@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ObjectUtils from '../utils/ObjectUtils';
+import { Ripple } from '../ripple/Ripple';
 
 export class DropdownItem extends Component {
 
@@ -49,6 +50,7 @@ export class DropdownItem extends Component {
         return (
             <li className={className} onClick={this.onClick} aria-label={this.props.label} key={this.props.label} role="option" aria-selected={this.props.selected}>
                 {content}
+                <Ripple />
             </li>
         );
     }

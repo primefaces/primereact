@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
 import { CSSTransition } from 'react-transition-group';
+import { Ripple } from '../ripple/Ripple';
 
 export class OverlayPanel extends Component {
 
@@ -150,6 +151,7 @@ export class OverlayPanel extends Component {
             return (
                 <button type="button" className="p-overlaypanel-close p-link" onClick={this.onCloseClick} aria-label={this.props.ariaCloseLabel}>
                     <span className="p-overlaypanel-close-icon pi pi-times"></span>
+                    <Ripple />
                 </button>
             );
         }

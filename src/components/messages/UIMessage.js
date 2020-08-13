@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { Ripple } from '../ripple/Ripple';
 
 export class UIMessage extends Component {
 
@@ -63,6 +64,7 @@ export class UIMessage extends Component {
             return (
                 <button type="button" className="p-message-close p-link" onClick={this.onClose}>
                     <i className="p-message-close-icon pi pi-times"></i>
+                    <Ripple />
                 </button>
             );
         }

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {InputText} from '../inputtext/InputText';
 import {Checkbox} from '../checkbox/Checkbox';
+import { Ripple } from '../ripple/Ripple';
 
 export class MultiSelectHeader extends Component {
 
@@ -72,6 +73,7 @@ export class MultiSelectHeader extends Component {
                     {filterElement}
                     <button type="button" className="p-multiselect-close p-link" onClick={this.props.onClose}>
                         <span className="p-multiselect-close-icon pi pi-times"></span>
+                        <Ripple />
                     </button>
                 </div>
         );

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
+import { Ripple } from '../ripple/Ripple';
 
 class GalleriaThumbnailItem extends Component {
 
@@ -405,6 +406,7 @@ export class GalleriaThumbnails extends Component {
             return (
                 <button className={buttonClassName} onClick={this.navBackward} disabled={isDisabled}>
                     <span className={iconClassName}></span>
+                    <Ripple />
                 </button>
             );
         }
@@ -426,6 +428,7 @@ export class GalleriaThumbnails extends Component {
             return (
                 <button className={buttonClassName} onClick={this.navForward} disabled={isDisabled}>
                     <span className={iconClassName}></span>
+                    <Ripple />
                 </button>
             );
         }

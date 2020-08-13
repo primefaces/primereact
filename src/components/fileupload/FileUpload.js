@@ -5,6 +5,7 @@ import {Messages} from '../messages/Messages';
 import {ProgressBar} from '../progressbar/ProgressBar';
 import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
+import { Ripple } from '../ripple/Ripple';
 
 export class FileUpload extends Component {
 
@@ -100,7 +101,7 @@ export class FileUpload extends Component {
     isImage(file) {
         return /^image\//.test(file.type);
     }
- 　　　
+
     remove(event, index) {
         this.clearInputElement();
         let currentFiles = [...this.state.files];
@@ -361,6 +362,7 @@ export class FileUpload extends Component {
                     multiple={this.props.multiple} accept={this.props.accept} disabled={this.props.disabled} />
                 <span className="p-button-icon p-button-icon-left p-clickable pi pi-fw pi-plus"></span>
                 <span className="p-button-label p-clickable">{this.props.chooseLabel}</span>
+                <Ripple />
             </span>
         );
     }
@@ -431,6 +433,7 @@ export class FileUpload extends Component {
                     <span className="p-button-text p-clickable">{this.props.auto ? this.props.chooseLabel : this.hasFiles() ? this.state.files[0].name : this.props.chooseLabel}</span>
                     <input ref={(el) => this.fileInput = el} type="file" multiple={this.props.multiple} accept={this.props.accept} disabled={this.props.disabled}
                         onChange={this.onFileSelect} onFocus={this.onFocus} onBlur={this.onBlur} />
+                    <Ripple />
                 </span>
             </div>
         );

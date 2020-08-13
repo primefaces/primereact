@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {tip} from "../tooltip/Tooltip";
+import { Ripple } from '../ripple/Ripple';
 
 export class ToggleButton extends Component {
 
@@ -140,6 +141,7 @@ export class ToggleButton extends Component {
 
                 {hasIcon && <span className={iconClassName}></span>}
                 <span className="p-button-label">{label}</span>
+                <Ripple />
             </div>
         );
     }

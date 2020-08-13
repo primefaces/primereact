@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { Ripple } from '../ripple/Ripple';
 
 export class SelectButtonItem extends Component {
 
@@ -95,6 +96,7 @@ export class SelectButtonItem extends Component {
                     <input ref={(el) => this.input = el} type="checkbox" defaultChecked={this.props.selected} onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.onKeyDown}
                         tabIndex={this.props.tabIndex} disabled={this.props.disabled} value={this.props.label}/>
                 </div>
+                <Ripple />
             </div>
         );
     }

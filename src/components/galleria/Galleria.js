@@ -7,6 +7,7 @@ import { GalleriaItem } from './GalleriaItem';
 import { GalleriaThumbnails } from './GalleriaThumbnails';
 import DomHandler from '../utils/DomHandler';
 import { CSSTransition } from 'react-transition-group';
+import { Ripple } from '../ripple/Ripple';
 
 export class Galleria extends Component {
 
@@ -209,6 +210,7 @@ export class Galleria extends Component {
         const closeIcon = this.props.fullScreen && (
             <button type="button" className="p-galleria-close p-link" onClick={this.hide}>
                 <span className="p-galleria-close-icon pi pi-times"></span>
+                <Ripple />
             </button>
         );
 

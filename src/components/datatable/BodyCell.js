@@ -4,6 +4,7 @@ import ObjectUtils from '../utils/ObjectUtils';
 import DomHandler from '../utils/DomHandler';
 import {RowRadioButton} from './RowRadioButton';
 import {RowCheckbox} from './RowCheckbox';
+import { Ripple } from '../ripple/Ripple';
 
 export class BodyCell extends Component {
 
@@ -175,6 +176,7 @@ export class BodyCell extends Component {
             content = (
                 <button type="button" onClick={this.onExpanderClick} className="p-row-toggler p-link">
                     <span className={iconClassName}></span>
+                    <Ripple />
                 </button>
             );
         }
@@ -210,9 +212,11 @@ export class BodyCell extends Component {
                     <>
                         <button type="button" onClick={this.props.onRowEditSave} className="p-row-editor-save p-link">
                             <span className="p-row-editor-save-icon pi pi-fw pi-check p-clickable"></span>
+                            <Ripple />
                         </button>
                         <button type="button" onClick={this.props.onRowEditCancel} className="p-row-editor-cancel p-link">
                             <span className="p-row-editor-cancel-icon pi pi-fw pi-times p-clickable"></span>
+                            <Ripple />
                         </button>
                     </>
                 );
@@ -221,6 +225,7 @@ export class BodyCell extends Component {
                 content = (
                     <button type="button" onClick={this.props.onRowEditInit} className="p-row-editor-init p-link">
                         <span className="p-row-editor-init-icon pi pi-fw pi-pencil p-clickable"></span>
+                        <Ripple />
                     </button>
                 );
             }

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import { CSSTransition } from 'react-transition-group';
+import { Ripple } from '../ripple/Ripple';
 
 export class Fieldset extends Component {
 
@@ -123,6 +124,7 @@ export class Fieldset extends Component {
                 <a href={'#' + ariaControls} aria-controls={ariaControls} id={this.id + '_header'} aria-expanded={!collapsed} tabIndex={this.props.toggleable ? null  : -1}>
                     {toggleIcon}
                     <span className="p-fieldset-legend-text">{this.props.legend}</span>
+                    <Ripple />
                  </a>
             );
         }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
+import { Ripple } from '../ripple/Ripple';
 
 export class GrowlMessage extends Component {
 
@@ -59,6 +60,7 @@ export class GrowlMessage extends Component {
             return (
                 <button type="button" className="p-toast-icon-close p-link" onClick={this.onClose}>
                     <span className="p-toast-icon-close-icon pi pi-times"></span>
+                    <Ripple />
                 </button>
             );
         }

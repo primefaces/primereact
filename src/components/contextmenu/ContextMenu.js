@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import ReactDOM from 'react-dom';
 import DomHandler from '../utils/DomHandler';
 import { CSSTransition } from 'react-transition-group';
+import { Ripple } from '../ripple/Ripple';
 
 class ContextMenuSub extends Component {
 
@@ -157,6 +158,7 @@ class ContextMenuSub extends Component {
                     {icon}
                     <span className="p-menuitem-text">{item.label}</span>
                     {submenuIcon}
+                    <Ripple />
                 </a>
                 {submenu}
             </li>

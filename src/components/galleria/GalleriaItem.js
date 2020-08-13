@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import { Ripple } from '../ripple/Ripple';
 
 export class GalleriaItem extends Component {
 
@@ -102,6 +103,7 @@ export class GalleriaItem extends Component {
             return (
                 <button type="button" className={buttonClassName} onClick={this.navBackward} disabled={isDisabled}>
                     <span className="p-galleria-item-prev-icon pi pi-chevron-left"></span>
+                    <Ripple />
                 </button>
             );
         }
@@ -119,6 +121,7 @@ export class GalleriaItem extends Component {
             return (
                 <button type="button" className={buttonClassName} onClick={this.navForward} disabled={isDisabled}>
                     <span className="p-galleria-item-next-icon pi pi-chevron-right"></span>
+                    <Ripple />
                 </button>
             );
         }
@@ -148,7 +151,9 @@ export class GalleriaItem extends Component {
 
         if (!indicator) {
             indicator = (
-                <button type="button" tabIndex="-1" className="p-link"></button>
+                <button type="button" tabIndex="-1" className="p-link">
+                    <Ripple />
+                </button>
             );
         }
 

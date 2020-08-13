@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { tip } from "../tooltip/Tooltip";
 import ObjectUtils from '../utils/ObjectUtils';
+import { Ripple } from '../ripple/Ripple';
 
 export class Button extends Component {
 
@@ -109,6 +110,7 @@ export class Button extends Component {
                 {label}
                 {this.props.children}
                 {badge}
+                <Ripple />
             </button>
         );
     }

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import { CSSTransition } from 'react-transition-group';
+import { Ripple } from '../ripple/Ripple';
 
 export class Panel extends Component {
 
@@ -100,6 +101,7 @@ export class Panel extends Component {
                 <button className="p-panel-header-icon p-panel-toggler p-link" onClick={this.toggle}
                     id={id} aria-controls={ariaControls} aria-expanded={!collapsed} role="tab">
                    <span className={toggleIcon}></span>
+                   <Ripple />
                 </button>
             );
         }

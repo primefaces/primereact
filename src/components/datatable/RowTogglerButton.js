@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { Ripple } from '../ripple/Ripple';
 
 export class RowTogglerButton extends Component {
 
@@ -38,6 +39,7 @@ export class RowTogglerButton extends Component {
 
         return  <button type="button" onClick={this.onClick} className="p-row-toggler p-link">
                     <span className={iconClassName}></span>
+                    <Ripple />
                 </button>
     }
 }

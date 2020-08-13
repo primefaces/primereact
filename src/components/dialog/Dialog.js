@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import { CSSTransition } from 'react-transition-group';
 import ObjectUtils from '../utils/ObjectUtils';
+import { Ripple } from '../ripple/Ripple';
 
 export class Dialog extends Component {
 
@@ -295,6 +296,7 @@ export class Dialog extends Component {
             return (
                 <button type="button" className="p-dialog-header-icon p-dialog-header-close p-link" aria-label={this.props.ariaCloseIconLabel} onClick={this.onClose}>
                     <span className="p-dialog-header-close-icon pi pi-times"></span>
+                    <Ripple />
                 </button>
             );
         }
@@ -309,6 +311,7 @@ export class Dialog extends Component {
             return (
                 <button type="button" className="p-dialog-header-icon p-dialog-header-maximize p-link" onClick={this.toggleMaximize}>
                     <span className={iconClassName}></span>
+                    <Ripple />
                 </button>
             );
         }

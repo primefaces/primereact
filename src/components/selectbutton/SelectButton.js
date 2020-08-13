@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ObjectUtils from '../utils/ObjectUtils';
-import {SelectButtonItem} from './SelectButtonItem';
-import {tip} from "../tooltip/Tooltip";
+import { SelectButtonItem } from './SelectButtonItem';
+import { tip } from "../tooltip/Tooltip";
 
 export class SelectButton extends Component {
 
@@ -79,8 +79,8 @@ export class SelectButton extends Component {
             this.props.onChange({
                 originalEvent: event.originalEvent,
                 value: newValue,
-                stopPropagation : () =>{},
-                preventDefault : () =>{},
+                stopPropagation: () => { },
+                preventDefault: () => { },
                 target: {
                     name: this.props.name,
                     id: this.props.id,
@@ -155,7 +155,7 @@ export class SelectButton extends Component {
                 let optionLabel = this.getOptionLabel(option);
 
                 return <SelectButtonItem key={optionLabel} label={optionLabel} className={option.className} option={option} onClick={this.onOptionClick} template={this.props.itemTemplate}
-                            selected={this.isSelected(option)} tabIndex={this.props.tabIndex} disabled={this.props.disabled} ariaLabelledBy={this.props.ariaLabelledBy}/>;
+                    selected={this.isSelected(option)} tabIndex={this.props.tabIndex} disabled={this.props.disabled} ariaLabelledBy={this.props.ariaLabelledBy} />;
             });
         }
 

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ObjectUtils from '../utils/ObjectUtils';
+import { Ripple } from '../ripple/Ripple';
 
 export class MultiSelectItem extends Component {
 
@@ -65,6 +66,7 @@ export class MultiSelectItem extends Component {
                     </div>
                 </div>
                 <span>{content}</span>
+                <Ripple />
             </li>
         );
     }

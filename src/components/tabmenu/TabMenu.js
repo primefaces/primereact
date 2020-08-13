@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
+import { Ripple } from '../ripple/Ripple';
 
 export class TabMenu extends Component {
 
@@ -110,6 +111,7 @@ export class TabMenu extends Component {
                  <a href={item.url||'#'} className="p-menuitem-link" target={item.target} onClick={(event) => this.itemClick(event, item)} role="presentation">
                     {icon}
                     <span className="p-menuitem-text">{item.label}</span>
+                    <Ripple />
                 </a>
             </li>
         );

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
+import { Ripple } from '../ripple/Ripple';
 
 export class UITreeNode extends Component {
 
@@ -664,6 +665,7 @@ export class UITreeNode extends Component {
         return (
             <button type="button" className="p-tree-toggler p-link" tabIndex="-1" onClick={this.onTogglerClick}>
                 <span className={iconClassName}></span>
+                <Ripple />
             </button>
         );
     }

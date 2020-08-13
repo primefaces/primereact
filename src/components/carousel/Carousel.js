@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import DomHandler from '../utils/DomHandler';
+import { Ripple } from '../ripple/Ripple';
 
 class CarouselItem extends Component {
 
@@ -627,6 +628,7 @@ export class Carousel extends Component {
         return (
             <button type="button" className={buttonClassName} onClick={this.navBackward} disabled={isDisabled}>
                 <span className={iconClassName}></span>
+                <Ripple />
             </button>
         );
     }
@@ -644,6 +646,7 @@ export class Carousel extends Component {
         return (
             <button type="button" className={buttonClassName} onClick={this.navForward} disabled={isDisabled}>
                 <span className={iconClassName}></span>
+                <Ripple />
             </button>
         );
     }
@@ -656,7 +659,9 @@ export class Carousel extends Component {
 
         return (
             <li className={indicatorItemClassName} key={'p-carousel-indicator-' + index}>
-                <button type="button" className="p-link" onClick={(e) => this.onDotClick(e, index)} />
+                <button type="button" className="p-link" onClick={(e) => this.onDotClick(e, index)}>
+                    <Ripple />
+                </button>
             </li>
         );
     }

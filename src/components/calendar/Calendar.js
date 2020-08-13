@@ -8,6 +8,7 @@ import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
 import {tip} from "../tooltip/Tooltip";
 import { CSSTransition } from 'react-transition-group';
+import { Ripple } from '../ripple/Ripple';
 
 export class Calendar extends Component {
 
@@ -2379,6 +2380,7 @@ export class Calendar extends Component {
         return (
             <button type="button" className="p-datepicker-prev p-link" {...navigatorProps}>
                 <span className="p-datepicker-prev-icon pi pi-chevron-left"></span>
+                <Ripple />
             </button>
         );
     }
@@ -2388,6 +2390,7 @@ export class Calendar extends Component {
         return (
             <button type="button" className="p-datepicker-next p-link" {...navigatorProps}>
                 <span className="p-datepicker-next-icon pi pi-chevron-right"></span>
+                <Ripple />
             </button>
         );
     }
@@ -2500,6 +2503,7 @@ export class Calendar extends Component {
         return (
             <span className={className} onClick={e => this.onDateSelect(e, date)} onKeyDown={e => this.onDateCellKeydown(e, date, groupIndex)}>
                 {content}
+                <Ripple />
             </span>
         );
     }
@@ -2612,6 +2616,7 @@ export class Calendar extends Component {
         return (
             <span key={monthName} className={className} onClick={event => this.onMonthSelect(event, index)} onKeyDown={event => this.onMonthCellKeydown(event, index)}>
                 {monthName}
+                <Ripple />
             </span>
         );
     }
@@ -2679,11 +2684,13 @@ export class Calendar extends Component {
                 <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 0, 1)} onMouseUp={this.onTimePickerElementMouseUp}
                         onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
                     <span className="pi pi-chevron-up"></span>
+                    <Ripple />
                 </button>
                 <span>{hourDisplay}</span>
                 <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 0, -1)} onMouseUp={this.onTimePickerElementMouseUp}
                         onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
                     <span className="pi pi-chevron-down"></span>
+                    <Ripple />
                 </button>
             </div>
         );
@@ -2699,11 +2706,13 @@ export class Calendar extends Component {
                 <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 1, 1)} onMouseUp={this.onTimePickerElementMouseUp}
                         onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
                     <span className="pi pi-chevron-up"></span>
+                    <Ripple />
                 </button>
                 <span>{minuteDisplay}</span>
                 <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 1, -1)} onMouseUp={this.onTimePickerElementMouseUp}
                         onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
                     <span className="pi pi-chevron-down"></span>
+                    <Ripple />
                 </button>
             </div>
         );
@@ -2720,11 +2729,13 @@ export class Calendar extends Component {
                     <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 2, 1)} onMouseUp={this.onTimePickerElementMouseUp}
                             onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
                         <span className="pi pi-chevron-up"></span>
+                        <Ripple />
                     </button>
                     <span>{secondDisplay}</span>
                     <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 2, -1)} onMouseUp={this.onTimePickerElementMouseUp}
                             onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
                         <span className="pi pi-chevron-down"></span>
+                        <Ripple />
                     </button>
                 </div>
             );
@@ -2744,11 +2755,13 @@ export class Calendar extends Component {
                     <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 3, 1)} onMouseUp={this.onTimePickerElementMouseUp}
                             onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
                         <span className="pi pi-chevron-up"></span>
+                        <Ripple />
                     </button>
                     <span>{millisecondDisplay}</span>
                     <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 3, -1)} onMouseUp={this.onTimePickerElementMouseUp}
                             onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
                         <span className="pi pi-chevron-down"></span>
+                        <Ripple />
                     </button>
                 </div>
             );
@@ -2767,17 +2780,18 @@ export class Calendar extends Component {
                 <div className="p-ampm-picker">
                     <button type="button" className="p-link" onClick={this.toggleAmPm}>
                         <span className="pi pi-chevron-up"></span>
+                        <Ripple />
                     </button>
                     <span>{display}</span>
                     <button type="button" className="p-link" onClick={this.toggleAmPm}>
                         <span className="pi pi-chevron-down"></span>
+                        <Ripple />
                     </button>
                 </div>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderSeparator(separator) {

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
+import { Ripple } from '../ripple/Ripple';
 
 export class MenubarSub extends Component {
 
@@ -307,6 +308,7 @@ export class MenubarSub extends Component {
                     {icon}
                     <span className="p-menuitem-text">{item.label}</span>
                     {submenuIcon}
+                    <Ripple />
                 </a>
                 {submenu}
             </li>

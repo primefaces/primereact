@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
+import { Ripple } from '../ripple/Ripple';
 
 export class MegaMenu extends Component {
 
@@ -281,6 +282,7 @@ export class MegaMenu extends Component {
                     <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => this.onLeafClick(event, item)} role="menuitem">
                         {icon}
                         <span className="p-menuitem-text">{item.label}</span>
+                        <Ripple />
                     </a>
                 </li>
             );
@@ -366,6 +368,7 @@ export class MegaMenu extends Component {
                     {icon}
                     <span className="p-menuitem-text">{category.label}</span>
                     {submenuIcon}
+                    <Ripple />
                 </a>
                 {panel}
             </li>

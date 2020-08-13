@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import DomHandler from '../utils/DomHandler';
+import { Ripple } from '../ripple/Ripple';
 
 export class TabPanel extends Component {
 
@@ -115,6 +116,7 @@ export class TabView extends Component {
                     {tab.props.leftIcon && <i className={tab.props.leftIcon}></i>}
                     <span className="p-tabview-title">{tab.props.header}</span>
                     {tab.props.rightIcon && <i className={tab.props.rightIcon}></i>}
+                    <Ripple />
                 </a>
                 {/* eslint-enable */}
             </li>

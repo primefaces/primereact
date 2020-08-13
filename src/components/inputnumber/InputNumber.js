@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import {InputText} from '../inputtext/InputText';
 import classNames from 'classnames';
 import {tip} from "../tooltip/Tooltip";
+import { Ripple } from '../ripple/Ripple';
 
 export class InputNumber extends Component {
 
@@ -827,6 +828,7 @@ export class InputNumber extends Component {
             <button type="button" className={className} onMouseLeave={this.onUpButtonMouseLeave} onMouseDown={this.onUpButtonMouseDown} onMouseUp={this.onUpButtonMouseUp}
                 onKeyDown={this.onUpButtonKeyDown} onKeyUp={this.onUpButtonKeyUp} disabled={this.props.disabled} tabIndex="-1">
                 <span className={icon}></span>
+                <Ripple />
             </button>
         );
     }
@@ -841,6 +843,7 @@ export class InputNumber extends Component {
             <button type="button" className={className} onMouseLeave={this.onDownButtonMouseLeave} onMouseDown={this.onDownButtonMouseDown} onMouseUp={this.onDownButtonMouseUp}
                 onKeyDown={this.onDownButtonKeyDown} onKeyUp={this.onDownButtonKeyUp} disabled={this.props.disabled} tabIndex="-1">
                 <span className={icon}></span>
+                <Ripple />
             </button>
         );
     }

@@ -1,14 +1,14 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import DomHandler from '../utils/DomHandler';
-import ObjectUtils from '../utils/ObjectUtils';
-import FilterUtils from '../utils/FilterUtils';
 import classNames from 'classnames';
-import { MultiSelectPanel } from './MultiSelectPanel';
-import { MultiSelectItem } from './MultiSelectItem';
-import { MultiSelectHeader } from './MultiSelectHeader';
-import {tip} from "../tooltip/Tooltip";
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { CSSTransition } from 'react-transition-group';
+import { tip } from "../tooltip/Tooltip";
+import DomHandler from '../utils/DomHandler';
+import FilterUtils from '../utils/FilterUtils';
+import ObjectUtils from '../utils/ObjectUtils';
+import { MultiSelectHeader } from './MultiSelectHeader';
+import { MultiSelectItem } from './MultiSelectItem';
+import { MultiSelectPanel } from './MultiSelectPanel';
 
 export class MultiSelect extends Component {
 

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ObjectUtils from '../utils/ObjectUtils';
 import DomHandler from '../utils/DomHandler';
+import { Ripple } from '../ripple/Ripple';
 
 export class OrderListSubList extends Component {
 
@@ -124,7 +125,10 @@ export class OrderListSubList extends Component {
                         this.renderDropPoint(i, key + '_droppoint'),
                         <li key={key} className={itemClassName} onClick={(e) => this.props.onItemClick({originalEvent: e, value: item, index: i})}
                             onKeyDown={(e) => this.props.onItemKeyDown({originalEvent: e, value: item, index: i})} role="option" aria-selected={this.isSelected(item)}
-                            draggable="true" onDragStart={(e) => this.onDragStart(e, i)} onDragEnd={this.onDragEnd} tabIndex={this.props.tabIndex}>{content}</li>
+                            draggable="true" onDragStart={(e) => this.onDragStart(e, i)} onDragEnd={this.onDragEnd} tabIndex={this.props.tabIndex}>
+                            {content}
+                            <Ripple />
+                        </li>
                     ];
 
                     if (i === this.props.value.length - 1) {

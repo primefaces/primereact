@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {Paginator} from '../paginator/Paginator';
 import classNames from 'classnames';
 import ObjectUtils from '../utils/ObjectUtils';
+import { Ripple } from '../ripple/Ripple';
 
 export class DataViewLayoutOptions extends Component {
 
@@ -44,9 +45,11 @@ export class DataViewLayoutOptions extends Component {
             <div id={this.props.id} style={this.props.style} className={className}>
                 <button type="button" className={buttonListClass} onClick={(event) => this.changeLayout(event, 'list')}>
                     <i className="pi pi-bars"></i>
+                    <Ripple />
                 </button>
                 <button type="button" className={buttonGridClass} onClick={(event) => this.changeLayout(event, 'grid')}>
                     <i className="pi pi-th-large"></i>
+                    <Ripple />
                 </button>
             </div>
         );
