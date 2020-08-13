@@ -6,6 +6,7 @@ import {ProgressBar} from '../progressbar/ProgressBar';
 import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
 import { Ripple } from '../ripple/Ripple';
+import ObjectUtils from '../utils/ObjectUtils';
 
 export class FileUpload extends Component {
 
@@ -29,6 +30,7 @@ export class FileUpload extends Component {
         uploadLabel: 'Upload',
         cancelLabel: 'Cancel',
         customUpload: false,
+        emptyTemplate: null,
         onBeforeUpload: null,
         onBeforeSend: null,
         onUpload: null,
@@ -61,6 +63,7 @@ export class FileUpload extends Component {
         uploadLabel: PropTypes.string,
         cancelLabel: PropTypes.string,
         customUpload: PropTypes.bool,
+        emptyTemplate: PropTypes.any,
         onBeforeUpload: PropTypes.func,
         onBeforeSend: PropTypes.func,
         onUpload: PropTypes.func,
@@ -389,10 +392,19 @@ export class FileUpload extends Component {
         );
     }
 
+    renderEmptyContent() {
+        if (this.props.emptyTemplate && !this.hasFiles()) {
+            return ObjectUtils.getJSXElement(this.props.emptyTemplate, this.props);
+        }
+
+        return null;
+    }
+
     renderAdvanced() {
-        let className = classNames('p-fileupload p-fileupload-advanced p-component', this.props.className);
+        const className = classNames('p-fileupload p-fileupload-advanced p-component', this.props.className);
         let uploadButton, cancelButton, filesList, progressBar;
-        let chooseButton = this.renderChooseButton();
+        const chooseButton = this.renderChooseButton();
+        const emptyContent = this.renderEmptyContent();
 
         if (!this.props.auto) {
             uploadButton = <Button type="button" label={this.props.uploadLabel} icon="pi pi-upload" onClick={this.upload} disabled={this.props.disabled || !this.hasFiles()} />;
@@ -416,6 +428,7 @@ export class FileUpload extends Component {
                     {progressBar}
                     <Messages ref={(el) => this.messagesUI = el } />
                     {filesList}
+                    {emptyContent}
                 </div>
             </div>
         );
