@@ -25,6 +25,7 @@ import axios from 'axios';
 
 import AppContentContext from './AppContentContext';
 import { Growl } from './components/growl/Growl';
+import PrimeReact from './components/utils/PrimeReact';
 
 export class App extends Component {
 
@@ -33,7 +34,7 @@ export class App extends Component {
         this.state = {
             theme: 'saga-blue',
             inputStyle: 'outlined',
-            ripple: false,
+            ripple: true,
             darkTheme: false,
             sidebarActive: false,
             /*mobileMenuActive: false,
@@ -64,11 +65,14 @@ export class App extends Component {
         this.hideConfigurator = this.hideConfigurator.bind(this);
         this.onMaskClick = this.onMaskClick.bind(this);
         this.onInputStyleChange = this.onInputStyleChange.bind(this);
+        this.onRippleChange = this.onRippleChange.bind(this);
 
         this.showChangelogDialog = this.showChangelogDialog.bind(this);
         this.hideChangelogDialog = this.hideChangelogDialog.bind(this);
         this.onPrev = this.onPrev.bind(this);
         this.onNext = this.onNext.bind(this);
+
+        PrimeReact.ripple = true;
     }
 
     onTopbarItemClick(event) {
@@ -191,6 +195,12 @@ export class App extends Component {
 
     onInputStyleChange(inputStyle) {
         this.setState({ inputStyle });
+    }
+
+    onRippleChange(value) {
+        PrimeReact.ripple = value;
+
+        this.setState({ ripple: value });
     }
 
     getChangelog() {
@@ -325,7 +335,7 @@ export class App extends Component {
                         <AppFooter />
                     </div>
 
-                    <AppConfig onThemeChange={this.onThemeChange} theme={this.state.theme} />
+                    <AppConfig theme={this.state.theme} ripple={this.state.ripple} onThemeChange={this.onThemeChange} onRippleChange={this.onRippleChange} />
                 </AppContentContext.Provider>
 
                 <div className={maskClassName} onClick={this.onMaskClick}></div>

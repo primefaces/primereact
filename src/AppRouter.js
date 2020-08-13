@@ -151,6 +151,7 @@ import { DataTableGridLinesDemo } from './showcase/datatable/DataTableGridLinesD
 import { DataTableStripedDemo } from './showcase/datatable/DataTableStripedDemo';
 import { AccessibilityDemo } from './showcase/accessibility/AccessibilityDemo';
 import { BadgeDemo } from './showcase/badge/BadgeDemo';
+import { RippleDemo } from './showcase/ripple/RippleDemo';
 
 class AppRouter extends Component {
 
@@ -327,6 +328,7 @@ class AppRouter extends Component {
                 <Route path="/text" component={TextDemo} />
                 <Route path="/accessibility" component={AccessibilityDemo} />
                 <Route path="/badge" component={BadgeDemo} />
+                <Route path="/ripple" component={RippleDemo} />
             </>
         );
     }
