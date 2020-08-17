@@ -10,17 +10,17 @@ export class ChartDoc extends Component {
     render() {
         return (
             <div className="content-section documentation">
-                <h3>Import</h3>
+                <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { Chart } from 'primereact/chart';
 `}
 </CodeHighlight>
 
-                <h3>Chart Types</h3>
+                <h5>Chart Types</h5>
                 <p>Chart type is defined using the <i>type</i> property. Currently there are 6 options available; "pie", "doughtnut", "line", "bar", "radar" and "polarArea".</p>
 
-                <h3>Data</h3>
+                <h5>Data</h5>
                 <p>Data of a chart is provided using a binding to the <i>data</i> property, each type has its own format of data. Here is an example of a line chart.</p>
 
 <CodeHighlight>
@@ -51,7 +51,7 @@ const data = {
 `}
 </CodeHighlight>
 
-<h3>Options</h3>
+<h5>Options</h5>
 <p>While a series can be customized per dataset, general chart options are defined with options property.
     Example below adds a title and customizes the legend position of the chart. For all available options refer to the charts.js documentation.</p>
 
@@ -77,7 +77,7 @@ const options = {
 `}
 </CodeHighlight>
 
-                <h3>Properties</h3>
+                <h5>Properties</h5>
                 <div className="doc-tablewrapper">
                     <table className="doc-table">
                         <thead>
@@ -141,7 +141,7 @@ const options = {
                     </table>
                 </div>
 
-                <h3>Methods</h3>
+                <h5>Methods</h5>
                 <div className="doc-tablewrapper">
                     <table className="doc-table">
                         <thead>

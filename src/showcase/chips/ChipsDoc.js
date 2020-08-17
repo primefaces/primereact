@@ -77,13 +77,13 @@ const ChipsDemo = () => {
 
     return (
         <div className="p-fluid">
-            <h3>Basic</h3>
+            <h5>Basic</h5>
             <Chips value={values1} onChange={(e) => setValues1(e.value)}></Chips>
 
-            <h3>Comma Separator</h3>
+            <h5>Comma Separator</h5>
             <Chips value={values2} onChange={(e) => setValues2(e.value)} separator=','></Chips>
 
-            <h3>Template</h3>
+            <h5>Template</h5>
             <Chips value={values3} onChange={(e) => setValues3(e.value)} max={5} itemTemplate={customChip}></Chips>
         </div>
     )
@@ -112,13 +112,13 @@ const ChipsDemo = () => {
 
     return (
         <div className="p-fluid">
-            <h3>Basic</h3>
+            <h5>Basic</h5>
             <Chips value={values1} onChange={(e) => setValues1(e.value)}></Chips>
 
-            <h3>Comma Separator</h3>
+            <h5>Comma Separator</h5>
             <Chips value={values2} onChange={(e) => setValues2(e.value)} separator=','></Chips>
 
-            <h3>Template</h3>
+            <h5>Template</h5>
             <Chips value={values3} onChange={(e) => setValues3(e.value)} max={5} itemTemplate={customChip}></Chips>
         </div>
     )
@@ -137,14 +137,14 @@ const ChipsDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import {Chips} from 'primereact/chips';
 `}
 </CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>Chips requires an array as its <i>value</i> and <i>onChange</i> callback to update the model.</p>
 
 <CodeHighlight>
@@ -153,7 +153,7 @@ import {Chips} from 'primereact/chips';
 `}
 </CodeHighlight>
 
-                        <h3>Custom Content</h3>
+                        <h5>Custom Content</h5>
                         <p>A chip is customized using <i>itemTemplate</i> function where value is passed to return JSX.</p>
 <CodeHighlight>
 {`
@@ -174,7 +174,7 @@ customChip(item) {
 `}
 </CodeHighlight>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -274,7 +274,7 @@ customChip(item) {
                             </table>
                         </div>
 
-                        <h3>Events</h3>
+                        <h5>Events</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -317,7 +317,7 @@ customChip(item) {
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -352,7 +352,7 @@ customChip(item) {
                             </table>
                         </div>
 
-                        <h3>Dependencies</h3>
+                        <h5>Dependencies</h5>
                         <p>None.</p>
                     </TabPanel>
 

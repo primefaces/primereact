@@ -109,14 +109,14 @@ const CaptchaDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { Captcha } from 'primereact/captcha';
 `}
 </CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>Captcha is used with a siteKey and a callback to verify the response.</p>
 <CodeHighlight>
 {`
@@ -124,7 +124,7 @@ import { Captcha } from 'primereact/captcha';
 `}
 </CodeHighlight>
 
-                        <h3>Verification</h3>
+                        <h5>Verification</h5>
                         <p>In order to ensure if a response token is valid, verification against recaptcha api needs to be done at backend. <a href="https://developers.google.com/recaptcha/docs/verify">Read more</a> at
                         official documentation.</p>
 <CodeHighlight lang="js">
@@ -142,7 +142,7 @@ showResponse(response) {
 `}
 </CodeHighlight>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -200,7 +200,7 @@ showResponse(response) {
                             </table>
                         </div>
 
-                        <h3>Events</h3>
+                        <h5>Events</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -225,7 +225,7 @@ showResponse(response) {
                             </table>
                         </div>
 
-                        <h3>Methods</h3>
+                        <h5>Methods</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -250,7 +250,7 @@ showResponse(response) {
                             </table>
                         </div>
 
-                        <h3>Dependencies</h3>
+                        <h5>Dependencies</h5>
                         <p>Google Recaptcha V2</p>
                     </TabPanel>
 

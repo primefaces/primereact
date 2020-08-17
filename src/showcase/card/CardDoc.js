@@ -133,14 +133,14 @@ const CardDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { Card } from 'primereact/card';
 `}
 </CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>Card is used as a container.</p>
 <CodeHighlight>
 {`
@@ -150,7 +150,7 @@ import { Card } from 'primereact/card';
 `}
 </CodeHighlight>
 
-                        <h3>Title</h3>
+                        <h5>Title</h5>
                         <p>Title text of the card is provided using the <i>title</i> property whereas <strong>subTitle</strong> property is available for additional information about the card. Both of these properties accept JSX as well.</p>
 <CodeHighlight>
 {`
@@ -160,7 +160,7 @@ import { Card } from 'primereact/card';
 `}
 </CodeHighlight>
 
-                        <h3>Header and Footer</h3>
+                        <h5>Header and Footer</h5>
                         <p>Header and Footer sections are defined using the properties of the same name.</p>
 
 <CodeHighlight>
@@ -177,7 +177,7 @@ const footer = <span>
 `}
 </CodeHighlight>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -235,7 +235,7 @@ const footer = <span>
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming">theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -270,7 +270,7 @@ const footer = <span>
                             </table>
                         </div>
 
-                        <h3>Dependencies</h3>
+                        <h5>Dependencies</h5>
                         <p>None.</p>
                     </TabPanel>
 
