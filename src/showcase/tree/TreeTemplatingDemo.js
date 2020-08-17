@@ -258,15 +258,9 @@ const TreeTemplatingDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="TreeTemplatingDemo" sources={[key, value]} />
-                                </TabPanel>
-                            );
-                        })
-                    }
+                    <TabPanel header="Source">
+                        <LiveEditor name="TreeTemplatingDemo" sources={this.sources} />
+                    </TabPanel>
                 </TabView>
             </div>
         );
