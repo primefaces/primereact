@@ -3497,18 +3497,11 @@ export class DataTableStateDemo extends Component {
             </div>
 
             </TabPanel>
-
-                    {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="DataTableDemo" sources={[key, value]} service="CustomerService" data="customers-large" extFiles={this.extFiles} />
-                                </TabPanel>
-                            );
-                        })
-                    }
-                </TabView>
-            </div>
+            <TabPanel header="Source">
+                <LiveEditor name="DataTableDemo" sources={this.sources} service="CustomerService" data="customers-large" extFiles={this.extFiles} />
+            </TabPanel>
+        </TabView>
+    </div>
         );
     }
 }
