@@ -407,15 +407,9 @@ const DataTableRowGroupDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="DataTableRowGroupDemo" sources={[key, value]} service="CarService" data="cars-medium" />
-                                </TabPanel>
-                            );
-                        })
-                    }
+                    <TabPanel header="Source">
+                        <LiveEditor name="DataTableRowGroupDemo" sources={this.sources} service="CarService" data="cars-medium" />
+                    </TabPanel>
                 </TabView>
             </div>
         )
