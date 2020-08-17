@@ -289,11 +289,11 @@ const OrganizationChartDemo = () => {
 
     return (
         <div className="organizationchart-demo">
-            <h3>Advanced</h3>
+            <h5>Advanced</h5>
             <OrganizationChart value={data1} nodeTemplate={nodeTemplate} selection={selection} selectionMode="multiple"
                 onSelectionChange={event => setSelection(event.data)} className="company"></OrganizationChart>
 
-            <h3>Basic</h3>
+            <h5>Basic</h5>
             <OrganizationChart value={data2}></OrganizationChart>
         </div>
     )
@@ -427,11 +427,11 @@ const OrganizationChartDemo = () => {
 
     return (
         <div className="organizationchart-demo">
-            <h3>Advanced</h3>
+            <h5>Advanced</h5>
             <OrganizationChart value={data1} nodeTemplate={nodeTemplate} selection={selection} selectionMode="multiple"
                 onSelectionChange={(event: any) => setSelection(event.data)} className="company"></OrganizationChart>
 
-            <h3>Basic</h3>
+            <h5>Basic</h5>
             <OrganizationChart value={data2}></OrganizationChart>
         </div>
     )
@@ -494,7 +494,7 @@ body .organizationchart-demo .department-cto .p-node-toggler {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { OrganizationChart } from 'primereact/organizationchart';
@@ -502,7 +502,7 @@ import { OrganizationChart } from 'primereact/organizationchart';
 </CodeHighlight>
 
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>OrganizationChart requires a model of TreeNode as its value.</p>
 <CodeHighlight lang="js">
 {`
@@ -553,7 +553,7 @@ export class OrganizationChartDemo extends Component {
 `}
                         </CodeHighlight>
 
-                        <h3>Templating</h3>
+                        <h5>Templating</h5>
                         <p>Label of the treenode is displayed inside the node content by default and templating enables further customization.</p>
 
 <CodeHighlight>
@@ -585,10 +585,10 @@ nodeTemplate(node) {
 `}
 </CodeHighlight>
 
-                        <h3>Expand/Collapse State</h3>
+                        <h5>Expand/Collapse State</h5>
                         <p>In order to display a treenode as expanded by default, set "expanded" property as true in your model.</p>
 
-                        <h3>Selection</h3>
+                        <h5>Selection</h5>
                         <p>OrganizationChart supports two selection methods; single or multiple. Selection is enabled by setting <i>selectionMode</i> property to the corresponding mode, defining <i>selection</i> property along with <i>selectionChange</i> callback.</p>
 <CodeHighlight>
 {`
@@ -596,7 +596,7 @@ nodeTemplate(node) {
 `}
 </CodeHighlight>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -654,7 +654,7 @@ nodeTemplate(node) {
                             </table>
                         </div>
 
-                        <h3>Events</h3>
+                        <h5>Events</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -687,7 +687,7 @@ nodeTemplate(node) {
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -730,7 +730,7 @@ nodeTemplate(node) {
                             </table>
                         </div>
 
-                        <h3>Dependencies</h3>
+                        <h5>Dependencies</h5>
                         <p>None.</p>
 
                     </TabPanel>

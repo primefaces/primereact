@@ -169,14 +169,14 @@ const OrderListDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { OrderList } from 'primereact/orderlist';
 `}
 </CodeHighlight>
 
-            <h3>Getting Started</h3>
+            <h5>Getting Started</h5>
             <p>OrderList requires an array as its value, a template for its content where each item in the array can be accessed inside the template and <i>onChange</i>
                     callback to update the value after reorder.
             </p>
@@ -186,7 +186,7 @@ import { OrderList } from 'primereact/orderlist';
 `}
 </CodeHighlight>
 
-            <h3>DragDrop</h3>
+            <h5>DragDrop</h5>
             <p>Items can be reordered using drag and drop by enabling <i>dragdrop</i> property.</p>
 
 <CodeHighlight>
@@ -195,7 +195,7 @@ import { OrderList } from 'primereact/orderlist';
 `}
 </CodeHighlight>
 
-            <h3>Properties</h3>
+            <h5>Properties</h5>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -271,7 +271,7 @@ import { OrderList } from 'primereact/orderlist';
                 </table>
             </div>
 
-            <h3>Events</h3>
+            <h5>Events</h5>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -292,7 +292,7 @@ import { OrderList } from 'primereact/orderlist';
                 </table>
             </div>
 
-            <h3>Styling</h3>
+            <h5>Styling</h5>
             <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
@@ -318,7 +318,7 @@ import { OrderList } from 'primereact/orderlist';
                     </tbody>
                 </table>
 
-                <h3>Dependencies</h3>
+                <h5>Dependencies</h5>
                 <p>None.</p>
             </div>
 

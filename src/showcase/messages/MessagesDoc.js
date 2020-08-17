@@ -165,7 +165,7 @@ const MessagesDemo = () => {
         <div>
             <Messages ref={messages} />
 
-            <h3 style={{marginTop: 0}}>Severities</h3>
+            <h3 style={{marginTop: 0}}>Severities</h5>
             <div className="p-grid p-fluid">
                 <div className="p-col-12 p-md-3">
                     <Button onClick={showSuccess} label="Success" className="p-button-success" />
@@ -181,7 +181,7 @@ const MessagesDemo = () => {
                 </div>
             </div>
 
-            <h3>Options</h3>
+            <h5>Options</h5>
             <div className="p-grid p-fluid">
                 <div className="p-col-12 p-md-4">
                     <Button onClick={showMultiple} label="Multiple" />
@@ -194,7 +194,7 @@ const MessagesDemo = () => {
                 </div>
             </div>
 
-            <h3>Inline Message CSS</h3>
+            <h5>Inline Message CSS</h5>
             <p>CSS helpers to display inline messages mostly within forms.</p>
             <div className="p-grid">
                 <div className="p-col-12 p-md-3">
@@ -272,7 +272,7 @@ const MessagesDemo = () => {
         <div>
             <Messages ref={messages} />
 
-            <h3 style={{marginTop: 0}}>Severities</h3>
+            <h3 style={{marginTop: 0}}>Severities</h5>
             <div className="p-grid p-fluid">
                 <div className="p-col-12 p-md-3">
                     <Button onClick={showSuccess} label="Success" className="p-button-success" />
@@ -288,7 +288,7 @@ const MessagesDemo = () => {
                 </div>
             </div>
 
-            <h3>Options</h3>
+            <h5>Options</h5>
             <div className="p-grid p-fluid">
                 <div className="p-col-12 p-md-4">
                     <Button onClick={showMultiple} label="Multiple" />
@@ -301,7 +301,7 @@ const MessagesDemo = () => {
                 </div>
             </div>
 
-            <h3>Inline Message CSS</h3>
+            <h5>Inline Message CSS</h5>
             <p>CSS helpers to display inline messages mostly within forms.</p>
             <div className="p-grid">
                 <div className="p-col-12 p-md-3">
@@ -343,7 +343,7 @@ const MessagesDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { Messages } from 'primereact/messages';
@@ -351,7 +351,7 @@ import { Message } from 'primereact/message';
 `}
 </CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>A single message is specified by the Message interface in PrimeReact that defines various properties such as severity,
                summary and detail. Messages are displayed by using the <i>show</i> method on the ref of the Messages instance.</p>
 
@@ -369,7 +369,7 @@ this.messages.show({severity: 'success', summary: 'Success Message', detail: 'Or
 `}
 </CodeHighlight>
 
-                        <h3>Message API</h3>
+                        <h5>Message API</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -427,7 +427,7 @@ this.messages.show({severity: 'success', summary: 'Success Message', detail: 'Or
                             </table>
                         </div>
 
-                        <h3>Severities</h3>
+                        <h5>Severities</h5>
                         <p>There are four possible values for the severity of a message.</p>
 
                         <ul>
@@ -437,7 +437,7 @@ this.messages.show({severity: 'success', summary: 'Success Message', detail: 'Or
                             <li>error</li>
                         </ul>
 
-                        <h3>Showing Messages</h3>
+                        <h5>Showing Messages</h5>
                         <p>Show method accepts either a single message or an array of messages.</p>
 
 <CodeHighlight>
@@ -480,7 +480,7 @@ showMultiple() {
 `}
 </CodeHighlight>
 
-                        <h3>Clearing Messages</h3>
+                        <h5>Clearing Messages</h5>
                         <p><i>clear()</i> method removes all messages.</p>
 
 <CodeHighlight lang="js">
@@ -489,7 +489,7 @@ this.messages.clear();
 `}
 </CodeHighlight>
 
-                        <h3>Replacing Messages</h3>
+                        <h5>Replacing Messages</h5>
                         <p><i>replace(newMessages)</i> method adds new messages after removing all old messages.</p>
 
 <CodeHighlight lang="js">
@@ -498,7 +498,7 @@ this.messages.replace(newMessages);
 `}
 </CodeHighlight>
 
-                        <h3>Closable</h3>
+                        <h5>Closable</h5>
                         <p>Messages are closable by default resulting in a close icon being displayed on top right corner. In order to disable closable messages, set <i>closable</i> to false.</p>
 
 <CodeHighlight lang="js">
@@ -507,7 +507,7 @@ this.messages.show({closable: false, severity: 'error', summary: 'Error Message'
 `}
 </CodeHighlight>
 
-                        <h3>Sticky</h3>
+                        <h5>Sticky</h5>
                         <p>Messages are cleared automatically after the timeout defined by <i>life</i> property which is 3 seconds by default. Use <i>sticky</i> mode to make them stay until
                 they are manually removed.</p>
 
@@ -522,11 +522,11 @@ this.messages.show({ life: 5000, severity: 'error', summary: 'Error Message', de
 </CodeHighlight>
 
 
-                        <h3>Message Component</h3>
+                        <h5>Message Component</h5>
                         <p>Message component is useful in cases where a single message needs to be displayed related to an element such as forms. It has two properties, <i>severity</i> and <i>text</i> of the message.</p>
 <CodeHighlight>
 {`
-<h3>Inline Message CSS</h3>
+<h5>Inline Message CSS</h5>
 <p>CSS helpers to display inline messages mostly within forms.</p>
 <Message severity="info" text="PrimeNG Rocks"></Message>
 <Message severity="success" text="Record Saved"></Message>
@@ -535,7 +535,7 @@ this.messages.show({ life: 5000, severity: 'error', summary: 'Error Message', de
 `}
 </CodeHighlight>
 
-                        <h3>Properties of Message</h3>
+                        <h5>Properties of Message</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -581,7 +581,7 @@ this.messages.show({ life: 5000, severity: 'error', summary: 'Error Message', de
                             </table>
                         </div>
 
-                        <h3>Properties of Messages</h3>
+                        <h5>Properties of Messages</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -615,7 +615,7 @@ this.messages.show({ life: 5000, severity: 'error', summary: 'Error Message', de
                             </table>
                         </div>
 
-                        <h3>Events of Messages</h3>
+                        <h5>Events of Messages</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -640,7 +640,7 @@ this.messages.show({ life: 5000, severity: 'error', summary: 'Error Message', de
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -690,7 +690,7 @@ this.messages.show({ life: 5000, severity: 'error', summary: 'Error Message', de
                                 </tbody>
                             </table>
 
-                            <h3>Dependencies</h3>
+                            <h5>Dependencies</h5>
                             <ul>
                                 <li>react-transition-group</li>
                             </ul>

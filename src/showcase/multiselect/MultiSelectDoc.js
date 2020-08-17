@@ -141,11 +141,11 @@ const MultiSelectDemo = () => {
 
     return (
         <div className="multiselect-demo">
-            <h3>Basic</h3>
+            <h5>Basic</h5>
             <MultiSelect value={cars1} options={cars} onChange={(e) => setCars1(e.value)}
                     style={{minWidth:'15em'}} filter={true} filterPlaceholder="Search" placeholder="Choose" />
 
-            <h3>Templating</h3>
+            <h5>Templating</h5>
             <MultiSelect value={cars2} options={cars} onChange={(e) => setCars2(e.value)}
                             style={{minWidth:'15em'}} filter={true} filterPlaceholder="Search" itemTemplate={carTemplate} selectedItemTemplate={selectedCarTemplate} />
         </div>
@@ -204,11 +204,11 @@ const MultiSelectDemo = () => {
 
     return (
         <div className="multiselect-demo">
-            <h3>Basic</h3>
+            <h5>Basic</h5>
             <MultiSelect value={cars1} options={cars} onChange={(e) => setCars1(e.value)}
                     style={{minWidth:'15em'}} filter={true} filterPlaceholder="Search" placeholder="Choose" />
 
-            <h3>Templating</h3>
+            <h5>Templating</h5>
             <MultiSelect value={cars2} options={cars} onChange={(e) => setCars2(e.value)}
                             style={{minWidth:'15em'}} filter={true} filterPlaceholder="Search" itemTemplate={carTemplate} selectedItemTemplate={selectedCarTemplate} />
         </div>
@@ -250,14 +250,14 @@ const MultiSelectDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { MultiSelect } from 'primereact/multiselect';
 `}
 </CodeHighlight>
 
-            <h3>Getting Started</h3>
+            <h5>Getting Started</h5>
             <p>MultiSelect is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with the options collection. There are two alternatives
             of how to define the options property; One way is providing a collection of <i>SelectItem</i> instances having label-value pairs
             whereas other way is providing an array of arbitrary objects along with the <i>optionLabel</i> and <i>optionValue</i> properties to specify the label/value field pair. In addition,
@@ -303,7 +303,7 @@ const cities = [
 </CodeHighlight>
             <p>When <i>optionValue</i> is not defined, value of an option refers to the option object itself.</p>
 
-            <h3>Custom Content</h3>
+            <h5>Custom Content</h5>
             <p>Label of an option is used as the display text of an item by default, for custom content support define an itemTemplate function that gets the option as a parameter and returns the content.</p>
 
 <CodeHighlight>
@@ -335,7 +335,7 @@ selectedItemTemplate(option) {
 `}
                         </CodeHighlight>
 
-            <h3>Filtering</h3>
+            <h5>Filtering</h5>
             <p>Options can be filtered using an input field in the overlay by enabling the <i>filter</i> property. By default filtering is done against
                 label of the items and <i>filterBy</i> property is available to choose one or more properties of the options. In addition <i>filterMatchMode</i> can be utilized
                 to define the filtering algorithm, valid options are "contains" (default), "startsWith", "endsWith", "equals" and "notEquals".</p>
@@ -346,7 +346,7 @@ selectedItemTemplate(option) {
 `}
 </CodeHighlight>
 
-            <h3>SelectItem API</h3>
+            <h5>SelectItem API</h5>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -392,7 +392,7 @@ selectedItemTemplate(option) {
                 </table>
             </div>
 
-            <h3>Properties</h3>
+            <h5>Properties</h5>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -576,7 +576,7 @@ selectedItemTemplate(option) {
                 </table>
             </div>
 
-            <h3>Events</h3>
+            <h5>Events</h5>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -608,7 +608,7 @@ selectedItemTemplate(option) {
                 </table>
             </div>
 
-            <h3>Methods</h3>
+            <h5>Methods</h5>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -628,7 +628,7 @@ selectedItemTemplate(option) {
                 </table>
             </div>
 
-            <h3>Styling</h3>
+            <h5>Styling</h5>
             <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
@@ -674,7 +674,7 @@ selectedItemTemplate(option) {
                     </tbody>
                 </table>
 
-                <h3>Dependencies</h3>
+                <h5>Dependencies</h5>
                 <p>None.</p>
             </div>
 

@@ -40,7 +40,7 @@ const PasswordDemo = () => {
 
     return (
         <div>
-            <h3>Password</h3>
+            <h5>Password</h5>
             <Password/>
         </div>
     );
@@ -57,7 +57,7 @@ const PasswordDemo = () => {
 
     return (
         <div>
-            <h3>Password</h3>
+            <h5>Password</h5>
             <Password/>
         </div>
     );
@@ -84,14 +84,14 @@ const PasswordDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import {Password} from 'primereact/password';
 `}
 </CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>Password is used as a controlled component with <i>value</i> and <i>onChange</i> properties.</p>
 <CodeHighlight>
 {`
@@ -99,7 +99,7 @@ import {Password} from 'primereact/password';
 `}
 </CodeHighlight>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <p>Password accepts all valid properties of an input element in addition the the custom properties below.</p>
 
                         <div className="doc-tablewrapper">
@@ -159,7 +159,7 @@ import {Password} from 'primereact/password';
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -186,7 +186,7 @@ import {Password} from 'primereact/password';
                             </table>
                         </div>
 
-                        <h3>Dependencies</h3>
+                        <h5>Dependencies</h5>
                         <p>None.</p>
                     </TabPanel>
 

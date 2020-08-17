@@ -127,16 +127,16 @@ const ProgressBarDemo = () => {
         <div>
             <Growl ref={growl}></Growl>
 
-            <h3 className="first">Dynamic</h3>
+            <h3 className="first">Dynamic</h5>
             <ProgressBar value={value1}></ProgressBar>
 
-            <h3>Static</h3>
+            <h5>Static</h5>
             <ProgressBar value={50}></ProgressBar>
 
-            <h3>Custom display value</h3>
+            <h5>Custom display value</h5>
             <ProgressBar value={40} displayValueTemplate={displayValueTemplate}></ProgressBar>
 
-            <h3>Indeterminate</h3>
+            <h5>Indeterminate</h5>
             <ProgressBar mode="indeterminate" style={{height: '6px'}}></ProgressBar>
         </div>
     );
@@ -186,16 +186,16 @@ const ProgressBarDemo = () => {
         <div>
             <Growl ref={growl}></Growl>
 
-            <h3 className="first">Dynamic</h3>
+            <h3 className="first">Dynamic</h5>
             <ProgressBar value={value1}></ProgressBar>
 
-            <h3>Static</h3>
+            <h5>Static</h5>
             <ProgressBar value={50}></ProgressBar>
 
-            <h3>Custom display value</h3>
+            <h5>Custom display value</h5>
             <ProgressBar value={40} displayValueTemplate={displayValueTemplate}></ProgressBar>
 
-            <h3>Indeterminate</h3>
+            <h5>Indeterminate</h5>
             <ProgressBar mode="indeterminate" style={{height: '6px'}}></ProgressBar>
         </div>
     );
@@ -214,14 +214,14 @@ const ProgressBarDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { ProgressBar } from 'primereact/progressbar';
 `}
 </CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>ProgressBar has two modes; "determinate" (default) and "indeterminate". In determinate mode, a value between 0 and 100 is required to display the progress.</p>
 <CodeHighlight>
 {`
@@ -235,7 +235,7 @@ import { ProgressBar } from 'primereact/progressbar';
 `}
 </CodeHighlight>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -299,7 +299,7 @@ import { ProgressBar } from 'primereact/progressbar';
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -333,7 +333,7 @@ import { ProgressBar } from 'primereact/progressbar';
                                 </tbody>
                             </table>
 
-                            <h3>Dependencies</h3>
+                            <h5>Dependencies</h5>
                             <p>None.</p>
                         </div>
                     </TabPanel>

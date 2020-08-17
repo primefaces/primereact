@@ -139,14 +139,14 @@ const OverlayPanelDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { OverlayPanel } from 'primereact/overlaypanel';
 `}
 </CodeHighlight>
 
-            <h3>Getting Started</h3>
+            <h5>Getting Started</h5>
             <p>OverlayPanel is accessed via its reference where visibility is controlled using toggle, show and hide methods.</p>
 <CodeHighlight>
 {`
@@ -158,7 +158,7 @@ import { OverlayPanel } from 'primereact/overlaypanel';
 `}
 </CodeHighlight>
 
-            <h3>Dismissable and CloseIcon</h3>
+            <h5>Dismissable and CloseIcon</h5>
             <p>Clicking outside the overlay hides the panel, setting dismissable to false disables this behavior.
                Additionally enablign showCloseIcon property displays a close icon at the top right corner to close the panel.</p>
 
@@ -170,7 +170,7 @@ import { OverlayPanel } from 'primereact/overlaypanel';
 `}
 </CodeHighlight>
 
-            <h3>Properties</h3>
+            <h5>Properties</h5>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -228,7 +228,7 @@ import { OverlayPanel } from 'primereact/overlaypanel';
                 </table>
             </div>
 
-            <h3>Events</h3>
+            <h5>Events</h5>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -248,7 +248,7 @@ import { OverlayPanel } from 'primereact/overlaypanel';
                 </table>
             </div>
 
-            <h3>Methods</h3>
+            <h5>Methods</h5>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -279,7 +279,7 @@ import { OverlayPanel } from 'primereact/overlaypanel';
                 </table>
             </div>
 
-            <h3>Styling</h3>
+            <h5>Styling</h5>
             <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
@@ -305,7 +305,7 @@ import { OverlayPanel } from 'primereact/overlaypanel';
                     </tbody>
                 </table>
 
-                <h3>Dependencies</h3>
+                <h5>Dependencies</h5>
                 <p>None.</p>
             </div>
 

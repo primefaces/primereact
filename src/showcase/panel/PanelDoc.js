@@ -111,14 +111,14 @@ const PanelDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { Panel } from 'primereact/panel';
 `}
 </CodeHighlight>
 
-            <h3>Getting Started</h3>
+            <h5>Getting Started</h5>
             <p>Panel is a container component that accepts content as its children.</p>
 <CodeHighlight>
 {`
@@ -133,7 +133,7 @@ import { Panel } from 'primereact/panel';
 
             <p>Instead of simple strings, <i>header</i> propery also can be used to provide custom content as JSX.</p>
 
-            <h3>Toggleable</h3>
+            <h5>Toggleable</h5>
             <p>Content of the panel can be expanded and collapsed using <i>toggleable</i> option. A toggleable panel can either be used as a Controlled or Uncontrolled component.</p>
 
             <p>In controlled mode, <i>collapsed</i> and <i>onToggle</i> properties needs to be defined to control the collapsed state.</p>
@@ -163,7 +163,7 @@ import { Panel } from 'primereact/panel';
 `}
 </CodeHighlight>
 
-            <h3>Properties</h3>
+            <h5>Properties</h5>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -215,7 +215,7 @@ import { Panel } from 'primereact/panel';
                 </table>
             </div>
 
-            <h3>Events</h3>
+            <h5>Events</h5>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -247,7 +247,7 @@ import { Panel } from 'primereact/panel';
                 </table>
             </div>
 
-            <h3>Styling</h3>
+            <h5>Styling</h5>
             <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
@@ -281,7 +281,7 @@ import { Panel } from 'primereact/panel';
                     </tbody>
                 </table>
 
-                <h3>Dependencies</h3>
+                <h5>Dependencies</h5>
                 <ul>
                     <li>react-transition-group</li>
                 </ul>

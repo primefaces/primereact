@@ -96,10 +96,10 @@ const PaginatorDemo = () => {
 
     return (
         <div>
-            <h3>Default</h3>
+            <h5>Default</h5>
             <Paginator first={first} rows={rows} totalRecords={120} rowsPerPageOptions={[10,20,30]} onPageChange={onPageChange}></Paginator>
 
-            <h3>Custom Template</h3>
+            <h5>Custom Template</h5>
             <Paginator first={first2} rows={rows2} totalRecords={120} rowsPerPageOptions={[10,20,30]} onPageChange={onPageChange2}
                 template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"></Paginator>
         </div>
@@ -131,10 +131,10 @@ const PaginatorDemo = () => {
 
     return (
         <div>
-            <h3>Default</h3>
+            <h5>Default</h5>
             <Paginator first={first} rows={rows} totalRecords={120} rowsPerPageOptions={[10,20,30]} onPageChange={onPageChange}></Paginator>
 
-            <h3>Custom Template</h3>
+            <h5>Custom Template</h5>
             <Paginator first={first2} rows={rows2} totalRecords={120} rowsPerPageOptions={[10,20,30]} onPageChange={onPageChange2}
                 template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"></Paginator>
         </div>
@@ -154,14 +154,14 @@ const PaginatorDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { Paginator } from 'primereact/paginator';
 `}
 </CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>Paginator is used as a controlled component with <i>first</i>, <i>rows</i> (optional) and <i>onPageChange</i> properties.</p>
 
 <CodeHighlight>
@@ -170,7 +170,7 @@ import { Paginator } from 'primereact/paginator';
 `}
 </CodeHighlight>
 
-                        <h3>Rows and TotalRecords</h3>
+                        <h5>Rows and TotalRecords</h5>
                         <p>Rows and TotalRecords define how many pages the paginator should display. Paginator below will have 10 pages.</p>
 <CodeHighlight>
 {`
@@ -178,7 +178,7 @@ import { Paginator } from 'primereact/paginator';
 `}
 </CodeHighlight>
 
-                        <h3>Rows Per Page</h3>
+                        <h5>Rows Per Page</h5>
                         <p>Number of items per page can be changed by the user using a dropdown if you define rowsPerPageOptions as an array of possible values. In this case,
                         rows property should also be updated
             </p>
@@ -188,7 +188,7 @@ import { Paginator } from 'primereact/paginator';
 `}
 </CodeHighlight>
 
-                        <h3>Template</h3>
+                        <h5>Template</h5>
                         <p>Paginator elements can be customized using the template property using the predefined keys, default value is
                         "FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown". Here are the available elements that
             can be placed inside a paginator.</p>
@@ -203,7 +203,7 @@ import { Paginator } from 'primereact/paginator';
                             <li>CurrentPageReport</li>
                         </ul>
 
-                        <h3>CurrentPageReport</h3>
+                        <h5>CurrentPageReport</h5>
                         <p>Current page report item in the itemplate displays information about the pagination state. Default value is (&#123;currentPage&#125; of &#123;totalPages&#125;)
                 whereas available placeholders are the following;</p>
                         <ul>
@@ -215,7 +215,7 @@ import { Paginator } from 'primereact/paginator';
                             <li>&#123;totalRecords&#125;</li>
                         </ul>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -299,7 +299,7 @@ import { Paginator } from 'primereact/paginator';
                             </table>
                         </div>
 
-                        <h3>Events</h3>
+                        <h5>Events</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -324,7 +324,7 @@ import { Paginator } from 'primereact/paginator';
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -370,7 +370,7 @@ import { Paginator } from 'primereact/paginator';
                                 </tbody>
                             </table>
 
-                            <h3>Dependencies</h3>
+                            <h5>Dependencies</h5>
                             <p>None.</p>
                         </div>
 

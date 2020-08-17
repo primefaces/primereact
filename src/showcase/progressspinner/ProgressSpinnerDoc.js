@@ -44,10 +44,10 @@ const ProgressSpinnerDemo = () => {
 
     return (
         <div>
-            <h3>Basic</h3>
+            <h5>Basic</h5>
             <ProgressSpinner/>
 
-            <h3>Custom</h3>
+            <h5>Custom</h5>
             <ProgressSpinner style={{width: '50px', height: '50px'}} strokeWidth="8" fill="#EEEEEE" animationDuration=".5s"/>
         </div>
     );
@@ -64,10 +64,10 @@ const ProgressSpinnerDemo = () => {
 
     return (
         <div>
-            <h3>Basic</h3>
+            <h5>Basic</h5>
             <ProgressSpinner/>
 
-            <h3>Custom</h3>
+            <h5>Custom</h5>
             <ProgressSpinner style={{width: '50px', height: '50px'}} strokeWidth="8" fill="#EEEEEE" animationDuration=".5s"/>
         </div>
     );
@@ -86,14 +86,14 @@ const ProgressSpinnerDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { ProgressSpinner } from 'primereact/progressspinner';
 `}
 </CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>ProgressSpinner is defined using ProgressSpinner element.</p>
 <CodeHighlight>
 {`
@@ -101,7 +101,7 @@ import { ProgressSpinner } from 'primereact/progressspinner';
 `}
 </CodeHighlight>
 
-                        <h3>Colors</h3>
+                        <h5>Colors</h5>
                         <p>Colors of the spinner can be changed by overriding the keyframes animation</p>
 <CodeHighlight lang="js">
 {`
@@ -124,7 +124,7 @@ import { ProgressSpinner } from 'primereact/progressspinner';
 `}
 </CodeHighlight>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -175,7 +175,7 @@ import { ProgressSpinner } from 'primereact/progressspinner';
                                 </tbody>
                             </table>
                         </div>
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -202,7 +202,7 @@ import { ProgressSpinner } from 'primereact/progressspinner';
                             </table>
                         </div>
 
-                        <h3>Dependencies</h3>
+                        <h5>Dependencies</h5>
                         <p>None.</p>
                     </TabPanel>
 

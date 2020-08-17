@@ -476,17 +476,17 @@ const MenubarDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { Menubar } from 'primereact/menubar';
 `}
 </CodeHighlight>
 
-                        <h3>MenuItem API</h3>
+                        <h5>MenuItem API</h5>
                         <p>Menubar uses the common menu item api to define its items, visit <Link to="/menumodel"> MenuModel </Link> for details.</p>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>Menubar requires nested menuitems as its model.</p>
 <CodeHighlight>
 {`
@@ -627,7 +627,7 @@ const items:[
 `}
 </CodeHighlight>
 
-                        <h3>Custom Content</h3>
+                        <h5>Custom Content</h5>
                         <p>Any content inside the menubar will be displayed on the right side by default. You may use ".ui-menubar-custom" style class to change the location of the content.</p>
 <CodeHighlight>
 {`
@@ -638,7 +638,7 @@ const items:[
 `}
 </CodeHighlight>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -690,7 +690,7 @@ const items:[
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -729,7 +729,7 @@ const items:[
                             </table>
                         </div>
 
-                        <h3>Dependencies</h3>
+                        <h5>Dependencies</h5>
                         <p>None.</p>
                     </TabPanel>
 
