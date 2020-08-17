@@ -352,15 +352,9 @@ import { AppInlineHeader } from '../../AppInlineHeader';
                     <p>None.</p>
                 </TabPanel>
 
-                    {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="RadioButtonDemo" sources={[key, value]} />
-                                </TabPanel>
-                            );
-                        })
-                    }
+                    <TabPanel header="Source">
+                        <LiveEditor name="RadioButtonDemo" sources={this.sources} />
+                    </TabPanel>
                 </TabView>
             </div>
         )

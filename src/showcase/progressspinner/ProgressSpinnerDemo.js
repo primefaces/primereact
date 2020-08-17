@@ -236,13 +236,9 @@ import {ProgressSpinner} from 'primereact/progressspinner';
                         <p>None.</p>
                     </TabPanel>
 
-                    {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <LiveEditor name="ProgressSpinnerDemo" sources={[key, value]} />
-                            );
-                        })
-                    }
+                    <TabPanel header="Source">
+                        <LiveEditor name="ProgressSpinnerDemo" sources={this.sources} />
+                    </TabPanel>
                 </TabView>
             </div>
         )

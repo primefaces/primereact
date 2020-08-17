@@ -216,15 +216,9 @@ import {Password} from 'primereact/password';
                         <p>None.</p>
                     </TabPanel>
 
-                    {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="PasswordDemo" sources={[key, value]} service="NodeService" data="treenodes" extFiles={this.extFiles} />
-                                </TabPanel>
-                            );
-                        })
-                    }
+                    <TabPanel header="Source">
+                        <LiveEditor name="PasswordDemo" sources={this.sources} service="NodeService" data="treenodes" extFiles={this.extFiles} />
+                    </TabPanel>
                 </TabView>
             </div>
         )
