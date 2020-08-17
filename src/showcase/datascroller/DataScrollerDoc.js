@@ -213,14 +213,14 @@ const DataScrollerDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { DataScroller } from 'primereact/datascroller';
 `}
 </CodeHighlight>
 
-            <h3>Getting Started</h3>
+            <h5>Getting Started</h5>
             <p>DataScroller requires a collection of items as its value, number of rows to load and a template content to display. Here is a sample DataScroller that displays a
                 list of cars where each load event adds 10 more rows if available.</p>
 <CodeHighlight>
@@ -237,7 +237,7 @@ itemTemplate(item) {
 </CodeHighlight>
 
 
-            <h3>Inline</h3>
+            <h5>Inline</h5>
             <p>By default DataScroller listens to the scroll event of window, the alternative is the inline mode where container of the DataScroller element itself is used as the event target. Set <i>inline</i> option to true to enable this mode.</p>
 <CodeHighlight>
 {`
@@ -245,7 +245,7 @@ itemTemplate(item) {
 `}
 </CodeHighlight>
 
-            <h3>Lazy Loading</h3>
+            <h5>Lazy Loading</h5>
             <p>Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking
              onLazyLoad callback everytime paging happens. To implement lazy loading,
             enable <i>lazy</i> property and provide a method callback using <i>onLazyLoad</i> that actually loads the data from a remote datasource. onLazyLoad gets an event object
@@ -267,7 +267,7 @@ loadData(event) {
 `}
 </CodeHighlight>
 
-            <h3>Properties</h3>
+            <h5>Properties</h5>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -355,7 +355,7 @@ loadData(event) {
                 </table>
             </div>
 
-            <h3>Events</h3>
+            <h5>Events</h5>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -376,7 +376,7 @@ loadData(event) {
                 </table>
             </div>
 
-            <h3>Styling</h3>
+            <h5>Styling</h5>
             <p>Following is the list of structural style classes</p>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
@@ -410,7 +410,7 @@ loadData(event) {
                     </tbody>
                 </table>
 
-                <h3>Dependencies</h3>
+                <h5>Dependencies</h5>
                 <p>None.</p>
             </div>
 

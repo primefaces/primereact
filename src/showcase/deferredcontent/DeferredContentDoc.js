@@ -182,14 +182,14 @@ const DeferredContentDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { DeferredContent } from 'primereact/deferredcontent';
 `}
 </CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>DeferredContent is used as a wrapper element of its content.</p>
 <CodeHighlight>
 {`
@@ -204,7 +204,7 @@ import { DeferredContent } from 'primereact/deferredcontent';
 `}
 </CodeHighlight>
 
-                        <h3>Callback</h3>
+                        <h5>Callback</h5>
                         <p><i>onLoad</i> callback is useful to initialize the content when it becomes visible on scroll such as loading data.</p>
 <CodeHighlight>
 {`
@@ -219,12 +219,12 @@ import { DeferredContent } from 'primereact/deferredcontent';
 `}
 </CodeHighlight>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             Component has no attributes.
                         </div>
 
-                        <h3>Events</h3>
+                        <h5>Events</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -244,12 +244,12 @@ import { DeferredContent } from 'primereact/deferredcontent';
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <div className="doc-tablewrapper">
                             Component does not apply any styling.
                         </div>
 
-                        <h3>Dependencies</h3>
+                        <h5>Dependencies</h5>
                         <p>None.</p>
                     </TabPanel>
 

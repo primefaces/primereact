@@ -509,14 +509,14 @@ const DataViewDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
 `}
 </CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>Layout of the DataView is managed by the <a href="https://github.com/primefaces/primeflex">PrimeFlex</a> that can be downloaded from npm.</p>
 
 <CodeHighlight lang="js">
@@ -554,7 +554,7 @@ itemTemplate(car, layout) {
 `}
 </CodeHighlight>
 
-                        <h3>DataViewLayoutOptions</h3>
+                        <h5>DataViewLayoutOptions</h5>
                         <p>DataViewLayoutOptions is a helper component to choose between layout modes. This component is used in controlled manner to manage the state of layout orientation.</p>
 
 <CodeHighlight>
@@ -563,7 +563,7 @@ itemTemplate(car, layout) {
 `}
 </CodeHighlight>
 
-                        <h3>Properties of DataViewLayoutOptions</h3>
+                        <h5>Properties of DataViewLayoutOptions</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -603,7 +603,7 @@ itemTemplate(car, layout) {
                             </table>
                         </div>
 
-                        <h3>Events of DataViewLayoutOptions</h3>
+                        <h5>Events of DataViewLayoutOptions</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -625,7 +625,7 @@ itemTemplate(car, layout) {
                             </table>
                         </div>
 
-                        <h3>Paginator</h3>
+                        <h5>Paginator</h5>
                         <p>Pagination is enabled by setting paginator property to true, rows attribute defines the number of rows per page and pageLinks specify the the number
                             of page links to display. Visit the <Link to="/paginator"> paginator</Link> paginator component for more information about the available properties.</p>
 
@@ -645,7 +645,7 @@ itemTemplate(car, layout) {
 `}
 </CodeHighlight>
 
-                        <h3>Sorting</h3>
+                        <h5>Sorting</h5>
                         <p><i>sortField</i> and <i>sortOrder</i> properties are available for sorting functionality, for flexibility there is no built-in UI available so that a custom UI can be used for the sorting element.
                             Here is an example that uses a dropdown where simply updating the sortField-sortOrder bindings of the DataView initiates sorting.</p>
 
@@ -692,12 +692,12 @@ onSortChange(event) {
 `}
 </CodeHighlight>
 
-                        <h3>Lazy Loading</h3>
+                        <h5>Lazy Loading</h5>
                         <p>Lazy loading is useful to deal with huge datasets, in order to implement lazy loading use the pagination in controlled mode and utilize the <i>onPage</i> callback to load your data from the backend.
                         Pagination in this case needs to display the logical number of records so bind this value to the <i>totalRecords</i> property so that paginator can display itself according to the total records although you'd only
                         need to load the data of the current page. Refer to <Link to="/datatable/lazy">DataTable</Link> lazy loading for a sample implementation.</p>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -857,7 +857,7 @@ onSortChange(event) {
                             </table>
                         </div>
 
-                        <h3>Events</h3>
+                        <h5>Events</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -879,7 +879,7 @@ onSortChange(event) {
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -917,7 +917,7 @@ onSortChange(event) {
                                 </tbody>
                             </table>
 
-                            <h3>Dependencies</h3>
+                            <h5>Dependencies</h5>
                             <p>None.</p>
                         </div>
 

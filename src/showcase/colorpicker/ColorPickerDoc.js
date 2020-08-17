@@ -53,11 +53,11 @@ const ColorPickerDemo = () => {
 
     return (
         <div>
-            <h3>Inline</h3>
+            <h5>Inline</h5>
             <ColorPicker inline={true} value={color1} onChange={(e) => setColor1(e.value)}></ColorPicker>
             <p style={{'marginTop':'.5em'}}>Selected Color: <span style={{'display':'inline-block','width':'32px','height':'32px','verticalAlign':'middle','backgroundColor': '#' + color1}}></span> {color1} </p>
 
-            <h3>Overlay</h3>
+            <h5>Overlay</h5>
             <ColorPicker value={color2} onChange={(e) => setColor2(e.value)}></ColorPicker>
             <p style={{'marginTop':'.5em'}}>Selected Color: <span style={{'color':'#' + color2}}>{color2}</span></p>
         </div>
@@ -77,11 +77,11 @@ const ColorPickerDemo = () => {
 
     return (
         <div>
-            <h3>Inline</h3>
+            <h5>Inline</h5>
             <ColorPicker inline={true} value={color1} onChange={(e) => setColor1(e.value)}></ColorPicker>
             <p style={{'marginTop':'.5em'}}>Selected Color: <span style={{'display':'inline-block','width':'32px','height':'32px','verticalAlign':'middle','backgroundColor': '#' + color1}}></span> {color1} </p>
 
-            <h3>Overlay</h3>
+            <h5>Overlay</h5>
             <ColorPicker value={color2} onChange={(e) => setColor2(e.value)}></ColorPicker>
             <p style={{'marginTop':'.5em'}}>Selected Color: <span style={{'color':'#' + color2}}>{color2}</span></p>
         </div>
@@ -112,14 +112,14 @@ const ColorPickerDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import {ColorPicker} from 'primereact/colorpicker';
 `}
 </CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>ColorPicker is used as a controlled input component with <i>value</i> and <i>onChange</i> properties.</p>
 
 <CodeHighlight>
@@ -128,7 +128,7 @@ import {ColorPicker} from 'primereact/colorpicker';
 `}
 </CodeHighlight>
 
-                        <h3>Formats</h3>
+                        <h5>Formats</h5>
                         <p>Default color format to use in value binding is "hex" and other possible values are "rgb" and "hsb". Example below has 3 colorpickers having default values with different formats.</p>
 
 <CodeHighlight>
@@ -142,7 +142,7 @@ import {ColorPicker} from 'primereact/colorpicker';
 </CodeHighlight>
 
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -236,7 +236,7 @@ import {ColorPicker} from 'primereact/colorpicker';
                             </table>
                         </div>
 
-                        <h3>Events</h3>
+                        <h5>Events</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -256,7 +256,7 @@ import {ColorPicker} from 'primereact/colorpicker';
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -311,7 +311,7 @@ import {ColorPicker} from 'primereact/colorpicker';
                             </table>
                         </div>
 
-                        <h3>Dependencies</h3>
+                        <h5>Dependencies</h5>
                         <p>None.</p>
                     </TabPanel>
 

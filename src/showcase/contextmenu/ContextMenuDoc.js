@@ -479,16 +479,16 @@ const ContextMenuDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { ContextMenu } from 'primereact/contextmenu';
 `}
 </CodeHighlight>
-                        <h3>MenuItem API</h3>
+                        <h5>MenuItem API</h5>
                         <p>ContextMenu uses the common menu item api to define its items, visit <Link to="/menumodel"> MenuModel </Link> for details.</p>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>Menu requires a collection of menuitems as its model.</p>
 <CodeHighlight lang="js">
 {`
@@ -632,7 +632,7 @@ const items: [
 `}
 </CodeHighlight>
 
-                        <h3>Document Menu</h3>
+                        <h5>Document Menu</h5>
                         <p>Setting global property attaches the context menu to the document.
                         </p>
 
@@ -643,7 +643,7 @@ const items: [
 `}
 </CodeHighlight>
 
-                        <h3>Element Menu</h3>
+                        <h5>Element Menu</h5>
                         <p>ContextMenu is attached to a custom element manually using the reference and calling the show(event) method.</p>
 
 <CodeHighlight>
@@ -655,7 +655,7 @@ const items: [
 
 
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -719,7 +719,7 @@ const items: [
                             </table>
                         </div>
 
-                        <h3>Methods</h3>
+                        <h5>Methods</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -744,7 +744,7 @@ const items: [
                             </table>
                         </div>
 
-                        <h3>Events</h3>
+                        <h5>Events</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -769,7 +769,7 @@ const items: [
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -808,7 +808,7 @@ const items: [
                             </table>
                         </div>
 
-                        <h3>Dependencies</h3>
+                        <h5>Dependencies</h5>
                         <p>None.</p>
                     </TabPanel>
 
