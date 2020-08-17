@@ -150,17 +150,17 @@ const AutoCompleteDemo = () => {
 
     return (
         <div>
-            <h3>Basic</h3>
+            <h5>Basic</h5>
             <AutoComplete value={selectedCountry} suggestions={filteredCountriesSingle} completeMethod={filterCountrySingle} field="name"
                 size={30} placeholder="Countries" minLength={1} onChange={(e) => setSelectedCountry(e.value)} />
             <span style={{ marginLeft: '10px' }}>Country: {selectedCountry ? selectedCountry.name || selectedCountry : 'none'}</span>
 
-            <h3>Advanced</h3>
+            <h5>Advanced</h5>
             <AutoComplete value={selectedBrand} suggestions={filteredBrands} completeMethod={filterBrands} size={30} minLength={1}
                 placeholder="Hint: type 'v' or 'f'" dropdown={true} itemTemplate={itemTemplate} onChange={(e) => setSelectedBrand(e.value)} />
             <span style={{ marginLeft: '10px' }}>Brand: {selectedBrand || 'none'}</span>
 
-            <h3>Multiple</h3>
+            <h5>Multiple</h5>
             <span className="p-fluid">
                 <AutoComplete value={selectedCountries} suggestions={filteredCountriesMultiple} completeMethod={filterCountryMultiple}
                     minLength={1} placeholder="Countries" field="name" multiple={true} onChange={(e) => setSelectedCountries(e.value)} />
@@ -239,17 +239,17 @@ const AutoCompleteDemo = () => {
 
     return (
         <div>
-            <h3>Basic</h3>
+            <h5>Basic</h5>
             <AutoComplete value={selectedCountry} suggestions={filteredCountriesSingle} completeMethod={filterCountrySingle} field="name"
                 size={30} placeholder="Countries" minLength={1} onChange={(e) => setSelectedCountry(e.value)} />
             <span style={{ marginLeft: '10px' }}>Country: {selectedCountry ? selectedCountry.name || selectedCountry : 'none'}</span>
 
-            <h3>Advanced</h3>
+            <h5>Advanced</h5>
             <AutoComplete value={selectedBrand} suggestions={filteredBrands} completeMethod={filterBrands} size={30} minLength={1}
                 placeholder="Hint: type 'v' or 'f'" dropdown={true} itemTemplate={itemTemplate} onChange={(e) => setSelectedBrand(e.value)} />
             <span style={{ marginLeft: '10px' }}>Brand: {selectedBrand || 'none'}</span>
 
-            <h3>Multiple</h3>
+            <h5>Multiple</h5>
             <span className="p-fluid">
                 <AutoComplete value={selectedCountries} suggestions={filteredCountriesMultiple} completeMethod={filterCountryMultiple}
                     minLength={1} placeholder="Countries" field="name" multiple={true} onChange={(e) => setSelectedCountries(e.value)} />
@@ -271,14 +271,14 @@ const AutoCompleteDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { AutoComplete } from 'primereact/autocomplete';
 `}
 </CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>AutoComplete is used as a controlled component with <i>value</i> and <i>onChange</i> properties. In addition, the component
                             requires a list of <i>suggestions</i> and a <i>completeMethod</i> to query the results.</p>
 
@@ -328,7 +328,7 @@ render() {
 `}
 </CodeHighlight>
 
-                        <h3>Dropdown</h3>
+                        <h5>Dropdown</h5>
                         <p>Enabling <i>dropdown</i> property displays a button next to the input field where click behavior of the button is defined using
                             dropdownMode property that takes "blank" or "current" as possible values.
                             "blank" is the default mode to send a query with an empty string whereas
@@ -341,7 +341,7 @@ render() {
 `}
 </CodeHighlight>
 
-                        <h3>Multiple Mode</h3>
+                        <h5>Multiple Mode</h5>
                         <p>Multiple mode is enabled using <i>multiple</i> property used to select more than one value from the autocomplete. In this case, value reference should be an array.</p>
 <CodeHighlight>
 {`
@@ -350,7 +350,7 @@ render() {
 `}
 </CodeHighlight>
 
-                        <h3>Objects</h3>
+                        <h5>Objects</h5>
                         <p>AutoComplete can also work with objects using the  <i>field</i> property that defines the label to display
                         as a suggestion. The value passed to the model would still be the object instance of a suggestion.
                         Here is an example with a Country object that has name and code fields such as &#123;name:"United States",code:"USA"&#125;.</p>
@@ -362,7 +362,7 @@ render() {
 `}
 </CodeHighlight>
 
-                        <h3>Templating</h3>
+                        <h5>Templating</h5>
                         <p>Custom content can be displayed using <i>itemTemplate</i> property that references a function or JSXElement or string which gets
                         the suggestion option and returns an element. Similarly <i>selectedItemTemplate</i> property is available
                         to customize the chips in multiple mode using the same approach.</p>
@@ -383,7 +383,7 @@ itemTemplate(item) {
 `}
 </CodeHighlight>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -579,7 +579,7 @@ itemTemplate(item) {
                             </table>
                         </div>
 
-                        <h3>Events</h3>
+                        <h5>Events</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -673,7 +673,7 @@ itemTemplate(item) {
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -716,7 +716,7 @@ itemTemplate(item) {
                             </table>
                         </div>
 
-                        <h3>Dependencies</h3>
+                        <h5>Dependencies</h5>
                         <p>None.</p>
                     </TabPanel>
 

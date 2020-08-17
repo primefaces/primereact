@@ -134,7 +134,7 @@ export class BadgeDoc extends Component {
                     <TabPanel header="Source">
 <CodeHighlight>
 {`
-<h3>Numbers</h3>
+<h5>Numbers</h5>
 <div className="badges">
     <span className="p-badge">2</span>
     <span className="p-badge p-badge-success">8</span>
@@ -143,7 +143,7 @@ export class BadgeDoc extends Component {
     <span className="p-badge p-badge-danger">3</span>
 </div>
 
-<h3>Tags</h3>
+<h5>Tags</h5>
 <div className="badges">
     <span className="p-tag">Primary</span>
     <span className="p-tag p-tag-success">Success</span>
@@ -152,7 +152,7 @@ export class BadgeDoc extends Component {
     <span className="p-tag p-tag-danger">Danger</span>
 </div>
 
-<h3>Pills</h3>
+<h5>Pills</h5>
 <div className="badges">
     <span className="p-tag p-tag-rounded">Primary</span>
     <span className="p-tag p-tag-rounded p-tag-success">Success</span>
@@ -161,7 +161,7 @@ export class BadgeDoc extends Component {
     <span className="p-tag p-tag-rounded p-tag-danger">Danger</span>
 </div>
 
-<h3>Positioned Badge</h3>
+<h5>Positioned Badge</h5>
 <span className="p-overlay-badge p-mr-5">
     <i className="pi pi-bell" style={{ fontSize: '2em' }}></i>
     <span className="p-badge">2</span>
@@ -172,11 +172,11 @@ export class BadgeDoc extends Component {
     <span className="p-badge p-badge-warning">5</span>
 </span>
 
-<h3>Inline Button Badge</h3>
+<h5>Inline Button Badge</h5>
 <Button type="button" label="Emails" badge="8" className="p-mr-2" />
 <Button type="button" label="Messages" icon="pi pi-users" className="p-button-warning" badge="8" badgeClassName="p-badge-danger" />
 
-<h3>Sizes</h3>
+<h5>Sizes</h5>
 <div className="badges">
     <span className="p-badge">2</span>
     <span className="p-badge p-badge-lg p-badge-sucess">4</span>

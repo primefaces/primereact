@@ -151,7 +151,7 @@ const AccordionDemo = () => {
 
     return (
         <div>
-            <h3>Default</h3>
+            <h5>Default</h5>
             <Accordion>
                 <AccordionTab header="Godfather I">
                     <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughters wedding.
@@ -174,7 +174,7 @@ const AccordionDemo = () => {
                 </AccordionTab>
             </Accordion>
 
-            <h3>Multiple</h3>
+            <h5>Multiple</h5>
             <Accordion multiple={true}>
                 <AccordionTab header="Godfather I">
                     <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughters wedding.
@@ -212,7 +212,7 @@ const AccordionDemo = () => {
 
     return (
         <div>
-            <h3>Default</h3>
+            <h5>Default</h5>
             <Accordion>
                 <AccordionTab header="Godfather I">
                     <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughters wedding.
@@ -235,7 +235,7 @@ const AccordionDemo = () => {
                 </AccordionTab>
             </Accordion>
 
-            <h3>Multiple</h3>
+            <h5>Multiple</h5>
             <Accordion multiple={true}>
                 <AccordionTab header="Godfather I">
                     <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughters wedding.
@@ -275,17 +275,17 @@ const AccordionDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { Accordion, AccordionTab } from 'primereact/accordion';
 `}
 </CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>Accordion element consists of one or more AccordionTab elements and can either be used as a Controlled or Uncontrolled component.</p>
 
-                        <h3>Controlled Component</h3>
+                        <h5>Controlled Component</h5>
                         <p>In controlled mode, <i>activeIndex</i> and <i>onTabChange</i> properties need to be defined to control the state.</p>
 
 <CodeHighlight>
@@ -304,7 +304,7 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
 `}
 </CodeHighlight>
 
-                        <h3>Uncontrolled</h3>
+                        <h5>Uncontrolled</h5>
                         <p>In uncontrolled mode, no additional properties are required. Initial active tab can be provided using the <i>activeIndex</i> property in uncontrolled mode however it is evaluated at initial rendering and ignored in further updates. If you programmatically
                 need to update the active tab, prefer to use the component as controlled.</p>
 
@@ -324,7 +324,7 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
 `}
 </CodeHighlight>
 
-                        <h3>Multiple</h3>
+                        <h5>Multiple</h5>
                         <p>By default only one tab at a time can be active, enabling <i>multiple</i> property changes this behavior to allow multiple tabs be active at the same time.</p>
 <CodeHighlight>
 {`
@@ -342,7 +342,7 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
 `}
 </CodeHighlight>
 
-                        <h3>Properties For AccordionTab</h3>
+                        <h5>Properties For AccordionTab</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -394,7 +394,7 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
                             </table>
                         </div>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -440,7 +440,7 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
                             </table>
                         </div>
 
-                        <h3>Events</h3>
+                        <h5>Events</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -476,7 +476,7 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -502,7 +502,7 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
                                 </tbody>
                             </table>
 
-                            <h3>Dependencies</h3>
+                            <h5>Dependencies</h5>
                             <p>None.</p>
                         </div>
 

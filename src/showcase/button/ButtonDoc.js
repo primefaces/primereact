@@ -150,14 +150,14 @@ import { Button } from 'primereact/button';
 const ButtonDemo = () => {
     return (
         <div className="button-demo">
-            <h3 className="first">Basic</h3>
+            <h3 className="first">Basic</h5>
             <Button label="Click" />
             <Button label="Click" icon="pi pi-check" />
             <Button label="Click" icon="pi pi-check" iconPos="right" />
             <Button icon="pi pi-check" />
             <Button label="Click" disabled="disabled" />
 
-            <h3>Severities</h3>
+            <h5>Severities</h5>
             <Button label="Primary" />
             <Button label="Secondary" className="p-button-secondary" />
             <Button label="Success" className="p-button-success" />
@@ -165,7 +165,7 @@ const ButtonDemo = () => {
             <Button label="Warning" className="p-button-warning" />
             <Button label="Danger" className="p-button-danger" />
 
-            <h3>Raised Buttons</h3>
+            <h5>Raised Buttons</h5>
             <Button label="Primary" className="p-button-raised" />
             <Button label="Secondary" className="p-button-raised p-button-secondary" />
             <Button label="Success" className="p-button-raised p-button-success" />
@@ -173,7 +173,7 @@ const ButtonDemo = () => {
             <Button label="Warning" className="p-button-raised p-button-warning" />
             <Button label="Danger" className="p-button-raised p-button-danger" />
 
-            <h3>Rounded Buttons</h3>
+            <h5>Rounded Buttons</h5>
             <Button label="Primary" className="p-button-rounded" />
             <Button label="Secondary" className="p-button-rounded p-button-secondary" />
             <Button label="Success" className="p-button-rounded p-button-success" />
@@ -194,14 +194,14 @@ import { Button } from 'primereact/button';
 const ButtonDemo = () => {
     return (
         <div className="button-demo">
-            <h3 className="first">Basic</h3>
+            <h3 className="first">Basic</h5>
             <Button label="Click" />
             <Button label="Click" icon="pi pi-check" />
             <Button label="Click" icon="pi pi-check" iconPos="right" />
             <Button icon="pi pi-check" />
             <Button label="Click" disabled="disabled" />
 
-            <h3>Severities</h3>
+            <h5>Severities</h5>
             <Button label="Primary" />
             <Button label="Secondary" className="p-button-secondary" />
             <Button label="Success" className="p-button-success" />
@@ -209,7 +209,7 @@ const ButtonDemo = () => {
             <Button label="Warning" className="p-button-warning" />
             <Button label="Danger" className="p-button-danger" />
 
-            <h3>Raised Buttons</h3>
+            <h5>Raised Buttons</h5>
             <Button label="Primary" className="p-button-raised" />
             <Button label="Secondary" className="p-button-raised p-button-secondary" />
             <Button label="Success" className="p-button-raised p-button-success" />
@@ -217,7 +217,7 @@ const ButtonDemo = () => {
             <Button label="Warning" className="p-button-raised p-button-warning" />
             <Button label="Danger" className="p-button-raised p-button-danger" />
 
-            <h3>Rounded Buttons</h3>
+            <h5>Rounded Buttons</h5>
             <Button label="Primary" className="p-button-rounded" />
             <Button label="Secondary" className="p-button-rounded p-button-secondary" />
             <Button label="Success" className="p-button-rounded p-button-success" />
@@ -249,14 +249,14 @@ const ButtonDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { Button } from 'primereact/button';
 `}
                         </CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>Button is created using the Button element.</p>
 <CodeHighlight>
 {`
@@ -264,7 +264,7 @@ import { Button } from 'primereact/button';
 `}
                         </CodeHighlight>
 
-                        <h3>Label</h3>
+                        <h5>Label</h5>
                         <p>Text of the button is defined using the <i>label</i> property.</p>
 <CodeHighlight>
 {`
@@ -272,7 +272,7 @@ import { Button } from 'primereact/button';
 `}
                         </CodeHighlight>
 
-                        <h3>Icons</h3>
+                        <h5>Icons</h5>
                         <p>Icon on a button is specified with <i>icon</i> property and position is configured using <i>iconPos</i> attribute. Default
                         icon position is "left" and alternative is "right". To display only an icon, leave label as undefined.</p>
 
@@ -284,7 +284,7 @@ import { Button } from 'primereact/button';
 `}
                         </CodeHighlight>
 
-                        <h3>Events</h3>
+                        <h5>Events</h5>
                         <p>Events are defined with the standard notation.</p>
 <CodeHighlight>
 {`
@@ -294,7 +294,7 @@ import { Button } from 'primereact/button';
 
 
 
-                        <h3>Severity</h3>
+                        <h5>Severity</h5>
                         <p>Different color options are available as severity levels.</p>
 
                         <ul>
@@ -316,14 +316,14 @@ import { Button } from 'primereact/button';
 `}
                         </CodeHighlight>
 
-                        <h3>Raised and Rounded Buttons</h3>
+                        <h5>Raised and Rounded Buttons</h5>
                         <p>A button can be raised by having "p-button-raised" style class and similarly borders can be made rounded using "p-button-rounded" class.</p>
 <CodeHighlight>
 {`
 <Button label="Proceed" className="p-button-raised p-button-rounded" />
 `}
 </CodeHighlight>
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -381,7 +381,7 @@ import { Button } from 'primereact/button';
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -408,7 +408,7 @@ import { Button } from 'primereact/button';
                             </table>
                         </div>
 
-                        <h3>Dependencies</h3>
+                        <h5>Dependencies</h5>
                         <p>None.</p>
                     </TabPanel>
 

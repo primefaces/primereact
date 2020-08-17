@@ -110,17 +110,17 @@ const BreadcrumbDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { Breadcrumb } from 'primereact/breadcrumb';
 `}
 </CodeHighlight>
 
-                        <h3>MenuModel API</h3>
+                        <h5>MenuModel API</h5>
                         <p>BreadCrumb uses the common menumodel api to define its items, visit <Link to="/menumodel"> MenuModel </Link> for details.</p>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>BreadCrumb requires a collection of menuitems as its model.</p>
 
 <CodeHighlight lang="js">
@@ -146,7 +146,7 @@ const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact' 
 `}
 </CodeHighlight>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -192,7 +192,7 @@ const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact' 
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -223,7 +223,7 @@ const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact' 
                             </table>
                         </div>
 
-                        <h3>Dependencies</h3>
+                        <h5>Dependencies</h5>
                         <p>None.</p>
                     </TabPanel>
 
