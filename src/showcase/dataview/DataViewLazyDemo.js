@@ -6,11 +6,12 @@ import ProductService from '../service/ProductService';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { Rating } from '../../components/rating/Rating';
 import { Button } from '../../components/button/Button';
+import { CodeHighlight } from '../codehighlight/CodeHighlight';
 
 export class DataViewLazyDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             products: null,
             layout: 'grid',
@@ -172,34 +173,35 @@ export class DataViewLazyDemoDoc extends Component {
                 content: `
 import React, { Component } from 'react';
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
-import { Panel } from 'primereact/panel';
-import { CarService } from '../service/CarService';
+import ProductService from '../service/ProductService';
+import { Rating } from 'primereact/rating';
+import { Button } from 'primereact/button';
 
 export class DataViewLazyDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            cars: [],
-            layout: 'list',
+            products: null,
+            layout: 'grid',
             loading: true,
             first: 0,
             totalRecords: 0
         };
         this.rows = 6;
 
-        this.carservice = new CarService();
+        this.productService = new ProductService();
         this.itemTemplate = this.itemTemplate.bind(this);
         this.onPage = this.onPage.bind(this);
     }
 
     componentDidMount() {
         setTimeout(() => {
-            this.carservice.getCarsLarge().then(data => {
+            this.productService.getProducts().then(data => {
                 this.datasource = data;
                 this.setState({
                     totalRecords: data.length,
-                    cars: this.datasource.slice(0, this.rows),
+                    products: this.datasource.slice(0, this.rows),
                     loading: false
                 });
             });
@@ -218,50 +220,68 @@ export class DataViewLazyDemo extends Component {
 
             this.setState({
                 first: startIndex,
-                cars: this.datasource.slice(startIndex, endIndex),
+                products: this.datasource.slice(startIndex, endIndex),
                 loading: false
             });
         }, 1000);
     }
 
-    renderListItem(car) {
+    renderListItem(data) {
         return (
             <div className="p-col-12">
-                <div className="car-details">
-                    <div>
-                        <img src={\`showcase/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand} />
-                        <div className="p-grid">
-                            <div className="p-col-12">Vin: <b>{car.vin}</b></div>
-                            <div className="p-col-12">Year: <b>{car.year}</b></div>
-                            <div className="p-col-12">Brand: <b>{car.brand}</b></div>
-                            <div className="p-col-12">Color: <b>{car.color}</b></div>
-                        </div>
+                <div className="product-list-item">
+                    <img src={\`showcase/demo/images/product/\${data.image}\`} alt={data.name} />
+                    <div className="product-list-detail">
+                        <div className="product-name">{data.name}</div>
+                        <div className="product-description">{data.description}</div>
+                        <Rating value={data.rating} readonly cancel={false}></Rating>
+                        <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
+                    </div>
+                    <div className="product-list-action">
+                        <span className="product-price">\${data.price}</span>
+                        <Button icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                        <span className={\`product-badge status-\${data.inventoryStatus.toLowerCase()}\`}>{data.inventoryStatus}</span>
                     </div>
                 </div>
             </div>
         );
     }
 
-    renderGridItem(car) {
+    renderGridItem(data) {
         return (
-            <div style={{ padding: '.5em' }} className="p-col-12 p-md-4">
-                <Panel header={car.vin} style={{ textAlign: 'center' }}>
-                    <img src={\`showcase/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand} />
-                    <div className="car-detail">{car.year} - {car.color}</div>
-                </Panel>
+            <div className="p-col-12 p-md-4">
+                <div className="product-grid-item card">
+                    <div className="product-grid-item-top">
+                        <div>
+                            <i className="pi pi-tag product-category-icon"></i>
+                            <span className="product-category">{data.category}</span>
+                        </div>
+                        <span className={\`product-badge status-\${data.inventoryStatus.toLowerCase()}\`}>{data.inventoryStatus}</span>
+                    </div>
+                    <div className="product-grid-item-content">
+                    <img src={\`showcase/demo/images/product/\${data.image}\`} alt={data.name} />
+                        <div className="product-name">{data.name}</div>
+                        <div className="product-description">{data.description}</div>
+                        <Rating value={data.rating} readonly cancel={false}></Rating>
+                    </div>
+                    <div className="product-grid-item-bottom">
+                        <span className="product-price">\${data.price}</span>
+                        <Button icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                    </div>
+                </div>
             </div>
         );
     }
 
-    itemTemplate(car, layout) {
-        if (!car) {
+    itemTemplate(product, layout) {
+        if (!product) {
             return;
         }
 
         if (layout === 'list')
-            return this.renderListItem(car);
+            return this.renderListItem(product);
         else if (layout === 'grid')
-            return this.renderGridItem(car);
+            return this.renderGridItem(product);
     }
 
     renderHeader() {
@@ -277,7 +297,7 @@ export class DataViewLazyDemo extends Component {
         };
 
         return (
-            <div style={{textAlign: 'left'}}>
+            <div style={{ textAlign: 'left' }}>
                 <DataViewLayoutOptions layout={this.state.layout} onChange={onOptionChange} />
             </div>
         );
@@ -288,9 +308,11 @@ export class DataViewLazyDemo extends Component {
 
         return (
             <div className="dataview-demo">
-                <DataView value={this.state.cars} layout={this.state.layout} header={header} itemTemplate={this.itemTemplate}
-                    lazy paginator paginatorPosition={'both'} rows={this.rows} totalRecords={this.state.totalRecords}
-                    first={this.state.first} onPage={this.onPage} loading={this.state.loading} />
+                <div className="card">
+                    <DataView value={this.state.products} layout={this.state.layout} header={header}
+                            itemTemplate={this.itemTemplate} lazy paginator paginatorPosition={'both'} rows={this.rows}
+                            totalRecords={this.state.totalRecords} first={this.state.first} onPage={this.onPage} loading={this.state.loading} />
+                </div>
             </div>
         );
     }
@@ -580,6 +602,132 @@ const DataViewLazyDemo = () => {
                 <TabView>
                     <TabPanel header="Source">
                         <LiveEditor name="DataViewLazyDemo" sources={this.sources} service="CarService" data="cars-large" extFiles={this.extFiles} />
+<CodeHighlight lang="scss">
+{`
+.dataview-demo {
+    .p-dropdown {
+        width: 14rem;
+        font-weight: normal;
+    }
+
+    .product-name {
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+
+    .product-description {
+        margin: 0 0 1rem 0;
+    }
+
+    .product-category-icon {
+        vertical-align: middle;
+        margin-right: .5rem;
+    }
+
+    .product-category {
+        font-weight: 600;
+        vertical-align: middle;
+    }
+
+    .product-list-item {
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+        width: 100%;
+
+        img {
+            width: 150px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+            margin-right: 2rem;
+        }
+
+        .product-list-detail {
+            flex: 1 1 0;
+        }
+
+        .p-rating {
+            margin: 0 0 .5rem 0;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: .5rem;
+            align-self: flex-end;
+        }
+
+        .product-list-action {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .p-button {
+            margin-bottom: .5rem;
+        }
+    }
+
+    .product-grid-item {
+        margin: .5em;
+        border: 1px solid #dee2e6;
+
+        .product-grid-item-top,
+        .product-grid-item-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        img {
+            width: 75%;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+            margin: 2rem 0;
+        }
+
+        .product-grid-item-content {
+            text-align: center;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+    }
+
+    @media screen and (max-width: 576px) {
+        .product-list-item {
+            flex-direction: column;
+            align-items: center;
+
+            img {
+                width: 75%;
+                margin: 2rem 0;
+            }
+
+            .product-list-detail {
+                text-align: center;
+            }
+
+            .product-price {
+                align-self: center;
+            }
+
+            .product-list-action {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .product-list-action {
+                margin-top: 2rem;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+            }
+        }
+    }
+}
+`}
+</CodeHighlight>
                     </TabPanel>
                 </TabView>
             </div>
