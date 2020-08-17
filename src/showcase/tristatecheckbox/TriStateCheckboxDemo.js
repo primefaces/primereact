@@ -271,17 +271,11 @@ import {TriStateCheckbox} from 'primereact/tristatecheckbox';
                     <p>None.</p>
                 </TabPanel>
 
-                    {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="TriStateCheckboxDemo" sources={[key, value]} />
-                                </TabPanel>
-                            );
-                        })
-                    }
-                </TabView>
-            </div>
+                <TabPanel header="Source">
+                    <LiveEditor name="TriStateCheckboxDemo" sources={this.sources} />
+                </TabPanel>
+            </TabView>
+        </div>
         )
     }
 }
