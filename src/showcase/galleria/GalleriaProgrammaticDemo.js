@@ -101,25 +101,28 @@ export class GalleriaProgrammaticDemoDoc extends Component {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Source">
-                        <CodeHighlight lang="js">
-                            {`
+<CodeHighlight lang="js">
+{`
 import React, { Component } from 'react';
 import { PhotoService } from '../service/PhotoService';
-import { Galleria } from '../../components/galleria/Galleria';
+import { Galleria } from 'primereact/galleria';
+import { Button } from 'primereact/button';
 
-export class GalleriaCaptionDemo extends Component {
+export class GalleriaProgrammaticDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
-            images: null
+            images: null,
+            activeIndex: 2
         };
 
         this.galleriaService = new PhotoService();
         this.itemTemplate = this.itemTemplate.bind(this);
-        this.previewTemplate = this.previewTemplate.bind(this);
-        this.caption = this.caption.bind(this);
+        this.thumbnailTemplate = this.thumbnailTemplate.bind(this);
+        this.next = this.next.bind(this);
+        this.prev = this.prev.bind(this);
 
         this.responsiveOptions = [
             {
@@ -141,53 +144,44 @@ export class GalleriaCaptionDemo extends Component {
         this.galleriaService.getImages().then(data => this.setState({ images: data }));
     }
 
+    next() {
+        this.setState((prevState) => ({
+            activeIndex: (prevState.activeIndex === this.state.images.length - 1) ? 0 : prevState.activeIndex + 1
+        }));
+    }
+
+    prev() {
+        this.setState((prevState) => ({
+            activeIndex: (prevState.activeIndex === 0) ? this.state.images.length - 1 : prevState.activeIndex - 1
+        }));
+    }
+
     itemTemplate(item) {
-        return (
-            <div className="p-grid p-nogutter p-justify-center">
-                <img src={\`\${item.thumbnailImageSrc}\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={item.alt} style={{ display: 'block' }} />
-            </div>
-        );
+        return <img src={item.itemImageSrc} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
     }
 
-    previewTemplate(item) {
-        return <img src={\`\${item.previewImageSrc}\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={item.alt} style={{ width: '100%', display: 'block' }} />
-    }
-
-    caption(item) {
-        return (
-            <>
-                <h4 style={{marginBottom: '.5em'}}>{item.title}</h4>
-                <p>{item.alt}</p>
-            </>
-        );
+    thumbnailTemplate(item) {
+        return <img src={item.thumbnailImageSrc} alt={item.alt} style={{ display: 'block' }} />;
     }
 
     render() {
         return (
             <div>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Galleria - Caption</h1>
-                        <p></p>
-
-                        <AppContentContext.Consumer>
-                            {context => <button onClick={() => context.onChangelogBtnClick("galleria")} className="layout-changelog-button">{context.changelogText}</button>}
-                        </AppContentContext.Consumer>
+                <div className="card">
+                    <div className="p-py-2">
+                        <Button icon="pi pi-minus" onClick={this.prev} className="p-button-secondary" />
+                        <Button icon="pi pi-plus" onClick={this.next} className="p-button-secondary p-ml-2" />
                     </div>
-                </div>
 
-                <div className="content-section implementation">
-                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5}
-                        item={this.previewTemplate} thumbnail={this.itemTemplate}
-                        caption={this.caption} style={{maxWidth: '520px'}} />
+                    <Galleria value={this.state.images} activeIndex={this.state.activeIndex} onItemChange={(e) => this.setState({ activeIndex: e.index })} responsiveOptions={this.responsiveOptions} numVisible={5}
+                        item={this.itemTemplate} thumbnail={this.thumbnailTemplate} style={{ maxWidth: '640px' }} />
                 </div>
             </div>
         );
     }
 }
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
                     </TabPanel>
                 </TabView>
             </div>

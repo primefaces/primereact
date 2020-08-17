@@ -62,7 +62,7 @@ export class GalleriaIndicatorDemo extends Component {
 
     render() {
         return (
-            <div className="galleria-demo">
+            <div>
                 <div className="content-section introduction">
                     <AppInlineHeader changelogText="galleria">
                         <h1>Galleria <span>Indicator</span></h1>
@@ -131,16 +131,17 @@ export class GalleriaIndicatorDemoDoc extends Component {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Source">
-                        <CodeHighlight lang="js">
-                            {`
+<CodeHighlight lang="js">
+{`
 import React, { Component } from 'react';
 import { PhotoService } from '../service/PhotoService';
-import { Galleria } from '../../components/galleria/Galleria';
+import { Galleria } from 'primereact/galleria';
+import './GalleriaDemo.scss';
 
 export class GalleriaIndicatorDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             images: null,
@@ -149,9 +150,8 @@ export class GalleriaIndicatorDemo extends Component {
 
         this.galleriaService = new PhotoService();
         this.itemTemplate = this.itemTemplate.bind(this);
-        this.previewTemplate = this.previewTemplate.bind(this);
-        this.indicator = this.indicator.bind(this);
-        this.indicator2 = this.indicator2.bind(this);
+        this.thumbnailTemplate = this.thumbnailTemplate.bind(this);
+        this.indicatorTemplate = this.indicatorTemplate.bind(this);
 
         this.responsiveOptions = [
             {
@@ -177,119 +177,90 @@ export class GalleriaIndicatorDemo extends Component {
     }
 
     itemTemplate(item) {
-        return (
-            <div className="p-grid p-nogutter p-justify-center">
-                <img src={\`\${item.thumbnailImageSrc}\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={item.alt} style={{ display: 'block' }}/>
-            </div>
-        );
+        return <img src={item.itemImageSrc} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
     }
 
-    previewTemplate(item) {
-        return <img src={\`\${item.previewImageSrc}\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={item.alt} style={{ width: '100%', display: 'block' }} />
+    thumbnailTemplate(item) {
+        return <img src={\`\${item.previewImageSrc}\`} alt={item.alt} style={{ width: '100%', display: 'block' }} />
     }
 
-    indicator(index) {
+    indicatorTemplate(index) {
         return (
-            <div>
+            <span className="indicator-text">
                 {index + 1}
-            </div>
-        )
-    }
-
-    indicator2(index) {
-        let item = this.state.images2[index];
-        return (
-            <div style={{padding: '.2em', cursor: 'pointer'}}>
-                <img src={\`\${item.thumbnailImageSrc}\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={item.alt} style={{ display: 'block' }}/>
-            </div>
+            </span>
         )
     }
 
     render() {
         return (
             <div className="galleria-demo">
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Galleria - Indicator</h1>
-                        <p></p>
-
-                        <AppContentContext.Consumer>
-                            {context => <button onClick={() => context.onChangelogBtnClick("galleria")} className="layout-changelog-button">{context.changelogText}</button>}
-                        </AppContentContext.Consumer>
-                    </div>
+                <div className="card">
+                    <h5>Indicators with Click Event</h5>
+                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
+                        showThumbnails={false} showIndicators item={this.itemTemplate} />
                 </div>
 
-                <div className="content-section implementation">
-                    <h3>Basic</h3>
-                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5}
-                        item={this.previewTemplate} thumbnail={this.itemTemplate} showThumbnails={false}
-                        showIndicators={true} style={{maxWidth: '520px'}} />
+                <div className="card">
+                    <h5>Indicators with Hover Event</h5>
+                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
+                        showThumbnails={false} showIndicators changeItemOnIndicatorHover item={this.itemTemplate} />
+                </div>
 
-                    <hr />
+                <div className="card">
+                    <h5>Inside Content</h5>
+                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
+                        showThumbnails={false} showIndicators changeItemOnIndicatorHover showIndicatorsOnItem item={this.itemTemplate} />
+                </div>
 
-                    <h3>Change Preview On Indicator Hover</h3>
-                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5}
-                        item={this.previewTemplate} thumbnail={this.itemTemplate} showThumbnails={false}
-                        showIndicators={true} changeItemOnIndicatorHover={true} style={{maxWidth: '520px'}} />
+                <div className="card">
+                    <h5>Positioned at Top</h5>
+                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
+                        showThumbnails={false} showIndicators changeItemOnIndicatorHover showIndicatorsOnItem indicatorsPosition="top" item={this.itemTemplate} />
+                </div>
 
-                    <hr />
+                <div className="card">
+                    <h5>Positioned at Left</h5>
+                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
+                        showThumbnails={false} showIndicators changeItemOnIndicatorHover showIndicatorsOnItem indicatorsPosition="left" item={this.itemTemplate} />
+                </div>
 
-                    <h3>Show Indicator On Preview</h3>
-                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5}
-                        item={this.previewTemplate} thumbnail={this.itemTemplate} showThumbnails={false}
-                        showIndicators={true} changeItemOnIndicatorHover={true} showIndicatorsOnItem={true} style={{maxWidth: '520px'}} />
+                <div className="card">
+                    <h5>Positioned at Right</h5>
+                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
+                        showThumbnails={false} showIndicators changeItemOnIndicatorHover showIndicatorsOnItem indicatorsPosition="right" item={this.itemTemplate} />
+                </div>
 
-                    <hr />
-
-                    <h3>Position</h3>
-                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5}
-                        item={this.previewTemplate} thumbnail={this.itemTemplate} showThumbnails={false}
-                        showIndicators={true} changeItemOnIndicatorHover={true} showIndicatorsOnItem={true} indicatorsPosition="bottom"
-                        style={{maxWidth: '520px'}} header="Bottom" />
-
-                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5}
-                        item={this.previewTemplate} thumbnail={this.itemTemplate} showThumbnails={false}
-                        showIndicators={true} changeItemOnIndicatorHover={true} showIndicatorsOnItem={true} indicatorsPosition="top"
-                        style={{maxWidth: '520px', marginTop: '2em'}} header="Top" />
-
-                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5}
-                        item={this.previewTemplate} thumbnail={this.itemTemplate} showThumbnails={false}
-                        showIndicators={true} changeItemOnIndicatorHover={true} showIndicatorsOnItem={true} indicatorsPosition="left"
-                        style={{maxWidth: '520px', marginTop: '2em'}} header="Left" />
-
-                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5}
-                        item={this.previewTemplate} thumbnail={this.itemTemplate} showThumbnails={false}
-                        showIndicators={true} changeItemOnIndicatorHover={true} showIndicatorsOnItem={true} indicatorsPosition="right"
-                        style={{maxWidth: '520px', marginTop: '2em'}} header="Right" />
-
-                    <hr />
-
-                    <h3>Template</h3>
-                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5}
-                        item={this.previewTemplate} thumbnail={this.itemTemplate}
-                        indicator={this.indicator} showThumbnails={false}
-                        showIndicators={true} changeItemOnIndicatorHover={true} showIndicatorsOnItem={true} indicatorsPosition="left"
-                        style={{maxWidth: '520px'}} className="custom-indicator-galleria"/>
-
-                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5}
-                        item={this.previewTemplate} thumbnail={this.itemTemplate}
-                        indicator={this.indicator} showThumbnails={false}
-                        showIndicators={true} changeItemOnIndicatorHover={true} indicatorsPosition="left"
-                        style={{maxWidth: '520px', marginTop: '2em'}} className="custom-indicator-galleria"/>
-
-                    <Galleria value={this.state.images2} responsiveOptions={this.responsiveOptions} numVisible={5}
-                        item={this.previewTemplate} thumbnail={this.itemTemplate}
-                        indicator={this.indicator2} showThumbnails={false}
-                        showIndicators={true} changeItemOnIndicatorHover={true} indicatorsPosition="left"
-                        style={{width: '520px', marginTop: '2em'}} className="custom-indicator-galleria2" />
+                <div className="card">
+                    <h5>Indicator Template</h5>
+                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }} className="custom-indicator-galleria"
+                        showThumbnails={false} showIndicators changeItemOnIndicatorHover showIndicatorsOnItem indicatorsPosition="left" item={this.itemTemplate} indicator={this.indicatorTemplate} />
                 </div>
             </div>
         );
     }
 }
+`}
+</CodeHighlight>
+<CodeHighlight lang="scss">
+{`
+.galleria-demo {
+    .custom-indicator-galleria {
+        .indicator-text {
+            color: #e9ecef;
+            cursor: pointer;
+        }
+
+        .p-highlight {
+            .indicator-text {
+                color: var(--primary-color);
+            }
+        }
+    }
+}
 
 `}
-                        </CodeHighlight>
+</CodeHighlight>
                     </TabPanel>
                 </TabView>
             </div>

@@ -576,16 +576,12 @@ const responsiveOptions = [
                                         <td>Viewport.</td>
                                     </tr>
                                     <tr>
-                                        <td>p-carousel-dots-container</td>
-                                        <td>Container of the paginator.</td>
+                                        <td>p-carousel-indicators</td>
+                                        <td>Container of the indicators.</td>
                                     </tr>
                                     <tr>
-                                        <td>p-carousel-dot-item</td>
-                                        <td>Paginator element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-carousel-dot-icon</td>
-                                        <td>Paginator element icon.</td>
+                                        <td>p-carousel-indicator</td>
+                                        <td>Indicator element.</td>
                                     </tr>
                                 </tbody>
                             </table>
