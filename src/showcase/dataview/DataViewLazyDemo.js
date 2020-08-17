@@ -578,15 +578,9 @@ const DataViewLazyDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="DataViewLazyDemo" sources={[key, value]} service="CarService" data="cars-large" extFiles={this.extFiles} />
-                                </TabPanel>
-                            );
-                        })
-                    }
+                    <TabPanel header="Source">
+                        <LiveEditor name="DataViewLazyDemo" sources={this.sources} service="CarService" data="cars-large" extFiles={this.extFiles} />
+                    </TabPanel>
                 </TabView>
             </div>
         )

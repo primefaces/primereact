@@ -251,15 +251,9 @@ import {DeferredContent} from 'primereact/DeferredContent';
                         <p>None.</p>
                     </TabPanel>
 
-                    {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="DeferredContentDemo" sources={[key, value]} service="CarService" data="cars-small" />
-                                </TabPanel>
-                            );
-                        })
-                    }
+                    <TabPanel header="Source">
+                        <LiveEditor name="DeferredContentDemo" sources={this.sources} service="CarService" data="cars-small" />
+                    </TabPanel>
                 </TabView>
             </div>
         );

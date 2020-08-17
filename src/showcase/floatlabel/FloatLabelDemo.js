@@ -666,15 +666,9 @@ const FloatLabelDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="FloatLabelDemo" sources={[key, value]} service="CountryService" data="countries" />
-                                </TabPanel>
-                            );
-                        })
-                    }
+                    <TabPanel header="Source">
+                        <LiveEditor name="FloatLabelDemo" sources={this.sources} service="CountryService" data="countries" />
+                    </TabPanel>
                 </TabView>
             </div>
         );
