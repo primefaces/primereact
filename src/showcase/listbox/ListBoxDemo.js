@@ -641,15 +641,9 @@ carTemplate(option) {
             <p>None.</p>
         </TabPanel>
 
-        {
-            this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                return (
-                    <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                        <LiveEditor name="ListBoxDemo" sources={[key, value]} service="NodeService" data="treenodes" />
-                    </TabPanel>
-                );
-            })
-        }
+        <TabPanel header="Source">
+            <LiveEditor name="ListBoxDemo" sources={this.sources} service="NodeService" data="treenodes" />
+        </TabPanel>
     </TabView>
 </div>
         );

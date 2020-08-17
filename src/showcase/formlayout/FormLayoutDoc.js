@@ -890,15 +890,9 @@ import 'primeflex/primeflex.css';
                         </div>
                     </TabPanel>
 
-                    {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="FormLayoutDemo" sources={[key, value]} />
-                                </TabPanel>
-                            );
-                        })
-                    }
+                    <TabPanel header="Source">
+                        <LiveEditor name="FormLayoutDemo" sources={this.sources} />
+                    </TabPanel>
                 </TabView>
             </div>
         )

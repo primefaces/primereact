@@ -372,15 +372,9 @@ this.fc.calendar.nextYear();
 
                     </TabPanel>
 
-                    {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="FullCalendarDemo" sources={[key, value]} service="EventService" data="events" dependencies={this.dependencies} />
-                                </TabPanel>
-                            );
-                        })
-                    }
+                    <TabPanel header="Source">
+                        <LiveEditor name="FullCalendarDemo" sources={this.sources} service="EventService" data="events" dependencies={this.dependencies} />
+                    </TabPanel>
                 </TabView>
             </div>
         );
