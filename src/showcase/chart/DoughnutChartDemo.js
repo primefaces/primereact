@@ -85,13 +85,15 @@ export class DoughnutChartDemoDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {Chart} from 'primereact/chart';
+import { Chart } from 'primereact/chart';
 
 export class DoughnutChartDemo extends Component {
 
-    render() {
-        const data = {
-            labels: ['A','B','C'],
+    constructor(props) {
+        super(props);
+
+        this.chartData = {
+            labels: ['A', 'B', 'C'],
             datasets: [
                 {
                     data: [300, 50, 100],
@@ -106,11 +108,21 @@ export class DoughnutChartDemo extends Component {
                         "#FFCE56"
                     ]
                 }]
-            };
+        };
 
+        this.lightOptions = {
+            legend: {
+                labels: {
+                    fontColor: '#495057'
+                }
+            }
+        };
+    }
+
+    render() {
         return (
-            <div>
-                <Chart type="doughnut" data={data} />
+            <div className="card">
+                <Chart type="doughnut" data={this.chartData} options={this.lightOptions} />
             </div>
         )
     }

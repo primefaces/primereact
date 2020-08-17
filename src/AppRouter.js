@@ -109,7 +109,7 @@ import { DataScrollerInlineDemo } from './showcase/datascroller/DataScrollerInli
 import { DataScrollerLoaderDemo } from './showcase/datascroller/DataScrollerLoaderDemo';
 import { MenuDemo } from './showcase/menu/MenuDemo';
 import { TabMenuDemo } from './showcase/tabmenu/TabMenuDemo';
-import { BreadcrumbDemo } from './showcase/breadcrumb/BreadcrumbDemo';
+import { BreadCrumbDemo } from './showcase/breadcrumb/BreadCrumbDemo';
 import { TieredMenuDemo } from './showcase/tieredmenu/TieredMenuDemo';
 import { MenubarDemo } from './showcase/menubar/MenubarDemo';
 import { ContextMenuDemo } from './showcase/contextmenu/ContextMenuDemo';
@@ -296,7 +296,7 @@ class AppRouter extends Component {
                 <Route path="/menumodel" component={MenuModelDemo} />
                 <Route path="/menu" component={MenuDemo} />
                 <Route path="/tabmenu" component={TabMenuDemo} />
-                <Route path="/breadcrumb" component={BreadcrumbDemo} />
+                <Route path="/breadcrumb" component={BreadCrumbDemo} />
                 <Route path="/tieredmenu" component={TieredMenuDemo} />
                 <Route path="/menubar" component={MenubarDemo} />
                 <Route path="/contextmenu" component={ContextMenuDemo} />

@@ -145,75 +145,86 @@ export class ComboChartDemoDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {Chart} from 'primereact/chart';
+import { Chart } from 'primereact/chart';
 
 export class ComboChartDemo extends Component {
 
-    render() {
-        const data = {
+    constructor(props) {
+        super(props);
+
+        this.chartData = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-			datasets: [{
-				type: 'line',
-				label: 'Dataset 1',
-				borderColor: '#2196F3',
-				borderWidth: 2,
-				fill: false,
-				data: [
-					50,
-					25,
-					12,
-					48,
-					56,
-					76,
-					42
-				]
-			}, {
-				type: 'bar',
-				label: 'Dataset 2',
-				backgroundColor: '#4CAF50',
-				data: [
-					21,
-					84,
-					24,
-					75,
-					37,
-					65,
+            datasets: [{
+                type: 'line',
+                label: 'Dataset 1',
+                borderColor: '#42A5F5',
+                borderWidth: 2,
+                fill: false,
+                data: [
+                    50,
+                    25,
+                    12,
+                    48,
+                    56,
+                    76,
+                    42
+                ]
+            }, {
+                type: 'bar',
+                label: 'Dataset 2',
+                backgroundColor: '#66BB6A',
+                data: [
+                    21,
+                    84,
+                    24,
+                    75,
+                    37,
+                    65,
                     34
                 ],
-				borderColor: 'white',
-				borderWidth: 2
-			}, {
-				type: 'bar',
-				label: 'Dataset 3',
-				backgroundColor: '#FFC107',
-				data: [
-					41,
-					52,
-					24,
-					74,
-					23,
-					21,
-					32
-				]
+                borderColor: 'white',
+                borderWidth: 2
+            }, {
+                type: 'bar',
+                label: 'Dataset 3',
+                backgroundColor: '#FFA726',
+                data: [
+                    41,
+                    52,
+                    24,
+                    74,
+                    23,
+                    21,
+                    32
+                ]
             }]
         };
 
-        const options = {
-            responsive: true,
-            title: {
-                display: true,
-                text: 'Combo Bar Line Chart'
+        this.lightOptions = {
+            legend: {
+                labels: {
+                    fontColor: '#495057'
+                }
             },
-            tooltips: {
-                mode: 'index',
-                intersect: true
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        fontColor: '#495057'
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        fontColor: '#495057'
+                    }
+                }]
             }
         };
+    }
 
+    render() {
         return (
-            <div>
-                <h3>Combo Chart</h3>
-                <Chart type="bar" data={data} options={options} />
+            <div className="card">
+                <Chart type="bar" data={this.chartData} options={this.lightOptions} />
             </div>
         )
     }

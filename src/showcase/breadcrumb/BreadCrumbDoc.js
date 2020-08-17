@@ -16,25 +16,24 @@ export class BreadCrumbDoc extends Component {
 import React, { Component } from 'react';
 import { BreadCrumb } from 'primereact/breadcrumb';
 
-export class BreadcrumbDemo extends Component {
+export class BreadCrumbDemo extends Component {
 
     render() {
         const items = [
-            { label: 'Categories' },
-            { label: 'Sports' },
-            { label: 'Football' },
-            { label: 'Countries' },
-            { label: 'Spain' },
-            { label: 'F.C. Barcelona' },
-            { label: 'Squad' },
-            { label: 'Lionel Messi', url: 'https://en.wikipedia.org/wiki/Lionel_Messi' }
+            {label: 'Computer'},
+            {label: 'Notebook'},
+            {label: 'Accessories'},
+            {label: 'Backpacks'},
+            {label: 'Item'}
         ];
 
-        const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact' }
+        const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact/showcase' }
 
         return (
             <div>
-                <BreadCrumb model={items} home={home} />
+                <div className="card">
+                    <BreadCrumb model={items} home={home} />
+                </div>
             </div>
         );
     }
@@ -112,11 +111,11 @@ const BreadcrumbDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight lang="js">
-                            {`
+<CodeHighlight lang="js">
+{`
 import { Breadcrumb } from 'primereact/breadcrumb';
-
-`}</CodeHighlight>
+`}
+</CodeHighlight>
 
                         <h3>MenuModel API</h3>
                         <p>BreadCrumb uses the common menumodel api to define its items, visit <Link to="/menumodel"> MenuModel </Link> for details.</p>
@@ -124,8 +123,8 @@ import { Breadcrumb } from 'primereact/breadcrumb';
                         <h3>Getting Started</h3>
                         <p>BreadCrumb requires a collection of menuitems as its model.</p>
 
-                        <CodeHighlight lang="js">
-                            {`
+<CodeHighlight lang="js">
+{`
 const items = [
     { label: 'Categories' },
     { label: 'Sports' },
@@ -138,16 +137,14 @@ const items = [
 ];
 
 const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact' }
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <CodeHighlight>
-                            {`
+<CodeHighlight>
+{`
 <BreadCrumb model={items} home="home"/>
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h3>Properties</h3>
                         <div className="doc-tablewrapper">

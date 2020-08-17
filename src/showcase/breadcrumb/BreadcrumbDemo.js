@@ -3,7 +3,7 @@ import { BreadCrumb } from '../../components/breadcrumb/BreadCrumb';
 import { BreadCrumbDoc } from './BreadCrumbDoc';
 import { AppInlineHeader } from '../../AppInlineHeader';
 
-export class BreadcrumbDemo extends Component {
+export class BreadCrumbDemo extends Component {
 
     render() {
         const items = [
