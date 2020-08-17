@@ -113,13 +113,13 @@ const StepsDemo = () => {
         <div>
             <Growl ref={growl}></Growl>
 
-            <h3>Basic</h3>
+            <h5>Basic</h5>
             <Steps model={items} />
 
-            <h3>Interactive</h3>
+            <h5>Interactive</h5>
             <Steps model={items} activeIndex={activeIndex} onSelect={(e) => setActiveIndex(e.index)} readOnly={false} />
 
-            <h3>Custom Style</h3>
+            <h5>Custom Style</h5>
             <Steps model={items} className="steps-custom" />
         </div>
     );
@@ -168,13 +168,13 @@ const StepsDemo = () => {
         <div>
             <Growl ref={growl}></Growl>
 
-            <h3>Basic</h3>
+            <h5>Basic</h5>
             <Steps model={items} />
 
-            <h3>Interactive</h3>
+            <h5>Interactive</h5>
             <Steps model={items} activeIndex={activeIndex} onSelect={(e) => setActiveIndex(e.index)} readOnly={false} />
 
-            <h3>Custom Style</h3>
+            <h5>Custom Style</h5>
             <Steps model={items} className="steps-custom" />
         </div>
     );
@@ -193,16 +193,16 @@ const StepsDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import {Steps} from 'primereact/steps';
 `}
 </CodeHighlight>
-                        <h3>MenuItem API</h3>
+                        <h5>MenuItem API</h5>
                         <p>Steps uses the common menu item api to define its items, visit <Link to="/menumodel"> MenuModel </Link> for details.</p>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>TabMenu requires a collection of menuitems as its model.</p>
 
 <CodeHighlight lang="js">
@@ -222,7 +222,7 @@ const items = [
 `}
 </CodeHighlight>
 
-                        <h3>interactive</h3>
+                        <h5>interactive</h5>
                         <p>Items are readonly by default, if you'd like to make them interactive then disable readonly, use command handlers of menuitem to respond to selection events and define activeIndex property along with the
                             onSelect event to use it as a controlled component.</p>
 
@@ -263,7 +263,7 @@ const interactiveItems = [
 `}
 </CodeHighlight>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -315,7 +315,7 @@ const interactiveItems = [
                             </table>
                         </div>
 
-                        <h3>Events</h3>
+                        <h5>Events</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -337,7 +337,7 @@ const interactiveItems = [
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -368,7 +368,7 @@ const interactiveItems = [
                             </table>
                         </div>
 
-                        <h3>Dependencies</h3>
+                        <h5>Dependencies</h5>
                         <p>None.</p>
                     </TabPanel>
 

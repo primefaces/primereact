@@ -60,16 +60,16 @@ const RatingDemo = () => {
 
     return (
         <div>
-            <h3 className="first">Basic {val1}</h3>
+            <h3 className="first">Basic {val1}</h5>
             <Rating value={val1} onChange={(e) => setVal1(e.value)} />
 
-            <h3>No Cancel {val2}</h3>
+            <h5>No Cancel {val2}</h5>
             <Rating value={val2} cancel={false} onChange={(e) => setVal2(e.value)} />
 
-            <h3>ReadOnly</h3>
+            <h5>ReadOnly</h5>
             <Rating value={5} readonly={true} stars={10} cancel={false} />
 
-            <h3>Disabled</h3>
+            <h5>Disabled</h5>
             <Rating value={8} disabled={true} stars={10} />
         </div>
     )
@@ -88,16 +88,16 @@ const RatingDemo = () => {
 
     return (
         <div>
-            <h3 className="first">Basic {val1}</h3>
+            <h3 className="first">Basic {val1}</h5>
             <Rating value={val1} onChange={(e) => setVal1(e.value)} />
 
-            <h3>No Cancel {val2}</h3>
+            <h5>No Cancel {val2}</h5>
             <Rating value={val2} cancel={false} onChange={(e) => setVal2(e.value)} />
 
-            <h3>ReadOnly</h3>
+            <h5>ReadOnly</h5>
             <Rating value={5} readonly={true} stars={10} cancel={false} />
 
-            <h3>Disabled</h3>
+            <h5>Disabled</h5>
             <Rating value={8} disabled={true} stars={10} />
         </div>
     )
@@ -116,14 +116,14 @@ const RatingDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { Rating } from 'primereact/rating';
 `}
                         </CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>Rating is used a controlled input component with <i>value</i> and <i>onChange</i> properties.</p>
 
 <CodeHighlight>
@@ -132,7 +132,7 @@ import { Rating } from 'primereact/rating';
 `}
 </CodeHighlight>
 
-                        <h3>Number of Stars</h3>
+                        <h5>Number of Stars</h5>
                         <p>Number of stars to display is defined with <i>stars</i> property, default is 5.</p>
 
 <CodeHighlight>
@@ -141,7 +141,7 @@ import { Rating } from 'primereact/rating';
 `}
 </CodeHighlight>
 
-                        <h3>Cancel</h3>
+                        <h5>Cancel</h5>
                         <p>A cancel icon is displayed to reset the value by default, set <i>cancel</i> as false to remove this option.</p>
 
 <CodeHighlight>
@@ -150,7 +150,7 @@ import { Rating } from 'primereact/rating';
 `}
 </CodeHighlight>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -226,7 +226,7 @@ import { Rating } from 'primereact/rating';
                             </table>
                         </div>
 
-                        <h3>Events</h3>
+                        <h5>Events</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -248,7 +248,7 @@ import { Rating } from 'primereact/rating';
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -279,7 +279,7 @@ import { Rating } from 'primereact/rating';
                             </table>
                         </div>
 
-                        <h3>Dependencies</h3>
+                        <h5>Dependencies</h5>
                         <p>None.</p>
                     </TabPanel>
 

@@ -130,10 +130,10 @@ const SplitButtonDemo = () => {
         <div className="splitbutton-demo">
             <Growl ref={growl}></Growl>
 
-            <h3 className="first">Basic</h3>
+            <h3 className="first">Basic</h5>
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items}></SplitButton>
 
-            <h3>Severities</h3>
+            <h5>Severities</h5>
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-secondary"></SplitButton>
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-success" style={{marginRight: '.25em'}}></SplitButton>
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-info" style={{marginRight: '.25em'}}></SplitButton>
@@ -191,10 +191,10 @@ const SplitButtonDemo = () => {
         <div className="splitbutton-demo">
             <Growl ref={growl}></Growl>
 
-            <h3 className="first">Basic</h3>
+            <h3 className="first">Basic</h5>
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items}></SplitButton>
 
-            <h3>Severities</h3>
+            <h5>Severities</h5>
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-secondary"></SplitButton>
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-success" style={{marginRight: '.25em'}}></SplitButton>
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-info" style={{marginRight: '.25em'}}></SplitButton>
@@ -225,7 +225,7 @@ const SplitButtonDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import {SplitButton} from 'primereact/splitbutton';
@@ -233,7 +233,7 @@ import {SplitButton} from 'primereact/splitbutton';
 `}
 </CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>SplitButton has a default command button and a collection of additional options defined by the <i>model</i> property.</p>
                         <CodeHighlight lang="js">
 {`
@@ -290,10 +290,10 @@ export class SplitButtonDemo extends Component {
 `}
 </CodeHighlight>
 
-                        <h3>MenuModel API</h3>
+                        <h5>MenuModel API</h5>
                         <p>SplitButton uses the common MenuModel API to define the items, visit <Link to="/menumodel">MenuModel API</Link> for details.</p>
 
-                        <h3>Severity</h3>
+                        <h5>Severity</h5>
                         <p>Different color options are available as severity levels.</p>
 
                         <ul>
@@ -316,7 +316,7 @@ export class SplitButtonDemo extends Component {
 `}
 </CodeHighlight>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -410,7 +410,7 @@ export class SplitButtonDemo extends Component {
                             </table>
                         </div>
 
-                        <h3>Events</h3>
+                        <h5>Events</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -430,7 +430,7 @@ export class SplitButtonDemo extends Component {
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -457,7 +457,7 @@ export class SplitButtonDemo extends Component {
                             </table>
                         </div>
 
-                        <h3>Dependencies</h3>
+                        <h5>Dependencies</h5>
                         <p>None.</p>
                     </TabPanel>
 

@@ -313,10 +313,10 @@ const SlideMenuDemo = () => {
 
     return (
         <div>
-            <h3>Basic</h3>
+            <h5>Basic</h5>
             <SlideMenu model={items} viewportHeight={250} style={{width: '13.5em'}}></SlideMenu>
 
-            <h3>Popup</h3>
+            <h5>Popup</h5>
             <SlideMenu ref={menu} model={items} popup={true} viewportHeight={250} style={{width: '13.5em'}}></SlideMenu>
             <Button type="button" icon="pi pi-bars" label="Show" onClick={(event) => menu.current.toggle(event)}></Button>
         </div>
@@ -467,10 +467,10 @@ const SlideMenuDemo = () => {
 
     return (
         <div>
-            <h3>Basic</h3>
+            <h5>Basic</h5>
             <SlideMenu model={items} viewportHeight={250} style={{width: '13.5em'}}></SlideMenu>
 
-            <h3>Popup</h3>
+            <h5>Popup</h5>
             <SlideMenu ref={menu} model={items} popup={true} viewportHeight={250} style={{width: '13.5em'}}></SlideMenu>
             <Button type="button" icon="pi pi-bars" label="Show" onClick={(event) => menu.current.toggle(event)}></Button>
         </div>
@@ -490,17 +490,17 @@ const SlideMenuDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { SlideMenu } from 'primereact/slidemenu';
 `}
 </CodeHighlight>
 
-                        <h3>MenuItem API</h3>
+                        <h5>MenuItem API</h5>
                         <p>Menu uses the common menumodel api to define its items, visit <Link to="/menumodel"> MenuModel API</Link> for details.</p>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>Menu requires a collection of menuitems as its model.</p>
 
 <CodeHighlight lang="js">
@@ -646,7 +646,7 @@ const items:[
 </CodeHighlight>
 
 
-                        <h3>Popup Mode</h3>
+                        <h5>Popup Mode</h5>
                         <p>SlideMenu is inline by default whereas popup mode is supported by enabling popup property and calling toggle method with an event of the target.</p>
 <CodeHighlight>
 {`
@@ -656,7 +656,7 @@ const items:[
 `}
 </CodeHighlight>
 
-                        <h3>Effects</h3>
+                        <h5>Effects</h5>
                         <p>The easing function to use is "ease-out" by default which can be customized using easing property.
                             See <a href="http://www.w3schools.com/cssref/css3_pr_transition-timing-function.asp">here</a> for possible alternative values.</p>
 
@@ -666,7 +666,7 @@ const items:[
 `}
 </CodeHighlight>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -760,7 +760,7 @@ const items:[
                             </table>
                         </div>
 
-                       <h3>Methods</h3>
+                       <h5>Methods</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -790,7 +790,7 @@ const items:[
                             </table>
                         </div>
 
-                        <h3>Events</h3>
+                        <h5>Events</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -815,7 +815,7 @@ const items:[
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -866,7 +866,7 @@ const items:[
                             </table>
                         </div>
 
-                        <h3>Dependencies</h3>
+                        <h5>Dependencies</h5>
                         <p>None.</p>
                     </TabPanel>
 

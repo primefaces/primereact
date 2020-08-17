@@ -137,7 +137,7 @@ const TabViewDemo = () => {
 
     return (
         <div>
-            <h3>Uncontrolled</h3>
+            <h5>Uncontrolled</h5>
             <TabView renderActiveOnly={false}>
                 <TabPanel header="Godfather I" leftIcon="pi pi-calendar">
                     <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, overseeshis daughter's wedding. His beloved son ichael has just come home from the war,
@@ -159,7 +159,7 @@ const TabViewDemo = () => {
                 </TabPanel>
             </TabView>
 
-            <h3>Controlled</h3>
+            <h5>Controlled</h5>
             <TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
                 <TabPanel header="Godfather I" leftIcon="pi pi-calendar">
                     <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, overseeshis daughter's wedding. His beloved son ichael has just come home from the war,
@@ -196,7 +196,7 @@ const TabViewDemo = () => {
 
     return (
         <div>
-            <h3>Uncontrolled</h3>
+            <h5>Uncontrolled</h5>
             <TabView renderActiveOnly={false}>
                 <TabPanel header="Godfather I" leftIcon="pi pi-calendar">
                     <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, overseeshis daughter's wedding. His beloved son ichael has just come home from the war,
@@ -218,7 +218,7 @@ const TabViewDemo = () => {
                 </TabPanel>
             </TabView>
 
-            <h3>Controlled</h3>
+            <h5>Controlled</h5>
             <TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
                 <TabPanel header="Godfather I" leftIcon="pi pi-calendar">
                     <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, overseeshis daughter's wedding. His beloved son ichael has just come home from the war,
@@ -256,17 +256,17 @@ const TabViewDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { TabView,TabPanel } from 'primereact/tabview';
 `}
 </CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>Tabview element consists of one or more TabPanel elements and can either be used as a Controlled or Uncontrolled component.</p>
 
-                        <h3>Controlled Component</h3>
+                        <h5>Controlled Component</h5>
                         <p>In controlled mode, <i>activeIndex</i> and <i>onTabChange</i> properties need to be defined to control the state.</p>
 
 <CodeHighlight>
@@ -285,7 +285,7 @@ import { TabView,TabPanel } from 'primereact/tabview';
 `}
 </CodeHighlight>
 
-                        <h3>Uncontrolled</h3>
+                        <h5>Uncontrolled</h5>
                         <p>In uncontrolled mode, no additional properties are required. Initial active tab can be provided using the <i>activeIndex</i> property in uncontrolled mode however it is evaluated at initial rendering and ignored in further updates. If you programmatically
                 need to update the active tab, prefer to use the component as controlled.</p>
 
@@ -305,7 +305,7 @@ import { TabView,TabPanel } from 'primereact/tabview';
 `}
 </CodeHighlight>
 
-                        <h3>Properties For TabPanel</h3>
+                        <h5>Properties For TabPanel</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -369,7 +369,7 @@ import { TabView,TabPanel } from 'primereact/tabview';
                             </table>
                         </div>
 
-                        <h3>Properties For TabView</h3>
+                        <h5>Properties For TabView</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -415,7 +415,7 @@ import { TabView,TabPanel } from 'primereact/tabview';
                             </table>
                         </div>
 
-                        <h3>Events</h3>
+                        <h5>Events</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -437,7 +437,7 @@ import { TabView,TabPanel } from 'primereact/tabview';
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -471,7 +471,7 @@ import { TabView,TabPanel } from 'primereact/tabview';
                                 </tbody>
                             </table>
 
-                            <h3>Dependencies</h3>
+                            <h5>Dependencies</h5>
                             <p>None.</p>
                         </div>
 

@@ -100,17 +100,17 @@ const SelectButtonDemo  = () => {
 
     return (
         <div>
-            <h3>Single</h3>
+            <h5>Single</h5>
             <SelectButton value={value1} options={options} onChange={(e) => setValue1(e.value)} />
             <br />
             <p>Selected Value: <span style={{fontWeight: 'bold'}}>{value1}</span></p>
 
-            <h3>Multiple</h3>
+            <h5>Multiple</h5>
             <SelectButton value={value2} multiple={true} options={options} onChange={(e) => setValue2(e.value)} />
             <br />
             <p>Selected Values: <span style={{fontWeight: 'bold'}}>{value2 && value2.map((val) => val + " ")}</span></p>
 
-            <h3>Custom Content</h3>
+            <h5>Custom Content</h5>
             <SelectButton value={value3} options={cars} onChange={(e) => setValue3(e.value)} itemTemplate={carTemplate} optionLabel="brand" optionValue="brand" />
             <br />
             <p>Selected Value: <span style={{fontWeight: 'bold'}}>{value3}</span></p>
@@ -155,17 +155,17 @@ const SelectButtonDemo  = () => {
 
     return (
         <div>
-            <h3>Single</h3>
+            <h5>Single</h5>
             <SelectButton value={value1} options={options} onChange={(e) => setValue1(e.value)} />
             <br />
             <p>Selected Value: <span style={{fontWeight: 'bold'}}>{value1}</span></p>
 
-            <h3>Multiple</h3>
+            <h5>Multiple</h5>
             <SelectButton value={value2} multiple={true} options={options} onChange={(e) => setValue2(e.value)} />
             <br />
             <p>Selected Values: <span style={{fontWeight: 'bold'}}>{value2 && value2.map((val) => val + " ")}</span></p>
 
-            <h3>Custom Content</h3>
+            <h5>Custom Content</h5>
             <SelectButton value={value3} options={cars} onChange={(e) => setValue3(e.value)} itemTemplate={carTemplate} optionLabel="brand" optionValue="brand" />
             <br />
             <p>Selected Value: <span style={{fontWeight: 'bold'}}>{value3}</span></p>
@@ -186,14 +186,14 @@ const SelectButtonDemo  = () => {
             <div className="content-section documentation">
     <TabView>
         <TabPanel header="Documentation">
-            <h3>Import</h3>
+            <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { SelectButton } from 'primereact/selectbutton';
 `}
 </CodeHighlight>
 
-            <h3>Getting Started</h3>
+            <h5>Getting Started</h5>
             <p>Dropdown is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with the options collection. There are two alternatives
             of how to define the options property; One way is providing a collection of <i>SelectItem</i> instances having label-value pairs
             whereas other way is providing an array of arbitrary objects along with the <i>optionLabel</i> and <i>optionValue</i> properties to specify the label/value field pair. In addition,
@@ -239,10 +239,10 @@ const cities = [
             </CodeHighlight>
             <p>When <i>optionValue</i> is not defined, value of an option refers to the option object itself.</p>
 
-            <h3>Multiple</h3>
+            <h5>Multiple</h5>
             <p>SelectButton allows selecting only one item by default and setting <i>multiple</i> option enables choosing more than one item. In multiple case, model property should be an array.</p>
 
-            <h3>Custom Content</h3>
+            <h5>Custom Content</h5>
             <p>Options support templating using the <i>itemTemplate</i> property that references a function to render the content. Notice
             the usage of optionLabel, although it is not rendered visually, it is still required to be used as the list key.</p>
 
@@ -260,7 +260,7 @@ itemTemplate(option) {
 `}
 </CodeHighlight>
 
-            <h3>SelectItem API</h3>
+            <h5>SelectItem API</h5>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -306,7 +306,7 @@ itemTemplate(option) {
                 </table>
             </div>
 
-            <h3>Properties</h3>
+            <h5>Properties</h5>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -412,7 +412,7 @@ itemTemplate(option) {
                 </table>
             </div>
 
-            <h3>Events</h3>
+            <h5>Events</h5>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -433,7 +433,7 @@ itemTemplate(option) {
                 </table>
             </div>
 
-            <h3>Dependencies</h3>
+            <h5>Dependencies</h5>
             <p>None.</p>
         </TabPanel>
 

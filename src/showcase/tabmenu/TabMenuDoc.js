@@ -100,15 +100,15 @@ const TabMenuDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { TabMenu } from 'primereact/tabmenu';
 `}</CodeHighlight>
-                        <h3>MenuModel API</h3>
+                        <h5>MenuModel API</h5>
                         <p>TabMenu uses the common menumodel api to define its items, visit <Link to="/menumodel"> MenuModel </Link> for details.</p>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>TabMenu requires a collection of menuitems as its model and can either be used as a Controlled or Uncontrolled component.</p>
 
 <CodeHighlight lang="js">
@@ -128,7 +128,7 @@ constructor(props) {
 `}
 </CodeHighlight>
 
-                        <h3>Controlled Component</h3>
+                        <h5>Controlled Component</h5>
                         <p>In controlled mode, <i>activeItem</i> and <i>onTabChange</i> properties must be defined along with the model.</p>
 
 <CodeHighlight>
@@ -137,7 +137,7 @@ constructor(props) {
 `}
 </CodeHighlight>
 
-                        <h3>Uncontrolled</h3>
+                        <h5>Uncontrolled</h5>
                         <p>In uncontrolled mode, only <i>model</i> is required. Initial active item can be provided using the activeItem property in uncontrolled mode however it is evaluated at initial rendering and ignored in further updates. If you programmatically
                             need to update the active item, prefer to use the component as controlled.</p>
 
@@ -147,7 +147,7 @@ constructor(props) {
 `}
 </CodeHighlight>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -193,7 +193,7 @@ constructor(props) {
                             </table>
                         </div>
 
-                        <h3>Events</h3>
+                        <h5>Events</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -214,7 +214,7 @@ constructor(props) {
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -253,7 +253,7 @@ constructor(props) {
                             </table>
                         </div>
 
-                        <h3>Dependencies</h3>
+                        <h5>Dependencies</h5>
                         <p>None.</p>
                     </TabPanel>
 

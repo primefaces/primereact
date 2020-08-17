@@ -102,20 +102,20 @@ const SliderDemo = () => {
 
     return (
         <div>
-            <h3>Basic: {val1}</h3>
+            <h5>Basic: {val1}</h5>
             <Slider value={val1} onChange={onChangeSlider1} style={{width: '14em'}}  />
 
-            <h3>Input: {val2}</h3>
+            <h5>Input: {val2}</h5>
             <InputText value={val2} style={{width: '14em'}} type="number" onChange={onChangeSlider2} />
             <Slider value={val2} onChange={onChangeSlider2} style={{width: '14em'}} />
 
-            <h3>Step: {val3}</h3>
+            <h5>Step: {val3}</h5>
             <Slider value={val3} onChange={onChangeSlider3} step={20} style={{width: '14em'}} />
 
-            <h3>Range: {rangeValues[0]},{rangeValues[1]}</h3>
+            <h5>Range: {rangeValues[0]},{rangeValues[1]}</h5>
             <Slider value={rangeValues} onChange={onChangeRangeSlider} range={true} style={{width: '14em'}} />
 
-            <h3>Vertical: {val4}</h3>
+            <h5>Vertical: {val4}</h5>
             <Slider value={val4} onChange={onChangeSlider4} orientation="vertical" style={{height: '14em'}} />
         </div>
     );
@@ -167,20 +167,20 @@ const SliderDemo = () => {
 
     return (
         <div>
-            <h3>Basic: {val1}</h3>
+            <h5>Basic: {val1}</h5>
             <Slider value={val1} onChange={onChangeSlider1} style={{width: '14em'}}  />
 
-            <h3>Input: {val2}</h3>
+            <h5>Input: {val2}</h5>
             <InputText value={val2} style={{width: '14em'}} type="number" onChange={onChangeSlider2} />
             <Slider value={val2} onChange={onChangeSlider2} style={{width: '14em'}} />
 
-            <h3>Step: {val3}</h3>
+            <h5>Step: {val3}</h5>
             <Slider value={val3} onChange={onChangeSlider3} step={20} style={{width: '14em'}} />
 
-            <h3>Range: {rangeValues[0]},{rangeValues[1]}</h3>
+            <h5>Range: {rangeValues[0]},{rangeValues[1]}</h5>
             <Slider value={rangeValues} onChange={onChangeRangeSlider} range={true} style={{width: '14em'}} />
 
-            <h3>Vertical: {val4}</h3>
+            <h5>Vertical: {val4}</h5>
             <Slider value={val4} onChange={onChangeSlider4} orientation="vertical" style={{height: '14em'}} />
         </div>
     );
@@ -199,14 +199,14 @@ const SliderDemo = () => {
             <div className="content-section documentation">
     <TabView>
         <TabPanel header="Documentation">
-            <h3>Import</h3>
+            <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { Slider } from 'primereact/slider';
 `}
 </CodeHighlight>
 
-            <h3>Getting Started</h3>
+            <h5>Getting Started</h5>
             <p>Slider is used as a controlled input with <i>value</i> and <i>onChange</i> properties.</p>
 
 <CodeHighlight>
@@ -215,7 +215,7 @@ import { Slider } from 'primereact/slider';
 `}
 </CodeHighlight>
 
-            <h3>Range</h3>
+            <h5>Range</h5>
             <p>Range slider provides two handles to define two values. Enable <i>range</i> property and bind an array to implement a range slider.</p>
 <CodeHighlight>
 {`
@@ -223,7 +223,7 @@ import { Slider } from 'primereact/slider';
 `}
 </CodeHighlight>
 
-            <h3>Orientation</h3>
+            <h5>Orientation</h5>
             <p>Default layout of slider is horizontal, use <i>orientation</i> property for the alternative vertical mode.</p>
 <CodeHighlight>
 {`
@@ -231,7 +231,7 @@ import { Slider } from 'primereact/slider';
 `}
 </CodeHighlight>
 
-            <h3>Properties</h3>
+            <h5>Properties</h5>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -325,7 +325,7 @@ import { Slider } from 'primereact/slider';
                 </table>
             </div>
 
-            <h3>Events</h3>
+            <h5>Events</h5>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -354,7 +354,7 @@ import { Slider } from 'primereact/slider';
                 </table>
             </div>
 
-            <h3>Styling</h3>
+            <h5>Styling</h5>
             <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
@@ -377,7 +377,7 @@ import { Slider } from 'primereact/slider';
                 </table>
             </div>
 
-            <h3>Dependencies</h3>
+            <h5>Dependencies</h5>
             <p>None.</p>
         </TabPanel>
 

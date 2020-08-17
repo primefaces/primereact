@@ -14,14 +14,14 @@ export class ScrollPanelDoc extends Component {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { ScrollPanel } from 'primereact/scrollpanel';
 `}
 </CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>ScrollPanel is defined using dimensions for the scrollable viewport.</p>
 <CodeHighlight>
 {`
@@ -34,7 +34,7 @@ import { ScrollPanel } from 'primereact/scrollpanel';
 `}
 </CodeHighlight>
 
-                        <h3>Customization</h3>
+                        <h5>Customization</h5>
                         <p>Look and feel can easily be customized, here is an example with a custom handle.</p>
 <CodeHighlight>
 {`
@@ -65,7 +65,7 @@ import { ScrollPanel } from 'primereact/scrollpanel';
 `}
 </CodeHighlight>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -99,7 +99,7 @@ import { ScrollPanel } from 'primereact/scrollpanel';
                             </table>
                         </div>
 
-                        <h3>Methods</h3>
+                        <h5>Methods</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -119,7 +119,7 @@ import { ScrollPanel } from 'primereact/scrollpanel';
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -157,7 +157,7 @@ import { ScrollPanel } from 'primereact/scrollpanel';
                                 </tbody>
                             </table>
 
-                            <h3>Dependencies</h3>
+                            <h5>Dependencies</h5>
                             <p>None.</p>
                         </div>
 

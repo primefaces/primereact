@@ -250,14 +250,14 @@ const SidebarDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { Sidebar } from 'primereact/sidebar';
 `}
 </CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>Sidebar is used as a container and visibility is controlled with <i>visible</i> property.</p>
 
 <CodeHighlight>
@@ -270,7 +270,7 @@ import { Sidebar } from 'primereact/sidebar';
 `}
                         </CodeHighlight>
 
-                        <h3>Position</h3>
+                        <h5>Position</h5>
                         <p>Sidebar can either be located on the left (default), right, top or bottom of the screen depending on the <i>position</i> property.</p>
 
 <CodeHighlight>
@@ -281,7 +281,7 @@ import { Sidebar } from 'primereact/sidebar';
 `}
 </CodeHighlight>
 
-                        <h3>Size</h3>
+                        <h5>Size</h5>
                         <p>Sidebar size can be changed using a fixed value or using one of the three predefined ones.</p>
 <CodeHighlight>
 {`
@@ -292,7 +292,7 @@ import { Sidebar } from 'primereact/sidebar';
 `}
 </CodeHighlight>
 
-                        <h3>Full Screen</h3>
+                        <h5>Full Screen</h5>
                         <p>Full screen mode allows the sidebar to cover whole screen.</p>
 <CodeHighlight>
 {`
@@ -302,7 +302,7 @@ import { Sidebar } from 'primereact/sidebar';
 `}
 </CodeHighlight>
 
-                        <h3>Custom toolbar</h3>
+                        <h5>Custom toolbar</h5>
                         <p>Additional content can be provided using the <i>iconsTemplate</i> property.</p>
 
 <CodeHighlight>
@@ -324,7 +324,7 @@ import { Sidebar } from 'primereact/sidebar';
 `}
 </CodeHighlight>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -424,7 +424,7 @@ import { Sidebar } from 'primereact/sidebar';
                             </table>
                         </div>
 
-                        <h3>Events</h3>
+                        <h5>Events</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -449,7 +449,7 @@ import { Sidebar } from 'primereact/sidebar';
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -512,7 +512,7 @@ import { Sidebar } from 'primereact/sidebar';
                             </table>
                         </div>
 
-                        <h3>Dependencies</h3>
+                        <h5>Dependencies</h5>
                         <p>None.</p>
                     </TabPanel>
 

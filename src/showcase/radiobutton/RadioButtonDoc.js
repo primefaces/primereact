@@ -143,14 +143,14 @@ const RadioButtonDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { RadioButton } from 'primereact/radiobutton';
 `}
 </CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>RadioButton is used as a controlled input with checked and onChange properties.</p>
 <CodeHighlight>
 {`
@@ -159,7 +159,7 @@ import { RadioButton } from 'primereact/radiobutton';
 `}
 </CodeHighlight>
 
-                    <h3>Properties</h3>
+                    <h5>Properties</h5>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -247,7 +247,7 @@ import { RadioButton } from 'primereact/radiobutton';
                         </table>
                     </div>
 
-                    <h3>Events</h3>
+                    <h5>Events</h5>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -269,7 +269,7 @@ import { RadioButton } from 'primereact/radiobutton';
                         </table>
                     </div>
 
-                    <h3>Styling</h3>
+                    <h5>Styling</h5>
                     <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming">theming</Link> page.</p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
@@ -300,7 +300,7 @@ import { RadioButton } from 'primereact/radiobutton';
                         </table>
                     </div>
 
-                    <h3>Dependencies</h3>
+                    <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
 
