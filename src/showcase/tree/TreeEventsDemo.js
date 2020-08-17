@@ -236,15 +236,9 @@ const TreeEventsDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="TreeEventsDemo" sources={[key, value]} service="NodeService" data="treenodes" />
-                                </TabPanel>
-                            );
-                        })
-                    }
+                    <TabPanel header="Source">
+                        <LiveEditor name="TreeEventsDemo" sources={this.sources} service="NodeService" data="treenodes" />
+                    </TabPanel>
                 </TabView>
             </div>
         );

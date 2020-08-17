@@ -552,15 +552,9 @@ import {TabView,TabPanel} from 'primereact/tabview';
 
                     </TabPanel>
 
-                    {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="TabViewDemo" sources={[key, value]} />
-                                </TabPanel>
-                            );
-                        })
-                    }
+                    <TabPanel header="Source">
+                        <LiveEditor name="TabViewDemo" sources={this.sources} />
+                    </TabPanel>
                 </TabView>
             </div>
         );
