@@ -8,7 +8,7 @@
 
         &.custombar1 {
             .p-scrollpanel-wrapper {
-                border-right: 9px solid var(--layer-1);
+                border-right: 10px solid var(--surface-b);
             }
 
             .p-scrollpanel-bar {
@@ -24,12 +24,12 @@
 
         &.custombar2 {
             .p-scrollpanel-wrapper {
-                border-right: 9px solid var(--layer-1);
-                border-bottom: 9px solid var(--layer-1);
+                border-right: 10px solid var(--surface-b);
+                border-bottom: 10px solid var(--surface-b);
             }
 
             .p-scrollpanel-bar {
-                background-color: var(--layer-2);
+                background-color: var(--surface-d);
                 border-radius: 0;
                 opacity: 1;
                 transition: background-color .2s;

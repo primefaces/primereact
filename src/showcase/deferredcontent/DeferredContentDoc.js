@@ -13,54 +13,59 @@ export class DeferredContentDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {DeferredContent} from 'primereact/deferredcontent';
-import {CarService} from "../service/CarService";
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {Growl} from 'primereact/growl';
+import { DeferredContent } from 'primereact/deferredcontent';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { Growl } from 'primereact/growl';
+import ProductService from '../service/ProductService';
 
 export class DeferredContentDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            cars: []
+            products: null
         };
-        this.carservice = new CarService();
+
+        this.productService = new ProductService();
         this.onImageLoad = this.onImageLoad.bind(this);
         this.onDataLoad = this.onDataLoad.bind(this);
     }
 
     onImageLoad() {
-        this.growl.show({severity: 'success', summary: 'Image Initialized', detail: 'Scroll down to load the datatable'});
+        this.growl.show({ severity: 'success', summary: 'Image Initialized', detail: 'Scroll down to load the datatable' });
     }
 
     onDataLoad() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
-        this.growl.show({severity: 'success', summary: 'Data Initialized', detail: 'Render Completed'});
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
+        this.growl.show({ severity: 'success', summary: 'Data Initialized', detail: 'Render Completed' });
     }
 
     render() {
         return (
             <div>
                 <Growl ref={(el) => this.growl = el} />
-                <div style={{height:'800px'}}>
-                    Scroll down to lazy load an image and the DataTable which initiates a query that is not executed on initial page load to speed up load performance.
-                </div>
-                <DeferredContent onLoad={this.onImageLoad}>
-                    <img src="showcase/demo/images/galleria/galleria1.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="prime"/>
-                </DeferredContent>
 
-                <div style={{height:'500px'}}>
+                <div className="card">
+                    <div style={{ height: '800px' }}>
+                        Scroll down to lazy load an image and the DataTable which initiates a query that is not executed on initial page load to speed up load performance.
+                    </div>
+
+                    <DeferredContent onLoad={this.onImageLoad}>
+                        <img src="showcase/demo/images/galleria/galleria1.jpg" alt="Prime"/>
+                    </DeferredContent>
+
+                    <div style={{height: '500px'}}></div>
+
+                    <DeferredContent onLoad={this.onDataLoad}>
+                        <DataTable value={this.state.products}>
+                            <Column field="code" header="Code"></Column>
+                            <Column field="name" header="Name"></Column>
+                            <Column field="category" header="Category"></Column>
+                            <Column field="quantity" header="Quantity"></Column>
+                        </DataTable>
+                    </DeferredContent>
                 </div>
-                <DeferredContent onLoad={this.onDataLoad}>
-                    <DataTable value={this.state.cars}>
-                        <Column field="vin" header="Vin" />
-                        <Column field="year" header="Year" />
-                        <Column field="brand" header="Brand" />
-                        <Column field="color" header="Color" />
-                    </DataTable>
-                </DeferredContent>
             </div>
         )
     }
@@ -178,44 +183,41 @@ const DeferredContentDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight lang="js">
-                            {`
-import {DeferredContent} from 'primereact/DeferredContent';
-
+<CodeHighlight lang="js">
+{`
+import { DeferredContent } from 'primereact/deferredcontent';
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h3>Getting Started</h3>
                         <p>DeferredContent is used as a wrapper element of its content.</p>
-                        <CodeHighlight>
-                            {`
-<DeferredContent>
-    <DataTable value={this.state.cars}>
-        <Column field="vin" header="Vin" />
-        <Column field="year" header="Year" />
-        <Column field="brand" header="Brand" />
-        <Column field="color" header="Color" />
+<CodeHighlight>
+{`
+<DeferredContent onLoad={this.onDataLoad}>
+    <DataTable value={this.state.products}>
+        <Column field="code" header="Code"></Column>
+        <Column field="name" header="Name"></Column>
+        <Column field="category" header="Category"></Column>
+        <Column field="quantity" header="Quantity"></Column>
     </DataTable>
 </DeferredContent>
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h3>Callback</h3>
                         <p><i>onLoad</i> callback is useful to initialize the content when it becomes visible on scroll such as loading data.</p>
-                        <CodeHighlight>
-                            {`
-<DeferredContent onLoad={this.initCars}>
-    <DataTable value={this.state.cars}>
-        <Column field="vin" header="Vin" />
-        <Column field="year" header="Year" />
-        <Column field="brand" header="Brand" />
-        <Column field="color" header="Color" />
+<CodeHighlight>
+{`
+<DeferredContent onLoad={this.onDataLoad}>
+    <DataTable value={this.state.products}>
+        <Column field="code" header="Code"></Column>
+        <Column field="name" header="Name"></Column>
+        <Column field="category" header="Category"></Column>
+        <Column field="quantity" header="Quantity"></Column>
     </DataTable>
 </DeferredContent>
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h3>Properties</h3>
                         <div className="doc-tablewrapper">

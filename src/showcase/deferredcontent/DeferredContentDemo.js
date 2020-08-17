@@ -9,8 +9,8 @@ import ProductService from '../service/ProductService';
 
 export class DeferredContentDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             products: null
         };
