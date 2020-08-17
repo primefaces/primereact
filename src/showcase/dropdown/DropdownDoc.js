@@ -171,16 +171,16 @@ const DropdownDemo = () => {
 
     return (
         <div>
-            <h3>Basic</h3>
+            <h5>Basic</h5>
             <Dropdown value={city} options={cities} onChange={onCityChange} placeholder="Select a City" optionLabel="name" style={{width: '12em'}}/>
             <div style={{marginTop: '.5em'}}>{city ? 'Selected City: ' + city.name : 'No city selected'}</div>
 
-            <h3>Editable</h3>
+            <h5>Editable</h5>
             <Dropdown value={car} options={cars} onChange={onCarChange} style={{width: '12em'}}
                         editable={true} placeholder="Select a Brand" />
             <div style={{marginTop: '.5em'}}>{car ? 'Selected Car: ' + car : 'No car selected'}</div>
 
-            <h3>Advanced</h3>
+            <h5>Advanced</h5>
             <Dropdown value={car2} options={cars} onChange={onCarChange2} itemTemplate={carTemplate}  style={{width: '12em'}}
                         filter={true} filterPlaceholder="Select Car" filterBy="label,value" showClear={true}/>
             <div style={{marginTop: '.5em'}}>{car2 ? 'Selected Car: ' + car2 : 'No car selected'}</div>
@@ -249,16 +249,16 @@ const DropdownDemo = () => {
 
     return (
         <div>
-            <h3>Basic</h3>
+            <h5>Basic</h5>
             <Dropdown value={city} options={cities} onChange={onCityChange} placeholder="Select a City" optionLabel="name" style={{width: '12em'}}/>
             <div style={{marginTop: '.5em'}}>{city ? 'Selected City: ' + city.name : 'No city selected'}</div>
 
-            <h3>Editable</h3>
+            <h5>Editable</h5>
             <Dropdown value={car} options={cars} onChange={onCarChange} style={{width: '12em'}}
                         editable={true} placeholder="Select a Brand" />
             <div style={{marginTop: '.5em'}}>{car ? 'Selected Car: ' + car : 'No car selected'}</div>
 
-            <h3>Advanced</h3>
+            <h5>Advanced</h5>
             <Dropdown value={car2} options={cars} onChange={onCarChange2} itemTemplate={carTemplate}  style={{width: '12em'}}
                         filter={true} filterPlaceholder="Select Car" filterBy="label,value" showClear={true}/>
             <div style={{marginTop: '.5em'}}>{car2 ? 'Selected Car: ' + car2 : 'No car selected'}</div>
@@ -279,14 +279,14 @@ const DropdownDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { Dropdown } from 'primereact/dropdown';
 `}
 </CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>SelectButton is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with the options collection. There are two alternatives
                         of how to define the options property; One way is providing a collection of <i>SelectItem</i> instances having label-value pairs
                         whereas other way is providing an array of arbitrary objects along with the <i>optionLabel</i> and <i>optionValue</i> properties to specify the label/value field pair. In addition,
@@ -332,10 +332,10 @@ const cities = [
 </CodeHighlight>
                         <p>When <i>optionValue</i> is not defined, value of an option refers to the option object itself.</p>
 
-                        <h3>Placeholder</h3>
+                        <h5>Placeholder</h5>
                         <p>Common pattern is providing an empty option as the placeholder when using native selects, however Dropdown has built-in support using the placeholder option so it is suggested to use it instead of creating an empty option.</p>
 
-                        <h3>Filtering</h3>
+                        <h5>Filtering</h5>
                         <p>Options can be filtered using an input field in the overlay by enabling the <i>filter</i> property. By default filtering is done against
                             label of the items and <i>filterBy</i> property is available to choose one or more properties of the options. In addition <i>filterMatchMode</i> can be utilized
                             to define the filtering algorithm, valid options are "contains" (default), "startsWith", "endsWith", "equals" and "notEquals".</p>
@@ -347,7 +347,7 @@ const cities = [
 `}
 </CodeHighlight>
 
-                        <h3>Custom Content</h3>
+                        <h5>Custom Content</h5>
                         <p>Label of an option is used as the display text of an item by default, for custom content support define an <i>itemTemplate</i> function that gets the option instance as a parameter and returns the content.</p>
 <CodeHighlight>
 {`
@@ -386,7 +386,7 @@ countryOptionTemplate(option) {
 `}
 </CodeHighlight>
 
-                        <h3>SelectItem API</h3>
+                        <h5>SelectItem API</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -432,7 +432,7 @@ countryOptionTemplate(option) {
                             </table>
                         </div>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -652,7 +652,7 @@ countryOptionTemplate(option) {
                             </table>
                         </div>
 
-                        <h3>Events</h3>
+                        <h5>Events</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -693,7 +693,7 @@ countryOptionTemplate(option) {
                             </table>
                         </div>
 
-                        <h3>Methods</h3>
+                        <h5>Methods</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -718,7 +718,7 @@ countryOptionTemplate(option) {
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -773,7 +773,7 @@ countryOptionTemplate(option) {
                             </table>
                         </div>
 
-                        <h3>Dependencies</h3>
+                        <h5>Dependencies</h5>
                         <p>None.</p>
                     </TabPanel>
 

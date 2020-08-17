@@ -214,7 +214,7 @@ const FloatLabelDemo = () => {
         <div>
             <div className="p-grid p-fluid">
                 <div className="p-col-12 p-md-4">
-                    <h3>InputText</h3>
+                    <h5>InputText</h5>
                     <span className="p-float-label">
                         <InputText id="float-input" type="text" size={30} value={inputtextValue} onChange={(e) => setInputtextValue(e.target.value)}/>
                         <label htmlFor="float-input">Username</label>
@@ -222,7 +222,7 @@ const FloatLabelDemo = () => {
                 </div>
 
                 <div className="p-col-12 p-md-4">
-                    <h3>AutoComplete</h3>
+                    <h5>AutoComplete</h5>
                     <span className="p-float-label">
                         <AutoComplete id="float-auto" value={country} suggestions={filteredCountriesSingle}
                                         completeMethod={filterCountrySingle} field="name" size={30} minLength={1} onChange={(e) => setCountry(e.value)}/>
@@ -231,7 +231,7 @@ const FloatLabelDemo = () => {
                 </div>
 
                 <div className="p-col-12 p-md-4">
-                    <h3>Calendar</h3>
+                    <h5>Calendar</h5>
                     <span className="p-float-label">
                         <Calendar id="float-claendar" value={calendarValue} onChange={(e) => setCalendarValue(e.value)} />
                         <label htmlFor="float-calendar">Select a Date</label>
@@ -239,7 +239,7 @@ const FloatLabelDemo = () => {
                 </div>
 
                 <div className="p-col-12 p-md-4">
-                    <h3>Chips</h3>
+                    <h5>Chips</h5>
                     <span className="p-float-label">
                         <Chips id="float-chips" value={chipsValue} onChange={(e) => setChipsValue(e.value)}/>
                         <label htmlFor="float-chips">Enter a Text</label>
@@ -247,7 +247,7 @@ const FloatLabelDemo = () => {
                 </div>
 
                 <div className="p-col-12 p-md-4">
-                    <h3>Dropdown</h3>
+                    <h5>Dropdown</h5>
                     <span className="p-float-label">
                         <Dropdown id="float-dropdown" value={city} options={cities} ariaLabel="Test" onChange={onCityChange} optionLabel="name"/>
                         <label htmlFor="float-dropdown">Select City</label>
@@ -255,7 +255,7 @@ const FloatLabelDemo = () => {
                 </div>
 
                 <div className="p-col-12 p-md-4">
-                    <h3>InputMask</h3>
+                    <h5>InputMask</h5>
                     <span className="p-float-label">
                         <InputMask id="float-mask" mask="99-999999" value={maskValue} onChange={(e) => setMaskValue(e.value)}/>
                         <label htmlFor="float-mask">99-999999</label>
@@ -263,7 +263,7 @@ const FloatLabelDemo = () => {
                 </div>
 
                 <div className="p-col-12 p-md-4">
-                    <h3>InputNumber</h3>
+                    <h5>InputNumber</h5>
                     <span className="p-float-label">
                         <InputNumber id="float-number" value={numberValue} onChange={(e) => setNumberValue(e.target.value)}/>
                         <label htmlFor="float-number">Number</label>
@@ -271,7 +271,7 @@ const FloatLabelDemo = () => {
                 </div>
 
                 <div className="p-col-12 p-md-4">
-                    <h3>KeyFilter</h3>
+                    <h5>KeyFilter</h5>
                     <span className="p-float-label">
                         <InputText id="float-keyfilter" keyfilter="int"/>
                         <label htmlFor="float-keyfilter">Integers</label>
@@ -279,7 +279,7 @@ const FloatLabelDemo = () => {
                 </div>
 
                 <div className="p-col-12 p-md-4">
-                    <h3>MultiSelect</h3>
+                    <h5>MultiSelect</h5>
                     <span className="p-float-label">
                         <MultiSelect id="float-multiselect" value={carsMultiselect} options={cars} onChange={(e) => setCarsMultiselect(e.value)}
                                         filter={true} filterPlaceholder="Search"/>
@@ -288,7 +288,7 @@ const FloatLabelDemo = () => {
                 </div>
 
                 <div className="p-col-12 p-md-4">
-                    <h3>Password</h3>
+                    <h5>Password</h5>
                     <span className="p-float-label">
                         <Password id="float-password"/>
                         <label htmlFor="float-password">Password</label>
@@ -296,7 +296,7 @@ const FloatLabelDemo = () => {
                 </div>
 
                 <div className="p-col-12 p-md-4">
-                    <h3>InputTextarea</h3>
+                    <h5>InputTextarea</h5>
                     <span className="p-float-label">
                         <InputTextarea id="float-textarea" value={textareaValue} onChange={(e) => setTextareaValue(e.target.value)} rows={5} cols={30}/>
                         <label htmlFor="float-textarea">Your Message</label>
@@ -379,7 +379,7 @@ const FloatLabelDemo = () => {
         <div>
             <div className="p-grid p-fluid">
                 <div className="p-col-12 p-md-4">
-                    <h3>InputText</h3>
+                    <h5>InputText</h5>
                     <span className="p-float-label">
                         <InputText id="float-input" type="text" size={30} value={inputtextValue} onChange={(e) => setInputtextValue(e.target.value)}/>
                         <label htmlFor="float-input">Username</label>
@@ -387,7 +387,7 @@ const FloatLabelDemo = () => {
                 </div>
 
                 <div className="p-col-12 p-md-4">
-                    <h3>AutoComplete</h3>
+                    <h5>AutoComplete</h5>
                     <span className="p-float-label">
                         <AutoComplete id="float-auto" value={country} suggestions={filteredCountriesSingle}
                                         completeMethod={filterCountrySingle} field="name" size={30} minLength={1} onChange={(e) => setCountry(e.value)}/>
@@ -396,7 +396,7 @@ const FloatLabelDemo = () => {
                 </div>
 
                 <div className="p-col-12 p-md-4">
-                    <h3>Calendar</h3>
+                    <h5>Calendar</h5>
                     <span className="p-float-label">
                         <Calendar id="float-claendar" value={calendarValue} onChange={(e) => setCalendarValue(e.value)} />
                         <label htmlFor="float-calendar">Select a Date</label>
@@ -404,7 +404,7 @@ const FloatLabelDemo = () => {
                 </div>
 
                 <div className="p-col-12 p-md-4">
-                    <h3>Chips</h3>
+                    <h5>Chips</h5>
                     <span className="p-float-label">
                         <Chips id="float-chips" value={chipsValue} onChange={(e) => setChipsValue(e.value)}/>
                         <label htmlFor="float-chips">Enter a Text</label>
@@ -412,7 +412,7 @@ const FloatLabelDemo = () => {
                 </div>
 
                 <div className="p-col-12 p-md-4">
-                    <h3>Dropdown</h3>
+                    <h5>Dropdown</h5>
                     <span className="p-float-label">
                         <Dropdown id="float-dropdown" value={city} options={cities} ariaLabel="Test" onChange={onCityChange} optionLabel="name"/>
                         <label htmlFor="float-dropdown">Select City</label>
@@ -420,7 +420,7 @@ const FloatLabelDemo = () => {
                 </div>
 
                 <div className="p-col-12 p-md-4">
-                    <h3>InputMask</h3>
+                    <h5>InputMask</h5>
                     <span className="p-float-label">
                         <InputMask id="float-mask" mask="99-999999" value={maskValue} onChange={(e) => setMaskValue(e.value)}/>
                         <label htmlFor="float-mask">99-999999</label>
@@ -428,7 +428,7 @@ const FloatLabelDemo = () => {
                 </div>
 
                 <div className="p-col-12 p-md-4">
-                    <h3>InputNumber</h3>
+                    <h5>InputNumber</h5>
                     <span className="p-float-label">
                         <InputNumber id="float-number" value={numberValue} onChange={(e) => setNumberValue(e.target.value)}/>
                         <label htmlFor="float-number">Number</label>
@@ -436,7 +436,7 @@ const FloatLabelDemo = () => {
                 </div>
 
                 <div className="p-col-12 p-md-4">
-                    <h3>KeyFilter</h3>
+                    <h5>KeyFilter</h5>
                     <span className="p-float-label">
                         <InputText id="float-keyfilter" keyfilter="int"/>
                         <label htmlFor="float-keyfilter">Integers</label>
@@ -444,7 +444,7 @@ const FloatLabelDemo = () => {
                 </div>
 
                 <div className="p-col-12 p-md-4">
-                    <h3>MultiSelect</h3>
+                    <h5>MultiSelect</h5>
                     <span className="p-float-label">
                         <MultiSelect id="float-multiselect" value={carsMultiselect} options={cars} onChange={(e) => setCarsMultiselect(e.value)}
                                         filter={true} filterPlaceholder="Search"/>
@@ -453,7 +453,7 @@ const FloatLabelDemo = () => {
                 </div>
 
                 <div className="p-col-12 p-md-4">
-                    <h3>Password</h3>
+                    <h5>Password</h5>
                     <span className="p-float-label">
                         <Password id="float-password"/>
                         <label htmlFor="float-password">Password</label>
@@ -461,7 +461,7 @@ const FloatLabelDemo = () => {
                 </div>
 
                 <div className="p-col-12 p-md-4">
-                    <h3>InputTextarea</h3>
+                    <h5>InputTextarea</h5>
                     <span className="p-float-label">
                         <InputTextarea id="float-textarea" value={textareaValue} onChange={(e) => setTextareaValue(e.target.value)} rows={5} cols={30}/>
                         <label htmlFor="float-textarea">Your Message</label>

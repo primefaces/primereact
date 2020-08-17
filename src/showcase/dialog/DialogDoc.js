@@ -208,7 +208,7 @@ const DialogDemo = () => {
 
     return (
         <div className="dialog-demo">
-            <h3>Basic</h3>
+            <h5>Basic</h5>
             <Button label="Show" icon="pi pi-external-link" onClick={() => onClick(setDisplayBasic)} />
             <Dialog header="Godfather I" visible={displayBasic} style={{width: '50vw'}} onHide={() => onHide(setDisplayBasic)} footer={renderFooter(setDisplayBasic)}>
                 <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
@@ -233,7 +233,7 @@ const DialogDemo = () => {
                 <br/><br/>
             </Dialog>
 
-            <h3>BlockScroll</h3>
+            <h5>BlockScroll</h5>
             <Button label="Show" icon="pi pi-external-link" onClick={() => onClick(setDisplayBlockScroll)} />
             <Dialog header="Godfather I" visible={displayBlockScroll} style={{width: '50vw'}} onHide={() => onHide(setDisplayBlockScroll)} blockScroll
                 footer={renderFooter(setDisplayBlockScroll)}>
@@ -243,7 +243,7 @@ const DialogDemo = () => {
                     kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
             </Dialog>
 
-            <h3>Without Modal</h3>
+            <h5>Without Modal</h5>
             <Button label="Show" icon="pi pi-external-link" onClick={() => onClick(setDisplayModal)} />
             <Dialog header="Godfather I" visible={displayModal} style={{width: '50vw'}} onHide={() => onHide(setDisplayModal)} modal={false}
                 footer={renderFooter(setDisplayModal)}>
@@ -253,7 +253,7 @@ const DialogDemo = () => {
                     kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
             </Dialog>
 
-            <h3>Maximizable</h3>
+            <h5>Maximizable</h5>
             <Button label="Show" icon="pi pi-external-link" onClick={() => onClick(setDisplayMaximizable)} />
             <Dialog header="Godfather I" visible={displayMaximizable} style={{width: '50vw'}} onHide={() => onHide(setDisplayMaximizable)} maximizable blockScroll
                 footer={renderFooter(setDisplayMaximizable)}>
@@ -263,7 +263,7 @@ const DialogDemo = () => {
                 kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
             </Dialog>
 
-            <h3>Position</h3>
+            <h5>Position</h5>
             <div className="p-grid p-dir-col">
                 <div className="p-col">
                     <Button label="Left" icon="pi pi-arrow-right" onClick={() => onClick(setDisplayPosition, 'left')} className="p-button-warning" />
@@ -332,7 +332,7 @@ const DialogDemo = () => {
 
     return (
         <div className="dialog-demo">
-            <h3>Basic</h3>
+            <h5>Basic</h5>
             <Button label="Show" icon="pi pi-external-link" onClick={() => onClick(setDisplayBasic)} />
             <Dialog header="Godfather I" visible={displayBasic} style={{width: '50vw'}} onHide={() => onHide(setDisplayBasic)} footer={renderFooter(setDisplayBasic)}>
                 <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
@@ -357,7 +357,7 @@ const DialogDemo = () => {
                 <br/><br/>
             </Dialog>
 
-            <h3>BlockScroll</h3>
+            <h5>BlockScroll</h5>
             <Button label="Show" icon="pi pi-external-link" onClick={() => onClick(setDisplayBlockScroll)} />
             <Dialog header="Godfather I" visible={displayBlockScroll} style={{width: '50vw'}} onHide={() => onHide(setDisplayBlockScroll)} blockScroll
                 footer={renderFooter(setDisplayBlockScroll)}>
@@ -367,7 +367,7 @@ const DialogDemo = () => {
                     kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
             </Dialog>
 
-            <h3>Without Modal</h3>
+            <h5>Without Modal</h5>
             <Button label="Show" icon="pi pi-external-link" onClick={() => onClick(setDisplayModal)} />
             <Dialog header="Godfather I" visible={displayModal} style={{width: '50vw'}} onHide={() => onHide(setDisplayModal)} modal={false}
                 footer={renderFooter(setDisplayModal)}>
@@ -377,7 +377,7 @@ const DialogDemo = () => {
                     kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
             </Dialog>
 
-            <h3>Maximizable</h3>
+            <h5>Maximizable</h5>
             <Button label="Show" icon="pi pi-external-link" onClick={() => onClick(setDisplayMaximizable)} />
             <Dialog header="Godfather I" visible={displayMaximizable} style={{width: '50vw'}} onHide={() => onHide(setDisplayMaximizable)} maximizable blockScroll
                 footer={renderFooter(setDisplayMaximizable)}>
@@ -387,7 +387,7 @@ const DialogDemo = () => {
                 kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
             </Dialog>
 
-            <h3>Position</h3>
+            <h5>Position</h5>
             <div className="p-grid p-dir-col">
                 <div className="p-col">
                     <Button label="Left" icon="pi pi-arrow-right" onClick={() => onClick(setDisplayPosition, 'left')} className="p-button-warning" />
@@ -441,14 +441,14 @@ const DialogDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { Dialog } from 'primereact/dialog';
 `}
 </CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>Dialog is used as a container and visibility is managed with <i>visible</i> property where <i>onHide</i> event is required to update the visibility state.</p>
 <CodeHighlight>
 {`
@@ -463,7 +463,7 @@ import { Dialog } from 'primereact/dialog';
 `}
 </CodeHighlight>
 
-                        <h3>Header and Footer</h3>
+                        <h5>Header and Footer</h5>
                         <p>Header and Footer sections are defined using properties with the same name that accept simple strings or JSX for custom content. In addition <i>iconsTemplate</i> property enables
             adding more icons at the header section.</p>
 <CodeHighlight>
@@ -487,10 +487,10 @@ const myIcon = (
 `}
 </CodeHighlight>
 
-                        <h3>Dynamic Content</h3>
+                        <h5>Dynamic Content</h5>
                         <p>Dynamic content may move the dialog boundaries outside of the viewport. Common solution is defining max-height via <i>contentStyle</i> so longer content displays a scrollbar.</p>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -650,7 +650,7 @@ const myIcon = (
                             </table>
                         </div>
 
-                        <h3>Events</h3>
+                        <h5>Events</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -682,7 +682,7 @@ const myIcon = (
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -720,7 +720,7 @@ const myIcon = (
                                 </tbody>
                             </table>
 
-                            <h3>Dependencies</h3>
+                            <h5>Dependencies</h5>
                             <p>None.</p>
                         </div>
 

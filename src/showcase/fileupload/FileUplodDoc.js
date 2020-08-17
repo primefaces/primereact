@@ -85,14 +85,14 @@ const FileUploadDemo = () => {
 
     return (
         <div>
-            <h3>Advanced</h3>
+            <h5>Advanced</h5>
             <FileUpload name="demo[]" url="./upload.php" onUpload={onUpload}
                         multiple={true} accept="image/*" maxFileSize={1000000} />
 
-            <h3>Basic</h3>
+            <h5>Basic</h5>
             <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUpload} />
 
-            <h3>Basic with Auto</h3>
+            <h5>Basic with Auto</h5>
             <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUploadAuto} auto={true} chooseLabel="Browse" />
 
             <Growl ref={growl}></Growl>
@@ -125,14 +125,14 @@ const FileUploadDemo = () => {
 
     return (
         <div>
-            <h3>Advanced</h3>
+            <h5>Advanced</h5>
             <FileUpload name="demo[]" url="./upload.php" onUpload={onUpload}
                         multiple={true} accept="image/*" maxFileSize={1000000} />
 
-            <h3>Basic</h3>
+            <h5>Basic</h5>
             <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUpload} />
 
-            <h3>Basic with Auto</h3>
+            <h5>Basic with Auto</h5>
             <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUploadAuto} auto={true} chooseLabel="Browse" />
 
             <Growl ref={growl}></Growl>
@@ -162,14 +162,14 @@ const FileUploadDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { FileUpload } from 'primereact/fileupload';
 `}
 </CodeHighlight>
 
-            <h3>Getting Started</h3>
+            <h5>Getting Started</h5>
             <p>FileUpload requires a <i>url</i> property as the upload target and a <i>name</i> to identify the files at backend.</p>
 <CodeHighlight>
 {`
@@ -177,7 +177,7 @@ import { FileUpload } from 'primereact/fileupload';
 `}
 </CodeHighlight>
 
-            <h3>Multiple Uploads</h3>
+            <h5>Multiple Uploads</h5>
             <p>Only one file can be selected at a time by default, to allow selecting multiple files at once enable <i>multiple</i> option.</p>
 
 <CodeHighlight>
@@ -186,10 +186,10 @@ import { FileUpload } from 'primereact/fileupload';
 `}
 </CodeHighlight>
 
-            <h3>DragDrop</h3>
+            <h5>DragDrop</h5>
             <p>File selection can also be done by dragging and dropping from the filesystem to the content section of the component.</p>
 
-            <h3>Auto Uploads</h3>
+            <h5>Auto Uploads</h5>
             <p>When <i>auto</i> property is enabled, upload begins as soon as file selection is completed or a file is dropped on the drop area.</p>
 
 <CodeHighlight>
@@ -198,7 +198,7 @@ import { FileUpload } from 'primereact/fileupload';
 `}
 </CodeHighlight>
 
-            <h3>File Types</h3>
+            <h5>File Types</h5>
             <p>Selectable file types can be restricted with <i>accept</i> property, example below only allows images to be uploaded. Read more about other possible values <a href="https://www.w3schools.com/tags/att_input_accept.asp"> here</a>.</p>
 <CodeHighlight>
 {`
@@ -206,7 +206,7 @@ import { FileUpload } from 'primereact/fileupload';
 `}
 </CodeHighlight>
 
-            <h3>File Size</h3>
+            <h5>File Size</h5>
             <p>Maximium file size can be restricted using <i>maxFileSize</i> property defined in bytes.</p>
 
 <CodeHighlight>
@@ -225,10 +225,10 @@ import { FileUpload } from 'primereact/fileupload';
                 </li>
             </ul>
 
-            <h3>Request Customization</h3>
+            <h5>Request Customization</h5>
             <p>XHR request to upload the files can be customized using the onBeforeUpload callback that passes the xhr instance and FormData object as event parameters.</p>
 
-            <h3>Basic UI</h3>
+            <h5>Basic UI</h5>
             <p>FileUpload basic mode provides a simpler UI as an alternative to advanced mode.</p>
 
 <CodeHighlight>
@@ -237,7 +237,7 @@ import { FileUpload } from 'primereact/fileupload';
 `}
 </CodeHighlight>
 
-            <h3>Custom Upload</h3>
+            <h5>Custom Upload</h5>
             <p>Uploading implementation can be overriden by enabling customUpload property and defining a custom upload handler event.</p>
 <CodeHighlight>
 {`
@@ -252,7 +252,7 @@ myUploader(event) {
 `}
 </CodeHighlight>
 
-            <h3>Properties</h3>
+            <h5>Properties</h5>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -388,7 +388,7 @@ myUploader(event) {
                 </table>
             </div>
 
-            <h3>Events</h3>
+            <h5>Events</h5>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -462,7 +462,7 @@ myUploader(event) {
                 </table>
             </div>
 
-            <h3>Methods</h3>
+            <h5>Methods</h5>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -487,7 +487,7 @@ myUploader(event) {
                 </table>
             </div>
 
-            <h3>Styling</h3>
+            <h5>Styling</h5>
             <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
@@ -513,7 +513,7 @@ myUploader(event) {
                     </tbody>
                 </table>
 
-                <h3>Dependencies</h3>
+                <h5>Dependencies</h5>
                 <p>None.</p>
             </div>
 
