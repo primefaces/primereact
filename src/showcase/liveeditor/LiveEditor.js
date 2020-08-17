@@ -241,7 +241,7 @@ ReactDOM.render(<${name} />, rootElement);`
     }
 
     render() {
-        let elements = this.renderElements();
+        //let elements = this.renderElements();
 
         return (
             <CodeHighlight lang="js">
