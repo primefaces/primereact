@@ -18,21 +18,23 @@ import { Growl } from 'primereact/growl';
 
 export class CaptchaDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.showResponse = this.showResponse.bind(this);
     }
 
     showResponse() {
-        this.growl.show({severity: 'info', summary: 'Success', detail: 'User Responded'});
+        this.growl.show({ severity: 'info', summary: 'Success', detail: 'User Responded' });
     }
 
     render() {
         return (
-            <div className="button-demo">
+            <div>
                 <Growl ref={(el) => this.growl = el}></Growl>
 
-                <Captcha siteKey="6Lf2XQkTAAAAANcvOwYqPxWL4iZDksFqHpS39GDA" onResponse={this.showResponse} />
+                <div className="card">
+                    <Captcha siteKey="YOUR_SITE_KEY" onResponse={this.showResponse} />
+                </div>
             </div>
         )
     }
@@ -108,41 +110,37 @@ const CaptchaDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight lang="js">
-                            {`
-import {Captcha} from 'primereact/captcha';
-
+<CodeHighlight lang="js">
+{`
+import { Captcha } from 'primereact/captcha';
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h3>Getting Started</h3>
                         <p>Captcha is used with a siteKey and a callback to verify the response.</p>
-                        <CodeHighlight>
-                            {`
+<CodeHighlight>
+{`
 <Captcha siteKey="YOUR_SITE_KEY" onResponse={this.showResponse}></Captcha>
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h3>Verification</h3>
                         <p>In order to ensure if a response token is valid, verification against recaptcha api needs to be done at backend. <a href="https://developers.google.com/recaptcha/docs/verify">Read more</a> at
                         official documentation.</p>
-                        <CodeHighlight lang="js">
-                            {`
+<CodeHighlight lang="js">
+{`
 showResponse(response) {
-    //call to a backend to verify against recaptcha with private key
+//call to a backend to verify against recaptcha with private key
 }
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <p>In addition, include the captcha widget resource to your page.</p>
-                        <CodeHighlight>
-                            {`
+<CodeHighlight>
+{`
 <script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h3>Properties</h3>
                         <div className="doc-tablewrapper">
