@@ -75,8 +75,8 @@ export class TreeSelectionDemoDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {Tree} from 'primereact/tree';
-import {NodeService} from '../service/NodeService';
+import { Tree } from 'primereact/tree';
+import { NodeService } from '../service/NodeService';
 
 export class TreeSelectionDemo extends Component {
 
@@ -84,33 +84,45 @@ export class TreeSelectionDemo extends Component {
         super(props);
         this.state = {
             nodes: null,
-            selectedNodeKey: null,
-            selectedNodeKeys1: null,
-            selectedNodeKeys2: null,
-            selectedNodeKeys3: null
+            selectedKey: null,
+            selectedKeys1: null,
+            selectedKeys2: null,
+            selectedKeys3: null
         };
 
         this.nodeService = new NodeService();
+        this.onNodeSelect = this.onNodeSelect.bind(this);
+        this.onNodeUnselect = this.onNodeUnselect.bind(this);
     }
 
     componentDidMount() {
-        this.nodeService.getTreeNodes().then(data => this.setState({nodes: data}));
+        this.nodeService.getTreeNodes().then(data => this.setState({ nodes: data }));
+    }
+
+    onNodeSelect(node) {
+        this.growl.show({ severity: 'success', summary: 'Node Selected', detail: node.label, life: 3000 });
+    }
+
+    onNodeUnselect(node) {
+        this.growl.show({ severity: 'success', summary: 'Node Unselected', detail: node.label, life: 3000 });
     }
 
     render() {
         return (
             <div>
-                <h3>Single Selection</h3>
-                <Tree value={this.state.nodes} selectionMode="single" selectionKeys={this.state.selectedNodeKey} onSelectionChange={e => this.setState({selectedNodeKey: e.value})} />
+                <div className="card">
+                    <h5>Single Selection</h5>
+                    <Tree value={this.state.nodes} selectionMode="single" selectionKeys={this.state.selectedKey1} onSelectionChange={e => this.setState({ selectedKey1: e.value })} />
 
-                <h3>Multiple Selection with MetaKey</h3>
-                <Tree value={this.state.nodes} selectionMode="multiple" selectionKeys={this.state.selectedNodeKeys1} onSelectionChange={e => this.setState({selectedNodeKeys1: e.value})} />
+                    <h5>Multiple Selection with MetaKey</h5>
+                    <Tree value={this.state.nodes} selectionMode="multiple" selectionKeys={this.state.selectedKeys1} onSelectionChange={e => this.setState({ selectedKeys1: e.value })} />
 
-                <h3>Multiple Selection without MetaKey</h3>
-                <Tree value={this.state.nodes} selectionMode="multiple" metaKeySelection={false} selectionKeys={this.state.selectedNodeKeys2} onSelectionChange={e => this.setState({selectedNodeKeys2: e.value})} />
+                    <h5>Multiple Selection without MetaKey</h5>
+                    <Tree value={this.state.nodes} selectionMode="multiple" metaKeySelection={false} selectionKeys={this.state.selectedKeys2} onSelectionChange={e => this.setState({ selectedKeys2: e.value })} />
 
-                <h3>Checkbox Selection</h3>
-                <Tree value={this.state.nodes} selectionMode="checkbox" selectionKeys={this.state.selectedNodeKeys3} onSelectionChange={e => this.setState({selectedNodeKeys3: e.value})} />
+                    <h5>Checkbox Selection</h5>
+                    <Tree value={this.state.nodes} selectionMode="checkbox" selectionKeys={this.state.selectedKeys3} onSelectionChange={e => this.setState({ selectedKeys3: e.value })} />
+                </div>
             </div>
         )
     }

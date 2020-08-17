@@ -56,33 +56,34 @@ export class TreeFilterDemoDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {Tree} from 'primereact/tree';
-import {NodeService} from '../service/NodeService';
+import { Tree } from 'primereact/tree';
+import { NodeService } from '../service/NodeService';
 
 export class TreeFilterDemo extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            nodes1: null,
-            nodes2: null
+            nodes: null
         };
 
         this.nodeService = new NodeService();
     }
 
     componentDidMount() {
-        this.nodeService.getTreeNodes().then(data => this.setState({nodes1: data, nodes2: data}));
+        this.nodeService.getTreeNodes().then(data => this.setState({ nodes: data }));
     }
 
     render() {
         return (
             <div>
-                <h3 className="first">Lenient Filter Mode</h3>
-                <Tree value={this.state.nodes1} filter={true} />
+                <div className="card">
+                    <h5>Lenient Filter</h5>
+                    <Tree value={this.state.nodes} filter filterMode="lenient"></Tree>
 
-                <h3>Strict Filter Mode</h3>
-                <Tree value={this.state.nodes2} filter={true} filterMode="strict" />
+                    <h5>Strict Filter</h5>
+                    <Tree value={this.state.nodes} filter filterMode="strict"></Tree>
+                </div>
             </div>
         )
     }

@@ -52,8 +52,8 @@ export class TreeDragDropDemoDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {Tree} from 'primereact/tree';
-import {NodeService} from '../service/NodeService';
+import { Tree } from 'primereact/tree';
+import { NodeService } from '../service/NodeService';
 
 export class TreeDragDropDemo extends Component {
 
@@ -67,13 +67,15 @@ export class TreeDragDropDemo extends Component {
     }
 
     componentDidMount() {
-        this.nodeService.getTreeNodes().then(data => this.setState({nodes: data}));
+        this.nodeService.getTreeNodes().then(data => this.setState({ nodes: data }));
     }
 
     render() {
         return (
             <div>
-                <Tree value={this.state.nodes} dragdropScope="demo" onDragDrop={event => this.setState({nodes: event.value})} />
+                <div className="card">
+                    <Tree value={this.state.nodes} dragdropScope="demo" onDragDrop={event => this.setState({ nodes: event.value })} />
+                </div>
             </div>
         )
     }

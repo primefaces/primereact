@@ -103,8 +103,8 @@ export class TreeLazyDemoDoc extends Component {
             'class': {
                 tabName: 'Class Source',
                 content: `
-import React, {Component} from 'react';
-import {Tree} from 'primereact/tree';
+import React, { Component } from 'react';
+import { Tree } from 'primereact/tree';
 
 export class TreeLazyDemo extends Component {
 
@@ -145,7 +145,7 @@ export class TreeLazyDemo extends Component {
             });
 
             setTimeout(() => {
-                let node = {...event.node};
+                let node = { ...event.node };
                 node.children = [];
 
                 for (let i = 0; i < 3; i++) {
@@ -177,8 +177,9 @@ export class TreeLazyDemo extends Component {
     render() {
         return (
             <div>
-                <h3>Lazy Loading</h3>
-                <Tree value={this.state.nodes} onExpand={this.loadOnExpand} loading={this.state.loading} />
+                <div className="card">
+                    <Tree value={this.state.nodes} onExpand={this.loadOnExpand} loading={this.state.loading} />
+                </div>
             </div>
         )
     }

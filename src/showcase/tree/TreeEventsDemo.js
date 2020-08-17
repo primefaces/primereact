@@ -78,9 +78,9 @@ export class TreeEventsDemoDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {Tree} from 'primereact/tree';
-import {Growl} from 'primereact/growl';
-import {NodeService} from '../service/NodeService';
+import { Tree } from 'primereact/tree';
+import { Growl } from 'primereact/growl';
+import { NodeService } from '../service/NodeService';
 
 export class TreeEventsDemo extends Component {
 
@@ -100,23 +100,23 @@ export class TreeEventsDemo extends Component {
     }
 
     componentDidMount() {
-        this.nodeService.getTreeNodes().then(data => this.setState({nodes: data}));
+        this.nodeService.getTreeNodes().then(data => this.setState({ nodes: data }));
     }
 
     onExpand(event) {
-        this.growl.show({severity: 'success', summary: 'Node Expanded', detail: event.node.label});
+        this.growl.show({ severity: 'success', summary: 'Node Expanded', detail: event.node.label });
     }
 
     onCollapse(event) {
-        this.growl.show({severity: 'success', summary: 'Node Collapsed', detail: event.node.label});
+        this.growl.show({ severity: 'success', summary: 'Node Collapsed', detail: event.node.label });
     }
 
     onSelect(event) {
-        this.growl.show({severity: 'info', summary: 'Node Selected', detail: event.node.label});
+        this.growl.show({ severity: 'info', summary: 'Node Selected', detail: event.node.label });
     }
 
     onUnselect(event) {
-        this.growl.show({severity: 'info', summary: 'Node Unselected', detail: event.node.label});
+        this.growl.show({ severity: 'info', summary: 'Node Unselected', detail: event.node.label });
     }
 
     render() {
@@ -124,9 +124,10 @@ export class TreeEventsDemo extends Component {
             <div>
                 <Growl ref={(el) => this.growl = el} />
 
-                <h3 className="first">Events</h3>
-                <Tree value={this.state.nodes} selectionMode="single" selectionKeys={this.state.selectedNodeKey} onSelectionChange={e => this.setState({selectedNodeKey: e.value})}
+                <div className="card">
+                    <Tree value={this.state.nodes} selectionMode="single" selectionKeys={this.state.selectedNodeKey} onSelectionChange={e => this.setState({ selectedNodeKey: e.value })}
                         onExpand={this.onExpand} onCollapse={this.onCollapse} onSelect={this.onSelect} onUnselect={this.onUnselect} />
+                </div>
             </div>
         )
     }
