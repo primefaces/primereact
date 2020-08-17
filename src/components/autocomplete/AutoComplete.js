@@ -90,7 +90,7 @@ export class AutoComplete extends Component {
         tooltipOptions: PropTypes.object,
         ariaLabelledBy: PropTypes.string,
         completeMethod: PropTypes.func,
-        itemTemplate: PropTypes.func,
+        itemTemplate: PropTypes.any,
         selectedItemTemplate: PropTypes.any,
         onChange: PropTypes.func,
         onFocus: PropTypes.func,

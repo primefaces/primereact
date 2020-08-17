@@ -21,7 +21,7 @@ export class AutoCompletePanel extends Component {
         suggestions: PropTypes.array,
         field: PropTypes.string,
         appendTo: PropTypes.any,
-        itemTemplate: PropTypes.func,
+        itemTemplate: PropTypes.any,
         onItemClick: PropTypes.func,
         scrollHeight: PropTypes.string,
         listId: PropTypes.any,
@@ -33,7 +33,7 @@ export class AutoCompletePanel extends Component {
 
         if (this.props.suggestions) {
             items = this.props.suggestions.map((suggestion, index) => {
-                let itemContent = this.props.itemTemplate ? this.props.itemTemplate(suggestion) : this.props.field ? ObjectUtils.resolveFieldData(suggestion, this.props.field) : suggestion;
+                let itemContent = this.props.itemTemplate ? ObjectUtils.getJSXElement(this.props.itemTemplate, suggestion) : this.props.field ? ObjectUtils.resolveFieldData(suggestion, this.props.field) : suggestion;
 
                 return (
                     <li key={index + '_item'} role="option" aria-selected={this.props.ariaSelected === suggestion} className="p-autocomplete-item" onClick={(e) => this.props.onItemClick(e, suggestion)}>

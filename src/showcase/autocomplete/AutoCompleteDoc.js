@@ -18,92 +18,62 @@ import { CountryService } from '../service/CountryService';
 
 export class AutoCompleteDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            countriesData: [],
-            filteredCountriesSingle: null,
-            filteredBrands: null,
-            filteredCountriesMultiple: null,
-            selectedCountry: null,
-            selectedBrand: null,
-            selectedCountries: null
+            countries: [],
+            selectedCountry1: null,
+            selectedCountry2: null,
+            selectedCountries: null,
+            filteredCountries: null
         };
 
-        this.filterCountrySingle = this.filterCountrySingle.bind(this);
-        this.filterBrands = this.filterBrands.bind(this);
-        this.filterCountryMultiple = this.filterCountryMultiple.bind(this);
+        this.searchCountry = this.searchCountry.bind(this);
         this.itemTemplate = this.itemTemplate.bind(this);
         this.countryservice = new CountryService();
     }
 
     componentDidMount() {
-        this.countryservice.getCountries().then(data => this.setState({ countriesData: data }));
-        this.brands = ['Audi', 'BMW', 'Fiat', 'Ford', 'Honda', 'Jaguar', 'Mercedes', 'Renault', 'Volvo'];
+        this.countryservice.getCountries().then(data => this.setState({ countries: data }));
     }
 
-    filterCountrySingle(event) {
+    searchCountry(event) {
         setTimeout(() => {
-            let results = this.state.countriesData.filter((country) => {
-                return country.name.toLowerCase().startsWith(event.query.toLowerCase());
-            });
-            this.setState({ filteredCountriesSingle: results });
-        }, 250);
-    }
-
-    filterBrands(event) {
-        setTimeout(() => {
-            let results;
-
-            if (event.query.length === 0) {
-                results = [...this.brands];
+            let filteredCountries;
+            if (!event.query.trim().length) {
+                filteredCountries = [...this.state.countries];
             }
             else {
-                results = this.brands.filter((brand) => {
-                    return brand.toLowerCase().startsWith(event.query.toLowerCase());
+                filteredCountries = this.state.countries.filter((country) => {
+                    return country.name.toLowerCase().startsWith(event.query.toLowerCase());
                 });
             }
 
-            this.setState({ filteredBrands: results });
+            this.setState({ filteredCountries });
         }, 250);
     }
 
-    filterCountryMultiple(event) {
-        setTimeout(() => {
-            let results = this.state.countriesData.filter((country) => {
-                return country.name.toLowerCase().startsWith(event.query.toLowerCase());
-            });
-
-            this.setState({ filteredCountriesMultiple: results });
-        }, 250);
-    }
-
-    itemTemplate(brand) {
+    itemTemplate(item) {
         return (
-            <div className="p-clearfix">
-                <img alt={brand} src={\`showcase/demo/images/car/\${brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" style={{ width: '32px', display: 'inline-block', margin: '5px 0 2px 5px' }} />
-                <div style={{ fontSize: '16px', float: 'right', margin: '10px 10px 0 0' }}>{brand}</div>
+            <div className="country-item">
+                <img alt={item.name} src={\`showcase/demo/images/flag_placeholder.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" className={\`flag flag-\${item.code.toLowerCase()}\`} />
+                <div>{item.name}</div>
             </div>
         );
     }
 
     render() {
         return (
-            <div>
-                <h3>Basic</h3>
-                <AutoComplete value={this.state.selectedCountry} suggestions={this.state.filteredCountriesSingle} completeMethod={this.filterCountrySingle} field="name"
-                    size={30} placeholder="Countries" minLength={1} onChange={(e) => this.setState({ selectedCountry: e.value })} />
-                <span style={{ marginLeft: '10px' }}>Country: {this.state.selectedCountry ? this.state.selectedCountry.name || this.state.selectedCountry : 'none'}</span>
+            <div className="card">
+                <h5>Basic</h5>
+                <AutoComplete value={this.state.selectedCountry1} suggestions={this.state.filteredCountries} completeMethod={this.searchCountry} field="name" onChange={(e) => this.setState({ selectedCountry1: e.value })} />
 
-                <h3>Advanced</h3>
-                <AutoComplete value={this.state.selectedBrand} suggestions={this.state.filteredBrands} completeMethod={this.filterBrands} size={30} minLength={1}
-                    placeholder="Hint: type 'v' or 'f'" dropdown={true} itemTemplate={this.itemTemplate} onChange={(e) => this.setState({ selectedBrand: e.value })} />
-                <span style={{ marginLeft: '10px' }}>Brand: {this.state.selectedBrand || 'none'}</span>
+                <h5>Dropdown and Templating</h5>
+                <AutoComplete value={this.state.selectedCountry2} suggestions={this.state.filteredCountries} completeMethod={this.searchCountry} field="name" dropdown itemTemplate={this.itemTemplate} onChange={(e) => this.setState({ selectedCountry2: e.value })} />
 
-                <h3>Multiple</h3>
+                <h5>Multiple</h5>
                 <span className="p-fluid">
-                    <AutoComplete value={this.state.selectedCountries} suggestions={this.state.filteredCountriesMultiple} completeMethod={this.filterCountryMultiple}
-                        minLength={1} placeholder="Countries" field="name" multiple={true} onChange={(e) => this.setState({ selectedCountries: e.value })} />
+                    <AutoComplete value={this.state.selectedCountries} suggestions={this.state.filteredCountries} completeMethod={this.searchCountry} field="name" multiple onChange={(e) => this.setState({ selectedCountries: e.value })} />
                 </span>
             </div>
         )
@@ -302,52 +272,61 @@ const AutoCompleteDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight lang="javascript">
-                            {`
+<CodeHighlight lang="js">
+{`
 import { AutoComplete } from 'primereact/autocomplete';
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h3>Getting Started</h3>
                         <p>AutoComplete is used as a controlled component with <i>value</i> and <i>onChange</i> properties. In addition, the component
                             requires a list of <i>suggestions</i> and a <i>completeMethod</i> to query the results.</p>
 
-                        <CodeHighlight>
-                            {`
-<AutoComplete value={this.state.brand} onChange={(e) => this.setState({brand: e.value})}
-            suggestions={this.state.brandSuggestions} completeMethod={this.suggestBrands.bind(this)} />
-
+<CodeHighlight>
+{`
+<AutoComplete value={this.state.selectedCountry} suggestions={this.state.filteredCountries}
+            completeMethod={this.searchCountry} field="name" onChange={(e) => this.setState({ selectedCountry: e.value })} />
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <CodeHighlight lang="javascript">
-                            {`
-constructor() {
-    super();
+<CodeHighlight lang="js">
+{`
+constructor(props) {
+    super(props);
     this.state = {
-        brandSuggestions: null
+        selectedCountry: null
+        filteredCountries: null
     };
-    this.brands = ['Audi', 'BMW', 'Fiat', 'Ford', 'Honda', 'Jaguar', 'Mercedes', 'Renault', 'Volvo'];
+
+    this.countries: ['Country-1', 'Country-2', 'Country-3', 'Country-4', 'Country-5'];
+    this.searchCountry = this.searchCountry.bind(this);
+    this.countryservice = new CountryService();
 }
 
-suggestBrands(event) {
-    let results = this.brands.filter((brand) => {
-         return brand.toLowerCase().startsWith(event.query.toLowerCase());
-    });
+searchCountry(event) {
+    setTimeout(() => {
+        let filteredCountries;
+        if (!event.query.trim().length) {
+            filteredCountries = [...this.countries];
+        }
+        else {
+            filteredCountries = this.countries.filter((country) => {
+                return country.name.toLowerCase().startsWith(event.query.toLowerCase());
+            });
+        }
 
-    this.setState({ brandSuggestions: results });
+        this.setState({ filteredCountries });
+    }, 250);
 }
 
 render() {
     return (
-        <AutoComplete value={this.state.brand} onChange={(e) => this.setState({brand: e.value})}
-                    suggestions={this.state.brandSuggestions} completeMethod={this.suggestBrands.bind(this)} />
+        <AutoComplete value={this.state.selectedCountry} suggestions={this.state.filteredCountries}
+            completeMethod={this.searchCountry} onChange={(e) => this.setState({ selectedCountry: e.value })} />
     );
 }
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h3>Dropdown</h3>
                         <p>Enabling <i>dropdown</i> property displays a button next to the input field where click behavior of the button is defined using
@@ -355,58 +334,54 @@ render() {
                             "blank" is the default mode to send a query with an empty string whereas
                             "current" setting sends a query with the current value of the input.</p>
 
-                        <CodeHighlight>
-                            {`
-<AutoComplete dropdown={true} value={this.state.brand} onChange={(e) => this.setState({brand: e.value})}
-            suggestions={this.state.brandSuggestions} completeMethod={this.suggestBrands.bind(this)} />
-
+<CodeHighlight>
+{`
+<AutoComplete dropdown value={this.state.selectedCountry} suggestions={this.state.filteredCountries}
+    completeMethod={this.searchCountry} onChange={(e) => this.setState({ selectedCountry: e.value })} />
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h3>Multiple Mode</h3>
                         <p>Multiple mode is enabled using <i>multiple</i> property used to select more than one value from the autocomplete. In this case, value reference should be an array.</p>
-                        <CodeHighlight>
-                            {`
-<AutoComplete multiple={true} value={this.state.brands} onChange={(e) => this.setState({brands: e.value})}
-            suggestions={this.state.brandSuggestions} completeMethod={this.suggestBrands.bind(this)} />
-
+<CodeHighlight>
+{`
+<AutoComplete multiple value={this.state.selectedCountry} suggestions={this.state.filteredCountries}
+    completeMethod={this.searchCountry} onChange={(e) => this.setState({ selectedCountry: e.value })} />
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h3>Objects</h3>
                         <p>AutoComplete can also work with objects using the  <i>field</i> property that defines the label to display
                         as a suggestion. The value passed to the model would still be the object instance of a suggestion.
                         Here is an example with a Country object that has name and code fields such as &#123;name:"United States",code:"USA"&#125;.</p>
 
-                        <CodeHighlight>
-                            {`
-<AutoComplete field="name" value={this.state.brands} onChange={(e) => this.setState({brands: e.value})}
-            suggestions={this.state.brandSuggestions} completeMethod={this.suggestBrands.bind(this)} />
-
+<CodeHighlight>
+{`
+<AutoComplete field="name" value={this.state.selectedCountry} suggestions={this.state.filteredCountries}
+    completeMethod={this.searchCountry} onChange={(e) => this.setState({ selectedCountry: e.value })} />
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h3>Templating</h3>
-                        <p>Custom content can be displayed using <i>itemTemplate</i> property that references a function which gets
+                        <p>Custom content can be displayed using <i>itemTemplate</i> property that references a function or JSXElement or string which gets
                         the suggestion option and returns an element. Similarly <i>selectedItemTemplate</i> property is available
                         to customize the chips in multiple mode using the same approach.</p>
 
-                        <CodeHighlight>
-                            {`
-<AutoComplete itemTemplate="this.brandTemplate" value={this.state.brand} onChange={(e) => this.setState({brand: e.value})}
-            suggestions={this.state.brandSuggestions} completeMethod={this.suggestBrands.bind(this)} />
-
+<CodeHighlight>
+{`
+<AutoComplete value={this.state.selectedCountry} suggestions={this.state.filteredCountries}
+    completeMethod={this.searchCountry} onChange={(e) => this.setState({ selectedCountry: e.value })}
+    itemTemplate={this.itemTemplate} />
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <CodeHighlight lang="javascript">
-                            {`
-brandTemplate(brand) {
+<CodeHighlight lang="js">
+{`
+itemTemplate(item) {
     //return custom element
 }
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h3>Properties</h3>
                         <div className="doc-tablewrapper">
@@ -590,15 +565,15 @@ brandTemplate(brand) {
                                     </tr>
                                     <tr>
                                         <td>itemTemplate</td>
-                                        <td>function</td>
+                                        <td>any</td>
                                         <td>null</td>
-                                        <td>Template function to return the content of a list item.</td>
+                                        <td>Template of a list item.</td>
                                     </tr>
                                     <tr>
                                         <td>selectedItemTemplate</td>
                                         <td>any</td>
                                         <td>null</td>
-                                        <td>Template function to return the content of a selected item.</td>
+                                        <td>Template of a selected item.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -745,16 +720,10 @@ brandTemplate(brand) {
                         <p>None.</p>
                     </TabPanel>
 
-                    {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="AutoCompleteDemo" sources={[key, value]} service="CountryService" data="countries" />
-                                </TabPanel>
-                            );
-                        })
-                    }
-                </TabView >
+                    <TabPanel header="Source">
+                        <LiveEditor name="AutoCompleteDemo" sources={this.sources} service="CountryService" data="countries" />
+                    </TabPanel>
+                </TabView>
             </div>
         )
     }

@@ -31,8 +31,8 @@ interface AutoCompleteProps {
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
     completeMethod?(e: {originalEvent: Event, query: string}): void;
-    itemTemplate?(data: any): JSX.Element | undefined;
-    selectedItemTemplate?(data: any): any;
+    itemTemplate?:((data: any) => any | any);
+    selectedItemTemplate?:((data: any) => any | any);
     onChange?(e: {originalEvent: Event, value: any, target: {name: string, id: string, value: any}}): void;
     onFocus?(event: Event): void;
     onBlur?(event: Event): void;
