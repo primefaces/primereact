@@ -90,32 +90,32 @@ const InputMaskDemo = () => {
         <div className="inputgrid-demo">
             <div className="p-grid p-fluid">
                 <div className="p-col-12 p-md-4">
-                    <h3>Basic {val1}</h3>
+                    <h5>Basic {val1}</h5>
                     <InputMask mask="99-999999" value={val1} placeholder="99-999999" onChange={(e) => setVal1(e.value)}></InputMask>
                 </div>
 
                 <div className="p-col-12 p-md-4">
-                    <h3>SSN {val2}</h3>
+                    <h5>SSN {val2}</h5>
                     <InputMask mask="999-99-9999" value={val2} placeholder="999-99-9999" onChange={(e) => setVal2(e.value)}></InputMask>
                 </div>
 
                 <div className="p-col-12 p-md-4">
-                    <h3>Date {val3}</h3>
+                    <h5>Date {val3}</h5>
                     <InputMask mask="99/99/9999" value={val3} placeholder="99/99/9999" slotChar="mm/dd/yyyy" onChange={(e) => setVal3(e.value)}></InputMask>
                 </div>
 
                 <div className="p-col-12 p-md-4">
-                    <h3>Phone {val4}</h3>
+                    <h5>Phone {val4}</h5>
                     <InputMask mask="(999) 999-9999" value={val4} placeholder="(999) 999-9999" onChange={(e) => setVal4(e.value)}></InputMask>
                 </div>
 
                 <div className="p-col-12 p-md-4">
-                    <h3>Phone Ext {val5}</h3>
+                    <h5>Phone Ext {val5}</h5>
                     <InputMask mask="(999) 999-9999? x99999" value={val5} placeholder="(999) 999-9999? x99999" onChange={(e) => setVal5(e.value)}></InputMask>
                 </div>
 
                 <div className="p-col-12 p-md-4">
-                    <h3>Serial Number {val6}</h3>
+                    <h5>Serial Number {val6}</h5>
                     <InputMask mask="a*-999-a999" value={val6} placeholder="a*-999-a999" onChange={(e) => setVal6(e.value)}></InputMask>
                 </div>
             </div>
@@ -142,32 +142,32 @@ const InputMaskDemo = () => {
         <div className="inputgrid-demo">
             <div className="p-grid p-fluid">
                 <div className="p-col-12 p-md-4">
-                    <h3>Basic {val1}</h3>
+                    <h5>Basic {val1}</h5>
                     <InputMask mask="99-999999" value={val1} placeholder="99-999999" onChange={(e) => setVal1(e.value)}></InputMask>
                 </div>
 
                 <div className="p-col-12 p-md-4">
-                    <h3>SSN {val2}</h3>
+                    <h5>SSN {val2}</h5>
                     <InputMask mask="999-99-9999" value={val2} placeholder="999-99-9999" onChange={(e) => setVal2(e.value)}></InputMask>
                 </div>
 
                 <div className="p-col-12 p-md-4">
-                    <h3>Date {val3}</h3>
+                    <h5>Date {val3}</h5>
                     <InputMask mask="99/99/9999" value={val3} placeholder="99/99/9999" slotChar="mm/dd/yyyy" onChange={(e) => setVal3(e.value)}></InputMask>
                 </div>
 
                 <div className="p-col-12 p-md-4">
-                    <h3>Phone {val4}</h3>
+                    <h5>Phone {val4}</h5>
                     <InputMask mask="(999) 999-9999" value={val4} placeholder="(999) 999-9999" onChange={(e) => setVal4(e.value)}></InputMask>
                 </div>
 
                 <div className="p-col-12 p-md-4">
-                    <h3>Phone Ext {val5}</h3>
+                    <h5>Phone Ext {val5}</h5>
                     <InputMask mask="(999) 999-9999? x99999" value={val5} placeholder="(999) 999-9999? x99999" onChange={(e) => setVal5(e.value)}></InputMask>
                 </div>
 
                 <div className="p-col-12 p-md-4">
-                    <h3>Serial Number {val6}</h3>
+                    <h5>Serial Number {val6}</h5>
                     <InputMask mask="a*-999-a999" value={val6} placeholder="a*-999-a999" onChange={(e) => setVal6(e.value)}></InputMask>
                 </div>
             </div>
@@ -196,14 +196,14 @@ const InputMaskDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { InputMask } from 'primereact/inputmask';
 `}
 </CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>InputMask is used as a controlled component with <i>value</i> and <i>onChange</i> properties.</p>
 
 <CodeHighlight>
@@ -212,7 +212,7 @@ import { InputMask } from 'primereact/inputmask';
 `}
 </CodeHighlight>
 
-                        <h3>Mask</h3>
+                        <h5>Mask</h5>
                         <p>Mask format can be a combination of the the following built-in definitions.</p>
 
                         <ul>
@@ -233,7 +233,7 @@ import { InputMask } from 'primereact/inputmask';
 `}
 </CodeHighlight>
 
-                        <h3>SlotChar</h3>
+                        <h5>SlotChar</h5>
                         <p>Underscore is the default placeholder for a mask and this can be customized using <i>slotChart</i> option.</p>
 
 <CodeHighlight>
@@ -242,7 +242,7 @@ import { InputMask } from 'primereact/inputmask';
 `}
 </CodeHighlight>
 
-                        <h3>Optional Values</h3>
+                        <h5>Optional Values</h5>
                         <p>If the input does not complete the mask definition, it is cleared by default.
                         Use <i>autoClear</i> property to control this behavior. In addition, certain part of
                         a mask can be made optional by using ? symbol where anything after the question
@@ -254,7 +254,7 @@ import { InputMask } from 'primereact/inputmask';
 `}
 </CodeHighlight>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -384,7 +384,7 @@ import { InputMask } from 'primereact/inputmask';
                             </table>
                         </div>
 
-                        <h3>Events</h3>
+                        <h5>Events</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -411,10 +411,10 @@ import { InputMask } from 'primereact/inputmask';
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Styling is same as <Link to="/inputtext"> inputtext component</Link>, for theming classes visit <Link to="/theming"> theming page.</Link></p>
 
-                        <h3>Dependencies</h3>
+                        <h5>Dependencies</h5>
                         <p>None.</p>
                     </TabPanel>
 

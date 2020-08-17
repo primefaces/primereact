@@ -274,10 +274,10 @@ const MegaMenuDemo = () => {
 
     return (
         <div>
-            <h3>Horizontal</h3>
+            <h5>Horizontal</h5>
             <MegaMenu model={items}/>
 
-            <h3>Vertical</h3>
+            <h5>Vertical</h5>
             <MegaMenu model={items} orientation="vertical"/>
         </div>
     );
@@ -407,10 +407,10 @@ const MegaMenuDemo = () => {
 
     return (
         <div>
-            <h3>Horizontal</h3>
+            <h5>Horizontal</h5>
             <MegaMenu model={items}/>
 
-            <h3>Vertical</h3>
+            <h5>Vertical</h5>
             <MegaMenu model={items} orientation="vertical"/>
         </div>
     );
@@ -429,17 +429,17 @@ const MegaMenuDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { MegaMenu } from 'primereact/megamenu';
 `}
 </CodeHighlight>
 
-                        <h3>MenuItem API</h3>
+                        <h5>MenuItem API</h5>
                         <p>MegaMenu uses the common menu item api to define its items, visit <Link to="/menumodel">  MenuModel </Link> for details.</p>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>Layout of the MegaMenu is managed by the <a href="https://github.com/primefaces/primeflex">PrimeFlex</a> that can be downloaded from npm.</p>
 
 <CodeHighlight lang="js">
@@ -573,7 +573,7 @@ const items: [
 `}
 </CodeHighlight>
 
-                        <h3>Orientation</h3>
+                        <h5>Orientation</h5>
                         <p>Default orientation is "horizontal" with "vertical" as the alternative.</p>
 <CodeHighlight>
 {`
@@ -581,7 +581,7 @@ const items: [
 `}
 </CodeHighlight>
 
-                        <h3>Custom Content</h3>
+                        <h5>Custom Content</h5>
                         <p>Any content inside the megamenu will be displayed on the right side by default. You may use ".ui-megamenu-custom" style class to change the location of the content.</p>
 <CodeHighlight>
 {`
@@ -592,7 +592,7 @@ const items: [
 `}
 </CodeHighlight>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -638,7 +638,7 @@ const items: [
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -677,7 +677,7 @@ const items: [
                             </table>
                         </div>
 
-                        <h3>Dependencies</h3>
+                        <h5>Dependencies</h5>
                         <p>None.</p>
                     </TabPanel>
 

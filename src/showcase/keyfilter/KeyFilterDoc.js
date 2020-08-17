@@ -72,7 +72,7 @@ const KeyFilterDemo = () => {
 
     return (
         <div>
-            <h3>Filtering</h3>
+            <h5>Filtering</h5>
             <div className="p-grid p-fluid">
                 <div className="p-col-12 p-md-4">
                     <InputText keyfilter="int" placeholder="Integers"/>
@@ -114,7 +114,7 @@ const KeyFilterDemo = () => {
 
     return (
         <div>
-            <h3>Filtering</h3>
+            <h5>Filtering</h5>
             <div className="p-grid p-fluid">
                 <div className="p-col-12 p-md-4">
                     <InputText keyfilter="int" placeholder="Integers"/>
@@ -158,14 +158,14 @@ const KeyFilterDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { InputText } from 'primereact/inputtext';
 `}
 </CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>KeyFilter property is integrated in input components such as InputText using the <i>keyfilter</i> property. The value of the filter
                             can either a built-in regular expression or a custom one. Following input only accepts integers.</p>
 
@@ -175,7 +175,7 @@ import { InputText } from 'primereact/inputtext';
 `}
 </CodeHighlight>
 
-                        <h3>Built-in Filters</h3>
+                        <h5>Built-in Filters</h5>
                         <p>Commonly used cases have their own built-in shortcuts.</p>
                         <ul>
                             <li>pint: Positive integers</li>
@@ -188,7 +188,7 @@ import { InputText } from 'primereact/inputtext';
                             <li>alphanum: Alphanumeric</li>
                         </ul>
 
-                        <h3>Custom Filter</h3>
+                        <h5>Custom Filter</h5>
                         <p>A custom filter is enabled by binding a regular expression, an example that blocks special characters would be;</p>
 <CodeHighlight>
 {`
@@ -196,7 +196,7 @@ import { InputText } from 'primereact/inputtext';
 `}
 </CodeHighlight>
 
-                        <h3>Dependencies</h3>
+                        <h5>Dependencies</h5>
                         <p>None.</p>
                     </TabPanel>
 

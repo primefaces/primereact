@@ -158,7 +158,7 @@ const InputGroupDemo = () => {
 
     return (
         <div>
-            <h3 className="first">Addons</h3>
+            <h3 className="first">Addons</h5>
             <div className="p-grid p-fluid">
                 <div className="p-col-12 p-md-4">
                     <div className="p-inputgroup">
@@ -185,7 +185,7 @@ const InputGroupDemo = () => {
                 </div>
             </div>
 
-            <h3>Multiple Addons</h3>
+            <h5>Multiple Addons</h5>
             <div className="p-grid">
                 <div className="p-col-12">
                     <div className="p-inputgroup">
@@ -202,7 +202,7 @@ const InputGroupDemo = () => {
                 </div>
             </div>
 
-            <h3>Button Addons</h3>
+            <h5>Button Addons</h5>
             <div className="p-grid p-fluid">
                 <div className="p-col-12 p-md-4">
                     <div className="p-inputgroup">
@@ -227,7 +227,7 @@ const InputGroupDemo = () => {
                 </div>
             </div>
 
-            <h3>Checkbox and RadioButton</h3>
+            <h5>Checkbox and RadioButton</h5>
             <div className="p-grid p-fluid">
                 <div className="p-col-12 p-md-4">
                     <div className="p-inputgroup">

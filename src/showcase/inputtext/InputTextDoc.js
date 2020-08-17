@@ -98,17 +98,17 @@ const InputTextDemo = () => {
 
     return (
         <div>
-            <h3 className="first">Basic</h3>
+            <h3 className="first">Basic</h5>
             <InputText value={value1} onChange={(e) => setValue1(e.target.value)} />
             <span style={{marginLeft:'.5em'}}>{value1}</span>
 
-            <h3>Floating Label</h3>
+            <h5>Floating Label</h5>
             <span className="p-float-label">
                 <InputText id="float-input" type="text" size={30} value={value2} onChange={(e) => setValue2(e.target.value)} />
                 <label htmlhtmlFor="float-input">Username</label>
             </span>
 
-            <h3>KeyFilter - Positive Number Only</h3>
+            <h5>KeyFilter - Positive Number Only</h5>
             <InputText type="text" keyfilter="pint" value={value3} onChange={(e) => setValue3(e.target.value)} />
         </div>
     )
@@ -128,17 +128,17 @@ const InputTextDemo = () => {
 
     return (
         <div>
-            <h3 className="first">Basic</h3>
+            <h3 className="first">Basic</h5>
             <InputText value={value1} onChange={(e) => setValue1((e.target as HTMLInputElement).value)} />
             <span style={{marginLeft:'.5em'}}>{value1}</span>
 
-            <h3>Floating Label</h3>
+            <h5>Floating Label</h5>
             <span className="p-float-label">
                 <InputText id="float-input" type="text" size={30} value={value2} onChange={(e) => setValue2((e.target as HTMLInputElement).value)} />
                 <label htmlhtmlFor="float-input">Username</label>
             </span>
 
-            <h3>KeyFilter - Positive Number Only</h3>
+            <h5>KeyFilter - Positive Number Only</h5>
             <InputText type="text" keyfilter="pint" value={value3} onChange={(e) => setValue3((e.target as HTMLInputElement).value)} />
         </div>
     )
@@ -157,14 +157,14 @@ const InputTextDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { InputText } from 'primereact/inputtext';
 `}
 </CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>InputText is used as a controlled input with <i>value</i> and <i>onChange</i> properties.</p>
 <CodeHighlight>
 {`
@@ -172,7 +172,7 @@ import { InputText } from 'primereact/inputtext';
 `}
 </CodeHighlight>
 
-                        <h3>Float Label</h3>
+                        <h5>Float Label</h5>
                         <p>A floating label is implemented by wrapping the input and the label inside a container having <i>.p-float-label</i> style class.</p>
 <CodeHighlight>
 {`
@@ -183,12 +183,12 @@ import { InputText } from 'primereact/inputtext';
 `}
 </CodeHighlight>
 
-                        <h3>KeyFilter</h3>
+                        <h5>KeyFilter</h5>
                         <p>InputText has built-in key filtering support to block certain keys, refer to <Link to="/keyfilter">keyfilter</Link> page for more information.</p>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <p>InputText passes any valid attribute to the underlying input element. Extended properties are as follows;</p>
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -228,7 +228,7 @@ import { InputText } from 'primereact/inputtext';
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming">theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -247,7 +247,7 @@ import { InputText } from 'primereact/inputtext';
                             </table>
                         </div>
 
-                        <h3>Dependencies</h3>
+                        <h5>Dependencies</h5>
                         <p>None.</p>
                     </TabPanel>
 

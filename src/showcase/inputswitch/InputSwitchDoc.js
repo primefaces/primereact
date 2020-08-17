@@ -54,10 +54,10 @@ const InputSwitchDemo = () => {
 
     return (
         <div>
-            <h3>Basic</h3>
+            <h5>Basic</h5>
             <InputSwitch checked={checked1} onChange={(e) => setChecked1(e.value)} />
 
-            <h3>Default Value</h3>
+            <h5>Default Value</h5>
             <InputSwitch checked={checked2} onChange={(e) => setChecked2(e.value)} />
         </div>
     );
@@ -76,10 +76,10 @@ const InputSwitchDemo = () => {
 
     return (
         <div>
-            <h3>Basic</h3>
+            <h5>Basic</h5>
             <InputSwitch checked={checked1} onChange={(e) => setChecked1(e.value)} />
 
-            <h3>Default Value</h3>
+            <h5>Default Value</h5>
             <InputSwitch checked={checked2} onChange={(e) => setChecked2(e.value)} />
         </div>
     );
@@ -98,14 +98,14 @@ const InputSwitchDemo = () => {
             <div className="content-section documentation">
             <TabView>
                 <TabPanel header="Documentation">
-                    <h3>Import</h3>
+                    <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import {InputSwitch} from 'primereact/inputswitch';
 `}
 </CodeHighlight>
 
-                    <h3>Getting Started</h3>
+                    <h5>Getting Started</h5>
                     <p>InputSwitch is used as a controlled input with <i>checked</i> and <i>onChange</i> properties.</p>
 
 <CodeHighlight>
@@ -114,7 +114,7 @@ import {InputSwitch} from 'primereact/inputswitch';
 `}
 </CodeHighlight>
 
-                    <h3>Properties</h3>
+                    <h5>Properties</h5>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -190,7 +190,7 @@ import {InputSwitch} from 'primereact/inputswitch';
                         </table>
                     </div>
 
-                    <h3>Events</h3>
+                    <h5>Events</h5>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -221,7 +221,7 @@ import {InputSwitch} from 'primereact/inputswitch';
                         </table>
                     </div>
 
-                    <h3>Styling</h3>
+                    <h5>Styling</h5>
                     <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
@@ -248,7 +248,7 @@ import {InputSwitch} from 'primereact/inputswitch';
                         </table>
                     </div>
 
-                    <h3>Dependencies</h3>
+                    <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
 

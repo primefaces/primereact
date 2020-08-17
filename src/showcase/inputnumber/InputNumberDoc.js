@@ -186,7 +186,7 @@ const InputNumberDemo = () => {
 
     return (
         <div className="inputnumber-demo">
-            <h3>Numerals</h3>
+            <h5>Numerals</h5>
             <div className="p-grid p-fluid">
                 <div className="p-col-12 p-md-3">
                     Integer Only
@@ -223,7 +223,7 @@ const InputNumberDemo = () => {
                 </div>
             </div>
 
-            <h3>Currency</h3>
+            <h5>Currency</h5>
             <div className="p-grid p-fluid">
                 <div className="p-col-12 p-md-3">
                     United States
@@ -243,7 +243,7 @@ const InputNumberDemo = () => {
                 </div>
             </div>
 
-            <h3>Prefix and Suffix</h3>
+            <h5>Prefix and Suffix</h5>
             <div className="p-grid p-fluid">
                 <div className="p-col-12 p-md-3">
                     Mile
@@ -263,7 +263,7 @@ const InputNumberDemo = () => {
                 </div>
             </div>
 
-            <h3>Buttons</h3>
+            <h5>Buttons</h5>
             <div className="p-grid p-fluid">
                 <div className="p-col-12 p-md-3">
                     Stacked
@@ -319,7 +319,7 @@ const InputNumberDemo = () => {
 
     return (
         <div className="inputnumber-demo">
-            <h3>Numerals</h3>
+            <h5>Numerals</h5>
             <div className="p-grid p-fluid">
                 <div className="p-col-12 p-md-3">
                     Integer Only
@@ -356,7 +356,7 @@ const InputNumberDemo = () => {
                 </div>
             </div>
 
-            <h3>Currency</h3>
+            <h5>Currency</h5>
             <div className="p-grid p-fluid">
                 <div className="p-col-12 p-md-3">
                     United States
@@ -376,7 +376,7 @@ const InputNumberDemo = () => {
                 </div>
             </div>
 
-            <h3>Prefix and Suffix</h3>
+            <h5>Prefix and Suffix</h5>
             <div className="p-grid p-fluid">
                 <div className="p-col-12 p-md-3">
                     Mile
@@ -396,7 +396,7 @@ const InputNumberDemo = () => {
                 </div>
             </div>
 
-            <h3>Buttons</h3>
+            <h5>Buttons</h5>
             <div className="p-grid p-fluid">
                 <div className="p-col-12 p-md-3">
                     Stacked
@@ -442,14 +442,14 @@ const InputNumberDemo = () => {
             <div className="content-section documentation">
     <TabView>
         <TabPanel header="Documentation">
-            <h3>Import</h3>
+            <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { InputNumber } from 'primereact/inputnumber';
 `}
 </CodeHighlight>
 
-            <h3>Getting Started</h3>
+            <h5>Getting Started</h5>
             <p>InputNumber is used as a controlled input with <i>value</i> and <i>onValueChange</i> properties. Component always provides a number type although formatting on the input is a string.</p>
 
 <CodeHighlight>
@@ -458,7 +458,7 @@ import { InputNumber } from 'primereact/inputnumber';
 `}
 </CodeHighlight>
 
-            <h3>Decimal Mode</h3>
+            <h5>Decimal Mode</h5>
             <p>Format is defined using the <i>mode</i> property, "decimal" is the default value allowing only integers when there is no other configuration.</p>
 <CodeHighlight>
 {`
@@ -491,7 +491,7 @@ Indian Locale
 `}
 </CodeHighlight>
 
-            <h3>Currency</h3>
+            <h5>Currency</h5>
             <p>Currency formatting is specified by setting the <i>mode</i> option to currency and <i>currency</i> property. In addition <i>currencyDisplay</i> option
             allows how the currency is displayed, valid values are "symbol" (default) or "code".</p>
 <CodeHighlight>
@@ -510,7 +510,7 @@ Japan
 `}
 </CodeHighlight>
 
-            <h3>Prefix and Suffix</h3>
+            <h5>Prefix and Suffix</h5>
             <p>Custom texts e.g. units can be placed before or after the input section with the <i>prefix</i> and <i>suffix</i> properties.</p>
 <CodeHighlight>
 {`
@@ -528,7 +528,7 @@ Temperature
 `}
 </CodeHighlight>
 
-            <h3>Buttons</h3>
+            <h5>Buttons</h5>
             <p>Spinner buttons is enabled using the <i>showButtons</i> options and layout is defined with the <i>buttonLayout</i>. Default value is "stacked" whereas
             "horizontal" and "stacked" are alternatives. Note that even there are no buttons, up and down arrow keys can be used to spin the values with keyboard.</p>
 <CodeHighlight>
@@ -546,7 +546,7 @@ Vertical
 `}
 </CodeHighlight>
 
-            <h3>Step</h3>
+            <h5>Step</h5>
             <p>Step factor is 1 by default and can be customized with <i>step</i> option.</p>
 <CodeHighlight>
 {`
@@ -555,7 +555,7 @@ Vertical
 </CodeHighlight>
 
 
-            <h3>Min and Max Boundaries</h3>
+            <h5>Min and Max Boundaries</h5>
             <p>Value to be entered can be restricted by configuring the <i>min</i> and <i>max</i> options.</p>
 <CodeHighlight>
 {`
@@ -563,7 +563,7 @@ Vertical
 `}
 </CodeHighlight>
 
-            <h3>Properties</h3>
+            <h5>Properties</h5>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -834,7 +834,7 @@ Vertical
                 </table>
             </div>
 
-            <h3>Events</h3>
+            <h5>Events</h5>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -871,7 +871,7 @@ Vertical
                 </table>
             </div>
 
-            <h3>Styling</h3>
+            <h5>Styling</h5>
             <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
@@ -923,7 +923,7 @@ Vertical
                 </table>
             </div>
 
-            <h3>Dependencies</h3>
+            <h5>Dependencies</h5>
             <p>None.</p>
         </TabPanel>
 

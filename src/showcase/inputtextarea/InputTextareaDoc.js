@@ -57,11 +57,11 @@ const InputTextareaDemo = () => {
 
     return (
         <div>
-            <h3>Default</h3>
+            <h5>Default</h5>
             <InputTextarea value={value} onChange={(e) => setValue(e.target.value)} rows={5} cols={30}></InputTextarea>
             <div>{value}</div>
 
-            <h3>AutoResize</h3>
+            <h5>AutoResize</h5>
             <InputTextarea rows={5} cols={30} autoResize={true}></InputTextarea>
         </div>
     )
@@ -79,11 +79,11 @@ const InputTextareaDemo = () => {
 
     return (
         <div>
-            <h3>Default</h3>
+            <h5>Default</h5>
             <InputTextarea value={value} onChange={(e) => setValue((e.target as HTMLInputElement).value)} rows={5} cols={30}></InputTextarea>
             <div>{value}</div>
 
-            <h3>AutoResize</h3>
+            <h5>AutoResize</h5>
             <InputTextarea rows={5} cols={30} autoResize={true}></InputTextarea>
         </div>
     )
@@ -102,14 +102,14 @@ const InputTextareaDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { InputTextarea } from 'primereact/inputtextarea';
 `}
 </CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>Textarea is used as a controlled input with <i>value</i> and <i>onChange</i> properties.</p>
 <CodeHighlight>
 {`
@@ -117,7 +117,7 @@ import { InputTextarea } from 'primereact/inputtextarea';
 `}
 </CodeHighlight>
 
-                        <h3>AutoResize</h3>
+                        <h5>AutoResize</h5>
                         <p>In auto resize mode, textarea grows instead of displaying a scrollbar.</p>
 <CodeHighlight>
 {`
@@ -125,7 +125,7 @@ import { InputTextarea } from 'primereact/inputtextarea';
 `}
 </CodeHighlight>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <p>InputTextarea passes any attribute to the underlying textarea element, additional attributes are as follows;</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -160,7 +160,7 @@ import { InputTextarea } from 'primereact/inputtextarea';
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming">theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -179,7 +179,7 @@ import { InputTextarea } from 'primereact/inputtextarea';
                             </table>
                         </div>
 
-                        <h3>Dependencies</h3>
+                        <h5>Dependencies</h5>
                         <p>None.</p>
                     </TabPanel>
 

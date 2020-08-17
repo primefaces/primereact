@@ -120,13 +120,13 @@ const ListBoxDemo = () => {
 
     return (
         <div>
-            <h3 className="first">Single</h3>
+            <h3 className="first">Single</h5>
             <ListBox value={selectedCity} options={cities} onChange={(e) => setSelectedCity(e.value)} optionLabel="name"/>
 
-            <h3>Multiple</h3>
+            <h5>Multiple</h5>
             <ListBox value={selectedCities} options={cities} onChange={(e) => setSelectedCities(e.value)} multiple={true} optionLabel="name"/>
 
-            <h3>Advanced</h3>
+            <h5>Advanced</h5>
             <ListBox value={selectedCar} filter={true} filterPlaceholder="Search" options={cars} onChange={(e) => setSelectedCar(e.value)} itemTemplate={carTemplate}
                             style={{width: '15em'}} listStyle={{maxHeight: '250px'}}  />
         </div>
@@ -178,13 +178,13 @@ const ListBoxDemo = () => {
 
     return (
         <div>
-            <h3 className="first">Single</h3>
+            <h3 className="first">Single</h5>
             <ListBox value={selectedCity} options={cities} onChange={(e) => setSelectedCity(e.value)} optionLabel="name"/>
 
-            <h3>Multiple</h3>
+            <h5>Multiple</h5>
             <ListBox value={selectedCities} options={cities} onChange={(e) => setSelectedCities(e.value)} multiple={true} optionLabel="name"/>
 
-            <h3>Advanced</h3>
+            <h5>Advanced</h5>
             <ListBox value={selectedCar} filter={true} filterPlaceholder="Search" options={cars} onChange={(e) => setSelectedCar(e.value)} itemTemplate={carTemplate}
                             style={{width: '15em'}} listStyle={{maxHeight: '250px'}}  />
         </div>
@@ -205,14 +205,14 @@ const ListBoxDemo = () => {
     <TabView>
         <TabPanel header="Documentation">
 
-            <h3>Import</h3>
+            <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { ListBox } from 'primereact/listbox';
 `}
 </CodeHighlight>
 
-            <h3>Getting Started</h3>
+            <h5>Getting Started</h5>
             <p>Listbox is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with the options collection. There are two alternatives
                 of how to define the options property; One way is providing a collection of <i>SelectItem</i> instances having label-value pairs
                 whereas other way is providing an array of arbitrary objects along with the <i>optionLabel</i> and <i>optionValue</i> properties to specify the label/value field pair.
@@ -258,7 +258,7 @@ const cities = [
             </CodeHighlight>
             <p>When <i>optionValue</i> is not defined, value of an option refers to the option object itself.</p>
 
-            <h3>Selection</h3>
+            <h5>Selection</h5>
             <p>Listbox allows selection of either single or multiple items. In single case, model should be a single object reference whereas in multiple case should be an array. Multiple items can either be selected
                 using metaKey or toggled individually depending on the value of <i>metaKeySelection</i> property value which is true by default. On touch enabled
                 devices metaKeySelection is turned off automatically.</p>
@@ -269,7 +269,7 @@ const cities = [
 `}
 </CodeHighlight>
 
-            <h3>Custom Content</h3>
+            <h5>Custom Content</h5>
             <p>Label of an option is used as the display text of an item by default, for custom content support define an itemTemplate function that gets the option as a parameter and returns the content.</p>
 
 <CodeHighlight>
@@ -285,7 +285,7 @@ itemTemplate(option) {
 }
 `}
 </CodeHighlight>
-            <h3>Filtering</h3>
+            <h5>Filtering</h5>
             <p>Options can be filtered using an input field in the overlay by enabling the <i>filter</i> property. By default filtering is done against
             label of the items and <i>filterBy</i> property is available to choose one or more properties of the options. In addition <i>filterMatchMode</i> can be utilized
             to define the filtering algorithm, valid options are "contains" (default), "startsWith", "endsWith", "equals" and "notEquals".</p>
@@ -296,7 +296,7 @@ itemTemplate(option) {
 `}
 </CodeHighlight>
 
-            <h3>SelectItem API</h3>
+            <h5>SelectItem API</h5>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -342,7 +342,7 @@ itemTemplate(option) {
                 </table>
             </div>
 
-            <h3>Properties</h3>
+            <h5>Properties</h5>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -491,7 +491,7 @@ itemTemplate(option) {
                 </table>
             </div>
 
-            <h3>Events</h3>
+            <h5>Events</h5>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -513,7 +513,7 @@ itemTemplate(option) {
                 </table>
             </div>
 
-            <h3>Styling</h3>
+            <h5>Styling</h5>
             <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
@@ -548,7 +548,7 @@ itemTemplate(option) {
                 </table>
             </div>
 
-            <h3>Dependencies</h3>
+            <h5>Dependencies</h5>
             <p>None.</p>
         </TabPanel>
 

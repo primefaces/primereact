@@ -107,10 +107,10 @@ const MenuDemo = () => {
 
     return (
         <div className="button-demo">
-            <h3 className="first">Basic</h3>
+            <h3 className="first">Basic</h5>
             <Menu model={items}/>
 
-            <h3>Popup</h3>
+            <h5>Popup</h5>
             <Menu model={items} popup={true} ref={menu} id="popup_menu"/>
             <Button label="Show" icon="pi pi-bars" onClick={(event) => menu.current.toggle(event)} aria-controls="popup_menu" aria-haspopup={true}/>
         </div>
@@ -143,10 +143,10 @@ const MenuDemo = () => {
 
     return (
         <div className="button-demo">
-            <h3 className="first">Basic</h3>
+            <h3 className="first">Basic</h5>
             <Menu model={items}/>
 
-            <h3>Popup</h3>
+            <h5>Popup</h5>
             <Menu model={items} popup={true} ref={menu} id="popup_menu"/>
             <Button label="Show" icon="pi pi-bars" onClick={(event) => menu.current.toggle(event)} aria-controls="popup_menu" aria-haspopup={true}/>
         </div>
@@ -174,17 +174,17 @@ const MenuDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { Menu } from 'primereact/menu';
 `}
 </CodeHighlight>
 
-                        <h3>MenuModel API</h3>
+                        <h5>MenuModel API</h5>
                         <p>Menu uses the common menumodel api to define its items, visit <Link to="/menumodel"> MenuModel API</Link> for details.</p>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>Menu requires a collection of menuitems as its model.</p>
 <CodeHighlight>
 {`
@@ -201,7 +201,7 @@ let items = [
 `}
 </CodeHighlight>
 
-                        <h3>SubMenus</h3>
+                        <h5>SubMenus</h5>
                         <p>Menu supports one level of nesting via subitems of an item.</p>
 <CodeHighlight lang="js">
 {`
@@ -220,7 +220,7 @@ let items: [
 `}
 </CodeHighlight>
 
-                        <h3>Popup Mode</h3>
+                        <h5>Popup Mode</h5>
                         <p>Menu is inline by default whereas popup mode is supported by enabling popup property and calling toggle method with an event of the target.</p>
 
 <CodeHighlight>
@@ -230,7 +230,7 @@ let items: [
 `}
 </CodeHighlight>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -294,7 +294,7 @@ let items: [
                             </table>
                         </div>
 
-                        <h3>Methods</h3>
+                        <h5>Methods</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -324,7 +324,7 @@ let items: [
                             </table>
                         </div>
 
-                        <h3>Events</h3>
+                        <h5>Events</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -349,7 +349,7 @@ let items: [
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -384,7 +384,7 @@ let items: [
                             </table>
                         </div>
 
-                        <h3>Dependencies</h3>
+                        <h5>Dependencies</h5>
                         <p>None.</p>
                     </TabPanel>
 
