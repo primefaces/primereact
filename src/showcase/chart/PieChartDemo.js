@@ -86,32 +86,45 @@ export class PieChartDemoDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {Chart} from 'primereact/chart';
+import { Chart } from 'primereact/chart';
 
 export class PieChartDemo extends Component {
 
-    render() {
-        const data = {
-            labels: ['A','B','C'],
+    constructor(props) {
+        super(props);
+
+        this.chartData = {
+            labels: ['A', 'B', 'C'],
             datasets: [
                 {
                     data: [300, 50, 100],
                     backgroundColor: [
-                        "#FF6384",
-                        "#36A2EB",
-                        "#FFCE56"
+                        "#42A5F5",
+                        "#66BB6A",
+                        "#FFA726"
                     ],
                     hoverBackgroundColor: [
-                        "#FF6384",
-                        "#36A2EB",
-                        "#FFCE56"
+                        "#64B5F6",
+                        "#81C784",
+                        "#FFB74D"
                     ]
-                }]
-            };
+                }
+            ]
+        };
 
+        this.lightOptions = {
+            legend: {
+                labels: {
+                    fontColor: '#495057'
+                }
+            }
+        };
+    }
+
+    render() {
         return (
-            <div>
-                <Chart type="pie" data={data} />
+            <div className="card">
+                <Chart type="pie" data={this.chartData} options={this.lightOptions} />
             </div>
         )
     }

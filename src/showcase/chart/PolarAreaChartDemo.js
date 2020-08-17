@@ -104,12 +104,14 @@ export class PolarAreaChartDemoDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {Chart} from 'primereact/chart';
+import { Chart } from 'primereact/chart';
 
 export class PolarAreaChartDemo extends Component {
 
-    render() {
-        const data = {
+    constructor(props) {
+        super(props);
+
+        this.chartData = {
             datasets: [{
                 data: [
                     11,
@@ -119,11 +121,11 @@ export class PolarAreaChartDemo extends Component {
                     14
                 ],
                 backgroundColor: [
-                    "#FF6384",
-                    "#4BC0C0",
-                    "#FFCE56",
-                    "#E7E9ED",
-                    "#36A2EB"
+                    "#42A5F5",
+                    "#66BB6A",
+                    "#FFA726",
+                    "#26C6DA",
+                    "#7E57C2"
                 ],
                 label: 'My dataset'
             }],
@@ -136,9 +138,24 @@ export class PolarAreaChartDemo extends Component {
             ]
         };
 
+        this.lightOptions = {
+            legend: {
+                labels: {
+                    fontColor: '#495057'
+                }
+            },
+            scale: {
+                gridLines: {
+                    color: '#ebedef'
+                }
+            }
+        };
+    }
+
+    render() {
         return (
-            <div>
-                <Chart type="polarArea" data={data} />
+            <div className="card">
+                <Chart type="polarArea" data={this.chartData} options={options} />
             </div>
         )
     }

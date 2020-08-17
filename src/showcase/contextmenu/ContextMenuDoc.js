@@ -14,7 +14,7 @@ export class ContextMenuDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {ContextMenu} from 'primereact/contextmenu';
+import { ContextMenu } from 'primereact/contextmenu';
 
 export class ContextMenuDemo extends Component {
 
@@ -23,132 +23,132 @@ export class ContextMenuDemo extends Component {
 
         this.items = [
             {
-               label:'File',
-               icon:'pi pi-fw pi-file',
-               items:[
-                  {
-                     label:'New',
-                     icon:'pi pi-fw pi-plus',
-                     items:[
-                        {
-                           label:'Bookmark',
-                           icon:'pi pi-fw pi-bookmark'
-                        },
-                        {
-                           label:'Video',
-                           icon:'pi pi-fw pi-video'
-                        },
+                label: 'File',
+                icon: 'pi pi-fw pi-file',
+                items: [
+                    {
+                        label: 'New',
+                        icon: 'pi pi-fw pi-plus',
+                        items: [
+                            {
+                                label: 'Bookmark',
+                                icon: 'pi pi-fw pi-bookmark'
+                            },
+                            {
+                                label: 'Video',
+                                icon: 'pi pi-fw pi-video'
+                            },
 
-                     ]
-                  },
-                  {
-                     label:'Delete',
-                     icon:'pi pi-fw pi-trash'
-                  },
-                  {
-                     separator:true
-                  },
-                  {
-                     label:'Export',
-                     icon:'pi pi-fw pi-external-link'
-                  }
-               ]
+                        ]
+                    },
+                    {
+                        label: 'Delete',
+                        icon: 'pi pi-fw pi-trash'
+                    },
+                    {
+                        separator: true
+                    },
+                    {
+                        label: 'Export',
+                        icon: 'pi pi-fw pi-external-link'
+                    }
+                ]
             },
             {
-               label:'Edit',
-               icon:'pi pi-fw pi-pencil',
-               items:[
-                  {
-                     label:'Left',
-                     icon:'pi pi-fw pi-align-left'
-                  },
-                  {
-                     label:'Right',
-                     icon:'pi pi-fw pi-align-right'
-                  },
-                  {
-                     label:'Center',
-                     icon:'pi pi-fw pi-align-center'
-                  },
-                  {
-                     label:'Justify',
-                     icon:'pi pi-fw pi-align-justify'
-                  },
+                label: 'Edit',
+                icon: 'pi pi-fw pi-pencil',
+                items: [
+                    {
+                        label: 'Left',
+                        icon: 'pi pi-fw pi-align-left'
+                    },
+                    {
+                        label: 'Right',
+                        icon: 'pi pi-fw pi-align-right'
+                    },
+                    {
+                        label: 'Center',
+                        icon: 'pi pi-fw pi-align-center'
+                    },
+                    {
+                        label: 'Justify',
+                        icon: 'pi pi-fw pi-align-justify'
+                    },
 
-               ]
+                ]
             },
             {
-               label:'Users',
-               icon:'pi pi-fw pi-user',
-               items:[
-                  {
-                     label:'New',
-                     icon:'pi pi-fw pi-user-plus',
+                label: 'Users',
+                icon: 'pi pi-fw pi-user',
+                items: [
+                    {
+                        label: 'New',
+                        icon: 'pi pi-fw pi-user-plus',
 
-                  },
-                  {
-                     label:'Delete',
-                     icon:'pi pi-fw pi-user-minus',
+                    },
+                    {
+                        label: 'Delete',
+                        icon: 'pi pi-fw pi-user-minus',
 
-                  },
-                  {
-                     label:'Search',
-                     icon:'pi pi-fw pi-users',
-                     items:[
-                        {
-                           label:'Filter',
-                           icon:'pi pi-fw pi-filter',
-                           items:[
-                              {
-                                 label:'Print',
-                                 icon:'pi pi-fw pi-print'
-                              }
-                           ]
-                        },
-                        {
-                           icon:'pi pi-fw pi-bars',
-                           label:'List'
-                        }
-                     ]
-                  }
-               ]
+                    },
+                    {
+                        label: 'Search',
+                        icon: 'pi pi-fw pi-users',
+                        items: [
+                            {
+                                label: 'Filter',
+                                icon: 'pi pi-fw pi-filter',
+                                items: [
+                                    {
+                                        label: 'Print',
+                                        icon: 'pi pi-fw pi-print'
+                                    }
+                                ]
+                            },
+                            {
+                                icon: 'pi pi-fw pi-bars',
+                                label: 'List'
+                            }
+                        ]
+                    }
+                ]
             },
             {
-               label:'Events',
-               icon:'pi pi-fw pi-calendar',
-               items:[
-                  {
-                     label:'Edit',
-                     icon:'pi pi-fw pi-pencil',
-                     items:[
-                        {
-                           label:'Save',
-                           icon:'pi pi-fw pi-calendar-plus'
-                        },
-                        {
-                           label:'Delete',
-                           icon:'pi pi-fw pi-calendar-minus'
-                        }
-                     ]
-                  },
-                  {
-                     label:'Archieve',
-                     icon:'pi pi-fw pi-calendar-times',
-                     items:[
-                        {
-                           label:'Remove',
-                           icon:'pi pi-fw pi-calendar-minus'
-                        }
-                     ]
-                  }
-               ]
+                label: 'Events',
+                icon: 'pi pi-fw pi-calendar',
+                items: [
+                    {
+                        label: 'Edit',
+                        icon: 'pi pi-fw pi-pencil',
+                        items: [
+                            {
+                                label: 'Save',
+                                icon: 'pi pi-fw pi-calendar-plus'
+                            },
+                            {
+                                label: 'Delete',
+                                icon: 'pi pi-fw pi-calendar-minus'
+                            }
+                        ]
+                    },
+                    {
+                        label: 'Archieve',
+                        icon: 'pi pi-fw pi-calendar-times',
+                        items: [
+                            {
+                                label: 'Remove',
+                                icon: 'pi pi-fw pi-calendar-minus'
+                            }
+                        ]
+                    }
+                ]
             },
             {
-               separator:true
+                separator: true
             },
             {
-               label:'Quit',
-               icon:'pi pi-fw pi-power-off'
+                label: 'Quit',
+                icon: 'pi pi-fw pi-power-off'
             }
         ];
     }
@@ -156,9 +156,11 @@ export class ContextMenuDemo extends Component {
     render() {
         return (
             <div>
-                <ContextMenu model={this.items} ref={el => this.cm = el}></ContextMenu>
+                <div className="card">
+                    <ContextMenu model={this.items} ref={el => this.cm = el}></ContextMenu>
 
-                <img src="showcase/images/logo.png" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => this.cm.show(e)} aria-haspopup={true}/>
+                    <img src="showcase/demo/images/nature/nature3.jpg" alt="Logo" onContextMenu={(e) => this.cm.show(e)} aria-haspopup />
+                </div>
             </div>
         );
     }
@@ -478,19 +480,19 @@ const ContextMenuDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight lang="js">
-                            {`
-import {ContextMenu} from 'primereact/contextmenu';
-
-`}</CodeHighlight>
+<CodeHighlight lang="js">
+{`
+import { ContextMenu } from 'primereact/contextmenu';
+`}
+</CodeHighlight>
                         <h3>MenuItem API</h3>
                         <p>ContextMenu uses the common menu item api to define its items, visit <Link to="/menumodel"> MenuModel </Link> for details.</p>
 
                         <h3>Getting Started</h3>
                         <p>Menu requires a collection of menuitems as its model.</p>
-                        <CodeHighlight lang="js">
-                            {`
-const items:[
+<CodeHighlight lang="js">
+{`
+const items: [
     {
        label:'File',
        icon:'pi pi-fw pi-file',
@@ -621,39 +623,35 @@ const items:[
        icon:'pi pi-fw pi-power-off'
     }
  ];
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <CodeHighlight>
-                            {`
+<CodeHighlight>
+{`
 <ContextMenu model={items}/>
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h3>Document Menu</h3>
                         <p>Setting global property attaches the context menu to the document.
                         </p>
 
 
-                        <CodeHighlight>
-                            {`
+<CodeHighlight>
+{`
 <ContextMenu global={true} model={items}/>
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h3>Element Menu</h3>
                         <p>ContextMenu is attached to a custom element manually using the reference and calling the show(event) method.</p>
 
-                        <CodeHighlight>
-                            {`
+<CodeHighlight>
+{`
 <ContextMenu model={this.state.imageItems} ref={el => this.cm = el}></ContextMenu>
 <img src="showcase/images/logo.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => this.cm.show(e)}/>
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
 
 

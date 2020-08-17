@@ -109,12 +109,14 @@ export class RadarChartDemoDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {Chart} from 'primereact/chart';
+import { Chart } from 'primereact/chart';
 
 export class RadarChartDemo extends Component {
 
-    render() {
-        const data = {
+    constructor(props) {
+        super(props);
+
+        this.chartData = {
             labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
             datasets: [
                 {
@@ -140,9 +142,27 @@ export class RadarChartDemo extends Component {
             ]
         };
 
+        this.lightOptions = {
+            legend: {
+                labels: {
+                    fontColor: '#495057'
+                }
+            },
+            scale: {
+                pointLabels: {
+                    fontColor: '#495057'
+                },
+                gridLines: {
+                    color: '#ebedef'
+                }
+            }
+        };
+    }
+
+    render() {
         return (
-            <div>
-                <Chart type="radar" data={data} />
+            <div className="card">
+                <Chart type="radar" data={this.chartData} options={this.lightOptions} />
             </div>
         )
     }
