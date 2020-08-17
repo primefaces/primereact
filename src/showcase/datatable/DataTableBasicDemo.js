@@ -161,15 +161,9 @@ const DataTableBasicDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="DataTableBasicDemo" sources={[key, value]} service="CarService" data="cars-small" />
-                                </TabPanel>
-                            );
-                        })
-                    }
+                    <TabPanel header="Source">
+                        <LiveEditor name="DataTableBasicDemo" sources={this.sources} service="CarService" data="cars-small" />
+                    </TabPanel>
                 </TabView>
             </div>
         )
