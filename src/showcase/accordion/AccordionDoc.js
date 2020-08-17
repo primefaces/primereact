@@ -444,15 +444,9 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
 
                     </TabPanel>
 
-                    {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="AccordionDemo" sources={[key, value]} />
-                                </TabPanel>
-                            );
-                        })
-                    }
+                    <TabPanel header="Source">
+                        <LiveEditor name="AccordionDemo" sources={this.sources} />
+                    </TabPanel>
                 </TabView>
             </div>
         );

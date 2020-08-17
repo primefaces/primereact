@@ -383,15 +383,9 @@ const ComboChartDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="ComboChartDemo" sources={[key, value]} dependencies={{ 'chart.js': '2.7.3' }} />
-                                </TabPanel>
-                            );
-                        })
-                    }
+                    <TabPanel header="Source">
+                        <LiveEditor name="ComboChartDemo" sources={this.sources} dependencies={{ 'chart.js': '2.7.3' }} />
+                    </TabPanel>
                 </TabView>
             </div>
         )
