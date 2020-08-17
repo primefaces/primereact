@@ -111,7 +111,7 @@ export class GalleriaThumbnailDemoDoc extends Component {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Source">
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 import React, { Component } from 'react';
 import { PhotoService } from '../service/PhotoService';

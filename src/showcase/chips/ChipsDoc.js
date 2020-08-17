@@ -136,7 +136,7 @@ const ChipsDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 import {Chips} from 'primereact/chips';
 
@@ -161,7 +161,7 @@ import {Chips} from 'primereact/chips';
 
 `}
                         </CodeHighlight>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 customChip(item) {
     return (

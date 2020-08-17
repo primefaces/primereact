@@ -291,7 +291,7 @@ const CarouselDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 import {Carousel} from 'primereact/carousel';
 
@@ -307,7 +307,7 @@ import {Carousel} from 'primereact/carousel';
 
 `}
                         </CodeHighlight>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 constructor() {
     super();
@@ -348,7 +348,7 @@ carTemplate(car) {
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 const responsiveOptions = [
     {

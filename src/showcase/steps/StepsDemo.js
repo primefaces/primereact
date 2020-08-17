@@ -263,7 +263,7 @@ const StepsDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 import {Steps} from 'primereact/steps';
 
@@ -274,7 +274,7 @@ import {Steps} from 'primereact/steps';
                         <h3>Getting Started</h3>
                         <p>TabMenu requires a collection of menuitems as its model.</p>
 
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 const items = [
     {label: 'Personal'},
@@ -304,7 +304,7 @@ const items = [
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 const interactiveItems = [{
     label: 'Personal',

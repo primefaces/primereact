@@ -277,7 +277,7 @@ const DataScrollerDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 {`
 import {DataScroller} from 'primereact/datascroller';
 
@@ -293,7 +293,7 @@ import {DataScroller} from 'primereact/datascroller';
 
 `}
 </CodeHighlight>
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 {`
 constructor() {
     super();
@@ -338,7 +338,7 @@ carTemplate(car) {
 `}
 </CodeHighlight>
 
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 {`
 loadData(event) {
     //event.first = First row offset

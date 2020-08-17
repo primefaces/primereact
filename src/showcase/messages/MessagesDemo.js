@@ -469,7 +469,7 @@ const MessagesDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 import {Messages} from 'primereact/messages';
 import {Message} from 'primereact/message';
@@ -490,7 +490,7 @@ import {Message} from 'primereact/message';
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 this.messages.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
 
@@ -575,7 +575,7 @@ this.messages.show({severity: 'success', summary: 'Success Message', detail: 'Or
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 showSuccess() {
     this.messages.show({ severity: 'success', summary: 'Success Message', detail: 'Order submitted' });
@@ -627,7 +627,7 @@ this.messages.replace(newMessages);
                         <h3>Closable</h3>
                         <p>Messages are closable by default resulting in a close icon being displayed on top right corner. In order to disable closable messages, set <i>closable</i> to false.</p>
 
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 this.messages.show({closable: false, severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
 
@@ -638,7 +638,7 @@ this.messages.show({closable: false, severity: 'error', summary: 'Error Message'
                         <p>Messages are cleared automatically after the timeout defined by <i>life</i> property which is 3 seconds by default. Use <i>sticky</i> mode to make them stay until
                 they are manually removed.</p>
 
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 //sticky
 this.messages.show({ sticky: true, severity: 'error', summary: 'Error Message', detail: 'Validation failed' });

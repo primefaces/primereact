@@ -222,7 +222,7 @@ const MenuDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 import {Menu} from 'primereact/menu';
 
@@ -241,7 +241,7 @@ import {Menu} from 'primereact/menu';
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 let items = [
     {label: 'New', icon: 'pi pi-fw pi-plus'},
@@ -253,7 +253,7 @@ let items = [
 
                         <h3>SubMenus</h3>
                         <p>Menu supports one level of nesting via subitems of an item.</p>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 let items: [
     {

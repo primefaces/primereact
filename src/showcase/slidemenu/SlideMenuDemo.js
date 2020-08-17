@@ -657,7 +657,7 @@ const SlideMenuDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 {`
 import {SlideMenu} from 'primereact/slidemenu';
 
@@ -670,7 +670,7 @@ import {SlideMenu} from 'primereact/slidemenu';
                         <h3>Getting Started</h3>
                         <p>Menu requires a collection of menuitems as its model.</p>
 
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 {`
 const items:[
     {

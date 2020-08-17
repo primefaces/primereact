@@ -575,7 +575,7 @@ const MegaMenuDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 import {MegaMenu} from 'primereact/megamenu';
 
@@ -587,7 +587,7 @@ import {MegaMenu} from 'primereact/megamenu';
                         <h3>Getting Started</h3>
                         <p>Layout of the MegaMenu is managed by the <a href="https://github.com/primefaces/primeflex">PrimeFlex</a> that can be downloaded from npm.</p>
 
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 npm install primeflex --save
 
@@ -596,7 +596,7 @@ npm install primeflex --save
 
                         <p>MegaMenu requires a collection of menuitems as its model.</p>
 
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 const items: [
     {

@@ -228,7 +228,7 @@ export class GalleriaAdvancedDemoDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 import {Galleria} from 'primereact/galleria';
 
@@ -244,7 +244,7 @@ import {Galleria} from 'primereact/galleria';
 
 `}
                         </CodeHighlight>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 constructor() {
     super();
@@ -303,7 +303,7 @@ previewTemplate(item) {
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 const responsiveOptions = [
     {
@@ -616,7 +616,7 @@ const responsiveOptions = [
                     </TabPanel>
 
                     <TabPanel header="Source">
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
@@ -807,7 +807,7 @@ export class GalleriaDemo extends Component {
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 // SCSS codes
 

@@ -219,7 +219,7 @@ const FullCalendarDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
 {`
 import {FullCalendar} from 'primereact/fullcalendar';
 
@@ -230,7 +230,7 @@ import {FullCalendar} from 'primereact/fullcalendar';
                         <p>FullCalendar is a wrapper around on <a href="https://fullcalendar.io/docs/v4">FullCalendar 4.0.1+</a> so fullcalendar core needs to be included in your project.
                         For a complete documentation and samples please refer to the <a href="https://fullcalendar.io/">fullcalendar website</a>.</p>
 
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
 {`
 npm install @fullcalendar/core --save
 
@@ -238,7 +238,7 @@ npm install @fullcalendar/core --save
                         </CodeHighlight>
 
                         <p>FullCalendar is plugin based so install the plugins you require and define them with the options property.</p>
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 {`
 npm install @fullcalendar/daygrid --save
 npm install @fullcalendar/timegrid --save
@@ -249,7 +249,7 @@ npm install @fullcalendar/interaction --save
 
                         <p>FullCalendar properties are defined with the <i>options</i> property and the events to display with the <i>events</i> property which should be an array and defined using the events property. Refer to <a href="https://fullcalendar.io/docs/event-object">Event API</a> for more information.</p>
 
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
 {`
 export class FullCalendarDemo extends Component {
 
@@ -289,7 +289,7 @@ export class FullCalendarDemo extends Component {
                         <h3>Callbacks</h3>
                         <p>Callbacks of the FullCalendar such as dateClick are also defined with the options property.</p>
 
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
 {`
 let options: {
     defaultDate: '2017-02-01',
@@ -316,7 +316,7 @@ let options: {
 
 `}
                         </CodeHighlight>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
 {`
 this.fc.calendar.nextYear();
 

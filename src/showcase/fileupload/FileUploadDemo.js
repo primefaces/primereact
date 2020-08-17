@@ -218,7 +218,7 @@ const FileUploadDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 {`
 import {FileUpload} from 'primereact/fileupload';
 
@@ -307,7 +307,7 @@ import {FileUpload} from 'primereact/fileupload';
 
 `}
 </CodeHighlight>
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 {`
 myUploader(event) {
     //event.files == files to upload

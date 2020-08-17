@@ -339,7 +339,7 @@ const SidebarDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 import {Sidebar} from 'primereact/sidebar';
 

@@ -450,7 +450,7 @@ const CalendarDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 import { Calendar } from 'primereact/calendar';
 
@@ -592,7 +592,7 @@ import { Calendar } from 'primereact/calendar';
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 let es = {
     firstDayOfWeek: 1,
@@ -621,7 +621,7 @@ let es = {
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 dateTemplate(date) {
     if (date.day > 10 && date.day < 15) {

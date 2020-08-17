@@ -435,7 +435,7 @@ const GrowlDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 import {Growl} from 'primereact/growl';
 
@@ -455,7 +455,7 @@ import {Growl} from 'primereact/growl';
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 this.growl.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
 
@@ -540,7 +540,7 @@ this.growl.show({severity: 'success', summary: 'Success Message', detail: 'Order
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 showSuccess() {
     this.growl.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
@@ -572,7 +572,7 @@ showMultiple() {
                         <h3>Closable</h3>
                         <p>Growls are closable by default resulting in a close icon being displayed on top right corner. In order to disable closable messages, set closable to false.</p>
 
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 this.growl.show({closable: false, severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
 
@@ -583,7 +583,7 @@ this.growl.show({closable: false, severity: 'error', summary: 'Error Message', d
                         <p>Messages are cleared automatically after the timeout defined by <i>life</i> property which is 3 seconds by default. Use <i>sticky</i> mode to make them stay until
             they are manually removed.</p>
 
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 //sticky
 this.growl.show({sticky: true, severity: 'error', summary: 'Error Message', detail: 'Validation failed'});

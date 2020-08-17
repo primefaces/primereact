@@ -146,7 +146,7 @@ const EditorDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 import {Editor} from 'primereact/editor';
 
@@ -314,7 +314,7 @@ const header = (
                         <h3>Dependencies</h3>
                         <p><a href="http://quilljs.com">Quill</a> Editor 1.3+.</p>
                         <p>Resources of quill needs to be added to your application.</p>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 npm install quill --save
 

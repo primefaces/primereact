@@ -329,7 +329,7 @@ const TabViewDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 import {TabView,TabPanel} from 'primereact/tabview';
 

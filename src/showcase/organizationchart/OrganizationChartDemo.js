@@ -650,7 +650,7 @@ body .organizationchart-demo .department-cto .p-node-toggler {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 import {OrganizationChart} from 'primereact/organizationchart';
 
@@ -660,7 +660,7 @@ import {OrganizationChart} from 'primereact/organizationchart';
 
                         <h3>Getting Started</h3>
                         <p>OrganizationChart requires a model of TreeNode as its value.</p>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 export class OrganizationChartDemo extends Component {
 
@@ -720,7 +720,7 @@ export class OrganizationChartDemo extends Component {
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 
 nodeTemplate(node) {

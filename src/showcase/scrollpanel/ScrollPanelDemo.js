@@ -91,7 +91,7 @@ export class ScrollPanelDoc extends Component {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 import {ScrollPanel} from 'primereact/scrollpanel';
 
@@ -244,7 +244,7 @@ import {ScrollPanel} from 'primereact/scrollpanel';
                     </TabPanel>
 
                     <TabPanel header="Source">
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 import React, {Component} from 'react';
 import {ScrollPanel} from 'primereact/scrollpanel';

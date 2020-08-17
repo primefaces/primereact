@@ -674,7 +674,7 @@ const DataViewDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 import {DataView, DataViewLayoutOptions} from 'primereact/dataview';
 
@@ -684,7 +684,7 @@ import {DataView, DataViewLayoutOptions} from 'primereact/dataview';
                         <h3>Getting Started</h3>
                         <p>Layout of the DataView is managed by the <a href="https://github.com/primefaces/primeflex">PrimeFlex</a> that can be downloaded from npm.</p>
 
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 {`
 npm install primeflex --save
 
@@ -695,7 +695,7 @@ npm install primeflex --save
                             Cars are loaded by a CarService that connects to a server to fetch the cars.</p>
 
                         <p>DataView has two layout modes; <i>list</i> and <i>grid</i> where <i>itemTemplate</i> function is called by passing the item to render along with the layout mode.</p>
-                            <CodeHighlight lang="javascript">
+                            <CodeHighlight lang="js">
 {`
 constructor() {
     super();
@@ -836,7 +836,7 @@ itemTemplate(car, layout) {
                         <p><i>sortField</i> and <i>sortOrder</i> properties are available for sorting functionality, for flexibility there is no built-in UI available so that a custom UI can be used for the sorting element.
                             Here is an example that uses a dropdown where simply updating the sortField-sortOrder bindings of the DataView initiates sorting.</p>
 
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                         {`
 const sortOptions = [
     {label: 'Newest First', value: '!year'},

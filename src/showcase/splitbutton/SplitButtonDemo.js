@@ -300,7 +300,7 @@ const SplitButtonDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 {`
 import {SplitButton} from 'primereact/splitbutton';
 
@@ -309,7 +309,7 @@ import {SplitButton} from 'primereact/splitbutton';
 
                         <h3>Getting Started</h3>
                         <p>SplitButton has a default command button and a collection of additional options defined by the <i>model</i> property.</p>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
 {`
 export class SplitButtonDemo extends Component {
 

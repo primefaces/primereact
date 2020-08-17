@@ -108,7 +108,7 @@ const CaptchaDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 import {Captcha} from 'primereact/captcha';
 
@@ -127,7 +127,7 @@ import {Captcha} from 'primereact/captcha';
                         <h3>Verification</h3>
                         <p>In order to ensure if a response token is valid, verification against recaptcha api needs to be done at backend. <a href="https://developers.google.com/recaptcha/docs/verify">Read more</a> at
                         official documentation.</p>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 showResponse(response) {
     //call to a backend to verify against recaptcha with private key

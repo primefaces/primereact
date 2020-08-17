@@ -637,7 +637,7 @@ const MenubarDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 import {Menubar} from 'primereact/menubar';
 
@@ -653,7 +653,7 @@ import {Menubar} from 'primereact/menubar';
 <Menubar model={items}/>
 
 `}</CodeHighlight>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 const items:[
     {

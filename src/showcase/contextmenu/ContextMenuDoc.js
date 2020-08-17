@@ -478,7 +478,7 @@ const ContextMenuDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 import {ContextMenu} from 'primereact/contextmenu';
 
@@ -488,7 +488,7 @@ import {ContextMenu} from 'primereact/contextmenu';
 
                         <h3>Getting Started</h3>
                         <p>Menu requires a collection of menuitems as its model.</p>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 const items:[
     {

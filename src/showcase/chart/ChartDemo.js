@@ -30,7 +30,7 @@ class ChartDoc extends Component {
         return (
             <div className="content-section documentation">
                 <h3>Import</h3>
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 {`
 import {Chart} from 'primereact/chart';
 
@@ -84,7 +84,7 @@ const data = {
 `}
 </CodeHighlight>
 
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 {`
 const options = {
         title: {

@@ -221,7 +221,7 @@ const TreeTableResponsiveDemo = () => {
         return (
             <>
                 <p>TreeTableDemo.css</p>
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 { this.extFiles['index.css'] }
 </CodeHighlight>
 

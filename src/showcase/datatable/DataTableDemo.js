@@ -1030,7 +1030,7 @@ const DataTableDemo = () => {
         return (
             <>
                 <p>DataTableDemo.css</p>
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 { this.extFiles['index.css'] }
 </CodeHighlight>
 
@@ -1044,7 +1044,7 @@ const DataTableDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 {`
 import {DataTable} from 'primereact/datatable';
 
@@ -1056,7 +1056,7 @@ import {DataTable} from 'primereact/datatable';
                 Note that this is only for demo purposes, DataTable does not have any restrictions on how data is provided.
             </p>
 
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 {`
 import axios from 'axios';
 
@@ -1082,7 +1082,7 @@ export class CarService {
 </CodeHighlight>
 
             <p>Following sample datatable has 4 columns and retrieves the data from a service on componentDidMount.</p>
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 {`
 export class DataTableDemo extends Component {
 
@@ -1112,7 +1112,7 @@ export class DataTableDemo extends Component {
 </CodeHighlight>
 
             <p>Dynamic columns are also possible by creating the column component dynamically.</p>
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 {`
 export class DataTableDemo extends Component {
 
@@ -1442,7 +1442,7 @@ export class DataTableDemo extends Component {
                 On the other hand, <i>header</i> and <i>footer</i> properties of a column are used to define the content of these sections by accepting either simple string values or JSX for advanced content. Similarly DataTable itself
                 also provides <i>header</i> and <i>footer</i> properties for the main header and footer of the table.</p>
 
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 {`
 export class DataTableTemplatingDemo extends Component {
 
@@ -1498,7 +1498,7 @@ export class DataTableTemplatingDemo extends Component {
             <h3>Column Group</h3>
             <p>Columns can be grouped at header and footer sections by defining a ColumnGroup component as the <i>headerColumnGroup</i> and <i>footerColumnGroup</i> properties.</p>
 
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 {`
 import React, { Component } from 'react';
 import {DataTable} from 'primereact/datatable';
@@ -1573,7 +1573,7 @@ export class DataTableColGroupDemo extends Component {
             See <Link to="/paginator">paginator</Link> component for more information about further customization options such as <i>paginator template</i>.</p>
 
             <p>Pagination can either be used in <b>Controlled</b> or <b>Uncontrolled</b> manner. In controlled mode, <i>first</i> and <i>onPage</i> properties need to be defined to control the paginator state.</p>
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 {`
 export class DataTablePaginatorDemo extends Component {
 
@@ -1606,7 +1606,7 @@ export class DataTablePaginatorDemo extends Component {
 
             <p>In uncontrolled mode, only <i>paginator</i> and <i>rows</i> need to be enabled. Index of the first record can be still be provided using the <i>first</i> property in uncontrolled mode however
             it is evaluated at initial rendering and ignored in further updates. If you programmatically need to update the paginator state, prefer to use the component as controlled.</p>
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 {`
 export class DataTablePaginatorDemo extends Component {
 
@@ -1697,7 +1697,7 @@ export class DataTablePaginatorDemo extends Component {
 `}
 </CodeHighlight>
 
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 {`
 let multiSortMeta = [];
 multiSortMeta.push({field: 'year', order: 1});
@@ -1734,7 +1734,7 @@ multiSortMeta.push({field: 'brand', order: -1});
 `}
 </CodeHighlight>
 
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 {`
 mysort(event) {
     //event.field = Field to sort
@@ -1745,7 +1745,7 @@ mysort(event) {
 </CodeHighlight>
 
             <p>Getting access to the sorted data is provided by the <i>onValueChange</i> callback.</p>
-            <CodeHighlight lang="javascript">
+            <CodeHighlight lang="js">
 {`
 <DataTable value={this.state.cars} onValueChange={sortedData => console.log(sortedData)}>
     <Column field="vin" header="Vin" sortable={true} />
@@ -1773,7 +1773,7 @@ mysort(event) {
 
             <p>An optional global filter feature is available to search all fields with the same keyword,
                 to implement this place an input component whose value is bound to the globalFilter property of the DataTable.</p>
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 {`
 export class DataTableFilterDemo extends Component {
 
@@ -1812,7 +1812,7 @@ export class DataTableFilterDemo extends Component {
 </CodeHighlight>
 
             <p>By default, input fields are used as filter elements and this can be customized using the <i>filterElement</i> property of the Column that calls the filter function of the table instance by passing the value, field and the match mode.</p>
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 {`
 export class DataTableCustomFilterDemo extends Component {
 
@@ -1890,7 +1890,7 @@ export class DataTableCustomFilterDemo extends Component {
             <p>In case you'd like to display the table as filtered by default on mount, use <i>filters</i> property in <b>Controlled</b> or <b>Uncontrolled</b> manner.
             In controlled mode, <i>filters</i> and <i>onFilter</i> properties need to be defined to control the filtering state.</p>
 
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 {`
 export class DataTableDefaultFilteredDemo extends Component {
 
@@ -1941,7 +1941,7 @@ export class DataTableDefaultFilteredDemo extends Component {
 </CodeHighlight>
 
             <p>Custom filtering is implemented by setting the <i>filterMatchMode</i> property as "custom" and providing a function that takes the data value along with the filter value to return a boolean.</p>
-            <CodeHighlight lang="javascript">
+            <CodeHighlight lang="js">
 {`
 export class DataTableFilterDemo extends Component {
 
@@ -1976,7 +1976,7 @@ export class DataTableFilterDemo extends Component {
 </CodeHighlight>
 
             <p>Getting access to the filtered data is provided by the <i>onValueChange</i> callback.</p>
-            <CodeHighlight lang="javascript">
+            <CodeHighlight lang="js">
 {`
 <DataTable value={this.state.cars} onValueChange={filteredData => console.log(filteredData)}>
     <Column field="vin" header="Vin" filter={true} />
@@ -1994,7 +1994,7 @@ export class DataTableFilterDemo extends Component {
 
             <p>In single mode, selection binding is an object reference.</p>
 
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 {`
 export class DataTableSelectionDemo extends Component {
 
@@ -2027,7 +2027,7 @@ export class DataTableSelectionDemo extends Component {
             <p>In multiple mode, selection binding should be an array and multiple items can either be selected using metaKey or toggled individually depending on the value of metaKeySelection property value which is true by default.
                 On touch enabled devices metaKeySelection is turned off automatically. Additionally ShiftKey is supported for range selection.</p>
 
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 {`
 export class DataTableSelectionDemo extends Component {
 
@@ -2088,7 +2088,7 @@ export class DataTableSelectionDemo extends Component {
 `}
 </CodeHighlight>
 
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 {`
 onEditorValueChange(props, value) {
     let updatedCars = [...this.state.cars];
@@ -2145,7 +2145,7 @@ saleDateEditor(props) {
 `}
 </CodeHighlight>
 
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 {`
 requiredValidator(props) {
     let value = props.rowData[props.field];
@@ -2169,7 +2169,7 @@ requiredValidator(props) {
 `}
 </CodeHighlight>
 
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 {`
 onEditorValueChange(props, value) {
     let updatedCars = [...this.state.cars];
@@ -2238,7 +2238,7 @@ onRowEditCancel(event) {
             <h3>ContextMenu</h3>
             <p>DataTable provides exclusive integration with ContextMenu.  <i>contextMenuSelection</i> and <i>onContextMenuSelectionChange</i> are used to get a reference of the the selected row
             and <i>onContextMenu</i> callback is utilized to display a particular context menu.</p>
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 {`
 export class DataTableContextMenuDemo extends Component {
 
@@ -2302,7 +2302,7 @@ export class DataTableContextMenuDemo extends Component {
                 <i>expandedRows</i> property to read the expanded rows along with the <i>onRowToggle</i> property to update it. <i>expandedRows</i> property either accepts an array of row data or a map whose key is the dataKey of the record.
                 Using expandable rows with a dataKey is suggested for better performance.</p>
 
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 {`
 export class DataTableRowExpansionDemo extends Component {
 
@@ -2426,7 +2426,7 @@ export class DataTableRowExpansionDemo extends Component {
 
             <h3>Data Export</h3>
             <p>DataTable can export its data in CSV format using exportCSV() method.</p>
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 {`
 export class DataTableExportDemo extends Component {
 
@@ -2468,7 +2468,7 @@ export class DataTableExportDemo extends Component {
             <i>rowGroupHeaderTemplate</i> property should be defined to provide the content of the header and optionally <i>rowGroupFooterTemplate</i> is available to provide a footer
             for the group.</p>
 
-            <CodeHighlight lang="javascript">
+            <CodeHighlight lang="js">
             {`
 export class DataTableRowGroupDemo extends Component {
 
@@ -2703,7 +2703,7 @@ export class DataTableLazyDemo extends Component {
                 Also, a special storage implementation can be made with <i>customSaveState</i> and <i>customRestoreState</i> methods using <i>stateStorage="custom"</i>.
                 Currently following features are supported by TableState; paging, sorting, filtering, column resizing, column reordering, row expansion and row selection.</p>
 
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 {`
 export class DataTableStateDemo extends Component {
 

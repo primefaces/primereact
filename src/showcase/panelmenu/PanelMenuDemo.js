@@ -574,7 +574,7 @@ const PanelMenuDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 import {PanelMenu} from 'primereact/panelmenu';
 
@@ -591,7 +591,7 @@ import {PanelMenu} from 'primereact/panelmenu';
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 const items:[
     {

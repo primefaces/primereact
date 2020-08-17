@@ -176,7 +176,7 @@ const CheckboxDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 import {Checkbox} from 'primereact/checkbox';
 
@@ -212,7 +212,7 @@ import {Checkbox} from 'primereact/checkbox';
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 constructor() {
     super();

@@ -278,7 +278,7 @@ const ListBoxDemo = () => {
         <TabPanel header="Documentation">
 
             <h3>Import</h3>
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 {`
 import {ListBox} from 'primereact/listbox';
 
@@ -292,7 +292,7 @@ import {ListBox} from 'primereact/listbox';
                 In addition, options can be simple primitive values such as a string array, in this case no optionLabel or optionValue is necessary.</p>
 
             <p><b>Options as SelectItems</b></p>
-            <CodeHighlight lang="javascript">
+            <CodeHighlight lang="js">
 {`
 const citySelectItems = [
     {label: 'New York', value: 'NY'},
@@ -313,7 +313,7 @@ const citySelectItems = [
             </CodeHighlight>
 
             <p><b>Options as any type</b></p>
-            <CodeHighlight lang="javascript">
+            <CodeHighlight lang="js">
 {`
 const cities = [
     {name: 'New York', code: 'NY'},
@@ -358,7 +358,7 @@ const cities = [
 `}
 </CodeHighlight>
 
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 {`
 carTemplate(option) {
     const logoPath = 'showcase/demo/images/car/' + option.label + '.png';

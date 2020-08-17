@@ -137,7 +137,7 @@ const TabMenuDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 import {TabMenu} from 'primereact/tabmenu';
 
@@ -148,7 +148,7 @@ import {TabMenu} from 'primereact/tabmenu';
                         <h3>Getting Started</h3>
                         <p>TabMenu requires a collection of menuitems as its model and can either be used as a Controlled or Uncontrolled component.</p>
 
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 constructor() {
     super();

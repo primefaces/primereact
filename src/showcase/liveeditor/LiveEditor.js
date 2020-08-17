@@ -19,7 +19,7 @@ export class LiveEditor extends Component {
 
     static propTypes = {
         name: PropTypes.string,
-        sources: PropTypes.array,
+        sources: PropTypes.object,
         service: PropTypes.string,
         data: PropTypes.string,
         dependencies: PropTypes.object,
@@ -128,7 +128,7 @@ ${extIndexCSS}
         let name = this.props.name;
         let extension = '.js';
         let extDependencies = this.props.dependencies || {};
-        let [sourceType, sourceValue] = this.props.sources;
+        let [sourceType, sourceValue] = Object.entries(this.props.sources);
 
         let _files = {};
         if (sourceType === 'class' || sourceType === 'hooks') {
@@ -217,7 +217,7 @@ ReactDOM.render(<${name} />, rootElement);`
     renderSandboxSource() {
         if (this.state.showCodeHighlight) {
             return (
-                <CodeHighlight className="language-javascript">
+                <CodeHighlight lang="js">
                     {this.props.sources[1].content}
                 </CodeHighlight>
             );
@@ -243,6 +243,10 @@ ReactDOM.render(<${name} />, rootElement);`
     render() {
         let elements = this.renderElements();
 
-        return elements;
+        return (
+            <CodeHighlight lang="js">
+                {this.props.sources.class.content}
+            </CodeHighlight>
+        )
     }
 }

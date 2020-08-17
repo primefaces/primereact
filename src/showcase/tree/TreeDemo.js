@@ -232,7 +232,7 @@ const TreeDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 import {Tree} from 'primereact/tree';
 
@@ -331,7 +331,7 @@ import {Tree} from 'primereact/tree';
 `}
                         </CodeHighlight>
 
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 const data: [
     {
@@ -394,7 +394,7 @@ const data: [
             property along with <i>onToggle</i> properties are used for full control over the state. If you need to expand or collapse the state of nodes programmatically then controlled mode should be used. Example below demonstrates
             both cases;</p>
 
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 import React, {Component} from 'react';
 import {Tree} from 'primereact/tree';
@@ -450,7 +450,7 @@ export class TreeDemo extends Component {
                         <p>Tree supports single, multiple and checkbox selection modes. Define <i>selectionMode</i>, <i>selectionKeys</i> and <i>onSelectionChange</i> properties to control the selection. In single mode, selectionKeys should
             be a single value whereas in multiple or checkbox modes an array is required. By default in multiple selection mode, metaKey is necessary to add to existing selections however this can be configured with <i>metaKeySelection</i> property. Note that
             in touch enabled devices, Tree does not require metaKey.</p>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 import React, {Component} from 'react';
 import {Tree} from 'primereact/tree';
@@ -501,7 +501,7 @@ export class TreeSelectionDemo extends Component {
                         <h3>Lazy</h3>
                         <p>Lazy loading is implemented using the <i>onExpand</i> event by adding children to the expanded node. <i>leaf</i> property should be enabled to indicate the node has children but not yet loaded. Here is a in-memory demo
             that loads generated nodes on expand event to imitate a remote call with a timeout. Notice the usage of <i>loading</i> property as well to give users a feedback about the loading process.</p>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 import React, {Component} from 'react';
 import {Tree} from 'primereact/tree';
@@ -572,7 +572,7 @@ export class TreeLazyDemo extends Component {
                         <h3>Templating</h3>
                         <p><i>label</i> property of a node is used to display as the content by default. Templating is supported as well with the <i>nodeTemplate</i> callback that gets the ndoe instance and returns JSX. Example
             below is a sample tree based navigation of React docs.</p>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 import React, {Component} from 'react';
 import {Tree} from 'primereact/tree';
@@ -639,7 +639,7 @@ export class TreeTemplatingDemo extends Component {
                         <h3>DragDrop</h3>
                         <p>Tree nodes can be reordered using dragdrop by setting <i>dragdropScope</i> property to a unique variable and updating the new value at <i>onDragDrop</i> callback. The value of the dragdropScope must be unique to provide
             intervention from other draggable elements on the page.</p>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 import React, {Component} from 'react';
 import {Tree} from 'primereact/tree';
@@ -679,7 +679,7 @@ export class TreeDragDropDemo extends Component {
                         <p>In addition <i>filterMode</i> specifies the filtering strategy. In <b>lenient</b> mode when the query matches a node, children of the node are not searched further as all descendants of the node are included. On the other hand,
                  in <b>strict</b> mode when the query matches a node, filtering continues on all descendants.</p>
 
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 <Tree value={this.state.nodes} filter={true} />
 
@@ -694,7 +694,7 @@ export class TreeDragDropDemo extends Component {
                         <p>One or more ContextMenu instances can be attached to nodes. Similar to selection, separate <i>contextMenuSelectionKey</i> and <i>onContextMenuSelectionChange</i> properties are necesary to manage the selected node with
             right click. In addition, a context menu can either be displayed at <i>onContextMenu</i> event. Since this event also passes the node instance, you may choose to display a different context menu for a particular node.</p>
 
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 import React, { Component } from 'react';
 import {Tree} from 'primereact/tree'

@@ -294,7 +294,7 @@ const InplaceDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 import {Inplace} from 'primereact/inplace';
 
@@ -357,7 +357,7 @@ import {Inplace} from 'primereact/inplace';
                         <p>Inplace allows lazy loading content so that the content gets initialized after getting opened instead of on load. Here is an example that loads, data of a table
                         if the user decides to open the inplace.
             </p>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 import React, {Component} from 'react';
 import {Inplace,InplaceDisplay,InplaceContent} from '../../components/inplace/Inplace';

@@ -112,7 +112,7 @@ const BreadcrumbDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 import { Breadcrumb } from 'primereact/breadcrumb';
 
@@ -124,7 +124,7 @@ import { Breadcrumb } from 'primereact/breadcrumb';
                         <h3>Getting Started</h3>
                         <p>BreadCrumb requires a collection of menuitems as its model.</p>
 
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 const items = [
     { label: 'Categories' },

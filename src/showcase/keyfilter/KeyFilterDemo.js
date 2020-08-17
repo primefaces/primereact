@@ -209,7 +209,7 @@ const KeyFilterDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight lang="javascript">
+                        <CodeHighlight lang="js">
                             {`
 import {InputText} from 'primereact/inputtext';
 

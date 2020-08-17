@@ -135,7 +135,7 @@ const InputSwitchDemo = () => {
             <TabView>
                 <TabPanel header="Documentation">
                     <h3>Import</h3>
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
 {`
 import {InputSwitch} from 'primereact/inputswitch';
 

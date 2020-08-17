@@ -31,7 +31,7 @@ class MenuModelDoc extends Component {
             <div className="content-section documentation">
                 <h3 style={{marginTop: 0}}>MenuItem</h3>
                 <p>Core of the API is the MenuItem class that defines various options such as the label, icon and children of an item in a menu.</p>
-                <CodeHighlight lang="javascript">
+                <CodeHighlight lang="js">
                     {`
 const items: [
     {
@@ -128,7 +128,7 @@ const items: [
 
                 <h3>Command</h3>
                 <p>The function to invoke when an item is clicked is defined using the command property.</p>
-<CodeHighlight lang="javascript">
+<CodeHighlight lang="js">
     {`
 const items =
 [
@@ -147,7 +147,7 @@ const items =
 
                 <h3>Navigation</h3>
                 <p>Navigation is specified using url property for external links or using command function for internal router.</p>
-                <CodeHighlight lang="javascript">
+                <CodeHighlight lang="js">
                     {`
 const items =
 [
