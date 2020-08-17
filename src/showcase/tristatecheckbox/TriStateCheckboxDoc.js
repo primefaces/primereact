@@ -52,7 +52,7 @@ const TriStateCheckboxDemo = () => {
 
     return (
         <div>
-            <h3 className="first">Value: {value + ''}</h3>
+            <h3 className="first">Value: {value + ''}</h5>
             <TriStateCheckbox value={value} onChange={(e) => setValue(e.value)} />
         </div>
     );
@@ -70,7 +70,7 @@ const TriStateCheckboxDemo = () => {
 
     return (
         <div>
-            <h3 className="first">Value: {value + ''}</h3>
+            <h3 className="first">Value: {value + ''}</h5>
             <TriStateCheckbox value={value} onChange={(e) => setValue(e.value)} />
         </div>
     );
@@ -89,14 +89,14 @@ const TriStateCheckboxDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import {TriStateCheckbox} from 'primereact/tristatecheckbox';
 `}
 </CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>TriStateCheckbox is used as a controlled input with <i>checked</i> and <i>onChange</i> properties.</p>
 <CodeHighlight>
 {`
@@ -104,7 +104,7 @@ import {TriStateCheckbox} from 'primereact/tristatecheckbox';
 `}
 </CodeHighlight>
 
-                    <h3>Properties</h3>
+                    <h5>Properties</h5>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -180,7 +180,7 @@ import {TriStateCheckbox} from 'primereact/tristatecheckbox';
                         </table>
                     </div>
 
-                    <h3>Events</h3>
+                    <h5>Events</h5>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -202,7 +202,7 @@ import {TriStateCheckbox} from 'primereact/tristatecheckbox';
                         </table>
                     </div>
 
-                    <h3>Styling</h3>
+                    <h5>Styling</h5>
                     <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming">theming</Link> page.</p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
@@ -233,7 +233,7 @@ import {TriStateCheckbox} from 'primereact/tristatecheckbox';
                         </table>
                     </div>
 
-                    <h3>Dependencies</h3>
+                    <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
 

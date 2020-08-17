@@ -55,11 +55,11 @@ const ToggleButtonDemo = () => {
 
     return (
         <div>
-            <h3>Basic</h3>
+            <h5>Basic</h5>
             <ToggleButton style={{width:'150px'}} checked={checked1} onChange={(e) => setChecked1(e.value)} />
             <p>Selected Value: {checked1 ? 'true' : 'false'}</p>
 
-            <h3>Custom</h3>
+            <h5>Custom</h5>
             <ToggleButton style={{width:'150px'}} onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIcon="pi pi-times"
                         checked={checked2} onChange={(e) => setChecked2(e.value)} />
             <p>Selected Value: {checked2 ? 'true' : 'false'}</p>
@@ -80,11 +80,11 @@ const ToggleButtonDemo = () => {
 
     return (
         <div>
-            <h3>Basic</h3>
+            <h5>Basic</h5>
             <ToggleButton style={{width:'150px'}} checked={checked1} onChange={(e) => setChecked1(e.value)} />
             <p>Selected Value: {checked1 ? 'true' : 'false'}</p>
 
-            <h3>Custom</h3>
+            <h5>Custom</h5>
             <ToggleButton style={{width:'150px'}} onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIcon="pi pi-times"
                         checked={checked2} onChange={(e) => setChecked2(e.value)} />
             <p>Selected Value: {checked2 ? 'true' : 'false'}</p>
@@ -105,14 +105,14 @@ const ToggleButtonDemo = () => {
             <div className="content-section documentation">
     <TabView>
         <TabPanel header="Documentation">
-            <h3>Import</h3>
+            <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { ToggleButton } from 'primereact/togglebutton';
 `}
 </CodeHighlight>
 
-            <h3>Getting Started</h3>
+            <h5>Getting Started</h5>
             <p>ToggleButton is used as a controlled input with <i>checked</i> and <i>onChange</i> properties.</p>
 
 <CodeHighlight>
@@ -121,7 +121,7 @@ import { ToggleButton } from 'primereact/togglebutton';
 `}
 </CodeHighlight>
 
-            <h3>Labels and Icons</h3>
+            <h5>Labels and Icons</h5>
             <p>Icons and Labels can be customized using <i>onLabel</i>, <i>offLabel</i>, <i>onIcon</i> and <i>offIcon</i> properties.</p>
 
 <CodeHighlight>
@@ -131,7 +131,7 @@ ToggleButton onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIco
 `}
 </CodeHighlight>
 
-            <h3>Properties</h3>
+            <h5>Properties</h5>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -225,7 +225,7 @@ ToggleButton onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIco
                 </table>
             </div>
 
-            <h3>Events</h3>
+            <h5>Events</h5>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -256,7 +256,7 @@ ToggleButton onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIco
                 </table>
             </div>
 
-            <h3>Styling</h3>
+            <h5>Styling</h5>
             <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
@@ -283,7 +283,7 @@ ToggleButton onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIco
                 </table>
             </div>
 
-            <h3>Dependencies</h3>
+            <h5>Dependencies</h5>
             <p>None.</p>
         </TabPanel>
 

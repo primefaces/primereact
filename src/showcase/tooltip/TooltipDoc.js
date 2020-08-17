@@ -78,7 +78,7 @@ const TooltipDemo = () => {
 
     return (
         <div>
-            <h3>Positions</h3>
+            <h5>Positions</h5>
             <div className="p-grid p-fluid">
                 <div className="p-col-12 p-md-3">
                     <InputText type="text" placeholder="Right" tooltip="Enter your username" />
@@ -94,10 +94,10 @@ const TooltipDemo = () => {
                 </div>
             </div>
 
-            <h3>Focus and Blur</h3>
+            <h5>Focus and Blur</h5>
             <InputText type="text" placeholder="Focus" tooltip="Enter your username" tooltipOptions={{event: 'focus'}} />
 
-            <h3>Button</h3>
+            <h5>Button</h5>
             <Button type="button" label="Save" icon="pi pi-check" tooltip="Click to proceed" />
         </div>
     )
@@ -115,7 +115,7 @@ const TooltipDemo = () => {
 
     return (
         <div>
-            <h3>Positions</h3>
+            <h5>Positions</h5>
             <div className="p-grid p-fluid">
                 <div className="p-col-12 p-md-3">
                     <InputText type="text" placeholder="Right" tooltip="Enter your username" />
@@ -131,10 +131,10 @@ const TooltipDemo = () => {
                 </div>
             </div>
 
-            <h3>Focus and Blur</h3>
+            <h5>Focus and Blur</h5>
             <InputText type="text" placeholder="Focus" tooltip="Enter your username" tooltipOptions={{event: 'focus'}} />
 
-            <h3>Button</h3>
+            <h5>Button</h5>
             <Button type="button" label="Save" icon="pi pi-check" tooltip="Click to proceed" />
         </div>
     )
@@ -153,13 +153,13 @@ const TooltipDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import to use it as a component</h3>
+                        <h5>Import to use it as a component</h5>
 <CodeHighlight lang="js">
 {`
 import { Tooltip } from 'primereact/tooltip';
 `}
 </CodeHighlight>
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>Tooltip functionality is integrated within the the components that have support such as inputtext or buttons. Content is defined with the <i>tooltip</i> property.</p>
 <CodeHighlight>
 {`
@@ -168,7 +168,7 @@ import { Tooltip } from 'primereact/tooltip';
 `}
 </CodeHighlight>
 
-                        <h3>Position</h3>
+                        <h5>Position</h5>
                         <p>There are four choices to position the tooltip, default value is "right" and alternatives are "top", "bottom", "left". Position is
                         specified using <i>tooltipOptions</i> property.</p>
 <CodeHighlight>
@@ -177,7 +177,7 @@ import { Tooltip } from 'primereact/tooltip';
 `}
 </CodeHighlight>
 
-                        <h3>Events</h3>
+                        <h5>Events</h5>
                         <p>Tooltip gets displayed on hover event of its target by default, other option is the focus event to display and blur to hide.</p>
 <CodeHighlight>
 {`
@@ -185,7 +185,7 @@ import { Tooltip } from 'primereact/tooltip';
 `}
 </CodeHighlight>
 
-                        <h3>Delay</h3>
+                        <h5>Delay</h5>
                         <p>Tooltip is displayed or hidden instantly by default however you may add delays using <i>showDelay</i> and <i>hideDelay</i> properties which accept a number value in terms of milliseconds.</p>
 <CodeHighlight>
 {`
@@ -193,7 +193,7 @@ import { Tooltip } from 'primereact/tooltip';
 `}
 </CodeHighlight>
 
-                    <h3>Tooltip Options</h3>
+                    <h5>Tooltip Options</h5>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -239,7 +239,7 @@ import { Tooltip } from 'primereact/tooltip';
                         </table>
                     </div>
 
-                    <h3>Styling</h3>
+                    <h5>Styling</h5>
                     <p>Following is the list of structural style classes</p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
@@ -266,7 +266,7 @@ import { Tooltip } from 'primereact/tooltip';
                         </table>
                     </div>
 
-                    <h3>Dependencies</h3>
+                    <h5>Dependencies</h5>
                     <p>None.</p>
                     </TabPanel>
 

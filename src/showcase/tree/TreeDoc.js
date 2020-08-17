@@ -108,10 +108,10 @@ const TreeDemo = () => {
 
     return (
         <div>
-            <h3 className="first">Uncontrolled</h3>
+            <h3 className="first">Uncontrolled</h5>
             <Tree value={nodes} />
 
-            <h3>Controlled</h3>
+            <h5>Controlled</h5>
             <Button onClick={toggleMovies} label="Toggle Movies" />
             <Tree value={nodes} expandedKeys={expandedKeys}
                 onToggle={e => setExpandedKeys(e.value)} style={{marginTop: '.5em'}} />
@@ -150,10 +150,10 @@ const TreeDemo = () => {
 
     return (
         <div>
-            <h3 className="first">Uncontrolled</h3>
+            <h3 className="first">Uncontrolled</h5>
             <Tree value={nodes} />
 
-            <h3>Controlled</h3>
+            <h5>Controlled</h5>
             <Button onClick={toggleMovies} label="Toggle Movies" />
             <Tree value={nodes} expandedKeys={expandedKeys}
                 onToggle={e => setExpandedKeys(e.value)} style={{marginTop: '.5em'}} />
@@ -174,17 +174,17 @@ const TreeDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { Tree } from 'primereact/tree';
 `}
 </CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>Tree component requires an array of TreeNode objects as its <i>value</i>.</p>
 
-                        <h3>TreeNode API</h3>
+                        <h5>TreeNode API</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -329,7 +329,7 @@ const data: [
 `}
 </CodeHighlight>
 
-                        <h3>Controlled vs Uncontrolled</h3>
+                        <h5>Controlled vs Uncontrolled</h5>
                         <p>Tree expansion state is managed in two ways, in uncontrolled mode only initial expanded state of a node can be defined using <i>expandedKeys</i> property whereas in controlled mode <i>expandedKeys</i>
                             property along with <i>onToggle</i> properties are used for full control over the state. If you need to expand or collapse the state of nodes programmatically then controlled mode should be used. Example below demonstrates
                             both cases;</p>
@@ -371,10 +371,10 @@ export class TreeDemo extends Component {
     render() {
         return (
             <div>
-                <h3 className="first">Uncontrolled</h3>
+                <h3 className="first">Uncontrolled</h5>
                 <Tree value={this.state.nodes} />
 
-                <h3>Controlled</h3>
+                <h5>Controlled</h5>
                 <Button onClick={this.toggleMovies} label="Toggle Movies" />
                 <Tree value={this.state.nodes} expandedKeys={this.state.expandedKeys}
                     onToggle={e => this.setState({expandedKeys: e.value})} style={{marginTop: '.5em'}} />
@@ -385,7 +385,7 @@ export class TreeDemo extends Component {
 `}
 </CodeHighlight>
 
-                        <h3>Selection</h3>
+                        <h5>Selection</h5>
                         <p>Tree supports single, multiple and checkbox selection modes. Define <i>selectionMode</i>, <i>selectionKeys</i> and <i>onSelectionChange</i> properties to control the selection. In single mode, selectionKeys should
             be a single value whereas in multiple or checkbox modes an array is required. By default in multiple selection mode, metaKey is necessary to add to existing selections however this can be configured with <i>metaKeySelection</i> property. Note that
             in touch enabled devices, Tree does not require metaKey.</p>
@@ -417,16 +417,16 @@ export class TreeSelectionDemo extends Component {
     render() {
         return (
             <div>
-                <h3>Single Selection</h3>
+                <h5>Single Selection</h5>
                 <Tree value={this.state.nodes} selectionMode="single" selectionKeys={this.state.selectedNodeKey} onSelectionChange={e => this.setState({selectedNodeKey: e.value})} />
 
-                <h3>Multiple Selection with MetaKey</h3>
+                <h5>Multiple Selection with MetaKey</h5>
                 <Tree value={this.state.nodes} selectionMode="multiple" selectionKeys={this.state.selectedNodeKeys1} onSelectionChange={e => this.setState({selectedNodeKeys1: e.value})} />
 
-                <h3>Multiple Selection without MetaKey</h3>
+                <h5>Multiple Selection without MetaKey</h5>
                 <Tree value={this.state.nodes} selectionMode="multiple" metaKeySelection={false} selectionKeys={this.state.selectedNodeKeys2} onSelectionChange={e => this.setState({selectedNodeKeys2: e.value})} />
 
-                <h3>Checkbox Selection</h3>
+                <h5>Checkbox Selection</h5>
                 <Tree value={this.state.nodes} selectionMode="checkbox" selectionKeys={this.state.selectedNodeKeys3} onSelectionChange={e => this.setState({selectedNodeKeys3: e.value})} />
             </div>
         )
@@ -435,7 +435,7 @@ export class TreeSelectionDemo extends Component {
 `}
 </CodeHighlight>
 
-                        <h3>Lazy</h3>
+                        <h5>Lazy</h5>
                         <p>Lazy loading is implemented using the <i>onExpand</i> event by adding children to the expanded node. <i>leaf</i> property should be enabled to indicate the node has children but not yet loaded. Here is a in-memory demo
             that loads generated nodes on expand event to imitate a remote call with a timeout. Notice the usage of <i>loading</i> property as well to give users a feedback about the loading process.</p>
 <CodeHighlight lang="js">
@@ -505,7 +505,7 @@ export class TreeLazyDemo extends Component {
 `}
 </CodeHighlight>
 
-                        <h3>Templating</h3>
+                        <h5>Templating</h5>
                         <p><i>label</i> property of a node is used to display as the content by default. Templating is supported as well with the <i>nodeTemplate</i> callback that gets the ndoe instance and returns JSX. Example
             below is a sample tree based navigation of React docs.</p>
 <CodeHighlight lang="js">
@@ -571,7 +571,7 @@ export class TreeTemplatingDemo extends Component {
 `}
 </CodeHighlight>
 
-                        <h3>DragDrop</h3>
+                        <h5>DragDrop</h5>
                         <p>Tree nodes can be reordered using dragdrop by setting <i>dragdropScope</i> property to a unique variable and updating the new value at <i>onDragDrop</i> callback. The value of the dragdropScope must be unique to provide
             intervention from other draggable elements on the page.</p>
 <CodeHighlight lang="js">
@@ -606,7 +606,7 @@ export class TreeDragDropDemo extends Component {
 `}
 </CodeHighlight>
 
-                        <h3>Filtering</h3>
+                        <h5>Filtering</h5>
                         <p>Filtering is enabled by setting the <i>filter</i> property to true, by default label property of a node
             is used to compare against the value in the text field, in order to customize which field(s) should be used during search define <i>filterBy</i> property.</p>
 
@@ -623,7 +623,7 @@ export class TreeDragDropDemo extends Component {
 `}
 </CodeHighlight>
 
-                        <h3>ContextMenu</h3>
+                        <h5>ContextMenu</h5>
                         <p>One or more ContextMenu instances can be attached to nodes. Similar to selection, separate <i>contextMenuSelectionKey</i> and <i>onContextMenuSelectionChange</i> properties are necesary to manage the selected node with
             right click. In addition, a context menu can either be displayed at <i>onContextMenu</i> event. Since this event also passes the node instance, you may choose to display a different context menu for a particular node.</p>
 
@@ -691,7 +691,7 @@ export class TreeContextMenuDemo extends Component {
 `}
 </CodeHighlight>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -858,7 +858,7 @@ export class TreeContextMenuDemo extends Component {
                             </table>
                         </div>
 
-                        <h3>Events</h3>
+                        <h5>Events</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -927,7 +927,7 @@ export class TreeContextMenuDemo extends Component {
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -981,7 +981,7 @@ export class TreeContextMenuDemo extends Component {
                                 </tbody>
                             </table>
 
-                            <h3>Dependencies</h3>
+                            <h5>Dependencies</h5>
                             <p>None.</p>
                         </div>
 
