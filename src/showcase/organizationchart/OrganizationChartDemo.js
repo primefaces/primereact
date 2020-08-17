@@ -894,15 +894,9 @@ nodeTemplate(node) {
 
                     </TabPanel>
 
-                    {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="OrganizationChartDemo" sources={[key, value]} extFiles={this.extFiles} />
-                                </TabPanel>
-                            );
-                        })
-                    }
+                    <TabPanel header="Source">
+                        <LiveEditor name="OrganizationChartDemo" sources={this.sources} extFiles={this.extFiles} />
+                    </TabPanel>
                 </TabView>
             </div>
         );
