@@ -498,17 +498,12 @@ loadData(event) {
 
             </TabPanel>
 
-                    {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="DataScrollerDemo" sources={[key, value]} service="CarService" data="cars-large" extFiles={this.extFiles} />
-                                </TabPanel>
-                            );
-                        })
-                    }
-                </TabView>
-            </div>
+            <TabPanel header="Source">
+                <LiveEditor name="DataScrollerDemo" sources={this.sources} service="CarService" data="cars-large" extFiles={this.extFiles} />
+            </TabPanel>
+
+            </TabView>
+        </div>
         );
     }
 }
