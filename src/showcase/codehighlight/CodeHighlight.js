@@ -9,7 +9,7 @@ import 'prismjs/components/prism-javascript';
 export class CodeHighlight extends Component {
 
     static defaultProps = {
-        lang: "jsx",
+        lang: 'jsx',
         style: null
     };
 
