@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
-import {InputText} from '../../components/inputtext/InputText';
-import {Button} from '../../components/button/Button';
-import {Checkbox} from "../../components/checkbox/Checkbox";
-import {RadioButton} from "../../components/radiobutton/RadioButton";
-import {Dropdown} from "../../components/dropdown/Dropdown";
-import {InputTextarea} from "../../components/inputtextarea/InputTextarea";
+import React, { Component } from 'react';
+import { InputText } from '../../components/inputtext/InputText';
+import { Button } from '../../components/button/Button';
+import { Checkbox } from "../../components/checkbox/Checkbox";
+import { RadioButton } from "../../components/radiobutton/RadioButton";
+import { Dropdown } from "../../components/dropdown/Dropdown";
+import { InputTextarea } from "../../components/inputtextarea/InputTextarea";
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { FormLayoutDoc } from './FormLayoutDoc';
 import './FormLayoutDemo.scss';

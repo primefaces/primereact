@@ -12,13 +12,13 @@ export class FormLayoutDoc extends Component {
             'class': {
                 tabName: 'Class Source',
                 content: `
-import React, {Component} from 'react';
-import {InputText} from 'primereact/inputtext';
-import {Button} from 'primereact/button';
-import {Checkbox} from 'primereact/checkbox';
-import {RadioButton} from 'primereact/radiobutton';
-import {Dropdown} from 'primereact/dropdown';
-import {InputTextarea} from 'primereact/inputtextarea';
+import React, { Component } from 'react';
+import { InputText } from 'primereact/inputtext';
+import { Button } from 'primereact/button';
+import { Checkbox } from 'primereact/checkbox';
+import { RadioButton } from 'primereact/radiobutton';
+import { Dropdown } from 'primereact/dropdown';
+import { InputTextarea } from 'primereact/inputtextarea';
 
 export class FormLayoutDemo extends Component {
 

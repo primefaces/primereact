@@ -34,11 +34,11 @@ import 'primeflex/primeflex.css';
 					a container <i>p-grid</i> class and children the <i>p-col</i> class. Children of the grid will have the same width and scale according to the width of the parent.</p>
 <CodeHighlight>
 {`
-    <div className="p-grid">
-        <div className="p-col">1</div>
-        <div className="p-col">2</div>
-        <div className="p-col">3</div>
-    </div>
+<div className="p-grid">
+    <div className="p-col">1</div>
+    <div className="p-col">2</div>
+    <div className="p-col">3</div>
+</div>
 `}
 </CodeHighlight>
 
@@ -216,10 +216,10 @@ import 'primeflex/primeflex.css';
                         <p>A column can have a fixed width while siblings having auto width. Apply <i>p-col-fixed</i> class to fix a column width.</p>
 <CodeHighlight>
 {`
-    <div className="p-grid">
-        <div className="p-col-fixed" style={{ width: '100px'}}>Fixed</div>
-        <div className="p-col">Auto</div>
-    </div>
+<div className="p-grid">
+    <div className="p-col-fixed" style={{ width: '100px'}}>Fixed</div>
+    <div className="p-col">Auto</div>
+</div>
 `}
 </CodeHighlight>
 
@@ -687,7 +687,7 @@ export class FlexGridDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section implementation flexgrid-demo">
+                <div className="flexgrid-demo">
                     <h5>Basic</h5>
                     <div className="p-grid">
                         <div className="p-col">
