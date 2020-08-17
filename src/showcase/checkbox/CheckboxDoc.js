@@ -18,49 +18,93 @@ import { Checkbox } from 'primereact/checkbox';
 
 export class CheckboxDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
+        this.categories = [{name: 'Accounting', key: 'A'}, {name: 'Marketing', key: 'M'}, {name: 'Production', key: 'P'}, {name: 'Research', key: 'R'}];
+
         this.state = {
             checked: false,
-            cities: []
+            cities: [],
+            selectedCategories: this.categories.slice(1,3)
         };
+
         this.onCityChange = this.onCityChange.bind(this);
+        this.onCategoryChange = this.onCategoryChange.bind(this);
     }
+
+    onCategoryChange(e) {
+        let selectedCategories = [...this.state.selectedCategories];
+
+        if (e.checked) {
+            selectedCategories.push(e.value);
+        }
+        else {
+            for (let i = 0; i < selectedCategories.length; i++) {
+                const selectedCategory = selectedCategories[i];
+
+                if (selectedCategory.key === e.value.key) {
+                    selectedCategories.splice(i, 1);
+                    break;
+                }
+            }
+        }
+
+        this.setState({ selectedCategories });
+    }
+
 
     onCityChange(e) {
         let selectedCities = [...this.state.cities];
 
-        if(e.checked)
+        if (e.checked)
             selectedCities.push(e.value);
         else
             selectedCities.splice(selectedCities.indexOf(e.value), 1);
 
-        this.setState({cities: selectedCities});
+        this.setState({ cities: selectedCities });
     }
 
     render() {
         return (
             <div>
-                <h3 className="first">Single</h3>
-                <Checkbox checked={this.state.checked} onChange={e => this.setState({checked: e.checked})} />
-                <p>Checked: <span style={{fontWeight: 'bold'}}>{this.state.checked ? 'true' : 'false'}</span></p>
+                <div className="card">
+                    <h5>Basic</h5>
+                    <div className="p-field-checkbox">
+                        <Checkbox inputId="binary" checked={this.state.checked} onChange={e => this.setState({ checked: e.checked })} />
+                        <label htmlFor="binary">{this.state.checked ? 'true' : 'false'}</label>
+                    </div>
 
-                <h3>Multiple</h3>
-                <div className="p-grid" style={{width:'250px'}}>
-                    <div className="p-col-12">
-                        <Checkbox inputId="cb1" value="New York" onChange={this.onCityChange} checked={this.state.cities.indexOf('New York') !== -1}></Checkbox>
-                        <label htmlFor="cb1" className="p-checkbox-label">New York</label>
+                    <h5>Multiple</h5>
+                    <div className="p-field-checkbox">
+                        <Checkbox inputId="city1" name="city" value="Chicago" onChange={this.onCityChange} checked={this.state.cities.indexOf('Chicago') !== -1} />
+                        <label htmlFor="city1">Chicago</label>
                     </div>
-                    <div className="p-col-12">
-                        <Checkbox inputId="cb2" value="San Francisco" onChange={this.onCityChange} checked={this.state.cities.indexOf('San Francisco') !== -1}></Checkbox>
-                        <label htmlFor="cb2" className="p-checkbox-label">San Francisco</label>
+                    <div className="p-field-checkbox">
+                        <Checkbox inputId="city2" name="city" value="Los Angeles" onChange={this.onCityChange} checked={this.state.cities.indexOf('Los Angeles') !== -1} />
+                        <label htmlFor="city2">Los Angeles</label>
                     </div>
-                    <div className="p-col-12">
-                        <Checkbox inputId="cb3" value="Los Angeles" onChange={this.onCityChange} checked={this.state.cities.indexOf('Los Angeles') !== -1}></Checkbox>
-                        <label htmlFor="cb3" className="p-checkbox-label">Los Angeles</label>
+                    <div className="p-field-checkbox">
+                        <Checkbox inputId="city3" name="city" value="New York" onChange={this.onCityChange} checked={this.state.cities.indexOf('New York') !== -1} />
+                        <label htmlFor="city3">New York</label>
                     </div>
+                    <div className="p-field-checkbox">
+                        <Checkbox inputId="city4" name="city" value="San Francisco" onChange={this.onCityChange} checked={this.state.cities.indexOf('San Francisco') !== -1} />
+                        <label htmlFor="city4">San Francisco</label>
+                    </div>
+
+                    <h5>Dynamic Values, Preselection, Value Binding and Disabled Option</h5>
+                    {
+                        this.categories.map((category) => {
+                            return (
+                                <div key={category.key} className="p-field-checkbox">
+                                    <Checkbox inputId={category.key} name="category" value={category} onChange={this.onCategoryChange} checked={this.state.selectedCategories.some((item) => item.key === category.key)} disabled={category.key === 'R'} />
+                                    <label htmlFor={category.key}>{category.name}</label>
+                                </div>
+                            )
+                        })
+                    }
                 </div>
-                <p>Selected Cities : {this.state.cities.map((city) => <span style={{fontWeight: 'bold'}} key={city}>{city} </span>)}</p>
             </div>
         )
     }
@@ -176,26 +220,24 @@ const CheckboxDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight lang="js">
-                            {`
+<CodeHighlight lang="js">
+{`
 import {Checkbox} from 'primereact/checkbox';
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h3>Getting Started</h3>
                         <p>Checkbox is used as a controlled input with <i>checked</i> and <i>onChange</i> properties.</p>
-                        <CodeHighlight>
-                            {`
+<CodeHighlight>
+{`
 <Checkbox onChange={e => this.setState({checked: e.checked})} checked={this.state.checked}></Checkbox>
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h3>Multiple Values</h3>
                         <p>Multiple checkboxes can be grouped using a list of values.</p>
-                        <CodeHighlight>
-                            {`
+<CodeHighlight>
+{`
 <div className="p-col-12">
     <Checkbox inputId="cb1" value="New York" onChange={this.onCityChange} checked={this.state.cities.includes('New York')}></Checkbox>
     <label htmlFor="cb1" className="p-checkbox-label">New York</label>
@@ -208,12 +250,11 @@ import {Checkbox} from 'primereact/checkbox';
     <Checkbox inputId="cb3" value="Los Angeles" onChange={this.onCityChange} checked={this.state.cities.includes('Los Angeles')}></Checkbox>
     <label htmlFor="cb3" className="p-checkbox-label">Los Angeles</label>
 </div>
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <CodeHighlight lang="js">
-                            {`
+<CodeHighlight lang="js">
+{`
 constructor() {
     super();
     this.state = {
@@ -231,9 +272,8 @@ onCityChange(e) {
 
     this.setState({cities: selectedCities});
 }
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h3>Properties</h3>
                         <div className="doc-tablewrapper">
@@ -396,15 +436,9 @@ onCityChange(e) {
                         <p>None.</p>
                     </TabPanel>
 
-                    {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="CheckboxDemo" sources={[key, value]} />
-                                </TabPanel>
-                            );
-                        })
-                    }
+                    <TabPanel header="Source">
+                        <LiveEditor name="CheckboxDemo" sources={this.sources} />
+                    </TabPanel>
                 </TabView>
             </div>
         )

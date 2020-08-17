@@ -5,8 +5,8 @@ import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class ChipsDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             values1: [],
             values2: [],

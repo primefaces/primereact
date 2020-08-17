@@ -5,8 +5,8 @@ import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class EditorDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             text1: '<div>Hello World!</div><div>PrimeReact <b>Editor</b> Rocks</div><div><br></div>',
             text2: ''

@@ -13,13 +13,13 @@ export class ChipsDoc extends Component {
             'class': {
                 tabName: 'Class Source',
                 content: `
-import React, {Component} from 'react';
-import {Chips} from 'primereact/chips';
+import React, { Component } from 'react';
+import { Chips } from 'primereact/chips';
 
 export class ChipsDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             values1: [],
             values2: [],
@@ -31,22 +31,24 @@ export class ChipsDemo extends Component {
         return (
             <div>
                 <span>{item} - (active) </span>
-                <i className="pi pi-user-plus" style={{fontSize: '14px'}}></i>
+                <i className="pi pi-user-plus" style={{ fontSize: '14px' }}></i>
             </div>
         );
     }
 
     render() {
         return (
-            <div className="p-fluid">
-                <h3>Basic</h3>
-                <Chips value={this.state.values1} onChange={(e) => this.setState({values1: e.value})}></Chips>
+            <div>
+                <div className="card p-fluid">
+                    <h5>Basic</h5>
+                    <Chips value={this.state.values1} onChange={(e) => this.setState({ values1: e.value })} />
 
-                <h3>Comma Separator</h3>
-                <Chips value={this.state.values2} onChange={(e) => this.setState({values2: e.value})} separator=','></Chips>
+                    <h5>Comma Separator</h5>
+                    <Chips value={this.state.values2} onChange={(e) => this.setState({ values2: e.value })} separator="," />
 
-                <h3>Template</h3>
-                <Chips value={this.state.values3} onChange={(e) => this.setState({values3: e.value})} max={5} itemTemplate={this.customChip}></Chips>
+                    <h5>Template</h5>
+                    <Chips value={this.state.values3} onChange={(e) => this.setState({ values3: e.value })} max={5} itemTemplate={this.customChip}></Chips>
+                </div>
             </div>
         )
     }
@@ -136,33 +138,30 @@ const ChipsDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight lang="js">
-                            {`
+<CodeHighlight lang="js">
+{`
 import {Chips} from 'primereact/chips';
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h3>Getting Started</h3>
                         <p>Chips requires an array as its <i>value</i> and <i>onChange</i> callback to update the model.</p>
 
-                        <CodeHighlight>
-                            {`
+<CodeHighlight>
+{`
 <Chips value={this.state.value} onChange={(e) => this.setState({value: e.value})}></Chips>
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h3>Custom Content</h3>
                         <p>A chip is customized using <i>itemTemplate</i> function where value is passed to return JSX.</p>
-                        <CodeHighlight>
-                            {`
+<CodeHighlight>
+{`
 <Chips value={this.state.value} onChange={(e) => this.setState({value: e.value})} itemTemplate={this.customChip}></Chips>
-
 `}
-                        </CodeHighlight>
-                        <CodeHighlight lang="js">
-                            {`
+</CodeHighlight>
+<CodeHighlight lang="js">
+{`
 customChip(item) {
     return (
         <div>
@@ -173,7 +172,7 @@ customChip(item) {
 }
 
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h3>Properties</h3>
                         <div className="doc-tablewrapper">
@@ -357,15 +356,9 @@ customChip(item) {
                         <p>None.</p>
                     </TabPanel>
 
-                    {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="ChipsDemo" sources={[key, value]} />
-                                </TabPanel>
-                            );
-                        })
-                    }
+                    <TabPanel header="Source">
+                        <LiveEditor name="ChipsDemo" sources={this.sources} />
+                    </TabPanel>
                 </TabView>
             </div>
         );

@@ -245,7 +245,7 @@ ReactDOM.render(<${name} />, rootElement);`
 
         return (
             <CodeHighlight lang="js">
-                {this.props.sources.class.content}
+                {this.props.sources['class'].content}
             </CodeHighlight>
         )
     }

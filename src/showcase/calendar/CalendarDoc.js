@@ -18,8 +18,8 @@ import { Calendar } from 'primereact/calendar';
 
 export class CalendarDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         let today = new Date();
         let month = today.getMonth();
@@ -64,12 +64,11 @@ export class CalendarDemo extends Component {
     dateTemplate(date) {
         if (date.day > 10 && date.day < 15) {
             return (
-                <div style={{ backgroundColor: '#1dcbb3', color: '#ffffff', fontWeight: 'bold', borderRadius: '50%', width: '2em', height: '2em', lineHeight: '2em', padding: 0 }}>{date.day}</div>
+                <strong className="special-day">{date.day}</strong>
             );
         }
-        else {
-            return date.day;
-        }
+
+        return date.day;
     }
 
     render() {
@@ -85,72 +84,75 @@ export class CalendarDemo extends Component {
         };
 
         return (
-            <div className="inputgrid-demo">
-                <div className="p-grid p-fluid">
-                    <div className="p-col-12 p-md-4">
-                        <h3>Basic</h3>
-                        <Calendar value={this.state.date1} onChange={(e) => this.setState({ date1: e.value })} />
+            <div>
+                <div className="card">
+                    <h5>Popup</h5>
+                    <div className="p-fluid p-grid p-formgrid">
+                        <div className="p-field p-col-12 p-md-4">
+                            <label htmlFor="basic">Basic</label>
+                            <Calendar id="basic" value={this.state.date1} onChange={(e) => this.setState({ date1: e.value })} />
+                        </div>
+                        <div className="p-field p-col-12 p-md-4">
+                            <label htmlFor="icon">Icon</label>
+                            <Calendar id="icon" value={this.state.date2} onChange={(e) => this.setState({ date2: e.value })} showIcon />
+                        </div>
+                        <div className="p-field p-col-12 p-md-4">
+                            <label htmlFor="spanish">Spanish</label>
+                            <Calendar id="spanish" value={this.state.date3} onChange={(e) => this.setState({ date3: e.value })} locale={es} dateFormat="dd/mm/yy" />
+                        </div>
+                        <div className="p-field p-col-12 p-md-4">
+                            <label htmlFor="minmax">MinMax</label>
+                            <Calendar id="minmax" value={this.state.date4} onChange={(e) => this.setState({ date4: e.value })} minDate={this.minDate} maxDate={this.maxDate} readOnlyInput />
+                        </div>
+                        <div className="p-field p-col-12 p-md-4">
+                            <label htmlFor="disableddays">Disabled Days</label>
+                            <Calendar id="disableddays" value={this.state.date5} onChange={(e) => this.setState({ date5: e.value })} disabledDates={this.invalidDates} disabledDays={[0, 6]} readOnlyInput />
+                        </div>
+                        <div className="p-field p-col-12 p-md-4">
+                            <label htmlFor="navigators">Navigators</label>
+                            <Calendar id="navigators" value={this.state.date6} onChange={(e) => this.setState({ date6: e.value })} monthNavigator yearNavigator yearRange="2010:2030" />
+                        </div>
+                        <div className="p-field p-col-12 p-md-4">
+                            <label htmlFor="multiple">Multiple</label>
+                            <Calendar id="multiple" value={this.state.dates1} onChange={(e) => this.setState({ dates1: e.value })} selectionMode="multiple" readOnlyInput />
+                        </div>
+                        <div className="p-field p-col-12 p-md-4">
+                            <label htmlFor="range">Range</label>
+                            <Calendar id="range" value={this.state.dates2} onChange={(e) => this.setState({ dates2: e.value })} selectionMode="range" readOnlyInput />
+                        </div>
+                        <div className="p-field p-col-12 p-md-4">
+                            <label htmlFor="buttonbar">Button Bar</label>
+                            <Calendar id="buttonbar" value={this.state.date7} onChange={(e) => this.setState({ date7: e.value })} showButtonBar />
+                        </div>
+                        <div className="p-field p-col-12 p-md-4">
+                            <label htmlFor="time24">Time / 24h</label>
+                            <Calendar id="time24" value={this.state.date8} onChange={(e) => this.setState({ date8: e.value })} showTime showSeconds />
+                        </div>
+                        <div className="p-field p-col-12 p-md-4">
+                            <label htmlFor="time12">Time / 12h</label>
+                            <Calendar id="time12" value={this.state.date9} onChange={(e) => this.setState({ date9: e.value })} timeOnly hourFormat="12" />
+                        </div>
+                        <div className="p-field p-col-12 p-md-4">
+                            <label htmlFor="monthpicker">Month Picker</label>
+                            <Calendar id="monthpicker" value={this.state.date10} onChange={(e) => this.setState({ date10: e.value })} view="month" dateFormat="mm/yy" yearNavigator yearRange="2010:2030" />
+                        </div>
+                        <div className="p-field p-col-12 p-md-4">
+                            <label htmlFor="multiplemonths">Multiple Months</label>
+                            <Calendar id="multiplemonths" value={this.state.date11} onChange={(e) => this.setState({ date11: e.value })} numberOfMonths={3} />
+                        </div>
+                        <div className="p-field p-col-12 p-md-4">
+                            <label htmlFor="datetemplate">Date Template</label>
+                            <Calendar id="datetemplate" value={this.state.date12} onChange={(e) => this.setState({ date12: e.value })} dateTemplate={this.dateTemplate} />
+                        </div>
+                        <div className="p-field p-col-12 p-md-4">
+                            <label htmlFor="touchUI">TouchUI</label>
+                            <Calendar id="touchUI" value={this.state.date13} onChange={(e) => this.setState({ date13: e.value })} touchUI />
+                        </div>
                     </div>
-                    <div className="p-col-12 p-md-4">
-                        <h3>Spanish</h3>
-                        <Calendar value={this.state.date2} onChange={(e) => this.setState({ date2: e.value })} locale={es} dateFormat="dd/mm/yy" />
-                    </div>
-                    <div className="p-col-12 p-md-4">
-                        <h3>Icon</h3>
-                        <Calendar value={this.state.date3} onChange={(e) => this.setState({ date3: e.value })} showIcon={true} />
-                    </div>
-                    <div className="p-col-12 p-md-4">
-                        <h3>Min-Max</h3>
-                        <Calendar value={this.state.date4} onChange={(e) => this.setState({ date4: e.value })} minDate={this.minDate} maxDate={this.maxDate} readOnlyInput={true} />
-                    </div>
-                    <div className="p-col-12 p-md-4">
-                        <h3>Disabled Days</h3>
-                        <Calendar value={this.state.date5} onChange={(e) => this.setState({ date5: e.value })} disabledDates={this.invalidDates} disabledDays={[0, 6]} readOnlyInput={true} />
-                    </div>
-                    <div className="p-col-12 p-md-4">
-                        <h3>Navigators</h3>
-                        <Calendar value={this.state.date6} onChange={(e) => this.setState({ date6: e.value })} monthNavigator={true} yearNavigator={true} yearRange="2010:2030" />
-                    </div>
-                    <div className="p-col-12 p-md-4">
-                        <h3>Multiple Selection</h3>
-                        <Calendar value={this.state.dates1} onChange={(e) => this.setState({ dates1: e.value })} selectionMode="multiple" readOnlyInput={true} />
-                    </div>
-                    <div className="p-col-12 p-md-4">
-                        <h3>Range Selection</h3>
-                        <Calendar value={this.state.dates2} onChange={(e) => this.setState({ dates2: e.value })} selectionMode="range" readOnlyInput={true} />
-                    </div>
-                    <div className="p-col-12 p-md-4">
-                        <h3>Button Bar</h3>
-                        <Calendar value={this.state.date7} onChange={(e) => this.setState({ date7: e.value })} showButtonBar={true} />
-                    </div>
-                    <div className="p-col-12 p-md-4">
-                        <h3>Time / 24h</h3>
-                        <Calendar value={this.state.date8} onChange={(e) => this.setState({ date8: e.value })} showTime={true} showSeconds={true} />
-                    </div>
-                    <div className="p-col-12 p-md-4">
-                        <h3>Time Only / 12h</h3>
-                        <Calendar value={this.state.date9} onChange={(e) => this.setState({ date9: e.value })} timeOnly={true} hourFormat="12" />
-                    </div>
-                    <div className="p-col-12 p-md-4">
-                        <h3>Date Template</h3>
-                        <Calendar value={this.state.date10} onChange={(e) => this.setState({ date10: e.value })} dateTemplate={this.dateTemplate} />
-                    </div>
-                    <div className="p-col-12 p-md-4">
-                        <h3>Multiple Months</h3>
-                        <Calendar value={this.state.date11} onChange={(e) => this.setState({ date11: e.value })} numberOfMonths={3} />
-                    </div>
-                    <div className="p-col-12 p-md-4">
-                        <h3>Month/Year Picker</h3>
-                        <Calendar value={this.state.date12} onChange={(e) => this.setState({ date12: e.value })} view="month" dateFormat="mm/yy" yearNavigator={true} yearRange="2010:2030" />
-                    </div>
-                    <div className="p-col-12 p-md-4">
-                        <h3>Touch UI</h3>
-                        <Calendar value={this.state.date13} onChange={(e) => this.setState({ date13: e.value })} touchUI={true} />
-                    </div>
-                </div>
 
-                <h3>Inline</h3>
-                <Calendar value={this.state.date14} onChange={(e) => this.setState({ date14: e.value })} inline={true} showWeek={true} />
+                    <h5>Inline</h5>
+                    <Calendar value={this.state.date14} onChange={(e) => this.setState({ date14: e.value })} inline showWeek />
+                </div>
             </div>
         );
     }
@@ -450,64 +452,58 @@ const CalendarDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h3>Import</h3>
-                        <CodeHighlight lang="js">
-                            {`
+<CodeHighlight lang="js">
+{`
 import { Calendar } from 'primereact/calendar';
-
 `}
                         </CodeHighlight>
 
                         <h3>Getting Started</h3>
                         <p>Calendar is used a controlled input component with <i>value</i> and <i>onChange</i> properties.</p>
 
-                        <CodeHighlight>
-                            {`
+<CodeHighlight>
+{`
 <Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h3>Popup and Inline</h3>
                         <p>Calendar is displayed in a popup by default whereas <i>inline</i> property needs to be enabled for inline mode.</p>
 
-                        <CodeHighlight>
-                            {`
+<CodeHighlight>
+{`
 <Calendar inline={true} value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h3>View Date</h3>
                         <p><i>viewDate</i> defines the date whose month and year are used to display the calendar. By default calendar uses value to render the view and falls back to today's date when value is not defined. In case you'd like
             to display a different month/year use <i>viewDate</i>. The usage of this property can either be controlled or uncontrolled. In controlled mode, <i>onViewDateChange</i> is required to manage the viewDate whereas in
             uncontrolled mode, viewDate is used only once in initial rendering and ignored in updates. If you'd like to change the displayed month/year programmatically, use the viewChange in controlled mode.</p>
-                        <CodeHighlight>
-                            {`
+<CodeHighlight>
+{`
 <Calendar value={this.state.dates} onChange={(e) => this.setState({date: e.value})} viewDate={this.state.viewDate} onViewDateChange={(e) => this.setState({viewDate: e.value})}></Calendar>
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h3>Selection Mode</h3>
                         <p>Calendar offers "single" (default), "multiple" and "range" selection types controlled via the <i>selectionMode</i> property. In single, mode the bound value should be an array whereas in multiple
             case an array is required. Third alternative is the range mode that allows selecting a range based on an array of two values where first value is the start date and second value
             is the end date. Note that time picker is not currently supported in multiple and range modes.</p>
-                        <CodeHighlight>
-                            {`
+<CodeHighlight>
+{`
 <Calendar selectionMode="multiple" value={this.state.dates} onChange={(e) => this.setState({dates: e.value})}></Calendar>
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h3>DateFormat</h3>
                         <p>Default date format is "mm/dd/yy" which can be customized using the <i>dateFormat</i> property.</p>
 
-                        <CodeHighlight>
-                            {`
+<CodeHighlight>
+{`
 <Calendar dateFormat="dd/mm/yy" value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <p>Following options can be a part of the format.</p>
                         <ul>
@@ -534,66 +530,60 @@ import { Calendar } from 'primereact/calendar';
                         <p>TimePicker is enabled with <i>showTime</i> property and <i>hourFormat</i> is used to select the 24 (default) or 12 hour mode. Optionally enabling <i>timeOnly</i>
                 displays a calendare with time controls only.</p>
 
-                        <CodeHighlight>
-                            {`
+<CodeHighlight>
+{`
 <Calendar showTime={true} hourFormat="12" value={this.state.date1} onChange={(e) => this.setState({date1: e.value})}></Calendar>
 <Calendar showTime={true} hourFormat="24" value={this.state.date2} onChange={(e) => this.setState({date2: e.value})}></Calendar>
 <Calendar timeOnly={true} showTime={true} hourFormat="24" value={this.state.date3} onChange={(e) => this.setState({date3: e.value})}></Calendar>
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h3>Date Restriction</h3>
                         <p>To disable entering dates manually, set <i>readOnlyInput</i> to true and to restrict selectable date ranges use <i>minDate</i> and <i>maxDate</i> options.</p>
 
-                        <CodeHighlight>
-                            {`
+<CodeHighlight>
+{`
 <Calendar minDate={minDate} maxDate={maxDate} readOnlyInput={true} value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h3>Disable specific dates and/or days</h3>
                         <p>Specific dates or days can be disabled as well, in this case set <i>readOnlyInput</i> to true and to restrict selectable dates use <i>disabledDates</i> and/or <i>disabledDays</i> options. <i>disabledDates</i>
             property should be an array of dates and <i>disabledDays</i> should be an array of disabled weekdays.</p>
 
-                        <CodeHighlight>
-                            {`
+<CodeHighlight>
+{`
 <Calendar disabledDates={invalidDates}" disabledDays={[0,6]} readOnlyInput={true} value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h3>Button Bar</h3>
                         <p>Button bar displays today and clear buttons and activated using the <i>showButtonBar</i> property.</p>
-                        <CodeHighlight>
-                            {`
+<CodeHighlight>
+{`
 <Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} showButtonBar={true}></Calendar>
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h3>Multiple Months</h3>
                         <p>Displaying multiple months is enabled by setting <i>numberOfMonths</i> property to a value greater than 1.</p>
-                        <CodeHighlight>
-                            {`
+<CodeHighlight>
+{`
 <Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} numberOfMonths={3}></Calendar>
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h3>Localization</h3>
                         <p>Localization for different languages and formats is defined by binding the locale settings object to the <i>locale</i> property. Following is a Spanish calendar.</p>
 
-                        <CodeHighlight>
-                            {`
+<CodeHighlight>
+{`
 <Calendar locale={es} dateFormat="dd/mm/yy" value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <CodeHighlight lang="js">
-                            {`
+<CodeHighlight lang="js">
+{`
 let es = {
     firstDayOfWeek: 1,
     dayNames: ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"],
@@ -606,23 +596,21 @@ let es = {
     dateFormat: 'dd/mm/yy',
     weekHeader: 'Sm'
 };
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h3>Date Template</h3>
                         <p>Date cell contents can be templated using the <i>dateTemplate</i> property that returns the content of a cell. This is a handy feature to highlight specific dates. Note that the
             variable passed to the template is not a date instance but a metadata object to represent a Date with "day", "month", "year", "otherMonth", "today" and "selectable" properties to represent the date. Example below changes the styling of dates between 10 and 15.</p>
 
-                        <CodeHighlight>
-                            {`
+<CodeHighlight>
+{`
 <Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} dateTemplate={this.dateTemplate} />
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <CodeHighlight lang="js">
-                            {`
+<CodeHighlight lang="js">
+{`
 dateTemplate(date) {
     if (date.day > 10 && date.day < 15) {
         return (
@@ -633,16 +621,14 @@ dateTemplate(date) {
         return date.day;
     }
 }
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h3>Header and Footer</h3>
                         <p><i>headerTemplate</i> and <i>footerTemplate</i> properties are available to place custom content at these sections.</p>
-                        <CodeHighlight>
-                            {`
+<CodeHighlight>
+{`
 <Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} headerTemplate={<Button label="Custom Button" />} footerTemplate={<div>Footer Content</div>} />
-
 `}
                         </CodeHighlight>
 
@@ -650,30 +636,27 @@ dateTemplate(date) {
                         <p>Navigators are used to quickly change the displayed month and year using dropdowns. Enabling <i>monthNavigator</i> displays a dropdown with months whereas <i>yearNavigator</i> along with <i>yearRange</i> displays
             available years. Format of the <i>yearRange</i> is "startYear:endYear".</p>
 
-                        <CodeHighlight>
-                            {`
+<CodeHighlight>
+{`
 <Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} monthNavigator={true} yearNavigator={true} yearRange="2010:2030" />
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h3>Month Picker</h3>
                         <p>Month picker is used to select month and year only without the date, set <i>view</i> mode as "month" to activate month picker.</p>
-                        <CodeHighlight>
-                            {`
+<CodeHighlight>
+{`
 <Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} view="month" dateFormat="mm/yy" yearNavigator={true} yearRange="2010:2030"/>
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h3>Touch UI</h3>
                         <p>Touch UI mode displays the calendar overlay at the center of the screen as optimized for touch devices.</p>
-                        <CodeHighlight>
-                            {`
+<CodeHighlight>
+{`
 <Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} touchUI={true} />
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
 
                         <h3>Properties</h3>
@@ -1154,15 +1137,9 @@ dateTemplate(date) {
 
                     </TabPanel>
 
-                    {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="CalendarDemo" sources={[key, value]} extFiles={this.extFiles} />
-                                </TabPanel>
-                            );
-                        })
-                    }
+                    <TabPanel header="Source">
+                        <LiveEditor name="CalendarDemo" sources={this.sources} extFiles={this.extFiles} />
+                    </TabPanel>
                 </TabView>
             </div>
         );
