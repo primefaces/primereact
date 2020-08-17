@@ -13,14 +13,14 @@ export class GMapDoc extends Component {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { GMap } from 'primereact/gmap';
 `}
 </CodeHighlight>
 
-            <h3>Getting Started</h3>
+            <h5>Getting Started</h5>
             <p>A map is initialized with options and dimensions. Refer to the google maps api for the list of available options.</p>
 
 <CodeHighlight lang="js">
@@ -38,7 +38,7 @@ render() {
 `}
 </CodeHighlight>
 
-            <h3>Overlays</h3>
+            <h5>Overlays</h5>
             <p>GMap can display any type of overlay such as markers, polygons and circles. Overlay instances are bound using the overlays property array. Overlays are aware
             of binding so whenever the array changes, gmap updates itself.</p>
 
@@ -69,7 +69,7 @@ render() {
 `}
 </CodeHighlight>
 
-            <h3>Events</h3>
+            <h5>Events</h5>
             <p>GMap provides common callbacks to hook into events including map click, overlay click and overlay dragging.</p>
 <CodeHighlight lang="js">
 {`
@@ -112,7 +112,7 @@ render() {
 `}
 </CodeHighlight>
 
-            <h3>Google Maps API</h3>
+            <h5>Google Maps API</h5>
             <p>In case you need to access the map instance directly, use the getMap() method. In the following example, this.gmap.getMap() will provide the map instance. Alternative
             is using onMapReady event as it passes the map instance as a parameter.</p>
 
@@ -132,7 +132,7 @@ render() {
 </CodeHighlight>
 
 
-            <h3>Properties</h3>
+            <h5>Properties</h5>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -172,7 +172,7 @@ render() {
                 </table>
             </div>
 
-            <h3>Events</h3>
+            <h5>Events</h5>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -229,11 +229,11 @@ render() {
                 </table>
             </div>
 
-            <h3>Styling</h3>
+            <h5>Styling</h5>
             <p>Component does not apply any styling.</p>
 
 
-            <h3>Dependencies</h3>
+            <h5>Dependencies</h5>
             <p>Google Maps script.</p>
 
             </TabPanel>

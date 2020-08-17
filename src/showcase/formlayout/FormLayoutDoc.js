@@ -71,7 +71,7 @@ export class FormLayoutDemo extends Component {
     render() {
         return (
             <div>
-                <h3>Vertical</h3>
+                <h5>Vertical</h5>
                 <div className="p-fluid">
                     <div className="p-field">
                         <label htmlFor="firstname1">Firstname</label>
@@ -83,7 +83,7 @@ export class FormLayoutDemo extends Component {
                     </div>
                 </div>
 
-                <h3>Vertical and Grid</h3>
+                <h5>Vertical and Grid</h5>
                 <div className="p-fluid p-formgrid p-grid">
                     <div className="p-field p-col">
                         <label htmlFor="firstname2">Firstname</label>
@@ -95,7 +95,7 @@ export class FormLayoutDemo extends Component {
                     </div>
                 </div>
 
-                <h3>Horizontal and Fixed Width</h3>
+                <h5>Horizontal and Fixed Width</h5>
                 <div className="p-field p-grid">
                     <label htmlFor="firstname3" className="p-col-fixed" style={{width:'100px'}}>Firstname</label>
                     <div className="p-col">
@@ -109,7 +109,7 @@ export class FormLayoutDemo extends Component {
                     </div>
                 </div>
 
-                <h3>Horizontal and Fluid</h3>
+                <h5>Horizontal and Fluid</h5>
                 <div className="p-fluid">
                     <div className="p-field p-grid">
                         <label htmlFor="firstname4" className="p-col-12 p-md-2">Firstname</label>
@@ -125,7 +125,7 @@ export class FormLayoutDemo extends Component {
                     </div>
                 </div>
 
-                <h3>Inline</h3>
+                <h5>Inline</h5>
                 <div className="p-formgroup-inline">
                     <div className="p-field">
                         <label htmlFor="firstname5" className="p-sr-only">Firstname</label>
@@ -138,7 +138,7 @@ export class FormLayoutDemo extends Component {
                     <Button type="button" label="Submit"/>
                 </div>
 
-                <h3>Vertical Checkbox</h3>
+                <h5>Vertical Checkbox</h5>
                 <div className="p-field-checkbox">
                     <Checkbox inputId="city1" value="Chicago" onChange={this.onCityChange1} checked={this.state.cities1.indexOf('Chicago') !== -1}/>
                     <label htmlFor="city1">Chicago</label>
@@ -148,7 +148,7 @@ export class FormLayoutDemo extends Component {
                     <label htmlFor="city2">Los Angeles</label>
                 </div>
 
-                <h3>Horizontal Checkbox</h3>
+                <h5>Horizontal Checkbox</h5>
                 <div className="p-formgroup-inline">
                     <div className="p-field-checkbox">
                         <Checkbox inputId="city3" value="Chicago" onChange={this.onCityChange2} checked={this.state.cities2.indexOf('Chicago') !== -1}/>
@@ -160,7 +160,7 @@ export class FormLayoutDemo extends Component {
                     </div>
                 </div>
 
-                <h3>Vertical RadioButton</h3>
+                <h5>Vertical RadioButton</h5>
                 <div className="p-field-radiobutton">
                     <RadioButton inputId="city5" name="city1" value="Chicago" onChange={(e) => this.setState({city1: e.value})} checked={this.state.city1 === 'Chicago'} />
                     <label htmlFor="city5">Chicago</label>
@@ -170,7 +170,7 @@ export class FormLayoutDemo extends Component {
                     <label htmlFor="city6">Los Angeles</label>
                 </div>
 
-                <h3>Horizontal RadioButton</h3>
+                <h5>Horizontal RadioButton</h5>
                 <div className="p-formgroup-inline">
                     <div className="p-field-checkbox">
                         <RadioButton inputId="city5" name="city2" value="Chicago" onChange={(e) => this.setState({city2: e.value})} checked={this.state.city2 === 'Chicago'} />
@@ -182,14 +182,14 @@ export class FormLayoutDemo extends Component {
                     </div>
                 </div>
 
-                <h3>Help Text</h3>
+                <h5>Help Text</h5>
                 <div className="p-field p-fluid">
                     <label htmlFor="username">Username</label>
                     <InputText id="username" type="username" aria-describedby="username-help"/>
                     <small id="username-help">Enter your username to reset your password.</small>
                 </div>
 
-                <h3>Advanced</h3>
+                <h5>Advanced</h5>
                 <div className="p-fluid p-formgrid p-grid">
                     <div className="p-field p-col-12 p-md-6">
                         <label htmlFor="firstname6">Firstname</label>
@@ -275,7 +275,7 @@ const FormLayoutDemo = () => {
 
     return (
         <div>
-            <h3>Vertical</h3>
+            <h5>Vertical</h5>
                     <div className="p-fluid">
                         <div className="p-field">
                             <label htmlFor="firstname1">Firstname</label>
@@ -287,7 +287,7 @@ const FormLayoutDemo = () => {
                         </div>
                     </div>
 
-                    <h3>Vertical and Grid</h3>
+                    <h5>Vertical and Grid</h5>
                     <div className="p-fluid p-formgrid p-grid">
                         <div className="p-field p-col">
                             <label htmlFor="firstname2">Firstname</label>
@@ -299,7 +299,7 @@ const FormLayoutDemo = () => {
                         </div>
                     </div>
 
-                    <h3>Horizontal and Fixed Width</h3>
+                    <h5>Horizontal and Fixed Width</h5>
                     <div className="p-field p-grid">
                         <label htmlFor="firstname3" className="p-col-fixed" style={{width:'100px'}}>Firstname</label>
                         <div className="p-col">
@@ -313,7 +313,7 @@ const FormLayoutDemo = () => {
                         </div>
                     </div>
 
-                    <h3>Horizontal and Fluid</h3>
+                    <h5>Horizontal and Fluid</h5>
                     <div className="p-fluid">
                         <div className="p-field p-grid">
                             <label htmlFor="firstname4" className="p-col-12 p-md-2">Firstname</label>
@@ -329,7 +329,7 @@ const FormLayoutDemo = () => {
                         </div>
                     </div>
 
-                    <h3>Inline</h3>
+                    <h5>Inline</h5>
                     <div className="p-formgroup-inline">
                         <div className="p-field">
                             <label htmlFor="firstname5" className="p-sr-only">Firstname</label>
@@ -342,7 +342,7 @@ const FormLayoutDemo = () => {
                         <Button type="button" label="Submit"/>
                     </div>
 
-                    <h3>Vertical Checkbox</h3>
+                    <h5>Vertical Checkbox</h5>
                     <div className="p-field-checkbox">
                         <Checkbox inputId="city1" value="Chicago" onChange={onCityChange1} checked={cities1.indexOf('Chicago') !== -1}/>
                         <label htmlFor="city1">Chicago</label>
@@ -352,7 +352,7 @@ const FormLayoutDemo = () => {
                         <label htmlFor="city2">Los Angeles</label>
                     </div>
 
-                    <h3>Horizontal Checkbox</h3>
+                    <h5>Horizontal Checkbox</h5>
                     <div className="p-formgroup-inline">
                         <div className="p-field-checkbox">
                             <Checkbox inputId="city3" value="Chicago" onChange={onCityChange2} checked={cities2.indexOf('Chicago') !== -1}/>
@@ -364,7 +364,7 @@ const FormLayoutDemo = () => {
                         </div>
                     </div>
 
-                    <h3>Vertical RadioButton</h3>
+                    <h5>Vertical RadioButton</h5>
                     <div className="p-field-radiobutton">
                         <RadioButton inputId="city5" name="city1" value="Chicago" onChange={e => setCity1(e.value)} checked={city1 === 'Chicago'} />
                         <label htmlFor="city5">Chicago</label>
@@ -374,7 +374,7 @@ const FormLayoutDemo = () => {
                         <label htmlFor="city6">Los Angeles</label>
                     </div>
 
-                    <h3>Horizontal RadioButton</h3>
+                    <h5>Horizontal RadioButton</h5>
                     <div className="p-formgroup-inline">
                         <div className="p-field-checkbox">
                             <RadioButton inputId="city5" name="city2" value="Chicago" onChange={e => setCity2(e.value)} checked={city2 === 'Chicago'} />
@@ -386,14 +386,14 @@ const FormLayoutDemo = () => {
                         </div>
                     </div>
 
-                    <h3>Help Text</h3>
+                    <h5>Help Text</h5>
                     <div className="p-field p-fluid">
                         <label htmlFor="username">Username</label>
                         <InputText id="username" type="username" aria-describedby="username-help"/>
                         <small id="username-help">Enter your username to reset your password.</small>
                     </div>
 
-                    <h3>Advanced</h3>
+                    <h5>Advanced</h5>
                     <div className="p-fluid p-formgrid p-grid">
                         <div className="p-field p-col-12 p-md-6">
                             <label htmlFor="firstname6">Firstname</label>
@@ -479,7 +479,7 @@ const FormLayoutDemo = () => {
 
     return (
         <div>
-            <h3>Vertical</h3>
+            <h5>Vertical</h5>
                     <div className="p-fluid">
                         <div className="p-field">
                             <label htmlFor="firstname1">Firstname</label>
@@ -491,7 +491,7 @@ const FormLayoutDemo = () => {
                         </div>
                     </div>
 
-                    <h3>Vertical and Grid</h3>
+                    <h5>Vertical and Grid</h5>
                     <div className="p-fluid p-formgrid p-grid">
                         <div className="p-field p-col">
                             <label htmlFor="firstname2">Firstname</label>
@@ -503,7 +503,7 @@ const FormLayoutDemo = () => {
                         </div>
                     </div>
 
-                    <h3>Horizontal and Fixed Width</h3>
+                    <h5>Horizontal and Fixed Width</h5>
                     <div className="p-field p-grid">
                         <label htmlFor="firstname3" className="p-col-fixed" style={{width:'100px'}}>Firstname</label>
                         <div className="p-col">
@@ -517,7 +517,7 @@ const FormLayoutDemo = () => {
                         </div>
                     </div>
 
-                    <h3>Horizontal and Fluid</h3>
+                    <h5>Horizontal and Fluid</h5>
                     <div className="p-fluid">
                         <div className="p-field p-grid">
                             <label htmlFor="firstname4" className="p-col-12 p-md-2">Firstname</label>
@@ -533,7 +533,7 @@ const FormLayoutDemo = () => {
                         </div>
                     </div>
 
-                    <h3>Inline</h3>
+                    <h5>Inline</h5>
                     <div className="p-formgroup-inline">
                         <div className="p-field">
                             <label htmlFor="firstname5" className="p-sr-only">Firstname</label>
@@ -546,7 +546,7 @@ const FormLayoutDemo = () => {
                         <Button type="button" label="Submit"/>
                     </div>
 
-                    <h3>Vertical Checkbox</h3>
+                    <h5>Vertical Checkbox</h5>
                     <div className="p-field-checkbox">
                         <Checkbox inputId="city1" value="Chicago" onChange={onCityChange1} checked={cities1.indexOf('Chicago') !== -1}/>
                         <label htmlFor="city1">Chicago</label>
@@ -556,7 +556,7 @@ const FormLayoutDemo = () => {
                         <label htmlFor="city2">Los Angeles</label>
                     </div>
 
-                    <h3>Horizontal Checkbox</h3>
+                    <h5>Horizontal Checkbox</h5>
                     <div className="p-formgroup-inline">
                         <div className="p-field-checkbox">
                             <Checkbox inputId="city3" value="Chicago" onChange={onCityChange2} checked={cities2.indexOf('Chicago') !== -1}/>
@@ -568,7 +568,7 @@ const FormLayoutDemo = () => {
                         </div>
                     </div>
 
-                    <h3>Vertical RadioButton</h3>
+                    <h5>Vertical RadioButton</h5>
                     <div className="p-field-radiobutton">
                         <RadioButton inputId="city5" name="city1" value="Chicago" onChange={e => setCity1(e.value)} checked={city1 === 'Chicago'} />
                         <label htmlFor="city5">Chicago</label>
@@ -578,7 +578,7 @@ const FormLayoutDemo = () => {
                         <label htmlFor="city6">Los Angeles</label>
                     </div>
 
-                    <h3>Horizontal RadioButton</h3>
+                    <h5>Horizontal RadioButton</h5>
                     <div className="p-formgroup-inline">
                         <div className="p-field-checkbox">
                             <RadioButton inputId="city5" name="city2" value="Chicago" onChange={e => setCity2(e.value)} checked={city2 === 'Chicago'} />
@@ -590,14 +590,14 @@ const FormLayoutDemo = () => {
                         </div>
                     </div>
 
-                    <h3>Help Text</h3>
+                    <h5>Help Text</h5>
                     <div className="p-field p-fluid">
                         <label htmlFor="username">Username</label>
                         <InputText id="username" type="username" aria-describedby="username-help"/>
                         <small id="username-help">Enter your username to reset your password.</small>
                     </div>
 
-                    <h3>Advanced</h3>
+                    <h5>Advanced</h5>
                     <div className="p-fluid p-formgrid p-grid">
                         <div className="p-field p-col-12 p-md-6">
                             <label htmlFor="firstname6">Firstname</label>
@@ -641,7 +641,7 @@ const FormLayoutDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Install</h3>
+                        <h5>Install</h5>
                         <p>PrimeFlex is available at npm, if you have an existing application run the following command to download it to your project.</p>
 <CodeHighlight lang="js">
 {`
@@ -656,7 +656,7 @@ import 'primeflex/primeflex.css';
 `}
 </CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>Core member of the FormLayout is the <i>.p-field</i> class that wraps the input field and the associated label.</p>
 <CodeHighlight>
 {`
@@ -667,7 +667,7 @@ import 'primeflex/primeflex.css';
 `}
 </CodeHighlight>
 
-                        <h3>Vertical Layout</h3>
+                        <h5>Vertical Layout</h5>
                         <p>In its simplest form, a vertical layout is created when used within <i>.p-fluid</i> which makes the components use all available width.</p>
 <CodeHighlight>
 {`
@@ -684,7 +684,7 @@ import 'primeflex/primeflex.css';
 `}
 </CodeHighlight>
 
-                        <h3>Vertical Layout with Grid</h3>
+                        <h5>Vertical Layout with Grid</h5>
                         <p>This is where FormLayout actually hooks-in to PrimeFlex with the help of <i>.p-formgrid</i> class to optimize the content for form design. Example
                             below arranges two fields to be displayed next two each other.</p>
 <CodeHighlight>
@@ -702,7 +702,7 @@ import 'primeflex/primeflex.css';
 `}
 </CodeHighlight>
 
-                        <h3>Horizontal and Fixed Width</h3>
+                        <h5>Horizontal and Fixed Width</h5>
                         <p>In horizontal form, label of the field is displayed on the same row of the input as opposed to the vertical alternative. In this
                             example, label has a fixed width where container of the inputs gets the remaining space.
                         </p>
@@ -723,7 +723,7 @@ import 'primeflex/primeflex.css';
 `}
 </CodeHighlight>
 
-                        <h3>Horizontal and Fluid</h3>
+                        <h5>Horizontal and Fluid</h5>
                         <p>Wrapping the form in the previous example with <i>.p-fluid</i> and removing the fixed width results in a fluid layout.</p>
 <CodeHighlight>
 {`
@@ -744,7 +744,7 @@ import 'primeflex/primeflex.css';
 `}
 </CodeHighlight>
 
-                        <h3>Inline</h3>
+                        <h5>Inline</h5>
                         <p>Inline forms are used to display the content on the same row and can simply be implemented by adding <i>.p-formgroup-inline</i> to the form container. Note that per design requirements, if labels
                             are not visually hidden, it is suggested to use <i>.p-sr-only</i> to still support screen readers.</p>
 <CodeHighlight>
@@ -763,12 +763,12 @@ import 'primeflex/primeflex.css';
 `}
 </CodeHighlight>
 
-                        <h3>Checkbox and RadioButton</h3>
+                        <h5>Checkbox and RadioButton</h5>
                         <p>Checkbox and RadioButton have exclusive layout support via <i>.p-field-checkbox</i> and <i>.p-field-radiobutton</i> classes respectively.
                             Examples here demonstrates vertical and horizontal layout alternatives.</p>
 <CodeHighlight>
 {`
-<h3>Vertical Checkbox</h3>
+<h5>Vertical Checkbox</h5>
 <div className="p-field-checkbox">
     <Checkbox inputId="city1" value="Chicago" onChange={this.onCityChange1} checked={this.state.cities1.indexOf('Chicago') !== -1}/>
     <label htmlFor="city1">Chicago</label>
@@ -778,7 +778,7 @@ import 'primeflex/primeflex.css';
     <label htmlFor="city2">Los Angeles</label>
 </div>
 
-<h3>Horizontal Checkbox</h3>
+<h5>Horizontal Checkbox</h5>
 <div className="p-formgroup-inline">
     <div className="p-field-checkbox">
         <Checkbox inputId="city3" value="Chicago" onChange={this.onCityChange2} checked={this.state.cities2.indexOf('Chicago') !== -1}/>
@@ -793,7 +793,7 @@ import 'primeflex/primeflex.css';
 </CodeHighlight>
 <CodeHighlight>
 {`
-<h3>Vertical RadioButton</h3>
+<h5>Vertical RadioButton</h5>
 <div className="p-field-radiobutton">
     <RadioButton inputId="city5" name="city1" value="Chicago" onChange={(e) => this.setState({city1: e.value})} checked={this.state.city1 === 'Chicago'} />
     <label htmlFor="city5">Chicago</label>
@@ -803,7 +803,7 @@ import 'primeflex/primeflex.css';
     <label htmlFor="city6">Los Angeles</label>
 </div>
 
-<h3>Horizontal RadioButton</h3>
+<h5>Horizontal RadioButton</h5>
 <div className="p-formgroup-inline">
     <div className="p-field-checkbox">
         <RadioButton inputId="city5" name="city2" value="Chicago" onChange={(e) => this.setState({city2: e.value})} checked={this.state.city2 === 'Chicago'} />
@@ -817,7 +817,7 @@ import 'primeflex/primeflex.css';
 `}
 </CodeHighlight>
 
-                        <h3>Helper text</h3>
+                        <h5>Helper text</h5>
                         <p>Helper text is an optional element defined with the <i>small</i> tag to display additional information about the input field.</p>
 <CodeHighlight>
 {`
@@ -829,7 +829,7 @@ import 'primeflex/primeflex.css';
 `}
 </CodeHighlight>
 
-                        <h3>Advanced Forms</h3>
+                        <h5>Advanced Forms</h5>
                         <p>A responsive form with various input fields can easily be implemented using a combination of <i>.p-field</i>, <i>.p-formgrid</i> and <i>.p-fluid</i>.</p>
 <CodeHighlight>
 {`
@@ -862,7 +862,7 @@ import 'primeflex/primeflex.css';
 `}
 </CodeHighlight>
 
-                        <h3>Customization</h3>
+                        <h5>Customization</h5>
                         <p>FormLayout comes with sensible defaults, in case these values need to be customized suggested
                             way is building <a
                                 href="https://github.com/primefaces/primeflex/blob/master/primeflex.scss">primeflex.scss</a> with

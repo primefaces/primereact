@@ -189,7 +189,7 @@ const GrowlDemo = () => {
         <div className="p-fluid">
             <Growl ref={growl} />
 
-            <h3 style={{marginTop: 0}}>Severities</h3>
+            <h3 style={{marginTop: 0}}>Severities</h5>
             <div className="p-grid">
                 <div className="p-col-12 p-md-3">
                     <Button onClick={showSuccess} label="Success" className="p-button-success" />
@@ -205,7 +205,7 @@ const GrowlDemo = () => {
                 </div>
             </div>
 
-            <h3>Options</h3>
+            <h5>Options</h5>
             <div className="p-grid">
                 <div className="p-col-12 p-md-4">
                     <Button onClick={showMultiple} label="Multiple" className="p-button-warning" />
@@ -218,7 +218,7 @@ const GrowlDemo = () => {
                 </div>
             </div>
 
-            <h3>Remove All</h3>
+            <h5>Remove All</h5>
             <Button onClick={clear} label="Clear" style={{width: 'auto', marginLeft: '.5em'}}/>
         </div>
     )
@@ -278,7 +278,7 @@ const GrowlDemo = () => {
         <div className="p-fluid">
             <Growl ref={growl} />
 
-            <h3 style={{marginTop: 0}}>Severities</h3>
+            <h3 style={{marginTop: 0}}>Severities</h5>
             <div className="p-grid">
                 <div className="p-col-12 p-md-3">
                     <Button onClick={showSuccess} label="Success" className="p-button-success" />
@@ -294,7 +294,7 @@ const GrowlDemo = () => {
                 </div>
             </div>
 
-            <h3>Options</h3>
+            <h5>Options</h5>
             <div className="p-grid">
                 <div className="p-col-12 p-md-4">
                     <Button onClick={showMultiple} label="Multiple" className="p-button-warning" />
@@ -307,7 +307,7 @@ const GrowlDemo = () => {
                 </div>
             </div>
 
-            <h3>Remove All</h3>
+            <h5>Remove All</h5>
             <Button onClick={clear} label="Clear" style={{width: 'auto', marginLeft: '.5em'}}/>
         </div>
     )
@@ -326,14 +326,14 @@ const GrowlDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { Growl } from 'primereact/growl';
 `}
 </CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>A single message is represented by the Message interface in PrimeReact that defines various properties such as severity,
                summary and detail. Messages are displayed by using the <i>show</i> method on the ref of the Growl instance.</p>
 
@@ -351,7 +351,7 @@ this.growl.show({severity: 'success', summary: 'Success Message', detail: 'Order
 `}
 </CodeHighlight>
 
-                        <h3>Message API</h3>
+                        <h5>Message API</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -403,7 +403,7 @@ this.growl.show({severity: 'success', summary: 'Success Message', detail: 'Order
                             </table>
                         </div>
 
-                        <h3>Severities</h3>
+                        <h5>Severities</h5>
                         <p>There are four possible values for the severity of a message.</p>
 
                         <ul>
@@ -413,7 +413,7 @@ this.growl.show({severity: 'success', summary: 'Success Message', detail: 'Order
                             <li>error</li>
                         </ul>
 
-                        <h3>Showing Messages</h3>
+                        <h5>Showing Messages</h5>
                         <p>Show method accepts either a single message or an array of messages.</p>
 
 <CodeHighlight>
@@ -456,7 +456,7 @@ showMultiple() {
 `}
 </CodeHighlight>
 
-                        <h3>Closable</h3>
+                        <h5>Closable</h5>
                         <p>Growls are closable by default resulting in a close icon being displayed on top right corner. In order to disable closable messages, set closable to false.</p>
 
 <CodeHighlight lang="js">
@@ -465,7 +465,7 @@ this.growl.show({closable: false, severity: 'error', summary: 'Error Message', d
 `}
 </CodeHighlight>
 
-                        <h3>Sticky</h3>
+                        <h5>Sticky</h5>
                         <p>Messages are cleared automatically after the timeout defined by <i>life</i> property which is 3 seconds by default. Use <i>sticky</i> mode to make them stay until
             they are manually removed.</p>
 
@@ -479,7 +479,7 @@ this.growl.show({life: 5000, severity: 'error', summary: 'Error Message', detail
 `}
 </CodeHighlight>
 
-                        <h3>Position</h3>
+                        <h5>Position</h5>
                         <p>There are four positions available for the growl container defined by the <i>position</i> property that defaults to "top-right". Other
                 valid values are "top-left", "bottom-left" and "bottom-right"
             </p>
@@ -490,7 +490,7 @@ this.growl.show({life: 5000, severity: 'error', summary: 'Error Message', detail
 `}
 </CodeHighlight>
 
-                        <h3>Clearing Messages</h3>
+                        <h5>Clearing Messages</h5>
                         <p><i>clear()</i> method removes all messages from Growl.</p>
 
 <CodeHighlight>
@@ -499,7 +499,7 @@ this.growl.clear();
 `}
 </CodeHighlight>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -545,7 +545,7 @@ this.growl.clear();
                             </table>
                         </div>
 
-                        <h3>Events</h3>
+                        <h5>Events</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -570,7 +570,7 @@ this.growl.clear();
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -612,7 +612,7 @@ this.growl.clear();
                                 </tbody>
                             </table>
 
-                            <h3>Dependencies</h3>
+                            <h5>Dependencies</h5>
                             <ul>
                                 <li>react-transition-group</li>
                             </ul>

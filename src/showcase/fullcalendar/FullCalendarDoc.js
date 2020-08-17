@@ -161,14 +161,14 @@ const FullCalendarDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { FullCalendar } from 'primereact/fullcalendar';
 `}
 </CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>FullCalendar is a wrapper around on <a href="https://fullcalendar.io/docs/v4">FullCalendar 4.0.1+</a> so fullcalendar core needs to be included in your project.
                         For a complete documentation and samples please refer to the <a href="https://fullcalendar.io/">fullcalendar website</a>.</p>
 
@@ -225,7 +225,7 @@ export class FullCalendarDemo extends Component {
 `}
                         </CodeHighlight>
 
-                        <h3>Callbacks</h3>
+                        <h5>Callbacks</h5>
                         <p>Callbacks of the FullCalendar such as dateClick are also defined with the options property.</p>
 
 <CodeHighlight lang="js">
@@ -245,7 +245,7 @@ let options: {
 `}
 </CodeHighlight>
 
-                        <h3>Methods</h3>
+                        <h5>Methods</h5>
                         <p>Methods of the underlying calendar instance is accessible using the reference of the components calendar API.</p>
 
 <CodeHighlight>
@@ -260,7 +260,7 @@ this.fc.calendar.nextYear();
 </CodeHighlight>
 
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -300,7 +300,7 @@ this.fc.calendar.nextYear();
                             </table>
                         </div>
 
-                        <h3>Dependencies</h3>
+                        <h5>Dependencies</h5>
                         <p>
                             <a href="https://fullcalendar.io/docs/v4">FullCalendar 4.0.1+</a>
                         </p>

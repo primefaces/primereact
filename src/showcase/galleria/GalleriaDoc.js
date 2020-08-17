@@ -13,14 +13,14 @@ export class GalleriaDoc extends Component {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { Galleria } from 'primereact/galleria';
 `}
 </CodeHighlight>
 
-            <h3>Getting Started</h3>
+            <h5>Getting Started</h5>
             <p>Galleria requires a value as an array of objects and can either be used as a Controlled or Uncontrolled component.</p>
 
 <CodeHighlight>
@@ -40,7 +40,7 @@ thumbnailTemplate(item) {
 `}
 </CodeHighlight>
 
-            <h3>Items per page</h3>
+            <h5>Items per page</h5>
             <p>Number of items per page is defined using the <i>numVisible</i> property.</p>
 <CodeHighlight>
 {`
@@ -49,7 +49,7 @@ thumbnailTemplate(item) {
 `}
 </CodeHighlight>
 
-            <h3>Responsive</h3>
+            <h5>Responsive</h5>
             <p>For responsive design, <i>numVisible</i> can be defined using the <i>responsiveOptions</i> property that should be an array of
             objects whose breakpoint defines the max-width to apply the settings.</p>
 <CodeHighlight>
@@ -78,7 +78,7 @@ const responsiveOptions = [
 `}
 </CodeHighlight>
 
-            <h3>Header and Footer</h3>
+            <h5>Header and Footer</h5>
             <p>Custom content projection is available using the <i>header</i> and <i>footer</i> properties.</p>
 <CodeHighlight>
 {`
@@ -88,7 +88,7 @@ const responsiveOptions = [
 `}
 </CodeHighlight>
 
-            <h3>Controlled vs Uncontrolled</h3>
+            <h5>Controlled vs Uncontrolled</h5>
             <p>In controlled mode, <i>activeIndex</i> and <i>onItemChange</i> properties need to be defined to control the first visible item.</p>
 
 <CodeHighlight>
@@ -98,7 +98,7 @@ const responsiveOptions = [
 `}
 </CodeHighlight>
 
-            <h3>Uncontrolled</h3>
+            <h5>Uncontrolled</h5>
             <p>In uncontrolled mode, no additional properties are required. Initial item can be provided using the <i>activeItemIndex</i> property in uncontrolled mode however it is evaluated at initial rendering and ignored in further updates. If you programmatically
                 need to update the first visible item index, prefer to use the component as controlled.</p>
 
@@ -108,7 +108,7 @@ const responsiveOptions = [
 `}
 </CodeHighlight>
 
-            <h3>Properties</h3>
+            <h5>Properties</h5>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -292,7 +292,7 @@ const responsiveOptions = [
                 </table>
             </div>
 
-            <h3>Events</h3>
+            <h5>Events</h5>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
@@ -312,7 +312,7 @@ const responsiveOptions = [
                 </table>
             </div>
 
-            <h3>Styling</h3>
+            <h5>Styling</h5>
             <p>Following is the list of structural style classes</p>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
@@ -362,7 +362,7 @@ const responsiveOptions = [
                     </tbody>
                 </table>
 
-                <h3>Dependencies</h3>
+                <h5>Dependencies</h5>
                 <p>None.</p>
             </div>
 

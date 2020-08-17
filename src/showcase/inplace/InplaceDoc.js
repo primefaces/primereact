@@ -105,7 +105,7 @@ const InplaceDemo = () => {
 
     return (
         <div>
-            <h3>Input</h3>
+            <h5>Input</h5>
             <Inplace closable={true}>
                 <InplaceDisplay>
                     Click to Edit
@@ -115,7 +115,7 @@ const InplaceDemo = () => {
                 </InplaceContent>
             </Inplace>
 
-            <h3>Image</h3>
+            <h5>Image</h5>
             <Inplace>
                 <InplaceDisplay>
                     <span className="pi pi-search" style={{verticalAlign: 'middle'}}></span>
@@ -126,7 +126,7 @@ const InplaceDemo = () => {
                 </InplaceContent>
             </Inplace>
 
-            <h3>Lazy Data</h3>
+            <h5>Lazy Data</h5>
             <Inplace onOpen={onOpen}>
                 <InplaceDisplay>
                     View Data
@@ -165,7 +165,7 @@ const InplaceDemo = () => {
 
     return (
         <div>
-            <h3>Input</h3>
+            <h5>Input</h5>
             <Inplace closable={true}>
                 <InplaceDisplay>
                     Click to Edit
@@ -175,7 +175,7 @@ const InplaceDemo = () => {
                 </InplaceContent>
             </Inplace>
 
-            <h3>Image</h3>
+            <h5>Image</h5>
             <Inplace>
                 <InplaceDisplay>
                     <span className="pi pi-search" style={{verticalAlign: 'middle'}}></span>
@@ -186,7 +186,7 @@ const InplaceDemo = () => {
                 </InplaceContent>
             </Inplace>
 
-            <h3>Lazy Data</h3>
+            <h5>Lazy Data</h5>
             <Inplace onOpen={onOpen}>
                 <InplaceDisplay>
                     View Data
@@ -217,14 +217,14 @@ const InplaceDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
+                        <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
 import { Inplace } from 'primereact/inplace';
 `}
 </CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>Inplace requires InplaceDisplay and InplaceContent component as children to define the content to display in each state. Active state of the inplace
                 can either be managed as a Controlled or Uncontrolled component.</p>
 
@@ -258,7 +258,7 @@ import { Inplace } from 'primereact/inplace';
 `}
 </CodeHighlight>
 
-                        <h3>Closable</h3>
+                        <h5>Closable</h5>
                         <p><i>closable</i> property is handy within forms as it enables to get back to output mode after editing is completed using a button displayed next to the form field.</p>
 <CodeHighlight>
 {`
@@ -273,7 +273,7 @@ import { Inplace } from 'primereact/inplace';
 `}
 </CodeHighlight>
 
-                        <h3>Lazy Loading</h3>
+                        <h5>Lazy Loading</h5>
                         <p>Inplace allows lazy loading content so that the content gets initialized after getting opened instead of on load. Here is an example that loads, data of a table
                         if the user decides to open the inplace.</p>
 <CodeHighlight lang="js">
@@ -298,7 +298,7 @@ onOpen() {
 `}
 </CodeHighlight>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -350,7 +350,7 @@ onOpen() {
                             </table>
                         </div>
 
-                        <h3>Events</h3>
+                        <h5>Events</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -382,7 +382,7 @@ onOpen() {
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -408,7 +408,7 @@ onOpen() {
                                 </tbody>
                             </table>
 
-                            <h3>Dependencies</h3>
+                            <h5>Dependencies</h5>
                             <p>None.</p>
                         </div>
 
