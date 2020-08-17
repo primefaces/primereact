@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Button } from '../../components/button/Button';
 import { ButtonDoc } from './ButtonDoc';
-import './ButtonDemo.scss';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import './ButtonDemo.scss';
 
 export class ButtonDemo extends Component {
 
