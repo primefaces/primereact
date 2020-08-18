@@ -32,37 +32,41 @@ export class TreeTableDemo extends Component {
     }
 
     toggleApplications() {
-        let expandedKeys = {...this.state.expandedKeys};
+        let expandedKeys = { ...this.state.expandedKeys };
         if (expandedKeys['0'])
             delete expandedKeys['0'];
         else
             expandedKeys['0'] = true;
 
-        this.setState({expandedKeys: expandedKeys});
+        this.setState({ expandedKeys: expandedKeys });
     }
 
     componentDidMount() {
-        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({ nodes: data }));
     }
 
     render() {
         return (
             <div>
-                <h5>Uncontrolled</h5>
-                <TreeTable value={this.state.nodes}>
-                    <Column field="name" header="Name" expander></Column>
-                    <Column field="size" header="Size"></Column>
-                    <Column field="type" header="Type"></Column>
-                </TreeTable>
+                <div className="card">
+                    <h5>Basic</h5>
+                    <TreeTable value={this.state.nodes}>
+                        <Column field="name" header="Name" expander></Column>
+                        <Column field="size" header="Size"></Column>
+                        <Column field="type" header="Type"></Column>
+                    </TreeTable>
+                </div>
 
-                <h5>Controlled</h5>
-                <Button onClick={this.toggleApplications} label="Toggle Applications" />
-                <TreeTable value={this.state.nodes} expandedKeys={this.state.expandedKeys}
-                    onToggle={e => this.setState({expandedKeys: e.value})} style={{marginTop: '.5em'}}>
-                    <Column field="name" header="Name" expander></Column>
-                    <Column field="size" header="Size"></Column>
-                    <Column field="type" header="Type"></Column>
-                </TreeTable>
+                <div className="card">
+                    <h5>Programmatic</h5>
+                    <Button onClick={this.toggleApplications} label="Toggle Applications" />
+                    <TreeTable value={this.state.nodes} expandedKeys={this.state.expandedKeys}
+                        onToggle={e => this.setState({ expandedKeys: e.value })} style={{ marginTop: '.5em' }}>
+                        <Column field="name" header="Name" expander></Column>
+                        <Column field="size" header="Size"></Column>
+                        <Column field="type" header="Type"></Column>
+                    </TreeTable>
+                </div>
             </div>
         )
     }

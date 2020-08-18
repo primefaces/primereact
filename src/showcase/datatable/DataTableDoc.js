@@ -14,28 +14,29 @@ export class DataTableDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {InputText} from 'primereact/inputtext';
-import {Button} from 'primereact/button';
-import {CustomerService} from '../service/CustomerService';
-import {Dropdown} from 'primereact/dropdown';
-import {Calendar} from 'primereact/calendar';
-import {MultiSelect} from 'primereact/multiselect';
-import {ProgressBar} from 'primereact/progressbar';
 import classNames from 'classnames';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { InputText } from 'primereact/inputtext';
+import { Button } from 'primereact/button';
+import { CustomerService } from '../service/CustomerService';
+import { Dropdown } from 'primereact/dropdown';
+import { Calendar } from 'primereact/calendar';
+import { MultiSelect } from 'primereact/multiselect';
+import { ProgressBar } from 'primereact/progressbar';
+import './DataTableDemo.scss';
 
 export class DataTableDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             customers: null,
             selectedCustomers: null,
             globalFilter: null,
             selectedRepresentatives: null,
             dateFilter: null,
-            selectedStatus: null,
+            selectedStatus: null
         };
 
         this.representatives = [
@@ -58,8 +59,10 @@ export class DataTableDemo extends Component {
         this.customerService = new CustomerService();
 
         //body cells
+        this.nameBodyTemplate = this.nameBodyTemplate.bind(this);
         this.countryBodyTemplate = this.countryBodyTemplate.bind(this);
         this.representativeBodyTemplate = this.representativeBodyTemplate.bind(this);
+        this.dateBodyTemplate = this.dateBodyTemplate.bind(this);
         this.statusBodyTemplate = this.statusBodyTemplate.bind(this);
         this.activityBodyTemplate = this.activityBodyTemplate.bind(this);
         this.actionBodyTemplate = this.actionBodyTemplate.bind(this);
@@ -79,17 +82,23 @@ export class DataTableDemo extends Component {
 
     renderHeader() {
         return (
-            <div>
+            <div className="table-header">
                 List of Customers
-                <div  className="p-datatable-globalfilter-container">
+                <span className="p-input-icon-left">
+                    <i className="pi pi-search" />
                     <InputText type="search" onInput={(e) => this.setState({globalFilter: e.target.value})} placeholder="Global Search" />
-                </div>
+                </span>
             </div>
         );
     }
 
     activityBodyTemplate(rowData) {
-        return <ProgressBar value={rowData.activity} showValue={false} />;
+        return (
+            <>
+                <span className="p-column-title">Activity</span>
+                <ProgressBar value={rowData.activity} showValue={false} />
+            </>
+        );
     }
 
     actionBodyTemplate() {
@@ -99,7 +108,21 @@ export class DataTableDemo extends Component {
     }
 
     statusBodyTemplate(rowData) {
-        return <span className={classNames('customer-badge', 'status-' + rowData.status)}>{rowData.status}</span>;
+        return (
+            <>
+                <span className="p-column-title">Status</span>
+                <span className={classNames('customer-badge', 'status-' + rowData.status)}>{rowData.status}</span>
+            </>
+        );
+    }
+
+    nameBodyTemplate(rowData) {
+        return (
+            <>
+                <span className="p-column-title">Name</span>
+                {rowData.name}
+            </>
+        );
     }
 
     countryBodyTemplate(rowData) {
@@ -107,7 +130,8 @@ export class DataTableDemo extends Component {
 
         return (
             <>
-                <img src="showcase/demo/images/flag_placeholder.png" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={name} className={classNames('flag', 'flag-' + code)} />
+                <span className="p-column-title">Country</span>
+                <img src="showcase/demo/images/flag_placeholder.png" alt={name} className={classNames('flag', 'flag-' + code)} />
                 <span style={{verticalAlign: 'middle', marginLeft: '.5em'}}>{name}</span>
             </>
         );
@@ -118,8 +142,18 @@ export class DataTableDemo extends Component {
 
         return (
             <>
-                <img alt={rowData.representative.name} src={src} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" width="32" style={{verticalAlign: 'middle'}} />
+                <span className="p-column-title">Representative</span>
+                <img alt={rowData.representative.name} src={src} width="32" style={{verticalAlign: 'middle'}} />
                 <span style={{verticalAlign: 'middle', marginLeft: '.5em'}}>{rowData.representative.name}</span>
+            </>
+        );
+    }
+
+    dateBodyTemplate(rowData) {
+        return (
+            <>
+                <span className="p-column-title">Date</span>
+                <span>{rowData.date}</span>
             </>
         );
     }
@@ -136,7 +170,7 @@ export class DataTableDemo extends Component {
 
         return (
             <div className="p-multiselect-representative-option">
-                <img alt={option.name} src={src} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" width="32" style={{verticalAlign: 'middle'}} />
+                <img alt={option.name} src={src} width="32" style={{verticalAlign: 'middle'}} />
                 <span style={{verticalAlign: 'middle', marginLeft: '.5em'}}>{option.name}</span>
             </div>
         );
@@ -215,20 +249,22 @@ export class DataTableDemo extends Component {
 
         return (
             <div className="datatable-doc-demo">
-                <DataTable ref={(el) => this.dt = el} value={this.state.customers}
-                    header={header} responsive className="p-datatable-customers" dataKey="id" rowHover globalFilter={this.state.globalFilter}
-                    selection={this.state.selectedCustomers} onSelectionChange={e => this.setState({selectedCustomers: e.value})}
-                    paginator rows={10} emptyMessage="No customers found" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" rowsPerPageOptions={[10,25,50]}>
-                    <Column selectionMode="multiple" style={{width:'3em'}}/>
-                    <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name" />
-                    <Column sortField="country.name" filterField="country.name" header="Country" body={this.countryBodyTemplate} sortable filter filterMatchMode="contains" filterPlaceholder="Search by country"/>
-                    <Column sortField="representative.name" filterField="representative.name" header="Representative" body={this.representativeBodyTemplate} sortable filter filterElement={representativeFilter} />
-                    <Column field="date" header="Date" sortable filter filterMatchMode="custom" filterFunction={this.filterDate} filterElement={dateFilter} />
-                    <Column field="status" header="Status" body={this.statusBodyTemplate} sortable filter filterElement={statusFilter} />
-                    <Column field="activity" header="Activity" body={this.activityBodyTemplate} sortable filter filterMatchMode="gte" filterPlaceholder="Minimum" />
-                    <Column body={this.actionBodyTemplate} headerStyle={{width: '8em', textAlign: 'center'}} bodyStyle={{textAlign: 'center', overflow: 'visible'}} />
-                </DataTable>
+                <div className="card">
+                    <DataTable ref={(el) => this.dt = el} value={this.state.customers}
+                        header={header} className="p-datatable-customers" dataKey="id" rowHover globalFilter={this.state.globalFilter}
+                        selection={this.state.selectedCustomers} onSelectionChange={e => this.setState({selectedCustomers: e.value})}
+                        paginator rows={10} emptyMessage="No customers found" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                        paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" rowsPerPageOptions={[10,25,50]}>
+                        <Column selectionMode="multiple" style={{width:'3em'}}/>
+                        <Column field="name" header="Name" body={this.nameBodyTemplate} sortable filter filterPlaceholder="Search by name" />
+                        <Column sortField="country.name" filterField="country.name" header="Country" body={this.countryBodyTemplate} sortable filter filterMatchMode="contains" filterPlaceholder="Search by country"/>
+                        <Column sortField="representative.name" filterField="representative.name" header="Representative" body={this.representativeBodyTemplate} sortable filter filterElement={representativeFilter} />
+                        <Column field="date" header="Date" body={this.dateBodyTemplate} sortable filter filterMatchMode="custom" filterFunction={this.filterDate} filterElement={dateFilter} />
+                        <Column field="status" header="Status" body={this.statusBodyTemplate} sortable filter filterElement={statusFilter} />
+                        <Column field="activity" header="Activity" body={this.activityBodyTemplate} sortable filter filterMatchMode="gte" filterPlaceholder="Minimum" />
+                        <Column body={this.actionBodyTemplate} headerStyle={{width: '8em', textAlign: 'center'}} bodyStyle={{textAlign: 'center', overflow: 'visible'}} />
+                    </DataTable>
+                </div>
             </div>
         );
     }
@@ -779,38 +815,33 @@ const DataTableDemo = () => {
                         <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
-import {DataTable} from 'primereact/datatable';
-
+import { DataTable } from 'primereact/datatable';
 `}
 </CodeHighlight>
 
             <h5>Getting Started</h5>
-            <p>DataTable requires a value as an array of objects and columns defined with Column component. Throughout the samples, a car interface having vin, brand, year and color properties is used to define an object to be displayed by the datatable. Cars are loaded by a CarService that connects to a server to fetch the cars with a axios.
-                Note that this is only for demo purposes, DataTable does not have any restrictions on how data is provided.
+            <p>DataTable requires a value as an array of objects and columns defined with Column component. Throughout the samples, a product interface having code, name, description, image, category, quantity, price, inventoryStatus and rating properties is used to define an object to be displayed by the datatable.
+                Products are loaded by a CustomerService that connects to a server to fetch the products with a axios. Note that this is only for demo purposes, DataTable does not have any restrictions on how data is provided.
             </p>
 
 <CodeHighlight lang="js">
 {`
 import axios from 'axios';
 
-export class CarService {
+export default class ProductService {
 
-    getCarsSmall() {
-        return axios.get('showcase/demo/data/cars-small.json')
-                .then(res => res.data.data);
+    getProductsSmall() {
+		return axios.get('showcase/demo/data/products-small.json').then(res => res.data.data);
+	}
+
+	getProducts() {
+		return axios.get('showcase/demo/data/products.json').then(res => res.data.data);
     }
 
-    getCarsMedium() {
-        return axios.get('showcase/demo/data/cars-medium.json')
-                .then(res => res.data.data);
-    }
-
-    getCarsLarge() {
-        return axios.get('showcase/demo/data/cars-large.json')
-                .then(res => res.data.data);
-    }
+    getProductsWithOrdersSmall() {
+		return axios.get('showcase/demo/data/products-orders-small.json').then(res => res.data.data);
+	}
 }
-
 `}
 </CodeHighlight>
 
@@ -819,28 +850,30 @@ export class CarService {
 {`
 export class DataTableDemo extends Component {
 
-    constructor() {
-        super();
-        this.state = {};
-        this.carservice = new CarService();
+    constructor(props) {
+        super(props);
+        this.state = {
+            products: []
+        };
+
+        this.productService = new ProductService();
     }
 
     componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
     }
 
     render() {
         return (
-            <DataTable value={this.state.cars}>
-                <Column field="vin" header="Vin" />
-                <Column field="year" header="Year" />
-                <Column field="brand" header="Brand" />
-                <Column field="color" header="Color" />
+            <DataTable value={this.state.products}>
+                <Column field="code" header="Code"></Column>
+                <Column field="name" header="Name"></Column>
+                <Column field="category" header="Category"></Column>
+                <Column field="quantity" header="Quantity"></Column>
             </DataTable>
         );
     }
 }
-
 `}
 </CodeHighlight>
 
@@ -849,36 +882,39 @@ export class DataTableDemo extends Component {
 {`
 export class DataTableDemo extends Component {
 
-    constructor() {
-        super();
-        this.state = {};
-        this.carservice = new CarService();
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            products: []
+        };
+
+        this.columns = [
+            {field: 'code', header: 'Code'},
+            {field: 'name', header: 'Name'},
+            {field: 'category', header: 'Category'},
+            {field: 'quantity', header: 'Quantity'}
+        ];
+
+        this.productService = new ProductService();
     }
 
     componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
     }
 
     render() {
-        let cols = [
-            {field: 'vin', header: 'Vin'},
-            {field: 'year', header: 'Year'},
-            {field: 'brand', header: 'Brand'},
-            {field: 'color', header: 'Color'}
-        ];
-
-        let dynamicColumns = cols.map((col,i) => {
+        const dynamicColumns = this.columns.map((col,i) => {
             return <Column key={col.field} field={col.field} header={col.header} />;
         });
 
         return (
-            <DataTable value={this.state.cars}>
+            <DataTable value={this.state.products}>
                 {dynamicColumns}
             </DataTable>
         );
     }
 }
-
 `}
 </CodeHighlight>
 
@@ -1179,52 +1215,65 @@ export class DataTableDemo extends Component {
 {`
 export class DataTableTemplatingDemo extends Component {
 
-    constructor() {
-        super();
-        this.state = {};
-        this.carservice = new CarService();
-        this.brandTemplate = this.brandTemplate.bind(this);
-        this.colorTemplate = this.colorTemplate.bind(this);
-        this.actionBodyTemplate = this.actionBodyTemplate.bind(this);
-    }
+    constructor(props) {
+        super(props);
 
-    colorTemplate(rowData, column) {
-        return <span style={{color: rowData['color']}}>{rowData['color']}</span>;
-    }
+        this.state = {
+            products: []
+        };
 
-    brandTemplate(rowData, column) {
-        var src = "showcase/demo/images/car/" + rowData.brand + ".png";
-        return <img src={src} alt={rowData.brand}/>;
-    }
-
-    actionTemplate(rowData, column) {
-        return <div>
-            <Button type="button" icon="pi pi-search" className="p-button-success"></Button>
-            <Button type="button" icon="pi pi-pencil" className="p-button-warning"></Button>
-        </div>;
+        this.productService = new ProductService();
+        this.imageBodyTemplate = this.imageBodyTemplate.bind(this);
+        this.priceBodyTemplate = this.priceBodyTemplate.bind(this);
+        this.ratingBodyTemplate = this.ratingBodyTemplate.bind(this);
+        this.statusBodyTemplate = this.statusBodyTemplate.bind(this);
     }
 
     componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
+    }
+
+    formatCurrency(value) {
+        return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    }
+
+    imageBodyTemplate(rowData) {
+        return <img src={\`showcase/demo/images/product/\${rowData.image}\`} alt={rowData.image} className="product-image" />;
+    }
+
+    priceBodyTemplate(rowData) {
+        return this.formatCurrency(rowData.price);
+    }
+
+    ratingBodyTemplate(rowData) {
+        return <Rating value={rowData.rating} readonly cancel={false} />;
+    }
+
+    statusBodyTemplate(rowData) {
+        return <span className={\`product-badge status-\${rowData.inventoryStatus.toLowerCase()}\`}>{rowData.inventoryStatus}</span>;
     }
 
     render() {
-        var carCount = this.state.cars ? this.state.cars.length: 0;
-        var header = <div className="p-clearfix" style={{'lineHeight':'1.87em'}}>List of Cars <Button icon="pi pi-refresh" style={{'float':'right'}}/></div>;
-        var footer = "There are " + carCount + ' cars';
+        const header = (
+            <div className="table-header">
+                Products
+                <Button icon="pi pi-refresh" />
+            </div>
+        );
+        const footer = \`In total there are \${this.state.products ? this.state.products.length : 0} products.\`;
 
         return (
-            <DataTable value={this.state.cars} header={header} footer={footer}>
-                <Column field="vin" header="Vin" />
-                <Column field="year" header="Year" />
-                <Column field="brand" header="Brand" body={this.brandTemplate} style={{textAlign:'center'}}/>
-                <Column field="color" header="Color" body={this.colorTemplate} />
-                <Column body={this.actionTemplate} style={{textAlign:'center', width: '6em'}}/>
+            <DataTable value={this.state.products} header={header} footer={footer}>
+                <Column field="name" header="Name"></Column>
+                <Column header="Image" body={this.imageBodyTemplate}></Column>
+                <Column field="price" header="Price" body={this.priceBodyTemplate}></Column>
+                <Column field="category" header="Category"></Column>
+                <Column field="rating" header="Reviews" body={this.ratingBodyTemplate}></Column>
+                <Column header="Status" body={this.statusBodyTemplate}></Column>
             </DataTable>
         );
     }
 }
-
 `}
 </CodeHighlight>
 
@@ -1241,28 +1290,72 @@ import {Row} from 'primereact/row';
 
 export class DataTableColGroupDemo extends Component {
 
-    constructor() {
-        super();
-        this.state = {
-            sales: [
-                {brand: 'Apple', lastYearSale: '51%', thisYearSale: '40%', lastYearProfit: '$54,406.00', thisYearProfit: '$43,342'},
-                {brand: 'Samsung', lastYearSale: '83%', thisYearSale: '96%', lastYearProfit: '$423,132', thisYearProfit: '$312,122'},
-                {brand: 'Microsoft', lastYearSale: '38%', thisYearSale: '5%', lastYearProfit: '$12,321', thisYearProfit: '$8,500'},
-                {brand: 'Philips', lastYearSale: '49%', thisYearSale: '22%', lastYearProfit: '$745,232', thisYearProfit: '$650,323,'},
-                {brand: 'Song', lastYearSale: '17%', thisYearSale: '79%', lastYearProfit: '$643,242', thisYearProfit: '500,332'},
-                {brand: 'LG', lastYearSale: '52%', thisYearSale: ' 65%', lastYearProfit: '$421,132', thisYearProfit: '$150,005'},
-                {brand: 'Sharp', lastYearSale: '82%', thisYearSale: '12%', lastYearProfit: '$131,211', thisYearProfit: '$100,214'},
-                {brand: 'Panasonic', lastYearSale: '44%', thisYearSale: '45%', lastYearProfit: '$66,442', thisYearProfit: '$53,322'},
-                {brand: 'HTC', lastYearSale: '90%', thisYearSale: '56%', lastYearProfit: '$765,442', thisYearProfit: '$296,232'},
-                {brand: 'Toshiba', lastYearSale: '75%', thisYearSale: '54%', lastYearProfit: '$21,212', thisYearProfit: '$12,533'}
-            ]
-        };
+    constructor(props) {
+        super(props);
+
+        this.sales = [
+            {product: 'Bamboo Watch', lastYearSale: 51, thisYearSale: 40, lastYearProfit: 54406, thisYearProfit: 43342},
+            {product: 'Black Watch', lastYearSale: 83, thisYearSale: 9, lastYearProfit: 423132, thisYearProfit: 312122},
+            {product: 'Blue Band', lastYearSale: 38, thisYearSale: 5, lastYearProfit: 12321, thisYearProfit: 8500},
+            {product: 'Blue T-Shirt', lastYearSale: 49, thisYearSale: 22, lastYearProfit: 745232, thisYearProfit: 65323},
+            {product: 'Brown Purse', lastYearSale: 17, thisYearSale: 79, lastYearProfit: 643242, thisYearProfit: 500332},
+            {product: 'Chakra Bracelet', lastYearSale: 52, thisYearSale:  65, lastYearProfit: 421132, thisYearProfit: 150005},
+            {product: 'Galaxy Earrings', lastYearSale: 82, thisYearSale: 12, lastYearProfit: 131211, thisYearProfit: 100214},
+            {product: 'Game Controller', lastYearSale: 44, thisYearSale: 45, lastYearProfit: 66442, thisYearProfit: 53322},
+            {product: 'Gaming Set', lastYearSale: 90, thisYearSale: 56, lastYearProfit: 765442, thisYearProfit: 296232},
+            {product: 'Gold Phone Case', lastYearSale: 75, thisYearSale: 54, lastYearProfit: 21212, thisYearProfit: 12533}
+        ];
+
+        this.lastYearTotal = this.lastYearTotal.bind(this);
+        this.thisYearTotal = this.thisYearTotal.bind(this);
+        this.lastYearSaleBodyTemplate = this.lastYearSaleBodyTemplate.bind(this);
+        this.thisYearSaleBodyTemplate = this.thisYearSaleBodyTemplate.bind(this);
+        this.lastYearProfitBodyTemplate = this.lastYearProfitBodyTemplate.bind(this);
+        this.thisYearProfitBodyTemplate = this.thisYearProfitBodyTemplate.bind(this);
+    }
+
+    lastYearSaleBodyTemplate(rowData) {
+        return \`\${rowData.lastYearSale}%\`;
+    }
+
+    thisYearSaleBodyTemplate(rowData) {
+        return \`\${rowData.thisYearSale}%\`;
+    }
+
+    lastYearProfitBodyTemplate(rowData) {
+        return \`\${this.formatCurrency(rowData.lastYearProfit)}\`;
+    }
+
+    thisYearProfitBodyTemplate(rowData) {
+        return \`\${this.formatCurrency(rowData.thisYearProfit)}\`;
+    }
+
+    formatCurrency(value) {
+        return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+    }
+
+    lastYearTotal() {
+        let total = 0;
+        for(let sale of this.sales) {
+            total += sale.lastYearProfit;
+        }
+
+        return this.formatCurrency(total);
+    }
+
+    thisYearTotal() {
+        let total = 0;
+        for(let sale of this.sales) {
+            total += sale.thisYearProfit;
+        }
+
+        return this.formatCurrency(total);
     }
 
     render() {
         let headerGroup = <ColumnGroup>
                             <Row>
-                                <Column header="Brand" rowSpan={3} />
+                                <Column header="Product" rowSpan={3} />
                                 <Column header="Sale Rate" colSpan={4} />
                             </Row>
                             <Row>
@@ -1270,32 +1363,31 @@ export class DataTableColGroupDemo extends Component {
                                 <Column header="Profits" colSpan={2} />
                             </Row>
                             <Row>
-                                <Column header="Last Year" />
-                                <Column header="This Year" />
-                                <Column header="Last Year" />
-                                <Column header="This Year" />
+                                <Column header="Last Year" sortable field="lastYearSale"/>
+                                <Column header="This Year" sortable field="thisYearSale"/>
+                                <Column header="Last Year" sortable field="lastYearProfit"/>
+                                <Column header="This Year" sortable field="thisYearProfit"/>
                             </Row>
                         </ColumnGroup>;
 
        let footerGroup = <ColumnGroup>
                             <Row>
-                                <Column footer="Totals:" colSpan={3} />
-                                <Column footer="$506,202" />
-                                <Column footer="$531,020" />
+                                <Column footer="Totals:" colSpan={3} footerStyle={{textAlign: 'right'}}/>
+                                <Column footer={this.lastYearTotal} />
+                                <Column footer={this.thisYearTotal} />
                             </Row>
                          </ColumnGroup>;
         return (
-            <DataTable value={this.state.sales} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup}>
-                <Column field="brand" />
-                <Column field="lastYearSale" />
-                <Column field="thisYearSale" />
-                <Column field="lastYearProfit" />
-                <Column field="thisYearProfit" />
+            <DataTable value={this.sales} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup}>
+                <Column field="product" />
+                <Column field="lastYearSale" body={this.lastYearSaleBodyTemplate} />
+                <Column field="thisYearSale" body={this.thisYearSaleBodyTemplate} />
+                <Column field="lastYearProfit" body={this.lastYearProfitBodyTemplate} />
+                <Column field="thisYearProfit" body={this.thisYearProfitBodyTemplate} />
             </DataTable>
         );
     }
 }
-
 `}
 </CodeHighlight>
 
@@ -1310,30 +1402,32 @@ export class DataTableColGroupDemo extends Component {
 {`
 export class DataTablePaginatorDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
-            cars: null
+            products: [],
+            first: 0
         };
-        this.carservice = new CarService();
+
+        this.productService = new ProductService();
     }
 
     componentDidMount() {
-        this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
     }
 
     render() {
         return (
-            <DataTable value={this.state.cars} paginator={true} rows={10} first={this.state.first} onPage={(e) => this.setState({first: e.first})}>
-                <Column field="vin" header="Vin" />
-                <Column field="year" header="Year" />
-                <Column field="brand" header="Brand" />
-                <Column field="color" header="Color" />
+            <DataTable value={this.state.products} paginator rows={10} first={this.state.first} onPage={(e) => this.setState({first: e.first})}>
+                <Column field="code" header="Code"></Column>
+                <Column field="name" header="Name"></Column>
+                <Column field="category" header="Category"></Column>
+                <Column field="quantity" header="Quantity"></Column>
             </DataTable>
         );
     }
 }
-
 `}
 </CodeHighlight>
 
@@ -1343,44 +1437,44 @@ export class DataTablePaginatorDemo extends Component {
 {`
 export class DataTablePaginatorDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
-            cars: null
+            products: []
         };
-        this.carservice = new CarService();
+
+        this.productService = new ProductService();
     }
 
     componentDidMount() {
-        this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
     }
 
     render() {
         return (
-            <DataTable value={this.state.cars} paginator={true} rows={10}>
-                <Column field="vin" header="Vin" />
-                <Column field="year" header="Year" />
-                <Column field="brand" header="Brand" />
-                <Column field="color" header="Color" />
+            <DataTable value={this.state.products} paginator rows={10}>
+                <Column field="code" header="Code"></Column>
+                <Column field="name" header="Name"></Column>
+                <Column field="category" header="Category"></Column>
+                <Column field="quantity" header="Quantity"></Column>
             </DataTable>
         );
     }
 }
-
 `}
 </CodeHighlight>
 
             <p>Elements of the paginator can be customized using the <i>paginatorTemplate</i> by the DataTable. Refer to the template section of the <Link to="/paginator"> paginator documentation</Link> for further options.</p>
 <CodeHighlight>
 {`
-<DataTable value={this.state.cars} paginator={true} rows={10} first={start}
+<DataTable value={this.state.products} paginator rows={10} first={start}
     paginatorTemplate="RowsPerPageDropdown PageLinks FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink">
-    <Column field="vin" header="Vin" />
-    <Column field="year" header="Year" />
-    <Column field="brand" header="Brand" />
-    <Column field="color" header="Color" />
+    <Column field="code" header="Code"></Column>
+    <Column field="name" header="Name"></Column>
+    <Column field="category" header="Category"></Column>
+    <Column field="quantity" header="Quantity"></Column>
 </DataTable>
-
 `}
 </CodeHighlight>
 
@@ -1388,16 +1482,14 @@ export class DataTablePaginatorDemo extends Component {
             <p>Enabling <i>sortable</i> property at column component would be enough to make a column sortable. The property to use when sorting is <i>field</i> by default and can be customized using <i>sortField</i>.</p>
 <CodeHighlight>
 {`
-<Column field="vin" header="Vin" sortable={true}/>
-
+<Column field="name" header="Name" sortable/>
 `}
 </CodeHighlight>
 
             <p>By default sorting is executed on the clicked column only. To enable multiple field sorting, set <i>sortMode</i> property to "multiple" and use metakey when clicking on another column.</p>
 <CodeHighlight>
 {`
-<DataTable value={this.state.cars} sortMode="multiple">
-
+<DataTable value={this.state.products} sortMode="multiple">
 `}
 </CodeHighlight>
 
@@ -1407,63 +1499,58 @@ export class DataTablePaginatorDemo extends Component {
 
 <CodeHighlight>
 {`
-<DataTable value={this.state.cars} sortField={this.state.sortField} sortOrder={this.state.sortOrder} onSort={(e) => this.setState({sortField: e.sortField, sortOrder: e.sortOrder})}>
-    <Column field="vin" header="Vin" sortable={true}/>
-    <Column field="year" header="Year" sortable={true}/>
-    <Column field="brand" header="Brand" sortable={true}/>
-    <Column field="color" header="Color" sortable={true}/>
+<DataTable value={this.state.products} sortField={this.state.sortField} sortOrder={this.state.sortOrder} onSort={(e) => this.setState({sortField: e.sortField, sortOrder: e.sortOrder})}>
+    <Column field="code" header="Code" sortable></Column>
+    <Column field="name" header="Name" sortable></Column>
+    <Column field="category" header="Category" sortable></Column>
+    <Column field="quantity" header="Quantity" sortable></Column>
 </DataTable>
-
 `}
 </CodeHighlight>
 
             <p>In multiple mode, use the <i>multiSortMeta</i> property and bind an array of SortMeta objects instead.</p>
 <CodeHighlight>
 {`
-<DataTable value={this.state.cars} multiSortMeta={multiSortMeta} onSort={(e) => this.setState({multiSortMeta: e.multiSortMeta})}>
-    <Column field="vin" header="Vin" sortable={true}/>
-    <Column field="year" header="Year" sortable={true}/>
-    <Column field="brand" header="Brand" sortable={true}/>
-    <Column field="color" header="Color" sortable={true}/>
+<DataTable value={this.state.products} multiSortMeta={multiSortMeta} onSort={(e) => this.setState({multiSortMeta: e.multiSortMeta})}>
+    <Column field="code" header="Code" sortable></Column>
+    <Column field="name" header="Name" sortable></Column>
+    <Column field="category" header="Category" sortable></Column>
+    <Column field="quantity" header="Quantity" sortable></Column>
 </DataTable>
-
 `}
 </CodeHighlight>
 
 <CodeHighlight lang="js">
 {`
 let multiSortMeta = [];
-multiSortMeta.push({field: 'year', order: 1});
-multiSortMeta.push({field: 'brand', order: -1});
-
+multiSortMeta.push({field: 'code', order: 1});
+multiSortMeta.push({field: 'name', order: -1});
 `}
 </CodeHighlight>
 
             <p>In uncontrolled mode, no additional properties need to be enabled. Initial sort field can be still be provided using the <i>sortField</i> property in uncontrolled mode however
             it is evaluated at initial rendering and ignored in further updates. If you programmatically need to update the sorting state, prefer to use the component as controlled.</p>
 
-            <CodeHighlight>
+<CodeHighlight>
 {`
-<DataTable value={this.state.cars} sortField="year" sortOrder={1}>
-    <Column field="vin" header="Vin" sortable={true}/>
-    <Column field="year" header="Year" sortable={true}/>
-    <Column field="brand" header="Brand" sortable={true}/>
-    <Column field="color" header="Color" sortable={true}/>
+<DataTable value={this.state.products} sortField="name" sortOrder={1}>
+    <Column field="code" header="Code" sortable></Column>
+    <Column field="name" header="Name" sortable></Column>
+    <Column field="category" header="Category" sortable></Column>
+    <Column field="quantity" header="Quantity" sortable></Column>
 </DataTable>
-
 `}
 </CodeHighlight>
 
             <p>To customize sorting algorithm, define a sortFunction that sorts the list.</p>
 <CodeHighlight>
 {`
-<DataTable value={this.state.cars} >
-    <Column field="vin" header="Vin" sortable={true}/>
-    <Column field="year" header="Year" sortable={true} sortFunction={this.mysort}/>
-    <Column field="brand" header="Brand" sortable={true}/>
-    <Column field="color" header="Color" sortable={true}/>
+<DataTable value={this.state.products} >
+    <Column field="code" header="Code" sortable></Column>
+    <Column field="name" header="Name" sortable sortFunction={this.mysort}></Column>
+    <Column field="category" header="Category" sortable></Column>
+    <Column field="quantity" header="Quantity" sortable></Column>
 </DataTable>
-
 `}
 </CodeHighlight>
 
@@ -1473,20 +1560,18 @@ mysort(event) {
     //event.field = Field to sort
     //event.order = Sort order
 }
-
 `}
 </CodeHighlight>
 
             <p>Getting access to the sorted data is provided by the <i>onValueChange</i> callback.</p>
-            <CodeHighlight lang="js">
+<CodeHighlight lang="js">
 {`
-<DataTable value={this.state.cars} onValueChange={sortedData => console.log(sortedData)}>
-    <Column field="vin" header="Vin" sortable={true} />
-    <Column field="year" header="Year" sortable={true} />
-    <Column field="brand" header="Brand" sortable={true} />
-    <Column field="color" header="Color" sortable={true} />
+<DataTable value={this.state.products} onValueChange={sortedData => console.log(sortedData)}>
+    <Column field="code" header="Code" sortable></Column>
+    <Column field="name" header="Name" sortable></Column>
+    <Column field="category" header="Category" sortable></Column>
+    <Column field="quantity" header="Quantity" sortable></Column>
 </DataTable>
-
 `}
 </CodeHighlight>
 
@@ -1494,13 +1579,12 @@ mysort(event) {
             <p>Filtering is enabled by setting the <i>filter</i> property as true on a column. Default match mode is "startsWith" and this can be configured using <i>filterMatchMode</i> property that also accepts                 "contains", "endsWith", "equals", "notEquals", "in", "lt", "lte", "gt", "gte" and "custom" as available modes.</p>
  <CodeHighlight>
 {`
-<DataTable value={this.state.cars}>
-    <Column field="vin" header="Vin" filter={true} />
-    <Column field="year" header="Year" filter={true} filterPlaceholder="Search" />
-    <Column field="brand" header="Brand" filter={true} filterMatchMode="contains"/>
-    <Column field="color" header="Color" filter={true} filterMatchMode="endsWith"/>
+<DataTable value={this.state.products}>
+    <Column field="code" header="Code" filter></Column>
+    <Column field="name" header="Name" filter filterPlaceholder="Search"></Column>
+    <Column field="category" header="Category" filter filterMatchMode="contains"></Column>
+    <Column field="quantity" header="Quantity" filter filterMatchMode="endsWith"></Column>
 </DataTable>
-
 `}
 </CodeHighlight>
 
@@ -1510,16 +1594,17 @@ mysort(event) {
 {`
 export class DataTableFilterDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
+            products: [],
             globalFilter: null
         };
-        this.carservice = new CarService();
+        this.productService = new ProductService();
     }
 
     componentDidMount() {
-        this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
     }
 
     render() {
@@ -1531,16 +1616,15 @@ export class DataTableFilterDemo extends Component {
         );
 
         return (
-            <DataTable value={this.state.cars} paginator={true} rows={10} header={header} globalFilter={this.state.globalFilter}>
-                <Column field="vin" header="Vin" filter={true} />
-                <Column field="year" header="Year" filter={true} />
-                <Column field="brand" header="Brand" filter={true} />
-                <Column field="color" header="Color" filter={true}  />
+            <DataTable value={this.state.products} paginator rows={10} header={header} globalFilter={this.state.globalFilter}>
+                <Column field="code" header="Code" filter></Column>
+                <Column field="name" header="Name" filter></Column>
+                <Column field="category" header="Category" filter></Column>
+                <Column field="quantity" header="Quantity" filter></Column>
             </DataTable>
         );
     }
 }
-
 `}
 </CodeHighlight>
 
@@ -1550,73 +1634,45 @@ export class DataTableFilterDemo extends Component {
 export class DataTableCustomFilterDemo extends Component {
 
     constructor() {
-        super();
+        super(props);
         this.state = {
-            brand: null,
-            colors: null
+            products: [],
+            inventoryStatus: null
         };
-        this.carservice = new CarService();
-        this.onBrandChange = this.onBrandChange.bind(this);
-        this.onColorChange = this.onColorChange.bind(this);
+        this.productService = new ProductService();
+        this.onStatusChange = this.onStatusChange.bind(this);
     }
 
     componentDidMount() {
-        this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
     }
 
-    onBrandChange(event) {
-        this.dt.filter(event.value, 'brand', 'equals');
-        this.setState({brand: event.value});
-    }
-
-    onColorChange(event) {
-        this.dt.filter(event.value, 'color', 'in');
-        this.setState({colors: event.value});
+    onStatusChange(event) {
+        this.dt.filter(event.value, 'inventoryStatus', 'equals');
+        this.setState({inventoryStatus: event.value});
     }
 
     render() {
-        let brands = [
-                {label: 'All Brands', value: null},
-                {label: 'Audi', value: 'Audi'},
-                {label: 'BMW', value: 'BMW'},
-                {label: 'Fiat', value: 'Fiat'},
-                {label: 'Honda', value: 'Honda'},
-                {label: 'Jaguar', value: 'Jaguar'},
-                {label: 'Mercedes', value: 'Mercedes'},
-                {label: 'Renault', value: 'Renault'},
-                {label: 'VW', value: 'VW'},
-                {label: 'Volvo', value: 'Volvo'}
+        let inventoryStatuses = [
+                {label: 'All Status', value: null},
+                {label: 'INSTOCK', value: 'INSTOCK'},
+                {label: 'LOWSTOCK', value: 'LOWSTOCK'},
+                {label: 'OUTOFSTOCK', value: 'OUTOFSTOCK'}
             ];
 
-        let brandFilter = <Dropdown style={{width: '100%'}} className="ui-column-filter"
-                value={this.state.brand} options={brands} onChange={this.onBrandChange}/>
-
-        let colors = [
-            {label: 'White', value: 'White'},
-            {label: 'Green', value: 'Green'},
-            {label: 'Silver', value: 'Silver'},
-            {label: 'Black', value: 'Black'},
-            {label: 'Red', value: 'Red'},
-            {label: 'Maroon', value: 'Maroon'},
-            {label: 'Brown', value: 'Brown'},
-            {label: 'Orange', value: 'Orange'},
-            {label: 'Blue', value: 'Blue'}
-        ];
-
-        let colorFilter = <MultiSelect style={{width:'100%'}} className="ui-column-filter"
-            value={this.state.colors} options={colors} onChange={this.onColorChange}/>
+        let statusFilter = <Dropdown style={{width: '100%'}} className="ui-column-filter"
+                value={this.state.inventoryStatus} options={inventoryStatuses} onChange={this.onStatusChange}/>
 
         return (
-            <DataTable ref={(el) => this.dt = el} value={this.state.cars}>
-                <Column field="vin" header="Vin" filter={true} />
-                <Column field="year" header="Year" filter={true} />
-                <Column field="brand" header="Brand" filter={true} filterElement={brandFilter} />
-                <Column field="color" header="Color" filter={true} filterElement={colorFilter} />
+            <DataTable ref={(el) => this.dt = el} value={this.state.products}>
+                <Column field="code" header="Code" filter></Column>
+                <Column field="name" header="Name" filter></Column>
+                <Column field="category" header="Category" filter></Column>
+                <Column field="inventoryStatus" header="Status" filter filterElement="statusFilter"></Column>
             </DataTable>
         );
     }
 }
-
 `}
 </CodeHighlight>
 
@@ -1627,97 +1683,97 @@ export class DataTableCustomFilterDemo extends Component {
 {`
 export class DataTableDefaultFilteredDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
+            products: [],
             filters: {
-                'brand': {
-                    value: 'BMW'
+                'inventoryStatus': {
+                    value: 'INSTOCK'
                 }
             }
         };
-        this.carservice = new CarService();
+        this.productService = new ProductService();
     }
 
     componentDidMount() {
-        this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
     }
 
     render() {
         return (
-            <DataTable value={this.state.cars} filters={this.state.filters} onFilter={(e) => this.setState({filters: e.filters})}>
-                <Column field="vin" header="Vin" filter={true} />
-                <Column field="year" header="Year" filter={true} />
-                <Column field="brand" header="Brand" filter={true} />
-                <Column field="color" header="Color" filter={true}  />
+            <DataTable value={this.state.products} filters={this.state.filters} onFilter={(e) => this.setState({filters: e.filters})}>
+                <Column field="code" header="Code" filter></Column>
+                <Column field="name" header="Name" filter></Column>
+                <Column field="category" header="Category" filter></Column>
+                <Column field="inventoryStatus" header="Status" filter></Column>
             </DataTable>
         );
     }
 }
-
 `}
 </CodeHighlight>
 
             <p>In uncontrolled filtering, no additional properties need to be enabled. Initial filtering can be still be provided using the <i>filters</i> property in uncontrolled mode however
             it is evaluated at initial rendering and ignored in further updates. If you programmatically need to update the filtering state, prefer to use the component as controlled.</p>
 
-            <CodeHighlight>
+<CodeHighlight>
 {`
-<DataTable value={this.state.cars}>
-    <Column field="vin" header="Vin" filter={true} />
-    <Column field="year" header="Year" filter={true} />
-    <Column field="brand" header="Brand" filter={true} />
-    <Column field="color" header="Color" filter={true}  />
+<DataTable value={this.state.products}>
+    <Column field="code" header="Code" filter></Column>
+    <Column field="name" header="Name" filter></Column>
+    <Column field="category" header="Category" filter></Column>
+    <Column field="inventoryStatus" header="Status" filter></Column>
 </DataTable>
-
 `}
 </CodeHighlight>
 
             <p>Custom filtering is implemented by setting the <i>filterMatchMode</i> property as "custom" and providing a function that takes the data value along with the filter value to return a boolean.</p>
-            <CodeHighlight lang="js">
+<CodeHighlight lang="js">
 {`
 export class DataTableFilterDemo extends Component {
 
-    constructor() {
-        super();
-        this.state = {};
-        this.carservice = new CarService();
-        this.yearFilter = this.yearFilter.bind(this);
+    constructor(props) {
+        super(props);
+        this.state = {
+            products: []
+        };
+
+        this.codeFilter = this.codeFilter.bind(this);
+        this.productService = new ProductService();
     }
 
     componentDidMount() {
-        this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
     }
 
-    yearFilter(value, filter) {
+    codeFilter(value, filter) {
         return filter > value;
     }
 
     render() {
         return (
-            <DataTable value={this.state.cars}>
-                <Column field="vin" header="Vin" filter={true} />
-                <Column field="year" header="Year" filter={true} filterMatchMode="custom" filterFunction={this.yearFilter}/>
-                <Column field="brand" header="Brand" filter={true} />
-                <Column field="color" header="Color" filter={true}  />
+            <DataTable value={this.state.products}>
+                <Column field="code" header="Code" filter filterMatchMode="custom" filterFunction={this.codeFilter}></Column>
+                <Column field="name" header="Name" filter></Column>
+                <Column field="category" header="Category" filter></Column>
+                <Column field="inventoryStatus" header="Status" filter></Column>
             </DataTable>
         );
     }
 }
-
 `}
 </CodeHighlight>
 
             <p>Getting access to the filtered data is provided by the <i>onValueChange</i> callback.</p>
             <CodeHighlight lang="js">
 {`
-<DataTable value={this.state.cars} onValueChange={filteredData => console.log(filteredData)}>
-    <Column field="vin" header="Vin" filter={true} />
-    <Column field="year" header="Year" filter={true} />
-    <Column field="brand" header="Brand" filter={true} />
-    <Column field="color" header="Color" filter={true}  />
+<DataTable value={this.state.products} onValueChange={filteredData => console.log(filteredData)}>
+    <Column field="code" header="Code" filter></Column>
+    <Column field="name" header="Name" filter></Column>
+    <Column field="category" header="Category" filter></Column>
+    <Column field="inventoryStatus" header="Status" filter></Column>
 </DataTable>
-
 `}
 </CodeHighlight>
 
@@ -1731,29 +1787,31 @@ export class DataTableFilterDemo extends Component {
 {`
 export class DataTableSelectionDemo extends Component {
 
-    constructor() {
-        super();
-        this.state = {};
-        this.carservice = new CarService();
+    constructor(props) {
+        super(props);
+        this.state = {
+            products: [],
+            selectedProduct: null
+        };
+        this.productService = new ProductService();
     }
 
     componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
     }
 
     render() {
         return (
-            <DataTable value={this.state.cars} selectionMode="single"
-                selection={this.state.selectedCar1} onSelectionChange={e => this.setState({selectedCar1: e.value})}>
-                <Column field="vin" header="Vin" />
-                <Column field="year" header="Year" />
-                <Column field="brand" header="Brand" />
-                <Column field="color" header="Color" />
+            <DataTable value={this.state.products} selectionMode="single"
+                selection={this.state.selectedProduct} onSelectionChange={e => this.setState({selectedProduct: e.value})}>
+                <Column field="code" header="Code"></Column>
+                <Column field="name" header="Name"></Column>
+                <Column field="category" header="Category"></Column>
+                <Column field="inventoryStatus" header="Status"></Column>
             </DataTable>
         );
     }
 }
-
 `}
 </CodeHighlight>
 
@@ -1764,29 +1822,32 @@ export class DataTableSelectionDemo extends Component {
 {`
 export class DataTableSelectionDemo extends Component {
 
-    constructor() {
-        super();
-        this.state = {};
-        this.carservice = new CarService();
+    constructor(props) {
+        super(props);
+        this.state = {
+            products: [],
+            selectedProducts: null
+        };
+
+        this.productService = new ProductService();
     }
 
     componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
     }
 
     render() {
         return (
-            <DataTable value={this.state.cars} selectionMode="multiple"
-                selection={this.state.selectedCars} onSelectionChange={e => this.setState({selectedCars: e.value})}>
-                <Column field="vin" header="Vin" />
-                <Column field="year" header="Year" />
-                <Column field="brand" header="Brand" />
-                <Column field="color" header="Color" />
+            <DataTable value={this.state.products} selectionMode="multiple"
+                selection={this.state.selectedProducts} onSelectionChange={e => this.setState({selectedProducts: e.value})}>
+                <Column field="code" header="Code"></Column>
+                <Column field="name" header="Name"></Column>
+                <Column field="category" header="Category"></Column>
+                <Column field="inventoryStatus" header="Status"></Column>
             </DataTable>
         );
     }
 }
-
 `}
 </CodeHighlight>
 
@@ -1795,14 +1856,13 @@ export class DataTableSelectionDemo extends Component {
             <p>Tip: Use <i>showSelectionElement</i> function in case you need to hide selection element for a particular row.</p>
 <CodeHighlight>
 {`
-<DataTable value={this.state.cars} selection={this.state.selectedCars} onSelectionChange={e => this.setState({selectedCars: e.value})}>
+<DataTable value={this.state.products} selection={this.state.selectedProducts} onSelectionChange={e => this.setState({selectedProducts: e.value})}>
     <Column selectionMode="multiple" />
-    <Column field="vin" header="Vin" />
-    <Column field="year" header="Year" />
-    <Column field="brand" header="Brand" />
-    <Column field="color" header="Color" />
+    <Column field="code" header="Code"></Column>
+    <Column field="name" header="Name"></Column>
+    <Column field="category" header="Category"></Column>
+    <Column field="inventoryStatus" header="Status"></Column>
 </DataTable>
-
 `}
 </CodeHighlight>
 
@@ -1812,54 +1872,48 @@ export class DataTableSelectionDemo extends Component {
 
 <CodeHighlight>
 {`
-<DataTable value={this.state.cars}>
-    <Column field="vin" header="Vin" editor={this.vinEditor} />
-    <Column field="brand" header="Brand" editor={this.brandEditor}/>
-    <Column field="saleDate" header="Sale Date" editor={this.saleDateEditor} >
+<DataTable value={this.state.products}>
+    <Column field="code" header="Code" editor={this.codeEditor}></Column>
+    <Column field="name" header="Name" editor={this.nameEditor}></Column>
+    <Column field="inventoryStatus" header="Status" body={this.statusBodyTemplate} editor={this.statusEditor}></Column>
+    <Column field="price" header="Price" editor={this.priceEditor}></Column>
 </DataTable>
-
 `}
 </CodeHighlight>
 
 <CodeHighlight lang="js">
 {`
 onEditorValueChange(props, value) {
-    let updatedCars = [...this.state.cars];
-    updatedCars[props.rowIndex][props.field] = value;
-    this.setState({cars: updatedCars});
+    let updatedProducts = [...props.value];
+    updatedProducts[props.rowIndex][props.field] = value;
+    this.setState({ products: updatedProducts });
 }
 
-vinEditor(props) {
-    return <InputText type="text" value={this.state.cars[props.rowIndex]['vin']} onChange={(e) => this.onEditorValueChange(props, e.target.value)} />;
+inputTextEditor(props, field) {
+    return <InputText type="text" value={props.rowData[field]} onChange={(e) => this.onEditorValueChange(props, e.target.value)} />;
 }
 
-brandEditor(props) {
-    let brands = [
-        {label: 'Audi', value: 'Audi'},
-        {label: 'BMW', value: 'BMW'},
-        {label: 'Fiat', value: 'Fiat'},
-        {label: 'Ford', value: 'Ford'},
-        {label: 'Honda', value: 'Honda'},
-        {label: 'Jaguar', value: 'Jaguar'},
-        {label: 'Mercedes', value: 'Mercedes'},
-        {label: 'Renault', value: 'Renault'},
-        {label: 'VW', value: 'VW'},
-        {label: 'Volvo', value: 'Volvo'}
-    ];
+codeEditor(props) {
+    return this.inputTextEditor(props, 'code');
+}
 
+nameEditor(props) {
+    return this.inputTextEditor(props, 'name');
+}
+
+priceEditor(props) {
+    return this.inputTextEditor(props, 'price');
+}
+
+statusEditor(props) {
     return (
-        <Dropdown value={this.state.cars[props.rowIndex].brand} options={brands}
-                onChange={(e) => this.onEditorValueChange(props, e.value)} style={{width:'100%'}} placeholder="Select a City"/>
+        <Dropdown value={props.rowData['inventoryStatus']} options={this.statuses} optionLabel="label" optionValue="value"
+            onChange={(e) => this.onEditorValueChange(props, e.value)} style={{ width: '100%' }} placeholder="Select a Status"
+            itemTemplate={(option) => {
+                return <span className={\`product-badge status-\${option.value.toLowerCase()}\`}>{option.label}</span>
+            }} />
     );
 }
-
-saleDateEditor(props) {
-    return (
-        <Calendar value={this.state.cars[props.rowIndex].saleDate}
-                onChange={(e) => this.onEditorValueChange(props, e.value)} style={{width:'100%'}} />
-    );
-}
-
 `}
 </CodeHighlight>
 
@@ -1869,12 +1923,11 @@ saleDateEditor(props) {
 
 <CodeHighlight>
 {`
-<DataTable value={this.state.cars}>
-    <Column field="vin" header="Vin" editor={this.vinEditor} editorValidator={this.requiredValidator} />
-    <Column field="brand" header="Brand" editor={this.brandEditor}/>
-    <Column field="saleDate" header="Sale Date" editor={this.saleDateEditor} >
+<DataTable value={this.state.products}>
+    <Column field="code" header="Code" editor={this.codeEditor} editorValidator={this.requiredValidator} />
+    <Column field="name" header="Name" editor={this.nameEditor} />
+    <Column field="price" header="Price" editor={this.priceDateEditor} />
 </DataTable>
-
 `}
 </CodeHighlight>
 
@@ -1892,79 +1945,21 @@ requiredValidator(props) {
 
 <CodeHighlight>
 {`
-<DataTable value={this.state.cars} editMode="row">
-    <Column field="vin" header="Vin" />
-    <Column field="brand" header="Brand" editor={this.brandEditor} onRowEditorValidator={this.onRowEditorValidator}/>
-    <Column field="saleDate" header="Sale Date" editor={this.saleDateEditor} >
+<DataTable value={this.state.products} editMode="row">
+    <Column field="code" header="Code" />
+    <Column field="name" header="Name" />
+    <Column field="inventoryStatuses" header="Status" editor={this.statusEditor} onRowEditorValidator={this.onRowEditorValidator} />
     <Column rowEditor={true} />
 </DataTable>
-
 `}
 </CodeHighlight>
 
 <CodeHighlight lang="js">
 {`
-onEditorValueChange(props, value) {
-    let updatedCars = [...this.state.cars];
-    updatedCars[props.rowIndex][props.field] = value;
-    this.setState({cars: updatedCars});
-}
-
-brandEditor(props) {
-    let brands = [
-        {label: 'Audi', value: 'Audi'},
-        {label: 'BMW', value: 'BMW'},
-        {label: 'Fiat', value: 'Fiat'},
-        {label: 'Ford', value: 'Ford'},
-        {label: 'Honda', value: 'Honda'},
-        {label: 'Jaguar', value: 'Jaguar'},
-        {label: 'Mercedes', value: 'Mercedes'},
-        {label: 'Renault', value: 'Renault'},
-        {label: 'VW', value: 'VW'},
-        {label: 'Volvo', value: 'Volvo'}
-    ];
-
-    return (
-        <Dropdown value={this.state.cars[props.rowIndex].brand} options={brands}
-                onChange={(e) => this.onEditorValueChange(props, e.value)} style={{width:'100%'}} placeholder="Select a City"/>
-    );
-}
-
-saleDateEditor(props) {
-    return (
-        <Calendar value={this.state.cars[props.rowIndex].saleDate}
-                onChange={(e) => this.onEditorValueChange(props, e.value)} style={{width:'100%'}} />
-    );
-}
-
 onRowEditorValidator(rowData) {
-    let value = rowData['brand'];
+    let value = rowData['inventoryStatuses'];
     return value.length > 0;
 }
-
-onRowEditInit(event) {
-    this.clonedCars[event.data.vin] = {...event.data};
-}
-
-onRowEditSave(event) {
-    if (this.onRowEditorValidator(event.data)) {
-        delete this.clonedCars[event.data.vin];
-        // Success message
-    }
-    else {
-        // Error message
-    }
-}
-
-onRowEditCancel(event) {
-    let cars = [...this.state.cars];
-    cars[event.index] = this.clonedCars[event.data.vin];
-    delete this.clonedCars[event.data.vin];
-    this.setState({
-        cars
-    })
-}
-
 `}
 </CodeHighlight>
 
@@ -1975,35 +1970,47 @@ onRowEditCancel(event) {
 {`
 export class DataTableContextMenuDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
-            menu: [
-                {label: 'View', icon: 'pi pi-fw pi-search', command: (event) => this.viewCar(this.state.selectedCar)},
-                {label: 'Delete', icon: 'pi pi-fw pi-times', command: (event) => this.deleteCar(this.state.selectedCar)}
-            ]
+            products: [],
+            selectedProduct: null
         };
-        this.carservice = new CarService();
-        this.viewCar = this.viewCar.bind(this);
-        this.deleteCar = this.deleteCar.bind(this);
+
+        this.menuModel = [
+            {label: 'View', icon: 'pi pi-fw pi-search', command: () => this.viewProduct(this.state.selectedProduct)},
+            {label: 'Delete', icon: 'pi pi-fw pi-times', command: () => this.deleteProduct(this.state.selectedProduct)}
+        ];
+
+        this.productService = new ProductService();
+        this.viewProduct = this.viewProduct.bind(this);
+        this.deleteProduct = this.deleteProduct.bind(this);
+        this.priceBodyTemplate = this.priceBodyTemplate.bind(this);
     }
 
     componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
     }
 
-    viewCar(car) {
-        this.growl.show({severity: 'info', summary: 'Car Selected', detail: car.vin + ' - ' + car.brand});
+    viewProduct(product) {
+        this.growl.show({severity: 'info', summary: 'Product Selected', detail: product.name});
     }
 
-    deleteCar(car) {
-        let carsList = [...this.state.cars];
-        carsList = carsList.filter((c) => c.vin !== car.vin);
+    deleteProduct(product) {
+        let products = [...this.state.products];
+        products = products.filter((p) => p.id !== product.id);
 
-        this.growl.show({severity: 'info', summary: 'Car Delete', detail: car.vin + ' - ' + car.brand});
-        this.setState({
-            cars: carsList
-        });
+        this.growl.show({severity: 'info', summary: 'Product Deleted', detail: product.name});
+        this.setState({ products });
+    }
+
+    formatCurrency(value) {
+        return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+    }
+
+    priceBodyTemplate(rowData) {
+        return this.formatCurrency(rowData.price);
     }
 
     render() {
@@ -2011,21 +2018,20 @@ export class DataTableContextMenuDemo extends Component {
             <div>
                 <Growl ref={(el) => { this.growl = el; }}></Growl>
 
-                <ContextMenu model={this.state.menu} ref={el => this.cm = el} onHide={() => this.setState({selectedCar: null})}/>
+                <ContextMenu model={this.menuModel} ref={el => this.cm = el} onHide={() => this.setState({ selectedProduct: null })}/>
 
-                <DataTable value={this.state.cars} header="Right Click"
-                    contextMenuSelection={this.state.selectedCar} onContextMenuSelectionChange={e => this.setState({selectedCar: e.value})}
+                <DataTable value={this.state.products} contextMenuSelection={this.state.selectedProduct}
+                    onContextMenuSelectionChange={e => this.setState({ selectedProduct: e.value })}
                     onContextMenu={e => this.cm.show(e.originalEvent)}>
-                    <Column field="vin" header="Vin" />
-                    <Column field="year" header="Year" />
-                    <Column field="brand" header="Brand" />
-                    <Column field="color" header="Color" />
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="price" header="Price" body={this.priceBodyTemplate} />
                 </DataTable>
             </div>
         );
     }
 }
-
 `}
 </CodeHighlight>
 
@@ -2039,59 +2045,131 @@ export class DataTableContextMenuDemo extends Component {
 {`
 export class DataTableRowExpansionDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
-            cars: null,
+            products: [],
             expandedRows: null
         };
-        this.carservice = new CarService();
+
+        this.productService = new ProductService();
+        this.amountBodyTemplate = this.amountBodyTemplate.bind(this);
         this.rowExpansionTemplate = this.rowExpansionTemplate.bind(this);
+        this.searchBodyTemplate = this.searchBodyTemplate.bind(this);
+        this.imageBodyTemplate = this.imageBodyTemplate.bind(this);
+        this.priceBodyTemplate = this.priceBodyTemplate.bind(this);
+        this.ratingBodyTemplate = this.ratingBodyTemplate.bind(this);
+        this.statusBodyTemplate = this.statusBodyTemplate.bind(this);
+        this.statusOrderBodyTemplate = this.statusOrderBodyTemplate.bind(this);
+        this.onRowExpand = this.onRowExpand.bind(this);
+        this.onRowCollapse = this.onRowCollapse.bind(this);
+        this.expandAll = this.expandAll.bind(this);
+        this.collapseAll = this.collapseAll.bind(this);
     }
 
     componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+        this.productService.getProductsWithOrdersSmall().then(data => this.setState({ products: data }));
+    }
+
+    onRowExpand(event) {
+        this.growl.show({severity: 'info', summary: 'Product Expanded', detail: event.data.name, life: 3000});
+    }
+
+    onRowCollapse(event) {
+        this.growl.show({severity: 'success', summary: 'Product Collapsed', detail: event.data.name, life: 3000});
+    }
+
+    expandAll() {
+        let expandedRows = {};
+        this.state.products.forEach(p => expandedRows[\`\${p.id}\`] = true);
+
+        this.setState({
+            expandedRows
+        }, () => {
+            this.growl.show({severity: 'success', summary: 'All Rows Expanded', life: 3000});
+        });
+    }
+
+    collapseAll() {
+        this.setState({
+            expandedRows: null
+        }, () => {
+            this.growl.show({severity: 'success', summary: 'All Rows Collapsed', life: 3000});
+        });
+    }
+
+    formatCurrency(value) {
+        return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+    }
+
+    amountBodyTemplate(rowData) {
+        return this.formatCurrency(rowData.amount);
+    }
+
+    statusOrderBodyTemplate(rowData) {
+        return <span className={\`order-badge order-\${rowData.status.toLowerCase()}\`}>{rowData.status}</span>;
+    }
+
+    searchBodyTemplate() {
+        return <Button icon="pi pi-search" />;
+    }
+
+    imageBodyTemplate(rowData) {
+        return <img src={\`showcase/demo/images/product/\${rowData.image}\`} alt={rowData.image} className="product-image" />;
+    }
+
+    priceBodyTemplate(rowData) {
+        return this.formatCurrency(rowData.price);
+    }
+
+    ratingBodyTemplate(rowData) {
+        return <Rating value={rowData.rating} readonly cancel={false} />;
+    }
+
+    statusBodyTemplate(rowData) {
+        return <span className={\`product-badge status-\${rowData.inventoryStatus.toLowerCase()}\`}>{rowData.inventoryStatus}</span>;
     }
 
     rowExpansionTemplate(data) {
-        var src = "showcase/demo/images/car/" + data.brand + ".png";
-
-        return  <div className="p-grid p-fluid">
-                    <div className="p-col-12 p-md-3" style={{textAlign:'center', borderRight: '1px solid #cccccc'}}>
-                        <img src={src} alt={data.brand}/>
-                    </div>
-                     <div className="p-col-12 p-md-9">
-                       <div className="p-grid">
-                          <div className="p-md-2">Vin: </div>
-                          <div className="p-md-10" style={{fontWeight:'bold'}}>{data.vin}</div>
-
-                          <div className="p-md-2">Year: </div>
-                          <div className="p-md-10" style={{fontWeight:'bold'}}>{data.year}</div>
-
-                          <div className="p-md-2">Brand: </div>
-                          <div className="p-md-10" style={{fontWeight:'bold'}}>{data.brand}</div>
-
-                          <div className="p-md-2">Color: </div>
-                          <div className="p-md-10" style={{fontWeight:'bold'}}>{data.color}</div>
-                       </div>
-                    </div>
-                </div>;
+        return (
+            <div className="orders-subtable">
+                <h5>Orders for {data.name}</h5>
+                <DataTable value={data.orders}>
+                    <Column field="id" header="Id" sortable></Column>
+                    <Column field="customer" header="Customer" sortable></Column>
+                    <Column field="date" header="Date" sortable></Column>
+                    <Column field="amount" header="Amount" body={this.amountBodyTemplate} sortable></Column>
+                    <Column field="status" header="Status" body={this.statusOrderBodyTemplate} sortable></Column>
+                    <Column headerStyle={{ width: '4rem'}} body={this.searchBodyTemplate}></Column>
+                </DataTable>
+            </div>
+        );
     }
 
     render() {
+        const header = (
+            <div className="table-header-container">
+                <Button icon="pi pi-plus" label="Expand All" onClick={this.expandAll} className="p-mr-2" />
+                <Button icon="pi pi-minus" label="Collapse All" onClick={this.collapseAll} />
+            </div>
+        );
+
         return (
-            <DataTable value={this.state.cars} expandedRows={this.state.expandedRows} onRowToggle={(e) => this.setState({expandedRows:e.data})}
-                    rowExpansionTemplate={this.rowExpansionTemplate} dataKey="vin">
-                <Column expander={true} style={{width: '2em'}} />
-                <Column field="vin" header="Vin" />
-                <Column field="year" header="Year" />
-                <Column field="brand" header="Brand" />
-                <Column field="color" header="Color" />
+            <DataTable value={this.state.products} expandedRows={this.state.expandedRows} onRowToggle={(e) => this.setState({ expandedRows: e.data })}
+                onRowExpand={this.onRowExpand} onRowCollapse={this.onRowCollapse}
+                rowExpansionTemplate={this.rowExpansionTemplate} dataKey="id" header={header}>
+                <Column expander={true} style={{ width: '3em' }} />
+                <Column field="name" header="Name" sortable />
+                <Column header="Image" body={this.imageBodyTemplate} />
+                <Column field="price" header="Price" sortable body={this.priceBodyTemplate} />
+                <Column field="category" header="Category" sortable />
+                <Column field="rating" header="Reviews" sortable body={this.ratingBodyTemplate} />
+                <Column field="inventoryStatus" header="Status" sortable body={this.statusBodyTemplate} />
             </DataTable>
         );
     }
 }
-
 `}
 </CodeHighlight>
 
@@ -2100,26 +2178,24 @@ export class DataTableRowExpansionDemo extends Component {
                 In "expand" mode, table width also changes along with the column width. <i>onColumnResizeEnd</i> is a callback that passes the resized column header as a parameter.</p>
 <CodeHighlight>
 {`
-<DataTable value={this.state.cars} resizableColumns={true}>
-    <Column field="vin" header="Vin" />
-    <Column field="year" header="Year" />
-    <Column field="brand" header="Brand" />
-    <Column field="color" header="Color" />
+<DataTable value={this.state.products} resizableColumns>
+    <Column field="code" header="Code"></Column>
+    <Column field="name" header="Name"></Column>
+    <Column field="category" header="Category"></Column>
+    <Column field="quantity" header="Quantity"></Column>
 </DataTable>
-
 `}
 </CodeHighlight>
 
             <p>It is important to note that when you need to change column widths, since table width is 100%, giving fixed pixel widths does not work well as browsers scale them, instead give percentage widths.</p>
 <CodeHighlight>
 {`
-<DataTable value={this.state.cars} resizableColumns={true}>
-    <Column field="vin" header="Vin" style={{width:'20%'}}/>
-    <Column field="year" header="Year" style={{width:'40%'}}/>
-    <Column field="brand" header="Brand" style={{width:'20%'}}/>
-    <Column field="color" header="Color" style={{width:'20%'}}/>
+<DataTable value={this.state.products} resizableColumns>
+    <Column field="code" header="Code" style={{width:'20%'}}></Column>
+    <Column field="name" header="Name" style={{width:'40%'}}></Column>
+    <Column field="category" header="Category" style={{width:'20%'}}></Column>
+    <Column field="quantity" header="Quantity" style={{width:'30%'}}></Column>
 </DataTable>
-
 `}
 </CodeHighlight>
 
@@ -2129,13 +2205,12 @@ export class DataTableRowExpansionDemo extends Component {
 
 <CodeHighlight>
 {`
-<DataTable value={this.state.cars} reorderableColumns={true}>
-    <Column field="vin" header="Vin" />
-    <Column field="year" header="Year" />
-    <Column field="brand" header="Brand" />
-    <Column field="color" header="Color" />
+<DataTable value={this.state.products} reorderableColumns>
+    <Column field="code" header="Code"></Column>
+    <Column field="name" header="Name"></Column>
+    <Column field="category" header="Category"></Column>
+    <Column field="quantity" header="Quantity"></Column>
 </DataTable>
-
 `}
 </CodeHighlight>
 
@@ -2146,14 +2221,13 @@ export class DataTableRowExpansionDemo extends Component {
 
 <CodeHighlight>
 {`
-<DataTable value={this.state.cars} reorderableColumns={true} onRowReorder={(e) => this.setState({cars: e.value})}>
+<DataTable value={this.state.products} reorderableColumns onRowReorder={(e) => this.setState({products: e.value})}>
     <Column rowReorder={true} style={{width: '2em'}} />
-    <Column columnKey="vin" field="vin" header="Vin"/>
-    <Column columnKey="year" field="year" header="Year" />
-    <Column columnKey="brand" field="brand" header="Brand" />
-    <Column columnKey="color" field="color" header="Color" />
+    <Column columnKey="vin" field="code" header="Code"></Column>
+    <Column columnKey="name" field="name" header="Name"></Column>
+    <Column columnKey="category" field="category" header="Category"></Column>
+    <Column columnKey="quantity" field="quantity" header="Quantity"></Column>
 </DataTable>
-
 `}
 </CodeHighlight>
 
@@ -2163,15 +2237,17 @@ export class DataTableRowExpansionDemo extends Component {
 {`
 export class DataTableExportDemo extends Component {
 
-    constructor() {
-        super();
-        this.state = {};
-        this.carservice = new CarService();
+    constructor(props) {
+        super(props);
+        this.state = {
+            products: []
+        };
         this.export = this.export.bind(this);
+        this.productService = new ProductService();
     }
 
     componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
     }
 
     export() {
@@ -2179,19 +2255,18 @@ export class DataTableExportDemo extends Component {
     }
 
     render() {
-        var header = <div style={{textAlign:'left'}}><Button type="button" icon="pi pi-external-link" iconPos="left" label="CSV" onClick={this.export}></Button></div>;
+        const header = <div style={{textAlign:'left'}}><Button type="button" icon="pi pi-external-link" iconPos="left" label="CSV" onClick={this.export}></Button></div>;
 
         return (
-            <DataTable value={this.state.cars} header={header} ref={(el) => { this.dt = el; }}>
-                <Column field="vin" header="Vin" />
-                <Column field="year" header="Year" />
-                <Column field="brand" header="Brand" />
-                <Column field="color" header="Color" />
+            <DataTable value={this.state.products} header={header} ref={(el) => { this.dt = el; }}>
+                <Column field="code" header="Code"></Column>
+                <Column field="name" header="Name"></Column>
+                <Column field="category" header="Category"></Column>
+                <Column field="quantity" header="Quantity"></Column>
             </DataTable>
         );
     }
 }
-
 `}
 </CodeHighlight>
 
@@ -2201,44 +2276,44 @@ export class DataTableExportDemo extends Component {
             <i>rowGroupHeaderTemplate</i> property should be defined to provide the content of the header and optionally <i>rowGroupFooterTemplate</i> is available to provide a footer
             for the group.</p>
 
-            <CodeHighlight lang="js">
-            {`
+<CodeHighlight lang="js">
+{`
 export class DataTableRowGroupDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            car: null
+            products: null
         };
 
-        this.carservice = new CarService()
         this.headerTemplate = this.headerTemplate.bind(this);
         this.footerTemplate = this.footerTemplate.bind(this);
+        this.productService = new ProductService();
     }
 
     componentDidMount() {
-        this.carservice.getCarsMedium().then(data => this.setState({cars: data}));
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
     }
 
     headerTemplate(data) {
-        return data.brand;
+        return data.name;
     }
 
     footerTemplate(data, index) {
         return ([
                     <td key={data.brand + '_footerTotalLabel'} colSpan="3" style={{textAlign: 'right'}}>Total Price</td>,
-                    <td key={data.brand + '_footerTotalValue'}>{this.calculateGroupTotal(data.brand)}</td>
+                    <td key={data.brand + '_footerTotalValue'}>{this.calculateGroupTotal(data.name)}</td>
             ]
         );
     }
 
-    calculateGroupTotal(brand) {
+    calculateGroupTotal(name) {
         let total = 0;
 
-        if(this.state.cars) {
-            for(let car of this.state.cars) {
-                if(car.brand === brand) {
-                    total += car.price;
+        if (this.state.products) {
+            for (let product of this.state.products) {
+                if (product.name === name) {
+                    total += product.price;
                 }
             }
         }
@@ -2249,53 +2324,50 @@ export class DataTableRowGroupDemo extends Component {
     render() {
         return (
             <div>
-                <DataTable header="SubHeader" value={this.state.cars} rowGroupMode="subheader" sortField="brand" sortOrder={1} groupField="brand"
+                <DataTable header="SubHeader" value={this.state.products} rowGroupMode="subheader" sortField="brand" sortOrder={1} groupField="name"
                     rowGroupHeaderTemplate={this.headerTemplate} rowGroupFooterTemplate={this.footerTemplate}>
-                    <Column field="vin" header="Vin" />
-                    <Column field="year" header="Year" />
-                    <Column field="color" header="Color" />
-                    <Column field="price" header="Price" />
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="price" header="Price"></Column>
                 </DataTable>
 
-                <DataTable header="RowSpan" value={this.state.cars} rowGroupMode="rowspan" sortField="brand" sortOrder={1} groupField="brand"
+                <DataTable header="RowSpan" value={this.state.products} rowGroupMode="rowspan" sortField="brand" sortOrder={1} groupField="name"
                     style={{marginTop:'30px'}}>
-                    <Column field="brand" header="Brand" />
-                    <Column field="year" header="Year" />
-                    <Column field="color" header="Color" />
-                    <Column field="vin" header="Vin" />
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="price" header="Price"></Column>
                 </DataTable>
             </div>
         );
     }
 }
-
-            `}
-            </CodeHighlight>
+`}
+</CodeHighlight>
 
             <h5>Scrolling</h5>
             <p>DataTable supports both horizontal and vertical scrolling as well as frozen columns and rows. Scrollable DataTable is enabled using <i>scrollable</i> property and <i>scrollHeight</i> to define the viewport height.</p>
 <CodeHighlight>
 {`
-<DataTable value={this.state.cars} scrollable={true} scrollHeight="200px">
-    <Column field="vin" header="Vin" />
-    <Column field="year" header="Year" />
-    <Column field="brand" header="Brand" />
-    <Column field="color" header="Color" />
+<DataTable value={this.state.products} scrollable scrollHeight="200px">
+    <Column field="code" header="Code"></Column>
+    <Column field="name" header="Name"></Column>
+    <Column field="category" header="Category"></Column>
+    <Column field="quantity" header="Quantity"></Column>
 </DataTable>
-
 `}
 </CodeHighlight>
 
             <p>Horizontal Scrolling requires a width of DataTable to be defined and explicit widths on columns.</p>
 <CodeHighlight>
 {`
-<DataTable value={this.state.cars} scrollable={true} scrollHeight="200px" style={{width: '600px'}}>
-    <Column field="vin" header="Vin" style={{width:'250px'}} />
-    <Column field="year" header="Year" style={{width:'250px'}} />
-    <Column field="brand" header="Brand" style={{width:'250px'}} />
-    <Column field="color" header="Color" style={{width:'250px'}} />
+<DataTable value={this.state.products} scrollable scrollHeight="200px" style={{width: '600px'}}>
+    <Column field="code" header="Code" style={{width:'250px'}}></Column>
+    <Column field="name" header="Name" style={{width:'250px'}}></Column>
+    <Column field="category" header="Category" style={{width:'250px'}}></Column>
+    <Column field="quantity" header="Quantity" style={{width:'250px'}}></Column>
 </DataTable>
-
 `}
 </CodeHighlight>
 
@@ -2303,43 +2375,40 @@ export class DataTableRowGroupDemo extends Component {
 
 <CodeHighlight>
 {`
-<DataTable value={this.state.cars} scrollable={true} scrollHeight="200px" style={{width: '800px'}} frozenWidth="200px">
-    <Column field="vin" header="Vin" style={{width:'250px'}} frozen={true} />
-    <Column field="year" header="Year" style={{width:'250px'}} />
-    <Column field="brand" header="Brand" style={{width:'250px'}} />
-    <Column field="color" header="Color" style={{width:'250px'}} />
-    <Column field="owner" header="Owner" style={{width:'250px'}} />
-    <Column field="tyre" header="Tyre" style={{width:'250px'}} />
-    <Column field="capacity" header="Capacity" style={{width:'250px'}} />
-    <Column field="engine" header="Engine" style={{width:'250px'}} />
+<DataTable value={this.state.products} scrollable scrollHeight="200px" style={{width: '800px'}} frozenWidth="200px">
+    <Column field="code" header="Code" style={{width:'250px'}} frozen></Column>
+    <Column field="name" header="Name" style={{width:'250px'}}></Column>
+    <Column field="category" header="Category" style={{width:'250px'}}></Column>
+    <Column field="quantity" header="Quantity" style={{width:'250px'}}></Column>
+    <Column field="price" header="Price" style={{width:'250px'}}></Column>
+    <Column field="rating" header="Rating" style={{width:'250px'}}></Column>
+    <Column field="description" header="Description" style={{width:'250px'}}></Column>
+    <Column field="inventoryStatus" header="Status" style={{width:'250px'}}></Column>
 </DataTable>
-
 `}
 </CodeHighlight>
 
             <p>Note that frozen columns are enabled, frozen and scrollable cells may have content with varying height which leads to misalignment. Provide fixed height to cells to avoid alignment issues.</p>
             <CodeHighlight>
 {`
-<DataTable value={this.state.cars} scrollable={true} scrollHeight="200px" style={{width: '800px'}} frozenWidth="200px">
-    <Column field="vin" header="Vin" style={{width:'250px', height: '25px'}} frozen={true} />
-    <Column field="year" header="Year" style={{width:'250px', height: '25px'}} />
-    <Column field="brand" header="Brand" style={{width:'250px', height: '25px'}} />
-    <Column field="color" header="Color" style={{width:'250px', height: '25px'}} />
+<DataTable value={this.state.products} scrollable scrollHeight="200px" style={{width: '800px'}} frozenWidth="200px">
+    <Column field="code" header="Code" style={{width:'250px', height: '25px'}} frozen></Column>
+    <Column field="name" header="Name" style={{width:'250px', height: '25px'}}></Column>
+    <Column field="category" header="Category" style={{width:'250px', height: '25px'}}></Column>
+    <Column field="quantity" header="Quantity" style={{width:'250px', height: '25px'}}></Column>
 </DataTable>
-
 `}
 </CodeHighlight>
 
             <p>One or more rows can be displayed as fixed using the <i>frozenValue</i> property.</p>
 <CodeHighlight>
 {`
-<DataTable header="Frozen Rows" value={this.state.cars} frozenValue={this.state.frozenCars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px'}}>
-    <Column field="vin" header="Vin" />
-    <Column field="year" header="Year" />
-    <Column field="brand" header="Brand" />
-    <Column field="color" header="Color" />
+<DataTable header="Frozen Rows" value={this.state.products} frozenValue={this.state.frozenProducts} scrollable scrollHeight="200px" style={{marginTop:'30px'}}>
+    <Column field="code" header="Code"></Column>
+    <Column field="name" header="Name"></Column>
+    <Column field="category" header="Category"></Column>
+    <Column field="quantity" header="Quantity"></Column>
 </DataTable>
-
 `}
 </CodeHighlight>
 
@@ -2352,14 +2421,13 @@ export class DataTableRowGroupDemo extends Component {
 
 <CodeHighlight>
 {`
-<DataTable value={this.state.lazyCars} scrollable={true} scrollHeight="200px" virtualScroll={true}
-    rows={10} totalRecords={this.state.lazyTotalRecords} lazy={true} onVirtualScroll={this.loadCarsLazy} style={{marginTop:'30px'}}>
-    <Column field="vin" header="Vin" />
-    <Column field="year" header="Year" />
-    <Column field="brand" header="Brand" />
-    <Column field="color" header="Color" />
+<DataTable value={this.state.lazyProducts} scrollable scrollHeight="200px" virtualScroll
+    rows={10} totalRecords={this.state.lazyTotalRecords} lazy onVirtualScroll={this.loadProductsLazy} style={{marginTop:'30px'}}>
+    <Column field="code" header="Code"></Column>
+    <Column field="name" header="Name"></Column>
+    <Column field="category" header="Category"></Column>
+    <Column field="quantity" header="Quantity"></Column>
 </DataTable>
-
 `}
 </CodeHighlight>
 
@@ -2369,29 +2437,30 @@ export class DataTableRowGroupDemo extends Component {
             there are actually records of totalRecords size although in reality they aren't as in lazy mode, only the records that are displayed on the current page exist.</p>
 
             <p>In lazy mode, pagination, sorting and filtering must be used in controlled mode in addition to enabling <i>lazy</i> property. Here is a sample paging implementation with in memory data.</p>
-<CodeHighlight>
+<CodeHighlight lang="js">
 {`
 export class DataTableLazyDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            cars: [],
+            products: [],
             loading: true,
             first: 0,
             rows: 10,
             totalRecords: 0
         };
-        this.carservice = new CarService();
+
         this.onPage = this.onPage.bind(this);
+        this.productService = new ProductService();
     }
 
     componentDidMount() {
-        this.carservice.getCarsLarge().then(data => {
+        this.productService.getProducts().then(data => {
             this.datasource = data;
             this.setState({
                 totalRecords: data.length,
-                cars: this.datasource.slice(0, this.state.rows),
+                products: this.datasource.slice(0, this.state.rows),
                 loading: false
             });
         });
@@ -2409,7 +2478,7 @@ export class DataTableLazyDemo extends Component {
 
             this.setState({
                 first: startIndex,
-                cars: this.datasource.slice(startIndex, endIndex),
+                products: this.datasource.slice(startIndex, endIndex),
                 loading: false
             });
         }, 250);
@@ -2417,16 +2486,15 @@ export class DataTableLazyDemo extends Component {
 
     render() {
         return (
-            <DataTable value={this.state.cars} paginator={true} rows={this.state.rows} totalRecords={this.state.totalRecords}
-                lazy={true} first={this.state.first} onPage={this.onPage} loading={this.state.loading}>
-                <Column field="vin" header="Vin" />
-                <Column field="year" header="Year" />
-                <Column field="brand" header="Brand" />
-                <Column field="color" header="Color" />
+            <DataTable value={this.state.products} paginator rows={this.state.rows} totalRecords={this.state.totalRecords}
+                lazy first={this.state.first} onPage={this.onPage} loading={this.state.loading}>
+                <Column field="code" header="Code"></Column>
+                <Column field="name" header="Name"></Column>
+                <Column field="category" header="Category"></Column>
+                <Column field="quantity" header="Quantity"></Column>
             </DataTable>
     }
 }
-
 `}
 </CodeHighlight>
 
@@ -2440,30 +2508,33 @@ export class DataTableLazyDemo extends Component {
 {`
 export class DataTableStateDemo extends Component {
 
-    constructor() {
-        super();
-        this.state = {};
-        this.carservice = new CarService();
+    constructor(props) {
+        super(props);
+        this.state = {
+            products: [],
+            selectedProducts: null
+        };
+
+        this.productService = new ProductService();
     }
 
     componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
     }
 
     render() {
         return (
-            <DataTable value={this.state.cars} selectionMode="multiple" resizableColumns={true}
-                        selection={this.state.selectedCars} onSelectionChange={e => this.setState({selectedCars: e.value})}
-                        paginator={true} rows={10} stateKey="tablestatedemo-session">
-                <Column field="vin" header="Vin" sortable={true} filter={true}/>
-                <Column field="year" header="Year" sortable={true} filter={true}/>
-                <Column field="brand" header="Brand" sortable={true} filter={true}/>
-                <Column field="color" header="Color" sortable={true} filter={true}/>
+            <DataTable value={this.state.products} selectionMode="multiple" resizableColumns
+                        selection={this.state.selectedProducts} onSelectionChange={e => this.setState({selectedProducts: e.value})}
+                        paginator rows={10} stateKey="tablestatedemo-session">
+                <Column field="code" header="Code" sortable filter></Column>
+                <Column field="name" header="Name" sortable filter></Column>
+                <Column field="category" header="Category" sortable filter></Column>
+                <Column field="quantity" header="Quantity" sortable filter></Column>
             </DataTable>
         );
     }
 }
-
 `}
 </CodeHighlight>
 
@@ -2471,13 +2542,12 @@ export class DataTableStateDemo extends Component {
             <p>DataTable columns are displayed as stacked in responsive mode if the screen size becomes smaller than a certain breakpoint value. This feature is enabled by setting responsive to true.</p>
 <CodeHighlight>
 {`
-<DataTable value={this.state.cars} responsive={true}>
-    <Column field="vin" header="Vin" />
-    <Column field="year" header="Year" />
-    <Column field="brand" header="Brand" />
-    <Column field="color" header="Color" />
+<DataTable value={this.state.products} responsive>
+    <Column field="code" header="Code"></Column>
+    <Column field="name" header="Name"></Column>
+    <Column field="category" header="Category"></Column>
+    <Column field="quantity" header="Quantity"></Column>
 </DataTable>
-
 `}
 </CodeHighlight>
 
@@ -3232,6 +3302,105 @@ export class DataTableStateDemo extends Component {
             </TabPanel>
             <TabPanel header="Source">
                 <LiveEditor name="DataTableDemo" sources={this.sources} service="CustomerService" data="customers-large" extFiles={this.extFiles} />
+<CodeHighlight lang="scss">
+{`
+.datatable-doc-demo {
+    .p-paginator {
+        .p-paginator-current {
+            margin-left: auto;
+        }
+    }
+
+    .p-progressbar {
+        height: .5rem;
+        background-color: #D8DADC;
+
+        .p-progressbar-value {
+            background-color: #607D8B;
+        }
+    }
+
+    .table-header {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .p-datepicker {
+        min-width: 25rem;
+
+        td {
+            font-weight: 400;
+        }
+    }
+
+    .p-datatable.p-datatable-customers {
+        .p-datatable-header {
+            padding: 1rem;
+            text-align: left;
+            font-size: 1.5rem;
+        }
+
+        .p-paginator {
+            padding: 1rem;
+        }
+
+        .p-datatable-thead > tr > th {
+            text-align: left;
+        }
+
+        .p-datatable-tbody > tr > td {
+            cursor: auto;
+        }
+
+        .p-dropdown-label:not(.p-placeholder) {
+            text-transform: uppercase;
+        }
+    }
+
+    /* Responsive */
+    .p-datatable-customers .p-datatable-tbody > tr > td .p-column-title {
+        display: none;
+    }
+
+    @media screen and (max-width: 960px) {
+        .p-datatable {
+            &.p-datatable-customers {
+                .p-datatable-thead > tr > th,
+                .p-datatable-tfoot > tr > td {
+                    display: none !important;
+                }
+
+                .p-datatable-tbody > tr {
+                    border-bottom: 1px solid var(--layer-2);
+
+                    > td {
+                        text-align: left;
+                        display: block;
+                        border: 0 none !important;
+                        width: 100% !important;
+                        float: left;
+                        clear: left;
+                        border: 0 none;
+
+                        .p-column-title {
+                            padding: .4rem;
+                            min-width: 30%;
+                            display: inline-block;
+                            margin: -.4rem 1rem -.4rem -.4rem;
+                            font-weight: bold;
+                        }
+
+                        .p-progressbar {
+                            margin-top: .5rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+`}
+</CodeHighlight>
             </TabPanel>
         </TabView>
     </div>
