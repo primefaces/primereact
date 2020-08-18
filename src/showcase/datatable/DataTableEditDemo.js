@@ -132,9 +132,9 @@ export class DataTableEditDemo extends Component {
     }
 
     onEditorValueChange(productKey, props, value) {
-        let updatedCars = [...props.value];
-        updatedCars[props.rowIndex][props.field] = value;
-        this.setState({ [`${productKey}`]: updatedCars });
+        let updatedProducts = [...props.value];
+        updatedProducts[props.rowIndex][props.field] = value;
+        this.setState({ [`${productKey}`]: updatedProducts });
     }
 
     inputTextEditor(productKey, props, field) {
@@ -362,9 +362,9 @@ export class DataTableEditDemo extends Component {
     }
 
     onEditorValueChange(productKey, props, value) {
-        let updatedCars = [...props.value];
-        updatedCars[props.rowIndex][props.field] = value;
-        this.setState({ [\`\${productKey}\`]: updatedCars });
+        let updatedProducts = [...props.value];
+        updatedProducts[props.rowIndex][props.field] = value;
+        this.setState({ [\`\${productKey}\`]: updatedProducts });
     }
 
     inputTextEditor(productKey, props, field) {
