@@ -177,12 +177,12 @@ const DropdownDemo = () => {
 
             <h5>Editable</h5>
             <Dropdown value={car} options={cars} onChange={onCarChange} style={{width: '12em'}}
-                        editable={true} placeholder="Select a Brand" />
+                        editable placeholder="Select a Brand" />
             <div style={{marginTop: '.5em'}}>{car ? 'Selected Car: ' + car : 'No car selected'}</div>
 
             <h5>Advanced</h5>
             <Dropdown value={car2} options={cars} onChange={onCarChange2} itemTemplate={carTemplate}  style={{width: '12em'}}
-                        filter={true} filterPlaceholder="Select Car" filterBy="label,value" showClear={true}/>
+                        filter filterPlaceholder="Select Car" filterBy="label,value" showClear/>
             <div style={{marginTop: '.5em'}}>{car2 ? 'Selected Car: ' + car2 : 'No car selected'}</div>
         </div>
     );
@@ -255,12 +255,12 @@ const DropdownDemo = () => {
 
             <h5>Editable</h5>
             <Dropdown value={car} options={cars} onChange={onCarChange} style={{width: '12em'}}
-                        editable={true} placeholder="Select a Brand" />
+                        editable placeholder="Select a Brand" />
             <div style={{marginTop: '.5em'}}>{car ? 'Selected Car: ' + car : 'No car selected'}</div>
 
             <h5>Advanced</h5>
             <Dropdown value={car2} options={cars} onChange={onCarChange2} itemTemplate={carTemplate}  style={{width: '12em'}}
-                        filter={true} filterPlaceholder="Select Car" filterBy="label,value" showClear={true}/>
+                        filter filterPlaceholder="Select Car" filterBy="label,value" showClear/>
             <div style={{marginTop: '.5em'}}>{car2 ? 'Selected Car: ' + car2 : 'No car selected'}</div>
         </div>
     );

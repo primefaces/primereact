@@ -63,7 +63,7 @@ const FieldsetDemo = () => {
 
             <br />
 
-            <Fieldset legend="Godfather I" toggleable={true}>
+            <Fieldset legend="Godfather I" toggleable>
                 <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
                 His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
                 Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
@@ -93,7 +93,7 @@ const FieldsetDemo = () => {
 
             <br />
 
-            <Fieldset legend="Godfather I" toggleable={true}>
+            <Fieldset legend="Godfather I" toggleable>
                 <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
                 His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
                 Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
@@ -144,7 +144,7 @@ import { Fieldset } from 'primereact/fieldset';
                         <p>In controlled mode, <i>collapsed</i> and <i>onToggle</i> properties need to be defined to control the collapsed state.</p>
 <CodeHighlight>
 {`
-<Fieldset legend="Header" toggleable={true} collapsed={this.state.panelCollapsed} onToggle={(e) => this.setState({panelCollapsed: e.value})}>
+<Fieldset legend="Header" toggleable collapsed={this.state.panelCollapsed} onToggle={(e) => this.setState({panelCollapsed: e.value})}>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat

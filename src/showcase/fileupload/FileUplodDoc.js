@@ -46,14 +46,14 @@ export class FileUploadDemo extends Component {
 
                 <div className="card">
                     <h5>Advanced</h5>
-                    <FileUpload name="demo[]" url="./upload.php" onUpload={this.onUpload} multiple={true} accept="image/*" maxFileSize={1000000}
+                    <FileUpload name="demo[]" url="./upload.php" onUpload={this.onUpload} multiple accept="image/*" maxFileSize={1000000}
                         emptyTemplate={<p className="p-m-0">Drag and drop files to here to upload.</p>} />
 
                     <h5>Basic</h5>
                     <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={this.onBasicUpload} />
 
                     <h5>Basic with Auto</h5>
-                    <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={this.onBasicUploadAuto} auto={true} chooseLabel="Browse" />
+                    <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={this.onBasicUploadAuto} auto chooseLabel="Browse" />
                 </div>
             </div>
         )
@@ -87,13 +87,13 @@ const FileUploadDemo = () => {
         <div>
             <h5>Advanced</h5>
             <FileUpload name="demo[]" url="./upload.php" onUpload={onUpload}
-                        multiple={true} accept="image/*" maxFileSize={1000000} />
+                        multiple accept="image/*" maxFileSize={1000000} />
 
             <h5>Basic</h5>
             <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUpload} />
 
             <h5>Basic with Auto</h5>
-            <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUploadAuto} auto={true} chooseLabel="Browse" />
+            <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUploadAuto} auto chooseLabel="Browse" />
 
             <Growl ref={growl}></Growl>
         </div>
@@ -127,13 +127,13 @@ const FileUploadDemo = () => {
         <div>
             <h5>Advanced</h5>
             <FileUpload name="demo[]" url="./upload.php" onUpload={onUpload}
-                        multiple={true} accept="image/*" maxFileSize={1000000} />
+                        multiple accept="image/*" maxFileSize={1000000} />
 
             <h5>Basic</h5>
             <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUpload} />
 
             <h5>Basic with Auto</h5>
-            <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUploadAuto} auto={true} chooseLabel="Browse" />
+            <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUploadAuto} auto chooseLabel="Browse" />
 
             <Growl ref={growl}></Growl>
         </div>
@@ -202,7 +202,7 @@ import { FileUpload } from 'primereact/fileupload';
             <p>Selectable file types can be restricted with <i>accept</i> property, example below only allows images to be uploaded. Read more about other possible values <a href="https://www.w3schools.com/tags/att_input_accept.asp"> here</a>.</p>
 <CodeHighlight>
 {`
-<FileUpload name="demo[]" url="./upload" multiple={true} accept="image/*" />
+<FileUpload name="demo[]" url="./upload" multiple accept="image/*" />
 `}
 </CodeHighlight>
 
@@ -241,7 +241,7 @@ import { FileUpload } from 'primereact/fileupload';
             <p>Uploading implementation can be overriden by enabling customUpload property and defining a custom upload handler event.</p>
 <CodeHighlight>
 {`
-<FileUpload name="demo[]" url="./upload" customUpload={true} uploadHandler={this.myUploader} />
+<FileUpload name="demo[]" url="./upload" customUpload uploadHandler={this.myUploader} />
 `}
 </CodeHighlight>
 <CodeHighlight lang="js">

@@ -282,7 +282,7 @@ const FloatLabelDemo = () => {
                     <h5>MultiSelect</h5>
                     <span className="p-float-label">
                         <MultiSelect id="float-multiselect" value={carsMultiselect} options={cars} onChange={(e) => setCarsMultiselect(e.value)}
-                                        filter={true} filterPlaceholder="Search"/>
+                                        filter filterPlaceholder="Search"/>
                         <label htmlFor="float-multiselect">Choose</label>
                     </span>
                 </div>
@@ -447,7 +447,7 @@ const FloatLabelDemo = () => {
                     <h5>MultiSelect</h5>
                     <span className="p-float-label">
                         <MultiSelect id="float-multiselect" value={carsMultiselect} options={cars} onChange={(e) => setCarsMultiselect(e.value)}
-                                        filter={true} filterPlaceholder="Search"/>
+                                        filter filterPlaceholder="Search"/>
                         <label htmlFor="float-multiselect">Choose</label>
                     </span>
                 </div>

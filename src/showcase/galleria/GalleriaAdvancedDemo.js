@@ -204,8 +204,8 @@ export class GalleriaAdvancedDemo extends Component {
                 <div className="content-section implementation galleria-demo">
                     <div className="card">
                         <Galleria ref={(el) => this.galleria = el} value={this.state.images} activeIndex={this.state.activeIndex} onItemChange={this.onItemChange}
-                            showThumbnails={this.state.showThumbnails} showItemNavigators={true} showItemNavigatorsOnHover={true}
-                            numVisible={5} circular={true} autoPlay={true} transitionInterval={3000} responsiveOptions={this.responsiveOptions}
+                            showThumbnails={this.state.showThumbnails} showItemNavigators showItemNavigatorsOnHover
+                            numVisible={5} circular autoPlay transitionInterval={3000} responsiveOptions={this.responsiveOptions}
                             item={this.itemTemplate} thumbnail={this.thumbnailTemplate} footer={footer}
                             style={{ maxWidth: '640px' }} className={galleriaClassName} />
                     </div>
@@ -425,8 +425,8 @@ export class GalleriaAdvancedDemo extends Component {
             <div className="galleria-demo">
                 <div className="card">
                     <Galleria ref={(el) => this.galleria = el} value={this.state.images} activeIndex={this.state.activeIndex} onItemChange={this.onItemChange}
-                        showThumbnails={this.state.showThumbnails} showItemNavigators={true} showItemNavigatorsOnHover={true}
-                        numVisible={5} circular={true} autoPlay={true} transitionInterval={3000} responsiveOptions={this.responsiveOptions}
+                        showThumbnails={this.state.showThumbnails} showItemNavigators showItemNavigatorsOnHover
+                        numVisible={5} circular autoPlay transitionInterval={3000} responsiveOptions={this.responsiveOptions}
                         item={this.itemTemplate} thumbnail={this.thumbnailTemplate} footer={footer}
                         style={{ maxWidth: '640px' }} className={galleriaClassName} />
                 </div>

@@ -41,14 +41,14 @@ export class FileUploadDemo extends Component {
 
                     <div className="card">
                         <h5>Advanced</h5>
-                        <FileUpload name="demo[]" url="./upload.php" onUpload={this.onUpload} multiple={true} accept="image/*" maxFileSize={1000000}
+                        <FileUpload name="demo[]" url="./upload.php" onUpload={this.onUpload} multiple accept="image/*" maxFileSize={1000000}
                             emptyTemplate={<p className="p-m-0">Drag and drop files to here to upload.</p>} />
 
                         <h5>Basic</h5>
                         <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={this.onBasicUpload} />
 
                         <h5>Basic with Auto</h5>
-                        <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={this.onBasicUploadAuto} auto={true} chooseLabel="Browse" />
+                        <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={this.onBasicUploadAuto} auto chooseLabel="Browse" />
                     </div>
                 </div>
 

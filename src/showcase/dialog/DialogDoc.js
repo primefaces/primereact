@@ -481,7 +481,7 @@ const myIcon = (
     </button>
 )
 
-<Dialog header="Header Text" footer={footer} iconsTemplate={myIcon} visible={this.state.visible} style={{width: '50vw'}} modal={true} onHide={this.onHide}>
+<Dialog header="Header Text" footer={footer} iconsTemplate={myIcon} visible={this.state.visible} style={{width: '50vw'}} modal onHide={this.onHide}>
     Content
 </Dialog>
 `}
