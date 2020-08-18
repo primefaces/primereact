@@ -84,9 +84,48 @@
     display: none;
 }
 
+/* Scrollable */
+.p-treetable-scrollable-wrapper {
+    position: relative;
+}
+.p-treetable-scrollable-header,
+.p-treetable-scrollable-footer {
+    overflow: hidden;
+    border: 0 none;
+}
+
+.p-treetable-scrollable-body {
+    overflow: auto;
+    position: relative;
+}
+
+.p-treetable-virtual-table {
+    position: absolute;
+}
+
+/* Frozen Columns */
+.p-treetable-frozen-view .p-treetable-scrollable-body {
+    overflow: hidden;
+}
+
+.p-treetable-unfrozen-view {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+/* Reorder */
+.p-treetable-reorder-indicator-up,
+.p-treetable-reorder-indicator-down {
+    position: absolute;
+    display: none;
+}
+
+/* Loader */
 .p-treetable .p-treetable-loading-overlay {
     position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 1;
 }
