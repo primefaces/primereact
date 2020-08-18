@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {DataTable} from '../../components/datatable/DataTable';
-import {Column} from '../../components/column/Column';
-import {Button} from '../../components/button/Button';
+import { DataTable } from '../../components/datatable/DataTable';
+import { Column } from '../../components/column/Column';
+import { Button } from '../../components/button/Button';
 import ProductService from '../service/ProductService';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
 import { LiveEditor } from '../liveeditor/LiveEditor';
@@ -67,41 +67,45 @@ export class DataTableExportDemoDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {Button} from 'primereact/button';
-import {CarService} from '../service/CarService';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { Button } from 'primereact/button';
+import ProductService from '../service/ProductService';
 
 export class DataTableExportDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
-            cars: []
+            products: []
         };
-        this.carservice = new CarService();
-        this.onExport = this.onExport.bind(this);
+
+        this.productService = new ProductService();
+        this.exportCSV = this.exportCSV.bind(this);
     }
 
     componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
     }
 
-    onExport() {
+    exportCSV() {
         this.dt.exportCSV();
     }
 
     render() {
-        const header = <div style={{textAlign:'left'}}><Button type="button" icon="pi pi-external-link" iconPos="left" label="CSV" onClick={this.onExport}></Button></div>;
+        const header = <div style={{textAlign:'left'}}><Button type="button" icon="pi pi-external-link" label="Export" onClick={this.exportCSV}></Button></div>;
 
         return (
             <div>
-                <DataTable value={this.state.cars} header={header} ref={(el) => { this.dt = el; }}>
-                    <Column field="vin" header="Vin" />
-                    <Column field="year" header="Year" />
-                    <Column field="brand" header="Brand" />
-                    <Column field="color" header="Color" />
-                </DataTable>
+                <div className="card">
+                    <DataTable value={this.state.products} header={header} ref={(el) => { this.dt = el; }}>
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="quantity" header="Quantity"></Column>
+                    </DataTable>
+                </div>
             </div>
         );
     }

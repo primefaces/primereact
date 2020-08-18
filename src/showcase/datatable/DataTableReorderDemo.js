@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import {DataTable} from '../../components/datatable/DataTable';
-import {Column} from '../../components/column/Column';
+import { DataTable } from '../../components/datatable/DataTable';
+import { Column } from '../../components/column/Column';
 import ProductService from '../service/ProductService';
 import { Growl } from '../../components/growl/Growl';
-import {TabView,TabPanel} from '../../components/tabview/TabView';
+import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { LiveEditor } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 
@@ -83,34 +83,61 @@ export class DataTableColReorderDemoDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service/CarService';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import ProductService from '../service/ProductService';
+import { Growl } from 'primereact/growl';
 
 export class DataTableReorderDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
-            cars: []
+            products: []
         };
-        this.carservice = new CarService();
+
+        this.columns = [
+            {field: 'code', header: 'Code'},
+            {field: 'name', header: 'Name'},
+            {field: 'category', header: 'Category'},
+            {field: 'quantity', header: 'Quantity'}
+        ];
+
+        this.productService = new ProductService();
+        this.onColReorder = this.onColReorder.bind(this);
+        this.onRowReorder = this.onRowReorder.bind(this);
     }
 
     componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
+    }
+
+    onColReorder() {
+        this.growl.show({severity:'success', summary: 'Column Reordered', life: 3000});
+    }
+
+    onRowReorder(e) {
+        this.setState({ products: e.value }, () => {
+            this.growl.show({severity:'success', summary: 'Rows Reordered', life: 3000});
+        });
     }
 
     render() {
+        const dynamicColumns = this.columns.map((col,i) => {
+            return <Column key={col.field} columnKey={col.field} field={col.field} header={col.header} />;
+        });
+
         return (
             <div>
-                <DataTable value={this.state.cars} reorderableColumns={true} onRowReorder={(e) => this.setState({cars: e.value})}>
-                    <Column rowReorder={true} style={{width: '3em'}} />
-                    <Column columnKey="vin" field="vin" header="Vin"/>
-                    <Column columnKey="year" field="year" header="Year" />
-                    <Column columnKey="brand" field="brand" header="Brand" />
-                    <Column columnKey="color" field="color" header="Color" />
-                </DataTable>
+                <Growl ref={(el) => { this.growl = el; }}></Growl>
+
+                <div className="card">
+                    <DataTable value={this.state.products} reorderableColumns onRowReorder={this.onRowReorder} onColReorder={this.onColReorder}>
+                        <Column rowReorder={true} style={{width: '3em'}} />
+                        {dynamicColumns}
+                    </DataTable>
+                </div>
             </div>
         );
     }

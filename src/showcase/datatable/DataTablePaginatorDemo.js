@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import {DataTable} from '../../components/datatable/DataTable';
-import {Column} from '../../components/column/Column';
-import {CustomerService} from '../service/CustomerService';
-import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {Button} from "../../components/button/Button";
+import { DataTable } from '../../components/datatable/DataTable';
+import { Column } from '../../components/column/Column';
+import { CustomerService } from '../service/CustomerService';
+import { TabView, TabPanel } from '../../components/tabview/TabView';
+import { Button } from '../../components/button/Button';
 import { LiveEditor } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 
@@ -66,38 +66,44 @@ export class DataTablePaginatorDemoDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service/CarService';
-import {Button} from 'primereact/button';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { CustomerService } from '../service/CustomerService';
+import { Button } from 'primereact/button';
 
 export class DataTablePaginatorDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
-            cars: []
+            customers: []
         };
-        this.carservice = new CarService();
+
+        this.customerService = new CustomerService();
     }
 
     componentDidMount() {
-        this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
+        this.customerService.getCustomersLarge().then(data => this.setState({ customers: data }));
     }
 
     render() {
-        const paginatorLeft = <Button icon="pi pi-refresh"/>;
+        const paginatorLeft = <Button type="button" icon="pi pi-refresh" className="p-button-text" />;
+        const paginatorRight = <Button type="button" icon="pi pi-cloud" className="p-button-text" />;
 
         return (
-            <div className="datatable-paginator-demo">
-                <DataTable value={this.state.cars} paginator={true} paginatorLeft={paginatorLeft}
-                    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" rows={10} rowsPerPageOptions={[5,10,20]} >
-                    <Column field="vin" header="Vin" />
-                    <Column field="year" header="Year" />
-                    <Column field="brand" header="Brand" />
-                    <Column field="color" header="Color" />
-                </DataTable>
+            <div>
+                <div className="card">
+                    <DataTable value={this.state.customers} paginator
+                        paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" rows={10} rowsPerPageOptions={[10,20,50]}
+                        paginatorLeft={paginatorLeft} paginatorRight={paginatorRight}>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="country.name" header="Country"></Column>
+                        <Column field="company" header="Company"></Column>
+                        <Column field="representative.name" header="Representative"></Column>
+                    </DataTable>
+                </div>
             </div>
         );
     }
