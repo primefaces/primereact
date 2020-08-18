@@ -201,88 +201,86 @@ export class DataTableScrollDemoDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service/CarService';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { CustomerService } from '../service/CustomerService';
 
 export class DataTableScrollDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
-            loading: true,
-            cars: [],
-            lazyCars: [],
+            customers: [],
+            virtualCustomers: [],
+            inmemoryData: [],
             lazyTotalRecords: 0,
-            frozenCars: []
+            loading: false
         };
 
-        this.inmemoryData = [
-            {"brand": "VW", "year": 2012, "color": "Orange"},
-            {"brand": "Audi", "year": 2011, "color": "Black"},
-            {"brand": "Renault", "year": 2005, "color": "Gray"},
-            {"brand": "BMW", "year": 2003, "color": "Blue"},
-            {"brand": "Mercedes", "year": 1995, "color": "Orange"},
-            {"brand": "Volvo", "year": 2005, "color": "Black"},
-            {"brand": "Honda", "year": 2012, "color": "Yellow"},
-            {"brand": "Jaguar", "year": 2013, "color": "Orange"},
-            {"brand": "Ford", "year": 2000, "color": "Black"},
-            {"brand": "Fiat", "year": 2013, "color": "Red"},
-            {"brand": "VW", "year": 2012, "color": "Orange"},
-            {"brand": "Audi", "year": 2011, "color": "Black"},
-            {"brand": "Renault", "year": 2005, "color": "Gray"},
-            {"brand": "BMW", "year": 2003, "color": "Blue"},
-            {"brand": "Mercedes", "year": 1995, "color": "Orange"},
-            {"brand": "Volvo", "year": 2005, "color": "Black"},
-            {"brand": "Honda", "year": 2012, "color": "Yellow"},
-            {"brand": "Jaguar", "year": 2013, "color": "Orange"},
-            {"brand": "Ford", "year": 2000, "color": "Black"},
-            {"brand": "Fiat", "year": 2013, "color": "Red"},
-            {"brand": "VW", "year": 2012, "color": "Orange"},
-            {"brand": "Audi", "year": 2011, "color": "Black"},
-            {"brand": "Renault", "year": 2005, "color": "Gray"},
-            {"brand": "BMW", "year": 2003, "color": "Blue"},
-            {"brand": "Mercedes", "year": 1995, "color": "Orange"},
-            {"brand": "Volvo", "year": 2005, "color": "Black"},
-            {"brand": "Honda", "year": 2012, "color": "Yellow"},
-            {"brand": "Jaguar", "year": 2013, "color": "Orange"},
-            {"brand": "Ford", "year": 2000, "color": "Black"},
-            {"brand": "Fiat", "year": 2013, "color": "Red"},
-            {"brand": "VW", "year": 2012, "color": "Orange"},
-            {"brand": "Audi", "year": 2011, "color": "Black"},
-            {"brand": "Renault", "year": 2005, "color": "Gray"},
-            {"brand": "BMW", "year": 2003, "color": "Blue"},
-            {"brand": "Mercedes", "year": 1995, "color": "Orange"},
-            {"brand": "Volvo", "year": 2005, "color": "Black"},
-            {"brand": "Honda", "year": 2012, "color": "Yellow"},
-            {"brand": "Jaguar", "year": 2013, "color": "Orange"},
-            {"brand": "Ford", "year": 2000, "color": "Black"},
-            {"brand": "Fiat", "year": 2013, "color": "Red"}
-        ];
-
-        this.carservice = new CarService();
+        this.customerService = new CustomerService();
+        this.nameBodyTemplate = this.nameBodyTemplate.bind(this);
         this.onVirtualScroll = this.onVirtualScroll.bind(this);
     }
 
     componentDidMount() {
-        this.carservice.getCarsLarge().then(data => {
+        this.setState({ loading: true });
+
+        this.customerService.getCustomersLarge().then(data => {
             this.setState({
-                cars: data,
-                lazyCars: this.loadChunk(0, 40),
-                lazyTotalRecords: 250000,
-                frozenCars: [
-                    {"brand": "BMW", "year": 2013, "color": "Grey", "vin": "fh2uf23"},
-                    {"brand": "Chevrolet", "year": 2011, "color": "Black", "vin": "4525g23"}
-                ],
+                customers: data,
                 loading: false
             });
         });
+        this.customerService.getCustomersXLarge().then(data => this.setState({ inmemoryData: data }));
+
+        this.frozenValue = [
+            {
+                id: 1255,
+                name: "James McAdams",
+                country: {
+                    name: "United States",
+                    code: "us"
+                },
+                company: "McAdams Consulting Ltd",
+                date: "2014-02-13",
+                status: "qualified",
+                activity: 23,
+                representative: {
+                    name: "Ioni Bowcher",
+                    image: "ionibowcher.png"
+                }
+            },
+            {
+                id: 5135,
+                name: "Geraldine Bisset",
+                country: {
+                    name: "France",
+                    code: "fr"
+                },
+                company: "Bisset Group",
+                status: "proposal",
+                date: "2019-05-05",
+                activity: 0,
+                representative: {
+                    name: "Amy Elsner",
+                    image: "amyelsner.png"
+                }
+            }
+        ];
+
+        setTimeout(() => {
+            this.setState({
+                virtualCustomers: this.loadChunk(0, 40),
+                lazyTotalRecords: 500
+            });
+        }, 250);
     }
 
     loadChunk(index, length) {
         let chunk = [];
         for (let i = 0; i < length; i++) {
-            chunk[i] = {...this.inmemoryData[i], ...{vin: (index + i)}};
+            chunk[i] = { ...this.state.inmemoryData[i]};
         }
 
         return chunk;
@@ -293,14 +291,14 @@ export class DataTableScrollDemo extends Component {
         //in a real production application, this data should come from server by building the query with LazyLoadEvent options
         setTimeout(() => {
             //last chunk
-            if (event.first === 249980) {
+            if (event.first === 480) {
                 this.setState({
-                    lazyCars: this.loadChunk(event.first, 20)
+                    virtualCustomers: this.loadChunk(event.first, 20)
                 });
             }
             else {
                 this.setState({
-                    lazyCars: this.loadChunk(event.first, event.rows)
+                    virtualCustomers: this.loadChunk(event.first, event.rows)
                 });
             }
         }, 250);
@@ -310,60 +308,71 @@ export class DataTableScrollDemo extends Component {
         return <span className="loading-text"></span>;
     }
 
+    nameBodyTemplate(rowData) {
+        return <span style={{ fontWeight: '700' }}>{rowData.name}</span>;
+    }
+
     render() {
         return (
             <div>
-                <DataTable header="Vertical" value={this.state.cars} scrollable={true} scrollHeight="200px" loading={this.state.loading}>
-                    <Column field="vin" header="Vin" />
-                    <Column field="year" header="Year" />
-                    <Column field="brand" header="Brand" />
-                    <Column field="color" header="Color" />
-                </DataTable>
+                <div className="card">
+                    <h5>Vertical</h5>
+                    <DataTable value={this.state.customers} scrollable scrollHeight="200px" loading={this.state.loading}>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="country.name" header="Country"></Column>
+                        <Column field="representative.name" header="Representative"></Column>
+                        <Column field="status" header="Status"></Column>
+                    </DataTable>
+                </div>
 
-                <DataTable header="VirtualScroll with Lazy Loading" value={this.state.lazyCars} scrollable={true} scrollHeight="200px" virtualScroll={true} virtualRowHeight={30}
-                    rows={20} totalRecords={this.state.lazyTotalRecords} lazy={true} onVirtualScroll={this.onVirtualScroll} style={{marginTop:'30px'}} loading={this.state.loading}>
-                    <Column field="vin" header="Vin" loadingBody={this.loadingText} />
-                    <Column field="year" header="Year" loadingBody={this.loadingText} />
-                    <Column field="brand" header="Brand" loadingBody={this.loadingText} />
-                    <Column field="color" header="Color" loadingBody={this.loadingText} />
-                </DataTable>
+                <div className="card">
+                    <h5>Virtual Scroll</h5>
+                    <DataTable value={this.state.virtualCustomers} scrollable scrollHeight="200px" lazy rows={20} loading={this.state.loading}
+                        virtualScroll virtualRowHeight={45} onVirtualScroll={this.onVirtualScroll} totalRecords={this.state.lazyTotalRecords}>
+                        <Column field="name" header="Name" loadingBody={this.loadingText}></Column>
+                        <Column field="country.name" header="Country" loadingBody={this.loadingText}></Column>
+                        <Column field="representative.name" header="Representative" loadingBody={this.loadingText}></Column>
+                        <Column field="status" header="Status" loadingBody={this.loadingText}></Column>
+                    </DataTable>
+                </div>
 
-                <DataTable header="Horizontal and Vertical" value={this.state.cars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px', width: '600px'}} loading={this.state.loading}>
-                    <Column field="vin" header="Vin" style={{width:'250px'}} />
-                    <Column field="year" header="Year" style={{width:'250px'}} />
-                    <Column field="brand" header="Brand" style={{width:'250px'}} />
-                    <Column field="color" header="Color" style={{width:'250px'}} />
-                </DataTable>
+                <div className="card">
+                    <h5>Horizontal and Vertical</h5>
+                    <DataTable value={this.state.customers} scrollable scrollHeight="200px" style={{ width: '600px' }} loading={this.state.loading}>
+                        <Column field="id" header="Id" headerStyle={{ width: '250px' }} columnKey="id"></Column>
+                        <Column field="name" header="Name" headerStyle={{ width: '250px' }} columnKey="name"></Column>
+                        <Column field="country.name" header="Country" headerStyle={{ width: '250px' }} columnKey="country"></Column>
+                        <Column field="date" header="Date" headerStyle={{ width: '250px' }} columnKey="date"></Column>
+                        <Column field="company" header="Company" headerStyle={{ width: '250px' }} columnKey="company"></Column>
+                        <Column field="status" header="Status" headerStyle={{ width: '250px' }} columnKey="status"></Column>
+                        <Column field="activity" header="Activity" headerStyle={{ width: '250px' }} columnKey="activity"></Column>
+                        <Column field="representative.name" header="Representative" headerStyle={{ width: '250px' }} columnKey="representative"></Column>
+                    </DataTable>
+                </div>
 
-                <DataTable header="Frozen Rows" value={this.state.cars} frozenValue={this.state.frozenCars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px'}} loading={this.state.loading}>
-                    <Column field="vin" header="Vin" />
-                    <Column field="year" header="Year" />
-                    <Column field="brand" header="Brand" />
-                    <Column field="color" header="Color" />
-                </DataTable>
+                <div className="card">
+                    <h5>Frozen Rows</h5>
+                    <DataTable value={this.state.customers} frozenValue={this.frozenValue} scrollable scrollHeight="200px" loading={this.state.loading}>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="country.name" header="Country"></Column>
+                        <Column field="representative.name" header="Representative"></Column>
+                        <Column field="status" header="Status"></Column>
+                    </DataTable>
+                </div>
 
-                <DataTable header="Frozen Columns" value={this.state.cars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px', width: '800px'}} frozenWidth="200px" loading={this.state.loading}>
-                    <Column field="vin" header="Vin" style={{width:'250px'}} frozen={true} />
-                    <Column field="year" header="Year" style={{width:'250px'}} />
-                    <Column field="brand" header="Brand" style={{width:'250px'}} />
-                    <Column field="color" header="Color" style={{width:'250px'}} />
-                    <Column field="vin" header="Vin" style={{width:'250px'}} />
-                    <Column field="year" header="Year" style={{width:'250px'}} />
-                    <Column field="brand" header="Brand" style={{width:'250px'}} />
-                    <Column field="color" header="Color" style={{width:'250px'}} />
-                </DataTable>
-
-                <DataTable header="Frozen Rows and Columns" value={this.state.cars} frozenValue={this.state.frozenCars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px', width: '800px'}}
-                    frozenWidth="200px" loading={this.state.loading}>
-                    <Column field="vin" header="Vin" style={{width:'250px'}} frozen={true} />
-                    <Column field="year" header="Year" style={{width:'250px'}} />
-                    <Column field="brand" header="Brand" style={{width:'250px'}} />
-                    <Column field="color" header="Color" style={{width:'250px'}} />
-                    <Column field="vin" header="Vin" style={{width:'250px'}} />
-                    <Column field="year" header="Year" style={{width:'250px'}} />
-                    <Column field="brand" header="Brand" style={{width:'250px'}} />
-                    <Column field="color" header="Color" style={{width:'250px'}} />
-                </DataTable>
+                <div className="card">
+                    <h5>Frozen Columns</h5>
+                    <DataTable value={this.state.customers} scrollable scrollHeight="200px" frozenWidth="300px" loading={this.state.loading}>
+                        <Column field="name" header="Name" body={this.nameBodyTemplate} headerStyle={{ width: '300px' }} columnKey="name" frozen></Column>
+                        <Column field="id" header="Id" headerStyle={{ width: '300px' }} columnKey="id"></Column>
+                        <Column field="country.name" header="Country" headerStyle={{ width: '300px' }} columnKey="country"></Column>
+                        <Column field="date" header="Date" headerStyle={{ width: '300px' }} columnKey="date"></Column>
+                        <Column field="company" header="Country" headerStyle={{ width: '300px' }} columnKey="company"></Column>
+                        <Column field="status" header="Status" headerStyle={{ width: '300px' }} columnKey="status"></Column>
+                        <Column field="activity" header="Activity" headerStyle={{ width: '300px' }} columnKey="activity"></Column>
+                        <Column field="representative.name" header="Representative" headerStyle={{ width: '300px' }} columnKey="representative"></Column>
+                    </DataTable>
+                </div>
             </div>
         );
     }

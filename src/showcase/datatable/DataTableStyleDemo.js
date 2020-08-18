@@ -7,6 +7,7 @@ import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { LiveEditor } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './DataTableDemo.scss';
+import { CodeHighlight } from '../codehighlight/CodeHighlight';
 
 export class DataTableStyleDemo extends Component {
 
@@ -83,49 +84,61 @@ export class DataTableStyleDemoDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service/CarService';
+import classNames from 'classnames';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import ProductService from '../service/ProductService';
+import './DataTableDemo.scss';
 
 export class DataTableStyleDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
-            cars: []
+            products: []
         };
-        this.carservice = new CarService();
-        this.yearTemplate = this.yearTemplate.bind(this);
-        this.rowClassName = this.rowClassName.bind(this);
+
+        this.productService = new ProductService();
+        this.stockBodyTemplate = this.stockBodyTemplate.bind(this);
+        this.rowClass = this.rowClass.bind(this);
     }
 
     componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
     }
 
-    yearTemplate(rowData) {
-        let year = rowData.year;
-        let fontWeight = year > 2010 ? 'bold' : 'normal';
-
-        return <span style={{fontWeight: fontWeight}}>{rowData.year}</span>;
+    rowClass(data) {
+        return {
+            'row-accessories': data.category === 'Accessories'
+        }
     }
 
-    rowClassName(rowData) {
-        let brand = rowData.brand;
+    stockBodyTemplate(rowData) {
+        const stockClassName = classNames({
+            'outofstock': rowData.quantity === 0,
+            'lowstock': rowData.quantity > 0 && rowData.quantity < 10,
+            'instock': rowData.quantity > 10
+        });
 
-        return {'p-highlight' : (brand === 'Jaguar')};
+        return (
+            <div className={stockClassName}>
+                {rowData.quantity}
+            </div>
+        );
     }
 
     render() {
         return (
-            <div>
-                <p>This datatable highlights cell with a bolder font weight whose year value is greater than 2010 and highlights rows whose brand is a Jaguar.</p>
-                <DataTable value={this.state.cars} rowClassName={this.rowClassName}>
-                    <Column field="vin" header="Vin" />
-                    <Column field="year" header="Year" body={this.yearTemplate} />
-                    <Column field="brand" header="Brand" />
-                    <Column field="color" header="Color" />
-                </DataTable>
+            <div className="datatable-style-demo">
+                <div className="card">
+                    <DataTable value={this.state.products} rowClassName={this.rowClass}>
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="quantity" header="Quantity" body={this.stockBodyTemplate}></Column>
+                    </DataTable>
+                </div>
             </div>
         );
     }
@@ -231,6 +244,31 @@ const DataTableStyleDemo = () => {
                 <TabView>
                     <TabPanel header="Source">
                         <LiveEditor name="DataTableStyleDemo" sources={this.sources} service="CarService" data="cars-small" />
+<CodeHighlight lang="scss">
+{`
+.datatable-style-demo {
+    .outofstock {
+        font-weight: 700;
+        color: #FF5252;
+        text-decoration: line-through;
+    }
+
+    .lowstock {
+        font-weight: 700;
+        color: #FFA726;
+    }
+
+    .instock {
+        font-weight: 700;
+        color: #66BB6A;
+    }
+
+    .row-accessories {
+        background-color: rgba(0,0,0,.15) !important;
+    }
+}
+`}
+</CodeHighlight>
                     </TabPanel>
                 </TabView>
             </div>
