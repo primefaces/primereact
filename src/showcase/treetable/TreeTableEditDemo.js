@@ -6,6 +6,8 @@ import { NodeService } from '../service/NodeService';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { LiveEditor } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import { CodeHighlight } from '../codehighlight/CodeHighlight';
+import './TreeTableDemo.scss';
 
 export class TreeTableEditDemo extends Component {
 
@@ -79,7 +81,7 @@ export class TreeTableEditDemo extends Component {
                     </AppInlineHeader>
                 </div>
 
-                <div className="content-section implementation">
+                <div className="content-section implementation treetable-editing-demo">
                     <div className="card">
                         <TreeTable value={this.state.nodes}>
                             <Column field="name" header="Name" expander style={{ height: '3.5em' }}></Column>
@@ -109,6 +111,7 @@ import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 import { NodeService } from '../service/NodeService';
+import './TreeTableDemo.scss';
 
 export class TreeTableEditDemo extends Component {
 
@@ -351,6 +354,17 @@ const TreeTableEditDemo = () => {
                 <TabView>
                     <TabPanel header="Source">
                         <LiveEditor name="TreeTableEditDemo" sources={this.sources} service="NodeService" data="treetablenodes" extFiles={this.extFiles} />
+
+<CodeHighlight lang="scss">
+{`
+.treetable-editing-demo {
+    .p-treetable .p-treetable-tbody > tr > td.p-cell-editing {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+}
+`}
+</CodeHighlight>
                     </TabPanel>
                 </TabView>
             </div>

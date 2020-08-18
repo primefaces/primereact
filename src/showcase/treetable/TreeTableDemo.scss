@@ -14,3 +14,10 @@
         }
     }
 }
+
+.treetable-editing-demo {
+    .p-treetable .p-treetable-tbody > tr > td.p-cell-editing {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+}
