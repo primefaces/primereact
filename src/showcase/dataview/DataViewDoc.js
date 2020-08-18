@@ -291,10 +291,10 @@ const DataViewDemo = () => {
     return (
         <div className="dataview-demo">
             <DataView value={cars} layout={layout} header={header}
-                    itemTemplate={itemTemplate} paginatorPosition={'both'} paginator={true} rows={20}
+                    itemTemplate={itemTemplate} paginatorPosition={'both'} paginator rows={20}
                     sortOrder={sortOrder} sortField={sortField} />
 
-            <Dialog header="Car Details" visible={visible} modal={true} onHide={() => setVisible(false)}>
+            <Dialog header="Car Details" visible={visible} modal onHide={() => setVisible(false)}>
                 {renderCarDialogContent()}
             </Dialog>
         </div>
@@ -440,10 +440,10 @@ const DataViewDemo = () => {
     return (
         <div className="dataview-demo">
             <DataView value={cars} layout={layout} header={header}
-                    itemTemplate={itemTemplate} paginatorPosition={'both'} paginator={true} rows={20}
+                    itemTemplate={itemTemplate} paginatorPosition={'both'} paginator rows={20}
                     sortOrder={sortOrder} sortField={sortField} />
 
-            <Dialog header="Car Details" visible={visible} modal={true} onHide={() => setVisible(false)}>
+            <Dialog header="Car Details" visible={visible} modal onHide={() => setVisible(false)}>
                 {renderCarDialogContent()}
             </Dialog>
         </div>
@@ -633,7 +633,7 @@ itemTemplate(car, layout) {
 
 <CodeHighlight>
 {`
-<DataView value={this.state.products} layout={this.state.layout} itemTemplate={this.itemTemplate} paginator={true} rows={10} first={this.state.first} onPage={(e) => this.setState({first: e.first})}></DataView>
+<DataView value={this.state.products} layout={this.state.layout} itemTemplate={this.itemTemplate} paginator rows={10} first={this.state.first} onPage={(e) => this.setState({first: e.first})}></DataView>
 `}
 </CodeHighlight>
 
@@ -641,7 +641,7 @@ itemTemplate(car, layout) {
                         it is evaluated at initial rendering and ignored in further updates. If you programmatically need to update the paginator, prefer to use the component as controlled.</p>
 <CodeHighlight>
 {`
-<DataView value={this.state.products} layout={this.state.layout} itemTemplate={this.itemTemplate} paginator={true} rows={10}></DataView>
+<DataView value={this.state.products} layout={this.state.layout} itemTemplate={this.itemTemplate} paginator rows={10}></DataView>
 `}
 </CodeHighlight>
 

@@ -131,7 +131,7 @@ const DataTablePaginatorDemo = () => {
 
     return (
         <div className="datatable-paginator-demo">
-            <DataTable value={cars} paginator={true} paginatorLeft={paginatorLeft}
+            <DataTable value={cars} paginator paginatorLeft={paginatorLeft}
                 paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" rows={10} rowsPerPageOptions={[5,10,20]} >
                 <Column field="vin" header="Vin" />
@@ -165,7 +165,7 @@ const DataTablePaginatorDemo = () => {
 
     return (
         <div className="datatable-paginator-demo">
-            <DataTable value={cars} paginator={true} paginatorLeft={paginatorLeft}
+            <DataTable value={cars} paginator paginatorLeft={paginatorLeft}
                 paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" rows={10} rowsPerPageOptions={[5,10,20]} >
                 <Column field="vin" header="Vin" />

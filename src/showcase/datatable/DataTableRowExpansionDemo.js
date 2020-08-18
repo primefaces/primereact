@@ -138,7 +138,7 @@ export class DataTableRowExpansionDemo extends Component {
                         <DataTable value={this.state.products} expandedRows={this.state.expandedRows} onRowToggle={(e) => this.setState({ expandedRows: e.data })}
                             onRowExpand={this.onRowExpand} onRowCollapse={this.onRowCollapse}
                             rowExpansionTemplate={this.rowExpansionTemplate} dataKey="id" header={header}>
-                            <Column expander={true} style={{ width: '3em' }} />
+                            <Column expander style={{ width: '3em' }} />
                             <Column field="name" header="Name" sortable />
                             <Column header="Image" body={this.imageBodyTemplate} />
                             <Column field="price" header="Price" sortable body={this.priceBodyTemplate} />
@@ -292,7 +292,7 @@ export class DataTableRowExpansionDemo extends Component {
                     <DataTable value={this.state.products} expandedRows={this.state.expandedRows} onRowToggle={(e) => this.setState({ expandedRows: e.data })}
                         onRowExpand={this.onRowExpand} onRowCollapse={this.onRowCollapse}
                         rowExpansionTemplate={this.rowExpansionTemplate} dataKey="id" header={header}>
-                        <Column expander={true} style={{ width: '3em' }} />
+                        <Column expander style={{ width: '3em' }} />
                         <Column field="name" header="Name" sortable />
                         <Column header="Image" body={this.imageBodyTemplate} />
                         <Column field="price" header="Price" sortable body={this.priceBodyTemplate} />
@@ -356,7 +356,7 @@ const DataTableRowExpansionDemo = () => {
         <div>
             <DataTable value={cars} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
                     rowExpansionTemplate={rowExpansionTemplate} dataKey="vin">
-                <Column expander={true} style={{width: '3em'}} />
+                <Column expander style={{width: '3em'}} />
                 <Column field="vin" header="Vin" />
                 <Column field="year" header="Year" />
                 <Column field="brand" header="Brand" />
@@ -416,7 +416,7 @@ const DataTableRowExpansionDemo = () => {
         <div>
             <DataTable value={cars} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
                     rowExpansionTemplate={rowExpansionTemplate} dataKey="vin">
-                <Column expander={true} style={{width: '3em'}} />
+                <Column expander style={{width: '3em'}} />
                 <Column field="vin" header="Vin" />
                 <Column field="year" header="Year" />
                 <Column field="brand" header="Brand" />

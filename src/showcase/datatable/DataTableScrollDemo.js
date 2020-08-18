@@ -484,37 +484,37 @@ const DataTableScrollDemo = () => {
 
     return (
         <div>
-            <DataTable header="Vertical" value={cars} scrollable={true} scrollHeight="200px" loading={loading}>
+            <DataTable header="Vertical" value={cars} scrollable scrollHeight="200px" loading={loading}>
                 <Column field="vin" header="Vin" />
                 <Column field="year" header="Year" />
                 <Column field="brand" header="Brand" />
                 <Column field="color" header="Color" />
             </DataTable>
 
-            <DataTable header="VirtualScroll with Lazy Loading" value={lazyCars} scrollable={true} scrollHeight="200px" virtualScroll={true} virtualRowHeight={30}
-                rows={20} totalRecords={lazyTotalRecords} lazy={true} onVirtualScroll={onVirtualScroll} style={{marginTop:'30px'}} loading={loading}>
+            <DataTable header="VirtualScroll with Lazy Loading" value={lazyCars} scrollable scrollHeight="200px" virtualScroll virtualRowHeight={30}
+                rows={20} totalRecords={lazyTotalRecords} lazy onVirtualScroll={onVirtualScroll} style={{marginTop:'30px'}} loading={loading}>
                 <Column field="vin" header="Vin" loadingBody={loadingText} />
                 <Column field="year" header="Year" loadingBody={loadingText} />
                 <Column field="brand" header="Brand" loadingBody={loadingText} />
                 <Column field="color" header="Color" loadingBody={loadingText} />
             </DataTable>
 
-            <DataTable header="Horizontal and Vertical" value={cars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px', width: '600px'}} loading={loading}>
+            <DataTable header="Horizontal and Vertical" value={cars} scrollable scrollHeight="200px" style={{marginTop:'30px', width: '600px'}} loading={loading}>
                 <Column field="vin" header="Vin" style={{width:'250px'}} />
                 <Column field="year" header="Year" style={{width:'250px'}} />
                 <Column field="brand" header="Brand" style={{width:'250px'}} />
                 <Column field="color" header="Color" style={{width:'250px'}} />
             </DataTable>
 
-            <DataTable header="Frozen Rows" value={cars} frozenValue={frozenCars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px'}} loading={loading}>
+            <DataTable header="Frozen Rows" value={cars} frozenValue={frozenCars} scrollable scrollHeight="200px" style={{marginTop:'30px'}} loading={loading}>
                 <Column field="vin" header="Vin" />
                 <Column field="year" header="Year" />
                 <Column field="brand" header="Brand" />
                 <Column field="color" header="Color" />
             </DataTable>
 
-            <DataTable header="Frozen Columns" value={cars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px', width: '800px'}} frozenWidth="200px" loading={loading}>
-                <Column field="vin" header="Vin" style={{width:'250px'}} frozen={true} />
+            <DataTable header="Frozen Columns" value={cars} scrollable scrollHeight="200px" style={{marginTop:'30px', width: '800px'}} frozenWidth="200px" loading={loading}>
+                <Column field="vin" header="Vin" style={{width:'250px'}} frozen />
                 <Column field="year" header="Year" style={{width:'250px'}} />
                 <Column field="brand" header="Brand" style={{width:'250px'}} />
                 <Column field="color" header="Color" style={{width:'250px'}} />
@@ -524,9 +524,9 @@ const DataTableScrollDemo = () => {
                 <Column field="color" header="Color" style={{width:'250px'}} />
             </DataTable>
 
-            <DataTable header="Frozen Rows and Columns" value={cars} frozenValue={frozenCars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px', width: '800px'}}
+            <DataTable header="Frozen Rows and Columns" value={cars} frozenValue={frozenCars} scrollable scrollHeight="200px" style={{marginTop:'30px', width: '800px'}}
                 frozenWidth="200px" loading={loading}>
-                <Column field="vin" header="Vin" style={{width:'250px'}} frozen={true} />
+                <Column field="vin" header="Vin" style={{width:'250px'}} frozen />
                 <Column field="year" header="Year" style={{width:'250px'}} />
                 <Column field="brand" header="Brand" style={{width:'250px'}} />
                 <Column field="color" header="Color" style={{width:'250px'}} />
@@ -645,37 +645,37 @@ const DataTableScrollDemo = () => {
 
     return (
         <div>
-            <DataTable header="Vertical" value={cars} scrollable={true} scrollHeight="200px" loading={loading}>
+            <DataTable header="Vertical" value={cars} scrollable scrollHeight="200px" loading={loading}>
                 <Column field="vin" header="Vin" />
                 <Column field="year" header="Year" />
                 <Column field="brand" header="Brand" />
                 <Column field="color" header="Color" />
             </DataTable>
 
-            <DataTable header="VirtualScroll with Lazy Loading" value={lazyCars} scrollable={true} scrollHeight="200px" virtualScroll={true} virtualRowHeight={30}
-                rows={20} totalRecords={lazyTotalRecords} lazy={true} onVirtualScroll={onVirtualScroll} style={{marginTop:'30px'}} loading={loading}>
+            <DataTable header="VirtualScroll with Lazy Loading" value={lazyCars} scrollable scrollHeight="200px" virtualScroll virtualRowHeight={30}
+                rows={20} totalRecords={lazyTotalRecords} lazy onVirtualScroll={onVirtualScroll} style={{marginTop:'30px'}} loading={loading}>
                 <Column field="vin" header="Vin" loadingBody={loadingText} />
                 <Column field="year" header="Year" loadingBody={loadingText} />
                 <Column field="brand" header="Brand" loadingBody={loadingText} />
                 <Column field="color" header="Color" loadingBody={loadingText} />
             </DataTable>
 
-            <DataTable header="Horizontal and Vertical" value={cars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px', width: '600px'}} loading={loading}>
+            <DataTable header="Horizontal and Vertical" value={cars} scrollable scrollHeight="200px" style={{marginTop:'30px', width: '600px'}} loading={loading}>
                 <Column field="vin" header="Vin" style={{width:'250px'}} />
                 <Column field="year" header="Year" style={{width:'250px'}} />
                 <Column field="brand" header="Brand" style={{width:'250px'}} />
                 <Column field="color" header="Color" style={{width:'250px'}} />
             </DataTable>
 
-            <DataTable header="Frozen Rows" value={cars} frozenValue={frozenCars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px'}} loading={loading}>
+            <DataTable header="Frozen Rows" value={cars} frozenValue={frozenCars} scrollable scrollHeight="200px" style={{marginTop:'30px'}} loading={loading}>
                 <Column field="vin" header="Vin" />
                 <Column field="year" header="Year" />
                 <Column field="brand" header="Brand" />
                 <Column field="color" header="Color" />
             </DataTable>
 
-            <DataTable header="Frozen Columns" value={cars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px', width: '800px'}} frozenWidth="200px" loading={loading}>
-                <Column field="vin" header="Vin" style={{width:'250px'}} frozen={true} />
+            <DataTable header="Frozen Columns" value={cars} scrollable scrollHeight="200px" style={{marginTop:'30px', width: '800px'}} frozenWidth="200px" loading={loading}>
+                <Column field="vin" header="Vin" style={{width:'250px'}} frozen />
                 <Column field="year" header="Year" style={{width:'250px'}} />
                 <Column field="brand" header="Brand" style={{width:'250px'}} />
                 <Column field="color" header="Color" style={{width:'250px'}} />
@@ -685,9 +685,9 @@ const DataTableScrollDemo = () => {
                 <Column field="color" header="Color" style={{width:'250px'}} />
             </DataTable>
 
-            <DataTable header="Frozen Rows and Columns" value={cars} frozenValue={frozenCars} scrollable={true} scrollHeight="200px" style={{marginTop:'30px', width: '800px'}}
+            <DataTable header="Frozen Rows and Columns" value={cars} frozenValue={frozenCars} scrollable scrollHeight="200px" style={{marginTop:'30px', width: '800px'}}
                 frozenWidth="200px" loading={loading}>
-                <Column field="vin" header="Vin" style={{width:'250px'}} frozen={true} />
+                <Column field="vin" header="Vin" style={{width:'250px'}} frozen />
                 <Column field="year" header="Year" style={{width:'250px'}} />
                 <Column field="brand" header="Brand" style={{width:'250px'}} />
                 <Column field="color" header="Color" style={{width:'250px'}} />

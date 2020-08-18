@@ -354,7 +354,7 @@ const DataTableRowGroupDemo = () => {
         <div>
             <DataTable header="Toggleable Row Groups" value={cars} rowGroupMode="subheader" sortField="brand" sortOrder={1} groupField="brand"
                 rowGroupHeaderTemplate={headerTemplate} rowGroupFooterTemplate={footerTemplate}
-                expandableRowGroups={true} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}>
+                expandableRowGroups expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}>
                 <Column field="vin" header="Vin" />
                 <Column field="year" header="Year" />
                 <Column field="color" header="Color" />
@@ -429,7 +429,7 @@ const DataTableRowGroupDemo = () => {
         <div>
             <DataTable header="Toggleable Row Groups" value={cars} rowGroupMode="subheader" sortField="brand" sortOrder={1} groupField="brand"
                 rowGroupHeaderTemplate={headerTemplate} rowGroupFooterTemplate={footerTemplate}
-                expandableRowGroups={true} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}>
+                expandableRowGroups expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}>
                 <Column field="vin" header="Vin" />
                 <Column field="year" header="Year" />
                 <Column field="color" header="Color" />

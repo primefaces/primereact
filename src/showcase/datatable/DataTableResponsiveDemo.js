@@ -195,7 +195,7 @@ const DataTableResponsiveDemo = () => {
 
     return (
         <div>
-            <DataTable value={cars} responsive={true} header="Responsive">
+            <DataTable value={cars} responsive header="Responsive">
                 <Column field="vin" header="Vin" />
                 <Column field="year" header="Year" />
                 <Column field="brand" header="Brand" />
@@ -224,7 +224,7 @@ const DataTableResponsiveDemo = () => {
 
     return (
         <div>
-            <DataTable value={cars} responsive={true} header="Responsive">
+            <DataTable value={cars} responsive header="Responsive">
                 <Column field="vin" header="Vin" />
                 <Column field="year" header="Year" />
                 <Column field="brand" header="Brand" />

@@ -61,7 +61,7 @@ export class DataTableReorderDemo extends Component {
 
                     <div className="card">
                         <DataTable value={this.state.products} reorderableColumns onRowReorder={this.onRowReorder} onColReorder={this.onColReorder}>
-                            <Column rowReorder={true} style={{width: '3em'}} />
+                            <Column rowReorder style={{width: '3em'}} />
                             {dynamicColumns}
                         </DataTable>
                     </div>
@@ -134,7 +134,7 @@ export class DataTableReorderDemo extends Component {
 
                 <div className="card">
                     <DataTable value={this.state.products} reorderableColumns onRowReorder={this.onRowReorder} onColReorder={this.onColReorder}>
-                        <Column rowReorder={true} style={{width: '3em'}} />
+                        <Column rowReorder style={{width: '3em'}} />
                         {dynamicColumns}
                     </DataTable>
                 </div>
@@ -162,8 +162,8 @@ const DataTableReorderDemo = () => {
 
     return (
         <div>
-            <DataTable value={cars} reorderableColumns={true} onRowReorder={(e) => setCars(e.value)}>
-                <Column rowReorder={true} style={{width: '3em'}} />
+            <DataTable value={cars} reorderableColumns onRowReorder={(e) => setCars(e.value)}>
+                <Column rowReorder style={{width: '3em'}} />
                 <Column columnKey="vin" field="vin" header="Vin"/>
                 <Column columnKey="year" field="year" header="Year" />
                 <Column columnKey="brand" field="brand" header="Brand" />
@@ -192,8 +192,8 @@ const DataTableReorderDemo = () => {
 
     return (
         <div>
-            <DataTable value={cars} reorderableColumns={true} onRowReorder={(e) => setCars(e.value)}>
-                <Column rowReorder={true} style={{width: '3em'}} />
+            <DataTable value={cars} reorderableColumns onRowReorder={(e) => setCars(e.value)}>
+                <Column rowReorder style={{width: '3em'}} />
                 <Column columnKey="vin" field="vin" header="Vin"/>
                 <Column columnKey="year" field="year" header="Year" />
                 <Column columnKey="brand" field="brand" header="Brand" />

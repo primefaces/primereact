@@ -337,22 +337,22 @@ const DataTableStateDemo = () => {
     return (
         <div>
             <h3>Session Storage</h3>
-            <DataTable value={cars1} selectionMode="multiple" resizableColumns={true} footer={displaySelection(selectedCars1)}
-                selection={selectedCars1} onSelectionChange={e => setSelectedCars1(e.value)} paginator={true} rows={10} stateKey="tablestatedemo-session">
-                <Column field="vin" header="Vin" sortable={true} filter={true}/>
-                <Column field="year" header="Year" sortable={true} filter={true}/>
-                <Column field="brand" header="Brand" sortable={true} filter={true}/>
-                <Column field="color" header="Color" sortable={true} filter={true}/>
+            <DataTable value={cars1} selectionMode="multiple" resizableColumns footer={displaySelection(selectedCars1)}
+                selection={selectedCars1} onSelectionChange={e => setSelectedCars1(e.value)} paginator rows={10} stateKey="tablestatedemo-session">
+                <Column field="vin" header="Vin" sortable filter/>
+                <Column field="year" header="Year" sortable filter/>
+                <Column field="brand" header="Brand" sortable filter/>
+                <Column field="color" header="Color" sortable filter/>
             </DataTable>
 
             <h3>Local Storage</h3>
-            <DataTable value={cars2} selectionMode="multiple" resizableColumns={true} footer={displaySelection(selectedCars2)}
-                selection={selectedCars2} onSelectionChange={e => setSelectedCars2(e.value)} paginator={true} rows={10}
+            <DataTable value={cars2} selectionMode="multiple" resizableColumns footer={displaySelection(selectedCars2)}
+                selection={selectedCars2} onSelectionChange={e => setSelectedCars2(e.value)} paginator rows={10}
                 stateStorage="local" stateKey="tablestatedemo-local">
-                <Column field="vin" header="Vin" sortable={true} filter={true}/>
-                <Column field="year" header="Year" sortable={true} filter={true}/>
-                <Column field="brand" header="Brand" sortable={true} filter={true}/>
-                <Column field="color" header="Color" sortable={true} filter={true}/>
+                <Column field="vin" header="Vin" sortable filter/>
+                <Column field="year" header="Year" sortable filter/>
+                <Column field="brand" header="Brand" sortable filter/>
+                <Column field="color" header="Color" sortable filter/>
             </DataTable>
         </div>
     );
@@ -397,22 +397,22 @@ const DataTableStateDemo = () => {
     return (
         <div>
             <h3>Session Storage</h3>
-            <DataTable value={cars1} selectionMode="multiple" resizableColumns={true} footer={displaySelection(selectedCars1)}
-                selection={selectedCars1} onSelectionChange={e => setSelectedCars1(e.value)} paginator={true} rows={10} stateKey="tablestatedemo-session">
-                <Column field="vin" header="Vin" sortable={true} filter={true}/>
-                <Column field="year" header="Year" sortable={true} filter={true}/>
-                <Column field="brand" header="Brand" sortable={true} filter={true}/>
-                <Column field="color" header="Color" sortable={true} filter={true}/>
+            <DataTable value={cars1} selectionMode="multiple" resizableColumns footer={displaySelection(selectedCars1)}
+                selection={selectedCars1} onSelectionChange={e => setSelectedCars1(e.value)} paginator rows={10} stateKey="tablestatedemo-session">
+                <Column field="vin" header="Vin" sortable filter/>
+                <Column field="year" header="Year" sortable filter/>
+                <Column field="brand" header="Brand" sortable filter/>
+                <Column field="color" header="Color" sortable filter/>
             </DataTable>
 
             <h3>Local Storage</h3>
-            <DataTable value={cars2} selectionMode="multiple" resizableColumns={true} footer={displaySelection(selectedCars2)}
-                selection={selectedCars2} onSelectionChange={e => setSelectedCars2(e.value)} paginator={true} rows={10}
+            <DataTable value={cars2} selectionMode="multiple" resizableColumns footer={displaySelection(selectedCars2)}
+                selection={selectedCars2} onSelectionChange={e => setSelectedCars2(e.value)} paginator rows={10}
                 stateStorage="local" stateKey="tablestatedemo-local">
-                <Column field="vin" header="Vin" sortable={true} filter={true}/>
-                <Column field="year" header="Year" sortable={true} filter={true}/>
-                <Column field="brand" header="Brand" sortable={true} filter={true}/>
-                <Column field="color" header="Color" sortable={true} filter={true}/>
+                <Column field="vin" header="Vin" sortable filter/>
+                <Column field="year" header="Year" sortable filter/>
+                <Column field="brand" header="Brand" sortable filter/>
+                <Column field="color" header="Color" sortable filter/>
             </DataTable>
         </div>
     );

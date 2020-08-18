@@ -207,26 +207,26 @@ const DataTableSortDemo = () => {
         <div>
             <h3>Single Column</h3>
             <DataTable value={cars}>
-                <Column field="vin" header="Vin" sortable={true}/>
-                <Column field="year" header="Year" sortable={true}/>
-                <Column field="brand" header="Brand" sortable={true}/>
-                <Column field="color" header="Color" sortable={true}/>
+                <Column field="vin" header="Vin" sortable/>
+                <Column field="year" header="Year" sortable/>
+                <Column field="brand" header="Brand" sortable/>
+                <Column field="color" header="Color" sortable/>
             </DataTable>
 
             <h3>Multiple Columns</h3>
             <DataTable value={cars} sortMode="multiple">
-                <Column field="vin" header="Vin" sortable={true}/>
-                <Column field="year" header="Year" sortable={true}/>
-                <Column field="brand" header="Brand" sortable={true}/>
-                <Column field="color" header="Color" sortable={true}/>
+                <Column field="vin" header="Vin" sortable/>
+                <Column field="year" header="Year" sortable/>
+                <Column field="brand" header="Brand" sortable/>
+                <Column field="color" header="Color" sortable/>
             </DataTable>
 
             <h3>Removable Sort</h3>
-            <DataTable value={cars} removableSort={true} sortMode="multiple">
-                <Column field="vin" header="Vin" sortable={true}/>
-                <Column field="year" header="Year" sortable={true}/>
-                <Column field="brand" header="Brand" sortable={true}/>
-                <Column field="color" header="Color" sortable={true}/>
+            <DataTable value={cars} removableSort sortMode="multiple">
+                <Column field="vin" header="Vin" sortable/>
+                <Column field="year" header="Year" sortable/>
+                <Column field="brand" header="Brand" sortable/>
+                <Column field="color" header="Color" sortable/>
             </DataTable>
         </div>
     );
@@ -253,26 +253,26 @@ const DataTableSortDemo = () => {
         <div>
             <h3>Single Column</h3>
             <DataTable value={cars}>
-                <Column field="vin" header="Vin" sortable={true}/>
-                <Column field="year" header="Year" sortable={true}/>
-                <Column field="brand" header="Brand" sortable={true}/>
-                <Column field="color" header="Color" sortable={true}/>
+                <Column field="vin" header="Vin" sortable/>
+                <Column field="year" header="Year" sortable/>
+                <Column field="brand" header="Brand" sortable/>
+                <Column field="color" header="Color" sortable/>
             </DataTable>
 
             <h3>Multiple Columns</h3>
             <DataTable value={cars} sortMode="multiple">
-                <Column field="vin" header="Vin" sortable={true}/>
-                <Column field="year" header="Year" sortable={true}/>
-                <Column field="brand" header="Brand" sortable={true}/>
-                <Column field="color" header="Color" sortable={true}/>
+                <Column field="vin" header="Vin" sortable/>
+                <Column field="year" header="Year" sortable/>
+                <Column field="brand" header="Brand" sortable/>
+                <Column field="color" header="Color" sortable/>
             </DataTable>
 
             <h3>Removable Sort</h3>
-            <DataTable value={cars} removableSort={true} sortMode="multiple">
-                <Column field="vin" header="Vin" sortable={true}/>
-                <Column field="year" header="Year" sortable={true}/>
-                <Column field="brand" header="Brand" sortable={true}/>
-                <Column field="color" header="Color" sortable={true}/>
+            <DataTable value={cars} removableSort sortMode="multiple">
+                <Column field="vin" header="Vin" sortable/>
+                <Column field="year" header="Year" sortable/>
+                <Column field="brand" header="Brand" sortable/>
+                <Column field="color" header="Color" sortable/>
             </DataTable>
         </div>
     );
