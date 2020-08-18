@@ -143,11 +143,11 @@ const MultiSelectDemo = () => {
         <div className="multiselect-demo">
             <h5>Basic</h5>
             <MultiSelect value={cars1} options={cars} onChange={(e) => setCars1(e.value)}
-                    style={{minWidth:'15em'}} filter={true} filterPlaceholder="Search" placeholder="Choose" />
+                    style={{minWidth:'15em'}} filter filterPlaceholder="Search" placeholder="Choose" />
 
             <h5>Templating</h5>
             <MultiSelect value={cars2} options={cars} onChange={(e) => setCars2(e.value)}
-                            style={{minWidth:'15em'}} filter={true} filterPlaceholder="Search" itemTemplate={carTemplate} selectedItemTemplate={selectedCarTemplate} />
+                            style={{minWidth:'15em'}} filter filterPlaceholder="Search" itemTemplate={carTemplate} selectedItemTemplate={selectedCarTemplate} />
         </div>
     );
 }
@@ -206,11 +206,11 @@ const MultiSelectDemo = () => {
         <div className="multiselect-demo">
             <h5>Basic</h5>
             <MultiSelect value={cars1} options={cars} onChange={(e) => setCars1(e.value)}
-                    style={{minWidth:'15em'}} filter={true} filterPlaceholder="Search" placeholder="Choose" />
+                    style={{minWidth:'15em'}} filter filterPlaceholder="Search" placeholder="Choose" />
 
             <h5>Templating</h5>
             <MultiSelect value={cars2} options={cars} onChange={(e) => setCars2(e.value)}
-                            style={{minWidth:'15em'}} filter={true} filterPlaceholder="Search" itemTemplate={carTemplate} selectedItemTemplate={selectedCarTemplate} />
+                            style={{minWidth:'15em'}} filter filterPlaceholder="Search" itemTemplate={carTemplate} selectedItemTemplate={selectedCarTemplate} />
         </div>
     );
 }

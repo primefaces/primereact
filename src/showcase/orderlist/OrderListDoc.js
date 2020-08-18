@@ -97,8 +97,8 @@ const OrderListDemo = () => {
         <div>
             <div className="p-grid">
                 <div className="p-col-12 p-md-6">
-                    <OrderList value={cars} dragdrop={true} itemTemplate={carTemplate}
-                        responsive={true} header="List of Cars" listStyle={{height: '20em'}}
+                    <OrderList value={cars} dragdrop itemTemplate={carTemplate}
+                        responsive header="List of Cars" listStyle={{height: '20em'}}
                         onChange={(e) => setCars(e.value)} />
                 </div>
                 <div className="p-col-12 p-md-6">
@@ -142,8 +142,8 @@ const OrderListDemo = () => {
         <div>
             <div className="p-grid">
                 <div className="p-col-12 p-md-6">
-                    <OrderList value={cars} dragdrop={true} itemTemplate={carTemplate}
-                        responsive={true} header="List of Cars" listStyle={{height: '20em'}}
+                    <OrderList value={cars} dragdrop itemTemplate={carTemplate}
+                        responsive header="List of Cars" listStyle={{height: '20em'}}
                         onChange={(e) => setCars(e.value)} />
                 </div>
                 <div className="p-col-12 p-md-6">
@@ -191,7 +191,7 @@ import { OrderList } from 'primereact/orderlist';
 
 <CodeHighlight>
 {`
-<OrderList value={this.state.products} itemTemplate={this.itemTemplate} dragdrop={true} onChange={(e) => this.setState({products: e.value})}></OrderList>
+<OrderList value={this.state.products} itemTemplate={this.itemTemplate} dragdrop onChange={(e) => this.setState({products: e.value})}></OrderList>
 `}
 </CodeHighlight>
 

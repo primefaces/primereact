@@ -124,10 +124,10 @@ const ListBoxDemo = () => {
             <ListBox value={selectedCity} options={cities} onChange={(e) => setSelectedCity(e.value)} optionLabel="name"/>
 
             <h5>Multiple</h5>
-            <ListBox value={selectedCities} options={cities} onChange={(e) => setSelectedCities(e.value)} multiple={true} optionLabel="name"/>
+            <ListBox value={selectedCities} options={cities} onChange={(e) => setSelectedCities(e.value)} multiple optionLabel="name"/>
 
             <h5>Advanced</h5>
-            <ListBox value={selectedCar} filter={true} filterPlaceholder="Search" options={cars} onChange={(e) => setSelectedCar(e.value)} itemTemplate={carTemplate}
+            <ListBox value={selectedCar} filter filterPlaceholder="Search" options={cars} onChange={(e) => setSelectedCar(e.value)} itemTemplate={carTemplate}
                             style={{width: '15em'}} listStyle={{maxHeight: '250px'}}  />
         </div>
     );
@@ -182,10 +182,10 @@ const ListBoxDemo = () => {
             <ListBox value={selectedCity} options={cities} onChange={(e) => setSelectedCity(e.value)} optionLabel="name"/>
 
             <h5>Multiple</h5>
-            <ListBox value={selectedCities} options={cities} onChange={(e) => setSelectedCities(e.value)} multiple={true} optionLabel="name"/>
+            <ListBox value={selectedCities} options={cities} onChange={(e) => setSelectedCities(e.value)} multiple optionLabel="name"/>
 
             <h5>Advanced</h5>
-            <ListBox value={selectedCar} filter={true} filterPlaceholder="Search" options={cars} onChange={(e) => setSelectedCar(e.value)} itemTemplate={carTemplate}
+            <ListBox value={selectedCar} filter filterPlaceholder="Search" options={cars} onChange={(e) => setSelectedCar(e.value)} itemTemplate={carTemplate}
                             style={{width: '15em'}} listStyle={{maxHeight: '250px'}}  />
         </div>
     );

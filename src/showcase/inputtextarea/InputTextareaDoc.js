@@ -62,7 +62,7 @@ const InputTextareaDemo = () => {
             <div>{value}</div>
 
             <h5>AutoResize</h5>
-            <InputTextarea rows={5} cols={30} autoResize={true}></InputTextarea>
+            <InputTextarea rows={5} cols={30} autoResize></InputTextarea>
         </div>
     )
 }
@@ -84,7 +84,7 @@ const InputTextareaDemo = () => {
             <div>{value}</div>
 
             <h5>AutoResize</h5>
-            <InputTextarea rows={5} cols={30} autoResize={true}></InputTextarea>
+            <InputTextarea rows={5} cols={30} autoResize></InputTextarea>
         </div>
     )
 }
@@ -121,7 +121,7 @@ import { InputTextarea } from 'primereact/inputtextarea';
                         <p>In auto resize mode, textarea grows instead of displaying a scrollbar.</p>
 <CodeHighlight>
 {`
-<InputTextarea rows={5} cols={30} value={this.state.value} onChange={(e) => this.setState({value: e.target.value})} autoResize={true} />
+<InputTextarea rows={5} cols={30} value={this.state.value} onChange={(e) => this.setState({value: e.target.value})} autoResize />
 `}
 </CodeHighlight>
 

@@ -111,8 +111,8 @@ const MenuDemo = () => {
             <Menu model={items}/>
 
             <h5>Popup</h5>
-            <Menu model={items} popup={true} ref={menu} id="popup_menu"/>
-            <Button label="Show" icon="pi pi-bars" onClick={(event) => menu.current.toggle(event)} aria-controls="popup_menu" aria-haspopup={true}/>
+            <Menu model={items} popup ref={menu} id="popup_menu"/>
+            <Button label="Show" icon="pi pi-bars" onClick={(event) => menu.current.toggle(event)} aria-controls="popup_menu" aria-haspopup/>
         </div>
     )
 }
@@ -147,8 +147,8 @@ const MenuDemo = () => {
             <Menu model={items}/>
 
             <h5>Popup</h5>
-            <Menu model={items} popup={true} ref={menu} id="popup_menu"/>
-            <Button label="Show" icon="pi pi-bars" onClick={(event) => menu.current.toggle(event)} aria-controls="popup_menu" aria-haspopup={true}/>
+            <Menu model={items} popup ref={menu} id="popup_menu"/>
+            <Button label="Show" icon="pi pi-bars" onClick={(event) => menu.current.toggle(event)} aria-controls="popup_menu" aria-haspopup/>
         </div>
     )
 }

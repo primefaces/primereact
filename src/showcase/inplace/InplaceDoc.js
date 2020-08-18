@@ -106,7 +106,7 @@ const InplaceDemo = () => {
     return (
         <div>
             <h5>Input</h5>
-            <Inplace closable={true}>
+            <Inplace closable>
                 <InplaceDisplay>
                     Click to Edit
                 </InplaceDisplay>
@@ -166,7 +166,7 @@ const InplaceDemo = () => {
     return (
         <div>
             <h5>Input</h5>
-            <Inplace closable={true}>
+            <Inplace closable>
                 <InplaceDisplay>
                     Click to Edit
                 </InplaceDisplay>
@@ -262,7 +262,7 @@ import { Inplace } from 'primereact/inplace';
                         <p><i>closable</i> property is handy within forms as it enables to get back to output mode after editing is completed using a button displayed next to the form field.</p>
 <CodeHighlight>
 {`
-<Inplace closable={true}>
+<Inplace closable>
     <InplaceDisplay>
         Click to Edit
     </InplaceDisplay>

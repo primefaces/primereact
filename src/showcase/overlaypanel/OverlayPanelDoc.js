@@ -97,7 +97,7 @@ const OverlayPanelDemo = () => {
         <div>
             <Button type="button" label="Toggle" onClick={(e) => op.current.toggle(e)}/>
 
-            <OverlayPanel ref={op} id="overlay_panel" showCloseIcon={true}>
+            <OverlayPanel ref={op} id="overlay_panel" showCloseIcon>
                 <img src="showcase/demo/images/galleria/galleria1.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Galleria 1" />
             </OverlayPanel>
         </div>
@@ -119,7 +119,7 @@ const OverlayPanelDemo = () => {
         <div>
             <Button type="button" label="Toggle" onClick={(e) => op.current.toggle(e)}/>
 
-            <OverlayPanel ref={op} id="overlay_panel" showCloseIcon={true}>
+            <OverlayPanel ref={op} id="overlay_panel" showCloseIcon>
                 <img src="showcase/demo/images/galleria/galleria1.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Galleria 1" />
             </OverlayPanel>
         </div>
