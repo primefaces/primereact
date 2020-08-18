@@ -45,7 +45,7 @@ import { ScrollPanel } from 'primereact/scrollpanel';
     kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
 </ScrollPanel>
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
 <CodeHighlight lang="scss">
 {`

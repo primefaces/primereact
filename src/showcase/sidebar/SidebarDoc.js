@@ -268,7 +268,7 @@ import { Sidebar } from 'primereact/sidebar';
 
 <Button icon="pi pi-arrow-right" onClick={(e) => this.setState({visible:true})}/>
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h5>Position</h5>
                         <p>Sidebar can either be located on the left (default), right, top or bottom of the screen depending on the <i>position</i> property.</p>

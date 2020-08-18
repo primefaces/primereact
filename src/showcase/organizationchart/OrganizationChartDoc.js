@@ -551,7 +551,7 @@ export class OrganizationChartDemo extends Component {
     }
 }
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h5>Templating</h5>
                         <p>Label of the treenode is displayed inside the node content by default and templating enables further customization.</p>

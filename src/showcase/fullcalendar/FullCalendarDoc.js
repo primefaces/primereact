@@ -223,7 +223,7 @@ export class FullCalendarDemo extends Component {
 	}
 }
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h5>Callbacks</h5>
                         <p>Callbacks of the FullCalendar such as dateClick are also defined with the options property.</p>

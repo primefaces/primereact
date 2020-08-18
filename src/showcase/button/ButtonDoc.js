@@ -254,7 +254,7 @@ const ButtonDemo = () => {
 {`
 import { Button } from 'primereact/button';
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h5>Getting Started</h5>
                         <p>Button is created using the Button element.</p>
@@ -262,7 +262,7 @@ import { Button } from 'primereact/button';
 {`
 <Button />
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h5>Label</h5>
                         <p>Text of the button is defined using the <i>label</i> property.</p>
@@ -270,7 +270,7 @@ import { Button } from 'primereact/button';
 {`
 <Button label="Save" />
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h5>Icons</h5>
                         <p>Icon on a button is specified with <i>icon</i> property and position is configured using <i>iconPos</i> attribute. Default
@@ -282,7 +282,7 @@ import { Button } from 'primereact/button';
 <Button label="Click" icon="pi pi-check" iconPos="right" />
 <Button icon="pi pi-check" iconPos="right" />
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h5>Events</h5>
                         <p>Events are defined with the standard notation.</p>
@@ -314,7 +314,7 @@ import { Button } from 'primereact/button';
 <Button label="Warning" className="p-button-warning" />
 <Button label="Danger" className="p-button-danger" />
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h5>Raised and Rounded Buttons</h5>
                         <p>A button can be raised by having "p-button-raised" style class and similarly borders can be made rounded using "p-button-rounded" class.</p>

@@ -121,7 +121,7 @@ const RatingDemo = () => {
 {`
 import { Rating } from 'primereact/rating';
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h5>Getting Started</h5>
                         <p>Rating is used a controlled input component with <i>value</i> and <i>onChange</i> properties.</p>

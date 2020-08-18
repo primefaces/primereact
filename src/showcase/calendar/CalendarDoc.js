@@ -456,7 +456,7 @@ const CalendarDemo = () => {
 {`
 import { Calendar } from 'primereact/calendar';
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h5>Getting Started</h5>
                         <p>Calendar is used a controlled input component with <i>value</i> and <i>onChange</i> properties.</p>
@@ -630,7 +630,7 @@ dateTemplate(date) {
 {`
 <Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} headerTemplate={<Button label="Custom Button" />} footerTemplate={<div>Footer Content</div>} />
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h5>Month and Year Navigator</h5>
                         <p>Navigators are used to quickly change the displayed month and year using dropdowns. Enabling <i>monthNavigator</i> displays a dropdown with months whereas <i>yearNavigator</i> along with <i>yearRange</i> displays

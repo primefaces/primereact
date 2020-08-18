@@ -333,7 +333,7 @@ selectedItemTemplate(option) {
     // custom selected item content
 }
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
             <h5>Filtering</h5>
             <p>Options can be filtered using an input field in the overlay by enabling the <i>filter</i> property. By default filtering is done against

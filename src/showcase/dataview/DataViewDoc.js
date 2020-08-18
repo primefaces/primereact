@@ -546,7 +546,7 @@ itemTemplate(car, layout) {
 }
 
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
 <CodeHighlight>
 {`
