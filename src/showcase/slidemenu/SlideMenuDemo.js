@@ -157,7 +157,7 @@ export class SlideMenuDemo extends Component {
                         <SlideMenu model={this.items} viewportHeight={250} style={{width: '13.5em'}}></SlideMenu>
 
                         <h5>Popup</h5>
-                        <SlideMenu ref={(el) => this.menu = el} model={this.items} popup={true} viewportHeight={250} style={{width: '13.5em'}}></SlideMenu>
+                        <SlideMenu ref={(el) => this.menu = el} model={this.items} popup viewportHeight={250} style={{width: '13.5em'}}></SlideMenu>
                         <Button type="button" icon="pi pi-bars" label="Show" onClick={(event) => this.menu.toggle(event)}></Button>
                     </div>
                 </div>

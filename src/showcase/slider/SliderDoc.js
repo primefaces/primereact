@@ -113,7 +113,7 @@ const SliderDemo = () => {
             <Slider value={val3} onChange={onChangeSlider3} step={20} style={{width: '14em'}} />
 
             <h5>Range: {rangeValues[0]},{rangeValues[1]}</h5>
-            <Slider value={rangeValues} onChange={onChangeRangeSlider} range={true} style={{width: '14em'}} />
+            <Slider value={rangeValues} onChange={onChangeRangeSlider} range style={{width: '14em'}} />
 
             <h5>Vertical: {val4}</h5>
             <Slider value={val4} onChange={onChangeSlider4} orientation="vertical" style={{height: '14em'}} />
@@ -178,7 +178,7 @@ const SliderDemo = () => {
             <Slider value={val3} onChange={onChangeSlider3} step={20} style={{width: '14em'}} />
 
             <h5>Range: {rangeValues[0]},{rangeValues[1]}</h5>
-            <Slider value={rangeValues} onChange={onChangeRangeSlider} range={true} style={{width: '14em'}} />
+            <Slider value={rangeValues} onChange={onChangeRangeSlider} range style={{width: '14em'}} />
 
             <h5>Vertical: {val4}</h5>
             <Slider value={val4} onChange={onChangeSlider4} orientation="vertical" style={{height: '14em'}} />
@@ -219,7 +219,7 @@ import { Slider } from 'primereact/slider';
             <p>Range slider provides two handles to define two values. Enable <i>range</i> property and bind an array to implement a range slider.</p>
 <CodeHighlight>
 {`
-<Slider value={this.state.rangeValues} onChange={(e) => this.setState({rangeValues: e.value})} range={true} />
+<Slider value={this.state.rangeValues} onChange={(e) => this.setState({rangeValues: e.value})} range />
 `}
 </CodeHighlight>
 

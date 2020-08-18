@@ -54,7 +54,7 @@ export class SidebarDemo extends Component {
                             <Button type="button" onClick={() => this.setState({ visibleBottom: false })} label="Cancel" className="p-button-secondary" />
                         </Sidebar>
 
-                        <Sidebar visible={this.state.visibleFullScreen} fullScreen={true} baseZIndex={1000000} onHide={() => this.setState({ visibleFullScreen: false })}>
+                        <Sidebar visible={this.state.visibleFullScreen} fullScreen baseZIndex={1000000} onHide={() => this.setState({ visibleFullScreen: false })}>
                             <h1 style={{ fontWeight: 'normal' }}>Full Screen Sidebar</h1>
                             <Button type="button" onClick={() => this.setState({ visibleFullScreen: false })} label="Save" className="p-button-success" style={{ marginRight: '.25em' }} />
                             <Button type="button" onClick={() => this.setState({ visibleFullScreen: false })} label="Cancel" className="p-button-secondary" />

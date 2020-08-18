@@ -106,7 +106,7 @@ const SelectButtonDemo  = () => {
             <p>Selected Value: <span style={{fontWeight: 'bold'}}>{value1}</span></p>
 
             <h5>Multiple</h5>
-            <SelectButton value={value2} multiple={true} options={options} onChange={(e) => setValue2(e.value)} />
+            <SelectButton value={value2} multiple options={options} onChange={(e) => setValue2(e.value)} />
             <br />
             <p>Selected Values: <span style={{fontWeight: 'bold'}}>{value2 && value2.map((val) => val + " ")}</span></p>
 
@@ -161,7 +161,7 @@ const SelectButtonDemo  = () => {
             <p>Selected Value: <span style={{fontWeight: 'bold'}}>{value1}</span></p>
 
             <h5>Multiple</h5>
-            <SelectButton value={value2} multiple={true} options={options} onChange={(e) => setValue2(e.value)} />
+            <SelectButton value={value2} multiple options={options} onChange={(e) => setValue2(e.value)} />
             <br />
             <p>Selected Values: <span style={{fontWeight: 'bold'}}>{value2 && value2.map((val) => val + " ")}</span></p>
 

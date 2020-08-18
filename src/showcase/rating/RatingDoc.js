@@ -67,10 +67,10 @@ const RatingDemo = () => {
             <Rating value={val2} cancel={false} onChange={(e) => setVal2(e.value)} />
 
             <h5>ReadOnly</h5>
-            <Rating value={5} readonly={true} stars={10} cancel={false} />
+            <Rating value={5} readonly stars={10} cancel={false} />
 
             <h5>Disabled</h5>
-            <Rating value={8} disabled={true} stars={10} />
+            <Rating value={8} disabled stars={10} />
         </div>
     )
 }
@@ -95,10 +95,10 @@ const RatingDemo = () => {
             <Rating value={val2} cancel={false} onChange={(e) => setVal2(e.value)} />
 
             <h5>ReadOnly</h5>
-            <Rating value={5} readonly={true} stars={10} cancel={false} />
+            <Rating value={5} readonly stars={10} cancel={false} />
 
             <h5>Disabled</h5>
-            <Rating value={8} disabled={true} stars={10} />
+            <Rating value={8} disabled stars={10} />
         </div>
     )
 }

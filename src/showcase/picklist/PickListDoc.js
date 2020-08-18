@@ -113,7 +113,7 @@ const PickListDemo = () => {
     return (
         <div>
             <PickList source={source} target={target} itemTemplate={carTemplate}
-                sourceHeader="Available" targetHeader="Selected" responsive={true}
+                sourceHeader="Available" targetHeader="Selected" responsive
                 sourceStyle={{height: '300px'}} targetStyle={{height: '300px'}}
                 onChange={onChange}></PickList>
         </div>
@@ -156,7 +156,7 @@ const PickListDemo = () => {
     return (
         <div>
             <PickList source={source} target={target} itemTemplate={carTemplate}
-                sourceHeader="Available" targetHeader="Selected" responsive={true}
+                sourceHeader="Available" targetHeader="Selected" responsive
                 sourceStyle={{height: '300px'}} targetStyle={{height: '300px'}}
                 onChange={onChange}></PickList>
         </div>
