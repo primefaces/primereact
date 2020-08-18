@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TreeTable } from '../../components/treetable/TreeTable';
-import { Column } from "../../components/column/Column";
+import { Column } from '../../components/column/Column';
 import { ColumnGroup } from '../../components/columngroup/ColumnGroup';
 import { Row } from '../../components/row/Row';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
@@ -240,11 +240,13 @@ import { Row } from 'primereact/row';
 
 export class TreeTableColGroupDemo extends Component {
 
-    getSales() {
-        return [
+    constructor(props) {
+        super(props);
+
+        this.nodes = [
             {
                 key: '0',
-                data: { brand: 'Bliss', lastYearSale: '51%', thisYearSale: '40%', lastYearProfit: '$54,406.00', thisYearProfit: '$43,342'},
+                data: { brand: 'Bliss', lastYearSale: '51%', thisYearSale: '40%', lastYearProfit: '$54,406.00', thisYearProfit: '$43,342' },
                 children: [
                     {
                         key: '0-0',
@@ -380,7 +382,7 @@ export class TreeTableColGroupDemo extends Component {
             },
             {
                 key: '9',
-                data:  { brand: 'Essence', lastYearSale: '75%', thisYearSale: '54%', lastYearProfit: '$21,212', thisYearProfit: '$12,533' },
+                data: { brand: 'Essence', lastYearSale: '75%', thisYearSale: '54%', lastYearProfit: '$21,212', thisYearProfit: '$12,533' },
                 children: [
                     {
                         key: '9-0',
@@ -425,17 +427,17 @@ export class TreeTableColGroupDemo extends Component {
             </ColumnGroup>
         );
 
-        const nodes = this.getSales();
-
         return (
             <div>
-                <TreeTable value={nodes} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup}>
-                    <Column field="brand" expander />
-                    <Column field="lastYearSale" />
-                    <Column field="thisYearSale" />
-                    <Column field="lastYearProfit" />
-                    <Column field="thisYearProfit" />
-                </TreeTable>
+                <div className="card">
+                    <TreeTable value={this.nodes} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup}>
+                        <Column field="brand" expander />
+                        <Column field="lastYearSale" />
+                        <Column field="thisYearSale" />
+                        <Column field="lastYearProfit" />
+                        <Column field="thisYearProfit" />
+                    </TreeTable>
+                </div>
             </div>
         )
     }

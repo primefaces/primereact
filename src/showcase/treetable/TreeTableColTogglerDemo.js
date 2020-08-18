@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TreeTable } from '../../components/treetable/TreeTable';
-import { Column } from "../../components/column/Column";
+import { Column } from '../../components/column/Column';
 import { NodeService } from '../service/NodeService';
 import { MultiSelect } from '../../components/multiselect/MultiSelect';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
@@ -94,13 +94,13 @@ export class TreeTableColTogglerDemo extends Component {
     constructor(props) {
         super(props);
         let columns = [
-            {field: 'size', header: 'Size'},
-            {field: 'type', header: 'Type'}
+            { field: 'size', header: 'Size' },
+            { field: 'type', header: 'Type' }
         ];
 
         this.colOptions = [];
         for (let col of columns) {
-            this.colOptions.push({label: col.header, value: col});
+            this.colOptions.push({ label: col.header, value: col });
         }
 
         this.state = {
@@ -113,18 +113,18 @@ export class TreeTableColTogglerDemo extends Component {
     }
 
     componentDidMount() {
-        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({ nodes: data }));
     }
 
     onColumnToggle(event) {
-        this.setState({cols: event.value});
+        this.setState({ cols: event.value });
     }
 
     render() {
         const header = (
-            <div style={{textAlign:'left'}}>
+            <div style={{ textAlign: 'left' }}>
                 <MultiSelect value={this.state.cols} options={this.colOptions} onChange={this.onColumnToggle}
-                        style={{width:'250px'}}/>
+                    style={{ width: '250px' }} />
             </div>
         );
 
@@ -134,10 +134,12 @@ export class TreeTableColTogglerDemo extends Component {
 
         return (
             <div>
-                <TreeTable value={this.state.nodes} header={header}>
-                    <Column key="name" field="name" header="Name" expander />
-                    {columns}
-                </TreeTable>
+                <div className="card">
+                    <TreeTable value={this.state.nodes} header={header}>
+                        <Column key="name" field="name" header="Name" expander />
+                        {columns}
+                    </TreeTable>
+                </div>
             </div>
         )
     }

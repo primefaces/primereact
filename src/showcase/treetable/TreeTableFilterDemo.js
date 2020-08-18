@@ -96,28 +96,50 @@ export class TreeTableFilterDemo extends Component {
         super(props);
         this.state = {
             nodes: [],
-            globalFilter: null
+            globalFilter1: null,
+            globalFilter2: null
         };
         this.nodeservice = new NodeService();
     }
 
     componentDidMount() {
-        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({ nodes: data }));
+    }
+
+    getHeader(globalFilterKey) {
+        return (
+            <div className="p-text-right">
+                <div className="p-input-icon-left">
+                    <i className="pi pi-search"></i>
+                    <InputText type="search" onInput={(e) => this.setState({ [\`\${globalFilterKey}\`]: e.target.value })} placeholder="Global Search" size="50" />
+                </div>
+            </div>
+        );
     }
 
     render() {
-        let header = <div style={{'textAlign':'left'}}>
-                        <i className="pi pi-search" style={{margin:'4px 4px 0 0'}}></i>
-                        <InputText type="search" onInput={(e) => this.setState({globalFilter: e.target.value})} placeholder="Global Search" size="50"/>
-                    </div>;
+        let header1 = this.getHeader('globalFilter1');
+        let header2 = this.getHeader('globalFilter2');
 
         return (
             <div>
-                <TreeTable value={this.state.nodes} globalFilter={this.state.globalFilter} header={header}>
-                    <Column field="name" header="Name" expander filter={true}></Column>
-                    <Column field="size" header="Size" filter={true}></Column>
-                    <Column field="type" header="Type" filter={true}></Column>
-                </TreeTable>
+                <div className="card">
+                    <h5>Lenient Filter</h5>
+                    <TreeTable value={this.state.nodes} globalFilter={this.state.globalFilter1} header={header1}>
+                        <Column field="name" header="Name" expander filter></Column>
+                        <Column field="size" header="Size" filter></Column>
+                        <Column field="type" header="Type" filter></Column>
+                    </TreeTable>
+                </div>
+
+                <div className="card">
+                    <h5>Strict Filter</h5>
+                    <TreeTable value={this.state.nodes} globalFilter={this.state.globalFilter2} header={header2} filterMode="strict">
+                        <Column field="name" header="Name" expander filter></Column>
+                        <Column field="size" header="Size" filter></Column>
+                        <Column field="type" header="Type" filter></Column>
+                    </TreeTable>
+                </div>
             </div>
         )
     }

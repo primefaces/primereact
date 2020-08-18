@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TreeTable } from '../../components/treetable/TreeTable';
-import { Column } from "../../components/column/Column";
+import { Column } from '../../components/column/Column';
 import { NodeService } from '../service/NodeService';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { LiveEditor } from '../liveeditor/LiveEditor';
@@ -71,17 +71,19 @@ export class TreeTableColReorderDemo extends Component {
     }
 
     componentDidMount() {
-        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({ nodes: data }));
     }
 
     render() {
         return (
             <div>
-                <TreeTable value={this.state.nodes} reorderableColumns>
-                    <Column field="name" header="Name" expander></Column>
-                    <Column field="size" header="Size"></Column>
-                    <Column field="type" header="Type"></Column>
-                </TreeTable>
+                <div className="card">
+                    <TreeTable value={this.state.nodes} reorderableColumns>
+                        <Column field="name" header="Name" expander></Column>
+                        <Column field="size" header="Size"></Column>
+                        <Column field="type" header="Type"></Column>
+                    </TreeTable>
+                </div>
             </div>
         )
     }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TreeTable } from '../../components/treetable/TreeTable';
-import { Column } from "../../components/column/Column";
+import { Column } from '../../components/column/Column';
 import { InputText } from '../../components/inputtext/InputText';
 import { NodeService } from '../service/NodeService';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
@@ -125,7 +125,7 @@ export class TreeTableEditDemo extends Component {
     }
 
     componentDidMount() {
-        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({ nodes: data }));
     }
 
     onEditorValueChange(props, value) {
@@ -154,7 +154,7 @@ export class TreeTableEditDemo extends Component {
     inputTextEditor(props, field) {
         return (
             <InputText type="text" value={props.node.data[field]}
-                    onChange={(e) => this.onEditorValueChange(props, e.target.value)} />
+                onChange={(e) => this.onEditorValueChange(props, e.target.value)} />
         );
     }
 
@@ -174,12 +174,14 @@ export class TreeTableEditDemo extends Component {
 
     render() {
         return (
-            <div className="treetableedit-demo">
-                <TreeTable value={this.state.nodes}>
-                    <Column field="name" header="Name" expander style={{height: '3.5em'}}></Column>
-                    <Column field="size" header="Size" editor={this.sizeEditor} editorValidator={this.requiredValidator} style={{height: '3.5em'}}></Column>
-                    <Column field="type" header="Type" editor={this.typeEditor} style={{height: '3.5em'}}></Column>
-                </TreeTable>
+            <div>
+                <div className="card">
+                    <TreeTable value={this.state.nodes}>
+                        <Column field="name" header="Name" expander style={{ height: '3.5em' }}></Column>
+                        <Column field="size" header="Size" editor={this.sizeEditor} editorValidator={this.requiredValidator} style={{ height: '3.5em' }}></Column>
+                        <Column field="type" header="Type" editor={this.typeEditor} style={{ height: '3.5em' }}></Column>
+                    </TreeTable>
+                </div>
             </div>
         )
     }

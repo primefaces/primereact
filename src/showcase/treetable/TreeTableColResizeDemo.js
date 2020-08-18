@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TreeTable } from '../../components/treetable/TreeTable';
-import { Column } from "../../components/column/Column";
+import { Column } from '../../components/column/Column';
 import { NodeService } from '../service/NodeService';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { LiveEditor } from '../liveeditor/LiveEditor';
@@ -100,39 +100,47 @@ export class TreeTableColResizeDemo extends Component {
     }
 
     componentDidMount() {
-        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({ nodes: data }));
     }
 
     render() {
         return (
             <div>
-                <h3>Fit Mode</h3>
-                <TreeTable value={this.state.nodes} resizableColumns={true} columnResizeMode="fit">
-                    <Column field="name" header="Name" expander></Column>
-                    <Column field="size" header="Size"></Column>
-                    <Column field="type" header="Type"></Column>
-                </TreeTable>
+                <div className="card">
+                    <h5>Fit Mode</h5>
+                    <TreeTable value={this.state.nodes} resizableColumns={true} columnResizeMode="fit">
+                        <Column field="name" header="Name" expander></Column>
+                        <Column field="size" header="Size"></Column>
+                        <Column field="type" header="Type"></Column>
+                    </TreeTable>
+                </div>
 
-                <h3>Expand Mode</h3>
-                <TreeTable value={this.state.nodes} resizableColumns={true} columnResizeMode="expand">
-                    <Column field="name" header="Name" expander></Column>
-                    <Column field="size" header="Size"></Column>
-                    <Column field="type" header="Type"></Column>
-                </TreeTable>
+                <div className="card">
+                    <h5>Expand Mode</h5>
+                    <TreeTable value={this.state.nodes} resizableColumns={true} columnResizeMode="expand">
+                        <Column field="name" header="Name" expander></Column>
+                        <Column field="size" header="Size"></Column>
+                        <Column field="type" header="Type"></Column>
+                    </TreeTable>
+                </div>
 
-                <h3>Scrollable</h3>
-                <TreeTable value={this.state.nodes} resizableColumns={true} scrollable={true} scrollHeight="200px">
-                    <Column field="name" header="Name" expander></Column>
-                    <Column field="size" header="Size"></Column>
-                    <Column field="type" header="Type"></Column>
-                </TreeTable>
+                <div className="card">
+                    <h5>Scrollable</h5>
+                    <TreeTable value={this.state.nodes} resizableColumns={true} scrollable={true} scrollHeight="200px">
+                        <Column field="name" header="Name" expander></Column>
+                        <Column field="size" header="Size"></Column>
+                        <Column field="type" header="Type"></Column>
+                    </TreeTable>
+                </div>
 
-                <h3>Scrollable with Variable Width</h3>
-                <TreeTable value={this.state.nodes} resizableColumns={true} scrollable={true} scrollHeight="200px">
-                    <Column field="name" header="Name" expander style={{width:'50%'}}></Column>
-                    <Column field="size" header="Size" style={{width:'30%'}}></Column>
-                    <Column field="type" header="Type" style={{width:'20%'}}></Column>
-                </TreeTable>
+                <div className="card">
+                    <h5>Scrollable with Variable Width</h5>
+                    <TreeTable value={this.state.nodes} resizableColumns={true} scrollable={true} scrollHeight="200px">
+                        <Column field="name" header="Name" expander style={{ width: '50%' }}></Column>
+                        <Column field="size" header="Size" style={{ width: '30%' }}></Column>
+                        <Column field="type" header="Type" style={{ width: '20%' }}></Column>
+                    </TreeTable>
+                </div>
             </div>
         )
     }
