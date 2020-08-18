@@ -163,7 +163,7 @@ const CarouselDemo = () => {
                 header={basicHeader} responsiveOptions={responsiveOptions}></Carousel>
 
             <Carousel value={cars} itemTemplate={carTemplate} numVisible={3} numScroll={1} className="custom-carousel"
-                responsiveOptions={responsiveOptions} header={customHeader} circular={true} autoplayInterval={3000}></Carousel>
+                responsiveOptions={responsiveOptions} header={customHeader} circular autoplayInterval={3000}></Carousel>
 
             <Carousel value={cars} itemTemplate={carTemplate} orientation="vertical" style={{maxWidth: '400px', marginTop: '2em'}}
                 numVisible={1} numScroll={1} verticalViewPortHeight="330px" header={verticalHeader}></Carousel>
@@ -237,7 +237,7 @@ const CarouselDemo = () => {
                 header={basicHeader} responsiveOptions={responsiveOptions}></Carousel>
 
             <Carousel value={cars} itemTemplate={carTemplate} numVisible={3} numScroll={1} className="custom-carousel"
-                responsiveOptions={responsiveOptions} header={customHeader} circular={true} autoplayInterval={3000}></Carousel>
+                responsiveOptions={responsiveOptions} header={customHeader} circular autoplayInterval={3000}></Carousel>
 
             <Carousel value={cars} itemTemplate={carTemplate} orientation="vertical" style={{maxWidth: '400px', marginTop: '2em'}}
                 numVisible={1} numScroll={1} verticalViewPortHeight="330px" header={verticalHeader}></Carousel>

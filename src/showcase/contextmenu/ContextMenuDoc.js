@@ -311,7 +311,7 @@ const ContextMenuDemo = () => {
         <div>
             <ContextMenu model={items} ref={cm}></ContextMenu>
 
-            <img src="showcase/images/logo.png" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => cm.current.show(e)} aria-haspopup={true}/>
+            <img src="showcase/images/logo.png" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => cm.current.show(e)} aria-haspopup/>
         </div>
     );
 }
@@ -461,7 +461,7 @@ const ContextMenuDemo = () => {
         <div>
             <ContextMenu model={items} ref={cm}></ContextMenu>
 
-            <img src="showcase/images/logo.png" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => cm.current.show(e)} aria-haspopup={true}/>
+            <img src="showcase/images/logo.png" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => cm.current.show(e)} aria-haspopup/>
         </div>
     );
 }
@@ -639,7 +639,7 @@ const items: [
 
 <CodeHighlight>
 {`
-<ContextMenu global={true} model={items}/>
+<ContextMenu global model={items}/>
 `}
 </CodeHighlight>
 

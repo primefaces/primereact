@@ -54,7 +54,7 @@ const ColorPickerDemo = () => {
     return (
         <div>
             <h5>Inline</h5>
-            <ColorPicker inline={true} value={color1} onChange={(e) => setColor1(e.value)}></ColorPicker>
+            <ColorPicker inline value={color1} onChange={(e) => setColor1(e.value)}></ColorPicker>
             <p style={{'marginTop':'.5em'}}>Selected Color: <span style={{'display':'inline-block','width':'32px','height':'32px','verticalAlign':'middle','backgroundColor': '#' + color1}}></span> {color1} </p>
 
             <h5>Overlay</h5>
@@ -78,7 +78,7 @@ const ColorPickerDemo = () => {
     return (
         <div>
             <h5>Inline</h5>
-            <ColorPicker inline={true} value={color1} onChange={(e) => setColor1(e.value)}></ColorPicker>
+            <ColorPicker inline value={color1} onChange={(e) => setColor1(e.value)}></ColorPicker>
             <p style={{'marginTop':'.5em'}}>Selected Color: <span style={{'display':'inline-block','width':'32px','height':'32px','verticalAlign':'middle','backgroundColor': '#' + color1}}></span> {color1} </p>
 
             <h5>Overlay</h5>

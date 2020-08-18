@@ -213,7 +213,7 @@ export class DataTableDemo extends Component {
     renderStatusFilter() {
         return (
             <Dropdown value={this.state.selectedStatus} options={this.statuses} onChange={this.onStatusFilterChange}
-                        itemTemplate={this.statusItemTemplate} showClear={true} placeholder="Select a Status" className="p-column-filter"/>
+                        itemTemplate={this.statusItemTemplate} showClear placeholder="Select a Status" className="p-column-filter"/>
         );
     }
 

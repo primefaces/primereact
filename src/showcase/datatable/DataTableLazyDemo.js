@@ -204,8 +204,8 @@ const DataTableLazyDemo = () => {
 
     return (
         <div>
-            <DataTable value={cars} paginator={true} rows={rows} totalRecords={totalRecords}
-                lazy={true} first={first} onPage={onPage} loading={loading}>
+            <DataTable value={cars} paginator rows={rows} totalRecords={totalRecords}
+                lazy first={first} onPage={onPage} loading={loading}>
                 <Column field="vin" header="Vin" />
                 <Column field="year" header="Year" />
                 <Column field="brand" header="Brand" />
@@ -260,8 +260,8 @@ const DataTableLazyDemo = () => {
 
     return (
         <div>
-            <DataTable value={cars} paginator={true} rows={rows} totalRecords={totalRecords}
-                lazy={true} first={first} onPage={onPage} loading={loading}>
+            <DataTable value={cars} paginator rows={rows} totalRecords={totalRecords}
+                lazy first={first} onPage={onPage} loading={loading}>
                 <Column field="vin" header="Vin" />
                 <Column field="year" header="Year" />
                 <Column field="brand" header="Brand" />

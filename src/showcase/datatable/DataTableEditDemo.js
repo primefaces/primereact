@@ -573,7 +573,7 @@ const DataTableEditDemo = () => {
                 <Column field="year" header="Year" editor={(props) => editorForRowEditing(props, 'year')} style={{height: '3.5em'}}/>
                 <Column field="brand" header="Brand" editor={(props) => editorForRowEditing(props, 'brand')} style={{height: '3.5em'}}/>
                 <Column field="color" header="Color" editor={(props) => editorForRowEditing(props, 'color')} style={{height: '3.5em'}}/>
-                <Column rowEditor={true} style={{'width': '70px', 'textAlign': 'center'}}></Column>
+                <Column rowEditor style={{'width': '70px', 'textAlign': 'center'}}></Column>
             </DataTable>
         </div>
     );
@@ -709,7 +709,7 @@ const DataTableEditDemo = () => {
                 <Column field="year" header="Year" editor={(props) => editorForRowEditing(props, 'year')} style={{height: '3.5em'}}/>
                 <Column field="brand" header="Brand" editor={(props) => editorForRowEditing(props, 'brand')} style={{height: '3.5em'}}/>
                 <Column field="color" header="Color" editor={(props) => editorForRowEditing(props, 'color')} style={{height: '3.5em'}}/>
-                <Column rowEditor={true} style={{'width': '70px', 'textAlign': 'center'}}></Column>
+                <Column rowEditor style={{'width': '70px', 'textAlign': 'center'}}></Column>
             </DataTable>
         </div>
     );

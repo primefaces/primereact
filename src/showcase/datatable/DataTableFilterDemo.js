@@ -467,12 +467,12 @@ const DataTableFilterDemo = () => {
 
     return (
         <div>
-            <DataTable ref={dt} value={cars} paginator={true} rows={10} header={header}
+            <DataTable ref={dt} value={cars} paginator rows={10} header={header}
                 globalFilter={globalFilter} emptyMessage="No records found">
-                <Column field="vin" header="Vin" filter={true} filterPlaceholder="Vin starts with"/>
-                <Column field="year" header="Year" filter={true} filterPlaceholder="Year contains" filterMatchMode="contains" />
-                <Column field="brand" header="Brand" filter={true} filterElement={brandFilter} />
-                <Column field="color" header="Color" filter={true} filterElement={colorFilter} />
+                <Column field="vin" header="Vin" filter filterPlaceholder="Vin starts with"/>
+                <Column field="year" header="Year" filter filterPlaceholder="Year contains" filterMatchMode="contains" />
+                <Column field="brand" header="Brand" filter filterElement={brandFilter} />
+                <Column field="color" header="Color" filter filterElement={colorFilter} />
             </DataTable>
         </div>
     );
@@ -549,12 +549,12 @@ const DataTableFilterDemo = () => {
 
     return (
         <div>
-            <DataTable ref={dt} value={cars} paginator={true} rows={10} header={header}
+            <DataTable ref={dt} value={cars} paginator rows={10} header={header}
                 globalFilter={globalFilter} emptyMessage="No records found">
-                <Column field="vin" header="Vin" filter={true} filterPlaceholder="Vin starts with"/>
-                <Column field="year" header="Year" filter={true} filterPlaceholder="Year contains" filterMatchMode="contains" />
-                <Column field="brand" header="Brand" filter={true} filterElement={brandFilter} />
-                <Column field="color" header="Color" filter={true} filterElement={colorFilter} />
+                <Column field="vin" header="Vin" filter filterPlaceholder="Vin starts with"/>
+                <Column field="year" header="Year" filter filterPlaceholder="Year contains" filterMatchMode="contains" />
+                <Column field="brand" header="Brand" filter filterElement={brandFilter} />
+                <Column field="color" header="Color" filter filterElement={colorFilter} />
             </DataTable>
         </div>
     );

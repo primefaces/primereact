@@ -236,39 +236,39 @@ const CalendarDemo = () => {
                 </div>
                 <div className="p-col-12 p-md-4">
                     <h5>Icon</h5>
-                    <Calendar value={date3} onChange={(e) => setDate3(e.value)} showIcon={true} />
+                    <Calendar value={date3} onChange={(e) => setDate3(e.value)} showIcon />
                 </div>
                 <div className="p-col-12 p-md-4">
                     <h5>Min-Max</h5>
-                    <Calendar value={date4} onChange={(e) => setDate4(e.value)} minDate={minDate} maxDate={maxDate} readOnlyInput={true} />
+                    <Calendar value={date4} onChange={(e) => setDate4(e.value)} minDate={minDate} maxDate={maxDate} readOnlyInput />
                 </div>
                 <div className="p-col-12 p-md-4">
                     <h5>Disabled Days</h5>
-                    <Calendar value={date5} onChange={(e) => setDate5(e.value)} disabledDates={invalidDates} disabledDays={[0, 6]} readOnlyInput={true} />
+                    <Calendar value={date5} onChange={(e) => setDate5(e.value)} disabledDates={invalidDates} disabledDays={[0, 6]} readOnlyInput />
                 </div>
                 <div className="p-col-12 p-md-4">
                     <h5>Navigators</h5>
-                    <Calendar value={date6} onChange={(e) => setDate6(e.value)} monthNavigator={true} yearNavigator={true} yearRange="2010:2030" />
+                    <Calendar value={date6} onChange={(e) => setDate6(e.value)} monthNavigator yearNavigator yearRange="2010:2030" />
                 </div>
                 <div className="p-col-12 p-md-4">
                     <h5>Multiple Selection</h5>
-                    <Calendar value={dates1} onChange={(e) => setDates1(e.value)} selectionMode="multiple" readOnlyInput={true} />
+                    <Calendar value={dates1} onChange={(e) => setDates1(e.value)} selectionMode="multiple" readOnlyInput />
                 </div>
                 <div className="p-col-12 p-md-4">
                     <h5>Range Selection</h5>
-                    <Calendar value={dates2} onChange={(e) => setDates2(e.value)} selectionMode="range" readOnlyInput={true} />
+                    <Calendar value={dates2} onChange={(e) => setDates2(e.value)} selectionMode="range" readOnlyInput />
                 </div>
                 <div className="p-col-12 p-md-4">
                     <h5>Button Bar</h5>
-                    <Calendar value={date7} onChange={(e) => setDate7(e.value)} showButtonBar={true} />
+                    <Calendar value={date7} onChange={(e) => setDate7(e.value)} showButtonBar />
                 </div>
                 <div className="p-col-12 p-md-4">
                     <h5>Time / 24h</h5>
-                    <Calendar value={date8} onChange={(e) => setDate8(e.value)} showTime={true} showSeconds={true} />
+                    <Calendar value={date8} onChange={(e) => setDate8(e.value)} showTime showSeconds />
                 </div>
                 <div className="p-col-12 p-md-4">
                     <h5>Time Only / 12h</h5>
-                    <Calendar value={date9} onChange={(e) => setDate9(e.value)} timeOnly={true} hourFormat="12" />
+                    <Calendar value={date9} onChange={(e) => setDate9(e.value)} timeOnly hourFormat="12" />
                 </div>
                 <div className="p-col-12 p-md-4">
                     <h5>Date Template</h5>
@@ -280,16 +280,16 @@ const CalendarDemo = () => {
                 </div>
                 <div className="p-col-12 p-md-4">
                     <h5>Month/Year Picker</h5>
-                    <Calendar value={date12} onChange={(e) => setDate12(e.value)} view="month" dateFormat="mm/yy" yearNavigator={true} yearRange="2010:2030" />
+                    <Calendar value={date12} onChange={(e) => setDate12(e.value)} view="month" dateFormat="mm/yy" yearNavigator yearRange="2010:2030" />
                 </div>
                 <div className="p-col-12 p-md-4">
                     <h5>Touch UI</h5>
-                    <Calendar value={date13} onChange={(e) => setDate13(e.value)} touchUI={true} />
+                    <Calendar value={date13} onChange={(e) => setDate13(e.value)} touchUI />
                 </div>
             </div>
 
             <h5>Inline</h5>
-            <Calendar value={date14} onChange={(e) => setDate14(e.value)} inline={true} showWeek={true} />
+            <Calendar value={date14} onChange={(e) => setDate14(e.value)} inline showWeek />
         </div>
     );
 }
@@ -372,39 +372,39 @@ const CalendarDemo = () => {
                 </div>
                 <div className="p-col-12 p-md-4">
                     <h5>Icon</h5>
-                    <Calendar value={date3} onChange={(e) => setDate3(e.value)} showIcon={true} />
+                    <Calendar value={date3} onChange={(e) => setDate3(e.value)} showIcon />
                 </div>
                 <div className="p-col-12 p-md-4">
                     <h5>Min-Max</h5>
-                    <Calendar value={date4} onChange={(e) => setDate4(e.value)} minDate={minDate} maxDate={maxDate} readOnlyInput={true} />
+                    <Calendar value={date4} onChange={(e) => setDate4(e.value)} minDate={minDate} maxDate={maxDate} readOnlyInput />
                 </div>
                 <div className="p-col-12 p-md-4">
                     <h5>Disabled Days</h5>
-                    <Calendar value={date5} onChange={(e) => setDate5(e.value)} disabledDates={invalidDates} disabledDays={[0, 6]} readOnlyInput={true} />
+                    <Calendar value={date5} onChange={(e) => setDate5(e.value)} disabledDates={invalidDates} disabledDays={[0, 6]} readOnlyInput />
                 </div>
                 <div className="p-col-12 p-md-4">
                     <h5>Navigators</h5>
-                    <Calendar value={date6} onChange={(e) => setDate6(e.value)} monthNavigator={true} yearNavigator={true} yearRange="2010:2030" />
+                    <Calendar value={date6} onChange={(e) => setDate6(e.value)} monthNavigator yearNavigator yearRange="2010:2030" />
                 </div>
                 <div className="p-col-12 p-md-4">
                     <h5>Multiple Selection</h5>
-                    <Calendar value={dates1} onChange={(e) => setDates1(e.value)} selectionMode="multiple" readOnlyInput={true} />
+                    <Calendar value={dates1} onChange={(e) => setDates1(e.value)} selectionMode="multiple" readOnlyInput />
                 </div>
                 <div className="p-col-12 p-md-4">
                     <h5>Range Selection</h5>
-                    <Calendar value={dates2} onChange={(e) => setDates2(e.value)} selectionMode="range" readOnlyInput={true} />
+                    <Calendar value={dates2} onChange={(e) => setDates2(e.value)} selectionMode="range" readOnlyInput />
                 </div>
                 <div className="p-col-12 p-md-4">
                     <h5>Button Bar</h5>
-                    <Calendar value={date7} onChange={(e) => setDate7(e.value)} showButtonBar={true} />
+                    <Calendar value={date7} onChange={(e) => setDate7(e.value)} showButtonBar />
                 </div>
                 <div className="p-col-12 p-md-4">
                     <h5>Time / 24h</h5>
-                    <Calendar value={date8} onChange={(e) => setDate8(e.value)} showTime={true} showSeconds={true} />
+                    <Calendar value={date8} onChange={(e) => setDate8(e.value)} showTime showSeconds />
                 </div>
                 <div className="p-col-12 p-md-4">
                     <h5>Time Only / 12h</h5>
-                    <Calendar value={date9} onChange={(e) => setDate9(e.value)} timeOnly={true} hourFormat="12" />
+                    <Calendar value={date9} onChange={(e) => setDate9(e.value)} timeOnly hourFormat="12" />
                 </div>
                 <div className="p-col-12 p-md-4">
                     <h5>Date Template</h5>
@@ -416,16 +416,16 @@ const CalendarDemo = () => {
                 </div>
                 <div className="p-col-12 p-md-4">
                     <h5>Month/Year Picker</h5>
-                    <Calendar value={date12} onChange={(e) => setDate12(e.value)} view="month" dateFormat="mm/yy" yearNavigator={true} yearRange="2010:2030" />
+                    <Calendar value={date12} onChange={(e) => setDate12(e.value)} view="month" dateFormat="mm/yy" yearNavigator yearRange="2010:2030" />
                 </div>
                 <div className="p-col-12 p-md-4">
                     <h5>Touch UI</h5>
-                    <Calendar value={date13} onChange={(e) => setDate13(e.value)} touchUI={true} />
+                    <Calendar value={date13} onChange={(e) => setDate13(e.value)} touchUI />
                 </div>
             </div>
 
             <h5>Inline</h5>
-            <Calendar value={date14} onChange={(e) => setDate14(e.value)} inline={true} showWeek={true} />
+            <Calendar value={date14} onChange={(e) => setDate14(e.value)} inline showWeek />
         </div>
     );
 }
@@ -472,7 +472,7 @@ import { Calendar } from 'primereact/calendar';
 
 <CodeHighlight>
 {`
-<Calendar inline={true} value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
+<Calendar inline value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
 `}
 </CodeHighlight>
 
@@ -532,9 +532,9 @@ import { Calendar } from 'primereact/calendar';
 
 <CodeHighlight>
 {`
-<Calendar showTime={true} hourFormat="12" value={this.state.date1} onChange={(e) => this.setState({date1: e.value})}></Calendar>
-<Calendar showTime={true} hourFormat="24" value={this.state.date2} onChange={(e) => this.setState({date2: e.value})}></Calendar>
-<Calendar timeOnly={true} showTime={true} hourFormat="24" value={this.state.date3} onChange={(e) => this.setState({date3: e.value})}></Calendar>
+<Calendar showTime hourFormat="12" value={this.state.date1} onChange={(e) => this.setState({date1: e.value})}></Calendar>
+<Calendar showTime hourFormat="24" value={this.state.date2} onChange={(e) => this.setState({date2: e.value})}></Calendar>
+<Calendar timeOnly showTime hourFormat="24" value={this.state.date3} onChange={(e) => this.setState({date3: e.value})}></Calendar>
 `}
 </CodeHighlight>
 
@@ -543,7 +543,7 @@ import { Calendar } from 'primereact/calendar';
 
 <CodeHighlight>
 {`
-<Calendar minDate={minDate} maxDate={maxDate} readOnlyInput={true} value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
+<Calendar minDate={minDate} maxDate={maxDate} readOnlyInput value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
 `}
 </CodeHighlight>
 
@@ -553,7 +553,7 @@ import { Calendar } from 'primereact/calendar';
 
 <CodeHighlight>
 {`
-<Calendar disabledDates={invalidDates}" disabledDays={[0,6]} readOnlyInput={true} value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
+<Calendar disabledDates={invalidDates}" disabledDays={[0,6]} readOnlyInput value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
 `}
 </CodeHighlight>
 
@@ -561,7 +561,7 @@ import { Calendar } from 'primereact/calendar';
                         <p>Button bar displays today and clear buttons and activated using the <i>showButtonBar</i> property.</p>
 <CodeHighlight>
 {`
-<Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} showButtonBar={true}></Calendar>
+<Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} showButtonBar></Calendar>
 `}
 </CodeHighlight>
 
@@ -638,7 +638,7 @@ dateTemplate(date) {
 
 <CodeHighlight>
 {`
-<Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} monthNavigator={true} yearNavigator={true} yearRange="2010:2030" />
+<Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} monthNavigator yearNavigator yearRange="2010:2030" />
 `}
 </CodeHighlight>
 
@@ -646,7 +646,7 @@ dateTemplate(date) {
                         <p>Month picker is used to select month and year only without the date, set <i>view</i> mode as "month" to activate month picker.</p>
 <CodeHighlight>
 {`
-<Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} view="month" dateFormat="mm/yy" yearNavigator={true} yearRange="2010:2030"/>
+<Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} view="month" dateFormat="mm/yy" yearNavigator yearRange="2010:2030"/>
 `}
 </CodeHighlight>
 
@@ -654,7 +654,7 @@ dateTemplate(date) {
                         <p>Touch UI mode displays the calendar overlay at the center of the screen as optimized for touch devices.</p>
 <CodeHighlight>
 {`
-<Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} touchUI={true} />
+<Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} touchUI />
 `}
 </CodeHighlight>
 

@@ -859,16 +859,16 @@ const DataTableCrudDemo = () => {
 
     return (
         <div>
-            <DataTable value={cars} paginator={true} rows={15}  header={header} footer={footer}
+            <DataTable value={cars} paginator rows={15}  header={header} footer={footer}
                         selectionMode="single" selection={selectedCar} onSelectionChange={e => setSelectedCar(e.value)}
                         onRowSelect={onCarSelect}>
-                <Column field="vin" header="Vin" sortable={true} />
-                <Column field="year" header="Year" sortable={true} />
-                <Column field="brand" header="Brand" sortable={true} />
-                <Column field="color" header="Color" sortable={true} />
+                <Column field="vin" header="Vin" sortable />
+                <Column field="year" header="Year" sortable />
+                <Column field="brand" header="Brand" sortable />
+                <Column field="color" header="Color" sortable />
             </DataTable>
 
-            <Dialog visible={displayDialog} style={{width: '300px'}} header="Car Details" modal={true} footer={dialogFooter} onHide={() => setDisplayDialog(false)}
+            <Dialog visible={displayDialog} style={{width: '300px'}} header="Car Details" modal footer={dialogFooter} onHide={() => setDisplayDialog(false)}
                 blockScroll={false}>
                 {
                     car &&
@@ -982,16 +982,16 @@ const DataTableCrudDemo = () => {
 
     return (
         <div>
-            <DataTable value={cars} paginator={true} rows={15}  header={header} footer={footer}
+            <DataTable value={cars} paginator rows={15}  header={header} footer={footer}
                         selectionMode="single" selection={selectedCar} onSelectionChange={e => setSelectedCar(e.value)}
                         onRowSelect={onCarSelect}>
-                <Column field="vin" header="Vin" sortable={true} />
-                <Column field="year" header="Year" sortable={true} />
-                <Column field="brand" header="Brand" sortable={true} />
-                <Column field="color" header="Color" sortable={true} />
+                <Column field="vin" header="Vin" sortable />
+                <Column field="year" header="Year" sortable />
+                <Column field="brand" header="Brand" sortable />
+                <Column field="color" header="Color" sortable />
             </DataTable>
 
-            <Dialog visible={displayDialog} style={{width: '300px'}} header="Car Details" modal={true} footer={dialogFooter} onHide={() => setDisplayDialog(false)}
+            <Dialog visible={displayDialog} style={{width: '300px'}} header="Car Details" modal footer={dialogFooter} onHide={() => setDisplayDialog(false)}
                 blockScroll={false}>
                 {
                     car &&

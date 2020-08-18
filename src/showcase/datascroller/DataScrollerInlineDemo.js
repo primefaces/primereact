@@ -57,7 +57,7 @@ export class DataScrollerInlineDemo extends Component {
 
                 <div className="content-section implementation datascroller-demo">
                     <div className="card">
-                        <DataScroller value={this.state.products} itemTemplate={this.itemTemplate} rows={5} inline={true} scrollHeight="500px" header="Scroll Down to Load More" />
+                        <DataScroller value={this.state.products} itemTemplate={this.itemTemplate} rows={5} inline scrollHeight="500px" header="Scroll Down to Load More" />
                     </div>
                 </div>
 
@@ -123,7 +123,7 @@ export class DataScrollerInlineDemo extends Component {
         return (
             <div className="datascroller-demo">
                 <div className="card">
-                    <DataScroller value={this.state.products} itemTemplate={this.itemTemplate} rows={5} inline={true} scrollHeight="500px" header="Scroll Down to Load More" />
+                    <DataScroller value={this.state.products} itemTemplate={this.itemTemplate} rows={5} inline scrollHeight="500px" header="Scroll Down to Load More" />
                 </div>
             </div>
         );
@@ -168,7 +168,7 @@ const DataScrollerInlineDemo = () => {
 
     return (
         <div className="dataview-demo">
-            <DataScroller value={cars} itemTemplate={carTemplate} rows={10} inline={true} scrollHeight="500px" header="Scroll Down to Load More" />
+            <DataScroller value={cars} itemTemplate={carTemplate} rows={10} inline scrollHeight="500px" header="Scroll Down to Load More" />
         </div>
     );
 }
@@ -211,7 +211,7 @@ const DataScrollerInlineDemo = () => {
 
     return (
         <div className="dataview-demo">
-            <DataScroller value={cars} itemTemplate={carTemplate} rows={10} inline={true} scrollHeight="500px" header="Scroll Down to Load More" />
+            <DataScroller value={cars} itemTemplate={carTemplate} rows={10} inline scrollHeight="500px" header="Scroll Down to Load More" />
         </div>
     );
 }

@@ -226,7 +226,7 @@ export class DataTableDemo extends Component {
     renderStatusFilter() {
         return (
             <Dropdown value={this.state.selectedStatus} options={this.statuses} onChange={this.onStatusFilterChange}
-                        itemTemplate={this.statusItemTemplate} showClear={true} placeholder="Select a Status" className="p-column-filter"/>
+                        itemTemplate={this.statusItemTemplate} showClear placeholder="Select a Status" className="p-column-filter"/>
         );
     }
 
@@ -432,7 +432,7 @@ const DataTableDemo = () => {
     const renderStatusFilter = () => {
         return (
             <Dropdown value={selectedStatus} options={statuses} onChange={onStatusFilterChange}
-                        itemTemplate={statusItemTemplate} showClear={true} placeholder="Select a Status" className="p-column-filter"/>
+                        itemTemplate={statusItemTemplate} showClear placeholder="Select a Status" className="p-column-filter"/>
         );
     };
 
@@ -634,7 +634,7 @@ const DataTableDemo = () => {
     const renderStatusFilter = () => {
         return (
             <Dropdown value={selectedStatus} options={statuses} onChange={onStatusFilterChange}
-                        itemTemplate={statusItemTemplate} showClear={true} placeholder="Select a Status" className="p-column-filter"/>
+                        itemTemplate={statusItemTemplate} showClear placeholder="Select a Status" className="p-column-filter"/>
         );
     };
 
@@ -1949,7 +1949,7 @@ requiredValidator(props) {
     <Column field="code" header="Code" />
     <Column field="name" header="Name" />
     <Column field="inventoryStatuses" header="Status" editor={this.statusEditor} onRowEditorValidator={this.onRowEditorValidator} />
-    <Column rowEditor={true} />
+    <Column rowEditor />
 </DataTable>
 `}
 </CodeHighlight>
@@ -2159,7 +2159,7 @@ export class DataTableRowExpansionDemo extends Component {
             <DataTable value={this.state.products} expandedRows={this.state.expandedRows} onRowToggle={(e) => this.setState({ expandedRows: e.data })}
                 onRowExpand={this.onRowExpand} onRowCollapse={this.onRowCollapse}
                 rowExpansionTemplate={this.rowExpansionTemplate} dataKey="id" header={header}>
-                <Column expander={true} style={{ width: '3em' }} />
+                <Column expander style={{ width: '3em' }} />
                 <Column field="name" header="Name" sortable />
                 <Column header="Image" body={this.imageBodyTemplate} />
                 <Column field="price" header="Price" sortable body={this.priceBodyTemplate} />
@@ -2222,7 +2222,7 @@ export class DataTableRowExpansionDemo extends Component {
 <CodeHighlight>
 {`
 <DataTable value={this.state.products} reorderableColumns onRowReorder={(e) => this.setState({products: e.value})}>
-    <Column rowReorder={true} style={{width: '2em'}} />
+    <Column rowReorder style={{width: '2em'}} />
     <Column columnKey="vin" field="code" header="Code"></Column>
     <Column columnKey="name" field="name" header="Name"></Column>
     <Column columnKey="category" field="category" header="Category"></Column>
