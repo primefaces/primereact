@@ -353,7 +353,7 @@ export class SlideMenu extends Component {
             <div id={this.props.id} className={className} style={this.props.style} ref={el => this.container = el} onClick={this.onMenuClick}>
                 <div className="p-slidemenu-wrapper" style={{height: this.props.viewportHeight + 'px'}}>
                     <div className="p-slidemenu-content" ref={el => this.slideMenuContent = el}>
-                        <SlideMenuSub model={this.props.model} root={true} index={0} menuWidth={this.props.menuWidth} effectDuration={this.props.effectDuration}
+                        <SlideMenuSub model={this.props.model} root index={0} menuWidth={this.props.menuWidth} effectDuration={this.props.effectDuration}
                                 level={this.state.level} parentActive={this.state.level === 0} onForward={this.navigateForward} />
                     </div>
                     {backward}

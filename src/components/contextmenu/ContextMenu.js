@@ -437,7 +437,7 @@ export class ContextMenu extends Component {
             <CSSTransition classNames="p-contextmenu" in={this.state.visible} timeout={{ enter: 250, exit: 0 }}
                 unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit}>
                 <div id={this.props.id} className={className} style={this.props.style} ref={el => this.container = el} onClick={this.onMenuClick} onMouseEnter={this.onMenuMouseEnter}>
-                    <ContextMenuSub model={this.props.model} root={true} resetMenu={this.state.resetMenu} onLeafClick={this.onLeafClick} />
+                    <ContextMenuSub model={this.props.model} root resetMenu={this.state.resetMenu} onLeafClick={this.onLeafClick} />
                 </div>
             </CSSTransition>
         );

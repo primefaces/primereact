@@ -150,7 +150,7 @@ export class TieredMenu extends Component {
             <CSSTransition classNames="p-connected-overlay" in={this.state.visible} timeout={{ enter: 120, exit: 100 }}
                 unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit}>
                 <div ref={el => this.container = el} id={this.props.id} className={className} style={this.props.style}>
-                    <TieredMenuSub model={this.props.model} root={true} popup={this.props.popup} />
+                    <TieredMenuSub model={this.props.model} root popup={this.props.popup} />
                 </div>
             </CSSTransition>
         );

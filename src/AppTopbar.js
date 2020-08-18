@@ -135,7 +135,7 @@ export class AppTopbar extends Component {
             <div className="layout-topbar">
                 <Tooltip target=".app-theme" position="bottom" />
 
-                <button type="button" className="p-link menu-button" onClick={this.onMenuButtonClick} aria-haspopup={true} aria-label="Menu">
+                <button type="button" className="p-link menu-button" onClick={this.onMenuButtonClick} aria-haspopup aria-label="Menu">
                     <i className="pi pi-bars"></i>
                 </button>
                 <Link to="/" className="logo" aria-label="PrimeReact logo">
@@ -152,7 +152,7 @@ export class AppTopbar extends Component {
 
                     <li role="none" className="topbar-submenu">
                         {/* eslint-disable */}
-                        <button type="button" role="menuitem" onClick={(e) => this.toggleMenu(e, 0)} aria-haspopup={true} aria-expanded={this.state.activeMenuIndex === 0} className="p-link">Themes</button>
+                        <button type="button" role="menuitem" onClick={(e) => this.toggleMenu(e, 0)} aria-haspopup aria-expanded={this.state.activeMenuIndex === 0} className="p-link">Themes</button>
                         {/* eslint-enable */}
                         <CSSTransition classNames="p-connected-overlay" timeout={{ enter: 120, exit: 100 }} in={this.state.activeMenuIndex === 0}
                             unmountOnExit onEntered={this.onMenuEnter}>
@@ -210,7 +210,7 @@ export class AppTopbar extends Component {
 
                     <li role="none" className="topbar-submenu">
                         {/* eslint-disable */}
-                        <button type="button" role="menuitem" onClick={(e) => this.toggleMenu(e, 1)} aria-haspopup={true} aria-expanded={this.props.activeTopbarItem === 1} className="p-link">Templates</button>
+                        <button type="button" role="menuitem" onClick={(e) => this.toggleMenu(e, 1)} aria-haspopup aria-expanded={this.props.activeTopbarItem === 1} className="p-link">Templates</button>
                         {/* eslint-enable */}
                         <CSSTransition classNames="p-connected-overlay" timeout={{ enter: 120, exit: 100 }} in={this.state.activeMenuIndex === 1}
                             unmountOnExit onEntered={this.onMenuEnter}>
@@ -264,7 +264,7 @@ export class AppTopbar extends Component {
 
                     <li role="none" className="topbar-submenu topbar-resources-submenu">
                         {/* eslint-disable */}
-                        <button type="button" role="menuitem" onClick={(e) => this.toggleMenu(e, 2)} aria-haspopup={true} aria-expanded={this.state.activeMenuIndex === 2} className="p-link">Resources</button>
+                        <button type="button" role="menuitem" onClick={(e) => this.toggleMenu(e, 2)} aria-haspopup aria-expanded={this.state.activeMenuIndex === 2} className="p-link">Resources</button>
                         {/* eslint-enable */}
                         <CSSTransition classNames="p-connected-overlay" timeout={{ enter: 120, exit: 100 }} in={this.state.activeMenuIndex === 2}
                             unmountOnExit onEntered={this.onMenuEnter}>

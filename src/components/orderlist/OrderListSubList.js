@@ -151,7 +151,7 @@ export class OrderListSubList extends Component {
         return (
             <div className="p-orderlist-list-container">
                 {header}
-                <ul ref={(el) => this.listElement = el} className="p-orderlist-list" style={this.props.listStyle} onDragOver={this.onListMouseMove} role="listbox" aria-multiselectable={true}>
+                <ul ref={(el) => this.listElement = el} className="p-orderlist-list" style={this.props.listStyle} onDragOver={this.onListMouseMove} role="listbox" aria-multiselectable>
                     {items}
                 </ul>
             </div>

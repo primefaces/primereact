@@ -137,7 +137,7 @@ export class Menubar extends Component {
             <div id={this.props.id} className={className} style={this.props.style}>
                 {start}
                 {menuButton}
-                <MenubarSub ref={(el) => this.rootmenu = ReactDOM.findDOMNode(el)} model={this.props.model} root={true} mobileActive={this.state.mobileActive} onLeafClick={this.onLeafClick} />
+                <MenubarSub ref={(el) => this.rootmenu = ReactDOM.findDOMNode(el)} model={this.props.model} root mobileActive={this.state.mobileActive} onLeafClick={this.onLeafClick} />
                 {end}
             </div>
         );

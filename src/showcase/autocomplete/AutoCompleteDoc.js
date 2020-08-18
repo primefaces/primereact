@@ -157,13 +157,13 @@ const AutoCompleteDemo = () => {
 
             <h5>Advanced</h5>
             <AutoComplete value={selectedBrand} suggestions={filteredBrands} completeMethod={filterBrands} size={30} minLength={1}
-                placeholder="Hint: type 'v' or 'f'" dropdown={true} itemTemplate={itemTemplate} onChange={(e) => setSelectedBrand(e.value)} />
+                placeholder="Hint: type 'v' or 'f'" dropdown itemTemplate={itemTemplate} onChange={(e) => setSelectedBrand(e.value)} />
             <span style={{ marginLeft: '10px' }}>Brand: {selectedBrand || 'none'}</span>
 
             <h5>Multiple</h5>
             <span className="p-fluid">
                 <AutoComplete value={selectedCountries} suggestions={filteredCountriesMultiple} completeMethod={filterCountryMultiple}
-                    minLength={1} placeholder="Countries" field="name" multiple={true} onChange={(e) => setSelectedCountries(e.value)} />
+                    minLength={1} placeholder="Countries" field="name" multiple onChange={(e) => setSelectedCountries(e.value)} />
             </span>
         </div>
     )
@@ -246,13 +246,13 @@ const AutoCompleteDemo = () => {
 
             <h5>Advanced</h5>
             <AutoComplete value={selectedBrand} suggestions={filteredBrands} completeMethod={filterBrands} size={30} minLength={1}
-                placeholder="Hint: type 'v' or 'f'" dropdown={true} itemTemplate={itemTemplate} onChange={(e) => setSelectedBrand(e.value)} />
+                placeholder="Hint: type 'v' or 'f'" dropdown itemTemplate={itemTemplate} onChange={(e) => setSelectedBrand(e.value)} />
             <span style={{ marginLeft: '10px' }}>Brand: {selectedBrand || 'none'}</span>
 
             <h5>Multiple</h5>
             <span className="p-fluid">
                 <AutoComplete value={selectedCountries} suggestions={filteredCountriesMultiple} completeMethod={filterCountryMultiple}
-                    minLength={1} placeholder="Countries" field="name" multiple={true} onChange={(e) => setSelectedCountries(e.value)} />
+                    minLength={1} placeholder="Countries" field="name" multiple onChange={(e) => setSelectedCountries(e.value)} />
             </span>
         </div>
     )

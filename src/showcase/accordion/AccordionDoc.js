@@ -175,7 +175,7 @@ const AccordionDemo = () => {
             </Accordion>
 
             <h5>Multiple</h5>
-            <Accordion multiple={true}>
+            <Accordion multiple>
                 <AccordionTab header="Godfather I">
                     <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughters wedding.
                     His beloved son Michael has just come home from the war, but does not intend to become part of his fathers business.
@@ -195,7 +195,7 @@ const AccordionDemo = () => {
                     third and final story of the fictional Corleone crime family. Two decades have passed, and crime kingpin Michael Corleone,
                     now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate.</p>
                 </AccordionTab>
-                <AccordionTab header="Godfather IV" disabled={true}></AccordionTab>
+                <AccordionTab header="Godfather IV" disabled></AccordionTab>
             </Accordion>
         </div>
     )
@@ -236,7 +236,7 @@ const AccordionDemo = () => {
             </Accordion>
 
             <h5>Multiple</h5>
-            <Accordion multiple={true}>
+            <Accordion multiple>
                 <AccordionTab header="Godfather I">
                     <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughters wedding.
                     His beloved son Michael has just come home from the war, but does not intend to become part of his fathers business.
@@ -256,7 +256,7 @@ const AccordionDemo = () => {
                     third and final story of the fictional Corleone crime family. Two decades have passed, and crime kingpin Michael Corleone,
                     now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate.</p>
                 </AccordionTab>
-                <AccordionTab header="Godfather IV" disabled={true}></AccordionTab>
+                <AccordionTab header="Godfather IV" disabled></AccordionTab>
             </Accordion>
         </div>
     )
@@ -328,7 +328,7 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
                         <p>By default only one tab at a time can be active, enabling <i>multiple</i> property changes this behavior to allow multiple tabs be active at the same time.</p>
 <CodeHighlight>
 {`
-<Accordion multiple={true}>
+<Accordion multiple>
     <AccordionTab header="Header I">
         Content I
     </AccordionTab>

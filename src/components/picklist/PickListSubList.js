@@ -155,7 +155,7 @@ export class PickListSubList extends Component {
 
         return <div className={wrapperClassName}>
                     {header}
-                    <ul className={listClassName} style={this.props.style} role="listbox" aria-multiselectable={true}>
+                    <ul className={listClassName} style={this.props.style} role="listbox" aria-multiselectable>
                         {items}
                     </ul>
                  </div>;
