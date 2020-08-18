@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TreeTable } from '../../components/treetable/TreeTable';
-import { Column } from "../../components/column/Column";
+import { Column } from '../../components/column/Column';
 import { NodeService } from '../service/NodeService';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
@@ -72,6 +72,7 @@ import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { NodeService } from '../service/NodeService';
+import './TreeTableDemo.scss';
 
 export class TreeTableResponsiveDemo extends Component {
 
@@ -92,20 +93,22 @@ export class TreeTableResponsiveDemo extends Component {
         return (
             <>
                 <span>{node.data.name}</span>
-                <span className="p-col-m">, {node.data.size}</span>
-                <span className="p-col-m">, {node.data.type}</span>
+                <span className="sm-visible"> {node.data.size}</span>
+                <span className="sm-visible"> {node.data.type}</span>
             </>
         )
     }
 
     render() {
         return (
-            <div>
-                <TreeTable value={this.state.nodes} header="Responsive TreeTable">
-                    <Column field="name" header="Name" body={this.nameTemplate} expander headerClassName="p-col-d"></Column>
-                    <Column field="size" header="Size" className="p-col-d"></Column>
-                    <Column field="type" header="Type" className="p-col-d"></Column>
-                </TreeTable>
+            <div className="treetable-responsive-demo">
+                <div className="card">
+                    <TreeTable value={this.state.nodes} header="Responsive">
+                        <Column field="name" header="Name" body={this.nameTemplate} expander></Column>
+                        <Column field="size" header="Size" headerClassName="sm-invisible" bodyClassName="sm-invisible"></Column>
+                        <Column field="type" header="Type" headerClassName="sm-invisible" bodyClassName="sm-invisible"></Column>
+                    </TreeTable>
+                </div>
             </div>
         )
     }

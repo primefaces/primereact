@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TreeTable } from '../../components/treetable/TreeTable';
-import { Column } from "../../components/column/Column";
+import { Column } from '../../components/column/Column';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { LiveEditor } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
@@ -175,13 +175,13 @@ export class TreeTableLazyDemo extends Component {
                 nodes: this.loadNodes(this.state.first, this.state.rows),
                 totalRecords: 1000
             });
-        }, 1000);
+        }, 500);
     }
 
     loadNodes(first, rows) {
         let nodes = [];
 
-        for(let i = 0; i < rows; i++) {
+        for (let i = 0; i < rows; i++) {
             let node = {
                 key: (first + i),
                 data: {
@@ -206,7 +206,7 @@ export class TreeTableLazyDemo extends Component {
 
             setTimeout(() => {
                 this.loading = false;
-                let lazyNode = {...event.node};
+                let lazyNode = { ...event.node };
 
                 lazyNode.children = [
                     {
@@ -254,18 +254,20 @@ export class TreeTableLazyDemo extends Component {
                 nodes: this.loadNodes(event.first, event.rows),
                 loading: false
             });
-        }, 1000);
+        }, 500);
     }
 
     render() {
         return (
             <div>
-                <TreeTable value={this.state.nodes} lazy={true} paginator={true} totalRecords={this.state.totalRecords}
-                    first={this.state.first} rows={this.state.rows} onPage={this.onPage} onExpand={this.onExpand} loading={this.state.loading}>
-                    <Column field="name" header="Name" expander></Column>
-                    <Column field="size" header="Size"></Column>
-                    <Column field="type" header="Type"></Column>
-                </TreeTable>
+                <div className="card">
+                    <TreeTable value={this.state.nodes} lazy={true} paginator={true} totalRecords={this.state.totalRecords}
+                        first={this.state.first} rows={this.state.rows} onPage={this.onPage} onExpand={this.onExpand} loading={this.state.loading}>
+                        <Column field="name" header="Name" expander></Column>
+                        <Column field="size" header="Size"></Column>
+                        <Column field="type" header="Type"></Column>
+                    </TreeTable>
+                </div>
             </div>
         )
     }

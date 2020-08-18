@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TreeTable } from '../../components/treetable/TreeTable';
-import { Column } from "../../components/column/Column";
+import { Column } from '../../components/column/Column';
 import { NodeService } from '../service/NodeService';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { LiveEditor } from '../liveeditor/LiveEditor';
@@ -87,29 +87,31 @@ export class TreeTableStyleDemo extends Component {
     }
 
     componentDidMount() {
-        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({ nodes: data }));
     }
 
     sizeTemplate(node) {
         let size = node.data.size;
         let fontWeight = parseInt(size, 10) > 75 ? 'bold' : 'normal';
 
-        return <span style={{fontWeight: fontWeight}}>{size}</span>;
+        return <span style={{ fontWeight: fontWeight }}>{size}</span>;
     }
 
     rowClassName(node) {
-        return {'p-highlight' : (node.children && node.children.length === 3)};
+        return { 'p-highlight': (node.children && node.children.length === 3) };
     }
 
     render() {
         return (
             <div>
-                <p>This treetable highlights cells with a bolder font weight whose size value is greater than 75kb and highlights rows who has at 3 child rows.</p>
-                <TreeTable value={this.state.nodes} rowClassName={this.rowClassName}>
-                    <Column field="name" header="Name" expander></Column>
-                    <Column field="size" header="Size" body={this.sizeTemplate}></Column>
-                    <Column field="type" header="Type"></Column>
-                </TreeTable>
+                <div className="card">
+                    <p>This treetable highlights cells with a bolder font weight whose size value is greater than 75kb and highlights rows who has at 3 child rows.</p>
+                    <TreeTable value={this.state.nodes} rowClassName={this.rowClassName}>
+                        <Column field="name" header="Name" expander></Column>
+                        <Column field="size" header="Size" body={this.sizeTemplate}></Column>
+                        <Column field="type" header="Type"></Column>
+                    </TreeTable>
+                </div>
             </div>
         )
     }

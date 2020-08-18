@@ -101,7 +101,7 @@ export class TreeTableSortDemo extends Component {
 
     componentDidMount() {
         this.nodeservice.getTreeTableNodes().then(data => {
-            this.setState({nodes1: data});
+            this.setState({ nodes1: data });
 
             let nodes2 = data;
             nodes2.push({
@@ -121,19 +121,23 @@ export class TreeTableSortDemo extends Component {
     render() {
         return (
             <div>
-                <h3>Single Column Sorting</h3>
-                <TreeTable value={this.state.nodes1} defaultSortOrder={-1}>
-                    <Column field="name" header="Name" expander sortable></Column>
-                    <Column field="size" header="Size" sortable></Column>
-                    <Column field="type" header="Type" sortable></Column>
-                </TreeTable>
+                <div className="card">
+                    <h5>Single Column Sorting</h5>
+                    <TreeTable value={this.state.nodes1} defaultSortOrder={-1}>
+                        <Column field="name" header="Name" expander sortable></Column>
+                        <Column field="size" header="Size" sortable></Column>
+                        <Column field="type" header="Type" sortable></Column>
+                    </TreeTable>
+                </div>
 
-                <h3>Multiple Column Sorting</h3>
-                <TreeTable value={this.state.nodes2} sortMode="multiple" defaultSortOrder={-1}>
-                    <Column field="name" header="Name" expander sortable></Column>
-                    <Column field="size" header="Size" sortable></Column>
-                    <Column field="type" header="Type" sortable></Column>
-                </TreeTable>
+                <div className="card">
+                    <h5>Multiple Column Sorting</h5>
+                    <TreeTable value={this.state.nodes2} sortMode="multiple" defaultSortOrder={-1}>
+                        <Column field="name" header="Name" expander sortable></Column>
+                        <Column field="size" header="Size" sortable></Column>
+                        <Column field="type" header="Type" sortable></Column>
+                    </TreeTable>
+                </div>
             </div>
         );
     }
