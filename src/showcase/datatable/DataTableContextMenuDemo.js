@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import {DataTable} from '../../components/datatable/DataTable';
-import {Column} from '../../components/column/Column';
-import {ContextMenu} from '../../components/contextmenu/ContextMenu';
-import {Growl} from '../../components/growl/Growl';
+import { DataTable } from '../../components/datatable/DataTable';
+import { Column } from '../../components/column/Column';
+import { ContextMenu } from '../../components/contextmenu/ContextMenu';
+import { Growl } from '../../components/growl/Growl';
 import ProductService from '../service/ProductService';
-import {TabView,TabPanel} from '../../components/tabview/TabView';
+import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { LiveEditor } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 
@@ -96,47 +96,55 @@ export class DataTableContextMenuDemoDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {ContextMenu} from 'primereact/contextmenu';
-import {Growl} from 'primereact/growl';
-import {CarService} from '../service/CarService';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { ContextMenu } from 'primereact/contextmenu';
+import { Growl } from 'primereact/growl';
+import ProductService from '../service/ProductService';
 
 export class DataTableContextMenuDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
-            cars: [],
-            selectedCar: null
+            products: [],
+            selectedProduct: null
         };
 
-        this.menu = [
-            {label: 'View', icon: 'pi pi-fw pi-search', command: () => this.viewCar(this.state.selectedCar)},
-            {label: 'Delete', icon: 'pi pi-fw pi-times', command: () => this.deleteCar(this.state.selectedCar)}
+        this.menuModel = [
+            {label: 'View', icon: 'pi pi-fw pi-search', command: () => this.viewProduct(this.state.selectedProduct)},
+            {label: 'Delete', icon: 'pi pi-fw pi-times', command: () => this.deleteProduct(this.state.selectedProduct)}
         ];
 
-        this.carservice = new CarService();
-        this.viewCar = this.viewCar.bind(this);
-        this.deleteCar = this.deleteCar.bind(this);
+        this.productService = new ProductService();
+        this.viewProduct = this.viewProduct.bind(this);
+        this.deleteProduct = this.deleteProduct.bind(this);
+        this.priceBodyTemplate = this.priceBodyTemplate.bind(this);
     }
 
     componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
     }
 
-    viewCar(car) {
-        this.growl.show({severity: 'info', summary: 'Car Selected', detail: car.vin + ' - ' + car.brand});
+    viewProduct(product) {
+        this.growl.show({severity: 'info', summary: 'Product Selected', detail: product.name});
     }
 
-    deleteCar(car) {
-        let carsList = [...this.state.cars];
-        carsList = carsList.filter((c) => c.vin !== car.vin);
+    deleteProduct(product) {
+        let products = [...this.state.products];
+        products = products.filter((p) => p.id !== product.id);
 
-        this.growl.show({severity: 'info', summary: 'Car Delete', detail: car.vin + ' - ' + car.brand});
-        this.setState({
-            cars: carsList
-        });
+        this.growl.show({severity: 'info', summary: 'Product Deleted', detail: product.name});
+        this.setState({ products });
+    }
+
+    formatCurrency(value) {
+        return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+    }
+
+    priceBodyTemplate(rowData) {
+        return this.formatCurrency(rowData.price);
     }
 
     render() {
@@ -144,16 +152,18 @@ export class DataTableContextMenuDemo extends Component {
             <div>
                 <Growl ref={(el) => { this.growl = el; }}></Growl>
 
-                <ContextMenu model={this.menu} ref={el => this.cm = el} onHide={() => this.setState({selectedCar: null})}/>
+                <ContextMenu model={this.menuModel} ref={el => this.cm = el} onHide={() => this.setState({ selectedProduct: null })}/>
 
-                <DataTable value={this.state.cars} header="Right Click"
-                    contextMenuSelection={this.state.selectedCar} onContextMenuSelectionChange={e => this.setState({selectedCar: e.value})}
-                    onContextMenu={e => this.cm.show(e.originalEvent)}>
-                    <Column field="vin" header="Vin" />
-                    <Column field="year" header="Year" />
-                    <Column field="brand" header="Brand" />
-                    <Column field="color" header="Color" />
-                </DataTable>
+                <div className="card">
+                    <DataTable value={this.state.products} contextMenuSelection={this.state.selectedProduct}
+                        onContextMenuSelectionChange={e => this.setState({ selectedProduct: e.value })}
+                        onContextMenu={e => this.cm.show(e.originalEvent)}>
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="price" header="Price" body={this.priceBodyTemplate} />
+                    </DataTable>
+                </div>
             </div>
         );
     }

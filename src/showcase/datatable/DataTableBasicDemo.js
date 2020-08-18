@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import {DataTable} from '../../components/datatable/DataTable';
-import {Column} from '../../components/column/Column';
+import { DataTable } from '../../components/datatable/DataTable';
+import { Column } from '../../components/column/Column';
 import ProductService from '../service/ProductService';
-import {TabView,TabPanel} from '../../components/tabview/TabView';
+import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { LiveEditor } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 
@@ -58,34 +58,36 @@ export class DataTableBasicDemoDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service/CarService';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import ProductService from '../service/ProductService';
 
 export class DataTableBasicDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            cars: []
+            products: []
         };
 
-        this.carservice = new CarService();
+        this.productService = new ProductService();
     }
 
     componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
     }
 
     render() {
         return (
             <div>
-                <DataTable value={this.state.cars}>
-                    <Column field="vin" header="Vin" />
-                    <Column field="year" header="Year" />
-                    <Column field="brand" header="Brand" />
-                    <Column field="color" header="Color" />
-                </DataTable>
+                <div className="card">
+                    <DataTable value={this.state.products}>
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="quantity" header="Quantity"></Column>
+                    </DataTable>
+                </div>
             </div>
         );
     }

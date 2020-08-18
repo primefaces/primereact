@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import {DataTable} from '../../components/datatable/DataTable';
-import {Column} from '../../components/column/Column';
+import { DataTable } from '../../components/datatable/DataTable';
+import { Column } from '../../components/column/Column';
 import ProductService from '../service/ProductService';
-import {TabView,TabPanel} from '../../components/tabview/TabView';
+import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { LiveEditor } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 
@@ -67,42 +67,45 @@ export class DataTableDynamicDemoDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service/CarService';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import ProductService from '../service/ProductService';
 
 export class DataTableDynamicDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
-            cars: []
+            products: []
         };
 
-        this.carservice = new CarService();
+        this.columns = [
+            {field: 'code', header: 'Code'},
+            {field: 'name', header: 'Name'},
+            {field: 'category', header: 'Category'},
+            {field: 'quantity', header: 'Quantity'}
+        ];
+
+        this.productService = new ProductService();
     }
 
     componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
     }
 
     render() {
-        const columns = [
-            {field: 'vin', header: 'Vin'},
-            {field: 'year', header: 'Year'},
-            {field: 'brand', header: 'Brand'},
-            {field: 'color', header: 'Color'}
-        ];
-
-        const dynamicColumns = columns.map((col,i) => {
+        const dynamicColumns = this.columns.map((col,i) => {
             return <Column key={col.field} field={col.field} header={col.header} />;
         });
 
         return (
             <div>
-                <DataTable value={this.state.cars}>
-                    {dynamicColumns}
-                </DataTable>
+                <div className="card">
+                    <DataTable value={this.state.products}>
+                        {dynamicColumns}
+                    </DataTable>
+                </div>
             </div>
         );
     }
