@@ -1446,7 +1446,7 @@ mysort(event) {
                         <p>Filtering is enabled by setting the <i>filter</i> property on a column. <i>filterMode</i> specifies the filtering strategy. In <b>lenient</b> mode when the query matches a node, children of the node are not searched further as all descendants of the node are included. On the other hand,
                         in <b>strict</b> mode when the query matches a node, filtering continues on all descendants.</p>
 
-<CodeHighlight lang="js">
+<CodeHighlight>
 {`
 <TreeTable value={this.state.nodes}>
     <Column field="name" header="Name" expander filter={true}></Column>
@@ -2238,9 +2238,9 @@ export class TreeTableResponsiveDemo extends Component {
                                     <tr>
                                         <td>currentPageReportTemplate</td>
                                         <td>string</td>
-                                        <td>(&123;currentPage&125; of &123;totalPages&125;)</td>
+                                        <td>({`{currentPage} of {totalPages}`})</td>
                                         <td>Template of the current page report element. Available placeholders are
-                                        &123;currentPage&125;,&123;totalPages&125;,&123;rows&125;,&123;first&125;,&123;last&125; and &123;totalRecords&125;
+                                        {` {currentPage}, {totalPages}, {rows}, {first}, {last} and {totalRecords}`}
                                     </td>
                                     </tr>
                                     <tr>
