@@ -161,7 +161,7 @@ export class TieredMenuDemo extends Component {
                     <TieredMenu model={this.items} />
 
                     <h5>Overlay</h5>
-                    <TieredMenu model={this.items} popup={true} ref={el => this.menu = el} id="overlay_tmenu" />
+                    <TieredMenu model={this.items} popup ref={el => this.menu = el} id="overlay_tmenu" />
                     <Button label="Show" icon="pi pi-bars" onClick={(event) => this.menu.toggle(event)} aria-haspopup aria-controls="overlay_tmenu"/>
                 </div>
             </div>
@@ -316,8 +316,8 @@ const TieredMenuDemo = () => {
             <TieredMenu model={items} />
 
             <h5>Popup</h5>
-            <TieredMenu model={items} popup={true} ref={menu} id="overlay_tmenu" />
-            <Button label="Show" icon="pi pi-bars" onClick={(event) => menu.current.toggle(event)} aria-haspopup={true} aria-controls="overlay_tmenu"/>
+            <TieredMenu model={items} popup ref={menu} id="overlay_tmenu" />
+            <Button label="Show" icon="pi pi-bars" onClick={(event) => menu.current.toggle(event)} aria-haspopup aria-controls="overlay_tmenu"/>
         </div>
     );
 }
@@ -469,8 +469,8 @@ const TieredMenuDemo = () => {
             <TieredMenu model={items} />
 
             <h5>Popup</h5>
-            <TieredMenu model={items} popup={true} ref={menu} id="overlay_tmenu" />
-            <Button label="Show" icon="pi pi-bars" onClick={(event) => menu.current.toggle(event)} aria-haspopup={true} aria-controls="overlay_tmenu"/>
+            <TieredMenu model={items} popup ref={menu} id="overlay_tmenu" />
+            <Button label="Show" icon="pi pi-bars" onClick={(event) => menu.current.toggle(event)} aria-haspopup aria-controls="overlay_tmenu"/>
         </div>
     );
 }

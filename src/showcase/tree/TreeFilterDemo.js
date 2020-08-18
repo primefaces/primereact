@@ -112,10 +112,10 @@ const TreeFilterDemo = () => {
     return (
         <div>
             <h3 className="first">Lenient Filter Mode</h3>
-            <Tree value={nodes1} filter={true} />
+            <Tree value={nodes1} filter />
 
             <h3>Strict Filter Mode</h3>
-            <Tree value={nodes2} filter={true} filterMode="strict" />
+            <Tree value={nodes2} filter filterMode="strict" />
         </div>
     )
 }
@@ -143,10 +143,10 @@ const TreeFilterDemo = () => {
     return (
         <div>
             <h3 className="first">Lenient Filter Mode</h3>
-            <Tree value={nodes1} filter={true} />
+            <Tree value={nodes1} filter />
 
             <h3>Strict Filter Mode</h3>
-            <Tree value={nodes2} filter={true} filterMode="strict" />
+            <Tree value={nodes2} filter filterMode="strict" />
         </div>
     )
 }

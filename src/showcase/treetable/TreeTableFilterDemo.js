@@ -172,9 +172,9 @@ const TreeTableFilterDemo = () => {
     return (
         <div>
             <TreeTable value={nodes} globalFilter={globalFilter} header={header}>
-                <Column field="name" header="Name" expander filter={true}></Column>
-                <Column field="size" header="Size" filter={true}></Column>
-                <Column field="type" header="Type" filter={true}></Column>
+                <Column field="name" header="Name" expander filter></Column>
+                <Column field="size" header="Size" filter></Column>
+                <Column field="type" header="Type" filter></Column>
             </TreeTable>
         </div>
     )
@@ -207,9 +207,9 @@ const TreeTableFilterDemo = () => {
     return (
         <div>
             <TreeTable value={nodes} globalFilter={globalFilter} header={header}>
-                <Column field="name" header="Name" expander filter={true}></Column>
-                <Column field="size" header="Size" filter={true}></Column>
-                <Column field="type" header="Type" filter={true}></Column>
+                <Column field="name" header="Name" expander filter></Column>
+                <Column field="size" header="Size" filter></Column>
+                <Column field="type" header="Type" filter></Column>
             </TreeTable>
         </div>
     )

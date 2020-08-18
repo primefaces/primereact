@@ -1303,7 +1303,7 @@ export class TreeTablePageDemo extends Component {
 
     render() {
         return (
-            <TreeTable value={this.state.nodes} paginator={true} rows={10}
+            <TreeTable value={this.state.nodes} paginator rows={10}
                 first={this.state.first} onPage={e => this.setState({first: e.first})}>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
@@ -1339,7 +1339,7 @@ export class TreeTablePageDemo extends Component {
 
     render() {
         return (
-            <TreeTable value={this.state.nodes} paginator={true} rows={10}>
+            <TreeTable value={this.state.nodes} paginator rows={10}>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
                 <Column field="type" header="Type"></Column>
@@ -1353,7 +1353,7 @@ export class TreeTablePageDemo extends Component {
                         <p>Elements of the paginator can be customized using the <i>paginatorTemplate</i> by the TreeTable. Refer to the template section of the <Link to="/paginator"> paginator documentation</Link> for further options.</p>
 <CodeHighlight>
 {`
-<TreeTable value={this.state.nodes} paginator={true} rows={10}
+<TreeTable value={this.state.nodes} paginator rows={10}
     paginatorTemplate="RowsPerPageDropdown PageLinks FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink">
     <Column field="name" header="Name" expander></Column>
     <Column field="size" header="Size"></Column>
@@ -1449,9 +1449,9 @@ mysort(event) {
 <CodeHighlight>
 {`
 <TreeTable value={this.state.nodes}>
-    <Column field="name" header="Name" expander filter={true}></Column>
-    <Column field="size" header="Size" filter={true}></Column>
-    <Column field="type" header="Type" filter={true}></Column>
+    <Column field="name" header="Name" expander filter></Column>
+    <Column field="size" header="Size" filter></Column>
+    <Column field="type" header="Type" filter></Column>
 </TreeTable>
 `}
 </CodeHighlight>
@@ -1641,7 +1641,7 @@ export class TreeTableSelectionDemo extends Component {
                 </TreeTable>
 
                 <h5>Multiple with MetaKey</h5>
-                <TreeTable value={this.state.nodes3} selectionMode="multiple" selectionKeys={this.state.selectedNodeKeys2} onSelectionChange={e => this.setState({selectedNodeKeys2: e.value})} metaKeySelection={true}>
+                <TreeTable value={this.state.nodes3} selectionMode="multiple" selectionKeys={this.state.selectedNodeKeys2} onSelectionChange={e => this.setState({selectedNodeKeys2: e.value})} metaKeySelection>
                     <Column field="name" header="Name" expander></Column>
                     <Column field="size" header="Size"></Column>
                     <Column field="type" header="Type"></Column>
@@ -1780,7 +1780,7 @@ export class TreeTableLazyDemo extends Component {
 
     render() {
         return (
-            <TreeTable value={this.state.nodes} lazy={true} paginator={true} totalRecords={this.state.totalRecords}
+            <TreeTable value={this.state.nodes} lazy paginator totalRecords={this.state.totalRecords}
                 first={this.state.first} rows={this.state.rows} onPage={this.onPage} onExpand={this.onExpand} loading={this.state.loading}>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
@@ -1958,14 +1958,14 @@ export class TreeTableContextMenuDemo extends Component {
 <CodeHighlight>
 {`
 <h5>Fit Mode</h5>
-<TreeTable value={this.state.nodes} resizableColumns={true} columnResizeMode="fit">
+<TreeTable value={this.state.nodes} resizableColumns columnResizeMode="fit">
     <Column field="name" header="Name" expander></Column>
     <Column field="size" header="Size"></Column>
     <Column field="type" header="Type"></Column>
 </TreeTable>
 
 <h5>Expand Mode</h5>
-<TreeTable value={this.state.nodes} resizableColumns={true} columnResizeMode="expand">
+<TreeTable value={this.state.nodes} resizableColumns columnResizeMode="expand">
     <Column field="name" header="Name" expander></Column>
     <Column field="size" header="Size"></Column>
     <Column field="type" header="Type"></Column>
@@ -1976,7 +1976,7 @@ export class TreeTableContextMenuDemo extends Component {
                         <p>It is important to note that when you need to change column widths, since table width is 100%, giving fixed pixel widths does not work well as browsers scale them, instead give percentage widths.</p>
 <CodeHighlight>
 {`
-<TreeTable value={this.state.nodes} resizableColumns={true}>
+<TreeTable value={this.state.nodes} resizableColumns>
     <Column field="name" header="Name" expander style={{width:'50%'}}></Column>
     <Column field="size" header="Size" style={{width:'30%'}}></Column>
     <Column field="type" header="Type" style={{width:'20%'}}></Column>

@@ -155,7 +155,7 @@ export class TieredMenuDemo extends Component {
                         <TieredMenu model={this.items} />
 
                         <h5>Overlay</h5>
-                        <TieredMenu model={this.items} popup={true} ref={el => this.menu = el} id="overlay_tmenu" />
+                        <TieredMenu model={this.items} popup ref={el => this.menu = el} id="overlay_tmenu" />
                         <Button label="Show" icon="pi pi-bars" onClick={(event) => this.menu.toggle(event)} aria-haspopup aria-controls="overlay_tmenu"/>
                     </div>
                 </div>

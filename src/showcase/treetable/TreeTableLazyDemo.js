@@ -124,7 +124,7 @@ export class TreeTableLazyDemo extends Component {
 
                 <div className="content-section implementation">
                     <div className="card">
-                        <TreeTable value={this.state.nodes} lazy={true} paginator={true} totalRecords={this.state.totalRecords}
+                        <TreeTable value={this.state.nodes} lazy paginator totalRecords={this.state.totalRecords}
                             first={this.state.first} rows={this.state.rows} onPage={this.onPage} onExpand={this.onExpand} loading={this.state.loading}>
                             <Column field="name" header="Name" expander></Column>
                             <Column field="size" header="Size"></Column>
@@ -261,7 +261,7 @@ export class TreeTableLazyDemo extends Component {
         return (
             <div>
                 <div className="card">
-                    <TreeTable value={this.state.nodes} lazy={true} paginator={true} totalRecords={this.state.totalRecords}
+                    <TreeTable value={this.state.nodes} lazy paginator totalRecords={this.state.totalRecords}
                         first={this.state.first} rows={this.state.rows} onPage={this.onPage} onExpand={this.onExpand} loading={this.state.loading}>
                         <Column field="name" header="Name" expander></Column>
                         <Column field="size" header="Size"></Column>
@@ -368,7 +368,7 @@ const TreeTableLazyDemo = () => {
 
     return (
         <div>
-            <TreeTable value={nodes} lazy={true} paginator={true} totalRecords={totalRecords}
+            <TreeTable value={nodes} lazy paginator totalRecords={totalRecords}
                 first={first} rows={rows} onPage={onPage} onExpand={onExpand} loading={loading}>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
@@ -473,7 +473,7 @@ const TreeTableLazyDemo = () => {
 
     return (
         <div>
-            <TreeTable value={nodes} lazy={true} paginator={true} totalRecords={totalRecords}
+            <TreeTable value={nodes} lazy paginator totalRecords={totalRecords}
                 first={first} rows={rows} onPage={onPage} onExpand={onExpand} loading={loading}>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>

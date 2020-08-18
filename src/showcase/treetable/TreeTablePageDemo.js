@@ -56,7 +56,7 @@ export class TreeTablePageDemo extends Component {
 
                 <div className="content-section implementation">
                     <div className="card">
-                        <TreeTable value={this.state.nodes} paginator={true} rows={10}>
+                        <TreeTable value={this.state.nodes} paginator rows={10}>
                             <Column field="name" header="Name" expander></Column>
                             <Column field="size" header="Size"></Column>
                             <Column field="type" header="Type"></Column>
@@ -126,7 +126,7 @@ export class TreeTablePageDemo extends Component {
         return (
             <div>
                 <div className="card">
-                    <TreeTable value={this.state.nodes} paginator={true} rows={10}>
+                    <TreeTable value={this.state.nodes} paginator rows={10}>
                         <Column field="name" header="Name" expander></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
@@ -178,7 +178,7 @@ const TreeTablePageDemo = () => {
 
     return (
         <div>
-            <TreeTable value={nodes} paginator={true} rows={10}>
+            <TreeTable value={nodes} paginator rows={10}>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
                 <Column field="type" header="Type"></Column>
@@ -228,7 +228,7 @@ const TreeTablePageDemo = () => {
 
     return (
         <div>
-            <TreeTable value={nodes} paginator={true} rows={10}>
+            <TreeTable value={nodes} paginator rows={10}>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
                 <Column field="type" header="Type"></Column>

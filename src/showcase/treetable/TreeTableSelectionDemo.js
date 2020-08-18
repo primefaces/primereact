@@ -70,7 +70,7 @@ export class TreeTableSelectionDemo extends Component {
 
                     <div className="card">
                         <h5>Multiple with MetaKey</h5>
-                        <TreeTable value={this.state.nodes} selectionMode="multiple" selectionKeys={this.state.selectedNodeKeys2} onSelectionChange={e => this.setState({ selectedNodeKeys2: e.value })} metaKeySelection={true}>
+                        <TreeTable value={this.state.nodes} selectionMode="multiple" selectionKeys={this.state.selectedNodeKeys2} onSelectionChange={e => this.setState({ selectedNodeKeys2: e.value })} metaKeySelection>
                             <Column field="name" header="Name" expander></Column>
                             <Column field="size" header="Size"></Column>
                             <Column field="type" header="Type"></Column>
@@ -173,7 +173,7 @@ export class TreeTableSelectionDemo extends Component {
 
                 <div className="card">
                     <h5>Multiple with MetaKey</h5>
-                    <TreeTable value={this.state.nodes} selectionMode="multiple" selectionKeys={this.state.selectedNodeKeys2} onSelectionChange={e => this.setState({ selectedNodeKeys2: e.value })} metaKeySelection={true}>
+                    <TreeTable value={this.state.nodes} selectionMode="multiple" selectionKeys={this.state.selectedNodeKeys2} onSelectionChange={e => this.setState({ selectedNodeKeys2: e.value })} metaKeySelection>
                         <Column field="name" header="Name" expander></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
@@ -264,7 +264,7 @@ const TreeTableSelectionDemo = () => {
             </TreeTable>
 
             <h3>Multiple with MetaKey</h3>
-            <TreeTable value={nodes3} selectionMode="multiple" selectionKeys={selectedNodeKeys2} onSelectionChange={e => setSelectedNodeKeys2(e.value)} metaKeySelection={true}>
+            <TreeTable value={nodes3} selectionMode="multiple" selectionKeys={selectedNodeKeys2} onSelectionChange={e => setSelectedNodeKeys2(e.value)} metaKeySelection>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
                 <Column field="type" header="Type"></Column>
@@ -349,7 +349,7 @@ const TreeTableSelectionDemo = () => {
             </TreeTable>
 
             <h3>Multiple with MetaKey</h3>
-            <TreeTable value={nodes3} selectionMode="multiple" selectionKeys={selectedNodeKeys2} onSelectionChange={e => setSelectedNodeKeys2(e.value)} metaKeySelection={true}>
+            <TreeTable value={nodes3} selectionMode="multiple" selectionKeys={selectedNodeKeys2} onSelectionChange={e => setSelectedNodeKeys2(e.value)} metaKeySelection>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
                 <Column field="type" header="Type"></Column>

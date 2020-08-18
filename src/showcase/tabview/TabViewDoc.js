@@ -154,7 +154,7 @@ const TabViewDemo = () => {
                     interests to longtime enforcer Joey Zasa. He uses his wealth in an attempt to rehabilitate his reputation through numerous philanthropic acts, administered by a foundation named after his father.
                     A decade earlier, he gave custody of his two children to Kay, who has since remarried.</p>
                 </TabPanel>
-                <TabPanel header="Godfather IV" disabled={true}>
+                <TabPanel header="Godfather IV" disabled>
 
                 </TabPanel>
             </TabView>
@@ -176,7 +176,7 @@ const TabViewDemo = () => {
                     interests to longtime enforcer Joey Zasa. He uses his wealth in an attempt to rehabilitate his reputation through numerous philanthropic acts, administered by a foundation named after his father.
                     A decade earlier, he gave custody of his two children to Kay, who has since remarried.</p>
                 </TabPanel>
-                <TabPanel header="Godfather IV" disabled={true}>
+                <TabPanel header="Godfather IV" disabled>
 
                 </TabPanel>
             </TabView>
@@ -213,7 +213,7 @@ const TabViewDemo = () => {
                     interests to longtime enforcer Joey Zasa. He uses his wealth in an attempt to rehabilitate his reputation through numerous philanthropic acts, administered by a foundation named after his father.
                     A decade earlier, he gave custody of his two children to Kay, who has since remarried.</p>
                 </TabPanel>
-                <TabPanel header="Godfather IV" disabled={true}>
+                <TabPanel header="Godfather IV" disabled>
 
                 </TabPanel>
             </TabView>
@@ -235,7 +235,7 @@ const TabViewDemo = () => {
                     interests to longtime enforcer Joey Zasa. He uses his wealth in an attempt to rehabilitate his reputation through numerous philanthropic acts, administered by a foundation named after his father.
                     A decade earlier, he gave custody of his two children to Kay, who has since remarried.</p>
                 </TabPanel>
-                <TabPanel header="Godfather IV" disabled={true}>
+                <TabPanel header="Godfather IV" disabled>
 
                 </TabPanel>
             </TabView>
