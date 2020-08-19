@@ -455,7 +455,7 @@ const DataTableDemo = () => {
     return (
         <div className="datatable-doc-demo">
             <DataTable ref={dt} value={customers}
-                header={header} responsive className="p-datatable-customers" dataKey="id" rowHover globalFilter={globalFilter}
+                header={header} className="p-datatable-customers" dataKey="id" rowHover globalFilter={globalFilter}
                 selection={selectedCustomers} onSelectionChange={e => setSelectedCustomers(e.value)}
                 paginator rows={10} emptyMessage="No customers found" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                 paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" rowsPerPageOptions={[10,25,50]}>
@@ -2539,15 +2539,64 @@ export class DataTableStateDemo extends Component {
 </CodeHighlight>
 
             <h5>Responsive</h5>
-            <p>DataTable columns are displayed as stacked in responsive mode if the screen size becomes smaller than a certain breakpoint value. This feature is enabled by setting responsive to true.</p>
+            <p>DataTable display can be optimized according to screen sizes, this example demonstrates a sample demo where columns are stacked on small screens.</p>
 <CodeHighlight>
 {`
-<DataTable value={this.state.products} responsive>
-    <Column field="code" header="Code"></Column>
-    <Column field="name" header="Name"></Column>
-    <Column field="category" header="Category"></Column>
-    <Column field="quantity" header="Quantity"></Column>
+<DataTable value={this.state.products} className="p-datatable-responsive-demo">
+    <Column field="code" header="Code" body={this.bodyTemplate}></Column>
+    <Column field="name" header="Name" body={this.bodyTemplate}></Column>
+    <Column field="category" header="Category" body={this.bodyTemplate}></Column>
+    <Column field="quantity" header="Quantity" body={this.bodyTemplate}></Column>
 </DataTable>
+`}
+</CodeHighlight>
+
+<CodeHighlight lang="js">
+{`
+bodyTemplate(data, props) {
+    return (
+        <>
+            <span className="p-column-title">{props.header}</span>
+            {data[props.field]}
+        </>
+    );
+}
+`}
+</CodeHighlight>
+
+<CodeHighlight lang="scss">
+{`
+.p-datatable-responsive-demo .p-datatable-tbody > tr > td .p-column-title {
+    display: none;
+}
+
+@media screen and (max-width: 40em) {
+    .p-datatable {
+        &.p-datatable-responsive-demo {
+            .p-datatable-thead > tr > th,
+            .p-datatable-tfoot > tr > td {
+                display: none !important;
+            }
+
+            .p-datatable-tbody > tr > td {
+                text-align: left;
+                display: block;
+                border: 0 none !important;
+                width: 100% !important;
+                float: left;
+                clear: left;
+
+                .p-column-title {
+                    padding: .4rem;
+                    min-width: 30%;
+                    display: inline-block;
+                    margin: -.4em 1em -.4em -.4rem;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
 `}
 </CodeHighlight>
 
@@ -2807,12 +2856,6 @@ export class DataTableStateDemo extends Component {
                             <td>array/object</td>
                             <td>null</td>
                             <td>A collection of rows or a map object row data keys that are expanded.</td>
-                        </tr>
-                        <tr>
-                            <td>responsive</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>Defines if the columns should be stacked in smaller screens.</td>
                         </tr>
                         <tr>
                             <td>resizableColumns</td>

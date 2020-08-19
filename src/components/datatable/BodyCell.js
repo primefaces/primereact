@@ -242,10 +242,6 @@ export class BodyCell extends Component {
             }
         }
 
-        if (this.props.responsive) {
-            header = <span className="p-column-title">{this.props.header}</span>;
-        }
-
         if (this.props.editMode !== 'row') {
             /* eslint-disable */
             editorKeyHelper = this.props.editor && <a tabIndex="0" ref={(el) => {this.keyHelper = el;}} className="p-cell-editor-key-helper p-hidden-accessible" onFocus={this.onEditorFocus}><span></span></a>;

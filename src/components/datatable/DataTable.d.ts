@@ -40,7 +40,6 @@ interface DataTableProps {
     frozenHeaderColumnGroup?: any;
     frozenFooterColumnGroup?: any;
     expandedRows?: any[];
-    responsive?: boolean;
     resizableColumns?: boolean;
     columnResizeMode?: string;
     reorderableColumns?: boolean;
