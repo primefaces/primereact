@@ -161,7 +161,7 @@ export class Menu extends Component {
         if (!this.documentClickListener) {
             this.documentClickListener = (event) => {
                 if (this.state.visible && this.isOutsideClicked(event)) {
-                    this.hide();
+                    this.hide(event);
                 }
             };
 
