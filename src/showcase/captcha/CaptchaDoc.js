@@ -14,7 +14,7 @@ export class CaptchaDoc extends Component {
                 content: `
 import React, { Component } from 'react';
 import { Captcha } from 'primereact/captcha';
-import { Growl } from 'primereact/growl';
+import { Toast } from 'primereact/toast';
 
 export class CaptchaDemo extends Component {
 
@@ -24,13 +24,13 @@ export class CaptchaDemo extends Component {
     }
 
     showResponse() {
-        this.growl.show({ severity: 'info', summary: 'Success', detail: 'User Responded' });
+        this.toast.show({ severity: 'info', summary: 'Success', detail: 'User Responded' });
     }
 
     render() {
         return (
             <div>
-                <Growl ref={(el) => this.growl = el}></Growl>
+                <Toast ref={(el) => this.toast = el}></Toast>
 
                 <div className="card">
                     <Captcha siteKey="YOUR_SITE_KEY" onResponse={this.showResponse} />
@@ -46,18 +46,18 @@ export class CaptchaDemo extends Component {
                 content: `
 import React, { useRef } from 'react';
 import { Captcha } from 'primereact/captcha';
-import { Growl } from 'primereact/growl';
+import { Toast } from 'primereact/toast';
 
 const CaptchaDemo = () => {
-    let growl = useRef(null);
+    let toast = useRef(null);
 
     const showResponse = () => {
-        growl.current.show({severity: 'info', summary: 'Success', detail: 'User Responded'});
+        toast.current.show({severity: 'info', summary: 'Success', detail: 'User Responded'});
     }
 
     return (
         <div className="button-demo">
-            <Growl ref={growl}></Growl>
+            <Toast ref={toast}></Toast>
 
             <Captcha siteKey="6Lf2XQkTAAAAANcvOwYqPxWL4iZDksFqHpS39GDA" onResponse={showResponse} />
         </div>
@@ -70,18 +70,18 @@ const CaptchaDemo = () => {
                 content: `
 import React, { useRef } from 'react';
 import { Captcha } from 'primereact/captcha';
-import { Growl } from 'primereact/growl';
+import { Toast } from 'primereact/toast';
 
 const CaptchaDemo = () => {
-    let growl = useRef<any>(null);
+    let toast = useRef<any>(null);
 
     const showResponse = () => {
-        growl.current.show({severity: 'info', summary: 'Success', detail: 'User Responded'});
+        toast.current.show({severity: 'info', summary: 'Success', detail: 'User Responded'});
     }
 
     return (
         <div className="button-demo">
-            <Growl ref={growl}></Growl>
+            <Toast ref={toast}></Toast>
 
             <Captcha siteKey="6Lf2XQkTAAAAANcvOwYqPxWL4iZDksFqHpS39GDA" onResponse={showResponse} />
         </div>

@@ -248,7 +248,7 @@ import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { Checkbox } from 'primereact/checkbox';
-import { Growl } from 'primereact/growl';
+import { Toast } from 'primereact/toast';
 import { loadGoogleMaps, removeGoogleMaps } from '../load/GoogleMaps';
 
 export class GMapDemo extends Component {
@@ -300,15 +300,15 @@ export class GMapDemo extends Component {
             this.infoWindow.open(event.map, event.overlay);
             event.map.setCenter(event.overlay.getPosition());
 
-            this.growl.show({severity:'info', summary:'Marker Selected', detail: title});
+            this.toast.show({severity:'info', summary:'Marker Selected', detail: title});
         }
         else {
-            this.growl.show({severity:'info', summary:'Shape Selected', detail: ''});
+            this.toast.show({severity:'info', summary:'Shape Selected', detail: ''});
         }
     }
 
     handleDragEnd(event) {
-        this.growl.show({severity:'info', summary:'Marker Dragged', detail: event.overlay.getTitle()});
+        this.toast.show({severity:'info', summary:'Marker Dragged', detail: event.overlay.getTitle()});
     }
 
     addMarker() {
@@ -362,7 +362,7 @@ export class GMapDemo extends Component {
 
         return (
             <div>
-                <Growl ref={(el) => { this.growl = el; }}></Growl>
+                <Toast ref={(el) => { this.toast = el; }}></Toast>
 
                 {
                     this.state.googleMapsReady && (

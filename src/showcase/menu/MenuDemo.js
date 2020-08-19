@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Menu } from '../../components/menu/Menu';
 import { Button } from '../../components/button/Button';
 import { AppInlineHeader } from '../../AppInlineHeader';
-import { Growl } from '../../components/growl/Growl';
+import { Toast } from '../../components/toast/Toast';
 import { MenuDoc } from './MenuDoc';
 
 export class MenuDemo extends Component {
@@ -18,14 +18,14 @@ export class MenuDemo extends Component {
                         label: 'Update',
                         icon: 'pi pi-refresh',
                         command: () => {
-                            this.growl.show({ severity: 'success', summary: 'Updated', detail: 'Data Updated', life: 3000 });
+                            this.toast.show({ severity: 'success', summary: 'Updated', detail: 'Data Updated', life: 3000 });
                         }
                     },
                     {
                         label: 'Delete',
                         icon: 'pi pi-times',
                         command: () => {
-                            this.growl.show({ severity: 'warn', summary: 'Delete', detail: 'Data Deleted', life: 3000 });
+                            this.toast.show({ severity: 'warn', summary: 'Delete', detail: 'Data Deleted', life: 3000 });
                         }
                     }
                 ]
@@ -61,7 +61,7 @@ export class MenuDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Growl ref={(el) => { this.growl = el; }}></Growl>
+                    <Toast ref={(el) => { this.toast = el; }}></Toast>
 
                     <div className="card">
                         <h5>Inline</h5>

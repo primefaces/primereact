@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Steps } from '../../components/steps/Steps';
-import { Growl } from '../../components/growl/Growl';
+import { Toast } from '../../components/toast/Toast';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { StepsDoc } from './StepsDoc';
 
@@ -16,25 +16,25 @@ export class StepsDemo extends Component {
             {
                 label: 'Personal',
                 command: (event) => {
-                    this.growl.show({ severity: 'info', summary: 'First Step', detail: event.item.label });
+                    this.toast.show({ severity: 'info', summary: 'First Step', detail: event.item.label });
                 }
             },
             {
                 label: 'Seat',
                 command: (event) => {
-                    this.growl.show({ severity: 'info', summary: 'Seat Selection', detail: event.item.label });
+                    this.toast.show({ severity: 'info', summary: 'Seat Selection', detail: event.item.label });
                 }
             },
             {
                 label: 'Payment',
                 command: (event) => {
-                    this.growl.show({ severity: 'info', summary: 'Pay with CC', detail: event.item.label });
+                    this.toast.show({ severity: 'info', summary: 'Pay with CC', detail: event.item.label });
                 }
             },
             {
                 label: 'Confirmation',
                 command: (event) => {
-                    this.growl.show({ severity: 'info', summary: 'Last Step', detail: event.item.label });
+                    this.toast.show({ severity: 'info', summary: 'Last Step', detail: event.item.label });
                 }
             }
         ];
@@ -51,7 +51,7 @@ export class StepsDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Growl ref={(el) => { this.growl = el }}></Growl>
+                    <Toast ref={(el) => { this.toast = el }}></Toast>
 
                     <div className="card">
                         <h5>Basic</h5>

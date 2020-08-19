@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { DeferredContent } from '../../components/deferredcontent/DeferredContent';
 import { DataTable } from "../../components/datatable/DataTable";
 import { Column } from "../../components/column/Column";
-import { Growl } from "../../components/growl/Growl";
+import { Toast } from "../../components/toast/Toast";
 import { DeferredContentDoc } from './DeferredContentDoc';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import ProductService from '../service/ProductService';
@@ -21,12 +21,12 @@ export class DeferredContentDemo extends Component {
     }
 
     onImageLoad() {
-        this.growl.show({ severity: 'success', summary: 'Image Initialized', detail: 'Scroll down to load the datatable' });
+        this.toast.show({ severity: 'success', summary: 'Image Initialized', detail: 'Scroll down to load the datatable' });
     }
 
     onDataLoad() {
         this.productService.getProductsSmall().then(data => this.setState({ products: data }));
-        this.growl.show({ severity: 'success', summary: 'Data Initialized', detail: 'Render Completed' });
+        this.toast.show({ severity: 'success', summary: 'Data Initialized', detail: 'Render Completed' });
     }
 
     render() {
@@ -40,7 +40,7 @@ export class DeferredContentDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Growl ref={(el) => this.growl = el} />
+                    <Toast ref={(el) => this.toast = el} />
 
                     <div className="card">
                         <div style={{ height: '800px' }}>

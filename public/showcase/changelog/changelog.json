@@ -597,7 +597,7 @@
                 "url": "https://github.com/primefaces/primereact/issues/1199"
             }
         ],
-        "growl": [
+        "toast": [
             {
                 "number": 1248,
                 "title": "onClose of GrowlMessage is also allowing onClick to fire.",
@@ -1186,7 +1186,7 @@
                 "url": "https://github.com/primefaces/primereact/issues/1196"
             }
         ],
-        "growl": [
+        "toast": [
             {
                 "number": 1190,
                 "title": "Alignment problem on Growl message without details",
@@ -1384,7 +1384,7 @@
                 "url": "https://github.com/primefaces/primereact/issues/1155"
             }
         ],
-        "growl": [
+        "toast": [
             {
                 "number": 1155,
                 "title": "When the buttons inside the components are clicked, they submit the form",
@@ -1488,7 +1488,7 @@
                 "url": "https://github.com/primefaces/primereact/issues/1085"
             }
         ],
-        "growl": [
+        "toast": [
             {
                 "number": 1095,
                 "title": "Growl messages from \"bottom*\" is not displaying as expected",
@@ -2049,7 +2049,7 @@
                 "url": "https://github.com/primefaces/primereact/issues/957"
             }
         ],
-        "growl": [
+        "toast": [
             {
                 "number": 965,
                 "title": "Growl detail should be placed in <div> not <p>",
@@ -2185,7 +2185,7 @@
                 "url": "https://github.com/primefaces/primereact/issues/913"
             }
         ],
-        "growl": [
+        "toast": [
             {
                 "number": 914,
                 "title": "onRemove event does not exists on Growl component",

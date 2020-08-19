@@ -4,7 +4,7 @@ import { Column } from '../../components/column/Column';
 import ProductService from '../service/ProductService';
 import { Rating } from '../../components/rating/Rating';
 import { Button } from '../../components/button/Button';
-import { Growl } from '../../components/growl/Growl';
+import { Toast } from '../../components/toast/Toast';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { LiveEditor } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
@@ -40,11 +40,11 @@ export class DataTableRowExpansionDemo extends Component {
     }
 
     onRowExpand(event) {
-        this.growl.show({severity: 'info', summary: 'Product Expanded', detail: event.data.name, life: 3000});
+        this.toast.show({severity: 'info', summary: 'Product Expanded', detail: event.data.name, life: 3000});
     }
 
     onRowCollapse(event) {
-        this.growl.show({severity: 'success', summary: 'Product Collapsed', detail: event.data.name, life: 3000});
+        this.toast.show({severity: 'success', summary: 'Product Collapsed', detail: event.data.name, life: 3000});
     }
 
     expandAll() {
@@ -54,7 +54,7 @@ export class DataTableRowExpansionDemo extends Component {
         this.setState({
             expandedRows
         }, () => {
-            this.growl.show({severity: 'success', summary: 'All Rows Expanded', life: 3000});
+            this.toast.show({severity: 'success', summary: 'All Rows Expanded', life: 3000});
         });
     }
 
@@ -62,7 +62,7 @@ export class DataTableRowExpansionDemo extends Component {
         this.setState({
             expandedRows: null
         }, () => {
-            this.growl.show({severity: 'success', summary: 'All Rows Collapsed', life: 3000});
+            this.toast.show({severity: 'success', summary: 'All Rows Collapsed', life: 3000});
         });
     }
 
@@ -132,7 +132,7 @@ export class DataTableRowExpansionDemo extends Component {
                 </div>
 
                 <div className="content-section implementation datatable-rowexpansion-demo">
-                    <Growl ref={(el) => this.growl = el} />
+                    <Toast ref={(el) => this.toast = el} />
 
                     <div className="card">
                         <DataTable value={this.state.products} expandedRows={this.state.expandedRows} onRowToggle={(e) => this.setState({ expandedRows: e.data })}
@@ -170,7 +170,7 @@ import { Column } from 'primereact/column';
 import ProductService from '../service/ProductService';
 import { Rating } from 'primereact/rating';
 import { Button } from 'primereact/button';
-import { Growl } from 'primereact/growl';
+import { Toast } from 'primereact/toast';
 
 export class DataTableRowExpansionDemo extends Component {
 
@@ -202,11 +202,11 @@ export class DataTableRowExpansionDemo extends Component {
     }
 
     onRowExpand(event) {
-        this.growl.show({severity: 'info', summary: 'Product Expanded', detail: event.data.name, life: 3000});
+        this.toast.show({severity: 'info', summary: 'Product Expanded', detail: event.data.name, life: 3000});
     }
 
     onRowCollapse(event) {
-        this.growl.show({severity: 'success', summary: 'Product Collapsed', detail: event.data.name, life: 3000});
+        this.toast.show({severity: 'success', summary: 'Product Collapsed', detail: event.data.name, life: 3000});
     }
 
     expandAll() {
@@ -216,7 +216,7 @@ export class DataTableRowExpansionDemo extends Component {
         this.setState({
             expandedRows
         }, () => {
-            this.growl.show({severity: 'success', summary: 'All Rows Expanded', life: 3000});
+            this.toast.show({severity: 'success', summary: 'All Rows Expanded', life: 3000});
         });
     }
 
@@ -224,7 +224,7 @@ export class DataTableRowExpansionDemo extends Component {
         this.setState({
             expandedRows: null
         }, () => {
-            this.growl.show({severity: 'success', summary: 'All Rows Collapsed', life: 3000});
+            this.toast.show({severity: 'success', summary: 'All Rows Collapsed', life: 3000});
         });
     }
 
@@ -286,7 +286,7 @@ export class DataTableRowExpansionDemo extends Component {
 
         return (
             <div className="datatable-rowexpansion-demo">
-                <Growl ref={(el) => this.growl = el} />
+                <Toast ref={(el) => this.toast = el} />
 
                 <div className="card">
                     <DataTable value={this.state.products} expandedRows={this.state.expandedRows} onRowToggle={(e) => this.setState({ expandedRows: e.data })}

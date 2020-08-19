@@ -632,7 +632,7 @@ export class TreeDragDropDemo extends Component {
 import React, { Component } from 'react';
 import {Tree} from 'primereact/tree'
 import {ContextMenu} from 'primereact/contextmenu';
-import {Growl} from 'primereact/growl';
+import {Toast} from 'primereact/toast';
 import {NodeService} from '../service/NodeService';
 
 export class TreeContextMenuDemo extends Component {
@@ -648,7 +648,7 @@ export class TreeContextMenuDemo extends Component {
                     label: 'View Key',
                     icon: 'pi pi-search',
                     command: () => {
-                        this.growl.show({severity: 'success', summary: 'Node Key', detail: this.state.selectedNodeKey});
+                        this.toast.show({severity: 'success', summary: 'Node Key', detail: this.state.selectedNodeKey});
                     }
                 },
                 {
@@ -677,7 +677,7 @@ export class TreeContextMenuDemo extends Component {
     render() {
         return (
             <div>
-                <Growl ref={(el) => this.growl = el} />
+                <Toast ref={(el) => this.toast = el} />
 
                 <ContextMenu model={this.state.menu} ref={el => this.cm = el} />
 

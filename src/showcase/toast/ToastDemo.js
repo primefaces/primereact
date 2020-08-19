@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Growl } from '../../components/growl/Growl';
+import { Toast } from '../../components/toast/Toast';
 import { Button } from '../../components/button/Button';
 import { AppInlineHeader } from '../../AppInlineHeader';
-import { GrowlDoc } from './GrowlDoc';
-import './GrowlDemo.scss';
+import { ToastDoc } from './ToastDoc';
+import './ToastDemo.scss';
 
-export class GrowlDemo extends Component {
+export class ToastDemo extends Component {
 
     constructor(props) {
         super(props);
@@ -23,39 +23,39 @@ export class GrowlDemo extends Component {
     }
 
     showSuccess() {
-        this.growl.show({severity:'success', summary: 'Success Message', detail:'Message Content', life: 3000});
+        this.toast.show({severity:'success', summary: 'Success Message', detail:'Message Content', life: 3000});
     }
 
     showInfo() {
-        this.growl.show({severity:'info', summary: 'Info Message', detail:'Message Content', life: 3000});
+        this.toast.show({severity:'info', summary: 'Info Message', detail:'Message Content', life: 3000});
     }
 
     showWarn() {
-        this.growl.show({severity:'warn', summary: 'Warn Message', detail:'Message Content', life: 3000});
+        this.toast.show({severity:'warn', summary: 'Warn Message', detail:'Message Content', life: 3000});
     }
 
     showError() {
-        this.growl.show({severity:'error', summary: 'Error Message', detail:'Message Content', life: 3000});
+        this.toast.show({severity:'error', summary: 'Error Message', detail:'Message Content', life: 3000});
     }
 
     showTopLeft() {
-        this.growlTL.show({severity: 'info', summary: 'Info Message', detail: 'Message Content', life: 3000});
+        this.toastTL.show({severity: 'info', summary: 'Info Message', detail: 'Message Content', life: 3000});
     }
 
     showBottomLeft() {
-        this.growlBL.show({severity:'warn', summary: 'Warn Message', detail:'Message Content', life: 3000});
+        this.toastBL.show({severity:'warn', summary: 'Warn Message', detail:'Message Content', life: 3000});
     }
 
     showBottomRight() {
-        this.growlBR.show({severity:'success', summary: 'Success Message', detail:'Message Content', life: 3000});
+        this.toastBR.show({severity:'success', summary: 'Success Message', detail:'Message Content', life: 3000});
     }
 
     showSticky() {
-        this.growl.show({severity: 'info', summary: 'Sticky Message', detail: 'Message Content', sticky: true});
+        this.toast.show({severity: 'info', summary: 'Sticky Message', detail: 'Message Content', sticky: true});
     }
 
     showConfirm() {
-        this.growlBC.show({ severity: 'warn', sticky: true, content: (
+        this.toastBC.show({ severity: 'warn', sticky: true, content: (
             <div className="p-flex p-flex-column" style={{flex: '1'}}>
                 <div className="p-text-center">
                     <i className="pi pi-exclamation-triangle" style={{fontSize: '3rem'}}></i>
@@ -75,7 +75,7 @@ export class GrowlDemo extends Component {
     }
 
     showMultiple() {
-        this.growl.show([
+        this.toast.show([
             {severity:'info', summary:'Message 1', detail:'Message 1 Content', life: 3000},
             {severity:'info', summary:'Message 2', detail:'Message 2 Content', life: 3000},
             {severity:'info', summary:'Message 3', detail:'Message 3 Content', life: 3000}
@@ -83,27 +83,27 @@ export class GrowlDemo extends Component {
     }
 
     clear() {
-        this.growl.clear();
+        this.toast.clear();
     }
 
     render() {
         return (
             <div>
-                <div className="content-section introduction growl-demo">
-                    <AppInlineHeader changelogText="growl">
-                        <h1>Growl</h1>
-                        <p>Growl is used to display messages in an overlay.</p>
+                <div className="content-section introduction toast-demo">
+                    <AppInlineHeader changelogText="toast">
+                        <h1>Toast</h1>
+                        <p>Toast is used to display messages in an overlay.</p>
                     </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <Growl ref={(el) => this.growl = el} />
-                    <Growl ref={(el) => this.growlTL = el} position="top-left" />
-                    <Growl ref={(el) => this.growlBL = el} position="bottom-left" />
-                    <Growl ref={(el) => this.growlBR = el} position="bottom-right" />
-                    <Growl ref={(el) => this.growlBC = el} position="bottom-center" />
+                    <Toast ref={(el) => this.toast = el} />
+                    <Toast ref={(el) => this.toastTL = el} position="top-left" />
+                    <Toast ref={(el) => this.toastBL = el} position="bottom-left" />
+                    <Toast ref={(el) => this.toastBR = el} position="bottom-right" />
+                    <Toast ref={(el) => this.toastBC = el} position="bottom-center" />
 
-                    <div className="card growl-demo">
+                    <div className="card toast-demo">
                         <h5>Severities</h5>
                         <Button label="Success" className="p-button-success" onClick={this.showSuccess} />
                         <Button label="Info" className="p-button-info" onClick={this.showInfo} />
@@ -127,7 +127,7 @@ export class GrowlDemo extends Component {
                     </div>
                 </div>
 
-                <GrowlDoc />
+                <ToastDoc />
             </div>
         )
     }

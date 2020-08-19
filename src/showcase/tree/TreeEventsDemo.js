@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Tree } from '../../components/tree/Tree';
-import { Growl } from '../../components/growl/Growl';
+import { Toast } from '../../components/toast/Toast';
 import { NodeService } from '../service/NodeService';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { LiveEditor } from '../liveeditor/LiveEditor';
@@ -28,19 +28,19 @@ export class TreeEventsDemo extends Component {
     }
 
     onExpand(event) {
-        this.growl.show({ severity: 'success', summary: 'Node Expanded', detail: event.node.label });
+        this.toast.show({ severity: 'success', summary: 'Node Expanded', detail: event.node.label });
     }
 
     onCollapse(event) {
-        this.growl.show({ severity: 'success', summary: 'Node Collapsed', detail: event.node.label });
+        this.toast.show({ severity: 'success', summary: 'Node Collapsed', detail: event.node.label });
     }
 
     onSelect(event) {
-        this.growl.show({ severity: 'info', summary: 'Node Selected', detail: event.node.label });
+        this.toast.show({ severity: 'info', summary: 'Node Selected', detail: event.node.label });
     }
 
     onUnselect(event) {
-        this.growl.show({ severity: 'info', summary: 'Node Unselected', detail: event.node.label });
+        this.toast.show({ severity: 'info', summary: 'Node Unselected', detail: event.node.label });
     }
 
     render() {
@@ -54,7 +54,7 @@ export class TreeEventsDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Growl ref={(el) => this.growl = el} />
+                    <Toast ref={(el) => this.toast = el} />
 
                     <div className="card">
                         <Tree value={this.state.nodes} selectionMode="single" selectionKeys={this.state.selectedNodeKey} onSelectionChange={e => this.setState({ selectedNodeKey: e.value })}
@@ -79,7 +79,7 @@ export class TreeEventsDemoDoc extends Component {
                 content: `
 import React, { Component } from 'react';
 import { Tree } from 'primereact/tree';
-import { Growl } from 'primereact/growl';
+import { Toast } from 'primereact/toast';
 import { NodeService } from '../service/NodeService';
 
 export class TreeEventsDemo extends Component {
@@ -104,25 +104,25 @@ export class TreeEventsDemo extends Component {
     }
 
     onExpand(event) {
-        this.growl.show({ severity: 'success', summary: 'Node Expanded', detail: event.node.label });
+        this.toast.show({ severity: 'success', summary: 'Node Expanded', detail: event.node.label });
     }
 
     onCollapse(event) {
-        this.growl.show({ severity: 'success', summary: 'Node Collapsed', detail: event.node.label });
+        this.toast.show({ severity: 'success', summary: 'Node Collapsed', detail: event.node.label });
     }
 
     onSelect(event) {
-        this.growl.show({ severity: 'info', summary: 'Node Selected', detail: event.node.label });
+        this.toast.show({ severity: 'info', summary: 'Node Selected', detail: event.node.label });
     }
 
     onUnselect(event) {
-        this.growl.show({ severity: 'info', summary: 'Node Unselected', detail: event.node.label });
+        this.toast.show({ severity: 'info', summary: 'Node Unselected', detail: event.node.label });
     }
 
     render() {
         return (
             <div>
-                <Growl ref={(el) => this.growl = el} />
+                <Toast ref={(el) => this.toast = el} />
 
                 <div className="card">
                     <Tree value={this.state.nodes} selectionMode="single" selectionKeys={this.state.selectedNodeKey} onSelectionChange={e => this.setState({ selectedNodeKey: e.value })}
@@ -139,38 +139,38 @@ export class TreeEventsDemo extends Component {
                 content: `
 import React, { useState, useEffect, useRef } from 'react';
 import {Tree} from 'primereact/tree';
-import {Growl} from 'primereact/growl';
+import {Toast} from 'primereact/toast';
 import {NodeService} from '../service/NodeService';
 
 const TreeEventsDemo = () => {
     const [nodes, setNodes] = useState([]);
     const [selectedNodeKey, setSelectedNodeKey] = useState(null);
     const nodeService = new NodeService();
-    let growl = useRef(null);
+    let toast = useRef(null);
 
     useEffect(() => {
         nodeService.getTreeNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onExpand = (event) => {
-        growl.current.show({severity: 'success', summary: 'Node Expanded', detail: event.node.label});
+        toast.current.show({severity: 'success', summary: 'Node Expanded', detail: event.node.label});
     };
 
     const onCollapse = (event) => {
-        growl.current.show({severity: 'success', summary: 'Node Collapsed', detail: event.node.label});
+        toast.current.show({severity: 'success', summary: 'Node Collapsed', detail: event.node.label});
     };
 
     const onSelect = (event) => {
-        growl.current.show({severity: 'info', summary: 'Node Selected', detail: event.node.label});
+        toast.current.show({severity: 'info', summary: 'Node Selected', detail: event.node.label});
     }
 
     const onUnselect = (event) => {
-        growl.current.show({severity: 'info', summary: 'Node Unselected', detail: event.node.label});
+        toast.current.show({severity: 'info', summary: 'Node Unselected', detail: event.node.label});
     };
 
     return (
         <div>
-            <Growl ref={growl} />
+            <Toast ref={toast} />
 
             <h3 className="first">Events</h3>
             <Tree value={nodes} selectionMode="single" selectionKeys={selectedNodeKey} onSelectionChange={e => setSelectedNodeKey(e.value)}
@@ -185,38 +185,38 @@ const TreeEventsDemo = () => {
                 content: `
 import React, { useState, useEffect, useRef } from 'react';
 import {Tree} from 'primereact/tree';
-import {Growl} from 'primereact/growl';
+import {Toast} from 'primereact/toast';
 import {NodeService} from '../service/NodeService';
 
 const TreeEventsDemo = () => {
     const [nodes, setNodes] = useState([]);
     const [selectedNodeKey, setSelectedNodeKey] = useState<any>(null);
     const nodeService = new NodeService();
-    let growl = useRef<any>(null);
+    let toast = useRef<any>(null);
 
     useEffect(() => {
         nodeService.getTreeNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onExpand = (event: any) => {
-        growl.current.show({severity: 'success', summary: 'Node Expanded', detail: event.node.label});
+        toast.current.show({severity: 'success', summary: 'Node Expanded', detail: event.node.label});
     };
 
     const onCollapse = (event: any) => {
-        growl.current.show({severity: 'success', summary: 'Node Collapsed', detail: event.node.label});
+        toast.current.show({severity: 'success', summary: 'Node Collapsed', detail: event.node.label});
     };
 
     const onSelect = (event: any) => {
-        growl.current.show({severity: 'info', summary: 'Node Selected', detail: event.node.label});
+        toast.current.show({severity: 'info', summary: 'Node Selected', detail: event.node.label});
     }
 
     const onUnselect = (event: any) => {
-        growl.current.show({severity: 'info', summary: 'Node Unselected', detail: event.node.label});
+        toast.current.show({severity: 'info', summary: 'Node Unselected', detail: event.node.label});
     };
 
     return (
         <div>
-            <Growl ref={growl} />
+            <Toast ref={toast} />
 
             <h3 className="first">Events</h3>
             <Tree value={nodes} selectionMode="single" selectionKeys={selectedNodeKey} onSelectionChange={e => setSelectedNodeKey(e.value)}

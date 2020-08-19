@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Captcha } from '../../components/captcha/Captcha';
-import { Growl } from '../../components/growl/Growl';
+import { Toast } from '../../components/toast/Toast';
 import { CaptchaDoc } from './CaptchaDoc';
 import { AppInlineHeader } from '../../AppInlineHeader';
 
@@ -12,7 +12,7 @@ export class CaptchaDemo extends Component {
     }
 
     showResponse() {
-        this.growl.show({ severity: 'info', summary: 'Success', detail: 'User Responded' });
+        this.toast.show({ severity: 'info', summary: 'Success', detail: 'User Responded' });
     }
 
     render() {
@@ -26,7 +26,7 @@ export class CaptchaDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Growl ref={(el) => this.growl = el}></Growl>
+                    <Toast ref={(el) => this.toast = el}></Toast>
 
                     <div className="card">
                         <Captcha siteKey="6Lf2XQkTAAAAANcvOwYqPxWL4iZDksFqHpS39GDA" onResponse={this.showResponse} />

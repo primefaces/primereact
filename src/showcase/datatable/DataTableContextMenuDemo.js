@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { DataTable } from '../../components/datatable/DataTable';
 import { Column } from '../../components/column/Column';
 import { ContextMenu } from '../../components/contextmenu/ContextMenu';
-import { Growl } from '../../components/growl/Growl';
+import { Toast } from '../../components/toast/Toast';
 import ProductService from '../service/ProductService';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { LiveEditor } from '../liveeditor/LiveEditor';
@@ -34,14 +34,14 @@ export class DataTableContextMenuDemo extends Component {
     }
 
     viewProduct(product) {
-        this.growl.show({severity: 'info', summary: 'Product Selected', detail: product.name});
+        this.toast.show({severity: 'info', summary: 'Product Selected', detail: product.name});
     }
 
     deleteProduct(product) {
         let products = [...this.state.products];
         products = products.filter((p) => p.id !== product.id);
 
-        this.growl.show({severity: 'info', summary: 'Product Deleted', detail: product.name});
+        this.toast.show({severity: 'info', summary: 'Product Deleted', detail: product.name});
         this.setState({ products });
     }
 
@@ -64,7 +64,7 @@ export class DataTableContextMenuDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Growl ref={(el) => { this.growl = el; }}></Growl>
+                    <Toast ref={(el) => { this.toast = el; }}></Toast>
 
                     <ContextMenu model={this.menuModel} ref={el => this.cm = el} onHide={() => this.setState({ selectedProduct: null })}/>
 
@@ -99,7 +99,7 @@ import React, { Component } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { ContextMenu } from 'primereact/contextmenu';
-import { Growl } from 'primereact/growl';
+import { Toast } from 'primereact/toast';
 import ProductService from '../service/ProductService';
 
 export class DataTableContextMenuDemo extends Component {
@@ -128,14 +128,14 @@ export class DataTableContextMenuDemo extends Component {
     }
 
     viewProduct(product) {
-        this.growl.show({severity: 'info', summary: 'Product Selected', detail: product.name});
+        this.toast.show({severity: 'info', summary: 'Product Selected', detail: product.name});
     }
 
     deleteProduct(product) {
         let products = [...this.state.products];
         products = products.filter((p) => p.id !== product.id);
 
-        this.growl.show({severity: 'info', summary: 'Product Deleted', detail: product.name});
+        this.toast.show({severity: 'info', summary: 'Product Deleted', detail: product.name});
         this.setState({ products });
     }
 
@@ -150,7 +150,7 @@ export class DataTableContextMenuDemo extends Component {
     render() {
         return (
             <div>
-                <Growl ref={(el) => { this.growl = el; }}></Growl>
+                <Toast ref={(el) => { this.toast = el; }}></Toast>
 
                 <ContextMenu model={this.menuModel} ref={el => this.cm = el} onHide={() => this.setState({ selectedProduct: null })}/>
 
@@ -177,7 +177,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import {DataTable} from 'primereact/datatable';
 import {Column} from 'primereact/column';
 import {ContextMenu} from 'primereact/contextmenu';
-import {Growl} from 'primereact/growl';
+import {Toast} from 'primereact/toast';
 import {CarService} from '../service/CarService';
 
 const DataTableContextMenuDemo = () => {
@@ -189,7 +189,7 @@ const DataTableContextMenuDemo = () => {
     ];
 
     const carservice = new CarService();
-    let growl = useRef(null);
+    let toast = useRef(null);
     let cm = useRef(null);
 
     useEffect(() => {
@@ -197,20 +197,20 @@ const DataTableContextMenuDemo = () => {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const viewCar = (car) => {
-        growl.current.show({severity: 'info', summary: 'Car Selected', detail: car.vin + ' - ' + car.brand});
+        toast.current.show({severity: 'info', summary: 'Car Selected', detail: car.vin + ' - ' + car.brand});
     };
 
     const deleteCar = (car) => {
         let carsList = [...cars];
         carsList = carsList.filter((c) => c.vin !== car.vin);
 
-        growl.current.show({severity: 'info', summary: 'Car Delete', detail: car.vin + ' - ' + car.brand});
+        toast.current.show({severity: 'info', summary: 'Car Delete', detail: car.vin + ' - ' + car.brand});
         setCars(carsList);
     };
 
     return (
         <div>
-            <Growl ref={growl}></Growl>
+            <Toast ref={toast}></Toast>
 
             <ContextMenu model={menu} ref={cm} onHide={() => setSelectedCar(null)}/>
 
@@ -234,7 +234,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import {DataTable} from 'primereact/datatable';
 import {Column} from 'primereact/column';
 import {ContextMenu} from 'primereact/contextmenu';
-import {Growl} from 'primereact/growl';
+import {Toast} from 'primereact/toast';
 import {CarService} from '../service/CarService';
 
 const DataTableContextMenuDemo = () => {
@@ -246,7 +246,7 @@ const DataTableContextMenuDemo = () => {
     ];
 
     const carservice = new CarService();
-    let growl = useRef<any>(null);
+    let toast = useRef<any>(null);
     let cm = useRef<any>(null);
 
     useEffect(() => {
@@ -254,20 +254,20 @@ const DataTableContextMenuDemo = () => {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const viewCar = (car: any) => {
-        growl.current.show({severity: 'info', summary: 'Car Selected', detail: car.vin + ' - ' + car.brand});
+        toast.current.show({severity: 'info', summary: 'Car Selected', detail: car.vin + ' - ' + car.brand});
     };
 
     const deleteCar = (car: any) => {
         let carsList: any = [...cars];
         carsList = carsList.filter((c) => c.vin !== car.vin);
 
-        growl.current.show({severity: 'info', summary: 'Car Delete', detail: car.vin + ' - ' + car.brand});
+        toast.current.show({severity: 'info', summary: 'Car Delete', detail: car.vin + ' - ' + car.brand});
         setCars(carsList);
     };
 
     return (
         <div>
-            <Growl ref={growl}></Growl>
+            <Toast ref={toast}></Toast>
 
             <ContextMenu model={menu} ref={cm} onHide={() => setSelectedCar(null)}/>
 

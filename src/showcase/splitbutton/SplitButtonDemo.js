@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { SplitButton } from '../../components/splitbutton/SplitButton';
-import { Growl } from '../../components/growl/Growl';
+import { Toast } from '../../components/toast/Toast';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { SplitButtonDoc } from './SplitButtonDoc';
 
@@ -14,14 +14,14 @@ export class SplitButtonDemo extends Component {
                 label: 'Update',
                 icon: 'pi pi-refresh',
                 command: () => {
-                    this.growl.show({severity:'success', summary:'Updated', detail:'Data Updated'});
+                    this.toast.show({severity:'success', summary:'Updated', detail:'Data Updated'});
                 }
             },
             {
                 label: 'Delete',
                 icon: 'pi pi-times',
                 command: () => {
-                    this.growl.show({ severity: 'success', summary: 'Delete', detail: 'Data Deleted' });
+                    this.toast.show({ severity: 'success', summary: 'Delete', detail: 'Data Deleted' });
                 }
             },
             {
@@ -43,7 +43,7 @@ export class SplitButtonDemo extends Component {
     }
 
     save() {
-        this.growl.show({severity: 'success', summary: 'Success', detail: 'Data Saved'});
+        this.toast.show({severity: 'success', summary: 'Success', detail: 'Data Saved'});
     }
 
     render() {
@@ -57,7 +57,7 @@ export class SplitButtonDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Growl ref={(el) => this.growl = el}></Growl>
+                    <Toast ref={(el) => this.toast = el}></Toast>
 
                     <div className="card">
                         <h5>Basic</h5>

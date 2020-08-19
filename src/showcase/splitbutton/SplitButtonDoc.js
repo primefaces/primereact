@@ -15,7 +15,7 @@ export class SplitButtonDoc extends Component {
                 content: `
 import React, { Component } from 'react';
 import { SplitButton } from 'primereact/splitbutton';
-import { Growl } from 'primereact/growl';
+import { Toast } from 'primereact/toast';
 
 export class SplitButtonDemo extends Component {
 
@@ -27,14 +27,14 @@ export class SplitButtonDemo extends Component {
                 label: 'Update',
                 icon: 'pi pi-refresh',
                 command: () => {
-                    this.growl.show({severity:'success', summary:'Updated', detail:'Data Updated'});
+                    this.toast.show({severity:'success', summary:'Updated', detail:'Data Updated'});
                 }
             },
             {
                 label: 'Delete',
                 icon: 'pi pi-times',
                 command: () => {
-                    this.growl.show({ severity: 'success', summary: 'Delete', detail: 'Data Deleted' });
+                    this.toast.show({ severity: 'success', summary: 'Delete', detail: 'Data Deleted' });
                 }
             },
             {
@@ -56,13 +56,13 @@ export class SplitButtonDemo extends Component {
     }
 
     save() {
-        this.growl.show({severity: 'success', summary: 'Success', detail: 'Data Saved'});
+        this.toast.show({severity: 'success', summary: 'Success', detail: 'Data Saved'});
     }
 
     render() {
         return (
             <div>
-                <Growl ref={(el) => this.growl = el}></Growl>
+                <Toast ref={(el) => this.toast = el}></Toast>
 
                 <div className="card">
                     <h5>Basic</h5>
@@ -88,23 +88,23 @@ export class SplitButtonDemo extends Component {
                 content: `
 import React, { useRef } from 'react';
 import {SplitButton} from 'primereact/splitbutton';
-import {Growl} from 'primereact/growl';
+import {Toast} from 'primereact/toast';
 
 const SplitButtonDemo = () => {
-    let growl = useRef(null);
+    let toast = useRef(null);
     const items = [
         {
             label: 'Update',
             icon: 'pi pi-refresh',
             command: () => {
-                growl.current.show({severity:'success', summary:'Updated', detail:'Data Updated'});
+                toast.current.show({severity:'success', summary:'Updated', detail:'Data Updated'});
             }
         },
         {
             label: 'Delete',
             icon: 'pi pi-times',
             command: () => {
-                growl.current.show({ severity: 'success', summary: 'Delete', detail: 'Data Deleted' });
+                toast.current.show({ severity: 'success', summary: 'Delete', detail: 'Data Deleted' });
             }
         },
         {
@@ -123,12 +123,12 @@ const SplitButtonDemo = () => {
     ];
 
     const save = () => {
-        growl.current.show({severity: 'success', summary: 'Success', detail: 'Data Saved'});
+        toast.current.show({severity: 'success', summary: 'Success', detail: 'Data Saved'});
     }
 
     return (
         <div className="splitbutton-demo">
-            <Growl ref={growl}></Growl>
+            <Toast ref={toast}></Toast>
 
             <h3 className="first">Basic</h5>
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items}></SplitButton>
@@ -149,23 +149,23 @@ const SplitButtonDemo = () => {
                 content: `
 import React, { useRef } from 'react';
 import {SplitButton} from 'primereact/splitbutton';
-import {Growl} from 'primereact/growl';
+import {Toast} from 'primereact/toast';
 
 const SplitButtonDemo = () => {
-    let growl = useRef<any>(null);
+    let toast = useRef<any>(null);
     const items = [
         {
             label: 'Update',
             icon: 'pi pi-refresh',
             command: () => {
-                growl.current.show({severity:'success', summary:'Updated', detail:'Data Updated'});
+                toast.current.show({severity:'success', summary:'Updated', detail:'Data Updated'});
             }
         },
         {
             label: 'Delete',
             icon: 'pi pi-times',
             command: () => {
-                growl.current.show({ severity: 'success', summary: 'Delete', detail: 'Data Deleted' });
+                toast.current.show({ severity: 'success', summary: 'Delete', detail: 'Data Deleted' });
             }
         },
         {
@@ -184,12 +184,12 @@ const SplitButtonDemo = () => {
     ];
 
     const save = () => {
-        growl.current.show({severity: 'success', summary: 'Success', detail: 'Data Saved'});
+        toast.current.show({severity: 'success', summary: 'Success', detail: 'Data Saved'});
     }
 
     return (
         <div className="splitbutton-demo">
-            <Growl ref={growl}></Growl>
+            <Toast ref={toast}></Toast>
 
             <h3 className="first">Basic</h5>
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items}></SplitButton>
@@ -247,14 +247,14 @@ export class SplitButtonDemo extends Component {
                     label: 'Update',
                     icon: 'pi pi-refresh',
                     command: (e) => {
-                        this.growl.show({severity:'success', summary:'Updated', detail:'Data Updated'});
+                        this.toast.show({severity:'success', summary:'Updated', detail:'Data Updated'});
                     }
                 },
                 {
                     label: 'Delete',
                     icon: 'pi pi-times',
                     command: (e) => {
-                        this.growl.show({ severity: 'success', summary: 'Delete', detail: 'Data Deleted' });
+                        this.toast.show({ severity: 'success', summary: 'Delete', detail: 'Data Deleted' });
                     }
                 },
                 {
@@ -277,7 +277,7 @@ export class SplitButtonDemo extends Component {
     }
 
     save() {
-        this.growl.show({severity: 'success', summary: 'Success', detail: 'Data Saved'});
+        this.toast.show({severity: 'success', summary: 'Success', detail: 'Data Saved'});
     }
 
     render() {

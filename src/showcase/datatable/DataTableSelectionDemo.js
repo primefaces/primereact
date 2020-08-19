@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { DataTable } from '../../components/datatable/DataTable';
 import { Column } from '../../components/column/Column';
 import ProductService from '../service/ProductService';
-import { Growl } from '../../components/growl/Growl';
+import { Toast } from '../../components/toast/Toast';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { LiveEditor } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
@@ -32,11 +32,11 @@ export class DataTableSelectionDemo extends Component {
     }
 
     onRowSelect(event) {
-        this.growl.show({ severity: 'info', summary: 'Product Selected', detail: 'Name: ' + event.data.name, life: 3000 });
+        this.toast.show({ severity: 'info', summary: 'Product Selected', detail: 'Name: ' + event.data.name, life: 3000 });
     }
 
     onRowUnselect(event) {
-        this.growl.show({ severity: 'warn', summary: 'Product Unselected', detail: 'Name: ' + event.data.name, life: 3000 });
+        this.toast.show({ severity: 'warn', summary: 'Product Unselected', detail: 'Name: ' + event.data.name, life: 3000 });
     }
 
     render() {
@@ -51,7 +51,7 @@ export class DataTableSelectionDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Growl ref={(el) => this.growl = el} />
+                    <Toast ref={(el) => this.toast = el} />
 
                     <div className="card">
                         <h5>Single</h5>
@@ -139,7 +139,7 @@ import React, { Component } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import ProductService from '../service/ProductService';
-import { Growl } from 'primereact/growl';
+import { Toast } from 'primereact/toast';
 
 export class DataTableSelectionDemo extends Component {
 
@@ -166,17 +166,17 @@ export class DataTableSelectionDemo extends Component {
     }
 
     onRowSelect(event) {
-        this.growl.show({ severity: 'info', summary: 'Product Selected', detail: 'Name: ' + event.data.name, life: 3000 });
+        this.toast.show({ severity: 'info', summary: 'Product Selected', detail: 'Name: ' + event.data.name, life: 3000 });
     }
 
     onRowUnselect(event) {
-        this.growl.show({ severity: 'warn', summary: 'Product Unselected', detail: 'Name: ' + event.data.name, life: 3000 });
+        this.toast.show({ severity: 'warn', summary: 'Product Unselected', detail: 'Name: ' + event.data.name, life: 3000 });
     }
 
     render() {
         return (
             <div>
-                <Growl ref={(el) => this.growl = el} />
+                <Toast ref={(el) => this.toast = el} />
 
                 <div className="card">
                     <h5>Single</h5>

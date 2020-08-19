@@ -20,7 +20,7 @@ import AppFooter from './AppFooter';
 import AppConfig from './AppConfig';
 
 import AppContentContext from './AppContentContext';
-import { Growl } from './components/growl/Growl';
+import { Toast } from './components/toast/Toast';
 import PrimeReact from './components/utils/PrimeReact';
 import { AppChangelogDialog } from './AppChangelogDialog';
 
@@ -141,7 +141,7 @@ export class App extends Component {
 
     componentDidMount() {
         if (this.isOutdatedIE()) {
-            this.showcaseGrowl.show({ severity: 'warn', summary: 'Limited Functionality', detail: 'Although PrimeReact supports IE11, ThemeSwitcher in this application cannot be not fully supported by your browser. Please use a modern browser for the best experience of the showcase.', life: 6000 });
+            this.showcaseToast.show({ severity: 'warn', summary: 'Limited Functionality', detail: 'Although PrimeReact supports IE11, ThemeSwitcher in this application cannot be not fully supported by your browser. Please use a modern browser for the best experience of the showcase.', life: 6000 });
         }
     }
 
@@ -157,7 +157,7 @@ export class App extends Component {
 
         return (
             <div className={wrapperClassName}>
-                <Growl ref={(el) => this.showcaseGrowl = el} />
+                <Toast ref={(el) => this.showcaseToast = el} />
 
                 {/* <AppNews newsActive={this.state.newsActive} onHideNews={this.onHideNews}/> */}
 

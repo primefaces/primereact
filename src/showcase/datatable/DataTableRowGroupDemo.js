@@ -70,11 +70,11 @@ export class DataTableRowGroupDemo extends Component {
     }
 
     onRowGroupExpand(event) {
-        this.growl.show({ severity: 'info', summary: 'Row Group Expanded', detail: 'Value: ' + event.data, life: 3000 });
+        this.toast.show({ severity: 'info', summary: 'Row Group Expanded', detail: 'Value: ' + event.data, life: 3000 });
     }
 
     onRowGroupCollapse(event) {
-        this.growl.show({ severity: 'success', summary: 'Row Group Collapsed', detail: 'Value: ' + event.data, life: 3000 });
+        this.toast.show({ severity: 'success', summary: 'Row Group Collapsed', detail: 'Value: ' + event.data, life: 3000 });
     }
 
     calculateCustomerTotal(name) {
@@ -232,11 +232,11 @@ export class DataTableRowGroupDemo extends Component {
     }
 
     onRowGroupExpand(event) {
-        this.growl.show({ severity: 'info', summary: 'Row Group Expanded', detail: 'Value: ' + event.data, life: 3000 });
+        this.toast.show({ severity: 'info', summary: 'Row Group Expanded', detail: 'Value: ' + event.data, life: 3000 });
     }
 
     onRowGroupCollapse(event) {
-        this.growl.show({ severity: 'success', summary: 'Row Group Collapsed', detail: 'Value: ' + event.data, life: 3000 });
+        this.toast.show({ severity: 'success', summary: 'Row Group Collapsed', detail: 'Value: ' + event.data, life: 3000 });
     }
 
     calculateCustomerTotal(name) {

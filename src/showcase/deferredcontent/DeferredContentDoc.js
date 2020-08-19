@@ -16,7 +16,7 @@ import React, { Component } from 'react';
 import { DeferredContent } from 'primereact/deferredcontent';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { Growl } from 'primereact/growl';
+import { Toast } from 'primereact/toast';
 import ProductService from '../service/ProductService';
 
 export class DeferredContentDemo extends Component {
@@ -33,18 +33,18 @@ export class DeferredContentDemo extends Component {
     }
 
     onImageLoad() {
-        this.growl.show({ severity: 'success', summary: 'Image Initialized', detail: 'Scroll down to load the datatable' });
+        this.toast.show({ severity: 'success', summary: 'Image Initialized', detail: 'Scroll down to load the datatable' });
     }
 
     onDataLoad() {
         this.productService.getProductsSmall().then(data => this.setState({ products: data }));
-        this.growl.show({ severity: 'success', summary: 'Data Initialized', detail: 'Render Completed' });
+        this.toast.show({ severity: 'success', summary: 'Data Initialized', detail: 'Render Completed' });
     }
 
     render() {
         return (
             <div>
-                <Growl ref={(el) => this.growl = el} />
+                <Toast ref={(el) => this.toast = el} />
 
                 <div className="card">
                     <div style={{ height: '800px' }}>
@@ -80,25 +80,25 @@ import {DeferredContent} from 'primereact/deferredcontent';
 import {CarService} from "../service/CarService";
 import {DataTable} from 'primereact/datatable';
 import {Column} from 'primereact/column';
-import {Growl} from 'primereact/growl';
+import {Toast} from 'primereact/toast';
 
 const DeferredContentDemo = () => {
     const [cars, setCars] = useState([]);
     const carservice = new CarService();
-    let growl = useRef(null);
+    let toast = useRef(null);
 
     const onImageLoad = () => {
-        growl.current.show({severity: 'success', summary: 'Image Initialized', detail: 'Scroll down to load the datatable'});
+        toast.current.show({severity: 'success', summary: 'Image Initialized', detail: 'Scroll down to load the datatable'});
     }
 
     const onDataLoad = () => {
         carservice.getCarsSmall().then(data => setCars(data));
-        growl.current.show({severity: 'success', summary: 'Data Initialized', detail: 'Render Completed'});
+        toast.current.show({severity: 'success', summary: 'Data Initialized', detail: 'Render Completed'});
     }
 
     return (
         <div>
-            <Growl ref={growl} />
+            <Toast ref={toast} />
             <div style={{height:'800px'}}>
                 Scroll down to lazy load an image and the DataTable which initiates a query that is not executed on initial page load to speed up load performance.
             </div>
@@ -129,25 +129,25 @@ import {DeferredContent} from 'primereact/deferredcontent';
 import {CarService} from "../service/CarService";
 import {DataTable} from 'primereact/datatable';
 import {Column} from 'primereact/column';
-import {Growl} from 'primereact/growl';
+import {Toast} from 'primereact/toast';
 
 const DeferredContentDemo = () => {
     const [cars, setCars] = useState([]);
     const carservice = new CarService();
-    let growl = useRef<any>(null);
+    let toast = useRef<any>(null);
 
     const onImageLoad = () => {
-        growl.current.show({severity: 'success', summary: 'Image Initialized', detail: 'Scroll down to load the datatable'});
+        toast.current.show({severity: 'success', summary: 'Image Initialized', detail: 'Scroll down to load the datatable'});
     }
 
     const onDataLoad = () => {
         carservice.getCarsSmall().then(data => setCars(data));
-        growl.current.show({severity: 'success', summary: 'Data Initialized', detail: 'Render Completed'});
+        toast.current.show({severity: 'success', summary: 'Data Initialized', detail: 'Render Completed'});
     }
 
     return (
         <div>
-            <Growl ref={growl} />
+            <Toast ref={toast} />
             <div style={{height:'800px'}}>
                 Scroll down to lazy load an image and the DataTable which initiates a query that is not executed on initial page load to speed up load performance.
             </div>

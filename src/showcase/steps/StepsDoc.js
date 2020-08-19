@@ -15,7 +15,7 @@ export class StepsDoc extends Component {
                 content: `
 import React, { Component } from 'react';
 import { Steps } from 'primereact/steps';
-import { Growl } from 'primereact/growl';
+import { Toast } from 'primereact/toast';
 
 export class StepsDemo extends Component {
 
@@ -29,25 +29,25 @@ export class StepsDemo extends Component {
             {
                 label: 'Personal',
                 command: (event) => {
-                    this.growl.show({ severity: 'info', summary: 'First Step', detail: event.item.label });
+                    this.toast.show({ severity: 'info', summary: 'First Step', detail: event.item.label });
                 }
             },
             {
                 label: 'Seat',
                 command: (event) => {
-                    this.growl.show({ severity: 'info', summary: 'Seat Selection', detail: event.item.label });
+                    this.toast.show({ severity: 'info', summary: 'Seat Selection', detail: event.item.label });
                 }
             },
             {
                 label: 'Payment',
                 command: (event) => {
-                    this.growl.show({ severity: 'info', summary: 'Pay with CC', detail: event.item.label });
+                    this.toast.show({ severity: 'info', summary: 'Pay with CC', detail: event.item.label });
                 }
             },
             {
                 label: 'Confirmation',
                 command: (event) => {
-                    this.growl.show({ severity: 'info', summary: 'Last Step', detail: event.item.label });
+                    this.toast.show({ severity: 'info', summary: 'Last Step', detail: event.item.label });
                 }
             }
         ];
@@ -56,7 +56,7 @@ export class StepsDemo extends Component {
     render() {
         return (
             <div>
-                <Growl ref={(el) => { this.growl = el }}></Growl>
+                <Toast ref={(el) => { this.toast = el }}></Toast>
 
                 <div className="card">
                     <h5>Basic</h5>
@@ -76,42 +76,42 @@ export class StepsDemo extends Component {
                 content: `
 import React, { useState, useRef } from 'react';
 import {Steps} from 'primereact/steps';
-import {Growl} from 'primereact/growl';
+import {Toast} from 'primereact/toast';
 
 const StepsDemo = () => {
     const [activeIndex, setActiveIndex] = useState(1);
-    let growl = useRef(null);
+    let toast = useRef(null);
 
     const items = [
         {
             label: 'Personal',
             command: (event) => {
-                growl.current.show({severity:'info', summary:'First Step', detail: event.item.label});
+                toast.current.show({severity:'info', summary:'First Step', detail: event.item.label});
             }
         },
         {
             label: 'Seat',
             command: (event) => {
-                growl.current.show({severity:'info', summary:'Seat Selection', detail: event.item.label});
+                toast.current.show({severity:'info', summary:'Seat Selection', detail: event.item.label});
             }
         },
         {
             label: 'Payment',
             command: (event) => {
-                growl.current.show({severity:'info', summary:'Pay with CC', detail: event.item.label});
+                toast.current.show({severity:'info', summary:'Pay with CC', detail: event.item.label});
             }
         },
         {
             label: 'Confirmation',
             command: (event) => {
-                growl.current.show({severity:'info', summary:'Last Step', detail: event.item.label});
+                toast.current.show({severity:'info', summary:'Last Step', detail: event.item.label});
             }
         }
     ];
 
     return (
         <div>
-            <Growl ref={growl}></Growl>
+            <Toast ref={toast}></Toast>
 
             <h5>Basic</h5>
             <Steps model={items} />
@@ -131,42 +131,42 @@ const StepsDemo = () => {
                 content: `
 import React, { useState, useRef } from 'react';
 import {Steps} from 'primereact/steps';
-import {Growl} from 'primereact/growl';
+import {Toast} from 'primereact/toast';
 
 const StepsDemo = () => {
     const [activeIndex, setActiveIndex] = useState(1);
-    let growl = useRef<any>(null);
+    let toast = useRef<any>(null);
 
     const items = [
         {
             label: 'Personal',
             command: (event: any) => {
-                growl.current.show({severity:'info', summary:'First Step', detail: event.item.label});
+                toast.current.show({severity:'info', summary:'First Step', detail: event.item.label});
             }
         },
         {
             label: 'Seat',
             command: (event: any) => {
-                growl.current.show({severity:'info', summary:'Seat Selection', detail: event.item.label});
+                toast.current.show({severity:'info', summary:'Seat Selection', detail: event.item.label});
             }
         },
         {
             label: 'Payment',
             command: (event: any) => {
-                growl.current.show({severity:'info', summary:'Pay with CC', detail: event.item.label});
+                toast.current.show({severity:'info', summary:'Pay with CC', detail: event.item.label});
             }
         },
         {
             label: 'Confirmation',
             command: (event: any) => {
-                growl.current.show({severity:'info', summary:'Last Step', detail: event.item.label});
+                toast.current.show({severity:'info', summary:'Last Step', detail: event.item.label});
             }
         }
     ];
 
     return (
         <div>
-            <Growl ref={growl}></Growl>
+            <Toast ref={toast}></Toast>
 
             <h5>Basic</h5>
             <Steps model={items} />
@@ -238,25 +238,25 @@ const interactiveItems = [
     {
         label: 'Personal',
         command: (event) => {
-            this.growl.show({severity:'info', summary:'First Step', detail: event.item.label});
+            this.toast.show({severity:'info', summary:'First Step', detail: event.item.label});
         }
     },
     {
         label: 'Seat',
         command: (event) => {
-            this.growl.show({severity:'info', summary:'Seat Selection', detail: event.item.label});
+            this.toast.show({severity:'info', summary:'Seat Selection', detail: event.item.label});
         }
     },
     {
         label: 'Payment',
         command: (event) => {
-            this.growl.show({severity:'info', summary:'Pay with CC', detail: event.item.label});
+            this.toast.show({severity:'info', summary:'Pay with CC', detail: event.item.label});
         }
     },
     {
         label: 'Confirmation',
         command: (event) => {
-            this.growl.show({severity:'info', summary:'Last Step', detail: event.item.label});
+            this.toast.show({severity:'info', summary:'Last Step', detail: event.item.label});
         }
     }
 ];

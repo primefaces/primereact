@@ -27,11 +27,11 @@ export class TreeSelectionDemo extends Component {
     }
 
     onNodeSelect(node) {
-        this.growl.show({ severity: 'success', summary: 'Node Selected', detail: node.label, life: 3000 });
+        this.toast.show({ severity: 'success', summary: 'Node Selected', detail: node.label, life: 3000 });
     }
 
     onNodeUnselect(node) {
-        this.growl.show({ severity: 'success', summary: 'Node Unselected', detail: node.label, life: 3000 });
+        this.toast.show({ severity: 'success', summary: 'Node Unselected', detail: node.label, life: 3000 });
     }
 
     render() {
@@ -100,11 +100,11 @@ export class TreeSelectionDemo extends Component {
     }
 
     onNodeSelect(node) {
-        this.growl.show({ severity: 'success', summary: 'Node Selected', detail: node.label, life: 3000 });
+        this.toast.show({ severity: 'success', summary: 'Node Selected', detail: node.label, life: 3000 });
     }
 
     onNodeUnselect(node) {
-        this.growl.show({ severity: 'success', summary: 'Node Unselected', detail: node.label, life: 3000 });
+        this.toast.show({ severity: 'success', summary: 'Node Unselected', detail: node.label, life: 3000 });
     }
 
     render() {

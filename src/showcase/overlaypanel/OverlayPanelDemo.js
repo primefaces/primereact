@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { OverlayPanel } from '../../components/overlaypanel/OverlayPanel';
 import { Button } from '../../components/button/Button';
-import { Growl } from '../../components/growl/Growl';
+import { Toast } from '../../components/toast/Toast';
 import { Column } from '../../components/column/Column';
 import { DataTable } from '../../components/datatable/DataTable';
 import ProductService from '../service/ProductService';
@@ -36,7 +36,7 @@ export class OverlayPanelDemo extends Component {
     onProductSelect(e) {
         this.setState({ selectedProduct: e.value }, () => {
             this.op.hide();
-            this.growl.show({severity:'info', summary: 'Product Selected', detail: this.state.selectedProduct.name, life: 3000});
+            this.toast.show({severity:'info', summary: 'Product Selected', detail: this.state.selectedProduct.name, life: 3000});
         });
     }
 
@@ -59,7 +59,7 @@ export class OverlayPanelDemo extends Component {
                 </div>
 
                 <div className="content-section implementation overlaypanel-demo">
-                    <Growl ref={(el) => this.growl = el} />
+                    <Toast ref={(el) => this.toast = el} />
 
                     <div className="card">
                         <Button type="button" icon="pi pi-search" label={this.state.selectedProduct ? this.state.selectedProduct.name : 'Select a Product'} onClick={(e) => this.op.toggle(e)} aria-haspopup aria-controls="overlay_panel" className="select-product-button" />

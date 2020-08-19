@@ -16,7 +16,7 @@ export class MenuDoc extends Component {
 import React, { Component } from 'react';
 import { Menu } from 'primereact/menu';
 import { Button } from 'primereact/button';
-import { Growl } from 'primereact/growl';
+import { Toast } from 'primereact/toast';
 
 export class MenuDemo extends Component {
 
@@ -31,14 +31,14 @@ export class MenuDemo extends Component {
                         label: 'Update',
                         icon: 'pi pi-refresh',
                         command: () => {
-                            this.growl.show({ severity: 'success', summary: 'Updated', detail: 'Data Updated', life: 3000 });
+                            this.toast.show({ severity: 'success', summary: 'Updated', detail: 'Data Updated', life: 3000 });
                         }
                     },
                     {
                         label: 'Delete',
                         icon: 'pi pi-times',
                         command: () => {
-                            this.growl.show({ severity: 'warn', summary: 'Delete', detail: 'Data Deleted', life: 3000 });
+                            this.toast.show({ severity: 'warn', summary: 'Delete', detail: 'Data Deleted', life: 3000 });
                         }
                     }
                 ]
@@ -66,7 +66,7 @@ export class MenuDemo extends Component {
     render() {
         return (
             <div>
-                <Growl ref={(el) => { this.growl = el; }}></Growl>
+                <Toast ref={(el) => { this.toast = el; }}></Toast>
 
                 <div className="card">
                     <h5>Inline</h5>

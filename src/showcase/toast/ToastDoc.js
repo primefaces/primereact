@@ -4,7 +4,7 @@ import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
 import { LiveEditor } from '../liveeditor/LiveEditor';
 
-export class GrowlDoc extends Component {
+export class ToastDoc extends Component {
 
     constructor(props) {
         super(props);
@@ -14,11 +14,11 @@ export class GrowlDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import { Growl } from 'primereact/growl';
+import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';
-import './GrowlDemo.scss';
+import './ToastDemo.scss';
 
-export class GrowlDemo extends Component {
+export class ToastDemo extends Component {
 
     constructor(props) {
         super(props);
@@ -36,39 +36,39 @@ export class GrowlDemo extends Component {
     }
 
     showSuccess() {
-        this.growl.show({severity:'success', summary: 'Success Message', detail:'Message Content', life: 3000});
+        this.toast.show({severity:'success', summary: 'Success Message', detail:'Message Content', life: 3000});
     }
 
     showInfo() {
-        this.growl.show({severity:'info', summary: 'Info Message', detail:'Message Content', life: 3000});
+        this.toast.show({severity:'info', summary: 'Info Message', detail:'Message Content', life: 3000});
     }
 
     showWarn() {
-        this.growl.show({severity:'warn', summary: 'Warn Message', detail:'Message Content', life: 3000});
+        this.toast.show({severity:'warn', summary: 'Warn Message', detail:'Message Content', life: 3000});
     }
 
     showError() {
-        this.growl.show({severity:'error', summary: 'Error Message', detail:'Message Content', life: 3000});
+        this.toast.show({severity:'error', summary: 'Error Message', detail:'Message Content', life: 3000});
     }
 
     showTopLeft() {
-        this.growlTL.show({severity: 'info', summary: 'Info Message', detail: 'Message Content', life: 3000});
+        this.toastTL.show({severity: 'info', summary: 'Info Message', detail: 'Message Content', life: 3000});
     }
 
     showBottomLeft() {
-        this.growlBL.show({severity:'warn', summary: 'Warn Message', detail:'Message Content', life: 3000});
+        this.toastBL.show({severity:'warn', summary: 'Warn Message', detail:'Message Content', life: 3000});
     }
 
     showBottomRight() {
-        this.growlBR.show({severity:'success', summary: 'Success Message', detail:'Message Content', life: 3000});
+        this.toastBR.show({severity:'success', summary: 'Success Message', detail:'Message Content', life: 3000});
     }
 
     showSticky() {
-        this.growl.show({severity: 'info', summary: 'Sticky Message', detail: 'Message Content', sticky: true});
+        this.toast.show({severity: 'info', summary: 'Sticky Message', detail: 'Message Content', sticky: true});
     }
 
     showConfirm() {
-        this.growlBC.show({ severity: 'warn', sticky: true, content: (
+        this.toastBC.show({ severity: 'warn', sticky: true, content: (
             <div className="p-flex p-flex-column" style={{flex: '1'}}>
                 <div className="p-text-center">
                     <i className="pi pi-exclamation-triangle" style={{fontSize: '3rem'}}></i>
@@ -88,7 +88,7 @@ export class GrowlDemo extends Component {
     }
 
     showMultiple() {
-        this.growl.show([
+        this.toast.show([
             {severity:'info', summary:'Message 1', detail:'Message 1 Content', life: 3000},
             {severity:'info', summary:'Message 2', detail:'Message 2 Content', life: 3000},
             {severity:'info', summary:'Message 3', detail:'Message 3 Content', life: 3000}
@@ -96,19 +96,19 @@ export class GrowlDemo extends Component {
     }
 
     clear() {
-        this.growl.clear();
+        this.toast.clear();
     }
 
     render() {
         return (
             <div>
-                <Growl ref={(el) => this.growl = el} />
-                <Growl ref={(el) => this.growlTL = el} position="top-left" />
-                <Growl ref={(el) => this.growlBL = el} position="bottom-left" />
-                <Growl ref={(el) => this.growlBR = el} position="bottom-right" />
-                <Growl ref={(el) => this.growlBC = el} position="bottom-center" />
+                <Toast ref={(el) => this.toast = el} />
+                <Toast ref={(el) => this.toastTL = el} position="top-left" />
+                <Toast ref={(el) => this.toastBL = el} position="bottom-left" />
+                <Toast ref={(el) => this.toastBR = el} position="bottom-right" />
+                <Toast ref={(el) => this.toastBC = el} position="bottom-center" />
 
-                <div className="card growl-demo">
+                <div className="card toast-demo">
                     <h5>Severities</h5>
                     <Button label="Success" className="p-button-success" onClick={this.showSuccess} />
                     <Button label="Info" className="p-button-info" onClick={this.showInfo} />
@@ -140,41 +140,41 @@ export class GrowlDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useRef } from 'react';
-import {Growl} from 'primereact/growl';
+import {Toast} from 'primereact/toast';
 import {Button} from 'primereact/button';
 
-const GrowlDemo = () => {
-    let growl = useRef(null);
+const ToastDemo = () => {
+    let toast = useRef(null);
 
     const showSuccess = () => {
-        growl.current.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
+        toast.current.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
     }
 
     const showInfo = () => {
-        growl.current.show({severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks'});
+        toast.current.show({severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks'});
     }
 
     const showWarn = () => {
-        growl.current.show({severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes'});
+        toast.current.show({severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes'});
     }
 
     const showError = () => {
-        growl.current.show({severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
+        toast.current.show({severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
     }
 
     const showSticky = () => {
-        growl.current.show({severity: 'info', summary: 'Sticky Message', detail: 'You need to close Me', sticky: true});
+        toast.current.show({severity: 'info', summary: 'Sticky Message', detail: 'You need to close Me', sticky: true});
     }
 
     const showCustom = () => {
         const summary = <span><i className="pi pi-check" /> <strong>PrimeReact</strong></span>;
         const detail = <img alt="PrimeReact" src="showcase/images/logo.png" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" width="80px" style={{backgroundColor: '#212121', marginLeft: '22px'}} />
 
-        growl.current.show({severity: 'info', summary: summary, detail: detail, sticky: true });
+        toast.current.show({severity: 'info', summary: summary, detail: detail, sticky: true });
     }
 
     const showMultiple = () => {
-        growl.current.show([
+        toast.current.show([
             {severity:'info', summary:'Message 1', detail:'PrimeReact rocks'},
             {severity:'info', summary:'Message 2', detail:'PrimeReact rocks'},
             {severity:'info', summary:'Message 3', detail:'PrimeFaces rocks'}
@@ -182,12 +182,12 @@ const GrowlDemo = () => {
     }
 
     const clear = () => {
-        growl.current.clear();
+        toast.current.clear();
     }
 
     return (
         <div className="p-fluid">
-            <Growl ref={growl} />
+            <Toast ref={toast} />
 
             <h3 style={{marginTop: 0}}>Severities</h5>
             <div className="p-grid">
@@ -229,41 +229,41 @@ const GrowlDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useRef } from 'react';
-import {Growl} from 'primereact/growl';
+import {Toast} from 'primereact/toast';
 import {Button} from 'primereact/button';
 
-const GrowlDemo = () => {
-    let growl = useRef<any>(null);
+const ToastDemo = () => {
+    let toast = useRef<any>(null);
 
     const showSuccess = () => {
-        growl.current.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
+        toast.current.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
     }
 
     const showInfo = () => {
-        growl.current.show({severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks'});
+        toast.current.show({severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks'});
     }
 
     const showWarn = () => {
-        growl.current.show({severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes'});
+        toast.current.show({severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes'});
     }
 
     const showError = () => {
-        growl.current.show({severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
+        toast.current.show({severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
     }
 
     const showSticky = () => {
-        growl.current.show({severity: 'info', summary: 'Sticky Message', detail: 'You need to close Me', sticky: true});
+        toast.current.show({severity: 'info', summary: 'Sticky Message', detail: 'You need to close Me', sticky: true});
     }
 
     const showCustom = () => {
         const summary = <span><i className="pi pi-check" /> <strong>PrimeReact</strong></span>;
         const detail = <img alt="PrimeReact" src="showcase/images/logo.png" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" width="80px" style={{backgroundColor: '#212121', marginLeft: '22px'}} />
 
-        growl.current.show({severity: 'info', summary: summary, detail: detail, sticky: true });
+        toast.current.show({severity: 'info', summary: summary, detail: detail, sticky: true });
     }
 
     const showMultiple = () => {
-        growl.current.show([
+        toast.current.show([
             {severity:'info', summary:'Message 1', detail:'PrimeReact rocks'},
             {severity:'info', summary:'Message 2', detail:'PrimeReact rocks'},
             {severity:'info', summary:'Message 3', detail:'PrimeFaces rocks'}
@@ -271,12 +271,12 @@ const GrowlDemo = () => {
     }
 
     const clear = () => {
-        growl.current.clear();
+        toast.current.clear();
     }
 
     return (
         <div className="p-fluid">
-            <Growl ref={growl} />
+            <Toast ref={toast} />
 
             <h3 style={{marginTop: 0}}>Severities</h5>
             <div className="p-grid">
@@ -329,25 +329,25 @@ const GrowlDemo = () => {
                         <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
-import { Growl } from 'primereact/growl';
+import { Toast } from 'primereact/toast';
 `}
 </CodeHighlight>
 
                         <h5>Getting Started</h5>
                         <p>A single message is represented by the Message interface in PrimeReact that defines various properties such as severity,
-               summary and detail. Messages are displayed by using the <i>show</i> method on the ref of the Growl instance.</p>
+               summary and detail. Messages are displayed by using the <i>show</i> method on the ref of the Toast instance.</p>
 
-                        <p>Note that for animations, growl requires react-transition-group package.</p>
+                        <p>Note that for animations, toast requires react-transition-group package.</p>
 
 <CodeHighlight>
 {`
-<Growl ref={(el) => this.growl = el} />
+<Toast ref={(el) => this.toast = el} />
 `}
 </CodeHighlight>
 
 <CodeHighlight lang="js">
 {`
-this.growl.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
+this.toast.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
 `}
 </CodeHighlight>
 
@@ -418,7 +418,7 @@ this.growl.show({severity: 'success', summary: 'Success Message', detail: 'Order
 
 <CodeHighlight>
 {`
-<Growl ref={(el) => this.growl = el}></Growl>
+<Toast ref={(el) => this.toast = el}></Toast>
 
 <Button onClick={this.showSuccess} label="Success" className="p-button-success" />
 <Button onClick={this.showInfo} label="Info" className="p-button-info" />
@@ -431,23 +431,23 @@ this.growl.show({severity: 'success', summary: 'Success Message', detail: 'Order
 <CodeHighlight lang="js">
 {`
 showSuccess() {
-    this.growl.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
+    this.toast.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
 }
 
 showInfo() {
-    this.growl.show({severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks'});
+    this.toast.show({severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks'});
 }
 
 showWarn() {
-    this.growl.show({severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes'});
+    this.toast.show({severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes'});
 }
 
 showError() {
-    this.growl.show({severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
+    this.toast.show({severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
 }
 
 showMultiple() {
-    this.growl.show([
+    this.toast.show([
         {severity:'info', summary:'Message 1', detail:'PrimeReact rocks'},
         {severity:'info', summary:'Message 2', detail:'PrimeReact rocks'},
         {severity:'info', summary:'Message 3', detail:'PrimeFaces rocks'}
@@ -457,11 +457,11 @@ showMultiple() {
 </CodeHighlight>
 
                         <h5>Closable</h5>
-                        <p>Growls are closable by default resulting in a close icon being displayed on top right corner. In order to disable closable messages, set closable to false.</p>
+                        <p>Toasts are closable by default resulting in a close icon being displayed on top right corner. In order to disable closable messages, set closable to false.</p>
 
 <CodeHighlight lang="js">
 {`
-this.growl.show({closable: false, severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
+this.toast.show({closable: false, severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
 `}
 </CodeHighlight>
 
@@ -472,30 +472,30 @@ this.growl.show({closable: false, severity: 'error', summary: 'Error Message', d
 <CodeHighlight lang="js">
 {`
 //sticky
-this.growl.show({sticky: true, severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
+this.toast.show({sticky: true, severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
 
 //automatically removed after 5 seconds
-this.growl.show({life: 5000, severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
+this.toast.show({life: 5000, severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
 `}
 </CodeHighlight>
 
                         <h5>Position</h5>
-                        <p>There are four positions available for the growl container defined by the <i>position</i> property that defaults to "top-right". Other
+                        <p>There are four positions available for the toast container defined by the <i>position</i> property that defaults to "top-right". Other
                 valid values are "top-left", "bottom-left" and "bottom-right"
             </p>
 
 <CodeHighlight>
 {`
-<Growl ref={(el) => this.growl = el} position="top-left"></Growl>
+<Toast ref={(el) => this.toast = el} position="top-left"></Toast>
 `}
 </CodeHighlight>
 
                         <h5>Clearing Messages</h5>
-                        <p><i>clear()</i> method removes all messages from Growl.</p>
+                        <p><i>clear()</i> method removes all messages from Toast.</p>
 
 <CodeHighlight>
 {`
-this.growl.clear();
+this.toast.clear();
 `}
 </CodeHighlight>
 
@@ -539,7 +539,7 @@ this.growl.clear();
                                         <td>position</td>
                                         <td>string</td>
                                         <td>topright</td>
-                                        <td>Position of the growl in viewport, valid values are "top-right", "top-left", "bottom-left" and "bottom-right".</td>
+                                        <td>Position of the toast in viewport, valid values are "top-right", "top-left", "bottom-left" and "bottom-right".</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -582,31 +582,31 @@ this.growl.clear();
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>p-growl</td>
+                                        <td>p-toast</td>
                                         <td>Main container element.</td>
                                     </tr>
                                     <tr>
-                                        <td>p-growl-container</td>
+                                        <td>p-toast-container</td>
                                         <td>Container of a message item.</td>
                                     </tr>
                                     <tr>
-                                        <td>p-growl-item</td>
+                                        <td>p-toast-item</td>
                                         <td>Message element.</td>
                                     </tr>
                                     <tr>
-                                        <td>p-growl-icon-close</td>
+                                        <td>p-toast-icon-close</td>
                                         <td>Close icon of a message.</td>
                                     </tr>
                                     <tr>
-                                        <td>p-growl-image</td>
+                                        <td>p-toast-image</td>
                                         <td>Severity icon.</td>
                                     </tr>
                                     <tr>
-                                        <td>p-growl-message</td>
+                                        <td>p-toast-message</td>
                                         <td>Container of message texts.</td>
                                     </tr>
                                     <tr>
-                                        <td>p-growl-title</td>
+                                        <td>p-toast-title</td>
                                         <td>Summary of the message.</td>
                                     </tr>
                                 </tbody>
@@ -621,10 +621,10 @@ this.growl.clear();
                     </TabPanel>
 
                     <TabPanel header="Source">
-                        <LiveEditor name="GrowlDemo" sources={this.sources} />
+                        <LiveEditor name="ToastDemo" sources={this.sources} />
 <CodeHighlight lang="scss">
 {`
-.growl-demo {
+.toast-demo {
     button {
         min-width: 10rem;
         margin-right: .5rem;

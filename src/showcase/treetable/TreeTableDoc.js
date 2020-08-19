@@ -1580,7 +1580,7 @@ export class TreeTableFilterDemo extends Component {
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
-import { Growl } from 'primereact/growl';
+import { Toast } from 'primereact/toast';
 import { NodeService } from '../service/NodeService';
 
 export class TreeTableSelectionDemo extends Component {
@@ -1606,11 +1606,11 @@ export class TreeTableSelectionDemo extends Component {
     }
 
     onSelect(event) {
-        this.growl.show({severity: 'info', summary: 'Node Selected', detail: event.node.data.name});
+        this.toast.show({severity: 'info', summary: 'Node Selected', detail: event.node.data.name});
     }
 
     onUnselect(event) {
-        this.growl.show({severity: 'info', summary: 'Node Unselected', detail: event.node.data.name});
+        this.toast.show({severity: 'info', summary: 'Node Unselected', detail: event.node.data.name});
     }
 
     componentDidMount() {
@@ -1624,7 +1624,7 @@ export class TreeTableSelectionDemo extends Component {
     render() {
         return (
             <div>
-                <Growl ref={(el) => this.growl = el} />
+                <Toast ref={(el) => this.toast = el} />
 
                 <h3 className="first">Single</h5>
                 <TreeTable value={this.state.nodes1} selectionMode="single" selectionKeys={this.state.selectedNodeKey1} onSelectionChange={e => this.setState({selectedNodeKey1: e.value})}>
@@ -1890,7 +1890,7 @@ import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { ContextMenu } from 'primereact/contextmenu';
-import { Growl } from 'primereact/growl';
+import { Toast } from 'primereact/toast';
 import { NodeService } from '../service/NodeService';
 
 export class TreeTableContextMenuDemo extends Component {
@@ -1906,7 +1906,7 @@ export class TreeTableContextMenuDemo extends Component {
                     label: 'View Key',
                     icon: 'pi pi-search',
                     command: () => {
-                        this.growl.show({severity: 'success', summary: 'Node Key', detail: this.state.selectedNodeKey});
+                        this.toast.show({severity: 'success', summary: 'Node Key', detail: this.state.selectedNodeKey});
                     }
                 },
                 {
@@ -1934,7 +1934,7 @@ export class TreeTableContextMenuDemo extends Component {
     render() {
         return (
             <div>
-                <Growl ref={(el) => this.growl = el} />
+                <Toast ref={(el) => this.toast = el} />
 
                 <ContextMenu model={this.state.menu} ref={el => this.cm = el} onHide={() => this.setState({selectedNodeKey: null})}/>
 

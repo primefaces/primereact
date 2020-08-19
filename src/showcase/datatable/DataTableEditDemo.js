@@ -3,7 +3,7 @@ import { DataTable } from '../../components/datatable/DataTable';
 import { Column } from '../../components/column/Column';
 import { InputText } from '../../components/inputtext/InputText';
 import { Dropdown } from '../../components/dropdown/Dropdown';
-import { Growl } from '../../components/growl/Growl';
+import { Toast } from '../../components/toast/Toast';
 import ProductService from '../service/ProductService';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { LiveEditor } from '../liveeditor/LiveEditor';
@@ -178,7 +178,7 @@ export class DataTableEditDemo extends Component {
                 </div>
 
                 <div className="content-section implementation datatable-editing-demo">
-                    <Growl ref={(el) => this.growl = el} />
+                    <Toast ref={(el) => this.toast = el} />
 
                     <div className="card">
                         <h5>Basic Cell Editing</h5>
@@ -237,7 +237,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
-import { Growl } from 'primereact/growl';
+import { Toast } from 'primereact/toast';
 import ProductService from '../service/ProductService';
 
 export class DataTableEditDemo extends Component {
@@ -400,7 +400,7 @@ export class DataTableEditDemo extends Component {
     render() {
         return (
             <div className="datatable-editing-demo">
-                <Growl ref={(el) => this.growl = el} />
+                <Toast ref={(el) => this.toast = el} />
 
                 <div className="card">
                     <h5>Basic Cell Editing</h5>
@@ -451,7 +451,7 @@ import {DataTable} from 'primereact/datatable';
 import {Column} from 'primereact/column';
 import {InputText} from 'primereact/inputtext';
 import {Dropdown} from 'primereact/dropdown';
-import {Growl} from 'primereact/growl';
+import {Toast} from 'primereact/toast';
 import {CarService} from '../service/CarService';
 
 const DataTableEditDemo = () => {
@@ -460,7 +460,7 @@ const DataTableEditDemo = () => {
 
     const carservice = new CarService();
     let clonedCars = {};
-    let growl = useRef(null);
+    let toast = useRef(null);
 
     useEffect(() => {
         carservice.getCarsSmall().then(data => {
@@ -541,10 +541,10 @@ const DataTableEditDemo = () => {
     const onRowEditSave = (event) => {
         if (onRowEditorValidator(event.data)) {
             delete clonedCars[event.data.vin];
-            growl.current.show({severity: 'success', summary: 'Success', detail: 'Car is updated'});
+            toast.current.show({severity: 'success', summary: 'Success', detail: 'Car is updated'});
         }
         else {
-            growl.current.show({severity: 'error', summary: 'Error', detail: 'Brand is required'});
+            toast.current.show({severity: 'error', summary: 'Error', detail: 'Brand is required'});
         }
     }
 
@@ -557,7 +557,7 @@ const DataTableEditDemo = () => {
 
     return (
         <div>
-            <Growl ref={growl} />
+            <Toast ref={toast} />
 
             <h3>Cell Editing</h3>
             <DataTable value={cars1}>
@@ -588,7 +588,7 @@ import {DataTable} from 'primereact/datatable';
 import {Column} from 'primereact/column';
 import {InputText} from 'primereact/inputtext';
 import {Dropdown} from 'primereact/dropdown';
-import {Growl} from 'primereact/growl';
+import {Toast} from 'primereact/toast';
 import {CarService} from '../service/CarService';
 
 const DataTableEditDemo = () => {
@@ -597,7 +597,7 @@ const DataTableEditDemo = () => {
 
     const carservice = new CarService();
     let clonedCars: any = {};
-    let growl = useRef<any>(null);
+    let toast = useRef<any>(null);
 
     useEffect(() => {
         carservice.getCarsSmall().then(data => {
@@ -677,10 +677,10 @@ const DataTableEditDemo = () => {
     const onRowEditSave = (event: any) => {
         if (onRowEditorValidator(event.data)) {
             delete clonedCars[event.data.vin];
-            growl.current.show({severity: 'success', summary: 'Success', detail: 'Car is updated'});
+            toast.current.show({severity: 'success', summary: 'Success', detail: 'Car is updated'});
         }
         else {
-            growl.current.show({severity: 'error', summary: 'Error', detail: 'Brand is required'});
+            toast.current.show({severity: 'error', summary: 'Error', detail: 'Brand is required'});
         }
     }
 
@@ -693,7 +693,7 @@ const DataTableEditDemo = () => {
 
     return (
         <div>
-            <Growl ref={growl} />
+            <Toast ref={toast} />
 
             <h3>Cell Editing</h3>
             <DataTable value={cars1}>

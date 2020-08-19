@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TreeTable } from '../../components/treetable/TreeTable';
-import { Growl } from '../../components/growl/Growl';
+import { Toast } from '../../components/toast/Toast';
 import { Column } from '../../components/column/Column';
 import { NodeService } from '../service/NodeService';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
@@ -26,11 +26,11 @@ export class TreeTableSelectionDemo extends Component {
     }
 
     onSelect(event) {
-        this.growl.show({ severity: 'info', summary: 'Node Selected', detail: event.node.data.name });
+        this.toast.show({ severity: 'info', summary: 'Node Selected', detail: event.node.data.name });
     }
 
     onUnselect(event) {
-        this.growl.show({ severity: 'info', summary: 'Node Unselected', detail: event.node.data.name });
+        this.toast.show({ severity: 'info', summary: 'Node Unselected', detail: event.node.data.name });
     }
 
     componentDidMount() {
@@ -48,7 +48,7 @@ export class TreeTableSelectionDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Growl ref={(el) => this.growl = el} />
+                    <Toast ref={(el) => this.toast = el} />
 
                     <div className="card">
                         <h5>Single</h5>
@@ -114,7 +114,7 @@ class TreeTableSelectionDemoDoc extends Component {
                 content: `
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
-import { Growl } from 'primereact/growl';
+import { Toast } from 'primereact/toast';
 import { Column } from 'primereact/column';
 import { NodeService } from '../service/NodeService';
 
@@ -137,11 +137,11 @@ export class TreeTableSelectionDemo extends Component {
     }
 
     onSelect(event) {
-        this.growl.show({ severity: 'info', summary: 'Node Selected', detail: event.node.data.name });
+        this.toast.show({ severity: 'info', summary: 'Node Selected', detail: event.node.data.name });
     }
 
     onUnselect(event) {
-        this.growl.show({ severity: 'info', summary: 'Node Unselected', detail: event.node.data.name });
+        this.toast.show({ severity: 'info', summary: 'Node Unselected', detail: event.node.data.name });
     }
 
     componentDidMount() {
@@ -151,7 +151,7 @@ export class TreeTableSelectionDemo extends Component {
     render() {
         return (
             <div>
-                <Growl ref={(el) => this.growl = el} />
+                <Toast ref={(el) => this.toast = el} />
 
                 <div className="card">
                     <h5>Single</h5>
@@ -209,7 +209,7 @@ export class TreeTableSelectionDemo extends Component {
                 content: `
 import React, { useState, useEffect, useRef } from 'react';
 import { TreeTable } from 'primereact/treetable';
-import { Growl } from 'primereact/growl';
+import { Toast } from 'primereact/toast';
 import { Column } from 'primereact/column';
 import { NodeService } from '../service/NodeService';
 
@@ -225,14 +225,14 @@ const TreeTableSelectionDemo = () => {
     const [selectedNodeKeys2, setSelectedNodeKeys2] = useState([]);
     const [selectedNodeKeys3, setSelectedNodeKeys3] = useState([]);
     const nodeservice = new NodeService();
-    let growl = useRef(null);
+    let toast = useRef(null);
 
     const onSelect = (event) => {
-        growl.current.show({severity: 'info', summary: 'Node Selected', detail: event.node.data.name});
+        toast.current.show({severity: 'info', summary: 'Node Selected', detail: event.node.data.name});
     }
 
     const onUnselect = (event) => {
-        growl.current.show({severity: 'info', summary: 'Node Unselected', detail: event.node.data.name});
+        toast.current.show({severity: 'info', summary: 'Node Unselected', detail: event.node.data.name});
     }
 
     useEffect(() => {
@@ -247,7 +247,7 @@ const TreeTableSelectionDemo = () => {
 
     return (
         <div>
-            <Growl ref={growl} />
+            <Toast ref={toast} />
 
             <h3 className="first">Single</h3>
             <TreeTable value={nodes1} selectionMode="single" selectionKeys={selectedNodeKey1} onSelectionChange={e => setSelectedNodeKey1(e.value)}>
@@ -294,7 +294,7 @@ const TreeTableSelectionDemo = () => {
                 content: `
 import React, { useState, useEffect, useRef } from 'react';
 import { TreeTable } from 'primereact/treetable';
-import { Growl } from 'primereact/growl';
+import { Toast } from 'primereact/toast';
 import { Column } from 'primereact/column';
 import { NodeService } from '../service/NodeService';
 
@@ -310,14 +310,14 @@ const TreeTableSelectionDemo = () => {
     const [selectedNodeKeys2, setSelectedNodeKeys2] = useState([]);
     const [selectedNodeKeys3, setSelectedNodeKeys3] = useState([]);
     const nodeservice = new NodeService();
-    let growl = useRef(null);
+    let toast = useRef(null);
 
     const onSelect = (event: any) => {
-        growl.current.show({severity: 'info', summary: 'Node Selected', detail: event.node.data.name});
+        toast.current.show({severity: 'info', summary: 'Node Selected', detail: event.node.data.name});
     }
 
     const onUnselect = (event: any) => {
-        growl.current.show({severity: 'info', summary: 'Node Unselected', detail: event.node.data.name});
+        toast.current.show({severity: 'info', summary: 'Node Unselected', detail: event.node.data.name});
     }
 
     useEffect(() => {
@@ -332,7 +332,7 @@ const TreeTableSelectionDemo = () => {
 
     return (
         <div>
-            <Growl ref={growl} />
+            <Toast ref={toast} />
 
             <h3 className="first">Single</h3>
             <TreeTable value={nodes1} selectionMode="single" selectionKeys={selectedNodeKey1} onSelectionChange={e => setSelectedNodeKey1(e.value)}>

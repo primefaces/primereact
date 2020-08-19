@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TreeTable } from '../../components/treetable/TreeTable';
 import { ContextMenu } from '../../components/contextmenu/ContextMenu';
-import { Growl } from '../../components/growl/Growl';
+import { Toast } from '../../components/toast/Toast';
 import { Column } from '../../components/column/Column';
 import { NodeService } from '../service/NodeService';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
@@ -23,7 +23,7 @@ export class TreeTableContextMenuDemo extends Component {
                 label: 'View Key',
                 icon: 'pi pi-search',
                 command: () => {
-                    this.growl.show({ severity: 'success', summary: 'Node Key', detail: this.state.selectedNodeKey });
+                    this.toast.show({ severity: 'success', summary: 'Node Key', detail: this.state.selectedNodeKey });
                 }
             },
             {
@@ -59,7 +59,7 @@ export class TreeTableContextMenuDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Growl ref={(el) => this.growl = el} />
+                    <Toast ref={(el) => this.toast = el} />
 
                     <ContextMenu model={this.menu} ref={el => this.cm = el} onHide={() => this.setState({ selectedNodeKey: null })} />
 
@@ -92,7 +92,7 @@ class TreeTableContextMenuDemoDoc extends Component {
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { ContextMenu } from 'primereact/contextmenu';
-import { Growl } from 'primereact/growl';
+import { Toast } from 'primereact/toast';
 import { Column } from 'primereact/column';
 import { NodeService } from '../service/NodeService';
 
@@ -111,7 +111,7 @@ export class TreeTableContextMenuDemo extends Component {
                 label: 'View Key',
                 icon: 'pi pi-search',
                 command: () => {
-                    this.growl.show({ severity: 'success', summary: 'Node Key', detail: this.state.selectedNodeKey });
+                    this.toast.show({ severity: 'success', summary: 'Node Key', detail: this.state.selectedNodeKey });
                 }
             },
             {
@@ -139,7 +139,7 @@ export class TreeTableContextMenuDemo extends Component {
     render() {
         return (
             <div>
-                <Growl ref={(el) => this.growl = el} />
+                <Toast ref={(el) => this.toast = el} />
 
                 <ContextMenu model={this.menu} ref={el => this.cm = el} onHide={() => this.setState({ selectedNodeKey: null })} />
 
@@ -164,7 +164,7 @@ export class TreeTableContextMenuDemo extends Component {
 import React, { useState, useEffect, useRef } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { ContextMenu } from 'primereact/contextmenu';
-import { Growl } from 'primereact/growl';
+import { Toast } from 'primereact/toast';
 import { Column } from 'primereact/column';
 import { NodeService } from '../service/NodeService';
 
@@ -172,7 +172,7 @@ const TreeTableContextMenuDemo = () => {
     const [nodes, setNodes] = useState([]);
     const [expandedKeys, setExpandedKeys] = useState({});
     const [selectedNodeKey, setSelectedNodeKey] = useState(null);
-    let growl = useRef(null);
+    let toast = useRef(null);
     let cm = useRef(null);
 
     const menu = [
@@ -180,7 +180,7 @@ const TreeTableContextMenuDemo = () => {
             label: 'View Key',
             icon: 'pi pi-search',
             command: () => {
-                growl.current.show({severity: 'success', summary: 'Node Key', detail: selectedNodeKey});
+                toast.current.show({severity: 'success', summary: 'Node Key', detail: selectedNodeKey});
             }
         },
         {
@@ -206,7 +206,7 @@ const TreeTableContextMenuDemo = () => {
 
     return (
         <div>
-            <Growl ref={growl} />
+            <Toast ref={toast} />
 
             <ContextMenu model={menu} ref={cm} onHide={() => setSelectedNodeKey(null)}/>
 
@@ -228,7 +228,7 @@ const TreeTableContextMenuDemo = () => {
 import React, { useState, useEffect, useRef } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { ContextMenu } from 'primereact/contextmenu';
-import { Growl } from 'primereact/growl';
+import { Toast } from 'primereact/toast';
 import { Column } from 'primereact/column';
 import { NodeService } from '../service/NodeService';
 
@@ -236,7 +236,7 @@ const TreeTableContextMenuDemo = () => {
     const [nodes, setNodes] = useState([]);
     const [expandedKeys, setExpandedKeys] = useState({});
     const [selectedNodeKey, setSelectedNodeKey] = useState<any>(null);
-    let growl = useRef<any>(null);
+    let toast = useRef<any>(null);
     let cm = useRef<any>(null);
 
     const menu = [
@@ -244,7 +244,7 @@ const TreeTableContextMenuDemo = () => {
             label: 'View Key',
             icon: 'pi pi-search',
             command: () => {
-                growl.current.show({severity: 'success', summary: 'Node Key', detail: selectedNodeKey});
+                toast.current.show({severity: 'success', summary: 'Node Key', detail: selectedNodeKey});
             }
         },
         {
@@ -270,7 +270,7 @@ const TreeTableContextMenuDemo = () => {
 
     return (
         <div>
-            <Growl ref={growl} />
+            <Toast ref={toast} />
 
             <ContextMenu model={menu} ref={cm} onHide={() => setSelectedNodeKey(null)}/>
 

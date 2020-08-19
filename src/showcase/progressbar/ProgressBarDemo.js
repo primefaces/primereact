@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ProgressBar } from '../../components/progressbar/ProgressBar';
-import { Growl } from '../../components/growl/Growl';
+import { Toast } from '../../components/toast/Toast';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { ProgressBarDoc } from './ProgressBarDoc';
 
@@ -30,7 +30,7 @@ export class ProgressBarDemo extends Component {
 
             if (val >= 100) {
                 val = 100;
-                this.growl.show({ severity: 'info', summary: 'Success', detail: 'Process Completed' });
+                this.toast.show({ severity: 'info', summary: 'Success', detail: 'Process Completed' });
                 clearInterval(this.interval);
             }
 
@@ -58,7 +58,7 @@ export class ProgressBarDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Growl ref={(el) => this.growl = el}></Growl>
+                    <Toast ref={(el) => this.toast = el}></Toast>
 
                     <div className="card">
                         <h5>Dynamic</h5>

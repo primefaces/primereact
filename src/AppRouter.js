@@ -15,7 +15,7 @@ import { FieldsetDemo } from './showcase/fieldset/FieldsetDemo';
 import { FileUploadDemo } from './showcase/fileupload/FileUploadDemo';
 import { FlexGridDemo } from './showcase/flexgrid/FlexGridDemo';
 import { GMapDemo } from './showcase/gmap/GMapDemo';
-import { GrowlDemo } from './showcase/growl/GrowlDemo';
+import { ToastDemo } from './showcase/toast/ToastDemo';
 import { InputNumberDemo } from './showcase/inputnumber/InputNumberDemo';
 import { InputTextDemo } from './showcase/inputtext/InputTextDemo';
 import { InputTextareaDemo } from './showcase/inputtextarea/InputTextareaDemo';
@@ -188,7 +188,7 @@ class AppRouter extends Component {
                 <Route path="/chips" component={ChipsDemo} />
                 <Route path="/dialog" component={DialogDemo} />
                 <Route path="/dropdown" component={DropdownDemo} />
-                <Route path="/growl" component={GrowlDemo} />
+                <Route path="/toast" component={ToastDemo} />
                 <Route path="/flexgrid" component={FlexGridDemo} />
                 <Route path="/fieldset" component={FieldsetDemo} />
                 <Route path="/fileupload" component={FileUploadDemo} />

@@ -4,7 +4,7 @@ import { DataTable } from '../../components/datatable/DataTable';
 import { Column } from '../../components/column/Column';
 import ProductService from '../service/ProductService';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { Growl } from '../../components/growl/Growl';
+import { Toast } from '../../components/toast/Toast';
 import { Button } from '../../components/button/Button';
 import { FileUpload } from '../../components/fileupload/FileUpload';
 import { Rating } from '../../components/rating/Rating';
@@ -112,13 +112,13 @@ export class DataTableCrudDemo extends Component {
                 const index = this.findIndexById(this.state.product.id);
 
                 products[index] = product;
-                this.growl.show({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
+                this.toast.show({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
             }
             else {
                 product.id = this.createId();
                 product.image = 'product-placeholder.svg';
                 products.push(product);
-                this.growl.show({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
+                this.toast.show({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
             }
 
             state = {
@@ -153,7 +153,7 @@ export class DataTableCrudDemo extends Component {
             deleteProductDialog: false,
             product: this.emptyProduct
         });
-        this.growl.show({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
+        this.toast.show({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
     }
 
     findIndexById(id) {
@@ -192,7 +192,7 @@ export class DataTableCrudDemo extends Component {
             deleteProductsDialog: false,
             selectedProducts: null
         });
-        this.growl.show({ severity: 'success', summary: 'Successful', detail: 'Products Deleted', life: 3000 });
+        this.toast.show({ severity: 'success', summary: 'Successful', detail: 'Products Deleted', life: 3000 });
     }
 
     onCategoryChange(e) {
@@ -299,7 +299,7 @@ export class DataTableCrudDemo extends Component {
                 </div>
 
                 <div className="content-section implementation datatable-crud-demo">
-                    <Growl ref={(el) => this.growl = el} />
+                    <Toast ref={(el) => this.toast = el} />
 
                     <div className="card">
                         <Toolbar className="p-mb-4" left={this.leftToolbarTemplate} right={this.rightToolbarTemplate}></Toolbar>
@@ -405,7 +405,7 @@ import classNames from 'classnames';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import ProductService from '../service/ProductService';
-import { Growl } from 'primereact/growl';
+import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';
 import { FileUpload } from 'primereact/fileupload';
 import { Rating } from 'primereact/rating';
@@ -510,13 +510,13 @@ export class DataTableCrudDemo extends Component {
                 const index = this.findIndexById(this.state.product.id);
 
                 products[index] = product;
-                this.growl.show({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
+                this.toast.show({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
             }
             else {
                 product.id = this.createId();
                 product.image = 'product-placeholder.svg';
                 products.push(product);
-                this.growl.show({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
+                this.toast.show({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
             }
 
             state = {
@@ -551,7 +551,7 @@ export class DataTableCrudDemo extends Component {
             deleteProductDialog: false,
             product: this.emptyProduct
         });
-        this.growl.show({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
+        this.toast.show({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
     }
 
     findIndexById(id) {
@@ -590,7 +590,7 @@ export class DataTableCrudDemo extends Component {
             deleteProductsDialog: false,
             selectedProducts: null
         });
-        this.growl.show({ severity: 'success', summary: 'Successful', detail: 'Products Deleted', life: 3000 });
+        this.toast.show({ severity: 'success', summary: 'Successful', detail: 'Products Deleted', life: 3000 });
     }
 
     onCategoryChange(e) {
@@ -689,7 +689,7 @@ export class DataTableCrudDemo extends Component {
 
         return (
             <div className="datatable-crud-demo">
-                <Growl ref={(el) => this.growl = el} />
+                <Toast ref={(el) => this.toast = el} />
 
                 <div className="card">
                     <Toolbar className="p-mb-4" left={this.leftToolbarTemplate} right={this.rightToolbarTemplate}></Toolbar>

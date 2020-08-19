@@ -5,7 +5,7 @@ import { Dialog } from '../../components/dialog/Dialog';
 import { InputText } from '../../components/inputtext/InputText';
 import { Button } from '../../components/button/Button';
 import { Checkbox } from '../../components/checkbox/Checkbox';
-import { Growl } from '../../components/growl/Growl';
+import { Toast } from '../../components/toast/Toast';
 import { loadGoogleMaps, removeGoogleMaps } from '../load/GoogleMaps';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { GMapDoc } from './GMapDoc';
@@ -59,15 +59,15 @@ export class GMapDemo extends Component {
             this.infoWindow.open(event.map, event.overlay);
             event.map.setCenter(event.overlay.getPosition());
 
-            this.growl.show({severity:'info', summary:'Marker Selected', detail: title});
+            this.toast.show({severity:'info', summary:'Marker Selected', detail: title});
         }
         else {
-            this.growl.show({severity:'info', summary:'Shape Selected', detail: ''});
+            this.toast.show({severity:'info', summary:'Shape Selected', detail: ''});
         }
     }
 
     handleDragEnd(event) {
-        this.growl.show({severity:'info', summary:'Marker Dragged', detail: event.overlay.getTitle()});
+        this.toast.show({severity:'info', summary:'Marker Dragged', detail: event.overlay.getTitle()});
     }
 
     addMarker() {
@@ -130,7 +130,7 @@ export class GMapDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Growl ref={(el) => { this.growl = el; }}></Growl>
+                    <Toast ref={(el) => { this.toast = el; }}></Toast>
 
                     {
                         this.state.googleMapsReady && (

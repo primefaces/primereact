@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { DataTable } from '../../components/datatable/DataTable';
 import { Column } from '../../components/column/Column';
 import ProductService from '../service/ProductService';
-import { Growl } from '../../components/growl/Growl';
+import { Toast } from '../../components/toast/Toast';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { LiveEditor } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
@@ -33,12 +33,12 @@ export class DataTableReorderDemo extends Component {
     }
 
     onColReorder() {
-        this.growl.show({severity:'success', summary: 'Column Reordered', life: 3000});
+        this.toast.show({severity:'success', summary: 'Column Reordered', life: 3000});
     }
 
     onRowReorder(e) {
         this.setState({ products: e.value }, () => {
-            this.growl.show({severity:'success', summary: 'Rows Reordered', life: 3000});
+            this.toast.show({severity:'success', summary: 'Rows Reordered', life: 3000});
         });
     }
 
@@ -57,7 +57,7 @@ export class DataTableReorderDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Growl ref={(el) => { this.growl = el; }}></Growl>
+                    <Toast ref={(el) => { this.toast = el; }}></Toast>
 
                     <div className="card">
                         <DataTable value={this.state.products} reorderableColumns onRowReorder={this.onRowReorder} onColReorder={this.onColReorder}>
@@ -86,7 +86,7 @@ import React, { Component } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import ProductService from '../service/ProductService';
-import { Growl } from 'primereact/growl';
+import { Toast } from 'primereact/toast';
 
 export class DataTableReorderDemo extends Component {
 
@@ -114,12 +114,12 @@ export class DataTableReorderDemo extends Component {
     }
 
     onColReorder() {
-        this.growl.show({severity:'success', summary: 'Column Reordered', life: 3000});
+        this.toast.show({severity:'success', summary: 'Column Reordered', life: 3000});
     }
 
     onRowReorder(e) {
         this.setState({ products: e.value }, () => {
-            this.growl.show({severity:'success', summary: 'Rows Reordered', life: 3000});
+            this.toast.show({severity:'success', summary: 'Rows Reordered', life: 3000});
         });
     }
 
@@ -130,7 +130,7 @@ export class DataTableReorderDemo extends Component {
 
         return (
             <div>
-                <Growl ref={(el) => { this.growl = el; }}></Growl>
+                <Toast ref={(el) => { this.toast = el; }}></Toast>
 
                 <div className="card">
                     <DataTable value={this.state.products} reorderableColumns onRowReorder={this.onRowReorder} onColReorder={this.onColReorder}>

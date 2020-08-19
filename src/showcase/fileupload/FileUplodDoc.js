@@ -14,7 +14,7 @@ export class FileUploadDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import { Growl } from 'primereact/growl';
+import { Toast } from 'primereact/toast';
 import { FileUpload } from 'primereact/fileupload';
 
 export class FileUploadDemo extends Component {
@@ -28,21 +28,21 @@ export class FileUploadDemo extends Component {
     }
 
     onUpload() {
-        this.growl.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});
+        this.toast.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});
     }
 
     onBasicUpload() {
-        this.growl.show({severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode'});
+        this.toast.show({severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode'});
     }
 
     onBasicUploadAuto() {
-        this.growl.show({severity: 'info', summary: 'Success', detail: 'File Uploaded with Auto Mode'});
+        this.toast.show({severity: 'info', summary: 'Success', detail: 'File Uploaded with Auto Mode'});
     }
 
     render() {
         return (
             <div>
-                <Growl ref={(el) => { this.growl = el; }}></Growl>
+                <Toast ref={(el) => { this.toast = el; }}></Toast>
 
                 <div className="card">
                     <h5>Advanced</h5>
@@ -65,22 +65,22 @@ export class FileUploadDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useRef } from 'react';
-import {Growl} from 'primereact/growl';
+import {Toast} from 'primereact/toast';
 import {FileUpload} from 'primereact/fileupload';
 
 const FileUploadDemo = () => {
-    let growl = useRef(null);
+    let toast = useRef(null);
 
     const onUpload = () => {
-        growl.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});
+        toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});
     }
 
     const onBasicUpload = () => {
-        growl.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode'});
+        toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode'});
     }
 
     const onBasicUploadAuto = () => {
-        growl.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded with Auto Mode'});
+        toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded with Auto Mode'});
     }
 
     return (
@@ -95,7 +95,7 @@ const FileUploadDemo = () => {
             <h5>Basic with Auto</h5>
             <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUploadAuto} auto chooseLabel="Browse" />
 
-            <Growl ref={growl}></Growl>
+            <Toast ref={toast}></Toast>
         </div>
     )
 }
@@ -105,22 +105,22 @@ const FileUploadDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useRef } from 'react';
-import {Growl} from 'primereact/growl';
+import {Toast} from 'primereact/toast';
 import {FileUpload} from 'primereact/fileupload';
 
 const FileUploadDemo = () => {
-    let growl = useRef<any>(null);
+    let toast = useRef<any>(null);
 
     const onUpload = () => {
-        growl.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});
+        toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});
     }
 
     const onBasicUpload = () => {
-        growl.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode'});
+        toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode'});
     }
 
     const onBasicUploadAuto = () => {
-        growl.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded with Auto Mode'});
+        toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded with Auto Mode'});
     }
 
     return (
@@ -135,7 +135,7 @@ const FileUploadDemo = () => {
             <h5>Basic with Auto</h5>
             <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUploadAuto} auto chooseLabel="Browse" />
 
-            <Growl ref={growl}></Growl>
+            <Toast ref={toast}></Toast>
         </div>
     )
 }

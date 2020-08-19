@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Growl } from '../../components/growl/Growl';
+import { Toast } from '../../components/toast/Toast';
 import { FileUpload } from '../../components/fileupload/FileUpload';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { FileUploadDoc } from './FileUplodDoc';
@@ -15,15 +15,15 @@ export class FileUploadDemo extends Component {
     }
 
     onUpload() {
-        this.growl.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});
+        this.toast.show({severity: 'info', summary: 'Success', detail: 'File Uploaded'});
     }
 
     onBasicUpload() {
-        this.growl.show({severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode'});
+        this.toast.show({severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode'});
     }
 
     onBasicUploadAuto() {
-        this.growl.show({severity: 'info', summary: 'Success', detail: 'File Uploaded with Auto Mode'});
+        this.toast.show({severity: 'info', summary: 'Success', detail: 'File Uploaded with Auto Mode'});
     }
 
     render() {
@@ -37,7 +37,7 @@ export class FileUploadDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <Growl ref={(el) => { this.growl = el; }}></Growl>
+                    <Toast ref={(el) => { this.toast = el; }}></Toast>
 
                     <div className="card">
                         <h5>Advanced</h5>

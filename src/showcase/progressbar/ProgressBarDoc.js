@@ -15,7 +15,7 @@ export class ProgressBarDoc extends Component {
                 content: `
 import React, { Component } from 'react';
 import { ProgressBar } from 'primereact/progressbar';
-import { Growl } from 'primereact/growl';
+import { Toast } from 'primereact/toast';
 
 export class ProgressBarDemo extends Component {
 
@@ -43,7 +43,7 @@ export class ProgressBarDemo extends Component {
 
             if (val >= 100) {
                 val = 100;
-                this.growl.show({ severity: 'info', summary: 'Success', detail: 'Process Completed' });
+                this.toast.show({ severity: 'info', summary: 'Success', detail: 'Process Completed' });
                 clearInterval(this.interval);
             }
 
@@ -63,7 +63,7 @@ export class ProgressBarDemo extends Component {
     render() {
         return (
             <div>
-                <Growl ref={(el) => this.growl = el}></Growl>
+                <Toast ref={(el) => this.toast = el}></Toast>
 
                 <div className="card">
                     <h5>Dynamic</h5>
@@ -89,18 +89,18 @@ export class ProgressBarDemo extends Component {
                 content: `
 import React, { useState, useEffect, useRef } from 'react';
 import {ProgressBar} from 'primereact/progressbar';
-import {Growl} from 'primereact/growl';
+import {Toast} from 'primereact/toast';
 
 const ProgressBarDemo = () => {
     const [value1, setValue1] = useState(0);
-    let growl = useRef(null);
+    let toast = useRef(null);
     let interval = setInterval(() => {
         let val = value1;
         val += Math.floor(Math.random() * 10) + 1;
 
         if(val >= 100) {
             val = 100;
-            growl.current.show({severity: 'info', summary: 'Success', detail: 'Process Completed'});
+            toast.current.show({severity: 'info', summary: 'Success', detail: 'Process Completed'});
             clearInterval(interval);
         }
 
@@ -125,7 +125,7 @@ const ProgressBarDemo = () => {
 
     return (
         <div>
-            <Growl ref={growl}></Growl>
+            <Toast ref={toast}></Toast>
 
             <h3 className="first">Dynamic</h5>
             <ProgressBar value={value1}></ProgressBar>
@@ -148,18 +148,18 @@ const ProgressBarDemo = () => {
                 content: `
 import React, { useState, useEffect, useRef } from 'react';
 import {ProgressBar} from 'primereact/progressbar';
-import {Growl} from 'primereact/growl';
+import {Toast} from 'primereact/toast';
 
 const ProgressBarDemo = () => {
     const [value1, setValue1] = useState(0);
-    let growl = useRef<any>(null);
+    let toast = useRef<any>(null);
     let interval: any = setInterval(() => {
         let val = value1;
         val += Math.floor(Math.random() * 10) + 1;
 
         if (val >= 100) {
             val = 100;
-            growl.current.show({severity: 'info', summary: 'Success', detail: 'Process Completed'});
+            toast.current.show({severity: 'info', summary: 'Success', detail: 'Process Completed'});
             clearInterval(interval);
         }
 
@@ -184,7 +184,7 @@ const ProgressBarDemo = () => {
 
     return (
         <div>
-            <Growl ref={growl}></Growl>
+            <Toast ref={toast}></Toast>
 
             <h3 className="first">Dynamic</h5>
             <ProgressBar value={value1}></ProgressBar>

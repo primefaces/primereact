@@ -1122,10 +1122,10 @@
                     ]
                 },
                 {
-                    "name": "Growl",
-                    "to": "/growl",
+                    "name": "Toast",
+                    "to": "/toast",
                     "meta": [
-                        "growl",
+                        "toast",
                         "toast"
                     ]
                 }
