@@ -183,7 +183,7 @@ export class AutoComplete extends Component {
         }
     }
 
-    selectItem(event, option) { 
+    selectItem(event, option) {
         if (this.props.multiple) {
             this.inputEl.value = '';
             if (!this.isSelected(option)) {
