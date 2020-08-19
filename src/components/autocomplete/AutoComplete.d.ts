@@ -12,6 +12,7 @@ interface AutoCompleteProps {
     dropdown?: boolean;
     dropdownMode?: string;
     multiple?: boolean;
+    allowCustom?: boolean;
     minLength?: number;
     delay?: number;
     style?: object;

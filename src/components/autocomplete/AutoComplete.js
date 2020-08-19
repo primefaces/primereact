@@ -24,6 +24,7 @@ export class AutoComplete extends Component {
         dropdown: false,
         dropdownMode: 'blank',
         multiple: false,
+        allowCustom: false,
         minLength: 1,
         delay: 300,
         style: null,
@@ -71,6 +72,7 @@ export class AutoComplete extends Component {
         dropdown: PropTypes.bool,
         dropdownMode: PropTypes.string,
         multiple: PropTypes.bool,
+        allowCustom: PropTypes.bool,
         minLength: PropTypes.number,
         delay: PropTypes.number,
         style: PropTypes.object,
@@ -181,7 +183,7 @@ export class AutoComplete extends Component {
         }
     }
 
-    selectItem(event, option) {
+    selectItem(event, option) { 
         if (this.props.multiple) {
             this.inputEl.value = '';
             if (!this.isSelected(option)) {
@@ -350,8 +352,15 @@ export class AutoComplete extends Component {
                 case 13:
                     if (highlightItem) {
                         this.selectItem(event, this.props.suggestions[DomHandler.index(highlightItem)]);
-                        this.hideOverlay();
+                    } else {
+                        if (this.props.allowCustom && this.props.multiple) {
+                            this.selectItem(event, {
+                                name: event.target.value,
+                                code: event.target.value
+                            });
+                        }
                     }
+                    this.hideOverlay();
 
                     event.preventDefault();
                 break;
@@ -513,7 +522,8 @@ export class AutoComplete extends Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps.suggestions !== this.props.suggestions && this.state.searching) {
-            if (this.props.suggestions && this.props.suggestions.length)
+            if (this.props.suggestions && this.props.suggestions.length ||
+                this.props.allowCustom && this.props.multiple && this.inputEl.value.length)
                 this.showOverlay();
             else
                 this.hideOverlay();

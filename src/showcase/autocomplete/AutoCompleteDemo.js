@@ -70,7 +70,7 @@ export class AutoCompleteDemo extends Component {
 
                         <h5>Multiple</h5>
                         <span className="p-fluid">
-                            <AutoComplete value={this.state.selectedCountries} suggestions={this.state.filteredCountries} completeMethod={this.searchCountry} field="name" multiple onChange={(e) => this.setState({ selectedCountries: e.value })} />
+                            <AutoComplete value={this.state.selectedCountries} suggestions={this.state.filteredCountries} completeMethod={this.searchCountry} field="name" multiple allowCustom onChange={(e) => this.setState({ selectedCountries: e.value })} />
                         </span>
                     </div>
                 </div>
