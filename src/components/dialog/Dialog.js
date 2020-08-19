@@ -33,7 +33,7 @@ export class Dialog extends Component {
         baseZIndex: 0,
         maximizable: false,
         blockScroll: false,
-        iconsTemplate: null,
+        icons: null,
         ariaCloseIconLabel: 'Close',
         focusOnShow: true,
         maximized: false,
@@ -63,7 +63,7 @@ export class Dialog extends Component {
         baseZIndex: PropTypes.number,
         maximizable: PropTypes.bool,
         blockScroll: PropTypes.bool,
-        iconsTemplate: PropTypes.any,
+        icons: PropTypes.any,
         ariaCloseIconLabel: PropTypes.string,
         focusOnShow: PropTypes.bool,
         maximized: PropTypes.bool,
@@ -319,9 +319,9 @@ export class Dialog extends Component {
         return null;
     }
 
-    renderIconsTemplate() {
-        if (this.props.iconsTemplate) {
-            return ObjectUtils.getJSXElement(this.props.iconsTemplate, this.props);
+    renderIcons() {
+        if (this.props.icons) {
+            return ObjectUtils.getJSXElement(this.props.icons, this.props);
         }
 
         return null;
@@ -331,13 +331,13 @@ export class Dialog extends Component {
         if (this.props.showHeader) {
             const closeIcon = this.renderCloseIcon();
             const maximizeIcon = this.renderMaximizeIcon();
-            const iconsTemplate = this.renderIconsTemplate();
+            const icons = this.renderIcons();
 
             return (
                 <div ref={el => this.headerElement = el} className="p-dialog-header">
                     <span id={this.id + '_header'} className="p-dialog-title">{this.props.header}</span>
                     <div className="p-dialog-header-icons">
-                        {iconsTemplate}
+                        {icons}
                         {maximizeIcon}
                         {closeIcon}
                     </div>

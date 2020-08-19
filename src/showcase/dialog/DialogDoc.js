@@ -464,7 +464,7 @@ import { Dialog } from 'primereact/dialog';
 </CodeHighlight>
 
                         <h5>Header and Footer</h5>
-                        <p>Header and Footer sections are defined using properties with the same name that accept simple strings or JSX for custom content. In addition <i>iconsTemplate</i> property enables
+                        <p>Header and Footer sections are defined using properties with the same name that accept simple strings or JSX for custom content. In addition <i>icons</i> property enables
             adding more icons at the header section.</p>
 <CodeHighlight>
 {`
@@ -481,7 +481,7 @@ const myIcon = (
     </button>
 )
 
-<Dialog header="Header Text" footer={footer} iconsTemplate={myIcon} visible={this.state.visible} style={{width: '50vw'}} modal onHide={this.onHide}>
+<Dialog header="Header Text" footer={footer} icons={myIcon} visible={this.state.visible} style={{width: '50vw'}} modal onHide={this.onHide}>
     Content
 </Dialog>
 `}
@@ -623,8 +623,8 @@ const myIcon = (
                                         <td>Whether background scroll should be blocked when dialog is visible.</td>
                                     </tr>
                                     <tr>
-                                        <td>iconsTemplate</td>
-                                        <td>Element</td>
+                                        <td>icons</td>
+                                        <td>any</td>
                                         <td>null</td>
                                         <td>Custom icons template for the header.</td>
                                     </tr>
