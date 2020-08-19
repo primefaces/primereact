@@ -91,24 +91,3 @@
     overflow: hidden;
     transition: max-height .45s cubic-bezier(0, 1, 0, 1), opacity .3s, margin-bottom .3s;
 }
-
-/* Animations
-.p-growl-enter {
-    opacity: 0.01;
-}
-
-.p-growl-enter.p-growl-enter-active {
-    opacity: 1;
-    transition: opacity 250ms ease-in;
-}
-
-.p-growl-exit {
-	max-height: 500px;
-}
-
-.p-growl-exit.p-growl-exit-active {
-	max-height: 0;
-	overflow: hidden;
-	margin-bottom: 0;
-	transition: max-height 0.5s cubic-bezier(0, 1, 0, 1), margin-bottom 0.5s cubic-bezier(0, 1, 0, 1);
-}*/

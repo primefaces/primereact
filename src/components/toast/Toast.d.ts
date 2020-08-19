@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export interface GrowlMessage {
+export interface ToastMessage {
     severity?: 'success' | 'info' | 'warn' | 'error',
     summary?: React.ReactNode;
     detail?: React.ReactNode;
@@ -9,18 +9,18 @@ export interface GrowlMessage {
     life?: number;
 }
 
-interface GrowlProps {
+interface ToastProps {
     id?: string;
     className?: string;
     style?: object;
     baseZIndex?: number;
     position?: string;
-    onClick?(message: GrowlMessage): void;
-    onClose?(message: GrowlMessage): void;
-    onRemove?(message: GrowlMessage): void;
+    onClick?(message: ToastMessage): void;
+    onClose?(message: ToastMessage): void;
+    onRemove?(message: ToastMessage): void;
 }
 
-export class Growl extends React.Component<GrowlProps, any> {
-    public show(message: GrowlMessage | GrowlMessage[]): void;
+export class Toast extends React.Component<ToastProps, any> {
+    public show(message: ToastMessage | ToastMessage[]): void;
     public clear():void;
 }

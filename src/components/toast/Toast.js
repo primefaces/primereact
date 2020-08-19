@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {GrowlMessage} from './GrowlMessage';
+import {ToastMessage} from './ToastMessage';
 import DomHandler from '../utils/DomHandler';
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
 var messageIdx = 0;
 
-export class Growl extends Component {
+export class Toast extends Component {
 
     static defaultProps = {
         id: null,
@@ -88,7 +88,7 @@ export class Growl extends Component {
                     {
                         this.state.messages.map((message) =>
                             <CSSTransition key={message.id} classNames="p-toast-message" unmountOnExit timeout={{ enter: 300, exit: 300 }}>
-                                <GrowlMessage message={message} onClick={this.props.onClick} onClose={this.onClose} />
+                                <ToastMessage message={message} onClick={this.props.onClick} onClose={this.onClose} />
                             </CSSTransition>
                         )
                     }

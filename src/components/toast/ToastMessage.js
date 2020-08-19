@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
 import { Ripple } from '../ripple/Ripple';
 
-export class GrowlMessage extends Component {
+export class ToastMessage extends Component {
 
     static defaultProps = {
         message: null,
@@ -50,7 +50,7 @@ export class GrowlMessage extends Component {
     }
 
     onClick(event) {
-        if (this.props.onClick && !(DomHandler.hasClass(event.target, 'p-toast-icon-close') || DomHandler.hasClass(event.target, 'p-growl-icon-close-icon'))) {
+        if (this.props.onClick && !(DomHandler.hasClass(event.target, 'p-toast-icon-close') || DomHandler.hasClass(event.target, 'p-toast-icon-close-icon'))) {
             this.props.onClick(this.props.message);
         }
     }
