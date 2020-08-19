@@ -94,9 +94,9 @@ export class Button extends Component {
 
     render() {
         let className = classNames('p-button p-component', this.props.className, {
-                'p-button-icon-only': this.props.icon && !this.props.label,
-                'p-button-vertical': (this.props.iconPos === 'top' || this.props.iconPos === 'bottom') && this.label,
-                'p-disabled': this.props.disabled
+            'p-button-icon-only': this.props.icon && !this.props.label,
+            'p-button-vertical': (this.props.iconPos === 'top' || this.props.iconPos === 'bottom') && this.label,
+            'p-disabled': this.props.disabled
         });
         let icon = this.renderIcon();
         let label = this.renderLabel();
