@@ -66,11 +66,11 @@ export class SidebarDemo extends Component {
 
                     <Sidebar visible={this.state.visibleCustomToolbar} baseZIndex={1000000} onHide={() => this.setState({ visibleCustomToolbar: false })} iconsTemplate={() => (
                         <>
-                            <button className="p-sidebar-close p-link">
-                                <span className="p-sidebar-close-icon pi pi-print" />
+                            <button className="p-sidebar-icon p-link p-mr-1">
+                                <span className="pi pi-print" />
                             </button>
-                            <button className="p-sidebar-close p-link">
-                                <span className="p-sidebar-close-icon pi pi-arrow-right" />
+                            <button className="p-sidebar-icon p-link p-mr-1">
+                                <span className="pi pi-arrow-right" />
                             </button>
                         </>
                     )}>
