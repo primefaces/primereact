@@ -6,14 +6,16 @@
     position: relative;
 }
 
-.p-sidebar-close {
-    position: absolute;
-    top: 0;
-    right: 0;
+.p-sidebar-icons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.p-sidebar-icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
 }
 
 .p-sidebar-mask {
