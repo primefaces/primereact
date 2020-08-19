@@ -31,6 +31,17 @@ export class SidebarDemo extends Component {
     }
 
     render() {
+        const customIcons = (
+            <>
+                <button className="p-sidebar-icon p-link p-mr-1">
+                    <span className="pi pi-print" />
+                </button>
+                <button className="p-sidebar-icon p-link p-mr-1">
+                    <span className="pi pi-arrow-right" />
+                </button>
+            </>
+        );
+
         return (
             <div>
                 <div className="card">
@@ -64,16 +75,7 @@ export class SidebarDemo extends Component {
                         <Button type="button" onClick={() => this.setState({ visibleFullScreen: false })} label="Cancel" className="p-button-secondary" />
                     </Sidebar>
 
-                    <Sidebar visible={this.state.visibleCustomToolbar} baseZIndex={1000000} onHide={() => this.setState({ visibleCustomToolbar: false })} iconsTemplate={() => (
-                        <>
-                            <button className="p-sidebar-icon p-link p-mr-1">
-                                <span className="pi pi-print" />
-                            </button>
-                            <button className="p-sidebar-icon p-link p-mr-1">
-                                <span className="pi pi-arrow-right" />
-                            </button>
-                        </>
-                    )}>
+                    <Sidebar visible={this.state.visibleCustomToolbar} baseZIndex={1000000} onHide={() => this.setState({ visibleCustomToolbar: false })} icons={customIcons}>
                         <h1 style={{ fontWeight: 'normal' }}>Sidebar with custom icons</h1>
                         <Button type="button" onClick={() => this.setState({ visibleCustomToolbar: false })} label="Save" className="p-button-success" style={{ marginRight: '.25em' }} />
                         <Button type="button" onClick={() => this.setState({ visibleCustomToolbar: false })} label="Cancel" className="p-button-secondary" />
@@ -107,6 +109,17 @@ const SidebarDemo = () => {
     const [visibleFullScreen, setVisibleFullScreen] = useState(false);
     const [visibleCustomToolbar, setVisibleCustomToolbar] = useState(false);
 
+    const customIcons = (
+        <>
+            <button className="p-sidebar-icon p-link p-mr-1">
+                <span className="pi pi-print" />
+            </button>
+            <button className="p-sidebar-icon p-link p-mr-1">
+                <span className="pi pi-arrow-right" />
+            </button>
+        </>
+    );
+
     return (
         <div>
             <Sidebar visible={visibleLeft} baseZIndex={1000000} onHide={() => setVisibleLeft(false)}>
@@ -139,16 +152,7 @@ const SidebarDemo = () => {
                 <Button type="button" onClick={(e) => setVisibleFullScreen(false)} label="Cancel" className="p-button-secondary"/>
             </Sidebar>
 
-            <Sidebar visible={visibleCustomToolbar} baseZIndex={1000000} onHide={() => setVisibleCustomToolbar(false)} iconsTemplate={() => (
-                <>
-                    <button className="p-sidebar-close p-link">
-                        <span className="p-sidebar-close-icon pi pi-print"/>
-                    </button>
-                    <button className="p-sidebar-close p-link">
-                        <span className="p-sidebar-close-icon pi pi-arrow-right"/>
-                    </button>
-                </>
-            )}>
+            <Sidebar visible={visibleCustomToolbar} baseZIndex={1000000} onHide={() => setVisibleCustomToolbar(false)} icons={customIcons}>
                 <h1 style={{fontWeight:'normal'}}>Sidebar with custom icons</h1>
                 <Button type="button" onClick={(e) => setVisibleCustomToolbar(false)} label="Save" className="p-button-success" style={{marginRight:'.25em'}} />
                 <Button type="button" onClick={(e) => setVisibleCustomToolbar(false)} label="Cancel" className="p-button-secondary"/>
@@ -180,6 +184,17 @@ const SidebarDemo = () => {
     const [visibleFullScreen, setVisibleFullScreen] = useState(false);
     const [visibleCustomToolbar, setVisibleCustomToolbar] = useState(false);
 
+    const customIcons = (
+        <>
+            <button className="p-sidebar-icon p-link p-mr-1">
+                <span className="pi pi-print" />
+            </button>
+            <button className="p-sidebar-icon p-link p-mr-1">
+                <span className="pi pi-arrow-right" />
+            </button>
+        </>
+    );
+
     return (
         <div>
             <Sidebar visible={visibleLeft} baseZIndex={1000000} onHide={() => setVisibleLeft(false)}>
@@ -212,16 +227,7 @@ const SidebarDemo = () => {
                 <Button type="button" onClick={(e) => setVisibleFullScreen(false)} label="Cancel" className="p-button-secondary"/>
             </Sidebar>
 
-            <Sidebar visible={visibleCustomToolbar} baseZIndex={1000000} onHide={() => setVisibleCustomToolbar(false)} iconsTemplate={() => (
-                <>
-                    <button className="p-sidebar-close p-link">
-                        <span className="p-sidebar-close-icon pi pi-print"/>
-                    </button>
-                    <button className="p-sidebar-close p-link">
-                        <span className="p-sidebar-close-icon pi pi-arrow-right"/>
-                    </button>
-                </>
-            )}>
+            <Sidebar visible={visibleCustomToolbar} baseZIndex={1000000} onHide={() => setVisibleCustomToolbar(false)} icons={customIcons}>
                 <h1 style={{fontWeight:'normal'}}>Sidebar with custom icons</h1>
                 <Button type="button" onClick={(e) => setVisibleCustomToolbar(false)} label="Save" className="p-button-success" style={{marginRight:'.25em'}} />
                 <Button type="button" onClick={(e) => setVisibleCustomToolbar(false)} label="Cancel" className="p-button-secondary"/>
@@ -303,11 +309,11 @@ import { Sidebar } from 'primereact/sidebar';
 </CodeHighlight>
 
                         <h5>Custom toolbar</h5>
-                        <p>Additional content can be provided using the <i>iconsTemplate</i> property.</p>
+                        <p>Additional content can be provided using the <i>icons</i> property.</p>
 
 <CodeHighlight>
 {`
-<Sidebar visible={this.state.visibleCustomToolbar} onHide={() => this.setState({visibleCustomToolbar: false})} iconsTemplate={() => (
+<Sidebar visible={this.state.visibleCustomToolbar} onHide={() => this.setState({visibleCustomToolbar: false})} icons={() => (
     <>
         <button className="p-sidebar-close p-link">
             <span className="p-sidebar-close-icon pi pi-print"/>
@@ -403,8 +409,8 @@ import { Sidebar } from 'primereact/sidebar';
                                         <td>Aria label of the close icon.</td>
                                     </tr>
                                     <tr>
-                                        <td>iconsTemplate</td>
-                                        <td>Element</td>
+                                        <td>icons</td>
+                                        <td>any</td>
                                         <td>null</td>
                                         <td>Custom icons template for the header.</td>
                                     </tr>

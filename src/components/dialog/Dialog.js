@@ -321,7 +321,7 @@ export class Dialog extends Component {
 
     renderIconsTemplate() {
         if (this.props.iconsTemplate) {
-            return ObjectUtils.getJSXElement(this.props.iconsTemplate, this);
+            return ObjectUtils.getJSXElement(this.props.iconsTemplate, this.props);
         }
 
         return null;

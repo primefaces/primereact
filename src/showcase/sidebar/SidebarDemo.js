@@ -19,6 +19,17 @@ export class SidebarDemo extends Component {
     }
 
     render() {
+        const customIcons = (
+            <>
+                <button className="p-sidebar-icon p-link p-mr-1">
+                    <span className="pi pi-print" />
+                </button>
+                <button className="p-sidebar-icon p-link p-mr-1">
+                    <span className="pi pi-arrow-right" />
+                </button>
+            </>
+        );
+
         return (
             <div>
                 <div className="content-section introduction">
@@ -60,16 +71,7 @@ export class SidebarDemo extends Component {
                             <Button type="button" onClick={() => this.setState({ visibleFullScreen: false })} label="Cancel" className="p-button-secondary" />
                         </Sidebar>
 
-                        <Sidebar visible={this.state.visibleCustomToolbar} baseZIndex={1000000} onHide={() => this.setState({ visibleCustomToolbar: false })} iconsTemplate={() => (
-                            <>
-                                <button className="p-sidebar-icon p-link p-mr-1">
-                                    <span className="pi pi-print" />
-                                </button>
-                                <button className="p-sidebar-icon p-link p-mr-1">
-                                    <span className="pi pi-arrow-right" />
-                                </button>
-                            </>
-                        )}>
+                        <Sidebar visible={this.state.visibleCustomToolbar} baseZIndex={1000000} onHide={() => this.setState({ visibleCustomToolbar: false })} icons={customIcons}>
                             <h1 style={{ fontWeight: 'normal' }}>Sidebar with custom icons</h1>
                             <Button type="button" onClick={() => this.setState({ visibleCustomToolbar: false })} label="Save" className="p-button-success" style={{ marginRight: '.25em' }} />
                             <Button type="button" onClick={() => this.setState({ visibleCustomToolbar: false })} label="Cancel" className="p-button-secondary" />
