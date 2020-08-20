@@ -52,6 +52,10 @@ export class DataTableFilterDemo extends Component {
         this.dateBodyTemplate = this.dateBodyTemplate.bind(this);
         this.statusBodyTemplate = this.statusBodyTemplate.bind(this);
         this.activityBodyTemplate = this.activityBodyTemplate.bind(this);
+        this.onRepresentativesChange = this.onRepresentativesChange.bind(this)
+        this.onDateChange = this.onDateChange.bind(this);
+        this.onStatusChange = this.onStatusChange.bind(this);
+        this.filterDate = this.filterDate.bind(this);
     }
 
     componentDidMount() {
@@ -83,6 +87,22 @@ export class DataTableFilterDemo extends Component {
         }
 
         return date.getFullYear() + '-' + month + '-' + day;
+    }
+
+    onRepresentativesChange(e) {
+        debugger;
+        this.dt.filter(e.value, 'representative.name', 'in');
+        this.setState({ selectedRepresentative: e.value });
+    }
+
+    onDateChange(e) {
+        this.dt.filter(e.value, 'date', 'custom');
+        this.setState({ selectedDate: e.value });
+    }
+
+    onStatusChange(e) {
+        this.dt.filter(e.value, 'status', 'equals');
+        this.setState({ selectedStatus: e.value })
     }
 
     nameBodyTemplate(rowData) {
@@ -165,9 +185,9 @@ export class DataTableFilterDemo extends Component {
             </div>
         );
 
-        const representativeFilter = <MultiSelect value={this.state.selectedRepresentative} options={this.representatives} itemTemplate={this.representativesItemTemplate} onChange={(e) => this.setState({ selectedRepresentative: e.value })} optionLabel="name" optionValue="name" placeholder="All" className="p-column-filter" />;
-        const dateFilter = <Calendar value={this.state.selectedDate} onChange={(e) => this.setState({ selectedDate: e.value })} dateFormat="yy-mm-dd" className="p-column-filter" placeholder="Registration Date"/>;
-        const statusFilter = <Dropdown value={this.state.selectedStatus} options={this.statuses} onChange={(e) => this.setState({ selectedStatus: e.value })} itemTemplate={this.statusItemTemplate} placeholder="Select a Status" className="p-column-filter" showClear />;
+        const representativeFilter = <MultiSelect value={this.state.selectedRepresentative} options={this.representatives} itemTemplate={this.representativesItemTemplate} onChange={this.onRepresentativesChange} optionLabel="name" optionValue="name" placeholder="All" className="p-column-filter" />;
+        const dateFilter = <Calendar value={this.state.selectedDate} onChange={this.onDateChange} dateFormat="yy-mm-dd" className="p-column-filter" placeholder="Registration Date"/>;
+        const statusFilter = <Dropdown value={this.state.selectedStatus} options={this.statuses} onChange={this.onStatusChange} itemTemplate={this.statusItemTemplate} placeholder="Select a Status" className="p-column-filter" showClear />;
 
         return (
             <div>
@@ -187,9 +207,9 @@ export class DataTableFilterDemo extends Component {
                             globalFilter={this.state.globalFilter} emptyMessage="No customers found." loading={this.state.loading}>
                             <Column field="name" header="Name" body={this.nameBodyTemplate} filter filterPlaceholder="Search by name" />
                             <Column field="country" header="Country" body={this.countryBodyTemplate} filter filterPlaceholder="Search by country" filterMatchMode="contains" />
-                            <Column field="representative" header="Representative" body={this.representativeBodyTemplate} filter filterElement={representativeFilter} filterMatchMode="in" />
-                            <Column field="date" header="Date" body={this.dateBodyTemplate} filter filterElement={dateFilter} filterMatchMode="custom" />
-                            <Column field="status" header="Status" body={this.statusBodyTemplate} filter filterElement={statusFilter} filterMatchMode="equals" />
+                            <Column field="representative.name" header="Representative" body={this.representativeBodyTemplate} filter filterElement={representativeFilter} />
+                            <Column field="date" header="Date" body={this.dateBodyTemplate} filter filterElement={dateFilter} filterFunction={this.filterDate} />
+                            <Column field="status" header="Status" body={this.statusBodyTemplate} filter filterElement={statusFilter}/>
                             <Column field="activity" header="Activity" body={this.activityBodyTemplate} filter filterPlaceholder="Minimum" filterMatchMode="gte" />
                         </DataTable>
                     </div>
@@ -260,6 +280,10 @@ export class DataTableFilterDemo extends Component {
         this.dateBodyTemplate = this.dateBodyTemplate.bind(this);
         this.statusBodyTemplate = this.statusBodyTemplate.bind(this);
         this.activityBodyTemplate = this.activityBodyTemplate.bind(this);
+        this.onRepresentativesChange = this.onRepresentativesChange.bind(this)
+        this.onDateChange = this.onDateChange.bind(this);
+        this.onStatusChange = this.onStatusChange.bind(this);
+        this.filterDate = this.filterDate.bind(this);
     }
 
     componentDidMount() {
@@ -291,6 +315,22 @@ export class DataTableFilterDemo extends Component {
         }
 
         return date.getFullYear() + '-' + month + '-' + day;
+    }
+
+    onRepresentativesChange(e) {
+        debugger;
+        this.dt.filter(e.value, 'representative.name', 'in');
+        this.setState({ selectedRepresentative: e.value });
+    }
+
+    onDateChange(e) {
+        this.dt.filter(e.value, 'date', 'custom');
+        this.setState({ selectedDate: e.value });
+    }
+
+    onStatusChange(e) {
+        this.dt.filter(e.value, 'status', 'equals');
+        this.setState({ selectedStatus: e.value })
     }
 
     nameBodyTemplate(rowData) {
@@ -385,9 +425,9 @@ export class DataTableFilterDemo extends Component {
                         globalFilter={this.state.globalFilter} emptyMessage="No customers found." loading={this.state.loading}>
                         <Column field="name" header="Name" body={this.nameBodyTemplate} filter filterPlaceholder="Search by name" />
                         <Column field="country" header="Country" body={this.countryBodyTemplate} filter filterPlaceholder="Search by country" filterMatchMode="contains" />
-                        <Column field="representative" header="Representative" body={this.representativeBodyTemplate} filter filterElement={representativeFilter} filterMatchMode="in" />
-                        <Column field="date" header="Date" body={this.dateBodyTemplate} filter filterElement={dateFilter} filterMatchMode="custom" />
-                        <Column field="status" header="Status" body={this.statusBodyTemplate} filter filterElement={statusFilter} filterMatchMode="equals" />
+                        <Column field="representative.name" header="Representative" body={this.representativeBodyTemplate} filter filterElement={representativeFilter} />
+                        <Column field="date" header="Date" body={this.dateBodyTemplate} filter filterElement={dateFilter} filterFunction={this.filterDate} />
+                        <Column field="status" header="Status" body={this.statusBodyTemplate} filter filterElement={statusFilter}/>
                         <Column field="activity" header="Activity" body={this.activityBodyTemplate} filter filterPlaceholder="Minimum" filterMatchMode="gte" />
                     </DataTable>
                 </div>
