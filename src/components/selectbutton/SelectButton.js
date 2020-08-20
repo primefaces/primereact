@@ -154,7 +154,7 @@ export class SelectButton extends Component {
             return this.props.options.map((option, index) => {
                 let optionLabel = this.getOptionLabel(option);
 
-                return <SelectButtonItem key={optionLabel} label={optionLabel} className={option.className} option={option} onClick={this.onOptionClick} template={this.props.itemTemplate}
+                return <SelectButtonItem key={`${optionLabel}_${index}`} label={optionLabel} className={option.className} option={option} onClick={this.onOptionClick} template={this.props.itemTemplate}
                     selected={this.isSelected(option)} tabIndex={this.props.tabIndex} disabled={this.props.disabled} ariaLabelledBy={this.props.ariaLabelledBy} />;
             });
         }

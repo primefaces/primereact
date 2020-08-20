@@ -17,8 +17,8 @@ export class SelectButtonItem extends Component {
     };
 
     static propTypes = {
-        option: PropTypes.object,
-        label: PropTypes.string,
+        option: PropTypes.any,
+        label: PropTypes.any,
         className: PropTypes.string,
         selected: PropTypes.bool,
         tabIndex: PropTypes.number,
