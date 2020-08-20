@@ -117,13 +117,13 @@ export class AppMenu extends Component {
         );
 
         if (href) {
-            return <a href={href} role="menuitem" target="_blank" rel="noopener noreferrer">{content}</a>
+            return <a href={href} role="menuitem" target="_blank" rel="noopener noreferrer" onClick={this.props.onMenuItemClick}>{content}</a>
         }
         else if (!to) {
             return <button className="p-link" {...props}>{content}</button>
         }
 
-        return <NavLink to={to} exact role="menuitem" activeClassName="router-link-exact-active router-link-active">{content}</NavLink>;
+        return <NavLink to={to} exact role="menuitem" activeClassName="router-link-exact-active router-link-active" onClick={this.props.onMenuItemClick}>{content}</NavLink>;
     }
 
     renderCategorySubmenuItems(item, submenuKey) {

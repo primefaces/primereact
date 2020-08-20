@@ -42,6 +42,7 @@ export class App extends Component {
 
         this.onThemeChange = this.onThemeChange.bind(this);
         this.onMenuButtonClick = this.onMenuButtonClick.bind(this);
+        this.onMenuItemClick = this.onMenuItemClick.bind(this);
         this.onHideNews = this.onHideNews.bind(this);
         this.onMaskClick = this.onMaskClick.bind(this);
         this.onInputStyleChange = this.onInputStyleChange.bind(this);
@@ -75,6 +76,11 @@ export class App extends Component {
             this.setState({ sidebarActive: true });
             this.addClass(document.body, 'blocked-scroll');
         }
+    }
+
+    onMenuItemClick() {
+        this.setState({ sidebarActive: false });
+        this.removeClass(document.body, 'blocked-scroll');
     }
 
     onMaskClick() {
@@ -163,7 +169,7 @@ export class App extends Component {
 
                 <AppTopbar onMenuButtonClick={this.onMenuButtonClick} onThemeChange={this.onThemeChange} theme={this.state.theme} darkTheme={this.state.darkTheme} />
 
-                <AppMenu active={this.state.sidebarActive} />
+                <AppMenu active={this.state.sidebarActive} onMenuItemClick={this.onMenuItemClick} />
 
                 <AppContentContext.Provider value={{
                     inputStyle: this.state.inputStyle,
