@@ -132,8 +132,8 @@ export class Dialog extends Component {
     }
 
     getPositionClass() {
-        const positions = ['center', 'left', 'right', 'top', 'topleft', 'topright', 'bottom', 'bottomleft', 'bottomright'];
-        const pos = positions.find(item => item === this.props.position);
+        const positions = ['center', 'left', 'right', 'top', 'top-left', 'top-right', 'bottom', 'bottom-left', 'bottom-right'];
+        const pos = positions.find(item => item === this.props.position || item.replace('-', '') === this.props.position);
 
         return pos ? `p-dialog-${pos}` : '';
     }
