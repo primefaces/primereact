@@ -754,6 +754,13 @@
                             ]
                         },
                         {
+                            "name": "Filter",
+                            "to": "/treetable/filter",
+                            "meta": [
+                                "filter"
+                            ]
+                        },
+                        {
                             "name": "Selection",
                             "to": "/treetable/selection",
                             "meta": [
@@ -828,13 +835,6 @@
                             "to": "/treetable/responsive",
                             "meta": [
                                 "responsive"
-                            ]
-                        },
-                        {
-                            "name": "Filter",
-                            "to": "/treetable/filter",
-                            "meta": [
-                                "filter"
                             ]
                         }
                     ]
