@@ -209,7 +209,7 @@ export class HomeComponent extends Component {
                             </a>
                         </div>
                         <div className="p-col-12 p-md-6">
-                            <img alt="PRO" src="showcase/images/home/pro.png"></img>
+                            <img alt="PRO" src="showcase/images/home/pro.png" style={{maxWidth: '430px', width: '100%'}}></img>
                         </div>
                     </div>
                 </div>
