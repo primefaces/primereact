@@ -392,14 +392,16 @@ export class InputNumber extends Component {
                         else if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
                             newValueStr = inputValue.slice(0, selectionStart - 1) + '0' + inputValue.slice(selectionStart);
                         }
+                        else if (decimalCharIndex > 0 && decimalCharIndex === 1) {
+                            newValueStr = inputValue.slice(0, selectionStart - 1) + '0' + inputValue.slice(selectionStart);
+                            newValueStr = this.parseValue(newValueStr) > 0 ? newValueStr : '';
+                        }
                         else {
                             newValueStr = inputValue.slice(0, selectionStart - 1) + inputValue.slice(selectionStart);
                         }
                     }
 
-                    if (newValueStr != null) {
-                        this.updateValue(event, newValueStr, 'delete-single');
-                    }
+                    this.updateValue(event, newValueStr, 'delete-single');
                 }
                 else {
                     newValueStr = this.deleteRange(inputValue, selectionStart, selectionEnd);
@@ -428,14 +430,16 @@ export class InputNumber extends Component {
                         else if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
                             newValueStr = inputValue.slice(0, selectionStart) + '0' + inputValue.slice(selectionStart + 1);
                         }
+                        else if (decimalCharIndex > 0 && decimalCharIndex === 1) {
+                            newValueStr = inputValue.slice(0, selectionStart) + '0' + inputValue.slice(selectionStart + 1);
+                            newValueStr = this.parseValue(newValueStr) > 0 ? newValueStr : '';
+                        }
                         else {
                             newValueStr = inputValue.slice(0, selectionStart) + inputValue.slice(selectionStart + 1);
                         }
                     }
 
-                    if (newValueStr != null) {
-                        this.updateValue(event, newValueStr, 'delete-back-single');
-                    }
+                    this.updateValue(event, newValueStr, 'delete-back-single');
                 }
                 else {
                     newValueStr = this.deleteRange(inputValue, selectionStart, selectionEnd);
@@ -452,9 +456,10 @@ export class InputNumber extends Component {
         event.preventDefault();
         let code = event.which || event.keyCode;
         let char = String.fromCharCode(code);
+        const isDecimalSign = this.isDecimalSign(char);
 
-        if ((48 <= code && code <= 57) || this.isMinusSign(char)) {
-            this.insert(event, char);
+        if ((48 <= code && code <= 57) || this.isMinusSign(char) || isDecimalSign) {
+            this.insert(event, char, isDecimalSign);
         }
     }
 
@@ -478,24 +483,46 @@ export class InputNumber extends Component {
         return false;
     }
 
-    insert(event, text) {
-        let selectionStart = this.inputEl.selectionStart;
-        let selectionEnd = this.inputEl.selectionEnd;
-        let inputValue = this.inputEl.value.trim();
-        let maxFractionDigits = this.numberFormat.resolvedOptions().maximumFractionDigits;
-        let newValueStr;
-        let decimalCharIndex = inputValue.search(this._decimal);
-        this._decimal.lastIndex = 0;
+    isDecimalSign(char) {
+        if (this._decimal.test(char)) {
+            this._decimal.lastIndex = 0;
+            return true;
+        }
 
-        if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
-            if ((selectionStart + text.length - (decimalCharIndex + 1)) <= maxFractionDigits) {
-                newValueStr = inputValue.slice(0, selectionStart) + text + inputValue.slice(selectionStart + text.length);
+        return false;
+    }
+
+    insert(event, text, isDecimalSign = false) {
+        const selectionStart = this.inputEl.selectionStart;
+        const selectionEnd = this.inputEl.selectionEnd;
+        let inputValue = this.inputEl.value.trim();
+        const decimalCharIndex = inputValue.search(this._decimal);
+        this._decimal.lastIndex = 0;
+        let newValueStr;
+
+        if (isDecimalSign) {
+            if (decimalCharIndex > 0 && selectionStart === decimalCharIndex) {
+                this.updateValue(event, inputValue, 'insert');
+            }
+            else if (decimalCharIndex > selectionStart && decimalCharIndex < selectionEnd) {
+                newValueStr = this.insertText(inputValue, text, selectionStart, selectionEnd);
                 this.updateValue(event, newValueStr, 'insert');
             }
         }
         else {
-            newValueStr = this.insertText(inputValue, text, selectionStart, selectionEnd);
-            this.updateValue(event, newValueStr, 'insert');
+            const maxFractionDigits = this.numberFormat.resolvedOptions().maximumFractionDigits;
+
+            if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
+                if ((selectionStart + text.length - (decimalCharIndex + 1)) <= maxFractionDigits) {
+                    newValueStr = inputValue.slice(0, selectionStart) + text + inputValue.slice(selectionStart + text.length);
+                    this.updateValue(event, newValueStr, 'insert');
+                }
+            }
+            else {
+                newValueStr = this.insertText(inputValue, text, selectionStart, selectionEnd);
+                const operation = selectionStart !== selectionEnd ? 'range-insert' : 'insert';
+                this.updateValue(event, newValueStr, operation);
+            }
         }
     }
 
@@ -662,6 +689,8 @@ export class InputNumber extends Component {
             if (newLength === currentLength) {
                 if (operation === 'insert' || operation === 'delete-back-single')
                     this.inputEl.setSelectionRange(selectionEnd + 1, selectionEnd + 1);
+                if (operation === 'range-insert')
+                    this.inputEl.setSelectionRange(selectionEnd, selectionEnd);
                 else if (operation === 'delete-single')
                     this.inputEl.setSelectionRange(selectionEnd - 1, selectionEnd - 1);
                 else if (operation === 'delete-range')
