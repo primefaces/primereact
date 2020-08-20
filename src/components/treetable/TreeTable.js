@@ -757,7 +757,6 @@ export class TreeTable extends Component {
         let filters = this.getFilters();
         let columns = React.Children.toArray(this.props.children);
         const isStrictMode = this.props.filterMode === 'strict';
-        let isValueChanged = false;
 
         for (let node of value) {
             let copyNode = {...node};
@@ -808,11 +807,9 @@ export class TreeTable extends Component {
             if (matches) {
                 filteredNodes.push(copyNode);
             }
-
-            isValueChanged = isValueChanged || !localMatch || globalMatch;
         }
 
-        return isValueChanged ? filteredNodes : value;
+        return filteredNodes;
     }
 
     findFilteredNodes(node, paramsWithoutNode) {
