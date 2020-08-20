@@ -147,13 +147,13 @@ export class DialogDemo extends Component {
                         </div>
                         <div className="p-col">
                             <Button label="Top" icon="pi pi-arrow-down" onClick={() => this.onClick('displayPosition', 'top')} className="p-button-warning" />
-                            <Button label="TopLeft" icon="pi pi-arrow-down" onClick={() => this.onClick('displayPosition', 'topleft')} className="p-button-warning" />
-                            <Button label="TopRight" icon="pi pi-arrow-down" onClick={() => this.onClick('displayPosition', 'topright')} className="p-button-warning" />
+                            <Button label="TopLeft" icon="pi pi-arrow-down" onClick={() => this.onClick('displayPosition', 'top-left')} className="p-button-warning" />
+                            <Button label="TopRight" icon="pi pi-arrow-down" onClick={() => this.onClick('displayPosition', 'top-right')} className="p-button-warning" />
                         </div>
                         <div className="p-col">
                             <Button label="Bottom" icon="pi pi-arrow-up" onClick={() => this.onClick('displayPosition', 'bottom')} className="p-button-warning" />
-                            <Button label="BottomLeft" icon="pi pi-arrow-up" onClick={() => this.onClick('displayPosition', 'bottomleft')} className="p-button-warning" />
-                            <Button label="BottomRight" icon="pi pi-arrow-up" onClick={() => this.onClick('displayPosition', 'bottomright')} className="p-button-warning" />
+                            <Button label="BottomLeft" icon="pi pi-arrow-up" onClick={() => this.onClick('displayPosition', 'bottom-left')} className="p-button-warning" />
+                            <Button label="BottomRight" icon="pi pi-arrow-up" onClick={() => this.onClick('displayPosition', 'bottom-right')} className="p-button-warning" />
                         </div>
                     </div>
 
@@ -271,13 +271,13 @@ const DialogDemo = () => {
                 </div>
                 <div className="p-col">
                     <Button label="Top" icon="pi pi-arrow-down" onClick={() => onClick(setDisplayPosition, 'top')} className="p-button-warning" />
-                    <Button label="TopLeft" icon="pi pi-arrow-down" onClick={() => onClick(setDisplayPosition, 'topleft')} className="p-button-warning" />
-                    <Button label="TopRight" icon="pi pi-arrow-down" onClick={() => onClick(setDisplayPosition, 'topright')} className="p-button-warning" />
+                    <Button label="TopLeft" icon="pi pi-arrow-down" onClick={() => onClick(setDisplayPosition, 'top-left')} className="p-button-warning" />
+                    <Button label="TopRight" icon="pi pi-arrow-down" onClick={() => onClick(setDisplayPosition, 'top-right')} className="p-button-warning" />
                 </div>
                 <div className="p-col">
                     <Button label="Bottom" icon="pi pi-arrow-up" onClick={() => onClick(setDisplayPosition, 'bottom')} className="p-button-warning" />
-                    <Button label="BottomLeft" icon="pi pi-arrow-up" onClick={() => onClick(setDisplayPosition, 'bottomleft')} className="p-button-warning" />
-                    <Button label="BottomRight" icon="pi pi-arrow-up" onClick={() => onClick(setDisplayPosition, 'bottomright')} className="p-button-warning" />
+                    <Button label="BottomLeft" icon="pi pi-arrow-up" onClick={() => onClick(setDisplayPosition, 'bottom-left')} className="p-button-warning" />
+                    <Button label="BottomRight" icon="pi pi-arrow-up" onClick={() => onClick(setDisplayPosition, 'bottom-right')} className="p-button-warning" />
                 </div>
             </div>
 
@@ -395,13 +395,13 @@ const DialogDemo = () => {
                 </div>
                 <div className="p-col">
                     <Button label="Top" icon="pi pi-arrow-down" onClick={() => onClick(setDisplayPosition, 'top')} className="p-button-warning" />
-                    <Button label="TopLeft" icon="pi pi-arrow-down" onClick={() => onClick(setDisplayPosition, 'topleft')} className="p-button-warning" />
-                    <Button label="TopRight" icon="pi pi-arrow-down" onClick={() => onClick(setDisplayPosition, 'topright')} className="p-button-warning" />
+                    <Button label="TopLeft" icon="pi pi-arrow-down" onClick={() => onClick(setDisplayPosition, 'top-left')} className="p-button-warning" />
+                    <Button label="TopRight" icon="pi pi-arrow-down" onClick={() => onClick(setDisplayPosition, 'top-right')} className="p-button-warning" />
                 </div>
                 <div className="p-col">
                     <Button label="Bottom" icon="pi pi-arrow-up" onClick={() => onClick(setDisplayPosition, 'bottom')} className="p-button-warning" />
-                    <Button label="BottomLeft" icon="pi pi-arrow-up" onClick={() => onClick(setDisplayPosition, 'bottomleft')} className="p-button-warning" />
-                    <Button label="BottomRight" icon="pi pi-arrow-up" onClick={() => onClick(setDisplayPosition, 'bottomright')} className="p-button-warning" />
+                    <Button label="BottomLeft" icon="pi pi-arrow-up" onClick={() => onClick(setDisplayPosition, 'bottom-left')} className="p-button-warning" />
+                    <Button label="BottomRight" icon="pi pi-arrow-up" onClick={() => onClick(setDisplayPosition, 'bottom-right')} className="p-button-warning" />
                 </div>
             </div>
 
@@ -530,7 +530,7 @@ const myIcon = (
                                         <td>position</td>
                                         <td>string</td>
                                         <td>center</td>
-                                        <td>Position of the dialog, options are "center", "top", "bottom", "left", "right", "topleft", "topright", "bottomleft" or "bottomright".</td>
+                                        <td>Position of the dialog, options are "center", "top", "bottom", "left", "right", "top-left", "top-right", "bottom-left" or "bottom-right".</td>
                                     </tr>
                                     <tr>
                                         <td>modal</td>
