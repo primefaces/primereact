@@ -172,8 +172,7 @@
                     "meta": [
                         "calendar",
                         "datepicker"
-                    ],
-                    "badge": "updated"
+                    ]
                 },
                 {
                     "name": "Checkbox",
@@ -202,8 +201,7 @@
                     "meta": [
                         "dropdown",
                         "selectOneMenu"
-                    ],
-                    "badge": "updated"
+                    ]
                 },
                 {
                     "name": "Editor",
@@ -274,8 +272,7 @@
                     "to": "/listbox",
                     "meta": [
                         "listbox"
-                    ],
-                    "badge": "updated"
+                    ]
                 },
                 {
                     "name": "MultiSelect",
@@ -283,8 +280,7 @@
                     "meta": [
                         "multiselect",
                         "selectCheckboxMenu"
-                    ],
-                    "badge": "updated"
+                    ]
                 },
                 {
                     "name": "Password",
@@ -314,8 +310,7 @@
                         "selectbutton",
                         "selectOneButton",
                         "selectManyButton"
-                    ],
-                    "badge": "updated"
+                    ]
                 },
                 {
                     "name": "Slider",
@@ -373,7 +368,6 @@
                     "meta": [
                         "datatable"
                     ],
-                    "badge": "updated",
                     "children": [
                         {
                             "name": "Documentation",
@@ -916,8 +910,7 @@
                     "to": "/dialog",
                     "meta": [
                         "dialog"
-                    ],
-                    "badge": "updated"
+                    ]
                 },
                 {
                     "name": "OverlayPanel",
@@ -1125,9 +1118,10 @@
                     "name": "Toast",
                     "to": "/toast",
                     "meta": [
-                        "toast",
+                        "growl",
                         "toast"
-                    ]
+                    ],
+                    "badge": "updated"
                 }
             ]
         },
@@ -1271,7 +1265,8 @@
                     "to": "/ripple",
                     "meta": [
                         "ripple"
-                    ]
+                    ],
+                    "badge": "new"
                 },
                 {
                     "name": "Captcha",
