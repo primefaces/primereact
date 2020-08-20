@@ -143,7 +143,7 @@ export class PickListSubList extends Component {
         let listClassName = classNames('p-picklist-list', this.props.listClassName);
 
         if(this.props.header) {
-            header = <div className="p-picklist-caption">{this.props.header}</div>
+            header = <div className="p-picklist-header">{this.props.header}</div>
         }
 
         if(this.props.list) {
