@@ -13,7 +13,83 @@ export class RippleDoc extends Component {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
+                        <h5>Import</h5>
+<CodeHighlight lang="js">
+{`
+import { PrimeReact } from 'primereact/utils';
+import { Ripple } from 'primereact/ripple';
+`}
+</CodeHighlight>
+                        <h5>Getting Started</h5>
+                        <p>Ripple effect is an optional animation for the supported components such as buttons. It is disabled by default and needs to be enabled at
+                            your app's main container (e.g. App.js) using the <i>PrimeReact</i> class.</p>
+<CodeHighlight lang="js">
+{`
+PrimeReact.ripple = true;
+`}
+</CodeHighlight>
 
+                        <p><span className="p-text-bold">Note</span>: That would be it to enable ripple on PrimeReact components, next section describes how to use it with your own components and standard elements.</p>
+
+                        <h5>Usage</h5>
+				        <p>Ripple is a component that needs to be imported and activated using <i>PrimeReact.ripple = true</i></p>
+<CodeHighlight lang="js">
+{`
+import { Ripple } from 'primereact/ripple';
+
+<div className="p-ripple">
+    <Ripple />
+</div>
+`}
+</CodeHighlight>
+
+                        <h5>Styling</h5>
+                        <p>Default styling of the animation adds a shade of white. This can easily be customized using css that changes the color of <i>.p-ink</i> element.</p>
+<CodeHighlight>
+{`
+<div className="p-ripple purple">
+    <Ripple />
+</div>
+`}
+</CodeHighlight>
+
+<CodeHighlight lang="css">
+{`
+.p-ripple.purple .p-ink {
+    background: rgba(256,39,176,.3);
+}
+`}
+</CodeHighlight>
+
+
+                        <h5>Styling</h5>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Element</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>p-ripple</td>
+                                        <td>Host element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>p-ink</td>
+                                        <td>Ripple element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>p-ink-active</td>
+                                        <td>Ripple element during animating.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h5>Dependencies</h5>
+                        <p>None.</p>
                     </TabPanel>
 
                     <TabPanel header="Source">

@@ -11,7 +11,7 @@ export class RippleDemo extends Component {
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Ripple</h1>
-                        <p>Ripple directive adds ripple effect to the host element.</p>
+                        <p>Ripple component adds ripple effect to the host element.</p>
                     </div>
                 </div>
 
