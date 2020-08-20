@@ -807,7 +807,12 @@ export class InputNumber extends Component {
                 this.renderTooltip();
         }
 
-        if (prevProps.value !== this.props.value) {
+        const isOptionChanged = this.isOptionChanged(prevProps);
+        if (isOptionChanged) {
+            this.constructParser();
+        }
+
+        if (prevProps.value !== this.props.value || isOptionChanged) {
             const newValue = this.validateValue(this.props.value);
             this.updateInputValue(newValue);
 
@@ -815,6 +820,11 @@ export class InputNumber extends Component {
                 this.updateModel(null, newValue);
             }
         }
+    }
+
+    isOptionChanged(prevProps) {
+        const optionProps = ['locale', 'localeMatcher', 'mode', 'currency', 'currencyDisplay', 'useGrouping', 'minFractionDigits', 'maxFractionDigits', 'suffix', 'prefix'];
+        return optionProps.some((option) => prevProps[option] !== this.props[option]);
     }
 
     componentWillUnmount() {
