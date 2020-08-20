@@ -1533,6 +1533,8 @@
   font-weight: 600;
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px; }
+.p-dataview .p-dataview-loading-icon {
+  font-size: 2rem; }
 
 .p-datascroller .p-paginator-top {
   border-width: 1px 0 1px 0;

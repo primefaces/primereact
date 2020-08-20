@@ -1545,6 +1545,8 @@
   font-weight: 500;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px; }
+.p-dataview .p-dataview-loading-icon {
+  font-size: 2rem; }
 
 .p-datascroller .p-paginator-top {
   border-width: 0 0 1px 0;
