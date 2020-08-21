@@ -577,6 +577,12 @@ this.messages.show({ life: 5000, severity: 'error', summary: 'Error Message', de
                                         <td>null</td>
                                         <td>Message text.</td>
                                     </tr>
+                                    <tr>
+                                        <td>content</td>
+                                        <td>element</td>
+                                        <td>null</td>
+                                        <td>Template of the message.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
