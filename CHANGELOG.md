@@ -1,5 +1,69 @@
 # Changelog
 
+## [5.0.0-rc.1](https://github.com/primefaces/primereact/tree/5.0.0-rc.1) (2020-08-20)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/4.2.2...5.0.0-rc.1)
+
+**Breaking changes:**
+
+- Change the values of position property on Dialog [\#1516](https://github.com/primefaces/primereact/issues/1516)
+- Rename iconsTemplate property to icons property on Dialog [\#1514](https://github.com/primefaces/primereact/issues/1514)
+- Rename iconsTemplate property to icons property on Sidebar [\#1513](https://github.com/primefaces/primereact/issues/1513)
+- Rename Growl component to Toast component [\#1512](https://github.com/primefaces/primereact/issues/1512)
+- Change some property names on Galleria [\#1503](https://github.com/primefaces/primereact/issues/1503)
+- Label Nova, Luna and Rhea as Legacy Themes [\#1501](https://github.com/primefaces/primereact/issues/1501)
+- Change the values of position property on Growl [\#1497](https://github.com/primefaces/primereact/issues/1497)
+- Remove responsive property from OrderList [\#1494](https://github.com/primefaces/primereact/issues/1494)
+- Remove responsive property from PickList [\#1493](https://github.com/primefaces/primereact/issues/1493)
+- Replace dotsContainerClassName with indicatorsContentClassName property on Carousel [\#1491](https://github.com/primefaces/primereact/issues/1491)
+- Remove Spinner Component [\#1488](https://github.com/primefaces/primereact/issues/1488)
+- Remove Lightbox component [\#1487](https://github.com/primefaces/primereact/issues/1487)
+- Migrate to PrimeOne Design Architecture [\#1484](https://github.com/primefaces/primereact/issues/1484)
+- Remove responsive attribute from DataTable [\#1250](https://github.com/primefaces/primereact/issues/1250)
+
+**Implemented New Features and Enhancements:**
+
+- Add emptyTemplate property to FileUpload [\#1508](https://github.com/primefaces/primereact/issues/1508)
+- New Component: Ripple [\#1507](https://github.com/primefaces/primereact/issues/1507)
+- Add index parameter to onRowEditInit and onRowSave callbacks on DataTable [\#1505](https://github.com/primefaces/primereact/issues/1505)
+- Add onEditorInit callback for cell editing mode to Column [\#1504](https://github.com/primefaces/primereact/issues/1504)
+- Add left and right properties to Toolbar [\#1502](https://github.com/primefaces/primereact/issues/1502)
+- Material Theme [\#1500](https://github.com/primefaces/primereact/issues/1500)
+- Bootstrap Theme  [\#1499](https://github.com/primefaces/primereact/issues/1499)
+- Add start and end properties to Menubar [\#1498](https://github.com/primefaces/primereact/issues/1498)
+- Add valueTemplate property to Dropdown [\#1496](https://github.com/primefaces/primereact/issues/1496)
+- Add iconPos property to ToggleButton [\#1495](https://github.com/primefaces/primereact/issues/1495)
+- Add badge and badgeClassName properties to Button [\#1490](https://github.com/primefaces/primereact/issues/1490)
+- Add Badge styles to core css [\#1489](https://github.com/primefaces/primereact/issues/1489)
+- Improved Overlay Animations [\#1486](https://github.com/primefaces/primereact/issues/1486)
+- PrimeOne Themes [\#1485](https://github.com/primefaces/primereact/issues/1485)
+- Label Nova, Luna and Rhea as Legacy Themes [\#1483](https://github.com/primefaces/primereact/issues/1483)
+- Add contentClassName property to Dialog [\#1455](https://github.com/primefaces/primereact/issues/1455)
+- Add listClassName property to Listbox [\#1454](https://github.com/primefaces/primereact/issues/1454)
+- Change onSlideEnd callback param on Slider [\#1437](https://github.com/primefaces/primereact/issues/1437)
+- Improve Tooltip implementation [\#1436](https://github.com/primefaces/primereact/issues/1436)
+- Add onValueChange property to InputNumber [\#1418](https://github.com/primefaces/primereact/issues/1418)
+- It is impossible to type fractional digits on InputNumber [\#1380](https://github.com/primefaces/primereact/issues/1380)
+- Remove browserslist, leave processing and transpilation to applications [\#1312](https://github.com/primefaces/primereact/issues/1312)
+- Custom content support for Button [\#1258](https://github.com/primefaces/primereact/issues/1258)
+
+**Fixed bugs:**
+
+- Global filter is not working with invalid values on TreeTable [\#1517](https://github.com/primefaces/primereact/issues/1517)
+- Captcha throws a JS exception [\#1509](https://github.com/primefaces/primereact/issues/1509)
+- Calendar with appendTo property isn't working as expected [\#1506](https://github.com/primefaces/primereact/issues/1506)
+- Chart does not update when its options and type properties change [\#1492](https://github.com/primefaces/primereact/issues/1492)
+- Dynamic options breaks InputNumber [\#1470](https://github.com/primefaces/primereact/issues/1470)
+- DatePicker Milliseconds jumps from 000 to 199 [\#1456](https://github.com/primefaces/primereact/issues/1456)
+- Typing for selectedItemTemplate in AutoComplete is wrong [\#1428](https://github.com/primefaces/primereact/issues/1428)
+- Can't type - as first symbol into an Inputnumber [\#1427](https://github.com/primefaces/primereact/issues/1427)
+- If the invalid value is entered to Calendar with keepInvalid property, the onChange event returns null [\#1422](https://github.com/primefaces/primereact/issues/1422)
+- Calling clearTimeout is required before unmounting AutoComplete [\#1421](https://github.com/primefaces/primereact/issues/1421)
+- Clear button is not closing Calendar [\#1416](https://github.com/primefaces/primereact/issues/1416)
+- File selection does not work after validation fails [\#1415](https://github.com/primefaces/primereact/issues/1415)
+- InputNumber prevents min key number [\#1412](https://github.com/primefaces/primereact/issues/1412)
+- ListBox, Dropdown: Using non-unique key [\#1397](https://github.com/primefaces/primereact/issues/1397)
+
 ## [4.2.2](https://github.com/primefaces/primereact/tree/4.2.2) (2020-06-09)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/4.2.1...4.2.2)
