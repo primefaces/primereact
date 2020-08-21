@@ -110,7 +110,7 @@ export class FileUpload extends Component {
     }
 
     chooseDisabled() {
-        return this.props.disabled || (this.props.fileLimit && this.props.fileLimit <= this.state.files.length + this.uploadedFileCount || this.state.uploading);
+        return this.props.disabled || (this.props.fileLimit && this.props.fileLimit <= this.state.files.length + this.uploadedFileCount) || this.state.uploading;
     }
 
     uploadDisabled() {
