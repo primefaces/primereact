@@ -5,11 +5,7 @@
 
 # PrimeReact
 
-PrimeReact is a rich set of open source UI Components for React.
-
-[![PrimeReact Logo](https://www.primefaces.org/wp-content/uploads/2017/09/primereact-transparent-250.png "PrimeReact")](https://www.primefaces.org/primereact)
-
-See [PrimeReact homepage](https://www.primefaces.org/primereact) for live showcase and documentation.
+PrimeReact is a rich set of open source UI Components for React. See [PrimeReact homepage](https://www.primefaces.org/primereact) for live showcase and documentation.
 
 ## Download
 
