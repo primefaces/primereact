@@ -1,24 +1,22 @@
 import React, { Component } from 'react';
-import { GalleriaService } from '../service/GalleriaService';
+import { PhotoService } from '../service/PhotoService';
 import { Galleria } from '../../components/galleria/Galleria';
-import { GalleriaSubmenu } from './GalleriaSubmenu';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class GalleriaThumbnailDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             images: null
         };
 
-        this.galleriaService = new GalleriaService();
+        this.galleriaService = new PhotoService();
         this.itemTemplate = this.itemTemplate.bind(this);
-        this.previewTemplate = this.previewTemplate.bind(this);
-        this.captionTemplate = this.captionTemplate.bind(this);
+        this.thumbnailTemplate = this.thumbnailTemplate.bind(this);
 
         this.responsiveOptions = [
             {
@@ -52,68 +50,47 @@ export class GalleriaThumbnailDemo extends Component {
     }
 
     itemTemplate(item) {
-        return (
-            <div className="p-grid p-nogutter p-justify-center">
-                <img src={`${item.thumbnailImageSrc}`} alt={item.alt} style={{ width: '100%', display: 'block' }}/>
-            </div>
-        );
+        return <img src={item.itemImageSrc} alt={item.alt} style={{ width: '100%', display: 'block' }} />
     }
 
-    previewTemplate(item) {
-        return <img src={`${item.previewImageSrc}`} alt={item.alt} style={{ width: '100%', display: 'block' }} />
-    }
-
-    captionTemplate(item) {
-        return (
-            <React.Fragment>
-                <h4>{item.title}</h4>
-                <p>{item.alt}</p>
-            </React.Fragment>
-        );
+    thumbnailTemplate(item) {
+        return <img src={item.thumbnailImageSrc} alt={item.alt} style={{ width: '100%', display: 'block' }} />
     }
 
     render() {
         return (
             <div>
-                <GalleriaSubmenu />
-
                 <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Galleria - Thumbnail</h1>
-                        <p></p>
-
-                        <AppContentContext.Consumer>
-                            {context => <button onClick={() => context.onChangelogBtnClick("galleria")} className="layout-changelog-button">{context.changelogText}</button>}
-                        </AppContentContext.Consumer>
-                    </div>
+                    <AppInlineHeader changelogText="galleria">
+                        <h1>Galleria <span>Thumbnail</span></h1>
+                        <p>Thumbnails represent a smaller version of the actual content.</p>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Basic</h3>
-                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5}
-                        previewItemTemplate={this.previewTemplate} thumbnailItemTemplate={this.itemTemplate}
-                        style={{maxWidth: '520px'}} />
+                    <div className="card">
+                        <h5>Positioned at Bottom</h5>
+                        <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
+                            item={this.itemTemplate} thumbnail={this.thumbnailTemplate} />
+                    </div>
 
-                    <h3>Position</h3>
-                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions2} numVisible={4}
-                        previewItemTemplate={this.previewTemplate} thumbnailItemTemplate={this.itemTemplate}
-                        thumbnailsPosition="left"
-                        style={{maxWidth: '610px', marginTop: '2em'}} header="Left" />
+                    <div className="card">
+                        <h5>Positioned at Left</h5>
+                        <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions2} numVisible={4} thumbnailsPosition="left" style={{ maxWidth: '640px' }}
+                            item={this.itemTemplate} thumbnail={this.thumbnailTemplate} />
+                    </div>
 
-                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions2} numVisible={4}
-                        previewItemTemplate={this.previewTemplate} thumbnailItemTemplate={this.itemTemplate}
-                        thumbnailsPosition="right"
-                        style={{maxWidth: '610px', marginTop: '2em'}} header="Right" />
+                    <div className="card">
+                        <h5>Positioned at Right</h5>
+                        <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions2} numVisible={4} thumbnailsPosition="right" style={{ maxWidth: '640px' }}
+                            item={this.itemTemplate} thumbnail={this.thumbnailTemplate} />
+                    </div>
 
-                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5}
-                        previewItemTemplate={this.previewTemplate} thumbnailItemTemplate={this.itemTemplate}
-                        thumbnailsPosition="top"
-                        style={{maxWidth: '520px', marginTop: '2em'}} header="Top" />
-
-                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5}
-                        previewItemTemplate={this.previewTemplate} thumbnailItemTemplate={this.itemTemplate}
-                        thumbnailsPosition="bottom"
-                        style={{maxWidth: '520px', marginTop: '2em'}} header="Bottom" />
+                    <div className="card">
+                        <h5>Positioned at Top</h5>
+                        <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5} thumbnailsPosition="top" style={{ maxWidth: '640px' }}
+                            item={this.itemTemplate} thumbnail={this.thumbnailTemplate} />
+                    </div>
                 </div>
 
                 <GalleriaThumbnailDemoDoc></GalleriaThumbnailDemoDoc>
@@ -133,25 +110,24 @@ export class GalleriaThumbnailDemoDoc extends Component {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Source">
-                        <CodeHighlight className="language-javascript">
-                            {`
+<CodeHighlight lang="js">
+{`
 import React, { Component } from 'react';
-import { GalleriaService } from '../service/GalleriaService';
-import { Galleria } from '../../components/galleria/Galleria';
+import { PhotoService } from '../service/PhotoService';
+import { Galleria } from 'primereact/galleria';
 
 export class GalleriaThumbnailDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             images: null
         };
 
-        this.galleriaService = new GalleriaService();
+        this.galleriaService = new PhotoService();
         this.itemTemplate = this.itemTemplate.bind(this);
-        this.previewTemplate = this.previewTemplate.bind(this);
-        this.captionTemplate = this.captionTemplate.bind(this);
+        this.thumbnailTemplate = this.thumbnailTemplate.bind(this);
 
         this.responsiveOptions = [
             {
@@ -185,74 +161,45 @@ export class GalleriaThumbnailDemo extends Component {
     }
 
     itemTemplate(item) {
-        return (
-            <div className="p-grid p-nogutter p-justify-center">
-                <img src={\`\${item.thumbnailImageSrc}\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={item.alt} style={{ width: '100%', display: 'block' }}/>
-            </div>
-        );
+        return <img src={item.itemImageSrc} alt={item.alt} style={{ width: '100%', display: 'block' }} />
     }
 
-    previewTemplate(item) {
-        return <img src={\`\${item.previewImageSrc}\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={item.alt} style={{ width: '100%', display: 'block' }} />
-    }
-
-    captionTemplate(item) {
-        return (
-            <React.Fragment>
-                <h4>{item.title}</h4>
-                <p>{item.alt}</p>
-            </React.Fragment>
-        );
+    thumbnailTemplate(item) {
+        return <img src={item.thumbnailImageSrc} alt={item.alt} style={{ width: '100%', display: 'block' }} />
     }
 
     render() {
         return (
             <div>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Galleria - Thumbnail</h1>
-                        <p></p>
-
-                        <AppContentContext.Consumer>
-                            {context => <button onClick={() => context.onChangelogBtnClick("galleria")} className="layout-changelog-button">{context.changelogText}</button>}
-                        </AppContentContext.Consumer>
-                    </div>
+                <div className="card">
+                    <h5>Positioned at Bottom</h5>
+                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
+                        item={this.itemTemplate} thumbnail={this.thumbnailTemplate} />
                 </div>
 
-                <div className="content-section implementation">
-                    <h3>Basic</h3>
-                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5}
-                        previewItemTemplate={this.previewTemplate} thumbnailItemTemplate={this.itemTemplate}
-                        style={{maxWidth: '520px'}} />
+                <div className="card">
+                    <h5>Positioned at Left</h5>
+                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions2} numVisible={4} thumbnailsPosition="left" style={{ maxWidth: '640px' }}
+                        item={this.itemTemplate} thumbnail={this.thumbnailTemplate} />
+                </div>
 
-                    <h3>Position</h3>
-                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions2} numVisible={4}
-                        previewItemTemplate={this.previewTemplate} thumbnailItemTemplate={this.itemTemplate}
-                        thumbnailsPosition="left"
-                        style={{maxWidth: '610px', marginTop: '2em'}} header="Left" />
+                <div className="card">
+                    <h5>Positioned at Right</h5>
+                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions2} numVisible={4} thumbnailsPosition="right" style={{ maxWidth: '640px' }}
+                        item={this.itemTemplate} thumbnail={this.thumbnailTemplate} />
+                </div>
 
-                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions2} numVisible={4}
-                        previewItemTemplate={this.previewTemplate} thumbnailItemTemplate={this.itemTemplate}
-                        thumbnailsPosition="right"
-                        style={{maxWidth: '610px', marginTop: '2em'}} header="Right" />
-
-                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5}
-                        previewItemTemplate={this.previewTemplate} thumbnailItemTemplate={this.itemTemplate}
-                        thumbnailsPosition="top"
-                        style={{maxWidth: '520px', marginTop: '2em'}} header="Top" />
-
-                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={4}
-                        previewItemTemplate={this.previewTemplate} thumbnailItemTemplate={this.itemTemplate}
-                        thumbnailsPosition="bottom"
-                        style={{maxWidth: '520px', marginTop: '2em'}} header="Bottom" />
+                <div className="card">
+                    <h5>Positioned at Top</h5>
+                    <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5} thumbnailsPosition="top" style={{ maxWidth: '640px' }}
+                        item={this.itemTemplate} thumbnail={this.thumbnailTemplate} />
                 </div>
             </div>
         );
     }
 }
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
                     </TabPanel>
                 </TabView>
             </div>

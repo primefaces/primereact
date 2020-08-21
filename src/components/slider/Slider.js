@@ -46,11 +46,6 @@ export class Slider extends Component {
         this.handleIndex = 0;
     }
 
-    componentWillUnmount() {
-        this.unbindDragListeners();
-        this.unbindTouchListeners();
-    }
-
     onDragStart(event, index) {
         if (this.disabled) {
             return;
@@ -230,6 +225,11 @@ export class Slider extends Component {
         }
     }
 
+    componentWillUnmount() {
+        this.unbindDragListeners();
+        this.unbindTouchListeners();
+    }
+
     renderHandle(leftValue, bottomValue, index) {
         const handleClassName = classNames('p-slider-handle', {
             'p-slider-handle-start': index === 0,
@@ -239,8 +239,8 @@ export class Slider extends Component {
 
         return (
             <span onMouseDown={event => this.onMouseDown(event, index)} onTouchStart={event => this.onTouchStart(event, index)} tabIndex={this.props.tabIndex}
-                  className={handleClassName}  style={{transition: this.dragging ? 'none' : null, left: leftValue + '%', bottom: bottomValue + '%'}}
-                  role="slider" aria-valuemin={this.props.min} aria-valuemax={this.props.max} aria-valuenow={this.props.value} aria-labelledby={this.props.ariaLabelledBy}></span>
+                  className={handleClassName}  style={{transition: this.dragging ? 'none' : null, left: leftValue !== null && (leftValue + '%'), bottom: bottomValue && (bottomValue + '%')}}
+                  role="slider" aria-valuemin={this.props.min} aria-valuemax={this.props.max} aria-valuenow={leftValue || bottomValue} aria-labelledby={this.props.ariaLabelledBy}></span>
         );
     }
 
@@ -249,16 +249,16 @@ export class Slider extends Component {
         let horizontal = (this.props.orientation === 'horizontal');
         const handleValueStart = (values[0] < this.props.min ? 0 : values[0] - this.props.min) * 100 / (this.props.max - this.props.min);
         const handleValueEnd = (values[1] > this.props.max ? 100 : values[1] - this.props.min) * 100 / (this.props.max - this.props.min);
-        const rangeStartHandle = horizontal ? this.renderHandle(handleValueStart, 'auto', 0) : this.renderHandle('auto', handleValueStart, 0);
-        const rangeEndHandle = horizontal ? this.renderHandle(handleValueEnd, 'auto', 1) : this.renderHandle('auto', handleValueEnd, 1);
+        const rangeStartHandle = horizontal ? this.renderHandle(handleValueStart, null, 0) : this.renderHandle(null, handleValueStart, 0);
+        const rangeEndHandle = horizontal ? this.renderHandle(handleValueEnd, null, 1) : this.renderHandle(null, handleValueEnd, 1);
         const rangeStyle = horizontal ? {left: handleValueStart + '%', width: (handleValueEnd - handleValueStart) + '%'} : {bottom: handleValueStart + '%', height: (handleValueEnd - handleValueStart) + '%'};
 
         return (
-            <React.Fragment>
+            <>
                 <span className="p-slider-range" style={rangeStyle}></span>
                 {rangeStartHandle}
                 {rangeEndHandle}
-            </React.Fragment>
+            </>
         )
     }
 
@@ -274,13 +274,13 @@ export class Slider extends Component {
             handleValue = (value - this.props.min) * 100 / (this.props.max - this.props.min);
 
         const rangeStyle = this.props.orientation === 'horizontal' ? {width: handleValue + '%'} : {height: handleValue + '%'};
-        const handle = this.props.orientation === 'horizontal' ? this.renderHandle(handleValue, 'auto', null) : this.renderHandle('auto', handleValue, null);
+        const handle = this.props.orientation === 'horizontal' ? this.renderHandle(handleValue, null, null) : this.renderHandle(null, handleValue, null);
 
         return (
-            <React.Fragment>
-                <span className="p-slider-range p-slider-range-min ui-widget-header ui-corner-all" style={rangeStyle}></span>
+            <>
+                <span className="p-slider-range" style={rangeStyle}></span>
                 {handle}
-            </React.Fragment>
+            </>
         );
     }
 

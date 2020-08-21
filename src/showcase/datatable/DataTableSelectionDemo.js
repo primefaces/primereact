@@ -1,112 +1,123 @@
 import React, { Component } from 'react';
-import {DataTable} from '../../components/datatable/DataTable';
-import {Column} from '../../components/column/Column';
-import {CarService} from '../service/CarService';
-import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
-import {TabView,TabPanel} from '../../components/tabview/TabView';
-import AppContentContext from '../../AppContentContext';
+import { DataTable } from '../../components/datatable/DataTable';
+import { Column } from '../../components/column/Column';
+import ProductService from '../service/ProductService';
+import { Toast } from '../../components/toast/Toast';
+import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class DataTableSelectionDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
-            cars: [],
-            selectedCar1: null,
-            selectedCar2: null,
-            selectedCars1: null,
-            selectedCars2: null,
-            selectedCars3: null
+            products: [],
+            selectedProduct1: null,
+            selectedProduct2: null,
+            selectedProduct3: null,
+            selectedProducts1: null,
+            selectedProducts2: null,
+            selectedProducts3: null
         };
-        this.carservice = new CarService();
+
+        this.productService = new ProductService();
+        this.onRowSelect = this.onRowSelect.bind(this);
+        this.onRowUnselect = this.onRowUnselect.bind(this);
     }
 
     componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
     }
 
-    displaySelection(data) {
-        if (!data || data.length === 0) {
-            return <div style={{textAlign: 'left'}}>No Selection</div>;
-        }
-        else {
-            if (data instanceof Array)
-                return <ul style={{textAlign: 'left', margin: 0}}>{data.map((car,i) => <li key={car.vin}>{car.vin + ' - ' + car.year + ' - ' + car.brand + ' - ' + car.color}</li>)}</ul>;
-            else
-                return <div style={{textAlign: 'left'}}>Selected Car: {data.vin + ' - ' + data.year + ' - ' + data.brand + ' - ' + data.color}</div>
-        }
+    onRowSelect(event) {
+        this.toast.show({ severity: 'info', summary: 'Product Selected', detail: 'Name: ' + event.data.name, life: 3000 });
+    }
+
+    onRowUnselect(event) {
+        this.toast.show({ severity: 'warn', summary: 'Product Unselected', detail: 'Name: ' + event.data.name, life: 3000 });
     }
 
     render() {
         return (
             <div>
-                <DataTableSubmenu />
-
                 <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>DataTable - Selection</h1>
+                    <AppInlineHeader changelogText="dataTable">
+                        <h1>DataTable <span>Selection</span></h1>
                         <p>DataTable provides single and multiple selection modes on click of a row. Selected rows are bound to the selection property and onRowSelect-onRowUnselect
                             events are provided as optional callbacks. In addition built-in radio button and checkbox based selections are available as alternatives.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("dataTable")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Single</h3>
-                    <p>In single mode, a row is selected on click event of a row. If the row is already selected then the row gets unselected.</p>
-                    <DataTable value={this.state.cars} selectionMode="single" header="Single Selection" footer={this.displaySelection(this.state.selectedCar1)}
-                        selection={this.state.selectedCar1} onSelectionChange={e => this.setState({selectedCar1: e.value})}>
-                        <Column field="vin" header="Vin" />
-                        <Column field="year" header="Year" />
-                        <Column field="brand" header="Brand" />
-                        <Column field="color" header="Color" />
-                    </DataTable>
+                    <Toast ref={(el) => this.toast = el} />
 
-                    <h3>Multiple</h3>
-                    <p>In multiple mode, selection binding should be an array. For touch enabled devices, selection is managed by tapping and for other devices metakey or shiftkey are required.
-                        Setting metaKeySelection property as false enables multiple selection without meta key.
-                    </p>
-                    <DataTable value={this.state.cars} selectionMode="multiple" header="Multiple Selection with MetaKey" footer={this.displaySelection(this.state.selectedCars1)}
-                        selection={this.state.selectedCars1} onSelectionChange={e => this.setState({selectedCars1: e.value})}>
-                        <Column field="vin" header="Vin" />
-                        <Column field="year" header="Year" />
-                        <Column field="brand" header="Brand" />
-                        <Column field="color" header="Color" />
-                    </DataTable>
+                    <div className="card">
+                        <h5>Single</h5>
+                        <p>In single mode, a row is selected on click event of a row. If the row is already selected then the row gets unselected.</p>
+                        <DataTable value={this.state.products} selection={this.state.selectedProduct1} onSelectionChange={e => this.setState({ selectedProduct1: e.value })} selectionMode="single" dataKey="id">
+                            <Column field="code" header="Code"></Column>
+                            <Column field="name" header="Name"></Column>
+                            <Column field="category" header="Category"></Column>
+                            <Column field="quantity" header="Quantity"></Column>
+                        </DataTable>
+                    </div>
 
-                    <DataTable value={this.state.cars} selectionMode="multiple" header="Multiple Selection without MetaKey" footer={this.displaySelection(this.state.selectedCars2)}
-                        selection={this.state.selectedCars2} onSelectionChange={e => this.setState({selectedCars2: e.value})} style={{marginTop: '2em'}} metaKeySelection={false}>
-                        <Column field="vin" header="Vin" />
-                        <Column field="year" header="Year" />
-                        <Column field="brand" header="Brand" />
-                        <Column field="color" header="Color" />
-                    </DataTable>
+                    <div className="card">
+                        <h5>Multiple</h5>
+                        <p>In multiple mode, selection binding should be an array. For touch enabled devices, selection is managed by tapping and for other devices metakey or shiftkey are required.
+                        Setting metaKeySelection property as false enables multiple selection without meta key.</p>
+                        <DataTable value={this.state.products} header="Multiple Selection with MetaKey" selection={this.state.selectedProducts1} onSelectionChange={e => this.setState({ selectedProducts1: e.value })} selectionMode="multiple" dataKey="id">
+                            <Column field="code" header="Code"></Column>
+                            <Column field="name" header="Name"></Column>
+                            <Column field="category" header="Category"></Column>
+                            <Column field="quantity" header="Quantity"></Column>
+                        </DataTable>
 
-                    <h3>RadioButton</h3>
-                    <p>Single selection can also be handled using radio buttons by enabling the selectionMode property of column as "single".</p>
-                    <DataTable value={this.state.cars} header="Single Selection" footer={this.displaySelection(this.state.selectedCar2)}
-                        selection={this.state.selectedCar2} onSelectionChange={e => this.setState({selectedCar2: e.value})}>
-                        <Column selectionMode="single" style={{width:'3em'}}/>
-                        <Column field="vin" header="Vin" />
-                        <Column field="year" header="Year" />
-                        <Column field="brand" header="Brand" />
-                        <Column field="color" header="Color" />
-                    </DataTable>
+                        <DataTable value={this.state.products} header="Multiple Selection without MetaKey" selection={this.state.selectedProducts2} onSelectionChange={e => this.setState({ selectedProducts2: e.value })} selectionMode="multiple" dataKey="id" metaKeySelection={false} style={{ marginTop: '2em' }}>
+                            <Column field="code" header="Code"></Column>
+                            <Column field="name" header="Name"></Column>
+                            <Column field="category" header="Category"></Column>
+                            <Column field="quantity" header="Quantity"></Column>
+                        </DataTable>
+                    </div>
 
-                    <h3>Checkbox</h3>
-                    <p>Multiple selection can also be handled using checkboxes by enabling the selectionMode property of column as "multiple".</p>
-                    <DataTable value={this.state.cars} header="Single Selection" footer={this.displaySelection(this.state.selectedCars3)}
-                        selection={this.state.selectedCars3} onSelectionChange={e => this.setState({selectedCars3: e.value})}>
-                        <Column selectionMode="multiple" style={{width:'3em'}}/>
-                        <Column field="vin" header="Vin" />
-                        <Column field="year" header="Year" />
-                        <Column field="brand" header="Brand" />
-                        <Column field="color" header="Color" />
-                    </DataTable>
+                    <div className="card">
+                        <h5>Events</h5>
+                        <p>row-select and row-unselects are available as selection events.</p>
+                        <DataTable value={this.state.products} selection={this.state.selectedProduct2} onSelectionChange={e => this.setState({ selectedProduct2: e.value })} selectionMode="single" dataKey="id"
+                            onRowSelect={this.onRowSelect} onRowUnselect={this.onRowUnselect}>
+                            <Column field="code" header="Code"></Column>
+                            <Column field="name" header="Name"></Column>
+                            <Column field="category" header="Category"></Column>
+                            <Column field="quantity" header="Quantity"></Column>
+                        </DataTable>
+                    </div>
+
+                    <div className="card">
+                        <h5>RadioButton</h5>
+                        <p>Single selection can also be handled using radio buttons by enabling the selectionMode property of column as "single".</p>
+                        <DataTable value={this.state.products} selection={this.state.selectedProduct3} onSelectionChange={e => this.setState({ selectedProduct3: e.value })} dataKey="id">
+                            <Column selectionMode="single" headerStyle={{width: '3em'}}></Column>
+                            <Column field="code" header="Code"></Column>
+                            <Column field="name" header="Name"></Column>
+                            <Column field="category" header="Category"></Column>
+                            <Column field="quantity" header="Quantity"></Column>
+                        </DataTable>
+                    </div>
+
+                    <div className="card">
+                        <h5>Checkbox</h5>
+
+                        <DataTable value={this.state.products} selection={this.state.selectedProducts3} onSelectionChange={e => this.setState({ selectedProducts3: e.value })} dataKey="id">
+                            <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>
+                            <Column field="code" header="Code"></Column>
+                            <Column field="name" header="Name"></Column>
+                            <Column field="category" header="Category"></Column>
+                            <Column field="quantity" header="Quantity"></Column>
+                        </DataTable>
+                    </div>
                 </div>
 
                 <DataTableSelectionDemoDoc></DataTableSelectionDemoDoc>
@@ -125,95 +136,113 @@ export class DataTableSelectionDemoDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service/CarService';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import ProductService from '../service/ProductService';
+import { Toast } from 'primereact/toast';
 
 export class DataTableSelectionDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
-            cars: [],
-            selectedCar1: null,
-            selectedCar2: null,
-            selectedCars1: null,
-            selectedCars2: null,
-            selectedCars3: null
+            products: [],
+            selectedProduct1: null,
+            selectedProduct2: null,
+            selectedProduct3: null,
+            selectedProducts1: null,
+            selectedProducts2: null,
+            selectedProducts3: null
         };
-        this.carservice = new CarService();
+
+        this.productService = new ProductService();
+        this.onRowSelect = this.onRowSelect.bind(this);
+        this.onRowUnselect = this.onRowUnselect.bind(this);
     }
 
     componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
     }
 
-    displaySelection(data) {
-        if (!data || data.length === 0) {
-            return <div style={{textAlign: 'left'}}>No Selection</div>;
-        }
-        else {
-            if (data instanceof Array)
-                return <ul style={{textAlign: 'left', margin: 0}}>{data.map((car,i) => <li key={car.vin}>{car.vin + ' - ' + car.year + ' - ' + car.brand + ' - ' + car.color}</li>)}</ul>;
-            else
-                return <div style={{textAlign: 'left'}}>Selected Car: {data.vin + ' - ' + data.year + ' - ' + data.brand + ' - ' + data.color}</div>
-        }
+    onRowSelect(event) {
+        this.toast.show({ severity: 'info', summary: 'Product Selected', detail: 'Name: ' + event.data.name, life: 3000 });
+    }
+
+    onRowUnselect(event) {
+        this.toast.show({ severity: 'warn', summary: 'Product Unselected', detail: 'Name: ' + event.data.name, life: 3000 });
     }
 
     render() {
         return (
             <div>
-                <h3>Single</h3>
-                <p>In single mode, a row is selected on click event of a row. If the row is already selected then the row gets unselected.</p>
-                <DataTable value={this.state.cars} selectionMode="single" header="Single Selection" footer={this.displaySelection(this.state.selectedCar1)}
-                    selection={this.state.selectedCar1} onSelectionChange={e => this.setState({selectedCar1: e.value})}>
-                    <Column field="vin" header="Vin" />
-                    <Column field="year" header="Year" />
-                    <Column field="brand" header="Brand" />
-                    <Column field="color" header="Color" />
-                </DataTable>
+                <Toast ref={(el) => this.toast = el} />
 
-                <h3>Multiple</h3>
-                <p>In multiple mode, selection binding should be an array. For touch enabled devices, selection is managed by tapping and for other devices metakey or shiftkey are required.
-                    Setting metaKeySelection property as false enables multiple selection without meta key.
-                </p>
-                <DataTable value={this.state.cars} selectionMode="multiple" header="Multiple Selection with MetaKey" footer={this.displaySelection(this.state.selectedCars1)}
-                    selection={this.state.selectedCars1} onSelectionChange={e => this.setState({selectedCars1: e.value})}>
-                    <Column field="vin" header="Vin" />
-                    <Column field="year" header="Year" />
-                    <Column field="brand" header="Brand" />
-                    <Column field="color" header="Color" />
-                </DataTable>
+                <div className="card">
+                    <h5>Single</h5>
+                    <p>In single mode, a row is selected on click event of a row. If the row is already selected then the row gets unselected.</p>
+                    <DataTable value={this.state.products} selection={this.state.selectedProduct1} onSelectionChange={e => this.setState({ selectedProduct1: e.value })} selectionMode="single" dataKey="id">
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="quantity" header="Quantity"></Column>
+                    </DataTable>
+                </div>
 
-                <DataTable value={this.state.cars} selectionMode="multiple" header="Multiple Selection without MetaKey" footer={this.displaySelection(this.state.selectedCars2)}
-                    selection={this.state.selectedCars2} onSelectionChange={e => this.setState({selectedCars2: e.value})} style={{marginTop: '2em'}} metaKeySelection={false}>
-                    <Column field="vin" header="Vin" />
-                    <Column field="year" header="Year" />
-                    <Column field="brand" header="Brand" />
-                    <Column field="color" header="Color" />
-                </DataTable>
+                <div className="card">
+                    <h5>Multiple</h5>
+                    <p>In multiple mode, selection binding should be an array. For touch enabled devices, selection is managed by tapping and for other devices metakey or shiftkey are required.
+                    Setting metaKeySelection property as false enables multiple selection without meta key.</p>
+                    <DataTable value={this.state.products} header="Multiple Selection with MetaKey" selection={this.state.selectedProducts1} onSelectionChange={e => this.setState({ selectedProducts1: e.value })} selectionMode="multiple" dataKey="id">
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="quantity" header="Quantity"></Column>
+                    </DataTable>
 
-                <h3>RadioButton</h3>
-                <p>Single selection can also be handled using radio buttons by enabling the selectionMode property of column as "single".</p>
-                <DataTable value={this.state.cars} header="Single Selection" footer={this.displaySelection(this.state.selectedCar2)}
-                    selection={this.state.selectedCar2} onSelectionChange={e => this.setState({selectedCar2: e.value})}>
-                    <Column selectionMode="single" style={{width:'3em'}}/>
-                    <Column field="vin" header="Vin" />
-                    <Column field="year" header="Year" />
-                    <Column field="brand" header="Brand" />
-                    <Column field="color" header="Color" />
-                </DataTable>
+                    <DataTable value={this.state.products} header="Multiple Selection without MetaKey" selection={this.state.selectedProducts2} onSelectionChange={e => this.setState({ selectedProducts2: e.value })} selectionMode="multiple" dataKey="id" metaKeySelection={false} style={{ marginTop: '2em' }}>
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="quantity" header="Quantity"></Column>
+                    </DataTable>
+                </div>
 
-                <h3>Checkbox</h3>
-                <p>Multiple selection can also be handled using checkboxes by enabling the selectionMode property of column as "multiple".</p>
-                <DataTable value={this.state.cars} header="Single Selection" footer={this.displaySelection(this.state.selectedCars3)}
-                    selection={this.state.selectedCars3} onSelectionChange={e => this.setState({selectedCars3: e.value})}>
-                    <Column selectionMode="multiple" style={{width:'3em'}}/>
-                    <Column field="vin" header="Vin" />
-                    <Column field="year" header="Year" />
-                    <Column field="brand" header="Brand" />
-                    <Column field="color" header="Color" />
-                </DataTable>
+                <div className="card">
+                    <h5>Events</h5>
+                    <p>row-select and row-unselects are available as selection events.</p>
+                    <DataTable value={this.state.products} selection={this.state.selectedProduct2} onSelectionChange={e => this.setState({ selectedProduct2: e.value })} selectionMode="single" dataKey="id"
+                        onRowSelect={this.onRowSelect} onRowUnselect={this.onRowUnselect}>
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="quantity" header="Quantity"></Column>
+                    </DataTable>
+                </div>
+
+                <div className="card">
+                    <h5>RadioButton</h5>
+                    <p>Single selection can also be handled using radio buttons by enabling the selectionMode property of column as "single".</p>
+                    <DataTable value={this.state.products} selection={this.state.selectedProduct3} onSelectionChange={e => this.setState({ selectedProduct3: e.value })} dataKey="id">
+                        <Column selectionMode="single" headerStyle={{width: '3em'}}></Column>
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="quantity" header="Quantity"></Column>
+                    </DataTable>
+                </div>
+
+                <div className="card">
+                    <h5>Checkbox</h5>
+
+                    <DataTable value={this.state.products} selection={this.state.selectedProducts3} onSelectionChange={e => this.setState({ selectedProducts3: e.value })} dataKey="id">
+                        <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="quantity" header="Quantity"></Column>
+                    </DataTable>
+                </div>
             </div>
         );
     }
@@ -413,15 +442,9 @@ const DataTableSelectionDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="DataTableSelectionDemo" sources={[key, value]} service="CarService" data="cars-small" />
-                                </TabPanel>
-                            );
-                        })
-                    }
+                    <TabPanel header="Source">
+                        <LiveEditor name="DataTableSelectionDemo" sources={this.sources} service="CarService" data="cars-small" />
+                    </TabPanel>
                 </TabView>
             </div>
         )

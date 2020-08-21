@@ -1,6 +1,6 @@
 {
   "name": "primereact",
-  "version": "5.0.0-SNAPSHOT",
+  "version": "5.0.0-rc.1",
   "homepage": ".",
   "repository": {
     "type": "git",
@@ -27,8 +27,8 @@
     "gulp-uglifycss": "^1.1.0",
     "node-sass": "^4.11.0",
     "primeflex": "2.0.0-rc.1",
-    "primeicons": "2.0.0",
-    "prismjs": "1.6.0",
+    "primeicons": "4.0.0",
+    "prismjs": "^1.15.0",
     "prop-types": "^15.6.2",
     "quill": "1.3.7",
     "react": "^16.13.1",

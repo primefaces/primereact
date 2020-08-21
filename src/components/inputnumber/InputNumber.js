@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import {InputText} from '../inputtext/InputText';
 import classNames from 'classnames';
 import {tip} from "../tooltip/Tooltip";
+import { Ripple } from '../ripple/Ripple';
 
 export class InputNumber extends Component {
 
@@ -14,8 +15,8 @@ export class InputNumber extends Component {
         buttonLayout: 'stacked',
         incrementButtonClassName: null,
         decrementButtonClassName: null,
-        incrementButtonIcon: 'pi pi-caret-up',
-        decrementButtonIcon: 'pi pi-caret-down',
+        incrementButtonIcon: 'pi pi-angle-up',
+        decrementButtonIcon: 'pi pi-angle-down',
         locale: undefined,
         localeMatcher: undefined,
         mode: 'decimal',
@@ -103,6 +104,10 @@ export class InputNumber extends Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {
+            focused: false
+        };
 
         this.constructParser();
 
@@ -387,14 +392,16 @@ export class InputNumber extends Component {
                         else if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
                             newValueStr = inputValue.slice(0, selectionStart - 1) + '0' + inputValue.slice(selectionStart);
                         }
+                        else if (decimalCharIndex > 0 && decimalCharIndex === 1) {
+                            newValueStr = inputValue.slice(0, selectionStart - 1) + '0' + inputValue.slice(selectionStart);
+                            newValueStr = this.parseValue(newValueStr) > 0 ? newValueStr : '';
+                        }
                         else {
                             newValueStr = inputValue.slice(0, selectionStart - 1) + inputValue.slice(selectionStart);
                         }
                     }
 
-                    if (newValueStr != null) {
-                        this.updateValue(event, newValueStr, 'delete-single');
-                    }
+                    this.updateValue(event, newValueStr, 'delete-single');
                 }
                 else {
                     newValueStr = this.deleteRange(inputValue, selectionStart, selectionEnd);
@@ -423,14 +430,16 @@ export class InputNumber extends Component {
                         else if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
                             newValueStr = inputValue.slice(0, selectionStart) + '0' + inputValue.slice(selectionStart + 1);
                         }
+                        else if (decimalCharIndex > 0 && decimalCharIndex === 1) {
+                            newValueStr = inputValue.slice(0, selectionStart) + '0' + inputValue.slice(selectionStart + 1);
+                            newValueStr = this.parseValue(newValueStr) > 0 ? newValueStr : '';
+                        }
                         else {
                             newValueStr = inputValue.slice(0, selectionStart) + inputValue.slice(selectionStart + 1);
                         }
                     }
 
-                    if (newValueStr != null) {
-                        this.updateValue(event, newValueStr, 'delete-back-single');
-                    }
+                    this.updateValue(event, newValueStr, 'delete-back-single');
                 }
                 else {
                     newValueStr = this.deleteRange(inputValue, selectionStart, selectionEnd);
@@ -447,9 +456,10 @@ export class InputNumber extends Component {
         event.preventDefault();
         let code = event.which || event.keyCode;
         let char = String.fromCharCode(code);
+        const isDecimalSign = this.isDecimalSign(char);
 
-        if ((48 <= code && code <= 57) || this.isMinusSign(char)) {
-            this.insert(event, char);
+        if ((48 <= code && code <= 57) || this.isMinusSign(char) || isDecimalSign) {
+            this.insert(event, char, isDecimalSign);
         }
     }
 
@@ -473,24 +483,46 @@ export class InputNumber extends Component {
         return false;
     }
 
-    insert(event, text) {
-        let selectionStart = this.inputEl.selectionStart;
-        let selectionEnd = this.inputEl.selectionEnd;
-        let inputValue = this.inputEl.value.trim();
-        let maxFractionDigits = this.numberFormat.resolvedOptions().maximumFractionDigits;
-        let newValueStr;
-        let decimalCharIndex = inputValue.search(this._decimal);
-        this._decimal.lastIndex = 0;
+    isDecimalSign(char) {
+        if (this._decimal.test(char)) {
+            this._decimal.lastIndex = 0;
+            return true;
+        }
 
-        if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
-            if ((selectionStart + text.length - (decimalCharIndex + 1)) <= maxFractionDigits) {
-                newValueStr = inputValue.slice(0, selectionStart) + text + inputValue.slice(selectionStart + text.length);
+        return false;
+    }
+
+    insert(event, text, isDecimalSign = false) {
+        const selectionStart = this.inputEl.selectionStart;
+        const selectionEnd = this.inputEl.selectionEnd;
+        let inputValue = this.inputEl.value.trim();
+        const decimalCharIndex = inputValue.search(this._decimal);
+        this._decimal.lastIndex = 0;
+        let newValueStr;
+
+        if (isDecimalSign) {
+            if (decimalCharIndex > 0 && selectionStart === decimalCharIndex) {
+                this.updateValue(event, inputValue, 'insert');
+            }
+            else if (decimalCharIndex > selectionStart && decimalCharIndex < selectionEnd) {
+                newValueStr = this.insertText(inputValue, text, selectionStart, selectionEnd);
                 this.updateValue(event, newValueStr, 'insert');
             }
         }
         else {
-            newValueStr = this.insertText(inputValue, text, selectionStart, selectionEnd);
-            this.updateValue(event, newValueStr, 'insert');
+            const maxFractionDigits = this.numberFormat.resolvedOptions().maximumFractionDigits;
+
+            if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
+                if ((selectionStart + text.length - (decimalCharIndex + 1)) <= maxFractionDigits) {
+                    newValueStr = inputValue.slice(0, selectionStart) + text + inputValue.slice(selectionStart + text.length);
+                    this.updateValue(event, newValueStr, 'insert');
+                }
+            }
+            else {
+                newValueStr = this.insertText(inputValue, text, selectionStart, selectionEnd);
+                const operation = selectionStart !== selectionEnd ? 'range-insert' : 'insert';
+                this.updateValue(event, newValueStr, operation);
+            }
         }
     }
 
@@ -657,6 +689,8 @@ export class InputNumber extends Component {
             if (newLength === currentLength) {
                 if (operation === 'insert' || operation === 'delete-back-single')
                     this.inputEl.setSelectionRange(selectionEnd + 1, selectionEnd + 1);
+                if (operation === 'range-insert')
+                    this.inputEl.setSelectionRange(selectionEnd, selectionEnd);
                 else if (operation === 'delete-single')
                     this.inputEl.setSelectionRange(selectionEnd - 1, selectionEnd - 1);
                 else if (operation === 'delete-range')
@@ -711,23 +745,25 @@ export class InputNumber extends Component {
     }
 
     onInputFocus(event) {
-        this.focus = true;
-
-        if (this.props.onFocus) {
-            this.props.onFocus(event);
-        }
+        event.persist();
+        this.setState({ focused: true }, () => {
+            if (this.props.onFocus) {
+                this.props.onFocus(event);
+            }
+        });
     }
 
     onInputBlur(event) {
-        this.focus = false;
+        event.persist();
+        this.setState({ focused: false }, () => {
+            let newValue = this.validateValue(this.parseValue(this.inputEl.value));
+            this.updateInputValue(newValue);
+            this.updateModel(event, newValue);
 
-        let newValue = this.validateValue(this.parseValue(this.inputEl.value));
-        this.updateInputValue(newValue);
-        this.updateModel(event, newValue);
-
-        if (this.props.onBlur) {
-            this.props.onBlur(event);
-        }
+            if (this.props.onBlur) {
+                this.props.onBlur(event);
+            }
+        });
     }
 
     clearTimer() {
@@ -771,7 +807,12 @@ export class InputNumber extends Component {
                 this.renderTooltip();
         }
 
-        if (prevProps.value !== this.props.value) {
+        const isOptionChanged = this.isOptionChanged(prevProps);
+        if (isOptionChanged) {
+            this.constructParser();
+        }
+
+        if (prevProps.value !== this.props.value || isOptionChanged) {
             const newValue = this.validateValue(this.props.value);
             this.updateInputValue(newValue);
 
@@ -779,6 +820,11 @@ export class InputNumber extends Component {
                 this.updateModel(null, newValue);
             }
         }
+    }
+
+    isOptionChanged(prevProps) {
+        const optionProps = ['locale', 'localeMatcher', 'mode', 'currency', 'currencyDisplay', 'useGrouping', 'minFractionDigits', 'maxFractionDigits', 'suffix', 'prefix'];
+        return optionProps.some((option) => prevProps[option] !== this.props[option]);
     }
 
     componentWillUnmount() {
@@ -812,29 +858,31 @@ export class InputNumber extends Component {
     }
 
     renderUpButton() {
-        const className = classNames("p-inputnumber-button p-inputnumber-button-up p-button p-button-icon-only p-component", this.props.incrementButtonClassName, {
+        const className = classNames('p-inputnumber-button p-inputnumber-button-up p-button p-button-icon-only p-component', {
             'p-disabled': this.props.disabled
-        });
-        const icon = classNames('p-inputnumber-button-icon', this.props.incrementButtonIcon);
+        }, this.props.incrementButtonClassName);
+        const icon = classNames('p-button-icon', this.props.incrementButtonIcon);
 
         return (
             <button type="button" className={className} onMouseLeave={this.onUpButtonMouseLeave} onMouseDown={this.onUpButtonMouseDown} onMouseUp={this.onUpButtonMouseUp}
                 onKeyDown={this.onUpButtonKeyDown} onKeyUp={this.onUpButtonKeyUp} disabled={this.props.disabled} tabIndex="-1">
                 <span className={icon}></span>
+                <Ripple />
             </button>
         );
     }
 
     renderDownButton() {
-        const className = classNames("p-inputnumber-button p-inputnumber-button-down p-button p-button-icon-only p-component", this.props.decrementButtonClassName, {
+        const className = classNames('p-inputnumber-button p-inputnumber-button-down p-button p-button-icon-only p-component', {
             'p-disabled': this.props.disabled
-        });
-        const icon = classNames('p-inputnumber-button-icon', this.props.decrementButtonIcon);
+        }, this.props.decrementButtonClassName);
+        const icon = classNames('p-button-icon', this.props.decrementButtonIcon);
 
         return (
             <button type="button" className={className} onMouseLeave={this.onDownButtonMouseLeave} onMouseDown={this.onDownButtonMouseDown} onMouseUp={this.onDownButtonMouseUp}
                 onKeyDown={this.onDownButtonKeyDown} onKeyUp={this.onDownButtonKeyUp} disabled={this.props.disabled} tabIndex="-1">
                 <span className={icon}></span>
+                <Ripple />
             </button>
         );
     }
@@ -853,17 +901,17 @@ export class InputNumber extends Component {
         }
 
         return (
-            <React.Fragment>
+            <>
                 {upButton}
                 {downButton}
-            </React.Fragment>
+            </>
         )
     }
 
     render() {
         const className = classNames('p-inputnumber p-component', this.props.className, {
-                'p-inputwrapper-filled': this.props.value != null,
-                'p-inputwrapper-focus': this.focus,
+                'p-inputwrapper-filled': this.props.value != null && this.props.value.toString().length > 0,
+                'p-inputwrapper-focus': this.state.focused,
                 'p-inputnumber-buttons-stacked': this.isStacked(),
                 'p-inputnumber-buttons-horizontal': this.isHorizontal(),
                 'p-inputnumber-buttons-vertical': this.isVertical()

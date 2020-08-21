@@ -14,34 +14,32 @@ export class CardDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {Card} from 'primereact/card';
-import {Button} from 'primereact/button';
+import { Card } from 'primereact/card';
+import { Button } from 'primereact/button';
 
 export class CardDemo extends Component {
 
     render() {
         const header = (
-            <img alt="Card" src='showcase/demo/images/usercard.png' srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png"/>
+            <img alt="Card" src='showcase/demo/images/usercard.png' />
         );
         const footer = (
             <span>
-                <Button label="Save" icon="pi pi-check" style={{marginRight: '.25em'}} />
-                <Button label="Cancel" icon="pi pi-times" className="p-button-secondary" />
+                <Button label="Save" icon="pi pi-check" />
+                <Button label="Cancel" icon="pi pi-times" className="p-button-secondary p-ml-2" />
             </span>
         );
 
         return (
             <div>
-                <Card title="Simple Card" style={{width: '360px'}}>
-                    <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
-                        quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</div>
+                <Card title="Simple Card" style={{ width: '25rem', marginBottom: '2em' }}>
+                    <p className="p-m-0" style={{lineHeight: '1.5'}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
+                        quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
                 </Card>
 
-                <br/><br/>
-
-                <Card title="Advanced Card" subTitle="Subtitle" style={{width: '360px'}} className="ui-card-shadow" footer={footer} header={header}>
-                    <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
-                        quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</div>
+                <Card title="Advanced Card" subTitle="Subtitle" style={{ width: '25em' }} className="ui-card-shadow" footer={footer} header={header}>
+                    <p className="p-m-0" style={{lineHeight: '1.5'}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
+                        quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
                 </Card>
             </div>
         )
@@ -135,54 +133,51 @@ const CardDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
-                            {`
-import {Card} from 'primereact/card';
-
+                        <h5>Import</h5>
+<CodeHighlight lang="js">
+{`
+import { Card } from 'primereact/card';
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>Card is used as a container.</p>
-                        <CodeHighlight className="language-jsx">
-                            {`
+<CodeHighlight>
+{`
 <Card>
     Content
 </Card>
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <h3>Title</h3>
+                        <h5>Title</h5>
                         <p>Title text of the card is provided using the <i>title</i> property whereas <strong>subTitle</strong> property is available for additional information about the card. Both of these properties accept JSX as well.</p>
-                        <CodeHighlight className="language-jsx">
-                            {`
+<CodeHighlight>
+{`
 <Card title="Title" subTitle="SubTitle">
     Content
 </Card>
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <h3>Header and Footer</h3>
+                        <h5>Header and Footer</h5>
                         <p>Header and Footer sections are defined using the properties of the same name.</p>
 
-                        <CodeHighlight className="language-jsx">
-                            {`
+<CodeHighlight>
+{`
 const header = <img alt="Card" src='showcase/demo/images/usercard.png'/>;
 const footer = <span>
-                <Button label="Save" icon="pi pi-check" style={{marginRight: '.25em'}}/>
-                <Button label="Cancel" icon="pi pi-times" className="p-button-secondary"/>
-             </span>;
+    <Button label="Save" icon="pi pi-check" style={{marginRight: '.25em'}}/>
+    <Button label="Cancel" icon="pi pi-times" className="p-button-secondary"/>
+</span>;
 
 <Card footer={footer} header={header}>
     Content
 </Card>
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -240,7 +235,7 @@ const footer = <span>
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming">theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -275,19 +270,13 @@ const footer = <span>
                             </table>
                         </div>
 
-                        <h3>Dependencies</h3>
+                        <h5>Dependencies</h5>
                         <p>None.</p>
                     </TabPanel>
 
-                    {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="CardDemo" sources={[key, value]} />
-                                </TabPanel>
-                            );
-                        })
-                    }
+                    <TabPanel header="Source">
+                        <LiveEditor name="CardDemo" sources={this.sources} />
+                    </TabPanel>
                 </TabView>
             </div>
         )

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ContextMenu } from '../../components/contextmenu/ContextMenu';
-import AppContentContext from '../../AppContentContext';
 import { ContextMenuDoc } from './ContextMenuDoc';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class ContextMenuDemo extends Component {
 
@@ -144,19 +144,18 @@ export class ContextMenuDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="contextMenu">
                         <h1>ContextMenu</h1>
                         <p>ContextMenu displays an overlay menu on right click of its target. Note that components like DataTable has special integration with ContextMenu. Refer to documentation of the individual documentation of the components having a special integration.</p>
-
-                        <AppContentContext.Consumer>
-                            {context => <button onClick={() => context.onChangelogBtnClick("contextMenu")} className="layout-changelog-button">{context.changelogText}</button>}
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
-                <div className="content-section implementation">
-                    <ContextMenu model={this.items} ref={el => this.cm = el}></ContextMenu>
 
-                    <img src="showcase/images/logo.png" alt="Logo" style={{ width: '80px' }} onContextMenu={(e) => this.cm.show(e)} aria-haspopup={true} />
+                <div className="content-section implementation">
+                    <div className="card">
+                        <ContextMenu model={this.items} ref={el => this.cm = el}></ContextMenu>
+
+                        <img src="showcase/demo/images/nature/nature3.jpg" alt="Logo" onContextMenu={(e) => this.cm.show(e)} aria-haspopup />
+                    </div>
                 </div>
 
                 <ContextMenuDoc />

@@ -45,7 +45,9 @@ export class Checkbox extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            focused: false
+        };
 
         this.onClick = this.onClick.bind(this);
         this.onFocus = this.onFocus.bind(this);
@@ -102,11 +104,11 @@ export class Checkbox extends Component {
     }
 
     onFocus() {
-        this.setState({focused: true});
+        this.setState({ focused: true });
     }
 
     onBlur() {
-        this.setState({focused: false});
+        this.setState({ focused: false });
     }
 
     onKeyDown(event) {
@@ -125,9 +127,19 @@ export class Checkbox extends Component {
     }
 
     render() {
-        let containerClass = classNames('p-checkbox p-component', this.props.className);
-        let boxClass = classNames('p-checkbox-box p-component', {'p-highlight': this.props.checked, 'p-disabled': this.props.disabled, 'p-focus': this.state.focused});
-        let iconClass = classNames('p-checkbox-icon p-c', {'pi pi-check': this.props.checked});
+        const containerClass = classNames('p-checkbox p-component', {
+            'p-checkbox-checked': this.props.checked,
+            'p-checkbox-disabled': this.props.disabled,
+            'p-checkbox-focused': this.state.focused
+        }, this.props.className);
+        const boxClass = classNames('p-checkbox-box', {
+            'p-highlight': this.props.checked,
+            'p-disabled': this.props.disabled,
+            'p-focus': this.state.focused
+        });
+        const iconClass = classNames('p-checkbox-icon p-c', {
+            'pi pi-check': this.props.checked
+        });
 
         return (
             <div ref={(el) => this.element = el} id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick} onContextMenu={this.props.onContextMenu} onMouseDown={this.props.onMouseDown}>

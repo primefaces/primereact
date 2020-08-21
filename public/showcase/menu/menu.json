@@ -1,8 +1,160 @@
 {
     "data": [
         {
-            "name": "Input",
-            "icon": "showcase/images/mono/input.svg",
+            "name": "General",
+            "meta": [
+                "general"
+            ],
+            "children": [
+                {
+                    "name": "Get Started",
+                    "to": "/setup",
+                    "meta": [
+                        "get started"
+                    ]
+                },
+                {
+                    "name": "Community Forum",
+                    "href": "https://forum.primefaces.org/viewforum.php?f=57",
+                    "meta": [
+                        "get started"
+                    ]
+                },
+                {
+                    "name": "Source Code",
+                    "href": "https://github.com/primefaces/primereact",
+                    "meta": [
+                        "source code"
+                    ]
+                },
+                {
+                    "name": "Support",
+                    "to": "/support",
+                    "meta": [
+                        "support"
+                    ]
+                },
+                {
+                    "name": "Store",
+                    "href": "https://www.primefaces.org/store/",
+                    "meta": [
+                        "store",
+                        "primestore"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Theming",
+            "meta": [
+                "theming"
+            ],
+            "children": [
+                {
+                    "name": "Guide",
+                    "to": "/theming",
+                    "meta": [
+                        "guide"
+                    ]
+                },
+                {
+                    "name": "Theme Designer",
+                    "href": "https://www.primefaces.org/designer/primereact",
+                    "meta": [
+                        "theme designer"
+                    ]
+                },
+                {
+                    "name": "Visual Editor",
+                    "href": "https://www.primefaces.org/designer-react",
+                    "meta": [
+                        "visual editor"
+                    ]
+                },
+                {
+                    "name": "SASS API",
+                    "href": "https://www.primefaces.org/designer/api/primereact/5.0.0",
+                    "meta": [
+                        "sass api"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "PrimeFlex",
+            "meta": [
+                "primeflex"
+            ],
+            "children": [
+                {
+                    "name": "Display",
+                    "to": "/display",
+                    "meta": [
+                        "display"
+                    ]
+                },
+                {
+                    "name": "Elevation",
+                    "to": "/elevation",
+                    "meta": [
+                        "elevation"
+                    ]
+                },
+                {
+                    "name": "Flexbox",
+                    "to": "/flexbox",
+                    "meta": [
+                        "flexbox"
+                    ]
+                },
+                {
+                    "name": "FormLayout",
+                    "to": "/formlayout",
+                    "meta": [
+                        "formlayout"
+                    ]
+                },
+                {
+                    "name": "Grid System",
+                    "to": "/flexgrid",
+                    "meta": [
+                        "grid system",
+                        "flexgrid"
+                    ]
+                },
+                {
+                    "name": "Spacing",
+                    "to": "/spacing",
+                    "meta": [
+                        "spacing"
+                    ]
+                },
+                {
+                    "name": "Text",
+                    "to": "/text",
+                    "meta": [
+                        "text"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "PrimeIcons",
+            "meta": [
+                "primeicons"
+            ],
+            "children": [
+                {
+                    "name": "Icons v4.0",
+                    "to": "/icons",
+                    "meta": [
+                        "icons"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Form",
             "meta": [
                 "input"
             ],
@@ -20,21 +172,13 @@
                     "meta": [
                         "calendar",
                         "datepicker"
-                    ],
-                    "badge": "updated"
+                    ]
                 },
                 {
                     "name": "Checkbox",
                     "to": "/checkbox",
                     "meta": [
                         "checkbox"
-                    ]
-                },
-                {
-                    "name": "ColorPicker",
-                    "to": "/colorpicker",
-                    "meta": [
-                        "colorpicker"
                     ]
                 },
                 {
@@ -45,13 +189,19 @@
                     ]
                 },
                 {
+                    "name": "ColorPicker",
+                    "to": "/colorpicker",
+                    "meta": [
+                        "colorpicker"
+                    ]
+                },
+                {
                     "name": "Dropdown",
                     "to": "/dropdown",
                     "meta": [
                         "dropdown",
                         "selectOneMenu"
-                    ],
-                    "badge": "updated"
+                    ]
                 },
                 {
                     "name": "Editor",
@@ -61,17 +211,17 @@
                     ]
                 },
                 {
-                    "name": "InputMask",
-                    "to": "/inputmask",
-                    "meta": [
-                        "inputmask"
-                    ]
-                },
-                {
                     "name": "InputGroup",
                     "to": "/inputgroup",
                     "meta": [
                         "inputgroup"
+                    ]
+                },
+                {
+                    "name": "InputMask",
+                    "to": "/inputmask",
+                    "meta": [
+                        "inputmask"
                     ]
                 },
                 {
@@ -97,19 +247,18 @@
                     ]
                 },
                 {
+                    "name": "FloatLabel",
+                    "to": "/floatlabel",
+                    "meta": [
+                        "floatlabel"
+                    ]
+                },
+                {
                     "name": "InputTextarea",
                     "to": "/inputtextarea",
                     "meta": [
                         "inputtextarea"
                     ]
-                },
-                {
-                    "name": "FormLayout",
-                    "to": "/formlayout",
-                    "meta": [
-                        "formlayout"
-                    ],
-                    "badge": "new"
                 },
                 {
                     "name": "KeyFilter",
@@ -123,8 +272,7 @@
                     "to": "/listbox",
                     "meta": [
                         "listbox"
-                    ],
-                    "badge": "updated"
+                    ]
                 },
                 {
                     "name": "MultiSelect",
@@ -132,8 +280,7 @@
                     "meta": [
                         "multiselect",
                         "selectCheckboxMenu"
-                    ],
-                    "badge": "updated"
+                    ]
                 },
                 {
                     "name": "Password",
@@ -163,21 +310,13 @@
                         "selectbutton",
                         "selectOneButton",
                         "selectManyButton"
-                    ],
-                    "badge": "updated"
+                    ]
                 },
                 {
                     "name": "Slider",
                     "to": "/slider",
                     "meta": [
                         "slider"
-                    ]
-                },
-                {
-                    "name": "Spinner",
-                    "to": "/spinner",
-                    "meta": [
-                        "spinner"
                     ]
                 },
                 {
@@ -198,7 +337,6 @@
         },
         {
             "name": "Button",
-            "icon": "showcase/images/mono/button.svg",
             "meta": [
                 "button"
             ],
@@ -221,38 +359,249 @@
         },
         {
             "name": "Data",
-            "icon": "showcase/images/mono/data.svg",
             "meta": [
                 "data"
             ],
             "children": [
                 {
-                    "name": "Carousel",
-                    "to": "/carousel",
+                    "name": "DataTable",
                     "meta": [
-                        "carousel"
+                        "datatable"
+                    ],
+                    "children": [
+                        {
+                            "name": "Documentation",
+                            "to": "/datatable",
+                            "meta": [
+                                "documentation"
+                            ]
+                        },
+                        {
+                            "name": "Basic",
+                            "to": "/datatable/basic",
+                            "meta": [
+                                "basic"
+                            ]
+                        },
+                        {
+                            "name": "Dynamic",
+                            "to": "/datatable/dynamiccolumns",
+                            "meta": [
+                                "dynamic"
+                            ]
+                        },
+                        {
+                            "name": "Templating",
+                            "to": "/datatable/templating",
+                            "meta": [
+                                "templating"
+                            ]
+                        },
+                        {
+                            "name": "Size",
+                            "to": "/datatable/size",
+                            "meta": [
+                                "size"
+                            ]
+                        },
+                        {
+                            "name": "GridLines",
+                            "to": "/datatable/gridlines",
+                            "meta": [
+                                "grid lines"
+                            ]
+                        },
+                        {
+                            "name": "Striped",
+                            "to": "/datatable/striped",
+                            "meta": [
+                                "striped"
+                            ]
+                        },
+                        {
+                            "name": "Paginator",
+                            "to": "/datatable/paginator",
+                            "meta": [
+                                "paginator"
+                            ]
+                        },
+                        {
+                            "name": "Sort",
+                            "to": "/datatable/sort",
+                            "meta": [
+                                "sort"
+                            ]
+                        },
+                        {
+                            "name": "Filter",
+                            "to": "/datatable/filter",
+                            "meta": [
+                                "filter"
+                            ]
+                        },
+                        {
+                            "name": "Selection",
+                            "to": "/datatable/selection",
+                            "meta": [
+                                "selection"
+                            ]
+                        },
+                        {
+                            "name": "Edit",
+                            "to": "/datatable/edit",
+                            "meta": [
+                                "edit"
+                            ]
+                        },
+                        {
+                            "name": "Lazy",
+                            "to": "/datatable/lazy",
+                            "meta": [
+                                "lazy"
+                            ]
+                        },
+                        {
+                            "name": "Scroll",
+                            "to": "/datatable/scroll",
+                            "meta": [
+                                "scroll"
+                            ]
+                        },
+                        {
+                            "name": "ColGroup",
+                            "to": "/datatable/colgroup",
+                            "meta": [
+                                "colgroup"
+                            ]
+                        },
+                        {
+                            "name": "RowGroup",
+                            "to": "/datatable/rowgroup",
+                            "meta": [
+                                "rowgroup"
+                            ]
+                        },
+                        {
+                            "name": "Expand",
+                            "to": "/datatable/rowexpand",
+                            "meta": [
+                                "expand"
+                            ]
+                        },
+                        {
+                            "name": "Responsive",
+                            "to": "/datatable/responsive",
+                            "meta": [
+                                "responsive"
+                            ]
+                        },
+                        {
+                            "name": "Style",
+                            "to": "/datatable/style",
+                            "meta": [
+                                "style"
+                            ]
+                        },
+                        {
+                            "name": "ColResize",
+                            "to": "/datatable/colresize",
+                            "meta": [
+                                "colresize"
+                            ]
+                        },
+                        {
+                            "name": "Reorder",
+                            "to": "/datatable/reorder",
+                            "meta": [
+                                "reorder"
+                            ]
+                        },
+                        {
+                            "name": "ColToggle",
+                            "to": "/datatable/coltoggle",
+                            "meta": [
+                                "coltoggle"
+                            ]
+                        },
+                        {
+                            "name": "Export",
+                            "to": "/datatable/export",
+                            "meta": [
+                                "export"
+                            ]
+                        },
+                        {
+                            "name": "ContextMenu",
+                            "to": "/datatable/contextmenu",
+                            "meta": [
+                                "contextmenu"
+                            ]
+                        },
+                        {
+                            "name": "State",
+                            "to": "/datatable/state",
+                            "meta": [
+                                "state"
+                            ]
+                        },
+                        {
+                            "name": "Crud",
+                            "to": "/datatable/crud",
+                            "meta": [
+                                "crud"
+                            ]
+                        }
                     ]
                 },
                 {
                     "name": "DataView",
-                    "to": "/dataview",
                     "meta": [
                         "dataview"
+                    ],
+                    "children": [
+                        {
+                            "name": "Documentation",
+                            "to": "/dataview",
+                            "meta": [
+                                "documentation"
+                            ]
+                        },
+                        {
+                            "name": "Lazy",
+                            "to": "/dataview/lazy",
+                            "meta": [
+                                "lazy"
+                            ]
+                        }
                     ]
                 },
                 {
-                    "name": "DataTable",
-                    "to": "/datatable",
-                    "meta": [
-                        "datatable"
-                    ],
-                    "badge": "updated"
-                },
-                {
                     "name": "DataScroller",
-                    "to": "/datascroller",
                     "meta": [
                         "datascroller"
+                    ],
+                    "children": [
+                        {
+                            "name": "Window",
+                            "to": "/datascroller",
+                            "meta": [
+                                "window"
+                            ]
+                        },
+                        {
+                            "name": "Inline",
+                            "to": "/datascroller/inline",
+                            "meta": [
+                                "inline"
+                            ]
+                        },
+                        {
+                            "name": "Loader",
+                            "to": "/datascroller/loader",
+                            "meta": [
+                                "loader"
+                            ]
+                        }
                     ]
                 },
                 {
@@ -302,23 +651,192 @@
                 },
                 {
                     "name": "Tree",
-                    "to": "/tree",
                     "meta": [
                         "tree"
+                    ],
+                    "children": [
+                        {
+                            "name": "Documentation",
+                            "to": "/tree",
+                            "meta": [
+                                "documentation"
+                            ]
+                        },
+                        {
+                            "name": "Selection",
+                            "to": "/tree/selection",
+                            "meta": [
+                                "selection"
+                            ]
+                        },
+                        {
+                            "name": "Events",
+                            "to": "/tree/events",
+                            "meta": [
+                                "events"
+                            ]
+                        },
+                        {
+                            "name": "Lazy",
+                            "to": "/tree/lazy",
+                            "meta": [
+                                "lazy"
+                            ]
+                        },
+                        {
+                            "name": "Templating",
+                            "to": "/tree/templating",
+                            "meta": [
+                                "templating"
+                            ]
+                        },
+                        {
+                            "name": "DragDrop",
+                            "to": "/tree/dragdrop",
+                            "meta": [
+                                "dragdrop"
+                            ]
+                        },
+                        {
+                            "name": "ContextMenu",
+                            "to": "/tree/contextmenu",
+                            "meta": [
+                                "contextmenu"
+                            ]
+                        },
+                        {
+                            "name": "Filter",
+                            "to": "/tree/filter",
+                            "meta": [
+                                "filter"
+                            ]
+                        }
                     ]
                 },
                 {
                     "name": "TreeTable",
-                    "to": "/treetable",
                     "meta": [
                         "treetable"
+                    ],
+                    "children": [
+                        {
+                            "name": "Documentation",
+                            "to": "/treetable",
+                            "meta": [
+                                "documentation"
+                            ]
+                        },
+                        {
+                            "name": "Templating",
+                            "to": "/treetable/templating",
+                            "meta": [
+                                "templating"
+                            ]
+                        },
+                        {
+                            "name": "Page",
+                            "to": "/treetable/page",
+                            "meta": [
+                                "page"
+                            ]
+                        },
+                        {
+                            "name": "Sort",
+                            "to": "/treetable/sort",
+                            "meta": [
+                                "sort"
+                            ]
+                        },
+                        {
+                            "name": "Filter",
+                            "to": "/treetable/filter",
+                            "meta": [
+                                "filter"
+                            ]
+                        },
+                        {
+                            "name": "Selection",
+                            "to": "/treetable/selection",
+                            "meta": [
+                                "selection"
+                            ]
+                        },
+                        {
+                            "name": "ColGroup",
+                            "to": "/treetable/colgroup",
+                            "meta": [
+                                "colgroup"
+                            ]
+                        },
+                        {
+                            "name": "Lazy",
+                            "to": "/treetable/lazy",
+                            "meta": [
+                                "lazy"
+                            ]
+                        },
+                        {
+                            "name": "Edit",
+                            "to": "/treetable/edit",
+                            "meta": [
+                                "edit"
+                            ]
+                        },
+                        {
+                            "name": "Scroll",
+                            "to": "/treetable/scroll",
+                            "meta": [
+                                "scroll"
+                            ]
+                        },
+                        {
+                            "name": "Resize",
+                            "to": "/treetable/resize",
+                            "meta": [
+                                "resize"
+                            ]
+                        },
+                        {
+                            "name": "Reorder",
+                            "to": "/treetable/reorder",
+                            "meta": [
+                                "reorder"
+                            ]
+                        },
+                        {
+                            "name": "Toggle",
+                            "to": "/treetable/toggle",
+                            "meta": [
+                                "toggle"
+                            ]
+                        },
+                        {
+                            "name": "Style",
+                            "to": "/treetable/style",
+                            "meta": [
+                                "style"
+                            ]
+                        },
+                        {
+                            "name": "ContextMenu",
+                            "to": "/treetable/contextmenu",
+                            "meta": [
+                                "contextmenu"
+                            ]
+                        },
+                        {
+                            "name": "Responsive",
+                            "to": "/treetable/responsive",
+                            "meta": [
+                                "responsive"
+                            ]
+                        }
                     ]
                 }
             ]
         },
         {
             "name": "Panel",
-            "icon": "showcase/images/mono/panel.svg",
             "meta": [
                 "panel"
             ],
@@ -359,13 +877,6 @@
                     ]
                 },
                 {
-                    "name": "FlexGrid",
-                    "to": "/flexgrid",
-                    "meta": [
-                        "flexgrid"
-                    ]
-                },
-                {
                     "name": "ScrollPanel",
                     "to": "/scrollPanel",
                     "meta": [
@@ -390,7 +901,6 @@
         },
         {
             "name": "Overlay",
-            "icon": "showcase/images/mono/overlay.svg",
             "meta": [
                 "overlay"
             ],
@@ -400,14 +910,6 @@
                     "to": "/dialog",
                     "meta": [
                         "dialog"
-                    ],
-                    "badge": "updated"
-                },
-                {
-                    "name": "Lightbox",
-                    "to": "/lightbox",
-                    "meta": [
-                        "lightbox"
                     ]
                 },
                 {
@@ -435,7 +937,6 @@
         },
         {
             "name": "File",
-            "icon": "showcase/images/mono/file.svg",
             "meta": [
                 "file"
             ],
@@ -451,7 +952,6 @@
         },
         {
             "name": "Menu",
-            "icon": "showcase/images/mono/menu.svg",
             "meta": [
                 "menu"
             ],
@@ -538,7 +1038,6 @@
         },
         {
             "name": "Chart",
-            "icon": "showcase/images/mono/charts.svg",
             "meta": [
                 "chart"
             ],
@@ -604,7 +1103,6 @@
         },
         {
             "name": "Messages",
-            "icon": "showcase/images/mono/message.svg",
             "meta": [
                 "message"
             ],
@@ -617,51 +1115,128 @@
                     ]
                 },
                 {
-                    "name": "Growl",
-                    "to": "/growl",
+                    "name": "Toast",
+                    "to": "/toast",
                     "meta": [
                         "growl",
                         "toast"
-                    ]
+                    ],
+                    "badge": "updated"
                 }
             ]
         },
         {
-            "name": "Multimedia",
-            "icon": "showcase/images/mono/multimedia.svg",
+            "name": "Media",
             "meta": [
-                "multimedia"
+                "media"
             ],
             "children": [
                 {
+                    "name": "Carousel",
+                    "to": "/carousel",
+                    "meta": [
+                        "carousel"
+                    ]
+                },
+                {
                     "name": "Galleria",
-                    "to": "/galleria",
                     "meta": [
                         "galleria"
                     ],
-                    "badge": "new"
+                    "badge": "new",
+                    "children": [
+                        {
+                            "name": "Documentation",
+                            "to": "/galleria",
+                            "meta": [
+                                "documentation"
+                            ]
+                        },
+                        {
+                            "name": "Programmatic",
+                            "to": "/galleria/programmatic",
+                            "meta": [
+                                "programmatic"
+                            ]
+                        },
+                        {
+                            "name": "Indicator",
+                            "to": "/galleria/indicator",
+                            "meta": [
+                                "indicator"
+                            ]
+                        },
+                        {
+                            "name": "Thumbnail",
+                            "to": "/galleria/thumbnail",
+                            "meta": [
+                                "thumbnail"
+                            ]
+                        },
+                        {
+                            "name": "Navigator",
+                            "to": "/galleria/navigator",
+                            "meta": [
+                                "navigator"
+                            ]
+                        },
+                        {
+                            "name": "Responsive",
+                            "to": "/galleria/responsive",
+                            "meta": [
+                                "responsive"
+                            ]
+                        },
+                        {
+                            "name": "FullScreen",
+                            "to": "/galleria/fullscreen",
+                            "meta": [
+                                "fullscreen"
+                            ]
+                        },
+                        {
+                            "name": "AutoPlay",
+                            "to": "/galleria/autoplay",
+                            "meta": [
+                                "autoplay"
+                            ]
+                        },
+                        {
+                            "name": "Caption",
+                            "to": "/galleria/caption",
+                            "meta": [
+                                "caption"
+                            ]
+                        },
+                        {
+                            "name": "Advanced",
+                            "to": "/galleria/advanced",
+                            "meta": [
+                                "advanced"
+                            ]
+                        }
+                    ]
                 }
             ]
         },
         {
             "name": "Misc",
-            "icon": "showcase/images/mono/misc.svg",
             "meta": [
                 "misc"
             ],
             "children": [
                 {
-                    "name": "ProgressBar",
-                    "to": "/progressbar",
+                    "name": "Accessibility",
+                    "to": "/accessibility",
                     "meta": [
-                        "progressbar"
+                        "accessibility"
                     ]
                 },
                 {
-                    "name": "Captcha",
-                    "to": "/captcha",
+                    "name": "Badge",
+                    "to": "/badge",
                     "meta": [
-                        "captcha"
+                        "badge"
                     ]
                 },
                 {
@@ -672,6 +1247,13 @@
                     ]
                 },
                 {
+                    "name": "ProgressBar",
+                    "to": "/progressbar",
+                    "meta": [
+                        "progressbar"
+                    ]
+                },
+                {
                     "name": "ProgressSpinner",
                     "to": "/progressspinner",
                     "meta": [
@@ -679,17 +1261,19 @@
                     ]
                 },
                 {
-                    "name": "PrimeIcons",
-                    "to": "/icons",
+                    "name": "Ripple",
+                    "to": "/ripple",
                     "meta": [
-                        "primeicons"
-                    ]
+                        "ripple"
+                    ],
+                    "badge": "new"
                 },
                 {
-                    "name": "FloatLabel",
-                    "to": "/floatlabel",
+                    "name": "Captcha",
+                    "to": "/captcha",
                     "meta": [
-                        "floatlabel"
+                        "captcha",
+                        "recaptcha"
                     ]
                 }
             ]

@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import AppContentContext from '../../AppContentContext';
 import { Editor } from "../../components/editor/Editor";
-import { Button } from "../../components/button/Button";
 import { EditorDoc } from './EditorDoc';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class EditorDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             text1: '<div>Hello World!</div><div>PrimeReact <b>Editor</b> Rocks</div><div><br></div>',
             text2: ''
@@ -30,28 +29,20 @@ export class EditorDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="editor" showInputStyle>
                         <h1>Editor</h1>
                         <p>Editor is rich text editor component based on Quill.</p>
-
-                        <AppContentContext.Consumer>
-                            {context => <button onClick={() => context.onChangelogBtnClick("editor")} className="layout-changelog-button">{context.changelogText}</button>}
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <h3 className="first">Default</h3>
-                    <Editor style={{ height: '320px' }} value={this.state.text1} onTextChange={(e) => this.setState({ text1: e.htmlValue })} />
-                    <p>Value: {this.state.text1 || 'empty'}</p>
-                    <Button label="Clear" icon="pi pi-times" onClick={() => this.setState({ text1: '' })} />
+                    <div className="card">
+                        <h5>Default</h5>
+                        <Editor style={{ height: '320px' }} value={this.state.text1} onTextChange={(e) => this.setState({ text1: e.htmlValue })} />
 
-                    <hr />
-
-                    <h3 className="first">Custom Toolbar</h3>
-                    <Editor headerTemplate={header} style={{ height: '320px' }} value={this.state.text2} onTextChange={(e) => this.setState({ text2: e.htmlValue })} />
-                    <p>Value: {this.state.text2 || 'empty'}</p>
-                    <Button label="Clear" icon="pi pi-times" onClick={() => this.setState({ text2: '' })} />
+                        <h5>Customized</h5>
+                        <Editor headerTemplate={header} style={{ height: '320px' }} value={this.state.text2} onTextChange={(e) => this.setState({ text2: e.htmlValue })} />
+                    </div>
                 </div>
 
                 <EditorDoc />

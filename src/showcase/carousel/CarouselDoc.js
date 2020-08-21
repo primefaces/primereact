@@ -12,20 +12,20 @@ export class CarouselDoc extends Component {
             'class': {
                 tabName: 'Class Source',
                 content: `
-import React, {Component} from 'react';
-import {Carousel} from 'primereact/carousel';
-import {CarService} from '../service/CarService';
-import {Button} from 'primereact/button';
+import React, { Component } from 'react';
+import { Carousel } from 'primereact/carousel';
+import { Button } from 'primereact/button';
+import ProductService from '../service/ProductService';
+import './CarouselDemo.scss';
 
 export class CarouselDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
-            cars: []
+            products: null
         };
-        this.carservice = new CarService();
-        this.carTemplate = this.carTemplate.bind(this);
 
         this.responsiveOptions = [
             {
@@ -34,37 +34,40 @@ export class CarouselDemo extends Component {
                 numScroll: 3
             },
             {
-                breakpoint: '768px',
+                breakpoint: '600px',
                 numVisible: 2,
                 numScroll: 2
             },
             {
-                breakpoint: '560px',
+                breakpoint: '480px',
                 numVisible: 1,
                 numScroll: 1
             }
         ];
+
+        this.productService = new ProductService();
+        this.productTemplate = this.productTemplate.bind(this);
     }
 
     componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+        this.productService.getProductsSmall().then(data => this.setState({ products: data.slice(0,9) }));
     }
 
-    carTemplate(car) {
+    productTemplate(product) {
         return (
-            <div className="car-details">
-                <div className="p-grid p-nogutter">
-                    <div className="p-col-12">
-                        <img src={\`showcase/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand} />
+            <div className="product-item">
+                <div className="product-item-content">
+                    <div className="p-mb-3">
+                        <img src={\`showcase/demo/images/product/\${product.image}\`} alt={product.name} className="product-image" />
                     </div>
-                    <div className="p-col-12 car-data">
-                        <div className="car-title">{car.brand}</div>
-                        <div className="car-subtitle">{car.year} | {car.color}</div>
-
-                        <div className="car-buttons">
-                            <Button icon="pi pi-search" className="p-button-secondary" />
-                            <Button icon="pi pi-star" className="p-button-secondary" />
-                            <Button icon="pi pi-cog" className="p-button-secondary" />
+                    <div>
+                        <h4 className="p-mb-1">{product.name}</h4>
+                        <h6 className="p-mt-0 p-mb-3">\${product.price}</h6>
+                        <span className={\`product-badge status-\${product.inventoryStatus.toLowerCase()}\`}>{product.inventoryStatus}</span>
+                        <div className="car-buttons p-mt-5">
+                            <Button icon="pi pi-search" className="p-button p-button-rounded p-mr-2" />
+                            <Button icon="pi pi-star" className="p-button-success p-button-rounded p-mr-2" />
+                            <Button icon="pi pi-cog" className="p-button-help p-button-rounded" />
                         </div>
                     </div>
                 </div>
@@ -73,20 +76,22 @@ export class CarouselDemo extends Component {
     }
 
     render() {
-        const basicHeader = <h2>Basic</h2>;
-        const customHeader = <h2>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h2>
-        const verticalHeader = <h2>Vertical</h2>
-
         return (
             <div className="carousel-demo">
-                <Carousel value={this.state.cars} itemTemplate={this.carTemplate} numVisible={4} numScroll={3}
-                    header={basicHeader} responsiveOptions={this.responsiveOptions}></Carousel>
+                <div className="card">
+                    <Carousel value={this.state.products} numVisible={3} numScroll={3} responsiveOptions={this.responsiveOptions}
+                        itemTemplate={this.productTemplate} header={<h5>Basic</h5>} />
+                </div>
 
-                <Carousel value={this.state.cars} itemTemplate={this.carTemplate} numVisible={3} numScroll={1} className="custom-carousel"
-                    responsiveOptions={this.responsiveOptions} header={customHeader} circular={true} autoplayInterval={3000}></Carousel>
+                <div className="card">
+                    <Carousel value={this.state.products} numVisible={3} numScroll={1} responsiveOptions={this.responsiveOptions} className="custom-carousel" circular
+                        autoplayInterval={3000} itemTemplate={this.productTemplate} header={<h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>} />
+                </div>
 
-                <Carousel value={this.state.cars} itemTemplate={this.carTemplate} orientation="vertical" style={{maxWidth: '400px', marginTop: '2em'}}
-                    numVisible={1} numScroll={1} verticalViewPortHeight="330px" header={verticalHeader}></Carousel>
+                <div className="card">
+                    <Carousel value={this.state.products} numVisible={1} numScroll={1} orientation="vertical" verticalViewPortHeight="352px"
+                        itemTemplate={this.productTemplate} header={<h5>Vertical</h5>} style={{maxWidth: '400px', marginTop: '2em'}} />
+                </div>
             </div>
         );
     }
@@ -158,7 +163,7 @@ const CarouselDemo = () => {
                 header={basicHeader} responsiveOptions={responsiveOptions}></Carousel>
 
             <Carousel value={cars} itemTemplate={carTemplate} numVisible={3} numScroll={1} className="custom-carousel"
-                responsiveOptions={responsiveOptions} header={customHeader} circular={true} autoplayInterval={3000}></Carousel>
+                responsiveOptions={responsiveOptions} header={customHeader} circular autoplayInterval={3000}></Carousel>
 
             <Carousel value={cars} itemTemplate={carTemplate} orientation="vertical" style={{maxWidth: '400px', marginTop: '2em'}}
                 numVisible={1} numScroll={1} verticalViewPortHeight="330px" header={verticalHeader}></Carousel>
@@ -232,7 +237,7 @@ const CarouselDemo = () => {
                 header={basicHeader} responsiveOptions={responsiveOptions}></Carousel>
 
             <Carousel value={cars} itemTemplate={carTemplate} numVisible={3} numScroll={1} className="custom-carousel"
-                responsiveOptions={responsiveOptions} header={customHeader} circular={true} autoplayInterval={3000}></Carousel>
+                responsiveOptions={responsiveOptions} header={customHeader} circular autoplayInterval={3000}></Carousel>
 
             <Carousel value={cars} itemTemplate={carTemplate} orientation="vertical" style={{maxWidth: '400px', marginTop: '2em'}}
                 numVisible={1} numScroll={1} verticalViewPortHeight="330px" header={verticalHeader}></Carousel>
@@ -290,66 +295,49 @@ const CarouselDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
-                            {`
-import {Carousel} from 'primereact/carousel';
-
+                        <h5>Import</h5>
+<CodeHighlight lang="js">
+{`
+import { Carousel } from 'primereact/carousel';
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>Carousel requires a collection of items as its value along with a template to render each item.</p>
 
-                        <CodeHighlight className="language-jsx">
-                            {`
-<Carousel value={this.state.cars} itemTemplate={this.carTemplate}></Carousel>
-
+<CodeHighlight>
+{`
+<Carousel value={this.state.products} itemTemplate={this.itemTemplate}></Carousel>
 `}
-                        </CodeHighlight>
-                        <CodeHighlight className="language-javascript">
-                            {`
-constructor() {
-    super();
-    this.state = {
-        cars: []
-    };
-    this.carservice = new CarService();
-    this.carTemplate = this.carTemplate.bind(this);
-}
+</CodeHighlight>
 
-componentDidMount() {
-    this.carservice.getCars().then(data => this.setState({cars: data}));
-}
-
-carTemplate(car) {
+<CodeHighlight lang="js">
+{`
+itemTemplate(car) {
     // return content;
 }
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <h3>Items per page and Scroll Items</h3>
+                        <h5>Items per page and Scroll Items</h5>
                         <p>Number of items per page is defined using the <i>numVisible</i> property whereas number of items to scroll is defined with the <i>numScroll</i> property.</p>
-                        <CodeHighlight className="language-jsx">
-                            {`
-<Carousel value={this.state.cars} itemTemplate={this.carTemplate} numVisible={3} numScroll={1}></Carousel>
-
+<CodeHighlight>
+{`
+<Carousel value={this.state.products} itemTemplate={this.itemTemplate} numVisible={3} numScroll={1}></Carousel>
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <h3>Responsive</h3>
+                        <h5>Responsive</h5>
                         <p>For responsive design, <i>numVisible</i> and <i>numScroll</i> can be defined using the <i>responsiveOptions</i> property that should be an array of
             objects whose breakpoint defines the max-width to apply the settings.</p>
-                        <CodeHighlight className="language-jsx">
-                            {`
-<Carousel value={this.state.cars} itemTemplate={this.carTemplate} numVisible={3} numScroll={1} responsiveOptions={responsiveOptions}></Carousel>
-
+<CodeHighlight>
+{`
+<Carousel value={this.state.products} itemTemplate={this.itemTemplate} numVisible={3} numScroll={1} responsiveOptions={responsiveOptions}></Carousel>
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <CodeHighlight className="language-javascript">
-                            {`
+<CodeHighlight lang="js">
+{`
 const responsiveOptions = [
     {
         breakpoint: '1024px',
@@ -367,53 +355,48 @@ const responsiveOptions = [
         numScroll: 1
     }
 ];
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <h3>Header and Footer</h3>
+                        <h5>Header and Footer</h5>
                         <p>Custom content projection is available using the <i>header</i> and <i>footer</i> properties.</p>
-                        <CodeHighlight className="language-jsx">
-                            {`
-<Carousel value={this.state.cars} itemTemplate={this.carTemplate} header={<h1>Header</h1>}></Carousel>
-
+<CodeHighlight>
+{`
+<Carousel value={this.state.products} itemTemplate={this.itemTemplate} header={<h1>Header</h1>}></Carousel>
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <h3>Orientation</h3>
+                        <h5>Orientation</h5>
                         <p>Default layout of the Carousel is horizontal, other possible option is the vertical mode that is configured with the <i>orientation</i> property.</p>
-                        <CodeHighlight className="language-jsx">
-                            {`
-<Carousel value={this.state.cars} itemTemplate={this.carTemplate} orientation="vertical"></Carousel>
-
+<CodeHighlight>
+{`
+<Carousel value={this.state.products} itemTemplate={this.itemTemplate} orientation="vertical"></Carousel>
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <h3>AutoPlay and Circular</h3>
+                        <h5>AutoPlay and Circular</h5>
                         <p>When <i>autoplayInterval</i> is defined in milliseconds, items are scrolled automatically. In addition, for infinite scrolling <i>circular</i> property needs to be enabled. Note that in autoplay mode, circular is enabled by default.</p>
 
-                        <h3>Controlled vs Uncontrolled</h3>
+                        <h5>Controlled vs Uncontrolled</h5>
                         <p>In controlled mode, <i>page</i> and <i>onPageChange</i> properties need to be defined to control the first visible item.</p>
 
-                        <CodeHighlight className="language-jsx">
-                            {`
-<Carousel value={this.state.cars} itemTemplate={this.carTemplate} page={this.state.page} onPageChange={(e) => this.setState({page: e.page})}></Carousel>
-
+<CodeHighlight>
+{`
+<Carousel value={this.state.products} itemTemplate={this.itemTemplate} page={this.state.page} onPageChange={(e) => this.setState({page: e.page})}></Carousel>
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <h3>Uncontrolled</h3>
+                        <h5>Uncontrolled</h5>
                         <p>In uncontrolled mode, no additional properties are required. Initial page can be provided using the <i>page</i> property in uncontrolled mode however it is evaluated at initial rendering and ignored in further updates. If you programmatically
                 need to update the first visible item index, prefer to use the component as controlled.</p>
 
-                        <CodeHighlight className="language-jsx">
-                            {`
-<Carousel value={this.state.cars} itemTemplate={this.carTemplate}></Carousel>
-
+<CodeHighlight>
+{`
+<Carousel value={this.state.products} itemTemplate={this.itemTemplate}></Carousel>
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -528,7 +511,7 @@ const responsiveOptions = [
                                         <td>Style class of the viewport container.</td>
                                     </tr>
                                     <tr>
-                                        <td>dotsContainerClassName</td>
+                                        <td>indicatorsContentClassName</td>
                                         <td>string</td>
                                         <td>null</td>
                                         <td>Style class of the paginator items.</td>
@@ -537,7 +520,7 @@ const responsiveOptions = [
                             </table>
                         </div>
 
-                        <h3>Events</h3>
+                        <h5>Events</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -557,7 +540,7 @@ const responsiveOptions = [
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -593,35 +576,45 @@ const responsiveOptions = [
                                         <td>Viewport.</td>
                                     </tr>
                                     <tr>
-                                        <td>p-carousel-dots-container</td>
-                                        <td>Container of the paginator.</td>
+                                        <td>p-carousel-indicators</td>
+                                        <td>Container of the indicators.</td>
                                     </tr>
                                     <tr>
-                                        <td>p-carousel-dot-item</td>
-                                        <td>Paginator element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-carousel-dot-icon</td>
-                                        <td>Paginator element icon.</td>
+                                        <td>p-carousel-indicator</td>
+                                        <td>Indicator element.</td>
                                     </tr>
                                 </tbody>
                             </table>
 
-                            <h3>Dependencies</h3>
+                            <h5>Dependencies</h5>
                             <p>None.</p>
                         </div>
 
                     </TabPanel>
 
-                    {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="CarouselDemo" sources={[key, value]} service="CarService" data="cars-small" extFiles={this.extFiles} />
-                                </TabPanel>
-                            );
-                        })
-                    }
+                    <TabPanel header="Source">
+                        <LiveEditor name="CarouselDemo" sources={this.sources} service="CarService" data="cars-small" extFiles={this.extFiles} />
+<CodeHighlight lang="scss">
+{`
+.carousel-demo {
+    .product-item {
+        .product-item-content {
+            border: 1px solid var(--surface-d);
+            border-radius: 3px;
+            margin: .3rem;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .product-image {
+            width: 50%;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+        }
+    }
+}
+`}
+</CodeHighlight>
+                    </TabPanel>
                 </TabView>
             </div>
         );

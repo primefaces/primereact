@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
+import ObjectUtils from '../utils/ObjectUtils';
+import { CSSTransition } from 'react-transition-group';
+import { Ripple } from '../ripple/Ripple';
 
 export class Sidebar extends Component {
 
@@ -18,7 +21,7 @@ export class Sidebar extends Component {
         showCloseIcon: true,
         ariaCloseLabel: 'close',
         closeOnEscape: true,
-        iconsTemplate: null,
+        icons: null,
         modal: true,
         onShow: null,
         onHide: null
@@ -37,7 +40,7 @@ export class Sidebar extends Component {
         showCloseIcon: PropTypes.bool,
         ariaCloseLabel: PropTypes.string,
         closeOnEscape: PropTypes.bool,
-        iconsTemplate: PropTypes.func,
+        icons: PropTypes.any,
         modal: PropTypes.bool,
         onShow: PropTypes.func,
         onHide: PropTypes.func.isRequired
@@ -45,45 +48,26 @@ export class Sidebar extends Component {
 
     constructor(props) {
         super(props);
+
         this.onCloseClick = this.onCloseClick.bind(this);
+        this.onEnter = this.onEnter.bind(this);
+        this.onEntered = this.onEntered.bind(this);
+        this.onExit = this.onExit.bind(this);
     }
 
-    componentDidMount() {
-        if (this.props.visible) {
-            this.onShow();
-        }
+    onCloseClick(event) {
+        this.props.onHide();
+        event.preventDefault();
     }
 
-    componentWillUnmount() {
-        this.unbindMaskClickListener();
-        this.disableModality();
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        if (prevProps.visible !== this.props.visible) {
-            if (this.props.visible)
-                this.onShow();
-            else
-                this.onHide();
-        }
-
-        if (this.mask && prevProps.dismissable !== this.props.dismissable) {
-            if (this.props.dismissable) {
-                this.bindMaskClickListener();
-            }
-            else {
-                this.unbindMaskClickListener();
-            }
-        }
-    }
-
-    onShow() {
+    onEnter() {
         this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
-
         if (this.props.modal) {
             this.enableModality();
         }
+    }
 
+    onEntered() {
         if (this.props.closeOnEscape) {
             this.bindDocumentEscapeListener();
         }
@@ -94,6 +78,15 @@ export class Sidebar extends Component {
 
         if (this.props.onShow) {
             this.props.onShow();
+        }
+    }
+
+    onExit() {
+        this.unbindMaskClickListener();
+        this.unbindDocumentEscapeListener();
+
+        if (this.props.modal) {
+            this.disableModality();
         }
     }
 
@@ -143,20 +136,6 @@ export class Sidebar extends Component {
         }
     }
 
-    onCloseClick(event) {
-        this.props.onHide();
-        event.preventDefault();
-    }
-
-    onHide() {
-        this.unbindMaskClickListener();
-        this.unbindDocumentEscapeListener();
-
-        if (this.props.modal) {
-            this.disableModality();
-        }
-    }
-
     bindDocumentEscapeListener() {
         this.documentEscapeListener = (event) => {
             if (event.which === 27) {
@@ -191,40 +170,67 @@ export class Sidebar extends Component {
         }
     }
 
-    renderCloseIcon() {
-        if (this.props.showCloseIcon) {
-            return (
-                <button type="button" ref={el => this.closeIcon = el} className="p-sidebar-close p-link" onClick={this.onCloseClick} aria-label={this.props.ariaCloseLabel}>
-                    <span className="p-sidebar-close-icon pi pi-times"/>
-                </button>
-            );
-        }
-        else {
-            return null;
+    componentDidUpdate(prevProps, prevState) {
+        if (this.mask && prevProps.dismissable !== this.props.dismissable) {
+            if (this.props.dismissable) {
+                this.bindMaskClickListener();
+            }
+            else {
+                this.unbindMaskClickListener();
+            }
         }
     }
 
-    renderIconsTemplate() {
-        if (this.props.iconsTemplate) {
-            return this.props.iconsTemplate(this);
+    componentWillUnmount() {
+        this.unbindMaskClickListener();
+        this.disableModality();
+    }
+
+    renderCloseIcon() {
+        if (this.props.showCloseIcon) {
+            return (
+                <button type="button" ref={el => this.closeIcon = el} className="p-sidebar-close p-sidebar-icon p-link" onClick={this.onCloseClick} aria-label={this.props.ariaCloseLabel}>
+                    <span className="p-sidebar-close-icon pi pi-times"/>
+                    <Ripple />
+                </button>
+            );
         }
-        else {
-            return null;
+
+        return null;
+    }
+
+    renderIcons() {
+        if (this.props.icons) {
+            return ObjectUtils.getJSXElement(this.props.icons, this.props);
         }
+
+        return null;
     }
 
     render() {
         const className = classNames('p-sidebar p-component', this.props.className, 'p-sidebar-' + this.props.position,
                                        {'p-sidebar-active': this.props.visible, 'p-sidebar-full': this.props.fullScreen});
         const closeIcon = this.renderCloseIcon();
-        const iconsTemplate = this.renderIconsTemplate();
+        const icons = this.renderIcons();
+
+        const transitionTimeout = {
+            enter: this.props.fullScreen ? 400 : 300,
+            exit: this.props.fullScreen ? 400 : 300
+        };
 
         return (
-            <div ref={(el) => this.container=el} id={this.props.id} className={className} style={this.props.style} role="complementary">
-                {closeIcon}
-                {iconsTemplate}
-                {this.props.children}
-            </div>
+            <CSSTransition classNames="p-sidebar" in={this.props.visible} timeout={transitionTimeout}
+                    unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit}>
+                <div ref={(el) => this.container=el} id={this.props.id} className={className} style={this.props.style} role="complementary">
+                    <div className="p-sidebar-icons">
+                        {icons}
+                        {closeIcon}
+                    </div>
+                    <div className="p-sidebar-content">
+                        {this.props.children}
+                    </div>
+                </div>
+            </CSSTransition>
         );
     }
 }

@@ -328,9 +328,9 @@ export class TableBody extends Component {
 
     findExpandedRowIndex(row) {
         let index = -1;
-        if(this.props.expandedRows) {
-            for(let i = 0; i < this.props.expandedRows.length; i++) {
-                if(ObjectUtils.equals(this.props.expandedRows[i], row)) {
+        if (this.props.expandedRows) {
+            for (let i = 0; i < this.props.expandedRows.length; i++) {
+                if (ObjectUtils.equals(this.props.expandedRows[i], row)) {
                     index = i;
                     break;
                 }
@@ -535,7 +535,7 @@ export class TableBody extends Component {
                 if (!this.props.expandableRowGroups || isRowGroupExpanded) {
                     //row content
                     let bodyRow = <BodyRow key={i} value={this.props.value} rowData={rowData} rowIndex={i} onClick={this.onRowClick} onDoubleClick={this.props.onRowDoubleClick} onRightClick={this.onRowRightClick} onTouchEnd={this.onRowTouchEnd}
-                                        onRowToggle={this.onRowToggle} expanded={expanded} responsive={this.props.responsive} selectionMode={this.props.selectionMode}
+                                        onRowToggle={this.onRowToggle} expanded={expanded} selectionMode={this.props.selectionMode}
                                         onRadioClick={this.onRadioClick} onCheckboxClick={this.onCheckboxClick} selected={selected} contextMenuSelected={contextMenuSelected} rowClassName={this.props.rowClassName}
                                         sortField={this.props.sortField} rowGroupMode={this.props.rowGroupMode} groupRowSpan={groupRowSpan}
                                         onDragStart={(e) => this.onRowDragStart(e, i)} onDragEnd={this.onRowDragEnd} onDragOver={(e) => this.onRowDragOver(e, i)} onDragLeave={this.onRowDragLeave}

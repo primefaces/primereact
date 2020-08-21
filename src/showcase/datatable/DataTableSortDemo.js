@@ -1,67 +1,92 @@
 import React, { Component } from 'react';
-import {DataTable} from '../../components/datatable/DataTable';
-import {Column} from '../../components/column/Column';
-import {CarService} from '../service/CarService';
-import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
-import {TabView,TabPanel} from '../../components/tabview/TabView';
-import AppContentContext from '../../AppContentContext';
+import { DataTable } from '../../components/datatable/DataTable';
+import { Column } from '../../components/column/Column';
+import ProductService from '../service/ProductService';
+import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class DataTableSortDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
-            cars: []
+            products: []
         };
-        this.carservice = new CarService();
+
+        this.productService = new ProductService();
+        this.priceBodyTemplate = this.priceBodyTemplate.bind(this);
     }
 
     componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
+    }
+
+    formatCurrency(value) {
+        return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+    }
+
+    priceBodyTemplate(rowData) {
+        return this.formatCurrency(rowData.price);
     }
 
     render() {
         return (
             <div>
-                <DataTableSubmenu />
-
                 <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>DataTable - Sort</h1>
+                    <AppInlineHeader changelogText="dataTable">
+                        <h1>DataTable <span>Sort</span></h1>
                         <p>Enabling sortable property on a column is enough to make a column sortable. Multiple column sorting is enabled using sortMode property and
                             used with metaKey.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("dataTable")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Single Column</h3>
-                    <DataTable value={this.state.cars}>
-                        <Column field="vin" header="Vin" sortable={true}/>
-                        <Column field="year" header="Year" sortable={true}/>
-                        <Column field="brand" header="Brand" sortable={true}/>
-                        <Column field="color" header="Color" sortable={true}/>
-                    </DataTable>
+                    <div className="card">
+                        <h5>Single Column</h5>
+                        <DataTable value={this.state.products}>
+                            <Column field="code" header="Code" sortable></Column>
+                            <Column field="name" header="Name" sortable></Column>
+                            <Column field="category" header="Category" sortable></Column>
+                            <Column field="quantity" header="Quantity" sortable></Column>
+                            <Column field="price" header="Price" body={this.priceBodyTemplate} sortable></Column>
+                        </DataTable>
+                    </div>
 
-                    <h3>Multiple Columns</h3>
-                    <DataTable value={this.state.cars} sortMode="multiple">
-                        <Column field="vin" header="Vin" sortable={true}/>
-                        <Column field="year" header="Year" sortable={true}/>
-                        <Column field="brand" header="Brand" sortable={true}/>
-                        <Column field="color" header="Color" sortable={true}/>
-                    </DataTable>
+                    <div className="card">
+                        <h5>Multiple Columns</h5>
+                        <p>Use metakey to add a column to the sort selection.</p>
+                        <DataTable value={this.state.products} sortMode="multiple">
+                            <Column field="code" header="Code" sortable></Column>
+                            <Column field="name" header="Name" sortable></Column>
+                            <Column field="category" header="Category" sortable></Column>
+                            <Column field="quantity" header="Quantity" sortable></Column>
+                            <Column field="price" header="Price" body={this.priceBodyTemplate} sortable></Column>
+                        </DataTable>
+                    </div>
 
-                    <h3>Removable Sort</h3>
-                    <DataTable value={this.state.cars} removableSort={true} sortMode="multiple">
-                        <Column field="vin" header="Vin" sortable={true}/>
-                        <Column field="year" header="Year" sortable={true}/>
-                        <Column field="brand" header="Brand" sortable={true}/>
-                        <Column field="color" header="Color" sortable={true}/>
-                    </DataTable>
+                    <div className="card">
+                        <h5>Presort</h5>
+                        <DataTable value={this.state.products} sortField="category" sortOrder={-1}>
+                            <Column field="code" header="Code" sortable></Column>
+                            <Column field="name" header="Name" sortable></Column>
+                            <Column field="category" header="Category" sortable></Column>
+                            <Column field="quantity" header="Quantity" sortable></Column>
+                            <Column field="price" header="Price" body={this.priceBodyTemplate} sortable></Column>
+                        </DataTable>
+                    </div>
+
+                    <div className="card">
+                        <h5>Removable Sort</h5>
+                        <DataTable value={this.state.products} removableSort>
+                            <Column field="code" header="Code" sortable></Column>
+                            <Column field="name" header="Name" sortable></Column>
+                            <Column field="category" header="Category" sortable></Column>
+                            <Column field="quantity" header="Quantity" sortable></Column>
+                            <Column field="price" header="Price" body={this.priceBodyTemplate} sortable></Column>
+                        </DataTable>
+                    </div>
                 </div>
 
                 <DataTableSortDemoDoc></DataTableSortDemoDoc>
@@ -80,50 +105,82 @@ export class DataTableSortDemoDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service/CarService';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import ProductService from '../service/ProductService';
 
 export class DataTableSortDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
-            cars: []
+            products: []
         };
-        this.carservice = new CarService();
+
+        this.productService = new ProductService();
+        this.priceBodyTemplate = this.priceBodyTemplate.bind(this);
     }
 
     componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
+    }
+
+    formatCurrency(value) {
+        return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+    }
+
+    priceBodyTemplate(rowData) {
+        return this.formatCurrency(rowData.price);
     }
 
     render() {
         return (
             <div>
-                <h3>Single Column</h3>
-                <DataTable value={this.state.cars}>
-                    <Column field="vin" header="Vin" sortable={true}/>
-                    <Column field="year" header="Year" sortable={true}/>
-                    <Column field="brand" header="Brand" sortable={true}/>
-                    <Column field="color" header="Color" sortable={true}/>
-                </DataTable>
+                <div className="card">
+                    <h5>Single Column</h5>
+                    <DataTable value={this.state.products}>
+                        <Column field="code" header="Code" sortable></Column>
+                        <Column field="name" header="Name" sortable></Column>
+                        <Column field="category" header="Category" sortable></Column>
+                        <Column field="quantity" header="Quantity" sortable></Column>
+                        <Column field="price" header="Price" body={this.priceBodyTemplate} sortable></Column>
+                    </DataTable>
+                </div>
 
-                <h3>Multiple Columns</h3>
-                <DataTable value={this.state.cars} sortMode="multiple">
-                    <Column field="vin" header="Vin" sortable={true}/>
-                    <Column field="year" header="Year" sortable={true}/>
-                    <Column field="brand" header="Brand" sortable={true}/>
-                    <Column field="color" header="Color" sortable={true}/>
-                </DataTable>
+                <div className="card">
+                    <h5>Multiple Columns</h5>
+                    <p>Use metakey to add a column to the sort selection.</p>
+                    <DataTable value={this.state.products} sortMode="multiple">
+                        <Column field="code" header="Code" sortable></Column>
+                        <Column field="name" header="Name" sortable></Column>
+                        <Column field="category" header="Category" sortable></Column>
+                        <Column field="quantity" header="Quantity" sortable></Column>
+                        <Column field="price" header="Price" body={this.priceBodyTemplate} sortable></Column>
+                    </DataTable>
+                </div>
 
-                <h3>Removable Sort</h3>
-                <DataTable value={this.state.cars} removableSort={true} sortMode="multiple">
-                    <Column field="vin" header="Vin" sortable={true}/>
-                    <Column field="year" header="Year" sortable={true}/>
-                    <Column field="brand" header="Brand" sortable={true}/>
-                    <Column field="color" header="Color" sortable={true}/>
-                </DataTable>
+                <div className="card">
+                    <h5>Presort</h5>
+                    <DataTable value={this.state.products} sortField="category" sortOrder={-1}>
+                        <Column field="code" header="Code" sortable></Column>
+                        <Column field="name" header="Name" sortable></Column>
+                        <Column field="category" header="Category" sortable></Column>
+                        <Column field="quantity" header="Quantity" sortable></Column>
+                        <Column field="price" header="Price" body={this.priceBodyTemplate} sortable></Column>
+                    </DataTable>
+                </div>
+
+                <div className="card">
+                    <h5>Removable Sort</h5>
+                    <DataTable value={this.state.products} removableSort>
+                        <Column field="code" header="Code" sortable></Column>
+                        <Column field="name" header="Name" sortable></Column>
+                        <Column field="category" header="Category" sortable></Column>
+                        <Column field="quantity" header="Quantity" sortable></Column>
+                        <Column field="price" header="Price" body={this.priceBodyTemplate} sortable></Column>
+                    </DataTable>
+                </div>
             </div>
         );
     }
@@ -150,26 +207,26 @@ const DataTableSortDemo = () => {
         <div>
             <h3>Single Column</h3>
             <DataTable value={cars}>
-                <Column field="vin" header="Vin" sortable={true}/>
-                <Column field="year" header="Year" sortable={true}/>
-                <Column field="brand" header="Brand" sortable={true}/>
-                <Column field="color" header="Color" sortable={true}/>
+                <Column field="vin" header="Vin" sortable/>
+                <Column field="year" header="Year" sortable/>
+                <Column field="brand" header="Brand" sortable/>
+                <Column field="color" header="Color" sortable/>
             </DataTable>
 
             <h3>Multiple Columns</h3>
             <DataTable value={cars} sortMode="multiple">
-                <Column field="vin" header="Vin" sortable={true}/>
-                <Column field="year" header="Year" sortable={true}/>
-                <Column field="brand" header="Brand" sortable={true}/>
-                <Column field="color" header="Color" sortable={true}/>
+                <Column field="vin" header="Vin" sortable/>
+                <Column field="year" header="Year" sortable/>
+                <Column field="brand" header="Brand" sortable/>
+                <Column field="color" header="Color" sortable/>
             </DataTable>
 
             <h3>Removable Sort</h3>
-            <DataTable value={cars} removableSort={true} sortMode="multiple">
-                <Column field="vin" header="Vin" sortable={true}/>
-                <Column field="year" header="Year" sortable={true}/>
-                <Column field="brand" header="Brand" sortable={true}/>
-                <Column field="color" header="Color" sortable={true}/>
+            <DataTable value={cars} removableSort sortMode="multiple">
+                <Column field="vin" header="Vin" sortable/>
+                <Column field="year" header="Year" sortable/>
+                <Column field="brand" header="Brand" sortable/>
+                <Column field="color" header="Color" sortable/>
             </DataTable>
         </div>
     );
@@ -196,26 +253,26 @@ const DataTableSortDemo = () => {
         <div>
             <h3>Single Column</h3>
             <DataTable value={cars}>
-                <Column field="vin" header="Vin" sortable={true}/>
-                <Column field="year" header="Year" sortable={true}/>
-                <Column field="brand" header="Brand" sortable={true}/>
-                <Column field="color" header="Color" sortable={true}/>
+                <Column field="vin" header="Vin" sortable/>
+                <Column field="year" header="Year" sortable/>
+                <Column field="brand" header="Brand" sortable/>
+                <Column field="color" header="Color" sortable/>
             </DataTable>
 
             <h3>Multiple Columns</h3>
             <DataTable value={cars} sortMode="multiple">
-                <Column field="vin" header="Vin" sortable={true}/>
-                <Column field="year" header="Year" sortable={true}/>
-                <Column field="brand" header="Brand" sortable={true}/>
-                <Column field="color" header="Color" sortable={true}/>
+                <Column field="vin" header="Vin" sortable/>
+                <Column field="year" header="Year" sortable/>
+                <Column field="brand" header="Brand" sortable/>
+                <Column field="color" header="Color" sortable/>
             </DataTable>
 
             <h3>Removable Sort</h3>
-            <DataTable value={cars} removableSort={true} sortMode="multiple">
-                <Column field="vin" header="Vin" sortable={true}/>
-                <Column field="year" header="Year" sortable={true}/>
-                <Column field="brand" header="Brand" sortable={true}/>
-                <Column field="color" header="Color" sortable={true}/>
+            <DataTable value={cars} removableSort sortMode="multiple">
+                <Column field="vin" header="Vin" sortable/>
+                <Column field="year" header="Year" sortable/>
+                <Column field="brand" header="Brand" sortable/>
+                <Column field="color" header="Color" sortable/>
             </DataTable>
         </div>
     );
@@ -233,15 +290,9 @@ const DataTableSortDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="DataTableSortDemo" sources={[key, value]} service="CarService" data="cars-small" />
-                                </TabPanel>
-                            );
-                        })
-                    }
+                    <TabPanel header="Source">
+                        <LiveEditor name="DataTableSortDemo" sources={this.sources} service="CarService" data="cars-small" />
+                    </TabPanel>
                 </TabView>
             </div>
         )

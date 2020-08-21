@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { ColorPicker } from '../../components/colorpicker/ColorPicker';
-import AppContentContext from '../../AppContentContext';
 import { ColorPickerDoc } from './ColorPickerDoc';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class ColorPickerDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             color1: null,
             color2: '1976D2'
@@ -17,24 +17,20 @@ export class ColorPickerDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="colorPicker">
                         <h1>ColorPicker</h1>
                         <p>ColorPicker is an input component to select a color.</p>
-
-                        <AppContentContext.Consumer>
-                            {context => <button onClick={() => context.onChangelogBtnClick("colorPicker")} className="layout-changelog-button">{context.changelogText}</button>}
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Inline</h3>
-                    <ColorPicker inline={true} value={this.state.color1} onChange={(e) => this.setState({ color1: e.value })}></ColorPicker>
-                    <p style={{ 'marginTop': '.5em' }}>Selected Color: <span style={{ 'display': 'inline-block', 'width': '32px', 'height': '32px', 'verticalAlign': 'middle', 'backgroundColor': '#' + this.state.color1 }}></span> {this.state.color1} </p>
+                    <div className="card">
+                        <h5>Inline</h5>
+                        <ColorPicker value={this.state.color1} onChange={(e) => this.setState({ color1: e.value })} inline></ColorPicker>
 
-                    <h3>Overlay</h3>
-                    <ColorPicker value={this.state.color2} onChange={(e) => this.setState({ color2: e.value })}></ColorPicker>
-                    <p style={{ 'marginTop': '.5em' }}>Selected Color: <span style={{ 'color': '#' + this.state.color2 }}>{this.state.color2}</span></p>
+                        <h5>Overlay</h5>
+                        <ColorPicker value={this.state.color2} onChange={(e) => this.setState({ color2: e.value })}></ColorPicker>
+                    </div>
                 </div>
 
                 <ColorPickerDoc />

@@ -384,9 +384,8 @@ export class Tree extends Component {
                 </ul>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderLoader() {
@@ -394,17 +393,13 @@ export class Tree extends Component {
             let icon = classNames('p-tree-loading-icon pi-spin', this.props.loadingIcon);
 
             return (
-                <React.Fragment>
-                    <div className="p-tree-loading-mask p-component-overlay"></div>
-                    <div className="p-tree-loading-content">
-                        <i className={icon} />
-                    </div>
-                </React.Fragment>
+                <div className="p-tree-loading-overlay p-component-overlay">
+                    <i className={icon} />
+                </div>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderFilter() {
@@ -415,9 +410,8 @@ export class Tree extends Component {
                         <span className="p-tree-filter-icon pi pi-search"></span>
                    </div>;
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     render() {

@@ -1,23 +1,18 @@
 import React, { Component } from 'react';
 import { TreeTable } from '../../components/treetable/TreeTable';
-import { Growl } from '../../components/growl/Growl';
-import { Column } from "../../components/column/Column";
+import { Toast } from '../../components/toast/Toast';
+import { Column } from '../../components/column/Column';
 import { NodeService } from '../service/NodeService';
-import { TreeTableSubmenu } from '../../showcase/treetable/TreeTableSubmenu';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
-import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class TreeTableSelectionDemo extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            nodes1: [],
-            nodes2: [],
-            nodes3: [],
-            nodes4: [],
-            nodes5: [],
+            nodes: [],
             selectedNodeKey1: null,
             selectedNodeKey2: null,
             selectedNodeKeys1: [],
@@ -31,79 +26,75 @@ export class TreeTableSelectionDemo extends Component {
     }
 
     onSelect(event) {
-        this.growl.show({ severity: 'info', summary: 'Node Selected', detail: event.node.data.name });
+        this.toast.show({ severity: 'info', summary: 'Node Selected', detail: event.node.data.name });
     }
 
     onUnselect(event) {
-        this.growl.show({ severity: 'info', summary: 'Node Unselected', detail: event.node.data.name });
+        this.toast.show({ severity: 'info', summary: 'Node Unselected', detail: event.node.data.name });
     }
 
     componentDidMount() {
-        this.nodeservice.getTreeTableNodes().then(data => {
-            this.setState({
-                nodes1: data,
-                nodes2: data,
-                nodes3: data,
-                nodes4: data,
-                nodes5: data
-            });
-        });
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({ nodes: data }));
     }
 
     render() {
         return (
             <div>
-                <TreeTableSubmenu />
-
                 <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>TreeTable - Selection</h1>
+                    <AppInlineHeader changelogText="treeTable">
+                        <h1>TreeTable <span>Selection</span></h1>
                         <p>TreeTable supports single, multiple and checkbox based selection modes.</p>
-
-                        <AppContentContext.Consumer>
-                            {context => <button onClick={() => context.onChangelogBtnClick("treeTable")} className="layout-changelog-button">{context.changelogText}</button>}
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <Growl ref={(el) => this.growl = el} />
+                    <Toast ref={(el) => this.toast = el} />
 
-                    <h3 className="first">Single</h3>
-                    <TreeTable value={this.state.nodes1} selectionMode="single" selectionKeys={this.state.selectedNodeKey1} onSelectionChange={e => this.setState({ selectedNodeKey1: e.value })}>
-                        <Column field="name" header="Name" expander></Column>
-                        <Column field="size" header="Size"></Column>
-                        <Column field="type" header="Type"></Column>
-                    </TreeTable>
+                    <div className="card">
+                        <h5>Single</h5>
+                        <TreeTable value={this.state.nodes} selectionMode="single" selectionKeys={this.state.selectedNodeKey1} onSelectionChange={e => this.setState({ selectedNodeKey1: e.value })}>
+                            <Column field="name" header="Name" expander></Column>
+                            <Column field="size" header="Size"></Column>
+                            <Column field="type" header="Type"></Column>
+                        </TreeTable>
+                    </div>
 
-                    <h3>Multiple</h3>
-                    <TreeTable value={this.state.nodes2} selectionMode="multiple" selectionKeys={this.state.selectedNodeKeys1} onSelectionChange={e => this.setState({ selectedNodeKeys1: e.value })} metaKeySelection={false}>
-                        <Column field="name" header="Name" expander></Column>
-                        <Column field="size" header="Size"></Column>
-                        <Column field="type" header="Type"></Column>
-                    </TreeTable>
+                    <div className="card">
+                        <h5>Multiple</h5>
+                        <TreeTable value={this.state.nodes} selectionMode="multiple" selectionKeys={this.state.selectedNodeKeys1} onSelectionChange={e => this.setState({ selectedNodeKeys1: e.value })} metaKeySelection={false}>
+                            <Column field="name" header="Name" expander></Column>
+                            <Column field="size" header="Size"></Column>
+                            <Column field="type" header="Type"></Column>
+                        </TreeTable>
+                    </div>
 
-                    <h3>Multiple with MetaKey</h3>
-                    <TreeTable value={this.state.nodes3} selectionMode="multiple" selectionKeys={this.state.selectedNodeKeys2} onSelectionChange={e => this.setState({ selectedNodeKeys2: e.value })} metaKeySelection={true}>
-                        <Column field="name" header="Name" expander></Column>
-                        <Column field="size" header="Size"></Column>
-                        <Column field="type" header="Type"></Column>
-                    </TreeTable>
+                    <div className="card">
+                        <h5>Multiple with MetaKey</h5>
+                        <TreeTable value={this.state.nodes} selectionMode="multiple" selectionKeys={this.state.selectedNodeKeys2} onSelectionChange={e => this.setState({ selectedNodeKeys2: e.value })} metaKeySelection>
+                            <Column field="name" header="Name" expander></Column>
+                            <Column field="size" header="Size"></Column>
+                            <Column field="type" header="Type"></Column>
+                        </TreeTable>
+                    </div>
 
-                    <h3>Events</h3>
-                    <TreeTable value={this.state.nodes4} selectionMode="single" selectionKeys={this.state.selectedNodeKey2} onSelectionChange={e => this.setState({ selectedNodeKey2: e.value })}
-                        onSelect={this.onSelect} onUnselect={this.onUnselect}>
-                        <Column field="name" header="Name" expander></Column>
-                        <Column field="size" header="Size"></Column>
-                        <Column field="type" header="Type"></Column>
-                    </TreeTable>
+                    <div className="card">
+                        <h5>Events</h5>
+                        <TreeTable value={this.state.nodes} selectionMode="single" selectionKeys={this.state.selectedNodeKey2} onSelectionChange={e => this.setState({ selectedNodeKey2: e.value })}
+                            onSelect={this.onSelect} onUnselect={this.onUnselect}>
+                            <Column field="name" header="Name" expander></Column>
+                            <Column field="size" header="Size"></Column>
+                            <Column field="type" header="Type"></Column>
+                        </TreeTable>
+                    </div>
 
-                    <h3>Checkbox</h3>
-                    <TreeTable value={this.state.nodes5} selectionMode="checkbox" selectionKeys={this.state.selectedNodeKeys3} onSelectionChange={e => this.setState({ selectedNodeKeys3: e.value })}>
-                        <Column field="name" header="Name" expander></Column>
-                        <Column field="size" header="Size"></Column>
-                        <Column field="type" header="Type"></Column>
-                    </TreeTable>
+                    <div className="card">
+                        <h5>Checkbox</h5>
+                        <TreeTable value={this.state.nodes} selectionMode="checkbox" selectionKeys={this.state.selectedNodeKeys3} onSelectionChange={e => this.setState({ selectedNodeKeys3: e.value })}>
+                            <Column field="name" header="Name" expander></Column>
+                            <Column field="size" header="Size"></Column>
+                            <Column field="type" header="Type"></Column>
+                        </TreeTable>
+                    </div>
                 </div>
 
                 <TreeTableSelectionDemoDoc />
@@ -123,7 +114,7 @@ class TreeTableSelectionDemoDoc extends Component {
                 content: `
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
-import { Growl } from 'primereact/growl';
+import { Toast } from 'primereact/toast';
 import { Column } from 'primereact/column';
 import { NodeService } from '../service/NodeService';
 
@@ -132,11 +123,7 @@ export class TreeTableSelectionDemo extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            nodes1: [],
-            nodes2: [],
-            nodes3: [],
-            nodes4: [],
-            nodes5: [],
+            nodes: [],
             selectedNodeKey1: null,
             selectedNodeKey2: null,
             selectedNodeKeys1: [],
@@ -150,65 +137,67 @@ export class TreeTableSelectionDemo extends Component {
     }
 
     onSelect(event) {
-        this.growl.show({severity: 'info', summary: 'Node Selected', detail: event.node.data.name});
+        this.toast.show({ severity: 'info', summary: 'Node Selected', detail: event.node.data.name });
     }
 
     onUnselect(event) {
-        this.growl.show({severity: 'info', summary: 'Node Unselected', detail: event.node.data.name});
+        this.toast.show({ severity: 'info', summary: 'Node Unselected', detail: event.node.data.name });
     }
 
     componentDidMount() {
-        this.nodeservice.getTreeTableNodes().then(data => {
-            this.setState({
-                nodes1: data,
-                nodes2: data,
-                nodes3: data,
-                nodes4: data,
-                nodes5: data
-            });
-        });
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({ nodes: data }));
     }
 
     render() {
         return (
             <div>
-                <Growl ref={(el) => this.growl = el} />
+                <Toast ref={(el) => this.toast = el} />
 
-                <h3 className="first">Single</h3>
-                <TreeTable value={this.state.nodes1} selectionMode="single" selectionKeys={this.state.selectedNodeKey1} onSelectionChange={e => this.setState({selectedNodeKey1: e.value})}>
-                    <Column field="name" header="Name" expander></Column>
-                    <Column field="size" header="Size"></Column>
-                    <Column field="type" header="Type"></Column>
-                </TreeTable>
+                <div className="card">
+                    <h5>Single</h5>
+                    <TreeTable value={this.state.nodes} selectionMode="single" selectionKeys={this.state.selectedNodeKey1} onSelectionChange={e => this.setState({ selectedNodeKey1: e.value })}>
+                        <Column field="name" header="Name" expander></Column>
+                        <Column field="size" header="Size"></Column>
+                        <Column field="type" header="Type"></Column>
+                    </TreeTable>
+                </div>
 
-                <h3>Multiple</h3>
-                <TreeTable value={this.state.nodes2} selectionMode="multiple" selectionKeys={this.state.selectedNodeKeys1} onSelectionChange={e => this.setState({selectedNodeKeys1: e.value})} metaKeySelection={false}>
-                    <Column field="name" header="Name" expander></Column>
-                    <Column field="size" header="Size"></Column>
-                    <Column field="type" header="Type"></Column>
-                </TreeTable>
+                <div className="card">
+                    <h5>Multiple</h5>
+                    <TreeTable value={this.state.nodes} selectionMode="multiple" selectionKeys={this.state.selectedNodeKeys1} onSelectionChange={e => this.setState({ selectedNodeKeys1: e.value })} metaKeySelection={false}>
+                        <Column field="name" header="Name" expander></Column>
+                        <Column field="size" header="Size"></Column>
+                        <Column field="type" header="Type"></Column>
+                    </TreeTable>
+                </div>
 
-                <h3>Multiple with MetaKey</h3>
-                <TreeTable value={this.state.nodes3} selectionMode="multiple" selectionKeys={this.state.selectedNodeKeys2} onSelectionChange={e => this.setState({selectedNodeKeys2: e.value})} metaKeySelection={true}>
-                    <Column field="name" header="Name" expander></Column>
-                    <Column field="size" header="Size"></Column>
-                    <Column field="type" header="Type"></Column>
-                </TreeTable>
+                <div className="card">
+                    <h5>Multiple with MetaKey</h5>
+                    <TreeTable value={this.state.nodes} selectionMode="multiple" selectionKeys={this.state.selectedNodeKeys2} onSelectionChange={e => this.setState({ selectedNodeKeys2: e.value })} metaKeySelection>
+                        <Column field="name" header="Name" expander></Column>
+                        <Column field="size" header="Size"></Column>
+                        <Column field="type" header="Type"></Column>
+                    </TreeTable>
+                </div>
 
-                <h3>Events</h3>
-                <TreeTable value={this.state.nodes4} selectionMode="single" selectionKeys={this.state.selectedNodeKey2} onSelectionChange={e => this.setState({selectedNodeKey2: e.value})}
-                    onSelect={this.onSelect} onUnselect={this.onUnselect}>
-                    <Column field="name" header="Name" expander></Column>
-                    <Column field="size" header="Size"></Column>
-                    <Column field="type" header="Type"></Column>
-                </TreeTable>
+                <div className="card">
+                    <h5>Events</h5>
+                    <TreeTable value={this.state.nodes} selectionMode="single" selectionKeys={this.state.selectedNodeKey2} onSelectionChange={e => this.setState({ selectedNodeKey2: e.value })}
+                        onSelect={this.onSelect} onUnselect={this.onUnselect}>
+                        <Column field="name" header="Name" expander></Column>
+                        <Column field="size" header="Size"></Column>
+                        <Column field="type" header="Type"></Column>
+                    </TreeTable>
+                </div>
 
-                <h3>Checkbox</h3>
-                <TreeTable value={this.state.nodes5} selectionMode="checkbox" selectionKeys={this.state.selectedNodeKeys3} onSelectionChange={e => this.setState({selectedNodeKeys3: e.value})}>
-                    <Column field="name" header="Name" expander></Column>
-                    <Column field="size" header="Size"></Column>
-                    <Column field="type" header="Type"></Column>
-                </TreeTable>
+                <div className="card">
+                    <h5>Checkbox</h5>
+                    <TreeTable value={this.state.nodes} selectionMode="checkbox" selectionKeys={this.state.selectedNodeKeys3} onSelectionChange={e => this.setState({ selectedNodeKeys3: e.value })}>
+                        <Column field="name" header="Name" expander></Column>
+                        <Column field="size" header="Size"></Column>
+                        <Column field="type" header="Type"></Column>
+                    </TreeTable>
+                </div>
             </div>
         )
     }
@@ -220,7 +209,7 @@ export class TreeTableSelectionDemo extends Component {
                 content: `
 import React, { useState, useEffect, useRef } from 'react';
 import { TreeTable } from 'primereact/treetable';
-import { Growl } from 'primereact/growl';
+import { Toast } from 'primereact/toast';
 import { Column } from 'primereact/column';
 import { NodeService } from '../service/NodeService';
 
@@ -236,14 +225,14 @@ const TreeTableSelectionDemo = () => {
     const [selectedNodeKeys2, setSelectedNodeKeys2] = useState([]);
     const [selectedNodeKeys3, setSelectedNodeKeys3] = useState([]);
     const nodeservice = new NodeService();
-    let growl = useRef(null);
+    let toast = useRef(null);
 
     const onSelect = (event) => {
-        growl.current.show({severity: 'info', summary: 'Node Selected', detail: event.node.data.name});
+        toast.current.show({severity: 'info', summary: 'Node Selected', detail: event.node.data.name});
     }
 
     const onUnselect = (event) => {
-        growl.current.show({severity: 'info', summary: 'Node Unselected', detail: event.node.data.name});
+        toast.current.show({severity: 'info', summary: 'Node Unselected', detail: event.node.data.name});
     }
 
     useEffect(() => {
@@ -258,7 +247,7 @@ const TreeTableSelectionDemo = () => {
 
     return (
         <div>
-            <Growl ref={growl} />
+            <Toast ref={toast} />
 
             <h3 className="first">Single</h3>
             <TreeTable value={nodes1} selectionMode="single" selectionKeys={selectedNodeKey1} onSelectionChange={e => setSelectedNodeKey1(e.value)}>
@@ -275,7 +264,7 @@ const TreeTableSelectionDemo = () => {
             </TreeTable>
 
             <h3>Multiple with MetaKey</h3>
-            <TreeTable value={nodes3} selectionMode="multiple" selectionKeys={selectedNodeKeys2} onSelectionChange={e => setSelectedNodeKeys2(e.value)} metaKeySelection={true}>
+            <TreeTable value={nodes3} selectionMode="multiple" selectionKeys={selectedNodeKeys2} onSelectionChange={e => setSelectedNodeKeys2(e.value)} metaKeySelection>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
                 <Column field="type" header="Type"></Column>
@@ -305,7 +294,7 @@ const TreeTableSelectionDemo = () => {
                 content: `
 import React, { useState, useEffect, useRef } from 'react';
 import { TreeTable } from 'primereact/treetable';
-import { Growl } from 'primereact/growl';
+import { Toast } from 'primereact/toast';
 import { Column } from 'primereact/column';
 import { NodeService } from '../service/NodeService';
 
@@ -321,14 +310,14 @@ const TreeTableSelectionDemo = () => {
     const [selectedNodeKeys2, setSelectedNodeKeys2] = useState([]);
     const [selectedNodeKeys3, setSelectedNodeKeys3] = useState([]);
     const nodeservice = new NodeService();
-    let growl = useRef(null);
+    let toast = useRef(null);
 
     const onSelect = (event: any) => {
-        growl.current.show({severity: 'info', summary: 'Node Selected', detail: event.node.data.name});
+        toast.current.show({severity: 'info', summary: 'Node Selected', detail: event.node.data.name});
     }
 
     const onUnselect = (event: any) => {
-        growl.current.show({severity: 'info', summary: 'Node Unselected', detail: event.node.data.name});
+        toast.current.show({severity: 'info', summary: 'Node Unselected', detail: event.node.data.name});
     }
 
     useEffect(() => {
@@ -343,7 +332,7 @@ const TreeTableSelectionDemo = () => {
 
     return (
         <div>
-            <Growl ref={growl} />
+            <Toast ref={toast} />
 
             <h3 className="first">Single</h3>
             <TreeTable value={nodes1} selectionMode="single" selectionKeys={selectedNodeKey1} onSelectionChange={e => setSelectedNodeKey1(e.value)}>
@@ -360,7 +349,7 @@ const TreeTableSelectionDemo = () => {
             </TreeTable>
 
             <h3>Multiple with MetaKey</h3>
-            <TreeTable value={nodes3} selectionMode="multiple" selectionKeys={selectedNodeKeys2} onSelectionChange={e => setSelectedNodeKeys2(e.value)} metaKeySelection={true}>
+            <TreeTable value={nodes3} selectionMode="multiple" selectionKeys={selectedNodeKeys2} onSelectionChange={e => setSelectedNodeKeys2(e.value)} metaKeySelection>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
                 <Column field="type" header="Type"></Column>
@@ -396,15 +385,9 @@ const TreeTableSelectionDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="TreeTableSelectionDemo" sources={[key, value]} service="NodeService" data="treetablenodes" />
-                                </TabPanel>
-                            );
-                        })
-                    }
+                    <TabPanel header="Source">
+                        <LiveEditor name="TreeTableSelectionDemo" sources={this.sources} service="NodeService" data="treetablenodes" />
+                    </TabPanel>
                 </TabView>
             </div>
         )

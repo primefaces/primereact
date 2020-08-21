@@ -18,7 +18,9 @@ export class RowCheckbox extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            focused: false
+        };
 
         this.onClick = this.onClick.bind(this);
         this.onFocus = this.onFocus.bind(this);

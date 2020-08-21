@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { Tree } from '../../components/tree/Tree';
 import { NodeService } from '../service/NodeService';
-import { TreeSubmenu } from './TreeSubmenu';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
-import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class TreeDragDropDemo extends Component {
 
@@ -24,21 +23,17 @@ export class TreeDragDropDemo extends Component {
     render() {
         return (
             <div>
-                <TreeSubmenu />
-
                 <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Tree - DragDrop</h1>
+                    <AppInlineHeader changelogText="tree">
+                        <h1>Tree <span>DragDrop</span></h1>
                         <p>Nodes can be reordered using drag and drop.</p>
-
-                        <AppContentContext.Consumer>
-                            {context => <button onClick={() => context.onChangelogBtnClick("tree")} className="layout-changelog-button">{context.changelogText}</button>}
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <Tree value={this.state.nodes} dragdropScope="demo" onDragDrop={event => this.setState({ nodes: event.value })} />
+                    <div className="card">
+                        <Tree value={this.state.nodes} dragdropScope="demo" onDragDrop={event => this.setState({ nodes: event.value })} />
+                    </div>
                 </div>
 
                 <TreeDragDropDemoDoc />
@@ -57,8 +52,8 @@ export class TreeDragDropDemoDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {Tree} from 'primereact/tree';
-import {NodeService} from '../service/NodeService';
+import { Tree } from 'primereact/tree';
+import { NodeService } from '../service/NodeService';
 
 export class TreeDragDropDemo extends Component {
 
@@ -72,13 +67,15 @@ export class TreeDragDropDemo extends Component {
     }
 
     componentDidMount() {
-        this.nodeService.getTreeNodes().then(data => this.setState({nodes: data}));
+        this.nodeService.getTreeNodes().then(data => this.setState({ nodes: data }));
     }
 
     render() {
         return (
             <div>
-                <Tree value={this.state.nodes} dragdropScope="demo" onDragDrop={event => this.setState({nodes: event.value})} />
+                <div className="card">
+                    <Tree value={this.state.nodes} dragdropScope="demo" onDragDrop={event => this.setState({ nodes: event.value })} />
+                </div>
             </div>
         )
     }
@@ -142,15 +139,9 @@ const TreeDragDropDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="TreeDragDropDemo" sources={[key, value]} service="NodeService" data="treenodes" />
-                                </TabPanel>
-                            );
-                        })
-                    }
+                    <TabPanel header="Source">
+                        <LiveEditor name="TreeDragDropDemo" sources={this.sources} service="NodeService" data="treenodes" />
+                    </TabPanel>
                 </TabView>
             </div>
         );

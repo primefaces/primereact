@@ -1,4 +1,585 @@
 {
+    "5.0": {
+        "sidebar": [
+            {
+                "number": 1513,
+                "title": "Rename iconsTemplate property to icons property on Sidebar",
+                "url": "https://github.com/primefaces/primereact/issues/1513"
+            }
+        ],
+        "toast": [
+            {
+                "number": 1512,
+                "title": "Rename Growl component to Toast component",
+                "url": "https://github.com/primefaces/primereact/issues/1512"
+            },
+            {
+                "number": 1497,
+                "title": "Change the values of position property on Growl",
+                "url": "https://github.com/primefaces/primereact/issues/1497"
+            }
+        ],
+        "fileupload": [
+            {
+                "number": 1508,
+                "title": "Add emptyTemplate property to FileUpload",
+                "url": "https://github.com/primefaces/primereact/issues/1508"
+            },
+            {
+                "number": 1415,
+                "title": "File selection does not work after validation fails",
+                "url": "https://github.com/primefaces/primereact/issues/1415"
+            }
+        ],
+        "dialog": [
+            {
+                "number": 1516,
+                "title": "Change the values of position property on Dialog",
+                "url": "https://github.com/primefaces/primereact/issues/1516"
+            },
+            {
+                "number": 1514,
+                "title": "Rename iconsTemplate property to icons property on Dialog",
+                "url": "https://github.com/primefaces/primereact/issues/1514"
+            },
+            {
+                "number": 1455,
+                "title": "Add contentClassName property to Dialog",
+                "url": "https://github.com/primefaces/primereact/issues/1455"
+            }
+        ],
+        "treetable": [
+            {
+                "number": 1517,
+                "title": "Global filter is not working with invalid values on TreeTable",
+                "url": "https://github.com/primefaces/primereact/issues/1517"
+            }
+        ],
+        "captcha": [
+            {
+                "number": 1509,
+                "title": "Captcha throws a JS exception",
+                "url": "https://github.com/primefaces/primereact/issues/1509"
+            }
+        ],
+        "button": [
+            {
+                "number": 1490,
+                "title": "Add badge and badgeClassName properties to Button",
+                "url": "https://github.com/primefaces/primereact/issues/1490"
+            },
+            {
+                "number": 1258,
+                "title": "Custom content support for Button",
+                "url": "https://github.com/primefaces/primereact/issues/1258"
+            },
+            {
+                "number": 1436,
+                "title": "Improve Tooltip implementation",
+                "url": "https://github.com/primefaces/primereact/issues/1436"
+            }
+        ],
+        "galleria": [
+            {
+                "number": 1503,
+                "title": "Change some property names on Galleria",
+                "url": "https://github.com/primefaces/primereact/issues/1503"
+            }
+        ],
+        "ripple": [
+            {
+                "number": 1507,
+                "title": "New Component: Ripple",
+                "url": "https://github.com/primefaces/primereact/issues/1507"
+            }
+        ],
+        "badge": [
+            {
+                "number": 1489,
+                "title": "Add Badge styles to core css",
+                "url": "https://github.com/primefaces/primereact/issues/1489"
+            }
+        ],
+        "orderlist": [
+            {
+                "number": 1494,
+                "title": "Remove responsive property from OrderList",
+                "url": "https://github.com/primefaces/primereact/issues/1494"
+            }
+        ],
+        "picklist": [
+            {
+                "number": 1493,
+                "title": "Remove responsive property from PickList",
+                "url": "https://github.com/primefaces/primereact/issues/1493"
+            }
+        ],
+        "menubar": [
+            {
+                "number": 1498,
+                "title": "Add start and end properties to Menubar",
+                "url": "https://github.com/primefaces/primereact/issues/1498"
+            }
+        ],
+        "datatable": [
+            {
+                "number": 1505,
+                "title": "Add index parameter to onRowEditInit and onRowSave callbacks on DataTable",
+                "url": "https://github.com/primefaces/primereact/issues/1505"
+            },
+            {
+                "number": 1250,
+                "title": "Remove responsive attribute from DataTable",
+                "url": "https://github.com/primefaces/primereact/issues/1250"
+            },
+            {
+                "number": 1504,
+                "title": "Add onEditorInit callback for cell editing mode to Column",
+                "url": "https://github.com/primefaces/primereact/issues/1504"
+            }
+        ],
+        "dropdown": [
+            {
+                "number": 1496,
+                "title": "Add valueTemplate property to Dropdown",
+                "url": "https://github.com/primefaces/primereact/issues/1496"
+            },
+            {
+                "number": 1436,
+                "title": "Improve Tooltip implementation",
+                "url": "https://github.com/primefaces/primereact/issues/1436"
+            },
+            {
+                "number": 1397,
+                "title": "ListBox, Dropdown: Using non-unique key",
+                "url": "https://github.com/primefaces/primereact/issues/1397"
+            }
+        ],
+        "slider": [
+            {
+                "number": 1437,
+                "title": "Change onSlideEnd callback param on Slider",
+                "url": "https://github.com/primefaces/primereact/issues/1437"
+            },
+            {
+                "number": 1484,
+                "title": "Migrate to PrimeOne Design Architecture",
+                "url": "https://github.com/primefaces/primereact/issues/1484"
+            }
+        ],
+        "inputnumber": [
+            {
+                "number": 1427,
+                "title": "Can't type - as first symbol into an Inputnumber",
+                "url": "https://github.com/primefaces/primereact/issues/1427"
+            },
+            {
+                "number": 1380,
+                "title": "It is impossible to type fractional digits on InputNumber",
+                "url": "https://github.com/primefaces/primereact/issues/1380"
+            },
+            {
+                "number": 1412,
+                "title": "InputNumber prevents min key number",
+                "url": "https://github.com/primefaces/primereact/issues/1412"
+            },
+            {
+                "number": 1436,
+                "title": "Improve Tooltip implementation",
+                "url": "https://github.com/primefaces/primereact/issues/1436"
+            },
+            {
+                "number": 1418,
+                "title": "Add onValueChange property to InputNumber",
+                "url": "https://github.com/primefaces/primereact/issues/1418"
+            },
+            {
+                "number": 1484,
+                "title": "Migrate to PrimeOne Design Architecture",
+                "url": "https://github.com/primefaces/primereact/issues/1484"
+            },
+            {
+                "number": 1470,
+                "title": "Dynamic options breaks InputNumber",
+                "url": "https://github.com/primefaces/primereact/issues/1470"
+            }
+        ],
+        "tooltip": [
+            {
+                "number": 1436,
+                "title": "Improve Tooltip implementation",
+                "url": "https://github.com/primefaces/primereact/issues/1436"
+            }
+        ],
+        "toolbar": [
+            {
+                "number": 1502,
+                "title": "Add left and right properties to Toolbar",
+                "url": "https://github.com/primefaces/primereact/issues/1502"
+            }
+        ],
+        "autocomplete": [
+            {
+                "number": 1428,
+                "title": "Typing for selectedItemTemplate in AutoComplete is wrong",
+                "url": "https://github.com/primefaces/primereact/issues/1428"
+            },
+            {
+                "number": 1436,
+                "title": "Improve Tooltip implementation",
+                "url": "https://github.com/primefaces/primereact/issues/1436"
+            },
+            {
+                "number": 1484,
+                "title": "Migrate to PrimeOne Design Architecture",
+                "url": "https://github.com/primefaces/primereact/issues/1484"
+            },
+            {
+                "number": 1421,
+                "title": "Calling clearTimeout is required before unmounting AutoComplete",
+                "url": "https://github.com/primefaces/primereact/issues/1421"
+            }
+        ],
+        "calendar": [
+            {
+                "number": 1436,
+                "title": "Improve Tooltip implementation",
+                "url": "https://github.com/primefaces/primereact/issues/1436"
+            },
+            {
+                "number": 1456,
+                "title": "DatePicker Milliseconds jumps from 000 to 199",
+                "url": "https://github.com/primefaces/primereact/issues/1456"
+            },
+            {
+                "number": 1416,
+                "title": "Clear button is not closing Calendar",
+                "url": "https://github.com/primefaces/primereact/issues/1416"
+            },
+            {
+                "number": 1506,
+                "title": "Calendar with appendTo property isn't working as expected",
+                "url": "https://github.com/primefaces/primereact/issues/1506"
+            },
+            {
+                "number": 1484,
+                "title": "Migrate to PrimeOne Design Architecture",
+                "url": "https://github.com/primefaces/primereact/issues/1484"
+            },
+            {
+                "number": 1422,
+                "title": "If the invalid value is entered to Calendar with keepInvalid property, the onChange event returns null",
+                "url": "https://github.com/primefaces/primereact/issues/1422"
+            }
+        ],
+        "checkbox": [
+            {
+                "number": 1436,
+                "title": "Improve Tooltip implementation",
+                "url": "https://github.com/primefaces/primereact/issues/1436"
+            },
+            {
+                "number": 1484,
+                "title": "Migrate to PrimeOne Design Architecture",
+                "url": "https://github.com/primefaces/primereact/issues/1484"
+            }
+        ],
+        "chips": [
+            {
+                "number": 1436,
+                "title": "Improve Tooltip implementation",
+                "url": "https://github.com/primefaces/primereact/issues/1436"
+            },
+            {
+                "number": 1484,
+                "title": "Migrate to PrimeOne Design Architecture",
+                "url": "https://github.com/primefaces/primereact/issues/1484"
+            }
+        ],
+        "colorpicker": [
+            {
+                "number": 1436,
+                "title": "Improve Tooltip implementation",
+                "url": "https://github.com/primefaces/primereact/issues/1436"
+            },
+            {
+                "number": 1484,
+                "title": "Migrate to PrimeOne Design Architecture",
+                "url": "https://github.com/primefaces/primereact/issues/1484"
+            }
+        ],
+        "inputmask": [
+            {
+                "number": 1436,
+                "title": "Improve Tooltip implementation",
+                "url": "https://github.com/primefaces/primereact/issues/1436"
+            }
+        ],
+        "inputswitch": [
+            {
+                "number": 1436,
+                "title": "Improve Tooltip implementation",
+                "url": "https://github.com/primefaces/primereact/issues/1436"
+            },
+            {
+                "number": 1484,
+                "title": "Migrate to PrimeOne Design Architecture",
+                "url": "https://github.com/primefaces/primereact/issues/1484"
+            }
+        ],
+        "inputtext": [
+            {
+                "number": 1436,
+                "title": "Improve Tooltip implementation",
+                "url": "https://github.com/primefaces/primereact/issues/1436"
+            }
+        ],
+        "inputtextarea": [
+            {
+                "number": 1436,
+                "title": "Improve Tooltip implementation",
+                "url": "https://github.com/primefaces/primereact/issues/1436"
+            },
+            {
+                "number": 1484,
+                "title": "Migrate to PrimeOne Design Architecture",
+                "url": "https://github.com/primefaces/primereact/issues/1484"
+            }
+        ],
+        "listbox": [
+            {
+                "number": 1436,
+                "title": "Improve Tooltip implementation",
+                "url": "https://github.com/primefaces/primereact/issues/1436"
+            },
+            {
+                "number": 1454,
+                "title": "Add listClassName property to Listbox",
+                "url": "https://github.com/primefaces/primereact/issues/1454"
+            },
+            {
+                "number": 1397,
+                "title": "ListBox, Dropdown: Using non-unique key",
+                "url": "https://github.com/primefaces/primereact/issues/1397"
+            }
+        ],
+        "multiselect": [
+            {
+                "number": 1436,
+                "title": "Improve Tooltip implementation",
+                "url": "https://github.com/primefaces/primereact/issues/1436"
+            }
+        ],
+        "password": [
+            {
+                "number": 1436,
+                "title": "Improve Tooltip implementation",
+                "url": "https://github.com/primefaces/primereact/issues/1436"
+            },
+            {
+                "number": 1484,
+                "title": "Migrate to PrimeOne Design Architecture",
+                "url": "https://github.com/primefaces/primereact/issues/1484"
+            }
+        ],
+        "radiobutton": [
+            {
+                "number": 1436,
+                "title": "Improve Tooltip implementation",
+                "url": "https://github.com/primefaces/primereact/issues/1436"
+            },
+            {
+                "number": 1484,
+                "title": "Migrate to PrimeOne Design Architecture",
+                "url": "https://github.com/primefaces/primereact/issues/1484"
+            }
+        ],
+        "rating": [
+            {
+                "number": 1436,
+                "title": "Improve Tooltip implementation",
+                "url": "https://github.com/primefaces/primereact/issues/1436"
+            },
+            {
+                "number": 1484,
+                "title": "Migrate to PrimeOne Design Architecture",
+                "url": "https://github.com/primefaces/primereact/issues/1484"
+            }
+        ],
+        "selectbutton": [
+            {
+                "number": 1436,
+                "title": "Improve Tooltip implementation",
+                "url": "https://github.com/primefaces/primereact/issues/1436"
+            },
+            {
+                "number": 1484,
+                "title": "Migrate to PrimeOne Design Architecture",
+                "url": "https://github.com/primefaces/primereact/issues/1484"
+            }
+        ],
+        "spinner": [
+            {
+                "number": 1436,
+                "title": "Improve Tooltip implementation",
+                "url": "https://github.com/primefaces/primereact/issues/1436"
+            },
+            {
+                "number": 1488,
+                "title": "Remove Spinner Component",
+                "url": "https://github.com/primefaces/primereact/issues/1488"
+            }
+        ],
+        "splitbutton": [
+            {
+                "number": 1436,
+                "title": "Improve Tooltip implementation",
+                "url": "https://github.com/primefaces/primereact/issues/1436"
+            },
+            {
+                "number": 1484,
+                "title": "Migrate to PrimeOne Design Architecture",
+                "url": "https://github.com/primefaces/primereact/issues/1484"
+            }
+        ],
+        "togglebutton": [
+            {
+                "number": 1436,
+                "title": "Improve Tooltip implementation",
+                "url": "https://github.com/primefaces/primereact/issues/1436"
+            },
+            {
+                "number": 1495,
+                "title": "Add iconPos property to ToggleButton",
+                "url": "https://github.com/primefaces/primereact/issues/1495"
+            }
+        ],
+        "tristatecheckbox": [
+            {
+                "number": 1436,
+                "title": "Improve Tooltip implementation",
+                "url": "https://github.com/primefaces/primereact/issues/1436"
+            }
+        ],
+        "utils": [
+            {
+                "number": 1436,
+                "title": "Improve Tooltip implementation",
+                "url": "https://github.com/primefaces/primereact/issues/1436"
+            },
+            {
+                "number": 1486,
+                "title": "Improved Overlay Animations",
+                "url": "https://github.com/primefaces/primereact/issues/1486"
+            }
+        ],
+        "carousel": [
+            {
+                "number": 1491,
+                "title": "Replace dotsContainerClassName with indicatorsContentClassName property on Carousel",
+                "url": "https://github.com/primefaces/primereact/issues/1491"
+            }
+        ],
+        "lightbox": [
+            {
+                "number": 1487,
+                "title": "Remove Lightbox component",
+                "url": "https://github.com/primefaces/primereact/issues/1487"
+            }
+        ],
+        "tabmenu": [
+            {
+                "number": 1484,
+                "title": "Migrate to PrimeOne Design Architecture",
+                "url": "https://github.com/primefaces/primereact/issues/1484"
+            }
+        ],
+        "breadcrumb": [
+            {
+                "number": 1484,
+                "title": "Migrate to PrimeOne Design Architecture",
+                "url": "https://github.com/primefaces/primereact/issues/1484"
+            }
+        ],
+        "paginator": [
+            {
+                "number": 1484,
+                "title": "Migrate to PrimeOne Design Architecture",
+                "url": "https://github.com/primefaces/primereact/issues/1484"
+            }
+        ],
+        "panel": [
+            {
+                "number": 1484,
+                "title": "Migrate to PrimeOne Design Architecture",
+                "url": "https://github.com/primefaces/primereact/issues/1484"
+            }
+        ],
+        "column": [
+            {
+                "number": 1504,
+                "title": "Add onEditorInit callback for cell editing mode to Column",
+                "url": "https://github.com/primefaces/primereact/issues/1504"
+            }
+        ],
+        "card": [
+            {
+                "number": 1484,
+                "title": "Migrate to PrimeOne Design Architecture",
+                "url": "https://github.com/primefaces/primereact/issues/1484"
+            }
+        ],
+        "accordion": [
+            {
+                "number": 1484,
+                "title": "Migrate to PrimeOne Design Architecture",
+                "url": "https://github.com/primefaces/primereact/issues/1484"
+            }
+        ],
+        "steps": [
+            {
+                "number": 1484,
+                "title": "Migrate to PrimeOne Design Architecture",
+                "url": "https://github.com/primefaces/primereact/issues/1484"
+            }
+        ],
+        "tabview": [
+            {
+                "number": 1484,
+                "title": "Migrate to PrimeOne Design Architecture",
+                "url": "https://github.com/primefaces/primereact/issues/1484"
+            }
+        ],
+        "panelmenu": [
+            {
+                "number": 1484,
+                "title": "Migrate to PrimeOne Design Architecture",
+                "url": "https://github.com/primefaces/primereact/issues/1484"
+            }
+        ],
+        "progressbar": [
+            {
+                "number": 1484,
+                "title": "Migrate to PrimeOne Design Architecture",
+                "url": "https://github.com/primefaces/primereact/issues/1484"
+            }
+        ],
+        "scrollpanel": [
+            {
+                "number": 1484,
+                "title": "Migrate to PrimeOne Design Architecture",
+                "url": "https://github.com/primefaces/primereact/issues/1484"
+            }
+        ],
+        "chart": [
+            {
+                "number": 1492,
+                "title": "Chart does not update when its options and type properties change",
+                "url": "https://github.com/primefaces/primereact/issues/1492"
+            }
+        ]
+    },
+
     "4.2.2": {
         "dialog": [
             {
@@ -597,7 +1178,7 @@
                 "url": "https://github.com/primefaces/primereact/issues/1199"
             }
         ],
-        "growl": [
+        "toast": [
             {
                 "number": 1248,
                 "title": "onClose of GrowlMessage is also allowing onClick to fire.",
@@ -1186,7 +1767,7 @@
                 "url": "https://github.com/primefaces/primereact/issues/1196"
             }
         ],
-        "growl": [
+        "toast": [
             {
                 "number": 1190,
                 "title": "Alignment problem on Growl message without details",
@@ -1384,7 +1965,7 @@
                 "url": "https://github.com/primefaces/primereact/issues/1155"
             }
         ],
-        "growl": [
+        "toast": [
             {
                 "number": 1155,
                 "title": "When the buttons inside the components are clicked, they submit the form",
@@ -1488,7 +2069,7 @@
                 "url": "https://github.com/primefaces/primereact/issues/1085"
             }
         ],
-        "growl": [
+        "toast": [
             {
                 "number": 1095,
                 "title": "Growl messages from \"bottom*\" is not displaying as expected",
@@ -2049,7 +2630,7 @@
                 "url": "https://github.com/primefaces/primereact/issues/957"
             }
         ],
-        "growl": [
+        "toast": [
             {
                 "number": 965,
                 "title": "Growl detail should be placed in <div> not <p>",
@@ -2185,7 +2766,7 @@
                 "url": "https://github.com/primefaces/primereact/issues/913"
             }
         ],
-        "growl": [
+        "toast": [
             {
                 "number": 914,
                 "title": "onRemove event does not exists on Growl component",

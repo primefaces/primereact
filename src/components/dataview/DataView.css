@@ -1,64 +1,12 @@
-.p-dataview {
+.p-dataview-loading {
     position: relative;
+    min-height: 4rem;
 }
 
-.p-dataview .p-paginator {
-    text-align: center;
-}
-
-.p-dataview-column {
-    padding: .25em;
-}
-
-.p-dataview-content-empty {
-    padding: .25em .625em;
-}
-
-.p-dataview .p-dataview-header,
-.p-dataview .p-dataview-footer {
-    text-align: center;
-    padding: .5em .75em;
-}
-
-.p-dataview .p-dataview-header {
-    border-bottom: 0 none;
-}
-
-.p-dataview .p-dataview-footer {
-    border-top: 0 none;
-}
-
-.p-dataview .p-paginator-top {
-    border-bottom: 0 none;
-}
-
-.p-dataview .p-paginator-bottom {
-    border-top: 0 none;
-}
-
-.p-dataview.p-dataview-list > .p-dataview-content > div.p-grid > div {
-    width: 100%;
-}
-
-/* Loader */
-.p-dataview-loading-overlay {
+.p-dataview .p-dataview-loading-overlay {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
-    opacity: 0.1;
     z-index: 1;
-}
-
-.p-dataview-loading-content {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    z-index: 2;
-    margin-top: -1em;
-    margin-left: -1em;
-}
-
-.p-dataview .p-dataview-loading-icon {
-    font-size: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

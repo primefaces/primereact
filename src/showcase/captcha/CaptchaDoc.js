@@ -14,25 +14,27 @@ export class CaptchaDoc extends Component {
                 content: `
 import React, { Component } from 'react';
 import { Captcha } from 'primereact/captcha';
-import { Growl } from 'primereact/growl';
+import { Toast } from 'primereact/toast';
 
 export class CaptchaDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.showResponse = this.showResponse.bind(this);
     }
 
     showResponse() {
-        this.growl.show({severity: 'info', summary: 'Success', detail: 'User Responded'});
+        this.toast.show({ severity: 'info', summary: 'Success', detail: 'User Responded' });
     }
 
     render() {
         return (
-            <div className="button-demo">
-                <Growl ref={(el) => this.growl = el}></Growl>
+            <div>
+                <Toast ref={(el) => this.toast = el}></Toast>
 
-                <Captcha siteKey="6Lf2XQkTAAAAANcvOwYqPxWL4iZDksFqHpS39GDA" onResponse={this.showResponse} />
+                <div className="card">
+                    <Captcha siteKey="YOUR_SITE_KEY" onResponse={this.showResponse} />
+                </div>
             </div>
         )
     }
@@ -44,18 +46,18 @@ export class CaptchaDemo extends Component {
                 content: `
 import React, { useRef } from 'react';
 import { Captcha } from 'primereact/captcha';
-import { Growl } from 'primereact/growl';
+import { Toast } from 'primereact/toast';
 
 const CaptchaDemo = () => {
-    let growl = useRef(null);
+    let toast = useRef(null);
 
     const showResponse = () => {
-        growl.current.show({severity: 'info', summary: 'Success', detail: 'User Responded'});
+        toast.current.show({severity: 'info', summary: 'Success', detail: 'User Responded'});
     }
 
     return (
         <div className="button-demo">
-            <Growl ref={growl}></Growl>
+            <Toast ref={toast}></Toast>
 
             <Captcha siteKey="6Lf2XQkTAAAAANcvOwYqPxWL4iZDksFqHpS39GDA" onResponse={showResponse} />
         </div>
@@ -68,18 +70,18 @@ const CaptchaDemo = () => {
                 content: `
 import React, { useRef } from 'react';
 import { Captcha } from 'primereact/captcha';
-import { Growl } from 'primereact/growl';
+import { Toast } from 'primereact/toast';
 
 const CaptchaDemo = () => {
-    let growl = useRef<any>(null);
+    let toast = useRef<any>(null);
 
     const showResponse = () => {
-        growl.current.show({severity: 'info', summary: 'Success', detail: 'User Responded'});
+        toast.current.show({severity: 'info', summary: 'Success', detail: 'User Responded'});
     }
 
     return (
         <div className="button-demo">
-            <Growl ref={growl}></Growl>
+            <Toast ref={toast}></Toast>
 
             <Captcha siteKey="6Lf2XQkTAAAAANcvOwYqPxWL4iZDksFqHpS39GDA" onResponse={showResponse} />
         </div>
@@ -107,44 +109,40 @@ const CaptchaDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
-                            {`
-import {Captcha} from 'primereact/captcha';
-
+                        <h5>Import</h5>
+<CodeHighlight lang="js">
+{`
+import { Captcha } from 'primereact/captcha';
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>Captcha is used with a siteKey and a callback to verify the response.</p>
-                        <CodeHighlight className="language-jsx">
-                            {`
+<CodeHighlight>
+{`
 <Captcha siteKey="YOUR_SITE_KEY" onResponse={this.showResponse}></Captcha>
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <h3>Verification</h3>
+                        <h5>Verification</h5>
                         <p>In order to ensure if a response token is valid, verification against recaptcha api needs to be done at backend. <a href="https://developers.google.com/recaptcha/docs/verify">Read more</a> at
                         official documentation.</p>
-                        <CodeHighlight className="language-javascript">
-                            {`
+<CodeHighlight lang="js">
+{`
 showResponse(response) {
-    //call to a backend to verify against recaptcha with private key
+//call to a backend to verify against recaptcha with private key
 }
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <p>In addition, include the captcha widget resource to your page.</p>
-                        <CodeHighlight className="language-jsx">
-                            {`
+<CodeHighlight>
+{`
 <script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -202,7 +200,7 @@ showResponse(response) {
                             </table>
                         </div>
 
-                        <h3>Events</h3>
+                        <h5>Events</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -227,7 +225,7 @@ showResponse(response) {
                             </table>
                         </div>
 
-                        <h3>Methods</h3>
+                        <h5>Methods</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -252,19 +250,13 @@ showResponse(response) {
                             </table>
                         </div>
 
-                        <h3>Dependencies</h3>
+                        <h5>Dependencies</h5>
                         <p>Google Recaptcha V2</p>
                     </TabPanel>
 
-                    {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="CaptchaDemo" sources={[key, value]} extFiles={this.extFiles} />
-                                </TabPanel>
-                            );
-                        })
-                    }
+                    <TabPanel header="Source">
+                        <LiveEditor name="CaptchaDemo" sources={this.sources} extFiles={this.extFiles} />
+                    </TabPanel>
                 </TabView>
             </div>
         )

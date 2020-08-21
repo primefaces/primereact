@@ -139,13 +139,11 @@ export class PickListSubList extends Component {
     render() {
         let header = null;
         let items = null;
-        let wrapperClassName = classNames('p-picklist-listwrapper', this.props.className, {
-            'p-picklist-listwrapper-nocontrols': !this.props.showControls
-        });
+        let wrapperClassName = classNames('p-picklist-list-wrapper', this.props.className);
         let listClassName = classNames('p-picklist-list', this.props.listClassName);
 
         if(this.props.header) {
-            header = <div className="p-picklist-caption">{this.props.header}</div>
+            header = <div className="p-picklist-header">{this.props.header}</div>
         }
 
         if(this.props.list) {
@@ -157,7 +155,7 @@ export class PickListSubList extends Component {
 
         return <div className={wrapperClassName}>
                     {header}
-                    <ul className={listClassName} style={this.props.style} role="listbox" aria-multiselectable={true}>
+                    <ul className={listClassName} style={this.props.style} role="listbox" aria-multiselectable>
                         {items}
                     </ul>
                  </div>;

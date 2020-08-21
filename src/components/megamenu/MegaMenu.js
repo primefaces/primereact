@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
+import { Ripple } from '../ripple/Ripple';
 
 export class MegaMenu extends Component {
 
@@ -49,25 +50,6 @@ export class MegaMenu extends Component {
         this.setState({
             activeItem: null
         });
-    }
-
-    componentDidMount() {
-        if (!this.documentClickListener) {
-            this.documentClickListener = (event) => {
-                if (this.container && !this.container.contains(event.target)) {
-                    this.setState({activeItem: null});
-                }
-            };
-
-            document.addEventListener('click', this.documentClickListener);
-        }
-    }
-
-    componentWillUnmount() {
-        if (this.documentClickListener) {
-            document.removeEventListener('click', this.documentClickListener);
-            this.documentClickListener = null;
-        }
     }
 
     onCategoryMouseEnter(event, item) {
@@ -248,41 +230,59 @@ export class MegaMenu extends Component {
         return columnClass;
     }
 
+    componentDidMount() {
+        if (!this.documentClickListener) {
+            this.documentClickListener = (event) => {
+                if (this.container && !this.container.contains(event.target)) {
+                    this.setState({activeItem: null});
+                }
+            };
+
+            document.addEventListener('click', this.documentClickListener);
+        }
+    }
+
+    componentWillUnmount() {
+        if (this.documentClickListener) {
+            document.removeEventListener('click', this.documentClickListener);
+            this.documentClickListener = null;
+        }
+    }
+
     renderSeparator(index) {
         return (
-            <li key={'separator_' + index} className="p-menu-separator"></li>
+            <li key={'separator_' + index} className="p-menu-separator" role="separator"></li>
         );
     }
 
     renderSubmenuIcon(item) {
         if (item.items) {
-            const className = classNames('p-submenu-icon pi pi-fw', {'pi-caret-down': this.isHorizontal(),'pi-caret-right': this.isVertical()});
+            const className = classNames('p-submenu-icon pi', {'pi-angle-down': this.isHorizontal(), 'pi-angle-right': this.isVertical()});
 
             return (
                 <span className={className}></span>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderSubmenuItem(item, index) {
         if (item.separator) {
-            return (
-                <li key={'separator_' + index} className="p-menu-separator" role="separator"></li>
-            );
+            return this.renderSeparator(index);
         }
         else {
-            const className = classNames('p-menuitem', item.className, {'p-disabled': item.disabled});
+            const className = classNames('p-menuitem', item.className);
+            const linkClassName = classNames('p-menuitem-link', {'p-disabled': item.disabled});
             const iconClassName = classNames(item.icon, 'p-menuitem-icon');
-            const icon = item.icon ? <span className={iconClassName}></span>: null;
+            const icon = item.icon && <span className={iconClassName}></span>;
 
             return (
                 <li key={item.label + '_' + index} className={className} style={item.style} role="none">
-                    <a href={item.url || '#'} className="p-menuitem-link" target={item.target} onClick={(event) => this.onLeafClick(event, item)} role="menuitem">
+                    <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => this.onLeafClick(event, item)} role="menuitem">
                         {icon}
                         <span className="p-menuitem-text">{item.label}</span>
+                        <Ripple />
                     </a>
                 </li>
             );
@@ -290,7 +290,7 @@ export class MegaMenu extends Component {
     }
 
     renderSubmenu(submenu) {
-        const className = classNames('p-megamenu-submenu-header', submenu.className, {'p-disabled': submenu.disabled});
+        const className = classNames('p-megamenu-submenu-header', {'p-disabled': submenu.disabled}, submenu.className);
         const items = submenu.items.map((item, index) => {
             return this.renderSubmenuItem(item, index);
         });
@@ -333,9 +333,8 @@ export class MegaMenu extends Component {
                 })
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderCategoryPanel(category) {
@@ -344,31 +343,32 @@ export class MegaMenu extends Component {
 
             return (
                 <div className="p-megamenu-panel">
-                    <div className="p-grid">
+                    <div className="p-megamenu-grid">
                         {columns}
                     </div>
                 </div>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderCategory(category, index) {
-        const className = classNames('p-menuitem', {'p-menuitem-active': category === this.state.activeItem, 'p-disabled': category.disabled}, category.className);
-        const iconClassName = classNames(category.icon, 'p-menuitem-icon');
-        const icon = category.icon ? <span className={iconClassName}></span>: null;
+        const className = classNames('p-menuitem', {'p-menuitem-active': category === this.state.activeItem}, category.className);
+        const linkClassName = classNames('p-menuitem-link', {'p-disabled': category.disabled});
+        const iconClassName = classNames('p-menuitem-icon', category.icon);
+        const icon = category.icon && <span className={iconClassName}></span>;
         const submenuIcon = this.renderSubmenuIcon(category);
         const panel = this.renderCategoryPanel(category);
 
         return (
             <li key={category.label + '_' + index} className={className} style={category.style} onMouseEnter={e => this.onCategoryMouseEnter(e, category)} role="none">
-                <a href={category.url || '#'} className="p-menuitem-link" target={category.target} onClick={e => this.onCategoryClick(e, category)} onKeyDown={e => this.onCategoryKeyDown(e, category)}
+                <a href={category.url || '#'} className={linkClassName} target={category.target} onClick={e => this.onCategoryClick(e, category)} onKeyDown={e => this.onCategoryKeyDown(e, category)}
                    role="menuitem" aria-haspopup={category.items != null}>
                     {icon}
                     <span className="p-menuitem-text">{category.label}</span>
                     {submenuIcon}
+                    <Ripple />
                 </a>
                 {panel}
             </li>
@@ -383,9 +383,8 @@ export class MegaMenu extends Component {
                 })
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderCustomContent() {
@@ -396,15 +395,15 @@ export class MegaMenu extends Component {
                 </div>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     render() {
-        const className = classNames('p-megamenu p-component',
-                {'p-megamenu-horizontal': this.props.orientation === 'horizontal',
-                'p-megamenu-vertical': this.props.orientation === 'vertical'}, this.props.className);
+        const className = classNames('p-megamenu p-component', {
+            'p-megamenu-horizontal': this.props.orientation === 'horizontal',
+            'p-megamenu-vertical': this.props.orientation === 'vertical'
+        }, this.props.className);
         const menu = this.renderMenu();
         const customContent = this.renderCustomContent();
 

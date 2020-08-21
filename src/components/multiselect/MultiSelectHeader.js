@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {InputText} from '../inputtext/InputText';
 import {Checkbox} from '../checkbox/Checkbox';
+import { Ripple } from '../ripple/Ripple';
 
 export class MultiSelectHeader extends Component {
 
@@ -54,14 +55,13 @@ export class MultiSelectHeader extends Component {
             return (
                 <div className="p-multiselect-filter-container">
                     <InputText type="text" role="textbox" value={this.props.filterValue} onChange={this.onFilter}
-                                className="p-inputtext p-component" placeholder={this.props.filterPlaceholder}/>
+                                className="p-multiselect-filter" placeholder={this.props.filterPlaceholder}/>
                     <span className="p-multiselect-filter-icon pi pi-search"></span>
                 </div>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     render() {
@@ -73,6 +73,7 @@ export class MultiSelectHeader extends Component {
                     {filterElement}
                     <button type="button" className="p-multiselect-close p-link" onClick={this.props.onClose}>
                         <span className="p-multiselect-close-icon pi pi-times"></span>
+                        <Ripple />
                     </button>
                 </div>
         );

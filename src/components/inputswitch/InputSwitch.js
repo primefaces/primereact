@@ -40,7 +40,11 @@ export class InputSwitch extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
+
+        this.state = {
+            focused: false
+        };
+
         this.onClick = this.onClick.bind(this);
         this.toggle = this.toggle.bind(this);
         this.onFocus = this.onFocus.bind(this);
@@ -74,19 +78,21 @@ export class InputSwitch extends Component {
     }
 
     onFocus(event) {
-        this.setState({focused: true});
-
-        if (this.props.onFocus) {
-            this.props.onFocus(event);
-        }
+        let currentEvent = event;
+        this.setState({ focused: true }, () => {
+            if (this.props.onFocus) {
+                this.props.onFocus(currentEvent);
+            }
+        });
     }
 
     onBlur(event) {
-        this.setState({focused: false});
-
-        if (this.props.onBlur) {
-            this.props.onBlur(event);
-        }
+        let currentEvent = event;
+        this.setState({ focused: false }, () => {
+            if (this.props.onBlur) {
+                this.props.onBlur(currentEvent);
+            }
+        });
     }
 
     onKeyDown(event) {
@@ -126,11 +132,11 @@ export class InputSwitch extends Component {
     }
 
     render() {
-        const className = classNames('p-inputswitch p-component', this.props.className, {
+        const className = classNames('p-inputswitch p-component', {
             'p-inputswitch-checked': this.props.checked,
             'p-disabled': this.props.disabled,
             'p-inputswitch-focus': this.state.focused
-        });
+        }, this.props.className);
 
         let inputSwitchProps = ObjectUtils.findDiffKeys(this.props, InputSwitch.defaultProps);
 

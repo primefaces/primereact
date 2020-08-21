@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
 import {TieredMenuSub} from './TieredMenuSub';
+import { CSSTransition } from 'react-transition-group';
 
 export class TieredMenu extends Component {
 
@@ -33,9 +34,21 @@ export class TieredMenu extends Component {
         onHide: PropTypes.func
     };
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            visible: !props.popup
+        };
+
+        this.onEnter = this.onEnter.bind(this);
+        this.onEntered = this.onEntered.bind(this);
+        this.onExit = this.onExit.bind(this);
+    }
+
     toggle(event) {
         if (this.props.popup) {
-            if (this.container.offsetParent)
+            if (this.state.visible)
                 this.hide(event);
             else
                 this.show(event);
@@ -43,41 +56,38 @@ export class TieredMenu extends Component {
     }
 
     show(event) {
-        if (this.props.autoZIndex) {
-            this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
-        }
-        this.container.style.display = 'block';
-        
-        setTimeout(() => {
-            DomHandler.addClass(this.container, 'p-menu-overlay-visible');
-            DomHandler.removeClass(this.container, 'p-menu-overlay-hidden');
-        }, 1);
+        this.target = event.currentTarget;
+        let currentEvent = event;
 
-        DomHandler.absolutePosition(this.container,  event.currentTarget);
-        this.bindDocumentListeners();
-        
-        if (this.props.onShow) {
-            this.props.onShow(event);
-        }
+        this.setState({ visible: true }, () => {
+            if (this.props.onShow) {
+                this.props.onShow(currentEvent);
+            }
+        });
     }
 
     hide(event) {
-        if (this.container) {
-            DomHandler.addClass(this.container, 'p-menu-overlay-hidden');
-            DomHandler.removeClass(this.container, 'p-menu-overlay-visible');
+        let currentEvent = event;
+        this.setState({ visible: false }, () => {
+            if (this.props.onHide) {
+                this.props.onHide(currentEvent);
+            }
+        });
+    }
 
-            setTimeout(() => {
-                if (this.container) {
-                    this.container.style.display = 'none';
-                    DomHandler.removeClass(this.container, 'p-menu-overlay-hidden');
-                }
-            }, 150);
+    onEnter() {
+        if (this.props.autoZIndex) {
+            this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
         }
+        DomHandler.absolutePosition(this.container,  this.target);
+    }
 
-        if (this.props.onHide) {
-            this.props.onHide(event);
-        }
+    onEntered() {
+        this.bindDocumentListeners();
+    }
 
+    onExit() {
+        this.target = null;
         this.unbindDocumentListeners();
     }
 
@@ -85,7 +95,7 @@ export class TieredMenu extends Component {
         this.bindDocumentClickListener();
         this.bindDocumentResizeListener();
     }
-    
+
     unbindDocumentListeners() {
         this.unbindDocumentClickListener();
         this.unbindDocumentResizeListener();
@@ -94,7 +104,7 @@ export class TieredMenu extends Component {
     bindDocumentClickListener() {
         if (!this.documentClickListener) {
             this.documentClickListener = (event) => {
-                if (this.props.popup && !this.container.contains(event.target)) {
+                if (this.props.popup && this.state.visible && !this.container.contains(event.target)) {
                     this.hide(event);
                 }
             };
@@ -113,7 +123,7 @@ export class TieredMenu extends Component {
     bindDocumentResizeListener() {
         if (!this.documentResizeListener) {
             this.documentResizeListener = (event) => {
-                if (this.container.offsetParent) {
+                if (this.state.visible) {
                     this.hide(event);
                 }
             };
@@ -134,18 +144,21 @@ export class TieredMenu extends Component {
     }
 
     renderElement() {
-        const className = classNames('p-tieredmenu p-component', {'p-tieredmenu-dynamic p-menu-overlay': this.props.popup}, this.props.className);
+        const className = classNames('p-tieredmenu p-component', {'p-tieredmenu-overlay': this.props.popup}, this.props.className);
 
-        return(
-            <div ref={el => this.container = el} id={this.props.id} className={className} style={this.props.style}>
-                <TieredMenuSub model={this.props.model} root={true} popup={this.props.popup} />
-            </div>
+        return (
+            <CSSTransition classNames="p-connected-overlay" in={this.state.visible} timeout={{ enter: 120, exit: 100 }}
+                unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit}>
+                <div ref={el => this.container = el} id={this.props.id} className={className} style={this.props.style}>
+                    <TieredMenuSub model={this.props.model} root popup={this.props.popup} />
+                </div>
+            </CSSTransition>
         );
     }
 
     render() {
         const element = this.renderElement();
-        
+
         if (this.props.appendTo)
             return ReactDOM.createPortal(element, this.props.appendTo);
         else

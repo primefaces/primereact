@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { tip } from "../tooltip/Tooltip";
 import ObjectUtils from '../utils/ObjectUtils';
+import { Ripple } from '../ripple/Ripple';
 
 export class Button extends Component {
 
@@ -10,6 +11,8 @@ export class Button extends Component {
         label: null,
         icon: null,
         iconPos: 'left',
+        badge: null,
+        badgeClassName: null,
         tooltip: null,
         tooltipOptions: null
     }
@@ -18,6 +21,8 @@ export class Button extends Component {
         label: PropTypes.string,
         icon: PropTypes.string,
         iconPos: PropTypes.string,
+        badge: PropTypes.string,
+        badgeClassName: PropTypes.string,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object
     };
@@ -55,46 +60,57 @@ export class Button extends Component {
     renderIcon() {
         if(this.props.icon) {
             let className = classNames(this.props.icon, 'p-c', {
-                'p-button-icon-left': this.props.iconPos !== 'right',
-                'p-button-icon-right': this.props.iconPos === 'right'
+                'p-button-icon-left': this.props.iconPos === 'left' && this.props.label,
+                'p-button-icon-right': this.props.iconPos === 'right' && this.props.label,
+                'p-button-icon-top': this.props.iconPos === 'top' && this.props.label,
+                'p-button-icon-bottom': this.props.iconPos === 'bottom' && this.props.label
             });
 
             return (
                 <span className={className}></span>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderLabel() {
-        const buttonLabel = this.props.label||'p-btn';
+        const buttonLabel = this.props.label||'&nbsp;';
 
         return (
-            <span className="p-button-text p-c">{buttonLabel}</span>
+            <span className="p-button-label p-c">{buttonLabel}</span>
         );
+    }
+
+    renderBadge() {
+        if (this.props.badge) {
+            const badgeClassName = classNames('p-badge', this.props.badgeClassName);
+
+            return <span className={badgeClassName}>{this.props.badge}</span>
+        }
+
+        return null;
     }
 
     render() {
         let className = classNames('p-button p-component', this.props.className, {
-                'p-button-icon-only': this.props.icon && !this.props.label,
-                'p-button-text-icon-left': this.props.icon && this.props.label && this.props.iconPos === 'left',
-                'p-button-text-icon-right': this.props.icon && this.props.label && this.props.iconPos === 'right',
-                'p-button-text-only': !this.props.icon && this.props.label,
-                'p-disabled': this.props.disabled
+            'p-button-icon-only': this.props.icon && !this.props.label,
+            'p-button-vertical': (this.props.iconPos === 'top' || this.props.iconPos === 'bottom') && this.label,
+            'p-disabled': this.props.disabled
         });
         let icon = this.renderIcon();
         let label = this.renderLabel();
+        let badge = this.renderBadge();
 
         let buttonProps = ObjectUtils.findDiffKeys(this.props, Button.defaultProps);
 
         return (
             <button ref={(el) => this.element = el} {...buttonProps} className={className}>
-                {this.props.iconPos === 'left' && icon}
+                {icon}
                 {label}
-                {this.props.iconPos === 'right' && icon}
                 {this.props.children}
+                {badge}
+                <Ripple />
             </button>
         );
     }

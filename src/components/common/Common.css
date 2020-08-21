@@ -1,9 +1,11 @@
 .p-component, .p-component * {
     box-sizing: border-box;
 }
+
 .p-hidden {
     display: none;
 }
+
 .p-hidden-accessible {
     border: 0;
     clip: rect(0 0 0 0);
@@ -14,10 +16,12 @@
     position: absolute;
     width: 1px;
 }
+
 .p-hidden-accessible input,
 .p-hidden-accessible select {
     transform: scale(0);
 }
+
 .p-reset {
     margin: 0;
     padding: 0;
@@ -27,40 +31,33 @@
     font-size: 100%;
     list-style: none;
 }
-.p-disabled {
+
+.p-disabled, .p-disabled * {
     cursor: default !important;
 }
-.p-disabled a {
-    cursor: default !important;
-}
+
 .p-component-overlay {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
 }
+
 .p-overflow-hidden {
     overflow: hidden;
 }
+
 .p-unselectable-text {
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -o-user-select: none;
     user-select: none;
 }
+
 .p-scrollbar-measure {
     width: 100px;
     height: 100px;
     overflow: scroll;
     position: absolute;
     top: -9999px;
-}
-.p-clearfix:after {
-    content: "";
-    display: table;
-    clear: both;
 }
 
 @-webkit-keyframes p-fadein {
@@ -77,126 +74,85 @@ input[type="submit"],
 input[type="reset"],
 input[type="file"]::-webkit-file-upload-button,
 button {
-    -moz-border-radius: 0;
-    -webkit-border-radius: 0;
     border-radius: 0;
 }
 
-/* Overlay Animations */
-.p-input-overlay {
-    -webkit-transform: translateY(5%);
-    -ms-transform: translateY(5%);
-    transform: translateY(5%);
-    opacity: 0;
-    -webkit-transition: transform .3s, opacity .3s;
-    transition: transform .3s, opacity .3s;
-}
-
-.p-input-overlay-visible {
-    -webkit-transform: translateY(0);
-    -ms-transform: translateY(0);
-    transform: translateY(0);
-    opacity: 1;
-}
-
-.p-input-overlay-hidden {
-    opacity: 0;
-    -webkit-transform: translateY(5%);
-    -ms-transform: translateY(5%);
-    transform: translateY(5%);
-    -webkit-transition: transform .3s, opacity .15s;
-    transition: transform .3s, opacity .15s;
-}
-
-.p-menu-overlay {
-    -webkit-transform: translateY(5%);
-    -ms-transform: translateY(5%);
-    transform: translateY(5%);
-    opacity: 0;
-    -webkit-transition: transform .3s, opacity .3s;
-    transition: transform .3s, opacity .3s;
-}
-
-.p-menu-overlay-visible {
-    -webkit-transform: translateY(0);
-    -ms-transform: translateY(0);
-    transform: translateY(0);
-    opacity: 1;
-}
-
-.p-menu-overlay-hidden {
-    opacity: 0;
-    -webkit-transform: translateY(5%);
-    -ms-transform: translateY(5%);
-    transform: translateY(5%);
-    -webkit-transition: transform .3s, opacity .15s;
-    transition: transform .3s, opacity .15s;
-}
-
 .p-link {
-    text-align: left;
-    background-color: transparent;
-    background: transparent;
+	text-align: left;
+	background-color: transparent;
 	margin: 0;
 	padding: 0;
 	border: none;
-	cursor: pointer;
+    cursor: pointer;
+    user-select: none;
 }
 
-/* Toggleable content with slide animation */
-.p-toggleable-content-collapsed {
-    display: none;
+/* Non react overlay animations */
+.p-connected-overlay {
+    opacity: 0;
+    transform: scaleY(0.8);
+    transition: transform .12s cubic-bezier(0, 0, 0.2, 1), opacity .12s cubic-bezier(0, 0, 0.2, 1);
 }
 
+.p-connected-overlay-visible {
+    opacity: 1;
+    transform: scaleY(1);
+}
+
+.p-connected-overlay-hidden {
+    opacity: 0;
+    transform: scaleY(1);
+    transition: opacity .1s linear;
+}
+
+/* React based overlay animations */
+.p-connected-overlay-enter {
+    opacity: 0;
+    transform: scaleY(0.8);
+}
+
+.p-connected-overlay-enter-active {
+    opacity: 1;
+    transform: scaleY(1);
+    transition: transform .12s cubic-bezier(0, 0, 0.2, 1), opacity .12s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.p-connected-overlay-enter-done {
+    transform: none;
+}
+
+.p-connected-overlay-exit {
+    opacity: 1;
+}
+
+.p-connected-overlay-exit-active {
+    opacity: 0;
+    transition: opacity .1s linear;
+}
+
+/* Toggleable Content */
 .p-toggleable-content-enter {
     max-height: 0;
-    display: block;
 }
 
 .p-toggleable-content-enter-active {
-    max-height: 1000px;
     overflow: hidden;
-    transition: max-height cubic-bezier(0.86, 0, 0.07, 1) 400ms;
+    max-height: 1000px;
+    transition: max-height 1s ease-in-out;
 }
 
 .p-toggleable-content-enter-done {
-    display: block;
+    transform: none;
 }
 
 .p-toggleable-content-exit {
     max-height: 1000px;
-    display: block;
 }
 
 .p-toggleable-content-exit-active {
-    max-height: 0;
-    display: block;
     overflow: hidden;
-    transition: max-height cubic-bezier(0.86, 0, 0.07, 1) 250ms;
-}
-
-.p-toggleable-content-exit-done {
-    display: none;
-}
-
-/* Floating Label */
-.p-float-label {
-    display: block;
-    position:relative;
-}
-
-.p-float-label > label {
-  font-weight:normal;
-  position:absolute;
-  pointer-events:none;
-  left: .25em;
-  top: 50%;
-  margin-top: -.5em;
-  transition: 0.3s ease all;
-  -moz-transition: 0.3s ease all;
-  -webkit-transition: 0.3s ease all;
-  color: #898989;
-  line-height: 1;
+    max-height: 0;
+    transition: max-height 0.45s cubic-bezier(0, 1, 0, 1);
 }
 
 .p-sr-only {

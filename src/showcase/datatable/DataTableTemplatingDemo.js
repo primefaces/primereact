@@ -1,74 +1,84 @@
 import React, { Component } from 'react';
-import {DataTable} from '../../components/datatable/DataTable';
-import {Column} from '../../components/column/Column';
-import {CarService} from '../service/CarService';
-import {Button} from '../../components/button/Button';
-import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
-import {TabView,TabPanel} from '../../components/tabview/TabView';
-import AppContentContext from '../../AppContentContext';
+import { DataTable } from '../../components/datatable/DataTable';
+import { Column } from '../../components/column/Column';
+import ProductService from '../service/ProductService';
+import { Button } from '../../components/button/Button';
+import { Rating } from '../../components/rating/Rating';
+import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
+import { CodeHighlight } from '../codehighlight/CodeHighlight';
+import './DataTableDemo.scss';
 
 export class DataTableTemplatingDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
-            cars: []
+            products: []
         };
-        this.carservice = new CarService();
-        this.brandTemplate = this.brandTemplate.bind(this);
-        this.colorTemplate = this.colorTemplate.bind(this);
-        this.actionTemplate = this.actionTemplate.bind(this);
-    }
 
-    colorTemplate(rowData, column) {
-        return <span style={{color: rowData['color']}}>{rowData['color']}</span>;
-    }
-
-    brandTemplate(rowData, column) {
-        var src = "showcase/demo/images/car/" + rowData.brand + ".png";
-        return <img src={src} alt={rowData.brand} width="48px" />;
-    }
-
-    actionTemplate(rowData, column) {
-        return <div>
-            <Button type="button" icon="pi pi-search" className="p-button-success" style={{marginRight: '.5em'}}></Button>
-            <Button type="button" icon="pi pi-pencil" className="p-button-warning"></Button>
-        </div>;
+        this.productService = new ProductService();
+        this.imageBodyTemplate = this.imageBodyTemplate.bind(this);
+        this.priceBodyTemplate = this.priceBodyTemplate.bind(this);
+        this.ratingBodyTemplate = this.ratingBodyTemplate.bind(this);
+        this.statusBodyTemplate = this.statusBodyTemplate.bind(this);
     }
 
     componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
+    }
+
+    formatCurrency(value) {
+        return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    }
+
+    imageBodyTemplate(rowData) {
+        return <img src={`showcase/demo/images/product/${rowData.image}`} alt={rowData.image} className="product-image" />;
+    }
+
+    priceBodyTemplate(rowData) {
+        return this.formatCurrency(rowData.price);
+    }
+
+    ratingBodyTemplate(rowData) {
+        return <Rating value={rowData.rating} readonly cancel={false} />;
+    }
+
+    statusBodyTemplate(rowData) {
+        return <span className={`product-badge status-${rowData.inventoryStatus.toLowerCase()}`}>{rowData.inventoryStatus}</span>;
     }
 
     render() {
-        const carCount = this.state.cars ? this.state.cars.length: 0;
-        const header = <div className="p-clearfix" style={{'lineHeight':'1.87em'}}>List of Cars <Button icon="pi pi-refresh" style={{'float':'right'}}/></div>;
-        const footer = "There are " + carCount + ' cars';
+        const header = (
+            <div className="table-header">
+                Products
+                <Button icon="pi pi-refresh" />
+            </div>
+        );
+        const footer = `In total there are ${this.state.products ? this.state.products.length : 0} products.`;
 
         return (
             <div>
-                <DataTableSubmenu />
-
                 <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>DataTable - Templating</h1>
+                    <AppInlineHeader changelogText="dataTable">
+                        <h1>DataTable <span>Templating</span></h1>
                         <p>Custom content at header, body and footer sections are supported via templating.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("dataTable")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
-                <div className="content-section implementation">
-                    <DataTable value={this.state.cars} header={header} footer={footer}>
-                        <Column field="vin" header="Vin" />
-                        <Column field="year" header="Year" />
-                        <Column field="brand" header="Brand" body={this.brandTemplate} style={{textAlign:'center'}}/>
-                        <Column field="color" header="Color" body={this.colorTemplate} />
-                        <Column body={this.actionTemplate} style={{textAlign:'center', width: '8em'}}/>
-                    </DataTable>
+                <div className="content-section implementation datatable-templating-demo">
+                    <div className="card">
+                        <DataTable value={this.state.products} header={header} footer={footer}>
+                            <Column field="name" header="Name"></Column>
+                            <Column header="Image" body={this.imageBodyTemplate}></Column>
+                            <Column field="price" header="Price" body={this.priceBodyTemplate}></Column>
+                            <Column field="category" header="Category"></Column>
+                            <Column field="rating" header="Reviews" body={this.ratingBodyTemplate}></Column>
+                            <Column header="Status" body={this.statusBodyTemplate}></Column>
+                        </DataTable>
+                    </div>
                 </div>
 
                 <DataTableTemplatingDemoDoc></DataTableTemplatingDemoDoc>
@@ -87,58 +97,74 @@ export class DataTableTemplatingDemoDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service/CarService';
-import {Button} from 'primereact/button';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import ProductService from '../service/ProductService';
+import { Button } from 'primereact/button';
+import { Rating } from 'primereact/rating';
+import './DataTableDemo.scss';
 
 export class DataTableTemplatingDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
-            cars: []
+            products: []
         };
-        this.carservice = new CarService();
-        this.brandTemplate = this.brandTemplate.bind(this);
-        this.colorTemplate = this.colorTemplate.bind(this);
-        this.actionTemplate = this.actionTemplate.bind(this);
-    }
 
-    colorTemplate(rowData, column) {
-        return <span style={{color: rowData['color']}}>{rowData['color']}</span>;
-    }
-
-    brandTemplate(rowData, column) {
-        var src = "showcase/demo/images/car/" + rowData.brand + ".png";
-        return <img src={src} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={rowData.brand} width="48px" />;
-    }
-
-    actionTemplate(rowData, column) {
-        return <div>
-            <Button type="button" icon="pi pi-search" className="p-button-success" style={{marginRight: '.5em'}}></Button>
-            <Button type="button" icon="pi pi-pencil" className="p-button-warning"></Button>
-        </div>;
+        this.productService = new ProductService();
+        this.imageBodyTemplate = this.imageBodyTemplate.bind(this);
+        this.priceBodyTemplate = this.priceBodyTemplate.bind(this);
+        this.ratingBodyTemplate = this.ratingBodyTemplate.bind(this);
+        this.statusBodyTemplate = this.statusBodyTemplate.bind(this);
     }
 
     componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
+    }
+
+    formatCurrency(value) {
+        return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    }
+
+    imageBodyTemplate(rowData) {
+        return <img src={\`showcase/demo/images/product/\${rowData.image}\`} alt={rowData.image} className="product-image" />;
+    }
+
+    priceBodyTemplate(rowData) {
+        return this.formatCurrency(rowData.price);
+    }
+
+    ratingBodyTemplate(rowData) {
+        return <Rating value={rowData.rating} readonly cancel={false} />;
+    }
+
+    statusBodyTemplate(rowData) {
+        return <span className={\`product-badge status-\${rowData.inventoryStatus.toLowerCase()}\`}>{rowData.inventoryStatus}</span>;
     }
 
     render() {
-        const carCount = this.state.cars ? this.state.cars.length: 0;
-        const header = <div className="p-clearfix" style={{'lineHeight':'1.87em'}}>List of Cars <Button icon="pi pi-refresh" style={{'float':'right'}}/></div>;
-        const footer = "There are " + carCount + ' cars';
+        const header = (
+            <div className="table-header">
+                Products
+                <Button icon="pi pi-refresh" />
+            </div>
+        );
+        const footer = \`In total there are \${this.state.products ? this.state.products.length : 0} products.\`;
 
         return (
-            <div>
-                <DataTable value={this.state.cars} header={header} footer={footer}>
-                    <Column field="vin" header="Vin" />
-                    <Column field="year" header="Year" />
-                    <Column field="brand" header="Brand" body={this.brandTemplate} style={{textAlign:'center'}}/>
-                    <Column field="color" header="Color" body={this.colorTemplate} />
-                    <Column body={this.actionTemplate} style={{textAlign:'center', width: '8em'}}/>
-                </DataTable>
+            <div className="datatable-templating-demo">
+                <div className="card">
+                    <DataTable value={this.state.products} header={header} footer={footer}>
+                        <Column field="name" header="Name"></Column>
+                        <Column header="Image" body={this.imageBodyTemplate}></Column>
+                        <Column field="price" header="Price" body={this.priceBodyTemplate}></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="rating" header="Reviews" body={this.ratingBodyTemplate}></Column>
+                        <Column header="Status" body={this.statusBodyTemplate}></Column>
+                    </DataTable>
+                </div>
             </div>
         );
     }
@@ -258,15 +284,25 @@ const DataTableTemplatingDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="DataTableTemplatingDemo" sources={[key, value]} service="CarService" data="cars-small" />
-                                </TabPanel>
-                            );
-                        })
-                    }
+                    <TabPanel header="Source">
+                        <LiveEditor name="DataTableTemplatingDemo" sources={this.sources} service="CarService" data="cars-small" />
+<CodeHighlight lang="scss">
+{`
+.datatable-templating-demo {
+    .table-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .product-image {
+        width: 100px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+    }
+}
+`}
+</CodeHighlight>
+                    </TabPanel>
                 </TabView>
             </div>
         )

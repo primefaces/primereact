@@ -45,8 +45,10 @@ export class OrganizationChartNode extends Component {
     }
 
     toggleNode(event, node) {
-        let _expanded = !this.state.expanded;
-        this.setState({expanded: _expanded});
+        this.setState((prevState) => ({
+            expanded: !prevState.expanded
+        }));
+
         event.preventDefault();
     }
 
@@ -66,12 +68,14 @@ export class OrganizationChartNode extends Component {
             toggleIcon = classNames('p-node-toggler-icon', {'pi pi-chevron-down': this.state.expanded, 'pi pi-chevron-up': !this.state.expanded}),
             nodeContent = (<tr>
                 <td colSpan={colspan}>
-                    <div className={nodeClassName} onClick={(e) => this.onNodeClick(e,this.node)}>
+                    <div className={nodeClassName} onClick={(e) => this.onNodeClick(e, this.node)}>
                         {nodeLabel}
                         {
-                            !this.getLeaf() && <button type="button" className="p-node-toggler p-link" onClick={(e) => this.toggleNode(e, this.node)}>
+                            /* eslint-disable */
+                            !this.getLeaf() && <a href="#" className="p-node-toggler" onClick={(e) => this.toggleNode(e, this.node)}>
                                 <i className={toggleIcon}></i>
-                            </button>
+                            </a>
+                            /* eslint-enable */
                         }
                     </div>
                 </td>
@@ -86,12 +90,21 @@ export class OrganizationChartNode extends Component {
             nodeChildLength = this.node.children && this.node.children.length,
             linesMiddle = (<tr style={{visibility: _visibility}} className="p-organizationchart-lines">
                 {
-                    this.node.children && this.node.children.map((item, index) => {
-                        let leftClass = classNames('p-organizationchart-line-left', {'p-organizationchart-line-top': index !== 0}),
-                        rightClass = classNames('p-organizationchart-line-right', {'p-organizationchart-line-top': index !== nodeChildLength - 1});
+                    this.node.children && this.node.children.length === 1 && (
+                                    <td colSpan={this.getColspan()}>
+                                        <div className="p-organizationchart-line-down"></div>
+                                    </td>
+                    )
+                }
+                {
+                    this.node.children && this.node.children.length > 1 && (
+                                    this.node.children.map((item, index) => {
+                                        let leftClass = classNames('p-organizationchart-line-left', {'p-organizationchart-line-top': index !== 0}),
+                                        rightClass = classNames('p-organizationchart-line-right', {'p-organizationchart-line-top': index !== nodeChildLength - 1});
 
-                        return [<td key={index + '_lineleft'} className={leftClass}>&nbsp;</td>, <td key={index + '_lineright'} className={rightClass}>&nbsp;</td>];
-                    })
+                                        return [<td key={index + '_lineleft'} className={leftClass}>&nbsp;</td>, <td key={index + '_lineright'} className={rightClass}>&nbsp;</td>];
+                                    })
+                                )
                 }
             </tr>),
             childNodes = (<tr style={{visibility: _visibility}} className="p-organizationchart-nodes">
@@ -235,7 +248,8 @@ export class OrganizationChart extends Component {
     render() {
         this.root = this.props.value && this.props.value.length ? this.props.value[0] : null;
 
-        var className = classNames('p-organizationchart p-component', this.props.className);
+        const className = classNames('p-organizationchart p-component', this.props.className);
+
         return (
             <div id={this.props.id} style={this.props.style} className={className}>
                 <OrganizationChartNode node={this.root} nodeTemplate={this.props.nodeTemplate} selectionMode={this.props.selectionMode}

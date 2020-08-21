@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { Ripple } from '../ripple/Ripple';
 
 export class NextPageLink extends Component {
 
@@ -19,7 +20,8 @@ export class NextPageLink extends Component {
 
         return (
             <button type="button" className={className} onClick={this.props.onClick} disabled={this.props.disabled}>
-                <span className="p-paginator-icon pi pi-caret-right"></span>
+                <span className="p-paginator-icon pi pi-angle-right"></span>
+                <Ripple />
             </button>
         );
     }

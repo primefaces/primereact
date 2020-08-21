@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
+import { CSSTransition } from 'react-transition-group';
+import { Ripple } from '../ripple/Ripple';
 
 export class OverlayPanel extends Component {
 
@@ -30,8 +32,16 @@ export class OverlayPanel extends Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {
+            visible: false
+        };
+
         this.onCloseClick = this.onCloseClick.bind(this);
         this.onPanelClick = this.onPanelClick.bind(this);
+        this.onEnter = this.onEnter.bind(this);
+        this.onEntered = this.onEntered.bind(this);
+        this.onExit = this.onExit.bind(this);
     }
 
     bindDocumentClickListener() {
@@ -59,8 +69,8 @@ export class OverlayPanel extends Component {
         return this.container && !(this.container.isSameNode(event.target) || this.container.contains(event.target));
     }
 
-    componentWillUnmount() {
-        this.unbindDocumentClickListener();
+    hasTargetChanged(event, target) {
+        return this.target != null && this.target !== (target||event.currentTarget||event.target);
     }
 
     onCloseClick(event) {
@@ -74,7 +84,7 @@ export class OverlayPanel extends Component {
     }
 
     toggle(event, target) {
-        if (this.isVisible()) {
+        if (this.state.visible) {
             this.hide();
 
             if (this.hasTargetChanged(event, target)) {
@@ -93,18 +103,33 @@ export class OverlayPanel extends Component {
     show(event, target) {
         this.target = target||event.currentTarget||event.target;
 
-        this.bindDocumentClickListener();
-
-        this.container.style.zIndex = String(DomHandler.generateZIndex());
-
-        if(this.isVisible()) {
+        if (this.state.visible) {
             this.align();
         }
         else {
-            this.container.style.display = 'block';
-            this.align();
-            DomHandler.fadeIn(this.container, 250);
+            this.setState({ visible: true });
         }
+    }
+
+    hide() {
+        this.setState({ visible: false }, () => {
+            if (this.props.onHide) {
+                this.props.onHide();
+            }
+        });
+    }
+
+    onEnter() {
+        this.container.style.zIndex = String(DomHandler.generateZIndex());
+        this.align();
+    }
+
+    onEntered() {
+        this.bindDocumentClickListener();
+    }
+
+    onExit() {
+        this.unbindDocumentClickListener();
     }
 
     align() {
@@ -117,24 +142,8 @@ export class OverlayPanel extends Component {
         }
     }
 
-    hide() {
-        if (this.isVisible()) {
-            this.container.style.display = 'none';
-            DomHandler.removeClass(this.container, 'p-overlaypanel-flipped');
-            this.unbindDocumentClickListener();
-
-            if (this.props.onHide) {
-                this.props.onHide();
-            }
-        }
-    }
-
-    isVisible() {
-        return this.container && this.container.offsetParent;
-    }
-
-    hasTargetChanged(event, target) {
-        return this.target != null && this.target !== (target||event.currentTarget||event.target);
+    componentWillUnmount() {
+        this.unbindDocumentClickListener();
     }
 
     renderCloseIcon() {
@@ -142,12 +151,12 @@ export class OverlayPanel extends Component {
             return (
                 <button type="button" className="p-overlaypanel-close p-link" onClick={this.onCloseClick} aria-label={this.props.ariaCloseLabel}>
                     <span className="p-overlaypanel-close-icon pi pi-times"></span>
+                    <Ripple />
                 </button>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderElement() {
@@ -155,12 +164,15 @@ export class OverlayPanel extends Component {
         let closeIcon = this.renderCloseIcon();
 
         return (
-            <div ref={el => this.container = el} id={this.props.id} className={className} style={this.props.style} onClick={this.onPanelClick}>
-                <div className="p-overlaypanel-content">
-                    {this.props.children}
+            <CSSTransition classNames="p-overlaypanel" in={this.state.visible} timeout={{ enter: 120, exit: 100 }}
+                unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit}>
+                <div ref={el => this.container = el} id={this.props.id} className={className} style={this.props.style} onClick={this.onPanelClick}>
+                    <div className="p-overlaypanel-content">
+                        {this.props.children}
+                    </div>
+                    {closeIcon}
                 </div>
-                {closeIcon}
-            </div>
+            </CSSTransition>
         );
     }
 

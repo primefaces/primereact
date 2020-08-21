@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Card } from '../../components/card/Card';
 import { Button } from '../../components/button/Button';
-import AppContentContext from '../../AppContentContext';
 import { CardDoc } from './CardDoc';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class CardDemo extends Component {
 
@@ -12,35 +12,29 @@ export class CardDemo extends Component {
         );
         const footer = (
             <span>
-                <Button label="Save" icon="pi pi-check" style={{ marginRight: '.25em' }} />
-                <Button label="Cancel" icon="pi pi-times" className="p-button-secondary" />
+                <Button label="Save" icon="pi pi-check" />
+                <Button label="Cancel" icon="pi pi-times" className="p-button-secondary p-ml-2" />
             </span>
         );
 
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="card">
                         <h1>Card</h1>
                         <p>Card is a flexible container component.</p>
-
-                        <AppContentContext.Consumer>
-                            {context => <button onClick={() => context.onChangelogBtnClick("card")} className="layout-changelog-button">{context.changelogText}</button>}
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <Card title="Simple Card" style={{ width: '360px' }}>
-                        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
-                            quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</div>
+                    <Card title="Simple Card" style={{ width: '25rem', marginBottom: '2em' }}>
+                        <p className="p-m-0" style={{lineHeight: '1.5'}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
+                            quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
                     </Card>
 
-                    <br /><br />
-
-                    <Card title="Advanced Card" subTitle="Subtitle" style={{ width: '360px' }} className="ui-card-shadow" footer={footer} header={header}>
-                        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
-                            quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</div>
+                    <Card title="Advanced Card" subTitle="Subtitle" style={{ width: '25em' }} className="ui-card-shadow" footer={footer} header={header}>
+                        <p className="p-m-0" style={{lineHeight: '1.5'}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
+                            quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
                     </Card>
                 </div>
 

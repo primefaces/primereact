@@ -757,7 +757,6 @@ export class TreeTable extends Component {
         let filters = this.getFilters();
         let columns = React.Children.toArray(this.props.children);
         const isStrictMode = this.props.filterMode === 'strict';
-        let isValueChanged = false;
 
         for (let node of value) {
             let copyNode = {...node};
@@ -808,11 +807,9 @@ export class TreeTable extends Component {
             if (matches) {
                 filteredNodes.push(copyNode);
             }
-
-            isValueChanged = isValueChanged || !localMatch || globalMatch;
         }
 
-        return isValueChanged ? filteredNodes : value;
+        return filteredNodes;
     }
 
     findFilteredNodes(node, paramsWithoutNode) {
@@ -954,7 +951,7 @@ export class TreeTable extends Component {
         const body = this.createTableBody(value, columns);
 
         return (
-            <div className="p-treetable-tablewrapper">
+            <div className="p-treetable-wrapper">
                 <table style={this.props.tableStyle} className={this.props.tableClassName}  ref={el => this.table = el}>
                     {header}
                     {footer}
@@ -977,16 +974,14 @@ export class TreeTable extends Component {
 
             return (
                 <div className="p-treetable-loading">
-                    <div className="p-treetable-loading-overlay p-component-overlay"></div>
-                    <div className="p-treetable-loading-content">
+                    <div className="p-treetable-loading-overlay p-component-overlay">
                         <i className={iconClassName}></i>
                     </div>
                 </div>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     render() {

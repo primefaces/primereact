@@ -79,15 +79,16 @@ export class Messages extends Component {
     render() {
         return (
             <div id={this.props.id} className={this.props.className} style={this.props.style}>
-                <TransitionGroup >
-                    {this.state.messages.map((message, index) =>
-                        <CSSTransition key={message.id} classNames="p-messages"
-                            timeout={{ enter: 250, exit: 500 }}>
-                            <UIMessage message={message} onClick={this.props.onClick} onClose={this.onClose} />
-                        </CSSTransition>
-                    )}
+                <TransitionGroup>
+                    {
+                        this.state.messages.map((message) =>
+                            <CSSTransition key={message.id} classNames="p-message" unmountOnExit timeout={{ enter: 300, exit: 300 }}>
+                                <UIMessage message={message} onClick={this.props.onClick} onClose={this.onClose} />
+                            </CSSTransition>
+                        )
+                    }
                 </TransitionGroup>
             </div>
-        );  
+        );
     }
 }

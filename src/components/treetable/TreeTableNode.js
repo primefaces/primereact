@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 export class UITreeTableNode extends Component {
-    
+
     static defaultProps = {
         node: null,
         index: null
@@ -16,9 +16,9 @@ export class UITreeTableNode extends Component {
 
     render() {
         return (
-            <React.Fragment>
-                
-            </React.Fragment>
+            <>
+
+            </>
         );
     }
 }

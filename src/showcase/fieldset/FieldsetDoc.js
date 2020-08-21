@@ -14,28 +14,30 @@ export class FieldsetDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {Fieldset} from 'primereact/fieldset';
+import { Fieldset } from 'primereact/fieldset';
 
 export class FieldsetDemo extends Component {
 
     render() {
         return (
             <div>
-                <Fieldset legend="Godfather I">
-                    <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-                    His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-                    Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
-                    kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
-                </Fieldset>
+                <div className="card">
+                    <h5>Regular</h5>
+                    <Fieldset legend="Header">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </Fieldset>
 
-                <br />
-
-                <Fieldset legend="Godfather I" toggleable={true}>
-                    <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-                    His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-                    Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
-                    kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
-                </Fieldset>
+                    <h5>Toggleable</h5>
+                    <Fieldset legend="Header" toggleable>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </Fieldset>
+                </div>
             </div>
         )
     }
@@ -61,7 +63,7 @@ const FieldsetDemo = () => {
 
             <br />
 
-            <Fieldset legend="Godfather I" toggleable={true}>
+            <Fieldset legend="Godfather I" toggleable>
                 <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
                 His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
                 Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
@@ -91,7 +93,7 @@ const FieldsetDemo = () => {
 
             <br />
 
-            <Fieldset legend="Godfather I" toggleable={true}>
+            <Fieldset legend="Godfather I" toggleable>
                 <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
                 His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
                 Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
@@ -114,62 +116,58 @@ const FieldsetDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
-                            {`
-import {Fieldset} from 'primereact/fieldset';
-
+                        <h5>Import</h5>
+<CodeHighlight lang="js">
+{`
+import { Fieldset } from 'primereact/fieldset';
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>Panel is a container component that accepts content as its children.</p>
-                        <CodeHighlight className="language-jsx">
-                            {`
-<Fieldset legend="Godfather I">
-    The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-    His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-    Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
-    kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
+<CodeHighlight>
+{`
+<Fieldset legend="Header">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 </Fieldset>
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <p>Instead of simple strings, <i>legend</i> propery also can be used to provide custom content as JSX.</p>
 
-                        <h3>Toggleable</h3>
+                        <h5>Toggleable</h5>
                         <p>Content of the fieldset can be expanded and collapsed using <i>toggleable</i> option. A toggleable fieldset can either be used as a Controlled or Uncontrolled component.</p>
 
                         <p>In controlled mode, <i>collapsed</i> and <i>onToggle</i> properties need to be defined to control the collapsed state.</p>
-                        <CodeHighlight className="language-jsx">
-                            {`
-<Fieldset legend="Godfather I" toggleable={true} collapsed={this.state.panelCollapsed} onToggle={(e) => this.setState({panelCollapsed: e.value})}>
-    The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-    His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-    Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
-    kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
+<CodeHighlight>
+{`
+<Fieldset legend="Header" toggleable collapsed={this.state.panelCollapsed} onToggle={(e) => this.setState({panelCollapsed: e.value})}>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 </Fieldset>
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <p>In uncontrolled mode, only <i>toggleable</i> property needs to be enabled. Initial state can be still be provided using the <i>collapsed</i> property in uncontrolled mode however
             it is evaluated at initial rendering and ignored in further updates. If you programmatically need to update the collapsed state, prefer to use the component as controlled.</p>
 
-                        <CodeHighlight className="language-jsx">
-                            {`
-<Fieldset legend="Godfather I" toggleable={true} >
-    The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-    His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-    Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
-    kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
+<CodeHighlight>
+{`
+<Fieldset legend="Header" toggleable>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 </Fieldset>
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -221,7 +219,7 @@ import {Fieldset} from 'primereact/fieldset';
                             </table>
                         </div>
 
-                        <h3>Events</h3>
+                        <h5>Events</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -258,7 +256,7 @@ import {Fieldset} from 'primereact/fieldset';
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -288,21 +286,15 @@ import {Fieldset} from 'primereact/fieldset';
                                 </tbody>
                             </table>
 
-                            <h3>Dependencies</h3>
+                            <h5>Dependencies</h5>
                             <p>None.</p>
                         </div>
 
                     </TabPanel>
 
-                    {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="FieldsetDemo" sources={[key, value]} />
-                                </TabPanel>
-                            );
-                        })
-                    }
+                    <TabPanel header="Source">
+                        <LiveEditor name="FieldsetDemo" sources={this.sources} />
+                    </TabPanel>
                 </TabView>
             </div>
         );

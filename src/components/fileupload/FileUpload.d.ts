@@ -20,6 +20,7 @@ interface FileUploadProps {
     uploadLabel?: string;
     cancelLabel?: string;
     customUpload?: boolean;
+    emptyTemplate?: ((props: object) => any | any);
     onBeforeUpload?(e: { xhr: XMLHttpRequest, formData: any }): void;
     onBeforeSend?(e: { xhr: XMLHttpRequest, formData: any }): void;
     onUpload?(e: {xhr: XMLHttpRequest, files: any}): void;

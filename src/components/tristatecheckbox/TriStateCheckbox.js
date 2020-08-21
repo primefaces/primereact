@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import DomHandler from '../utils/DomHandler';
 import {tip} from "../tooltip/Tooltip";
 
 export class TriStateCheckbox extends Component {
@@ -36,6 +35,11 @@ export class TriStateCheckbox extends Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {
+            focused: false
+        };
+
         this.onClick = this.onClick.bind(this);
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
@@ -49,15 +53,15 @@ export class TriStateCheckbox extends Component {
     }
 
     toggle(event) {
-        var newValue;
-        if(this.props.value === null || this.props.value === undefined)
+        let newValue;
+        if (this.props.value === null || this.props.value === undefined)
             newValue = true;
-        else if(this.props.value === true)
+        else if (this.props.value === true)
             newValue = false;
-        else if(this.props.value === false)
+        else if (this.props.value === false)
             newValue = null;
 
-        if(this.props.onChange) {
+        if (this.props.onChange) {
             this.props.onChange({
                 originalEvent: event,
                 value: newValue,
@@ -72,12 +76,12 @@ export class TriStateCheckbox extends Component {
         }
     }
 
-    onFocus(event) {
-        DomHandler.addClass(this.box, 'p-focus');
+    onFocus() {
+        this.setState({ focused: true });
     }
 
-    onBlur(event) {
-        DomHandler.removeClass(this.box, 'p-focus');
+    onBlur() {
+        this.setState({ focused: false });
     }
 
     componentDidMount() {
@@ -111,9 +115,16 @@ export class TriStateCheckbox extends Component {
     }
 
     render() {
-        let containerClass = classNames('p-checkbox p-tristatecheckbox p-component', this.props.className);
-        let boxClass = classNames('p-checkbox-box p-component', {'p-highlight':(this.props.value || !this.props.value) && this.props.value !== null, 'p-disabled': this.props.disabled});
-        let iconClass = classNames('p-checkbox-icon p-c', {'pi pi-check': this.props.value === true, 'pi pi-times': this.props.value === false});
+        let containerClass = classNames('p-tristatecheckbox p-checkbox p-component', this.props.className);
+        let boxClass = classNames('p-checkbox-box', {
+            'p-highlight': (this.props.value || !this.props.value) && this.props.value !== null,
+            'p-disabled': this.props.disabled,
+            'p-focus': this.state.focused
+        });
+        let iconClass = classNames('p-checkbox-icon p-c', {
+            'pi pi-check': this.props.value === true,
+            'pi pi-times': this.props.value === false
+        });
 
         return (
             <div ref={el => this.element = el} id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick}>

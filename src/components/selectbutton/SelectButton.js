@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ObjectUtils from '../utils/ObjectUtils';
-import {SelectButtonItem} from './SelectButtonItem';
-import {tip} from "../tooltip/Tooltip";
+import { SelectButtonItem } from './SelectButtonItem';
+import { tip } from "../tooltip/Tooltip";
 
 export class SelectButton extends Component {
 
@@ -47,38 +47,8 @@ export class SelectButton extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
+
         this.onOptionClick = this.onOptionClick.bind(this);
-    }
-
-    componentDidMount() {
-        if (this.props.tooltip) {
-            this.renderTooltip();
-        }
-    }
-
-    componentDidUpdate(prevProps) {
-        if (prevProps.tooltip !== this.props.tooltip) {
-            if (this.tooltip)
-                this.tooltip.updateContent(this.props.tooltip);
-            else
-                this.renderTooltip();
-        }
-    }
-
-    componentWillUnmount() {
-        if (this.tooltip) {
-            this.tooltip.destroy();
-            this.tooltip = null;
-        }
-    }
-
-    renderTooltip() {
-        this.tooltip = tip({
-            target: this.element,
-            content: this.props.tooltip,
-            options: this.props.tooltipOptions
-        });
     }
 
     onOptionClick(event) {
@@ -109,8 +79,8 @@ export class SelectButton extends Component {
             this.props.onChange({
                 originalEvent: event.originalEvent,
                 value: newValue,
-                stopPropagation : () =>{},
-                preventDefault : () =>{},
+                stopPropagation: () => { },
+                preventDefault: () => { },
                 target: {
                     name: this.props.name,
                     id: this.props.id,
@@ -149,29 +119,56 @@ export class SelectButton extends Component {
         return selected;
     }
 
+    componentDidMount() {
+        if (this.props.tooltip) {
+            this.renderTooltip();
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.tooltip !== this.props.tooltip) {
+            if (this.tooltip)
+                this.tooltip.updateContent(this.props.tooltip);
+            else
+                this.renderTooltip();
+        }
+    }
+
+    componentWillUnmount() {
+        if (this.tooltip) {
+            this.tooltip.destroy();
+            this.tooltip = null;
+        }
+    }
+
+    renderTooltip() {
+        this.tooltip = tip({
+            target: this.element,
+            content: this.props.tooltip,
+            options: this.props.tooltipOptions
+        });
+    }
+
     renderItems() {
         if (this.props.options && this.props.options.length) {
             return this.props.options.map((option, index) => {
                 let optionLabel = this.getOptionLabel(option);
 
-                return <SelectButtonItem key={optionLabel} label={optionLabel} className={option.className} option={option} onClick={this.onOptionClick} template={this.props.itemTemplate}
-                            selected={this.isSelected(option)} tabIndex={this.props.tabIndex} disabled={this.props.disabled} ariaLabelledBy={this.props.ariaLabelledBy}/>;
+                return <SelectButtonItem key={`${optionLabel}_${index}`} label={optionLabel} className={option.className} option={option} onClick={this.onOptionClick} template={this.props.itemTemplate}
+                    selected={this.isSelected(option)} tabIndex={this.props.tabIndex} disabled={this.props.disabled} ariaLabelledBy={this.props.ariaLabelledBy} />;
             });
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     render() {
-        let className = classNames('p-selectbutton p-buttonset p-component p-buttonset-3', this.props.className);
+        let className = classNames('p-selectbutton p-buttonset p-component', this.props.className);
         let items = this.renderItems();
 
         return (
-            <div id={this.props.id} ref={(el) => this.element = el} role="group">
-                <div className={className} style={this.props.style}>
-                    {items}
-                </div>
+            <div id={this.props.id} ref={(el) => this.element = el} className={className} style={this.props.style} role="group">
+                {items}
             </div>
         );
     }

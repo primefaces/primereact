@@ -44,17 +44,17 @@ export class Captcha extends Component {
     reset() {
         if(this._instance === null)
             return;
-        
+
         (window).grecaptcha.reset(this._instance);
     }
-    
+
     getResponse() {
         if (this._instance === null)
             return null;
-        
+
         return (window).grecaptcha.getResponse(this._instance);
     }
-    
+
     recaptchaCallback(response) {
         if(this.props.onResponse) {
             this.props.onResponse({
@@ -68,7 +68,7 @@ export class Captcha extends Component {
             this.props.onExpire();
         }
     }
-    
+
     addRecaptchaScript() {
         this.recaptchaScript = null;
         if (!(window).grecaptcha) {
@@ -77,6 +77,16 @@ export class Captcha extends Component {
             this.recaptchaScript.src = "https://www.google.com/recaptcha/api.js?render=explicit";
             this.recaptchaScript.async = true;
             this.recaptchaScript.defer = true;
+            this.recaptchaScript.onload = () => {
+                if (!(window).grecaptcha) {
+                    console.warn("Recaptcha is not loaded");
+                    return;
+                }
+
+                window.grecaptcha.ready(() => {
+                    this.init();
+                });
+            }
             head.appendChild(this.recaptchaScript);
         }
     }
@@ -85,16 +95,7 @@ export class Captcha extends Component {
         this.addRecaptchaScript();
 
         if ((window).grecaptcha) {
-            this.init(); 
-        }
-        else {
-            setTimeout(() => {
-                if (!(window).grecaptcha) {
-                    console.warn("Recaptcha is not loaded");
-                    return;
-                }
-                this.init();
-            },500);
+            this.init();
         }
     }
 

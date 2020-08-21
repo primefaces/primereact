@@ -18,7 +18,7 @@ interface CarouselProps {
     verticalViewPortHeight?: string;
     contentClassName?: string;
     containerClassName?: string;
-    dotsContainerClassName?: string;
+    indicatorsContentClassName?: string;
     onPageChange?(e: {page: number}): void;
 }
 

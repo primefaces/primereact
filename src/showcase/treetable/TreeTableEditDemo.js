@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { TreeTable } from '../../components/treetable/TreeTable';
-import { Column } from "../../components/column/Column";
+import { Column } from '../../components/column/Column';
 import { InputText } from '../../components/inputtext/InputText';
 import { NodeService } from '../service/NodeService';
-import { TreeTableSubmenu } from '../../showcase/treetable/TreeTableSubmenu';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
-import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
+import { CodeHighlight } from '../codehighlight/CodeHighlight';
+import './TreeTableDemo.scss';
 
 export class TreeTableEditDemo extends Component {
 
@@ -73,25 +74,21 @@ export class TreeTableEditDemo extends Component {
     render() {
         return (
             <div>
-                <TreeTableSubmenu />
-
-                <div className="content-section introduction treetableeditdemo">
-                    <div className="feature-intro">
-                        <h1>TreeTable - Edit</h1>
+                <div className="content-section introduction">
+                    <AppInlineHeader changelogText="treeTable">
+                        <h1>TreeTable <span>Edit</span></h1>
                         <p>Incell editing provides a quick and user friendly way to manipulate data.</p>
-
-                        <AppContentContext.Consumer>
-                            {context => <button onClick={() => context.onChangelogBtnClick("treeTable")} className="layout-changelog-button">{context.changelogText}</button>}
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
-                <div className="content-section implementation treetableedit-demo">
-                    <TreeTable value={this.state.nodes}>
-                        <Column field="name" header="Name" expander style={{ height: '3.5em' }}></Column>
-                        <Column field="size" header="Size" editor={this.sizeEditor} editorValidator={this.requiredValidator} style={{ height: '3.5em' }}></Column>
-                        <Column field="type" header="Type" editor={this.typeEditor} style={{ height: '3.5em' }}></Column>
-                    </TreeTable>
+                <div className="content-section implementation treetable-editing-demo">
+                    <div className="card">
+                        <TreeTable value={this.state.nodes}>
+                            <Column field="name" header="Name" expander style={{ height: '3.5em' }}></Column>
+                            <Column field="size" header="Size" editor={this.sizeEditor} editorValidator={this.requiredValidator} style={{ height: '3.5em' }}></Column>
+                            <Column field="type" header="Type" editor={this.typeEditor} style={{ height: '3.5em' }}></Column>
+                        </TreeTable>
+                    </div>
                 </div>
 
                 <TreeTableEditDemoDoc />
@@ -114,6 +111,7 @@ import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 import { NodeService } from '../service/NodeService';
+import './TreeTableDemo.scss';
 
 export class TreeTableEditDemo extends Component {
 
@@ -130,7 +128,7 @@ export class TreeTableEditDemo extends Component {
     }
 
     componentDidMount() {
-        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({ nodes: data }));
     }
 
     onEditorValueChange(props, value) {
@@ -159,7 +157,7 @@ export class TreeTableEditDemo extends Component {
     inputTextEditor(props, field) {
         return (
             <InputText type="text" value={props.node.data[field]}
-                    onChange={(e) => this.onEditorValueChange(props, e.target.value)} />
+                onChange={(e) => this.onEditorValueChange(props, e.target.value)} />
         );
     }
 
@@ -179,12 +177,14 @@ export class TreeTableEditDemo extends Component {
 
     render() {
         return (
-            <div className="treetableedit-demo">
-                <TreeTable value={this.state.nodes}>
-                    <Column field="name" header="Name" expander style={{height: '3.5em'}}></Column>
-                    <Column field="size" header="Size" editor={this.sizeEditor} editorValidator={this.requiredValidator} style={{height: '3.5em'}}></Column>
-                    <Column field="type" header="Type" editor={this.typeEditor} style={{height: '3.5em'}}></Column>
-                </TreeTable>
+            <div>
+                <div className="card">
+                    <TreeTable value={this.state.nodes}>
+                        <Column field="name" header="Name" expander style={{ height: '3.5em' }}></Column>
+                        <Column field="size" header="Size" editor={this.sizeEditor} editorValidator={this.requiredValidator} style={{ height: '3.5em' }}></Column>
+                        <Column field="type" header="Type" editor={this.typeEditor} style={{ height: '3.5em' }}></Column>
+                    </TreeTable>
+                </div>
             </div>
         )
     }
@@ -352,15 +352,20 @@ const TreeTableEditDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="TreeTableEditDemo" sources={[key, value]} service="NodeService" data="treetablenodes" extFiles={this.extFiles} />
-                                </TabPanel>
-                            );
-                        })
-                    }
+                    <TabPanel header="Source">
+                        <LiveEditor name="TreeTableEditDemo" sources={this.sources} service="NodeService" data="treetablenodes" extFiles={this.extFiles} />
+
+<CodeHighlight lang="scss">
+{`
+.treetable-editing-demo {
+    .p-treetable .p-treetable-tbody > tr > td.p-cell-editing {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+}
+`}
+</CodeHighlight>
+                    </TabPanel>
                 </TabView>
             </div>
         )

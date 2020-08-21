@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { TreeTable } from '../../components/treetable/TreeTable';
 import { Column } from '../../components/column/Column';
 import { NodeService } from '../service/NodeService';
-import { TreeTableSubmenu } from '../../showcase/treetable/TreeTableSubmenu';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
-import AppContentContext from '../../AppContentContext';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class TreeTableSortDemo extends Component {
 
@@ -41,33 +40,31 @@ export class TreeTableSortDemo extends Component {
     render() {
         return (
             <div>
-                <TreeTableSubmenu />
-
                 <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>TreeTable - Sort</h1>
+                    <AppInlineHeader changelogText="treeTable">
+                        <h1>TreeTable <span>Sort</span></h1>
                         <p>TreeTable supports both single column and multiple column sorting.</p>
-
-                        <AppContentContext.Consumer>
-                            {context => <button onClick={() => context.onChangelogBtnClick("treeTable")} className="layout-changelog-button">{context.changelogText}</button>}
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Single Column Sorting</h3>
-                    <TreeTable value={this.state.nodes1} defaultSortOrder={-1}>
-                        <Column field="name" header="Name" expander sortable></Column>
-                        <Column field="size" header="Size" sortable></Column>
-                        <Column field="type" header="Type" sortable></Column>
-                    </TreeTable>
+                    <div className="card">
+                        <h5>Single Column Sorting</h5>
+                        <TreeTable value={this.state.nodes1} defaultSortOrder={-1}>
+                            <Column field="name" header="Name" expander sortable></Column>
+                            <Column field="size" header="Size" sortable></Column>
+                            <Column field="type" header="Type" sortable></Column>
+                        </TreeTable>
+                    </div>
 
-                    <h3>Multiple Column Sorting</h3>
-                    <TreeTable value={this.state.nodes2} sortMode="multiple" defaultSortOrder={-1}>
-                        <Column field="name" header="Name" expander sortable></Column>
-                        <Column field="size" header="Size" sortable></Column>
-                        <Column field="type" header="Type" sortable></Column>
-                    </TreeTable>
+                    <div className="card">
+                        <h5>Multiple Column Sorting</h5>
+                        <TreeTable value={this.state.nodes2} sortMode="multiple" defaultSortOrder={-1}>
+                            <Column field="name" header="Name" expander sortable></Column>
+                            <Column field="size" header="Size" sortable></Column>
+                            <Column field="type" header="Type" sortable></Column>
+                        </TreeTable>
+                    </div>
                 </div>
 
                 <TreeTableSortDemoDoc />
@@ -104,7 +101,7 @@ export class TreeTableSortDemo extends Component {
 
     componentDidMount() {
         this.nodeservice.getTreeTableNodes().then(data => {
-            this.setState({nodes1: data});
+            this.setState({ nodes1: data });
 
             let nodes2 = data;
             nodes2.push({
@@ -124,19 +121,23 @@ export class TreeTableSortDemo extends Component {
     render() {
         return (
             <div>
-                <h3>Single Column Sorting</h3>
-                <TreeTable value={this.state.nodes1} defaultSortOrder={-1}>
-                    <Column field="name" header="Name" expander sortable></Column>
-                    <Column field="size" header="Size" sortable></Column>
-                    <Column field="type" header="Type" sortable></Column>
-                </TreeTable>
+                <div className="card">
+                    <h5>Single Column Sorting</h5>
+                    <TreeTable value={this.state.nodes1} defaultSortOrder={-1}>
+                        <Column field="name" header="Name" expander sortable></Column>
+                        <Column field="size" header="Size" sortable></Column>
+                        <Column field="type" header="Type" sortable></Column>
+                    </TreeTable>
+                </div>
 
-                <h3>Multiple Column Sorting</h3>
-                <TreeTable value={this.state.nodes2} sortMode="multiple" defaultSortOrder={-1}>
-                    <Column field="name" header="Name" expander sortable></Column>
-                    <Column field="size" header="Size" sortable></Column>
-                    <Column field="type" header="Type" sortable></Column>
-                </TreeTable>
+                <div className="card">
+                    <h5>Multiple Column Sorting</h5>
+                    <TreeTable value={this.state.nodes2} sortMode="multiple" defaultSortOrder={-1}>
+                        <Column field="name" header="Name" expander sortable></Column>
+                        <Column field="size" header="Size" sortable></Column>
+                        <Column field="type" header="Type" sortable></Column>
+                    </TreeTable>
+                </div>
             </div>
         );
     }
@@ -254,15 +255,9 @@ const TreeTableSortDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="TreeTableSortDemo" sources={[key, value]} service="NodeService" data="treetablenodes" />
-                                </TabPanel>
-                            );
-                        })
-                    }
+                    <TabPanel header="Source">
+                        <LiveEditor name="TreeTableSortDemo" sources={this.sources} service="NodeService" data="treetablenodes" />
+                    </TabPanel>
                 </TabView>
             </div>
         )

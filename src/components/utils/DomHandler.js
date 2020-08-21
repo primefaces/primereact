@@ -90,8 +90,8 @@ export default class DomHandler {
             let rect = el.getBoundingClientRect();
 
             return {
-                top: rect.top + document.body.scrollTop,
-                left: rect.left + document.body.scrollLeft
+                top: rect.top + (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0),
+                left: rect.left + (window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0),
             };
         }
 
@@ -220,9 +220,12 @@ export default class DomHandler {
                 if(top < 0) {
                     top = windowScrollTop;
                 }
+
+                element.style.transformOrigin = 'bottom';
             }
             else {
                 top = targetOuterHeight + targetOffset.top + windowScrollTop;
+                element.style.transformOrigin = 'top';
             }
 
             if (targetOffset.left + targetOuterWidth + elementOuterWidth > viewport.width)
@@ -248,9 +251,12 @@ export default class DomHandler {
                 if (targetOffset.top + top < 0) {
                     top = -1 * targetOffset.top;
                 }
+
+                element.style.transformOrigin = 'bottom';
             }
             else {
                 top = targetHeight;
+                element.style.transformOrigin = 'top';
             }
 
             if (elementDimensions.width > viewport.width) {

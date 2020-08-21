@@ -62,8 +62,9 @@ export class ListBox extends Component {
         onChange: PropTypes.func
     };
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
             filter: ''
         }
@@ -265,9 +266,9 @@ export class ListBox extends Component {
     }
 
     render() {
-        let className = classNames('p-listbox p-inputtext p-component', this.props.className, {
+        let className = classNames('p-listbox p-component', {
             'p-disabled': this.props.disabled
-        });
+        }, this.props.className);
         let listClassName = classNames('p-listbox-list-wrapper', this.props.listClassName);
         let items = this.props.options;
         let header;

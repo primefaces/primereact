@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import DomHandler from '../utils/DomHandler';
+import { Ripple } from '../ripple/Ripple';
 
 export class TabMenu extends Component {
 
@@ -24,6 +26,7 @@ export class TabMenu extends Component {
 
     constructor(props) {
         super(props);
+
         if (!this.props.onTabChange) {
             this.state = {
                 activeItem: props.activeItem
@@ -61,17 +64,54 @@ export class TabMenu extends Component {
         }
     }
 
+    getActiveItem() {
+        return this.props.onTabChange ? this.props.activeItem : this.state.activeItem;
+    }
+
+    getActiveIndex() {
+        const activeItem = this.getActiveItem();
+        if (this.props.model) {
+            for (let i = 0; i < this.props.model.length; i++) {
+                if (activeItem === this.props.model[i]) {
+                    return i;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    updateInkBar() {
+        const activeIndex = this.getActiveIndex();
+        const tabHeader = this[`tab_${activeIndex}`];
+
+        this.inkbar.style.width = DomHandler.getWidth(tabHeader) + 'px';
+        this.inkbar.style.left =  DomHandler.getOffset(tabHeader).left - DomHandler.getOffset(this.nav).left + 'px';
+    }
+
+    componentDidMount() {
+        this.updateInkBar();
+    }
+
+    componentDidUpdate() {
+        this.updateInkBar();
+    }
+
     renderMenuItem(item, index) {
-        const activeItem = this.props.onTabChange ? this.props.activeItem : this.state.activeItem;
-        const className = classNames('p-tabmenuitem', item.className, {'p-highlight': activeItem ? activeItem === item : index === 0, 'p-disabled': item.disabled});
-        const iconClassName = classNames(item.icon, 'p-menuitem-icon');
-        const icon = item.icon ? <span className={iconClassName}></span>: null;
+        const activeItem = this.getActiveItem();
+        const className = classNames('p-tabmenuitem', {
+            'p-highlight': activeItem ? activeItem === item : index === 0,
+            'p-disabled': item.disabled
+        }, item.className);
+        const iconClassName = classNames('p-menuitem-icon', item.icon);
+        const icon = item.icon && <span className={iconClassName}></span>;
 
         return (
-            <li key={item.label + '_' + index} className={className} style={item.style} role="tab" aria-selected={activeItem ? activeItem === item : index === 0} aria-expanded={activeItem ? activeItem === item : index === 0}>
+            <li ref={(el) => this[`tab_${index}`] = el} key={item.label + '_' + index} className={className} style={item.style} role="tab" aria-selected={activeItem ? activeItem === item : index === 0} aria-expanded={activeItem ? activeItem === item : index === 0}>
                  <a href={item.url||'#'} className="p-menuitem-link" target={item.target} onClick={(event) => this.itemClick(event, item)} role="presentation">
                     {icon}
                     <span className="p-menuitem-text">{item.label}</span>
+                    <Ripple />
                 </a>
             </li>
         );
@@ -92,14 +132,14 @@ export class TabMenu extends Component {
 
             return (
                 <div id={this.props.id} className={className} style={this.props.style}>
-                    <ul className="p-tabmenu-nav p-reset" role="tablist">
+                    <ul ref={(el) => this.nav = el} className="p-tabmenu-nav p-reset" role="tablist">
                         {items}
+                        <li ref={(el) => this.inkbar = el} className="p-tabmenu-ink-bar"></li>
                     </ul>
                 </div>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 }

@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import { Carousel } from '../../components/carousel/Carousel';
-import { CarService } from '../service/CarService';
-import AppContentContext from '../../AppContentContext';
 import { Button } from '../../components/button/Button';
 import { CarouselDoc } from './CarouselDoc';
+import { AppInlineHeader } from '../../AppInlineHeader';
+import ProductService from '../service/ProductService';
+import './CarouselDemo.scss';
 
 export class CarouselDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
-            cars: []
+            products: null
         };
-        this.carservice = new CarService();
-        this.carTemplate = this.carTemplate.bind(this);
 
         this.responsiveOptions = [
             {
@@ -22,37 +22,40 @@ export class CarouselDemo extends Component {
                 numScroll: 3
             },
             {
-                breakpoint: '768px',
+                breakpoint: '600px',
                 numVisible: 2,
                 numScroll: 2
             },
             {
-                breakpoint: '560px',
+                breakpoint: '480px',
                 numVisible: 1,
                 numScroll: 1
             }
         ];
+
+        this.productService = new ProductService();
+        this.productTemplate = this.productTemplate.bind(this);
     }
 
     componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({ cars: data }));
+        this.productService.getProductsSmall().then(data => this.setState({ products: data.slice(0,9) }));
     }
 
-    carTemplate(car) {
+    productTemplate(product) {
         return (
-            <div className="car-details">
-                <div className="p-grid p-nogutter">
-                    <div className="p-col-12">
-                        <img src={`showcase/demo/images/car/${car.brand}.png`} alt={car.brand} />
+            <div className="product-item">
+                <div className="product-item-content">
+                    <div className="p-mb-3">
+                        <img src={`showcase/demo/images/product/${product.image}`} alt={product.name} className="product-image" />
                     </div>
-                    <div className="p-col-12 car-data">
-                        <div className="car-title">{car.brand}</div>
-                        <div className="car-subtitle">{car.year} | {car.color}</div>
-
-                        <div className="car-buttons">
-                            <Button icon="pi pi-search" className="p-button-secondary" />
-                            <Button icon="pi pi-star" className="p-button-secondary" />
-                            <Button icon="pi pi-cog" className="p-button-secondary" />
+                    <div>
+                        <h4 className="p-mb-1">{product.name}</h4>
+                        <h6 className="p-mt-0 p-mb-3">${product.price}</h6>
+                        <span className={`product-badge status-${product.inventoryStatus.toLowerCase()}`}>{product.inventoryStatus}</span>
+                        <div className="car-buttons p-mt-5">
+                            <Button icon="pi pi-search" className="p-button p-button-rounded p-mr-2" />
+                            <Button icon="pi pi-star" className="p-button-success p-button-rounded p-mr-2" />
+                            <Button icon="pi pi-cog" className="p-button-help p-button-rounded" />
                         </div>
                     </div>
                 </div>
@@ -61,32 +64,30 @@ export class CarouselDemo extends Component {
     }
 
     render() {
-        const basicHeader = <h2>Basic</h2>;
-        const customHeader = <h2>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h2>
-        const verticalHeader = <h2>Vertical</h2>
-
         return (
-            <div className="carousel-demo">
+            <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="carousel">
                         <h1>Carousel</h1>
                         <p>Carousel is a content slider featuring various customization options.</p>
-
-                        <AppContentContext.Consumer>
-                            {context => <button onClick={() => context.onChangelogBtnClick("carousel")} className="layout-changelog-button">{context.changelogText}</button>}
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
-                <div className="content-section implementation">
-                    <Carousel value={this.state.cars} itemTemplate={this.carTemplate} numVisible={4} numScroll={3}
-                        header={basicHeader} responsiveOptions={this.responsiveOptions}></Carousel>
+                <div className="content-section implementation carousel-demo">
+                    <div className="card">
+                        <Carousel value={this.state.products} numVisible={3} numScroll={3} responsiveOptions={this.responsiveOptions}
+                            itemTemplate={this.productTemplate} header={<h5>Basic</h5>} />
+                    </div>
 
-                    <Carousel value={this.state.cars} itemTemplate={this.carTemplate} numVisible={3} numScroll={1} className="custom-carousel"
-                        responsiveOptions={this.responsiveOptions} header={customHeader} circular={true} autoplayInterval={3000}></Carousel>
+                    <div className="card">
+                        <Carousel value={this.state.products} numVisible={3} numScroll={1} responsiveOptions={this.responsiveOptions} className="custom-carousel" circular
+                            autoplayInterval={3000} itemTemplate={this.productTemplate} header={<h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>} />
+                    </div>
 
-                    <Carousel value={this.state.cars} itemTemplate={this.carTemplate} orientation="vertical" style={{ maxWidth: '400px', marginTop: '2em' }}
-                        numVisible={1} numScroll={1} verticalViewPortHeight="330px" header={verticalHeader}></Carousel>
+                    <div className="card">
+                        <Carousel value={this.state.products} numVisible={1} numScroll={1} orientation="vertical" verticalViewPortHeight="352px"
+                            itemTemplate={this.productTemplate} header={<h5>Vertical</h5>} style={{maxWidth: '400px', marginTop: '2em'}} />
+                    </div>
                 </div>
 
                 <CarouselDoc />

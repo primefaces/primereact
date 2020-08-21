@@ -13,17 +13,16 @@ export class EditorDoc extends Component {
             'class': {
                 tabName: 'Class Source',
                 content: `
-import React, {Component} from 'react';
-import {Editor} from 'primereact/editor';
-import {Button} from 'primereact/button';
+import React, { Component } from 'react';
+import { Editor } from 'primereact/editor';
 
 export class EditorDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            text1 : '<div>Hello World!</div><div>PrimeReact <b>Editor</b> Rocks</div><div><br></div>',
-            text2 : ''
+            text1: '<div>Hello World!</div><div>PrimeReact <b>Editor</b> Rocks</div><div><br></div>',
+            text2: ''
         };
     }
 
@@ -42,17 +41,13 @@ export class EditorDemo extends Component {
 
         return (
             <div>
-                <h3 className="first">Default</h3>
-                <Editor style={{height:'320px'}} value={this.state.text1} onTextChange={(e)=>this.setState({text1:e.htmlValue})}/>
-                <p>Value: {this.state.text1 ||'empty'}</p>
-                <Button label="Clear" icon="pi pi-times" onClick={()=> this.setState({text1:''})}/>
+                <div className="card">
+                    <h5>Default</h5>
+                    <Editor style={{ height: '320px' }} value={this.state.text1} onTextChange={(e) => this.setState({ text1: e.htmlValue })} />
 
-                <hr/>
-
-                <h3 className="first">Custom Toolbar</h3>
-                <Editor headerTemplate={header} style={{height:'320px'}} value={this.state.text2} onTextChange={(e)=>this.setState({text2:e.htmlValue})}/>
-                <p>Value: {this.state.text2 ||'empty'}</p>
-                <Button label="Clear" icon="pi pi-times" onClick={() => this.setState({text2:''})}/>
+                    <h5>Customized</h5>
+                    <Editor headerTemplate={header} style={{ height: '320px' }} value={this.state.text2} onTextChange={(e) => this.setState({ text2: e.htmlValue })} />
+                </div>
             </div>
         );
     }
@@ -80,14 +75,14 @@ const EditorDemo = () => {
 
     return (
         <div>
-            <h3 className="first">Default</h3>
+            <h3 className="first">Default</h5>
             <Editor style={{height:'320px'}} value={text1} onTextChange={(e)=> setText1(e.htmlValue)}/>
             <p>Value: {text1 ||'empty'}</p>
             <Button label="Clear" icon="pi pi-times" onClick={()=> setText1('')}/>
 
             <hr/>
 
-            <h3 className="first">Custom Toolbar</h3>
+            <h3 className="first">Custom Toolbar</h5>
             <Editor headerTemplate={header} style={{height:'320px'}} value={text2} onTextChange={(e)=> setText2(e.htmlValue)}/>
             <p>Value: {text2 ||'empty'}</p>
             <Button label="Clear" icon="pi pi-times" onClick={() => setText2('')}/>
@@ -117,14 +112,14 @@ const EditorDemo = () => {
 
     return (
         <div>
-            <h3 className="first">Default</h3>
+            <h3 className="first">Default</h5>
             <Editor style={{height:'320px'}} value={text1} onTextChange={(e)=> setText1(e.htmlValue)}/>
             <p>Value: {text1 ||'empty'}</p>
             <Button label="Clear" icon="pi pi-times" onClick={()=> setText1('')}/>
 
             <hr/>
 
-            <h3 className="first">Custom Toolbar</h3>
+            <h3 className="first">Custom Toolbar</h5>
             <Editor headerTemplate={header} style={{height:'320px'}} value={text2} onTextChange={(e)=> setText2(e.htmlValue)}/>
             <p>Value: {text2 ||'empty'}</p>
             <Button label="Clear" icon="pi pi-times" onClick={() => setText2('')}/>
@@ -145,29 +140,27 @@ const EditorDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
-                            {`
-import {Editor} from 'primereact/editor';
-
+                        <h5>Import</h5>
+<CodeHighlight lang="js">
+{`
+import { Editor } from 'primereact/editor';
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>Editor is used as a controlled component with <i>value</i> and <i>onTextChange</i> properties.</p>
 
-                        <CodeHighlight className="language-jsx">
-                            {`
+<CodeHighlight>
+{`
 <Editor style={{height:'320px'}} value={this.state.text} onTextChange={(e) => this.setState({text: e.htmlValue})} />
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <h3>Toolbar</h3>
+                        <h5>Toolbar</h5>
                         <p>Editor provides a default toolbar with common options, to customize it define your elements with the <i>headerTemplate</i>. Refer to <a href="http://quilljs.com/docs/modules/toolbar/">Quill documentation</a> for available controls.</p>
 
-                        <CodeHighlight className="language-jsx">
-                            {`
+<CodeHighlight>
+{`
 const header = (
     <span className="ql-formats">
         <button className="ql-bold" aria-label="Bold"></button>
@@ -177,11 +170,10 @@ const header = (
 );
 
 <Editor style={{height:'320px'}} value={this.state.text} onTextChange={(e) => this.setState({text: e.htmlValue})} headerTemplate={header}/>
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -251,7 +243,7 @@ const header = (
                             </table>
                         </div>
 
-                        <h3>Events</h3>
+                        <h5>Events</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -283,7 +275,7 @@ const header = (
 
                         <p>Refer to <a href="http://beta.quilljs.com/docs/api/#events">Quill documentation</a> for more information.</p>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -311,26 +303,19 @@ const header = (
                         </div>
 
 
-                        <h3>Dependencies</h3>
+                        <h5>Dependencies</h5>
                         <p><a href="http://quilljs.com">Quill</a> Editor 1.3+.</p>
                         <p>Resources of quill needs to be added to your application.</p>
-                        <CodeHighlight className="language-javascript">
-                            {`
+<CodeHighlight lang="js">
+{`
 npm install quill --save
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
                     </TabPanel>
 
-                    {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="EditorDemo" sources={[key, value]} dependencies={{ "quill": "1.3.7" }} />
-                                </TabPanel>
-                            );
-                        })
-                    }
+                    <TabPanel header="Source">
+                        <LiveEditor name="EditorDemo" sources={this.sources} dependencies={{ "quill": "1.3.7" }} />
+                    </TabPanel>
                 </TabView>
             </div>
         )

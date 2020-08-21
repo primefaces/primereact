@@ -1,54 +1,53 @@
 import React, { Component } from 'react';
-import {DataTable} from '../../components/datatable/DataTable';
-import {Column} from '../../components/column/Column';
-import {CarService} from '../service/CarService';
-import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
-import {TabView,TabPanel} from '../../components/tabview/TabView';
-import AppContentContext from '../../AppContentContext';
-import {Button} from "../../components/button/Button";
+import { DataTable } from '../../components/datatable/DataTable';
+import { Column } from '../../components/column/Column';
+import { CustomerService } from '../service/CustomerService';
+import { TabView, TabPanel } from '../../components/tabview/TabView';
+import { Button } from '../../components/button/Button';
 import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class DataTablePaginatorDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
-            cars: []
+            customers: []
         };
-        this.carservice = new CarService();
+
+        this.customerService = new CustomerService();
     }
 
     componentDidMount() {
-        this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
+        this.customerService.getCustomersLarge().then(data => this.setState({ customers: data }));
     }
 
     render() {
-        const paginatorLeft = <Button icon="pi pi-refresh"/>;
+        const paginatorLeft = <Button type="button" icon="pi pi-refresh" className="p-button-text" />;
+        const paginatorRight = <Button type="button" icon="pi pi-cloud" className="p-button-text" />;
 
         return (
-            <div className="datatable-paginator-demo">
-                <DataTableSubmenu />
-
+            <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>DataTable - Paginator</h1>
+                    <AppInlineHeader changelogText="dataTable">
+                        <h1>DataTable <span>Paginator</span></h1>
                         <p>Pagination is enabled by setting paginator property to true, rows attribute defines the number of rows per page and pageLinks specify the the number of page links to display.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("dataTable")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <DataTable value={this.state.cars} paginator={true} paginatorLeft={paginatorLeft}
-                        paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" rows={10} rowsPerPageOptions={[5,10,20]} >
-                        <Column field="vin" header="Vin" />
-                        <Column field="year" header="Year" />
-                        <Column field="brand" header="Brand" />
-                        <Column field="color" header="Color" />
-                    </DataTable>
+                    <div className="card">
+                        <DataTable value={this.state.customers} paginator
+                            paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" rows={10} rowsPerPageOptions={[10,20,50]}
+                            paginatorLeft={paginatorLeft} paginatorRight={paginatorRight}>
+                            <Column field="name" header="Name"></Column>
+                            <Column field="country.name" header="Country"></Column>
+                            <Column field="company" header="Company"></Column>
+                            <Column field="representative.name" header="Representative"></Column>
+                        </DataTable>
+                    </div>
                 </div>
 
                 <DataTablePaginatorDemoDoc></DataTablePaginatorDemoDoc>
@@ -67,38 +66,44 @@ export class DataTablePaginatorDemoDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service/CarService';
-import {Button} from 'primereact/button';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { CustomerService } from '../service/CustomerService';
+import { Button } from 'primereact/button';
 
 export class DataTablePaginatorDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
-            cars: []
+            customers: []
         };
-        this.carservice = new CarService();
+
+        this.customerService = new CustomerService();
     }
 
     componentDidMount() {
-        this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
+        this.customerService.getCustomersLarge().then(data => this.setState({ customers: data }));
     }
 
     render() {
-        const paginatorLeft = <Button icon="pi pi-refresh"/>;
+        const paginatorLeft = <Button type="button" icon="pi pi-refresh" className="p-button-text" />;
+        const paginatorRight = <Button type="button" icon="pi pi-cloud" className="p-button-text" />;
 
         return (
-            <div className="datatable-paginator-demo">
-                <DataTable value={this.state.cars} paginator={true} paginatorLeft={paginatorLeft}
-                    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" rows={10} rowsPerPageOptions={[5,10,20]} >
-                    <Column field="vin" header="Vin" />
-                    <Column field="year" header="Year" />
-                    <Column field="brand" header="Brand" />
-                    <Column field="color" header="Color" />
-                </DataTable>
+            <div>
+                <div className="card">
+                    <DataTable value={this.state.customers} paginator
+                        paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" rows={10} rowsPerPageOptions={[10,20,50]}
+                        paginatorLeft={paginatorLeft} paginatorRight={paginatorRight}>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="country.name" header="Country"></Column>
+                        <Column field="company" header="Company"></Column>
+                        <Column field="representative.name" header="Representative"></Column>
+                    </DataTable>
+                </div>
             </div>
         );
     }
@@ -126,7 +131,7 @@ const DataTablePaginatorDemo = () => {
 
     return (
         <div className="datatable-paginator-demo">
-            <DataTable value={cars} paginator={true} paginatorLeft={paginatorLeft}
+            <DataTable value={cars} paginator paginatorLeft={paginatorLeft}
                 paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" rows={10} rowsPerPageOptions={[5,10,20]} >
                 <Column field="vin" header="Vin" />
@@ -160,7 +165,7 @@ const DataTablePaginatorDemo = () => {
 
     return (
         <div className="datatable-paginator-demo">
-            <DataTable value={cars} paginator={true} paginatorLeft={paginatorLeft}
+            <DataTable value={cars} paginator paginatorLeft={paginatorLeft}
                 paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" rows={10} rowsPerPageOptions={[5,10,20]} >
                 <Column field="vin" header="Vin" />
@@ -192,15 +197,9 @@ const DataTablePaginatorDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="DataTablePaginatorDemo" sources={[key, value]} service="CarService" data="cars-large" extFiles={this.extFiles} />
-                                </TabPanel>
-                            );
-                        })
-                    }
+                    <TabPanel header="Source">
+                        <LiveEditor name="DataTablePaginatorDemo" sources={this.sources} service="CarService" data="cars-large" extFiles={this.extFiles} />
+                    </TabPanel>
                 </TabView>
             </div>
         )

@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { AppMenu } from './AppMenu';
-import {Dialog} from './components/dialog/Dialog';
-import {Button} from './components/button/Button';
 import classNames from 'classnames';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
@@ -21,95 +19,100 @@ import AppTopbar from './AppTopbar';
 import AppFooter from './AppFooter';
 import AppConfig from './AppConfig';
 
-import axios from 'axios';
-
 import AppContentContext from './AppContentContext';
+import { Toast } from './components/toast/Toast';
+import PrimeReact from './components/utils/PrimeReact';
+import { AppChangelogDialog } from './AppChangelogDialog';
 
 export class App extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            activeTheme: 'nova-light',
-            mobileMenuActive: false,
-            themeMenuActive: false,
-            themeMenuVisited: false,
-            newsActive: sessionStorage.getItem('primenews-hidden') ? false: true,
+            theme: 'saga-blue',
+            inputStyle: 'outlined',
+            ripple: true,
+            darkTheme: false,
+            sidebarActive: false,
+            newsActive: sessionStorage.getItem('primenews-hidden') ? false : true,
             configuratorActive: false,
-            changelog: null,
             changelogActive: false,
-            totalVersion: 0,
-            prevChangelog: null,
-            currentChangelog: null,
-            nextChangelog: null,
-            filteredChangelog: null,
             searchVal: null
         };
 
-        this.onTopbarItemClick = this.onTopbarItemClick.bind(this);
         this.onThemeChange = this.onThemeChange.bind(this);
         this.onMenuButtonClick = this.onMenuButtonClick.bind(this);
-        this.onSidebarClick = this.onSidebarClick.bind(this);
         this.onMenuItemClick = this.onMenuItemClick.bind(this);
         this.onHideNews = this.onHideNews.bind(this);
-        this.bindDocumentClick = this.bindDocumentClick.bind(this);
-        this.onConfiguratorClick = this.onConfiguratorClick.bind(this)
-        this.toggleConfigurator = this.toggleConfigurator.bind(this);
-        this.hideConfigurator = this.hideConfigurator.bind(this);
+        this.onMaskClick = this.onMaskClick.bind(this);
+        this.onInputStyleChange = this.onInputStyleChange.bind(this);
+        this.onRippleChange = this.onRippleChange.bind(this);
 
         this.showChangelogDialog = this.showChangelogDialog.bind(this);
         this.hideChangelogDialog = this.hideChangelogDialog.bind(this);
-        this.onPrev = this.onPrev.bind(this);
-        this.onNext = this.onNext.bind(this);
-    }
 
-    onTopbarItemClick(event) {
-        this.topbarItemClick = true;
-
-        if(this.state.activeTopbarItem === event.item)
-            this.setState({activeTopbarItem: null});
-        else
-            this.setState({activeTopbarItem: event.item});
-
-        //event.originalEvent.preventDefault();
+        PrimeReact.ripple = true;
     }
 
     onThemeChange(event) {
         let themeElement = document.getElementById('theme-link');
-        let urlTokens = themeElement.getAttribute('href').split('/');
-        urlTokens[urlTokens.length - 2] = event.theme;
-        let newURL = urlTokens.join('/');
-
-        this.replaceLink(themeElement, newURL);
-
-        const hasBodyDarkTheme = this.hasClass(document.body, 'dark-theme');
-        if (event.dark) {
-            if (!hasBodyDarkTheme) {
-                this.addClass(document.body, 'dark-theme');
-            }
-        }
-        else if (hasBodyDarkTheme) {
-            this.removeClass(document.body, 'dark-theme');
-        }
-
+        themeElement.setAttribute('href', themeElement.getAttribute('href').replace(this.state.theme, event.theme));
         this.setState({
-            themeMenuActive: false,
-            activeTheme: event.theme
+            theme: event.theme,
+            darkTheme: event.dark
         });
+
         event.originalEvent.preventDefault();
     }
 
-    replaceLink(linkElement, href) {
-        const id = linkElement.getAttribute('id');
-        const cloneLinkElement = linkElement.cloneNode(true);
-        cloneLinkElement.setAttribute('href', href);
-        cloneLinkElement.setAttribute('id', id + '-clone');
-        linkElement.parentNode.insertBefore(cloneLinkElement, linkElement.nextSibling);
+    onMenuButtonClick() {
+        this.menuClick = true;
 
-        cloneLinkElement.addEventListener('load', () => {
-            linkElement.remove();
-            cloneLinkElement.setAttribute('id', id);
+        if (this.sidebarActive) {
+            this.setState({ sidebarActive: false });
+            this.removeClass(document.body, 'blocked-scroll');
+        }
+        else {
+            this.setState({ sidebarActive: true });
+            this.addClass(document.body, 'blocked-scroll');
+        }
+    }
+
+    onMenuItemClick() {
+        this.setState({ sidebarActive: false });
+        this.removeClass(document.body, 'blocked-scroll');
+    }
+
+    onMaskClick() {
+        this.setState({ sidebarActive: false });
+        this.removeClass(document.body, 'blocked-scroll');
+    }
+
+    onHideNews(event) {
+        this.setState({ newsActive: false });
+        sessionStorage.setItem('primenews-hidden', "true");
+        event.stopPropagation();
+    }
+
+    onInputStyleChange(inputStyle) {
+        this.setState({ inputStyle });
+    }
+
+    onRippleChange(value) {
+        PrimeReact.ripple = value;
+
+        this.setState({ ripple: value });
+    }
+
+    showChangelogDialog(searchVal) {
+        this.setState({
+            changelogActive: true,
+            searchVal
         });
+    }
+
+    hideChangelogDialog() {
+        this.setState({ changelogActive: false });
     }
 
     addClass(element, className) {
@@ -133,186 +136,60 @@ export class App extends Component {
             return new RegExp('(^| )' + className + '( |$)', 'gi').test(element.className);
     }
 
-    onMenuButtonClick() {
-        this.menuClick = true;
-        this.setState({ mobileMenuActive: !this.state.mobileMenuActive });
-    }
-
-    onSidebarClick() {
-        this.menuClick = true;
-    }
-
-    onMenuItemClick() {
-        this.setState({ mobileMenuActive: false });
-    }
-
-    bindDocumentClick() {
-        if (!this.topbarItemClick) {
-            this.setState({
-                activeTopbarItem: null,
-                topbarMenuActive: false
-            });
+    isOutdatedIE() {
+        let ua = window.navigator.userAgent;
+        if (ua.indexOf('MSIE ') > 0 || ua.indexOf('Trident/') > 0) {
+            return true;
         }
 
-        if (!this.menuClick) {
-            this.setState({ mobileMenuActive: false });
-        }
-
-        if (!this.configClick) {
-            this.setState({ configuratorActive: false });
-        }
-
-        this.topbarItemClick = false;
-        this.menuClick = false;
-        this.configClick = false;
-    }
-
-    onHideNews(event) {
-        this.setState({ newsActive: false });
-        sessionStorage.setItem('primenews-hidden', "true");
-        event.stopPropagation();
-    }
-
-    onConfiguratorClick() {
-        this.configClick = true;
-    }
-
-    toggleConfigurator() {
-        this.configClick = true;
-        this.setState({ configuratorActive: !this.state.configuratorActive })
-    }
-
-    hideConfigurator() {
-        this.setState({ configuratorActive: false });
-    }
-
-    getChangelog() {
-        axios.get('showcase/changelog/changelog.json', { headers: { 'Cache-Control' : 'no-cache' } })
-            .then(res => res.data)
-            .then(data => this.setState({ changelog: data }));
-    }
-
-    showChangelogDialog(searchVal) {
-        const currentVersion = Object.keys(this.state.changelog)[0],
-            totalVersion = Object.keys(this.state.changelog).length;
-
-        this.setState({
-            changelogActive: true,
-            currentChangelog: { version: currentVersion, index: 0 },
-            prevChangelog: { version: Object.keys(this.state.changelog)[1], index: 1 },
-            filteredChangelog: this.state.changelog[currentVersion][searchVal.toLowerCase()],
-            totalVersion,
-            searchVal
-        });
-    }
-
-    hideChangelogDialog() {
-        this.setState({ changelogActive: false });
-    }
-
-    onPrev() {
-        let state = {
-            filteredChangelog: this.state.changelog[this.state.prevChangelog.version][this.state.searchVal.toLowerCase()],
-            prevChangelog: null,
-            currentChangelog: this.state.prevChangelog,
-            nextChangelog: this.state.currentChangelog
-        };
-
-        if (this.state.totalVersion > this.state.prevChangelog.index + 1) {
-            let prevIndex = this.state.prevChangelog.index + 1;
-            let prevVersion = Object.keys(this.state.changelog)[prevIndex];
-            state['prevChangelog'] = {
-                version: prevVersion,
-                index: prevIndex
-            }
-        }
-
-        this.setState(state);
-    }
-
-    onNext() {
-        let state = {
-            filteredChangelog: this.state.changelog[this.state.nextChangelog.version][this.state.searchVal.toLowerCase()],
-            prevChangelog: this.state.currentChangelog,
-            currentChangelog: this.state.nextChangelog,
-            nextChangelog: null
-        };
-
-        if (this.state.nextChangelog.index > 0) {
-            let nextIndex = this.state.nextChangelog.index - 1;
-            let nextVersion = Object.keys(this.state.changelog)[nextIndex];
-            state['nextChangelog'] = {
-                version: nextVersion,
-                index: nextIndex
-            }
-        }
-
-        this.setState(state);
+        return false;
     }
 
     componentDidMount() {
-        this.getChangelog();
+        if (this.isOutdatedIE()) {
+            this.showcaseToast.show({ severity: 'warn', summary: 'Limited Functionality', detail: 'Although PrimeReact supports IE11, ThemeSwitcher in this application cannot be not fully supported by your browser. Please use a modern browser for the best experience of the showcase.', life: 6000 });
+        }
     }
 
     render() {
         const wrapperClassName = classNames('layout-wrapper', {
             /*'layout-news-active': this.state.newsActive,*/
-            'layout-sidebar-mobile-active': this.state.mobileMenuActive,
-            'layout-config-active': this.state.configuratorActive
+            'p-input-filled': this.state.inputStyle === 'filled',
+            'p-ripple-disabled': this.state.ripple === false
+        });
+        const maskClassName = classNames('layout-mask', {
+            'layout-mask-active': this.state.sidebarActive
         });
 
         return (
-            <div className={wrapperClassName} onClick={this.bindDocumentClick}>
+            <div className={wrapperClassName}>
+                <Toast ref={(el) => this.showcaseToast = el} />
 
                 {/* <AppNews newsActive={this.state.newsActive} onHideNews={this.onHideNews}/> */}
 
-                <AppTopbar activeTopbarItem={this.state.activeTopbarItem} onMenuButtonClick={this.onMenuButtonClick}
-                    onTopbarItemClick={this.onTopbarItemClick} onThemeChange={this.onThemeChange} menuActive={this.state.mobileMenuActive}/>
+                <AppTopbar onMenuButtonClick={this.onMenuButtonClick} onThemeChange={this.onThemeChange} theme={this.state.theme} darkTheme={this.state.darkTheme} />
 
-                <AppMenu onSidebarClick={this.onSidebarClick} onMenuItemClick={this.onMenuItemClick}/>
+                <AppMenu active={this.state.sidebarActive} onMenuItemClick={this.onMenuItemClick} />
 
-                <div className="layout-content">
-                    <AppContentContext.Provider value={{
-                        changelogText: "VIEW CHANGELOG",
-                        onChangelogBtnClick: this.showChangelogDialog
-                    }}>
+                <AppContentContext.Provider value={{
+                    inputStyle: this.state.inputStyle,
+                    darkTheme: this.state.darkTheme,
+                    changelogText: "VIEW CHANGELOG",
+                    onChangelogBtnClick: this.showChangelogDialog,
+                    onInputStyleChange: this.onInputStyleChange
+                }}>
+                    <div className="layout-content">
                         <AppRouter />
 
-                    </AppContentContext.Provider>
+                        <AppChangelogDialog visible={this.state.changelogActive} searchVal={this.state.searchVal} onHide={this.hideChangelogDialog} />
 
-                    <Dialog header={`${this.state.searchVal} changelog`} className="layout-changelog-dialog" visible={this.state.changelogActive} style={{width: '50vw'}} onHide={this.hideChangelogDialog}>
-                        {
-                            this.state.currentChangelog && <div className="layout-changelog-current-header">
-                                    <span>
-                                        <span className="layout-changelog-version">{this.state.currentChangelog.version}</span>
-                                        { this.state.currentChangelog.index === 0 && <span className="layout-changelog-badge">current</span> }
-                                    </span>
-                                    <a href="https://github.com/primefaces/primereact/blob/master/CHANGELOG.md" target="_blank" rel="noopener noreferrer" className="layout-changelog-full">View Full Changelog</a>
-                                </div>
-                        }
-                        <ul className="layout-changelog-container">
-                            {
-                                this.state.filteredChangelog ?
-                                    this.state.filteredChangelog.map((item, index) => {
-                                        return <li key={index}>&#9679; {item.title} <a href={item.url} target="_blank" rel="noopener noreferrer" className="layout-changelog-issue-no">#{item.number}</a></li>
-                                    })
-                                    :
-                                    <li>No Change</li>
-                            }
-                        </ul>
-                        <div className="layout-changelog-actions">
-                            { this.state.prevChangelog && <Button type="button" label={this.state.prevChangelog.version} onClick={this.onPrev} className="p-button-secondary" icon="pi pi-chevron-left" /> }
-                            { this.state.nextChangelog && <Button type="button" label={this.state.nextChangelog.version} onClick={this.onNext} className="p-button-secondary" icon="pi pi-chevron-right" iconPos="right" /> }
-                        </div>
-                    </Dialog>
+                        <AppFooter />
+                    </div>
 
-                    <AppFooter />
-                </div>
+                    <AppConfig theme={this.state.theme} ripple={this.state.ripple} onThemeChange={this.onThemeChange} onRippleChange={this.onRippleChange} />
+                </AppContentContext.Provider>
 
-                <AppConfig onConfiguratorClick={this.onConfiguratorClick} toggleConfigurator={this.toggleConfigurator}
-                    hideConfigurator={this.hideConfigurator} onThemeChange={this.onThemeChange} activeTheme={this.state.activeTheme}/>
-
-                { this.state.mobileMenuActive && <div className="layout-mask"></div> }
+                <div className={maskClassName} onClick={this.onMaskClick}></div>
             </div>
         );
     }

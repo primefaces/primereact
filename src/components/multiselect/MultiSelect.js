@@ -1,13 +1,14 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import DomHandler from '../utils/DomHandler';
-import ObjectUtils from '../utils/ObjectUtils';
-import FilterUtils from '../utils/FilterUtils';
 import classNames from 'classnames';
-import { MultiSelectPanel } from './MultiSelectPanel';
-import { MultiSelectItem } from './MultiSelectItem';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { CSSTransition } from 'react-transition-group';
+import { tip } from "../tooltip/Tooltip";
+import DomHandler from '../utils/DomHandler';
+import FilterUtils from '../utils/FilterUtils';
+import ObjectUtils from '../utils/ObjectUtils';
 import { MultiSelectHeader } from './MultiSelectHeader';
-import {tip} from "../tooltip/Tooltip";
+import { MultiSelectItem } from './MultiSelectItem';
+import { MultiSelectPanel } from './MultiSelectPanel';
 
 export class MultiSelect extends Component {
 
@@ -74,8 +75,8 @@ export class MultiSelect extends Component {
         maxSelectedLabels: PropTypes.number,
         selectedItemsLabel: PropTypes.string,
         ariaLabelledBy: PropTypes.string,
-        itemTemplate: PropTypes.func,
-        selectedItemTemplate: PropTypes.func,
+        itemTemplate: PropTypes.any,
+        selectedItemTemplate: PropTypes.any,
         onChange: PropTypes.func,
         onFocus: PropTypes.func,
         onBlur: PropTypes.func
@@ -85,11 +86,11 @@ export class MultiSelect extends Component {
         super(props);
         this.state = {
             filter: '',
-            panelClick: false
+            focused: false,
+            overlayVisible: false
         };
 
         this.onClick = this.onClick.bind(this);
-        this.onPanelClick = this.onPanelClick.bind(this);
         this.onOptionClick = this.onOptionClick.bind(this);
         this.onOptionKeyDown = this.onOptionKeyDown.bind(this);
         this.onFocus = this.onFocus.bind(this);
@@ -97,6 +98,9 @@ export class MultiSelect extends Component {
         this.onFilter = this.onFilter.bind(this);
         this.onCloseClick = this.onCloseClick.bind(this);
         this.onToggleAll = this.onToggleAll.bind(this);
+        this.onOverlayEnter = this.onOverlayEnter.bind(this);
+        this.onOverlayEntered = this.onOverlayEntered.bind(this);
+        this.onOverlayExit = this.onOverlayExit.bind(this);
     }
 
     onOptionClick(event) {
@@ -166,12 +170,8 @@ export class MultiSelect extends Component {
     }
 
     onClick(event) {
-        if(this.props.disabled) {
-            return;
-        }
-
-        if(!this.isPanelClicked(event)) {
-            if(this.panel.element.offsetParent) {
+        if (!this.props.disabled && !this.isPanelClicked(event)) {
+            if (this.state.overlayVisible) {
                 this.hide();
             }
             else {
@@ -179,10 +179,6 @@ export class MultiSelect extends Component {
                 this.show();
             }
         }
-    }
-
-    onPanelClick(event) {
-        this.setState({panelClick : true});
     }
 
     onToggleAll(event) {
@@ -221,47 +217,42 @@ export class MultiSelect extends Component {
     }
 
     onFilter(event) {
-        this.setState({filter: event.query});
+        this.setState({ filter: event.query });
     }
 
     show() {
-        if(this.props.options && this.props.options.length) {
-            this.panel.element.style.zIndex = String(DomHandler.generateZIndex());
-            this.panel.element.style.display = 'block';
-
-            setTimeout(() => {
-                DomHandler.addClass(this.panel.element, 'p-input-overlay-visible');
-                DomHandler.removeClass(this.panel.element, 'p-input-overlay-hidden');
-            }, 1);
-
-            this.alignPanel();
-            this.bindDocumentClickListener();
-        }
+        this.setState({ overlayVisible: true });
     }
 
     hide() {
-        DomHandler.addClass(this.panel.element, 'p-input-overlay-hidden');
-        DomHandler.removeClass(this.panel.element, 'p-input-overlay-visible');
-        this.unbindDocumentClickListener();
+        this.setState({ overlayVisible: false });
+    }
 
-        setTimeout(() => {
-            this.panel.element.style.display = 'none';
-            DomHandler.removeClass(this.panel.element, 'p-input-overlay-hidden');
-        }, 150);
+    onOverlayEnter() {
+        this.panel.element.style.zIndex = String(DomHandler.generateZIndex());
+        this.alignPanel();
+    }
+
+    onOverlayEntered() {
+        this.bindDocumentClickListener();
+    }
+
+    onOverlayExit() {
+        this.unbindDocumentClickListener();
     }
 
     alignPanel() {
+        const container = this.label.parentElement;
         if (this.props.appendTo) {
-            this.panel.element.style.minWidth = DomHandler.getWidth(this.container) + 'px';
-            DomHandler.absolutePosition(this.panel.element, this.container);
+            this.panel.element.style.minWidth = DomHandler.getWidth(container) + 'px';
+            DomHandler.absolutePosition(this.panel.element, container);
         }
         else {
-            DomHandler.relativePosition(this.panel.element, this.container);
+            DomHandler.relativePosition(this.panel.element, container);
         }
     }
 
     onCloseClick(event) {
-        this.setState({panelClick : false});
         this.hide();
         event.preventDefault();
         event.stopPropagation();
@@ -303,28 +294,29 @@ export class MultiSelect extends Component {
     }
 
     onFocus(event) {
-        DomHandler.addClass(this.container, 'p-focus');
-        this.focus = true;
+        event.persist();
 
-        if (this.props.onFocus) {
-            this.props.onFocus(event);
-        }
+        this.setState({ focused: true }, () => {
+            if (this.props.onFocus) {
+                this.props.onFocus(event);
+            }
+        });
     }
 
     onBlur(event) {
-        DomHandler.removeClass(this.container, 'p-focus');
-        this.focus = false;
+        event.persist();
 
-        if (this.props.onBlur) {
-            this.props.onBlur(event);
-        }
+        this.setState({ focused: false }, () => {
+            if (this.props.onBlur) {
+                this.props.onBlur(event);
+            }
+        });
     }
 
     bindDocumentClickListener() {
         if(!this.documentClickListener) {
             this.documentClickListener = (event) => {
-                if(this.isOutsideClicked(event)) {
-                    this.setState({panelClick : false});
+                if (this.state.overlayVisible && this.isOutsideClicked(event)) {
                     this.hide();
                 }
             };
@@ -443,8 +435,10 @@ export class MultiSelect extends Component {
             if (!this.isEmpty()) {
                 if (this.props.value.length <= this.props.maxSelectedLabels) {
                     return this.props.value.map((val, index) => {
+                        const item = ObjectUtils.getJSXElement(this.props.selectedItemTemplate, val);
+
                         return (
-                            <React.Fragment key={index}>{this.props.selectedItemTemplate(val)}</React.Fragment>
+                            <React.Fragment key={index}>{item}</React.Fragment>
                         );
                     });
                 }
@@ -453,7 +447,7 @@ export class MultiSelect extends Component {
                 }
             }
             else {
-                return this.props.selectedItemTemplate();
+                return ObjectUtils.getJSXElement(this.props.selectedItemTemplate);
             }
         }
         else {
@@ -479,14 +473,15 @@ export class MultiSelect extends Component {
     renderLabel() {
         const empty = this.isEmpty();
         const content = this.getLabelContent();
-        const className = classNames('p-multiselect-label', {
+        const labelClassName = classNames('p-multiselect-label', {
             'p-placeholder': empty && this.props.placeholder,
-            'p-multiselect-label-empty': empty && !this.props.placeholder && !this.props.selectedItemTemplate}
-        );
+            'p-multiselect-label-empty': empty && !this.props.placeholder && !this.props.selectedItemTemplate,
+            'p-multiselect-items-label': !empty && this.props.value.length > this.props.maxSelectedLabels
+        });
 
         return (
-            <div className="p-multiselect-label-container">
-                <label className={className}>{content||this.props.placeholder||'empty'}</label>
+            <div ref={(el) => this.label = el} className="p-multiselect-label-container">
+                <div className={labelClassName}>{content||this.props.placeholder||'empty'}</div>
             </div>
         );
     }
@@ -504,10 +499,12 @@ export class MultiSelect extends Component {
     }
 
     render() {
-        let className = classNames('p-multiselect p-component', this.props.className, {
+        let className = classNames('p-multiselect p-component', {
             'p-disabled': this.props.disabled,
+            'p-focus': this.state.focused,
             'p-inputwrapper-filled': this.props.value && this.props.value.length > 0,
-            'p-inputwrapper-focus': this.focus || (this.props.filter && this.state.panelClick)});
+            'p-inputwrapper-focus': this.state.focused
+        }, this.props.className);
         let label = this.renderLabel();
         let hiddenSelect = this.renderHiddenSelect();
         let items = this.props.options;
@@ -540,10 +537,13 @@ export class MultiSelect extends Component {
                 <div className="p-multiselect-trigger">
                     <span className="p-multiselect-trigger-icon pi pi-chevron-down p-c"></span>
                 </div>
-                <MultiSelectPanel ref={el => this.panel = el} onClick={this.onPanelClick} header={header} appendTo={this.props.appendTo}
-                    scrollHeight={this.props.scrollHeight}>
-                    {items}
-                </MultiSelectPanel>
+                <CSSTransition classNames="p-connected-overlay" in={this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }}
+                    unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit}>
+                    <MultiSelectPanel ref={el => this.panel = el} header={header} appendTo={this.props.appendTo}
+                        scrollHeight={this.props.scrollHeight}>
+                        {items}
+                    </MultiSelectPanel>
+                </CSSTransition>
             </div>
         );
     }

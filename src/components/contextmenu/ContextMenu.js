@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ReactDOM from 'react-dom';
 import DomHandler from '../utils/DomHandler';
+import { CSSTransition } from 'react-transition-group';
+import { Ripple } from '../ripple/Ripple';
 
 class ContextMenuSub extends Component {
 
@@ -27,16 +29,8 @@ class ContextMenuSub extends Component {
         this.state = {
             activeItem : null
         };
-    }
 
-    static getDerivedStateFromProps(nextProps, prevState) {
-        if (nextProps.resetMenu === true) {
-            return {
-                activeItem: null
-            }
-        }
-
-        return null;
+        this.onEnter = this.onEnter.bind(this);
     }
 
     onItemMouseEnter(event, item) {
@@ -72,12 +66,6 @@ class ContextMenuSub extends Component {
         }
     }
 
-    componentDidUpdate() {
-        if (this.element.offsetParent) {
-            this.position();
-        }
-    }
-
     position() {
         const parentItem = this.element.parentElement;
         const containerOffset = DomHandler.getOffset(this.element.parentElement)
@@ -95,6 +83,30 @@ class ContextMenuSub extends Component {
         }
     }
 
+    onEnter() {
+        this.position();
+    }
+
+    isActive() {
+        return this.props.root || !this.props.resetMenu;
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.resetMenu === true) {
+            return {
+                activeItem: null
+            }
+        }
+
+        return null;
+    }
+
+    componentDidUpdate() {
+        if (this.isActive()) {
+            this.position();
+        }
+    }
+
     renderSeparator(index) {
         return (
             <li key={'separator_' + index} className="p-menu-separator" role="separator"></li>
@@ -108,20 +120,18 @@ class ContextMenuSub extends Component {
                 <span className={className}></span>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderSubmenuIcon(item) {
         if (item.items) {
             return (
-                <span className="p-submenu-icon pi pi-fw pi-caret-right"></span>
+                <span className="p-submenu-icon pi pi-angle-right"></span>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderSubmenu(item) {
@@ -130,24 +140,25 @@ class ContextMenuSub extends Component {
                 <ContextMenuSub model={item.items} resetMenu={item !== this.state.activeItem} onLeafClick={this.props.onLeafClick} />
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderMenuitem(item, index) {
-        const className = classNames('p-menuitem', {'p-menuitem-active': this.state.activeItem === item, 'p-disabled': item.disabled}, item.className);
+        const className = classNames('p-menuitem', {'p-menuitem-active': this.state.activeItem === item}, item.className);
+        const linkClassName = classNames('p-menuitem-link', {'p-disabled': item.disabled});
         const icon = this.renderIcon(item);
         const submenuIcon = this.renderSubmenuIcon(item);
         const submenu = this.renderSubmenu(item);
 
         return (
             <li key={item.label + '_' + index} role="none" className={className} style={item.style} onMouseEnter={(event) => this.onItemMouseEnter(event, item)}>
-                <a href={item.url || '#'} className="p-menuitem-link" target={item.target} onClick={(event) => this.onItemClick(event, item, index)} role="menuitem"
+                <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => this.onItemClick(event, item, index)} role="menuitem"
                    aria-haspopup={item.items != null}>
                     {icon}
                     <span className="p-menuitem-text">{item.label}</span>
                     {submenuIcon}
+                    <Ripple />
                 </a>
                 {submenu}
             </li>
@@ -169,19 +180,22 @@ class ContextMenuSub extends Component {
                 })
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     render() {
         const className = classNames({'p-submenu-list': !this.props.root});
         const submenu = this.renderMenu();
+        const isActive = this.isActive();
 
         return (
-            <ul ref={el => this.element = el} className={className}>
-                {submenu}
-            </ul>
+            <CSSTransition classNames="p-contextmenusub" in={isActive} timeout={{ enter: 0, exit: 0 }}
+                unmountOnExit onEnter={this.onEnter}>
+                <ul ref={el => this.element = el} className={className}>
+                    {submenu}
+                </ul>
+            </CSSTransition>
         );
     }
  }
@@ -215,19 +229,19 @@ export class ContextMenu extends Component {
     };
 
     constructor(props) {
-        super();
+        super(props);
+
         this.state = {
+            visible: false,
             resetMenu: false
-        }
+        };
+
         this.onMenuClick = this.onMenuClick.bind(this);
         this.onLeafClick = this.onLeafClick.bind(this);
         this.onMenuMouseEnter = this.onMenuMouseEnter.bind(this);
-    }
-
-    componentDidMount() {
-        if (this.props.global) {
-            this.bindDocumentContextMenuListener();
-        }
+        this.onEnter = this.onEnter.bind(this);
+        this.onEntered = this.onEntered.bind(this);
+        this.onExit = this.onExit.bind(this);
     }
 
     onMenuClick() {
@@ -243,35 +257,50 @@ export class ContextMenu extends Component {
     }
 
     show(event) {
-        this.container.style.display = 'block';
-        this.position(event);
-        if (this.props.autoZIndex) {
-            this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
-        }
-        DomHandler.fadeIn(this.container, 250);
-
-        this.bindDocumentClickListener();
-        this.bindDocumentResizeListener();
-
-        if (this.props.onShow) {
-            this.props.onShow(event);
+        if (!(event instanceof Event)) {
+            event.persist();
         }
 
         event.stopPropagation();
         event.preventDefault();
+
+        this.currentEvent = event;
+
+        this.setState({ visible: true }, () => {
+            if (this.props.onShow) {
+                this.props.onShow(this.currentEvent);
+            }
+        });
     }
 
     hide(event) {
-        if (this.container) {
-            this.container.style.display = 'none';
+        if (!(event instanceof Event)) {
+            event.persist();
         }
 
-        if (this.props.onHide) {
-            this.props.onHide(event);
+        this.currentEvent = event;
+        this.setState({ visible: false }, () => {
+            if (this.props.onHide) {
+                this.props.onHide(this.currentEvent);
+            }
+        });
+    }
+
+    onEnter() {
+        if (this.props.autoZIndex) {
+            this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
         }
 
-        this.unbindDocumentResizeListener();
-        this.unbindDocumentClickListener();
+        this.position(this.currentEvent);
+    }
+
+    onEntered() {
+        this.bindDocumentListeners();
+    }
+
+    onExit() {
+        this.currentEvent = null;
+        this.unbindDocumentListeners();
     }
 
     position(event) {
@@ -321,6 +350,16 @@ export class ContextMenu extends Component {
         return this.container && !(this.container.isSameNode(event.target) || this.container.contains(event.target));
     }
 
+    bindDocumentListeners() {
+        this.bindDocumentResizeListener();
+        this.bindDocumentClickListener();
+    }
+
+    unbindDocumentListeners() {
+        this.unbindDocumentResizeListener();
+        this.unbindDocumentClickListener();
+    }
+
     bindDocumentClickListener() {
         if (!this.documentClickListener) {
             this.documentClickListener = (event) => {
@@ -350,7 +389,7 @@ export class ContextMenu extends Component {
     bindDocumentResizeListener() {
         if (!this.documentResizeListener) {
             this.documentResizeListener = (event) => {
-                if (this.container.offsetParent) {
+                if (this.state.visible) {
                     this.hide(event);
                 }
             };
@@ -380,19 +419,27 @@ export class ContextMenu extends Component {
         }
     }
 
+    componentDidMount() {
+        if (this.props.global) {
+            this.bindDocumentContextMenuListener();
+        }
+    }
+
     componentWillUnmount() {
-        this.unbindDocumentClickListener();
-        this.unbindDocumentResizeListener();
+        this.unbindDocumentListeners();
         this.unbindDocumentContextMenuListener();
     }
 
     renderContextMenu() {
         const className = classNames('p-contextmenu p-component', this.props.className);
 
-        return(
-            <div id={this.props.id} className={className} style={this.props.style} ref={el => this.container = el} onClick={this.onMenuClick} onMouseEnter={this.onMenuMouseEnter}>
-                <ContextMenuSub model={this.props.model} root={true} resetMenu={this.state.resetMenu} onLeafClick={this.onLeafClick} />
-            </div>
+        return (
+            <CSSTransition classNames="p-contextmenu" in={this.state.visible} timeout={{ enter: 250, exit: 0 }}
+                unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit}>
+                <div id={this.props.id} className={className} style={this.props.style} ref={el => this.container = el} onClick={this.onMenuClick} onMouseEnter={this.onMenuMouseEnter}>
+                    <ContextMenuSub model={this.props.model} root resetMenu={this.state.resetMenu} onLeafClick={this.onLeafClick} />
+                </div>
+            </CSSTransition>
         );
     }
 

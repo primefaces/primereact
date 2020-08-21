@@ -154,7 +154,7 @@ export class Paginator extends Component {
             return null;
         }
         else {
-            let className = classNames('p-paginator p-component p-unselectable-text', this.props.className);
+            let className = classNames('p-paginator p-component', this.props.className);
 
             let paginatorElements = this.props.template.split(' ').map((value) => {
                 let key = value.trim();
@@ -186,7 +186,7 @@ export class Paginator extends Component {
                     break;
 
                     case 'CurrentPageReport':
-                        element = <CurrentPageReport template={this.props.currentPageReportTemplate} key={key} 
+                        element = <CurrentPageReport template={this.props.currentPageReportTemplate} key={key}
                                 page={this.getPage()} pageCount={this.getPageCount()} first={this.props.first}
                                 rows={this.props.rows} totalRecords={this.props.totalRecords} />;
                     break;

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Chips } from '../../components/chips/Chips';
-import AppContentContext from '../../AppContentContext';
 import { ChipsDoc } from './ChipsDoc';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class ChipsDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             values1: [],
             values2: [],
@@ -27,25 +27,23 @@ export class ChipsDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="chips" showInputStyle>
                         <h1>Chips</h1>
                         <p>Chips is used to enter multiple values on an input field.</p>
-
-                        <AppContentContext.Consumer>
-                            {context => <button onClick={() => context.onChangelogBtnClick("chips")} className="layout-changelog-button">{context.changelogText}</button>}
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation p-fluid">
-                    <h3>Basic</h3>
-                    <Chips value={this.state.values1} onChange={(e) => this.setState({ values1: e.value })}></Chips>
+                    <div className="card">
+                        <h5>Basic</h5>
+                        <Chips value={this.state.values1} onChange={(e) => this.setState({ values1: e.value })} />
 
-                    <h3>Comma Separator</h3>
-                    <Chips value={this.state.values2} onChange={(e) => this.setState({ values2: e.value })} separator=','></Chips>
+                        <h5>Comma Separator</h5>
+                        <Chips value={this.state.values2} onChange={(e) => this.setState({ values2: e.value })} separator="," />
 
-                    <h3>Template</h3>
-                    <Chips value={this.state.values3} onChange={(e) => this.setState({ values3: e.value })} max={5} itemTemplate={this.customChip}></Chips>
+                        <h5>Template</h5>
+                        <Chips value={this.state.values3} onChange={(e) => this.setState({ values3: e.value })} max={5} itemTemplate={this.customChip}></Chips>
+                    </div>
                 </div>
 
                 <ChipsDoc />

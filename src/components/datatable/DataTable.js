@@ -57,7 +57,6 @@ export class DataTable extends Component {
         rowExpansionTemplate: null,
         expandedRows: null,
         onRowToggle: null,
-        responsive: false,
         resizableColumns: false,
         columnResizeMode: 'fit',
         reorderableColumns: false,
@@ -156,7 +155,6 @@ export class DataTable extends Component {
         rowExpansionTemplate: PropTypes.func,
         expandedRows: PropTypes.oneOfType([PropTypes.array,PropTypes.object]),
         onRowToggle: PropTypes.func,
-        responsive: PropTypes.bool,
         resizableColumns: PropTypes.bool,
         columnResizeMode: PropTypes.string,
         reorderableColumns: PropTypes.bool,
@@ -1301,7 +1299,7 @@ export class DataTable extends Component {
                         onSelectionChange={this.props.onSelectionChange} onRowClick={this.props.onRowClick} onRowDoubleClick={this.props.onRowDoubleClick} onRowSelect={this.props.onRowSelect} onRowUnselect={this.props.onRowUnselect}
                         contextMenuSelection={this.props.contextMenuSelection} onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu}
                         expandedRows={this.props.expandedRows} onRowToggle={this.props.onRowToggle} rowExpansionTemplate={this.props.rowExpansionTemplate}
-                        onRowExpand={this.props.onRowExpand} onRowCollapse={this.props.onRowCollapse} responsive={this.props.responsive} emptyMessage={this.props.emptyMessage}
+                        onRowExpand={this.props.onRowExpand} onRowCollapse={this.props.onRowCollapse} emptyMessage={this.props.emptyMessage}
                         virtualScroll={this.props.virtualScroll} virtualRowHeight={this.props.virtualRowHeight} loading={this.props.loading}
                         groupField={this.props.groupField} rowGroupMode={this.props.rowGroupMode} rowGroupHeaderTemplate={this.props.rowGroupHeaderTemplate} rowGroupFooterTemplate={this.props.rowGroupFooterTemplate}
                         sortField={this.getSortField()} rowClassName={this.props.rowClassName} onRowReorder={this.props.onRowReorder}
@@ -1419,11 +1417,8 @@ export class DataTable extends Component {
         let iconClassName = classNames('p-datatable-loading-icon pi-spin', this.props.loadingIcon);
 
         return (
-            <div className="p-datatable-loading">
-                <div className="p-datatable-loading-overlay p-component-overlay"></div>
-                <div className="p-datatable-loading-content">
-                    <i className={iconClassName}></i>
-                </div>
+            <div className="p-datatable-loading-overlay p-component-overlay">
+                <i className={iconClassName}></i>
             </div>
         );
     }
@@ -1444,7 +1439,7 @@ export class DataTable extends Component {
         let value = this.processData();
         let columns = this.getColumns();
         let totalRecords = this.getTotalRecords(value);
-        let className = classNames('p-datatable p-component', {'p-datatable-responsive': this.props.responsive,
+        let className = classNames('p-datatable p-component', {
                         'p-datatable-resizable': this.props.resizableColumns, 'p-datatable-resizable-fit': this.props.resizableColumns && this.props.columnResizeMode === 'fit',
                         'p-datatable-scrollable': this.props.scrollable, 'p-datatable-virtual-scrollable': this.props.virtualScroll,
                         'p-datatable-auto-layout': this.props.autoLayout, 'p-datatable-hoverable-rows': this.props.rowHover || this.props.selectionMode}, this.props.className);

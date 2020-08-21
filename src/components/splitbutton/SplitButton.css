@@ -1,36 +1,27 @@
 .p-splitbutton {
+    display: inline-flex;
     position: relative;
-    display: inline-block;
-    zoom: 1;
 }
 
-.p-splitbutton .p-button.p-splitbutton-menubutton {
-    width: 2em;
-    vertical-align: top;
-}
-
-.p-splitbutton.p-disabled button {
-    cursor: default;
-}
-
-.p-fluid .p-splitbutton {
-    width: 100%;
-    box-sizing: border-box;
-    -webkit-box-sizing:border-box;
-    -moz-box-sizing: border-box;
-}
-
-.p-fluid .p-splitbutton .p-button:first-child {
-    width: calc(100% - 2em);
-}
-
-.p-fluid .p-splitbutton .p-button.p-splitbutton-menubutton {
-    width: 2em;
-    box-sizing: border-box;
-    -webkit-box-sizing:border-box;
-    -moz-box-sizing: border-box;
-}
-
-.p-splitbutton.p-button-secondary .p-button:first-child {
+.p-splitbutton .p-splitbutton-defaultbutton {
+    flex: 1 1 auto;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
     border-right: 0 none;
+}
+
+.p-splitbutton-menubutton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.p-splitbutton .p-menu {
+    min-width: 100%;
+}
+
+.p-fluid .p-splitbutton  {
+    display: flex;
 }

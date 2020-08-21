@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Captcha } from '../../components/captcha/Captcha';
-import { Growl } from '../../components/growl/Growl';
-import AppContentContext from '../../AppContentContext';
+import { Toast } from '../../components/toast/Toast';
 import { CaptchaDoc } from './CaptchaDoc';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class CaptchaDemo extends Component {
 
@@ -12,27 +12,25 @@ export class CaptchaDemo extends Component {
     }
 
     showResponse() {
-        this.growl.show({ severity: 'info', summary: 'Success', detail: 'User Responded' });
+        this.toast.show({ severity: 'info', summary: 'Success', detail: 'User Responded' });
     }
 
     render() {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="captcha">
                         <h1>Captcha</h1>
                         <p>Captcha is a form validation component based on Recaptcha.</p>
-
-                        <AppContentContext.Consumer>
-                            {context => <button onClick={() => context.onChangelogBtnClick("captcha")} className="layout-changelog-button">{context.changelogText}</button>}
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
-                <div className="content-section implementation button-demo">
-                    <Growl ref={(el) => this.growl = el}></Growl>
+                <div className="content-section implementation">
+                    <Toast ref={(el) => this.toast = el}></Toast>
 
-                    <Captcha siteKey="6Lf2XQkTAAAAANcvOwYqPxWL4iZDksFqHpS39GDA" onResponse={this.showResponse} />
+                    <div className="card">
+                        <Captcha siteKey="6Lf2XQkTAAAAANcvOwYqPxWL4iZDksFqHpS39GDA" onResponse={this.showResponse} />
+                    </div>
                 </div>
 
                 <CaptchaDoc />

@@ -16,25 +16,24 @@ export class BreadCrumbDoc extends Component {
 import React, { Component } from 'react';
 import { BreadCrumb } from 'primereact/breadcrumb';
 
-export class BreadcrumbDemo extends Component {
+export class BreadCrumbDemo extends Component {
 
     render() {
         const items = [
-            { label: 'Categories' },
-            { label: 'Sports' },
-            { label: 'Football' },
-            { label: 'Countries' },
-            { label: 'Spain' },
-            { label: 'F.C. Barcelona' },
-            { label: 'Squad' },
-            { label: 'Lionel Messi', url: 'https://en.wikipedia.org/wiki/Lionel_Messi' }
+            {label: 'Computer'},
+            {label: 'Notebook'},
+            {label: 'Accessories'},
+            {label: 'Backpacks'},
+            {label: 'Item'}
         ];
 
-        const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact' }
+        const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact/showcase' }
 
         return (
             <div>
-                <BreadCrumb model={items} home={home} />
+                <div className="card">
+                    <BreadCrumb model={items} home={home} />
+                </div>
             </div>
         );
     }
@@ -111,21 +110,21 @@ const BreadcrumbDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
-                            {`
+                        <h5>Import</h5>
+<CodeHighlight lang="js">
+{`
 import { Breadcrumb } from 'primereact/breadcrumb';
+`}
+</CodeHighlight>
 
-`}</CodeHighlight>
-
-                        <h3>MenuModel API</h3>
+                        <h5>MenuModel API</h5>
                         <p>BreadCrumb uses the common menumodel api to define its items, visit <Link to="/menumodel"> MenuModel </Link> for details.</p>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>BreadCrumb requires a collection of menuitems as its model.</p>
 
-                        <CodeHighlight className="language-javascript">
-                            {`
+<CodeHighlight lang="js">
+{`
 const items = [
     { label: 'Categories' },
     { label: 'Sports' },
@@ -138,18 +137,16 @@ const items = [
 ];
 
 const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact' }
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <CodeHighlight className="language-jsx">
-                            {`
+<CodeHighlight>
+{`
 <BreadCrumb model={items} home="home"/>
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -195,7 +192,7 @@ const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact' 
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -226,19 +223,13 @@ const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact' 
                             </table>
                         </div>
 
-                        <h3>Dependencies</h3>
+                        <h5>Dependencies</h5>
                         <p>None.</p>
                     </TabPanel>
 
-                    {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="BreadcrumbDemo" sources={[key, value]} />
-                                </TabPanel>
-                            );
-                        })
-                    }
+                    <TabPanel header="Source">
+                        <LiveEditor name="BreadcrumbDemo" sources={this.sources} />
+                    </TabPanel>
                 </TabView>
             </div>
         )

@@ -24,27 +24,20 @@ export class Card extends Component {
         className: PropTypes.string
     };
 
-    renderHeader(){
-        return <div className="p-card-header">
-                    {this.props.header}
-                </div>;
-    }
-    
-    renderBody(){
-        let title, subTitle, footer, children;
+    renderHeader() {
+        if (this.props.header) {
+            return <div className="p-card-header">{this.props.header}</div>;
+        }
 
-        if(this.props.title) {
-            title = <div className="p-card-title">{this.props.title}</div>;
-        }
-        if(this.props.subTitle) {
-            subTitle = <div className="p-card-subtitle">{this.props.subTitle}</div>;
-        }
-        if(this.props.footer) {
-            footer = <div className="p-card-footer"> {this.props.footer}</div>;
-        }
-        if(this.props.children) {
-            children = <div className="p-card-content"> {this.props.children} </div>;
-        }
+        return null;
+    }
+
+    renderBody() {
+        const title = this.props.title && <div className="p-card-title">{this.props.title}</div>
+        const subTitle = this.props.subTitle && <div className="p-card-subtitle">{this.props.subTitle}</div>
+        const children = this.props.children && <div className="p-card-content">{this.props.children}</div>
+        const footer = this.props.footer && <div className="p-card-footer"> {this.props.footer}</div>;
+
         return (
             <div className="p-card-body">
                 {title}
@@ -55,17 +48,12 @@ export class Card extends Component {
         );
     }
 
-    render(){
-
-        let header, body;
+    render() {
+        const header = this.renderHeader();
+        const body = this.renderBody();
         let className = classNames('p-card p-component',this.props.className);
 
-        if(this.props.header) {
-            header = this.renderHeader();
-        }
-        body = this.renderBody();
-
-        return(
+        return (
             <div className={className} style={this.props.style}>
                 {header}
                 {body}

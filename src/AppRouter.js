@@ -15,7 +15,7 @@ import { FieldsetDemo } from './showcase/fieldset/FieldsetDemo';
 import { FileUploadDemo } from './showcase/fileupload/FileUploadDemo';
 import { FlexGridDemo } from './showcase/flexgrid/FlexGridDemo';
 import { GMapDemo } from './showcase/gmap/GMapDemo';
-import { GrowlDemo } from './showcase/growl/GrowlDemo';
+import { ToastDemo } from './showcase/toast/ToastDemo';
 import { InputNumberDemo } from './showcase/inputnumber/InputNumberDemo';
 import { InputTextDemo } from './showcase/inputtext/InputTextDemo';
 import { InputTextareaDemo } from './showcase/inputtextarea/InputTextareaDemo';
@@ -33,7 +33,6 @@ import { TriStateCheckboxDemo } from './showcase/tristatecheckbox/TriStateCheckb
 import { SelectButtonDemo } from './showcase/selectbutton/SelectButtonDemo';
 import { InputSwitchDemo } from './showcase/inputswitch/InputSwitchDemo';
 import { SliderDemo } from './showcase/slider/SliderDemo';
-import { SpinnerDemo } from './showcase/spinner/SpinnerDemo';
 import { InputMaskDemo } from './showcase/inputmask/InputMaskDemo';
 import { CalendarDemo } from './showcase/calendar/CalendarDemo';
 import { ChartDemo } from './showcase/chart/ChartDemo';
@@ -105,13 +104,12 @@ import { SupportPage } from './showcase/support/SupportPage';
 import { RatingDemo } from './showcase/rating/RatingDemo';
 import { ToolbarDemo } from './showcase/toolbar/ToolbarDemo';
 import { InplaceDemo } from './showcase/inplace/InplaceDemo';
-import { LightboxDemo } from './showcase/lightbox/LightboxDemo';
 import { DataScrollerDemo } from './showcase/datascroller/DataScrollerDemo';
 import { DataScrollerInlineDemo } from './showcase/datascroller/DataScrollerInlineDemo';
 import { DataScrollerLoaderDemo } from './showcase/datascroller/DataScrollerLoaderDemo';
 import { MenuDemo } from './showcase/menu/MenuDemo';
 import { TabMenuDemo } from './showcase/tabmenu/TabMenuDemo';
-import { BreadcrumbDemo } from './showcase/breadcrumb/BreadcrumbDemo';
+import { BreadCrumbDemo } from './showcase/breadcrumb/BreadCrumbDemo';
 import { TieredMenuDemo } from './showcase/tieredmenu/TieredMenuDemo';
 import { MenubarDemo } from './showcase/menubar/MenubarDemo';
 import { ContextMenuDemo } from './showcase/contextmenu/ContextMenuDemo';
@@ -132,16 +130,28 @@ import { KeyFilterDemo } from "./showcase/keyfilter/KeyFilterDemo";
 import { DataViewDemo } from "./showcase/dataview/DataViewDemo";
 import { DataViewLazyDemo } from "./showcase/dataview/DataViewLazyDemo";
 import { GalleriaDemo } from './showcase/galleria/GalleriaDemo';
-import { GalleriaBasicDemo } from './showcase/galleria/GalleriaBasicDemo';
+import { GalleriaAdvancedDemo } from './showcase/galleria/GalleriaAdvancedDemo';
+import { GalleriaProgrammaticDemo } from './showcase/galleria/GalleriaProgrammaticDemo';
+import { GalleriaNavigatorDemo } from './showcase/galleria/GalleriaNavigatorDemo';
 import { GalleriaCaptionDemo } from './showcase/galleria/GalleriaCaptionDemo';
 import { GalleriaIndicatorDemo } from './showcase/galleria/GalleriaIndicatorDemo';
-import { GalleriaCircularDemo } from './showcase/galleria/GalleriaCircularDemo';
+import { GalleriaAutoPlayDemo } from './showcase/galleria/GalleriaAutoPlayDemo';
 import { GalleriaResponsiveDemo } from './showcase/galleria/GalleriaResponsiveDemo';
 import { GalleriaThumbnailDemo } from './showcase/galleria/GalleriaThumbnailDemo';
-import { GalleriaPreviewDemo } from './showcase/galleria/GalleriaPreviewDemo';
 import { GalleriaFullScreenDemo } from './showcase/galleria/GalleriaFullScreenDemo';
 import { FloatLabelDemo } from './showcase/floatlabel/FloatLabelDemo';
 import { FormLayoutDemo } from './showcase/formlayout/FormLayoutDemo';
+import { DisplayDemo } from './showcase/display/DisplayDemo';
+import { ElevationDemo } from './showcase/elevation/ElevationDemo';
+import { FlexBoxDemo } from './showcase/flexbox/FlexBoxDemo';
+import { SpacingDemo } from './showcase/spacing/SpacingDemo';
+import { TextDemo } from './showcase/text/TextDemo';
+import { DataTableSizeDemo } from './showcase/datatable/DataTableSizeDemo';
+import { DataTableGridLinesDemo } from './showcase/datatable/DataTableGridLinesDemo';
+import { DataTableStripedDemo } from './showcase/datatable/DataTableStripedDemo';
+import { AccessibilityDemo } from './showcase/accessibility/AccessibilityDemo';
+import { BadgeDemo } from './showcase/badge/BadgeDemo';
+import { RippleDemo } from './showcase/ripple/RippleDemo';
 
 class AppRouter extends Component {
 
@@ -167,7 +177,7 @@ class AppRouter extends Component {
 
     render() {
         return (
-            <React.Fragment>
+            <>
                 <Route exact path="/" component={HomeComponent} />
                 <Route path="/icons" component={IconsPage} />
                 <Route path="/support" component={SupportPage} />
@@ -178,7 +188,7 @@ class AppRouter extends Component {
                 <Route path="/chips" component={ChipsDemo} />
                 <Route path="/dialog" component={DialogDemo} />
                 <Route path="/dropdown" component={DropdownDemo} />
-                <Route path="/growl" component={GrowlDemo} />
+                <Route path="/toast" component={ToastDemo} />
                 <Route path="/flexgrid" component={FlexGridDemo} />
                 <Route path="/fieldset" component={FieldsetDemo} />
                 <Route path="/fileupload" component={FileUploadDemo} />
@@ -199,7 +209,6 @@ class AppRouter extends Component {
                 <Route path="/inputswitch" component={InputSwitchDemo} />
                 <Route path="/inputmask" component={InputMaskDemo} />
                 <Route path="/slider" component={SliderDemo} />
-                <Route path="/spinner" component={SpinnerDemo} />
                 <Route path="/calendar" component={CalendarDemo} />
                 <Route path="/carousel" component={CarouselDemo} />
                 <Route path="/chartdemo" component={ChartDemo} />
@@ -212,14 +221,15 @@ class AppRouter extends Component {
                 <Route path="/radarchart" component={RadarChartDemo} />
                 <Route path="/paginator" component={PaginatorDemo} />
                 <Route exact path="/galleria" component={GalleriaDemo} />
-                <Route path="/galleria/basic" component={GalleriaBasicDemo} />
+                <Route path="/galleria/programmatic" component={GalleriaProgrammaticDemo} />
+                <Route path="/galleria/navigator" component={GalleriaNavigatorDemo} />
                 <Route path="/galleria/caption" component={GalleriaCaptionDemo} />
                 <Route path="/galleria/indicator" component={GalleriaIndicatorDemo} />
-                <Route path="/galleria/circular" component={GalleriaCircularDemo} />
+                <Route path="/galleria/autoplay" component={GalleriaAutoPlayDemo} />
                 <Route path="/galleria/responsive" component={GalleriaResponsiveDemo} />
                 <Route path="/galleria/thumbnail" component={GalleriaThumbnailDemo} />
-                <Route path="/galleria/preview" component={GalleriaPreviewDemo} />
                 <Route path="/galleria/fullscreen" component={GalleriaFullScreenDemo} />
+                <Route path="/galleria/advanced" component={GalleriaAdvancedDemo} />
                 <Route exact path="/datatable" component={DataTableDemo} />
                 <Route path="/datatable/basic" component={DataTableBasicDemo} />
                 <Route path="/datatable/dynamiccolumns" component={DataTableDynamicDemo} />
@@ -243,6 +253,9 @@ class AppRouter extends Component {
                 <Route path="/datatable/crud" component={DataTableCrudDemo} />
                 <Route path="/datatable/style" component={DataTableStyleDemo} />
                 <Route path="/datatable/state" component={DataTableStateDemo} />
+                <Route path="/datatable/size" component={DataTableSizeDemo} />
+                <Route path="/datatable/gridlines" component={DataTableGridLinesDemo} />
+                <Route path="/datatable/striped" component={DataTableStripedDemo} />
                 <Route path="/orderlist" component={OrderListDemo} />
                 <Route path="/picklist" component={PickListDemo} />
                 <Route path="/fullcalendar" component={FullCalendarDemo} />
@@ -274,7 +287,6 @@ class AppRouter extends Component {
                 <Route path="/colorpicker" component={ColorPickerDemo} />
                 <Route path="/password" component={PasswordDemo} />
                 <Route path="/toolbar" component={ToolbarDemo} />
-                <Route path="/lightbox" component={LightboxDemo} />
                 <Route path="/rating" component={RatingDemo} />
                 <Route exact path="/datascroller" component={DataScrollerDemo} />
                 <Route path="/datascroller/inline" component={DataScrollerInlineDemo} />
@@ -284,7 +296,7 @@ class AppRouter extends Component {
                 <Route path="/menumodel" component={MenuModelDemo} />
                 <Route path="/menu" component={MenuDemo} />
                 <Route path="/tabmenu" component={TabMenuDemo} />
-                <Route path="/breadcrumb" component={BreadcrumbDemo} />
+                <Route path="/breadcrumb" component={BreadCrumbDemo} />
                 <Route path="/tieredmenu" component={TieredMenuDemo} />
                 <Route path="/menubar" component={MenubarDemo} />
                 <Route path="/contextmenu" component={ContextMenuDemo} />
@@ -309,7 +321,15 @@ class AppRouter extends Component {
                 <Route path="/deferredcontent" component={DeferredContentDemo} />
                 <Route path="/floatlabel" component={FloatLabelDemo} />
                 <Route path="/formlayout" component={FormLayoutDemo} />
-            </React.Fragment>
+                <Route path="/display" component={DisplayDemo} />
+                <Route path="/elevation" component={ElevationDemo} />
+                <Route path="/flexbox" component={FlexBoxDemo} />
+                <Route path="/spacing" component={SpacingDemo} />
+                <Route path="/text" component={TextDemo} />
+                <Route path="/accessibility" component={AccessibilityDemo} />
+                <Route path="/badge" component={BadgeDemo} />
+                <Route path="/ripple" component={RippleDemo} />
+            </>
         );
     }
 }

@@ -7,6 +7,7 @@ interface ToggleButtonProps {
     offIcon?: string;
     onLabel?: string;
     offLabel?: string;
+    iconPos?: string;
     style?: object;
     className?: string;
     checked?: boolean;

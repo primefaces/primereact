@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import { CSSTransition } from 'react-transition-group';
+import { Ripple } from '../ripple/Ripple';
 
 export class Fieldset extends Component {
 
@@ -89,12 +90,11 @@ export class Fieldset extends Component {
     }
 
     renderContent(collapsed) {
-        const className = classNames('p-toggleable-content', {'p-toggleable-content-collapsed': collapsed});
         const id = this.id + '_content';
 
         return (
-            <CSSTransition classNames="p-toggleable-content" timeout={{enter: 400, exit: 250}} in={!this.isCollapsed()}>
-                <div id={id} className={className} aria-hidden={collapsed} role="region" aria-labelledby={this.id + '_header'}>
+            <CSSTransition classNames="p-toggleable-content" timeout={{enter: 1000, exit: 450}} in={!collapsed} unmountOnExit>
+                <div id={id} className="p-toggleable-content" aria-hidden={collapsed} role="region" aria-labelledby={this.id + '_header'}>
                     <div className="p-fieldset-content">
                         {this.props.children}
                     </div>
@@ -111,9 +111,8 @@ export class Fieldset extends Component {
                 <span className={className}></span>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderLegendContent(collapsed) {
@@ -125,14 +124,14 @@ export class Fieldset extends Component {
                 <a href={'#' + ariaControls} aria-controls={ariaControls} id={this.id + '_header'} aria-expanded={!collapsed} tabIndex={this.props.toggleable ? null  : -1}>
                     {toggleIcon}
                     <span className="p-fieldset-legend-text">{this.props.legend}</span>
+                    <Ripple />
                  </a>
             );
         }
-        else {
-            return (
-                <span className="p-fieldset-legend-text" id={this.id + '_header'}>{this.props.legend}</span>
-            );
-        }
+
+        return (
+            <span className="p-fieldset-legend-text" id={this.id + '_header'}>{this.props.legend}</span>
+        );
     }
 
     renderLegend(collapsed) {

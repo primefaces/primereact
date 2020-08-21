@@ -5,11 +5,13 @@ import classNames from 'classnames';
 export class SplitButtonItem extends Component {
 
     static defaultProps = {
-        menuitem: null
+        menuitem: null,
+        onItemClick: null
     }
 
     static propTypes = {
-        menuitem: PropTypes.any
+        menuitem: PropTypes.any,
+        onItemClick: PropTypes.func
     }
 
     constructor(props) {
@@ -21,6 +23,11 @@ export class SplitButtonItem extends Component {
         if (this.props.menuitem.command) {
             this.props.menuitem.command({ originalEvent: e, item: this.props.menuitem });
         }
+
+        if (this.props.onItemClick) {
+            this.props.onItemClick(e);
+        }
+
         e.preventDefault();
     }
 

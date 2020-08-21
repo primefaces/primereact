@@ -1,23 +1,30 @@
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import { Link } from 'react-router-dom';
+import AppContentContext from '../../AppContentContext';
 
 export class HomeComponent extends Component {
 
     render() {
         return (
             <div className="home">
-                <div className="introduction">
-                    <h1>The Most Complete UI Framework</h1>
-                    <h2>for REACT</h2>
+                <AppContentContext.Consumer>
+                {
+                    context => (
+                        <div className={classNames('introduction', {'introduction-dark': context.darkTheme})}>
+                            <div className="introduction-title">The Ultimate UI Component Library</div>
+                            <div className="introduction-subtitle">for React</div>
 
-                    <Link to="/setup" className="link-button">Get Started</Link>
-                </div>
+                            <Link to="/setup" className="action-button">Get Started</Link>
+                            <img alt="devices" className="introduction-devices" src="showcase/images/home/intro-devices.png" />
+                        </div>
+                    )
+                }
+                </AppContentContext.Consumer>
+
                 <div className="features">
-                    <h3>Why PrimeReact?</h3>
-                    <p className="features-tagline">Congratulations! <span role="img" aria-label="celebrate">🎉</span> Your quest to find the UI library for React is complete.</p>
-
-                    <p className="features-description">PrimeReact is a collection of rich UI components for React. All widgets are open source and free to use under MIT License. PrimeReact is developed by PrimeTek Informatics,
-                        a vendor with years of expertise in developing open source UI solutions. For project news and updates, please <a href="https://twitter.com/primereact" className="layout-content-link">follow us on twitter</a> and <a href="https://www.primefaces.org/category/primereact/" className="layout-content-link">visit our blog</a>.</p>
+                    <h4>Features</h4>
+                    <p>Congratulations! <span role="img" aria-label="celebrate" className="p-mx-2">🎉</span> Your quest to find the UI library for React is now complete.</p>
 
                     <div className="p-grid">
                         <div className="p-col-12 p-md-4">
@@ -104,9 +111,8 @@ export class HomeComponent extends Component {
                     </div>
                 </div>
                 <div className="whouses">
-                    <h3>Key Users</h3>
-                    <p>Open source products of <a href="http://www.primetek.com.tr">PrimeTek</a> are used all around the world by 1M+ developers in Fortune 500 companies, corporations, government and educational
-                        institutions.</p>
+                    <h4>Key Users</h4>
+                    <p>The creator of PrimeReact is PrimeTek Informatics, the distinguished component library vendor who built popular open source projects such as PrimeFaces, PrimeNG and PrimeVue over the past years.</p>
                     <div className="p-grid">
                         <div className="p-col-6 p-md-2"><img alt="airbus" src="showcase/images/home/airbus.svg"/></div>
                         <div className="p-col-6 p-md-2"><img alt="amex" src="showcase/images/home/amex.svg"/></div>
@@ -123,7 +129,51 @@ export class HomeComponent extends Component {
                     </div>
                 </div>
                 <div className="templates">
-                    <h3>Free Application Template for PrimeReact</h3>
+                    <h4>Premium Application Templates</h4>
+                    <p>Based on <a href="https://github.com/facebookincubator/create-react-app" className="layout-content-link">create-react-app</a>, develop awesome applications in no time using the premium templates
+                        of PrimeReact and impress your users.</p>
+
+                    <div className="p-grid">
+                        <div className="p-col-12 p-md-3">
+							<a href="https://www.primefaces.org/layouts/sapphire-react">
+								<img alt="Sapphire" src="showcase/images/layouts/sapphire-react.jpg" />
+							</a>
+						</div>
+                        <div className="p-col-12 p-md-3">
+                            <a href="https://www.primefaces.org/layouts/serenity-react">
+                                <img alt="Serenity" src="showcase/images/layouts/serenity-react.jpg" />
+                            </a>
+                        </div>
+                        <div className="p-col-12 p-md-3">
+                            <a href="https://www.primefaces.org/layouts/ultima-react">
+                                <img alt="Ultima" src="showcase/images/layouts/ultima-react.jpg" />
+                            </a>
+                        </div>
+                        <div className="p-col-12 p-md-3">
+							<a href="https://www.primefaces.org/layouts/babylon-react">
+								<img alt="Babylon" src="showcase/images/layouts/babylon-react.jpg" />
+							</a>
+						</div>
+                        <div className="p-col-12 p-md-3">
+                            <a href="https://www.primefaces.org/layouts/avalon-react">
+                                <img alt="Avalon" src="showcase/images/layouts/avalon-react.jpg" />
+                            </a>
+                        </div>
+                        <div className="p-col-12 p-md-3">
+                            <a href="https://www.primefaces.org/layouts/apollo-react">
+                                <img alt="Apollo" src="showcase/images/layouts/apollo-react.jpg" />
+                            </a>
+                        </div>
+                        <div className="p-col-12 p-md-3">
+							<a href="https://www.primefaces.org/layouts/roma-react">
+								<img alt="Roma" src="showcase/images/layouts/roma-react.jpg" />
+							</a>
+						</div>
+                    </div>
+                </div>
+
+                <div className="templates">
+                    <h4>Free Application Template for PrimeReact</h4>
                     <p>Sigma is a free and open source admin template based on <a href="https://github.com/facebookincubator/create-react-app" className="layout-content-link">create-react-app</a>.</p>
 
                     <div className="p-grid">
@@ -134,60 +184,16 @@ export class HomeComponent extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="templates">
-
-                    <h3>Premium Application Templates for PrimeReact</h3>
-                    <p>Based on <a href="https://github.com/facebookincubator/create-react-app" className="layout-content-link">create-react-app</a>, develop awesome applications in no time using the premium templates
-                        of PrimeReact and impress your users.</p>
-
-                    <div className="p-grid templates-grid">
-                        <div className="p-col-12 p-md-4">
-							<a href="https://www.primefaces.org/layouts/sapphire-react">
-								<img alt="Sapphire" src="showcase/images/layouts/sapphire-react.jpg" />
-							</a>
-						</div>
-                        <div className="p-col-12 p-md-4">
-                            <a href="https://www.primefaces.org/layouts/serenity-react">
-                                <img alt="Serenity" src="showcase/images/layouts/serenity-react.jpg" />
-                            </a>
-                        </div>
-                        <div className="p-col-12 p-md-4">
-                            <a href="https://www.primefaces.org/layouts/ultima-react">
-                                <img alt="Ultima" src="showcase/images/layouts/ultima-react.jpg" />
-                            </a>
-                        </div>
-                        <div className="p-col-12 p-md-4">
-							<a href="https://www.primefaces.org/layouts/babylon-react">
-								<img alt="Babylon" src="showcase/images/layouts/babylon-react.jpg" />
-							</a>
-						</div>
-                        <div className="p-col-12 p-md-4">
-                            <a href="https://www.primefaces.org/layouts/avalon-react">
-                                <img alt="Avalon" src="showcase/images/layouts/avalon-react.jpg" />
-                            </a>
-                        </div>
-                        <div className="p-col-12 p-md-4">
-                            <a href="https://www.primefaces.org/layouts/apollo-react">
-                                <img alt="Apollo" src="showcase/images/layouts/apollo-react.jpg" />
-                            </a>
-                        </div>
-                        <div className="p-col-12 p-md-4">
-							<a href="https://www.primefaces.org/layouts/roma-react">
-								<img alt="Roma" src="showcase/images/layouts/roma-react.jpg" />
-							</a>
-						</div>
-                    </div>
-                </div>
 
                 <div className="primereact-designer">
-                    <h3>PrimeReact Designer API</h3>
+                    <h4>Theme Designer</h4>
+                    <p>PrimeReact is a design-agnostic library and the theming system is based on the Theme Designer, the official tool to create themes for the components. Designer includes a SASS enabled infrastructure that has over 500 customizable variables, a live editor
+                        and a create-react-app application to test your themes with ease along with built-in theme samples that are embedded in PrimeReact Core.</p>
+
+                    <p>Visit <a href="https://www.primefaces.org/designer/primereact">Designer API HomePage</a> to learn more about the features and interact with the <a href="https://www.primefaces.org/designer-react">live editor</a>.</p>
                     <div className="p-grid">
                         <div className="p-col-12">
                             <img alt="PrimeReact Designer" src="showcase/images/primereact-designer.jpg" />
-                            <p><a href="https://www.primefaces.org/designer/primereact">Designer API</a> is a SASS based theme engine to create PrimeReact themes easily featuring over 500 variables,
-                                a demo application and a base sample theme. Whether you have your own style guide or just need a custom theme, Designer API is the right tool to design and bring them to existence.</p>
-
-                            <p>Visit <a href="https://www.primefaces.org/designer/primereact">Designer API HomePage</a> for more information, live demos and access to a trial version.</p>
                         </div>
                     </div>
                 </div>
@@ -203,7 +209,7 @@ export class HomeComponent extends Component {
                             </a>
                         </div>
                         <div className="p-col-12 p-md-6">
-                            <img alt="PRO" src="showcase/images/home/icon-pro.svg"></img>
+                            <img alt="PRO" src="showcase/images/home/pro.png" style={{maxWidth: '430px', width: '100%'}}></img>
                         </div>
                     </div>
                 </div>

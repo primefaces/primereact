@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
+import { Ripple } from '../ripple/Ripple';
 
 export class MenubarSub extends Component {
 
@@ -12,7 +13,8 @@ export class MenubarSub extends Component {
         popup: false,
         onLeafClick: null,
         onKeyDown: null,
-        parentActive: false
+        parentActive: false,
+        mobileActive: false
     };
 
     static propTypes = {
@@ -22,7 +24,8 @@ export class MenubarSub extends Component {
         popup: PropTypes.bool,
         onLeafClick: PropTypes.func,
         onKeyDown: PropTypes.func,
-        parentActive: PropTypes.bool
+        parentActive: PropTypes.bool,
+        mobileActive: PropTypes.bool
     };
 
     constructor(props) {
@@ -35,35 +38,8 @@ export class MenubarSub extends Component {
         this.onChildItemKeyDown = this.onChildItemKeyDown.bind(this);
     }
 
-    componentDidUpdate(prevProps) {
-        if (prevProps.parentActive && !this.props.parentActive) {
-            this.setState({
-                activeItem: null
-            });
-        }
-    }
-
-    componentDidMount() {
-        if (!this.documentClickListener) {
-            this.documentClickListener = (event) => {
-                if (this.element && !this.element.contains(event.target)) {
-                    this.setState({activeItem: null});
-                }
-            };
-
-            document.addEventListener('click', this.documentClickListener);
-        }
-    }
-
-    componentWillUnmount() {
-        if (this.documentClickListener) {
-            document.removeEventListener('click', this.documentClickListener);
-            this.documentClickListener = null;
-        }
-    }
-
     onItemMouseEnter(event, item) {
-        if (item.disabled) {
+        if (item.disabled || this.props.mobileActive) {
             event.preventDefault();
             return;
         }
@@ -99,22 +75,20 @@ export class MenubarSub extends Component {
             });
         }
 
-        if (this.props.root) {
-            if (item.items) {
-                if (this.state.activeItem && item === this.state.activeItem) {
-                    this.setState({
-                        activeItem: null
-                    });
-                }
-                else {
-                    this.setState({
-                        activeItem: item
-                    });
-                }
+
+        if (item.items) {
+            if (this.state.activeItem && item === this.state.activeItem) {
+                this.setState({
+                    activeItem: null
+                });
+            }
+            else {
+                this.setState({
+                    activeItem: item
+                });
             }
         }
-
-        if (!item.items) {
+        else {
             this.onLeafClick();
         }
     }
@@ -253,6 +227,33 @@ export class MenubarSub extends Component {
         }
     }
 
+    componentDidMount() {
+        if (!this.documentClickListener) {
+            this.documentClickListener = (event) => {
+                if (this.element && !this.element.contains(event.target)) {
+                    this.setState({activeItem: null});
+                }
+            };
+
+            document.addEventListener('click', this.documentClickListener);
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.parentActive && !this.props.parentActive) {
+            this.setState({
+                activeItem: null
+            });
+        }
+    }
+
+    componentWillUnmount() {
+        if (this.documentClickListener) {
+            document.removeEventListener('click', this.documentClickListener);
+            this.documentClickListener = null;
+        }
+    }
+
     renderSeparator(index) {
         return (
             <li key={'separator_' + index} className="p-menu-separator" role="separator"></li>
@@ -267,48 +268,47 @@ export class MenubarSub extends Component {
                 <span className={className}></span>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderSubmenuIcon(item) {
-        const icon = classNames('p-submenu-icon pi pi-fw', {'pi-caret-down': this.props.root, 'pi-caret-right': !this.props.root});
+        const icon = classNames('p-submenu-icon pi', {'pi-angle-down': this.props.root, 'pi-angle-right': !this.props.root});
 
         if (item.items) {
             return (
                 <span className={icon}></span>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderSubmenu(item) {
-        if(item.items) {
+        if (item.items) {
             return (
-                <MenubarSub model={item.items} onLeafClick={this.onLeafClick} onKeyDown={this.onChildItemKeyDown} parentActive={item === this.state.activeItem} />
+                <MenubarSub model={item.items} mobileActive={this.props.mobileActive} onLeafClick={this.onLeafClick} onKeyDown={this.onChildItemKeyDown} parentActive={item === this.state.activeItem} />
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderMenuitem(item, index) {
-        const className = classNames('p-menuitem', {'p-menuitem-active': this.state.activeItem === item, 'p-disabled': item.disabled}, item.className);
+        const className = classNames('p-menuitem', {'p-menuitem-active': this.state.activeItem === item}, item.className);
+        const linkClassName = classNames('p-menuitem-link', {'p-disabled': item.disabled});
         const icon = this.renderIcon(item);
         const submenuIcon = this.renderSubmenuIcon(item);
         const submenu = this.renderSubmenu(item);
 
         return (
             <li key={item.label + '_' + index} role="none" className={className} style={item.style} onMouseEnter={(event) => this.onItemMouseEnter(event, item)}>
-                <a href={item.url || '#'} role="menuitem" className="p-menuitem-link" target={item.target} aria-haspopup={item.items != null}
+                <a href={item.url || '#'} role="menuitem" className={linkClassName} target={item.target} aria-haspopup={item.items != null}
                     onClick={(event) => this.onItemClick(event, item)} onKeyDown={(event) => this.onItemKeyDown(event, item)}>
                     {icon}
                     <span className="p-menuitem-text">{item.label}</span>
                     {submenuIcon}
+                    <Ripple />
                 </a>
                 {submenu}
             </li>
@@ -330,9 +330,8 @@ export class MenubarSub extends Component {
                 })
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     render() {
