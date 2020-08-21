@@ -1,7 +1,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![npm version](https://badge.fury.io/js/primereact.svg)](https://badge.fury.io/js/primereact)
 
-[![PrimeReact Hero](https://www.primefaces.org/wp-content/uploads/2020/03/primereact-github-02032020-2.jpg "PrimeReact Hero")](https://www.primefaces.org/primereact)
+[![PrimeReact Hero](https://www.primefaces.org/wp-content/uploads/2020/08/primereact-promotion-21aug2020@2x.jpg)](https://www.primefaces.org/primereact)
 
 # PrimeReact
 
