@@ -16,7 +16,7 @@ export class RippleDoc extends Component {
                         <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
-import { PrimeReact } from 'primereact/utils';
+import PrimeReact from 'primereact/utils';
 import { Ripple } from 'primereact/ripple';
 `}
 </CodeHighlight>
@@ -96,10 +96,17 @@ import { Ripple } from 'primereact/ripple';
 <CodeHighlight lang="js">
 {`
 import React, { Component } from 'react';
+import PrimeReact from 'primereact/utils';
 import { Ripple } from 'primereact/ripple';
 import './RippleDemo.scss';
 
 export class RippleDemo extends Component {
+
+    constructor(props) {
+        super(props);
+
+        PrimeReact.ripple = true;
+    }
 
     render() {
         return (
