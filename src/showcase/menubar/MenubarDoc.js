@@ -306,10 +306,11 @@ const MenubarDemo = () => {
 
     return (
         <div>
-            <Menubar model={items}>
-                <InputText placeholder="Search" type="text"/>
-                <Button label="Logout" icon="pi pi-power-off" style={{marginLeft:4}}/>
-            </Menubar>
+            <Menubar
+              model={items}
+              start={<InputText placeholder="Search" type="text"/>}
+              end={<Button label="Logout" icon="pi pi-power-off"/>}
+            />
         </div>
     );
 }
@@ -455,10 +456,11 @@ const MenubarDemo = () => {
 
     return (
         <div>
-            <Menubar model={items}>
-                <InputText placeholder="Search" type="text"/>
-                <Button label="Logout" icon="pi pi-power-off" style={{marginLeft:4}}/>
-            </Menubar>
+            <Menubar
+              model={items}
+              start={<InputText placeholder="Search" type="text"/>}
+              end={<Button label="Logout" icon="pi pi-power-off"/>}
+            />
         </div>
     );
 }
@@ -628,13 +630,14 @@ const items:[
 </CodeHighlight>
 
                         <h5>Custom Content</h5>
-                        <p>Any content inside the menubar will be displayed on the right side by default. You may use ".ui-menubar-custom" style class to change the location of the content.</p>
+                        <p>The menubar can display custom content by using the "start" and "end" properties.</p>
 <CodeHighlight>
 {`
-<Menubar model={items}>
-    <InputText placeholder="Search" type="text"/>
-    <Button label="Logout" icon="pi pi-power-off" style={{marginLeft:4}}/>
-</Menubar>
+<Menubar
+  model={items}
+  start={<InputText placeholder="Search" type="text"/>}
+  end={<Button label="Logout" icon="pi pi-power-off"/>}
+/>
 `}
 </CodeHighlight>
 
