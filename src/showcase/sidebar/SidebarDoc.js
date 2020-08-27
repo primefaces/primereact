@@ -424,7 +424,7 @@ import { Sidebar } from 'primereact/sidebar';
                                         <td>closeOnEscape</td>
                                         <td>boolean</td>
                                         <td>true</td>
-                                        <td>Specifices if pressing escape key should hide the sidebar.</td>
+                                        <td>Specifies if pressing escape key should hide the sidebar.</td>
                                     </tr>
                                 </tbody>
                             </table>
