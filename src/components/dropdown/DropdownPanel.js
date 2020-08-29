@@ -23,10 +23,38 @@ export class DropdownPanel extends Component {
         onClick: PropTypes.func
     };
 
+    isInsideDropdown() {
+        let component = ReactDOM.findDOMNode(this);
+        while (component) {
+            if (component.className?.includes('p-dialog-content')) {
+                return true;
+            }
+            component = component.parentNode;
+        }
+        return false;
+    }
+
     renderElement() {
         let className = classNames('p-dropdown-panel p-component', this.props.panelClassName);
+        const isInsideDropdown = this.isInsideDropdown()
+        function wrapIfNeeded(dom) {
+            if (isInsideDropdown) {
+                return (
+                    <div>
+                        <div style={{ position: 'absolute', zIndex: 999 }}>
+                            <div style={{ position: 'fixed' }}>
+                                { dom }
+                            </div>
+                        </div>
+                    </div>
+                )
+            } else {
+                return dom;
+            }
+        }
 
-        return (
+
+        return wrapIfNeeded(
             <div ref={(el) => this.element = el} className={className} style={this.props.panelStyle} onClick={this.props.onClick}>
                 {this.props.filter}
                 <div ref={(el) => this.itemsWrapper = el} className="p-dropdown-items-wrapper" style={{ maxHeight: this.props.scrollHeight || 'auto' }}>
@@ -35,7 +63,7 @@ export class DropdownPanel extends Component {
                     </ul>
                 </div>
             </div>
-        );
+        )
     }
 
     render() {
