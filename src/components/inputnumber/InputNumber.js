@@ -650,7 +650,7 @@ export class InputNumber extends Component {
         }
 
         if (newValue != null) {
-            let parsedCurrentValue = (typeof value1 === 'string') ? this.parseValue(currentValue) : currentValue;
+            let parsedCurrentValue = (typeof currentValue === 'string') ? this.parseValue(currentValue) : currentValue;
             return newValue !== parsedCurrentValue;
         }
 
@@ -689,7 +689,7 @@ export class InputNumber extends Component {
             if (newLength === currentLength) {
                 if (operation === 'insert' || operation === 'delete-back-single')
                     this.inputEl.setSelectionRange(selectionEnd + 1, selectionEnd + 1);
-                if (operation === 'range-insert')
+                else if (operation === 'range-insert')
                     this.inputEl.setSelectionRange(selectionEnd, selectionEnd);
                 else if (operation === 'delete-single')
                     this.inputEl.setSelectionRange(selectionEnd - 1, selectionEnd - 1);
