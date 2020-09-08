@@ -2594,15 +2594,11 @@ export class Calendar extends Component {
             return this.renderMonth(monthMetaData, index);
         });
 
-        if (this.props.numberOfMonths > 1) {
-            return (
-                <div className="p-datepicker-groups">
-                    {groups}
-                </div>
-            )
-        }
-
-        return groups;
+        return (
+            <div className="p-datepicker-group-container">
+                {groups}
+            </div>
+        )
     }
 
     renderDateView() {
