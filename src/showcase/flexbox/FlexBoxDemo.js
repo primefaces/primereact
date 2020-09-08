@@ -22,8 +22,8 @@ export class FlexBoxDemo extends Component {
 `}
 </CodeHighlight>
 
-                    <div className="box p-d-flex p-mb-3">Flex Container</div>
-                    <div className="box p-d-inline-flex">Inline Flex Container</div>
+<div className="box p-d-flex p-mb-3">Flex Container</div>
+<div className="box p-d-inline-flex">Inline Flex Container</div>
 
                     <h5>Direction</h5>
                     <p>Default is applied using the <i>{`p-flex-{direction}`}</i> class where direction can be either of the following.</p>

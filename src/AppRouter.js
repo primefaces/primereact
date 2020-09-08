@@ -141,6 +141,7 @@ import { GalleriaThumbnailDemo } from './showcase/galleria/GalleriaThumbnailDemo
 import { GalleriaFullScreenDemo } from './showcase/galleria/GalleriaFullScreenDemo';
 import { FloatLabelDemo } from './showcase/floatlabel/FloatLabelDemo';
 import { FormLayoutDemo } from './showcase/formlayout/FormLayoutDemo';
+import { PrimeFlexSetup } from './showcase/primeflex/PrimeFlexSetup';
 import { DisplayDemo } from './showcase/display/DisplayDemo';
 import { ElevationDemo } from './showcase/elevation/ElevationDemo';
 import { FlexBoxDemo } from './showcase/flexbox/FlexBoxDemo';
@@ -321,6 +322,7 @@ class AppRouter extends Component {
                 <Route path="/deferredcontent" component={DeferredContentDemo} />
                 <Route path="/floatlabel" component={FloatLabelDemo} />
                 <Route path="/formlayout" component={FormLayoutDemo} />
+                <Route path="/primeflex" component={PrimeFlexSetup} />
                 <Route path="/display" component={DisplayDemo} />
                 <Route path="/elevation" component={ElevationDemo} />
                 <Route path="/flexbox" component={FlexBoxDemo} />

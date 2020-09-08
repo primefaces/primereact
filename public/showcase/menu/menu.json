@@ -87,6 +87,14 @@
             ],
             "children": [
                 {
+                    "name": "Setup",
+                    "to": "/primeflex",
+                    "meta": [
+                        "primeflex",
+                        "setup"
+                    ]
+                },
+                {
                     "name": "Display",
                     "to": "/display",
                     "meta": [
