@@ -30,6 +30,7 @@ export class MultiSelect extends Component {
         filterMatchMode: 'contains',
         filterPlaceholder: null,
         filterLocale: undefined,
+        emptyMessage: 'No results found',
         tabIndex: '0',
         dataKey: null,
         inputId: null,
@@ -65,6 +66,7 @@ export class MultiSelect extends Component {
         filterMatchMode: PropTypes.string,
         filterPlaceholder: PropTypes.string,
         filterLocale: PropTypes.string,
+        emptyMessage: PropTypes.any,
         tabIndex: PropTypes.string,
         dataKey: PropTypes.string,
         inputId: PropTypes.string,
@@ -377,9 +379,11 @@ export class MultiSelect extends Component {
     }
 
     filterOptions(options) {
-        let filterValue = this.state.filter.trim().toLocaleLowerCase(this.props.filterLocale);
-        let searchFields = this.props.filterBy ? this.props.filterBy.split(',') : [this.props.optionLabel || 'label'];
-        return FilterUtils.filter(options, searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
+        if (options) {
+            let filterValue = this.state.filter.trim().toLocaleLowerCase(this.props.filterLocale);
+            let searchFields = this.props.filterBy ? this.props.filterBy.split(',') : [this.props.optionLabel || 'label'];
+            return FilterUtils.filter(options, searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
+        }
     }
 
     getOptionLabel(option) {
@@ -509,11 +513,11 @@ export class MultiSelect extends Component {
         let hiddenSelect = this.renderHiddenSelect();
         let items = this.props.options;
 
-        if (items) {
-            if (this.hasFilter()) {
-                items = this.filterOptions(items);
-            }
+        if (this.hasFilter()) {
+            items = this.filterOptions(items);
+        }
 
+        if (items && items.length) {
             items = items.map((option, index) => {
                 let optionLabel = this.getOptionLabel(option);
 
@@ -522,6 +526,14 @@ export class MultiSelect extends Component {
                     selected={this.isSelected(option)} onClick={this.onOptionClick} onKeyDown={this.onOptionKeyDown} tabIndex={this.props.tabIndex} />
                 );
             });
+        }
+        else {
+            const emptyMessage = ObjectUtils.getJSXElement(this.props.emptyMessage, this.props);
+            items = (
+                <li className="p-multiselect-empty-message">
+                    {emptyMessage}
+                </li>
+            );
         }
 
         let header = this.renderHeader(items);
