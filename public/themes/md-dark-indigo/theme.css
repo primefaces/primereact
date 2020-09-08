@@ -428,6 +428,10 @@
       .p-dropdown-panel .p-dropdown-items .p-dropdown-item:not(.p-highlight):not(.p-disabled):hover {
         color: rgba(255, 255, 255, 0.87);
         background: rgba(255, 255, 255, 0.04); }
+    .p-dropdown-panel .p-dropdown-items .p-dropdown-empty-message {
+      padding: 1rem 1rem;
+      color: rgba(255, 255, 255, 0.87);
+      background: transparent; }
 
 .p-input-filled .p-dropdown {
   background: rgba(255, 255, 255, 0.06); }
@@ -792,6 +796,10 @@
         box-shadow: none; }
       .p-multiselect-panel .p-multiselect-items .p-multiselect-item .p-checkbox {
         margin-right: 0.5rem; }
+    .p-multiselect-panel .p-multiselect-items .p-multiselect-empty-message {
+      padding: 1rem 1rem;
+      color: rgba(255, 255, 255, 0.87);
+      background: transparent; }
 
 .p-input-filled .p-multiselect {
   background: rgba(255, 255, 255, 0.06); }
