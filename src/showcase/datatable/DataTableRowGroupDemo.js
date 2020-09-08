@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { DataTable } from '../../components/datatable/DataTable';
 import { Column } from '../../components/column/Column';
+import { Toast } from '../../components/toast/Toast';
 import { CustomerService } from '../service/CustomerService';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { LiveEditor } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import './DataTableDemo.scss';
 
 export class DataTableRowGroupDemo extends Component {
 
@@ -70,11 +72,11 @@ export class DataTableRowGroupDemo extends Component {
     }
 
     onRowGroupExpand(event) {
-        this.toast.show({ severity: 'info', summary: 'Row Group Expanded', detail: 'Value: ' + event.data, life: 3000 });
+        this.toast.show({ severity: 'info', summary: 'Row Group Expanded', detail: 'Value: ' + event.data.representative.name, life: 3000 });
     }
 
     onRowGroupCollapse(event) {
-        this.toast.show({ severity: 'success', summary: 'Row Group Collapsed', detail: 'Value: ' + event.data, life: 3000 });
+        this.toast.show({ severity: 'success', summary: 'Row Group Collapsed', detail: 'Value: ' + event.data.representative.name, life: 3000 });
     }
 
     calculateCustomerTotal(name) {
@@ -101,7 +103,9 @@ export class DataTableRowGroupDemo extends Component {
                     </AppInlineHeader>
                 </div>
 
-                <div className="content-section implementation">
+                <div className="content-section implementation datatable-rowgroup-demo">
+                    <Toast ref={(el) => this.toast = el}></Toast>
+
                     <div className="card">
                         <h5>Subheader Grouping</h5>
                         <p>Group customers by their representative.</p>
@@ -122,7 +126,8 @@ export class DataTableRowGroupDemo extends Component {
                         <p>Group customers by their representative.</p>
                         <DataTable value={this.state.customers} rowGroupMode="subheader" groupField="representative.name"
                             sortMode="single" sortField="representative.name" sortOrder={1}
-                            expandableRowGroups expandedRows={this.state.expandedRows} onRowExpand={this.onRowGroupExpand} onRowCollapse={this.onRowGroupCollapse}
+                            expandableRowGroups expandedRows={this.state.expandedRows} onRowToggle={(e) => this.setState({ expandedRows: e.data })}
+                            onRowExpand={this.onRowGroupExpand} onRowCollapse={this.onRowGroupCollapse}
                             rowGroupHeaderTemplate={this.headerTemplate} rowGroupFooterTemplate={this.footerTemplate}>
                             <Column field="representative.name" header="Representative"></Column>
                             <Column field="name" header="Name"></Column>
@@ -232,11 +237,11 @@ export class DataTableRowGroupDemo extends Component {
     }
 
     onRowGroupExpand(event) {
-        this.toast.show({ severity: 'info', summary: 'Row Group Expanded', detail: 'Value: ' + event.data, life: 3000 });
+        this.toast.show({ severity: 'info', summary: 'Row Group Expanded', detail: 'Value: ' + event.data.representative.name, life: 3000 });
     }
 
     onRowGroupCollapse(event) {
-        this.toast.show({ severity: 'success', summary: 'Row Group Collapsed', detail: 'Value: ' + event.data, life: 3000 });
+        this.toast.show({ severity: 'success', summary: 'Row Group Collapsed', detail: 'Value: ' + event.data.representative.name, life: 3000 });
     }
 
     calculateCustomerTotal(name) {
@@ -276,7 +281,8 @@ export class DataTableRowGroupDemo extends Component {
                     <p>Group customers by their representative.</p>
                     <DataTable value={this.state.customers} rowGroupMode="subheader" groupField="representative.name"
                         sortMode="single" sortField="representative.name" sortOrder={1}
-                        expandableRowGroups expandedRows={this.state.expandedRows} onRowExpand={this.onRowGroupExpand} onRowCollapse={this.onRowGroupCollapse}
+                        expandableRowGroups expandedRows={this.state.expandedRows} onRowToggle={(e) => this.setState({ expandedRows: e.data })}
+                        onRowExpand={this.onRowGroupExpand} onRowCollapse={this.onRowGroupCollapse}
                         rowGroupHeaderTemplate={this.headerTemplate} rowGroupFooterTemplate={this.footerTemplate}>
                         <Column field="representative.name" header="Representative"></Column>
                         <Column field="name" header="Name"></Column>

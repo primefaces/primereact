@@ -306,3 +306,20 @@
 
     }
 }
+
+.datatable-rowgroup-demo {
+    .p-rowgroup-footer td {
+        font-weight: 700;
+    }
+
+    .p-rowgroup-header {
+        span {
+            font-weight: 700;
+        }
+
+        .p-row-toggler {
+            vertical-align: middle;
+            margin-right: .25rem;
+        }
+    }
+}
