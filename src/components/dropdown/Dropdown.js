@@ -607,7 +607,9 @@ export class Dropdown extends Component {
                 this.alignPanel();
             }
 
-            this.scrollInView();
+            if (prevProps.value !== this.props.value) {
+                this.scrollInView();
+            }
         }
 
         if (prevProps.tooltip !== this.props.tooltip) {
