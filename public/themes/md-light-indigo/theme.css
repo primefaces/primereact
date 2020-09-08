@@ -704,6 +704,10 @@
         outline: 0 none;
         outline-offset: 0;
         box-shadow: none; }
+    .p-listbox .p-listbox-list .p-listbox-empty-message {
+      padding: 1rem 1rem;
+      color: rgba(0, 0, 0, 0.87);
+      background: transparent; }
   .p-listbox:not(.p-disabled) .p-listbox-item:not(.p-highlight):not(.p-disabled):hover {
     color: rgba(0, 0, 0, 0.87);
     background: rgba(0, 0, 0, 0.04); }
