@@ -2590,11 +2590,19 @@ export class Calendar extends Component {
     }
 
     renderMonths(monthsMetaData) {
-        return (
-            monthsMetaData.map((monthMetaData, index) => {
-                return this.renderMonth(monthMetaData, index);
-            })
-        );
+        const groups = monthsMetaData.map((monthMetaData, index) => {
+            return this.renderMonth(monthMetaData, index);
+        });
+
+        if (this.props.numberOfMonths > 1) {
+            return (
+                <div className="p-datepicker-groups">
+                    {groups}
+                </div>
+            )
+        }
+
+        return groups;
     }
 
     renderDateView() {
