@@ -501,6 +501,12 @@ selectedItemTemplate(option) {
                             <td>Locale to use in filtering. The default locale is the host environment's current locale.</td>
                         </tr>
                         <tr>
+                            <td>emptyMessage</td>
+                            <td>any</td>
+                            <td>No records found.</td>
+                            <td>Template to display when there is no option.</td>
+                        </tr>
+                        <tr>
                             <td>tabIndex</td>
                             <td>string</td>
                             <td>null</td>
