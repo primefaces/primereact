@@ -28,7 +28,7 @@ export class Dropdown extends Component {
         filterMatchMode: 'contains',
         filterPlaceholder: null,
         filterLocale: undefined,
-        emptyMessage: 'No results found',
+        emptyFilterMessage: 'No results found',
         editable: false,
         placeholder:null,
         required: false,
@@ -71,7 +71,7 @@ export class Dropdown extends Component {
         filterMatchMode: PropTypes.string,
         filterPlaceholder: PropTypes.string,
         filterLocale: PropTypes.string,
-        emptyMessage: PropTypes.any,
+        emptyFilterMessage: PropTypes.any,
         editable:PropTypes.bool,
         placeholder: PropTypes.string,
         required: PropTypes.bool,
@@ -712,12 +712,16 @@ export class Dropdown extends Component {
             });
         }
 
-        const emptyMessage = ObjectUtils.getJSXElement(this.props.emptyMessage, this.props);
-        return (
-            <li className="p-dropdown-empty-message">
-                {emptyMessage}
-            </li>
-        );
+        if (this.hasFilter()) {
+            const emptyFilterMessage = ObjectUtils.getJSXElement(this.props.emptyFilterMessage, this.props);
+            return (
+                <li className="p-dropdown-empty-message">
+                    {emptyFilterMessage}
+                </li>
+            );
+        }
+
+        return null;
     }
 
     renderFilter() {
