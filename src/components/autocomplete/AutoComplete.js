@@ -630,7 +630,7 @@ export class AutoComplete extends Component {
 
     render() {
         let input, dropdown;
-        let className = classNames('p-autocomplete p-component', this.props.className, {
+        let className = classNames('p-autocomplete p-component p-inputwrapper', this.props.className, {
             'p-autocomplete-dd': this.props.dropdown,
             'p-autocomplete-multiple': this.props.multiple,
             'p-inputwrapper-filled': this.props.value,

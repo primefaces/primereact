@@ -294,7 +294,7 @@ export class Chips extends Component {
     }
 
     render() {
-        const className = classNames('p-chips p-component', this.props.className, {
+        const className = classNames('p-chips p-component p-inputwrapper', this.props.className, {
             'p-inputwrapper-filled': (this.props.value && this.props.value.length > 0) || (DomHandler.hasClass(this.inputElement, 'p-filled') && this.inputElement.value !== ''),
             'p-inputwrapper-focus': this.state.focused
         });

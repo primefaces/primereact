@@ -503,7 +503,7 @@ export class MultiSelect extends Component {
     }
 
     render() {
-        let className = classNames('p-multiselect p-component', {
+        let className = classNames('p-multiselect p-component p-inputwrapper', {
             'p-disabled': this.props.disabled,
             'p-focus': this.state.focused,
             'p-inputwrapper-filled': this.props.value && this.props.value.length > 0,

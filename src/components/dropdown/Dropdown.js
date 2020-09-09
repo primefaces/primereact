@@ -741,7 +741,7 @@ export class Dropdown extends Component {
     }
 
     render() {
-        let className = classNames('p-dropdown p-component', this.props.className, {
+        let className = classNames('p-dropdown p-component p-inputwrapper', this.props.className, {
             'p-disabled': this.props.disabled,
             'p-focus': this.state.focused,
             'p-dropdown-clearable': this.props.showClear && !this.props.disabled,
