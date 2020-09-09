@@ -30,7 +30,7 @@ export class MultiSelect extends Component {
         filterMatchMode: 'contains',
         filterPlaceholder: null,
         filterLocale: undefined,
-        emptyMessage: 'No results found',
+        emptyFilterMessage: 'No results found',
         tabIndex: '0',
         dataKey: null,
         inputId: null,
@@ -66,7 +66,7 @@ export class MultiSelect extends Component {
         filterMatchMode: PropTypes.string,
         filterPlaceholder: PropTypes.string,
         filterLocale: PropTypes.string,
-        emptyMessage: PropTypes.any,
+        emptyFilterMessage: PropTypes.any,
         tabIndex: PropTypes.string,
         dataKey: PropTypes.string,
         inputId: PropTypes.string,
@@ -512,8 +512,9 @@ export class MultiSelect extends Component {
         let label = this.renderLabel();
         let hiddenSelect = this.renderHiddenSelect();
         let items = this.props.options;
+        const hasFilter = this.hasFilter();
 
-        if (this.hasFilter()) {
+        if (hasFilter) {
             items = this.filterOptions(items);
         }
 
@@ -527,11 +528,11 @@ export class MultiSelect extends Component {
                 );
             });
         }
-        else {
-            const emptyMessage = ObjectUtils.getJSXElement(this.props.emptyMessage, this.props);
+        else if (hasFilter) {
+            const emptyFilterMessage = ObjectUtils.getJSXElement(this.props.emptyFilterMessage, this.props);
             items = (
                 <li className="p-multiselect-empty-message">
-                    {emptyMessage}
+                    {emptyFilterMessage}
                 </li>
             );
         }
