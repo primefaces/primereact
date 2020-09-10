@@ -173,10 +173,11 @@ export class UITreeNode extends Component {
             case 40:
                 const listElement = nodeElement.children[1];
                 if (listElement) {
-                    this.focusNode(listElement.children[0]);
+                    const validChild = this.findNextValidSibling(listElement.children[0]);
+                    this.focusNode(validChild);
                 }
                 else {
-                    const nextNodeElement = nodeElement.nextElementSibling;
+                    const nextNodeElement = this.findNextValidSibling(nodeElement.nextElementSibling);
                     if (nextNodeElement) {
                         this.focusNode(nextNodeElement);
                     }
@@ -193,8 +194,9 @@ export class UITreeNode extends Component {
 
             //up arrow
             case 38:
-                if (nodeElement.previousElementSibling) {
-                    this.focusNode(this.findLastVisibleDescendant(nodeElement.previousElementSibling));
+                const previousElement = this.findPreviousValidSibling(nodeElement.previousElementSibling);
+                if (previousElement) {
+                    this.focusNode(this.findLastVisibleDescendant(previousElement));
                 }
                 else {
                     let parentNodeElement = this.getParentNodeElement(nodeElement);
@@ -236,6 +238,16 @@ export class UITreeNode extends Component {
         }
     }
 
+    findPreviousValidSibling(nodeElement){
+        const previousNodeElement = nodeElement.previousElementSibling;
+        return DomHandler.hasClass(previousNodeElement, 'p-treenode-droppoint') ? previousNodeElement.previousElementSibling : previousNodeElement;
+    }
+
+    findNextValidSibling(nodeElement){
+        const nextNodeElement = nodeElement.nextElementSibling;
+        return DomHandler.hasClass(nextNodeElement, 'p-treenode-droppoint') ? nextNodeElement.nextElementSibling : nextNodeElement;
+    }
+
     findNextSiblingOfAncestor(nodeElement) {
         let parentNodeElement = this.getParentNodeElement(nodeElement);
         if (parentNodeElement) {
@@ -268,7 +280,9 @@ export class UITreeNode extends Component {
     }
 
     focusNode(element) {
-        element.children[0].focus();
+        if(element && element.children.length > 0){
+            element.children[0].focus();
+        }
     }
 
     onClick(event) {
