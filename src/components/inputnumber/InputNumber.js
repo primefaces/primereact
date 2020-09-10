@@ -889,7 +889,7 @@ export class InputNumber extends Component {
                        maxLength={this.props.maxlength} disabled={this.props.disabled} required={this.props.required} pattern={this.props.pattern}
                        placeholder={this.props.placeholder} readOnly={this.props.readonly} name={this.props.name}
                        onKeyDown={this.onInputKeyDown} onKeyPress={this.onInputKeyPress} onInput={this.onInput} onClick={this.onInputClick}
-                       onBlur={this.onInputBlur} onFocus={this.onInputFocus} onPaste={this.onPaste}
+                       onBlur={this.onInputBlur} onFocus={this.onInputFocus} onPaste={this.onPaste} min={this.props.min} max={this.props.max}
                        aria-valuemin={this.props.min} aria-valuemax={this.props.max} aria-valuenow={this.props.value} aria-labelledby={this.props.ariaLabelledBy} />
         );
     }
