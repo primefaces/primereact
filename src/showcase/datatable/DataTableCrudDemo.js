@@ -339,19 +339,19 @@ export class DataTableCrudDemo extends Component {
                             <label className="p-mb-3">Category</label>
                             <div className="p-formgrid p-grid">
                                 <div className="p-field-radiobutton p-col-6">
-                                    <RadioButton id="category1" name="category" value="Accessories" onChange={this.onCategoryChange} checked={this.state.product.category === 'Accessories'} />
+                                    <RadioButton inputId="category1" name="category" value="Accessories" onChange={this.onCategoryChange} checked={this.state.product.category === 'Accessories'} />
                                     <label htmlFor="category1">Accessories</label>
                                 </div>
                                 <div className="p-field-radiobutton p-col-6">
-                                    <RadioButton id="category2" name="category" value="Clothing" onChange={this.onCategoryChange} checked={this.state.product.category === 'Clothing'} />
+                                    <RadioButton inputId="category2" name="category" value="Clothing" onChange={this.onCategoryChange} checked={this.state.product.category === 'Clothing'} />
                                     <label htmlFor="category2">Clothing</label>
                                 </div>
                                 <div className="p-field-radiobutton p-col-6">
-                                    <RadioButton id="category3" name="category" value="Electronics" onChange={this.onCategoryChange} checked={this.state.product.category === 'Electronics'} />
+                                    <RadioButton inputId="category3" name="category" value="Electronics" onChange={this.onCategoryChange} checked={this.state.product.category === 'Electronics'} />
                                     <label htmlFor="category3">Electronics</label>
                                 </div>
                                 <div className="p-field-radiobutton p-col-6">
-                                    <RadioButton id="category4" name="category" value="Fitness" onChange={this.onCategoryChange} checked={this.state.product.category === 'Fitness'} />
+                                    <RadioButton inputId="category4" name="category" value="Fitness" onChange={this.onCategoryChange} checked={this.state.product.category === 'Fitness'} />
                                     <label htmlFor="category4">Fitness</label>
                                 </div>
                             </div>
