@@ -54,15 +54,15 @@ export class RowCheckbox extends Component {
     }
 
     render() {
-        let className = classNames('p-checkbox-box p-component', {'p-highlight': this.props.selected, 'p-disabled': this.props.disabled, 'p-focus': this.state.focused});
+        let className = classNames('p-checkbox-box p-component p-clickable', {'p-highlight': this.props.selected, 'p-disabled': this.props.disabled, 'p-focus': this.state.focused});
         let iconClassName = classNames('p-checkbox-icon p-clickable', {'pi pi-check': this.props.selected});
 
-        return <div className="p-checkbox p-component" onClick={this.onClick}>
+        return <div className="p-checkbox p-component">
                  <div className="p-hidden-accessible">
                     <input type="checkbox" defaultChecked={this.props.selected} disabled={this.props.disabled}
                         aria-checked={this.props.selected} onKeyDown={this.onKeyDown} onFocus={this.onFocus} onBlur={this.onBlur}/>
                 </div>
-                <div className={className} role="checkbox" aria-checked={this.props.selected}>
+                <div className={className} onClick={this.onClick} role="checkbox" aria-checked={this.props.selected}>
                     <span className={iconClassName}></span>
                 </div>
             </div>;
