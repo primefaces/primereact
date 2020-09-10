@@ -8,8 +8,8 @@ interface ProgressBarProps {
     style?: object;
     className?: string;
     mode?: string;
-    displayValueTemplate?(value: any): JSX.Element;
     color?: string;
+    displayValueTemplate?(value: any): JSX.Element;
 }
 
 export class ProgressBar extends React.Component<ProgressBarProps,any> {}
