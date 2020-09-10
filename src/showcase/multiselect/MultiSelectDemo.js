@@ -73,7 +73,7 @@ export class MultiSelectDemo extends Component {
                 <div className="content-section implementation multiselect-demo">
                     <div className="card">
                         <h5>Basic</h5>
-                        <MultiSelect value={this.state.selectedCities} options={[]} onChange={(e) => this.setState({ selectedCities: e.value })} optionLabel="name" placeholder="Select a City" />
+                        <MultiSelect value={this.state.selectedCities} options={this.cities} onChange={(e) => this.setState({ selectedCities: e.value })} optionLabel="name" placeholder="Select a City" />
 
                         <h5>Advanced with Templating and Filtering</h5>
                         <MultiSelect value={this.state.selectedCountries} options={this.countries}  onChange={(e) => this.setState({ selectedCountries: e.value })} optionLabel="name" placeholder="Select Countries" filter className="multiselect-custom"
