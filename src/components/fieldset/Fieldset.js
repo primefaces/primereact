@@ -152,7 +152,7 @@ export class Fieldset extends Component {
 
         return (
             <fieldset id={this.props.id} className={className} style={this.props.style} onClick={this.props.onClick}>
-                {legend}
+                {legend ? legend : null}
                 {content}
             </fieldset>
         );
