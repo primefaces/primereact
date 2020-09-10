@@ -12,7 +12,8 @@ export class ProgressBar extends Component {
         style: null,
         className: null,
         mode: 'determinate',
-        displayValueTemplate: null
+        displayValueTemplate: null,
+        color: null
     }
 
     static propTypes = {
@@ -23,7 +24,8 @@ export class ProgressBar extends Component {
         style: PropTypes.object,
         className: PropTypes.string,
         mode: PropTypes.string,
-        displayValueTemplate: PropTypes.func
+        displayValueTemplate: PropTypes.func,
+        color: PropTypes.string
     };
 
     renderLabel() {
@@ -42,8 +44,8 @@ export class ProgressBar extends Component {
         let label = this.renderLabel();
 
         return (
-            <div  role="progressbar" id={this.props.id} className={className} style={this.props.style} aria-valuemin="0" aria-valuenow={this.props.value} aria-valuemax="100" aria-label={this.props.value}>
-                <div className="p-progressbar-value p-progressbar-value-animate" style={{width: this.props.value + '%', display: 'block'}}></div>
+            <div  role="progressbar" id={this.props.id} className={className} color={this.props.color} style={this.props.style} aria-valuemin="0" aria-valuenow={this.props.value} aria-valuemax="100" aria-label={this.props.value}>
+                <div className="p-progressbar-value p-progressbar-value-animate" style={{width: this.props.value + '%', display: 'block', backgroundColor: this.props.color}}></div>
                 {label}
             </div>
         );
