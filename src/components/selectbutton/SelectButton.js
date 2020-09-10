@@ -13,6 +13,7 @@ export class SelectButton extends Component {
         options: null,
         optionLabel: null,
         optionValue: null,
+        optionDisabled: null,
         tabIndex: null,
         multiple: null,
         disabled: null,
@@ -32,6 +33,7 @@ export class SelectButton extends Component {
         options: PropTypes.array,
         optionLabel: PropTypes.string,
         optionValue: PropTypes.string,
+        optionDisabled: PropTypes.string,
         tabIndex: PropTypes.string,
         multiple: PropTypes.bool,
         disabled: PropTypes.bool,
@@ -52,7 +54,7 @@ export class SelectButton extends Component {
     }
 
     onOptionClick(event) {
-        if (this.props.disabled) {
+        if (this.props.disabled || this.isOptionDisabled(event.option)) {
             return;
         }
 
@@ -96,6 +98,10 @@ export class SelectButton extends Component {
 
     getOptionValue(option) {
         return this.props.optionValue ? ObjectUtils.resolveFieldData(option, this.props.optionValue) : (option['value'] !== undefined ? option['value'] : option);
+    }
+
+    isOptionDisabled(option) {
+        return this.props.optionDisabled ? ObjectUtils.resolveFieldData(option, this.props.optionDisabled) : !!option['disabled'];
     }
 
     isSelected(option) {
@@ -152,10 +158,12 @@ export class SelectButton extends Component {
     renderItems() {
         if (this.props.options && this.props.options.length) {
             return this.props.options.map((option, index) => {
-                let optionLabel = this.getOptionLabel(option);
+                const isDisabled = this.props.disabled || this.isOptionDisabled(option);
+                const optionLabel = this.getOptionLabel(option);
+                const tabIndex = isDisabled ? null : 0;
 
                 return <SelectButtonItem key={`${optionLabel}_${index}`} label={optionLabel} className={option.className} option={option} onClick={this.onOptionClick} template={this.props.itemTemplate}
-                    selected={this.isSelected(option)} tabIndex={this.props.tabIndex} disabled={this.props.disabled} ariaLabelledBy={this.props.ariaLabelledBy} />;
+                    selected={this.isSelected(option)} tabIndex={tabIndex} disabled={isDisabled} ariaLabelledBy={this.props.ariaLabelledBy} />;
             });
         }
 

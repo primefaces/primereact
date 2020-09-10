@@ -46,8 +46,6 @@ export class SelectButtonItem extends Component {
                 originalEvent: event,
                 option: this.props.option
             });
-
-            this.input.focus();
         }
     }
 
@@ -60,14 +58,11 @@ export class SelectButtonItem extends Component {
     }
 
     onKeyDown(event) {
-        if (event.key === 'Enter') {
+        const keyCode = event.which;
+        if (keyCode === 32 || keyCode === 13) { //space and enter
             this.onClick(event);
             event.preventDefault();
         }
-    }
-
-    componentDidUpdate() {
-        this.input.checked = this.props.selected;
     }
 
     renderContent() {
@@ -90,13 +85,10 @@ export class SelectButtonItem extends Component {
         const content = this.renderContent();
 
         return (
-            <div ref={(el) => this.el = el} className={className} onClick={this.onClick} role="button" aria-pressed={this.props.selected} aria-labelledby={this.props.ariaLabelledBy}>
+            <div className={className} role="button" aria-label={this.props.label} aria-pressed={this.props.selected} aria-labelledby={this.props.ariaLabelledBy}
+                onClick={this.onClick} onKeyDown={this.onKeyDown} tabIndex={this.props.tabIndex} onFocus={this.onFocus} onBlur={this.onBlur}>
                 {content}
-                <div className="p-hidden-accessible">
-                    <input ref={(el) => this.input = el} type="checkbox" defaultChecked={this.props.selected} onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.onKeyDown}
-                        tabIndex={this.props.tabIndex} disabled={this.props.disabled} value={this.props.label}/>
-                </div>
-                <Ripple />
+                { !this.props.disabled && <Ripple /> }
             </div>
         );
     }
