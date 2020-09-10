@@ -15,6 +15,7 @@ export class CalendarDoc extends Component {
                 content: `
 import React, { Component } from 'react';
 import { Calendar } from 'primereact/calendar';
+import 'primeflex/primeflex.css';
 
 export class CalendarDemo extends Component {
 
