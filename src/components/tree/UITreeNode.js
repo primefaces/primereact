@@ -163,11 +163,11 @@ export class UITreeNode extends Component {
         }
 
         const nodeElement = event.target.parentElement;
-        // For other elements in the tree like text boxes in the tree, we should avoid this event
-        if (nodeElement.nodeName !== 'P-TREENODE') {
+
+        if (!DomHandler.hasClass(nodeElement, 'p-treenode')) {
             return;
         }
-        
+
         switch (event.which) {
             //down arrow
             case 40:
