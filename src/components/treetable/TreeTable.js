@@ -991,7 +991,7 @@ export class TreeTable extends Component {
             'p-treetable-resizable': this.props.resizableColumns,
             'p-treetable-resizable-fit': (this.props.resizableColumns && this.props.columnResizeMode === 'fit'),
             'p-treetable-auto-layout': this.props.autoLayout
-        });
+        }, this.props.className);
         const table = this.renderTable(value);
         const totalRecords = this.getTotalRecords(value);
         const headerFacet = this.props.header && <div className="p-treetable-header">{this.props.header}</div>;
