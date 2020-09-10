@@ -31,6 +31,7 @@ export class MultiSelect extends Component {
         filterPlaceholder: null,
         filterLocale: undefined,
         emptyFilterMessage: 'No results found',
+        resetFilterOnHide: false,
         tabIndex: '0',
         dataKey: null,
         inputId: null,
@@ -67,6 +68,7 @@ export class MultiSelect extends Component {
         filterPlaceholder: PropTypes.string,
         filterLocale: PropTypes.string,
         emptyFilterMessage: PropTypes.any,
+        resetFilterOnHide: PropTypes.bool,
         tabIndex: PropTypes.string,
         dataKey: PropTypes.string,
         inputId: PropTypes.string,
@@ -104,6 +106,7 @@ export class MultiSelect extends Component {
         this.onOverlayEnter = this.onOverlayEnter.bind(this);
         this.onOverlayEntered = this.onOverlayEntered.bind(this);
         this.onOverlayExit = this.onOverlayExit.bind(this);
+        this.onOverlayExited = this.onOverlayExited.bind(this);
     }
 
     onOptionClick(event) {
@@ -260,6 +263,10 @@ export class MultiSelect extends Component {
         this.setState({ filter: event.query });
     }
 
+    resetFilter() {
+        this.setState({ filter: '' });
+    }
+
     show() {
         this.setState({ overlayVisible: true });
     }
@@ -279,6 +286,12 @@ export class MultiSelect extends Component {
 
     onOverlayExit() {
         this.unbindDocumentClickListener();
+    }
+
+    onOverlayExited() {
+        if (this.props.filter && this.props.resetFilterOnHide) {
+            this.resetFilter();
+        }
     }
 
     alignPanel() {
@@ -590,7 +603,7 @@ export class MultiSelect extends Component {
                     <span className="p-multiselect-trigger-icon pi pi-chevron-down p-c"></span>
                 </div>
                 <CSSTransition classNames="p-connected-overlay" in={this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }}
-                    unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit}>
+                    unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
                     <MultiSelectPanel ref={el => this.panel = el} header={header} appendTo={this.props.appendTo}
                         scrollHeight={this.props.scrollHeight}>
                         {items}

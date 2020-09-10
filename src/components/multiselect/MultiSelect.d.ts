@@ -20,6 +20,7 @@ interface MultiSelectProps {
     filterPlaceholder?: string;
     filterLocale?: string;
     emptyFilterMessage?: any;
+    resetFilterOnHide?: boolean;
     tabIndex?: boolean;
     dataKey?: string;
     inputId?: string;

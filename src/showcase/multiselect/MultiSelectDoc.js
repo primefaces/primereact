@@ -507,6 +507,12 @@ selectedItemTemplate(option) {
                             <td>Template to display when filtering does not return any results.</td>
                         </tr>
                         <tr>
+                            <td>resetFilterOnHide</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>Clears the filter value when hiding the dropdown.</td>
+                        </tr>
+                        <tr>
                             <td>tabIndex</td>
                             <td>string</td>
                             <td>null</td>
