@@ -290,6 +290,12 @@ import { ProgressBar } from 'primereact/progressbar';
                                         <td>Defines the mode of the progress, valid values are "determinate" and "indeterminate".</td>
                                     </tr>
                                     <tr>
+                                        <td>color</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Color for the background of the progress.</td>
+                                    </tr>
+                                    <tr>
                                         <td>displayValueTemplate</td>
                                         <td>Element</td>
                                         <td>null</td>
