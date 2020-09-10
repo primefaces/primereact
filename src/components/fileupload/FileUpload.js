@@ -81,8 +81,7 @@ export class FileUpload extends Component {
         this.state = {
             files: [],
             msgs: [],
-            focused: false,
-            uploading: false
+            focused: false
         };
 
         this.choose = this.choose.bind(this);
@@ -110,15 +109,15 @@ export class FileUpload extends Component {
     }
 
     chooseDisabled() {
-        return this.props.disabled || (this.props.fileLimit && this.props.fileLimit <= this.state.files.length + this.uploadedFileCount) || this.state.uploading;
+        return this.props.disabled || (this.props.fileLimit && this.props.fileLimit <= this.state.files.length + this.uploadedFileCount);
     }
 
     uploadDisabled() {
-        return this.props.disabled || !this.hasFiles() || this.state.uploading;
+        return this.props.disabled || !this.hasFiles();
     }
 
     cancelDisabled() {
-        return this.props.disabled || !this.hasFiles() || this.state.uploading;
+        return this.props.disabled || !this.hasFiles();
     }
 
     remove(event, index) {
@@ -281,10 +280,7 @@ export class FileUpload extends Component {
 
             xhr.onreadystatechange = () => {
                 if (xhr.readyState === 4) {
-                    this.setState({
-                        progress: 0,
-                        uploading: false
-                    });
+                    this.setState({ progress: 0 });
 
                     if (xhr.status >= 200 && xhr.status < 300) {
                         if (this.props.fileLimit) {
@@ -317,8 +313,6 @@ export class FileUpload extends Component {
             xhr.withCredentials = this.props.withCredentials;
 
             xhr.send(formData);
-
-            this.setState({ uploading: true });
         }
     }
 
@@ -349,14 +343,14 @@ export class FileUpload extends Component {
     }
 
     onDragEnter(event) {
-        if (!this.props.disabled && !this.state.uploading) {
+        if(!this.props.disabled) {
             event.stopPropagation();
             event.preventDefault();
         }
     }
 
     onDragOver(event) {
-        if (!this.props.disabled && !this.state.uploading) {
+        if (!this.props.disabled) {
             DomHandler.addClass(this.content, 'p-fileupload-highlight');
             event.stopPropagation();
             event.preventDefault();
@@ -364,13 +358,13 @@ export class FileUpload extends Component {
     }
 
     onDragLeave(event) {
-        if (!this.props.disabled && !this.state.uploading) {
+        if (!this.props.disabled) {
             DomHandler.removeClass(this.content, 'p-fileupload-highlight');
         }
     }
 
     onDrop(event) {
-        if (!this.props.disabled && !this.state.uploading) {
+        if (!this.props.disabled) {
             DomHandler.removeClass(this.content, 'p-fileupload-highlight');
             event.stopPropagation();
             event.preventDefault();
@@ -385,13 +379,11 @@ export class FileUpload extends Component {
     }
 
     onSimpleUploaderClick() {
-        if (!this.state.uploading) {
-            if (this.hasFiles()) {
-                this.upload();
-            }
-            else {
-                this.fileInput.click();
-            }
+        if (this.hasFiles()) {
+            this.upload();
+        }
+        else {
+            this.fileInput.click();
         }
     }
 
@@ -420,7 +412,7 @@ export class FileUpload extends Component {
                         let preview = this.isImage(file) ? <div><img alt={file.name} role="presentation" src={file.objectURL} width={this.props.previewWidth} /></div> : null;
                         let fileName = <div>{file.name}</div>;
                         let size = <div>{this.formatSize(file.size)}</div>;
-                        let removeButton = <div><Button type="button" icon="pi pi-times" onClick={(e) => this.remove(e, index)} disabled={this.state.uploading} /></div>
+                        let removeButton = <div><Button type="button" icon="pi pi-times" onClick={(e) => this.remove(e, index)} /></div>
 
                         return <div className="p-fileupload-row" key={file.name + file.type + file.size}>
                                  {preview}
