@@ -392,7 +392,7 @@ export class Dialog extends Component {
                 <CSSTransition classNames="p-dialog" timeout={transitionTimeout} in={this.props.visible} unmountOnExit
                     onEntered={this.onEntered} onExit={this.onExit} onExited={this.onExited}>
                     <div ref={el => this.dialog = el} id={this.id} className={className} style={this.props.style} onClick={this.onDialogClick}
-                         aria-labelledby={this.id + '_label'} role="dialog" aria-modal={this.props.model}>
+                         aria-labelledby={this.id + '_header'} role="dialog" aria-modal={this.props.model}>
                         {header}
                         {content}
                         {footer}
