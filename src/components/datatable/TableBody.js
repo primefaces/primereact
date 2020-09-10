@@ -29,12 +29,12 @@ export class TableBody extends Component {
             this.props.onRowClick(event);
         }
 
-        if(this.props.selectionMode) {
+        if (this.props.selectionMode) {
             let rowData = event.data;
             let rowIndex = event.index;
             let selection;
 
-            if(this.isMultipleSelectionMode() && event.originalEvent.shiftKey && this.anchorRowIndex !== null) {
+            if (this.isMultipleSelectionMode() && event.originalEvent.shiftKey && this.anchorRowIndex !== null) {
                 DomHandler.clearSelection();
                 this.rangeRowIndex = rowIndex;
                 selection = this.selectRange(event);
@@ -45,7 +45,7 @@ export class TableBody extends Component {
                 this.anchorRowIndex = rowIndex;
                 this.rangeRowIndex = rowIndex;
 
-                if(metaSelection) {
+                if (metaSelection) {
                     let metaKey = event.originalEvent.metaKey || event.originalEvent.ctrlKey;
 
                     if(selected && metaKey) {
@@ -62,11 +62,11 @@ export class TableBody extends Component {
                         }
                     }
                     else {
-                        if(this.isSingleSelectionMode()) {
+                        if (this.isSingleSelectionMode()) {
                             selection = rowData;
                         }
-                        else if(this.isMultipleSelectionMode()) {
-                            if(metaKey)
+                        else if (this.isMultipleSelectionMode()) {
+                            if (metaKey)
                                 selection = this.props.selection ? [...this.props.selection] : [];
                             else
                                 selection = [];
@@ -95,7 +95,7 @@ export class TableBody extends Component {
                         }
                     }
                     else {
-                        if(selected) {
+                        if (selected) {
                             let selectionIndex = this.findIndexInSelection(rowData);
                             selection = this.props.selection.filter((val,i) => i !== selectionIndex);
                             if(this.props.onRowSelect) {

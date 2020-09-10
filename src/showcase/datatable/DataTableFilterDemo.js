@@ -90,7 +90,6 @@ export class DataTableFilterDemo extends Component {
     }
 
     onRepresentativesChange(e) {
-        debugger;
         this.dt.filter(e.value, 'representative.name', 'in');
         this.setState({ selectedRepresentative: e.value });
     }
@@ -318,7 +317,6 @@ export class DataTableFilterDemo extends Component {
     }
 
     onRepresentativesChange(e) {
-        debugger;
         this.dt.filter(e.value, 'representative.name', 'in');
         this.setState({ selectedRepresentative: e.value });
     }
