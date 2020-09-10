@@ -135,6 +135,10 @@ export class Fieldset extends Component {
     }
 
     renderLegend(collapsed) {
+        if (!this.props.legend) {
+            return;
+        }
+
         const legendContent = this.renderLegendContent(collapsed);
 
         return (
