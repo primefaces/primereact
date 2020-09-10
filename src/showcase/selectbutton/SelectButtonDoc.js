@@ -300,7 +300,7 @@ itemTemplate(option) {
                             <td>disabled</td>
                             <td>boolean</td>
                             <td>false</td>
-                            <td>Whether the option is disabled or not. (Not supported)</td>
+                            <td>Whether the option is disabled or not.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -347,6 +347,12 @@ itemTemplate(option) {
                             <td>string</td>
                             <td>null</td>
                             <td>Name of the value field of an option when arbitrary objects are used as options instead of SelectItems.</td>
+                        </tr>
+                        <tr>
+                            <td>optionDisabled</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Property name or getter function to use as the disabled flag of an option, defaults to false when not defined.</td>
                         </tr>
                         <tr>
                             <td>tabIndex</td>
