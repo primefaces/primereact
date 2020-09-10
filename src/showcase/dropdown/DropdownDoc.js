@@ -547,6 +547,12 @@ countryOptionTemplate(option) {
                                         <td>Template to display when filtering does not return any results.</td>
                                     </tr>
                                     <tr>
+                                        <td>resetFilterOnHide</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>Clears the filter value when hiding the dropdown.</td>
+                                    </tr>
+                                    <tr>
                                         <td>editable</td>
                                         <td>boolean</td>
                                         <td>false</td>

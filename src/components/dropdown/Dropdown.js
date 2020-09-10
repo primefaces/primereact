@@ -37,6 +37,7 @@ export class Dropdown extends Component {
         tabIndex: null,
         autoFocus: false,
         filterInputAutoFocus: true,
+        resetFilterOnHide: false,
         panelClassName: null,
         panelStyle: null,
         dataKey: null,
@@ -80,6 +81,7 @@ export class Dropdown extends Component {
         tabIndex: PropTypes.number,
         autoFocus: PropTypes.bool,
         filterInputAutoFocus: PropTypes.bool,
+        resetFilterOnHide: PropTypes.bool,
         lazy: PropTypes.bool,
         panelClassName: PropTypes.string,
         panelStyle: PropTypes.object,
@@ -120,6 +122,7 @@ export class Dropdown extends Component {
         this.onOverlayEnter = this.onOverlayEnter.bind(this);
         this.onOverlayEntered = this.onOverlayEntered.bind(this);
         this.onOverlayExit = this.onOverlayExit.bind(this);
+        this.onOverlayExited = this.onOverlayExited.bind(this);
         this.clear = this.clear.bind(this);
     }
 
@@ -487,6 +490,12 @@ export class Dropdown extends Component {
         this.unbindDocumentClickListener();
     }
 
+    onOverlayExited() {
+        if (this.props.filter && this.props.resetFilterOnHide) {
+            this.resetFilter();
+        }
+    }
+
     alignPanel() {
         const container = this.input.parentElement;
         if(this.props.appendTo) {
@@ -767,7 +776,7 @@ export class Dropdown extends Component {
                  {clearIcon}
                  {dropdownIcon}
                  <CSSTransition classNames="p-connected-overlay" in={this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }}
-                    unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit}>
+                    unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
                     <DropdownPanel ref={(el) => this.panel = el} appendTo={this.props.appendTo}
                         panelStyle={this.props.panelStyle} panelClassName={this.props.panelClassName}
                         scrollHeight={this.props.scrollHeight} filter={filterElement} onClick={this.onPanelClick}>
