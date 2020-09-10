@@ -49,9 +49,14 @@ export class ScrollableView extends Component {
 
     componentDidMount() {
         this.setScrollHeight();
-                
-        if(!this.props.frozen) {
-            this.alignScrollBar();
+
+        if (!this.props.frozen) {
+            let scrollBarWidth = DomHandler.calculateScrollbarWidth();
+
+            this.scrollHeaderBox.style.marginRight = scrollBarWidth + 'px';
+            if (this.scrollFooterBox) {
+                this.scrollFooterBox.style.marginRight = scrollBarWidth + 'px';
+            }
         }
         else {
             this.scrollBody.style.paddingBottom = DomHandler.calculateScrollbarWidth() + 'px';
@@ -63,20 +68,16 @@ export class ScrollableView extends Component {
             this.setScrollHeight();
         }
 
-        if(!this.props.frozen) {
-            this.alignScrollBar();
-            
-            if(this.props.virtualScroll) {
-                this.virtualScroller.style.height = this.props.totalRecords * this.props.virtualRowHeight + 'px';
-            }
+        if (!this.props.frozen && this.props.virtualScroll) {
+            this.virtualScroller.style.height = this.props.totalRecords * this.props.virtualRowHeight + 'px';
         }
-        
-        if(this.virtualScrollCallback && !this.props.loading) {
+
+        if (this.virtualScrollCallback && !this.props.loading) {
             this.virtualScrollCallback();
             this.virtualScrollCallback = null;
         }
     }
-    
+
     setScrollHeight() {
         if(this.props.scrollHeight) {
             let frozenView = this.container.previousElementSibling;
@@ -93,11 +94,11 @@ export class ScrollableView extends Component {
                     let relativeHeight = DomHandler.getOuterHeight(datatableContainer.parentElement) * parseInt(this.props.scrollHeight, 10) / 100;
                     let staticHeight = containerHeight - 100;       //total height of headers, footers, paginators
                     let scrollBodyHeight = (relativeHeight - staticHeight);
-                    
+
                     if (this.props.frozen) {
                         scrollBodyHeight -= DomHandler.calculateScrollbarWidth();
                     }
-                    
+
                     this.scrollBody.style.height = 'auto';
                     this.scrollBody.style.maxHeight = scrollBodyHeight + 'px';
                     this.scrollBody.style.visibility = 'visible';
@@ -108,7 +109,7 @@ export class ScrollableView extends Component {
             }
         }
     }
-    
+
     findDataTableContainer(element) {
         if(element) {
             let el = element;
@@ -133,16 +134,16 @@ export class ScrollableView extends Component {
         if(frozenView) {
             frozenScrollBody = DomHandler.findSingle(frozenView, '.p-datatable-scrollable-body');
         }
-        
+
         this.scrollHeaderBox.style.marginLeft = -1 * this.scrollBody.scrollLeft + 'px';
         if(this.scrollFooterBox) {
             this.scrollFooterBox.style.marginLeft = -1 * this.scrollBody.scrollLeft + 'px';
         }
-        
+
         if(frozenScrollBody) {
             frozenScrollBody.scrollTop = this.scrollBody.scrollTop;
         }
-        
+
         if(this.props.virtualScroll) {
             let viewport = DomHandler.getClientHeight(this.scrollBody);
             let tableHeight = DomHandler.getOuterHeight(this.scrollTable);
@@ -150,19 +151,19 @@ export class ScrollableView extends Component {
             let virtualTableHeight = DomHandler.getOuterHeight(this.virtualScroller);
             let pageCount = (virtualTableHeight / pageHeight)||1;
             let scrollBodyTop = this.scrollTable.style.top||'0';
-            
+
             if(this.scrollBody.scrollTop + viewport > parseFloat(scrollBodyTop) + tableHeight || this.scrollBody.scrollTop < parseFloat(scrollBodyTop)) {
                 if (this.loadingTable) {
                     this.loadingTable.style.display = 'table';
                     this.loadingTable.style.top = this.scrollBody.scrollTop + 'px';
                 }
-                
+
                 let page = Math.floor((this.scrollBody.scrollTop * pageCount) / (this.scrollBody.scrollHeight)) + 1;
                 if(this.props.onVirtualScroll) {
                     this.props.onVirtualScroll({
                         page: page
                     });
-                    
+
                     this.virtualScrollCallback = () => {
                         if (this.loadingTable) {
                             this.loadingTable.style.display = 'none';
@@ -172,19 +173,6 @@ export class ScrollableView extends Component {
                     }
                 }
             }
-        }
-    }
-
-    hasVerticalOverflow() {
-        return DomHandler.getOuterHeight(this.scrollTable) > DomHandler.getOuterHeight(this.scrollBody);
-    }
-
-    alignScrollBar() {
-        let scrollBarWidth = this.hasVerticalOverflow() ? DomHandler.calculateScrollbarWidth() : 0;
-        
-        this.scrollHeaderBox.style.marginRight = scrollBarWidth + 'px';
-        if(this.scrollFooterBox) {
-            this.scrollFooterBox.style.marginRight = scrollBarWidth + 'px';
         }
     }
 
