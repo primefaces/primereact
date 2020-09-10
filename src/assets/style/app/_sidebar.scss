@@ -40,10 +40,17 @@
             a,
             button {
                 color: var(--text-color);
-                display: block;
+                display: flex;
                 padding: .5rem;
                 border-radius: 3px;
                 cursor: pointer;
+                align-items: center;
+
+                .layout-menu-badge {
+                    padding: .14rem .5rem;
+                    font-size: .7rem;
+                    line-height: 1.4;
+                }
 
                 &:hover {
                     background-color: var(--surface-c);
