@@ -93,6 +93,7 @@ export class MultiSelect extends Component {
         };
 
         this.onClick = this.onClick.bind(this);
+        this.onKeyDown = this.onKeyDown.bind(this);
         this.onOptionClick = this.onOptionClick.bind(this);
         this.onOptionKeyDown = this.onOptionKeyDown.bind(this);
         this.onFocus = this.onFocus.bind(this);
@@ -119,9 +120,10 @@ export class MultiSelect extends Component {
     }
 
     onOptionKeyDown(event) {
-        let listItem = event.originalEvent.currentTarget;
+        const originalEvent = event.originalEvent;
+        let listItem = originalEvent.currentTarget;
 
-        switch(event.originalEvent.which) {
+        switch(originalEvent.which) {
             //down
             case 40:
                 var nextItem = this.findNextItem(listItem);
@@ -129,7 +131,7 @@ export class MultiSelect extends Component {
                     nextItem.focus();
                 }
 
-                event.originalEvent.preventDefault();
+                originalEvent.preventDefault();
             break;
 
             //up
@@ -139,13 +141,20 @@ export class MultiSelect extends Component {
                     prevItem.focus();
                 }
 
-                event.originalEvent.preventDefault();
+                originalEvent.preventDefault();
             break;
 
-            //enter
+            //enter and space
             case 13:
+            case 32:
                 this.onOptionClick(event);
-                event.originalEvent.preventDefault();
+                originalEvent.preventDefault();
+            break;
+
+            //escape
+            case 27:
+                this.hide();
+                this.focusInput.focus();
             break;
 
             default:
@@ -177,9 +186,38 @@ export class MultiSelect extends Component {
                 this.hide();
             }
             else {
-                this.focusInput.focus();
                 this.show();
             }
+
+            this.focusInput.focus();
+        }
+    }
+
+    onKeyDown(event){
+        switch(event.which) {
+            //down
+            case 40:
+                if (!this.state.overlayVisible && event.altKey) {
+                    this.show();
+                    event.preventDefault();
+                }
+            break;
+
+            //space
+            case 32:
+                if (!this.state.overlayVisible){
+                    this.show();
+                    event.preventDefault();
+                }
+            break;
+
+            //escape
+            case 27:
+                this.hide();
+            break;
+
+            default:
+            break;
         }
     }
 
@@ -256,6 +294,7 @@ export class MultiSelect extends Component {
 
     onCloseClick(event) {
         this.hide();
+        this.focusInput.focus();
         event.preventDefault();
         event.stopPropagation();
     }
@@ -543,8 +582,8 @@ export class MultiSelect extends Component {
             <div id={this.props.id} className={className} onClick={this.onClick} ref={el => this.container = el} style={this.props.style}>
                 {hiddenSelect}
                 <div className="p-hidden-accessible">
-                    <input readOnly type="text" onFocus={this.onFocus} onBlur={this.onBlur} ref={el => this.focusInput = el} aria-haspopup="listbox"
-                           aria-labelledby={this.props.ariaLabelledBy} id={this.props.inputId} />
+                    <input ref={el => this.focusInput = el} id={this.props.inputId} readOnly type="text" onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.onKeyDown}
+                        role="listbox" aria-haspopup="listbox" aria-labelledby={this.props.ariaLabelledBy} aria-expanded={this.state.overlayVisible} disabled={this.props.disabled} tabIndex={this.props.tabIndex} />
                 </div>
                 {label}
                 <div className="p-multiselect-trigger">
