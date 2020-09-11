@@ -1,5 +1,42 @@
 # Changelog
 
+## [5.0.0-rc.2](https://github.com/primefaces/primereact/tree/5.0.0-rc.2) (2020-09-10)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/5.0.0-rc.1...5.0.0-rc.2)
+
+**Implemented New Features and Enhancements:**
+
+- Add resetFilterOnHide property to MultiSelect [\#1565](https://github.com/primefaces/primereact/issues/1565)
+- Add resetFilterOnHide property to Dropdown [\#1564](https://github.com/primefaces/primereact/issues/1564)
+- Add keyboard support to MultiSelect [\#1563](https://github.com/primefaces/primereact/issues/1563)
+- Improve SelectButton implementation [\#1561](https://github.com/primefaces/primereact/issues/1561)
+- Add optionDisabled property to SelectButton [\#1560](https://github.com/primefaces/primereact/issues/1560)
+- Add emptyFilterMessage property to MultiSelect [\#1556](https://github.com/primefaces/primereact/issues/1556)
+- Add emptyFilterMessage property to Dropdown [\#1554](https://github.com/primefaces/primereact/issues/1554)
+- Negative sign with InputNumber [\#1551](https://github.com/primefaces/primereact/issues/1551)
+- InputNumber: pasting doesn't work correctly [\#1549](https://github.com/primefaces/primereact/issues/1549)
+- InputGroup support for input components with wrappers [\#1548](https://github.com/primefaces/primereact/issues/1548)
+- Update PrimeFlex documentation to 2.0.0 [\#1542](https://github.com/primefaces/primereact/issues/1542)
+- Scrollable Table alignment improvement [\#1541](https://github.com/primefaces/primereact/issues/1541)
+- DataTable onRowClick executes when multiple selection mode is enabled and user clicks on selection checkbox column cell [\#1534](https://github.com/primefaces/primereact/issues/1534)
+- Add content property to Message component [\#1463](https://github.com/primefaces/primereact/issues/1463)
+- Add color property to ProgressBar [\#1457](https://github.com/primefaces/primereact/issues/1457)
+- NumberInput does not pass down validation attributes to input element. [\#1444](https://github.com/primefaces/primereact/issues/1444)
+
+**Fixed bugs:**
+
+- The left and right arrow keys not working on input elements inside Tree [\#1559](https://github.com/primefaces/primereact/issues/1559)
+- Items in PanelMenu are highlighted wrongly with Material dark themes [\#1557](https://github.com/primefaces/primereact/issues/1557)
+- Calendar misplaced layout if more than one month is shown [\#1553](https://github.com/primefaces/primereact/issues/1553)
+- inputNumber cannot set value bigger than 99.999 for an ES locale [\#1552](https://github.com/primefaces/primereact/issues/1552)
+- inputNumber with numeric prefix is not working as expected  [\#1550](https://github.com/primefaces/primereact/issues/1550)
+- Item selection does not work on Dropdown with scrollable panel [\#1544](https://github.com/primefaces/primereact/issues/1544)
+- Dialog with Long Content does not scroll in IE11 [\#1538](https://github.com/primefaces/primereact/issues/1538)
+- Pill Text not centered [\#1532](https://github.com/primefaces/primereact/issues/1532)
+- Ripple effect with typescript [\#1530](https://github.com/primefaces/primereact/issues/1530)
+- Component TreeTable doesn't added props className [\#1473](https://github.com/primefaces/primereact/issues/1473)
+- Dialog aria-labelledby references an unexisting id [\#1405](https://github.com/primefaces/primereact/issues/1405)
+
 ## [5.0.0-rc.1](https://github.com/primefaces/primereact/tree/5.0.0-rc.1) (2020-08-20)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/4.2.2...5.0.0-rc.1)
