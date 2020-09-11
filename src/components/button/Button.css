@@ -4,7 +4,6 @@
     cursor: pointer;
     user-select: none;
     align-items: center;
-    vertical-align: bottom;
     text-align: center;
     overflow: hidden;
     position: relative;
@@ -12,6 +11,7 @@
 
 .p-button-label {
     flex: 1 1 auto;
+    line-height: normal;
 }
 
 .p-button-icon-right {
