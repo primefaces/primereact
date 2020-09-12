@@ -136,12 +136,13 @@ export class Fieldset extends Component {
 
     renderLegend(collapsed) {
         const legendContent = this.renderLegendContent(collapsed);
-
-        return (
-            <legend className="p-fieldset-legend p-unselectable-text" onClick={this.toggle}>
-                {legendContent}
-            </legend>
-        );
+        if (this.props.legend != null || this.props.toggleable) {
+            return (
+                <legend className="p-fieldset-legend p-unselectable-text" onClick={this.toggle}>
+                    {legendContent}
+                </legend>
+            );
+        }
     }
 
     render() {
