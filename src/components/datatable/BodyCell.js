@@ -35,16 +35,16 @@ export class BodyCell extends Component {
     onKeyDown(event) {
         if (this.props.editMode !== 'row') {
             if (event.which === 13 || event.which === 9) { // tab || enter
-                this.switchCellToViewMode(true);
+                this.switchCellToViewMode(true, event);
             }
             if (event.which === 27) // escape
             {
-                this.switchCellToViewMode(false);
+                this.switchCellToViewMode(false, event);
             }
         }
     }
 
-    onClick() {
+    onClick(event) {
         if (this.props.editMode !== 'row') {
             this.editingCellClick = true;
 
@@ -53,7 +53,7 @@ export class BodyCell extends Component {
                     editing: true
                 }, () => {
                     if (this.props.onEditorInit) {
-                        this.props.onEditorInit(this.props);
+                        this.props.onEditorInit(this.props, event);
                     }
                 });
 
@@ -64,9 +64,9 @@ export class BodyCell extends Component {
         }
     }
 
-    onBlur() {
+    onBlur(event) {
         if (this.props.editMode !== 'row' && this.state.editing && this.props.editorValidatorEvent === 'blur') {
-            this.switchCellToViewMode(true);
+            this.switchCellToViewMode(true, event);
         }
     }
 
@@ -78,7 +78,7 @@ export class BodyCell extends Component {
         if (!this.documentEditListener) {
             this.documentEditListener = (event) => {
                 if (!this.editingCellClick) {
-                    this.switchCellToViewMode(true);
+                    this.switchCellToViewMode(true, event);
                 }
 
                 this.editingCellClick = false;
@@ -101,19 +101,19 @@ export class BodyCell extends Component {
         this.unbindDocumentEditListener();
     }
 
-    switchCellToViewMode(submit) {
+    switchCellToViewMode(submit, event) {
         if (!submit && this.props.onEditorCancel) {
-            this.props.onEditorCancel(this.props);
+            this.props.onEditorCancel(this.props, event);
         }
 
         let valid = true;
         if (this.props.editorValidator) {
-            valid = this.props.editorValidator(this.props);
+            valid = this.props.editorValidator(this.props, event);
         }
 
         if (valid) {
             if (submit && this.props.onEditorSubmit) {
-                this.props.onEditorSubmit(this.props);
+                this.props.onEditorSubmit(this.props, event);
             }
 
             this.closeCell();
