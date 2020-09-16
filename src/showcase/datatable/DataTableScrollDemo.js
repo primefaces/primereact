@@ -17,7 +17,8 @@ export class DataTableScrollDemo extends Component {
             virtualCustomers: [],
             inmemoryData: [],
             lazyTotalRecords: 0,
-            loading: false
+            loading: false,
+            virtualLoading: false
         };
 
         this.customerService = new CustomerService();
@@ -26,7 +27,7 @@ export class DataTableScrollDemo extends Component {
     }
 
     componentDidMount() {
-        this.setState({ loading: true });
+        this.setState({ loading: true, virtualLoading: true });
 
         this.customerService.getCustomersLarge().then(data => {
             this.setState({
@@ -75,7 +76,8 @@ export class DataTableScrollDemo extends Component {
     loadVirtualCustomers() {
         this.setState({
             virtualCustomers: this.loadChunk(0, 40),
-            lazyTotalRecords: 500
+            lazyTotalRecords: 500,
+            virtualLoading: false
         });
     }
 
@@ -138,7 +140,7 @@ export class DataTableScrollDemo extends Component {
 
                     <div className="card">
                         <h5>Virtual Scroll</h5>
-                        <DataTable value={this.state.virtualCustomers} scrollable scrollHeight="200px" lazy rows={20} loading={this.state.loading}
+                        <DataTable value={this.state.virtualCustomers} scrollable scrollHeight="200px" lazy rows={20} loading={this.state.virtualLoading}
                             virtualScroll virtualRowHeight={45} onVirtualScroll={this.onVirtualScroll} totalRecords={this.state.lazyTotalRecords}>
                             <Column field="name" header="Name" loadingBody={this.loadingText}></Column>
                             <Column field="country.name" header="Country" loadingBody={this.loadingText}></Column>
@@ -216,7 +218,8 @@ export class DataTableScrollDemo extends Component {
             virtualCustomers: [],
             inmemoryData: [],
             lazyTotalRecords: 0,
-            loading: false
+            loading: false,
+            virtualLoading: false
         };
 
         this.customerService = new CustomerService();
@@ -225,7 +228,7 @@ export class DataTableScrollDemo extends Component {
     }
 
     componentDidMount() {
-        this.setState({ loading: true });
+        this.setState({ loading: true, virtualLoading: true });
 
         this.customerService.getCustomersLarge().then(data => {
             this.setState({
@@ -274,7 +277,8 @@ export class DataTableScrollDemo extends Component {
     loadVirtualCustomers() {
         this.setState({
             virtualCustomers: this.loadChunk(0, 40),
-            lazyTotalRecords: 500
+            lazyTotalRecords: 500,
+            virtualLoading: false
         });
     }
 
@@ -328,7 +332,7 @@ export class DataTableScrollDemo extends Component {
 
                 <div className="card">
                     <h5>Virtual Scroll</h5>
-                    <DataTable value={this.state.virtualCustomers} scrollable scrollHeight="200px" lazy rows={20} loading={this.state.loading}
+                    <DataTable value={this.state.virtualCustomers} scrollable scrollHeight="200px" lazy rows={20} loading={this.state.virtualLoading}
                         virtualScroll virtualRowHeight={45} onVirtualScroll={this.onVirtualScroll} totalRecords={this.state.lazyTotalRecords}>
                         <Column field="name" header="Name" loadingBody={this.loadingText}></Column>
                         <Column field="country.name" header="Country" loadingBody={this.loadingText}></Column>
