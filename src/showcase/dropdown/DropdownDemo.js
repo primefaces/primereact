@@ -91,7 +91,7 @@ export class DropdownDemo extends Component {
                 <div className="content-section implementation dropdown-demo">
                     <div className="card">
                         <h5>Basic</h5>
-                        <Dropdown value={this.state.selectedCity1} options={[]} onChange={this.onCityChange} optionLabel="name" placeholder="Select a City" />
+                        <Dropdown value={this.state.selectedCity1} options={this.cities} onChange={this.onCityChange} optionLabel="name" placeholder="Select a City" />
 
                         <h5>Editable</h5>
                         <Dropdown value={this.state.selectedCity2} options={this.cities} onChange={this.onCityChange2} optionLabel="name" editable />
