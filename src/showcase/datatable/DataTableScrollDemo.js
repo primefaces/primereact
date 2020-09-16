@@ -5,6 +5,7 @@ import { CustomerService } from '../service/CustomerService';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { LiveEditor } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import './DataTableDemo.scss';
 
 export class DataTableScrollDemo extends Component {
 
@@ -33,7 +34,7 @@ export class DataTableScrollDemo extends Component {
                 loading: false
             });
         });
-        this.customerService.getCustomersXLarge().then(data => this.setState({ inmemoryData: data }));
+        this.customerService.getCustomersXLarge().then(data => this.setState({ inmemoryData: data }, this.loadVirtualCustomers));
 
         this.frozenValue = [
             {
@@ -69,13 +70,13 @@ export class DataTableScrollDemo extends Component {
                 }
             }
         ];
+    }
 
-        setTimeout(() => {
-            this.setState({
-                virtualCustomers: this.loadChunk(0, 40),
-                lazyTotalRecords: 500
-            });
-        }, 250);
+    loadVirtualCustomers() {
+        this.setState({
+            virtualCustomers: this.loadChunk(0, 40),
+            lazyTotalRecords: 500
+        });
     }
 
     loadChunk(index, length) {
@@ -124,7 +125,7 @@ export class DataTableScrollDemo extends Component {
                     </AppInlineHeader>
                 </div>
 
-                <div className="content-section implementation">
+                <div className="content-section implementation datatable-scroll-demo">
                     <div className="card">
                         <h5>Vertical</h5>
                         <DataTable value={this.state.customers} scrollable scrollHeight="200px" loading={this.state.loading}>
@@ -232,7 +233,7 @@ export class DataTableScrollDemo extends Component {
                 loading: false
             });
         });
-        this.customerService.getCustomersXLarge().then(data => this.setState({ inmemoryData: data }));
+        this.customerService.getCustomersXLarge().then(data => this.setState({ inmemoryData: data }, this.loadVirtualCustomers));
 
         this.frozenValue = [
             {
@@ -268,13 +269,13 @@ export class DataTableScrollDemo extends Component {
                 }
             }
         ];
+    }
 
-        setTimeout(() => {
-            this.setState({
-                virtualCustomers: this.loadChunk(0, 40),
-                lazyTotalRecords: 500
-            });
-        }, 250);
+    loadVirtualCustomers() {
+        this.setState({
+            virtualCustomers: this.loadChunk(0, 40),
+            lazyTotalRecords: 500
+        });
     }
 
     loadChunk(index, length) {
