@@ -19,6 +19,8 @@ interface AutoCompleteProps {
     inputId?: string;
     inputStyle?: object;
     inputClassName?: string;
+    panelClassName?: string;
+    panelStyle?: object;
     placeholder?: string;
     readonly?: boolean;
     disabled?: boolean;

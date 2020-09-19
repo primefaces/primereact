@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import ObjectUtils from '../utils/ObjectUtils';
 import { Ripple } from '../ripple/Ripple';
+import classNames from 'classnames';
 
 export class AutoCompletePanel extends Component {
 
@@ -14,7 +15,9 @@ export class AutoCompletePanel extends Component {
         onItemClick: null,
         scrollHeight: '200px',
         listId: null,
-        ariaSelected: null
+        ariaSelected: null,
+        panelClassName: null,
+        panelStyle: null
     }
 
     static propTypes = {
@@ -25,10 +28,14 @@ export class AutoCompletePanel extends Component {
         onItemClick: PropTypes.func,
         scrollHeight: PropTypes.string,
         listId: PropTypes.any,
-        ariaSelected: PropTypes.any
+        ariaSelected: PropTypes.any,
+        panelClassName: PropTypes.string,
+        panelStyle: PropTypes.object
     };
 
     renderElement() {
+        const panelClassName = classNames('p-autocomplete-panel p-component', this.props.panelClassName);
+        const panelStyle = { maxHeight: this.props.scrollHeight, ...this.props.panelStyle };
         let items;
 
         if (this.props.suggestions) {
@@ -45,7 +52,7 @@ export class AutoCompletePanel extends Component {
         }
 
         return (
-            <div ref={(el) => this.element = el} className="p-autocomplete-panel p-component" style={{ maxHeight: this.props.scrollHeight }}>
+            <div ref={(el) => this.element = el} className={panelClassName} style={panelStyle}>
                 <ul className="p-autocomplete-items" role="listbox" id={this.props.listId}>
                     {items}
                 </ul>

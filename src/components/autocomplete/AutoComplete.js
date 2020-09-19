@@ -31,6 +31,8 @@ export class AutoComplete extends Component {
         inputId: null,
         inputStyle: null,
         inputClassName: null,
+        panelClassName: null,
+        panelStyle: null,
         placeholder: null,
         readonly: false,
         disabled: false,
@@ -78,6 +80,8 @@ export class AutoComplete extends Component {
         inputId: PropTypes.string,
         inputStyle: PropTypes.object,
         inputClassName: PropTypes.string,
+        panelClassName: PropTypes.string,
+        panelStyle: PropTypes.object,
         placeholder: PropTypes.string,
         readonly: PropTypes.bool,
         disabled: PropTypes.bool,
@@ -687,7 +691,8 @@ export class AutoComplete extends Component {
                 <CSSTransition classNames="p-connected-overlay" in={this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }}
                     unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit}>
                     <AutoCompletePanel ref={(el) => this.overlay = el} suggestions={this.props.suggestions} field={this.props.field} listId={this.listId}
-                            appendTo={this.props.appendTo} itemTemplate={this.props.itemTemplate} onItemClick={this.selectItem} ariaSelected={this.ariaSelected}/>
+                            appendTo={this.props.appendTo} itemTemplate={this.props.itemTemplate} onItemClick={this.selectItem} ariaSelected={this.ariaSelected}
+                            panelStyle={this.props.panelStyle} panelClassName={this.props.panelClassName}/>
                 </CSSTransition>
             </span>
         );
