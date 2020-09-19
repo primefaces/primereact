@@ -511,6 +511,15 @@ export class Carousel extends Component {
             }
         }
 
+        if (prevProps.page !== this.props.page) {
+            if (this.props.page > prevProps.page && this.props.page <= (this.totalIndicators - 1)) {
+				this.step(-1, this.props.page);
+			}
+			else if (this.props.page < prevProps.page) {
+				this.step(1, this.props.page);
+			}
+        }
+
         if (!stateChanged && this.isAutoplay()) {
             this.startAutoplay();
         }
