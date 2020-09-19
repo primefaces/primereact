@@ -2,6 +2,7 @@ import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
 interface PasswordProps extends React.HTMLProps<HTMLInputElement> {
+    id?: string;
     promptLabel?: string;
     weakLabel?: string;
     mediumLabel?: string;
