@@ -22,6 +22,8 @@ export class MultiSelect extends Component {
         optionValue: null,
         style: null,
         className: null,
+        panelClassName: null,
+        panelStyle: null,
         scrollHeight: '200px',
         placeholder: null,
         fixedPlaceholder: false,
@@ -59,6 +61,8 @@ export class MultiSelect extends Component {
         optionValue: PropTypes.string,
         style: PropTypes.object,
         className: PropTypes.string,
+        panelClassName: PropTypes.string,
+        panelStyle: PropTypes.object,
         scrollHeight: PropTypes.string,
         placeholder: PropTypes.string,
         fixedPlaceholder: PropTypes.bool,
@@ -637,7 +641,7 @@ export class MultiSelect extends Component {
                 <CSSTransition classNames="p-connected-overlay" in={this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }}
                     unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
                     <MultiSelectPanel ref={el => this.panel = el} header={header} appendTo={this.props.appendTo}
-                        scrollHeight={this.props.scrollHeight}>
+                        scrollHeight={this.props.scrollHeight} panelClassName={this.props.panelClassName} panelStyle={this.props.panelStyle}>
                         {items}
                     </MultiSelectPanel>
                 </CSSTransition>

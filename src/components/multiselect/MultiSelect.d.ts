@@ -10,6 +10,8 @@ interface MultiSelectProps {
     optionValue?: string;
     style?: object;
     className?: string;
+    panelClassName?: string;
+    panelStyle?: object;
     scrollHeight?: string;
     placeholder?: string;
     fixedPlaceholder?: boolean;
