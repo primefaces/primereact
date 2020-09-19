@@ -25,7 +25,7 @@ export class CurrentPageReport extends Component {
         let text = this.props.template
             .replace("{currentPage}", this.props.page + 1)
             .replace("{totalPages}", this.props.pageCount)
-            .replace("{first}", this.props.first + 1)
+            .replace("{first}", Math.min(this.props.first + 1, this.props.totalRecords))
             .replace("{last}", Math.min(this.props.first + this.props.rows, this.props.totalRecords))
             .replace("{rows}", this.props.rows)
             .replace("{totalRecords}", this.props.totalRecords);
