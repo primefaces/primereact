@@ -447,6 +447,18 @@ selectedItemTemplate(option) {
                             <td>Style class of the element.</td>
                         </tr>
                         <tr>
+                            <td>panelClassName</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Style class of the overlay panel element.</td>
+                        </tr>
+                        <tr>
+                            <td>panelStyle</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Inline style of the overlay panel element.</td>
+                        </tr>
+                        <tr>
                             <td>scrollHeight</td>
                             <td>string</td>
                             <td>200px</td>
