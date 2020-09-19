@@ -7,6 +7,7 @@ import { tip } from '../tooltip/Tooltip';
 import ObjectUtils from '../utils/ObjectUtils';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import { CSSTransition } from 'react-transition-group';
+import classNames from 'classnames';
 
 export class Password extends Component {
 
@@ -18,7 +19,9 @@ export class Password extends Component {
         strongLabel: 'Strong',
         feedback: true,
         tooltip: null,
-        tooltipOptions: null
+        tooltipOptions: null,
+        panelClassName: null,
+        panelStyle: null
     };
 
     static propTypes = {
@@ -29,7 +32,9 @@ export class Password extends Component {
         strongLabel:PropTypes.string,
         feedback: PropTypes.bool,
         tooltip: PropTypes.string,
-        tooltipOptions: PropTypes.object
+        tooltipOptions: PropTypes.object,
+        panelClassName: PropTypes.string,
+        panelStyle: PropTypes.object
     };
 
     constructor(props) {
@@ -224,6 +229,7 @@ export class Password extends Component {
     }
 
     render() {
+        const panelClassName = classNames('p-password-panel p-component', this.props.panelClassName);
         let inputProps = ObjectUtils.findDiffKeys(this.props, Password.defaultProps);
 
         return (
@@ -232,7 +238,7 @@ export class Password extends Component {
 
                 <CSSTransition classNames="p-connected-overlay" in={this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }}
                     unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit}>
-                    <div ref={(el) => this.panel = el} className="p-password-panel p-component">
+                    <div ref={(el) => this.panel = el} className={panelClassName} style={this.props.panelStyle}>
                         <div className="p-password-meter" style={{ backgroundPosition: this.state.meterPosition }}></div>
                         <div className="p-password-info">
                             {this.state.infoText}
