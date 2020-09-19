@@ -72,4 +72,5 @@ interface TreeTableProps {
 }
 
 export class TreeTable extends React.Component<TreeTableProps, any> {
+    public filter<T>(value:T, field:string, mode:string):void;
 }
