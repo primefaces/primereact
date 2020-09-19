@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
 import { CSSTransition } from 'react-transition-group';
+import UniqueComponentId from '../utils/UniqueComponentId';
 
 export class SlideMenuSub extends Component {
 
@@ -153,11 +154,10 @@ export class SlideMenuSub extends Component {
         );
     }
 }
-
 export class SlideMenu extends Component {
 
     static defaultProps = {
-        id: null,
+        id: UniqueComponentId(),
         model: null,
         popup: false,
         style: null,
@@ -269,12 +269,14 @@ export class SlideMenu extends Component {
     onEntered() {
         this.bindDocumentClickListener();
         this.bindDocumentResizeListener();
+        this.bindScrollListener();
     }
 
     onExit() {
         this.target = null;
         this.unbindDocumentClickListener();
         this.unbindDocumentResizeListener();
+        this.unbindScrollListener();
     }
 
     onExited() {
@@ -323,6 +325,34 @@ export class SlideMenu extends Component {
         }
     }
 
+    bindScrollListener() {
+        this.scrollableParents = DomHandler.getScrollableParents(this.container);
+        this.scrollListeners = {};
+        for (let i = 0; i < this.scrollableParents.length; i++) {
+            let parent = this.scrollableParents[i];
+            if (!this.scrollListeners[`${this.props.id}_${i}`]) {
+                this.scrollListeners[`${this.props.id}_${i}`] = (event) => {
+                    if (this.state.visible) {
+                        this.hide(event);
+                    }
+                }
+                parent.addEventListener('scroll', this.scrollListeners[`${this.props.id}_${i}`]);
+            }
+        }
+    }
+
+    unbindScrollListener() {
+        if (this.scrollableParents) {
+            for (let i = 0; i < this.scrollableParents.length; i++) {
+                let parent = this.scrollableParents[i];
+                if (this.scrollListeners[`${this.props.id}_${i}`]) {
+                    parent.removeEventListener('scroll', this.scrollListeners[`${this.props.id}_${i}`]);
+                    this.scrollListeners[`${this.props.id}_${i}`] = null;
+                }
+            }
+        }
+    }
+
     componentDidUpdate(prevProps, prevState) {
         if (this.props.model !== prevProps.model) {
             this.setState({
@@ -334,6 +364,7 @@ export class SlideMenu extends Component {
     componentWillUnmount() {
         this.unbindDocumentClickListener();
         this.unbindDocumentResizeListener();
+        this.unbindScrollListener();
     }
 
     renderElement() {

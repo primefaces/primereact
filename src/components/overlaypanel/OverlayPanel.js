@@ -5,11 +5,12 @@ import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
 import { CSSTransition } from 'react-transition-group';
 import { Ripple } from '../ripple/Ripple';
+import UniqueComponentId from '../utils/UniqueComponentId';
 
 export class OverlayPanel extends Component {
 
     static defaultProps = {
-        id: null,
+        id: UniqueComponentId(),
         dismissable: true,
         showCloseIcon: false,
         style: null,
@@ -62,6 +63,34 @@ export class OverlayPanel extends Component {
         if(this.documentClickListener) {
             document.removeEventListener('click', this.documentClickListener);
             this.documentClickListener = null;
+        }
+    }
+
+    bindScrollListener() {
+        this.scrollableParents = DomHandler.getScrollableParents(this.container);
+        this.scrollListeners = {};
+        for (let i = 0; i < this.scrollableParents.length; i++) {
+            let parent = this.scrollableParents[i];
+            if (!this.scrollListeners[`${this.props.id}_${i}`]) {
+                this.scrollListeners[`${this.props.id}_${i}`] = () => {
+                    if (this.state.visible) {
+                        this.hide();
+                    }
+                }
+                parent.addEventListener('scroll', this.scrollListeners[`${this.props.id}_${i}`]);
+            }
+        }
+    }
+
+    unbindScrollListener() {
+        if (this.scrollableParents) {
+            for (let i = 0; i < this.scrollableParents.length; i++) {
+                let parent = this.scrollableParents[i];
+                if (this.scrollListeners[`${this.props.id}_${i}`]) {
+                    parent.removeEventListener('scroll', this.scrollListeners[`${this.props.id}_${i}`]);
+                    this.scrollListeners[`${this.props.id}_${i}`] = null;
+                }
+            }
         }
     }
 
@@ -126,10 +155,12 @@ export class OverlayPanel extends Component {
 
     onEntered() {
         this.bindDocumentClickListener();
+        this.bindScrollListener();
     }
 
     onExit() {
         this.unbindDocumentClickListener();
+        this.unbindScrollListener();
     }
 
     align() {
@@ -144,6 +175,7 @@ export class OverlayPanel extends Component {
 
     componentWillUnmount() {
         this.unbindDocumentClickListener();
+        this.unbindScrollListener();
     }
 
     renderCloseIcon() {

@@ -1,20 +1,20 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import {InputText} from '../inputtext/InputText';
-import {Button} from '../button/Button';
+import { InputText } from '../inputtext/InputText';
+import { Button } from '../button/Button';
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
-import {AutoCompletePanel} from './AutoCompletePanel';
+import { AutoCompletePanel } from './AutoCompletePanel';
 import classNames from 'classnames';
-import {tip} from "../tooltip/Tooltip";
+import { tip } from '../tooltip/Tooltip';
 import UniqueComponentId from "../utils/UniqueComponentId";
 import { CSSTransition } from 'react-transition-group';
 
 export class AutoComplete extends Component {
 
     static defaultProps = {
-        id: null,
+        id: UniqueComponentId(),
         value: null,
         name: null,
         type: 'text',
@@ -129,7 +129,7 @@ export class AutoComplete extends Component {
         this.onOverlayEntered = this.onOverlayEntered.bind(this);
         this.onOverlayExit = this.onOverlayExit.bind(this);
 
-        this.listId = UniqueComponentId() + '_list';
+        this.listId = this.props.id + '_list';
     }
 
     onInputChange(event) {
@@ -263,10 +263,12 @@ export class AutoComplete extends Component {
 
     onOverlayEntered() {
         this.bindDocumentClickListener();
+        this.bindScrollListener();
     }
 
     onOverlayExit() {
         this.unbindDocumentClickListener();
+        this.unbindScrollListener();
     }
 
     alignOverlay() {
@@ -490,6 +492,34 @@ export class AutoComplete extends Component {
         }
     }
 
+    bindScrollListener() {
+        this.scrollableParents = DomHandler.getScrollableParents(this.container);
+        this.scrollListeners = {};
+        for (let i = 0; i < this.scrollableParents.length; i++) {
+            let parent = this.scrollableParents[i];
+            if (!this.scrollListeners[`${this.props.id}_${i}`]) {
+                this.scrollListeners[`${this.props.id}_${i}`] = () => {
+                    if (this.state.overlayVisible) {
+                        this.hideOverlay();
+                    }
+                }
+                parent.addEventListener('scroll', this.scrollListeners[`${this.props.id}_${i}`]);
+            }
+        }
+    }
+
+    unbindScrollListener() {
+        if (this.scrollableParents) {
+            for (let i = 0; i < this.scrollableParents.length; i++) {
+                let parent = this.scrollableParents[i];
+                if (this.scrollListeners[`${this.props.id}_${i}`]) {
+                    parent.removeEventListener('scroll', this.scrollListeners[`${this.props.id}_${i}`]);
+                    this.scrollListeners[`${this.props.id}_${i}`] = null;
+                }
+            }
+        }
+    }
+
     isOutsideClicked(event) {
         return this.container && (this.overlay && this.overlay.element && !this.overlay.element.contains(event.target)) && !this.isInputClicked(event);
     }
@@ -535,6 +565,7 @@ export class AutoComplete extends Component {
 
     componentWillUnmount() {
         this.unbindDocumentClickListener();
+        this.unbindScrollListener();
 
         if (this.tooltip) {
             this.tooltip.destroy();

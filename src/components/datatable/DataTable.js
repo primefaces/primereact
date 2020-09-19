@@ -1490,7 +1490,7 @@ export class DataTable extends Component {
         }
 
         return (
-            <div id={this.props.id} className={className} style={this.props.style} ref={(el) => {this.container = el;}}>
+            <div id={this.props.id} className={className} style={this.props.style} ref={(el) => {this.container = el;}} data-scrollselectors=".p-datatable-scrollable-body, .p-datatable-unfrozen-view .p-datatable-scrollable-body">
                 {loader}
                 {headerFacet}
                 {paginatorTop}

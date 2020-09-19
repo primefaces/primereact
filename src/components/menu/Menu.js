@@ -4,11 +4,12 @@ import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
 import { CSSTransition } from 'react-transition-group';
+import UniqueComponentId from '../utils/UniqueComponentId';
 
 export class Menu extends Component {
 
     static defaultProps = {
-        id: null,
+        id: UniqueComponentId(),
         model: null,
         popup: false,
         style: null,
@@ -150,11 +151,13 @@ export class Menu extends Component {
 
     onEntered() {
         this.bindDocumentListeners();
+        this.bindScrollListener();
     }
 
     onExit() {
         this.target = null;
         this.unbindDocumentListeners();
+        this.unbindScrollListener();
     }
 
     bindDocumentListeners() {
@@ -179,10 +182,6 @@ export class Menu extends Component {
         }
     }
 
-    isOutsideClicked(event) {
-        return this.container && !(this.container.isSameNode(event.target) || this.container.contains(event.target));
-    }
-
     unbindDocumentListeners() {
         if(this.documentClickListener) {
             document.removeEventListener('click', this.documentClickListener);
@@ -195,8 +194,41 @@ export class Menu extends Component {
         }
     }
 
+    bindScrollListener() {
+        this.scrollableParents = DomHandler.getScrollableParents(this.container);
+        this.scrollListeners = {};
+        for (let i = 0; i < this.scrollableParents.length; i++) {
+            let parent = this.scrollableParents[i];
+            if (!this.scrollListeners[`${this.props.id}_${i}`]) {
+                this.scrollListeners[`${this.props.id}_${i}`] = (event) => {
+                    if (this.state.visible) {
+                        this.hide(event);
+                    }
+                }
+                parent.addEventListener('scroll', this.scrollListeners[`${this.props.id}_${i}`]);
+            }
+        }
+    }
+
+    unbindScrollListener() {
+        if (this.scrollableParents) {
+            for (let i = 0; i < this.scrollableParents.length; i++) {
+                let parent = this.scrollableParents[i];
+                if (this.scrollListeners[`${this.props.id}_${i}`]) {
+                    parent.removeEventListener('scroll', this.scrollListeners[`${this.props.id}_${i}`]);
+                    this.scrollListeners[`${this.props.id}_${i}`] = null;
+                }
+            }
+        }
+    }
+
+    isOutsideClicked(event) {
+        return this.container && !(this.container.isSameNode(event.target) || this.container.contains(event.target));
+    }
+
     componentWillUnmount() {
         this.unbindDocumentListeners();
+        this.unbindScrollListener();
     }
 
     renderSubmenu(submenu, index) {

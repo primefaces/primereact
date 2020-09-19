@@ -1,14 +1,17 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import {InputText} from '../inputtext/InputText';
+import { InputText } from '../inputtext/InputText';
 import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
-import {tip} from "../tooltip/Tooltip";
+import { tip } from '../tooltip/Tooltip';
 import ObjectUtils from '../utils/ObjectUtils';
+import UniqueComponentId from '../utils/UniqueComponentId';
+import { CSSTransition } from 'react-transition-group';
 
 export class Password extends Component {
 
     static defaultProps = {
+        id: UniqueComponentId(),
         promptLabel: 'Enter a password',
         weakLabel: 'Weak',
         mediumLabel: 'Medium',
@@ -19,6 +22,7 @@ export class Password extends Component {
     };
 
     static propTypes = {
+        id: PropTypes.string,
         promptLabel: PropTypes.string,
         weakLabel: PropTypes.string,
         mediumLabel: PropTypes.string,
@@ -31,24 +35,45 @@ export class Password extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            overlayVisible: false,
+            meterPosition: '',
+            infoText: props.promptLabel
+        };
+
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
         this.onKeyup = this.onKeyup.bind(this);
+        this.onOverlayEnter = this.onOverlayEnter.bind(this);
+        this.onOverlayEntered = this.onOverlayEntered.bind(this);
+        this.onOverlayExit = this.onOverlayExit.bind(this);
+    }
+
+    showOverlay() {
+        this.setState({ overlayVisible: true });
+    }
+
+    hideOverlay() {
+        this.setState({ overlayVisible: false });
+    }
+
+    onOverlayEnter() {
+        this.panel.style.zIndex = String(DomHandler.generateZIndex());
+        this.panel.style.minWidth = DomHandler.getOuterWidth(this.inputEl) + 'px';
+        DomHandler.absolutePosition(this.panel, this.inputEl);
+    }
+
+    onOverlayEntered() {
+        this.bindScrollListener();
+    }
+
+    onOverlayExit() {
+        this.unbindScrollListener();
     }
 
     onFocus(e) {
         if (this.props.feedback) {
-            if (!this.panel) {
-                this.createPanel();
-            }
-
-            this.panel.style.zIndex = String(DomHandler.generateZIndex());
-            this.panel.style.display = 'block';
-            setTimeout(() => {
-                DomHandler.addClass(this.panel, 'p-connected-overlay-visible');
-                DomHandler.removeClass(this.panel, 'p-connected-overlay-hidden');
-            }, 1);
-            DomHandler.absolutePosition(this.panel, this.inputEl);
+            this.showOverlay();
         }
 
         if (this.props.onFocus) {
@@ -58,13 +83,7 @@ export class Password extends Component {
 
     onBlur(e) {
         if (this.props.feedback) {
-            DomHandler.addClass(this.panel, 'p-connected-overlay-hidden');
-            DomHandler.removeClass(this.panel, 'p-connected-overlay-visible');
-
-            setTimeout(() => {
-                this.panel.style.display = 'none';
-                DomHandler.removeClass(this.panel, 'p-connected-overlay-hidden');
-            }, 150);
+            this.hideOverlay();
         }
 
         if (this.props.onBlur) {
@@ -99,8 +118,14 @@ export class Password extends Component {
                 }
             }
 
-            this.meter.style.backgroundPosition = meterPos;
-            this.info.textContent = label;
+            this.setState({
+                meterPosition: meterPos,
+                infoText: label
+            }, () => {
+                if (!this.state.overlayVisible) {
+                    this.showOverlay();
+                }
+            });
         }
 
         if (this.props.onKeyUp) {
@@ -138,19 +163,32 @@ export class Password extends Component {
             return 1 + 0.5 * (x / (x + y/4));
     }
 
-    createPanel() {
-        this.panel = document.createElement('div');
-        this.panel.className = 'p-password-panel p-component p-password-panel-overlay p-connected-overlay';
-        this.meter = document.createElement('div');
-        this.meter.className = 'p-password-meter';
-        this.info = document.createElement('div');
-        this.info.className = 'p-password-info';
-        this.info.textContent = this.props.promptLabel;
+    bindScrollListener() {
+        this.scrollableParents = DomHandler.getScrollableParents(this.inputEl);
+        this.scrollListeners = {};
+        for (let i = 0; i < this.scrollableParents.length; i++) {
+            let parent = this.scrollableParents[i];
+            if (!this.scrollListeners[`${this.props.id}_${i}`]) {
+                this.scrollListeners[`${this.props.id}_${i}`] = () => {
+                    if (this.state.overlayVisible) {
+                        this.hideOverlay();
+                    }
+                }
+                parent.addEventListener('scroll', this.scrollListeners[`${this.props.id}_${i}`]);
+            }
+        }
+    }
 
-        this.panel.style.minWidth = DomHandler.getOuterWidth(this.inputEl) + 'px';
-        this.panel.appendChild(this.meter);
-        this.panel.appendChild(this.info);
-        document.body.appendChild(this.panel);
+    unbindScrollListener() {
+        if (this.scrollableParents) {
+            for (let i = 0; i < this.scrollableParents.length; i++) {
+                let parent = this.scrollableParents[i];
+                if (this.scrollListeners[`${this.props.id}_${i}`]) {
+                    parent.removeEventListener('scroll', this.scrollListeners[`${this.props.id}_${i}`]);
+                    this.scrollListeners[`${this.props.id}_${i}`] = null;
+                }
+            }
+        }
     }
 
     componentDidMount() {
@@ -169,14 +207,7 @@ export class Password extends Component {
     }
 
     componentWillUnmount() {
-        if (this.feedback && this.panel) {
-            this.panel.removeChild(this.meter);
-            this.panel.removeChild(this.info);
-            document.body.removeChild(this.panel);
-            this.panel = null;
-            this.meter = null;
-            this.info = null;
-        }
+        this.unbindScrollListener();
 
         if (this.tooltip) {
             this.tooltip.destroy();
@@ -196,7 +227,19 @@ export class Password extends Component {
         let inputProps = ObjectUtils.findDiffKeys(this.props, Password.defaultProps);
 
         return (
-            <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} {...inputProps} type="password" onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyup} />
+            <>
+                <InputText id={this.props.id} ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} {...inputProps} type="password" onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyup} />
+
+                <CSSTransition classNames="p-connected-overlay" in={this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }}
+                    unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit}>
+                    <div ref={(el) => this.panel = el} className="p-password-panel p-component">
+                        <div className="p-password-meter" style={{ backgroundPosition: this.state.meterPosition }}></div>
+                        <div className="p-password-info">
+                            {this.state.infoText}
+                        </div>
+                    </div>
+                </CSSTransition>
+            </>
         );
     }
 }

@@ -9,11 +9,12 @@ import ObjectUtils from '../utils/ObjectUtils';
 import { MultiSelectHeader } from './MultiSelectHeader';
 import { MultiSelectItem } from './MultiSelectItem';
 import { MultiSelectPanel } from './MultiSelectPanel';
+import UniqueComponentId from '../utils/UniqueComponentId';
 
 export class MultiSelect extends Component {
 
     static defaultProps = {
-        id: null,
+        id: UniqueComponentId(),
         name: null,
         value: null,
         options: null,
@@ -282,10 +283,12 @@ export class MultiSelect extends Component {
 
     onOverlayEntered() {
         this.bindDocumentClickListener();
+        this.bindScrollListener();
     }
 
     onOverlayExit() {
         this.unbindDocumentClickListener();
+        this.unbindScrollListener();
     }
 
     onOverlayExited() {
@@ -379,6 +382,34 @@ export class MultiSelect extends Component {
         }
     }
 
+    bindScrollListener() {
+        this.scrollableParents = DomHandler.getScrollableParents(this.container);
+        this.scrollListeners = {};
+        for (let i = 0; i < this.scrollableParents.length; i++) {
+            let parent = this.scrollableParents[i];
+            if (!this.scrollListeners[`${this.props.id}_${i}`]) {
+                this.scrollListeners[`${this.props.id}_${i}`] = () => {
+                    if (this.state.overlayVisible) {
+                        this.hide();
+                    }
+                }
+                parent.addEventListener('scroll', this.scrollListeners[`${this.props.id}_${i}`]);
+            }
+        }
+    }
+
+    unbindScrollListener() {
+        if (this.scrollableParents) {
+            for (let i = 0; i < this.scrollableParents.length; i++) {
+                let parent = this.scrollableParents[i];
+                if (this.scrollListeners[`${this.props.id}_${i}`]) {
+                    parent.removeEventListener('scroll', this.scrollListeners[`${this.props.id}_${i}`]);
+                    this.scrollListeners[`${this.props.id}_${i}`] = null;
+                }
+            }
+        }
+    }
+
     isOutsideClicked(event) {
         return this.container && !(this.container.isSameNode(event.target) || this.container.contains(event.target)
             || (this.panel && this.panel.element && this.panel.element.contains(event.target)));
@@ -412,6 +443,7 @@ export class MultiSelect extends Component {
 
     componentWillUnmount() {
         this.unbindDocumentClickListener();
+        this.unbindScrollListener();
 
         if (this.tooltip) {
             this.tooltip.destroy();

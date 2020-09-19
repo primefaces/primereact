@@ -8,11 +8,12 @@ import { DropdownPanel } from './DropdownPanel';
 import { DropdownItem } from './DropdownItem';
 import {tip} from "../tooltip/Tooltip";
 import { CSSTransition } from 'react-transition-group';
+import UniqueComponentId from '../utils/UniqueComponentId';
 
 export class Dropdown extends Component {
 
     static defaultProps = {
-        id: null,
+        id: UniqueComponentId(),
         name: null,
         value: null,
         options: null,
@@ -480,6 +481,7 @@ export class Dropdown extends Component {
     onOverlayEntered() {
         this.scrollInView();
         this.bindDocumentClickListener();
+        this.bindScrollListener();
 
         if (this.props.filter && this.props.filterInputAutoFocus) {
             this.filterInput.focus();
@@ -488,6 +490,7 @@ export class Dropdown extends Component {
 
     onOverlayExit() {
         this.unbindDocumentClickListener();
+        this.unbindScrollListener();
     }
 
     onOverlayExited() {
@@ -530,6 +533,34 @@ export class Dropdown extends Component {
         if (this.documentClickListener) {
             document.removeEventListener('click', this.documentClickListener);
             this.documentClickListener = null;
+        }
+    }
+
+    bindScrollListener() {
+        this.scrollableParents = DomHandler.getScrollableParents(this.container);
+        this.scrollListeners = {};
+        for (let i = 0; i < this.scrollableParents.length; i++) {
+            let parent = this.scrollableParents[i];
+            if (!this.scrollListeners[`${this.props.id}_${i}`]) {
+                this.scrollListeners[`${this.props.id}_${i}`] = () => {
+                    if (this.state.overlayVisible) {
+                        this.hideOverlay();
+                    }
+                }
+                parent.addEventListener('scroll', this.scrollListeners[`${this.props.id}_${i}`]);
+            }
+        }
+    }
+
+    unbindScrollListener() {
+        if (this.scrollableParents) {
+            for (let i = 0; i < this.scrollableParents.length; i++) {
+                let parent = this.scrollableParents[i];
+                if (this.scrollListeners[`${this.props.id}_${i}`]) {
+                    parent.removeEventListener('scroll', this.scrollListeners[`${this.props.id}_${i}`]);
+                    this.scrollListeners[`${this.props.id}_${i}`] = null;
+                }
+            }
         }
     }
 
@@ -600,6 +631,7 @@ export class Dropdown extends Component {
 
     componentWillUnmount() {
         this.unbindDocumentClickListener();
+        this.unbindScrollListener();
 
         if (this.tooltip) {
             this.tooltip.destroy();
