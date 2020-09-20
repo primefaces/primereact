@@ -379,6 +379,12 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
                                         <td>Style class of the tab header.</td>
                                     </tr>
                                     <tr>
+                                        <td>headerTemplate</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Template of the tab header.</td>
+                                    </tr>
+                                    <tr>
                                         <td>contentStyle</td>
                                         <td>object</td>
                                         <td>null</td>
