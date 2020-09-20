@@ -476,6 +476,10 @@ export class InputNumber extends Component {
         }
     }
 
+    allowMinusSign() {
+        return this.props.min === null || this.props.min < 0;
+    }
+
     isMinusSign(char) {
         if (this._minusSign.test(char)) {
             this._minusSign.lastIndex = 0;
@@ -495,6 +499,12 @@ export class InputNumber extends Component {
     }
 
     insert(event, text, sign = { isDecimalSign: false, isMinusSign: false }) {
+        const minusCharIndexOnText = text.search(this._minusSign);
+        this._minusSign.lastIndex = 0;
+        if (!this.allowMinusSign() && minusCharIndexOnText !== -1) {
+            return;
+        }
+
         const selectionStart = this.inputEl.selectionStart;
         const selectionEnd = this.inputEl.selectionEnd;
         let inputValue = this.inputEl.value.trim();
