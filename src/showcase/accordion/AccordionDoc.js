@@ -436,6 +436,18 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
                                         <td>false</td>
                                         <td>When enabled, multiple tabs can be activated at the same time.</td>
                                     </tr>
+                                    <tr>
+                                        <td>expandIcon</td>
+                                        <td>string</td>
+                                        <td>pi pi-chevron-right</td>
+                                        <td>Icon of a collapsed tab.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>collapseIcon</td>
+                                        <td>string</td>
+                                        <td>pi pi-chevron-down</td>
+                                        <td>Icon of an expanded tab.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
