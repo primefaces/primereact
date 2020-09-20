@@ -204,7 +204,7 @@ export class InputNumber extends Component {
                 return formattedValue;
             }
 
-            return value;
+            return value.toString();
         }
 
         return '';
