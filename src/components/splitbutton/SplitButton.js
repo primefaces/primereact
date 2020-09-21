@@ -13,7 +13,7 @@ import { CSSTransition } from 'react-transition-group';
 export class SplitButton extends Component {
 
     static defaultProps = {
-        id: UniqueComponentId(),
+        id: null,
         label: null,
         icon: null,
         model: null,
@@ -57,6 +57,8 @@ export class SplitButton extends Component {
         this.onOverlayEnter = this.onOverlayEnter.bind(this);
         this.onOverlayEntered = this.onOverlayEntered.bind(this);
         this.onOverlayExit = this.onOverlayExit.bind(this);
+
+        this.id = this.props.id || UniqueComponentId();
     }
 
     onDropdownButtonClick() {
@@ -124,7 +126,7 @@ export class SplitButton extends Component {
             }
         };
         const addScrollEvent = (el, index) => {
-            const namespace = `${this.props.id}_${index}`;
+            const namespace = `${this.id}_${index}`;
             if (!this[namespace]) {
                 this[namespace] = scrollCallback;
                 el.addEventListener('scroll', this[namespace]);
@@ -140,7 +142,7 @@ export class SplitButton extends Component {
     unbindScrollListener() {
         if (this.scrollableParents) {
             const removeScrollEvent = (el, index) => {
-                const namespace = `${this.props.id}_${index}`;
+                const namespace = `${this.id}_${index}`;
                 if (this[namespace]) {
                     el.removeEventListener('scroll', this[namespace]);
                     this[namespace] = null;
@@ -213,13 +215,13 @@ export class SplitButton extends Component {
         let items = this.renderItems();
 
         return (
-            <div id={this.props.id} className={className} style={this.props.style} ref={el => this.container = el}>
+            <div id={this.id} className={className} style={this.props.style} ref={el => this.container = el}>
                 <Button ref={(el) => this.defaultButton = ReactDOM.findDOMNode(el)} type="button" className="p-splitbutton-defaultbutton" icon={this.props.icon} label={this.props.label} onClick={this.props.onClick} disabled={this.props.disabled} tabIndex={this.props.tabIndex}/>
                 <Button type="button" className="p-splitbutton-menubutton" icon="pi pi-chevron-down" onClick={this.onDropdownButtonClick} disabled={this.props.disabled}
-                        aria-expanded={this.state.overlayVisible} aria-haspopup aria-owns={this.props.id + '_overlay'}/>
+                        aria-expanded={this.state.overlayVisible} aria-haspopup aria-owns={this.id + '_overlay'}/>
                 <CSSTransition classNames="p-connected-overlay" in={this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }}
                     unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit}>
-                    <SplitButtonPanel ref={(el) => this.panel = el} appendTo={this.props.appendTo} id={this.props.id + '_overlay'}
+                    <SplitButtonPanel ref={(el) => this.panel = el} appendTo={this.props.appendTo} id={this.id + '_overlay'}
                                 menuStyle={this.props.menuStyle} menuClassName={this.props.menuClassName}>
                         {items}
                     </SplitButtonPanel>

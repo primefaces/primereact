@@ -157,7 +157,7 @@ export class SlideMenuSub extends Component {
 export class SlideMenu extends Component {
 
     static defaultProps = {
-        id: UniqueComponentId(),
+        id: null,
         model: null,
         popup: false,
         style: null,
@@ -205,6 +205,8 @@ export class SlideMenu extends Component {
         this.onEntered = this.onEntered.bind(this);
         this.onExit = this.onExit.bind(this);
         this.onExited = this.onExited.bind(this);
+
+        this.id = this.props.id || UniqueComponentId();
     }
 
     navigateForward() {
@@ -330,13 +332,13 @@ export class SlideMenu extends Component {
         this.scrollListeners = {};
         for (let i = 0; i < this.scrollableParents.length; i++) {
             let parent = this.scrollableParents[i];
-            if (!this.scrollListeners[`${this.props.id}_${i}`]) {
-                this.scrollListeners[`${this.props.id}_${i}`] = (event) => {
+            if (!this.scrollListeners[`${this.id}_${i}`]) {
+                this.scrollListeners[`${this.id}_${i}`] = (event) => {
                     if (this.state.visible) {
                         this.hide(event);
                     }
                 }
-                parent.addEventListener('scroll', this.scrollListeners[`${this.props.id}_${i}`]);
+                parent.addEventListener('scroll', this.scrollListeners[`${this.id}_${i}`]);
             }
         }
     }
@@ -345,9 +347,9 @@ export class SlideMenu extends Component {
         if (this.scrollableParents) {
             for (let i = 0; i < this.scrollableParents.length; i++) {
                 let parent = this.scrollableParents[i];
-                if (this.scrollListeners[`${this.props.id}_${i}`]) {
-                    parent.removeEventListener('scroll', this.scrollListeners[`${this.props.id}_${i}`]);
-                    this.scrollListeners[`${this.props.id}_${i}`] = null;
+                if (this.scrollListeners[`${this.id}_${i}`]) {
+                    parent.removeEventListener('scroll', this.scrollListeners[`${this.id}_${i}`]);
+                    this.scrollListeners[`${this.id}_${i}`] = null;
                 }
             }
         }
@@ -374,7 +376,7 @@ export class SlideMenu extends Component {
         return (
             <CSSTransition classNames="p-connected-overlay" in={!this.props.popup || this.state.visible} timeout={{ enter: 120, exit: 100 }}
                 unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit} onExited={this.onExited}>
-                <div id={this.props.id} className={className} style={this.props.style} ref={el => this.container = el}>
+                <div id={this.id} className={className} style={this.props.style} ref={el => this.container = el}>
                     <div className="p-slidemenu-wrapper" style={{height: this.props.viewportHeight + 'px'}}>
                         <div className="p-slidemenu-content" ref={el => this.slideMenuContent = el}>
                             <SlideMenuSub model={this.props.model} root index={0} menuWidth={this.props.menuWidth} effectDuration={this.props.effectDuration}

@@ -14,7 +14,7 @@ import UniqueComponentId from '../utils/UniqueComponentId';
 export class Calendar extends Component {
 
     static defaultProps = {
-        id: UniqueComponentId(),
+        id: null,
         name: null,
         value: null,
         viewDate: null,
@@ -214,6 +214,8 @@ export class Calendar extends Component {
         this.onOverlayEntered = this.onOverlayEntered.bind(this);
         this.onOverlayExit = this.onOverlayExit.bind(this);
         this.reFocusInputField = this.reFocusInputField.bind(this);
+
+        this.id = this.props.id || UniqueComponentId();
     }
 
     componentDidMount() {
@@ -1437,7 +1439,7 @@ export class Calendar extends Component {
                 preventDefault : () =>{},
                 target: {
                     name: this.props.name,
-                    id: this.props.id,
+                    id: this.id,
                     value: value
                 }
             });
@@ -1516,13 +1518,13 @@ export class Calendar extends Component {
         this.scrollListeners = {};
         for (let i = 0; i < this.scrollableParents.length; i++) {
             let parent = this.scrollableParents[i];
-            if (!this.scrollListeners[`${this.props.id}_${i}`]) {
-                this.scrollListeners[`${this.props.id}_${i}`] = () => {
+            if (!this.scrollListeners[`${this.id}_${i}`]) {
+                this.scrollListeners[`${this.id}_${i}`] = () => {
                     if (this.state.overlayVisible) {
                         this.hideOverlay();
                     }
                 }
-                parent.addEventListener('scroll', this.scrollListeners[`${this.props.id}_${i}`]);
+                parent.addEventListener('scroll', this.scrollListeners[`${this.id}_${i}`]);
             }
         }
     }
@@ -1531,9 +1533,9 @@ export class Calendar extends Component {
         if (this.scrollableParents) {
             for (let i = 0; i < this.scrollableParents.length; i++) {
                 let parent = this.scrollableParents[i];
-                if (this.scrollListeners[`${this.props.id}_${i}`]) {
-                    parent.removeEventListener('scroll', this.scrollListeners[`${this.props.id}_${i}`]);
-                    this.scrollListeners[`${this.props.id}_${i}`] = null;
+                if (this.scrollListeners[`${this.id}_${i}`]) {
+                    parent.removeEventListener('scroll', this.scrollListeners[`${this.id}_${i}`]);
+                    this.scrollListeners[`${this.id}_${i}`] = null;
                 }
             }
         }
@@ -2934,7 +2936,7 @@ export class Calendar extends Component {
         const footer = this.renderFooter();
 
         return (
-            <span ref={(el) => this.container = el} id={this.props.id} className={className} style={this.props.style}>
+            <span ref={(el) => this.container = el} id={this.id} className={className} style={this.props.style}>
                 {input}
                 {button}
                 <CSSTransition classNames="p-connected-overlay" in={this.props.inline || this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }}

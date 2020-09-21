@@ -10,7 +10,7 @@ import UniqueComponentId from '../utils/UniqueComponentId';
 export class OverlayPanel extends Component {
 
     static defaultProps = {
-        id: UniqueComponentId(),
+        id: null,
         dismissable: true,
         showCloseIcon: false,
         style: null,
@@ -43,6 +43,8 @@ export class OverlayPanel extends Component {
         this.onEnter = this.onEnter.bind(this);
         this.onEntered = this.onEntered.bind(this);
         this.onExit = this.onExit.bind(this);
+
+        this.id = this.props.id || UniqueComponentId();
     }
 
     bindDocumentClickListener() {
@@ -71,13 +73,13 @@ export class OverlayPanel extends Component {
         this.scrollListeners = {};
         for (let i = 0; i < this.scrollableParents.length; i++) {
             let parent = this.scrollableParents[i];
-            if (!this.scrollListeners[`${this.props.id}_${i}`]) {
-                this.scrollListeners[`${this.props.id}_${i}`] = () => {
+            if (!this.scrollListeners[`${this.id}_${i}`]) {
+                this.scrollListeners[`${this.id}_${i}`] = () => {
                     if (this.state.visible) {
                         this.hide();
                     }
                 }
-                parent.addEventListener('scroll', this.scrollListeners[`${this.props.id}_${i}`]);
+                parent.addEventListener('scroll', this.scrollListeners[`${this.id}_${i}`]);
             }
         }
     }
@@ -86,9 +88,9 @@ export class OverlayPanel extends Component {
         if (this.scrollableParents) {
             for (let i = 0; i < this.scrollableParents.length; i++) {
                 let parent = this.scrollableParents[i];
-                if (this.scrollListeners[`${this.props.id}_${i}`]) {
-                    parent.removeEventListener('scroll', this.scrollListeners[`${this.props.id}_${i}`]);
-                    this.scrollListeners[`${this.props.id}_${i}`] = null;
+                if (this.scrollListeners[`${this.id}_${i}`]) {
+                    parent.removeEventListener('scroll', this.scrollListeners[`${this.id}_${i}`]);
+                    this.scrollListeners[`${this.id}_${i}`] = null;
                 }
             }
         }
@@ -198,7 +200,7 @@ export class OverlayPanel extends Component {
         return (
             <CSSTransition classNames="p-overlaypanel" in={this.state.visible} timeout={{ enter: 120, exit: 100 }}
                 unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit}>
-                <div ref={el => this.container = el} id={this.props.id} className={className} style={this.props.style} onClick={this.onPanelClick}>
+                <div ref={el => this.container = el} id={this.id} className={className} style={this.props.style} onClick={this.onPanelClick}>
                     <div className="p-overlaypanel-content">
                         {this.props.children}
                     </div>

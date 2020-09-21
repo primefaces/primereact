@@ -14,7 +14,7 @@ import { CSSTransition } from 'react-transition-group';
 export class AutoComplete extends Component {
 
     static defaultProps = {
-        id: UniqueComponentId(),
+        id: null,
         value: null,
         name: null,
         type: 'text',
@@ -133,7 +133,8 @@ export class AutoComplete extends Component {
         this.onOverlayEntered = this.onOverlayEntered.bind(this);
         this.onOverlayExit = this.onOverlayExit.bind(this);
 
-        this.listId = this.props.id + '_list';
+        this.id = this.props.id || UniqueComponentId();
+        this.listId = this.id + '_list';
     }
 
     onInputChange(event) {
@@ -218,7 +219,7 @@ export class AutoComplete extends Component {
                 preventDefault : () =>{},
                 target: {
                     name: this.props.name,
-                    id: this.props.id,
+                    id: this.id,
                     value: value
                 }
             });
@@ -501,13 +502,13 @@ export class AutoComplete extends Component {
         this.scrollListeners = {};
         for (let i = 0; i < this.scrollableParents.length; i++) {
             let parent = this.scrollableParents[i];
-            if (!this.scrollListeners[`${this.props.id}_${i}`]) {
-                this.scrollListeners[`${this.props.id}_${i}`] = () => {
+            if (!this.scrollListeners[`${this.id}_${i}`]) {
+                this.scrollListeners[`${this.id}_${i}`] = () => {
                     if (this.state.overlayVisible) {
                         this.hideOverlay();
                     }
                 }
-                parent.addEventListener('scroll', this.scrollListeners[`${this.props.id}_${i}`]);
+                parent.addEventListener('scroll', this.scrollListeners[`${this.id}_${i}`]);
             }
         }
     }
@@ -516,9 +517,9 @@ export class AutoComplete extends Component {
         if (this.scrollableParents) {
             for (let i = 0; i < this.scrollableParents.length; i++) {
                 let parent = this.scrollableParents[i];
-                if (this.scrollListeners[`${this.props.id}_${i}`]) {
-                    parent.removeEventListener('scroll', this.scrollListeners[`${this.props.id}_${i}`]);
-                    this.scrollListeners[`${this.props.id}_${i}`] = null;
+                if (this.scrollListeners[`${this.id}_${i}`]) {
+                    parent.removeEventListener('scroll', this.scrollListeners[`${this.id}_${i}`]);
+                    this.scrollListeners[`${this.id}_${i}`] = null;
                 }
             }
         }
@@ -683,7 +684,7 @@ export class AutoComplete extends Component {
         }
 
         return (
-            <span ref={(el) => this.container = el} id={this.props.id} style={this.props.style} className={className} aria-haspopup="listbox"
+            <span ref={(el) => this.container = el} id={this.id} style={this.props.style} className={className} aria-haspopup="listbox"
                   aria-expanded={this.state.overlayVisible} aria-owns={this.listId}>
                 {input}
                 {loader}

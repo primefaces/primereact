@@ -11,7 +11,7 @@ import UniqueComponentId from '../utils/UniqueComponentId';
 export class ColorPicker extends Component {
 
     static defaultProps = {
-        id: UniqueComponentId(),
+        id: null,
         value: null,
         style: null,
         className: null,
@@ -56,6 +56,8 @@ export class ColorPicker extends Component {
         this.onOverlayEnter = this.onOverlayEnter.bind(this);
         this.onOverlayEntered = this.onOverlayEntered.bind(this);
         this.onOverlayExit = this.onOverlayExit.bind(this);
+
+        this.id = this.props.id || UniqueComponentId();
     }
 
     onHueMousedown(event) {
@@ -175,7 +177,7 @@ export class ColorPicker extends Component {
                 preventDefault : () =>{},
                 target: {
                     name: this.props.name,
-                    id: this.props.id,
+                    id: this.id,
                     value: value
                 }
             })
@@ -288,13 +290,13 @@ export class ColorPicker extends Component {
         this.scrollListeners = {};
         for (let i = 0; i < this.scrollableParents.length; i++) {
             let parent = this.scrollableParents[i];
-            if (!this.scrollListeners[`${this.props.id}_${i}`]) {
-                this.scrollListeners[`${this.props.id}_${i}`] = () => {
+            if (!this.scrollListeners[`${this.id}_${i}`]) {
+                this.scrollListeners[`${this.id}_${i}`] = () => {
                     if (this.state.overlayVisible) {
                         this.hide();
                     }
                 }
-                parent.addEventListener('scroll', this.scrollListeners[`${this.props.id}_${i}`]);
+                parent.addEventListener('scroll', this.scrollListeners[`${this.id}_${i}`]);
             }
         }
     }
@@ -303,9 +305,9 @@ export class ColorPicker extends Component {
         if (this.scrollableParents) {
             for (let i = 0; i < this.scrollableParents.length; i++) {
                 let parent = this.scrollableParents[i];
-                if (this.scrollListeners[`${this.props.id}_${i}`]) {
-                    parent.removeEventListener('scroll', this.scrollListeners[`${this.props.id}_${i}`]);
-                    this.scrollListeners[`${this.props.id}_${i}`] = null;
+                if (this.scrollListeners[`${this.id}_${i}`]) {
+                    parent.removeEventListener('scroll', this.scrollListeners[`${this.id}_${i}`]);
+                    this.scrollListeners[`${this.id}_${i}`] = null;
                 }
             }
         }
@@ -594,7 +596,7 @@ export class ColorPicker extends Component {
         let input = this.renderInput();
 
         return (
-            <div ref={(el) => this.container = el} id={this.props.id} style={this.props.style} className={containerClassName}>
+            <div ref={(el) => this.container = el} id={this.id} style={this.props.style} className={containerClassName}>
                 {input}
                 <CSSTransition classNames="p-connected-overlay" in={this.props.inline || this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }}
                     unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit}>

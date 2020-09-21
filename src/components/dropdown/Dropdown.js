@@ -13,7 +13,7 @@ import UniqueComponentId from '../utils/UniqueComponentId';
 export class Dropdown extends Component {
 
     static defaultProps = {
-        id: UniqueComponentId(),
+        id: null,
         name: null,
         value: null,
         options: null,
@@ -125,6 +125,8 @@ export class Dropdown extends Component {
         this.onOverlayExit = this.onOverlayExit.bind(this);
         this.onOverlayExited = this.onOverlayExited.bind(this);
         this.clear = this.clear.bind(this);
+
+        this.id = this.props.id || UniqueComponentId();
     }
 
     onClick(event) {
@@ -370,7 +372,7 @@ export class Dropdown extends Component {
             preventDefault : () =>{},
             target: {
                 name: this.props.name,
-                id: this.props.id,
+                id: this.id,
                 value : event.target.value,
             }
         });
@@ -416,7 +418,7 @@ export class Dropdown extends Component {
             preventDefault : () =>{},
             target: {
                 name: this.props.name,
-                id: this.props.id,
+                id: this.id,
                 value : null
             }
         });
@@ -438,7 +440,7 @@ export class Dropdown extends Component {
                 preventDefault : () =>{},
                 target: {
                     name: this.props.name,
-                    id: this.props.id,
+                    id: this.id,
                     value: optionValue
                 }
             });
@@ -541,13 +543,13 @@ export class Dropdown extends Component {
         this.scrollListeners = {};
         for (let i = 0; i < this.scrollableParents.length; i++) {
             let parent = this.scrollableParents[i];
-            if (!this.scrollListeners[`${this.props.id}_${i}`]) {
-                this.scrollListeners[`${this.props.id}_${i}`] = () => {
+            if (!this.scrollListeners[`${this.id}_${i}`]) {
+                this.scrollListeners[`${this.id}_${i}`] = () => {
                     if (this.state.overlayVisible) {
                         this.hideOverlay();
                     }
                 }
-                parent.addEventListener('scroll', this.scrollListeners[`${this.props.id}_${i}`]);
+                parent.addEventListener('scroll', this.scrollListeners[`${this.id}_${i}`]);
             }
         }
     }
@@ -556,9 +558,9 @@ export class Dropdown extends Component {
         if (this.scrollableParents) {
             for (let i = 0; i < this.scrollableParents.length; i++) {
                 let parent = this.scrollableParents[i];
-                if (this.scrollListeners[`${this.props.id}_${i}`]) {
-                    parent.removeEventListener('scroll', this.scrollListeners[`${this.props.id}_${i}`]);
-                    this.scrollListeners[`${this.props.id}_${i}`] = null;
+                if (this.scrollListeners[`${this.id}_${i}`]) {
+                    parent.removeEventListener('scroll', this.scrollListeners[`${this.id}_${i}`]);
+                    this.scrollListeners[`${this.id}_${i}`] = null;
                 }
             }
         }
@@ -800,7 +802,7 @@ export class Dropdown extends Component {
         let clearIcon = this.renderClearIcon();
 
         return (
-            <div id={this.props.id} ref={(el) => this.container = el} className={className} style={this.props.style} onClick={this.onClick}
+            <div id={this.id} ref={(el) => this.container = el} className={className} style={this.props.style} onClick={this.onClick}
                  onMouseDown={this.props.onMouseDown} onContextMenu={this.props.onContextMenu}>
                  {keyboardHelper}
                  {hiddenSelect}

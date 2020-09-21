@@ -6,7 +6,7 @@ import UniqueComponentId from '../utils/UniqueComponentId';
 export class Steps extends Component {
 
     static defaultProps = {
-        id: UniqueComponentId(),
+        id: null,
         model: null,
         activeIndex: 0,
         readOnly: true,
@@ -24,6 +24,12 @@ export class Steps extends Component {
         className: PropTypes.string,
         onSelect: PropTypes.func
     };
+
+    constructor(props) {
+        super(props);
+
+        this.id = this.props.id || UniqueComponentId();
+    }
 
     itemClick(event, item, index) {
         if (this.props.readOnly || item.disabled) {

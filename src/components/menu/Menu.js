@@ -9,7 +9,7 @@ import UniqueComponentId from '../utils/UniqueComponentId';
 export class Menu extends Component {
 
     static defaultProps = {
-        id: UniqueComponentId(),
+        id: null,
         model: null,
         popup: false,
         style: null,
@@ -44,6 +44,8 @@ export class Menu extends Component {
         this.onEnter = this.onEnter.bind(this);
         this.onEntered = this.onEntered.bind(this);
         this.onExit = this.onExit.bind(this);
+
+        this.id = this.props.id || UniqueComponentId();
     }
 
     onItemClick(event, item){
@@ -199,13 +201,13 @@ export class Menu extends Component {
         this.scrollListeners = {};
         for (let i = 0; i < this.scrollableParents.length; i++) {
             let parent = this.scrollableParents[i];
-            if (!this.scrollListeners[`${this.props.id}_${i}`]) {
-                this.scrollListeners[`${this.props.id}_${i}`] = (event) => {
+            if (!this.scrollListeners[`${this.id}_${i}`]) {
+                this.scrollListeners[`${this.id}_${i}`] = (event) => {
                     if (this.state.visible) {
                         this.hide(event);
                     }
                 }
-                parent.addEventListener('scroll', this.scrollListeners[`${this.props.id}_${i}`]);
+                parent.addEventListener('scroll', this.scrollListeners[`${this.id}_${i}`]);
             }
         }
     }
@@ -214,9 +216,9 @@ export class Menu extends Component {
         if (this.scrollableParents) {
             for (let i = 0; i < this.scrollableParents.length; i++) {
                 let parent = this.scrollableParents[i];
-                if (this.scrollListeners[`${this.props.id}_${i}`]) {
-                    parent.removeEventListener('scroll', this.scrollListeners[`${this.props.id}_${i}`]);
-                    this.scrollListeners[`${this.props.id}_${i}`] = null;
+                if (this.scrollListeners[`${this.id}_${i}`]) {
+                    parent.removeEventListener('scroll', this.scrollListeners[`${this.id}_${i}`]);
+                    this.scrollListeners[`${this.id}_${i}`] = null;
                 }
             }
         }
@@ -296,7 +298,7 @@ export class Menu extends Component {
             return (
                 <CSSTransition classNames="p-connected-overlay" in={this.state.visible} timeout={{ enter: 120, exit: 100 }}
                     unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit}>
-                    <div id={this.props.id} className={className} style={this.props.style} ref={el => this.container = el}>
+                    <div id={this.id} className={className} style={this.props.style} ref={el => this.container = el}>
                         <ul className="p-menu-list p-reset" role="menu">
                             {menuitems}
                         </ul>
