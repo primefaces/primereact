@@ -173,7 +173,7 @@ export class Password extends Component {
 
     bindScrollListener() {
         if (!this.scrollHandler) {
-            this.scrollHandler = new ConnectedOverlayScrollHandler(this.container, this.id, () => {
+            this.scrollHandler = new ConnectedOverlayScrollHandler(this.inputEl, this.id, () => {
                 if (this.state.overlayVisible) {
                     this.hideOverlay();
                 }
