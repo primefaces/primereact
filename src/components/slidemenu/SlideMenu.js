@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
 import { CSSTransition } from 'react-transition-group';
 import UniqueComponentId from '../utils/UniqueComponentId';
+import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 
 export class SlideMenuSub extends Component {
 
@@ -328,30 +329,20 @@ export class SlideMenu extends Component {
     }
 
     bindScrollListener() {
-        this.scrollableParents = DomHandler.getScrollableParents(this.container);
-        this.scrollListeners = {};
-        for (let i = 0; i < this.scrollableParents.length; i++) {
-            let parent = this.scrollableParents[i];
-            if (!this.scrollListeners[`${this.id}_${i}`]) {
-                this.scrollListeners[`${this.id}_${i}`] = (event) => {
-                    if (this.state.visible) {
-                        this.hide(event);
-                    }
+        if (!this.scrollHandler) {
+            this.scrollHandler = new ConnectedOverlayScrollHandler(this.container, this.id, (event) => {
+                if (this.state.visible) {
+                    this.hide(event);
                 }
-                parent.addEventListener('scroll', this.scrollListeners[`${this.id}_${i}`]);
-            }
+            });
         }
+
+        this.scrollHandler.bindScrollListener();
     }
 
     unbindScrollListener() {
-        if (this.scrollableParents) {
-            for (let i = 0; i < this.scrollableParents.length; i++) {
-                let parent = this.scrollableParents[i];
-                if (this.scrollListeners[`${this.id}_${i}`]) {
-                    parent.removeEventListener('scroll', this.scrollListeners[`${this.id}_${i}`]);
-                    this.scrollListeners[`${this.id}_${i}`] = null;
-                }
-            }
+        if (this.scrollHandler) {
+            this.scrollHandler.unbindScrollListener();
         }
     }
 
@@ -367,6 +358,7 @@ export class SlideMenu extends Component {
         this.unbindDocumentClickListener();
         this.unbindDocumentResizeListener();
         this.unbindScrollListener();
+        this.scrollHandler = null;
     }
 
     renderElement() {

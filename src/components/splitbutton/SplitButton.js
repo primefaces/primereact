@@ -10,6 +10,7 @@ import {tip} from "../tooltip/Tooltip";
 import UniqueComponentId from "../utils/UniqueComponentId";
 import { CSSTransition } from 'react-transition-group';
 import ObjectUtils from '../utils/ObjectUtils';
+import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 
 export class SplitButton extends Component {
 
@@ -122,40 +123,20 @@ export class SplitButton extends Component {
     }
 
     bindScrollListener() {
-        this.scrollableParents = DomHandler.getScrollableParents(this.container);
-        const scrollCallback = () => {
-            if (this.state.overlayVisible) {
-                this.hide();
-            }
-        };
-        const addScrollEvent = (el, index) => {
-            const namespace = `${this.id}_${index}`;
-            if (!this[namespace]) {
-                this[namespace] = scrollCallback;
-                el.addEventListener('scroll', this[namespace]);
-            }
-        };
-
-        for (let i = 0; i < this.scrollableParents.length; i++) {
-            let parent = this.scrollableParents[i];
-            addScrollEvent(parent, i);
+        if (!this.scrollHandler) {
+            this.scrollHandler = new ConnectedOverlayScrollHandler(this.container, this.id, () => {
+                if (this.state.overlayVisible) {
+                    this.hide();
+                }
+            });
         }
+
+        this.scrollHandler.bindScrollListener();
     }
 
     unbindScrollListener() {
-        if (this.scrollableParents) {
-            const removeScrollEvent = (el, index) => {
-                const namespace = `${this.id}_${index}`;
-                if (this[namespace]) {
-                    el.removeEventListener('scroll', this[namespace]);
-                    this[namespace] = null;
-                }
-            };
-
-            for (let i = 0; i < this.scrollableParents.length; i++) {
-                let parent = this.scrollableParents[i];
-                removeScrollEvent(parent, i);
-            }
+        if (this.scrollHandler) {
+            this.scrollHandler.unbindScrollListener();
         }
     }
 
@@ -188,6 +169,7 @@ export class SplitButton extends Component {
     componentWillUnmount() {
         this.unbindDocumentClickListener();
         this.unbindScrollListener();
+        this.scrollHandler = null;
 
         if (this.tooltip) {
             this.tooltip.destroy();

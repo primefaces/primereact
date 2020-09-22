@@ -10,6 +10,7 @@ import classNames from 'classnames';
 import { tip } from '../tooltip/Tooltip';
 import UniqueComponentId from "../utils/UniqueComponentId";
 import { CSSTransition } from 'react-transition-group';
+import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 
 export class AutoComplete extends Component {
 
@@ -498,30 +499,20 @@ export class AutoComplete extends Component {
     }
 
     bindScrollListener() {
-        this.scrollableParents = DomHandler.getScrollableParents(this.container);
-        this.scrollListeners = {};
-        for (let i = 0; i < this.scrollableParents.length; i++) {
-            let parent = this.scrollableParents[i];
-            if (!this.scrollListeners[`${this.id}_${i}`]) {
-                this.scrollListeners[`${this.id}_${i}`] = () => {
-                    if (this.state.overlayVisible) {
-                        this.hideOverlay();
-                    }
+        if (!this.scrollHandler) {
+            this.scrollHandler = new ConnectedOverlayScrollHandler(this.container, this.id, () => {
+                if (this.state.overlayVisible) {
+                    this.hideOverlay();
                 }
-                parent.addEventListener('scroll', this.scrollListeners[`${this.id}_${i}`]);
-            }
+            });
         }
+
+        this.scrollHandler.bindScrollListener();
     }
 
     unbindScrollListener() {
-        if (this.scrollableParents) {
-            for (let i = 0; i < this.scrollableParents.length; i++) {
-                let parent = this.scrollableParents[i];
-                if (this.scrollListeners[`${this.id}_${i}`]) {
-                    parent.removeEventListener('scroll', this.scrollListeners[`${this.id}_${i}`]);
-                    this.scrollListeners[`${this.id}_${i}`] = null;
-                }
-            }
+        if (this.scrollHandler) {
+            this.scrollHandler.unbindScrollListener();
         }
     }
 
@@ -571,6 +562,7 @@ export class AutoComplete extends Component {
     componentWillUnmount() {
         this.unbindDocumentClickListener();
         this.unbindScrollListener();
+        this.scrollHandler = null;
 
         if (this.tooltip) {
             this.tooltip.destroy();
