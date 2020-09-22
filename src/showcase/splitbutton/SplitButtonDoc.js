@@ -229,7 +229,6 @@ const SplitButtonDemo = () => {
 <CodeHighlight lang="js">
 {`
 import {SplitButton} from 'primereact/splitbutton';
-
 `}
 </CodeHighlight>
 
@@ -405,6 +404,12 @@ export class SplitButtonDemo extends Component {
                                         <td>object</td>
                                         <td>null</td>
                                         <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>buttonTemplate</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Template of the default button.</td>
                                     </tr>
                                 </tbody>
                             </table>
