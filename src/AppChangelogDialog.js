@@ -92,7 +92,7 @@ export class AppChangelogDialog extends Component {
                 {
                     this.state.currentChangelog && <div className="p-d-flex p-ai-center">
                         <span className="p-text-bold" style={{ fontSize: '1.1rem'}}>{this.state.currentChangelog.version}</span>
-                        {this.state.currentChangelog.index === 0 && <span className="p-tag p-tag-rounded p-tag-info p-ml-2">current</span>}
+                        {this.state.currentChangelog.index === 0 && <span className="p-tag p-tag-rounded p-tag-info p-ml-2" style={{padding: '.14rem .5rem'}}>current</span>}
                         <a href="https://github.com/primefaces/primereact/blob/master/CHANGELOG.md" target="_blank" rel="noopener noreferrer" className="p-ml-auto">View Full Changelog</a>
                     </div>
                 }
