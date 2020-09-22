@@ -213,6 +213,7 @@ export class ScrollableView extends Component {
         let left = this.props.frozen ? null : this.props.frozenWidth;
         let colGroup = this.renderColGroup();
         let loadingTable = this.renderLoadingTable(colGroup);
+        let scrollableBodyStyle = !this.props.frozen && this.props.scrollHeight ? { overflowY: 'scroll' } : null;
 
         return (
             <div className={className} style={{width: width, left: left}} ref={(el) => { this.container = el; }}>
@@ -225,7 +226,7 @@ export class ScrollableView extends Component {
                         </table>
                     </div>
                 </div>
-                <div className="p-datatable-scrollable-body" ref={(el) => { this.scrollBody = el; }} onScroll={this.onBodyScroll}>
+                <div className="p-datatable-scrollable-body" ref={(el) => { this.scrollBody = el; }} style={scrollableBodyStyle} onScroll={this.onBodyScroll}>
                     <table ref={el => this.scrollTable = el} style={tableBodyStyle} className={tableBodyClassName}>
                         {colGroup}
                         {this.props.body}
