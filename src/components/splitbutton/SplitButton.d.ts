@@ -15,6 +15,7 @@ interface SplitButtonProps {
     appendTo?: HTMLElement;
     tooltip?: any;
     tooltipOptions?: TooltipOptions;
+    buttonTemplate?: any;
     onClick?(event: Event): void;
 }
 

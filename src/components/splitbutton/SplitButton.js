@@ -9,6 +9,7 @@ import { SplitButtonPanel } from './SplitButtonPanel';
 import {tip} from "../tooltip/Tooltip";
 import UniqueComponentId from "../utils/UniqueComponentId";
 import { CSSTransition } from 'react-transition-group';
+import ObjectUtils from '../utils/ObjectUtils';
 
 export class SplitButton extends Component {
 
@@ -26,7 +27,8 @@ export class SplitButton extends Component {
         onClick: null,
         appendTo: null,
         tooltip: null,
-        tooltipOptions: null
+        tooltipOptions: null,
+        buttonTemplate: null
     }
 
     static propTypes = {
@@ -43,7 +45,8 @@ export class SplitButton extends Component {
         onClick: PropTypes.func,
         appendTo: PropTypes.object,
         tooltip: PropTypes.string,
-        tooltipOptions: PropTypes.object
+        tooltipOptions: PropTypes.object,
+        buttonTemplate: PropTypes.any
     }
 
     constructor(props) {
@@ -213,10 +216,13 @@ export class SplitButton extends Component {
     render() {
         let className = classNames('p-splitbutton p-component', this.props.className, {'p-disabled': this.props.disabled});
         let items = this.renderItems();
+        const buttonContent = this.props.buttonTemplate ? ObjectUtils.getJSXElement(this.props.buttonTemplate, this.props) : null;
 
         return (
             <div id={this.id} className={className} style={this.props.style} ref={el => this.container = el}>
-                <Button ref={(el) => this.defaultButton = ReactDOM.findDOMNode(el)} type="button" className="p-splitbutton-defaultbutton" icon={this.props.icon} label={this.props.label} onClick={this.props.onClick} disabled={this.props.disabled} tabIndex={this.props.tabIndex}/>
+                <Button ref={(el) => this.defaultButton = ReactDOM.findDOMNode(el)} type="button" className="p-splitbutton-defaultbutton" icon={this.props.icon} label={this.props.label} onClick={this.props.onClick} disabled={this.props.disabled} tabIndex={this.props.tabIndex}>
+                    {buttonContent}
+                </Button>
                 <Button type="button" className="p-splitbutton-menubutton" icon="pi pi-chevron-down" onClick={this.onDropdownButtonClick} disabled={this.props.disabled}
                         aria-expanded={this.state.overlayVisible} aria-haspopup aria-owns={this.id + '_overlay'}/>
                 <CSSTransition classNames="p-connected-overlay" in={this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }}
