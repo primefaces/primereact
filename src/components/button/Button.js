@@ -75,11 +75,11 @@ export class Button extends Component {
     }
 
     renderLabel() {
-        const buttonLabel = this.props.label||'&nbsp;';
+        if (!this.props.label) {
+            return <span className="p-button-label p-c" dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
+        }
 
-        return (
-            <span className="p-button-label p-c">{buttonLabel}</span>
-        );
+        return <span className="p-button-label p-c">{this.props.label}</span>
     }
 
     renderBadge() {
