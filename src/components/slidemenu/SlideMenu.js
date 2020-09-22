@@ -330,7 +330,7 @@ export class SlideMenu extends Component {
 
     bindScrollListener() {
         if (!this.scrollHandler) {
-            this.scrollHandler = new ConnectedOverlayScrollHandler(this.container, this.id, (event) => {
+            this.scrollHandler = new ConnectedOverlayScrollHandler(this.target, this.id, (event) => {
                 if (this.state.visible) {
                     this.hide(event);
                 }

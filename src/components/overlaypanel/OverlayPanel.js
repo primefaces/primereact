@@ -71,7 +71,7 @@ export class OverlayPanel extends Component {
 
     bindScrollListener() {
         if (!this.scrollHandler) {
-            this.scrollHandler = new ConnectedOverlayScrollHandler(this.container, this.id, () => {
+            this.scrollHandler = new ConnectedOverlayScrollHandler(this.target, this.id, () => {
                 if (this.state.visible) {
                     this.hide();
                 }
