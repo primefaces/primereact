@@ -128,6 +128,7 @@ export class TreeTableScrollableView extends Component {
         let width = this.props.frozen ? this.props.frozenWidth : 'calc(100% - ' + this.props.frozenWidth + ')';
         let left = this.props.frozen ? null : this.props.frozenWidth;
         let colGroup = this.renderColGroup();
+        let scrollableBodyStyle = !this.props.frozen && this.props.scrollHeight ? { overflowY: 'scroll' } : null;
 
         return (
             <div className={className} style={{width: width, left: left}} ref={(el) => { this.container = el; }}>
@@ -139,7 +140,7 @@ export class TreeTableScrollableView extends Component {
                         </table>
                     </div>
                 </div>
-                <div className="p-treetable-scrollable-body" ref={(el) => { this.scrollBody = el; }} onScroll={this.onBodyScroll}>
+                <div className="p-treetable-scrollable-body" ref={(el) => { this.scrollBody = el; }} style={scrollableBodyStyle} onScroll={this.onBodyScroll}>
                     <table ref={(el) => { this.scrollTable = el; }} style={{top:'0'}} className="p-treetable-scrollable-body-table">
                         {colGroup}
                         {this.props.body}

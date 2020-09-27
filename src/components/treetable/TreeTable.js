@@ -952,7 +952,7 @@ export class TreeTable extends Component {
 
         return (
             <div className="p-treetable-wrapper">
-                <table style={this.props.tableStyle} className={this.props.tableClassName}  ref={el => this.table = el}>
+                <table style={this.props.tableStyle} className={this.props.tableClassName} ref={el => this.table = el}>
                     {header}
                     {footer}
                     {body}
