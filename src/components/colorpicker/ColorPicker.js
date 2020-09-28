@@ -288,7 +288,7 @@ export class ColorPicker extends Component {
 
     bindScrollListener() {
         if (!this.scrollHandler) {
-            this.scrollHandler = new ConnectedOverlayScrollHandler(this.container, this.id, () => {
+            this.scrollHandler = new ConnectedOverlayScrollHandler(this.container, () => {
                 if (this.state.overlayVisible) {
                     this.hide();
                 }
@@ -495,10 +495,12 @@ export class ColorPicker extends Component {
 
     componentWillUnmount() {
         this.unbindDocumentClickListener();
-        this.unbindScrollListener();
         this.unbindDocumentMouseMoveListener();
         this.unbindDocumentMouseUpListener();
-        this.scrollHandler = null;
+        if (this.scrollHandler) {
+            this.scrollHandler.destroy();
+            this.scrollHandler = null;
+        }
 
         if (this.tooltip) {
             this.tooltip.destroy();

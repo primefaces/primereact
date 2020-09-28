@@ -330,7 +330,7 @@ export class SlideMenu extends Component {
 
     bindScrollListener() {
         if (!this.scrollHandler) {
-            this.scrollHandler = new ConnectedOverlayScrollHandler(this.target, this.id, (event) => {
+            this.scrollHandler = new ConnectedOverlayScrollHandler(this.target, (event) => {
                 if (this.state.visible) {
                     this.hide(event);
                 }
@@ -357,8 +357,10 @@ export class SlideMenu extends Component {
     componentWillUnmount() {
         this.unbindDocumentClickListener();
         this.unbindDocumentResizeListener();
-        this.unbindScrollListener();
-        this.scrollHandler = null;
+        if (this.scrollHandler) {
+            this.scrollHandler.destroy();
+            this.scrollHandler = null;
+        }
     }
 
     renderElement() {

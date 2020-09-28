@@ -289,8 +289,10 @@ export class Calendar extends Component {
 
         this.unbindDocumentClickListener();
         this.unbindDocumentResizeListener();
-        this.unbindScrollListener();
-        this.scrollHandler = null;
+        if (this.scrollHandler) {
+            this.scrollHandler.destroy();
+            this.scrollHandler = null;
+        }
     }
 
     renderTooltip() {
@@ -1517,7 +1519,7 @@ export class Calendar extends Component {
 
     bindScrollListener() {
         if (!this.scrollHandler) {
-            this.scrollHandler = new ConnectedOverlayScrollHandler(this.container, this.id, () => {
+            this.scrollHandler = new ConnectedOverlayScrollHandler(this.container, () => {
                 if (this.state.overlayVisible) {
                     this.hideOverlay();
                 }

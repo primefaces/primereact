@@ -541,7 +541,7 @@ export class Dropdown extends Component {
 
     bindScrollListener() {
         if (!this.scrollHandler) {
-            this.scrollHandler = new ConnectedOverlayScrollHandler(this.container, this.id, () => {
+            this.scrollHandler = new ConnectedOverlayScrollHandler(this.container, () => {
                 if (this.state.overlayVisible) {
                     this.hideOverlay();
                 }
@@ -624,8 +624,10 @@ export class Dropdown extends Component {
 
     componentWillUnmount() {
         this.unbindDocumentClickListener();
-        this.unbindScrollListener();
-        this.scrollHandler = null;
+        if (this.scrollHandler) {
+            this.scrollHandler.destroy();
+            this.scrollHandler = null;
+        }
 
         if (this.tooltip) {
             this.tooltip.destroy();

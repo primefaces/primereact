@@ -71,7 +71,7 @@ export class OverlayPanel extends Component {
 
     bindScrollListener() {
         if (!this.scrollHandler) {
-            this.scrollHandler = new ConnectedOverlayScrollHandler(this.target, this.id, () => {
+            this.scrollHandler = new ConnectedOverlayScrollHandler(this.target, () => {
                 if (this.state.visible) {
                     this.hide();
                 }
@@ -168,8 +168,10 @@ export class OverlayPanel extends Component {
 
     componentWillUnmount() {
         this.unbindDocumentClickListener();
-        this.unbindScrollListener();
-        this.scrollHandler = null;
+        if (this.scrollHandler) {
+            this.scrollHandler.destroy();
+            this.scrollHandler = null;
+        }
     }
 
     renderCloseIcon() {

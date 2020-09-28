@@ -147,7 +147,7 @@ export class TieredMenu extends Component {
 
     bindScrollListener() {
         if (!this.scrollHandler) {
-            this.scrollHandler = new ConnectedOverlayScrollHandler(this.target, this.id, (event) => {
+            this.scrollHandler = new ConnectedOverlayScrollHandler(this.target, (event) => {
                 if (this.state.visible) {
                     this.hide(event);
                 }
@@ -165,8 +165,10 @@ export class TieredMenu extends Component {
 
     componentWillUnmount() {
         this.unbindDocumentListeners();
-        this.unbindScrollListener();
-        this.scrollHandler = null;
+        if (this.scrollHandler) {
+            this.scrollHandler.destroy();
+            this.scrollHandler = null;
+        }
     }
 
     renderElement() {
