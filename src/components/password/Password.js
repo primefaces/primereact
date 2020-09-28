@@ -73,10 +73,12 @@ export class Password extends Component {
 
     onOverlayEntered() {
         this.bindScrollListener();
+        this.bindResizeListener();
     }
 
     onOverlayExit() {
         this.unbindScrollListener();
+        this.unbindResizeListener();
     }
 
     onFocus(e) {
@@ -189,6 +191,24 @@ export class Password extends Component {
         }
     }
 
+    bindResizeListener() {
+        if (!this.resizeListener) {
+            this.resizeListener = () => {
+                if (this.state.overlayVisible) {
+                    this.hideOverlay();
+                }
+            };
+            window.addEventListener('resize', this.resizeListener);
+        }
+    }
+
+    unbindResizeListener() {
+        if (this.resizeListener) {
+            window.removeEventListener('resize', this.resizeListener);
+            this.resizeListener = null;
+        }
+    }
+
     componentDidMount() {
         if (this.props.tooltip) {
             this.renderTooltip();
@@ -205,6 +225,7 @@ export class Password extends Component {
     }
 
     componentWillUnmount() {
+        this.unbindResizeListener();
         if (this.scrollHandler) {
             this.scrollHandler.destroy();
             this.scrollHandler = null;

@@ -87,6 +87,24 @@ export class OverlayPanel extends Component {
         }
     }
 
+    bindResizeListener() {
+        if (!this.resizeListener) {
+            this.resizeListener = () => {
+                if (this.state.visible) {
+                    this.hide();
+                }
+            };
+            window.addEventListener('resize', this.resizeListener);
+        }
+    }
+
+    unbindResizeListener() {
+        if (this.resizeListener) {
+            window.removeEventListener('resize', this.resizeListener);
+            this.resizeListener = null;
+        }
+    }
+
     isOutsideClicked(event) {
         return this.container && !(this.container.isSameNode(event.target) || this.container.contains(event.target));
     }
@@ -149,11 +167,13 @@ export class OverlayPanel extends Component {
     onEntered() {
         this.bindDocumentClickListener();
         this.bindScrollListener();
+        this.bindResizeListener();
     }
 
     onExit() {
         this.unbindDocumentClickListener();
         this.unbindScrollListener();
+        this.unbindResizeListener();
     }
 
     align() {
@@ -168,6 +188,7 @@ export class OverlayPanel extends Component {
 
     componentWillUnmount() {
         this.unbindDocumentClickListener();
+        this.unbindResizeListener();
         if (this.scrollHandler) {
             this.scrollHandler.destroy();
             this.scrollHandler = null;

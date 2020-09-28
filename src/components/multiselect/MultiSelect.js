@@ -291,11 +291,13 @@ export class MultiSelect extends Component {
     onOverlayEntered() {
         this.bindDocumentClickListener();
         this.bindScrollListener();
+        this.bindResizeListener();
     }
 
     onOverlayExit() {
         this.unbindDocumentClickListener();
         this.unbindScrollListener();
+        this.unbindResizeListener();
     }
 
     onOverlayExited() {
@@ -407,6 +409,24 @@ export class MultiSelect extends Component {
         }
     }
 
+    bindResizeListener() {
+        if (!this.resizeListener) {
+            this.resizeListener = () => {
+                if (this.state.overlayVisible) {
+                    this.hide();
+                }
+            };
+            window.addEventListener('resize', this.resizeListener);
+        }
+    }
+
+    unbindResizeListener() {
+        if (this.resizeListener) {
+            window.removeEventListener('resize', this.resizeListener);
+            this.resizeListener = null;
+        }
+    }
+
     isOutsideClicked(event) {
         return this.container && !(this.container.isSameNode(event.target) || this.container.contains(event.target)
             || (this.panel && this.panel.element && this.panel.element.contains(event.target)));
@@ -440,6 +460,7 @@ export class MultiSelect extends Component {
 
     componentWillUnmount() {
         this.unbindDocumentClickListener();
+        this.unbindResizeListener();
         if (this.scrollHandler) {
             this.scrollHandler.destroy();
             this.scrollHandler = null;

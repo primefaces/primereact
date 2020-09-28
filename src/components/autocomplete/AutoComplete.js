@@ -270,11 +270,13 @@ export class AutoComplete extends Component {
     onOverlayEntered() {
         this.bindDocumentClickListener();
         this.bindScrollListener();
+        this.bindResizeListener();
     }
 
     onOverlayExit() {
         this.unbindDocumentClickListener();
         this.unbindScrollListener();
+        this.unbindResizeListener();
     }
 
     alignOverlay() {
@@ -516,6 +518,24 @@ export class AutoComplete extends Component {
         }
     }
 
+    bindResizeListener() {
+        if (!this.resizeListener) {
+            this.resizeListener = () => {
+                if (this.state.overlayVisible) {
+                    this.hideOverlay();
+                }
+            };
+            window.addEventListener('resize', this.resizeListener);
+        }
+    }
+
+    unbindResizeListener() {
+        if (this.resizeListener) {
+            window.removeEventListener('resize', this.resizeListener);
+            this.resizeListener = null;
+        }
+    }
+
     isOutsideClicked(event) {
         return this.container && (this.overlay && this.overlay.element && !this.overlay.element.contains(event.target)) && !this.isInputClicked(event);
     }
@@ -561,7 +581,7 @@ export class AutoComplete extends Component {
 
     componentWillUnmount() {
         this.unbindDocumentClickListener();
-
+        this.unbindResizeListener();
         if (this.scrollHandler) {
             this.scrollHandler.destroy();
             this.scrollHandler = null;

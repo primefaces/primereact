@@ -485,6 +485,7 @@ export class Dropdown extends Component {
         this.scrollInView();
         this.bindDocumentClickListener();
         this.bindScrollListener();
+        this.bindResizeListener();
 
         if (this.props.filter && this.props.filterInputAutoFocus) {
             this.filterInput.focus();
@@ -494,6 +495,7 @@ export class Dropdown extends Component {
     onOverlayExit() {
         this.unbindDocumentClickListener();
         this.unbindScrollListener();
+        this.unbindResizeListener();
     }
 
     onOverlayExited() {
@@ -554,6 +556,24 @@ export class Dropdown extends Component {
     unbindScrollListener() {
         if (this.scrollHandler) {
             this.scrollHandler.unbindScrollListener();
+        }
+    }
+
+    bindResizeListener() {
+        if (!this.resizeListener) {
+            this.resizeListener = () => {
+                if (this.state.overlayVisible) {
+                    this.hideOverlay();
+                }
+            };
+            window.addEventListener('resize', this.resizeListener);
+        }
+    }
+
+    unbindResizeListener() {
+        if (this.resizeListener) {
+            window.removeEventListener('resize', this.resizeListener);
+            this.resizeListener = null;
         }
     }
 
@@ -624,6 +644,7 @@ export class Dropdown extends Component {
 
     componentWillUnmount() {
         this.unbindDocumentClickListener();
+        this.unbindResizeListener();
         if (this.scrollHandler) {
             this.scrollHandler.destroy();
             this.scrollHandler = null;
