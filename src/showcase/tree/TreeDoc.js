@@ -33,25 +33,26 @@ export class TreeDemo extends Component {
     }
 
     expandAll() {
+        let expandedKeys = {};
         for (let node of this.state.nodes) {
-            this.expandNode(node);
+            this.expandNode(node, expandedKeys);
         }
+
+        this.setState({ expandedKeys });
     }
 
     collapseAll() {
         this.setState({ expandedKeys: {} });
     }
 
-    expandNode(node, expandedKeys = { ...this.state.expandedKeys }) {
+    expandNode(node, expandedKeys) {
         if (node.children && node.children.length) {
             expandedKeys[node.key] = true;
 
             for (let child of node.children) {
-                this.expandNode(child);
+                this.expandNode(child, expandedKeys);
             }
         }
-
-        this.setState({ expandedKeys });
     }
 
     componentDidMount() {
@@ -92,31 +93,49 @@ const TreeDemo = () => {
     const [expandedKeys, setExpandedKeys] = useState({});
     const nodeService = new NodeService();
 
+    const expandAll = () => {
+        let _expandedKeys = {};
+        for (let node of nodes) {
+            expandNode(node, _expandedKeys);
+        }
+
+        setExpandedKeys(_expandedKeys);
+    }
+
+    const collapseAll = () => {
+        setExpandedKeys({});
+    }
+
+    const expandNode = (node, _expandedKeys) => {
+        if (node.children && node.children.length) {
+            _expandedKeys[node.key] = true;
+
+            for (let child of node.children) {
+                expandNode(child, _expandedKeys);
+            }
+        }
+    }
+
     useEffect(() => {
         nodeService.getTreeNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const toggleMovies = () => {
-        let _expandedKeys = {...expandedKeys};
-        if (_expandedKeys['2'])
-            delete _expandedKeys['2'];
-        else
-            _expandedKeys['2'] = true;
-
-        setExpandedKeys(_expandedKeys);
-    };
-
     return (
         <div>
-            <h3 className="first">Uncontrolled</h5>
-            <Tree value={nodes} />
+            <div className="card">
+                <h5>Basic</h5>
+                <Tree value={nodes} />
 
-            <h5>Controlled</h5>
-            <Button onClick={toggleMovies} label="Toggle Movies" />
-            <Tree value={nodes} expandedKeys={expandedKeys}
-                onToggle={e => setExpandedKeys(e.value)} style={{marginTop: '.5em'}} />
+                <h5>Programmatic Control</h5>
+                <div className="p-mb-4">
+                    <Button type="button" icon="pi pi-plus" label="Expand All" onClick={expandAll} className="p-mr-2" />
+                    <Button type="button" icon="pi pi-minus" label="Collapse All" onClick={collapseAll} />
+                </div>
+                <Tree value={nodes} expandedKeys={expandedKeys}
+                    onToggle={e => setExpandedKeys(e.value)} />
+            </div>
         </div>
-    )
+    );
 }
                 `
             },
@@ -127,38 +146,55 @@ import React, { useState, useEffect } from 'react';
 import { Tree } from 'primereact/tree';
 import { Button } from 'primereact/button';
 import { NodeService } from '../service/NodeService';
-import TreeNode from 'primereact/components/treenode/TreeNode';
 
 const TreeDemo = () => {
-    const [nodes, setNodes] = useState<TreeNode[] | undefined>(undefined);
+    const [nodes, setNodes] = useState(null);
     const [expandedKeys, setExpandedKeys] = useState({});
     const nodeService = new NodeService();
+
+    const expandAll = () => {
+        let _expandedKeys = {};
+        for (let node of nodes) {
+            expandNode(node, _expandedKeys);
+        }
+
+        setExpandedKeys(_expandedKeys);
+    }
+
+    const collapseAll = () => {
+        setExpandedKeys({});
+    }
+
+    const expandNode = (node, _expandedKeys) => {
+        if (node.children && node.children.length) {
+            _expandedKeys[node.key] = true;
+
+            for (let child of node.children) {
+                expandNode(child, _expandedKeys);
+            }
+        }
+    }
 
     useEffect(() => {
         nodeService.getTreeNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const toggleMovies = () => {
-        let _expandedKeys: any = {...expandedKeys};
-        if (_expandedKeys['2'])
-            delete _expandedKeys['2'];
-        else
-            _expandedKeys['2'] = true;
-
-        setExpandedKeys(_expandedKeys);
-    };
-
     return (
         <div>
-            <h3 className="first">Uncontrolled</h5>
-            <Tree value={nodes} />
+            <div className="card">
+                <h5>Basic</h5>
+                <Tree value={nodes} />
 
-            <h5>Controlled</h5>
-            <Button onClick={toggleMovies} label="Toggle Movies" />
-            <Tree value={nodes} expandedKeys={expandedKeys}
-                onToggle={e => setExpandedKeys(e.value)} style={{marginTop: '.5em'}} />
+                <h5>Programmatic Control</h5>
+                <div className="p-mb-4">
+                    <Button type="button" icon="pi pi-plus" label="Expand All" onClick={expandAll} className="p-mr-2" />
+                    <Button type="button" icon="pi pi-minus" label="Collapse All" onClick={collapseAll} />
+                </div>
+                <Tree value={nodes} expandedKeys={expandedKeys}
+                    onToggle={e => setExpandedKeys(e.value)} />
+            </div>
         </div>
-    )
+    );
 }
                 `
             }

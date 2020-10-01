@@ -21,25 +21,26 @@ export class TreeDemo extends Component {
     }
 
     expandAll() {
+        let expandedKeys = {};
         for (let node of this.state.nodes) {
-            this.expandNode(node);
+            this.expandNode(node, expandedKeys);
         }
+
+        this.setState({ expandedKeys });
     }
 
     collapseAll() {
         this.setState({ expandedKeys: {} });
     }
 
-    expandNode(node, expandedKeys = { ...this.state.expandedKeys }) {
+    expandNode(node, expandedKeys) {
         if (node.children && node.children.length) {
             expandedKeys[node.key] = true;
 
             for (let child of node.children) {
-                this.expandNode(child);
+                this.expandNode(child, expandedKeys);
             }
         }
-
-        this.setState({ expandedKeys });
     }
 
     componentDidMount() {

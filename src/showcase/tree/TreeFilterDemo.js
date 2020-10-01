@@ -94,28 +94,26 @@ export class TreeFilterDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState, useEffect } from 'react';
-import {Tree} from 'primereact/tree';
-import {NodeService} from '../service/NodeService';
+import { Tree } from 'primereact/tree';
+import { NodeService } from '../service/NodeService';
 
 const TreeFilterDemo = () => {
-    const [nodes1, setNodes1] = useState(null);
-    const [nodes2, setNodes2] = useState(null);
+    const [nodes, setNodes] = useState(null);
     const nodeService = new NodeService();
 
     useEffect(() => {
-        nodeService.getTreeNodes().then(data => {
-            setNodes1(data);
-            setNodes2(data);
-        });
+        nodeService.getTreeNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div>
-            <h3 className="first">Lenient Filter Mode</h3>
-            <Tree value={nodes1} filter />
+            <div className="card">
+                <h5>Lenient Filter</h5>
+                <Tree value={nodes} filter filterMode="lenient"></Tree>
 
-            <h3>Strict Filter Mode</h3>
-            <Tree value={nodes2} filter filterMode="strict" />
+                <h5>Strict Filter</h5>
+                <Tree value={nodes} filter filterMode="strict"></Tree>
+            </div>
         </div>
     )
 }

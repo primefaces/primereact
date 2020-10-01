@@ -86,8 +86,8 @@ export class TreeDragDropDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState, useEffect } from 'react';
-import {Tree} from 'primereact/tree';
-import {NodeService} from '../service/NodeService';
+import { Tree } from 'primereact/tree';
+import { NodeService } from '../service/NodeService';
 
 const TreeDragDropDemo = () => {
     const [nodes, setNodes] = useState(null);
@@ -99,9 +99,11 @@ const TreeDragDropDemo = () => {
 
     return (
         <div>
-            <Tree value={nodes} dragdropScope="demo" onDragDrop={event => setNodes(event.value)} />
+            <div className="card">
+                <Tree value={nodes} dragdropScope="demo" onDragDrop={event => setNodes(event.value)} />
+            </div>
         </div>
-    );
+    )
 }
                 `
             },
@@ -109,11 +111,11 @@ const TreeDragDropDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState, useEffect } from 'react';
-import {Tree} from 'primereact/tree';
-import {NodeService} from '../service/NodeService';
+import { Tree } from 'primereact/tree';
+import { NodeService } from '../service/NodeService';
 
 const TreeDragDropDemo = () => {
-    const [nodes, setNodes] = useState([]);
+    const [nodes, setNodes] = useState(null);
     const nodeService = new NodeService();
 
     useEffect(() => {
@@ -122,9 +124,11 @@ const TreeDragDropDemo = () => {
 
     return (
         <div>
-            <Tree value={nodes} dragdropScope="demo" onDragDrop={event => setNodes(event.value)} />
+            <div className="card">
+                <Tree value={nodes} dragdropScope="demo" onDragDrop={event => setNodes(event.value)} />
+            </div>
         </div>
-    );
+    )
 }
                 `
             }
