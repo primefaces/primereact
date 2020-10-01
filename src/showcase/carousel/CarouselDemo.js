@@ -12,7 +12,7 @@ export class CarouselDemo extends Component {
         super(props);
 
         this.state = {
-            products: null
+            products: []
         };
 
         this.responsiveOptions = [
@@ -46,7 +46,7 @@ export class CarouselDemo extends Component {
             <div className="product-item">
                 <div className="product-item-content">
                     <div className="p-mb-3">
-                        <img src={`showcase/demo/images/product/${product.image}`} alt={product.name} className="product-image" />
+                        <img src={`showcase/demo/images/product/${product.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={product.name} className="product-image" />
                     </div>
                     <div>
                         <h4 className="p-mb-1">{product.name}</h4>

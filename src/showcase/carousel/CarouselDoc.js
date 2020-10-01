@@ -16,7 +16,7 @@ import React, { Component } from 'react';
 import { Carousel } from 'primereact/carousel';
 import { Button } from 'primereact/button';
 import ProductService from '../service/ProductService';
-import './CarouselDemo.scss';
+import './CarouselDemo.css';
 
 export class CarouselDemo extends Component {
 
@@ -24,7 +24,7 @@ export class CarouselDemo extends Component {
         super(props);
 
         this.state = {
-            products: null
+            products: []
         };
 
         this.responsiveOptions = [
@@ -58,7 +58,7 @@ export class CarouselDemo extends Component {
             <div className="product-item">
                 <div className="product-item-content">
                     <div className="p-mb-3">
-                        <img src={\`showcase/demo/images/product/\${product.image}\`} alt={product.name} className="product-image" />
+                        <img src={\`showcase/demo/images/product/\${product.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={product.name} className="product-image" />
                     </div>
                     <div>
                         <h4 className="p-mb-1">{product.name}</h4>
@@ -102,13 +102,13 @@ export class CarouselDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState, useEffect } from 'react';
-import {Carousel} from 'primereact/carousel';
-import {CarService} from '../service/CarService';
-import {Button} from 'primereact/button';
+import { Carousel } from 'primereact/carousel';
+import { Button } from 'primereact/button';
+import ProductService from '../service/ProductService';
+import './CarouselDemo.css';
 
 const CarouselDemo = () => {
-    const [cars, setCars] = useState([]);
-    const carservice = new CarService();
+    const [products, setProducts] = useState([]);
     const responsiveOptions = [
         {
             breakpoint: '1024px',
@@ -116,57 +116,61 @@ const CarouselDemo = () => {
             numScroll: 3
         },
         {
-            breakpoint: '768px',
+            breakpoint: '600px',
             numVisible: 2,
             numScroll: 2
         },
         {
-            breakpoint: '560px',
+            breakpoint: '480px',
             numVisible: 1,
             numScroll: 1
         }
     ];
 
+    const productService = new ProductService();
+
     useEffect(() => {
-        carservice.getCarsSmall().then(data => setCars(data));
+        productService.getProductsSmall().then(data => setProducts(data.slice(0,9)));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const carTemplate = (car) => {
+    const productTemplate = (product) => {
         return (
-            <div className="car-details">
-                <div className="p-grid p-nogutter">
-                    <div className="p-col-12">
-                        <img src={\`showcase/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand} />
+            <div className="product-item">
+                <div className="product-item-content">
+                    <div className="p-mb-3">
+                        <img src={\`showcase/demo/images/product/\${product.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={product.name} className="product-image" />
                     </div>
-                    <div className="p-col-12 car-data">
-                        <div className="car-title">{car.brand}</div>
-                        <div className="car-subtitle">{car.year} | {car.color}</div>
-
-                        <div className="car-buttons">
-                            <Button icon="pi pi-search" className="p-button-secondary" />
-                            <Button icon="pi pi-star" className="p-button-secondary" />
-                            <Button icon="pi pi-cog" className="p-button-secondary" />
+                    <div>
+                        <h4 className="p-mb-1">{product.name}</h4>
+                        <h6 className="p-mt-0 p-mb-3">\${product.price}</h6>
+                        <span className={\`product-badge status-\${product.inventoryStatus.toLowerCase()}\`}>{product.inventoryStatus}</span>
+                        <div className="car-buttons p-mt-5">
+                            <Button icon="pi pi-search" className="p-button p-button-rounded p-mr-2" />
+                            <Button icon="pi pi-star" className="p-button-success p-button-rounded p-mr-2" />
+                            <Button icon="pi pi-cog" className="p-button-help p-button-rounded" />
                         </div>
                     </div>
                 </div>
             </div>
         );
-    };
-
-    const basicHeader = <h2>Basic</h2>;
-    const customHeader = <h2>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h2>
-    const verticalHeader = <h2>Vertical</h2>
+    }
 
     return (
         <div className="carousel-demo">
-            <Carousel value={cars} itemTemplate={carTemplate} numVisible={4} numScroll={3}
-                header={basicHeader} responsiveOptions={responsiveOptions}></Carousel>
+            <div className="card">
+                <Carousel value={products} numVisible={3} numScroll={3} responsiveOptions={responsiveOptions}
+                    itemTemplate={productTemplate} header={<h5>Basic</h5>} />
+            </div>
 
-            <Carousel value={cars} itemTemplate={carTemplate} numVisible={3} numScroll={1} className="custom-carousel"
-                responsiveOptions={responsiveOptions} header={customHeader} circular autoplayInterval={3000}></Carousel>
+            <div className="card">
+                <Carousel value={products} numVisible={3} numScroll={1} responsiveOptions={responsiveOptions} className="custom-carousel" circular
+                    autoplayInterval={3000} itemTemplate={productTemplate} header={<h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>} />
+            </div>
 
-            <Carousel value={cars} itemTemplate={carTemplate} orientation="vertical" style={{maxWidth: '400px', marginTop: '2em'}}
-                numVisible={1} numScroll={1} verticalViewPortHeight="330px" header={verticalHeader}></Carousel>
+            <div className="card">
+                <Carousel value={products} numVisible={1} numScroll={1} orientation="vertical" verticalViewPortHeight="352px"
+                    itemTemplate={productTemplate} header={<h5>Vertical</h5>} style={{maxWidth: '400px', marginTop: '2em'}} />
+            </div>
         </div>
     );
 }
@@ -176,13 +180,13 @@ const CarouselDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState, useEffect } from 'react';
-import {Carousel} from 'primereact/carousel';
-import {CarService} from '../service/CarService';
-import {Button} from 'primereact/button';
+import { Carousel } from 'primereact/carousel';
+import { Button } from 'primereact/button';
+import ProductService from '../service/ProductService';
+import './CarouselDemo.css';
 
 const CarouselDemo = () => {
-    const [cars, setCars] = useState<any>([]);
-    const carservice = new CarService();
+    const [products, setProducts] = useState([]);
     const responsiveOptions = [
         {
             breakpoint: '1024px',
@@ -190,57 +194,61 @@ const CarouselDemo = () => {
             numScroll: 3
         },
         {
-            breakpoint: '768px',
+            breakpoint: '600px',
             numVisible: 2,
             numScroll: 2
         },
         {
-            breakpoint: '560px',
+            breakpoint: '480px',
             numVisible: 1,
             numScroll: 1
         }
     ];
 
+    const productService = new ProductService();
+
     useEffect(() => {
-        carservice.getCarsSmall().then(data => setCars(data));
+        productService.getProductsSmall().then(data => setProducts(data.slice(0,9)));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const carTemplate = (car: { brand: string, year: string, color: string }) => {
+    const productTemplate = (product) => {
         return (
-            <div className="car-details">
-                <div className="p-grid p-nogutter">
-                    <div className="p-col-12">
-                        <img src={\`showcase/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand} />
+            <div className="product-item">
+                <div className="product-item-content">
+                    <div className="p-mb-3">
+                        <img src={\`showcase/demo/images/product/\${product.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={product.name} className="product-image" />
                     </div>
-                    <div className="p-col-12 car-data">
-                        <div className="car-title">{car.brand}</div>
-                        <div className="car-subtitle">{car.year} | {car.color}</div>
-
-                        <div className="car-buttons">
-                            <Button icon="pi pi-search" className="p-button-secondary" />
-                            <Button icon="pi pi-star" className="p-button-secondary" />
-                            <Button icon="pi pi-cog" className="p-button-secondary" />
+                    <div>
+                        <h4 className="p-mb-1">{product.name}</h4>
+                        <h6 className="p-mt-0 p-mb-3">\${product.price}</h6>
+                        <span className={\`product-badge status-\${product.inventoryStatus.toLowerCase()}\`}>{product.inventoryStatus}</span>
+                        <div className="car-buttons p-mt-5">
+                            <Button icon="pi pi-search" className="p-button p-button-rounded p-mr-2" />
+                            <Button icon="pi pi-star" className="p-button-success p-button-rounded p-mr-2" />
+                            <Button icon="pi pi-cog" className="p-button-help p-button-rounded" />
                         </div>
                     </div>
                 </div>
             </div>
         );
-    };
-
-    const basicHeader = <h2>Basic</h2>;
-    const customHeader = <h2>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h2>
-    const verticalHeader = <h2>Vertical</h2>
+    }
 
     return (
         <div className="carousel-demo">
-            <Carousel value={cars} itemTemplate={carTemplate} numVisible={4} numScroll={3}
-                header={basicHeader} responsiveOptions={responsiveOptions}></Carousel>
+            <div className="card">
+                <Carousel value={products} numVisible={3} numScroll={3} responsiveOptions={responsiveOptions}
+                    itemTemplate={productTemplate} header={<h5>Basic</h5>} />
+            </div>
 
-            <Carousel value={cars} itemTemplate={carTemplate} numVisible={3} numScroll={1} className="custom-carousel"
-                responsiveOptions={responsiveOptions} header={customHeader} circular autoplayInterval={3000}></Carousel>
+            <div className="card">
+                <Carousel value={products} numVisible={3} numScroll={1} responsiveOptions={responsiveOptions} className="custom-carousel" circular
+                    autoplayInterval={3000} itemTemplate={productTemplate} header={<h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>} />
+            </div>
 
-            <Carousel value={cars} itemTemplate={carTemplate} orientation="vertical" style={{maxWidth: '400px', marginTop: '2em'}}
-                numVisible={1} numScroll={1} verticalViewPortHeight="330px" header={verticalHeader}></Carousel>
+            <div className="card">
+                <Carousel value={products} numVisible={1} numScroll={1} orientation="vertical" verticalViewPortHeight="352px"
+                    itemTemplate={productTemplate} header={<h5>Vertical</h5>} style={{maxWidth: '400px', marginTop: '2em'}} />
+            </div>
         </div>
     );
 }
@@ -249,40 +257,22 @@ const CarouselDemo = () => {
         }
 
         this.extFiles = {
-            'index.css': `
-.carousel-demo .p-carousel .p-carousel-content .p-carousel-item .car-details > .p-grid {
-    border: 1px solid #b3c2ca;
+            'src/demo/CarouselDemo.css': {
+                content: `
+.carousel-demo .product-item .product-item-content {
+    border: 1px solid var(--surface-d);
     border-radius: 3px;
-    margin: 0.3em;
+    margin: .3rem;
     text-align: center;
-    padding: 2em 0 2.25em 0;
+    padding: 2rem 0;
 }
-.carousel-demo .p-carousel .p-carousel-content .p-carousel-item .car-data .car-title {
-    font-weight: 700;
-    font-size: 20px;
-    margin-top: 24px;
+
+.carousel-demo .product-item .product-image {
+    width: 50%;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
-.carousel-demo .p-carousel .p-carousel-content .p-carousel-item .car-data .car-subtitle {
-    margin: 0.25em 0 2em 0;
-}
-.carousel-demo .p-carousel .p-carousel-content .p-carousel-item .car-data button {
-    margin-left: 0.5em;
-}
-.carousel-demo .p-carousel .p-carousel-content .p-carousel-item .car-data button:first-child {
-    margin-left: 0;
-}
-.carousel-demo .p-carousel.custom-carousel .p-carousel-dot-icon {
-    width: 16px !important;
-    height: 16px !important;
-    border-radius: 50%;
-}
-.carousel-demo .p-carousel.p-carousel-horizontal .p-carousel-content .p-carousel-item.p-carousel-item-start .car-details > .p-grid {
-    margin-left: 0.6em;
-}
-.carousel-demo .p-carousel.p-carousel-horizontal .p-carousel-content .p-carousel-item.p-carousel-item-end .car-details > .p-grid {
-    margin-right: 0.6em;
-}
-            `
+                `
+            }
         }
     }
 
@@ -593,27 +583,7 @@ const responsiveOptions = [
                     </TabPanel>
 
                     <TabPanel header="Source">
-                        <LiveEditor name="CarouselDemo" sources={this.sources} service="CarService" data="cars-small" extFiles={this.extFiles} />
-<CodeHighlight lang="scss">
-{`
-.carousel-demo {
-    .product-item {
-        .product-item-content {
-            border: 1px solid var(--surface-d);
-            border-radius: 3px;
-            margin: .3rem;
-            text-align: center;
-            padding: 2rem 0;
-        }
-
-        .product-image {
-            width: 50%;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
-        }
-    }
-}
-`}
-</CodeHighlight>
+                        <LiveEditor name="CarouselDemo" sources={this.sources} service="ProductService" data="products-small" extFiles={this.extFiles} />
                     </TabPanel>
                 </TabView>
             </div>
