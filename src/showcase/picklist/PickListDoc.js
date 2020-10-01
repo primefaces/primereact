@@ -16,7 +16,7 @@ export class PickListDoc extends Component {
 import React, { Component } from 'react';
 import { PickList } from 'primereact/picklist';
 import ProductService from '../service/ProductService';
-import './PickListDemo.scss';
+import './PickListDemo.css';
 
 export class PickListDemo extends Component {
 
@@ -48,7 +48,7 @@ export class PickListDemo extends Component {
         return (
             <div className="product-item">
                 <div className="image-container">
-                    <img src={\`showcase/demo/images/product/\${item.image}\`} alt={item.name} />
+                    <img src={\`showcase/demo/images/product/\${item.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} />
                 </div>
                 <div className="product-list-detail">
                     <h5 className="p-mb-2">{item.name}</h5>
@@ -82,40 +82,51 @@ export class PickListDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState, useEffect } from 'react';
-import {PickList} from 'primereact/picklist';
-import {CarService} from '../service/CarService';
+import { PickList } from 'primereact/picklist';
+import ProductService from '../service/ProductService';
+import './PickListDemo.css';
 
 const PickListDemo = () => {
     const [source, setSource] = useState([]);
     const [target, setTarget] = useState([]);
-    const carservice = new CarService();
+    const productService = new ProductService();
 
     useEffect(() => {
-        carservice.getCarsSmall().then(data => setSource(data));
+        productService.getProductsSmall().then(data => setSource(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onChange = (event) => {
         setSource(event.source);
         setTarget(event.target);
-    };
+    }
 
-    const carTemplate = (car) => {
-        let imageSource = 'showcase/demo/images/car/' + car.brand + '.png';
-
+    const itemTemplate = (item) => {
         return (
-            <div className="p-clearfix">
-                <img src={imageSource} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand} style={{display: 'inline-block', margin: '2px 0 2px 2px',width:48}} />
-                <div style={{fontSize: '14px', float: 'right', margin: '15px 5px 0 0'}}>{car.brand} - {car.year} - {car.color}</div>
+            <div className="product-item">
+                <div className="image-container">
+                    <img src={\`showcase/demo/images/product/\${item.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} />
+                </div>
+                <div className="product-list-detail">
+                    <h5 className="p-mb-2">{item.name}</h5>
+                    <i className="pi pi-tag product-category-icon"></i>
+                    <span className="product-category">{item.category}</span>
+                </div>
+                <div className="product-list-action">
+                    <h6 className="p-mb-2">\${item.price}</h6>
+                    <span className={\`product-badge status-\${item.inventoryStatus.toLowerCase()}\`}>{item.inventoryStatus}</span>
+                </div>
             </div>
         );
-    };
+    }
 
     return (
-        <div>
-            <PickList source={source} target={target} itemTemplate={carTemplate}
-                sourceHeader="Available" targetHeader="Selected" responsive
-                sourceStyle={{height: '300px'}} targetStyle={{height: '300px'}}
-                onChange={onChange}></PickList>
+        <div className="picklist-demo">
+            <div className="card">
+                <PickList source={source} target={target} itemTemplate={itemTemplate}
+                    sourceHeader="Available" targetHeader="Selected"
+                    sourceStyle={{ height: '342px' }} targetStyle={{ height: '342px' }}
+                    onChange={onChange}></PickList>
+            </div>
         </div>
     );
 }
@@ -125,42 +136,108 @@ const PickListDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState, useEffect } from 'react';
-import {PickList} from 'primereact/picklist';
-import {CarService} from '../service/CarService';
+import { PickList } from 'primereact/picklist';
+import ProductService from '../service/ProductService';
+import './PickListDemo.css';
 
 const PickListDemo = () => {
     const [source, setSource] = useState([]);
     const [target, setTarget] = useState([]);
-    const carservice = new CarService();
+    const productService = new ProductService();
 
     useEffect(() => {
-        carservice.getCarsSmall().then(data => setSource(data));
+        productService.getProductsSmall().then(data => setSource(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const onChange = (event: any) => {
+    const onChange = (event) => {
         setSource(event.source);
         setTarget(event.target);
-    };
+    }
 
-    const carTemplate = (car: any) => {
-        let imageSource = 'showcase/demo/images/car/' + car.brand + '.png';
-
+    const itemTemplate = (item) => {
         return (
-            <div className="p-clearfix">
-                <img src={imageSource} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand} style={{display: 'inline-block', margin: '2px 0 2px 2px',width:48}} />
-                <div style={{fontSize: '14px', float: 'right', margin: '15px 5px 0 0'}}>{car.brand} - {car.year} - {car.color}</div>
+            <div className="product-item">
+                <div className="image-container">
+                    <img src={\`showcase/demo/images/product/\${item.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} />
+                </div>
+                <div className="product-list-detail">
+                    <h5 className="p-mb-2">{item.name}</h5>
+                    <i className="pi pi-tag product-category-icon"></i>
+                    <span className="product-category">{item.category}</span>
+                </div>
+                <div className="product-list-action">
+                    <h6 className="p-mb-2">\${item.price}</h6>
+                    <span className={\`product-badge status-\${item.inventoryStatus.toLowerCase()}\`}>{item.inventoryStatus}</span>
+                </div>
             </div>
         );
-    };
+    }
 
     return (
-        <div>
-            <PickList source={source} target={target} itemTemplate={carTemplate}
-                sourceHeader="Available" targetHeader="Selected" responsive
-                sourceStyle={{height: '300px'}} targetStyle={{height: '300px'}}
-                onChange={onChange}></PickList>
+        <div className="picklist-demo">
+            <div className="card">
+                <PickList source={source} target={target} itemTemplate={itemTemplate}
+                    sourceHeader="Available" targetHeader="Selected"
+                    sourceStyle={{ height: '342px' }} targetStyle={{ height: '342px' }}
+                    onChange={onChange}></PickList>
+            </div>
         </div>
     );
+}
+                `
+            }
+        };
+
+        this.extFiles = {
+            'src/demo/PickListDemo.css': {
+                content: `
+.picklist-demo .product-item {
+    display: flex;
+    align-items: center;
+    padding: .5rem;
+    width: 100%;
+}
+
+.picklist-demo .product-item img {
+    width: 75px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    margin-right: 1rem;
+}
+
+.picklist-demo .product-item .product-list-detail {
+    flex: 1 1 0;
+}
+
+.picklist-demo .product-item .product-list-action {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.picklist-demo .product-item .product-category-icon {
+    vertical-align: middle;
+    margin-right: .5rem;
+}
+
+.picklist-demo .product-item .product-category {
+    vertical-align: middle;
+    line-height: 1;
+}
+
+@media screen and (max-width: 576px) {
+    .picklist-demo .product-item {
+        flex-wrap: wrap;
+    }
+
+    .picklist-demo .product-item .image-container {
+        width: 100%;
+        text-align: center;
+    }
+
+    .picklist-demo .product-item img {
+        margin: 0 0 1rem 0;
+        width: 100px;
+    }
 }
                 `
             }
@@ -411,61 +488,7 @@ import { PickList } from 'primereact/picklist';
                     </TabPanel>
 
                     <TabPanel header="Source">
-                        <LiveEditor name="PickListDemo" sources={this.sources} service="CarService" data="cars-small" />
-<CodeHighlight lang="scss">
-{`
-.picklist-demo {
-    .product-item {
-        display: flex;
-        align-items: center;
-        padding: .5rem;
-        width: 100%;
-
-        img {
-            width: 75px;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-            margin-right: 1rem;
-        }
-
-        .product-list-detail {
-            flex: 1 1 0;
-        }
-
-        .product-list-action {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-        }
-
-        .product-category-icon {
-            vertical-align: middle;
-            margin-right: .5rem;
-        }
-
-        .product-category {
-            vertical-align: middle;
-            line-height: 1;
-        }
-    }
-
-    @media screen and (max-width: 576px) {
-        .product-item {
-            flex-wrap: wrap;
-
-            .image-container {
-                width: 100%;
-                text-align: center;
-            }
-
-            img {
-                margin: 0 0 1rem 0;
-                width: 100px;
-            }
-        }
-    }
-}
-`}
-</CodeHighlight>
+                        <LiveEditor name="PickListDemo" sources={this.sources} service="ProductService" data="products-small" extFiles={this.extFiles} />
                     </TabPanel>
                 </TabView>
             </div>

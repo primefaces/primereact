@@ -17,9 +17,9 @@ export class ProgressBarDemo extends Component {
 
     displayValueTemplate(value) {
         return (
-            <>
+            <React.Fragment>
                 {value}/<b>100</b>
-            </>
+            </React.Fragment>
         );
     }
 
