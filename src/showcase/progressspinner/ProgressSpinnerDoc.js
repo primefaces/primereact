@@ -38,17 +38,18 @@ export class ProgressSpinnerDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React from 'react';
-import {ProgressSpinner} from 'primereact/progressspinner';
+import { ProgressSpinner } from 'primereact/progressspinner';
 
 const ProgressSpinnerDemo = () => {
-
     return (
         <div>
-            <h5>Basic</h5>
-            <ProgressSpinner/>
+            <div className="card">
+                <h5>Basic</h5>
+                <ProgressSpinner />
 
-            <h5>Custom</h5>
-            <ProgressSpinner style={{width: '50px', height: '50px'}} strokeWidth="8" fill="#EEEEEE" animationDuration=".5s"/>
+                <h5>Custom</h5>
+                <ProgressSpinner style={{width: '50px', height: '50px'}} strokeWidth="8" fill="#EEEEEE" animationDuration=".5s"/>
+            </div>
         </div>
     );
 }
@@ -58,17 +59,18 @@ const ProgressSpinnerDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React from 'react';
-import {ProgressSpinner} from 'primereact/progressspinner';
+import { ProgressSpinner } from 'primereact/progressspinner';
 
 const ProgressSpinnerDemo = () => {
-
     return (
         <div>
-            <h5>Basic</h5>
-            <ProgressSpinner/>
+            <div className="card">
+                <h5>Basic</h5>
+                <ProgressSpinner />
 
-            <h5>Custom</h5>
-            <ProgressSpinner style={{width: '50px', height: '50px'}} strokeWidth="8" fill="#EEEEEE" animationDuration=".5s"/>
+                <h5>Custom</h5>
+                <ProgressSpinner style={{width: '50px', height: '50px'}} strokeWidth="8" fill="#EEEEEE" animationDuration=".5s"/>
+            </div>
         </div>
     );
 }

@@ -60,17 +60,19 @@ const RatingDemo = () => {
 
     return (
         <div>
-            <h3 className="first">Basic {val1}</h5>
-            <Rating value={val1} onChange={(e) => setVal1(e.value)} />
+            <div className="card">
+                <h5>Basic {val1}</h5>
+                <Rating value={val1} onChange={(e) => setVal1(e.value)} />
 
-            <h5>No Cancel {val2}</h5>
-            <Rating value={val2} cancel={false} onChange={(e) => setVal2(e.value)} />
+                <h5>Without Cancel</h5>
+                <Rating value={val2} cancel={false} onChange={(e) => setVal2(e.value)} />
 
-            <h5>ReadOnly</h5>
-            <Rating value={5} readonly stars={10} cancel={false} />
+                <h5>ReadOnly</h5>
+                <Rating value={5} readonly stars={10} cancel={false} />
 
-            <h5>Disabled</h5>
-            <Rating value={8} disabled stars={10} />
+                <h5>Disabled</h5>
+                <Rating value={8} disabled stars={10} />
+            </div>
         </div>
     )
 }
@@ -83,27 +85,29 @@ import React, { useState } from 'react';
 import { Rating } from 'primereact/rating';
 
 const RatingDemo = () => {
-    const [val1, setVal1] = useState<number|undefined>(undefined);
-    const [val2, setVal2] = useState<number|undefined>(undefined);
+    const [val1, setVal1] = useState(null);
+    const [val2, setVal2] = useState(null);
 
     return (
         <div>
-            <h3 className="first">Basic {val1}</h5>
-            <Rating value={val1} onChange={(e) => setVal1(e.value)} />
+            <div className="card">
+                <h5>Basic {val1}</h5>
+                <Rating value={val1} onChange={(e) => setVal1(e.value)} />
 
-            <h5>No Cancel {val2}</h5>
-            <Rating value={val2} cancel={false} onChange={(e) => setVal2(e.value)} />
+                <h5>Without Cancel</h5>
+                <Rating value={val2} cancel={false} onChange={(e) => setVal2(e.value)} />
 
-            <h5>ReadOnly</h5>
-            <Rating value={5} readonly stars={10} cancel={false} />
+                <h5>ReadOnly</h5>
+                <Rating value={5} readonly stars={10} cancel={false} />
 
-            <h5>Disabled</h5>
-            <Rating value={8} disabled stars={10} />
+                <h5>Disabled</h5>
+                <Rating value={8} disabled stars={10} />
+            </div>
         </div>
     )
 }
                 `
-            }
+            },
         }
     }
 
