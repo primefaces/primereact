@@ -147,28 +147,58 @@ export class DataTableReorderDemo extends Component {
             'hooks': {
                 tabName: 'Hooks Source',
                 content: `
-import React, { useState, useEffect } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service/CarService';
+import React, { useState, useEffect, useRef } from 'react';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import ProductService from '../service/ProductService';
+import { Toast } from 'primereact/toast';
 
 const DataTableReorderDemo = () => {
-    const [cars, setCars] = useState([]);
-    const carservice = new CarService();
+    const [products, setProducts] = useState([]);
+    const toast = useRef(null);
+    const isMounted = useRef(false);
+    const columns = [
+        {field: 'code', header: 'Code'},
+        {field: 'name', header: 'Name'},
+        {field: 'category', header: 'Category'},
+        {field: 'quantity', header: 'Quantity'}
+    ];
+
+    const productService = new ProductService();
 
     useEffect(() => {
-        carservice.getCarsSmall().then(data => setCars(data));
+        if (isMounted.current) {
+            toast.current.show({severity:'success', summary: 'Rows Reordered', life: 3000});
+        }
+    }, [products]);
+
+    useEffect(() => {
+        isMounted.current = true;
+        productService.getProductsSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const onColReorder = () => {
+        toast.current.show({severity:'success', summary: 'Column Reordered', life: 3000});
+    }
+
+    const onRowReorder = (e) => {
+        setProducts(e.value);
+    }
+
+    const dynamicColumns = columns.map((col,i) => {
+        return <Column key={col.field} columnKey={col.field} field={col.field} header={col.header} />;
+    });
 
     return (
         <div>
-            <DataTable value={cars} reorderableColumns onRowReorder={(e) => setCars(e.value)}>
-                <Column rowReorder style={{width: '3em'}} />
-                <Column columnKey="vin" field="vin" header="Vin"/>
-                <Column columnKey="year" field="year" header="Year" />
-                <Column columnKey="brand" field="brand" header="Brand" />
-                <Column columnKey="color" field="color" header="Color" />
-            </DataTable>
+            <Toast ref={toast}></Toast>
+
+            <div className="card">
+                <DataTable value={products} reorderableColumns onRowReorder={onRowReorder} onColReorder={onColReorder}>
+                    <Column rowReorder style={{width: '3em'}} />
+                    {dynamicColumns}
+                </DataTable>
+            </div>
         </div>
     );
 }
@@ -177,28 +207,58 @@ const DataTableReorderDemo = () => {
             'ts': {
                 tabName: 'TS Source',
                 content: `
-import React, { useState, useEffect } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service/CarService';
+import React, { useState, useEffect, useRef } from 'react';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import ProductService from '../service/ProductService';
+import { Toast } from 'primereact/toast';
 
 const DataTableReorderDemo = () => {
-    const [cars, setCars] = useState([]);
-    const carservice = new CarService();
+    const [products, setProducts] = useState([]);
+    const toast = useRef(null);
+    const isMounted = useRef(false);
+    const columns = [
+        {field: 'code', header: 'Code'},
+        {field: 'name', header: 'Name'},
+        {field: 'category', header: 'Category'},
+        {field: 'quantity', header: 'Quantity'}
+    ];
+
+    const productService = new ProductService();
 
     useEffect(() => {
-        carservice.getCarsSmall().then(data => setCars(data));
+        if (isMounted.current) {
+            toast.current.show({severity:'success', summary: 'Rows Reordered', life: 3000});
+        }
+    }, [products]);
+
+    useEffect(() => {
+        isMounted.current = true;
+        productService.getProductsSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const onColReorder = () => {
+        toast.current.show({severity:'success', summary: 'Column Reordered', life: 3000});
+    }
+
+    const onRowReorder = (e) => {
+        setProducts(e.value);
+    }
+
+    const dynamicColumns = columns.map((col,i) => {
+        return <Column key={col.field} columnKey={col.field} field={col.field} header={col.header} />;
+    });
 
     return (
         <div>
-            <DataTable value={cars} reorderableColumns onRowReorder={(e) => setCars(e.value)}>
-                <Column rowReorder style={{width: '3em'}} />
-                <Column columnKey="vin" field="vin" header="Vin"/>
-                <Column columnKey="year" field="year" header="Year" />
-                <Column columnKey="brand" field="brand" header="Brand" />
-                <Column columnKey="color" field="color" header="Color" />
-            </DataTable>
+            <Toast ref={toast}></Toast>
+
+            <div className="card">
+                <DataTable value={products} reorderableColumns onRowReorder={onRowReorder} onColReorder={onColReorder}>
+                    <Column rowReorder style={{width: '3em'}} />
+                    {dynamicColumns}
+                </DataTable>
+            </div>
         </div>
     );
 }
@@ -216,7 +276,7 @@ const DataTableReorderDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Source">
-                        <LiveEditor name="DataTableReorderDemo" sources={this.sources} service="CarService" data="cars-small" />
+                        <LiveEditor name="DataTableReorderDemo" sources={this.sources} service="ProductService" data="products-small" />
                     </TabPanel>
                 </TabView>
             </div>

@@ -5,7 +5,7 @@ import ProductService from '../service/ProductService';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { LiveEditor } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
-import { CodeHighlight } from '../codehighlight/CodeHighlight';
+import './DataTableDemo.scss';
 
 export class DataTableResponsiveDemo extends Component {
 
@@ -29,37 +29,37 @@ export class DataTableResponsiveDemo extends Component {
 
     codeBodyTemplate(rowData) {
         return (
-            <>
+            <React.Fragment>
                 <span className="p-column-title">Code</span>
                 {rowData.code}
-            </>
+            </React.Fragment>
         );
     }
 
     nameBodyTemplate(rowData) {
         return (
-            <>
+            <React.Fragment>
                 <span className="p-column-title">Name</span>
                 {rowData.name}
-            </>
+            </React.Fragment>
         );
     }
 
     categoryBodyTemplate(rowData) {
         return (
-            <>
+            <React.Fragment>
                 <span className="p-column-title">Category</span>
                 {rowData.category}
-            </>
+            </React.Fragment>
         );
     }
 
     quantityBodyTemplate(rowData) {
         return (
-            <>
+            <React.Fragment>
                 <span className="p-column-title">Quantity</span>
                 {rowData.quantity}
-            </>
+            </React.Fragment>
         );
     }
 
@@ -103,6 +103,7 @@ import React, { Component } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import ProductService from '../service/ProductService';
+import './DataTableDemo.css';
 
 export class DataTableResponsiveDemo extends Component {
 
@@ -126,37 +127,37 @@ export class DataTableResponsiveDemo extends Component {
 
     codeBodyTemplate(rowData) {
         return (
-            <>
+            <React.Fragment>
                 <span className="p-column-title">Code</span>
                 {rowData.code}
-            </>
+            </React.Fragment>
         );
     }
 
     nameBodyTemplate(rowData) {
         return (
-            <>
+            <React.Fragment>
                 <span className="p-column-title">Name</span>
                 {rowData.name}
-            </>
+            </React.Fragment>
         );
     }
 
     categoryBodyTemplate(rowData) {
         return (
-            <>
+            <React.Fragment>
                 <span className="p-column-title">Category</span>
                 {rowData.category}
-            </>
+            </React.Fragment>
         );
     }
 
     quantityBodyTemplate(rowData) {
         return (
-            <>
+            <React.Fragment>
                 <span className="p-column-title">Quantity</span>
                 {rowData.quantity}
-            </>
+            </React.Fragment>
         );
     }
 
@@ -181,26 +182,65 @@ export class DataTableResponsiveDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState, useEffect } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service/CarService';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import ProductService from '../service/ProductService';
+import './DataTableDemo.css';
 
 const DataTableResponsiveDemo = () => {
-    const [cars, setCars] = useState([]);
-    const carservice = new CarService();
+    const [products, setProducts] = useState([]);
+    const productService = new ProductService();
 
     useEffect(() => {
-        carservice.getCarsSmall().then(data => setCars(data));
+        productService.getProducts().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+    const codeBodyTemplate = (rowData) => {
+        return (
+            <React.Fragment>
+                <span className="p-column-title">Code</span>
+                {rowData.code}
+            </React.Fragment>
+        );
+    }
+
+    const nameBodyTemplate = (rowData) => {
+        return (
+            <React.Fragment>
+                <span className="p-column-title">Name</span>
+                {rowData.name}
+            </React.Fragment>
+        );
+    }
+
+    const categoryBodyTemplate = (rowData) => {
+        return (
+            <React.Fragment>
+                <span className="p-column-title">Category</span>
+                {rowData.category}
+            </React.Fragment>
+        );
+    }
+
+    const quantityBodyTemplate = (rowData) => {
+        return (
+            <React.Fragment>
+                <span className="p-column-title">Quantity</span>
+                {rowData.quantity}
+            </React.Fragment>
+        );
+    }
+
     return (
-        <div>
-            <DataTable value={cars} responsive header="Responsive">
-                <Column field="vin" header="Vin" />
-                <Column field="year" header="Year" />
-                <Column field="brand" header="Brand" />
-                <Column field="color" header="Color" />
-            </DataTable>
+        <div className="datatable-responsive-demo">
+            <div className="card">
+                <DataTable value={products} className="p-datatable-responsive-demo" paginator rows={10} header="Responsive">
+                    <Column field="code" header="Code" body={codeBodyTemplate} />
+                    <Column field="name" header="Name" body={nameBodyTemplate} />
+                    <Column field="category" header="Category" body={categoryBodyTemplate} />
+                    <Column field="quantity" header="Quantity" body={quantityBodyTemplate} />
+                </DataTable>
+            </div>
         </div>
     );
 }
@@ -210,28 +250,105 @@ const DataTableResponsiveDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState, useEffect } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service/CarService';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import ProductService from '../service/ProductService';
+import './DataTableDemo.css';
 
 const DataTableResponsiveDemo = () => {
-    const [cars, setCars] = useState([]);
-    const carservice = new CarService();
+    const [products, setProducts] = useState([]);
+    const productService = new ProductService();
 
     useEffect(() => {
-        carservice.getCarsSmall().then(data => setCars(data));
+        productService.getProducts().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+    const codeBodyTemplate = (rowData) => {
+        return (
+            <React.Fragment>
+                <span className="p-column-title">Code</span>
+                {rowData.code}
+            </React.Fragment>
+        );
+    }
+
+    const nameBodyTemplate = (rowData) => {
+        return (
+            <React.Fragment>
+                <span className="p-column-title">Name</span>
+                {rowData.name}
+            </React.Fragment>
+        );
+    }
+
+    const categoryBodyTemplate = (rowData) => {
+        return (
+            <React.Fragment>
+                <span className="p-column-title">Category</span>
+                {rowData.category}
+            </React.Fragment>
+        );
+    }
+
+    const quantityBodyTemplate = (rowData) => {
+        return (
+            <React.Fragment>
+                <span className="p-column-title">Quantity</span>
+                {rowData.quantity}
+            </React.Fragment>
+        );
+    }
+
     return (
-        <div>
-            <DataTable value={cars} responsive header="Responsive">
-                <Column field="vin" header="Vin" />
-                <Column field="year" header="Year" />
-                <Column field="brand" header="Brand" />
-                <Column field="color" header="Color" />
-            </DataTable>
+        <div className="datatable-responsive-demo">
+            <div className="card">
+                <DataTable value={products} className="p-datatable-responsive-demo" paginator rows={10} header="Responsive">
+                    <Column field="code" header="Code" body={codeBodyTemplate} />
+                    <Column field="name" header="Name" body={nameBodyTemplate} />
+                    <Column field="category" header="Category" body={categoryBodyTemplate} />
+                    <Column field="quantity" header="Quantity" body={quantityBodyTemplate} />
+                </DataTable>
+            </div>
         </div>
     );
+}
+                `
+            }
+        };
+
+        this.extFiles = {
+            'src/demo/DataTableDemo.css': {
+                content: `
+.datatable-responsive-demo .p-datatable-responsive-demo .p-datatable-tbody > tr > td .p-column-title {
+    display: none;
+}
+
+@media screen and (max-width: 40em) {
+    .datatable-responsive-demo .p-datatable.p-datatable-responsive-demo .p-datatable-thead > tr > th,
+    .datatable-responsive-demo .p-datatable.p-datatable-responsive-demo .p-datatable-tfoot > tr > td {
+        display: none !important;
+    }
+
+    .datatable-responsive-demo .p-datatable.p-datatable-responsive-demo .p-datatable-tbody > tr > td {
+        text-align: left;
+        display: block;
+        width: 100%;
+        float: left;
+        clear: left;
+        border: 0 none;
+    }
+
+    .datatable-responsive-demo .p-datatable.p-datatable-responsive-demo .p-datatable-tbody > tr > td .p-column-title {
+        padding: .4rem;
+        min-width: 30%;
+        display: inline-block;
+        margin: -.4em 1em -.4em -.4rem;
+        font-weight: bold;
+    }
+
+    .datatable-responsive-demo .p-datatable.p-datatable-responsive-demo .p-datatable-tbody > tr > td:last-child {
+        border-bottom: 1px solid var(--surface-d);
+    }
 }
                 `
             }
@@ -247,48 +364,7 @@ const DataTableResponsiveDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Source">
-                        <LiveEditor name="DataTableResponsiveDemo" sources={this.sources} service="CarService" data="cars-small" />
-<CodeHighlight lang="scss">
-{`
-.datatable-responsive-demo {
-    .p-datatable-responsive-demo .p-datatable-tbody > tr > td .p-column-title {
-        display: none;
-    }
-
-    @media screen and (max-width: 40em) {
-        .p-datatable {
-            &.p-datatable-responsive-demo {
-                .p-datatable-thead > tr > th,
-                .p-datatable-tfoot > tr > td {
-                    display: none !important;
-                }
-
-                .p-datatable-tbody > tr > td {
-                    text-align: left;
-                    display: block;
-                    width: 100%;
-                    float: left;
-                    clear: left;
-                    border: 0 none;
-
-                    .p-column-title {
-                        padding: .4rem;
-                        min-width: 30%;
-                        display: inline-block;
-                        margin: -.4em 1em -.4em -.4rem;
-                        font-weight: bold;
-                    }
-
-                    &:last-child {
-                        border-bottom: 1px solid var(--surface-d);
-                    }
-                }
-            }
-        }
-    }
-}
-`}
-</CodeHighlight>
+                        <LiveEditor name="DataTableResponsiveDemo" sources={this.sources} service="ProductService" data="products" extFiles={this.extFiles} />
                     </TabPanel>
                 </TabView>
             </div>
