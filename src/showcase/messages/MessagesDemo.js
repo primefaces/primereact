@@ -25,10 +25,10 @@ export class MessagesDemo extends Component {
 
         this.msgs3.show({
             severity: 'info', sticky: true, content: (
-                <>
-                    <img alt="logo" src="showcase/images/logo.png" width="32" />
+                <React.Fragment>
+                    <img alt="logo" src="showcase/images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" />
                     <div className="p-ml-2">Always bet on Prime.</div>
-                </>
+                </React.Fragment>
             )
         });
     }
