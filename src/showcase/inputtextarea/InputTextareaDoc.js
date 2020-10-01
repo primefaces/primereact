@@ -50,19 +50,25 @@ export class InputTextareaDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState } from 'react';
-import {InputTextarea} from 'primereact/inputtextarea';
+import { InputTextarea } from 'primereact/inputtextarea';
 
 const InputTextareaDemo = () => {
-    const [value, setValue] = useState('Welcome to PrimeLand!');
+    const [value1, setValue1] = useState('');
+    const [value2, setValue2] = useState('');
+    const [value3, setValue3] = useState('');
 
     return (
         <div>
-            <h5>Default</h5>
-            <InputTextarea value={value} onChange={(e) => setValue(e.target.value)} rows={5} cols={30}></InputTextarea>
-            <div>{value}</div>
+            <div className="card">
+                <h5>Basic</h5>
+                <InputTextarea value={value1} onChange={(e) => setValue1(e.target.value)} rows={5} cols={30} />
 
-            <h5>AutoResize</h5>
-            <InputTextarea rows={5} cols={30} autoResize></InputTextarea>
+                <h5>Auto Resize</h5>
+                <InputTextarea value={value2} onChange={(e) => setValue2(e.target.value)} rows={5} cols={30} autoResize />
+
+                <h5>Disabled</h5>
+                <InputTextarea value={value3} rows={5} cols={30} disabled />
+            </div>
         </div>
     )
 }
@@ -72,24 +78,30 @@ const InputTextareaDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState } from 'react';
-import {InputTextarea} from 'primereact/inputtextarea';
+import { InputTextarea } from 'primereact/inputtextarea';
 
 const InputTextareaDemo = () => {
-    const [value, setValue] = useState('Welcome to PrimeLand!');
+    const [value1, setValue1] = useState('');
+    const [value2, setValue2] = useState('');
+    const [value3, setValue3] = useState('');
 
     return (
         <div>
-            <h5>Default</h5>
-            <InputTextarea value={value} onChange={(e) => setValue((e.target as HTMLInputElement).value)} rows={5} cols={30}></InputTextarea>
-            <div>{value}</div>
+            <div className="card">
+                <h5>Basic</h5>
+                <InputTextarea value={value1} onChange={(e) => setValue1(e.target.value)} rows={5} cols={30} />
 
-            <h5>AutoResize</h5>
-            <InputTextarea rows={5} cols={30} autoResize></InputTextarea>
+                <h5>Auto Resize</h5>
+                <InputTextarea value={value2} onChange={(e) => setValue2(e.target.value)} rows={5} cols={30} autoResize />
+
+                <h5>Disabled</h5>
+                <InputTextarea value={value3} rows={5} cols={30} disabled />
+            </div>
         </div>
     )
 }
                 `
-            }
+            },
         }
     }
 

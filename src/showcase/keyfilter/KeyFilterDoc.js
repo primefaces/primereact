@@ -66,37 +66,46 @@ export class KeyFilterDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React from 'react';
-import {InputText} from 'primereact/inputtext';
+import { InputText } from 'primereact/inputtext';
 
 const KeyFilterDemo = () => {
 
     return (
         <div>
-            <h5>Filtering</h5>
-            <div className="p-grid p-fluid">
-                <div className="p-col-12 p-md-4">
-                    <InputText keyfilter="int" placeholder="Integers"/>
-                </div>
-                <div className="p-col-12 p-md-4">
-                    <InputText keyfilter="num" placeholder="Numbers"/>
-                </div>
-                <div className="p-col-12 p-md-4">
-                    <InputText keyfilter="money" placeholder="Money"/>
-                </div>
-                <div className="p-col-12 p-md-4">
-                    <InputText keyfilter="hex" placeholder="Hex"/>
-                </div>
-                <div className="p-col-12 p-md-4">
-                    <InputText keyfilter="alpha" placeholder="Alphabetic"/>
-                </div>
-                <div className="p-col-12 p-md-4">
-                    <InputText keyfilter="alphanum" placeholder="Alphanumberic"/>
-                </div>
-                <div className="p-col-12 p-md-4">
-                    <InputText keyfilter={/^[^<>*!]+$/} placeholder="Block < > * !"/>
-                </div>
-                <div className="p-col-12 p-md-4">
-                    <InputText keyfilter={/[^\\s]/} placeholder="Block space key"/>
+            <div className="card">
+                <div className="p-grid p-fluid">
+                    <div className="p-field p-col-12 p-md-3">
+                        <label htmlFor="integer">Integers</label>
+                        <InputText id="integer" keyfilter="int" />
+                    </div>
+                    <div className="p-field p-col-12 p-md-3">
+                        <label htmlFor="numbers">Numbers</label>
+                        <InputText id="numbers" keyfilter="num" />
+                    </div>
+                    <div className="p-field p-col-12 p-md-3">
+                        <label htmlFor="money">Hex</label>
+                        <InputText id="money" keyfilter="money" />
+                    </div>
+                    <div className="p-field p-col-12 p-md-3">
+                    <label htmlFor="integer">Integers</label>
+                        <InputText id="hex" keyfilter="hex" />
+                    </div>
+                    <div className="p-field p-col-12 p-md-3">
+                        <label htmlFor="alpha">Alphabetic</label>
+                        <InputText id="alpha" keyfilter="alpha"/>
+                    </div>
+                    <div className="p-field p-col-12 p-md-3">
+                    <label htmlFor="alphanum">Alphanumberic</label>
+                        <InputText id="alphanum" keyfilter="alphanum" />
+                    </div>
+                    <div className="p-field p-col-12 p-md-3">
+                        <label htmlFor="block">Block {\`< > * !\`}</label>
+                        <InputText id="block" keyfilter={/^[^<>*!]+$/}/>
+                    </div>
+                    <div className="p-field p-col-12 p-md-3">
+                        <label htmlFor="spaceblock">Block space key</label>
+                        <InputText id="spaceblock" keyfilter={/[^\\s]/} />
+                    </div>
                 </div>
             </div>
         </div>
@@ -108,37 +117,46 @@ const KeyFilterDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React from 'react';
-import {InputText} from 'primereact/inputtext';
+import { InputText } from 'primereact/inputtext';
 
 const KeyFilterDemo = () => {
 
     return (
         <div>
-            <h5>Filtering</h5>
-            <div className="p-grid p-fluid">
-                <div className="p-col-12 p-md-4">
-                    <InputText keyfilter="int" placeholder="Integers"/>
-                </div>
-                <div className="p-col-12 p-md-4">
-                    <InputText keyfilter="num" placeholder="Numbers"/>
-                </div>
-                <div className="p-col-12 p-md-4">
-                    <InputText keyfilter="money" placeholder="Money"/>
-                </div>
-                <div className="p-col-12 p-md-4">
-                    <InputText keyfilter="hex" placeholder="Hex"/>
-                </div>
-                <div className="p-col-12 p-md-4">
-                    <InputText keyfilter="alpha" placeholder="Alphabetic"/>
-                </div>
-                <div className="p-col-12 p-md-4">
-                    <InputText keyfilter="alphanum" placeholder="Alphanumberic"/>
-                </div>
-                <div className="p-col-12 p-md-4">
-                    <InputText keyfilter={/^[^<>*!]+$/} placeholder="Block < > * !"/>
-                </div>
-                <div className="p-col-12 p-md-4">
-                    <InputText keyfilter={/[^\\s]/} placeholder="Block space key"/>
+            <div className="card">
+                <div className="p-grid p-fluid">
+                    <div className="p-field p-col-12 p-md-3">
+                        <label htmlFor="integer">Integers</label>
+                        <InputText id="integer" keyfilter="int" />
+                    </div>
+                    <div className="p-field p-col-12 p-md-3">
+                        <label htmlFor="numbers">Numbers</label>
+                        <InputText id="numbers" keyfilter="num" />
+                    </div>
+                    <div className="p-field p-col-12 p-md-3">
+                        <label htmlFor="money">Hex</label>
+                        <InputText id="money" keyfilter="money" />
+                    </div>
+                    <div className="p-field p-col-12 p-md-3">
+                    <label htmlFor="integer">Integers</label>
+                        <InputText id="hex" keyfilter="hex" />
+                    </div>
+                    <div className="p-field p-col-12 p-md-3">
+                        <label htmlFor="alpha">Alphabetic</label>
+                        <InputText id="alpha" keyfilter="alpha"/>
+                    </div>
+                    <div className="p-field p-col-12 p-md-3">
+                    <label htmlFor="alphanum">Alphanumberic</label>
+                        <InputText id="alphanum" keyfilter="alphanum" />
+                    </div>
+                    <div className="p-field p-col-12 p-md-3">
+                        <label htmlFor="block">Block {\`< > * !\`}</label>
+                        <InputText id="block" keyfilter={/^[^<>*!]+$/}/>
+                    </div>
+                    <div className="p-field p-col-12 p-md-3">
+                        <label htmlFor="spaceblock">Block space key</label>
+                        <InputText id="spaceblock" keyfilter={/[^\\s]/} />
+                    </div>
                 </div>
             </div>
         </div>
