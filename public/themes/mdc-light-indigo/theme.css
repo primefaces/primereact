@@ -3120,7 +3120,7 @@
     font-size: 0.875rem; }
 
 .p-inline-message {
-  padding: 1rem 1rem;
+  padding: 0.75rem 0.75rem;
   margin: 0;
   border-radius: 4px; }
   .p-inline-message.p-inline-message-info {
