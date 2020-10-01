@@ -145,7 +145,7 @@ export class BodyRow extends Component {
     findNextSelectableRow(row) {
         let nextRow = row.nextElementSibling;
         if (nextRow) {
-            if (DomHandler.hasClass(nextRow, 'p-datatable-row'))
+            if (DomHandler.hasClass(nextRow, 'p-selectable-row'))
                 return nextRow;
             else
                 return this.findNextSelectableRow(nextRow);
@@ -158,7 +158,7 @@ export class BodyRow extends Component {
     findPrevSelectableRow(row) {
         let prevRow = row.previousElementSibling;
         if (prevRow) {
-            if (DomHandler.hasClass(prevRow, 'p-datatable-row'))
+            if (DomHandler.hasClass(prevRow, 'p-selectable-row'))
                 return prevRow;
             else
                 return this.findPrevSelectableRow(prevRow);
@@ -226,14 +226,15 @@ export class BodyRow extends Component {
         let columns = React.Children.toArray(this.props.children);
         let conditionalClassNames = {
             'p-highlight': this.props.selected,
-            'p-highlight-contextmenu': this.props.contextMenuSelected
+            'p-highlight-contextmenu': this.props.contextMenuSelected,
+            'p-selectable-row': this.props.selectionMode
         };
 
         if (this.props.rowClassName) {
             let rowClassNameCondition = this.props.rowClassName(this.props.rowData);
             conditionalClassNames = {...conditionalClassNames, ...rowClassNameCondition};
         }
-        let className = classNames('p-datatable-row', conditionalClassNames);
+        let className = classNames(conditionalClassNames);
         let style = this.props.virtualScroll ? {height: this.props.virtualRowHeight} : {};
         let hasRowSpanGrouping = this.props.rowGroupMode === 'rowspan';
         let cells = [];
