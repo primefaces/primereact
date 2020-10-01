@@ -38,10 +38,10 @@ export class MessagesDemo extends Component {
 
         this.msgs3.show({
             severity: 'info', sticky: true, content: (
-                <>
-                    <img alt="logo" src="showcase/images/logo.png" width="32" />
+                <React.Fragment>
+                    <img alt="logo" src="showcase/images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" />
                     <div className="p-ml-2">Always bet on Prime.</div>
-                </>
+                </React.Fragment>
             )
         });
     }
@@ -120,104 +120,98 @@ export class MessagesDemo extends Component {
             'hooks': {
                 tabName: 'Hooks Source',
                 content: `
-import React, { useRef } from 'react';
-import {Messages} from 'primereact/messages';
-import {Message} from 'primereact/message';
-import {InputText} from 'primereact/inputtext';
-import {Button} from 'primereact/button';
+import React, { useEffect, useRef } from 'react';
+import { Messages } from 'primereact/messages';
+import { Message } from 'primereact/message';
+import { InputText } from 'primereact/inputtext';
+import { Button } from 'primereact/button';
 
 const MessagesDemo = () => {
-    let messages = useRef(null);
+    const msgs1 = useRef(null);
+    const msgs2 = useRef(null);
+    const msgs3 = useRef(null);
 
-    const showSuccess = () => {
-        messages.current.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
-    };
+    useEffect(() => {
+        msgs1.current.show([
+            { severity: 'success', summary: 'Success', detail: 'Message Content', sticky: true },
+            { severity: 'info', summary: 'Info', detail: 'Message Content', sticky: true },
+            { severity: 'warn', summary: 'Warning', detail: 'Message Content', sticky: true },
+            { severity: 'error', summary: 'Error', detail: 'Message Content', sticky: true }
+        ]);
 
-    const showInfo = () => {
-        messages.current.show({severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks'});
-    };
+        msgs3.current.show({
+            severity: 'info', sticky: true, content: (
+                <React.Fragment>
+                    <img alt="logo" src="showcase/images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" />
+                    <div className="p-ml-2">Always bet on Prime.</div>
+                </React.Fragment>
+            )
+        });
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const showWarn = () => {
-        messages.current.show({severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes'});
-    };
-
-    const showError = () => {
-        messages.current.show({severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
-    };
-
-    const showSticky = () => {
-        messages.current.show({severity: 'info', summary: 'Sticky Message', detail: 'You need to close Me', sticky: true});
-    };
-
-    const showMultiple = () => {
-        messages.current.show([
-            {severity: 'info', summary: 'Message 1', detail: 'PrimeReact rocks'},
-            {severity: 'info', summary: 'Message 2', detail: 'PrimeReact rocks'},
-            {severity: 'info', summary: 'Message 3', detail: 'PrimeFaces rocks'}
+    const addMessages = () => {
+        msgs2.current.show([
+            { severity: 'success', summary: 'Success', detail: 'Message Content', sticky: true },
+            { severity: 'info', summary: 'Info', detail: 'Message Content', sticky: true },
+            { severity: 'warn', summary: 'Warning', detail: 'Message Content', sticky: true },
+            { severity: 'error', summary: 'Error', detail: 'Message Content', sticky: true }
         ]);
     }
 
-    const clear = () => {
-        messages.current.clear();
+    const clearMessages = () => {
+        msgs2.current.clear();
     }
 
     return (
         <div>
-            <Messages ref={messages} />
+            <div className="card">
+                <h5>Severities</h5>
+                <Messages ref={msgs1} />
 
-            <h3 style={{marginTop: 0}}>Severities</h5>
-            <div className="p-grid p-fluid">
-                <div className="p-col-12 p-md-3">
-                    <Button onClick={showSuccess} label="Success" className="p-button-success" />
-                </div>
-                <div className="p-col-12 p-md-3">
-                    <Button onClick={showInfo} label="Info" className="p-button-info" />
-                </div>
-                <div className="p-col-12 p-md-3">
-                    <Button onClick={showWarn} label="Warn" className="p-button-warning" />
-                </div>
-                <div className="p-col-12 p-md-3">
-                    <Button onClick={showError} label="Error" className="p-button-danger" />
-                </div>
-            </div>
+                <h5>Dynamic</h5>
+                <Button type="button" onClick={addMessages} label="Show" className="p-mr-2" />
+                <Button type="button" onClick={clearMessages} icon="pi pi-times" label="Clear" className="p-button-secondary" />
 
-            <h5>Options</h5>
-            <div className="p-grid p-fluid">
-                <div className="p-col-12 p-md-4">
-                    <Button onClick={showMultiple} label="Multiple" />
-                </div>
-                <div className="p-col-12 p-md-4">
-                    <Button onClick={showSticky} label="Sticky" />
-                </div>
-                <div className="p-col-12 p-md-4">
-                    <Button onClick={clear} icon="pi pi-times" style={{float: 'right'}} label="Clear" />
-                </div>
-            </div>
+                <Messages ref={msgs2} />
 
-            <h5>Inline Message CSS</h5>
-            <p>CSS helpers to display inline messages mostly within forms.</p>
-            <div className="p-grid">
-                <div className="p-col-12 p-md-3">
-                    <Message severity="info" text="PrimeReact Rocks" />
-                </div>
-                <div className="p-col-12 p-md-3">
-                    <Message severity="success" text="Record Saved" />
-                </div>
-                <div className="p-col-12 p-md-3">
-                    <Message severity="warn" text="Are you sure?" />
-                </div>
-                <div className="p-col-12 p-md-3">
-                    <Message severity="error" text="Field is required" />
-                </div>
-            </div>
+                <h5>Static Content</h5>
+                <Messages ref={msgs3} />
 
-            <div style={{ marginTop: '30px', paddingLeft: '.5em' }}>
-                <InputText placeholder="Username" className="p-error" style={{marginRight: '.25em'}} />
-                <Message severity="error" text="Field is required" />
-            </div>
-            <div style={{ marginTop: '30px', paddingLeft: '.5em' }}>
-                <InputText placeholder="Email" className="p-error" style={{marginRight: '.25em'}} />
-                <Message severity="error" />
+                <h5>Inline Message</h5>
+                <p>Message component is used to display inline messages mostly within forms.</p>
+                <div className="p-grid">
+                    <div className="p-col-12 p-md-3">
+                        <Message severity="info" text="Message Content" />
+                    </div>
+                    <div className="p-col-12 p-md-3">
+                        <Message severity="success" text="Message Content" />
+                    </div>
+                    <div className="p-col-12 p-md-3">
+                        <Message severity="warn" text="Message Content" />
+                    </div>
+                    <div className="p-col-12 p-md-3">
+                        <Message severity="error" text="Message Content" />
+                    </div>
+                </div>
+
+                <h5>Validation Message</h5>
+                <div className="p-formgroup-inline p-mb-2">
+                    <label htmlFor="username1" className="p-sr-only">Username</label>
+                    <InputText id="username1" placeholder="Username" className="p-invalid p-mr-2" />
+                    <Message severity="error" text="Username is required" />
+                </div>
+                <div className="p-formgroup-inline">
+                    <label htmlFor="email" className="p-sr-only">email</label>
+                    <InputText id="email" placeholder="Email" className="p-invalid p-mr-2" />
+                    <Message severity="error" />
+                </div>
+
+                <h5>Form Layout</h5>
+                <div className="p-field p-fluid">
+                    <label htmlFor="username2">Username</label>
+                    <InputText id="username2" aria-describedby="username-help" className="p-invalid p-mr-2" />
+                    <small id="username-help" className="p-invalid">Username is not available.</small>
+                </div>
             </div>
         </div>
     )
@@ -227,104 +221,98 @@ const MessagesDemo = () => {
             'ts': {
                 tabName: 'TS Source',
                 content: `
-import React, { useRef } from 'react';
-import {Messages} from 'primereact/messages';
-import {Message} from 'primereact/message';
-import {InputText} from 'primereact/inputtext';
-import {Button} from 'primereact/button';
+import React, { useEffect, useRef } from 'react';
+import { Messages } from 'primereact/messages';
+import { Message } from 'primereact/message';
+import { InputText } from 'primereact/inputtext';
+import { Button } from 'primereact/button';
 
 const MessagesDemo = () => {
-    let messages = useRef<any>(null);
+    const msgs1 = useRef(null);
+    const msgs2 = useRef(null);
+    const msgs3 = useRef(null);
 
-    const showSuccess = () => {
-        messages.current.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
-    };
+    useEffect(() => {
+        msgs1.current.show([
+            { severity: 'success', summary: 'Success', detail: 'Message Content', sticky: true },
+            { severity: 'info', summary: 'Info', detail: 'Message Content', sticky: true },
+            { severity: 'warn', summary: 'Warning', detail: 'Message Content', sticky: true },
+            { severity: 'error', summary: 'Error', detail: 'Message Content', sticky: true }
+        ]);
 
-    const showInfo = () => {
-        messages.current.show({severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks'});
-    };
+        msgs3.current.show({
+            severity: 'info', sticky: true, content: (
+                <React.Fragment>
+                    <img alt="logo" src="showcase/images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" />
+                    <div className="p-ml-2">Always bet on Prime.</div>
+                </React.Fragment>
+            )
+        });
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const showWarn = () => {
-        messages.current.show({severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes'});
-    };
-
-    const showError = () => {
-        messages.current.show({severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
-    };
-
-    const showSticky = () => {
-        messages.current.show({severity: 'info', summary: 'Sticky Message', detail: 'You need to close Me', sticky: true});
-    };
-
-    const showMultiple = () => {
-        messages.current.show([
-            {severity: 'info', summary: 'Message 1', detail: 'PrimeReact rocks'},
-            {severity: 'info', summary: 'Message 2', detail: 'PrimeReact rocks'},
-            {severity: 'info', summary: 'Message 3', detail: 'PrimeFaces rocks'}
+    const addMessages = () => {
+        msgs2.current.show([
+            { severity: 'success', summary: 'Success', detail: 'Message Content', sticky: true },
+            { severity: 'info', summary: 'Info', detail: 'Message Content', sticky: true },
+            { severity: 'warn', summary: 'Warning', detail: 'Message Content', sticky: true },
+            { severity: 'error', summary: 'Error', detail: 'Message Content', sticky: true }
         ]);
     }
 
-    const clear = () => {
-        messages.current.clear();
+    const clearMessages = () => {
+        msgs2.current.clear();
     }
 
     return (
         <div>
-            <Messages ref={messages} />
+            <div className="card">
+                <h5>Severities</h5>
+                <Messages ref={msgs1} />
 
-            <h3 style={{marginTop: 0}}>Severities</h5>
-            <div className="p-grid p-fluid">
-                <div className="p-col-12 p-md-3">
-                    <Button onClick={showSuccess} label="Success" className="p-button-success" />
-                </div>
-                <div className="p-col-12 p-md-3">
-                    <Button onClick={showInfo} label="Info" className="p-button-info" />
-                </div>
-                <div className="p-col-12 p-md-3">
-                    <Button onClick={showWarn} label="Warn" className="p-button-warning" />
-                </div>
-                <div className="p-col-12 p-md-3">
-                    <Button onClick={showError} label="Error" className="p-button-danger" />
-                </div>
-            </div>
+                <h5>Dynamic</h5>
+                <Button type="button" onClick={addMessages} label="Show" className="p-mr-2" />
+                <Button type="button" onClick={clearMessages} icon="pi pi-times" label="Clear" className="p-button-secondary" />
 
-            <h5>Options</h5>
-            <div className="p-grid p-fluid">
-                <div className="p-col-12 p-md-4">
-                    <Button onClick={showMultiple} label="Multiple" />
-                </div>
-                <div className="p-col-12 p-md-4">
-                    <Button onClick={showSticky} label="Sticky" />
-                </div>
-                <div className="p-col-12 p-md-4">
-                    <Button onClick={clear} icon="pi pi-times" style={{float: 'right'}} label="Clear" />
-                </div>
-            </div>
+                <Messages ref={msgs2} />
 
-            <h5>Inline Message CSS</h5>
-            <p>CSS helpers to display inline messages mostly within forms.</p>
-            <div className="p-grid">
-                <div className="p-col-12 p-md-3">
-                    <Message severity="info" text="PrimeReact Rocks" />
-                </div>
-                <div className="p-col-12 p-md-3">
-                    <Message severity="success" text="Record Saved" />
-                </div>
-                <div className="p-col-12 p-md-3">
-                    <Message severity="warn" text="Are you sure?" />
-                </div>
-                <div className="p-col-12 p-md-3">
-                    <Message severity="error" text="Field is required" />
-                </div>
-            </div>
+                <h5>Static Content</h5>
+                <Messages ref={msgs3} />
 
-            <div style={{ marginTop: '30px', paddingLeft: '.5em' }}>
-                <InputText placeholder="Username" className="p-error" style={{marginRight: '.25em'}} />
-                <Message severity="error" text="Field is required" />
-            </div>
-            <div style={{ marginTop: '30px', paddingLeft: '.5em' }}>
-                <InputText placeholder="Email" className="p-error" style={{marginRight: '.25em'}} />
-                <Message severity="error" />
+                <h5>Inline Message</h5>
+                <p>Message component is used to display inline messages mostly within forms.</p>
+                <div className="p-grid">
+                    <div className="p-col-12 p-md-3">
+                        <Message severity="info" text="Message Content" />
+                    </div>
+                    <div className="p-col-12 p-md-3">
+                        <Message severity="success" text="Message Content" />
+                    </div>
+                    <div className="p-col-12 p-md-3">
+                        <Message severity="warn" text="Message Content" />
+                    </div>
+                    <div className="p-col-12 p-md-3">
+                        <Message severity="error" text="Message Content" />
+                    </div>
+                </div>
+
+                <h5>Validation Message</h5>
+                <div className="p-formgroup-inline p-mb-2">
+                    <label htmlFor="username1" className="p-sr-only">Username</label>
+                    <InputText id="username1" placeholder="Username" className="p-invalid p-mr-2" />
+                    <Message severity="error" text="Username is required" />
+                </div>
+                <div className="p-formgroup-inline">
+                    <label htmlFor="email" className="p-sr-only">email</label>
+                    <InputText id="email" placeholder="Email" className="p-invalid p-mr-2" />
+                    <Message severity="error" />
+                </div>
+
+                <h5>Form Layout</h5>
+                <div className="p-field p-fluid">
+                    <label htmlFor="username2">Username</label>
+                    <InputText id="username2" aria-describedby="username-help" className="p-invalid p-mr-2" />
+                    <small id="username-help" className="p-invalid">Username is not available.</small>
+                </div>
             </div>
         </div>
     )

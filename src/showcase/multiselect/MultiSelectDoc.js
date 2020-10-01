@@ -15,7 +15,7 @@ export class MultiSelectDoc extends Component {
                 content: `
 import React, { Component } from 'react';
 import { MultiSelect } from 'primereact/multiselect';
-import './MultiSelectDemo.scss';
+import './MultiSelectDemo.css';
 
 export class MultiSelectDemo extends Component {
 
@@ -54,7 +54,7 @@ export class MultiSelectDemo extends Component {
     countryTemplate(option) {
         return (
             <div className="country-item">
-                <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
                 <div>{option.name}</div>
             </div>
         );
@@ -64,7 +64,7 @@ export class MultiSelectDemo extends Component {
         if (option) {
             return (
                 <div className="country-item country-item-value">
-                    <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                    <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
                     <div>{option.name}</div>
                 </div>
             );
@@ -94,60 +94,64 @@ export class MultiSelectDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState } from 'react';
-import {MultiSelect} from 'primereact/multiselect';
+import { MultiSelect } from 'primereact/multiselect';
+import './MultiSelectDemo.css';
 
 const MultiSelectDemo = () => {
-    const [cars1, setCars1] = useState([]);
-    const [cars2, setCars2] = useState([]);
+    const [selectedCities, setSelectedCities] = useState(null);
+    const [selectedCountries, setSelectedCountries] = useState(null);
+    const cities = [
+        {name: 'New York', code: 'NY'},
+        {name: 'Rome', code: 'RM'},
+        {name: 'London', code: 'LDN'},
+        {name: 'Istanbul', code: 'IST'},
+        {name: 'Paris', code: 'PRS'}
+    ];
+    const countries = [
+        {name: 'Australia', code: 'AU'},
+        {name: 'Brazil', code: 'BR'},
+        {name: 'China', code: 'CN'},
+        {name: 'Egypt', code: 'EG'},
+        {name: 'France', code: 'FR'},
+        {name: 'Germany', code: 'DE'},
+        {name: 'India', code: 'IN'},
+        {name: 'Japan', code: 'JP'},
+        {name: 'Spain', code: 'ES'},
+        {name: 'United States', code: 'US'}
+    ];
 
-    const carTemplate = (option) => {
-        const logoPath = 'showcase/demo/images/car/' + option.label + '.png';
-
+    const countryTemplate = (option) => {
         return (
-            <div className="p-clearfix">
-                <img alt={option.label} src={logoPath} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" style={{width:'24px', verticalAlign:'middle'}} />
-                <span style={{fontSize:'1em',float:'right',marginTop:'4px'}}>{option.label}</span>
+            <div className="country-item">
+                <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <div>{option.name}</div>
             </div>
         );
     }
 
-    const selectedCarTemplate = (value) => {
-        if (value) {
-            const logoPath = 'showcase/demo/images/car/' + value + '.png';
-
+    const selectedCountriesTemplate = (option) => {
+        if (option) {
             return (
-                <div className="my-multiselected-item-token">
-                    <img alt={value} src={logoPath} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" style={{width:'20px', verticalAlign:'middle', marginRight:'.5em'}} />
-                    <span>{value}</span>
+                <div className="country-item country-item-value">
+                    <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                    <div>{option.name}</div>
                 </div>
             );
         }
-        else {
-            return <span className="my-multiselected-empty-token">Choose</span>
-        }
-    }
 
-    const cars = [
-        {label: 'Audi', value: 'Audi'},
-        {label: 'BMW', value: 'BMW'},
-        {label: 'Fiat', value: 'Fiat'},
-        {label: 'Honda', value: 'Honda'},
-        {label: 'Jaguar', value: 'Jaguar'},
-        {label: 'Mercedes', value: 'Mercedes'},
-        {label: 'Renault', value: 'Renault'},
-        {label: 'VW', value: 'VW'},
-        {label: 'Volvo', value: 'Volvo'}
-    ];
+        return "Select Countries";
+    }
 
     return (
         <div className="multiselect-demo">
-            <h5>Basic</h5>
-            <MultiSelect value={cars1} options={cars} onChange={(e) => setCars1(e.value)}
-                    style={{minWidth:'15em'}} filter filterPlaceholder="Search" placeholder="Choose" />
+            <div className="card">
+                <h5>Basic</h5>
+                <MultiSelect value={selectedCities} options={cities} onChange={(e) => setSelectedCities(e.value)} optionLabel="name" placeholder="Select a City" />
 
-            <h5>Templating</h5>
-            <MultiSelect value={cars2} options={cars} onChange={(e) => setCars2(e.value)}
-                            style={{minWidth:'15em'}} filter filterPlaceholder="Search" itemTemplate={carTemplate} selectedItemTemplate={selectedCarTemplate} />
+                <h5>Advanced with Templating and Filtering</h5>
+                <MultiSelect value={selectedCountries} options={countries}  onChange={(e) => setSelectedCountries(e.value)} optionLabel="name" placeholder="Select Countries" filter className="multiselect-custom"
+                    itemTemplate={countryTemplate} selectedItemTemplate={selectedCountriesTemplate} />
+            </div>
         </div>
     );
 }
@@ -157,60 +161,64 @@ const MultiSelectDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState } from 'react';
-import {MultiSelect} from 'primereact/multiselect';
+import { MultiSelect } from 'primereact/multiselect';
+import './MultiSelectDemo.css';
 
 const MultiSelectDemo = () => {
-    const [cars1, setCars1] = useState([]);
-    const [cars2, setCars2] = useState([]);
+    const [selectedCities, setSelectedCities] = useState(null);
+    const [selectedCountries, setSelectedCountries] = useState(null);
+    const cities = [
+        {name: 'New York', code: 'NY'},
+        {name: 'Rome', code: 'RM'},
+        {name: 'London', code: 'LDN'},
+        {name: 'Istanbul', code: 'IST'},
+        {name: 'Paris', code: 'PRS'}
+    ];
+    const countries = [
+        {name: 'Australia', code: 'AU'},
+        {name: 'Brazil', code: 'BR'},
+        {name: 'China', code: 'CN'},
+        {name: 'Egypt', code: 'EG'},
+        {name: 'France', code: 'FR'},
+        {name: 'Germany', code: 'DE'},
+        {name: 'India', code: 'IN'},
+        {name: 'Japan', code: 'JP'},
+        {name: 'Spain', code: 'ES'},
+        {name: 'United States', code: 'US'}
+    ];
 
-    const carTemplate = (option: { label: string }) => {
-        const logoPath = 'showcase/demo/images/car/' + option.label + '.png';
-
+    const countryTemplate = (option) => {
         return (
-            <div className="p-clearfix">
-                <img alt={option.label} src={logoPath} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" style={{width:'24px', verticalAlign:'middle'}} />
-                <span style={{fontSize:'1em',float:'right',marginTop:'4px'}}>{option.label}</span>
+            <div className="country-item">
+                <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <div>{option.name}</div>
             </div>
         );
     }
 
-    const selectedCarTemplate = (value: string) => {
-        if (value) {
-            const logoPath = 'showcase/demo/images/car/' + value + '.png';
-
+    const selectedCountriesTemplate = (option) => {
+        if (option) {
             return (
-                <div className="my-multiselected-item-token">
-                    <img alt={value} src={logoPath} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" style={{width:'20px', verticalAlign:'middle', marginRight:'.5em'}} />
-                    <span>{value}</span>
+                <div className="country-item country-item-value">
+                    <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                    <div>{option.name}</div>
                 </div>
             );
         }
-        else {
-            return <span className="my-multiselected-empty-token">Choose</span>
-        }
-    }
 
-    const cars = [
-        {label: 'Audi', value: 'Audi'},
-        {label: 'BMW', value: 'BMW'},
-        {label: 'Fiat', value: 'Fiat'},
-        {label: 'Honda', value: 'Honda'},
-        {label: 'Jaguar', value: 'Jaguar'},
-        {label: 'Mercedes', value: 'Mercedes'},
-        {label: 'Renault', value: 'Renault'},
-        {label: 'VW', value: 'VW'},
-        {label: 'Volvo', value: 'Volvo'}
-    ];
+        return "Select Countries";
+    }
 
     return (
         <div className="multiselect-demo">
-            <h5>Basic</h5>
-            <MultiSelect value={cars1} options={cars} onChange={(e) => setCars1(e.value)}
-                    style={{minWidth:'15em'}} filter filterPlaceholder="Search" placeholder="Choose" />
+            <div className="card">
+                <h5>Basic</h5>
+                <MultiSelect value={selectedCities} options={cities} onChange={(e) => setSelectedCities(e.value)} optionLabel="name" placeholder="Select a City" />
 
-            <h5>Templating</h5>
-            <MultiSelect value={cars2} options={cars} onChange={(e) => setCars2(e.value)}
-                            style={{minWidth:'15em'}} filter filterPlaceholder="Search" itemTemplate={carTemplate} selectedItemTemplate={selectedCarTemplate} />
+                <h5>Advanced with Templating and Filtering</h5>
+                <MultiSelect value={selectedCountries} options={countries}  onChange={(e) => setSelectedCountries(e.value)} optionLabel="name" placeholder="Select Countries" filter className="multiselect-custom"
+                    itemTemplate={countryTemplate} selectedItemTemplate={selectedCountriesTemplate} />
+            </div>
         </div>
     );
 }
@@ -219,25 +227,31 @@ const MultiSelectDemo = () => {
         }
 
         this.extFiles = {
-            'index.css': `
-.multiselect-demo .my-multiselected-item-token, .multiselect-demo .my-multiselected-empty-token {
-    padding: 2px 4px;
-    margin: 0 0.286em 0 0;
-    display: inline-block;
-    vertical-align: middle;
-    height: 1.857em;
+            'src/demo/MultiSelectDemo.css': {
+                content: `
+.multiselect-demo .p-multiselect {
+    min-width: 15rem;
+}
+
+.multiselect-demo .multiselect-custom .p-multiselect-label:not(.p-placeholder):not(.p-multiselect-items-label) {
+    padding-top: .25rem;
+    padding-bottom: .25rem;
+}
+
+.multiselect-demo .multiselect-custom .country-item-value {
+    padding: .25rem .5rem;
     border-radius: 3px;
+    display: inline-flex;
+    margin-right: .5rem;
+    background-color: var(--primary-color);
+    color: var(--primary-color-text);
 }
-.multiselect-demo .my-multiselected-item-token {
-    background: #007ad9;
-    color: #ffffff;
+
+.multiselect-demo .multiselect-custom .country-item-value img.flag {
+    width: 17px;
 }
-.multiselect-demo .my-multiselected-empty-token {
-    background: #1dcbb3;
-    color: #ffffff;
-    width: 100%;
-}
-            `
+                `
+            }
         }
     }
 
@@ -705,37 +719,7 @@ selectedItemTemplate(option) {
             </TabPanel>
 
             <TabPanel header="Source">
-                <LiveEditor name="MultiSelectDemo" sources={this.sources} service="NodeService" data="treenodes" extFiles={this.extFiles} />
-
-<CodeHighlight lang="scss">
-{`
-.multiselect-demo {
-    .p-multiselect {
-        min-width: 15rem;
-    }
-
-    .multiselect-custom {
-        .p-multiselect-label:not(.p-placeholder):not(.p-multiselect-items-label) {
-            padding-top: .25rem;
-            padding-bottom: .25rem;
-        }
-
-        .country-item-value {
-            padding: .25rem .5rem;
-            border-radius: 3px;
-            display: inline-flex;
-            margin-right: .5rem;
-            background-color: var(--primary-color);
-            color: var(--primary-color-text);
-
-            img.flag {
-                width: 17px;
-            }
-        }
-    }
-}
-`}
-</CodeHighlight>
+                <LiveEditor name="MultiSelectDemo" sources={this.sources} extFiles={this.extFiles} />
             </TabPanel>
         </TabView>
     </div>
