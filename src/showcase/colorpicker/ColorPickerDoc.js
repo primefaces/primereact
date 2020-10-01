@@ -45,7 +45,7 @@ export class ColorPickerDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState } from 'react';
-import {ColorPicker} from 'primereact/colorpicker';
+import { ColorPicker } from 'primereact/colorpicker';
 
 const ColorPickerDemo = () => {
     const [color1, setColor1] = useState(null);
@@ -53,13 +53,13 @@ const ColorPickerDemo = () => {
 
     return (
         <div>
-            <h5>Inline</h5>
-            <ColorPicker inline value={color1} onChange={(e) => setColor1(e.value)}></ColorPicker>
-            <p style={{'marginTop':'.5em'}}>Selected Color: <span style={{'display':'inline-block','width':'32px','height':'32px','verticalAlign':'middle','backgroundColor': '#' + color1}}></span> {color1} </p>
+            <div className="card">
+                <h5>Inline</h5>
+                <ColorPicker value={color1} onChange={(e) => setColor1(e.value)} inline></ColorPicker>
 
-            <h5>Overlay</h5>
-            <ColorPicker value={color2} onChange={(e) => setColor2(e.value)}></ColorPicker>
-            <p style={{'marginTop':'.5em'}}>Selected Color: <span style={{'color':'#' + color2}}>{color2}</span></p>
+                <h5>Overlay</h5>
+                <ColorPicker value={color2} onChange={(e) => setColor2(e.value)}></ColorPicker>
+            </div>
         </div>
     )
 }
@@ -69,21 +69,21 @@ const ColorPickerDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState } from 'react';
-import {ColorPicker} from 'primereact/colorpicker';
+import { ColorPicker } from 'primereact/colorpicker';
 
 const ColorPickerDemo = () => {
-    const [color1, setColor1] = useState(null);
-    const [color2, setColor2] = useState('1976D2');
+    const [color1, setColor1] = useState<any>(null);
+    const [color2, setColor2] = useState<any>('1976D2');
 
     return (
         <div>
-            <h5>Inline</h5>
-            <ColorPicker inline value={color1} onChange={(e) => setColor1(e.value)}></ColorPicker>
-            <p style={{'marginTop':'.5em'}}>Selected Color: <span style={{'display':'inline-block','width':'32px','height':'32px','verticalAlign':'middle','backgroundColor': '#' + color1}}></span> {color1} </p>
+            <div className="card">
+                <h5>Inline</h5>
+                <ColorPicker value={color1} onChange={(e) => setColor1(e.value)} inline></ColorPicker>
 
-            <h5>Overlay</h5>
-            <ColorPicker value={color2} onChange={(e) => setColor2(e.value)}></ColorPicker>
-            <p style={{'marginTop':'.5em'}}>Selected Color: <span style={{'color':'#' + color2}}>{color2}</span></p>
+                <h5>Overlay</h5>
+                <ColorPicker value={color2} onChange={(e) => setColor2(e.value)}></ColorPicker>
+            </div>
         </div>
     )
 }

@@ -154,7 +154,7 @@ export class ContextMenuDemo extends Component {
                     <div className="card">
                         <ContextMenu model={this.items} ref={el => this.cm = el}></ContextMenu>
 
-                        <img src="showcase/demo/images/nature/nature3.jpg" alt="Logo" onContextMenu={(e) => this.cm.show(e)} aria-haspopup />
+                        <img src="showcase/demo/images/nature/nature3.jpg" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt="Logo" onContextMenu={(e) => this.cm.show(e)} aria-haspopup />
                     </div>
                 </div>
 
