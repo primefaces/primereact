@@ -53,7 +53,7 @@ export class ListBoxDemo extends Component {
     countryTemplate(option) {
         return (
             <div className="country-item">
-                <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
                 <div>{option.name}</div>
             </div>
         );
@@ -79,25 +79,12 @@ export class ListBoxDemo extends Component {
             'hooks': {
                 tabName: 'Hooks Source',
                 content: `
-import React, {useState} from 'react';
-import {ListBox} from 'primereact/listbox';
+import React, { useState } from 'react';
+import { ListBox } from 'primereact/listbox';
 
 const ListBoxDemo = () => {
     const [selectedCity, setSelectedCity] = useState(null);
-    const [selectedCities, setSelectedCities] = useState(null);
-    const [selectedCar, setSelectedCar] = useState('BMW');
-
-    const carTemplate = (option) => {
-        const logoPath = 'showcase/demo/images/car/' + option.label + '.png';
-
-        return (
-            <div className="p-clearfix">
-                <img alt={option.label} src={logoPath} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" style={{display:'inline-block',margin:'5px 0 0 5px',width:48}} />
-                <span style={{fontSize:'1em',float:'right',margin:'1em .5em 0 0'}}>{option.label}</span>
-            </div>
-        );
-    }
-
+    const [selectedCountries, setSelectedCountries] = useState(null);
     const cities = [
         {name: 'New York', code: 'NY'},
         {name: 'Rome', code: 'RM'},
@@ -105,30 +92,38 @@ const ListBoxDemo = () => {
         {name: 'Istanbul', code: 'IST'},
         {name: 'Paris', code: 'PRS'}
     ];
-
-    const cars = [
-        {label: 'Audi', value: 'Audi'},
-        {label: 'BMW', value: 'BMW'},
-        {label: 'Fiat', value: 'Fiat'},
-        {label: 'Honda', value: 'Honda'},
-        {label: 'Jaguar', value: 'Jaguar'},
-        {label: 'Mercedes', value: 'Mercedes'},
-        {label: 'Renault', value: 'Renault'},
-        {label: 'VW', value: 'VW'},
-        {label: 'Volvo', value: 'Volvo'}
+    const countries = [
+        {name: 'Australia', code: 'AU'},
+        {name: 'Brazil', code: 'BR'},
+        {name: 'China', code: 'CN'},
+        {name: 'Egypt', code: 'EG'},
+        {name: 'France', code: 'FR'},
+        {name: 'Germany', code: 'DE'},
+        {name: 'India', code: 'IN'},
+        {name: 'Japan', code: 'JP'},
+        {name: 'Spain', code: 'ES'},
+        {name: 'United States', code: 'US'}
     ];
+
+    const countryTemplate = (option) => {
+        return (
+            <div className="country-item">
+                <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <div>{option.name}</div>
+            </div>
+        );
+    }
 
     return (
         <div>
-            <h3 className="first">Single</h5>
-            <ListBox value={selectedCity} options={cities} onChange={(e) => setSelectedCity(e.value)} optionLabel="name"/>
+            <div className="card">
+                <h5>Single</h5>
+                <ListBox value={selectedCity} options={cities} onChange={(e) => setSelectedCity(e.value)} optionLabel="name" style={{width: '15rem'}} />
 
-            <h5>Multiple</h5>
-            <ListBox value={selectedCities} options={cities} onChange={(e) => setSelectedCities(e.value)} multiple optionLabel="name"/>
-
-            <h5>Advanced</h5>
-            <ListBox value={selectedCar} filter filterPlaceholder="Search" options={cars} onChange={(e) => setSelectedCar(e.value)} itemTemplate={carTemplate}
-                            style={{width: '15em'}} listStyle={{maxHeight: '250px'}}  />
+                <h5>Advanced with Templating, Filtering and Multiple Selection</h5>
+                <ListBox value={selectedCountries} options={countries} onChange={(e) => setSelectedCountries(e.value)} multiple filter optionLabel="name"
+                    itemTemplate={countryTemplate} style={{width: '15rem'}} listStyle={{maxHeight: '250px'}} />
+            </div>
         </div>
     );
 }
@@ -137,25 +132,12 @@ const ListBoxDemo = () => {
             'ts': {
                 tabName: 'TS Source',
                 content: `
-import React, {useState} from 'react';
-import {ListBox} from 'primereact/listbox';
+import React, { useState } from 'react';
+import { ListBox } from 'primereact/listbox';
 
 const ListBoxDemo = () => {
-    const [selectedCity, setSelectedCity] = useState<string|undefined>(undefined);
-    const [selectedCities, setSelectedCities] = useState<any[]|undefined>(undefined);
-    const [selectedCar, setSelectedCar] = useState('BMW');
-
-    const carTemplate = (option: { label: string }) => {
-        const logoPath = 'showcase/demo/images/car/' + option.label + '.png';
-
-        return (
-            <div className="p-clearfix">
-                <img alt={option.label} src={logoPath} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" style={{display:'inline-block',margin:'5px 0 0 5px',width:48}} />
-                <span style={{fontSize:'1em',float:'right',margin:'1em .5em 0 0'}}>{option.label}</span>
-            </div>
-        );
-    }
-
+    const [selectedCity, setSelectedCity] = useState(null);
+    const [selectedCountries, setSelectedCountries] = useState(null);
     const cities = [
         {name: 'New York', code: 'NY'},
         {name: 'Rome', code: 'RM'},
@@ -163,30 +145,38 @@ const ListBoxDemo = () => {
         {name: 'Istanbul', code: 'IST'},
         {name: 'Paris', code: 'PRS'}
     ];
-
-    const cars = [
-        {label: 'Audi', value: 'Audi'},
-        {label: 'BMW', value: 'BMW'},
-        {label: 'Fiat', value: 'Fiat'},
-        {label: 'Honda', value: 'Honda'},
-        {label: 'Jaguar', value: 'Jaguar'},
-        {label: 'Mercedes', value: 'Mercedes'},
-        {label: 'Renault', value: 'Renault'},
-        {label: 'VW', value: 'VW'},
-        {label: 'Volvo', value: 'Volvo'}
+    const countries = [
+        {name: 'Australia', code: 'AU'},
+        {name: 'Brazil', code: 'BR'},
+        {name: 'China', code: 'CN'},
+        {name: 'Egypt', code: 'EG'},
+        {name: 'France', code: 'FR'},
+        {name: 'Germany', code: 'DE'},
+        {name: 'India', code: 'IN'},
+        {name: 'Japan', code: 'JP'},
+        {name: 'Spain', code: 'ES'},
+        {name: 'United States', code: 'US'}
     ];
+
+    const countryTemplate = (option) => {
+        return (
+            <div className="country-item">
+                <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <div>{option.name}</div>
+            </div>
+        );
+    }
 
     return (
         <div>
-            <h3 className="first">Single</h5>
-            <ListBox value={selectedCity} options={cities} onChange={(e) => setSelectedCity(e.value)} optionLabel="name"/>
+            <div className="card">
+                <h5>Single</h5>
+                <ListBox value={selectedCity} options={cities} onChange={(e) => setSelectedCity(e.value)} optionLabel="name" style={{width: '15rem'}} />
 
-            <h5>Multiple</h5>
-            <ListBox value={selectedCities} options={cities} onChange={(e) => setSelectedCities(e.value)} multiple optionLabel="name"/>
-
-            <h5>Advanced</h5>
-            <ListBox value={selectedCar} filter filterPlaceholder="Search" options={cars} onChange={(e) => setSelectedCar(e.value)} itemTemplate={carTemplate}
-                            style={{width: '15em'}} listStyle={{maxHeight: '250px'}}  />
+                <h5>Advanced with Templating, Filtering and Multiple Selection</h5>
+                <ListBox value={selectedCountries} options={countries} onChange={(e) => setSelectedCountries(e.value)} multiple filter optionLabel="name"
+                    itemTemplate={countryTemplate} style={{width: '15rem'}} listStyle={{maxHeight: '250px'}} />
+            </div>
         </div>
     );
 }
@@ -553,7 +543,7 @@ itemTemplate(option) {
         </TabPanel>
 
         <TabPanel header="Source">
-            <LiveEditor name="ListBoxDemo" sources={this.sources} service="NodeService" data="treenodes" />
+            <LiveEditor name="ListBoxDemo" sources={this.sources} />
         </TabPanel>
     </TabView>
 </div>
