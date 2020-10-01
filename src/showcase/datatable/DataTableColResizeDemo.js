@@ -123,48 +123,39 @@ export class DataTableColResizeDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState, useEffect } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service/CarService';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import ProductService from '../service/ProductService';
 
 const DataTableColResizeDemo = () => {
-    const [cars1, setCars1] = useState([]);
-    const [cars2, setCars2] = useState([]);
-
-    const carservice = new CarService();
+    const [products, setProducts] = useState([]);
+    const productService = new ProductService();
 
     useEffect(() => {
-        carservice.getCarsSmall().then(data => {
-            setCars1(data);
-            setCars2(data);
-        });
+        productService.getProductsSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div>
-            <h3>Fit Mode</h3>
-            <DataTable value={cars1} resizableColumns columnResizeMode="fit">
-                <Column field="vin" header="Vin" style={{width:'20%'}}/>
-                <Column field="year" header="Year" style={{width:'40%'}}/>
-                <Column field="brand" header="Brand" style={{width:'20%'}}/>
-                <Column field="color" header="Color" style={{width:'20%'}}/>
-            </DataTable>
+            <div className="card">
+                <h5>Fit Mode</h5>
+                <DataTable value={products} resizableColumns columnResizeMode="fit">
+                    <Column field="code" header="Code" style={{width:'20%'}}/>
+                    <Column field="name" header="Name" style={{width:'40%'}}/>
+                    <Column field="category" header="Category" style={{width:'20%'}}/>
+                    <Column field="quantity" header="Quantity" style={{width:'20%'}}/>
+                </DataTable>
+            </div>
 
-            <h3>Expand Mode</h3>
-            <DataTable value={cars1} resizableColumns columnResizeMode="expand">
-                <Column field="vin" header="Vin" />
-                <Column field="year" header="Year" />
-                <Column field="brand" header="Brand" />
-                <Column field="color" header="Color" />
-            </DataTable>
-
-            <h3>Scrollable Mode</h3>
-            <DataTable value={cars2} resizableColumns scrollable scrollHeight="200px">
-                <Column field="vin" header="Vin" style={{width:'20%'}}/>
-                <Column field="year" header="Year" style={{width:'40%'}}/>
-                <Column field="brand" header="Brand" style={{width:'20%'}}/>
-                <Column field="color" header="Color" style={{width:'20%'}}/>
-            </DataTable>
+            <div className="card">
+                <h5>Expand Mode</h5>
+                <DataTable value={products} resizableColumns columnResizeMode="expand">
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+            </div>
         </div>
     );
 }
@@ -174,48 +165,39 @@ const DataTableColResizeDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState, useEffect } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service/CarService';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import ProductService from '../service/ProductService';
 
 const DataTableColResizeDemo = () => {
-    const [cars1, setCars1] = useState([]);
-    const [cars2, setCars2] = useState([]);
-
-    const carservice = new CarService();
+    const [products, setProducts] = useState([]);
+    const productService = new ProductService();
 
     useEffect(() => {
-        carservice.getCarsSmall().then(data => {
-            setCars1(data);
-            setCars2(data);
-        });
+        productService.getProductsSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div>
-            <h3>Fit Mode</h3>
-            <DataTable value={cars1} resizableColumns columnResizeMode="fit">
-                <Column field="vin" header="Vin" style={{width:'20%'}}/>
-                <Column field="year" header="Year" style={{width:'40%'}}/>
-                <Column field="brand" header="Brand" style={{width:'20%'}}/>
-                <Column field="color" header="Color" style={{width:'20%'}}/>
-            </DataTable>
+            <div className="card">
+                <h5>Fit Mode</h5>
+                <DataTable value={products} resizableColumns columnResizeMode="fit">
+                    <Column field="code" header="Code" style={{width:'20%'}}/>
+                    <Column field="name" header="Name" style={{width:'40%'}}/>
+                    <Column field="category" header="Category" style={{width:'20%'}}/>
+                    <Column field="quantity" header="Quantity" style={{width:'20%'}}/>
+                </DataTable>
+            </div>
 
-            <h3>Expand Mode</h3>
-            <DataTable value={cars1} resizableColumns columnResizeMode="expand">
-                <Column field="vin" header="Vin" />
-                <Column field="year" header="Year" />
-                <Column field="brand" header="Brand" />
-                <Column field="color" header="Color" />
-            </DataTable>
-
-            <h3>Scrollable Mode</h3>
-            <DataTable value={cars2} resizableColumns scrollable scrollHeight="200px">
-                <Column field="vin" header="Vin" style={{width:'20%'}}/>
-                <Column field="year" header="Year" style={{width:'40%'}}/>
-                <Column field="brand" header="Brand" style={{width:'20%'}}/>
-                <Column field="color" header="Color" style={{width:'20%'}}/>
-            </DataTable>
+            <div className="card">
+                <h5>Expand Mode</h5>
+                <DataTable value={products} resizableColumns columnResizeMode="expand">
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+            </div>
         </div>
     );
 }
@@ -233,7 +215,7 @@ const DataTableColResizeDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Source">
-                        <LiveEditor name="DataTableColResizeDemo" sources={this.sources} service="CarService" data="treenodes" />
+                        <LiveEditor name="DataTableColResizeDemo" sources={this.sources} service="ProductService" data="products-small" />
                     </TabPanel>
                 </TabView>
             </div>
