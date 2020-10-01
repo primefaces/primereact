@@ -58,34 +58,33 @@ export class EditorDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState } from 'react';
-import {Editor} from 'primereact/editor';
-import {Button} from 'primereact/button';
+import { Editor } from 'primereact/editor';
 
 const EditorDemo = () => {
     const [text1, setText1] = useState('<div>Hello World!</div><div>PrimeReact <b>Editor</b> Rocks</div><div><br></div>');
     const [text2, setText2] = useState('');
 
-    const header = (
-        <span className="ql-formats">
-            <button className="ql-bold" aria-label="Bold"></button>
-            <button className="ql-italic" aria-label="Italic"></button>
-            <button className="ql-underline" aria-label="Underline"></button>
-        </span>
-    );
+    const renderHeader = () => {
+        return (
+            <span className="ql-formats">
+                <button className="ql-bold" aria-label="Bold"></button>
+                <button className="ql-italic" aria-label="Italic"></button>
+                <button className="ql-underline" aria-label="Underline"></button>
+            </span>
+        );
+    }
+
+    const header = renderHeader();
 
     return (
         <div>
-            <h3 className="first">Default</h5>
-            <Editor style={{height:'320px'}} value={text1} onTextChange={(e)=> setText1(e.htmlValue)}/>
-            <p>Value: {text1 ||'empty'}</p>
-            <Button label="Clear" icon="pi pi-times" onClick={()=> setText1('')}/>
+            <div className="card">
+                <h5>Default</h5>
+                <Editor style={{ height: '320px' }} value={text1} onTextChange={(e) => setText1(e.htmlValue)} />
 
-            <hr/>
-
-            <h3 className="first">Custom Toolbar</h5>
-            <Editor headerTemplate={header} style={{height:'320px'}} value={text2} onTextChange={(e)=> setText2(e.htmlValue)}/>
-            <p>Value: {text2 ||'empty'}</p>
-            <Button label="Clear" icon="pi pi-times" onClick={() => setText2('')}/>
+                <h5>Customized</h5>
+                <Editor headerTemplate={header} style={{ height: '320px' }} value={text2} onTextChange={(e) => setText2(e.htmlValue)} />
+            </div>
         </div>
     );
 }
@@ -95,34 +94,33 @@ const EditorDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState } from 'react';
-import {Editor} from 'primereact/editor';
-import {Button} from 'primereact/button';
+import { Editor } from 'primereact/editor';
 
 const EditorDemo = () => {
-    const [text1, setText1] = useState<any>('<div>Hello World!</div><div>PrimeReact <b>Editor</b> Rocks</div><div><br></div>');
-    const [text2, setText2] = useState<any>('');
+    const [text1, setText1] = useState<string>('<div>Hello World!</div><div>PrimeReact <b>Editor</b> Rocks</div><div><br></div>');
+    const [text2, setText2] = useState<string>('');
 
-    const header = (
-        <span className="ql-formats">
-            <button className="ql-bold" aria-label="Bold"></button>
-            <button className="ql-italic" aria-label="Italic"></button>
-            <button className="ql-underline" aria-label="Underline"></button>
-        </span>
-    );
+    const renderHeader = () => {
+        return (
+            <span className="ql-formats">
+                <button className="ql-bold" aria-label="Bold"></button>
+                <button className="ql-italic" aria-label="Italic"></button>
+                <button className="ql-underline" aria-label="Underline"></button>
+            </span>
+        );
+    }
+
+    const header = renderHeader();
 
     return (
         <div>
-            <h3 className="first">Default</h5>
-            <Editor style={{height:'320px'}} value={text1} onTextChange={(e)=> setText1(e.htmlValue)}/>
-            <p>Value: {text1 ||'empty'}</p>
-            <Button label="Clear" icon="pi pi-times" onClick={()=> setText1('')}/>
+            <div className="card">
+                <h5>Default</h5>
+                <Editor style={{ height: '320px' }} value={text1} onTextChange={(e) => setText1(e.htmlValue)} />
 
-            <hr/>
-
-            <h3 className="first">Custom Toolbar</h5>
-            <Editor headerTemplate={header} style={{height:'320px'}} value={text2} onTextChange={(e)=> setText2(e.htmlValue)}/>
-            <p>Value: {text2 ||'empty'}</p>
-            <Button label="Clear" icon="pi pi-times" onClick={() => setText2('')}/>
+                <h5>Customized</h5>
+                <Editor headerTemplate={header} style={{ height: '320px' }} value={text2} onTextChange={(e) => setText2(e.htmlValue)} />
+            </div>
         </div>
     );
 }

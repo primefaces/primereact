@@ -15,7 +15,7 @@ export class DropdownDoc extends Component {
                 content: `
 import React, { Component } from 'react';
 import { Dropdown } from 'primereact/dropdown';
-import './DropdownDemo.scss';
+import './DropdownDemo.css';
 
 export class DropdownDemo extends Component {
 
@@ -69,7 +69,7 @@ export class DropdownDemo extends Component {
         if (option) {
             return (
                 <div className="country-item country-item-value">
-                    <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                    <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
                     <div>{option.name}</div>
                 </div>
             );
@@ -85,7 +85,7 @@ export class DropdownDemo extends Component {
     countryOptionTemplate(option) {
         return (
             <div className="country-item">
-                <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
                 <div>{option.name}</div>
             </div>
         );
@@ -115,75 +115,84 @@ export class DropdownDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState } from 'react';
-import {Dropdown} from 'primereact/dropdown';
+import { Dropdown } from 'primereact/dropdown';
+import './DropdownDemo.css';
 
 const DropdownDemo = () => {
-    const [city, setCity] = useState(null);
-    const [car, setCar] = useState(null);
-    const [car2, setCar2] = useState('BMW');
-
-    let cities = [
-        {name: 'New York', code: 'NY'},
-        {name: 'Rome', code: 'RM'},
-        {name: 'London', code: 'LDN'},
-        {name: 'Istanbul', code: 'IST'},
-        {name: 'Paris', code: 'PRS'}
+    const [selectedCity1, setSelectedCity1] = useState(null);
+    const [selectedCity2, setSelectedCity2] = useState(null);
+    const [selectedCountry, setSelectedCountry] = useState(null);
+    const cities = [
+        { name: 'New York', code: 'NY' },
+        { name: 'Rome', code: 'RM' },
+        { name: 'London', code: 'LDN' },
+        { name: 'Istanbul', code: 'IST' },
+        { name: 'Paris', code: 'PRS' }
     ];
-    let cars = [
-        {label: 'Audi', value: 'Audi'},
-        {label: 'BMW', value: 'BMW'},
-        {label: 'Fiat', value: 'Fiat'},
-        {label: 'Honda', value: 'Honda'},
-        {label: 'Jaguar', value: 'Jaguar'},
-        {label: 'Mercedes', value: 'Mercedes'},
-        {label: 'Renault', value: 'Renault'},
-        {label: 'VW', value: 'VW'},
-        {label: 'Volvo', value: 'Volvo'}
+    const countries = [
+        {name: 'Australia', code: 'AU'},
+        {name: 'Brazil', code: 'BR'},
+        {name: 'China', code: 'CN'},
+        {name: 'Egypt', code: 'EG'},
+        {name: 'France', code: 'FR'},
+        {name: 'Germany', code: 'DE'},
+        {name: 'India', code: 'IN'},
+        {name: 'Japan', code: 'JP'},
+        {name: 'Spain', code: 'ES'},
+        {name: 'United States', code: 'US'}
     ];
 
     const onCityChange = (e) => {
-        setCity(e.value);
-    };
+        setSelectedCity1(e.value);
+    }
 
-    const onCarChange = (e) => {
-        setCar(e.value);
-    };
+    const onCityChange2 = (e) => {
+        setSelectedCity2(e.value);
+    }
 
-    const onCarChange2 = (e) => {
-        setCar2(e.value);
-    };
+    const onCountryChange = (e) => {
+        setSelectedCountry(e.value);
+    }
 
-    const carTemplate = (option) => {
-        if(!option.value) {
-            return option.label;
-        }
-        else {
-            let logoPath = 'showcase/demo/images/car/' + option.label + '.png';
-
+    const selectedCountryTemplate = (option, props) => {
+        if (option) {
             return (
-                <div className="p-clearfix">
-                    <img alt={option.label} src={logoPath} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" style={{display:'inline-block',margin:'5px 0 0 5px'}} width="24"/>
-                    <span style={{float:'right',margin:'.5em .25em 0 0'}}>{option.label}</span>
+                <div className="country-item country-item-value">
+                    <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                    <div>{option.name}</div>
                 </div>
             );
         }
-    };
+
+        return (
+            <span>
+                {props.placeholder}
+            </span>
+        );
+    }
+
+    const countryOptionTemplate = (option) => {
+        return (
+            <div className="country-item">
+                <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <div>{option.name}</div>
+            </div>
+        );
+    }
 
     return (
-        <div>
-            <h5>Basic</h5>
-            <Dropdown value={city} options={cities} onChange={onCityChange} placeholder="Select a City" optionLabel="name" style={{width: '12em'}}/>
-            <div style={{marginTop: '.5em'}}>{city ? 'Selected City: ' + city.name : 'No city selected'}</div>
+        <div className="dropdown-demo">
+            <div className="card">
+                <h5>Basic</h5>
+                <Dropdown value={selectedCity1} options={cities} onChange={onCityChange} optionLabel="name" placeholder="Select a City" />
 
-            <h5>Editable</h5>
-            <Dropdown value={car} options={cars} onChange={onCarChange} style={{width: '12em'}}
-                        editable placeholder="Select a Brand" />
-            <div style={{marginTop: '.5em'}}>{car ? 'Selected Car: ' + car : 'No car selected'}</div>
+                <h5>Editable</h5>
+                <Dropdown value={selectedCity2} options={cities} onChange={onCityChange2} optionLabel="name" editable />
 
-            <h5>Advanced</h5>
-            <Dropdown value={car2} options={cars} onChange={onCarChange2} itemTemplate={carTemplate}  style={{width: '12em'}}
-                        filter filterPlaceholder="Select Car" filterBy="label,value" showClear/>
-            <div style={{marginTop: '.5em'}}>{car2 ? 'Selected Car: ' + car2 : 'No car selected'}</div>
+                <h5>Advanced with Templating, Filtering and Clear Icon</h5>
+                <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" filter showClear filterBy="name" placeholder="Select a Country"
+                    valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
+            </div>
         </div>
     );
 }
@@ -193,77 +202,100 @@ const DropdownDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState } from 'react';
-import {Dropdown} from 'primereact/dropdown';
+import { Dropdown } from 'primereact/dropdown';
+import './DropdownDemo.css';
 
 const DropdownDemo = () => {
-    const [city, setCity] = useState<any>(null);
-    const [car, setCar] = useState<string | null>(null);
-    const [car2, setCar2] = useState<string>('BMW');
-
-    let cities = [
-        {name: 'New York', code: 'NY'},
-        {name: 'Rome', code: 'RM'},
-        {name: 'London', code: 'LDN'},
-        {name: 'Istanbul', code: 'IST'},
-        {name: 'Paris', code: 'PRS'}
+    const [selectedCity1, setSelectedCity1] = useState<any>(null);
+    const [selectedCity2, setSelectedCity2] = useState<any>(null);
+    const [selectedCountry, setSelectedCountry] = useState<any>(null);
+    const cities = [
+        { name: 'New York', code: 'NY' },
+        { name: 'Rome', code: 'RM' },
+        { name: 'London', code: 'LDN' },
+        { name: 'Istanbul', code: 'IST' },
+        { name: 'Paris', code: 'PRS' }
     ];
-    let cars = [
-        {label: 'Audi', value: 'Audi'},
-        {label: 'BMW', value: 'BMW'},
-        {label: 'Fiat', value: 'Fiat'},
-        {label: 'Honda', value: 'Honda'},
-        {label: 'Jaguar', value: 'Jaguar'},
-        {label: 'Mercedes', value: 'Mercedes'},
-        {label: 'Renault', value: 'Renault'},
-        {label: 'VW', value: 'VW'},
-        {label: 'Volvo', value: 'Volvo'}
+    const countries = [
+        {name: 'Australia', code: 'AU'},
+        {name: 'Brazil', code: 'BR'},
+        {name: 'China', code: 'CN'},
+        {name: 'Egypt', code: 'EG'},
+        {name: 'France', code: 'FR'},
+        {name: 'Germany', code: 'DE'},
+        {name: 'India', code: 'IN'},
+        {name: 'Japan', code: 'JP'},
+        {name: 'Spain', code: 'ES'},
+        {name: 'United States', code: 'US'}
     ];
 
     const onCityChange = (e: { value: any }) => {
-        setCity(e.value);
-    };
+        setSelectedCity1(e.value);
+    }
 
-    const onCarChange = (e: { value: any }) => {
-        setCar(e.value);
-    };
+    const onCityChange2 = (e: { value: any }) => {
+        setSelectedCity2(e.value);
+    }
 
-    const onCarChange2 = (e: { value: any }) => {
-        setCar2(e.value);
-    };
+    const onCountryChange = (e: { value: any }) => {
+        setSelectedCountry(e.value);
+    }
 
-    const carTemplate = (option: any) => {
-        if(!option.value) {
-            return option.label;
-        }
-        else {
-            let logoPath = 'showcase/demo/images/car/' + option.label + '.png';
-
+    const selectedCountryTemplate = (option: { name: string, code: string }, props: { placeholder: string }) => {
+        if (option) {
             return (
-                <div className="p-clearfix">
-                    <img alt={option.label} src={logoPath} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" style={{display:'inline-block',margin:'5px 0 0 5px'}} width="24"/>
-                    <span style={{float:'right',margin:'.5em .25em 0 0'}}>{option.label}</span>
+                <div className="country-item country-item-value">
+                    <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                    <div>{option.name}</div>
                 </div>
             );
         }
-    };
+
+        return (
+            <span>
+                {props.placeholder}
+            </span>
+        );
+    }
+
+    const countryOptionTemplate = (option: any) => {
+        return (
+            <div className="country-item">
+                <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <div>{option.name}</div>
+            </div>
+        );
+    }
 
     return (
-        <div>
-            <h5>Basic</h5>
-            <Dropdown value={city} options={cities} onChange={onCityChange} placeholder="Select a City" optionLabel="name" style={{width: '12em'}}/>
-            <div style={{marginTop: '.5em'}}>{city ? 'Selected City: ' + city.name : 'No city selected'}</div>
+        <div className="dropdown-demo">
+            <div className="card">
+                <h5>Basic</h5>
+                <Dropdown value={selectedCity1} options={cities} onChange={onCityChange} optionLabel="name" placeholder="Select a City" />
 
-            <h5>Editable</h5>
-            <Dropdown value={car} options={cars} onChange={onCarChange} style={{width: '12em'}}
-                        editable placeholder="Select a Brand" />
-            <div style={{marginTop: '.5em'}}>{car ? 'Selected Car: ' + car : 'No car selected'}</div>
+                <h5>Editable</h5>
+                <Dropdown value={selectedCity2} options={cities} onChange={onCityChange2} optionLabel="name" editable />
 
-            <h5>Advanced</h5>
-            <Dropdown value={car2} options={cars} onChange={onCarChange2} itemTemplate={carTemplate}  style={{width: '12em'}}
-                        filter filterPlaceholder="Select Car" filterBy="label,value" showClear/>
-            <div style={{marginTop: '.5em'}}>{car2 ? 'Selected Car: ' + car2 : 'No car selected'}</div>
+                <h5>Advanced with Templating, Filtering and Clear Icon</h5>
+                <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" filter showClear filterBy="name" placeholder="Select a Country"
+                    valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
+            </div>
         </div>
     );
+}
+                `
+            },
+        }
+
+        this.extFiles = {
+            'src/demo/DropdownDemo.css': {
+                content: `
+.dropdown-demo .p-dropdown {
+    width: 14rem;
+}
+
+.dropdown-demo .country-item-value img.flag {
+    width: 17px;
 }
                 `
             }
@@ -790,22 +822,7 @@ countryOptionTemplate(option) {
                     </TabPanel>
 
                     <TabPanel header="Source">
-                        <LiveEditor name="DropdownDemo" sources={this.sources} />
-<CodeHighlight lang="scss">
-{`
-.dropdown-demo {
-    .p-dropdown {
-        width: 14rem;
-    }
-
-    .country-item-value {
-        img.flag {
-            width: 17px;
-        }
-    }
-}
-`}
-</CodeHighlight>
+                        <LiveEditor name="DropdownDemo" sources={this.sources} extFiles={this.extFiles} />
                     </TabPanel>
                 </TabView>
             </div>
