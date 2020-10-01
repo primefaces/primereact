@@ -133,11 +133,11 @@ export class DoughnutChartDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React from 'react';
-import {Chart} from 'primereact/chart';
+import { Chart } from 'primereact/chart';
 
 const DoughnutChartDemo = () => {
-    const data = {
-        labels: ['A','B','C'],
+    const chartData = {
+        labels: ['A', 'B', 'C'],
         datasets: [
             {
                 data: [300, 50, 100],
@@ -152,11 +152,19 @@ const DoughnutChartDemo = () => {
                     "#FFCE56"
                 ]
             }]
-        };
+    };
+
+    const lightOptions = {
+        legend: {
+            labels: {
+                fontColor: '#495057'
+            }
+        }
+    };
 
     return (
-        <div>
-            <Chart type="doughnut" data={data} />
+        <div className="card">
+            <Chart type="doughnut" data={chartData} options={lightOptions} />
         </div>
     )
 }
@@ -166,11 +174,11 @@ const DoughnutChartDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React from 'react';
-import {Chart} from 'primereact/chart';
+import { Chart } from 'primereact/chart';
 
 const DoughnutChartDemo = () => {
-    const data = {
-        labels: ['A','B','C'],
+    const chartData = {
+        labels: ['A', 'B', 'C'],
         datasets: [
             {
                 data: [300, 50, 100],
@@ -185,11 +193,19 @@ const DoughnutChartDemo = () => {
                     "#FFCE56"
                 ]
             }]
-        };
+    };
+
+    const lightOptions = {
+        legend: {
+            labels: {
+                fontColor: '#495057'
+            }
+        }
+    };
 
     return (
-        <div>
-            <Chart type="doughnut" data={data} />
+        <div className="card">
+            <Chart type="doughnut" data={chartData} options={lightOptions} />
         </div>
     )
 }
