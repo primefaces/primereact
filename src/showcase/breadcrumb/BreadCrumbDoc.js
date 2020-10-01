@@ -46,24 +46,22 @@ export class BreadCrumbDemo extends Component {
 import React from 'react';
 import { BreadCrumb } from 'primereact/breadcrumb';
 
-const BreadcrumbDemo = () => {
-
+const BreadCrumbDemo = () => {
     const items = [
-        { label: 'Categories' },
-        { label: 'Sports' },
-        { label: 'Football' },
-        { label: 'Countries' },
-        { label: 'Spain' },
-        { label: 'F.C. Barcelona' },
-        { label: 'Squad' },
-        { label: 'Lionel Messi', url: 'https://en.wikipedia.org/wiki/Lionel_Messi' }
+        {label: 'Computer'},
+        {label: 'Notebook'},
+        {label: 'Accessories'},
+        {label: 'Backpacks'},
+        {label: 'Item'}
     ];
 
-    const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact' }
+    const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact/showcase' }
 
     return (
         <div>
-            <BreadCrumb model={items} home={home} />
+            <div className="card">
+                <BreadCrumb model={items} home={home} />
+            </div>
         </div>
     );
 }
@@ -75,24 +73,22 @@ const BreadcrumbDemo = () => {
 import React from 'react';
 import { BreadCrumb } from 'primereact/breadcrumb';
 
-const BreadcrumbDemo = () => {
-
+const BreadCrumbDemo = () => {
     const items = [
-        { label: 'Categories' },
-        { label: 'Sports' },
-        { label: 'Football' },
-        { label: 'Countries' },
-        { label: 'Spain' },
-        { label: 'F.C. Barcelona' },
-        { label: 'Squad' },
-        { label: 'Lionel Messi', url: 'https://en.wikipedia.org/wiki/Lionel_Messi' }
+        {label: 'Computer'},
+        {label: 'Notebook'},
+        {label: 'Accessories'},
+        {label: 'Backpacks'},
+        {label: 'Item'}
     ];
 
-    const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact' }
+    const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact/showcase' }
 
     return (
         <div>
-            <BreadCrumb model={items} home={home} />
+            <div className="card">
+                <BreadCrumb model={items} home={home} />
+            </div>
         </div>
     );
 }
@@ -228,7 +224,7 @@ const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact' 
                     </TabPanel>
 
                     <TabPanel header="Source">
-                        <LiveEditor name="BreadcrumbDemo" sources={this.sources} />
+                        <LiveEditor name="BreadCrumbDemo" sources={this.sources} />
                     </TabPanel>
                 </TabView>
             </div>
