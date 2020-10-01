@@ -116,34 +116,36 @@ export class DataTableExportDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState, useEffect, useRef } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {Button} from 'primereact/button';
-import {CarService} from '../service/CarService';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { Button } from 'primereact/button';
+import ProductService from '../service/ProductService';
 
 const DataTableExportDemo = () => {
-    const [cars, setCars] = useState([]);
-    const carservice = new CarService();
-    let dt = useRef(null);
+    const [products, setProducts] = useState([]);
+    const dt = useRef(null);
+    const productService = new ProductService();
 
     useEffect(() => {
-        carservice.getCarsSmall().then(data => setCars(data));
+        productService.getProductsSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const onExport = () => {
+    const exportCSV = () => {
         dt.current.exportCSV();
-    };
+    }
 
-    const header = <div style={{textAlign:'left'}}><Button type="button" icon="pi pi-external-link" iconPos="left" label="CSV" onClick={onExport}></Button></div>;
+    const header = <div style={{textAlign:'left'}}><Button type="button" icon="pi pi-external-link" label="Export" onClick={exportCSV}></Button></div>;
 
     return (
         <div>
-            <DataTable value={cars} header={header} ref={dt}>
-                <Column field="vin" header="Vin" />
-                <Column field="year" header="Year" />
-                <Column field="brand" header="Brand" />
-                <Column field="color" header="Color" />
-            </DataTable>
+            <div className="card">
+                <DataTable value={products} header={header} ref={dt}>
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+            </div>
         </div>
     );
 }
@@ -153,34 +155,36 @@ const DataTableExportDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState, useEffect, useRef } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {Button} from 'primereact/button';
-import {CarService} from '../service/CarService';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { Button } from 'primereact/button';
+import ProductService from '../service/ProductService';
 
 const DataTableExportDemo = () => {
-    const [cars, setCars] = useState([]);
-    const carservice = new CarService();
-    let dt = useRef<any>(null);
+    const [products, setProducts] = useState([]);
+    const dt = useRef(null);
+    const productService = new ProductService();
 
     useEffect(() => {
-        carservice.getCarsSmall().then(data => setCars(data));
+        productService.getProductsSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const onExport = () => {
+    const exportCSV = () => {
         dt.current.exportCSV();
-    };
+    }
 
-    const header = <div style={{textAlign:'left'}}><Button type="button" icon="pi pi-external-link" iconPos="left" label="CSV" onClick={onExport}></Button></div>;
+    const header = <div style={{textAlign:'left'}}><Button type="button" icon="pi pi-external-link" label="Export" onClick={exportCSV}></Button></div>;
 
     return (
         <div>
-            <DataTable value={cars} header={header} ref={dt}>
-                <Column field="vin" header="Vin" />
-                <Column field="year" header="Year" />
-                <Column field="brand" header="Brand" />
-                <Column field="color" header="Color" />
-            </DataTable>
+            <div className="card">
+                <DataTable value={products} header={header} ref={dt}>
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+            </div>
         </div>
     );
 }
@@ -198,7 +202,7 @@ const DataTableExportDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Source">
-                        <LiveEditor name="DataTableExportDemo" sources={this.sources} service="CarService" data="cars-small" />
+                        <LiveEditor name="DataTableExportDemo" sources={this.sources} service="ProductService" data="products-small" />
                     </TabPanel>
                 </TabView>
             </div>
