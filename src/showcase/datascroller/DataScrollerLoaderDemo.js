@@ -7,7 +7,6 @@ import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { LiveEditor } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './DataScrollerDemo.scss';
-import { CodeHighlight } from '../codehighlight/CodeHighlight';
 
 export class DataScrollerLoaderDemo extends Component {
 
@@ -29,7 +28,7 @@ export class DataScrollerLoaderDemo extends Component {
     itemTemplate(data) {
         return (
             <div className="product-item">
-                <img src={`showcase/demo/images/product/${data.image}`} alt={data.name} />
+                <img src={`showcase/demo/images/product/${data.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
                 <div className="product-detail">
                     <div className="product-name">{data.name}</div>
                     <div className="product-description">{data.description}</div>
@@ -84,7 +83,7 @@ import { DataScroller } from 'primereact/datascroller';
 import { Button } from 'primereact/button';
 import { Rating } from 'primereact/rating';
 import ProductService from '../service/ProductService';
-import './DataScrollerDemo.scss';
+import './DataScrollerDemo.css';
 
 export class DataScrollerLoaderDemo extends Component {
 
@@ -106,7 +105,7 @@ export class DataScrollerLoaderDemo extends Component {
     itemTemplate(data) {
         return (
             <div className="product-item">
-                <img src={\`showcase/demo/images/product/\${data.image}\`} alt={data.name} />
+                <img src={\`showcase/demo/images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
                 <div className="product-detail">
                     <div className="product-name">{data.name}</div>
                     <div className="product-description">{data.description}</div>
@@ -141,45 +140,48 @@ export class DataScrollerLoaderDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState, useEffect, useRef } from 'react';
-import {DataScroller} from 'primereact/datascroller';
-import {Button} from 'primereact/button';
-import {CarService} from '../service/CarService';
+import { DataScroller } from 'primereact/datascroller';
+import { Button } from 'primereact/button';
+import { Rating } from 'primereact/rating';
+import ProductService from '../service/ProductService';
+import './DataScrollerDemo.css';
 
 const DataScrollerLoaderDemo = () => {
-    const [cars, setCars] = useState([]);
-    const carservice = new CarService();
-    let loadButton = useRef(null);
+    const [products, setProducts] = useState([]);
+    const loadButton = useRef(null);
+    const productService = new ProductService();
 
     useEffect(() => {
-        carservice.getCarsLarge().then(data => setCars(data));
+        this.productService.getProducts().then(data => this.setState({ products: data }));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const carTemplate = (car) => {
-        if (!car) {
-            return;
-        }
-
+    const itemTemplate = (data) => {
         return (
-            <div className="car-details">
-                <div>
-                    <img src={\`showcase/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand}/>
-                    <div className="p-grid">
-                        <div className="p-col-12">Vin: <b>{car.vin}</b></div>
-                        <div className="p-col-12">Year: <b>{car.year}</b></div>
-                        <div className="p-col-12">Brand: <b>{car.brand}</b></div>
-                        <div className="p-col-12">Color: <b>{car.color}</b></div>
-                    </div>
+            <div className="product-item">
+                <img src={\`showcase/demo/images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
+                <div className="product-detail">
+                    <div className="product-name">{data.name}</div>
+                    <div className="product-description">{data.description}</div>
+                    <Rating value={data.rating} readonly cancel={false}></Rating>
+                    <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
+                </div>
+                <div className="product-action">
+                    <span className="product-price">\${data.price}</span>
+                    <Button icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                    <span className={\`product-badge status-\${data.inventoryStatus.toLowerCase()}\`}>{data.inventoryStatus}</span>
                 </div>
             </div>
         );
-    };
+    }
 
     const footer = <Button ref={loadButton} type="text" icon="pi pi-plus" label="Load" />;
 
     return (
-        <div className="dataview-demo">
-            <DataScroller value={cars} itemTemplate={carTemplate} rows={5}
-                loader={loadButton.current} footer={footer} header="Click Load Button at Footer to Load More"/>
+        <div className="datascroller-demo">
+            <div className="card">
+                <DataScroller value={products} itemTemplate={itemTemplate} rows={5}
+                    loader={loadButton} footer={footer} header="Click Load Button at Footer to Load More" />
+            </div>
         </div>
     );
 }
@@ -189,45 +191,48 @@ const DataScrollerLoaderDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState, useEffect, useRef } from 'react';
-import {DataScroller} from 'primereact/datascroller';
-import {Button} from 'primereact/button';
-import {CarService} from '../service/CarService';
+import { DataScroller } from 'primereact/datascroller';
+import { Button } from 'primereact/button';
+import { Rating } from 'primereact/rating';
+import ProductService from '../service/ProductService';
+import './DataScrollerDemo.css';
 
 const DataScrollerLoaderDemo = () => {
-    const [cars, setCars] = useState([]);
-    const carservice = new CarService();
-    let loadButton = useRef(null);
+    const [products, setProducts] = useState([]);
+    const loadButton = useRef(null);
+    const productService = new ProductService();
 
     useEffect(() => {
-        carservice.getCarsLarge().then(data => setCars(data));
+        this.productService.getProducts().then(data => this.setState({ products: data }));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const carTemplate = (car: any) => {
-        if (!car) {
-            return;
-        }
-
+    const itemTemplate = (data) => {
         return (
-            <div className="car-details">
-                <div>
-                    <img src={\`showcase/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand}/>
-                    <div className="p-grid">
-                        <div className="p-col-12">Vin: <b>{car.vin}</b></div>
-                        <div className="p-col-12">Year: <b>{car.year}</b></div>
-                        <div className="p-col-12">Brand: <b>{car.brand}</b></div>
-                        <div className="p-col-12">Color: <b>{car.color}</b></div>
-                    </div>
+            <div className="product-item">
+                <img src={\`showcase/demo/images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
+                <div className="product-detail">
+                    <div className="product-name">{data.name}</div>
+                    <div className="product-description">{data.description}</div>
+                    <Rating value={data.rating} readonly cancel={false}></Rating>
+                    <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
+                </div>
+                <div className="product-action">
+                    <span className="product-price">\${data.price}</span>
+                    <Button icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                    <span className={\`product-badge status-\${data.inventoryStatus.toLowerCase()}\`}>{data.inventoryStatus}</span>
                 </div>
             </div>
         );
-    };
+    }
 
     const footer = <Button ref={loadButton} type="text" icon="pi pi-plus" label="Load" />;
 
     return (
-        <div className="dataview-demo">
-            <DataScroller value={cars} itemTemplate={carTemplate} rows={5}
-                loader={loadButton.current} footer={footer} header="Click Load Button at Footer to Load More"/>
+        <div className="datascroller-demo">
+            <div className="card">
+                <DataScroller value={products} itemTemplate={itemTemplate} rows={5}
+                    loader={loadButton} footer={footer} header="Click Load Button at Footer to Load More" />
+            </div>
         </div>
     );
 }
@@ -236,49 +241,98 @@ const DataScrollerLoaderDemo = () => {
         }
 
         this.extFiles = {
-            'index.css': `
-.dataview-demo .car-details {
+            'src/demo/DataScrollerDemo.css': {
+                content: `
+.datascroller-demo .product-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.datascroller-demo .product-description {
+    margin: 0 0 1rem 0;
+}
+
+.datascroller-demo .product-category-icon {
+    vertical-align: middle;
+    margin-right: .5rem;
+}
+
+.datascroller-demo .product-category {
+    font-weight: 600;
+    vertical-align: middle;
+}
+
+.datascroller-demo .product-item {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 2em;
-    border-bottom: 1px solid #d9dad9;
+    padding: 1rem;
+    width: 100%;
 }
-.dataview-demo .car-details > div {
+
+.datascroller-demo .product-item img {
+    width: 150px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    margin-right: 2rem;
+}
+
+.datascroller-demo .product-item .product-detail {
+    flex: 1 1 0;
+}
+
+.datascroller-demo .product-item .p-rating {
+    margin: 0 0 .5rem 0;
+}
+
+.datascroller-demo .product-item .product-price {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: .5rem;
+    align-self: flex-end;
+}
+
+.datascroller-demo .product-item .product-action {
     display: flex;
-    align-items: center;
+    flex-direction: column;
 }
-.dataview-demo .car-details > div img {
-    margin-right: 14px;
+
+.datascroller-demo .product-item .p-button {
+    margin-bottom: .5rem;
 }
-.dataview-demo .car-detail {
-    padding: 0 1em 1em 1em;
-    border-bottom: 1px solid #d9dad9;
-    margin: 1em;
-}
-.dataview-demo .p-panel-content {
-    padding: 1em;
-}
-@media screen and (max-width: 1024px) {
-    .dataview-demo .p-dataview .car-details img {
-        width: 75px;
-    }
-}
-@media screen and (max-width: 640px) {
-    .dataview-demo .car-details, .dataview-demo .search-icon {
-        text-align: center;
-        margin-top: 0;
+
+@media screen and (max-width: 576px) {
+    .datascroller-demo .product-item {
+        flex-direction: column;
+        align-items: center;
     }
 
-    .dataview-demo .filter-container {
-        text-align: left;
+    .datascroller-demo .product-item img {
+        width: 75%;
+        margin: 2rem 0;
     }
 
-    .datascroll-demo .car-item {
+    .datascroller-demo .product-item .product-detail {
         text-align: center;
     }
+
+    .datascroller-demo .product-item .product-price {
+        align-self: center;
+    }
+
+    .datascroller-demo .product-item .product-action {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .datascroller-demo .product-item .product-action {
+        margin-top: 2rem;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
 }
-            `
+                `
+            }
         }
     }
 
@@ -291,101 +345,7 @@ const DataScrollerLoaderDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Source">
-                        <LiveEditor name="DataScrollerLoaderDemo" sources={this.sources} service="CarService" data="cars-large" extFiles={this.extFiles} />
-<CodeHighlight lang="scss">
-{`
-.datascroller-demo {
-    .product-name {
-        font-size: 1.5rem;
-        font-weight: 700;
-    }
-
-    .product-description {
-        margin: 0 0 1rem 0;
-    }
-
-    .product-category-icon {
-        vertical-align: middle;
-        margin-right: .5rem;
-    }
-
-    .product-category {
-        font-weight: 600;
-        vertical-align: middle;
-    }
-
-    .product-item {
-        display: flex;
-        align-items: center;
-        padding: 1rem;
-        width: 100%;
-
-        img {
-            width: 150px;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-            margin-right: 2rem;
-        }
-
-        .product-detail {
-            flex: 1 1 0;
-        }
-
-        .p-rating {
-            margin: 0 0 .5rem 0;
-        }
-
-        .product-price {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: .5rem;
-            align-self: flex-end;
-        }
-
-        .product-action {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .p-button {
-            margin-bottom: .5rem;
-        }
-    }
-
-    @media screen and (max-width: 576px) {
-        .product-item {
-            flex-direction: column;
-            align-items: center;
-
-            img {
-                width: 75%;
-                margin: 2rem 0;
-            }
-
-            .product-detail {
-                text-align: center;
-            }
-
-            .product-price {
-                align-self: center;
-            }
-
-            .product-action {
-                display: flex;
-                flex-direction: column;
-            }
-
-            .product-action {
-                margin-top: 2rem;
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-                width: 100%;
-            }
-        }
-    }
-}
-`}
-</CodeHighlight>
+                        <LiveEditor name="DataScrollerLoaderDemo" sources={this.sources} service="ProductService" data="products" extFiles={this.extFiles} />
                     </TabPanel>
                 </TabView>
             </div>
