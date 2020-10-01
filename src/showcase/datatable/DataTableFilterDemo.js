@@ -10,7 +10,7 @@ import { MultiSelect } from '../../components/multiselect/MultiSelect';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { LiveEditor } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
-import { CodeHighlight } from '../codehighlight/CodeHighlight';
+import './DataTableDemo.scss';
 
 export class DataTableFilterDemo extends Component {
 
@@ -106,64 +106,64 @@ export class DataTableFilterDemo extends Component {
 
     nameBodyTemplate(rowData) {
         return (
-            <>
+            <React.Fragment>
                 <span className="p-column-title">Name</span>
                 {rowData.name}
-            </>
+            </React.Fragment>
         );
     }
 
     countryBodyTemplate(rowData) {
         return (
-            <>
+            <React.Fragment>
                 <span className="p-column-title">Country</span>
-                <img alt="flag" src="showcase/demo/images/flag_placeholder.png" className={`flag flag-${rowData.country.code}`} width={30} />
+                <img alt="flag" src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={`flag flag-${rowData.country.code}`} width={30} />
                 <span className="image-text">{rowData.country.name}</span>
-            </>
+            </React.Fragment>
         );
     }
 
     representativeBodyTemplate(rowData) {
         return (
-            <>
+            <React.Fragment>
                 <span className="p-column-title">Representative</span>
-                <img alt={rowData.representative.name} src={`showcase/demo/images/avatar/${rowData.representative.image}`} width={32} style={{verticalAlign: 'middle'}} />
+                <img alt={rowData.representative.name} src={`showcase/demo/images/avatar/${rowData.representative.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width={32} style={{verticalAlign: 'middle'}} />
                 <span className="image-text">{rowData.representative.name}</span>
-            </>
+            </React.Fragment>
         );
     }
 
     dateBodyTemplate(rowData) {
         return (
-            <>
+            <React.Fragment>
                 <span className="p-column-title">Date</span>
                 <span>{rowData.date}</span>
-            </>
+            </React.Fragment>
         );
     }
 
     statusBodyTemplate(rowData) {
         return (
-            <>
+            <React.Fragment>
                 <span className="p-column-title">Status</span>
                 <span className={`customer-badge status-${rowData.status}`}>{rowData.status}</span>
-            </>
+            </React.Fragment>
         );
     }
 
     activityBodyTemplate(rowData) {
         return (
-            <>
+            <React.Fragment>
                 <span className="p-column-title">Activity</span>
                 <ProgressBar value={rowData.activity} showValue={false} />
-            </>
+            </React.Fragment>
         );
     }
 
     representativesItemTemplate(option) {
         return (
             <div className="p-multiselect-representative-option">
-                <img alt={option.name} src={`showcase/demo/images/avatar/${option.image}`} width={32} style={{verticalAlign: 'middle'}} />
+                <img alt={option.name} src={`showcase/demo/images/avatar/${option.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width={32} style={{verticalAlign: 'middle'}} />
                 <span className="image-text">{option.name}</span>
             </div>
         );
@@ -238,6 +238,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { ProgressBar } from 'primereact/progressbar';
 import { Calendar } from 'primereact/calendar';
 import { MultiSelect } from 'primereact/multiselect';
+import './DataTableDemo.css';
 
 export class DataTableFilterDemo extends Component {
 
@@ -333,64 +334,64 @@ export class DataTableFilterDemo extends Component {
 
     nameBodyTemplate(rowData) {
         return (
-            <>
+            <React.Fragment>
                 <span className="p-column-title">Name</span>
                 {rowData.name}
-            </>
+            </React.Fragment>
         );
     }
 
     countryBodyTemplate(rowData) {
         return (
-            <>
+            <React.Fragment>
                 <span className="p-column-title">Country</span>
-                <img alt="flag" src="showcase/demo/images/flag_placeholder.png" className={\`flag flag-\${rowData.country.code}\`} width={30} />
+                <img alt="flag" src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${rowData.country.code}\`} width={30} />
                 <span className="image-text">{rowData.country.name}</span>
-            </>
+            </React.Fragment>
         );
     }
 
     representativeBodyTemplate(rowData) {
         return (
-            <>
+            <React.Fragment>
                 <span className="p-column-title">Representative</span>
-                <img alt={rowData.representative.name} src={\`showcase/demo/images/avatar/\${rowData.representative.image}\`} width={32} style={{verticalAlign: 'middle'}} />
+                <img alt={rowData.representative.name} src={\`showcase/demo/images/avatar/\${rowData.representative.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width={32} style={{verticalAlign: 'middle'}} />
                 <span className="image-text">{rowData.representative.name}</span>
-            </>
+            </React.Fragment>
         );
     }
 
     dateBodyTemplate(rowData) {
         return (
-            <>
+            <React.Fragment>
                 <span className="p-column-title">Date</span>
                 <span>{rowData.date}</span>
-            </>
+            </React.Fragment>
         );
     }
 
     statusBodyTemplate(rowData) {
         return (
-            <>
+            <React.Fragment>
                 <span className="p-column-title">Status</span>
                 <span className={\`customer-badge status-\${rowData.status}\`}>{rowData.status}</span>
-            </>
+            </React.Fragment>
         );
     }
 
     activityBodyTemplate(rowData) {
         return (
-            <>
+            <React.Fragment>
                 <span className="p-column-title">Activity</span>
                 <ProgressBar value={rowData.activity} showValue={false} />
-            </>
+            </React.Fragment>
         );
     }
 
     representativesItemTemplate(option) {
         return (
             <div className="p-multiselect-representative-option">
-                <img alt={option.name} src={\`showcase/demo/images/avatar/\${option.image}\`} width={32} style={{verticalAlign: 'middle'}} />
+                <img alt={option.name} src={\`showcase/demo/images/avatar/\${option.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width={32} style={{verticalAlign: 'middle'}} />
                 <span className="image-text">{option.name}</span>
             </div>
         );
@@ -439,79 +440,186 @@ export class DataTableFilterDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState, useEffect, useRef } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {InputText} from 'primereact/inputtext';
-import {CarService} from '../service/CarService';
-import {Dropdown} from 'primereact/dropdown';
-import {MultiSelect} from 'primereact/multiselect';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { InputText } from 'primereact/inputtext';
+import { CustomerService } from '../service/CustomerService';
+import { Dropdown } from 'primereact/dropdown';
+import { ProgressBar } from 'primereact/progressbar';
+import { Calendar } from 'primereact/calendar';
+import { MultiSelect } from 'primereact/multiselect';
+import './DataTableDemo.css';
 
 const DataTableFilterDemo = () => {
-    const [cars, setCars] = useState([]);
+    const [customers, setCustomers] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [selectedRepresentative, setSelectedRepresentative] = useState(null);
+    const [selectedDate, setSelectedDate] = useState(null);
+    const [selectedStatus, setSelectedStatus] = useState(null);
     const [globalFilter, setGlobalFilter] = useState(null);
-    const [selectedBrand, setSelectedBrand] = useState(null);
-    const [selectedColors, setSelectedColors] = useState(null);
-
-    const brands = [
-        {label: 'Audi', value: 'Audi'},
-        {label: 'BMW', value: 'BMW'},
-        {label: 'Fiat', value: 'Fiat'},
-        {label: 'Honda', value: 'Honda'},
-        {label: 'Jaguar', value: 'Jaguar'},
-        {label: 'Mercedes', value: 'Mercedes'},
-        {label: 'Renault', value: 'Renault'},
-        {label: 'VW', value: 'VW'},
-        {label: 'Volvo', value: 'Volvo'}
+    const dt = useRef(null);
+    const representatives = [
+        {name: "Amy Elsner", image: 'amyelsner.png'},
+        {name: "Anna Fali", image: 'annafali.png'},
+        {name: "Asiya Javayant", image: 'asiyajavayant.png'},
+        {name: "Bernardo Dominic", image: 'bernardodominic.png'},
+        {name: "Elwin Sharvill", image: 'elwinsharvill.png'},
+        {name: "Ioni Bowcher", image: 'ionibowcher.png'},
+        {name: "Ivan Magalhaes",image: 'ivanmagalhaes.png'},
+        {name: "Onyama Limba", image: 'onyamalimba.png'},
+        {name: "Stephen Shaw", image: 'stephenshaw.png'},
+        {name: "XuXue Feng", image: 'xuxuefeng.png'}
     ];
 
-    const colors = [
-        {label: 'White', value: 'White'},
-        {label: 'Green', value: 'Green'},
-        {label: 'Silver', value: 'Silver'},
-        {label: 'Black', value: 'Black'},
-        {label: 'Red', value: 'Red'},
-        {label: 'Maroon', value: 'Maroon'},
-        {label: 'Brown', value: 'Brown'},
-        {label: 'Orange', value: 'Orange'},
-        {label: 'Blue', value: 'Blue'}
+    const statuses = [
+        'unqualified', 'qualified', 'new', 'negotiation', 'renewal', 'proposal'
     ];
 
-    const carservice = new CarService();
-    let dt = useRef(null);
+    const customerService = new CustomerService();
 
     useEffect(() => {
-        carservice.getCarsLarge().then(data => setCars(data));
+        customerService.getCustomersLarge().then(data => setCustomers(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const onBrandChange = (event) => {
-        dt.current.filter(event.value, 'brand', 'equals');
-        setSelectedBrand(event.value);
-    };
+    const filterDate = (value, filter) => {
+        if (filter === undefined || filter === null || (typeof filter === 'string' && filter.trim() === '')) {
+            return true;
+        }
 
-    const onColorChange = (event) => {
-        dt.current.filter(event.value, 'color', 'in');
-        setSelectedColors(event.value);
-    };
+        if (value === undefined || value === null) {
+            return false;
+        }
+
+        return value === formatDate(filter);
+    }
+
+    const formatDate = (date) => {
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
+
+        if (month < 10) {
+            month = '0' + month;
+        }
+
+        if (day < 10) {
+            day = '0' + day;
+        }
+
+        return date.getFullYear() + '-' + month + '-' + day;
+    }
+
+    const onRepresentativesChange = (e) => {
+        dt.current.filter(e.value, 'representative.name', 'in');
+        setSelectedRepresentative(e.value);
+    }
+
+    const onDateChange = (e) => {
+        dt.current.filter(e.value, 'date', 'custom');
+        setSelectedDate(e.value);
+    }
+
+    const onStatusChange = (e) => {
+        dt.current.filter(e.value, 'status', 'equals');
+        setSelectedStatus(e.value);
+    }
+
+    const nameBodyTemplate = (rowData) => {
+        return (
+            <React.Fragment>
+                <span className="p-column-title">Name</span>
+                {rowData.name}
+            </React.Fragment>
+        );
+    }
+
+    const countryBodyTemplate = (rowData) => {
+        return (
+            <React.Fragment>
+                <span className="p-column-title">Country</span>
+                <img alt="flag" src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${rowData.country.code}\`} width={30} />
+                <span className="image-text">{rowData.country.name}</span>
+            </React.Fragment>
+        );
+    }
+
+    const representativeBodyTemplate = (rowData) => {
+        return (
+            <React.Fragment>
+                <span className="p-column-title">Representative</span>
+                <img alt={rowData.representative.name} src={\`showcase/demo/images/avatar/\${rowData.representative.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width={32} style={{verticalAlign: 'middle'}} />
+                <span className="image-text">{rowData.representative.name}</span>
+            </React.Fragment>
+        );
+    }
+
+    const dateBodyTemplate = (rowData) => {
+        return (
+            <React.Fragment>
+                <span className="p-column-title">Date</span>
+                <span>{rowData.date}</span>
+            </React.Fragment>
+        );
+    }
+
+    const statusBodyTemplate = (rowData) => {
+        return (
+            <React.Fragment>
+                <span className="p-column-title">Status</span>
+                <span className={\`customer-badge status-\${rowData.status}\`}>{rowData.status}</span>
+            </React.Fragment>
+        );
+    }
+
+    const activityBodyTemplate = (rowData) => {
+        return (
+            <React.Fragment>
+                <span className="p-column-title">Activity</span>
+                <ProgressBar value={rowData.activity} showValue={false} />
+            </React.Fragment>
+        );
+    }
+
+    const representativesItemTemplate = (option) => {
+        return (
+            <div className="p-multiselect-representative-option">
+                <img alt={option.name} src={\`showcase/demo/images/avatar/\${option.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width={32} style={{verticalAlign: 'middle'}} />
+                <span className="image-text">{option.name}</span>
+            </div>
+        );
+    }
+
+    const statusItemTemplate = (option) => {
+        return <span className={\`customer-badge status-\${option}\`}>{option}</span>;
+    }
 
     const header = (
-        <div style={{'textAlign':'left'}}>
-            <i className="pi pi-search" style={{margin:'4px 4px 0 0'}}></i>
-            <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Global Search" size="50"/>
+        <div className="table-header">
+            List of Customers
+            <span className="p-input-icon-left">
+                <i className="pi pi-search" />
+                <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Global Search" />
+            </span>
         </div>
     );
 
-    const brandFilter = <Dropdown style={{width: '100%'}} placeholder="Select a Brand" value={selectedBrand} options={brands} onChange={onBrandChange} showClear />;
-    const colorFilter = <MultiSelect style={{width:'100%'}} placeholder="Select Colors" value={selectedColors} options={colors} onChange={onColorChange} />;
+    const representativeFilter = <MultiSelect value={selectedRepresentative} options={representatives} itemTemplate={representativesItemTemplate} onChange={(e) => setSelectedRepresentative(e.value)} optionLabel="name" optionValue="name" placeholder="All" className="p-column-filter" />;
+    const dateFilter = <Calendar value={selectedDate} onChange={(e) => setSelectedDate(e.value)} dateFormat="yy-mm-dd" className="p-column-filter" placeholder="Registration Date"/>;
+    const statusFilter = <Dropdown value={selectedStatus} options={statuses} onChange={(e) => setSelectedStatus(e.value)} itemTemplate={statusItemTemplate} placeholder="Select a Status" className="p-column-filter" showClear />;
 
     return (
-        <div>
-            <DataTable ref={dt} value={cars} paginator rows={10} header={header}
-                globalFilter={globalFilter} emptyMessage="No records found">
-                <Column field="vin" header="Vin" filter filterPlaceholder="Vin starts with"/>
-                <Column field="year" header="Year" filter filterPlaceholder="Year contains" filterMatchMode="contains" />
-                <Column field="brand" header="Brand" filter filterElement={brandFilter} />
-                <Column field="color" header="Color" filter filterElement={colorFilter} />
-            </DataTable>
+        <div className="datatable-filter-demo">
+            <div className="card">
+                <DataTable ref={dt} value={customers} paginator rows={10}
+                    header={header} className="p-datatable-customers"
+                    globalFilter={globalFilter} emptyMessage="No customers found." loading={loading}>
+                    <Column field="name" header="Name" body={nameBodyTemplate} filter filterPlaceholder="Search by name" />
+                    <Column field="country" header="Country" body={countryBodyTemplate} filter filterPlaceholder="Search by country" filterMatchMode="contains" />
+                    <Column field="representative.name" header="Representative" body={representativeBodyTemplate} filter filterElement={representativeFilter} />
+                    <Column field="date" header="Date" body={dateBodyTemplate} filter filterElement={dateFilter} filterFunction={filterDate} />
+                    <Column field="status" header="Status" body={statusBodyTemplate} filter filterElement={statusFilter}/>
+                    <Column field="activity" header="Activity" body={activityBodyTemplate} filter filterPlaceholder="Minimum" filterMatchMode="gte" />
+                </DataTable>
+            </div>
         </div>
     );
 }
@@ -521,81 +629,279 @@ const DataTableFilterDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState, useEffect, useRef } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {InputText} from 'primereact/inputtext';
-import {CarService} from '../service/CarService';
-import {Dropdown} from 'primereact/dropdown';
-import {MultiSelect} from 'primereact/multiselect';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { InputText } from 'primereact/inputtext';
+import { CustomerService } from '../service/CustomerService';
+import { Dropdown } from 'primereact/dropdown';
+import { ProgressBar } from 'primereact/progressbar';
+import { Calendar } from 'primereact/calendar';
+import { MultiSelect } from 'primereact/multiselect';
+import './DataTableDemo.css';
 
 const DataTableFilterDemo = () => {
-    const [cars, setCars] = useState([]);
-    const [globalFilter, setGlobalFilter] = useState<any>(null);
-    const [selectedBrand, setSelectedBrand] = useState(null);
-    const [selectedColors, setSelectedColors] = useState(null);
-
-    const brands = [
-        {label: 'Audi', value: 'Audi'},
-        {label: 'BMW', value: 'BMW'},
-        {label: 'Fiat', value: 'Fiat'},
-        {label: 'Honda', value: 'Honda'},
-        {label: 'Jaguar', value: 'Jaguar'},
-        {label: 'Mercedes', value: 'Mercedes'},
-        {label: 'Renault', value: 'Renault'},
-        {label: 'VW', value: 'VW'},
-        {label: 'Volvo', value: 'Volvo'}
+    const [customers, setCustomers] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [selectedRepresentative, setSelectedRepresentative] = useState(null);
+    const [selectedDate, setSelectedDate] = useState(null);
+    const [selectedStatus, setSelectedStatus] = useState(null);
+    const [globalFilter, setGlobalFilter] = useState(null);
+    const dt = useRef(null);
+    const representatives = [
+        {name: "Amy Elsner", image: 'amyelsner.png'},
+        {name: "Anna Fali", image: 'annafali.png'},
+        {name: "Asiya Javayant", image: 'asiyajavayant.png'},
+        {name: "Bernardo Dominic", image: 'bernardodominic.png'},
+        {name: "Elwin Sharvill", image: 'elwinsharvill.png'},
+        {name: "Ioni Bowcher", image: 'ionibowcher.png'},
+        {name: "Ivan Magalhaes",image: 'ivanmagalhaes.png'},
+        {name: "Onyama Limba", image: 'onyamalimba.png'},
+        {name: "Stephen Shaw", image: 'stephenshaw.png'},
+        {name: "XuXue Feng", image: 'xuxuefeng.png'}
     ];
 
-    const colors = [
-        {label: 'White', value: 'White'},
-        {label: 'Green', value: 'Green'},
-        {label: 'Silver', value: 'Silver'},
-        {label: 'Black', value: 'Black'},
-        {label: 'Red', value: 'Red'},
-        {label: 'Maroon', value: 'Maroon'},
-        {label: 'Brown', value: 'Brown'},
-        {label: 'Orange', value: 'Orange'},
-        {label: 'Blue', value: 'Blue'}
+    const statuses = [
+        'unqualified', 'qualified', 'new', 'negotiation', 'renewal', 'proposal'
     ];
 
-    const carservice = new CarService();
-    let dt = useRef<any>(null);
+    const customerService = new CustomerService();
 
     useEffect(() => {
-        carservice.getCarsLarge().then(data => setCars(data));
+        customerService.getCustomersLarge().then(data => setCustomers(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const onBrandChange = (event: any) => {
-        dt.current.filter(event.value, 'brand', 'equals');
-        setSelectedBrand(event.value);
-    };
+    const filterDate = (value, filter) => {
+        if (filter === undefined || filter === null || (typeof filter === 'string' && filter.trim() === '')) {
+            return true;
+        }
 
-    const onColorChange = (event: any) => {
-        dt.current.filter(event.value, 'color', 'in');
-        setSelectedColors(event.value);
-    };
+        if (value === undefined || value === null) {
+            return false;
+        }
+
+        return value === formatDate(filter);
+    }
+
+    const formatDate = (date) => {
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
+
+        if (month < 10) {
+            month = '0' + month;
+        }
+
+        if (day < 10) {
+            day = '0' + day;
+        }
+
+        return date.getFullYear() + '-' + month + '-' + day;
+    }
+
+    const onRepresentativesChange = (e) => {
+        dt.current.filter(e.value, 'representative.name', 'in');
+        setSelectedRepresentative(e.value);
+    }
+
+    const onDateChange = (e) => {
+        dt.current.filter(e.value, 'date', 'custom');
+        setSelectedDate(e.value);
+    }
+
+    const onStatusChange = (e) => {
+        dt.current.filter(e.value, 'status', 'equals');
+        setSelectedStatus(e.value);
+    }
+
+    const nameBodyTemplate = (rowData) => {
+        return (
+            <React.Fragment>
+                <span className="p-column-title">Name</span>
+                {rowData.name}
+            </React.Fragment>
+        );
+    }
+
+    const countryBodyTemplate = (rowData) => {
+        return (
+            <React.Fragment>
+                <span className="p-column-title">Country</span>
+                <img alt="flag" src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${rowData.country.code}\`} width={30} />
+                <span className="image-text">{rowData.country.name}</span>
+            </React.Fragment>
+        );
+    }
+
+    const representativeBodyTemplate = (rowData) => {
+        return (
+            <React.Fragment>
+                <span className="p-column-title">Representative</span>
+                <img alt={rowData.representative.name} src={\`showcase/demo/images/avatar/\${rowData.representative.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width={32} style={{verticalAlign: 'middle'}} />
+                <span className="image-text">{rowData.representative.name}</span>
+            </React.Fragment>
+        );
+    }
+
+    const dateBodyTemplate = (rowData) => {
+        return (
+            <React.Fragment>
+                <span className="p-column-title">Date</span>
+                <span>{rowData.date}</span>
+            </React.Fragment>
+        );
+    }
+
+    const statusBodyTemplate = (rowData) => {
+        return (
+            <React.Fragment>
+                <span className="p-column-title">Status</span>
+                <span className={\`customer-badge status-\${rowData.status}\`}>{rowData.status}</span>
+            </React.Fragment>
+        );
+    }
+
+    const activityBodyTemplate = (rowData) => {
+        return (
+            <React.Fragment>
+                <span className="p-column-title">Activity</span>
+                <ProgressBar value={rowData.activity} showValue={false} />
+            </React.Fragment>
+        );
+    }
+
+    const representativesItemTemplate = (option) => {
+        return (
+            <div className="p-multiselect-representative-option">
+                <img alt={option.name} src={\`showcase/demo/images/avatar/\${option.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width={32} style={{verticalAlign: 'middle'}} />
+                <span className="image-text">{option.name}</span>
+            </div>
+        );
+    }
+
+    const statusItemTemplate = (option) => {
+        return <span className={\`customer-badge status-\${option}\`}>{option}</span>;
+    }
 
     const header = (
-        <div style={{'textAlign':'left'}}>
-            <i className="pi pi-search" style={{margin:'4px 4px 0 0'}}></i>
-            <InputText type="search" onInput={(e) => setGlobalFilter((e.target as HTMLInputElement).value)} placeholder="Global Search" size="50"/>
+        <div className="table-header">
+            List of Customers
+            <span className="p-input-icon-left">
+                <i className="pi pi-search" />
+                <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Global Search" />
+            </span>
         </div>
     );
 
-    const brandFilter = <Dropdown style={{width: '100%'}} placeholder="Select a Brand" value={selectedBrand} options={brands} onChange={onBrandChange} showClear />;
-    const colorFilter = <MultiSelect style={{width:'100%'}} placeholder="Select Colors" value={selectedColors} options={colors} onChange={onColorChange} />;
+    const representativeFilter = <MultiSelect value={selectedRepresentative} options={representatives} itemTemplate={representativesItemTemplate} onChange={(e) => setSelectedRepresentative(e.value)} optionLabel="name" optionValue="name" placeholder="All" className="p-column-filter" />;
+    const dateFilter = <Calendar value={selectedDate} onChange={(e) => setSelectedDate(e.value)} dateFormat="yy-mm-dd" className="p-column-filter" placeholder="Registration Date"/>;
+    const statusFilter = <Dropdown value={selectedStatus} options={statuses} onChange={(e) => setSelectedStatus(e.value)} itemTemplate={statusItemTemplate} placeholder="Select a Status" className="p-column-filter" showClear />;
 
     return (
-        <div>
-            <DataTable ref={dt} value={cars} paginator rows={10} header={header}
-                globalFilter={globalFilter} emptyMessage="No records found">
-                <Column field="vin" header="Vin" filter filterPlaceholder="Vin starts with"/>
-                <Column field="year" header="Year" filter filterPlaceholder="Year contains" filterMatchMode="contains" />
-                <Column field="brand" header="Brand" filter filterElement={brandFilter} />
-                <Column field="color" header="Color" filter filterElement={colorFilter} />
-            </DataTable>
+        <div className="datatable-filter-demo">
+            <div className="card">
+                <DataTable ref={dt} value={customers} paginator rows={10}
+                    header={header} className="p-datatable-customers"
+                    globalFilter={globalFilter} emptyMessage="No customers found." loading={loading}>
+                    <Column field="name" header="Name" body={nameBodyTemplate} filter filterPlaceholder="Search by name" />
+                    <Column field="country" header="Country" body={countryBodyTemplate} filter filterPlaceholder="Search by country" filterMatchMode="contains" />
+                    <Column field="representative.name" header="Representative" body={representativeBodyTemplate} filter filterElement={representativeFilter} />
+                    <Column field="date" header="Date" body={dateBodyTemplate} filter filterElement={dateFilter} filterFunction={filterDate} />
+                    <Column field="status" header="Status" body={statusBodyTemplate} filter filterElement={statusFilter}/>
+                    <Column field="activity" header="Activity" body={activityBodyTemplate} filter filterPlaceholder="Minimum" filterMatchMode="gte" />
+                </DataTable>
+            </div>
         </div>
     );
+}
+                `
+            }
+        };
+
+        this.extFiles = {
+            'src/demo/DataTableDemo.css': {
+                content: `
+.datatable-filter-demo .p-paginator .p-paginator-current {
+    margin-left: auto;
+}
+
+.datatable-filter-demo .p-progressbar {
+    height: .5rem;
+    background-color: #D8DADC;
+}
+
+.datatable-filter-demo .p-progressbar .p-progressbar-value {
+    background-color: #607D8B;
+}
+
+.datatable-filter-demo .table-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.datatable-filter-demo .p-datepicker {
+    min-width: 25rem;
+}
+
+.datatable-filter-demo .p-datepicker td {
+    font-weight: 400;
+}
+
+.datatable-filter-demo .p-datatable.p-datatable-customers .p-datatable-header {
+    padding: 1rem;
+    text-align: left;
+    font-size: 1.5rem;
+}
+
+.datatable-filter-demo .p-datatable.p-datatable-customers .p-paginator {
+    padding: 1rem;
+}
+
+.datatable-filter-demo .p-datatable.p-datatable-customers .p-datatable-thead > tr > th {
+    text-align: left;
+}
+
+.datatable-filter-demo .p-datatable.p-datatable-customers .p-datatable-tbody > tr > td {
+    cursor: auto;
+}
+
+.datatable-filter-demo .p-datatable.p-datatable-customers .p-dropdown-label:not(.p-placeholder) {
+    text-transform: uppercase;
+}
+
+.datatable-filter-demo .p-datatable-customers .p-datatable-tbody > tr > td .p-column-title {
+    display: none;
+}
+
+@media screen and (max-width: 960px) {
+    .datatable-filter-demo .p-datatable.p-datatable-customers .p-datatable-thead > tr > th,
+    .datatable-filter-demo .p-datatable.p-datatable-customers .p-datatable-tfoot > tr > td {
+        display: none !important;
+    }
+
+    .datatable-filter-demo .p-datatable.p-datatable-customers .p-datatable-tbody > tr {
+        border-bottom: 1px solid var(--layer-2);
+    }
+
+    .datatable-filter-demo .p-datatable.p-datatable-customers .p-datatable-tbody > tr > td {
+        text-align: left;
+        display: block;
+        border: 0 none !important;
+        width: 100% !important;
+        float: left;
+        clear: left;
+        border: 0 none;
+    }
+
+    .datatable-filter-demo .p-datatable.p-datatable-customers .p-datatable-tbody > tr > td .p-column-title {
+        padding: .4rem;
+        min-width: 30%;
+        display: inline-block;
+        margin: -.4rem 1rem -.4rem -.4rem;
+        font-weight: bold;
+    }
+
+    .datatable-filter-demo .p-datatable.p-datatable-customers .p-datatable-tbody > tr > td .p-progressbar {
+        margin-top: .5rem;
+    }
 }
                 `
             }
@@ -611,106 +917,7 @@ const DataTableFilterDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Source">
-                        <LiveEditor name="DataTableFilterDemo" sources={this.sources} service="CarService" data="cars-large" />
-<CodeHighlight lang="scss">
-{`
-.datatable-filter-demo {
-    .p-paginator {
-        .p-paginator-current {
-            margin-left: auto;
-        }
-    }
-
-    .p-progressbar {
-        height: .5rem;
-        background-color: #D8DADC;
-
-        .p-progressbar-value {
-            background-color: #607D8B;
-        }
-    }
-
-    .table-header {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .p-datepicker {
-        min-width: 25rem;
-
-        td {
-            font-weight: 400;
-        }
-    }
-
-    .p-datatable.p-datatable-customers {
-        .p-datatable-header {
-            padding: 1rem;
-            text-align: left;
-            font-size: 1.5rem;
-        }
-
-        .p-paginator {
-            padding: 1rem;
-        }
-
-        .p-datatable-thead > tr > th {
-            text-align: left;
-        }
-
-        .p-datatable-tbody > tr > td {
-            cursor: auto;
-        }
-
-        .p-dropdown-label:not(.p-placeholder) {
-            text-transform: uppercase;
-        }
-    }
-
-    /* Responsive */
-    .p-datatable-customers .p-datatable-tbody > tr > td .p-column-title {
-        display: none;
-    }
-
-    @media screen and (max-width: 960px) {
-        .p-datatable {
-            &.p-datatable-customers {
-                .p-datatable-thead > tr > th,
-                .p-datatable-tfoot > tr > td {
-                    display: none !important;
-                }
-
-                .p-datatable-tbody > tr {
-                    border-bottom: 1px solid var(--layer-2);
-
-                    > td {
-                        text-align: left;
-                        display: block;
-                        border: 0 none !important;
-                        width: 100% !important;
-                        float: left;
-                        clear: left;
-                        border: 0 none;
-
-                        .p-column-title {
-                            padding: .4rem;
-                            min-width: 30%;
-                            display: inline-block;
-                            margin: -.4rem 1rem -.4rem -.4rem;
-                            font-weight: bold;
-                        }
-
-                        .p-progressbar {
-                            margin-top: .5rem;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-`}
-</CodeHighlight>
+                        <LiveEditor name="DataTableFilterDemo" sources={this.sources} service="CustomerService" data="customers-large" extFiles={this.extFiles} />
                     </TabPanel>
                 </TabView>
             </div>
