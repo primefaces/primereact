@@ -46,10 +46,11 @@ export class TabMenuDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React from 'react';
-import {TabMenu} from 'primereact/tabmenu';
+import { TabMenu } from 'primereact/tabmenu';
 
 const TabMenuDemo = () => {
-    const items =  [
+
+    const items = [
         {label: 'Home', icon: 'pi pi-fw pi-home'},
         {label: 'Calendar', icon: 'pi pi-fw pi-calendar'},
         {label: 'Edit', icon: 'pi pi-fw pi-pencil'},
@@ -59,7 +60,9 @@ const TabMenuDemo = () => {
 
     return (
         <div>
-            <TabMenu model={items} />
+            <div className="card">
+                <TabMenu model={items} />
+            </div>
         </div>
     );
 }
@@ -69,10 +72,11 @@ const TabMenuDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React from 'react';
-import {TabMenu} from 'primereact/tabmenu';
+import { TabMenu } from 'primereact/tabmenu';
 
 const TabMenuDemo = () => {
-    const items =  [
+
+    const items = [
         {label: 'Home', icon: 'pi pi-fw pi-home'},
         {label: 'Calendar', icon: 'pi pi-fw pi-calendar'},
         {label: 'Edit', icon: 'pi pi-fw pi-pencil'},
@@ -82,7 +86,9 @@ const TabMenuDemo = () => {
 
     return (
         <div>
-            <TabMenu model={items} />
+            <div className="card">
+                <TabMenu model={items} />
+            </div>
         </div>
     );
 }

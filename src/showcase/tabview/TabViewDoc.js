@@ -16,7 +16,7 @@ export class TabViewDoc extends Component {
 import React, { Component } from 'react';
 import { TabView, TabPanel } from 'primereact/tabview';
 import { Button } from 'primereact/button';
-import './TabViewDemo.scss';
+import './TabViewDemo.css';
 
 export class TabViewDemo extends Component {
 
@@ -130,56 +130,105 @@ export class TabViewDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState } from 'react';
-import {TabView,TabPanel} from 'primereact/tabview';
+import { TabView, TabPanel } from 'primereact/tabview';
+import { Button } from 'primereact/button';
+import './TabViewDemo.css';
 
 const TabViewDemo = () => {
     const [activeIndex, setActiveIndex] = useState(1);
 
     return (
-        <div>
-            <h5>Uncontrolled</h5>
-            <TabView renderActiveOnly={false}>
-                <TabPanel header="Godfather I" leftIcon="pi pi-calendar">
-                    <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, overseeshis daughter's wedding. His beloved son ichael has just come home from the war,
-                    but does not intend to become part of his father's business. Through Michael's life the nature of the family business becomes clear. The business of the family is
-                    just like the head of the family, kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
-                </TabPanel>
-                <TabPanel header="Godfather II" rightIcon="pi pi-user">
-                    <p>Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather parallels the young Vito Corleone's rise with his son Michael's spiritual fall,
-                    deepening The_Godfather's depiction of the dark side of the American dream. In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills
-                    his family. Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy.</p>
-                </TabPanel>
-                <TabPanel header="Godfather III" leftIcon="pi pi-search" rightIcon="pi pi-check">
-                    <p>The Godfather Part III is set in 1979 and 1980. Michael has moved back to New York and taken great strides to remove the family from crime. He turns over his New York criminal
-                    interests to longtime enforcer Joey Zasa. He uses his wealth in an attempt to rehabilitate his reputation through numerous philanthropic acts, administered by a foundation named after his father.
-                    A decade earlier, he gave custody of his two children to Kay, who has since remarried.</p>
-                </TabPanel>
-                <TabPanel header="Godfather IV" disabled>
+        <div className="tabview-demo">
+            <div className="card">
+                <h5>Default</h5>
+                <TabView>
+                    <TabPanel header="Header I">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                        ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </TabPanel>
+                    <TabPanel header="Header II">
+                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
+                        architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+                    voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.</p>
+                    </TabPanel>
+                    <TabPanel header="Header III">
+                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
+                        cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
+                    Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
+                    </TabPanel>
+                </TabView>
+            </div>
 
-                </TabPanel>
-            </TabView>
+            <div className="card">
+                <h5>Programmatic</h5>
+                <div className="p-pt-2 p-pb-4">
+                    <Button onClick={() => setActiveIndex(0)} className="p-button-text" label="Activate 1st" />
+                    <Button onClick={() => setActiveIndex(1)} className="p-button-text" label="Activate 2nd" />
+                    <Button onClick={() => setActiveIndex(2)} className="p-button-text" label="Activate 3rd" />
+                </div>
 
-            <h5>Controlled</h5>
-            <TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
-                <TabPanel header="Godfather I" leftIcon="pi pi-calendar">
-                    <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, overseeshis daughter's wedding. His beloved son ichael has just come home from the war,
-                    but does not intend to become part of his father's business. Through Michael's life the nature of the family business becomes clear. The business of the family is
-                    just like the head of the family, kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
-                </TabPanel>
-                <TabPanel header="Godfather II" rightIcon="pi pi-user">
-                    <p>Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather parallels the young Vito Corleone's rise with his son Michael's spiritual fall,
-                    deepening The_Godfather's depiction of the dark side of the American dream. In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills
-                    his family. Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy.</p>
-                </TabPanel>
-                <TabPanel header="Godfather III" leftIcon="pi pi-search" rightIcon="pi pi-check">
-                    <p>The Godfather Part III is set in 1979 and 1980. Michael has moved back to New York and taken great strides to remove the family from crime. He turns over his New York criminal
-                    interests to longtime enforcer Joey Zasa. He uses his wealth in an attempt to rehabilitate his reputation through numerous philanthropic acts, administered by a foundation named after his father.
-                    A decade earlier, he gave custody of his two children to Kay, who has since remarried.</p>
-                </TabPanel>
-                <TabPanel header="Godfather IV" disabled>
+                <TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
+                    <TabPanel header="Header I">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                        ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </TabPanel>
+                    <TabPanel header="Header II">
+                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
+                        architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+                            voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.</p>
+                    </TabPanel>
+                    <TabPanel header="Header III">
+                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
+                        cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
+                            Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
+                    </TabPanel>
+                </TabView>
+            </div>
 
-                </TabPanel>
-            </TabView>
+            <div className="card">
+                <h5>Disabled</h5>
+                <TabView>
+                    <TabPanel header="Header I">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                        ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </TabPanel>
+                    <TabPanel header="Header II">
+                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
+                        architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+                    voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.</p>
+                    </TabPanel>
+                    <TabPanel header="Header III">
+                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
+                        cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
+                    Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
+                    </TabPanel>
+                    <TabPanel header="Header IV" disabled></TabPanel>
+                </TabView>
+            </div>
+
+            <div className="card">
+                <h5>Custom Headers</h5>
+                <TabView className="tabview-custom">
+                    <TabPanel header="Header I" leftIcon="pi pi-calendar">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                        ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </TabPanel>
+                    <TabPanel header="Header II" rightIcon="pi pi-user">
+                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
+                        architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+                    voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.</p>
+                    </TabPanel>
+                    <TabPanel header="Header III" leftIcon="pi pi-search" rightIcon="pi pi-cog">
+                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
+                        cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
+                    Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
+                    </TabPanel>
+                </TabView>
+            </div>
         </div>
     )
 }
@@ -189,58 +238,130 @@ const TabViewDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState } from 'react';
-import {TabView,TabPanel} from 'primereact/tabview';
+import { TabView, TabPanel } from 'primereact/tabview';
+import { Button } from 'primereact/button';
+import './TabViewDemo.css';
 
 const TabViewDemo = () => {
     const [activeIndex, setActiveIndex] = useState(1);
 
     return (
-        <div>
-            <h5>Uncontrolled</h5>
-            <TabView renderActiveOnly={false}>
-                <TabPanel header="Godfather I" leftIcon="pi pi-calendar">
-                    <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, overseeshis daughter's wedding. His beloved son ichael has just come home from the war,
-                    but does not intend to become part of his father's business. Through Michael's life the nature of the family business becomes clear. The business of the family is
-                    just like the head of the family, kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
-                </TabPanel>
-                <TabPanel header="Godfather II" rightIcon="pi pi-user">
-                    <p>Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather parallels the young Vito Corleone's rise with his son Michael's spiritual fall,
-                    deepening The_Godfather's depiction of the dark side of the American dream. In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills
-                    his family. Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy.</p>
-                </TabPanel>
-                <TabPanel header="Godfather III" leftIcon="pi pi-search" rightIcon="pi pi-check">
-                    <p>The Godfather Part III is set in 1979 and 1980. Michael has moved back to New York and taken great strides to remove the family from crime. He turns over his New York criminal
-                    interests to longtime enforcer Joey Zasa. He uses his wealth in an attempt to rehabilitate his reputation through numerous philanthropic acts, administered by a foundation named after his father.
-                    A decade earlier, he gave custody of his two children to Kay, who has since remarried.</p>
-                </TabPanel>
-                <TabPanel header="Godfather IV" disabled>
+        <div className="tabview-demo">
+            <div className="card">
+                <h5>Default</h5>
+                <TabView>
+                    <TabPanel header="Header I">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                        ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </TabPanel>
+                    <TabPanel header="Header II">
+                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
+                        architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+                    voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.</p>
+                    </TabPanel>
+                    <TabPanel header="Header III">
+                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
+                        cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
+                    Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
+                    </TabPanel>
+                </TabView>
+            </div>
 
-                </TabPanel>
-            </TabView>
+            <div className="card">
+                <h5>Programmatic</h5>
+                <div className="p-pt-2 p-pb-4">
+                    <Button onClick={() => setActiveIndex(0)} className="p-button-text" label="Activate 1st" />
+                    <Button onClick={() => setActiveIndex(1)} className="p-button-text" label="Activate 2nd" />
+                    <Button onClick={() => setActiveIndex(2)} className="p-button-text" label="Activate 3rd" />
+                </div>
 
-            <h5>Controlled</h5>
-            <TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
-                <TabPanel header="Godfather I" leftIcon="pi pi-calendar">
-                    <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, overseeshis daughter's wedding. His beloved son ichael has just come home from the war,
-                    but does not intend to become part of his father's business. Through Michael's life the nature of the family business becomes clear. The business of the family is
-                    just like the head of the family, kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
-                </TabPanel>
-                <TabPanel header="Godfather II" rightIcon="pi pi-user">
-                    <p>Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather parallels the young Vito Corleone's rise with his son Michael's spiritual fall,
-                    deepening The_Godfather's depiction of the dark side of the American dream. In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills
-                    his family. Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy.</p>
-                </TabPanel>
-                <TabPanel header="Godfather III" leftIcon="pi pi-search" rightIcon="pi pi-check">
-                    <p>The Godfather Part III is set in 1979 and 1980. Michael has moved back to New York and taken great strides to remove the family from crime. He turns over his New York criminal
-                    interests to longtime enforcer Joey Zasa. He uses his wealth in an attempt to rehabilitate his reputation through numerous philanthropic acts, administered by a foundation named after his father.
-                    A decade earlier, he gave custody of his two children to Kay, who has since remarried.</p>
-                </TabPanel>
-                <TabPanel header="Godfather IV" disabled>
+                <TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
+                    <TabPanel header="Header I">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                        ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </TabPanel>
+                    <TabPanel header="Header II">
+                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
+                        architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+                            voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.</p>
+                    </TabPanel>
+                    <TabPanel header="Header III">
+                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
+                        cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
+                            Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
+                    </TabPanel>
+                </TabView>
+            </div>
 
-                </TabPanel>
-            </TabView>
+            <div className="card">
+                <h5>Disabled</h5>
+                <TabView>
+                    <TabPanel header="Header I">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                        ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </TabPanel>
+                    <TabPanel header="Header II">
+                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
+                        architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+                    voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.</p>
+                    </TabPanel>
+                    <TabPanel header="Header III">
+                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
+                        cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
+                    Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
+                    </TabPanel>
+                    <TabPanel header="Header IV" disabled></TabPanel>
+                </TabView>
+            </div>
+
+            <div className="card">
+                <h5>Custom Headers</h5>
+                <TabView className="tabview-custom">
+                    <TabPanel header="Header I" leftIcon="pi pi-calendar">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                        ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </TabPanel>
+                    <TabPanel header="Header II" rightIcon="pi pi-user">
+                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
+                        architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+                    voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.</p>
+                    </TabPanel>
+                    <TabPanel header="Header III" leftIcon="pi pi-search" rightIcon="pi pi-cog">
+                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
+                        cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
+                    Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
+                    </TabPanel>
+                </TabView>
+            </div>
         </div>
     )
+}
+                `
+            }
+        };
+
+        this.extFiles = {
+            'src/demo/TabViewDemo.css': {
+                content: `
+.tabview-demo .tabview-custom i, .tabview-demo .tabview-custom span {
+    vertical-align: middle;
+}
+
+.tabview-demo .tabview-custom span {
+    margin: 0 .5rem;
+}
+
+.tabview-demo .p-button {
+    margin-right: .25rem;
+}
+
+.tabview-demo .p-tabview p {
+    line-height: 1.5;
+    margin: 0;
 }
                 `
             }
@@ -478,31 +599,7 @@ import { TabView,TabPanel } from 'primereact/tabview';
                     </TabPanel>
 
                     <TabPanel header="Source">
-                        <LiveEditor name="TabViewDemo" sources={this.sources} />
-<CodeHighlight lang="scss">
-{`
-.tabview-demo {
-    .tabview-custom {
-        i, span {
-            vertical-align: middle;
-        }
-
-        span {
-            margin: 0 .5rem;
-        }
-    }
-
-    .p-button {
-        margin-right: .25rem;
-    }
-
-    .p-tabview p {
-        line-height: 1.5;
-        margin: 0;
-    }
-}
-`}
-</CodeHighlight>
+                        <LiveEditor name="TabViewDemo" sources={this.sources} extFiles={this.extFiles} />
                     </TabPanel>
                 </TabView>
             </div>

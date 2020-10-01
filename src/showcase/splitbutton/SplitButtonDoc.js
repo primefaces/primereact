@@ -87,11 +87,11 @@ export class SplitButtonDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useRef } from 'react';
-import {SplitButton} from 'primereact/splitbutton';
-import {Toast} from 'primereact/toast';
+import { SplitButton } from 'primereact/splitbutton';
+import { Toast } from 'primereact/toast';
 
 const SplitButtonDemo = () => {
-    let toast = useRef(null);
+    const toast = useRef(null);
     const items = [
         {
             label: 'Update',
@@ -110,13 +110,13 @@ const SplitButtonDemo = () => {
         {
             label: 'React Website',
             icon: 'pi pi-external-link',
-            command:() => {
+            command: () => {
                 window.location.href = 'https://facebook.github.io/react/'
             }
         },
         {   label: 'Upload',
             icon: 'pi pi-upload',
-            command:() => {
+            command: () => {
                 window.location.hash = "/fileupload"
             }
         }
@@ -127,18 +127,22 @@ const SplitButtonDemo = () => {
     }
 
     return (
-        <div className="splitbutton-demo">
+        <div>
             <Toast ref={toast}></Toast>
 
-            <h3 className="first">Basic</h5>
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items}></SplitButton>
+            <div className="card">
+                <h5>Basic</h5>
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items}></SplitButton>
 
-            <h5>Severities</h5>
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-secondary"></SplitButton>
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-success" style={{marginRight: '.25em'}}></SplitButton>
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-info" style={{marginRight: '.25em'}}></SplitButton>
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-warning" style={{marginRight: '.25em'}}></SplitButton>
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-danger" style={{marginRight: '.25em'}}></SplitButton>
+                <h5>Severities</h5>
+                <SplitButton label="Save" icon="pi pi-plus" model={items} className="p-mr-2"></SplitButton>
+                <SplitButton label="Save" icon="pi pi-plus" model={items} className="p-button-secondary p-mr-2"></SplitButton>
+                <SplitButton label="Save" icon="pi pi-plus" model={items} className="p-button-success p-mr-2"></SplitButton>
+                <SplitButton label="Save" icon="pi pi-plus" model={items} className="p-button-info p-mr-2"></SplitButton>
+                <SplitButton label="Save" icon="pi pi-plus" model={items} className="p-button-warning p-mr-2"></SplitButton>
+                <SplitButton label="Save" icon="pi pi-plus" model={items} className="p-button-help p-mr-2"></SplitButton>
+                <SplitButton label="Save" icon="pi pi-plus" model={items} className="p-button-danger p-mr-2"></SplitButton>
+            </div>
         </div>
     )
 }
@@ -148,11 +152,11 @@ const SplitButtonDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useRef } from 'react';
-import {SplitButton} from 'primereact/splitbutton';
-import {Toast} from 'primereact/toast';
+import { SplitButton } from 'primereact/splitbutton';
+import { Toast } from 'primereact/toast';
 
 const SplitButtonDemo = () => {
-    let toast = useRef<any>(null);
+    const toast = useRef(null);
     const items = [
         {
             label: 'Update',
@@ -171,13 +175,13 @@ const SplitButtonDemo = () => {
         {
             label: 'React Website',
             icon: 'pi pi-external-link',
-            command:() => {
+            command: () => {
                 window.location.href = 'https://facebook.github.io/react/'
             }
         },
         {   label: 'Upload',
             icon: 'pi pi-upload',
-            command:() => {
+            command: () => {
                 window.location.hash = "/fileupload"
             }
         }
@@ -188,31 +192,27 @@ const SplitButtonDemo = () => {
     }
 
     return (
-        <div className="splitbutton-demo">
+        <div>
             <Toast ref={toast}></Toast>
 
-            <h3 className="first">Basic</h5>
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items}></SplitButton>
+            <div className="card">
+                <h5>Basic</h5>
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items}></SplitButton>
 
-            <h5>Severities</h5>
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-secondary"></SplitButton>
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-success" style={{marginRight: '.25em'}}></SplitButton>
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-info" style={{marginRight: '.25em'}}></SplitButton>
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-warning" style={{marginRight: '.25em'}}></SplitButton>
-            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} className="p-button-danger" style={{marginRight: '.25em'}}></SplitButton>
+                <h5>Severities</h5>
+                <SplitButton label="Save" icon="pi pi-plus" model={items} className="p-mr-2"></SplitButton>
+                <SplitButton label="Save" icon="pi pi-plus" model={items} className="p-button-secondary p-mr-2"></SplitButton>
+                <SplitButton label="Save" icon="pi pi-plus" model={items} className="p-button-success p-mr-2"></SplitButton>
+                <SplitButton label="Save" icon="pi pi-plus" model={items} className="p-button-info p-mr-2"></SplitButton>
+                <SplitButton label="Save" icon="pi pi-plus" model={items} className="p-button-warning p-mr-2"></SplitButton>
+                <SplitButton label="Save" icon="pi pi-plus" model={items} className="p-button-help p-mr-2"></SplitButton>
+                <SplitButton label="Save" icon="pi pi-plus" model={items} className="p-button-danger p-mr-2"></SplitButton>
+            </div>
         </div>
     )
 }
                 `
             }
-        }
-
-        this.extFiles = {
-            'index.css': `
-.splitbutton-demo p-splitbutton {
-    margin-right: .5em;
-}
-            `
         }
     }
 
@@ -467,7 +467,7 @@ export class SplitButtonDemo extends Component {
                     </TabPanel>
 
                     <TabPanel header="Source">
-                        <LiveEditor name="SplitButtonDemo" sources={this.sources} extFiles={this.extFiles} />
+                        <LiveEditor name="SplitButtonDemo" sources={this.sources} />
                     </TabPanel>
                 </TabView >
             </div>

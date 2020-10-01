@@ -75,36 +75,35 @@ export class StepsDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState, useRef } from 'react';
-import {Steps} from 'primereact/steps';
-import {Toast} from 'primereact/toast';
+import { Steps } from 'primereact/steps';
+import { Toast } from 'primereact/toast';
 
 const StepsDemo = () => {
     const [activeIndex, setActiveIndex] = useState(1);
-    let toast = useRef(null);
-
+    const toast = useRef(null);
     const items = [
         {
             label: 'Personal',
             command: (event) => {
-                toast.current.show({severity:'info', summary:'First Step', detail: event.item.label});
+                toast.current.show({ severity: 'info', summary: 'First Step', detail: event.item.label });
             }
         },
         {
             label: 'Seat',
             command: (event) => {
-                toast.current.show({severity:'info', summary:'Seat Selection', detail: event.item.label});
+                toast.current.show({ severity: 'info', summary: 'Seat Selection', detail: event.item.label });
             }
         },
         {
             label: 'Payment',
             command: (event) => {
-                toast.current.show({severity:'info', summary:'Pay with CC', detail: event.item.label});
+                toast.current.show({ severity: 'info', summary: 'Pay with CC', detail: event.item.label });
             }
         },
         {
             label: 'Confirmation',
             command: (event) => {
-                toast.current.show({severity:'info', summary:'Last Step', detail: event.item.label});
+                toast.current.show({ severity: 'info', summary: 'Last Step', detail: event.item.label });
             }
         }
     ];
@@ -113,14 +112,13 @@ const StepsDemo = () => {
         <div>
             <Toast ref={toast}></Toast>
 
-            <h5>Basic</h5>
-            <Steps model={items} />
+            <div className="card">
+                <h5>Basic</h5>
+                <Steps model={items} />
 
-            <h5>Interactive</h5>
-            <Steps model={items} activeIndex={activeIndex} onSelect={(e) => setActiveIndex(e.index)} readOnly={false} />
-
-            <h5>Custom Style</h5>
-            <Steps model={items} className="steps-custom" />
+                <h5>Interactive</h5>
+                <Steps model={items} activeIndex={activeIndex} onSelect={(e) => setActiveIndex(e.index)} readOnly={false} />
+            </div>
         </div>
     );
 }
@@ -130,36 +128,35 @@ const StepsDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState, useRef } from 'react';
-import {Steps} from 'primereact/steps';
-import {Toast} from 'primereact/toast';
+import { Steps } from 'primereact/steps';
+import { Toast } from 'primereact/toast';
 
 const StepsDemo = () => {
     const [activeIndex, setActiveIndex] = useState(1);
-    let toast = useRef<any>(null);
-
+    const toast = useRef(null);
     const items = [
         {
             label: 'Personal',
-            command: (event: any) => {
-                toast.current.show({severity:'info', summary:'First Step', detail: event.item.label});
+            command: (event) => {
+                toast.current.show({ severity: 'info', summary: 'First Step', detail: event.item.label });
             }
         },
         {
             label: 'Seat',
-            command: (event: any) => {
-                toast.current.show({severity:'info', summary:'Seat Selection', detail: event.item.label});
+            command: (event) => {
+                toast.current.show({ severity: 'info', summary: 'Seat Selection', detail: event.item.label });
             }
         },
         {
             label: 'Payment',
-            command: (event: any) => {
-                toast.current.show({severity:'info', summary:'Pay with CC', detail: event.item.label});
+            command: (event) => {
+                toast.current.show({ severity: 'info', summary: 'Pay with CC', detail: event.item.label });
             }
         },
         {
             label: 'Confirmation',
-            command: (event: any) => {
-                toast.current.show({severity:'info', summary:'Last Step', detail: event.item.label});
+            command: (event) => {
+                toast.current.show({ severity: 'info', summary: 'Last Step', detail: event.item.label });
             }
         }
     ];
@@ -168,14 +165,13 @@ const StepsDemo = () => {
         <div>
             <Toast ref={toast}></Toast>
 
-            <h5>Basic</h5>
-            <Steps model={items} />
+            <div className="card">
+                <h5>Basic</h5>
+                <Steps model={items} />
 
-            <h5>Interactive</h5>
-            <Steps model={items} activeIndex={activeIndex} onSelect={(e) => setActiveIndex(e.index)} readOnly={false} />
-
-            <h5>Custom Style</h5>
-            <Steps model={items} className="steps-custom" />
+                <h5>Interactive</h5>
+                <Steps model={items} activeIndex={activeIndex} onSelect={(e) => setActiveIndex(e.index)} readOnly={false} />
+            </div>
         </div>
     );
 }
