@@ -33,28 +33,28 @@ export class DataTableRowGroupDemo extends Component {
 
     headerTemplate(data) {
         return (
-            <>
-                <img alt={data.representative.name} src={`showcase/demo/images/avatar/${data.representative.image}`} width="32" style={{ verticalAlign: 'middle' }} />
+            <React.Fragment>
+                <img alt={data.representative.name} src={`showcase/demo/images/avatar/${data.representative.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" style={{ verticalAlign: 'middle' }} />
                 <span className="image-text">{data.representative.name}</span>
-            </>
+            </React.Fragment>
         );
     }
 
     footerTemplate(data) {
         return (
-            <>
+            <React.Fragment>
                 <td colSpan="4" style={{ textAlign: 'right' }}>Total Customers</td>
                 <td>{this.calculateCustomerTotal(data.representative.name)}</td>
-            </>
+            </React.Fragment>
         );
     }
 
     countryBodyTemplate(rowData) {
         return (
-            <>
-                <img alt={rowData.country.name} src="showcase/demo/images/flag_placeholder.png" className={`flag flag-${rowData.country.code}`} width="30" />
+            <React.Fragment>
+                <img alt={rowData.country.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={`flag flag-${rowData.country.code}`} width="30" />
                 <span className="image-text">{rowData.country.name}</span>
-            </>
+            </React.Fragment>
         );
     }
 
@@ -64,10 +64,10 @@ export class DataTableRowGroupDemo extends Component {
 
     representativeBodyTemplate(rowData) {
         return (
-            <>
-                <img alt={rowData.representative.name} src={`showcase/demo/images/avatar/${rowData.representative.image}`} width="32" style={{ verticalAlign: 'middle' }} />
+            <React.Fragment>
+                <img alt={rowData.representative.name} src={`showcase/demo/images/avatar/${rowData.representative.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" style={{ verticalAlign: 'middle' }} />
                 <span className="image-text">{rowData.representative.name}</span>
-            </>
+            </React.Fragment>
         )
     }
 
@@ -171,7 +171,9 @@ export class DataTableColGroupDemoDoc extends Component {
 import React, { Component } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import { Toast } from 'primereact/toast';
 import { CustomerService } from '../service/CustomerService';
+import './DataTableDemo.css';
 
 export class DataTableRowGroupDemo extends Component {
 
@@ -198,28 +200,28 @@ export class DataTableRowGroupDemo extends Component {
 
     headerTemplate(data) {
         return (
-            <>
-                <img alt={data.representative.name} src={\`showcase/demo/images/avatar/\${data.representative.image}\`} width="32" style={{ verticalAlign: 'middle' }} />
+            <React.Fragment>
+                <img alt={data.representative.name} src={\`showcase/demo/images/avatar/\${data.representative.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" style={{ verticalAlign: 'middle' }} />
                 <span className="image-text">{data.representative.name}</span>
-            </>
+            </React.Fragment>
         );
     }
 
     footerTemplate(data) {
         return (
-            <>
+            <React.Fragment>
                 <td colSpan="4" style={{ textAlign: 'right' }}>Total Customers</td>
                 <td>{this.calculateCustomerTotal(data.representative.name)}</td>
-            </>
+            </React.Fragment>
         );
     }
 
     countryBodyTemplate(rowData) {
         return (
-            <>
-                <img alt={rowData.country.name} src="showcase/demo/images/flag_placeholder.png" className={\`flag flag-\${rowData.country.code}\`} width="30" />
+            <React.Fragment>
+                <img alt={rowData.country.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${rowData.country.code}\`} width="30" />
                 <span className="image-text">{rowData.country.name}</span>
-            </>
+            </React.Fragment>
         );
     }
 
@@ -229,10 +231,10 @@ export class DataTableRowGroupDemo extends Component {
 
     representativeBodyTemplate(rowData) {
         return (
-            <>
-                <img alt={rowData.representative.name} src={\`showcase/demo/images/avatar/\${rowData.representative.image}\`} width="32" style={{ verticalAlign: 'middle' }} />
+            <React.Fragment>
+                <img alt={rowData.representative.name} src={\`showcase/demo/images/avatar/\${rowData.representative.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" style={{ verticalAlign: 'middle' }} />
                 <span className="image-text">{rowData.representative.name}</span>
-            </>
+            </React.Fragment>
         )
     }
 
@@ -260,7 +262,9 @@ export class DataTableRowGroupDemo extends Component {
 
     render() {
         return (
-            <div>
+            <div className="datatable-rowgroup-demo">
+                <Toast ref={(el) => this.toast = el}></Toast>
+
                 <div className="card">
                     <h5>Subheader Grouping</h5>
                     <p>Group customers by their representative.</p>
@@ -315,73 +319,134 @@ export class DataTableRowGroupDemo extends Component {
             'hooks': {
                 tabName: 'Hooks Source',
                 content: `
-import React, { useState, useEffect } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service/CarService';
+import React, { useState, useEffect, useRef } from 'react';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { Toast } from 'primereact/toast';
+import { CustomerService } from '../service/CustomerService';
+import './DataTableDemo.css';
 
 const DataTableRowGroupDemo = () => {
-    const [car, setCar] = useState([]);
+    const [customers, setCustomers] = useState([]);
     const [expandedRows, setExpandedRows] = useState([]);
-    const carservice = new CarService();
+    const toast = useRef(null);
+    const customerService = new CustomerService();
 
     useEffect(() => {
-        carservice.getCarsMedium().then(data => setCars(data));
+        customerService.getCustomersMedium().then(data => setCustomers(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const headerTemplate = (data) => {
-        return data.brand;
-    };
-
-    const footerTemplate = (data, index) => {
         return (
-            <>
-                <td key={data.brand + '_footerTotalLabel'} colSpan={3} style={{textAlign: 'right'}}>Total Price</td>
-                <td key={data.brand + '_footerTotalValue'}>{calculateGroupTotal(data.brand)}</td>
-            </>
+            <React.Fragment>
+                <img alt={data.representative.name} src={\`showcase/demo/images/avatar/\${data.representative.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" style={{ verticalAlign: 'middle' }} />
+                <span className="image-text">{data.representative.name}</span>
+            </React.Fragment>
         );
-    };
+    }
 
-    const calculateGroupTotal = (brand) => {
+    const footerTemplate = (data) => {
+        return (
+            <React.Fragment>
+                <td colSpan="4" style={{ textAlign: 'right' }}>Total Customers</td>
+                <td>{calculateCustomerTotal(data.representative.name)}</td>
+            </React.Fragment>
+        );
+    }
+
+    const countryBodyTemplate = (rowData) => {
+        return (
+            <React.Fragment>
+                <img alt={rowData.country.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${rowData.country.code}\`} width="30" />
+                <span className="image-text">{rowData.country.name}</span>
+            </React.Fragment>
+        );
+    }
+
+    const statusBodyTemplate = (rowData) => {
+        return <span className={\`customer-badge status-\${rowData.status}\`}>{rowData.status}</span>;
+    }
+
+    const representativeBodyTemplate = (rowData) => {
+        return (
+            <React.Fragment>
+                <img alt={rowData.representative.name} src={\`showcase/demo/images/avatar/\${rowData.representative.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" style={{ verticalAlign: 'middle' }} />
+                <span className="image-text">{rowData.representative.name}</span>
+            </React.Fragment>
+        )
+    }
+
+    const onRowGroupExpand = (event) => {
+        toast.current.show({ severity: 'info', summary: 'Row Group Expanded', detail: 'Value: ' + event.data.representative.name, life: 3000 });
+    }
+
+    const onRowGroupCollapse = (event) => {
+        toast.current.show({ severity: 'success', summary: 'Row Group Collapsed', detail: 'Value: ' + event.data.representative.name, life: 3000 });
+    }
+
+    const calculateCustomerTotal = (name) => {
         let total = 0;
 
-        if (cars) {
-            for (let car of cars) {
-                if (car.brand === brand) {
-                    total += car.price;
+        if (customers) {
+            for (let customer of customers) {
+                if (customer.representative.name === name) {
+                    total++;
                 }
             }
         }
 
         return total;
-    };
+    }
 
     return (
-        <div>
-            <DataTable header="Toggleable Row Groups" value={cars} rowGroupMode="subheader" sortField="brand" sortOrder={1} groupField="brand"
-                rowGroupHeaderTemplate={headerTemplate} rowGroupFooterTemplate={footerTemplate}
-                expandableRowGroups expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}>
-                <Column field="vin" header="Vin" />
-                <Column field="year" header="Year" />
-                <Column field="color" header="Color" />
-                <Column field="price" header="Price" />
-            </DataTable>
+        <div className="datatable-rowgroup-demo">
+            <Toast ref={toast}></Toast>
 
-            <DataTable header="SubHeader" value={cars} rowGroupMode="subheader" sortField="brand" sortOrder={1} groupField="brand"
-                rowGroupHeaderTemplate={headerTemplate} rowGroupFooterTemplate={footerTemplate} style={{marginTop:'30px'}}>
-                <Column field="vin" header="Vin" />
-                <Column field="year" header="Year" />
-                <Column field="color" header="Color" />
-                <Column field="price" header="Price" />
-            </DataTable>
+            <div className="card">
+                <h5>Subheader Grouping</h5>
+                <p>Group customers by their representative.</p>
+                <DataTable value={customers} rowGroupMode="subheader" groupField="representative.name"
+                    sortMode="single" sortField="representative.name" sortOrder={1}
+                    rowGroupHeaderTemplate={headerTemplate} rowGroupFooterTemplate={footerTemplate}>
+                    <Column field="representative.name" header="Representative"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="country" header="Country" body={countryBodyTemplate}></Column>
+                    <Column field="company" header="Company"></Column>
+                    <Column field="status" header="Status" body={statusBodyTemplate}></Column>
+                    <Column field="date" header="Date"></Column>
+                </DataTable>
+            </div>
 
-            <DataTable header="RowSpan" value={cars} rowGroupMode="rowspan" sortField="brand" sortOrder={1} groupField="brand"
-                style={{marginTop:'30px'}}>
-                <Column field="brand" header="Brand" />
-                <Column field="year" header="Year" />
-                <Column field="color" header="Color" />
-                <Column field="vin" header="Vin" />
-            </DataTable>
+            <div className="card">
+                <h5>Expandable Row Groups</h5>
+                <p>Group customers by their representative.</p>
+                <DataTable value={customers} rowGroupMode="subheader" groupField="representative.name"
+                    sortMode="single" sortField="representative.name" sortOrder={1}
+                    expandableRowGroups expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
+                    onRowExpand={onRowGroupExpand} onRowCollapse={onRowGroupCollapse}
+                    rowGroupHeaderTemplate={headerTemplate} rowGroupFooterTemplate={footerTemplate}>
+                    <Column field="representative.name" header="Representative"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="country" header="Country" body={countryBodyTemplate}></Column>
+                    <Column field="company" header="Company"></Column>
+                    <Column field="status" header="Status" body={statusBodyTemplate}></Column>
+                    <Column field="date" header="Date"></Column>
+                </DataTable>
+            </div>
+
+            <div className="card">
+                <h5>RowSpan Grouping</h5>
+                <DataTable value={customers} rowGroupMode="rowspan" groupField="representative.name"
+                    sortMode="single" sortField="representative.name" sortOrder={1}>
+                    <Column header="#" headerStyle={{ width: '3em' }} body={(data, props) => props.rowIndex + 1}></Column>
+                    <Column field="representative.name" header="Representative" body={representativeBodyTemplate}></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="country" header="Country" body={countryBodyTemplate}></Column>
+                    <Column field="company" header="Company"></Column>
+                    <Column field="status" header="Status" body={statusBodyTemplate}></Column>
+                    <Column field="date" header="Date"></Column>
+                </DataTable>
+            </div>
         </div>
     );
 }
@@ -390,75 +455,154 @@ const DataTableRowGroupDemo = () => {
             'ts': {
                 tabName: 'TS Source',
                 content: `
-import React, { useState, useEffect } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service/CarService';
+import React, { useState, useEffect, useRef } from 'react';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { Toast } from 'primereact/toast';
+import { CustomerService } from '../service/CustomerService';
+import './DataTableDemo.css';
 
 const DataTableRowGroupDemo = () => {
-    const [cars, setCars] = useState<any>([]);
-    const [expandedRows, setExpandedRows] = useState<any>([]);
-    const carservice = new CarService();
+    const [customers, setCustomers] = useState([]);
+    const [expandedRows, setExpandedRows] = useState([]);
+    const toast = useRef(null);
+    const customerService = new CustomerService();
 
     useEffect(() => {
-        carservice.getCarsMedium().then(data => setCars(data));
+        customerService.getCustomersMedium().then(data => setCustomers(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const headerTemplate = (data: any) => {
-        return data.brand;
-    };
-
-    const footerTemplate = (data: any, index: number) => {
+    const headerTemplate = (data) => {
         return (
-            <>
-                <td key={data.brand + '_footerTotalLabel'} colSpan={3} style={{textAlign: 'right'}}>Total Price</td>
-                <td key={data.brand + '_footerTotalValue'}>{calculateGroupTotal(data.brand)}</td>
-            </>
+            <React.Fragment>
+                <img alt={data.representative.name} src={\`showcase/demo/images/avatar/\${data.representative.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" style={{ verticalAlign: 'middle' }} />
+                <span className="image-text">{data.representative.name}</span>
+            </React.Fragment>
         );
-    };
+    }
 
-    const calculateGroupTotal = (brand: string) => {
+    const footerTemplate = (data) => {
+        return (
+            <React.Fragment>
+                <td colSpan="4" style={{ textAlign: 'right' }}>Total Customers</td>
+                <td>{calculateCustomerTotal(data.representative.name)}</td>
+            </React.Fragment>
+        );
+    }
+
+    const countryBodyTemplate = (rowData) => {
+        return (
+            <React.Fragment>
+                <img alt={rowData.country.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${rowData.country.code}\`} width="30" />
+                <span className="image-text">{rowData.country.name}</span>
+            </React.Fragment>
+        );
+    }
+
+    const statusBodyTemplate = (rowData) => {
+        return <span className={\`customer-badge status-\${rowData.status}\`}>{rowData.status}</span>;
+    }
+
+    const representativeBodyTemplate = (rowData) => {
+        return (
+            <React.Fragment>
+                <img alt={rowData.representative.name} src={\`showcase/demo/images/avatar/\${rowData.representative.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" style={{ verticalAlign: 'middle' }} />
+                <span className="image-text">{rowData.representative.name}</span>
+            </React.Fragment>
+        )
+    }
+
+    const onRowGroupExpand = (event) => {
+        toast.current.show({ severity: 'info', summary: 'Row Group Expanded', detail: 'Value: ' + event.data.representative.name, life: 3000 });
+    }
+
+    const onRowGroupCollapse = (event) => {
+        toast.current.show({ severity: 'success', summary: 'Row Group Collapsed', detail: 'Value: ' + event.data.representative.name, life: 3000 });
+    }
+
+    const calculateCustomerTotal = (name) => {
         let total = 0;
 
-        if (cars) {
-            for (let car of cars) {
-                if (car.brand === brand) {
-                    total += car.price;
+        if (customers) {
+            for (let customer of customers) {
+                if (customer.representative.name === name) {
+                    total++;
                 }
             }
         }
 
         return total;
-    };
+    }
 
     return (
-        <div>
-            <DataTable header="Toggleable Row Groups" value={cars} rowGroupMode="subheader" sortField="brand" sortOrder={1} groupField="brand"
-                rowGroupHeaderTemplate={headerTemplate} rowGroupFooterTemplate={footerTemplate}
-                expandableRowGroups expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}>
-                <Column field="vin" header="Vin" />
-                <Column field="year" header="Year" />
-                <Column field="color" header="Color" />
-                <Column field="price" header="Price" />
-            </DataTable>
+        <div className="datatable-rowgroup-demo">
+            <Toast ref={toast}></Toast>
+            <div className="card">
+                <h5>Subheader Grouping</h5>
+                <p>Group customers by their representative.</p>
+                <DataTable value={customers} rowGroupMode="subheader" groupField="representative.name"
+                    sortMode="single" sortField="representative.name" sortOrder={1}
+                    rowGroupHeaderTemplate={headerTemplate} rowGroupFooterTemplate={footerTemplate}>
+                    <Column field="representative.name" header="Representative"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="country" header="Country" body={countryBodyTemplate}></Column>
+                    <Column field="company" header="Company"></Column>
+                    <Column field="status" header="Status" body={statusBodyTemplate}></Column>
+                    <Column field="date" header="Date"></Column>
+                </DataTable>
+            </div>
 
-            <DataTable header="SubHeader" value={cars} rowGroupMode="subheader" sortField="brand" sortOrder={1} groupField="brand"
-                rowGroupHeaderTemplate={headerTemplate} rowGroupFooterTemplate={footerTemplate} style={{marginTop:'30px'}}>
-                <Column field="vin" header="Vin" />
-                <Column field="year" header="Year" />
-                <Column field="color" header="Color" />
-                <Column field="price" header="Price" />
-            </DataTable>
+            <div className="card">
+                <h5>Expandable Row Groups</h5>
+                <p>Group customers by their representative.</p>
+                <DataTable value={customers} rowGroupMode="subheader" groupField="representative.name"
+                    sortMode="single" sortField="representative.name" sortOrder={1}
+                    expandableRowGroups expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
+                    onRowExpand={onRowGroupExpand} onRowCollapse={onRowGroupCollapse}
+                    rowGroupHeaderTemplate={headerTemplate} rowGroupFooterTemplate={footerTemplate}>
+                    <Column field="representative.name" header="Representative"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="country" header="Country" body={countryBodyTemplate}></Column>
+                    <Column field="company" header="Company"></Column>
+                    <Column field="status" header="Status" body={statusBodyTemplate}></Column>
+                    <Column field="date" header="Date"></Column>
+                </DataTable>
+            </div>
 
-            <DataTable header="RowSpan" value={cars} rowGroupMode="rowspan" sortField="brand" sortOrder={1} groupField="brand"
-                style={{marginTop:'30px'}}>
-                <Column field="brand" header="Brand" />
-                <Column field="year" header="Year" />
-                <Column field="color" header="Color" />
-                <Column field="vin" header="Vin" />
-            </DataTable>
+            <div className="card">
+                <h5>RowSpan Grouping</h5>
+                <DataTable value={customers} rowGroupMode="rowspan" groupField="representative.name"
+                    sortMode="single" sortField="representative.name" sortOrder={1}>
+                    <Column header="#" headerStyle={{ width: '3em' }} body={(data, props) => props.rowIndex + 1}></Column>
+                    <Column field="representative.name" header="Representative" body={representativeBodyTemplate}></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="country" header="Country" body={countryBodyTemplate}></Column>
+                    <Column field="company" header="Company"></Column>
+                    <Column field="status" header="Status" body={statusBodyTemplate}></Column>
+                    <Column field="date" header="Date"></Column>
+                </DataTable>
+            </div>
         </div>
     );
+}
+                `
+            }
+        };
+
+        this.extFiles = {
+            'src/demo/DataTableDemo.css': {
+                content: `
+.datatable-rowgroup-demo .p-rowgroup-footer td {
+    font-weight: 700;
+}
+
+.datatable-rowgroup-demo .p-rowgroup-header span {
+    font-weight: 700;
+}
+
+.datatable-rowgroup-demo .p-rowgroup-header .p-row-toggler {
+    vertical-align: middle;
+    margin-right: .25rem;
 }
                 `
             }
@@ -474,7 +618,7 @@ const DataTableRowGroupDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Source">
-                        <LiveEditor name="DataTableRowGroupDemo" sources={this.sources} service="CarService" data="cars-medium" />
+                        <LiveEditor name="DataTableRowGroupDemo" sources={this.sources} service="CustomerService" data="customers-medium" extFiles={this.extFiles} />
                     </TabPanel>
                 </TabView>
             </div>

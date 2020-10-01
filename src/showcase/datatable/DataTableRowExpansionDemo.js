@@ -8,7 +8,7 @@ import { Toast } from '../../components/toast/Toast';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { LiveEditor } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
-import { CodeHighlight } from '../codehighlight/CodeHighlight';
+import './DataTableDemo.scss';
 
 export class DataTableRowExpansionDemo extends Component {
 
@@ -83,7 +83,7 @@ export class DataTableRowExpansionDemo extends Component {
     }
 
     imageBodyTemplate(rowData) {
-        return <img src={`showcase/demo/images/product/${rowData.image}`} alt={rowData.image} className="product-image" />;
+        return <img src={`showcase/demo/images/product/${rowData.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="product-image" />;
     }
 
     priceBodyTemplate(rowData) {
@@ -171,6 +171,7 @@ import ProductService from '../service/ProductService';
 import { Rating } from 'primereact/rating';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
+import './DataTableDemo.css';
 
 export class DataTableRowExpansionDemo extends Component {
 
@@ -245,7 +246,7 @@ export class DataTableRowExpansionDemo extends Component {
     }
 
     imageBodyTemplate(rowData) {
-        return <img src={\`showcase/demo/images/product/\${rowData.image}\`} alt={rowData.image} className="product-image" />;
+        return <img src={\`showcase/demo/images/product/\${rowData.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="product-image" />;
     }
 
     priceBodyTemplate(rowData) {
@@ -310,58 +311,125 @@ export class DataTableRowExpansionDemo extends Component {
             'hooks': {
                 tabName: 'Hooks Source',
                 content: `
-import React, { useState, useEffect } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service/CarService';
+import React, { useState, useEffect, useRef } from 'react';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import ProductService from '../service/ProductService';
+import { Rating } from 'primereact/rating';
+import { Button } from 'primereact/button';
+import { Toast } from 'primereact/toast';
+import './DataTableDemo.css';
 
 const DataTableRowExpansionDemo = () => {
-    const [cars, setCars] = useState([]);
+    const [products, setProducts] = useState([]);
     const [expandedRows, setExpandedRows] = useState(null);
-
-    const carservice = new CarService();
+    const toast = useRef(null);
+    const isMounted = useRef(false);
+    const productService = new ProductService();
 
     useEffect(() => {
-        carservice.getCarsSmall().then(data => setCars(data));
+        if (isMounted.current) {
+            const summary = expandedRows !== null ? 'All Rows Expanded' : 'All Rows Collapsed';
+            toast.current.show({severity: 'success', summary: \`\${summary}\`, life: 3000});
+        }
+    }, [expandedRows]);
+
+    useEffect(() => {
+        isMounted.current = true;
+        productService.getProductsWithOrdersSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+    const onRowExpand = (event) => {
+        toast.current.show({severity: 'info', summary: 'Product Expanded', detail: event.data.name, life: 3000});
+    }
+
+    const onRowCollapse = (event) => {
+        toast.current.show({severity: 'success', summary: 'Product Collapsed', detail: event.data.name, life: 3000});
+    }
+
+    const expandAll = () => {
+        let _expandedRows = {};
+        products.forEach(p => _expandedRows[\`\${p.id}\`] = true);
+
+        setExpandedRows(_expandedRows);
+    }
+
+    const collapseAll = () => {
+        setExpandedRows(null);
+    }
+
+    const formatCurrency = (value) => {
+        return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+    }
+
+    const amountBodyTemplate = (rowData) => {
+        return formatCurrency(rowData.amount);
+    }
+
+    const statusOrderBodyTemplate = (rowData) => {
+        return <span className={\`order-badge order-\${rowData.status.toLowerCase()}\`}>{rowData.status}</span>;
+    }
+
+    const searchBodyTemplate = () => {
+        return <Button icon="pi pi-search" />;
+    }
+
+    const imageBodyTemplate = (rowData) => {
+        return <img src={\`showcase/demo/images/product/\${rowData.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="product-image" />;
+    }
+
+    const priceBodyTemplate = (rowData) => {
+        return formatCurrency(rowData.price);
+    }
+
+    const ratingBodyTemplate = (rowData) => {
+        return <Rating value={rowData.rating} readonly cancel={false} />;
+    }
+
+    const statusBodyTemplate = (rowData) => {
+        return <span className={\`product-badge status-\${rowData.inventoryStatus.toLowerCase()}\`}>{rowData.inventoryStatus}</span>;
+    }
+
     const rowExpansionTemplate = (data) => {
-        const src = "showcase/demo/images/car/" + data.brand + ".png";
-
-        return  (
-            <div className="p-grid p-fluid" style={{padding: '2em 1em 1em 1em'}}>
-                <div className="p-col-12 p-md-3" style={{textAlign:'center'}}>
-                    <img src={src} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={data.brand}/>
-                </div>
-                    <div className="p-col-12 p-md-9">
-                    <div className="p-grid">
-                        <div className="p-md-2">Vin: </div>
-                        <div className="p-md-10" style={{fontWeight:'bold'}}>{data.vin}</div>
-
-                        <div className="p-md-2">Year: </div>
-                        <div className="p-md-10" style={{fontWeight:'bold'}}>{data.year}</div>
-
-                        <div className="p-md-2">Brand: </div>
-                        <div className="p-md-10" style={{fontWeight:'bold'}}>{data.brand}</div>
-
-                        <div className="p-md-2">Color: </div>
-                        <div className="p-md-10" style={{fontWeight:'bold'}}>{data.color}</div>
-                    </div>
-                </div>
+        return (
+            <div className="orders-subtable">
+                <h5>Orders for {data.name}</h5>
+                <DataTable value={data.orders}>
+                    <Column field="id" header="Id" sortable></Column>
+                    <Column field="customer" header="Customer" sortable></Column>
+                    <Column field="date" header="Date" sortable></Column>
+                    <Column field="amount" header="Amount" body={amountBodyTemplate} sortable></Column>
+                    <Column field="status" header="Status" body={statusOrderBodyTemplate} sortable></Column>
+                    <Column headerStyle={{ width: '4rem'}} body={searchBodyTemplate}></Column>
+                </DataTable>
             </div>
         );
-    };
+    }
+
+    const header = (
+        <div className="table-header-container">
+            <Button icon="pi pi-plus" label="Expand All" onClick={expandAll} className="p-mr-2" />
+            <Button icon="pi pi-minus" label="Collapse All" onClick={collapseAll} />
+        </div>
+    );
 
     return (
-        <div>
-            <DataTable value={cars} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
-                    rowExpansionTemplate={rowExpansionTemplate} dataKey="vin">
-                <Column expander style={{width: '3em'}} />
-                <Column field="vin" header="Vin" />
-                <Column field="year" header="Year" />
-                <Column field="brand" header="Brand" />
-                <Column field="color" header="Color" />
-            </DataTable>
+        <div className="datatable-rowexpansion-demo">
+            <Toast ref={toast} />
+
+            <div className="card">
+                <DataTable value={products} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
+                    onRowExpand={onRowExpand} onRowCollapse={onRowCollapse}
+                    rowExpansionTemplate={rowExpansionTemplate} dataKey="id" header={header}>
+                    <Column expander style={{ width: '3em' }} />
+                    <Column field="name" header="Name" sortable />
+                    <Column header="Image" body={imageBodyTemplate} />
+                    <Column field="price" header="Price" sortable body={priceBodyTemplate} />
+                    <Column field="category" header="Category" sortable />
+                    <Column field="rating" header="Reviews" sortable body={ratingBodyTemplate} />
+                    <Column field="inventoryStatus" header="Status" sortable body={statusBodyTemplate} />
+                </DataTable>
+            </div>
         </div>
     );
 }
@@ -370,60 +438,142 @@ const DataTableRowExpansionDemo = () => {
             'ts': {
                 tabName: 'TS Source',
                 content: `
-import React, { useState, useEffect } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service/CarService';
+import React, { useState, useEffect, useRef } from 'react';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import ProductService from '../service/ProductService';
+import { Rating } from 'primereact/rating';
+import { Button } from 'primereact/button';
+import { Toast } from 'primereact/toast';
+import './DataTableDemo.css';
 
 const DataTableRowExpansionDemo = () => {
-    const [cars, setCars] = useState([]);
-    const [expandedRows, setExpandedRows] = useState<any>(null);
-
-    const carservice = new CarService();
+    const [products, setProducts] = useState([]);
+    const [expandedRows, setExpandedRows] = useState(null);
+    const toast = useRef(null);
+    const isMounted = useRef(false);
+    const productService = new ProductService();
 
     useEffect(() => {
-        carservice.getCarsSmall().then(data => setCars(data));
+        if (isMounted.current) {
+            const summary = expandedRows !== null ? 'All Rows Expanded' : 'All Rows Collapsed';
+            toast.current.show({severity: 'success', summary: \`\${summary}\`, life: 3000});
+        }
+    }, [expandedRows]);
+
+    useEffect(() => {
+        isMounted.current = true;
+        productService.getProductsWithOrdersSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const rowExpansionTemplate = (data: any) => {
-        const src = "showcase/demo/images/car/" + data.brand + ".png";
+    const onRowExpand = (event) => {
+        toast.current.show({severity: 'info', summary: 'Product Expanded', detail: event.data.name, life: 3000});
+    }
 
-        return  (
-            <div className="p-grid p-fluid" style={{padding: '2em 1em 1em 1em'}}>
-                <div className="p-col-12 p-md-3" style={{textAlign:'center'}}>
-                    <img src={src} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={data.brand}/>
-                </div>
-                    <div className="p-col-12 p-md-9">
-                    <div className="p-grid">
-                        <div className="p-md-2">Vin: </div>
-                        <div className="p-md-10" style={{fontWeight:'bold'}}>{data.vin}</div>
+    const onRowCollapse = (event) => {
+        toast.current.show({severity: 'success', summary: 'Product Collapsed', detail: event.data.name, life: 3000});
+    }
 
-                        <div className="p-md-2">Year: </div>
-                        <div className="p-md-10" style={{fontWeight:'bold'}}>{data.year}</div>
+    const expandAll = () => {
+        let _expandedRows = {};
+        products.forEach(p => _expandedRows[\`\${p.id}\`] = true);
 
-                        <div className="p-md-2">Brand: </div>
-                        <div className="p-md-10" style={{fontWeight:'bold'}}>{data.brand}</div>
+        setExpandedRows(_expandedRows);
+    }
 
-                        <div className="p-md-2">Color: </div>
-                        <div className="p-md-10" style={{fontWeight:'bold'}}>{data.color}</div>
-                    </div>
-                </div>
+    const collapseAll = () => {
+        setExpandedRows(null);
+    }
+
+    const formatCurrency = (value) => {
+        return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+    }
+
+    const amountBodyTemplate = (rowData) => {
+        return formatCurrency(rowData.amount);
+    }
+
+    const statusOrderBodyTemplate = (rowData) => {
+        return <span className={\`order-badge order-\${rowData.status.toLowerCase()}\`}>{rowData.status}</span>;
+    }
+
+    const searchBodyTemplate = () => {
+        return <Button icon="pi pi-search" />;
+    }
+
+    const imageBodyTemplate = (rowData) => {
+        return <img src={\`showcase/demo/images/product/\${rowData.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="product-image" />;
+    }
+
+    const priceBodyTemplate = (rowData) => {
+        return formatCurrency(rowData.price);
+    }
+
+    const ratingBodyTemplate = (rowData) => {
+        return <Rating value={rowData.rating} readonly cancel={false} />;
+    }
+
+    const statusBodyTemplate = (rowData) => {
+        return <span className={\`product-badge status-\${rowData.inventoryStatus.toLowerCase()}\`}>{rowData.inventoryStatus}</span>;
+    }
+
+    const rowExpansionTemplate = (data) => {
+        return (
+            <div className="orders-subtable">
+                <h5>Orders for {data.name}</h5>
+                <DataTable value={data.orders}>
+                    <Column field="id" header="Id" sortable></Column>
+                    <Column field="customer" header="Customer" sortable></Column>
+                    <Column field="date" header="Date" sortable></Column>
+                    <Column field="amount" header="Amount" body={amountBodyTemplate} sortable></Column>
+                    <Column field="status" header="Status" body={statusOrderBodyTemplate} sortable></Column>
+                    <Column headerStyle={{ width: '4rem'}} body={searchBodyTemplate}></Column>
+                </DataTable>
             </div>
         );
-    };
+    }
 
-    return (
-        <div>
-            <DataTable value={cars} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
-                    rowExpansionTemplate={rowExpansionTemplate} dataKey="vin">
-                <Column expander style={{width: '3em'}} />
-                <Column field="vin" header="Vin" />
-                <Column field="year" header="Year" />
-                <Column field="brand" header="Brand" />
-                <Column field="color" header="Color" />
-            </DataTable>
+    const header = (
+        <div className="table-header-container">
+            <Button icon="pi pi-plus" label="Expand All" onClick={expandAll} className="p-mr-2" />
+            <Button icon="pi pi-minus" label="Collapse All" onClick={collapseAll} />
         </div>
     );
+
+    return (
+        <div className="datatable-rowexpansion-demo">
+            <Toast ref={toast} />
+
+            <div className="card">
+                <DataTable value={products} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
+                    onRowExpand={onRowExpand} onRowCollapse={onRowCollapse}
+                    rowExpansionTemplate={rowExpansionTemplate} dataKey="id" header={header}>
+                    <Column expander style={{ width: '3em' }} />
+                    <Column field="name" header="Name" sortable />
+                    <Column header="Image" body={imageBodyTemplate} />
+                    <Column field="price" header="Price" sortable body={priceBodyTemplate} />
+                    <Column field="category" header="Category" sortable />
+                    <Column field="rating" header="Reviews" sortable body={ratingBodyTemplate} />
+                    <Column field="inventoryStatus" header="Status" sortable body={statusBodyTemplate} />
+                </DataTable>
+            </div>
+        </div>
+    );
+}
+                `
+            }
+        };
+
+        this.extFiles = {
+            'src/demo/DataTableDemo.css': {
+                content: `
+.datatable-rowexpansion-demo .product-image {
+    width: 100px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.datatable-rowexpansion-demo .orders-subtable {
+    padding: 1rem;
 }
                 `
             }
@@ -439,21 +589,7 @@ const DataTableRowExpansionDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Source">
-                        <LiveEditor name="DataTableRowExpansionDemo" sources={this.sources} service="CarService" data="cars-small" />
-<CodeHighlight lang="scss">
-{`
-.datatable-rowexpansion-demo {
-    .product-image {
-        width: 100px;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
-    }
-
-    .orders-subtable {
-        padding: 1rem;
-    }
-}
-`}
-</CodeHighlight>
+                        <LiveEditor name="DataTableRowExpansionDemo" sources={this.sources} service="ProductService" data="products-orders-small" extFiles={this.extFiles} />
                     </TabPanel>
                 </TabView>
             </div>
