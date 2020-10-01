@@ -174,54 +174,63 @@ export class DataTableContextMenuDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState, useEffect, useRef } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {ContextMenu} from 'primereact/contextmenu';
-import {Toast} from 'primereact/toast';
-import {CarService} from '../service/CarService';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { ContextMenu } from 'primereact/contextmenu';
+import { Toast } from 'primereact/toast';
+import ProductService from '../service/ProductService';
 
 const DataTableContextMenuDemo = () => {
-    const [cars, setCars] = useState([]);
-    const [selectedCar, setSelectedCar] = useState(null);
-    const menu = [
-        {label: 'View', icon: 'pi pi-fw pi-search', command: () => viewCar(selectedCar)},
-        {label: 'Delete', icon: 'pi pi-fw pi-times', command: () => deleteCar(selectedCar)}
+    const [products, setProducts] = useState([]);
+    const [selectedProduct, setSelectedProduct] = useState(null);
+    const toast = useRef(null);
+    const cm = useRef(null);
+    const menuModel = [
+        {label: 'View', icon: 'pi pi-fw pi-search', command: () => viewProduct(selectedProduct)},
+        {label: 'Delete', icon: 'pi pi-fw pi-times', command: () => deleteProduct(selectedProduct)}
     ];
-
-    const carservice = new CarService();
-    let toast = useRef(null);
-    let cm = useRef(null);
+    const productService = new ProductService();
 
     useEffect(() => {
-        carservice.getCarsSmall().then(data => setCars(data));
+        productService.getProductsSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const viewCar = (car) => {
-        toast.current.show({severity: 'info', summary: 'Car Selected', detail: car.vin + ' - ' + car.brand});
-    };
+    const viewProduct = (product) => {
+        toast.current.show({severity: 'info', summary: 'Product Selected', detail: product.name});
+    }
 
-    const deleteCar = (car) => {
-        let carsList = [...cars];
-        carsList = carsList.filter((c) => c.vin !== car.vin);
+    const deleteProduct = (product) => {
+        let _products = [...products];
+        _products = _products.filter((p) => p.id !== product.id);
 
-        toast.current.show({severity: 'info', summary: 'Car Delete', detail: car.vin + ' - ' + car.brand});
-        setCars(carsList);
-    };
+        toast.current.show({severity: 'info', summary: 'Product Deleted', detail: product.name});
+        setProducts(_products);
+    }
+
+    const formatCurrency = (value) => {
+        return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+    }
+
+    const priceBodyTemplate = (rowData) => {
+        return formatCurrency(rowData.price);
+    }
 
     return (
         <div>
             <Toast ref={toast}></Toast>
 
-            <ContextMenu model={menu} ref={cm} onHide={() => setSelectedCar(null)}/>
+            <ContextMenu model={menuModel} ref={cm} onHide={() => setSelectedProduct(null)}/>
 
-            <DataTable value={cars} header="Right Click"
-                contextMenuSelection={selectedCar} onContextMenuSelectionChange={e => setSelectedCar(e.value)}
-                onContextMenu={e => cm.current.show(e.originalEvent)}>
-                <Column field="vin" header="Vin" />
-                <Column field="year" header="Year" />
-                <Column field="brand" header="Brand" />
-                <Column field="color" header="Color" />
-            </DataTable>
+            <div className="card">
+                <DataTable value={products} contextMenuSelection={selectedProduct}
+                    onContextMenuSelectionChange={e => setSelectedProduct(e.value)}
+                    onContextMenu={e => cm.current.show(e.originalEvent)}>
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="price" header="Price" body={priceBodyTemplate} />
+                </DataTable>
+            </div>
         </div>
     );
 }
@@ -231,54 +240,63 @@ const DataTableContextMenuDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState, useEffect, useRef } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {ContextMenu} from 'primereact/contextmenu';
-import {Toast} from 'primereact/toast';
-import {CarService} from '../service/CarService';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { ContextMenu } from 'primereact/contextmenu';
+import { Toast } from 'primereact/toast';
+import ProductService from '../service/ProductService';
 
 const DataTableContextMenuDemo = () => {
-    const [cars, setCars] = useState([]);
-    const [selectedCar, setSelectedCar] = useState(null);
-    const menu = [
-        {label: 'View', icon: 'pi pi-fw pi-search', command: () => viewCar(selectedCar)},
-        {label: 'Delete', icon: 'pi pi-fw pi-times', command: () => deleteCar(selectedCar)}
+    const [products, setProducts] = useState([]);
+    const [selectedProduct, setSelectedProduct] = useState(null);
+    const toast = useRef(null);
+    const cm = useRef(null);
+    const menuModel = [
+        {label: 'View', icon: 'pi pi-fw pi-search', command: () => viewProduct(selectedProduct)},
+        {label: 'Delete', icon: 'pi pi-fw pi-times', command: () => deleteProduct(selectedProduct)}
     ];
-
-    const carservice = new CarService();
-    let toast = useRef<any>(null);
-    let cm = useRef<any>(null);
+    const productService = new ProductService();
 
     useEffect(() => {
-        carservice.getCarsSmall().then(data => setCars(data));
+        productService.getProductsSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const viewCar = (car: any) => {
-        toast.current.show({severity: 'info', summary: 'Car Selected', detail: car.vin + ' - ' + car.brand});
-    };
+    const viewProduct = (product) => {
+        toast.current.show({severity: 'info', summary: 'Product Selected', detail: product.name});
+    }
 
-    const deleteCar = (car: any) => {
-        let carsList: any = [...cars];
-        carsList = carsList.filter((c) => c.vin !== car.vin);
+    const deleteProduct = (product) => {
+        let _products = [...products];
+        _products = _products.filter((p) => p.id !== product.id);
 
-        toast.current.show({severity: 'info', summary: 'Car Delete', detail: car.vin + ' - ' + car.brand});
-        setCars(carsList);
-    };
+        toast.current.show({severity: 'info', summary: 'Product Deleted', detail: product.name});
+        setProducts(_products);
+    }
+
+    const formatCurrency = (value) => {
+        return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+    }
+
+    const priceBodyTemplate = (rowData) => {
+        return formatCurrency(rowData.price);
+    }
 
     return (
         <div>
             <Toast ref={toast}></Toast>
 
-            <ContextMenu model={menu} ref={cm} onHide={() => setSelectedCar(null)}/>
+            <ContextMenu model={menuModel} ref={cm} onHide={() => setSelectedProduct(null)}/>
 
-            <DataTable value={cars} header="Right Click"
-                contextMenuSelection={selectedCar} onContextMenuSelectionChange={e => setSelectedCar(e.value)}
-                onContextMenu={e => cm.current.show(e.originalEvent)}>
-                <Column field="vin" header="Vin" />
-                <Column field="year" header="Year" />
-                <Column field="brand" header="Brand" />
-                <Column field="color" header="Color" />
-            </DataTable>
+            <div className="card">
+                <DataTable value={products} contextMenuSelection={selectedProduct}
+                    onContextMenuSelectionChange={e => setSelectedProduct(e.value)}
+                    onContextMenu={e => cm.current.show(e.originalEvent)}>
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="price" header="Price" body={priceBodyTemplate} />
+                </DataTable>
+            </div>
         </div>
     );
 }
@@ -296,7 +314,7 @@ const DataTableContextMenuDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Source">
-                        <LiveEditor name="DataTableContextMenuDemo" sources={this.sources} service="CarService" data="cars-small" />
+                        <LiveEditor name="DataTableContextMenuDemo" sources={this.sources} service="ProductService" data="products-small" />
                     </TabPanel>
                 </TabView>
             </div>

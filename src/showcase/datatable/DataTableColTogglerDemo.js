@@ -146,35 +146,35 @@ export class DataTableColTogglerDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState, useEffect } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service/CarService';
-import {MultiSelect} from 'primereact/multiselect';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import ProductService from '../service/ProductService';
+import { MultiSelect } from 'primereact/multiselect';
 
 const DataTableColTogglerDemo = () => {
     const columns = [
-        {field: 'vin', header: 'Vin'},
-        {field: 'year', header: 'Year'},
-        {field: 'brand', header: 'Brand'},
-        {field: 'color', header: 'Color'}
+        {field: 'name', header: 'Name'},
+        {field: 'category', header: 'Category'},
+        {field: 'quantity', header: 'Quantity'}
     ];
+
     const [selectedColumns, setSelectedColumns] = useState(columns);
-    const [cars, setCars] = useState([]);
-    const carservice = new CarService();
+    const [products, setProducts] = useState([]);
+    const productService = new ProductService();
 
     useEffect(() => {
-        carservice.getCarsSmall().then(data => setCars(data));
+        productService.getProductsSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onColumnToggle = (event) => {
-        let _selectedColumns = event.value;
-        let orderedSelectedColumns = columns.filter(col => _selectedColumns.some(sCol => sCol.field === col.field));
+        let selectedColumns = event.value;
+        let orderedSelectedColumns = columns.filter(col => selectedColumns.some(sCol => sCol.field === col.field));
         setSelectedColumns(orderedSelectedColumns);
-    };
+    }
 
     const header = (
-        <div style={{textAlign:'left'}}>
-            <MultiSelect value={selectedColumns} options={columns} optionLabel="field" onChange={onColumnToggle} style={{width:'250px'}}/>
+        <div style={{ textAlign:'left' }}>
+            <MultiSelect value={selectedColumns} options={columns} optionLabel="header" onChange={onColumnToggle} style={{width:'20em'}}/>
         </div>
     );
 
@@ -184,9 +184,12 @@ const DataTableColTogglerDemo = () => {
 
     return (
         <div>
-            <DataTable value={cars} header={header}>
-                {columnComponents}
-            </DataTable>
+            <div className="card">
+                <DataTable value={products} header={header}>
+                    <Column field="code" header="Code" />
+                    {columnComponents}
+                </DataTable>
+            </div>
         </div>
     );
 }
@@ -196,47 +199,50 @@ const DataTableColTogglerDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState, useEffect } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service/CarService';
-import {MultiSelect} from 'primereact/multiselect';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import ProductService from '../service/ProductService';
+import { MultiSelect } from 'primereact/multiselect';
 
 const DataTableColTogglerDemo = () => {
     const columns = [
-        {field: 'vin', header: 'Vin'},
-        {field: 'year', header: 'Year'},
-        {field: 'brand', header: 'Brand'},
-        {field: 'color', header: 'Color'}
+        {field: 'name', header: 'Name'},
+        {field: 'category', header: 'Category'},
+        {field: 'quantity', header: 'Quantity'}
     ];
+
     const [selectedColumns, setSelectedColumns] = useState(columns);
-    const [cars, setCars] = useState([]);
-    const carservice = new CarService();
+    const [products, setProducts] = useState([]);
+    const productService = new ProductService();
 
     useEffect(() => {
-        carservice.getCarsSmall().then(data => setCars(data));
+        productService.getProductsSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const onColumnToggle = (event: any) => {
-        let _selectedColumns: any = event.value;
-        let orderedSelectedColumns = columns.filter(col => _selectedColumns.some(sCol => sCol.field === col.field));
+    const onColumnToggle = (event) => {
+        let selectedColumns = event.value;
+        let orderedSelectedColumns = columns.filter(col => selectedColumns.some(sCol => sCol.field === col.field));
         setSelectedColumns(orderedSelectedColumns);
-    };
+    }
 
     const header = (
-        <div style={{textAlign:'left'}}>
-            <MultiSelect value={selectedColumns} options={columns} optionLabel="field" onChange={onColumnToggle} style={{width:'250px'}}/>
+        <div style={{ textAlign:'left' }}>
+            <MultiSelect value={selectedColumns} options={columns} optionLabel="header" onChange={onColumnToggle} style={{width:'20em'}}/>
         </div>
     );
 
-    const columnComponents = selectedColumns.map(col => {
+    const columnComponents = selectedColumns.map(col=> {
         return <Column key={col.field} field={col.field} header={col.header} />;
     });
 
     return (
         <div>
-            <DataTable value={cars} header={header}>
-                {columnComponents}
-            </DataTable>
+            <div className="card">
+                <DataTable value={products} header={header}>
+                    <Column field="code" header="Code" />
+                    {columnComponents}
+                </DataTable>
+            </div>
         </div>
     );
 }
@@ -254,7 +260,7 @@ const DataTableColTogglerDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Source">
-                        <LiveEditor name="DataTableColTogglerDemo" sources={this.sources} service="CarService" data="cars-small" />
+                        <LiveEditor name="DataTableColTogglerDemo" sources={this.sources} service="ProductService" data="products-small" />
                     </TabPanel>
                 </TabView>
             </div>
