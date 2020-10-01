@@ -26,7 +26,7 @@ export class OrderListDemo extends Component {
         return (
             <div className="product-item">
                 <div className="image-container">
-                    <img src={`showcase/demo/images/product/${item.image}`} alt={item.name} />
+                    <img src={`showcase/demo/images/product/${item.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} />
                 </div>
                 <div className="product-list-detail">
                     <h5 className="p-mb-2">{item.name}</h5>
