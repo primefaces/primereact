@@ -44,7 +44,7 @@ export class AutoCompleteDemo extends Component {
     itemTemplate(item) {
         return (
             <div className="country-item">
-                <img alt={item.name} src={`showcase/demo/images/flag_placeholder.png`} className={`flag flag-${item.code.toLowerCase()}`} />
+                <img alt={item.name} src={`showcase/demo/images/flag_placeholder.png`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={`flag flag-${item.code.toLowerCase()}`} />
                 <div>{item.name}</div>
             </div>
         );
