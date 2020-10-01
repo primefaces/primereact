@@ -163,54 +163,56 @@ export class DataTableLazyDemo extends Component {
             'hooks': {
                 tabName: 'Hooks Source',
                 content: `
-import React, { useState, useEffect } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service/CarService';
+import React, { useState, useEffect, useRef } from 'react';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { CustomerService } from '../service/CustomerService';
 
 const DataTableLazyDemo = () => {
-    const [cars, setCars] = useState([]);
-    const [datasource, setDatasource] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [first, setFirst] = useState(0);
     const [totalRecords, setTotalRecords] = useState(0);
-    const rows = 10;
-    const carservice = new CarService();
+    const [customers, setCustomers] = useState(null);
+    const datasource = useRef(null);
+    const customerService = new CustomerService();
 
     useEffect(() => {
+        setLoading(true);
+
         setTimeout(() => {
-            carservice.getCarsLarge().then(data => {
-                setDatasource(data);
+            customerService.getCustomersLarge().then(data => {
+                datasource.current = data;
                 setTotalRecords(data.length);
-                setCars(data.slice(0, rows));
+                setCustomers(datasource.slice(0, 10));
                 setLoading(false);
             });
-        }, 1000);
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        }, 500);
+    }
 
     const onPage = (event) => {
         setLoading(true);
 
         //imitate delay of a backend call
         setTimeout(() => {
-            const startIndex = event.first;
-            const endIndex = event.first + rows;
+            const { first:_first, rows } = event;
 
-            setFirst(startIndex);
-            setCars(datasource.slice(startIndex, endIndex));
+            setFirst(_first);
+            setCustomers(datasource.current.slice(_first, _first + rows));
             setLoading(false);
-        }, 1000);
-    }
+        }, 500);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div>
-            <DataTable value={cars} paginator rows={rows} totalRecords={totalRecords}
-                lazy first={first} onPage={onPage} loading={loading}>
-                <Column field="vin" header="Vin" />
-                <Column field="year" header="Year" />
-                <Column field="brand" header="Brand" />
-                <Column field="color" header="Color" />
-            </DataTable>
+            <div className="card">
+                <DataTable value={customers} paginator rows={10} totalRecords={totalRecords}
+                    lazy first={first} onPage={onPage} loading={loading}>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="country.name" header="Country"></Column>
+                    <Column field="company" header="Company"></Column>
+                    <Column field="representative.name" header="Representative"></Column>
+                </DataTable>
+            </div>
         </div>
     );
 }
@@ -219,54 +221,56 @@ const DataTableLazyDemo = () => {
             'ts': {
                 tabName: 'TS Source',
                 content: `
-import React, { useState, useEffect } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service/CarService';
+import React, { useState, useEffect, useRef } from 'react';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { CustomerService } from '../service/CustomerService';
 
 const DataTableLazyDemo = () => {
-    const [cars, setCars] = useState([]);
-    const [datasource, setDatasource] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [first, setFirst] = useState(0);
     const [totalRecords, setTotalRecords] = useState(0);
-    const rows = 10;
-    const carservice = new CarService();
+    const [customers, setCustomers] = useState(null);
+    const datasource = useRef(null);
+    const customerService = new CustomerService();
 
     useEffect(() => {
+        setLoading(true);
+
         setTimeout(() => {
-            carservice.getCarsLarge().then(data => {
-                setDatasource(data);
+            customerService.getCustomersLarge().then(data => {
+                datasource.current = data;
                 setTotalRecords(data.length);
-                setCars(data.slice(0, rows));
+                setCustomers(datasource.slice(0, 10));
                 setLoading(false);
             });
-        }, 1000);
+        }, 500);
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const onPage = (event: any) => {
+    const onPage = (event) => {
         setLoading(true);
 
         //imitate delay of a backend call
         setTimeout(() => {
-            const startIndex = event.first;
-            const endIndex = event.first + rows;
+            const { first:_first, rows } = event;
 
-            setFirst(startIndex);
-            setCars(datasource.slice(startIndex, endIndex));
+            setFirst(_first);
+            setCustomers(datasource.current.slice(_first, _first + rows));
             setLoading(false);
-        }, 1000);
+        }, 500);
     }
 
     return (
         <div>
-            <DataTable value={cars} paginator rows={rows} totalRecords={totalRecords}
-                lazy first={first} onPage={onPage} loading={loading}>
-                <Column field="vin" header="Vin" />
-                <Column field="year" header="Year" />
-                <Column field="brand" header="Brand" />
-                <Column field="color" header="Color" />
-            </DataTable>
+            <div className="card">
+                <DataTable value={customers} paginator rows={10} totalRecords={totalRecords}
+                    lazy first={first} onPage={onPage} loading={loading}>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="country.name" header="Country"></Column>
+                    <Column field="company" header="Company"></Column>
+                    <Column field="representative.name" header="Representative"></Column>
+                </DataTable>
+            </div>
         </div>
     );
 }
@@ -284,7 +288,7 @@ const DataTableLazyDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Source">
-                        <LiveEditor name="DataTableLazyDemo" sources={this.sources} service="CarService" data="cars-large" />
+                        <LiveEditor name="DataTableLazyDemo" sources={this.sources} service="CustomerService" data="customers-large" />
                     </TabPanel>
                 </TabView>
             </div>

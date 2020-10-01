@@ -114,31 +114,35 @@ export class DataTablePaginatorDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState, useEffect } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service/CarService';
-import {Button} from 'primereact/button';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { CustomerService } from '../service/CustomerService';
+import { Button } from 'primereact/button';
 
 const DataTablePaginatorDemo = () => {
-    const [cars, setCars] = useState([]);
-    const carservice = new CarService();
+    const [customers, setCustomers] = useState([]);
+    const customerService = new CustomerService();
 
     useEffect(() => {
-        carservice.getCarsLarge().then(data => setCars(data));
+        customerService.getCustomersLarge().then(data => setCustomers(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const paginatorLeft = <Button icon="pi pi-refresh"/>;
+    const paginatorLeft = <Button type="button" icon="pi pi-refresh" className="p-button-text" />;
+    const paginatorRight = <Button type="button" icon="pi pi-cloud" className="p-button-text" />;
 
     return (
-        <div className="datatable-paginator-demo">
-            <DataTable value={cars} paginator paginatorLeft={paginatorLeft}
-                paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" rows={10} rowsPerPageOptions={[5,10,20]} >
-                <Column field="vin" header="Vin" />
-                <Column field="year" header="Year" />
-                <Column field="brand" header="Brand" />
-                <Column field="color" header="Color" />
-            </DataTable>
+        <div>
+            <div className="card">
+                <DataTable value={customers} paginator
+                    paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" rows={10} rowsPerPageOptions={[10,20,50]}
+                    paginatorLeft={paginatorLeft} paginatorRight={paginatorRight}>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="country.name" header="Country"></Column>
+                    <Column field="company" header="Company"></Column>
+                    <Column field="representative.name" header="Representative"></Column>
+                </DataTable>
+            </div>
         </div>
     );
 }
@@ -148,44 +152,40 @@ const DataTablePaginatorDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState, useEffect } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service/CarService';
-import {Button} from 'primereact/button';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { CustomerService } from '../service/CustomerService';
+import { Button } from 'primereact/button';
 
 const DataTablePaginatorDemo = () => {
-    const [cars, setCars] = useState([]);
-    const carservice = new CarService();
+    const [customers, setCustomers] = useState([]);
+    const customerService = new CustomerService();
 
     useEffect(() => {
-        carservice.getCarsLarge().then(data => setCars(data));
+        customerService.getCustomersLarge().then(data => setCustomers(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const paginatorLeft = <Button icon="pi pi-refresh"/>;
+    const paginatorLeft = <Button type="button" icon="pi pi-refresh" className="p-button-text" />;
+    const paginatorRight = <Button type="button" icon="pi pi-cloud" className="p-button-text" />;
 
     return (
-        <div className="datatable-paginator-demo">
-            <DataTable value={cars} paginator paginatorLeft={paginatorLeft}
-                paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" rows={10} rowsPerPageOptions={[5,10,20]} >
-                <Column field="vin" header="Vin" />
-                <Column field="year" header="Year" />
-                <Column field="brand" header="Brand" />
-                <Column field="color" header="Color" />
-            </DataTable>
+        <div>
+            <div className="card">
+                <DataTable value={customers} paginator
+                    paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" rows={10} rowsPerPageOptions={[10,20,50]}
+                    paginatorLeft={paginatorLeft} paginatorRight={paginatorRight}>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="country.name" header="Country"></Column>
+                    <Column field="company" header="Company"></Column>
+                    <Column field="representative.name" header="Representative"></Column>
+                </DataTable>
+            </div>
         </div>
     );
 }
                 `
             }
-        }
-
-        this.extFiles = {
-            'index.css': `
-.datatable-paginator-demo .p-paginator-current {
-    float: right;
-}
-            `
         }
     }
 
@@ -198,7 +198,7 @@ const DataTablePaginatorDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Source">
-                        <LiveEditor name="DataTablePaginatorDemo" sources={this.sources} service="CarService" data="cars-large" extFiles={this.extFiles} />
+                        <LiveEditor name="DataTablePaginatorDemo" sources={this.sources} service="CustomerService" data="customers-large" />
                     </TabPanel>
                 </TabView>
             </div>
