@@ -47,7 +47,7 @@ export class ToggleButtonDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState } from 'react';
-import {ToggleButton} from 'primereact/togglebutton';
+import { ToggleButton } from 'primereact/togglebutton';
 
 const ToggleButtonDemo = () => {
     const [checked1, setChecked1] = useState(false);
@@ -55,14 +55,13 @@ const ToggleButtonDemo = () => {
 
     return (
         <div>
-            <h5>Basic</h5>
-            <ToggleButton style={{width:'150px'}} checked={checked1} onChange={(e) => setChecked1(e.value)} />
-            <p>Selected Value: {checked1 ? 'true' : 'false'}</p>
+            <div className="card">
+                <h5>Basic</h5>
+                <ToggleButton checked={checked1} onChange={(e) => setChecked1(e.value)} onIcon="pi pi-check" offIcon="pi pi-times" />
 
-            <h5>Custom</h5>
-            <ToggleButton style={{width:'150px'}} onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIcon="pi pi-times"
-                        checked={checked2} onChange={(e) => setChecked2(e.value)} />
-            <p>Selected Value: {checked2 ? 'true' : 'false'}</p>
+                <h5>Customized</h5>
+                <ToggleButton checked={checked2} onChange={(e) => setChecked2(e.value)} onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIcon="pi pi-times" style={{width: '10em'}} />
+            </div>
         </div>
     );
 }
@@ -72,22 +71,21 @@ const ToggleButtonDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState } from 'react';
-import {ToggleButton} from 'primereact/togglebutton';
+import { ToggleButton } from 'primereact/togglebutton';
 
 const ToggleButtonDemo = () => {
-    const [checked1, setChecked1] = useState<boolean>(false);
-    const [checked2, setChecked2] = useState<boolean>(false);
+    const [checked1, setChecked1] = useState(false);
+    const [checked2, setChecked2] = useState(false);
 
     return (
         <div>
-            <h5>Basic</h5>
-            <ToggleButton style={{width:'150px'}} checked={checked1} onChange={(e) => setChecked1(e.value)} />
-            <p>Selected Value: {checked1 ? 'true' : 'false'}</p>
+            <div className="card">
+                <h5>Basic</h5>
+                <ToggleButton checked={checked1} onChange={(e) => setChecked1(e.value)} onIcon="pi pi-check" offIcon="pi pi-times" />
 
-            <h5>Custom</h5>
-            <ToggleButton style={{width:'150px'}} onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIcon="pi pi-times"
-                        checked={checked2} onChange={(e) => setChecked2(e.value)} />
-            <p>Selected Value: {checked2 ? 'true' : 'false'}</p>
+                <h5>Customized</h5>
+                <ToggleButton checked={checked2} onChange={(e) => setChecked2(e.value)} onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIcon="pi pi-times" style={{width: '10em'}} />
+            </div>
         </div>
     );
 }

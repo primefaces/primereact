@@ -174,12 +174,11 @@ export class TieredMenuDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useRef } from 'react';
-import {TieredMenu} from 'primereact/tieredmenu';
-import {Button} from 'primereact/button';
+import { TieredMenu } from 'primereact/tieredmenu';
+import { Button } from 'primereact/button';
 
 const TieredMenuDemo = () => {
-    let menu = useRef(null);
-
+    const menu = useRef(null);
     const items = [
         {
             label:'File',
@@ -312,12 +311,14 @@ const TieredMenuDemo = () => {
 
     return (
         <div>
-            <h3 className="first">Inline</h5>
-            <TieredMenu model={items} />
+            <div className="card">
+                <h5>Inline</h5>
+                <TieredMenu model={items} />
 
-            <h5>Popup</h5>
-            <TieredMenu model={items} popup ref={menu} id="overlay_tmenu" />
-            <Button label="Show" icon="pi pi-bars" onClick={(event) => menu.current.toggle(event)} aria-haspopup aria-controls="overlay_tmenu"/>
+                <h5>Overlay</h5>
+                <TieredMenu model={items} popup ref={menu} id="overlay_tmenu" />
+                <Button label="Show" icon="pi pi-bars" onClick={(event) => menu.current.toggle(event)} aria-haspopup aria-controls="overlay_tmenu"/>
+            </div>
         </div>
     );
 }
@@ -327,12 +328,11 @@ const TieredMenuDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useRef } from 'react';
-import {TieredMenu} from 'primereact/tieredmenu';
-import {Button} from 'primereact/button';
+import { TieredMenu } from 'primereact/tieredmenu';
+import { Button } from 'primereact/button';
 
 const TieredMenuDemo = () => {
-    let menu = useRef<any>(null);
-
+    const menu = useRef(null);
     const items = [
         {
             label:'File',
@@ -465,12 +465,14 @@ const TieredMenuDemo = () => {
 
     return (
         <div>
-            <h3 className="first">Inline</h5>
-            <TieredMenu model={items} />
+            <div className="card">
+                <h5>Inline</h5>
+                <TieredMenu model={items} />
 
-            <h5>Popup</h5>
-            <TieredMenu model={items} popup ref={menu} id="overlay_tmenu" />
-            <Button label="Show" icon="pi pi-bars" onClick={(event) => menu.current.toggle(event)} aria-haspopup aria-controls="overlay_tmenu"/>
+                <h5>Overlay</h5>
+                <TieredMenu model={items} popup ref={menu} id="overlay_tmenu" />
+                <Button label="Show" icon="pi pi-bars" onClick={(event) => menu.current.toggle(event)} aria-haspopup aria-controls="overlay_tmenu"/>
+            </div>
         </div>
     );
 }
