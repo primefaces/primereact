@@ -135,30 +135,39 @@ export class PieChartDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React from 'react';
-import {Chart} from 'primereact/chart';
+import { Chart } from 'primereact/chart';
 
 const PieChartDemo = () => {
-    const data = {
-        labels: ['A','B','C'],
+    const chartData = {
+        labels: ['A', 'B', 'C'],
         datasets: [
             {
                 data: [300, 50, 100],
                 backgroundColor: [
-                    "#FF6384",
-                    "#36A2EB",
-                    "#FFCE56"
+                    "#42A5F5",
+                    "#66BB6A",
+                    "#FFA726"
                 ],
                 hoverBackgroundColor: [
-                    "#FF6384",
-                    "#36A2EB",
-                    "#FFCE56"
+                    "#64B5F6",
+                    "#81C784",
+                    "#FFB74D"
                 ]
-            }]
-        };
+            }
+        ]
+    };
+
+    const lightOptions = {
+        legend: {
+            labels: {
+                fontColor: '#495057'
+            }
+        }
+    };
 
     return (
-        <div>
-            <Chart type="pie" data={data} />
+        <div className="card">
+            <Chart type="pie" data={chartData} options={lightOptions} />
         </div>
     )
 }
@@ -168,30 +177,39 @@ const PieChartDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React from 'react';
-import {Chart} from 'primereact/chart';
+import { Chart } from 'primereact/chart';
 
 const PieChartDemo = () => {
-    const data = {
-        labels: ['A','B','C'],
+    const chartData = {
+        labels: ['A', 'B', 'C'],
         datasets: [
             {
                 data: [300, 50, 100],
                 backgroundColor: [
-                    "#FF6384",
-                    "#36A2EB",
-                    "#FFCE56"
+                    "#42A5F5",
+                    "#66BB6A",
+                    "#FFA726"
                 ],
                 hoverBackgroundColor: [
-                    "#FF6384",
-                    "#36A2EB",
-                    "#FFCE56"
+                    "#64B5F6",
+                    "#81C784",
+                    "#FFB74D"
                 ]
-            }]
-        };
+            }
+        ]
+    };
+
+    const lightOptions = {
+        legend: {
+            labels: {
+                fontColor: '#495057'
+            }
+        }
+    };
 
     return (
-        <div>
-            <Chart type="pie" data={data} />
+        <div className="card">
+            <Chart type="pie" data={chartData} options={lightOptions} />
         </div>
     )
 }

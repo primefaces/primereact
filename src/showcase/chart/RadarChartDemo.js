@@ -173,10 +173,10 @@ export class RadarChartDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React from 'react';
-import {Chart} from 'primereact/chart';
+import { Chart } from 'primereact/chart';
 
 const RadarChartDemo = () => {
-    const data = {
+    const chartData = {
         labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
         datasets: [
             {
@@ -202,11 +202,27 @@ const RadarChartDemo = () => {
         ]
     };
 
+    const lightOptions = {
+        legend: {
+            labels: {
+                fontColor: '#495057'
+            }
+        },
+        scale: {
+            pointLabels: {
+                fontColor: '#495057'
+            },
+            gridLines: {
+                color: '#ebedef'
+            }
+        }
+    };
+
     return (
-        <div>
-            <Chart type="radar" data={data} />
+        <div className="card">
+            <Chart type="radar" data={chartData} options={lightOptions} />
         </div>
-    )
+    );
 }
                 `
             },
@@ -214,10 +230,10 @@ const RadarChartDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React from 'react';
-import {Chart} from 'primereact/chart';
+import { Chart } from 'primereact/chart';
 
 const RadarChartDemo = () => {
-    const data = {
+    const chartData = {
         labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
         datasets: [
             {
@@ -243,11 +259,27 @@ const RadarChartDemo = () => {
         ]
     };
 
+    const lightOptions = {
+        legend: {
+            labels: {
+                fontColor: '#495057'
+            }
+        },
+        scale: {
+            pointLabels: {
+                fontColor: '#495057'
+            },
+            gridLines: {
+                color: '#ebedef'
+            }
+        }
+    };
+
     return (
-        <div>
-            <Chart type="radar" data={data} />
+        <div className="card">
+            <Chart type="radar" data={chartData} options={lightOptions} />
         </div>
-    )
+    );
 }
                 `
             }
