@@ -235,15 +235,15 @@ export class ComboChartDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React from 'react';
-import {Chart} from 'primereact/chart';
+import { Chart } from 'primereact/chart';
 
 const ComboChartDemo = () => {
-    const data = {
+    const chartData = {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [{
             type: 'line',
             label: 'Dataset 1',
-            borderColor: '#2196F3',
+            borderColor: '#42A5F5',
             borderWidth: 2,
             fill: false,
             data: [
@@ -258,7 +258,7 @@ const ComboChartDemo = () => {
         }, {
             type: 'bar',
             label: 'Dataset 2',
-            backgroundColor: '#4CAF50',
+            backgroundColor: '#66BB6A',
             data: [
                 21,
                 84,
@@ -273,7 +273,7 @@ const ComboChartDemo = () => {
         }, {
             type: 'bar',
             label: 'Dataset 3',
-            backgroundColor: '#FFC107',
+            backgroundColor: '#FFA726',
             data: [
                 41,
                 52,
@@ -286,22 +286,29 @@ const ComboChartDemo = () => {
         }]
     };
 
-    const options = {
-        responsive: true,
-        title: {
-            display: true,
-            text: 'Combo Bar Line Chart'
+    const lightOptions = {
+        legend: {
+            labels: {
+                fontColor: '#495057'
+            }
         },
-        tooltips: {
-            mode: 'index',
-            intersect: true
+        scales: {
+            xAxes: [{
+                ticks: {
+                    fontColor: '#495057'
+                }
+            }],
+            yAxes: [{
+                ticks: {
+                    fontColor: '#495057'
+                }
+            }]
         }
     };
 
     return (
-        <div>
-            <h3>Combo Chart</h3>
-            <Chart type="bar" data={data} options={options} />
+        <div className="card">
+            <Chart type="bar" data={chartData} options={lightOptions} />
         </div>
     )
 }
@@ -311,15 +318,15 @@ const ComboChartDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React from 'react';
-import {Chart} from 'primereact/chart';
+import { Chart } from 'primereact/chart';
 
 const ComboChartDemo = () => {
-    const data = {
+    const chartData = {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [{
             type: 'line',
             label: 'Dataset 1',
-            borderColor: '#2196F3',
+            borderColor: '#42A5F5',
             borderWidth: 2,
             fill: false,
             data: [
@@ -334,7 +341,7 @@ const ComboChartDemo = () => {
         }, {
             type: 'bar',
             label: 'Dataset 2',
-            backgroundColor: '#4CAF50',
+            backgroundColor: '#66BB6A',
             data: [
                 21,
                 84,
@@ -349,7 +356,7 @@ const ComboChartDemo = () => {
         }, {
             type: 'bar',
             label: 'Dataset 3',
-            backgroundColor: '#FFC107',
+            backgroundColor: '#FFA726',
             data: [
                 41,
                 52,
@@ -362,22 +369,29 @@ const ComboChartDemo = () => {
         }]
     };
 
-    const options = {
-        responsive: true,
-        title: {
-            display: true,
-            text: 'Combo Bar Line Chart'
+    const lightOptions = {
+        legend: {
+            labels: {
+                fontColor: '#495057'
+            }
         },
-        tooltips: {
-            mode: 'index',
-            intersect: true
+        scales: {
+            xAxes: [{
+                ticks: {
+                    fontColor: '#495057'
+                }
+            }],
+            yAxes: [{
+                ticks: {
+                    fontColor: '#495057'
+                }
+            }]
         }
     };
 
     return (
-        <div>
-            <h3>Combo Chart</h3>
-            <Chart type="bar" data={data} options={options} />
+        <div className="card">
+            <Chart type="bar" data={chartData} options={lightOptions} />
         </div>
     )
 }
