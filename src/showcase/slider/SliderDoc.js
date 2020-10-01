@@ -16,7 +16,7 @@ export class SliderDoc extends Component {
 import React, { Component } from 'react';
 import { Slider } from 'primereact/slider';
 import { InputText } from 'primereact/inputtext';
-import './SliderDemo.scss';
+import './SliderDemo.css';
 
 export class SliderDemo extends Component {
 
@@ -64,59 +64,34 @@ export class SliderDemo extends Component {
 import React, { useState } from 'react';
 import { Slider } from 'primereact/slider';
 import { InputText } from 'primereact/inputtext';
+import './SliderDemo.css';
 
 const SliderDemo = () => {
-    const [val1, setVal1] = useState(null);
-    const [val2, setVal2] = useState(50);
-    const [val3, setVal3] = useState(null);
-    const [val4, setVal4] = useState(null);
-    const [rangeValues, setRangeValues] = useState([20, 80]);
-
-    const onChangeSlider1 = (e) => {
-        setVal1(e.value);
-    };
-
-    const onChangeSlider2 = (e) => {
-        let newValue;
-        if (e.target && e.target.nodeName === "INPUT") {
-            newValue = e.target.value;
-        }
-        else {
-            newValue = e.value;
-        }
-
-        setVal2(newValue);
-    };
-
-    const onChangeSlider3 = (e) => {
-        setVal3(e.value);
-    };
-
-    const onChangeSlider4 = (e) => {
-        setVal4(e.value);
-    };
-
-    const onChangeRangeSlider = (e) => {
-        setRangeValues(e.value);
-    };
+    const [value1, setValue1] = useState(null);
+    const [value2, setValue2] = useState(50);
+    const [value3, setValue3] = useState(20);
+    const [value4, setValue4] = useState([20,80]);
+    const [value5, setValue5] = useState(50);
 
     return (
-        <div>
-            <h5>Basic: {val1}</h5>
-            <Slider value={val1} onChange={onChangeSlider1} style={{width: '14em'}}  />
+        <div className="slider-demo">
+            <div className="card">
+                <h5>Basic: {value1}</h5>
+                <Slider value={value1} onChange={(e) => setValue1(e.value)} />
 
-            <h5>Input: {val2}</h5>
-            <InputText value={val2} style={{width: '14em'}} type="number" onChange={onChangeSlider2} />
-            <Slider value={val2} onChange={onChangeSlider2} style={{width: '14em'}} />
+                <h5>Input: {value2}</h5>
+                <InputText value={value2} onChange={(e) => setValue2(e.target.value)} />
+                <Slider value={value2} onChange={(e) => setValue2(e.value)} />
 
-            <h5>Step: {val3}</h5>
-            <Slider value={val3} onChange={onChangeSlider3} step={20} style={{width: '14em'}} />
+                <h5>Step: {value3}</h5>
+                <Slider value={value3} onChange={(e) => setValue3(e.value)} step={20} />
 
-            <h5>Range: {rangeValues[0]},{rangeValues[1]}</h5>
-            <Slider value={rangeValues} onChange={onChangeRangeSlider} range style={{width: '14em'}} />
+                <h5>Range: [{value4[0]}, {value4[1]}]</h5>
+                <Slider value={value4} onChange={(e) => setValue4(e.value)} range />
 
-            <h5>Vertical: {val4}</h5>
-            <Slider value={val4} onChange={onChangeSlider4} orientation="vertical" style={{height: '14em'}} />
+                <h5>Vertical: {value5}</h5>
+                <Slider value={value5} onChange={(e) => setValue5(e.value)} orientation="vertical" />
+            </div>
         </div>
     );
 }
@@ -128,62 +103,50 @@ const SliderDemo = () => {
 import React, { useState } from 'react';
 import { Slider } from 'primereact/slider';
 import { InputText } from 'primereact/inputtext';
+import './SliderDemo.css';
 
 const SliderDemo = () => {
-    const [val1, setVal1] = useState<number|undefined>(undefined);
-    const [val2, setVal2] = useState<number|undefined>(50);
-    const [val3, setVal3] = useState<number|undefined>(undefined);
-    const [val4, setVal4] = useState<number|undefined>(undefined);
-    const [rangeValues, setRangeValues] = useState<[number, number]>([20, 80]);
-
-    const onChangeSlider1 = (e: { value: any }) => {
-        setVal1(e.value);
-    };
-
-    const onChangeSlider2 = (e: any) => {
-        let newValue;
-        const target = ((e as React.FormEvent).target as HTMLInputElement);
-        if (target && target.nodeName === "INPUT") {
-            newValue = target.value;
-        }
-        else {
-            newValue = e.value;
-        }
-
-        setVal2(newValue);
-    };
-
-    const onChangeSlider3 = (e: { value: any }) => {
-        setVal3(e.value);
-    };
-
-    const onChangeSlider4 = (e: { value: any }) => {
-        setVal4(e.value);
-    };
-
-    const onChangeRangeSlider = (e: { value: any }) => {
-        setRangeValues(e.value);
-    };
+    const [value1, setValue1] = useState(null);
+    const [value2, setValue2] = useState(50);
+    const [value3, setValue3] = useState(20);
+    const [value4, setValue4] = useState([20,80]);
+    const [value5, setValue5] = useState(50);
 
     return (
-        <div>
-            <h5>Basic: {val1}</h5>
-            <Slider value={val1} onChange={onChangeSlider1} style={{width: '14em'}}  />
+        <div className="slider-demo">
+            <div className="card">
+                <h5>Basic: {value1}</h5>
+                <Slider value={value1} onChange={(e) => setValue1(e.value)} />
 
-            <h5>Input: {val2}</h5>
-            <InputText value={val2} style={{width: '14em'}} type="number" onChange={onChangeSlider2} />
-            <Slider value={val2} onChange={onChangeSlider2} style={{width: '14em'}} />
+                <h5>Input: {value2}</h5>
+                <InputText value={value2} onChange={(e) => setValue2(e.target.value)} />
+                <Slider value={value2} onChange={(e) => setValue2(e.value)} />
 
-            <h5>Step: {val3}</h5>
-            <Slider value={val3} onChange={onChangeSlider3} step={20} style={{width: '14em'}} />
+                <h5>Step: {value3}</h5>
+                <Slider value={value3} onChange={(e) => setValue3(e.value)} step={20} />
 
-            <h5>Range: {rangeValues[0]},{rangeValues[1]}</h5>
-            <Slider value={rangeValues} onChange={onChangeRangeSlider} range style={{width: '14em'}} />
+                <h5>Range: [{value4[0]}, {value4[1]}]</h5>
+                <Slider value={value4} onChange={(e) => setValue4(e.value)} range />
 
-            <h5>Vertical: {val4}</h5>
-            <Slider value={val4} onChange={onChangeSlider4} orientation="vertical" style={{height: '14em'}} />
+                <h5>Vertical: {value5}</h5>
+                <Slider value={value5} onChange={(e) => setValue5(e.value)} orientation="vertical" />
+            </div>
         </div>
     );
+}
+                `
+            }
+        };
+
+        this.extFiles = {
+            'src/demo/SliderDemo.css': {
+                content: `
+.slider-demo .p-slider-horizontal, .slider-demo .p-inputtext {
+    width: 14rem;
+}
+
+.slider-demo .p-slider-vertical {
+    height: 14rem;
 }
                 `
             }
@@ -382,20 +345,7 @@ import { Slider } from 'primereact/slider';
         </TabPanel>
 
         <TabPanel header="Source">
-            <LiveEditor name="SliderDemo" sources={this.sources} />
-<CodeHighlight lang="scss">
-{`
-.slider-demo {
-    .p-slider-horizontal, .p-inputtext {
-        width: 14rem;
-    }
-
-    .p-slider-vertical {
-        height: 14rem;
-    }
-}
-`}
-</CodeHighlight>
+            <LiveEditor name="SliderDemo" sources={this.sources} extFiles={this.extFiles} />
         </TabPanel>
     </TabView>
 </div>

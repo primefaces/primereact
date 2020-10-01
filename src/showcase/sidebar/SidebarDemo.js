@@ -20,14 +20,14 @@ export class SidebarDemo extends Component {
 
     render() {
         const customIcons = (
-            <>
+            <React.Fragment>
                 <button className="p-sidebar-icon p-link p-mr-1">
                     <span className="pi pi-print" />
                 </button>
                 <button className="p-sidebar-icon p-link p-mr-1">
                     <span className="pi pi-arrow-right" />
                 </button>
-            </>
+            </React.Fragment>
         );
 
         return (

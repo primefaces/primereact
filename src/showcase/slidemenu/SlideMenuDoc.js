@@ -166,6 +166,7 @@ export class SlideMenuDemo extends Component {
                     <Button type="button" icon="pi pi-bars" label="Show" onClick={(event) => this.menu.toggle(event)}></Button>
                 </div>
             </div>
+        )
     }
 }
                 `
@@ -174,12 +175,11 @@ export class SlideMenuDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useRef } from 'react';
-import {SlideMenu} from 'primereact/slidemenu';
-import {Button} from 'primereact/button';
+import { SlideMenu } from 'primereact/slidemenu';
+import { Button } from 'primereact/button';
 
 const SlideMenuDemo = () => {
-    let menu = useRef(null);
-
+    const menu = useRef(null);
     const items = [
         {
             label:'File',
@@ -313,14 +313,16 @@ const SlideMenuDemo = () => {
 
     return (
         <div>
-            <h5>Basic</h5>
-            <SlideMenu model={items} viewportHeight={250} style={{width: '13.5em'}}></SlideMenu>
+            <div className="card">
+                <h5>Basic</h5>
+                <SlideMenu model={items} viewportHeight={250} menuWidth={175}></SlideMenu>
 
-            <h5>Popup</h5>
-            <SlideMenu ref={menu} model={items} popup viewportHeight={250} style={{width: '13.5em'}}></SlideMenu>
-            <Button type="button" icon="pi pi-bars" label="Show" onClick={(event) => menu.current.toggle(event)}></Button>
+                <h5>Popup</h5>
+                <SlideMenu ref={menu} model={items} popup viewportHeight={250} menuWidth={175}></SlideMenu>
+                <Button type="button" icon="pi pi-bars" label="Show" onClick={(event) => menu.current.toggle(event)}></Button>
+            </div>
         </div>
-    )
+    );
 }
                 `
             },
@@ -328,12 +330,11 @@ const SlideMenuDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useRef } from 'react';
-import {SlideMenu} from 'primereact/slidemenu';
-import {Button} from 'primereact/button';
+import { SlideMenu } from 'primereact/slidemenu';
+import { Button } from 'primereact/button';
 
 const SlideMenuDemo = () => {
-    let menu = useRef<any>(null);
-
+    const menu = useRef(null);
     const items = [
         {
             label:'File',
@@ -467,14 +468,16 @@ const SlideMenuDemo = () => {
 
     return (
         <div>
-            <h5>Basic</h5>
-            <SlideMenu model={items} viewportHeight={250} style={{width: '13.5em'}}></SlideMenu>
+            <div className="card">
+                <h5>Basic</h5>
+                <SlideMenu model={items} viewportHeight={250} menuWidth={175}></SlideMenu>
 
-            <h5>Popup</h5>
-            <SlideMenu ref={menu} model={items} popup viewportHeight={250} style={{width: '13.5em'}}></SlideMenu>
-            <Button type="button" icon="pi pi-bars" label="Show" onClick={(event) => menu.current.toggle(event)}></Button>
+                <h5>Popup</h5>
+                <SlideMenu ref={menu} model={items} popup viewportHeight={250} menuWidth={175}></SlideMenu>
+                <Button type="button" icon="pi pi-bars" label="Show" onClick={(event) => menu.current.toggle(event)}></Button>
+            </div>
         </div>
-    )
+    );
 }
                 `
             }
