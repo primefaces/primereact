@@ -19,7 +19,7 @@ import { Button } from 'primereact/button';
 import { Dropdown } from 'primereact/dropdown';
 import ProductService from '../service/ProductService';
 import { Rating } from 'primereact/rating';
-import './DataViewDemo.scss';
+import './DataViewDemo.css';
 
 export class DataViewDemo extends Component {
 
@@ -70,7 +70,7 @@ export class DataViewDemo extends Component {
         return (
             <div className="p-col-12">
                 <div className="product-list-item">
-                    <img src={\`showcase/demo/images/product/\${data.image}\`} alt={data.name} />
+                    <img src={\`showcase/demo/images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
                     <div className="product-list-detail">
                         <div className="product-name">{data.name}</div>
                         <div className="product-description">{data.description}</div>
@@ -99,7 +99,7 @@ export class DataViewDemo extends Component {
                         <span className={\`product-badge status-\${data.inventoryStatus.toLowerCase()}\`}>{data.inventoryStatus}</span>
                     </div>
                     <div className="product-grid-item-content">
-                    <img src={\`showcase/demo/images/product/\${data.image}\`} alt={data.name} />
+                    <img src={\`showcase/demo/images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
                         <div className="product-name">{data.name}</div>
                         <div className="product-description">{data.description}</div>
                         <Rating value={data.rating} readonly cancel={false}></Rating>
@@ -157,146 +157,125 @@ export class DataViewDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState, useEffect } from 'react';
-import { Dialog } from 'primereact/dialog';
-import { Panel } from 'primereact/panel';
-import { CarService } from '../service/CarService';
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
 import { Button } from 'primereact/button';
 import { Dropdown } from 'primereact/dropdown';
+import ProductService from '../service/ProductService';
+import { Rating } from 'primereact/rating';
+import './DataViewDemo.css';
 
 const DataViewDemo = () => {
-    const [cars, setCars] = useState([]);
-    const [layout, setLayout] = useState('list');
-    const [selectedCar, setSelectedCar] = useState(null);
-    const [visible, setVisible] = useState(false);
+    const [products, setProducts] = useState(null);
+    const [layout, setLayout] = useState('grid');
     const [sortKey, setSortKey] = useState(null);
     const [sortOrder, setSortOrder] = useState(null);
     const [sortField, setSortField] = useState(null);
-    const carservice = new CarService();
+    const sortOptions = [
+        {label: 'Price High to Low', value: '!price'},
+        {label: 'Price Low to High', value: 'price'},
+    ];
+
+    const productService = new ProductService();
 
     useEffect(() => {
-        carservice.getCarsLarge().then(data => setCars(data));
+        productService.getProducts().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onSortChange = (event) => {
         const value = event.value;
-        let _sortOrder;
-        let _sortField;
-        let _sortKey = value;
 
         if (value.indexOf('!') === 0) {
-            _sortOrder = -1;
-            _sortField = value.substring(1, value.length);
+            setSortOrder(-1);
+            setSortField(value.substring(1, value.length));
+            setSortKey(value);
         }
         else {
-            _sortOrder = 1;
-            _sortField = value;
+            setSortOrder(1);
+            setSortField(value);
+            setSortKey(value);
         }
+    }
 
-        setSortOrder(_sortOrder);
-        setSortField(_sortField);
-        setSortKey(_sortKey);
-    };
-
-    const renderListItem = (car) => {
+    const renderListItem = (data) => {
         return (
             <div className="p-col-12">
-                <div className="car-details">
-                    <div>
-                        <img src={\`showcase/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand}/>
-                        <div className="p-grid">
-                            <div className="p-col-12">Vin: <b>{car.vin}</b></div>
-                            <div className="p-col-12">Year: <b>{car.year}</b></div>
-                            <div className="p-col-12">Brand: <b>{car.brand}</b></div>
-                            <div className="p-col-12">Color: <b>{car.color}</b></div>
-                        </div>
+                <div className="product-list-item">
+                    <img src={\`showcase/demo/images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
+                    <div className="product-list-detail">
+                        <div className="product-name">{data.name}</div>
+                        <div className="product-description">{data.description}</div>
+                        <Rating value={data.rating} readonly cancel={false}></Rating>
+                        <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
                     </div>
-                    <Button icon="pi pi-search" onClick={(e) => {setSelectedCar(car); setVisible(true)}}></Button>
+                    <div className="product-list-action">
+                        <span className="product-price">\${data.price}</span>
+                        <Button icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                        <span className={\`product-badge status-\${data.inventoryStatus.toLowerCase()}\`}>{data.inventoryStatus}</span>
+                    </div>
                 </div>
             </div>
         );
-    };
+    }
 
-    const renderGridItem = (car) => {
+    const renderGridItem = (data) => {
         return (
-            <div style={{ padding: '.5em' }} className="p-col-12 p-md-3">
-                <Panel header={car.vin} style={{ textAlign: 'center' }}>
-                    <img src={\`showcase/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand} />
-                    <div className="car-detail">{car.year} - {car.color}</div>
-                    <Button icon="pi pi-search" onClick={(e) => {setSelectedCar(car); setVisible(true)}}></Button>
-                </Panel>
+            <div className="p-col-12 p-md-4">
+                <div className="product-grid-item card">
+                    <div className="product-grid-item-top">
+                        <div>
+                            <i className="pi pi-tag product-category-icon"></i>
+                            <span className="product-category">{data.category}</span>
+                        </div>
+                        <span className={\`product-badge status-\${data.inventoryStatus.toLowerCase()}\`}>{data.inventoryStatus}</span>
+                    </div>
+                    <div className="product-grid-item-content">
+                    <img src={\`showcase/demo/images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
+                        <div className="product-name">{data.name}</div>
+                        <div className="product-description">{data.description}</div>
+                        <Rating value={data.rating} readonly cancel={false}></Rating>
+                    </div>
+                    <div className="product-grid-item-bottom">
+                        <span className="product-price">\${data.price}</span>
+                        <Button icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                    </div>
+                </div>
             </div>
         );
-    };
+    }
 
-    const itemTemplate = (car, layout) => {
-        if (!car) {
+    const itemTemplate = (product, layout) => {
+        if (!product) {
             return;
         }
 
         if (layout === 'list')
-            return renderListItem(car);
+            return renderListItem(product);
         else if (layout === 'grid')
-            return renderGridItem(car);
-    };
-
-    const renderCarDialogContent = () => {
-        if (selectedCar) {
-            return (
-                <div className="p-grid" style={{fontSize: '16px', textAlign: 'center', padding: '20px'}}>
-                    <div className="p-col-12" style={{textAlign: 'center'}}>
-                        <img src={\`showcase/demo/images/car/\${selectedCar.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={selectedCar.brand} />
-                    </div>
-
-                    <div className="p-col-4">Vin: </div>
-                    <div className="p-col-8">{selectedCar.vin}</div>
-
-                    <div className="p-col-4">Year: </div>
-                    <div className="p-col-8">{selectedCar.year}</div>
-
-                    <div className="p-col-4">Brand: </div>
-                    <div className="p-col-8">{selectedCar.brand}</div>
-
-                    <div className="p-col-4">Color: </div>
-                    <div className="p-col-8">{selectedCar.color}</div>
-                </div>
-            );
-        }
-        else {
-            return null;
-        }
-    };
+            return renderGridItem(product);
+    }
 
     const renderHeader = () => {
-        const sortOptions = [
-            {label: 'Newest First', value: '!year'},
-            {label: 'Oldest First', value: 'year'},
-            {label: 'Brand', value: 'brand'}
-        ];
-
         return (
-            <div className="p-grid">
+            <div className="p-grid p-nogutter">
                 <div className="p-col-6" style={{textAlign: 'left'}}>
-                    <Dropdown options={sortOptions} value={sortKey} placeholder="Sort By" onChange={onSortChange} style={{width: '12em'}} />
+                    <Dropdown options={sortOptions} value={sortKey} optionLabel="label" placeholder="Sort By Price" onChange={onSortChange}/>
                 </div>
                 <div className="p-col-6" style={{textAlign: 'right'}}>
                     <DataViewLayoutOptions layout={layout} onChange={(e) => setLayout(e.value)} />
                 </div>
             </div>
         );
-    };
+    }
 
     const header = renderHeader();
 
     return (
         <div className="dataview-demo">
-            <DataView value={cars} layout={layout} header={header}
-                    itemTemplate={itemTemplate} paginatorPosition={'both'} paginator rows={20}
-                    sortOrder={sortOrder} sortField={sortField} />
-
-            <Dialog header="Car Details" visible={visible} modal onHide={() => setVisible(false)}>
-                {renderCarDialogContent()}
-            </Dialog>
+            <div className="card">
+                <DataView value={products} layout={layout} header={header}
+                        itemTemplate={itemTemplate} paginator rows={9}
+                        sortOrder={sortOrder} sortField={sortField} />
+            </div>
         </div>
     );
 }
@@ -306,146 +285,125 @@ const DataViewDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState, useEffect } from 'react';
-import { Dialog } from 'primereact/dialog';
-import { Panel } from 'primereact/panel';
-import { CarService } from '../service/CarService';
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
 import { Button } from 'primereact/button';
 import { Dropdown } from 'primereact/dropdown';
+import ProductService from '../service/ProductService';
+import { Rating } from 'primereact/rating';
+import './DataViewDemo.css';
 
 const DataViewDemo = () => {
-    const [cars, setCars] = useState<any>([]);
-    const [layout, setLayout] = useState<string>('list');
-    const [selectedCar, setSelectedCar] = useState<any>(null);
-    const [visible, setVisible] = useState(false);
-    const [sortKey, setSortKey] = useState<string|undefined>(undefined);
-    const [sortOrder, setSortOrder] = useState<number|undefined>(undefined);
-    const [sortField, setSortField] = useState<string|undefined>(undefined);
-    const carservice = new CarService();
+    const [products, setProducts] = useState(null);
+    const [layout, setLayout] = useState('grid');
+    const [sortKey, setSortKey] = useState(null);
+    const [sortOrder, setSortOrder] = useState(null);
+    const [sortField, setSortField] = useState(null);
+    const sortOptions = [
+        {label: 'Price High to Low', value: '!price'},
+        {label: 'Price Low to High', value: 'price'},
+    ];
+
+    const productService = new ProductService();
 
     useEffect(() => {
-        carservice.getCarsLarge().then(data => setCars(data));
+        productService.getProducts().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const onSortChange = (event: { value: string }) => {
+    const onSortChange = (event) => {
         const value = event.value;
-        let _sortOrder;
-        let _sortField;
-        let _sortKey = value;
 
         if (value.indexOf('!') === 0) {
-            _sortOrder = -1;
-            _sortField = value.substring(1, value.length);
+            setSortOrder(-1);
+            setSortField(value.substring(1, value.length));
+            setSortKey(value);
         }
         else {
-            _sortOrder = 1;
-            _sortField = value;
+            setSortOrder(1);
+            setSortField(value);
+            setSortKey(value);
         }
+    }
 
-        setSortOrder(_sortOrder);
-        setSortField(_sortField);
-        setSortKey(_sortKey);
-    };
-
-    const renderListItem = (car: any) => {
+    const renderListItem = (data) => {
         return (
             <div className="p-col-12">
-                <div className="car-details">
-                    <div>
-                        <img src={\`showcase/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand}/>
-                        <div className="p-grid">
-                            <div className="p-col-12">Vin: <b>{car.vin}</b></div>
-                            <div className="p-col-12">Year: <b>{car.year}</b></div>
-                            <div className="p-col-12">Brand: <b>{car.brand}</b></div>
-                            <div className="p-col-12">Color: <b>{car.color}</b></div>
-                        </div>
+                <div className="product-list-item">
+                    <img src={\`showcase/demo/images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
+                    <div className="product-list-detail">
+                        <div className="product-name">{data.name}</div>
+                        <div className="product-description">{data.description}</div>
+                        <Rating value={data.rating} readonly cancel={false}></Rating>
+                        <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
                     </div>
-                    <Button icon="pi pi-search" onClick={(e) => {setSelectedCar(car); setVisible(true)}}></Button>
+                    <div className="product-list-action">
+                        <span className="product-price">\${data.price}</span>
+                        <Button icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                        <span className={\`product-badge status-\${data.inventoryStatus.toLowerCase()}\`}>{data.inventoryStatus}</span>
+                    </div>
                 </div>
             </div>
         );
-    };
+    }
 
-    const renderGridItem = (car: any) => {
+    const renderGridItem = (data) => {
         return (
-            <div style={{ padding: '.5em' }} className="p-col-12 p-md-3">
-                <Panel header={car.vin} style={{ textAlign: 'center' }}>
-                    <img src={\`showcase/demo/images/car/\${car.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={car.brand} />
-                    <div className="car-detail">{car.year} - {car.color}</div>
-                    <Button icon="pi pi-search" onClick={(e) => {setSelectedCar(car); setVisible(true)}}></Button>
-                </Panel>
+            <div className="p-col-12 p-md-4">
+                <div className="product-grid-item card">
+                    <div className="product-grid-item-top">
+                        <div>
+                            <i className="pi pi-tag product-category-icon"></i>
+                            <span className="product-category">{data.category}</span>
+                        </div>
+                        <span className={\`product-badge status-\${data.inventoryStatus.toLowerCase()}\`}>{data.inventoryStatus}</span>
+                    </div>
+                    <div className="product-grid-item-content">
+                    <img src={\`showcase/demo/images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
+                        <div className="product-name">{data.name}</div>
+                        <div className="product-description">{data.description}</div>
+                        <Rating value={data.rating} readonly cancel={false}></Rating>
+                    </div>
+                    <div className="product-grid-item-bottom">
+                        <span className="product-price">\${data.price}</span>
+                        <Button icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                    </div>
+                </div>
             </div>
         );
-    };
+    }
 
-    const itemTemplate = (car: any, layout: string) => {
-        if (!car) {
+    const itemTemplate = (product, layout) => {
+        if (!product) {
             return;
         }
 
         if (layout === 'list')
-            return renderListItem(car);
+            return renderListItem(product);
         else if (layout === 'grid')
-            return renderGridItem(car);
-    };
-
-    const renderCarDialogContent = () => {
-        if (selectedCar) {
-            return (
-                <div className="p-grid" style={{fontSize: '16px', textAlign: 'center', padding: '20px'}}>
-                    <div className="p-col-12" style={{textAlign: 'center'}}>
-                        <img src={\`showcase/demo/images/car/\${selectedCar.brand}.png\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={selectedCar.brand} />
-                    </div>
-
-                    <div className="p-col-4">Vin: </div>
-                    <div className="p-col-8">{selectedCar.vin}</div>
-
-                    <div className="p-col-4">Year: </div>
-                    <div className="p-col-8">{selectedCar.year}</div>
-
-                    <div className="p-col-4">Brand: </div>
-                    <div className="p-col-8">{selectedCar.brand}</div>
-
-                    <div className="p-col-4">Color: </div>
-                    <div className="p-col-8">{selectedCar.color}</div>
-                </div>
-            );
-        }
-        else {
-            return null;
-        }
-    };
+            return renderGridItem(product);
+    }
 
     const renderHeader = () => {
-        const sortOptions = [
-            {label: 'Newest First', value: '!year'},
-            {label: 'Oldest First', value: 'year'},
-            {label: 'Brand', value: 'brand'}
-        ];
-
         return (
-            <div className="p-grid">
+            <div className="p-grid p-nogutter">
                 <div className="p-col-6" style={{textAlign: 'left'}}>
-                    <Dropdown options={sortOptions} value={sortKey} placeholder="Sort By" onChange={onSortChange} style={{width: '12em'}} />
+                    <Dropdown options={sortOptions} value={sortKey} optionLabel="label" placeholder="Sort By Price" onChange={onSortChange}/>
                 </div>
                 <div className="p-col-6" style={{textAlign: 'right'}}>
                     <DataViewLayoutOptions layout={layout} onChange={(e) => setLayout(e.value)} />
                 </div>
             </div>
         );
-    };
+    }
 
     const header = renderHeader();
 
     return (
         <div className="dataview-demo">
-            <DataView value={cars} layout={layout} header={header}
-                    itemTemplate={itemTemplate} paginatorPosition={'both'} paginator rows={20}
-                    sortOrder={sortOrder} sortField={sortField} />
-
-            <Dialog header="Car Details" visible={visible} modal onHide={() => setVisible(false)}>
-                {renderCarDialogContent()}
-            </Dialog>
+            <div className="card">
+                <DataView value={products} layout={layout} header={header}
+                        itemTemplate={itemTemplate} paginator rows={9}
+                        sortOrder={sortOrder} sortField={sortField} />
+            </div>
         </div>
     );
 }
@@ -454,49 +412,131 @@ const DataViewDemo = () => {
         }
 
         this.extFiles = {
-            'index.css': `
-.dataview-demo .car-details {
+            'src/demo/DataViewDemo.css': {
+                content: `
+.dataview-demo .p-dropdown {
+    width: 14rem;
+    font-weight: normal;
+}
+
+.dataview-demo .product-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.dataview-demo .product-description {
+    margin: 0 0 1rem 0;
+}
+
+.dataview-demo .product-category-icon {
+    vertical-align: middle;
+    margin-right: .5rem;
+}
+
+.dataview-demo .product-category {
+    font-weight: 600;
+    vertical-align: middle;
+}
+
+.dataview-demo .product-list-item {
     display: flex;
+    align-items: center;
+    padding: 1rem;
+    width: 100%;
+}
+
+.dataview-demo .product-list-item img {
+    width: 150px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    margin-right: 2rem;
+}
+
+.dataview-demo .product-list-item .product-list-detail {
+    flex: 1 1 0;
+}
+
+.dataview-demo .product-list-item .p-rating {
+    margin: 0 0 .5rem 0;
+}
+
+.dataview-demo .product-list-item .product-price {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: .5rem;
+    align-self: flex-end;
+}
+
+.dataview-demo .product-list-item .product-list-action {
+    display: flex;
+    flex-direction: column;
+}
+
+.dataview-demo .product-list-item .p-button {
+    margin-bottom: .5rem;
+}
+
+.dataview-demo .product-grid-item {
+    margin: .5em;
+    border: 1px solid #dee2e6;
+    padding: 2rem;
+}
+
+.dataview-demo .product-grid-item .product-grid-item-top,
+    .dataview-demo .product-grid-item .product-grid-item-bottom {
+    display: flex;
+    align-items: center;
     justify-content: space-between;
-    align-items: center;
-    padding: 2em;
-    border-bottom: 1px solid #d9dad9;
 }
-.dataview-demo .car-details > div {
-    display: flex;
-    align-items: center;
+
+.dataview-demo .product-grid-item img {
+    width: 75%;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    margin: 2rem 0;
 }
-.dataview-demo .car-details > div img {
-    margin-right: 14px;
+
+.dataview-demo .product-grid-item .product-grid-item-content {
+    text-align: center;
 }
-.dataview-demo .car-detail {
-    padding: 0 1em 1em 1em;
-    border-bottom: 1px solid #d9dad9;
-    margin: 1em;
+
+.dataview-demo .product-grid-item .product-price {
+    font-size: 1.5rem;
+    font-weight: 600;
 }
-.dataview-demo .p-panel-content {
-    padding: 1em;
-}
-@media screen and (max-width: 1024px) {
-    .dataview-demo .p-dataview .car-details img {
-        width: 75px;
-    }
-}
-@media screen and (max-width: 640px) {
-    .dataview-demo .car-details, .dataview-demo .search-icon {
-        text-align: center;
-        margin-top: 0;
+
+@media screen and (max-width: 576px) {
+    .dataview-demo .product-list-item {
+        flex-direction: column;
+        align-items: center;
     }
 
-    .dataview-demo .filter-container {
-        text-align: left;
+    .dataview-demo .product-list-item img {
+        width: 75%;
+        margin: 2rem 0;
     }
 
-    .datascroll-demo .car-item {
+    .dataview-demo .product-list-item .product-list-detail {
         text-align: center;
     }
+
+    .dataview-demo .product-list-item .product-price {
+        align-self: center;
+    }
+
+    .dataview-demo .product-list-item .product-list-action {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .dataview-demo .product-list-item .product-list-action {
+        margin-top: 2rem;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
 }
-            `
+                `
+            }
         }
     }
 
@@ -525,13 +565,12 @@ npm install primeflex --save
 `}
 </CodeHighlight>
 
-                        <p>DataView requires a collection of items as its value and one or more templates depending on the layout mode e.g. <i>list</i> and <i>grid</i>. Throughout the samples, a car interface having vin, brand, year and color properties are used to define an object to be displayed by the dataview.
-                            Cars are loaded by a CarService that connects to a server to fetch the cars.</p>
+                        <p>DataView requires a collection of items as its value and one or more templates depending on the layout mode e.g. <i>list</i> and <i>grid</i>. </p>
 
                         <p>DataView has two layout modes; <i>list</i> and <i>grid</i> where <i>itemTemplate</i> function is called by passing the item to render along with the layout mode.</p>
 <CodeHighlight lang="js">
 {`
-itemTemplate(car, layout) {
+itemTemplate(data, layout) {
     if (layout === 'list') {
         return (
             // List content
@@ -924,133 +963,7 @@ onSortChange(event) {
                     </TabPanel>
 
                     <TabPanel header="Source">
-                        <LiveEditor name="DataViewDemo" sources={this.sources} service="CarService" data="cars-large" extFiles={this.extFiles} />
-<CodeHighlight lang="scss">
-{`
-.dataview-demo {
-    .p-dropdown {
-        width: 14rem;
-        font-weight: normal;
-    }
-
-    .product-name {
-        font-size: 1.5rem;
-        font-weight: 700;
-    }
-
-    .product-description {
-        margin: 0 0 1rem 0;
-    }
-
-    .product-category-icon {
-        vertical-align: middle;
-        margin-right: .5rem;
-    }
-
-    .product-category {
-        font-weight: 600;
-        vertical-align: middle;
-    }
-
-    .product-list-item {
-        display: flex;
-        align-items: center;
-        padding: 1rem;
-        width: 100%;
-
-        img {
-            width: 150px;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-            margin-right: 2rem;
-        }
-
-        .product-list-detail {
-            flex: 1 1 0;
-        }
-
-        .p-rating {
-            margin: 0 0 .5rem 0;
-        }
-
-        .product-price {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: .5rem;
-            align-self: flex-end;
-        }
-
-        .product-list-action {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .p-button {
-            margin-bottom: .5rem;
-        }
-    }
-
-    .product-grid-item {
-        margin: .5em;
-        border: 1px solid #dee2e6;
-
-        .product-grid-item-top,
-        .product-grid-item-bottom {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        img {
-            width: 75%;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-            margin: 2rem 0;
-        }
-
-        .product-grid-item-content {
-            text-align: center;
-        }
-
-        .product-price {
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-    }
-
-    @media screen and (max-width: 576px) {
-        .product-list-item {
-            flex-direction: column;
-            align-items: center;
-
-            img {
-                width: 75%;
-                margin: 2rem 0;
-            }
-
-            .product-list-detail {
-                text-align: center;
-            }
-
-            .product-price {
-                align-self: center;
-            }
-
-            .product-list-action {
-                display: flex;
-                flex-direction: column;
-            }
-
-            .product-list-action {
-                margin-top: 2rem;
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-                width: 100%;
-            }
-        }
-    }
-}
-`}
-</CodeHighlight>
+                        <LiveEditor name="DataViewDemo" sources={this.sources} service="ProductService" data="products" extFiles={this.extFiles} />
                     </TabPanel>
                 </TabView>
             </div>

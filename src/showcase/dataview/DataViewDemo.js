@@ -57,7 +57,7 @@ export class DataViewDemo extends Component {
         return (
             <div className="p-col-12">
                 <div className="product-list-item">
-                    <img src={`showcase/demo/images/product/${data.image}`} alt={data.name} />
+                    <img src={`showcase/demo/images/product/${data.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
                     <div className="product-list-detail">
                         <div className="product-name">{data.name}</div>
                         <div className="product-description">{data.description}</div>
@@ -86,7 +86,7 @@ export class DataViewDemo extends Component {
                         <span className={`product-badge status-${data.inventoryStatus.toLowerCase()}`}>{data.inventoryStatus}</span>
                     </div>
                     <div className="product-grid-item-content">
-                    <img src={`showcase/demo/images/product/${data.image}`} alt={data.name} />
+                    <img src={`showcase/demo/images/product/${data.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
                         <div className="product-name">{data.name}</div>
                         <div className="product-description">{data.description}</div>
                         <Rating value={data.rating} readonly cancel={false}></Rating>

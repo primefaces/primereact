@@ -7,7 +7,6 @@ import { Rating } from '../../components/rating/Rating';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { LiveEditor } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
-import { CodeHighlight } from '../codehighlight/CodeHighlight';
 import './DataTableDemo.scss';
 
 export class DataTableTemplatingDemo extends Component {
@@ -35,7 +34,7 @@ export class DataTableTemplatingDemo extends Component {
     }
 
     imageBodyTemplate(rowData) {
-        return <img src={`showcase/demo/images/product/${rowData.image}`} alt={rowData.image} className="product-image" />;
+        return <img src={`showcase/demo/images/product/${rowData.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="product-image" />;
     }
 
     priceBodyTemplate(rowData) {
@@ -102,7 +101,7 @@ import { Column } from 'primereact/column';
 import ProductService from '../service/ProductService';
 import { Button } from 'primereact/button';
 import { Rating } from 'primereact/rating';
-import './DataTableDemo.scss';
+import './DataTableDemo.css';
 
 export class DataTableTemplatingDemo extends Component {
 
@@ -129,7 +128,7 @@ export class DataTableTemplatingDemo extends Component {
     }
 
     imageBodyTemplate(rowData) {
-        return <img src={\`showcase/demo/images/product/\${rowData.image}\`} alt={rowData.image} className="product-image" />;
+        return <img src={\`showcase/demo/images/product/\${rowData.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="product-image" />;
     }
 
     priceBodyTemplate(rowData) {
@@ -175,48 +174,61 @@ export class DataTableTemplatingDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState, useEffect } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service/CarService';
-import {Button} from 'primereact/button';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import ProductService from '../service/ProductService';
+import { Button } from 'primereact/button';
+import { Rating } from 'primereact/rating';
+import './DataTableDemo.css';
 
 const DataTableTemplatingDemo = () => {
-    const [cars, setCars] = useState([]);
-    const carservice = new CarService();
-
-    const colorTemplate = (rowData, column) => {
-        return <span style={{color: rowData['color']}}>{rowData['color']}</span>;
-    };
-
-    const brandTemplate = (rowData, column) => {
-        let src = "showcase/demo/images/car/" + rowData.brand + ".png";
-        return <img src={src} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={rowData.brand} width="48px" />;
-    };
-
-    const actionTemplate = (rowData, column) => {
-        return <div>
-            <Button type="button" icon="pi pi-search" className="p-button-success" style={{marginRight: '.5em'}}></Button>
-            <Button type="button" icon="pi pi-pencil" className="p-button-warning"></Button>
-        </div>;
-    };
+    const [products, setProducts] = useState([]);
+    const productService = new ProductService();
 
     useEffect(() => {
-        carservice.getCarsSmall().then(data => setCars(data));
+        productService.getProductsSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const carCount = cars ? cars.length : 0;
-    const header = <div className="p-clearfix" style={{'lineHeight':'1.87em'}}>List of Cars <Button icon="pi pi-refresh" style={{'float':'right'}}/></div>;
-    const footer = "There are " + carCount + ' cars';
+    const formatCurrency = (value) => {
+        return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    }
+
+    const imageBodyTemplate = (rowData) => {
+        return <img src={\`showcase/demo/images/product/\${rowData.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="product-image" />;
+    }
+
+    const priceBodyTemplate = (rowData) => {
+        return formatCurrency(rowData.price);
+    }
+
+    const ratingBodyTemplate = (rowData) => {
+        return <Rating value={rowData.rating} readonly cancel={false} />;
+    }
+
+    const statusBodyTemplate = (rowData) => {
+        return <span className={\`product-badge status-\${rowData.inventoryStatus.toLowerCase()}\`}>{rowData.inventoryStatus}</span>;
+    }
+
+    const header = (
+        <div className="table-header">
+            Products
+            <Button icon="pi pi-refresh" />
+        </div>
+    );
+    const footer = \`In total there are \${products ? products.length : 0} products.\`;
 
     return (
-        <div>
-            <DataTable value={cars} header={header} footer={footer}>
-                <Column field="vin" header="Vin" />
-                <Column field="year" header="Year" />
-                <Column field="brand" header="Brand" body={brandTemplate} style={{textAlign:'center'}}/>
-                <Column field="color" header="Color" body={colorTemplate} />
-                <Column body={actionTemplate} style={{textAlign:'center', width: '8em'}}/>
-            </DataTable>
+        <div className="datatable-templating-demo">
+            <div className="card">
+                <DataTable value={products} header={header} footer={footer}>
+                    <Column field="name" header="Name"></Column>
+                    <Column header="Image" body={imageBodyTemplate}></Column>
+                    <Column field="price" header="Price" body={priceBodyTemplate}></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="rating" header="Reviews" body={ratingBodyTemplate}></Column>
+                    <Column header="Status" body={statusBodyTemplate}></Column>
+                </DataTable>
+            </div>
         </div>
     );
 }
@@ -226,50 +238,80 @@ const DataTableTemplatingDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState, useEffect } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service/CarService';
-import {Button} from 'primereact/button';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import ProductService from '../service/ProductService';
+import { Button } from 'primereact/button';
+import { Rating } from 'primereact/rating';
+import './DataTableDemo.css';
 
 const DataTableTemplatingDemo = () => {
-    const [cars, setCars] = useState([]);
-    const carservice = new CarService();
-
-    const colorTemplate = (rowData: any, column: any) => {
-        return <span style={{color: rowData['color']}}>{rowData['color']}</span>;
-    };
-
-    const brandTemplate = (rowData: any, column: any) => {
-        let src = "showcase/demo/images/car/" + rowData.brand + ".png";
-        return <img src={src} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt={rowData.brand} width="48px" />;
-    };
-
-    const actionTemplate = (rowData: any, column: any) => {
-        return <div>
-            <Button type="button" icon="pi pi-search" className="p-button-success" style={{marginRight: '.5em'}}></Button>
-            <Button type="button" icon="pi pi-pencil" className="p-button-warning"></Button>
-        </div>;
-    };
+    const [products, setProducts] = useState([]);
+    const productService = new ProductService();
 
     useEffect(() => {
-        carservice.getCarsSmall().then(data => setCars(data));
+        productService.getProductsSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const carCount = cars ? cars.length : 0;
-    const header = <div className="p-clearfix" style={{'lineHeight':'1.87em'}}>List of Cars <Button icon="pi pi-refresh" style={{'float':'right'}}/></div>;
-    const footer = "There are " + carCount + ' cars';
+    const formatCurrency = (value) => {
+        return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    }
 
-    return (
-        <div>
-            <DataTable value={cars} header={header} footer={footer}>
-                <Column field="vin" header="Vin" />
-                <Column field="year" header="Year" />
-                <Column field="brand" header="Brand" body={brandTemplate} style={{textAlign:'center'}}/>
-                <Column field="color" header="Color" body={colorTemplate} />
-                <Column body={actionTemplate} style={{textAlign:'center', width: '8em'}}/>
-            </DataTable>
+    const imageBodyTemplate = (rowData) => {
+        return <img src={\`showcase/demo/images/product/\${rowData.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="product-image" />;
+    }
+
+    const priceBodyTemplate = (rowData) => {
+        return formatCurrency(rowData.price);
+    }
+
+    const ratingBodyTemplate = (rowData) => {
+        return <Rating value={rowData.rating} readonly cancel={false} />;
+    }
+
+    const statusBodyTemplate = (rowData) => {
+        return <span className={\`product-badge status-\${rowData.inventoryStatus.toLowerCase()}\`}>{rowData.inventoryStatus}</span>;
+    }
+
+    const header = (
+        <div className="table-header">
+            Products
+            <Button icon="pi pi-refresh" />
         </div>
     );
+    const footer = \`In total there are \${products ? products.length : 0} products.\`;
+
+    return (
+        <div className="datatable-templating-demo">
+            <div className="card">
+                <DataTable value={products} header={header} footer={footer}>
+                    <Column field="name" header="Name"></Column>
+                    <Column header="Image" body={imageBodyTemplate}></Column>
+                    <Column field="price" header="Price" body={priceBodyTemplate}></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="rating" header="Reviews" body={ratingBodyTemplate}></Column>
+                    <Column header="Status" body={statusBodyTemplate}></Column>
+                </DataTable>
+            </div>
+        </div>
+    );
+}
+                `
+            }
+        };
+
+        this.extFiles = {
+            'src/demo/DataTableDemo.css': {
+                content: `
+.datatable-templating-demo .table-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.datatable-templating-demo .product-image {
+    width: 100px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
                 `
             }
@@ -285,23 +327,7 @@ const DataTableTemplatingDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Source">
-                        <LiveEditor name="DataTableTemplatingDemo" sources={this.sources} service="CarService" data="cars-small" />
-<CodeHighlight lang="scss">
-{`
-.datatable-templating-demo {
-    .table-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .product-image {
-        width: 100px;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
-    }
-}
-`}
-</CodeHighlight>
+                        <LiveEditor name="DataTableTemplatingDemo" sources={this.sources} service="ProductService" data="products-small" extFiles={this.extFiles} />
                     </TabPanel>
                 </TabView>
             </div>
