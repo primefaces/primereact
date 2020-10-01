@@ -49,17 +49,19 @@ import { Captcha } from 'primereact/captcha';
 import { Toast } from 'primereact/toast';
 
 const CaptchaDemo = () => {
-    let toast = useRef(null);
+    const toast = useRef(null);
 
     const showResponse = () => {
-        toast.current.show({severity: 'info', summary: 'Success', detail: 'User Responded'});
+        toast.current.show({ severity: 'info', summary: 'Success', detail: 'User Responded' });
     }
 
     return (
-        <div className="button-demo">
+        <div>
             <Toast ref={toast}></Toast>
 
-            <Captcha siteKey="6Lf2XQkTAAAAANcvOwYqPxWL4iZDksFqHpS39GDA" onResponse={showResponse} />
+            <div className="card">
+                <Captcha siteKey="YOUR_SITE_KEY" onResponse={showResponse} />
+            </div>
         </div>
     )
 }
@@ -73,30 +75,24 @@ import { Captcha } from 'primereact/captcha';
 import { Toast } from 'primereact/toast';
 
 const CaptchaDemo = () => {
-    let toast = useRef<any>(null);
+    const toast = useRef(null);
 
     const showResponse = () => {
-        toast.current.show({severity: 'info', summary: 'Success', detail: 'User Responded'});
+        toast.current.show({ severity: 'info', summary: 'Success', detail: 'User Responded' });
     }
 
     return (
-        <div className="button-demo">
+        <div>
             <Toast ref={toast}></Toast>
 
-            <Captcha siteKey="6Lf2XQkTAAAAANcvOwYqPxWL4iZDksFqHpS39GDA" onResponse={showResponse} />
+            <div className="card">
+                <Captcha siteKey="YOUR_SITE_KEY" onResponse={showResponse} />
+            </div>
         </div>
     )
 }
                 `
             }
-        }
-
-        this.extFiles = {
-            'index.css': `
-.button-demo button {
-    margin-right: .5em;
-}
-            `
         }
     }
 
@@ -255,7 +251,7 @@ showResponse(response) {
                     </TabPanel>
 
                     <TabPanel header="Source">
-                        <LiveEditor name="CaptchaDemo" sources={this.sources} extFiles={this.extFiles} />
+                        <LiveEditor name="CaptchaDemo" sources={this.sources} />
                     </TabPanel>
                 </TabView>
             </div>
