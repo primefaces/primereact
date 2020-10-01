@@ -1,5 +1,33 @@
 # Changelog
 
+## [5.0.0](https://github.com/primefaces/primereact/tree/5.0.0) (2020-10-01)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/5.0.0-rc.2...5.0.0)
+
+**Implemented New Features and Enhancements:**
+
+- Lighter Highlight Color for PrimeOne Themes [\#1605](https://github.com/primefaces/primereact/issues/1605)
+- Add template property support to MenuModel API [\#1597](https://github.com/primefaces/primereact/issues/1597)
+- Add buttonTemplate property to SplitButton [\#1596](https://github.com/primefaces/primereact/issues/1596)
+- Add headerTemplate property to AccordionTab on Accordion [\#1594](https://github.com/primefaces/primereact/issues/1594)
+- Add expandIcon and collapseIcon properties to Accordion [\#1593](https://github.com/primefaces/primereact/issues/1593)
+- Add id property to Password [\#1590](https://github.com/primefaces/primereact/issues/1590)
+- Improvement in behavior of components that have overlay panels in scrollable containers [\#1589](https://github.com/primefaces/primereact/issues/1589)
+- InputNumber feature - allow negative values [\#1585](https://github.com/primefaces/primereact/issues/1585)
+- Add panelClassName and panelStyle properties for appendable overlays [\#1459](https://github.com/primefaces/primereact/issues/1459)
+- TreeTable: expose the filter method for TypeScript [\#1435](https://github.com/primefaces/primereact/issues/1435)
+
+**Fixed bugs:**
+
+- Alignment issue on Scrollable TreeTable [\#1599](https://github.com/primefaces/primereact/issues/1599)
+- Alignment issue on Scrollable Datatable [\#1598](https://github.com/primefaces/primereact/issues/1598)
+- Button shows "&nbsp" text if the label property is empty [\#1595](https://github.com/primefaces/primereact/issues/1595)
+- InputNumber cannot set value when format property is false [\#1582](https://github.com/primefaces/primereact/issues/1582)
+- Carousel page prop not detecting changes to prop value. [\#1464](https://github.com/primefaces/primereact/issues/1464)
+- Pagination \(currentPageReportTemplate\) is not showing correct page no for first [\#1453](https://github.com/primefaces/primereact/issues/1453)
+- MultiSelect: error when selecting option with null value [\#1446](https://github.com/primefaces/primereact/issues/1446)
+- MultiSelect: warning in console when using string array as options [\#1445](https://github.com/primefaces/primereact/issues/1445)
+
 ## [5.0.0-rc.2](https://github.com/primefaces/primereact/tree/5.0.0-rc.2) (2020-09-10)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/5.0.0-rc.1...5.0.0-rc.2)
