@@ -3,7 +3,6 @@ import { TreeTable } from '../../components/treetable/TreeTable';
 import { Column } from '../../components/column/Column';
 import { NodeService } from '../service/NodeService';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { CodeHighlight } from '../codehighlight/CodeHighlight';
 import { LiveEditor } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './TreeTableDemo.scss';
@@ -25,11 +24,11 @@ export class TreeTableResponsiveDemo extends Component {
 
     nameTemplate(node) {
         return (
-            <>
+            <React.Fragment>
                 <span>{node.data.name}</span>
                 <span className="sm-visible"> {node.data.size}</span>
                 <span className="sm-visible"> {node.data.type}</span>
-            </>
+            </React.Fragment>
         )
     }
 
@@ -72,7 +71,7 @@ import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { NodeService } from '../service/NodeService';
-import './TreeTableDemo.scss';
+import './TreeTableDemo.css';
 
 export class TreeTableResponsiveDemo extends Component {
 
@@ -91,11 +90,11 @@ export class TreeTableResponsiveDemo extends Component {
 
     nameTemplate(node) {
         return (
-            <>
+            <React.Fragment>
                 <span>{node.data.name}</span>
                 <span className="sm-visible"> {node.data.size}</span>
                 <span className="sm-visible"> {node.data.type}</span>
-            </>
+            </React.Fragment>
         )
     }
 
@@ -122,6 +121,7 @@ import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { NodeService } from '../service/NodeService';
+import './TreeTableDemo.css';
 
 const TreeTableResponsiveDemo = () => {
     const [nodes, setNodes] = useState([]);
@@ -133,23 +133,25 @@ const TreeTableResponsiveDemo = () => {
 
     const nameTemplate = (node) => {
         return (
-            <>
+            <React.Fragment>
                 <span>{node.data.name}</span>
-                <span className="p-col-m">, {node.data.size}</span>
-                <span className="p-col-m">, {node.data.type}</span>
-            </>
+                <span className="sm-visible"> {node.data.size}</span>
+                <span className="sm-visible"> {node.data.type}</span>
+            </React.Fragment>
         )
     }
 
     return (
-        <div>
-            <TreeTable value={nodes} header="Responsive TreeTable">
-                <Column field="name" header="Name" body={nameTemplate} expander headerClassName="p-col-d"></Column>
-                <Column field="size" header="Size" className="p-col-d"></Column>
-                <Column field="type" header="Type" className="p-col-d"></Column>
-            </TreeTable>
+        <div className="treetable-responsive-demo">
+            <div className="card">
+                <TreeTable value={nodes} header="Responsive">
+                    <Column field="name" header="Name" body={nameTemplate} expander></Column>
+                    <Column field="size" header="Size" headerClassName="sm-invisible" bodyClassName="sm-invisible"></Column>
+                    <Column field="type" header="Type" headerClassName="sm-invisible" bodyClassName="sm-invisible"></Column>
+                </TreeTable>
+            </div>
         </div>
-    )
+    );
 }
                 `
             },
@@ -160,6 +162,7 @@ import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { NodeService } from '../service/NodeService';
+import './TreeTableDemo.css';
 
 const TreeTableResponsiveDemo = () => {
     const [nodes, setNodes] = useState([]);
@@ -169,67 +172,56 @@ const TreeTableResponsiveDemo = () => {
         nodeservice.getTreeTableNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const nameTemplate = (node: any) => {
+    const nameTemplate = (node) => {
         return (
-            <>
+            <React.Fragment>
                 <span>{node.data.name}</span>
-                <span className="p-col-m">, {node.data.size}</span>
-                <span className="p-col-m">, {node.data.type}</span>
-            </>
+                <span className="sm-visible"> {node.data.size}</span>
+                <span className="sm-visible"> {node.data.type}</span>
+            </React.Fragment>
         )
     }
 
     return (
-        <div>
-            <TreeTable value={nodes} header="Responsive TreeTable">
-                <Column field="name" header="Name" body={nameTemplate} expander headerClassName="p-col-d"></Column>
-                <Column field="size" header="Size" className="p-col-d"></Column>
-                <Column field="type" header="Type" className="p-col-d"></Column>
-            </TreeTable>
+        <div className="treetable-responsive-demo">
+            <div className="card">
+                <TreeTable value={nodes} header="Responsive">
+                    <Column field="name" header="Name" body={nameTemplate} expander></Column>
+                    <Column field="size" header="Size" headerClassName="sm-invisible" bodyClassName="sm-invisible"></Column>
+                    <Column field="type" header="Type" headerClassName="sm-invisible" bodyClassName="sm-invisible"></Column>
+                </TreeTable>
+            </div>
         </div>
-    )
+    );
 }
                 `
             }
         }
 
         this.extFiles = {
-            'index.css': `
-.p-col-d {
-    display: table-cell;
-}
-
-.p-col-m {
+            'src/demo/TreeTableDemo.css': {
+                content: `
+.treetable-responsive-demo .sm-visible {
     display: none;
 }
 
-@media screen and (max-width: 64em) {
-    .p-col-d {
+@media screen and (max-width: 40em) {
+    .treetable-responsive-demo .sm-invisible {
         display: none;
     }
 
-    .p-col-m {
-        display: inline-block;
+    .treetable-responsive-demo .sm-visible {
+        display: inline;
+        margin-right: .5rem;
     }
 }
-            `
-        };
+                `
+            }
+        }
     }
 
     shouldComponentUpdate() {
         return false;
-    }
-
-    renderDemoStyle() {
-        return (
-            <>
-                <p>TreeTableDemo.css</p>
-<CodeHighlight lang="js">
-{ this.extFiles['index.css'] }
-</CodeHighlight>
-
-            </>
-        )
     }
 
     render() {

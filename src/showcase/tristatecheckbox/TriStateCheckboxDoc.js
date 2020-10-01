@@ -45,15 +45,19 @@ export class TriStateCheckboxDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState } from 'react';
-import {TriStateCheckbox} from 'primereact/tristatecheckbox';
+import { TriStateCheckbox } from 'primereact/tristatecheckbox';
 
 const TriStateCheckboxDemo = () => {
     const [value, setValue] = useState(null);
 
     return (
         <div>
-            <h3 className="first">Value: {value + ''}</h5>
-            <TriStateCheckbox value={value} onChange={(e) => setValue(e.value)} />
+            <div className="card">
+                <div className="p-field-checkbox p-m-0">
+                    <TriStateCheckbox value={value} onChange={(e) => setValue(e.value)} />
+                    <label>{String(value)}</label>
+                </div>
+            </div>
         </div>
     );
 }
@@ -63,15 +67,19 @@ const TriStateCheckboxDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState } from 'react';
-import {TriStateCheckbox} from 'primereact/tristatecheckbox';
+import { TriStateCheckbox } from 'primereact/tristatecheckbox';
 
 const TriStateCheckboxDemo = () => {
-    const [value, setValue] = useState<boolean|null>(null);
+    const [value, setValue] = useState(null);
 
     return (
         <div>
-            <h3 className="first">Value: {value + ''}</h5>
-            <TriStateCheckbox value={value} onChange={(e) => setValue(e.value)} />
+            <div className="card">
+                <div className="p-field-checkbox p-m-0">
+                    <TriStateCheckbox value={value} onChange={(e) => setValue(e.value)} />
+                    <label>{String(value)}</label>
+                </div>
+            </div>
         </div>
     );
 }

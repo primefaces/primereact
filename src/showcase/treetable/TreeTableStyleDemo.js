@@ -138,23 +138,25 @@ const TreeTableStyleDemo = () => {
         let size = node.data.size;
         let fontWeight = parseInt(size, 10) > 75 ? 'bold' : 'normal';
 
-        return <span style={{fontWeight: fontWeight}}>{size}</span>;
-    };
+        return <span style={{ fontWeight: fontWeight }}>{size}</span>;
+    }
 
     const rowClassName = (node) => {
-        return {'p-highlight' : (node.children && node.children.length === 3)};
-    };
+        return { 'p-highlight': (node.children && node.children.length === 3) };
+    }
 
     return (
         <div>
-            <p>This treetable highlights cells with a bolder font weight whose size value is greater than 75kb and highlights rows who has at 3 child rows.</p>
-            <TreeTable value={nodes} rowClassName={rowClassName}>
-                <Column field="name" header="Name" expander></Column>
-                <Column field="size" header="Size" body={sizeTemplate}></Column>
-                <Column field="type" header="Type"></Column>
-            </TreeTable>
+            <div className="card">
+                <p>This treetable highlights cells with a bolder font weight whose size value is greater than 75kb and highlights rows who has at 3 child rows.</p>
+                <TreeTable value={nodes} rowClassName={rowClassName}>
+                    <Column field="name" header="Name" expander></Column>
+                    <Column field="size" header="Size" body={sizeTemplate}></Column>
+                    <Column field="type" header="Type"></Column>
+                </TreeTable>
+            </div>
         </div>
-    )
+    );
 }
                 `
             },
@@ -167,34 +169,36 @@ import { Column } from 'primereact/column';
 import { NodeService } from '../service/NodeService';
 
 const TreeTableStyleDemo = () => {
-    const [nodes, setNodes] = useState<any>([]);
+    const [nodes, setNodes] = useState([]);
     const nodeservice = new NodeService();
 
     useEffect(() => {
         nodeservice.getTreeTableNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const sizeTemplate = (node: any) => {
+    const sizeTemplate = (node) => {
         let size = node.data.size;
-        let fontWeight: any = parseInt(size, 10) > 75 ? 'bold' : 'normal';
+        let fontWeight = parseInt(size, 10) > 75 ? 'bold' : 'normal';
 
-        return <span style={{fontWeight: fontWeight}}>{size}</span>;
-    };
+        return <span style={{ fontWeight: fontWeight }}>{size}</span>;
+    }
 
-    const rowClassName = (node: any) => {
-        return {'p-highlight' : (node.children && node.children.length === 3)};
-    };
+    const rowClassName = (node) => {
+        return { 'p-highlight': (node.children && node.children.length === 3) };
+    }
 
     return (
         <div>
-            <p>This treetable highlights cells with a bolder font weight whose size value is greater than 75kb and highlights rows who has at 3 child rows.</p>
-            <TreeTable value={nodes} rowClassName={rowClassName}>
-                <Column field="name" header="Name" expander></Column>
-                <Column field="size" header="Size" body={sizeTemplate}></Column>
-                <Column field="type" header="Type"></Column>
-            </TreeTable>
+            <div className="card">
+                <p>This treetable highlights cells with a bolder font weight whose size value is greater than 75kb and highlights rows who has at 3 child rows.</p>
+                <TreeTable value={nodes} rowClassName={rowClassName}>
+                    <Column field="name" header="Name" expander></Column>
+                    <Column field="size" header="Size" body={sizeTemplate}></Column>
+                    <Column field="type" header="Type"></Column>
+                </TreeTable>
+            </div>
         </div>
-    )
+    );
 }
                 `
             }

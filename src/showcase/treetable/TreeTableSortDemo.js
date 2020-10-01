@@ -176,19 +176,23 @@ const TreeTableSortDemo = () => {
 
     return (
         <div>
-            <h3>Single Column Sorting</h3>
-            <TreeTable value={nodes1} defaultSortOrder={-1}>
-                <Column field="name" header="Name" expander sortable></Column>
-                <Column field="size" header="Size" sortable></Column>
-                <Column field="type" header="Type" sortable></Column>
-            </TreeTable>
+            <div className="card">
+                <h5>Single Column Sorting</h5>
+                <TreeTable value={nodes1} defaultSortOrder={-1}>
+                    <Column field="name" header="Name" expander sortable></Column>
+                    <Column field="size" header="Size" sortable></Column>
+                    <Column field="type" header="Type" sortable></Column>
+                </TreeTable>
+            </div>
 
-            <h3>Multiple Column Sorting</h3>
-            <TreeTable value={nodes2} sortMode="multiple" defaultSortOrder={-1}>
-                <Column field="name" header="Name" expander sortable></Column>
-                <Column field="size" header="Size" sortable></Column>
-                <Column field="type" header="Type" sortable></Column>
-            </TreeTable>
+            <div className="card">
+                <h5>Multiple Column Sorting</h5>
+                <TreeTable value={nodes2} sortMode="multiple" defaultSortOrder={-1}>
+                    <Column field="name" header="Name" expander sortable></Column>
+                    <Column field="size" header="Size" sortable></Column>
+                    <Column field="type" header="Type" sortable></Column>
+                </TreeTable>
+            </div>
         </div>
     );
 }
@@ -226,19 +230,23 @@ const TreeTableSortDemo = () => {
 
     return (
         <div>
-            <h3>Single Column Sorting</h3>
-            <TreeTable value={nodes1} defaultSortOrder={-1}>
-                <Column field="name" header="Name" expander sortable></Column>
-                <Column field="size" header="Size" sortable></Column>
-                <Column field="type" header="Type" sortable></Column>
-            </TreeTable>
+            <div className="card">
+                <h5>Single Column Sorting</h5>
+                <TreeTable value={nodes1} defaultSortOrder={-1}>
+                    <Column field="name" header="Name" expander sortable></Column>
+                    <Column field="size" header="Size" sortable></Column>
+                    <Column field="type" header="Type" sortable></Column>
+                </TreeTable>
+            </div>
 
-            <h3>Multiple Column Sorting</h3>
-            <TreeTable value={nodes2} sortMode="multiple" defaultSortOrder={-1}>
-                <Column field="name" header="Name" expander sortable></Column>
-                <Column field="size" header="Size" sortable></Column>
-                <Column field="type" header="Type" sortable></Column>
-            </TreeTable>
+            <div className="card">
+                <h5>Multiple Column Sorting</h5>
+                <TreeTable value={nodes2} sortMode="multiple" defaultSortOrder={-1}>
+                    <Column field="name" header="Name" expander sortable></Column>
+                    <Column field="size" header="Size" sortable></Column>
+                    <Column field="type" header="Type" sortable></Column>
+                </TreeTable>
+            </div>
         </div>
     );
 }
