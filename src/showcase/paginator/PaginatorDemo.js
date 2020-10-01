@@ -58,7 +58,7 @@ export class PaginatorDemo extends Component {
                             template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"></Paginator>
 
                         <div className="image-gallery">
-                            <img alt={this.state.first2} src={`showcase/demo/images/nature/nature${this.state.first2 + 1}.jpg`} />
+                            <img alt={this.state.first2} src={`showcase/demo/images/nature/nature${this.state.first2 + 1}.jpg`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} />
                         </div>
                     </div>
                 </div>

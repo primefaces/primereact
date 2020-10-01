@@ -16,7 +16,7 @@ export class PaginatorDoc extends Component {
 import React, { Component } from 'react';
 import { Paginator } from 'primereact/paginator';
 import { Button } from 'primereact/button';
-import './PaginatorDemo.scss';
+import './PaginatorDemo.css';
 
 export class PaginatorDemo extends Component {
 
@@ -63,7 +63,7 @@ export class PaginatorDemo extends Component {
                         template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"></Paginator>
 
                     <div className="image-gallery">
-                        <img alt={this.state.first2} src={\`showcase/demo/images/nature/nature\${this.state.first2 + 1}.jpg\`} />
+                        <img alt={this.state.first2} src={\`showcase/demo/images/nature/nature\${this.state.first2 + 1}.jpg\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} />
                     </div>
                 </div>
             </div>
@@ -75,33 +75,43 @@ export class PaginatorDemo extends Component {
             'hooks': {
                 tabName: 'Hooks Source',
                 content: `
-import React, { useState } from 'react';
-import {Paginator} from 'primereact/paginator';
+import React, { useState, useEffect } from 'react';
+import { Paginator } from 'primereact/paginator';
+import { Button } from 'primereact/button';
+import './PaginatorDemo.css';
 
 const PaginatorDemo = () => {
     const [first, setFirst] = useState(0);
     const [rows, setRows] = useState(10);
     const [first2, setFirst2] = useState(0);
-    const [rows2, setRows2] = useState(10);
 
-    const onPageChange = (event) => {
+    const onPageChange = (event) => {
         setFirst(event.first);
         setRows(event.rows);
-    };
+    }
 
-    const onPageChange2 = (event) => {
+    const onPageChange2 = (event) => {
         setFirst2(event.first);
-        setRows2(event.rows);
-    };
+    }
+
+    const leftContent = <Button type="button" icon="pi pi-refresh" onClick={() => setFirst2(0)} />;
+    const rightContent = <Button type="button" icon="pi pi-search" />;
 
     return (
-        <div>
-            <h5>Default</h5>
-            <Paginator first={first} rows={rows} totalRecords={120} rowsPerPageOptions={[10,20,30]} onPageChange={onPageChange}></Paginator>
+        <div className="paginator-demo">
+            <div className="card">
+                <h5>Basic</h5>
+                <Paginator first={first} rows={rows} totalRecords={120} rowsPerPageOptions={[10, 20, 30]} onPageChange={onPageChange}></Paginator>
 
-            <h5>Custom Template</h5>
-            <Paginator first={first2} rows={rows2} totalRecords={120} rowsPerPageOptions={[10,20,30]} onPageChange={onPageChange2}
-                template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"></Paginator>
+                <h5>Custom Template</h5>
+                <Paginator first={first2} rows={1} totalRecords={12} onPageChange={onPageChange2}
+                    leftContent={leftContent} rightContent={rightContent}
+                    template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"></Paginator>
+
+                <div className="image-gallery">
+                    <img alt={first2} src={\`showcase/demo/images/nature/nature\${first2 + 1}.jpg\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} />
+                </div>
+            </div>
         </div>
     );
 }
@@ -110,35 +120,60 @@ const PaginatorDemo = () => {
             'ts': {
                 tabName: 'TS Source',
                 content: `
-import React, { useState } from 'react';
-import {Paginator} from 'primereact/paginator';
+import React, { useState, useEffect } from 'react';
+import { Paginator } from 'primereact/paginator';
+import { Button } from 'primereact/button';
+import './PaginatorDemo.css';
 
 const PaginatorDemo = () => {
     const [first, setFirst] = useState(0);
     const [rows, setRows] = useState(10);
     const [first2, setFirst2] = useState(0);
-    const [rows2, setRows2] = useState(10);
 
-    const onPageChange = (event: { first: number, rows: number }) => {
+    const onPageChange = (event) => {
         setFirst(event.first);
         setRows(event.rows);
-    };
+    }
 
-    const onPageChange2 = (event: { first: number, rows: number }) => {
+    const onPageChange2 = (event) => {
         setFirst2(event.first);
-        setRows2(event.rows);
-    };
+    }
+
+    const leftContent = <Button type="button" icon="pi pi-refresh" onClick={() => setFirst2(0)} />;
+    const rightContent = <Button type="button" icon="pi pi-search" />;
 
     return (
-        <div>
-            <h5>Default</h5>
-            <Paginator first={first} rows={rows} totalRecords={120} rowsPerPageOptions={[10,20,30]} onPageChange={onPageChange}></Paginator>
+        <div className="paginator-demo">
+            <div className="card">
+                <h5>Basic</h5>
+                <Paginator first={first} rows={rows} totalRecords={120} rowsPerPageOptions={[10, 20, 30]} onPageChange={onPageChange}></Paginator>
 
-            <h5>Custom Template</h5>
-            <Paginator first={first2} rows={rows2} totalRecords={120} rowsPerPageOptions={[10,20,30]} onPageChange={onPageChange2}
-                template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"></Paginator>
+                <h5>Custom Template</h5>
+                <Paginator first={first2} rows={1} totalRecords={12} onPageChange={onPageChange2}
+                    leftContent={leftContent} rightContent={rightContent}
+                    template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"></Paginator>
+
+                <div className="image-gallery">
+                    <img alt={first2} src={\`showcase/demo/images/nature/nature\${first2 + 1}.jpg\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} />
+                </div>
+            </div>
         </div>
     );
+}
+                `
+            }
+        };
+
+        this.extFiles = {
+            'src/demo/PaginatorDemo.css': {
+                content: `
+.paginator-demo .p-button.p-button-icon-only {
+    border-radius: 0;
+}
+
+.paginator-demo .image-gallery {
+    text-align: center;
+    padding: 1rem;
 }
                 `
             }
@@ -377,21 +412,7 @@ import { Paginator } from 'primereact/paginator';
                     </TabPanel>
 
                     <TabPanel header="Source">
-                        <LiveEditor name="PaginatorDemo" sources={this.sources} />
-<CodeHighlight lang="scss">
-{`
-.paginator-demo {
-    .p-button.p-button-icon-only {
-        border-radius: 0;
-    }
-
-    .image-gallery {
-        text-align: center;
-        padding: 1rem;
-    }
-}
-`}
-</CodeHighlight>
+                        <LiveEditor name="PaginatorDemo" sources={this.sources} extFiles={this.extFiles} />
                     </TabPanel>
                 </TabView>
             </div>

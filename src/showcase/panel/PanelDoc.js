@@ -46,24 +46,25 @@ export class PanelDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React from 'react';
-import {Panel} from 'primereact/panel';
+import { Panel } from 'primereact/panel';
 
 const PanelDemo = () => {
-
     return (
         <div>
-            <Panel header="Godfather I">
-                <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-                His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-                Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
-                kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
+            <h5>Regular</h5>
+            <Panel header="Header">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                    cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             </Panel>
 
-                <Panel header="Godfather I" style={{marginTop:'2em'}} toggleable>
-                <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-                His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-                Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
-                kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
+            <h5>Advanced</h5>
+            <Panel header="Header" toggleable>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                    cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             </Panel>
         </div>
     )
@@ -74,29 +75,29 @@ const PanelDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React from 'react';
-import {Panel} from 'primereact/panel';
+import { Panel } from 'primereact/panel';
 
 const PanelDemo = () => {
-
     return (
         <div>
-            <Panel header="Godfather I">
-                <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-                His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-                Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
-                kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
+            <h5>Regular</h5>
+            <Panel header="Header">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                    cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             </Panel>
 
-                <Panel header="Godfather I" style={{marginTop:'2em'}} toggleable>
-                <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-                His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-                Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
-                kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
+            <h5>Advanced</h5>
+            <Panel header="Header" toggleable>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                    cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             </Panel>
         </div>
     )
 }
-
                 `
             }
         }
