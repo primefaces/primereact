@@ -68,52 +68,41 @@ export class SelectButtonDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState } from 'react';
-import {SelectButton} from 'primereact/selectbutton';
+import { SelectButton } from 'primereact/selectbutton';
 
-const SelectButtonDemo  = () => {
-    const [value1, setValue1] = useState(null);
-    const [value2, setValue2] = useState(['Apartment', 'Studio']);
+const SelectButtonDemo = () => {
+    const [value1, setValue1] = useState('Off');
+    const [value2, setValue2] = useState(null);
     const [value3, setValue3] = useState(null);
-
-    const options = [
-        {label: 'Apartment', value: 'Apartment'},
-        {label: 'House', value: 'House'},
-        {label: 'Studio', value: 'Studio'}
+    const options = ['Off', 'On'];
+    const paymentOptions = [
+        {name: 'Option 1', value: 1},
+        {name: 'Option 2', value: 2},
+        {name: 'Option 3', value: 3}
+    ];
+    const justifyOptions = [
+        {icon: 'pi pi-align-left', value: 'left'},
+        {icon: 'pi pi-align-right', value: 'Right'},
+        {icon: 'pi pi-align-center', value: 'Center'},
+        {icon: 'pi pi-align-justify', value: 'Justify'}
     ];
 
-    const cars = [
-        {brand: 'Audi', key: 'A'},
-        {brand: 'BMW', key: 'B'},
-        {brand: 'Mercedes', key: 'M'}
-    ];
-
-    const carTemplate = (option) => {
-        const logoPath = 'showcase/demo/images/car/' + option.brand + '.png';
-
-        return (
-            <div style={{textAlign: 'center', padding: '1em', width: '125px'}}>
-                <img alt={option.brand} src={logoPath} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" style={{width: '48px'}} />
-                <div style={{marginTop: '1em'}}>{option.brand}</div>
-            </div>
-        )
+    const justifyTemplate = (option) => {
+        return <i className={option.icon}></i>;
     }
 
     return (
         <div>
-            <h5>Single</h5>
-            <SelectButton value={value1} options={options} onChange={(e) => setValue1(e.value)} />
-            <br />
-            <p>Selected Value: <span style={{fontWeight: 'bold'}}>{value1}</span></p>
+            <div className="card">
+                <h5>Single Selection</h5>
+                <SelectButton value={value1} options={options} onChange={(e) => setValue1(e.value)} />
 
-            <h5>Multiple</h5>
-            <SelectButton value={value2} multiple options={options} onChange={(e) => setValue2(e.value)} />
-            <br />
-            <p>Selected Values: <span style={{fontWeight: 'bold'}}>{value2 && value2.map((val) => val + " ")}</span></p>
+                <h5>Multiple Selection</h5>
+                <SelectButton value={value2} options={paymentOptions} onChange={(e) => setValue2(e.value)} optionLabel="name" multiple />
 
-            <h5>Custom Content</h5>
-            <SelectButton value={value3} options={cars} onChange={(e) => setValue3(e.value)} itemTemplate={carTemplate} optionLabel="brand" optionValue="brand" />
-            <br />
-            <p>Selected Value: <span style={{fontWeight: 'bold'}}>{value3}</span></p>
+                <h5>Custom Content</h5>
+                <SelectButton value={value3} options={justifyOptions} onChange={(e) => setValue3(e.value)} itemTemplate={justifyTemplate} />
+            </div>
         </div>
     );
 }
@@ -123,52 +112,41 @@ const SelectButtonDemo  = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState } from 'react';
-import {SelectButton} from 'primereact/selectbutton';
+import { SelectButton } from 'primereact/selectbutton';
 
-const SelectButtonDemo  = () => {
-    const [value1, setValue1] = useState<any>(null);
-    const [value2, setValue2] = useState(['Apartment', 'Studio']);
-    const [value3, setValue3] = useState<any>(null);
-
-    const options = [
-        {label: 'Apartment', value: 'Apartment'},
-        {label: 'House', value: 'House'},
-        {label: 'Studio', value: 'Studio'}
+const SelectButtonDemo = () => {
+    const [value1, setValue1] = useState('Off');
+    const [value2, setValue2] = useState(null);
+    const [value3, setValue3] = useState(null);
+    const options = ['Off', 'On'];
+    const paymentOptions = [
+        {name: 'Option 1', value: 1},
+        {name: 'Option 2', value: 2},
+        {name: 'Option 3', value: 3}
+    ];
+    const justifyOptions = [
+        {icon: 'pi pi-align-left', value: 'left'},
+        {icon: 'pi pi-align-right', value: 'Right'},
+        {icon: 'pi pi-align-center', value: 'Center'},
+        {icon: 'pi pi-align-justify', value: 'Justify'}
     ];
 
-    const cars = [
-        {brand: 'Audi', key: 'A'},
-        {brand: 'BMW', key: 'B'},
-        {brand: 'Mercedes', key: 'M'}
-    ];
-
-    const carTemplate = (option: { brand: string }) => {
-        const logoPath = 'showcase/demo/images/car/' + option.brand + '.png';
-
-        return (
-            <div style={{textAlign: 'center', padding: '1em', width: '125px'}}>
-                <img alt={option.brand} src={logoPath} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" style={{width: '48px'}} />
-                <div style={{marginTop: '1em'}}>{option.brand}</div>
-            </div>
-        )
+    const justifyTemplate = (option) => {
+        return <i className={option.icon}></i>;
     }
 
     return (
         <div>
-            <h5>Single</h5>
-            <SelectButton value={value1} options={options} onChange={(e) => setValue1(e.value)} />
-            <br />
-            <p>Selected Value: <span style={{fontWeight: 'bold'}}>{value1}</span></p>
+            <div className="card">
+                <h5>Single Selection</h5>
+                <SelectButton value={value1} options={options} onChange={(e) => setValue1(e.value)} />
 
-            <h5>Multiple</h5>
-            <SelectButton value={value2} multiple options={options} onChange={(e) => setValue2(e.value)} />
-            <br />
-            <p>Selected Values: <span style={{fontWeight: 'bold'}}>{value2 && value2.map((val) => val + " ")}</span></p>
+                <h5>Multiple Selection</h5>
+                <SelectButton value={value2} options={paymentOptions} onChange={(e) => setValue2(e.value)} optionLabel="name" multiple />
 
-            <h5>Custom Content</h5>
-            <SelectButton value={value3} options={cars} onChange={(e) => setValue3(e.value)} itemTemplate={carTemplate} optionLabel="brand" optionValue="brand" />
-            <br />
-            <p>Selected Value: <span style={{fontWeight: 'bold'}}>{value3}</span></p>
+                <h5>Custom Content</h5>
+                <SelectButton value={value3} options={justifyOptions} onChange={(e) => setValue3(e.value)} itemTemplate={justifyTemplate} />
+            </div>
         </div>
     );
 }

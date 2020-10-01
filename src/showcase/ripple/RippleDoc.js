@@ -1,8 +1,170 @@
 import React, { Component } from 'react';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
+import { LiveEditor } from '../liveeditor/LiveEditor';
 
 export class RippleDoc extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.sources = {
+            'class': {
+                tabName: 'Class Source',
+                content: `
+import React, { Component } from 'react';
+import PrimeReact from 'primereact/utils';
+import { Ripple } from 'primereact/ripple';
+import './RippleDemo.css';
+
+export class RippleDemo extends Component {
+
+    constructor(props) {
+        super(props);
+
+        PrimeReact.ripple = true;
+    }
+
+    render() {
+        return (
+            <div className="ripple-demo">
+                <div className="card-container p-d-flex">
+                    <div className="card primary-box p-ripple">
+                        Default
+                        <Ripple />
+                    </div>
+                    <div className="card styled-box-green p-ripple">
+                        Green
+                        <Ripple />
+                    </div>
+                    <div className="card styled-box-orange p-ripple">
+                        Orange
+                        <Ripple />
+                    </div>
+                    <div className="card styled-box-purple p-ripple">
+                        Purple
+                        <Ripple />
+                    </div>
+                </div>
+            </div>
+        );
+    }
+}
+                `
+            },
+            'hooks': {
+                tabName: 'Hooks Source',
+                content: `
+import React from 'react';
+import PrimeReact from 'primereact/utils';
+import { Ripple } from 'primereact/ripple';
+import './RippleDemo.css';
+
+const RippleDemo = () => {
+    PrimeReact.ripple = true;
+
+    return (
+        <div className="ripple-demo">
+            <div className="card-container p-d-flex">
+                <div className="card primary-box p-ripple">
+                    Default
+                    <Ripple />
+                </div>
+                <div className="card styled-box-green p-ripple">
+                    Green
+                    <Ripple />
+                </div>
+                <div className="card styled-box-orange p-ripple">
+                    Orange
+                    <Ripple />
+                </div>
+                <div className="card styled-box-purple p-ripple">
+                    Purple
+                    <Ripple />
+                </div>
+            </div>
+        </div>
+    );
+}
+                `
+            },
+            'ts': {
+                tabName: 'TS Source',
+                content: `
+import React from 'react';
+import PrimeReact from 'primereact/utils';
+import { Ripple } from 'primereact/ripple';
+import './RippleDemo.css';
+
+const RippleDemo = () => {
+    PrimeReact.ripple = true;
+
+    return (
+        <div className="ripple-demo">
+            <div className="card-container p-d-flex">
+                <div className="card primary-box p-ripple">
+                    Default
+                    <Ripple />
+                </div>
+                <div className="card styled-box-green p-ripple">
+                    Green
+                    <Ripple />
+                </div>
+                <div className="card styled-box-orange p-ripple">
+                    Orange
+                    <Ripple />
+                </div>
+                <div className="card styled-box-purple p-ripple">
+                    Purple
+                    <Ripple />
+                </div>
+            </div>
+        </div>
+    );
+}
+                `
+            }
+        };
+
+        this.extFiles = {
+            'src/demo/RippleDemo.css': {
+                content: `
+.ripple-demo .card-container .card {
+    width: 75px;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    user-select: none;
+    padding: 0;
+}
+
+.ripple-demo .card-container .card.primary-box {
+    background-color: var(--primary-color);
+    padding: 0;
+    color: var(--primary-color-text);
+}
+
+.ripple-demo .card-container .card.styled-box-green .p-ink {
+    background: rgba(75, 175, 80, 0.3);
+}
+
+.ripple-demo .card-container .card.styled-box-orange .p-ink {
+    background: rgba(255, 193, 6, 0.3);
+}
+
+.ripple-demo .card-container .card.styled-box-purple .p-ink {
+    background: rgba(156, 39, 176, 0.3);
+}
+
+.ripple-demo .card-container .card:last-child {
+    margin-right: 0;
+}
+                `
+            }
+        }
+    }
 
     shouldComponentUpdate() {
         return false;
@@ -93,95 +255,7 @@ import { Ripple } from 'primereact/ripple';
                     </TabPanel>
 
                     <TabPanel header="Source">
-<CodeHighlight lang="js">
-{`
-import React, { Component } from 'react';
-import PrimeReact from 'primereact/utils';
-import { Ripple } from 'primereact/ripple';
-import './RippleDemo.scss';
-
-export class RippleDemo extends Component {
-
-    constructor(props) {
-        super(props);
-
-        PrimeReact.ripple = true;
-    }
-
-    render() {
-        return (
-            <div className="ripple-demo">
-                <div className="card-container p-d-flex">
-                    <div className="card primary-box p-ripple">
-                        Default
-                        <Ripple />
-                    </div>
-                    <div className="card styled-box-green p-ripple">
-                        Green
-                        <Ripple />
-                    </div>
-                    <div className="card styled-box-orange p-ripple">
-                        Orange
-                        <Ripple />
-                    </div>
-                    <div className="card styled-box-purple p-ripple">
-                        Purple
-                        <Ripple />
-                    </div>
-                </div>
-            </div>
-        );
-    }
-}
-`}
-</CodeHighlight>
-
-<CodeHighlight lang="scss">
-{`
-.ripple-demo {
-    .card-container {
-        .card {
-            width: 75px;
-            height: 75px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 1rem;
-            user-select: none;
-            padding: 0;
-
-            &.primary-box {
-                background-color: var(--primary-color);
-                padding: 0;
-                color: var(--primary-color-text);
-            }
-
-            &.styled-box-green {
-                .p-ink {
-                    background: rgba(#4baf50, 0.3);
-                }
-            }
-
-            &.styled-box-orange {
-                .p-ink {
-                    background: rgba(#ffc106, 0.3);
-                }
-            }
-
-            &.styled-box-purple {
-                .p-ink {
-                    background: rgba(#9c27b0, 0.3);
-                }
-            }
-
-            &:last-child {
-                margin-right: 0;
-            }
-        }
-    }
-}
-`}
-</CodeHighlight>
+                        <LiveEditor name="RippleDemo" sources={this.sources} extFiles={this.extFiles} />
                     </TabPanel>
                 </TabView>
             </div>
