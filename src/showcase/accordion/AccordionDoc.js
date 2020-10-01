@@ -16,7 +16,7 @@ export class AccordionDoc extends Component {
 import React, { Component } from 'react';
 import { Accordion, AccordionTab } from 'primereact/accordion';
 import { Button } from 'primereact/button';
-import './AccordionDemo.scss';
+import './AccordionDemo.css';
 
 export class AccordionDemo extends Component {
 
@@ -118,17 +118,17 @@ export class AccordionDemo extends Component {
 
                     <h5>Custom Headers</h5>
                     <Accordion className="accordion-custom" activeIndex={0}>
-                        <AccordionTab header={<><i className="pi pi-calendar"></i><span>Header I</span></>}>
+                        <AccordionTab header={<React.Fragment><i className="pi pi-calendar"></i><span>Header I</span></React.Fragment>}>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                                 ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                                 Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                         </AccordionTab>
-                        <AccordionTab header={<><i className="pi pi-user"></i><span>Header II</span></>}>
+                        <AccordionTab header={<React.Fragment><i className="pi pi-user"></i><span>Header II</span></React.Fragment>}>
                             <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
                                 architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
                                 voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.</p>
                         </AccordionTab>
-                        <AccordionTab header={<><i className="pi pi-search"></i><span>Header III</span><i className="pi pi-cog"></i></>}>
+                        <AccordionTab header={<React.Fragment><i className="pi pi-search"></i><span>Header III</span><i className="pi pi-cog"></i></React.Fragment>}>
                             <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
                                 cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
                                 Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
@@ -144,59 +144,120 @@ export class AccordionDemo extends Component {
             'hooks': {
                 tabName: 'Hooks Source',
                 content: `
-import React from 'react';
+import React, { useState } from 'react';
 import { Accordion, AccordionTab } from 'primereact/accordion';
+import { Button } from 'primereact/button';
+import './AccordionDemo.css';
 
 const AccordionDemo = () => {
+    const [activeIndex, setActiveIndex] = useState(null);
+
+    const onClick = (itemIndex) => {
+        let _activeIndex = activeIndex ? [...activeIndex] : [];
+
+        if (_activeIndex.length === 0) {
+            _activeIndex.push(itemIndex);
+        }
+        else {
+            const index = _activeIndex.indexOf(itemIndex);
+            if (index === -1) {
+                _activeIndex.push(itemIndex);
+            }
+            else {
+                _activeIndex.splice(index, 1);
+            }
+        }
+
+        setActiveIndex(_activeIndex);
+    }
 
     return (
-        <div>
-            <h5>Default</h5>
-            <Accordion>
-                <AccordionTab header="Godfather I">
-                    <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughters wedding.
-                    His beloved son Michael has just come home from the war, but does not intend to become part of his fathers business.
-                    Through Michaels life the nature of the family business becomes clear. The business of the family is just like the head
-                    of the family, kind and benevolent to those who give respect,
-                    but given to ruthless violence whenever anything stands against the good of the family.</p>
-                </AccordionTab>
-                <AccordionTab header="Godfather II">
-                    <p>Francis Ford Coppolas legendary continuation and sequel to his landmark 1972 film, The_Godfather parallels the young
-                    Vito Corleone's rise with his son Michael's spiritual fall, deepening The_Godfathers depiction of the dark side of
-                    the American dream. In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family.
-                    Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy, killing the local Black Hand
-                    Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows.</p>
-                </AccordionTab>
-                <AccordionTab header="Godfather III">
-                    <p>After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this
-                    third and final story of the fictional Corleone crime family. Two decades have passed, and crime kingpin Michael Corleone,
-                    now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate.</p>
-                </AccordionTab>
-            </Accordion>
+        <div className="accordion-demo">
+            <div className="card">
+                <h5>Default</h5>
+                <Accordion activeIndex={0}>
+                    <AccordionTab header="Header I">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                            ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </AccordionTab>
+                    <AccordionTab header="Header II">
+                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
+                            architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+                            voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.</p>
+                    </AccordionTab>
+                    <AccordionTab header="Header III">
+                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
+                            cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
+                            Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
+                    </AccordionTab>
+                </Accordion>
 
-            <h5>Multiple</h5>
-            <Accordion multiple>
-                <AccordionTab header="Godfather I">
-                    <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughters wedding.
-                    His beloved son Michael has just come home from the war, but does not intend to become part of his fathers business.
-                    Through Michaels life the nature of the family business becomes clear. The business of the family is just like the head
-                    of the family, kind and benevolent to those who give respect,
-                    but given to ruthless violence whenever anything stands against the good of the family.</p>
-                </AccordionTab>
-                <AccordionTab header="Godfather II">
-                    <p>Francis Ford Coppolas legendary continuation and sequel to his landmark 1972 film, The_Godfather parallels the young
-                    Vito Corleone's rise with his son Michael's spiritual fall, deepening The_Godfathers depiction of the dark side of
-                    the American dream. In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family.
-                    Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy, killing the local Black Hand
-                    Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows.</p>
-                </AccordionTab>
-                <AccordionTab header="Godfather III">
-                    <p>After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this
-                    third and final story of the fictional Corleone crime family. Two decades have passed, and crime kingpin Michael Corleone,
-                    now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate.</p>
-                </AccordionTab>
-                <AccordionTab header="Godfather IV" disabled></AccordionTab>
-            </Accordion>
+                <h5>Multiple</h5>
+                <Accordion multiple activeIndex={[0]}>
+                    <AccordionTab header="Header I">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                            ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </AccordionTab>
+                    <AccordionTab header="Header II">
+                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
+                            architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+                            voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.</p>
+                    </AccordionTab>
+                    <AccordionTab header="Header III">
+                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
+                            cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
+                            Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
+                    </AccordionTab>
+                    <AccordionTab header="Header IV" disabled>
+                    </AccordionTab>
+                </Accordion>
+
+                <h5>Programmatic</h5>
+                <div className="p-pt-2 p-pb-4">
+                    <Button icon={activeIndex && activeIndex.some((index) => index === 0) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 1st" onClick={() => onClick(0)} className="p-button-text" />
+                    <Button icon={activeIndex && activeIndex.some((index) => index === 1) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 2nd" onClick={() => onClick(1)} className="p-button-text p-ml-2" />
+                    <Button icon={activeIndex && activeIndex.some((index) => index === 2) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 3rd" onClick={() => onClick(2)} className="p-button-text p-ml-2" />
+                </div>
+
+                <Accordion multiple activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
+                    <AccordionTab header="Header I">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                            ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </AccordionTab>
+                    <AccordionTab header="Header II">
+                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
+                            architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+                            voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.</p>
+                    </AccordionTab>
+                    <AccordionTab header="Header III">
+                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
+                            cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
+                            Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
+                    </AccordionTab>
+                </Accordion>
+
+                <h5>Custom Headers</h5>
+                <Accordion className="accordion-custom" activeIndex={0}>
+                    <AccordionTab header={<React.Fragment><i className="pi pi-calendar"></i><span>Header I</span></React.Fragment>}>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                            ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </AccordionTab>
+                    <AccordionTab header={<React.Fragment><i className="pi pi-user"></i><span>Header II</span></React.Fragment>}>
+                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
+                            architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+                            voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.</p>
+                    </AccordionTab>
+                    <AccordionTab header={<React.Fragment><i className="pi pi-search"></i><span>Header III</span><i className="pi pi-cog"></i></React.Fragment>}>
+                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
+                            cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
+                            Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
+                    </AccordionTab>
+                </Accordion>
+            </div>
         </div>
     )
 }
@@ -205,61 +266,141 @@ const AccordionDemo = () => {
             'ts': {
                 tabName: 'TS Source',
                 content: `
-import React from 'react';
+import React, { useState } from 'react';
 import { Accordion, AccordionTab } from 'primereact/accordion';
+import { Button } from 'primereact/button';
+import './AccordionDemo.css';
 
 const AccordionDemo = () => {
+    const [activeIndex, setActiveIndex] = useState(null);
+
+    const onClick = (itemIndex) => {
+        let _activeIndex = activeIndex ? [...activeIndex] : [];
+
+        if (_activeIndex.length === 0) {
+            _activeIndex.push(itemIndex);
+        }
+        else {
+            const index = _activeIndex.indexOf(itemIndex);
+            if (index === -1) {
+                _activeIndex.push(itemIndex);
+            }
+            else {
+                _activeIndex.splice(index, 1);
+            }
+        }
+
+        setActiveIndex(_activeIndex);
+    }
 
     return (
-        <div>
-            <h5>Default</h5>
-            <Accordion>
-                <AccordionTab header="Godfather I">
-                    <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughters wedding.
-                    His beloved son Michael has just come home from the war, but does not intend to become part of his fathers business.
-                    Through Michaels life the nature of the family business becomes clear. The business of the family is just like the head
-                    of the family, kind and benevolent to those who give respect,
-                    but given to ruthless violence whenever anything stands against the good of the family.</p>
-                </AccordionTab>
-                <AccordionTab header="Godfather II">
-                    <p>Francis Ford Coppolas legendary continuation and sequel to his landmark 1972 film, The_Godfather parallels the young
-                    Vito Corleone's rise with his son Michael's spiritual fall, deepening The_Godfathers depiction of the dark side of
-                    the American dream. In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family.
-                    Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy, killing the local Black Hand
-                    Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows.</p>
-                </AccordionTab>
-                <AccordionTab header="Godfather III">
-                    <p>After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this
-                    third and final story of the fictional Corleone crime family. Two decades have passed, and crime kingpin Michael Corleone,
-                    now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate.</p>
-                </AccordionTab>
-            </Accordion>
+        <div className="accordion-demo">
+            <div className="card">
+                <h5>Default</h5>
+                <Accordion activeIndex={0}>
+                    <AccordionTab header="Header I">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                            ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </AccordionTab>
+                    <AccordionTab header="Header II">
+                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
+                            architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+                            voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.</p>
+                    </AccordionTab>
+                    <AccordionTab header="Header III">
+                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
+                            cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
+                            Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
+                    </AccordionTab>
+                </Accordion>
 
-            <h5>Multiple</h5>
-            <Accordion multiple>
-                <AccordionTab header="Godfather I">
-                    <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughters wedding.
-                    His beloved son Michael has just come home from the war, but does not intend to become part of his fathers business.
-                    Through Michaels life the nature of the family business becomes clear. The business of the family is just like the head
-                    of the family, kind and benevolent to those who give respect,
-                    but given to ruthless violence whenever anything stands against the good of the family.</p>
-                </AccordionTab>
-                <AccordionTab header="Godfather II">
-                    <p>Francis Ford Coppolas legendary continuation and sequel to his landmark 1972 film, The_Godfather parallels the young
-                    Vito Corleone's rise with his son Michael's spiritual fall, deepening The_Godfathers depiction of the dark side of
-                    the American dream. In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family.
-                    Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy, killing the local Black Hand
-                    Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows.</p>
-                </AccordionTab>
-                <AccordionTab header="Godfather III">
-                    <p>After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this
-                    third and final story of the fictional Corleone crime family. Two decades have passed, and crime kingpin Michael Corleone,
-                    now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate.</p>
-                </AccordionTab>
-                <AccordionTab header="Godfather IV" disabled></AccordionTab>
-            </Accordion>
+                <h5>Multiple</h5>
+                <Accordion multiple activeIndex={[0]}>
+                    <AccordionTab header="Header I">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                            ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </AccordionTab>
+                    <AccordionTab header="Header II">
+                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
+                            architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+                            voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.</p>
+                    </AccordionTab>
+                    <AccordionTab header="Header III">
+                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
+                            cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
+                            Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
+                    </AccordionTab>
+                    <AccordionTab header="Header IV" disabled>
+                    </AccordionTab>
+                </Accordion>
+
+                <h5>Programmatic</h5>
+                <div className="p-pt-2 p-pb-4">
+                    <Button icon={activeIndex && activeIndex.some((index) => index === 0) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 1st" onClick={() => onClick(0)} className="p-button-text" />
+                    <Button icon={activeIndex && activeIndex.some((index) => index === 1) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 2nd" onClick={() => onClick(1)} className="p-button-text p-ml-2" />
+                    <Button icon={activeIndex && activeIndex.some((index) => index === 2) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 3rd" onClick={() => onClick(2)} className="p-button-text p-ml-2" />
+                </div>
+
+                <Accordion multiple activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
+                    <AccordionTab header="Header I">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                            ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </AccordionTab>
+                    <AccordionTab header="Header II">
+                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
+                            architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+                            voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.</p>
+                    </AccordionTab>
+                    <AccordionTab header="Header III">
+                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
+                            cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
+                            Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
+                    </AccordionTab>
+                </Accordion>
+
+                <h5>Custom Headers</h5>
+                <Accordion className="accordion-custom" activeIndex={0}>
+                    <AccordionTab header={<React.Fragment><i className="pi pi-calendar"></i><span>Header I</span></React.Fragment>}>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                            ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </AccordionTab>
+                    <AccordionTab header={<React.Fragment><i className="pi pi-user"></i><span>Header II</span></React.Fragment>}>
+                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
+                            architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+                            voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.</p>
+                    </AccordionTab>
+                    <AccordionTab header={<React.Fragment><i className="pi pi-search"></i><span>Header III</span><i className="pi pi-cog"></i></React.Fragment>}>
+                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
+                            cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
+                            Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
+                    </AccordionTab>
+                </Accordion>
+            </div>
         </div>
     )
+}
+                `
+            }
+        };
+
+        this.extFiles = {
+            'src/demo/AccordionDemo.css': {
+                content: `
+.accordion-demo .accordion-custom i, .accordion-demo .accordion-custom span {
+    vertical-align: middle;
+}
+
+.accordion-demo .accordion-custom span {
+    margin: 0 .5rem;
+}
+
+.accordion-demo .p-accordion p {
+    line-height: 1.5;
+    margin: 0;
 }
                 `
             }
@@ -527,27 +668,7 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
                     </TabPanel>
 
                     <TabPanel header="Source">
-                        <LiveEditor name="AccordionDemo" sources={this.sources} />
-<CodeHighlight lang="scss">
-{`
-.accordion-demo {
-    .accordion-custom {
-        i, span {
-            vertical-align: middle;
-        }
-
-        span {
-            margin: 0 .5rem;
-        }
-    }
-
-    .p-accordion p {
-        line-height: 1.5;
-        margin: 0;
-    }
-}
-`}
-</CodeHighlight>
+                        <LiveEditor name="AccordionDemo" sources={this.sources} extFiles={this.extFiles} />
                     </TabPanel>
                 </TabView>
             </div>
