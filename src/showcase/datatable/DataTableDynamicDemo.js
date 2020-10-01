@@ -116,24 +116,24 @@ export class DataTableDynamicDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState, useEffect } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service/CarService';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import ProductService from '../service/ProductService';
 
 const DataTableDynamicDemo = () => {
-    const [cars, setCars] = useState([]);
-    const carservice = new CarService();
+    const [products, setProducts] = useState([]);
+    const columns = [
+        {field: 'code', header: 'Code'},
+        {field: 'name', header: 'Name'},
+        {field: 'category', header: 'Category'},
+        {field: 'quantity', header: 'Quantity'}
+    ];
+
+    const productService = new ProductService();
 
     useEffect(() => {
-        carservice.getCarsSmall().then(data => setCars(data));
+        productService.getProductsSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const columns = [
-        {field: 'vin', header: 'Vin'},
-        {field: 'year', header: 'Year'},
-        {field: 'brand', header: 'Brand'},
-        {field: 'color', header: 'Color'}
-    ];
 
     const dynamicColumns = columns.map((col,i) => {
         return <Column key={col.field} field={col.field} header={col.header} />;
@@ -141,37 +141,38 @@ const DataTableDynamicDemo = () => {
 
     return (
         <div>
-            <DataTable value={cars}>
-                {dynamicColumns}
-            </DataTable>
+            <div className="card">
+                <DataTable value={products}>
+                    {dynamicColumns}
+                </DataTable>
+            </div>
         </div>
     );
 }
-
                 `
             },
             'ts': {
                 tabName: 'TS Source',
                 content: `
 import React, { useState, useEffect } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service/CarService';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import ProductService from '../service/ProductService';
 
 const DataTableDynamicDemo = () => {
-    const [cars, setCars] = useState([]);
-    const carservice = new CarService();
+    const [products, setProducts] = useState([]);
+    const columns = [
+        {field: 'code', header: 'Code'},
+        {field: 'name', header: 'Name'},
+        {field: 'category', header: 'Category'},
+        {field: 'quantity', header: 'Quantity'}
+    ];
+
+    const productService = new ProductService();
 
     useEffect(() => {
-        carservice.getCarsSmall().then(data => setCars(data));
+        productService.getProductsSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const columns = [
-        {field: 'vin', header: 'Vin'},
-        {field: 'year', header: 'Year'},
-        {field: 'brand', header: 'Brand'},
-        {field: 'color', header: 'Color'}
-    ];
 
     const dynamicColumns = columns.map((col,i) => {
         return <Column key={col.field} field={col.field} header={col.header} />;
@@ -179,9 +180,11 @@ const DataTableDynamicDemo = () => {
 
     return (
         <div>
-            <DataTable value={cars}>
-                {dynamicColumns}
-            </DataTable>
+            <div className="card">
+                <DataTable value={products}>
+                    {dynamicColumns}
+                </DataTable>
+            </div>
         </div>
     );
 }
@@ -199,7 +202,7 @@ const DataTableDynamicDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Source">
-                        <LiveEditor name="DataTableDynamicDemo" sources={this.sources} service="CarService" data="cars-small" />
+                        <LiveEditor name="DataTableDynamicDemo" sources={this.sources} service="ProductService" data="products-small" />
                     </TabPanel>
                 </TabView>
             </div>
