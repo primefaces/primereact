@@ -144,3 +144,23 @@ pre[class*="language-"] {
         color: #ffffff;
     }
 }
+
+.liveEditorSplitButton {
+    .p-splitbutton-defaultbutton {
+        .p-button-label {
+            display: none;
+        }
+    }
+}
+
+.liveEditorPanel {
+    .p-menuitem-link {
+        height: 38px;
+
+        img {
+            margin-left: -4px;
+            width: 20px;
+            height: 20px;
+        }
+    }
+}

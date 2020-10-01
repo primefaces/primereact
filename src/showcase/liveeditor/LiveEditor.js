@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { services, data } from './LiveEditorData';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
+import { SplitButton } from '../../components/splitbutton/SplitButton';
 
 export class LiveEditor extends Component {
 
@@ -14,7 +15,7 @@ export class LiveEditor extends Component {
         dependencies: null,
         extFiles: null,
         activeButtonIndex: 0,
-        editorType: 'codesandbox'
+        defaultSourceType: 'class'
     };
 
     static propTypes = {
@@ -25,7 +26,7 @@ export class LiveEditor extends Component {
         dependencies: PropTypes.object,
         extFiles: PropTypes.object,
         activeButtonIndex: PropTypes.number,
-        editorType: PropTypes.string
+        defaultSourceType: PropTypes.string
     };
 
     constructor(props) {
@@ -35,19 +36,61 @@ export class LiveEditor extends Component {
             sandbox_id: null,
             showCodeHighlight: false
         }
+
+        this.items = [
+            {
+                template: () => {
+                    return (
+                        <>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--text-color)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-codesandbox"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="7.5 4.21 12 6.81 16.5 4.21"></polyline><polyline points="7.5 19.79 7.5 14.6 3 12"></polyline><polyline points="21 12 16.5 14.6 16.5 19.79"></polyline><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                            <span className="p-ml-2" style={{color: 'var(--text-color)'}}>Class source</span>
+                        </>
+                    );
+                },
+                command: () => {
+                    this.postSandboxParameters('class');
+                }
+            },
+            {
+                template: () => {
+                    return (
+                        <>
+                            <i className="pi pi-external-link" />
+                            <span className="p-ml-2" style={{color: 'var(--text-color)'}}>Hooks source</span>
+                        </>
+                    );
+                },
+                command: () => {
+                    this.postSandboxParameters('hooks');
+                }
+            },
+            {
+                template: () => {
+                    return (
+                        <>
+                            <img src="showcase/images/typescript-icon.png" alt="TypeScript"></img>
+                            <span className="p-ml-2" style={{color: 'var(--text-color)'}}>TS source</span>
+                        </>
+                    );
+                },
+                command: () => {
+                    this.postSandboxParameters('ts');
+                }
+            }
+        ];
     }
 
-    postSandboxParameters(parameters) {
+    postSandboxParameters(sourceType) {
         fetch('https://codesandbox.io/api/v1/sandboxes/define?json=1', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
-            body: JSON.stringify(parameters)
+            body: JSON.stringify(this.getSandboxParameters(sourceType))
         })
         .then(response => response.json())
-        .then(data => this.setState({ sandbox_id: data.sandbox_id }))
+        .then(data => window.open(`https://codesandbox.io/s/${data.sandbox_id}`, '_blank'))
         .catch(() => this.setState({ showCodeHighlight: true }));
     }
 
@@ -78,34 +121,203 @@ export class LiveEditor extends Component {
                 },
                 'index.css': {
                     content: `
+html {
+    font-size: 14px;
+}
+
 body {
-    padding: .5em;
-    font-family: "Open Sans", "Helvetica Neue", sans-serif;
+    background-color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
     font-weight: normal;
-    color: #333333;
+    color: #495057;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-size: 14px;
+    padding: .5em;
     margin-bottom: 50px;
 }
-.center-demo {
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 1.5rem 0 1rem 0;
+    font-family: inherit;
+    font-weight: 600;
+    line-height: 1.2;
+    color: inherit;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.75rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1rem; }
+p {
+    line-height: 1.5;
+    margin: 0 0 1rem 0;
+}
+
+.card {
+    margin-bottom: 2rem;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+@keyframes pulse {
+    0% {
+        background-color: rgba(165, 165, 165, 0.1)
+    }
+    50% {
+        background-color: rgba(165, 165, 165, 0.3)
+    }
+    100% {
+        background-color: rgba(165, 165, 165, 0.1)
+    }
+}
+
+.customer-badge {
+    border-radius: 2px;
+    padding: .25em .5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .3px;
+}
+
+.customer-badge.status-qualified {
+    background-color: #C8E6C9;
+    color: #256029;
+}
+
+.customer-badge.status-unqualified {
+    background-color: #FFCDD2;
+    color: #C63737;
+}
+
+.customer-badge.status-negotiation {
+    background-color: #FEEDAF;
+    color: #8A5340;
+}
+
+.customer-badge.status-new {
+    background-color: #B3E5FC;
+    color: #23547B;
+}
+
+.customer-badge.status-renewal {
+    background-color: #ECCFFF;
+    color: #694382;
+}
+
+.customer-badge.status-proposal {
+    background-color: #FFD8B2;
+    color: #805B36;
+}
+
+.product-badge {
+    border-radius: 2px;
+    padding: .25em .5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .3px;
+}
+
+.product-badge.status-instock {
+    background: #C8E6C9;
+    color: #256029;
+}
+
+.product-badge.status-outofstock {
+    background: #FFCDD2;
+    color: #C63737;
+}
+
+.product-badge.status-lowstock {
+    background: #FEEDAF;
+    color: #8A5340;
+}
+
+.order-badge {
+    border-radius: 2px;
+    padding: .25em .5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .3px;
+}
+
+.order-badge.order-delivered {
+    background: #C8E6C9;
+    color: #256029;
+}
+
+.order-badge.order-cancelled {
+    background: #FFCDD2;
+    color: #C63737;
+}
+
+.order-badge.order-pending {
+    background: #FEEDAF;
+    color: #8A5340;
+}
+
+.order-badge.order-returned {
+    background: #ECCFFF;
+    color: #694382;
+}
+
+.image-text {
+    vertical-align: middle;
+    margin-left: .5rem;
+}
+
+.p-multiselect-representative-option {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.p-multiselect-representative-option img {
+    vertical-align: middle;
+    width: 24px;
+}
+
+.p-multiselect-representative-option span {
+    margin-top: .125rem;
+}
+
+.p-column-filter {
+    width: 100%;
+}
+
+.country-item {
     display: flex;
-    flex-direction: column;
     align-items: center;
 }
-.p-col-d {
-    display: table-cell;
+
+.country-item img.flag {
+    width: 18px;
+    margin-right: .5rem;
 }
-.p-col-m {
-    display: none;
+
+.flag {
+    vertical-align: middle;
 }
-@media screen and (max-width: 1024px) {
-    .p-col-d {
-        display: none;
-    }
-    .p-col-m {
-        display: inline-block;
-    }
+
+span.flag {
+    width:44px;
+    height:30px;
+    display:inline-block;
+}
+
+img.flag {
+    width:30px
 }
 ${extIndexCSS}
                     `,
@@ -124,11 +336,11 @@ ${extIndexCSS}
         }
     }
 
-    getSandboxParameters() {
+    getSandboxParameters(sourceType) {
         let name = this.props.name;
         let extension = '.js';
         let extDependencies = this.props.dependencies || {};
-        let [sourceType, sourceValue] = Object.entries(this.props.sources);
+        let content = this.props.sources[sourceType].content;
 
         let _files = {};
         if (sourceType === 'class' || sourceType === 'hooks') {
@@ -186,7 +398,7 @@ import 'primereact/resources/primereact.css';
 import 'primeflex/primeflex.css';
 import '../../index.css';
 import ReactDOM from 'react-dom';
-${sourceValue.content}
+${content}
 const rootElement = document.getElementById("root");
 ReactDOM.render(<${name} />, rootElement);`
         }
@@ -200,53 +412,57 @@ ReactDOM.render(<${name} />, rootElement);`
         }
 
         if (this.props.data) {
-            _files[`public/data/${this.props.data}.json`] = {
-                content: data[this.props.data]
-            }
+            const dataArr = this.props.data.split(',');
+            dataArr.forEach(el => {
+                _files[`public/data/${el}.json`] = {
+                    content: data[el]
+                }
+            });
         }
 
         return this.createSandboxParameters(`${name}${extension}`, _files, extDependencies);
     }
 
-    componentDidMount() {
-        if (this.props.editorType === 'codesandbox') {
-            this.postSandboxParameters(this.getSandboxParameters());
-        }
-    }
-
-    renderSandboxSource() {
-        if (this.state.showCodeHighlight) {
-            return (
-                <CodeHighlight lang="js">
-                    {this.props.sources[1].content}
-                </CodeHighlight>
-            );
-        }
+    renderElement() {
+        const buttonContent = (
+            <>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--primary-color-text)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-codesandbox"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="7.5 4.21 12 6.81 16.5 4.21"></polyline><polyline points="7.5 19.79 7.5 14.6 3 12"></polyline><polyline points="21 12 16.5 14.6 16.5 19.79"></polyline><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                <span className="p-ml-2">Edit in CodeSandbox</span>
+            </>
+        );
 
         return (
-            <iframe title="PrimeReact Demo"
-                src={`https://codesandbox.io/embed/${this.state.sandbox_id}?theme=light&fontsize=14`}
-                style={{'width':'100%', 'height':'600px', 'border':'0', 'overflow':'hidden'}}
-                allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-                sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
+            <div className="p-d-flex p-jc-end" style={{marginTop: '-1rem'}}>
+                <SplitButton model={this.items} buttonTemplate={buttonContent} onClick={() => this.postSandboxParameters(this.props.defaultSourceType)} appendTo={document.body} className="liveEditorSplitButton" menuClassName="liveEditorPanel"></SplitButton>
+            </div>
         );
     }
 
-    renderElements() {
-        if (this.props.editorType === 'codesandbox') {
-            return this.renderSandboxSource();
-        }
-
-        return null;
-    }
-
     render() {
-        //let elements = this.renderElements();
+        const element = this.renderElement();
 
         return (
-            <CodeHighlight lang="js">
-                {this.props.sources['class'].content}
-            </CodeHighlight>
+            <>
+                {element}
+                <CodeHighlight lang="js">
+                    {this.props.sources[this.props.defaultSourceType].content}
+                </CodeHighlight>
+
+                {
+                    this.props.extFiles && Object.entries(this.props.extFiles).map(([key, value], i) => {
+                        if (key === 'index.css') {
+                            return null;
+                        }
+
+                        const lang = key.indexOf('.css') !== -1 ? 'css' : 'js';
+                        return (
+                            <CodeHighlight key={`${key}_${i}`} lang={lang}>
+                                {value.content}
+                            </CodeHighlight>
+                        )
+                    })
+                }
+            </>
         )
     }
 }
