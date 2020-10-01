@@ -57,7 +57,7 @@ export class TooltipDemo extends Component {
                         <Button type="button" label="Save" icon="pi pi-check" tooltip="Save" tooltipOptions={{ position: 'bottom', mouseTrack: true, mouseTrackTop: 15 }} />
 
                         <Tooltip target=".logo" mouseTrack mouseTrackLeft={10}/>
-                        <img className="logo p-ml-2" alt="logo" src="showcase/images/logo.png" data-pr-tooltip="PrimeReact-Logo" height="80px"/>
+                        <img className="logo p-ml-2" alt="logo" src="showcase/images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} data-pr-tooltip="PrimeReact-Logo" height="80px"/>
                     </div>
                 </div>
             </div>
@@ -70,75 +70,101 @@ export class TooltipDemo extends Component {
             'hooks': {
                 tabName: 'Hooks Source',
                 content: `
-import React from 'react';
-import {InputText} from 'primereact/inputtext';
-import {Button} from 'primereact/button';
+import React, { useState } from 'react';
+import { InputText } from 'primereact/inputtext';
+import { Button } from 'primereact/button';
+import { Tooltip } from 'primereact/tooltip';
 
 const TooltipDemo = () => {
+    const [saveBtnTooltipText, setSaveBtnTooltipText] = useState('Click to proceed');
 
     return (
         <div>
-            <h5>Positions</h5>
-            <div className="p-grid p-fluid">
-                <div className="p-col-12 p-md-3">
-                    <InputText type="text" placeholder="Right" tooltip="Enter your username" />
+            <div className="card">
+                <h5>Positions</h5>
+                <div className="p-grid p-fluid">
+                    <div className="p-col-12 p-md-3">
+                        <InputText type="text" placeholder="Right" tooltip="Enter your username" />
+                    </div>
+                    <div className="p-col-12 p-md-3">
+                        <InputText type="text" placeholder="Top" tooltip="Enter your username" tooltipOptions={{position: 'top'}} />
+                    </div>
+                    <div className="p-col-12 p-md-3">
+                        <InputText type="text" placeholder="Bottom" tooltip="Enter your username" tooltipOptions={{position: 'bottom'}} />
+                    </div>
+                    <div className="p-col-12 p-md-3">
+                        <InputText type="text" placeholder="Left" tooltip="Enter your username" tooltipOptions={{position: 'left'}} />
+                    </div>
                 </div>
-                <div className="p-col-12 p-md-3">
-                    <InputText type="text" placeholder="Top" tooltip="Enter your username" tooltipOptions={{position: 'top'}} />
-                </div>
-                <div className="p-col-12 p-md-3">
-                    <InputText type="text" placeholder="Bottom" tooltip="Enter your username" tooltipOptions={{position: 'bottom'}} />
-                </div>
-                <div className="p-col-12 p-md-3">
-                    <InputText type="text" placeholder="Left" tooltip="Enter your username" tooltipOptions={{position: 'left'}} />
+
+                <h5>Focus and Blur</h5>
+                <InputText type="text" placeholder="Focus" tooltip="Enter your username" tooltipOptions={{event: 'focus'}} />
+
+                <h5>Button</h5>
+                <Button type="button" label="Save" icon="pi pi-check" tooltip={saveBtnTooltipText} onClick={() => setSaveBtnTooltipText('Completed')} />
+
+                <h5>MouseTrack</h5>
+                <div className="p-d-flex p-ai-center">
+                    <Button type="button" label="Save" icon="pi pi-check" tooltip="Save" tooltipOptions={{ position: 'bottom', mouseTrack: true, mouseTrackTop: 15 }} />
+
+                    <Tooltip target=".logo" mouseTrack mouseTrackLeft={10}/>
+                    <img className="logo p-ml-2" alt="logo" src="showcase/images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} data-pr-tooltip="PrimeReact-Logo" height="80px"/>
                 </div>
             </div>
-
-            <h5>Focus and Blur</h5>
-            <InputText type="text" placeholder="Focus" tooltip="Enter your username" tooltipOptions={{event: 'focus'}} />
-
-            <h5>Button</h5>
-            <Button type="button" label="Save" icon="pi pi-check" tooltip="Click to proceed" />
         </div>
     )
 }
+
                 `
             },
             'ts': {
                 tabName: 'TS Source',
                 content: `
-import React from 'react';
-import {InputText} from 'primereact/inputtext';
-import {Button} from 'primereact/button';
+import React, { useState } from 'react';
+import { InputText } from 'primereact/inputtext';
+import { Button } from 'primereact/button';
+import { Tooltip } from 'primereact/tooltip';
 
 const TooltipDemo = () => {
+    const [saveBtnTooltipText, setSaveBtnTooltipText] = useState('Click to proceed');
 
     return (
         <div>
-            <h5>Positions</h5>
-            <div className="p-grid p-fluid">
-                <div className="p-col-12 p-md-3">
-                    <InputText type="text" placeholder="Right" tooltip="Enter your username" />
+            <div className="card">
+                <h5>Positions</h5>
+                <div className="p-grid p-fluid">
+                    <div className="p-col-12 p-md-3">
+                        <InputText type="text" placeholder="Right" tooltip="Enter your username" />
+                    </div>
+                    <div className="p-col-12 p-md-3">
+                        <InputText type="text" placeholder="Top" tooltip="Enter your username" tooltipOptions={{position: 'top'}} />
+                    </div>
+                    <div className="p-col-12 p-md-3">
+                        <InputText type="text" placeholder="Bottom" tooltip="Enter your username" tooltipOptions={{position: 'bottom'}} />
+                    </div>
+                    <div className="p-col-12 p-md-3">
+                        <InputText type="text" placeholder="Left" tooltip="Enter your username" tooltipOptions={{position: 'left'}} />
+                    </div>
                 </div>
-                <div className="p-col-12 p-md-3">
-                    <InputText type="text" placeholder="Top" tooltip="Enter your username" tooltipOptions={{position: 'top'}} />
-                </div>
-                <div className="p-col-12 p-md-3">
-                    <InputText type="text" placeholder="Bottom" tooltip="Enter your username" tooltipOptions={{position: 'bottom'}} />
-                </div>
-                <div className="p-col-12 p-md-3">
-                    <InputText type="text" placeholder="Left" tooltip="Enter your username" tooltipOptions={{position: 'left'}} />
+
+                <h5>Focus and Blur</h5>
+                <InputText type="text" placeholder="Focus" tooltip="Enter your username" tooltipOptions={{event: 'focus'}} />
+
+                <h5>Button</h5>
+                <Button type="button" label="Save" icon="pi pi-check" tooltip={saveBtnTooltipText} onClick={() => setSaveBtnTooltipText('Completed')} />
+
+                <h5>MouseTrack</h5>
+                <div className="p-d-flex p-ai-center">
+                    <Button type="button" label="Save" icon="pi pi-check" tooltip="Save" tooltipOptions={{ position: 'bottom', mouseTrack: true, mouseTrackTop: 15 }} />
+
+                    <Tooltip target=".logo" mouseTrack mouseTrackLeft={10}/>
+                    <img className="logo p-ml-2" alt="logo" src="showcase/images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} data-pr-tooltip="PrimeReact-Logo" height="80px"/>
                 </div>
             </div>
-
-            <h5>Focus and Blur</h5>
-            <InputText type="text" placeholder="Focus" tooltip="Enter your username" tooltipOptions={{event: 'focus'}} />
-
-            <h5>Button</h5>
-            <Button type="button" label="Save" icon="pi pi-check" tooltip="Click to proceed" />
         </div>
     )
 }
+
                 `
             }
         }

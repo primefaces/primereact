@@ -50,20 +50,20 @@ export class ToolbarDemo extends Component {
 
     render() {
         const leftContents = (
-            <>
+            <React.Fragment>
                 <Button label="New" icon="pi pi-plus" className="p-mr-2" />
                 <Button label="Upload" icon="pi pi-upload" className="p-button-success" />
                 <i className="pi pi-bars p-toolbar-separator p-mr-2" />
                 <SplitButton label="Save" icon="pi pi-check" model={this.items} className="p-button-warning"></SplitButton>
-            </>
+            </React.Fragment>
         );
 
         const rightContents = (
-            <>
+            <React.Fragment>
                 <Button icon="pi pi-search" className="p-mr-2" />
                 <Button icon="pi pi-calendar" className="p-button-success p-mr-2" />
                 <Button icon="pi pi-times" className="p-button-danger" />
-            </>
+            </React.Fragment>
         );
 
         return (
@@ -79,26 +79,55 @@ export class ToolbarDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React from 'react';
-import {Toolbar} from 'primereact/toolbar';
-import {Button} from 'primereact/button';
+import { Toolbar } from 'primereact/toolbar';
+import { Button } from 'primereact/button';
+import { SplitButton } from 'primereact/splitbutton';
 
 const ToolbarDemo = () => {
+    const items = [
+        {
+            label: 'Update',
+            icon: 'pi pi-refresh'
+        },
+        {
+            label: 'Delete',
+            icon: 'pi pi-times'
+        },
+        {
+            label: 'React Website',
+            icon: 'pi pi-external-link',
+            command: () => {
+                window.location.href = 'https://reactjs.org/'
+            }
+        },
+        {   label: 'Upload',
+            icon: 'pi pi-upload',
+            command: () => {
+                window.location.hash = "/fileupload"
+            }
+        }
+    ];
+
+    const leftContents = (
+        <React.Fragment>
+            <Button label="New" icon="pi pi-plus" className="p-mr-2" />
+            <Button label="Upload" icon="pi pi-upload" className="p-button-success" />
+            <i className="pi pi-bars p-toolbar-separator p-mr-2" />
+            <SplitButton label="Save" icon="pi pi-check" model={items} className="p-button-warning"></SplitButton>
+        </React.Fragment>
+    );
+
+    const rightContents = (
+        <React.Fragment>
+            <Button icon="pi pi-search" className="p-mr-2" />
+            <Button icon="pi pi-calendar" className="p-button-success p-mr-2" />
+            <Button icon="pi pi-times" className="p-button-danger" />
+        </React.Fragment>
+    );
 
     return (
         <div>
-            <Toolbar>
-                <div className="p-toolbar-group-left">
-                    <Button label="New" icon="pi pi-plus" style={{marginRight:'.25em'}} />
-                    <Button label="Upload" icon="pi pi-upload" className="p-button-success" />
-                    <i className="pi pi-bars p-toolbar-separator" style={{marginRight:'.25em'}} />
-                    <Button label="Save" icon="pi pi-check" className="p-button-warning" />
-                </div>
-                <div className="p-toolbar-group-right">
-                    <Button icon="pi pi-search" style={{marginRight:'.25em'}} />
-                    <Button icon="pi pi-calendar" className="p-button-success" style={{marginRight:'.25em'}} />
-                    <Button icon="pi pi-times" className="p-button-danger" />
-                </div>
-            </Toolbar>
+            <Toolbar left={leftContents} right={rightContents} />
         </div>
     );
 }
@@ -108,26 +137,55 @@ const ToolbarDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React from 'react';
-import {Toolbar} from 'primereact/toolbar';
-import {Button} from 'primereact/button';
+import { Toolbar } from 'primereact/toolbar';
+import { Button } from 'primereact/button';
+import { SplitButton } from 'primereact/splitbutton';
 
 const ToolbarDemo = () => {
+    const items = [
+        {
+            label: 'Update',
+            icon: 'pi pi-refresh'
+        },
+        {
+            label: 'Delete',
+            icon: 'pi pi-times'
+        },
+        {
+            label: 'React Website',
+            icon: 'pi pi-external-link',
+            command: () => {
+                window.location.href = 'https://reactjs.org/'
+            }
+        },
+        {   label: 'Upload',
+            icon: 'pi pi-upload',
+            command: () => {
+                window.location.hash = "/fileupload"
+            }
+        }
+    ];
+
+    const leftContents = (
+        <React.Fragment>
+            <Button label="New" icon="pi pi-plus" className="p-mr-2" />
+            <Button label="Upload" icon="pi pi-upload" className="p-button-success" />
+            <i className="pi pi-bars p-toolbar-separator p-mr-2" />
+            <SplitButton label="Save" icon="pi pi-check" model={items} className="p-button-warning"></SplitButton>
+        </React.Fragment>
+    );
+
+    const rightContents = (
+        <React.Fragment>
+            <Button icon="pi pi-search" className="p-mr-2" />
+            <Button icon="pi pi-calendar" className="p-button-success p-mr-2" />
+            <Button icon="pi pi-times" className="p-button-danger" />
+        </React.Fragment>
+    );
 
     return (
         <div>
-            <Toolbar>
-                <div className="p-toolbar-group-left">
-                    <Button label="New" icon="pi pi-plus" style={{marginRight:'.25em'}} />
-                    <Button label="Upload" icon="pi pi-upload" className="p-button-success" />
-                    <i className="pi pi-bars p-toolbar-separator" style={{marginRight:'.25em'}} />
-                    <Button label="Save" icon="pi pi-check" className="p-button-warning" />
-                </div>
-                <div className="p-toolbar-group-right">
-                    <Button icon="pi pi-search" style={{marginRight:'.25em'}} />
-                    <Button icon="pi pi-calendar" className="p-button-success" style={{marginRight:'.25em'}} />
-                    <Button icon="pi pi-times" className="p-button-danger" />
-                </div>
-            </Toolbar>
+            <Toolbar left={leftContents} right={rightContents} />
         </div>
     );
 }
@@ -157,20 +215,20 @@ import { Toolbar } from 'primereact/toolbar';
 <CodeHighlight>
 {`
 const leftContents = (
-    <>
+    <React.Fragment>
         <Button label="New" icon="pi pi-plus" className="p-mr-2" />
         <Button label="Upload" icon="pi pi-upload" className="p-button-success" />
         <i className="pi pi-bars p-toolbar-separator p-mr-2" />
         <SplitButton label="Save" icon="pi pi-check" model={this.items} className="p-button-warning"></SplitButton>
-    </>
+    </React.Fragment>
 );
 
 const rightContents = (
-    <>
+    <React.Fragment>
         <Button icon="pi pi-search" className="p-mr-2" />
         <Button icon="pi pi-calendar" className="p-button-success p-mr-2" />
         <Button icon="pi pi-times" className="p-button-danger" />
-    </>
+    </React.Fragment>
 );
 
 <Toolbar left={leftContents} right={rightContents} />

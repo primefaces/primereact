@@ -152,18 +152,17 @@ export class TreeContextMenuDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState, useEffect, useRef } from 'react';
-import {Tree} from 'primereact/tree';
-import {ContextMenu} from 'primereact/contextmenu';
-import {Toast} from 'primereact/toast';
-import {NodeService} from '../service/NodeService';
+import { Tree } from 'primereact/tree';
+import { ContextMenu } from 'primereact/contextmenu';
+import { Toast} from 'primereact/toast';
+import { NodeService } from '../service/NodeService';
 
 const TreeContextMenuDemo = () => {
     const [nodes, setNodes] = useState(null);
     const [expandedKeys, setExpandedKeys] = useState({});
     const [selectedNodeKey, setSelectedNodeKey] = useState(null);
-    let toast = useRef(null);
-    let cm = useRef(null);
-
+    const toast = useRef(null);
+    const cm = useRef(null);
     const menu = [
         {
             label: 'View Key',
@@ -199,9 +198,11 @@ const TreeContextMenuDemo = () => {
 
             <ContextMenu model={menu} ref={cm} onHide={() => setSelectedNodeKey(null)}/>
 
-            <Tree value={nodes} expandedKeys={expandedKeys} onToggle={e => setExpandedKeys(e.value)}
-                contextMenuSelectionKey={selectedNodeKey} onContextMenuSelectionChange={event => setSelectedNodeKey(event.value)}
-                onContextMenu={event => cm.current.show(event.originalEvent)} />
+            <div className="card">
+                <Tree value={nodes} expandedKeys={expandedKeys} onToggle={e => setExpandedKeys(e.value)}
+                    contextMenuSelectionKey={selectedNodeKey} onContextMenuSelectionChange={event => setSelectedNodeKey(event.value)}
+                    onContextMenu={event => cm.current.show(event.originalEvent)} />
+            </div>
         </div>
     )
 }
@@ -211,18 +212,17 @@ const TreeContextMenuDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState, useEffect, useRef } from 'react';
-import {Tree} from 'primereact/tree';
-import {ContextMenu} from 'primereact/contextmenu';
-import {Toast} from 'primereact/toast';
-import {NodeService} from '../service/NodeService';
+import { Tree } from 'primereact/tree';
+import { ContextMenu } from 'primereact/contextmenu';
+import { Toast} from 'primereact/toast';
+import { NodeService } from '../service/NodeService';
 
 const TreeContextMenuDemo = () => {
-    const [nodes, setNodes] = useState<any>(null);
+    const [nodes, setNodes] = useState(null);
     const [expandedKeys, setExpandedKeys] = useState({});
-    const [selectedNodeKey, setSelectedNodeKey] = useState<any>(null);
-    let toast = useRef<any>(null);
-    let cm = useRef<any>(null);
-
+    const [selectedNodeKey, setSelectedNodeKey] = useState(null);
+    const toast = useRef(null);
+    const cm = useRef(null);
     const menu = [
         {
             label: 'View Key',
@@ -235,7 +235,7 @@ const TreeContextMenuDemo = () => {
             label: 'Toggle',
             icon: 'pi pi-cog',
             command: () => {
-                let _expandedKeys:any = {...expandedKeys};
+                let _expandedKeys = {...expandedKeys};
                 if (_expandedKeys[selectedNodeKey])
                     delete _expandedKeys[selectedNodeKey];
                 else
@@ -258,9 +258,11 @@ const TreeContextMenuDemo = () => {
 
             <ContextMenu model={menu} ref={cm} onHide={() => setSelectedNodeKey(null)}/>
 
-            <Tree value={nodes} expandedKeys={expandedKeys} onToggle={e => setExpandedKeys(e.value)}
-                contextMenuSelectionKey={selectedNodeKey} onContextMenuSelectionChange={event => setSelectedNodeKey(event.value)}
-                onContextMenu={event => cm.current.show(event.originalEvent)} />
+            <div className="card">
+                <Tree value={nodes} expandedKeys={expandedKeys} onToggle={e => setExpandedKeys(e.value)}
+                    contextMenuSelectionKey={selectedNodeKey} onContextMenuSelectionChange={event => setSelectedNodeKey(event.value)}
+                    onContextMenu={event => cm.current.show(event.originalEvent)} />
+            </div>
         </div>
     )
 }
