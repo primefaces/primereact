@@ -172,22 +172,21 @@ const TreeTableContextMenuDemo = () => {
     const [nodes, setNodes] = useState([]);
     const [expandedKeys, setExpandedKeys] = useState({});
     const [selectedNodeKey, setSelectedNodeKey] = useState(null);
-    let toast = useRef(null);
-    let cm = useRef(null);
-
+    const toast = useRef(null);
+    const cm = useRef(null);
     const menu = [
         {
             label: 'View Key',
             icon: 'pi pi-search',
             command: () => {
-                toast.current.show({severity: 'success', summary: 'Node Key', detail: selectedNodeKey});
+                toast.current.show({ severity: 'success', summary: 'Node Key', detail: this.state.selectedNodeKey });
             }
         },
         {
             label: 'Toggle',
             icon: 'pi pi-cog',
             command: () => {
-                let _expandedKeys = {...expandedKeys};
+                let _expandedKeys = { ...expandedKeys };
                 if (_expandedKeys[selectedNodeKey])
                     delete _expandedKeys[selectedNodeKey];
                 else
@@ -208,15 +207,17 @@ const TreeTableContextMenuDemo = () => {
         <div>
             <Toast ref={toast} />
 
-            <ContextMenu model={menu} ref={cm} onHide={() => setSelectedNodeKey(null)}/>
+            <ContextMenu model={menu} ref={cm} onHide={() => setSelectedNodeKey(null)} />
 
-            <TreeTable value={nodes} expandedKeys={expandedKeys} onToggle={e => setExpandedKeys(e.value)}
-                contextMenuSelectionKey={selectedNodeKey} onContextMenuSelectionChange={event => setSelectedNodeKey(event.value)}
-                onContextMenu={event => cm.current.show(event.originalEvent)}>
-                <Column field="name" header="Name" expander></Column>
-                <Column field="size" header="Size"></Column>
-                <Column field="type" header="Type"></Column>
-            </TreeTable>
+            <div className="card">
+                <TreeTable value={nodes} expandedKeys={expandedKeys} onToggle={e => setExpandedKeys(e.value)}
+                    contextMenuSelectionKey={selectedNodeKey} onContextMenuSelectionChange={event => setSelectedNodeKey(event.value)}
+                    onContextMenu={event => cm.current.show(event.originalEvent)}>
+                    <Column field="name" header="Name" expander></Column>
+                    <Column field="size" header="Size"></Column>
+                    <Column field="type" header="Type"></Column>
+                </TreeTable>
+            </div>
         </div>
     )
 }
@@ -235,23 +236,22 @@ import { NodeService } from '../service/NodeService';
 const TreeTableContextMenuDemo = () => {
     const [nodes, setNodes] = useState([]);
     const [expandedKeys, setExpandedKeys] = useState({});
-    const [selectedNodeKey, setSelectedNodeKey] = useState<any>(null);
-    let toast = useRef<any>(null);
-    let cm = useRef<any>(null);
-
+    const [selectedNodeKey, setSelectedNodeKey] = useState(null);
+    const toast = useRef(null);
+    const cm = useRef(null);
     const menu = [
         {
             label: 'View Key',
             icon: 'pi pi-search',
             command: () => {
-                toast.current.show({severity: 'success', summary: 'Node Key', detail: selectedNodeKey});
+                toast.current.show({ severity: 'success', summary: 'Node Key', detail: this.state.selectedNodeKey });
             }
         },
         {
             label: 'Toggle',
             icon: 'pi pi-cog',
             command: () => {
-                let _expandedKeys: any = {...expandedKeys};
+                let _expandedKeys = { ...expandedKeys };
                 if (_expandedKeys[selectedNodeKey])
                     delete _expandedKeys[selectedNodeKey];
                 else
@@ -272,15 +272,17 @@ const TreeTableContextMenuDemo = () => {
         <div>
             <Toast ref={toast} />
 
-            <ContextMenu model={menu} ref={cm} onHide={() => setSelectedNodeKey(null)}/>
+            <ContextMenu model={menu} ref={cm} onHide={() => setSelectedNodeKey(null)} />
 
-            <TreeTable value={nodes} expandedKeys={expandedKeys} onToggle={e => setExpandedKeys(e.value)}
-                contextMenuSelectionKey={selectedNodeKey} onContextMenuSelectionChange={event => setSelectedNodeKey(event.value)}
-                onContextMenu={event => cm.current.show(event.originalEvent)}>
-                <Column field="name" header="Name" expander></Column>
-                <Column field="size" header="Size"></Column>
-                <Column field="type" header="Type"></Column>
-            </TreeTable>
+            <div className="card">
+                <TreeTable value={nodes} expandedKeys={expandedKeys} onToggle={e => setExpandedKeys(e.value)}
+                    contextMenuSelectionKey={selectedNodeKey} onContextMenuSelectionChange={event => setSelectedNodeKey(event.value)}
+                    onContextMenu={event => cm.current.show(event.originalEvent)}>
+                    <Column field="name" header="Name" expander></Column>
+                    <Column field="size" header="Size"></Column>
+                    <Column field="type" header="Type"></Column>
+                </TreeTable>
+            </div>
         </div>
     )
 }

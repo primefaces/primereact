@@ -108,11 +108,13 @@ const TreeTableColReorderDemo = () => {
 
     return (
         <div>
-            <TreeTable value={nodes} reorderableColumns>
-                <Column field="name" header="Name" expander></Column>
-                <Column field="size" header="Size"></Column>
-                <Column field="type" header="Type"></Column>
-            </TreeTable>
+            <div className="card">
+                <TreeTable value={nodes} reorderableColumns>
+                    <Column field="name" header="Name" expander></Column>
+                    <Column field="size" header="Size"></Column>
+                    <Column field="type" header="Type"></Column>
+                </TreeTable>
+            </div>
         </div>
     )
 }
@@ -136,11 +138,13 @@ const TreeTableColReorderDemo = () => {
 
     return (
         <div>
-            <TreeTable value={nodes} reorderableColumns>
-                <Column field="name" header="Name" expander></Column>
-                <Column field="size" header="Size"></Column>
-                <Column field="type" header="Type"></Column>
-            </TreeTable>
+            <div className="card">
+                <TreeTable value={nodes} reorderableColumns>
+                    <Column field="name" header="Name" expander></Column>
+                    <Column field="size" header="Size"></Column>
+                    <Column field="type" header="Type"></Column>
+                </TreeTable>
+            </div>
         </div>
     )
 }
