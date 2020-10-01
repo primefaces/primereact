@@ -60,7 +60,7 @@ export class InplaceDemo extends Component {
                             </span>
                         </InplaceDisplay>
                         <InplaceContent>
-                            <img alt="Nature" src="showcase/demo/images/nature/nature1.jpg" />
+                            <img alt="Nature" src="showcase/demo/images/nature/nature1.jpg" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} />
                         </InplaceContent>
                     </Inplace>
 
@@ -88,58 +88,63 @@ export class InplaceDemo extends Component {
             'hooks': {
                 tabName: 'Hooks Source',
                 content: `
-import React, { useState } from 'react';
-import {Inplace,InplaceDisplay,InplaceContent} from 'primereact/inplace';
-import {InputText} from 'primereact/inputtext';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service/CarService';
+import React, { useState, useEffect } from 'react';
+import { Inplace, InplaceDisplay, InplaceContent } from 'primereact/inplace';
+import { InputText } from 'primereact/inputtext';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import ProductService from '../service/ProductService';
 
 const InplaceDemo = () => {
-    const [cars, setCars] = useState([]);
-    const carservice = new CarService();
+    const [text, setText] = useState('');
+    const [products, setProducts] = useState([]);
+    const productService = new ProductService();
 
     const onOpen = () => {
-        carservice.getCarsSmall().then(data => setCars(data));
-    };
+        productService.getProductsSmall().then(data => setProducts(data));
+    }
 
     return (
         <div>
-            <h5>Input</h5>
-            <Inplace closable>
-                <InplaceDisplay>
-                    Click to Edit
-                </InplaceDisplay>
-                <InplaceContent>
-                    <InputText autoFocus />
-                </InplaceContent>
-            </Inplace>
+            <div className="card">
+                <h5>Input</h5>
+                <Inplace closable>
+                    <InplaceDisplay>
+                        {text || 'Click to Edit'}
+                    </InplaceDisplay>
+                    <InplaceContent>
+                        <InputText value={text} onChange={(e) => setText(e.target.value)} autoFocus />
+                    </InplaceContent>
+                </Inplace>
 
-            <h5>Image</h5>
-            <Inplace>
-                <InplaceDisplay>
-                    <span className="pi pi-search" style={{verticalAlign: 'middle'}}></span>
-                    <span style={{marginLeft:'.5em', verticalAlign: 'middle'}}>View Picture</span>
-                </InplaceDisplay>
-                <InplaceContent>
-                    <img src="showcase/demo/images/galleria/galleria5.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Nature" />
-                </InplaceContent>
-            </Inplace>
+                <h5>Image</h5>
+                <Inplace>
+                    <InplaceDisplay>
+                        <span className="p-d-inline-flex p-align-center">
+                            <span className="pi pi-search"></span>
+                            <span className="p-ml-2">View Picture</span>
+                        </span>
+                    </InplaceDisplay>
+                    <InplaceContent>
+                        <img alt="Nature" src="showcase/demo/images/nature/nature1.jpg" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} />
+                    </InplaceContent>
+                </Inplace>
 
-            <h5>Lazy Data</h5>
-            <Inplace onOpen={onOpen}>
-                <InplaceDisplay>
-                    View Data
+                <h5>Lazy Data</h5>
+                <Inplace onOpen={onOpen}>
+                    <InplaceDisplay>
+                        View Data
                 </InplaceDisplay>
-                <InplaceContent>
-                    <DataTable value={cars}>
-                        <Column field="vin" header="Vin" />
-                        <Column field="year" header="Year" />
-                        <Column field="brand" header="Brand" />
-                        <Column field="color" header="Color" />
-                    </DataTable>
-                </InplaceContent>
-            </Inplace>
+                    <InplaceContent>
+                        <DataTable value={products}>
+                            <Column field="code" header="Code"></Column>
+                            <Column field="name" header="Name"></Column>
+                            <Column field="category" header="Category"></Column>
+                            <Column field="quantity" header="Quantity"></Column>
+                        </DataTable>
+                    </InplaceContent>
+                </Inplace>
+            </div>
         </div>
     )
 }
@@ -148,58 +153,63 @@ const InplaceDemo = () => {
             'ts': {
                 tabName: 'TS Source',
                 content: `
-import React, { useState } from 'react';
-import {Inplace,InplaceDisplay,InplaceContent} from 'primereact/inplace';
-import {InputText} from 'primereact/inputtext';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service/CarService';
+import React, { useState, useEffect } from 'react';
+import { Inplace, InplaceDisplay, InplaceContent } from 'primereact/inplace';
+import { InputText } from 'primereact/inputtext';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import ProductService from '../service/ProductService';
 
 const InplaceDemo = () => {
-    const [cars, setCars] = useState([]);
-    const carservice = new CarService();
+    const [text, setText] = useState('');
+    const [products, setProducts] = useState([]);
+    const productService = new ProductService();
 
     const onOpen = () => {
-        carservice.getCarsSmall().then(data => setCars(data));
-    };
+        productService.getProductsSmall().then(data => setProducts(data));
+    }
 
     return (
         <div>
-            <h5>Input</h5>
-            <Inplace closable>
-                <InplaceDisplay>
-                    Click to Edit
-                </InplaceDisplay>
-                <InplaceContent>
-                    <InputText autoFocus />
-                </InplaceContent>
-            </Inplace>
+            <div className="card">
+                <h5>Input</h5>
+                <Inplace closable>
+                    <InplaceDisplay>
+                        {text || 'Click to Edit'}
+                    </InplaceDisplay>
+                    <InplaceContent>
+                        <InputText value={text} onChange={(e) => setText(e.target.value)} autoFocus />
+                    </InplaceContent>
+                </Inplace>
 
-            <h5>Image</h5>
-            <Inplace>
-                <InplaceDisplay>
-                    <span className="pi pi-search" style={{verticalAlign: 'middle'}}></span>
-                    <span style={{marginLeft:'.5em', verticalAlign: 'middle'}}>View Picture</span>
-                </InplaceDisplay>
-                <InplaceContent>
-                    <img src="showcase/demo/images/galleria/galleria5.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Nature" />
-                </InplaceContent>
-            </Inplace>
+                <h5>Image</h5>
+                <Inplace>
+                    <InplaceDisplay>
+                        <span className="p-d-inline-flex p-align-center">
+                            <span className="pi pi-search"></span>
+                            <span className="p-ml-2">View Picture</span>
+                        </span>
+                    </InplaceDisplay>
+                    <InplaceContent>
+                        <img alt="Nature" src="showcase/demo/images/nature/nature1.jpg" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} />
+                    </InplaceContent>
+                </Inplace>
 
-            <h5>Lazy Data</h5>
-            <Inplace onOpen={onOpen}>
-                <InplaceDisplay>
-                    View Data
+                <h5>Lazy Data</h5>
+                <Inplace onOpen={onOpen}>
+                    <InplaceDisplay>
+                        View Data
                 </InplaceDisplay>
-                <InplaceContent>
-                    <DataTable value={cars}>
-                        <Column field="vin" header="Vin" />
-                        <Column field="year" header="Year" />
-                        <Column field="brand" header="Brand" />
-                        <Column field="color" header="Color" />
-                    </DataTable>
-                </InplaceContent>
-            </Inplace>
+                    <InplaceContent>
+                        <DataTable value={products}>
+                            <Column field="code" header="Code"></Column>
+                            <Column field="name" header="Name"></Column>
+                            <Column field="category" header="Category"></Column>
+                            <Column field="quantity" header="Quantity"></Column>
+                        </DataTable>
+                    </InplaceContent>
+                </Inplace>
+            </div>
         </div>
     )
 }
@@ -415,7 +425,7 @@ onOpen() {
                     </TabPanel>
 
                     <TabPanel header="Source">
-                        <LiveEditor name="InplaceDemo" sources={this.sources} service="CarService" data="cars-small" />
+                        <LiveEditor name="InplaceDemo" sources={this.sources} service="ProductService" data="products-small" />
                     </TabPanel>
                 </TabView>
             </div>

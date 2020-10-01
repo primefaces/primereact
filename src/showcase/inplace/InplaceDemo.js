@@ -55,7 +55,7 @@ export class InplaceDemo extends Component {
                                 </span>
                             </InplaceDisplay>
                             <InplaceContent>
-                                <img alt="Nature" src="showcase/demo/images/nature/nature1.jpg" />
+                                <img alt="Nature" src="showcase/demo/images/nature/nature1.jpg" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} />
                             </InplaceContent>
                         </Inplace>
 
