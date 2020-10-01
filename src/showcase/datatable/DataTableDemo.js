@@ -81,10 +81,10 @@ export class DataTableDemo extends Component {
 
     activityBodyTemplate(rowData) {
         return (
-            <>
+            <React.Fragment>
                 <span className="p-column-title">Activity</span>
                 <ProgressBar value={rowData.activity} showValue={false} />
-            </>
+            </React.Fragment>
         );
     }
 
@@ -96,19 +96,19 @@ export class DataTableDemo extends Component {
 
     statusBodyTemplate(rowData) {
         return (
-            <>
+            <React.Fragment>
                 <span className="p-column-title">Status</span>
                 <span className={classNames('customer-badge', 'status-' + rowData.status)}>{rowData.status}</span>
-            </>
+            </React.Fragment>
         );
     }
 
     nameBodyTemplate(rowData) {
         return (
-            <>
+            <React.Fragment>
                 <span className="p-column-title">Name</span>
                 {rowData.name}
-            </>
+            </React.Fragment>
         );
     }
 
@@ -116,11 +116,11 @@ export class DataTableDemo extends Component {
         let { name, code } = rowData.country;
 
         return (
-            <>
+            <React.Fragment>
                 <span className="p-column-title">Country</span>
-                <img src="showcase/demo/images/flag_placeholder.png" alt={name} className={classNames('flag', 'flag-' + code)} />
+                <img src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={name} className={classNames('flag', 'flag-' + code)} />
                 <span style={{verticalAlign: 'middle', marginLeft: '.5em'}}>{name}</span>
-            </>
+            </React.Fragment>
         );
     }
 
@@ -128,20 +128,20 @@ export class DataTableDemo extends Component {
         const src = "showcase/demo/images/avatar/" + rowData.representative.image;
 
         return (
-            <>
+            <React.Fragment>
                 <span className="p-column-title">Representative</span>
-                <img alt={rowData.representative.name} src={src} width="32" style={{verticalAlign: 'middle'}} />
+                <img alt={rowData.representative.name} src={src} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" style={{verticalAlign: 'middle'}} />
                 <span style={{verticalAlign: 'middle', marginLeft: '.5em'}}>{rowData.representative.name}</span>
-            </>
+            </React.Fragment>
         );
     }
 
     dateBodyTemplate(rowData) {
         return (
-            <>
+            <React.Fragment>
                 <span className="p-column-title">Date</span>
                 <span>{rowData.date}</span>
-            </>
+            </React.Fragment>
         );
     }
 
@@ -157,7 +157,7 @@ export class DataTableDemo extends Component {
 
         return (
             <div className="p-multiselect-representative-option">
-                <img alt={option.name} src={src} width="32" style={{verticalAlign: 'middle'}} />
+                <img alt={option.name} src={src} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" style={{verticalAlign: 'middle'}} />
                 <span style={{verticalAlign: 'middle', marginLeft: '.5em'}}>{option.name}</span>
             </div>
         );
