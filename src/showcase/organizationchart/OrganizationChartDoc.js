@@ -14,7 +14,7 @@ export class OrganizationChartDoc extends Component {
                 content: `
 import React, { Component } from 'react';
 import { OrganizationChart } from 'primereact/organizationchart';
-import './OrganizationChartDemo.scss';
+import './OrganizationChartDemo.css';
 
 export class OrganizationChartDemo extends Component {
 
@@ -133,7 +133,7 @@ export class OrganizationChartDemo extends Component {
                 <div>
                     <div className="node-header">{node.label}</div>
                     <div className="node-content">
-                        <img alt={node.data.avatar} src={\`showcase/demo/images/organization/\${node.data.avatar}\`} style={{ width: '32px' }} />
+                        <img alt={node.data.avatar} src={\`showcase/demo/images/organization/\${node.data.avatar}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} style={{ width: '32px' }} />
                         <div>{node.data.name}</div>
                     </div>
                 </div>
@@ -166,7 +166,8 @@ export class OrganizationChartDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState } from 'react';
-import {OrganizationChart} from 'primereact/organizationchart';
+import { OrganizationChart } from 'primereact/organizationchart';
+import './OrganizationChartDemo.css';
 
 const OrganizationChartDemo = () => {
     const [selection, setSelection] = useState([]);
@@ -175,15 +176,15 @@ const OrganizationChartDemo = () => {
         type: 'person',
         className: 'p-person',
         expanded: true,
-        data: {name:'Walter White', 'avatar': 'walter.jpg'},
+        data: { name: 'Walter White', 'avatar': 'walter.jpg' },
         children: [
             {
                 label: 'CFO',
                 type: 'person',
                 className: 'p-person',
                 expanded: true,
-                data: {name:'Saul Goodman', 'avatar': 'saul.jpg'},
-                children:[{
+                data: { name: 'Saul Goodman', 'avatar': 'saul.jpg' },
+                children: [{
                     label: 'Tax',
                     className: 'department-cfo'
                 },
@@ -197,8 +198,8 @@ const OrganizationChartDemo = () => {
                 type: 'person',
                 className: 'p-person',
                 expanded: true,
-                data: {name:'Mike E.', 'avatar': 'mike.jpg'},
-                children:[{
+                data: { name: 'Mike E.', 'avatar': 'mike.jpg' },
+                children: [{
                     label: 'Operations',
                     className: 'department-coo'
                 }]
@@ -208,12 +209,12 @@ const OrganizationChartDemo = () => {
                 type: 'person',
                 className: 'p-person',
                 expanded: true,
-                data: {name:'Jesse Pinkman', 'avatar': 'jesse.jpg'},
-                children:[{
+                data: { name: 'Jesse Pinkman', 'avatar': 'jesse.jpg' },
+                children: [{
                     label: 'Development',
                     className: 'department-cto',
                     expanded: true,
-                    children:[{
+                    children: [{
                         label: 'Analysis',
                         className: 'department-cto'
                     },
@@ -275,7 +276,7 @@ const OrganizationChartDemo = () => {
                 <div>
                     <div className="node-header">{node.label}</div>
                     <div className="node-content">
-                        <img alt={node.data.avatar} src={\`showcase/demo/images/organization/\${node.data.avatar}\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" style={{ width: '32px' }}/>
+                        <img alt={node.data.avatar} src={\`showcase/demo/images/organization/\${node.data.avatar}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} style={{ width: '32px' }} />
                         <div>{node.data.name}</div>
                     </div>
                 </div>
@@ -285,16 +286,18 @@ const OrganizationChartDemo = () => {
         if (node.type === "department") {
             return node.label;
         }
-    };
+    }
 
     return (
         <div className="organizationchart-demo">
-            <h5>Advanced</h5>
-            <OrganizationChart value={data1} nodeTemplate={nodeTemplate} selection={selection} selectionMode="multiple"
-                onSelectionChange={event => setSelection(event.data)} className="company"></OrganizationChart>
+            <div className="card">
+                <h5>Advanced</h5>
+                <OrganizationChart value={data1} nodeTemplate={nodeTemplate} selection={selection} selectionMode="multiple"
+                    onSelectionChange={event => setSelection(event.data)} className="company"></OrganizationChart>
 
-            <h5>Basic</h5>
-            <OrganizationChart value={data2}></OrganizationChart>
+                <h5>Basic</h5>
+                <OrganizationChart value={data2}></OrganizationChart>
+            </div>
         </div>
     )
 }
@@ -304,7 +307,8 @@ const OrganizationChartDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState } from 'react';
-import {OrganizationChart} from 'primereact/organizationchart';
+import { OrganizationChart } from 'primereact/organizationchart';
+import './OrganizationChartDemo.css';
 
 const OrganizationChartDemo = () => {
     const [selection, setSelection] = useState([]);
@@ -313,15 +317,15 @@ const OrganizationChartDemo = () => {
         type: 'person',
         className: 'p-person',
         expanded: true,
-        data: {name:'Walter White', 'avatar': 'walter.jpg'},
+        data: { name: 'Walter White', 'avatar': 'walter.jpg' },
         children: [
             {
                 label: 'CFO',
                 type: 'person',
                 className: 'p-person',
                 expanded: true,
-                data: {name:'Saul Goodman', 'avatar': 'saul.jpg'},
-                children:[{
+                data: { name: 'Saul Goodman', 'avatar': 'saul.jpg' },
+                children: [{
                     label: 'Tax',
                     className: 'department-cfo'
                 },
@@ -335,8 +339,8 @@ const OrganizationChartDemo = () => {
                 type: 'person',
                 className: 'p-person',
                 expanded: true,
-                data: {name:'Mike E.', 'avatar': 'mike.jpg'},
-                children:[{
+                data: { name: 'Mike E.', 'avatar': 'mike.jpg' },
+                children: [{
                     label: 'Operations',
                     className: 'department-coo'
                 }]
@@ -346,12 +350,12 @@ const OrganizationChartDemo = () => {
                 type: 'person',
                 className: 'p-person',
                 expanded: true,
-                data: {name:'Jesse Pinkman', 'avatar': 'jesse.jpg'},
-                children:[{
+                data: { name: 'Jesse Pinkman', 'avatar': 'jesse.jpg' },
+                children: [{
                     label: 'Development',
                     className: 'department-cto',
                     expanded: true,
-                    children:[{
+                    children: [{
                         label: 'Analysis',
                         className: 'department-cto'
                     },
@@ -407,13 +411,13 @@ const OrganizationChartDemo = () => {
         ]
     }];
 
-    const nodeTemplate = (node: any) => {
+    const nodeTemplate = (node) => {
         if (node.type === "person") {
             return (
                 <div>
                     <div className="node-header">{node.label}</div>
                     <div className="node-content">
-                        <img alt={node.data.avatar} src={\`showcase/demo/images/organization/\${node.data.avatar}\`} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" style={{ width: '32px' }}/>
+                        <img alt={node.data.avatar} src={\`showcase/demo/images/organization/\${node.data.avatar}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} style={{ width: '32px' }} />
                         <div>{node.data.name}</div>
                     </div>
                 </div>
@@ -423,16 +427,18 @@ const OrganizationChartDemo = () => {
         if (node.type === "department") {
             return node.label;
         }
-    };
+    }
 
     return (
         <div className="organizationchart-demo">
-            <h5>Advanced</h5>
-            <OrganizationChart value={data1} nodeTemplate={nodeTemplate} selection={selection} selectionMode="multiple"
-                onSelectionChange={(event: any) => setSelection(event.data)} className="company"></OrganizationChart>
+            <div className="card">
+                <h5>Advanced</h5>
+                <OrganizationChart value={data1} nodeTemplate={nodeTemplate} selection={selection} selectionMode="multiple"
+                    onSelectionChange={event => setSelection(event.data)} className="company"></OrganizationChart>
 
-            <h5>Basic</h5>
-            <OrganizationChart value={data2}></OrganizationChart>
+                <h5>Basic</h5>
+                <OrganizationChart value={data2}></OrganizationChart>
+            </div>
         </div>
     )
 }
@@ -441,47 +447,47 @@ const OrganizationChartDemo = () => {
         }
 
         this.extFiles = {
-            'index.css': `
-body .organizationchart-demo .company.p-organizationchart .p-organizationchart-node-content.p-person {
+            'src/demo/OrganizationChartDemo.css': {
+                content: `
+.organizationchart-demo .p-organizationchart .p-person {
     padding: 0;
     border: 0 none;
 }
-body .organizationchart-demo .node-header, body .organizationchart-demo .node-content {
-    padding: 0.5em 0.7em;
+
+.organizationchart-demo .p-organizationchart .node-header, .organizationchart-demo .p-organizationchart .node-content {
+    padding: .5em .7rem;
 }
-body .organizationchart-demo .node-header {
+
+.organizationchart-demo .p-organizationchart .node-header {
     background-color: #495ebb;
     color: #ffffff;
 }
-body .organizationchart-demo .node-content {
+
+.organizationchart-demo .p-organizationchart .node-content {
     text-align: center;
     border: 1px solid #495ebb;
 }
-body .organizationchart-demo .node-content img {
+
+.organizationchart-demo .p-organizationchart .node-content img {
     border-radius: 50%;
 }
-body .organizationchart-demo .department-cfo {
+
+.organizationchart-demo .p-organizationchart .department-cfo {
     background-color: #7247bc;
     color: #ffffff;
 }
-body .organizationchart-demo .department-coo {
+
+.organizationchart-demo .p-organizationchart .department-coo {
     background-color: #a534b6;
     color: #ffffff;
 }
-body .organizationchart-demo .department-cto {
+
+.organizationchart-demo .p-organizationchart .department-cto {
     background-color: #e9286f;
     color: #ffffff;
 }
-body .organizationchart-demo .p-organizationchart .p-highlight {
-    background-color: orange;
-}
-body .organizationchart-demo .p-person .p-node-toggler {
-    color: #495ebb !important;
-}
-body .organizationchart-demo .department-cto .p-node-toggler {
-    color: #8a0a39 !important;
-}
-            `
+                `
+            }
         }
     }
 
@@ -737,51 +743,6 @@ nodeTemplate(node) {
 
                     <TabPanel header="Source">
                         <LiveEditor name="OrganizationChartDemo" sources={this.sources} extFiles={this.extFiles} />
-<CodeHighlight lang="scss">
-{`
-.organizationchart-demo {
-    .p-organizationchart {
-        .p-person {
-            padding: 0;
-            border: 0 none;
-        }
-
-        .node-header, .node-content {
-            padding: .5em .7rem;
-        }
-
-        .node-header {
-            background-color: #495ebb;
-            color: #ffffff;
-        }
-
-        .node-content {
-            text-align: center;
-            border: 1px solid #495ebb;
-        }
-
-        .node-content img {
-            border-radius: 50%;
-        }
-
-        .department-cfo {
-            background-color: #7247bc;
-            color: #ffffff;
-        }
-
-        .department-coo {
-            background-color: #a534b6;
-            color: #ffffff;
-        }
-
-        .department-cto {
-            background-color: #e9286f;
-            color: #ffffff;
-        }
-    }
-}
-`}
-</CodeHighlight>
                     </TabPanel>
                 </TabView>
             </div>

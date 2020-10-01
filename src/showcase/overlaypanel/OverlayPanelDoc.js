@@ -20,6 +20,7 @@ import { Toast } from 'primereact/toast';
 import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
 import ProductService from '../service/ProductService';
+import './OverlayPanelDemo.css';
 
 export class OverlayPanelDemo extends Component {
 
@@ -53,7 +54,7 @@ export class OverlayPanelDemo extends Component {
     }
 
     imageBody(rowData) {
-        return <img src={\`showcase/demo/images/product/\${rowData.image}\`} alt={rowData.image} className="product-image" />
+        return <img src={\`showcase/demo/images/product/\${rowData.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="product-image" />
     }
 
     priceBody(rowData) {
@@ -86,20 +87,67 @@ export class OverlayPanelDemo extends Component {
             'hooks': {
                 tabName: 'Hooks Source',
                 content: `
-import React, { useRef } from 'react';
-import {OverlayPanel} from 'primereact/overlaypanel';
-import {Button} from 'primereact/button';
+import React, { useState, useEffect, useRef } from 'react';
+import { OverlayPanel } from 'primereact/overlaypanel';
+import { Button } from 'primereact/button';
+import { Toast } from 'primereact/toast';
+import { Column } from 'primereact/column';
+import { DataTable } from 'primereact/datatable';
+import ProductService from '../service/ProductService';
+import './OverlayPanelDemo.css';
 
 const OverlayPanelDemo = () => {
-    let op = useRef(null);
+    const [products, setProducts] = useState(null);
+    const [selectedProduct, setSelectedProduct] = useState(null);
+    const productService = new ProductService();
+    const op = useRef(null);
+    const toast = useRef(null);
+    const isMounted = useRef(false);
+
+    useEffect(() => {
+        if (isMounted.current) {
+            op.current.hide();
+            toast.current.show({severity:'info', summary: 'Product Selected', detail: selectedProduct.name, life: 3000});
+        }
+    }, [selectedProduct]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    useEffect(() => {
+        isMounted.current = true;
+        productService.getProductsSmall().then(data => setProducts(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const formatCurrency = (value) => {
+        return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+    }
+
+    const onProductSelect = (e) => {
+        setSelectedProduct(e.value);
+    }
+
+    const imageBody = (rowData) => {
+        return <img src={\`showcase/demo/images/product/\${rowData.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="product-image" />
+    }
+
+    const priceBody = (rowData) => {
+        return formatCurrency(rowData.price);
+    }
 
     return (
-        <div>
-            <Button type="button" label="Toggle" onClick={(e) => op.current.toggle(e)}/>
+        <div className="overlaypanel-demo">
+            <Toast ref={toast} />
 
-            <OverlayPanel ref={op} id="overlay_panel" showCloseIcon>
-                <img src="showcase/demo/images/galleria/galleria1.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Galleria 1" />
-            </OverlayPanel>
+            <div className="card">
+                <Button type="button" icon="pi pi-search" label={selectedProduct ? selectedProduct.name : 'Select a Product'} onClick={(e) => op.current.toggle(e)} aria-haspopup aria-controls="overlay_panel" className="select-product-button" />
+
+                <OverlayPanel ref={op} showCloseIcon id="overlay_panel" style={{width: '450px'}}>
+                    <DataTable value={products} selectionMode="single" paginator rows={5}
+                        selection={selectedProduct} onSelectionChange={onProductSelect}>
+                        <Column field="name" header="Name" sortable />
+                        <Column header="Image" body={imageBody} />
+                        <Column field="price" header="Price" sortable body={priceBody} />
+                    </DataTable>
+                </OverlayPanel>
+            </div>
         </div>
     )
 }
@@ -108,22 +156,84 @@ const OverlayPanelDemo = () => {
             'ts': {
                 tabName: 'TS Source',
                 content: `
-import React, { useRef } from 'react';
-import {OverlayPanel} from 'primereact/overlaypanel';
-import {Button} from 'primereact/button';
+import React, { useState, useEffect, useRef } from 'react';
+import { OverlayPanel } from 'primereact/overlaypanel';
+import { Button } from 'primereact/button';
+import { Toast } from 'primereact/toast';
+import { Column } from 'primereact/column';
+import { DataTable } from 'primereact/datatable';
+import ProductService from '../service/ProductService';
+import './OverlayPanelDemo.css';
 
 const OverlayPanelDemo = () => {
-    let op = useRef<any>(null);
+    const [products, setProducts] = useState(null);
+    const [selectedProduct, setSelectedProduct] = useState(null);
+    const productService = new ProductService();
+    const op = useRef(null);
+    const toast = useRef(null);
+    const isMounted = useRef(false);
+
+    useEffect(() => {
+        if (isMounted.current) {
+            op.current.hide();
+            toast.current.show({severity:'info', summary: 'Product Selected', detail: selectedProduct.name, life: 3000});
+        }
+    }, [selectedProduct]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    useEffect(() => {
+        isMounted.current = true;
+        productService.getProductsSmall().then(data => setProducts(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const formatCurrency = (value) => {
+        return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+    }
+
+    const onProductSelect = (e) => {
+        setSelectedProduct(e.value);
+    }
+
+    const imageBody = (rowData) => {
+        return <img src={\`showcase/demo/images/product/\${rowData.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="product-image" />
+    }
+
+    const priceBody = (rowData) => {
+        return formatCurrency(rowData.price);
+    }
 
     return (
-        <div>
-            <Button type="button" label="Toggle" onClick={(e) => op.current.toggle(e)}/>
+        <div className="overlaypanel-demo">
+            <Toast ref={toast} />
 
-            <OverlayPanel ref={op} id="overlay_panel" showCloseIcon>
-                <img src="showcase/demo/images/galleria/galleria1.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Galleria 1" />
-            </OverlayPanel>
+            <div className="card">
+                <Button type="button" icon="pi pi-search" label={selectedProduct ? selectedProduct.name : 'Select a Product'} onClick={(e) => op.current.toggle(e)} aria-haspopup aria-controls="overlay_panel" className="select-product-button" />
+
+                <OverlayPanel ref={op} showCloseIcon id="overlay_panel" style={{width: '450px'}}>
+                    <DataTable value={products} selectionMode="single" paginator rows={5}
+                        selection={selectedProduct} onSelectionChange={onProductSelect}>
+                        <Column field="name" header="Name" sortable />
+                        <Column header="Image" body={imageBody} />
+                        <Column field="price" header="Price" sortable body={priceBody} />
+                    </DataTable>
+                </OverlayPanel>
+            </div>
         </div>
     )
+}
+                `
+            }
+        };
+
+        this.extFiles = {
+            'src/demo/OverlayPanelDemo.css': {
+                content: `
+.overlaypanel-demo .select-product-button {
+    min-width: 15rem;
+}
+
+.overlaypanel-demo .product-image {
+    width: 50px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
                 `
             }
@@ -312,7 +422,7 @@ import { OverlayPanel } from 'primereact/overlaypanel';
             </TabPanel>
 
             <TabPanel header="Source">
-                <LiveEditor name="OverlayPanelDemo" sources={this.sources} />
+                <LiveEditor name="OverlayPanelDemo" sources={this.sources} service="ProductService" data="products-small" extFiles={this.extFiles} />
             </TabPanel>
         </TabView>
     </div>
