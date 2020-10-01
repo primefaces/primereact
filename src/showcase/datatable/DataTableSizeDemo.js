@@ -136,40 +136,46 @@ export class DataTableSizeDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState, useEffect } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service/CarService';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import ProductService from '../service/ProductService';
 
-const DataTableStyleDemo = () => {
-    const [cars, setCars] = useState([]);
-    const carservice = new CarService();
+const DataTableSizeDemo = () => {
+    const [products, setProducts] = useState(null);
+    const productService = new ProductService();
 
     useEffect(() => {
-        carservice.getCarsSmall().then(data => setCars(data));
+        productService.getProductsSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const yearTemplate = (rowData) => {
-        let year = rowData.year;
-        let fontWeight = year > 2010 ? 'bold' : 'normal';
-
-        return <span style={{fontWeight: fontWeight}}>{rowData.year}</span>;
-    };
-
-    const rowClassName = (rowData) => {
-        let brand = rowData.brand;
-
-        return {'p-highlight' : (brand === 'Jaguar')};
-    };
 
     return (
         <div>
-            <p>This datatable highlights cell with a bolder font weight whose year value is greater than 2010 and highlights rows whose brand is a Jaguar.</p>
-            <DataTable value={cars} rowClassName={rowClassName}>
-                <Column field="vin" header="Vin" />
-                <Column field="year" header="Year" body={yearTemplate} />
-                <Column field="brand" header="Brand" />
-                <Column field="color" header="Color" />
-            </DataTable>
+            <div className="card">
+                <DataTable value={products} header="Small Table" className="p-datatable-sm">
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+            </div>
+
+            <div className="card">
+                <DataTable value={products} header="Normal Table">
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+            </div>
+
+            <div className="card">
+                <DataTable value={products} header="Large Table" className="p-datatable-lg">
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+            </div>
         </div>
     );
 }
@@ -179,40 +185,46 @@ const DataTableStyleDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState, useEffect } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service/CarService';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import ProductService from '../service/ProductService';
 
-const DataTableStyleDemo = () => {
-    const [cars, setCars] = useState([]);
-    const carservice = new CarService();
+const DataTableSizeDemo = () => {
+    const [products, setProducts] = useState(null);
+    const productService = new ProductService();
 
     useEffect(() => {
-        carservice.getCarsSmall().then(data => setCars(data));
+        productService.getProductsSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const yearTemplate = (rowData: any) => {
-        let year = rowData.year;
-        let fontWeight: any = year > 2010 ? 'bold' : 'normal';
-
-        return <span style={{fontWeight: fontWeight}}>{rowData.year}</span>;
-    };
-
-    const rowClassName = (rowData: any) => {
-        let brand = rowData.brand;
-
-        return {'p-highlight' : (brand === 'Jaguar')};
-    };
 
     return (
         <div>
-            <p>This datatable highlights cell with a bolder font weight whose year value is greater than 2010 and highlights rows whose brand is a Jaguar.</p>
-            <DataTable value={cars} rowClassName={rowClassName}>
-                <Column field="vin" header="Vin" />
-                <Column field="year" header="Year" body={yearTemplate} />
-                <Column field="brand" header="Brand" />
-                <Column field="color" header="Color" />
-            </DataTable>
+            <div className="card">
+                <DataTable value={products} header="Small Table" className="p-datatable-sm">
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+            </div>
+
+            <div className="card">
+                <DataTable value={products} header="Normal Table">
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+            </div>
+
+            <div className="card">
+                <DataTable value={products} header="Large Table" className="p-datatable-lg">
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+            </div>
         </div>
     );
 }
@@ -230,7 +242,7 @@ const DataTableStyleDemo = () => {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Source">
-                        <LiveEditor name="DataTableStyleDemo" sources={this.sources} service="CarService" data="cars-small" />
+                        <LiveEditor name="DataTableSizeDemo" sources={this.sources} service="ProductService" data="products-small" />
                     </TabPanel>
                 </TabView>
             </div>
