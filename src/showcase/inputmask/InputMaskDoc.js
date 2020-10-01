@@ -76,7 +76,7 @@ export class InputMaskDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState } from 'react';
-import {InputMask} from 'primereact/inputmask';
+import { InputMask } from 'primereact/inputmask';
 
 const InputMaskDemo = () => {
     const [val1, setVal1] = useState();
@@ -87,36 +87,38 @@ const InputMaskDemo = () => {
     const [val6, setVal6] = useState();
 
     return (
-        <div className="inputgrid-demo">
-            <div className="p-grid p-fluid">
-                <div className="p-col-12 p-md-4">
-                    <h5>Basic {val1}</h5>
-                    <InputMask mask="99-999999" value={val1} placeholder="99-999999" onChange={(e) => setVal1(e.value)}></InputMask>
-                </div>
+        <div>
+            <div className="card">
+                <div className="p-fluid p-formgrid p-grid">
+                    <div className="p-field p-col-12 p-md-4">
+                        <label htmlFor="basic">Basic</label>
+                        <InputMask id="basic" mask="99-999999" value={val1} placeholder="99-999999" onChange={(e) => setVal1(e.value)}></InputMask>
+                    </div>
 
-                <div className="p-col-12 p-md-4">
-                    <h5>SSN {val2}</h5>
-                    <InputMask mask="999-99-9999" value={val2} placeholder="999-99-9999" onChange={(e) => setVal2(e.value)}></InputMask>
-                </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <label htmlFor="ssn">SSN</label>
+                        <InputMask id="ssn" mask="999-99-9999" value={val2} placeholder="999-99-9999" onChange={(e) => setVal2(e.value)}></InputMask>
+                    </div>
 
-                <div className="p-col-12 p-md-4">
-                    <h5>Date {val3}</h5>
-                    <InputMask mask="99/99/9999" value={val3} placeholder="99/99/9999" slotChar="mm/dd/yyyy" onChange={(e) => setVal3(e.value)}></InputMask>
-                </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <label htmlFor="date">Date</label>
+                        <InputMask id="date" mask="99/99/9999" value={val3} placeholder="99/99/9999" slotChar="mm/dd/yyyy" onChange={(e) => setVal3(e.value)}></InputMask>
+                    </div>
 
-                <div className="p-col-12 p-md-4">
-                    <h5>Phone {val4}</h5>
-                    <InputMask mask="(999) 999-9999" value={val4} placeholder="(999) 999-9999" onChange={(e) => setVal4(e.value)}></InputMask>
-                </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <label htmlFor="phone">Phone</label>
+                        <InputMask id="phone" mask="(999) 999-9999" value={val4} placeholder="(999) 999-9999" onChange={(e) => setVal4(e.value)}></InputMask>
+                    </div>
 
-                <div className="p-col-12 p-md-4">
-                    <h5>Phone Ext {val5}</h5>
-                    <InputMask mask="(999) 999-9999? x99999" value={val5} placeholder="(999) 999-9999? x99999" onChange={(e) => setVal5(e.value)}></InputMask>
-                </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <label htmlFor="phoneext">Phone Ext</label>
+                        <InputMask id="phoneext" mask="(999) 999-9999? x99999" value={val5} placeholder="(999) 999-9999? x99999" onChange={(e) => setVal5(e.value)}></InputMask>
+                    </div>
 
-                <div className="p-col-12 p-md-4">
-                    <h5>Serial Number {val6}</h5>
-                    <InputMask mask="a*-999-a999" value={val6} placeholder="a*-999-a999" onChange={(e) => setVal6(e.value)}></InputMask>
+                    <div className="p-field p-col-12 p-md-4">
+                        <label htmlFor="serial">Serial</label>
+                        <InputMask id="serial" mask="a*-999-a999" value={val6} placeholder="a*-999-a999" onChange={(e) => setVal6(e.value)}></InputMask>
+                    </div>
                 </div>
             </div>
         </div>
@@ -128,62 +130,56 @@ const InputMaskDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState } from 'react';
-import {InputMask} from 'primereact/inputmask';
+import { InputMask } from 'primereact/inputmask';
 
 const InputMaskDemo = () => {
-    const [val1, setVal1] = useState<string|undefined>(undefined);
-    const [val2, setVal2] = useState<string|undefined>(undefined);
-    const [val3, setVal3] = useState<string|undefined>(undefined);
-    const [val4, setVal4] = useState<string|undefined>(undefined);
-    const [val5, setVal5] = useState<string|undefined>(undefined);
-    const [val6, setVal6] = useState<string|undefined>(undefined);
+    const [val1, setVal1] = useState();
+    const [val2, setVal2] = useState();
+    const [val3, setVal3] = useState();
+    const [val4, setVal4] = useState();
+    const [val5, setVal5] = useState();
+    const [val6, setVal6] = useState();
 
     return (
-        <div className="inputgrid-demo">
-            <div className="p-grid p-fluid">
-                <div className="p-col-12 p-md-4">
-                    <h5>Basic {val1}</h5>
-                    <InputMask mask="99-999999" value={val1} placeholder="99-999999" onChange={(e) => setVal1(e.value)}></InputMask>
-                </div>
+        <div>
+            <div className="card">
+                <div className="p-fluid p-formgrid p-grid">
+                    <div className="p-field p-col-12 p-md-4">
+                        <label htmlFor="basic">Basic</label>
+                        <InputMask id="basic" mask="99-999999" value={val1} placeholder="99-999999" onChange={(e) => setVal1(e.value)}></InputMask>
+                    </div>
 
-                <div className="p-col-12 p-md-4">
-                    <h5>SSN {val2}</h5>
-                    <InputMask mask="999-99-9999" value={val2} placeholder="999-99-9999" onChange={(e) => setVal2(e.value)}></InputMask>
-                </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <label htmlFor="ssn">SSN</label>
+                        <InputMask id="ssn" mask="999-99-9999" value={val2} placeholder="999-99-9999" onChange={(e) => setVal2(e.value)}></InputMask>
+                    </div>
 
-                <div className="p-col-12 p-md-4">
-                    <h5>Date {val3}</h5>
-                    <InputMask mask="99/99/9999" value={val3} placeholder="99/99/9999" slotChar="mm/dd/yyyy" onChange={(e) => setVal3(e.value)}></InputMask>
-                </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <label htmlFor="date">Date</label>
+                        <InputMask id="date" mask="99/99/9999" value={val3} placeholder="99/99/9999" slotChar="mm/dd/yyyy" onChange={(e) => setVal3(e.value)}></InputMask>
+                    </div>
 
-                <div className="p-col-12 p-md-4">
-                    <h5>Phone {val4}</h5>
-                    <InputMask mask="(999) 999-9999" value={val4} placeholder="(999) 999-9999" onChange={(e) => setVal4(e.value)}></InputMask>
-                </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <label htmlFor="phone">Phone</label>
+                        <InputMask id="phone" mask="(999) 999-9999" value={val4} placeholder="(999) 999-9999" onChange={(e) => setVal4(e.value)}></InputMask>
+                    </div>
 
-                <div className="p-col-12 p-md-4">
-                    <h5>Phone Ext {val5}</h5>
-                    <InputMask mask="(999) 999-9999? x99999" value={val5} placeholder="(999) 999-9999? x99999" onChange={(e) => setVal5(e.value)}></InputMask>
-                </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <label htmlFor="phoneext">Phone Ext</label>
+                        <InputMask id="phoneext" mask="(999) 999-9999? x99999" value={val5} placeholder="(999) 999-9999? x99999" onChange={(e) => setVal5(e.value)}></InputMask>
+                    </div>
 
-                <div className="p-col-12 p-md-4">
-                    <h5>Serial Number {val6}</h5>
-                    <InputMask mask="a*-999-a999" value={val6} placeholder="a*-999-a999" onChange={(e) => setVal6(e.value)}></InputMask>
+                    <div className="p-field p-col-12 p-md-4">
+                        <label htmlFor="serial">Serial</label>
+                        <InputMask id="serial" mask="a*-999-a999" value={val6} placeholder="a*-999-a999" onChange={(e) => setVal6(e.value)}></InputMask>
+                    </div>
                 </div>
             </div>
         </div>
     );
 }
                 `
-            }
-        }
-
-        this.extFiles = {
-            'index.css': `
-.inputgrid-demo {
-    padding-top: 0 !important;
-}
-            `
+            },
         }
     }
 
@@ -419,7 +415,7 @@ import { InputMask } from 'primereact/inputmask';
                     </TabPanel>
 
                     <TabPanel header="Source">
-                        <LiveEditor name="InputMaskDemo" sources={this.sources} extFiles={this.extFiles} />
+                        <LiveEditor name="InputMaskDemo" sources={this.sources} />
                     </TabPanel>
                 </TabView>
             </div>

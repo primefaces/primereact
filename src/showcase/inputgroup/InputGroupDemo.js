@@ -51,7 +51,7 @@ export class InputGroupDemo extends Component {
 
                             <div className="p-col-12 p-md-4">
                                 <div className="p-inputgroup">
-                                    <span className="p-inputgroup-addon">W</span>
+                                    <span className="p-inputgroup-addon">www</span>
                                     <InputText placeholder="Website" />
                                 </div>
                             </div>
