@@ -12,7 +12,6 @@ export class DialogDemo extends Component {
         this.state = {
             displayBasic: false,
             displayBasic2: false,
-            displayBlockScroll: false,
             displayModal: false,
             displayConfirmation: false,
             displayMaximizable: false,
