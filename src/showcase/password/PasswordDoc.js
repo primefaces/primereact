@@ -34,14 +34,14 @@ export class PasswordDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React from 'react';
-import {Password} from 'primereact/password';
+import { Password } from 'primereact/password';
 
 const PasswordDemo = () => {
-
     return (
         <div>
-            <h5>Password</h5>
-            <Password/>
+            <div className="card">
+                <Password />
+            </div>
         </div>
     );
 }
@@ -51,19 +51,19 @@ const PasswordDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React from 'react';
-import {Password} from 'primereact/password';
+import { Password } from 'primereact/password';
 
 const PasswordDemo = () => {
-
     return (
         <div>
-            <h5>Password</h5>
-            <Password/>
+            <div className="card">
+                <Password />
+            </div>
         </div>
     );
 }
                 `
-            }
+            },
         }
 
         this.extFiles = {
@@ -209,7 +209,7 @@ import {Password} from 'primereact/password';
                     </TabPanel>
 
                     <TabPanel header="Source">
-                        <LiveEditor name="PasswordDemo" sources={this.sources} service="NodeService" data="treenodes" extFiles={this.extFiles} />
+                        <LiveEditor name="PasswordDemo" sources={this.sources} extFiles={this.extFiles} />
                     </TabPanel>
                 </TabView>
             </div>

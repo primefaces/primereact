@@ -154,11 +154,10 @@ export class PanelMenuDemo extends Component {
             'hooks': {
                 tabName: 'Hooks Source',
                 content: `
-import React, { useState, useEffect } from 'react';
-import {PanelMenu} from 'primereact/panelmenu';
+import React from 'react';
+import { PanelMenu } from 'primereact/panelmenu';
 
 const PanelMenuDemo = () => {
-
     const items = [
         {
             label:'File',
@@ -278,7 +277,9 @@ const PanelMenuDemo = () => {
 
     return (
         <div>
-            <PanelMenu model={items} style={{width:'300px'}}/>
+            <div className="card">
+                <PanelMenu model={items} style={{ width: '22rem' }}/>
+            </div>
         </div>
     );
 }
@@ -288,10 +289,9 @@ const PanelMenuDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React from 'react';
-import {PanelMenu} from 'primereact/panelmenu';
+import { PanelMenu } from 'primereact/panelmenu';
 
 const PanelMenuDemo = () => {
-
     const items = [
         {
             label:'File',
@@ -411,12 +411,14 @@ const PanelMenuDemo = () => {
 
     return (
         <div>
-            <PanelMenu model={items} style={{width:'300px'}}/>
+            <div className="card">
+                <PanelMenu model={items} style={{ width: '22rem' }}/>
+            </div>
         </div>
     );
 }
                 `
-            }
+            },
         }
     }
 
