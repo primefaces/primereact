@@ -18,6 +18,9 @@ import { EventService } from '../service/EventService';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import '@fullcalendar/core/main.css';
+import '@fullcalendar/daygrid/main.css';
+import '@fullcalendar/timegrid/main.css';
 
 export class FullCalendarDemo extends Component {
 
@@ -63,16 +66,15 @@ export class FullCalendarDemo extends Component {
             'hooks': {
                 tabName: 'Hooks Source',
                 content: `
-import '@fullcalendar/core/main.css';
-import '@fullcalendar/daygrid/main.css';
-import '@fullcalendar/timegrid/main.css';
-
 import React, { useState, useEffect } from 'react';
-import {FullCalendar} from 'primereact/fullcalendar';
-import {EventService} from '../service/EventService';
+import { FullCalendar } from 'primereact/fullcalendar';
+import { EventService } from '../service/EventService';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import '@fullcalendar/core/main.css';
+import '@fullcalendar/daygrid/main.css';
+import '@fullcalendar/timegrid/main.css';
 
 const FullCalendarDemo = () => {
     const [events, setEvents] = useState([]);
@@ -87,6 +89,7 @@ const FullCalendarDemo = () => {
         },
         editable: true
     };
+
     const eventService = new EventService();
 
     useEffect(() => {
@@ -95,7 +98,9 @@ const FullCalendarDemo = () => {
 
     return (
         <div>
-            <FullCalendar events={events} options={options} />
+            <div className="card">
+                <FullCalendar events={events} options={options} />
+            </div>
         </div>
     );
 }
@@ -104,16 +109,15 @@ const FullCalendarDemo = () => {
             'ts': {
                 tabName: 'TS Source',
                 content: `
-import '@fullcalendar/core/main.css';
-import '@fullcalendar/daygrid/main.css';
-import '@fullcalendar/timegrid/main.css';
-
 import React, { useState, useEffect } from 'react';
-import {FullCalendar} from 'primereact/fullcalendar';
-import {EventService} from '../service/EventService';
+import { FullCalendar } from 'primereact/fullcalendar';
+import { EventService } from '../service/EventService';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import '@fullcalendar/core/main.css';
+import '@fullcalendar/daygrid/main.css';
+import '@fullcalendar/timegrid/main.css';
 
 const FullCalendarDemo = () => {
     const [events, setEvents] = useState([]);
@@ -128,6 +132,7 @@ const FullCalendarDemo = () => {
         },
         editable: true
     };
+
     const eventService = new EventService();
 
     useEffect(() => {
@@ -136,7 +141,9 @@ const FullCalendarDemo = () => {
 
     return (
         <div>
-            <FullCalendar events={events} options={options} />
+            <div className="card">
+                <FullCalendar events={events} options={options} />
+            </div>
         </div>
     );
 }

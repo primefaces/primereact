@@ -147,160 +147,122 @@ export class FloatLabelDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState, useEffect } from 'react';
-import {InputText} from 'primereact/inputtext';
-import {AutoComplete} from 'primereact/autocomplete';
-import {Calendar} from 'primereact/calendar';
-import {Chips} from 'primereact/chips';
-import {Dropdown} from 'primereact/dropdown';
-import {InputMask} from 'primereact/inputmask';
-import {InputNumber} from 'primereact/inputnumber';
-import {InputTextarea} from 'primereact/inputtextarea';
-import {MultiSelect} from 'primereact/multiselect';
-import {Password} from 'primereact/password';
-import {CountryService} from "../service/CountryService";
+import { InputText } from 'primereact/inputtext';
+import { AutoComplete } from 'primereact/autocomplete';
+import { Calendar } from 'primereact/calendar';
+import { Chips } from 'primereact/chips';
+import { Dropdown } from 'primereact/dropdown';
+import { InputMask } from 'primereact/inputmask';
+import { InputNumber } from 'primereact/inputnumber';
+import { InputTextarea } from 'primereact/inputtextarea';
+import { MultiSelect } from 'primereact/multiselect';
+import { CountryService } from '../service/CountryService';
 
 const FloatLabelDemo = () => {
-    const [inputtextValue, setInputtextValue] = useState('');
-    const [countriesData, setCountriesData] = useState([]);
-    const [filteredCountriesSingle, setFilteredCountriesSingle] = useState(null);
-    const [calendarValue, setCalendarValue] = useState(null);
-    const [chipsValue, setChipsValue] = useState([]);
-    const [city, setCity] = useState(null);
-    const [maskValue, setMaskValue] = useState(null);
-    const [numberValue, setNumberValue] = useState(null);
-    const [textareaValue, setTextareaValue] = useState('');
-    const [carsMultiselect, setCarsMultiselect] = useState([]);
-    const [country, setCountry] = useState(null);
+    const [countries, setCountries] = useState(null);
+    const [filteredCountries, setFilteredCountries] = useState(null);
+    const [value1, setValue1] = useState('');
+    const [value2, setValue2] = useState(null);
+    const [value3, setValue3] = useState(null);
+    const [value4, setValue4] = useState(null);
+    const [value5, setValue5] = useState(null);
+    const [value6, setValue6] = useState(null);
+    const [value7, setValue7] = useState('');
+    const [value8, setValue8] = useState(null);
+    const [value9, setValue9] = useState(null);
+    const [value10, setValue10] = useState('');
+
     const countryservice = new CountryService();
+    const cities = [
+        { name: 'New York', code: 'NY' },
+        { name: 'Rome', code: 'RM' },
+        { name: 'London', code: 'LDN' },
+        { name: 'Istanbul', code: 'IST' },
+        { name: 'Paris', code: 'PRS' }
+    ];
 
     useEffect(() => {
-        countryservice.getCountries().then(data => setCountriesData(data));
+        countryservice.getCountries().then(data => setCountries(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const filterCountrySingle = (event) => {
+    const searchCountry = (event) => {
         setTimeout(() => {
-            let results = countriesData.filter((country) => {
+            let results = countries.filter((country) => {
                 return country.name.toLowerCase().startsWith(event.query.toLowerCase());
             });
-            setFilteredCountriesSingle(results);
+            setFilteredCountries(results);
         }, 250);
     }
 
-    const onCityChange = (e) => {
-        setCity(e.value);
-    }
-
-    const cars = [
-        {label: 'Audi', value: 'Audi'},
-        {label: 'BMW', value: 'BMW'},
-        {label: 'Fiat', value: 'Fiat'},
-        {label: 'Honda', value: 'Honda'},
-        {label: 'Jaguar', value: 'Jaguar'},
-        {label: 'Mercedes', value: 'Mercedes'},
-        {label: 'Renault', value: 'Renault'},
-        {label: 'VW', value: 'VW'},
-        {label: 'Volvo', value: 'Volvo'}
-    ];
-
-    const cities = [
-        {name: 'New York', code: 'NY'},
-        {name: 'Rome', code: 'RM'},
-        {name: 'London', code: 'LDN'},
-        {name: 'Istanbul', code: 'IST'},
-        {name: 'Paris', code: 'PRS'}
-    ];
-
     return (
         <div>
-            <div className="p-grid p-fluid">
-                <div className="p-col-12 p-md-4">
-                    <h5>InputText</h5>
-                    <span className="p-float-label">
-                        <InputText id="float-input" type="text" size={30} value={inputtextValue} onChange={(e) => setInputtextValue(e.target.value)}/>
-                        <label htmlFor="float-input">Username</label>
-                    </span>
-                </div>
-
-                <div className="p-col-12 p-md-4">
-                    <h5>AutoComplete</h5>
-                    <span className="p-float-label">
-                        <AutoComplete id="float-auto" value={country} suggestions={filteredCountriesSingle}
-                                        completeMethod={filterCountrySingle} field="name" size={30} minLength={1} onChange={(e) => setCountry(e.value)}/>
-                        <label htmlFor="float-auto">Countries</label>
-                    </span>
-                </div>
-
-                <div className="p-col-12 p-md-4">
-                    <h5>Calendar</h5>
-                    <span className="p-float-label">
-                        <Calendar id="float-claendar" value={calendarValue} onChange={(e) => setCalendarValue(e.value)} />
-                        <label htmlFor="float-calendar">Select a Date</label>
-                    </span>
-                </div>
-
-                <div className="p-col-12 p-md-4">
-                    <h5>Chips</h5>
-                    <span className="p-float-label">
-                        <Chips id="float-chips" value={chipsValue} onChange={(e) => setChipsValue(e.value)}/>
-                        <label htmlFor="float-chips">Enter a Text</label>
-                    </span>
-                </div>
-
-                <div className="p-col-12 p-md-4">
-                    <h5>Dropdown</h5>
-                    <span className="p-float-label">
-                        <Dropdown id="float-dropdown" value={city} options={cities} ariaLabel="Test" onChange={onCityChange} optionLabel="name"/>
-                        <label htmlFor="float-dropdown">Select City</label>
-                    </span>
-                </div>
-
-                <div className="p-col-12 p-md-4">
-                    <h5>InputMask</h5>
-                    <span className="p-float-label">
-                        <InputMask id="float-mask" mask="99-999999" value={maskValue} onChange={(e) => setMaskValue(e.value)}/>
-                        <label htmlFor="float-mask">99-999999</label>
-                    </span>
-                </div>
-
-                <div className="p-col-12 p-md-4">
-                    <h5>InputNumber</h5>
-                    <span className="p-float-label">
-                        <InputNumber id="float-number" value={numberValue} onChange={(e) => setNumberValue(e.target.value)}/>
-                        <label htmlFor="float-number">Number</label>
-                    </span>
-                </div>
-
-                <div className="p-col-12 p-md-4">
-                    <h5>KeyFilter</h5>
-                    <span className="p-float-label">
-                        <InputText id="float-keyfilter" keyfilter="int"/>
-                        <label htmlFor="float-keyfilter">Integers</label>
-                    </span>
-                </div>
-
-                <div className="p-col-12 p-md-4">
-                    <h5>MultiSelect</h5>
-                    <span className="p-float-label">
-                        <MultiSelect id="float-multiselect" value={carsMultiselect} options={cars} onChange={(e) => setCarsMultiselect(e.value)}
-                                        filter filterPlaceholder="Search"/>
-                        <label htmlFor="float-multiselect">Choose</label>
-                    </span>
-                </div>
-
-                <div className="p-col-12 p-md-4">
-                    <h5>Password</h5>
-                    <span className="p-float-label">
-                        <Password id="float-password"/>
-                        <label htmlFor="float-password">Password</label>
-                    </span>
-                </div>
-
-                <div className="p-col-12 p-md-4">
-                    <h5>InputTextarea</h5>
-                    <span className="p-float-label">
-                        <InputTextarea id="float-textarea" value={textareaValue} onChange={(e) => setTextareaValue(e.target.value)} rows={5} cols={30}/>
-                        <label htmlFor="float-textarea">Your Message</label>
-                    </span>
+            <div className="card">
+                <div className="p-fluid p-grid">
+                    <div className="p-field p-col-12 p-md-4">
+                        <span className="p-float-label">
+                            <InputText id="inputtext" value={value1} onChange={(e) => setValue1(e.target.value)} />
+                            <label htmlFor="inputtext">InputText</label>
+                        </span>
+                    </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <span className="p-float-label">
+                            <AutoComplete value={value2} suggestions={filteredCountries} onComplete={searchCountry} field="name" />
+                            <label htmlFor="autocomplete">AutoComplete</label>
+                        </span>
+                    </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <span className="p-float-label">
+                            <Calendar id="calendar" value={value3} onChange={(e) => setValue3(e.value)} />
+                            <label htmlFor="calendar">Calendar</label>
+                        </span>
+                    </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <span className="p-float-label">
+                            <Chips id="chips" value={value4} onChange={(e) => setValue4(e.value)} />
+                            <label htmlFor="chips">Chips</label>
+                        </span>
+                    </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <span className="p-float-label">
+                            <InputMask id="inputmask" value={value5} onChange={(e) => setValue5(e.value)} mask="99/99/9999" slotChar="mm/dd/yyyy" />
+                            <label htmlFor="inputmask">InputMask</label>
+                        </span>
+                    </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <span className="p-float-label">
+                            <InputNumber id="inputnumber" value={value6} onChange={(e) => setValue6(e.value)} />
+                            <label htmlFor="inputnumber">InputNumber</label>
+                        </span>
+                    </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <div className="p-inputgroup">
+                            <span className="p-inputgroup-addon">
+                                <i className="pi pi-user"></i>
+                            </span>
+                            <span className="p-float-label">
+                                <InputText id="inputgroup" type="text" value={value7} onChange={(e) => setValue7(e.target.value)} />
+                                <label htmlFor="inputgroup">InputGroup</label>
+                            </span>
+                        </div>
+                    </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <span className="p-float-label">
+                            <Dropdown id="dropdown" value={value8} options={cities} onChange={(e) => setValue8(e.value)} optionLabel="name" />
+                            <label htmlFor="dropdown">Dropdown</label>
+                        </span>
+                    </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <span className="p-float-label">
+                            <MultiSelect id="multiselect" value={value9} options={cities} onChange={(e) => setValue9(e.value)} optionLabel="name" />
+                            <label htmlFor="multiselect">MultiSelect</label>
+                        </span>
+                    </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <span className="p-float-label">
+                            <InputTextarea id="textarea" value={value10} onChange={(e) => setValue10(e.target.value)} rows={3} />
+                            <label htmlFor="textarea">Textarea</label>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -312,167 +274,129 @@ const FloatLabelDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState, useEffect } from 'react';
-import {InputText} from 'primereact/inputtext';
-import {AutoComplete} from 'primereact/autocomplete';
-import {Calendar} from 'primereact/calendar';
-import {Chips} from 'primereact/chips';
-import {Dropdown} from 'primereact/dropdown';
-import {InputMask} from 'primereact/inputmask';
-import {InputNumber} from 'primereact/inputnumber';
-import {InputTextarea} from 'primereact/inputtextarea';
-import {MultiSelect} from 'primereact/multiselect';
-import {Password} from 'primereact/password';
-import {CountryService} from "../service/CountryService";
+import { InputText } from 'primereact/inputtext';
+import { AutoComplete } from 'primereact/autocomplete';
+import { Calendar } from 'primereact/calendar';
+import { Chips } from 'primereact/chips';
+import { Dropdown } from 'primereact/dropdown';
+import { InputMask } from 'primereact/inputmask';
+import { InputNumber } from 'primereact/inputnumber';
+import { InputTextarea } from 'primereact/inputtextarea';
+import { MultiSelect } from 'primereact/multiselect';
+import { CountryService } from '../service/CountryService';
 
 const FloatLabelDemo = () => {
-    const [inputtextValue, setInputtextValue] = useState('');
-    const [countriesData, setCountriesData] = useState([]);
-    const [filteredCountriesSingle, setFilteredCountriesSingle] = useState<any>(null);
-    const [calendarValue, setCalendarValue] = useState<any>(null);
-    const [chipsValue, setChipsValue] = useState([]);
-    const [city, setCity] = useState(null);
-    const [maskValue, setMaskValue] = useState<any>(null);
-    const [numberValue, setNumberValue] = useState<any>(null);
-    const [textareaValue, setTextareaValue] = useState('');
-    const [carsMultiselect, setCarsMultiselect] = useState([]);
-    const [country, setCountry] = useState<any>(null);
+    const [countries, setCountries] = useState(null);
+    const [filteredCountries, setFilteredCountries] = useState(null);
+    const [value1, setValue1] = useState('');
+    const [value2, setValue2] = useState(null);
+    const [value3, setValue3] = useState(null);
+    const [value4, setValue4] = useState(null);
+    const [value5, setValue5] = useState(null);
+    const [value6, setValue6] = useState(null);
+    const [value7, setValue7] = useState('');
+    const [value8, setValue8] = useState(null);
+    const [value9, setValue9] = useState(null);
+    const [value10, setValue10] = useState('');
+
     const countryservice = new CountryService();
+    const cities = [
+        { name: 'New York', code: 'NY' },
+        { name: 'Rome', code: 'RM' },
+        { name: 'London', code: 'LDN' },
+        { name: 'Istanbul', code: 'IST' },
+        { name: 'Paris', code: 'PRS' }
+    ];
 
     useEffect(() => {
-        countryservice.getCountries().then(data => setCountriesData(data));
+        countryservice.getCountries().then(data => setCountries(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const filterCountrySingle = (event: any) => {
+    const searchCountry = (event) => {
         setTimeout(() => {
-            let results = countriesData.filter((country: any) => {
+            let results = countries.filter((country) => {
                 return country.name.toLowerCase().startsWith(event.query.toLowerCase());
             });
-            setFilteredCountriesSingle(results);
+            setFilteredCountries(results);
         }, 250);
     }
 
-    const onCityChange = (e: any) => {
-        setCity(e.value);
-    }
-
-    const cars = [
-        {label: 'Audi', value: 'Audi'},
-        {label: 'BMW', value: 'BMW'},
-        {label: 'Fiat', value: 'Fiat'},
-        {label: 'Honda', value: 'Honda'},
-        {label: 'Jaguar', value: 'Jaguar'},
-        {label: 'Mercedes', value: 'Mercedes'},
-        {label: 'Renault', value: 'Renault'},
-        {label: 'VW', value: 'VW'},
-        {label: 'Volvo', value: 'Volvo'}
-    ];
-
-    const cities = [
-        {name: 'New York', code: 'NY'},
-        {name: 'Rome', code: 'RM'},
-        {name: 'London', code: 'LDN'},
-        {name: 'Istanbul', code: 'IST'},
-        {name: 'Paris', code: 'PRS'}
-    ];
-
     return (
         <div>
-            <div className="p-grid p-fluid">
-                <div className="p-col-12 p-md-4">
-                    <h5>InputText</h5>
-                    <span className="p-float-label">
-                        <InputText id="float-input" type="text" size={30} value={inputtextValue} onChange={(e) => setInputtextValue(e.target.value)}/>
-                        <label htmlFor="float-input">Username</label>
-                    </span>
-                </div>
-
-                <div className="p-col-12 p-md-4">
-                    <h5>AutoComplete</h5>
-                    <span className="p-float-label">
-                        <AutoComplete id="float-auto" value={country} suggestions={filteredCountriesSingle}
-                                        completeMethod={filterCountrySingle} field="name" size={30} minLength={1} onChange={(e) => setCountry(e.value)}/>
-                        <label htmlFor="float-auto">Countries</label>
-                    </span>
-                </div>
-
-                <div className="p-col-12 p-md-4">
-                    <h5>Calendar</h5>
-                    <span className="p-float-label">
-                        <Calendar id="float-claendar" value={calendarValue} onChange={(e) => setCalendarValue(e.value)} />
-                        <label htmlFor="float-calendar">Select a Date</label>
-                    </span>
-                </div>
-
-                <div className="p-col-12 p-md-4">
-                    <h5>Chips</h5>
-                    <span className="p-float-label">
-                        <Chips id="float-chips" value={chipsValue} onChange={(e) => setChipsValue(e.value)}/>
-                        <label htmlFor="float-chips">Enter a Text</label>
-                    </span>
-                </div>
-
-                <div className="p-col-12 p-md-4">
-                    <h5>Dropdown</h5>
-                    <span className="p-float-label">
-                        <Dropdown id="float-dropdown" value={city} options={cities} ariaLabel="Test" onChange={onCityChange} optionLabel="name"/>
-                        <label htmlFor="float-dropdown">Select City</label>
-                    </span>
-                </div>
-
-                <div className="p-col-12 p-md-4">
-                    <h5>InputMask</h5>
-                    <span className="p-float-label">
-                        <InputMask id="float-mask" mask="99-999999" value={maskValue} onChange={(e) => setMaskValue(e.value)}/>
-                        <label htmlFor="float-mask">99-999999</label>
-                    </span>
-                </div>
-
-                <div className="p-col-12 p-md-4">
-                    <h5>InputNumber</h5>
-                    <span className="p-float-label">
-                        <InputNumber id="float-number" value={numberValue} onChange={(e) => setNumberValue(e.target.value)}/>
-                        <label htmlFor="float-number">Number</label>
-                    </span>
-                </div>
-
-                <div className="p-col-12 p-md-4">
-                    <h5>KeyFilter</h5>
-                    <span className="p-float-label">
-                        <InputText id="float-keyfilter" keyfilter="int"/>
-                        <label htmlFor="float-keyfilter">Integers</label>
-                    </span>
-                </div>
-
-                <div className="p-col-12 p-md-4">
-                    <h5>MultiSelect</h5>
-                    <span className="p-float-label">
-                        <MultiSelect id="float-multiselect" value={carsMultiselect} options={cars} onChange={(e) => setCarsMultiselect(e.value)}
-                                        filter filterPlaceholder="Search"/>
-                        <label htmlFor="float-multiselect">Choose</label>
-                    </span>
-                </div>
-
-                <div className="p-col-12 p-md-4">
-                    <h5>Password</h5>
-                    <span className="p-float-label">
-                        <Password id="float-password"/>
-                        <label htmlFor="float-password">Password</label>
-                    </span>
-                </div>
-
-                <div className="p-col-12 p-md-4">
-                    <h5>InputTextarea</h5>
-                    <span className="p-float-label">
-                        <InputTextarea id="float-textarea" value={textareaValue} onChange={(e) => setTextareaValue(e.target.value)} rows={5} cols={30}/>
-                        <label htmlFor="float-textarea">Your Message</label>
-                    </span>
+            <div className="card">
+                <div className="p-fluid p-grid">
+                    <div className="p-field p-col-12 p-md-4">
+                        <span className="p-float-label">
+                            <InputText id="inputtext" value={value1} onChange={(e) => setValue1(e.target.value)} />
+                            <label htmlFor="inputtext">InputText</label>
+                        </span>
+                    </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <span className="p-float-label">
+                            <AutoComplete value={value2} suggestions={filteredCountries} onComplete={searchCountry} field="name" />
+                            <label htmlFor="autocomplete">AutoComplete</label>
+                        </span>
+                    </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <span className="p-float-label">
+                            <Calendar id="calendar" value={value3} onChange={(e) => setValue3(e.value)} />
+                            <label htmlFor="calendar">Calendar</label>
+                        </span>
+                    </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <span className="p-float-label">
+                            <Chips id="chips" value={value4} onChange={(e) => setValue4(e.value)} />
+                            <label htmlFor="chips">Chips</label>
+                        </span>
+                    </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <span className="p-float-label">
+                            <InputMask id="inputmask" value={value5} onChange={(e) => setValue5(e.value)} mask="99/99/9999" slotChar="mm/dd/yyyy" />
+                            <label htmlFor="inputmask">InputMask</label>
+                        </span>
+                    </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <span className="p-float-label">
+                            <InputNumber id="inputnumber" value={value6} onChange={(e) => setValue6(e.value)} />
+                            <label htmlFor="inputnumber">InputNumber</label>
+                        </span>
+                    </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <div className="p-inputgroup">
+                            <span className="p-inputgroup-addon">
+                                <i className="pi pi-user"></i>
+                            </span>
+                            <span className="p-float-label">
+                                <InputText id="inputgroup" type="text" value={value7} onChange={(e) => setValue7(e.target.value)} />
+                                <label htmlFor="inputgroup">InputGroup</label>
+                            </span>
+                        </div>
+                    </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <span className="p-float-label">
+                            <Dropdown id="dropdown" value={value8} options={cities} onChange={(e) => setValue8(e.value)} optionLabel="name" />
+                            <label htmlFor="dropdown">Dropdown</label>
+                        </span>
+                    </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <span className="p-float-label">
+                            <MultiSelect id="multiselect" value={value9} options={cities} onChange={(e) => setValue9(e.value)} optionLabel="name" />
+                            <label htmlFor="multiselect">MultiSelect</label>
+                        </span>
+                    </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <span className="p-float-label">
+                            <InputTextarea id="textarea" value={value10} onChange={(e) => setValue10(e.target.value)} rows={3} />
+                            <label htmlFor="textarea">Textarea</label>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
     );
 }
                 `
-            }
+            },
         }
     }
 
