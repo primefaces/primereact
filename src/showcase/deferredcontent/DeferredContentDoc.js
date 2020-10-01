@@ -52,7 +52,7 @@ export class DeferredContentDemo extends Component {
                     </div>
 
                     <DeferredContent onLoad={this.onImageLoad}>
-                        <img src="showcase/demo/images/galleria/galleria1.jpg" alt="Prime"/>
+                        <img src="showcase/demo/images/galleria/galleria1.jpg" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt="Prime"/>
                     </DeferredContent>
 
                     <div style={{height: '500px'}}></div>
@@ -76,46 +76,50 @@ export class DeferredContentDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState, useRef } from 'react';
-import {DeferredContent} from 'primereact/deferredcontent';
-import {CarService} from "../service/CarService";
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {Toast} from 'primereact/toast';
+import { DeferredContent } from 'primereact/deferredcontent';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { Toast } from 'primereact/toast';
+import ProductService from '../service/ProductService';
 
-const DeferredContentDemo = () => {
-    const [cars, setCars] = useState([]);
-    const carservice = new CarService();
-    let toast = useRef(null);
+export class DeferredContentDemo extends Component {
+    const toast = useRef(null);
+    const [products, setProducts] = useState(null);
+    const productService = new ProductService();
 
     const onImageLoad = () => {
-        toast.current.show({severity: 'success', summary: 'Image Initialized', detail: 'Scroll down to load the datatable'});
+        toast.current.show({ severity: 'success', summary: 'Image Initialized', detail: 'Scroll down to load the datatable' });
     }
 
     const onDataLoad = () => {
-        carservice.getCarsSmall().then(data => setCars(data));
-        toast.current.show({severity: 'success', summary: 'Data Initialized', detail: 'Render Completed'});
+        productService.getProductsSmall().then(data => setProducts(data));
+        toast.current.show({ severity: 'success', summary: 'Data Initialized', detail: 'Render Completed' });
     }
 
     return (
         <div>
             <Toast ref={toast} />
-            <div style={{height:'800px'}}>
-                Scroll down to lazy load an image and the DataTable which initiates a query that is not executed on initial page load to speed up load performance.
-            </div>
-            <DeferredContent onLoad={onImageLoad}>
-                <img src="showcase/demo/images/galleria/galleria1.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="prime"/>
-            </DeferredContent>
 
-            <div style={{height:'500px'}}>
+            <div className="card">
+                <div style={{ height: '800px' }}>
+                    Scroll down to lazy load an image and the DataTable which initiates a query that is not executed on initial page load to speed up load performance.
+                </div>
+
+                <DeferredContent onLoad={onImageLoad}>
+                    <img src="showcase/demo/images/galleria/galleria1.jpg" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt="Prime"/>
+                </DeferredContent>
+
+                <div style={{height: '500px'}}></div>
+
+                <DeferredContent onLoad={onDataLoad}>
+                    <DataTable value={products}>
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="quantity" header="Quantity"></Column>
+                    </DataTable>
+                </DeferredContent>
             </div>
-            <DeferredContent onLoad={onDataLoad}>
-                <DataTable value={cars}>
-                    <Column field="vin" header="Vin" />
-                    <Column field="year" header="Year" />
-                    <Column field="brand" header="Brand" />
-                    <Column field="color" header="Color" />
-                </DataTable>
-            </DeferredContent>
         </div>
     )
 }
@@ -125,51 +129,55 @@ const DeferredContentDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState, useRef } from 'react';
-import {DeferredContent} from 'primereact/deferredcontent';
-import {CarService} from "../service/CarService";
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {Toast} from 'primereact/toast';
+import { DeferredContent } from 'primereact/deferredcontent';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { Toast } from 'primereact/toast';
+import ProductService from '../service/ProductService';
 
-const DeferredContentDemo = () => {
-    const [cars, setCars] = useState([]);
-    const carservice = new CarService();
-    let toast = useRef<any>(null);
+export class DeferredContentDemo extends Component {
+    const toast = useRef(null);
+    const [products, setProducts] = useState(null);
+    const productService = new ProductService();
 
     const onImageLoad = () => {
-        toast.current.show({severity: 'success', summary: 'Image Initialized', detail: 'Scroll down to load the datatable'});
+        toast.current.show({ severity: 'success', summary: 'Image Initialized', detail: 'Scroll down to load the datatable' });
     }
 
     const onDataLoad = () => {
-        carservice.getCarsSmall().then(data => setCars(data));
-        toast.current.show({severity: 'success', summary: 'Data Initialized', detail: 'Render Completed'});
+        productService.getProductsSmall().then(data => setProducts(data));
+        toast.current.show({ severity: 'success', summary: 'Data Initialized', detail: 'Render Completed' });
     }
 
     return (
         <div>
             <Toast ref={toast} />
-            <div style={{height:'800px'}}>
-                Scroll down to lazy load an image and the DataTable which initiates a query that is not executed on initial page load to speed up load performance.
-            </div>
-            <DeferredContent onLoad={onImageLoad}>
-                <img src="showcase/demo/images/galleria/galleria1.jpg" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="prime"/>
-            </DeferredContent>
 
-            <div style={{height:'500px'}}>
+            <div className="card">
+                <div style={{ height: '800px' }}>
+                    Scroll down to lazy load an image and the DataTable which initiates a query that is not executed on initial page load to speed up load performance.
+                </div>
+
+                <DeferredContent onLoad={onImageLoad}>
+                    <img src="showcase/demo/images/galleria/galleria1.jpg" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt="Prime"/>
+                </DeferredContent>
+
+                <div style={{height: '500px'}}></div>
+
+                <DeferredContent onLoad={onDataLoad}>
+                    <DataTable value={products}>
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="quantity" header="Quantity"></Column>
+                    </DataTable>
+                </DeferredContent>
             </div>
-            <DeferredContent onLoad={onDataLoad}>
-                <DataTable value={cars}>
-                    <Column field="vin" header="Vin" />
-                    <Column field="year" header="Year" />
-                    <Column field="brand" header="Brand" />
-                    <Column field="color" header="Color" />
-                </DataTable>
-            </DeferredContent>
         </div>
     )
 }
                 `
-            }
+            },
         }
     }
 
@@ -254,7 +262,7 @@ import { DeferredContent } from 'primereact/deferredcontent';
                     </TabPanel>
 
                     <TabPanel header="Source">
-                        <LiveEditor name="DeferredContentDemo" sources={this.sources} service="CarService" data="cars-small" />
+                        <LiveEditor name="DeferredContentDemo" sources={this.sources} service="ProductService" data="products-small" />
                     </TabPanel>
                 </TabView>
             </div>

@@ -48,7 +48,7 @@ export class DeferredContentDemo extends Component {
                         </div>
 
                         <DeferredContent onLoad={this.onImageLoad}>
-                            <img src="showcase/demo/images/galleria/galleria1.jpg" alt="Prime"/>
+                            <img src="showcase/demo/images/galleria/galleria1.jpg" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt="Prime"/>
                         </DeferredContent>
 
                         <div style={{height: '500px'}}></div>
