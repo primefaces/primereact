@@ -59,7 +59,7 @@ export class ChipsDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState } from 'react';
-import {Chips} from 'primereact/chips';
+import { Chips } from 'primereact/chips';
 
 const ChipsDemo = () => {
     const [values1, setValues1] = useState([]);
@@ -70,21 +70,23 @@ const ChipsDemo = () => {
         return (
             <div>
                 <span>{item} - (active) </span>
-                <i className="pi pi-user-plus" style={{fontSize: '14px'}}></i>
+                <i className="pi pi-user-plus" style={{ fontSize: '14px' }}></i>
             </div>
         );
     }
 
     return (
-        <div className="p-fluid">
-            <h5>Basic</h5>
-            <Chips value={values1} onChange={(e) => setValues1(e.value)}></Chips>
+        <div>
+            <div className="card p-fluid">
+                <h5>Basic</h5>
+                <Chips value={values1} onChange={(e) => setValues1(e.value)} />
 
-            <h5>Comma Separator</h5>
-            <Chips value={values2} onChange={(e) => setValues2(e.value)} separator=','></Chips>
+                <h5>Comma Separator</h5>
+                <Chips value={values2} onChange={(e) => setValues2(e.value)} separator="," />
 
-            <h5>Template</h5>
-            <Chips value={values3} onChange={(e) => setValues3(e.value)} max={5} itemTemplate={customChip}></Chips>
+                <h5>Template</h5>
+                <Chips value={values3} onChange={(e) => setValues3(e.value)} max={5} itemTemplate={customChip}></Chips>
+            </div>
         </div>
     )
 }
@@ -94,32 +96,34 @@ const ChipsDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState } from 'react';
-import {Chips} from 'primereact/chips';
+import { Chips } from 'primereact/chips';
 
 const ChipsDemo = () => {
-    const [values1, setValues1] = useState([]);
-    const [values2, setValues2] = useState([]);
-    const [values3, setValues3] = useState([]);
+    const [values1, setValues1] = useState<any>([]);
+    const [values2, setValues2] = useState<any>([]);
+    const [values3, setValues3] = useState<any>([]);
 
-    const customChip = (item: string) => {
+    const customChip = (item: any) => {
         return (
             <div>
                 <span>{item} - (active) </span>
-                <i className="pi pi-user-plus" style={{fontSize: '14px'}}></i>
+                <i className="pi pi-user-plus" style={{ fontSize: '14px' }}></i>
             </div>
         );
     }
 
     return (
-        <div className="p-fluid">
-            <h5>Basic</h5>
-            <Chips value={values1} onChange={(e) => setValues1(e.value)}></Chips>
+        <div>
+            <div className="card p-fluid">
+                <h5>Basic</h5>
+                <Chips value={values1} onChange={(e) => setValues1(e.value)} />
 
-            <h5>Comma Separator</h5>
-            <Chips value={values2} onChange={(e) => setValues2(e.value)} separator=','></Chips>
+                <h5>Comma Separator</h5>
+                <Chips value={values2} onChange={(e) => setValues2(e.value)} separator="," />
 
-            <h5>Template</h5>
-            <Chips value={values3} onChange={(e) => setValues3(e.value)} max={5} itemTemplate={customChip}></Chips>
+                <h5>Template</h5>
+                <Chips value={values3} onChange={(e) => setValues3(e.value)} max={5} itemTemplate={customChip}></Chips>
+            </div>
         </div>
     )
 }
