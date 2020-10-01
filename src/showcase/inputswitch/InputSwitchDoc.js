@@ -46,7 +46,7 @@ export class InputSwitchDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState } from 'react';
-import {InputSwitch} from 'primereact/inputswitch';
+import { InputSwitch } from 'primereact/inputswitch';
 
 const InputSwitchDemo = () => {
     const [checked1, setChecked1] = useState(false);
@@ -54,11 +54,13 @@ const InputSwitchDemo = () => {
 
     return (
         <div>
-            <h5>Basic</h5>
-            <InputSwitch checked={checked1} onChange={(e) => setChecked1(e.value)} />
+            <div className="card">
+                <h5>Basic</h5>
+                <InputSwitch checked={checked1} onChange={(e) => setChecked1(e.value)} />
 
-            <h5>Default Value</h5>
-            <InputSwitch checked={checked2} onChange={(e) => setChecked2(e.value)} />
+                <h5>Preselection</h5>
+                <InputSwitch checked={checked2} onChange={(e) => setChecked2(e.value)} />
+            </div>
         </div>
     );
 }
@@ -68,7 +70,7 @@ const InputSwitchDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState } from 'react';
-import {InputSwitch} from 'primereact/inputswitch';
+import { InputSwitch } from 'primereact/inputswitch';
 
 const InputSwitchDemo = () => {
     const [checked1, setChecked1] = useState(false);
@@ -76,16 +78,18 @@ const InputSwitchDemo = () => {
 
     return (
         <div>
-            <h5>Basic</h5>
-            <InputSwitch checked={checked1} onChange={(e) => setChecked1(e.value)} />
+            <div className="card">
+                <h5>Basic</h5>
+                <InputSwitch checked={checked1} onChange={(e) => setChecked1(e.value)} />
 
-            <h5>Default Value</h5>
-            <InputSwitch checked={checked2} onChange={(e) => setChecked2(e.value)} />
+                <h5>Preselection</h5>
+                <InputSwitch checked={checked2} onChange={(e) => setChecked2(e.value)} />
+            </div>
         </div>
     );
 }
                 `
-            }
+            },
         }
     }
 
