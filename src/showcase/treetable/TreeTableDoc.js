@@ -88,7 +88,7 @@ const TreeTableDemo = () => {
     const nodeservice = new NodeService();
 
     const toggleApplications = () => {
-        let _expandedKeys = {...expandedKeys};
+        let _expandedKeys = { ...expandedKeys };
         if (_expandedKeys['0'])
             delete _expandedKeys['0'];
         else
@@ -103,23 +103,27 @@ const TreeTableDemo = () => {
 
     return (
         <div>
-            <h5>Uncontrolled</h5>
-            <TreeTable value={nodes}>
-                <Column field="name" header="Name" expander></Column>
-                <Column field="size" header="Size"></Column>
-                <Column field="type" header="Type"></Column>
-            </TreeTable>
+            <div className="card">
+                <h5>Basic</h5>
+                <TreeTable value={nodes}>
+                    <Column field="name" header="Name" expander></Column>
+                    <Column field="size" header="Size"></Column>
+                    <Column field="type" header="Type"></Column>
+                </TreeTable>
+            </div>
 
-            <h5>Controlled</h5>
-            <Button onClick={toggleApplications} label="Toggle Applications" />
-            <TreeTable value={nodes} expandedKeys={expandedKeys}
-                onToggle={e => setExpandedKeys(e.value)} style={{marginTop: '.5em'}}>
-                <Column field="name" header="Name" expander></Column>
-                <Column field="size" header="Size"></Column>
-                <Column field="type" header="Type"></Column>
-            </TreeTable>
+            <div className="card">
+                <h5>Programmatic</h5>
+                <Button onClick={toggleApplications} label="Toggle Applications" />
+                <TreeTable value={nodes} expandedKeys={expandedKeys}
+                    onToggle={e => setExpandedKeys(e.value)} style={{ marginTop: '.5em' }}>
+                    <Column field="name" header="Name" expander></Column>
+                    <Column field="size" header="Size"></Column>
+                    <Column field="type" header="Type"></Column>
+                </TreeTable>
+            </div>
         </div>
-    )
+    );
 }
                 `
             },
@@ -138,7 +142,7 @@ const TreeTableDemo = () => {
     const nodeservice = new NodeService();
 
     const toggleApplications = () => {
-        let _expandedKeys: any = {...expandedKeys};
+        let _expandedKeys = { ...expandedKeys };
         if (_expandedKeys['0'])
             delete _expandedKeys['0'];
         else
@@ -153,23 +157,27 @@ const TreeTableDemo = () => {
 
     return (
         <div>
-            <h5>Uncontrolled</h5>
-            <TreeTable value={nodes}>
-                <Column field="name" header="Name" expander></Column>
-                <Column field="size" header="Size"></Column>
-                <Column field="type" header="Type"></Column>
-            </TreeTable>
+            <div className="card">
+                <h5>Basic</h5>
+                <TreeTable value={nodes}>
+                    <Column field="name" header="Name" expander></Column>
+                    <Column field="size" header="Size"></Column>
+                    <Column field="type" header="Type"></Column>
+                </TreeTable>
+            </div>
 
-            <h5>Controlled</h5>
-            <Button onClick={toggleApplications} label="Toggle Applications" />
-            <TreeTable value={nodes} expandedKeys={expandedKeys}
-                onToggle={e => setExpandedKeys(e.value)} style={{marginTop: '.5em'}}>
-                <Column field="name" header="Name" expander></Column>
-                <Column field="size" header="Size"></Column>
-                <Column field="type" header="Type"></Column>
-            </TreeTable>
+            <div className="card">
+                <h5>Programmatic</h5>
+                <Button onClick={toggleApplications} label="Toggle Applications" />
+                <TreeTable value={nodes} expandedKeys={expandedKeys}
+                    onToggle={e => setExpandedKeys(e.value)} style={{ marginTop: '.5em' }}>
+                    <Column field="name" header="Name" expander></Column>
+                    <Column field="size" header="Size"></Column>
+                    <Column field="type" header="Type"></Column>
+                </TreeTable>
+            </div>
         </div>
-    )
+    );
 }
                 `
             }
@@ -2100,11 +2108,11 @@ export class TreeTableResponsiveDemo extends Component {
 
     nameTemplate(node) {
         return (
-            <>
+            <React.Fragment>
                 <span>{node.data.name}</span>
                 <span className="p-col-m">, {node.data.size}</span>
                 <span className="p-col-m">, {node.data.type}</span>
-            </>
+            </React.Fragment>
         )
     }
 

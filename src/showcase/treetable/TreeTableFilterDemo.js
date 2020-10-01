@@ -157,25 +157,52 @@ import { NodeService } from '../service/NodeService';
 
 const TreeTableFilterDemo = () => {
     const [nodes, setNodes] = useState([]);
-    const [globalFilter, setGlobalFilter] = useState(null);
+    const [globalFilter1, setGlobalFilter1] = useState(null);
+    const [globalFilter2, setGlobalFilter2] = useState(null);
     const nodeservice = new NodeService();
+
+    const treeTableFuncMap = {
+        'globalFilter1': setGlobalFilter1,
+        'globalFilter2': setGlobalFilter2
+    };
 
     useEffect(() => {
         nodeservice.getTreeTableNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    let header = <div style={{'textAlign':'left'}}>
-                    <i className="pi pi-search" style={{margin:'4px 4px 0 0'}}></i>
-                    <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Global Search" size="50"/>
-                </div>;
+    const getHeader = (globalFilterKey) => {
+        return (
+            <div className="p-text-right">
+                <div className="p-input-icon-left">
+                    <i className="pi pi-search"></i>
+                    <InputText type="search" onInput={(e) => treeTableFuncMap[\`\${globalFilterKey}\`](e.target.value)} placeholder="Global Search" size="50" />
+                </div>
+            </div>
+        );
+    }
+
+    let header1 = getHeader('globalFilter1');
+    let header2 = getHeader('globalFilter2');
 
     return (
         <div>
-            <TreeTable value={nodes} globalFilter={globalFilter} header={header}>
-                <Column field="name" header="Name" expander filter></Column>
-                <Column field="size" header="Size" filter></Column>
-                <Column field="type" header="Type" filter></Column>
-            </TreeTable>
+            <div className="card">
+                <h5>Lenient Filter</h5>
+                <TreeTable value={nodes} globalFilter={globalFilter1} header={header1}>
+                    <Column field="name" header="Name" expander filter></Column>
+                    <Column field="size" header="Size" filter></Column>
+                    <Column field="type" header="Type" filter></Column>
+                </TreeTable>
+            </div>
+
+            <div className="card">
+                <h5>Strict Filter</h5>
+                <TreeTable value={nodes} globalFilter={globalFilter2} header={header2} filterMode="strict">
+                    <Column field="name" header="Name" expander filter></Column>
+                    <Column field="size" header="Size" filter></Column>
+                    <Column field="type" header="Type" filter></Column>
+                </TreeTable>
+            </div>
         </div>
     )
 }
@@ -192,25 +219,52 @@ import { NodeService } from '../service/NodeService';
 
 const TreeTableFilterDemo = () => {
     const [nodes, setNodes] = useState([]);
-    const [globalFilter, setGlobalFilter] = useState<any>(null);
+    const [globalFilter1, setGlobalFilter1] = useState(null);
+    const [globalFilter2, setGlobalFilter2] = useState(null);
     const nodeservice = new NodeService();
+
+    const treeTableFuncMap = {
+        'globalFilter1': setGlobalFilter1,
+        'globalFilter2': setGlobalFilter2
+    };
 
     useEffect(() => {
         nodeservice.getTreeTableNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    let header = <div style={{'textAlign':'left'}}>
-                    <i className="pi pi-search" style={{margin:'4px 4px 0 0'}}></i>
-                    <InputText type="search" onInput={(e) => setGlobalFilter((e.target as HTMLInputElement).value)} placeholder="Global Search" size="50"/>
-                </div>;
+    const getHeader = (globalFilterKey) => {
+        return (
+            <div className="p-text-right">
+                <div className="p-input-icon-left">
+                    <i className="pi pi-search"></i>
+                    <InputText type="search" onInput={(e) => treeTableFuncMap[\`\${globalFilterKey}\`](e.target.value)} placeholder="Global Search" size="50" />
+                </div>
+            </div>
+        );
+    }
+
+    let header1 = getHeader('globalFilter1');
+    let header2 = getHeader('globalFilter2');
 
     return (
         <div>
-            <TreeTable value={nodes} globalFilter={globalFilter} header={header}>
-                <Column field="name" header="Name" expander filter></Column>
-                <Column field="size" header="Size" filter></Column>
-                <Column field="type" header="Type" filter></Column>
-            </TreeTable>
+            <div className="card">
+                <h5>Lenient Filter</h5>
+                <TreeTable value={nodes} globalFilter={globalFilter1} header={header1}>
+                    <Column field="name" header="Name" expander filter></Column>
+                    <Column field="size" header="Size" filter></Column>
+                    <Column field="type" header="Type" filter></Column>
+                </TreeTable>
+            </div>
+
+            <div className="card">
+                <h5>Strict Filter</h5>
+                <TreeTable value={nodes} globalFilter={globalFilter2} header={header2} filterMode="strict">
+                    <Column field="name" header="Name" expander filter></Column>
+                    <Column field="size" header="Size" filter></Column>
+                    <Column field="type" header="Type" filter></Column>
+                </TreeTable>
+            </div>
         </div>
     )
 }
