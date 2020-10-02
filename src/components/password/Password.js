@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import { InputText } from '../inputtext/InputText';
 import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';

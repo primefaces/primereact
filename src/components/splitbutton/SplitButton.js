@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 import {Button} from '../button/Button';
 import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';

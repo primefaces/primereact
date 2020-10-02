@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
 import {PickListSubList} from './PickListSubList';
