@@ -106,6 +106,6 @@ export class Captcha extends Component {
     }
 
     render() {
-        return <div id={this.props.id} ref={(el) => this.targetEL = ReactDOM.findDOMNode(el)}></div>
+        return <div id={this.props.id} ref={(el) => this.targetEL = el}></div>
     }
 }
