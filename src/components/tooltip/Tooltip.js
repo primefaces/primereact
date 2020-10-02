@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
+import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 
 export function tip(props) {
     let appendTo = props.appendTo || document.body;
@@ -158,6 +159,7 @@ export class Tooltip extends Component {
                 });
 
                 this.bindDocumentResizeListener();
+                this.bindScrollListener();
             });
         }
     }
@@ -177,7 +179,9 @@ export class Tooltip extends Component {
                     }
 
                     this.unbindDocumentResizeListener();
+                    this.unbindScrollListener();
                     this.currentTarget = null;
+                    this.scrollHandler = null;
                     this.sendCallback(this.props.onHide, { originalEvent: e, target: this.currentTarget });
                 });
             });
@@ -247,6 +251,24 @@ export class Tooltip extends Component {
         if (this.documentResizeListener) {
             window.removeEventListener('resize', this.documentResizeListener);
             this.documentResizeListener = null;
+        }
+    }
+
+    bindScrollListener() {
+        if (!this.scrollHandler) {
+            this.scrollHandler = new ConnectedOverlayScrollHandler(this.currentTarget, (e) => {
+                if (this.state.visible) {
+                    this.hide(e);
+                }
+            });
+        }
+
+        this.scrollHandler.bindScrollListener();
+    }
+
+    unbindScrollListener() {
+        if (this.scrollHandler) {
+            this.scrollHandler.unbindScrollListener();
         }
     }
 
@@ -337,6 +359,11 @@ export class Tooltip extends Component {
         this.clearTimeouts();
         this.unbindDocumentResizeListener();
         this.unbindTargetEvent();
+
+        if (this.scrollHandler) {
+            this.scrollHandler.destroy();
+            this.scrollHandler = null;
+        }
     }
 
     renderElement() {
