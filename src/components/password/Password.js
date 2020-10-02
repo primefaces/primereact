@@ -251,7 +251,7 @@ export class Password extends Component {
 
         return (
             <>
-                <InputText id={this.id} ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} {...inputProps} type="password" onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyup} />
+                <InputText id={this.id} ref={(el) => this.inputEl = el} {...inputProps} type="password" onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyup} />
 
                 <CSSTransition classNames="p-connected-overlay" in={this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }}
                     unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit}>
