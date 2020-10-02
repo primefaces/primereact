@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
 import { Ripple } from '../ripple/Ripple';
 
-export class MenubarSub extends Component {
+export class MenubarSubComponent extends Component {
 
     static defaultProps = {
         model: null,
@@ -14,7 +14,8 @@ export class MenubarSub extends Component {
         onLeafClick: null,
         onKeyDown: null,
         parentActive: false,
-        mobileActive: false
+        mobileActive: false,
+        forwardRef: null
     };
 
     static propTypes = {
@@ -25,7 +26,8 @@ export class MenubarSub extends Component {
         onLeafClick: PropTypes.func,
         onKeyDown: PropTypes.func,
         parentActive: PropTypes.bool,
-        mobileActive: PropTypes.bool
+        mobileActive: PropTypes.bool,
+        forwardRef: PropTypes.func
     };
 
     constructor(props) {
@@ -339,9 +341,11 @@ export class MenubarSub extends Component {
         const submenu = this.renderMenu();
 
         return (
-            <ul ref={el => this.element = el} className={className} role={this.props.root ? 'menubar' : 'menu'}>
+            <ul ref={el => {this.element = el; if(this.props.forwardRef) this.props.forwardRef(el)}} className={className} role={this.props.root ? 'menubar' : 'menu'}>
                 {submenu}
             </ul>
         );
     }
 }
+
+export const MenubarSub = React.forwardRef((props, ref) => <MenubarSubComponent forwardRef={ref} {...props}/>);
