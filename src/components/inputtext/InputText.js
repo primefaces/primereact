@@ -14,7 +14,8 @@ class InputTextComponent extends Component {
         keyfilter: null,
         validateOnly: false,
         tooltip: null,
-        tooltipOptions: null
+        tooltipOptions: null,
+        forwardRef: null
     };
 
     static propTypes = {
@@ -23,7 +24,8 @@ class InputTextComponent extends Component {
         keyfilter: PropTypes.any,
         validateOnly: PropTypes.bool,
         tooltip: PropTypes.string,
-        tooltipOptions: PropTypes.object
+        tooltipOptions: PropTypes.object,
+        forwardRef: PropTypes.func
     };
 
     constructor(props) {
