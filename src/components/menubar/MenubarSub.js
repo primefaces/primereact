@@ -34,8 +34,16 @@ export class MenubarSub extends Component {
             activeItem: null
         };
 
+        this.createUlRef = this.createUlRef.bind(this);
         this.onLeafClick = this.onLeafClick.bind(this);
         this.onChildItemKeyDown = this.onChildItemKeyDown.bind(this);
+    }
+
+    createUlRef(element) {
+        this.element = element;
+        if (!!this.props.forwardRef) {
+            this.props.forwardRef(element);
+        }
     }
 
     onItemMouseEnter(event, item) {
@@ -339,7 +347,7 @@ export class MenubarSub extends Component {
         const submenu = this.renderMenu();
 
         return (
-            <ul ref={el => this.element = el} className={className} role={this.props.root ? 'menubar' : 'menu'}>
+            <ul ref={this.createUlRef} className={className} role={this.props.root ? 'menubar' : 'menu'}>
                 {submenu}
             </ul>
         );
