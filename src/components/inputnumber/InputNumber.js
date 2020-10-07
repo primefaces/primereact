@@ -158,6 +158,10 @@ export class InputNumber extends Component {
         this._index = d => index.get(d);
     }
 
+    escapeRegExp(text) {
+        return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+    }
+
     getDecimalExpression() {
         const formatter = new Intl.NumberFormat(this.props.locale, {useGrouping: false});
         return new RegExp(`[${formatter.format(1.1).trim().replace(this._numeral, '')}]`, 'g');
@@ -193,7 +197,7 @@ export class InputNumber extends Component {
             this.prefixChar = formatter.format(1).split('1')[0];
         }
 
-        return new RegExp(`[${this.prefixChar||''}]`, 'g');
+        return new RegExp(`${this.escapeRegExp(this.prefixChar||'')}`, 'g');
     }
 
     getSuffixExpression() {
@@ -206,7 +210,7 @@ export class InputNumber extends Component {
             this.suffixChar = formatter.format(1).split('1')[1];
         }
 
-        return new RegExp(`[${this.suffixChar||''}]`, 'g');
+        return new RegExp(`${this.escapeRegExp(this.suffixChar||'')}`, 'g');
     }
 
     formatValue(value) {
