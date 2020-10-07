@@ -153,8 +153,8 @@ export class InputNumber extends Component {
         this._group = this.getGroupingExpression();
         this._minusSign = this.getMinusSignExpression();
         this._currency = this.getCurrencyExpression();
-        this._suffix = new RegExp(`[${this.props.suffix||''}]`, 'g');
-        this._prefix = new RegExp(`[${this.props.prefix||''}]`, 'g');
+        this._suffix = this.getSuffixExpression();
+        this._prefix = this.getPrefixExpression();
         this._index = d => index.get(d);
     }
 
@@ -182,6 +182,31 @@ export class InputNumber extends Component {
         else {
             return new RegExp(`[]`,'g');
         }
+    }
+
+    getPrefixExpression() {
+        if (this.props.prefix) {
+            this.prefix = this.props.prefix;
+        }
+        else {
+            const formatter = new Intl.NumberFormat(this.props.locale, {style: this.props.mode, currency: this.props.currency, currencyDisplay: this.props.currencyDisplay});
+            this.prefix = formatter.format(1).split('1')[0];
+        }
+
+        return new RegExp(`[${this.prefix||''}]`, 'g');
+    }
+
+    getSuffixExpression() {
+        if (this.props.suffix) {
+            this.suffix = this.props.suffix;
+        }
+        else {
+            const formatter = new Intl.NumberFormat(this.props.locale, {style: this.props.mode, currency: this.props.currency, currencyDisplay: this.props.currencyDisplay,
+                minimumFractionDigits: 0, maximumFractionDigits: 0});
+            this.suffix = formatter.format(1).split('1')[1];
+        }
+
+        return new RegExp(`[${this.suffix||''}]`, 'g');
     }
 
     formatValue(value) {
@@ -535,16 +560,16 @@ export class InputNumber extends Component {
         }
         else {
             const maxFractionDigits = this.numberFormat.resolvedOptions().maximumFractionDigits;
+            const operation = selectionStart !== selectionEnd ? 'range-insert' : 'insert';
 
             if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
                 if ((selectionStart + text.length - (decimalCharIndex + 1)) <= maxFractionDigits) {
                     newValueStr = inputValue.slice(0, selectionStart) + text + inputValue.slice(selectionStart + text.length);
-                    this.updateValue(event, newValueStr, text, 'insert');
+                    this.updateValue(event, newValueStr, text, operation);
                 }
             }
             else {
                 newValueStr = this.insertText(inputValue, text, selectionStart, selectionEnd);
-                const operation = selectionStart !== selectionEnd ? 'range-insert' : 'insert';
                 this.updateValue(event, newValueStr, text, operation);
             }
         }
@@ -556,7 +581,7 @@ export class InputNumber extends Component {
         if (textSplit.length === 2) {
             const decimalCharIndex = value.slice(start, end).search(this._decimal);
             this._decimal.lastIndex = 0;
-            return (decimalCharIndex > 0) ? value.slice(0, start) + this.formatValue(text) + value.slice(end) : value;
+            return (decimalCharIndex > 0) ? value.slice(0, start) + this.formatValue(text) + value.slice(end) : (value || this.formatValue(text));
         }
         else if ((end - start) === value.length) {
             return this.formatValue(text);
