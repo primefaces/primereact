@@ -186,27 +186,27 @@ export class InputNumber extends Component {
 
     getPrefixExpression() {
         if (this.props.prefix) {
-            this.prefix = this.props.prefix;
+            this.prefixChar = this.props.prefix;
         }
         else {
             const formatter = new Intl.NumberFormat(this.props.locale, {style: this.props.mode, currency: this.props.currency, currencyDisplay: this.props.currencyDisplay});
-            this.prefix = formatter.format(1).split('1')[0];
+            this.prefixChar = formatter.format(1).split('1')[0];
         }
 
-        return new RegExp(`[${this.prefix||''}]`, 'g');
+        return new RegExp(`[${this.prefixChar||''}]`, 'g');
     }
 
     getSuffixExpression() {
         if (this.props.suffix) {
-            this.suffix = this.props.suffix;
+            this.suffixChar = this.props.suffix;
         }
         else {
             const formatter = new Intl.NumberFormat(this.props.locale, {style: this.props.mode, currency: this.props.currency, currencyDisplay: this.props.currencyDisplay,
                 minimumFractionDigits: 0, maximumFractionDigits: 0});
-            this.suffix = formatter.format(1).split('1')[1];
+            this.suffixChar = formatter.format(1).split('1')[1];
         }
 
-        return new RegExp(`[${this.suffix||''}]`, 'g');
+        return new RegExp(`[${this.suffixChar||''}]`, 'g');
     }
 
     formatValue(value) {
@@ -738,7 +738,7 @@ export class InputNumber extends Component {
             this.inputEl.value = newValue;
             this.inputEl.setSelectionRange(0, 0);
             this.initCursor();
-            const prefixLength = (this.prefix || '').length;
+            const prefixLength = (this.prefixChar || '').length;
             const selectionEnd = prefixLength + insertedValueStr.length;
             this.inputEl.setSelectionRange(selectionEnd, selectionEnd);
         }
