@@ -734,6 +734,8 @@ export class InputNumber extends Component {
     }
 
     updateInput(value, insertedValueStr, operation) {
+        insertedValueStr = insertedValueStr || '';
+
         let inputValue = this.inputEl.value;
         let newValue = this.formatValue(value);
         let currentLength = inputValue.length;
