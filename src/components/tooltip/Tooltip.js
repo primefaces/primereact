@@ -75,10 +75,8 @@ export class Tooltip extends Component {
         mouseTrackLeft: PropTypes.number,
         onBeforeShow: PropTypes.func,
         onBeforeHide: PropTypes.func,
-        onBeforeUpdated: PropTypes.func,
         onShow: PropTypes.func,
-        onHide: PropTypes.func,
-        onUpdated: PropTypes.func
+        onHide: PropTypes.func
     }
 
     constructor(props) {
