@@ -851,6 +851,12 @@ onSortChange(event) {
                                         <td>Template of the current page report element.</td>
                                     </tr>
                                     <tr>
+                                        <td>paginatorDropdownAppendTo</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Target element to attach the paginator dropdown overlay.</td>
+                                    </tr>
+                                    <tr>
                                         <td>emptyMessage</td>
                                         <td>string</td>
                                         <td>No records found.</td>
