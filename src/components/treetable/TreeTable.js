@@ -28,6 +28,7 @@ export class TreeTable extends Component {
         paginatorTemplate: 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown',
         paginatorLeft:null,
         paginatorRight: null,
+        paginatorDropdownAppendTo: null,
         pageLinkSize: 5,
         rowsPerPageOptions: null,
         currentPageReportTemplate: '({currentPage} of {totalPages})',
@@ -98,6 +99,7 @@ export class TreeTable extends Component {
         paginatorTemplate: PropTypes.string,
         paginatorLeft: PropTypes.any,
         paginatorRight: PropTypes.any,
+        paginatorDropdownAppendTo: PropTypes.any,
         pageLinkSize: PropTypes.number,
         rowsPerPageOptions: PropTypes.array,
         currentPageReportTemplate: PropTypes.string,
@@ -910,7 +912,7 @@ export class TreeTable extends Component {
             <Paginator first={this.getFirst()} rows={this.getRows()} pageLinkSize={this.props.pageLinkSize} className={className}
                     onPageChange={this.onPageChange} template={this.props.paginatorTemplate}
                     totalRecords={totalRecords} rowsPerPageOptions={this.props.rowsPerPageOptions} currentPageReportTemplate={this.props.currentPageReportTemplate}
-                    leftContent={this.props.paginatorLeft} rightContent={this.props.paginatorRight} alwaysShow={this.props.alwaysShowPaginator} />
+                    leftContent={this.props.paginatorLeft} rightContent={this.props.paginatorRight} alwaysShow={this.props.alwaysShowPaginator} dropdownAppendTo={this.props.paginatorDropdownAppendTo} />
         )
     }
 
