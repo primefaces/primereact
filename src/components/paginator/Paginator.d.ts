@@ -20,6 +20,7 @@ interface PaginatorProps {
     leftContent?: JSX.Element | undefined;
     rightContent?: JSX.Element | undefined;
     currentPageReportTemplate?: string;
+    dropdownAppendTo?: any;
     onPageChange?(event: PageState): void;
 }
 
