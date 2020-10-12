@@ -83,7 +83,6 @@ export class Dialog extends Component {
         this.onClose = this.onClose.bind(this);
         this.toggleMaximize = this.toggleMaximize.bind(this);
         this.onMaskClick = this.onMaskClick.bind(this);
-        this.onDialogClick = this.onDialogClick.bind(this);
         this.onEntered = this.onEntered.bind(this);
         this.onExit = this.onExit.bind(this);
         this.onExited = this.onExited.bind(this);
@@ -104,13 +103,9 @@ export class Dialog extends Component {
     }
 
     onMaskClick(event) {
-        if (this.props.modal && this.props.closable && this.props.dismissableMask) {
+        if (this.props.dismissableMask && this.props.closable && this.props.modal && this.mask === event.target) {
             this.onClose(event);
         }
-    }
-
-    onDialogClick(event) {
-        event.stopPropagation();
     }
 
     toggleMaximize(event) {
@@ -391,7 +386,7 @@ export class Dialog extends Component {
             <div ref={(el) => this.mask = el} className={maskClassName} onClick={this.onMaskClick}>
                 <CSSTransition classNames="p-dialog" timeout={transitionTimeout} in={this.props.visible} unmountOnExit
                     onEntered={this.onEntered} onExit={this.onExit} onExited={this.onExited}>
-                    <div ref={el => this.dialog = el} id={this.id} className={className} style={this.props.style} onClick={this.onDialogClick}
+                    <div ref={el => this.dialog = el} id={this.id} className={className} style={this.props.style}
                          aria-labelledby={this.id + '_header'} role="dialog" aria-modal={this.props.model}>
                         {header}
                         {content}
