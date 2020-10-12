@@ -215,6 +215,16 @@ export class AppConfig extends Component {
                                 </div>
                             </div>
 
+                            <h5>Fluent UI</h5>
+                            <div className="p-grid free-themes">
+                                <div className="p-col-3">
+                                    <button className="p-link">
+                                        <img src="showcase/images/themes/fluent-light.png" alt="Fluent Light" onClick={(e) => this.onThemeChange(e, 'fluent-light')}/>
+                                    </button>
+                                    <span>Blue</span>
+                                </div>
+                            </div>
+
                             <h5>PrimeOne Design</h5>
                             <div className="p-grid free-themes">
                                 <div className="p-col-3">
@@ -291,7 +301,24 @@ export class AppConfig extends Component {
                                 </div>
                             </div>
 
-                            <h5>Legacy</h5>
+                            <h5>Premium Themes</h5>
+                            <p>Premium themes are only available exclusively for <a href="https://www.primefaces.org/designer/primereact">PrimeReact Theme Designer</a> subscribers and therefore not included in PrimeReact core.</p>
+                            <div className="p-grid free-themes">
+                                <div className="p-col-3">
+                                    <button className="p-link">
+                                        <img src="showcase/images/themes/soho-light.png" alt="Soho Light" onClick={(e) => this.onThemeChange(e, 'soho-light')}/>
+                                    </button>
+                                    <span>Soho Light</span>
+                                </div>
+                                <div className="p-col-3">
+                                    <button className="p-link">
+                                        <img src="showcase/images/themes/soho-dark.png" alt="Soho Dark" onClick={(e) => this.onThemeChange(e, 'soho-dark', true)}/>
+                                    </button>
+                                    <span>Soho Dark</span>
+                                </div>
+                            </div>
+
+                            <h4>Legacy Free Themes</h4>
                             <div className="p-grid free-themes">
                                 <div className="p-col-3">
                                     <button className="p-link">

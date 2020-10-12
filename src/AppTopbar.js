@@ -59,7 +59,10 @@ export class AppTopbar extends Component {
             'luna-green': 'luna-green.png',
             'luna-pink': 'luna-pink.png',
             'luna-amber': 'luna-amber.png',
-            'rhea': 'rhea.png'
+            'rhea': 'rhea.png',
+            'fluent-light': 'fluent-light.png',
+            'soho-light': 'soho-light.png',
+            'soho-dark': 'soho-dark.png'
         };
 
         this.onMenuButtonClick = this.onMenuButtonClick.bind(this);
@@ -181,6 +184,9 @@ export class AppTopbar extends Component {
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'mdc-dark-indigo', true)} role="menuitem"><img src="showcase/images/themes/md-dark-indigo.svg" alt="Indigo Dark" /><span>Indigo Dark</span></button></li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'mdc-dark-deeppurple', true)} role="menuitem"><img src="showcase/images/themes/md-dark-deeppurple.svg" alt="Deep Purple Dark" /><span>Deep Purple Dark</span></button></li>
 
+                                <li role="none" className="topbar-submenu-header">FLUENT UI</li>
+                                <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'fluent-light')} role="menuitem"><img src="showcase/images/themes/fluent-light.png" alt="Fluent Light" /><span>Fluent Light</span></button></li>
+
                                 <li role="none" className="topbar-submenu-header">PRIMEONE</li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'saga-blue')} role="menuitem"><img src="showcase/images/themes/saga-blue.png" alt="Saga Blue" /><span>Saga Blue</span></button></li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'saga-green')} role="menuitem"><img src="showcase/images/themes/saga-green.png" alt="Saga Green" /><span>Saga Green</span></button></li>
@@ -194,6 +200,10 @@ export class AppTopbar extends Component {
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'arya-green', true)} role="menuitem"><img src="showcase/images/themes/arya-green.png" alt="Arya Green" /><span>Arya Green</span></button></li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'arya-orange', true)} role="menuitem"><img src="showcase/images/themes/arya-orange.png" alt="Arya Orange" /><span>Arya Orange</span></button></li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'arya-purple', true)} role="menuitem"><img src="showcase/images/themes/arya-purple.png" alt="Arya Purple" /><span>Arya Purple</span></button></li>
+
+                                <li role="none" className="topbar-submenu-header">PREMIUM</li>
+                                <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'soho-light')} role="menuitem"><img src="showcase/images/themes/soho-light.png" alt="Soho Light" /><span>Soho Light</span></button></li>
+                                <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'soho-dark', true)} role="menuitem"><img src="showcase/images/themes/soho-dark.png" alt="Soho Dark" /><span>Soho Dark</span></button></li>
 
                                 <li role="none" className="topbar-submenu-header">LEGACY</li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'nova')} role="menuitem"><img src="showcase/images/themes/nova.png" alt="Nova" /><span>Nova</span></button></li>
