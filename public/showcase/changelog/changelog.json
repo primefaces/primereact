@@ -1,4 +1,75 @@
 {
+    "5.0.1": {
+        "tooltip": [
+            {
+                "number": 1618,
+                "title": "TypeScript applications cannot find the 'Tooltip' module",
+                "url": "https://github.com/primefaces/primereact/issues/1618"
+            },
+            {
+                "number": 1607,
+                "title": "Tooltip doesn't close in scrollable containers",
+                "url": "https://github.com/primefaces/primereact/issues/1607"
+            }
+        ],
+        "inputnumber": [
+            {
+                "number": 1612,
+                "title": "Problems when typing or pasting numbers into InputNumber",
+                "url": "https://github.com/primefaces/primereact/issues/1612"
+            },
+            {
+                "number": 1614,
+                "title": "InputNumber with spinner mode throws a JS exception",
+                "url": "https://github.com/primefaces/primereact/issues/1614"
+            },
+            {
+                "number": 1613,
+                "title": "inputNumber with numeric prefix is not working as expected",
+                "url": "https://github.com/primefaces/primereact/issues/1613"
+            }
+        ],
+        "paginator": [
+            {
+                "number": 1622,
+                "title": "Add dropdownAppendTo property to Paginator",
+                "url": "https://github.com/primefaces/primereact/issues/1622"
+            },
+            {
+                "number": 1621,
+                "title": "Add paginatorDropdownAppendTo property to DataTable, TreeTable and DataView",
+                "url": "https://github.com/primefaces/primereact/issues/1621"
+            }
+        ],
+        "dropdown": [
+            {
+                "number": 1624,
+                "title": "Dropdown items throws a JS exception",
+                "url": "https://github.com/primefaces/primereact/issues/1624"
+            }
+        ],
+        "datatable": [
+            {
+                "number": 1621,
+                "title": "Add paginatorDropdownAppendTo property to DataTable, TreeTable and DataView",
+                "url": "https://github.com/primefaces/primereact/issues/1621"
+            }
+        ],
+        "dataview": [
+            {
+                "number": 1621,
+                "title": "Add paginatorDropdownAppendTo property to DataTable, TreeTable and DataView",
+                "url": "https://github.com/primefaces/primereact/issues/1621"
+            }
+        ],
+        "treetable": [
+            {
+                "number": 1621,
+                "title": "Add paginatorDropdownAppendTo property to DataTable, TreeTable and DataView",
+                "url": "https://github.com/primefaces/primereact/issues/1621"
+            }
+        ]
+    },
     "5.0": {
         "carousel": [
             {
