@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
 
 export class SetupPage extends Component {
@@ -24,6 +25,10 @@ npm install primeicons --save
 `}
 </CodeHighlight>
 
+                    <h5>PrimeFlex</h5>
+                    <p>PrimeFlex is a CSS utility library featuring various helpers such as a grid system, flexbox, spacing, elevation and more. Although it is not required, it is highly
+                    recommended to add PrimeFlex as it is likely to need such utilities when developing applications. View the <Link to="/primeflex">PrimeFlex</Link> section for the installation.</p>
+
                     <h5>Import</h5>
                     <p>Path of each component is available at the "import" section of a component documentation.</p>
 
@@ -47,7 +52,7 @@ dependencies: {
     "react-dom": "^16.6.3",
     "react-transition-group": "^2.5.1"
     "classnames": "^2.2.6",
-    "primeicons": "^1.0.0"
+    "primeicons": "^4.0.0"
 }
 `}
 </CodeHighlight>
@@ -103,6 +108,60 @@ primeicons/primeicons.css
 import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
+`}
+</CodeHighlight>
+
+                <h5>Free Themes</h5>
+                <p>PrimeReact ships with various free themes to choose from.</p>
+<CodeHighlight lang="js">
+{`
+primereact/resources/themes/bootstrap4-light-blue/theme.css
+primereact/resources/themes/bootstrap4-light-purple/theme.css
+primereact/resources/themes/bootstrap4-dark-blue/theme.css
+primereact/resources/themes/bootstrap4-dark-purple/theme.css
+primereact/resources/themes/md-light-indigo/theme.css
+primereact/resources/themes/md-light-deeppurple/theme.css
+primereact/resources/themes/md-dark-indigo/theme.css
+primereact/resources/themes/md-dark-deeppurple/theme.css
+primereact/resources/themes/mdc-light-indigo/theme.css
+primereact/resources/themes/mdc-light-deeppurple/theme.css
+primereact/resources/themes/mdc-dark-indigo/theme.css
+primereact/resources/themes/mdc-dark-deeppurple/theme.css
+primereact/resources/themes/fluent-light/theme.css
+primereact/resources/themes/saga-blue/theme.css
+primereact/resources/themes/saga-green/theme.css
+primereact/resources/themes/saga-orange/theme.css
+primereact/resources/themes/saga-purple/theme.css
+primereact/resources/themes/vela-blue/theme.css
+primereact/resources/themes/vela-green/theme.css
+primereact/resources/themes/vela-orange/theme.css
+primereact/resources/themes/vela-purple/theme.css
+primereact/resources/themes/arya-blue/theme.css
+primereact/resources/themes/arya-green/theme.css
+primereact/resources/themes/arya-orange/theme.css
+primereact/resources/themes/arya-purple/theme.css
+primereact/resources/themes/nova/theme.css
+primereact/resources/themes/nova-alt/theme.css
+primereact/resources/themes/nova-accent/theme.css
+primereact/resources/themes/nova-vue/theme.css
+primereact/resources/themes/luna-amber/theme.css
+primereact/resources/themes/luna-blue/theme.css
+primereact/resources/themes/luna-green/theme.css
+primereact/resources/themes/luna-pink/theme.css
+primereact/resources/themes/rhea/theme.css
+
+`}
+</CodeHighlight>
+
+                    <h5>Ripple</h5>
+                    <p>Ripple is an optional animation for the supported components such as buttons. It is disabled by default and needs to be enabled at
+                        your app's entry file (e.g. main.js) using the <i>PrimeReact</i> variable.
+                    </p>
+<CodeHighlight lang="js">
+{`
+import PrimeReact from 'primereact/utils';
+
+PrimeReact.ripple = true;
 `}
 </CodeHighlight>
 
