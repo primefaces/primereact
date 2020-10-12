@@ -23,6 +23,7 @@ export class Paginator extends Component {
         onPageChange: null,
         leftContent: null,
         rightContent: null,
+        dropdownAppendTo: null,
         currentPageReportTemplate: '({currentPage} of {totalPages})',
         alwaysShow: true
     }
@@ -39,6 +40,7 @@ export class Paginator extends Component {
         onPageChange: PropTypes.func,
         leftContent: PropTypes.any,
         rightContent: PropTypes.any,
+        dropdownAppendTo: PropTypes.any,
         currentPageReportTemplate: PropTypes.any,
         alwaysShow: PropTypes.bool
     }
@@ -182,7 +184,7 @@ export class Paginator extends Component {
                     break;
 
                     case 'RowsPerPageDropdown':
-                        element = <RowsPerPageDropdown key={key} value={this.props.rows} options={this.props.rowsPerPageOptions} onChange={this.onRowsChange} />;
+                        element = <RowsPerPageDropdown key={key} value={this.props.rows} options={this.props.rowsPerPageOptions} onChange={this.onRowsChange} appendTo={this.props.dropdownAppendTo} />;
                     break;
 
                     case 'CurrentPageReport':

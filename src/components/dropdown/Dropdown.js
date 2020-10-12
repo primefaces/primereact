@@ -605,7 +605,7 @@ export class Dropdown extends Component {
     }
 
     getOptionKey(option, index) {
-        return this.props.dataKey ? ObjectUtils.resolveFieldData(option, this.props.dataKey) : `pr_id__${this.getOptionLabel}-${index}`;
+        return this.props.dataKey ? ObjectUtils.resolveFieldData(option, this.props.dataKey) : `pr_id__${this.getOptionLabel(option)}-${index}`;
     }
 
     checkValidity() {

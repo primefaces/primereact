@@ -2252,6 +2252,12 @@ export class TreeTableResponsiveDemo extends Component {
                                     </td>
                                     </tr>
                                     <tr>
+                                        <td>paginatorDropdownAppendTo</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Target element to attach the paginator dropdown overlay.</td>
+                                    </tr>
+                                    <tr>
                                         <td>first</td>
                                         <td>number</td>
                                         <td>0</td>

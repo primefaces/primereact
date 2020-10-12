@@ -3,5 +3,5 @@ export default interface TooltipOptions {
     position?: string;
     showDelay?: number;
     hideDelay?: number;
-	  className?: string;
+	className?: string;
 }

@@ -18,6 +18,7 @@ interface TreeTableProps {
     paginatorLeft?: any;
     paginatorRight?: any;
     pageLinkSize?: number;
+    paginatorDropdownAppendTo?: any;
     rowsPerPageOptions?: number[];
     currentPageReportTemplate?: string;
     first?: number;

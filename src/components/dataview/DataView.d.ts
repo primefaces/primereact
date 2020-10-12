@@ -26,6 +26,7 @@ interface DataViewProps {
     paginatorLeft?: any;
     paginatorRight?: any;
     pageLinkSize?: number;
+    paginatorDropdownAppendTo?: any;
     rowsPerPageOptions?: number[];
     currentPageReportTemplate?: string;
     emptyMessage?: string;

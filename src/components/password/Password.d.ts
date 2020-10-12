@@ -10,7 +10,7 @@ interface PasswordProps extends React.HTMLProps<HTMLInputElement> {
     feedback?: boolean;
     tooltip?: any;
     tooltipOptions?: TooltipOptions;
-    [key: string]: any;,
+    [key: string]: any;
     panelClassName?: string;
     panelStyle?: object;
 }
