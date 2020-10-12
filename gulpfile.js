@@ -21,7 +21,7 @@ gulp.task('build-css', function() {
 
 gulp.task('build-themes', function() {
     return gulp.src([
-        'public/themes/**/*'
+        'public/themes/**/*','!public/themes/soho-*/**/*'
     ])
     //.pipe(uglifycss({"uglyComments": true}))
     .pipe(gulp.dest('resources/themes'));
