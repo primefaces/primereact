@@ -5,6 +5,8 @@ import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import { CSSTransition } from 'react-transition-group';
+import ObjectUtils from '../utils/ObjectUtils';
+import { Ripple } from '../ripple/Ripple';
 
 export class Dialog extends Component {
 
@@ -18,6 +20,7 @@ export class Dialog extends Component {
         onHide: null,
         onShow: null,
         contentStyle: null,
+        contentClassName: null,
         closeOnEscape: true,
         dismissableMask: false,
         rtl: false,
@@ -30,7 +33,7 @@ export class Dialog extends Component {
         baseZIndex: 0,
         maximizable: false,
         blockScroll: false,
-        iconsTemplate: null,
+        icons: null,
         ariaCloseIconLabel: 'Close',
         focusOnShow: true,
         maximized: false,
@@ -47,6 +50,7 @@ export class Dialog extends Component {
         onHide: PropTypes.func.isRequired,
         onShow: PropTypes.func,
         contentStyle: PropTypes.object,
+        contentClassName: PropTypes.string,
         closeOnEscape: PropTypes.bool,
         dismissableMask: PropTypes.bool,
         rtl: PropTypes.bool,
@@ -59,7 +63,7 @@ export class Dialog extends Component {
         baseZIndex: PropTypes.number,
         maximizable: PropTypes.bool,
         blockScroll: PropTypes.bool,
-        iconsTemplate: PropTypes.func,
+        icons: PropTypes.any,
         ariaCloseIconLabel: PropTypes.string,
         focusOnShow: PropTypes.bool,
         maximized: PropTypes.bool,
@@ -79,7 +83,6 @@ export class Dialog extends Component {
         this.onClose = this.onClose.bind(this);
         this.toggleMaximize = this.toggleMaximize.bind(this);
         this.onMaskClick = this.onMaskClick.bind(this);
-        this.onDialogClick = this.onDialogClick.bind(this);
         this.onEntered = this.onEntered.bind(this);
         this.onExit = this.onExit.bind(this);
         this.onExited = this.onExited.bind(this);
@@ -100,13 +103,9 @@ export class Dialog extends Component {
     }
 
     onMaskClick(event) {
-        if (this.props.modal && this.props.closable && this.props.dismissableMask) {
+        if (this.props.dismissableMask && this.props.closable && this.props.modal && this.mask === event.target) {
             this.onClose(event);
         }
-    }
-
-    onDialogClick(event) {
-        event.stopPropagation();
     }
 
     toggleMaximize(event) {
@@ -128,8 +127,8 @@ export class Dialog extends Component {
     }
 
     getPositionClass() {
-        const positions = ['center', 'left', 'right', 'top', 'topleft', 'topright', 'bottom', 'bottomleft', 'bottomright'];
-        const pos = positions.find(item => item === this.props.position);
+        const positions = ['center', 'left', 'right', 'top', 'top-left', 'top-right', 'bottom', 'bottom-left', 'bottom-right'];
+        const pos = positions.find(item => item === this.props.position || item.replace('-', '') === this.props.position);
 
         return pos ? `p-dialog-${pos}` : '';
     }
@@ -290,65 +289,64 @@ export class Dialog extends Component {
     renderCloseIcon() {
         if (this.props.closable) {
             return (
-                <button type="button" className="p-dialog-titlebar-icon p-dialog-titlebar-close p-link" aria-label={this.props.ariaCloseIconLabel} onClick={this.onClose}>
-                    <span className="p-dialog-titlebar-close-icon pi pi-times"></span>
+                <button type="button" className="p-dialog-header-icon p-dialog-header-close p-link" aria-label={this.props.ariaCloseIconLabel} onClick={this.onClose}>
+                    <span className="p-dialog-header-close-icon pi pi-times"></span>
+                    <Ripple />
                 </button>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderMaximizeIcon() {
-        const iconClassName = classNames('p-dialog-titlebar-maximize-icon pi', {'pi-window-maximize': !this.maximized, 'pi-window-minimize': this.maximized});
+        const iconClassName = classNames('p-dialog-header-maximize-icon pi', {'pi-window-maximize': !this.maximized, 'pi-window-minimize': this.maximized});
 
         if (this.props.maximizable) {
             return (
-                <button type="button" className="p-dialog-titlebar-icon p-dialog-titlebar-maximize p-link" onClick={this.toggleMaximize}>
+                <button type="button" className="p-dialog-header-icon p-dialog-header-maximize p-link" onClick={this.toggleMaximize}>
                     <span className={iconClassName}></span>
+                    <Ripple />
                 </button>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
-    renderIconsTemplate() {
-        if (this.props.iconsTemplate) {
-            return this.props.iconsTemplate(this);
+    renderIcons() {
+        if (this.props.icons) {
+            return ObjectUtils.getJSXElement(this.props.icons, this.props);
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderHeader() {
         if (this.props.showHeader) {
             const closeIcon = this.renderCloseIcon();
             const maximizeIcon = this.renderMaximizeIcon();
-            const iconsTemplate = this.renderIconsTemplate();
+            const icons = this.renderIcons();
 
             return (
-                <div ref={el => this.headerElement = el} className="p-dialog-titlebar">
+                <div ref={el => this.headerElement = el} className="p-dialog-header">
                     <span id={this.id + '_header'} className="p-dialog-title">{this.props.header}</span>
-                    <div className="p-dialog-titlebar-icons">
-                        {iconsTemplate}
+                    <div className="p-dialog-header-icons">
+                        {icons}
                         {maximizeIcon}
                         {closeIcon}
                     </div>
                 </div>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderContent() {
+        let contentClassName = classNames('p-dialog-content', this.props.contentClassName)
         return (
-            <div ref={el => this.contentElement = el} className="p-dialog-content" style={this.props.contentStyle}>
+            <div ref={el => this.contentElement = el} className={contentClassName} style={this.props.contentStyle}>
                 {this.props.children}
             </div>
         );
@@ -360,9 +358,8 @@ export class Dialog extends Component {
                 <div ref={el => this.footerElement = el} className="p-dialog-footer">{this.props.footer}</div>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderElement() {
@@ -382,15 +379,15 @@ export class Dialog extends Component {
 
         let transitionTimeout = {
             enter: this.props.position === 'center' ? 150 : 300,
-            exit: this.props.position === 'center' ? 150 : 300,
+            exit: this.props.position === 'center' ? 150 : 300
         };
 
         return (
             <div ref={(el) => this.mask = el} className={maskClassName} onClick={this.onMaskClick}>
                 <CSSTransition classNames="p-dialog" timeout={transitionTimeout} in={this.props.visible} unmountOnExit
                     onEntered={this.onEntered} onExit={this.onExit} onExited={this.onExited}>
-                    <div ref={el => this.dialog = el} id={this.id} className={className} style={this.props.style} onClick={this.onDialogClick}
-                         aria-labelledby={this.id + '_label'} role="dialog" aria-modal={this.props.model}>
+                    <div ref={el => this.dialog = el} id={this.id} className={className} style={this.props.style}
+                         aria-labelledby={this.id + '_header'} role="dialog" aria-modal={this.props.model}>
                         {header}
                         {content}
                         {footer}

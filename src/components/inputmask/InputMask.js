@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import DomHandler from '../utils/DomHandler';
 import { InputText } from '../inputtext/InputText';
-import Tooltip from "../tooltip/Tooltip";
+import classNames from 'classnames';
+import {tip} from "../tooltip/Tooltip";
 
 export class InputMask extends Component {
 
@@ -476,19 +477,25 @@ export class InputMask extends Component {
             else {
                 this.input.value = this.props.value;
                 this.checkVal();
-            }
 
-            setTimeout(() => {
-                if(this.input) {
-                    this.writeBuffer();
-                    this.checkVal();
-                }
-            }, 10);
+                setTimeout(() => {
+                    if(this.input) {
+                        this.writeBuffer();
+                        this.checkVal();
+                    }
+                }, 10);
+            }
 
             this.focusText = this.input.value;
         }
 
         this.updateFilledState();
+    }
+
+    isValueUpdated() {
+        return this.props.unmask ?
+                        (this.props.value !== this.getUnmaskedValue()) :
+                        (this.defaultBuffer !== this.input.value && this.input.value !== this.props.value);
     }
 
     init() {
@@ -556,8 +563,7 @@ export class InputMask extends Component {
                 this.renderTooltip();
         }
 
-        let isValueUpdated = prevProps.value !== this.props.value && (this.props.unmask ? this.props.value !== this.getUnmaskedValue() : this.props.value.length && this.input.value !== this.props.value);
-        if (isValueUpdated) {
+        if (this.isValueUpdated()) {
             this.updateValue();
         }
 
@@ -576,7 +582,7 @@ export class InputMask extends Component {
     }
 
     renderTooltip() {
-        this.tooltip = new Tooltip({
+        this.tooltip = tip({
             target: this.input,
             content: this.props.tooltip,
             options: this.props.tooltipOptions
@@ -584,8 +590,9 @@ export class InputMask extends Component {
     }
 
     render() {
+        let inputMaskClassName = classNames('p-inputmask', this.props.className);
         return (
-            <InputText id={this.props.id} ref={(el) => this.input = ReactDOM.findDOMNode(el)} type={this.props.type} name={this.props.name} style={this.props.style} className={this.props.className} placeholder={this.props.placeholder}
+            <InputText id={this.props.id} ref={(el) => this.input = ReactDOM.findDOMNode(el)} type={this.props.type} name={this.props.name} style={this.props.style} className={inputMaskClassName} placeholder={this.props.placeholder}
                 size={this.props.size} maxLength={this.props.maxlength} tabIndex={this.props.tabindex} disabled={this.props.disabled} readOnly={this.props.readonly}
                 onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.onKeyDown} onKeyPress={this.onKeyPress}
                 onInput={this.onInput} onPaste={this.handleInputChange} required={this.props.required} aria-labelledby={this.props.ariaLabelledBy} />

@@ -18,6 +18,7 @@ interface TreeTableProps {
     paginatorLeft?: any;
     paginatorRight?: any;
     pageLinkSize?: number;
+    paginatorDropdownAppendTo?: any;
     rowsPerPageOptions?: number[];
     currentPageReportTemplate?: string;
     first?: number;
@@ -54,6 +55,7 @@ interface TreeTableProps {
     filters?: object;
     globalFilter?: any;
     filterMode?: string;
+    filterLocale?: string;
     onFilter?(filters: any[]): void;
     onExpand?(e: {originalEvent: Event, node: TreeNode}): void;
     onCollapse?(e: {originalEvent: Event, node: TreeNode}): void;
@@ -71,4 +73,5 @@ interface TreeTableProps {
 }
 
 export class TreeTable extends React.Component<TreeTableProps, any> {
+    public filter<T>(value:T, field:string, mode:string):void;
 }

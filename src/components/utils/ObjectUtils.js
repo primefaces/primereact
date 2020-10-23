@@ -1,12 +1,12 @@
 export default class ObjectUtils {
-    
+
     static equals(obj1, obj2, field) {
         if(field && obj1 && typeof obj1 === 'object' && obj2 && typeof obj2 === 'object')
             return (this.resolveFieldData(obj1, field) === this.resolveFieldData(obj2, field));
         else
             return this.deepEquals(obj1, obj2);
     }
-    
+
     static deepEquals(a, b) {
         if (a === b) return true;
 
@@ -57,29 +57,31 @@ export default class ObjectUtils {
         /*eslint no-self-compare: "off"*/
         return a !== a && b !== b;
     }
-    
+
     static resolveFieldData(data, field) {
-        if(data && field) {
-            if (this.isFunction(field)) {
-                return field(data);
-            }
-            else if(field.indexOf('.') === -1) {
-                return data[field];
-            }
-            else {
-                let fields = field.split('.');
-                let value = data;
-                for(var i = 0, len = fields.length; i < len; ++i) {
-                    if (value == null) {
-                        return null;
-                    }
-                    value = value[fields[i]];
-                }
-                return value;
-            }
+        if (this.isFunction(field)) {
+            return field(data);
         }
         else {
-            return null;
+            if (data && field) {
+                if (field.indexOf('.') === -1) {
+                    return data[field];
+                }
+                else {
+                    let fields = field.split('.');
+                    let value = data;
+                    for(var i = 0, len = fields.length; i < len; ++i) {
+                        if (value == null) {
+                            return null;
+                        }
+                        value = value[fields[i]];
+                    }
+                    return value;
+                }
+            }
+            else {
+                return null;
+            }
         }
     }
 
@@ -98,23 +100,6 @@ export default class ObjectUtils {
         }, {});
     }
 
-    static filter(value, fields, filterValue) {
-        var filteredItems=[];
-
-        if(value) {
-            for(let item of value) {
-                for(let field of fields) {
-                    if(String(this.resolveFieldData(item, field)).toLowerCase().indexOf(filterValue.toLowerCase()) > -1) {
-                        filteredItems.push(item);
-                        break;
-                    }
-                }
-            }
-        }
-
-        return filteredItems;
-    }
-
     static reorderArray(value, from, to) {
         let target;
         if(value && (from !== to)) {
@@ -127,10 +112,10 @@ export default class ObjectUtils {
             value.splice(to, 0, value.splice(from, 1)[0]);
         }
     }
-    
+
     static findIndexInList(value, list) {
         let index = -1;
-        
+
         if(list) {
             for(let i = 0; i < list.length; i++) {
                 if(list[i] === value) {
@@ -139,8 +124,12 @@ export default class ObjectUtils {
                 }
             }
         }
-        
+
         return index;
+    }
+
+    static getJSXElement(obj, ...params) {
+        return this.isFunction(obj) ? obj(...params) : obj;
     }
 
     static removeAccents(str) {

@@ -1,15 +1,11 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![npm version](https://badge.fury.io/js/primereact.svg)](https://badge.fury.io/js/primereact)
 
-[![PrimeReact Hero](https://www.primefaces.org/wp-content/uploads/2020/03/primereact-github-02032020-2.jpg "PrimeReact Hero")](https://www.primefaces.org/primereact)
+[![PrimeReact Hero](https://www.primefaces.org/wp-content/uploads/2020/08/primereact-promotion-21aug2020@2x.jpg)](https://www.primefaces.org/primereact)
 
 # PrimeReact
 
-PrimeReact is a rich set of open source UI Components for React.
-
-[![PrimeReact Logo](https://www.primefaces.org/wp-content/uploads/2017/09/primereact-transparent-250.png "PrimeReact")](https://www.primefaces.org/primereact)
-
-See [PrimeReact homepage](https://www.primefaces.org/react) for live showcase and documentation.
+PrimeReact is a rich set of open source UI Components for React. See [PrimeReact homepage](https://www.primefaces.org/primereact) for live showcase and documentation.
 
 ## Download
 
@@ -48,7 +44,7 @@ dependencies: {
 The css dependencies are as follows, note that you may change the theme with another one of your choice.
 
 ```
-primereact/resources/themes/nova-light/theme.css
+primereact/resources/themes/saga-blue/theme.css
 primereact/resources/primereact.min.css
 primeicons/primeicons.css
 ```
@@ -56,7 +52,7 @@ primeicons/primeicons.css
 If you are using a bundler such as webpack with a css loader you may also import them to your main application component, an example from create-react-app would be.
 
 ```javascript
-import 'primereact/resources/themes/nova-light/theme.css';
+import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 ```

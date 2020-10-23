@@ -1,9 +1,8 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
-import {Button} from '../../components/button/Button';
-import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
+import React, { Component } from 'react';
+import { Button } from '../../components/button/Button';
+import { ButtonDoc } from './ButtonDoc';
+import { AppInlineHeader } from '../../AppInlineHeader';
+import './ButtonDemo.scss';
 
 export class ButtonDemo extends Component {
 
@@ -11,302 +10,129 @@ export class ButtonDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="button">
                         <h1>Button</h1>
                         <p>Button is an extension to standard input element with icons and theming.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("button")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation button-demo">
-                    <h3 className="first">Basic</h3>
-                    <Button label="Click" />
-                    <Button label="Click" icon="pi pi-check" />
-                    <Button label="Click" icon="pi pi-check" iconPos="right" />
-                    <Button icon="pi pi-check" />
-                    <Button label="Click" disabled="disabled" />
+                    <div className="card">
+                        <h5>Basic</h5>
+                        <Button label="Submit" />
+                        <Button label="Disabled" disabled />
+                        <Button label="Link" className="p-button-link" />
 
-                    <h3>Severities</h3>
-                    <Button label="Primary" />
-                    <Button label="Secondary" className="p-button-secondary" />
-                    <Button label="Success" className="p-button-success" />
-                    <Button label="Info" className="p-button-info" />
-                    <Button label="Warning" className="p-button-warning" />
-                    <Button label="Danger" className="p-button-danger" />
+                        <h5>Icons</h5>
+                        <Button icon="pi pi-check" />
+                        <Button label="Submit" icon="pi pi-check" />
+                        <Button label="Submit" icon="pi pi-check" iconPos="right" />
 
-                    <h3>Raised Buttons</h3>
-                    <Button label="Primary" className="p-button-raised" />
-                    <Button label="Secondary" className="p-button-raised p-button-secondary" />
-                    <Button label="Success" className="p-button-raised p-button-success" />
-                    <Button label="Info" className="p-button-raised p-button-info" />
-                    <Button label="Warning" className="p-button-raised p-button-warning" />
-                    <Button label="Danger" className="p-button-raised p-button-danger" />
+                        <h5>Severities</h5>
+                        <Button label="Primary" />
+                        <Button label="Secondary" className="p-button-secondary" />
+                        <Button label="Success" className="p-button-success" />
+                        <Button label="Info" className="p-button-info" />
+                        <Button label="Warning" className="p-button-warning" />
+                        <Button label="Help" className="p-button-help" />
+                        <Button label="Danger" className="p-button-danger" />
 
-                    <h3>Rounded Buttons</h3>
-                    <Button label="Primary" className="p-button-rounded" />
-                    <Button label="Secondary" className="p-button-rounded p-button-secondary" />
-                    <Button label="Success" className="p-button-rounded p-button-success" />
-                    <Button label="Info" className="p-button-rounded p-button-info" />
-                    <Button label="Warning" className="p-button-rounded p-button-warning" />
-                    <Button label="Danger" className="p-button-rounded p-button-danger" />
-                </div>
+                        <h5>Raised Buttons</h5>
+                        <Button label="Primary" className="p-button-raised" />
+                        <Button label="Secondary" className="p-button-raised p-button-secondary" />
+                        <Button label="Success" className="p-button-raised p-button-success" />
+                        <Button label="Info" className="p-button-raised p-button-info" />
+                        <Button label="Warning" className="p-button-raised p-button-warning" />
+                        <Button label="Help" className="p-button-raised p-button-help" />
+                        <Button label="Danger" className="p-button-raised p-button-danger" />
 
-                <ButtonDoc />
-            </div>
-        )
-    }
-}
+                        <h5>Rounded Buttons</h5>
+                        <Button label="Primary" className="p-button-rounded" />
+                        <Button label="Secondary" className="p-button-rounded p-button-secondary" />
+                        <Button label="Success" className="p-button-rounded p-button-success" />
+                        <Button label="Info" className="p-button-rounded p-button-info" />
+                        <Button label="Warning" className="p-button-rounded p-button-warning" />
+                        <Button label="Help" className="p-button-rounded p-button-help" />
+                        <Button label="Danger" className="p-button-rounded p-button-danger" />
 
-class ButtonDoc extends Component {
+                        <h5>Text Buttons</h5>
+                        <Button label="Primary" className="p-button-text" />
+                        <Button label="Secondary" className="p-button-secondary p-button-text" />
+                        <Button label="Success" className="p-button-success p-button-text" />
+                        <Button label="Info" className="p-button-info p-button-text" />
+                        <Button label="Warning" className="p-button-warning p-button-text" />
+                        <Button label="Help" className="p-button-help p-button-text" />
+                        <Button label="Danger" className="p-button-danger p-button-text" />
+                        <Button label="Plain" className="p-button-text p-button-plain" />
 
-    shouldComponentUpdate(){
-        return false;
-    }
+                        <h5>Raised Text Buttons</h5>
+                        <Button label="Primary" className="p-button-raised p-button-text" />
+                        <Button label="Secondary" className="p-button-raised p-button-secondary p-button-text" />
+                        <Button label="Success" className="p-button-raised p-button-success p-button-text" />
+                        <Button label="Info" className="p-button-raised p-button-info p-button-text" />
+                        <Button label="Warning" className="p-button-raised p-button-warning p-button-text" />
+                        <Button label="Help" className="p-button-raised p-button-help p-button-text" />
+                        <Button label="Danger" className="p-button-raised p-button-danger p-button-text" />
+                        <Button label="Plain" className="p-button-raised p-button-text p-button-plain" />
 
-    render() {
-        return (
-            <div className="content-section documentation">
-                <TabView>
-                    <TabPanel header="Documentation">
-                        <h3>Import</h3>
-<CodeHighlight className="language-javascript">
-{`
-import {Button} from 'primereact/button';
+                        <h5>Outlined Buttons</h5>
+                        <Button label="Primary" className="p-button-outlined" />
+                        <Button label="Secondary" className="p-button-outlined p-button-secondary" />
+                        <Button label="Success" className="p-button-outlined p-button-success" />
+                        <Button label="Info" className="p-button-outlined p-button-info" />
+                        <Button label="Warning" className="p-button-outlined p-button-warning" />
+                        <Button label="Help" className="p-button-outlined p-button-help" />
+                        <Button label="Danger" className="p-button-outlined p-button-danger" />
 
-`}
-</CodeHighlight>
+                        <h5>Rounded Icon Buttons</h5>
+                        <Button icon="pi pi-bookmark" className="p-button-rounded p-button-secondary" />
+                        <Button icon="pi pi-search" className="p-button-rounded p-button-success" />
+                        <Button icon="pi pi-user" className="p-button-rounded p-button-info" />
+                        <Button icon="pi pi-bell" className="p-button-rounded p-button-warning" />
+                        <Button icon="pi pi-heart" className="p-button-rounded p-button-help" />
+                        <Button icon="pi pi-times" className="p-button-rounded p-button-danger" />
+                        <Button icon="pi pi-check" className="p-button-rounded" />
 
-                        <h3>Getting Started</h3>
-                        <p>Button is created using the Button element.</p>
-<CodeHighlight className="language-jsx">
-{`
-<Button />
+                        <h5>Rounded Text Icon Buttons</h5>
+                        <Button icon="pi pi-check" className="p-button-rounded p-button-text" />
+                        <Button icon="pi pi-bookmark" className="p-button-rounded p-button-secondary p-button-text" />
+                        <Button icon="pi pi-search" className="p-button-rounded p-button-success p-button-text" />
+                        <Button icon="pi pi-user" className="p-button-rounded p-button-info p-button-text" />
+                        <Button icon="pi pi-bell" className="p-button-rounded p-button-warning p-button-text" />
+                        <Button icon="pi pi-heart" className="p-button-rounded p-button-help p-button-text" />
+                        <Button icon="pi pi-times" className="p-button-rounded p-button-danger p-button-text" />
+                        <Button icon="pi pi-filter" className="p-button-rounded p-button-text p-button-plain" />
 
-`}
-</CodeHighlight>
+                        <h5>Rounded and Outlined Icon Buttons</h5>
+                        <Button icon="pi pi-check" className="p-button-rounded p-button-outlined" />
+                        <Button icon="pi pi-bookmark" className="p-button-rounded p-button-secondary p-button-outlined" />
+                        <Button icon="pi pi-search" className="p-button-rounded p-button-success p-button-outlined" />
+                        <Button icon="pi pi-user" className="p-button-rounded p-button-info p-button-outlined" />
+                        <Button icon="pi pi-bell" className="p-button-rounded p-button-warning p-button-outlined" />
+                        <Button icon="pi pi-heart" className="p-button-rounded p-button-help p-button-outlined" />
+                        <Button icon="pi pi-times" className="p-button-rounded p-button-danger p-button-outlined" />
 
-                        <h3>Label</h3>
-                        <p>Text of the button is defined using the <i>label</i> property.</p>
-<CodeHighlight className="language-jsx">
-{`
-<Button label="Save" />
+                        <h5>Badges</h5>
+                        <Button type="button" label="Emails" badge="8" />
+                        <Button type="button" label="Messages" icon="pi pi-users" className="p-button-warning" badge="8" badgeClassName="p-badge-danger" />
 
-`}
-</CodeHighlight>
+                        <h5>Button Set</h5>
+                        <span className="p-buttonset">
+                            <Button label="Save" icon="pi pi-check" />
+                            <Button label="Delete" icon="pi pi-trash" />
+                            <Button label="Cancel" icon="pi pi-times" />
+                        </span>
 
-                        <h3>Icons</h3>
-                        <p>Icon on a button is specified with <i>icon</i> property and position is configured using <i>iconPos</i> attribute. Default
-                        icon position is "left" and alternative is "right". To display only an icon, leave label as undefined.</p>
-
-<CodeHighlight className="language-jsx">
-{`
-<Button label="Click" icon="pi pi-check" />
-<Button label="Click" icon="pi pi-check" iconPos="right" />
-<Button icon="pi pi-check" iconPos="right" />
-
-`}
-</CodeHighlight>
-
-                        <h3>Events</h3>
-                        <p>Events are defined with the standard notation.</p>
-<CodeHighlight className="language-jsx">
-{`
-<Button label="Click" onClick={this.handleClick} />
-
-`}
-</CodeHighlight>
-
-
-
-                        <h3>Severity</h3>
-                        <p>Different color options are available as severity levels.</p>
-
-                        <ul>
-                            <li>.p-button-secondary</li>
-                            <li>.p-button-success</li>
-                            <li>.p-button-info</li>
-                            <li>.p-button-warning</li>
-                            <li>.p-button-danger</li>
-                        </ul>
-
-<CodeHighlight className="language-jsx">
-{`
-<Button label="Primary" />
-<Button label="Secondary" className="p-button-secondary" />
-<Button label="Success" className="p-button-success" />
-<Button label="Info" className="p-button-info" />
-<Button label="Warning" className="p-button-warning" />
-<Button label="Danger" className="p-button-danger" />
-
-`}
-</CodeHighlight>
-
-                        <h3>Raised and Rounded Buttons</h3>
-                        <p>A button can be raised by having "p-button-raised" style class and similarly borders can be made rounded using "p-button-rounded" class.</p>
-                        <CodeHighlight className="language-jsx">
-{`
-<Button label="Proceed" className="p-button-raised p-button-rounded" />
-
-`}
-</CodeHighlight>
-                        <h3>Properties</h3>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Default</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>label</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Text of the button.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>icon</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Name of the icon.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>iconPos</td>
-                                        <td>string</td>
-                                        <td>left</td>
-                                        <td>Position of the icon, valid values are "left" and "right".</td>
-                                    </tr>
-                                    <tr>
-                                        <td>tooltip</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Content of the tooltip.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>tooltipOptions</td>
-                                        <td>object</td>
-                                        <td>null</td>
-                                        <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <h5>Sizes</h5>
+                        <div className="sizes">
+                            <Button label="Small" icon="pi pi-check" className="p-button-sm"  />
+                            <Button label="Normal" icon="pi pi-check" className="p-button"  />
+                            <Button label="Large" icon="pi pi-check" className="p-button-lg" />
                         </div>
-
-                        <h3>Styling</h3>
-                        <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Element</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>p-button</td>
-                                        <td>Button element</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-button-icon</td>
-                                        <td>Icon element</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-button-text</td>
-                                        <td>Label element of the button</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <h3>Dependencies</h3>
-                        <p>None.</p>
-                    </TabPanel>
-
-                    <TabPanel header="Source">
-
-                        <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/button" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
-                            <span>View on GitHub</span>
-                        </a>
-
-<CodeHighlight className="language-javascript">
-{`
-import React, {Component} from 'react';
-import {Button} from 'primereact/button';
-
-export class ButtonDemo extends Component {
-
-    constructor() {
-        super();
-        this.state = {
-            count: 0
-        };
-        this.increment = this.increment.bind(this);
-    }
-
-    increment() {
-        this.setState((prevState, props) => ({
-            count: prevState.count + 1
-        }));
-    }
-
-    render() {
-        return (
-            <div>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Button</h1>
-                        <p>Button is an extension to standard input element with icons and theming.</p>
                     </div>
                 </div>
 
-                <div className="content-section implementation button-demo">
-                    <h3 className="first">Basic</h3>
-                    <Button label="Click" />
-                    <Button label="Click" icon="pi pi-check" />
-                    <Button label="Click" icon="pi pi-check" iconPos="right" />
-                    <Button icon="pi pi-check" />
-                    <Button label="Click" disabled="disabled" />
-
-                    <h3>Severities</h3>
-                    <Button label="Primary" />
-                    <Button label="Secondary" className="p-button-secondary" />
-                    <Button label="Success" className="p-button-success" />
-                    <Button label="Info" className="p-button-info" />
-                    <Button label="Warning" className="p-button-warning" />
-                    <Button label="Danger" className="p-button-danger" />
-
-                    <h3>Raised Buttons</h3>
-                    <Button label="Primary" className="p-button-raised" />
-                    <Button label="Secondary" className="p-button-raised p-button-secondary" />
-                    <Button label="Success" className="p-button-raised p-button-success" />
-                    <Button label="Info" className="p-button-raised p-button-info" />
-                    <Button label="Warning" className="p-button-raised p-button-warning" />
-                    <Button label="Danger" className="p-button-raised p-button-danger" />
-
-                    <h3>Rounded Buttons</h3>
-                    <Button label="Primary" className="p-button-rounded" />
-                    <Button label="Secondary" className="p-button-rounded p-button-secondary" />
-                    <Button label="Success" className="p-button-rounded p-button-success" />
-                    <Button label="Info" className="p-button-rounded p-button-info" />
-                    <Button label="Warning" className="p-button-rounded p-button-warning" />
-                    <Button label="Danger" className="p-button-rounded p-button-danger" />
-                </div>
-            </div>
-        )
-    }
-}
-
-`}
-</CodeHighlight>
-                    </TabPanel>
-                </TabView >
+                <ButtonDoc></ButtonDoc>
             </div>
         )
     }

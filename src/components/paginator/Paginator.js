@@ -23,6 +23,7 @@ export class Paginator extends Component {
         onPageChange: null,
         leftContent: null,
         rightContent: null,
+        dropdownAppendTo: null,
         currentPageReportTemplate: '({currentPage} of {totalPages})',
         alwaysShow: true
     }
@@ -39,6 +40,7 @@ export class Paginator extends Component {
         onPageChange: PropTypes.func,
         leftContent: PropTypes.any,
         rightContent: PropTypes.any,
+        dropdownAppendTo: PropTypes.any,
         currentPageReportTemplate: PropTypes.any,
         alwaysShow: PropTypes.bool
     }
@@ -154,7 +156,7 @@ export class Paginator extends Component {
             return null;
         }
         else {
-            let className = classNames('p-paginator p-component p-unselectable-text', this.props.className);
+            let className = classNames('p-paginator p-component', this.props.className);
 
             let paginatorElements = this.props.template.split(' ').map((value) => {
                 let key = value.trim();
@@ -182,11 +184,11 @@ export class Paginator extends Component {
                     break;
 
                     case 'RowsPerPageDropdown':
-                        element = <RowsPerPageDropdown key={key} value={this.props.rows} options={this.props.rowsPerPageOptions} onChange={this.onRowsChange} />;
+                        element = <RowsPerPageDropdown key={key} value={this.props.rows} options={this.props.rowsPerPageOptions} onChange={this.onRowsChange} appendTo={this.props.dropdownAppendTo} />;
                     break;
 
                     case 'CurrentPageReport':
-                        element = <CurrentPageReport template={this.props.currentPageReportTemplate} key={key} 
+                        element = <CurrentPageReport template={this.props.currentPageReportTemplate} key={key}
                                 page={this.getPage()} pageCount={this.getPageCount()} first={this.props.first}
                                 rows={this.props.rows} totalRecords={this.props.totalRecords} />;
                     break;

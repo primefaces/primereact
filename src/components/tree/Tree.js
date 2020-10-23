@@ -30,6 +30,7 @@ export class Tree extends Component {
         filterBy: 'label',
         filterMode: 'lenient',
         filterPlaceholder: null,
+        filterLocale: undefined,
         nodeTemplate: null,
         onSelect: null,
         onUnselect: null,
@@ -64,6 +65,7 @@ export class Tree extends Component {
         filterBy: PropTypes.any,
         filterMode: PropTypes.string,
         filterPlaceholder: PropTypes.string,
+        filterLocale: PropTypes.string,
         nodeTemplate: PropTypes.func,
         onSelect: PropTypes.func,
         onUnselect: PropTypes.func,
@@ -77,11 +79,12 @@ export class Tree extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            filter: ''
+        };
+
         if (!this.props.onToggle) {
-            this.state = {
-                expandedKeys: this.props.expandedKeys,
-                filter: ''
-            };
+            this.state['expandedKeys'] = this.props.expandedKeys;
         }
 
         this.isNodeLeaf = this.isNodeLeaf.bind(this);
@@ -294,7 +297,7 @@ export class Tree extends Component {
         else {
             this.filteredNodes = [];
             const searchFields = this.props.filterBy.split(',');
-            const filterText = this.state.filter.toLowerCase();
+            const filterText = this.state.filter.toLocaleLowerCase(this.props.filterLocale);
             const isStrictMode = this.props.filterMode === 'strict';
             for(let node of this.props.value) {
                 let copyNode = {...node};
@@ -333,7 +336,7 @@ export class Tree extends Component {
     isFilterMatched(node, {searchFields, filterText, isStrictMode}) {
         let matched = false;
         for(let field of searchFields) {
-            let fieldValue = String(ObjectUtils.resolveFieldData(node, field)).toLowerCase();
+            let fieldValue = String(ObjectUtils.resolveFieldData(node, field)).toLocaleLowerCase(this.props.filterLocale);
             if(fieldValue.indexOf(filterText) > -1) {
                 matched = true;
             }
@@ -381,9 +384,8 @@ export class Tree extends Component {
                 </ul>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderLoader() {
@@ -391,17 +393,13 @@ export class Tree extends Component {
             let icon = classNames('p-tree-loading-icon pi-spin', this.props.loadingIcon);
 
             return (
-                <React.Fragment>
-                    <div className="p-tree-loading-mask p-component-overlay"></div>
-                    <div className="p-tree-loading-content">
-                        <i className={icon} />
-                    </div>
-                </React.Fragment>
+                <div className="p-tree-loading-overlay p-component-overlay">
+                    <i className={icon} />
+                </div>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderFilter() {
@@ -412,9 +410,8 @@ export class Tree extends Component {
                         <span className="p-tree-filter-icon pi pi-search"></span>
                    </div>;
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     render() {

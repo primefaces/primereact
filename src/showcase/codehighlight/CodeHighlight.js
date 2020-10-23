@@ -5,16 +5,18 @@ import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-markup';
 import 'prismjs/components/prism-jsx';
 import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-css';
+import 'prismjs/components/prism-scss';
 
 export class CodeHighlight extends Component {
-    
+
     static defaultProps = {
-        className: null,
+        lang: 'jsx',
         style: null
     };
 
     static propTypes = {
-        className: PropTypes.string,
+        lang: PropTypes.string,
         style: PropTypes.object
     };
 
@@ -27,16 +29,18 @@ export class CodeHighlight extends Component {
     }
 
     highlightCode() {
-        if(Prism) {
+        if (Prism) {
             Prism.highlightElement(this.codeElement);
         }
     }
 
     render() {
+        const languageClassName = `language-${this.props.lang}`;
+
         return (
             <pre style={this.props.style}>
-                <code ref={el => this.codeElement = el} className={this.props.className}>
-                    {this.props.children}
+                <code ref={el => this.codeElement = el} className={languageClassName}>
+                    {this.props.children}&nbsp;
                 </code>
             </pre>
         );

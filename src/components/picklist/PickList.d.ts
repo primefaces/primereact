@@ -10,7 +10,6 @@ interface PickListProps {
     className?: string;
     sourceStyle?: object;
     targetStyle?: object;
-    responsive?: boolean;
     showSourceControls?: boolean;
     showTargetControls?: boolean;
     metaKeySelection?: boolean;

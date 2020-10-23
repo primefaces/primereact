@@ -4,7 +4,7 @@ import { Button } from '../button/Button';
 import ObjectUtils from '../utils/ObjectUtils';
 
 export class OrderListControls extends Component {
-    
+
     static defaultProps = {
         value: null,
         selection: null,
@@ -16,7 +16,7 @@ export class OrderListControls extends Component {
         selection: PropTypes.array,
         onReorder: PropTypes.func
     }
-    
+
     constructor() {
         super();
         this.moveUp = this.moveUp.bind(this);
@@ -28,7 +28,7 @@ export class OrderListControls extends Component {
     moveUp(event) {
         if(this.props.selection) {
             let value = [...this.props.value];
-            
+
             for (let i = 0; i < this.props.selection.length; i++) {
                 let selectedItem = this.props.selection[i];
                 let selectedItemIndex = ObjectUtils.findIndexInList(selectedItem, value);
@@ -43,7 +43,7 @@ export class OrderListControls extends Component {
                     break;
                 }
             }
-                        
+
             if(this.props.onReorder) {
                 this.props.onReorder({
                     originalEvent: event,
@@ -57,7 +57,7 @@ export class OrderListControls extends Component {
     moveTop(event) {
         if(this.props.selection) {
             let value = [...this.props.value];
-            
+
             for (let i = 0; i < this.props.selection.length; i++) {
                 let selectedItem = this.props.selection[i];
                 let selectedItemIndex = ObjectUtils.findIndexInList(selectedItem, value);
@@ -82,9 +82,9 @@ export class OrderListControls extends Component {
     }
 
     moveDown(event) {
-        if(this.props.selection) {
+        if (this.props.selection) {
             let value = [...this.props.value];
-            
+
             for (let i = this.props.selection.length - 1; i >= 0; i--) {
                 let selectedItem = this.props.selection[i];
                 let selectedItemIndex = ObjectUtils.findIndexInList(selectedItem, value);
@@ -99,7 +99,7 @@ export class OrderListControls extends Component {
                     break;
                 }
             }
-            
+
             if(this.props.onReorder) {
                 this.props.onReorder({
                     originalEvent: event,
@@ -110,10 +110,10 @@ export class OrderListControls extends Component {
         }
     }
 
-    moveBottom(event) {        
+    moveBottom(event) {
         if(this.props.selection) {
             let value = [...this.props.value];
-            
+
             for (let i = this.props.selection.length - 1; i >= 0; i--) {
                 let selectedItem = this.props.selection[i];
                 let selectedItemIndex = ObjectUtils.findIndexInList(selectedItem, value);
@@ -136,8 +136,8 @@ export class OrderListControls extends Component {
             }
         }
     }
-        
-    render() {        
+
+    render() {
         return (
             <div className="p-orderlist-controls">
                 <Button type="button" icon="pi pi-angle-up" onClick={this.moveUp}></Button>

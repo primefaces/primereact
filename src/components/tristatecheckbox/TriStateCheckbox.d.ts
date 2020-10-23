@@ -8,6 +8,7 @@ interface TriStateCheckboxProps {
     name?: string;
     style?: object;
     className?: string;
+    disabled?: boolean;
     tooltip?: any;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;

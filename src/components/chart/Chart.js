@@ -38,23 +38,23 @@ export class Chart extends Component {
     getCanvas() {
         return this.canvas;
     }
-    
+
     getBase64Image() {
         return this.chart.toBase64Image();
     }
-    
+
     generateLegend() {
         if(this.chart) {
             this.chart.generateLegend();
         }
     }
-    
+
     refresh() {
         if(this.chart) {
             this.chart.update();
         }
     }
-    
+
     reinit() {
         if(this.chart) {
             this.chart.destroy();
@@ -62,18 +62,19 @@ export class Chart extends Component {
         }
     }
 
-    shouldComponentUpdate(nextProps){	
-        if(nextProps.data === this.props.data) {	
-            return false;	
+    shouldComponentUpdate(nextProps) {
+        if (nextProps.data === this.props.data && nextProps.options === this.props.options && nextProps.type === this.props.type) {
+            return false;
         }
-        return true;	
+
+        return true;
     }
 
     componentDidMount() {
         this.initChart();
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate() {
         this.reinit();
     }
 

@@ -42,7 +42,8 @@ interface InputNumberProps {
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
-    onChange?(e: {originalEvent: Event, value: any, target: {name: string, id: string, value: any}}): void;
+    onValueChange?(e: {originalEvent: Event, value: any, target: {name: string, id: string, value: any}}): void;
+    onChange?(e: {originalEvent: Event, value: any}): void;
     onBlur?(e: Event): void;
     onFocus?(e: Event): void;
 }

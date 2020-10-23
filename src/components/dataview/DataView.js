@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {Paginator} from '../paginator/Paginator';
 import classNames from 'classnames';
 import ObjectUtils from '../utils/ObjectUtils';
+import { Ripple } from '../ripple/Ripple';
 
 export class DataViewLayoutOptions extends Component {
 
@@ -37,18 +38,18 @@ export class DataViewLayoutOptions extends Component {
 
     render() {
         const className = classNames('p-dataview-layout-options p-selectbutton p-buttonset', this.props.className);
-        const buttonListClass = classNames("p-button p-button-icon-only", {'p-highlight': this.props.layout === 'list'});
-        const buttonGridClass = classNames("p-button p-button-icon-only", {'p-highlight': this.props.layout === 'grid'});
+        const buttonListClass = classNames('p-button p-button-icon-only', {'p-highlight': this.props.layout === 'list'});
+        const buttonGridClass = classNames('p-button p-button-icon-only', {'p-highlight': this.props.layout === 'grid'});
 
         return (
             <div id={this.props.id} style={this.props.style} className={className}>
                 <button type="button" className={buttonListClass} onClick={(event) => this.changeLayout(event, 'list')}>
-                    <i className="pi pi-bars p-button-icon-left"></i>
-                    <span className="p-button-text p-clickable">p-btn</span>
+                    <i className="pi pi-bars"></i>
+                    <Ripple />
                 </button>
                 <button type="button" className={buttonGridClass} onClick={(event) => this.changeLayout(event, 'grid')}>
-                    <i className="pi pi-th-large p-button-icon-left"></i>
-                    <span className="p-button-text p-clickable">p-btn</span>
+                    <i className="pi pi-th-large"></i>
+                    <Ripple />
                 </button>
             </div>
         );
@@ -92,6 +93,7 @@ export class DataView extends Component {
         paginatorTemplate: 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown',
         paginatorLeft:null,
         paginatorRight: null,
+        paginatorDropdownAppendTo: null,
         pageLinkSize: 5,
         rowsPerPageOptions: null,
         currentPageReportTemplate: '({currentPage} of {totalPages})',
@@ -122,6 +124,7 @@ export class DataView extends Component {
         paginatorTemplate: PropTypes.string,
         paginatorLeft: PropTypes.any,
         paginatorRight: PropTypes.any,
+        paginatorDropdownAppendTo: PropTypes.any,
         pageLinkSize: PropTypes.number,
         rowsPerPageOptions: PropTypes.array,
         currentPageReportTemplate: PropTypes.string,
@@ -139,12 +142,14 @@ export class DataView extends Component {
 
     constructor(props) {
         super(props);
+
         if (!this.props.onPage) {
             this.state = {
                 first: this.props.first,
                 rows: this.props.rows
             };
         }
+
         this.sortChange = false;
         this.onPageChange = this.onPageChange.bind(this)
     }
@@ -165,7 +170,7 @@ export class DataView extends Component {
         return (
             <Paginator first={first} rows={rows} pageLinkSize={this.props.pageLinkSize} className={className} onPageChange={this.onPageChange} template={this.props.paginatorTemplate}
                         totalRecords={totalRecords} rowsPerPageOptions={this.props.rowsPerPageOptions} currentPageReportTemplate={this.props.currentPageReportTemplate}
-                        leftContent={this.props.paginatorLeft} rightContent={this.props.paginatorRight} alwaysShow={this.props.alwaysShowPaginator} />
+                        leftContent={this.props.paginatorLeft} rightContent={this.props.paginatorRight} alwaysShow={this.props.alwaysShowPaginator} dropdownAppendTo={this.props.paginatorDropdownAppendTo} />
         );
     }
 
@@ -224,11 +229,8 @@ export class DataView extends Component {
             let iconClassName = classNames('p-dataview-loading-icon pi-spin', this.props.loadingIcon);
 
             return (
-                <div className="p-dataview-loading">
-                    <div className="p-dataview-loading-overlay p-component-overlay"></div>
-                    <div className="p-dataview-loading-content">
-                        <i className={iconClassName}></i>
-                    </div>
+                <div className="p-dataview-loading-overlay p-component-overlay">
+                    <i className={iconClassName}></i>
                 </div>
             );
         }
@@ -254,7 +256,7 @@ export class DataView extends Component {
 
     renderEmptyMessage() {
         if (!this.props.loading) {
-            return <div className="p-col-12">{this.props.emptyMessage}</div>;
+            return <div className="p-col-12 p-dataview-emptymessage">{this.props.emptyMessage}</div>;
         }
 
         return null;
@@ -308,7 +310,7 @@ export class DataView extends Component {
 
         return (
             <div className="p-dataview-content">
-                <div className="p-grid">
+                <div className="p-grid p-nogutter">
                     {items}
                 </div>
             </div>
@@ -329,7 +331,7 @@ export class DataView extends Component {
 
     render() {
         const value = this.processData();
-        const className = classNames('p-dataview p-component', {'p-dataview-list': (this.props.layout === 'list'), 'p-dataview-grid': (this.props.layout === 'grid')}, this.props.className);
+        const className = classNames('p-dataview p-component', {'p-dataview-list': (this.props.layout === 'list'), 'p-dataview-grid': (this.props.layout === 'grid'), 'p-dataview-loading': this.props.loading}, this.props.className);
         const loader = this.renderLoader();
         const topPaginator = this.renderTopPaginator();
         const bottomPaginator = this.renderBottomPaginator() ;

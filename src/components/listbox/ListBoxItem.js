@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
+import { Ripple } from '../ripple/Ripple';
 
 export class ListBoxItem extends Component {
 
@@ -106,13 +107,16 @@ export class ListBoxItem extends Component {
     }
 
     render() {
-        let className = classNames(this.props.option.className, 'p-listbox-item', {'p-highlight': this.props.selected});
+        let className = classNames('p-listbox-item', {
+            'p-highlight': this.props.selected
+        }, this.props.option.className);
         let content = this.props.template ? this.props.template(this.props.option) : this.props.label;
 
         return (
             <li className={className} onClick={this.onClick} onTouchEnd={this.onTouchEnd} onKeyDown={this.onKeyDown} tabIndex={this.props.tabIndex}
                 aria-label={this.props.label} key={this.props.label} role="option" aria-selected={this.props.selected}>
                 {content}
+                <Ripple />
             </li>
         );
     }

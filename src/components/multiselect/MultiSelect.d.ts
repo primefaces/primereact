@@ -3,12 +3,15 @@ import TooltipOptions from '../tooltip/TooltipOptions';
 
 interface MultiSelectProps {
     id?: string;
+    name?: string;
     value?: any;
     options?: any[];
     optionLabel?: string;
     optionValue?: string;
     style?: object;
     className?: string;
+    panelClassName?: string;
+    panelStyle?: object;
     scrollHeight?: string;
     placeholder?: string;
     fixedPlaceholder?: boolean;
@@ -17,8 +20,13 @@ interface MultiSelectProps {
     filterBy?: string;
     filterMatchMode?: string;
     filterPlaceholder?: string;
+    filterLocale?: string;
+    emptyFilterMessage?: any;
+    resetFilterOnHide?: boolean;
     tabIndex?: boolean;
     dataKey?: string;
+    inputId?: string;
+    required?: boolean;
     appendTo?: HTMLElement;
     tooltip?: any;
     tooltipOptions?: TooltipOptions;

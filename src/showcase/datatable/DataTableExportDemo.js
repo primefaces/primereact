@@ -1,55 +1,54 @@
 import React, { Component } from 'react';
-import {DataTable} from '../../components/datatable/DataTable';
-import {Column} from '../../components/column/Column';
-import {Button} from '../../components/button/Button';
-import {CarService} from '../service/CarService';
-import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
+import { DataTable } from '../../components/datatable/DataTable';
+import { Column } from '../../components/column/Column';
+import { Button } from '../../components/button/Button';
+import ProductService from '../service/ProductService';
 import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
+import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class DataTableExportDemo extends Component {
 
-    constructor() {
-        super();
-        this.state = {};
-        this.carservice = new CarService();
-        this.export = this.export.bind(this);
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            products: []
+        };
+
+        this.productService = new ProductService();
+        this.exportCSV = this.exportCSV.bind(this);
     }
 
     componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
     }
 
-    export() {
+    exportCSV() {
         this.dt.exportCSV();
     }
 
     render() {
-        let header = <div style={{textAlign:'left'}}><Button type="button" icon="pi pi-external-link" iconPos="left" label="CSV" onClick={this.export}></Button></div>;
+        const header = <div style={{textAlign:'left'}}><Button type="button" icon="pi pi-external-link" label="Export" onClick={this.exportCSV}></Button></div>;
 
         return (
             <div>
-                <DataTableSubmenu />
-
                 <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>DataTable - Export</h1>
+                    <AppInlineHeader changelogText="dataTable">
+                        <h1>DataTable <span>Export</span></h1>
                         <p>DataTable can export its data to CSV format.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("dataTable")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <DataTable value={this.state.cars} header={header} ref={(el) => { this.dt = el; }}>
-                        <Column field="vin" header="Vin" />
-                        <Column field="year" header="Year" />
-                        <Column field="brand" header="Brand" />
-                        <Column field="color" header="Color" />
-                    </DataTable>
+                    <div className="card">
+                        <DataTable value={this.state.products} header={header} ref={(el) => { this.dt = el; }}>
+                            <Column field="code" header="Code"></Column>
+                            <Column field="name" header="Name"></Column>
+                            <Column field="category" header="Category"></Column>
+                            <Column field="quantity" header="Quantity"></Column>
+                        </DataTable>
+                    </div>
                 </div>
 
                 <DataTableExportDemoDoc></DataTableExportDemoDoc>
@@ -60,7 +59,141 @@ export class DataTableExportDemo extends Component {
 
 export class DataTableExportDemoDoc extends Component {
 
-    shouldComponentUpdate(){
+    constructor(props) {
+        super(props);
+
+        this.sources = {
+            'class': {
+                tabName: 'Class Source',
+                content: `
+import React, { Component } from 'react';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { Button } from 'primereact/button';
+import ProductService from '../service/ProductService';
+
+export class DataTableExportDemo extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            products: []
+        };
+
+        this.productService = new ProductService();
+        this.exportCSV = this.exportCSV.bind(this);
+    }
+
+    componentDidMount() {
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
+    }
+
+    exportCSV() {
+        this.dt.exportCSV();
+    }
+
+    render() {
+        const header = <div style={{textAlign:'left'}}><Button type="button" icon="pi pi-external-link" label="Export" onClick={this.exportCSV}></Button></div>;
+
+        return (
+            <div>
+                <div className="card">
+                    <DataTable value={this.state.products} header={header} ref={(el) => { this.dt = el; }}>
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="quantity" header="Quantity"></Column>
+                    </DataTable>
+                </div>
+            </div>
+        );
+    }
+}
+                `
+            },
+            'hooks': {
+                tabName: 'Hooks Source',
+                content: `
+import React, { useState, useEffect, useRef } from 'react';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { Button } from 'primereact/button';
+import ProductService from '../service/ProductService';
+
+const DataTableExportDemo = () => {
+    const [products, setProducts] = useState([]);
+    const dt = useRef(null);
+    const productService = new ProductService();
+
+    useEffect(() => {
+        productService.getProductsSmall().then(data => setProducts(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const exportCSV = () => {
+        dt.current.exportCSV();
+    }
+
+    const header = <div style={{textAlign:'left'}}><Button type="button" icon="pi pi-external-link" label="Export" onClick={exportCSV}></Button></div>;
+
+    return (
+        <div>
+            <div className="card">
+                <DataTable value={products} header={header} ref={dt}>
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+            </div>
+        </div>
+    );
+}
+                `
+            },
+            'ts': {
+                tabName: 'TS Source',
+                content: `
+import React, { useState, useEffect, useRef } from 'react';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { Button } from 'primereact/button';
+import ProductService from '../service/ProductService';
+
+const DataTableExportDemo = () => {
+    const [products, setProducts] = useState([]);
+    const dt = useRef(null);
+    const productService = new ProductService();
+
+    useEffect(() => {
+        productService.getProductsSmall().then(data => setProducts(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const exportCSV = () => {
+        dt.current.exportCSV();
+    }
+
+    const header = <div style={{textAlign:'left'}}><Button type="button" icon="pi pi-external-link" label="Export" onClick={exportCSV}></Button></div>;
+
+    return (
+        <div>
+            <div className="card">
+                <DataTable value={products} header={header} ref={dt}>
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+            </div>
+        </div>
+    );
+}
+                `
+            }
+        }
+    }
+
+    shouldComponentUpdate() {
         return false;
     }
 
@@ -69,58 +202,7 @@ export class DataTableExportDemoDoc extends Component {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Source">
-<CodeHighlight className="language-javascript">
-{`
-import React, { Component } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {Button} from 'primereact/button';
-import {CarService} from '../service/CarService';
-
-export class DataTableExportDemo extends Component {
-
-    constructor() {
-        super();
-        this.state = {};
-        this.carservice = new CarService();
-        this.export = this.export.bind(this);
-    }
-
-    componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
-    }
-
-    export() {
-        this.dt.exportCSV();
-    }
-
-    render() {
-        var header = <div style={{textAlign:'left'}}><Button type="button" icon="pi pi-external-link" iconPos="left" label="CSV" onClick={this.export}></Button></div>;
-
-        return (
-            <div>
-                <div className="content-section">
-                    <div className="feature-intro">
-                        <h1>DataTable - Export</h1>
-                        <p>DataTable can export its data to CSV format.</p>
-                    </div>
-                </div>
-
-                <div className="content-section implementation">
-                    <DataTable value={this.state.cars} header={header} ref={(el) => { this.dt = el; }}>
-                        <Column field="vin" header="Vin" />
-                        <Column field="year" header="Year" />
-                        <Column field="brand" header="Brand" />
-                        <Column field="color" header="Color" />
-                    </DataTable>
-                </div>
-            </div>
-        );
-    }
-}
-
-`}
-</CodeHighlight>
+                        <LiveEditor name="DataTableExportDemo" sources={this.sources} service="ProductService" data="products-small" />
                     </TabPanel>
                 </TabView>
             </div>

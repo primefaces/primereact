@@ -72,7 +72,7 @@ interface CalendarProps {
     selectOtherMonths?: boolean;
     showButtonBar?: boolean;
     todayButtonClassName?: string;
-    clearButtonStyleClass?: string;
+    clearButtonClassName?: string;
     autoZIndex?: boolean;
     baseZIndex?: number;
     appendTo?: any;

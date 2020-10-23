@@ -90,10 +90,11 @@ export default class DomHandler {
             let rect = el.getBoundingClientRect();
 
             return {
-                top: rect.top + document.body.scrollTop,
-                left: rect.left + document.body.scrollLeft
+                top: rect.top + (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0),
+                left: rect.left + (window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0),
             };
         }
+
         return {
             top: 'auto',
             left: 'auto'
@@ -219,9 +220,12 @@ export default class DomHandler {
                 if(top < 0) {
                     top = windowScrollTop;
                 }
+
+                element.style.transformOrigin = 'bottom';
             }
             else {
                 top = targetOuterHeight + targetOffset.top + windowScrollTop;
+                element.style.transformOrigin = 'top';
             }
 
             if (targetOffset.left + targetOuterWidth + elementOuterWidth > viewport.width)
@@ -247,9 +251,12 @@ export default class DomHandler {
                 if (targetOffset.top + top < 0) {
                     top = -1 * targetOffset.top;
                 }
+
+                element.style.transformOrigin = 'bottom';
             }
             else {
                 top = targetHeight;
+                element.style.transformOrigin = 'top';
             }
 
             if (elementDimensions.width > viewport.width) {
@@ -268,6 +275,212 @@ export default class DomHandler {
             element.style.top = top + 'px';
             element.style.left = left + 'px';
         }
+    }
+
+    static flipfitCollision(element, target, my = 'left top', at = 'left bottom', callback) {
+        const targetOffset = target.getBoundingClientRect();
+        const viewport = this.getViewport();
+        const myArr = my.split(' ');
+        const atArr = at.split(' ');
+        const getPositionValue = (arr, isOffset) => (isOffset ? (+arr.substring(arr.search(/(\+|-)/g)) || 0) : (arr.substring(0, arr.search(/(\+|-)/g)) || arr));
+        const position = {
+            my: {
+                x: getPositionValue(myArr[0]),
+                y: getPositionValue(myArr[1] || myArr[0]),
+                offsetX: getPositionValue(myArr[0], true),
+                offsetY: getPositionValue((myArr[1] || myArr[0]), true)
+            },
+            at: {
+                x: getPositionValue(atArr[0]),
+                y: getPositionValue(atArr[1] || atArr[0]),
+                offsetX: getPositionValue(atArr[0], true),
+                offsetY: getPositionValue((atArr[1] || atArr[0]), true)
+            }
+        };
+        const myOffset = {
+            left: () => {
+                const totalOffset = position.my.offsetX + position.at.offsetX;
+                return totalOffset + targetOffset.left + (position.my.x === 'left' ? 0 : -1 * (position.my.x === 'center' ? this.getOuterWidth(element) / 2 : this.getOuterWidth(element)));
+            },
+            top: () => {
+                const totalOffset = position.my.offsetY + position.at.offsetY;
+                return totalOffset + targetOffset.top + (position.my.y === 'top' ? 0 : -1 * (position.my.y === 'center' ? this.getOuterHeight(element) / 2 : this.getOuterHeight(element)));
+            }
+        };
+        const alignWithAt = {
+            count: {
+                x: 0,
+                y: 0
+            },
+            left: function() {
+                const left = myOffset.left();
+                const scrollLeft = DomHandler.getWindowScrollLeft();
+                element.style.left = (left + scrollLeft) + 'px';
+
+                if (this.count.x === 2) {
+                    element.style.left = scrollLeft + 'px';
+                    this.count.x = 0;
+                }
+                else if (left < 0) {
+                    this.count.x++;
+                    position.my.x = 'left';
+                    position.at.x = 'right';
+                    position.my.offsetX *= -1;
+                    position.at.offsetX *= -1;
+
+                    this.right();
+                }
+            },
+            right: function() {
+                const left = myOffset.left() + DomHandler.getOuterWidth(target);
+                const scrollLeft = DomHandler.getWindowScrollLeft();
+                element.style.left = (left + scrollLeft) + 'px';
+
+                if (this.count.x === 2) {
+                    element.style.left = (viewport.width - DomHandler.getOuterWidth(element) + scrollLeft) + 'px';
+                    this.count.x = 0;
+                }
+                else if (left + DomHandler.getOuterWidth(element) > viewport.width) {
+                    this.count.x++;
+
+                    position.my.x = 'right';
+                    position.at.x = 'left';
+                    position.my.offsetX *= -1;
+                    position.at.offsetX *= -1;
+
+                    this.left();
+                }
+            },
+            top: function() {
+                const top = myOffset.top();
+                const scrollTop = DomHandler.getWindowScrollTop();
+                element.style.top = (top + scrollTop) + 'px';
+
+                if (this.count.y === 2) {
+                    element.style.left = scrollTop + 'px';
+                    this.count.y = 0;
+                }
+                else if (top < 0) {
+                    this.count.y++;
+
+                    position.my.y = 'top';
+                    position.at.y = 'bottom';
+                    position.my.offsetY *= -1;
+                    position.at.offsetY *= -1;
+
+                    this.bottom();
+                }
+            },
+            bottom: function() {
+                const top = myOffset.top() + DomHandler.getOuterHeight(target);
+                const scrollTop = DomHandler.getWindowScrollTop();
+                element.style.top = (top + scrollTop) + 'px';
+
+                if (this.count.y === 2) {
+                    element.style.left = (viewport.height - DomHandler.getOuterHeight(element) + scrollTop) + 'px';
+                    this.count.y = 0;
+                }
+                else if (top + DomHandler.getOuterHeight(target) > viewport.height) {
+                    this.count.y++;
+
+                    position.my.y = 'bottom';
+                    position.at.y = 'top';
+                    position.my.offsetY *= -1;
+                    position.at.offsetY *= -1;
+
+                    this.top();
+                }
+            },
+            center: function(axis) {
+                if (axis === 'y') {
+                    const top = myOffset.top() + (DomHandler.getOuterHeight(target) / 2);
+                    element.style.top = (top + DomHandler.getWindowScrollTop()) + 'px';
+
+                    if (top < 0) {
+                        this.bottom();
+                    }
+                    else if (top + DomHandler.getOuterHeight(target) > viewport.height) {
+                        this.top();
+                    }
+                }
+                else {
+                    const left = myOffset.left() + (DomHandler.getOuterWidth(target) / 2);
+                    element.style.left = (left + DomHandler.getWindowScrollLeft()) + 'px';
+
+                    if (left < 0) {
+                        this.left();
+                    }
+                    else if (left + DomHandler.getOuterWidth(element) > viewport.width) {
+                        this.right();
+                    }
+                }
+            }
+        };
+
+        alignWithAt[position.at.x]('x');
+        alignWithAt[position.at.y]('y');
+
+        if (this.isFunction(callback)) {
+            callback(position);
+        }
+    }
+
+    static findCollisionPosition(position) {
+        if (position) {
+            const isAxisY = position === 'top' || position === 'bottom';
+            const myXPosition = position === 'left' ? 'right' : 'left';
+            const myYPosition = position === 'top' ? 'bottom' : 'top';
+
+            if (isAxisY) {
+                return {
+                    axis: 'y',
+                    my: `center ${myYPosition}`,
+                    at: `center ${position}`,
+                }
+            }
+
+            return {
+                axis: 'x',
+                my: `${myXPosition} center`,
+                at: `${position} center`
+            }
+        }
+    }
+
+    static getParents(element, parents = []) {
+        return element['parentNode'] === null ? parents : this.getParents(element.parentNode, parents.concat([element.parentNode]));
+    }
+
+    static getScrollableParents(element) {
+        let scrollableParents = [];
+
+        if (element) {
+            let parents = this.getParents(element);
+            const overflowRegex = /(auto|scroll)/;
+            const overflowCheck = (node) => {
+                let styleDeclaration = window['getComputedStyle'](node, null);
+                return overflowRegex.test(styleDeclaration.getPropertyValue('overflow')) || overflowRegex.test(styleDeclaration.getPropertyValue('overflowX')) || overflowRegex.test(styleDeclaration.getPropertyValue('overflowY'));
+            };
+
+            for (let parent of parents) {
+                let scrollSelectors = parent.nodeType === 1 && parent.dataset['scrollselectors'];
+                if (scrollSelectors) {
+                    let selectors = scrollSelectors.split(',');
+                    for (let selector of selectors) {
+                        let el = this.findSingle(parent, selector);
+                        if (el && overflowCheck(el)) {
+                            scrollableParents.push(el);
+                        }
+                    }
+                }
+
+                if (parent.nodeType === 9 || overflowCheck(parent)) {
+                    scrollableParents.push(parent);
+                }
+            }
+        }
+
+        return scrollableParents;
     }
 
     static getHiddenElementOuterHeight(element) {
@@ -361,13 +574,32 @@ export default class DomHandler {
         return /(android)/i.test(navigator.userAgent);
     }
 
+    static isFunction(obj) {
+        return !!(obj && obj.constructor && obj.call && obj.apply);
+    }
+
     static appendChild(element, target) {
-        if(this.isElement(target))
+        if (this.isElement(target))
             target.appendChild(element);
         else if(target.el && target.el.nativeElement)
             target.el.nativeElement.appendChild(element);
         else
             throw new Error('Cannot append ' + target + ' to ' + element);
+    }
+
+    static removeChild(element, target) {
+        if (this.isElement(target))
+            target.removeChild(element);
+        else if (target.el && target.el.nativeElement)
+            target.el.nativeElement.removeChild(element);
+        else
+            throw new Error('Cannot remove ' + element + ' from ' + target);
+    }
+
+    static isElement(obj) {
+        return (typeof HTMLElement === "object" ? obj instanceof HTMLElement :
+            obj && typeof obj === "object" && obj !== null && obj.nodeType === 1 && typeof obj.nodeName === "string"
+        );
     }
 
     static scrollInView(container, item) {
@@ -469,10 +701,10 @@ export default class DomHandler {
     }
 
     static getFocusableElements(element) {
-        let focusableElements = DomHandler.find(element, `button:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden]), 
-                [href][clientHeight][clientWidth]:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden]), 
-                input:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden]), select:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden]), 
-                textarea:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden]), [tabIndex]:not([tabIndex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden]), 
+        let focusableElements = DomHandler.find(element, `button:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden]),
+                [href][clientHeight][clientWidth]:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden]),
+                input:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden]), select:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden]),
+                textarea:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden]), [tabIndex]:not([tabIndex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden]),
                 [contenteditable]:not([tabIndex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden])`
         );
 

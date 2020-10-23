@@ -16,6 +16,7 @@ interface DataTableProps {
     paginatorLeft?: any;
     paginatorRight?: any;
     pageLinkSize?: number;
+    paginatorDropdownAppendTo?: any;
     rowsPerPageOptions?: number[];
     currentPageReportTemplate?: string;
     first?: number;
@@ -40,12 +41,12 @@ interface DataTableProps {
     frozenHeaderColumnGroup?: any;
     frozenFooterColumnGroup?: any;
     expandedRows?: any[];
-    responsive?: boolean;
     resizableColumns?: boolean;
     columnResizeMode?: string;
     reorderableColumns?: boolean;
     filters?: object;
     globalFilter?: any;
+    filterLocale?: string;
     scrollable?: boolean;
     scrollHeight?: string;
     virtualScroll?: boolean;
@@ -78,7 +79,7 @@ interface DataTableProps {
     onColumnResizeEnd?(e: {element: HTMLElement, delta: number}): void;
     onSort?(e: {sortField: string, sortOrder: number, multiSortMeta: any}): void;
     onPage?(e: {first: number, rows: number}): void;
-    onFilter?(filters: object): void;
+    onFilter?(e: {filters: any}): void;
     onVirtualScroll?(e: {first: number, rows: number}): void;
     onRowClick?(e: {originalEvent: Event, data: any, index: number}): void;
     onRowDoubleClick?(e: {originalEvent: Event, data: any, index: number}): void;
@@ -91,10 +92,14 @@ interface DataTableProps {
     onRowReorder?(e: {originalEvent: Event, value: any, dragIndex: number, dropIndex: number}): void;
     onValueChange?(value: any[]): void;
     rowEditorValidator?(rowData: any): boolean;
-    onRowEditInit?(e: {originalEvent: Event, data: any}): void;
-    onRowEditSave?(e: {originalEvent: Event, data: any}): void;
+    onRowEditInit?(e: {originalEvent: Event, data: any, index: number}): void;
+    onRowEditSave?(e: {originalEvent: Event, data: any, index: number}): void;
     onRowEditCancel?(e: {originalEvent: Event, data: any, index: number}): void;
     exportFunction?(e: {data: any, field: string}): any;
+    customSaveState?(state: any): void;
+    customRestoreState?(): any;
+    onStateSave?(state: any): void;
+    onStateRestore?(state: any): void;
 }
 
 export class DataTable extends React.Component<DataTableProps,any> {

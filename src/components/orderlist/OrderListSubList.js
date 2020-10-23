@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ObjectUtils from '../utils/ObjectUtils';
 import DomHandler from '../utils/DomHandler';
+import { Ripple } from '../ripple/Ripple';
 
 export class OrderListSubList extends Component {
 
@@ -110,24 +111,27 @@ export class OrderListSubList extends Component {
         let items = null;
 
         if (this.props.header) {
-            header = <div className="p-orderlist-caption">{this.props.header}</div>
+            header = <div className="p-orderlist-header">{this.props.header}</div>
         }
 
         if (this.props.value) {
             items = this.props.value.map((item, i) => {
                 let content = this.props.itemTemplate ? this.props.itemTemplate(item) : item;
-                let itemClassName = classNames('p-orderlist-item', this.props.className, {'p-highlight': this.isSelected(item)});
+                let itemClassName = classNames('p-orderlist-item', {'p-highlight': this.isSelected(item)}, this.props.className);
                 let key = JSON.stringify(item);
 
-                if(this.props.dragdrop) {
+                if (this.props.dragdrop) {
                     let items = [
                         this.renderDropPoint(i, key + '_droppoint'),
                         <li key={key} className={itemClassName} onClick={(e) => this.props.onItemClick({originalEvent: e, value: item, index: i})}
                             onKeyDown={(e) => this.props.onItemKeyDown({originalEvent: e, value: item, index: i})} role="option" aria-selected={this.isSelected(item)}
-                            draggable="true" onDragStart={(e) => this.onDragStart(e, i)} onDragEnd={this.onDragEnd} tabIndex={this.props.tabIndex}>{content}</li>
+                            draggable="true" onDragStart={(e) => this.onDragStart(e, i)} onDragEnd={this.onDragEnd} tabIndex={this.props.tabIndex}>
+                            {content}
+                            <Ripple />
+                        </li>
                     ];
 
-                    if(i === this.props.value.length - 1) {
+                    if (i === this.props.value.length - 1) {
                         items.push(this.renderDropPoint(item, i, key + '_droppoint_end'));
                     }
 
@@ -147,7 +151,7 @@ export class OrderListSubList extends Component {
         return (
             <div className="p-orderlist-list-container">
                 {header}
-                <ul ref={(el) => this.listElement = el} className="p-orderlist-list" style={this.props.listStyle} onDragOver={this.onListMouseMove} role="listbox" aria-multiselectable={true}>
+                <ul ref={(el) => this.listElement = el} className="p-orderlist-list" style={this.props.listStyle} onDragOver={this.onListMouseMove} role="listbox" aria-multiselectable>
                     {items}
                 </ul>
             </div>

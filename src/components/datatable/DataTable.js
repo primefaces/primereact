@@ -28,6 +28,7 @@ export class DataTable extends Component {
         paginatorTemplate: 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown',
         paginatorLeft:null,
         paginatorRight: null,
+        paginatorDropdownAppendTo: null,
         pageLinkSize: 5,
         rowsPerPageOptions: null,
         currentPageReportTemplate: '({currentPage} of {totalPages})',
@@ -57,12 +58,12 @@ export class DataTable extends Component {
         rowExpansionTemplate: null,
         expandedRows: null,
         onRowToggle: null,
-        responsive: false,
         resizableColumns: false,
         columnResizeMode: 'fit',
         reorderableColumns: false,
         filters: null,
         globalFilter: null,
+        filterLocale: undefined,
         scrollable: false,
         scrollHeight: null,
         virtualScroll: false,
@@ -106,7 +107,11 @@ export class DataTable extends Component {
         onRowEditInit: null,
         onRowEditSave: null,
         onRowEditCancel: null,
-        exportFunction: null
+        exportFunction: null,
+        customSaveState: null,
+        customRestoreState: null,
+        onStateSave: null,
+        onStateRestore: null,
     }
 
     static propTypes = {
@@ -124,6 +129,7 @@ export class DataTable extends Component {
         paginatorTemplate: PropTypes.string,
         paginatorLeft: PropTypes.any,
         paginatorRight: PropTypes.any,
+        paginatorDropdownAppendTo: PropTypes.any,
         pageLinkSize: PropTypes.number,
         rowsPerPageOptions: PropTypes.array,
         currentPageReportTemplate: PropTypes.string,
@@ -151,12 +157,12 @@ export class DataTable extends Component {
         rowExpansionTemplate: PropTypes.func,
         expandedRows: PropTypes.oneOfType([PropTypes.array,PropTypes.object]),
         onRowToggle: PropTypes.func,
-        responsive: PropTypes.bool,
         resizableColumns: PropTypes.bool,
         columnResizeMode: PropTypes.string,
         reorderableColumns: PropTypes.bool,
         filters: PropTypes.object,
         globalFilter: PropTypes.any,
+        filterLocale: PropTypes.string,
         scrollable: PropTypes.bool,
         scrollHeight: PropTypes.string,
         virtualScroll: PropTypes.bool,
@@ -200,7 +206,11 @@ export class DataTable extends Component {
         onRowEditInit: PropTypes.func,
         onRowEditSave: PropTypes.func,
         onRowEditCancel: PropTypes.func,
-        exportFunction: PropTypes.func
+        exportFunction: PropTypes.func,
+        customSaveState: PropTypes.func,
+        customRestoreState: PropTypes.func,
+        onStateSave: PropTypes.func,
+        onStateRestore: PropTypes.func
     };
 
     constructor(props) {
@@ -264,24 +274,30 @@ export class DataTable extends Component {
     }
 
     getStorage() {
-        switch(this.props.stateStorage) {
+        switch (this.props.stateStorage) {
             case 'local':
                 return window.localStorage;
 
             case 'session':
                 return window.sessionStorage;
 
+            case 'custom':
+                return null;
+
             default:
-                throw new Error(this.props.stateStorage + ' is not a valid value for the state storage, supported values are "local" and "session".');
+                throw new Error(this.props.stateStorage + ' is not a valid value for the state storage, supported values are "local", "session" and "custom".');
         }
     }
 
+    isCustomStateStorage() {
+        return this.props.stateStorage === 'custom';
+    }
+
     isStateful() {
-        return this.props.stateKey != null;
+        return this.props.stateKey != null || this.isCustomStateStorage();
     }
 
     saveState() {
-        const storage = this.getStorage();
         let state = {};
 
         if (this.props.paginator) {
@@ -320,26 +336,49 @@ export class DataTable extends Component {
             state.selection = this.props.selection;
         }
 
-        if (Object.keys(state).length) {
-            storage.setItem(this.props.stateKey, JSON.stringify(state));
+        if (this.isCustomStateStorage()) {
+            if (this.props.customSaveState) {
+                this.props.customSaveState(state);
+            }
+        }
+        else {
+            const storage = this.getStorage();
+            if (Object.keys(state).length) {
+                storage.setItem(this.props.stateKey, JSON.stringify(state));
+            }
+        }
+
+        if (this.props.onStateSave) {
+            this.props.onStateSave(state);
         }
     }
 
     clearState() {
         const storage = this.getStorage();
 
-        if (this.props.stateKey) {
+        if (storage && this.props.stateKey) {
             storage.removeItem(this.props.stateKey);
         }
     }
 
     restoreState(state) {
-        const storage = this.getStorage();
-        const stateString = storage.getItem(this.props.stateKey);
+        let restoredState = {};
 
-        if (stateString) {
-            let restoredState = JSON.parse(stateString);
+        if (this.isCustomStateStorage()) {
+            if (this.props.customRestoreState) {
+                restoredState = this.props.customRestoreState();
+            }
+        }
+        else {
+            const storage = this.getStorage();
+            const stateString = storage.getItem(this.props.stateKey);
 
+            if (stateString) {
+                restoredState = JSON.parse(stateString);
+            }
+        }
+
+        if (restoredState && Object.keys(restoredState).length) {
             if (this.props.paginator) {
                 if (this.props.onPage) {
                     this.props.onPage({
@@ -408,6 +447,10 @@ export class DataTable extends Component {
                     value: restoredState.selection
                 });
             }
+
+            if (this.props.onStateRestore) {
+                this.props.onStateRestore(restoredState);
+            }
         }
     }
 
@@ -468,7 +511,7 @@ export class DataTable extends Component {
         return (
             <Paginator first={this.getFirst()} rows={this.getRows()} pageLinkSize={this.props.pageLinkSize} className={className} onPageChange={this.onPageChange} template={this.props.paginatorTemplate}
                         totalRecords={totalRecords} rowsPerPageOptions={this.props.rowsPerPageOptions} currentPageReportTemplate={this.props.currentPageReportTemplate}
-                        leftContent={this.props.paginatorLeft} rightContent={this.props.paginatorRight} alwaysShow={this.props.alwaysShowPaginator} />
+                        leftContent={this.props.paginatorLeft} rightContent={this.props.paginatorRight} alwaysShow={this.props.alwaysShowPaginator} dropdownAppendTo={this.props.paginatorDropdownAppendTo} />
         );
     }
 
@@ -1142,7 +1185,7 @@ export class DataTable extends Component {
                     let filterMatchMode = filterMeta.matchMode||col.props.filterMatchMode;
                     let filterConstraint = filterMatchMode === 'custom' ? col.props.filterFunction : FilterUtils[filterMatchMode];
 
-                    if(!filterConstraint(dataFieldValue, filterValue)) {
+                    if(!filterConstraint(dataFieldValue, filterValue, this.props.filterLocale)) {
                         localMatch = false;
                     }
 
@@ -1152,7 +1195,7 @@ export class DataTable extends Component {
                 }
 
                 if (!col.props.excludeGlobalFilter && this.props.globalFilter && !globalMatch) {
-                    globalMatch = FilterUtils['contains'](ObjectUtils.resolveFieldData(value[i], columnField), this.props.globalFilter);
+                    globalMatch = FilterUtils['contains'](ObjectUtils.resolveFieldData(value[i], columnField), this.props.globalFilter, this.props.filterLocale);
                 }
             }
 
@@ -1258,7 +1301,7 @@ export class DataTable extends Component {
                         onSelectionChange={this.props.onSelectionChange} onRowClick={this.props.onRowClick} onRowDoubleClick={this.props.onRowDoubleClick} onRowSelect={this.props.onRowSelect} onRowUnselect={this.props.onRowUnselect}
                         contextMenuSelection={this.props.contextMenuSelection} onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu}
                         expandedRows={this.props.expandedRows} onRowToggle={this.props.onRowToggle} rowExpansionTemplate={this.props.rowExpansionTemplate}
-                        onRowExpand={this.props.onRowExpand} onRowCollapse={this.props.onRowCollapse} responsive={this.props.responsive} emptyMessage={this.props.emptyMessage}
+                        onRowExpand={this.props.onRowExpand} onRowCollapse={this.props.onRowCollapse} emptyMessage={this.props.emptyMessage}
                         virtualScroll={this.props.virtualScroll} virtualRowHeight={this.props.virtualRowHeight} loading={this.props.loading}
                         groupField={this.props.groupField} rowGroupMode={this.props.rowGroupMode} rowGroupHeaderTemplate={this.props.rowGroupHeaderTemplate} rowGroupFooterTemplate={this.props.rowGroupFooterTemplate}
                         sortField={this.getSortField()} rowClassName={this.props.rowClassName} onRowReorder={this.props.onRowReorder}
@@ -1376,11 +1419,8 @@ export class DataTable extends Component {
         let iconClassName = classNames('p-datatable-loading-icon pi-spin', this.props.loadingIcon);
 
         return (
-            <div className="p-datatable-loading">
-                <div className="p-datatable-loading-overlay p-component-overlay"></div>
-                <div className="p-datatable-loading-content">
-                    <i className={iconClassName}></i>
-                </div>
+            <div className="p-datatable-loading-overlay p-component-overlay">
+                <i className={iconClassName}></i>
             </div>
         );
     }
@@ -1401,7 +1441,7 @@ export class DataTable extends Component {
         let value = this.processData();
         let columns = this.getColumns();
         let totalRecords = this.getTotalRecords(value);
-        let className = classNames('p-datatable p-component', {'p-datatable-responsive': this.props.responsive,
+        let className = classNames('p-datatable p-component', {
                         'p-datatable-resizable': this.props.resizableColumns, 'p-datatable-resizable-fit': this.props.resizableColumns && this.props.columnResizeMode === 'fit',
                         'p-datatable-scrollable': this.props.scrollable, 'p-datatable-virtual-scrollable': this.props.virtualScroll,
                         'p-datatable-auto-layout': this.props.autoLayout, 'p-datatable-hoverable-rows': this.props.rowHover || this.props.selectionMode}, this.props.className);
@@ -1452,7 +1492,7 @@ export class DataTable extends Component {
         }
 
         return (
-            <div id={this.props.id} className={className} style={this.props.style} ref={(el) => {this.container = el;}}>
+            <div id={this.props.id} className={className} style={this.props.style} ref={(el) => {this.container = el;}} data-scrollselectors=".p-datatable-scrollable-body, .p-datatable-unfrozen-view .p-datatable-scrollable-body">
                 {loader}
                 {headerFacet}
                 {paginatorTop}

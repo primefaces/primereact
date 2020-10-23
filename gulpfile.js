@@ -21,7 +21,7 @@ gulp.task('build-css', function() {
 
 gulp.task('build-themes', function() {
     return gulp.src([
-        'public/resources/themes/**/*'
+        'public/themes/**/*','!public/themes/soho-*/**/*'
     ])
     //.pipe(uglifycss({"uglyComments": true}))
     .pipe(gulp.dest('resources/themes'));
@@ -39,6 +39,6 @@ gulp.task('build-exports', function() {
 });
 
 //Building project with run sequence
-gulp.task('build-resources', ['build-css','images', 'build-themes']);
+gulp.task('build-resources', gulp.series('build-css','images', 'build-themes'));
 
         

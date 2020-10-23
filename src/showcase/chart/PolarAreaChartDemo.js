@@ -1,13 +1,16 @@
-import React, {Component} from 'react';
-import {TabView, TabPanel} from '../../components/tabview/TabView';
-import { CodeHighlight } from '../codehighlight/CodeHighlight';
+import React, { Component } from 'react';
+import { TabView, TabPanel } from '../../components/tabview/TabView';
+import { Chart } from '../../components/chart/Chart';
+import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 import AppContentContext from '../../AppContentContext';
-import {Chart} from '../../components/chart/Chart';
 
 export class PolarAreaChartDemo extends Component {
 
-    render() {
-        const data = {
+    constructor(props) {
+        super(props);
+
+        this.chartData = {
             datasets: [{
                 data: [
                     11,
@@ -17,11 +20,11 @@ export class PolarAreaChartDemo extends Component {
                     14
                 ],
                 backgroundColor: [
-                    "#FF6384",
-                    "#4BC0C0",
-                    "#FFCE56",
-                    "#E7E9ED",
-                    "#36A2EB"
+                    "#42A5F5",
+                    "#66BB6A",
+                    "#FFA726",
+                    "#26C6DA",
+                    "#7E57C2"
                 ],
                 label: 'My dataset'
             }],
@@ -34,21 +37,55 @@ export class PolarAreaChartDemo extends Component {
             ]
         };
 
+        this.lightOptions = {
+            legend: {
+                labels: {
+                    fontColor: '#495057'
+                }
+            },
+            scale: {
+                gridLines: {
+                    color: '#ebedef'
+                }
+            }
+        };
+
+        this.darkOptions = {
+            legend: {
+                labels: {
+                    fontColor: '#ebedef'
+                }
+            },
+            scale: {
+                gridLines: {
+                    color: 'rgba(255,255,255,0.2)'
+                }
+            }
+        };
+    }
+
+    render() {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="chart">
                         <h1>PolarAreaChart</h1>
                         <p>Polar area charts are similar to pie charts, but each segment has the same angle - the radius of the segment differs depending on the value.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("chart")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <Chart type="polarArea" data={data} />
+                    <div className="card">
+                        <AppContentContext.Consumer>
+                            {
+                                context => {
+                                    let options = context.darkTheme ? this.darkOptions : this.lightOptions;
+
+                                    return <Chart type="polarArea" data={this.chartData} options={options} />
+                                }
+                            }
+                        </AppContentContext.Consumer>
+                    </div>
                 </div>
 
                 <PolarAreaChartDemoDoc></PolarAreaChartDemoDoc>
@@ -59,24 +96,22 @@ export class PolarAreaChartDemo extends Component {
 
 export class PolarAreaChartDemoDoc extends Component {
 
-    shouldComponentUpdate() {
-        return false;
-    }
+    constructor(props) {
+        super(props);
 
-    render() {
-        return (
-            <div className="content-section documentation">
-                <TabView>
-                    <TabPanel header="Source">
-                        <CodeHighlight className="language-javascript">
-                            {`
-import React, {Component} from 'react';
-import {Chart} from 'primereact/chart';
+        this.sources = {
+            'class': {
+                tabName: 'Class Source',
+                content: `
+import React, { Component } from 'react';
+import { Chart } from 'primereact/chart';
 
 export class PolarAreaChartDemo extends Component {
 
-    render() {
-        const data = {
+    constructor(props) {
+        super(props);
+
+        this.chartData = {
             datasets: [{
                 data: [
                     11,
@@ -86,11 +121,11 @@ export class PolarAreaChartDemo extends Component {
                     14
                 ],
                 backgroundColor: [
-                    "#FF6384",
-                    "#4BC0C0",
-                    "#FFCE56",
-                    "#E7E9ED",
-                    "#36A2EB"
+                    "#42A5F5",
+                    "#66BB6A",
+                    "#FFA726",
+                    "#26C6DA",
+                    "#7E57C2"
                 ],
                 label: 'My dataset'
             }],
@@ -103,25 +138,153 @@ export class PolarAreaChartDemo extends Component {
             ]
         };
 
-        return (
-            <div>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>PolarAreaChart</h1>
-                        <p>Polar area charts are similar to pie charts, but each segment has the same angle - the radius of the segment differs depending on the value.</p>
-                    </div>
-                </div>
+        this.lightOptions = {
+            legend: {
+                labels: {
+                    fontColor: '#495057'
+                }
+            },
+            scale: {
+                gridLines: {
+                    color: '#ebedef'
+                }
+            }
+        };
+    }
 
-                <div className="content-section implementation">
-                    <Chart type="polarArea" data={data} />
-                </div>
+    render() {
+        return (
+            <div className="card">
+                <Chart type="polarArea" data={this.chartData} options={options} />
             </div>
         )
     }
 }
+                `
+            },
+            'hooks': {
+                tabName: 'Hooks Source',
+                content: `
+import React from 'react';
+import { Chart } from 'primereact/chart';
 
-`}
-                        </CodeHighlight>
+const PolarAreaChartDemo = () => {
+    const chartData = {
+        datasets: [{
+            data: [
+                11,
+                16,
+                7,
+                3,
+                14
+            ],
+            backgroundColor: [
+                "#42A5F5",
+                "#66BB6A",
+                "#FFA726",
+                "#26C6DA",
+                "#7E57C2"
+            ],
+            label: 'My dataset'
+        }],
+        labels: [
+            "Red",
+            "Green",
+            "Yellow",
+            "Grey",
+            "Blue"
+        ]
+    };
+
+    const lightOptions = {
+        legend: {
+            labels: {
+                fontColor: '#495057'
+            }
+        },
+        scale: {
+            gridLines: {
+                color: '#ebedef'
+            }
+        }
+    };
+
+    return (
+        <div className="card">
+            <Chart type="polarArea" data={chartData} options={options} />
+        </div>
+    );
+}
+                `
+            },
+            'ts': {
+                tabName: 'TS Source',
+                content: `
+import React from 'react';
+import { Chart } from 'primereact/chart';
+
+const PolarAreaChartDemo = () => {
+    const chartData = {
+        datasets: [{
+            data: [
+                11,
+                16,
+                7,
+                3,
+                14
+            ],
+            backgroundColor: [
+                "#42A5F5",
+                "#66BB6A",
+                "#FFA726",
+                "#26C6DA",
+                "#7E57C2"
+            ],
+            label: 'My dataset'
+        }],
+        labels: [
+            "Red",
+            "Green",
+            "Yellow",
+            "Grey",
+            "Blue"
+        ]
+    };
+
+    const lightOptions = {
+        legend: {
+            labels: {
+                fontColor: '#495057'
+            }
+        },
+        scale: {
+            gridLines: {
+                color: '#ebedef'
+            }
+        }
+    };
+
+    return (
+        <div className="card">
+            <Chart type="polarArea" data={chartData} options={options} />
+        </div>
+    );
+}
+                `
+            }
+        }
+    }
+
+    shouldComponentUpdate() {
+        return false;
+    }
+
+    render() {
+        return (
+            <div className="content-section documentation">
+                <TabView>
+                    <TabPanel header="Source">
+                        <LiveEditor name="PolarAreaChartDemo" sources={this.sources} dependencies={{ 'chart.js': '2.7.3' }}/>
                     </TabPanel>
                 </TabView>
             </div>

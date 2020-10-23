@@ -1,11 +1,9 @@
 .p-slidemenu {
     width: 12.5em;
-    padding: .25em;
 }
 
-.p-slidemenu.p-slidemenu-dynamic {
+.p-slidemenu.p-slidemenu-overlay {
     position: absolute;
-    display: none;
 }
 
 .p-slidemenu .p-menu-separator {
@@ -28,18 +26,17 @@
     position: absolute;
     top: 0;
     width: 12.5em;
-    padding: .25em;
 }
 
 .p-slidemenu .p-menuitem-link {
-    padding: .25em;
-    display: block;
-    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
     text-decoration: none;
+    overflow: hidden;
 }
 
 .p-slidemenu .p-menuitem-icon {
-    margin-right: .25em;
     vertical-align: middle;
 }
 
@@ -49,14 +46,10 @@
 
 .p-slidemenu .p-menuitem {
     position: relative;
-    margin: .125em 0;
 }
 
 .p-slidemenu .p-menuitem-link .p-submenu-icon {
-    position: absolute;
-    margin-top: -.5em;
-    right: 0;
-    top: 50%;
+    margin-left: auto;
 }
 
 .p-slidemenu .p-slidemenu-wrapper {

@@ -5,6 +5,8 @@ import {Messages} from '../messages/Messages';
 import {ProgressBar} from '../progressbar/ProgressBar';
 import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
+import { Ripple } from '../ripple/Ripple';
+import ObjectUtils from '../utils/ObjectUtils';
 
 export class FileUpload extends Component {
 
@@ -28,6 +30,7 @@ export class FileUpload extends Component {
         uploadLabel: 'Upload',
         cancelLabel: 'Cancel',
         customUpload: false,
+        emptyTemplate: null,
         onBeforeUpload: null,
         onBeforeSend: null,
         onUpload: null,
@@ -60,6 +63,7 @@ export class FileUpload extends Component {
         uploadLabel: PropTypes.string,
         cancelLabel: PropTypes.string,
         customUpload: PropTypes.bool,
+        emptyTemplate: PropTypes.any,
         onBeforeUpload: PropTypes.func,
         onBeforeSend: PropTypes.func,
         onUpload: PropTypes.func,
@@ -75,10 +79,12 @@ export class FileUpload extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            files:[],
-            msgs: []
+            files: [],
+            msgs: [],
+            focused: false
         };
 
+        this.choose = this.choose.bind(this);
         this.upload = this.upload.bind(this);
         this.clear = this.clear.bind(this);
         this.onFileSelect = this.onFileSelect.bind(this);
@@ -86,6 +92,7 @@ export class FileUpload extends Component {
         this.onDragOver = this.onDragOver.bind(this);
         this.onDragLeave = this.onDragLeave.bind(this);
         this.onDrop = this.onDrop.bind(this);
+        this.onKeyDown = this.onKeyDown.bind(this);
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
         this.onSimpleUploaderClick = this.onSimpleUploaderClick.bind(this);
@@ -99,6 +106,18 @@ export class FileUpload extends Component {
 
     isImage(file) {
         return /^image\//.test(file.type);
+    }
+
+    chooseDisabled() {
+        return this.props.disabled || (this.props.fileLimit && this.props.fileLimit <= this.state.files.length + this.uploadedFileCount);
+    }
+
+    uploadDisabled() {
+        return this.props.disabled || !this.hasFiles();
+    }
+
+    cancelDisabled() {
+        return this.props.disabled || !this.hasFiles();
     }
 
     remove(event, index) {
@@ -119,9 +138,6 @@ export class FileUpload extends Component {
 
     clearInputElement() {
         this.fileInput.value = '';
-        if(this.props.mode === 'basic') {
-            this.fileInput.style.display = 'inline';
-        }
     }
 
     clearIEInput() {
@@ -182,7 +198,7 @@ export class FileUpload extends Component {
             this.clearInputElement();
         }
 
-        if(this.props.mode === 'basic') {
+        if(this.props.mode === 'basic' && this.files.length > 0) {
             this.fileInput.style.display = 'none';
         }
     }
@@ -223,6 +239,10 @@ export class FileUpload extends Component {
 
     upload() {
         if (this.props.customUpload) {
+            if (this.props.fileLimit) {
+                this.uploadedFileCount += this.state.files.length;
+            }
+
             if (this.props.uploadHandler) {
                 this.props.uploadHandler({
                     files: this.state.files
@@ -260,16 +280,20 @@ export class FileUpload extends Component {
 
             xhr.onreadystatechange = () => {
                 if (xhr.readyState === 4) {
-                this.setState({progress: 0});
+                    this.setState({ progress: 0 });
 
                     if (xhr.status >= 200 && xhr.status < 300) {
+                        if (this.props.fileLimit) {
+                            this.uploadedFileCount += this.state.files.length;
+                        }
+
                         if (this.props.onUpload) {
-                            this.props.onUpload({xhr: xhr, files: this.files});
+                            this.props.onUpload({xhr: xhr, files: this.state.files});
                         }
                     }
                     else {
                         if (this.props.onError) {
-                            this.props.onError({xhr: xhr, files: this.files});
+                            this.props.onError({xhr: xhr, files: this.state.files});
                         }
                     }
 
@@ -293,19 +317,29 @@ export class FileUpload extends Component {
     }
 
     clear() {
-        this.setState({files:[]});
+        this.setState({ files:[] });
         if (this.props.onClear) {
             this.props.onClear();
         }
         this.clearInputElement();
     }
 
-    onFocus(event) {
-        DomHandler.addClass(event.currentTarget.parentElement, 'p-focus');
+    choose() {
+        this.fileInput.click();
     }
 
-    onBlur(event) {
-        DomHandler.removeClass(event.currentTarget.parentElement, 'p-focus');
+    onFocus() {
+        this.setState({ focused: true });
+    }
+
+    onBlur() {
+        this.setState({ focused: false });
+    }
+
+    onKeyDown(event) {
+        if (event.which === 13) { // enter
+            this.choose();
+        }
     }
 
     onDragEnter(event) {
@@ -348,17 +382,24 @@ export class FileUpload extends Component {
         if (this.hasFiles()) {
             this.upload();
         }
+        else {
+            this.fileInput.click();
+        }
     }
 
     renderChooseButton() {
-        let className = classNames('p-button p-fileupload-choose p-component p-button-text-icon-left');
+        let className = classNames('p-button p-fileupload-choose p-component', {
+            'p-disabled': this.props.disabled,
+            'p-focus': this.state.focused
+        });
 
         return (
-            <span icon="pi pi-plus" className={className}>
-                <input ref={(el) => this.fileInput = el} type="file" onChange={this.onFileSelect} onFocus={this.onFocus} onBlur={this.onBlur}
-                    multiple={this.props.multiple} accept={this.props.accept} disabled={this.props.disabled} />
+            <span className={className} onClick={this.choose} onKeyDown={this.onKeyDown} onFocus={this.onFocus} onBlur={this.onBlur} tabIndex={0}>
+                <input ref={(el) => this.fileInput = el} type="file" onChange={this.onFileSelect}
+                    multiple={this.props.multiple} accept={this.props.accept} disabled={this.chooseDisabled()} />
                 <span className="p-button-icon p-button-icon-left p-clickable pi pi-fw pi-plus"></span>
-                <span className="p-button-text p-clickable">{this.props.chooseLabel}</span>
+                <span className="p-button-label p-clickable">{this.props.chooseLabel}</span>
+                <Ripple />
             </span>
         );
     }
@@ -385,14 +426,23 @@ export class FileUpload extends Component {
         );
     }
 
+    renderEmptyContent() {
+        if (this.props.emptyTemplate && !this.hasFiles()) {
+            return ObjectUtils.getJSXElement(this.props.emptyTemplate, this.props);
+        }
+
+        return null;
+    }
+
     renderAdvanced() {
-        let className = classNames('p-fileupload p-component', this.props.className);
+        const className = classNames('p-fileupload p-fileupload-advanced p-component', this.props.className);
         let uploadButton, cancelButton, filesList, progressBar;
-        let chooseButton = this.renderChooseButton();
+        const chooseButton = this.renderChooseButton();
+        const emptyContent = this.renderEmptyContent();
 
         if (!this.props.auto) {
-            uploadButton = <Button type="button" label={this.props.uploadLabel} icon="pi pi-upload" onClick={this.upload} disabled={this.props.disabled || !this.hasFiles()} />;
-            cancelButton = <Button type="button" label={this.props.cancelLabel} icon="pi pi-times" onClick={this.clear} disabled={this.props.disabled || !this.hasFiles()} />;
+            uploadButton = <Button type="button" label={this.props.uploadLabel} icon="pi pi-upload" onClick={this.upload} disabled={this.uploadDisabled()} />;
+            cancelButton = <Button type="button" label={this.props.cancelLabel} icon="pi pi-times" onClick={this.clear} disabled={this.cancelDisabled()} />;
         }
 
         if (this.hasFiles()) {
@@ -412,22 +462,28 @@ export class FileUpload extends Component {
                     {progressBar}
                     <Messages ref={(el) => this.messagesUI = el } />
                     {filesList}
+                    {emptyContent}
                 </div>
             </div>
         );
     }
 
     renderBasic() {
-        let buttonClassName = classNames('p-button p-fileupload-choose p-component p-button-text-icon-left', {'p-fileupload-choose-selected': this.hasFiles()});
-        let iconClassName = classNames('p-button-icon-left pi', {'pi-plus': !this.hasFiles() || this.props.auto, 'pi-upload': this.hasFiles() && !this.props.auto});
+        const className = classNames('p-fileupload p-fileupload-basic p-component', this.props.className);
+        const buttonClassName = classNames('p-button p-component p-fileupload-choose', { 'p-fileupload-choose-selected': this.hasFiles(), 'p-disabled': this.props.disabled, 'p-focus': this.state.focused });
+        const iconClassName = classNames('p-button-icon p-button-icon-left pi', { 'pi-plus': !this.hasFiles() || this.props.auto, 'pi-upload': this.hasFiles() && !this.props.auto });
+        const label = this.props.auto ? this.props.chooseLabel : this.hasFiles() ? this.state.files[0].name : this.props.chooseLabel;
 
         return (
-            <span className={buttonClassName} onMouseUp={this.onSimpleUploaderClick}>
-                <span className={iconClassName}></span>
-                <span className="p-button-text p-clickable">{this.props.auto ? this.props.chooseLabel : this.hasFiles() ? this.state.files[0].name : this.props.chooseLabel}</span>
-                <input ref={(el) => this.fileInput = el} type="file" multiple={this.props.multiple} accept={this.props.accept} disabled={this.props.disabled}
-                    onChange={this.onFileSelect} onFocus={this.onFocus} onBlur={this.onBlur} />
-             </span>
+            <div className={className}>
+                <Messages ref={(el) => this.messagesUI = el } />
+                <span className={buttonClassName} onMouseUp={this.onSimpleUploaderClick} onKeyDown={this.onKeyDown} onFocus={this.onFocus} onBlur={this.onBlur} tabIndex={0}>
+                    <span className={iconClassName}></span>
+                    <span className="p-button-label p-clickable">{label}</span>
+                    { !this.hasFiles() && <input ref={(el) => this.fileInput = el} type="file" accept={this.props.accept} disabled={this.props.disabled} onChange={this.onFileSelect} /> }
+                    <Ripple />
+                </span>
+            </div>
         );
     }
 

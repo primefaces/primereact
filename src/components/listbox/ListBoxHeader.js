@@ -36,7 +36,7 @@ export class ListBoxHeader extends Component {
         return (
                 <div className="p-listbox-header">
                     <div className="p-listbox-filter-container">
-                        <InputText type="text" value={this.props.filter} onChange={this.onFilter} disabled={this.props.disabled} placeholder={this.props.filterPlaceholder} />
+                        <InputText type="text" value={this.props.filter} onChange={this.onFilter} className="p-listbox-filter" disabled={this.props.disabled} placeholder={this.props.filterPlaceholder} />
                         <span className="p-listbox-filter-icon pi pi-search"></span>
                     </div>
                 </div>

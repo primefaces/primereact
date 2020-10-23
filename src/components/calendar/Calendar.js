@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import {InputText} from '../inputtext/InputText';
-import {Button} from '../button/Button';
-import {CalendarPanel} from './CalendarPanel';
+import { InputText } from '../inputtext/InputText';
+import { Button } from '../button/Button';
+import { CalendarPanel } from './CalendarPanel';
 import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
-import Tooltip from "../tooltip/Tooltip";
+import { tip } from '../tooltip/Tooltip';
+import { CSSTransition } from 'react-transition-group';
+import { Ripple } from '../ripple/Ripple';
+import UniqueComponentId from '../utils/UniqueComponentId';
+import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 
 export class Calendar extends Component {
 
@@ -71,7 +75,7 @@ export class Calendar extends Component {
         selectOtherMonths: false,
         showButtonBar: false,
         todayButtonClassName: 'p-button-secondary',
-        clearButtonStyleClass: 'p-button-secondary',
+        clearButtonClassName: 'p-button-secondary',
         autoZIndex: true,
         baseZIndex: 0,
         appendTo: null,
@@ -142,7 +146,7 @@ export class Calendar extends Component {
         selectOtherMonths: PropTypes.bool,
         showButtonBar: PropTypes.bool,
         todayButtonClassName: PropTypes.string,
-        clearButtonStyleClass: PropTypes.string,
+        clearButtonClassName: PropTypes.string,
         autoZIndex: PropTypes.bool,
         baseZIndex: PropTypes.number,
         appendTo: PropTypes.any,
@@ -165,6 +169,11 @@ export class Calendar extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            focused: false,
+            overlayVisible: false
+        };
+
         if (!this.props.onViewDateChange) {
             let propValue = this.props.value;
             if (Array.isArray(propValue)) {
@@ -174,6 +183,7 @@ export class Calendar extends Component {
             let viewDate = this.props.viewDate && this.isValidDate(this.props.viewDate) ?
                             this.props.viewDate : (propValue && this.isValidDate(propValue) ? propValue : new Date());
             this.state = {
+                ...this.state,
                 viewDate
             }
         }
@@ -201,6 +211,12 @@ export class Calendar extends Component {
         this.onTimePickerElementMouseDown = this.onTimePickerElementMouseDown.bind(this);
         this.onTimePickerElementMouseUp = this.onTimePickerElementMouseUp.bind(this);
         this.onTimePickerElementMouseLeave = this.onTimePickerElementMouseLeave.bind(this);
+        this.onOverlayEnter = this.onOverlayEnter.bind(this);
+        this.onOverlayEntered = this.onOverlayEntered.bind(this);
+        this.onOverlayExit = this.onOverlayExit.bind(this);
+        this.reFocusInputField = this.reFocusInputField.bind(this);
+
+        this.id = this.props.id || UniqueComponentId();
     }
 
     componentDidMount() {
@@ -252,7 +268,7 @@ export class Calendar extends Component {
             this.updateFocus();
         }
 
-        if (prevProps.value !== this.props.value && (!this.viewStateChanged || !this.panel.offsetParent)) {
+        if (prevProps.value !== this.props.value && (!this.viewStateChanged || this.state.overlayVisible)) {
             this.updateInputfield(this.props.value);
         }
     }
@@ -273,10 +289,14 @@ export class Calendar extends Component {
 
         this.unbindDocumentClickListener();
         this.unbindDocumentResizeListener();
+        if (this.scrollHandler) {
+            this.scrollHandler.destroy();
+            this.scrollHandler = null;
+        }
     }
 
     renderTooltip() {
-        this.tooltip = new Tooltip({
+        this.tooltip = tip({
             target: this.inputElement,
             content: this.props.tooltip,
             options: this.props.tooltipOptions
@@ -284,27 +304,38 @@ export class Calendar extends Component {
     }
 
     onInputFocus(event) {
-        if (this.props.showOnFocus && !this.panel.offsetParent) {
-            this.showOverlay();
+        if (this.ignoreFocusFunctionality) {
+            this.setState({ focused: true }, () => {
+                this.ignoreFocusFunctionality = false;
+            });
         }
+        else {
+            event.persist();
 
-        if (this.props.onFocus) {
-            this.props.onFocus(event);
+            if (this.props.showOnFocus && !this.state.overlayVisible) {
+                this.showOverlay();
+            }
+
+            this.setState({ focused: true }, () => {
+                if (this.props.onFocus) {
+                    this.props.onFocus(event);
+                }
+            });
         }
-
-        DomHandler.addClass(this.container, 'p-inputwrapper-focus');
     }
 
     onInputBlur(event) {
-        if (this.props.onBlur) {
-            this.props.onBlur(event);
-        }
+        event.persist();
 
-        if (!this.props.keepInvalid) {
-            this.updateInputfield(this.props.value);
-        }
+        this.setState({ focused: false }, () => {
+            if (this.props.onBlur) {
+                this.props.onBlur(event);
+            }
 
-        DomHandler.removeClass(this.container, 'p-inputwrapper-focus');
+            if (!this.props.keepInvalid) {
+                this.updateInputfield(this.props.value);
+            }
+        });
     }
 
     onInputKeyDown(event) {
@@ -319,12 +350,12 @@ export class Calendar extends Component {
 
             //tab
             case 9: {
-                if(this.props.touchUI) {
-                    this.disableModality();
+                if (this.state.overlayVisible) {
+                    this.trapFocus(event);
                 }
 
-                if (event.shiftKey) {
-                    this.hideOverlay();
+                if (this.props.touchUI) {
+                    this.disableModality();
                 }
                 break;
             }
@@ -352,13 +383,20 @@ export class Calendar extends Component {
             }
         }
         catch(err) {
-            //this.updateModel(event, rawValue);
             //invalid date
-            this.updateModel(event, null);
+            let value = this.props.keepInvalid ? rawValue : null;
+            this.updateModel(event, value);
         }
 
         if (this.props.onInput) {
             this.props.onInput(event);
+        }
+    }
+
+    reFocusInputField() {
+        if (!this.props.inline && this.inputElement) {
+            this.ignoreFocusFunctionality = true;
+            this.inputElement.focus();
         }
     }
 
@@ -376,12 +414,12 @@ export class Calendar extends Component {
         return isValid;
     }
 
-    onButtonClick(event) {
-        if (!this.panel.offsetParent) {
-            this.showOverlay();
+    onButtonClick() {
+        if (this.state.overlayVisible) {
+            this.hideOverlay();
         }
         else {
-            this.hideOverlay();
+            this.showOverlay();
         }
     }
 
@@ -404,7 +442,7 @@ export class Calendar extends Component {
 
             //escape
             case 27:
-                this.hideOverlay();
+                this.hideOverlay(this.reFocusInputField);
                 event.preventDefault();
                 break;
 
@@ -505,6 +543,7 @@ export class Calendar extends Component {
         }
 
         let newViewDate = new Date(this.getViewDate().getTime());
+        newViewDate.setDate(1);
 
         if (this.props.view === 'date') {
             if(newViewDate.getMonth() === 0) {
@@ -542,6 +581,7 @@ export class Calendar extends Component {
         }
 
         let newViewDate = new Date(this.getViewDate().getTime());
+        newViewDate.setDate(1);
 
         if (this.props.view === 'date') {
             if(newViewDate.getMonth() === 11) {
@@ -604,6 +644,7 @@ export class Calendar extends Component {
     onClearButtonClick(event) {
         this.updateModel(event, null);
         this.updateInputfield(null);
+        this.hideOverlay(this.reFocusInputField);
 
         if (this.props.onClearButtonClick) {
             this.props.onClearButtonClick(event);
@@ -891,7 +932,7 @@ export class Calendar extends Component {
         const currentTime = (this.props.value && this.props.value instanceof Date) ? this.props.value : this.getViewDate();
         const currentMillisecond = currentTime.getMilliseconds();
         let newMillisecond = currentMillisecond - this.props.stepMillisec;
-        newMillisecond = (newMillisecond < 0) ? (newMillisecond + 200) : newMillisecond;
+        newMillisecond = (newMillisecond < 0) ? (newMillisecond + 999) : newMillisecond;
 
         if (this.validateMillisecond(newMillisecond, currentTime)) {
             this.updateTime(event, currentTime.getHours(), currentTime.getMinutes(), currentTime.getSeconds(), newMillisecond);
@@ -1164,7 +1205,7 @@ export class Calendar extends Component {
 
             //escape
             case 27: {
-                this.hideOverlay()
+                this.hideOverlay(this.reFocusInputField)
                 event.preventDefault();
                 break;
             }
@@ -1261,7 +1302,7 @@ export class Calendar extends Component {
 
             //escape
             case 27: {
-                this.hideOverlay();
+                this.hideOverlay(this.reFocusInputField);
                 event.preventDefault();
                 break;
             }
@@ -1402,7 +1443,7 @@ export class Calendar extends Component {
                 preventDefault : () =>{},
                 target: {
                     name: this.props.name,
-                    id: this.props.id,
+                    id: this.id,
                     value: value
                 }
             });
@@ -1412,39 +1453,41 @@ export class Calendar extends Component {
     }
 
     showOverlay() {
+        this.setState({ overlayVisible: true });
+    }
+
+    hideOverlay(callback) {
+        this.setState({ overlayVisible: false }, () => {
+            this.ignoreFocusFunctionality = false;
+            if (callback) {
+                callback();
+            }
+        });
+    }
+
+    onOverlayEnter() {
         if (this.props.autoZIndex) {
             this.panel.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
         }
-        this.panel.style.display = 'block';
-
-        setTimeout(() => {
-            DomHandler.addClass(this.panel, 'p-input-overlay-visible');
-            DomHandler.removeClass(this.panel, 'p-input-overlay-hidden');
-        }, 1);
-
-        this.alignPanel();
-        this.bindDocumentClickListener();
-        this.bindDocumentResizeListener();
+        this.alignOverlay();
     }
 
-    hideOverlay() {
-        if (this.panel) {
-            DomHandler.addClass(this.panel, 'p-input-overlay-hidden');
-            DomHandler.removeClass(this.panel, 'p-input-overlay-visible');
-            this.unbindDocumentClickListener();
-            this.unbindDocumentResizeListener();
+    onOverlayEntered() {
+        this.bindDocumentClickListener();
+        this.bindDocumentResizeListener();
+        this.bindScrollListener();
+    }
 
-            this.hideTimeout = setTimeout(() => {
-                this.panel.style.display = 'none';
-                DomHandler.removeClass(this.panel, 'p-input-overlay-hidden');
-            }, 150);
-        }
+    onOverlayExit() {
+        this.unbindDocumentClickListener();
+        this.unbindDocumentResizeListener();
+        this.unbindScrollListener();
     }
 
     bindDocumentClickListener() {
         if (!this.documentClickListener) {
             this.documentClickListener = (event) => {
-                if (this.isOutsideClicked(event)) {
+                if (this.state.overlayVisible && this.isOutsideClicked(event)) {
                     this.hideOverlay();
                 }
             };
@@ -1474,6 +1517,24 @@ export class Calendar extends Component {
         }
     }
 
+    bindScrollListener() {
+        if (!this.scrollHandler) {
+            this.scrollHandler = new ConnectedOverlayScrollHandler(this.container, () => {
+                if (this.state.overlayVisible) {
+                    this.hideOverlay();
+                }
+            });
+        }
+
+        this.scrollHandler.bindScrollListener();
+    }
+
+    unbindScrollListener() {
+        if (this.scrollHandler) {
+            this.scrollHandler.unbindScrollListener();
+        }
+    }
+
     isOutsideClicked(event) {
         return this.container && !(this.container.isSameNode(event.target) || this.isNavIconClicked(event) ||
             this.container.contains(event.target) || (this.panel && this.panel.contains(event.target)));
@@ -1485,12 +1546,12 @@ export class Calendar extends Component {
     }
 
     onWindowResize() {
-        if (this.panel.offsetParent && !DomHandler.isAndroid()) {
+        if (this.state.overlayVisible && !DomHandler.isAndroid()) {
             this.hideOverlay();
         }
     }
 
-    alignPanel() {
+    alignOverlay() {
         if (this.props.touchUI) {
             this.enableModality();
         }
@@ -2074,7 +2135,7 @@ export class Calendar extends Component {
         }
 
         if (this.props.showMillisec) {
-            output += ':';
+            output += '.';
             output += milliseconds < 100 ? (milliseconds < 10 ? '00' : '0') + milliseconds : milliseconds;
         }
 
@@ -2147,6 +2208,7 @@ export class Calendar extends Component {
     }
 
     parseTime(value, ampm) {
+        value = this.props.showMillisec ? value.replace('.', ':') : value;
         let tokens = value.split(':');
         let validTokenLength = this.props.showSeconds ? 3 : 2;
         validTokenLength = this.props.showMillisec ? validTokenLength + 1 : validTokenLength;
@@ -2341,18 +2403,22 @@ export class Calendar extends Component {
         return date;
     }
 
-    renderBackwardNavigator() {
+    renderBackwardNavigator(isVisible) {
+        let navigatorProps = isVisible ? { 'onClick': this.onPrevButtonClick, 'onKeyDown': e => this.onContainerButtonKeydown(e) } : { 'style': {visibility: 'hidden'} };
         return (
-            <button type="button" className="p-datepicker-prev p-link" onClick={this.onPrevButtonClick} onKeyDown={e => this.onContainerButtonKeydown(e)}>
+            <button type="button" className="p-datepicker-prev p-link" {...navigatorProps}>
                 <span className="p-datepicker-prev-icon pi pi-chevron-left"></span>
+                <Ripple />
             </button>
         );
     }
 
-    renderForwardNavigator() {
+    renderForwardNavigator(isVisible) {
+        let navigatorProps = isVisible ? { 'onClick': this.onNextButtonClick, 'onKeyDown': e => this.onContainerButtonKeydown(e) } : { 'style': {visibility: 'hidden'} };
         return (
-            <button type="button" className="p-datepicker-next p-link" onClick={this.onNextButtonClick} onKeyDown={e => this.onContainerButtonKeydown(e)}>
+            <button type="button" className="p-datepicker-next p-link" {...navigatorProps}>
                 <span className="p-datepicker-next-icon pi pi-chevron-right"></span>
+                <Ripple />
             </button>
         );
     }
@@ -2465,6 +2531,7 @@ export class Calendar extends Component {
         return (
             <span className={className} onClick={e => this.onDateSelect(e, date)} onKeyDown={e => this.onDateCellKeydown(e, date, groupIndex)}>
                 {content}
+                <Ripple />
             </span>
         );
     }
@@ -2474,7 +2541,7 @@ export class Calendar extends Component {
             const selected = this.isSelected(date);
             const cellClassName = classNames({'p-datepicker-other-month': date.otherMonth, 'p-datepicker-today': date.today});
             const dateClassName = classNames({'p-highlight': selected, 'p-disabled': !date.selectable});
-            const content = this.renderDateCellContent(date, dateClassName, groupIndex);
+            const content = (date.otherMonth && !this.props.showOtherMonths) ? null : this.renderDateCellContent(date, dateClassName, groupIndex);
 
             return (
                 <td key={date.day} className={cellClassName}>
@@ -2531,8 +2598,8 @@ export class Calendar extends Component {
 
     renderMonth(monthMetaData, index) {
         const weekDays = this.createWeekDays();
-        const backwardNavigator = (index === 0) ? this.renderBackwardNavigator(): null;
-        const forwardNavigator = (this.props.numberOfMonths === 1) || (index === this.props.numberOfMonths -1) ? this.renderForwardNavigator(): null;
+        const backwardNavigator = this.renderBackwardNavigator((index === 0));
+        const forwardNavigator = this.renderForwardNavigator((this.props.numberOfMonths === 1) || (index === this.props.numberOfMonths -1));
         const title = this.renderTitle(monthMetaData);
         const dateViewGrid = this.renderDateViewGrid(monthMetaData, weekDays, index);
         const header = this.props.headerTemplate ? this.props.headerTemplate() : null;
@@ -2542,8 +2609,8 @@ export class Calendar extends Component {
                 <div className="p-datepicker-header">
                     {header}
                     {backwardNavigator}
-                    {forwardNavigator}
                     {title}
+                    {forwardNavigator}
                 </div>
                 {dateViewGrid}
             </div>
@@ -2551,11 +2618,15 @@ export class Calendar extends Component {
     }
 
     renderMonths(monthsMetaData) {
+        const groups = monthsMetaData.map((monthMetaData, index) => {
+            return this.renderMonth(monthMetaData, index);
+        });
+
         return (
-            monthsMetaData.map((monthMetaData, index) => {
-                return this.renderMonth(monthMetaData, index);
-            })
-        );
+            <div className="p-datepicker-group-container">
+                {groups}
+            </div>
+        )
     }
 
     renderDateView() {
@@ -2564,9 +2635,9 @@ export class Calendar extends Component {
         const months = this.renderMonths(monthsMetaData);
 
         return (
-            <React.Fragment>
+            <>
                 {months}
-            </React.Fragment>
+            </>
         );
     }
 
@@ -2577,6 +2648,7 @@ export class Calendar extends Component {
         return (
             <span key={monthName} className={className} onClick={event => this.onMonthSelect(event, index)} onKeyDown={event => this.onMonthCellKeydown(event, index)}>
                 {monthName}
+                <Ripple />
             </span>
         );
     }
@@ -2597,7 +2669,7 @@ export class Calendar extends Component {
         const months = this.renderMonthViewMonths();
 
         return (
-            <React.Fragment>
+            <>
                 <div className="p-datepicker-header">
                     {backwardNavigator}
                     {forwardNavigator}
@@ -2608,7 +2680,7 @@ export class Calendar extends Component {
                 <div className="p-monthpicker">
                     {months}
                 </div>
-            </React.Fragment>
+            </>
         );
     }
 
@@ -2644,11 +2716,13 @@ export class Calendar extends Component {
                 <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 0, 1)} onMouseUp={this.onTimePickerElementMouseUp}
                         onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
                     <span className="pi pi-chevron-up"></span>
+                    <Ripple />
                 </button>
                 <span>{hourDisplay}</span>
                 <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 0, -1)} onMouseUp={this.onTimePickerElementMouseUp}
                         onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
                     <span className="pi pi-chevron-down"></span>
+                    <Ripple />
                 </button>
             </div>
         );
@@ -2664,11 +2738,13 @@ export class Calendar extends Component {
                 <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 1, 1)} onMouseUp={this.onTimePickerElementMouseUp}
                         onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
                     <span className="pi pi-chevron-up"></span>
+                    <Ripple />
                 </button>
                 <span>{minuteDisplay}</span>
                 <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 1, -1)} onMouseUp={this.onTimePickerElementMouseUp}
                         onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
                     <span className="pi pi-chevron-down"></span>
+                    <Ripple />
                 </button>
             </div>
         );
@@ -2685,11 +2761,13 @@ export class Calendar extends Component {
                     <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 2, 1)} onMouseUp={this.onTimePickerElementMouseUp}
                             onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
                         <span className="pi pi-chevron-up"></span>
+                        <Ripple />
                     </button>
                     <span>{secondDisplay}</span>
                     <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 2, -1)} onMouseUp={this.onTimePickerElementMouseUp}
                             onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
                         <span className="pi pi-chevron-down"></span>
+                        <Ripple />
                     </button>
                 </div>
             );
@@ -2709,11 +2787,13 @@ export class Calendar extends Component {
                     <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 3, 1)} onMouseUp={this.onTimePickerElementMouseUp}
                             onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
                         <span className="pi pi-chevron-up"></span>
+                        <Ripple />
                     </button>
                     <span>{millisecondDisplay}</span>
                     <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 3, -1)} onMouseUp={this.onTimePickerElementMouseUp}
                             onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
                         <span className="pi pi-chevron-down"></span>
+                        <Ripple />
                     </button>
                 </div>
             );
@@ -2732,29 +2812,24 @@ export class Calendar extends Component {
                 <div className="p-ampm-picker">
                     <button type="button" className="p-link" onClick={this.toggleAmPm}>
                         <span className="pi pi-chevron-up"></span>
+                        <Ripple />
                     </button>
                     <span>{display}</span>
                     <button type="button" className="p-link" onClick={this.toggleAmPm}>
                         <span className="pi pi-chevron-down"></span>
+                        <Ripple />
                     </button>
                 </div>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
-    renderSeparator() {
+    renderSeparator(separator) {
         return (
             <div className="p-separator">
-                <span className="p-separator-spacer">
-                    <span className="pi pi-chevron-up"></span>
-                </span>
-                <span>:</span>
-                <span className="p-separator-spacer">
-                    <span className="pi pi-chevron-down"></span>
-                </span>
+                <span>{separator}</span>
             </div>
         );
     }
@@ -2764,13 +2839,13 @@ export class Calendar extends Component {
             return (
                 <div className="p-timepicker">
                     {this.renderHourPicker()}
-                    {this.renderSeparator()}
+                    {this.renderSeparator(':')}
                     {this.renderMinutePicker()}
-                    {this.props.showSeconds && this.renderSeparator()}
+                    {this.props.showSeconds && this.renderSeparator(':')}
                     {this.renderSecondPicker()}
-                    {this.props.showMillisec && this.renderSeparator()}
+                    {this.props.showMillisec && this.renderSeparator('.')}
                     {this.renderMiliSecondPicker()}
-                    {this.props.hourFormat === '12' && this.renderSeparator()}
+                    {this.props.hourFormat === '12' && this.renderSeparator(':')}
                     {this.renderAmPmPicker()}
                 </div>
             )
@@ -2781,43 +2856,41 @@ export class Calendar extends Component {
 
     renderInputElement() {
         if (!this.props.inline) {
-            const className = classNames('p-inputtext p-component', this.props.inputClassName);
-
             return (
-                <InputText ref={(el) => this.inputElement = ReactDOM.findDOMNode(el)} id={this.props.inputId} name={this.props.name} type="text" className={className} style={this.props.inputStyle}
+                <InputText ref={(el) => this.inputElement = ReactDOM.findDOMNode(el)} id={this.props.inputId} name={this.props.name} type="text" className={this.props.inputClassName} style={this.props.inputStyle}
                            readOnly={this.props.readOnlyInput} disabled={this.props.disabled} required={this.props.required} autoComplete="off" placeholder={this.props.placeholder}
-                           onInput={this.onUserInput} onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onInputKeyDown} aria-labelledby={this.props.ariaLabelledBy}/>
+                           onInput={this.onUserInput} onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onInputKeyDown} aria-labelledby={this.props.ariaLabelledBy} inputMode="none"/>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderButton() {
         if (this.props.showIcon) {
             return (
                 <Button type="button" icon={this.props.icon} onClick={this.onButtonClick} tabIndex="-1"
-                        disabled={this.props.disabled} className="p-datepicker-trigger p-calendar-button" />
+                        disabled={this.props.disabled} className="p-datepicker-trigger" />
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderButtonBar() {
         if (this.props.showButtonBar) {
+            const todayClassName = classNames('p-button-text', this.props.todayButtonClassName);
+            const clearClassName = classNames('p-button-text', this.props.clearButtonClassName);
+
             return (
                 <div className="p-datepicker-buttonbar">
-                    <Button type="button" label={this.props.locale.today} onClick={this.onTodayButtonClick} onKeyDown={e => this.onContainerButtonKeydown(e)} className={this.props.todayButtonClassName} />
-                    <Button type="button" label={this.props.locale.clear} onClick={this.onClearButtonClick} onKeyDown={e => this.onContainerButtonKeydown(e)} className={this.props.clearButtonStyleClass} />
+                    <Button type="button" label={this.props.locale.today} onClick={this.onTodayButtonClick} onKeyDown={e => this.onContainerButtonKeydown(e)} className={todayClassName} />
+                    <Button type="button" label={this.props.locale.clear} onClick={this.onClearButtonClick} onKeyDown={e => this.onContainerButtonKeydown(e)} className={clearClassName} />
                 </div>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderFooter() {
@@ -2830,21 +2903,19 @@ export class Calendar extends Component {
                 </div>
             )
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     render() {
-        const className = classNames('p-calendar', this.props.className, {
+        const className = classNames('p-calendar p-inputwrapper', this.props.className, {
             'p-calendar-w-btn': this.props.showIcon,
             'p-calendar-timeonly': this.props.timeOnly,
-            'p-inputwrapper-filled': this.props.value
+            'p-inputwrapper-filled': this.props.value || (DomHandler.hasClass(this.inputElement, 'p-filled') && this.inputElement.value !== ''),
+            'p-inputwrapper-focus': this.state.focused
         });
         const panelClassName = classNames('p-datepicker p-component', this.props.panelClassName, {
             'p-datepicker-inline': this.props.inline,
-            'p-input-overlay': !this.props.inline,
-            'p-shadow': !this.props.inline,
             'p-disabled': this.props.disabled,
             'p-datepicker-timeonly': this.props.timeOnly,
             'p-datepicker-multiple-month': this.props.numberOfMonths > 1,
@@ -2859,16 +2930,19 @@ export class Calendar extends Component {
         const footer = this.renderFooter();
 
         return (
-            <span ref={(el) => this.container = el} id={this.props.id} className={className} style={this.props.style}>
+            <span ref={(el) => this.container = el} id={this.id} className={className} style={this.props.style}>
                 {input}
                 {button}
-                <CalendarPanel ref={(el) => this.panel = ReactDOM.findDOMNode(el)} className={panelClassName} style={this.props.panelStyle}
+                <CSSTransition classNames="p-connected-overlay" in={this.props.inline || this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }}
+                    unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit}>
+                    <CalendarPanel ref={(el) => this.panel = ReactDOM.findDOMNode(el)} className={panelClassName} style={this.props.panelStyle}
                                appendTo={this.props.appendTo}>
-                    {datePicker}
-                    {timePicker}
-                    {buttonBar}
-                    {footer}
-                </CalendarPanel>
+                        {datePicker}
+                        {timePicker}
+                        {buttonBar}
+                        {footer}
+                    </CalendarPanel>
+                </CSSTransition>
             </span>
         );
     }

@@ -1,50 +1,45 @@
 import React, { Component } from 'react';
-import {DataTable} from '../../components/datatable/DataTable';
-import {Column} from '../../components/column/Column';
-import {CarService} from '../service/CarService';
-import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
-import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
+import { DataTable } from '../../components/datatable/DataTable';
+import { Column } from '../../components/column/Column';
+import ProductService from '../service/ProductService';
+import { TabView, TabPanel } from '../../components/tabview/TabView';
+import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class DataTableBasicDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            cars: null
+            products: []
         };
 
-        this.carservice = new CarService();
+        this.productService = new ProductService();
     }
 
     componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
     }
 
     render() {
         return (
             <div>
-                <DataTableSubmenu />
-
                 <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>DataTable - Basic</h1>
-                        <p>DataTable requires a collection to display along with column components for the representation of the data.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("dataTable")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    <AppInlineHeader changelogText="dataTable">
+                        <h1>DataTable <span>Basic</span></h1>
+				        <p>DataTable requires a collection to display along with column components for the representation of the data.</p>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <DataTable value={this.state.cars}>
-                        <Column field="vin" header="Vin" />
-                        <Column field="year" header="Year" />
-                        <Column field="brand" header="Brand" />
-                        <Column field="color" header="Color" />
-                    </DataTable>
+                    <div className="card">
+                        <DataTable value={this.state.products}>
+                            <Column field="code" header="Code"></Column>
+                            <Column field="name" header="Name"></Column>
+                            <Column field="category" header="Category"></Column>
+                            <Column field="quantity" header="Quantity"></Column>
+                        </DataTable>
+                    </div>
                 </div>
 
                 <DataTableBasicDemoDoc></DataTableBasicDemoDoc>
@@ -55,7 +50,116 @@ export class DataTableBasicDemo extends Component {
 
 export class DataTableBasicDemoDoc extends Component {
 
-    shouldComponentUpdate(){
+    constructor(props) {
+        super(props);
+
+        this.sources = {
+            'class': {
+                tabName: 'Class Source',
+                content: `
+import React, { Component } from 'react';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import ProductService from '../service/ProductService';
+
+export class DataTableBasicDemo extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            products: []
+        };
+
+        this.productService = new ProductService();
+    }
+
+    componentDidMount() {
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
+    }
+
+    render() {
+        return (
+            <div>
+                <div className="card">
+                    <DataTable value={this.state.products}>
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="quantity" header="Quantity"></Column>
+                    </DataTable>
+                </div>
+            </div>
+        );
+    }
+}
+                `
+            },
+            'hooks': {
+                tabName: 'Hooks Source',
+                content: `
+import React, { useState, useEffect } from 'react';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import ProductService from '../service/ProductService';
+
+const DataTableBasicDemo = () => {
+    const [products, setProducts] = useState([]);
+    const productService = new ProductService();
+
+    useEffect(() => {
+        productService.getProductsSmall().then(data => setProducts(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    return (
+        <div>
+            <div className="card">
+                <DataTable value={products}>
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+            </div>
+        </div>
+    );
+}
+                `
+            },
+            'ts': {
+                tabName: 'TS Source',
+                content: `
+import React, { useState, useEffect } from 'react';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import ProductService from '../service/ProductService';
+
+const DataTableBasicDemo = () => {
+    const [products, setProducts] = useState([]);
+    const productService = new ProductService();
+
+    useEffect(() => {
+        productService.getProductsSmall().then(data => setProducts(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    return (
+        <div>
+            <div className="card">
+                <DataTable value={products}>
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+            </div>
+        </div>
+    );
+}
+                `
+            }
+        }
+    }
+
+    shouldComponentUpdate() {
         return false;
     }
 
@@ -64,53 +168,7 @@ export class DataTableBasicDemoDoc extends Component {
             <div className="content-section documentation">
                 <TabView>
                     <TabPanel header="Source">
-<CodeHighlight className="language-javascript">
-{`
-import React, { Component } from 'react';
-import {DataTable} from '../../components/datatable/DataTable';
-import {Column} from '../../components/column/Column';
-import {CarService} from '../service/CarService';
-
-export class DataTableBasicDemo extends Component {
-
-    constructor() {
-        super();
-        this.state = {
-            cars: null
-        };
-
-        this.carservice = new CarService();
-    }
-
-    componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
-    }
-
-    render() {
-        return (
-            <div>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>DataTable - Basic</h1>
-                        <p>DataTable requires a collection to display along with column components for the representation of the data.</p>
-                    </div>
-                </div>
-
-                <div className="content-section implementation">
-                    <DataTable value={this.state.cars}>
-                        <Column field="vin" header="Vin" />
-                        <Column field="year" header="Year" />
-                        <Column field="brand" header="Brand" />
-                        <Column field="color" header="Color" />
-                    </DataTable>
-                </div>
-            </div>
-        );
-    }
-}
-
-`}
-</CodeHighlight>
+                        <LiveEditor name="DataTableBasicDemo" sources={this.sources} service="ProductService" data="products-small" />
                     </TabPanel>
                 </TabView>
             </div>

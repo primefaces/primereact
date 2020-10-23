@@ -9,6 +9,7 @@ interface ListBoxProps {
     optionValue?: string;
     style?: object;
     listStyle?: object;
+    listClassName?: string;
     className?: string;
     disabled?: boolean;
     dataKey?: string;
@@ -18,6 +19,7 @@ interface ListBoxProps {
     filterBy?: string;
     filterMatchMode?: string;
     filterPlaceholder?: string;
+    filterLocale?: string;
     tabIndex?:string;
     tooltip?: any;
     tooltipOptions?: TooltipOptions;

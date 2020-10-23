@@ -1,0 +1,168 @@
+.layout-wrapper {
+    .layout-news {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 999;
+        overflow: hidden;
+        width: 100%;
+        height: 70px;
+        background-image: url("../../images/news/topbar-easter-2020-bg.jpg");
+        /*@include flex();
+        @include flex-justify-center();
+        @include flex-align-center();*/
+        cursor: pointer;
+
+        .layout-news-container {
+            /*@include flex();
+            @include flex-align-center();
+            @include flex-justify-center();*/
+            height: 100%;
+
+            .layout-news-text {
+                height: 60px;
+                z-index: 1;
+            }
+
+            .layout-news-helper-image {
+                height: 70px;
+                position: absolute;
+                right: 52px;
+            }
+
+            .layout-news-button {
+                border: 1px solid #ffffff;
+                color: #ffffff;
+                font-size: 15px;
+                padding: .3em .3em .5em 1em;
+                font-weight: bold;
+                border-radius: 3px;
+                transition: background-color .15s;
+                margin-left: 2em;
+                position: relative;
+                z-index: 1;
+                /*@include flex();
+                @include flex-align-center();
+                @include flex-justify-center();*/
+                flex-shrink: 0;
+
+                i {
+                    font-size: 1.5em;
+                }
+
+                &:hover {
+                    background-color: rgba(255, 255, 255, .25);
+                }
+            }
+
+            .layout-news-close {
+                color: #ffffff;
+                position: absolute;
+                right: 28px;
+                z-index: 2;
+                background-color: rgba(0,0,0,.3);
+                border-radius: 50%;
+                width: 23px;
+                height: 23px;
+                cursor: pointer;
+                /*@include flex();
+                @include flex-align-center();
+                @include flex-justify-center();*/
+
+                i {
+                    font-size: 1.5em;
+                }
+            }
+        }
+    }
+
+    &.layout-news-active {
+        .layout-topbar {
+            top: 70px;
+        }
+
+        .layout-sidebar {
+            top: 140px;
+            height: calc(100% - 140px);
+        }
+
+        .layout-content {
+            padding-top: 140px;
+        }
+
+        .layout-config {
+            top: 140px;
+            height: calc(100% - 140px);
+        }
+
+        .layout-mask {
+            top: 140px;
+        }
+    }
+
+   /* @media screen and (max-width: $tabletBreakpoint) {
+        .layout-news {
+            display: block;
+
+            .layout-news-container {
+                background-image: linear-gradient(180deg, rgba(255,255,255,0.30) 0%, #FFFFFF 100%);
+
+                .layout-news-helper-image {
+                    display: none;
+                }
+
+                .layout-news-button {
+                    opacity: 0;
+                    position: absolute;
+                    z-index: 1;
+                    width: 100%;
+                    height: 100%;
+                    margin: 0;
+                    top: 0;
+                    left: 0;
+                }
+
+                .layout-news-close {
+                    top: 50%;
+                    margin-top: -.65em;
+                }
+            }
+        }
+
+        &.layout-news-active {
+            .layout-sidebar {
+                top: 180px;
+                height: calc(100% - 180px);
+            }
+
+            .layout-content {
+                padding-top: 180px;
+            }
+
+            .layout-config {
+                top: 180px;
+                height: calc(100% - 180px);
+            }
+
+            .layout-mask {
+                top: 180px;
+            }
+        }
+    }
+
+    @media screen and (max-width: $mobileBreakpoint) {
+        &.layout-news-active {
+            .layout-topbar {
+                .layout-topbar-right {
+                    .topbar-menu {
+                        > li {
+                            > ul {
+                                top: 180px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }*/
+}

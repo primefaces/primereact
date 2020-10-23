@@ -10,11 +10,12 @@ export class HeaderCell extends Component {
         super(props);
 
         this.state = {
+            filterValue: '',
             badgeVisible: false
         }
 
         this.onClick = this.onClick.bind(this);
-        this.onFilterInput = this.onFilterInput.bind(this);
+        this.onFilterChange = this.onFilterChange.bind(this);
         this.onMouseDown = this.onMouseDown.bind(this);
         this.onResizerMouseDown = this.onResizerMouseDown.bind(this);
         this.onKeyDown = this.onKeyDown.bind(this);
@@ -37,13 +38,14 @@ export class HeaderCell extends Component {
         }
     }
 
-    onFilterInput(e) {
-        if(this.props.columnProps.filter && this.props.onFilter) {
+    onFilterChange(e) {
+        let filterValue = e.target.value;
+
+        if (this.props.columnProps.filter && this.props.onFilter) {
             if(this.filterTimeout) {
                 clearTimeout(this.filterTimeout);
             }
 
-            let filterValue = e.target.value;
             this.filterTimeout = setTimeout(() => {
                 this.props.onFilter({
                     value: filterValue,
@@ -53,6 +55,8 @@ export class HeaderCell extends Component {
                 this.filterTimeout = null;
             }, this.filterDelay);
         }
+
+        this.setState({ filterValue });
     }
 
     onResizerMouseDown(event) {
@@ -97,14 +101,18 @@ export class HeaderCell extends Component {
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
+        const filterField = nextProps.columnProps.filterField || nextProps.columnProps.field;
+        const value = nextProps.filters && nextProps.filters[filterField] ? nextProps.filters[filterField].value : null;
+
         return {
+            filterValue: value !== null ? value : '',
             badgeVisible: nextProps.multiSortMeta && nextProps.multiSortMeta.length > 1
         }
     }
 
     getAriaSort(sorted, sortOrder) {
         if (this.props.columnProps.sortable) {
-            let sortIcon = sorted ? sortOrder < 0 ? 'pi-sort-down' : 'pi-sort-up': 'pi-sort';
+            let sortIcon = sorted ? sortOrder < 0 ? 'pi-sort-amount-down' : 'pi-sort-amount-up-alt': 'pi-sort-alt';
             if (sortIcon === 'pi-sort-down')
                 return 'descending';
             else if (sortIcon === 'pi-sort-up')
@@ -119,7 +127,7 @@ export class HeaderCell extends Component {
 
     renderSortIcon(sorted, sortOrder) {
         if (this.props.columnProps.sortable) {
-            let sortIcon = sorted ? sortOrder < 0 ? 'pi-sort-down' : 'pi-sort-up': 'pi-sort';
+            let sortIcon = sorted ? sortOrder < 0 ? 'pi-sort-amount-down' : 'pi-sort-amount-up-alt': 'pi-sort-alt';
             let sortIconClassName = classNames('p-sortable-column-icon pi pi-fw', sortIcon);
 
             return (
@@ -143,8 +151,7 @@ export class HeaderCell extends Component {
         let filterElement, headerCheckbox;
 
         if (this.props.columnProps.filter && this.props.renderOptions.renderFilter) {
-            let filterField = this.props.columnProps.filterField || this.props.columnProps.field;
-            filterElement = this.props.columnProps.filterElement||<InputText onInput={this.onFilterInput} type={this.props.columnProps.filterType} defaultValue={this.props.filters && this.props.filters[filterField] ? this.props.filters[filterField].value : null}
+            filterElement = this.props.columnProps.filterElement||<InputText onChange={this.onFilterChange} type={this.props.columnProps.filterType} value={this.state.filterValue}
                         className="p-column-filter" placeholder={this.props.columnProps.filterPlaceholder} maxLength={this.props.columnProps.filterMaxLength} />;
         }
 

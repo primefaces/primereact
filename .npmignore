@@ -11,3 +11,4 @@ yarn.lock
 exports
 vscode
 .vscode
+.editorconfig

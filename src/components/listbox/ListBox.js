@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ObjectUtils from '../utils/ObjectUtils';
-import FilterUtils from '../utils/ObjectUtils';
+import FilterUtils from '../utils/FilterUtils';
 import {ListBoxItem} from './ListBoxItem';
 import {ListBoxHeader} from './ListBoxHeader';
-import Tooltip from "../tooltip/Tooltip";
+import {tip} from "../tooltip/Tooltip";
 
 export class ListBox extends Component {
 
@@ -18,6 +18,7 @@ export class ListBox extends Component {
         itemTemplate: null,
         style: null,
         listStyle: null,
+        listClassName: null,
         className: null,
         disabled: null,
         dataKey: null,
@@ -27,6 +28,7 @@ export class ListBox extends Component {
         filterBy: null,
         filterMatchMode: 'contains',
         filterPlaceholder: null,
+        filterLocale: undefined,
         tabIndex: '0',
         tooltip: null,
         tooltipOptions: null,
@@ -43,6 +45,7 @@ export class ListBox extends Component {
         itemTemplate: PropTypes.func,
         style: PropTypes.object,
         listStyle: PropTypes.object,
+        listClassName: PropTypes.string,
         className: PropTypes.string,
         dataKey: PropTypes.string,
         multiple: PropTypes.bool,
@@ -51,6 +54,7 @@ export class ListBox extends Component {
         filterBy: PropTypes.string,
         filterMatchMode: PropTypes.string,
         filterPlaceholder: PropTypes.string,
+        filterLocale: PropTypes.string,
         tabIndex: PropTypes.string,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
@@ -58,8 +62,9 @@ export class ListBox extends Component {
         onChange: PropTypes.func
     };
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
             filter: ''
         }
@@ -91,7 +96,7 @@ export class ListBox extends Component {
     }
 
     renderTooltip() {
-        this.tooltip = new Tooltip({
+        this.tooltip = tip({
             target: this.element,
             content: this.props.tooltip,
             options: this.props.tooltipOptions
@@ -242,10 +247,10 @@ export class ListBox extends Component {
     }
 
     filter(option) {
-        let filterValue = this.state.filter.trim().toLowerCase();
-        let optionLabel = this.getOptionLabel(option);
+        let filterValue = this.state.filter.trim().toLocaleLowerCase(this.props.filterLocale);
+        let optionLabel = this.getOptionLabel(option).toLocaleLowerCase(this.props.filterLocale);
 
-        return optionLabel.toLowerCase().indexOf(filterValue.toLowerCase()) > -1;
+        return optionLabel.indexOf(filterValue) > -1;
     }
 
     hasFilter() {
@@ -261,24 +266,26 @@ export class ListBox extends Component {
     }
 
     render() {
-        let className = classNames('p-listbox p-inputtext p-component', this.props.className, {
+        let className = classNames('p-listbox p-component', {
             'p-disabled': this.props.disabled
-        });
+        }, this.props.className);
+        let listClassName = classNames('p-listbox-list-wrapper', this.props.listClassName);
         let items = this.props.options;
         let header;
 
         if (this.props.options) {
             if (this.hasFilter()) {
-                let filterValue = this.state.filter.trim().toLowerCase();
+                let filterValue = this.state.filter.trim().toLocaleLowerCase(this.props.filterLocale)
                 let searchFields = this.props.filterBy ? this.props.filterBy.split(',') : [this.props.optionLabel || 'label'];
-                items = FilterUtils.filter(items, searchFields, filterValue, this.props.filterMatchMode);
+                items = FilterUtils.filter(items, searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
             }
 
             items = items.map((option, index) => {
                 let optionLabel = this.getOptionLabel(option);
+                let optionKey = `pr_id__${optionLabel}-${index}`;
 
                 return (
-                    <ListBoxItem key={optionLabel} label={optionLabel} option={option} template={this.props.itemTemplate} selected={this.isSelected(option)}
+                    <ListBoxItem key={optionKey} label={optionLabel} option={option} template={this.props.itemTemplate} selected={this.isSelected(option)}
                         onClick={this.onOptionClick} onTouchEnd={(e) => this.onOptionTouchEnd(e, option, index)} tabIndex={this.props.tabIndex} />
                 );
             });
@@ -291,7 +298,7 @@ export class ListBox extends Component {
         return (
             <div ref={(el) => this.element = el} id={this.props.id} className={className} style={this.props.style}>
                 {header}
-                <div className="p-listbox-list-wrapper" style={this.props.listStyle}>
+                <div className={listClassName} style={this.props.listStyle}>
                     <ul className="p-listbox-list" role="listbox" aria-multiselectable={this.props.multiple}>
                         {items}
                     </ul>

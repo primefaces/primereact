@@ -1,10 +1,8 @@
-import React, {Component} from 'react';
-import {Tree} from '../../components/tree/Tree';
-import {NodeService} from '../service/NodeService';
-import {TreeSubmenu} from './TreeSubmenu';
-import {TabView, TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
+import React, { Component } from 'react';
+import { Tree } from '../../components/tree/Tree';
+import { TabView, TabPanel } from '../../components/tabview/TabView';
+import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class TreeLazyDemo extends Component {
 
@@ -14,8 +12,6 @@ export class TreeLazyDemo extends Component {
             nodes: null,
             loading: true,
         };
-
-        this.nodeService = new NodeService();
 
         this.loadOnExpand = this.loadOnExpand.bind(this);
     }
@@ -47,7 +43,7 @@ export class TreeLazyDemo extends Component {
             });
 
             setTimeout(() => {
-                let node = {...event.node};
+                let node = { ...event.node };
                 node.children = [];
 
                 for (let i = 0; i < 3; i++) {
@@ -69,34 +65,27 @@ export class TreeLazyDemo extends Component {
 
     componentDidMount() {
         setTimeout(() => {
-            this.nodeService.getTreeNodes().then(data => this.setState(
-                {
-                    nodes: this.createLazyNodes(),
-                    loading: false
-                }
-            ));
+            this.setState({
+                nodes: this.createLazyNodes(),
+                loading: false
+            });
         }, 2000);
     }
 
     render() {
         return (
             <div>
-                <TreeSubmenu />
-
                 <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Tree - Lazy</h1>
+                    <AppInlineHeader changelogText="tree">
+                        <h1>Tree <span>Lazy</span></h1>
                         <p>Lazy loading is useful when dealing with huge datasets.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("tree")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <h3>Lazy Loading</h3>
-                    <Tree value={this.state.nodes} onExpand={this.loadOnExpand} loading={this.state.loading} />
+                    <div className="card">
+                        <Tree value={this.state.nodes} onExpand={this.loadOnExpand} loading={this.state.loading} />
+                    </div>
                 </div>
 
                 <TreeLazyDemoDoc />
@@ -107,21 +96,15 @@ export class TreeLazyDemo extends Component {
 
 export class TreeLazyDemoDoc extends Component {
 
-    shouldComponentUpdate(){
-        return false;
-    }
+    constructor(props) {
+        super(props);
 
-    render() {
-        return (
-            <div className="content-section documentation">
-                <TabView>
-                    <TabPanel header="Source">
-                        <h3>Import</h3>
-<CodeHighlight className="language-javascript">
-{`
-import React, {Component} from 'react';
-import {Tree} from 'primereact/tree';
-import {NodeService} from '../service/NodeService';
+        this.sources = {
+            'class': {
+                tabName: 'Class Source',
+                content: `
+import React, { Component } from 'react';
+import { Tree } from 'primereact/tree';
 
 export class TreeLazyDemo extends Component {
 
@@ -131,8 +114,6 @@ export class TreeLazyDemo extends Component {
             nodes: null,
             loading: true,
         };
-
-        this.nodeService = new NodeService();
 
         this.loadOnExpand = this.loadOnExpand.bind(this);
     }
@@ -164,7 +145,7 @@ export class TreeLazyDemo extends Component {
             });
 
             setTimeout(() => {
-                let node = {...event.node};
+                let node = { ...event.node };
                 node.children = [];
 
                 for (let i = 0; i < 3; i++) {
@@ -186,38 +167,178 @@ export class TreeLazyDemo extends Component {
 
     componentDidMount() {
         setTimeout(() => {
-            this.nodeService.getTreeNodes().then(data => this.setState(
-                {
-                    nodes: this.createLazyNodes(),
-                    loading: false
-                }
-            ));
+            this.setState({
+                nodes: this.createLazyNodes(),
+                loading: false
+            });
         }, 2000);
     }
 
     render() {
         return (
             <div>
-
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Tree - Lazy</h1>
-                        <p>Lazy loading is useful when dealing with huge datasets.</p>
-                    </div>
-                </div>
-
-                <div className="content-section implementation">
-                    <h3>Lazy Loading</h3>
+                <div className="card">
                     <Tree value={this.state.nodes} onExpand={this.loadOnExpand} loading={this.state.loading} />
                 </div>
             </div>
         )
     }
 }
+                `
+            },
+            'hooks': {
+                tabName: 'Hooks Source',
+                content: `
+import React, { useState, useEffect } from 'react';
+import { Tree } from 'primereact/tree';
 
-`}
-</CodeHighlight>
+const TreeLazyDemo = () => {
+    const [nodes, setNodes] = useState(null);
+    const [loading, setLoading] = useState(true);
 
+    const createLazyNodes = () => {
+        return [
+            {
+                key: '0',
+                label: 'Node 0',
+                leaf: false
+            },
+            {
+                key: '1',
+                label: 'Node 1',
+                leaf: false
+            },
+            {
+                key: '2',
+                label: 'Node 2',
+                leaf: false
+            }
+        ];
+    }
+
+    const loadOnExpand = (event) => {
+        if (!event.node.children) {
+            setLoading(true);
+
+            setTimeout(() => {
+                let node = { ...event.node };
+                node.children = [];
+
+                for (let i = 0; i < 3; i++) {
+                    node.children.push({
+                        key: node.key + '-' + i,
+                        label: 'Lazy ' + node.label + '-' + i
+                    });
+                }
+
+                let value = [...nodes];
+                value[parseInt(event.node.key, 10)] = node;
+                setNodes(value);
+                setLoading(false);
+            }, 500);
+        }
+    }
+
+    useEffect(() => {
+        setTimeout(() => {
+            setNodes(createLazyNodes());
+            setLoading(false);
+        }, 2000);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    return (
+        <div>
+            <div className="card">
+                <Tree value={nodes} onExpand={loadOnExpand} loading={loading} />
+            </div>
+        </div>
+    )
+}
+                `
+            },
+            'ts': {
+                tabName: 'TS Source',
+                content: `
+import React, { useState, useEffect } from 'react';
+import { Tree } from 'primereact/tree';
+
+const TreeLazyDemo = () => {
+    const [nodes, setNodes] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    const createLazyNodes = () => {
+        return [
+            {
+                key: '0',
+                label: 'Node 0',
+                leaf: false
+            },
+            {
+                key: '1',
+                label: 'Node 1',
+                leaf: false
+            },
+            {
+                key: '2',
+                label: 'Node 2',
+                leaf: false
+            }
+        ];
+    }
+
+    const loadOnExpand = (event) => {
+        if (!event.node.children) {
+            setLoading(true);
+
+            setTimeout(() => {
+                let node = { ...event.node };
+                node.children = [];
+
+                for (let i = 0; i < 3; i++) {
+                    node.children.push({
+                        key: node.key + '-' + i,
+                        label: 'Lazy ' + node.label + '-' + i
+                    });
+                }
+
+                let value = [...nodes];
+                value[parseInt(event.node.key, 10)] = node;
+                setNodes(value);
+                setLoading(false);
+            }, 500);
+        }
+    }
+
+    useEffect(() => {
+        setTimeout(() => {
+            setNodes(createLazyNodes());
+            setLoading(false);
+        }, 2000);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    return (
+        <div>
+            <div className="card">
+                <Tree value={nodes} onExpand={loadOnExpand} loading={loading} />
+            </div>
+        </div>
+    )
+}
+                `
+            }
+        }
+    }
+
+    shouldComponentUpdate() {
+        return false;
+    }
+
+    render() {
+        return (
+            <div className="content-section documentation">
+                <TabView>
+                    <TabPanel header="Source">
+                        <LiveEditor name="TreeLazyDemo" sources={this.sources} />
                     </TabPanel>
                 </TabView>
             </div>

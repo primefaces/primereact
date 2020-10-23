@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { Ripple } from '../ripple/Ripple';
 
 export class PageLinks extends Component {
 
@@ -34,7 +35,10 @@ export class PageLinks extends Component {
             });
 
             return (
-                <button type="button" key={pageLink} className={pageClassName} onClick={(e) => this.onPageLinkClick(e, pageLink)}>{pageLink}</button>
+                <button type="button" key={pageLink} className={pageClassName} onClick={(e) => this.onPageLinkClick(e, pageLink)}>
+                    {pageLink}
+                    <Ripple />
+                </button>
             );
         });
 

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { TreeTable } from '../../components/treetable/TreeTable';
-import { Column } from "../../components/column/Column";
+import { Column } from '../../components/column/Column';
 import { InputText } from '../../components/inputtext/InputText';
 import { NodeService } from '../service/NodeService';
-import { TreeTableSubmenu } from '../../showcase/treetable/TreeTableSubmenu';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
+import { LiveEditor } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
+import './TreeTableDemo.scss';
 
 export class TreeTableEditDemo extends Component {
 
@@ -23,7 +23,7 @@ export class TreeTableEditDemo extends Component {
     }
 
     componentDidMount() {
-        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({ nodes: data }));
     }
 
     onEditorValueChange(props, value) {
@@ -52,7 +52,7 @@ export class TreeTableEditDemo extends Component {
     inputTextEditor(props, field) {
         return (
             <InputText type="text" value={props.node.data[field]}
-                    onChange={(e) => this.onEditorValueChange(props, e.target.value)} />
+                onChange={(e) => this.onEditorValueChange(props, e.target.value)} />
         );
     }
 
@@ -73,25 +73,21 @@ export class TreeTableEditDemo extends Component {
     render() {
         return (
             <div>
-                <TreeTableSubmenu />
-
-                <div className="content-section introduction treetableeditdemo">
-                    <div className="feature-intro">
-                        <h1>TreeTable - Edit</h1>
+                <div className="content-section introduction">
+                    <AppInlineHeader changelogText="treeTable">
+                        <h1>TreeTable <span>Edit</span></h1>
                         <p>Incell editing provides a quick and user friendly way to manipulate data.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("treeTable")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
-                <div className="content-section implementation treetableedit-demo">
-                    <TreeTable value={this.state.nodes}>
-                        <Column field="name" header="Name" expander style={{height: '3.5em'}}></Column>
-                        <Column field="size" header="Size" editor={this.sizeEditor} editorValidator={this.requiredValidator} style={{height: '3.5em'}}></Column>
-                        <Column field="type" header="Type" editor={this.typeEditor} style={{height: '3.5em'}}></Column>
-                    </TreeTable>
+                <div className="content-section implementation treetable-editing-demo">
+                    <div className="card">
+                        <TreeTable value={this.state.nodes}>
+                            <Column field="name" header="Name" expander style={{ height: '3.5em' }}></Column>
+                            <Column field="size" header="Size" editor={this.sizeEditor} editorValidator={this.requiredValidator} style={{ height: '3.5em' }}></Column>
+                            <Column field="type" header="Type" editor={this.typeEditor} style={{ height: '3.5em' }}></Column>
+                        </TreeTable>
+                    </div>
                 </div>
 
                 <TreeTableEditDemoDoc />
@@ -102,22 +98,19 @@ export class TreeTableEditDemo extends Component {
 
 class TreeTableEditDemoDoc extends Component {
 
-    shouldComponentUpdate(){
-        return false;
-    }
+    constructor(props) {
+        super(props);
 
-    render() {
-        return (
-            <div className="content-section documentation">
-                <TabView>
-                    <TabPanel header="Source">
-<CodeHighlight className="language-javascript">
-{`
+        this.sources = {
+            'class': {
+                tabName: 'Class Source',
+                content: `
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
-import { Column } from "primereact/column";
-import { InputText } from 'primereact/inputtext;
+import { Column } from 'primereact/column';
+import { InputText } from 'primereact/inputtext';
 import { NodeService } from '../service/NodeService';
+import './TreeTableDemo.css';
 
 export class TreeTableEditDemo extends Component {
 
@@ -134,7 +127,7 @@ export class TreeTableEditDemo extends Component {
     }
 
     componentDidMount() {
-        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({ nodes: data }));
     }
 
     onEditorValueChange(props, value) {
@@ -162,8 +155,8 @@ export class TreeTableEditDemo extends Component {
 
     inputTextEditor(props, field) {
         return (
-            <InputText type="text" value={props.node.data[field]}}
-                    onChange={(e) => this.onEditorValueChange(props, e.target.value)} />
+            <InputText type="text" value={props.node.data[field]}
+                onChange={(e) => this.onEditorValueChange(props, e.target.value)} />
         );
     }
 
@@ -184,27 +177,191 @@ export class TreeTableEditDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>TreeTable - Edit</h1>
-                        <p>Incell editing provides a quick and user friendly way to manipulate data.</p>
-                    </div>
-                </div>
-
-                <div className="content-section implementation">
+                <div className="card">
                     <TreeTable value={this.state.nodes}>
-                        <Column field="name" header="Name" expander style={{height: '3.5em'}}></Column>
-                        <Column field="size" header="Size" editor={this.sizeEditor} editorValidator={this.requiredValidator} style={{height: '3.5em'}}></Column>
-                        <Column field="type" header="Type" editor={this.typeEditor} style={{height: '3.5em'}}></Column>
+                        <Column field="name" header="Name" expander style={{ height: '3.5em' }}></Column>
+                        <Column field="size" header="Size" editor={this.sizeEditor} editorValidator={this.requiredValidator} style={{ height: '3.5em' }}></Column>
+                        <Column field="type" header="Type" editor={this.typeEditor} style={{ height: '3.5em' }}></Column>
                     </TreeTable>
                 </div>
             </div>
         )
     }
 }
+                `
+            },
+            'hooks': {
+                tabName: 'Hooks Source',
+                content: `
+import React, { useState, useEffect } from 'react';
+import { TreeTable } from 'primereact/treetable';
+import { Column } from 'primereact/column';
+import { InputText } from 'primereact/inputtext';
+import { NodeService } from '../service/NodeService';
+import './TreeTableDemo.css';
 
-`}
-</CodeHighlight>
+const TreeTableEditDemo = () => {
+    const [nodes, setNodes] = useState([]);
+    const nodeservice = new NodeService();
+
+    useEffect(() => {
+        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const onEditorValueChange = (props, value) => {
+        let newNodes = JSON.parse(JSON.stringify(nodes));
+        let editedNode = findNodeByKey(newNodes, props.node.key);
+        editedNode.data[props.field] = value;
+
+        setNodes(newNodes);
+    }
+
+    const findNodeByKey = (nodes, key) => {
+        let path = key.split('-');
+        let node;
+
+        while (path.length) {
+            let list = node ? node.children : nodes;
+            node = list[parseInt(path[0], 10)];
+            path.shift();
+        }
+
+        return node;
+    }
+
+    const inputTextEditor = (props, field) => {
+        return (
+            <InputText type="text" value={props.node.data[field]}
+                onChange={(e) => onEditorValueChange(props, e.target.value)} />
+        );
+    }
+
+    const sizeEditor = (props) => {
+        return inputTextEditor(props, 'size');
+    }
+
+    const typeEditor = (props) => {
+        return inputTextEditor(props, 'type');
+    }
+
+    const requiredValidator = (props) => {
+        let value = props.node.data[props.field];
+
+        return value && value.length > 0;
+    }
+
+    return (
+        <div>
+            <div className="card">
+                <TreeTable value={nodes}>
+                    <Column field="name" header="Name" expander style={{ height: '3.5em' }}></Column>
+                    <Column field="size" header="Size" editor={sizeEditor} editorValidator={requiredValidator} style={{ height: '3.5em' }}></Column>
+                    <Column field="type" header="Type" editor={typeEditor} style={{ height: '3.5em' }}></Column>
+                </TreeTable>
+            </div>
+        </div>
+    );
+}
+                `
+            },
+            'ts': {
+                tabName: 'TS Source',
+                content: `
+import React, { useState, useEffect } from 'react';
+import { TreeTable } from 'primereact/treetable';
+import { Column } from 'primereact/column';
+import { InputText } from 'primereact/inputtext';
+import { NodeService } from '../service/NodeService';
+import './TreeTableDemo.css';
+
+const TreeTableEditDemo = () => {
+    const [nodes, setNodes] = useState([]);
+    const nodeservice = new NodeService();
+
+    useEffect(() => {
+        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const onEditorValueChange = (props, value) => {
+        let newNodes = JSON.parse(JSON.stringify(nodes));
+        let editedNode = findNodeByKey(newNodes, props.node.key);
+        editedNode.data[props.field] = value;
+
+        setNodes(newNodes);
+    }
+
+    const findNodeByKey = (nodes, key) => {
+        let path = key.split('-');
+        let node;
+
+        while (path.length) {
+            let list = node ? node.children : nodes;
+            node = list[parseInt(path[0], 10)];
+            path.shift();
+        }
+
+        return node;
+    }
+
+    const inputTextEditor = (props, field) => {
+        return (
+            <InputText type="text" value={props.node.data[field]}
+                onChange={(e) => onEditorValueChange(props, e.target.value)} />
+        );
+    }
+
+    const sizeEditor = (props) => {
+        return inputTextEditor(props, 'size');
+    }
+
+    const typeEditor = (props) => {
+        return inputTextEditor(props, 'type');
+    }
+
+    const requiredValidator = (props) => {
+        let value = props.node.data[props.field];
+
+        return value && value.length > 0;
+    }
+
+    return (
+        <div>
+            <div className="card">
+                <TreeTable value={nodes}>
+                    <Column field="name" header="Name" expander style={{ height: '3.5em' }}></Column>
+                    <Column field="size" header="Size" editor={sizeEditor} editorValidator={requiredValidator} style={{ height: '3.5em' }}></Column>
+                    <Column field="type" header="Type" editor={typeEditor} style={{ height: '3.5em' }}></Column>
+                </TreeTable>
+            </div>
+        </div>
+    );
+}
+                `
+            }
+        }
+
+        this.extFiles = {
+            'src/demo/TreeTableDemo.css': {
+                content: `
+.treetable-editing-demo .p-treetable .p-treetable-tbody > tr > td.p-cell-editing {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+                `
+            }
+        }
+    }
+
+    shouldComponentUpdate() {
+        return false;
+    }
+
+    render() {
+        return (
+            <div className="content-section documentation">
+                <TabView>
+                    <TabPanel header="Source">
+                        <LiveEditor name="TreeTableEditDemo" sources={this.sources} service="NodeService" data="treetablenodes" extFiles={this.extFiles} />
                     </TabPanel>
                 </TabView>
             </div>

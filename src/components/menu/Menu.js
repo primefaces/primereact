@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
+import { CSSTransition } from 'react-transition-group';
+import UniqueComponentId from '../utils/UniqueComponentId';
+import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 
 export class Menu extends Component {
 
@@ -31,6 +34,20 @@ export class Menu extends Component {
         onShow: PropTypes.func,
         onHide: PropTypes.func
     };
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            visible: !props.popup
+        };
+
+        this.onEnter = this.onEnter.bind(this);
+        this.onEntered = this.onEntered.bind(this);
+        this.onExit = this.onExit.bind(this);
+
+        this.id = this.props.id || UniqueComponentId();
+    }
 
     onItemClick(event, item){
         if (item.disabled) {
@@ -103,7 +120,7 @@ export class Menu extends Component {
 
     toggle(event) {
         if (this.props.popup) {
-            if (this.container.offsetParent)
+            if (this.state.visible)
                 this.hide(event);
             else
                 this.show(event);
@@ -111,47 +128,46 @@ export class Menu extends Component {
     }
 
     show(event) {
-        this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
-        this.container.style.display = 'block';
+        this.target = event.currentTarget;
+        let currentEvent = event;
 
-        setTimeout(() => {
-            DomHandler.addClass(this.container, 'p-menu-overlay-visible');
-            DomHandler.removeClass(this.container, 'p-menu-overlay-hidden');
-        }, 1);
-
-        DomHandler.absolutePosition(this.container,  event.currentTarget);
-        this.bindDocumentListeners();
-
-        if (this.props.onShow) {
-            this.props.onShow(event);
-        }
+        this.setState({ visible: true }, () => {
+            if (this.props.onShow) {
+                this.props.onShow(currentEvent);
+            }
+        });
     }
 
     hide(event) {
-        if (this.container) {
-            DomHandler.addClass(this.container, 'p-menu-overlay-hidden');
-            DomHandler.removeClass(this.container, 'p-menu-overlay-visible');
+        let currentEvent = event;
+        this.setState({ visible: false }, () => {
+            if (this.props.onHide) {
+                this.props.onHide(currentEvent);
+            }
+        });
+    }
 
-            setTimeout(() => {
-                if (this.container) {
-                    this.container.style.display = 'none';
-                    DomHandler.removeClass(this.container, 'p-menu-overlay-hidden');
-                }
-            }, 150);
-        }
+    onEnter() {
+        this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
+        DomHandler.absolutePosition(this.container,  this.target);
+    }
 
-        if (this.props.onHide) {
-            this.props.onHide(event);
-        }
+    onEntered() {
+        this.bindDocumentListeners();
+        this.bindScrollListener();
+    }
 
+    onExit() {
+        this.target = null;
         this.unbindDocumentListeners();
+        this.unbindScrollListener();
     }
 
     bindDocumentListeners() {
         if (!this.documentClickListener) {
             this.documentClickListener = (event) => {
-                if(this.isOutsideClicked(event)) {
-                    this.hide();
+                if (this.state.visible && this.isOutsideClicked(event)) {
+                    this.hide(event);
                 }
             };
 
@@ -160,17 +176,13 @@ export class Menu extends Component {
 
         if (!this.documentResizeListener) {
             this.documentResizeListener = (event) => {
-                if(this.container.offsetParent) {
+                if (this.state.visible) {
                     this.hide(event);
                 }
             };
 
             window.addEventListener('resize', this.documentResizeListener);
         }
-    }
-
-    isOutsideClicked(event) {
-        return this.container && !(this.container.isSameNode(event.target) || this.container.contains(event.target));
     }
 
     unbindDocumentListeners() {
@@ -185,12 +197,38 @@ export class Menu extends Component {
         }
     }
 
+    bindScrollListener() {
+        if (!this.scrollHandler) {
+            this.scrollHandler = new ConnectedOverlayScrollHandler(this.target, (event) => {
+                if (this.state.visible) {
+                    this.hide(event);
+                }
+            });
+        }
+
+        this.scrollHandler.bindScrollListener();
+    }
+
+    unbindScrollListener() {
+        if (this.scrollHandler) {
+            this.scrollHandler.unbindScrollListener();
+        }
+    }
+
+    isOutsideClicked(event) {
+        return this.container && !(this.container.isSameNode(event.target) || this.container.contains(event.target));
+    }
+
     componentWillUnmount() {
         this.unbindDocumentListeners();
+        if (this.scrollHandler) {
+            this.scrollHandler.destroy();
+            this.scrollHandler = null;
+        }
     }
 
     renderSubmenu(submenu, index) {
-        const className = classNames('p-submenu-header', submenu.className,  {'p-disabled': submenu.disabled});
+        const className = classNames('p-submenu-header', {'p-disabled': submenu.disabled}, submenu.className);
         const items = submenu.items.map((item, index)=> {
             return this.renderMenuitem(item, index);
         });
@@ -210,13 +248,15 @@ export class Menu extends Component {
     }
 
     renderMenuitem(item, index) {
-        const className = classNames('p-menuitem', item.className, {'p-disabled': item.disabled});
-        const iconClassName = classNames(item.icon, 'p-menuitem-icon');
-        const icon = item.icon ? <span className={iconClassName}></span>: null;
+        const className = classNames('p-menuitem', item.className);
+        const linkClassName = classNames('p-menuitem-link', {'p-disabled': item.disabled})
+        const iconClassName = classNames('p-menuitem-icon', item.icon);
+        const icon = item.icon && <span className={iconClassName}></span>;
+        const tabIndex = item.disabled ? null : 0;
 
         return (
             <li key={item.label + '_' + index} className={className} style={item.style} role="none">
-                <a href={item.url||'#'} className="p-menuitem-link" role="menuitem" target={item.target} onClick={e => this.onItemClick(e, item)} onKeyDown={e => this.onItemKeyDown(e, item)}>
+                <a href={item.url||'#'} className={linkClassName} role="menuitem" target={item.target} onClick={e => this.onItemClick(e, item)} onKeyDown={e => this.onItemKeyDown(e, item)} tabIndex={tabIndex}>
                     {icon}
                     <span className="p-menuitem-text">{item.label}</span>
                 </a>
@@ -246,20 +286,22 @@ export class Menu extends Component {
 
     renderElement() {
         if (this.props.model) {
-            const className = classNames('p-menu p-component', this.props.className, {'p-menu-dynamic p-menu-overlay': this.props.popup});
+            const className = classNames('p-menu p-component', this.props.className, {'p-menu-overlay': this.props.popup});
             const menuitems = this.renderMenu();
 
             return (
-                <div id={this.props.id} className={className} style={this.props.style} ref={el => this.container = el}>
-                    <ul className="p-menu-list p-reset" role="menu">
-                        {menuitems}
-                    </ul>
-                </div>
+                <CSSTransition classNames="p-connected-overlay" in={this.state.visible} timeout={{ enter: 120, exit: 100 }}
+                    unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit}>
+                    <div id={this.id} className={className} style={this.props.style} ref={el => this.container = el}>
+                        <ul className="p-menu-list p-reset" role="menu">
+                            {menuitems}
+                        </ul>
+                    </div>
+                </CSSTransition>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     render() {

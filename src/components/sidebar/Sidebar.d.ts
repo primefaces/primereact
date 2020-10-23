@@ -13,7 +13,7 @@ interface SidebarProps {
     showCloseIcon?: boolean;
     ariaCloseLabel?: string;
     closeOnEscape?: boolean;
-    iconsTemplate?(): JSX.Element | undefined;
+    icons?: ((props: object) => any | any);
     modal?: boolean;
     onShow?(): void;
     onHide(): void;

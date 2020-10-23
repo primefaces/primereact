@@ -33,21 +33,20 @@ export class TreeTableScrollableView extends Component {
 
     componentDidMount() {
         this.setScrollHeight();
-                
-        if(!this.props.frozen) {
-            this.alignScrollBar();
+
+        if (!this.props.frozen) {
+            let scrollBarWidth = DomHandler.calculateScrollbarWidth();
+
+            this.scrollHeaderBox.style.marginRight = scrollBarWidth + 'px';
+            if(this.scrollFooterBox) {
+                this.scrollFooterBox.style.marginRight = scrollBarWidth + 'px';
+            }
         }
         else {
             this.scrollBody.style.paddingBottom = DomHandler.calculateScrollbarWidth() + 'px';
         }
     }
 
-    componentDidUpdate() {
-        if(!this.props.frozen) {
-            this.alignScrollBar();
-        }
-    }
-    
     setScrollHeight() {
         if(this.props.scrollHeight) {
             if(this.props.scrollHeight.indexOf('%') !== -1) {
@@ -58,7 +57,7 @@ export class TreeTableScrollableView extends Component {
                 let relativeHeight = DomHandler.getOuterHeight(datatableContainer.parentElement) * parseInt(this.props.scrollHeight, 10) / 100;
                 let staticHeight = containerHeight - 100;       //total height of headers, footers, paginators
                 let scrollBodyHeight = (relativeHeight - staticHeight);
-                
+
                 this.scrollBody.style.height = 'auto';
                 this.scrollBody.style.maxHeight = scrollBodyHeight + 'px';
                 this.scrollBody.style.visibility = 'visible';
@@ -68,7 +67,7 @@ export class TreeTableScrollableView extends Component {
             }
         }
     }
-    
+
     findDataTableContainer(element) {
         if(element) {
             let el = element;
@@ -93,30 +92,17 @@ export class TreeTableScrollableView extends Component {
         if(frozenView) {
             frozenScrollBody = DomHandler.findSingle(frozenView, '.p-treetable-scrollable-body');
         }
-        
+
         this.scrollHeaderBox.style.marginLeft = -1 * this.scrollBody.scrollLeft + 'px';
         if(this.scrollFooterBox) {
             this.scrollFooterBox.style.marginLeft = -1 * this.scrollBody.scrollLeft + 'px';
         }
-        
+
         if(frozenScrollBody) {
             frozenScrollBody.scrollTop = this.scrollBody.scrollTop;
         }
     }
 
-    hasVerticalOverflow() {
-        return DomHandler.getOuterHeight(this.scrollTable) > DomHandler.getOuterHeight(this.scrollBody);
-    }
-
-    alignScrollBar() {
-        let scrollBarWidth = this.hasVerticalOverflow() ? DomHandler.calculateScrollbarWidth() : 0;
-        
-        this.scrollHeaderBox.style.marginRight = scrollBarWidth + 'px';
-        if(this.scrollFooterBox) {
-            this.scrollFooterBox.style.marginRight = scrollBarWidth + 'px';
-        }
-    }
-    
     calculateRowHeight() {
         let row = DomHandler.findSingle(this.scrollTable, 'tr:not(.p-treetable-emptymessage-row)');
         if(row) {
@@ -142,6 +128,7 @@ export class TreeTableScrollableView extends Component {
         let width = this.props.frozen ? this.props.frozenWidth : 'calc(100% - ' + this.props.frozenWidth + ')';
         let left = this.props.frozen ? null : this.props.frozenWidth;
         let colGroup = this.renderColGroup();
+        let scrollableBodyStyle = !this.props.frozen && this.props.scrollHeight ? { overflowY: 'scroll' } : null;
 
         return (
             <div className={className} style={{width: width, left: left}} ref={(el) => { this.container = el; }}>
@@ -153,7 +140,7 @@ export class TreeTableScrollableView extends Component {
                         </table>
                     </div>
                 </div>
-                <div className="p-treetable-scrollable-body" ref={(el) => { this.scrollBody = el; }} onScroll={this.onBodyScroll}>
+                <div className="p-treetable-scrollable-body" ref={(el) => { this.scrollBody = el; }} style={scrollableBodyStyle} onScroll={this.onBodyScroll}>
                     <table ref={(el) => { this.scrollTable = el; }} style={{top:'0'}} className="p-treetable-scrollable-body-table">
                         {colGroup}
                         {this.props.body}

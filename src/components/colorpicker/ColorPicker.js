@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
 import {ColorPickerPanel} from './ColorPickerPanel';
-import Tooltip from "../tooltip/Tooltip";
+import {tip} from "../tooltip/Tooltip";
+import ObjectUtils from '../utils/ObjectUtils';
+import { CSSTransition } from 'react-transition-group';
+import UniqueComponentId from '../utils/UniqueComponentId';
+import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 
 export class ColorPicker extends Component {
 
@@ -44,8 +48,17 @@ export class ColorPicker extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            overlayVisible: false
+        };
+
         this.onInputClick = this.onInputClick.bind(this);
         this.onInputKeydown = this.onInputKeydown.bind(this);
+        this.onOverlayEnter = this.onOverlayEnter.bind(this);
+        this.onOverlayEntered = this.onOverlayEntered.bind(this);
+        this.onOverlayExit = this.onOverlayExit.bind(this);
+
+        this.id = this.props.id || UniqueComponentId();
     }
 
     onHueMousedown(event) {
@@ -165,7 +178,7 @@ export class ColorPicker extends Component {
                 preventDefault : () =>{},
                 target: {
                     name: this.props.name,
-                    id: this.props.id,
+                    id: this.id,
                     value: value
                 }
             })
@@ -173,53 +186,58 @@ export class ColorPicker extends Component {
     }
 
     updateColorSelector() {
-        var hsbValue = this.validateHSB({
-            h: this.hsbValue.h,
-            s: 100,
-            b: 100
-        });
-        this.colorSelector.style.backgroundColor = '#' + this.HSBtoHEX(hsbValue);
+        if (this.colorSelector) {
+            let hsbValue = this.validateHSB({
+                h: this.hsbValue.h,
+                s: 100,
+                b: 100
+            });
+            this.colorSelector.style.backgroundColor = '#' + this.HSBtoHEX(hsbValue);
+        }
     }
 
     updateColorHandle() {
-        this.colorHandle.style.left = Math.floor(150 * this.hsbValue.s / 100) + 'px';
-        this.colorHandle.style.top = Math.floor(150 * (100 - this.hsbValue.b) / 100) + 'px';
+        if (this.colorHandle) {
+            this.colorHandle.style.left = Math.floor(150 * this.hsbValue.s / 100) + 'px';
+            this.colorHandle.style.top = Math.floor(150 * (100 - this.hsbValue.b) / 100) + 'px';
+        }
     }
 
     updateHue() {
-        this.hueHandle.style.top = Math.floor(150 - (150 * this.hsbValue.h / 360)) + 'px';
+        if (this.hueHandle) {
+            this.hueHandle.style.top = Math.floor(150 - (150 * this.hsbValue.h / 360)) + 'px';
+        }
     }
 
     updateInput() {
-        if(this.input) {
+        if (this.input) {
             this.input.style.backgroundColor = '#' + this.HSBtoHEX(this.hsbValue);
         }
     }
 
     show() {
-        this.panel.element.style.zIndex = String(DomHandler.generateZIndex());
-        this.panel.element.style.display = 'block';
-
-        setTimeout(() => {
-            DomHandler.addClass(this.panel.element, 'p-input-overlay-visible');
-            DomHandler.removeClass(this.panel.element, 'p-input-overlay-hidden');
-        }, 1);
-
-        this.alignPanel();
-
-        this.bindDocumentClickListener();
+        this.setState({ overlayVisible: true });
     }
 
     hide() {
-        DomHandler.addClass(this.panel.element, 'p-input-overlay-hidden');
-        DomHandler.removeClass(this.panel.element, 'p-input-overlay-visible');
+        this.setState({ overlayVisible: false });
+    }
+
+    onOverlayEnter() {
+        this.panel.element.style.zIndex = String(DomHandler.generateZIndex());
+        this.alignPanel();
+    }
+
+    onOverlayEntered() {
+        this.bindDocumentClickListener();
+        this.bindScrollListener();
+        this.bindResizeListener();
+    }
+
+    onOverlayExit() {
         this.unbindDocumentClickListener();
-
-        setTimeout(() => {
-            this.panel.element.style.display = 'none';
-            DomHandler.removeClass(this.panel.element, 'p-input-overlay-hidden');
-        }, 150);
-
+        this.unbindScrollListener();
+        this.unbindResizeListener();
     }
 
     onInputClick() {
@@ -227,10 +245,10 @@ export class ColorPicker extends Component {
     }
 
     togglePanel() {
-        if(!this.panel.element.offsetParent)
-            this.show();
-        else
+        if (this.state.overlayVisible)
             this.hide();
+        else
+            this.show();
     }
 
     onInputKeydown(event) {
@@ -255,9 +273,8 @@ export class ColorPicker extends Component {
     bindDocumentClickListener() {
         if(!this.documentClickListener) {
             this.documentClickListener = (event) => {
-                if(this.isOutsideClicked(event)) {
+                if (this.state.overlayVisible && this.isOutsideClicked(event)) {
                     this.hide();
-                    this.unbindDocumentClickListener();
                 }
             };
             document.addEventListener('click', this.documentClickListener);
@@ -268,6 +285,42 @@ export class ColorPicker extends Component {
         if(this.documentClickListener) {
             document.removeEventListener('click', this.documentClickListener);
             this.documentClickListener = null;
+        }
+    }
+
+    bindScrollListener() {
+        if (!this.scrollHandler) {
+            this.scrollHandler = new ConnectedOverlayScrollHandler(this.container, () => {
+                if (this.state.overlayVisible) {
+                    this.hide();
+                }
+            });
+        }
+
+        this.scrollHandler.bindScrollListener();
+    }
+
+    unbindScrollListener() {
+        if (this.scrollHandler) {
+            this.scrollHandler.unbindScrollListener();
+        }
+    }
+
+    bindResizeListener() {
+        if (!this.resizeListener) {
+            this.resizeListener = () => {
+                if (this.state.overlayVisible) {
+                    this.hide();
+                }
+            };
+            window.addEventListener('resize', this.resizeListener);
+        }
+    }
+
+    unbindResizeListener() {
+        if (this.resizeListener) {
+            window.removeEventListener('resize', this.resizeListener);
+            this.resizeListener = null;
         }
     }
 
@@ -464,24 +517,15 @@ export class ColorPicker extends Component {
         this.unbindDocumentClickListener();
         this.unbindDocumentMouseMoveListener();
         this.unbindDocumentMouseUpListener();
+        this.unbindResizeListener();
+        if (this.scrollHandler) {
+            this.scrollHandler.destroy();
+            this.scrollHandler = null;
+        }
 
         if (this.tooltip) {
             this.tooltip.destroy();
             this.tooltip = null;
-        }
-    }
-
-    shouldComponentUpdate(nextProps) {
-        if(this.colorDragging) {
-            return false;
-        }
-        else {
-            let oldValue = this.hsbValue;
-            this.updateHSBValue(nextProps.value);
-            let newValue = this.toHSB(nextProps.value);
-            let equals = (newValue.h === oldValue.h && newValue.s === oldValue.s && newValue.b === oldValue.b);
-
-            return !equals;
         }
     }
 
@@ -493,17 +537,18 @@ export class ColorPicker extends Component {
     }
 
     alignPanel() {
+        const container = this.input.parentElement;
         if (this.props.appendTo) {
-            this.panel.element.style.minWidth = DomHandler.getWidth(this.container) + 'px';
-            DomHandler.absolutePosition(this.panel.element, this.container);
+            this.panel.element.style.minWidth = DomHandler.getWidth(container) + 'px';
+            DomHandler.absolutePosition(this.panel.element, container);
         }
         else {
-            DomHandler.relativePosition(this.panel.element, this.container);
+            DomHandler.relativePosition(this.panel.element, container);
         }
     }
 
     renderTooltip() {
-        this.tooltip = new Tooltip({
+        this.tooltip = tip({
             target: this.container,
             content: this.props.tooltip,
             options: this.props.tooltipOptions
@@ -546,27 +591,34 @@ export class ColorPicker extends Component {
                 'p-disabled': this.props.disabled
             });
 
+            let inputProps = ObjectUtils.findDiffKeys(this.props, ColorPicker.defaultProps);
+
             return (
                 <input ref={(el) => this.input = el} type="text" className={inputClassName} readOnly="readonly" id={this.props.inputId} tabIndex={this.props.tabIndex} disabled={this.props.disabled}
-                    onClick={this.onInputClick} onKeyDown={this.onInputKeydown} />
+                    onClick={this.onInputClick} onKeyDown={this.onInputKeydown} {...inputProps}/>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     render() {
-        let className = classNames('p-colorpicker p-component', this.props.className, {'p-colorpicker-overlay': !this.props.inline});
+        const containerClassName = classNames('p-colorpicker p-component', {
+            'p-colorpicker-overlay': !this.props.inline
+        }, this.props.className);
+
         let content = this.renderContent();
         let input = this.renderInput();
 
         return (
-            <div ref={(el) => this.container = el} id={this.props.id} style={this.props.style} className={className}>
+            <div ref={(el) => this.container = el} id={this.id} style={this.props.style} className={containerClassName}>
                 {input}
-                <ColorPickerPanel ref={(el) => this.panel = el} appendTo={this.props.appendTo} inline={this.props.inline} disabled={this.props.disabled}>
-                    {content}
-                </ColorPickerPanel>
+                <CSSTransition classNames="p-connected-overlay" in={this.props.inline || this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }}
+                    unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit}>
+                    <ColorPickerPanel ref={(el) => this.panel = el} appendTo={this.props.appendTo} inline={this.props.inline} disabled={this.props.disabled}>
+                        {content}
+                    </ColorPickerPanel>
+                </CSSTransition>
             </div>
         );
     }

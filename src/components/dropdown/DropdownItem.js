@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import ObjectUtils from '../utils/ObjectUtils';
+import { Ripple } from '../ripple/Ripple';
 
 export class DropdownItem extends Component {
 
@@ -16,7 +18,7 @@ export class DropdownItem extends Component {
     static propTypes = {
         option: PropTypes.any,
         label: PropTypes.any,
-        template: PropTypes.func,
+        template: PropTypes.any,
         selected: PropTypes.bool,
         disabled: PropTypes.bool,
         onClick: PropTypes.func
@@ -38,16 +40,17 @@ export class DropdownItem extends Component {
     }
 
     render() {
-        let className = classNames(this.props.option.className, 'p-dropdown-item', {
+        let className = classNames('p-dropdown-item', {
             'p-highlight': this.props.selected,
             'p-disabled': this.props.disabled,
             'p-dropdown-item-empty': (!this.props.label || this.props.label.length === 0)
-        });
-        let content = this.props.template ? this.props.template(this.props.option) : this.props.label;
+        }, this.props.option.className);
+        let content = this.props.template ? ObjectUtils.getJSXElement(this.props.template, this.props.option) : this.props.label;
 
         return (
             <li className={className} onClick={this.onClick} aria-label={this.props.label} key={this.props.label} role="option" aria-selected={this.props.selected}>
                 {content}
+                <Ripple />
             </li>
         );
     }

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import DomHandler from '../utils/DomHandler';
 import { TreeTableBodyCell } from './TreeTableBodyCell';
+import { Ripple } from '../ripple/Ripple';
 
 export class TreeTableRow extends Component {
 
@@ -461,9 +462,10 @@ export class TreeTableRow extends Component {
         const style = {marginLeft: this.props.level * 16 + 'px', visibility: (this.props.node.leaf === false || (this.props.node.children && this.props.node.children.length)) ? 'visible' : 'hidden'};
 
         return (
-            <span className="p-treetable-toggler p-unselectable-text" onClick={this.onTogglerClick} style={style}>
-                <i className={iconClassName} ></i>
-            </span>
+            <button type="button" className="p-treetable-toggler p-link p-unselectable-text" onClick={this.onTogglerClick} tabIndex="-1" style={style}>
+                <i className={iconClassName}></i>
+                <Ripple />
+            </button>
         );
     }
 
@@ -542,10 +544,10 @@ export class TreeTableRow extends Component {
         className = classNames(className, this.props.node.className);
 
         return (
-            <React.Fragment>
+            <>
                 <tr ref={el => this.container = el} tabIndex="0" className={className} style={this.props.node.style} onClick={this.onClick} onTouchEnd={this.onTouchEnd} onContextMenu={this.onRightClick} onKeyDown={this.onKeyDown}>{cells}</tr>
                 {children}
-            </React.Fragment>
+            </>
         );
     }
 }

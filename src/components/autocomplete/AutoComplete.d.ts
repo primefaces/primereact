@@ -19,6 +19,8 @@ interface AutoCompleteProps {
     inputId?: string;
     inputStyle?: object;
     inputClassName?: string;
+    panelClassName?: string;
+    panelStyle?: object;
     placeholder?: string;
     readonly?: boolean;
     disabled?: boolean;
@@ -31,8 +33,8 @@ interface AutoCompleteProps {
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
     completeMethod?(e: {originalEvent: Event, query: string}): void;
-    itemTemplate?(data: any): JSX.Element | undefined;
-    selectedItemTemplate?(data: any): JSX.Element | undefined;
+    itemTemplate?:((data: any) => any | any);
+    selectedItemTemplate?:((data: any) => any | any);
     onChange?(e: {originalEvent: Event, value: any, target: {name: string, id: string, value: any}}): void;
     onFocus?(event: Event): void;
     onBlur?(event: Event): void;

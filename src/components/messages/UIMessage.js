@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { Ripple } from '../ripple/Ripple';
 
 export class UIMessage extends Component {
 
@@ -61,52 +62,51 @@ export class UIMessage extends Component {
     renderCloseIcon() {
         if (this.props.message.closable !== false) {
             return (
-                <button type="button" className="p-messages-close p-link" onClick={this.onClose}>
-                    <i className="p-messages-close-icon pi pi-times"></i>
+                <button type="button" className="p-message-close p-link" onClick={this.onClose}>
+                    <i className="p-message-close-icon pi pi-times"></i>
+                    <Ripple />
                 </button>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
-    renderMessages() {
-        if(this.props.message) {
-            return (
-                <ul>
-                    <li key={this.props.message.id}>
-                        <span className="p-messages-summary">{this.props.message.summary}</span>
-                        <span className="p-messages-detail">{this.props.message.detail}</span>
-                    </li>
-                </ul>
-            )
+    renderMessage() {
+        if (this.props.message) {
+            const { severity, content, summary, detail } = this.props.message;
+            const icon = classNames('p-message-icon pi ', {
+                'pi-info-circle': severity === 'info',
+                'pi-check': severity === 'success',
+                'pi-exclamation-triangle': severity === 'warn',
+                'pi-times-circle': severity === 'error'
+            });
+
+            return content || (
+                <>
+                    <span className={icon}></span>
+                    <span className="p-message-summary">{summary}</span>
+                    <span className="p-message-detail">{detail}</span>
+                </>
+            );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     render() {
-        let className = 'p-messages p-component p-messages-' + this.props.message.severity;
-        let icon = classNames('p-messages-icon pi ', {
-            'pi-info-circle': this.props.message.severity === 'info',
-            'pi-exclamation-triangle': this.props.message.severity === 'warn',
-            'pi-times': this.props.message.severity === 'error',
-            'pi-check': this.props.message.severity === 'success',
-        });
+        const severity = this.props.message.severity;
+        let className = 'p-message p-component p-message-' + severity;
         let closeIcon = this.renderCloseIcon();
-        let messages = this.renderMessages();
+        let message = this.renderMessage();
 
         return (
             <div ref={(el) => { this.container = el; }} className={className} onClick={this.onClick}>
-                <div className="p-messages-wrapper">
+                <div className="p-message-wrapper">
+                    {message}
                     {closeIcon}
-                    <span className={icon}></span>
-                    {messages}
                 </div>
             </div>
         );
-
     }
 }

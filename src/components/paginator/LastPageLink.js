@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { Ripple } from '../ripple/Ripple';
 
 export class LastPageLink extends Component {
 
@@ -19,7 +20,8 @@ export class LastPageLink extends Component {
 
         return (
             <button type="button" className={className} onClick={this.props.onClick} disabled={this.props.disabled}>
-                <span className="p-paginator-icon pi pi-step-forward"></span>
+                <span className="p-paginator-icon pi pi-angle-double-right"></span>
+                <Ripple />
             </button>
         );
     }

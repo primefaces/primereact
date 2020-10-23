@@ -12,6 +12,10 @@
 /.sass-cache
 /resources
 /components
-/src/sass/App.css
-/src/sass/App.css.map
+/src/assets/style/app/App.css
+/src/assets/style/app/App.css.map
 package-lock.json
+
+# Themes
+public/themes/soho-light/
+public/themes/soho-dark/

@@ -145,7 +145,7 @@ export class BodyRow extends Component {
     findNextSelectableRow(row) {
         let nextRow = row.nextElementSibling;
         if (nextRow) {
-            if (DomHandler.hasClass(nextRow, 'p-datatable-row'))
+            if (DomHandler.hasClass(nextRow, 'p-selectable-row'))
                 return nextRow;
             else
                 return this.findNextSelectableRow(nextRow);
@@ -158,7 +158,7 @@ export class BodyRow extends Component {
     findPrevSelectableRow(row) {
         let prevRow = row.previousElementSibling;
         if (prevRow) {
-            if (DomHandler.hasClass(prevRow, 'p-datatable-row'))
+            if (DomHandler.hasClass(prevRow, 'p-selectable-row'))
                 return prevRow;
             else
                 return this.findPrevSelectableRow(prevRow);
@@ -172,7 +172,8 @@ export class BodyRow extends Component {
         if (this.props.onRowEditInit) {
             this.props.onRowEditInit({
                 originalEvent: event,
-                data: this.props.rowData
+                data: this.props.rowData,
+                index: this.props.rowIndex
             });
         }
 
@@ -193,7 +194,8 @@ export class BodyRow extends Component {
         if (this.props.onRowEditSave) {
             this.props.onRowEditSave({
                 originalEvent: event,
-                data: this.props.rowData
+                data: this.props.rowData,
+                index: this.props.rowIndex
             });
         }
 
@@ -224,14 +226,15 @@ export class BodyRow extends Component {
         let columns = React.Children.toArray(this.props.children);
         let conditionalClassNames = {
             'p-highlight': this.props.selected,
-            'p-highlight-contextmenu': this.props.contextMenuSelected
+            'p-highlight-contextmenu': this.props.contextMenuSelected,
+            'p-selectable-row': this.props.selectionMode
         };
 
-        if(this.props.rowClassName) {
+        if (this.props.rowClassName) {
             let rowClassNameCondition = this.props.rowClassName(this.props.rowData);
             conditionalClassNames = {...conditionalClassNames, ...rowClassNameCondition};
         }
-        let className = classNames('p-datatable-row', conditionalClassNames);
+        let className = classNames(conditionalClassNames);
         let style = this.props.virtualScroll ? {height: this.props.virtualRowHeight} : {};
         let hasRowSpanGrouping = this.props.rowGroupMode === 'rowspan';
         let cells = [];
@@ -252,8 +255,8 @@ export class BodyRow extends Component {
             }
 
             let cell = <BodyCell key={i} {...column.props} value={this.props.value} rowSpan={rowSpan} rowData={this.props.rowData} rowIndex={this.props.rowIndex} onRowToggle={this.props.onRowToggle} expanded={this.props.expanded}
-                        onRadioClick={this.props.onRadioClick} onCheckboxClick={this.props.onCheckboxClick} responsive={this.props.responsive} selected={this.props.selected}
-                        editMode={this.props.editMode} editing={this.state.editing} onRowEditInit={this.onRowEditInit} onRowEditSave={this.onRowEditSave} onRowEditCancel={this.onRowEditCancel} 
+                        onRadioClick={this.props.onRadioClick} onCheckboxClick={this.props.onCheckboxClick} selected={this.props.selected}
+                        editMode={this.props.editMode} editing={this.state.editing} onRowEditInit={this.onRowEditInit} onRowEditSave={this.onRowEditSave} onRowEditCancel={this.onRowEditCancel}
                         showRowReorderElement={this.props.showRowReorderElement} showSelectionElement={this.props.showSelectionElement}/>;
 
             cells.push(cell);
