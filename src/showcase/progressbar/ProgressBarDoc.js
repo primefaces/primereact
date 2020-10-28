@@ -169,8 +169,8 @@ const ProgressBarDemo = () => {
     }
 
     useEffect(() => {
+        let val = value1;
         interval.current = setInterval(() => {
-            let val = value1;
             val += Math.floor(Math.random() * 10) + 1;
 
             if (val >= 100) {
