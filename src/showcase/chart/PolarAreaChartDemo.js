@@ -155,7 +155,7 @@ export class PolarAreaChartDemo extends Component {
     render() {
         return (
             <div className="card">
-                <Chart type="polarArea" data={this.chartData} options={options} />
+                <Chart type="polarArea" data={this.chartData} options={this.lightOptions} />
             </div>
         )
     }
@@ -211,7 +211,7 @@ const PolarAreaChartDemo = () => {
 
     return (
         <div className="card">
-            <Chart type="polarArea" data={chartData} options={options} />
+            <Chart type="polarArea" data={chartData} options={lightOptions} />
         </div>
     );
 }
