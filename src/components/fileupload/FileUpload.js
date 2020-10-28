@@ -480,7 +480,7 @@ export class FileUpload extends Component {
                 <span className={buttonClassName} onMouseUp={this.onSimpleUploaderClick} onKeyDown={this.onKeyDown} onFocus={this.onFocus} onBlur={this.onBlur} tabIndex={0}>
                     <span className={iconClassName}></span>
                     <span className="p-button-label p-clickable">{label}</span>
-                    { !this.hasFiles() && <input ref={(el) => this.fileInput = el} type="file" accept={this.props.accept} disabled={this.props.disabled} onChange={this.onFileSelect} /> }
+                    { !this.hasFiles() && <input ref={(el) => this.fileInput = el} type="file" accept={this.props.accept} multiple={this.props.multiple} disabled={this.props.disabled} onChange={this.onFileSelect} /> }
                     <Ripple />
                 </span>
             </div>
