@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import DomHandler from '../utils/DomHandler';
 import classNames from 'classnames';
-import {tip} from "../tooltip/Tooltip";
+import { tip } from "../tooltip/Tooltip";
 
 export class Chips extends Component {
 
@@ -208,6 +207,10 @@ export class Chips extends Component {
         return this.props.max && this.props.value && this.props.max === this.props.value.length;
     }
 
+    isFilled() {
+        return (this.props.value && this.props.value.length) || (this.inputElement && this.inputElement.value && this.inputElement.value.length);
+    }
+
     componentDidMount() {
         if (this.props.tooltip) {
             this.renderTooltip();
@@ -295,7 +298,7 @@ export class Chips extends Component {
 
     render() {
         const className = classNames('p-chips p-component p-inputwrapper', this.props.className, {
-            'p-inputwrapper-filled': (this.props.value && this.props.value.length > 0) || (DomHandler.hasClass(this.inputElement, 'p-filled') && this.inputElement.value !== ''),
+            'p-inputwrapper-filled': this.isFilled(),
             'p-inputwrapper-focus': this.state.focused
         });
         const list = this.renderList();
