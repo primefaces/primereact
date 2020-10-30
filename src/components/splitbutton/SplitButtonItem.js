@@ -32,7 +32,13 @@ export class SplitButtonItem extends Component {
         e.preventDefault();
     }
 
-    render() {
+    renderSeparator() {
+        return (
+            <li className="p-menu-separator" role="separator"></li>
+        );
+    }
+
+    renderMenuitem() {
         let { disabled, icon, label, template } = this.props.menuitem;
         const className = classNames('p-menuitem-link', { 'p-disabled': disabled });
         const itemContent = template ? ObjectUtils.getJSXElement(template, this.props.menuitem) : null;
@@ -48,5 +54,19 @@ export class SplitButtonItem extends Component {
                 </a>
             </li>
         );
+    }
+
+    renderItem() {
+        if (this.props.menuitem.separator) {
+            return this.renderSeparator();
+        }
+
+        return this.renderMenuitem();
+    }
+
+    render() {
+        const item = this.renderItem();
+
+        return item;
     }
 }
