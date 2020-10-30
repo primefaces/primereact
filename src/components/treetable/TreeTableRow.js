@@ -473,7 +473,7 @@ export class TreeTableRow extends Component {
         if (this.props.selectionMode === 'checkbox' && this.props.node.selectable !== false) {
             const checked = this.isChecked();
             const partialChecked = this.isPartialChecked();
-            const className = classNames('p-checkbox-box', {'p-highlight': checked});
+            const className = classNames('p-checkbox-box', {'p-highlight': checked, 'p-indeterminate': partialChecked});
             const icon = classNames('p-checkbox-icon p-c', {'pi pi-check': checked, 'pi pi-minus': partialChecked});
 
             return (
