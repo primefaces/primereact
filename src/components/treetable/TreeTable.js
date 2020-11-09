@@ -223,6 +223,12 @@ export class TreeTable extends Component {
         if (this.props.sortMode === 'multiple') {
             let metaKey = event.originalEvent.metaKey || event.originalEvent.ctrlKey;
             multiSortMeta = this.getMultiSortMeta();
+
+            if (multiSortMeta && multiSortMeta instanceof Array) {
+                const sortMeta = multiSortMeta.find(sortMeta => sortMeta.field === sortField);
+                sortOrder = sortMeta ? this.getCalculatedSortOrder(sortMeta.order) : sortOrder;
+            }
+
             if (!multiSortMeta || !metaKey) {
                 multiSortMeta = [];
             }
@@ -245,6 +251,10 @@ export class TreeTable extends Component {
                 multiSortMeta: multiSortMeta
             });
         }
+    }
+
+    getCalculatedSortOrder(currentOrder) {
+        return currentOrder * -1;
     }
 
     addSortMeta(meta, multiSortMeta) {
