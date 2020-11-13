@@ -1458,6 +1458,7 @@ export class Calendar extends Component {
 
     hideOverlay(callback) {
         this.setState({ overlayVisible: false }, () => {
+            this.viewStateChanged = false;
             this.ignoreFocusFunctionality = false;
             if (callback) {
                 callback();
