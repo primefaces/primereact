@@ -138,7 +138,7 @@ const InputTextDemo = () => {
                 </div>
 
                 <h5>Disabled</h5>
-                <InputText value={this.state.value5} disabled />
+                <InputText value={value5} disabled />
 
                 <h5>Sizes</h5>
                 <div className="sizes">
@@ -205,7 +205,7 @@ const InputTextDemo = () => {
                 </div>
 
                 <h5>Disabled</h5>
-                <InputText value={this.state.value5} disabled />
+                <InputText value={value5} disabled />
 
                 <h5>Sizes</h5>
                 <div className="sizes">
