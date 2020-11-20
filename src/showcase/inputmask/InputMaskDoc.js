@@ -392,6 +392,16 @@ import { InputMask } from 'primereact/inputmask';
                                 </thead>
                                 <tbody>
                                     <tr>
+                                        <td>onFocus</td>
+                                        <td>event: Browser event</td>
+                                        <td>Callback to invoke when input receives focus.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onBlur</td>
+                                        <td>event: Browser event</td>
+                                        <td>Callback to invoke when input loses focus.</td>
+                                    </tr>
+                                    <tr>
                                         <td>onComplete</td>
                                         <td>event: Browser event<br/>
                                             value: New value of the component</td>

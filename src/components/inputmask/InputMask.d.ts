@@ -24,6 +24,8 @@ interface InputMaskProps {
     ariaLabelledBy?: string;
     onComplete?(e: {originalEvent: Event, value: any}): void;
     onChange?(e: {originalEvent: Event, value: any, target: {name: string, id: string, value: any}}): void;
+    onFocus?(e: Event): void;
+    onBlur?(e: Event): void;
 }
 
 export class InputMask extends React.Component<InputMaskProps,any> {}
