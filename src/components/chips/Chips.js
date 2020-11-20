@@ -118,18 +118,19 @@ export class Chips extends Component {
 
     onKeyDown(event) {
         const inputValue = event.target.value;
+        const values = this.props.value || [];
 
         switch(event.which) {
             //backspace
             case 8:
-                if (this.inputElement.value.length === 0 && this.props.value && this.props.value.length > 0) {
-                    this.removeItem(event, this.props.value.length - 1);
+                if (this.inputElement.value.length === 0 && values.length > 0) {
+                    this.removeItem(event, values.length - 1);
                 }
             break;
 
             //enter
             case 13:
-                if (inputValue && inputValue.trim().length && (!this.props.max || this.props.max > this.props.value.length)) {
+                if (inputValue && inputValue.trim().length && (!this.props.max || this.props.max > values.length)) {
                     this.addItem(event, inputValue, true);
                 }
             break;
