@@ -30,7 +30,9 @@ export class InputMask extends Component {
         tooltipOptions: null,
         ariaLabelledBy: null,
         onComplete: null,
-        onChange: null
+        onChange: null,
+        onFocus: null,
+        onBlur: null
     }
 
     static propTypes = {
@@ -55,7 +57,9 @@ export class InputMask extends Component {
         tooltipOptions: PropTypes.object,
         ariaLabelledBy: PropTypes.string,
         onComplete: PropTypes.func,
-        onChange: PropTypes.func
+        onChange: PropTypes.func,
+        onFocus: PropTypes.func,
+        onBlur: PropTypes.func
     }
 
     constructor(props) {
@@ -210,6 +214,10 @@ export class InputMask extends Component {
         this.checkVal();
         this.updateModel(e);
         this.updateFilledState();
+
+        if (this.props.onBlur) {
+            this.props.onBlur(e);
+        }
 
         if (this.input.value !== this.focusText) {
             let event = document.createEvent('HTMLEvents');
@@ -382,7 +390,7 @@ export class InputMask extends Component {
         return (this.partialPosition ? i : this.firstNonMaskPos);
     }
 
-    onFocus(event) {
+    onFocus(e) {
         if (this.props.readonly) {
             return;
         }
@@ -408,6 +416,10 @@ export class InputMask extends Component {
             }
             this.updateFilledState();
         }, 10);
+
+        if (this.props.onFocus) {
+            this.props.onFocus(e);
+        }
     }
 
     onInput(event) {
