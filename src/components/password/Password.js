@@ -47,7 +47,7 @@ export class Password extends Component {
 
         this.state = {
             overlayVisible: false,
-            meterPosition: '',
+            meter: null,
             infoText: props.promptLabel
         };
 
@@ -111,32 +111,41 @@ export class Password extends Component {
         if(this.props.feedback) {
             let value = e.target.value;
             let label = null;
-            let meterPos = null;
+            let meter = null;
 
             switch (this.testStrength(value)) {
                 case 1:
                     label = this.props.weakLabel;
-                    meterPos = '0px -10px';
+                    meter = {
+                        strength: 'weak',
+                        width: '33.33%'
+                    };
                     break;
 
                 case 2:
                     label = this.props.mediumLabel;
-                    meterPos = '0px -20px';
+                    meter = {
+                        strength: 'medium',
+                        width: '66.66%'
+                    };
                     break;
 
                 case 3:
                     label = this.props.strongLabel;
-                    meterPos = '0px -30px';
+                    meter = {
+                        strength: 'strong',
+                        width: '100%'
+                    };
                     break;
 
                 default:
                     label = this.props.promptLabel;
-                    meterPos = '0px 0px';
+                    meter = null;
                     break;
             }
 
             this.setState({
-                meterPosition: meterPos,
+                meter,
                 infoText: label
             }, () => {
                 if (!this.state.overlayVisible) {
@@ -246,6 +255,7 @@ export class Password extends Component {
     render() {
         const panelClassName = classNames('p-password-panel p-component', this.props.panelClassName);
         let inputProps = ObjectUtils.findDiffKeys(this.props, Password.defaultProps);
+        let { strength, width } = this.state.meter || { strength: '', width: '0%' };
 
         return (
             <>
@@ -254,7 +264,9 @@ export class Password extends Component {
                 <CSSTransition classNames="p-connected-overlay" in={this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }}
                     unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit}>
                     <div ref={(el) => this.panel = el} className={panelClassName} style={this.props.panelStyle}>
-                        <div className="p-password-meter" style={{ backgroundPosition: this.state.meterPosition }}></div>
+                        <div className="p-password-meter">
+                            <div className={`p-password-strength ${strength}`} style={{ width: width }}></div>
+                        </div>
                         <div className="p-password-info">
                             {this.state.infoText}
                         </div>
