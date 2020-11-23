@@ -180,7 +180,16 @@ export class OverlayPanel extends Component {
         if (this.target) {
             DomHandler.absolutePosition(this.container, this.target);
 
-            if (DomHandler.getOffset(this.container).top < DomHandler.getOffset(this.target).top) {
+            const containerOffset = DomHandler.getOffset(this.container);
+            const targetOffset = DomHandler.getOffset(this.target);
+            let arrowLeft = 0;
+
+            if (containerOffset.left < targetOffset.left) {
+                arrowLeft = targetOffset.left - containerOffset.left;
+            }
+            this.container.style.setProperty('--overlayArrowLeft', `${arrowLeft}px`);
+
+            if (containerOffset.top < targetOffset.top) {
                 DomHandler.addClass(this.container, 'p-overlaypanel-flipped');
             }
         }
