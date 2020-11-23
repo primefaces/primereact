@@ -161,6 +161,8 @@ export class Tooltip extends Component {
     }
 
     hide(e) {
+        this.clearTimeouts();
+
         if (this.state.visible) {
             this.sendCallback(this.props.onBeforeHide, { originalEvent: e, target: this.currentTarget });
             this.applyDelay('hideDelay', () => {
