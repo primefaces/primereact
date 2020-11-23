@@ -135,6 +135,11 @@ export class HomeComponent extends Component {
 
                     <div className="p-grid">
                         <div className="p-col-12 p-md-3">
+							<a href="https://www.primefaces.org/layouts/diamond-react">
+								<img alt="Diamond" src="showcase/images/layouts/diamond-react.jpg" />
+							</a>
+						</div>
+                        <div className="p-col-12 p-md-3">
 							<a href="https://www.primefaces.org/layouts/sapphire-react">
 								<img alt="Sapphire" src="showcase/images/layouts/sapphire-react.jpg" />
 							</a>

@@ -15,16 +15,21 @@ export class AppNews extends Component {
         return (
             <>
                 {
-                    this.props.newsActive && <div className="layout-news" onClick={() => window.open('https://www.primefaces.org/store', '_blank')}>
-                        <div className="layout-news-container">
-                            <img src="showcase/images/news/topbar-easter-2020-text.png" className="layout-news-text" alt="New Year" />
-                            <img src="showcase/images/news/topbar-easter-2020-ultima.png" className="layout-news-helper-image" alt="New Year" />
-
-                            <button type="button" className="p-link layout-news-close" onClick={this.props.onHideNews}>
-                                <i className="pi pi-times"></i>
-                            </button>
+                    this.props.newsActive && (
+                        <div className="layout-news">
+                            <div className="layout-news-container">
+                                <img className="layouts-news-mockup-image" src="showcase/images/news/topbar-diamond-mockup.png" alt="layout" />
+                                <span className="layout-news-details">
+                                </span>
+                                <a href="https://www.primefaces.org/layouts/diamond-react" target="_blank" rel="noopener noreferrer" tabIndex="-1" style={{textDecoration: 'none'}} className="layout-news-button">
+                                    LEARN MORE<i className="pi pi-angle-right"></i>
+                                </a>
+                                <button type="button" className="p-link layout-news-close" onClick={this.props.onHideNews}>
+                                    <i className="pi pi-times"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                    )
                 }
             </>
         );

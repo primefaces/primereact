@@ -373,7 +373,12 @@ export class AppConfig extends Component {
                             <h4>Premium Create-React-App Templates</h4>
                             <p>Beautifully crafted premium <a href="https://github.com/facebookincubator/create-react-app">create-react-app</a> application templates by the PrimeTek design team.</p>
                             <div className="p-grid premium-themes">
-                            <div className="p-col-12 p-md-6">
+                                <div className="p-col-12 p-md-6">
+                                    <a href="https://www.primefaces.org/layouts/diamond-react" rel="noopener noreferrer" target="_blank">
+                                        <img alt="Diamond" src="showcase/images/layouts/diamond-react.jpg" />
+                                    </a>
+                                </div>
+                                <div className="p-col-12 p-md-6">
                                     <a href="https://www.primefaces.org/layouts/sapphire-react" rel="noopener noreferrer" target="_blank">
                                         <img alt="Sapphire" src="showcase/images/layouts/sapphire-react.jpg" />
                                     </a>
