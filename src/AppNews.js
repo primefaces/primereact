@@ -18,10 +18,10 @@ export class AppNews extends Component {
                     this.props.newsActive && (
                         <div className="layout-news">
                             <div className="layout-news-container">
-                                <img className="layouts-news-mockup-image" src="showcase/images/news/topbar-diamond-mockup.png" alt="layout" />
+                                <img className="layouts-news-mockup-image" src="showcase/images/news/topbar-blackfriday.png" alt="layout" />
                                 <span className="layout-news-details">
                                 </span>
-                                <a href="https://www.primefaces.org/layouts/diamond-react" target="_blank" rel="noopener noreferrer" tabIndex="-1" style={{textDecoration: 'none'}} className="layout-news-button">
+                                <a href="https://www.primefaces.org/store" target="_blank" rel="noopener noreferrer" tabIndex="-1" style={{textDecoration: 'none'}} className="layout-news-button">
                                     LEARN MORE<i className="pi pi-angle-right"></i>
                                 </a>
                                 <button type="button" className="p-link layout-news-close" onClick={this.props.onHideNews}>

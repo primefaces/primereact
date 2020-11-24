@@ -9,7 +9,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url("../../images/news/topbar-diamond-bg.png");
+    background-image: url("../../images/news/topbar-blackfriday-bg.png");
     cursor: pointer;
 
     .layout-news-container {
@@ -47,8 +47,8 @@
         }
 
         .layout-news-button {
-            border: 1px solid #ffffff;
-            color: #ffffff;
+            border: 1px solid #000000;
+            color: #000000;
             font-size: 15px;
             padding: .3em .3em .5em 1em;
             font-weight: bold;

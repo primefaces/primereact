@@ -178,3 +178,9 @@
         }
     }
 }
+
+@media screen and (max-width: 576px) {
+    .layout-news .layout-news-container img.layouts-news-mockup-image {
+        width: 95%;
+    }
+}
