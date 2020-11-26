@@ -153,6 +153,7 @@ import { DataTableStripedDemo } from './showcase/datatable/DataTableStripedDemo'
 import { AccessibilityDemo } from './showcase/accessibility/AccessibilityDemo';
 import { BadgeDemo } from './showcase/badge/BadgeDemo';
 import { RippleDemo } from './showcase/ripple/RippleDemo';
+import { TimelineDemo } from './showcase/timeline/TimelineDemo';
 
 class AppRouter extends Component {
 
@@ -331,6 +332,7 @@ class AppRouter extends Component {
                 <Route path="/accessibility" component={AccessibilityDemo} />
                 <Route path="/badge" component={BadgeDemo} />
                 <Route path="/ripple" component={RippleDemo} />
+                <Route path="/timeline" component={TimelineDemo} />
             </>
         );
     }

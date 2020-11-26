@@ -840,6 +840,14 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "name": "Timeline",
+                    "to": "/timeline",
+                    "meta": [
+                        "timeline"
+                    ],
+                    "badge": "new"
                 }
             ]
         },
