@@ -283,7 +283,8 @@ export class DataView extends Component {
             if (this.props.paginator) {
                 const rows = this.props.onPage ? this.props.rows : this.state.rows;
                 const first = this.props.lazy ? 0 : this.props.onPage ? this.props.first : this.state.first;
-                const last = rows + first;
+                const totalRecords = this.getTotalRecords();
+                const last = Math.min(rows + first, totalRecords);
                 let items = [];
 
                 for (let i = first; i < last; i++) {
