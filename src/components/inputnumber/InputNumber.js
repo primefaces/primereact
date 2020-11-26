@@ -401,6 +401,14 @@ export class InputNumber extends Component {
                 }
             break;
 
+            //enter
+            case 13:
+                newValueStr = this.validateValue(this.parseValue(inputValue));
+                this.inputEl.value = this.formatValue(newValueStr);
+                this.inputEl.setAttribute('aria-valuenow', newValueStr);
+                this.updateModel(event, newValueStr);
+            break;
+
             //backspace
             case 8:
                 event.preventDefault();
