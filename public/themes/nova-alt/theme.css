@@ -725,6 +725,14 @@
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s; }
     .p-multiselect .p-multiselect-label.p-placeholder {
       color: #666666; }
+  .p-multiselect.p-multiselect-chip .p-multiselect-token {
+    padding: 0.2145rem 0.429rem;
+    margin-right: 0.5rem;
+    background: #007ad9;
+    color: #ffffff;
+    border-radius: 3px; }
+    .p-multiselect.p-multiselect-chip .p-multiselect-token .p-multiselect-token-icon {
+      margin-left: 0.5rem; }
   .p-multiselect .p-multiselect-trigger {
     background: transparent;
     color: #848484;
@@ -733,6 +741,9 @@
     border-bottom-right-radius: 3px; }
   .p-multiselect.p-error, .p-multiselect.p-invalid {
     border-color: #a80000; }
+
+.p-inputwrapper-filled.p-multiselect.p-multiselect-chip .p-multiselect-label {
+  padding: 0.2145rem 0.429rem; }
 
 .p-multiselect-panel {
   background: #ffffff;
@@ -855,6 +866,8 @@
         color: #ffffff; }
   .p-radiobutton.p-error > .p-radiobutton-box, .p-radiobutton.p-invalid > .p-radiobutton-box {
     border-color: #a80000; }
+  .p-radiobutton:focus {
+    outline: 0 none; }
 
 .p-input-filled .p-radiobutton .p-radiobutton-box {
   background-color: #f4f4f4; }
