@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import ObjectUtils from '../utils/ObjectUtils';
 import DomHandler from '../utils/DomHandler';
 import {RowRadioButton} from './RowRadioButton';

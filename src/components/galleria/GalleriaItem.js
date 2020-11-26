@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import { Ripple } from '../ripple/Ripple';
 
 export class GalleriaItem extends Component {

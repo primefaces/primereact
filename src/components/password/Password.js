@@ -7,7 +7,7 @@ import { tip } from '../tooltip/Tooltip';
 import ObjectUtils from '../utils/ObjectUtils';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import { CSSTransition } from 'react-transition-group';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 
 export class Password extends Component {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import {InputText} from '../inputtext/InputText';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import {tip} from "../tooltip/Tooltip";
 import { Ripple } from '../ripple/Ripple';
 

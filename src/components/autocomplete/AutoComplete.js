@@ -6,7 +6,7 @@ import { Button } from '../button/Button';
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
 import { AutoCompletePanel } from './AutoCompletePanel';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import { tip } from '../tooltip/Tooltip';
 import UniqueComponentId from "../utils/UniqueComponentId";
 import { CSSTransition } from 'react-transition-group';

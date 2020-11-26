@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import {Button} from '../button/Button';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
 import { SplitButtonItem } from './SplitButtonItem';
 import { SplitButtonPanel } from './SplitButtonPanel';

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import Quill from "quill";
 import 'quill/dist/quill.snow.css';
 import 'quill/dist/quill.bubble.css';

@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import DomHandler from '../utils/DomHandler';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import {PickListSubList} from './PickListSubList';
 import {PickListControls} from './PickListControls';
 import {PickListTransferControls} from './PickListTransferControls';

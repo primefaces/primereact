@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
 import { CSSTransition } from 'react-transition-group';
 import { Ripple } from '../ripple/Ripple';

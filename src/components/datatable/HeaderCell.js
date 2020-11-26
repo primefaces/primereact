@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {InputText} from '../inputtext/InputText';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import {RowCheckbox} from './RowCheckbox';
 import DomHandler from '../utils/DomHandler';
 

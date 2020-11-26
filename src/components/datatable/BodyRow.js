@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import {BodyCell} from './BodyCell';
 import DomHandler from '../utils/DomHandler';
 

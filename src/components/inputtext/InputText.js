@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import KeyFilter from "../keyfilter/KeyFilter";
 import {tip} from "../tooltip/Tooltip";
 import DomHandler from '../utils/DomHandler';

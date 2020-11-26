@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Paginator} from '../paginator/Paginator';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import ObjectUtils from '../utils/ObjectUtils';
 import { Ripple } from '../ripple/Ripple';
 

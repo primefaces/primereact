@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import ObjectUtils from '../utils/ObjectUtils';
 import { Ripple } from '../ripple/Ripple';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 
 export class AutoCompletePanel extends Component {
 

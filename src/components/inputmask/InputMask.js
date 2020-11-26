@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import DomHandler from '../utils/DomHandler';
 import { InputText } from '../inputtext/InputText';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import {tip} from "../tooltip/Tooltip";
 
 export class InputMask extends Component {

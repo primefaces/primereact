@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import {ColorPickerPanel} from './ColorPickerPanel';
 import {tip} from "../tooltip/Tooltip";
 import ObjectUtils from '../utils/ObjectUtils';

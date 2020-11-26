@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 
