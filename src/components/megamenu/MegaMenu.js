@@ -207,23 +207,23 @@ export class MegaMenu extends Component {
 
         switch(length) {
             case 2:
-                columnClass= 'p-col-6';
+                columnClass= 'p-megamenu-col-6';
             break;
 
             case 3:
-                columnClass= 'p-col-4';
+                columnClass= 'p-megamenu-col-4';
             break;
 
             case 4:
-                columnClass= 'p-col-3';
+                columnClass= 'p-megamenu-col-3';
             break;
 
             case 6:
-                columnClass= 'p-col-2';
+                columnClass= 'p-megamenu-col-2';
             break;
 
             default:
-                columnClass= 'p-col-12';
+                columnClass= 'p-megamenu-col-12';
             break;
         }
 
