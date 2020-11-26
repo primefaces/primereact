@@ -51,7 +51,6 @@ dependencies: {
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-transition-group": "^2.5.1"
-    "classnames": "^2.2.6",
     "primeicons": "^4.0.0"
 }
 `}
@@ -85,7 +84,7 @@ dependencies: {
                                 </tr>
                                 <tr>
                                     <td>PrimeFlex</td>
-                                    <td>DataView and MegaMenu components.</td>
+                                    <td>DataView component.</td>
                                 </tr>
                             </tbody>
                         </table>
