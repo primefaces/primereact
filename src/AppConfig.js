@@ -316,6 +316,18 @@ export class AppConfig extends Component {
                                     </button>
                                     <span>Soho Dark</span>
                                 </div>
+                                <div className="p-col-3">
+                                    <button className="p-link">
+                                        <img src="showcase/images/themes/mira.jpg" alt="Mira" onClick={(e) => this.onThemeChange(e, 'mira')}/>
+                                    </button>
+                                    <span>Mira</span>
+                                </div>
+                                <div className="p-col-3">
+                                    <button className="p-link">
+                                        <img src="showcase/images/themes/nano.jpg" alt="Nano" onClick={(e) => this.onThemeChange(e, 'nano', true)}/>
+                                    </button>
+                                    <span>Nano</span>
+                                </div>
                             </div>
 
                             <h4>Legacy Free Themes</h4>
