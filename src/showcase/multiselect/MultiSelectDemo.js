@@ -9,7 +9,8 @@ export class MultiSelectDemo extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedCities: null,
+            selectedCities1: null,
+            selectedCities2: null,
             selectedCountries: null
         };
 
@@ -73,7 +74,10 @@ export class MultiSelectDemo extends Component {
                 <div className="content-section implementation multiselect-demo">
                     <div className="card">
                         <h5>Basic</h5>
-                        <MultiSelect value={this.state.selectedCities} options={this.cities} onChange={(e) => this.setState({ selectedCities: e.value })} optionLabel="name" placeholder="Select a City" />
+                        <MultiSelect value={this.state.selectedCities1} options={this.cities} onChange={(e) => this.setState({ selectedCities1: e.value })} optionLabel="name" placeholder="Select a City" />
+
+                        <h5>Chips</h5>
+                        <MultiSelect value={this.state.selectedCities2} options={this.cities} onChange={(e) => this.setState({ selectedCities2: e.value })} optionLabel="name" placeholder="Select a City" display="chip" />
 
                         <h5>Advanced with Templating and Filtering</h5>
                         <MultiSelect value={this.state.selectedCountries} options={this.countries}  onChange={(e) => this.setState({ selectedCountries: e.value })} optionLabel="name" placeholder="Select Countries" filter className="multiselect-custom"
