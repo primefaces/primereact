@@ -21,6 +21,7 @@ export class MultiSelect extends Component {
         options: null,
         optionLabel: null,
         optionValue: null,
+        display: 'comma',
         style: null,
         className: null,
         panelClassName: null,
@@ -60,6 +61,7 @@ export class MultiSelect extends Component {
         options: PropTypes.array,
         optionLabel: PropTypes.string,
         optionValue: PropTypes.string,
+        display: PropTypes.string,
         style: PropTypes.object,
         className: PropTypes.string,
         panelClassName: PropTypes.string,
@@ -192,7 +194,7 @@ export class MultiSelect extends Component {
     }
 
     onClick(event) {
-        if (!this.props.disabled && !this.isPanelClicked(event)) {
+        if (!this.props.disabled && !this.isPanelClicked(event) && !DomHandler.hasClass(event.target, 'p-multiselect-token-icon')) {
             if (this.state.overlayVisible) {
                 this.hide();
             }
@@ -328,8 +330,9 @@ export class MultiSelect extends Component {
         let index = -1;
 
         if (this.props.value) {
+            const key = this.equalityKey();
             for (let i = 0; i < this.props.value.length; i++) {
-                if (ObjectUtils.equals(this.props.value[i], value, this.props.dataKey)) {
+                if (ObjectUtils.equals(this.props.value[i], value, key)) {
                     index = i;
                     break;
                 }
@@ -343,14 +346,15 @@ export class MultiSelect extends Component {
         return this.findSelectionIndex(this.getOptionValue(option)) !== -1;
     }
 
-    findLabelByValue(val) {
+    getLabelByValue(val) {
         let label = null;
 
         for (let i = 0; i < this.props.options.length; i++) {
             let option = this.props.options[i];
             let optionValue = this.getOptionValue(option);
+            let key = this.equalityKey();
 
-            if (ObjectUtils.equals(optionValue, val)) {
+            if (ObjectUtils.equals(optionValue, val, key)) {
                 label = this.getOptionLabel(option);
                 break;
             }
@@ -503,8 +507,19 @@ export class MultiSelect extends Component {
         return !this.props.value || this.props.value.length === 0;
     }
 
+    equalityKey() {
+        return this.props.optionValue ? null : this.props.dataKey;
+    }
+
     checkValidity() {
         return this.nativeSelect.checkValidity();
+    }
+
+    removeChip(event, item) {
+        let key = this.equalityKey();
+        let value = this.props.value.filter(val => !ObjectUtils.equals(val, item, key));
+
+        this.updateModel(event, value);
     }
 
     getSelectedItemsLabel() {
@@ -525,7 +540,7 @@ export class MultiSelect extends Component {
                 if(i !== 0) {
                     label += ',';
                 }
-                label += this.findLabelByValue(this.props.value[i]);
+                label += this.getLabelByValue(this.props.value[i]);
             }
 
             if (this.props.value.length <= this.props.maxSelectedLabels) {
@@ -560,6 +575,20 @@ export class MultiSelect extends Component {
             }
         }
         else {
+            if (this.props.display === 'chip' && !this.isEmpty()) {
+                return (
+                    this.props.value.map((val) => {
+                        const label = this.getLabelByValue(val);
+                        return (
+                            <div className="p-multiselect-token" key={label}>
+                                <span className="p-multiselect-token-label">{label}</span>
+                                { !this.props.disabled && <span className="p-multiselect-token-icon pi pi-times-circle" onClick={(e) => this.removeChip(e, val)}></span> }
+                            </div>
+                        )
+                    })
+                );
+            }
+
             return this.getLabel();
         }
     }
@@ -609,6 +638,7 @@ export class MultiSelect extends Component {
 
     render() {
         let className = classNames('p-multiselect p-component p-inputwrapper', {
+            'p-multiselect-chip': this.props.display === 'chip',
             'p-disabled': this.props.disabled,
             'p-focus': this.state.focused,
             'p-inputwrapper-filled': this.props.value && this.props.value.length > 0,
