@@ -223,7 +223,7 @@ const citySelectItems = [
 
 <CodeHighlight>
 {`
-<Listbox value={this.state.city} options={citySelectItems} onChange={(e) => this.setState({city: e.value})} />
+<ListBox value={this.state.city} options={citySelectItems} onChange={(e) => this.setState({city: e.value})} />
 `}
 </CodeHighlight>
 
@@ -242,8 +242,8 @@ const cities = [
 
             <CodeHighlight>
 {`
-<Listbox optionLabel="name" value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})} />
-<Listbox optionLabel="name" optionValue="code" value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})} />
+<ListBox optionLabel="name" value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})} />
+<ListBox optionLabel="name" optionValue="code" value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})} />
 `}
             </CodeHighlight>
             <p>When <i>optionValue</i> is not defined, value of an option refers to the option object itself.</p>
@@ -255,7 +255,7 @@ const cities = [
 
 <CodeHighlight>
 {`
-<Listbox value={this.state.cities} options={cities} onChange={(e) => this.setState({city: e.value})} multiple />
+<ListBox value={this.state.cities} options={cities} onChange={(e) => this.setState({city: e.value})} multiple />
 `}
 </CodeHighlight>
 
@@ -264,7 +264,7 @@ const cities = [
 
 <CodeHighlight>
 {`
-<Listbox value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})} itemTemplate={this.itemTemplate} />
+<ListBox value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})} itemTemplate={this.itemTemplate} />
 `}
 </CodeHighlight>
 
@@ -282,7 +282,7 @@ itemTemplate(option) {
 
 <CodeHighlight>
 {`
-<Listbox value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})} filter />
+<ListBox value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})} filter />
 `}
 </CodeHighlight>
 
