@@ -233,6 +233,7 @@ export class ContextMenu extends Component {
 
         this.state = {
             visible: false,
+            reshow: false,
             resetMenu: false
         };
 
@@ -266,11 +267,27 @@ export class ContextMenu extends Component {
 
         this.currentEvent = event;
 
-        this.setState({ visible: true }, () => {
-            if (this.props.onShow) {
-                this.props.onShow(this.currentEvent);
-            }
-        });
+        if (this.state.visible) {
+            this.setState({ reshow: true });
+        }
+        else {
+            this.setState({ visible: true }, () => {
+                if (this.props.onShow) {
+                    this.props.onShow(this.currentEvent);
+                }
+            });
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.visible && prevState.reshow !== this.state.reshow) {
+            let event = this.currentEvent;
+            this.setState({
+                visible: false,
+                rePosition: false,
+                resetMenu: true
+            }, () => this.show(event));
+        }
     }
 
     hide(event) {
@@ -279,7 +296,7 @@ export class ContextMenu extends Component {
         }
 
         this.currentEvent = event;
-        this.setState({ visible: false }, () => {
+        this.setState({ visible: false, reshow: false }, () => {
             if (this.props.onHide) {
                 this.props.onHide(this.currentEvent);
             }
