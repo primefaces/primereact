@@ -76,7 +76,7 @@ export class BodyCell extends Component {
 
     bindDocumentEditListener() {
         if (!this.documentEditListener) {
-            this.documentEditListener = (event) => {
+            this.documentEditListener = () => {
                 if (!this.editingCellClick) {
                     this.switchCellToViewMode(true);
                 }
@@ -86,7 +86,7 @@ export class BodyCell extends Component {
 
             this.editingCellClick = false;
 
-            document.addEventListener('click', this.documentEditListener);
+            document.addEventListener('click', this.documentEditListener, { capture: true });
         }
     }
 
@@ -122,7 +122,7 @@ export class BodyCell extends Component {
 
     unbindDocumentEditListener() {
         if (this.documentEditListener) {
-            document.removeEventListener('click', this.documentEditListener);
+            document.removeEventListener('click', this.documentEditListener, { capture: true });
             this.documentEditListener = null;
         }
     }
