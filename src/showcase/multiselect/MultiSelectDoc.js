@@ -517,6 +517,12 @@ selectedItemTemplate(option) {
                             <td>When present, it specifies that the component should be disabled.</td>
                         </tr>
                         <tr>
+                            <td>showClear</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>When enabled, a clear icon is displayed to clear the value.</td>
+                        </tr>
+                        <tr>
                             <td>filter</td>
                             <td>boolean</td>
                             <td>true</td>
