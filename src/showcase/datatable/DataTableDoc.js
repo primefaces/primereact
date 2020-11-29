@@ -1967,7 +1967,8 @@ statusEditor(props) {
 
 <CodeHighlight lang="js">
 {`
-requiredValidator(props) {
+requiredValidator(e) {
+    let props = e.columnProps;
     let value = props.rowData[props.field];
     return value && value.length > 0;
 }

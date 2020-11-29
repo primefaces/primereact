@@ -1869,7 +1869,8 @@ export class TreeTableEditDemo extends Component {
         return this.inputTextEditor(props, 'type', '100%');
     }
 
-    requiredValidator(props) {
+    requiredValidator(e) {
+        let props = e.columnProps;
         let value = props.node.data[props.field];
 
         return value && value.length > 0;
