@@ -30,6 +30,7 @@ export class MultiSelect extends Component {
         placeholder: null,
         fixedPlaceholder: false,
         disabled: false,
+        showClear: false,
         filter: false,
         filterBy: null,
         filterMatchMode: 'contains',
@@ -70,6 +71,7 @@ export class MultiSelect extends Component {
         placeholder: PropTypes.string,
         fixedPlaceholder: PropTypes.bool,
         disabled: PropTypes.bool,
+        showClear: PropTypes.bool,
         filter: PropTypes.bool,
         filterBy: PropTypes.string,
         filterMatchMode: PropTypes.string,
@@ -194,7 +196,7 @@ export class MultiSelect extends Component {
     }
 
     onClick(event) {
-        if (!this.props.disabled && !this.isPanelClicked(event) && !DomHandler.hasClass(event.target, 'p-multiselect-token-icon')) {
+        if (!this.props.disabled && !this.isPanelClicked(event) && !DomHandler.hasClass(event.target, 'p-multiselect-token-icon') && !this.isClearClicked(event)) {
             if (this.state.overlayVisible) {
                 this.hide();
             }
@@ -432,8 +434,12 @@ export class MultiSelect extends Component {
     }
 
     isOutsideClicked(event) {
-        return this.container && !(this.container.isSameNode(event.target) || this.container.contains(event.target)
+        return this.container && !(this.container.isSameNode(event.target) || this.isClearClicked(event) || this.container.contains(event.target)
             || (this.panel && this.panel.element && this.panel.element.contains(event.target)));
+    }
+
+    isClearClicked(event) {
+        return DomHandler.hasClass(event.target, 'p-multiselect-clear-icon')
     }
 
     isPanelClicked(event) {
@@ -608,6 +614,17 @@ export class MultiSelect extends Component {
         );
     }
 
+    renderClearIcon() {
+        const empty = this.isEmpty();
+        if (!empty && this.props.showClear && !this.props.disabled) {
+            return (
+                <i className="p-multiselect-clear-icon pi pi-times" onClick={(e) => this.updateModel(e, null)}></i>
+            );
+        }
+
+        return null;
+    }
+
     renderLabel() {
         const empty = this.isEmpty();
         const content = this.getLabelContent();
@@ -640,11 +657,13 @@ export class MultiSelect extends Component {
         let className = classNames('p-multiselect p-component p-inputwrapper', {
             'p-multiselect-chip': this.props.display === 'chip',
             'p-disabled': this.props.disabled,
+            'p-multiselect-clearable': this.props.showClear && !this.props.disabled,
             'p-focus': this.state.focused,
             'p-inputwrapper-filled': this.props.value && this.props.value.length > 0,
             'p-inputwrapper-focus': this.state.focused
         }, this.props.className);
         let label = this.renderLabel();
+        let clearIcon = this.renderClearIcon();
         let hiddenSelect = this.renderHiddenSelect();
         let items = this.props.options;
         const hasFilter = this.hasFilter();
@@ -682,6 +701,7 @@ export class MultiSelect extends Component {
                         role="listbox" aria-haspopup="listbox" aria-labelledby={this.props.ariaLabelledBy} aria-expanded={this.state.overlayVisible} disabled={this.props.disabled} tabIndex={this.props.tabIndex} />
                 </div>
                 {label}
+                {clearIcon}
                 <div className="p-multiselect-trigger">
                     <span className="p-multiselect-trigger-icon pi pi-chevron-down p-c"></span>
                 </div>

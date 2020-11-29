@@ -100,6 +100,12 @@
     position: relative;
 }
 
+.p-multiselect-clear-icon {
+    position: absolute;
+    top: 50%;
+    margin-top: -.5rem;
+}
+
 .p-fluid .p-multiselect {
     display: flex;
 }
