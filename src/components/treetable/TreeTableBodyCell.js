@@ -32,7 +32,7 @@ export class TreeTableBodyCell extends Component {
 
     onKeyDown(event) {
         if(event.which === 13 || event.which === 9) {
-            this.switchCellToViewMode();
+            this.switchCellToViewMode(event);
         }
     }
 
@@ -40,7 +40,7 @@ export class TreeTableBodyCell extends Component {
         if(!this.documentEditListener) {
             this.documentEditListener = (event) => {
                 if(!this.cellClick) {
-                    this.switchCellToViewMode();
+                    this.switchCellToViewMode(event);
                 }
 
                 this.cellClick = false;
@@ -68,9 +68,13 @@ export class TreeTableBodyCell extends Component {
         this.onClick(event);
     }
 
-    switchCellToViewMode() {
+    switchCellToViewMode(event) {
         if (this.props.editorValidator) {
-            let valid = this.props.editorValidator(this.props);
+            let valid = this.props.editorValidator({
+                originalEvent: event,
+                columnProps: this.props
+            });
+
             if(valid) {
                 this.closeCell();
             }

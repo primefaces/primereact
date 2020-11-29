@@ -35,11 +35,11 @@ export class BodyCell extends Component {
     onKeyDown(event) {
         if (this.props.editMode !== 'row') {
             if (event.which === 13 || event.which === 9) { // tab || enter
-                this.switchCellToViewMode(true, event);
+                this.switchCellToViewMode(event, true);
             }
             if (event.which === 27) // escape
             {
-                this.switchCellToViewMode(false, event);
+                this.switchCellToViewMode(event, false);
             }
         }
     }
@@ -53,7 +53,10 @@ export class BodyCell extends Component {
                     editing: true
                 }, () => {
                     if (this.props.onEditorInit) {
-                        this.props.onEditorInit(this.props, event);
+                        this.props.onEditorInit({
+                            originalEvent: event,
+                            columnProps: this.props
+                        });
                     }
                 });
 
@@ -66,7 +69,7 @@ export class BodyCell extends Component {
 
     onBlur(event) {
         if (this.props.editMode !== 'row' && this.state.editing && this.props.editorValidatorEvent === 'blur') {
-            this.switchCellToViewMode(true, event);
+            this.switchCellToViewMode(event, true);
         }
     }
 
@@ -76,9 +79,9 @@ export class BodyCell extends Component {
 
     bindDocumentEditListener() {
         if (!this.documentEditListener) {
-            this.documentEditListener = () => {
+            this.documentEditListener = (e) => {
                 if (!this.editingCellClick) {
-                    this.switchCellToViewMode(true, event);
+                    this.switchCellToViewMode(e, true);
                 }
 
                 this.editingCellClick = false;
@@ -101,19 +104,24 @@ export class BodyCell extends Component {
         this.unbindDocumentEditListener();
     }
 
-    switchCellToViewMode(submit, event) {
+    switchCellToViewMode(event, submit) {
+        const params = {
+            originalEvent: event,
+            columnProps: this.props
+        };
+
         if (!submit && this.props.onEditorCancel) {
-            this.props.onEditorCancel(this.props, event);
+            this.props.onEditorCancel(params);
         }
 
         let valid = true;
         if (this.props.editorValidator) {
-            valid = this.props.editorValidator(this.props, event);
+            valid = this.props.editorValidator(params);
         }
 
         if (valid) {
             if (submit && this.props.onEditorSubmit) {
-                this.props.onEditorSubmit(this.props, event);
+                this.props.onEditorSubmit(params);
             }
 
             this.closeCell();
