@@ -32,7 +32,7 @@ export class DataTable extends Component {
         pageLinkSize: 5,
         rowsPerPageOptions: null,
         currentPageReportTemplate: '({currentPage} of {totalPages})',
-        first: null,
+        first: 0,
         rows: null,
         totalRecords: null,
         lazy: false,

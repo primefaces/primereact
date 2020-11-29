@@ -44,6 +44,7 @@ export class TableBody extends Component {
                 let metaSelection = this.rowTouched ? false : this.props.metaKeySelection;
                 this.anchorRowIndex = rowIndex;
                 this.rangeRowIndex = rowIndex;
+                this.anchorRowFirst = this.props.first;
 
                 if (metaSelection) {
                     let metaKey = event.originalEvent.metaKey || event.originalEvent.ctrlKey;
@@ -125,6 +126,12 @@ export class TableBody extends Component {
 
     selectRange(event) {
         let rangeStart, rangeEnd;
+        let isLazyAndPaginator = this.props.lazy && this.props.paginator;
+
+        if (isLazyAndPaginator) {
+            this.anchorRowIndex += this.anchorRowFirst;
+            this.rangeRowIndex += this.props.first;
+        }
 
         if (this.rangeRowIndex > this.anchorRowIndex) {
             rangeStart = this.anchorRowIndex;
@@ -139,9 +146,9 @@ export class TableBody extends Component {
             rangeEnd = this.rangeRowIndex;
         }
 
-        if (this.props.lazy && this.props.paginator) {
-            rangeStart -= this.first;
-            rangeEnd -= this.first;
+        if (isLazyAndPaginator) {
+            rangeStart = Math.max(rangeStart - this.props.first, 0);
+            rangeEnd -= this.props.first;
         }
 
         const value = this.props.value;
