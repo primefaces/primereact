@@ -237,8 +237,7 @@
                     "to": "/inputnumber",
                     "meta": [
                         "inputnumber"
-                    ],
-                    "badge": "new"
+                    ]
                 },
                 {
                     "name": "InputSwitch",
@@ -288,14 +287,16 @@
                     "meta": [
                         "multiselect",
                         "selectCheckboxMenu"
-                    ]
+                    ],
+                    "badge": "updated"
                 },
                 {
                     "name": "Password",
                     "to": "/password",
                     "meta": [
                         "password"
-                    ]
+                    ],
+                    "badge": "updated"
                 },
                 {
                     "name": "RadioButton",
@@ -1159,7 +1160,6 @@
                     "meta": [
                         "galleria"
                     ],
-                    "badge": "new",
                     "children": [
                         {
                             "name": "Documentation",

@@ -1,4 +1,592 @@
 {
+    "5.0.2": {
+        "calendar": [
+            {
+                "number": 1672,
+                "title": "Calendar value change does not update UI",
+                "url": "https://github.com/primefaces/primereact/issues/1672"
+            },
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "datatable": [
+            {
+                "number": 1685,
+                "title": "DataTable edit not work (Input disappears immediately after clicking cell) in react-dom@17.0.1",
+                "url": "https://github.com/primefaces/primereact/issues/1685"
+            },
+            {
+                "number": 1692,
+                "title": "Change params of onEditorInit, onEditorSubmit, onEditorCancel and editorValidator callbacks on Column",
+                "url": "https://github.com/primefaces/primereact/issues/1692"
+            },
+            {
+                "number": 1636,
+                "title": "DataTable with lazy mode and multiple selection doesn't work as expected",
+                "url": "https://github.com/primefaces/primereact/issues/1636"
+            },
+            {
+                "number": 1577,
+                "title": "Add browser event param to editor callbacks on Datatable",
+                "url": "https://github.com/primefaces/primereact/issues/1577"
+            },
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "megamenu": [
+            {
+                "number": 1690,
+                "title": "Remove PrimeFlex dependency from MegaMenu",
+                "url": "https://github.com/primefaces/primereact/issues/1690"
+            },
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "multiselect": [
+            {
+                "number": 1689,
+                "title": "Chips display for MultiSelect",
+                "url": "https://github.com/primefaces/primereact/issues/1689"
+            },
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            },
+            {
+                "number": 1627,
+                "title": "Add showClear property to MultiSelect",
+                "url": "https://github.com/primefaces/primereact/issues/1627"
+            }
+        ],
+        "column": [
+            {
+                "number": 1692,
+                "title": "Change params of onEditorInit, onEditorSubmit, onEditorCancel and editorValidator callbacks on Column",
+                "url": "https://github.com/primefaces/primereact/issues/1692"
+            }
+        ],
+        "treetable": [
+            {
+                "number": 1692,
+                "title": "Change params of onEditorInit, onEditorSubmit, onEditorCancel and editorValidator callbacks on Column",
+                "url": "https://github.com/primefaces/primereact/issues/1692"
+            },
+            {
+                "number": 1442,
+                "title": "Multiple sort in TreeTable is not working when passing multisortmeta props",
+                "url": "https://github.com/primefaces/primereact/issues/1442"
+            },
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            },
+            {
+                "number": 1657,
+                "title": "When a partial selection is made among children of a node, the minus icon doesn't appear in the checkbox of that node.",
+                "url": "https://github.com/primefaces/primereact/issues/1657"
+            }
+        ],
+        "tooltip": [
+            {
+                "number": 1667,
+                "title": "Tooltip with `showDelay` appears despite cursor has already left the Input",
+                "url": "https://github.com/primefaces/primereact/issues/1667"
+            },
+            {
+                "number": 1683,
+                "title": "Improve Tooltip implementation",
+                "url": "https://github.com/primefaces/primereact/issues/1683"
+            },
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "inputmask": [
+            {
+                "number": 1677,
+                "title": "Add onFocus and onBlur events on InputMask",
+                "url": "https://github.com/primefaces/primereact/issues/1677"
+            },
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "timeline": [
+            {
+                "number": 1687,
+                "title": "New Component: Timeline",
+                "url": "https://github.com/primefaces/primereact/issues/1687"
+            },
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "common": [
+            {
+                "number": 1634,
+                "title": "pRipple working when disabled(etc menuitem)",
+                "url": "https://github.com/primefaces/primereact/issues/1634"
+            }
+        ],
+        "password": [
+            {
+                "number": 1684,
+                "title": "Improve Password implementation",
+                "url": "https://github.com/primefaces/primereact/issues/1684"
+            },
+            {
+                "number": 1623,
+                "title": "Add mediumRegex and strongRegex property to Password",
+                "url": "https://github.com/primefaces/primereact/issues/1623"
+            },
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "utils": [
+            {
+                "number": 1655,
+                "title": "Do not hide overlays on body scroll",
+                "url": "https://github.com/primefaces/primereact/issues/1655"
+            },
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "chips": [
+            {
+                "number": 1654,
+                "title": "Float label is not working on Chips",
+                "url": "https://github.com/primefaces/primereact/issues/1654"
+            },
+            {
+                "number": 1678,
+                "title": "Chips is not working when the initial value sets 'null'",
+                "url": "https://github.com/primefaces/primereact/issues/1678"
+            },
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "overlaypanel": [
+            {
+                "number": 1671,
+                "title": "OverlayPanel - arrow always on the left side of the panel. ",
+                "url": "https://github.com/primefaces/primereact/issues/1671"
+            },
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "contextmenu": [
+            {
+                "number": 1574,
+                "title": "DataTable Context Menu doesn't reposition",
+                "url": "https://github.com/primefaces/primereact/issues/1574"
+            },
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "inputnumber": [
+            {
+                "number": 1688,
+                "title": "Add the 'enter' key support to InputNumber",
+                "url": "https://github.com/primefaces/primereact/issues/1688"
+            },
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "card": [
+            {
+                "number": 1658,
+                "title": "Change the types of header, footer, title, subTitle properties on Card",
+                "url": "https://github.com/primefaces/primereact/issues/1658"
+            },
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "dataview": [
+            {
+                "number": 1691,
+                "title": "DataView throws an exception when the last page is reached using Paginator",
+                "url": "https://github.com/primefaces/primereact/issues/1691"
+            },
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "accordion": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "autocomplete": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "breadcrumb": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "button": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "carousel": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "chart": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "checkbox": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "colorpicker": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "datascroller": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "dialog": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "dropdown": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "editor": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "fieldset": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "fileupload": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "galleria": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "inplace": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "inputtext": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "inputtextarea": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "listbox": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "menu": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "menubar": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "message": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "messages": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "orderlist": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "organizationchart": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "paginator": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "panel": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "panelmenu": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "picklist": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "progressbar": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "progressspinner": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "radiobutton": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "rating": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "scrollpanel": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "selectbutton": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "sidebar": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "slidemenu": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "splitbutton": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            },
+            {
+                "number": 1656,
+                "title": "Add separator support to SplitButton",
+                "url": "https://github.com/primefaces/primereact/issues/1656"
+            }
+        ],
+        "steps": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "tabmenu": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "tabview": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "tieredmenu": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "toast": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "togglebutton": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "toolbar": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "tree": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "tristatecheckbox": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ]
+    },
+
     "5.0.1": {
         "tooltip": [
             {
