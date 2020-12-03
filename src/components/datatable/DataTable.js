@@ -456,7 +456,7 @@ export class DataTable extends Component {
 
     saveColumnWidths(state) {
         let widths = [];
-        let headers = DomHandler.find(this.container, '.p-datatable-thead > tr > th');
+        let headers = DomHandler.find(this.container, '.p-datatable-thead > tr > th.p-resizable-column');
         headers.map(header => widths.push(DomHandler.getOuterWidth(header)));
         state.columnWidths = widths.join(',');
 
