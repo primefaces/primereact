@@ -542,7 +542,7 @@ export class TreeLazyDemo extends Component {
 </CodeHighlight>
 
                         <h5>Templating</h5>
-                        <p><i>label</i> property of a node is used to display as the content by default. Templating is supported as well with the <i>nodeTemplate</i> callback that gets the ndoe instance and returns JSX. Example
+                        <p><i>label</i> property of a node is used to display as the content by default. Templating is supported as well with the <i>nodeTemplate</i> callback that gets the node instance and returns JSX. Example
             below is a sample tree based navigation of React docs.</p>
 <CodeHighlight lang="js">
 {`
