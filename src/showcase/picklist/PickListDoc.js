@@ -347,6 +347,18 @@ import { PickList } from 'primereact/picklist';
                                         <td>Inline style of the target list element.</td>
                                     </tr>
                                     <tr>
+                                        <td>sourceSelection</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Selected item in the source list.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>targetSelection</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Selected items in the target list.</td>
+                                    </tr>
+                                    <tr>
                                         <td>showSourceControls</td>
                                         <td>boolean</td>
                                         <td>true</td>
@@ -424,13 +436,13 @@ import { PickList } from 'primereact/picklist';
                                         <td>Callback to invoke when all items are moved from source to target.</td>
                                     </tr>
                                     <tr>
-                                        <td>onSourceSelect</td>
+                                        <td>onSourceSelectionChange</td>
                                         <td>event.originalEvent: Browser event <br />
                                 items: Selected items array</td>
                                         <td>Callback to invoke when items are selected within source list.</td>
                                     </tr>
                                     <tr>
-                                        <td>onTargetSelect</td>
+                                        <td>onTargetSelectionChange</td>
                                         <td>event.originalEvent: Browser event <br />
                                 items: Selected items array</td>
                                         <td>Callback to invoke when items are selected within target list.</td>
