@@ -10,6 +10,8 @@ interface PickListProps {
     className?: string;
     sourceStyle?: object;
     targetStyle?: object;
+    sourceSelection?: any;
+    targetSelection?: any;
     showSourceControls?: boolean;
     showTargetControls?: boolean;
     metaKeySelection?: boolean;
@@ -20,8 +22,8 @@ interface PickListProps {
     onMoveAllToSource?(e: {originalEvent: Event, value: any}): void;
     onMoveToTarget?(e: {originalEvent: Event, value: any}): void;
     onMoveAllToTarget?(e: {originalEvent: Event, value: any}): void;
-    onSourceSelect?(e: {originalEvent: Event, value: any}): void;
-    onTargetSelect?(e: {originalEvent: Event, value: any}): void;
+    onSourceSelectionChange?(e: {originalEvent: Event, value: any}): void;
+    onTargetSelectionChange?(e: {originalEvent: Event, value: any}): void;
 }
 
 export class PickList extends React.Component<PickListProps,any> {}
