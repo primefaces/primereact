@@ -1,8 +1,7 @@
 import * as React from 'react';
-
 interface TimelineProps {
     id?: string;
-    value?: array;
+    value?: Array<any>;
     align?: string;
     layout?: string;
     dataKey?: string;
