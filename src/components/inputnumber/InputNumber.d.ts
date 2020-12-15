@@ -46,6 +46,7 @@ interface InputNumberProps {
     onChange?(e: {originalEvent: Event, value: any}): void;
     onBlur?(e: Event): void;
     onFocus?(e: Event): void;
+    onKeyDown?(e: Event): void;
 }
 
 export class InputNumber extends React.Component<InputNumberProps,any> {}

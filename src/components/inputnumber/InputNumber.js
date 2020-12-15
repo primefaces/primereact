@@ -52,7 +52,8 @@ export class InputNumber extends Component {
         onValueChange: null,
         onChange: null,
         onBlur: null,
-        onFocus: null
+        onFocus: null,
+        onKeyDown: null
     }
 
     static propTypes = {
@@ -99,7 +100,8 @@ export class InputNumber extends Component {
         onValueChange: PropTypes.func,
         onChange: PropTypes.func,
         onBlur: PropTypes.func,
-        onFocus: PropTypes.func
+        onFocus: PropTypes.func,
+        onKeyDown: PropTypes.func
     }
 
     constructor(props) {
@@ -487,6 +489,10 @@ export class InputNumber extends Component {
 
             default:
             break;
+        }
+
+        if (this.props.onKeyDown) {
+            this.props.onKeyDown(event);
         }
     }
 

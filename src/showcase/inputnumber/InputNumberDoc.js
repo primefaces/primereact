@@ -869,6 +869,11 @@ Vertical
                             <td>event: Browser event</td>
                             <td>Callback to invoke when input loses focus.</td>
                         </tr>
+                        <tr>
+                            <td>onKeyDown</td>
+                            <td>event: Browser event.</td>
+                            <td>Callback to invoke when the key pressed.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
