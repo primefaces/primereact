@@ -335,7 +335,7 @@ import { InputMask } from 'primereact/inputmask';
                                         <td>Maximum number of character allows in the input field.</td>
                                     </tr>
                                     <tr>
-                                        <td>tabindex</td>
+                                        <td>tabIndex</td>
                                         <td>number</td>
                                         <td>null</td>
                                         <td>Specifies tab order of the element.</td>

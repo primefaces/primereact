@@ -490,7 +490,7 @@ itemTemplate(item) {
                                         <td>DOM element instance where the overlay panel should be mounted.</td>
                                     </tr>
                                     <tr>
-                                        <td>tabindex</td>
+                                        <td>tabIndex</td>
                                         <td>number</td>
                                         <td>null</td>
                                         <td>Index of the element in tabbing order.</td>

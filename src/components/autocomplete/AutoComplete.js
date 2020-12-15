@@ -40,7 +40,7 @@ export class AutoComplete extends Component {
         maxlength: null,
         size: null,
         appendTo: null,
-        tabindex: null,
+        tabIndex: null,
         autoFocus: false,
         tooltip: null,
         tooltipOptions: null,
@@ -89,7 +89,7 @@ export class AutoComplete extends Component {
         maxlength: PropTypes.number,
         size: PropTypes.number,
         appendTo: PropTypes.any,
-        tabindex: PropTypes.number,
+        tabIndex: PropTypes.number,
         autoFocus: PropTypes.bool,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
@@ -615,7 +615,7 @@ export class AutoComplete extends Component {
                         defaultValue={this.formatValue(this.props.value)} role="searchbox" aria-autocomplete="list" aria-controls={this.listId}
                         aria-labelledby={this.props.ariaLabelledBy} className={inputClassName} style={this.props.inputStyle} autoComplete="off"
                         readOnly={this.props.readonly} disabled={this.props.disabled} placeholder={this.props.placeholder} size={this.props.size}
-                        maxLength={this.props.maxlength} tabIndex={this.props.tabindex}
+                        maxLength={this.props.maxlength} tabIndex={this.props.tabIndex}
                         onBlur={this.onInputBlur} onFocus={this.onInputFocus} onChange={this.onInputChange}
                         onMouseDown={this.props.onMouseDown} onKeyUp={this.props.onKeyUp} onKeyDown={this.onInputKeyDown}
                         onKeyPress={this.props.onKeyPress} onContextMenu={this.props.onContextMenu}
@@ -643,7 +643,7 @@ export class AutoComplete extends Component {
             <li className="p-autocomplete-input-token">
                 <input ref={(el) => this.inputEl = el} type={this.props.type} disabled={this.props.disabled} placeholder={this.props.placeholder}
                        role="searchbox" aria-autocomplete="list" aria-controls={this.listId} aria-labelledby={this.props.ariaLabelledBy}
-                       autoComplete="off" tabIndex={this.props.tabindex} onChange={this.onInputChange} id={this.props.inputId} name={this.props.name}
+                       autoComplete="off" tabIndex={this.props.tabIndex} onChange={this.onInputChange} id={this.props.inputId} name={this.props.name}
                        style={this.props.inputStyle} className={this.props.inputClassName} maxLength={this.props.maxlength}
                        onKeyUp={this.props.onKeyUp} onKeyDown={this.onInputKeyDown} onKeyPress={this.props.onKeyPress}
                        onFocus={this.onMultiInputFocus} onBlur={this.onMultiInputBlur} />

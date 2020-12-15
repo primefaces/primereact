@@ -184,7 +184,7 @@ showResponse(response) {
                                         <td>tabIndex</td>
                                         <td>number</td>
                                         <td>0</td>
-                                        <td>The tabindex of the widget and challenge.</td>
+                                        <td>The tabIndex of the widget and challenge.</td>
                                     </tr>
                                     <tr>
                                         <td>language</td>

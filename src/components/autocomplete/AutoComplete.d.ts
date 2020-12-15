@@ -27,7 +27,7 @@ interface AutoCompleteProps {
     maxlength?: number;
     size?: number;
     appendTo?: any;
-    tabindex?: number;
+    tabIndex?: number;
     autoFocus?: boolean;
     tooltip?: any;
     tooltipOptions?: TooltipOptions;

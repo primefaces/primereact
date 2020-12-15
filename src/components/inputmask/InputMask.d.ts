@@ -14,7 +14,7 @@ interface InputMaskProps {
     placeholder?: string;
     size?: number;
     maxlength?: number;
-    tabindex?: number;
+    tabIndex?: number;
     disabled?: boolean;
     readonly?: boolean;
     name?: string;
