@@ -154,6 +154,7 @@ import { AccessibilityDemo } from './showcase/accessibility/AccessibilityDemo';
 import { BadgeDemo } from './showcase/badge/BadgeDemo';
 import { RippleDemo } from './showcase/ripple/RippleDemo';
 import { TimelineDemo } from './showcase/timeline/TimelineDemo';
+import { AvatarDemo } from './showcase/avatar/AvatarDemo';
 
 class AppRouter extends Component {
 
@@ -330,9 +331,10 @@ class AppRouter extends Component {
                 <Route path="/spacing" component={SpacingDemo} />
                 <Route path="/text" component={TextDemo} />
                 <Route path="/accessibility" component={AccessibilityDemo} />
-                <Route path="/badge" component={BadgeDemo} />
                 <Route path="/ripple" component={RippleDemo} />
                 <Route path="/timeline" component={TimelineDemo} />
+                <Route path="/avatar" component={AvatarDemo} />
+                <Route path="/badge" component={BadgeDemo} />
             </>
         );
     }

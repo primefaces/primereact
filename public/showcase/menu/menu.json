@@ -1242,17 +1242,26 @@
             ],
             "children": [
                 {
-                    "name": "Accessibility",
-                    "to": "/accessibility",
+                    "name": "Avatar",
+                    "to": "/avatar",
                     "meta": [
-                        "accessibility"
-                    ]
+                        "avatar"
+                    ],
+                    "badge": "new"
                 },
                 {
                     "name": "Badge",
                     "to": "/badge",
                     "meta": [
                         "badge"
+                    ],
+                    "badge": "new"
+                },       
+                {
+                    "name": "Accessibility",
+                    "to": "/accessibility",
+                    "meta": [
+                        "accessibility"
                     ]
                 },
                 {
