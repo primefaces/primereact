@@ -22,7 +22,7 @@ export class AvatarDemo extends Component {
                                 <h5>Label</h5>
                                 <Avatar className="p-mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }}>
                                     V
-                            </Avatar>
+                                </Avatar>
                             </div>
                         </div>
 

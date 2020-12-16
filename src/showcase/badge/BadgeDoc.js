@@ -202,8 +202,8 @@ import Badge from 'primereact/badge';
 </CodeHighlight>
 <h5>Properties</h5>
 				<p>Any property as style and class are passed to the main container element. Following are the additional properties to configure the component.</p>
-				<div class="doc-tablewrapper">
-					<table class="doc-table">
+				<div className="doc-tablewrapper">
+					<table className="doc-table">
 						<thead>
                             <tr>
                                 <th>Name</th>
@@ -237,8 +237,8 @@ import Badge from 'primereact/badge';
 
 				<h5>Styling</h5>
 				<p>Following is the list of structural style classes, for theming classes visit <NavLink to="/theming">theming</NavLink> page.</p>
-				<div class="doc-tablewrapper">
-					<table class="doc-table">
+				<div className="doc-tablewrapper">
+					<table className="doc-table">
 						<thead>
 						<tr>
 							<th>Name</th>

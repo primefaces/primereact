@@ -394,8 +394,8 @@ import { AvatarGroup } from 'primereact/avatargroup';
 
                 <h5>Properties of Avatar</h5>
 				<p>Any property as style and class are passed to the main container element. Following are the additional properties to configure the component.</p>
-				<div class="doc-tablewrapper">
-					<table class="doc-table">
+				<div className="doc-tablewrapper">
+					<table className="doc-table">
 						<thead>
                             <tr>
                                 <th>Name</th>
@@ -444,8 +444,8 @@ import { AvatarGroup } from 'primereact/avatargroup';
 				
 				<h5>Styling of Avatar</h5>
 				<p>Following is the list of structural style classes, for theming classes visit <router-link to="/theming">theming</router-link> page.</p>
-				<div class="doc-tablewrapper">
-					<table class="doc-table">
+				<div className="doc-tablewrapper">
+					<table className="doc-table">
 						<thead>
                             <tr>
                                 <th>Name</th>
@@ -486,8 +486,8 @@ import { AvatarGroup } from 'primereact/avatargroup';
 				</div>
 
 				<h5>Styling of AvatarGroup</h5>
-				<div class="doc-tablewrapper">
-					<table class="doc-table">
+				<div className="doc-tablewrapper">
+					<table className="doc-table">
 						<thead>
                             <tr>
                                 <th>Name</th>
