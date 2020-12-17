@@ -156,6 +156,8 @@ import { RippleDemo } from './showcase/ripple/RippleDemo';
 import { TimelineDemo } from './showcase/timeline/TimelineDemo';
 import { AvatarDemo } from './showcase/avatar/AvatarDemo';
 import { TagDemo } from './showcase/tag/TagDemo';
+import { SkeletonDemo } from './showcase/skeleton/SkeletonDemo';
+
 
 class AppRouter extends Component {
 
@@ -337,6 +339,9 @@ class AppRouter extends Component {
                 <Route path="/avatar" component={AvatarDemo} />
                 <Route path="/badge" component={BadgeDemo} />
                 <Route path="/tag" component={TagDemo} />
+                <Route path="/skeleton" component={SkeletonDemo} />
+
+
             </>
         );
     }

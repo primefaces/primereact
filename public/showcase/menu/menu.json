@@ -1272,6 +1272,14 @@
                     ]
                 },
                 {
+                    "name": "Skeleton",
+                    "to": "/skeleton",
+                    "meta": [
+                        "skeleton"
+                    ],
+                    "badge": "new"
+                },
+                {
                     "name": "ProgressBar",
                     "to": "/progressbar",
                     "meta": [

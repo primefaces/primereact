@@ -8,7 +8,7 @@ export class TagDoc extends Component {
 
     constructor(props) {
         super(props);
-
+ 
         this.sources = {
             'class': {
                 tabName: 'Class Source',
