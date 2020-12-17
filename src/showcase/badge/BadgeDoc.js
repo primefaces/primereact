@@ -15,7 +15,7 @@ export class BadgeDoc extends Component {
                 content: `
 import React, { Component } from 'react';
 import { Button } from 'primereact/button';
-import { Badge } from '.primereact/badge';
+import { Badge } from 'primereact/badge';
 
 export class BadgeDemo extends Component {
 

@@ -14,9 +14,9 @@ export class SkeletonDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from "react";
-import { Skeleton } from 'primereact/skeleton/Skeleton';
-import { DataTable } from 'primereact/datatable/DataTable';
-import { Column } from 'primereact/column/Column';
+import { Skeleton } from 'primereact/skeleton';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
 import './SkeletonDemo.scss';
 
 export class SkeletonDemo extends Component {
@@ -164,9 +164,9 @@ export class SkeletonDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React from "react";
-import { Skeleton } from 'primereact/skeleton/Skeleton';
-import { DataTable } from 'primereact/datatable/DataTable';
-import { Column } from 'primereact/column/Column';
+import { Skeleton } from 'primereact/skeleton';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
 import './SkeletonDemo.scss';
 
 export const SkeletonDemo = () => {
@@ -311,9 +311,9 @@ export const SkeletonDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React from "react";
-import { Skeleton } from 'primereact/skeleton/Skeleton';
-import { DataTable } from 'primereact/datatable/DataTable';
-import { Column } from 'primereact/column/Column';
+import { Skeleton } from 'primereact/skeleton';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
 import './SkeletonDemo.scss';
 
 export const SkeletonDemo = () => {
