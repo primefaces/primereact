@@ -3,6 +3,7 @@ import { Skeleton } from '../../components/skeleton/Skeleton';
 import { DataTable } from '../../components/datatable/DataTable';
 import { Column } from '../../components/column/Column';
 import { SkeletonDoc } from './SkeletonDoc';
+import { AppInlineHeader } from '../../AppInlineHeader';
 import './SkeletonDemo.scss';
 
 export class SkeletonDemo extends Component {
@@ -19,8 +20,10 @@ export class SkeletonDemo extends Component {
             <div>
                 <div className="content-section introduction">
                     <div className="feature-intro">
-                        <h1>Skeleton</h1>
-                        <p>Skeleton is a placeholder to display instead of the actual content.</p>
+                        <AppInlineHeader changelogText="tag">
+                            <h1>Skeleton</h1>
+                            <p>Skeleton is a placeholder to display instead of the actual content.</p>
+                        </AppInlineHeader>
                     </div>
                 </div>
 

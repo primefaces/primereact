@@ -3,6 +3,7 @@ import { Avatar } from '../../components/avatar/Avatar'
 import { AvatarDoc } from './AvatarDoc'
 import { AvatarGroup } from '../../components/avatargroup/AvatarGroup'
 import { Badge } from '../../components/badge/Badge'
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class AvatarDemo extends Component {
     render() {
@@ -10,8 +11,10 @@ export class AvatarDemo extends Component {
             <div>
                 <div className="content-section introduction">
                     <div className="feature-intro">
-                        <h1>Avatar</h1>
-                        <p>Avatar represents people using icons, labels and images.</p>
+                        <AppInlineHeader changelogText="avatar">
+                            <h1>Avatar</h1>
+                            <p>Avatar represents people using icons, labels and images.</p>
+                        </AppInlineHeader>
                     </div>
                 </div>
 

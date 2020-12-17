@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button } from '../../components/button/Button';
 import { Badge } from '../../components/badge/Badge';
 import { BadgeDoc } from './BadgeDoc';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class BadgeDemo extends Component {
     render() {
@@ -9,8 +10,10 @@ export class BadgeDemo extends Component {
             <div>
                 <div className="content-section introduction">
                     <div className="feature-intro">
-                        <h1>Badge</h1>
-                        <p>Badge is a small status indicator for another element.</p>
+                        <AppInlineHeader changelogText="badge">
+                            <h1>Badge</h1>
+                            <p>Badge is a small status indicator for another element.</p>
+                        </AppInlineHeader>
                     </div>
                 </div>
 

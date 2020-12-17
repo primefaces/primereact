@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Tag } from '../../components/tag/Tag';
 import { TagDoc } from './TagDoc';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class TagDemo extends Component {
     render() {
@@ -8,8 +9,10 @@ export class TagDemo extends Component {
             <div>
                 <div className="content-section introduction">
                     <div className="feature-intro">
-                        <h1>Tag</h1>
-                        <p>Tag component is used to categorize content.</p>
+                        <AppInlineHeader changelogText="tag">
+                            <h1>Tag</h1>
+                            <p>Tag component is used to categorize content.</p>
+                        </AppInlineHeader>
                     </div>
                 </div>
 
