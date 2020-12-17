@@ -145,7 +145,7 @@ export const BadgeDemo = () => {
                         <h6>Component</h6>
 <CodeHighlight lang="js">
 {`
-import Badge from 'primereact/badge';
+import { Badge } from 'primereact/badge';
 `}
 </CodeHighlight>
                 <p>Content of the badge is specified using the <i>value</i> property.</p>

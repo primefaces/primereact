@@ -45,7 +45,9 @@ export class AvatarDemo extends Component {
                     <div className="p-col-12 p-md-4">
                         <div className="card">
                             <h5>Label - Badge</h5>
-                            <Avatar label="U" size="xlarge" className="p-overlay-badge" style={{ backgroundColor: '#4caf4f', color: '#ffffff' }}><Badge value="4" /> </Avatar>
+                            <Avatar label="U" size="xlarge" className="p-overlay-badge" style={{ backgroundColor: '#4caf4f', color: '#ffffff' }}>
+                                <Badge value="4" />
+                            </Avatar>
                         </div>
                     </div>
                 </div>
@@ -150,7 +152,9 @@ export const AvatarDemo = () => {
                 <div className="p-col-12 p-md-4">
                     <div className="card">
                         <h5>Label - Badge</h5>
-                        <Avatar label="U" size="xlarge" className="p-overlay-badge" style={{ backgroundColor: '#4caf4f', color: '#ffffff' }}><Badge value="4" /></Avatar>
+                        <Avatar label="U" size="xlarge" className="p-overlay-badge" style={{ backgroundColor: '#4caf4f', color: '#ffffff' }}>
+                            <Badge value="4" />
+                        </Avatar>
                     </div>
                 </div>
             </div>
@@ -254,7 +258,9 @@ export const AvatarDemo = () => {
                 <div className="p-col-12 p-md-4">
                     <div className="card">
                         <h5>Label - Badge</h5>
-                        <Avatar label="U" size="xlarge" className="p-overlay-badge" style={{ backgroundColor: '#4caf4f', color: '#ffffff' }}><Badge value="4" /></Avatar>
+                        <Avatar label="U" size="xlarge" className="p-overlay-badge" style={{ backgroundColor: '#4caf4f', color: '#ffffff' }}>
+                            <Badge value="4" />
+                        </Avatar>
                     </div>
                 </div>
             </div>

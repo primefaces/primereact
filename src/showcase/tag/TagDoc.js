@@ -132,7 +132,7 @@ export const TagDemo = () => {
                     <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
-import Tag from 'primereact/tag';
+import { Tag } from 'primereact/tag';
 `}
 </CodeHighlight>
                 <h5>Getting Started</h5>
