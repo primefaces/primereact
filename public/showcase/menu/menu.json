@@ -1300,6 +1300,14 @@
                         "captcha",
                         "recaptcha"
                     ]
+                },
+                {
+                    "name": "Tag",
+                    "to": "/tag",
+                    "meta": [
+                        "tag"
+                    ],
+                    "badge": "new"
                 }
             ]
         }
