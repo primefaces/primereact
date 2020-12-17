@@ -880,6 +880,14 @@
                     ]
                 },
                 {
+                    "name": "Divider",
+                    "to": "/divider",
+                    "meta": [
+                        "divider"
+                    ],
+                    "badge": "new"
+                },
+                {
                     "name": "Fieldset",
                     "to": "/fieldset",
                     "meta": [
