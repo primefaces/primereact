@@ -20,7 +20,7 @@ export class SkeletonDemo extends Component {
             <div>
                 <div className="content-section introduction">
                     <div className="feature-intro">
-                        <AppInlineHeader changelogText="tag">
+                        <AppInlineHeader changelogText="skeleton">
                             <h1>Skeleton</h1>
                             <p>Skeleton is a placeholder to display instead of the actual content.</p>
                         </AppInlineHeader>
