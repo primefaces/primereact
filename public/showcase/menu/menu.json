@@ -261,6 +261,14 @@
                     ]
                 },
                 {
+                    "name": "Knob",
+                    "to": "/knob",
+                    "meta": [
+                        "knob"
+                    ],
+                    "badge": "new"
+                },
+                {
                     "name": "InputTextarea",
                     "to": "/inputtextarea",
                     "meta": [
@@ -1264,7 +1272,7 @@
                         "badge"
                     ],
                     "badge": "new"
-                },       
+                },
                 {
                     "name": "Accessibility",
                     "to": "/accessibility",
