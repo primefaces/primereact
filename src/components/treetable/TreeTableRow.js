@@ -126,114 +126,7 @@ export class TreeTableRow extends Component {
 
     onClick(event) {
         if (this.props.onRowClick) {
-            this.props.onRowClick({
-                originalEvent: event,
-                node: this.props.node
-            });
-        }
-
-        let targetNode = event.target.nodeName;
-        if (targetNode === 'INPUT' || targetNode === 'BUTTON' || targetNode === 'A' || DomHandler.hasClass(event.target, 'p-clickable')
-            || DomHandler.hasClass(event.target, 'p-treetable-toggler') || DomHandler.hasClass(event.target.parentElement, 'p-treetable-toggler')) {
-            return;
-        }
-
-        if ((this.isSingleSelectionMode() || this.isMultipleSelectionMode()) && this.props.node.selectable !== false) {
-            let selectionKeys;
-            const selected = this.isSelected();
-            const metaSelection = this.nodeTouched ? false : this.props.metaKeySelection;
-
-            if (metaSelection) {
-                let metaKey = (event.metaKey||event.ctrlKey);
-
-                if (selected && metaKey) {
-                    if (this.isSingleSelectionMode()) {
-                        selectionKeys = null;
-                    }
-                    else {
-                        selectionKeys = {...this.props.selectionKeys};
-                        delete selectionKeys[this.props.node.key];
-                    }
-
-                    if (this.props.onUnselect) {
-                        this.props.onUnselect({
-                            originalEvent: event,
-                            node: this.props.node
-                        });
-                    }
-                }
-                else {
-                    if (this.isSingleSelectionMode()) {
-                        selectionKeys = this.props.node.key;
-                    }
-                    else if (this.isMultipleSelectionMode()) {
-                        selectionKeys = !metaKey ? {} : (this.props.selectionKeys ? {...this.props.selectionKeys} : {});
-                        selectionKeys[this.props.node.key] = true;
-                    }
-
-                    if (this.props.onSelect) {
-                        this.props.onSelect({
-                            originalEvent: event,
-                            node: this.props.node
-                        });
-                    }
-                }
-            }
-            else {
-                if (this.isSingleSelectionMode()) {
-                    if (selected) {
-                        selectionKeys = null;
-
-                        if (this.props.onUnselect) {
-                            this.props.onUnselect({
-                                originalEvent: event,
-                                node: this.props.node
-                            });
-                        }
-                    }
-                    else {
-                        selectionKeys = this.props.node.key;
-
-                        if (this.props.onSelect) {
-                            this.props.onSelect({
-                                originalEvent: event,
-                                node: this.props.node
-                            });
-                        }
-                    }
-                }
-                else {
-                    if (selected) {
-                        selectionKeys = {...this.props.selectionKeys};
-                        delete selectionKeys[this.props.node.key];
-
-                        if (this.props.onUnselect) {
-                            this.props.onUnselect({
-                                originalEvent: event,
-                                node: this.props.node
-                            });
-                        }
-                    }
-                    else {
-                        selectionKeys = this.props.selectionKeys ? {...this.props.selectionKeys} : {};
-                        selectionKeys[this.props.node.key] = true;
-
-                        if (this.props.onSelect) {
-                            this.props.onSelect({
-                                originalEvent: event,
-                                node: this.props.node
-                            });
-                        }
-                    }
-                }
-            }
-
-            if (this.props.onSelectionChange) {
-                this.props.onSelectionChange({
-                    originalEvent: event,
-                    value: selectionKeys
-                })
-            }
+            this.props.onRowClick(event, this.props.node);
         }
 
         this.nodeTouched = false;
@@ -425,14 +318,6 @@ export class TreeTableRow extends Component {
                 break;
             }
         }
-    }
-
-    isSingleSelectionMode() {
-        return this.props.selectionMode && this.props.selectionMode === 'single';
-    }
-
-    isMultipleSelectionMode() {
-        return this.props.selectionMode && this.props.selectionMode === 'multiple';
     }
 
     isExpanded() {

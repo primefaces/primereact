@@ -561,7 +561,7 @@ onSortChange(event) {
                                         <td>onPage</td>
                                         <td>event.originalEvent: Browser event <br />
                                             event.first: Index of the first records on page. <br />
-                                            event.rows: Number of records to display per page.></td>
+                                            event.rows: Number of records to display per page. </td>
                                         <td>Callback to invoke on pagination.</td>
                                     </tr>
                                 </tbody>
