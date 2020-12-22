@@ -324,7 +324,7 @@ export class AppConfig extends Component {
                                 </div>
                                 <div className="p-col-3">
                                     <button className="p-link">
-                                        <img src="showcase/images/themes/nano.jpg" alt="Nano" onClick={(e) => this.onThemeChange(e, 'nano', true)}/>
+                                        <img src="showcase/images/themes/nano.jpg" alt="Nano" onClick={(e) => this.onThemeChange(e, 'nano')}/>
                                     </button>
                                     <span>Nano</span>
                                 </div>
