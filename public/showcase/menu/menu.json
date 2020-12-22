@@ -910,6 +910,14 @@
                     ]
                 },
                 {
+                    "name": "Splitter",
+                    "to": "/splitter",
+                    "meta": [
+                        "splitter"
+                    ],
+                    "badge": "new"
+                },
+                {
                     "name": "ScrollPanel",
                     "to": "/scrollPanel",
                     "meta": [
