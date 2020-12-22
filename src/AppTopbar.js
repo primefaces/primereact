@@ -207,7 +207,7 @@ export class AppTopbar extends Component {
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'soho-light')} role="menuitem"><img src="showcase/images/themes/soho-light.png" alt="Soho Light" /><span>Soho Light</span></button></li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'soho-dark', true)} role="menuitem"><img src="showcase/images/themes/soho-dark.png" alt="Soho Dark" /><span>Soho Dark</span></button></li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'mira')} role="menuitem"><img src="showcase/images/themes/mira.jpg" alt="Mira" /><span>Mira</span></button></li>
-                                <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'nano', true)} role="menuitem"><img src="showcase/images/themes/nano.jpg" alt="Nano" /><span>Nano</span></button></li>
+                                <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'nano')} role="menuitem"><img src="showcase/images/themes/nano.jpg" alt="Nano" /><span>Nano</span></button></li>
 
                                 <li role="none" className="topbar-submenu-header">LEGACY</li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'nova')} role="menuitem"><img src="showcase/images/themes/nova.png" alt="Nova" /><span>Nova</span></button></li>
