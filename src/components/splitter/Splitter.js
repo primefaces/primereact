@@ -227,17 +227,25 @@ export class Splitter extends Component {
 
     onGutterTouchStart(event, index) {
         this.onResizeStart(event, index);
-        event.preventDefault();
+
+        this.windowTouchMoveListener = this.onGutterTouchMove.bind(this);
+        this.windowTouchEndListener = this.onGutterTouchEnd.bind(this);
+        window.addEventListener('touchmove', this.windowTouchMoveListener, {passive: false, cancelable: false});
+        window.addEventListener('touchend', this.windowTouchEndListener);
+
     }
 
     onGutterTouchMove(event) {
         this.onResize(event);
-        event.preventDefault();
     }
 
     onGutterTouchEnd(event) {
         this.onResizeEnd(event);
-        event.preventDefault();
+
+        window.removeEventListener('touchmove', this.windowTouchMoveListener);
+        window.removeEventListener('touchend', this.windowTouchEndListener);
+        this.windowTouchMoveListener = null;
+        this.windowTouchEndListener = null;
     }
 
     renderTab(panel, index) {
@@ -245,7 +253,7 @@ export class Splitter extends Component {
         const gutterStyle = this.props.layout === 'horizontal' ? {width: this.props.gutterSize + 'px'} : {height: this.props.gutterSize + 'px'}
         const gutter = (index !== this.props.children.length - 1) &&
             <div ref={(el) => this.gutterElement = el} className={'p-splitter-gutter'} style={gutterStyle} onMouseDown={event => this.onGutterMouseDown(event, index)}
-                 onTouchStart={event => this.onGutterTouchStart(event, index)} onTouchMove={event => this.onGutterTouchMove(event, index)} onTouchEnd={event => this.onGutterTouchEnd(event, index)}>
+                 onTouchStart={event => this.onGutterTouchStart(event, index)} onTouchMove={event => this.onGutterTouchMove(event)} onTouchEnd={event => this.onGutterTouchEnd(event)}>
                 <div className={'p-splitter-gutter-handle'}></div>
             </div>
 
