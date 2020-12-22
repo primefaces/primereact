@@ -158,6 +158,7 @@ import { AvatarDemo } from './showcase/avatar/AvatarDemo';
 import { TagDemo } from './showcase/tag/TagDemo';
 import { SkeletonDemo } from './showcase/skeleton/SkeletonDemo';
 import { DividerDemo } from './showcase/divider/DividerDemo';
+import { KnobDemo } from './showcase/knob/KnobDemo';
 
 class AppRouter extends Component {
 
@@ -341,6 +342,7 @@ class AppRouter extends Component {
                 <Route path="/tag" component={TagDemo} />
                 <Route path="/skeleton" component={SkeletonDemo} />
                 <Route path="/divider" component={DividerDemo} />
+                <Route path="/knob" component={KnobDemo} />
 
             </>
         );
