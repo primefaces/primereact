@@ -97,7 +97,7 @@ export class ScrollTop extends Component {
     render() {
         const className = classNames('p-scrolltop p-link p-component', {
             'p-scrolltop-sticky': this.props.target !== 'window'
-        });
+        }, this.props.className);
         const iconClassName = classNames('p-scrolltop-icon', this.props.icon);
         const isTargetParent = this.props.target === 'parent';
 
