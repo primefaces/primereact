@@ -24,7 +24,7 @@ export class KnobDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="keyFilter" showInputStyle>
+                    <AppInlineHeader changelogText="knob" showInputStyle>
                         <h1>Knob</h1>
                         <p>Knob is a form component to define number inputs with a dial.</p>
                     </AppInlineHeader>
