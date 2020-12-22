@@ -94,7 +94,6 @@
 .p-dialog-bottom-left .p-dialog,
 .p-dialog-bottom-right .p-dialog {
     margin: .75em;
-    transition: all .3s ease-out;
 }
 
 .p-dialog-top .p-dialog-enter,
@@ -134,6 +133,18 @@
 .p-dialog-top-right .p-dialog-enter-active,
 .p-dialog-bottom-right .p-dialog-enter-active {
     transform: translate3d(0px, 0px, 0px);
+    transition: all .3s ease-out;
+}
+
+.p-dialog-top .p-dialog-exit-active,
+.p-dialog-bottom .p-dialog-exit-active,
+.p-dialog-left .p-dialog-exit-active,
+.p-dialog-top-left .p-dialog-exit-active,
+.p-dialog-bottom-left .p-dialog-exit-active,
+.p-dialog-right .p-dialog-exit-active,
+.p-dialog-top-right .p-dialog-exit-active,
+.p-dialog-bottom-right .p-dialog-exit-active {
+    transition: all .3s ease-out;
 }
 
 /* Maximize */
@@ -185,4 +196,9 @@
 .p-dialog-bottom-right {
     justify-content: flex-end;
     align-items: flex-end;
+}
+
+.p-confirm-dialog .p-dialog-content {
+    display: flex;
+    align-items: center;
 }
