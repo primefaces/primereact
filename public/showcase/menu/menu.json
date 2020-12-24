@@ -183,6 +183,14 @@
                     ]
                 },
                 {
+                    "name": "CascadeSelect",
+                    "to": "/cascadeselect",
+                    "meta": [
+                        "cascadeselect"
+                    ],
+                    "badge": "new"
+                },
+                {
                     "name": "Checkbox",
                     "to": "/checkbox",
                     "meta": [

@@ -160,6 +160,7 @@ import { SkeletonDemo } from './showcase/skeleton/SkeletonDemo';
 import { DividerDemo } from './showcase/divider/DividerDemo';
 import { KnobDemo } from './showcase/knob/KnobDemo';
 import { SplitterDemo } from './showcase/splitter/SplitterDemo';
+import { CascadeSelectDemo } from './showcase/cascadeselect/CascadeSelectDemo';
 
 class AppRouter extends Component {
 
@@ -345,6 +346,7 @@ class AppRouter extends Component {
                 <Route path="/divider" component={DividerDemo} />
                 <Route path="/knob" component={KnobDemo} />
                 <Route path="/splitter" component={SplitterDemo} />
+                <Route path="/cascadeselect" component={CascadeSelectDemo} />
 
             </>
         );
