@@ -65,7 +65,7 @@ export class ConfirmDialogDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="checkbox">
+                    <AppInlineHeader changelogText="confirmDialog">
                         <h1>ConfirmDialog</h1>
                         <p>ConfirmDialog uses a Dialog UI with <b>confirmDialog</b> method or <b>&lt;ConfirmDialog&gt;</b> tag.</p>
                     </AppInlineHeader>
