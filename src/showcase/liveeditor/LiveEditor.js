@@ -433,7 +433,10 @@ ReactDOM.render(<${name} />, rootElement);`
 
         return (
             <div className="p-d-flex p-jc-end" style={{marginTop: '-1rem'}}>
-                <SplitButton model={this.items} buttonTemplate={buttonContent} onClick={() => this.postSandboxParameters(this.props.defaultSourceType)} appendTo={document.body} className="liveEditorSplitButton" menuClassName="liveEditorPanel"></SplitButton>
+                <div className="p-d-flex p-flex-column p-ai-end">
+                    <span className="liveEditorSplitButtonHelperText">*Hooks, TS and Class sources can be accessed using</span>
+                    <SplitButton model={this.items} buttonTemplate={buttonContent} onClick={() => this.postSandboxParameters(this.props.defaultSourceType)} appendTo={document.body} className="liveEditorSplitButton" menuClassName="liveEditorPanel"></SplitButton>
+                </div>
             </div>
         );
     }

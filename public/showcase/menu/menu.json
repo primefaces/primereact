@@ -48,6 +48,13 @@
                         "store",
                         "primestore"
                     ]
+                },
+                {
+                    "name": "Accessibility",
+                    "to": "/accessibility",
+                    "meta": [
+                        "accessibility"
+                    ]
                 }
             ]
         },
@@ -1316,13 +1323,6 @@
                         "chip"
                     ],
                     "badge": "new"
-                },
-                {
-                    "name": "Accessibility",
-                    "to": "/accessibility",
-                    "meta": [
-                        "accessibility"
-                    ]
                 },
                 {
                     "name": "Inplace",
