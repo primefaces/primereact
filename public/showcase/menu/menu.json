@@ -955,6 +955,22 @@
             ],
             "children": [
                 {
+                    "name": "ConfirmDialog",
+                    "to": "/confirmdialog",
+                    "meta": [
+                        "confirmdialog"
+                    ],
+                    "badge": "new"
+                },
+                {
+                    "name": "ConfirmPopup",
+                    "to": "/confirmpopup",
+                    "meta": [
+                        "confirmpopup"
+                    ],
+                    "badge": "new"
+                },
+                {
                     "name": "Dialog",
                     "to": "/dialog",
                     "meta": [

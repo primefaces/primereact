@@ -163,6 +163,8 @@ import { SplitterDemo } from './showcase/splitter/SplitterDemo';
 import { CascadeSelectDemo } from './showcase/cascadeselect/CascadeSelectDemo';
 import { ScrollTopDemo } from './showcase/scrolltop/ScrollTopDemo';
 import { ChipDemo } from './showcase/chip/ChipDemo';
+import { ConfirmDialogDemo } from './showcase/confirmdialog/ConfirmDialogDemo';
+import { ConfirmPopupDemo } from './showcase/confirmpopup/ConfirmPopupDemo';
 
 class AppRouter extends Component {
 
@@ -351,6 +353,8 @@ class AppRouter extends Component {
                 <Route path="/cascadeselect" component={CascadeSelectDemo} />
                 <Route path="/scrolltop" component={ScrollTopDemo} />
                 <Route path="/chip" component={ChipDemo} />
+                <Route path="/confirmdialog" component={ConfirmDialogDemo} />
+                <Route path="/confirmpopup" component={ConfirmPopupDemo} />
             </>
         );
     }
