@@ -256,7 +256,6 @@ export class Dialog extends Component {
         if (this.props.visible) {
             this.setState({ visible: true }, () => {
                 this.mask.style.zIndex = String(this.zIndex);
-                this.onEntered();
             });
         }
     }
