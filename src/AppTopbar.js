@@ -290,6 +290,7 @@ export class AppTopbar extends Component {
                             <ul role="menu" aria-label="Resources">
                                 <li role="none"><Link to="/support" role="menuitem"><span>Support</span></Link></li>
                                 <li role="none"><a href="https://forum.primefaces.org/viewforum.php?f=57" role="menuitem" target="_blank" rel="noopener noreferrer"><span>Forum</span></a></li>
+                                <li role="none"><a href="https://discord.gg/gzKFYnpmCY" role="menuitem" target="_blank" rel="noopener noreferrer"><span>Discord Chat</span></a></li>
                                 <li role="none"><a href="https://github.com/primefaces/primereact" role="menuitem" target="_blank" rel="noopener noreferrer"><span>Source Code</span></a></li>
                                 <li role="none"><a href="https://www.primefaces.org/store" role="menuitem" target="_blank" rel="noopener noreferrer"><span>PrimeStore</span></a></li>
                                 <li role="none"><a href="https://www.primefaces.org/category/primereact/" role="menuitem" target="_blank" rel="noopener noreferrer"><span>Blog</span></a></li>

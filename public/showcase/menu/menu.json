@@ -21,6 +21,13 @@
                     ]
                 },
                 {
+                    "name": "Discord Chat",
+                    "href": "https://discord.gg/gzKFYnpmCY",
+                    "meta": [
+                        "discord"
+                    ]
+                },
+                {
                     "name": "Source Code",
                     "href": "https://github.com/primefaces/primereact",
                     "meta": [
@@ -303,16 +310,14 @@
                     "meta": [
                         "multiselect",
                         "selectCheckboxMenu"
-                    ],
-                    "badge": "updated"
+                    ]
                 },
                 {
                     "name": "Password",
                     "to": "/password",
                     "meta": [
                         "password"
-                    ],
-                    "badge": "updated"
+                    ]
                 },
                 {
                     "name": "RadioButton",
@@ -863,8 +868,7 @@
                     "to": "/timeline",
                     "meta": [
                         "timeline"
-                    ],
-                    "badge": "new"
+                    ]
                 }
             ]
         },
@@ -975,7 +979,8 @@
                     "to": "/dialog",
                     "meta": [
                         "dialog"
-                    ]
+                    ],
+                    "badge": "updated"
                 },
                 {
                     "name": "OverlayPanel",
@@ -1185,8 +1190,7 @@
                     "meta": [
                         "growl",
                         "toast"
-                    ],
-                    "badge": "updated"
+                    ]
                 }
             ]
         },
@@ -1362,8 +1366,7 @@
                     "to": "/ripple",
                     "meta": [
                         "ripple"
-                    ],
-                    "badge": "new"
+                    ]
                 },
                 {
                     "name": "Captcha",
