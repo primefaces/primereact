@@ -96,9 +96,10 @@ export class Dialog extends Component {
     }
 
     focus() {
-        let focusable = DomHandler.findSingle(this.dialog, 'button');
-        if (focusable) {
-            focusable.focus();
+        let activeElement = document.activeElement;
+        let isActiveElementInDialog = activeElement && this.dialog.contains(activeElement);
+        if (!isActiveElementInDialog && this.props.closable) {
+            this.closeElement.focus();
         }
     }
 
@@ -292,7 +293,7 @@ export class Dialog extends Component {
     renderCloseIcon() {
         if (this.props.closable) {
             return (
-                <button type="button" className="p-dialog-header-icon p-dialog-header-close p-link" aria-label={this.props.ariaCloseIconLabel} onClick={this.onClose}>
+                <button ref={(el) => this.closeElement = el} type="button" className="p-dialog-header-icon p-dialog-header-close p-link" aria-label={this.props.ariaCloseIconLabel} onClick={this.onClose}>
                     <span className="p-dialog-header-close-icon pi pi-times"></span>
                     <Ripple />
                 </button>
