@@ -1290,6 +1290,14 @@
                     "badge": "new"
                 },
                 {
+                    "name": "Chip",
+                    "to": "/chip",
+                    "meta": [
+                        "chip"
+                    ],
+                    "badge": "new"
+                },
+                {
                     "name": "Accessibility",
                     "to": "/accessibility",
                     "meta": [

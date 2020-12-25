@@ -162,6 +162,7 @@ import { KnobDemo } from './showcase/knob/KnobDemo';
 import { SplitterDemo } from './showcase/splitter/SplitterDemo';
 import { CascadeSelectDemo } from './showcase/cascadeselect/CascadeSelectDemo';
 import { ScrollTopDemo } from './showcase/scrolltop/ScrollTopDemo';
+import { ChipDemo } from './showcase/chip/ChipDemo';
 
 class AppRouter extends Component {
 
@@ -349,7 +350,7 @@ class AppRouter extends Component {
                 <Route path="/splitter" component={SplitterDemo} />
                 <Route path="/cascadeselect" component={CascadeSelectDemo} />
                 <Route path="/scrolltop" component={ScrollTopDemo} />
-
+                <Route path="/chip" component={ChipDemo} />
             </>
         );
     }
