@@ -240,7 +240,7 @@ import { Chip } from 'primereact/chip';
                                         <td>Whether to display a remove icon.</td>
                                     </tr>
                                     <tr>
-                                        <td>removeIconClass</td>
+                                        <td>removeIcon</td>
                                         <td>string</td>
                                         <td>pi pi-times-circle</td>
                                         <td>Icon of the remove element.</td>
@@ -256,6 +256,12 @@ import { Chip } from 'primereact/chip';
                                         <td>string</td>
                                         <td>null</td>
                                         <td>Style class of the element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>template</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Template of an item.</td>
                                     </tr>
                                 </tbody>
                             </table>
