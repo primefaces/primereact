@@ -1304,6 +1304,14 @@
                     ]
                 },
                 {
+                    "name": "ScrollTop",
+                    "to": "/scrolltop",
+                    "meta": [
+                        "scrolltop"
+                    ],
+                    "badge": "new"
+                },
+                {
                     "name": "Skeleton",
                     "to": "/skeleton",
                     "meta": [
