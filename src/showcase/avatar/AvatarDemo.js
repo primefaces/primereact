@@ -1,11 +1,12 @@
-import React, { Component } from "react";
-import { Avatar } from '../../components/avatar/Avatar'
-import { AvatarDoc } from './AvatarDoc'
-import { AvatarGroup } from '../../components/avatargroup/AvatarGroup'
-import { Badge } from '../../components/badge/Badge'
+import React, { Component } from 'react';
+import { Avatar } from '../../components/avatar/Avatar';
+import { AvatarGroup } from '../../components/avatargroup/AvatarGroup';
+import { Badge } from '../../components/badge/Badge';
+import { AvatarDoc } from './AvatarDoc';
 import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class AvatarDemo extends Component {
+
     render() {
         return (
             <div>
@@ -41,7 +42,9 @@ export class AvatarDemo extends Component {
                         <div className="p-col-12 p-md-4">
                             <div className="card">
                                 <h5>Label - Badge</h5>
-                                <Avatar label="U" size="xlarge" className="p-overlay-badge" style={{ backgroundColor: '#4caf4f', color: '#ffffff' }}><Badge value="4" /> </Avatar>
+                                <Avatar label="U" size="xlarge" className="p-overlay-badge" style={{ backgroundColor: '#4caf4f', color: '#ffffff' }}>
+                                    <Badge value="4" />
+                                </Avatar>
                             </div>
                         </div>
                     </div>
@@ -68,7 +71,9 @@ export class AvatarDemo extends Component {
                         <div className="p-col-12 p-md-4">
                             <div className="card">
                                 <h5>Icon - Badge</h5>
-                                <Avatar className="p-overlay-badge" icon="pi pi-user" size="xlarge" ><Badge value="4" /> </Avatar>
+                                <Avatar className="p-overlay-badge" icon="pi pi-user" size="xlarge">
+                                    <Badge value="4" />
+                                </Avatar>
                             </div>
                         </div>
                     </div>
@@ -100,11 +105,14 @@ export class AvatarDemo extends Component {
                         <div className="p-col-12 p-md-4">
                             <div className="card">
                                 <h5>Image - Badge</h5>
-                                <Avatar className="p-overlay-badge" image="showcase/demo/images/organization/walter.jpg" size="xlarge"><Badge value="4" severity="danger" /></Avatar>,
+                                <Avatar className="p-overlay-badge" image="showcase/demo/images/organization/walter.jpg" size="xlarge">
+                                    <Badge value="4" severity="danger" />
+                                </Avatar>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <AvatarDoc />
             </div>
         );

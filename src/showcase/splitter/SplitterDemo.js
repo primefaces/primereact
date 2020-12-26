@@ -9,7 +9,7 @@ export class SplitterDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="splitter" showInputStyle>
+                    <AppInlineHeader changelogText="splitter">
                         <h1>Splitter</h1>
                         <p>Splitter is utilized to separate and resize panels.</p>
                     </AppInlineHeader>

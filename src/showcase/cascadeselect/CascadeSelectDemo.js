@@ -1,92 +1,94 @@
 import React, { Component } from 'react';
 import { CascadeSelectDoc } from './CascadeSelectDoc';
 import { AppInlineHeader } from '../../AppInlineHeader';
-import {CascadeSelect} from "../../components/cascadeselect/CascadeSelect";
+import { CascadeSelect } from '../../components/cascadeselect/CascadeSelect';
 
 export class CascadeSelectDemo extends Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
             selectedCity1: null,
-            selectedCity2: null,
-            countries: [
-                {
-                    name: 'Australia',
-                    code: 'AU',
-                    states: [
-                        {
-                            name: 'New South Wales',
-                            cities: [
-                                {cname: 'Sydney', code: 'A-SY'},
-                                {cname: 'Newcastle', code: 'A-NE'},
-                                {cname: 'Wollongong', code: 'A-WO'}
-                            ]
-                        },
-                        {
-                            name: 'Queensland',
-                            cities: [
-                                {cname: 'Brisbane', code: 'A-BR'},
-                                {cname: 'Townsville', code: 'A-TO'}
-                            ]
-                        },
-
-                    ]
-                },
-                {
-                    name: 'Canada',
-                    code: 'CA',
-                    states: [
-                        {
-                            name: 'Quebec',
-                            cities: [
-                                {cname: 'Montreal', code: 'C-MO'},
-                                {cname: 'Quebec City', code: 'C-QU'}
-                            ]
-                        },
-                        {
-                            name: 'Ontario',
-                            cities: [
-                                {cname: 'Ottawa', code: 'C-OT'},
-                                {cname: 'Toronto', code: 'C-TO'}
-                            ]
-                        },
-
-                    ]
-                },
-                {
-                    name: 'United States',
-                    code: 'US',
-                    states: [
-                        {
-                            name: 'California',
-                            cities: [
-                                {cname: 'Los Angeles', code: 'US-LA'},
-                                {cname: 'San Diego', code: 'US-SD'},
-                                {cname: 'San Francisco', code: 'US-SF'}
-                            ]
-                        },
-                        {
-                            name: 'Florida',
-                            cities: [
-                                {cname: 'Jacksonville', code: 'US-JA'},
-                                {cname: 'Miami', code: 'US-MI'},
-                                {cname: 'Tampa', code: 'US-TA'},
-                                {cname: 'Orlando', code: 'US-OR'}
-                            ]
-                        },
-                        {
-                            name: 'Texas',
-                            cities: [
-                                {cname: 'Austin', code: 'US-AU'},
-                                {cname: 'Dallas', code: 'US-DA'},
-                                {cname: 'Houston', code: 'US-HO'}
-                            ]
-                        }
-                    ]
-                }
-            ],
+            selectedCity2: null
         };
+
+        this.countries = [
+            {
+                name: 'Australia',
+                code: 'AU',
+                states: [
+                    {
+                        name: 'New South Wales',
+                        cities: [
+                            {cname: 'Sydney', code: 'A-SY'},
+                            {cname: 'Newcastle', code: 'A-NE'},
+                            {cname: 'Wollongong', code: 'A-WO'}
+                        ]
+                    },
+                    {
+                        name: 'Queensland',
+                        cities: [
+                            {cname: 'Brisbane', code: 'A-BR'},
+                            {cname: 'Townsville', code: 'A-TO'}
+                        ]
+                    },
+
+                ]
+            },
+            {
+                name: 'Canada',
+                code: 'CA',
+                states: [
+                    {
+                        name: 'Quebec',
+                        cities: [
+                            {cname: 'Montreal', code: 'C-MO'},
+                            {cname: 'Quebec City', code: 'C-QU'}
+                        ]
+                    },
+                    {
+                        name: 'Ontario',
+                        cities: [
+                            {cname: 'Ottawa', code: 'C-OT'},
+                            {cname: 'Toronto', code: 'C-TO'}
+                        ]
+                    },
+
+                ]
+            },
+            {
+                name: 'United States',
+                code: 'US',
+                states: [
+                    {
+                        name: 'California',
+                        cities: [
+                            {cname: 'Los Angeles', code: 'US-LA'},
+                            {cname: 'San Diego', code: 'US-SD'},
+                            {cname: 'San Francisco', code: 'US-SF'}
+                        ]
+                    },
+                    {
+                        name: 'Florida',
+                        cities: [
+                            {cname: 'Jacksonville', code: 'US-JA'},
+                            {cname: 'Miami', code: 'US-MI'},
+                            {cname: 'Tampa', code: 'US-TA'},
+                            {cname: 'Orlando', code: 'US-OR'}
+                        ]
+                    },
+                    {
+                        name: 'Texas',
+                        cities: [
+                            {cname: 'Austin', code: 'US-AU'},
+                            {cname: 'Dallas', code: 'US-DA'},
+                            {cname: 'Houston', code: 'US-HO'}
+                        ]
+                    }
+                ]
+            }
+        ];
     }
 
     countryOptionTemplate(option) {
@@ -105,21 +107,21 @@ export class CascadeSelectDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="cascadeSelect">
+                    <AppInlineHeader changelogText="cascadeSelect" showInputStyle>
                         <h1>CascadeSelect</h1>
-                        <p>Card is a flexible container component.</p>
+                        <p>CascadeSelect displays a nested structure of options.</p>
                     </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
                     <div className="card">
                         <h5>Basic</h5>
-                        <CascadeSelect  value={this.state.selectedCity1} options={this.state.countries}  optionLabel={"cname"} optionGroupLabel={"name"} optionGroupChildren={['states', 'cities']}
-                                        style={{minWidth: '14rem'}} placeholder={"Select a City"} onChange={event => this.setState({selectedCity1: event.value})}/>
+                        <CascadeSelect value={this.state.selectedCity1} options={this.countries}  optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']}
+                            style={{minWidth: '14rem'}} placeholder="Select a City" onChange={event => this.setState({selectedCity1: event.value})}/>
 
                         <h5>Templating</h5>
-                        <CascadeSelect  value={this.state.selectedCity2} options={this.state.countries}  optionLabel={"cname"} optionGroupLabel={"name"} optionGroupChildren={['states', 'cities']}
-                                        style={{minWidth: '14rem'}} placeholder={"Select a City"} onChange={event => this.setState({selectedCity2: event.value})}  itemTemplate={this.countryOptionTemplate}/>
+                        <CascadeSelect value={this.state.selectedCity2} options={this.countries}  optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']}
+                            style={{minWidth: '14rem'}} placeholder="Select a City" onChange={event => this.setState({selectedCity2: event.value})}  itemTemplate={this.countryOptionTemplate}/>
                     </div>
                 </div>
 
