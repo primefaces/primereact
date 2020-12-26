@@ -39,11 +39,11 @@ export class KnobDemo extends Component {
                             </div>
                             <div className="p-field p-col-12 p-md-4">
                                 <h5>Readonly</h5>
-                                <Knob value={this.state.value2} readOnly={true}/>
+                                <Knob value={this.state.value2} readOnly/>
                             </div>
                             <div className="p-field p-col-12 p-md-4">
                                 <h5>Disabled</h5>
-                                <Knob value={this.state.value3} disabled={true}/>
+                                <Knob value={this.state.value3} disabled/>
                             </div>
                             <div className="p-field p-col-12 p-md-4">
                                 <h5 className="p-mt-3">Min/Max</h5>

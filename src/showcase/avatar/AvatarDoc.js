@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
 import { LiveEditor } from '../liveeditor/LiveEditor';
 
 export class AvatarDoc extends Component {
-    
+
     constructor(props){
         super(props)
 
@@ -332,7 +332,7 @@ export const AvatarDemo = () => {
             }
         };
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -447,9 +447,9 @@ import { AvatarGroup } from 'primereact/avatargroup';
 
 				<h5>Properties of AvatarGroup</h5>
 				<p>Any property as style and class are passed to the main container element. There are no additional properties.</p>
-				
+
 				<h5>Styling of Avatar</h5>
-				<p>Following is the list of structural style classes, for theming classes visit <router-link to="/theming">theming</router-link> page.</p>
+				<p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
 				<div className="doc-tablewrapper">
 					<table className="doc-table">
 						<thead>
@@ -518,5 +518,5 @@ import { AvatarGroup } from 'primereact/avatargroup';
                 </TabView>
             </div>
         );
-    }   
+    }
 }

@@ -373,7 +373,7 @@ export class CascadeSelect extends Component {
                     <div className="p-cascadeselect-items-wrapper">
                         <CascadeSelectSub options={this.props.options} selectionPath={this.selectionPath} className={"p-cascadeselect-items"} optionLabel={this.props.optionLabel}
                                           optionValue={this.props.optionValue} level={0} optionGroupLabel={this.props.optionGroupLabel} optionGroupChildren={this.props.optionGroupChildren}
-                                          onOptionSelect={this.onOptionSelect} onOptionGroupSelect={this.onOptionGroupSelect} root={true} template={this.props.itemTemplate}/>
+                                          onOptionSelect={this.onOptionSelect} onOptionGroupSelect={this.onOptionGroupSelect} root template={this.props.itemTemplate}/>
                     </div>
                 </div>
             </CSSTransition>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
 import { LiveEditor } from '../liveeditor/LiveEditor';
@@ -42,11 +43,11 @@ export class KnobDemo extends Component {
                         </div>
                         <div className="p-field p-col-12 p-md-4">
                             <h5>Readonly</h5>
-                            <Knob value={this.state.value2} readOnly={true}/>
+                            <Knob value={this.state.value2} readOnly/>
                         </div>
                         <div className="p-field p-col-12 p-md-4">
                             <h5>Disabled</h5>
-                            <Knob value={this.state.value3} disabled={true}/>
+                            <Knob value={this.state.value3} disabled/>
                         </div>
                         <div className="p-field p-col-12 p-md-4">
                             <h5 className="p-mt-3">Min/Max</h5>
@@ -107,11 +108,11 @@ const KnobDemo = () => {
                     </div>
                     <div className="p-field p-col-12 p-md-4">
                         <h5>Readonly</h5>
-                        <Knob value={value2} readOnly={true}/>
+                        <Knob value={value2} readOnly/>
                     </div>
                     <div className="p-field p-col-12 p-md-4">
                         <h5>Disabled</h5>
-                        <Knob value={value3} disabled={true}/>
+                        <Knob value={value3} disabled/>
                     </div>
                     <div className="p-field p-col-12 p-md-4">
                         <h5 className="p-mt-3">Min/Max</h5>
@@ -171,15 +172,15 @@ const KnobDemo = () => {
                     </div>
                     <div className="p-field p-col-12 p-md-4">
                         <h5>Readonly</h5>
-                        <Knob value={value2} readOnly={true}/>
+                        <Knob value={value2} readOnly/>
                     </div>
                     <div className="p-field p-col-12 p-md-4">
                         <h5>Disabled</h5>
-                        <Knob value={value3} disabled={true}/>
+                        <Knob value={value3} disabled/>
                     </div>
                     <div className="p-field p-col-12 p-md-4">
                         <h5 className="p-mt-3">Min/Max</h5>
-                        <Knob value={value4} min={-50} max={50} onChange={(e) =>  setValue4(e.value)}/>
+                        <Knob value={value4} min={-50} max={50} onChange={(e) => setValue4(e.value)}/>
                     </div>
                     <div className="p-field p-col-12 p-md-4">
                         <h5 className="p-mt-3">Step</h5>
@@ -391,8 +392,7 @@ import { Knob } from 'primereact/knob';
                         </div>
 
                         <h5>Styling</h5>
-                        <p>Following is the list of structural style classes, for theming classes visit <router-link
-                            to="/theming">theming</router-link> page.
+                        <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.
                         </p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
