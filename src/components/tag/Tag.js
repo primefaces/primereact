@@ -18,10 +18,9 @@ export class Tag extends Component {
         severity: PropTypes.string,
         rounded: PropTypes.bool,
         icon: PropTypes.string,
-        className: PropTypes.string,
-        style: PropTypes.object
+        style: PropTypes.object,
+        className: PropTypes.string
     };
-
 
     render() {
         const tagClassName = classNames('p-tag p-component', {

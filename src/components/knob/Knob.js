@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
-import UniqueComponentId from "../utils/UniqueComponentId";
+import UniqueComponentId from '../utils/UniqueComponentId';
 
-export class Knob extends Component{
+export class Knob extends Component {
+
     static defaultProps = {
         id: null,
         style: null,
@@ -16,7 +17,7 @@ export class Knob extends Component{
         step: 1,
         min: 0,
         max: 100,
-        strokeWidht: 14,
+        strokeWidth: 14,
         name: '',
         valueColor: 'var(--primary-color, Black)',
         rangeColor: 'var(--surface-d, LightGray)',
@@ -37,7 +38,7 @@ export class Knob extends Component{
         step: PropTypes.number,
         min: PropTypes.number,
         max: PropTypes.number,
-        strokeWidht: PropTypes.number,
+        strokeWidth: PropTypes.number,
         name: PropTypes.string,
         valueColor: PropTypes.string,
         rangeColor: PropTypes.string,
@@ -67,6 +68,7 @@ export class Knob extends Component{
         this.onMouseMove = this.onMouseMove.bind(this);
         this.onTouchMove = this.onTouchMove.bind(this);
     }
+
     updateValue(offsetX, offsetY) {
         let dx = offsetX - this.props.size / 2;
         let dy =  this.props.size / 2 - offsetY;
@@ -234,8 +236,8 @@ export class Knob extends Component{
             <div className={containerClassName} style={this.props.style} ref={(el) => this.element = el}>
                 <svg viewBox="0 0 100 100" width={this.props.size} height={this.props.size} onClick={this.onClick} onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp}
                      onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}>
-                    <path d={this.rangePath()} strokeWidth={this.props.strokeWidht} stroke={this.props.rangeColor} className={'p-knob-range'}></path>
-                    <path d={this.valuePath()} strokeWidth={this.props.strokeWidht} stroke={this.props.valueColor} className={'p-knob-value'}></path>
+                    <path d={this.rangePath()} strokeWidth={this.props.strokeWidth} stroke={this.props.rangeColor} className={'p-knob-range'}></path>
+                    <path d={this.valuePath()} strokeWidth={this.props.strokeWidth} stroke={this.props.valueColor} className={'p-knob-value'}></path>
                     {text}
                 </svg>
             </div>

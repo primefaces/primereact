@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import UniqueComponentId from '../utils/UniqueComponentId';
@@ -17,7 +17,7 @@ export class SplitterPanel extends Component {
         header: PropTypes.number,
         disabled: PropTypes.number,
         style: PropTypes.object,
-        className: PropTypes.string,
+        className: PropTypes.string
     }
 }
 
@@ -49,37 +49,6 @@ export class Splitter extends Component {
         super(props);
 
         this.id = this.props.id || UniqueComponentId();
-    }
-
-    componentDidMount() {
-
-        if (this.panelElement) {
-            if(this.panelElement.childNodes && DomHandler.find(this.panelElement, '.p-splitter')){
-                DomHandler.addClass(this.panelElement, 'p-splitter-panel-nested');
-            }
-        }
-
-        if (this.props.children && this.props.children.length) {
-            let initialized = false;
-            if (this.isStateful()) {
-                initialized = this.restoreState();
-            }
-
-            if (!initialized) {
-                let children = [...this.container.children].filter(child => DomHandler.hasClass(child, 'p-splitter-panel'));
-                let _panelSizes = [];
-
-                this.props.children.map((panel, i) => {
-                    let panelInitialSize = panel.props && panel.props.size ? panel.props.size: null;
-                    let panelSize = panelInitialSize || (100 / this.props.children.length);
-                    _panelSizes[i] = panelSize;
-                    children[i].style.flexBasis = 'calc(' + panelSize + '% - ' + ((this.props.children.length - 1) * this.props.gutterSize) + 'px)';
-                    return _panelSizes;
-                });
-
-                this.panelSizes = _panelSizes;
-            }
-        }
     }
 
     bindMouseListeners() {
@@ -138,7 +107,7 @@ export class Splitter extends Component {
     }
 
     getStorage() {
-        switch(this.props.stateStorage) {
+        switch (this.props.stateStorage) {
             case 'local':
                 return window.localStorage;
 
@@ -178,8 +147,8 @@ export class Splitter extends Component {
         this.startPos = this.props.layout === 'horizontal' ? event.pageX : event.pageY;
         this.prevPanelElement = this.gutterElement.previousElementSibling;
         this.nextPanelElement = this.gutterElement.nextElementSibling;
-        this.prevPanelSize = 100 * (this.props.layout === 'horizontal' ? DomHandler.getOuterWidth(this.prevPanelElement, true): DomHandler.getOuterHeight(this.prevPanelElement, true)) / this.size;
-        this.nextPanelSize = 100 * (this.props.layout === 'horizontal' ? DomHandler.getOuterWidth(this.nextPanelElement, true): DomHandler.getOuterHeight(this.nextPanelElement, true)) / this.size;
+        this.prevPanelSize = 100 * (this.props.layout === 'horizontal' ? DomHandler.getOuterWidth(this.prevPanelElement, true) : DomHandler.getOuterHeight(this.prevPanelElement, true)) / this.size;
+        this.nextPanelSize = 100 * (this.props.layout === 'horizontal' ? DomHandler.getOuterWidth(this.nextPanelElement, true) : DomHandler.getOuterHeight(this.nextPanelElement, true)) / this.size;
         this.prevPanelIndex = index;
         DomHandler.addClass(this.gutterElement, 'p-splitter-gutter-resizing');
         DomHandler.addClass(this.container, 'p-splitter-resizing');
@@ -208,7 +177,7 @@ export class Splitter extends Component {
             this.saveState();
         }
 
-        if(this.props.onResizeEnd) {
+        if (this.props.onResizeEnd) {
             this.props.onResizeEnd({
                 originalEvent: event,
                 sizes: this.panelSizes
@@ -230,7 +199,7 @@ export class Splitter extends Component {
 
         this.windowTouchMoveListener = this.onGutterTouchMove.bind(this);
         this.windowTouchEndListener = this.onGutterTouchEnd.bind(this);
-        window.addEventListener('touchmove', this.windowTouchMoveListener, {passive: false, cancelable: false});
+        window.addEventListener('touchmove', this.windowTouchMoveListener, { passive: false, cancelable: false });
         window.addEventListener('touchend', this.windowTouchEndListener);
 
     }
@@ -248,14 +217,45 @@ export class Splitter extends Component {
         this.windowTouchEndListener = null;
     }
 
-    renderTab(panel, index) {
+    componentDidMount() {
+        if (this.panelElement) {
+            if (this.panelElement.childNodes && DomHandler.find(this.panelElement, '.p-splitter')) {
+                DomHandler.addClass(this.panelElement, 'p-splitter-panel-nested');
+            }
+        }
+
+        if (this.props.children && this.props.children.length) {
+            let initialized = false;
+            if (this.isStateful()) {
+                initialized = this.restoreState();
+            }
+
+            if (!initialized) {
+                let children = [...this.container.children].filter(child => DomHandler.hasClass(child, 'p-splitter-panel'));
+                let _panelSizes = [];
+
+                this.props.children.map((panel, i) => {
+                    let panelInitialSize = panel.props && panel.props.size ? panel.props.size : null;
+                    let panelSize = panelInitialSize || (100 / this.props.children.length);
+                    _panelSizes[i] = panelSize;
+                    children[i].style.flexBasis = 'calc(' + panelSize + '% - ' + ((this.props.children.length - 1) * this.props.gutterSize) + 'px)';
+                    return _panelSizes;
+                });
+
+                this.panelSizes = _panelSizes;
+            }
+        }
+    }
+
+    renderPanel(panel, index) {
         const panelClassName = classNames('p-splitter-panel', panel.props.className);
-        const gutterStyle = this.props.layout === 'horizontal' ? {width: this.props.gutterSize + 'px'} : {height: this.props.gutterSize + 'px'}
-        const gutter = (index !== this.props.children.length - 1) &&
+        const gutterStyle = this.props.layout === 'horizontal' ? { width: this.props.gutterSize + 'px' } : { height: this.props.gutterSize + 'px' }
+        const gutter = (index !== this.props.children.length - 1) && (
             <div ref={(el) => this.gutterElement = el} className={'p-splitter-gutter'} style={gutterStyle} onMouseDown={event => this.onGutterMouseDown(event, index)}
-                 onTouchStart={event => this.onGutterTouchStart(event, index)} onTouchMove={event => this.onGutterTouchMove(event)} onTouchEnd={event => this.onGutterTouchEnd(event)}>
-                <div className={'p-splitter-gutter-handle'}></div>
+                onTouchStart={event => this.onGutterTouchStart(event, index)} onTouchMove={event => this.onGutterTouchMove(event)} onTouchEnd={event => this.onGutterTouchEnd(event)}>
+                <div className="p-splitter-gutter-handle"></div>
             </div>
+        );
 
         return (
             <React.Fragment>
@@ -270,13 +270,13 @@ export class Splitter extends Component {
     renderPanels() {
         return (
             React.Children.map(this.props.children, (panel, index) => {
-                return this.renderTab(panel, index);
+                return this.renderPanel(panel, index);
             })
         )
     }
 
     render() {
-        const className = classNames('p-splitter p-component p-splitter-' + this.props.layout, this.props.className);
+        const className = classNames(`p-splitter p-component p-splitter-${this.props.layout}`, this.props.className);
         const panels = this.renderPanels();
 
         return (

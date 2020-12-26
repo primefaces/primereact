@@ -20,15 +20,22 @@ export class Divider extends Component {
         className: PropTypes.string
     };
 
+    get isHorizontal() {
+        return this.props.layout === 'horizontal';
+    }
+
+    get isVertical() {
+        return this.props.layout === 'vertical';
+    }
+
     render() {
-        const dividerClassName = classNames('p-divider p-component', 'p-divider-' + this.props.layout, 'p-divider-' + this.props.type,
-            { 'p-divider-left': this.props.layout === 'horizontal' && (!this.props.align || this.props.align === 'left') },
-            { 'p-divider-center': this.props.layout === 'horizontal' && this.props.align === 'center' },
-            { 'p-divider-right': this.props.layout === 'horizontal' && this.props.align === 'right' },
-            { 'p-divider-top': this.props.layout === 'vertical' && (this.props.align === 'top') },
-            { 'p-divider-center': this.props.layout === 'vertical' && (!this.props.align || this.props.align === 'center') },
-            { 'p-divider-bottom': this.props.layout === 'vertical' && this.props.align === 'bottom' },
-            this.props.className);
+        const dividerClassName = classNames(`p-divider p-component p-divider-${this.props.layout} p-divider-${this.props.type}`, {
+            'p-divider-left': this.isHorizontal && (!this.props.align || this.props.align === 'left'),
+            'p-divider-right': this.isHorizontal && this.props.align === 'right',
+            'p-divider-center': (this.isHorizontal && this.props.align === 'center') || (this.isVertical && (!this.props.align || this.props.align === 'center')),
+            'p-divider-top': this.isVertical && this.props.align === 'top',
+            'p-divider-bottom': this.isVertical && this.props.align === 'bottom',
+        }, this.props.className);
 
         return (
             <div className={dividerClassName} style={this.props.style} role="separator">
