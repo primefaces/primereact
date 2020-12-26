@@ -34,13 +34,12 @@ export class Skeleton extends Component {
     }
 
     render() {
-
-        const style = this.skeletonStyle();
-
         const skeletonClassName = classNames('p-skeleton p-component', {
             'p-skeleton-circle': this.props.shape === 'circle',
             'p-skeleton-animation-none': this.props.animation === 'none'
         }, this.props.className);
+
+        const style = this.skeletonStyle();
 
         return (
             <div style={style} className={skeletonClassName}></div>
