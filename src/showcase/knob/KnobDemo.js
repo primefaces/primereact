@@ -59,7 +59,7 @@ export class KnobDemo extends Component {
                             </div>
                             <div className="p-field p-col-12 p-md-4">
                                 <h5 className="p-mt-3">Stroke</h5>
-                                <Knob value={this.state.value7} strokeWidht={5} onChange={(e)=>this.setState({value7: e.value})}/>
+                                <Knob value={this.state.value7} strokeWidth={5} onChange={(e)=>this.setState({value7: e.value})}/>
                             </div>
                             <div className="p-field p-col-12 p-md-4">
                                 <h5 className="p-mt-3">Size</h5>
