@@ -26,7 +26,7 @@ export class CascadeSelect extends Component {
         disabled: false,
         dataKey: null,
         inputId: null,
-        tabindex: null,
+        tabIndex: null,
         ariaLabelledBy: null,
         appendTo: null,
         onChange: null,
@@ -34,7 +34,7 @@ export class CascadeSelect extends Component {
         onBeforeShow: null,
         onBeforeHide: null,
         onShow: null,
-        onHide: null,
+        onHide: null
     };
 
     static propTypes = {
@@ -52,7 +52,7 @@ export class CascadeSelect extends Component {
         disabled: PropTypes.bool,
         dataKey: PropTypes.string,
         inputId: PropTypes.string,
-        tabindex: PropTypes.string,
+        tabIndex: PropTypes.string,
         ariaLabelledBy: PropTypes.string,
         appendTo: PropTypes.any,
         onChange: PropTypes.func,
@@ -60,19 +60,21 @@ export class CascadeSelect extends Component {
         onBeforeShow: PropTypes.func,
         onBeforeHide: PropTypes.func,
         onShow: PropTypes.func,
-        onHide: PropTypes.func,
+        onHide: PropTypes.func
     };
 
     constructor(props) {
         super(props);
+
         this.state = {
             focused: false,
-            overlayVisible: false,
+            overlayVisible: false
         };
 
         this.dirty = false;
         this.selectionPath = null;
         this.id = this.props.id || UniqueComponentId();
+
         this.onClick = this.onClick.bind(this);
         this.onInputFocus = this.onInputFocus.bind(this);
         this.onInputBlur = this.onInputBlur.bind(this);
@@ -84,29 +86,8 @@ export class CascadeSelect extends Component {
         this.onOptionGroupSelect = this.onOptionGroupSelect.bind(this);
     }
 
-    componentDidMount() {
-        this.updateSelectionPath();
-    }
-
-    componentWillUnmount() {
-        this.unbindOutsideClickListener();
-        this.unbindResizeListener();
-
-        if (this.scrollHandler) {
-            this.scrollHandler.destroy();
-            this.scrollHandler = null;
-        }
-        this.overlay = null;
-    }
-
-    componentDidUpdate(prevProps) {
-        if (prevProps.value !== this.props.value) {
-            this.updateSelectionPath();
-        }
-    }
-
     onOptionSelect(event) {
-        if(this.props.onChange) {
+        if (this.props.onChange) {
             this.props.onChange({
                 originalEvent: event,
                 value: event.value
@@ -120,8 +101,9 @@ export class CascadeSelect extends Component {
 
     onOptionGroupSelect(event) {
         this.dirty = true;
-        if(this.props.onGroupChange) {
-            this.props.onGroupChange(event)
+
+        if (this.props.onGroupChange) {
+            this.props.onGroupChange(event);
         }
     }
 
@@ -190,13 +172,11 @@ export class CascadeSelect extends Component {
         }
     }
 
-    onInputFocus(event) {
-        event.persist();
+    onInputFocus() {
         this.setState({ focused: true });
     }
 
-    onInputBlur(event) {
-        event.persist();
+    onInputBlur() {
         this.setState({ focused: false });
     }
 
@@ -336,12 +316,35 @@ export class CascadeSelect extends Component {
             || (this.overlay && this.overlay.element && this.overlay.element.contains(event.target)));
     }
 
+    componentDidMount() {
+        this.updateSelectionPath();
+    }
+
+    componentWillUnmount() {
+        this.unbindOutsideClickListener();
+        this.unbindResizeListener();
+
+        if (this.scrollHandler) {
+            this.scrollHandler.destroy();
+            this.scrollHandler = null;
+        }
+        this.overlay = null;
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.value !== this.props.value) {
+            this.updateSelectionPath();
+        }
+    }
+
     renderKeyboardHelper() {
-        return <div className="p-hidden-accessible">
-            <input ref={(el) => this.focusInput = el} type="text" id={this.props.inputId} readOnly disabled={this.props.disabled}
-                   onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onInputKeyDown}
-                   tabIndex={this.props.tabIndex} aria-haspopup="listbox" aria-labelledby={this.props.ariaLabelledBy}/>
-        </div>;
+        return (
+            <div className="p-hidden-accessible">
+                <input ref={(el) => this.focusInput = el} type="text" id={this.props.inputId} readOnly disabled={this.props.disabled}
+                    onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onInputKeyDown}
+                    tabIndex={this.props.tabIndex} aria-haspopup="listbox" aria-labelledby={this.props.ariaLabelledBy}/>
+            </div>
+        );
     }
 
     renderLabel(value) {
@@ -355,9 +358,11 @@ export class CascadeSelect extends Component {
     }
 
     renderDropdownIcon() {
-        return <div className="p-cascadeselect-trigger" role="button" aria-haspopup="listbox" aria-expanded={this.state.overlayVisible}>
-            <span className="p-cascadeselect-trigger-icon pi pi-chevron-down"></span>
-        </div>;
+        return (
+            <div className="p-cascadeselect-trigger" role="button" aria-haspopup="listbox" aria-expanded={this.state.overlayVisible}>
+                <span className="p-cascadeselect-trigger-icon pi pi-chevron-down"></span>
+            </div>
+        );
     }
 
     renderOverlay() {

@@ -168,7 +168,7 @@ export class CascadeSelectSub extends Component {
             if(this.props.onOptionGroupSelect) {
                 this.props.onOptionGroupSelect({
                     originalEvent: event,
-                    value: option,
+                    value: option
                 });
             }
         }

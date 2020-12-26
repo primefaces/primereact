@@ -574,7 +574,7 @@ countryOptionTemplate(option){
                                     <td>A property to uniquely identify an option.</td>
                                 </tr>
                                 <tr>
-                                    <td>tabindex</td>
+                                    <td>tabIndex</td>
                                     <td>number</td>
                                     <td>null</td>
                                     <td>Index of the element in tabbing order.</td>
