@@ -347,7 +347,7 @@ import { InputMask } from 'primereact/inputmask';
                                         <td>When present, it specifies that the element value cannot be altered.</td>
                                     </tr>
                                     <tr>
-                                        <td>readonly</td>
+                                        <td>readOnly</td>
                                         <td>boolean</td>
                                         <td>false</td>
                                         <td>When present, it specifies that an input field is read-only.</td>

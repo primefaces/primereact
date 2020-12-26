@@ -7,7 +7,7 @@ interface KnobProps {
     value?: any;
     size?: number;
     disabled?: boolean;
-    readonly?: boolean;
+    readOnly?: boolean;
     showValue?: boolean;
     step?: number;
     min?: number;

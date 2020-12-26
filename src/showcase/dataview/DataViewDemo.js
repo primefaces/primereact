@@ -61,7 +61,7 @@ export class DataViewDemo extends Component {
                     <div className="product-list-detail">
                         <div className="product-name">{data.name}</div>
                         <div className="product-description">{data.description}</div>
-                        <Rating value={data.rating} readonly cancel={false}></Rating>
+                        <Rating value={data.rating} readOnly cancel={false}></Rating>
                         <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
                     </div>
                     <div className="product-list-action">
@@ -89,7 +89,7 @@ export class DataViewDemo extends Component {
                     <img src={`showcase/demo/images/product/${data.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
                         <div className="product-name">{data.name}</div>
                         <div className="product-description">{data.description}</div>
-                        <Rating value={data.rating} readonly cancel={false}></Rating>
+                        <Rating value={data.rating} readOnly cancel={false}></Rating>
                     </div>
                     <div className="product-grid-item-bottom">
                         <span className="product-price">${data.price}</span>

@@ -9,7 +9,7 @@ export class Rating extends Component {
         id: null,
         value: null,
         disabled: false,
-        readonly: false,
+        readOnly: false,
         stars: 5,
         cancel: true,
         style: null,
@@ -23,7 +23,7 @@ export class Rating extends Component {
         id: PropTypes.string,
         value: PropTypes.number,
         disabled: PropTypes.bool,
-        readonly: PropTypes.bool,
+        readOnly: PropTypes.bool,
         stars: PropTypes.number,
         cancel: PropTypes.bool,
         style: PropTypes.object,
@@ -41,7 +41,7 @@ export class Rating extends Component {
     }
 
     rate(event, i) {
-        if (!this.props.readonly && !this.props.disabled && this.props.onChange) {
+        if (!this.props.readOnly && !this.props.disabled && this.props.onChange) {
             this.props.onChange({
                 originalEvent: event,
                 value: i,
@@ -59,7 +59,7 @@ export class Rating extends Component {
     }
 
     clear(event) {
-        if (!this.props.readonly && !this.props.disabled && this.props.onChange) {
+        if (!this.props.readOnly && !this.props.disabled && this.props.onChange) {
             this.props.onChange({
                 originalEvent: event,
                 value: null,
@@ -97,7 +97,7 @@ export class Rating extends Component {
     }
 
     getFocusIndex() {
-        return (this.props.disabled || this.props.readonly) ? null : '0';
+        return (this.props.disabled || this.props.readOnly) ? null : '0';
     }
 
     componentDidMount() {
@@ -163,7 +163,7 @@ export class Rating extends Component {
     render() {
         let className = classNames('p-rating', {
             'p-disabled': this.props.disabled,
-            'p-rating-readonly': this.props.readonly
+            'p-rating-readonly': this.props.readOnly
         }, this.props.className);
         let cancelIcon = this.renderCancelIcon();
         let stars = this.renderStars();

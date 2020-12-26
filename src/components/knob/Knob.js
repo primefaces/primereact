@@ -12,7 +12,7 @@ export class Knob extends Component {
         value: null,
         size: 100,
         disabled: false,
-        readonly: false,
+        readOnly: false,
         showValue: true,
         step: 1,
         min: 0,
@@ -33,7 +33,7 @@ export class Knob extends Component {
         value: PropTypes.any,
         size: PropTypes.number,
         disabled: PropTypes.bool,
-        readonly: PropTypes.bool,
+        readOnly: PropTypes.bool,
         showValue: PropTypes.bool,
         step: PropTypes.number,
         min: PropTypes.number,
@@ -101,13 +101,13 @@ export class Knob extends Component {
     }
 
     onClick(event) {
-        if (!this.props.disabled && !this.props.readonly) {
+        if (!this.props.disabled && !this.props.readOnly) {
             this.updateValue(event.nativeEvent.offsetX, event.nativeEvent.offsetY);
         }
     }
 
     onMouseDown(event) {
-        if (!this.props.disabled && !this.props.readonly) {
+        if (!this.props.disabled && !this.props.readOnly) {
             this.windowMouseMoveListener = this.onMouseMove;
             this.windowMouseUpListener = this.onMouseUp;
             window.addEventListener('mousemove', this.windowMouseMoveListener);
@@ -117,7 +117,7 @@ export class Knob extends Component {
     }
 
     onMouseUp(event) {
-        if (!this.props.disabled && !this.props.readonly) {
+        if (!this.props.disabled && !this.props.readOnly) {
             window.removeEventListener('mousemove', this.windowMouseMoveListener);
             window.removeEventListener('mouseup', this.windowMouseUpListener);
             this.windowMouseMoveListener = null;
@@ -127,7 +127,7 @@ export class Knob extends Component {
     }
 
     onTouchStart(event) {
-        if (!this.props.disabled && !this.props.readonly) {
+        if (!this.props.disabled && !this.props.readOnly) {
             this.windowTouchMoveListener = this.onTouchMove;
             this.windowTouchEndListener = this.onTouchEnd;
             window.addEventListener('touchmove', this.windowTouchMoveListener, {passive: false, cancelable: false});
@@ -136,7 +136,7 @@ export class Knob extends Component {
     }
 
     onTouchEnd(event) {
-        if (!this.props.disabled && !this.props.readonly) {
+        if (!this.props.disabled && !this.props.readOnly) {
             window.removeEventListener('touchmove', this.windowTouchMoveListener);
             window.removeEventListener('touchend', this.windowTouchEndListener);
             this.windowTouchMoveListener = null;
@@ -145,14 +145,14 @@ export class Knob extends Component {
     }
 
     onMouseMove(event) {
-        if (!this.props.disabled && !this.props.readonly) {
+        if (!this.props.disabled && !this.props.readOnly) {
             this.updateValue(event.offsetX, event.offsetY);
             event.preventDefault();
         }
     }
 
     onTouchMove(event) {
-        if (!this.props.disabled && !this.props.readonly && event.touches.length === 1) {
+        if (!this.props.disabled && !this.props.readOnly && event.touches.length === 1) {
             const rect = this.element.getBoundingClientRect();
             const touch = event.targetTouches.item(0);
             const offsetX = touch.clientX - rect.left;

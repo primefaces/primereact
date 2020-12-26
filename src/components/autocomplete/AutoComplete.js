@@ -35,7 +35,7 @@ export class AutoComplete extends Component {
         panelClassName: null,
         panelStyle: null,
         placeholder: null,
-        readonly: false,
+        readOnly: false,
         disabled: false,
         maxlength: null,
         size: null,
@@ -84,7 +84,7 @@ export class AutoComplete extends Component {
         panelClassName: PropTypes.string,
         panelStyle: PropTypes.object,
         placeholder: PropTypes.string,
-        readonly: PropTypes.bool,
+        readOnly: PropTypes.bool,
         disabled: PropTypes.bool,
         maxlength: PropTypes.number,
         size: PropTypes.number,
@@ -614,7 +614,7 @@ export class AutoComplete extends Component {
             <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} id={this.props.inputId} type={this.props.type} name={this.props.name}
                         defaultValue={this.formatValue(this.props.value)} role="searchbox" aria-autocomplete="list" aria-controls={this.listId}
                         aria-labelledby={this.props.ariaLabelledBy} className={inputClassName} style={this.props.inputStyle} autoComplete="off"
-                        readOnly={this.props.readonly} disabled={this.props.disabled} placeholder={this.props.placeholder} size={this.props.size}
+                        readOnly={this.props.readOnly} disabled={this.props.disabled} placeholder={this.props.placeholder} size={this.props.size}
                         maxLength={this.props.maxlength} tabIndex={this.props.tabIndex}
                         onBlur={this.onInputBlur} onFocus={this.onInputFocus} onChange={this.onInputChange}
                         onMouseDown={this.props.onMouseDown} onKeyUp={this.props.onKeyUp} onKeyDown={this.onInputKeyDown}

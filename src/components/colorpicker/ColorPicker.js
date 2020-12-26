@@ -594,7 +594,7 @@ export class ColorPicker extends Component {
             let inputProps = ObjectUtils.findDiffKeys(this.props, ColorPicker.defaultProps);
 
             return (
-                <input ref={(el) => this.input = el} type="text" className={inputClassName} readOnly="readonly" id={this.props.inputId} tabIndex={this.props.tabIndex} disabled={this.props.disabled}
+                <input ref={(el) => this.input = el} type="text" className={inputClassName} readOnly id={this.props.inputId} tabIndex={this.props.tabIndex} disabled={this.props.disabled}
                     onClick={this.onInputClick} onKeyDown={this.onInputKeydown} {...inputProps}/>
             );
         }

@@ -32,7 +32,7 @@ export class DataScrollerLoaderDemo extends Component {
                 <div className="product-detail">
                     <div className="product-name">{data.name}</div>
                     <div className="product-description">{data.description}</div>
-                    <Rating value={data.rating} readonly cancel={false}></Rating>
+                    <Rating value={data.rating} readOnly cancel={false}></Rating>
                     <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
                 </div>
                 <div className="product-action">
@@ -109,7 +109,7 @@ export class DataScrollerLoaderDemo extends Component {
                 <div className="product-detail">
                     <div className="product-name">{data.name}</div>
                     <div className="product-description">{data.description}</div>
-                    <Rating value={data.rating} readonly cancel={false}></Rating>
+                    <Rating value={data.rating} readOnly cancel={false}></Rating>
                     <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
                 </div>
                 <div className="product-action">
@@ -162,7 +162,7 @@ const DataScrollerLoaderDemo = () => {
                 <div className="product-detail">
                     <div className="product-name">{data.name}</div>
                     <div className="product-description">{data.description}</div>
-                    <Rating value={data.rating} readonly cancel={false}></Rating>
+                    <Rating value={data.rating} readOnly cancel={false}></Rating>
                     <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
                 </div>
                 <div className="product-action">
@@ -213,7 +213,7 @@ const DataScrollerLoaderDemo = () => {
                 <div className="product-detail">
                     <div className="product-name">{data.name}</div>
                     <div className="product-description">{data.description}</div>
-                    <Rating value={data.rating} readonly cancel={false}></Rating>
+                    <Rating value={data.rating} readOnly cancel={false}></Rating>
                     <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
                 </div>
                 <div className="product-action">

@@ -39,7 +39,7 @@ export class KnobDemo extends Component {
                             </div>
                             <div className="p-field p-col-12 p-md-4">
                                 <h5>Readonly</h5>
-                                <Knob value={this.state.value2} readonly={true}/>
+                                <Knob value={this.state.value2} readOnly={true}/>
                             </div>
                             <div className="p-field p-col-12 p-md-4">
                                 <h5>Disabled</h5>

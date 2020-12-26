@@ -92,7 +92,7 @@ export class Steps extends Component {
     }
 
     render() {
-        const className = classNames('p-steps p-component', this.props.className, {'p-readonly': this.props.readonly});
+        const className = classNames('p-steps p-component', this.props.className, {'p-readonly': this.props.readOnly});
         const items = this.renderItems();
 
         return (

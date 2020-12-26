@@ -23,7 +23,7 @@ export class InputMask extends Component {
         maxlength: null,
         tabIndex: null,
         disabled: false,
-        readonly: false,
+        readOnly: false,
         name: null,
         required: false,
         tooltip: null,
@@ -50,7 +50,7 @@ export class InputMask extends Component {
         maxlength: PropTypes.number,
         tabIndex: PropTypes.number,
         disabled: PropTypes.bool,
-        readonly: PropTypes.bool,
+        readOnly: PropTypes.bool,
         name: PropTypes.string,
         required: PropTypes.bool,
         tooltip: PropTypes.string,
@@ -227,7 +227,7 @@ export class InputMask extends Component {
     }
 
     onKeyDown(e) {
-        if (this.props.readonly) {
+        if (this.props.readOnly) {
             return;
         }
 
@@ -267,7 +267,7 @@ export class InputMask extends Component {
     }
 
     onKeyPress(e) {
-        if (this.props.readonly) {
+        if (this.props.readOnly) {
             return;
         }
 
@@ -391,7 +391,7 @@ export class InputMask extends Component {
     }
 
     onFocus(e) {
-        if (this.props.readonly) {
+        if (this.props.readOnly) {
             return;
         }
 
@@ -430,7 +430,7 @@ export class InputMask extends Component {
     }
 
     handleInputChange(e) {
-        if (this.props.readonly) {
+        if (this.props.readOnly) {
             return;
         }
 
@@ -605,7 +605,7 @@ export class InputMask extends Component {
         let inputMaskClassName = classNames('p-inputmask', this.props.className);
         return (
             <InputText id={this.props.id} ref={(el) => this.input = ReactDOM.findDOMNode(el)} type={this.props.type} name={this.props.name} style={this.props.style} className={inputMaskClassName} placeholder={this.props.placeholder}
-                size={this.props.size} maxLength={this.props.maxlength} tabIndex={this.props.tabIndex} disabled={this.props.disabled} readOnly={this.props.readonly}
+                size={this.props.size} maxLength={this.props.maxlength} tabIndex={this.props.tabIndex} disabled={this.props.disabled} readOnly={this.props.readOnly}
                 onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.onKeyDown} onKeyPress={this.onKeyPress}
                 onInput={this.onInput} onPaste={this.handleInputChange} required={this.props.required} aria-labelledby={this.props.ariaLabelledBy} />
         );

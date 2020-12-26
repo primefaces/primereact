@@ -767,13 +767,7 @@ Vertical
                             <td>Hint text for the input field.</td>
                         </tr>
                         <tr>
-                            <td>readonly</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>When present, it specifies that the input cannot be typed.</td>
-                        </tr>
-                        <tr>
-                            <td>readonly</td>
+                            <td>readOnly</td>
                             <td>boolean</td>
                             <td>false</td>
                             <td>When present, it specifies that the element should be read-only.</td>

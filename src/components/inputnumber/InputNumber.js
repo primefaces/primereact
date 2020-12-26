@@ -39,7 +39,7 @@ export class InputNumber extends Component {
         pattern: null,
         inputMode: null,
         placeholder: null,
-        readonly: false,
+        readOnly: false,
         size: null,
         style: null,
         className: null,
@@ -87,7 +87,7 @@ export class InputNumber extends Component {
         pattern: PropTypes.string,
         inputMode: PropTypes.string,
         placeholder: PropTypes.string,
-        readonly: PropTypes.bool,
+        readOnly: PropTypes.bool,
         size: PropTypes.number,
         style: PropTypes.object,
         className: PropTypes.string,
@@ -942,7 +942,7 @@ export class InputNumber extends Component {
             <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} id={this.props.inputId} style={this.props.inputStyle} role="spinbutton"
                        className={className} defaultValue={valueToRender} type={this.props.type} size={this.props.size} tabIndex={this.props.tabIndex} inputMode={this.getInputMode()}
                        maxLength={this.props.maxlength} disabled={this.props.disabled} required={this.props.required} pattern={this.props.pattern}
-                       placeholder={this.props.placeholder} readOnly={this.props.readonly} name={this.props.name}
+                       placeholder={this.props.placeholder} readOnly={this.props.readOnly} name={this.props.name}
                        onKeyDown={this.onInputKeyDown} onKeyPress={this.onInputKeyPress} onInput={this.onInput} onClick={this.onInputClick}
                        onBlur={this.onInputBlur} onFocus={this.onInputFocus} onPaste={this.onPaste} min={this.props.min} max={this.props.max}
                        aria-valuemin={this.props.min} aria-valuemax={this.props.max} aria-valuenow={this.props.value} aria-labelledby={this.props.ariaLabelledBy} />

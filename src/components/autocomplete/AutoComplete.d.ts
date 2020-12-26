@@ -22,7 +22,7 @@ interface AutoCompleteProps {
     panelClassName?: string;
     panelStyle?: object;
     placeholder?: string;
-    readonly?: boolean;
+    readOnly?: boolean;
     disabled?: boolean;
     maxlength?: number;
     size?: number;

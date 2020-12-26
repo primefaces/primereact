@@ -460,7 +460,7 @@ itemTemplate(item) {
                                         <td>Hint text for the input field.</td>
                                     </tr>
                                     <tr>
-                                        <td>readonly</td>
+                                        <td>readOnly</td>
                                         <td>boolean</td>
                                         <td>false</td>
                                         <td>When present, it specifies that the input cannot be typed.</td>

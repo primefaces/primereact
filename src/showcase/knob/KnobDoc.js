@@ -42,7 +42,7 @@ export class KnobDemo extends Component {
                         </div>
                         <div className="p-field p-col-12 p-md-4">
                             <h5>Readonly</h5>
-                            <Knob value={this.state.value2} readonly={true}/>
+                            <Knob value={this.state.value2} readOnly={true}/>
                         </div>
                         <div className="p-field p-col-12 p-md-4">
                             <h5>Disabled</h5>
@@ -107,7 +107,7 @@ const KnobDemo = () => {
                     </div>
                     <div className="p-field p-col-12 p-md-4">
                         <h5>Readonly</h5>
-                        <Knob value={value2} readonly={true}/>
+                        <Knob value={value2} readOnly={true}/>
                     </div>
                     <div className="p-field p-col-12 p-md-4">
                         <h5>Disabled</h5>
@@ -171,7 +171,7 @@ const KnobDemo = () => {
                     </div>
                     <div className="p-field p-col-12 p-md-4">
                         <h5>Readonly</h5>
-                        <Knob value={value2} readonly={true}/>
+                        <Knob value={value2} readOnly={true}/>
                     </div>
                     <div className="p-field p-col-12 p-md-4">
                         <h5>Disabled</h5>
@@ -307,7 +307,7 @@ import { Knob } from 'primereact/knob';
                                     <td>When present, it specifies that the component should be disabled.</td>
                                 </tr>
                                 <tr>
-                                    <td>readonly</td>
+                                    <td>readOnly</td>
                                     <td>boolean</td>
                                     <td>false</td>
                                     <td>When present, it specifies that the component value cannot be edited.</td>

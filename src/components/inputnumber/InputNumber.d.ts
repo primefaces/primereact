@@ -32,7 +32,7 @@ interface InputNumberProps {
     pattern?: string;
     inputMode?: string;
     placeholder?: string;
-    readonly?: boolean;
+    readOnly?: boolean;
     size?: number;
     style?: object;
     className?: string;
