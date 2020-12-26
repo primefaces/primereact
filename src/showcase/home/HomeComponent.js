@@ -31,8 +31,8 @@ export class HomeComponent extends Component {
                             <div className="feature-card">
                                 <img alt="components" src="showcase/images/home/react-components.png" />
                                 <div className="feature-card-detail">
-                                    <span className="feature-name">70+ COMPONENTS</span>
-                                    <p>The most complete set of native widgets featuring 70+ easy to use components for all your UI requirements.</p>
+                                    <span className="feature-name">80+ COMPONENTS</span>
+                                    <p>The most complete set of native widgets featuring 80+ easy to use components for all your UI requirements.</p>
                                 </div>
                             </div>
                         </div>
