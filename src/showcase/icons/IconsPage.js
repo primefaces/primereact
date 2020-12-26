@@ -99,7 +99,7 @@ npm install primeicons --save
 {`
 <i className="pi pi-check" style={{'fontSize': '2em'}}></i>
 `}
-                    </CodeHighlight>
+</CodeHighlight>
 
                     <i className="pi pi-check" style={{ 'fontSize': '2em' }}></i>
 

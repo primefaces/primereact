@@ -24,9 +24,9 @@ export class AvatarDemo extends Component {
                         <div className="p-col-12 p-md-4">
                             <div className="card">
                                 <h5>Label</h5>
-                                <Avatar className="p-mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }}>
-                                    V
-                                </Avatar>
+                                <Avatar label="P" className="p-mr-2" size="xlarge" />
+                                <Avatar label="V" className="p-mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} />
+                                <Avatar label="U" className="p-mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
                             </div>
                         </div>
 
