@@ -60,7 +60,7 @@ interface DataTableProps {
     autoLayout?:boolean;
     loading?:boolean;
     loadingIcon?:string;
-    tabIndex?:string;
+    tabIndex?:number;
     stateKey?:string;
     stateStorage?:string;
     groupField?:string;

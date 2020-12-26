@@ -42,7 +42,7 @@ export class SplitButton extends Component {
         className: PropTypes.string,
         menustyle: PropTypes.object,
         menuClassName: PropTypes.string,
-        tabIndex: PropTypes.string,
+        tabIndex: PropTypes.number,
         onClick: PropTypes.func,
         appendTo: PropTypes.object,
         tooltip: PropTypes.string,

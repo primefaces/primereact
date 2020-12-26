@@ -111,7 +111,7 @@ export class Calendar extends Component {
         readOnlyInput: PropTypes.bool,
         keepInvalid: PropTypes.bool,
         disabled: PropTypes.bool,
-        tabIndex: PropTypes.string,
+        tabIndex: PropTypes.number,
         placeholder: PropTypes.string,
         showIcon: PropTypes.bool,
         icon: PropTypes.string,

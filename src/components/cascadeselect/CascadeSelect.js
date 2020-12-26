@@ -52,7 +52,7 @@ export class CascadeSelect extends Component {
         disabled: PropTypes.bool,
         dataKey: PropTypes.string,
         inputId: PropTypes.string,
-        tabIndex: PropTypes.string,
+        tabIndex: PropTypes.number,
         ariaLabelledBy: PropTypes.string,
         appendTo: PropTypes.any,
         onChange: PropTypes.func,

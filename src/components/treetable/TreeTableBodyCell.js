@@ -127,7 +127,7 @@ export class TreeTableBodyCell extends Component {
         }
 
         /* eslint-disable */
-        const editorKeyHelper = this.props.editor && <a tabIndex="0" ref={(el) => {this.keyHelper = el;}} className="p-cell-editor-key-helper p-hidden-accessible" onFocus={this.onEditorFocus}><span></span></a>;
+        const editorKeyHelper = this.props.editor && <a tabIndex={0} ref={(el) => {this.keyHelper = el;}} className="p-cell-editor-key-helper p-hidden-accessible" onFocus={this.onEditorFocus}><span></span></a>;
         /* eslint-enable */
 
         return (

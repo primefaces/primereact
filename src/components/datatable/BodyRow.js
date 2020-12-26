@@ -263,7 +263,7 @@ export class BodyRow extends Component {
         }
 
         return (
-            <tr tabIndex={this.props.selectionMode ? '0' : null} ref={(el) => {this.container = el;}} className={className} onClick={this.onClick} onDoubleClick={this.onDoubleClick} onTouchEnd={this.onTouchEnd} onContextMenu={this.onRightClick} onMouseDown={this.onMouseDown}
+            <tr tabIndex={this.props.selectionMode ? 0 : null} ref={(el) => {this.container = el;}} className={className} onClick={this.onClick} onDoubleClick={this.onDoubleClick} onTouchEnd={this.onTouchEnd} onContextMenu={this.onRightClick} onMouseDown={this.onMouseDown}
                 onDragStart={this.props.onDragStart} onDragEnd={this.onDragEnd} onDragOver={this.onDragOver} onDragLeave={this.onDragLeave} onDrop={this.onDrop} style={style} onKeyDown={this.onKeyDown}>
                 {cells}
             </tr>

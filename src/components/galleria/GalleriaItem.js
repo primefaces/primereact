@@ -151,7 +151,7 @@ export class GalleriaItem extends Component {
 
         if (!indicator) {
             indicator = (
-                <button type="button" tabIndex="-1" className="p-link">
+                <button type="button" tabIndex={-1} className="p-link">
                     <Ripple />
                 </button>
             );

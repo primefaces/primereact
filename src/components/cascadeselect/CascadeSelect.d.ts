@@ -15,7 +15,7 @@ interface CascadeSelectProps {
     disabled?: boolean;
     dataKey?: string;
     inputId?: string;
-    tabIndex?: string;
+    tabIndex?: number;
     ariaLabelledBy?: string;
     appendTo?: any;
     onChange?(e: {originalEvent: Event, value: any}): void;

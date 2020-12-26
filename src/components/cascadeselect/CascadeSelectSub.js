@@ -236,7 +236,7 @@ export class CascadeSelectSub extends Component {
 
         return (
             <li key={this.getOptionLabelToRender(option)+'_'+index} className={className} style={option.style} role="none">
-                <div className={"p-cascadeselect-item-content"} onClick={event => this.onOptionClick(event, option)} tabIndex="0" onKeyDown={event => this.onKeyDown(event, option, index)}>
+                <div className={"p-cascadeselect-item-content"} onClick={event => this.onOptionClick(event, option)} tabIndex={0} onKeyDown={event => this.onKeyDown(event, option, index)}>
                     {content}
                     {optionGroup}
                     <Ripple />

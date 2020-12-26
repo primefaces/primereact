@@ -462,7 +462,7 @@ export class TreeTableRow extends Component {
         const style = {marginLeft: this.props.level * 16 + 'px', visibility: (this.props.node.leaf === false || (this.props.node.children && this.props.node.children.length)) ? 'visible' : 'hidden'};
 
         return (
-            <button type="button" className="p-treetable-toggler p-link p-unselectable-text" onClick={this.onTogglerClick} tabIndex="-1" style={style}>
+            <button type="button" className="p-treetable-toggler p-link p-unselectable-text" onClick={this.onTogglerClick} tabIndex={-1} style={style}>
                 <i className={iconClassName}></i>
                 <Ripple />
             </button>
@@ -545,7 +545,7 @@ export class TreeTableRow extends Component {
 
         return (
             <>
-                <tr ref={el => this.container = el} tabIndex="0" className={className} style={this.props.node.style} onClick={this.onClick} onTouchEnd={this.onTouchEnd} onContextMenu={this.onRightClick} onKeyDown={this.onKeyDown}>{cells}</tr>
+                <tr ref={el => this.container = el} tabIndex={0} className={className} style={this.props.node.style} onClick={this.onClick} onTouchEnd={this.onTouchEnd} onContextMenu={this.onRightClick} onKeyDown={this.onKeyDown}>{cells}</tr>
                 {children}
             </>
         );

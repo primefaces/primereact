@@ -73,7 +73,7 @@ export class Chip extends Component {
 
         if (this.props.removable) {
             const removableIconClassName = classNames('p-chip-remove-icon', this.props.removeIcon);
-            content.push(<span key="removeIcon" tabIndex="0" className={removableIconClassName} onClick={this.close} onKeyDown={this.onKeyDown}></span>);
+            content.push(<span key="removeIcon" tabIndex={0} className={removableIconClassName} onClick={this.close} onKeyDown={this.onKeyDown}></span>);
         }
 
         return content;

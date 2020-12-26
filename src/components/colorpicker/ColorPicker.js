@@ -38,7 +38,7 @@ export class ColorPicker extends Component {
         format: PropTypes.string,
         appendTo: PropTypes.any,
         disabled: PropTypes.bool,
-        tabIndex: PropTypes.string,
+        tabIndex: PropTypes.number,
         inputId: PropTypes.string,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,

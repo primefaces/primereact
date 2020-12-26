@@ -34,7 +34,7 @@ export class SelectButton extends Component {
         optionLabel: PropTypes.string,
         optionValue: PropTypes.string,
         optionDisabled: PropTypes.string,
-        tabIndex: PropTypes.string,
+        tabIndex: PropTypes.number,
         multiple: PropTypes.bool,
         disabled: PropTypes.bool,
         style: PropTypes.object,

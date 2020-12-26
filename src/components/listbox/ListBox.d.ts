@@ -21,7 +21,7 @@ interface ListBoxProps {
     filterMatchMode?: string;
     filterPlaceholder?: string;
     filterLocale?: string;
-    tabIndex?:string;
+    tabIndex?: number;
     tooltip?: any;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string,

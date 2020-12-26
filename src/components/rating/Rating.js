@@ -97,7 +97,7 @@ export class Rating extends Component {
     }
 
     getFocusIndex() {
-        return (this.props.disabled || this.props.readOnly) ? null : '0';
+        return (this.props.disabled || this.props.readOnly) ? null : 0;
     }
 
     componentDidMount() {

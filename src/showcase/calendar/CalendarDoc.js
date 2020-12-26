@@ -758,7 +758,7 @@ dateTemplate(date) {
                                     </tr>
                                     <tr>
                                         <td>tabIndex</td>
-                                        <td>string</td>
+                                        <td>number</td>
                                         <td>null</td>
                                         <td>Index of the element in tabbing order.</td>
                                     </tr>
