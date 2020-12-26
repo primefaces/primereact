@@ -1,5 +1,5 @@
 import * as React from 'react';
-import DialogProps from '../dialog/Dialog.d.ts';
+import { DialogProps } from '../dialog/Dialog.d.ts';
 
 interface ConfirmDialogProps extends DialogProps {
     visible?: boolean;

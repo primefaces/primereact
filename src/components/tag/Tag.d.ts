@@ -1,12 +1,12 @@
 import * as React from 'react';
 
-interface Tag {
-    value: any,
-    severity: string,
-    rounded: boolean,
-    icon: string,
-    className: string,
-    style: object
+interface TagProps {
+    value?: any;
+    severity?: string;
+    rounded?: boolean;
+    icon?: string;
+    style?: object;
+    className?: string;
 }
 
-export class Tag extends React.Component<Tag,any> {}
+export class Tag extends React.Component<TagProps,any> {}
