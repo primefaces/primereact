@@ -359,6 +359,32 @@ export class TableBody extends Component {
         }
     }
 
+    findEditingRowIndex(row) {
+        let index = -1;
+        if (this.props.editingRows) {
+            for (let i = 0; i < this.props.editingRows.length; i++) {
+                if (ObjectUtils.equals(this.props.editingRows[i], row)) {
+                    index = i;
+                    break;
+                }
+            }
+        }
+        return index;
+    }
+
+    isRowEditing(row) {
+        let dataKey = this.props.dataKey;
+
+        if (dataKey) {
+            let dataKeyValue = String(ObjectUtils.resolveFieldData(row, dataKey));
+
+            return this.props.editingRows && this.props.editingRows[dataKeyValue] != null;
+        }
+        else {
+            return this.findEditingRowIndex(row) !== -1
+        }
+    }
+
     isSelectionEnabled() {
         if(this.props.selectionMode || this.props.frozenSelectionMode != null) {
             return true;
@@ -503,6 +529,7 @@ export class TableBody extends Component {
 
                     let rowData = this.props.value[i];
                     let expanded = this.isRowExpanded(rowData);
+                    let editing = this.isRowEditing(rowData);
                     let selected = selectionEnabled ? this.isSelected(this.props.value[i]) : false;
                     let contextMenuSelected = this.isContextMenuSelected(rowData);
                     let groupRowSpan;
@@ -549,7 +576,7 @@ export class TableBody extends Component {
                                             sortField={this.props.sortField} rowGroupMode={this.props.rowGroupMode} groupRowSpan={groupRowSpan}
                                             onDragStart={(e) => this.onRowDragStart(e, i)} onDragEnd={this.onRowDragEnd} onDragOver={(e) => this.onRowDragOver(e, i)} onDragLeave={this.onRowDragLeave}
                                             onDrop={this.onRowDrop} virtualScroll={this.props.virtualScroll} virtualRowHeight={this.props.virtualRowHeight}
-                                            editMode={this.props.editMode} rowEditorValidator={this.props.rowEditorValidator} onRowEditInit={this.props.onRowEditInit} onRowEditSave={this.props.onRowEditSave} onRowEditCancel={this.props.onRowEditCancel}
+                                            editMode={this.props.editMode} editing={editing} rowEditorValidator={this.props.rowEditorValidator} onRowEditInit={this.props.onRowEditInit} onRowEditSave={this.props.onRowEditSave} onRowEditCancel={this.props.onRowEditCancel}
                                             showRowReorderElement={this.props.showRowReorderElement} showSelectionElement={this.props.showSelectionElement}>
                                             {this.props.children}
                                     </BodyRow>
