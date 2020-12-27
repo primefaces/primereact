@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import ObjectUtils from '../utils/ObjectUtils';
 import { SelectButtonItem } from './SelectButtonItem';
 import { tip } from "../tooltip/Tooltip";
@@ -34,7 +34,7 @@ export class SelectButton extends Component {
         optionLabel: PropTypes.string,
         optionValue: PropTypes.string,
         optionDisabled: PropTypes.string,
-        tabIndex: PropTypes.string,
+        tabIndex: PropTypes.number,
         multiple: PropTypes.bool,
         disabled: PropTypes.bool,
         style: PropTypes.object,

@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import ObjectUtils from '../utils/ObjectUtils';
@@ -31,7 +31,7 @@ export class PickListSubList extends Component {
         style: PropTypes.object,
         showControls: PropTypes.bool,
         metaKeySelection: PropTypes.bool,
-        tabIndex: PropTypes.string,
+        tabIndex: PropTypes.number,
         itemTemplate: PropTypes.func,
         onItemClick: PropTypes.func,
         onSelectionChange: PropTypes.func

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
 
 export class ScrollableView extends Component {
@@ -209,7 +209,7 @@ export class ScrollableView extends Component {
         let tableHeaderClassName = classNames('p-datatable-scrollable-header-table', this.props.tableClassName);
         let tableFooterClassName = classNames('p-datatable-scrollable-footer-table', this.props.tableClassName);
         let tableBodyStyle = Object.assign({top:'0'}, this.props.tableStyle);
-        let width = this.props.frozen ? this.props.frozenWidth : 'calc(100% - ' + this.props.frozenWidth + ')';
+        let width = this.props.columns ? (this.props.frozen ? this.props.frozenWidth : 'calc(100% - ' + this.props.frozenWidth + ')') : 0;
         let left = this.props.frozen ? null : this.props.frozenWidth;
         let colGroup = this.renderColGroup();
         let loadingTable = this.renderLoadingTable(colGroup);

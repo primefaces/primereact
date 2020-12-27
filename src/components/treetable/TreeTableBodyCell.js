@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import ObjectUtils from '../utils/ObjectUtils';
 import DomHandler from '../utils/DomHandler';
 
@@ -32,7 +32,7 @@ export class TreeTableBodyCell extends Component {
 
     onKeyDown(event) {
         if(event.which === 13 || event.which === 9) {
-            this.switchCellToViewMode();
+            this.switchCellToViewMode(event);
         }
     }
 
@@ -40,7 +40,7 @@ export class TreeTableBodyCell extends Component {
         if(!this.documentEditListener) {
             this.documentEditListener = (event) => {
                 if(!this.cellClick) {
-                    this.switchCellToViewMode();
+                    this.switchCellToViewMode(event);
                 }
 
                 this.cellClick = false;
@@ -68,9 +68,13 @@ export class TreeTableBodyCell extends Component {
         this.onClick(event);
     }
 
-    switchCellToViewMode() {
+    switchCellToViewMode(event) {
         if (this.props.editorValidator) {
-            let valid = this.props.editorValidator(this.props);
+            let valid = this.props.editorValidator({
+                originalEvent: event,
+                columnProps: this.props
+            });
+
             if(valid) {
                 this.closeCell();
             }
@@ -123,7 +127,7 @@ export class TreeTableBodyCell extends Component {
         }
 
         /* eslint-disable */
-        const editorKeyHelper = this.props.editor && <a tabIndex="0" ref={(el) => {this.keyHelper = el;}} className="p-cell-editor-key-helper p-hidden-accessible" onFocus={this.onEditorFocus}><span></span></a>;
+        const editorKeyHelper = this.props.editor && <a tabIndex={0} ref={(el) => {this.keyHelper = el;}} className="p-cell-editor-key-helper p-hidden-accessible" onFocus={this.onEditorFocus}><span></span></a>;
         /* eslint-enable */
 
         return (

@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { CSSTransition } from 'react-transition-group';
@@ -21,6 +21,7 @@ export class MultiSelect extends Component {
         options: null,
         optionLabel: null,
         optionValue: null,
+        display: 'comma',
         style: null,
         className: null,
         panelClassName: null,
@@ -29,6 +30,7 @@ export class MultiSelect extends Component {
         placeholder: null,
         fixedPlaceholder: false,
         disabled: false,
+        showClear: false,
         filter: false,
         filterBy: null,
         filterMatchMode: 'contains',
@@ -36,7 +38,7 @@ export class MultiSelect extends Component {
         filterLocale: undefined,
         emptyFilterMessage: 'No results found',
         resetFilterOnHide: false,
-        tabIndex: '0',
+        tabIndex: 0,
         dataKey: null,
         inputId: null,
         required: false,
@@ -60,6 +62,7 @@ export class MultiSelect extends Component {
         options: PropTypes.array,
         optionLabel: PropTypes.string,
         optionValue: PropTypes.string,
+        display: PropTypes.string,
         style: PropTypes.object,
         className: PropTypes.string,
         panelClassName: PropTypes.string,
@@ -68,6 +71,7 @@ export class MultiSelect extends Component {
         placeholder: PropTypes.string,
         fixedPlaceholder: PropTypes.bool,
         disabled: PropTypes.bool,
+        showClear: PropTypes.bool,
         filter: PropTypes.bool,
         filterBy: PropTypes.string,
         filterMatchMode: PropTypes.string,
@@ -75,7 +79,7 @@ export class MultiSelect extends Component {
         filterLocale: PropTypes.string,
         emptyFilterMessage: PropTypes.any,
         resetFilterOnHide: PropTypes.bool,
-        tabIndex: PropTypes.string,
+        tabIndex: PropTypes.number,
         dataKey: PropTypes.string,
         inputId: PropTypes.string,
         required: PropTypes.bool,
@@ -192,7 +196,7 @@ export class MultiSelect extends Component {
     }
 
     onClick(event) {
-        if (!this.props.disabled && !this.isPanelClicked(event)) {
+        if (!this.props.disabled && !this.isPanelClicked(event) && !DomHandler.hasClass(event.target, 'p-multiselect-token-icon') && !this.isClearClicked(event)) {
             if (this.state.overlayVisible) {
                 this.hide();
             }
@@ -328,8 +332,9 @@ export class MultiSelect extends Component {
         let index = -1;
 
         if (this.props.value) {
+            const key = this.equalityKey();
             for (let i = 0; i < this.props.value.length; i++) {
-                if (ObjectUtils.equals(this.props.value[i], value, this.props.dataKey)) {
+                if (ObjectUtils.equals(this.props.value[i], value, key)) {
                     index = i;
                     break;
                 }
@@ -343,14 +348,15 @@ export class MultiSelect extends Component {
         return this.findSelectionIndex(this.getOptionValue(option)) !== -1;
     }
 
-    findLabelByValue(val) {
+    getLabelByValue(val) {
         let label = null;
 
         for (let i = 0; i < this.props.options.length; i++) {
             let option = this.props.options[i];
             let optionValue = this.getOptionValue(option);
+            let key = this.equalityKey();
 
-            if (ObjectUtils.equals(optionValue, val)) {
+            if (ObjectUtils.equals(optionValue, val, key)) {
                 label = this.getOptionLabel(option);
                 break;
             }
@@ -428,8 +434,12 @@ export class MultiSelect extends Component {
     }
 
     isOutsideClicked(event) {
-        return this.container && !(this.container.isSameNode(event.target) || this.container.contains(event.target)
+        return this.container && !(this.container.isSameNode(event.target) || this.isClearClicked(event) || this.container.contains(event.target)
             || (this.panel && this.panel.element && this.panel.element.contains(event.target)));
+    }
+
+    isClearClicked(event) {
+        return DomHandler.hasClass(event.target, 'p-multiselect-clear-icon')
     }
 
     isPanelClicked(event) {
@@ -503,8 +513,19 @@ export class MultiSelect extends Component {
         return !this.props.value || this.props.value.length === 0;
     }
 
+    equalityKey() {
+        return this.props.optionValue ? null : this.props.dataKey;
+    }
+
     checkValidity() {
         return this.nativeSelect.checkValidity();
+    }
+
+    removeChip(event, item) {
+        let key = this.equalityKey();
+        let value = this.props.value.filter(val => !ObjectUtils.equals(val, item, key));
+
+        this.updateModel(event, value);
     }
 
     getSelectedItemsLabel() {
@@ -525,7 +546,7 @@ export class MultiSelect extends Component {
                 if(i !== 0) {
                     label += ',';
                 }
-                label += this.findLabelByValue(this.props.value[i]);
+                label += this.getLabelByValue(this.props.value[i]);
             }
 
             if (this.props.value.length <= this.props.maxSelectedLabels) {
@@ -560,6 +581,20 @@ export class MultiSelect extends Component {
             }
         }
         else {
+            if (this.props.display === 'chip' && !this.isEmpty()) {
+                return (
+                    this.props.value.map((val) => {
+                        const label = this.getLabelByValue(val);
+                        return (
+                            <div className="p-multiselect-token" key={label}>
+                                <span className="p-multiselect-token-label">{label}</span>
+                                { !this.props.disabled && <span className="p-multiselect-token-icon pi pi-times-circle" onClick={(e) => this.removeChip(e, val)}></span> }
+                            </div>
+                        )
+                    })
+                );
+            }
+
             return this.getLabel();
         }
     }
@@ -577,6 +612,17 @@ export class MultiSelect extends Component {
             <MultiSelectHeader filter={this.props.filter} filterValue={this.state.filter} onFilter={this.onFilter} filterPlaceholder={this.props.filterPlaceholder}
                 onClose={this.onCloseClick} onToggleAll={this.onToggleAll} allChecked={this.isAllChecked(items)} />
         );
+    }
+
+    renderClearIcon() {
+        const empty = this.isEmpty();
+        if (!empty && this.props.showClear && !this.props.disabled) {
+            return (
+                <i className="p-multiselect-clear-icon pi pi-times" onClick={(e) => this.updateModel(e, null)}></i>
+            );
+        }
+
+        return null;
     }
 
     renderLabel() {
@@ -600,7 +646,7 @@ export class MultiSelect extends Component {
 
         return (
             <div className="p-hidden-accessible p-multiselect-hidden-select">
-                <select ref={(el) => this.nativeSelect = el} required={this.props.required} name={this.props.name} tabIndex="-1" aria-hidden="true" multiple>
+                <select ref={(el) => this.nativeSelect = el} required={this.props.required} name={this.props.name} tabIndex={-1} aria-hidden="true" multiple>
                     {selectedOptions}
                 </select>
             </div>
@@ -609,12 +655,15 @@ export class MultiSelect extends Component {
 
     render() {
         let className = classNames('p-multiselect p-component p-inputwrapper', {
+            'p-multiselect-chip': this.props.display === 'chip',
             'p-disabled': this.props.disabled,
+            'p-multiselect-clearable': this.props.showClear && !this.props.disabled,
             'p-focus': this.state.focused,
             'p-inputwrapper-filled': this.props.value && this.props.value.length > 0,
             'p-inputwrapper-focus': this.state.focused
         }, this.props.className);
         let label = this.renderLabel();
+        let clearIcon = this.renderClearIcon();
         let hiddenSelect = this.renderHiddenSelect();
         let items = this.props.options;
         const hasFilter = this.hasFilter();
@@ -652,6 +701,7 @@ export class MultiSelect extends Component {
                         role="listbox" aria-haspopup="listbox" aria-labelledby={this.props.ariaLabelledBy} aria-expanded={this.state.overlayVisible} disabled={this.props.disabled} tabIndex={this.props.tabIndex} />
                 </div>
                 {label}
+                {clearIcon}
                 <div className="p-multiselect-trigger">
                     <span className="p-multiselect-trigger-icon pi pi-chevron-down p-c"></span>
                 </div>

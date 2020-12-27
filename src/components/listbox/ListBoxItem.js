@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
 import { Ripple } from '../ripple/Ripple';
 
@@ -20,7 +20,7 @@ export class ListBoxItem extends Component {
         option: PropTypes.any,
         label: PropTypes.string,
         selected: PropTypes.bool,
-        tabIndex: PropTypes.string,
+        tabIndex: PropTypes.number,
         onClick: PropTypes.func,
         onTouchEnd: PropTypes.func,
         template: PropTypes.func

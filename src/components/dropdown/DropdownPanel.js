@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 
 export class DropdownPanel extends Component {
 

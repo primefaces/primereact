@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
 import {InputText} from '../inputtext/InputText';
 
@@ -277,7 +277,7 @@ export class TreeTableHeader extends Component {
                 return (
                     <tr>{columns.map((col, i) => this.renderHeaderCell(col, {index: i, filterOnly: false, renderFilter: false}))}</tr>
                 );
-            }            
+            }
         }
         else {
             return null;

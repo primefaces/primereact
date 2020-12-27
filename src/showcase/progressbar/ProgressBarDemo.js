@@ -24,8 +24,8 @@ export class ProgressBarDemo extends Component {
     }
 
     componentDidMount() {
+        let val = this.state.value1;
         this.interval = setInterval(() => {
-            let val = this.state.value1;
             val += Math.floor(Math.random() * 10) + 1;
 
             if (val >= 100) {

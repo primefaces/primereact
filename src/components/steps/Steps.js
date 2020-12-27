@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import UniqueComponentId from '../utils/UniqueComponentId';
 
 export class Steps extends Component {
@@ -92,7 +92,7 @@ export class Steps extends Component {
     }
 
     render() {
-        const className = classNames('p-steps p-component', this.props.className, {'p-readonly': this.props.readonly});
+        const className = classNames('p-steps p-component', this.props.className, {'p-readonly': this.props.readOnly});
         const items = this.renderItems();
 
         return (

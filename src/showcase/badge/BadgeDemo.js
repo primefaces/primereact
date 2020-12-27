@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Button } from '../../components/button/Button';
-import './BadgeDemo.scss';
+import { Badge } from '../../components/badge/Badge';
 import { BadgeDoc } from './BadgeDoc';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class BadgeDemo extends Component {
     render() {
@@ -9,66 +10,40 @@ export class BadgeDemo extends Component {
             <div>
                 <div className="content-section introduction">
                     <div className="feature-intro">
-                        <h1>Badge</h1>
-                        <p>Badge is a small status indicator for another element.</p>
+                        <AppInlineHeader changelogText="badge">
+                            <h1>Badge</h1>
+                            <p>Badge is a small status indicator for another element.</p>
+                        </AppInlineHeader>
                     </div>
                 </div>
 
-                <div className="content-section implementation badge-demo">
+                <div className="content-section implementation">
                     <div className="card">
                         <h5>Numbers</h5>
-                        <div className="badges">
-                            <span className="p-badge">2</span>
-                            <span className="p-badge p-badge-success">8</span>
-                            <span className="p-badge p-badge-info">4</span>
-                            <span className="p-badge p-badge-warning">12</span>
-                            <span className="p-badge p-badge-danger">3</span>
-                        </div>
+                        <Badge value="2" className="p-mr-2"></Badge>
+                        <Badge value="8" severity="success" className="p-mr-2"></Badge>
+                        <Badge value="4" severity="info" className="p-mr-2"></Badge >
+                        <Badge value="12" severity="warning" className="p-mr-2"></Badge>
+                        <Badge value="3" severity="danger"></Badge>
 
-                        <h5>Tags</h5>
-                        <div className="badges">
-                            <span className="p-tag">Primary</span>
-                            <span className="p-tag p-tag-success">Success</span>
-                            <span className="p-tag p-tag-info">Info</span>
-                            <span className="p-tag p-tag-warning">Warning</span>
-                            <span className="p-tag p-tag-danger">Danger</span>
-                        </div>
+                        <h5 className="p-mb-4">Positioned Badge</h5>
+                        <i className="pi pi-bell p-mr-4 p-text-secondary p-overlay-badge" style={{ fontSize: '2rem' }}><Badge value="2" ></Badge></i>
+                        <i className="pi pi-calendar p-mr-4 p-text-secondary p-overlay-badge" style={{ fontSize: '2rem' }}><Badge value="10+" severity="danger" ></Badge></i>
+                        <i className="pi pi-envelope p-text-secondary p-overlay-badge" style={{ fontSize: '2rem' }}><Badge severity="danger"></Badge></i>
 
-                        <h5>Pills</h5>
-                        <div className="badges">
-                            <span className="p-tag p-tag-rounded">Primary</span>
-                            <span className="p-tag p-tag-rounded p-tag-success">Success</span>
-                            <span className="p-tag p-tag-rounded p-tag-info">Info</span>
-                            <span className="p-tag p-tag-rounded p-tag-warning">Warning</span>
-                            <span className="p-tag p-tag-rounded p-tag-danger">Danger</span>
-                        </div>
-
-                        <h5>Positioned Badge</h5>
-                        <span className="p-overlay-badge p-mr-5">
-                            <i className="pi pi-bell" style={{ fontSize: '2em' }}></i>
-                            <span className="p-badge">2</span>
-                        </span>
-
-                        <span className="p-overlay-badge">
-                            <Button type="button" label="New" />
-                            <span className="p-badge p-badge-warning">5</span>
-                        </span>
-
-                        <h5>Inline Button Badge</h5>
-                        <Button type="button" label="Emails" badge="8" className="p-mr-2" />
-                        <Button type="button" label="Messages" icon="pi pi-users" className="p-button-warning" badge="8" badgeClassName="p-badge-danger" />
+                        <h5>Button Badge</h5>
+                        <Button type="button" label="Emails" className="p-mr-2"><Badge value="8" ></Badge></Button>
+                        <Button type="button" label="Messages" icon="pi pi-users" className="p-button-warning"><Badge value="8" severity="danger" ></Badge></Button>
 
                         <h5>Sizes</h5>
-                        <div className="badges">
-                            <span className="p-badge">2</span>
-                            <span className="p-badge p-badge-lg p-badge-sucess">4</span>
-                            <span className="p-badge p-badge-xl p-badge-warning">6</span>
-                        </div>
+                        <Badge value="2" className="p-mr-2"></Badge>
+                        <Badge value="4" className="p-mr-2" size="large" severity="warning"></Badge>
+                        <Badge value="6" size="xlarge" severity="success"></Badge>
                     </div>
-                </div>
+                </div >
 
                 <BadgeDoc />
-            </div>
+            </div >
         );
     }
 }

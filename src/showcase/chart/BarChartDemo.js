@@ -856,7 +856,6 @@ const BarChartDemo = () => {
             </div>
         )
     }
-}
                 `
             },
             'ts': {

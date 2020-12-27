@@ -5,7 +5,7 @@ import { InputText } from '../inputtext/InputText';
 import { Button } from '../button/Button';
 import { CalendarPanel } from './CalendarPanel';
 import DomHandler from '../utils/DomHandler';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import { tip } from '../tooltip/Tooltip';
 import { CSSTransition } from 'react-transition-group';
 import { Ripple } from '../ripple/Ripple';
@@ -111,7 +111,7 @@ export class Calendar extends Component {
         readOnlyInput: PropTypes.bool,
         keepInvalid: PropTypes.bool,
         disabled: PropTypes.bool,
-        tabIndex: PropTypes.string,
+        tabIndex: PropTypes.number,
         placeholder: PropTypes.string,
         showIcon: PropTypes.bool,
         icon: PropTypes.string,
@@ -268,7 +268,7 @@ export class Calendar extends Component {
             this.updateFocus();
         }
 
-        if (prevProps.value !== this.props.value && (!this.viewStateChanged || this.state.overlayVisible)) {
+        if (prevProps.value !== this.props.value && (!this.viewStateChanged || !this.state.overlayVisible)) {
             this.updateInputfield(this.props.value);
         }
     }
@@ -1458,6 +1458,7 @@ export class Calendar extends Component {
 
     hideOverlay(callback) {
         this.setState({ overlayVisible: false }, () => {
+            this.viewStateChanged = false;
             this.ignoreFocusFunctionality = false;
             if (callback) {
                 callback();

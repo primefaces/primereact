@@ -11,7 +11,7 @@ interface ColorPickerProps {
     format?: string;
     appendTo?: any;
     disabled?: boolean;
-    tabindex?: string;
+    tabIndex?: number;
     inputId?: string;
     tooltip?: any;
     tooltipOptions?: TooltipOptions;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import ObjectUtils from '../utils/ObjectUtils';
 import DomHandler from '../utils/DomHandler';
 import { Ripple } from '../ripple/Ripple';
@@ -27,7 +27,7 @@ export class OrderListSubList extends Component {
         listStyle: PropTypes.object,
         itemTemplate: PropTypes.func,
         dragdrop: PropTypes.bool,
-        tabIndex: PropTypes.string,
+        tabIndex: PropTypes.number,
         onItemClick: PropTypes.func,
         onItemKeyDown: PropTypes.func,
         onChange: PropTypes.func

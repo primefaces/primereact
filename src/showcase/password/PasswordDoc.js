@@ -144,6 +144,18 @@ import {Password} from 'primereact/password';
                                         <td>Text for a strong password.</td>
                                     </tr>
                                     <tr>
+                                        <td>mediumRegex</td>
+                                        <td>string</td>
+                                        <td>{`^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,}).`}</td>
+                                        <td>Regex for a medium level password.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>strongRegex</td>
+                                        <td>string</td>
+                                        <td>{`^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})`}</td>
+                                        <td>Regex for a strong level password.</td>
+                                    </tr>
+                                    <tr>
                                         <td>feedback</td>
                                         <td>boolean</td>
                                         <td>true</td>

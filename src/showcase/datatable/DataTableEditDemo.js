@@ -58,13 +58,13 @@ export class DataTableEditDemo extends Component {
         this.productService.getProductsSmall().then(data => this.setState({ [`${productStateKey}`]: data }));
     }
 
-    positiveIntegerValidator(props) {
-        const { rowData, field } = props;
+    positiveIntegerValidator(e) {
+        const { rowData, field } = e.columnProps;
         return this.isPositiveInteger(rowData[field]);
     }
 
-    emptyValueValidator(props) {
-        const { rowData, field } = props;
+    emptyValueValidator(e) {
+        const { rowData, field } = e.columnProps;
         return rowData[field].trim().length > 0;
     }
 
@@ -79,16 +79,16 @@ export class DataTableEditDemo extends Component {
         return n !== Infinity && String(n) === str && n >= 0;
     }
 
-    onEditorInit(props) {
-        const { rowIndex: index, field, rowData } = props;
+    onEditorInit(e) {
+        const { rowIndex: index, field, rowData } = e.columnProps;
         if (!this.editingCellRows[index]) {
             this.editingCellRows[index] = {...rowData};
         }
         this.editingCellRows[index][field] = this.state.products2[index][field];
     }
 
-    onEditorCancel(props) {
-        const { rowIndex: index, field } = props;
+    onEditorCancel(e) {
+        const { rowIndex: index, field } = e.columnProps;
         let products = [...this.state.products2];
         products[index][field] = this.editingCellRows[index][field];
         delete this.editingCellRows[index][field];
@@ -98,8 +98,8 @@ export class DataTableEditDemo extends Component {
         });
     }
 
-    onEditorSubmit(props) {
-        const { rowIndex: index, field } = props;
+    onEditorSubmit(e) {
+        const { rowIndex: index, field } = e.columnProps;
         delete this.editingCellRows[index][field];
     }
 
@@ -289,13 +289,13 @@ export class DataTableEditDemo extends Component {
         this.productService.getProductsSmall().then(data => this.setState({ [\`\${productStateKey}\`]: data }));
     }
 
-    positiveIntegerValidator(props) {
-        const { rowData, field } = props;
+    positiveIntegerValidator(e) {
+        const { rowData, field } = e.columnProps;
         return this.isPositiveInteger(rowData[field]);
     }
 
-    emptyValueValidator(props) {
-        const { rowData, field } = props;
+    emptyValueValidator(e) {
+        const { rowData, field } = e.columnProps;
         return rowData[field].trim().length > 0;
     }
 
@@ -310,16 +310,16 @@ export class DataTableEditDemo extends Component {
         return n !== Infinity && String(n) === str && n >= 0;
     }
 
-    onEditorInit(props) {
-        const { rowIndex: index, field, rowData } = props;
+    onEditorInit(e) {
+        const { rowIndex: index, field, rowData } = e.columnProps;
         if (!this.editingCellRows[index]) {
             this.editingCellRows[index] = {...rowData};
         }
         this.editingCellRows[index][field] = this.state.products2[index][field];
     }
 
-    onEditorCancel(props) {
-        const { rowIndex: index, field } = props;
+    onEditorCancel(e) {
+        const { rowIndex: index, field } = e.columnProps;
         let products = [...this.state.products2];
         products[index][field] = this.editingCellRows[index][field];
         delete this.editingCellRows[index][field];
@@ -329,8 +329,8 @@ export class DataTableEditDemo extends Component {
         });
     }
 
-    onEditorSubmit(props) {
-        const { rowIndex: index, field } = props;
+    onEditorSubmit(e) {
+        const { rowIndex: index, field } = e.columnProps;
         delete this.editingCellRows[index][field];
     }
 
@@ -495,13 +495,13 @@ const DataTableEditDemo = () => {
         productService.getProductsSmall().then(data => dataTableFuncMap[\`\${productStateKey}\`](data));
     }
 
-    const positiveIntegerValidator = (props) => {
-        const { rowData, field } = props;
+    const positiveIntegerValidator = (e) => {
+        const { rowData, field } = e.columnProps;
         return isPositiveInteger(rowData[field]);
     }
 
-    const emptyValueValidator = (props) => {
-        const { rowData, field } = props;
+    const emptyValueValidator = (e) => {
+        const { rowData, field } = e.columnProps;
         return rowData[field].trim().length > 0;
     }
 
@@ -516,16 +516,16 @@ const DataTableEditDemo = () => {
         return n !== Infinity && String(n) === str && n >= 0;
     }
 
-    const onEditorInit = (props) => {
-        const { rowIndex: index, field, rowData } = props;
+    const onEditorInit = (e) => {
+        const { rowIndex: index, field, rowData } = e.columnProps;
         if (!editingCellRows[index]) {
             editingCellRows[index] = {...rowData};
         }
         editingCellRows[index][field] = products2[index][field];
     }
 
-    const onEditorCancel = (props) => {
-        const { rowIndex: index, field } = props;
+    const onEditorCancel = (e) => {
+        const { rowIndex: index, field } = e.columnProps;
         let products = [...products2];
         products[index][field] = editingCellRows[index][field];
         delete editingCellRows[index][field];
@@ -533,8 +533,8 @@ const DataTableEditDemo = () => {
         setProducts2(products);
     }
 
-    const onEditorSubmit = (props) => {
-        const { rowIndex: index, field } = props;
+    const onEditorSubmit = (e) => {
+        const { rowIndex: index, field } = e.columnProps;
         delete editingCellRows[index][field];
     }
 
@@ -697,13 +697,13 @@ const DataTableEditDemo = () => {
         productService.getProductsSmall().then(data => dataTableFuncMap[\`\${productStateKey}\`](data));
     }
 
-    const positiveIntegerValidator = (props) => {
-        const { rowData, field } = props;
+    const positiveIntegerValidator = (e) => {
+        const { rowData, field } = e.columnProps;
         return isPositiveInteger(rowData[field]);
     }
 
-    const emptyValueValidator = (props) => {
-        const { rowData, field } = props;
+    const emptyValueValidator = (e) => {
+        const { rowData, field } = e.columnProps;
         return rowData[field].trim().length > 0;
     }
 
@@ -718,16 +718,16 @@ const DataTableEditDemo = () => {
         return n !== Infinity && String(n) === str && n >= 0;
     }
 
-    const onEditorInit = (props) => {
-        const { rowIndex: index, field, rowData } = props;
+    const onEditorInit = (e) => {
+        const { rowIndex: index, field, rowData } = e.columnProps;
         if (!editingCellRows[index]) {
             editingCellRows[index] = {...rowData};
         }
         editingCellRows[index][field] = products2[index][field];
     }
 
-    const onEditorCancel = (props) => {
-        const { rowIndex: index, field } = props;
+    const onEditorCancel = (e) => {
+        const { rowIndex: index, field } = e.columnProps;
         let products = [...products2];
         products[index][field] = editingCellRows[index][field];
         delete editingCellRows[index][field];
@@ -735,8 +735,8 @@ const DataTableEditDemo = () => {
         setProducts2(products);
     }
 
-    const onEditorSubmit = (props) => {
-        const { rowIndex: index, field } = props;
+    const onEditorSubmit = (e) => {
+        const { rowIndex: index, field } = e.columnProps;
         delete editingCellRows[index][field];
     }
 

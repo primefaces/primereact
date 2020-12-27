@@ -8,7 +8,7 @@ interface SelectButtonProps {
     optionLabel?: string;
     optionValue?: string;
     optionDisabled?: string;
-    tabIndex?: string;
+    tabIndex?: number;
     multiple?: boolean;
     disabled?: boolean;
     style?: object;

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import {Button} from '../button/Button';
 
 export class InplaceDisplay extends Component {
@@ -27,7 +27,7 @@ export class Inplace extends Component {
         active: false,
         closable: false,
         disabled: false,
-        tabIndex: '0',
+        tabIndex: 0,
         onOpen: null,
         onClose: null,
         onToggle: null
@@ -39,7 +39,7 @@ export class Inplace extends Component {
         active: PropTypes.bool,
         closable: PropTypes.bool,
         disabled: PropTypes.bool,
-        tabIndex: PropTypes.string,
+        tabIndex: PropTypes.number,
         onOpen: PropTypes.func,
         onClose: PropTypes.func,
         onToggle: PropTypes.func,

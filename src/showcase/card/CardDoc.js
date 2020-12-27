@@ -205,13 +205,13 @@ const footer = <span>
                                     </tr>
                                     <tr>
                                         <td>title</td>
-                                        <td>string</td>
+                                        <td>any</td>
                                         <td>null</td>
                                         <td>Title of the card.</td>
                                     </tr>
                                     <tr>
                                         <td>subTitle</td>
-                                        <td>string</td>
+                                        <td>any</td>
                                         <td>null</td>
                                         <td>Secondary title of the card.</td>
                                     </tr>

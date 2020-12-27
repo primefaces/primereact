@@ -16,7 +16,7 @@ export class Slider extends Component {
         style: null,
         className: null,
         disabled: false,
-        tabIndex: '0',
+        tabIndex: 0,
         ariaLabelledBy: null,
         onChange: null,
         onSlideEnd: null
@@ -33,7 +33,7 @@ export class Slider extends Component {
         style: PropTypes.object,
         className: PropTypes.string,
         disabled: PropTypes.bool,
-        tabIndex: PropTypes.string,
+        tabIndex: PropTypes.number,
         ariaLabelledBy: PropTypes.string,
         onChange: PropTypes.func,
         onSlideEnd: PropTypes.func

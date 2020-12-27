@@ -42,7 +42,7 @@ export class DataTableTemplatingDemo extends Component {
     }
 
     ratingBodyTemplate(rowData) {
-        return <Rating value={rowData.rating} readonly cancel={false} />;
+        return <Rating value={rowData.rating} readOnly cancel={false} />;
     }
 
     statusBodyTemplate(rowData) {
@@ -136,7 +136,7 @@ export class DataTableTemplatingDemo extends Component {
     }
 
     ratingBodyTemplate(rowData) {
-        return <Rating value={rowData.rating} readonly cancel={false} />;
+        return <Rating value={rowData.rating} readOnly cancel={false} />;
     }
 
     statusBodyTemplate(rowData) {
@@ -202,7 +202,7 @@ const DataTableTemplatingDemo = () => {
     }
 
     const ratingBodyTemplate = (rowData) => {
-        return <Rating value={rowData.rating} readonly cancel={false} />;
+        return <Rating value={rowData.rating} readOnly cancel={false} />;
     }
 
     const statusBodyTemplate = (rowData) => {
@@ -266,7 +266,7 @@ const DataTableTemplatingDemo = () => {
     }
 
     const ratingBodyTemplate = (rowData) => {
-        return <Rating value={rowData.rating} readonly cancel={false} />;
+        return <Rating value={rowData.rating} readOnly cancel={false} />;
     }
 
     const statusBodyTemplate = (rowData) => {

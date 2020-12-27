@@ -109,7 +109,7 @@ const BreadCrumbDemo = () => {
                         <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
-import { Breadcrumb } from 'primereact/breadcrumb';
+import { BreadCrumb } from 'primereact/breadcrumb';
 `}
 </CodeHighlight>
 
@@ -138,7 +138,7 @@ const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact' 
 
 <CodeHighlight>
 {`
-<BreadCrumb model={items} home="home"/>
+<BreadCrumb model={items} home={home}/>
 `}
 </CodeHighlight>
 

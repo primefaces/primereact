@@ -153,6 +153,12 @@ pre[class*="language-"] {
     }
 }
 
+.liveEditorSplitButtonHelperText {
+    font-size: .875rem;
+    padding-bottom: .2rem;
+    color: var(--text-color-secondary);
+}
+
 .liveEditorPanel {
     .p-menuitem-link {
         height: 38px;

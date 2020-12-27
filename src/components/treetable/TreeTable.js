@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import ObjectUtils from '../utils/ObjectUtils';
 import FilterUtils from '../utils/FilterUtils';
 import DomHandler from '../utils/DomHandler';
@@ -51,7 +51,7 @@ export class TreeTable extends Component {
         rowClassName: null,
         loading: false,
         loadingIcon: 'pi pi-spinner',
-        tabIndex: '0',
+        tabIndex: 0,
         scrollable: false,
         scrollHeight: null,
         reorderableColumns: false,
@@ -122,7 +122,7 @@ export class TreeTable extends Component {
         rowClassName: PropTypes.func,
         loading: PropTypes.bool,
         loadingIcon: PropTypes.string,
-        tabIndex: PropTypes.string,
+        tabIndex: PropTypes.number,
         scrollable: PropTypes.bool,
         scrollHeight: PropTypes.string,
         reorderableColumns: PropTypes.bool,
@@ -223,6 +223,12 @@ export class TreeTable extends Component {
         if (this.props.sortMode === 'multiple') {
             let metaKey = event.originalEvent.metaKey || event.originalEvent.ctrlKey;
             multiSortMeta = this.getMultiSortMeta();
+
+            if (multiSortMeta && multiSortMeta instanceof Array) {
+                const sortMeta = multiSortMeta.find(sortMeta => sortMeta.field === sortField);
+                sortOrder = sortMeta ? this.getCalculatedSortOrder(sortMeta.order) : sortOrder;
+            }
+
             if (!multiSortMeta || !metaKey) {
                 multiSortMeta = [];
             }
@@ -245,6 +251,10 @@ export class TreeTable extends Component {
                 multiSortMeta: multiSortMeta
             });
         }
+    }
+
+    getCalculatedSortOrder(currentOrder) {
+        return currentOrder * -1;
     }
 
     addSortMeta(meta, multiSortMeta) {

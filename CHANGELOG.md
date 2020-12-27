@@ -1,4 +1,43 @@
 # Changelog
+## [5.0.2](https://github.com/primefaces/primereact/tree/5.0.2) (2020-11-30)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/5.0.1...5.0.2)
+
+**Breaking changes:**
+- Change params of onEditorInit, onEditorSubmit, onEditorCancel and editorValidator callbacks on Column [\#1692](https://github.com/primefaces/primereact/issues/1692)
+
+**Implemented New Features and Enhancements:**
+
+- Remove PrimeFlex dependency from MegaMenu [\#1690](https://github.com/primefaces/primereact/issues/1690)
+- Chips display for MultiSelect [\#1689](https://github.com/primefaces/primereact/issues/1689)
+- Add the 'enter' key support to InputNumber [\#1688](https://github.com/primefaces/primereact/issues/1688)
+- New Component: Timeline [\#1687](https://github.com/primefaces/primereact/issues/1687)
+- Improve Password implementation [\#1684](https://github.com/primefaces/primereact/issues/1684)
+- Improve Tooltip implementation [\#1683](https://github.com/primefaces/primereact/issues/1683)
+- Add onFocus and onBlur events on InputMask [\#1677](https://github.com/primefaces/primereact/issues/1677)
+- OverlayPanel - arrow always on the left side of the panel.  [\#1671](https://github.com/primefaces/primereact/issues/1671)
+- Change the types of header, footer, title, subTitle properties on Card [\#1658](https://github.com/primefaces/primereact/issues/1658)
+- Add separator support to SplitButton [\#1656](https://github.com/primefaces/primereact/issues/1656)
+- Do not hide overlays on body scroll [\#1655](https://github.com/primefaces/primereact/issues/1655)
+- Remove 'classnames' dependency from PrimeReact components [\#1653](https://github.com/primefaces/primereact/issues/1653)
+- Add showClear property to MultiSelect [\#1627](https://github.com/primefaces/primereact/issues/1627)
+- Add mediumRegex and strongRegex property to Password [\#1623](https://github.com/primefaces/primereact/issues/1623)
+- Add browser event param to editor callbacks on Datatable [\#1577](https://github.com/primefaces/primereact/issues/1577)
+
+**Fixed bugs:**
+
+- DataView throws an exception when the last page is reached using Paginator [\#1691](https://github.com/primefaces/primereact/issues/1691)
+- DataTable edit not work \(Input disappears immediately after clicking cell\) in react-dom@17.0.1 [\#1685](https://github.com/primefaces/primereact/issues/1685)
+- Chips is not working when the initial value sets 'null' [\#1678](https://github.com/primefaces/primereact/issues/1678)
+- Global tooltip documentation missing [\#1676](https://github.com/primefaces/primereact/issues/1676)
+- Calendar value change does not update UI [\#1672](https://github.com/primefaces/primereact/issues/1672)
+- Tooltip with `showDelay` appears despite cursor has already left the Input [\#1667](https://github.com/primefaces/primereact/issues/1667)
+- When a partial selection is made among children of a node, the minus icon doesn't appear in the checkbox of that node. [\#1657](https://github.com/primefaces/primereact/issues/1657)
+- Float label is not working on Chips [\#1654](https://github.com/primefaces/primereact/issues/1654)
+- DataTable with lazy mode and multiple selection doesn't work as expected [\#1636](https://github.com/primefaces/primereact/issues/1636)
+- pRipple working when disabled\(etc menuitem\) [\#1634](https://github.com/primefaces/primereact/issues/1634)
+- DataTable Context Menu doesn't reposition [\#1574](https://github.com/primefaces/primereact/issues/1574)
+- Multiple sort in TreeTable is not working when passing multisortmeta props [\#1442](https://github.com/primefaces/primereact/issues/1442)
 
 ## [5.0.1](https://github.com/primefaces/primereact/tree/5.0.1) (2020-10-12)
 

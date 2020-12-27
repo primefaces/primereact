@@ -480,7 +480,7 @@ import { Calendar } from 'primereact/calendar';
                         <h5>View Date</h5>
                         <p><i>viewDate</i> defines the date whose month and year are used to display the calendar. By default calendar uses value to render the view and falls back to today's date when value is not defined. In case you'd like
             to display a different month/year use <i>viewDate</i>. The usage of this property can either be controlled or uncontrolled. In controlled mode, <i>onViewDateChange</i> is required to manage the viewDate whereas in
-            uncontrolled mode, viewDate is used only once in initial rendering and ignored in updates. If you'd like to change the displayed month/year programmatically, use the viewChange in controlled mode.</p>
+            uncontrolled mode, viewDate is used only once in initial rendering and ignored in updates. If you'd like to change the displayed month/year programmatically, use the onViewDateChange in controlled mode.</p>
 <CodeHighlight>
 {`
 <Calendar value={this.state.dates} onChange={(e) => this.setState({date: e.value})} viewDate={this.state.viewDate} onViewDateChange={(e) => this.setState({viewDate: e.value})}></Calendar>
@@ -758,7 +758,7 @@ dateTemplate(date) {
                                     </tr>
                                     <tr>
                                         <td>tabIndex</td>
-                                        <td>string</td>
+                                        <td>number</td>
                                         <td>null</td>
                                         <td>Index of the element in tabbing order.</td>
                                     </tr>
@@ -1061,7 +1061,7 @@ dateTemplate(date) {
                                         <td>Callback to invoke when clear button is clicked.</td>
                                     </tr>
                                     <tr>
-                                        <td>onViewChange</td>
+                                        <td>onViewDateChange</td>
                                         <td>originalEvent: Browser event <br />
                                 value: New date</td>
                                         <td>Callback to invoke when the displayed month/year is changed.</td>

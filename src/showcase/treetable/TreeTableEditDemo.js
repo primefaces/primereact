@@ -64,7 +64,8 @@ export class TreeTableEditDemo extends Component {
         return this.inputTextEditor(props, 'type');
     }
 
-    requiredValidator(props) {
+    requiredValidator(e) {
+        let props = e.columnProps;
         let value = props.node.data[props.field];
 
         return value && value.length > 0;
@@ -168,7 +169,8 @@ export class TreeTableEditDemo extends Component {
         return this.inputTextEditor(props, 'type');
     }
 
-    requiredValidator(props) {
+    requiredValidator(e) {
+        let props = e.columnProps;
         let value = props.node.data[props.field];
 
         return value && value.length > 0;
@@ -244,7 +246,8 @@ const TreeTableEditDemo = () => {
         return inputTextEditor(props, 'type');
     }
 
-    const requiredValidator = (props) => {
+    const requiredValidator = (e) => {
+        let props = e.columnProps;
         let value = props.node.data[props.field];
 
         return value && value.length > 0;
@@ -318,7 +321,8 @@ const TreeTableEditDemo = () => {
         return inputTextEditor(props, 'type');
     }
 
-    const requiredValidator = (props) => {
+    const requiredValidator = (e) => {
+        let props = e.columnProps;
         let value = props.node.data[props.field];
 
         return value && value.length > 0;

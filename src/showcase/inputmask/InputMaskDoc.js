@@ -335,7 +335,7 @@ import { InputMask } from 'primereact/inputmask';
                                         <td>Maximum number of character allows in the input field.</td>
                                     </tr>
                                     <tr>
-                                        <td>tabindex</td>
+                                        <td>tabIndex</td>
                                         <td>number</td>
                                         <td>null</td>
                                         <td>Specifies tab order of the element.</td>
@@ -347,7 +347,7 @@ import { InputMask } from 'primereact/inputmask';
                                         <td>When present, it specifies that the element value cannot be altered.</td>
                                     </tr>
                                     <tr>
-                                        <td>readonly</td>
+                                        <td>readOnly</td>
                                         <td>boolean</td>
                                         <td>false</td>
                                         <td>When present, it specifies that an input field is read-only.</td>
@@ -391,6 +391,16 @@ import { InputMask } from 'primereact/inputmask';
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <tr>
+                                        <td>onFocus</td>
+                                        <td>event: Browser event</td>
+                                        <td>Callback to invoke when input receives focus.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onBlur</td>
+                                        <td>event: Browser event</td>
+                                        <td>Callback to invoke when input loses focus.</td>
+                                    </tr>
                                     <tr>
                                         <td>onComplete</td>
                                         <td>event: Browser event<br/>

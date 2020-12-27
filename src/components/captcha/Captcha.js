@@ -22,7 +22,7 @@ export class Captcha extends Component {
         theme: PropTypes.string,
         type: PropTypes.string,
         size: PropTypes.string,
-        tabindex: PropTypes.number,
+        tabIndex: PropTypes.number,
         language: PropTypes.string,
         onResponse: PropTypes.func,
         onExpire: PropTypes.func

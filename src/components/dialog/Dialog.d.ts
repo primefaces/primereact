@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-interface DialogProps {
+export interface DialogProps {
     id?: string;
     header?: any;
     footer?: any;

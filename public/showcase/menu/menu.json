@@ -21,6 +21,13 @@
                     ]
                 },
                 {
+                    "name": "Discord Chat",
+                    "href": "https://discord.gg/gzKFYnpmCY",
+                    "meta": [
+                        "discord"
+                    ]
+                },
+                {
                     "name": "Source Code",
                     "href": "https://github.com/primefaces/primereact",
                     "meta": [
@@ -40,6 +47,13 @@
                     "meta": [
                         "store",
                         "primestore"
+                    ]
+                },
+                {
+                    "name": "Accessibility",
+                    "to": "/accessibility",
+                    "meta": [
+                        "accessibility"
                     ]
                 }
             ]
@@ -183,6 +197,14 @@
                     ]
                 },
                 {
+                    "name": "CascadeSelect",
+                    "to": "/cascadeselect",
+                    "meta": [
+                        "cascadeselect"
+                    ],
+                    "badge": "new"
+                },
+                {
                     "name": "Checkbox",
                     "to": "/checkbox",
                     "meta": [
@@ -237,8 +259,7 @@
                     "to": "/inputnumber",
                     "meta": [
                         "inputnumber"
-                    ],
-                    "badge": "new"
+                    ]
                 },
                 {
                     "name": "InputSwitch",
@@ -260,6 +281,14 @@
                     "meta": [
                         "floatlabel"
                     ]
+                },
+                {
+                    "name": "Knob",
+                    "to": "/knob",
+                    "meta": [
+                        "knob"
+                    ],
+                    "badge": "new"
                 },
                 {
                     "name": "InputTextarea",
@@ -840,6 +869,13 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "name": "Timeline",
+                    "to": "/timeline",
+                    "meta": [
+                        "timeline"
+                    ]
                 }
             ]
         },
@@ -871,6 +907,14 @@
                     ]
                 },
                 {
+                    "name": "Divider",
+                    "to": "/divider",
+                    "meta": [
+                        "divider"
+                    ],
+                    "badge": "new"
+                },
+                {
                     "name": "Fieldset",
                     "to": "/fieldset",
                     "meta": [
@@ -883,6 +927,14 @@
                     "meta": [
                         "panel"
                     ]
+                },
+                {
+                    "name": "Splitter",
+                    "to": "/splitter",
+                    "meta": [
+                        "splitter"
+                    ],
+                    "badge": "new"
                 },
                 {
                     "name": "ScrollPanel",
@@ -914,11 +966,28 @@
             ],
             "children": [
                 {
+                    "name": "ConfirmDialog",
+                    "to": "/confirmdialog",
+                    "meta": [
+                        "confirmdialog"
+                    ],
+                    "badge": "new"
+                },
+                {
+                    "name": "ConfirmPopup",
+                    "to": "/confirmpopup",
+                    "meta": [
+                        "confirmpopup"
+                    ],
+                    "badge": "new"
+                },
+                {
                     "name": "Dialog",
                     "to": "/dialog",
                     "meta": [
                         "dialog"
-                    ]
+                    ],
+                    "badge": "updated"
                 },
                 {
                     "name": "OverlayPanel",
@@ -1128,8 +1197,7 @@
                     "meta": [
                         "growl",
                         "toast"
-                    ],
-                    "badge": "updated"
+                    ]
                 }
             ]
         },
@@ -1151,7 +1219,6 @@
                     "meta": [
                         "galleria"
                     ],
-                    "badge": "new",
                     "children": [
                         {
                             "name": "Documentation",
@@ -1234,18 +1301,28 @@
             ],
             "children": [
                 {
-                    "name": "Accessibility",
-                    "to": "/accessibility",
+                    "name": "Avatar",
+                    "to": "/avatar",
                     "meta": [
-                        "accessibility"
-                    ]
+                        "avatar"
+                    ],
+                    "badge": "new"
                 },
                 {
                     "name": "Badge",
                     "to": "/badge",
                     "meta": [
                         "badge"
-                    ]
+                    ],
+                    "badge": "new"
+                },
+                {
+                    "name": "Chip",
+                    "to": "/chip",
+                    "meta": [
+                        "chip"
+                    ],
+                    "badge": "new"
                 },
                 {
                     "name": "Inplace",
@@ -1253,6 +1330,22 @@
                     "meta": [
                         "inplace"
                     ]
+                },
+                {
+                    "name": "ScrollTop",
+                    "to": "/scrolltop",
+                    "meta": [
+                        "scrolltop"
+                    ],
+                    "badge": "new"
+                },
+                {
+                    "name": "Skeleton",
+                    "to": "/skeleton",
+                    "meta": [
+                        "skeleton"
+                    ],
+                    "badge": "new"
                 },
                 {
                     "name": "ProgressBar",
@@ -1273,8 +1366,7 @@
                     "to": "/ripple",
                     "meta": [
                         "ripple"
-                    ],
-                    "badge": "new"
+                    ]
                 },
                 {
                     "name": "Captcha",
@@ -1283,6 +1375,14 @@
                         "captcha",
                         "recaptcha"
                     ]
+                },
+                {
+                    "name": "Tag",
+                    "to": "/tag",
+                    "meta": [
+                        "tag"
+                    ],
+                    "badge": "new"
                 }
             ]
         }

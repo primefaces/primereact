@@ -442,16 +442,6 @@ import { MegaMenu } from 'primereact/megamenu';
 
                         <h5>MenuItem API</h5>
                         <p>MegaMenu uses the common menu item api to define its items, visit <Link to="/menumodel">  MenuModel </Link> for details.</p>
-
-                        <h5>Getting Started</h5>
-                        <p>Layout of the MegaMenu is managed by the <a href="https://github.com/primefaces/primeflex">PrimeFlex</a> that can be downloaded from npm.</p>
-
-<CodeHighlight lang="js">
-{`
-npm install primeflex --save
-`}
-</CodeHighlight>
-
                         <p>MegaMenu requires a collection of menuitems as its model.</p>
 
 <CodeHighlight lang="js">

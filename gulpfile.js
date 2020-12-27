@@ -6,7 +6,7 @@ var gulp = require('gulp'),
     rename = require('gulp-rename'),
     del = require('del'),
     flatten = require('gulp-flatten');
-    
+
 gulp.task('build-css', function() {
     return gulp.src([
         'src/components/common/Common.css',
@@ -21,7 +21,8 @@ gulp.task('build-css', function() {
 
 gulp.task('build-themes', function() {
     return gulp.src([
-        'public/themes/**/*','!public/themes/soho-*/**/*'
+        'public/themes/**/*','!public/themes/soho-*/**/*',
+        '!public/themes/mira/**/*', '!public/themes/nano/**/*'
     ])
     //.pipe(uglifycss({"uglyComments": true}))
     .pipe(gulp.dest('resources/themes'));
@@ -41,4 +42,3 @@ gulp.task('build-exports', function() {
 //Building project with run sequence
 gulp.task('build-resources', gulp.series('build-css','images', 'build-themes'));
 
-        

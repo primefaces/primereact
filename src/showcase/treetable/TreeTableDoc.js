@@ -1869,7 +1869,8 @@ export class TreeTableEditDemo extends Component {
         return this.inputTextEditor(props, 'type', '100%');
     }
 
-    requiredValidator(props) {
+    requiredValidator(e) {
+        let props = e.columnProps;
         let value = props.node.data[props.field];
 
         return value && value.length > 0;
@@ -2374,7 +2375,7 @@ export class TreeTableResponsiveDemo extends Component {
                                     </tr>
                                     <tr>
                                         <td>tabIndex</td>
-                                        <td>string</td>
+                                        <td>number</td>
                                         <td>null</td>
                                         <td>Index of the element in tabbing order.</td>
                                     </tr>

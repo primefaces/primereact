@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 
 export class DataScroller extends Component {
-    
+
     static defaultProps = {
         id: null,
         value: null,
@@ -56,13 +56,13 @@ export class DataScroller extends Component {
             this.load();
         }
     }
-        
+
     load() {
         if(this.props.lazy) {
             if(this.props.onLazyLoad) {
                 this.props.onLazyLoad(this.createLazyLoadMetadata());
             }
-            
+
             this.first = this.first + this.props.rows;
         }
         else {
@@ -74,13 +74,13 @@ export class DataScroller extends Component {
 
                     this.dataToRender.push(this.value[i]);
                 }
-                
+
                 this.first = this.first + this.props.rows;
                 this.setState({ dataToRender: this.dataToRender });
             }
         }
     }
-     
+
     reset() {
         this.first = 0;
         this.dataToRender = [];
@@ -91,14 +91,14 @@ export class DataScroller extends Component {
     isEmpty() {
         return !this.dataToRender||(this.dataToRender.length === 0);
     }
-    
+
     createLazyLoadMetadata() {
         return {
             first: this.first,
             rows: this.props.rows
         };
     }
-    
+
     bindScrollListener() {
         if(this.props.inline) {
             this.scrollFunction = () => {
@@ -110,7 +110,7 @@ export class DataScroller extends Component {
                     this.load();
                 }
             }
-            
+
             this.contentElement.addEventListener('scroll', this.scrollFunction);
         }
         else {
@@ -120,14 +120,14 @@ export class DataScroller extends Component {
                     scrollTop = (window.pageYOffset||document.documentElement.scrollTop),
                     winHeight = docElement.clientHeight,
                     docHeight = Math.max(docBody.scrollHeight, docBody.offsetHeight, winHeight, docElement.scrollHeight, docElement.offsetHeight);
-                            
+
                 if(scrollTop >= ((docHeight * this.props.buffer) - winHeight)) {
                     this.load();
                 }
             }
 
             window.addEventListener('scroll', this.scrollFunction);
-        } 
+        }
     }
 
     unbindScrollListener() {
@@ -141,7 +141,7 @@ export class DataScroller extends Component {
             }
             else {
                 window.removeEventListener('scroll', this.scrollFunction);
-            }   
+            }
         }
     }
 
@@ -165,9 +165,9 @@ export class DataScroller extends Component {
         var newValue = this.props.value;
         if (newValue && this.value !== newValue) {
             this.value = newValue;
-            
+
             this.handleDataChange();
-        } 
+        }
 
         if(this.props.loader && !this.isLoaded) {
             this.unbindScrollListener();

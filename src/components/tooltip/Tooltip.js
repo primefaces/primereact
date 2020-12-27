@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 
 export function tip(props) {
     let appendTo = props.appendTo || document.body;
 
-    let tooltipWrapper = document.createElement('div');
+    let tooltipWrapper = document.createDocumentFragment();
     DomHandler.appendChild(tooltipWrapper, appendTo);
 
-    props.appendTo = tooltipWrapper;
     props = {...props, ...props.options};
 
     let tooltipEl = React.createElement(Tooltip, props);
@@ -20,7 +19,6 @@ export function tip(props) {
     return {
         destroy: () => {
             ReactDOM.unmountComponentAtNode(tooltipWrapper);
-            DomHandler.removeChild(tooltipWrapper, appendTo);
         },
         updateContent: (content) => {
             ReactDOM.render(React.cloneElement(tooltipEl, {content}), tooltipWrapper);
@@ -163,6 +161,8 @@ export class Tooltip extends Component {
     }
 
     hide(e) {
+        this.clearTimeouts();
+
         if (this.state.visible) {
             this.sendCallback(this.props.onBeforeHide, { originalEvent: e, target: this.currentTarget });
             this.applyDelay('hideDelay', () => {

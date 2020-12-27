@@ -428,6 +428,12 @@ onCityChange(e) {
                                         <td>When present, it specifies that the element cannot be typed.</td>
                                     </tr>
                                     <tr>
+                                        <td>tabIndex</td>
+                                        <td>number</td>
+                                        <td>null</td>
+                                        <td>Index of the element in tabbing order.</td>
+                                    </tr>
+                                    <tr>
                                         <td>tooltip</td>
                                         <td>any</td>
                                         <td>null</td>

@@ -22,7 +22,8 @@ export class MultiSelectDemo extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedCities: null,
+            selectedCities1: null,
+            selectedCities2: null,
             selectedCountries: null
         };
 
@@ -78,7 +79,10 @@ export class MultiSelectDemo extends Component {
             <div className="multiselect-demo">
                 <div className="card">
                     <h5>Basic</h5>
-                    <MultiSelect value={this.state.selectedCities} options={this.cities} onChange={(e) => this.setState({ selectedCities: e.value })} optionLabel="name" placeholder="Select a City" />
+                    <MultiSelect value={this.state.selectedCities1} options={this.cities} onChange={(e) => this.setState({ selectedCities1: e.value })} optionLabel="name" placeholder="Select a City" />
+
+                    <h5>Chips</h5>
+                    <MultiSelect value={this.state.selectedCities2} options={this.cities} onChange={(e) => this.setState({ selectedCities2: e.value })} optionLabel="name" placeholder="Select a City" display="chip" />
 
                     <h5>Advanced with Templating and Filtering</h5>
                     <MultiSelect value={this.state.selectedCountries} options={this.countries}  onChange={(e) => this.setState({ selectedCountries: e.value })} optionLabel="name" placeholder="Select Countries" filter className="multiselect-custom"
@@ -98,7 +102,8 @@ import { MultiSelect } from 'primereact/multiselect';
 import './MultiSelectDemo.css';
 
 const MultiSelectDemo = () => {
-    const [selectedCities, setSelectedCities] = useState(null);
+    const [selectedCities1, setSelectedCities1] = useState(null);
+    const [selectedCities2, setSelectedCities2] = useState(null);
     const [selectedCountries, setSelectedCountries] = useState(null);
     const cities = [
         {name: 'New York', code: 'NY'},
@@ -146,7 +151,10 @@ const MultiSelectDemo = () => {
         <div className="multiselect-demo">
             <div className="card">
                 <h5>Basic</h5>
-                <MultiSelect value={selectedCities} options={cities} onChange={(e) => setSelectedCities(e.value)} optionLabel="name" placeholder="Select a City" />
+                <MultiSelect value={selectedCities1} options={cities} onChange={(e) => setSelectedCities1(e.value)} optionLabel="name" placeholder="Select a City" />
+
+                <h5>Chips</h5>
+                <MultiSelect value={selectedCities2} options={cities} onChange={(e) => setSelectedCities2(e.value)} optionLabel="name" placeholder="Select a City" display="chip" />
 
                 <h5>Advanced with Templating and Filtering</h5>
                 <MultiSelect value={selectedCountries} options={countries}  onChange={(e) => setSelectedCountries(e.value)} optionLabel="name" placeholder="Select Countries" filter className="multiselect-custom"
@@ -165,7 +173,8 @@ import { MultiSelect } from 'primereact/multiselect';
 import './MultiSelectDemo.css';
 
 const MultiSelectDemo = () => {
-    const [selectedCities, setSelectedCities] = useState(null);
+    const [selectedCities1, setSelectedCities1] = useState(null);
+    const [selectedCities2, setSelectedCities2] = useState(null);
     const [selectedCountries, setSelectedCountries] = useState(null);
     const cities = [
         {name: 'New York', code: 'NY'},
@@ -213,7 +222,10 @@ const MultiSelectDemo = () => {
         <div className="multiselect-demo">
             <div className="card">
                 <h5>Basic</h5>
-                <MultiSelect value={selectedCities} options={cities} onChange={(e) => setSelectedCities(e.value)} optionLabel="name" placeholder="Select a City" />
+                <MultiSelect value={selectedCities1} options={cities} onChange={(e) => setSelectedCities1(e.value)} optionLabel="name" placeholder="Select a City" />
+
+                <h5>Chips</h5>
+                <MultiSelect value={selectedCities2} options={cities} onChange={(e) => setSelectedCities2(e.value)} optionLabel="name" placeholder="Select a City" display="chip" />
 
                 <h5>Advanced with Templating and Filtering</h5>
                 <MultiSelect value={selectedCountries} options={countries}  onChange={(e) => setSelectedCountries(e.value)} optionLabel="name" placeholder="Select Countries" filter className="multiselect-custom"
@@ -316,6 +328,14 @@ const cities = [
 `}
 </CodeHighlight>
             <p>When <i>optionValue</i> is not defined, value of an option refers to the option object itself.</p>
+
+            <h5>Chips Display</h5>
+            <p>A comma separated list is used by default to display selected items whereas alternative chip mode is provided using the <i>display</i> property to visualize the items as tokens.</p>
+<CodeHighlight>
+{`
+<MultiSelect display="chip" optionLabel="name" value={this.state.selectedCities} options={this.cities} onChange={(e) => this.setState({ selectedCities: e.value })} />
+`}
+</CodeHighlight>
 
             <h5>Custom Content</h5>
             <p>Label of an option is used as the display text of an item by default, for custom content support define an itemTemplate function that gets the option as a parameter and returns the content.</p>
@@ -497,6 +517,12 @@ selectedItemTemplate(option) {
                             <td>When present, it specifies that the component should be disabled.</td>
                         </tr>
                         <tr>
+                            <td>showClear</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>When enabled, a clear icon is displayed to clear the value.</td>
+                        </tr>
+                        <tr>
                             <td>filter</td>
                             <td>boolean</td>
                             <td>true</td>
@@ -540,7 +566,7 @@ selectedItemTemplate(option) {
                         </tr>
                         <tr>
                             <td>tabIndex</td>
-                            <td>string</td>
+                            <td>number</td>
                             <td>null</td>
                             <td>Index of the element in tabbing order.</td>
                         </tr>
@@ -609,6 +635,12 @@ selectedItemTemplate(option) {
                             <td>string</td>
                             <td>null</td>
                             <td>Establishes relationships between the component and label(s) where its value should be one or more element IDs.</td>
+                        </tr>
+                        <tr>
+                            <td>display</td>
+                            <td>string</td>
+                            <td>comma</td>
+                            <td>Used mode to display the selected item. Valid values are 'comma' and 'chip'.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -708,6 +740,18 @@ selectedItemTemplate(option) {
                         <tr>
                             <td>p-multiselect-item</td>
                             <td>An item in the list.</td>
+                        </tr>
+                        <tr>
+                            <td>p-multiselect-token</td>
+                            <td>A selected item element container on display='chip' mode.</td>
+                        </tr>
+                        <tr>
+                            <td>p-chips-token-icon</td>
+                            <td>Icon of a selected item element on display='chip' mode.</td>
+                        </tr>
+                        <tr>
+                            <td>p-chips-token-label</td>
+                            <td>Label of a selected item element on display='chip' mode.</td>
                         </tr>
                     </tbody>
                 </table>

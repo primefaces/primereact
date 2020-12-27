@@ -16,7 +16,7 @@ export class OrderList extends Component {
         className: null,
         listStyle: null,
         dragdrop: false,
-        tabIndex: '0',
+        tabIndex: 0,
         onChange: null,
         itemTemplate: null
     }
@@ -29,7 +29,7 @@ export class OrderList extends Component {
         className: PropTypes.string,
         listStyle: PropTypes.object,
         dragdrop: PropTypes.bool,
-        tabIndex: PropTypes.string,
+        tabIndex: PropTypes.number,
         onChange: PropTypes.func,
         itemTemplate: PropTypes.func
     }

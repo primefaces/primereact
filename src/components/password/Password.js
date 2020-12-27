@@ -7,7 +7,7 @@ import { tip } from '../tooltip/Tooltip';
 import ObjectUtils from '../utils/ObjectUtils';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import { CSSTransition } from 'react-transition-group';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 
 export class Password extends Component {
@@ -18,6 +18,8 @@ export class Password extends Component {
         weakLabel: 'Weak',
         mediumLabel: 'Medium',
         strongLabel: 'Strong',
+        mediumRegex: '^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})',
+        strongRegex: '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})',
         feedback: true,
         tooltip: null,
         tooltipOptions: null,
@@ -31,6 +33,8 @@ export class Password extends Component {
         weakLabel: PropTypes.string,
         mediumLabel: PropTypes.string,
         strongLabel:PropTypes.string,
+        mediumRegex: PropTypes.string,
+        strongRegex: PropTypes.string,
         feedback: PropTypes.bool,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
@@ -43,7 +47,7 @@ export class Password extends Component {
 
         this.state = {
             overlayVisible: false,
-            meterPosition: '',
+            meter: null,
             infoText: props.promptLabel
         };
 
@@ -55,6 +59,8 @@ export class Password extends Component {
         this.onOverlayExit = this.onOverlayExit.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
+        this.mediumCheckRegExp = new RegExp(this.props.mediumRegex);
+        this.strongCheckRegExp = new RegExp(this.props.strongRegex);
     }
 
     showOverlay() {
@@ -103,33 +109,43 @@ export class Password extends Component {
 
     onKeyup(e) {
         if(this.props.feedback) {
-            let value = e.target.value,
-            label = null,
-            meterPos = null;
+            let value = e.target.value;
+            let label = null;
+            let meter = null;
 
-            if(value.length === 0) {
-                label = this.props.promptLabel;
-                meterPos = '0px 0px';
-            }
-            else {
-                var score = this.testStrength(value);
-
-                if(score < 30) {
+            switch (this.testStrength(value)) {
+                case 1:
                     label = this.props.weakLabel;
-                    meterPos = '0px -10px';
-                }
-                else if(score >= 30 && score < 80) {
+                    meter = {
+                        strength: 'weak',
+                        width: '33.33%'
+                    };
+                    break;
+
+                case 2:
                     label = this.props.mediumLabel;
-                    meterPos = '0px -20px';
-                }
-                else if(score >= 80) {
+                    meter = {
+                        strength: 'medium',
+                        width: '66.66%'
+                    };
+                    break;
+
+                case 3:
                     label = this.props.strongLabel;
-                    meterPos = '0px -30px';
-                }
+                    meter = {
+                        strength: 'strong',
+                        width: '100%'
+                    };
+                    break;
+
+                default:
+                    label = this.props.promptLabel;
+                    meter = null;
+                    break;
             }
 
             this.setState({
-                meterPosition: meterPos,
+                meter,
                 infoText: label
             }, () => {
                 if (!this.state.overlayVisible) {
@@ -144,33 +160,16 @@ export class Password extends Component {
     }
 
     testStrength(str) {
-        let grade = 0;
-        let val;
+        let level = 0;
 
-        val = str.match('[0-9]');
-        grade += this.normalize(val ? val.length : 1/4, 1) * 25;
+        if (this.strongCheckRegExp.test(str))
+            level = 3;
+        else if (this.mediumCheckRegExp.test(str))
+            level = 2;
+        else if (str.length)
+            level = 1;
 
-        val = str.match('[a-zA-Z]');
-        grade += this.normalize(val ? val.length : 1/2, 3) * 10;
-
-        val = str.match('[!@#$%^&*?_~.,;=]');
-        grade += this.normalize(val ? val.length : 1/6, 1) * 35;
-
-        val = str.match('[A-Z]');
-        grade += this.normalize(val ? val.length : 1/6, 1) * 30;
-
-        grade *= str.length / 8;
-
-        return grade > 100 ? 100 : grade;
-    }
-
-    normalize(x, y) {
-        let diff = x - y;
-
-        if(diff <= 0)
-            return x / y;
-        else
-            return 1 + 0.5 * (x / (x + y/4));
+        return level;
     }
 
     bindScrollListener() {
@@ -222,6 +221,14 @@ export class Password extends Component {
             else
                 this.renderTooltip();
         }
+
+        if (prevProps.mediumRegex !== this.props.mediumRegex) {
+            this.mediumCheckRegExp = new RegExp(this.props.mediumRegex);
+        }
+
+        if (prevProps.strongRegex !== this.props.strongRegex) {
+            this.strongCheckRegExp = new RegExp(this.props.strongRegex);
+        }
     }
 
     componentWillUnmount() {
@@ -248,6 +255,7 @@ export class Password extends Component {
     render() {
         const panelClassName = classNames('p-password-panel p-component', this.props.panelClassName);
         let inputProps = ObjectUtils.findDiffKeys(this.props, Password.defaultProps);
+        let { strength, width } = this.state.meter || { strength: '', width: '0%' };
 
         return (
             <>
@@ -256,7 +264,9 @@ export class Password extends Component {
                 <CSSTransition classNames="p-connected-overlay" in={this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }}
                     unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit}>
                     <div ref={(el) => this.panel = el} className={panelClassName} style={this.props.panelStyle}>
-                        <div className="p-password-meter" style={{ backgroundPosition: this.state.meterPosition }}></div>
+                        <div className="p-password-meter">
+                            <div className={`p-password-strength ${strength}`} style={{ width: width }}></div>
+                        </div>
                         <div className="p-password-info">
                             {this.state.infoText}
                         </div>

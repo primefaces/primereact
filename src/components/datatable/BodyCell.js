@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import ObjectUtils from '../utils/ObjectUtils';
 import DomHandler from '../utils/DomHandler';
 import {RowRadioButton} from './RowRadioButton';
@@ -35,16 +35,16 @@ export class BodyCell extends Component {
     onKeyDown(event) {
         if (this.props.editMode !== 'row') {
             if (event.which === 13 || event.which === 9) { // tab || enter
-                this.switchCellToViewMode(true);
+                this.switchCellToViewMode(event, true);
             }
             if (event.which === 27) // escape
             {
-                this.switchCellToViewMode(false);
+                this.switchCellToViewMode(event, false);
             }
         }
     }
 
-    onClick() {
+    onClick(event) {
         if (this.props.editMode !== 'row') {
             this.editingCellClick = true;
 
@@ -53,7 +53,10 @@ export class BodyCell extends Component {
                     editing: true
                 }, () => {
                     if (this.props.onEditorInit) {
-                        this.props.onEditorInit(this.props);
+                        this.props.onEditorInit({
+                            originalEvent: event,
+                            columnProps: this.props
+                        });
                     }
                 });
 
@@ -64,9 +67,9 @@ export class BodyCell extends Component {
         }
     }
 
-    onBlur() {
+    onBlur(event) {
         if (this.props.editMode !== 'row' && this.state.editing && this.props.editorValidatorEvent === 'blur') {
-            this.switchCellToViewMode(true);
+            this.switchCellToViewMode(event, true);
         }
     }
 
@@ -76,9 +79,9 @@ export class BodyCell extends Component {
 
     bindDocumentEditListener() {
         if (!this.documentEditListener) {
-            this.documentEditListener = (event) => {
+            this.documentEditListener = (e) => {
                 if (!this.editingCellClick) {
-                    this.switchCellToViewMode(true);
+                    this.switchCellToViewMode(e, true);
                 }
 
                 this.editingCellClick = false;
@@ -86,7 +89,7 @@ export class BodyCell extends Component {
 
             this.editingCellClick = false;
 
-            document.addEventListener('click', this.documentEditListener);
+            document.addEventListener('click', this.documentEditListener, { capture: true });
         }
     }
 
@@ -101,19 +104,24 @@ export class BodyCell extends Component {
         this.unbindDocumentEditListener();
     }
 
-    switchCellToViewMode(submit) {
+    switchCellToViewMode(event, submit) {
+        const params = {
+            originalEvent: event,
+            columnProps: this.props
+        };
+
         if (!submit && this.props.onEditorCancel) {
-            this.props.onEditorCancel(this.props);
+            this.props.onEditorCancel(params);
         }
 
         let valid = true;
         if (this.props.editorValidator) {
-            valid = this.props.editorValidator(this.props);
+            valid = this.props.editorValidator(params);
         }
 
         if (valid) {
             if (submit && this.props.onEditorSubmit) {
-                this.props.onEditorSubmit(this.props);
+                this.props.onEditorSubmit(params);
             }
 
             this.closeCell();
@@ -122,7 +130,7 @@ export class BodyCell extends Component {
 
     unbindDocumentEditListener() {
         if (this.documentEditListener) {
-            document.removeEventListener('click', this.documentEditListener);
+            document.removeEventListener('click', this.documentEditListener, { capture: true });
             this.documentEditListener = null;
         }
     }

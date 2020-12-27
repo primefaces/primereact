@@ -14,7 +14,7 @@ import 'prismjs/themes/prism-coy.css';
 import './assets/style/app/App.scss';
 
 import AppRouter from './AppRouter';
-/*import AppNews from './AppNews';*/
+import AppNews from './AppNews';
 import AppTopbar from './AppTopbar';
 import AppFooter from './AppFooter';
 import AppConfig from './AppConfig';
@@ -28,13 +28,16 @@ export class App extends Component {
 
     constructor(props) {
         super(props);
+
+        this.news_key = 'primenews-react';
+
         this.state = {
             theme: 'saga-blue',
             inputStyle: 'outlined',
             ripple: true,
             darkTheme: false,
             sidebarActive: false,
-            newsActive: sessionStorage.getItem('primenews-hidden') ? false : true,
+            newsActive: this.isNewsStorageExpired(),
             configuratorActive: false,
             changelogActive: false,
             searchVal: null
@@ -89,9 +92,31 @@ export class App extends Component {
     }
 
     onHideNews(event) {
-        this.setState({ newsActive: false });
-        sessionStorage.setItem('primenews-hidden', "true");
+        this.setState({ newsActive: false }, () => {
+            const now = new Date();
+            const item = {
+                value: false,
+                expiry: now.getTime() + 604800000,
+            }
+            localStorage.setItem(this.news_key, JSON.stringify(item));
+        });
         event.stopPropagation();
+    }
+
+    isNewsStorageExpired() {
+        const newsString = localStorage.getItem(this.news_key);
+        if (!newsString) {
+            return true;
+        }
+        const newsItem = JSON.parse(newsString);
+        const now = new Date()
+
+        if (now.getTime() > newsItem.expiry) {
+            localStorage.removeItem(this.news_key);
+            return true;
+        }
+
+        return false;
     }
 
     onInputStyleChange(inputStyle) {
@@ -153,7 +178,7 @@ export class App extends Component {
 
     render() {
         const wrapperClassName = classNames('layout-wrapper', {
-            /*'layout-news-active': this.state.newsActive,*/
+            'layout-news-active': this.state.newsActive,
             'p-input-filled': this.state.inputStyle === 'filled',
             'p-ripple-disabled': this.state.ripple === false
         });
@@ -165,7 +190,7 @@ export class App extends Component {
             <div className={wrapperClassName}>
                 <Toast ref={(el) => this.showcaseToast = el} />
 
-                {/* <AppNews newsActive={this.state.newsActive} onHideNews={this.onHideNews}/> */}
+                <AppNews newsActive={this.state.newsActive} onHideNews={this.onHideNews}/>
 
                 <AppTopbar onMenuButtonClick={this.onMenuButtonClick} onThemeChange={this.onThemeChange} theme={this.state.theme} darkTheme={this.state.darkTheme} />
 

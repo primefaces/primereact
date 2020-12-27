@@ -37,7 +37,7 @@ interface CalendarProps {
     readOnlyInput?: boolean;
     keepInvalid?: boolean;
     disabled?: boolean;
-    tabIndex?: string;
+    tabIndex?: number;
     placeholder?: string;
     showIcon?: boolean;
     icon?: string;

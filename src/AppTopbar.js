@@ -62,7 +62,9 @@ export class AppTopbar extends Component {
             'rhea': 'rhea.png',
             'fluent-light': 'fluent-light.png',
             'soho-light': 'soho-light.png',
-            'soho-dark': 'soho-dark.png'
+            'soho-dark': 'soho-dark.png',
+            'mira': 'mira.jpg',
+            'nano': 'nano.jpg'
         };
 
         this.onMenuButtonClick = this.onMenuButtonClick.bind(this);
@@ -204,6 +206,8 @@ export class AppTopbar extends Component {
                                 <li role="none" className="topbar-submenu-header">PREMIUM</li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'soho-light')} role="menuitem"><img src="showcase/images/themes/soho-light.png" alt="Soho Light" /><span>Soho Light</span></button></li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'soho-dark', true)} role="menuitem"><img src="showcase/images/themes/soho-dark.png" alt="Soho Dark" /><span>Soho Dark</span></button></li>
+                                <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'mira')} role="menuitem"><img src="showcase/images/themes/mira.jpg" alt="Mira" /><span>Mira</span></button></li>
+                                <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'nano')} role="menuitem"><img src="showcase/images/themes/nano.jpg" alt="Nano" /><span>Nano</span></button></li>
 
                                 <li role="none" className="topbar-submenu-header">LEGACY</li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'nova')} role="menuitem"><img src="showcase/images/themes/nova.png" alt="Nova" /><span>Nova</span></button></li>
@@ -234,8 +238,13 @@ export class AppTopbar extends Component {
 
                                 <li role="none" className="topbar-submenu-header">PREMIUM ADMIN TEMPLATES</li>
                                 <li role="none">
+                                    <a href="https://www.primefaces.org/layouts/diamond-react" role="menuitem" rel="noopener noreferrer" target="_blank">
+                                        <img src="showcase/images/layouts/themeswitcher-diamond.png" alt="Diamond" /><span>Diamond</span><span className="theme-badge new p-tag p-tag-success">NEW</span>
+                                    </a>
+                                </li>
+                                <li role="none">
                                     <a href="https://www.primefaces.org/layouts/roma-react" role="menuitem" rel="noopener noreferrer" target="_blank">
-                                        <img src="showcase/images/layouts/themeswitcher-roma.jpg" alt="Roma" /><span>Roma</span><span className="theme-badge new">NEW</span>
+                                        <img src="showcase/images/layouts/themeswitcher-roma.jpg" alt="Roma" /><span>Roma</span>
                                     </a>
                                 </li>
                                 <li role="none">
@@ -281,6 +290,7 @@ export class AppTopbar extends Component {
                             <ul role="menu" aria-label="Resources">
                                 <li role="none"><Link to="/support" role="menuitem"><span>Support</span></Link></li>
                                 <li role="none"><a href="https://forum.primefaces.org/viewforum.php?f=57" role="menuitem" target="_blank" rel="noopener noreferrer"><span>Forum</span></a></li>
+                                <li role="none"><a href="https://discord.gg/gzKFYnpmCY" role="menuitem" target="_blank" rel="noopener noreferrer"><span>Discord Chat</span></a></li>
                                 <li role="none"><a href="https://github.com/primefaces/primereact" role="menuitem" target="_blank" rel="noopener noreferrer"><span>Source Code</span></a></li>
                                 <li role="none"><a href="https://www.primefaces.org/store" role="menuitem" target="_blank" rel="noopener noreferrer"><span>PrimeStore</span></a></li>
                                 <li role="none"><a href="https://www.primefaces.org/category/primereact/" role="menuitem" target="_blank" rel="noopener noreferrer"><span>Blog</span></a></li>
