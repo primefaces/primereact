@@ -1280,7 +1280,7 @@ export class DataTableTemplatingDemo extends Component {
     }
 
     ratingBodyTemplate(rowData) {
-        return <Rating value={rowData.rating} readonly cancel={false} />;
+        return <Rating value={rowData.rating} readOnly cancel={false} />;
     }
 
     statusBodyTemplate(rowData) {
@@ -2159,7 +2159,7 @@ export class DataTableRowExpansionDemo extends Component {
     }
 
     ratingBodyTemplate(rowData) {
-        return <Rating value={rowData.rating} readonly cancel={false} />;
+        return <Rating value={rowData.rating} readOnly cancel={false} />;
     }
 
     statusBodyTemplate(rowData) {
@@ -3032,7 +3032,7 @@ bodyTemplate(data, props) {
                         </tr>
                         <tr>
                             <td>tabIndex</td>
-                            <td>string</td>
+                            <td>number</td>
                             <td>null</td>
                             <td>Index of the element in tabbing order.</td>
                         </tr>

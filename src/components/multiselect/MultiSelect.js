@@ -38,7 +38,7 @@ export class MultiSelect extends Component {
         filterLocale: undefined,
         emptyFilterMessage: 'No results found',
         resetFilterOnHide: false,
-        tabIndex: '0',
+        tabIndex: 0,
         dataKey: null,
         inputId: null,
         required: false,
@@ -79,7 +79,7 @@ export class MultiSelect extends Component {
         filterLocale: PropTypes.string,
         emptyFilterMessage: PropTypes.any,
         resetFilterOnHide: PropTypes.bool,
-        tabIndex: PropTypes.string,
+        tabIndex: PropTypes.number,
         dataKey: PropTypes.string,
         inputId: PropTypes.string,
         required: PropTypes.bool,
@@ -646,7 +646,7 @@ export class MultiSelect extends Component {
 
         return (
             <div className="p-hidden-accessible p-multiselect-hidden-select">
-                <select ref={(el) => this.nativeSelect = el} required={this.props.required} name={this.props.name} tabIndex="-1" aria-hidden="true" multiple>
+                <select ref={(el) => this.nativeSelect = el} required={this.props.required} name={this.props.name} tabIndex={-1} aria-hidden="true" multiple>
                     {selectedOptions}
                 </select>
             </div>

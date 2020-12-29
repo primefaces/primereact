@@ -42,7 +42,7 @@ import { Accordion,AccordionTab } from 'primereact/accordion';
 
                     <h5>Dependencies</h5>
                     <p>Majority of PrimeReact components (95%) are native and there are some exceptions having 3rd party dependencies such as Google Maps for GMap.</p>
-                    <p>In addition, components require PrimeIcons library for icons, <a href="https://www.npmjs.com/package/classnames" className="layout-content-link">classNames</a> package to manage style classes and
+                    <p>In addition, components require PrimeIcons library for icons and
                          <a href="https://www.npmjs.com/package/react-transition-group" className="layout-content-link"> react-transition-group</a> for animations.</p>
 
 <CodeHighlight lang="js">

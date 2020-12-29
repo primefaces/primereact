@@ -20,7 +20,7 @@ export class PickListItem extends Component {
         className: PropTypes.string,
         template: PropTypes.func,
         selected: PropTypes.bool,
-        tabIndex: PropTypes.string,
+        tabIndex: PropTypes.number,
         onClick: PropTypes.func,
         onKeyDown: PropTypes.func
     }

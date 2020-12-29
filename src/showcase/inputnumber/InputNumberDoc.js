@@ -743,7 +743,7 @@ Vertical
                             <td>When present, it specifies that an input field must be filled out before submitting the form.</td>
                         </tr>
                         <tr>
-                            <td>tabindex</td>
+                            <td>tabIndex</td>
                             <td>number</td>
                             <td>null</td>
                             <td>Index of the element in tabbing order.</td>
@@ -767,13 +767,7 @@ Vertical
                             <td>Hint text for the input field.</td>
                         </tr>
                         <tr>
-                            <td>readonly</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>When present, it specifies that the input cannot be typed.</td>
-                        </tr>
-                        <tr>
-                            <td>readonly</td>
+                            <td>readOnly</td>
                             <td>boolean</td>
                             <td>false</td>
                             <td>When present, it specifies that the element should be read-only.</td>
@@ -868,6 +862,11 @@ Vertical
                             <td>onBlur</td>
                             <td>event: Browser event</td>
                             <td>Callback to invoke when input loses focus.</td>
+                        </tr>
+                        <tr>
+                            <td>onKeyDown</td>
+                            <td>event: Browser event.</td>
+                            <td>Callback to invoke when the key pressed.</td>
                         </tr>
                     </tbody>
                 </table>

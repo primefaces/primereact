@@ -219,7 +219,7 @@ const items = [
 </CodeHighlight>
 
                         <h5>interactive</h5>
-                        <p>Items are readonly by default, if you'd like to make them interactive then disable readonly, use command handlers of menuitem to respond to selection events and define activeIndex property along with the
+                        <p>Items are readOnly by default, if you'd like to make them interactive then disable readonly, use command handlers of menuitem to respond to selection events and define activeIndex property along with the
                             onSelect event to use it as a controlled component.</p>
 
 <CodeHighlight>

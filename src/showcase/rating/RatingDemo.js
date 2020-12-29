@@ -33,7 +33,7 @@ export class RatingDemo extends Component {
                         <Rating value={this.state.val2} cancel={false} onChange={(e) => this.setState({val2: e.value})} />
 
                         <h5>ReadOnly</h5>
-                        <Rating value={5} readonly stars={10} cancel={false} />
+                        <Rating value={5} readOnly stars={10} cancel={false} />
 
                         <h5>Disabled</h5>
                         <Rating value={8} disabled stars={10} />

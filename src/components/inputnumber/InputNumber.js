@@ -39,7 +39,7 @@ export class InputNumber extends Component {
         pattern: null,
         inputMode: null,
         placeholder: null,
-        readonly: false,
+        readOnly: false,
         size: null,
         style: null,
         className: null,
@@ -52,7 +52,8 @@ export class InputNumber extends Component {
         onValueChange: null,
         onChange: null,
         onBlur: null,
-        onFocus: null
+        onFocus: null,
+        onKeyDown: null
     }
 
     static propTypes = {
@@ -86,7 +87,7 @@ export class InputNumber extends Component {
         pattern: PropTypes.string,
         inputMode: PropTypes.string,
         placeholder: PropTypes.string,
-        readonly: PropTypes.bool,
+        readOnly: PropTypes.bool,
         size: PropTypes.number,
         style: PropTypes.object,
         className: PropTypes.string,
@@ -99,7 +100,8 @@ export class InputNumber extends Component {
         onValueChange: PropTypes.func,
         onChange: PropTypes.func,
         onBlur: PropTypes.func,
-        onFocus: PropTypes.func
+        onFocus: PropTypes.func,
+        onKeyDown: PropTypes.func
     }
 
     constructor(props) {
@@ -487,6 +489,10 @@ export class InputNumber extends Component {
 
             default:
             break;
+        }
+
+        if (this.props.onKeyDown) {
+            this.props.onKeyDown(event);
         }
     }
 
@@ -936,7 +942,7 @@ export class InputNumber extends Component {
             <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} id={this.props.inputId} style={this.props.inputStyle} role="spinbutton"
                        className={className} defaultValue={valueToRender} type={this.props.type} size={this.props.size} tabIndex={this.props.tabIndex} inputMode={this.getInputMode()}
                        maxLength={this.props.maxlength} disabled={this.props.disabled} required={this.props.required} pattern={this.props.pattern}
-                       placeholder={this.props.placeholder} readOnly={this.props.readonly} name={this.props.name}
+                       placeholder={this.props.placeholder} readOnly={this.props.readOnly} name={this.props.name}
                        onKeyDown={this.onInputKeyDown} onKeyPress={this.onInputKeyPress} onInput={this.onInput} onClick={this.onInputClick}
                        onBlur={this.onInputBlur} onFocus={this.onInputFocus} onPaste={this.onPaste} min={this.props.min} max={this.props.max}
                        aria-valuemin={this.props.min} aria-valuemax={this.props.max} aria-valuenow={this.props.value} aria-labelledby={this.props.ariaLabelledBy} />
@@ -951,7 +957,7 @@ export class InputNumber extends Component {
 
         return (
             <button type="button" className={className} onMouseLeave={this.onUpButtonMouseLeave} onMouseDown={this.onUpButtonMouseDown} onMouseUp={this.onUpButtonMouseUp}
-                onKeyDown={this.onUpButtonKeyDown} onKeyUp={this.onUpButtonKeyUp} disabled={this.props.disabled} tabIndex="-1">
+                onKeyDown={this.onUpButtonKeyDown} onKeyUp={this.onUpButtonKeyUp} disabled={this.props.disabled} tabIndex={-1}>
                 <span className={icon}></span>
                 <Ripple />
             </button>
@@ -966,7 +972,7 @@ export class InputNumber extends Component {
 
         return (
             <button type="button" className={className} onMouseLeave={this.onDownButtonMouseLeave} onMouseDown={this.onDownButtonMouseDown} onMouseUp={this.onDownButtonMouseUp}
-                onKeyDown={this.onDownButtonKeyDown} onKeyUp={this.onDownButtonKeyUp} disabled={this.props.disabled} tabIndex="-1">
+                onKeyDown={this.onDownButtonKeyDown} onKeyUp={this.onDownButtonKeyUp} disabled={this.props.disabled} tabIndex={-1}>
                 <span className={icon}></span>
                 <Ripple />
             </button>

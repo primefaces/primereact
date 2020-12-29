@@ -5,7 +5,7 @@ interface RatingProps {
     id?: string;
     value?: number;
     disabled?: boolean;
-    readonly?: boolean;
+    readOnly?: boolean;
     stars?: number;
     cancel?: boolean;
     style?: object;

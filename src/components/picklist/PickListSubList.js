@@ -31,7 +31,7 @@ export class PickListSubList extends Component {
         style: PropTypes.object,
         showControls: PropTypes.bool,
         metaKeySelection: PropTypes.bool,
-        tabIndex: PropTypes.string,
+        tabIndex: PropTypes.number,
         itemTemplate: PropTypes.func,
         onItemClick: PropTypes.func,
         onSelectionChange: PropTypes.func

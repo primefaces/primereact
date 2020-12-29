@@ -118,7 +118,7 @@ export class Menubar extends Component {
     renderMenuButton() {
         /* eslint-disable */
         const button = (
-            <a ref={(el) => this.menubutton = el} href={'#'} role="button" tabIndex="0" className="p-menubar-button" onClick={this.toggle}>
+            <a ref={(el) => this.menubutton = el} href={'#'} role="button" tabIndex={0} className="p-menubar-button" onClick={this.toggle}>
                 <i className="pi pi-bars" />
             </a>
         );

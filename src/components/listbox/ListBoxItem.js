@@ -20,7 +20,7 @@ export class ListBoxItem extends Component {
         option: PropTypes.any,
         label: PropTypes.string,
         selected: PropTypes.bool,
-        tabIndex: PropTypes.string,
+        tabIndex: PropTypes.number,
         onClick: PropTypes.func,
         onTouchEnd: PropTypes.func,
         template: PropTypes.func

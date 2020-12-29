@@ -26,14 +26,16 @@ export class ListBox extends Component {
         metaKeySelection: false,
         filter: false,
         filterBy: null,
+        filterValue: null,
         filterMatchMode: 'contains',
         filterPlaceholder: null,
         filterLocale: undefined,
-        tabIndex: '0',
+        tabIndex: 0,
         tooltip: null,
         tooltipOptions: null,
         ariaLabelledBy: null,
-        onChange: null
+        onChange: null,
+        onFilterValueChange: null
     }
 
     static propTypes = {
@@ -52,21 +54,24 @@ export class ListBox extends Component {
         metaKeySelection: PropTypes.bool,
         filter: PropTypes.bool,
         filterBy: PropTypes.string,
+        filterValue: PropTypes.string,
         filterMatchMode: PropTypes.string,
         filterPlaceholder: PropTypes.string,
         filterLocale: PropTypes.string,
-        tabIndex: PropTypes.string,
+        tabIndex: PropTypes.number,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
         ariaLabelledBy: PropTypes.string,
-        onChange: PropTypes.func
+        onChange: PropTypes.func,
+        onFilterValueChange: PropTypes.func
     };
 
     constructor(props) {
         super(props);
+        this.state = {};
 
-        this.state = {
-            filter: ''
+        if (!this.props.onFilterValueChange) {
+            this.state.filterValue = '';
         }
 
         this.onFilter = this.onFilter.bind(this);
@@ -101,6 +106,10 @@ export class ListBox extends Component {
             content: this.props.tooltip,
             options: this.props.tooltipOptions
         });
+    }
+
+    getFilterValue() {
+        return (this.props.onFilterValueChange ? this.props.filterValue : this.state.filterValue) || '';
     }
 
     onOptionClick(event) {
@@ -202,7 +211,16 @@ export class ListBox extends Component {
     }
 
     onFilter(event) {
-        this.setState({filter: event.query});
+        const { originalEvent, value } = event;
+        if (this.props.onFilterValueChange) {
+            this.props.onFilterValueChange({
+                originalEvent,
+                value
+            });
+        }
+        else {
+            this.setState({ filterValue: value });
+        }
     }
 
     updateModel(event, value) {
@@ -247,14 +265,15 @@ export class ListBox extends Component {
     }
 
     filter(option) {
-        let filterValue = this.state.filter.trim().toLocaleLowerCase(this.props.filterLocale);
+        let filterValue = this.getFilterValue().trim().toLocaleLowerCase(this.props.filterLocale);
         let optionLabel = this.getOptionLabel(option).toLocaleLowerCase(this.props.filterLocale);
 
         return optionLabel.indexOf(filterValue) > -1;
     }
 
     hasFilter() {
-        return this.state.filter && this.state.filter.trim().length > 0;
+        let filter = this.getFilterValue();
+        return filter && filter.trim().length > 0;
     }
 
     getOptionLabel(option) {
@@ -275,7 +294,7 @@ export class ListBox extends Component {
 
         if (this.props.options) {
             if (this.hasFilter()) {
-                let filterValue = this.state.filter.trim().toLocaleLowerCase(this.props.filterLocale)
+                let filterValue = this.getFilterValue().trim().toLocaleLowerCase(this.props.filterLocale)
                 let searchFields = this.props.filterBy ? this.props.filterBy.split(',') : [this.props.optionLabel || 'label'];
                 items = FilterUtils.filter(items, searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
             }
@@ -292,7 +311,7 @@ export class ListBox extends Component {
         }
 
         if (this.props.filter) {
-            header = <ListBoxHeader filter={this.state.filter} onFilter={this.onFilter} disabled={this.props.disabled} filterPlaceholder={this.props.filterPlaceholder} />
+            header = <ListBoxHeader filter={this.getFilterValue()} onFilter={this.onFilter} disabled={this.props.disabled} filterPlaceholder={this.props.filterPlaceholder} />
         }
 
         return (

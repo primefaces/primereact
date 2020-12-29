@@ -278,7 +278,8 @@ itemTemplate(option) {
             <h5>Filtering</h5>
             <p>Options can be filtered using an input field in the overlay by enabling the <i>filter</i> property. By default filtering is done against
             label of the items and <i>filterBy</i> property is available to choose one or more properties of the options. In addition <i>filterMatchMode</i> can be utilized
-            to define the filtering algorithm, valid options are "contains" (default), "startsWith", "endsWith", "equals" and "notEquals".</p>
+            to define the filtering algorithm, valid options are "contains" (default), "startsWith", "endsWith", "equals" and "notEquals".
+            Also, the <i>filterValue</i> and <i>onFilterValueChange</i> properties can be used to control the filter value.</p>
 
 <CodeHighlight>
 {`
@@ -442,6 +443,12 @@ itemTemplate(option) {
                             <td>When filtering is enabled, filterBy decides which field or fields (comma separated) to search against.</td>
                         </tr>
                         <tr>
+                            <td>filterValue</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>When specified, filter displays with this value.</td>
+                        </tr>
+                        <tr>
                             <td>filterMatchMode</td>
                             <td>string</td>
                             <td>contains</td>
@@ -461,7 +468,7 @@ itemTemplate(option) {
                         </tr>
                         <tr>
                             <td>tabIndex</td>
-                            <td>string</td>
+                            <td>number</td>
                             <td>null</td>
                             <td>Index of the element in tabbing order.</td>
                         </tr>
@@ -498,6 +505,13 @@ itemTemplate(option) {
                                 event.value: Single value or an array of values depending on the selection mode <br/>
                             </td>
                             <td>Callback to invoke when value of listbox changes.</td>
+                        </tr>
+                        <tr>
+                            <td>onFilterValueChange</td>
+                            <td>event.originalEvent: Browser event <br/>
+                                event.value: the filtered value <br/>
+                            </td>
+                            <td>Callback to invoke when filter value changes.</td>
                         </tr>
                     </tbody>
                 </table>

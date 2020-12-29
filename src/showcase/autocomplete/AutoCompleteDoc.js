@@ -460,7 +460,7 @@ itemTemplate(item) {
                                         <td>Hint text for the input field.</td>
                                     </tr>
                                     <tr>
-                                        <td>readonly</td>
+                                        <td>readOnly</td>
                                         <td>boolean</td>
                                         <td>false</td>
                                         <td>When present, it specifies that the input cannot be typed.</td>
@@ -490,7 +490,7 @@ itemTemplate(item) {
                                         <td>DOM element instance where the overlay panel should be mounted.</td>
                                     </tr>
                                     <tr>
-                                        <td>tabindex</td>
+                                        <td>tabIndex</td>
                                         <td>number</td>
                                         <td>null</td>
                                         <td>Index of the element in tabbing order.</td>

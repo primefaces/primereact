@@ -154,6 +154,17 @@ import { AccessibilityDemo } from './showcase/accessibility/AccessibilityDemo';
 import { BadgeDemo } from './showcase/badge/BadgeDemo';
 import { RippleDemo } from './showcase/ripple/RippleDemo';
 import { TimelineDemo } from './showcase/timeline/TimelineDemo';
+import { AvatarDemo } from './showcase/avatar/AvatarDemo';
+import { TagDemo } from './showcase/tag/TagDemo';
+import { SkeletonDemo } from './showcase/skeleton/SkeletonDemo';
+import { DividerDemo } from './showcase/divider/DividerDemo';
+import { KnobDemo } from './showcase/knob/KnobDemo';
+import { SplitterDemo } from './showcase/splitter/SplitterDemo';
+import { CascadeSelectDemo } from './showcase/cascadeselect/CascadeSelectDemo';
+import { ScrollTopDemo } from './showcase/scrolltop/ScrollTopDemo';
+import { ChipDemo } from './showcase/chip/ChipDemo';
+import { ConfirmDialogDemo } from './showcase/confirmdialog/ConfirmDialogDemo';
+import { ConfirmPopupDemo } from './showcase/confirmpopup/ConfirmPopupDemo';
 
 class AppRouter extends Component {
 
@@ -330,9 +341,20 @@ class AppRouter extends Component {
                 <Route path="/spacing" component={SpacingDemo} />
                 <Route path="/text" component={TextDemo} />
                 <Route path="/accessibility" component={AccessibilityDemo} />
-                <Route path="/badge" component={BadgeDemo} />
                 <Route path="/ripple" component={RippleDemo} />
                 <Route path="/timeline" component={TimelineDemo} />
+                <Route path="/avatar" component={AvatarDemo} />
+                <Route path="/badge" component={BadgeDemo} />
+                <Route path="/tag" component={TagDemo} />
+                <Route path="/skeleton" component={SkeletonDemo} />
+                <Route path="/divider" component={DividerDemo} />
+                <Route path="/knob" component={KnobDemo} />
+                <Route path="/splitter" component={SplitterDemo} />
+                <Route path="/cascadeselect" component={CascadeSelectDemo} />
+                <Route path="/scrolltop" component={ScrollTopDemo} />
+                <Route path="/chip" component={ChipDemo} />
+                <Route path="/confirmdialog" component={ConfirmDialogDemo} />
+                <Route path="/confirmpopup" component={ConfirmPopupDemo} />
             </>
         );
     }

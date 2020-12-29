@@ -12,6 +12,7 @@ interface CheckboxProps {
     disabled?: boolean;
     required?: boolean;
     readOnly?: boolean;
+    tabIndex?: number;
     tooltip?: any;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;

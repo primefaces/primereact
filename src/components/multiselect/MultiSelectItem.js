@@ -20,7 +20,7 @@ export class MultiSelectItem extends Component {
         option: PropTypes.any,
         label: PropTypes.string,
         selected: PropTypes.bool,
-        tabIndex: PropTypes.string,
+        tabIndex: PropTypes.number,
         template: PropTypes.any,
         onClick: PropTypes.func,
         onKeyDown: PropTypes.func,

@@ -80,7 +80,7 @@ export class DataTable extends Component {
         rowGroupFooterTemplate: null,
         loading: false,
         loadingIcon: 'pi pi-spinner',
-        tabIndex: '0',
+        tabIndex: 0,
         stateKey: null,
         stateStorage: 'session',
         editMode: 'cell',
@@ -179,7 +179,7 @@ export class DataTable extends Component {
         rowGroupFooterTemplate: PropTypes.func,
         loading: PropTypes.bool,
         loadingIcon: PropTypes.string,
-        tabIndex: PropTypes.string,
+        tabIndex: PropTypes.number,
         stateKey: PropTypes.string,
         stateStorage: PropTypes.string,
         editMode: PropTypes.string,
@@ -456,7 +456,7 @@ export class DataTable extends Component {
 
     saveColumnWidths(state) {
         let widths = [];
-        let headers = DomHandler.find(this.container, '.p-datatable-thead > tr > th');
+        let headers = DomHandler.find(this.container, '.p-datatable-thead > tr > th.p-resizable-column');
         headers.map(header => widths.push(DomHandler.getOuterWidth(header)));
         state.columnWidths = widths.join(',');
 
