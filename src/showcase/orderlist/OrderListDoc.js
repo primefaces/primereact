@@ -239,7 +239,7 @@ import { OrderList } from 'primereact/orderlist';
             </p>
 <CodeHighlight>
 {`
-<OrderList value={this.state.products} itemTemplate={this.itemTemplate} header="Products" onChange={(e) => this.setState({products: e.value})}></OrderList>
+<OrderList value={products} itemTemplate={itemTemplate} header="Products" onChange={(e) => setProducts(e.value)}></OrderList>
 `}
 </CodeHighlight>
 
@@ -248,7 +248,7 @@ import { OrderList } from 'primereact/orderlist';
 
 <CodeHighlight>
 {`
-<OrderList value={this.state.products} itemTemplate={this.itemTemplate} dragdrop onChange={(e) => this.setState({products: e.value})}></OrderList>
+<OrderList value={products} itemTemplate={itemTemplate} dragdrop onChange={(e) => setProducts(e.value)}></OrderList>
 `}
 </CodeHighlight>
 

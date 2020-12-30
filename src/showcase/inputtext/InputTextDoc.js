@@ -242,7 +242,7 @@ import { InputText } from 'primereact/inputtext';
                         <p>InputText is used as a controlled input with <i>value</i> and <i>onChange</i> properties.</p>
 <CodeHighlight>
 {`
-<InputText value={this.state.value} onChange={(e) => this.setState({value: e.target.value})} />
+<InputText value={value} onChange={(e) => setValue(e.target.value)} />
 `}
 </CodeHighlight>
 
@@ -251,7 +251,7 @@ import { InputText } from 'primereact/inputtext';
 <CodeHighlight>
 {`
 <span className="p-float-label">
-    <InputText id="in" value={this.state.value} onChange={(e) => this.setState({value: e.target.value})} />
+    <InputText id="in" value={value} onChange={(e) => setValue(e.target.value)} />
     <label htmlhtmlFor="in">Username</label>
 </span>
 `}

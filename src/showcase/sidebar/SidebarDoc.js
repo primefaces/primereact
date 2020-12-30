@@ -272,11 +272,11 @@ import { Sidebar } from 'primereact/sidebar';
 
 <CodeHighlight>
 {`
-<Sidebar visible={this.state.visible} onHide={() => this.setState({visible:false})}>
+<Sidebar visible={visible} onHide={() => setVisible(false)}>
     Content
 </Sidebar>
 
-<Button icon="pi pi-arrow-right" onClick={(e) => this.setState({visible:true})}/>
+<Button icon="pi pi-arrow-right" onClick={(e) => setVisible(true)}/>
 `}
 </CodeHighlight>
 
@@ -285,7 +285,7 @@ import { Sidebar } from 'primereact/sidebar';
 
 <CodeHighlight>
 {`
-<Sidebar visible={this.state.visible} position="right" onHide={() => this.setState({visible:false})}>
+<Sidebar visible={visible} position="right" onHide={() => setVisible(false)}>
     Content
 </Sidebar>
 `}
@@ -295,10 +295,10 @@ import { Sidebar } from 'primereact/sidebar';
                         <p>Sidebar size can be changed using a fixed value or using one of the three predefined ones.</p>
 <CodeHighlight>
 {`
-<Sidebar visible={this.state.visible} position="right" className="ui-sidebar-sm" onHide={() => this.setState({visible:false})}></Sidebar>
-<Sidebar visible={this.state.visible} position="right" className="ui-sidebar-md" onHide={() => this.setState({visible:false})}></Sidebar>
-<Sidebar visible={this.state.visible} position="right" className="ui-sidebar-lg" onHide={() => this.setState({visible:false})}></Sidebar>
-<Sidebar visible={this.state.visible} position="right" style={{width:'30em'}} onHide={() => this.setState({visible:false})}></Sidebar>
+<Sidebar visible={visible} position="right" className="ui-sidebar-sm" onHide={() => setVisible(false)}></Sidebar>
+<Sidebar visible={visible} position="right" className="ui-sidebar-md" onHide={() => setVisible(false)}></Sidebar>
+<Sidebar visible={visible} position="right" className="ui-sidebar-lg" onHide={() => setVisible(false)}></Sidebar>
+<Sidebar visible={visible} position="right" style={{width:'30em'}} onHide={() => setVisible(false)}></Sidebar>
 `}
 </CodeHighlight>
 
@@ -306,7 +306,7 @@ import { Sidebar } from 'primereact/sidebar';
                         <p>Full screen mode allows the sidebar to cover whole screen.</p>
 <CodeHighlight>
 {`
-<Sidebar visible={this.state.visible} fullScreen onHide={() => this.setState({visible:false})}>
+<Sidebar visible={visible} fullScreen onHide={() => setVisible(false)}}>
     Content
 </Sidebar>
 `}
@@ -317,7 +317,7 @@ import { Sidebar } from 'primereact/sidebar';
 
 <CodeHighlight>
 {`
-<Sidebar visible={this.state.visibleCustomToolbar} onHide={() => this.setState({visibleCustomToolbar: false})} icons={() => (
+<Sidebar visible={visibleCustomToolbar} onHide={() => setVisibleCustomToolbar(false)} icons={() => (
     <React.Fragment>
         <button className="p-sidebar-close p-link">
             <span className="p-sidebar-close-icon pi pi-print"/>
@@ -328,8 +328,8 @@ import { Sidebar } from 'primereact/sidebar';
     </React.Fragment>
 )}>
     <h1 style={{fontWeight:'normal'}}>Sidebar with custom icons</h1>
-    <Button type="button" onClick={(e) => this.setState({visibleCustomToolbar: false})} label="Save" className="p-button-success" style={{marginRight:'.25em'}} />
-    <Button type="button" onClick={(e) => this.setState({visibleCustomToolbar: false})} label="Cancel" className="p-button-secondary"/>
+    <Button type="button" onClick={(e) => setVisibleCustomToolbar(false)} label="Save" className="p-button-success" style={{marginRight:'.25em'}} />
+    <Button type="button" onClick={(e) => setVisibleCustomToolbar(false)} label="Cancel" className="p-button-secondary"/>
 </Sidebar>
 `}
 </CodeHighlight>

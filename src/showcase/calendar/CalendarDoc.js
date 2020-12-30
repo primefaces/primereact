@@ -464,7 +464,7 @@ import { Calendar } from 'primereact/calendar';
 
 <CodeHighlight>
 {`
-<Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
+<Calendar value={date} onChange={(e) => setDate(e.value)}></Calendar>
 `}
 </CodeHighlight>
 
@@ -473,7 +473,7 @@ import { Calendar } from 'primereact/calendar';
 
 <CodeHighlight>
 {`
-<Calendar inline value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
+<Calendar inline value={date} onChange={(e) => setDate(e.value)}></Calendar>
 `}
 </CodeHighlight>
 
@@ -483,7 +483,7 @@ import { Calendar } from 'primereact/calendar';
             uncontrolled mode, viewDate is used only once in initial rendering and ignored in updates. If you'd like to change the displayed month/year programmatically, use the onViewDateChange in controlled mode.</p>
 <CodeHighlight>
 {`
-<Calendar value={this.state.dates} onChange={(e) => this.setState({date: e.value})} viewDate={this.state.viewDate} onViewDateChange={(e) => this.setState({viewDate: e.value})}></Calendar>
+<Calendar value={dates} onChange={(e) => setDate(e.value)} viewDate={viewDate} onViewDateChange={(e) => setViewDate(e.value)}></Calendar>
 `}
 </CodeHighlight>
 
@@ -493,7 +493,7 @@ import { Calendar } from 'primereact/calendar';
             is the end date. Note that time picker is not currently supported in multiple and range modes.</p>
 <CodeHighlight>
 {`
-<Calendar selectionMode="multiple" value={this.state.dates} onChange={(e) => this.setState({dates: e.value})}></Calendar>
+<Calendar selectionMode="multiple" value={dates} onChange={(e) => setDates(e.value)}></Calendar>
 `}
 </CodeHighlight>
 
@@ -502,7 +502,7 @@ import { Calendar } from 'primereact/calendar';
 
 <CodeHighlight>
 {`
-<Calendar dateFormat="dd/mm/yy" value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
+<Calendar dateFormat="dd/mm/yy" value={date} onChange={(e) => setDate(e.value)}></Calendar>
 `}
 </CodeHighlight>
 
@@ -533,9 +533,9 @@ import { Calendar } from 'primereact/calendar';
 
 <CodeHighlight>
 {`
-<Calendar showTime hourFormat="12" value={this.state.date1} onChange={(e) => this.setState({date1: e.value})}></Calendar>
-<Calendar showTime hourFormat="24" value={this.state.date2} onChange={(e) => this.setState({date2: e.value})}></Calendar>
-<Calendar timeOnly showTime hourFormat="24" value={this.state.date3} onChange={(e) => this.setState({date3: e.value})}></Calendar>
+<Calendar showTime hourFormat="12" value={date1} onChange={(e) => setDate1(e.value)}></Calendar>
+<Calendar showTime hourFormat="24" value={date2} onChange={(e) => setDate2(e.value)}></Calendar>
+<Calendar timeOnly showTime hourFormat="24" value={date3} onChange={(e) => setDate3(e.value)}></Calendar>
 `}
 </CodeHighlight>
 
@@ -544,7 +544,7 @@ import { Calendar } from 'primereact/calendar';
 
 <CodeHighlight>
 {`
-<Calendar minDate={minDate} maxDate={maxDate} readOnlyInput value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
+<Calendar minDate={minDate} maxDate={maxDate} readOnlyInput value={date} onChange={(e) => setDate(e.value)}></Calendar>
 `}
 </CodeHighlight>
 
@@ -554,7 +554,7 @@ import { Calendar } from 'primereact/calendar';
 
 <CodeHighlight>
 {`
-<Calendar disabledDates={invalidDates}" disabledDays={[0,6]} readOnlyInput value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
+<Calendar disabledDates={invalidDates} disabledDays={[0,6]} readOnlyInput value={date} onChange={(e) => setDate(e.value)}></Calendar>
 `}
 </CodeHighlight>
 
@@ -562,7 +562,7 @@ import { Calendar } from 'primereact/calendar';
                         <p>Button bar displays today and clear buttons and activated using the <i>showButtonBar</i> property.</p>
 <CodeHighlight>
 {`
-<Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} showButtonBar></Calendar>
+<Calendar value={date} onChange={(e) => setDate(e.value)} showButtonBar></Calendar>
 `}
 </CodeHighlight>
 
@@ -570,7 +570,7 @@ import { Calendar } from 'primereact/calendar';
                         <p>Displaying multiple months is enabled by setting <i>numberOfMonths</i> property to a value greater than 1.</p>
 <CodeHighlight>
 {`
-<Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} numberOfMonths={3}></Calendar>
+<Calendar value={date} onChange={(e) => setDate(e.value)} numberOfMonths={3}></Calendar>
 `}
 </CodeHighlight>
 
@@ -579,7 +579,7 @@ import { Calendar } from 'primereact/calendar';
 
 <CodeHighlight>
 {`
-<Calendar locale={es} dateFormat="dd/mm/yy" value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
+<Calendar locale={es} dateFormat="dd/mm/yy" value={date} onChange={(e) => setDate(e.value)}></Calendar>
 `}
 </CodeHighlight>
 
@@ -606,7 +606,7 @@ let es = {
 
 <CodeHighlight>
 {`
-<Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} dateTemplate={this.dateTemplate} />
+<Calendar value={date} onChange={(e) => setDate(e.value)} dateTemplate={dateTemplate} />
 `}
 </CodeHighlight>
 
@@ -629,7 +629,7 @@ dateTemplate(date) {
                         <p><i>headerTemplate</i> and <i>footerTemplate</i> properties are available to place custom content at these sections.</p>
 <CodeHighlight>
 {`
-<Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} headerTemplate={<Button label="Custom Button" />} footerTemplate={<div>Footer Content</div>} />
+<Calendar value={date} onChange={(e) => setDate(e.value)} headerTemplate={<Button label="Custom Button" />} footerTemplate={<div>Footer Content</div>} />
 `}
 </CodeHighlight>
 
@@ -639,7 +639,7 @@ dateTemplate(date) {
 
 <CodeHighlight>
 {`
-<Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} monthNavigator yearNavigator yearRange="2010:2030" />
+<Calendar value={date} onChange={(e) => setDate(e.value)} monthNavigator yearNavigator yearRange="2010:2030" />
 `}
 </CodeHighlight>
 
@@ -647,7 +647,7 @@ dateTemplate(date) {
                         <p>Month picker is used to select month and year only without the date, set <i>view</i> mode as "month" to activate month picker.</p>
 <CodeHighlight>
 {`
-<Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} view="month" dateFormat="mm/yy" yearNavigator yearRange="2010:2030"/>
+<Calendar value={date} onChange={(e) => setDate(e.value)} view="month" dateFormat="mm/yy" yearNavigator yearRange="2010:2030"/>
 `}
 </CodeHighlight>
 
@@ -655,7 +655,7 @@ dateTemplate(date) {
                         <p>Touch UI mode displays the calendar overlay at the center of the screen as optimized for touch devices.</p>
 <CodeHighlight>
 {`
-<Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} touchUI />
+<Calendar value={date} onChange={(e) => setDate(e.value)} touchUI />
 `}
 </CodeHighlight>
 

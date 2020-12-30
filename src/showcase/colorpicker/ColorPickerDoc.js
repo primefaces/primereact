@@ -124,7 +124,7 @@ import {ColorPicker} from 'primereact/colorpicker';
 
 <CodeHighlight>
 {`
-<ColorPicker value={this.state.color} onChange={(e) => this.setState({color: e.value})} />
+<ColorPicker value={color} onChange={(e) => setColor(e.value)} />
 `}
 </CodeHighlight>
 
@@ -133,11 +133,11 @@ import {ColorPicker} from 'primereact/colorpicker';
 
 <CodeHighlight>
 {`
-<ColorPicker value={this.state.color1} onChange={(e) => this.setState({color1: e.value})} />
+<ColorPicker value={color1} onChange={(e) => setColor1(e.value)} />
 
-<ColorPicker format="rgb" value={this.state.color2} onChange={(e) => this.setState({color2: e.value})} />
+<ColorPicker format="rgb" value={color2} onChange={(e) => setColor2(e.value)} />
 
-<ColorPicker format="hsb" value={this.state.color3} onChange={(e) => this.setState({color3: e.value})}/>
+<ColorPicker format="hsb" value={color3} onChange={(e) => setColor3(e.value)}/>
 `}
 </CodeHighlight>
 

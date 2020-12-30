@@ -108,7 +108,7 @@ import {TriStateCheckbox} from 'primereact/tristatecheckbox';
                         <p>TriStateCheckbox is used as a controlled input with <i>checked</i> and <i>onChange</i> properties.</p>
 <CodeHighlight>
 {`
-<TriStateCheckbox value={this.state.value} onChange={(e) => this.setState({value: e.value})} />
+<TriStateCheckbox value={value} onChange={(e) => setValue(e.value)} />
 `}
 </CodeHighlight>
 

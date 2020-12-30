@@ -494,7 +494,7 @@ import { ContextMenu } from 'primereact/contextmenu';
                         <p>Menu requires a collection of menuitems as its model.</p>
 <CodeHighlight lang="js">
 {`
-const items: [
+const items = [
     {
        label:'File',
        icon:'pi pi-fw pi-file',
@@ -650,8 +650,8 @@ const items: [
 
 <CodeHighlight>
 {`
-<ContextMenu model={this.state.imageItems} ref={el => this.cm = el}></ContextMenu>
-<img src="showcase/images/logo.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => this.cm.show(e)}/>
+<ContextMenu model={imageItems} ref={cm}></ContextMenu>
+<img src="showcase/images/logo.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => cm.current.show(e)}/>
 `}
 </CodeHighlight>
 

@@ -446,7 +446,7 @@ import { MegaMenu } from 'primereact/megamenu';
 
 <CodeHighlight lang="js">
 {`
-const items: [
+const items = [
     {
         label: 'Videos', icon: 'pi pi-fw pi-video',
         items: [

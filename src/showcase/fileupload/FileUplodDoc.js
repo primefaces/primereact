@@ -245,12 +245,12 @@ import { FileUpload } from 'primereact/fileupload';
             <p>Uploading implementation can be overriden by enabling customUpload property and defining a custom upload handler event.</p>
 <CodeHighlight>
 {`
-<FileUpload name="demo[]" url="./upload" customUpload uploadHandler={this.myUploader} />
+<FileUpload name="demo[]" url="./upload" customUpload uploadHandler={myUploader} />
 `}
 </CodeHighlight>
 <CodeHighlight lang="js">
 {`
-myUploader(event) {
+const myUploader = (event) => {
     //event.files == files to upload
 }
 `}

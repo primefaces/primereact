@@ -259,7 +259,7 @@ let items = [
                         <p>Menu supports one level of nesting via subitems of an item.</p>
 <CodeHighlight lang="js">
 {`
-let items: [
+let items = [
     {
         label: 'Options',
         items: [{label: 'New', icon: 'pi pi-fw pi-plus',command:()=>{ window.location.hash="/fileupload"; }},
@@ -279,8 +279,8 @@ let items: [
 
 <CodeHighlight>
 {`
-<Menu model={items} popup ref={el => this.menu = el} />
-<Button label="Show" icon="pi pi-bars" onClick={(event) => this.menu.toggle(event)}/>
+<Menu model={items} popup ref={menu} />
+<Button label="Show" icon="pi pi-bars" onClick={(event) => menu.current.toggle(event)}/>
 `}
 </CodeHighlight>
 

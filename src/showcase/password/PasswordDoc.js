@@ -95,7 +95,7 @@ import {Password} from 'primereact/password';
                         <p>Password is used as a controlled component with <i>value</i> and <i>onChange</i> properties.</p>
 <CodeHighlight>
 {`
-<Password value={this.state.value} onChange={(e) => this.setState({value: e.target.value})} />
+<Password value={value} onChange={(e) => setValue(e.target.value)} />
 `}
 </CodeHighlight>
 

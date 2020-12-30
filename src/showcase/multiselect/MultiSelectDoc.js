@@ -304,7 +304,7 @@ const citySelectItems = [
 
 <CodeHighlight>
 {`
-<MultiSelect value={this.state.cities} options={citySelectItems} onChange={(e) => this.setState({cities: e.value})} />
+<MultiSelect value={cities} options={citySelectItems} onChange={(e) => setCities(e.value)} />
 `}
 </CodeHighlight>
 
@@ -323,8 +323,8 @@ const cities = [
 
 <CodeHighlight>
 {`
-<MultiSelect optionLabel="name" value={this.state.cities} options={cities} onChange={(e) => this.setState({cities: e.value})} />
-<MultiSelect optionLabel="name" optionValue="code" value={this.state.cities} options={cities} onChange={(e) => this.setState({cities: e.value})} />
+<MultiSelect optionLabel="name" value={cities} options={cities} onChange={(e) => setCities(e.value)} />
+<MultiSelect optionLabel="name" optionValue="code" value={cities} options={cities} onChange={(e) => setCities(e.value)} />
 `}
 </CodeHighlight>
             <p>When <i>optionValue</i> is not defined, value of an option refers to the option object itself.</p>
@@ -333,7 +333,7 @@ const cities = [
             <p>A comma separated list is used by default to display selected items whereas alternative chip mode is provided using the <i>display</i> property to visualize the items as tokens.</p>
 <CodeHighlight>
 {`
-<MultiSelect display="chip" optionLabel="name" value={this.state.selectedCities} options={this.cities} onChange={(e) => this.setState({ selectedCities: e.value })} />
+<MultiSelect display="chip" optionLabel="name" value={selectedCities} options={cities} onChange={(e) => setSelectedCities(e.value)} />
 `}
 </CodeHighlight>
 
@@ -342,7 +342,7 @@ const cities = [
 
 <CodeHighlight>
 {`
-<MultiSelect value={this.state.cities} options={citySelectItems} onChange={(e) => this.setState({cities: e.value})} itemTemplate={this.itemTemplate} />
+<MultiSelect value={cities} options={citySelectItems} onChange={(e) => setCities(e.value)} itemTemplate={itemTemplate} />
 `}
 </CodeHighlight>
 
@@ -357,7 +357,7 @@ itemTemplate(option) {
 
 <CodeHighlight>
 {`
-<MultiSelect value={this.state.cities} options={citySelectItems} onChange={(e) => this.setState({cities: e.value})} selectedItemTemplate={this.selectedItemTemplate} />
+<MultiSelect value={cities} options={citySelectItems} onChange={(e) => setCities(e.value)} selectedItemTemplate={selectedItemTemplate} />
 `}
 </CodeHighlight>
 
@@ -376,7 +376,7 @@ selectedItemTemplate(option) {
 
 <CodeHighlight>
 {`
-<MultiSelect value={this.state.cities} options={citySelectItems} onChange={(e) => this.setState({cities: e.value})} filter/>
+<MultiSelect value={cities} options={citySelectItems} onChange={(e) => setCities(e.value)} filter/>
 `}
 </CodeHighlight>
 

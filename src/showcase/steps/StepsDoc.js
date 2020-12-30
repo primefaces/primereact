@@ -224,7 +224,7 @@ const items = [
 
 <CodeHighlight>
 {`
-<Steps model={interactiveItems} activeIndex={this.state.activeIndex} onSelect={(e) => this.setState({activeIndex: e.index})} readOnly={false} />
+<Steps model={interactiveItems} activeIndex={activeIndex} onSelect={(e) => setActiveIndex(e.index)} readOnly={false} />
 `}
 </CodeHighlight>
 
@@ -234,25 +234,25 @@ const interactiveItems = [
     {
         label: 'Personal',
         command: (event) => {
-            this.toast.show({severity:'info', summary:'First Step', detail: event.item.label});
+            toast.current.show({severity:'info', summary:'First Step', detail: event.item.label});
         }
     },
     {
         label: 'Seat',
         command: (event) => {
-            this.toast.show({severity:'info', summary:'Seat Selection', detail: event.item.label});
+            toast.current.show({severity:'info', summary:'Seat Selection', detail: event.item.label});
         }
     },
     {
         label: 'Payment',
         command: (event) => {
-            this.toast.show({severity:'info', summary:'Pay with CC', detail: event.item.label});
+            toast.current.show({severity:'info', summary:'Pay with CC', detail: event.item.label});
         }
     },
     {
         label: 'Confirmation',
         command: (event) => {
-            this.toast.show({severity:'info', summary:'Last Step', detail: event.item.label});
+            toast.current.show({severity:'info', summary:'Last Step', detail: event.item.label});
         }
     }
 ];

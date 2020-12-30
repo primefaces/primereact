@@ -119,18 +119,13 @@ import { TabMenu } from 'primereact/tabmenu';
 
 <CodeHighlight lang="js">
 {`
-constructor(props) {
-    super(props);
-    this.state = {
-        items: [
-            {label: 'Home', icon: 'pi pi-fw pi-home'},
-            {label: 'Calendar', icon: 'pi pi-fw pi-calendar'},
-            {label: 'Edit', icon: 'pi pi-fw pi-pencil'},
-            {label: 'Documentation', icon: 'pi pi-fw pi-file'},
-            {label: 'Settings', icon: 'pi pi-fw pi-cog'}
-        ]
-    };
-}
+const items = [
+    {label: 'Home', icon: 'pi pi-fw pi-home'},
+    {label: 'Calendar', icon: 'pi pi-fw pi-calendar'},
+    {label: 'Edit', icon: 'pi pi-fw pi-pencil'},
+    {label: 'Documentation', icon: 'pi pi-fw pi-file'},
+    {label: 'Settings', icon: 'pi pi-fw pi-cog'}
+];
 `}
 </CodeHighlight>
 
@@ -139,7 +134,7 @@ constructor(props) {
 
 <CodeHighlight>
 {`
-<TabMenu model={this.state.items} activeItem={this.state.activeItem} onTabChange={(e) => this.setState({activeItem: e.value})}/>
+<TabMenu model={items} activeItem={activeItem} onTabChange={(e) => setActiveItem(e.value)}/>
 `}
 </CodeHighlight>
 
@@ -149,7 +144,7 @@ constructor(props) {
 
 <CodeHighlight>
 {`
-<TabMenu model={this.state.items} />
+<TabMenu model={items} />
 `}
 </CodeHighlight>
 

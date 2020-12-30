@@ -386,14 +386,14 @@ import { CascadeSelect } from 'primereact/cascadeselect';
                             matters and it should correspond to the data hierarchy.</p>
 <CodeHighlight>
 {`
-<CascadeSelect  value={this.state.selectedCity} options={this.state.countries}  optionLabel={"cname"} optionGroupLabel={"name"} optionGroupChildren={['states', 'cities']}
-                style={{minWidth: '14rem'}} placeholder={"Select a City"} onChange={event => this.setState({selectedCity1: event.value})}/>
+<CascadeSelect  value={selectedCity} options={countries}  optionLabel={"cname"} optionGroupLabel={"name"} optionGroupChildren={['states', 'cities']}
+                style={{minWidth: '14rem'}} placeholder={"Select a City"} onChange={event => setSelectedCity1(event.value)}/>
 `}
 </CodeHighlight>
 
 <CodeHighlight lang="js">
 {`
-countries: [
+const countries = [
     {
         name: 'Australia',
         code: 'AU',
@@ -477,13 +477,13 @@ countries: [
                         <p>Content of an item can be customized with the <i>itemTemplate</i> prop.</p>
 <CodeHighlight>
 {`
-<CascadeSelect value={this.state.selectedCity2} options={this.state.countries}  optionLabel={"cname"} optionGroupLabel={"name"} optionGroupChildren={['states', 'cities']}
-    style={{minWidth: '14rem'}} placeholder={"Select a City"} onChange={event => this.setState({selectedCity2: event.value})} itemTemplate={this.countryOptionTemplate}/>
+<CascadeSelect value={selectedCity2} options={countries}  optionLabel={"cname"} optionGroupLabel={"name"} optionGroupChildren={['states', 'cities']}
+    style={{minWidth: '14rem'}} placeholder={"Select a City"} onChange={event => setSelectedCity2(event.value)} itemTemplate={countryOptionTemplate}/>
 `}
 </CodeHighlight>
 <CodeHighlight lang="js">
 {`
-countryOptionTemplate(option){
+const countryOptionTemplate = (option) => {
     return (
         <div className="country-item">
             {option.states && <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'}

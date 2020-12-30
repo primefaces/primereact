@@ -219,7 +219,7 @@ const leftContents = (
         <Button label="New" icon="pi pi-plus" className="p-mr-2" />
         <Button label="Upload" icon="pi pi-upload" className="p-button-success" />
         <i className="pi pi-bars p-toolbar-separator p-mr-2" />
-        <SplitButton label="Save" icon="pi pi-check" model={this.items} className="p-button-warning"></SplitButton>
+        <SplitButton label="Save" icon="pi pi-check" model={items} className="p-button-warning"></SplitButton>
     </React.Fragment>
 );
 

@@ -284,12 +284,12 @@ import { DataScroller } from 'primereact/datascroller';
                 list of cars where each load event adds 10 more rows if available.</p>
 <CodeHighlight>
 {`
-<DataScroller value={this.state.products} itemTemplate={itemTemplate} rows={10}></DataScroller>
+<DataScroller value={products} itemTemplate={itemTemplate} rows={10}></DataScroller>
 `}
 </CodeHighlight>
 <CodeHighlight lang="js">
 {`
-itemTemplate(item) {
+const itemTemplate = (item) => {
     // custom item content
 }
 `}
@@ -300,7 +300,7 @@ itemTemplate(item) {
             <p>By default DataScroller listens to the scroll event of window, the alternative is the inline mode where container of the DataScroller element itself is used as the event target. Set <i>inline</i> option to true to enable this mode.</p>
 <CodeHighlight>
 {`
-<DataScroller value={this.state.products} itemTemplate={itemTemplate} rows={10} inline></DataScroller>
+<DataScroller value={products} itemTemplate={itemTemplate} rows={10} inline></DataScroller>
 `}
 </CodeHighlight>
 
@@ -312,13 +312,13 @@ itemTemplate(item) {
 
 <CodeHighlight>
 {`
-<DataScroller value={this.state.products} itemTemplate={itemTemplate} rows={10} lazy onLazyLoad={this.loadData}></DataScroller>
+<DataScroller value={products} itemTemplate={itemTemplate} rows={10} lazy onLazyLoad={loadData}></DataScroller>
 `}
 </CodeHighlight>
 
 <CodeHighlight lang="js">
 {`
-loadData(event) {
+const loadData = (event) => {
     //event.first = First row offset
     //event.rows = Number of rows per page
     //add more records to the cars array

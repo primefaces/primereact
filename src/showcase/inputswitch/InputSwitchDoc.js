@@ -114,7 +114,7 @@ import {InputSwitch} from 'primereact/inputswitch';
 
 <CodeHighlight>
 {`
-<InputSwitch checked={this.state.value} onChange={(e) => this.setState({value: e.value})} />
+<InputSwitch checked={value} onChange={(e) => setValue(e.value)} />
 `}
 </CodeHighlight>
 

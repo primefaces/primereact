@@ -174,7 +174,7 @@ import { Slider } from 'primereact/slider';
 
 <CodeHighlight>
 {`
-<Slider value={this.state.value} onChange={(e) => this.setState({value: e.value})} />
+<Slider value={value} onChange={(e) => setValue(e.value)} />
 `}
 </CodeHighlight>
 
@@ -182,7 +182,7 @@ import { Slider } from 'primereact/slider';
             <p>Range slider provides two handles to define two values. Enable <i>range</i> property and bind an array to implement a range slider.</p>
 <CodeHighlight>
 {`
-<Slider value={this.state.rangeValues} onChange={(e) => this.setState({rangeValues: e.value})} range />
+<Slider value={rangeValues} onChange={(e) => setRangeValues(e.value)} range />
 `}
 </CodeHighlight>
 
@@ -190,7 +190,7 @@ import { Slider } from 'primereact/slider';
             <p>Default layout of slider is horizontal, use <i>orientation</i> property for the alternative vertical mode.</p>
 <CodeHighlight>
 {`
-<Slider value={this.state.value} onChange={(e) => this.setState({value: e.value})} orientation="vertical" />
+<Slider value={value} onChange={(e) => setValue(e.value)} orientation="vertical" />
 `}
 </CodeHighlight>
 

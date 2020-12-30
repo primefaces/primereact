@@ -150,7 +150,7 @@ import { Editor } from 'primereact/editor';
 
 <CodeHighlight>
 {`
-<Editor style={{height:'320px'}} value={this.state.text} onTextChange={(e) => this.setState({text: e.htmlValue})} />
+<Editor style={{height:'320px'}} value={text} onTextChange={(e) => setText(e.htmlValue)} />
 `}
 </CodeHighlight>
 
@@ -167,7 +167,7 @@ const header = (
     </span>
 );
 
-<Editor style={{height:'320px'}} value={this.state.text} onTextChange={(e) => this.setState({text: e.htmlValue})} headerTemplate={header}/>
+<Editor style={{height:'320px'}} value={text} onTextChange={(e) => setText(e.htmlValue)} headerTemplate={header}/>
 `}
 </CodeHighlight>
 

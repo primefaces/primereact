@@ -241,7 +241,7 @@ import { Inplace } from 'primereact/inplace';
                         <p>In controlled mode, <i>active</i> and <i>onToggle</i> properties need to be defined to control the active state.</p>
 <CodeHighlight>
 {`
-<Inplace active={this.state.active} onToggle={(e) => this.setState({active: e.value})}>
+<Inplace active={active} onToggle={(e) => setActive(e.value)}>
     <InplaceDisplay>
         Click to Edit
     </InplaceDisplay>
@@ -288,16 +288,16 @@ import { Inplace } from 'primereact/inplace';
                         if the user decides to open the inplace.</p>
 <CodeHighlight lang="js">
 {`
-onOpen() {
-    this.productService.getProductsSmall().then(data => this.setState({ products: data }));
+const onOpen = () => {
+    productService.getProductsSmall().then(data => setProducts(data));
 }
 
-<Inplace onOpen={this.onOpen}>
+<Inplace onOpen={onOpen}>
     <InplaceDisplay>
         View Data
     </InplaceDisplay>
     <InplaceContent>
-        <DataTable value={this.state.products}>
+        <DataTable value={products}>
             <Column field="code" header="Code"></Column>
             <Column field="name" header="Name"></Column>
             <Column field="category" header="Category"></Column>

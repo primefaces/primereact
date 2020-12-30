@@ -409,13 +409,13 @@ import { Toast } from 'primereact/toast';
 
 <CodeHighlight>
 {`
-<Toast ref={(el) => this.toast = el} />
+<Toast ref={toast} />
 `}
 </CodeHighlight>
 
 <CodeHighlight lang="js">
 {`
-this.toast.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
+toast.current.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
 `}
 </CodeHighlight>
 
@@ -486,36 +486,36 @@ this.toast.show({severity: 'success', summary: 'Success Message', detail: 'Order
 
 <CodeHighlight>
 {`
-<Toast ref={(el) => this.toast = el}></Toast>
+<Toast ref={toast}></Toast>
 
-<Button onClick={this.showSuccess} label="Success" className="p-button-success" />
-<Button onClick={this.showInfo} label="Info" className="p-button-info" />
-<Button onClick={this.showWarn} label="Warn" className="p-button-warning" />
-<Button onClick={this.showError} label="Error" className="p-button-danger" />
-<Button onClick={this.showMultiple} label="Multiple" />
+<Button onClick={showSuccess} label="Success" className="p-button-success" />
+<Button onClick={showInfo} label="Info" className="p-button-info" />
+<Button onClick={showWarn} label="Warn" className="p-button-warning" />
+<Button onClick={showError} label="Error" className="p-button-danger" />
+<Button onClick={showMultiple} label="Multiple" />
 `}
 </CodeHighlight>
 
 <CodeHighlight lang="js">
 {`
 showSuccess() {
-    this.toast.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
+    toast.current.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
 }
 
 showInfo() {
-    this.toast.show({severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks'});
+    toast.current.show({severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks'});
 }
 
 showWarn() {
-    this.toast.show({severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes'});
+    toast.current.show({severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes'});
 }
 
 showError() {
-    this.toast.show({severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
+    toast.current.show({severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
 }
 
 showMultiple() {
-    this.toast.show([
+    toast.current.show([
         {severity:'info', summary:'Message 1', detail:'PrimeReact rocks'},
         {severity:'info', summary:'Message 2', detail:'PrimeReact rocks'},
         {severity:'info', summary:'Message 3', detail:'PrimeFaces rocks'}
@@ -529,7 +529,7 @@ showMultiple() {
 
 <CodeHighlight lang="js">
 {`
-this.toast.show({closable: false, severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
+toast.current.show({closable: false, severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
 `}
 </CodeHighlight>
 
@@ -540,10 +540,10 @@ this.toast.show({closable: false, severity: 'error', summary: 'Error Message', d
 <CodeHighlight lang="js">
 {`
 //sticky
-this.toast.show({sticky: true, severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
+toast.current.show({sticky: true, severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
 
 //automatically removed after 5 seconds
-this.toast.show({life: 5000, severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
+toast.current.show({life: 5000, severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
 `}
 </CodeHighlight>
 
@@ -554,7 +554,7 @@ this.toast.show({life: 5000, severity: 'error', summary: 'Error Message', detail
 
 <CodeHighlight>
 {`
-<Toast ref={(el) => this.toast = el} position="top-left"></Toast>
+<Toast ref={toast} position="top-left"></Toast>
 `}
 </CodeHighlight>
 
@@ -563,7 +563,7 @@ this.toast.show({life: 5000, severity: 'error', summary: 'Error Message', detail
 
 <CodeHighlight>
 {`
-this.toast.clear();
+    toast.current.clear();
 `}
 </CodeHighlight>
 

@@ -260,9 +260,9 @@ import { OverlayPanel } from 'primereact/overlaypanel';
             <p>OverlayPanel is accessed via its reference where visibility is controlled using toggle, show and hide methods.</p>
 <CodeHighlight>
 {`
-<Button type="button" label="Basic" onClick={(e) => this.op.toggle(e)} />
+<Button type="button" label="Basic" onClick={(e) => op.current.toggle(e)} />
 
-<OverlayPanel ref={(el) => this.op = el}>
+<OverlayPanel ref={op}>
     // Content
 </OverlayPanel>
 `}
@@ -274,7 +274,7 @@ import { OverlayPanel } from 'primereact/overlaypanel';
 
 <CodeHighlight>
 {`
-<OverlayPanel ref={(el) => this.op = el} showCloseIcon dismissable>
+<OverlayPanel ref={op} showCloseIcon dismissable>
     // Content
 </OverlayPanel>
 `}

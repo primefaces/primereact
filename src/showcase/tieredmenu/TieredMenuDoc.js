@@ -503,7 +503,7 @@ import { TieredMenu } from 'primereact/tieredmenu';
                         <p>Menu requires a collection of menuitems as its model.</p>
 <CodeHighlight lang="js">
 {`
-const items: [
+const items = [
     {
        label:'File',
        icon:'pi pi-fw pi-file',
@@ -648,8 +648,8 @@ const items: [
 
 <CodeHighlight>
 {`
-<TieredMenu model={items} popup ref={el => this.menu = el} />
-<Button label="Show" icon="pi pi-bars" onClick={(event) => this.menu.toggle(event)}/>
+<TieredMenu model={items} popup ref={menu} />
+<Button label="Show" icon="pi pi-bars" onClick={(event) => menu.current.toggle(event)}/>
 `}
 </CodeHighlight>
 
