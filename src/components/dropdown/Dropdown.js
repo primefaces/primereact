@@ -398,13 +398,11 @@ export class Dropdown extends Component {
             this.focusInput.focus();
         }
 
-        setTimeout(() => {
-            this.hideOverlay();
-        }, 100);
+        this.hideOverlay();
     }
 
     onFilterInputChange(event) {
-        this.setState({filter: event.target.value});
+        this.setState({ filter: event.target.value });
     }
 
     resetFilter() {

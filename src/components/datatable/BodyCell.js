@@ -58,11 +58,11 @@ export class BodyCell extends Component {
                             columnProps: this.props
                         });
                     }
-                });
 
-                if (this.props.editorValidatorEvent === 'click') {
-                    this.bindDocumentEditListener();
-                }
+                    if (this.props.editorValidatorEvent === 'click') {
+                        this.bindDocumentEditListener();
+                    }
+                });
             }
         }
     }
@@ -87,9 +87,7 @@ export class BodyCell extends Component {
                 this.editingCellClick = false;
             };
 
-            this.editingCellClick = false;
-
-            document.addEventListener('click', this.documentEditListener, { capture: true });
+            document.addEventListener('click', this.documentEditListener);
         }
     }
 
@@ -98,10 +96,10 @@ export class BodyCell extends Component {
         setTimeout(() => {
             this.setState({
                 editing: false
+            }, () => {
+                this.unbindDocumentEditListener();
             });
         }, 1);
-
-        this.unbindDocumentEditListener();
     }
 
     switchCellToViewMode(event, submit) {
@@ -130,7 +128,7 @@ export class BodyCell extends Component {
 
     unbindDocumentEditListener() {
         if (this.documentEditListener) {
-            document.removeEventListener('click', this.documentEditListener, { capture: true });
+            document.removeEventListener('click', this.documentEditListener);
             this.documentEditListener = null;
         }
     }
