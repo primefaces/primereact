@@ -164,11 +164,11 @@ PrimeReact.ripple = true;
 </CodeHighlight>
 
                     <h5>Quickstart</h5>
-                    <p>An example application based on create-react-app is available at <a href="https://github.com/primefaces/primereact-quickstart" className="layout-content-link">github</a>.</p>
+                    <p>An example application based on create-react-app is available at <a href="https://github.com/primefaces/primereact-quickstart" className="layout-content-link">GitHub</a>.</p>
 
                     <h5>Typescript</h5>
                     <p>Typescript is fully supported as type definition files are provided in the npm package of PrimeReact. A sample typescript-primereact application
-                    is available as well at <a href="https://github.com/primefaces/primereact-typescript-quickstart" className="layout-content-link">github</a>.</p>
+                    is available as well at <a href="https://github.com/primefaces/primereact-typescript-quickstart" className="layout-content-link">GitHub</a>.</p>
 
                     <p>Note: A shorthand API is available to import APIs such as MenuModel and SelectItem.</p>
 <CodeHighlight lang="js">
@@ -179,7 +179,7 @@ import { MenuItem } from 'primereact/api';
 </CodeHighlight>
 
 					<h5>Next.js</h5>
-					<p>A sample next.js-primereact application is available as well at <a href="https://github.com/primefaces/primereact-nextjs-quickstart" className="layout-content-link">github</a>.</p>
+					<p>A sample next.js-primereact application is available as well at <a href="https://github.com/primefaces/primereact-nextjs-quickstart" className="layout-content-link">GitHub</a>.</p>
                 </div>
             </div>
         );
