@@ -232,7 +232,7 @@ import { Knob } from 'primereact/knob';
                         <p>Knob is used as a controlled input with value and onChange properties.</p>
                         <CodeHighlight>
                             {`
-<Knob value={this.state.value} onChange={(e)=>this.setState({value: e.value})}/>
+<Knob value={value} onChange={(e) => setValue(value)} />
 `}
                         </CodeHighlight>
 
@@ -240,7 +240,7 @@ import { Knob } from 'primereact/knob';
                         <p>Boundaries are configured with the <i>min</i> and <i>max</i> values whose defaults are 0 and 100 respectively.</p>
                         <CodeHighlight>
                             {`
-<Knob value={this.state.value} min={0} max={100} onChange={(e)=>this.setState({value: e.value})}/>
+<Knob value={value} min={0} max={100} onChange={(e) => setValue(value)} />
 `}
                         </CodeHighlight>
 
@@ -248,7 +248,7 @@ import { Knob } from 'primereact/knob';
                         <p>Step factor is 1 by default and can be customized with <i>step</i> option.</p>
                         <CodeHighlight>
                             {`
-<Knob value={this.state.value} step={10} onChange={(e)=>this.setState({value: e.value})}/>
+<Knob value={value} step={10} onChange={(e) => setValue(value)} />
 `}
                         </CodeHighlight>
 
@@ -257,7 +257,7 @@ import { Knob } from 'primereact/knob';
                             In addition, <i>strokeWidth</i> is used to determine the width of the stroke of range and value sections.</p>
                         <CodeHighlight>
                             {`
-<Knob value={this.state.value} valueColor={"SlateGray"} rangeColor={"MediumTurquoise"} onChange={(e)=>this.setState({value: e.value})}/>
+<Knob value={value} valueColor={"SlateGray"} rangeColor={"MediumTurquoise"} onChange={(e) => setValue(value)} />
 `}
                         </CodeHighlight>
 
@@ -265,7 +265,7 @@ import { Knob } from 'primereact/knob';
                         <p>Default size of the Knob is 100 pixels for width and height, use the <i>size</i> property to customize it per your requirements.</p>
                         <CodeHighlight>
                             {`
-<Knob value={this.state.value} size={200} onChange={(e)=>this.setState({value: e.value})}/>
+<Knob value={value} size={200} onChange={(e) => setValue(value)} />
 `}
                         </CodeHighlight>
 

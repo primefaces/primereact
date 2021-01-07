@@ -508,7 +508,7 @@ import { SlideMenu } from 'primereact/slidemenu';
 
 <CodeHighlight lang="js">
 {`
-const items:[
+const items = [
     {
        label:'File',
        icon:'pi pi-fw pi-file',
@@ -653,9 +653,9 @@ const items:[
                         <p>SlideMenu is inline by default whereas popup mode is supported by enabling popup property and calling toggle method with an event of the target.</p>
 <CodeHighlight>
 {`
-<SlideMenu ref={(el) => this.menu = el} model={items} popup />
+<SlideMenu ref={menu} model={items} popup />
 
-<Button type="button" icon="pi pi-bars" label="Show" onClick={(event) => this.menu.toggle(event)}></Button>
+<Button type="button" icon="pi pi-bars" label="Show" onClick={(event) => menu.current.toggle(event)}></Button>
 `}
 </CodeHighlight>
 
@@ -665,7 +665,7 @@ const items:[
 
 <CodeHighlight>
 {`
-<SlideMenu model={this.items} effectDuration={1000} easing="ease-in" />
+<SlideMenu model={items} effectDuration={1000} easing="ease-in" />
 `}
 </CodeHighlight>
 

@@ -190,8 +190,8 @@ import { RadioButton } from 'primereact/radiobutton';
                         <p>RadioButton is used as a controlled input with checked and onChange properties.</p>
 <CodeHighlight>
 {`
-<RadioButton value="val1" name="city" onChange={(e) => this.setState({value: e.value})} checked={this.state.value === 'val1'} />
-<RadioButton value="val2" name="city" onChange={(e) => this.setState({value: e.value})} checked={this.state.value === 'val2'} />
+<RadioButton value="val1" name="city" onChange={(e) => setValue(e.value)} checked={value === 'val1'} />
+<RadioButton value="val2" name="city" onChange={(e) => setValue(e.value)} checked={value === 'val2'} />
 `}
 </CodeHighlight>
 

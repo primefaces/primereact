@@ -235,7 +235,7 @@ import { ProgressBar } from 'primereact/progressbar';
                         <p>ProgressBar has two modes; "determinate" (default) and "indeterminate". In determinate mode, a value between 0 and 100 is required to display the progress.</p>
 <CodeHighlight>
 {`
-<ProgressBar value={this.state.value} />
+<ProgressBar value={value} />
 `}
 </CodeHighlight>
                         <p>Indeterminate is simplly enabled using <i>mode</i> property.</p>

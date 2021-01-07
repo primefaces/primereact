@@ -116,7 +116,7 @@ import { Captcha } from 'primereact/captcha';
                         <p>Captcha is used with a siteKey and a callback to verify the response.</p>
 <CodeHighlight>
 {`
-<Captcha siteKey="YOUR_SITE_KEY" onResponse={this.showResponse}></Captcha>
+<Captcha siteKey="YOUR_SITE_KEY" onResponse={showResponse}></Captcha>
 `}
 </CodeHighlight>
 
@@ -125,7 +125,7 @@ import { Captcha } from 'primereact/captcha';
                         official documentation.</p>
 <CodeHighlight lang="js">
 {`
-showResponse(response) {
+const showResponse = (response) => {
 //call to a backend to verify against recaptcha with private key
 }
 `}

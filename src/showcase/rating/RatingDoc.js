@@ -132,7 +132,7 @@ import { Rating } from 'primereact/rating';
 
 <CodeHighlight>
 {`
-<Rating value={this.state.value} onChange={(e) => this.setState({value: e.value})} />
+<Rating value={value} onChange={(e) => setValue(e.value)} />
 `}
 </CodeHighlight>
 
@@ -141,7 +141,7 @@ import { Rating } from 'primereact/rating';
 
 <CodeHighlight>
 {`
-<Rating value={this.state.value} onChange={(e) => this.setState({value: e.value})} stars={5} />
+<Rating value={value} onChange={(e) => setValue(e.value)} stars={5} />
 `}
 </CodeHighlight>
 
@@ -150,7 +150,7 @@ import { Rating } from 'primereact/rating';
 
 <CodeHighlight>
 {`
-<Rating value={this.state.value} onChange={(e) => this.setState({value: e.value})} cancel={5} />
+<Rating value={value} onChange={(e) => setValue(e.value)} cancel={5} />
 `}
 </CodeHighlight>
 

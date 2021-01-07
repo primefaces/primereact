@@ -318,17 +318,17 @@ import { confirmDialog } from 'primereact/confirmdialog'; // To use confirmDialo
                         <h6>1. confirmDialog method</h6>
 <CodeHighlight lang="js">
 {`
-confirm() {
+const confirm = () => {
     confirmDialog({
         message: 'Are you sure you want to proceed?',
         header: 'Confirmation',
         icon: 'pi pi-exclamation-triangle',
-        accept: this.accept,
-        reject: this.reject
+        accept: accept,
+        reject: reject
     });
 }
 
-<Button onClick={this.confirm} icon="pi pi-check" label="Confirm"></Button>
+<Button onClick={confirm} icon="pi pi-check" label="Confirm"></Button>
 `}
 </CodeHighlight>
 
@@ -337,10 +337,10 @@ confirm() {
 
 <CodeHighlight>
 {`
-<ConfirmDialog visible={this.state.visible} onHide={() => this.setState({ visible: false })} message="Are you sure you want to proceed?"
-    header="Confirmation" icon="pi pi-exclamation-triangle" accept={this.accept} reject={this.reject} />
+<ConfirmDialog visible={this.state.visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?"
+    header="Confirmation" icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
 
-<Button onClick={() => this.setState({ visible: true })} icon="pi pi-check" label="Confirm" />
+<Button onClick={() => setVisible(true)} icon="pi pi-check" label="Confirm" />
 `}
 </CodeHighlight>
 

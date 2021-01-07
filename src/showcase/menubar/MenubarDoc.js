@@ -496,7 +496,7 @@ import { Menubar } from 'primereact/menubar';
 
 <CodeHighlight lang="js">
 {`
-const items:[
+const items = [
     {
        label:'File',
        icon:'pi pi-fw pi-file',

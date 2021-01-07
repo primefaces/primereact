@@ -201,7 +201,7 @@ import { Paginator } from 'primereact/paginator';
 
 <CodeHighlight>
 {`
-<Paginator first={this.state.first} rows={this.state.rows} onPageChange={(e) => this.setState({first: e.first})}></Paginator>
+<Paginator first={first} rows={rows} onPageChange={(e) => setFirst(e.first)}></Paginator>
 `}
 </CodeHighlight>
 
@@ -209,7 +209,7 @@ import { Paginator } from 'primereact/paginator';
                         <p>Rows and TotalRecords define how many pages the paginator should display. Paginator below will have 10 pages.</p>
 <CodeHighlight>
 {`
-<Paginator rows={10} totalRecords={120} first={this.state.first} onPageChange={(e) => this.setState({first: e.first})}></Paginator>
+<Paginator rows={10} totalRecords={120} first={first} onPageChange={(e) => setFirst(e.first)}></Paginator>
 `}
 </CodeHighlight>
 
@@ -219,7 +219,15 @@ import { Paginator } from 'primereact/paginator';
             </p>
 <CodeHighlight>
 {`
-<Paginator first={this.state.first} rows={this.state.rows} totalRecords={120} rowsPerPageOptions={[10,20,30]} onPageChange={(e) => this.setState({first: e.first, rows: e.rows})}></Paginator>
+const onPageChange = (e) => {
+    setFirst(e.first); 
+    setRows(e.rows);
+}
+`}
+</CodeHighlight>
+<CodeHighlight>
+{`
+<Paginator first={first} rows={rows} totalRecords={120} rowsPerPageOptions={[10,20,30]} onPageChange={onPageChange}></Paginator>
 `}
 </CodeHighlight>
 

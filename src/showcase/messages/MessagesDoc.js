@@ -347,13 +347,13 @@ import { Message } from 'primereact/message';
 
 <CodeHighlight>
 {`
-<Messages ref={(el) => this.messages = el}></Messages>
+<Messages ref={messages}></Messages>
 `}
 </CodeHighlight>
 
 <CodeHighlight lang="js">
 {`
-this.messages.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
+messages.current.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
 `}
 </CodeHighlight>
 

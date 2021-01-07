@@ -115,7 +115,7 @@ import { ToggleButton } from 'primereact/togglebutton';
 
 <CodeHighlight>
 {`
-<ToggleButton checked={this.state.checked1} onChange={(e) => this.setState({checked1: e.value})} />
+<ToggleButton checked={checked1} onChange={(e) => setChecked1(e.value)} />
 `}
 </CodeHighlight>
 
@@ -124,8 +124,7 @@ import { ToggleButton } from 'primereact/togglebutton';
 
 <CodeHighlight>
 {`
-ToggleButton onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIcon="pi pi-times"
-                                checked={this.state.checked2} onChange={(e) => this.setState({checked2: e.value})} />
+<ToggleButton onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIcon="pi pi-times" checked={checked2} onChange={(e) => setChecked2(e.value)} />
 `}
 </CodeHighlight>
 

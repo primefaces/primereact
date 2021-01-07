@@ -198,36 +198,29 @@ npm install @fullcalendar/interaction --save
 
 <CodeHighlight lang="js">
 {`
-export class FullCalendarDemo extends Component {
+export const FullCalendarDemo = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            events: [],
-            options: {
-                plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-                defaultView: 'dayGridMonth',
-                defaultDate: '2017-02-01',
-                header: {
-                    left: 'prev,next',
-                    center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
-                },
-                editable: true
-            }
-        };
-        this.eventService = new EventService();
-    }
+    const [events, setEvents]: useState([]);
+    const options = {
+        plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
+        defaultView: 'dayGridMonth',
+        defaultDate: '2017-02-01',
+        header: {
+            left: 'prev,next',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        editable: true
+    };
 
-    componentDidMount() {
-        this.eventService.getEvents().then(data => this.setState({events: data}));
-    }
+    useEffect(() => {
+        eventService = new EventService();
+        eventService.getEvents().then(data => setEvents(data));
+    }, []);
 
-	render() {
-		return (
-			<FullCalendar events={this.state.events} options={this.state.options} />
-		);
-	}
+    return (
+        <FullCalendar events={events} options={options} />
+    );
 }
 `}
 </CodeHighlight>
@@ -257,12 +250,12 @@ let options: {
 
 <CodeHighlight>
 {`
-<FullCalendar ref={(el) => this.fc = el} events={this.state.events} options={this.state.options} />
+<FullCalendar ref={fc} events={events} options={options} />
 `}
 </CodeHighlight>
 <CodeHighlight lang="js">
 {`
-this.fc.calendar.nextYear();
+fc.current.calendar.nextYear();
 `}
 </CodeHighlight>
 

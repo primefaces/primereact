@@ -456,7 +456,7 @@ import { InputNumber } from 'primereact/inputnumber';
 
 <CodeHighlight>
 {`
-<InputNumber value={this.state.value} onValueChange={(e) => this.setState({value: e.value})} />
+<InputNumber value={value} onValueChange={(e) => setValue(e.value)} />
 `}
 </CodeHighlight>
 
@@ -464,15 +464,15 @@ import { InputNumber } from 'primereact/inputnumber';
             <p>Format is defined using the <i>mode</i> property, "decimal" is the default value allowing only integers when there is no other configuration.</p>
 <CodeHighlight>
 {`
-<InputNumber value={this.state.value} onValueChange={(e) => this.setState({value: e.value})} mode="decimal" />
+<InputNumber value={value} onValueChange={(e) => setValue(e.value)}  mode="decimal" />
 `}
 </CodeHighlight>
 
             <p>Fractions are configured with the <i>minFractionDigits</i> property. Optionally <i>maxFractionDigits</i> can be used to defined a boundary for the maximum digits.</p>
 <CodeHighlight>
 {`
-<InputNumber value={this.state.value1} onValueChange={(e) => this.setState({value1: e.value})} mode="decimal" minFractionDigits={2} />
-<InputNumber value={this.state.value2} onValueChange={(e) => this.setState({value2: e.value})} mode="decimal" minFractionDigits={2} maxFracionDigits={2} />
+<InputNumber value={value1} onValueChange={(e) => setValue1(e.value)} mode="decimal" minFractionDigits={2} />
+<InputNumber value={value2} onValueChange={(e) => setValue2(e.value)} mode="decimal" minFractionDigits={2} maxFracionDigits={2} />
 `}
 </CodeHighlight>
 
@@ -480,16 +480,16 @@ import { InputNumber } from 'primereact/inputnumber';
 <CodeHighlight>
 {`
 User Locale
-<InputNumber value={this.state.value1} onValueChange={(e) => this.setState({value1: e.value})} mode="decimal" minFractionDigits={2} />
+<InputNumber value={value1} onValueChange={(e) => setValue1(e.value)} mode="decimal" minFractionDigits={2} />
 
 United State Locale
-<InputNumber value={this.state.value2} onValueChange={(e) => this.setState({value2: e.value})} mode="decimal" locale="en-US" minFractionDigits={2}/>
+<InputNumber value={value2} onValueChange={(e) => setValue2(e.value)} mode="decimal" locale="en-US" minFractionDigits={2}/>
 
 German Locale
-<InputNumber value={this.state.value3} onValueChange={(e) => this.setState({value3: e.value})} mode="decimal" locale="de-DE" minFractionDigits={2}/>
+<InputNumber value={value3} onValueChange={(e) => setValue3(e.value)} mode="decimal" locale="de-DE" minFractionDigits={2}/>
 
 Indian Locale
-<InputNumber value={this.state.value4} onValueChange={(e) => this.setState({value4: e.value})} mode="decimal" locale="en-IN" minFractionDigits={2} />
+<InputNumber value={value4} onValueChange={(e) => setValue4(e.value)} mode="decimal" locale="en-IN" minFractionDigits={2} />
 `}
 </CodeHighlight>
 
@@ -499,16 +499,16 @@ Indian Locale
 <CodeHighlight>
 {`
 United States
-<InputNumber value={this.state.value1} onValueChange={(e) => this.setState({value1: e.value})} mode="currency" currency="USD" locale="en-US" />
+<InputNumber value={value1} onValueChange={(e) => setValue1(e.value)} mode="currency" currency="USD" locale="en-US" />
 
 Germany
-<InputNumber value={this.state.value2} onValueChange={(e) => this.setState({value2: e.value})} mode="currency" currency="EUR" locale="de-DE" />
+<InputNumber value={value2} onValueChange={(e) => setValue2(e.value)} mode="currency" currency="EUR" locale="de-DE" />
 
 India
-<InputNumber value={this.state.value3} onValueChange={(e) => this.setState({value3: e.value})} mode="currency" currency="INR" currencyDisplay="code" locale="en-IN"/>
+<InputNumber value={value3} onValueChange={(e) => setValue3(e.value)} mode="currency" currency="INR" currencyDisplay="code" locale="en-IN"/>
 
 Japan
-<InputNumber value={this.state.value4} onValueChange={(e) => this.setState({value4: e.value})} mode="currency" currency="JPY" locale="jp-JP"/>
+<InputNumber value={value4} onValueChange={(e) => setValue4(e.value)} mode="currency" currency="JPY" locale="jp-JP"/>
 `}
 </CodeHighlight>
 
@@ -517,16 +517,16 @@ Japan
 <CodeHighlight>
 {`
 Mile
-<InputNumber value={this.state.value1} onValueChange={(e) => this.setState({value1: e.value})} suffix=" mi" />
+<InputNumber value={value1} onValueChange={(e) => setValue1(e.value)} suffix=" mi" />
 
 Percent
-<InputNumber value={this.state.value2} onValueChange={(e) => this.setState({value2: e.value})} prefix="%" />
+<InputNumber value={value2} onValueChange={(e) => setValue2(e.value)} prefix="%" />
 
 Expiry
-<InputNumber value={this.state.value3} onValueChange={(e) => this.setState({value3: e.value})}  prefix="Expires in " suffix=" days" />
+<InputNumber value={value3} onValueChange={(e) => setValue3(e.value)} prefix="Expires in " suffix=" days" />
 
 Temperature
-<InputNumber value={this.state.value4} onValueChange={(e) => this.setState({value4: e.value})} prefix="&uarr; " suffix="℃" min={0} max={40} />
+<InputNumber value={value4} onValueChange={(e) => setValue4(e.value)} prefix="&uarr; " suffix="℃" min={0} max={40} />
 `}
 </CodeHighlight>
 
@@ -536,14 +536,14 @@ Temperature
 <CodeHighlight>
 {`
 Stacked
-<InputNumber value={this.state.value1} onValueChange={(e) => this.setState({value1: e.value})} showButtons mode="currency" currency="USD" />
+<InputNumber value={value1} onValueChange={(e) => setValue1(e.value)} showButtons mode="currency" currency="USD" />
 
 Horizontal
-<InputNumber value={this.state.value2} onValueChange={(e) => this.setState({value2: e.value})} showButtons buttonLayout="horizontal"
+<InputNumber value={value2} onValueChange={(e) => setValue2(e.value)} showButtons buttonLayout="horizontal"
     decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" mode="currency" currency="EUR"/>
 
 Vertical
-<InputNumber value={this.state.value3} onValueChange={(e) => this.setState({value3: e.value})} mode="decimal" showButtons buttonLayout="vertical" style={{width: '6em'}}
+<InputNumber value={value3} onValueChange={(e) => setValue3(e.value)} mode="decimal" showButtons buttonLayout="vertical" style={{width: '6em'}}
     decrementButtonClassName="p-button-secondary" incrementButtonClassName="p-button-secondary" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" />
 `}
 </CodeHighlight>
@@ -552,7 +552,7 @@ Vertical
             <p>Step factor is 1 by default and can be customized with <i>step</i> option.</p>
 <CodeHighlight>
 {`
-<InputNumber value={this.state.value} onValueChange={(e) => this.setState({value: e.value})} step={0.25} />
+<InputNumber value={value} onValueChange={(e) => setValue(e.value)} step={0.25} />
 `}
 </CodeHighlight>
 
@@ -561,7 +561,7 @@ Vertical
             <p>Value to be entered can be restricted by configuring the <i>min</i> and <i>max</i> options.</p>
 <CodeHighlight>
 {`
-<InputNumber value={this.state.value} onValueChange={(e) => this.setState({value: e.value})} min={0} max={100} />
+<InputNumber value={value} onValueChange={(e) => setValue1(e.value)} min={0} max={100} />
 `}
 </CodeHighlight>
 

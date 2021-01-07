@@ -153,7 +153,7 @@ import {Chips} from 'primereact/chips';
 
 <CodeHighlight>
 {`
-<Chips value={this.state.value} onChange={(e) => this.setState({value: e.value})}></Chips>
+<Chips value={value} onChange={(e) => setValue(e.value)}></Chips>
 `}
 </CodeHighlight>
 
@@ -161,7 +161,7 @@ import {Chips} from 'primereact/chips';
                         <p>A chip is customized using <i>itemTemplate</i> function where value is passed to return JSX.</p>
 <CodeHighlight>
 {`
-<Chips value={this.state.value} onChange={(e) => this.setState({value: e.value})} itemTemplate={this.customChip}></Chips>
+<Chips value={value} onChange={(e) => setValue(e.value)} itemTemplate={customChip}></Chips>
 `}
 </CodeHighlight>
 <CodeHighlight lang="js">

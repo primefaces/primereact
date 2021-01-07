@@ -228,45 +228,39 @@ import { AutoComplete } from 'primereact/autocomplete';
 
 <CodeHighlight>
 {`
-<AutoComplete value={this.state.selectedCountry} suggestions={this.state.filteredCountries}
-            completeMethod={this.searchCountry} field="name" onChange={(e) => this.setState({ selectedCountry: e.value })} />
+<AutoComplete value={selectedCountry} suggestions={filteredCountries}
+            completeMethod={searchCountry} field="name" onChange={(e) => setSelectedCountry(e.value)} />
 `}
 </CodeHighlight>
 
 <CodeHighlight lang="js">
 {`
-constructor(props) {
-    super(props);
-    this.state = {
-        selectedCountry: null
-        filteredCountries: null
-    };
+const [selectedCountry, setSelectedCountry] = useState(null);
+const [filteredCountries, setFilteredCountries] = useState(null);
 
-    this.countries: ['Country-1', 'Country-2', 'Country-3', 'Country-4', 'Country-5'];
-    this.searchCountry = this.searchCountry.bind(this);
-    this.countryservice = new CountryService();
-}
+const countries: ['Country-1', 'Country-2', 'Country-3', 'Country-4', 'Country-5'];
+const countryservice = new CountryService();
 
-searchCountry(event) {
+const searchCountry = (event) => {
     setTimeout(() => {
         let filteredCountries;
         if (!event.query.trim().length) {
-            filteredCountries = [...this.countries];
+            filteredCountries = [...countries];
         }
         else {
-            filteredCountries = this.countries.filter((country) => {
+            filteredCountries = countries.filter((country) => {
                 return country.name.toLowerCase().startsWith(event.query.toLowerCase());
             });
         }
 
-        this.setState({ filteredCountries });
+        setFilteredCountries(filteredCountries)
     }, 250);
 }
 
 render() {
     return (
-        <AutoComplete value={this.state.selectedCountry} suggestions={this.state.filteredCountries}
-            completeMethod={this.searchCountry} onChange={(e) => this.setState({ selectedCountry: e.value })} />
+        <AutoComplete value={selectedCountry} suggestions={filteredCountries}
+            completeMethod={searchCountry} onChange={(e) => setSelectedCountry(e.value)} />
     );
 }
 `}
@@ -280,8 +274,8 @@ render() {
 
 <CodeHighlight>
 {`
-<AutoComplete dropdown value={this.state.selectedCountry} suggestions={this.state.filteredCountries}
-    completeMethod={this.searchCountry} onChange={(e) => this.setState({ selectedCountry: e.value })} />
+<AutoComplete dropdown value={selectedCountry} suggestions={filteredCountries}
+    completeMethod={searchCountry} onChange={(e) => setSelectedCountry(e.value)} />
 `}
 </CodeHighlight>
 
@@ -289,8 +283,8 @@ render() {
                         <p>Multiple mode is enabled using <i>multiple</i> property used to select more than one value from the autocomplete. In this case, value reference should be an array.</p>
 <CodeHighlight>
 {`
-<AutoComplete multiple value={this.state.selectedCountry} suggestions={this.state.filteredCountries}
-    completeMethod={this.searchCountry} onChange={(e) => this.setState({ selectedCountry: e.value })} />
+<AutoComplete multiple value={selectedCountry} suggestions={filteredCountries}
+    completeMethod={searchCountry} onChange={(e) => setSelectedCountry(e.value)} />
 `}
 </CodeHighlight>
 
@@ -301,8 +295,8 @@ render() {
 
 <CodeHighlight>
 {`
-<AutoComplete field="name" value={this.state.selectedCountry} suggestions={this.state.filteredCountries}
-    completeMethod={this.searchCountry} onChange={(e) => this.setState({ selectedCountry: e.value })} />
+<AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries}
+    completeMethod={searchCountry} onChange={(e) => setSelectedCountry(e.value)} />
 `}
 </CodeHighlight>
 
@@ -313,9 +307,9 @@ render() {
 
 <CodeHighlight>
 {`
-<AutoComplete value={this.state.selectedCountry} suggestions={this.state.filteredCountries}
-    completeMethod={this.searchCountry} onChange={(e) => this.setState({ selectedCountry: e.value })}
-    itemTemplate={this.itemTemplate} />
+<AutoComplete value={selectedCountry} suggestions={filteredCountries}
+    completeMethod={searchCountry} onChange={(e) => setSelectedCountry(e.value)}
+    itemTemplate={itemTemplate} />
 `}
 </CodeHighlight>
 

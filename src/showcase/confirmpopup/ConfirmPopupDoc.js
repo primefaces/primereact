@@ -232,18 +232,18 @@ import { confirmPopup } from 'primereact/confirmpopup'; // To use confirmPopup m
                         <h6>1. confirmPopup method</h6>
 <CodeHighlight lang="js">
 {`
-confirm(event) {
+const confirm = (event) => {
     confirmPopup({
         target: event.currentTarget,
         message: 'Are you sure you want to proceed?',
         header: 'Confirmation',
         icon: 'pi pi-exclamation-triangle',
-        accept: this.accept,
-        reject: this.reject
+        accept: accept,
+        reject: reject
     });
 }
 
-<Button onClick={this.confirm} icon="pi pi-check" label="Confirm"></Button>
+<Button onClick={confirm} icon="pi pi-check" label="Confirm"></Button>
 `}
 </CodeHighlight>
 
@@ -252,10 +252,10 @@ confirm(event) {
 
 <CodeHighlight>
 {`
-<ConfirmPopup target={document.getElementById('button')} visible={this.state.visible} onHide={() => this.setState({ visible: false })} message="Are you sure you want to proceed?"
-    icon="pi pi-exclamation-triangle" accept={this.accept} reject={this.reject} />
+<ConfirmPopup target={document.getElementById('button')} visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?"
+    icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
 
-<Button id="button onClick={() => this.setState({ visible: true })} icon="pi pi-check" label="Confirm" />
+<Button id="button onClick={() => setVisible(true)} icon="pi pi-check" label="Confirm" />
 `}
 </CodeHighlight>
 

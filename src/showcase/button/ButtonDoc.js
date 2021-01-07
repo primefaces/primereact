@@ -487,7 +487,7 @@ import { Button } from 'primereact/button';
                         <p>Events are defined with the standard notation.</p>
 <CodeHighlight>
 {`
-<Button label="Click" onClick={this.handleClick} />
+<Button label="Click" onClick={handleClick} />
 `}
 </CodeHighlight>
 

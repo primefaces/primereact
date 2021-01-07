@@ -201,8 +201,8 @@ import { DeferredContent } from 'primereact/deferredcontent';
                         <p>DeferredContent is used as a wrapper element of its content.</p>
 <CodeHighlight>
 {`
-<DeferredContent onLoad={this.onDataLoad}>
-    <DataTable value={this.state.products}>
+<DeferredContent onLoad={onDataLoad}>
+    <DataTable value={products}>
         <Column field="code" header="Code"></Column>
         <Column field="name" header="Name"></Column>
         <Column field="category" header="Category"></Column>
@@ -216,8 +216,8 @@ import { DeferredContent } from 'primereact/deferredcontent';
                         <p><i>onLoad</i> callback is useful to initialize the content when it becomes visible on scroll such as loading data.</p>
 <CodeHighlight>
 {`
-<DeferredContent onLoad={this.onDataLoad}>
-    <DataTable value={this.state.products}>
+<DeferredContent onLoad={onDataLoad}>
+    <DataTable value={products}>
         <Column field="code" header="Code"></Column>
         <Column field="name" header="Name"></Column>
         <Column field="category" header="Category"></Column>

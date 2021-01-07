@@ -125,7 +125,7 @@ import { InputTextarea } from 'primereact/inputtextarea';
                         <p>Textarea is used as a controlled input with <i>value</i> and <i>onChange</i> properties.</p>
 <CodeHighlight>
 {`
-<InputTextarea rows={5} cols={30} value={this.state.value} onChange={(e) => this.setState({value: e.target.value})} />
+<InputTextarea rows={5} cols={30} value={value} onChange={(e) => setValue(event.target.value)} />
 `}
 </CodeHighlight>
 
@@ -133,7 +133,7 @@ import { InputTextarea } from 'primereact/inputtextarea';
                         <p>In auto resize mode, textarea grows instead of displaying a scrollbar.</p>
 <CodeHighlight>
 {`
-<InputTextarea rows={5} cols={30} value={this.state.value} onChange={(e) => this.setState({value: e.target.value})} autoResize />
+<InputTextarea rows={5} cols={30} value={value} onChange={(e) => setValue(event.target.value)} autoResize />
 `}
 </CodeHighlight>
 
