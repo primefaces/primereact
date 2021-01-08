@@ -217,6 +217,9 @@ export class Calendar extends Component {
         this.reFocusInputField = this.reFocusInputField.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
+        
+        this.inputRef = React.createRef();
+        this.calendarRef = React.createRef();
     }
 
     componentDidMount() {
@@ -2858,7 +2861,7 @@ export class Calendar extends Component {
     renderInputElement() {
         if (!this.props.inline) {
             return (
-                <InputText ref={(el) => this.inputElement = ReactDOM.findDOMNode(el)} id={this.props.inputId} name={this.props.name} type="text" className={this.props.inputClassName} style={this.props.inputStyle}
+                <InputText ref={this.inputRef} id={this.props.inputId} name={this.props.name} type="text" className={this.props.inputClassName} style={this.props.inputStyle}
                            readOnly={this.props.readOnlyInput} disabled={this.props.disabled} required={this.props.required} autoComplete="off" placeholder={this.props.placeholder}
                            onInput={this.onUserInput} onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onInputKeyDown} aria-labelledby={this.props.ariaLabelledBy} inputMode="none"/>
             );
@@ -2936,7 +2939,7 @@ export class Calendar extends Component {
                 {button}
                 <CSSTransition classNames="p-connected-overlay" in={this.props.inline || this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }}
                     unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit}>
-                    <CalendarPanel ref={(el) => this.panel = ReactDOM.findDOMNode(el)} className={panelClassName} style={this.props.panelStyle}
+                    <CalendarPanel ref={this.calendarRef} className={panelClassName} style={this.props.panelStyle}
                                appendTo={this.props.appendTo}>
                         {datePicker}
                         {timePicker}
