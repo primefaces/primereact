@@ -132,7 +132,7 @@ import { Panel } from 'primereact/panel';
 `}
 </CodeHighlight>
 
-            <p>Instead of simple strings, <i>header</i> propery also can be used to provide custom content as JSX.</p>
+            <p><i>header</i> propery also can be used to provide custom content as JSX.</p>
 
             <h5>Toggleable</h5>
             <p>Content of the panel can be expanded and collapsed using <i>toggleable</i> option. A toggleable panel can either be used as a Controlled or Uncontrolled component.</p>
@@ -184,15 +184,21 @@ import { Panel } from 'primereact/panel';
                         </tr>
                         <tr>
                             <td>header</td>
-                            <td>string</td>
+                            <td>any</td>
                             <td>null</td>
-                            <td>Header text of the panel.</td>
+                            <td>Custom header template of the panel.</td>
                         </tr>
                         <tr>
                             <td>toggleable</td>
                             <td>boolean</td>
                             <td>false</td>
                             <td>Defines if content of panel can be expanded and collapsed.</td>
+                        </tr>
+                        <tr>
+                            <td>icons</td>
+                            <td>any</td>
+                            <td>null</td>
+                            <td>Custom icons template for the header.</td>
                         </tr>
                         <tr>
                             <td>style</td>
