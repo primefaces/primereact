@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import { CSSTransition } from 'react-transition-group';
 import DomHandler from '../utils/DomHandler';
+import { Ripple } from '../ripple/Ripple';
 
 export class ScrollTop extends Component {
 
@@ -106,6 +107,7 @@ export class ScrollTop extends Component {
                 <CSSTransition classNames="p-scrolltop" in={this.state.visible} timeout={{ enter: 150, exit: 150 }} unmountOnExit onEnter={this.onEnter}>
                     <button type="button" className={className} style={this.props.style} onClick={this.onClick}>
                         <span className={iconClassName}></span>
+                        <Ripple />
                     </button>
                 </CSSTransition>
                 { isTargetParent && <span ref={(el) => this.helper = el} className="p-scrolltop-helper"></span> }
