@@ -104,7 +104,7 @@ export class Dialog extends Component {
     }
 
     onMaskClick(event) {
-        if (this.props.dismissableMask && this.props.closable && this.props.modal && this.mask === event.target) {
+        if (this.props.dismissableMask && this.props.modal && this.mask === event.target) {
             this.onClose(event);
         }
     }
