@@ -44,7 +44,7 @@ export class ListBox extends Component {
         options: PropTypes.array,
         optionLabel: PropTypes.string,
         optionValue: PropTypes.string,
-        itemTemplate: PropTypes.func,
+        itemTemplate: PropTypes.any,
         style: PropTypes.object,
         listStyle: PropTypes.object,
         listClassName: PropTypes.string,
