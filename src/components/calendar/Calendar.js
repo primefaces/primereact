@@ -52,7 +52,7 @@ export class Calendar extends Component {
         hideOnDateTimeSelect: false,
         showWeek: false,
         locale: null,
-        dateFormat: 'mm/dd/yy',
+        dateFormat: null,
         panelStyle: null,
         panelClassName: null,
         monthNavigator: false,
@@ -292,6 +292,10 @@ export class Calendar extends Component {
             content: this.props.tooltip,
             options: this.props.tooltipOptions
         });
+    }
+
+    getDateFormat() {
+        return this.props.dateFormat || localeOption('dateFormat', this.props.locale);
     }
 
     onInputFocus(event) {
@@ -2007,7 +2011,7 @@ export class Calendar extends Component {
                 formattedValue = this.formatTime(date);
             }
             else {
-                formattedValue = this.formatDate(date, this.props.dateFormat);
+                formattedValue = this.formatDate(date, this.getDateFormat());
                 if(this.props.showTime) {
                     formattedValue += ' ' + this.formatTime(date);
                 }
@@ -2178,11 +2182,11 @@ export class Calendar extends Component {
         }
         else {
             if(this.props.showTime) {
-                date = this.parseDate(parts[0], this.props.dateFormat);
+                date = this.parseDate(parts[0], this.getDateFormat());
                 this.populateTime(date, parts[1], parts[2]);
             }
             else {
-                date = this.parseDate(text, this.props.dateFormat);
+                date = this.parseDate(text, this.getDateFormat());
             }
         }
 
