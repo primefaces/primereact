@@ -21,7 +21,7 @@ import AppConfig from './AppConfig';
 
 import AppContentContext from './AppContentContext';
 import { Toast } from './components/toast/Toast';
-import PrimeReact from './components/utils/PrimeReact';
+import PrimeReact from './components/api/PrimeReact';
 import { AppChangelogDialog } from './AppChangelogDialog';
 
 export class App extends Component {

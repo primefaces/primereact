@@ -8,6 +8,7 @@ import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
+import { localeOption } from '../api/Locale';
 
 export function confirmPopup(props) {
     let appendTo = props.appendTo || document.body;
@@ -49,8 +50,8 @@ export class ConfirmPopup extends Component {
         target: null,
         visible: false,
         message: null,
-        rejectLabel: 'No',
-        acceptLabel: 'Yes',
+        rejectLabel: null,
+        acceptLabel: null,
         icon: null,
         rejectIcon: null,
         acceptIcon: null,
@@ -102,6 +103,14 @@ export class ConfirmPopup extends Component {
         this.onExit = this.onExit.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
+    }
+
+    acceptLabel() {
+        return this.props.acceptLabel || localeOption('accept');
+    }
+
+    rejectLabel() {
+        return this.props.rejectLabel || localeOption('reject');
     }
 
     bindDocumentClickListener() {
@@ -284,8 +293,8 @@ export class ConfirmPopup extends Component {
 
         const content = this.props.footer ? ObjectUtils.getJSXElement(this.props.footer, this.props) : (
             <>
-                <Button label={this.props.rejectLabel} icon={this.props.rejectIcon} className={rejectClassName} onClick={this.reject} />
-                <Button label={this.props.acceptLabel} icon={this.props.acceptIcon} className={acceptClassName} onClick={this.accept} autoFocus />
+                <Button label={this.rejectLabel()} icon={this.props.rejectIcon} className={rejectClassName} onClick={this.reject} />
+                <Button label={this.acceptLabel()} icon={this.props.acceptIcon} className={acceptClassName} onClick={this.accept} autoFocus />
             </>
         )
 

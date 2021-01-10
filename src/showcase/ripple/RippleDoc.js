@@ -13,7 +13,7 @@ export class RippleDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import PrimeReact from 'primereact/utils';
+import PrimeReact from 'primereact/api';
 import { Ripple } from 'primereact/ripple';
 import './RippleDemo.css';
 
@@ -56,7 +56,7 @@ export class RippleDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React from 'react';
-import PrimeReact from 'primereact/utils';
+import PrimeReact from 'primereact/api';
 import { Ripple } from 'primereact/ripple';
 import './RippleDemo.css';
 
@@ -92,7 +92,7 @@ const RippleDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React from 'react';
-import PrimeReact from 'primereact/utils';
+import PrimeReact from 'primereact/api';
 import { Ripple } from 'primereact/ripple';
 import './RippleDemo.css';
 
@@ -178,7 +178,7 @@ const RippleDemo = () => {
                         <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
-import PrimeReact from 'primereact/utils';
+import PrimeReact from 'primereact/api';
 import { Ripple } from 'primereact/ripple';
 `}
 </CodeHighlight>

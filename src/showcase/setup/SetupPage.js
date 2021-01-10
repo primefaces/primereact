@@ -157,7 +157,7 @@ primereact/resources/themes/rhea/theme.css
                     </p>
 <CodeHighlight lang="js">
 {`
-import PrimeReact from 'primereact/utils';
+import PrimeReact from 'primereact/api';
 
 PrimeReact.ripple = true;
 `}

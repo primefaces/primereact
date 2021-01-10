@@ -6,6 +6,7 @@ import { Dialog } from '../dialog/Dialog';
 import { Button } from '../button/Button';
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
+import { localeOption } from '../api/Locale';
 
 export function confirmDialog(props) {
     let appendTo = props.appendTo || document.body;
@@ -46,8 +47,8 @@ export class ConfirmDialog extends Component {
     static defaultProps = {
         visible: false,
         message: null,
-        rejectLabel: 'No',
-        acceptLabel: 'Yes',
+        rejectLabel: null,
+        acceptLabel: null,
         icon: null,
         rejectIcon: null,
         acceptIcon: null,
@@ -87,6 +88,14 @@ export class ConfirmDialog extends Component {
         this.reject = this.reject.bind(this);
         this.accept = this.accept.bind(this);
         this.hide = this.hide.bind(this);
+    }
+
+    acceptLabel() {
+        return this.props.acceptLabel || localeOption('accept');
+    }
+
+    rejectLabel() {
+        return this.props.rejectLabel || localeOption('reject');
     }
 
     accept() {
@@ -131,8 +140,8 @@ export class ConfirmDialog extends Component {
 
         return this.props.footer ? ObjectUtils.getJSXElement(this.props.footer, this.props) : (
             <>
-                <Button label={this.props.rejectLabel} icon={this.props.rejectIcon} className={rejectClassName} onClick={this.reject} />
-                <Button label={this.props.acceptLabel} icon={this.props.acceptIcon} className={acceptClassName} onClick={this.accept} autoFocus />
+                <Button label={this.rejectLabel()} icon={this.props.rejectIcon} className={rejectClassName} onClick={this.reject} />
+                <Button label={this.acceptLabel()} icon={this.props.acceptIcon} className={acceptClassName} onClick={this.accept} autoFocus />
             </>
         )
     }

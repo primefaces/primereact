@@ -9,15 +9,16 @@ import UniqueComponentId from '../utils/UniqueComponentId';
 import { CSSTransition } from 'react-transition-group';
 import { classNames } from '../utils/ClassNames';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
+import { localeOption } from '../api/Locale';
 
 export class Password extends Component {
 
     static defaultProps = {
         id: null,
-        promptLabel: 'Enter a password',
-        weakLabel: 'Weak',
-        mediumLabel: 'Medium',
-        strongLabel: 'Strong',
+        promptLabel: null,
+        weakLabel: null,
+        mediumLabel: null,
+        strongLabel: null,
         mediumRegex: '^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})',
         strongRegex: '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})',
         feedback: true,
@@ -48,7 +49,7 @@ export class Password extends Component {
         this.state = {
             overlayVisible: false,
             meter: null,
-            infoText: props.promptLabel
+            infoText: this.promptLabel()
         };
 
         this.onFocus = this.onFocus.bind(this);
@@ -61,6 +62,22 @@ export class Password extends Component {
         this.id = this.props.id || UniqueComponentId();
         this.mediumCheckRegExp = new RegExp(this.props.mediumRegex);
         this.strongCheckRegExp = new RegExp(this.props.strongRegex);
+    }
+
+    promptLabel() {
+        return this.props.promptLabel || localeOption('passwordPrompt');
+    }
+
+    weakLabel() {
+        return this.props.weakLabel || localeOption('weak');
+    }
+
+    mediumLabel() {
+        return this.props.mediumLabel || localeOption('medium');
+    }
+
+    strongLabel() {
+        return this.props.strongLabel || localeOption('strong');
     }
 
     showOverlay() {
@@ -115,7 +132,7 @@ export class Password extends Component {
 
             switch (this.testStrength(value)) {
                 case 1:
-                    label = this.props.weakLabel;
+                    label = this.weakLabel();
                     meter = {
                         strength: 'weak',
                         width: '33.33%'
@@ -123,7 +140,7 @@ export class Password extends Component {
                     break;
 
                 case 2:
-                    label = this.props.mediumLabel;
+                    label = this.mediumLabel();
                     meter = {
                         strength: 'medium',
                         width: '66.66%'
@@ -131,7 +148,7 @@ export class Password extends Component {
                     break;
 
                 case 3:
-                    label = this.props.strongLabel;
+                    label = this.strongLabel();
                     meter = {
                         strength: 'strong',
                         width: '100%'
@@ -139,7 +156,7 @@ export class Password extends Component {
                     break;
 
                 default:
-                    label = this.props.promptLabel;
+                    label = this.promptLabel();
                     meter = null;
                     break;
             }
