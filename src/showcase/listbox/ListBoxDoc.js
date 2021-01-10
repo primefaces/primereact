@@ -260,7 +260,7 @@ const cities = [
 </CodeHighlight>
 
             <h5>Custom Content</h5>
-            <p>Label of an option is used as the display text of an item by default, for custom content support define an itemTemplate function that gets the option as a parameter and returns the content.</p>
+            <p>Label of an option is used as the display text of an item by default, for custom content support define an itemTemplate property. Its value can be JSXElement, function or string.</p>
 
 <CodeHighlight>
 {`
@@ -377,9 +377,9 @@ itemTemplate(option) {
                         </tr>
                         <tr>
                             <td>itemTemplate</td>
-                            <td>function</td>
+                            <td>any</td>
                             <td>null</td>
-                            <td>Function that gets the option and returns the content for it.</td>
+                            <td>Custom template for the items.</td>
                         </tr>
                         <tr>
                             <td>style</td>
