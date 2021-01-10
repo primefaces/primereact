@@ -7,3 +7,4 @@ module.updateLocaleOption = require('./components/api/Locale').updateLocaleOptio
 module.updateLocaleOptions = require('./components/api/Locale').updateLocaleOptions;
 module.localeOption = require('./components/api/Locale').localeOption;
 module.localeOptions = require('./components/api/Locale').localeOptions;
+module.PrimeIcons = require('./components/api/PrimeIcons').PrimeIcons;
