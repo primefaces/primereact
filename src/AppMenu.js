@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import { CSSTransition } from 'react-transition-group';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import classNames from 'classnames';
-import { CSSTransition } from 'react-transition-group';
 import { InputText } from '../src/components/inputtext/InputText';
 
 export class AppMenu extends Component {
@@ -16,6 +17,7 @@ export class AppMenu extends Component {
         };
 
         this.onSearchInputChange = this.onSearchInputChange.bind(this);
+        this.resetFilter = this.resetFilter.bind(this);
     }
 
     getMenu() {
@@ -114,6 +116,17 @@ export class AppMenu extends Component {
         return false;
     }
 
+    showSearchClearIcon() {
+        return this.state.filteredMenu && this.state.menu && this.state.filteredMenu.length !== this.state.menu.length;
+    }
+
+    resetFilter() {
+        this.setState({ filteredMenu : this.state.menu }, () => {
+            this.searchInput.value = '';
+            this.searchInput.focus();
+        });
+    }
+
     componentDidMount() {
         this.getMenu();
     }
@@ -207,14 +220,17 @@ export class AppMenu extends Component {
     }
 
     render() {
-        const sidebarClassName = classNames('layout-sidebar', {'active': this.props.active});
         const menuItems = this.renderCategoryItems();
+        const showClearIcon = this.showSearchClearIcon();
+        const sidebarClassName = classNames('layout-sidebar', {'active': this.props.active});
+        const filterClassName = classNames('layout-sidebar-filter p-input-icon-left p-fluid p-my-2', {'p-input-icon-right': showClearIcon});
 
         return (
             <div className={sidebarClassName} role="navigation">
-                <span className="layout-sidebar-filter p-input-icon-left p-fluid p-my-2">
+                <span className={filterClassName}>
                     <i className="pi pi-search" />
-                    <InputText type="text" onChange={this.onSearchInputChange} placeholder="Search by name, badge..." aria-label="Search input" autoComplete="off" />
+                    <InputText ref={(el) => this.searchInput = ReactDOM.findDOMNode(el)} type="text" onChange={this.onSearchInputChange} placeholder="Search by name, badge..." aria-label="Search input" autoComplete="off" />
+                    {showClearIcon && <i className="clear-icon pi pi-times" onClick={this.resetFilter} />}
                 </span>
 
                 <div className="layout-menu" role="menubar">

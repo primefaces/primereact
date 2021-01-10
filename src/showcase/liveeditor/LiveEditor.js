@@ -14,7 +14,6 @@ export class LiveEditor extends Component {
         data: null,
         dependencies: null,
         extFiles: null,
-        activeButtonIndex: 0,
         defaultSourceType: 'hooks'
     };
 
@@ -25,7 +24,6 @@ export class LiveEditor extends Component {
         data: PropTypes.string,
         dependencies: PropTypes.object,
         extFiles: PropTypes.object,
-        activeButtonIndex: PropTypes.number,
         defaultSourceType: PropTypes.string
     };
 
