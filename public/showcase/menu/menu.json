@@ -14,17 +14,20 @@
                     ]
                 },
                 {
-                    "name": "Community Forum",
-                    "href": "https://forum.primefaces.org/viewforum.php?f=57",
+                    "name": "I18N",
+                    "to": "/i18n",
                     "meta": [
-                        "get started"
-                    ]
+                        "i18N",
+                        "locale",
+                        "translate"
+                    ],
+                    "badge": "new"
                 },
                 {
-                    "name": "Discord Chat",
-                    "href": "https://discord.gg/gzKFYnpmCY",
+                    "name": "Accessibility",
+                    "to": "/accessibility",
                     "meta": [
-                        "discord"
+                        "accessibility"
                     ]
                 },
                 {
@@ -35,25 +38,40 @@
                     ]
                 },
                 {
-                    "name": "Support",
-                    "to": "/support",
-                    "meta": [
-                        "support"
-                    ]
-                },
-                {
                     "name": "Store",
                     "href": "https://www.primefaces.org/store/",
                     "meta": [
                         "store",
                         "primestore"
                     ]
+                }
+            ]
+        },
+        {
+            "name": "Support",
+            "meta": [
+                "support"
+            ],
+            "children": [
+                {
+                    "name": "Forum",
+                    "href": "https://forum.primefaces.org/viewforum.php?f=57",
+                    "meta": [
+                        "forum"
+                    ]
                 },
                 {
-                    "name": "Accessibility",
-                    "to": "/accessibility",
+                    "name": "Discord Chat",
+                    "href": "https://discord.gg/gzKFYnpmCY",
                     "meta": [
-                        "accessibility"
+                        "discord"
+                    ]
+                },
+                {
+                    "name": "PRO Support",
+                    "to": "/support",
+                    "meta": [
+                        "pro support"
                     ]
                 }
             ]
@@ -167,11 +185,12 @@
             ],
             "children": [
                 {
-                    "name": "Icons v4.0",
+                    "name": "Icons v4.1",
                     "to": "/icons",
                     "meta": [
                         "icons"
-                    ]
+                    ],
+                    "badge": "updated"
                 }
             ]
         },
