@@ -223,7 +223,7 @@ export class AppMenu extends Component {
         const menuItems = this.renderCategoryItems();
         const showClearIcon = this.showSearchClearIcon();
         const sidebarClassName = classNames('layout-sidebar', {'active': this.props.active});
-        const filterContentClassName = classNames('layout-sidebar-filter-content p-input-icon-left p-fluid', {'p-input-icon-right': showClearIcon});
+        const filterContentClassName = classNames('layout-sidebar-filter-content p-input-filled p-input-icon-left p-fluid', {'p-input-icon-right': showClearIcon});
 
         return (
             <div className={sidebarClassName} role="navigation">
