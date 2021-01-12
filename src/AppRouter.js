@@ -151,7 +151,7 @@ import { DataTableSizeDemo } from './showcase/datatable/DataTableSizeDemo';
 import { DataTableGridLinesDemo } from './showcase/datatable/DataTableGridLinesDemo';
 import { DataTableStripedDemo } from './showcase/datatable/DataTableStripedDemo';
 import { AccessibilityDemo } from './showcase/accessibility/AccessibilityDemo';
-import { I18NDemo } from './showcase/i18n/I18NDemo';
+import { LocaleDemo } from './showcase/locale/LocaleDemo';
 import { BadgeDemo } from './showcase/badge/BadgeDemo';
 import { RippleDemo } from './showcase/ripple/RippleDemo';
 import { TimelineDemo } from './showcase/timeline/TimelineDemo';
@@ -343,7 +343,7 @@ class AppRouter extends Component {
                 <Route path="/spacing" component={SpacingDemo} />
                 <Route path="/text" component={TextDemo} />
                 <Route path="/accessibility" component={AccessibilityDemo} />
-                <Route path="/i18n" component={I18NDemo} />
+                <Route path="/locale" component={LocaleDemo} />
                 <Route path="/ripple" component={RippleDemo} />
                 <Route path="/timeline" component={TimelineDemo} />
                 <Route path="/avatar" component={AvatarDemo} />

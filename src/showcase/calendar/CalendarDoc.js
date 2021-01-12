@@ -530,8 +530,8 @@ import { Calendar } from 'primereact/calendar';
                             <li>anything else - literal text</li>
                         </ul>
 
-                        <h5>I18N</h5>
-                        <p>Translations for the calendar are defined with the <Link to="/i18n">I18N API</Link>.</p>
+                        <h5>Locale</h5>
+                        <p>Translations for the calendar are defined with the <Link to="/locale">Locale API</Link>.</p>
 
                         <h5>Time</h5>
                         <p>TimePicker is enabled with <i>showTime</i> property and <i>hourFormat</i> is used to select the 24 (default) or 12 hour mode. Optionally enabling <i>timeOnly</i>
@@ -818,7 +818,7 @@ dateTemplate(date) {
                                         <td>locale</td>
                                         <td>string</td>
                                         <td>en</td>
-                                        <td>Used to display the values ​​of the locale object defined in the i18n API</td>
+                                        <td>Used to display the values ​​of the locale object defined in the Locale API</td>
                                     </tr>
                                     <tr>
                                         <td>stepHour</td>

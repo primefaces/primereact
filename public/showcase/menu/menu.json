@@ -14,12 +14,13 @@
                     ]
                 },
                 {
-                    "name": "I18N",
-                    "to": "/i18n",
+                    "name": "Locale",
+                    "to": "/locale",
                     "meta": [
                         "i18N",
                         "locale",
-                        "translate"
+                        "translate",
+                        "internationalization"
                     ],
                     "badge": "new"
                 },

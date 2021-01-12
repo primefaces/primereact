@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
 
-export class I18NDemo extends Component {
+export class LocaleDemo extends Component {
     render() {
         return (
             <div>
                 <div className="content-section documentation">
-                    <h1>I18N</h1>
-                    <p>The i18n API allows setting translations globally for the components.</p>
+                    <h1>Internationalization and Localization</h1>
+                    <p>The Locale API allows setting i18n and l7n options globally for the components.</p>
 
                     <h5>Getting Started</h5>
                     <p>By using the <i>locale</i>, <i>addLocale</i>, <i>updateLocaleOption</i>, <i>updateLocaleOptions</i>, <i>localeOption</i> and <i>localeOptions</i> methods, locale objects can be used in the whole application or in certain pages.</p>
