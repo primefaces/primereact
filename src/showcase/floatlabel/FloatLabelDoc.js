@@ -79,7 +79,7 @@ export class FloatLabelDemo extends Component {
                         </div>
                         <div className="p-field p-col-12 p-md-4">
                             <span className="p-float-label">
-                                <AutoComplete value={this.state.value2} suggestions={this.state.filteredCountries} completeMethod={this.searchCountry} field="name" />
+                                <AutoComplete value={this.state.value2} suggestions={this.state.filteredCountries} completeMethod={this.searchCountry} field="name" onChange={(e) => this.setState({ value2: e.value })} />
                                 <label htmlFor="autocomplete">AutoComplete</label>
                             </span>
                         </div>
@@ -207,7 +207,7 @@ const FloatLabelDemo = () => {
                     </div>
                     <div className="p-field p-col-12 p-md-4">
                         <span className="p-float-label">
-                            <AutoComplete value={value2} suggestions={filteredCountries} completeMethod={searchCountry} field="name" />
+                            <AutoComplete value={value2} suggestions={filteredCountries} completeMethod={searchCountry} field="name" onChange={(e) => setValue2(e.value)} />
                             <label htmlFor="autocomplete">AutoComplete</label>
                         </span>
                     </div>
@@ -334,7 +334,7 @@ const FloatLabelDemo = () => {
                     </div>
                     <div className="p-field p-col-12 p-md-4">
                         <span className="p-float-label">
-                            <AutoComplete value={value2} suggestions={filteredCountries} completeMethod={searchCountry} field="name" />
+                            <AutoComplete value={value2} suggestions={filteredCountries} completeMethod={searchCountry} field="name" onChange={(e) => setValue2(e.value)} />
                             <label htmlFor="autocomplete">AutoComplete</label>
                         </span>
                     </div>
