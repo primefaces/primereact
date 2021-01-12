@@ -219,7 +219,7 @@ export class Chips extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        let isValueSame = this.props.value && prevProps.value.length === this.props.value.length;
+        let isValueSame = this.props.value && prevProps.value && prevProps.value.length === this.props.value.length;
         if (this.props.tooltip) {
             if (prevProps.tooltip !== this.props.tooltip) {
                 if (this.tooltip)
