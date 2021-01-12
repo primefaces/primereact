@@ -1395,7 +1395,8 @@
                     "to": "/ripple",
                     "meta": [
                         "ripple"
-                    ]
+                    ],
+                    "badge": "updated"
                 },
                 {
                     "name": "Captcha",
