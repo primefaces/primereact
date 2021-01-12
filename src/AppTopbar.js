@@ -63,6 +63,8 @@ export class AppTopbar extends Component {
             'fluent-light': 'fluent-light.png',
             'soho-light': 'soho-light.png',
             'soho-dark': 'soho-dark.png',
+            'viva-light': 'viva-light.svg',
+            'viva-dark': 'viva-dark.svg',
             'mira': 'mira.jpg',
             'nano': 'nano.jpg'
         };
@@ -206,6 +208,8 @@ export class AppTopbar extends Component {
                                 <li role="none" className="topbar-submenu-header">PREMIUM</li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'soho-light')} role="menuitem"><img src="showcase/images/themes/soho-light.png" alt="Soho Light" /><span>Soho Light</span></button></li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'soho-dark', true)} role="menuitem"><img src="showcase/images/themes/soho-dark.png" alt="Soho Dark" /><span>Soho Dark</span></button></li>
+                                <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'viva-light')} role="menuitem"><img src="showcase/images/themes/viva-light.sbg" alt="Viva Light" /><span>Viva Light</span></button></li>
+                                <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'viva-dark', true)} role="menuitem"><img src="showcase/images/themes/viva-dark.svg" alt="Viva Dark" /><span>Viva Dark</span></button></li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'mira')} role="menuitem"><img src="showcase/images/themes/mira.jpg" alt="Mira" /><span>Mira</span></button></li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'nano')} role="menuitem"><img src="showcase/images/themes/nano.jpg" alt="Nano" /><span>Nano</span></button></li>
 

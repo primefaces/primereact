@@ -318,6 +318,18 @@ export class AppConfig extends Component {
                                 </div>
                                 <div className="p-col-3">
                                     <button className="p-link">
+                                        <img src="showcase/images/themes/viva-light.svg" alt="Viva Light" onClick={(e) => this.onThemeChange(e, 'viva-light')}/>
+                                    </button>
+                                    <span>Viva Light</span>
+                                </div>
+                                <div className="p-col-3">
+                                    <button className="p-link">
+                                        <img src="showcase/images/themes/viva-dark.svg" alt="Viva Dark" onClick={(e) => this.onThemeChange(e, 'viva-dark', true)}/>
+                                    </button>
+                                    <span>Viva Dark</span>
+                                </div>
+                                <div className="p-col-3">
+                                    <button className="p-link">
                                         <img src="showcase/images/themes/mira.jpg" alt="Mira" onClick={(e) => this.onThemeChange(e, 'mira')}/>
                                     </button>
                                     <span>Mira</span>
