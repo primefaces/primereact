@@ -223,15 +223,17 @@ export class AppMenu extends Component {
         const menuItems = this.renderCategoryItems();
         const showClearIcon = this.showSearchClearIcon();
         const sidebarClassName = classNames('layout-sidebar', {'active': this.props.active});
-        const filterClassName = classNames('layout-sidebar-filter p-input-icon-left p-fluid p-my-2', {'p-input-icon-right': showClearIcon});
+        const filterContentClassName = classNames('layout-sidebar-filter-content p-input-icon-left p-fluid', {'p-input-icon-right': showClearIcon});
 
         return (
             <div className={sidebarClassName} role="navigation">
-                <span className={filterClassName}>
-                    <i className="pi pi-search" />
-                    <InputText ref={(el) => this.searchInput = ReactDOM.findDOMNode(el)} type="text" onChange={this.onSearchInputChange} placeholder="Search by name, badge..." aria-label="Search input" autoComplete="off" />
-                    {showClearIcon && <i className="clear-icon pi pi-times" onClick={this.resetFilter} />}
-                </span>
+                <div className="layout-sidebar-filter">
+                    <div className={filterContentClassName}>
+                        <i className="pi pi-search" />
+                        <InputText ref={(el) => this.searchInput = ReactDOM.findDOMNode(el)} type="text" onChange={this.onSearchInputChange} placeholder="Search by name, badge..." aria-label="Search input" autoComplete="off" />
+                        {showClearIcon && <i className="clear-icon pi pi-times" onClick={this.resetFilter} />}
+                    </div>
+                </div>
 
                 <div className="layout-menu" role="menubar">
                     { menuItems }

@@ -137,7 +137,8 @@
                     "name": "Elevation",
                     "to": "/elevation",
                     "meta": [
-                        "elevation"
+                        "elevation",
+                        "shadow"
                     ]
                 },
                 {
