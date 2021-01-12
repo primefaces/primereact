@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class DataTableDoc extends Component {
 
@@ -3211,9 +3211,9 @@ const bodyTemplate = (data, props) => {
             </div>
 
             </TabPanel>
-            <TabPanel header="Source">
-                <LiveEditor name="DataTableDemo" sources={this.sources} service="CustomerService" data="customers-large" extFiles={this.extFiles} />
-            </TabPanel>
+            {
+                useLiveEditorTabs({ name: 'DataTableDemo', sources: this.sources, service: 'CustomerService', data: 'customers-large', extFiles: this.extFiles })
+            }
         </TabView>
     </div>
         );

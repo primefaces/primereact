@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class PaginatorDoc extends Component {
 
@@ -220,7 +220,7 @@ import { Paginator } from 'primereact/paginator';
 <CodeHighlight>
 {`
 const onPageChange = (e) => {
-    setFirst(e.first); 
+    setFirst(e.first);
     setRows(e.rows);
 }
 `}
@@ -424,9 +424,9 @@ const onPageChange = (e) => {
 
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="PaginatorDemo" sources={this.sources} extFiles={this.extFiles} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'PaginatorDemo', sources: this.sources, extFiles: this.extFiles })
+                    }
                 </TabView>
             </div>
         );

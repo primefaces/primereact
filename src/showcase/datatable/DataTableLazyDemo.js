@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { DataTable } from '../../components/datatable/DataTable';
 import { Column } from '../../components/column/Column';
 import { CustomerService } from '../service/CustomerService';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class DataTableLazyDemo extends Component {
@@ -287,9 +287,9 @@ const DataTableLazyDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="DataTableLazyDemo" sources={this.sources} service="CustomerService" data="customers-large" />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'DataTableLazyDemo', sources: this.sources, service: 'CustomerService', data: 'customers-large' })
+                    }
                 </TabView>
             </div>
         )

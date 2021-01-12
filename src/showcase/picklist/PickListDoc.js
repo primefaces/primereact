@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class PickListDoc extends Component {
 
@@ -265,7 +265,7 @@ import { PickList } from 'primereact/picklist';
 <CodeHighlight>
 {`
 const onChange = (e) => {
-    setSource(e.source); 
+    setSource(e.source);
     setTarget(e.target);
 }
 `}
@@ -507,9 +507,9 @@ const onChange = (e) => {
 
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="PickListDemo" sources={this.sources} service="ProductService" data="products-small" extFiles={this.extFiles} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'PickListDemo', sources: this.sources, service: 'ProductService', data: 'products-small', extFiles: this.extFiles })
+                    }
                 </TabView>
             </div>
         );

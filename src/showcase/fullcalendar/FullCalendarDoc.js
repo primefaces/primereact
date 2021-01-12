@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class FullCalendarDoc extends Component {
 
@@ -308,9 +308,9 @@ fc.current.calendar.nextYear();
 
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="FullCalendarDemo" sources={this.sources} service="EventService" data="events" dependencies={this.dependencies} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'FullCalendarDemo', sources: this.sources, service: 'EventService', data: 'events', dependencies: this.dependencies })
+                    }
                 </TabView>
             </div>
         );

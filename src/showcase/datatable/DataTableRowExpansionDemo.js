@@ -5,8 +5,8 @@ import ProductService from '../service/ProductService';
 import { Rating } from '../../components/rating/Rating';
 import { Button } from '../../components/button/Button';
 import { Toast } from '../../components/toast/Toast';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './DataTableDemo.scss';
 
@@ -588,9 +588,9 @@ const DataTableRowExpansionDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="DataTableRowExpansionDemo" sources={this.sources} service="ProductService" data="products-orders-small" extFiles={this.extFiles} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'DataTableRowExpansionDemo', sources: this.sources, service: 'ProductService', data: 'products-orders-small', extFiles: this.extFiles })
+                    }
                 </TabView>
             </div>
         )

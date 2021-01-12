@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class BadgeDoc extends Component {
 
@@ -85,7 +85,7 @@ export const BadgeDemo = () => {
             </div>
         </div>
     );
-}        
+}
 `
             },
             'ts': {
@@ -124,12 +124,12 @@ export const BadgeDemo = () => {
             </div>
         );
     }
-}                
+}
 `
             }
         };
     }
-    
+
     shouldComponentUpdate() {
         return false;
     }
@@ -290,9 +290,9 @@ import { Badge } from 'primereact/badge';
 				<p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                    <LiveEditor name="BadgeDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'BadgeDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         );

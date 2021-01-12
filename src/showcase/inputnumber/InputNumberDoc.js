@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
 
 export class InputNumberDoc extends Component {
@@ -928,9 +928,9 @@ Vertical
             <p>None.</p>
         </TabPanel>
 
-        <TabPanel header="Source">
-            <LiveEditor name="InputNumberDemo" sources={this.sources} />
-        </TabPanel>
+        {
+            useLiveEditorTabs({ name: 'InputNumberDemo', sources: this.sources })
+        }
     </TabView>
 </div>
         );

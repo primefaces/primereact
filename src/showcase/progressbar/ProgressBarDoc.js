@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class ProgressBarDoc extends Component {
 
@@ -354,9 +354,9 @@ import { ProgressBar } from 'primereact/progressbar';
                         </div>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="ProgressBarDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'ProgressBarDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         );

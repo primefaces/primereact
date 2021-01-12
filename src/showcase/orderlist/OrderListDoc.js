@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class OrderListDoc extends Component {
 
@@ -381,9 +381,9 @@ import { OrderList } from 'primereact/orderlist';
 
             </TabPanel>
 
-            <TabPanel header="Source">
-                <LiveEditor name="OrderListDemo" sources={this.sources} service="ProductService" data="products-small" extFiles={this.extFiles} />
-            </TabPanel>
+            {
+                useLiveEditorTabs({ name: 'OrderListDemo', sources: this.sources, service: 'ProductService', data: 'products-small', extFiles: this.extFiles })
+            }
         </TabView>
     </div>
         );

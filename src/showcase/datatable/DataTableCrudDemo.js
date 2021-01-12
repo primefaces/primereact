@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { DataTable } from '../../components/datatable/DataTable';
 import { Column } from '../../components/column/Column';
 import ProductService from '../service/ProductService';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
+import { TabView } from '../../components/tabview/TabView';
 import { Toast } from '../../components/toast/Toast';
 import { Button } from '../../components/button/Button';
 import { FileUpload } from '../../components/fileupload/FileUpload';
@@ -14,7 +14,7 @@ import { RadioButton } from '../../components/radiobutton/RadioButton';
 import { InputNumber } from '../../components/inputnumber/InputNumber';
 import { Dialog } from '../../components/dialog/Dialog';
 import { InputText } from '../../components/inputtext/InputText';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './DataTableDemo.scss';
 
@@ -1491,9 +1491,9 @@ const DataTableCrudDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="DataTableCrudDemo" sources={this.sources} service="ProductService" data="products" extFiles={this.extFiles} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'DataTableCrudDemo', sources: this.sources, service: 'ProductService', data: 'products', extFiles: this.extFiles })
+                    }
                 </TabView>
             </div>
         )

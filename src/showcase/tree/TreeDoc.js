@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class TreeDoc extends Component {
 
@@ -472,7 +472,7 @@ export const TreeLazyDemo = () => {
         nodeService = new NodeService();
         setTimeout(() => {
             nodeService.getTreeNodes().then(data => {
-                setNodes(data); 
+                setNodes(data);
                 setLoading(false);
             });
         }, 2000);
@@ -966,9 +966,9 @@ export const TreeContextMenuDemo = () => {
 
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="TreeDemo" sources={this.sources} service="NodeService" data="treenodes" />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'TreeDemo', sources: this.sources, service: 'NodeService', data: 'treenodes' })
+                    }
                 </TabView>
             </div>
         );

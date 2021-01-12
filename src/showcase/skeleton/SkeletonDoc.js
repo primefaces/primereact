@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class SkeletonDoc extends Component {
-    
+
     constructor(props){
         super(props)
 
@@ -284,7 +284,7 @@ export const SkeletonDemo = () => {
                 </DataTable>
             </div>
 
-        </div> 
+        </div>
     );
 }
 `
@@ -421,7 +421,7 @@ export const SkeletonDemo = () => {
                     <Column field="quantity" header="Quantity" body={bodyTemplate}></Column>
                 </DataTable>
             </div>
-            
+
         </div>
     );
 }
@@ -429,7 +429,7 @@ export const SkeletonDemo = () => {
             }
         };
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -560,11 +560,11 @@ import { Skeleton } from 'primereact/skeleton';
 				<h5>Dependencies</h5>
 				<p>None.</p>
                     </TabPanel>
-                    <TabPanel header="Source">
-                        <LiveEditor name="SkeletonDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'SkeletonDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         );
-    }   
+    }
 }

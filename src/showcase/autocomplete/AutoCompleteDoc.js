@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class AutoCompleteDoc extends Component {
 
@@ -228,39 +228,22 @@ import { AutoComplete } from 'primereact/autocomplete';
 
 <CodeHighlight>
 {`
-<AutoComplete value={selectedCountry} suggestions={filteredCountries}
-            completeMethod={searchCountry} field="name" onChange={(e) => setSelectedCountry(e.value)} />
+<AutoComplete value={selectedCountry} suggestions={filteredCountries} completeMethod={searchCountry} field="name" onChange={(e) => setSelectedCountry(e.value)} />
 `}
 </CodeHighlight>
 
 <CodeHighlight lang="js">
 {`
-const [selectedCountry, setSelectedCountry] = useState(null);
-const [filteredCountries, setFilteredCountries] = useState(null);
-
-const countries: ['Country-1', 'Country-2', 'Country-3', 'Country-4', 'Country-5'];
-const countryservice = new CountryService();
+const countries = // datasource
 
 const searchCountry = (event) => {
-    setTimeout(() => {
-        let filteredCountries;
-        if (!event.query.trim().length) {
-            filteredCountries = [...countries];
-        }
-        else {
-            filteredCountries = countries.filter((country) => {
-                return country.name.toLowerCase().startsWith(event.query.toLowerCase());
-            });
-        }
-
-        setFilteredCountries(filteredCountries)
-    }, 250);
+    let filteredCountries = //suggestions
+    setFilteredCountries(filteredCountries);
 }
 
 render() {
     return (
-        <AutoComplete value={selectedCountry} suggestions={filteredCountries}
-            completeMethod={searchCountry} onChange={(e) => setSelectedCountry(e.value)} />
+        <AutoComplete value={selectedCountry} suggestions={filteredCountries} completeMethod={searchCountry} onChange={(e) => setSelectedCountry(e.value)} />
     );
 }
 `}
@@ -274,8 +257,7 @@ render() {
 
 <CodeHighlight>
 {`
-<AutoComplete dropdown value={selectedCountry} suggestions={filteredCountries}
-    completeMethod={searchCountry} onChange={(e) => setSelectedCountry(e.value)} />
+<AutoComplete dropdown value={selectedCountry} suggestions={filteredCountries} completeMethod={searchCountry} onChange={(e) => setSelectedCountry(e.value)} />
 `}
 </CodeHighlight>
 
@@ -283,8 +265,7 @@ render() {
                         <p>Multiple mode is enabled using <i>multiple</i> property used to select more than one value from the autocomplete. In this case, value reference should be an array.</p>
 <CodeHighlight>
 {`
-<AutoComplete multiple value={selectedCountry} suggestions={filteredCountries}
-    completeMethod={searchCountry} onChange={(e) => setSelectedCountry(e.value)} />
+<AutoComplete multiple value={selectedCountry} suggestions={filteredCountries} completeMethod={searchCountry} onChange={(e) => setSelectedCountry(e.value)} />
 `}
 </CodeHighlight>
 
@@ -295,8 +276,7 @@ render() {
 
 <CodeHighlight>
 {`
-<AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries}
-    completeMethod={searchCountry} onChange={(e) => setSelectedCountry(e.value)} />
+<AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={searchCountry} onChange={(e) => setSelectedCountry(e.value)} />
 `}
 </CodeHighlight>
 
@@ -307,9 +287,7 @@ render() {
 
 <CodeHighlight>
 {`
-<AutoComplete value={selectedCountry} suggestions={filteredCountries}
-    completeMethod={searchCountry} onChange={(e) => setSelectedCountry(e.value)}
-    itemTemplate={itemTemplate} />
+<AutoComplete value={selectedCountry} suggestions={filteredCountries} completeMethod={searchCountry} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} />
 `}
 </CodeHighlight>
 
@@ -670,9 +648,9 @@ itemTemplate(item) {
                         <p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="AutoCompleteDemo" sources={this.sources} service="CountryService" data="countries" />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'AutoCompleteDemo', sources: this.sources, service: 'CountryService', data: 'countries' })
+                    }
                 </TabView>
             </div>
         )

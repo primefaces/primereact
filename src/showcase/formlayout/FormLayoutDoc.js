@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class FormLayoutDoc extends Component {
 
@@ -890,9 +890,9 @@ import 'primeflex/primeflex.css';
                         </div>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="FormLayoutDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'FormLayoutDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         )

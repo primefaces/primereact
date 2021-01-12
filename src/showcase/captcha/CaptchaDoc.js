@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class CaptchaDoc extends Component {
 
@@ -250,9 +250,9 @@ const showResponse = (response) => {
                         <p>Google Recaptcha V2</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="CaptchaDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'CaptchaDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         )

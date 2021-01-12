@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class FloatLabelDoc extends Component {
 
@@ -409,9 +409,9 @@ const FloatLabelDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="FloatLabelDemo" sources={this.sources} service="CountryService" data="countries" />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'FloatLabelDemo', sources: this.sources, service: 'CountryService', data: 'countries' })
+                    }
                 </TabView>
             </div>
         );

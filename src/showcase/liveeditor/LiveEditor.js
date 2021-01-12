@@ -4,7 +4,41 @@ import PropTypes from 'prop-types';
 import { services, data } from './LiveEditorData';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
 import { SplitButton } from '../../components/splitbutton/SplitButton';
+import { TabPanel } from '../../components/tabview/TabView';
 
+export function useLiveEditorTabs(props) {
+    let tabs = [(
+        <TabPanel key="source" header="Source">
+            <LiveEditor {...props} />
+        </TabPanel>
+    )];
+
+    if (props.service) {
+        tabs.push(
+            <TabPanel key="service" header={`${props.service}.js`}>
+                <CodeHighlight lang="js">
+                    {services[props.service]}
+                </CodeHighlight>
+                <span className="liveEditorHelperText">*Dependency: axios</span>
+            </TabPanel>
+        )
+    }
+
+    if (props.data) {
+        const dataArr = props.data.split(',');
+        dataArr.forEach((el, i) => {
+            tabs.push(
+                <TabPanel key={`${el}_i`} header={`${el}.json`}>
+                    <CodeHighlight lang="js" style={{maxHeight: '500px'}}>
+                        {data[el]}
+                    </CodeHighlight>
+                </TabPanel>
+            )
+        });
+    }
+
+    return tabs;
+}
 export class LiveEditor extends Component {
 
     static defaultProps = {
@@ -432,7 +466,7 @@ ReactDOM.render(<${name} />, rootElement);`
         return (
             <div className="p-d-flex p-jc-end" style={{marginTop: '-1rem'}}>
                 <div className="p-d-flex p-flex-column p-ai-end">
-                    <span className="liveEditorSplitButtonHelperText">*Hooks, TS and Class sources can be accessed using</span>
+                    <span className="liveEditorHelperText">*Hooks, TS and Class sources can be accessed using</span>
                     <SplitButton model={this.items} buttonTemplate={buttonContent} onClick={() => this.postSandboxParameters(this.props.defaultSourceType)} appendTo={document.body} className="liveEditorSplitButton" menuClassName="liveEditorPanel"></SplitButton>
                 </div>
             </div>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class TreeTableDoc extends Component {
 
@@ -1044,7 +1044,7 @@ export const TreeTableColGroupDemo = () => {
 
     const [nodes, setNodes] = useState([]);
 
-    useEffect(() => { 
+    useEffect(() => {
         setNodes(getSales())
     }, [])
 
@@ -1302,7 +1302,7 @@ export const TreeTablePageDemo = () => {
             <Column field="type" header="Type"></Column>
         </TreeTable>
     )
-    
+
 }
 `}
 </CodeHighlight>
@@ -1421,7 +1421,7 @@ export const TreeTableFilterDemo = () => {
 
     const [nodes, setNodes] = useState{[]};
     const [glogalFilter, setGlobalFilter] = useState(null);
-    
+
     useEffect( () => {
         nodeservice = new NodeService();
         nodeservice.getTreeTableNodes().then(data => setNodes(data));
@@ -1544,7 +1544,7 @@ export const TreeTableSelectionDemo = () => {
         nodeservice.getTreeTableNodes().then(data => setNodes4(data));
         nodeservice.getTreeTableNodes().then(data => setNodes5(data));
     }, [])
-    
+
 
     const onSelect = (event) => {
         toast.current.show({severity: 'info', summary: 'Node Selected', detail: event.node.data.name});
@@ -2508,9 +2508,9 @@ export const TreeTableResponsiveDemo = () => {
 
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="TreeTableDemo" sources={this.sources} service="NodeService" data="treetablenodes" />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'TreeTableDemo', sources: this.sources, service: 'NodeService', data: 'treetablenodes' })
+                    }
                 </TabView>
             </div>
         );

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 
 export class InvalidDoc extends Component {
 
@@ -319,9 +319,9 @@ const InvalidDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="InvalidDemo" sources={this.sources} service="CountryService" data="countries" />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'InvalidDemo', sources: this.sources, service: 'CountryService', data: 'countries' })
+                    }
                 </TabView>
             </div>
         );

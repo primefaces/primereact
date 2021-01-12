@@ -2,7 +2,7 @@ import React, { Component}  from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class OverlayPanelDoc extends Component {
 
@@ -421,9 +421,9 @@ import { OverlayPanel } from 'primereact/overlaypanel';
 
             </TabPanel>
 
-            <TabPanel header="Source">
-                <LiveEditor name="OverlayPanelDemo" sources={this.sources} service="ProductService" data="products-small" extFiles={this.extFiles} />
-            </TabPanel>
+            {
+                useLiveEditorTabs({ name: 'OverlayPanelDemo', sources: this.sources, service: 'ProductService', data: 'products-small', extFiles: this.extFiles })
+            }
         </TabView>
     </div>
         );
