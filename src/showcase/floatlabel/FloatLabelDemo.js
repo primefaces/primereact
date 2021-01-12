@@ -39,6 +39,7 @@ export class FloatLabelDemo extends Component {
         };
 
         this.countryservice = new CountryService();
+        this.searchCountry = this.searchCountry.bind(this);
     }
 
     componentDidMount() {
@@ -75,7 +76,7 @@ export class FloatLabelDemo extends Component {
                             </div>
                             <div className="p-field p-col-12 p-md-4">
                                 <span className="p-float-label">
-                                    <AutoComplete value={this.state.value2} suggestions={this.state.filteredCountries} onComplete={this.searchCountry} field="name" />
+                                    <AutoComplete value={this.state.value2} suggestions={this.state.filteredCountries} completeMethod={this.searchCountry} field="name" />
                                     <label htmlFor="autocomplete">AutoComplete</label>
                                 </span>
                             </div>

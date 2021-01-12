@@ -166,6 +166,7 @@ import { ScrollTopDemo } from './showcase/scrolltop/ScrollTopDemo';
 import { ChipDemo } from './showcase/chip/ChipDemo';
 import { ConfirmDialogDemo } from './showcase/confirmdialog/ConfirmDialogDemo';
 import { ConfirmPopupDemo } from './showcase/confirmpopup/ConfirmPopupDemo';
+import { InvalidDemo } from './showcase/invalid/InvalidDemo';
 
 class AppRouter extends Component {
 
@@ -357,6 +358,7 @@ class AppRouter extends Component {
                 <Route path="/chip" component={ChipDemo} />
                 <Route path="/confirmdialog" component={ConfirmDialogDemo} />
                 <Route path="/confirmpopup" component={ConfirmPopupDemo} />
+                <Route path="/invalid" component={InvalidDemo} />
             </>
         );
     }
