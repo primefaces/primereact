@@ -361,20 +361,20 @@ const myUploader = (event) => {
                         <tr>
                             <td>chooseLabel</td>
                             <td>string</td>
-                            <td>Choose</td>
-                            <td>Label of the choose button.</td>
+                            <td>null</td>
+                            <td>Label of the choose button. Defaults to global value in i18n configuration.</td>
                         </tr>
                         <tr>
                             <td>uploadLabel</td>
                             <td>string</td>
-                            <td>Upload</td>
-                            <td>Label of the upload button.</td>
+                            <td>null</td>
+                            <td>Label of the upload button. Defaults to global value in i18n configuration.</td>
                         </tr>
                         <tr>
                             <td>cancelLabel</td>
                             <td>string</td>
-                            <td>Cancel</td>
-                            <td>Label of the cancel button.</td>
+                            <td>null</td>
+                            <td>Label of the cancel button. Defaults to global value in i18n configuration.</td>
                         </tr>
                         <tr>
                             <td>customUpload</td>

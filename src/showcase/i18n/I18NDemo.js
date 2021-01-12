@@ -51,7 +51,7 @@ locale('es');
 
                     <h5>Locale Methods</h5>
                     <div className="doc-tablewrapper">
-                        <table class="doc-table">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -103,7 +103,7 @@ locale('es');
 
                     <h5>Locale Options</h5>
                     <div className="doc-tablewrapper">
-                        <table class="doc-table">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Key</th>

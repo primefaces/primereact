@@ -15,6 +15,7 @@ export class CalendarDoc extends Component {
                 content: `
 import React, { Component } from 'react';
 import { Calendar } from 'primereact/calendar';
+import { addLocale } from 'primereact/api';
 import 'primeflex/primeflex.css';
 
 export class CalendarDemo extends Component {
@@ -60,6 +61,17 @@ export class CalendarDemo extends Component {
         this.invalidDates = [today];
 
         this.dateTemplate = this.dateTemplate.bind(this);
+
+        addLocale('es', {
+            firstDayOfWeek: 1,
+            dayNames: ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'],
+            dayNamesShort: ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'],
+            dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
+            monthNames: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'],
+            monthNamesShort: ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'],
+            today: 'Hoy',
+            clear: 'Claro'
+        });
     }
 
     dateTemplate(date) {
@@ -73,17 +85,6 @@ export class CalendarDemo extends Component {
     }
 
     render() {
-        const es = {
-            firstDayOfWeek: 1,
-            dayNames: ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"],
-            dayNamesShort: ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"],
-            dayNamesMin: ["D", "L", "M", "X", "J", "V", "S"],
-            monthNames: ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"],
-            monthNamesShort: ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"],
-            today: "Hoy",
-            clear: "Claro"
-        };
-
         return (
             <div>
                 <div className="card">
@@ -99,7 +100,7 @@ export class CalendarDemo extends Component {
                         </div>
                         <div className="p-field p-col-12 p-md-4">
                             <label htmlFor="spanish">Spanish</label>
-                            <Calendar id="spanish" value={this.state.date3} onChange={(e) => this.setState({ date3: e.value })} locale={es} dateFormat="dd/mm/yy" />
+                            <Calendar id="spanish" value={this.state.date3} onChange={(e) => this.setState({ date3: e.value })} locale="es" dateFormat="dd/mm/yy" />
                         </div>
                         <div className="p-field p-col-12 p-md-4">
                             <label htmlFor="minmax">MinMax</label>
@@ -165,6 +166,7 @@ export class CalendarDemo extends Component {
                 content: `
 import React, { useState } from 'react';
 import { Calendar } from 'primereact/calendar';
+import { addLocale } from 'primereact/api';
 import 'primeflex/primeflex.css';
 
 const CalendarDemo = () => {
@@ -204,6 +206,17 @@ const CalendarDemo = () => {
 
     let invalidDates = [today];
 
+    addLocale('es', {
+        firstDayOfWeek: 1,
+        dayNames: ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'],
+        dayNamesShort: ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'],
+        dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
+        monthNames: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'],
+        monthNamesShort: ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'],
+        today: 'Hoy',
+        clear: 'Claro'
+    });
+
     const dateTemplate = (date: any) => {
         if (date.day > 10 && date.day < 15) {
             return (
@@ -213,17 +226,6 @@ const CalendarDemo = () => {
 
         return date.day;
     }
-
-    const es = {
-        firstDayOfWeek: 1,
-        dayNames: ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"],
-        dayNamesShort: ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"],
-        dayNamesMin: ["D", "L", "M", "X", "J", "V", "S"],
-        monthNames: ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"],
-        monthNamesShort: ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"],
-        today: "Hoy",
-        clear: "Claro"
-    };
 
     return (
         <div>
@@ -240,7 +242,7 @@ const CalendarDemo = () => {
                     </div>
                     <div className="p-field p-col-12 p-md-4">
                         <label htmlFor="spanish">Spanish</label>
-                        <Calendar id="spanish" value={date3} onChange={(e) => setDate3(e.value)} locale={es} dateFormat="dd/mm/yy" />
+                        <Calendar id="spanish" value={date3} onChange={(e) => setDate3(e.value)} locale="es" dateFormat="dd/mm/yy" />
                     </div>
                     <div className="p-field p-col-12 p-md-4">
                         <label htmlFor="minmax">MinMax</label>
@@ -305,6 +307,7 @@ const CalendarDemo = () => {
                 content: `
 import React, { useState } from 'react';
 import { Calendar } from 'primereact/calendar';
+import { addLocale } from 'primereact/api';
 import 'primeflex/primeflex.css';
 
 const CalendarDemo = () => {
@@ -344,6 +347,17 @@ const CalendarDemo = () => {
 
     let invalidDates = [today];
 
+    addLocale('es', {
+        firstDayOfWeek: 1,
+        dayNames: ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'],
+        dayNamesShort: ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'],
+        dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
+        monthNames: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'],
+        monthNamesShort: ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'],
+        today: 'Hoy',
+        clear: 'Claro'
+    });
+
     const dateTemplate = (date: any) => {
         if (date.day > 10 && date.day < 15) {
             return (
@@ -353,17 +367,6 @@ const CalendarDemo = () => {
 
         return date.day;
     }
-
-    const es = {
-        firstDayOfWeek: 1,
-        dayNames: ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"],
-        dayNamesShort: ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"],
-        dayNamesMin: ["D", "L", "M", "X", "J", "V", "S"],
-        monthNames: ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"],
-        monthNamesShort: ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"],
-        today: "Hoy",
-        clear: "Claro"
-    };
 
     return (
         <div>
@@ -380,7 +383,7 @@ const CalendarDemo = () => {
                     </div>
                     <div className="p-field p-col-12 p-md-4">
                         <label htmlFor="spanish">Spanish</label>
-                        <Calendar id="spanish" value={date3} onChange={(e) => setDate3(e.value)} locale={es} dateFormat="dd/mm/yy" />
+                        <Calendar id="spanish" value={date3} onChange={(e) => setDate3(e.value)} locale="es" dateFormat="dd/mm/yy" />
                     </div>
                     <div className="p-field p-col-12 p-md-4">
                         <label htmlFor="minmax">MinMax</label>
@@ -527,6 +530,9 @@ import { Calendar } from 'primereact/calendar';
                             <li>anything else - literal text</li>
                         </ul>
 
+                        <h5>I18N</h5>
+                        <p>Translations for the calendar are defined with the <Link to="/i18n">I18N API</Link>.</p>
+
                         <h5>Time</h5>
                         <p>TimePicker is enabled with <i>showTime</i> property and <i>hourFormat</i> is used to select the 24 (default) or 12 hour mode. Optionally enabling <i>timeOnly</i>
                 displays a calendare with time controls only.</p>
@@ -571,32 +577,6 @@ import { Calendar } from 'primereact/calendar';
 <CodeHighlight>
 {`
 <Calendar value={date} onChange={(e) => setDate(e.value)} numberOfMonths={3}></Calendar>
-`}
-</CodeHighlight>
-
-                        <h5>Localization</h5>
-                        <p>Localization for different languages and formats is defined by binding the locale settings object to the <i>locale</i> property. Following is a Spanish calendar.</p>
-
-<CodeHighlight>
-{`
-<Calendar locale={es} dateFormat="dd/mm/yy" value={date} onChange={(e) => setDate(e.value)}></Calendar>
-`}
-</CodeHighlight>
-
-<CodeHighlight lang="js">
-{`
-let es = {
-    firstDayOfWeek: 1,
-    dayNames: ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"],
-    dayNamesShort: ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"],
-    dayNamesMin: ["D", "L", "M", "X", "J", "V", "S"],
-    monthNames: ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"],
-    monthNamesShort: ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"],
-    today: 'Hoy',
-    clear: 'Limpiar',
-    dateFormat: 'dd/mm/yy',
-    weekHeader: 'Sm'
-};
 `}
 </CodeHighlight>
 
@@ -833,6 +813,12 @@ dateTemplate(date) {
                                         <td>string</td>
                                         <td>24</td>
                                         <td>Specifies 12 or 24 hour format.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>locale</td>
+                                        <td>string</td>
+                                        <td>en</td>
+                                        <td>Used to display the values ​​of the locale object defined in the i18n API</td>
                                     </tr>
                                     <tr>
                                         <td>stepHour</td>
