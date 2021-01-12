@@ -1,4 +1,53 @@
 # Changelog
+
+## [6.0.0-rc.1](https://github.com/primefaces/primereact/tree/6.0.0-rc.1) (2021-01-12)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/5.0.2...6.0.0-rc.1)
+
+**Breaking changes:**
+
+- Change the type of locale property on Calendar [\#1750](https://github.com/primefaces/primereact/issues/1750)
+- Change the import of PrimeReact class [\#1751](https://github.com/primefaces/primereact/issues/1751)
+- Rename 'readonly' property with 'readOnly' on all components [\#1738](https://github.com/primefaces/primereact/issues/1738)
+- Remove onSourceSelect and onTargetSelect callbacks from PickList [\#1707](https://github.com/primefaces/primereact/issues/1707)
+- Change the type of tabIndex property on all components [\#1566](https://github.com/primefaces/primereact/issues/1566)
+
+**Implemented New Features and Enhancements:**
+
+- Locale API [\#1749](https://github.com/primefaces/primereact/issues/1749)
+- New Component: CascadeSelect  [\#1736](https://github.com/primefaces/primereact/issues/1736)
+- New Component: Chip [\#1734](https://github.com/primefaces/primereact/issues/1734)
+- New Component: ScrollTop [\#1733](https://github.com/primefaces/primereact/issues/1733)
+- New Component: ConfirmPopup [\#1731](https://github.com/primefaces/primereact/issues/1731)
+- New Component: ConfirmDialog [\#1730](https://github.com/primefaces/primereact/issues/1730)
+- New Component: Splitter  [\#1729](https://github.com/primefaces/primereact/issues/1729)
+- New Component: Knob  [\#1727](https://github.com/primefaces/primereact/issues/1727)
+- New Component: Divider [\#1726](https://github.com/primefaces/primereact/issues/1726)
+- New Component: Skeleton [\#1725](https://github.com/primefaces/primereact/issues/1725)
+- New Component: Tag [\#1723](https://github.com/primefaces/primereact/issues/1723)
+- New Component: Badge [\#1719](https://github.com/primefaces/primereact/issues/1719)
+- New Component: Avatar [\#1717](https://github.com/primefaces/primereact/issues/1717)
+- Add icons property to Panel [\#1748](https://github.com/primefaces/primereact/issues/1748)
+- Change the type of header property on Panel [\#1747](https://github.com/primefaces/primereact/issues/1747)
+- Dialog dismissableMask didn't work if hide the close icon [\#1745](https://github.com/primefaces/primereact/issues/1745)
+- Chips and AutoComplete\(multiple mode\) support multiline input mode [\#1740](https://github.com/primefaces/primereact/issues/1740)
+- Improving the initial focus of the Dialog [\#1737](https://github.com/primefaces/primereact/issues/1737)
+- Improve Dialog implementation for ConfirmDialog [\#1732](https://github.com/primefaces/primereact/issues/1732)
+- Add tabIndex property to Checkbox [\#1716](https://github.com/primefaces/primereact/issues/1716)
+- Add sourceSelection and targetSelection properties to PickList [\#1708](https://github.com/primefaces/primereact/issues/1708)
+- Add filterValue and onFilterValueChange properties to ListBox [\#1706](https://github.com/primefaces/primereact/issues/1706)
+- Add onKeyDown event to InputNumber [\#1695](https://github.com/primefaces/primereact/issues/1695)
+- Constants for PrimeIcons [\#1625](https://github.com/primefaces/primereact/issues/1625)
+
+**Fixed bugs:**
+
+- Chips throws a JS exception [\#1754](https://github.com/primefaces/primereact/issues/1754)
+- Typo in tabIndex property name [\#1710](https://github.com/primefaces/primereact/issues/1710)
+- DataTable with empty frozen column throws a JS exception [\#1703](https://github.com/primefaces/primereact/issues/1703)
+- Prop type incorrect for Timeline [\#1700](https://github.com/primefaces/primereact/issues/1700)
+- Datatable with stateStorage property saves filterheader as extra columnwidth [\#1697](https://github.com/primefaces/primereact/issues/1697)
+- DataTable edit not work \(Input disappears immediately after clicking cell\) in react-dom@17.0.1 [\#1685](https://github.com/primefaces/primereact/issues/1685)
+
 ## [5.0.2](https://github.com/primefaces/primereact/tree/5.0.2) (2020-11-30)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/5.0.1...5.0.2)
