@@ -4,7 +4,7 @@
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/5.0.2...6.0.0-rc.1)
 
-**Breaking Changes:**
+**Breaking changes:**
 
 - Change the type of locale property on Calendar [\#1750](https://github.com/primefaces/primereact/issues/1750)
 - Change the import of PrimeReact class [\#1751](https://github.com/primefaces/primereact/issues/1751)
