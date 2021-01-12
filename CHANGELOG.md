@@ -1,8 +1,8 @@
 # Changelog
 
-## [6.0.0-rc.1](https://github.com/primefaces/primereact/tree/6.0.0-rc.1) (2021-01-12)
+## [6.0](https://github.com/primefaces/primereact/tree/6.0) (2021-01-12)
 
-[Full Changelog](https://github.com/primefaces/primereact/compare/5.0.2...6.0.0-rc.1)
+[Full Changelog](https://github.com/primefaces/primereact/compare/5.0.2...6.0)
 
 **Breaking changes:**
 
