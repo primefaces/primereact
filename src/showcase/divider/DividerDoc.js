@@ -163,7 +163,7 @@ export class DividerDemo extends Component {
             </div>
         );
     }
-}             
+}
 `
             },
             'hooks': {
@@ -318,7 +318,7 @@ export const DividerDemo = () => {
 
         </div>
     );
-}   
+}
 `
             },
             'ts': {
@@ -470,15 +470,15 @@ export const DividerDemo = () => {
                     </div>
                 </div>
             </div>
-            
+
         </div>
     );
-}               
+}
 `
             }
         };
     }
-    
+
 
 
     render() {
@@ -497,7 +497,7 @@ import { Divider } from 'primereact/divider';
 <CodeHighlight>
 {`
 <div>Content 1</div>
-   <Divider />
+<Divider />
 <div>Content 2</div>
 `}
 </CodeHighlight>
@@ -506,7 +506,7 @@ import { Divider } from 'primereact/divider';
 <CodeHighlight>
 {`
 <div>Content 1</div>
-   <Divider type="dashed" />
+<Divider type="dashed" />
 <div>Content 2</div>
 `}
 </CodeHighlight>
@@ -526,7 +526,7 @@ import { Divider } from 'primereact/divider';
 `}
 </CodeHighlight>
                 <h5>Content</h5>
-                <p>Any content placed inside is rendered within the boundaries of the divider. In addition, location 
+                <p>Any content placed inside is rendered within the boundaries of the divider. In addition, location
                     of the content is configured with the <i>align</i> property. In horizontal layout, alignment options
                     are "left", "center" and "right" whereas vertical mode supports "top", "center" and "bottom".
                 </p>
@@ -573,7 +573,7 @@ import { Divider } from 'primereact/divider';
                                 <td>align</td>
                                 <td>string</td>
                                 <td>null</td>
-                                <td>Alignment of the content, options are "left", "center", "right" for horizontal layout 
+                                <td>Alignment of the content, options are "left", "center", "right" for horizontal layout
                                     and "top", "center", "bottom" for vertical.</td>
                             </tr>
                             <tr>
