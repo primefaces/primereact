@@ -16,6 +16,7 @@ export class StepsDoc extends Component {
 import React, { Component } from 'react';
 import { Steps } from 'primereact/steps';
 import { Toast } from 'primereact/toast';
+import './StepsDemo.css';
 
 export class StepsDemo extends Component {
 
@@ -55,7 +56,7 @@ export class StepsDemo extends Component {
 
     render() {
         return (
-            <div>
+            <div className="steps-demo">
                 <Toast ref={(el) => { this.toast = el }}></Toast>
 
                 <div className="card">
@@ -77,6 +78,7 @@ export class StepsDemo extends Component {
 import React, { useState, useRef } from 'react';
 import { Steps } from 'primereact/steps';
 import { Toast } from 'primereact/toast';
+import './StepsDemo.css';
 
 const StepsDemo = () => {
     const [activeIndex, setActiveIndex] = useState(1);
@@ -109,7 +111,7 @@ const StepsDemo = () => {
     ];
 
     return (
-        <div>
+        <div className="steps-demo">
             <Toast ref={toast}></Toast>
 
             <div className="card">
@@ -130,6 +132,7 @@ const StepsDemo = () => {
 import React, { useState, useRef } from 'react';
 import { Steps } from 'primereact/steps';
 import { Toast } from 'primereact/toast';
+import './StepsDemo.css';
 
 const StepsDemo = () => {
     const [activeIndex, setActiveIndex] = useState(1);
@@ -162,7 +165,7 @@ const StepsDemo = () => {
     ];
 
     return (
-        <div>
+        <div className="steps-demo">
             <Toast ref={toast}></Toast>
 
             <div className="card">
@@ -174,6 +177,54 @@ const StepsDemo = () => {
             </div>
         </div>
     );
+}
+                `
+            }
+        }
+
+        this.extFiles = {
+            'src/demo/StepsDemo.css': {
+                content: `
+@media screen and (max-width: 640px) {
+    .steps-demo .p-steps {
+        height: 350px;
+    }
+    .steps-demo .p-steps > ul {
+        flex-direction: column;
+        height: 100%;
+    }
+    .steps-demo .p-steps > ul .p-steps-item {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        justify-content: center;
+    }
+    .steps-demo .p-steps > ul .p-steps-item:before {
+        position: static;
+        left: auto;
+        top: auto;
+        margin-top: 0;
+        border-left: 1px solid var(--surface-d);
+        border-top: 0 none;
+        width: auto;
+        height: 100%;
+        margin-left: 1rem;
+    }
+    .steps-demo .p-steps > ul .p-steps-item .p-menuitem-link {
+        flex-direction: row;
+        overflow: visible;
+    }
+    .steps-demo .p-steps > ul .p-steps-item .p-menuitem-link .p-steps-title {
+        margin: 0 .5rem 0;
+    }
+    .steps-demo .p-steps > ul .p-steps-item:last-child {
+        flex-grow: 0;
+    }
+    .steps-demo .p-steps > ul .p-steps-item:last-child .p-menuitem-link {
+        padding: 0;
+    }
+    .steps-demo .p-steps > ul .p-steps-item:last-child:before {
+        display: none;
+    }
 }
                 `
             }
@@ -369,7 +420,7 @@ const interactiveItems = [
                     </TabPanel>
 
                     {
-                        useLiveEditorTabs({ name: 'StepsDemo', sources: this.sources })
+                        useLiveEditorTabs({ name: 'StepsDemo', sources: this.sources, extFiles: this.extFiles })
                     }
                 </TabView>
             </div>
