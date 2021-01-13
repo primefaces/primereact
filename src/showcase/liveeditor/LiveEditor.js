@@ -145,7 +145,7 @@ export class LiveEditor extends Component {
                             'react-transition-group': dependencies['react-transition-group'],
                             'classnames': dependencies['classnames'],
                             'axios': dependencies['axios'],
-                            'primereact': '6.0.0',
+                            'primereact': '^6.0.0', // latest
                             'primeflex': dependencies['primeflex'],
                             'primeicons': dependencies['primeicons']
                         }
