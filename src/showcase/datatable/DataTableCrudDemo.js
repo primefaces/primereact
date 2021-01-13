@@ -328,7 +328,7 @@ export class DataTableCrudDemo extends Component {
                         <div className="p-field">
                             <label htmlFor="name">Name</label>
                             <InputText id="name" value={this.state.product.name} onChange={(e) => this.onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': this.state.submitted && !this.state.product.name })} />
-                            {this.state.submitted && !this.state.product.name && <small className="p-invalid">Name is required.</small>}
+                            {this.state.submitted && !this.state.product.name && <small className="p-error">Name is required.</small>}
                         </div>
                         <div className="p-field">
                             <label htmlFor="description">Description</label>
@@ -719,7 +719,7 @@ export class DataTableCrudDemo extends Component {
                     <div className="p-field">
                         <label htmlFor="name">Name</label>
                         <InputText id="name" value={this.state.product.name} onChange={(e) => this.onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': this.state.submitted && !this.state.product.name })} />
-                        {this.state.submitted && !this.state.product.name && <small className="p-invalid">Name is required.</small>}
+                        {this.state.submitted && !this.state.product.name && <small className="p-error">Name is required.</small>}
                     </div>
                     <div className="p-field">
                         <label htmlFor="description">Description</label>
@@ -1056,7 +1056,7 @@ const DataTableCrudDemo = () => {
                 <div className="p-field">
                     <label htmlFor="name">Name</label>
                     <InputText id="name" value={product.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !product.name })} />
-                    {submitted && !product.name && <small className="p-invalid">Name is required.</small>}
+                    {submitted && !product.name && <small className="p-error">Name is required.</small>}
                 </div>
                 <div className="p-field">
                     <label htmlFor="description">Description</label>
@@ -1392,7 +1392,7 @@ const DataTableCrudDemo = () => {
                 <div className="p-field">
                     <label htmlFor="name">Name</label>
                     <InputText id="name" value={product.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !product.name })} />
-                    {submitted && !product.name && <small className="p-invalid">Name is required.</small>}
+                    {submitted && !product.name && <small className="p-error">Name is required.</small>}
                 </div>
                 <div className="p-field">
                     <label htmlFor="description">Description</label>

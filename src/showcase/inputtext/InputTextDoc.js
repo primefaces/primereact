@@ -66,7 +66,7 @@ export class InputTextDemo extends Component {
                     <div className="p-field">
                         <label htmlFor="username2" className="p-d-block">Username</label>
                         <InputText id="username2" aria-describedby="username2-help" className="p-invalid p-d-block" />
-                        <small id="username2-help" className="p-invalid p-d-block">Username is not available.</small>
+                        <small id="username2-help" className="p-error p-d-block">Username is not available.</small>
                     </div>
 
                     <h5>Disabled</h5>
@@ -134,7 +134,7 @@ const InputTextDemo = () => {
                 <div className="p-field">
                     <label htmlFor="username2" className="p-d-block">Username</label>
                     <InputText id="username2" aria-describedby="username2-help" className="p-invalid p-d-block" />
-                    <small id="username2-help" className="p-invalid p-d-block">Username is not available.</small>
+                    <small id="username2-help" className="p-error p-d-block">Username is not available.</small>
                 </div>
 
                 <h5>Disabled</h5>
@@ -201,7 +201,7 @@ const InputTextDemo = () => {
                 <div className="p-field">
                     <label htmlFor="username2" className="p-d-block">Username</label>
                     <InputText id="username2" aria-describedby="username2-help" className="p-invalid p-d-block" />
-                    <small id="username2-help" className="p-invalid p-d-block">Username is not available.</small>
+                    <small id="username2-help" className="p-error p-d-block">Username is not available.</small>
                 </div>
 
                 <h5>Disabled</h5>
