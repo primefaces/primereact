@@ -36,6 +36,7 @@ export class App extends Component {
             inputStyle: 'outlined',
             ripple: true,
             darkTheme: false,
+            themeCategory: null,
             sidebarActive: false,
             newsActive: this.isNewsStorageExpired(),
             configuratorActive: false,
@@ -60,9 +61,12 @@ export class App extends Component {
     onThemeChange(event) {
         let themeElement = document.getElementById('theme-link');
         themeElement.setAttribute('href', themeElement.getAttribute('href').replace(this.state.theme, event.theme));
+        let theme = event.theme;
+        let themeCategory = /^(md-|mdc-)/i.test(theme) ? 'material' : (/^(bootstrap)/i.test(theme) ? 'bootstrap' : null);
         this.setState({
-            theme: event.theme,
-            darkTheme: event.dark
+            theme,
+            darkTheme: event.dark,
+            themeCategory
         });
 
         event.originalEvent.preventDefault();
@@ -180,7 +184,8 @@ export class App extends Component {
         const wrapperClassName = classNames('layout-wrapper', {
             'layout-news-active': this.state.newsActive,
             'p-input-filled': this.state.inputStyle === 'filled',
-            'p-ripple-disabled': this.state.ripple === false
+            'p-ripple-disabled': this.state.ripple === false,
+            [`theme-${this.state.themeCategory}`]: !!this.state.themeCategory
         });
         const maskClassName = classNames('layout-mask', {
             'layout-mask-active': this.state.sidebarActive
