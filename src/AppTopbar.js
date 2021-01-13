@@ -169,6 +169,8 @@ export class AppTopbar extends Component {
                                 <li role="none"><a href="https://www.primefaces.org/designer/primereact" role="menuitem"><i className="pi pi-fw pi-palette" /><span>Designer</span></a></li>
                                 <li role="none"><a href="https://www.primefaces.org/designer-react" role="menuitem"><i className="pi pi-fw pi-desktop" /><span>Visual Editor</span></a></li>
                                 <li role="none"><Link to="/icons" onClick={this.onThemesMenuRouteChange} role="menuitem" className="no-border"><i className="pi pi-fw pi-info-circle" /><span>Icons</span></Link></li>
+                                <li role="none"><a href="https://www.figma.com/community/file/890589747170608208" role="menuitem"><i className="pi pi-fw pi-pencil" /><span>Figma UI Kit</span></a></li>
+                                
 
                                 <li role="none" className="topbar-submenu-header">BOOTSTRAP</li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'bootstrap4-light-blue')} role="menuitem"><img src="showcase/images/themes/bootstrap4-light-blue.svg" alt="Blue Light" /><span>Blue Light</span></button></li>
