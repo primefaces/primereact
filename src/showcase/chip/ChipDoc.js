@@ -15,6 +15,7 @@ export class ChipDoc extends Component {
                 content: `
 import React, { Component } from 'react';
 import { Chip } from 'primereact/chip';
+import './ChipDemo.css';
 
 export class ChipDemo extends Component {
 
@@ -63,8 +64,9 @@ export class ChipDemo extends Component {
             'hooks': {
                 tabName: 'Hooks Source',
                 content: `
-import React, { useState } from 'react';
+import React from 'react';
 import { Chip } from 'primereact/chip';
+import './ChipDemo.css';
 
 const ChipDemo = () => {
     return (
@@ -110,8 +112,9 @@ const ChipDemo = () => {
             'ts': {
                 tabName: 'TS Source',
                 content: `
-import React, { useState } from 'react';
-import { Checkbox } from 'primereact/checkbox';
+import React from 'react';
+import { Chip } from 'primereact/chip';
+import './ChipDemo.css';
 
 const ChipDemo = () => {
     return (
@@ -151,6 +154,16 @@ const ChipDemo = () => {
             </div>
         </div>
     );
+}
+                `
+            }
+        }
+        this.extFiles = {
+            'src/demo/ChipDemo.css': {
+                content: `
+.p-chip.custom-chip {
+    background: var(--primary-color);
+    color: var(--primary-color-text);
 }
                 `
             }
@@ -323,7 +336,7 @@ import { Chip } from 'primereact/chip';
                     </TabPanel>
 
                     {
-                        useLiveEditorTabs({ name: 'ChipDemo', sources: this.sources })
+                        useLiveEditorTabs({ name: 'ChipDemo', sources: this.sources, extFiles: this.extFiles })
                     }
                 </TabView>
             </div>
