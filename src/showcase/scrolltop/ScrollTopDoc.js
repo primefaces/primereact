@@ -16,7 +16,7 @@ export class ScrollTopDoc extends Component {
 import React, { Component } from 'react';
 import { ScrollTop } from 'primereact/scrolltop';
 import { ScrollPanel } from 'primereact/scrollpanel';
-import './ScrollTopDemo.scss';
+import './ScrollTopDemo.css';
 
 export class ScrollTopDemo extends Component {
     render() {
@@ -58,7 +58,7 @@ export class ScrollTopDemo extends Component {
 import React from 'react';
 import { ScrollTop } from 'primereact/scrolltop';
 import { ScrollPanel } from 'primereact/scrollpanel';
-import './ScrollTopDemo.scss';
+import './ScrollTopDemo.css';
 
 export const ScrollTopDemo = () => {
     return (
@@ -98,7 +98,7 @@ export const ScrollTopDemo = () => {
 import React from 'react';
 import { ScrollTop } from 'primereact/scrolltop';
 import { ScrollPanel } from 'primereact/scrollpanel';
-import './ScrollTopDemo.scss';
+import './ScrollTopDemo.css';
 
 export const ScrollTopDemo = () => {
     return (
@@ -129,9 +129,30 @@ export const ScrollTopDemo = () => {
 
         </div>
     );
+}
 `
             }
         };
+        this.extFiles = {
+            'src/demo/ScrollTopDemo.css': {
+                content: `
+.custom-scrolltop {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 4px;
+    background-color: var(--primary-color) !important;
+}
+.custom-scrolltop:hover {
+    background-color: var(--primary-color) !important;
+}
+
+.custom-scrolltop .p-scrolltop-icon {
+    font-size: 1rem;
+    color: var(--primary-color-text);
+}
+                `
+            }
+        }
     }
 
     render() {
@@ -240,7 +261,7 @@ import { ScrollTop } from 'primereact/scrolltop';
                     </TabPanel>
 
                     {
-                        useLiveEditorTabs({ name: 'ScrollTopDemo', sources: this.sources })
+                        useLiveEditorTabs({ name: 'ScrollTopDemo', sources: this.sources, extFiles: this.extFiles })
                     }
                 </TabView>
             </div>

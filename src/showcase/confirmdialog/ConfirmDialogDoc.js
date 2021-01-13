@@ -126,11 +126,11 @@ const ConfirmDialogDemo = () => {
     const toast = useRef(null);
 
     const accept = () => {
-        toast.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
+        toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
     }
 
     const reject = () => {
-        toast.show({ severity: 'info', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
+        toast.currents.show({ severity: 'info', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
     }
 
     const confirm1 = () => {
@@ -215,11 +215,11 @@ const ConfirmDialogDemo = () => {
     const toast = useRef(null);
 
     const accept = () => {
-        toast.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
+        toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
     }
 
     const reject = () => {
-        toast.show({ severity: 'info', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
+        toast.current.show({ severity: 'info', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
     }
 
     const confirm1 = () => {

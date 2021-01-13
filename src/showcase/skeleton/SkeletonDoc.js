@@ -17,7 +17,7 @@ import React, { Component } from "react";
 import { Skeleton } from 'primereact/skeleton';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import './SkeletonDemo.scss';
+import './SkeletonDemo.css';
 
 export class SkeletonDemo extends Component {
 
@@ -158,7 +158,7 @@ import React from "react";
 import { Skeleton } from 'primereact/skeleton';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import './SkeletonDemo.scss';
+import './SkeletonDemo.css';
 
 export const SkeletonDemo = () => {
 
@@ -296,7 +296,7 @@ import React from "react";
 import { Skeleton } from 'primereact/skeleton';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import './SkeletonDemo.scss';
+import './SkeletonDemo.css';
 
 export const SkeletonDemo = () => {
 
@@ -428,6 +428,20 @@ export const SkeletonDemo = () => {
 `
             }
         };
+
+        this.extFiles = {
+            'src/demo/SkeletonDemo.css': {
+                content: `
+.custom-skeleton {
+    border: 1px solid var(--surface-d);
+    border-borderRadius: 4px;
+}
+.custom-skeleton ul {
+    list-style: none;
+}
+                `
+            }
+        }
     }
 
     render() {
@@ -561,7 +575,7 @@ import { Skeleton } from 'primereact/skeleton';
 				<p>None.</p>
                     </TabPanel>
                     {
-                        useLiveEditorTabs({ name: 'SkeletonDemo', sources: this.sources })
+                        useLiveEditorTabs({ name: 'SkeletonDemo', sources: this.sources, extFiles: this.extFiles })
                     }
                 </TabView>
             </div>
