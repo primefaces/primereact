@@ -311,7 +311,7 @@ const MessagesDemo = () => {
                 <div className="p-field p-fluid">
                     <label htmlFor="username2">Username</label>
                     <InputText id="username2" aria-describedby="username-help" className="p-invalid p-mr-2" />
-                    <small id="username-help" className="p-invalid">Username is not available.</small>
+                    <small id="username-help" className="p-error">Username is not available.</small>
                 </div>
             </div>
         </div>
