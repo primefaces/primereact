@@ -94,7 +94,6 @@ import { Toast } from 'primereact/toast';
 const ConfirmPopupDemo = () => {
     const [visible, setVisible] = useState(false);
     const toast = useRef(null);
-    const button = useRef(null);
 
     const accept = () => {
         toast.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
@@ -155,7 +154,6 @@ import { Toast } from 'primereact/toast';
 const ConfirmPopupDemo = () => {
     const [visible, setVisible] = useState<boolean>(false);
     const toast = useRef(null);
-    const button = useRef(null);
 
     const accept = () => {
         toast.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });

@@ -136,7 +136,7 @@ export class CascadeSelectDemo extends Component {
             'hooks': {
                 tabName: 'Hooks Source',
                 content: `
-import React from 'react';
+import React, { useState } from 'react';
 import { CascadeSelect } from 'primereact/cascadeselect';
 
 const CascadeSelectDemo = () => {
@@ -250,7 +250,7 @@ const CascadeSelectDemo = () => {
             'ts': {
                 tabName: 'TS Source',
                 content: `
-import React from 'react';
+import React, { useState } from 'react';
 import { CascadeSelect } from 'primereact/cascadeselect';
 
 const CascadeSelectDemo = () => {

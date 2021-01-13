@@ -78,7 +78,7 @@ export class SplitterDemo extends Component {
             'hooks': {
                 tabName: 'Hooks Source',
                 content: `
-import React, { useState } from 'react';
+import React from 'react';
 import { Splitter, SplitterPanel } from 'primereact/splitter';
 
 const SplitterDemo = () => {
@@ -141,7 +141,7 @@ const SplitterDemo = () => {
             'ts': {
                 tabName: 'TS Source',
                 content: `
-import React, { useState } from 'react';
+import React from 'react';
 import { Splitter, SplitterPanel } from 'primereact/splitter';
 
 const SplitterDemo = () => {

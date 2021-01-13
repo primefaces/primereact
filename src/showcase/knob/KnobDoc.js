@@ -84,7 +84,7 @@ export class KnobDemo extends Component {
             'hooks': {
                 tabName: 'Hooks Source',
                 content: `
-import React from 'react';
+import React, { useState } from 'react';
 import { Knob } from 'primereact/knob';
 
 const KnobDemo = () => {
@@ -148,7 +148,7 @@ const KnobDemo = () => {
             'ts': {
                 tabName: 'TS Source',
                 content: `
-import React from 'react';
+import React, { useState } from 'react';
 import { Knob } from 'primereact/knob';
 
 const KnobDemo = () => {
