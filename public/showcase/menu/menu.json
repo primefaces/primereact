@@ -106,7 +106,7 @@
                 },
                 {
                     "name": "SASS API",
-                    "href": "https://www.primefaces.org/designer/api/primereact/5.0.0",
+                    "href": "https://www.primefaces.org/designer/api/primereact/6.0.0",
                     "meta": [
                         "sass api"
                     ]
