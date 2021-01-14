@@ -318,7 +318,7 @@ export class AppTopbar extends Component {
 
                     <li role="none" className="topbar-submenu">
                         {/* eslint-disable */}
-                        <button type="button" role="menuitem" onClick={(e) => this.toggleMenu(e, 3)} aria-haspopup aria-expanded={this.state.activeMenuIndex === 3} className="p-link">{this.version}</button>
+                        <button type="button" role="menuitem" onClick={(e) => this.toggleMenu(e, 3)} aria-haspopup aria-expanded={this.state.activeMenuIndex === 3} className="p-link">v{this.version}</button>
                         {/* eslint-enable */}
                         <CSSTransition classNames="p-connected-overlay" timeout={{ enter: 120, exit: 100 }} in={this.state.activeMenuIndex === 3}
                             unmountOnExit onEntered={this.onMenuEnter}>
