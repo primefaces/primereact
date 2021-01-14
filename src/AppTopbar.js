@@ -29,6 +29,7 @@ export class AppTopbar extends Component {
             versions: []
         };
         this.versionService = new VersionService();
+        this.version = require('../package.json') && require('../package.json').version;
 
         this.logoMap = {
             'bootstrap4-light-blue': 'bootstrap4-light-blue.svg',
@@ -317,7 +318,7 @@ export class AppTopbar extends Component {
 
                     <li role="none" className="topbar-submenu">
                         {/* eslint-disable */}
-                        <button type="button" role="menuitem" onClick={(e) => this.toggleMenu(e, 3)} aria-haspopup aria-expanded={this.state.activeMenuIndex === 3} className="p-link">Versions</button>
+                        <button type="button" role="menuitem" onClick={(e) => this.toggleMenu(e, 3)} aria-haspopup aria-expanded={this.state.activeMenuIndex === 3} className="p-link">{this.version}</button>
                         {/* eslint-enable */}
                         <CSSTransition classNames="p-connected-overlay" timeout={{ enter: 120, exit: 100 }} in={this.state.activeMenuIndex === 3}
                             unmountOnExit onEntered={this.onMenuEnter}>
@@ -332,7 +333,7 @@ export class AppTopbar extends Component {
                                                 </li>
                                             )
                                         })
-                                    }
+                                }
                             </ul>
                         </CSSTransition>
                     </li>
