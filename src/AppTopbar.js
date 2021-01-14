@@ -3,6 +3,7 @@ import { PropTypes } from 'prop-types'
 import { Link } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 import { Tooltip } from './components/tooltip/Tooltip';
+import { VersionService } from './showcase/service/VersionService';
 
 export class AppTopbar extends Component {
 
@@ -24,8 +25,10 @@ export class AppTopbar extends Component {
         super(props);
 
         this.state = {
-            activeMenuIndex: null
+            activeMenuIndex: null,
+            versions: []
         };
+        this.versionService = new VersionService();
 
         this.logoMap = {
             'bootstrap4-light-blue': 'bootstrap4-light-blue.svg',
@@ -73,6 +76,10 @@ export class AppTopbar extends Component {
         this.onThemeChange = this.onThemeChange.bind(this);
         this.onMenuEnter = this.onMenuEnter.bind(this);
         this.resetMenuActive = this.resetMenuActive.bind(this);
+    }
+
+    componentDidMount() {
+        this.versionService.getVersions().then(data => this.setState({ versions: data }));
     }
 
     onMenuButtonClick(event) {
@@ -304,6 +311,28 @@ export class AppTopbar extends Component {
                                 <li role="none"><a href="https://www.primefaces.org/whouses" role="menuitem" target="_blank" rel="noopener noreferrer"><span>Who Uses</span></a></li>
                                 <li role="none"><a href="https://www.primefaces.org/newsletter" role="menuitem" target="_blank" rel="noopener noreferrer"><span>Newsletter</span></a></li>
                                 <li role="none"><a href="https://www.primetek.com.tr/" role="menuitem" target="_blank" rel="noopener noreferrer"><span>About PrimeTek</span></a></li>
+                            </ul>
+                        </CSSTransition>
+                    </li>
+
+                    <li role="none" className="topbar-submenu topbar-resources-submenu">
+                        {/* eslint-disable */}
+                        <button type="button" role="menuitem" onClick={(e) => this.toggleMenu(e, 3)} aria-haspopup aria-expanded={this.state.activeMenuIndex === 3} className="p-link">Versions</button>
+                        {/* eslint-enable */}
+                        <CSSTransition classNames="p-connected-overlay" timeout={{ enter: 120, exit: 100 }} in={this.state.activeMenuIndex === 3}
+                            unmountOnExit onEntered={this.onMenuEnter}>
+                            <ul role="menu" aria-label="Versions">
+                                {
+                                        this.state.versions.map(version => {
+                                            return (
+                                                <li role="none" key={version.version}>
+                                                    <a href={version.url} role="menuitem">
+                                                        {version.version}
+                                                    </a>
+                                                </li>
+                                            )
+                                        })
+                                    }
                             </ul>
                         </CSSTransition>
                     </li>
