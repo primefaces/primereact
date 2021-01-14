@@ -294,7 +294,7 @@ export class AppTopbar extends Component {
                         </CSSTransition>
                     </li>
 
-                    <li role="none" className="topbar-submenu topbar-resources-submenu">
+                    <li role="none" className="topbar-submenu">
                         {/* eslint-disable */}
                         <button type="button" role="menuitem" onClick={(e) => this.toggleMenu(e, 2)} aria-haspopup aria-expanded={this.state.activeMenuIndex === 2} className="p-link">Resources</button>
                         {/* eslint-enable */}
@@ -315,13 +315,13 @@ export class AppTopbar extends Component {
                         </CSSTransition>
                     </li>
 
-                    <li role="none" className="topbar-submenu topbar-resources-submenu">
+                    <li role="none" className="topbar-submenu">
                         {/* eslint-disable */}
                         <button type="button" role="menuitem" onClick={(e) => this.toggleMenu(e, 3)} aria-haspopup aria-expanded={this.state.activeMenuIndex === 3} className="p-link">Versions</button>
                         {/* eslint-enable */}
                         <CSSTransition classNames="p-connected-overlay" timeout={{ enter: 120, exit: 100 }} in={this.state.activeMenuIndex === 3}
                             unmountOnExit onEntered={this.onMenuEnter}>
-                            <ul role="menu" aria-label="Versions">
+                            <ul role="menu" aria-label="Versions" style={{width: '100%'}}>
                                 {
                                         this.state.versions.map(version => {
                                             return (
