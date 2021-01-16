@@ -473,6 +473,10 @@ export default class DomHandler {
                         }
                     }
                 }
+
+                if (overflowCheck(parent)) {
+                    scrollableParents.push(parent);
+                }
             }
         }
 
