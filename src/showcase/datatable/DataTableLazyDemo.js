@@ -114,7 +114,6 @@ export class DataTableLazyDemo extends Component {
     }
 
     onFilter(event) {
-        console.log(event)
         const params = {
             ...event,
             rows: 10,
