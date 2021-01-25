@@ -129,6 +129,10 @@ export class Tooltip extends Component {
     show(e) {
         this.currentTarget = e.currentTarget;
 
+        if (this.isContentEmpty(this.currentTarget)) {
+            return;
+        }
+
         const updateTooltipState = () => {
             this.updateText(this.currentTarget, () => {
                 if (this.props.autoZIndex && !this.containerEl.style.zIndex) {
@@ -331,6 +335,10 @@ export class Tooltip extends Component {
                 setEvent(this.props.target);
             }
         }
+    }
+
+    isContentEmpty(target) {
+        return !(this.props.content || (target && target.getAttribute('data-pr-tooltip')) || this.props.children);
     }
 
     componentDidMount() {
