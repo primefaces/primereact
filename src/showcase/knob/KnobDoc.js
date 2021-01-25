@@ -20,6 +20,7 @@ export class KnobDemo extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            value: 0,
             value1 : 0,
             value2 : 50,
             value3 : 75,
@@ -30,6 +31,17 @@ export class KnobDemo extends Component {
             value8 : 60,
             value9 : 50,
         }
+
+        this.increment = this.increment.bind(this)
+        this.decrement = this.decrement.bind(this)
+    }
+
+    increment() {
+        this.setState({ value: this.state.value >= 100 ? 0 : this.state.value + 1 })
+    }
+
+    decrement() {
+        this.setState({ value: this.state.value <= 0 ? 100 : this.state.value - 1 })
     }
 
     render() {
@@ -75,6 +87,16 @@ export class KnobDemo extends Component {
                         </div>
                     </div>
                 </div>
+
+                <div className="card p-text-center">
+                    <h5>Reactive Knob</h5>
+                    <Knob value={this.state.value} readOnly/>
+                    <br/>
+                    <Button label="Increment" onClick={this.increment} style={{ marginRight: 2 }}/>
+                    <Button label="Decrement" onClick={this.decrement} style={{ marginLeft: 2 }}/>
+                    <br/>
+                    <b>Value:</b> {this.state.value}
+                </div>
             </div>
         )
     }
@@ -88,6 +110,7 @@ import React, { useState } from 'react';
 import { Knob } from 'primereact/knob';
 
 const KnobDemo = () => {
+    const [value, setValue] = useState(0);
     const [value1, setValue1] = useState(0);
     const [value2, setValue2] = useState(50);
     const [value3, setValue3] = useState(75);
@@ -97,6 +120,14 @@ const KnobDemo = () => {
     const [value7, setValue7] = useState(40);
     const [value8, setValue8] = useState(60);
     const [value9, setValue9] = useState(50);
+
+    function increment() {
+        setValue(value >= 100 ? 0 : value + 1)
+    }
+
+    function decrement() {
+        setValue(value <= 0 ? 100 : value - 1)
+    }
 
     return (
         <div>
@@ -140,6 +171,16 @@ const KnobDemo = () => {
                     </div>
                 </div>
             </div>
+
+            <div className="card p-text-center">
+                <h5>Reactive Knob</h5>
+                <Knob value={value} readOnly/>
+                <br/>
+                <Button label="Increment" onClick={increment} style={{ marginRight: 2 }}/>
+                <Button label="Decrement" onClick={decrement} style={{ marginLeft: 2 }}/>
+                <br/>
+                <b>Value:</b> {value}
+            </div>
         </div>
     )
 }
@@ -152,6 +193,7 @@ import React, { useState } from 'react';
 import { Knob } from 'primereact/knob';
 
 const KnobDemo = () => {
+    const [value, setValue] = useState(0);
     const [value1, setValue1] = useState(0);
     const [value2, setValue2] = useState(50);
     const [value3, setValue3] = useState(75);
@@ -161,6 +203,14 @@ const KnobDemo = () => {
     const [value7, setValue7] = useState(40);
     const [value8, setValue8] = useState(60);
     const [value9, setValue9] = useState(50);
+
+    function increment() {
+        setValue(value >= 100 ? 0 : value + 1)
+    }
+
+    function decrement() {
+        setValue(value <= 0 ? 100 : value - 1)
+    }
 
     return (
         <div>
@@ -203,6 +253,16 @@ const KnobDemo = () => {
                         <Knob value={value9} valueColor={"SlateGray"} rangeColor={"MediumTurquoise"} onChange={(e) => setValue9(e.value)}/>
                     </div>
                 </div>
+            </div>
+
+            <div className="card p-text-center">
+                <h5>Reactive Knob</h5>
+                <Knob value={value} readOnly/>
+                <br/>
+                <Button label="Increment" onClick={increment} style={{ marginRight: 2 }}/>
+                <Button label="Decrement" onClick={decrement} style={{ marginLeft: 2 }}/>
+                <br/>
+                <b>Value:</b> {value}
             </div>
         </div>
     )

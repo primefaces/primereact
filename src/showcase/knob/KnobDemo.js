@@ -2,12 +2,14 @@ import React, {Component} from 'react';
 import {Knob} from '../../components/knob/Knob';
 import {AppInlineHeader} from '../../AppInlineHeader';
 import {KnobDoc} from './KnobDoc';
+import {Button} from "../../components/button/Button";
 
 export class KnobDemo extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            value: 0,
             value1 : 0,
             value2 : 50,
             value3 : 75,
@@ -18,6 +20,17 @@ export class KnobDemo extends Component {
             value8 : 60,
             value9 : 50,
         }
+
+        this.increment = this.increment.bind(this)
+        this.decrement = this.decrement.bind(this)
+    }
+
+    increment() {
+        this.setState({ value: this.state.value >= 100 ? 0 : this.state.value + 1 })
+    }
+
+    decrement() {
+        this.setState({ value: this.state.value <= 0 ? 100 : this.state.value - 1 })
     }
 
     render() {
@@ -70,6 +83,16 @@ export class KnobDemo extends Component {
                                 <Knob value={this.state.value9} valueColor={"SlateGray"} rangeColor={"MediumTurquoise"} onChange={(e)=>this.setState({value9: e.value})}/>
                             </div>
                         </div>
+                    </div>
+
+                    <div className="card p-text-center">
+                        <h5>Reactive Knob</h5>
+                        <Knob value={this.state.value} readOnly/>
+                        <br/>
+                        <Button label="Increment" onClick={this.increment} style={{ marginRight: 2 }}/>
+                        <Button label="Decrement" onClick={this.decrement} style={{ marginLeft: 2 }}/>
+                        <br/>
+                        <b>Value:</b> {this.state.value}
                     </div>
                 </div>
 

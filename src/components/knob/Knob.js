@@ -52,7 +52,6 @@ export class Knob extends Component {
 
         this.state = {}
 
-        this.value = this.props.value;
         this.radius = 40;
         this.midX =  50;
         this.midY = 50;
@@ -86,10 +85,8 @@ export class Knob extends Component {
         else
             return;
 
-        let newValue = Math.round((mappedValue - this.props.min) / this.props.step) * this.props.step + this.props.min;
-        this.value = newValue;
-
         if (this.props.onChange) {
+            const newValue = Math.round((mappedValue - this.props.min) / this.props.step) * this.props.step + this.props.min;
             this.props.onChange({
                 value: newValue
             })
@@ -178,7 +175,7 @@ export class Knob extends Component {
     }
 
     valueRadians() {
-        return this.mapRange(this.value, this.props.min, this.props.max, this.minRadians, this.maxRadians);
+        return this.mapRange(this.props.value, this.props.min, this.props.max, this.minRadians, this.maxRadians);
     }
 
     minX() {
@@ -222,7 +219,7 @@ export class Knob extends Component {
     }
 
     valueToDisplay() {
-        return this.props.valueTemplate.replace("{value}", this.value.toString());
+        return this.props.valueTemplate.replace("{value}", this.props.value.toString());
     }
 
     render() {
