@@ -9,7 +9,6 @@ export class KnobDemo extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: 0,
             value1 : 0,
             value2 : 50,
             value3 : 75,
@@ -19,18 +18,35 @@ export class KnobDemo extends Component {
             value7 : 40,
             value8 : 60,
             value9 : 50,
+            value10: 0,
+            disabledIncrementBtn: false,
+            disabledDecrementBtn: true
         }
 
-        this.increment = this.increment.bind(this)
-        this.decrement = this.decrement.bind(this)
+        this.increment = this.increment.bind(this);
+        this.decrement = this.decrement.bind(this);
     }
 
     increment() {
-        this.setState({ value: this.state.value >= 100 ? 0 : this.state.value + 1 })
+        this.setState((prevState) => {
+            const value = prevState.value10 + 1;
+            return {
+                value10: value,
+                disabledIncrementBtn: value === 100,
+                disabledDecrementBtn: false
+            }
+        });
     }
 
     decrement() {
-        this.setState({ value: this.state.value <= 0 ? 100 : this.state.value - 1 })
+        this.setState((prevState) => {
+            const value = prevState.value10 - 1;
+            return {
+                value10: value,
+                disabledIncrementBtn: false,
+                disabledDecrementBtn: value === 0
+            }
+        });
     }
 
     render() {
@@ -87,12 +103,9 @@ export class KnobDemo extends Component {
 
                     <div className="card p-text-center">
                         <h5>Reactive Knob</h5>
-                        <Knob value={this.state.value} readOnly/>
-                        <br/>
-                        <Button label="Increment" onClick={this.increment} style={{ marginRight: 2 }}/>
-                        <Button label="Decrement" onClick={this.decrement} style={{ marginLeft: 2 }}/>
-                        <br/>
-                        <b>Value:</b> {this.state.value}
+                        <Knob value={this.state.value10} size={150} readOnly />
+                        <Button label="Increment" onClick={this.increment} className="p-mr-2" disabled={this.state.disabledIncrementBtn} />
+                        <Button label="Decrement" onClick={this.decrement} disabled={this.state.disabledDecrementBtn} />
                     </div>
                 </div>
 
