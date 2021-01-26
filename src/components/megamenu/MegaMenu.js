@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
 import { Ripple } from '../ripple/Ripple';
+import ObjectUtils from '../utils/ObjectUtils';
 
 export class MegaMenu extends Component {
 
@@ -276,12 +277,15 @@ export class MegaMenu extends Component {
             const linkClassName = classNames('p-menuitem-link', {'p-disabled': item.disabled});
             const iconClassName = classNames(item.icon, 'p-menuitem-icon');
             const icon = item.icon && <span className={iconClassName}></span>;
+            const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
+            const itemContent = item.template ? ObjectUtils.getJSXElement(item.template, item) : null;
 
             return (
                 <li key={item.label + '_' + index} className={className} style={item.style} role="none">
                     <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => this.onLeafClick(event, item)} role="menuitem">
                         {icon}
-                        <span className="p-menuitem-text">{item.label}</span>
+                        {label}
+                        {itemContent}
                         <Ripple />
                     </a>
                 </li>
@@ -358,6 +362,8 @@ export class MegaMenu extends Component {
         const linkClassName = classNames('p-menuitem-link', {'p-disabled': category.disabled});
         const iconClassName = classNames('p-menuitem-icon', category.icon);
         const icon = category.icon && <span className={iconClassName}></span>;
+        const label = category.label && <span className="p-menuitem-text">{category.label}</span>;
+        const itemContent = category.template ? ObjectUtils.getJSXElement(category.template, category) : null;
         const submenuIcon = this.renderSubmenuIcon(category);
         const panel = this.renderCategoryPanel(category);
 
@@ -366,7 +372,8 @@ export class MegaMenu extends Component {
                 <a href={category.url || '#'} className={linkClassName} target={category.target} onClick={e => this.onCategoryClick(e, category)} onKeyDown={e => this.onCategoryKeyDown(e, category)}
                    role="menuitem" aria-haspopup={category.items != null}>
                     {icon}
-                    <span className="p-menuitem-text">{category.label}</span>
+                    {label}
+                    {itemContent}
                     {submenuIcon}
                     <Ripple />
                 </a>

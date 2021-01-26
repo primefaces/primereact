@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
 import { Ripple } from '../ripple/Ripple';
+import ObjectUtils from '../utils/ObjectUtils';
 
 export class TieredMenuSub extends Component {
 
@@ -246,6 +247,8 @@ export class TieredMenuSub extends Component {
         const className = classNames('p-menuitem', {'p-menuitem-active': this.state.activeItem === item}, item.className);
         const linkClassName = classNames('p-menuitem-link', {'p-disabled': item.disabled})
         const icon = this.renderIcon(item);
+        const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
+        const itemContent = item.template ? ObjectUtils.getJSXElement(item.template, item) : null;
         const submenuIcon = this.renderSubmenuIcon(item);
         const submenu = this.renderSubmenu(item);
 
@@ -254,7 +257,8 @@ export class TieredMenuSub extends Component {
                 <a href={item.url || '#'} className={linkClassName} target={item.target} role="menuitem" aria-haspopup={item.items != null}
                     onClick={(event) => this.onItemClick(event, item)} onKeyDown={(event) => this.onItemKeyDown(event, item)}>
                     {icon}
-                    <span className="p-menuitem-text">{item.label}</span>
+                    {label}
+                    {itemContent}
                     {submenuIcon}
                     <Ripple />
                 </a>

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
+import ObjectUtils from '../utils/ObjectUtils';
 import { Ripple } from '../ripple/Ripple';
 
 export class TabMenu extends Component {
@@ -105,12 +106,15 @@ export class TabMenu extends Component {
         }, item.className);
         const iconClassName = classNames('p-menuitem-icon', item.icon);
         const icon = item.icon && <span className={iconClassName}></span>;
+        const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
+        const itemContent = item.template ? ObjectUtils.getJSXElement(item.template, item) : null;
 
         return (
             <li ref={(el) => this[`tab_${index}`] = el} key={item.label + '_' + index} className={className} style={item.style} role="tab" aria-selected={activeItem ? activeItem === item : index === 0} aria-expanded={activeItem ? activeItem === item : index === 0}>
                  <a href={item.url||'#'} className="p-menuitem-link" target={item.target} onClick={(event) => this.itemClick(event, item)} role="presentation">
                     {icon}
-                    <span className="p-menuitem-text">{item.label}</span>
+                    {label}
+                    {itemContent}
                     <Ripple />
                 </a>
             </li>

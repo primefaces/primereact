@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
+import ObjectUtils from '../utils/ObjectUtils';
 import { classNames } from '../utils/ClassNames';
 import { CSSTransition } from 'react-transition-group';
 import UniqueComponentId from '../utils/UniqueComponentId';
@@ -252,13 +253,16 @@ export class Menu extends Component {
         const linkClassName = classNames('p-menuitem-link', {'p-disabled': item.disabled})
         const iconClassName = classNames('p-menuitem-icon', item.icon);
         const icon = item.icon && <span className={iconClassName}></span>;
+        const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
+        const itemContent = item.template ? ObjectUtils.getJSXElement(item.template, item) : null;
         const tabIndex = item.disabled ? null : 0;
 
         return (
             <li key={item.label + '_' + index} className={className} style={item.style} role="none">
                 <a href={item.url||'#'} className={linkClassName} role="menuitem" target={item.target} onClick={e => this.onItemClick(e, item)} onKeyDown={e => this.onItemKeyDown(e, item)} tabIndex={tabIndex}>
                     {icon}
-                    <span className="p-menuitem-text">{item.label}</span>
+                    {label}
+                    {itemContent}
                 </a>
             </li>
         );

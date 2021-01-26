@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import { CSSTransition } from 'react-transition-group';
+import ObjectUtils from '../utils/ObjectUtils';
 
 class PanelMenuSub extends Component {
 
@@ -101,6 +102,8 @@ class PanelMenuSub extends Component {
         const className = classNames('p-menuitem', item.className);
         const linkClassName = classNames('p-menuitem-link', {'p-disabled': item.disabled});
         const icon = this.renderIcon(item, active);
+        const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
+        const itemContent = item.template ? ObjectUtils.getJSXElement(item.template, item) : null;
         const submenuIcon = this.renderSubmenuIcon(item, active);
         const submenu = this.renderSubmenu(item, active);
 
@@ -109,7 +112,8 @@ class PanelMenuSub extends Component {
                 <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => this.onItemClick(event, item, index)} role="menuitem">
                     {submenuIcon}
                     {icon}
-                    <span className="p-menuitem-text">{item.label}</span>
+                    {label}
+                    {itemContent}
                 </a>
                 {submenu}
             </li>

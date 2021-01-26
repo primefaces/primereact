@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import DomHandler from '../utils/DomHandler';
 import { CSSTransition } from 'react-transition-group';
 import { Ripple } from '../ripple/Ripple';
+import ObjectUtils from '../utils/ObjectUtils';
 
 class ContextMenuSub extends Component {
 
@@ -148,6 +149,8 @@ class ContextMenuSub extends Component {
         const className = classNames('p-menuitem', {'p-menuitem-active': this.state.activeItem === item}, item.className);
         const linkClassName = classNames('p-menuitem-link', {'p-disabled': item.disabled});
         const icon = this.renderIcon(item);
+        const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
+        const itemContent = item.template ? ObjectUtils.getJSXElement(item.template, item) : null;
         const submenuIcon = this.renderSubmenuIcon(item);
         const submenu = this.renderSubmenu(item);
 
@@ -156,7 +159,8 @@ class ContextMenuSub extends Component {
                 <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => this.onItemClick(event, item, index)} role="menuitem"
                    aria-haspopup={item.items != null}>
                     {icon}
-                    <span className="p-menuitem-text">{item.label}</span>
+                    {label}
+                    {itemContent}
                     {submenuIcon}
                     <Ripple />
                 </a>
