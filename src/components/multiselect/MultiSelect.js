@@ -660,7 +660,7 @@ export class MultiSelect extends Component {
             'p-multiselect-clearable': this.props.showClear && !this.props.disabled,
             'p-focus': this.state.focused,
             'p-inputwrapper-filled': this.props.value && this.props.value.length > 0,
-            'p-inputwrapper-focus': this.state.focused
+            'p-inputwrapper-focus': this.state.focused || this.state.overlayVisible
         }, this.props.className);
         let label = this.renderLabel();
         let clearIcon = this.renderClearIcon();

@@ -802,7 +802,7 @@ export class Dropdown extends Component {
             'p-focus': this.state.focused,
             'p-dropdown-clearable': this.props.showClear && !this.props.disabled,
             'p-inputwrapper-filled': this.props.value,
-            'p-inputwrapper-focus': this.state.focused
+            'p-inputwrapper-focus': this.state.focused || this.state.overlayVisible
         });
         let selectedOption = this.findOption(this.props.value);
 

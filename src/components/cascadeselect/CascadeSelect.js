@@ -385,7 +385,7 @@ export class CascadeSelect extends Component {
             'p-disabled': this.props.disabled,
             'p-focus': this.state.focused,
             'p-inputwrapper-filled': this.props.value,
-            'p-inputwrapper-focus': this.state.focused
+            'p-inputwrapper-focus': this.state.focused || this.state.overlayVisible
         });
 
         let keyboardHelper = this.renderKeyboardHelper();
