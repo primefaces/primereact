@@ -236,8 +236,8 @@ const confirm = (event) => {
         message: 'Are you sure you want to proceed?',
         header: 'Confirmation',
         icon: 'pi pi-exclamation-triangle',
-        accept: accept,
-        reject: reject
+        accept: () => acceptFunc(),
+        reject: () => rejectFunc()
     });
 }
 
