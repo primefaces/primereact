@@ -9,6 +9,8 @@ interface AvatarProps {
     style?: object;
     className?: string;
     template?: any;
+    imageAlt?: string;
+    onImageError?(event: Event): void;
 }
 
 export class Avatar extends React.Component<AvatarProps,any> {}

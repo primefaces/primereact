@@ -13,7 +13,9 @@ export class Avatar extends Component {
         shape: 'square',
         style: null,
         className: null,
-        template: null
+        template: null,
+        imageAlt: 'avatar',
+        onImageError: null
     }
 
     static propTypes = {
@@ -24,7 +26,9 @@ export class Avatar extends Component {
         shape: PropTypes.string,
         style: PropTypes.object,
         className: PropTypes.string,
-        template: PropTypes.any
+        template: PropTypes.any,
+        imageAlt: PropTypes.string,
+        onImageError: PropTypes.func
     };
 
     renderContent() {
@@ -36,7 +40,13 @@ export class Avatar extends Component {
             return <span className={iconClassName}></span>;
         }
         else if (this.props.image) {
-            return <img src={this.props.image} alt="avatar"></img>
+            const onError = (e) => {
+                if (this.props.onImageError) {
+                    this.props.onImageError(e);
+                }
+            };
+
+            return <img src={this.props.image} alt={this.props.imageAlt} onError={onError}></img>
         }
 
         return null;
