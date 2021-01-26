@@ -14,6 +14,8 @@ export class Chip extends Component {
         className: null,
         style: null,
         template: null,
+        imageAlt: 'chip',
+        onImageError: null,
         onRemove: null
     };
 
@@ -26,6 +28,8 @@ export class Chip extends Component {
         className: PropTypes.string,
         style: PropTypes.object,
         template: PropTypes.any,
+        imageAlt: PropTypes.string,
+        onImageError: PropTypes.func,
         onRemove: PropTypes.func
     };
 
@@ -60,7 +64,13 @@ export class Chip extends Component {
         let content = [];
 
         if (this.props.image) {
-            content.push(<img key="image" src={this.props.image} alt="chip"></img>);
+            const onError = (e) => {
+                if (this.props.onImageError) {
+                    this.props.onImageError(e);
+                }
+            };
+
+            content.push(<img key="image" src={this.props.image} alt={this.props.imageAlt} onError={onError}></img>);
         }
         else if (this.props.icon) {
             const iconClassName = classNames('p-chip-icon', this.props.icon);

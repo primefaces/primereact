@@ -276,6 +276,12 @@ import { Chip } from 'primereact/chip';
                                         <td>null</td>
                                         <td>Template of an item.</td>
                                     </tr>
+                                    <tr>
+                                        <td>imageAlt</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>It specifies an alternate text for an image, if the image cannot be displayed.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -295,6 +301,11 @@ import { Chip } from 'primereact/chip';
                                         <td>onRemove</td>
                                         <td>event: Browser event</td>
                                         <td>Callback to invoke when a chip is removed.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onImageError</td>
+                                        <td>event: Browser event</td>
+                                        <td>This event is triggered if an error occurs while loading an image file.</td>
                                     </tr>
                                 </tbody>
                             </table>
