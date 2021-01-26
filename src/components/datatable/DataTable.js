@@ -378,6 +378,17 @@ export class DataTable extends Component {
             }
         }
 
+        this._restoreState(restoredState, state);
+    }
+
+    restoreTableState(restoredState) {
+        const state = this._restoreState(restoredState);
+        if (state && Object.keys(state).length) {
+            this.setState(state);
+        }
+    }
+
+    _restoreState(restoredState, state = {}) {
         if (restoredState && Object.keys(restoredState).length) {
             if (this.props.paginator) {
                 if (this.props.onPage) {
@@ -452,6 +463,8 @@ export class DataTable extends Component {
                 this.props.onStateRestore(restoredState);
             }
         }
+
+        return state;
     }
 
     saveColumnWidths(state) {

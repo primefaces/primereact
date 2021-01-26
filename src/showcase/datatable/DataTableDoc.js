@@ -3135,6 +3135,11 @@ const bodyTemplate = (data, props) => {
                             <td>-</td>
                             <td>Resets column order when reorderableColumns is enabled.</td>
                         </tr>
+                        <tr>
+                            <td>restoreTableState</td>
+                            <td>state</td>
+                            <td>Stored states can be loaded at any time using this method if there is a stateStorage property.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
