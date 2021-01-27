@@ -80,7 +80,7 @@ export class BodyCell extends Component {
     bindDocumentEditListener() {
         if (!this.documentEditListener) {
             this.documentEditListener = (e) => {
-                if (!this.editingCellClick) {
+                if (this.editingCellClick) {
                     this.switchCellToViewMode(e, true);
                 }
 
