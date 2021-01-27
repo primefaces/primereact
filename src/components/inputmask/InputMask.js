@@ -481,19 +481,21 @@ export class InputMask extends Component {
             DomHandler.removeClass(this.input, 'p-filled');
     }
 
-    updateValue() {
+    updateValue(allow) {
+        let pos;
+
         if (this.input) {
             if (this.props.value == null) {
                 this.input.value = '';
             }
             else {
                 this.input.value = this.props.value;
-                this.checkVal();
+                pos = this.checkVal(allow);
 
                 setTimeout(() => {
                     if(this.input) {
                         this.writeBuffer();
-                        this.checkVal();
+                        return this.checkVal(allow);
                     }
                 }, 10);
             }
@@ -502,6 +504,8 @@ export class InputMask extends Component {
         }
 
         this.updateFilledState();
+
+        return pos;
     }
 
     isValueUpdated() {
@@ -581,7 +585,7 @@ export class InputMask extends Component {
 
         if (prevProps.mask !== this.props.mask) {
             this.init();
-            this.updateValue();
+            this.caret(this.updateValue(true));
             this.updateModel();
         }
     }
