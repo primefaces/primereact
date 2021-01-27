@@ -45,25 +45,21 @@ export class BodyCell extends Component {
     }
 
     onClick(event) {
-        if (this.props.editMode !== 'row') {
-            this.editingCellClick = true;
+        if (this.props.editMode !== 'row' && this.props.editor && !this.state.editing) {
+            this.setState({
+                editing: true
+            }, () => {
+                if (this.props.onEditorInit) {
+                    this.props.onEditorInit({
+                        originalEvent: event,
+                        columnProps: this.props
+                    });
+                }
 
-            if (this.props.editor && !this.state.editing) {
-                this.setState({
-                    editing: true
-                }, () => {
-                    if (this.props.onEditorInit) {
-                        this.props.onEditorInit({
-                            originalEvent: event,
-                            columnProps: this.props
-                        });
-                    }
-
-                    if (this.props.editorValidatorEvent === 'click') {
-                        this.bindDocumentEditListener();
-                    }
-                });
-            }
+                if (this.props.editorValidatorEvent === 'click') {
+                    this.bindDocumentEditListener();
+                }
+            });
         }
     }
 
@@ -80,15 +76,17 @@ export class BodyCell extends Component {
     bindDocumentEditListener() {
         if (!this.documentEditListener) {
             this.documentEditListener = (e) => {
-                if (this.editingCellClick) {
+                if (this.isOutsideClicked(e)) {
                     this.switchCellToViewMode(e, true);
                 }
-
-                this.editingCellClick = false;
             };
 
             document.addEventListener('click', this.documentEditListener);
         }
+    }
+
+    isOutsideClicked(event) {
+        return this.container && !(this.container.isSameNode(event.target) || this.container.contains(event.target));
     }
 
     closeCell() {
