@@ -493,20 +493,20 @@ const onCityChange = (e) => {
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>p-chkbox</td>
+                                        <td>p-checkbox</td>
                                         <td>Container element</td>
                                     </tr>
                                     <tr>
-                                        <td>p-chkbox-box</td>
+                                        <td>p-checkbox-box</td>
                                         <td>Container of icon.</td>
                                     </tr>
                                     <tr>
-                                        <td>p-chkbox-icon</td>
+                                        <td>p-checkbox-icon</td>
                                         <td>Icon element.</td>
                                     </tr>
                                     <tr>
-                                        <td>p-chkbox-label</td>
-                                        <td>Label element.</td>
+                                        <td>p-checkbox-label</td>
+                                        <td>Label element and it is an external CSS class.</td>
                                     </tr>
                                 </tbody>
                             </table>
