@@ -16,12 +16,20 @@ export function tip(props) {
     let tooltipEl = React.createElement(Tooltip, props);
     ReactDOM.render(tooltipEl, tooltipWrapper);
 
+    let updateTooltip = (newProps) => {
+        props = { ...props, ...newProps };
+        ReactDOM.render(React.cloneElement(tooltipEl, props), tooltipWrapper);
+    };
+
     return {
         destroy: () => {
             ReactDOM.unmountComponentAtNode(tooltipWrapper);
         },
-        updateContent: (content) => {
-            ReactDOM.render(React.cloneElement(tooltipEl, {content}), tooltipWrapper);
+        updateContent: (newContent) => {
+            updateTooltip({ content: newContent });
+        },
+        update: (newProps) => {
+            updateTooltip(newProps);
         }
     }
 }
@@ -315,24 +323,34 @@ export class Tooltip extends Component {
     }
 
     loadTargetEvents() {
-        if (DomHandler.isElement(this.props.target)) {
-            this.bindTargetEvent(this.props.target);
-        }
-        else {
-            const setEvent = (target) => {
-                let element = DomHandler.find(document, target);
-                element.forEach((el) => {
-                    this.bindTargetEvent(el);
-                });
-            }
+        this.setTargetEventOperations(this.props.target, 'bindTargetEvent');
+    }
 
-            if (this.props.target instanceof Array) {
-                this.props.target.forEach(target => {
-                    setEvent(target);
-                });
+    unloadTargetEvents() {
+        this.setTargetEventOperations(this.props.target, 'unbindTargetEvent');
+    }
+
+    setTargetEventOperations(target, operation) {
+        if (target) {
+            if (DomHandler.isElement(target)) {
+                this[operation](target);
             }
             else {
-                setEvent(this.props.target);
+                const setEvent = (target) => {
+                    let element = DomHandler.find(document, target);
+                    element.forEach((el) => {
+                        this[operation](el);
+                    });
+                }
+
+                if (target instanceof Array) {
+                    target.forEach(t => {
+                        setEvent(t);
+                    });
+                }
+                else {
+                    setEvent(target);
+                }
             }
         }
     }
@@ -364,7 +382,7 @@ export class Tooltip extends Component {
     componentWillUnmount() {
         this.clearTimeouts();
         this.unbindDocumentResizeListener();
-        this.unbindTargetEvent();
+        this.unloadTargetEvents();
 
         if (this.scrollHandler) {
             this.scrollHandler.destroy();
