@@ -39,18 +39,17 @@ export class FloatLabelDemo extends Component {
                 { name: 'Paris', code: 'PRS' }
             ],
             value1: '',
-            value2: null,
-            value3: null,
-            value4: null,
+            value2: '',
+            value3: '',
+            value4: '',
             value5: null,
             value6: null,
-            value7: '',
+            value7: null,
             value8: null,
-            value9: null,
-            value10: '',
-            value11: '',
-            value11: '',
-            value12: '',
+            value9: '',
+            value10: null,
+            value11: null,
+            value12: null,
             value13: ''
 
         };
@@ -270,17 +269,17 @@ const FloatLabelDemo = () => {
     const [countries, setCountries] = useState(null);
     const [filteredCountries, setFilteredCountries] = useState(null);
     const [value1, setValue1] = useState('');
-    const [value2, setValue2] = useState(null);
-    const [value3, setValue3] = useState(null);
-    const [value4, setValue4] = useState(null);
+    const [value2, setValue2] = useState('');
+    const [value3, setValue3] = useState('');
+    const [value4, setValue4] = useState('');
     const [value5, setValue5] = useState(null);
     const [value6, setValue6] = useState(null);
-    const [value7, setValue7] = useState('');
+    const [value7, setValue7] = useState(null);
     const [value8, setValue8] = useState(null);
-    const [value9, setValue9] = useState(null);
-    const [value10, setValue10] = useState('');
-    const [value11, setValue11] = useState('');
-    const [value12, setValue12] = useState('');
+    const [value9, setValue9] = useState('');
+    const [value10, setValue10] = useState(null);
+    const [value11, setValue11] = useState(null);
+    const [value12, setValue12] = useState(null);
     const [value13, setValue13] = useState('');
 
     const cascadeSelectCountries = [
@@ -498,17 +497,17 @@ const FloatLabelDemo = () => {
     const [countries, setCountries] = useState(null);
     const [filteredCountries, setFilteredCountries] = useState(null);
     const [value1, setValue1] = useState('');
-    const [value2, setValue2] = useState(null);
-    const [value3, setValue3] = useState(null);
-    const [value4, setValue4] = useState(null);
+    const [value2, setValue2] = useState('');
+    const [value3, setValue3] = useState('');
+    const [value4, setValue4] = useState('');
     const [value5, setValue5] = useState(null);
     const [value6, setValue6] = useState(null);
-    const [value7, setValue7] = useState('');
+    const [value7, setValue7] = useState(null);
     const [value8, setValue8] = useState(null);
-    const [value9, setValue9] = useState(null);
-    const [value10, setValue10] = useState('');
-    const [value11, setValue11] = useState('');
-    const [value12, setValue12] = useState('');
+    const [value9, setValue9] = useState('');
+    const [value10, setValue10] = useState(null);
+    const [value11, setValue11] = useState(null);
+    const [value12, setValue12] = useState(null);
     const [value13, setValue13] = useState('');
 
     const cascadeSelectCountries = [

@@ -28,17 +28,17 @@ export class FloatLabelDemo extends Component {
                 { name: 'Paris', code: 'PRS' }
             ],
             value1: '',
-            value2: null,
-            value3: null,
-            value4: null,
+            value2: '',
+            value3: '',
+            value4: '',
             value5: null,
             value6: null,
-            value7: '',
+            value7: null,
             value8: null,
-            value9: null,
-            value10: '',
-            value11: '',
-            value12: '',
+            value9: '',
+            value10: null,
+            value11: null,
+            value12: null,
             value13: ''
         };
 
@@ -159,15 +159,15 @@ export class FloatLabelDemo extends Component {
                             <div className="p-field p-col-12 p-md-4">
                                 <span className="p-float-label p-input-icon-left">
                                     <i className="pi pi-search" />
-                                    <InputText id="inputtext" value={this.state.value2} onChange={(e) => this.setState({ value2: e.target.value })} />
-                                    <label htmlFor="inputtext">Left Icon</label>
+                                    <InputText id="lefticon" value={this.state.value2} onChange={(e) => this.setState({ value2: e.target.value })} />
+                                    <label htmlFor="lefticon">Left Icon</label>
                                 </span>
                             </div>
                             <div className="p-field p-col-12 p-md-4">
                                 <span className="p-float-label p-input-icon-right">
                                     <i className="pi pi-spin pi-spinner" />
-                                    <InputText id="inputtext" value={this.state.value3} onChange={(e) => this.setState({ value3: e.target.value })} />
-                                    <label htmlFor="inputtext">Right Icon</label>
+                                    <InputText id="righticon" value={this.state.value3} onChange={(e) => this.setState({ value3: e.target.value })} />
+                                    <label htmlFor="righticon">Right Icon</label>
                                 </span>
                             </div>
                             <div className="p-field p-col-12 p-md-4">
