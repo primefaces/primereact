@@ -439,15 +439,21 @@ toast.current.show({severity: 'success', summary: 'Success Message', detail: 'Or
                                     </tr>
                                     <tr>
                                         <td>summary</td>
-                                        <td>element</td>
+                                        <td>element/string</td>
                                         <td>null</td>
                                         <td>Summary content of the message.</td>
                                     </tr>
                                     <tr>
                                         <td>detail</td>
-                                        <td>element</td>
+                                        <td>element/string</td>
                                         <td>null</td>
                                         <td>Detail content of the message.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>content</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Custom content of the message. If enabled, summary and details properties are ignored.</td>
                                     </tr>
                                     <tr>
                                         <td>closable</td>
