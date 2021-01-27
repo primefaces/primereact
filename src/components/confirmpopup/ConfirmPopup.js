@@ -62,7 +62,9 @@ export class ConfirmPopup extends Component {
         appendTo: null,
         dismissable: true,
         footer: null,
-        onHide: null
+        onHide: null,
+        accept: null,
+        reject: null
     }
 
     static propTypes = {
@@ -81,7 +83,9 @@ export class ConfirmPopup extends Component {
         appendTo: PropTypes.any,
         dismissable: PropTypes.bool,
         footer: PropTypes.any,
-        onHide: PropTypes.func
+        onHide: PropTypes.func,
+        accept: PropTypes.func,
+        reject: PropTypes.func
     }
 
     constructor(props) {

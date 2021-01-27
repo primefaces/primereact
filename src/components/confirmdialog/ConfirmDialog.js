@@ -57,7 +57,9 @@ export class ConfirmDialog extends Component {
         className: null,
         appendTo: null,
         footer: null,
-        onHide: null
+        onHide: null,
+        accept: null,
+        reject: null
     }
 
     static propTypes = {
@@ -73,7 +75,9 @@ export class ConfirmDialog extends Component {
         appendTo: PropTypes.any,
         className: PropTypes.string,
         footer: PropTypes.any,
-        onHide: PropTypes.func
+        onHide: PropTypes.func,
+        accept: PropTypes.func,
+        reject: PropTypes.func
     }
 
     constructor(props) {

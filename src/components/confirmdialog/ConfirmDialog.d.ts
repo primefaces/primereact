@@ -15,6 +15,10 @@ interface ConfirmDialogProps extends DialogProps {
     className?: string;
     footer?: any;
     onHide?(result: string): void;
+    accept?(): void;
+    reject?(): void;
 }
 
 export class ConfirmDialog extends React.Component<ConfirmDialogProps,any> {}
+
+export function confirmDialog(props: ConfirmDialogProps):any;
