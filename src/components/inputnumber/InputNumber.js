@@ -806,6 +806,9 @@ export class InputNumber extends Component {
                 this._group.lastIndex = 0;
                 this.inputEl.setSelectionRange(selectionEnd, selectionEnd);
             }
+            else if (inputValue === '-' && operation === 'insert') {
+                this.inputEl.setSelectionRange(selectionEnd + 1, selectionEnd + 1);
+            }
             else {
                 selectionEnd = selectionEnd + (newLength - currentLength);
                 this.inputEl.setSelectionRange(selectionEnd, selectionEnd);
