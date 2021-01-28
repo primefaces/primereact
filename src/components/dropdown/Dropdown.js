@@ -412,13 +412,13 @@ export class Dropdown extends Component {
     clear(event) {
         this.props.onChange({
             originalEvent: event,
-            value: null,
+            value: undefined,
             stopPropagation : () =>{},
             preventDefault : () =>{},
             target: {
                 name: this.props.name,
                 id: this.id,
-                value : null
+                value : undefined
             }
         });
 
