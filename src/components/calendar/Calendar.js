@@ -255,11 +255,11 @@ export class Calendar extends Component {
             }
         }
 
-        if(this.panel) {
+        if (this.panel) {
             this.updateFocus();
         }
 
-        if (prevProps.value !== this.props.value && (!this.viewStateChanged || !this.state.overlayVisible)) {
+        if ((prevProps.value !== this.props.value && (!this.viewStateChanged || !this.state.overlayVisible)) || this.isOptionChanged(prevProps)) {
             this.updateInputfield(this.props.value);
         }
     }
@@ -292,6 +292,11 @@ export class Calendar extends Component {
             content: this.props.tooltip,
             options: this.props.tooltipOptions
         });
+    }
+
+    isOptionChanged(prevProps) {
+        const optionProps = ['dateFormat', 'hourFormat', 'timeOnly', 'showSeconds', 'showMillisec'];
+        return optionProps.some((option) => prevProps[option] !== this.props[option]);
     }
 
     getDateFormat() {
