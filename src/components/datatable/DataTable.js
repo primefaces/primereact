@@ -1213,7 +1213,7 @@ export class DataTable extends Component {
             }
 
             let matches = localMatch;
-            if(this.props.globalFilter) {
+            if (this.props.globalFilter) {
                 matches = localMatch&&globalMatch;
             }
 
@@ -1444,9 +1444,13 @@ export class DataTable extends Component {
         }
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps, prevState) {
         if (this.isStateful()) {
             this.saveState();
+        }
+
+        if (prevProps.globalFilter !== this.props.globalFilter) {
+            this.filter(this.props.globalFilter, 'globalFilter', 'contains');
         }
     }
 
