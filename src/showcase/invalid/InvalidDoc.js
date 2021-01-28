@@ -45,8 +45,86 @@ export class InvalidDemo extends Component {
             value6: null,
             value7: null,
             value8: null,
-            value9: ''
+            value9: '',
+            value10: null
         };
+
+        this.cascadeSelectCountries = [
+            {
+                name: 'Australia',
+                code: 'AU',
+                states: [
+                    {
+                        name: 'New South Wales',
+                        cities: [
+                            { cname: 'Sydney', code: 'A-SY' },
+                            { cname: 'Newcastle', code: 'A-NE' },
+                            { cname: 'Wollongong', code: 'A-WO' }
+                        ]
+                    },
+                    {
+                        name: 'Queensland',
+                        cities: [
+                            { cname: 'Brisbane', code: 'A-BR' },
+                            { cname: 'Townsville', code: 'A-TO' }
+                        ]
+                    },
+
+                ]
+            },
+            {
+                name: 'Canada',
+                code: 'CA',
+                states: [
+                    {
+                        name: 'Quebec',
+                        cities: [
+                            { cname: 'Montreal', code: 'C-MO' },
+                            { cname: 'Quebec City', code: 'C-QU' }
+                        ]
+                    },
+                    {
+                        name: 'Ontario',
+                        cities: [
+                            { cname: 'Ottawa', code: 'C-OT' },
+                            { cname: 'Toronto', code: 'C-TO' }
+                        ]
+                    },
+
+                ]
+            },
+            {
+                name: 'United States',
+                code: 'US',
+                states: [
+                    {
+                        name: 'California',
+                        cities: [
+                            { cname: 'Los Angeles', code: 'US-LA' },
+                            { cname: 'San Diego', code: 'US-SD' },
+                            { cname: 'San Francisco', code: 'US-SF' }
+                        ]
+                    },
+                    {
+                        name: 'Florida',
+                        cities: [
+                            { cname: 'Jacksonville', code: 'US-JA' },
+                            { cname: 'Miami', code: 'US-MI' },
+                            { cname: 'Tampa', code: 'US-TA' },
+                            { cname: 'Orlando', code: 'US-OR' }
+                        ]
+                    },
+                    {
+                        name: 'Texas',
+                        cities: [
+                            { cname: 'Austin', code: 'US-AU' },
+                            { cname: 'Dallas', code: 'US-DA' },
+                            { cname: 'Houston', code: 'US-HO' }
+                        ]
+                    }
+                ]
+            }
+        ];
 
         this.countryservice = new CountryService();
         this.searchCountry = this.searchCountry.bind(this);
@@ -95,6 +173,10 @@ export class InvalidDemo extends Component {
                             <InputNumber id="inputnumber" value={this.state.value6} onChange={(e) => this.setState({ value6: e.value })} className="p-invalid" />
                         </div>
                         <div className="p-field p-col-12 p-md-4">
+                            <label htmlFor="cascadeselect">CascadeSelect</label>
+                            <CascadeSelect id="cascadeselect" value={this.state.value10} options={this.cascadeSelectCountries} optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']} onChange={event => this.setState({ value10: event.value })} className="p-invalid"/>
+                        </div>
+                        <div className="p-field p-col-12 p-md-4">
                             <label htmlFor="dropdown">Dropdown</label>
                             <Dropdown id="dropdown" value={this.state.value7} options={this.state.cities} onChange={(e) => this.setState({ value7: e.value })} optionLabel="name" className="p-invalid" />
                         </div>
@@ -141,6 +223,7 @@ const InvalidDemo = () => {
     const [value7, setValue7] = useState(null);
     const [value8, setValue8] = useState(null);
     const [value9, setValue9] = useState('');
+    const [value10, setValue10] = useState(null);
 
     const countryservice = new CountryService();
     const cities = [
@@ -149,6 +232,83 @@ const InvalidDemo = () => {
         { name: 'London', code: 'LDN' },
         { name: 'Istanbul', code: 'IST' },
         { name: 'Paris', code: 'PRS' }
+    ];
+
+    const cascadeSelectCountries = [
+        {
+            name: 'Australia',
+            code: 'AU',
+            states: [
+                {
+                    name: 'New South Wales',
+                    cities: [
+                        { cname: 'Sydney', code: 'A-SY' },
+                        { cname: 'Newcastle', code: 'A-NE' },
+                        { cname: 'Wollongong', code: 'A-WO' }
+                    ]
+                },
+                {
+                    name: 'Queensland',
+                    cities: [
+                        { cname: 'Brisbane', code: 'A-BR' },
+                        { cname: 'Townsville', code: 'A-TO' }
+                    ]
+                },
+
+            ]
+        },
+        {
+            name: 'Canada',
+            code: 'CA',
+            states: [
+                {
+                    name: 'Quebec',
+                    cities: [
+                        { cname: 'Montreal', code: 'C-MO' },
+                        { cname: 'Quebec City', code: 'C-QU' }
+                    ]
+                },
+                {
+                    name: 'Ontario',
+                    cities: [
+                        { cname: 'Ottawa', code: 'C-OT' },
+                        { cname: 'Toronto', code: 'C-TO' }
+                    ]
+                },
+
+            ]
+        },
+        {
+            name: 'United States',
+            code: 'US',
+            states: [
+                {
+                    name: 'California',
+                    cities: [
+                        { cname: 'Los Angeles', code: 'US-LA' },
+                        { cname: 'San Diego', code: 'US-SD' },
+                        { cname: 'San Francisco', code: 'US-SF' }
+                    ]
+                },
+                {
+                    name: 'Florida',
+                    cities: [
+                        { cname: 'Jacksonville', code: 'US-JA' },
+                        { cname: 'Miami', code: 'US-MI' },
+                        { cname: 'Tampa', code: 'US-TA' },
+                        { cname: 'Orlando', code: 'US-OR' }
+                    ]
+                },
+                {
+                    name: 'Texas',
+                    cities: [
+                        { cname: 'Austin', code: 'US-AU' },
+                        { cname: 'Dallas', code: 'US-DA' },
+                        { cname: 'Houston', code: 'US-HO' }
+                    ]
+                }
+            ]
+        }
     ];
 
     useEffect(() => {
@@ -191,6 +351,10 @@ const InvalidDemo = () => {
                     <div className="p-field p-col-12 p-md-4">
                         <label htmlFor="inputnumber">InputNumber</label>
                         <InputNumber id="inputnumber" value={value6} onChange={(e) => setValue6(e.value)} className="p-invalid" />
+                    </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <label htmlFor="cascadeselect">CascadeSelect</label>
+                        <CascadeSelect id="cascadeselect" value={value10} options={cascadeSelectCountries} optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']} onChange={(e) => setValue10(e.value)} className="p-invalid"/>
                     </div>
                     <div className="p-field p-col-12 p-md-4">
                         <label htmlFor="dropdown">Dropdown</label>
@@ -238,6 +402,84 @@ const InvalidDemo = () => {
     const [value7, setValue7] = useState(null);
     const [value8, setValue8] = useState(null);
     const [value9, setValue9] = useState('');
+    const [value10, setValue10] = useState(null);
+
+    const cascadeSelectCountries = [
+        {
+            name: 'Australia',
+            code: 'AU',
+            states: [
+                {
+                    name: 'New South Wales',
+                    cities: [
+                        { cname: 'Sydney', code: 'A-SY' },
+                        { cname: 'Newcastle', code: 'A-NE' },
+                        { cname: 'Wollongong', code: 'A-WO' }
+                    ]
+                },
+                {
+                    name: 'Queensland',
+                    cities: [
+                        { cname: 'Brisbane', code: 'A-BR' },
+                        { cname: 'Townsville', code: 'A-TO' }
+                    ]
+                },
+
+            ]
+        },
+        {
+            name: 'Canada',
+            code: 'CA',
+            states: [
+                {
+                    name: 'Quebec',
+                    cities: [
+                        { cname: 'Montreal', code: 'C-MO' },
+                        { cname: 'Quebec City', code: 'C-QU' }
+                    ]
+                },
+                {
+                    name: 'Ontario',
+                    cities: [
+                        { cname: 'Ottawa', code: 'C-OT' },
+                        { cname: 'Toronto', code: 'C-TO' }
+                    ]
+                },
+
+            ]
+        },
+        {
+            name: 'United States',
+            code: 'US',
+            states: [
+                {
+                    name: 'California',
+                    cities: [
+                        { cname: 'Los Angeles', code: 'US-LA' },
+                        { cname: 'San Diego', code: 'US-SD' },
+                        { cname: 'San Francisco', code: 'US-SF' }
+                    ]
+                },
+                {
+                    name: 'Florida',
+                    cities: [
+                        { cname: 'Jacksonville', code: 'US-JA' },
+                        { cname: 'Miami', code: 'US-MI' },
+                        { cname: 'Tampa', code: 'US-TA' },
+                        { cname: 'Orlando', code: 'US-OR' }
+                    ]
+                },
+                {
+                    name: 'Texas',
+                    cities: [
+                        { cname: 'Austin', code: 'US-AU' },
+                        { cname: 'Dallas', code: 'US-DA' },
+                        { cname: 'Houston', code: 'US-HO' }
+                    ]
+                }
+            ]
+        }
+    ];
 
     const countryservice = new CountryService();
     const cities = [
@@ -288,6 +530,10 @@ const InvalidDemo = () => {
                     <div className="p-field p-col-12 p-md-4">
                         <label htmlFor="inputnumber">InputNumber</label>
                         <InputNumber id="inputnumber" value={value6} onChange={(e) => setValue6(e.value)} className="p-invalid" />
+                    </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <label htmlFor="cascadeselect">CascadeSelect</label>
+                        <CascadeSelect id="cascadeselect" value={value10} options={cascadeSelectCountries} optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']} onChange={(e) => setValue10(e.value)} className="p-invalid"/>
                     </div>
                     <div className="p-field p-col-12 p-md-4">
                         <label htmlFor="dropdown">Dropdown</label>
