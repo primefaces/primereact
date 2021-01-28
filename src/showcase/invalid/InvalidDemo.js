@@ -3,6 +3,7 @@ import { InputText } from '../../components/inputtext/InputText';
 import { AutoComplete } from '../../components/autocomplete/AutoComplete';
 import { CountryService } from '../service/CountryService';
 import { Calendar } from '../../components/calendar/Calendar';
+import { CascadeSelect } from '../../components/cascadeselect/CascadeSelect';
 import { Chips } from '../../components/chips/Chips';
 import { Dropdown } from '../../components/dropdown/Dropdown';
 import { InputMask } from '../../components/inputmask/InputMask';
@@ -34,8 +35,86 @@ export class InvalidDemo extends Component {
             value6: null,
             value7: null,
             value8: null,
-            value9: ''
+            value9: '',
+            value10: null
         };
+
+        this.cascadeSelectCountries = [
+            {
+                name: 'Australia',
+                code: 'AU',
+                states: [
+                    {
+                        name: 'New South Wales',
+                        cities: [
+                            { cname: 'Sydney', code: 'A-SY' },
+                            { cname: 'Newcastle', code: 'A-NE' },
+                            { cname: 'Wollongong', code: 'A-WO' }
+                        ]
+                    },
+                    {
+                        name: 'Queensland',
+                        cities: [
+                            { cname: 'Brisbane', code: 'A-BR' },
+                            { cname: 'Townsville', code: 'A-TO' }
+                        ]
+                    },
+
+                ]
+            },
+            {
+                name: 'Canada',
+                code: 'CA',
+                states: [
+                    {
+                        name: 'Quebec',
+                        cities: [
+                            { cname: 'Montreal', code: 'C-MO' },
+                            { cname: 'Quebec City', code: 'C-QU' }
+                        ]
+                    },
+                    {
+                        name: 'Ontario',
+                        cities: [
+                            { cname: 'Ottawa', code: 'C-OT' },
+                            { cname: 'Toronto', code: 'C-TO' }
+                        ]
+                    },
+
+                ]
+            },
+            {
+                name: 'United States',
+                code: 'US',
+                states: [
+                    {
+                        name: 'California',
+                        cities: [
+                            { cname: 'Los Angeles', code: 'US-LA' },
+                            { cname: 'San Diego', code: 'US-SD' },
+                            { cname: 'San Francisco', code: 'US-SF' }
+                        ]
+                    },
+                    {
+                        name: 'Florida',
+                        cities: [
+                            { cname: 'Jacksonville', code: 'US-JA' },
+                            { cname: 'Miami', code: 'US-MI' },
+                            { cname: 'Tampa', code: 'US-TA' },
+                            { cname: 'Orlando', code: 'US-OR' }
+                        ]
+                    },
+                    {
+                        name: 'Texas',
+                        cities: [
+                            { cname: 'Austin', code: 'US-AU' },
+                            { cname: 'Dallas', code: 'US-DA' },
+                            { cname: 'Houston', code: 'US-HO' }
+                        ]
+                    }
+                ]
+            }
+        ];
 
         this.countryservice = new CountryService();
         this.searchCountry = this.searchCountry.bind(this);
@@ -90,6 +169,10 @@ export class InvalidDemo extends Component {
                             <div className="p-field p-col-12 p-md-4">
                                 <label htmlFor="inputnumber">InputNumber</label>
                                 <InputNumber id="inputnumber" value={this.state.value6} onChange={(e) => this.setState({ value6: e.value })} className="p-invalid" />
+                            </div>
+                            <div className="p-field p-col-12 p-md-4">
+                                <label htmlFor="cascadeselect">CascadeSelect</label>
+                                <CascadeSelect id="cascadeselect" value={this.state.value10} options={this.cascadeSelectCountries} optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']} onChange={event => this.setState({ value10: event.value })} className="p-invalid"/>
                             </div>
                             <div className="p-field p-col-12 p-md-4">
                                 <label htmlFor="dropdown">Dropdown</label>
