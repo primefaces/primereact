@@ -1,5 +1,42 @@
 # Changelog
 
+## [6.0.1](https://github.com/primefaces/primereact/tree/6.0.1) (2021-01-28)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/6.0.0...6.0.1)
+
+**Implemented New Features and Enhancements:**
+
+- Clearing Dropdown returns null instead of undefined [\#1784](https://github.com/primefaces/primereact/issues/1784)
+- Improve template property on MenuModel API [\#1783](https://github.com/primefaces/primereact/issues/1783)
+- Add CascadeSelect to FloatLabelDemo [\#1781](https://github.com/primefaces/primereact/issues/1781)
+- Add imageAlt and onImageError to Avatar [\#1779](https://github.com/primefaces/primereact/issues/1779)
+- Add imageAlt and onImageError property to Chip [\#1778](https://github.com/primefaces/primereact/issues/1778)
+- Improve custom content option on Button [\#1777](https://github.com/primefaces/primereact/issues/1777)
+- Add restoreTableState method to DataTable [\#1776](https://github.com/primefaces/primereact/issues/1776)
+- If Tooltip's content is empty, the tooltip may not be rendered. [\#1770](https://github.com/primefaces/primereact/issues/1770)
+- Controlled Knob does not react to value changes on props [\#1766](https://github.com/primefaces/primereact/issues/1766)
+- Get filtered rows from global filter action [\#1763](https://github.com/primefaces/primereact/issues/1763)
+- Feature Request: DataTable hide expander when there are no children rows [\#1762](https://github.com/primefaces/primereact/issues/1762)
+- Change the type of content property in ToastMessage [\#1761](https://github.com/primefaces/primereact/issues/1761)
+- Add p-component class to Calendar [\#1756](https://github.com/primefaces/primereact/issues/1756)
+- Improve dynamic mask on InputMask [\#1718](https://github.com/primefaces/primereact/issues/1718)
+- MultiSelect implement SelectItem disabled [\#1698](https://github.com/primefaces/primereact/issues/1698)
+- Do not hide overlays on body scroll [\#1655](https://github.com/primefaces/primereact/issues/1655)
+- Add template property support to MenuModel API in all menu components [\#1635](https://github.com/primefaces/primereact/issues/1635)
+
+**Fixed bugs:**
+
+- Button link is invisible in material themes [\#1786](https://github.com/primefaces/primereact/issues/1786)
+- Inline Calendar doesn't display correctly with time/button bar  [\#1782](https://github.com/primefaces/primereact/issues/1782)
+- Improve float label support in overlay selects [\#1780](https://github.com/primefaces/primereact/issues/1780)
+- Avatar with image and shape="circle" doesn't have border-radius style [\#1773](https://github.com/primefaces/primereact/issues/1773)
+- Primereact 6 doesn't work once compiled with Webpack [\#1771](https://github.com/primefaces/primereact/issues/1771)
+- No typing for confirmPopup and confirmDialog [\#1765](https://github.com/primefaces/primereact/issues/1765)
+- Cascade Select material theming is inconsistent [\#1757](https://github.com/primefaces/primereact/issues/1757)
+- DataTable with editMode="cell" doesn't work as expected [\#1752](https://github.com/primefaces/primereact/issues/1752)
+- Problem in entering negative value in INPUTNUMBER.  [\#1746](https://github.com/primefaces/primereact/issues/1746)
+- Calendar input does not update view when hourFormat changes [\#1711](https://github.com/primefaces/primereact/issues/1711)
+
 ## [6.0.0](https://github.com/primefaces/primereact/tree/6.0.0) (2021-01-12)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/5.0.2...6.0.0)
