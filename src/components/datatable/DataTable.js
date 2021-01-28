@@ -1182,11 +1182,11 @@ export class DataTable extends Component {
         let filters = localFilters || this.getFilters();
         let columns = React.Children.toArray(this.props.children);
 
-        for(let i = 0; i < value.length; i++) {
+        for (let i = 0; i < value.length; i++) {
             let localMatch = true;
             let globalMatch = false;
 
-            for(let j = 0; j < columns.length; j++) {
+            for (let j = 0; j < columns.length; j++) {
                 let col = columns[j];
                 let columnField = col.props.filterField || col.props.field;
                 let filterMeta = filters ? filters[columnField] : null;
@@ -1198,11 +1198,11 @@ export class DataTable extends Component {
                     let filterMatchMode = filterMeta.matchMode||col.props.filterMatchMode;
                     let filterConstraint = filterMatchMode === 'custom' ? col.props.filterFunction : FilterUtils[filterMatchMode];
 
-                    if(!filterConstraint(dataFieldValue, filterValue, this.props.filterLocale)) {
+                    if (filterConstraint !== null && !filterConstraint(dataFieldValue, filterValue, this.props.filterLocale)) {
                         localMatch = false;
                     }
 
-                    if(!localMatch) {
+                    if (!localMatch) {
                         break;
                     }
                 }
