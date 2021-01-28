@@ -225,7 +225,7 @@ import { InputMask } from 'primereact/inputmask';
 
 <CodeHighlight>
 {`
-<InputMask mask="a*-999-a999"value={value} onChange={(e) => setValue(e.value)}></InputMask>
+<InputMask mask="a*-999-a999" value={value} onChange={(e) => setValue(e.value)}></InputMask>
 `}
 </CodeHighlight>
 
