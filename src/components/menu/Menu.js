@@ -254,16 +254,32 @@ export class Menu extends Component {
         const iconClassName = classNames('p-menuitem-icon', item.icon);
         const icon = item.icon && <span className={iconClassName}></span>;
         const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
-        const itemContent = item.template ? ObjectUtils.getJSXElement(item.template, item) : null;
         const tabIndex = item.disabled ? null : 0;
+        let content = (
+            <a href={item.url||'#'} className={linkClassName} role="menuitem" target={item.target} onClick={(event) => this.onItemClick(event, item)} onKeyDown={(event) => this.onItemKeyDown(event, item)} tabIndex={tabIndex}>
+                {icon}
+                {label}
+            </a>
+        );
+
+        if (item.template) {
+            const defaultContentOptions = {
+                onClick: (event) => this.onItemClick(event, item),
+                onKeyDown: (event) => this.onItemKeyDown(event, item),
+                className: linkClassName,
+                tabIndex: tabIndex,
+                labelClassName: 'p-menuitem-text',
+                iconClassName,
+                element: content,
+                props: this.props
+            };
+
+            content = ObjectUtils.getJSXElement(item.template, item, defaultContentOptions);
+        }
 
         return (
             <li key={item.label + '_' + index} className={className} style={item.style} role="none">
-                <a href={item.url||'#'} className={linkClassName} role="menuitem" target={item.target} onClick={e => this.onItemClick(e, item)} onKeyDown={e => this.onItemKeyDown(e, item)} tabIndex={tabIndex}>
-                    {icon}
-                    {label}
-                    {itemContent}
-                </a>
+                {content}
             </li>
         );
     }

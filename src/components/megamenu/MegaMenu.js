@@ -278,16 +278,30 @@ export class MegaMenu extends Component {
             const iconClassName = classNames(item.icon, 'p-menuitem-icon');
             const icon = item.icon && <span className={iconClassName}></span>;
             const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
-            const itemContent = item.template ? ObjectUtils.getJSXElement(item.template, item) : null;
+            let content = (
+                <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => this.onLeafClick(event, item)} role="menuitem">
+                    {icon}
+                    {label}
+                    <Ripple />
+                </a>
+            );
+
+            if (item.template) {
+                const defaultContentOptions = {
+                    onClick: (event) => this.onLeafClick(event, item),
+                    className: linkClassName,
+                    labelClassName: 'p-menuitem-text',
+                    iconClassName,
+                    element: content,
+                    props: this.props
+                };
+
+                content = ObjectUtils.getJSXElement(item.template, item, defaultContentOptions);
+            }
 
             return (
                 <li key={item.label + '_' + index} className={className} style={item.style} role="none">
-                    <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => this.onLeafClick(event, item)} role="menuitem">
-                        {icon}
-                        {label}
-                        {itemContent}
-                        <Ripple />
-                    </a>
+                    {content}
                 </li>
             );
         }

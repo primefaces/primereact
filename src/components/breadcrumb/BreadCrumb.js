@@ -65,14 +65,27 @@ export class BreadCrumb extends Component {
     renderMenuitem(item) {
         const className = classNames(item.className, {'p-disabled': item.disabled});
         const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
-        const itemContent = item.template ? ObjectUtils.getJSXElement(item.template, item) : null;
+        let content = (
+            <a href={item.url || '#'} className="p-menuitem-link" target={item.target} onClick={event => this.itemClick(event, item)}>
+                {label}
+            </a>
+        );
+
+        if (item.template) {
+            const defaultContentOptions = {
+                onClick: (event) => this.itemClick(event, item),
+                className: 'p-menuitem-link',
+                labelClassName: 'p-menuitem-text',
+                element: content,
+                props: this.props
+            };
+
+            content = ObjectUtils.getJSXElement(item.template, item, defaultContentOptions);
+        }
 
         return (
             <li className={className} style={item.style}>
-                <a href={item.url || '#'} className="p-menuitem-link" target={item.target} onClick={event => this.itemClick(event, item)}>
-                    {label}
-                    {itemContent}
-                </a>
+                {content}
             </li>
         );
     }
