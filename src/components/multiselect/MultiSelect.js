@@ -677,7 +677,7 @@ export class MultiSelect extends Component {
                 let optionLabel = this.getOptionLabel(option);
 
                 return (
-                    <MultiSelectItem key={optionLabel + '_' + index} label={optionLabel} option={option} template={this.props.itemTemplate}
+                    <MultiSelectItem key={optionLabel + '_' + index} label={optionLabel} option={option} disabled={option.disabled} template={this.props.itemTemplate}
                     selected={this.isSelected(option)} onClick={this.onOptionClick} onKeyDown={this.onOptionKeyDown} tabIndex={this.props.tabIndex} />
                 );
             });

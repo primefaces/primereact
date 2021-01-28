@@ -1,6 +1,5 @@
 .p-multiselect {
     display: inline-flex;
-    cursor: pointer;
     position: relative;
     user-select: none;
 }
@@ -10,6 +9,7 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    cursor: pointer;
 }
 
 .p-multiselect-label-container {
