@@ -473,7 +473,7 @@ ReactDOM.render(<${name} />, rootElement);`
             <div className="p-d-flex p-jc-end" style={{marginTop: '-1rem'}}>
                 <div className="p-d-flex p-flex-column p-ai-end">
                     <span className="liveEditorHelperText">*Hooks, TS and Class sources can be accessed using</span>
-                    <SplitButton model={this.items} buttonTemplate={buttonContent} onClick={() => this.postSandboxParameters(this.props.defaultSourceType)} appendTo={document.body} className="liveEditorSplitButton" menuClassName="liveEditorPanel"></SplitButton>
+                    <SplitButton model={this.items} buttonTemplate={buttonContent} onClick={() => this.postSandboxParameters(this.props.defaultSourceType)} appendTo={document.body} className="liveEditorSplitButton p-m-2" menuClassName="liveEditorPanel"></SplitButton>
                 </div>
             </div>
         );
