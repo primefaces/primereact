@@ -37,8 +37,8 @@ export class BodyCell extends Component {
             if (event.which === 13 || event.which === 9) { // tab || enter
                 this.switchCellToViewMode(event, true);
             }
-            if (event.which === 27) // escape
-            {
+
+            if (event.which === 27) { // escape
                 this.switchCellToViewMode(event, false);
             }
         }
