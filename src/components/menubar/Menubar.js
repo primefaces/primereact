@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import {MenubarSub} from './MenubarSub';
@@ -137,7 +136,7 @@ export class Menubar extends Component {
             <div id={this.props.id} className={className} style={this.props.style}>
                 {start}
                 {menuButton}
-                <MenubarSub ref={(el) => this.rootmenu = ReactDOM.findDOMNode(el)} model={this.props.model} root mobileActive={this.state.mobileActive} onLeafClick={this.onLeafClick} />
+                <MenubarSub ref={(el) => this.rootmenu = el} model={this.props.model} root mobileActive={this.state.mobileActive} onLeafClick={this.onLeafClick} />
                 {end}
             </div>
         );

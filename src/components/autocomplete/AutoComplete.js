@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 import { InputText } from '../inputtext/InputText';
 import { Button } from '../button/Button';
 import DomHandler from '../utils/DomHandler';
@@ -611,7 +610,7 @@ export class AutoComplete extends Component {
         });
 
         return (
-            <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} id={this.props.inputId} type={this.props.type} name={this.props.name}
+            <InputText ref={(el) => this.inputEl = el} id={this.props.inputId} type={this.props.type} name={this.props.name}
                         defaultValue={this.formatValue(this.props.value)} role="searchbox" aria-autocomplete="list" aria-controls={this.listId}
                         aria-labelledby={this.props.ariaLabelledBy} className={inputClassName} style={this.props.inputStyle} autoComplete="off"
                         readOnly={this.props.readOnly} disabled={this.props.disabled} placeholder={this.props.placeholder} size={this.props.size}

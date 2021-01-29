@@ -6,7 +6,7 @@ import {tip} from "../tooltip/Tooltip";
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
 
-export class InputText extends Component {
+class InputTextComponent extends Component {
 
     static defaultProps = {
         onInput: null,
@@ -14,7 +14,8 @@ export class InputText extends Component {
         keyfilter: null,
         validateOnly: false,
         tooltip: null,
-        tooltipOptions: null
+        tooltipOptions: null,
+        forwardRef: null
     };
 
     static propTypes = {
@@ -23,7 +24,8 @@ export class InputText extends Component {
         keyfilter: PropTypes.any,
         validateOnly: PropTypes.bool,
         tooltip: PropTypes.string,
-        tooltipOptions: PropTypes.object
+        tooltipOptions: PropTypes.object,
+        forwardRef: PropTypes.func
     };
 
     constructor(props) {
@@ -96,8 +98,10 @@ export class InputText extends Component {
             'p-filled': (this.props.value != null && this.props.value.toString().length > 0) || (this.props.defaultValue != null && this.props.defaultValue.toString().length > 0)
         });
 
-        let inputProps = ObjectUtils.findDiffKeys(this.props, InputText.defaultProps);
+        let inputProps = ObjectUtils.findDiffKeys(this.props, InputTextComponent.defaultProps);
 
-        return <input ref={(el) => this.element = el} {...inputProps} className={className} onInput={this.onInput} onKeyPress={this.onKeyPress}/>;
+        return <input ref={(el) => {this.element = el; if(this.props.forwardRef) this.props.forwardRef(el)}} {...inputProps} className={className} onInput={this.onInput} onKeyPress={this.onKeyPress}/>;
     }
 }
+
+export const InputText = React.forwardRef((props, ref) => <InputTextComponent forwardRef={ref} {...props}/>);

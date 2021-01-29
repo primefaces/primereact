@@ -5,7 +5,7 @@ import { tip } from '../tooltip/Tooltip';
 import ObjectUtils from '../utils/ObjectUtils';
 import { Ripple } from '../ripple/Ripple';
 
-export class Button extends Component {
+export class ButtonComponent extends Component {
 
     static defaultProps = {
         label: null,
@@ -14,7 +14,8 @@ export class Button extends Component {
         badge: null,
         badgeClassName: null,
         tooltip: null,
-        tooltipOptions: null
+        tooltipOptions: null,
+        forwardRef: null
     }
 
     static propTypes = {
@@ -24,7 +25,8 @@ export class Button extends Component {
         badge: PropTypes.string,
         badgeClassName: PropTypes.string,
         tooltip: PropTypes.string,
-        tooltipOptions: PropTypes.object
+        tooltipOptions: PropTypes.object,
+        forwardRef: PropTypes.func
     };
 
     componentDidMount() {
@@ -102,10 +104,10 @@ export class Button extends Component {
         let label = this.renderLabel();
         let badge = this.renderBadge();
 
-        let buttonProps = ObjectUtils.findDiffKeys(this.props, Button.defaultProps);
+        let buttonProps = ObjectUtils.findDiffKeys(this.props, ButtonComponent.defaultProps);
 
         return (
-            <button ref={(el) => this.element = el} {...buttonProps} className={className}>
+            <button ref={(el) => {this.element = el; if(this.props.forwardRef) this.props.forwardRef(el)}} {...buttonProps} className={className}>
                 {icon}
                 {label}
                 {this.props.children}
@@ -115,3 +117,5 @@ export class Button extends Component {
         );
     }
 }
+
+export const Button = React.forwardRef((props, ref) => <ButtonComponent forwardRef={ref} {...props}/>);

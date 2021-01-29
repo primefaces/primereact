@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 import {Button} from '../button/Button';
 import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
@@ -225,7 +224,7 @@ export class SplitButton extends Component {
 
         return (
             <div id={this.id} className={className} style={this.props.style} ref={el => this.container = el}>
-                <Button ref={(el) => this.defaultButton = ReactDOM.findDOMNode(el)} type="button" className="p-splitbutton-defaultbutton" icon={this.props.icon} label={this.props.label} onClick={this.props.onClick} disabled={this.props.disabled} tabIndex={this.props.tabIndex}>
+                <Button ref={(el) => this.defaultButton = el} type="button" className="p-splitbutton-defaultbutton" icon={this.props.icon} label={this.props.label} onClick={this.props.onClick} disabled={this.props.disabled} tabIndex={this.props.tabIndex}>
                     {buttonContent}
                 </Button>
                 <Button type="button" className="p-splitbutton-menubutton" icon="pi pi-chevron-down" onClick={this.onDropdownButtonClick} disabled={this.props.disabled}
