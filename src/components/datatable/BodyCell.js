@@ -177,21 +177,21 @@ export class BodyCell extends Component {
 
         if (this.props.expander) {
             const iconClassName = classNames('p-row-toggler-icon pi pi-fw p-clickable', {'pi-chevron-down': this.props.expanded, 'pi-chevron-right': !this.props.expanded});
+            let expanderProps = {
+                onClick: this.onExpanderClick,
+                className: 'p-row-toggler p-link',
+                iconClassName
+            };
+
             content = (
-                <button type="button" onClick={this.onExpanderClick} className="p-row-toggler p-link">
-                    <span className={iconClassName}></span>
+                <button type="button" onClick={expanderProps.onClick} className={expanderProps.className}>
+                    <span className={expanderProps.iconClassName}></span>
                     <Ripple />
                 </button>
             );
 
             if (this.props.body) {
-                const expanderProps = {
-                    onClick: this.onExpanderClick,
-                    className: "p-row-toggler p-link",
-                    iconClassName,
-                    element: content
-                };
-
+                expanderProps['element'] = content;
                 content = this.props.body(this.props.rowData, { ...this.props, ...{expander: expanderProps} });
             }
         }
