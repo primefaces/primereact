@@ -286,6 +286,7 @@ export class ContextMenu extends Component {
             let event = this.currentEvent;
             this.setState({
                 visible: false,
+                reshow: false,
                 rePosition: false,
                 resetMenu: true
             }, () => this.show(event));
