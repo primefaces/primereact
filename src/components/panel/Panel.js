@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import UniqueComponentId from '../utils/UniqueComponentId';
 import { CSSTransition } from 'react-transition-group';
+import { classNames } from '../utils/ClassNames';
+import UniqueComponentId from '../utils/UniqueComponentId';
+import ObjectUtils from '../utils/ObjectUtils';
 import { Ripple } from '../ripple/Ripple';
 
 export class Panel extends Component {
@@ -16,6 +17,7 @@ export class Panel extends Component {
         collapsed: null,
         expandIcon: 'pi pi-plus',
         collapseIcon: 'pi pi-minus',
+        icons: null,
         onExpand: null,
         onCollapse: null,
         onToggle: null
@@ -30,6 +32,7 @@ export class Panel extends Component {
         collapsed: PropTypes.bool,
         expandIcon: PropTypes.string,
         collapseIcon: PropTypes.string,
+        icons: PropTypes.any,
         onExpand: PropTypes.func,
         onCollapse: PropTypes.func,
         onToggle: PropTypes.func
@@ -111,12 +114,15 @@ export class Panel extends Component {
 
     renderHeader(collapsed) {
         if (this.props.header || this.props.toggleable) {
+            const header = ObjectUtils.getJSXElement(this.props.header, this.props);
+            const icons = ObjectUtils.getJSXElement(this.props.icons, this.props);
             const toggleIcon = this.renderToggleIcon(collapsed);
 
             return (
                 <div className="p-panel-header">
-                    <span className="p-panel-title" aria-label={this.id + '_header'}>{this.props.header}</span>
+                    <span className="p-panel-title" aria-label={this.id + '_header'}>{header}</span>
                     <div className="p-panel-icons">
+                        {icons}
                         {toggleIcon}
                     </div>
                 </div>

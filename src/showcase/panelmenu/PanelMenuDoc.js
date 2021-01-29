@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class PanelMenuDoc extends Component {
 
@@ -450,7 +450,7 @@ import { PanelMenu } from 'primereact/panelmenu';
 
 <CodeHighlight lang="js">
 {`
-const items:[
+const items = [
     {
        label:'File',
        icon:'pi pi-fw pi-file',
@@ -661,9 +661,9 @@ const items:[
                         <p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="PanelMenuDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'PanelMenuDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         )

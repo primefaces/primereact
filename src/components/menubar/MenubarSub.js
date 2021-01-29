@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
 import { Ripple } from '../ripple/Ripple';
+import ObjectUtils from '../utils/ObjectUtils';
 
 export class MenubarSubComponent extends Component {
 
@@ -262,30 +263,6 @@ export class MenubarSubComponent extends Component {
         );
     }
 
-    renderIcon(item) {
-        const className = classNames('p-menuitem-icon', item.icon);
-
-        if (item.icon) {
-            return (
-                <span className={className}></span>
-            );
-        }
-
-        return null;
-    }
-
-    renderSubmenuIcon(item) {
-        const icon = classNames('p-submenu-icon pi', {'pi-angle-down': this.props.root, 'pi-angle-right': !this.props.root});
-
-        if (item.items) {
-            return (
-                <span className={icon}></span>
-            );
-        }
-
-        return null;
-    }
-
     renderSubmenu(item) {
         if (item.items) {
             return (
@@ -299,19 +276,40 @@ export class MenubarSubComponent extends Component {
     renderMenuitem(item, index) {
         const className = classNames('p-menuitem', {'p-menuitem-active': this.state.activeItem === item}, item.className);
         const linkClassName = classNames('p-menuitem-link', {'p-disabled': item.disabled});
-        const icon = this.renderIcon(item);
-        const submenuIcon = this.renderSubmenuIcon(item);
+        const iconClassName = classNames('p-menuitem-icon', item.icon);
+        const submenuIconClassName = classNames('p-submenu-icon pi', {'pi-angle-down': this.props.root, 'pi-angle-right': !this.props.root});
+        const icon = item.icon && <span className={iconClassName}></span>;
+        const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
+        const submenuIcon = item.items && <span className={submenuIconClassName}></span>;
         const submenu = this.renderSubmenu(item);
+        let content = (
+            <a href={item.url || '#'} role="menuitem" className={linkClassName} target={item.target} aria-haspopup={item.items != null}
+                onClick={(event) => this.onItemClick(event, item)} onKeyDown={(event) => this.onItemKeyDown(event, item)}>
+                {icon}
+                {label}
+                {submenuIcon}
+                <Ripple />
+            </a>
+        );
+
+        if (item.template) {
+            const defaultContentOptions = {
+                onClick: (event) => this.onItemClick(event, item),
+                onKeyDown: (event) => this.onItemKeyDown(event, item),
+                className: linkClassName,
+                labelClassName: 'p-menuitem-text',
+                iconClassName,
+                submenuIconClassName,
+                element: content,
+                props: this.props
+            };
+
+            content = ObjectUtils.getJSXElement(item.template, item, defaultContentOptions);
+        }
 
         return (
             <li key={item.label + '_' + index} role="none" className={className} style={item.style} onMouseEnter={(event) => this.onItemMouseEnter(event, item)}>
-                <a href={item.url || '#'} role="menuitem" className={linkClassName} target={item.target} aria-haspopup={item.items != null}
-                    onClick={(event) => this.onItemClick(event, item)} onKeyDown={(event) => this.onItemKeyDown(event, item)}>
-                    {icon}
-                    <span className="p-menuitem-text">{item.label}</span>
-                    {submenuIcon}
-                    <Ripple />
-                </a>
+                {content}
                 {submenu}
             </li>
         );

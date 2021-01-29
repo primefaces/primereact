@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class ListBoxDoc extends Component {
 
@@ -223,7 +223,7 @@ const citySelectItems = [
 
 <CodeHighlight>
 {`
-<Listbox value={this.state.city} options={citySelectItems} onChange={(e) => this.setState({city: e.value})} />
+<ListBox value={city} options={citySelectItems} onChange={(e) => setCity(e.value)} />
 `}
 </CodeHighlight>
 
@@ -242,8 +242,8 @@ const cities = [
 
             <CodeHighlight>
 {`
-<Listbox optionLabel="name" value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})} />
-<Listbox optionLabel="name" optionValue="code" value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})} />
+<ListBox optionLabel="name" value={city} options={cities} onChange={(e) => setCity(e.value)} />
+<ListBox optionLabel="name" optionValue="code" value={city} options={cities} onChange={(e) => setCity(e.value)} />
 `}
             </CodeHighlight>
             <p>When <i>optionValue</i> is not defined, value of an option refers to the option object itself.</p>
@@ -255,16 +255,16 @@ const cities = [
 
 <CodeHighlight>
 {`
-<Listbox value={this.state.cities} options={cities} onChange={(e) => this.setState({city: e.value})} multiple />
+<ListBox value={cities} options={cities} onChange={(e) => setCity(e.value)} multiple />
 `}
 </CodeHighlight>
 
             <h5>Custom Content</h5>
-            <p>Label of an option is used as the display text of an item by default, for custom content support define an itemTemplate function that gets the option as a parameter and returns the content.</p>
+            <p>Label of an option is used as the display text of an item by default, for custom content support define an itemTemplate property. Its value can be JSXElement, function or string.</p>
 
 <CodeHighlight>
 {`
-<Listbox value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})} itemTemplate={this.itemTemplate} />
+<ListBox value={city} options={cities} onChange={(e) => setCity(e.value)} itemTemplate={itemTemplate} />
 `}
 </CodeHighlight>
 
@@ -278,11 +278,12 @@ itemTemplate(option) {
             <h5>Filtering</h5>
             <p>Options can be filtered using an input field in the overlay by enabling the <i>filter</i> property. By default filtering is done against
             label of the items and <i>filterBy</i> property is available to choose one or more properties of the options. In addition <i>filterMatchMode</i> can be utilized
-            to define the filtering algorithm, valid options are "contains" (default), "startsWith", "endsWith", "equals" and "notEquals".</p>
+            to define the filtering algorithm, valid options are "contains" (default), "startsWith", "endsWith", "equals" and "notEquals".
+            Also, the <i>filterValue</i> and <i>onFilterValueChange</i> properties can be used to control the filter value.</p>
 
 <CodeHighlight>
 {`
-<Listbox value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})} filter />
+<ListBox value={city} options={cities} onChange={(e) => setCity(e.value)} filter />
 `}
 </CodeHighlight>
 
@@ -376,9 +377,9 @@ itemTemplate(option) {
                         </tr>
                         <tr>
                             <td>itemTemplate</td>
-                            <td>function</td>
+                            <td>any</td>
                             <td>null</td>
-                            <td>Function that gets the option and returns the content for it.</td>
+                            <td>Custom template for the items.</td>
                         </tr>
                         <tr>
                             <td>style</td>
@@ -442,6 +443,12 @@ itemTemplate(option) {
                             <td>When filtering is enabled, filterBy decides which field or fields (comma separated) to search against.</td>
                         </tr>
                         <tr>
+                            <td>filterValue</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>When specified, filter displays with this value.</td>
+                        </tr>
+                        <tr>
                             <td>filterMatchMode</td>
                             <td>string</td>
                             <td>contains</td>
@@ -461,7 +468,7 @@ itemTemplate(option) {
                         </tr>
                         <tr>
                             <td>tabIndex</td>
-                            <td>string</td>
+                            <td>number</td>
                             <td>null</td>
                             <td>Index of the element in tabbing order.</td>
                         </tr>
@@ -498,6 +505,13 @@ itemTemplate(option) {
                                 event.value: Single value or an array of values depending on the selection mode <br/>
                             </td>
                             <td>Callback to invoke when value of listbox changes.</td>
+                        </tr>
+                        <tr>
+                            <td>onFilterValueChange</td>
+                            <td>event.originalEvent: Browser event <br/>
+                                event.value: the filtered value <br/>
+                            </td>
+                            <td>Callback to invoke when filter value changes.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -542,9 +556,9 @@ itemTemplate(option) {
             <p>None.</p>
         </TabPanel>
 
-        <TabPanel header="Source">
-            <LiveEditor name="ListBoxDemo" sources={this.sources} />
-        </TabPanel>
+        {
+            useLiveEditorTabs({ name: 'ListBoxDemo', sources: this.sources })
+        }
     </TabView>
 </div>
         );

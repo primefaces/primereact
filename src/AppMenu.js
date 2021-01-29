@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import { CSSTransition } from 'react-transition-group';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import classNames from 'classnames';
-import { CSSTransition } from 'react-transition-group';
 import { InputText } from '../src/components/inputtext/InputText';
 
 export class AppMenu extends Component {
@@ -16,6 +17,7 @@ export class AppMenu extends Component {
         };
 
         this.onSearchInputChange = this.onSearchInputChange.bind(this);
+        this.resetFilter = this.resetFilter.bind(this);
     }
 
     getMenu() {
@@ -69,7 +71,7 @@ export class AppMenu extends Component {
 
     isFilterMatched(item, searchVal) {
         let matched = false;
-        if(item.name.toLowerCase().indexOf(searchVal) > -1 || this.onFilterOnMeta(item, searchVal)) {
+        if (this.onFilterOnOptions(item, searchVal, ['name', 'meta', 'badge'])) {
             matched = true;
         }
 
@@ -80,9 +82,20 @@ export class AppMenu extends Component {
         return matched;
     }
 
-    onFilterOnMeta(item, searchVal) {
-        if (item && item.meta) {
-            return item.meta.filter(meta => meta.toLowerCase().indexOf(searchVal) > -1).length > 0
+    onFilterOnOptions(item, searchVal, optionKeys) {
+        if (item && optionKeys) {
+            return optionKeys.some(optionKey => {
+                let value = item[optionKey];
+
+                if (value) {
+                    if (typeof value === 'string')
+                        return value.toLowerCase().indexOf(searchVal) > -1;
+                    else
+                        return value.filter(meta => meta.toLowerCase().indexOf(searchVal) > -1).length > 0;
+                }
+
+                return false;
+            });
         }
 
         return false;
@@ -101,6 +114,17 @@ export class AppMenu extends Component {
         }
 
         return false;
+    }
+
+    showSearchClearIcon() {
+        return this.state.filteredMenu && this.state.menu && this.state.filteredMenu.length !== this.state.menu.length;
+    }
+
+    resetFilter() {
+        this.setState({ filteredMenu : this.state.menu }, () => {
+            this.searchInput.value = '';
+            this.searchInput.focus();
+        });
     }
 
     componentDidMount() {
@@ -196,15 +220,20 @@ export class AppMenu extends Component {
     }
 
     render() {
-        const sidebarClassName = classNames('layout-sidebar', {'active': this.props.active});
         const menuItems = this.renderCategoryItems();
+        const showClearIcon = this.showSearchClearIcon();
+        const sidebarClassName = classNames('layout-sidebar', {'active': this.props.active});
+        const filterContentClassName = classNames('layout-sidebar-filter-content p-input-filled p-input-icon-left p-fluid', {'p-input-icon-right': showClearIcon});
 
         return (
             <div className={sidebarClassName} role="navigation">
-                <span className="layout-sidebar-filter p-input-icon-left p-fluid p-my-2">
-                    <i className="pi pi-search" />
-                    <InputText type="text" onChange={this.onSearchInputChange}  placeholder="Search..." aria-label="Search input" autoComplete="off" />
-                </span>
+                <div className="layout-sidebar-filter">
+                    <div className={filterContentClassName}>
+                        <i className="pi pi-search" />
+                        <InputText ref={(el) => this.searchInput = ReactDOM.findDOMNode(el)} type="text" onChange={this.onSearchInputChange} placeholder="Search by name, badge..." aria-label="Search input" autoComplete="off" />
+                        {showClearIcon && <i className="clear-icon pi pi-times" onClick={this.resetFilter} />}
+                    </div>
+                </div>
 
                 <div className="layout-menu" role="menubar">
                     { menuItems }

@@ -1,28 +1,35 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
+import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 
 export function tip(props) {
     let appendTo = props.appendTo || document.body;
 
-    let tooltipWrapper = document.createElement('div');
+    let tooltipWrapper = document.createDocumentFragment();
     DomHandler.appendChild(tooltipWrapper, appendTo);
 
-    props.appendTo = tooltipWrapper;
     props = {...props, ...props.options};
 
     let tooltipEl = React.createElement(Tooltip, props);
     ReactDOM.render(tooltipEl, tooltipWrapper);
 
+    let updateTooltip = (newProps) => {
+        props = { ...props, ...newProps };
+        ReactDOM.render(React.cloneElement(tooltipEl, props), tooltipWrapper);
+    };
+
     return {
         destroy: () => {
             ReactDOM.unmountComponentAtNode(tooltipWrapper);
-            DomHandler.removeChild(tooltipWrapper, appendTo);
         },
-        updateContent: (content) => {
-            ReactDOM.render(React.cloneElement(tooltipEl, {content}), tooltipWrapper);
+        updateContent: (newContent) => {
+            updateTooltip({ content: newContent });
+        },
+        update: (newProps) => {
+            updateTooltip(newProps);
         }
     }
 }
@@ -74,10 +81,8 @@ export class Tooltip extends Component {
         mouseTrackLeft: PropTypes.number,
         onBeforeShow: PropTypes.func,
         onBeforeHide: PropTypes.func,
-        onBeforeUpdated: PropTypes.func,
         onShow: PropTypes.func,
-        onHide: PropTypes.func,
-        onUpdated: PropTypes.func
+        onHide: PropTypes.func
     }
 
     constructor(props) {
@@ -132,6 +137,10 @@ export class Tooltip extends Component {
     show(e) {
         this.currentTarget = e.currentTarget;
 
+        if (this.isContentEmpty(this.currentTarget)) {
+            return;
+        }
+
         const updateTooltipState = () => {
             this.updateText(this.currentTarget, () => {
                 if (this.props.autoZIndex && !this.containerEl.style.zIndex) {
@@ -158,11 +167,14 @@ export class Tooltip extends Component {
                 });
 
                 this.bindDocumentResizeListener();
+                this.bindScrollListener();
             });
         }
     }
 
     hide(e) {
+        this.clearTimeouts();
+
         if (this.state.visible) {
             this.sendCallback(this.props.onBeforeHide, { originalEvent: e, target: this.currentTarget });
             this.applyDelay('hideDelay', () => {
@@ -177,7 +189,9 @@ export class Tooltip extends Component {
                     }
 
                     this.unbindDocumentResizeListener();
+                    this.unbindScrollListener();
                     this.currentTarget = null;
+                    this.scrollHandler = null;
                     this.sendCallback(this.props.onHide, { originalEvent: e, target: this.currentTarget });
                 });
             });
@@ -250,6 +264,24 @@ export class Tooltip extends Component {
         }
     }
 
+    bindScrollListener() {
+        if (!this.scrollHandler) {
+            this.scrollHandler = new ConnectedOverlayScrollHandler(this.currentTarget, (e) => {
+                if (this.state.visible) {
+                    this.hide(e);
+                }
+            });
+        }
+
+        this.scrollHandler.bindScrollListener();
+    }
+
+    unbindScrollListener() {
+        if (this.scrollHandler) {
+            this.scrollHandler.unbindScrollListener();
+        }
+    }
+
     bindTargetEvent(target) {
         if (target) {
             const { showEvent, hideEvent } = this.getEvents();
@@ -291,26 +323,40 @@ export class Tooltip extends Component {
     }
 
     loadTargetEvents() {
-        if (DomHandler.isElement(this.props.target)) {
-            this.bindTargetEvent(this.props.target);
-        }
-        else {
-            const setEvent = (target) => {
-                let element = DomHandler.find(document, target);
-                element.forEach((el) => {
-                    this.bindTargetEvent(el);
-                });
-            }
+        this.setTargetEventOperations(this.props.target, 'bindTargetEvent');
+    }
 
-            if (this.props.target instanceof Array) {
-                this.props.target.forEach(target => {
-                    setEvent(target);
-                });
+    unloadTargetEvents() {
+        this.setTargetEventOperations(this.props.target, 'unbindTargetEvent');
+    }
+
+    setTargetEventOperations(target, operation) {
+        if (target) {
+            if (DomHandler.isElement(target)) {
+                this[operation](target);
             }
             else {
-                setEvent(this.props.target);
+                const setEvent = (target) => {
+                    let element = DomHandler.find(document, target);
+                    element.forEach((el) => {
+                        this[operation](el);
+                    });
+                }
+
+                if (target instanceof Array) {
+                    target.forEach(t => {
+                        setEvent(t);
+                    });
+                }
+                else {
+                    setEvent(target);
+                }
             }
         }
+    }
+
+    isContentEmpty(target) {
+        return !(this.props.content || (target && target.getAttribute('data-pr-tooltip')) || this.props.children);
     }
 
     componentDidMount() {
@@ -336,7 +382,12 @@ export class Tooltip extends Component {
     componentWillUnmount() {
         this.clearTimeouts();
         this.unbindDocumentResizeListener();
-        this.unbindTargetEvent();
+        this.unloadTargetEvents();
+
+        if (this.scrollHandler) {
+            this.scrollHandler.destroy();
+            this.scrollHandler = null;
+        }
     }
 
     renderElement() {

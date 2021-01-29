@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { DataTable } from '../../components/datatable/DataTable';
 import { Column } from '../../components/column/Column';
 import { CustomerService } from '../service/CustomerService';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
+import { TabView } from '../../components/tabview/TabView';
 import { Button } from '../../components/button/Button';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class DataTablePaginatorDemo extends Component {
@@ -197,9 +197,9 @@ const DataTablePaginatorDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="DataTablePaginatorDemo" sources={this.sources} service="CustomerService" data="customers-large" />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'DataTablePaginatorDemo', sources: this.sources, service: 'CustomerService', data: 'customers-large' })
+                    }
                 </TabView>
             </div>
         )

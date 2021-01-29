@@ -130,6 +130,7 @@ export class GalleriaIndicatorDemoDoc extends Component {
         return (
             <div className="content-section documentation">
                 <TabView>
+
                     <TabPanel header="Source">
 <CodeHighlight lang="js">
 {`

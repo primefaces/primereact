@@ -16,6 +16,7 @@ interface DataTableProps {
     paginatorLeft?: any;
     paginatorRight?: any;
     pageLinkSize?: number;
+    paginatorDropdownAppendTo?: any;
     rowsPerPageOptions?: number[];
     currentPageReportTemplate?: string;
     first?: number;
@@ -59,7 +60,7 @@ interface DataTableProps {
     autoLayout?:boolean;
     loading?:boolean;
     loadingIcon?:string;
-    tabIndex?:string;
+    tabIndex?:number;
     stateKey?:string;
     stateStorage?:string;
     groupField?:string;

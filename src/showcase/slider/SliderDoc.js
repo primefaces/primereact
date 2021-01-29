@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class SliderDoc extends Component {
 
@@ -174,7 +174,7 @@ import { Slider } from 'primereact/slider';
 
 <CodeHighlight>
 {`
-<Slider value={this.state.value} onChange={(e) => this.setState({value: e.value})} />
+<Slider value={value} onChange={(e) => setValue(e.value)} />
 `}
 </CodeHighlight>
 
@@ -182,7 +182,7 @@ import { Slider } from 'primereact/slider';
             <p>Range slider provides two handles to define two values. Enable <i>range</i> property and bind an array to implement a range slider.</p>
 <CodeHighlight>
 {`
-<Slider value={this.state.rangeValues} onChange={(e) => this.setState({rangeValues: e.value})} range />
+<Slider value={rangeValues} onChange={(e) => setRangeValues(e.value)} range />
 `}
 </CodeHighlight>
 
@@ -190,7 +190,7 @@ import { Slider } from 'primereact/slider';
             <p>Default layout of slider is horizontal, use <i>orientation</i> property for the alternative vertical mode.</p>
 <CodeHighlight>
 {`
-<Slider value={this.state.value} onChange={(e) => this.setState({value: e.value})} orientation="vertical" />
+<Slider value={value} onChange={(e) => setValue(e.value)} orientation="vertical" />
 `}
 </CodeHighlight>
 
@@ -274,7 +274,7 @@ import { Slider } from 'primereact/slider';
                         </tr>
                         <tr>
                             <td>tabIndex</td>
-                            <td>string</td>
+                            <td>number</td>
                             <td>null</td>
                             <td>Index of the element in tabbing order.</td>
                         </tr>
@@ -344,9 +344,9 @@ import { Slider } from 'primereact/slider';
             <p>None.</p>
         </TabPanel>
 
-        <TabPanel header="Source">
-            <LiveEditor name="SliderDemo" sources={this.sources} extFiles={this.extFiles} />
-        </TabPanel>
+        {
+            useLiveEditorTabs({ name: 'SliderDemo', sources: this.sources, extFiles: this.extFiles })
+        }
     </TabView>
 </div>
         );

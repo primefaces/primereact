@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Tree } from '../../components/tree/Tree';
 import { NodeService } from '../service/NodeService';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
+import { TabView } from '../../components/tabview/TabView';
 import { Toast } from '../../components/toast/Toast';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class TreeSelectionDemo extends Component {
@@ -244,9 +244,9 @@ const TreeSelectionDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="TreeSelectionDemo" sources={this.sources} service="NodeService" data="treenodes" />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'TreeSelectionDemo', sources: this.sources, service: 'NodeService', data: 'treenodes' })
+                    }
                 </TabView>
             </div>
         );

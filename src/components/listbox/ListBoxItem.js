@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
 import { Ripple } from '../ripple/Ripple';
+import ObjectUtils from '../utils/ObjectUtils';
 
 export class ListBoxItem extends Component {
 
@@ -20,14 +21,14 @@ export class ListBoxItem extends Component {
         option: PropTypes.any,
         label: PropTypes.string,
         selected: PropTypes.bool,
-        tabIndex: PropTypes.string,
+        tabIndex: PropTypes.number,
         onClick: PropTypes.func,
         onTouchEnd: PropTypes.func,
-        template: PropTypes.func
+        template: PropTypes.any
     }
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.onClick = this.onClick.bind(this);
         this.onTouchEnd = this.onTouchEnd.bind(this);
         this.onKeyDown = this.onKeyDown.bind(this);
@@ -110,7 +111,7 @@ export class ListBoxItem extends Component {
         let className = classNames('p-listbox-item', {
             'p-highlight': this.props.selected
         }, this.props.option.className);
-        let content = this.props.template ? this.props.template(this.props.option) : this.props.label;
+        let content = this.props.template ? ObjectUtils.getJSXElement(this.props.template, this.props.option) : this.props.label;
 
         return (
             <li className={className} onClick={this.onClick} onTouchEnd={this.onTouchEnd} onKeyDown={this.onKeyDown} tabIndex={this.props.tabIndex}

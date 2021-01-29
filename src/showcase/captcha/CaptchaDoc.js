@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class CaptchaDoc extends Component {
 
@@ -116,7 +116,7 @@ import { Captcha } from 'primereact/captcha';
                         <p>Captcha is used with a siteKey and a callback to verify the response.</p>
 <CodeHighlight>
 {`
-<Captcha siteKey="YOUR_SITE_KEY" onResponse={this.showResponse}></Captcha>
+<Captcha siteKey="YOUR_SITE_KEY" onResponse={showResponse}></Captcha>
 `}
 </CodeHighlight>
 
@@ -125,7 +125,7 @@ import { Captcha } from 'primereact/captcha';
                         official documentation.</p>
 <CodeHighlight lang="js">
 {`
-showResponse(response) {
+const showResponse = (response) => {
 //call to a backend to verify against recaptcha with private key
 }
 `}
@@ -184,7 +184,7 @@ showResponse(response) {
                                         <td>tabIndex</td>
                                         <td>number</td>
                                         <td>0</td>
-                                        <td>The tabindex of the widget and challenge.</td>
+                                        <td>The tabIndex of the widget and challenge.</td>
                                     </tr>
                                     <tr>
                                         <td>language</td>
@@ -250,9 +250,9 @@ showResponse(response) {
                         <p>Google Recaptcha V2</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="CaptchaDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'CaptchaDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         )

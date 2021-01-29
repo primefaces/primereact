@@ -22,12 +22,12 @@ interface AutoCompleteProps {
     panelClassName?: string;
     panelStyle?: object;
     placeholder?: string;
-    readonly?: boolean;
+    readOnly?: boolean;
     disabled?: boolean;
     maxlength?: number;
     size?: number;
     appendTo?: any;
-    tabindex?: number;
+    tabIndex?: number;
     autoFocus?: boolean;
     tooltip?: any;
     tooltipOptions?: TooltipOptions;

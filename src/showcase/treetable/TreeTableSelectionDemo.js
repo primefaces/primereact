@@ -3,8 +3,8 @@ import { TreeTable } from '../../components/treetable/TreeTable';
 import { Toast } from '../../components/toast/Toast';
 import { Column } from '../../components/column/Column';
 import { NodeService } from '../service/NodeService';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class TreeTableSelectionDemo extends Component {
@@ -385,9 +385,9 @@ const TreeTableSelectionDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="TreeTableSelectionDemo" sources={this.sources} service="NodeService" data="treetablenodes" />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'TreeTableSelectionDemo', sources: this.sources, service: 'NodeService', data: 'treetablenodes' })
+                    }
                 </TabView>
             </div>
         )

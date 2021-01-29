@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Tree } from '../../components/tree/Tree';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class TreeLazyDemo extends Component {
@@ -337,9 +337,9 @@ const TreeLazyDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="TreeLazyDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'TreeLazyDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         );

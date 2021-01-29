@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class FileUploadDoc extends Component {
 
@@ -245,12 +245,12 @@ import { FileUpload } from 'primereact/fileupload';
             <p>Uploading implementation can be overriden by enabling customUpload property and defining a custom upload handler event.</p>
 <CodeHighlight>
 {`
-<FileUpload name="demo[]" url="./upload" customUpload uploadHandler={this.myUploader} />
+<FileUpload name="demo[]" url="./upload" customUpload uploadHandler={myUploader} />
 `}
 </CodeHighlight>
 <CodeHighlight lang="js">
 {`
-myUploader(event) {
+const myUploader = (event) => {
     //event.files == files to upload
 }
 `}
@@ -361,20 +361,20 @@ myUploader(event) {
                         <tr>
                             <td>chooseLabel</td>
                             <td>string</td>
-                            <td>Choose</td>
-                            <td>Label of the choose button.</td>
+                            <td>null</td>
+                            <td>Label of the choose button. Defaults to global value in Locale configuration.</td>
                         </tr>
                         <tr>
                             <td>uploadLabel</td>
                             <td>string</td>
-                            <td>Upload</td>
-                            <td>Label of the upload button.</td>
+                            <td>null</td>
+                            <td>Label of the upload button. Defaults to global value in Locale configuration.</td>
                         </tr>
                         <tr>
                             <td>cancelLabel</td>
                             <td>string</td>
-                            <td>Cancel</td>
-                            <td>Label of the cancel button.</td>
+                            <td>null</td>
+                            <td>Label of the cancel button. Defaults to global value in Locale configuration.</td>
                         </tr>
                         <tr>
                             <td>customUpload</td>
@@ -523,9 +523,9 @@ myUploader(event) {
 
             </TabPanel>
 
-            <TabPanel header="Source">
-                <LiveEditor name="FileUploadDemo" sources={this.sources} extFiles={this.extFiles} />
-            </TabPanel>
+            {
+                useLiveEditorTabs({ name: 'FileUploadDemo', sources: this.sources, extFiles: this.extFiles })
+            }
         </TabView>
     </div>
         );

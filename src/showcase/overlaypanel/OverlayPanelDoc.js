@@ -2,7 +2,7 @@ import React, { Component}  from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class OverlayPanelDoc extends Component {
 
@@ -260,9 +260,9 @@ import { OverlayPanel } from 'primereact/overlaypanel';
             <p>OverlayPanel is accessed via its reference where visibility is controlled using toggle, show and hide methods.</p>
 <CodeHighlight>
 {`
-<Button type="button" label="Basic" onClick={(e) => this.op.toggle(e)} />
+<Button type="button" label="Basic" onClick={(e) => op.current.toggle(e)} />
 
-<OverlayPanel ref={(el) => this.op = el}>
+<OverlayPanel ref={op}>
     // Content
 </OverlayPanel>
 `}
@@ -274,7 +274,7 @@ import { OverlayPanel } from 'primereact/overlaypanel';
 
 <CodeHighlight>
 {`
-<OverlayPanel ref={(el) => this.op = el} showCloseIcon dismissable>
+<OverlayPanel ref={op} showCloseIcon dismissable>
     // Content
 </OverlayPanel>
 `}
@@ -421,9 +421,9 @@ import { OverlayPanel } from 'primereact/overlaypanel';
 
             </TabPanel>
 
-            <TabPanel header="Source">
-                <LiveEditor name="OverlayPanelDemo" sources={this.sources} service="ProductService" data="products-small" extFiles={this.extFiles} />
-            </TabPanel>
+            {
+                useLiveEditorTabs({ name: 'OverlayPanelDemo', sources: this.sources, service: 'ProductService', data: 'products-small', extFiles: this.extFiles })
+            }
         </TabView>
     </div>
         );

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class StepsDoc extends Component {
 
@@ -16,6 +16,7 @@ export class StepsDoc extends Component {
 import React, { Component } from 'react';
 import { Steps } from 'primereact/steps';
 import { Toast } from 'primereact/toast';
+import './StepsDemo.css';
 
 export class StepsDemo extends Component {
 
@@ -55,7 +56,7 @@ export class StepsDemo extends Component {
 
     render() {
         return (
-            <div>
+            <div className="steps-demo">
                 <Toast ref={(el) => { this.toast = el }}></Toast>
 
                 <div className="card">
@@ -77,6 +78,7 @@ export class StepsDemo extends Component {
 import React, { useState, useRef } from 'react';
 import { Steps } from 'primereact/steps';
 import { Toast } from 'primereact/toast';
+import './StepsDemo.css';
 
 const StepsDemo = () => {
     const [activeIndex, setActiveIndex] = useState(1);
@@ -109,7 +111,7 @@ const StepsDemo = () => {
     ];
 
     return (
-        <div>
+        <div className="steps-demo">
             <Toast ref={toast}></Toast>
 
             <div className="card">
@@ -130,6 +132,7 @@ const StepsDemo = () => {
 import React, { useState, useRef } from 'react';
 import { Steps } from 'primereact/steps';
 import { Toast } from 'primereact/toast';
+import './StepsDemo.css';
 
 const StepsDemo = () => {
     const [activeIndex, setActiveIndex] = useState(1);
@@ -162,7 +165,7 @@ const StepsDemo = () => {
     ];
 
     return (
-        <div>
+        <div className="steps-demo">
             <Toast ref={toast}></Toast>
 
             <div className="card">
@@ -174,6 +177,54 @@ const StepsDemo = () => {
             </div>
         </div>
     );
+}
+                `
+            }
+        }
+
+        this.extFiles = {
+            'src/demo/StepsDemo.css': {
+                content: `
+@media screen and (max-width: 640px) {
+    .steps-demo .p-steps {
+        height: 350px;
+    }
+    .steps-demo .p-steps > ul {
+        flex-direction: column;
+        height: 100%;
+    }
+    .steps-demo .p-steps > ul .p-steps-item {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        justify-content: center;
+    }
+    .steps-demo .p-steps > ul .p-steps-item:before {
+        position: static;
+        left: auto;
+        top: auto;
+        margin-top: 0;
+        border-left: 1px solid var(--surface-d);
+        border-top: 0 none;
+        width: auto;
+        height: 100%;
+        margin-left: 1rem;
+    }
+    .steps-demo .p-steps > ul .p-steps-item .p-menuitem-link {
+        flex-direction: row;
+        overflow: visible;
+    }
+    .steps-demo .p-steps > ul .p-steps-item .p-menuitem-link .p-steps-title {
+        margin: 0 .5rem 0;
+    }
+    .steps-demo .p-steps > ul .p-steps-item:last-child {
+        flex-grow: 0;
+    }
+    .steps-demo .p-steps > ul .p-steps-item:last-child .p-menuitem-link {
+        padding: 0;
+    }
+    .steps-demo .p-steps > ul .p-steps-item:last-child:before {
+        display: none;
+    }
 }
                 `
             }
@@ -219,12 +270,12 @@ const items = [
 </CodeHighlight>
 
                         <h5>interactive</h5>
-                        <p>Items are readonly by default, if you'd like to make them interactive then disable readonly, use command handlers of menuitem to respond to selection events and define activeIndex property along with the
+                        <p>Items are readOnly by default, if you'd like to make them interactive then disable readonly, use command handlers of menuitem to respond to selection events and define activeIndex property along with the
                             onSelect event to use it as a controlled component.</p>
 
 <CodeHighlight>
 {`
-<Steps model={interactiveItems} activeIndex={this.state.activeIndex} onSelect={(e) => this.setState({activeIndex: e.index})} readOnly={false} />
+<Steps model={interactiveItems} activeIndex={activeIndex} onSelect={(e) => setActiveIndex(e.index)} readOnly={false} />
 `}
 </CodeHighlight>
 
@@ -234,25 +285,25 @@ const interactiveItems = [
     {
         label: 'Personal',
         command: (event) => {
-            this.toast.show({severity:'info', summary:'First Step', detail: event.item.label});
+            toast.current.show({severity:'info', summary:'First Step', detail: event.item.label});
         }
     },
     {
         label: 'Seat',
         command: (event) => {
-            this.toast.show({severity:'info', summary:'Seat Selection', detail: event.item.label});
+            toast.current.show({severity:'info', summary:'Seat Selection', detail: event.item.label});
         }
     },
     {
         label: 'Payment',
         command: (event) => {
-            this.toast.show({severity:'info', summary:'Pay with CC', detail: event.item.label});
+            toast.current.show({severity:'info', summary:'Pay with CC', detail: event.item.label});
         }
     },
     {
         label: 'Confirmation',
         command: (event) => {
-            this.toast.show({severity:'info', summary:'Last Step', detail: event.item.label});
+            toast.current.show({severity:'info', summary:'Last Step', detail: event.item.label});
         }
     }
 ];
@@ -368,9 +419,9 @@ const interactiveItems = [
                         <p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="StepsDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'StepsDemo', sources: this.sources, extFiles: this.extFiles })
+                    }
                 </TabView>
             </div>
         )

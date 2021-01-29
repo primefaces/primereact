@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import DomHandler from '../utils/DomHandler';
 import { Ripple } from '../ripple/Ripple';
@@ -106,7 +106,7 @@ export class TabView extends Component {
         const className = classNames('p-unselectable-text', {'p-tabview-selected p-highlight': selected, 'p-disabled': tab.props.disabled}, tab.props.headerClassName);
         const id = this.id + '_header_' + index;
         const ariaControls = this.id + '_content_' + index;
-        const tabIndex = tab.props.disabled ? null : '0';
+        const tabIndex = tab.props.disabled ? null : 0;
 
         return (
             <li ref={(el) => this[`tab_${index}`] = el} className={className} style={tab.props.headerStyle} role="presentation">

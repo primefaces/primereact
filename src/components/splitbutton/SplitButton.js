@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {Button} from '../button/Button';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
 import { SplitButtonItem } from './SplitButtonItem';
 import { SplitButtonPanel } from './SplitButtonPanel';
@@ -41,7 +41,7 @@ export class SplitButton extends Component {
         className: PropTypes.string,
         menustyle: PropTypes.object,
         menuClassName: PropTypes.string,
-        tabIndex: PropTypes.string,
+        tabIndex: PropTypes.number,
         onClick: PropTypes.func,
         appendTo: PropTypes.object,
         tooltip: PropTypes.string,

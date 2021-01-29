@@ -3,6 +3,7 @@ import { Steps } from '../../components/steps/Steps';
 import { Toast } from '../../components/toast/Toast';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { StepsDoc } from './StepsDoc';
+import './StepsDemo.scss';
 
 export class StepsDemo extends Component {
 
@@ -50,7 +51,7 @@ export class StepsDemo extends Component {
                     </AppInlineHeader>
                 </div>
 
-                <div className="content-section implementation">
+                <div className="content-section implementation steps-demo">
                     <Toast ref={(el) => { this.toast = el }}></Toast>
 
                     <div className="card">

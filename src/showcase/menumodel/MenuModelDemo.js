@@ -33,7 +33,7 @@ class MenuModelDoc extends Component {
                 <p>Core of the API is the MenuItem class that defines various options such as the label, icon and children of an item in a menu.</p>
                 <CodeHighlight lang="js">
                     {`
-const items: [
+const items = [
     {
         label: 'Options',
         items: [{label: 'New', icon: 'pi pi-fw pi-plus',command:()=>{ window.location.hash="/fileupload"; }},

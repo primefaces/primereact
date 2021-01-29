@@ -3,6 +3,7 @@ import { PropTypes } from 'prop-types'
 import { Link } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 import { Tooltip } from './components/tooltip/Tooltip';
+import { VersionService } from './showcase/service/VersionService';
 
 export class AppTopbar extends Component {
 
@@ -24,8 +25,11 @@ export class AppTopbar extends Component {
         super(props);
 
         this.state = {
-            activeMenuIndex: null
+            activeMenuIndex: null,
+            versions: []
         };
+        this.versionService = new VersionService();
+        this.version = require('../package.json') && require('../package.json').version;
 
         this.logoMap = {
             'bootstrap4-light-blue': 'bootstrap4-light-blue.svg',
@@ -59,13 +63,24 @@ export class AppTopbar extends Component {
             'luna-green': 'luna-green.png',
             'luna-pink': 'luna-pink.png',
             'luna-amber': 'luna-amber.png',
-            'rhea': 'rhea.png'
+            'rhea': 'rhea.png',
+            'fluent-light': 'fluent-light.png',
+            'soho-light': 'soho-light.png',
+            'soho-dark': 'soho-dark.png',
+            'viva-light': 'viva-light.svg',
+            'viva-dark': 'viva-dark.svg',
+            'mira': 'mira.jpg',
+            'nano': 'nano.jpg'
         };
 
         this.onMenuButtonClick = this.onMenuButtonClick.bind(this);
         this.onThemeChange = this.onThemeChange.bind(this);
         this.onMenuEnter = this.onMenuEnter.bind(this);
         this.resetMenuActive = this.resetMenuActive.bind(this);
+    }
+
+    componentDidMount() {
+        this.versionService.getVersions().then(data => this.setState({ versions: data }));
     }
 
     onMenuButtonClick(event) {
@@ -162,6 +177,8 @@ export class AppTopbar extends Component {
                                 <li role="none"><a href="https://www.primefaces.org/designer/primereact" role="menuitem"><i className="pi pi-fw pi-palette" /><span>Designer</span></a></li>
                                 <li role="none"><a href="https://www.primefaces.org/designer-react" role="menuitem"><i className="pi pi-fw pi-desktop" /><span>Visual Editor</span></a></li>
                                 <li role="none"><Link to="/icons" onClick={this.onThemesMenuRouteChange} role="menuitem" className="no-border"><i className="pi pi-fw pi-info-circle" /><span>Icons</span></Link></li>
+                                <li role="none"><a href="https://www.figma.com/community/file/890589747170608208" role="menuitem"><i className="pi pi-fw pi-pencil" /><span>Figma UI Kit</span></a></li>
+                                
 
                                 <li role="none" className="topbar-submenu-header">BOOTSTRAP</li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'bootstrap4-light-blue')} role="menuitem"><img src="showcase/images/themes/bootstrap4-light-blue.svg" alt="Blue Light" /><span>Blue Light</span></button></li>
@@ -181,6 +198,9 @@ export class AppTopbar extends Component {
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'mdc-dark-indigo', true)} role="menuitem"><img src="showcase/images/themes/md-dark-indigo.svg" alt="Indigo Dark" /><span>Indigo Dark</span></button></li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'mdc-dark-deeppurple', true)} role="menuitem"><img src="showcase/images/themes/md-dark-deeppurple.svg" alt="Deep Purple Dark" /><span>Deep Purple Dark</span></button></li>
 
+                                <li role="none" className="topbar-submenu-header">FLUENT UI</li>
+                                <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'fluent-light')} role="menuitem"><img src="showcase/images/themes/fluent-light.png" alt="Fluent Light" /><span>Fluent Light</span></button></li>
+
                                 <li role="none" className="topbar-submenu-header">PRIMEONE</li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'saga-blue')} role="menuitem"><img src="showcase/images/themes/saga-blue.png" alt="Saga Blue" /><span>Saga Blue</span></button></li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'saga-green')} role="menuitem"><img src="showcase/images/themes/saga-green.png" alt="Saga Green" /><span>Saga Green</span></button></li>
@@ -194,6 +214,14 @@ export class AppTopbar extends Component {
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'arya-green', true)} role="menuitem"><img src="showcase/images/themes/arya-green.png" alt="Arya Green" /><span>Arya Green</span></button></li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'arya-orange', true)} role="menuitem"><img src="showcase/images/themes/arya-orange.png" alt="Arya Orange" /><span>Arya Orange</span></button></li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'arya-purple', true)} role="menuitem"><img src="showcase/images/themes/arya-purple.png" alt="Arya Purple" /><span>Arya Purple</span></button></li>
+
+                                <li role="none" className="topbar-submenu-header">PREMIUM</li>
+                                <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'soho-light')} role="menuitem"><img src="showcase/images/themes/soho-light.png" alt="Soho Light" /><span>Soho Light</span></button></li>
+                                <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'soho-dark', true)} role="menuitem"><img src="showcase/images/themes/soho-dark.png" alt="Soho Dark" /><span>Soho Dark</span></button></li>
+                                <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'viva-light')} role="menuitem"><img src="showcase/images/themes/viva-light.svg" alt="Viva Light" /><span>Viva Light</span></button></li>
+                                <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'viva-dark', true)} role="menuitem"><img src="showcase/images/themes/viva-dark.svg" alt="Viva Dark" /><span>Viva Dark</span></button></li>
+                                <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'mira')} role="menuitem"><img src="showcase/images/themes/mira.jpg" alt="Mira" /><span>Mira</span></button></li>
+                                <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'nano')} role="menuitem"><img src="showcase/images/themes/nano.jpg" alt="Nano" /><span>Nano</span></button></li>
 
                                 <li role="none" className="topbar-submenu-header">LEGACY</li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'nova')} role="menuitem"><img src="showcase/images/themes/nova.png" alt="Nova" /><span>Nova</span></button></li>
@@ -224,8 +252,13 @@ export class AppTopbar extends Component {
 
                                 <li role="none" className="topbar-submenu-header">PREMIUM ADMIN TEMPLATES</li>
                                 <li role="none">
+                                    <a href="https://www.primefaces.org/layouts/diamond-react" role="menuitem" rel="noopener noreferrer" target="_blank">
+                                        <img src="showcase/images/layouts/themeswitcher-diamond.png" alt="Diamond" /><span>Diamond</span><span className="theme-badge new p-tag p-tag-success">NEW</span>
+                                    </a>
+                                </li>
+                                <li role="none">
                                     <a href="https://www.primefaces.org/layouts/roma-react" role="menuitem" rel="noopener noreferrer" target="_blank">
-                                        <img src="showcase/images/layouts/themeswitcher-roma.jpg" alt="Roma" /><span>Roma</span><span className="theme-badge new">NEW</span>
+                                        <img src="showcase/images/layouts/themeswitcher-roma.jpg" alt="Roma" /><span>Roma</span>
                                     </a>
                                 </li>
                                 <li role="none">
@@ -262,7 +295,7 @@ export class AppTopbar extends Component {
                         </CSSTransition>
                     </li>
 
-                    <li role="none" className="topbar-submenu topbar-resources-submenu">
+                    <li role="none" className="topbar-submenu">
                         {/* eslint-disable */}
                         <button type="button" role="menuitem" onClick={(e) => this.toggleMenu(e, 2)} aria-haspopup aria-expanded={this.state.activeMenuIndex === 2} className="p-link">Resources</button>
                         {/* eslint-enable */}
@@ -271,6 +304,7 @@ export class AppTopbar extends Component {
                             <ul role="menu" aria-label="Resources">
                                 <li role="none"><Link to="/support" role="menuitem"><span>Support</span></Link></li>
                                 <li role="none"><a href="https://forum.primefaces.org/viewforum.php?f=57" role="menuitem" target="_blank" rel="noopener noreferrer"><span>Forum</span></a></li>
+                                <li role="none"><a href="https://discord.gg/gzKFYnpmCY" role="menuitem" target="_blank" rel="noopener noreferrer"><span>Discord Chat</span></a></li>
                                 <li role="none"><a href="https://github.com/primefaces/primereact" role="menuitem" target="_blank" rel="noopener noreferrer"><span>Source Code</span></a></li>
                                 <li role="none"><a href="https://www.primefaces.org/store" role="menuitem" target="_blank" rel="noopener noreferrer"><span>PrimeStore</span></a></li>
                                 <li role="none"><a href="https://www.primefaces.org/category/primereact/" role="menuitem" target="_blank" rel="noopener noreferrer"><span>Blog</span></a></li>
@@ -278,6 +312,28 @@ export class AppTopbar extends Component {
                                 <li role="none"><a href="https://www.primefaces.org/whouses" role="menuitem" target="_blank" rel="noopener noreferrer"><span>Who Uses</span></a></li>
                                 <li role="none"><a href="https://www.primefaces.org/newsletter" role="menuitem" target="_blank" rel="noopener noreferrer"><span>Newsletter</span></a></li>
                                 <li role="none"><a href="https://www.primetek.com.tr/" role="menuitem" target="_blank" rel="noopener noreferrer"><span>About PrimeTek</span></a></li>
+                            </ul>
+                        </CSSTransition>
+                    </li>
+
+                    <li role="none" className="topbar-submenu">
+                        {/* eslint-disable */}
+                        <button type="button" role="menuitem" onClick={(e) => this.toggleMenu(e, 3)} aria-haspopup aria-expanded={this.state.activeMenuIndex === 3} className="p-link">v{this.version}</button>
+                        {/* eslint-enable */}
+                        <CSSTransition classNames="p-connected-overlay" timeout={{ enter: 120, exit: 100 }} in={this.state.activeMenuIndex === 3}
+                            unmountOnExit onEntered={this.onMenuEnter}>
+                            <ul role="menu" aria-label="Versions" style={{width: '100%'}}>
+                                {
+                                        this.state.versions.map(version => {
+                                            return (
+                                                <li role="none" key={version.version}>
+                                                    <a href={version.url} role="menuitem">
+                                                        {version.version}
+                                                    </a>
+                                                </li>
+                                            )
+                                        })
+                                }
                             </ul>
                         </CSSTransition>
                     </li>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class TooltipDoc extends Component {
 
@@ -219,6 +219,18 @@ import { Tooltip } from 'primereact/tooltip';
 `}
 </CodeHighlight>
 
+                        <h5>Global Tooltip</h5>
+                        <p>It is used to bind the same properties to more than one element. Each element can have its own <i>{`data-pr-{options}`}</i> properties. In this way, options can be customized among themselves. Using the <i>data-pr-tooltip</i> property on any element, the text to be displayed in the tooltip is determined.
+                            The target property is required for the global tooltip. It can be a selector, DOM element or selector array.</p>
+<CodeHighlight>
+{`
+<Tooltip target=".customClassName" mouseTrack mouseTrackLeft={10} />
+
+<img className="customClassName" data-pr-tooltip="PrimeReact-Logo" alt="logo" src="showcase/images/logo.png" height="80px"/>
+<div className="customClassName" data-pr-tooltip="This is a div element" style={{ width: '50px', height: '50px', border: '1px solid black' }} />
+`}
+</CodeHighlight>
+
                     <h5>Tooltip Options</h5>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
@@ -296,9 +308,9 @@ import { Tooltip } from 'primereact/tooltip';
                     <p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="TooltipDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'TooltipDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         )

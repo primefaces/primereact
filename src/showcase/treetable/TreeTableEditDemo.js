@@ -3,8 +3,8 @@ import { TreeTable } from '../../components/treetable/TreeTable';
 import { Column } from '../../components/column/Column';
 import { InputText } from '../../components/inputtext/InputText';
 import { NodeService } from '../service/NodeService';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './TreeTableDemo.scss';
 
@@ -64,7 +64,8 @@ export class TreeTableEditDemo extends Component {
         return this.inputTextEditor(props, 'type');
     }
 
-    requiredValidator(props) {
+    requiredValidator(e) {
+        let props = e.columnProps;
         let value = props.node.data[props.field];
 
         return value && value.length > 0;
@@ -168,7 +169,8 @@ export class TreeTableEditDemo extends Component {
         return this.inputTextEditor(props, 'type');
     }
 
-    requiredValidator(props) {
+    requiredValidator(e) {
+        let props = e.columnProps;
         let value = props.node.data[props.field];
 
         return value && value.length > 0;
@@ -244,7 +246,8 @@ const TreeTableEditDemo = () => {
         return inputTextEditor(props, 'type');
     }
 
-    const requiredValidator = (props) => {
+    const requiredValidator = (e) => {
+        let props = e.columnProps;
         let value = props.node.data[props.field];
 
         return value && value.length > 0;
@@ -318,7 +321,8 @@ const TreeTableEditDemo = () => {
         return inputTextEditor(props, 'type');
     }
 
-    const requiredValidator = (props) => {
+    const requiredValidator = (e) => {
+        let props = e.columnProps;
         let value = props.node.data[props.field];
 
         return value && value.length > 0;
@@ -360,9 +364,9 @@ const TreeTableEditDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="TreeTableEditDemo" sources={this.sources} service="NodeService" data="treetablenodes" extFiles={this.extFiles} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'TreeTableEditDemo', sources: this.sources, service: 'NodeService', data: 'treetablenodes', extFiles: this.extFiles })
+                    }
                 </TabView>
             </div>
         )

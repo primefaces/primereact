@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import {MenubarSub} from './MenubarSub';
 import ObjectUtils from '../utils/ObjectUtils';
 import DomHandler from '../utils/DomHandler';
@@ -117,7 +117,7 @@ export class Menubar extends Component {
     renderMenuButton() {
         /* eslint-disable */
         const button = (
-            <a ref={(el) => this.menubutton = el} href={'#'} role="button" tabIndex="0" className="p-menubar-button" onClick={this.toggle}>
+            <a ref={(el) => this.menubutton = el} href={'#'} role="button" tabIndex={0} className="p-menubar-button" onClick={this.toggle}>
                 <i className="pi pi-bars" />
             </a>
         );

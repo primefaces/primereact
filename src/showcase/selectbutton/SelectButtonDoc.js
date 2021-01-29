@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class SelectButtonDoc extends Component {
 
@@ -192,7 +192,7 @@ const citySelectItems = [
 
 <CodeHighlight>
 {`
-<SelectButton value={this.state.city} options={citySelectItems} onChange={(e) => this.setState({city: e.value})}></SelectButton>
+<SelectButton value={city} options={citySelectItems} onChange={(e) => setValue(e.value)}></SelectButton>
 `}
 </CodeHighlight>
 
@@ -211,8 +211,8 @@ const cities = [
 
 <CodeHighlight>
 {`
-<SelectButton optionLabel="name" value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})}></SelectButton>
-<SelectButton optionLabel="name" optionValue="code" value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})}></SelectButton>
+<SelectButton optionLabel="name" value={city} options={cities} onChange={(e) => setValue(e.value)}></SelectButton>
+<SelectButton optionLabel="name" optionValue="code" value={city} options={cities} onChange={(e) => setValue(e.value)}></SelectButton>
 `}
             </CodeHighlight>
             <p>When <i>optionValue</i> is not defined, value of an option refers to the option object itself.</p>
@@ -226,13 +226,13 @@ const cities = [
 
 <CodeHighlight>
 {`
-<SelectButton optionLabel="name" optionValue="code" value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})} itemTemplate={this.itemTemplate} />
+<SelectButton optionLabel="name" optionValue="code" value={city} options={cities} onChange={(e) => setValue(e.value)} itemTemplate={itemTemplate} />
 `}
 </CodeHighlight>
 
 <CodeHighlight lang="js">
 {`
-itemTemplate(option) {
+const itemTemplate = (option) => {
     // custom item content
 }
 `}
@@ -334,7 +334,7 @@ itemTemplate(option) {
                         </tr>
                         <tr>
                             <td>tabIndex</td>
-                            <td>string</td>
+                            <td>number</td>
                             <td>null</td>
                             <td>Index of the element in tabbing order.</td>
                         </tr>
@@ -421,9 +421,9 @@ itemTemplate(option) {
             <p>None.</p>
         </TabPanel>
 
-        <TabPanel header="Source">
-            <LiveEditor name="SelectButtonDemo" sources={this.sources} />
-        </TabPanel>
+        {
+            useLiveEditorTabs({ name: 'SelectButtonDemo', sources: this.sources })
+        }
     </TabView>
 </div>
         );

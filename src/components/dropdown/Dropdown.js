@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
 import FilterUtils from '../utils/FilterUtils';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import { DropdownPanel } from './DropdownPanel';
 import { DropdownItem } from './DropdownItem';
 import {tip} from "../tooltip/Tooltip";
@@ -398,13 +398,11 @@ export class Dropdown extends Component {
             this.focusInput.focus();
         }
 
-        setTimeout(() => {
-            this.hideOverlay();
-        }, 100);
+        this.hideOverlay();
     }
 
     onFilterInputChange(event) {
-        this.setState({filter: event.target.value});
+        this.setState({ filter: event.target.value });
     }
 
     resetFilter() {
@@ -414,13 +412,13 @@ export class Dropdown extends Component {
     clear(event) {
         this.props.onChange({
             originalEvent: event,
-            value: null,
+            value: undefined,
             stopPropagation : () =>{},
             preventDefault : () =>{},
             target: {
                 name: this.props.name,
                 id: this.id,
-                value : null
+                value : undefined
             }
         });
 
@@ -605,7 +603,7 @@ export class Dropdown extends Component {
     }
 
     getOptionKey(option, index) {
-        return this.props.dataKey ? ObjectUtils.resolveFieldData(option, this.props.dataKey) : `pr_id__${this.getOptionLabel}-${index}`;
+        return this.props.dataKey ? ObjectUtils.resolveFieldData(option, this.props.dataKey) : `pr_id__${this.getOptionLabel(option)}-${index}`;
     }
 
     checkValidity() {
@@ -693,7 +691,7 @@ export class Dropdown extends Component {
 
         return (
             <div className="p-hidden-accessible p-dropdown-hidden-select">
-                <select ref={(el) => this.nativeSelect = el} required={this.props.required} name={this.props.name} tabIndex="-1" aria-hidden="true">
+                <select ref={(el) => this.nativeSelect = el} required={this.props.required} name={this.props.name} tabIndex={-1} aria-hidden="true">
                     {placeHolderOption}
                     {option}
                 </select>
@@ -804,7 +802,7 @@ export class Dropdown extends Component {
             'p-focus': this.state.focused,
             'p-dropdown-clearable': this.props.showClear && !this.props.disabled,
             'p-inputwrapper-filled': this.props.value,
-            'p-inputwrapper-focus': this.state.focused
+            'p-inputwrapper-focus': this.state.focused || this.state.overlayVisible
         });
         let selectedOption = this.findOption(this.props.value);
 

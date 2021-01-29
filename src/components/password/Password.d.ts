@@ -7,10 +7,12 @@ interface PasswordProps extends React.HTMLProps<HTMLInputElement> {
     weakLabel?: string;
     mediumLabel?: string;
     strongLabel?: string;
+    mediumRegex?: string;
+    strongRegex?: string;
     feedback?: boolean;
     tooltip?: any;
     tooltipOptions?: TooltipOptions;
-    [key: string]: any;,
+    [key: string]: any;
     panelClassName?: string;
     panelStyle?: object;
 }

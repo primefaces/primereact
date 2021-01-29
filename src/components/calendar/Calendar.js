@@ -4,12 +4,13 @@ import { InputText } from '../inputtext/InputText';
 import { Button } from '../button/Button';
 import { CalendarPanel } from './CalendarPanel';
 import DomHandler from '../utils/DomHandler';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import { tip } from '../tooltip/Tooltip';
 import { CSSTransition } from 'react-transition-group';
 import { Ripple } from '../ripple/Ripple';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
+import { localeOption, localeOptions } from '../api/Locale';
 
 export class Calendar extends Component {
 
@@ -49,18 +50,8 @@ export class Calendar extends Component {
         shortYearCutoff: '+10',
         hideOnDateTimeSelect: false,
         showWeek: false,
-        locale: {
-            firstDayOfWeek: 0,
-            dayNames: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-            dayNamesShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-            dayNamesMin: ["Su","Mo","Tu","We","Th","Fr","Sa"],
-            monthNames: [ "January","February","March","April","May","June","July","August","September","October","November","December" ],
-            monthNamesShort: [ "Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ],
-            today: 'Today',
-            clear: 'Clear',
-            weekHeader: 'Wk'
-        },
-        dateFormat: 'mm/dd/yy',
+        locale: null,
+        dateFormat: null,
         panelStyle: null,
         panelClassName: null,
         monthNavigator: false,
@@ -110,7 +101,7 @@ export class Calendar extends Component {
         readOnlyInput: PropTypes.bool,
         keepInvalid: PropTypes.bool,
         disabled: PropTypes.bool,
-        tabIndex: PropTypes.string,
+        tabIndex: PropTypes.number,
         placeholder: PropTypes.string,
         showIcon: PropTypes.bool,
         icon: PropTypes.string,
@@ -130,7 +121,7 @@ export class Calendar extends Component {
         shortYearCutoff: PropTypes.string,
         hideOnDateTimeSelect: PropTypes.bool,
         showWeek: PropTypes.bool,
-        locale: PropTypes.object,
+        locale: PropTypes.string,
         dateFormat: PropTypes.string,
         panelStyle: PropTypes.object,
         panelClassName: PropTypes.string,
@@ -263,11 +254,11 @@ export class Calendar extends Component {
             }
         }
 
-        if(this.panel) {
+        if (this.panel) {
             this.updateFocus();
         }
 
-        if (prevProps.value !== this.props.value && (!this.viewStateChanged || this.state.overlayVisible)) {
+        if ((prevProps.value !== this.props.value && (!this.viewStateChanged || !this.state.overlayVisible)) || this.isOptionChanged(prevProps)) {
             this.updateInputfield(this.props.value);
         }
     }
@@ -300,6 +291,15 @@ export class Calendar extends Component {
             content: this.props.tooltip,
             options: this.props.tooltipOptions
         });
+    }
+
+    isOptionChanged(prevProps) {
+        const optionProps = ['dateFormat', 'hourFormat', 'timeOnly', 'showSeconds', 'showMillisec'];
+        return optionProps.some((option) => prevProps[option] !== this.props[option]);
+    }
+
+    getDateFormat() {
+        return this.props.dateFormat || localeOption('dateFormat', this.props.locale);
     }
 
     onInputFocus(event) {
@@ -1457,6 +1457,7 @@ export class Calendar extends Component {
 
     hideOverlay(callback) {
         this.setState({ overlayVisible: false }, () => {
+            this.viewStateChanged = false;
             this.ignoreFocusFunctionality = false;
             if (callback) {
                 callback();
@@ -1666,14 +1667,15 @@ export class Calendar extends Component {
     }
 
     getSundayIndex() {
-        return this.props.locale.firstDayOfWeek > 0 ? 7 - this.props.locale.firstDayOfWeek : 0;
+        const firstDayOfWeek = localeOption('firstDayOfWeek', this.props.locale);
+        return firstDayOfWeek > 0 ? 7 - firstDayOfWeek : 0;
     }
 
     createWeekDays() {
         let weekDays = [];
-        let dayIndex = this.props.locale.firstDayOfWeek;
+        let { firstDayOfWeek: dayIndex, dayNamesMin } = localeOptions(this.props.locale);
         for(let i = 0; i < 7; i++) {
-            weekDays.push(this.props.locale.dayNamesMin[dayIndex]);
+            weekDays.push(dayNamesMin[dayIndex]);
             dayIndex = (dayIndex === 6) ? 0 : ++dayIndex;
         }
 
@@ -2013,7 +2015,7 @@ export class Calendar extends Component {
                 formattedValue = this.formatTime(date);
             }
             else {
-                formattedValue = this.formatDate(date, this.props.dateFormat);
+                formattedValue = this.formatDate(date, this.getDateFormat());
                 if(this.props.showTime) {
                     formattedValue += ' ' + this.formatTime(date);
                 }
@@ -2050,6 +2052,7 @@ export class Calendar extends Component {
             };
         let output = '';
         let literal = false;
+        const { dayNamesShort, dayNames, monthNamesShort, monthNames } = localeOptions(this.props.locale);
 
         if (date) {
             for (iFormat = 0; iFormat < format.length; iFormat++) {
@@ -2065,7 +2068,7 @@ export class Calendar extends Component {
                             output += formatNumber('d', date.getDate(), 2);
                             break;
                         case 'D':
-                            output += formatName('D', date.getDay(), this.props.locale.dayNamesShort, this.props.locale.dayNames);
+                            output += formatName('D', date.getDay(), dayNamesShort, dayNames);
                             break;
                         case 'o':
                             output += formatNumber('o',
@@ -2077,7 +2080,7 @@ export class Calendar extends Component {
                             output += formatNumber('m', date.getMonth() + 1, 2);
                             break;
                         case 'M':
-                            output += formatName('M',date.getMonth(), this.props.locale.monthNamesShort, this.props.locale.monthNames);
+                            output += formatName('M',date.getMonth(), monthNamesShort, monthNames);
                             break;
                         case 'y':
                             output += lookAhead('y') ? date.getFullYear() : (date.getFullYear() % 100 < 10 ? '0' : '') + (date.getFullYear() % 100);
@@ -2183,11 +2186,11 @@ export class Calendar extends Component {
         }
         else {
             if(this.props.showTime) {
-                date = this.parseDate(parts[0], this.props.dateFormat);
+                date = this.parseDate(parts[0], this.getDateFormat());
                 this.populateTime(date, parts[1], parts[2]);
             }
             else {
-                date = this.parseDate(text, this.props.dateFormat);
+                date = this.parseDate(text, this.getDateFormat());
             }
         }
 
@@ -2315,6 +2318,8 @@ export class Calendar extends Component {
             day = 1;
         }
 
+        const { dayNamesShort, dayNames, monthNamesShort, monthNames } = localeOptions(this.props.locale);
+
         for (iFormat = 0; iFormat < format.length; iFormat++) {
             if(literal) {
                 if(format.charAt(iFormat) === "'" && !lookAhead("'")) {
@@ -2328,7 +2333,7 @@ export class Calendar extends Component {
                         day = getNumber("d");
                         break;
                     case "D":
-                        getName("D", this.props.locale.dayNamesShort, this.props.locale.dayNames);
+                        getName("D", dayNamesShort, dayNames);
                         break;
                     case "o":
                         doy = getNumber("o");
@@ -2337,7 +2342,7 @@ export class Calendar extends Component {
                         month = getNumber("m");
                         break;
                     case "M":
-                        month = getName("M", this.props.locale.monthNamesShort, this.props.locale.monthNames);
+                        month = getName("M", monthNamesShort, monthNames);
                         break;
                     case "y":
                         year = getNumber("y");
@@ -2431,14 +2436,16 @@ export class Calendar extends Component {
     }
 
     renderTitleMonthElement(month) {
+        const monthNames = localeOption('monthNames', this.props.locale);
+
         if (this.props.monthNavigator && this.props.view !== 'month') {
-            let viewDate = this.getViewDate();
-            let viewMonth = viewDate.getMonth();
+            const viewDate = this.getViewDate();
+            const viewMonth = viewDate.getMonth();
 
             return (
                 <select className="p-datepicker-month" onChange={this.onMonthDropdownChange} value={viewMonth}>
                     {
-                        this.props.locale.monthNames.map((month, index) => {
+                        monthNames.map((month, index) => {
                             if ((!this.isInMinYear(viewDate) || index >= this.props.minDate.getMonth()) && (!this.isInMaxYear(viewDate) || index <= this.props.maxDate.getMonth())) {
                                 return <option key={month} value={index}>{month}</option>
                             }
@@ -2450,7 +2457,7 @@ export class Calendar extends Component {
         }
         else {
             return (
-                <span className="p-datepicker-month">{this.props.locale.monthNames[month]}</span>
+                <span className="p-datepicker-month">{monthNames[month]}</span>
             );
         }
     }
@@ -2513,7 +2520,7 @@ export class Calendar extends Component {
         if (this.props.showWeek) {
             const weekHeader = (
                 <th scope="col" key={'wn'} className="p-datepicker-weekheader p-disabled">
-                    <span>{this.props.locale['weekHeader']}</span>
+                    <span>{localeOption('weekHeader', this.props.locale)}</span>
                 </th>
             );
 
@@ -2642,7 +2649,8 @@ export class Calendar extends Component {
 
     renderMonthViewMonth(index) {
         const className = classNames('p-monthpicker-month', {'p-highlight': this.isMonthSelected(index)});
-        const monthName = this.props.locale.monthNamesShort[index];
+        const monthNamesShort = localeOption('monthNamesShort', this.props.locale);
+        const monthName = monthNamesShort[index];
 
         return (
             <span key={monthName} className={className} onClick={event => this.onMonthSelect(event, index)} onKeyDown={event => this.onMonthCellKeydown(event, index)}>
@@ -2880,11 +2888,12 @@ export class Calendar extends Component {
         if (this.props.showButtonBar) {
             const todayClassName = classNames('p-button-text', this.props.todayButtonClassName);
             const clearClassName = classNames('p-button-text', this.props.clearButtonClassName);
+            const { today, clear } = localeOptions(this.props.locale);
 
             return (
                 <div className="p-datepicker-buttonbar">
-                    <Button type="button" label={this.props.locale.today} onClick={this.onTodayButtonClick} onKeyDown={e => this.onContainerButtonKeydown(e)} className={todayClassName} />
-                    <Button type="button" label={this.props.locale.clear} onClick={this.onClearButtonClick} onKeyDown={e => this.onContainerButtonKeydown(e)} className={clearClassName} />
+                    <Button type="button" label={today} onClick={this.onTodayButtonClick} onKeyDown={e => this.onContainerButtonKeydown(e)} className={todayClassName} />
+                    <Button type="button" label={clear} onClick={this.onClearButtonClick} onKeyDown={e => this.onContainerButtonKeydown(e)} className={clearClassName} />
                 </div>
             );
         }
@@ -2907,7 +2916,7 @@ export class Calendar extends Component {
     }
 
     render() {
-        const className = classNames('p-calendar p-inputwrapper', this.props.className, {
+        const className = classNames('p-calendar p-component p-inputwrapper', this.props.className, {
             'p-calendar-w-btn': this.props.showIcon,
             'p-calendar-timeonly': this.props.timeOnly,
             'p-inputwrapper-filled': this.props.value || (DomHandler.hasClass(this.inputElement, 'p-filled') && this.inputElement.value !== ''),

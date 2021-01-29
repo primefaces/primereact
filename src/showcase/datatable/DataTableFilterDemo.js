@@ -7,8 +7,8 @@ import { Dropdown } from '../../components/dropdown/Dropdown';
 import { ProgressBar } from '../../components/progressbar/ProgressBar';
 import { Calendar } from '../../components/calendar/Calendar';
 import { MultiSelect } from '../../components/multiselect/MultiSelect';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './DataTableDemo.scss';
 
@@ -19,7 +19,6 @@ export class DataTableFilterDemo extends Component {
 
         this.state = {
             customers: null,
-            loading: false,
             selectedRepresentative: null,
             selectedDate: null,
             selectedStatus: null,
@@ -203,9 +202,9 @@ export class DataTableFilterDemo extends Component {
                     <div className="card">
                         <DataTable ref={(el) => this.dt = el} value={this.state.customers} paginator rows={10}
                             header={header} className="p-datatable-customers"
-                            globalFilter={this.state.globalFilter} emptyMessage="No customers found." loading={this.state.loading}>
+                            globalFilter={this.state.globalFilter} emptyMessage="No customers found.">
                             <Column field="name" header="Name" body={this.nameBodyTemplate} filter filterPlaceholder="Search by name" />
-                            <Column field="country" header="Country" body={this.countryBodyTemplate} filter filterPlaceholder="Search by country" filterMatchMode="contains" />
+                            <Column field="country" filterField="country.name" header="Country" body={this.countryBodyTemplate} filter filterPlaceholder="Search by country" filterMatchMode="contains" />
                             <Column field="representative.name" header="Representative" body={this.representativeBodyTemplate} filter filterElement={representativeFilter} />
                             <Column field="date" header="Date" body={this.dateBodyTemplate} filter filterElement={dateFilter} filterFunction={this.filterDate} />
                             <Column field="status" header="Status" body={this.statusBodyTemplate} filter filterElement={statusFilter}/>
@@ -247,7 +246,6 @@ export class DataTableFilterDemo extends Component {
 
         this.state = {
             customers: null,
-            loading: false,
             selectedRepresentative: null,
             selectedDate: null,
             selectedStatus: null,
@@ -412,18 +410,18 @@ export class DataTableFilterDemo extends Component {
             </div>
         );
 
-        const representativeFilter = <MultiSelect value={this.state.selectedRepresentative} options={this.representatives} itemTemplate={this.representativesItemTemplate} onChange={(e) => this.setState({ selectedRepresentative: e.value })} optionLabel="name" optionValue="name" placeholder="All" className="p-column-filter" />;
-        const dateFilter = <Calendar value={this.state.selectedDate} onChange={(e) => this.setState({ selectedDate: e.value })} dateFormat="yy-mm-dd" className="p-column-filter" placeholder="Registration Date"/>;
-        const statusFilter = <Dropdown value={this.state.selectedStatus} options={this.statuses} onChange={(e) => this.setState({ selectedStatus: e.value })} itemTemplate={this.statusItemTemplate} placeholder="Select a Status" className="p-column-filter" showClear />;
+        const representativeFilter = <MultiSelect value={this.state.selectedRepresentative} options={this.representatives} itemTemplate={this.representativesItemTemplate} onChange={this.onRepresentativesChange} optionLabel="name" optionValue="name" placeholder="All" className="p-column-filter" />;
+        const dateFilter = <Calendar value={this.state.selectedDate} onChange={this.onDateChange} dateFormat="yy-mm-dd" className="p-column-filter" placeholder="Registration Date"/>;
+        const statusFilter = <Dropdown value={this.state.selectedStatus} options={this.statuses} onChange={this.onStatusChange} itemTemplate={this.statusItemTemplate} placeholder="Select a Status" className="p-column-filter" showClear />;
 
         return (
             <div className="datatable-filter-demo">
                 <div className="card">
                     <DataTable ref={(el) => this.dt = el} value={this.state.customers} paginator rows={10}
                         header={header} className="p-datatable-customers"
-                        globalFilter={this.state.globalFilter} emptyMessage="No customers found." loading={this.state.loading}>
+                        globalFilter={this.state.globalFilter} emptyMessage="No customers found.">
                         <Column field="name" header="Name" body={this.nameBodyTemplate} filter filterPlaceholder="Search by name" />
-                        <Column field="country" header="Country" body={this.countryBodyTemplate} filter filterPlaceholder="Search by country" filterMatchMode="contains" />
+                        <Column field="country" filterField="country.name" header="Country" body={this.countryBodyTemplate} filter filterPlaceholder="Search by country" filterMatchMode="contains" />
                         <Column field="representative.name" header="Representative" body={this.representativeBodyTemplate} filter filterElement={representativeFilter} />
                         <Column field="date" header="Date" body={this.dateBodyTemplate} filter filterElement={dateFilter} filterFunction={this.filterDate} />
                         <Column field="status" header="Status" body={this.statusBodyTemplate} filter filterElement={statusFilter}/>
@@ -452,7 +450,6 @@ import './DataTableDemo.css';
 
 const DataTableFilterDemo = () => {
     const [customers, setCustomers] = useState(null);
-    const [loading, setLoading] = useState(false);
     const [selectedRepresentative, setSelectedRepresentative] = useState(null);
     const [selectedDate, setSelectedDate] = useState(null);
     const [selectedStatus, setSelectedStatus] = useState(null);
@@ -602,18 +599,18 @@ const DataTableFilterDemo = () => {
         </div>
     );
 
-    const representativeFilter = <MultiSelect value={selectedRepresentative} options={representatives} itemTemplate={representativesItemTemplate} onChange={(e) => setSelectedRepresentative(e.value)} optionLabel="name" optionValue="name" placeholder="All" className="p-column-filter" />;
-    const dateFilter = <Calendar value={selectedDate} onChange={(e) => setSelectedDate(e.value)} dateFormat="yy-mm-dd" className="p-column-filter" placeholder="Registration Date"/>;
-    const statusFilter = <Dropdown value={selectedStatus} options={statuses} onChange={(e) => setSelectedStatus(e.value)} itemTemplate={statusItemTemplate} placeholder="Select a Status" className="p-column-filter" showClear />;
+    const representativeFilter = <MultiSelect value={selectedRepresentative} options={representatives} itemTemplate={representativesItemTemplate} onChange={onRepresentativesChange} optionLabel="name" optionValue="name" placeholder="All" className="p-column-filter" />;
+    const dateFilter = <Calendar value={selectedDate} onChange={onDateChange} dateFormat="yy-mm-dd" className="p-column-filter" placeholder="Registration Date"/>;
+    const statusFilter = <Dropdown value={selectedStatus} options={statuses} onChange={onStatusChange} itemTemplate={statusItemTemplate} placeholder="Select a Status" className="p-column-filter" showClear />;
 
     return (
         <div className="datatable-filter-demo">
             <div className="card">
                 <DataTable ref={dt} value={customers} paginator rows={10}
                     header={header} className="p-datatable-customers"
-                    globalFilter={globalFilter} emptyMessage="No customers found." loading={loading}>
+                    globalFilter={globalFilter} emptyMessage="No customers found.">
                     <Column field="name" header="Name" body={nameBodyTemplate} filter filterPlaceholder="Search by name" />
-                    <Column field="country" header="Country" body={countryBodyTemplate} filter filterPlaceholder="Search by country" filterMatchMode="contains" />
+                    <Column field="country" filterField="country.name" header="Country" body={countryBodyTemplate} filter filterPlaceholder="Search by country" filterMatchMode="contains" />
                     <Column field="representative.name" header="Representative" body={representativeBodyTemplate} filter filterElement={representativeFilter} />
                     <Column field="date" header="Date" body={dateBodyTemplate} filter filterElement={dateFilter} filterFunction={filterDate} />
                     <Column field="status" header="Status" body={statusBodyTemplate} filter filterElement={statusFilter}/>
@@ -641,7 +638,6 @@ import './DataTableDemo.css';
 
 const DataTableFilterDemo = () => {
     const [customers, setCustomers] = useState(null);
-    const [loading, setLoading] = useState(false);
     const [selectedRepresentative, setSelectedRepresentative] = useState(null);
     const [selectedDate, setSelectedDate] = useState(null);
     const [selectedStatus, setSelectedStatus] = useState(null);
@@ -791,18 +787,18 @@ const DataTableFilterDemo = () => {
         </div>
     );
 
-    const representativeFilter = <MultiSelect value={selectedRepresentative} options={representatives} itemTemplate={representativesItemTemplate} onChange={(e) => setSelectedRepresentative(e.value)} optionLabel="name" optionValue="name" placeholder="All" className="p-column-filter" />;
-    const dateFilter = <Calendar value={selectedDate} onChange={(e) => setSelectedDate(e.value)} dateFormat="yy-mm-dd" className="p-column-filter" placeholder="Registration Date"/>;
-    const statusFilter = <Dropdown value={selectedStatus} options={statuses} onChange={(e) => setSelectedStatus(e.value)} itemTemplate={statusItemTemplate} placeholder="Select a Status" className="p-column-filter" showClear />;
+    const representativeFilter = <MultiSelect value={selectedRepresentative} options={representatives} itemTemplate={representativesItemTemplate} onChange={onRepresentativesChange} optionLabel="name" optionValue="name" placeholder="All" className="p-column-filter" />;
+    const dateFilter = <Calendar value={selectedDate} onChange={onDateChange} dateFormat="yy-mm-dd" className="p-column-filter" placeholder="Registration Date"/>;
+    const statusFilter = <Dropdown value={selectedStatus} options={statuses} onChange={onStatusChange} itemTemplate={statusItemTemplate} placeholder="Select a Status" className="p-column-filter" showClear />;
 
     return (
         <div className="datatable-filter-demo">
             <div className="card">
                 <DataTable ref={dt} value={customers} paginator rows={10}
                     header={header} className="p-datatable-customers"
-                    globalFilter={globalFilter} emptyMessage="No customers found." loading={loading}>
+                    globalFilter={globalFilter} emptyMessage="No customers found.">
                     <Column field="name" header="Name" body={nameBodyTemplate} filter filterPlaceholder="Search by name" />
-                    <Column field="country" header="Country" body={countryBodyTemplate} filter filterPlaceholder="Search by country" filterMatchMode="contains" />
+                    <Column field="country" filterField="country.name" header="Country" body={countryBodyTemplate} filter filterPlaceholder="Search by country" filterMatchMode="contains" />
                     <Column field="representative.name" header="Representative" body={representativeBodyTemplate} filter filterElement={representativeFilter} />
                     <Column field="date" header="Date" body={dateBodyTemplate} filter filterElement={dateFilter} filterFunction={filterDate} />
                     <Column field="status" header="Status" body={statusBodyTemplate} filter filterElement={statusFilter}/>
@@ -916,9 +912,9 @@ const DataTableFilterDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="DataTableFilterDemo" sources={this.sources} service="CustomerService" data="customers-large" extFiles={this.extFiles} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'DataTableFilterDemo', sources: this.sources, service: 'CustomerService', data: 'customers-large', extFiles: this.extFiles })
+                    }
                 </TabView>
             </div>
         )

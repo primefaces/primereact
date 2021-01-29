@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import { Ripple } from '../ripple/Ripple';
 
 export class PickListItem extends Component {
@@ -20,7 +20,7 @@ export class PickListItem extends Component {
         className: PropTypes.string,
         template: PropTypes.func,
         selected: PropTypes.bool,
-        tabIndex: PropTypes.string,
+        tabIndex: PropTypes.number,
         onClick: PropTypes.func,
         onKeyDown: PropTypes.func
     }

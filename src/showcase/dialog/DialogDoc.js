@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class DialogDoc extends Component {
 
@@ -511,9 +511,9 @@ import { Dialog } from 'primereact/dialog';
                         <p>Dialog is used as a container and visibility is managed with <i>visible</i> property where <i>onHide</i> event is required to update the visibility state.</p>
 <CodeHighlight>
 {`
-<Button label="Show" icon="pi pi-external-link" onClick={() => this.onClick('displayBasic')} />
+<Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayBasic')} />
 
-<Dialog header="Header" visible={this.state.displayBasic} style={{ width: '50vw' }} footer={this.renderFooter('displayBasic')} onHide={() => this.onHide('displayBasic')}>
+<Dialog header="Header" visible={displayBasic} style={{ width: '50vw' }} footer={renderFooter('displayBasic')} onHide={() => onHide('displayBasic')}>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
     Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
@@ -529,8 +529,8 @@ import { Dialog } from 'primereact/dialog';
 {`
 const footer = (
     <div>
-        <Button label="Yes" icon="pi pi-check" onClick={this.onHide} />
-        <Button label="No" icon="pi pi-times" onClick={this.onHide} />
+        <Button label="Yes" icon="pi pi-check" onClick={onHide} />
+        <Button label="No" icon="pi pi-times" onClick={onHide} />
     </div>
 );
 
@@ -540,7 +540,7 @@ const myIcon = (
     </button>
 )
 
-<Dialog header="Header Text" footer={footer} icons={myIcon} visible={this.state.visible} style={{width: '50vw'}} modal onHide={this.onHide}>
+<Dialog header="Header Text" footer={footer} icons={myIcon} visible={visible} style={{width: '50vw'}} modal onHide={onHide}>
     Content
 </Dialog>
 `}
@@ -785,9 +785,9 @@ const myIcon = (
 
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="DialogDemo" sources={this.sources} extFiles={this.extFiles} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'DialogDemo', sources: this.sources, extFiles: this.extFiles })
+                    }
                 </TabView>
             </div>
         );

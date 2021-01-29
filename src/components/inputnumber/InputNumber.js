@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {InputText} from '../inputtext/InputText';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import {tip} from "../tooltip/Tooltip";
 import { Ripple } from '../ripple/Ripple';
 
@@ -38,7 +38,7 @@ export class InputNumber extends Component {
         pattern: null,
         inputMode: null,
         placeholder: null,
-        readonly: false,
+        readOnly: false,
         size: null,
         style: null,
         className: null,
@@ -51,7 +51,8 @@ export class InputNumber extends Component {
         onValueChange: null,
         onChange: null,
         onBlur: null,
-        onFocus: null
+        onFocus: null,
+        onKeyDown: null
     }
 
     static propTypes = {
@@ -85,7 +86,7 @@ export class InputNumber extends Component {
         pattern: PropTypes.string,
         inputMode: PropTypes.string,
         placeholder: PropTypes.string,
-        readonly: PropTypes.bool,
+        readOnly: PropTypes.bool,
         size: PropTypes.number,
         style: PropTypes.object,
         className: PropTypes.string,
@@ -98,7 +99,8 @@ export class InputNumber extends Component {
         onValueChange: PropTypes.func,
         onChange: PropTypes.func,
         onBlur: PropTypes.func,
-        onFocus: PropTypes.func
+        onFocus: PropTypes.func,
+        onKeyDown: PropTypes.func
     }
 
     constructor(props) {
@@ -152,9 +154,13 @@ export class InputNumber extends Component {
         this._group = this.getGroupingExpression();
         this._minusSign = this.getMinusSignExpression();
         this._currency = this.getCurrencyExpression();
-        this._suffix = new RegExp(`[${this.props.suffix||''}]`, 'g');
-        this._prefix = new RegExp(`[${this.props.prefix||''}]`, 'g');
+        this._suffix = this.getSuffixExpression();
+        this._prefix = this.getPrefixExpression();
         this._index = d => index.get(d);
+    }
+
+    escapeRegExp(text) {
+        return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
     }
 
     getDecimalExpression() {
@@ -181,6 +187,31 @@ export class InputNumber extends Component {
         else {
             return new RegExp(`[]`,'g');
         }
+    }
+
+    getPrefixExpression() {
+        if (this.props.prefix) {
+            this.prefixChar = this.props.prefix;
+        }
+        else {
+            const formatter = new Intl.NumberFormat(this.props.locale, {style: this.props.mode, currency: this.props.currency, currencyDisplay: this.props.currencyDisplay});
+            this.prefixChar = formatter.format(1).split('1')[0];
+        }
+
+        return new RegExp(`${this.escapeRegExp(this.prefixChar||'')}`, 'g');
+    }
+
+    getSuffixExpression() {
+        if (this.props.suffix) {
+            this.suffixChar = this.props.suffix;
+        }
+        else {
+            const formatter = new Intl.NumberFormat(this.props.locale, {style: this.props.mode, currency: this.props.currency, currencyDisplay: this.props.currencyDisplay,
+                minimumFractionDigits: 0, maximumFractionDigits: 0});
+            this.suffixChar = formatter.format(1).split('1')[1];
+        }
+
+        return new RegExp(`${this.escapeRegExp(this.suffixChar||'')}`, 'g');
     }
 
     formatValue(value) {
@@ -371,6 +402,14 @@ export class InputNumber extends Component {
                 }
             break;
 
+            //enter
+            case 13:
+                newValueStr = this.validateValue(this.parseValue(inputValue));
+                this.inputEl.value = this.formatValue(newValueStr);
+                this.inputEl.setAttribute('aria-valuenow', newValueStr);
+                this.updateModel(event, newValueStr);
+            break;
+
             //backspace
             case 8:
                 event.preventDefault();
@@ -449,6 +488,10 @@ export class InputNumber extends Component {
 
             default:
             break;
+        }
+
+        if (this.props.onKeyDown) {
+            this.props.onKeyDown(event);
         }
     }
 
@@ -534,16 +577,16 @@ export class InputNumber extends Component {
         }
         else {
             const maxFractionDigits = this.numberFormat.resolvedOptions().maximumFractionDigits;
+            const operation = selectionStart !== selectionEnd ? 'range-insert' : 'insert';
 
             if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
                 if ((selectionStart + text.length - (decimalCharIndex + 1)) <= maxFractionDigits) {
                     newValueStr = inputValue.slice(0, selectionStart) + text + inputValue.slice(selectionStart + text.length);
-                    this.updateValue(event, newValueStr, text, 'insert');
+                    this.updateValue(event, newValueStr, text, operation);
                 }
             }
             else {
                 newValueStr = this.insertText(inputValue, text, selectionStart, selectionEnd);
-                const operation = selectionStart !== selectionEnd ? 'range-insert' : 'insert';
                 this.updateValue(event, newValueStr, text, operation);
             }
         }
@@ -555,7 +598,7 @@ export class InputNumber extends Component {
         if (textSplit.length === 2) {
             const decimalCharIndex = value.slice(start, end).search(this._decimal);
             this._decimal.lastIndex = 0;
-            return (decimalCharIndex > 0) ? value.slice(0, start) + this.formatValue(text) + value.slice(end) : value;
+            return (decimalCharIndex > 0) ? value.slice(0, start) + this.formatValue(text) + value.slice(end) : (value || this.formatValue(text));
         }
         else if ((end - start) === value.length) {
             return this.formatValue(text);
@@ -704,6 +747,8 @@ export class InputNumber extends Component {
     }
 
     updateInput(value, insertedValueStr, operation) {
+        insertedValueStr = insertedValueStr || '';
+
         let inputValue = this.inputEl.value;
         let newValue = this.formatValue(value);
         let currentLength = inputValue.length;
@@ -712,7 +757,7 @@ export class InputNumber extends Component {
             this.inputEl.value = newValue;
             this.inputEl.setSelectionRange(0, 0);
             this.initCursor();
-            const prefixLength = (this.prefix || '').length;
+            const prefixLength = (this.prefixChar || '').length;
             const selectionEnd = prefixLength + insertedValueStr.length;
             this.inputEl.setSelectionRange(selectionEnd, selectionEnd);
         }
@@ -759,6 +804,9 @@ export class InputNumber extends Component {
 
                 this._group.lastIndex = 0;
                 this.inputEl.setSelectionRange(selectionEnd, selectionEnd);
+            }
+            else if (inputValue === '-' && operation === 'insert') {
+                this.inputEl.setSelectionRange(selectionEnd + 1, selectionEnd + 1);
             }
             else {
                 selectionEnd = selectionEnd + (newLength - currentLength);
@@ -896,7 +944,7 @@ export class InputNumber extends Component {
             <InputText ref={(el) => this.inputEl = el} id={this.props.inputId} style={this.props.inputStyle} role="spinbutton"
                        className={className} defaultValue={valueToRender} type={this.props.type} size={this.props.size} tabIndex={this.props.tabIndex} inputMode={this.getInputMode()}
                        maxLength={this.props.maxlength} disabled={this.props.disabled} required={this.props.required} pattern={this.props.pattern}
-                       placeholder={this.props.placeholder} readOnly={this.props.readonly} name={this.props.name}
+                       placeholder={this.props.placeholder} readOnly={this.props.readOnly} name={this.props.name}
                        onKeyDown={this.onInputKeyDown} onKeyPress={this.onInputKeyPress} onInput={this.onInput} onClick={this.onInputClick}
                        onBlur={this.onInputBlur} onFocus={this.onInputFocus} onPaste={this.onPaste} min={this.props.min} max={this.props.max}
                        aria-valuemin={this.props.min} aria-valuemax={this.props.max} aria-valuenow={this.props.value} aria-labelledby={this.props.ariaLabelledBy} />
@@ -911,7 +959,7 @@ export class InputNumber extends Component {
 
         return (
             <button type="button" className={className} onMouseLeave={this.onUpButtonMouseLeave} onMouseDown={this.onUpButtonMouseDown} onMouseUp={this.onUpButtonMouseUp}
-                onKeyDown={this.onUpButtonKeyDown} onKeyUp={this.onUpButtonKeyUp} disabled={this.props.disabled} tabIndex="-1">
+                onKeyDown={this.onUpButtonKeyDown} onKeyUp={this.onUpButtonKeyUp} disabled={this.props.disabled} tabIndex={-1}>
                 <span className={icon}></span>
                 <Ripple />
             </button>
@@ -926,7 +974,7 @@ export class InputNumber extends Component {
 
         return (
             <button type="button" className={className} onMouseLeave={this.onDownButtonMouseLeave} onMouseDown={this.onDownButtonMouseDown} onMouseUp={this.onDownButtonMouseUp}
-                onKeyDown={this.onDownButtonKeyDown} onKeyUp={this.onDownButtonKeyUp} disabled={this.props.disabled} tabIndex="-1">
+                onKeyDown={this.onDownButtonKeyDown} onKeyUp={this.onDownButtonKeyUp} disabled={this.props.disabled} tabIndex={-1}>
                 <span className={icon}></span>
                 <Ripple />
             </button>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class MessagesDoc extends Component {
 
@@ -108,7 +108,7 @@ export class MessagesDemo extends Component {
                     <div className="p-field p-fluid">
                         <label htmlFor="username2">Username</label>
                         <InputText id="username2" aria-describedby="username-help" className="p-invalid p-mr-2" />
-                        <small id="username-help" className="p-invalid">Username is not available.</small>
+                        <small id="username-help" className="p-error">Username is not available.</small>
                     </div>
                 </div>
             </div>
@@ -210,7 +210,7 @@ const MessagesDemo = () => {
                 <div className="p-field p-fluid">
                     <label htmlFor="username2">Username</label>
                     <InputText id="username2" aria-describedby="username-help" className="p-invalid p-mr-2" />
-                    <small id="username-help" className="p-invalid">Username is not available.</small>
+                    <small id="username-help" className="p-error">Username is not available.</small>
                 </div>
             </div>
         </div>
@@ -311,7 +311,7 @@ const MessagesDemo = () => {
                 <div className="p-field p-fluid">
                     <label htmlFor="username2">Username</label>
                     <InputText id="username2" aria-describedby="username-help" className="p-invalid p-mr-2" />
-                    <small id="username-help" className="p-invalid">Username is not available.</small>
+                    <small id="username-help" className="p-error">Username is not available.</small>
                 </div>
             </div>
         </div>
@@ -347,13 +347,13 @@ import { Message } from 'primereact/message';
 
 <CodeHighlight>
 {`
-<Messages ref={(el) => this.messages = el}></Messages>
+<Messages ref={messages}></Messages>
 `}
 </CodeHighlight>
 
 <CodeHighlight lang="js">
 {`
-this.messages.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
+messages.current.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
 `}
 </CodeHighlight>
 
@@ -692,9 +692,9 @@ this.messages.show({ life: 5000, severity: 'error', summary: 'Error Message', de
 
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="MessagesDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'MessagesDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         );

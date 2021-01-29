@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import { TabView,TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class PasswordDoc extends Component {
 
@@ -95,7 +95,7 @@ import {Password} from 'primereact/password';
                         <p>Password is used as a controlled component with <i>value</i> and <i>onChange</i> properties.</p>
 <CodeHighlight>
 {`
-<Password value={this.state.value} onChange={(e) => this.setState({value: e.target.value})} />
+<Password value={value} onChange={(e) => setValue(e.target.value)} />
 `}
 </CodeHighlight>
 
@@ -142,6 +142,18 @@ import {Password} from 'primereact/password';
                                         <td>string</td>
                                         <td>Strong</td>
                                         <td>Text for a strong password.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>mediumRegex</td>
+                                        <td>string</td>
+                                        <td>{`^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,}).`}</td>
+                                        <td>Regex for a medium level password.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>strongRegex</td>
+                                        <td>string</td>
+                                        <td>{`^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})`}</td>
+                                        <td>Regex for a strong level password.</td>
                                     </tr>
                                     <tr>
                                         <td>feedback</td>
@@ -208,9 +220,9 @@ import {Password} from 'primereact/password';
                         <p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="PasswordDemo" sources={this.sources} extFiles={this.extFiles} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'PasswordDemo', sources: this.sources, extFiles: this.extFiles })
+                    }
                 </TabView>
             </div>
         )

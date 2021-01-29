@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
+import ObjectUtils from '../utils/ObjectUtils';
 import { CSSTransition } from 'react-transition-group';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
@@ -67,28 +68,6 @@ export class SlideMenuSub extends Component {
         );
     }
 
-    renderIcon(item) {
-        if (item.icon) {
-            const className = classNames('p-menuitem-icon', item.icon);
-
-            return (
-                <span className={className}></span>
-            );
-        }
-
-        return null;
-    }
-
-    renderSubmenuIcon(item) {
-        if (item.items) {
-            return (
-                <span className="p-submenu-icon pi pi-fw pi-angle-right"></span>
-            );
-        }
-
-        return null;
-    }
-
     renderSubmenu(item) {
         if(item.items) {
             return (
@@ -101,18 +80,40 @@ export class SlideMenuSub extends Component {
     }
 
     renderMenuitem(item, index) {
-        const className = classNames('p-menuitem', {'p-menuitem-active': this.state.activeItem === item, 'p-disabled': item.disabled}, item.className);
-        const icon = this.renderIcon(item);
-        const submenuIcon = this.renderSubmenuIcon(item);
+        const active = this.state.activeItem === item;
+        const className = classNames('p-menuitem', {'p-menuitem-active': active, 'p-disabled': item.disabled}, item.className);
+        const iconClassName = classNames('p-menuitem-icon', item.icon);
+        const submenuIconClassName = 'p-submenu-icon pi pi-fw pi-angle-right';
+        const icon = item.icon && <span className={iconClassName}></span>;
+        const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
+        const submenuIcon = item.items && <span className={submenuIconClassName}></span>;
         const submenu = this.renderSubmenu(item);
+        let content = (
+            <a href={item.url || '#'} className="p-menuitem-link" target={item.target} onClick={(event) => this.onItemClick(event, item, index)}>
+                {icon}
+                {label}
+                {submenuIcon}
+            </a>
+        );
+
+        if (item.template) {
+            const defaultContentOptions = {
+                onClick: (event) => this.onItemClick(event, item, index),
+                className: 'p-menuitem',
+                labelClassName: 'p-menuitem-text',
+                iconClassName,
+                submenuIconClassName,
+                element: content,
+                props: this.props,
+                active
+            };
+
+            content = ObjectUtils.getJSXElement(item.template, item, defaultContentOptions);
+        }
 
         return (
             <li key={item.label + '_' + index} className={className} style={item.style}>
-                <a href={item.url || '#'} className="p-menuitem-link" target={item.target} onClick={(event) => this.onItemClick(event, item, index)}>
-                    {icon}
-                    <span className="p-menuitem-text">{item.label}</span>
-                    {submenuIcon}
-                </a>
+                {content}
                 {submenu}
             </li>
         );

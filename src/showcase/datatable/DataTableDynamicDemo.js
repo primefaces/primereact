@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { DataTable } from '../../components/datatable/DataTable';
 import { Column } from '../../components/column/Column';
 import ProductService from '../service/ProductService';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class DataTableDynamicDemo extends Component {
@@ -201,9 +201,9 @@ const DataTableDynamicDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="DataTableDynamicDemo" sources={this.sources} service="ProductService" data="products-small" />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'DataTableDynamicDemo', sources: this.sources, service: 'ProductService', data: 'products-small' })
+                    }
                 </TabView>
             </div>
         )

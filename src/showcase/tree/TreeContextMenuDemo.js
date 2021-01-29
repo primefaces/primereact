@@ -3,8 +3,8 @@ import { Tree } from '../../components/tree/Tree';
 import { ContextMenu } from '../../components/contextmenu/ContextMenu';
 import { Toast} from '../../components/toast/Toast';
 import { NodeService } from '../service/NodeService';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class TreeContextMenuDemo extends Component {
@@ -279,9 +279,9 @@ const TreeContextMenuDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="TreeContextMenuDemo" sources={this.sources} service="NodeService" data="treenodes" />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'TreeContextMenuDemo', sources: this.sources, service: 'NodeService', data: 'treenodes' })
+                    }
                 </TabView>
             </div>
         );

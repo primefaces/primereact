@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { DataTable } from '../../components/datatable/DataTable';
 import { Column } from '../../components/column/Column';
 import { InputText } from '../../components/inputtext/InputText';
+import { InputNumber } from '../../components/inputnumber/InputNumber';
 import { Dropdown } from '../../components/dropdown/Dropdown';
 import { Toast } from '../../components/toast/Toast';
 import ProductService from '../service/ProductService';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './DataTableDemo.scss';
 
@@ -44,6 +45,7 @@ export class DataTableEditDemo extends Component {
         this.onEditorCancel = this.onEditorCancel.bind(this);
         this.onEditorSubmit = this.onEditorSubmit.bind(this);
         this.statusBodyTemplate = this.statusBodyTemplate.bind(this);
+        this.priceBodyTemplate = this.priceBodyTemplate.bind(this);
         this.positiveIntegerValidator = this.positiveIntegerValidator.bind(this);
         this.emptyValueValidator = this.emptyValueValidator.bind(this);
     }
@@ -58,13 +60,13 @@ export class DataTableEditDemo extends Component {
         this.productService.getProductsSmall().then(data => this.setState({ [`${productStateKey}`]: data }));
     }
 
-    positiveIntegerValidator(props) {
-        const { rowData, field } = props;
+    positiveIntegerValidator(e) {
+        const { rowData, field } = e.columnProps;
         return this.isPositiveInteger(rowData[field]);
     }
 
-    emptyValueValidator(props) {
-        const { rowData, field } = props;
+    emptyValueValidator(e) {
+        const { rowData, field } = e.columnProps;
         return rowData[field].trim().length > 0;
     }
 
@@ -79,16 +81,16 @@ export class DataTableEditDemo extends Component {
         return n !== Infinity && String(n) === str && n >= 0;
     }
 
-    onEditorInit(props) {
-        const { rowIndex: index, field, rowData } = props;
+    onEditorInit(e) {
+        const { rowIndex: index, field, rowData } = e.columnProps;
         if (!this.editingCellRows[index]) {
             this.editingCellRows[index] = {...rowData};
         }
         this.editingCellRows[index][field] = this.state.products2[index][field];
     }
 
-    onEditorCancel(props) {
-        const { rowIndex: index, field } = props;
+    onEditorCancel(e) {
+        const { rowIndex: index, field } = e.columnProps;
         let products = [...this.state.products2];
         products[index][field] = this.editingCellRows[index][field];
         delete this.editingCellRows[index][field];
@@ -98,8 +100,8 @@ export class DataTableEditDemo extends Component {
         });
     }
 
-    onEditorSubmit(props) {
-        const { rowIndex: index, field } = props;
+    onEditorSubmit(e) {
+        const { rowIndex: index, field } = e.columnProps;
         delete this.editingCellRows[index][field];
     }
 
@@ -150,7 +152,7 @@ export class DataTableEditDemo extends Component {
     }
 
     priceEditor(productKey, props) {
-        return this.inputTextEditor(productKey, props, 'price');
+        return <InputNumber value={props.rowData['price']} onValueChange={(e) => this.onEditorValueChange(productKey, props, e.value)} mode="currency" currency="USD" locale="en-US" />
     }
 
     statusEditor(productKey, props) {
@@ -165,6 +167,10 @@ export class DataTableEditDemo extends Component {
 
     statusBodyTemplate(rowData) {
         return this.getStatusLabel(rowData.inventoryStatus);
+    }
+
+    priceBodyTemplate(rowData) {
+        return new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(rowData.price);
     }
 
     render() {
@@ -186,7 +192,7 @@ export class DataTableEditDemo extends Component {
                             <Column field="code" header="Code" editor={(props) => this.codeEditor('products1', props)}></Column>
                             <Column field="name" header="Name" editor={(props) => this.nameEditor('products1', props)}></Column>
                             <Column field="inventoryStatus" header="Status" body={this.statusBodyTemplate} editor={(props) => this.statusEditor('products1', props)}></Column>
-                            <Column field="price" header="Price" editor={(props) => this.priceEditor('products1', props)}></Column>
+                            <Column field="price" header="Price" body={this.priceBodyTemplate} editor={(props) => this.priceEditor('products1', props)}></Column>
                         </DataTable>
                     </div>
 
@@ -198,7 +204,8 @@ export class DataTableEditDemo extends Component {
                                 this.columns.map(col => {
                                     const { field, header } = col;
                                     const validator = (field === 'quantity' || field === 'price') ? this.positiveIntegerValidator : this.emptyValueValidator;
-                                    return <Column key={field} field={field} header={header} editor={(props) => this.inputTextEditor('products2', props, field)} editorValidator={validator}
+                                    return <Column key={field} field={field} header={header} body={field === 'price' && this.priceBodyTemplate}
+                                        editor={(props) => this.inputTextEditor('products2', props, field)} editorValidator={validator}
                                         onEditorInit={this.onEditorInit} onEditorCancel={this.onEditorCancel} onEditorSubmit={this.onEditorSubmit} />
                                 })
                             }
@@ -211,7 +218,7 @@ export class DataTableEditDemo extends Component {
                             <Column field="code" header="Code" editor={(props) => this.codeEditor('products3', props)}></Column>
                             <Column field="name" header="Name" editor={(props) => this.nameEditor('products3', props)}></Column>
                             <Column field="inventoryStatus" header="Status" body={this.statusBodyTemplate} editor={(props) => this.statusEditor('products3', props)}></Column>
-                            <Column field="price" header="Price" editor={(props) => this.priceEditor('products3', props)}></Column>
+                            <Column field="price" header="Price" body={this.priceBodyTemplate} editor={(props) => this.priceEditor('products3', props)}></Column>
                             <Column rowEditor headerStyle={{ width: '7rem' }} bodyStyle={{ textAlign: 'center' }}></Column>
                         </DataTable>
                     </div>
@@ -236,6 +243,7 @@ import React, { Component } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
+import { InputNumber } from 'primereact/inputnumber';
 import { Dropdown } from 'primereact/dropdown';
 import { Toast } from 'primereact/toast';
 import ProductService from '../service/ProductService';
@@ -289,13 +297,13 @@ export class DataTableEditDemo extends Component {
         this.productService.getProductsSmall().then(data => this.setState({ [\`\${productStateKey}\`]: data }));
     }
 
-    positiveIntegerValidator(props) {
-        const { rowData, field } = props;
+    positiveIntegerValidator(e) {
+        const { rowData, field } = e.columnProps;
         return this.isPositiveInteger(rowData[field]);
     }
 
-    emptyValueValidator(props) {
-        const { rowData, field } = props;
+    emptyValueValidator(e) {
+        const { rowData, field } = e.columnProps;
         return rowData[field].trim().length > 0;
     }
 
@@ -310,16 +318,16 @@ export class DataTableEditDemo extends Component {
         return n !== Infinity && String(n) === str && n >= 0;
     }
 
-    onEditorInit(props) {
-        const { rowIndex: index, field, rowData } = props;
+    onEditorInit(e) {
+        const { rowIndex: index, field, rowData } = e.columnProps;
         if (!this.editingCellRows[index]) {
             this.editingCellRows[index] = {...rowData};
         }
         this.editingCellRows[index][field] = this.state.products2[index][field];
     }
 
-    onEditorCancel(props) {
-        const { rowIndex: index, field } = props;
+    onEditorCancel(e) {
+        const { rowIndex: index, field } = e.columnProps;
         let products = [...this.state.products2];
         products[index][field] = this.editingCellRows[index][field];
         delete this.editingCellRows[index][field];
@@ -329,8 +337,8 @@ export class DataTableEditDemo extends Component {
         });
     }
 
-    onEditorSubmit(props) {
-        const { rowIndex: index, field } = props;
+    onEditorSubmit(e) {
+        const { rowIndex: index, field } = e.columnProps;
         delete this.editingCellRows[index][field];
     }
 
@@ -381,7 +389,7 @@ export class DataTableEditDemo extends Component {
     }
 
     priceEditor(productKey, props) {
-        return this.inputTextEditor(productKey, props, 'price');
+        return <InputNumber value={props.rowData['price']} onValueChange={(e) => this.onEditorValueChange(productKey, props, e.value)} mode="currency" currency="USD" locale="en-US" />
     }
 
     statusEditor(productKey, props) {
@@ -398,6 +406,10 @@ export class DataTableEditDemo extends Component {
         return this.getStatusLabel(rowData.inventoryStatus);
     }
 
+    priceBodyTemplate(rowData) {
+        return new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(rowData.price);
+    }
+
     render() {
         return (
             <div className="datatable-editing-demo">
@@ -409,7 +421,7 @@ export class DataTableEditDemo extends Component {
                         <Column field="code" header="Code" editor={(props) => this.codeEditor('products1', props)}></Column>
                         <Column field="name" header="Name" editor={(props) => this.nameEditor('products1', props)}></Column>
                         <Column field="inventoryStatus" header="Status" body={this.statusBodyTemplate} editor={(props) => this.statusEditor('products1', props)}></Column>
-                        <Column field="price" header="Price" editor={(props) => this.priceEditor('products1', props)}></Column>
+                        <Column field="price" header="Price" body={this.priceBodyTemplate} editor={(props) => this.priceEditor('products1', props)}></Column>
                     </DataTable>
                 </div>
 
@@ -421,7 +433,8 @@ export class DataTableEditDemo extends Component {
                             this.columns.map(col => {
                                 const { field, header } = col;
                                 const validator = (field === 'quantity' || field === 'price') ? this.positiveIntegerValidator : this.emptyValueValidator;
-                                return <Column key={field} field={field} header={header} editor={(props) => this.inputTextEditor('products2', props, field)} editorValidator={validator}
+                                return <Column key={field} field={field} header={header} body={field === 'price' && this.priceBodyTemplate}
+                                    editor={(props) => this.inputTextEditor('products2', props, field)} editorValidator={validator}
                                     onEditorInit={this.onEditorInit} onEditorCancel={this.onEditorCancel} onEditorSubmit={this.onEditorSubmit} />
                             })
                         }
@@ -434,7 +447,7 @@ export class DataTableEditDemo extends Component {
                         <Column field="code" header="Code" editor={(props) => this.codeEditor('products3', props)}></Column>
                         <Column field="name" header="Name" editor={(props) => this.nameEditor('products3', props)}></Column>
                         <Column field="inventoryStatus" header="Status" body={this.statusBodyTemplate} editor={(props) => this.statusEditor('products3', props)}></Column>
-                        <Column field="price" header="Price" editor={(props) => this.priceEditor('products3', props)}></Column>
+                        <Column field="price" header="Price" body={this.priceBodyTemplate} editor={(props) => this.priceEditor('products3', props)}></Column>
                         <Column rowEditor headerStyle={{ width: '7rem' }} bodyStyle={{ textAlign: 'center' }}></Column>
                     </DataTable>
                 </div>
@@ -451,6 +464,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
+import { InputNumber } from 'primereact/inputnumber';
 import { Dropdown } from 'primereact/dropdown';
 import { Toast } from 'primereact/toast';
 import ProductService from '../service/ProductService';
@@ -495,13 +509,13 @@ const DataTableEditDemo = () => {
         productService.getProductsSmall().then(data => dataTableFuncMap[\`\${productStateKey}\`](data));
     }
 
-    const positiveIntegerValidator = (props) => {
-        const { rowData, field } = props;
+    const positiveIntegerValidator = (e) => {
+        const { rowData, field } = e.columnProps;
         return isPositiveInteger(rowData[field]);
     }
 
-    const emptyValueValidator = (props) => {
-        const { rowData, field } = props;
+    const emptyValueValidator = (e) => {
+        const { rowData, field } = e.columnProps;
         return rowData[field].trim().length > 0;
     }
 
@@ -516,16 +530,16 @@ const DataTableEditDemo = () => {
         return n !== Infinity && String(n) === str && n >= 0;
     }
 
-    const onEditorInit = (props) => {
-        const { rowIndex: index, field, rowData } = props;
+    const onEditorInit = (e) => {
+        const { rowIndex: index, field, rowData } = e.columnProps;
         if (!editingCellRows[index]) {
             editingCellRows[index] = {...rowData};
         }
         editingCellRows[index][field] = products2[index][field];
     }
 
-    const onEditorCancel = (props) => {
-        const { rowIndex: index, field } = props;
+    const onEditorCancel = (e) => {
+        const { rowIndex: index, field } = e.columnProps;
         let products = [...products2];
         products[index][field] = editingCellRows[index][field];
         delete editingCellRows[index][field];
@@ -533,8 +547,8 @@ const DataTableEditDemo = () => {
         setProducts2(products);
     }
 
-    const onEditorSubmit = (props) => {
-        const { rowIndex: index, field } = props;
+    const onEditorSubmit = (e) => {
+        const { rowIndex: index, field } = e.columnProps;
         delete editingCellRows[index][field];
     }
 
@@ -585,7 +599,7 @@ const DataTableEditDemo = () => {
     }
 
     const priceEditor = (productKey, props) => {
-        return inputTextEditor(productKey, props, 'price');
+        return <InputNumber value={props.rowData['price']} onValueChange={(e) => onEditorValueChange(productKey, props, e.value)} mode="currency" currency="USD" locale="en-US" />
     }
 
     const statusEditor = (productKey, props) => {
@@ -602,6 +616,10 @@ const DataTableEditDemo = () => {
         return getStatusLabel(rowData.inventoryStatus);
     }
 
+    const priceBodyTemplate = (rowData) => {
+        return new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(rowData.price);
+    }
+
     return (
         <div className="datatable-editing-demo">
             <Toast ref={toast} />
@@ -612,7 +630,7 @@ const DataTableEditDemo = () => {
                     <Column field="code" header="Code" editor={(props) => codeEditor('products1', props)}></Column>
                     <Column field="name" header="Name" editor={(props) => nameEditor('products1', props)}></Column>
                     <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} editor={(props) => statusEditor('products1', props)}></Column>
-                    <Column field="price" header="Price" editor={(props) => priceEditor('products1', props)}></Column>
+                    <Column field="price" header="Price" body={priceBodyTemplate} editor={(props) => priceEditor('products1', props)}></Column>
                 </DataTable>
             </div>
 
@@ -624,7 +642,8 @@ const DataTableEditDemo = () => {
                         columns.map(col => {
                             const { field, header } = col;
                             const validator = (field === 'quantity' || field === 'price') ? positiveIntegerValidator : emptyValueValidator;
-                            return <Column key={field} field={field} header={header} editor={(props) => inputTextEditor('products2', props, field)} editorValidator={validator}
+                            return <Column key={field} field={field} header={header} body={field === 'price' && priceBodyTemplate}
+                                editor={(props) => inputTextEditor('products2', props, field)} editorValidator={validator}
                                 onEditorInit={onEditorInit} onEditorCancel={onEditorCancel} onEditorSubmit={onEditorSubmit} />
                         })
                     }
@@ -637,7 +656,7 @@ const DataTableEditDemo = () => {
                     <Column field="code" header="Code" editor={(props) => codeEditor('products3', props)}></Column>
                     <Column field="name" header="Name" editor={(props) => nameEditor('products3', props)}></Column>
                     <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} editor={(props) => statusEditor('products3', props)}></Column>
-                    <Column field="price" header="Price" editor={(props) => priceEditor('products3', props)}></Column>
+                    <Column field="price" header="Price" body={priceBodyTemplate} editor={(props) => priceEditor('products3', props)}></Column>
                     <Column rowEditor headerStyle={{ width: '7rem' }} bodyStyle={{ textAlign: 'center' }}></Column>
                 </DataTable>
             </div>
@@ -653,6 +672,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
+import { InputNumber } from 'primereact/inputnumber';
 import { Dropdown } from 'primereact/dropdown';
 import { Toast } from 'primereact/toast';
 import ProductService from '../service/ProductService';
@@ -697,13 +717,13 @@ const DataTableEditDemo = () => {
         productService.getProductsSmall().then(data => dataTableFuncMap[\`\${productStateKey}\`](data));
     }
 
-    const positiveIntegerValidator = (props) => {
-        const { rowData, field } = props;
+    const positiveIntegerValidator = (e) => {
+        const { rowData, field } = e.columnProps;
         return isPositiveInteger(rowData[field]);
     }
 
-    const emptyValueValidator = (props) => {
-        const { rowData, field } = props;
+    const emptyValueValidator = (e) => {
+        const { rowData, field } = e.columnProps;
         return rowData[field].trim().length > 0;
     }
 
@@ -718,16 +738,16 @@ const DataTableEditDemo = () => {
         return n !== Infinity && String(n) === str && n >= 0;
     }
 
-    const onEditorInit = (props) => {
-        const { rowIndex: index, field, rowData } = props;
+    const onEditorInit = (e) => {
+        const { rowIndex: index, field, rowData } = e.columnProps;
         if (!editingCellRows[index]) {
             editingCellRows[index] = {...rowData};
         }
         editingCellRows[index][field] = products2[index][field];
     }
 
-    const onEditorCancel = (props) => {
-        const { rowIndex: index, field } = props;
+    const onEditorCancel = (e) => {
+        const { rowIndex: index, field } = e.columnProps;
         let products = [...products2];
         products[index][field] = editingCellRows[index][field];
         delete editingCellRows[index][field];
@@ -735,8 +755,8 @@ const DataTableEditDemo = () => {
         setProducts2(products);
     }
 
-    const onEditorSubmit = (props) => {
-        const { rowIndex: index, field } = props;
+    const onEditorSubmit = (e) => {
+        const { rowIndex: index, field } = e.columnProps;
         delete editingCellRows[index][field];
     }
 
@@ -787,7 +807,7 @@ const DataTableEditDemo = () => {
     }
 
     const priceEditor = (productKey, props) => {
-        return inputTextEditor(productKey, props, 'price');
+        return <InputNumber value={props.rowData['price']} onValueChange={(e) => onEditorValueChange(productKey, props, e.value)} mode="currency" currency="USD" locale="en-US" />
     }
 
     const statusEditor = (productKey, props) => {
@@ -804,6 +824,10 @@ const DataTableEditDemo = () => {
         return getStatusLabel(rowData.inventoryStatus);
     }
 
+    const priceBodyTemplate = (rowData) => {
+        return new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(rowData.price);
+    }
+
     return (
         <div className="datatable-editing-demo">
             <Toast ref={toast} />
@@ -814,7 +838,7 @@ const DataTableEditDemo = () => {
                     <Column field="code" header="Code" editor={(props) => codeEditor('products1', props)}></Column>
                     <Column field="name" header="Name" editor={(props) => nameEditor('products1', props)}></Column>
                     <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} editor={(props) => statusEditor('products1', props)}></Column>
-                    <Column field="price" header="Price" editor={(props) => priceEditor('products1', props)}></Column>
+                    <Column field="price" header="Price" body={priceBodyTemplate} editor={(props) => priceEditor('products1', props)}></Column>
                 </DataTable>
             </div>
 
@@ -826,7 +850,8 @@ const DataTableEditDemo = () => {
                         columns.map(col => {
                             const { field, header } = col;
                             const validator = (field === 'quantity' || field === 'price') ? positiveIntegerValidator : emptyValueValidator;
-                            return <Column key={field} field={field} header={header} editor={(props) => inputTextEditor('products2', props, field)} editorValidator={validator}
+                            return <Column key={field} field={field} header={header} body={field === 'price' && priceBodyTemplate}
+                                editor={(props) => inputTextEditor('products2', props, field)} editorValidator={validator}
                                 onEditorInit={onEditorInit} onEditorCancel={onEditorCancel} onEditorSubmit={onEditorSubmit} />
                         })
                     }
@@ -839,7 +864,7 @@ const DataTableEditDemo = () => {
                     <Column field="code" header="Code" editor={(props) => codeEditor('products3', props)}></Column>
                     <Column field="name" header="Name" editor={(props) => nameEditor('products3', props)}></Column>
                     <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} editor={(props) => statusEditor('products3', props)}></Column>
-                    <Column field="price" header="Price" editor={(props) => priceEditor('products3', props)}></Column>
+                    <Column field="price" header="Price" body={priceBodyTemplate} editor={(props) => priceEditor('products3', props)}></Column>
                     <Column rowEditor headerStyle={{ width: '7rem' }} bodyStyle={{ textAlign: 'center' }}></Column>
                 </DataTable>
             </div>
@@ -870,9 +895,9 @@ const DataTableEditDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="DataTableEditDemo" sources={this.sources} service="ProductService" data="products-small" extFiles={this.extFiles} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'DataTableEditDemo', sources: this.sources, service: 'ProductService', data: 'products-small', extFiles: this.extFiles })
+                    }
                 </TabView>
             </div>
         )

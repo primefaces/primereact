@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
+import ObjectUtils from '../utils/ObjectUtils';
 
 export class BreadCrumb extends Component {
 
@@ -61,14 +62,30 @@ export class BreadCrumb extends Component {
         );
     }
 
-    renderMenuitem(item, index) {
+    renderMenuitem(item) {
         const className = classNames(item.className, {'p-disabled': item.disabled});
+        const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
+        let content = (
+            <a href={item.url || '#'} className="p-menuitem-link" target={item.target} onClick={event => this.itemClick(event, item)}>
+                {label}
+            </a>
+        );
+
+        if (item.template) {
+            const defaultContentOptions = {
+                onClick: (event) => this.itemClick(event, item),
+                className: 'p-menuitem-link',
+                labelClassName: 'p-menuitem-text',
+                element: content,
+                props: this.props
+            };
+
+            content = ObjectUtils.getJSXElement(item.template, item, defaultContentOptions);
+        }
 
         return (
             <li className={className} style={item.style}>
-                <a href={item.url || '#'} className="p-menuitem-link" target={item.target} onClick={event => this.itemClick(event, item)}>
-                    <span className="p-menuitem-text">{item.label}</span>
-                </a>
+                {content}
             </li>
         );
     }
@@ -76,7 +93,7 @@ export class BreadCrumb extends Component {
     renderMenuitems() {
         if (this.props.model) {
             const items = this.props.model.map((item, index)=> {
-                const menuitem = this.renderMenuitem(item, index);
+                const menuitem = this.renderMenuitem(item);
                 const separator = (index === this.props.model.length - 1) ? null : this.renderSeparator();
 
                 return (

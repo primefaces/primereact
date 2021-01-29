@@ -14,10 +14,21 @@
                     ]
                 },
                 {
-                    "name": "Community Forum",
-                    "href": "https://forum.primefaces.org/viewforum.php?f=57",
+                    "name": "Locale",
+                    "to": "/locale",
                     "meta": [
-                        "get started"
+                        "i18N",
+                        "locale",
+                        "translate",
+                        "internationalization"
+                    ],
+                    "badge": "new"
+                },
+                {
+                    "name": "Accessibility",
+                    "to": "/accessibility",
+                    "meta": [
+                        "accessibility"
                     ]
                 },
                 {
@@ -28,18 +39,40 @@
                     ]
                 },
                 {
-                    "name": "Support",
-                    "to": "/support",
-                    "meta": [
-                        "support"
-                    ]
-                },
-                {
                     "name": "Store",
                     "href": "https://www.primefaces.org/store/",
                     "meta": [
                         "store",
                         "primestore"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Support",
+            "meta": [
+                "support"
+            ],
+            "children": [
+                {
+                    "name": "Forum",
+                    "href": "https://forum.primefaces.org/viewforum.php?f=57",
+                    "meta": [
+                        "forum"
+                    ]
+                },
+                {
+                    "name": "Discord Chat",
+                    "href": "https://discord.gg/gzKFYnpmCY",
+                    "meta": [
+                        "discord"
+                    ]
+                },
+                {
+                    "name": "PRO Support",
+                    "to": "/support",
+                    "meta": [
+                        "pro support"
                     ]
                 }
             ]
@@ -73,7 +106,7 @@
                 },
                 {
                     "name": "SASS API",
-                    "href": "https://www.primefaces.org/designer/api/primereact/5.0.0",
+                    "href": "https://www.primefaces.org/designer/api/primereact/6.0.0",
                     "meta": [
                         "sass api"
                     ]
@@ -105,7 +138,8 @@
                     "name": "Elevation",
                     "to": "/elevation",
                     "meta": [
-                        "elevation"
+                        "elevation",
+                        "shadow"
                     ]
                 },
                 {
@@ -153,11 +187,12 @@
             ],
             "children": [
                 {
-                    "name": "Icons v4.0",
+                    "name": "Icons v4.1",
                     "to": "/icons",
                     "meta": [
                         "icons"
-                    ]
+                    ],
+                    "badge": "updated"
                 }
             ]
         },
@@ -181,6 +216,14 @@
                         "calendar",
                         "datepicker"
                     ]
+                },
+                {
+                    "name": "CascadeSelect",
+                    "to": "/cascadeselect",
+                    "meta": [
+                        "cascadeselect"
+                    ],
+                    "badge": "new"
                 },
                 {
                     "name": "Checkbox",
@@ -219,6 +262,13 @@
                     ]
                 },
                 {
+                    "name": "FloatLabel",
+                    "to": "/floatlabel",
+                    "meta": [
+                        "floatlabel"
+                    ]
+                },
+                {
                     "name": "InputGroup",
                     "to": "/inputgroup",
                     "meta": [
@@ -231,14 +281,6 @@
                     "meta": [
                         "inputmask"
                     ]
-                },
-                {
-                    "name": "InputNumber",
-                    "to": "/inputnumber",
-                    "meta": [
-                        "inputnumber"
-                    ],
-                    "badge": "new"
                 },
                 {
                     "name": "InputSwitch",
@@ -255,18 +297,34 @@
                     ]
                 },
                 {
-                    "name": "FloatLabel",
-                    "to": "/floatlabel",
-                    "meta": [
-                        "floatlabel"
-                    ]
-                },
-                {
                     "name": "InputTextarea",
                     "to": "/inputtextarea",
                     "meta": [
                         "inputtextarea"
                     ]
+                },
+                {
+                    "name": "InputNumber",
+                    "to": "/inputnumber",
+                    "meta": [
+                        "inputnumber"
+                    ]
+                },
+                {
+                    "name": "InvalidState",
+                    "to": "/invalid",
+                    "meta": [
+                        "invalid state"
+                    ],
+                    "badge": "new"
+                },
+                {
+                    "name": "Knob",
+                    "to": "/knob",
+                    "meta": [
+                        "knob"
+                    ],
+                    "badge": "new"
                 },
                 {
                     "name": "KeyFilter",
@@ -840,6 +898,13 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "name": "Timeline",
+                    "to": "/timeline",
+                    "meta": [
+                        "timeline"
+                    ]
                 }
             ]
         },
@@ -871,6 +936,14 @@
                     ]
                 },
                 {
+                    "name": "Divider",
+                    "to": "/divider",
+                    "meta": [
+                        "divider"
+                    ],
+                    "badge": "new"
+                },
+                {
                     "name": "Fieldset",
                     "to": "/fieldset",
                     "meta": [
@@ -883,6 +956,14 @@
                     "meta": [
                         "panel"
                     ]
+                },
+                {
+                    "name": "Splitter",
+                    "to": "/splitter",
+                    "meta": [
+                        "splitter"
+                    ],
+                    "badge": "new"
                 },
                 {
                     "name": "ScrollPanel",
@@ -914,11 +995,28 @@
             ],
             "children": [
                 {
+                    "name": "ConfirmDialog",
+                    "to": "/confirmdialog",
+                    "meta": [
+                        "confirmdialog"
+                    ],
+                    "badge": "new"
+                },
+                {
+                    "name": "ConfirmPopup",
+                    "to": "/confirmpopup",
+                    "meta": [
+                        "confirmpopup"
+                    ],
+                    "badge": "new"
+                },
+                {
                     "name": "Dialog",
                     "to": "/dialog",
                     "meta": [
                         "dialog"
-                    ]
+                    ],
+                    "badge": "updated"
                 },
                 {
                     "name": "OverlayPanel",
@@ -1128,8 +1226,7 @@
                     "meta": [
                         "growl",
                         "toast"
-                    ],
-                    "badge": "updated"
+                    ]
                 }
             ]
         },
@@ -1151,7 +1248,6 @@
                     "meta": [
                         "galleria"
                     ],
-                    "badge": "new",
                     "children": [
                         {
                             "name": "Documentation",
@@ -1234,18 +1330,28 @@
             ],
             "children": [
                 {
-                    "name": "Accessibility",
-                    "to": "/accessibility",
+                    "name": "Avatar",
+                    "to": "/avatar",
                     "meta": [
-                        "accessibility"
-                    ]
+                        "avatar"
+                    ],
+                    "badge": "new"
                 },
                 {
                     "name": "Badge",
                     "to": "/badge",
                     "meta": [
                         "badge"
-                    ]
+                    ],
+                    "badge": "new"
+                },
+                {
+                    "name": "Chip",
+                    "to": "/chip",
+                    "meta": [
+                        "chip"
+                    ],
+                    "badge": "new"
                 },
                 {
                     "name": "Inplace",
@@ -1253,6 +1359,22 @@
                     "meta": [
                         "inplace"
                     ]
+                },
+                {
+                    "name": "ScrollTop",
+                    "to": "/scrolltop",
+                    "meta": [
+                        "scrolltop"
+                    ],
+                    "badge": "new"
+                },
+                {
+                    "name": "Skeleton",
+                    "to": "/skeleton",
+                    "meta": [
+                        "skeleton"
+                    ],
+                    "badge": "new"
                 },
                 {
                     "name": "ProgressBar",
@@ -1274,7 +1396,7 @@
                     "meta": [
                         "ripple"
                     ],
-                    "badge": "new"
+                    "badge": "updated"
                 },
                 {
                     "name": "Captcha",
@@ -1283,6 +1405,14 @@
                         "captcha",
                         "recaptcha"
                     ]
+                },
+                {
+                    "name": "Tag",
+                    "to": "/tag",
+                    "meta": [
+                        "tag"
+                    ],
+                    "badge": "new"
                 }
             ]
         }

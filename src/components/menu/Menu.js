@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
-import classNames from 'classnames';
+import ObjectUtils from '../utils/ObjectUtils';
+import { classNames } from '../utils/ClassNames';
 import { CSSTransition } from 'react-transition-group';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
@@ -252,14 +253,33 @@ export class Menu extends Component {
         const linkClassName = classNames('p-menuitem-link', {'p-disabled': item.disabled})
         const iconClassName = classNames('p-menuitem-icon', item.icon);
         const icon = item.icon && <span className={iconClassName}></span>;
+        const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
         const tabIndex = item.disabled ? null : 0;
+        let content = (
+            <a href={item.url||'#'} className={linkClassName} role="menuitem" target={item.target} onClick={(event) => this.onItemClick(event, item)} onKeyDown={(event) => this.onItemKeyDown(event, item)} tabIndex={tabIndex}>
+                {icon}
+                {label}
+            </a>
+        );
+
+        if (item.template) {
+            const defaultContentOptions = {
+                onClick: (event) => this.onItemClick(event, item),
+                onKeyDown: (event) => this.onItemKeyDown(event, item),
+                className: linkClassName,
+                tabIndex: tabIndex,
+                labelClassName: 'p-menuitem-text',
+                iconClassName,
+                element: content,
+                props: this.props
+            };
+
+            content = ObjectUtils.getJSXElement(item.template, item, defaultContentOptions);
+        }
 
         return (
             <li key={item.label + '_' + index} className={className} style={item.style} role="none">
-                <a href={item.url||'#'} className={linkClassName} role="menuitem" target={item.target} onClick={e => this.onItemClick(e, item)} onKeyDown={e => this.onItemKeyDown(e, item)} tabIndex={tabIndex}>
-                    {icon}
-                    <span className="p-menuitem-text">{item.label}</span>
-                </a>
+                {content}
             </li>
         );
     }

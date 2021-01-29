@@ -3,8 +3,8 @@ import { TreeTable } from '../../components/treetable/TreeTable';
 import { Column } from '../../components/column/Column';
 import { InputText } from '../../components/inputtext/InputText';
 import { NodeService } from '../service/NodeService';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class TreeTableFilterDemo extends Component {
@@ -281,9 +281,9 @@ const TreeTableFilterDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="TreeTableFilterDemo" sources={this.sources} service="NodeService" data="treetablenodes" />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'TreeTableFilterDemo', sources: this.sources, service: 'NodeService', data: 'treetablenodes' })
+                    }
                 </TabView>
             </div>
         )

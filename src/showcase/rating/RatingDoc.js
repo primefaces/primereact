@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class RatingDoc extends Component {
 
@@ -37,7 +37,7 @@ export class RatingDemo extends Component {
                     <Rating value={this.state.val2} cancel={false} onChange={(e) => this.setState({val2: e.value})} />
 
                     <h5>ReadOnly</h5>
-                    <Rating value={5} readonly stars={10} cancel={false} />
+                    <Rating value={5} readOnly stars={10} cancel={false} />
 
                     <h5>Disabled</h5>
                     <Rating value={8} disabled stars={10} />
@@ -68,7 +68,7 @@ const RatingDemo = () => {
                 <Rating value={val2} cancel={false} onChange={(e) => setVal2(e.value)} />
 
                 <h5>ReadOnly</h5>
-                <Rating value={5} readonly stars={10} cancel={false} />
+                <Rating value={5} readOnly stars={10} cancel={false} />
 
                 <h5>Disabled</h5>
                 <Rating value={8} disabled stars={10} />
@@ -98,7 +98,7 @@ const RatingDemo = () => {
                 <Rating value={val2} cancel={false} onChange={(e) => setVal2(e.value)} />
 
                 <h5>ReadOnly</h5>
-                <Rating value={5} readonly stars={10} cancel={false} />
+                <Rating value={5} readOnly stars={10} cancel={false} />
 
                 <h5>Disabled</h5>
                 <Rating value={8} disabled stars={10} />
@@ -132,7 +132,7 @@ import { Rating } from 'primereact/rating';
 
 <CodeHighlight>
 {`
-<Rating value={this.state.value} onChange={(e) => this.setState({value: e.value})} />
+<Rating value={value} onChange={(e) => setValue(e.value)} />
 `}
 </CodeHighlight>
 
@@ -141,7 +141,7 @@ import { Rating } from 'primereact/rating';
 
 <CodeHighlight>
 {`
-<Rating value={this.state.value} onChange={(e) => this.setState({value: e.value})} stars={5} />
+<Rating value={value} onChange={(e) => setValue(e.value)} stars={5} />
 `}
 </CodeHighlight>
 
@@ -150,7 +150,7 @@ import { Rating } from 'primereact/rating';
 
 <CodeHighlight>
 {`
-<Rating value={this.state.value} onChange={(e) => this.setState({value: e.value})} cancel={5} />
+<Rating value={value} onChange={(e) => setValue(e.value)} cancel={5} />
 `}
 </CodeHighlight>
 
@@ -185,7 +185,7 @@ import { Rating } from 'primereact/rating';
                                         <td>When present, it specifies that the element should be disabled.</td>
                                     </tr>
                                     <tr>
-                                        <td>readonly</td>
+                                        <td>readOnly</td>
                                         <td>boolean</td>
                                         <td>false</td>
                                         <td>When present, changing the value is not possible.</td>
@@ -287,9 +287,9 @@ import { Rating } from 'primereact/rating';
                         <p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="RatingDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'RatingDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         )

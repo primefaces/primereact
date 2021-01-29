@@ -5,8 +5,8 @@ import { CustomerService } from '../service/CustomerService';
 import { InputText } from '../../components/inputtext/InputText';
 import { MultiSelect } from '../../components/multiselect/MultiSelect';
 import { Dropdown } from '../../components/dropdown/Dropdown';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class DataTableStateDemo extends Component {
@@ -584,9 +584,9 @@ const DataTableStateDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="DataTableStateDemo" sources={this.sources} service="CustomerService" data="customers-medium" />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'DataTableStateDemo', sources: this.sources, service: 'CustomerService', data: 'customers-medium' })
+                    }
                 </TabView>
             </div>
         )

@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Paginator } from '../paginator/Paginator';
@@ -28,10 +28,11 @@ export class DataTable extends Component {
         paginatorTemplate: 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown',
         paginatorLeft:null,
         paginatorRight: null,
+        paginatorDropdownAppendTo: null,
         pageLinkSize: 5,
         rowsPerPageOptions: null,
         currentPageReportTemplate: '({currentPage} of {totalPages})',
-        first: null,
+        first: 0,
         rows: null,
         totalRecords: null,
         lazy: false,
@@ -79,7 +80,7 @@ export class DataTable extends Component {
         rowGroupFooterTemplate: null,
         loading: false,
         loadingIcon: 'pi pi-spinner',
-        tabIndex: '0',
+        tabIndex: 0,
         stateKey: null,
         stateStorage: 'session',
         editMode: 'cell',
@@ -128,6 +129,7 @@ export class DataTable extends Component {
         paginatorTemplate: PropTypes.string,
         paginatorLeft: PropTypes.any,
         paginatorRight: PropTypes.any,
+        paginatorDropdownAppendTo: PropTypes.any,
         pageLinkSize: PropTypes.number,
         rowsPerPageOptions: PropTypes.array,
         currentPageReportTemplate: PropTypes.string,
@@ -177,7 +179,7 @@ export class DataTable extends Component {
         rowGroupFooterTemplate: PropTypes.func,
         loading: PropTypes.bool,
         loadingIcon: PropTypes.string,
-        tabIndex: PropTypes.string,
+        tabIndex: PropTypes.number,
         stateKey: PropTypes.string,
         stateStorage: PropTypes.string,
         editMode: PropTypes.string,
@@ -376,6 +378,17 @@ export class DataTable extends Component {
             }
         }
 
+        this._restoreState(restoredState, state);
+    }
+
+    restoreTableState(restoredState) {
+        const state = this._restoreState(restoredState);
+        if (state && Object.keys(state).length) {
+            this.setState(state);
+        }
+    }
+
+    _restoreState(restoredState, state = {}) {
         if (restoredState && Object.keys(restoredState).length) {
             if (this.props.paginator) {
                 if (this.props.onPage) {
@@ -450,11 +463,13 @@ export class DataTable extends Component {
                 this.props.onStateRestore(restoredState);
             }
         }
+
+        return state;
     }
 
     saveColumnWidths(state) {
         let widths = [];
-        let headers = DomHandler.find(this.container, '.p-datatable-thead > tr > th');
+        let headers = DomHandler.find(this.container, '.p-datatable-thead > tr > th.p-resizable-column');
         headers.map(header => widths.push(DomHandler.getOuterWidth(header)));
         state.columnWidths = widths.join(',');
 
@@ -509,7 +524,7 @@ export class DataTable extends Component {
         return (
             <Paginator first={this.getFirst()} rows={this.getRows()} pageLinkSize={this.props.pageLinkSize} className={className} onPageChange={this.onPageChange} template={this.props.paginatorTemplate}
                         totalRecords={totalRecords} rowsPerPageOptions={this.props.rowsPerPageOptions} currentPageReportTemplate={this.props.currentPageReportTemplate}
-                        leftContent={this.props.paginatorLeft} rightContent={this.props.paginatorRight} alwaysShow={this.props.alwaysShowPaginator} />
+                        leftContent={this.props.paginatorLeft} rightContent={this.props.paginatorRight} alwaysShow={this.props.alwaysShowPaginator} dropdownAppendTo={this.props.paginatorDropdownAppendTo} />
         );
     }
 
@@ -1167,11 +1182,11 @@ export class DataTable extends Component {
         let filters = localFilters || this.getFilters();
         let columns = React.Children.toArray(this.props.children);
 
-        for(let i = 0; i < value.length; i++) {
+        for (let i = 0; i < value.length; i++) {
             let localMatch = true;
             let globalMatch = false;
 
-            for(let j = 0; j < columns.length; j++) {
+            for (let j = 0; j < columns.length; j++) {
                 let col = columns[j];
                 let columnField = col.props.filterField || col.props.field;
                 let filterMeta = filters ? filters[columnField] : null;
@@ -1183,11 +1198,11 @@ export class DataTable extends Component {
                     let filterMatchMode = filterMeta.matchMode||col.props.filterMatchMode;
                     let filterConstraint = filterMatchMode === 'custom' ? col.props.filterFunction : FilterUtils[filterMatchMode];
 
-                    if(!filterConstraint(dataFieldValue, filterValue, this.props.filterLocale)) {
+                    if (filterConstraint !== null && !filterConstraint(dataFieldValue, filterValue, this.props.filterLocale)) {
                         localMatch = false;
                     }
 
-                    if(!localMatch) {
+                    if (!localMatch) {
                         break;
                     }
                 }
@@ -1198,7 +1213,7 @@ export class DataTable extends Component {
             }
 
             let matches = localMatch;
-            if(this.props.globalFilter) {
+            if (this.props.globalFilter) {
                 matches = localMatch&&globalMatch;
             }
 
@@ -1429,9 +1444,13 @@ export class DataTable extends Component {
         }
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps, prevState) {
         if (this.isStateful()) {
             this.saveState();
+        }
+
+        if (prevProps.globalFilter !== this.props.globalFilter) {
+            this.filter(this.props.globalFilter, 'globalFilter', 'contains');
         }
     }
 

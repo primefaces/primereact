@@ -5,7 +5,7 @@ import { Button } from '../button/Button';
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
 import { AutoCompletePanel } from './AutoCompletePanel';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import { tip } from '../tooltip/Tooltip';
 import UniqueComponentId from "../utils/UniqueComponentId";
 import { CSSTransition } from 'react-transition-group';
@@ -34,12 +34,12 @@ export class AutoComplete extends Component {
         panelClassName: null,
         panelStyle: null,
         placeholder: null,
-        readonly: false,
+        readOnly: false,
         disabled: false,
         maxlength: null,
         size: null,
         appendTo: null,
-        tabindex: null,
+        tabIndex: null,
         autoFocus: false,
         tooltip: null,
         tooltipOptions: null,
@@ -83,12 +83,12 @@ export class AutoComplete extends Component {
         panelClassName: PropTypes.string,
         panelStyle: PropTypes.object,
         placeholder: PropTypes.string,
-        readonly: PropTypes.bool,
+        readOnly: PropTypes.bool,
         disabled: PropTypes.bool,
         maxlength: PropTypes.number,
         size: PropTypes.number,
         appendTo: PropTypes.any,
-        tabindex: PropTypes.number,
+        tabIndex: PropTypes.number,
         autoFocus: PropTypes.bool,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
@@ -613,8 +613,8 @@ export class AutoComplete extends Component {
             <InputText ref={(el) => this.inputEl = el} id={this.props.inputId} type={this.props.type} name={this.props.name}
                         defaultValue={this.formatValue(this.props.value)} role="searchbox" aria-autocomplete="list" aria-controls={this.listId}
                         aria-labelledby={this.props.ariaLabelledBy} className={inputClassName} style={this.props.inputStyle} autoComplete="off"
-                        readOnly={this.props.readonly} disabled={this.props.disabled} placeholder={this.props.placeholder} size={this.props.size}
-                        maxLength={this.props.maxlength} tabIndex={this.props.tabindex}
+                        readOnly={this.props.readOnly} disabled={this.props.disabled} placeholder={this.props.placeholder} size={this.props.size}
+                        maxLength={this.props.maxlength} tabIndex={this.props.tabIndex}
                         onBlur={this.onInputBlur} onFocus={this.onInputFocus} onChange={this.onInputChange}
                         onMouseDown={this.props.onMouseDown} onKeyUp={this.props.onKeyUp} onKeyDown={this.onInputKeyDown}
                         onKeyPress={this.props.onKeyPress} onContextMenu={this.props.onContextMenu}
@@ -642,7 +642,7 @@ export class AutoComplete extends Component {
             <li className="p-autocomplete-input-token">
                 <input ref={(el) => this.inputEl = el} type={this.props.type} disabled={this.props.disabled} placeholder={this.props.placeholder}
                        role="searchbox" aria-autocomplete="list" aria-controls={this.listId} aria-labelledby={this.props.ariaLabelledBy}
-                       autoComplete="off" tabIndex={this.props.tabindex} onChange={this.onInputChange} id={this.props.inputId} name={this.props.name}
+                       autoComplete="off" tabIndex={this.props.tabIndex} onChange={this.onInputChange} id={this.props.inputId} name={this.props.name}
                        style={this.props.inputStyle} className={this.props.inputClassName} maxLength={this.props.maxlength}
                        onKeyUp={this.props.onKeyUp} onKeyDown={this.onInputKeyDown} onKeyPress={this.props.onKeyPress}
                        onFocus={this.onMultiInputFocus} onBlur={this.onMultiInputBlur} />

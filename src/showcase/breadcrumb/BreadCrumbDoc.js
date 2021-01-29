@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class BreadCrumbDoc extends Component {
 
@@ -109,7 +109,7 @@ const BreadCrumbDemo = () => {
                         <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
-import { Breadcrumb } from 'primereact/breadcrumb';
+import { BreadCrumb } from 'primereact/breadcrumb';
 `}
 </CodeHighlight>
 
@@ -138,7 +138,7 @@ const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact' 
 
 <CodeHighlight>
 {`
-<BreadCrumb model={items} home="home"/>
+<BreadCrumb model={items} home={home}/>
 `}
 </CodeHighlight>
 
@@ -223,9 +223,9 @@ const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact' 
                         <p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="BreadCrumbDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'BreadCrumbDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         )

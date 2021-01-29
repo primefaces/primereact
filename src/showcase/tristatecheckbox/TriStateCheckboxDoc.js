@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight}  from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class TriStateCheckboxDoc extends Component {
 
@@ -108,7 +108,7 @@ import {TriStateCheckbox} from 'primereact/tristatecheckbox';
                         <p>TriStateCheckbox is used as a controlled input with <i>checked</i> and <i>onChange</i> properties.</p>
 <CodeHighlight>
 {`
-<TriStateCheckbox value={this.state.value} onChange={(e) => this.setState({value: e.value})} />
+<TriStateCheckbox value={value} onChange={(e) => setValue(e.value)} />
 `}
 </CodeHighlight>
 
@@ -245,9 +245,9 @@ import {TriStateCheckbox} from 'primereact/tristatecheckbox';
                     <p>None.</p>
                 </TabPanel>
 
-                <TabPanel header="Source">
-                    <LiveEditor name="TriStateCheckboxDemo" sources={this.sources} />
-                </TabPanel>
+                {
+                    useLiveEditorTabs({ name: 'TriStateCheckboxDemo', sources: this.sources })
+                }
             </TabView>
         </div>
         )

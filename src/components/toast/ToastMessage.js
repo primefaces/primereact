@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
+import ObjectUtils from '../utils/ObjectUtils';
 import { Ripple } from '../ripple/Ripple';
 
 export class ToastMessage extends Component {
@@ -71,6 +72,7 @@ export class ToastMessage extends Component {
     renderMessage() {
         if (this.props.message) {
             const { severity, content, summary, detail } = this.props.message;
+            const contentEl = ObjectUtils.getJSXElement(content, this.props);
             let iconClassName = classNames('p-toast-message-icon pi', {
                 'pi-info-circle': severity === 'info',
                 'pi-exclamation-triangle': severity === 'warn',
@@ -78,7 +80,7 @@ export class ToastMessage extends Component {
                 'pi-check': severity === 'success'
             });
 
-            return content || (
+            return contentEl || (
                 <>
                     <span className={iconClassName}></span>
                     <div className="p-toast-message-text">

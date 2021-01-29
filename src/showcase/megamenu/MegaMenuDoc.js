@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class MegaMenuDoc extends Component {
 
@@ -442,21 +442,11 @@ import { MegaMenu } from 'primereact/megamenu';
 
                         <h5>MenuItem API</h5>
                         <p>MegaMenu uses the common menu item api to define its items, visit <Link to="/menumodel">  MenuModel </Link> for details.</p>
-
-                        <h5>Getting Started</h5>
-                        <p>Layout of the MegaMenu is managed by the <a href="https://github.com/primefaces/primeflex">PrimeFlex</a> that can be downloaded from npm.</p>
-
-<CodeHighlight lang="js">
-{`
-npm install primeflex --save
-`}
-</CodeHighlight>
-
                         <p>MegaMenu requires a collection of menuitems as its model.</p>
 
 <CodeHighlight lang="js">
 {`
-const items: [
+const items = [
     {
         label: 'Videos', icon: 'pi pi-fw pi-video',
         items: [
@@ -685,9 +675,9 @@ const items: [
                         <p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="MegaMenuDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'MegaMenuDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         )

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { tip } from "../tooltip/Tooltip";
+import { classNames } from '../utils/ClassNames';
+import { tip } from '../tooltip/Tooltip';
 import ObjectUtils from '../utils/ObjectUtils';
 import { Ripple } from '../ripple/Ripple';
 
@@ -77,11 +77,11 @@ export class ButtonComponent extends Component {
     }
 
     renderLabel() {
-        if (!this.props.label) {
-            return <span className="p-button-label p-c" dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
+        if (this.props.label) {
+            return <span className="p-button-label p-c">{this.props.label}</span>;
         }
 
-        return <span className="p-button-label p-c">{this.props.label}</span>
+        return !this.props.children && !this.props.label && <span className="p-button-label p-c" dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
     }
 
     renderBadge() {

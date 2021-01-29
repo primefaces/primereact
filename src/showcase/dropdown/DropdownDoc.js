@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class DropdownDoc extends Component {
 
@@ -339,7 +339,7 @@ const citySelectItems = [
 
 <CodeHighlight>
 {`
-<Dropdown value={this.state.city} options={citySelectItems} onChange={(e) => {this.setState({city: e.value})}} placeholder="Select a City"/>
+<Dropdown value={city} options={citySelectItems} onChange={(e) => setCity(e.value)} placeholder="Select a City"/>
 `}
 </CodeHighlight>
 
@@ -358,8 +358,8 @@ const cities = [
 
 <CodeHighlight>
 {`
-<Dropdown optionLabel="name" value={this.state.city} options={cities} onChange={(e) => {this.setState({city: e.value})}} placeholder="Select a City"/>
-<Dropdown optionLabel="name" optionValue="code" value={this.state.city} options={cities} onChange={(e) => {this.setState({city: e.value})}} placeholder="Select a City"/>
+<Dropdown optionLabel="name" value={city} options={cities} onChange={(e) => setCity(e.value)} placeholder="Select a City"/>
+<Dropdown optionLabel="name" optionValue="code" value={city} options={cities} onChange={(e) => setCity(e.value)} placeholder="Select a City"/>
 `}
 </CodeHighlight>
                         <p>When <i>optionValue</i> is not defined, value of an option refers to the option object itself.</p>
@@ -374,8 +374,8 @@ const cities = [
 
 <CodeHighlight>
 {`
-<Dropdown value={this.state.selectedCountry} options={this.countries} onChange={(e) => this.setState({ selectedCountry: e.value })} optionLabel="name" filter showClear filterBy="name"
-    placeholder="Select a Country" itemTemplate={this.countryOptionTemplate} />
+<Dropdown value={selectedCountry} options={countries} onChange={(e) => setSelectedCountry(e.value)} optionLabel="name" filter showClear filterBy="name"
+    placeholder="Select a Country" itemTemplate={countryOptionTemplate} />
 `}
 </CodeHighlight>
 
@@ -383,14 +383,14 @@ const cities = [
                         <p>Label of an option is used as the display text of an item by default, for custom content support define an <i>itemTemplate</i> function that gets the option instance as a parameter and returns the content.</p>
 <CodeHighlight>
 {`
-<Dropdown value={this.state.selectedCountry} options={this.countries} onChange={(e) => this.setState({ selectedCountry: e.value })} optionLabel="name" placeholder="Select a Country"
-    valueTemplate={this.selectedCountryTemplate} itemTemplate={this.countryOptionTemplate} />
+<Dropdown value={selectedCountry} options={countries} onChange={(e) => setSelectedCountry(e.value)} optionLabel="name" placeholder="Select a Country"
+    valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
 `}
 </CodeHighlight>
 
 <CodeHighlight lang="js">
 {`
-selectedCountryTemplate(option, props) {
+const selectedCountryTemplate = (option, props) => {
     if (option) {
         return (
             <div className="country-item country-item-value">
@@ -407,7 +407,7 @@ selectedCountryTemplate(option, props) {
     );
 }
 
-countryOptionTemplate(option) {
+const countryOptionTemplate = (option) => {
     return (
         <div className="country-item">
             <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} />
@@ -821,9 +821,9 @@ countryOptionTemplate(option) {
                         <p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="DropdownDemo" sources={this.sources} extFiles={this.extFiles} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'DropdownDemo', sources: this.sources, extFiles: this.extFiles })
+                    }
                 </TabView>
             </div>
         )

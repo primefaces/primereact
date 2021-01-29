@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import ObjectUtils from '../utils/ObjectUtils';
 import DomHandler from '../utils/DomHandler';
 import {RowRadioButton} from './RowRadioButton';
@@ -35,38 +35,37 @@ export class BodyCell extends Component {
     onKeyDown(event) {
         if (this.props.editMode !== 'row') {
             if (event.which === 13 || event.which === 9) { // tab || enter
-                this.switchCellToViewMode(true);
+                this.switchCellToViewMode(event, true);
             }
-            if (event.which === 27) // escape
-            {
-                this.switchCellToViewMode(false);
+
+            if (event.which === 27) { // escape
+                this.switchCellToViewMode(event, false);
             }
         }
     }
 
-    onClick() {
-        if (this.props.editMode !== 'row') {
-            this.editingCellClick = true;
-
-            if (this.props.editor && !this.state.editing) {
-                this.setState({
-                    editing: true
-                }, () => {
-                    if (this.props.onEditorInit) {
-                        this.props.onEditorInit(this.props);
-                    }
-                });
+    onClick(event) {
+        if (this.props.editMode !== 'row' && this.props.editor && !this.state.editing) {
+            this.setState({
+                editing: true
+            }, () => {
+                if (this.props.onEditorInit) {
+                    this.props.onEditorInit({
+                        originalEvent: event,
+                        columnProps: this.props
+                    });
+                }
 
                 if (this.props.editorValidatorEvent === 'click') {
                     this.bindDocumentEditListener();
                 }
-            }
+            });
         }
     }
 
-    onBlur() {
+    onBlur(event) {
         if (this.props.editMode !== 'row' && this.state.editing && this.props.editorValidatorEvent === 'blur') {
-            this.switchCellToViewMode(true);
+            this.switchCellToViewMode(event, true);
         }
     }
 
@@ -76,18 +75,18 @@ export class BodyCell extends Component {
 
     bindDocumentEditListener() {
         if (!this.documentEditListener) {
-            this.documentEditListener = (event) => {
-                if (!this.editingCellClick) {
-                    this.switchCellToViewMode(true);
+            this.documentEditListener = (e) => {
+                if (this.isOutsideClicked(e)) {
+                    this.switchCellToViewMode(e, true);
                 }
-
-                this.editingCellClick = false;
             };
-
-            this.editingCellClick = false;
 
             document.addEventListener('click', this.documentEditListener);
         }
+    }
+
+    isOutsideClicked(event) {
+        return this.container && !(this.container.isSameNode(event.target) || this.container.contains(event.target));
     }
 
     closeCell() {
@@ -95,25 +94,30 @@ export class BodyCell extends Component {
         setTimeout(() => {
             this.setState({
                 editing: false
+            }, () => {
+                this.unbindDocumentEditListener();
             });
         }, 1);
-
-        this.unbindDocumentEditListener();
     }
 
-    switchCellToViewMode(submit) {
+    switchCellToViewMode(event, submit) {
+        const params = {
+            originalEvent: event,
+            columnProps: this.props
+        };
+
         if (!submit && this.props.onEditorCancel) {
-            this.props.onEditorCancel(this.props);
+            this.props.onEditorCancel(params);
         }
 
         let valid = true;
         if (this.props.editorValidator) {
-            valid = this.props.editorValidator(this.props);
+            valid = this.props.editorValidator(params);
         }
 
         if (valid) {
             if (submit && this.props.onEditorSubmit) {
-                this.props.onEditorSubmit(this.props);
+                this.props.onEditorSubmit(params);
             }
 
             this.closeCell();
@@ -172,13 +176,24 @@ export class BodyCell extends Component {
                             });
 
         if (this.props.expander) {
-            let iconClassName = classNames('p-row-toggler-icon pi pi-fw p-clickable', {'pi-chevron-down': this.props.expanded, 'pi-chevron-right': !this.props.expanded});
+            const iconClassName = classNames('p-row-toggler-icon pi pi-fw p-clickable', {'pi-chevron-down': this.props.expanded, 'pi-chevron-right': !this.props.expanded});
+            let expanderProps = {
+                onClick: this.onExpanderClick,
+                className: 'p-row-toggler p-link',
+                iconClassName
+            };
+
             content = (
-                <button type="button" onClick={this.onExpanderClick} className="p-row-toggler p-link">
-                    <span className={iconClassName}></span>
+                <button type="button" onClick={expanderProps.onClick} className={expanderProps.className}>
+                    <span className={expanderProps.iconClassName}></span>
                     <Ripple />
                 </button>
             );
+
+            if (this.props.body) {
+                expanderProps['element'] = content;
+                content = this.props.body(this.props.rowData, { ...this.props, ...{expander: expanderProps} });
+            }
         }
         else if (this.props.selectionMode) {
             let showSelection = true;
@@ -207,27 +222,51 @@ export class BodyCell extends Component {
             }
         }
         else if (this.props.rowEditor) {
+            let rowEditorProps = {};
+
             if (this.state.editing) {
+                rowEditorProps = {
+                    editing: true,
+                    onSaveClick: this.props.onRowEditSave,
+                    saveClassName: 'p-row-editor-save p-link',
+                    saveIconClassName: 'p-row-editor-save-icon pi pi-fw pi-check p-clickable',
+                    onCancelClick: this.props.onRowEditCancel,
+                    cancelClassName: 'p-row-editor-cancel p-link',
+                    cancelIconClassName: 'p-row-editor-cancel-icon pi pi-fw pi-times p-clickable'
+                };
+
                 content = (
                     <>
-                        <button type="button" onClick={this.props.onRowEditSave} className="p-row-editor-save p-link">
-                            <span className="p-row-editor-save-icon pi pi-fw pi-check p-clickable"></span>
+                        <button type="button" onClick={rowEditorProps.onSaveClick} className={rowEditorProps.saveClassName}>
+                            <span className={rowEditorProps.saveIconClassName}></span>
                             <Ripple />
                         </button>
-                        <button type="button" onClick={this.props.onRowEditCancel} className="p-row-editor-cancel p-link">
-                            <span className="p-row-editor-cancel-icon pi pi-fw pi-times p-clickable"></span>
+                        <button type="button" onClick={rowEditorProps.onCancelClick} className={rowEditorProps.cancelClassName}>
+                            <span className={rowEditorProps.cancelIconClassName}></span>
                             <Ripple />
                         </button>
                     </>
                 );
             }
             else {
+                rowEditorProps = {
+                    editing: false,
+                    onInitClick: this.props.onRowEditInit,
+                    initClassName: 'p-row-editor-init p-link',
+                    initIconClassName: 'p-row-editor-init-icon pi pi-fw pi-pencil p-clickable'
+                };
+
                 content = (
-                    <button type="button" onClick={this.props.onRowEditInit} className="p-row-editor-init p-link">
-                        <span className="p-row-editor-init-icon pi pi-fw pi-pencil p-clickable"></span>
+                    <button type="button" onClick={rowEditorProps.onInitClick} className={rowEditorProps.initClassName}>
+                        <span className={rowEditorProps.initIconClassName}></span>
                         <Ripple />
                     </button>
                 );
+            }
+
+            if (this.props.body) {
+                rowEditorProps['element'] = content;
+                content = this.props.body(this.props.rowData, { ...this.props, ...{rowEditor: rowEditorProps} });
             }
         }
         else {

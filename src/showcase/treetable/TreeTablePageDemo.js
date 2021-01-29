@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { TreeTable } from '../../components/treetable/TreeTable';
 import { Column } from '../../components/column/Column';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class TreeTablePageDemo extends Component {
@@ -253,9 +253,9 @@ const TreeTablePageDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="TreeTablePageDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'TreeTablePageDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         )

@@ -114,7 +114,7 @@ export default class DomHandler {
         if (element) {
             let children = element.parentNode.childNodes;
             let num = 0;
-            for (var i = 0; i < children.length; i++) {
+            for (let i = 0; i < children.length; i++) {
                 if (children[i] === element) return num;
                 if (children[i].nodeType === 1) num++;
             }
@@ -474,7 +474,7 @@ export default class DomHandler {
                     }
                 }
 
-                if (parent.nodeType === 9 || overflowCheck(parent)) {
+                if (parent.nodeType !== 9 && overflowCheck(parent)) {
                     scrollableParents.push(parent);
                 }
             }

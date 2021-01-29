@@ -4,7 +4,41 @@ import PropTypes from 'prop-types';
 import { services, data } from './LiveEditorData';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
 import { SplitButton } from '../../components/splitbutton/SplitButton';
+import { TabPanel } from '../../components/tabview/TabView';
 
+export function useLiveEditorTabs(props) {
+    let tabs = [(
+        <TabPanel key="source" header="Source">
+            <LiveEditor {...props} />
+        </TabPanel>
+    )];
+
+    if (props.service) {
+        tabs.push(
+            <TabPanel key="service" header={`${props.service}.js`}>
+                <CodeHighlight lang="js">
+                    {services[props.service]}
+                </CodeHighlight>
+                <span className="liveEditorHelperText">*Dependency: axios</span>
+            </TabPanel>
+        )
+    }
+
+    if (props.data) {
+        const dataArr = props.data.split(',');
+        dataArr.forEach((el, i) => {
+            tabs.push(
+                <TabPanel key={`${el}_i`} header={`${el}.json`}>
+                    <CodeHighlight lang="js" style={{maxHeight: '500px'}}>
+                        {data[el]}
+                    </CodeHighlight>
+                </TabPanel>
+            )
+        });
+    }
+
+    return tabs;
+}
 export class LiveEditor extends Component {
 
     static defaultProps = {
@@ -14,8 +48,7 @@ export class LiveEditor extends Component {
         data: null,
         dependencies: null,
         extFiles: null,
-        activeButtonIndex: 0,
-        defaultSourceType: 'class'
+        defaultSourceType: 'hooks'
     };
 
     static propTypes = {
@@ -25,7 +58,6 @@ export class LiveEditor extends Component {
         data: PropTypes.string,
         dependencies: PropTypes.object,
         extFiles: PropTypes.object,
-        activeButtonIndex: PropTypes.number,
         defaultSourceType: PropTypes.string
     };
 
@@ -39,12 +71,14 @@ export class LiveEditor extends Component {
 
         this.items = [
             {
-                template: () => {
+                template: (item, options) => {
                     return (
-                        <>
+                        /* eslint-disable */
+                        <a href="#" role="menuitem" className={options.className} target={item.target} onClick={options.onClick}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--text-color)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-codesandbox"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="7.5 4.21 12 6.81 16.5 4.21"></polyline><polyline points="7.5 19.79 7.5 14.6 3 12"></polyline><polyline points="21 12 16.5 14.6 16.5 19.79"></polyline><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
                             <span className="p-ml-2" style={{color: 'var(--text-color)'}}>Class source</span>
-                        </>
+                        </a>
+                        /* eslint-enable */
                     );
                 },
                 command: () => {
@@ -52,12 +86,14 @@ export class LiveEditor extends Component {
                 }
             },
             {
-                template: () => {
+                template: (item, options) => {
                     return (
-                        <>
+                        /* eslint-disable */
+                        <a href="#" role="menuitem" className={options.className} target={item.target} onClick={options.onClick}>
                             <i className="pi pi-external-link" />
                             <span className="p-ml-2" style={{color: 'var(--text-color)'}}>Hooks source</span>
-                        </>
+                        </a>
+                        /* eslint-enable */
                     );
                 },
                 command: () => {
@@ -65,12 +101,14 @@ export class LiveEditor extends Component {
                 }
             },
             {
-                template: () => {
+                template: (item, options) => {
                     return (
-                        <>
+                        /* eslint-disable */
+                        <a href="#" role="menuitem" className={options.className} target={item.target} onClick={options.onClick}>
                             <img src="showcase/images/typescript-icon.png" alt="TypeScript"></img>
                             <span className="p-ml-2" style={{color: 'var(--text-color)'}}>TS source</span>
-                        </>
+                        </a>
+                        /* eslint-enable */
                     );
                 },
                 command: () => {
@@ -113,7 +151,7 @@ export class LiveEditor extends Component {
                             'react-transition-group': dependencies['react-transition-group'],
                             'classnames': dependencies['classnames'],
                             'axios': dependencies['axios'],
-                            'primereact': 'latest',
+                            'primereact': '^6.0.0', // latest
                             'primeflex': dependencies['primeflex'],
                             'primeicons': dependencies['primeicons']
                         }
@@ -433,7 +471,10 @@ ReactDOM.render(<${name} />, rootElement);`
 
         return (
             <div className="p-d-flex p-jc-end" style={{marginTop: '-1rem'}}>
-                <SplitButton model={this.items} buttonTemplate={buttonContent} onClick={() => this.postSandboxParameters(this.props.defaultSourceType)} appendTo={document.body} className="liveEditorSplitButton" menuClassName="liveEditorPanel"></SplitButton>
+                <div className="p-d-flex p-flex-column p-ai-end">
+                    <span className="liveEditorHelperText">*Hooks, TS and Class sources can be accessed using</span>
+                    <SplitButton model={this.items} buttonTemplate={buttonContent} onClick={() => this.postSandboxParameters(this.props.defaultSourceType)} appendTo={document.body} className="liveEditorSplitButton p-m-2" menuClassName="liveEditorPanel"></SplitButton>
+                </div>
             </div>
         );
     }

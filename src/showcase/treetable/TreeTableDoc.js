@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class TreeTableDoc extends Component {
 
@@ -650,29 +650,22 @@ import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { NodeService } from '../service/NodeService';
 
-export class TreeTableDemo extends Component {
+export const TreeTableDemo = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            nodes: []
-        };
-        this.nodeservice = new NodeService();
-    }
+    const [nodes, setNodes] = useState([]);
 
-    componentDidMount() {
-        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
-    }
+    useEffect(() => {
+        nodeservice = new NodeService();
+        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+    }, [])
 
-    render() {
-        return (
-            <TreeTable value={this.state.nodes}>
-                <Column field="name" header="Name" expander></Column>
-                <Column field="size" header="Size"></Column>
-                <Column field="type" header="Type"></Column>
-            </TreeTable>
-        );
-    }
+    return (
+        <TreeTable value={nodes}>
+            <Column field="name" header="Name" expander></Column>
+            <Column field="size" header="Size"></Column>
+            <Column field="type" header="Type"></Column>
+        </TreeTable>
+    );
 }
 `}
 </CodeHighlight>
@@ -685,37 +678,30 @@ import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { NodeService } from '../service/NodeService';
 
-export class TreeTableDemo extends Component {
+export const TreeTableDemo = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            nodes: []
-        };
-        this.nodeservice = new NodeService();
-    }
+    const [nodes, setNodes] = useState([]);
 
-    componentDidMount() {
-        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
-    }
+    useEffect(() => {
+        nodeservice = new NodeService();
+        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+    }, [])
 
-    render() {
-        let cols = [
-            {field: 'name', header: 'Name'},
-            {field: 'size', header: 'Size'},
-            {field: 'type', header: 'Type'}
-        ];
+    let cols = [
+        {field: 'name', header: 'Name'},
+        {field: 'size', header: 'Size'},
+        {field: 'type', header: 'Type'}
+    ];
 
-        let dynamicColumns = cols.map((col,i) => {
-            return <Column key={col.field} field={col.field} header={col.header} />;
-        });
+    let dynamicColumns = cols.map((col,i) => {
+        return <Column key={col.field} field={col.field} header={col.header} />;
+    });
 
-        return (
-            <TreeTable value={this.state.nodes}>
-                {dynamicColumns}
-            </TreeTable>
-        );
-    }
+    return (
+        <TreeTable value={nodes}>
+            {dynamicColumns}
+        </TreeTable>
+    );
 }
 `}
 </CodeHighlight>
@@ -948,53 +934,45 @@ import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { NodeService } from '../service/NodeService';
 
-export class TreeTableDemo extends Component {
+export class TreeTableDemo = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            nodes: [],
-            expandedKeys: []
-        };
-        this.nodeservice = new NodeService();
-        this.toggleApplications = this.toggleApplications.bind(this);
-    }
+    const [nodes, setNodes] = useState([]);
+    const [expandedKeys, setExpandedKeys] = useState([]);
 
-    toggleApplications() {
-        let expandedKeys = {...this.state.expandedKeys};
+    useEffect(() => {
+        nodeservice = new NodeService();
+        nodeservice.getTreeTableNodes().then(data => setNdes(data));
+    }, [])
+
+    const toggleApplications = () => {
+        let expandedKeys = {...expandedKeys};
         if (expandedKeys['0'])
             delete expandedKeys['0'];
         else
             expandedKeys['0'] = true;
 
-        this.setState({expandedKeys: expandedKeys});
+        setExpandedKeys(expandedKeys);
     }
 
-    componentDidMount() {
-        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
-    }
+    return (
+        <div>
+            <h5>Uncontrolled</h5>
+            <TreeTable value={nodes}>
+                <Column field="name" header="Name" expander></Column>
+                <Column field="size" header="Size"></Column>
+                <Column field="type" header="Type"></Column>
+            </TreeTable>
 
-    render() {
-        return (
-            <div>
-                <h5>Uncontrolled</h5>
-                <TreeTable value={this.state.nodes}>
-                    <Column field="name" header="Name" expander></Column>
-                    <Column field="size" header="Size"></Column>
-                    <Column field="type" header="Type"></Column>
-                </TreeTable>
-
-                <h5>Controlled</h5>
-                <Button onClick={this.toggleApplications} label="Toggle Applications" />
-                <TreeTable value={this.state.nodes} expandedKeys={this.state.expandedKeys}
-                    onToggle={e => this.setState({expandedKeys: e.value})} style={{marginTop: '.5em'}}>
-                    <Column field="name" header="Name" expander></Column>
-                    <Column field="size" header="Size"></Column>
-                    <Column field="type" header="Type"></Column>
-                </TreeTable>
-            </div>
-        )
-    }
+            <h5>Controlled</h5>
+            <Button onClick={toggleApplications} label="Toggle Applications" />
+            <TreeTable value={nodes} expandedKeys={expandedKeys}
+                onToggle={e => setExpandedKeys(e.value)} style={{marginTop: '.5em'}}>
+                <Column field="name" header="Name" expander></Column>
+                <Column field="size" header="Size"></Column>
+                <Column field="type" header="Type"></Column>
+            </TreeTable>
+        </div>
+    )
 }
 `}
 </CodeHighlight>
@@ -1017,22 +995,16 @@ import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { NodeService } from '../service/NodeService';
 
-export class TreeTableTemplatingDemo extends Component {
+export const TreeTableTemplatingDemo = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            nodes: []
-        };
-        this.nodeservice = new NodeService();
-        this.actionTemplate = this.actionTemplate.bind(this);
-    }
+    const [nodes, setNodes] = useState([]);
 
-    componentDidMount() {
-        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
-    }
+    useEffect(() => {
+        nodeservice = new NodeService();
+        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+    }, [])
 
-    actionTemplate(node, column) {
+    const actionTemplate = (node, column) => {
         return <div>
             <Button type="button" icon="pi pi-search" className="p-button-success" style={{marginRight: '.5em'}}></Button>
             <Button type="button" icon="pi pi-pencil" className="p-button-warning"></Button>
@@ -1044,11 +1016,11 @@ export class TreeTableTemplatingDemo extends Component {
         const footer = <div style={{textAlign:'left'}}><Button icon="pi pi-refresh" tooltip="Reload"/></div>;
 
         return (
-            <TreeTable value={this.state.nodes} header={header} footer={footer}>
+            <TreeTable value={nodes} header={header} footer={footer}>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
                 <Column field="type" header="Type"></Column>
-                <Column body={this.actionTemplate} style={{textAlign:'center', width: '8em'}}/>
+                <Column body={actionTemplate} style={{textAlign:'center', width: '8em'}}/>
             </TreeTable>
         )
     }
@@ -1068,17 +1040,15 @@ import { ColumnGroup } from 'primereact/columngroup';
 import { Row } from 'primereact/row';
 import { NodeService } from '../service/NodeService';
 
-export class TreeTableColGroupDemo extends Component {
+export const TreeTableColGroupDemo = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            nodes: []
-        };
-        this.nodeservice = new NodeService();
-    }
+    const [nodes, setNodes] = useState([]);
 
-    getSales() {
+    useEffect(() => {
+        setNodes(getSales())
+    }, [])
+
+    const getSales = () => {
         return [
             {
                 key: '0',
@@ -1233,52 +1203,44 @@ export class TreeTableColGroupDemo extends Component {
         ];
     }
 
-    componentDidMount() {
-        this.setState({
-            nodes: this.getSales()
-        });
-    }
+    const headerGroup = (
+        <ColumnGroup>
+            <Row>
+                <Column header="Brand" rowSpan={3} />
+                <Column header="Sale Rate" colSpan={4} />
+            </Row>
+            <Row>
+                <Column header="Sales" colSpan={2} />
+                <Column header="Profits" colSpan={2} />
+            </Row>
+            <Row>
+                <Column header="Last Year" />
+                <Column header="This Year" />
+                <Column header="Last Year" />
+                <Column header="This Year" />
+            </Row>
+        </ColumnGroup>
+    );
 
-    render() {
-        const headerGroup = (
-            <ColumnGroup>
-                <Row>
-                    <Column header="Brand" rowSpan={3} />
-                    <Column header="Sale Rate" colSpan={4} />
-                </Row>
-                <Row>
-                    <Column header="Sales" colSpan={2} />
-                    <Column header="Profits" colSpan={2} />
-                </Row>
-                <Row>
-                    <Column header="Last Year" />
-                    <Column header="This Year" />
-                    <Column header="Last Year" />
-                    <Column header="This Year" />
-                </Row>
-            </ColumnGroup>
-        );
+    const footerGroup = (
+        <ColumnGroup>
+            <Row>
+                <Column footer="Totals:" colSpan={3} />
+                <Column footer="$506,202" />
+                <Column footer="$531,020" />
+            </Row>
+        </ColumnGroup>
+    );
 
-        const footerGroup = (
-            <ColumnGroup>
-                <Row>
-                    <Column footer="Totals:" colSpan={3} />
-                    <Column footer="$506,202" />
-                    <Column footer="$531,020" />
-                </Row>
-            </ColumnGroup>
-        );
-
-        return (
-            <TreeTable value={this.state.nodes} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup}>
-                <Column field="brand" expander />
-                <Column field="lastYearSale" />
-                <Column field="thisYearSale" />
-                <Column field="lastYearProfit" />
-                <Column field="thisYearProfit" />
-            </TreeTable>
-        )
-    }
+    return (
+        <TreeTable value={nodes} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup}>
+            <Column field="brand" expander />
+            <Column field="lastYearSale" />
+            <Column field="thisYearSale" />
+            <Column field="lastYearProfit" />
+            <Column field="thisYearProfit" />
+        </TreeTable>
+    )
 }
 `}
 </CodeHighlight>
@@ -1295,30 +1257,23 @@ import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 
-export class TreeTablePageDemo extends Component {
+export const TreeTablePageDemo = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            nodes: [],
-            first: 0
-        };
-    }
+    const [nodes, setNodes] = useState([]);
+    const [first, setFirst] = useState(0);
 
-    componentDidMount() {
-        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
-    }
+    useEffect(() => {
+        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+    }, [])
 
-    render() {
-        return (
-            <TreeTable value={this.state.nodes} paginator rows={10}
-                first={this.state.first} onPage={e => this.setState({first: e.first})}>
-                <Column field="name" header="Name" expander></Column>
-                <Column field="size" header="Size"></Column>
-                <Column field="type" header="Type"></Column>
-            </TreeTable>
-        )
-    }
+    return (
+        <TreeTable value={nodes} paginator rows={10}
+            first={first} onPage={e => setFirst(e.first)}>
+            <Column field="name" header="Name" expander></Column>
+            <Column field="size" header="Size"></Column>
+            <Column field="type" header="Type"></Column>
+        </TreeTable>
+    )
 }
 `}
 </CodeHighlight>
@@ -1332,28 +1287,22 @@ import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 
-export class TreeTablePageDemo extends Component {
+export const TreeTablePageDemo = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            nodes: []
-        };
-    }
+    const [nodes, setNodes] = useState([]);
 
-    componentDidMount() {
-        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
-    }
+    useEffect(() => {
+        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+    }, [])
 
-    render() {
-        return (
-            <TreeTable value={this.state.nodes} paginator rows={10}>
-                <Column field="name" header="Name" expander></Column>
-                <Column field="size" header="Size"></Column>
-                <Column field="type" header="Type"></Column>
-            </TreeTable>
-        )
-    }
+    return (
+        <TreeTable value={nodes} paginator rows={10}>
+            <Column field="name" header="Name" expander></Column>
+            <Column field="size" header="Size"></Column>
+            <Column field="type" header="Type"></Column>
+        </TreeTable>
+    )
+
 }
 `}
 </CodeHighlight>
@@ -1361,7 +1310,7 @@ export class TreeTablePageDemo extends Component {
                         <p>Elements of the paginator can be customized using the <i>paginatorTemplate</i> by the TreeTable. Refer to the template section of the <Link to="/paginator"> paginator documentation</Link> for further options.</p>
 <CodeHighlight>
 {`
-<TreeTable value={this.state.nodes} paginator rows={10}
+<TreeTable value={nodes} paginator rows={10}
     paginatorTemplate="RowsPerPageDropdown PageLinks FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink">
     <Column field="name" header="Name" expander></Column>
     <Column field="size" header="Size"></Column>
@@ -1382,7 +1331,7 @@ export class TreeTablePageDemo extends Component {
                         <p>By default sorting is executed on the clicked column only. To enable multiple field sorting, set <i>sortMode</i> property to "multiple" and use metakey when clicking on another column.</p>
 <CodeHighlight>
 {`
-<TreeTable value={this.state.nodes} sortMode="multiple">
+<TreeTable value={nodes} sortMode="multiple">
 `}
 </CodeHighlight>
 
@@ -1391,7 +1340,7 @@ export class TreeTablePageDemo extends Component {
 
 <CodeHighlight>
 {`
-<TreeTable value={this.state.nodes} sortField={this.state.sortField} sortOrder={this.state.sortOrder} onSort={(e) => this.setState({sortField: e.sortField, sortOrder: e.sortOrder})}>
+<TreeTable value={nodes} sortField={sortField} sortOrder={sortOrder} onSort={(e) => {setSortField(e.sortField); setSortOrder(e.sortOrder}}>
     <Column field="name" header="Name" expander sortable></Column>
     <Column field="size" header="Size" sortable></Column>
     <Column field="type" header="Type" sortable></Column>
@@ -1402,7 +1351,7 @@ export class TreeTablePageDemo extends Component {
                         <p>In multiple mode, use the <i>multiSortMeta</i> property and bind an array of SortMeta objects instead.</p>
 <CodeHighlight>
 {`
-<TreeTable value={this.state.nodes} multiSortMeta={multiSortMeta} onSort={(e) => this.setState({multiSortMeta: e.multiSortMeta})}>
+<TreeTable value={nodes} multiSortMeta={multiSortMeta} onSort={(e) => setMultiSortMeta(e.multiSortMeta)}>
     <Column field="name" header="Name" expander sortable></Column>
     <Column field="size" header="Size" sortable></Column>
     <Column field="type" header="Type" sortable></Column>
@@ -1422,7 +1371,7 @@ multiSortMeta.push({field: 'brand', order: -1});
                         it is evaluated at initial rendering and ignored in further updates. If you programmatically need to update the sorting state, prefer to use the component as controlled.</p>
 <CodeHighlight>
 {`
-<TreeTable value={this.state.nodes} sortField="year">
+<TreeTable value={nodes} sortField="year">
     <Column field="name" header="Name" expander sortable></Column>
     <Column field="size" header="Size" sortable></Column>
     <Column field="type" header="Type" sortable></Column>
@@ -1433,9 +1382,9 @@ multiSortMeta.push({field: 'brand', order: -1});
                         <p>To customize sorting algorithm, set sortable option to custom and define a sortFunction that sorts the list.</p>
 <CodeHighlight>
 {`
-<TreeTable value={this.state.nodes} sortField="year">
+<TreeTable value={nodes} sortField="year">
     <Column field="name" header="Name" expander sortable></Column>
-    <Column field="size" header="Size" sortable="custom" sortFunction={this.mysort}></Column>
+    <Column field="size" header="Size" sortable="custom" sortFunction={mysort}></Column>
     <Column field="type" header="Type" sortable></Column>
 </TreeTable>
 `}
@@ -1456,7 +1405,7 @@ mysort(event) {
 
 <CodeHighlight>
 {`
-<TreeTable value={this.state.nodes}>
+<TreeTable value={nodes}>
     <Column field="name" header="Name" expander filter></Column>
     <Column field="size" header="Size" filter></Column>
     <Column field="type" header="Type" filter></Column>
@@ -1468,35 +1417,28 @@ mysort(event) {
                                         to implement this place an input component whose value is bound to the globalFilter property of the TreeTable.</p>
 <CodeHighlight lang="js">
 {`
-export class TreeTableFilterDemo extends Component {
+export const TreeTableFilterDemo = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            nodes: [],
-            globalFilter: null
-        };
-        this.nodeservice = new NodeService();
-    }
+    const [nodes, setNodes] = useState{[]};
+    const [glogalFilter, setGlobalFilter] = useState(null);
 
-    componentDidMount() {
-        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
-    }
+    useEffect( () => {
+        nodeservice = new NodeService();
+        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+    }, [])
 
-    render() {
-        let header = <div style={{'textAlign':'left'}}>
-                        <i className="pi pi-search" style={{margin:'4px 4px 0 0'}}></i>
-                        <InputText type="search" onInput={(e) => this.setState({globalFilter: e.target.value})} placeholder="Global Search" size="50"/>
-                    </div>;
+    let header = <div style={{'textAlign':'left'}}>
+                    <i className="pi pi-search" style={{margin:'4px 4px 0 0'}}></i>
+                    <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Global Search" size="50"/>
+                </div>;
 
-        return (
-            <TreeTable value={this.state.nodes} globalFilter={this.state.globalFilter} header={header}>
-                <Column field="name" header="Name" expander filter></Column>
-                <Column field="size" header="Size" filter></Column>
-                <Column field="type" header="Type" filter></Column>
-            </TreeTable>
-        )
-    }
+    return (
+        <TreeTable value={nodes} globalFilter={globalFilter} header={header}>
+            <Column field="name" header="Name" expander filter></Column>
+            <Column field="size" header="Size" filter></Column>
+            <Column field="type" header="Type" filter></Column>
+        </TreeTable>
+    )
 }
 `}
 </CodeHighlight>
@@ -1506,28 +1448,23 @@ export class TreeTableFilterDemo extends Component {
 
 <CodeHighlight lang="js">
 {`
-export class TreeTableDefaultFilteredDemo extends Component {
+export const TreeTableDefaultFilteredDemo = () => {
 
-    constructor() {
-        super();
-        this.state = {
-            nodes: [],
-            filters: {
-                'label': {
-                    value: 'Events'
-                }
-            }
-        };
-        this.nodeservice = new NodeService();
-    }
+    const [nodes, setNodes] = useState([]);
+    const [filters, setFilters] = useState(
+        'label': {
+            value: 'Events'
+        }
+    );
 
-    componentDidMount() {
-        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
-    }
+    useEffect(() => {
+        nodeservice = new NodeService();
+        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+    }, [])
 
     render() {
         return (
-            <TreeTable value={this.state.nodes} filters={this.state.filters} onFilter={(e) => this.setState({filters: e.filters})}>
+            <TreeTable value={nodes} filters={filters} onFilter={(e) => setFilters(e.filters)}>
                 <Column field="name" header="Name" expander filter></Column>
                 <Column field="size" header="Size" filter></Column>
                 <Column field="type" header="Type" filter></Column>
@@ -1543,30 +1480,24 @@ export class TreeTableDefaultFilteredDemo extends Component {
                         <p>Custom filtering is implemented by setting the <i>filterMatchMode</i> property as "custom" and providing a function that takes the data value along with the filter value to return a boolean.</p>
 <CodeHighlight lang="js">
 {`
-export class TreeTableFilterDemo extends Component {
+export const TreeTableFilterDemo = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            nodes: []
-        };
-        this.nodeservice = new NodeService();
-        this.sizeFilter = this.sizeFilter.bind(this);
-    }
+    const [nodes, setNodes] = useState([]);
 
-    componentDidMount() {
-        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
-    }
+    useEffect(() => {
+        nodeservice = new NodeService();
+        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+    }, [])
 
-    sizeFilter(value, filter) {
+    const sizeFilter = (value, filter) => {
         return filter > value;
     }
 
     render() {
         return (
-            <TreeTable value={this.state.nodes}>
+            <TreeTable value={nodes}>
                 <Column field="name" header="Name" expander filter></Column>
-                <Column field="size" header="Size" filter filterMatchMode="custom" filterFunction={this.sizeFilter}></Column>
+                <Column field="size" header="Size" filter filterMatchMode="custom" filterFunction={sizeFilter}></Column>
                 <Column field="type" header="Type" filter></Column>
             </TreeTable>
         );
@@ -1591,87 +1522,79 @@ import { Column } from 'primereact/column';
 import { Toast } from 'primereact/toast';
 import { NodeService } from '../service/NodeService';
 
-export class TreeTableSelectionDemo extends Component {
+export const TreeTableSelectionDemo = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            nodes1: [],
-            nodes2: [],
-            nodes3: [],
-            nodes4: [],
-            nodes5: [],
-            selectedNodeKey1: null,
-            selectedNodeKey2: null,
-            selectedNodeKeys1: [],
-            selectedNodeKeys2: [],
-            selectedNodeKeys3: []
-        };
+    const [nodes1, setNodes1] = useState([]);
+    const [nodes2, setNodes2] = useState([]);
+    const [nodes3, setNodes3] = useState([]);
+    const [nodes4, setNodes4] = useState([]);
+    const [nodes5, setNodes5] = useState([]);
+    const [selectedNodekey1, setSelectedNodekey1] = useState(null);
+    const [selectedNodekey2, setSelectedNodekey2] = useState(null);
+    const [selectedNodeKeys1, setSelectedNodeKeys1] = useState([]);
+    const [selectedNodeKeys2, setSelectedNodeKeys2] = useState([]);
+    const [selectedNodeKeys3, setSelectedNodeKeys3] = useState([]);
+    const toast = useRef(null);
 
-        this.nodeservice = new NodeService();
-        this.onSelect = this.onSelect.bind(this);
-        this.onUnselect = this.onUnselect.bind(this);
+    useEffect(() => {
+        nodeservice = new NodeService();
+        nodeservice.getTreeTableNodes().then(data => setNodes1(data));
+        nodeservice.getTreeTableNodes().then(data => setNodes2(data));
+        nodeservice.getTreeTableNodes().then(data => setNodes3(data));
+        nodeservice.getTreeTableNodes().then(data => setNodes4(data));
+        nodeservice.getTreeTableNodes().then(data => setNodes5(data));
+    }, [])
+
+
+    const onSelect = (event) => {
+        toast.current.show({severity: 'info', summary: 'Node Selected', detail: event.node.data.name});
     }
 
-    onSelect(event) {
-        this.toast.show({severity: 'info', summary: 'Node Selected', detail: event.node.data.name});
+    onUnselect = (event) => {
+        toast.current.show({severity: 'info', summary: 'Node Unselected', detail: event.node.data.name});
     }
 
-    onUnselect(event) {
-        this.toast.show({severity: 'info', summary: 'Node Unselected', detail: event.node.data.name});
-    }
+    return (
+        <div>
+            <Toast ref={toast} />
 
-    componentDidMount() {
-        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes1: data}));
-        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes2: data}));
-        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes3: data}));
-        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes4: data}));
-        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes5: data}));
-    }
+            <h3 className="first">Single</h5>
+            <TreeTable value={nodes1} selectionMode="single" selectionKeys={selectedNodeKey1} onSelectionChange={e => setSelectedNodeKey1(e.value)}>
+                <Column field="name" header="Name" expander></Column>
+                <Column field="size" header="Size"></Column>
+                <Column field="type" header="Type"></Column>
+            </TreeTable>
 
-    render() {
-        return (
-            <div>
-                <Toast ref={(el) => this.toast = el} />
+            <h5>Multiple</h5>
+            <TreeTable value={nodes2} selectionMode="multiple" selectionKeys={selectedNodeKeys1} onSelectionChange={e => setSelectedNodeKeys1(e.value)} metaKeySelection={false}>
+                <Column field="name" header="Name" expander></Column>
+                <Column field="size" header="Size"></Column>
+                <Column field="type" header="Type"></Column>
+            </TreeTable>
 
-                <h3 className="first">Single</h5>
-                <TreeTable value={this.state.nodes1} selectionMode="single" selectionKeys={this.state.selectedNodeKey1} onSelectionChange={e => this.setState({selectedNodeKey1: e.value})}>
-                    <Column field="name" header="Name" expander></Column>
-                    <Column field="size" header="Size"></Column>
-                    <Column field="type" header="Type"></Column>
-                </TreeTable>
+            <h5>Multiple with MetaKey</h5>
+            <TreeTable value={nodes3} selectionMode="multiple" selectionKeys={selectedNodeKeys2} onSelectionChange={e => setSelectedNodeKeys2(e.value)} metaKeySelection>
+                <Column field="name" header="Name" expander></Column>
+                <Column field="size" header="Size"></Column>
+                <Column field="type" header="Type"></Column>
+            </TreeTable>
 
-                <h5>Multiple</h5>
-                <TreeTable value={this.state.nodes2} selectionMode="multiple" selectionKeys={this.state.selectedNodeKeys1} onSelectionChange={e => this.setState({selectedNodeKeys1: e.value})} metaKeySelection={false}>
-                    <Column field="name" header="Name" expander></Column>
-                    <Column field="size" header="Size"></Column>
-                    <Column field="type" header="Type"></Column>
-                </TreeTable>
+            <h5>Events</h5>
+            <TreeTable value={nodes4} selectionMode="single" selectionKeys={selectedNodeKey2} onSelectionChange={e => setSelectedNodeKey2(e.value)}
+                onSelect={onSelect} onUnselect={onUnselect}>
+                <Column field="name" header="Name" expander></Column>
+                <Column field="size" header="Size"></Column>
+                <Column field="type" header="Type"></Column>
+            </TreeTable>
 
-                <h5>Multiple with MetaKey</h5>
-                <TreeTable value={this.state.nodes3} selectionMode="multiple" selectionKeys={this.state.selectedNodeKeys2} onSelectionChange={e => this.setState({selectedNodeKeys2: e.value})} metaKeySelection>
-                    <Column field="name" header="Name" expander></Column>
-                    <Column field="size" header="Size"></Column>
-                    <Column field="type" header="Type"></Column>
-                </TreeTable>
-
-                <h5>Events</h5>
-                <TreeTable value={this.state.nodes4} selectionMode="single" selectionKeys={this.state.selectedNodeKey2} onSelectionChange={e => this.setState({selectedNodeKey2: e.value})}
-                    onSelect={this.onSelect} onUnselect={this.onUnselect}>
-                    <Column field="name" header="Name" expander></Column>
-                    <Column field="size" header="Size"></Column>
-                    <Column field="type" header="Type"></Column>
-                </TreeTable>
-
-                <h5>Checkbox</h5>
-                <TreeTable value={this.state.nodes5} selectionMode="checkbox" selectionKeys={this.state.selectedNodeKeys3} onSelectionChange={e => this.setState({selectedNodeKeys3: e.value})}>
-                    <Column field="name" header="Name" expander></Column>
-                    <Column field="size" header="Size"></Column>
-                    <Column field="type" header="Type"></Column>
-                </TreeTable>
-            </div>
-        )
-    }
+            <h5>Checkbox</h5>
+            <TreeTable value={nodes5} selectionMode="checkbox" selectionKeys={selectedNodeKeys3} onSelectionChange={e => setSelectedNodeKeys3(e.value)}>
+                <Column field="name" header="Name" expander></Column>
+                <Column field="size" header="Size"></Column>
+                <Column field="type" header="Type"></Column>
+            </TreeTable>
+        </div>
+    )
 }
 `}
 </CodeHighlight>
@@ -1686,33 +1609,23 @@ import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 
-export class TreeTableLazyDemo extends Component {
+export const TreeTableLazyDemo = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            nodes: [],
-            first: 0,
-            rows: 10,
-            totalRecords: 0,
-            loading: true
-        };
+    const [nodes, setNodes] = useState([]);
+    const [first, setFirst] = useState(0);
+    const [rows, setRows] = useState(10);
+    const [totalRecords, setTotalRecords] = useState(0);
+    const [loading, setLoading] = useState(true);
 
-        this.onPage = this.onPage.bind(this);
-        this.onExpand = this.onExpand.bind(this);
-    }
-
-    componentDidMount() {
+    useEffect(() => {
         setTimeout(() => {
-            this.setState({
-                loading: false,
-                nodes: this.loadNodes(this.state.first, this.state.first + this.state.rows),
-                totalRecords: 1000
-            });
+            setLoading(false);
+            setNodes(loadNodes(first, first + rows));
+            setTotalRecords(1000);
         }, 1000);
-    }
+    }, []);
 
-    loadNodes(start, end) {
+    const loadNodes = (start, end) => {
         let nodes = [];
 
         for(let i = start; i < end; i++) {
@@ -1732,14 +1645,12 @@ export class TreeTableLazyDemo extends Component {
         return nodes;
     }
 
-    onExpand(event) {
+    const onExpand = (event) => {
         if (!event.node.children) {
-            this.setState({
-                loading: true
-            });
+            setLoading(true);
 
             setTimeout(() => {
-                this.loading = false;
+                setLoading(false);
                 let lazyNode = {...event.node};
 
                 lazyNode.children = [
@@ -1759,43 +1670,35 @@ export class TreeTableLazyDemo extends Component {
                     }
                 ];
 
-                let nodes = [...this.state.nodes];
+                let nodes = [...nodes];
                 nodes[event.node.key] = lazyNode;
 
-                this.setState({
-                    loading: false,
-                    nodes: nodes
-                });
+                setLoading(false);
+                setNodes(nodes)
             }, 250);
         }
     }
 
-    onPage(event) {
-        this.setState({
-            loading: true
-        });
+    const onPage = (event) => {
+        setLoading(true)
 
         //imitate delay of a backend call
         setTimeout(() => {
-            this.setState({
-                first: event.first,
-                rows: event.rows,
-                nodes: this.loadNodes(event.first, event.first + event.rows),
-                loading: false
-            });
+            setFirst(event.first);
+            setRows(event.rows);
+            setNodes(loadNodes(event.first, event.first + event.rows));
+            setLoading(false);
         }, 1000);
     }
 
-    render() {
-        return (
-            <TreeTable value={this.state.nodes} lazy paginator totalRecords={this.state.totalRecords}
-                first={this.state.first} rows={this.state.rows} onPage={this.onPage} onExpand={this.onExpand} loading={this.state.loading}>
-                <Column field="name" header="Name" expander></Column>
-                <Column field="size" header="Size"></Column>
-                <Column field="type" header="Type"></Column>
-            </TreeTable>
-        )
-    }
+    return (
+        <TreeTable value={nodes} lazy paginator totalRecords={totalRecords}
+            first={first} rows={rows} onPage={onPage} onExpand={onExpand} loading={loading}>
+            <Column field="name" header="Name" expander></Column>
+            <Column field="size" header="Size"></Column>
+            <Column field="type" header="Type"></Column>
+        </TreeTable>
+    )
 }
 `}
 </CodeHighlight>
@@ -1813,35 +1716,24 @@ import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext;
 import { NodeService } from '../service/NodeService';
 
-export class TreeTableEditDemo extends Component {
+export const TreeTableEditDemo = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            nodes: []
-        };
-        this.nodeservice = new NodeService();
+    const [nodes, setNodes] = useState([]);
 
-        this.sizeEditor = this.sizeEditor.bind(this);
-        this.typeEditor = this.typeEditor.bind(this);
-        this.requiredValidator = this.requiredValidator.bind(this);
-    }
+    useEffect(() => {
+        nodeservice = new NodeService();
+        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+    }, [])
 
-    componentDidMount() {
-        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
-    }
-
-    onEditorValueChange(props, value) {
-        let newNodes = JSON.parse(JSON.stringify(this.state.nodes));
-        let editedNode = this.findNodeByKey(newNodes, props.node.key);
+    const onEditorValueChange = (props, value) => {
+        let newNodes = JSON.parse(JSON.stringify(nodes));
+        let editedNode = findNodeByKey(newNodes, props.node.key);
         editedNode.data[props.field] = value;
 
-        this.setState({
-            nodes: newNodes
-        });
+        setNodes(newNodes)
     }
 
-    findNodeByKey(nodes, key) {
+    const findNodeByKey = (nodes, key) => {
         let path = key.split('-');
         let node;
 
@@ -1854,36 +1746,35 @@ export class TreeTableEditDemo extends Component {
         return node;
     }
 
-    inputTextEditor(props, field, width) {
+    const inputTextEditor = (props, field, width) => {
         return (
             <InputText type="text" value={props.node.data[field]} style={{'width': width, 'padding': 0}}
-                    onChange={(e) => this.onEditorValueChange(props, e.target.value)} />
+                    onChange={(e) => onEditorValueChange(props, e.target.value)} />
         );
     }
 
-    sizeEditor(props) {
-        return this.inputTextEditor(props, 'size', '100%');
+    const sizeEditor = (props) => {
+        return inputTextEditor(props, 'size', '100%');
     }
 
-    typeEditor(props) {
-        return this.inputTextEditor(props, 'type', '100%');
+    const typeEditor = (props) => {
+        return inputTextEditor(props, 'type', '100%');
     }
 
-    requiredValidator(props) {
+    const requiredValidator = (e) => {
+        let props = e.columnProps;
         let value = props.node.data[props.field];
 
         return value && value.length > 0;
     }
 
-    render() {
-        return (
-            <TreeTable value={this.state.nodes}>
-                <Column field="name" header="Name" expander></Column>
-                <Column field="size" header="Size" editor={this.sizeEditor} editorValidator={this.requiredValidator}></Column>
-                <Column field="type" header="Type" editor={this.typeEditor}></Column>
-            </TreeTable>
-        )
-    }
+    return (
+        <TreeTable value={nodes}>
+            <Column field="name" header="Name" expander></Column>
+            <Column field="size" header="Size" editor={sizeEditor} editorValidator={requiredValidator}></Column>
+            <Column field="type" header="Type" editor={typeEditor}></Column>
+        </TreeTable>
+    )
 }
 `}
 </CodeHighlight>
@@ -1901,61 +1792,56 @@ import { ContextMenu } from 'primereact/contextmenu';
 import { Toast } from 'primereact/toast';
 import { NodeService } from '../service/NodeService';
 
-export class TreeTableContextMenuDemo extends Component {
+export const TreeTableContextMenuDemo = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            nodes: [],
-            expandedKeys: {},
-            selectedNodeKey: null,
-            menu: [
-                {
-                    label: 'View Key',
-                    icon: 'pi pi-search',
-                    command: () => {
-                        this.toast.show({severity: 'success', summary: 'Node Key', detail: this.state.selectedNodeKey});
-                    }
-                },
-                {
-                    label: 'Toggle',
-                    icon: 'pi pi-cog',
-                    command: () => {
-                        let expandedKeys = {...this.state.expandedKeys};
-                        if (expandedKeys[this.state.selectedNodeKey])
-                            delete expandedKeys[this.state.selectedNodeKey];
-                        else
-                            expandedKeys[this.state.selectedNodeKey] = true;
+    const [nodes, setNodes] = useState([]);
+    const [expandedKeys, setExpandedKeys] = useState({});
+    const [selectedNodeKey, setSelectedNodeKey] = useState(null);
+    const toast = useRef(null);
+    const cm = useRef(null);
+    const menu = [
+        {
+            label: 'View Key',
+            icon: 'pi pi-search',
+            command: () => {
+                toast.current.show({severity: 'success', summary: 'Node Key', detail: selectedNodeKey});
+            }
+        },
+        {
+            label: 'Toggle',
+            icon: 'pi pi-cog',
+            command: () => {
+                let expandedKeys = {...expandedKeys};
+                if (expandedKeys[selectedNodeKey])
+                    delete expandedKeys[selectedNodeKey];
+                else
+                    expandedKeys[selectedNodeKey] = true;
 
-                        this.setState({expandedKeys: expandedKeys});
-                    }
-                }
-            ]
-        };
-        this.nodeservice = new NodeService();
-    }
+                setExpandedKeys(expandedKeys);
+            }
+        }
+    ];
 
-    componentDidMount() {
-        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
-    }
+    useEffect(() => {
+        nodeservice = new NodeService();
+        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+    }, [])
 
-    render() {
-        return (
-            <div>
-                <Toast ref={(el) => this.toast = el} />
+    return (
+        <div>
+            <Toast ref={toast} />
 
-                <ContextMenu model={this.state.menu} ref={el => this.cm = el} onHide={() => this.setState({selectedNodeKey: null})}/>
+            <ContextMenu model={menu} ref={cm} onHide={() => setSelectedNodeKey(null)}/>
 
-                <TreeTable value={this.state.nodes}  expandedKeys={this.state.expandedKeys} onToggle={e => this.setState({expandedKeys: e.value})}
-                    contextMenuSelectionKey={this.state.selectedNodeKey} onContextMenuSelectionChange={event => this.setState({selectedNodeKey: event.value})}
-                    onContextMenu={event => this.cm.show(event.originalEvent)}>
-                    <Column field="name" header="Name" expander></Column>
-                    <Column field="size" header="Size"></Column>
-                    <Column field="type" header="Type"></Column>
-                </TreeTable>
+            <TreeTable value={nodes}  expandedKeys={expandedKeys} onToggle={e => setExpandedKeys(e.value)}
+                contextMenuSelectionKey={selectedNodeKey} onContextMenuSelectionChange={event => setSelectedNodeKey(e.value)}
+                onContextMenu={event => cm.current.show(event.originalEvent)}>
+                <Column field="name" header="Name" expander></Column>
+                <Column field="size" header="Size"></Column>
+                <Column field="type" header="Type"></Column>
+            </TreeTable>
         </div>
-        )
-    }
+    )
 }
 `}
 </CodeHighlight>
@@ -1966,14 +1852,14 @@ export class TreeTableContextMenuDemo extends Component {
 <CodeHighlight>
 {`
 <h5>Fit Mode</h5>
-<TreeTable value={this.state.nodes} resizableColumns columnResizeMode="fit">
+<TreeTable value={nodes} resizableColumns columnResizeMode="fit">
     <Column field="name" header="Name" expander></Column>
     <Column field="size" header="Size"></Column>
     <Column field="type" header="Type"></Column>
 </TreeTable>
 
 <h5>Expand Mode</h5>
-<TreeTable value={this.state.nodes} resizableColumns columnResizeMode="expand">
+<TreeTable value={nodes} resizableColumns columnResizeMode="expand">
     <Column field="name" header="Name" expander></Column>
     <Column field="size" header="Size"></Column>
     <Column field="type" header="Type"></Column>
@@ -1984,7 +1870,7 @@ export class TreeTableContextMenuDemo extends Component {
                         <p>It is important to note that when you need to change column widths, since table width is 100%, giving fixed pixel widths does not work well as browsers scale them, instead give percentage widths.</p>
 <CodeHighlight>
 {`
-<TreeTable value={this.state.nodes} resizableColumns>
+<TreeTable value={nodes} resizableColumns>
     <Column field="name" header="Name" expander style={{width:'50%'}}></Column>
     <Column field="size" header="Size" style={{width:'30%'}}></Column>
     <Column field="type" header="Type" style={{width:'20%'}}></Column>
@@ -1998,7 +1884,7 @@ export class TreeTableContextMenuDemo extends Component {
 
 <CodeHighlight>
 {`
-<TreeTable value={this.state.nodes} reorderableColumns>
+<TreeTable value={nodes} reorderableColumns>
     <Column field="name" header="Name" expander></Column>
     <Column field="size" header="Size"></Column>
     <Column field="type" header="Type"></Column>
@@ -2010,7 +1896,7 @@ export class TreeTableContextMenuDemo extends Component {
                         <p>TreeTable supports both horizontal and vertical scrolling as well as frozen columns. Vertical scrolling is enabled using <i>scrollable</i> property and <i>scrollHeight</i> to define the viewport height.</p>
 <CodeHighlight>
 {`
-<TreeTable value={this.state.nodes} scrollable scrollHeight="200px">
+<TreeTable value={nodes} scrollable scrollHeight="200px">
     <Column field="name" header="Name" expander></Column>
     <Column field="size" header="Size"></Column>
     <Column field="type" header="Type"></Column>
@@ -2021,7 +1907,7 @@ export class TreeTableContextMenuDemo extends Component {
                         <p>Horizontal Scrolling requires a width of DataTable to be defined and explicit widths on columns.</p>
 <CodeHighlight>
 {`
-<TreeTable value={this.state.nodes} scrollable style={{width: '600px'}}>
+<TreeTable value={nodes} scrollable style={{width: '600px'}}>
     <Column field="name" header="Name" expander style={{width:'350px'}}></Column>
     <Column field="size" header="Size" style={{width:'350px'}}></Column>
     <Column field="type" header="Type" style={{width:'350px'}}></Column>
@@ -2033,7 +1919,7 @@ export class TreeTableContextMenuDemo extends Component {
 
 <CodeHighlight>
 {`
-<TreeTable value={this.state.nodes} scrollable frozenWidth="200px" scrollHeight="250px">
+<TreeTable value={nodes} scrollable frozenWidth="200px" scrollHeight="250px">
     <Column field="name" header="Name" expander frozen style={{width:'250px'}}></Column>
     <Column field="size" header="Size" style={{width:'250px'}}></Column>
     <Column field="type" header="Type" style={{width:'250px'}}></Column>
@@ -2048,7 +1934,7 @@ export class TreeTableContextMenuDemo extends Component {
                         <p>Note that frozen columns are enabled, frozen and scrollable cells may have content with varying height which leads to misalignment. Provide fixed height to cells to avoid alignment issues.</p>
 <CodeHighlight>
 {`
-<TreeTable value={this.state.nodes} scrollable frozenWidth="200px" scrollHeight="250px">
+<TreeTable value={nodes} scrollable frozenWidth="200px" scrollHeight="250px">
     <Column field="name" header="Name" expander frozen style={{width:'250px', height: '25px'}}></Column>
     <Column field="size" header="Size" style={{width:'250px', height: '25px'}}></Column>
     <Column field="type" header="Type" style={{width:'250px', height: '25px'}}></Column>
@@ -2091,22 +1977,17 @@ import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { NodeService } from '../service/NodeService';
 
-export class TreeTableResponsiveDemo extends Component {
+export const TreeTableResponsiveDemo = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            nodes: []
-        };
-        this.nodeservice = new NodeService();
-        this.nameTemplate = this.nameTemplate.bind(this);
-    }
+    const [nodes, setNodes] = useState([]);
 
-    componentDidMount() {
-        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
-    }
+    useEffect(() => {
+        nodeservice = new NodeService();
+        nodeservice.getTreeTableNodes().then(data => setNodes(data));
 
-    nameTemplate(node) {
+    }, [])
+
+    const nameTemplate = (node) => {
         return (
             <React.Fragment>
                 <span>{node.data.name}</span>
@@ -2116,15 +1997,14 @@ export class TreeTableResponsiveDemo extends Component {
         )
     }
 
-    render() {
-        return (
-            <TreeTable value={this.state.nodes} header="Responsive TreeTable">
-                <Column field="name" header="Name" body={this.nameTemplate} expander headerClassName="p-col-d"></Column>
-                <Column field="size" header="Size" className="p-col-d"></Column>
-                <Column field="type" header="Type" className="p-col-d"></Column>
-            </TreeTable>
-        )
-    }
+    return (
+        <TreeTable value={nodes} header="Responsive TreeTable">
+            <Column field="name" header="Name" body={nameTemplate} expander headerClassName="p-col-d"></Column>
+            <Column field="size" header="Size" className="p-col-d"></Column>
+            <Column field="type" header="Type" className="p-col-d"></Column>
+        </TreeTable>
+    )
+
 }
 `}
 </CodeHighlight>
@@ -2252,6 +2132,12 @@ export class TreeTableResponsiveDemo extends Component {
                                     </td>
                                     </tr>
                                     <tr>
+                                        <td>paginatorDropdownAppendTo</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Target element to attach the paginator dropdown overlay.</td>
+                                    </tr>
+                                    <tr>
                                         <td>first</td>
                                         <td>number</td>
                                         <td>0</td>
@@ -2368,7 +2254,7 @@ export class TreeTableResponsiveDemo extends Component {
                                     </tr>
                                     <tr>
                                         <td>tabIndex</td>
-                                        <td>string</td>
+                                        <td>number</td>
                                         <td>null</td>
                                         <td>Index of the element in tabbing order.</td>
                                     </tr>
@@ -2622,9 +2508,9 @@ export class TreeTableResponsiveDemo extends Component {
 
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="TreeTableDemo" sources={this.sources} service="NodeService" data="treetablenodes" />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'TreeTableDemo', sources: this.sources, service: 'NodeService', data: 'treetablenodes' })
+                    }
                 </TabView>
             </div>
         );

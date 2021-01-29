@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Calendar } from '../../components/calendar/Calendar';
 import { CalendarDoc } from './CalendarDoc';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import { addLocale } from '../../components/api/Locale';
 
 export class CalendarDemo extends Component {
 
@@ -46,6 +47,17 @@ export class CalendarDemo extends Component {
         this.invalidDates = [today];
 
         this.dateTemplate = this.dateTemplate.bind(this);
+
+        addLocale('es', {
+            firstDayOfWeek: 1,
+            dayNames: ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'],
+            dayNamesShort: ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'],
+            dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
+            monthNames: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'],
+            monthNamesShort: ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'],
+            today: 'Hoy',
+            clear: 'Claro'
+        });
     }
 
     dateTemplate(date) {
@@ -59,17 +71,6 @@ export class CalendarDemo extends Component {
     }
 
     render() {
-        const es = {
-            firstDayOfWeek: 1,
-            dayNames: ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"],
-            dayNamesShort: ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"],
-            dayNamesMin: ["D", "L", "M", "X", "J", "V", "S"],
-            monthNames: ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"],
-            monthNamesShort: ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"],
-            today: "Hoy",
-            clear: "Claro"
-        };
-
         return (
             <div>
                 <div className="content-section introduction">
@@ -93,7 +94,7 @@ export class CalendarDemo extends Component {
                             </div>
                             <div className="p-field p-col-12 p-md-4">
                                 <label htmlFor="spanish">Spanish</label>
-                                <Calendar id="spanish" value={this.state.date3} onChange={(e) => this.setState({ date3: e.value })} locale={es} dateFormat="dd/mm/yy" />
+                                <Calendar id="spanish" value={this.state.date3} onChange={(e) => this.setState({ date3: e.value })} locale="es" dateFormat="dd/mm/yy" />
                             </div>
                             <div className="p-field p-col-12 p-md-4">
                                 <label htmlFor="minmax">MinMax</label>

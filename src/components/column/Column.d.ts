@@ -38,13 +38,13 @@ interface ColumnProps {
     exportable?: boolean;
     reorderable?: boolean;
     excludeGlobalFilter?: boolean;
-    onEditorInit?(props: any): void;
-    onEditorSubmit?(props: any): void;
-    onEditorCancel?(props: any): void;
+    onEditorInit?(e: {originalEvent: Event, columnProps: any}): void;
+    onEditorSubmit?(e: {originalEvent: Event, columnProps: any}): void;
+    onEditorCancel?(e: {originalEvent: Event, columnProps: any}): void;
     sortFunction?(e: {field: string, order: number}): void;
     filterFunction?(value: any, filter: any): void;
     editor?(props: any): JSX.Element | undefined;
-    editorValidator?(props: any): boolean;
+    editorValidator?(e: {originalEvent: Event, columnProps: any}): boolean;
 }
 
 export class Column extends React.Component<ColumnProps,any> {}

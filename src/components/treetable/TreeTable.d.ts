@@ -18,6 +18,7 @@ interface TreeTableProps {
     paginatorLeft?: any;
     paginatorRight?: any;
     pageLinkSize?: number;
+    paginatorDropdownAppendTo?: any;
     rowsPerPageOptions?: number[];
     currentPageReportTemplate?: string;
     first?: number;
@@ -39,7 +40,7 @@ interface TreeTableProps {
     rowClassName?(rowData: any): object;
     loading?: boolean;
     loadingIcon?: string;
-    tabIndex?:string;
+    tabIndex?: number;
     scrollable?: boolean;
     scrollHeight?: string;
     reorderableColumns?: boolean;

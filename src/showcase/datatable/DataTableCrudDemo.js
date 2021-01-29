@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { DataTable } from '../../components/datatable/DataTable';
 import { Column } from '../../components/column/Column';
 import ProductService from '../service/ProductService';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
+import { TabView } from '../../components/tabview/TabView';
 import { Toast } from '../../components/toast/Toast';
 import { Button } from '../../components/button/Button';
 import { FileUpload } from '../../components/fileupload/FileUpload';
@@ -14,7 +14,7 @@ import { RadioButton } from '../../components/radiobutton/RadioButton';
 import { InputNumber } from '../../components/inputnumber/InputNumber';
 import { Dialog } from '../../components/dialog/Dialog';
 import { InputText } from '../../components/inputtext/InputText';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './DataTableDemo.scss';
 
@@ -244,7 +244,7 @@ export class DataTableCrudDemo extends Component {
     }
 
     ratingBodyTemplate(rowData) {
-        return <Rating value={rowData.rating} readonly cancel={false} />;
+        return <Rating value={rowData.rating} readOnly cancel={false} />;
     }
 
     statusBodyTemplate(rowData) {
@@ -328,7 +328,7 @@ export class DataTableCrudDemo extends Component {
                         <div className="p-field">
                             <label htmlFor="name">Name</label>
                             <InputText id="name" value={this.state.product.name} onChange={(e) => this.onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': this.state.submitted && !this.state.product.name })} />
-                            {this.state.submitted && !this.state.product.name && <small className="p-invalid">Name is required.</small>}
+                            {this.state.submitted && !this.state.product.name && <small className="p-error">Name is required.</small>}
                         </div>
                         <div className="p-field">
                             <label htmlFor="description">Description</label>
@@ -643,7 +643,7 @@ export class DataTableCrudDemo extends Component {
     }
 
     ratingBodyTemplate(rowData) {
-        return <Rating value={rowData.rating} readonly cancel={false} />;
+        return <Rating value={rowData.rating} readOnly cancel={false} />;
     }
 
     statusBodyTemplate(rowData) {
@@ -719,7 +719,7 @@ export class DataTableCrudDemo extends Component {
                     <div className="p-field">
                         <label htmlFor="name">Name</label>
                         <InputText id="name" value={this.state.product.name} onChange={(e) => this.onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': this.state.submitted && !this.state.product.name })} />
-                        {this.state.submitted && !this.state.product.name && <small className="p-invalid">Name is required.</small>}
+                        {this.state.submitted && !this.state.product.name && <small className="p-error">Name is required.</small>}
                     </div>
                     <div className="p-field">
                         <label htmlFor="description">Description</label>
@@ -981,7 +981,7 @@ const DataTableCrudDemo = () => {
     }
 
     const ratingBodyTemplate = (rowData) => {
-        return <Rating value={rowData.rating} readonly cancel={false} />;
+        return <Rating value={rowData.rating} readOnly cancel={false} />;
     }
 
     const statusBodyTemplate = (rowData) => {
@@ -1056,7 +1056,7 @@ const DataTableCrudDemo = () => {
                 <div className="p-field">
                     <label htmlFor="name">Name</label>
                     <InputText id="name" value={product.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !product.name })} />
-                    {submitted && !product.name && <small className="p-invalid">Name is required.</small>}
+                    {submitted && !product.name && <small className="p-error">Name is required.</small>}
                 </div>
                 <div className="p-field">
                     <label htmlFor="description">Description</label>
@@ -1317,7 +1317,7 @@ const DataTableCrudDemo = () => {
     }
 
     const ratingBodyTemplate = (rowData) => {
-        return <Rating value={rowData.rating} readonly cancel={false} />;
+        return <Rating value={rowData.rating} readOnly cancel={false} />;
     }
 
     const statusBodyTemplate = (rowData) => {
@@ -1392,7 +1392,7 @@ const DataTableCrudDemo = () => {
                 <div className="p-field">
                     <label htmlFor="name">Name</label>
                     <InputText id="name" value={product.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !product.name })} />
-                    {submitted && !product.name && <small className="p-invalid">Name is required.</small>}
+                    {submitted && !product.name && <small className="p-error">Name is required.</small>}
                 </div>
                 <div className="p-field">
                     <label htmlFor="description">Description</label>
@@ -1491,9 +1491,9 @@ const DataTableCrudDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="DataTableCrudDemo" sources={this.sources} service="ProductService" data="products" extFiles={this.extFiles} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'DataTableCrudDemo', sources: this.sources, service: 'ProductService', data: 'products', extFiles: this.extFiles })
+                    }
                 </TabView>
             </div>
         )

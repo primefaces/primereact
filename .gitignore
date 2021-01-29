@@ -15,3 +15,11 @@
 /src/assets/style/app/App.css
 /src/assets/style/app/App.css.map
 package-lock.json
+
+# Themes
+public/themes/soho-light/
+public/themes/soho-dark/
+public/themes/viva-light/
+public/themes/viva-dark/
+public/themes/mira/
+public/themes/nano/

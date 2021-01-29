@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import { CSSTransition } from 'react-transition-group';
 import ObjectUtils from '../utils/ObjectUtils';
@@ -73,7 +73,8 @@ export class Dialog extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            maskVisible: props.visible
+            maskVisible: props.visible,
+            visible: false
         };
 
         if (!this.props.onMaximize) {
@@ -83,9 +84,7 @@ export class Dialog extends Component {
         this.onClose = this.onClose.bind(this);
         this.toggleMaximize = this.toggleMaximize.bind(this);
         this.onMaskClick = this.onMaskClick.bind(this);
-        this.onDialogClick = this.onDialogClick.bind(this);
         this.onEntered = this.onEntered.bind(this);
-        this.onExit = this.onExit.bind(this);
         this.onExited = this.onExited.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
@@ -97,20 +96,17 @@ export class Dialog extends Component {
     }
 
     focus() {
-        let focusable = DomHandler.findSingle(this.dialog, 'button');
-        if (focusable) {
-            focusable.focus();
+        let activeElement = document.activeElement;
+        let isActiveElementInDialog = activeElement && this.dialog.contains(activeElement);
+        if (!isActiveElementInDialog && this.props.closable) {
+            this.closeElement.focus();
         }
     }
 
     onMaskClick(event) {
-        if (this.props.modal && this.props.closable && this.props.dismissableMask) {
+        if (this.props.dismissableMask && this.props.modal && this.mask === event.target) {
             this.onClose(event);
         }
-    }
-
-    onDialogClick(event) {
-        event.stopPropagation();
     }
 
     toggleMaximize(event) {
@@ -156,10 +152,6 @@ export class Dialog extends Component {
         }
 
         this.enableDocumentSettings();
-    }
-
-    onExit() {
-        this.props.onHide();
     }
 
     onExited() {
@@ -263,8 +255,9 @@ export class Dialog extends Component {
 
     componentDidMount() {
         if (this.props.visible) {
-            this.mask.style.zIndex = String(this.zIndex);
-            this.onEntered();
+            this.setState({ visible: true }, () => {
+                this.mask.style.zIndex = String(this.zIndex);
+            });
         }
     }
 
@@ -272,6 +265,12 @@ export class Dialog extends Component {
         if (this.props.visible && !this.state.maskVisible) {
             this.setState({ maskVisible: true }, () => {
                 this.mask.style.zIndex = String(this.zIndex);
+            });
+        }
+
+        if (this.props.visible !== this.state.visible && this.state.maskVisible) {
+            this.setState({
+                visible: this.props.visible
             });
         }
 
@@ -294,7 +293,7 @@ export class Dialog extends Component {
     renderCloseIcon() {
         if (this.props.closable) {
             return (
-                <button type="button" className="p-dialog-header-icon p-dialog-header-close p-link" aria-label={this.props.ariaCloseIconLabel} onClick={this.onClose}>
+                <button ref={(el) => this.closeElement = el} type="button" className="p-dialog-header-icon p-dialog-header-close p-link" aria-label={this.props.ariaCloseIconLabel} onClick={this.onClose}>
                     <span className="p-dialog-header-close-icon pi pi-times"></span>
                     <Ripple />
                 </button>
@@ -319,23 +318,16 @@ export class Dialog extends Component {
         return null;
     }
 
-    renderIcons() {
-        if (this.props.icons) {
-            return ObjectUtils.getJSXElement(this.props.icons, this.props);
-        }
-
-        return null;
-    }
-
     renderHeader() {
         if (this.props.showHeader) {
             const closeIcon = this.renderCloseIcon();
             const maximizeIcon = this.renderMaximizeIcon();
-            const icons = this.renderIcons();
+            const icons = ObjectUtils.getJSXElement(this.props.icons, this.props);
+            const header = ObjectUtils.getJSXElement(this.props.header, this.props);
 
             return (
                 <div ref={el => this.headerElement = el} className="p-dialog-header">
-                    <span id={this.id + '_header'} className="p-dialog-title">{this.props.header}</span>
+                    <span id={this.id + '_header'} className="p-dialog-title">{header}</span>
                     <div className="p-dialog-header-icons">
                         {icons}
                         {maximizeIcon}
@@ -350,6 +342,7 @@ export class Dialog extends Component {
 
     renderContent() {
         let contentClassName = classNames('p-dialog-content', this.props.contentClassName)
+
         return (
             <div ref={el => this.contentElement = el} className={contentClassName} style={this.props.contentStyle}>
                 {this.props.children}
@@ -358,13 +351,9 @@ export class Dialog extends Component {
     }
 
     renderFooter() {
-        if (this.props.footer) {
-            return (
-                <div ref={el => this.footerElement = el} className="p-dialog-footer">{this.props.footer}</div>
-            );
-        }
+        const footer = ObjectUtils.getJSXElement(this.props.footer, this.props);
 
-        return null;
+        return footer && <div ref={el => this.footerElement = el} className="p-dialog-footer">{footer}</div>
     }
 
     renderElement() {
@@ -389,9 +378,9 @@ export class Dialog extends Component {
 
         return (
             <div ref={(el) => this.mask = el} className={maskClassName} onClick={this.onMaskClick}>
-                <CSSTransition classNames="p-dialog" timeout={transitionTimeout} in={this.props.visible} unmountOnExit
-                    onEntered={this.onEntered} onExit={this.onExit} onExited={this.onExited}>
-                    <div ref={el => this.dialog = el} id={this.id} className={className} style={this.props.style} onClick={this.onDialogClick}
+                <CSSTransition classNames="p-dialog" timeout={transitionTimeout} in={this.state.visible} unmountOnExit
+                    onEntered={this.onEntered} onExited={this.onExited}>
+                    <div ref={el => this.dialog = el} id={this.id} className={className} style={this.props.style}
                          aria-labelledby={this.id + '_header'} role="dialog" aria-modal={this.props.model}>
                         {header}
                         {content}
@@ -403,11 +392,15 @@ export class Dialog extends Component {
     }
 
     render() {
-        const element = this.renderElement();
+        if (this.state.maskVisible) {
+            const element = this.renderElement();
 
-        if (this.props.appendTo)
-            return ReactDOM.createPortal(element, this.props.appendTo);
-        else
-            return element;
+            if (this.props.appendTo)
+                return ReactDOM.createPortal(element, this.props.appendTo);
+            else
+                return element;
+        }
+
+        return null;
     }
 }

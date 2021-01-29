@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
+import { TabView } from '../../components/tabview/TabView';
 import { Chart } from '../../components/chart/Chart';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import AppContentContext from '../../AppContentContext';
 
@@ -155,7 +155,7 @@ export class PolarAreaChartDemo extends Component {
     render() {
         return (
             <div className="card">
-                <Chart type="polarArea" data={this.chartData} options={options} />
+                <Chart type="polarArea" data={this.chartData} options={this.lightOptions} />
             </div>
         )
     }
@@ -211,7 +211,7 @@ const PolarAreaChartDemo = () => {
 
     return (
         <div className="card">
-            <Chart type="polarArea" data={chartData} options={options} />
+            <Chart type="polarArea" data={chartData} options={lightOptions} />
         </div>
     );
 }
@@ -283,9 +283,9 @@ const PolarAreaChartDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="PolarAreaChartDemo" sources={this.sources} dependencies={{ 'chart.js': '2.7.3' }}/>
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'PolarAreaChartDemo', sources: this.sources, dependencies: { 'chart.js': '2.7.3' } })
+                    }
                 </TabView>
             </div>
         )

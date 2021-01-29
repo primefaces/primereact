@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import ReactDOM from 'react-dom';
 import DomHandler from '../utils/DomHandler';
 import { CSSTransition } from 'react-transition-group';
 import { Ripple } from '../ripple/Ripple';
+import ObjectUtils from '../utils/ObjectUtils';
 
 class ContextMenuSub extends Component {
 
@@ -113,27 +114,6 @@ class ContextMenuSub extends Component {
         );
     }
 
-    renderIcon(item) {
-        const className = classNames('p-menuitem-icon', item.icon);
-        if (item.icon) {
-            return (
-                <span className={className}></span>
-            );
-        }
-
-        return null;
-    }
-
-    renderSubmenuIcon(item) {
-        if (item.items) {
-            return (
-                <span className="p-submenu-icon pi pi-angle-right"></span>
-            );
-        }
-
-        return null;
-    }
-
     renderSubmenu(item) {
         if (item.items) {
             return (
@@ -145,21 +125,43 @@ class ContextMenuSub extends Component {
     }
 
     renderMenuitem(item, index) {
-        const className = classNames('p-menuitem', {'p-menuitem-active': this.state.activeItem === item}, item.className);
+        const active = this.state.activeItem === item;
+        const className = classNames('p-menuitem', {'p-menuitem-active': active}, item.className);
         const linkClassName = classNames('p-menuitem-link', {'p-disabled': item.disabled});
-        const icon = this.renderIcon(item);
-        const submenuIcon = this.renderSubmenuIcon(item);
+        const iconClassName = classNames('p-menuitem-icon', item.icon);
+        const submenuIconClassName = 'p-submenu-icon pi pi-angle-right';
+        const icon = item.icon && <span className={iconClassName}></span>;
+        const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
+        const submenuIcon = item.items && <span className={submenuIconClassName}></span>;
         const submenu = this.renderSubmenu(item);
+        let content = (
+            <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => this.onItemClick(event, item, index)} role="menuitem"
+                aria-haspopup={item.items != null}>
+                {icon}
+                {label}
+                {submenuIcon}
+                <Ripple />
+            </a>
+        );
+
+        if (item.template) {
+            const defaultContentOptions = {
+                onClick: (event) => this.onItemClick(event, item, index),
+                className: linkClassName,
+                labelClassName: 'p-menuitem-text',
+                iconClassName,
+                submenuIconClassName,
+                element: content,
+                props: this.props,
+                active
+            };
+
+            content = ObjectUtils.getJSXElement(item.template, item, defaultContentOptions);
+        }
 
         return (
             <li key={item.label + '_' + index} role="none" className={className} style={item.style} onMouseEnter={(event) => this.onItemMouseEnter(event, item)}>
-                <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => this.onItemClick(event, item, index)} role="menuitem"
-                   aria-haspopup={item.items != null}>
-                    {icon}
-                    <span className="p-menuitem-text">{item.label}</span>
-                    {submenuIcon}
-                    <Ripple />
-                </a>
+                {content}
                 {submenu}
             </li>
         );
@@ -233,6 +235,7 @@ export class ContextMenu extends Component {
 
         this.state = {
             visible: false,
+            reshow: false,
             resetMenu: false
         };
 
@@ -266,11 +269,28 @@ export class ContextMenu extends Component {
 
         this.currentEvent = event;
 
-        this.setState({ visible: true }, () => {
-            if (this.props.onShow) {
-                this.props.onShow(this.currentEvent);
-            }
-        });
+        if (this.state.visible) {
+            this.setState({ reshow: true });
+        }
+        else {
+            this.setState({ visible: true }, () => {
+                if (this.props.onShow) {
+                    this.props.onShow(this.currentEvent);
+                }
+            });
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.visible && prevState.reshow !== this.state.reshow) {
+            let event = this.currentEvent;
+            this.setState({
+                visible: false,
+                reshow: false,
+                rePosition: false,
+                resetMenu: true
+            }, () => this.show(event));
+        }
     }
 
     hide(event) {
@@ -279,7 +299,7 @@ export class ContextMenu extends Component {
         }
 
         this.currentEvent = event;
-        this.setState({ visible: false }, () => {
+        this.setState({ visible: false, reshow: false }, () => {
             if (this.props.onHide) {
                 this.props.onHide(this.currentEvent);
             }
