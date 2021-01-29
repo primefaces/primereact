@@ -86,9 +86,10 @@ export class TreeTableBodyCell extends Component {
 
     componentDidUpdate() {
         if (this.container && this.props.editor) {
+            clearTimeout(this.tabindexTimeout);
             if (this.state && this.state.editing) {
                 let focusable = DomHandler.findSingle(this.container, 'input');
-                if(focusable) {
+                if (focusable && document.activeElement !== focusable && !focusable.hasAttribute('data-isCellEditing')) {
                     focusable.setAttribute('data-isCellEditing', true);
                     focusable.focus();
                 }
@@ -96,9 +97,9 @@ export class TreeTableBodyCell extends Component {
                 this.keyHelper.tabIndex = -1;
             }
             else {
-                setTimeout(() => {
+                this.tabindexTimeout = setTimeout(() => {
                     if (this.keyHelper) {
-                        this.keyHelper.removeAttribute('tabindex');
+                        this.keyHelper.setAttribute('tabindex', 0);
                     }
                 }, 50);
             }
