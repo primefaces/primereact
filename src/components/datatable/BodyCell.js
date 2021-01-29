@@ -189,7 +189,7 @@ export class BodyCell extends Component {
                     onClick: this.onExpanderClick,
                     className: "p-row-toggler p-link",
                     iconClassName,
-                    defaultElement: content
+                    element: content
                 };
 
                 content = this.props.body(this.props.rowData, { ...this.props, ...{expander: expanderProps} });
@@ -222,27 +222,51 @@ export class BodyCell extends Component {
             }
         }
         else if (this.props.rowEditor) {
+            let rowEditorProps = {};
+
             if (this.state.editing) {
+                rowEditorProps = {
+                    editing: true,
+                    onSaveClick: this.props.onRowEditSave,
+                    saveClassName: 'p-row-editor-save p-link',
+                    saveIconClassName: 'p-row-editor-save-icon pi pi-fw pi-check p-clickable',
+                    onCancelClick: this.props.onRowEditCancel,
+                    cancelClassName: 'p-row-editor-cancel p-link',
+                    cancelIconClassName: 'p-row-editor-cancel-icon pi pi-fw pi-times p-clickable'
+                };
+
                 content = (
                     <>
-                        <button type="button" onClick={this.props.onRowEditSave} className="p-row-editor-save p-link">
-                            <span className="p-row-editor-save-icon pi pi-fw pi-check p-clickable"></span>
+                        <button type="button" onClick={rowEditorProps.onSaveClick} className={rowEditorProps.saveClassName}>
+                            <span className={rowEditorProps.saveIconClassName}></span>
                             <Ripple />
                         </button>
-                        <button type="button" onClick={this.props.onRowEditCancel} className="p-row-editor-cancel p-link">
-                            <span className="p-row-editor-cancel-icon pi pi-fw pi-times p-clickable"></span>
+                        <button type="button" onClick={rowEditorProps.onCancelClick} className={rowEditorProps.cancelClassName}>
+                            <span className={rowEditorProps.cancelIconClassName}></span>
                             <Ripple />
                         </button>
                     </>
                 );
             }
             else {
+                rowEditorProps = {
+                    editing: false,
+                    onInitClick: this.props.onRowEditInit,
+                    initClassName: 'p-row-editor-init p-link',
+                    initIconClassName: 'p-row-editor-init-icon pi pi-fw pi-pencil p-clickable'
+                };
+
                 content = (
-                    <button type="button" onClick={this.props.onRowEditInit} className="p-row-editor-init p-link">
-                        <span className="p-row-editor-init-icon pi pi-fw pi-pencil p-clickable"></span>
+                    <button type="button" onClick={rowEditorProps.onInitClick} className={rowEditorProps.initClassName}>
+                        <span className={rowEditorProps.initIconClassName}></span>
                         <Ripple />
                     </button>
                 );
+            }
+
+            if (this.props.body) {
+                rowEditorProps['element'] = content;
+                content = this.props.body(this.props.rowData, { ...this.props, ...{rowEditor: rowEditorProps} });
             }
         }
         else {
