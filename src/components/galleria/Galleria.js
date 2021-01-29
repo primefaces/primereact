@@ -221,7 +221,7 @@ export class Galleria extends Component {
                 { closeIcon }
                 { header }
                 <div className="p-galleria-content">
-                    <GalleriaItem ref={(el) => this.previewContent = ReactDOM.findDOMNode(el)} value={this.props.value} activeItemIndex={this.activeItemIndex} onActiveItemChange={this.onActiveItemChange}
+                    <GalleriaItem ref={(el) => this.previewContent = el} value={this.props.value} activeItemIndex={this.activeItemIndex} onActiveItemChange={this.onActiveItemChange}
                         itemTemplate={this.props.item} circular={this.props.circular} caption={this.props.caption}
                         showIndicators={this.props.showIndicators} changeItemOnIndicatorHover={this.props.changeItemOnIndicatorHover} indicator={this.props.indicator}
                         showItemNavigators={this.props.showItemNavigators} autoPlay={this.props.autoPlay} slideShowActive={this.state.slideShowActive}

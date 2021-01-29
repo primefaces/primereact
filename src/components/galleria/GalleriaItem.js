@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { classNames } from '../utils/ClassNames';
 import { Ripple } from '../ripple/Ripple';
 
-export class GalleriaItem extends Component {
+class GalleriaItemComponent extends Component {
 
     constructor(props) {
         super(props);
@@ -192,7 +192,7 @@ export class GalleriaItem extends Component {
         const indicators = this.renderIndicators();
 
         return (
-            <div className="p-galleria-item-wrapper">
+            <div ref={(el) => {if(this.props.forwardRef) this.props.forwardRef(el)}} className="p-galleria-item-wrapper">
                 <div className="p-galleria-item-container">
                     { backwardNavigator }
                     <div className="p-galleria-item">
@@ -207,3 +207,5 @@ export class GalleriaItem extends Component {
         );
     }
 }
+
+export const GalleriaItem = React.forwardRef((props, ref) => <GalleriaItemComponent forwardRef={ref} {...props}/>);

@@ -195,7 +195,7 @@ export class DataScroller extends Component {
         var header =this.props.header && <div className="p-datascroller-header"> {this.props.header}</div>,
             footer = this.props.footer && <div className="p-datascroller-footer"> {this.props.footer} </div>,
             content = (
-                <div ref={(el) => this.contentElement = ReactDOM.findDOMNode(el)} className="p-datascroller-content" style={{'maxHeight': this.props.scrollHeight}}>
+                <div ref={(el) => this.contentElement = el} className="p-datascroller-content" style={{'maxHeight': this.props.scrollHeight}}>
                     <ul className="p-datascroller-list">
                     {
                         this.state.dataToRender && this.state.dataToRender.map((val, i) => {
