@@ -13,7 +13,6 @@ export class DialogDemo extends Component {
             displayBasic: false,
             displayBasic2: false,
             displayModal: false,
-            displayConfirmation: false,
             displayMaximizable: false,
             displayPosition: false,
             position: 'center'
@@ -114,15 +113,6 @@ export class DialogDemo extends Component {
                             <p className="p-m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                             laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                             Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                        </Dialog>
-
-                        <h5>Confirmation</h5>
-                        <Button label="Confirm" icon="pi pi-external-link" onClick={() => this.onClick('displayConfirmation')} />
-                        <Dialog header="Confirmation" visible={this.state.displayConfirmation} modal style={{ width: '350px' }} footer={this.renderFooter('displayConfirmation')} onHide={() => this.onHide('displayConfirmation')}>
-                            <div className="confirmation-content">
-                                <i className="pi pi-exclamation-triangle p-mr-3" style={{ fontSize: '2rem' }} />
-                                <span>Are you sure you want to proceed?</span>
-                            </div>
                         </Dialog>
 
                         <h5>Maximizable</h5>

@@ -26,7 +26,6 @@ export class DialogDemo extends Component {
             displayBasic: false,
             displayBasic2: false,
             displayModal: false,
-            displayConfirmation: false,
             displayMaximizable: false,
             displayPosition: false,
             position: 'center'
@@ -121,15 +120,6 @@ export class DialogDemo extends Component {
                         Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                     </Dialog>
 
-                    <h5>Confirmation</h5>
-                    <Button label="Confirm" icon="pi pi-external-link" onClick={() => this.onClick('displayConfirmation')} />
-                    <Dialog header="Confirmation" visible={this.state.displayConfirmation} modal style={{ width: '350px' }} footer={this.renderFooter('displayConfirmation')} onHide={() => this.onHide('displayConfirmation')}>
-                        <div className="confirmation-content">
-                            <i className="pi pi-exclamation-triangle p-mr-3" style={{ fontSize: '2rem' }} />
-                            <span>Are you sure you want to proceed?</span>
-                        </div>
-                    </Dialog>
-
                     <h5>Maximizable</h5>
                     <Button label="Show" icon="pi pi-external-link" onClick={() => this.onClick('displayMaximizable')} />
                     <Dialog header="Header" visible={this.state.displayMaximizable} maximizable modal style={{ width: '50vw' }} footer={this.renderFooter('displayMaximizable')} onHide={() => this.onHide('displayMaximizable')}>
@@ -180,7 +170,6 @@ const DialogDemo = () => {
     const [displayBasic, setDisplayBasic] = useState(false);
     const [displayBasic2, setDisplayBasic2] = useState(false);
     const [displayModal, setDisplayModal] = useState(false);
-    const [displayConfirmation, setDisplayConfirmation] = useState(false);
     const [displayMaximizable, setDisplayMaximizable] = useState(false);
     const [displayPosition, setDisplayPosition] = useState(false);
     const [position, setPosition] = useState('center');
@@ -189,7 +178,6 @@ const DialogDemo = () => {
         'displayBasic': setDisplayBasic,
         'displayBasic2': setDisplayBasic2,
         'displayModal': setDisplayModal,
-        'displayConfirmation': setDisplayConfirmation,
         'displayMaximizable': setDisplayMaximizable,
         'displayPosition': setDisplayPosition
     }
@@ -267,15 +255,6 @@ const DialogDemo = () => {
                     <p className="p-m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                     laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                     Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                </Dialog>
-
-                <h5>Confirmation</h5>
-                <Button label="Confirm" icon="pi pi-external-link" onClick={() => onClick('displayConfirmation')} />
-                <Dialog header="Confirmation" visible={displayConfirmation} modal style={{ width: '350px' }} footer={renderFooter('displayConfirmation')} onHide={() => onHide('displayConfirmation')}>
-                    <div className="confirmation-content">
-                        <i className="pi pi-exclamation-triangle p-mr-3" style={{ fontSize: '2rem' }} />
-                        <span>Are you sure you want to proceed?</span>
-                    </div>
                 </Dialog>
 
                 <h5>Maximizable</h5>
@@ -327,7 +306,6 @@ const DialogDemo = () => {
     const [displayBasic, setDisplayBasic] = useState(false);
     const [displayBasic2, setDisplayBasic2] = useState(false);
     const [displayModal, setDisplayModal] = useState(false);
-    const [displayConfirmation, setDisplayConfirmation] = useState(false);
     const [displayMaximizable, setDisplayMaximizable] = useState(false);
     const [displayPosition, setDisplayPosition] = useState(false);
     const [position, setPosition] = useState('center');
@@ -336,7 +314,6 @@ const DialogDemo = () => {
         'displayBasic': setDisplayBasic,
         'displayBasic2': setDisplayBasic2,
         'displayModal': setDisplayModal,
-        'displayConfirmation': setDisplayConfirmation,
         'displayMaximizable': setDisplayMaximizable,
         'displayPosition': setDisplayPosition
     }
@@ -414,15 +391,6 @@ const DialogDemo = () => {
                     <p className="p-m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                     laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                     Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                </Dialog>
-
-                <h5>Confirmation</h5>
-                <Button label="Confirm" icon="pi pi-external-link" onClick={() => onClick('displayConfirmation')} />
-                <Dialog header="Confirmation" visible={displayConfirmation} modal style={{ width: '350px' }} footer={renderFooter('displayConfirmation')} onHide={() => onHide('displayConfirmation')}>
-                    <div className="confirmation-content">
-                        <i className="pi pi-exclamation-triangle p-mr-3" style={{ fontSize: '2rem' }} />
-                        <span>Are you sure you want to proceed?</span>
-                    </div>
                 </Dialog>
 
                 <h5>Maximizable</h5>
@@ -475,12 +443,6 @@ const DialogDemo = () => {
 .dialog-demo p {
     margin: 0;
     line-height: 1.5;
-}
-
-.dialog-demo .confirmation-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .dialog-demo .p-dialog .p-button {
