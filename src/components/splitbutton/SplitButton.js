@@ -5,7 +5,7 @@ import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
 import { SplitButtonItem } from './SplitButtonItem';
 import { SplitButtonPanel } from './SplitButtonPanel';
-import { tip } from "../tooltip/Tooltip";
+import { tip } from '../tooltip/Tooltip';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import ObjectUtils from '../utils/ObjectUtils';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';

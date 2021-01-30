@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames'
-import {tip} from "../tooltip/Tooltip";
+import { tip } from '../tooltip/Tooltip';
 import ObjectUtils from '../utils/ObjectUtils';
 
 export class InputSwitch extends Component {

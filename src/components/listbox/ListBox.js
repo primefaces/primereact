@@ -5,7 +5,7 @@ import ObjectUtils from '../utils/ObjectUtils';
 import FilterUtils from '../utils/FilterUtils';
 import {ListBoxItem} from './ListBoxItem';
 import {ListBoxHeader} from './ListBoxHeader';
-import {tip} from "../tooltip/Tooltip";
+import { tip } from '../tooltip/Tooltip';
 
 export class ListBox extends Component {
 

@@ -7,7 +7,7 @@ import ObjectUtils from '../utils/ObjectUtils';
 import { AutoCompletePanel } from './AutoCompletePanel';
 import { classNames } from '../utils/ClassNames';
 import { tip } from '../tooltip/Tooltip';
-import UniqueComponentId from "../utils/UniqueComponentId";
+import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 
 export class AutoComplete extends Component {

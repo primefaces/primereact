@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Knob} from '../../components/knob/Knob';
 import {AppInlineHeader} from '../../AppInlineHeader';
 import {KnobDoc} from './KnobDoc';
-import {Button} from "../../components/button/Button";
+import {Button} from '../../components/button/Button';
 
 export class KnobDemo extends Component {
 

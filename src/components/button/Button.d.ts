@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Omit} from "../util";
+import {Omit} from '../util';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
 interface ButtonProps extends Omit<React.HTMLProps<HTMLButtonElement>, 'ref'> {

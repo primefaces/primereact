@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
-import {tip} from "../tooltip/Tooltip";
+import { tip } from '../tooltip/Tooltip';
 import { Ripple } from '../ripple/Ripple';
 
 export class ToggleButton extends Component {

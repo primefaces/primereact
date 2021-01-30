@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import { classNames } from '../utils/ClassNames';
 import { ColorPickerPanel } from './ColorPickerPanel';
-import { tip } from "../tooltip/Tooltip";
+import { tip } from '../tooltip/Tooltip';
 import ObjectUtils from '../utils/ObjectUtils';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';

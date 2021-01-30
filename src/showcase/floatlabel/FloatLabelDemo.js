@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import { InputText } from "../../components/inputtext/InputText";
-import { AutoComplete } from "../../components/autocomplete/AutoComplete";
-import { CountryService } from "../service/CountryService";
-import { Calendar } from "../../components/calendar/Calendar";
+import { InputText } from '../../components/inputtext/InputText';
+import { AutoComplete } from '../../components/autocomplete/AutoComplete';
+import { CountryService } from '../service/CountryService';
+import { Calendar } from '../../components/calendar/Calendar';
 import { CascadeSelect } from '../../components/cascadeselect/CascadeSelect';
-import { Chips } from "../../components/chips/Chips";
-import { Dropdown } from "../../components/dropdown/Dropdown";
-import { InputMask } from "../../components/inputmask/InputMask";
-import { InputNumber } from "../../components/inputnumber/InputNumber";
-import { InputTextarea } from "../../components/inputtextarea/InputTextarea";
-import { MultiSelect } from "../../components/multiselect/MultiSelect";
+import { Chips } from '../../components/chips/Chips';
+import { Dropdown } from '../../components/dropdown/Dropdown';
+import { InputMask } from '../../components/inputmask/InputMask';
+import { InputNumber } from '../../components/inputnumber/InputNumber';
+import { InputTextarea } from '../../components/inputtextarea/InputTextarea';
+import { MultiSelect } from '../../components/multiselect/MultiSelect';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { FloatLabelDoc } from './FloatLabelDoc';
 

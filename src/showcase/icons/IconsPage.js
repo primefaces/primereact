@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { InputText } from "../../components/inputtext/InputText";
+import { InputText } from '../../components/inputtext/InputText';
 import { IconService } from '../service/IconService';
 import './IconsPage.scss';
 

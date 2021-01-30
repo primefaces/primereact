@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Editor } from "../../components/editor/Editor";
+import { Editor } from '../../components/editor/Editor';
 import { EditorDoc } from './EditorDoc';
 import { AppInlineHeader } from '../../AppInlineHeader';
 
