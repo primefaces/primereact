@@ -666,7 +666,8 @@
                             "to": "/datascroller/loader",
                             "meta": [
                                 "loader"
-                            ]
+                            ],
+                            "badge": "updated"
                         }
                     ]
                 },
