@@ -77,7 +77,7 @@ export class DataTableEditDemo extends Component {
             return false;
         }
         str = str.replace(/^0+/, "") || "0";
-        var n = Math.floor(Number(str));
+        let n = Math.floor(Number(str));
         return n !== Infinity && String(n) === str && n >= 0;
     }
 
@@ -314,7 +314,7 @@ export class DataTableEditDemo extends Component {
             return false;
         }
         str = str.replace(/^0+/, "") || "0";
-        var n = Math.floor(Number(str));
+        let n = Math.floor(Number(str));
         return n !== Infinity && String(n) === str && n >= 0;
     }
 
@@ -526,7 +526,7 @@ const DataTableEditDemo = () => {
             return false;
         }
         str = str.replace(/^0+/, "") || "0";
-        var n = Math.floor(Number(str));
+        let n = Math.floor(Number(str));
         return n !== Infinity && String(n) === str && n >= 0;
     }
 
@@ -734,7 +734,7 @@ const DataTableEditDemo = () => {
             return false;
         }
         str = str.replace(/^0+/, "") || "0";
-        var n = Math.floor(Number(str));
+        let n = Math.floor(Number(str));
         return n !== Infinity && String(n) === str && n >= 0;
     }
 

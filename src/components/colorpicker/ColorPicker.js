@@ -392,10 +392,10 @@ export class ColorPicker extends Component {
     }
 
     validateHEX(hex) {
-        var len = 6 - hex.length;
+        let len = 6 - hex.length;
         if (len > 0) {
-            var o = [];
-            for (var i = 0; i < len; i++) {
+            let o = [];
+            for (let i = 0; i < len; i++) {
                 o.push('0');
             }
             o.push(hex);
@@ -414,14 +414,14 @@ export class ColorPicker extends Component {
     }
 
     RGBtoHSB(rgb) {
-        var hsb = {
+        let hsb = {
             h: 0,
             s: 0,
             b: 0
         };
-        var min = Math.min(rgb.r, rgb.g, rgb.b);
-        var max = Math.max(rgb.r, rgb.g, rgb.b);
-        var delta = max - min;
+        let min = Math.min(rgb.r, rgb.g, rgb.b);
+        let max = Math.max(rgb.r, rgb.g, rgb.b);
+        let delta = max - min;
         hsb.b = max;
         hsb.s = max !== 0 ? 255 * delta / max : 0;
         if (hsb.s !== 0) {
@@ -445,12 +445,12 @@ export class ColorPicker extends Component {
     }
 
     HSBtoRGB(hsb) {
-        var rgb = {
+        let rgb = {
             r: null, g: null, b: null
         };
-        var h = Math.round(hsb.h);
-        var s = Math.round(hsb.s * 255 / 100);
-        var v = Math.round(hsb.b * 255 / 100);
+        let h = Math.round(hsb.h);
+        let s = Math.round(hsb.s * 255 / 100);
+        let v = Math.round(hsb.b * 255 / 100);
         if (s === 0) {
             rgb = {
                 r: v,
@@ -459,9 +459,9 @@ export class ColorPicker extends Component {
             }
         }
         else {
-            var t1 = v;
-            var t2 = (255 - s) * v / 255;
-            var t3 = (t1 - t2) * (h % 60) / 60;
+            let t1 = v;
+            let t2 = (255 - s) * v / 255;
+            let t3 = (t1 - t2) * (h % 60) / 60;
             if (h === 360) h = 0;
             if (h < 60) { rgb.r = t1; rgb.b = t2; rgb.g = t2 + t3 }
             else if (h < 120) { rgb.g = t1; rgb.b = t2; rgb.r = t1 - t3 }
@@ -475,13 +475,13 @@ export class ColorPicker extends Component {
     }
 
     RGBtoHEX(rgb) {
-        var hex = [
+        let hex = [
             rgb.r.toString(16),
             rgb.g.toString(16),
             rgb.b.toString(16)
         ];
 
-        for (var key in hex) {
+        for (let key in hex) {
             if (hex[key].length === 1) {
                 hex[key] = '0' + hex[key];
             }

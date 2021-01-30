@@ -227,7 +227,7 @@ export class Knob extends Component {
             'p-disabled': this.props.disabled,
         }, this.props.className);
 
-        var text = this.props.showValue && <text x={50} y={57} textAnchor={'middle'} fill={this.props.textColor} className={'p-knob-text'} name={this.props.name}>{this.valueToDisplay()}</text>
+        let text = this.props.showValue && <text x={50} y={57} textAnchor={'middle'} fill={this.props.textColor} className={'p-knob-text'} name={this.props.name}>{this.valueToDisplay()}</text>
 
         return (
             <div className={containerClassName} style={this.props.style} ref={(el) => this.element = el}>

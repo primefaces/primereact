@@ -180,8 +180,8 @@ export class InputMask extends Component {
     }
 
     handleAndroidInput(e) {
-        var curVal = this.input.value;
-        var pos = this.caret();
+        let curVal = this.input.value;
+        let pos = this.caret();
         if (this.oldVal && this.oldVal.length && this.oldVal.length > curVal.length) {
             // a deletion or backspace happened
             this.checkVal(true);
@@ -270,7 +270,7 @@ export class InputMask extends Component {
             return;
         }
 
-        var k = e.which || e.keyCode,
+        let k = e.which || e.keyCode,
             pos = this.caret(),
             p,
             c,
@@ -433,7 +433,7 @@ export class InputMask extends Component {
             return;
         }
 
-        var pos = this.checkVal(true);
+        let pos = this.checkVal(true);
         this.caret(pos);
         this.updateModel(e);
         if (this.props.onComplete && this.isCompleted()) {
@@ -458,7 +458,7 @@ export class InputMask extends Component {
 
     updateModel(e) {
         if (this.props.onChange) {
-            var val = this.props.unmask ? this.getUnmaskedValue() : e && e.target.value;
+            let val = this.props.unmask ? this.getUnmaskedValue() : e && e.target.value;
             this.props.onChange({
                 originalEvent: e,
                 value: (this.defaultBuffer !== val) ? val : '',

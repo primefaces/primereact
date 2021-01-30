@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { UIMessage } from './UIMessage';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
-var messageIdx = 0;
+let messageIdx = 0;
 
 export class Messages extends Component {
 

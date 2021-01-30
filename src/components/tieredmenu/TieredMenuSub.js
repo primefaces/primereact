@@ -127,7 +127,7 @@ export class TieredMenuSub extends Component {
         switch(event.which) {
             //down
             case 40:
-                var nextItem = this.findNextItem(listItem);
+                let nextItem = this.findNextItem(listItem);
                 if (nextItem) {
                     nextItem.children[0].focus();
                 }
@@ -137,7 +137,7 @@ export class TieredMenuSub extends Component {
 
             //up
             case 38:
-                var prevItem = this.findPrevItem(listItem);
+                let prevItem = this.findPrevItem(listItem);
                 if (prevItem) {
                     prevItem.children[0].focus();
                 }

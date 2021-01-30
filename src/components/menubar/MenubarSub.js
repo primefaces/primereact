@@ -136,7 +136,7 @@ export class MenubarSubComponent extends Component {
             //right
             case 39:
                 if (this.props.root) {
-                    var nextItem = this.findNextItem(listItem);
+                    let nextItem = this.findNextItem(listItem);
                     if (nextItem) {
                         nextItem.children[0].focus();
                     }
@@ -199,14 +199,14 @@ export class MenubarSubComponent extends Component {
     }
 
     navigateToNextItem(listItem) {
-        var nextItem = this.findNextItem(listItem);
+        let nextItem = this.findNextItem(listItem);
         if (nextItem) {
             nextItem.children[0].focus();
         }
     }
 
     navigateToPrevItem(listItem) {
-        var prevItem = this.findPrevItem(listItem);
+        let prevItem = this.findPrevItem(listItem);
         if (prevItem) {
             prevItem.children[0].focus();
         }

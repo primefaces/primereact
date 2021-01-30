@@ -60,7 +60,7 @@ export class ListBoxItem extends Component {
         switch(event.which) {
             //down
             case 40:
-                var nextItem = this.findNextItem(item);
+                let nextItem = this.findNextItem(item);
                 if(nextItem) {
                     nextItem.focus();
                 }
@@ -70,7 +70,7 @@ export class ListBoxItem extends Component {
 
             //up
             case 38:
-                var prevItem = this.findPrevItem(item);
+                let prevItem = this.findPrevItem(item);
                 if(prevItem) {
                     prevItem.focus();
                 }

@@ -1257,8 +1257,8 @@ export class Calendar extends Component {
             case 38:
             case 40: {
                 cell.tabIndex = '-1';
-                var cells = cell.parentElement.children;
-                var cellIndex = DomHandler.index(cell);
+                let cells = cell.parentElement.children;
+                let cellIndex = DomHandler.index(cell);
                 let nextCell = cells[event.which === 40 ? cellIndex + 3 : cellIndex - 3];
                 if (nextCell) {
                     nextCell.tabIndex = '0';

@@ -5,7 +5,7 @@ import { ToastMessage } from './ToastMessage';
 import DomHandler from '../utils/DomHandler';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
-var messageIdx = 0;
+let messageIdx = 0;
 
 export class Toast extends Component {
 

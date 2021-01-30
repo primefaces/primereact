@@ -68,27 +68,27 @@ export class Paginator extends Component {
     }
 
     calculatePageLinkBoundaries() {
-        var numberOfPages = this.getPageCount();
-        var visiblePages = Math.min(this.props.pageLinkSize, numberOfPages);
+        let numberOfPages = this.getPageCount();
+        let visiblePages = Math.min(this.props.pageLinkSize, numberOfPages);
 
         //calculate range, keep current in middle if necessary
-        var start = Math.max(0, Math.ceil(this.getPage() - ((visiblePages) / 2)));
-        var end = Math.min(numberOfPages - 1, start + visiblePages - 1);
+        let start = Math.max(0, Math.ceil(this.getPage() - ((visiblePages) / 2)));
+        let end = Math.min(numberOfPages - 1, start + visiblePages - 1);
 
         //check when approaching to last page
-        var delta = this.props.pageLinkSize - (end - start + 1);
+        let delta = this.props.pageLinkSize - (end - start + 1);
         start = Math.max(0, start - delta);
 
         return [start, end];
     }
 
     updatePageLinks() {
-        var pageLinks = [];
-        var boundaries = this.calculatePageLinkBoundaries();
-        var start = boundaries[0];
-        var end = boundaries[1];
+        let pageLinks = [];
+        let boundaries = this.calculatePageLinkBoundaries();
+        let start = boundaries[0];
+        let end = boundaries[1];
 
-        for(var i = start; i <= end; i++) {
+        for(let i = start; i <= end; i++) {
             pageLinks.push(i + 1);
         }
 
@@ -96,11 +96,11 @@ export class Paginator extends Component {
     }
 
     changePage(first, rows) {
-        var pc = this.getPageCount();
-        var p = Math.floor(first / rows);
+        let pc = this.getPageCount();
+        let p = Math.floor(first / rows);
 
         if(p >= 0 && p < pc) {
-            var newPageState = {
+            let newPageState = {
                 first: first,
                 rows: rows,
                 page: p,

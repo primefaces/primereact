@@ -11,7 +11,7 @@ export default class ObjectUtils {
         if (a === b) return true;
 
         if (a && b && typeof a == 'object' && typeof b == 'object') {
-            var arrA = Array.isArray(a)
+            let arrA = Array.isArray(a)
                 , arrB = Array.isArray(b)
                 , i
                 , length
@@ -27,17 +27,17 @@ export default class ObjectUtils {
 
             if (arrA !== arrB) return false;
 
-            var dateA = a instanceof Date
+            let dateA = a instanceof Date
                 , dateB = b instanceof Date;
             if (dateA !== dateB) return false;
             if (dateA && dateB) return a.getTime() === b.getTime();
 
-            var regexpA = a instanceof RegExp
+            let regexpA = a instanceof RegExp
                 , regexpB = b instanceof RegExp;
             if (regexpA !== regexpB) return false;
             if (regexpA && regexpB) return a.toString() === b.toString();
 
-            var keys = Object.keys(a);
+            let keys = Object.keys(a);
             length = keys.length;
 
             if (length !== Object.keys(b).length)
@@ -70,7 +70,7 @@ export default class ObjectUtils {
                 else {
                     let fields = field.split('.');
                     let value = data;
-                    for(var i = 0, len = fields.length; i < len; ++i) {
+                    for(let i = 0, len = fields.length; i < len; ++i) {
                         if (value == null) {
                             return null;
                         }
