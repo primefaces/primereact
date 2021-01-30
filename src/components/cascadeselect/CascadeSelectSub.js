@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
@@ -55,7 +55,7 @@ export class CascadeSelectSub extends Component {
         if (this.props.selectionPath && this.props.options && !this.props.dirty) {
             for (let option of this.props.options) {
                 if (this.props.selectionPath.includes(option)) {
-                    this.setState({activeOption: option});
+                    this.setState({ activeOption: option });
                     break;
                 }
             }
@@ -68,7 +68,7 @@ export class CascadeSelectSub extends Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps.parentActive !== this.props.parentActive) {
-            this.setState({activeOption: null})
+            this.setState({ activeOption: null })
         }
     }
 
@@ -85,12 +85,12 @@ export class CascadeSelectSub extends Component {
     }
 
     onOptionSelect(event) {
-        if(this.props.onOptionSelect) {
+        if (this.props.onOptionSelect) {
             this.props.onOptionSelect(event);
         }
     }
 
-    onKeyDown(event, option, index) {
+    onKeyDown(event, option) {
         let listItem = event.currentTarget.parentElement;
 
         switch (event.key) {
@@ -117,14 +117,14 @@ export class CascadeSelectSub extends Component {
                         listItem.children[1].children[0].children[0].focus();
                     }
                     else {
-                        this.setState({activeOption: option});
+                        this.setState({ activeOption: option });
                     }
                 }
                 break;
 
             case 'Left':
             case 'ArrowLeft':
-                this.setState({activeOption: null});
+                this.setState({ activeOption: null });
 
                 let parentList = event.currentTarget.parentElement.parentElement.previousElementSibling;
                 if (parentList) {
@@ -163,9 +163,9 @@ export class CascadeSelectSub extends Component {
 
     onOptionClick(event, option) {
         if (this.isOptionGroup(option)) {
-            this.setState( {activeOption: (this.state.activeOption === option) ? null : option});
+            this.setState({ activeOption: (this.state.activeOption === option) ? null : option });
 
-            if(this.props.onOptionGroupSelect) {
+            if (this.props.onOptionGroupSelect) {
                 this.props.onOptionGroupSelect({
                     originalEvent: event,
                     value: option
@@ -173,7 +173,7 @@ export class CascadeSelectSub extends Component {
             }
         }
         else {
-            if(this.props.onOptionSelect) {
+            if (this.props.onOptionSelect) {
                 this.props.onOptionSelect({
                     originalEvent: event,
                     value: this.getOptionValue(option),
@@ -183,7 +183,7 @@ export class CascadeSelectSub extends Component {
     }
 
     onOptionGroupSelect(event) {
-        if(this.props.onOptionGroupSelect) {
+        if (this.props.onOptionGroupSelect) {
             this.props.onOptionGroupSelect(event);
         }
     }
@@ -213,12 +213,12 @@ export class CascadeSelectSub extends Component {
     }
 
     renderSubmenu(option) {
-        if(this.isOptionGroup(option) && this.state.activeOption === option) {
+        if (this.isOptionGroup(option) && this.state.activeOption === option) {
             return (
                 <CascadeSelectSub options={this.getOptionGroupChildren(option)} className={"p-cascadeselect-sublist"} selectionPath={this.props.selectionPath} optionLabel={this.props.optionLabel}
-                                  optionValue={this.props.optionValue} level={this.props.level+1} onOptionSelect={this.onOptionSelect} onOptionGroupSelect={this.onOptionGroupSelect}
-                                  parentActive={this.state.activeOption === option} optionGroupLabel={this.props.optionGroupLabel} optionGroupChildren={this.props.optionGroupChildren}
-                                  dirty={this.props.dirty} template={this.props.template}/>
+                    optionValue={this.props.optionValue} level={this.props.level + 1} onOptionSelect={this.onOptionSelect} onOptionGroupSelect={this.onOptionGroupSelect}
+                    parentActive={this.state.activeOption === option} optionGroupLabel={this.props.optionGroupLabel} optionGroupChildren={this.props.optionGroupChildren}
+                    dirty={this.props.dirty} template={this.props.template} />
             );
         }
 
@@ -228,15 +228,16 @@ export class CascadeSelectSub extends Component {
     renderOption(option, index) {
         const className = classNames('p-cascadeselect-item', {
             'p-cascadeselect-item-group': this.isOptionGroup(option),
-            'p-cascadeselect-item-active p-highlight': this.state.activeOption === option}, option.className);
+            'p-cascadeselect-item-active p-highlight': this.state.activeOption === option
+        }, option.className);
         const submenu = this.renderSubmenu(option);
         const content = this.props.template ? ObjectUtils.getJSXElement(this.props.template, this.getOptionValue(option)) :
             <span className="p-cascadeselect-item-text">{this.getOptionLabelToRender(option)}</span>;
-        const optionGroup = this.isOptionGroup(option) && <span className="p-cascadeselect-group-icon pi pi-angle-right"/>
+        const optionGroup = this.isOptionGroup(option) && <span className="p-cascadeselect-group-icon pi pi-angle-right" />
 
         return (
-            <li key={this.getOptionLabelToRender(option)+'_'+index} className={className} style={option.style} role="none">
-                <div className={"p-cascadeselect-item-content"} onClick={event => this.onOptionClick(event, option)} tabIndex={0} onKeyDown={event => this.onKeyDown(event, option, index)}>
+            <li key={this.getOptionLabelToRender(option) + '_' + index} className={className} style={option.style} role="none">
+                <div className={"p-cascadeselect-item-content"} onClick={event => this.onOptionClick(event, option)} tabIndex={0} onKeyDown={event => this.onKeyDown(event, option)}>
                     {content}
                     {optionGroup}
                     <Ripple />

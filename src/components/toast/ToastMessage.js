@@ -5,7 +5,7 @@ import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
 import { Ripple } from '../ripple/Ripple';
 
-export class ToastMessage extends Component {
+class ToastMessageComponent extends Component {
 
     static defaultProps = {
         message: null,
@@ -106,7 +106,7 @@ export class ToastMessage extends Component {
         const closeIcon = this.renderCloseIcon();
 
         return (
-            <div ref={(el) => { this.element = el; }} className={className} role="alert" aria-live="assertive" aria-atomic="true" onClick={this.onClick}>
+            <div ref={this.props.forwardRef} className={className} role="alert" aria-live="assertive" aria-atomic="true" onClick={this.onClick}>
                 <div className="p-toast-message-content">
                     {message}
                     {closeIcon}
@@ -115,3 +115,5 @@ export class ToastMessage extends Component {
         );
     }
 }
+
+export const ToastMessage = React.forwardRef((props, ref) => <ToastMessageComponent forwardRef={ref} {...props} />);

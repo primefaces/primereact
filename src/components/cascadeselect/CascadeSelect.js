@@ -1,13 +1,13 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from "react-dom";
 import { classNames } from '../utils/ClassNames';
 import ObjectUtils from '../utils/ObjectUtils';
 import DomHandler from '../utils/DomHandler';
 import UniqueComponentId from "../utils/UniqueComponentId";
-import {CSSTransition} from "react-transition-group";
+import { CSSTransition } from "react-transition-group";
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
-import {CascadeSelectSub} from "./CascadeSelectSub";
+import { CascadeSelectSub } from "./CascadeSelectSub";
 
 export class CascadeSelect extends Component {
 
@@ -74,6 +74,7 @@ export class CascadeSelect extends Component {
         this.dirty = false;
         this.selectionPath = null;
         this.id = this.props.id || UniqueComponentId();
+        this.overlayRef = React.createRef();
 
         this.onClick = this.onClick.bind(this);
         this.onInputFocus = this.onInputFocus.bind(this);
@@ -160,7 +161,8 @@ export class CascadeSelect extends Component {
             return;
         }
 
-        if (!this.overlay || !this.overlay.contains(event.target)) {
+        const overlay = this.overlayRef ? this.overlayRef.current : null;
+        if (!overlay || !overlay.contains(event.target)) {
             this.focusInput.focus();
 
             if (this.state.overlayVisible) {
@@ -181,11 +183,11 @@ export class CascadeSelect extends Component {
     }
 
     onInputKeyDown(event) {
-        switch(event.key) {
+        switch (event.key) {
             case 'Down':
             case 'ArrowDown':
                 if (this.state.overlayVisible) {
-                    DomHandler.findSingle(this.overlay, '.p-cascadeselect-item').children[0].focus();
+                    DomHandler.findSingle(this.overlayRef.current, '.p-cascadeselect-item').children[0].focus();
                 }
                 else if (event.altKey && this.props.options && this.props.options.length) {
                     this.show();
@@ -210,29 +212,29 @@ export class CascadeSelect extends Component {
     }
 
     show() {
-        if(this.props.onBeforeShow) {
+        if (this.props.onBeforeShow) {
             this.props.onBeforeShow();
         }
         this.setState({ overlayVisible: true });
     }
 
     hide() {
-        if(this.props.onBeforeHide) {
+        if (this.props.onBeforeHide) {
             this.props.onBeforeHide();
         }
         this.setState({ overlayVisible: false });
     }
 
     onOverlayEnter() {
-        this.overlay.style.zIndex = String(DomHandler.generateZIndex());
+        this.overlayRef.current.style.zIndex = String(DomHandler.generateZIndex());
         this.alignOverlay();
     }
 
-    onOverlayEntered () {
+    onOverlayEntered() {
         this.bindOutsideClickListener();
         this.bindScrollListener();
         this.bindResizeListener();
-        if(this.props.onShow) {
+        if (this.props.onShow) {
             this.props.onShow();
         }
     }
@@ -242,7 +244,7 @@ export class CascadeSelect extends Component {
         this.unbindScrollListener();
         this.unbindResizeListener();
         this.dirty = false;
-        if(this.props.onHide) {
+        if (this.props.onHide) {
             this.props.onHide();
         }
     }
@@ -250,10 +252,11 @@ export class CascadeSelect extends Component {
     alignOverlay() {
         const container = this.input.parentElement;
         if (this.appendTo) {
-            DomHandler.absolutePosition(this.overlay, container);
-            this.overlay.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
-        } else {
-            DomHandler.relativePosition(this.overlay, container);
+            DomHandler.absolutePosition(this.overlayRef.current, container);
+            this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
+        }
+        else {
+            DomHandler.relativePosition(this.overlayRef.current, container);
         }
     }
 
@@ -313,7 +316,7 @@ export class CascadeSelect extends Component {
 
     isOutsideClicked(event) {
         return this.container && !(this.container.isSameNode(event.target) || this.container.contains(event.target)
-            || (this.overlay && this.overlay.element && this.overlay.element.contains(event.target)));
+            || (this.overlayRef && this.overlayRef.current.contains(event.target)));
     }
 
     componentDidMount() {
@@ -328,7 +331,6 @@ export class CascadeSelect extends Component {
             this.scrollHandler.destroy();
             this.scrollHandler = null;
         }
-        this.overlay = null;
     }
 
     componentDidUpdate(prevProps) {
@@ -342,13 +344,13 @@ export class CascadeSelect extends Component {
             <div className="p-hidden-accessible">
                 <input ref={(el) => this.focusInput = el} type="text" id={this.props.inputId} readOnly disabled={this.props.disabled}
                     onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onInputKeyDown}
-                    tabIndex={this.props.tabIndex} aria-haspopup="listbox" aria-labelledby={this.props.ariaLabelledBy}/>
+                    tabIndex={this.props.tabIndex} aria-haspopup="listbox" aria-labelledby={this.props.ariaLabelledBy} />
             </div>
         );
     }
 
     renderLabel(value) {
-        let label = value ? this.getOptionLabel(this.props.value) : this.props.placeholder||'p-emptylabel';
+        let label = value ? this.getOptionLabel(this.props.value) : this.props.placeholder || 'p-emptylabel';
         let labelClassName = classNames('p-cascadeselect-label ', {
             'p-placeholder': label === this.props.placeholder,
             'p-cascadeselect-label-empty': !this.props.value && label === 'p-emptylabel'
@@ -367,13 +369,13 @@ export class CascadeSelect extends Component {
 
     renderOverlay() {
         return (
-            <CSSTransition classNames="p-connected-overlay" in={this.state.overlayVisible} timeout={{enter: 120, exit: 100}}
-                           unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit}>
-                <div ref={(el) => this.overlay = el} className="p-cascadeselect-panel p-component">
+            <CSSTransition nodeRef={this.overlayRef} classNames="p-connected-overlay" in={this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }}
+                unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit}>
+                <div ref={this.overlayRef} className="p-cascadeselect-panel p-component">
                     <div className="p-cascadeselect-items-wrapper">
                         <CascadeSelectSub options={this.props.options} selectionPath={this.selectionPath} className={"p-cascadeselect-items"} optionLabel={this.props.optionLabel}
-                                          optionValue={this.props.optionValue} level={0} optionGroupLabel={this.props.optionGroupLabel} optionGroupChildren={this.props.optionGroupChildren}
-                                          onOptionSelect={this.onOptionSelect} onOptionGroupSelect={this.onOptionGroupSelect} root template={this.props.itemTemplate}/>
+                            optionValue={this.props.optionValue} level={0} optionGroupLabel={this.props.optionGroupLabel} optionGroupChildren={this.props.optionGroupChildren}
+                            onOptionSelect={this.onOptionSelect} onOptionGroupSelect={this.onOptionGroupSelect} root template={this.props.itemTemplate} />
                     </div>
                 </div>
             </CSSTransition>

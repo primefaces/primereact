@@ -107,6 +107,7 @@ export class ConfirmPopup extends Component {
         this.onExit = this.onExit.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
+        this.overlayRef = React.createRef();
     }
 
     acceptLabel() {
@@ -175,7 +176,7 @@ export class ConfirmPopup extends Component {
     }
 
     isOutsideClicked(event) {
-        return this.container && !(this.container.isSameNode(event.target) || this.container.contains(event.target));
+        return this.overlayRef && this.overlayRef.current && !(this.overlayRef.current.isSameNode(event.target) || this.overlayRef.current.contains(event.target));
     }
 
     hasTargetChanged(event, target) {
@@ -221,7 +222,7 @@ export class ConfirmPopup extends Component {
     }
 
     onEnter() {
-        this.container.style.zIndex = String(DomHandler.generateZIndex());
+        this.overlayRef.current.style.zIndex = String(DomHandler.generateZIndex());
         this.align();
     }
 
@@ -239,19 +240,19 @@ export class ConfirmPopup extends Component {
 
     align() {
         if (this.props.target) {
-            DomHandler.absolutePosition(this.container, this.props.target);
+            DomHandler.absolutePosition(this.overlayRef.current, this.props.target);
 
-            const containerOffset = DomHandler.getOffset(this.container);
+            const containerOffset = DomHandler.getOffset(this.overlayRef.current);
             const targetOffset = DomHandler.getOffset(this.props.target);
             let arrowLeft = 0;
 
             if (containerOffset.left < targetOffset.left) {
                 arrowLeft = targetOffset.left - containerOffset.left;
             }
-            this.container.style.setProperty('--overlayArrowLeft', `${arrowLeft}px`);
+            this.overlayRef.current.style.setProperty('--overlayArrowLeft', `${arrowLeft}px`);
 
             if (containerOffset.top < targetOffset.top) {
-                DomHandler.addClass(this.container, 'p-confirm-popup-flipped');
+                DomHandler.addClass(this.overlayRef.current, 'p-confirm-popup-flipped');
             }
         }
     }
@@ -315,9 +316,9 @@ export class ConfirmPopup extends Component {
         const footer = this.renderFooter();
 
         return (
-            <CSSTransition classNames="p-connected-overlay" in={this.state.visible} timeout={{ enter: 120, exit: 100 }}
+            <CSSTransition nodeRef={this.overlayRef} classNames="p-connected-overlay" in={this.state.visible} timeout={{ enter: 120, exit: 100 }}
                 unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit}>
-                <div ref={el => this.container = el} id={this.id} className={className} style={this.props.style} onClick={this.onPanelClick}>
+                <div ref={this.overlayRef} id={this.id} className={className} style={this.props.style} onClick={this.onPanelClick}>
                     {content}
                     {footer}
                 </div>

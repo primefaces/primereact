@@ -59,6 +59,7 @@ export class Password extends Component {
         this.onOverlayExit = this.onOverlayExit.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
+        this.overlayRef = React.createRef();
         this.mediumCheckRegExp = new RegExp(this.props.mediumRegex);
         this.strongCheckRegExp = new RegExp(this.props.strongRegex);
     }
@@ -88,9 +89,9 @@ export class Password extends Component {
     }
 
     onOverlayEnter() {
-        this.panel.style.zIndex = String(DomHandler.generateZIndex());
-        this.panel.style.minWidth = DomHandler.getOuterWidth(this.inputEl) + 'px';
-        DomHandler.absolutePosition(this.panel, this.inputEl);
+        this.overlayRef.current.style.zIndex = String(DomHandler.generateZIndex());
+        this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(this.inputEl) + 'px';
+        DomHandler.absolutePosition(this.overlayRef.current, this.inputEl);
     }
 
     onOverlayEntered() {
@@ -277,9 +278,9 @@ export class Password extends Component {
             <>
                 <InputText id={this.id} ref={(el) => this.inputEl = el} {...inputProps} type="password" onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyup} />
 
-                <CSSTransition classNames="p-connected-overlay" in={this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }}
+                <CSSTransition nodeRef={this.overlayRef} classNames="p-connected-overlay" in={this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }}
                     unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit}>
-                    <div ref={(el) => this.panel = el} className={panelClassName} style={this.props.panelStyle}>
+                    <div ref={this.overlayRef} className={panelClassName} style={this.props.panelStyle}>
                         <div className="p-password-meter">
                             <div className={`p-password-strength ${strength}`} style={{ width: width }}></div>
                         </div>

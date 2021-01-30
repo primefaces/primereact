@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
-import {TieredMenuSub} from './TieredMenuSub';
+import { TieredMenuSub } from './TieredMenuSub';
 import { CSSTransition } from 'react-transition-group';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
@@ -48,6 +48,7 @@ export class TieredMenu extends Component {
         this.onExit = this.onExit.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
+        this.menuRef = React.createRef();
     }
 
     toggle(event) {
@@ -81,9 +82,9 @@ export class TieredMenu extends Component {
 
     onEnter() {
         if (this.props.autoZIndex) {
-            this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
+            this.menuRef.current.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
         }
-        DomHandler.absolutePosition(this.container,  this.target);
+        DomHandler.absolutePosition(this.menuRef.current, this.target);
     }
 
     onEntered() {
@@ -110,7 +111,7 @@ export class TieredMenu extends Component {
     bindDocumentClickListener() {
         if (!this.documentClickListener) {
             this.documentClickListener = (event) => {
-                if (this.props.popup && this.state.visible && !this.container.contains(event.target)) {
+                if (this.props.popup && this.state.visible && this.menuRef.current && !this.menuRef.current.contains(event.target)) {
                     this.hide(event);
                 }
             };
@@ -139,7 +140,7 @@ export class TieredMenu extends Component {
     }
 
     unbindDocumentResizeListener() {
-        if(this.documentResizeListener) {
+        if (this.documentResizeListener) {
             window.removeEventListener('resize', this.documentResizeListener);
             this.documentResizeListener = null;
         }
@@ -172,12 +173,12 @@ export class TieredMenu extends Component {
     }
 
     renderElement() {
-        const className = classNames('p-tieredmenu p-component', {'p-tieredmenu-overlay': this.props.popup}, this.props.className);
+        const className = classNames('p-tieredmenu p-component', { 'p-tieredmenu-overlay': this.props.popup }, this.props.className);
 
         return (
-            <CSSTransition classNames="p-connected-overlay" in={this.state.visible} timeout={{ enter: 120, exit: 100 }}
+            <CSSTransition nodeRef={this.menuRef} classNames="p-connected-overlay" in={this.state.visible} timeout={{ enter: 120, exit: 100 }}
                 unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit}>
-                <div ref={el => this.container = el} id={this.id} className={className} style={this.props.style}>
+                <div ref={this.menuRef} id={this.id} className={className} style={this.props.style}>
                     <TieredMenuSub model={this.props.model} root popup={this.props.popup} />
                 </div>
             </CSSTransition>

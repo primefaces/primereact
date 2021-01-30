@@ -48,9 +48,10 @@ export class Menu extends Component {
         this.onExit = this.onExit.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
+        this.menuRef = React.createRef();
     }
 
-    onItemClick(event, item){
+    onItemClick(event, item) {
         if (item.disabled) {
             event.preventDefault();
             return;
@@ -75,29 +76,29 @@ export class Menu extends Component {
     onItemKeyDown(event, item) {
         let listItem = event.currentTarget.parentElement;
 
-        switch(event.which) {
+        switch (event.which) {
             //down
             case 40:
                 var nextItem = this.findNextItem(listItem);
-                if(nextItem) {
+                if (nextItem) {
                     nextItem.children[0].focus();
                 }
 
                 event.preventDefault();
-            break;
+                break;
 
             //up
             case 38:
                 var prevItem = this.findPrevItem(listItem);
-                if(prevItem) {
+                if (prevItem) {
                     prevItem.children[0].focus();
                 }
 
                 event.preventDefault();
-            break;
+                break;
 
             default:
-            break;
+                break;
         }
     }
 
@@ -149,8 +150,8 @@ export class Menu extends Component {
     }
 
     onEnter() {
-        this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
-        DomHandler.absolutePosition(this.container,  this.target);
+        this.menuRef.current.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
+        DomHandler.absolutePosition(this.menuRef.current, this.target);
     }
 
     onEntered() {
@@ -187,12 +188,12 @@ export class Menu extends Component {
     }
 
     unbindDocumentListeners() {
-        if(this.documentClickListener) {
+        if (this.documentClickListener) {
             document.removeEventListener('click', this.documentClickListener);
             this.documentClickListener = null;
         }
 
-        if(this.documentResizeListener) {
+        if (this.documentResizeListener) {
             window.removeEventListener('resize', this.documentResizeListener);
             this.documentResizeListener = null;
         }
@@ -217,7 +218,7 @@ export class Menu extends Component {
     }
 
     isOutsideClicked(event) {
-        return this.container && !(this.container.isSameNode(event.target) || this.container.contains(event.target));
+        return this.menuRef && this.menuRef.current && !(this.menuRef.current.isSameNode(event.target) || this.menuRef.current.contains(event.target));
     }
 
     componentWillUnmount() {
@@ -229,8 +230,8 @@ export class Menu extends Component {
     }
 
     renderSubmenu(submenu, index) {
-        const className = classNames('p-submenu-header', {'p-disabled': submenu.disabled}, submenu.className);
-        const items = submenu.items.map((item, index)=> {
+        const className = classNames('p-submenu-header', { 'p-disabled': submenu.disabled }, submenu.className);
+        const items = submenu.items.map((item, index) => {
             return this.renderMenuitem(item, index);
         });
 
@@ -250,13 +251,13 @@ export class Menu extends Component {
 
     renderMenuitem(item, index) {
         const className = classNames('p-menuitem', item.className);
-        const linkClassName = classNames('p-menuitem-link', {'p-disabled': item.disabled})
+        const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled })
         const iconClassName = classNames('p-menuitem-icon', item.icon);
         const icon = item.icon && <span className={iconClassName}></span>;
         const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
         const tabIndex = item.disabled ? null : 0;
         let content = (
-            <a href={item.url||'#'} className={linkClassName} role="menuitem" target={item.target} onClick={(event) => this.onItemClick(event, item)} onKeyDown={(event) => this.onItemKeyDown(event, item)} tabIndex={tabIndex}>
+            <a href={item.url || '#'} className={linkClassName} role="menuitem" target={item.target} onClick={(event) => this.onItemClick(event, item)} onKeyDown={(event) => this.onItemKeyDown(event, item)} tabIndex={tabIndex}>
                 {icon}
                 {label}
             </a>
@@ -306,13 +307,13 @@ export class Menu extends Component {
 
     renderElement() {
         if (this.props.model) {
-            const className = classNames('p-menu p-component', this.props.className, {'p-menu-overlay': this.props.popup});
+            const className = classNames('p-menu p-component', this.props.className, { 'p-menu-overlay': this.props.popup });
             const menuitems = this.renderMenu();
 
             return (
-                <CSSTransition classNames="p-connected-overlay" in={this.state.visible} timeout={{ enter: 120, exit: 100 }}
+                <CSSTransition nodeRef={this.menuRef} classNames="p-connected-overlay" in={this.state.visible} timeout={{ enter: 120, exit: 100 }}
                     unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit}>
-                    <div id={this.id} className={className} style={this.props.style} ref={el => this.container = el}>
+                    <div ref={this.menuRef} id={this.id} className={className} style={this.props.style}>
                         <ul className="p-menu-list p-reset" role="menu">
                             {menuitems}
                         </ul>

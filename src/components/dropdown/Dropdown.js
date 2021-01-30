@@ -6,8 +6,7 @@ import FilterUtils from '../utils/FilterUtils';
 import { classNames } from '../utils/ClassNames';
 import { DropdownPanel } from './DropdownPanel';
 import { DropdownItem } from './DropdownItem';
-import {tip} from "../tooltip/Tooltip";
-import { CSSTransition } from 'react-transition-group';
+import { tip } from '../tooltip/Tooltip';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 
@@ -32,7 +31,7 @@ export class Dropdown extends Component {
         filterLocale: undefined,
         emptyFilterMessage: 'No results found',
         editable: false,
-        placeholder:null,
+        placeholder: null,
         required: false,
         disabled: false,
         appendTo: null,
@@ -75,7 +74,7 @@ export class Dropdown extends Component {
         filterPlaceholder: PropTypes.string,
         filterLocale: PropTypes.string,
         emptyFilterMessage: PropTypes.any,
-        editable:PropTypes.bool,
+        editable: PropTypes.bool,
         placeholder: PropTypes.string,
         required: PropTypes.bool,
         disabled: PropTypes.bool,
@@ -128,6 +127,7 @@ export class Dropdown extends Component {
         this.clear = this.clear.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
+        this.overlayRef = React.createRef();
     }
 
     onClick(event) {
@@ -170,40 +170,40 @@ export class Dropdown extends Component {
     }
 
     onInputKeyDown(event) {
-        switch(event.which) {
+        switch (event.which) {
             //down
             case 40:
                 this.onDownKey(event);
-            break;
+                break;
 
             //up
             case 38:
                 this.onUpKey(event);
-            break;
+                break;
 
             //space
             case 32:
-                if(!this.state.overlayVisible){
+                if (!this.state.overlayVisible) {
                     this.showOverlay();
                     event.preventDefault();
                 }
-            break;
+                break;
 
             //enter
             case 13:
                 this.hideOverlay();
                 event.preventDefault();
-            break;
+                break;
 
             //escape and tab
             case 27:
             case 9:
                 this.hideOverlay();
-            break;
+                break;
 
             default:
                 this.search(event);
-            break;
+                break;
         }
     }
 
@@ -224,10 +224,10 @@ export class Dropdown extends Component {
             case 27:
                 this.hideOverlay();
                 event.preventDefault();
-            break;
+                break;
 
             default:
-            break;
+                break;
         }
     }
 
@@ -369,12 +369,12 @@ export class Dropdown extends Component {
         this.props.onChange({
             originalEvent: event.originalEvent,
             value: event.target.value,
-            stopPropagation : () =>{},
-            preventDefault : () =>{},
+            stopPropagation: () => { },
+            preventDefault: () => { },
             target: {
                 name: this.props.name,
                 id: this.id,
-                value : event.target.value,
+                value: event.target.value,
             }
         });
     }
@@ -413,12 +413,12 @@ export class Dropdown extends Component {
         this.props.onChange({
             originalEvent: event,
             value: undefined,
-            stopPropagation : () =>{},
-            preventDefault : () =>{},
+            stopPropagation: () => { },
+            preventDefault: () => { },
             target: {
                 name: this.props.name,
                 id: this.id,
-                value : undefined
+                value: undefined
             }
         });
 
@@ -435,8 +435,8 @@ export class Dropdown extends Component {
             this.props.onChange({
                 originalEvent: event.originalEvent,
                 value: optionValue,
-                stopPropagation : () =>{},
-                preventDefault : () =>{},
+                stopPropagation: () => { },
+                preventDefault: () => { },
                 target: {
                     name: this.props.name,
                     id: this.id,
@@ -451,7 +451,7 @@ export class Dropdown extends Component {
         if (options) {
             for (let i = 0; i < options.length; i++) {
                 let optionValue = this.getOptionValue(options[i]);
-                if ((value === null && optionValue == null) || ObjectUtils.equals(value, optionValue, this.props.dataKey)) {
+                if ((value === null && optionValue == null) || ObjectUtils.equals(value, optionValue, this.props.dataKey)) {
                     selectedOptionIndex = i;
                     break;
                 }
@@ -475,7 +475,7 @@ export class Dropdown extends Component {
     }
 
     onOverlayEnter() {
-        this.panel.element.style.zIndex = String(DomHandler.generateZIndex());
+        this.overlayRef.current.style.zIndex = String(DomHandler.generateZIndex());
         this.alignPanel();
     }
 
@@ -504,19 +504,20 @@ export class Dropdown extends Component {
 
     alignPanel() {
         const container = this.input.parentElement;
-        if(this.props.appendTo) {
-            this.panel.element.style.minWidth = DomHandler.getWidth(container) + 'px';
-            DomHandler.absolutePosition(this.panel.element, container);
+        if (this.props.appendTo) {
+            this.overlayRef.current.style.minWidth = DomHandler.getWidth(container) + 'px';
+            DomHandler.absolutePosition(this.overlayRef.current, container);
         }
         else {
-            DomHandler.relativePosition(this.panel.element, container);
+            DomHandler.relativePosition(this.overlayRef.current, container);
         }
     }
 
     scrollInView() {
-        let highlightItem = DomHandler.findSingle(this.panel.element, 'li.p-highlight');
+        let highlightItem = DomHandler.findSingle(this.overlayRef.current, 'li.p-highlight');
         if (highlightItem) {
-            DomHandler.scrollInView(this.panel.itemsWrapper, highlightItem);
+            let itemsWrapper = DomHandler.findSingle(this.overlayRef.current, '.p-dropdown-items-wrapper');
+            DomHandler.scrollInView(itemsWrapper, highlightItem);
         }
     }
 
@@ -577,7 +578,7 @@ export class Dropdown extends Component {
 
     isOutsideClicked(event) {
         return this.container && !(this.container.isSameNode(event.target) || this.isClearClicked(event) || this.container.contains(event.target)
-            || (this.panel && this.panel.element && this.panel.element.contains(event.target)));
+            || (this.overlayRef && this.overlayRef.current.contains(event.target)));
     }
 
     isClearClicked(event) {
@@ -586,7 +587,7 @@ export class Dropdown extends Component {
 
     updateEditableLabel(option) {
         if (this.input) {
-            this.input.value = (option ? this.getOptionLabel(option) : this.props.value||'');
+            this.input.value = (option ? this.getOptionLabel(option) : this.props.value || '');
         }
     }
 
@@ -622,7 +623,7 @@ export class Dropdown extends Component {
         if (this.props.editable && this.input) {
             let selectedOption = this.findOption(this.props.value);
             const label = selectedOption ? this.getOptionLabel(selectedOption) : null;
-            const value = label||this.props.value||'';
+            const value = label || this.props.value || '';
             this.input.value = value;
         }
     }
@@ -678,7 +679,7 @@ export class Dropdown extends Component {
         }
 
         if (this.state.filter && (!this.props.options || this.props.options.length === 0)) {
-            this.setState({filter: ''});
+            this.setState({ filter: '' });
         }
 
         this.updateInputField();
@@ -709,22 +710,22 @@ export class Dropdown extends Component {
 
     renderKeyboardHelper() {
         return <div className="p-hidden-accessible">
-                    <input ref={(el) => this.focusInput = el} id={this.props.inputId} type="text" readOnly aria-haspopup="listbox"
-                        onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onInputKeyDown}
-                        disabled={this.props.disabled} tabIndex={this.props.tabIndex} aria-label={this.props.ariaLabel} aria-labelledby={this.props.ariaLabelledBy}/>
-                </div>;
+            <input ref={(el) => this.focusInput = el} id={this.props.inputId} type="text" readOnly aria-haspopup="listbox"
+                onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onInputKeyDown}
+                disabled={this.props.disabled} tabIndex={this.props.tabIndex} aria-label={this.props.ariaLabel} aria-labelledby={this.props.ariaLabelledBy} />
+        </div>;
     }
 
     renderLabel(selectedOption) {
         const label = selectedOption ? this.getOptionLabel(selectedOption) : null;
 
         if (this.props.editable) {
-            let value = label||this.props.value||'';
+            let value = label || this.props.value || '';
 
             return <input ref={(el) => this.input = el} type="text" defaultValue={value} className="p-dropdown-label p-inputtext" disabled={this.props.disabled}
-                          placeholder={this.props.placeholder} maxLength={this.props.maxLength} onClick={this.onEditableInputClick} onInput={this.onEditableInputChange}
-                          onFocus={this.onEditableInputFocus} onBlur={this.onInputBlur} aria-label={this.props.ariaLabel} aria-labelledby={this.props.ariaLabelledBy}
-                          aria-haspopup="listbox"/>;
+                placeholder={this.props.placeholder} maxLength={this.props.maxLength} onClick={this.onEditableInputClick} onInput={this.onEditableInputChange}
+                onFocus={this.onEditableInputFocus} onBlur={this.onInputBlur} aria-label={this.props.ariaLabel} aria-labelledby={this.props.ariaLabelledBy}
+                aria-haspopup="listbox" />;
         }
         else {
             let className = classNames('p-dropdown-label p-inputtext', {
@@ -732,7 +733,7 @@ export class Dropdown extends Component {
                 'p-dropdown-label-empty': label === null && !this.props.placeholder
             });
 
-            let content = this.props.valueTemplate ? ObjectUtils.getJSXElement(this.props.valueTemplate, selectedOption, this.props) : (label||this.props.placeholder||'empty');
+            let content = this.props.valueTemplate ? ObjectUtils.getJSXElement(this.props.valueTemplate, selectedOption, this.props) : (label || this.props.placeholder || 'empty');
 
             return <span ref={(el) => this.input = el} className={className}>{content}</span>;
         }
@@ -749,9 +750,11 @@ export class Dropdown extends Component {
     }
 
     renderDropdownIcon() {
-        return <div ref={(el) => this.trigger = el} className="p-dropdown-trigger" role="button" aria-haspopup="listbox" aria-expanded={this.state.overlayVisible}>
-                    <span className="p-dropdown-trigger-icon pi pi-chevron-down p-clickable"></span>
-                </div>;
+        return (
+            <div ref={(el) => this.trigger = el} className="p-dropdown-trigger" role="button" aria-haspopup="listbox" aria-expanded={this.state.overlayVisible}>
+                <span className="p-dropdown-trigger-icon pi pi-chevron-down p-clickable"></span>
+            </div>
+        );
     }
 
     renderItems(selectedOption) {
@@ -785,9 +788,9 @@ export class Dropdown extends Component {
             return (
                 <div className="p-dropdown-header">
                     <div className="p-dropdown-filter-container">
-                            <input ref={(el) => this.filterInput = el} type="text" autoComplete="off" className="p-dropdown-filter p-inputtext p-component" placeholder={this.props.filterPlaceholder}
-                                onKeyDown={this.onFilterInputKeyDown} onChange={this.onFilterInputChange} value={this.state.filter} />
-                            <span className="p-dropdown-filter-icon pi pi-search"></span>
+                        <input ref={(el) => this.filterInput = el} type="text" autoComplete="off" className="p-dropdown-filter p-inputtext p-component" placeholder={this.props.filterPlaceholder}
+                            onKeyDown={this.onFilterInputKeyDown} onChange={this.onFilterInputChange} value={this.state.filter} />
+                        <span className="p-dropdown-filter-icon pi pi-search"></span>
                     </div>
                 </div>
             );
@@ -816,20 +819,17 @@ export class Dropdown extends Component {
 
         return (
             <div id={this.id} ref={(el) => this.container = el} className={className} style={this.props.style} onClick={this.onClick}
-                 onMouseDown={this.props.onMouseDown} onContextMenu={this.props.onContextMenu}>
-                 {keyboardHelper}
-                 {hiddenSelect}
-                 {labelElement}
-                 {clearIcon}
-                 {dropdownIcon}
-                 <CSSTransition classNames="p-connected-overlay" in={this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }}
-                    unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
-                    <DropdownPanel ref={(el) => this.panel = el} appendTo={this.props.appendTo}
-                        panelStyle={this.props.panelStyle} panelClassName={this.props.panelClassName}
-                        scrollHeight={this.props.scrollHeight} filter={filterElement} onClick={this.onPanelClick}>
-                        {items}
-                    </DropdownPanel>
-                </CSSTransition>
+                onMouseDown={this.props.onMouseDown} onContextMenu={this.props.onContextMenu}>
+                {keyboardHelper}
+                {hiddenSelect}
+                {labelElement}
+                {clearIcon}
+                {dropdownIcon}
+                <DropdownPanel ref={this.overlayRef} appendTo={this.props.appendTo} panelStyle={this.props.panelStyle} panelClassName={this.props.panelClassName}
+                    scrollHeight={this.props.scrollHeight} filter={filterElement} onClick={this.onPanelClick}
+                    in={this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
+                    {items}
+                </DropdownPanel>
             </div>
         );
     }

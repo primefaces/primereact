@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import { classNames } from '../utils/ClassNames';
+import { CSSTransition } from 'react-transition-group';
 
-export class MultiSelectPanel extends Component {
+class MultiSelectPanelComponent extends Component {
 
     static defaultProps = {
         appendTo: null,
@@ -25,16 +26,20 @@ export class MultiSelectPanel extends Component {
 
     renderElement() {
         const panelClassName = classNames('p-multiselect-panel p-component', this.props.panelClassName);
+
         return (
-            <div className={panelClassName} style={this.props.panelStyle}
-                ref={(el) => this.element = el} onClick={this.props.onClick}>
-                {this.props.header}
-                <div className="p-multiselect-items-wrapper" style={{ maxHeight: this.props.scrollHeight }}>
-                    <ul className="p-multiselect-items p-component" role="listbox" aria-multiselectable>
-                        {this.props.children}
-                    </ul>
+            <CSSTransition nodeRef={this.props.forwardRef} classNames="p-connected-overlay" in={this.props.in} timeout={{ enter: 120, exit: 100 }}
+                unmountOnExit onEnter={this.props.onEnter} onEntered={this.props.onEntered} onExit={this.props.onExit} onExited={this.props.onExited}>
+                <div ref={this.props.forwardRef} className={panelClassName} style={this.props.panelStyle} onClick={this.props.onClick}>
+                    {this.props.header}
+                    <div className="p-multiselect-items-wrapper" style={{ maxHeight: this.props.scrollHeight }}>
+                        <ul className="p-multiselect-items p-component" role="listbox" aria-multiselectable>
+                            {this.props.children}
+                        </ul>
+                    </div>
                 </div>
-            </div>
+            </CSSTransition>
+
         );
     }
 
@@ -48,5 +53,6 @@ export class MultiSelectPanel extends Component {
             return element;
         }
     }
-
 }
+
+export const MultiSelectPanel = React.forwardRef((props, ref) => <MultiSelectPanelComponent forwardRef={ref} {...props} />);

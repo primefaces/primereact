@@ -69,7 +69,7 @@ export class SlideMenuSub extends Component {
     }
 
     renderSubmenu(item) {
-        if(item.items) {
+        if (item.items) {
             return (
                 <SlideMenuSub model={item.items} index={this.props.index + 1} menuWidth={this.props.menuWidth} effectDuration={this.props.effectDuration}
                     onForward={this.props.onForward} parentActive={item === this.state.activeItem} />
@@ -81,7 +81,7 @@ export class SlideMenuSub extends Component {
 
     renderMenuitem(item, index) {
         const active = this.state.activeItem === item;
-        const className = classNames('p-menuitem', {'p-menuitem-active': active, 'p-disabled': item.disabled}, item.className);
+        const className = classNames('p-menuitem', { 'p-menuitem-active': active, 'p-disabled': item.disabled }, item.className);
         const iconClassName = classNames('p-menuitem-icon', item.icon);
         const submenuIconClassName = 'p-submenu-icon pi pi-fw pi-angle-right';
         const icon = item.icon && <span className={iconClassName}></span>;
@@ -139,7 +139,7 @@ export class SlideMenuSub extends Component {
     }
 
     render() {
-        const className = classNames({'p-slidemenu-rootlist': this.props.root, 'p-submenu-list': !this.props.root, 'p-active-submenu': this.props.parentActive});
+        const className = classNames({ 'p-slidemenu-rootlist': this.props.root, 'p-submenu-list': !this.props.root, 'p-active-submenu': this.props.parentActive });
         const style = {
             width: this.props.menuWidth + 'px',
             left: this.props.root ? (-1 * this.props.level * this.props.menuWidth) + 'px' : this.props.menuWidth + 'px',
@@ -209,6 +209,7 @@ export class SlideMenu extends Component {
         this.onExited = this.onExited.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
+        this.menuRef = React.createRef();
     }
 
     navigateForward() {
@@ -224,7 +225,7 @@ export class SlideMenu extends Component {
     }
 
     renderBackward() {
-        const className = classNames('p-slidemenu-backward', {'p-hidden': this.state.level === 0});
+        const className = classNames('p-slidemenu-backward', { 'p-hidden': this.state.level === 0 });
 
         return (
             <div ref={el => this.backward = el} className={className} onClick={this.navigateBack}>
@@ -265,9 +266,9 @@ export class SlideMenu extends Component {
 
     onEnter() {
         if (this.props.autoZIndex) {
-            this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
+            this.menuRef.current.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
         }
-        DomHandler.absolutePosition(this.container, this.target);
+        DomHandler.absolutePosition(this.menuRef.current, this.target);
     }
 
     onEntered() {
@@ -300,7 +301,7 @@ export class SlideMenu extends Component {
     }
 
     isOutsideClicked(event) {
-        return this.container && !(this.container.isSameNode(event.target) || this.container.contains(event.target));
+        return this.menuRef && this.menuRef.current && !(this.menuRef.current.isSameNode(event.target) || this.menuRef.current.contains(event.target));
     }
 
     bindDocumentResizeListener() {
@@ -316,14 +317,14 @@ export class SlideMenu extends Component {
     }
 
     unbindDocumentClickListener() {
-        if(this.documentClickListener) {
+        if (this.documentClickListener) {
             document.removeEventListener('click', this.documentClickListener);
             this.documentClickListener = null;
         }
     }
 
     unbindDocumentResizeListener() {
-        if(this.documentResizeListener) {
+        if (this.documentResizeListener) {
             window.removeEventListener('resize', this.documentResizeListener);
             this.documentResizeListener = null;
         }
@@ -365,17 +366,17 @@ export class SlideMenu extends Component {
     }
 
     renderElement() {
-        const className = classNames('p-slidemenu p-component', {'p-slidemenu-overlay': this.props.popup});
+        const className = classNames('p-slidemenu p-component', { 'p-slidemenu-overlay': this.props.popup });
         const backward = this.renderBackward();
 
         return (
-            <CSSTransition classNames="p-connected-overlay" in={!this.props.popup || this.state.visible} timeout={{ enter: 120, exit: 100 }}
+            <CSSTransition nodeRef={this.menuRef} classNames="p-connected-overlay" in={!this.props.popup || this.state.visible} timeout={{ enter: 120, exit: 100 }}
                 unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit} onExited={this.onExited}>
-                <div id={this.id} className={className} style={this.props.style} ref={el => this.container = el}>
-                    <div className="p-slidemenu-wrapper" style={{height: this.props.viewportHeight + 'px'}}>
+                <div ref={this.menuRef} id={this.id} className={className} style={this.props.style}>
+                    <div className="p-slidemenu-wrapper" style={{ height: this.props.viewportHeight + 'px' }}>
                         <div className="p-slidemenu-content" ref={el => this.slideMenuContent = el}>
                             <SlideMenuSub model={this.props.model} root index={0} menuWidth={this.props.menuWidth} effectDuration={this.props.effectDuration}
-                                    level={this.state.level} parentActive={this.state.level === 0} onForward={this.navigateForward} />
+                                level={this.state.level} parentActive={this.state.level === 0} onForward={this.navigateForward} />
                         </div>
                         {backward}
                     </div>

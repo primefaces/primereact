@@ -4,8 +4,9 @@ import ReactDOM from 'react-dom';
 import ObjectUtils from '../utils/ObjectUtils';
 import { Ripple } from '../ripple/Ripple';
 import { classNames } from '../utils/ClassNames';
+import { CSSTransition } from 'react-transition-group';
 
-export class AutoCompletePanel extends Component {
+class AutoCompletePanelComponent extends Component {
 
     static defaultProps = {
         suggestions: null,
@@ -17,7 +18,8 @@ export class AutoCompletePanel extends Component {
         listId: null,
         ariaSelected: null,
         panelClassName: null,
-        panelStyle: null
+        panelStyle: null,
+        forwardRef: null
     }
 
     static propTypes = {
@@ -30,7 +32,8 @@ export class AutoCompletePanel extends Component {
         listId: PropTypes.any,
         ariaSelected: PropTypes.any,
         panelClassName: PropTypes.string,
-        panelStyle: PropTypes.object
+        panelStyle: PropTypes.object,
+        forwardRef: PropTypes.object
     };
 
     renderElement() {
@@ -52,11 +55,14 @@ export class AutoCompletePanel extends Component {
         }
 
         return (
-            <div ref={(el) => this.element = el} className={panelClassName} style={panelStyle}>
-                <ul className="p-autocomplete-items" role="listbox" id={this.props.listId}>
-                    {items}
-                </ul>
-            </div>
+            <CSSTransition nodeRef={this.props.forwardRef} classNames="p-connected-overlay" in={this.props.in} timeout={{ enter: 120, exit: 100 }}
+                unmountOnExit onEnter={this.props.onEnter} onEntered={this.props.onEntered} onExit={this.props.onExit}>
+                <div ref={this.props.forwardRef} className={panelClassName} style={panelStyle}>
+                    <ul className="p-autocomplete-items" role="listbox" id={this.props.listId}>
+                        {items}
+                    </ul>
+                </div>
+            </CSSTransition>
         );
     }
 
@@ -71,3 +77,5 @@ export class AutoCompletePanel extends Component {
         }
     }
 }
+
+export const AutoCompletePanel = React.forwardRef((props, ref) => <AutoCompletePanelComponent forwardRef={ref} {...props} />);

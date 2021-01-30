@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
+import { CSSTransition } from 'react-transition-group';
 
 class CalendarPanelComponent extends Component {
 
@@ -18,9 +19,12 @@ class CalendarPanelComponent extends Component {
 
     renderElement() {
         return (
-            <div ref={(el) => {this.element = el; if(this.props.forwardRef) this.props.forwardRef(el)}} className={this.props.className} style={this.props.style}>
-                {this.props.children}
-            </div>
+            <CSSTransition nodeRef={this.props.forwardRef} classNames="p-connected-overlay" in={this.props.in} timeout={{ enter: 120, exit: 100 }}
+                unmountOnExit onEnter={this.props.onEnter} onEntered={this.props.onEntered} onExit={this.props.onExit}>
+                <div ref={this.props.forwardRef} className={this.props.className} style={this.props.style}>
+                    {this.props.children}
+                </div>
+            </CSSTransition>
         );
     }
 
@@ -35,4 +39,4 @@ class CalendarPanelComponent extends Component {
 
 }
 
-export const CalendarPanel = React.forwardRef((props, ref) => <CalendarPanelComponent forwardRef={ref} {...props}/>);
+export const CalendarPanel = React.forwardRef((props, ref) => <CalendarPanelComponent forwardRef={ref} {...props} />);

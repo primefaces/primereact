@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import { classNames } from '../utils/ClassNames';
+import { CSSTransition } from 'react-transition-group';
 
-export class DropdownPanel extends Component {
+class DropdownPanelComponent extends Component {
 
     static defaultProps = {
         appendTo: null,
@@ -27,14 +28,17 @@ export class DropdownPanel extends Component {
         let className = classNames('p-dropdown-panel p-component', this.props.panelClassName);
 
         return (
-            <div ref={(el) => this.element = el} className={className} style={this.props.panelStyle} onClick={this.props.onClick}>
-                {this.props.filter}
-                <div ref={(el) => this.itemsWrapper = el} className="p-dropdown-items-wrapper" style={{ maxHeight: this.props.scrollHeight || 'auto' }}>
-                    <ul className="p-dropdown-items" role="listbox">
-                        {this.props.children}
-                    </ul>
+            <CSSTransition nodeRef={this.props.forwardRef} classNames="p-connected-overlay" in={this.props.in} timeout={{ enter: 120, exit: 100 }}
+                unmountOnExit onEnter={this.props.onEnter} onEntered={this.props.onEntered} onExit={this.props.onExit} onExited={this.props.onExited}>
+                <div ref={this.props.forwardRef} className={className} style={this.props.panelStyle} onClick={this.props.onClick}>
+                    {this.props.filter}
+                    <div className="p-dropdown-items-wrapper" style={{ maxHeight: this.props.scrollHeight || 'auto' }}>
+                        <ul className="p-dropdown-items" role="listbox">
+                            {this.props.children}
+                        </ul>
+                    </div>
                 </div>
-            </div>
+            </CSSTransition>
         );
     }
 
@@ -50,3 +54,5 @@ export class DropdownPanel extends Component {
     }
 
 }
+
+export const DropdownPanel = React.forwardRef((props, ref) => <DropdownPanelComponent forwardRef={ref} {...props} />);

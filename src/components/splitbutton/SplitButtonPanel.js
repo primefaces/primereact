@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import { classNames } from '../utils/ClassNames';
+import { CSSTransition } from 'react-transition-group';
 
-export class SplitButtonPanel extends Component {
+class SplitButtonPanelComponent extends Component {
 
     static defaultProps = {
         appendTo: null,
@@ -23,11 +24,14 @@ export class SplitButtonPanel extends Component {
         let className = classNames('p-menu p-menu-overlay p-component', this.props.menuClassName);
 
         return (
-            <div className={className} style={this.props.menuStyle} id={this.props.id} ref={(el) => { this.element = el; }}>
-                <ul className="p-menu-list p-reset" role="menu">
-                    {this.props.children}
-                </ul>
-            </div>
+            <CSSTransition nodeRef={this.props.forwardRef} classNames="p-connected-overlay" in={this.props.in} timeout={{ enter: 120, exit: 100 }}
+                unmountOnExit onEnter={this.props.onEnter} onEntered={this.props.onEntered} onExit={this.props.onExit}>
+                <div ref={this.props.forwardRef} className={className} style={this.props.menuStyle} id={this.props.id}>
+                    <ul className="p-menu-list p-reset" role="menu">
+                        {this.props.children}
+                    </ul>
+                </div>
+            </CSSTransition>
         );
     }
 
@@ -41,5 +45,6 @@ export class SplitButtonPanel extends Component {
             return element;
         }
     }
-
 }
+
+export const SplitButtonPanel = React.forwardRef((props, ref) => <SplitButtonPanelComponent forwardRef={ref} {...props} />);

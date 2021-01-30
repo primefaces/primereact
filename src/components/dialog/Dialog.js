@@ -88,6 +88,7 @@ export class Dialog extends Component {
         this.onExited = this.onExited.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
+        this.dialogRef = React.createRef();
     }
 
     onClose(event) {
@@ -97,7 +98,7 @@ export class Dialog extends Component {
 
     focus() {
         let activeElement = document.activeElement;
-        let isActiveElementInDialog = activeElement && this.dialog.contains(activeElement);
+        let isActiveElementInDialog = activeElement && this.dialogRef && this.dialogRef.current.contains(activeElement);
         if (!isActiveElementInDialog && this.props.closable) {
             this.closeElement.focus();
         }
@@ -378,9 +379,9 @@ export class Dialog extends Component {
 
         return (
             <div ref={(el) => this.mask = el} className={maskClassName} onClick={this.onMaskClick}>
-                <CSSTransition classNames="p-dialog" timeout={transitionTimeout} in={this.state.visible} unmountOnExit
+                <CSSTransition nodeRef={this.dialogRef} classNames="p-dialog" timeout={transitionTimeout} in={this.state.visible} unmountOnExit
                     onEntered={this.onEntered} onExited={this.onExited}>
-                    <div ref={el => this.dialog = el} id={this.id} className={className} style={this.props.style}
+                    <div ref={this.dialogRef} id={this.id} className={className} style={this.props.style}
                          aria-labelledby={this.id + '_header'} role="dialog" aria-modal={this.props.model}>
                         {header}
                         {content}

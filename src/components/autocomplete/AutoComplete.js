@@ -8,7 +8,6 @@ import { AutoCompletePanel } from './AutoCompletePanel';
 import { classNames } from '../utils/ClassNames';
 import { tip } from '../tooltip/Tooltip';
 import UniqueComponentId from "../utils/UniqueComponentId";
-import { CSSTransition } from 'react-transition-group';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 
 export class AutoComplete extends Component {
@@ -135,6 +134,7 @@ export class AutoComplete extends Component {
 
         this.id = this.props.id || UniqueComponentId();
         this.listId = this.id + '_list';
+        this.overlayRef = React.createRef();
     }
 
     onInputChange(event) {
@@ -215,8 +215,8 @@ export class AutoComplete extends Component {
             this.props.onChange({
                 originalEvent: event,
                 value: value,
-                stopPropagation : () =>{},
-                preventDefault : () =>{},
+                stopPropagation: () => { },
+                preventDefault: () => { },
                 target: {
                     name: this.props.name,
                     id: this.id,
@@ -262,7 +262,7 @@ export class AutoComplete extends Component {
     }
 
     onOverlayEnter() {
-        this.overlay.element.style.zIndex = String(DomHandler.generateZIndex());
+        this.overlayRef.current.style.zIndex = String(DomHandler.generateZIndex());
         this.alignOverlay();
     }
 
@@ -282,11 +282,11 @@ export class AutoComplete extends Component {
         let target = this.props.multiple ? this.multiContainer : this.inputEl;
 
         if (this.props.appendTo) {
-            this.overlay.element.style.minWidth = DomHandler.getWidth(target) + 'px';
-            DomHandler.absolutePosition(this.overlay.element, target);
+            this.overlayRef.current.style.minWidth = DomHandler.getWidth(target) + 'px';
+            DomHandler.absolutePosition(this.overlayRef.current, target);
         }
         else {
-            DomHandler.relativePosition(this.overlay.element, target);
+            DomHandler.relativePosition(this.overlayRef.current, target);
         }
     }
 
@@ -321,9 +321,9 @@ export class AutoComplete extends Component {
 
     onInputKeyDown(event) {
         if (this.state.overlayVisible) {
-            let highlightItem = DomHandler.findSingle(this.overlay.element, 'li.p-highlight');
+            let highlightItem = DomHandler.findSingle(this.overlayRef.current, 'li.p-highlight');
 
-            switch(event.which) {
+            switch (event.which) {
                 //down
                 case 40:
                     if (highlightItem) {
@@ -331,15 +331,15 @@ export class AutoComplete extends Component {
                         if (nextElement) {
                             DomHandler.addClass(nextElement, 'p-highlight');
                             DomHandler.removeClass(highlightItem, 'p-highlight');
-                            DomHandler.scrollInView(this.overlay.element, nextElement);
+                            DomHandler.scrollInView(this.overlayRef.current, nextElement);
                         }
                     }
                     else {
-                        DomHandler.addClass(this.overlay.element.firstChild.firstChild, 'p-highlight');
+                        DomHandler.addClass(this.overlayRef.current.firstChild.firstChild, 'p-highlight');
                     }
 
                     event.preventDefault();
-                break;
+                    break;
 
                 //up
                 case 38:
@@ -348,12 +348,12 @@ export class AutoComplete extends Component {
                         if (previousElement) {
                             DomHandler.addClass(previousElement, 'p-highlight');
                             DomHandler.removeClass(highlightItem, 'p-highlight');
-                            DomHandler.scrollInView(this.overlay.element, previousElement);
+                            DomHandler.scrollInView(this.overlayRef.current, previousElement);
                         }
                     }
 
                     event.preventDefault();
-                break;
+                    break;
 
                 //enter,tab
                 case 13:
@@ -363,13 +363,13 @@ export class AutoComplete extends Component {
                     }
 
                     event.preventDefault();
-                break;
+                    break;
 
                 //escape
                 case 27:
                     this.hideOverlay();
                     event.preventDefault();
-                break;
+                    break;
 
                 //tab
                 case 9:
@@ -378,15 +378,15 @@ export class AutoComplete extends Component {
                     }
 
                     this.hideOverlay();
-                break;
+                    break;
 
                 default:
-                break;
+                    break;
             }
         }
 
         if (this.props.multiple) {
-            switch(event.which) {
+            switch (event.which) {
                 //backspace
                 case 8:
                     if (this.props.value && this.props.value.length && !this.inputEl.value) {
@@ -402,10 +402,10 @@ export class AutoComplete extends Component {
                             })
                         }
                     }
-                break;
+                    break;
 
                 default:
-                break;
+                    break;
             }
         }
     }
@@ -483,7 +483,7 @@ export class AutoComplete extends Component {
                     return;
                 }
 
-                if (this.state.overlayVisible && this.overlay && this.isOutsideClicked(event)) {
+                if (this.state.overlayVisible && this.isOutsideClicked(event)) {
                     this.hideOverlay();
                 }
             };
@@ -536,7 +536,7 @@ export class AutoComplete extends Component {
     }
 
     isOutsideClicked(event) {
-        return this.container && (this.overlay && this.overlay.element && !this.overlay.element.contains(event.target)) && !this.isInputClicked(event);
+        return this.container && (this.overlayRef && this.overlayRef.current && !this.overlayRef.current.contains(event.target)) && !this.isInputClicked(event);
     }
 
     isInputClicked(event) {
@@ -611,14 +611,14 @@ export class AutoComplete extends Component {
 
         return (
             <InputText ref={(el) => this.inputEl = el} id={this.props.inputId} type={this.props.type} name={this.props.name}
-                        defaultValue={this.formatValue(this.props.value)} role="searchbox" aria-autocomplete="list" aria-controls={this.listId}
-                        aria-labelledby={this.props.ariaLabelledBy} className={inputClassName} style={this.props.inputStyle} autoComplete="off"
-                        readOnly={this.props.readOnly} disabled={this.props.disabled} placeholder={this.props.placeholder} size={this.props.size}
-                        maxLength={this.props.maxlength} tabIndex={this.props.tabIndex}
-                        onBlur={this.onInputBlur} onFocus={this.onInputFocus} onChange={this.onInputChange}
-                        onMouseDown={this.props.onMouseDown} onKeyUp={this.props.onKeyUp} onKeyDown={this.onInputKeyDown}
-                        onKeyPress={this.props.onKeyPress} onContextMenu={this.props.onContextMenu}
-                        onClick={this.props.onClick} onDoubleClick={this.props.onDblClick} />
+                defaultValue={this.formatValue(this.props.value)} role="searchbox" aria-autocomplete="list" aria-controls={this.listId}
+                aria-labelledby={this.props.ariaLabelledBy} className={inputClassName} style={this.props.inputStyle} autoComplete="off"
+                readOnly={this.props.readOnly} disabled={this.props.disabled} placeholder={this.props.placeholder} size={this.props.size}
+                maxLength={this.props.maxlength} tabIndex={this.props.tabIndex}
+                onBlur={this.onInputBlur} onFocus={this.onInputFocus} onChange={this.onInputChange}
+                onMouseDown={this.props.onMouseDown} onKeyUp={this.props.onKeyUp} onKeyDown={this.onInputKeyDown}
+                onKeyPress={this.props.onKeyPress} onContextMenu={this.props.onContextMenu}
+                onClick={this.props.onClick} onDoubleClick={this.props.onDblClick} />
         );
     }
 
@@ -641,11 +641,11 @@ export class AutoComplete extends Component {
         return (
             <li className="p-autocomplete-input-token">
                 <input ref={(el) => this.inputEl = el} type={this.props.type} disabled={this.props.disabled} placeholder={this.props.placeholder}
-                       role="searchbox" aria-autocomplete="list" aria-controls={this.listId} aria-labelledby={this.props.ariaLabelledBy}
-                       autoComplete="off" tabIndex={this.props.tabIndex} onChange={this.onInputChange} id={this.props.inputId} name={this.props.name}
-                       style={this.props.inputStyle} className={this.props.inputClassName} maxLength={this.props.maxlength}
-                       onKeyUp={this.props.onKeyUp} onKeyDown={this.onInputKeyDown} onKeyPress={this.props.onKeyPress}
-                       onFocus={this.onMultiInputFocus} onBlur={this.onMultiInputBlur} />
+                    role="searchbox" aria-autocomplete="list" aria-controls={this.listId} aria-labelledby={this.props.ariaLabelledBy}
+                    autoComplete="off" tabIndex={this.props.tabIndex} onChange={this.onInputChange} id={this.props.inputId} name={this.props.name}
+                    style={this.props.inputStyle} className={this.props.inputClassName} maxLength={this.props.maxlength}
+                    onKeyUp={this.props.onKeyUp} onKeyDown={this.onInputKeyDown} onKeyPress={this.props.onKeyPress}
+                    onFocus={this.onMultiInputFocus} onBlur={this.onMultiInputBlur} />
             </li>
         );
     }
@@ -658,11 +658,11 @@ export class AutoComplete extends Component {
         let input = this.renderMultiInput();
 
         return (
-                <ul ref={(el) => {this.multiContainer = el}} className={multiContainerClass} onContextMenu={this.props.onContextMenu} onMouseDown={this.props.onMouseDown}
-                        onClick={this.onMultiContainerClick} onDoubleClick={this.props.onDblClick} >
-                    {tokens}
-                    {input}
-                </ul>
+            <ul ref={(el) => { this.multiContainer = el }} className={multiContainerClass} onContextMenu={this.props.onContextMenu} onMouseDown={this.props.onMouseDown}
+                onClick={this.onMultiContainerClick} onDoubleClick={this.props.onDblClick} >
+                {tokens}
+                {input}
+            </ul>
         );
     }
 
@@ -699,16 +699,14 @@ export class AutoComplete extends Component {
 
         return (
             <span ref={(el) => this.container = el} id={this.id} style={this.props.style} className={className} aria-haspopup="listbox"
-                  aria-expanded={this.state.overlayVisible} aria-owns={this.listId}>
+                aria-expanded={this.state.overlayVisible} aria-owns={this.listId}>
                 {input}
                 {loader}
                 {dropdown}
-                <CSSTransition classNames="p-connected-overlay" in={this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }}
-                    unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit}>
-                    <AutoCompletePanel ref={(el) => this.overlay = el} suggestions={this.props.suggestions} field={this.props.field} listId={this.listId}
-                            appendTo={this.props.appendTo} itemTemplate={this.props.itemTemplate} onItemClick={this.selectItem} ariaSelected={this.ariaSelected}
-                            panelStyle={this.props.panelStyle} panelClassName={this.props.panelClassName}/>
-                </CSSTransition>
+                <AutoCompletePanel ref={this.overlayRef} suggestions={this.props.suggestions} field={this.props.field} listId={this.listId}
+                    appendTo={this.props.appendTo} itemTemplate={this.props.itemTemplate} onItemClick={this.selectItem} ariaSelected={this.ariaSelected}
+                    panelStyle={this.props.panelStyle} panelClassName={this.props.panelClassName}
+                    in={this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} />
             </span>
         );
     }

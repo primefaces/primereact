@@ -33,6 +33,8 @@ export class ScrollTop extends Component {
         };
 
         this.onClick = this.onClick.bind(this);
+        this.onEnter = this.onEnter.bind(this);
+        this.scrollElementRef = React.createRef();
     }
 
     onClick() {
@@ -77,8 +79,8 @@ export class ScrollTop extends Component {
         }
     }
 
-    onEnter(el) {
-        el.style.zIndex = String(DomHandler.generateZIndex());
+    onEnter() {
+        this.scrollElementRef.current.style.zIndex = String(DomHandler.generateZIndex());
     }
 
     componentDidMount() {
@@ -104,13 +106,13 @@ export class ScrollTop extends Component {
 
         return (
             <>
-                <CSSTransition classNames="p-scrolltop" in={this.state.visible} timeout={{ enter: 150, exit: 150 }} unmountOnExit onEnter={this.onEnter}>
-                    <button type="button" className={className} style={this.props.style} onClick={this.onClick}>
+                <CSSTransition nodeRef={this.scrollElementRef} classNames="p-scrolltop" in={this.state.visible} timeout={{ enter: 150, exit: 150 }} unmountOnExit onEnter={this.onEnter}>
+                    <button ref={this.scrollElementRef} type="button" className={className} style={this.props.style} onClick={this.onClick}>
                         <span className={iconClassName}></span>
                         <Ripple />
                     </button>
                 </CSSTransition>
-                { isTargetParent && <span ref={(el) => this.helper = el} className="p-scrolltop-helper"></span> }
+                {isTargetParent && <span ref={(el) => this.helper = el} className="p-scrolltop-helper"></span>}
             </>
         );
     }
