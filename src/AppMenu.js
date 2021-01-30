@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import { CSSTransition } from 'react-transition-group';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
@@ -232,7 +231,7 @@ export class AppMenu extends Component {
                 <div className="layout-sidebar-filter">
                     <div className={filterContentClassName}>
                         <i className="pi pi-search" />
-                        <InputText ref={(el) => this.searchInput = ReactDOM.findDOMNode(el)} type="text" onChange={this.onSearchInputChange} placeholder="Search by name, badge..." aria-label="Search input" autoComplete="off" />
+                        <InputText ref={(el) => this.searchInput = el} type="text" onChange={this.onSearchInputChange} placeholder="Search by name, badge..." aria-label="Search input" autoComplete="off" />
                         {showClearIcon && <i className="clear-icon pi pi-times" onClick={this.resetFilter} />}
                     </div>
                 </div>

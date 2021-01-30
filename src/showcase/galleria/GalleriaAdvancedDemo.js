@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import { PhotoService } from '../service/PhotoService';
 import { Button } from '../../components/button/Button';
@@ -88,7 +87,7 @@ export class GalleriaAdvancedDemo extends Component {
     }
 
     openFullScreen() {
-        let elem = ReactDOM.findDOMNode(this.galleria);
+        let elem = document.querySelector('.custom-galleria');
         if (elem.requestFullscreen) {
             elem.requestFullscreen();
         }
@@ -317,7 +316,7 @@ export class GalleriaAdvancedDemo extends Component {
     }
 
     openFullScreen() {
-        let elem = ReactDOM.findDOMNode(this.galleria);
+        let elem = document.querySelector('.custom-galleria');
         if (elem.requestFullscreen) {
             elem.requestFullscreen();
         }
