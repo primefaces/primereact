@@ -370,9 +370,9 @@ const loadData = (event) => {
                                     </tr>
                                     <tr>
                                         <td>loader</td>
-                                        <td>any</td>
+                                        <td>boolean</td>
                                         <td>null</td>
-                                        <td>Reference of the target element whose click event loads the data instead of scrolling.</td>
+                                        <td>Determines whether data is loaded by a target element.</td>
                                     </tr>
                                     <tr>
                                         <td>buffer</td>

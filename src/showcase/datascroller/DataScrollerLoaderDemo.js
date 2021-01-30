@@ -45,7 +45,7 @@ export class DataScrollerLoaderDemo extends Component {
     }
 
     render() {
-        const footer = <Button ref={(el) => this.loadButton = el} type="text" icon="pi pi-plus" label="Load" />;
+        const footer = <Button type="text" icon="pi pi-plus" label="Load" onClick={() => this.ds.load()} />;
 
         return (
             <div>
@@ -58,8 +58,8 @@ export class DataScrollerLoaderDemo extends Component {
 
                 <div className="content-section implementation datascroller-demo">
                     <div className="card">
-                        <DataScroller value={this.state.products} itemTemplate={this.itemTemplate} rows={5}
-                            loader={this.loadButton} footer={footer} header="Click Load Button at Footer to Load More" />
+                        <DataScroller ref={(el) => this.ds = el} value={this.state.products} itemTemplate={this.itemTemplate} rows={5}
+                            loader footer={footer} header="Click Load Button at Footer to Load More" />
                     </div>
                 </div>
 
@@ -122,13 +122,13 @@ export class DataScrollerLoaderDemo extends Component {
     }
 
     render() {
-        const footer = <Button ref={(el) => this.loadButton = el} type="text" icon="pi pi-plus" label="Load" />;
+        const footer = <Button type="text" icon="pi pi-plus" label="Load" onClick={() => this.ds.load()} />;
 
         return (
             <div className="datascroller-demo">
                 <div className="card">
-                    <DataScroller value={this.state.products} itemTemplate={this.itemTemplate} rows={5}
-                        loader={this.loadButton} footer={footer} header="Click Load Button at Footer to Load More" />
+                    <DataScroller ref={(el) => this.ds = el} value={this.state.products} itemTemplate={this.itemTemplate} rows={5}
+                        loader footer={footer} header="Click Load Button at Footer to Load More" />
                 </div>
             </div>
         );
@@ -148,7 +148,7 @@ import './DataScrollerDemo.css';
 
 const DataScrollerLoaderDemo = () => {
     const [products, setProducts] = useState([]);
-    const loadButton = useRef(null);
+    const ds = useRef(null);
     const productService = new ProductService();
 
     useEffect(() => {
@@ -174,13 +174,13 @@ const DataScrollerLoaderDemo = () => {
         );
     }
 
-    const footer = <Button ref={loadButton} type="text" icon="pi pi-plus" label="Load" />;
+    const footer = <Button type="text" icon="pi pi-plus" label="Load" onClick={() => ds.load()} />;
 
     return (
         <div className="datascroller-demo">
             <div className="card">
-                <DataScroller value={products} itemTemplate={itemTemplate} rows={5}
-                    loader={loadButton} footer={footer} header="Click Load Button at Footer to Load More" />
+                <DataScroller ref={ds} value={products} itemTemplate={itemTemplate} rows={5}
+                    loader footer={footer} header="Click Load Button at Footer to Load More" />
             </div>
         </div>
     );
@@ -199,7 +199,7 @@ import './DataScrollerDemo.css';
 
 const DataScrollerLoaderDemo = () => {
     const [products, setProducts] = useState([]);
-    const loadButton = useRef(null);
+    const ds = useRef(null);
     const productService = new ProductService();
 
     useEffect(() => {
@@ -225,13 +225,13 @@ const DataScrollerLoaderDemo = () => {
         );
     }
 
-    const footer = <Button ref={loadButton} type="text" icon="pi pi-plus" label="Load" />;
+    const footer = <Button type="text" icon="pi pi-plus" label="Load" onClick={() => ds.load()} />;
 
     return (
         <div className="datascroller-demo">
             <div className="card">
-                <DataScroller value={products} itemTemplate={itemTemplate} rows={5}
-                    loader={loadButton} footer={footer} header="Click Load Button at Footer to Load More" />
+                <DataScroller ref={ds} value={products} itemTemplate={itemTemplate} rows={5}
+                    loader footer={footer} header="Click Load Button at Footer to Load More" />
             </div>
         </div>
     );
