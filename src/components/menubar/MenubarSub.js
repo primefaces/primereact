@@ -41,6 +41,16 @@ export class MenubarSubComponent extends Component {
         this.onChildItemKeyDown = this.onChildItemKeyDown.bind(this);
     }
 
+    getElementRef(el) {
+        this.element = el;
+
+        if (this.props.forwardRef) {
+            return this.props.forwardRef(el);
+        }
+
+        return this.element;
+    }
+
     onItemMouseEnter(event, item) {
         if (item.disabled || this.props.mobileActive) {
             event.preventDefault();
@@ -339,7 +349,7 @@ export class MenubarSubComponent extends Component {
         const submenu = this.renderMenu();
 
         return (
-            <ul ref={el => {this.element = el; if(this.props.forwardRef) this.props.forwardRef(el)}} className={className} role={this.props.root ? 'menubar' : 'menu'}>
+            <ul ref={(el) => this.getElementRef(el)} className={className} role={this.props.root ? 'menubar' : 'menu'}>
                 {submenu}
             </ul>
         );

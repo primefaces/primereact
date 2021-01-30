@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import KeyFilter from "../keyfilter/KeyFilter";
-import {tip} from "../tooltip/Tooltip";
+import { tip } from "../tooltip/Tooltip";
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
 
@@ -32,6 +32,21 @@ class InputTextComponent extends Component {
         super(props);
         this.onInput = this.onInput.bind(this);
         this.onKeyPress = this.onKeyPress.bind(this);
+    }
+
+    getElementRef(el) {
+        this.element = el;
+
+        if (this.props.forwardRef) {
+            if (ObjectUtils.isFunction(this.props.forwardRef)) {
+                return this.props.forwardRef(el);
+            }
+            else {
+                return this.props.forwardRef;
+            }
+        }
+
+        return this.element;
     }
 
     onKeyPress(event) {
@@ -100,8 +115,8 @@ class InputTextComponent extends Component {
 
         let inputProps = ObjectUtils.findDiffKeys(this.props, InputTextComponent.defaultProps);
 
-        return <input ref={(el) => {this.element = el; if(this.props.forwardRef) this.props.forwardRef(el)}} {...inputProps} className={className} onInput={this.onInput} onKeyPress={this.onKeyPress}/>;
+        return <input ref={(el) => this.getElementRef(el)} {...inputProps} className={className} onInput={this.onInput} onKeyPress={this.onKeyPress} />;
     }
 }
 
-export const InputText = React.forwardRef((props, ref) => <InputTextComponent forwardRef={ref} {...props}/>);
+export const InputText = React.forwardRef((props, ref) => <InputTextComponent forwardRef={ref} {...props} />);

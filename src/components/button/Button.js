@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import { tip } from '../tooltip/Tooltip';
@@ -26,8 +26,23 @@ export class ButtonComponent extends Component {
         badgeClassName: PropTypes.string,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
-        forwardRef: PropTypes.func
+        forwardRef: PropTypes.any
     };
+
+    getElementRef(el) {
+        this.element = el;
+
+        if (this.props.forwardRef) {
+            if (ObjectUtils.isFunction(this.props.forwardRef)) {
+                return this.props.forwardRef(el);
+            }
+            else {
+                return this.props.forwardRef;
+            }
+        }
+
+        return this.element;
+    }
 
     componentDidMount() {
         if (this.props.tooltip) {
@@ -60,7 +75,7 @@ export class ButtonComponent extends Component {
     }
 
     renderIcon() {
-        if(this.props.icon) {
+        if (this.props.icon) {
             let className = classNames(this.props.icon, 'p-c', {
                 'p-button-icon-left': this.props.iconPos === 'left' && this.props.label,
                 'p-button-icon-right': this.props.iconPos === 'right' && this.props.label,
@@ -107,7 +122,7 @@ export class ButtonComponent extends Component {
         let buttonProps = ObjectUtils.findDiffKeys(this.props, ButtonComponent.defaultProps);
 
         return (
-            <button ref={(el) => {this.element = el; if(this.props.forwardRef) this.props.forwardRef(el)}} {...buttonProps} className={className}>
+            <button ref={(el) => this.getElementRef(el)} {...buttonProps} className={className}>
                 {icon}
                 {label}
                 {this.props.children}
@@ -118,4 +133,4 @@ export class ButtonComponent extends Component {
     }
 }
 
-export const Button = React.forwardRef((props, ref) => <ButtonComponent forwardRef={ref} {...props}/>);
+export const Button = React.forwardRef((props, ref) => <ButtonComponent forwardRef={ref} {...props} />);

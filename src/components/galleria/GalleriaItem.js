@@ -134,7 +134,7 @@ class GalleriaItemComponent extends Component {
             const content = this.props.caption(this.props.value[this.props.activeItemIndex]);
             return (
                 <div className="p-galleria-caption">
-                    { content }
+                    { content}
                 </div>
             );
         }
@@ -160,7 +160,7 @@ class GalleriaItemComponent extends Component {
         return (
             <li className={indicatorItemClassName} key={'p-galleria-indicator-' + index} tabIndex={0}
                 onClick={() => this.onIndicatorClick(index)} onMouseEnter={() => this.onIndicatorMouseEnter(index)} onKeyDown={(e) => this.onIndicatorKeyDown(e, index)}>
-                { indicator }
+                { indicator}
             </li>
         );
     }
@@ -176,7 +176,7 @@ class GalleriaItemComponent extends Component {
 
             return (
                 <ul className={indicatorsContentClassName}>
-                    { indicators }
+                    { indicators}
                 </ul>
             );
         }
@@ -192,20 +192,20 @@ class GalleriaItemComponent extends Component {
         const indicators = this.renderIndicators();
 
         return (
-            <div ref={(el) => {if(this.props.forwardRef) this.props.forwardRef(el)}} className="p-galleria-item-wrapper">
+            <div ref={(el) => this.props.forwardRef(el)} className="p-galleria-item-wrapper">
                 <div className="p-galleria-item-container">
-                    { backwardNavigator }
+                    {backwardNavigator}
                     <div className="p-galleria-item">
-                        { content }
+                        {content}
                     </div>
-                    { forwardNavigator }
-                    { caption }
+                    {forwardNavigator}
+                    {caption}
                 </div>
 
-                { indicators }
+                {indicators}
             </div>
         );
     }
 }
 
-export const GalleriaItem = React.forwardRef((props, ref) => <GalleriaItemComponent forwardRef={ref} {...props}/>);
+export const GalleriaItem = React.forwardRef((props, ref) => <GalleriaItemComponent forwardRef={ref} {...props} />);
