@@ -21,23 +21,23 @@ export class AppMenu extends Component {
     }
 
     getMenu() {
-        axios.get('showcase/menu/menu.json', { headers: { 'Cache-Control' : 'no-cache' } })
+        axios.get('showcase/menu/menu.json', { headers: { 'Cache-Control': 'no-cache' } })
             .then(res => res.data.data)
             .then(data => this.setState({ menu: data, filteredMenu: data }));
     }
 
     onSearchInputChange(event) {
-        if (!this.state.menu){
-            this.setState({ filteredMenu : [] });
+        if (!this.state.menu) {
+            this.setState({ filteredMenu: [] });
         }
         else if (!event.target.value) {
-            this.setState({ filteredMenu : this.state.menu });
+            this.setState({ filteredMenu: this.state.menu });
         }
         else if (this.state.menu) {
             const searchVal = event.target.value && event.target.value.toLowerCase();
             let filteredMenu = [];
             for (let item of this.state.menu) {
-                let copyItem = {...item};
+                let copyItem = { ...item };
                 if (this.findFilteredItems(copyItem, searchVal) || this.isFilterMatched(copyItem, searchVal)) {
                     filteredMenu.push(copyItem);
                 }
@@ -54,7 +54,7 @@ export class AppMenu extends Component {
                 let childItems = [...item.children];
                 item.children = [];
                 for (let childItem of childItems) {
-                    let copyChildItem = {...childItem};
+                    let copyChildItem = { ...childItem };
                     if (this.isFilterMatched(copyChildItem, searchVal)) {
                         matched = true;
                         item.children.push(copyChildItem);
@@ -102,8 +102,8 @@ export class AppMenu extends Component {
     }
 
     toggleSubmenu(event, name) {
-        let activeSubmenus = {...this.state.activeSubmenus};
-        activeSubmenus[name] = activeSubmenus[name] ? false: true;
+        let activeSubmenus = { ...this.state.activeSubmenus };
+        activeSubmenus[name] = activeSubmenus[name] ? false : true;
         this.setState({ activeSubmenus });
         event.preventDefault();
     }
@@ -121,7 +121,7 @@ export class AppMenu extends Component {
     }
 
     resetFilter() {
-        this.setState({ filteredMenu : this.state.menu }, () => {
+        this.setState({ filteredMenu: this.state.menu }, () => {
             this.searchInput.value = '';
             this.searchInput.focus();
         });
@@ -136,7 +136,7 @@ export class AppMenu extends Component {
         const content = (
             <>
                 {name}
-                {badge && <span className={classNames('layout-menu-badge p-tag p-tag-rounded p-ml-2 p-text-uppercase', { [`${badge}`]: true, 'p-tag-success': badge === 'new', 'p-tag-info': badge === 'updated' })}>{badge}</span> }
+                {badge && <span className={classNames('layout-menu-badge p-tag p-tag-rounded p-ml-2 p-text-uppercase', { [`${badge}`]: true, 'p-tag-success': badge === 'new', 'p-tag-info': badge === 'updated' })}>{badge}</span>}
             </>
         );
 
@@ -151,9 +151,11 @@ export class AppMenu extends Component {
     }
 
     renderCategorySubmenuItems(item, submenuKey) {
+        const cSubmenuRef = React.createRef();
+
         return (
-            <CSSTransition classNames="p-toggleable-content" timeout={{enter: 1000, exit: 450}} in={this.isSubmenuActive(item.name) || item.expanded} unmountOnExit>
-                <div className="p-toggleable-content">
+            <CSSTransition nodeRef={cSubmenuRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={this.isSubmenuActive(item.name) || item.expanded} unmountOnExit>
+                <div ref={cSubmenuRef} className="p-toggleable-content">
                     <ul role="menu">
                         {
                             item.children.map((item, index) => {
@@ -178,7 +180,7 @@ export class AppMenu extends Component {
                     {
                         menuitem.children.map((item, index) => {
                             const submenuKey = `${menuitemIndex}_${index}`;
-                            const link = this.renderLink(item, {onClick: (e) => this.toggleSubmenu(e, item.name)});
+                            const link = this.renderLink(item, { onClick: (e) => this.toggleSubmenu(e, item.name) });
 
                             return (
                                 <React.Fragment key={`menuitem_${submenuKey}`}>
@@ -206,7 +208,7 @@ export class AppMenu extends Component {
                                 <React.Fragment key={`category_${index}`}>
                                     <div className="menu-category">{menuitem.name}</div>
                                     <div className="menu-items">
-                                        { categoryItem }
+                                        {categoryItem}
                                     </div>
                                 </React.Fragment>
                             )
@@ -222,8 +224,8 @@ export class AppMenu extends Component {
     render() {
         const menuItems = this.renderCategoryItems();
         const showClearIcon = this.showSearchClearIcon();
-        const sidebarClassName = classNames('layout-sidebar', {'active': this.props.active});
-        const filterContentClassName = classNames('layout-sidebar-filter-content p-input-filled p-input-icon-left p-fluid', {'p-input-icon-right': showClearIcon});
+        const sidebarClassName = classNames('layout-sidebar', { 'active': this.props.active });
+        const filterContentClassName = classNames('layout-sidebar-filter-content p-input-filled p-input-icon-left p-fluid', { 'p-input-icon-right': showClearIcon });
 
         return (
             <div className={sidebarClassName} role="navigation">
@@ -236,7 +238,7 @@ export class AppMenu extends Component {
                 </div>
 
                 <div className="layout-menu" role="menubar">
-                    { menuItems }
+                    {menuItems}
                 </div>
             </div>
         );
