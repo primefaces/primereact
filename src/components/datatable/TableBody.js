@@ -493,7 +493,7 @@ export class TableBody extends Component {
 
             if(this.props.value && this.props.value.length) {
                 rows = [];
-                let startIndex = this.props.lazy ? 0 : first;
+                let startIndex = this.props.lazy ? 0 : (this.props.value.length > first ? first : 0);
                 let endIndex = this.props.virtualScroll ? (startIndex + rpp * 2) : (startIndex + rpp||this.props.value.length);
 
                 for(let i = startIndex; i < endIndex; i++) {
