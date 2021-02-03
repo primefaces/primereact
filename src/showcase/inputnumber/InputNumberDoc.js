@@ -749,6 +749,12 @@ Vertical
                             <td>Index of the element in tabbing order.</td>
                         </tr>
                         <tr>
+                            <td>autoFocus</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>When present, it specifies that the component should automatically get focus on load.</td>
+                        </tr>
+                        <tr>
                             <td>pattern</td>
                             <td>string</td>
                             <td>null</td>

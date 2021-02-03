@@ -43,6 +43,7 @@ export class InputNumber extends Component {
         style: null,
         className: null,
         inputId: null,
+        autoFocus: false,
         inputStyle: null,
         inputClassName: null,
         tooltip: null,
@@ -91,6 +92,7 @@ export class InputNumber extends Component {
         style: PropTypes.object,
         className: PropTypes.string,
         inputId: PropTypes.string,
+        autoFocus: PropTypes.bool,
         inputStyle: PropTypes.object,
         inputClassName: PropTypes.string,
         tooltip: PropTypes.string,
@@ -944,7 +946,7 @@ export class InputNumber extends Component {
             <InputText ref={(el) => this.inputEl = el} id={this.props.inputId} style={this.props.inputStyle} role="spinbutton"
                        className={className} defaultValue={valueToRender} type={this.props.type} size={this.props.size} tabIndex={this.props.tabIndex} inputMode={this.getInputMode()}
                        maxLength={this.props.maxlength} disabled={this.props.disabled} required={this.props.required} pattern={this.props.pattern}
-                       placeholder={this.props.placeholder} readOnly={this.props.readOnly} name={this.props.name}
+                       placeholder={this.props.placeholder} readOnly={this.props.readOnly} name={this.props.name} autoFocus={this.props.autoFocus}
                        onKeyDown={this.onInputKeyDown} onKeyPress={this.onInputKeyPress} onInput={this.onInput} onClick={this.onInputClick}
                        onBlur={this.onInputBlur} onFocus={this.onInputFocus} onPaste={this.onPaste} min={this.props.min} max={this.props.max}
                        aria-valuemin={this.props.min} aria-valuemax={this.props.max} aria-valuenow={this.props.value} aria-labelledby={this.props.ariaLabelledBy} />

@@ -37,6 +37,7 @@ interface InputNumberProps {
     style?: object;
     className?: string;
     inputId?: string;
+    autoFocus?: boolean;
     inputStyle?: object;
     inputClassName?: string;
     tooltip?: string;
