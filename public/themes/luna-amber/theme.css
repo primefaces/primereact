@@ -27,7 +27,7 @@
 .p-disabled, .p-component:disabled {
   opacity: 0.5; }
 
-.p-invalid {
+.p-error {
   color: #e57373; }
 
 .p-text-secondary {
@@ -282,7 +282,7 @@
     width: 2.357rem;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px; }
-  .p-cascadeselect.p-invalid {
+  .p-cascadeselect.p-invalid.p-component {
     border-color: #e57373; }
 
 .p-cascadeselect-panel {
