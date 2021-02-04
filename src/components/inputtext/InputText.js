@@ -49,6 +49,10 @@ class InputTextComponent extends Component {
         return this.element;
     }
 
+    isFilled() {
+        return (this.props.value != null && this.props.value.toString().length > 0) || (this.props.defaultValue != null && this.props.defaultValue.toString().length > 0)
+    }
+
     onKeyPress(event) {
         if (this.props.onKeyPress) {
             this.props.onKeyPress(event);
@@ -108,10 +112,10 @@ class InputTextComponent extends Component {
     }
 
     render() {
-        const className = classNames('p-inputtext p-component', this.props.className, {
+        const className = classNames('p-inputtext p-component', {
             'p-disabled': this.props.disabled,
-            'p-filled': (this.props.value != null && this.props.value.toString().length > 0) || (this.props.defaultValue != null && this.props.defaultValue.toString().length > 0)
-        });
+            'p-filled': this.isFilled()
+        }, this.props.className);
 
         let inputProps = ObjectUtils.findDiffKeys(this.props, InputTextComponent.defaultProps);
 
