@@ -21,6 +21,7 @@ import { InputMask } from 'primereact/inputmask';
 import { InputNumber } from 'primereact/inputnumber';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { MultiSelect } from 'primereact/multiselect';
+import { CascadeSelect } from 'primereact/cascadeselect';
 import { CountryService } from '../service/CountryService';
 
 export class InvalidDemo extends Component {
@@ -209,6 +210,7 @@ import { InputMask } from 'primereact/inputmask';
 import { InputNumber } from 'primereact/inputnumber';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { MultiSelect } from 'primereact/multiselect';
+import { CascadeSelect } from 'primereact/cascadeselect';
 import { CountryService } from '../service/CountryService';
 
 const InvalidDemo = () => {
@@ -388,6 +390,7 @@ import { InputMask } from 'primereact/inputmask';
 import { InputNumber } from 'primereact/inputnumber';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { MultiSelect } from 'primereact/multiselect';
+import { CascadeSelect } from 'primereact/cascadeselect';
 import { CountryService } from '../service/CountryService';
 
 const InvalidDemo = () => {
