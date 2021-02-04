@@ -65,8 +65,8 @@ export class AutoCompleteDemo extends Component {
                         <h5>Basic</h5>
                         <AutoComplete value={this.state.selectedCountry1} suggestions={this.state.filteredCountries} completeMethod={this.searchCountry} field="name" onChange={(e) => this.setState({ selectedCountry1: e.value })} />
 
-                        <h5>Dropdown and Templating</h5>
-                        <AutoComplete value={this.state.selectedCountry2} suggestions={this.state.filteredCountries} completeMethod={this.searchCountry} field="name" dropdown itemTemplate={this.itemTemplate} onChange={(e) => this.setState({ selectedCountry2: e.value })} />
+                        <h5>Dropdown, Templating and Force Selection</h5>
+                        <AutoComplete value={this.state.selectedCountry2} suggestions={this.state.filteredCountries} completeMethod={this.searchCountry} field="name" dropdown forceSelection itemTemplate={this.itemTemplate} onChange={(e) => this.setState({ selectedCountry2: e.value })} />
 
                         <h5>Multiple</h5>
                         <span className="p-fluid">

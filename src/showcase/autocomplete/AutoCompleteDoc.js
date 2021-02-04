@@ -68,8 +68,8 @@ export class AutoCompleteDemo extends Component {
                 <h5>Basic</h5>
                 <AutoComplete value={this.state.selectedCountry1} suggestions={this.state.filteredCountries} completeMethod={this.searchCountry} field="name" onChange={(e) => this.setState({ selectedCountry1: e.value })} />
 
-                <h5>Dropdown and Templating</h5>
-                <AutoComplete value={this.state.selectedCountry2} suggestions={this.state.filteredCountries} completeMethod={this.searchCountry} field="name" dropdown itemTemplate={this.itemTemplate} onChange={(e) => this.setState({ selectedCountry2: e.value })} />
+                <h5>Dropdown, Templating and Force Selection</h5>
+                <AutoComplete value={this.state.selectedCountry2} suggestions={this.state.filteredCountries} completeMethod={this.searchCountry} field="name" dropdown forceSelection itemTemplate={this.itemTemplate} onChange={(e) => this.setState({ selectedCountry2: e.value })} />
 
                 <h5>Multiple</h5>
                 <span className="p-fluid">
@@ -130,8 +130,8 @@ const AutoCompleteDemo = () => {
             <h5>Basic</h5>
             <AutoComplete value={selectedCountry1} suggestions={filteredCountries} completeMethod={searchCountry} field="name" onChange={(e) => setSelectedCountry1(e.value)} />
 
-            <h5>Dropdown and Templating</h5>
-            <AutoComplete value={selectedCountry2} suggestions={filteredCountries} completeMethod={searchCountry} field="name" dropdown itemTemplate={itemTemplate} onChange={(e) => setSelectedCountry2(e.value)} />
+            <h5>Dropdown, Templating and Force Selection</h5>
+            <AutoComplete value={selectedCountry2} suggestions={filteredCountries} completeMethod={searchCountry} field="name" dropdown forceSelection itemTemplate={itemTemplate} onChange={(e) => setSelectedCountry2(e.value)} />
 
             <h5>Multiple</h5>
             <span className="p-fluid">
@@ -191,8 +191,8 @@ const AutoCompleteDemo = () => {
             <h5>Basic</h5>
             <AutoComplete value={selectedCountry1} suggestions={filteredCountries} completeMethod={searchCountry} field="name" onChange={(e) => setSelectedCountry1(e.value)} />
 
-            <h5>Dropdown and Templating</h5>
-            <AutoComplete value={selectedCountry2} suggestions={filteredCountries} completeMethod={searchCountry} field="name" dropdown itemTemplate={itemTemplate} onChange={(e) => setSelectedCountry2(e.value)} />
+            <h5>Dropdown, Templating and Force Selection</h5>
+            <AutoComplete value={selectedCountry2} suggestions={filteredCountries} completeMethod={searchCountry} field="name" dropdown forceSelection itemTemplate={itemTemplate} onChange={(e) => setSelectedCountry2(e.value)} />
 
             <h5>Multiple</h5>
             <span className="p-fluid">
@@ -280,6 +280,15 @@ render() {
 `}
 </CodeHighlight>
 
+                        <h5>Force Selection</h5>
+                        <p>ForceSelection mode validates the manual input to check whether it also exists in the suggestions list, if not the input value is cleared
+                        to make sure the value passed to the model is always one of the suggestions. Simply enable <i>forceSelection</i> to enforce that input is always from the suggestion list.</p>
+<CodeHighlight>
+{`
+<AutoComplete forceSelection value={selectedCountry} suggestions={filteredCountries} completeMethod={searchCountry} onChange={(e) => setSelectedCountry(e.value)} />
+`}
+</CodeHighlight>
+
                         <h5>Templating</h5>
                         <p>Custom content can be displayed using <i>itemTemplate</i> property that references a function or JSXElement or string which gets
                         the suggestion option and returns an element. Similarly <i>selectedItemTemplate</i> property is available
@@ -346,6 +355,13 @@ itemTemplate(item) {
                                         <td>any</td>
                                         <td>null</td>
                                         <td>Field of a suggested object to resolve and display.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>forceSelection</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>When present, autocomplete clears the manual input if it does not match of the suggestions to force only
+                                        accepting values from the suggestions.</td>
                                     </tr>
                                     <tr>
                                         <td>scrollHeight</td>
