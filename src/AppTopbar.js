@@ -3,6 +3,7 @@ import { PropTypes } from 'prop-types'
 import { Link } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 import { Tooltip } from './components/tooltip/Tooltip';
+import { Badge } from './components/badge/Badge';
 import { VersionService } from './showcase/service/VersionService';
 
 export class AppTopbar extends Component {
@@ -171,7 +172,12 @@ export class AppTopbar extends Component {
                     </li>
 
                     <li role="none" className="topbar-submenu">
-                        <button type="button" role="menuitem" onClick={(e) => this.toggleMenu(e, 0)} aria-haspopup className="p-link">Themes</button>
+                        <button type="button" role="menuitem" onClick={(e) => this.toggleMenu(e, 0)} aria-haspopup className="p-link">
+                            <span className="p-overlay-badge">
+                                Themes
+                                <Badge severity="danger"></Badge>
+                            </span>
+                        </button>
                         <CSSTransition nodeRef={this.themesOverlayRef} classNames="p-connected-overlay" timeout={{ enter: 120, exit: 100 }} in={this.state.activeMenuIndex === 0}
                             unmountOnExit onEntered={this.onMenuEnter}>
                             <ul ref={this.themesOverlayRef} role="menu" aria-label="Themes">
