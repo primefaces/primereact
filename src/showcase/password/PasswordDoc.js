@@ -15,14 +15,51 @@ export class PasswordDoc extends Component {
                 content: `
 import React, {Component} from 'react';
 import { Password } from 'primereact/password';
+import { Divider } from 'primereact/divider';
+import './PasswordDemo.css';
 
 export class PasswordDemo extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            value1: null,
+            value2: null,
+            value3: null,
+            value4: null
+        };
+    }
+
     render() {
+        const header = <h6>Pick a password</h6>;
+        const footer = (
+            <>
+                <Divider />
+                <p className="p-mt-2">Suggestions</p>
+                <ul className="p-pl-2 p-ml-2 p-mt-0" style={{lineHeight: '1.5'}}>
+                    <li>At least one lowercase</li>
+                    <li>At least one uppercase</li>
+                    <li>At least one numeric</li>
+                    <li>Minimum 8 characters</li>
+                </ul>
+            </>
+        );
+
         return (
             <div>
                 <div className="card">
-                    <Password />
+                    <h5>Basic</h5>
+                    <Password value={this.state.value1} onChange={(e) => this.setState({ value1: e.target.value })} feedback={false} />
+
+                    <h5>Password Meter</h5>
+                    <Password value={this.state.value2} onChange={(e) => this.setState({ value2: e.target.value })} />
+
+                    <h5>Show Password</h5>
+                    <Password value={this.state.value3} onChange={(e) => this.setState({ value3: e.target.value })} toggleMask />
+
+                    <h5>Templating</h5>
+                    <Password value={this.state.value4} onChange={(e) => this.setState({ value4: e.target.value })} header={header} footer={footer} />
                 </div>
             </div>
         );
@@ -33,14 +70,45 @@ export class PasswordDemo extends Component {
             'hooks': {
                 tabName: 'Hooks Source',
                 content: `
-import React from 'react';
+import React, { useState } from 'react';
 import { Password } from 'primereact/password';
+import { Divider } from 'primereact/divider';
+import './PasswordDemo.css';
 
 const PasswordDemo = () => {
+    const [value1, setValue1] = useState(null);
+    const [value2, setValue2] = useState(null);
+    const [value3, setValue3] = useState(null);
+    const [value4, setValue4] = useState(null);
+
+    const header = <h6>Pick a password</h6>;
+    const footer = (
+        <>
+            <Divider />
+            <p className="p-mt-2">Suggestions</p>
+            <ul className="p-pl-2 p-ml-2 p-mt-0" style={{lineHeight: '1.5'}}>
+                <li>At least one lowercase</li>
+                <li>At least one uppercase</li>
+                <li>At least one numeric</li>
+                <li>Minimum 8 characters</li>
+            </ul>
+        </>
+    );
+
     return (
         <div>
             <div className="card">
-                <Password />
+                <h5>Basic</h5>
+                <Password value={value1} onChange={(e) => setValue1(e.target.value)} feedback={false} />
+
+                <h5>Password Meter</h5>
+                <Password value={value2} onChange={(e) => setValue2(e.target.value)} />
+
+                <h5>Show Password</h5>
+                <Password value={value3} onChange={(e) => setValue3(e.target.value)} toggleMask />
+
+                <h5>Templating</h5>
+                <Password value={value4} onChange={(e) => setValue4(e.target.value)} header={header} footer={footer} />
             </div>
         </div>
     );
@@ -52,12 +120,43 @@ const PasswordDemo = () => {
                 content: `
 import React from 'react';
 import { Password } from 'primereact/password';
+import { Divider } from 'primereact/divider';
+import './PasswordDemo.css';
 
 const PasswordDemo = () => {
+    const [value1, setValue1] = useState(null);
+    const [value2, setValue2] = useState(null);
+    const [value3, setValue3] = useState(null);
+    const [value4, setValue4] = useState(null);
+
+    const header = <h6>Pick a password</h6>;
+    const footer = (
+        <>
+            <Divider />
+            <p className="p-mt-2">Suggestions</p>
+            <ul className="p-pl-2 p-ml-2 p-mt-0" style={{lineHeight: '1.5'}}>
+                <li>At least one lowercase</li>
+                <li>At least one uppercase</li>
+                <li>At least one numeric</li>
+                <li>Minimum 8 characters</li>
+            </ul>
+        </>
+    );
+
     return (
         <div>
             <div className="card">
-                <Password />
+                <h5>Basic</h5>
+                <Password value={value1} onChange={(e) => setValue1(e.target.value)} feedback={false} />
+
+                <h5>Password Meter</h5>
+                <Password value={value2} onChange={(e) => setValue2(e.target.value)} />
+
+                <h5>Show Password</h5>
+                <Password value={value3} onChange={(e) => setValue3(e.target.value)} toggleMask />
+
+                <h5>Templating</h5>
+                <Password value={value4} onChange={(e) => setValue4(e.target.value)} header={header} footer={footer} />
             </div>
         </div>
     );
@@ -67,11 +166,13 @@ const PasswordDemo = () => {
         }
 
         this.extFiles = {
-            'index.css': `
-.p-password-panel .p-password-meter {
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAAAoAgMAAABhr+t0AAAADFBMVEXx8fHjHD39uB5KpWRhxht7AAAAJUlEQVR4AWMYDGAUhCKBgAFSNqpsFS5AR2Wjyv4TAz7QVNmoMgB5UksJhzldcwAAAABJRU5ErkJggg==);
+            'src/demo/PasswordDemo.css': {
+                content: `
+.p-password input {
+    width: 15rem;
 }
-            `
+                `
+            }
         }
     }
 
@@ -120,6 +221,12 @@ import {Password} from 'primereact/password';
                                         <td>Unique identifier of the element.</td>
                                     </tr>
                                     <tr>
+                                        <td>value</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Value of the component.</td>
+                                    </tr>
+                                    <tr>
                                         <td>promptLabel</td>
                                         <td>string</td>
                                         <td>Please enter a password</td>
@@ -162,6 +269,42 @@ import {Password} from 'primereact/password';
                                         <td>Whether to show the strength indicator or not.</td>
                                     </tr>
                                     <tr>
+                                        <td>toggleMask</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>Whether to show an icon to display the password as plain text.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>appendTo</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Id of the element or "body" for document where the overlay should be appended to.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>header</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Template of panel header if "feedback" is enabled.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>content</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Template of panel content if "feedback" is enabled.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>footer</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Template of panel footer if "feedback" is enabled.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>icon</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Template of mask icon if "toggleMask" is enabled.</td>
+                                    </tr>
+                                    <tr>
                                         <td>tooltip</td>
                                         <td>any</td>
                                         <td>null</td>
@@ -172,6 +315,30 @@ import {Password} from 'primereact/password';
                                         <td>object</td>
                                         <td>null</td>
                                         <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>style</td>
+                                        <td>object</td>
+                                        <td>null</td>
+                                        <td>Inline style of the element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>className</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Style class of the element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>inputStyle</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Inline style of the input field.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>inputClassName</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Style class of the input field.</td>
                                     </tr>
                                     <tr>
                                         <td>panelClassName</td>
@@ -200,6 +367,14 @@ import {Password} from 'primereact/password';
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <tr>
+                                        <td>p-password</td>
+                                        <td>Container element</td>
+                                    </tr>
+                                    <tr>
+                                        <td>p-password-input</td>
+                                        <td>Input Element</td>
+                                    </tr>
                                     <tr>
                                         <td>p-password-panel</td>
                                         <td>Container of password panel</td>
