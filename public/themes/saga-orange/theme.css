@@ -892,6 +892,9 @@
   .p-input-filled .p-multiselect:not(.p-disabled).p-focus {
     background-color: #ffffff; }
 
+.p-password.p-invalid.p-component > .p-inputtext {
+  border-color: #f44336; }
+
 .p-password-panel {
   padding: 1rem;
   background: #ffffff;
