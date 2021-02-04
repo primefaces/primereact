@@ -19,6 +19,7 @@ export class AutoComplete extends Component {
         type: 'text',
         suggestions: null,
         field: null,
+        forceSelection: false,
         scrollHeight: '200px',
         dropdown: false,
         dropdownMode: 'blank',
@@ -68,6 +69,7 @@ export class AutoComplete extends Component {
         type: PropTypes.string,
         suggestions: PropTypes.array,
         field: PropTypes.string,
+        forceSelection: PropTypes.bool,
         scrollHeight: PropTypes.string,
         dropdown: PropTypes.bool,
         dropdownMode: PropTypes.string,
@@ -186,7 +188,7 @@ export class AutoComplete extends Component {
         }
     }
 
-    selectItem(event, option) {
+    selectItem(event, option, preventInputFocus) {
         if (this.props.multiple) {
             this.inputEl.value = '';
             if (!this.isSelected(option)) {
@@ -206,8 +208,10 @@ export class AutoComplete extends Component {
             })
         }
 
-        this.inputEl.focus();
-        this.hideOverlay();
+        if (!preventInputFocus) {
+            this.inputEl.focus();
+            this.hideOverlay();
+        }
     }
 
     updateModel(event, value) {
@@ -420,10 +424,39 @@ export class AutoComplete extends Component {
         });
     }
 
+    forceItemSelection(event) {
+        let valid = false;
+        let inputValue = event.target.value.trim();
+
+        if (this.props.suggestions)  {
+            for (let item of this.props.suggestions) {
+                let itemValue = this.props.field ? ObjectUtils.resolveFieldData(item, this.props.field) : item;
+                if (itemValue && inputValue === itemValue.trim()) {
+                    valid = true;
+                    this.selectItem(event, item, true);
+                    break;
+                }
+            }
+        }
+
+        if (!valid) {
+            this.inputEl.value = '';
+            this.updateModel(event, null);
+
+            if (this.props.onClear) {
+                this.props.onClear(event);
+            }
+        }
+    }
+
     onInputBlur(event) {
         event.persist();
 
         this.setState({ focused: false }, () => {
+            if (this.props.forceSelection) {
+                this.forceItemSelection(event);
+            }
+
             if (this.props.onBlur) {
                 this.props.onBlur(event);
             }

@@ -8,6 +8,7 @@ interface AutoCompleteProps {
     type?: string;
     suggestions?: any[];
     field?: string;
+    forceSelection?: boolean;
     scrollHeight?: string;
     dropdown?: boolean;
     dropdownMode?: string;
