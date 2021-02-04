@@ -132,6 +132,45 @@ const items = [
                     </table>
                 </div>
 
+                <h3>Template</h3>
+                <p>Used to create custom menuitem elements.</p>
+<CodeHighlight lang="js">
+    {`
+const items =
+[
+    {
+        label: 'New',
+        template: (item, options) => {
+            return (
+                /* custom element */
+                <a className={options.className} target={item.target} onClick={options.onClick}>
+                    <span className={classNames(options.iconClassName, 'pi pi-home')}></span>;
+                    <span className={options.labelClassName}>{item.label}</span>;
+                </a>
+            );
+        }
+    }
+];
+
+`}
+</CodeHighlight>
+
+<CodeHighlight lang="js">
+    {`
+template: (item, options) => {
+    // item: Current item object.
+    // options.onClick: Click event for the default element.
+    // options.className: Style class of the default element.
+    // options.labelClassName: Style class of the default label element.
+    // options.iconClassName: Style class of the default icon element.
+    // options.element: Default element created by the component.
+    // options.props: component props.
+
+    // Note: Extra options may come according to the components.
+}
+`}
+</CodeHighlight>
+
                 <h3>Command</h3>
                 <p>The function to invoke when an item is clicked is defined using the command property.</p>
 <CodeHighlight lang="js">
