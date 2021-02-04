@@ -364,6 +364,12 @@ itemTemplate(item) {
                                         accepting values from the suggestions.</td>
                                     </tr>
                                     <tr>
+                                        <td>autoHighlight</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>When enabled, highlights the first item in the list by default.</td>
+                                    </tr>
+                                    <tr>
                                         <td>scrollHeight</td>
                                         <td>string</td>
                                         <td>200px</td>
