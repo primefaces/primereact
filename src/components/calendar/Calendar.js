@@ -171,6 +171,9 @@ export class Calendar extends Component {
 
             let viewDate = this.props.viewDate && this.isValidDate(this.props.viewDate) ?
                 this.props.viewDate : (propValue && this.isValidDate(propValue) ? propValue : new Date());
+
+            this.validateDate(viewDate);
+
             this.state = {
                 ...this.state,
                 viewDate
@@ -245,6 +248,8 @@ export class Calendar extends Component {
             if ((!prevPropValue && propValue) || (propValue && propValue instanceof Date && propValue.getTime() !== prevPropValue.getTime())) {
                 let viewDate = this.props.viewDate && this.isValidDate(this.props.viewDate) ?
                     this.props.viewDate : (propValue && this.isValidDate(propValue) ? propValue : new Date());
+
+                this.validateDate(viewDate);
 
                 this.setState({
                     viewDate
@@ -1045,6 +1050,33 @@ export class Calendar extends Component {
         return valid;
     }
 
+    validateDate(value) {
+        if (this.props.yearNavigator) {
+            let viewYear = value.getFullYear();
+
+            const minRangeYear = this.props.yearRange ? parseInt(this.props.yearRange.split(':')[0], 10) : null;
+            const maxRangeYear = this.props.yearRange ? parseInt(this.props.yearRange.split(':')[1], 10) : null;
+            const minYear = this.props.minDate && minRangeYear != null ? Math.max(this.props.minDate.getFullYear(), minRangeYear) : this.props.minDate || minRangeYear;
+            const maxYear = this.props.maxDate && maxRangeYear != null ? Math.min(this.props.maxDate.getFullYear(), maxRangeYear) : this.props.maxDate || maxRangeYear;
+
+            if (minYear && minYear > viewYear) {
+                viewYear = minYear;
+            }
+            if (maxYear && maxYear < viewYear) {
+                viewYear = maxYear
+            }
+
+            value.setFullYear(viewYear);
+        }
+
+        if (this.props.monthNavigator && this.props.view !== 'month') {
+            let viewMonth = value.getMonth();
+            let viewMonthWithMinMax = parseInt((this.isInMinYear(value) && Math.max(this.props.minDate.getMonth(), viewMonth).toString()) || (this.isInMaxYear(value) && Math.min(this.props.maxDate.getMonth(), viewMonth).toString()) || viewMonth);
+
+            value.setMonth(viewMonthWithMinMax);
+        }
+    }
+
     updateTime(event, hour, minute, second, millisecond) {
         let newDateTime = (this.props.value && this.props.value instanceof Date) ? new Date(this.props.value) : new Date();
 
@@ -1066,25 +1098,7 @@ export class Calendar extends Component {
     }
 
     updateViewDate(event, value) {
-        if (this.props.yearNavigator) {
-            let viewYear = value.getFullYear();
-
-            if (this.props.minDate && this.props.minDate.getFullYear() > viewYear) {
-                viewYear = this.props.minDate.getFullYear();
-            }
-            if (this.props.maxDate && this.props.maxDate.getFullYear() < viewYear) {
-                viewYear = this.props.maxDate.getFullYear();
-            }
-
-            value.setFullYear(viewYear);
-        }
-
-        if (this.props.monthNavigator && this.props.view !== 'month') {
-            let viewMonth = value.getMonth();
-            let viewMonthWithMinMax = parseInt((this.isInMinYear(value) && Math.max(this.props.minDate.getMonth(), viewMonth).toString()) || (this.isInMaxYear(value) && Math.min(this.props.maxDate.getMonth(), viewMonth).toString()) || viewMonth);
-
-            value.setMonth(viewMonthWithMinMax);
-        }
+        this.validateDate(value);
 
         if (this.props.onViewDateChange) {
             this.props.onViewDateChange({
