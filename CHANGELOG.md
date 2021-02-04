@@ -1,5 +1,30 @@
 # Changelog
 
+## [6.0.2](https://github.com/primefaces/primereact/tree/6.0.2) (2021-02-04)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/6.0.1...6.0.2)
+
+**Implemented New Features and Enhancements:**
+
+- Add autoHighlight property to AutoComplete [\#1801](https://github.com/primefaces/primereact/issues/1801)
+- Add forceSelection to AutoComplete [\#1800](https://github.com/primefaces/primereact/issues/1800)
+- Improve Password implementation [\#1799](https://github.com/primefaces/primereact/issues/1799)
+- InplaceDisplay has no ariaLabel property [\#1796](https://github.com/primefaces/primereact/issues/1796)
+- Add autoFocus property to InputNumber [\#1794](https://github.com/primefaces/primereact/issues/1794)
+- Change the type of loader property on DataScroller [\#1791](https://github.com/primefaces/primereact/issues/1791)
+- Improve PrimeReact components for React.StrictMode [\#1790](https://github.com/primefaces/primereact/issues/1790)
+- Improve rowEditor buttons on DataTable with editMode="row" [\#1788](https://github.com/primefaces/primereact/issues/1788)
+
+**Fixed bugs:**
+
+- AutoComplete in FireFox does not pass focus on Tab [\#1798](https://github.com/primefaces/primereact/issues/1798)
+- Fullcalendar Week View Missing Vertical Lines [\#1797](https://github.com/primefaces/primereact/issues/1797)
+- SplitterPanel is not exported in TypeScript [\#1795](https://github.com/primefaces/primereact/issues/1795)
+- Navigator Calendar taking current year when yearRange property is less than current year [\#1793](https://github.com/primefaces/primereact/issues/1793)
+- Datatable doesn't change page when the last element on a page is removed. [\#1792](https://github.com/primefaces/primereact/issues/1792)
+- DataTable ContextMenu Third Reposition [\#1789](https://github.com/primefaces/primereact/issues/1789)
+- TreeTable tabbing between editable cells not working [\#1617](https://github.com/primefaces/primereact/issues/1617)
+
 ## [6.0.1](https://github.com/primefaces/primereact/tree/6.0.1) (2021-01-28)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/6.0.0...6.0.1)
