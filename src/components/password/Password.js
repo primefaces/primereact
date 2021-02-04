@@ -114,6 +114,38 @@ export class Password extends Component {
         return this.state.unmasked ? 'text' : 'password';
     }
 
+    updateLabels() {
+        if (this.state.meter) {
+            let label = null;
+            switch (this.state.meter.strength) {
+                case 'weak':
+                    label = this.weakLabel();
+                    break;
+
+                case 'medium':
+                    label = this.mediumLabel();
+                    break;
+
+                case 'strong':
+                    label = this.strongLabel();
+                    break;
+
+                default:
+                    break;
+            }
+
+            if (label && this.state.infoText !== label) {
+                this.setState({ infoText: label });
+            }
+        }
+        else {
+            const promptLabel = this.promptLabel();
+            if (this.state.infoText !== promptLabel) {
+                this.setState({ infoText: promptLabel });
+            }
+        }
+    }
+
     onMaskToggle() {
         this.setState((prevState) => {
             return {
@@ -123,6 +155,7 @@ export class Password extends Component {
     }
 
     showOverlay() {
+        this.updateLabels();
         this.setState({ overlayVisible: true });
     }
 
