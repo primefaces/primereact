@@ -20,6 +20,7 @@ export class AutoComplete extends Component {
         suggestions: null,
         field: null,
         forceSelection: false,
+        autoHighlight: false,
         scrollHeight: '200px',
         dropdown: false,
         dropdownMode: 'blank',
@@ -70,6 +71,7 @@ export class AutoComplete extends Component {
         suggestions: PropTypes.array,
         field: PropTypes.string,
         forceSelection: PropTypes.bool,
+        autoHighlight: PropTypes.bool,
         scrollHeight: PropTypes.string,
         dropdown: PropTypes.bool,
         dropdownMode: PropTypes.string,
@@ -131,6 +133,7 @@ export class AutoComplete extends Component {
         this.onMultiInputBlur = this.onMultiInputBlur.bind(this);
         this.selectItem = this.selectItem.bind(this);
         this.onOverlayEnter = this.onOverlayEnter.bind(this);
+        this.onOverlayEntering = this.onOverlayEntering.bind(this);
         this.onOverlayEntered = this.onOverlayEntered.bind(this);
         this.onOverlayExit = this.onOverlayExit.bind(this);
 
@@ -268,6 +271,12 @@ export class AutoComplete extends Component {
     onOverlayEnter() {
         this.overlayRef.current.style.zIndex = String(DomHandler.generateZIndex());
         this.alignOverlay();
+    }
+
+    onOverlayEntering() {
+        if (this.props.autoHighlight && this.props.suggestions && this.props.suggestions.length) {
+            DomHandler.addClass(this.overlayRef.current.firstChild.firstChild, 'p-highlight');
+        }
     }
 
     onOverlayEntered() {
@@ -739,7 +748,7 @@ export class AutoComplete extends Component {
                 <AutoCompletePanel ref={this.overlayRef} suggestions={this.props.suggestions} field={this.props.field} listId={this.listId}
                     appendTo={this.props.appendTo} itemTemplate={this.props.itemTemplate} onItemClick={this.selectItem} ariaSelected={this.ariaSelected}
                     panelStyle={this.props.panelStyle} panelClassName={this.props.panelClassName}
-                    in={this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} />
+                    in={this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntering={this.onOverlayEntering} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} />
             </span>
         );
     }
