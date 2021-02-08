@@ -14,14 +14,15 @@ export class DataTableLazyDemo extends Component {
 
         this.state = {
             loading: false,
-            first: 0,
             totalRecords: 0,
             customers: null,
             selectedRepresentative: null,
-            sortEvent: {},
-            filters: {},
-            sortField: '',
-            sortOrder: null,
+            lazyParams: {
+                first: 0,
+                filters: {},
+                sortField: '',
+                sortOrder: null
+            }
         };
 
         this.representatives = [
@@ -37,99 +38,60 @@ export class DataTableLazyDemo extends Component {
             { name: "XuXue Feng", image: 'xuxuefeng.png' }
         ];
 
-        this.customerService = new CustomerService();
+        this.loadLazyData = this.loadLazyData.bind(this);
         this.onPage = this.onPage.bind(this);
         this.onSort = this.onSort.bind(this);
         this.onFilter = this.onFilter.bind(this);
         this.onRepresentativesChange = this.onRepresentativesChange.bind(this);
+
+        this.customerService = new CustomerService();
+        this.loadLazyTimeout = null;
     }
 
-    componentDidMount() {
+    loadLazyData() {
         this.setState({ loading: true });
 
-        setTimeout(() => {
-            const params = {
-                first: 0,
-                rows: 10,
-                page: 1,
-                pageCount: 20
-            };
+        if (this.loadLazyTimeout) {
+            clearTimeout(this.loadLazyTimeout);
+        }
 
-            this.customerService.getCustomers({ lazyEvent: JSON.stringify(params) }).then(data => {
+        //imitate delay of a backend call
+        this.loadLazyTimeout = setTimeout(() => {
+            this.customerService.getCustomers({lazyEvent: JSON.stringify(this.state.lazyParams)}).then(data => {
                 this.setState({
                     totalRecords: data.totalRecords,
                     customers: data.customers,
                     loading: false
                 });
             });
-        }, 500);
+        }, Math.random() * 1000 + 250);
     }
 
     onPage(event) {
-        this.setState({ loading: true });
-
-        //imitate delay of a backend call
-        setTimeout(() => {
-            const params = {
-                ...event,
-                ...this.state.sortEvent,
-                filters: this.state.filters
-            };
-
-            this.customerService.getCustomers({ lazyEvent: JSON.stringify(params) }).then(res => {
-                this.setState({
-                    first: event.first,
-                    customers: res.customers,
-                    totalRecords: res.totalRecords,
-                    loading: false
-                })
-            })
-        }, 500);
+        let lazyParams = { ...this.state.lazyParams, ...event };
+        this.setState({ lazyParams }, this.loadLazyData);
     }
 
     onSort(event) {
-        this.setState({ loading: true });
-
-        //imitate delay of a backend call
-        setTimeout(() => {
-            const params = {
-                ...event,
-                rows: 10,
-                first: 0,
-                filters: this.state.filters
-            };
-
-            this.customerService.getCustomers({ lazyEvent: JSON.stringify(params) }).then(res => {
-                this.setState({
-                    first: 0,
-                    customers: res.customers,
-                    totalRecords: res.totalRecords,
-                    loading: false,
-                    sortEvent: event,
-                    sortField: event.sortField,
-                    sortOrder: event.sortOrder
-                })
-            })
-        }, 500);
+        let lazyParams = { ...this.state.lazyParams, ...event };
+        this.setState({ lazyParams }, this.loadLazyData);
     }
 
     onFilter(event) {
-        const params = {
-            ...event,
-            rows: 10,
-            first: 0,
-            ...this.state.sortEvent
-        };
+        let lazyParams = { ...this.state.lazyParams, ...event };
+        lazyParams['first'] = 0;
+        this.setState({ lazyParams }, this.loadLazyData);
+    }
 
-        this.customerService.getCustomers({ lazyEvent: JSON.stringify(params) }).then(res => {
-            this.setState({
+    componentDidMount() {
+        this.setState({
+            lazyParams: {
                 first: 0,
-                customers: res.customers,
-                totalRecords: res.totalRecords,
-                loading: false,
-                filters: event.filters
-            })
-        })
+                rows: 10,
+                page: 1,
+                pageCount: 20
+            }
+        }, this.loadLazyData);
     }
 
     representativeBodyTemplate(rowData) {
@@ -180,11 +142,13 @@ export class DataTableLazyDemo extends Component {
 
                 <div className="content-section implementation">
                     <div className="card">
-                        <DataTable ref={(el) => this.dt = el} value={this.state.customers} paginator rows={10} totalRecords={this.state.totalRecords}
-                            lazy first={this.state.first} onPage={this.onPage} onSort={this.onSort} sortField={this.state.sortField} sortOrder={this.state.sortOrder} onFilter={this.onFilter} filters={this.state.filters} loading={this.state.loading}>
-                            <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name" ></Column>
-                            <Column field="country.name" sortable header="Country" filterField="country.name" body={this.countryBodyTemplate} filter filterPlaceholder="Search by country" filterMatchMode="contains"></Column>
-                            <Column field="company" sortable filter header="Company" filterPlaceholder="Search by company"></Column>
+                        <DataTable ref={(el) => this.dt = el} value={this.state.customers} lazy
+                            paginator first={this.state.lazyParams.first} rows={10} totalRecords={this.state.totalRecords} onPage={this.onPage}
+                            onSort={this.onSort} sortField={this.state.lazyParams.sortField} sortOrder={this.state.lazyParams.sortOrder}
+                            onFilter={this.onFilter} filters={this.state.lazyParams.filters} loading={this.state.loading}>
+                            <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name" />
+                            <Column field="country.name" sortable header="Country" filterField="country.name" body={this.countryBodyTemplate} filter filterPlaceholder="Search by country" filterMatchMode="contains" />
+                            <Column field="company" sortable filter header="Company" filterPlaceholder="Search by company" />
                             <Column field="representative.name" header="Representative" body={this.representativeBodyTemplate} filter filterElement={representativeFilter} />
                         </DataTable>
                     </div>
@@ -557,7 +521,7 @@ export const DataTableLazyDemo = () => {
             </div>
         </div>
     );
-    
+
 }
                 `
             },
@@ -728,7 +692,7 @@ export const DataTableLazyDemo = () => {
             </div>
         </div>
     );
-    
+
 }
                 `
             }
