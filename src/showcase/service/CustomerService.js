@@ -21,4 +21,9 @@ export class CustomerService {
         return axios.get('showcase/demo/data/customers-xlarge.json')
                 .then(res => res.data.data);
     }
+
+    getCustomers(params) {
+        return axios.get('https://www.primefaces.org/data/customers',{params: params})
+                .then(res => res.data)
+    }
 }
