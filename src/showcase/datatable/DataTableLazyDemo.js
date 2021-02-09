@@ -343,6 +343,7 @@ export const DataTableLazyDemo = () => {
         { name: "Stephen Shaw", image: 'stephenshaw.png' },
         { name: "XuXue Feng", image: 'xuxuefeng.png' }
     ];
+
     const customerService = new CustomerService();
 
     let loadLazyTimeout = null;
@@ -352,7 +353,7 @@ export const DataTableLazyDemo = () => {
     },[lazyParams]) // eslint-disable-line react-hooks/exhaustive-deps
 
     const loadLazyData = () => {
-        setLoading(true)
+        setLoading(true);
 
         if (loadLazyTimeout) {
             clearTimeout(loadLazyTimeout);
@@ -370,18 +371,18 @@ export const DataTableLazyDemo = () => {
 
     const onPage = (event) => {
         let _lazyParams = { ...lazyParams, ...event };
-        setLazyParams(_lazyParams)
+        setLazyParams(_lazyParams);
     }
 
     const onSort = (event) => {
         let _lazyParams = { ...lazyParams, ...event };
-        setLazyParams(_lazyParams)
+        setLazyParams(_lazyParams);
     }
 
     const onFilter = (event) => {
         let _lazyParams = { ...lazyParams, ...event };
         _lazyParams['first'] = 0;
-        setLazyParams(_lazyParams)
+        setLazyParams(_lazyParams);
     }
 
     const representativeBodyTemplate = (rowData) => {
@@ -474,12 +475,13 @@ export const DataTableLazyDemo = () => {
         { name: "Stephen Shaw", image: 'stephenshaw.png' },
         { name: "XuXue Feng", image: 'xuxuefeng.png' }
     ];
+    
     const customerService = new CustomerService();
 
     let loadLazyTimeout = null;
 
     const loadLazyData = () => {
-        setLoading(true)
+        setLoading(true);
 
         if (loadLazyTimeout) {
             clearTimeout(loadLazyTimeout);
@@ -501,18 +503,18 @@ export const DataTableLazyDemo = () => {
 
     const onPage = (event) => {
         let _lazyParams = { ...lazyParams, ...event };
-        setLazyParams(_lazyParams)
+        setLazyParams(_lazyParams);
     }
 
     const onSort = (event) => {
         let _lazyParams = { ...lazyParams, ...event };
-        setLazyParams(_lazyParams)
+        setLazyParams(_lazyParams);
     }
 
     const onFilter = (event) => {
         let _lazyParams = { ...lazyParams, ...event };
         _lazyParams['first'] = 0;
-        setLazyParams(_lazyParams)
+        setLazyParams(_lazyParams);
     }
 
     const representativeBodyTemplate = (rowData) => {
