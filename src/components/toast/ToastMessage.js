@@ -72,7 +72,7 @@ class ToastMessageComponent extends Component {
     renderMessage() {
         if (this.props.message) {
             const { severity, content, summary, detail } = this.props.message;
-            const contentEl = ObjectUtils.getJSXElement(content, this.props);
+            const contentEl = ObjectUtils.getJSXElement(content, {...this.props, onClose: this.onClose});
             let iconClassName = classNames('p-toast-message-icon pi', {
                 'pi-info-circle': severity === 'info',
                 'pi-exclamation-triangle': severity === 'warn',
