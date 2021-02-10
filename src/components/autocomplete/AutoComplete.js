@@ -600,12 +600,13 @@ export class AutoComplete extends Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps.suggestions !== this.props.suggestions && this.state.searching) {
-            if (this.props.suggestions && this.props.suggestions.length){
+            if (this.props.suggestions && this.props.suggestions.length) {
                 this.alignOverlay()
                 this.showOverlay();
             }
-            else
+            else {
                 this.hideOverlay();
+            }
 
             this.setState({ searching: false });
         }
