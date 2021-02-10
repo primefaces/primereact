@@ -252,7 +252,7 @@ import { InputText } from 'primereact/inputtext';
 {`
 <span className="p-float-label">
     <InputText id="in" value={value} onChange={(e) => setValue(e.target.value)} />
-    <label htmlhtmlFor="in">Username</label>
+    <label htmlFor="in">Username</label>
 </span>
 `}
 </CodeHighlight>

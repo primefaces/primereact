@@ -640,7 +640,7 @@ const countryOptionTemplate = (option) => {
                                     </tr>
                                     <tr>
                                         <td>panelStyle</td>
-                                        <td>string</td>
+                                        <td>object</td>
                                         <td>null</td>
                                         <td>Inline style of the overlay panel element.</td>
                                     </tr>
