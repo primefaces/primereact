@@ -36,7 +36,7 @@ dependencies: {
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-transition-group": "^4.4.1",
-    "primeicons": "^4.0.0"
+    "primeicons": "^4.1.0"
 }
 ```
 

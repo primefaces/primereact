@@ -48,10 +48,10 @@ import { Accordion,AccordionTab } from 'primereact/accordion';
 <CodeHighlight lang="js">
 {`
 dependencies: {
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
-    "react-transition-group": "^2.5.1"
-    "primeicons": "^4.0.0"
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-transition-group": "^4.4.1",
+    "primeicons": "^4.1.0",
 }
 `}
 </CodeHighlight>
