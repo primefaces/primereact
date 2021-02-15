@@ -167,6 +167,7 @@ import { ChipDemo } from './showcase/chip/ChipDemo';
 import { ConfirmDialogDemo } from './showcase/confirmdialog/ConfirmDialogDemo';
 import { ConfirmPopupDemo } from './showcase/confirmpopup/ConfirmPopupDemo';
 import { InvalidDemo } from './showcase/invalid/InvalidDemo';
+import MultiCheckboxDemo from "./showcase/multicheckbox/MultiCheckboxDemo";
 
 class AppRouter extends Component {
 
@@ -220,6 +221,7 @@ class AppRouter extends Component {
                 <Route path="/tabview" component={TabViewDemo} />
                 <Route path="/togglebutton" component={ToggleButtonDemo} />
                 <Route path="/tristatecheckbox" component={TriStateCheckboxDemo} />
+                <Route path="/multicheckbox" component={MultiCheckboxDemo} />
                 <Route path="/selectbutton" component={SelectButtonDemo} />
                 <Route path="/inputswitch" component={InputSwitchDemo} />
                 <Route path="/inputmask" component={InputMaskDemo} />

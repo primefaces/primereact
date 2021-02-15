@@ -398,6 +398,14 @@
                     "meta": [
                         "togglebutton"
                     ]
+                },
+                {
+                    "name": "MultiCheckbox",
+                    "to": "/multicheckbox",
+                    "meta": [
+                        "multicheckbox"
+                    ],
+                    "badge": "new"
                 }
             ]
         },
