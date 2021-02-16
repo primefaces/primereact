@@ -239,7 +239,14 @@ export const MultiCheckboxDemo = () => {
 `}
                     </CodeHighlight>
 
+                    <h5>Styling</h5>
+                    <p>The <i>MultiCheckbox</i> component exposes the properties <i>style</i> and <i>className</i>, which applies the styles to the component's root element.</p>
+
+                    <p>The <i>MultiCheckbox.Option</i> component exposes the properties <i>style</i> and <i>className</i>, which applies the styles to the option's icon.</p>
+                    <p>Also, the <i>MultiCheckbox.Option</i> component exposes the properties <i>boxStyle</i> and <i>boxClassName</i>, which applies the styles to the checkbox inner component.</p>
+
                     <h5>Properties</h5>
+                    <h6>MultiCheckbox</h6>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -277,7 +284,7 @@ export const MultiCheckboxDemo = () => {
                             </tr>
                             <tr>
                                 <td>style</td>
-                                <td>string</td>
+                                <td>object</td>
                                 <td>null</td>
                                 <td>Inline style of the element.</td>
                             </tr>
@@ -309,7 +316,61 @@ export const MultiCheckboxDemo = () => {
                         </table>
                     </div>
 
+                    <h6>MultiCheckbox.Option</h6>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Default</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>value</td>
+                                <td>any</td>
+                                <td>null</td>
+                                <td>The value to be attached with the option.</td>
+                            </tr>
+                            <tr>
+                                <td>icon</td>
+                                <td>string</td>
+                                <td>null</td>
+                                <td>The icon of the option.</td>
+                            </tr>
+                            <tr>
+                                <td>style</td>
+                                <td>object</td>
+                                <td>undefined</td>
+                                <td>Inline style of the element.</td>
+                            </tr>
+                            <tr>
+                                <td>className</td>
+                                <td>string</td>
+                                <td>undefined</td>
+                                <td>Style class of the element.</td>
+                            </tr>
+                            <tr>
+                                <td>boxStyle</td>
+                                <td>object</td>
+                                <td>undefined</td>
+                                <td>Inline style of the checkbox element when the current option is selected.</td>
+                            </tr>
+                            <tr>
+                                <td>boxClassName</td>
+                                <td>string</td>
+                                <td>undefined</td>
+                                <td>Style class of the checkbox element when the current option is selected.</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
                     <h5>Events</h5>
+                    <h6>MultiCheckbox</h6>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>

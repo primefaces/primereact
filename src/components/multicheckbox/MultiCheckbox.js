@@ -31,7 +31,8 @@ export const propTypes = {
 }
 
 export function MultiCheckbox(props) {
-    const { value, children, id, style } = props;
+    const { value, children, id } = props;
+    const { style, className } = props;
     const { inputId, name, ariaLabelledBy, disabled, readOnly } = props;
     const [focused, setFocused] = React.useState(false);
     const input = React.useRef();
@@ -82,8 +83,8 @@ export function MultiCheckbox(props) {
 
     const currentOption = options.find(option => value === option.value)
 
-    const containerClass = classNames('p-multicheckbox p-checkbox p-component', props.className);
-    const boxClass = classNames('p-checkbox-box', {
+    const containerClass = classNames('p-multicheckbox p-checkbox p-component', className);
+    const boxClass = classNames('p-checkbox-box', currentOption?.boxClassName,{
         'p-highlight': !!currentOption,
         'p-disabled': disabled || readOnly,
         'p-focus': focused
@@ -105,7 +106,7 @@ export function MultiCheckbox(props) {
                     readOnly={readOnly}
                 />
             </div>
-            <div className={boxClass} role="checkbox" aria-checked={!!currentOption}>
+            <div className={boxClass} style={currentOption?.boxStyle} role="checkbox" aria-checked={!!currentOption}>
                 { currentOption && <Option {...currentOption}/> }
             </div>
         </div>

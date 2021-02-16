@@ -11,8 +11,12 @@ import classnames from 'classnames';
 export const propTypes = {
     value: PropTypes.any.isRequired,
     icon: PropTypes.string.isRequired,
+    style: PropTypes.object,
+    className: PropTypes.string,
+    boxStyle: PropTypes.object,
+    boxClassName: PropTypes.string,
 }
 
-export default function Option({ icon }) {
-    return <span className={classnames('p-checkbox-icon p-c', icon)}/>
+export default function Option({ icon, style, className }) {
+    return <span className={classnames('p-checkbox-icon p-c', icon, className)} style={style}/>
 }
