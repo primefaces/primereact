@@ -39,7 +39,9 @@ export function MultiCheckbox(props) {
 
     const options = React.useMemo(() => {
         const optionsComponents = Array.isArray(children) ? children : [children]
-        const options = optionsComponents.map(it => it.props)
+        const options = optionsComponents
+            .map(it => it.props)
+            .filter(it => it.eligible === undefined || !!it.eligible)
 
         if (new Set(options.map(it => it.value)).size !== options.length) {
             console.warn("MultiCheckbox contains one or more Options with duplicated values, which are not supported. Expect weird behavior")

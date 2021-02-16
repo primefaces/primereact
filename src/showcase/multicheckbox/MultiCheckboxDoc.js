@@ -245,6 +245,19 @@ export const MultiCheckboxDemo = () => {
                     <p>The <i>MultiCheckbox.Option</i> component exposes the properties <i>style</i> and <i>className</i>, which applies the styles to the option's icon.</p>
                     <p>Also, the <i>MultiCheckbox.Option</i> component exposes the properties <i>boxStyle</i> and <i>boxClassName</i>, which applies the styles to the checkbox inner component.</p>
 
+                    <h5>Non-Eligible Options</h5>
+                    <p>A <i>MultiCheckbox.Option</i> component with a falsy value different of <i>undefined</i> in the <i>eligible</i> property will prevent it from being selected by the <i>MultiCheckbox</i></p>
+
+                    <CodeHighlight>
+{`
+<MultiCheckbox value={privacy} onChange={(e) => setPrivacy(e.value)}>
+    <MultiCheckbox.Option value="everyone" icon="pi pi-globe"/>
+    <MultiCheckbox.Option value="friends_only" icon="pi pi-users" eligible={user.hasFriends}/>
+    <MultiCheckbox.Option value="just_me" icon="pi pi-lock"/>
+</MultiCheckbox>
+`}
+                    </CodeHighlight>
+
                     <h5>Properties</h5>
                     <h6>MultiCheckbox</h6>
                     <div className="doc-tablewrapper">
@@ -339,6 +352,12 @@ export const MultiCheckboxDemo = () => {
                                 <td>string</td>
                                 <td>null</td>
                                 <td>The icon of the option.</td>
+                            </tr>
+                            <tr>
+                                <td>eligible</td>
+                                <td>boolean</td>
+                                <td>true</td>
+                                <td>Determines if an option can be selected.</td>
                             </tr>
                             <tr>
                                 <td>style</td>

@@ -11,10 +11,15 @@ import classnames from 'classnames';
 export const propTypes = {
     value: PropTypes.any.isRequired,
     icon: PropTypes.string.isRequired,
+    eligible: PropTypes.bool,
     style: PropTypes.object,
     className: PropTypes.string,
     boxStyle: PropTypes.object,
     boxClassName: PropTypes.string,
+}
+
+export const defaultProps = {
+    eligible: true
 }
 
 export default function Option({ icon, style, className }) {
