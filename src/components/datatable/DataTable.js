@@ -1444,6 +1444,16 @@ export class DataTable extends Component {
         }
     }
 
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.rows !== prevState.rows && !nextProps.onPage) {
+            return {
+                rows: nextProps.rows
+            }
+        }
+
+        return null;
+    }
+
     componentDidUpdate(prevProps, prevState) {
         if (this.isStateful()) {
             this.saveState();

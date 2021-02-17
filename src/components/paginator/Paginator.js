@@ -146,7 +146,10 @@ export class Paginator extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (this.getPage() > 0 && prevProps.totalRecords !== this.props.totalRecords && this.props.first >= this.props.totalRecords) {
+        if (this.props.rows !== prevProps.rows) {
+            this.changePage(0, this.props.rows);
+        }
+        else if (this.getPage() > 0 && prevProps.totalRecords !== this.props.totalRecords && this.props.first >= this.props.totalRecords) {
             this.changePage((this.getPageCount() - 1) * this.props.rows, this.props.rows);
         }
     }
