@@ -98,25 +98,29 @@ export class PickList extends Component {
     }
 
     handleScrollPosition(listElement, direction) {
-        switch(direction) {
-            case 'up':
-                this.scrollInView(listElement, -1);
-            break;
+        if (listElement) {
+            let listContainer = DomHandler.findSingle(listElement, '.p-picklist-list');
 
-            case 'top':
-                listElement.scrollTop = 0;
-            break;
+            switch(direction) {
+                case 'up':
+                    this.scrollInView(listContainer, -1);
+                break;
 
-            case 'down':
-                this.scrollInView(listElement, 1);
-            break;
+                case 'top':
+                    listContainer.scrollTop = 0;
+                break;
 
-            case 'bottom':
-                listElement.scrollTop = listElement.scrollHeight;
-            break;
+                case 'down':
+                    this.scrollInView(listContainer, 1);
+                break;
 
-            default:
-            break;
+                case 'bottom':
+                    listContainer.scrollTop = listContainer.scrollHeight;
+                break;
+
+                default:
+                break;
+            }
         }
     }
 
@@ -179,17 +183,9 @@ export class PickList extends Component {
         this.handleChange(event, source, target);
     }
 
-    scrollInView(listElement, direction) {
-        let listContainer = DomHandler.findSingle(listElement, '.p-picklist-list');
-        let listItems = listContainer.getElementsByClassName('p-highlight');
-        let listItem;
-
-        if(direction === -1)
-            listItem = listItems[0];
-        else if(direction === 1)
-            listItem = listItems[listItems.length - 1];
-
-        DomHandler.scrollInView(listContainer, listItem);
+    scrollInView(listContainer, direction = 1) {
+        let selectedItems = listContainer.getElementsByClassName('p-highlight');
+        DomHandler.scrollInView(listContainer, (direction === -1 ? selectedItems[0] : selectedItems[selectedItems.length - 1]));
     }
 
     onSelectionChange(e, stateKey, callback) {

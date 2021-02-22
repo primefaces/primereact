@@ -5,9 +5,10 @@ import ObjectUtils from '../utils/ObjectUtils';
 import { PickListItem } from './PickListItem';
 import DomHandler from '../utils/DomHandler';
 
-export class PickListSubList extends Component {
+class PickListSubListComponent extends Component {
 
     static defaultProps = {
+        forwardRef: null,
         list: null,
         selection: null,
         header: null,
@@ -23,6 +24,7 @@ export class PickListSubList extends Component {
     }
 
     static propTypes = {
+        forwardRef: PropTypes.any,
         list: PropTypes.array,
         selection: PropTypes.array,
         header: PropTypes.string,
@@ -37,8 +39,8 @@ export class PickListSubList extends Component {
         onSelectionChange: PropTypes.func
     }
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.onItemClick = this.onItemClick.bind(this);
         this.onItemKeyDown = this.onItemKeyDown.bind(this);
     }
@@ -153,7 +155,7 @@ export class PickListSubList extends Component {
             });
         }
 
-        return <div className={wrapperClassName}>
+        return <div ref={this.props.forwardRef} className={wrapperClassName}>
                     {header}
                     <ul className={listClassName} style={this.props.style} role="listbox" aria-multiselectable>
                         {items}
@@ -161,3 +163,5 @@ export class PickListSubList extends Component {
                  </div>;
     }
 }
+
+export const PickListSubList = React.forwardRef((props, ref) => <PickListSubListComponent forwardRef={ref} {...props} />);
