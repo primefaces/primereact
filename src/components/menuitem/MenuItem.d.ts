@@ -9,5 +9,5 @@ export interface MenuItem {
     style?: any;
     className?: string;
     command?(e: {originalEvent: Event, item: MenuItem}): void;
-    template: JSX.Element;
+    template?: JSX.Element|string;
 }
