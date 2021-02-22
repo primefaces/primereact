@@ -476,6 +476,11 @@ import { AvatarGroup } from 'primereact/avatargroup';
 								<td>event: Browser event</td>
 								<td>This event is triggered if an error occurs while loading an image file.</td>
 							</tr>
+                            <tr>
+								<td>onClick</td>
+								<td>event: Browser event</td>
+								<td>Callback to invoke on click.</td>
+							</tr>
                         </tbody>
                     </table>
                 </div>
