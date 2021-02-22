@@ -15,7 +15,8 @@ export class Avatar extends Component {
         className: null,
         template: null,
         imageAlt: 'avatar',
-        onImageError: null
+        onImageError: null,
+        onClick: null
     }
 
     static propTypes = {
@@ -28,7 +29,8 @@ export class Avatar extends Component {
         className: PropTypes.string,
         template: PropTypes.any,
         imageAlt: PropTypes.string,
-        onImageError: PropTypes.func
+        onImageError: PropTypes.func,
+        onClick: PropTypes.func
     };
 
     renderContent() {
@@ -57,13 +59,14 @@ export class Avatar extends Component {
             'p-avatar-image': this.props.image != null,
             'p-avatar-circle': this.props.shape === 'circle',
             'p-avatar-lg': this.props.size === 'large',
-            'p-avatar-xl': this.props.size === 'xlarge'
+            'p-avatar-xl': this.props.size === 'xlarge',
+            'p-avatar-clickable': !!this.props.onClick
         }, this.props.className);
 
         const content = this.props.template ? ObjectUtils.getJSXElement(this.props.template, this.props) : this.renderContent();
 
         return (
-            <div className={containerClassName} style={this.props.style}>
+            <div className={containerClassName} style={this.props.style} onClick={this.props.onClick}>
                 {content}
                 {this.props.children}
             </div>
