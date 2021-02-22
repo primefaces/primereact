@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import KeyFilter from '../keyfilter/KeyFilter';
@@ -25,28 +25,15 @@ class InputTextComponent extends Component {
         validateOnly: PropTypes.bool,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
-        forwardRef: PropTypes.func
+        forwardRef: PropTypes.any
     };
 
     constructor(props) {
         super(props);
         this.onInput = this.onInput.bind(this);
         this.onKeyPress = this.onKeyPress.bind(this);
-    }
 
-    getElementRef(el) {
-        this.element = el;
-
-        if (this.props.forwardRef) {
-            if (ObjectUtils.isFunction(this.props.forwardRef)) {
-                return this.props.forwardRef(el);
-            }
-            else {
-                return this.props.forwardRef;
-            }
-        }
-
-        return this.element;
+        this.elementRef = createRef(this.props.forwardRef);
     }
 
     isFilled() {
@@ -81,7 +68,22 @@ class InputTextComponent extends Component {
         }
     }
 
+    updateForwardRef() {
+        let ref = this.props.forwardRef;
+
+        if (ref) {
+            if (typeof ref === 'function') {
+                ref(this.elementRef.current);
+            }
+            else {
+                ref.current = this.elementRef.current;
+            }
+        }
+    }
+
     componentDidMount() {
+        this.updateForwardRef();
+
         if (this.props.tooltip) {
             this.renderTooltip();
         }
@@ -105,7 +107,7 @@ class InputTextComponent extends Component {
 
     renderTooltip() {
         this.tooltip = tip({
-            target: this.element,
+            target: this.elementRef.current,
             content: this.props.tooltip,
             options: this.props.tooltipOptions
         });
@@ -119,7 +121,7 @@ class InputTextComponent extends Component {
 
         let inputProps = ObjectUtils.findDiffKeys(this.props, InputTextComponent.defaultProps);
 
-        return <input ref={(el) => this.getElementRef(el)} {...inputProps} className={className} onInput={this.onInput} onKeyPress={this.onKeyPress} />;
+        return <input ref={this.elementRef} {...inputProps} className={className} onInput={this.onInput} onKeyPress={this.onKeyPress} />;
     }
 }
 
