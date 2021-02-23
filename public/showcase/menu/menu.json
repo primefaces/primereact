@@ -1038,7 +1038,8 @@
                     "to": "/tooltip",
                     "meta": [
                         "tooltip"
-                    ]
+                    ],
+                    "badge":"updated"
                 }
             ]
         },
