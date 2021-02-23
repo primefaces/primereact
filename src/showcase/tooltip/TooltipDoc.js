@@ -422,8 +422,8 @@ import { Tooltip } from 'primereact/tooltip';
 {`
 <Tooltip target=".customClassName" mouseTrack mouseTrackLeft={10} />
 
-<img className="customClassName" data-pr-tooltip="PrimeReact-Logo" alt="logo" src="showcase/images/logo.png" height="80px"/>
-<div className="customClassName" data-pr-tooltip="This is a div element" style={{ width: '50px', height: '50px', border: '1px solid black' }} />
+<img className="customClassName" data-pr-tooltip="PrimeReact-Logo" data-pr-position="left" alt="logo" src="showcase/images/logo.png" height="80px"/>
+<div className="customClassName" data-pr-tooltip="This is a div element" data-pr-position="right" style={{ width: '50px', height: '50px', border: '1px solid black' }} />
 `}
 </CodeHighlight>
 
