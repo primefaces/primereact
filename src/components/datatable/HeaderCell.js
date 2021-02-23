@@ -192,7 +192,7 @@ export class HeaderCell extends Component {
             let sortBadge = this.renderSortBadge(sortMetaDataIndex);
 
             return (
-                <th ref={(el) => this.el = el} tabIndex={this.props.columnProps.sortable ? this.props.columnProps.tabIndex : null}
+                <th ref={(el) => this.el = el} tabIndex={this.props.columnProps.sortable ? this.props.tabIndex : null}
                     className={className} style={this.props.columnProps.headerStyle||this.props.columnProps.style} onClick={this.onClick} onMouseDown={this.onMouseDown} onKeyDown={this.onKeyDown}
                     colSpan={this.props.columnProps.colSpan} rowSpan={this.props.columnProps.rowSpan} aria-sort={ariaSortData}
                     onDragStart={this.props.onDragStart} onDragOver={this.props.onDragOver} onDragLeave={this.props.onDragLeave} onDrop={this.props.onDrop}>
