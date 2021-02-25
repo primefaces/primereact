@@ -26,6 +26,7 @@ export function tip(props) {
             ReactDOM.unmountComponentAtNode(tooltipWrapper);
         },
         updateContent: (newContent) => {
+            console.warn("The 'updateContent' method has been deprecated on Tooltip. Use update(newProps) method.");
             updateTooltip({ content: newContent });
         },
         update: (newProps) => {
