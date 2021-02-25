@@ -234,7 +234,6 @@ const confirm = (event) => {
     confirmPopup({
         target: event.currentTarget,
         message: 'Are you sure you want to proceed?',
-        header: 'Confirmation',
         icon: 'pi pi-exclamation-triangle',
         accept: () => acceptFunc(),
         reject: () => rejectFunc()
