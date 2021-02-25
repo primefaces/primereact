@@ -3,6 +3,7 @@ import * as React from 'react';
 interface TooltipProps {
     target?: any;
     content?: string;
+    disabled?: boolean;
     className?: string;
     style?: object;
     appendTo?: object;

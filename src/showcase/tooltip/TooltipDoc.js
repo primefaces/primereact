@@ -286,6 +286,12 @@ import { Tooltip } from 'primereact/tooltip';
                                 </thead>
                                 <tbody>
                                     <tr>
+                                        <td>disabled</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>When present, it specifies that the tooltip should be hidden.</td>
+                                    </tr>
+                                    <tr>
                                         <td>className</td>
                                         <td>string</td>
                                         <td>null</td>
@@ -444,6 +450,12 @@ import { Tooltip } from 'primereact/tooltip';
                                         <td>string</td>
                                         <td>null</td>
                                         <td>Content of the tooltip.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>data-pr-disabled</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>When present, it specifies that the tooltip should be hidden.</td>
                                     </tr>
                                     <tr>
                                         <td>data-pr-classname</td>
