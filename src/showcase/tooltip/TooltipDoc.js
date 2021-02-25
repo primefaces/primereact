@@ -457,6 +457,16 @@ import { Tooltip } from 'primereact/tooltip';
 `}
 </CodeHighlight>
 
+                        <h5>Custom Content</h5>
+                        <p>The tooltip can display custom content by using JSX elements in its children.</p>
+<CodeHighlight>
+{`
+<Tooltip target=".customClassName">
+    // Content
+</Tooltip>
+`}
+</CodeHighlight>
+
                         <h5>Target Element Options</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -591,6 +601,37 @@ import { Tooltip } from 'primereact/tooltip';
 <Tooltip target=".customClassName" mouseTrack mouseTrackLeft={10} showDelay={100}/>
 `}
 </CodeHighlight>
+
+                        <h5>Methods</h5>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Parameters</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>updateTargetEvents</td>
+                                        <td>target: target element. (Default: current target)</td>
+                                        <td>Used to reload target events. In some cases, the target element can be hidden initially. <br />
+                                        Later, when this element becomes visible, it will be necessary to bind tooltip events to this element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>loadTargetEvents</td>
+                                        <td>target: target element. (Default: current target)</td>
+                                        <td>Used to load target events.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>unloadTargetEvents</td>
+                                        <td>target: target element. (Default: current target)</td>
+                                        <td>Used to unload target events.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
                         <h5>Styling</h5>
                         <p>Following is the list of structural style classes</p>

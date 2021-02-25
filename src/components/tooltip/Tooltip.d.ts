@@ -27,4 +27,8 @@ interface TooltipProps {
     onHide?(e: {originalEvent: Event, target: HTMLElement}): void;
 }
 
-export class Tooltip extends React.Component<TooltipProps,any> {}
+export class Tooltip extends React.Component<TooltipProps,any> {
+    public updateTargetEvents(target: HTMLElement): void;
+    public loadTargetEvents(target: HTMLElement): void;
+    public unloadTargetEvents(target: HTMLElement): void;
+}
