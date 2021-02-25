@@ -39,6 +39,7 @@ export class Tooltip extends Component {
     static defaultProps = {
         target: null,
         content: null,
+        disabled: false,
         className: null,
         style: null,
         appendTo: null,
@@ -65,6 +66,7 @@ export class Tooltip extends Component {
     static propTypes = {
         target: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.array]),
         content: PropTypes.string,
+        disabled: PropTypes.bool,
         className: PropTypes.string,
         style: PropTypes.object,
         appendTo: PropTypes.object,
@@ -108,6 +110,10 @@ export class Tooltip extends Component {
 
     isMouseTrack(target) {
         return this.getTargetOption(target, 'mousetrack') || this.props.mouseTrack;
+    }
+
+    isDisabled(target) {
+        return this.getTargetOption(target, 'disabled') === 'true' || this.props.disabled;
     }
 
     getTargetOption(target, option) {
@@ -167,7 +173,7 @@ export class Tooltip extends Component {
     show(e) {
         this.currentTarget = e.currentTarget;
 
-        if (this.isContentEmpty(this.currentTarget)) {
+        if (this.isContentEmpty(this.currentTarget) || this.isDisabled(this.currentTarget)) {
             return;
         }
 
@@ -360,12 +366,17 @@ export class Tooltip extends Component {
         clearTimeout(this.hideDelayTimeout);
     }
 
-    loadTargetEvents() {
-        this.setTargetEventOperations(this.props.target, 'bindTargetEvent');
+    updateTargetEvents(target) {
+        this.unloadTargetEvents(target);
+        this.loadTargetEvents(target);
     }
 
-    unloadTargetEvents() {
-        this.setTargetEventOperations(this.props.target, 'unbindTargetEvent');
+    loadTargetEvents(target) {
+        this.setTargetEventOperations(target || this.props.target, 'bindTargetEvent');
+    }
+
+    unloadTargetEvents(target) {
+        this.setTargetEventOperations(target || this.props.target, 'unbindTargetEvent');
     }
 
     setTargetEventOperations(target, operation) {
@@ -401,15 +412,22 @@ export class Tooltip extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.target !== this.props.target) {
+            this.unloadTargetEvents(prevProps.target);
             this.loadTargetEvents();
         }
 
-        if (this.state.visible && prevProps.content !== this.props.content) {
-            this.applyDelay('updateDelay', () => {
-                this.updateText(this.currentTarget, () => {
-                    this.align(this.currentTarget);
+        if (this.state.visible) {
+            if (prevProps.content !== this.props.content) {
+                this.applyDelay('updateDelay', () => {
+                    this.updateText(this.currentTarget, () => {
+                        this.align(this.currentTarget);
+                    });
                 });
-            });
+            }
+
+            if (this.currentTarget && this.isDisabled(this.currentTarget)) {
+                this.hide();
+            }
         }
     }
 
