@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { InputText } from '../../components/inputtext/InputText';
 import { Button } from '../../components/button/Button';
 import { Tooltip } from '../../components/tooltip/Tooltip';
+import { Knob } from '../../components/knob/Knob';
 import { Badge } from '../../components/badge/Badge';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { TooltipDoc } from './TooltipDoc';
@@ -11,7 +12,8 @@ export class TooltipDemo extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            saveBtnTooltipText: 'Click to proceed'
+            saveBtnTooltipText: 'Click to proceed',
+            knobValue: 60
         }
     }
 
@@ -47,7 +49,12 @@ export class TooltipDemo extends Component {
                         <InputText type="text" placeholder="Focus" tooltip="Enter your username" tooltipOptions={{event: 'focus'}} />
 
                         <h5>Dynamic Tooltip</h5>
-                        <Button type="button" label="Save" icon="pi pi-check" tooltip={this.state.saveBtnTooltipText} onClick={() => this.setState({saveBtnTooltipText: 'Completed'})} />
+                        <div className="p-d-flex p-ai-center">
+                            <Button type="button" label="Save" icon="pi pi-check" tooltip={this.state.saveBtnTooltipText} onClick={() => this.setState({saveBtnTooltipText: 'Completed'})} />
+
+                            <Tooltip target=".knob" content={`${this.state.knobValue}%`} />
+                            <Knob className="knob p-ml-3" value={this.state.knobValue} onChange={(e) => this.setState({ knobValue: e.value})} showValue={false} />
+                        </div>
 
                         <h5>MouseTrack</h5>
                         <div className="p-d-flex p-ai-center">

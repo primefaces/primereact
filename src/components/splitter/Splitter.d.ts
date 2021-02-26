@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 interface SplitterPanelProps {
-    header?: number;
+    size?: number;
     minSize?: number;
     style?: object;
     className?: string;
