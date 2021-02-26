@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 interface TooltipProps {
+    id?: string;
     target?: any;
     content?: string;
     disabled?: boolean;
