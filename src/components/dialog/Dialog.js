@@ -598,7 +598,7 @@ export class Dialog extends Component {
                 <CSSTransition nodeRef={this.dialogRef} classNames="p-dialog" timeout={transitionTimeout} in={this.state.visible} unmountOnExit
                     onEntered={this.onEntered} onExited={this.onExited}>
                     <div ref={this.dialogRef} id={this.id} className={className} style={this.props.style}
-                        role="dialog" aria-labelledby={this.id + '_header'} aria-describedby={this.id + '_content'} aria-modal={this.props.model}>
+                        role="dialog" aria-labelledby={this.id + '_header'} aria-describedby={this.id + '_content'} aria-modal={this.props.modal}>
                         {header}
                         {content}
                         {footer}
