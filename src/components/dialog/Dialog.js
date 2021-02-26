@@ -550,7 +550,7 @@ export class Dialog extends Component {
         let contentClassName = classNames('p-dialog-content', this.props.contentClassName)
 
         return (
-            <div ref={el => this.contentEl = el} className={contentClassName} style={this.props.contentStyle}>
+            <div id={this.id + '_content'} ref={el => this.contentEl = el} className={contentClassName} style={this.props.contentStyle}>
                 {this.props.children}
             </div>
         );
@@ -598,7 +598,7 @@ export class Dialog extends Component {
                 <CSSTransition nodeRef={this.dialogRef} classNames="p-dialog" timeout={transitionTimeout} in={this.state.visible} unmountOnExit
                     onEntered={this.onEntered} onExited={this.onExited}>
                     <div ref={this.dialogRef} id={this.id} className={className} style={this.props.style}
-                         aria-labelledby={this.id + '_header'} role="dialog" aria-modal={this.props.model}>
+                        role="dialog" aria-labelledby={this.id + '_header'} aria-describedby={this.id + '_content'} aria-modal={this.props.model}>
                         {header}
                         {content}
                         {footer}

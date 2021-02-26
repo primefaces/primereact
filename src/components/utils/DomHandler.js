@@ -123,7 +123,7 @@ export default class DomHandler {
     }
 
     static addMultipleClasses(element, className) {
-        if (element) {
+        if (element && className) {
             if (element.classList) {
                 let styles = className.split(' ');
                 for (let i = 0; i < styles.length; i++) {
@@ -141,7 +141,7 @@ export default class DomHandler {
     }
 
     static addClass(element, className) {
-        if (element) {
+        if (element && className) {
             if (element.classList)
                 element.classList.add(className);
             else
@@ -150,7 +150,7 @@ export default class DomHandler {
     }
 
     static removeClass(element, className) {
-        if (element) {
+        if (element && className) {
             if (element.classList)
                 element.classList.remove(className);
             else

@@ -38,6 +38,7 @@ export function tip(props) {
 export class Tooltip extends Component {
 
     static defaultProps = {
+        id: null,
         target: null,
         content: null,
         disabled: false,
@@ -65,6 +66,7 @@ export class Tooltip extends Component {
     }
 
     static propTypes = {
+        id: PropTypes.string,
         target: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.array]),
         content: PropTypes.string,
         disabled: PropTypes.bool,
@@ -449,7 +451,7 @@ export class Tooltip extends Component {
         }, this.props.className);
 
         return (
-            <div ref={(el) => this.containerEl = el} className={tooltipClass} style={this.props.style}>
+            <div id={this.props.id} ref={(el) => this.containerEl = el} className={tooltipClass} style={this.props.style} role="tooltip" aria-hidden={this.state.visible}>
                 <div className="p-tooltip-arrow"></div>
                 <div ref={(el) => this.tooltipTextEl = el} className="p-tooltip-text"></div>
             </div>
