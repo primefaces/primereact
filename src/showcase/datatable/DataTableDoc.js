@@ -2962,7 +2962,7 @@ const bodyTemplate = (data, props) => {
                         </tr>
                         <tr>
                             <td>onColumnResizeEnd</td>
-                            <td>event.element: DOM element of the resized column.
+                            <td>event.element: DOM element of the resized column.<br />
                                 event.column: Properties of the resized column.<br />
                                 event.delta: Change in column width</td>
                             <td>Callback to invoke when a column is resized.</td>
