@@ -46,6 +46,8 @@ export class BodyCell extends Component {
 
     onClick(event) {
         if (this.props.editMode !== 'row' && this.props.editor && !this.state.editing) {
+            this.selfClick = true;
+
             this.setState({
                 editing: true
             }, () => {
@@ -64,6 +66,8 @@ export class BodyCell extends Component {
     }
 
     onBlur(event) {
+        this.selfClick = false;
+
         if (this.props.editMode !== 'row' && this.state.editing && this.props.editorValidatorEvent === 'blur') {
             this.switchCellToViewMode(event, true);
         }
@@ -79,6 +83,8 @@ export class BodyCell extends Component {
                 if (this.isOutsideClicked(e)) {
                     this.switchCellToViewMode(e, true);
                 }
+
+                this.selfClick = false;
             };
 
             document.addEventListener('click', this.documentEditListener);
@@ -86,7 +92,7 @@ export class BodyCell extends Component {
     }
 
     isOutsideClicked(event) {
-        return this.container && !(this.container.isSameNode(event.target) || this.container.contains(event.target));
+        return !this.selfClick && this.container && !(this.container.isSameNode(event.target) || this.container.contains(event.target));
     }
 
     closeCell() {
@@ -128,6 +134,7 @@ export class BodyCell extends Component {
         if (this.documentEditListener) {
             document.removeEventListener('click', this.documentEditListener);
             this.documentEditListener = null;
+            this.selfClick = false;
         }
     }
 
