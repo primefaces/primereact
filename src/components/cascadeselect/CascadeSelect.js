@@ -8,6 +8,7 @@ import UniqueComponentId from '../utils/UniqueComponentId';
 import { CSSTransition } from "react-transition-group";
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import { CascadeSelectSub } from "./CascadeSelectSub";
+import { PrimeEventBus } from '../utils/PrimeEventBus';
 
 export class CascadeSelect extends Component {
 
@@ -85,6 +86,7 @@ export class CascadeSelect extends Component {
         this.onOverlayExit = this.onOverlayExit.bind(this);
         this.onOptionSelect = this.onOptionSelect.bind(this);
         this.onOptionGroupSelect = this.onOptionGroupSelect.bind(this);
+        this.onPanelClick = this.onPanelClick.bind(this);
     }
 
     onOptionSelect(event) {
@@ -209,6 +211,13 @@ export class CascadeSelect extends Component {
             default:
                 break;
         }
+    }
+
+    onPanelClick(event) {
+        PrimeEventBus.emit('overlay-click', {
+            originalEvent: event,
+            target: this.container
+        });
     }
 
     show() {
@@ -371,7 +380,7 @@ export class CascadeSelect extends Component {
         const overlay = (
             <CSSTransition nodeRef={this.overlayRef} classNames="p-connected-overlay" in={this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }}
                 unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit}>
-                <div ref={this.overlayRef} className="p-cascadeselect-panel p-component">
+                <div ref={this.overlayRef} className="p-cascadeselect-panel p-component" onClick={this.onPanelClick}>
                     <div className="p-cascadeselect-items-wrapper">
                         <CascadeSelectSub options={this.props.options} selectionPath={this.selectionPath} className={"p-cascadeselect-items"} optionLabel={this.props.optionLabel}
                             optionValue={this.props.optionValue} level={0} optionGroupLabel={this.props.optionGroupLabel} optionGroupChildren={this.props.optionGroupChildren}
