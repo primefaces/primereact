@@ -7,6 +7,7 @@ import { tip } from '../tooltip/Tooltip';
 import ObjectUtils from '../utils/ObjectUtils';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
+import { PrimeEventBus } from '../utils/PrimeEventBus';
 
 export class ColorPicker extends Component {
 
@@ -56,9 +57,19 @@ export class ColorPicker extends Component {
         this.onOverlayEnter = this.onOverlayEnter.bind(this);
         this.onOverlayEntered = this.onOverlayEntered.bind(this);
         this.onOverlayExit = this.onOverlayExit.bind(this);
+        this.onPanelClick = this.onPanelClick.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
         this.overlayRef = React.createRef();
+    }
+
+    onPanelClick(event) {
+        if (!this.props.inline) {
+            PrimeEventBus.emit('overlay-click', {
+                originalEvent: event,
+                target: this.container
+            });
+        }
     }
 
     onHueMousedown(event) {
@@ -613,7 +624,7 @@ export class ColorPicker extends Component {
         return (
             <div ref={(el) => this.container = el} id={this.id} style={this.props.style} className={containerClassName}>
                 {input}
-                <ColorPickerPanel ref={this.overlayRef} appendTo={this.props.appendTo} inline={this.props.inline} disabled={this.props.disabled}
+                <ColorPickerPanel ref={this.overlayRef} appendTo={this.props.appendTo} inline={this.props.inline} disabled={this.props.disabled} onClick={this.onPanelClick}
                     in={this.props.inline || this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit}>
                     {content}
                 </ColorPickerPanel>
