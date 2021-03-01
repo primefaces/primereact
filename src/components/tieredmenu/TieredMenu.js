@@ -7,6 +7,7 @@ import { TieredMenuSub } from './TieredMenuSub';
 import { CSSTransition } from 'react-transition-group';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
+import { PrimeEventBus } from '../utils/PrimeEventBus';
 
 export class TieredMenu extends Component {
 
@@ -46,9 +47,19 @@ export class TieredMenu extends Component {
         this.onEnter = this.onEnter.bind(this);
         this.onEntered = this.onEntered.bind(this);
         this.onExit = this.onExit.bind(this);
+        this.onPanelClick = this.onPanelClick.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
         this.menuRef = React.createRef();
+    }
+
+    onPanelClick(event) {
+        if (this.props.popup) {
+            PrimeEventBus.emit('overlay-click', {
+                originalEvent: event,
+                target: this.target
+            });
+        }
     }
 
     toggle(event) {
@@ -178,7 +189,7 @@ export class TieredMenu extends Component {
         return (
             <CSSTransition nodeRef={this.menuRef} classNames="p-connected-overlay" in={this.state.visible} timeout={{ enter: 120, exit: 100 }}
                 unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit}>
-                <div ref={this.menuRef} id={this.id} className={className} style={this.props.style}>
+                <div ref={this.menuRef} id={this.id} className={className} style={this.props.style} onClick={this.onPanelClick}>
                     <TieredMenuSub model={this.props.model} root popup={this.props.popup} />
                 </div>
             </CSSTransition>
