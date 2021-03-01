@@ -10,6 +10,7 @@ import { CSSTransition } from 'react-transition-group';
 import { classNames } from '../utils/ClassNames';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import { localeOption } from '../api/Locale';
+import { PrimeEventBus } from '../utils/PrimeEventBus';
 
 export class Password extends Component {
 
@@ -83,6 +84,7 @@ export class Password extends Component {
         this.onOverlayEnter = this.onOverlayEnter.bind(this);
         this.onOverlayEntered = this.onOverlayEntered.bind(this);
         this.onOverlayExit = this.onOverlayExit.bind(this);
+        this.onPanelClick = this.onPanelClick.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
         this.overlayRef = React.createRef();
@@ -143,6 +145,15 @@ export class Password extends Component {
             if (this.state.infoText !== promptLabel) {
                 this.setState({ infoText: promptLabel });
             }
+        }
+    }
+
+    onPanelClick(event) {
+        if (this.props.feedback) {
+            PrimeEventBus.emit('overlay-click', {
+                originalEvent: event,
+                target: this.container
+            });
         }
     }
 
@@ -400,7 +411,7 @@ export class Password extends Component {
         const panel = (
             <CSSTransition nodeRef={this.overlayRef} classNames="p-connected-overlay" in={this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }}
                 unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit}>
-                <div ref={this.overlayRef} className={panelClassName} style={this.props.panelStyle}>
+                <div ref={this.overlayRef} className={panelClassName} style={this.props.panelStyle} onClick={this.onPanelClick}>
                     {header}
                     {content}
                     {footer}
@@ -429,7 +440,7 @@ export class Password extends Component {
         const panel = this.renderPanel();
 
         return (
-            <div className={containerClassName} style={this.props.style}>
+            <div ref={el => this.container = el} className={containerClassName} style={this.props.style}>
                 <InputText id={this.id} ref={(el) => this.inputEl = el} {...inputProps} type={type} className={inputClassName} style={this.props.inputStyle}
                     onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyup} />
                 {icon}
