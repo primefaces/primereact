@@ -9,6 +9,7 @@ import { DropdownItem } from './DropdownItem';
 import { tip } from '../tooltip/Tooltip';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
+import { PrimeEventBus } from '../utils/PrimeEventBus';
 
 export class Dropdown extends Component {
 
@@ -166,7 +167,10 @@ export class Dropdown extends Component {
     }
 
     onPanelClick(event) {
-        event.stopPropagation();
+        PrimeEventBus.emit('overlay-click', {
+            originalEvent: event,
+            target: this.container
+        });
     }
 
     onInputKeyDown(event) {
