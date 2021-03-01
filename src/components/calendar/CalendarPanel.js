@@ -21,7 +21,7 @@ class CalendarPanelComponent extends Component {
         return (
             <CSSTransition nodeRef={this.props.forwardRef} classNames="p-connected-overlay" in={this.props.in} timeout={{ enter: 120, exit: 100 }}
                 unmountOnExit onEnter={this.props.onEnter} onEntered={this.props.onEntered} onExit={this.props.onExit}>
-                <div ref={this.props.forwardRef} className={this.props.className} style={this.props.style}>
+                <div ref={this.props.forwardRef} className={this.props.className} style={this.props.style} onClick={this.props.onClick}>
                     {this.props.children}
                 </div>
             </CSSTransition>

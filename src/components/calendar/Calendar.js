@@ -10,6 +10,7 @@ import { Ripple } from '../ripple/Ripple';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import { localeOption, localeOptions } from '../api/Locale';
+import { PrimeEventBus } from '../utils/PrimeEventBus';
 
 export class Calendar extends Component {
 
@@ -193,6 +194,7 @@ export class Calendar extends Component {
         this.onYearDropdownChange = this.onYearDropdownChange.bind(this);
         this.onTodayButtonClick = this.onTodayButtonClick.bind(this);
         this.onClearButtonClick = this.onClearButtonClick.bind(this);
+        this.onPanelClick = this.onPanelClick.bind(this);
         this.incrementHour = this.incrementHour.bind(this);
         this.decrementHour = this.decrementHour.bind(this);
         this.incrementMinute = this.incrementMinute.bind(this);
@@ -652,6 +654,15 @@ export class Calendar extends Component {
 
         if (this.props.onClearButtonClick) {
             this.props.onClearButtonClick(event);
+        }
+    }
+
+    onPanelClick(event) {
+        if (!this.props.inline) {
+            PrimeEventBus.emit('overlay-click', {
+                originalEvent: event,
+                target: this.container
+            });
         }
     }
 
@@ -2963,7 +2974,7 @@ export class Calendar extends Component {
             <span ref={(el) => this.container = el} id={this.id} className={className} style={this.props.style}>
                 {input}
                 {button}
-                <CalendarPanel ref={this.overlayRef} className={panelClassName} style={this.props.panelStyle} appendTo={this.props.appendTo}
+                <CalendarPanel ref={this.overlayRef} className={panelClassName} style={this.props.panelStyle} appendTo={this.props.appendTo} onClick={this.onPanelClick}
                     in={this.props.inline || this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit}>
                     {datePicker}
                     {timePicker}
