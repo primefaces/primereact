@@ -9,6 +9,7 @@ import { tip } from '../tooltip/Tooltip';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import ObjectUtils from '../utils/ObjectUtils';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
+import { PrimeEventBus } from '../utils/PrimeEventBus';
 
 export class SplitButton extends Component {
 
@@ -59,9 +60,17 @@ export class SplitButton extends Component {
         this.onOverlayEnter = this.onOverlayEnter.bind(this);
         this.onOverlayEntered = this.onOverlayEntered.bind(this);
         this.onOverlayExit = this.onOverlayExit.bind(this);
+        this.onPanelClick = this.onPanelClick.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
         this.overlayRef = React.createRef();
+    }
+
+    onPanelClick(event) {
+        PrimeEventBus.emit('overlay-click', {
+            originalEvent: event,
+            target: this.container
+        });
     }
 
     onDropdownButtonClick() {
@@ -230,7 +239,7 @@ export class SplitButton extends Component {
                 <Button type="button" className="p-splitbutton-menubutton" icon="pi pi-chevron-down" onClick={this.onDropdownButtonClick} disabled={this.props.disabled}
                     aria-expanded={this.state.overlayVisible} aria-haspopup aria-owns={this.id + '_overlay'} />
                 <SplitButtonPanel ref={this.overlayRef} appendTo={this.props.appendTo} id={this.id + '_overlay'}
-                    menuStyle={this.props.menuStyle} menuClassName={this.props.menuClassName}
+                    menuStyle={this.props.menuStyle} menuClassName={this.props.menuClassName} onClick={this.onPanelClick}
                     in={this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit}>
                     {items}
                 </SplitButtonPanel>
