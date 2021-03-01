@@ -9,6 +9,7 @@ import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandle
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
 import { localeOption } from '../api/Locale';
+import { PrimeEventBus } from '../utils/PrimeEventBus';
 
 export function confirmPopup(props) {
     let appendTo = props.appendTo || document.body;
@@ -121,7 +122,7 @@ export class ConfirmPopup extends Component {
     bindDocumentClickListener() {
         if(!this.documentClickListener && this.props.dismissable) {
             this.documentClickListener = (event) => {
-                if (!this.isPanelClicked && this.isOutsideClicked(event)) {
+                if (!this.isPanelClicked && this.isOutsideClicked(event.target)) {
                     this.hide();
                 }
 
@@ -175,12 +176,8 @@ export class ConfirmPopup extends Component {
         }
     }
 
-    isOutsideClicked(event) {
-        return this.overlayRef && this.overlayRef.current && !(this.overlayRef.current.isSameNode(event.target) || this.overlayRef.current.contains(event.target));
-    }
-
-    hasTargetChanged(event, target) {
-        return this.target != null && this.target !== (target||event.currentTarget||event.target);
+    isOutsideClicked(target) {
+        return this.overlayRef && this.overlayRef.current && !(this.overlayRef.current.isSameNode(target) || this.overlayRef.current.contains(target));
     }
 
     onCloseClick(event) {
@@ -189,8 +186,13 @@ export class ConfirmPopup extends Component {
         event.preventDefault();
     }
 
-    onPanelClick() {
+    onPanelClick(event) {
         this.isPanelClicked = true;
+
+        PrimeEventBus.emit('overlay-click', {
+            originalEvent: event,
+            target: this.props.target
+        });
     }
 
     accept() {
@@ -210,7 +212,13 @@ export class ConfirmPopup extends Component {
     }
 
     show() {
-        this.setState({ visible: true });
+        this.setState({ visible: true }, () => {
+            PrimeEventBus.on('overlay-click', (e) => {
+                if (!this.isOutsideClicked(e.target)) {
+                    this.isPanelClicked = true;
+                }
+            });
+        });
     }
 
     hide(result) {
