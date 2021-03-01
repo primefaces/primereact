@@ -223,6 +223,8 @@ export class ConfirmPopup extends Component {
 
     hide(result) {
         this.setState({ visible: false }, () => {
+            PrimeEventBus.off('overlay-click');
+
             if (this.props.onHide) {
                 this.props.onHide(result);
             }

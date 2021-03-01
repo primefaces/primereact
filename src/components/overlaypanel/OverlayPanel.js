@@ -166,6 +166,8 @@ export class OverlayPanel extends Component {
 
     hide() {
         this.setState({ visible: false }, () => {
+            PrimeEventBus.off('overlay-click');
+
             if (this.props.onHide) {
                 this.props.onHide();
             }
