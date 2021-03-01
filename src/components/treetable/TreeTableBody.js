@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { TreeTableRow } from './TreeTableRow'; 
+import { TreeTableRow } from './TreeTableRow';
 
 export class TreeTableBody extends Component {
 
@@ -60,10 +60,10 @@ export class TreeTableBody extends Component {
         onContextMenu: PropTypes.func
     }
 
-    createRow(node) {
+    createRow(node, index) {
         return (
-            <TreeTableRow key={node.key||JSON.stringify(node.data)} level={0}
-                            node={node} columns={this.props.columns} expandedKeys={this.props.expandedKeys} 
+            <TreeTableRow key={node.key||JSON.stringify(node.data)} level={0} rowIndex={index}
+                            node={node} columns={this.props.columns} expandedKeys={this.props.expandedKeys}
                             onToggle={this.props.onToggle} onExpand={this.props.onExpand} onCollapse={this.props.onCollapse}
                             selectionMode={this.props.selectionMode} selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange}
                             metaKeySelection={this.props.metaKeySelection} onRowClick={this.props.onRowClick} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect}
@@ -91,8 +91,8 @@ export class TreeTableBody extends Component {
             return rows;
         }
         else {
-            return this.props.value.map(node => this.createRow(node));
-        } 
+            return this.props.value.map((node, index) => this.createRow(node, index));
+        }
     }
 
     renderEmptyMessage() {
