@@ -10,6 +10,7 @@ import { MultiSelectItem } from './MultiSelectItem';
 import { MultiSelectPanel } from './MultiSelectPanel';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
+import { PrimeEventBus } from '../utils/PrimeEventBus';
 
 export class MultiSelect extends Component {
 
@@ -116,9 +117,17 @@ export class MultiSelect extends Component {
         this.onOverlayEntered = this.onOverlayEntered.bind(this);
         this.onOverlayExit = this.onOverlayExit.bind(this);
         this.onOverlayExited = this.onOverlayExited.bind(this);
+        this.onPanelClick = this.onPanelClick.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
         this.overlayRef = React.createRef();
+    }
+
+    onPanelClick(event) {
+        PrimeEventBus.emit('overlay-click', {
+            originalEvent: event,
+            target: this.container
+        });
     }
 
     onOptionClick(event) {
@@ -705,7 +714,7 @@ export class MultiSelect extends Component {
                 <div className="p-multiselect-trigger">
                     <span className="p-multiselect-trigger-icon pi pi-chevron-down p-c"></span>
                 </div>
-                <MultiSelectPanel ref={this.overlayRef} header={header} appendTo={this.props.appendTo}
+                <MultiSelectPanel ref={this.overlayRef} header={header} appendTo={this.props.appendTo} onClick={this.onPanelClick}
                     scrollHeight={this.props.scrollHeight} panelClassName={this.props.panelClassName} panelStyle={this.props.panelStyle}
                     in={this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
                     {items}
