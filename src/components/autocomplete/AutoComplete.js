@@ -9,6 +9,7 @@ import { classNames } from '../utils/ClassNames';
 import { tip } from '../tooltip/Tooltip';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
+import { PrimeEventBus } from '../utils/PrimeEventBus';
 
 export class AutoComplete extends Component {
 
@@ -136,6 +137,7 @@ export class AutoComplete extends Component {
         this.onOverlayEntering = this.onOverlayEntering.bind(this);
         this.onOverlayEntered = this.onOverlayEntered.bind(this);
         this.onOverlayExit = this.onOverlayExit.bind(this);
+        this.onPanelClick = this.onPanelClick.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
         this.listId = this.id + '_list';
@@ -301,6 +303,13 @@ export class AutoComplete extends Component {
         else {
             DomHandler.relativePosition(this.overlayRef.current, target);
         }
+    }
+
+    onPanelClick(event) {
+        PrimeEventBus.emit('overlay-click', {
+            originalEvent: event,
+            target: this.container
+        });
     }
 
     onDropdownClick(event) {
@@ -750,7 +759,7 @@ export class AutoComplete extends Component {
                 {dropdown}
                 <AutoCompletePanel ref={this.overlayRef} suggestions={this.props.suggestions} field={this.props.field} listId={this.listId}
                     appendTo={this.props.appendTo} itemTemplate={this.props.itemTemplate} onItemClick={this.selectItem} ariaSelected={this.ariaSelected}
-                    panelStyle={this.props.panelStyle} panelClassName={this.props.panelClassName}
+                    panelStyle={this.props.panelStyle} panelClassName={this.props.panelClassName} onClick={this.onPanelClick}
                     in={this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntering={this.onOverlayEntering} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} />
             </span>
         );

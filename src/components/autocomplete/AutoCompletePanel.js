@@ -19,7 +19,8 @@ class AutoCompletePanelComponent extends Component {
         ariaSelected: null,
         panelClassName: null,
         panelStyle: null,
-        forwardRef: null
+        forwardRef: null,
+        onClick: null
     }
 
     static propTypes = {
@@ -33,7 +34,8 @@ class AutoCompletePanelComponent extends Component {
         ariaSelected: PropTypes.any,
         panelClassName: PropTypes.string,
         panelStyle: PropTypes.object,
-        forwardRef: PropTypes.object
+        forwardRef: PropTypes.object,
+        onClick: PropTypes.func
     };
 
     renderElement() {
@@ -57,7 +59,7 @@ class AutoCompletePanelComponent extends Component {
         return (
             <CSSTransition nodeRef={this.props.forwardRef} classNames="p-connected-overlay" in={this.props.in} timeout={{ enter: 120, exit: 100 }}
                 unmountOnExit onEnter={this.props.onEnter} onEntering={this.props.onEntering} onEntered={this.props.onEntered} onExit={this.props.onExit}>
-                <div ref={this.props.forwardRef} className={panelClassName} style={panelStyle} tabIndex="-1">
+                <div ref={this.props.forwardRef} className={panelClassName} style={panelStyle} onClick={this.props.onClick}>
                     <ul className="p-autocomplete-items" role="listbox" id={this.props.listId}>
                         {items}
                     </ul>
