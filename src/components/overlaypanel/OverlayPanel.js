@@ -7,6 +7,7 @@ import { CSSTransition } from 'react-transition-group';
 import { Ripple } from '../ripple/Ripple';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
+import { PrimeEventBus } from '../utils/PrimeEventBus';
 
 export class OverlayPanel extends Component {
 
@@ -52,7 +53,7 @@ export class OverlayPanel extends Component {
     bindDocumentClickListener() {
         if(!this.documentClickListener && this.props.dismissable) {
             this.documentClickListener = (event) => {
-                if (!this.isPanelClicked && this.isOutsideClicked(event)) {
+                if (!this.isPanelClicked && this.isOutsideClicked(event.target)) {
                     this.hide();
                 }
 
@@ -106,8 +107,8 @@ export class OverlayPanel extends Component {
         }
     }
 
-    isOutsideClicked(event) {
-        return this.overlayRef && this.overlayRef.current && !(this.overlayRef.current.isSameNode(event.target) || this.overlayRef.current.contains(event.target));
+    isOutsideClicked(target) {
+        return this.overlayRef && this.overlayRef.current && !(this.overlayRef.current.isSameNode(target) || this.overlayRef.current.contains(target));
     }
 
     hasTargetChanged(event, target) {
@@ -120,8 +121,13 @@ export class OverlayPanel extends Component {
         event.preventDefault();
     }
 
-    onPanelClick() {
+    onPanelClick(event) {
         this.isPanelClicked = true;
+
+        PrimeEventBus.emit('overlay-click', {
+            originalEvent: event,
+            target: this.target
+        });
     }
 
     toggle(event, target) {
@@ -148,7 +154,13 @@ export class OverlayPanel extends Component {
             this.align();
         }
         else {
-            this.setState({ visible: true });
+            this.setState({ visible: true }, () => {
+                PrimeEventBus.on('overlay-click', (e) => {
+                    if (!this.isOutsideClicked(e.target)) {
+                        this.isPanelClicked = true;
+                    }
+                });
+            });
         }
     }
 
