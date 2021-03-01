@@ -251,7 +251,7 @@ export class CascadeSelect extends Component {
 
     alignOverlay() {
         const container = this.input.parentElement;
-        if (this.appendTo) {
+        if (this.props.appendTo) {
             DomHandler.absolutePosition(this.overlayRef.current, container);
             this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
         }
@@ -368,7 +368,7 @@ export class CascadeSelect extends Component {
     }
 
     renderOverlay() {
-        return (
+        const overlay = (
             <CSSTransition nodeRef={this.overlayRef} classNames="p-connected-overlay" in={this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }}
                 unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit}>
                 <div ref={this.overlayRef} className="p-cascadeselect-panel p-component">
@@ -380,6 +380,8 @@ export class CascadeSelect extends Component {
                 </div>
             </CSSTransition>
         );
+
+        return this.props.appendTo ? ReactDOM.createPortal(overlay, this.props.appendTo) : overlay;
     }
 
     renderElement() {
@@ -408,9 +410,6 @@ export class CascadeSelect extends Component {
     render() {
         const element = this.renderElement();
 
-        if (this.props.appendTo)
-            return ReactDOM.createPortal(element, this.props.appendTo);
-        else
-            return element;
+        return element;
     }
 }
