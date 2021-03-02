@@ -34,7 +34,7 @@ class AutoCompletePanelComponent extends Component {
         ariaSelected: PropTypes.any,
         panelClassName: PropTypes.string,
         panelStyle: PropTypes.object,
-        forwardRef: PropTypes.object,
+        forwardRef: PropTypes.any,
         onClick: PropTypes.func
     };
 
