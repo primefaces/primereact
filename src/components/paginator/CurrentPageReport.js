@@ -45,12 +45,11 @@ export class CurrentPageReport extends Component {
         const element = <span className="p-paginator-current">{text}</span>;
 
         if (this.props.template) {
-            const defaultOptions = {
+            const defaultOptions = {...report, ...{
                 className: 'p-paginator-current',
                 element,
-                report,
                 props: this.props
-            };
+            }};
 
             return ObjectUtils.getJSXElement(this.props.template, defaultOptions);
         }
