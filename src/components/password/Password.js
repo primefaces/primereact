@@ -10,7 +10,7 @@ import { CSSTransition } from 'react-transition-group';
 import { classNames } from '../utils/ClassNames';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import { localeOption } from '../api/Locale';
-import { PrimeEventBus } from '../utils/PrimeEventBus';
+import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 
 export class Password extends Component {
 
@@ -150,7 +150,7 @@ export class Password extends Component {
 
     onPanelClick(event) {
         if (this.props.feedback) {
-            PrimeEventBus.emit('overlay-click', {
+            OverlayEventBus.emit('overlay-click', {
                 originalEvent: event,
                 target: this.container
             });

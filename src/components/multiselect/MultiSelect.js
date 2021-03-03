@@ -10,7 +10,7 @@ import { MultiSelectItem } from './MultiSelectItem';
 import { MultiSelectPanel } from './MultiSelectPanel';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
-import { PrimeEventBus } from '../utils/PrimeEventBus';
+import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 
 export class MultiSelect extends Component {
 
@@ -124,7 +124,7 @@ export class MultiSelect extends Component {
     }
 
     onPanelClick(event) {
-        PrimeEventBus.emit('overlay-click', {
+        OverlayEventBus.emit('overlay-click', {
             originalEvent: event,
             target: this.container
         });

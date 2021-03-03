@@ -7,7 +7,7 @@ import { classNames } from '../utils/ClassNames';
 import { CSSTransition } from 'react-transition-group';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
-import { PrimeEventBus } from '../utils/PrimeEventBus';
+import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 
 export class Menu extends Component {
 
@@ -55,7 +55,7 @@ export class Menu extends Component {
 
     onPanelClick(event) {
         if (this.props.popup) {
-            PrimeEventBus.emit('overlay-click', {
+            OverlayEventBus.emit('overlay-click', {
                 originalEvent: event,
                 target: this.target
             });

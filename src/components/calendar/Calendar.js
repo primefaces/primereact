@@ -10,7 +10,7 @@ import { Ripple } from '../ripple/Ripple';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import { localeOption, localeOptions } from '../api/Locale';
-import { PrimeEventBus } from '../utils/PrimeEventBus';
+import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 
 export class Calendar extends Component {
 
@@ -659,7 +659,7 @@ export class Calendar extends Component {
 
     onPanelClick(event) {
         if (!this.props.inline) {
-            PrimeEventBus.emit('overlay-click', {
+            OverlayEventBus.emit('overlay-click', {
                 originalEvent: event,
                 target: this.container
             });

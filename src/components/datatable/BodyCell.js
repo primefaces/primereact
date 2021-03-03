@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { classNames } from '../utils/ClassNames';
-import { PrimeEventBus } from '../utils/PrimeEventBus';
+import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 import ObjectUtils from '../utils/ObjectUtils';
 import DomHandler from '../utils/DomHandler';
 import { RowRadioButton } from './RowRadioButton';
@@ -64,7 +64,7 @@ export class BodyCell extends Component {
                 if (this.props.editorValidatorEvent === 'click') {
                     this.bindDocumentEditListener();
 
-                    PrimeEventBus.on('overlay-click', (e) => {
+                    OverlayEventBus.on('overlay-click', (e) => {
                         if (!this.isOutsideClicked(e.target)) {
                             this.selfClick = true;
                         }
@@ -111,7 +111,7 @@ export class BodyCell extends Component {
                 editing: false
             }, () => {
                 this.unbindDocumentEditListener();
-                PrimeEventBus.off('overlay-click', this.eventBusKey);
+                OverlayEventBus.off('overlay-click', this.eventBusKey);
             });
         }, 1);
     }

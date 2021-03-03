@@ -7,7 +7,7 @@ import { tip } from '../tooltip/Tooltip';
 import ObjectUtils from '../utils/ObjectUtils';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
-import { PrimeEventBus } from '../utils/PrimeEventBus';
+import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 
 export class ColorPicker extends Component {
 
@@ -65,7 +65,7 @@ export class ColorPicker extends Component {
 
     onPanelClick(event) {
         if (!this.props.inline) {
-            PrimeEventBus.emit('overlay-click', {
+            OverlayEventBus.emit('overlay-click', {
                 originalEvent: event,
                 target: this.container
             });

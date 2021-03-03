@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { classNames } from '../utils/ClassNames';
 import ObjectUtils from '../utils/ObjectUtils';
 import DomHandler from '../utils/DomHandler';
-import { PrimeEventBus } from '../utils/PrimeEventBus';
+import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 
 export class TreeTableBodyCell extends Component {
 
@@ -29,7 +29,7 @@ export class TreeTableBodyCell extends Component {
             }, () => {
                 this.bindDocumentEditListener();
 
-                PrimeEventBus.on('overlay-click', (e) => {
+                OverlayEventBus.on('overlay-click', (e) => {
                     if (!this.isOutsideClicked(e.target)) {
                         this.selfClick = true;
                     }
@@ -77,7 +77,7 @@ export class TreeTableBodyCell extends Component {
                 editing: false
             }, () => {
                 this.unbindDocumentEditListener();
-                PrimeEventBus.off('overlay-click', this.eventBusKey);
+                OverlayEventBus.off('overlay-click', this.eventBusKey);
             });
         }, 1);
     }

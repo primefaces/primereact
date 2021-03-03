@@ -9,7 +9,7 @@ import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandle
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
 import { localeOption } from '../api/Locale';
-import { PrimeEventBus } from '../utils/PrimeEventBus';
+import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 
 export function confirmPopup(props) {
     let appendTo = props.appendTo || document.body;
@@ -189,7 +189,7 @@ export class ConfirmPopup extends Component {
     onPanelClick(event) {
         this.isPanelClicked = true;
 
-        PrimeEventBus.emit('overlay-click', {
+        OverlayEventBus.emit('overlay-click', {
             originalEvent: event,
             target: this.props.target
         });
@@ -213,7 +213,7 @@ export class ConfirmPopup extends Component {
 
     show() {
         this.setState({ visible: true }, () => {
-            PrimeEventBus.on('overlay-click', (e) => {
+            OverlayEventBus.on('overlay-click', (e) => {
                 if (!this.isOutsideClicked(e.target)) {
                     this.isPanelClicked = true;
                 }
@@ -223,7 +223,7 @@ export class ConfirmPopup extends Component {
 
     hide(result) {
         this.setState({ visible: false }, () => {
-            PrimeEventBus.off('overlay-click');
+            OverlayEventBus.off('overlay-click');
 
             if (this.props.onHide) {
                 this.props.onHide(result);

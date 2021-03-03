@@ -1,4 +1,4 @@
-function handler() {
+export default function() {
     let eventTarget = document.body.appendChild(document.createComment(''));
     let eventListener, eventKey;
 
@@ -23,5 +23,3 @@ function handler() {
         }
     }
 }
-
-export const PrimeEventBus = handler();

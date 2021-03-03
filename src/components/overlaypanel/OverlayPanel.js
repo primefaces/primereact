@@ -7,7 +7,7 @@ import { CSSTransition } from 'react-transition-group';
 import { Ripple } from '../ripple/Ripple';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
-import { PrimeEventBus } from '../utils/PrimeEventBus';
+import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 
 export class OverlayPanel extends Component {
 
@@ -124,7 +124,7 @@ export class OverlayPanel extends Component {
     onPanelClick(event) {
         this.isPanelClicked = true;
 
-        PrimeEventBus.emit('overlay-click', {
+        OverlayEventBus.emit('overlay-click', {
             originalEvent: event,
             target: this.target
         });
@@ -155,7 +155,7 @@ export class OverlayPanel extends Component {
         }
         else {
             this.setState({ visible: true }, () => {
-                PrimeEventBus.on('overlay-click', (e) => {
+                OverlayEventBus.on('overlay-click', (e) => {
                     if (!this.isOutsideClicked(e.target)) {
                         this.isPanelClicked = true;
                     }
@@ -166,7 +166,7 @@ export class OverlayPanel extends Component {
 
     hide() {
         this.setState({ visible: false }, () => {
-            PrimeEventBus.off('overlay-click');
+            OverlayEventBus.off('overlay-click');
 
             if (this.props.onHide) {
                 this.props.onHide();

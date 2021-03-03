@@ -9,7 +9,7 @@ import { tip } from '../tooltip/Tooltip';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import ObjectUtils from '../utils/ObjectUtils';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
-import { PrimeEventBus } from '../utils/PrimeEventBus';
+import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 
 export class SplitButton extends Component {
 
@@ -67,7 +67,7 @@ export class SplitButton extends Component {
     }
 
     onPanelClick(event) {
-        PrimeEventBus.emit('overlay-click', {
+        OverlayEventBus.emit('overlay-click', {
             originalEvent: event,
             target: this.container
         });

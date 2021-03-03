@@ -8,7 +8,7 @@ import UniqueComponentId from '../utils/UniqueComponentId';
 import { CSSTransition } from "react-transition-group";
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import { CascadeSelectSub } from "./CascadeSelectSub";
-import { PrimeEventBus } from '../utils/PrimeEventBus';
+import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 
 export class CascadeSelect extends Component {
 
@@ -214,7 +214,7 @@ export class CascadeSelect extends Component {
     }
 
     onPanelClick(event) {
-        PrimeEventBus.emit('overlay-click', {
+        OverlayEventBus.emit('overlay-click', {
             originalEvent: event,
             target: this.container
         });
