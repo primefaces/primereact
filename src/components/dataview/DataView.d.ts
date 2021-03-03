@@ -22,7 +22,7 @@ interface DataViewProps {
     paginator?: boolean;
     paginatorPosition?: string;
     alwaysShowPaginator?: boolean;
-    paginatorTemplate?: string;
+    paginatorTemplate?: string | object;
     paginatorLeft?: any;
     paginatorRight?: any;
     pageLinkSize?: number;
