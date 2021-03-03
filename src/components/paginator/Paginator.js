@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
-import {FirstPageLink} from './FirstPageLink';
-import {NextPageLink} from './NextPageLink';
-import {PrevPageLink} from './PrevPageLink';
-import {LastPageLink} from './LastPageLink';
-import {PageLinks} from './PageLinks';
-import {RowsPerPageDropdown} from './RowsPerPageDropdown';
-import {CurrentPageReport} from './CurrentPageReport';
+import { FirstPageLink } from './FirstPageLink';
+import { NextPageLink } from './NextPageLink';
+import { PrevPageLink } from './PrevPageLink';
+import { LastPageLink } from './LastPageLink';
+import { PageLinks } from './PageLinks';
+import { RowsPerPageDropdown } from './RowsPerPageDropdown';
+import { CurrentPageReport } from './CurrentPageReport';
+import ObjectUtils from '../utils/ObjectUtils';
 
 export class Paginator extends Component {
 
@@ -36,7 +37,7 @@ export class Paginator extends Component {
         rowsPerPageOptions: PropTypes.array,
         style: PropTypes.object,
         className: PropTypes.string,
-        template: PropTypes.string,
+        template: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
         onPageChange: PropTypes.func,
         leftContent: PropTypes.any,
         rightContent: PropTypes.any,
@@ -88,7 +89,7 @@ export class Paginator extends Component {
         let start = boundaries[0];
         let end = boundaries[1];
 
-        for(let i = start; i <= end; i++) {
+        for (let i = start; i <= end; i++) {
             pageLinks.push(i + 1);
         }
 
@@ -99,7 +100,7 @@ export class Paginator extends Component {
         let pc = this.getPageCount();
         let p = Math.floor(first / rows);
 
-        if(p >= 0 && p < pc) {
+        if (p >= 0 && p < pc) {
             let newPageState = {
                 first: first,
                 rows: rows,
@@ -107,7 +108,7 @@ export class Paginator extends Component {
                 pageCount: pc
             };
 
-            if(this.props.onPageChange) {
+            if (this.props.onPageChange) {
                 this.props.onPageChange(newPageState);
             }
         }
@@ -154,64 +155,86 @@ export class Paginator extends Component {
         }
     }
 
+    renderElement(key, template) {
+        let element;
+
+        switch (key) {
+            case 'FirstPageLink':
+                element = <FirstPageLink key={key} onClick={this.changePageToFirst} disabled={this.isFirstPage()} template={template} />;
+                break;
+
+            case 'PrevPageLink':
+                element = <PrevPageLink key={key} onClick={this.changePageToPrev} disabled={this.isFirstPage()} template={template} />;
+                break;
+
+            case 'NextPageLink':
+                element = <NextPageLink key={key} onClick={this.changePageToNext} disabled={this.isLastPage()} template={template} />;
+                break;
+
+            case 'LastPageLink':
+                element = <LastPageLink key={key} onClick={this.changePageToLast} disabled={this.isLastPage()} template={template} />;
+                break;
+
+            case 'PageLinks':
+                element = <PageLinks key={key} value={this.updatePageLinks()} page={this.getPage()} rows={this.props.rows} pageCount={this.getPageCount()} onClick={this.onPageLinkClick} template={template} />;
+                break;
+
+            case 'RowsPerPageDropdown':
+                element = <RowsPerPageDropdown key={key} value={this.props.rows} page={this.getPage()} pageCount={this.getPageCount()} totalRecords={this.props.totalRecords} options={this.props.rowsPerPageOptions} onChange={this.onRowsChange} appendTo={this.props.dropdownAppendTo} template={template} />;
+                break;
+
+            case 'CurrentPageReport':
+                element = <CurrentPageReport reportTemplate={this.props.currentPageReportTemplate} key={key}
+                    page={this.getPage()} pageCount={this.getPageCount()} first={this.props.first}
+                    rows={this.props.rows} totalRecords={this.props.totalRecords} template={template}/>;
+                break;
+
+            default:
+                element = null;
+                break;
+        }
+
+        return element;
+    }
+
+    renderElements() {
+        const template = this.props.template;
+
+        if (typeof template === 'object') {
+            return template.layout ?
+                template.layout.split(' ').map((value) => {
+                    const key = value.trim();
+                    return this.renderElement(key, template[key]);
+                })
+                :
+                Object.entries(template).map(([key, _template]) => {
+                    return this.renderElement(key, _template);
+                });
+        }
+
+        return template.split(' ').map((value) => {
+            return this.renderElement(value.trim());
+        });
+    }
+
     render() {
         if (!this.props.alwaysShow && this.getPageCount() === 1) {
             return null;
         }
         else {
-            let className = classNames('p-paginator p-component', this.props.className);
+            const className = classNames('p-paginator p-component', this.props.className);
+            const leftContent = ObjectUtils.getJSXElement(this.props.leftContent, this.props);
+            const rightContent = ObjectUtils.getJSXElement(this.props.rightContent, this.props);
 
-            let paginatorElements = this.props.template.split(' ').map((value) => {
-                let key = value.trim();
-                let element;
-
-                switch(key) {
-                    case 'FirstPageLink':
-                        element = <FirstPageLink key={key} onClick={this.changePageToFirst} disabled={this.isFirstPage()} />;
-                    break;
-
-                    case 'PrevPageLink':
-                        element = <PrevPageLink key={key} onClick={this.changePageToPrev} disabled={this.isFirstPage()} />;
-                    break;
-
-                    case 'NextPageLink':
-                        element = <NextPageLink key={key} onClick={this.changePageToNext} disabled={this.isLastPage()} />;
-                    break;
-
-                    case 'LastPageLink':
-                        element = <LastPageLink key={key} onClick={this.changePageToLast} disabled={this.isLastPage()} />;
-                    break;
-
-                    case 'PageLinks':
-                        element = <PageLinks key={key} value={this.updatePageLinks()} page={this.getPage()} onClick={this.onPageLinkClick} />;
-                    break;
-
-                    case 'RowsPerPageDropdown':
-                        element = <RowsPerPageDropdown key={key} value={this.props.rows} options={this.props.rowsPerPageOptions} onChange={this.onRowsChange} appendTo={this.props.dropdownAppendTo} />;
-                    break;
-
-                    case 'CurrentPageReport':
-                        element = <CurrentPageReport template={this.props.currentPageReportTemplate} key={key}
-                                page={this.getPage()} pageCount={this.getPageCount()} first={this.props.first}
-                                rows={this.props.rows} totalRecords={this.props.totalRecords} />;
-                    break;
-
-                    default:
-                        element = null;
-                    break;
-                }
-
-                return element;
-            });
-
-            let leftContent = this.props.leftContent && <div className="p-paginator-left-content" >{this.props.leftContent}</div>;
-            let rightContent = this.props.rightContent && <div className="p-paginator-right-content" >{this.props.rightContent}</div>
+            const elements = this.renderElements();
+            const leftElement = leftContent && <div className="p-paginator-left-content">{leftContent}</div>;
+            const rightElement = rightContent && <div className="p-paginator-right-content">{rightContent}</div>;
 
             return (
                 <div className={className} style={this.props.style}>
-                    {leftContent}
-                    {paginatorElements}
-                    {rightContent}
+                    {leftElement}
+                    {elements}
+                    {rightElement}
                 </div>
             );
         }

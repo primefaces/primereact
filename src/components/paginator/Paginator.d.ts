@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export interface PageState{
+export interface PageState {
     first: number,
     rows: number,
     page: number,
