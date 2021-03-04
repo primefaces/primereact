@@ -27,9 +27,14 @@ export class RowsPerPageDropdown extends Component {
         template: PropTypes.any
     }
 
+    hasOptions() {
+        return this.props.options && this.props.options.length > 0;
+    }
+
     render() {
-        const options = this.props.options ? this.props.options.map(opt => ({ label: String(opt), value: opt })) : [];
-        const element = <Dropdown value={this.props.value} options={options} onChange={this.props.onChange} appendTo={this.props.appendTo} />;
+        const hasOptions = this.hasOptions();
+        const options = hasOptions ? this.props.options.map(opt => ({ label: String(opt), value: opt })) : [];
+        const element = hasOptions ? <Dropdown value={this.props.value} options={options} onChange={this.props.onChange} appendTo={this.props.appendTo} /> : null;
 
         if (this.props.template) {
             const defaultOptions = {
