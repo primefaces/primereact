@@ -46,6 +46,7 @@ export class MultiSelect extends Component {
         tooltip: null,
         tooltipOptions: null,
         maxSelectedLabels: 3,
+        selectionLimit: null,
         selectedItemsLabel: '{0} items selected',
         ariaLabelledBy: null,
         itemTemplate: null,
@@ -89,6 +90,7 @@ export class MultiSelect extends Component {
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
         maxSelectedLabels: PropTypes.number,
+        selectionLimit: PropTypes.number,
         selectedItemsLabel: PropTypes.string,
         ariaLabelledBy: PropTypes.string,
         itemTemplate: PropTypes.any,
@@ -134,17 +136,20 @@ export class MultiSelect extends Component {
         });
     }
 
+    allowOptionSelect() {
+        return !this.props.selectionLimit || !this.props.value || (this.props.value && this.props.value.length < this.props.selectionLimit);
+    }
+
     onOptionClick(event) {
-        let optionValue = this.getOptionValue(event.option);
+        let { originalEvent, option } = event;
+        let optionValue = this.getOptionValue(option);
         let selectionIndex = this.findSelectionIndex(optionValue);
-        let newValue;
+        let allowOptionSelect = this.allowOptionSelect();
 
         if (selectionIndex !== -1)
-            newValue = this.props.value.filter((val, i) => i !== selectionIndex);
-        else
-            newValue = [...this.props.value || [], optionValue];
-
-        this.updateModel(event.originalEvent, newValue);
+            this.updateModel(originalEvent, this.props.value.filter((val, i) => i !== selectionIndex));
+        else if (allowOptionSelect)
+            this.updateModel(originalEvent, [...this.props.value || [], optionValue]);
     }
 
     onOptionKeyDown(event) {
@@ -689,6 +694,7 @@ export class MultiSelect extends Component {
             'p-inputwrapper-filled': this.props.value && this.props.value.length > 0,
             'p-inputwrapper-focus': this.state.focused || this.state.overlayVisible
         }, this.props.className);
+        let panelClassName = classNames({ 'p-multiselect-limited': !this.allowOptionSelect() }, this.props.panelClassName);
         let label = this.renderLabel();
         let clearIcon = this.renderClearIcon();
         let hiddenSelect = this.renderHiddenSelect();
@@ -734,7 +740,7 @@ export class MultiSelect extends Component {
                     <span className="p-multiselect-trigger-icon pi pi-chevron-down p-c"></span>
                 </div>
                 <MultiSelectPanel ref={this.overlayRef} header={header} footer={footer} appendTo={this.props.appendTo} onClick={this.onPanelClick}
-                    scrollHeight={this.props.scrollHeight} panelClassName={this.props.panelClassName} panelStyle={this.props.panelStyle}
+                    scrollHeight={this.props.scrollHeight} panelClassName={panelClassName} panelStyle={this.props.panelStyle}
                     in={this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
                     {items}
                 </MultiSelectPanel>
