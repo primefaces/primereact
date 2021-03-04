@@ -666,6 +666,12 @@ selectedItemTemplate(option) {
                             <td>Decides how many selected item labels to show at most.</td>
                         </tr>
                         <tr>
+                            <td>selectionLimit</td>
+                            <td>number</td>
+                            <td>null</td>
+                            <td>Number of maximum options that can be selected.</td>
+                        </tr>
+                        <tr>
                             <td>selectedItemsLabel</td>
                             <td>string</td>
                             <td>&#123;0&#125; items selected</td>

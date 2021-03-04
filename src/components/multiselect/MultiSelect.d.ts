@@ -34,6 +34,7 @@ interface MultiSelectProps {
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
     maxSelectedLabels?: number;
+    selectionLimit?: number;
     selectedItemsLabel?: string;
     panelHeaderTemplate?: any;
     panelFooterTemplate?: any;
