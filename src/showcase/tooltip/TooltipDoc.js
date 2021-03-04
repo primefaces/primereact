@@ -17,6 +17,7 @@ import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { Knob } from 'primereact/knob';
 import { Badge } from 'primereact/badge';
+import { Slider } from 'primereact/slider';
 import { Tooltip } from 'primereact/tooltip';
 
 export class TooltipDemo extends Component {
@@ -25,7 +26,8 @@ export class TooltipDemo extends Component {
         super(props);
         this.state = {
             saveBtnTooltipText: 'Click to proceed',
-            knobValue: 60
+            knobValue: 60,
+            sliderValue: 20
         }
     }
 
@@ -58,6 +60,9 @@ export class TooltipDemo extends Component {
 
                         <Tooltip target=".knob" content={\`\${this.state.knobValue}%\`} />
                         <Knob className="knob p-ml-3" value={this.state.knobValue} onChange={(e) => this.setState({ knobValue: e.value})} showValue={false} />
+
+                        <Tooltip target=".slider>.p-slider-handle" content={\`\${this.state.sliderValue}%\`} position="top" event="focus" />
+                        <Slider className="slider p-ml-3" value={this.state.sliderValue} onChange={(e) => this.setState({ sliderValue: e.value })} style={{ width: '14rem' }} />
                     </div>
 
                     <h5>MouseTrack</h5>
@@ -101,11 +106,13 @@ import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { Knob } from 'primereact/knob';
 import { Badge } from 'primereact/badge';
+import { Slider } from 'primereact/slider';
 import { Tooltip } from 'primereact/tooltip';
 
 const TooltipDemo = () => {
     const [saveBtnTooltipText, setSaveBtnTooltipText] = useState('Click to proceed');
     const [knobValue, setKnobValue] = useState(60);
+    const [sliderValue, setSliderValue] = useState(20);
 
     return (
         <div>
@@ -135,6 +142,9 @@ const TooltipDemo = () => {
 
                     <Tooltip target=".knob" content={\`\${knobValue}%\`} />
                     <Knob className="knob p-ml-3" value={knobValue} onChange={(e) => setKnobValue(e.value)} showValue={false} />
+
+                    <Tooltip target=".slider>.p-slider-handle" content={\`\${sliderValue}%\`} position="top" event="focus" />
+                    <Slider className="slider p-ml-3" value={sliderValue} onChange={(e) => setSliderValue(e.value)} style={{ width: '14rem' }} />
                 </div>
 
                 <h5>MouseTrack</h5>
@@ -177,11 +187,13 @@ import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { Knob } from 'primereact/knob';
 import { Badge } from 'primereact/badge';
+import { Slider } from 'primereact/slider';
 import { Tooltip } from 'primereact/tooltip';
 
 const TooltipDemo = () => {
     const [saveBtnTooltipText, setSaveBtnTooltipText] = useState('Click to proceed');
     const [knobValue, setKnobValue] = useState(60);
+    const [sliderValue, setSliderValue] = useState(20);
 
     return (
         <div>
@@ -211,6 +223,9 @@ const TooltipDemo = () => {
 
                     <Tooltip target=".knob" content={\`\${knobValue}%\`} />
                     <Knob className="knob p-ml-3" value={knobValue} onChange={(e) => setKnobValue(e.value)} showValue={false} />
+
+                    <Tooltip target=".slider>.p-slider-handle" content={\`\${sliderValue}%\`} position="top" event="focus" />
+                    <Slider className="slider p-ml-3" value={sliderValue} onChange={(e) => setSliderValue(e.value)} style={{ width: '14rem' }} />
                 </div>
 
                 <h5>MouseTrack</h5>

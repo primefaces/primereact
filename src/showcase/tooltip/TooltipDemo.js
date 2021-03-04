@@ -3,6 +3,7 @@ import { InputText } from '../../components/inputtext/InputText';
 import { Button } from '../../components/button/Button';
 import { Tooltip } from '../../components/tooltip/Tooltip';
 import { Knob } from '../../components/knob/Knob';
+import { Slider } from '../../components/slider/Slider';
 import { Badge } from '../../components/badge/Badge';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { TooltipDoc } from './TooltipDoc';
@@ -13,7 +14,8 @@ export class TooltipDemo extends Component {
         super(props);
         this.state = {
             saveBtnTooltipText: 'Click to proceed',
-            knobValue: 60
+            knobValue: 60,
+            sliderValue: 20
         }
     }
 
@@ -54,6 +56,9 @@ export class TooltipDemo extends Component {
 
                             <Tooltip target=".knob" content={`${this.state.knobValue}%`} />
                             <Knob className="knob p-ml-3" value={this.state.knobValue} onChange={(e) => this.setState({ knobValue: e.value})} showValue={false} />
+
+                            <Tooltip target=".slider>.p-slider-handle" content={`${this.state.sliderValue}%`} position="top" event="focus" />
+                            <Slider className="slider p-ml-3" value={this.state.sliderValue} onChange={(e) => this.setState({ sliderValue: e.value })} style={{ width: '14rem' }} />
                         </div>
 
                         <h5>MouseTrack</h5>
