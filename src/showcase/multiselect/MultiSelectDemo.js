@@ -37,6 +37,7 @@ export class MultiSelectDemo extends Component {
 
         this.countryTemplate = this.countryTemplate.bind(this);
         this.selectedCountriesTemplate = this.selectedCountriesTemplate.bind(this);
+        this.panelFooterTemplate = this.panelFooterTemplate.bind(this);
     }
 
     countryTemplate(option) {
@@ -61,6 +62,16 @@ export class MultiSelectDemo extends Component {
         return "Select Countries";
     }
 
+    panelFooterTemplate() {
+        const selectedItems = this.state.selectedCountries;
+        const length = selectedItems ? selectedItems.length : 0;
+        return (
+            <div className="p-py-2 p-px-3">
+                <b>{length}</b> item{length > 1 ? 's' : ''} selected.
+            </div>
+        );
+    }
+
     render() {
         return (
             <div>
@@ -81,7 +92,7 @@ export class MultiSelectDemo extends Component {
 
                         <h5>Advanced with Templating and Filtering</h5>
                         <MultiSelect value={this.state.selectedCountries} options={this.countries}  onChange={(e) => this.setState({ selectedCountries: e.value })} optionLabel="name" placeholder="Select Countries" filter className="multiselect-custom"
-                            itemTemplate={this.countryTemplate} selectedItemTemplate={this.selectedCountriesTemplate} />
+                            itemTemplate={this.countryTemplate} selectedItemTemplate={this.selectedCountriesTemplate} panelFooterTemplate={this.panelFooterTemplate} />
                     </div>
                 </div>
 

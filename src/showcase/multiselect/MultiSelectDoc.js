@@ -50,6 +50,7 @@ export class MultiSelectDemo extends Component {
 
         this.countryTemplate = this.countryTemplate.bind(this);
         this.selectedCountriesTemplate = this.selectedCountriesTemplate.bind(this);
+        this.panelFooterTemplate = this.panelFooterTemplate.bind(this);
     }
 
     countryTemplate(option) {
@@ -74,6 +75,16 @@ export class MultiSelectDemo extends Component {
         return "Select Countries";
     }
 
+    panelFooterTemplate() {
+        const selectedItems = this.state.selectedCountries;
+        const length = selectedItems ? selectedItems.length : 0;
+        return (
+            <div className="p-py-2 p-px-3">
+                <b>{length}</b> item{length > 1 ? 's' : ''} selected.
+            </div>
+        );
+    }
+
     render() {
         return (
             <div className="multiselect-demo">
@@ -86,7 +97,7 @@ export class MultiSelectDemo extends Component {
 
                     <h5>Advanced with Templating and Filtering</h5>
                     <MultiSelect value={this.state.selectedCountries} options={this.countries}  onChange={(e) => this.setState({ selectedCountries: e.value })} optionLabel="name" placeholder="Select Countries" filter className="multiselect-custom"
-                        itemTemplate={this.countryTemplate} selectedItemTemplate={this.selectedCountriesTemplate} />
+                        itemTemplate={this.countryTemplate} selectedItemTemplate={this.selectedCountriesTemplate} panelFooterTemplate={this.panelFooterTemplate}/>
                 </div>
             </div>
         );
@@ -147,6 +158,15 @@ const MultiSelectDemo = () => {
         return "Select Countries";
     }
 
+    const panelFooterTemplate = () => {
+        const length = selectedCountries ? selectedCountries.length : 0;
+        return (
+            <div className="p-py-2 p-px-3">
+                <b>{length}</b> item{length > 1 ? 's' : ''} selected.
+            </div>
+        );
+    }
+
     return (
         <div className="multiselect-demo">
             <div className="card">
@@ -158,7 +178,7 @@ const MultiSelectDemo = () => {
 
                 <h5>Advanced with Templating and Filtering</h5>
                 <MultiSelect value={selectedCountries} options={countries}  onChange={(e) => setSelectedCountries(e.value)} optionLabel="name" placeholder="Select Countries" filter className="multiselect-custom"
-                    itemTemplate={countryTemplate} selectedItemTemplate={selectedCountriesTemplate} />
+                    itemTemplate={countryTemplate} selectedItemTemplate={selectedCountriesTemplate} panelFooterTemplate={panelFooterTemplate}/>
             </div>
         </div>
     );
@@ -218,6 +238,15 @@ const MultiSelectDemo = () => {
         return "Select Countries";
     }
 
+    const panelFooterTemplate = () => {
+        const length = selectedCountries ? selectedCountries.length : 0;
+        return (
+            <div className="p-py-2 p-px-3">
+                <b>{length}</b> item{length > 1 ? 's' : ''} selected.
+            </div>
+        );
+    }
+
     return (
         <div className="multiselect-demo">
             <div className="card">
@@ -229,7 +258,7 @@ const MultiSelectDemo = () => {
 
                 <h5>Advanced with Templating and Filtering</h5>
                 <MultiSelect value={selectedCountries} options={countries}  onChange={(e) => setSelectedCountries(e.value)} optionLabel="name" placeholder="Select Countries" filter className="multiselect-custom"
-                    itemTemplate={countryTemplate} selectedItemTemplate={selectedCountriesTemplate} />
+                    itemTemplate={countryTemplate} selectedItemTemplate={selectedCountriesTemplate} panelFooterTemplate={panelFooterTemplate}/>
             </div>
         </div>
     );
@@ -611,6 +640,18 @@ selectedItemTemplate(option) {
                             <td>function</td>
                             <td>null</td>
                             <td>Function that gets an item in the value and returns the content for it.</td>
+                        </tr>
+                        <tr>
+                            <td>panelHeaderTemplate</td>
+                            <td>any</td>
+                            <td>null</td>
+                            <td>Template of the panel header.</td>
+                        </tr>
+                        <tr>
+                            <td>panelFooterTemplate</td>
+                            <td>any</td>
+                            <td>null</td>
+                            <td>Template of the panel footer.</td>
                         </tr>
                         <tr>
                             <td>appendTo</td>
