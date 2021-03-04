@@ -489,7 +489,8 @@
                             "to": "/datatable/paginator",
                             "meta": [
                                 "paginator"
-                            ]
+                            ],
+                            "badge":"updated"
                         },
                         {
                             "name": "Sort",
@@ -707,7 +708,8 @@
                     "to": "/paginator",
                     "meta": [
                         "paginator"
-                    ]
+                    ],
+                    "badge":"updated"
                 },
                 {
                     "name": "PickList",
@@ -801,11 +803,13 @@
                             ]
                         },
                         {
-                            "name": "Page",
+                            "name": "Paginator",
                             "to": "/treetable/page",
                             "meta": [
-                                "page"
-                            ]
+                                "page",
+                                "paginator"
+                            ],
+                            "badge":"updated"
                         },
                         {
                             "name": "Sort",
