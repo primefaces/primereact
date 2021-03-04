@@ -2518,7 +2518,7 @@ const bodyTemplate = (data, props) => {
                         </tr>
                         <tr>
                             <td>tableClassName</td>
-                            <td>any</td>
+                            <td>string</td>
                             <td>null</td>
                             <td>Style class of the table element.</td>
                         </tr>
@@ -2539,6 +2539,12 @@ const bodyTemplate = (data, props) => {
                             <td>boolean</td>
                             <td>true</td>
                             <td>Whether to show it even there is only one page.</td>
+                        </tr>
+                        <tr>
+                            <td>paginatorClassName</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Style class of the paginator element.</td>
                         </tr>
                         <tr>
                             <td>paginatorTemplate</td>

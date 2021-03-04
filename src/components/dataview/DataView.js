@@ -90,6 +90,7 @@ export class DataView extends Component {
         paginator: false,
         paginatorPosition: 'bottom',
         alwaysShowPaginator: true,
+        paginatorClassName: null,
         paginatorTemplate: 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown',
         paginatorLeft:null,
         paginatorRight: null,
@@ -121,6 +122,7 @@ export class DataView extends Component {
         paginator: PropTypes.bool,
         paginatorPosition: PropTypes.string,
         alwaysShowPaginator: PropTypes.bool,
+        paginatorClassName: PropTypes.string,
         paginatorTemplate: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
         paginatorLeft: PropTypes.any,
         paginatorRight: PropTypes.any,
@@ -162,7 +164,7 @@ export class DataView extends Component {
     }
 
     createPaginator(position) {
-        const className = 'p-paginator-' + position;
+        const className = classNames('p-paginator-' + position, this.props.paginatorClassName);
         const first = this.props.onPage ? this.props.first: this.state.first;
         const rows = this.props.onPage ? this.props.rows : this.state.rows;
         const totalRecords = this.getTotalRecords();

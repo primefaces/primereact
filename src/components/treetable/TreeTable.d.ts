@@ -14,6 +14,7 @@ interface TreeTableProps {
     paginator?: boolean;
     paginatorPosition?: string;
     alwaysShowPaginator?: boolean;
+    paginatorClassName?: string;
     paginatorTemplate?: string | object;
     paginatorLeft?: any;
     paginatorRight?: any;
