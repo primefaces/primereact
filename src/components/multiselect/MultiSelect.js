@@ -50,6 +50,8 @@ export class MultiSelect extends Component {
         ariaLabelledBy: null,
         itemTemplate: null,
         selectedItemTemplate: null,
+        panelHeaderTemplate: null,
+        panelFooterTemplate: null,
         onChange: null,
         onFocus: null,
         onBlur: null
@@ -91,6 +93,8 @@ export class MultiSelect extends Component {
         ariaLabelledBy: PropTypes.string,
         itemTemplate: PropTypes.any,
         selectedItemTemplate: PropTypes.any,
+        panelHeaderTemplate: PropTypes.any,
+        panelFooterTemplate: PropTypes.any,
         onChange: PropTypes.func,
         onFocus: PropTypes.func,
         onBlur: PropTypes.func
@@ -619,8 +623,22 @@ export class MultiSelect extends Component {
     renderHeader(items) {
         return (
             <MultiSelectHeader filter={this.props.filter} filterValue={this.state.filter} onFilter={this.onFilter} filterPlaceholder={this.props.filterPlaceholder}
-                onClose={this.onCloseClick} onToggleAll={this.onToggleAll} allChecked={this.isAllChecked(items)} />
+                onClose={this.onCloseClick} onToggleAll={this.onToggleAll} allChecked={this.isAllChecked(items)} template={this.props.panelHeaderTemplate} />
         );
+    }
+
+    renderFooter() {
+        if (this.props.panelFooterTemplate) {
+            const content = ObjectUtils.getJSXElement(this.props.panelFooterTemplate, this.props);
+
+            return (
+                <div className="p-multiselect-footer">
+                    {content}
+                </div>
+            );
+        }
+
+        return null;
     }
 
     renderClearIcon() {
@@ -701,6 +719,7 @@ export class MultiSelect extends Component {
         }
 
         let header = this.renderHeader(items);
+        let footer = this.renderFooter();
 
         return (
             <div id={this.id} className={className} onClick={this.onClick} ref={el => this.container = el} style={this.props.style}>
@@ -714,7 +733,7 @@ export class MultiSelect extends Component {
                 <div className="p-multiselect-trigger">
                     <span className="p-multiselect-trigger-icon pi pi-chevron-down p-c"></span>
                 </div>
-                <MultiSelectPanel ref={this.overlayRef} header={header} appendTo={this.props.appendTo} onClick={this.onPanelClick}
+                <MultiSelectPanel ref={this.overlayRef} header={header} footer={footer} appendTo={this.props.appendTo} onClick={this.onPanelClick}
                     scrollHeight={this.props.scrollHeight} panelClassName={this.props.panelClassName} panelStyle={this.props.panelStyle}
                     in={this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
                     {items}

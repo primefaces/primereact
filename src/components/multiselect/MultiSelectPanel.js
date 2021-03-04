@@ -9,6 +9,7 @@ class MultiSelectPanelComponent extends Component {
     static defaultProps = {
         appendTo: null,
         header: null,
+        footer: null,
         onClick: null,
         scrollHeight: null,
         panelClassName: null,
@@ -18,6 +19,7 @@ class MultiSelectPanelComponent extends Component {
     static propTypes = {
         appendTo: PropTypes.object,
         header: PropTypes.any,
+        footer: PropTypes.any,
         onClick: PropTypes.func,
         scrollHeight: PropTypes.string,
         panelClassName: PropTypes.string,
@@ -37,6 +39,7 @@ class MultiSelectPanelComponent extends Component {
                             {this.props.children}
                         </ul>
                     </div>
+                    {this.props.footer}
                 </div>
             </CSSTransition>
 
