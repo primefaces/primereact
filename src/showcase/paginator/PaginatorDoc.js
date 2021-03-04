@@ -679,7 +679,7 @@ import { Paginator } from 'primereact/paginator';
                         <p>Number of items per page can be changed by the user using a dropdown if you define rowsPerPageOptions as an array of possible values. In this case,
                         rows property should also be updated
             </p>
-<CodeHighlight>
+<CodeHighlight lang="js">
 {`
 const onPageChange = (e) => {
     setFirst(e.first);
@@ -709,7 +709,7 @@ const onPageChange = (e) => {
                         </ul>
 
                         <p>The pagination element is fully customizable. To make special paginators, an object can be given to the <i>template</i> property as below.</p>
-<CodeHighlight>
+<CodeHighlight lang="js">
 {`
 const template = {
     layout: 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown CurrentPageReport', // The above keys can be set in the desired order.
@@ -868,7 +868,7 @@ const template = {
                                     </tr>
                                     <tr>
                                         <td>template</td>
-                                        <td>string</td>
+                                        <td>string|object</td>
                                         <td>FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown</td>
                                         <td>Template of the paginator.</td>
                                     </tr>
