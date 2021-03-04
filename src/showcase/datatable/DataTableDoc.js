@@ -2542,9 +2542,9 @@ const bodyTemplate = (data, props) => {
                         </tr>
                         <tr>
                             <td>paginatorTemplate</td>
-                            <td>string</td>
+                            <td>string|object</td>
                             <td>FirstPageLink PrevPageLink PageLinks <br /> NextPageLink LastPageLink RowsPerPageDropdown</td>
-                            <td>Template of the paginator.</td>
+                            <td>Template of the paginator. For details, refer to the template section of the <Link to="/paginator">paginator documentation</Link> for further options.</td>
                         </tr>
                         <tr>
                             <td>paginatorLeft</td>
@@ -2575,7 +2575,7 @@ const bodyTemplate = (data, props) => {
                             <td>string</td>
                             <td>(&#123;currentPage&#125; of &#123;totalPages&#125;)</td>
                             <td>Template of the current page report element. Available placeholders are
-                                &123;currentPage&125;,&123;totalPages&125;,&123;rows&125;,&123;first&125;,&123;last&125; and &123;totalRecords&125;
+                                &#123;currentPage&#125;, &#123;totalPages&#125;, &#123;rows&#125;, &#123;first&#125;, &#123;last&#125; and &#123;totalRecords&#125;
                             </td>
                         </tr>
                         <tr>

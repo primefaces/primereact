@@ -2095,9 +2095,9 @@ export const TreeTableResponsiveDemo = () => {
                                     </tr>
                                     <tr>
                                         <td>paginatorTemplate</td>
-                                        <td>string</td>
+                                        <td>string|object</td>
                                         <td>FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown</td>
-                                        <td>Template of the paginator.</td>
+                                        <td>Template of the paginator. For details, refer to the template section of the <Link to="/paginator">paginator documentation</Link> for further options.</td>
                                     </tr>
                                     <tr>
                                         <td>paginatorLeft</td>
