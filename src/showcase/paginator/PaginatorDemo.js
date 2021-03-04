@@ -4,6 +4,8 @@ import { Button } from '../../components/button/Button';
 import { Ripple } from '../../components/ripple/Ripple';
 import { Dropdown } from '../../components/dropdown/Dropdown';
 import { InputText } from '../../components/inputtext/InputText';
+import { Slider } from '../../components/slider/Slider';
+import { Tooltip } from '../../components/tooltip/Tooltip';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './PaginatorDemo.scss';
 import { PaginatorDoc } from './PaginatorDoc';
@@ -21,6 +23,8 @@ export class PaginatorDemo extends Component {
             customRows1: 10,
             customFirst2: 0,
             customRows2: 10,
+            customFirst3: 0,
+            customRows3: 10,
             contentFirst: 0,
             currentPage: 1,
             pageInputTooltip: 'Press \'Enter\' key to go to this page.'
@@ -29,6 +33,7 @@ export class PaginatorDemo extends Component {
         this.onBasicPageChange = this.onBasicPageChange.bind(this);
         this.onCustomPageChange1 = this.onCustomPageChange1.bind(this);
         this.onCustomPageChange2 = this.onCustomPageChange2.bind(this);
+        this.onCustomPageChange3 = this.onCustomPageChange3.bind(this);
         this.onContentPageChange = this.onContentPageChange.bind(this);
         this.onPageInputKeyDown = this.onPageInputKeyDown.bind(this);
         this.onPageInputChange = this.onPageInputChange.bind(this);
@@ -53,6 +58,13 @@ export class PaginatorDemo extends Component {
         this.setState({
             customFirst2: event.first,
             customRows2: event.rows
+        });
+    }
+
+    onCustomPageChange3(event) {
+        this.setState({
+            customFirst3: event.first,
+            customRows3: event.rows
         });
     }
 
@@ -159,6 +171,26 @@ export class PaginatorDemo extends Component {
                     </span>
                 )
             }
+        };
+        const template3 = {
+            layout: 'RowsPerPageDropdown PrevPageLink PageLinks NextPageLink CurrentPageReport',
+            'RowsPerPageDropdown': (options) => {
+                return (
+                    <div className="p-d-flex p-ai-center">
+                        <Tooltip target=".slider>.p-slider-handle" content={`${options.value} / page`} position="top" event="focus" />
+
+                        <span className="p-mr-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
+                        <Slider className="slider" value={options.value} onChange={options.onChange} min={10} max={120} step={30} style={{ width: '10rem' }} />
+                    </div>
+                );
+            },
+            'CurrentPageReport': (options) => {
+                return (
+                    <span style={{ color: 'var(--text-color)', userSelect: 'none', width: '120px', textAlign: 'center' }}>
+                        {options.first} - {options.last} of {options.totalRecords}
+                    </span>
+                )
+            }
         }
 
         return (
@@ -178,6 +210,7 @@ export class PaginatorDemo extends Component {
                         <h5>Custom Template</h5>
                         <Paginator template={template1} first={this.state.customFirst1} rows={this.state.customRows1} totalRecords={120} onPageChange={this.onCustomPageChange1}></Paginator>
                         <Paginator template={template2} first={this.state.customFirst2} rows={this.state.customRows2} totalRecords={120} onPageChange={this.onCustomPageChange2} className="p-jc-end p-my-3"></Paginator>
+                        <Paginator template={template3} first={this.state.customFirst3} rows={this.state.customRows3} totalRecords={120} onPageChange={this.onCustomPageChange3} className="p-jc-start p-my-3"></Paginator>
 
                         <h5>Left and Right Content</h5>
                         <Paginator first={this.state.contentFirst} rows={1} totalRecords={12} onPageChange={this.onContentPageChange}
