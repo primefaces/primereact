@@ -1168,6 +1168,18 @@ export const DataTableDemo = () => {
                             <td>Event to trigger the validation, possible values are "click" and "blur".</td>
                         </tr>
                         <tr>
+                            <td>onBeforeEditorShow</td>
+                            <td>function</td>
+                            <td>null</td>
+                            <td>Callback to invoke before the cell editor is shown.</td>
+                        </tr>
+                        <tr>
+                            <td>onBeforeEditorHide</td>
+                            <td>function</td>
+                            <td>null</td>
+                            <td>Callback to invoke before the cell editor is hidden.</td>
+                        </tr>
+                        <tr>
                             <td>onEditorInit</td>
                             <td>function</td>
                             <td>null</td>

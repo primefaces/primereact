@@ -51,6 +51,13 @@ export class BodyCell extends Component {
         if (this.props.editMode !== 'row' && this.props.editor && !this.state.editing) {
             this.selfClick = true;
 
+            if (this.props.onBeforeEditorShow) {
+                this.props.onBeforeEditorShow({
+                    originalEvent: event,
+                    columnProps: this.props
+                });
+            }
+
             this.setState({
                 editing: true
             }, () => {
@@ -104,7 +111,14 @@ export class BodyCell extends Component {
         return this.container && !(this.container.isSameNode(target) || this.container.contains(target));
     }
 
-    closeCell() {
+    closeCell(event) {
+        if (this.props.onBeforeEditorHide) {
+            this.props.onBeforeEditorHide({
+                originalEvent: event,
+                columnProps: this.props
+            });
+        }
+
         /* When using the 'tab' key, the focus event of the next cell is not called in IE. */
         setTimeout(() => {
             this.setState({
@@ -136,7 +150,7 @@ export class BodyCell extends Component {
                 this.props.onEditorSubmit(params);
             }
 
-            this.closeCell();
+            this.closeCell(event);
         }
     }
 
