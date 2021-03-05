@@ -40,13 +40,60 @@ class PanelMenuSub extends Component {
         }
 
         if (this.state.activeItem && this.state.activeItem === item) {
+            item.expanded = false;
             this.setState({
                 activeItem: null
             });
         }
         else {
+            let activeItem = this.state.activeItem;
+            if (activeItem) {
+                activeItem.expanded = false;
+            }
+
+            item.expanded = true;
             this.setState({
                 activeItem: item
+            });
+        }
+    }
+
+    updateActiveItemState(item, isActive) {
+        let activeItem = this.state.activeItem;
+        if (activeItem) {
+            activeItem.expanded = isActive;
+        }
+
+        item.expanded = !isActive;
+        this.setState({
+            activeItem: !isActive ? item : null
+        });
+    }
+
+    findActiveItem() {
+        let activeItem = null;
+
+        if (this.props.model) {
+            this.props.model.forEach(item => {
+                if (item.expanded) {
+                    if (!activeItem) {
+                        activeItem = item;
+                    }
+                    else {
+                        item.expanded = false;
+                    }
+                }
+            });
+        }
+
+        return activeItem;
+    }
+
+    componentDidMount() {
+        const activeItem = this.findActiveItem();
+        if (activeItem) {
+            this.setState({
+                activeItem
             });
         }
     }
@@ -189,13 +236,60 @@ export class PanelMenu extends Component {
         }
 
         if (this.state.activeItem && this.state.activeItem === item) {
+            item.expanded = false;
             this.setState({
                 activeItem: null
             });
         }
         else {
+            let activeItem = this.state.activeItem;
+            if (activeItem) {
+                activeItem.expanded = false;
+            }
+
+            item.expanded = true;
             this.setState({
                 activeItem: item
+            });
+        }
+    }
+
+    updateActiveItemState(item, isActive) {
+        let activeItem = this.state.activeItem;
+        if (activeItem) {
+            activeItem.expanded = isActive;
+        }
+
+        item.expanded = !isActive;
+        this.setState({
+            activeItem: !isActive ? item : null
+        });
+    }
+
+    findActiveItem() {
+        let activeItem = null;
+
+        if (this.props.model) {
+            this.props.model.forEach(item => {
+                if (item.expanded) {
+                    if (!activeItem) {
+                        activeItem = item;
+                    }
+                    else {
+                        item.expanded = false;
+                    }
+                }
+            });
+        }
+
+        return activeItem;
+    }
+
+    componentDidMount() {
+        const activeItem = this.findActiveItem();
+        if (activeItem) {
+            this.setState({
+                activeItem
             });
         }
     }
