@@ -27,7 +27,7 @@ export class BodyRow extends Component {
     }
 
     onClick(event) {
-        if(this.props.onClick) {
+        if (this.props.onClick) {
             this.props.onClick({
                 originalEvent: event,
                 data: this.props.rowData,
@@ -107,13 +107,14 @@ export class BodyRow extends Component {
 
     onKeyDown(event) {
         if (this.props.selectionMode) {
-            const row = event.target;
+            const row = event.currentTarget;
 
             switch (event.which) {
                 //down arrow
                 case 40:
                     let nextRow = this.findNextSelectableRow(row);
                     if (nextRow) {
+                        this.changeTabIndex(row, nextRow);
                         nextRow.focus();
                     }
 
@@ -124,21 +125,31 @@ export class BodyRow extends Component {
                 case 38:
                     let prevRow = this.findPrevSelectableRow(row);
                     if (prevRow) {
+                        this.changeTabIndex(row, prevRow);
                         prevRow.focus();
                     }
 
                     event.preventDefault();
                 break;
 
-                //enter
-                case 13:
+                //enter or space
+                case 13: // @deprecated
+                case 32:
                     this.onClick(event);
+                    event.preventDefault();
                 break;
 
                 default:
                     //no op
                 break;
             }
+        }
+    }
+
+    changeTabIndex(currentRow, nextRow) {
+        if (currentRow && nextRow) {
+            currentRow.tabIndex = -1;
+            nextRow.tabIndex = 0;
         }
     }
 
@@ -222,6 +233,10 @@ export class BodyRow extends Component {
         event.preventDefault();
     }
 
+    getTabIndex() {
+        return this.props.selectionMode ? (this.props.rowIndex === 0 ? 0 : -1) : null;
+    }
+
     render() {
         let columns = React.Children.toArray(this.props.children);
         let conditionalClassNames = {
@@ -237,6 +252,7 @@ export class BodyRow extends Component {
         let className = classNames(conditionalClassNames);
         let style = this.props.virtualScroll ? {height: this.props.virtualRowHeight} : {};
         let hasRowSpanGrouping = this.props.rowGroupMode === 'rowspan';
+        let tabIndex = this.getTabIndex();
         let cells = [];
 
         for (let i = 0; i < columns.length; i++) {
@@ -263,7 +279,7 @@ export class BodyRow extends Component {
         }
 
         return (
-            <tr role="row" tabIndex={this.props.selectionMode ? 0 : null} ref={(el) => {this.container = el;}} className={className} onClick={this.onClick} onDoubleClick={this.onDoubleClick} onTouchEnd={this.onTouchEnd} onContextMenu={this.onRightClick} onMouseDown={this.onMouseDown}
+            <tr role="row" tabIndex={tabIndex} ref={(el) => {this.container = el;}} className={className} onClick={this.onClick} onDoubleClick={this.onDoubleClick} onTouchEnd={this.onTouchEnd} onContextMenu={this.onRightClick} onMouseDown={this.onMouseDown}
                 onDragStart={this.props.onDragStart} onDragEnd={this.onDragEnd} onDragOver={this.onDragOver} onDragLeave={this.onDragLeave} onDrop={this.onDrop} style={style} onKeyDown={this.onKeyDown}>
                 {cells}
             </tr>
