@@ -20,8 +20,6 @@ class PanelMenuSub extends Component {
         this.state = {
             activeItem: null
         };
-
-        this.submenuContentRef = React.createRef();
     }
 
     onItemClick(event, item) {
@@ -61,11 +59,12 @@ class PanelMenuSub extends Component {
 
     renderSubmenu(item, active) {
         const submenuWrapperClassName = classNames('p-toggleable-content', { 'p-toggleable-content-collapsed': !active });
+        const submenuContentRef = React.createRef();
 
         if (item.items) {
             return (
-                <CSSTransition nodeRef={this.submenuContentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={active} unmountOnExit>
-                    <div ref={this.submenuContentRef} className={submenuWrapperClassName}>
+                <CSSTransition nodeRef={submenuContentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={active} unmountOnExit>
+                    <div ref={submenuContentRef} className={submenuWrapperClassName}>
                         <PanelMenuSub model={item.items} />
                     </div>
                 </CSSTransition>
@@ -170,7 +169,6 @@ export class PanelMenu extends Component {
         };
 
         this.id = this.props.id || UniqueComponentId();
-        this.menuRef = React.createRef();
     }
 
     onItemClick(event, item) {
@@ -233,6 +231,7 @@ export class PanelMenu extends Component {
         const toggleIcon = this.renderPanelToggleIcon(item, active);
         const itemIcon = this.renderPanelIcon(item);
         const contentWrapperClassName = classNames('p-toggleable-content', { 'p-toggleable-content-collapsed': !active });
+        const menuContentRef = React.createRef();
 
         return (
             <div key={item.label + '_' + index} className={className} style={item.style}>
@@ -244,8 +243,8 @@ export class PanelMenu extends Component {
                         <span className="p-menuitem-text">{item.label}</span>
                     </a>
                 </div>
-                <CSSTransition nodeRef={this.menuRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={active} unmountOnExit>
-                    <div ref={this.menuRef} className={contentWrapperClassName} role="region" id={this.id + '_content'} aria-labelledby={this.id + '_header'}>
+                <CSSTransition nodeRef={menuContentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={active} unmountOnExit>
+                    <div ref={menuContentRef} className={contentWrapperClassName} role="region" id={this.id + '_content'} aria-labelledby={this.id + '_header'}>
                         <div className="p-panelmenu-content">
                             <PanelMenuSub model={item.items} className="p-panelmenu-root-submenu" />
                         </div>
