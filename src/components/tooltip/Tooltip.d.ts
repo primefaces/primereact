@@ -17,6 +17,8 @@ interface TooltipProps {
     mouseTrack?: boolean;
     mouseTrackTop?: number;
     mouseTrackLeft?: number;
+    showDelay?: number;
+    hideDelay?: number;
     onBeforeShow?(e: {originalEvent: Event, target: HTMLElement}): void;
     onBeforeHide?(e: {originalEvent: Event, target: HTMLElement}): void;
     onShow?(e: {originalEvent: Event, target: HTMLElement}): void;
