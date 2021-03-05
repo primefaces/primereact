@@ -32,7 +32,7 @@ interface TreeProps {
     onExpand?(e: {originalEvent: Event, node: TreeNode}): void;
     onCollapse?(e: {originalEvent: Event, node: TreeNode}): void;
     onToggle?(e: {originalEvent: Event, value: any}): void;
-    onDragDrop?(e: {originalEvent: Event, value: any}): void;
+    onDragDrop?(e: {originalEvent: Event, value: any, dragNode: any, dropNode: any, dropIndex: number}): void;
     onContextMenu?(e: {originalEvent: Event, node: TreeNode}): void;
 }
 

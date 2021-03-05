@@ -570,7 +570,8 @@ export class UITreeNode extends Component {
             if (this.props.onDrop) {
                 this.props.onDrop({
                     originalEvent: event,
-                    path: this.props.path
+                    path: this.props.path,
+                    index: this.props.index
                 });
             }
         }
