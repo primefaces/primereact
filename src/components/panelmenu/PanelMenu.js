@@ -17,8 +17,9 @@ class PanelMenuSub extends Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
-            activeItem: null
+            activeItem: this.findActiveItem()
         };
     }
 
@@ -87,15 +88,6 @@ class PanelMenuSub extends Component {
         }
 
         return activeItem;
-    }
-
-    componentDidMount() {
-        const activeItem = this.findActiveItem();
-        if (activeItem) {
-            this.setState({
-                activeItem
-            });
-        }
     }
 
     renderSeparator(index) {
@@ -211,8 +203,9 @@ export class PanelMenu extends Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
-            activeItem: null
+            activeItem: this.findActiveItem()
         };
 
         this.id = this.props.id || UniqueComponentId();
@@ -283,15 +276,6 @@ export class PanelMenu extends Component {
         }
 
         return activeItem;
-    }
-
-    componentDidMount() {
-        const activeItem = this.findActiveItem();
-        if (activeItem) {
-            this.setState({
-                activeItem
-            });
-        }
     }
 
     renderPanelIcon(item) {
