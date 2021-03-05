@@ -93,6 +93,12 @@ const items = [
                                 <td>An array of children menuitems.</td>
                             </tr>
                             <tr>
+                                <td>expanded</td>
+                                <td>boolean</td>
+                                <td>false</td>
+                                <td>Visibility of submenu.</td>
+                            </tr>
+                            <tr>
                                 <td>disabled</td>
                                 <td>boolean</td>
                                 <td>false</td>
