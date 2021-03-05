@@ -460,8 +460,8 @@ export class TableBody extends Component {
         }
 
         return (
-            <tr key={index + '_rowgroupheader'} className="p-rowgroup-header">
-                <td colSpan={React.Children.count(this.props.children)}>
+            <tr role="row" key={index + '_rowgroupheader'} className="p-rowgroup-header">
+                <td role="cell" colSpan={React.Children.count(this.props.children)}>
                     { content }
                     <span className="p-rowgroup-header-name">
                         {this.props.rowGroupHeaderTemplate(rowData, index)}
@@ -473,7 +473,7 @@ export class TableBody extends Component {
 
     renderRowGroupFooter(rowData, index) {
         return (
-            <tr key={index + '_rowgroupfooter'} className="p-rowgroup-footer">
+            <tr role="row" key={index + '_rowgroupfooter'} className="p-rowgroup-footer">
                 {this.props.rowGroupFooterTemplate(rowData, index)}
             </tr>
         );
@@ -543,7 +543,7 @@ export class TableBody extends Component {
                     let isRowGroupExpanded = this.props.expandableRowGroups && hasSubheaderGrouping && rowGroupHeaderExpanded;
                     if (!this.props.expandableRowGroups || isRowGroupExpanded) {
                         //row content
-                        let bodyRow = <BodyRow key={i} value={this.props.value} rowData={rowData} rowIndex={i} onClick={this.onRowClick} onDoubleClick={this.props.onRowDoubleClick} onRightClick={this.onRowRightClick} onTouchEnd={this.onRowTouchEnd}
+                        let bodyRow = <BodyRow tableId={this.props.tableId} key={i} value={this.props.value} rowData={rowData} rowIndex={i} onClick={this.onRowClick} onDoubleClick={this.props.onRowDoubleClick} onRightClick={this.onRowRightClick} onTouchEnd={this.onRowTouchEnd}
                                             onRowToggle={this.onRowToggle} expanded={expanded} selectionMode={this.props.selectionMode}
                                             onRadioClick={this.onRadioClick} onCheckboxClick={this.onCheckboxClick} selected={selected} contextMenuSelected={contextMenuSelected} rowClassName={this.props.rowClassName}
                                             sortField={this.props.sortField} rowGroupMode={this.props.rowGroupMode} groupRowSpan={groupRowSpan}
@@ -558,14 +558,15 @@ export class TableBody extends Component {
                     }
 
                     //row expansion
-                    if(expanded && !(hasSubheaderGrouping && this.props.expandableRowGroups)) {
+                    if (expanded && !(hasSubheaderGrouping && this.props.expandableRowGroups)) {
                         let expandedRowContent = this.props.rowExpansionTemplate(rowData);
-                        let expandedRow = <tr key={i + '_expanded'}><td colSpan={this.props.children.length}>{expandedRowContent}</td></tr>
+                        let id = `${this.props.tableId ? this.props.tableId + '_' : ''}content_${i}_expanded`;
+                        let expandedRow = <tr key={id} id={id} role="row"><td role="cell" colSpan={this.props.children.length}>{expandedRowContent}</td></tr>
                         rows.push(expandedRow);
                     }
 
                     //footer row group
-                    if(hasSubheaderGrouping && (!this.props.expandableRowGroups || isRowGroupExpanded)) {
+                    if (hasSubheaderGrouping && (!this.props.expandableRowGroups || isRowGroupExpanded)) {
                         let currentRowFieldData = ObjectUtils.resolveFieldData(rowData, this.props.groupField);
                         let nextRowFieldData = ObjectUtils.resolveFieldData(this.props.value[i + 1], this.props.groupField);
 
@@ -579,8 +580,8 @@ export class TableBody extends Component {
                 let emptyMessage = this.props.emptyMessage;
 
                 rows = !this.props.loading && emptyMessage !== null ?
-                    <tr className="p-datatable-emptymessage">
-                        <td colSpan={this.props.children.length}>
+                    <tr role="row" className="p-datatable-emptymessage">
+                        <td role="cell" colSpan={this.props.children.length}>
                             {
                                 (typeof emptyMessage === 'function') ? emptyMessage(this.props.frozen) : emptyMessage
                             }

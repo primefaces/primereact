@@ -208,6 +208,7 @@ export class BodyCell extends Component {
 
         if (this.props.expander) {
             const iconClassName = classNames('p-row-toggler-icon pi pi-fw p-clickable', { 'pi-chevron-down': this.props.expanded, 'pi-chevron-right': !this.props.expanded });
+            const ariaControls = `${this.props.tableId ? this.props.tableId + '_' : ''}content_${this.props.rowIndex}_expanded`;
             let expanderProps = {
                 onClick: this.onExpanderClick,
                 className: 'p-row-toggler p-link',
@@ -215,7 +216,7 @@ export class BodyCell extends Component {
             };
 
             content = (
-                <button type="button" onClick={expanderProps.onClick} className={expanderProps.className}>
+                <button type="button" onClick={expanderProps.onClick} className={expanderProps.className} aria-expanded={this.props.expanded} aria-controls={ariaControls}>
                     <span className={expanderProps.iconClassName}></span>
                     <Ripple />
                 </button>
@@ -319,7 +320,7 @@ export class BodyCell extends Component {
         }
 
         return (
-            <td ref={(el) => { this.container = el; }} className={cellClassName} style={this.props.bodyStyle || this.props.style} onClick={this.onClick} onKeyDown={this.onKeyDown}
+            <td ref={(el) => { this.container = el; }} role="cell" className={cellClassName} style={this.props.bodyStyle || this.props.style} onClick={this.onClick} onKeyDown={this.onKeyDown}
                 rowSpan={this.props.rowSpan} onBlur={this.onBlur}>
                 {header}
                 {editorKeyHelper}
