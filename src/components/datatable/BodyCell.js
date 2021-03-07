@@ -235,7 +235,7 @@ export class BodyCell extends Component {
 
             if (showSelection) {
                 if (this.props.selectionMode === 'single')
-                    content = <RowRadioButton onClick={this.props.onRadioClick} rowData={this.props.rowData} selected={this.props.selected} />;
+                    content = <RowRadioButton onClick={this.props.onRadioClick} rowData={this.props.rowData} selected={this.props.selected} tableId={this.props.tableId} />;
                 else
                     content = <RowCheckbox onClick={this.props.onCheckboxClick} rowData={this.props.rowData} selected={this.props.selected} />;
             }
