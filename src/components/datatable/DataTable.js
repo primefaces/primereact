@@ -1081,10 +1081,17 @@ export class DataTable extends Component {
         }, this.props.virtualScrollDelay);
     }
 
-    exportCSV() {
-        let data = this.processData();
+    exportCSV(options) {
+        let data;
         let csv = '\ufeff';
         let columns = React.Children.toArray(this.props.children);
+
+        if (options && options.selectionOnly) {
+            data = this.props.selection || [];
+        }
+        else {
+            data = this.processData();
+        }
 
         //headers
         for(let i = 0; i < columns.length; i++) {
