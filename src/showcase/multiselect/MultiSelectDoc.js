@@ -382,7 +382,7 @@ itemTemplate(option) {
 }
 `}
 </CodeHighlight>
-                        <p>In addition <i>selectedItemTemplate</i> can be used to customize the selected values display instead of the default comma separated list.</p>
+                        <p><i>selectedItemTemplate</i> can be used to customize the selected values display instead of the default comma separated list.</p>
 
 <CodeHighlight>
 {`
@@ -394,6 +394,35 @@ itemTemplate(option) {
 {`
 selectedItemTemplate(option) {
     // custom selected item content
+}
+`}
+</CodeHighlight>
+
+                        <p>In addition <i>panelHeaderTemplate</i> and <i>panelFooterTemplate</i> can be used to customize the header and footer of panel.</p>
+<CodeHighlight>
+{`
+<MultiSelect value={cities} options={citySelectItems} onChange={(e) => setCities(e.value)} panelHeaderTemplate={panelHeaderTemplate} panelFooterTemplate={panelFooterTemplate} />
+`}
+</CodeHighlight>
+
+<CodeHighlight lang="js">
+{`
+panelHeaderTemplate(options) {
+    // options.className: Style class of the panel header.
+    // options.checkboxElement: Default checkbox element created by the component.
+    // options.checked: Whether the all checkbox is checked.
+    // options.onChange: Change event of toggleable checkbox.
+    // options.filterElement: Default filter element created by the component.
+    // options.closeElement: Default close element created by the component.
+    // options.closeElementClassName: Style class of the close container
+    // options.closeIconClassName: Style class of the close icon
+    // options.onCloseClick: Click event for the close icon.
+    // options.element: Default element created by the component.
+    // options.props: component props.
+}
+
+panelFooterTemplate(options) {
+    // options.props: component props.
 }
 `}
 </CodeHighlight>
