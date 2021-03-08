@@ -462,6 +462,10 @@
     .p-dropdown-panel .p-dropdown-header .p-dropdown-filter-icon {
       right: 0.429rem;
       color: #a6a6a6; }
+    .p-dropdown-panel .p-dropdown-header .p-dropdown-clearable-filter .p-dropdown-filter {
+      padding-right: 2.858rem; }
+    .p-dropdown-panel .p-dropdown-header .p-dropdown-clearable-filter .p-dropdown-filter-clear-icon {
+      right: 1.858rem; }
   .p-dropdown-panel .p-dropdown-items {
     padding: 0; }
     .p-dropdown-panel .p-dropdown-items .p-dropdown-item {
