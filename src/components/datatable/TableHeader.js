@@ -7,7 +7,7 @@ export class TableHeader extends Component {
         return React.Children.map(columns, (column, i) => {
             return <HeaderCell key={column.columnKey||column.field||i} columnProps={column.props} value={this.props.value} onSort={this.props.onSort}
                         sortField={this.props.sortField} sortOrder={this.props.sortOrder} multiSortMeta={this.props.multiSortMeta}
-                        resizableColumns={this.props.resizableColumns} onColumnResizeStart={this.props.onColumnResizeStart}
+                        resizableColumns={this.props.resizableColumns} onColumnResizeStart={this.props.onColumnResizeStart} filterDelay={this.props.filterDelay}
                         onFilter={this.props.onFilter} renderOptions={renderOptions} onHeaderCheckboxClick={this.props.onHeaderCheckboxClick} headerCheckboxSelected={this.props.headerCheckboxSelected}
                         reorderableColumns={this.props.reorderableColumns} onDragStart={this.props.onColumnDragStart} onDragOver={this.props.onColumnDragOver}
                         onDragLeave={this.props.onColumnDragLeave} onDrop={this.props.onColumnDrop} filters={this.props.filters} tabIndex={this.props.tabIndex} />;

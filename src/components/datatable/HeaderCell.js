@@ -53,7 +53,7 @@ export class HeaderCell extends Component {
                     matchMode: this.props.columnProps.filterMatchMode
                 });
                 this.filterTimeout = null;
-            }, this.filterDelay);
+            }, this.props.filterDelay);
         }
 
         this.setState({ filterValue });
@@ -101,11 +101,7 @@ export class HeaderCell extends Component {
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
-        const filterField = nextProps.columnProps.filterField || nextProps.columnProps.field;
-        const value = nextProps.filters && nextProps.filters[filterField] ? nextProps.filters[filterField].value : null;
-
         return {
-            filterValue: value !== null ? value : '',
             badgeVisible: nextProps.multiSortMeta && nextProps.multiSortMeta.length > 1
         }
     }

@@ -64,6 +64,7 @@ export class DataTable extends Component {
         reorderableColumns: false,
         filters: null,
         globalFilter: null,
+        filterDelay: 300,
         filterLocale: undefined,
         scrollable: false,
         scrollHeight: null,
@@ -164,6 +165,7 @@ export class DataTable extends Component {
         reorderableColumns: PropTypes.bool,
         filters: PropTypes.object,
         globalFilter: PropTypes.any,
+        filterDelay: PropTypes.number,
         filterLocale: PropTypes.string,
         scrollable: PropTypes.bool,
         scrollHeight: PropTypes.string,
@@ -1302,7 +1304,7 @@ export class DataTable extends Component {
 
     createTableHeader(value, columns, columnGroup) {
         return <TableHeader value={value} onSort={this.onSort} sortField={this.getSortField()} sortOrder={this.getSortOrder()} multiSortMeta={this.getMultiSortMeta()} columnGroup={columnGroup}
-                            resizableColumns={this.props.resizableColumns} onColumnResizeStart={this.onColumnResizeStart} onFilter={this.onFilter}
+                            resizableColumns={this.props.resizableColumns} onColumnResizeStart={this.onColumnResizeStart} onFilter={this.onFilter} filterDelay={this.props.filterDelay}
                             onHeaderCheckboxClick={this.onHeaderCheckboxClick} headerCheckboxSelected={this.isAllSelected()}
                             reorderableColumns={this.props.reorderableColumns} onColumnDragStart={this.onColumnDragStart} filters={this.getFilters()}
                             onColumnDragOver={this.onColumnDragOver} onColumnDragLeave={this.onColumnDragLeave} onColumnDrop={this.onColumnDrop} tabIndex={this.props.tabIndex}>
