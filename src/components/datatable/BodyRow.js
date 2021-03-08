@@ -289,7 +289,7 @@ export class BodyRow extends Component {
             }
 
             let editing = this.getEditing();
-            let cell = <BodyCell tableId={this.props.tableId} key={i} {...column.props} value={this.props.value} rowSpan={rowSpan} rowData={this.props.rowData} rowIndex={this.props.rowIndex} onRowToggle={this.props.onRowToggle} expanded={this.props.expanded}
+            let cell = <BodyCell tableId={this.props.tableId} key={i} {...column.props} tableSelectionMode={this.props.selectionMode} value={this.props.value} rowSpan={rowSpan} rowData={this.props.rowData} rowIndex={this.props.rowIndex} onRowToggle={this.props.onRowToggle} expanded={this.props.expanded}
                             onRadioClick={this.props.onRadioClick} onCheckboxClick={this.props.onCheckboxClick} selected={this.props.selected}
                             editMode={this.props.editMode} editing={editing} onRowEditInit={this.onRowEditInit} onRowEditSave={this.onRowEditSave} onRowEditCancel={this.onRowEditCancel}
                             showRowReorderElement={this.props.showRowReorderElement} showSelectionElement={this.props.showSelectionElement} />;

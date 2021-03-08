@@ -501,7 +501,7 @@ export class TreeTableRow extends Component {
         }
 
         return (
-            <TreeTableBodyCell key={column.props.columnKey||column.props.field} {...column.props} node={this.props.node} rowIndex={this.props.rowIndex}>
+            <TreeTableBodyCell key={column.props.columnKey||column.props.field} {...column.props} treeTableSelectionMode={this.props.selectionMode} selected={this.isSelected()} node={this.props.node} rowIndex={this.props.rowIndex}>
                 {toggler}
                 {checkbox}
             </TreeTableBodyCell>
