@@ -27,6 +27,7 @@ interface DropdownProps {
     autoFocus?: boolean;
     filterInputAutoFocus?: boolean;
     resetFilterOnHide?: boolean;
+    showFilterClear?: boolean;
     lazy?: boolean;
     panelClassName?: string;
     panelStyle?: object;

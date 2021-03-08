@@ -633,6 +633,12 @@ const countryOptionTemplate = (option) => {
                                         <td>When the panel is opened, it specifies that the filter input should focus automatically.</td>
                                     </tr>
                                     <tr>
+                                        <td>showClear</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>When enabled, a clear icon is displayed to clear the filtered value.</td>
+                                    </tr>
+                                    <tr>
                                         <td>panelClassName</td>
                                         <td>string</td>
                                         <td>null</td>
