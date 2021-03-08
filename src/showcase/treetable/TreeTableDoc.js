@@ -792,6 +792,12 @@ export const TreeTableDemo = () => {
                                         <td>Defines placeholder of the input fields.</td>
                                     </tr>
                                     <tr>
+                                        <td>filterDelay</td>
+                                        <td>number</td>
+                                        <td>300</td>
+                                        <td>Delay in milliseconds before filtering the data.</td>
+                                    </tr>
+                                    <tr>
                                         <td>filterLocale</td>
                                         <td>string</td>
                                         <td>undefined</td>

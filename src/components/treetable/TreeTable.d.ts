@@ -56,6 +56,7 @@ interface TreeTableProps {
     filters?: object;
     globalFilter?: any;
     filterMode?: string;
+    filterDelay?: number;
     filterLocale?: string;
     onFilter?(filters: any[]): void;
     onExpand?(e: {originalEvent: Event, node: TreeNode}): void;
