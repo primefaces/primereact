@@ -41,7 +41,7 @@ interface DataTableProps {
     footerColumnGroup?: any;
     frozenHeaderColumnGroup?: any;
     frozenFooterColumnGroup?: any;
-    expandedRows?: any[];
+    expandedRows?: any[] | object;
     resizableColumns?: boolean;
     columnResizeMode?: string;
     reorderableColumns?: boolean;
@@ -67,7 +67,7 @@ interface DataTableProps {
     stateStorage?:string;
     groupField?:string;
     editMode?:string;
-    editingRows?: any[];
+    editingRows?: any[] | object;
     expandableRowGroups?:boolean;
     rowHover?:boolean;
     showSelectionElement?(e: {data: any}): boolean;
