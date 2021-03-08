@@ -40,6 +40,7 @@ export class Dropdown extends Component {
         autoFocus: false,
         filterInputAutoFocus: true,
         resetFilterOnHide: false,
+        showFilterClear: false,
         panelClassName: null,
         panelStyle: null,
         dataKey: null,
@@ -84,6 +85,7 @@ export class Dropdown extends Component {
         autoFocus: PropTypes.bool,
         filterInputAutoFocus: PropTypes.bool,
         resetFilterOnHide: PropTypes.bool,
+        showFilterClear: PropTypes.bool,
         lazy: PropTypes.bool,
         panelClassName: PropTypes.string,
         panelStyle: PropTypes.object,
@@ -111,6 +113,7 @@ export class Dropdown extends Component {
         };
 
         this.onClick = this.onClick.bind(this);
+        this.onFilterContainerClick = this.onFilterContainerClick.bind(this);
         this.onInputFocus = this.onInputFocus.bind(this);
         this.onInputBlur = this.onInputBlur.bind(this);
         this.onInputKeyDown = this.onInputKeyDown.bind(this);
@@ -125,6 +128,7 @@ export class Dropdown extends Component {
         this.onOverlayEntered = this.onOverlayEntered.bind(this);
         this.onOverlayExit = this.onOverlayExit.bind(this);
         this.onOverlayExited = this.onOverlayExited.bind(this);
+        this.resetFilter = this.resetFilter.bind(this);
         this.clear = this.clear.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
@@ -146,6 +150,10 @@ export class Dropdown extends Component {
                 this.showOverlay();
             }
         }
+    }
+
+    onFilterContainerClick(event) {
+        event.stopPropagation();
     }
 
     onInputFocus(event) {
@@ -409,8 +417,8 @@ export class Dropdown extends Component {
         this.setState({ filter: event.target.value });
     }
 
-    resetFilter() {
-        this.setState({ filter: '' });
+    resetFilter(callback) {
+        this.setState({ filter: '' }, callback);
     }
 
     clear(event) {
@@ -787,14 +795,25 @@ export class Dropdown extends Component {
         return null;
     }
 
+    renderFilterClearIcon() {
+        if (this.props.showFilterClear && this.state.filter) {
+            return <i className="p-dropdown-filter-clear-icon pi pi-times" onClick={() => this.resetFilter(() => this.filterInput.focus())}></i>
+        }
+
+        return null;
+    }
+
     renderFilter() {
         if (this.props.filter) {
+            const clearIcon = this.renderFilterClearIcon();
+            const containerClassName = classNames('p-dropdown-filter-container', { 'p-dropdown-clearable-filter': !!clearIcon });
             return (
                 <div className="p-dropdown-header">
-                    <div className="p-dropdown-filter-container">
+                    <div className={containerClassName} onClick={this.onFilterContainerClick}>
                         <input ref={(el) => this.filterInput = el} type="text" autoComplete="off" className="p-dropdown-filter p-inputtext p-component" placeholder={this.props.filterPlaceholder}
                             onKeyDown={this.onFilterInputKeyDown} onChange={this.onFilterInputChange} value={this.state.filter} />
-                        <span className="p-dropdown-filter-icon pi pi-search"></span>
+                        {clearIcon}
+                        <i className="p-dropdown-filter-icon pi pi-search"></i>
                     </div>
                 </div>
             );
