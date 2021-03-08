@@ -2739,7 +2739,7 @@ const bodyTemplate = (data, props) => {
                         </tr>
                         <tr>
                             <td>expandedRows</td>
-                            <td>array/object</td>
+                            <td>array|object</td>
                             <td>null</td>
                             <td>A collection of rows or a map object row data keys that are expanded.</td>
                         </tr>
@@ -2904,6 +2904,12 @@ const bodyTemplate = (data, props) => {
                             <td>string</td>
                             <td>cell</td>
                             <td>Defines editing mode, options are "cell" and "row".</td>
+                        </tr>
+                        <tr>
+                            <td>editingRows</td>
+                            <td>array|object</td>
+                            <td>null</td>
+                            <td>A collection of rows to represent the current editing data in row edit mode.</td>
                         </tr>
                         <tr>
                             <td>exportFunction</td>
@@ -3105,6 +3111,13 @@ const bodyTemplate = (data, props) => {
                                 event.data: Editing row data <br />
                                 event.index: Editing row data index</td>
                             <td>Callback to invoke when the cancel icon is clicked on row editing mode.</td>
+                        </tr>
+                        <tr>
+                            <td>onRowEditChange</td>
+                            <td>event.originalEvent: Browser event <br />
+                                event.data: Editing rows data <br />
+                                event.index: Current editing row data index</td>
+                            <td>Callback to invoke when the row editor is programmatically shown/hidden on row editing mode.</td>
                         </tr>
                         <tr>
                             <td>onStateSave</td>
