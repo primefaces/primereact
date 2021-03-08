@@ -126,7 +126,7 @@ export class TreeTableHeader extends Component {
                     matchMode: column.props.filterMatchMode
                 });
                 this.filterTimeout = null;
-            }, this.filterDelay);
+            }, this.props.filterDelay);
         }
     }
 

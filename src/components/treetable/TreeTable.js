@@ -67,6 +67,7 @@ export class TreeTable extends Component {
         filters: null,
         globalFilter: null,
         filterMode: 'lenient',
+        filterDelay: 300,
         filterLocale: undefined,
         onFilter: null,
         onExpand: null,
@@ -139,6 +140,7 @@ export class TreeTable extends Component {
         filters: PropTypes.object,
         globalFilter: PropTypes.any,
         filterMode: PropTypes.string,
+        filterDelay: PropTypes.number,
         filterLocale: PropTypes.string,
         onFilter: PropTypes.func,
         onExpand: PropTypes.func,
@@ -894,7 +896,7 @@ export class TreeTable extends Component {
                         resizableColumns={this.props.resizableColumns} onResizeStart={this.onColumnResizeStart}
                         reorderableColumns={this.props.reorderableColumns} onDragStart={this.onColumnDragStart}
                         onDragOver={this.onColumnDragOver} onDragLeave={this.onColumnDragLeave} onDrop={this.onColumnDrop}
-                        onFilter={this.onFilter} filters={this.getFilters()}/>
+                        onFilter={this.onFilter} filters={this.getFilters()} filterDelay={this.props.filterDelay}/>
         );
     }
 
