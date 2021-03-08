@@ -11,6 +11,7 @@ import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import { localeOption, localeOptions } from '../api/Locale';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
+import { mask } from '../utils/Mask';
 
 export class Calendar extends Component {
 
@@ -29,6 +30,7 @@ export class Calendar extends Component {
         required: false,
         readOnlyInput: false,
         keepInvalid: false,
+        mask: null,
         disabled: false,
         tabIndex: null,
         placeholder: null,
@@ -100,6 +102,7 @@ export class Calendar extends Component {
         required: PropTypes.bool,
         readOnlyInput: PropTypes.bool,
         keepInvalid: PropTypes.bool,
+        mask: PropTypes.string,
         disabled: PropTypes.bool,
         tabIndex: PropTypes.number,
         placeholder: PropTypes.string,
@@ -221,6 +224,13 @@ export class Calendar extends Component {
 
         if (this.props.inline) {
             this.initFocusableCell();
+        }
+        else if (this.props.mask) {
+            mask(this.inputElement, {
+                mask: this.props.mask,
+                readOnly: this.props.readOnlyInput || this.props.disabled,
+                onChange: (e) => this.updateValueOnInput(e.originalEvent, e.value)
+            });
         }
 
         if (this.props.value) {
