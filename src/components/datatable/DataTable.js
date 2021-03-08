@@ -110,6 +110,7 @@ export class DataTable extends Component {
         onRowEditInit: null,
         onRowEditSave: null,
         onRowEditCancel: null,
+        onRowEditChange: null,
         exportFunction: null,
         customSaveState: null,
         customRestoreState: null,
@@ -212,6 +213,7 @@ export class DataTable extends Component {
         onRowEditInit: PropTypes.func,
         onRowEditSave: PropTypes.func,
         onRowEditCancel: PropTypes.func,
+        onRowEditChange: PropTypes.func,
         exportFunction: PropTypes.func,
         customSaveState: PropTypes.func,
         customRestoreState: PropTypes.func,
@@ -1331,7 +1333,8 @@ export class DataTable extends Component {
                         virtualScroll={this.props.virtualScroll} virtualRowHeight={this.props.virtualRowHeight} loading={this.props.loading}
                         groupField={this.props.groupField} rowGroupMode={this.props.rowGroupMode} rowGroupHeaderTemplate={this.props.rowGroupHeaderTemplate} rowGroupFooterTemplate={this.props.rowGroupFooterTemplate}
                         sortField={this.getSortField()} rowClassName={this.props.rowClassName} onRowReorder={this.props.onRowReorder}
-                        editMode={this.props.editMode} editingRows={this.props.editingRows} rowEditorValidator={this.props.rowEditorValidator} onRowEditInit={this.props.onRowEditInit} onRowEditSave={this.props.onRowEditSave} onRowEditCancel={this.props.onRowEditCancel}
+                        editMode={this.props.editMode} editingRows={this.props.editingRows} rowEditorValidator={this.props.rowEditorValidator}
+                        onRowEditInit={this.props.onRowEditInit} onRowEditSave={this.props.onRowEditSave} onRowEditCancel={this.props.onRowEditCancel} onRowEditChange={this.props.onRowEditChange}
                         expandableRowGroups={this.props.expandableRowGroups} showRowReorderElement={this.props.showRowReorderElement} showSelectionElement={this.props.showSelectionElement}>
                         {columns}
                 </TableBody>;

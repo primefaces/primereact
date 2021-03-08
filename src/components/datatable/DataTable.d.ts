@@ -98,6 +98,7 @@ interface DataTableProps {
     onRowEditInit?(e: {originalEvent: Event, data: any, index: number}): void;
     onRowEditSave?(e: {originalEvent: Event, data: any, index: number, valid: boolean}): void;
     onRowEditCancel?(e: {originalEvent: Event, data: any, index: number}): void;
+    onRowEditChange?(e: {originalEvent: Event, data: any, index: number}): void;
     exportFunction?(e: {data: any, field: string}): any;
     customSaveState?(state: any): void;
     customRestoreState?(): any;
@@ -107,7 +108,7 @@ interface DataTableProps {
 
 export class DataTable extends React.Component<DataTableProps,any> {
     public reset():void;
-    public exportCSV():void;
+    public exportCSV(options?: {selectionOnly: boolean}):void;
     public filter<T>(value:T, field:string, mode:string):void;
     public resetColumnOrder():void;
     public closeEditingCell():void;
