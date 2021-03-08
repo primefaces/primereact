@@ -274,9 +274,9 @@ export class Calendar extends Component {
         if (this.hideTimeout) {
             clearTimeout(this.hideTimeout);
         }
-        if (this.mask) {
+        if (this.touchUIMask) {
             this.disableModality();
-            this.mask = null;
+            this.touchUIMask = null;
         }
 
         if (this.tooltip) {
@@ -379,8 +379,14 @@ export class Calendar extends Component {
         }
         this.isKeydown = false;
 
-        let rawValue = event.target.value;
+        this.updateValueOnInput(event, event.target.value);
 
+        if (this.props.onInput) {
+            this.props.onInput(event);
+        }
+    }
+
+    updateValueOnInput(event, rawValue) {
         try {
             let value = this.parseValueFromString(rawValue);
             if (this.isValidSelection(value)) {
@@ -392,10 +398,6 @@ export class Calendar extends Component {
             //invalid date
             let value = this.props.keepInvalid ? rawValue : null;
             this.updateModel(event, value);
-        }
-
-        if (this.props.onInput) {
-            this.props.onInput(event);
         }
     }
 
@@ -1372,7 +1374,7 @@ export class Calendar extends Component {
                 this.hideOverlay();
             }, 100);
 
-            if (this.mask) {
+            if (this.touchUIMask) {
                 this.disableModality();
             }
         }
@@ -1460,6 +1462,8 @@ export class Calendar extends Component {
 
     updateModel(event, value) {
         if (this.props.onChange) {
+            this.viewStateChanged = true;
+
             this.props.onChange({
                 originalEvent: event,
                 value: value,
@@ -1471,8 +1475,6 @@ export class Calendar extends Component {
                     value: value
                 }
             });
-
-            this.viewStateChanged = true;
         }
     }
 
@@ -1592,27 +1594,27 @@ export class Calendar extends Component {
     }
 
     enableModality() {
-        if (!this.mask) {
-            this.mask = document.createElement('div');
-            this.mask.style.zIndex = String(parseInt(this.overlayRef.current.style.zIndex, 10) - 1);
-            DomHandler.addMultipleClasses(this.mask, 'p-component-overlay p-datepicker-mask p-datepicker-mask-scrollblocker');
+        if (!this.touchUIMask) {
+            this.touchUIMask = document.createElement('div');
+            this.touchUIMask.style.zIndex = String(parseInt(this.overlayRef.current.style.zIndex, 10) - 1);
+            DomHandler.addMultipleClasses(this.touchUIMask, 'p-component-overlay p-datepicker-mask p-datepicker-mask-scrollblocker');
 
-            this.maskClickListener = () => {
+            this.touchUIMaskClickListener = () => {
                 this.disableModality();
             };
-            this.mask.addEventListener('click', this.maskClickListener);
+            this.touchUIMask.addEventListener('click', this.touchUIMaskClickListener);
 
-            document.body.appendChild(this.mask);
+            document.body.appendChild(this.touchUIMask);
             DomHandler.addClass(document.body, 'p-overflow-hidden');
         }
     }
 
     disableModality() {
-        if (this.mask) {
-            this.mask.removeEventListener('click', this.maskClickListener);
-            this.maskClickListener = null;
-            document.body.removeChild(this.mask);
-            this.mask = null;
+        if (this.touchUIMask) {
+            this.touchUIMask.removeEventListener('click', this.touchUIMaskClickListener);
+            this.touchUIMaskClickListener = null;
+            document.body.removeChild(this.touchUIMask);
+            this.touchUIMask = null;
 
             let bodyChildren = document.body.children;
             let hasBlockerMasks;
