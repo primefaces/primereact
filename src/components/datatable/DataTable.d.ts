@@ -67,6 +67,7 @@ interface DataTableProps {
     stateStorage?:string;
     groupField?:string;
     editMode?:string;
+    editingRows?: any[];
     expandableRowGroups?:boolean;
     rowHover?:boolean;
     showSelectionElement?(e: {data: any}): boolean;
@@ -95,7 +96,7 @@ interface DataTableProps {
     onValueChange?(value: any[]): void;
     rowEditorValidator?(rowData: any): boolean;
     onRowEditInit?(e: {originalEvent: Event, data: any, index: number}): void;
-    onRowEditSave?(e: {originalEvent: Event, data: any, index: number}): void;
+    onRowEditSave?(e: {originalEvent: Event, data: any, index: number, valid: boolean}): void;
     onRowEditCancel?(e: {originalEvent: Event, data: any, index: number}): void;
     exportFunction?(e: {data: any, field: string}): any;
     customSaveState?(state: any): void;

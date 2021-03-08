@@ -7,9 +7,6 @@ export class BodyRow extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            editing: false
-        };
 
         this.onClick = this.onClick.bind(this);
         this.onDoubleClick = this.onDoubleClick.bind(this);
@@ -188,10 +185,6 @@ export class BodyRow extends Component {
             });
         }
 
-        this.setState({
-            editing: true
-        });
-
         event.preventDefault();
     }
 
@@ -206,13 +199,10 @@ export class BodyRow extends Component {
             this.props.onRowEditSave({
                 originalEvent: event,
                 data: this.props.rowData,
-                index: this.props.rowIndex
+                index: this.props.rowIndex,
+                valid: valid
             });
         }
-
-        this.setState({
-            editing: !valid
-        });
 
         event.preventDefault();
     }
@@ -225,10 +215,6 @@ export class BodyRow extends Component {
                 index: this.props.rowIndex
             });
         }
-
-        this.setState({
-            editing: false
-        });
 
         event.preventDefault();
     }
@@ -272,7 +258,7 @@ export class BodyRow extends Component {
 
             let cell = <BodyCell tableId={this.props.tableId} key={i} {...column.props} value={this.props.value} rowSpan={rowSpan} rowData={this.props.rowData} rowIndex={this.props.rowIndex} onRowToggle={this.props.onRowToggle} expanded={this.props.expanded}
                         onRadioClick={this.props.onRadioClick} onCheckboxClick={this.props.onCheckboxClick} selected={this.props.selected}
-                        editMode={this.props.editMode} editing={this.state.editing} onRowEditInit={this.onRowEditInit} onRowEditSave={this.onRowEditSave} onRowEditCancel={this.onRowEditCancel}
+                        editMode={this.props.editMode} editing={this.props.editing} onRowEditInit={this.onRowEditInit} onRowEditSave={this.onRowEditSave} onRowEditCancel={this.onRowEditCancel}
                         showRowReorderElement={this.props.showRowReorderElement} showSelectionElement={this.props.showSelectionElement}/>;
 
             cells.push(cell);
