@@ -6,6 +6,7 @@
 
 **Implemented New Features and Enhancements:**
 
+- Color Palettes for Each Theme [\#1860](https://github.com/primefaces/primereact/issues/1860)
 - Add touch support to ColorPicker [\#1857](https://github.com/primefaces/primereact/issues/1857)
 - Add breakpoints property to Dialog, ConfirmDialog and OverlayPanel [\#1856](https://github.com/primefaces/primereact/issues/1856)
 - Add selectionOnly options to CSV export on DataTable [\#1853](https://github.com/primefaces/primereact/issues/1853)
