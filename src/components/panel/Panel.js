@@ -11,6 +11,7 @@ export class Panel extends Component {
     static defaultProps = {
         id: null,
         header: null,
+        headerTemplate: null,
         toggleable: null,
         style: null,
         className: null,
@@ -26,6 +27,7 @@ export class Panel extends Component {
     static propTypes = {
         id: PropTypes.string,
         header: PropTypes.any,
+        headerTemplate: PropTypes.any,
         toggleable: PropTypes.bool,
         style: PropTypes.object,
         className: PropTypes.string,
@@ -114,20 +116,43 @@ export class Panel extends Component {
     }
 
     renderHeader(collapsed) {
-        if (this.props.header || this.props.toggleable) {
-            const header = ObjectUtils.getJSXElement(this.props.header, this.props);
-            const icons = ObjectUtils.getJSXElement(this.props.icons, this.props);
-            const toggleIcon = this.renderToggleIcon(collapsed);
+        const header = ObjectUtils.getJSXElement(this.props.header, this.props);
+        const icons = ObjectUtils.getJSXElement(this.props.icons, this.props);
+        const togglerElement = this.renderToggleIcon(collapsed);
+        const titleElement = <span className="p-panel-title" id={this.id + '_header'}>{header}</span>;
+        const iconsElement = (
+            <div className="p-panel-icons">
+                {icons}
+                {togglerElement}
+            </div>
+        );
+        const content = (
+            <div className="p-panel-header">
+                {titleElement}
+                {iconsElement}
+            </div>
+        );
 
-            return (
-                <div className="p-panel-header">
-                    <span className="p-panel-title" aria-label={this.id + '_header'}>{header}</span>
-                    <div className="p-panel-icons">
-                        {icons}
-                        {toggleIcon}
-                    </div>
-                </div>
-            );
+        if (this.props.headerTemplate) {
+            const defaultContentOptions = {
+                className: 'p-panel-header',
+                titleClassName: 'p-panel-title',
+                iconsClassName: 'p-panel-icons',
+                togglerClassName: 'p-panel-header-icon p-panel-toggler p-link',
+                togglerIconClassName: collapsed ? this.props.expandIcon : this.props.collapseIcon,
+                onTogglerClick: this.toggle,
+                titleElement,
+                iconsElement,
+                togglerElement,
+                element: content,
+                props: this.props,
+                collapsed
+            };
+
+            return ObjectUtils.getJSXElement(this.props.headerTemplate, defaultContentOptions);
+        }
+        else if (this.props.header || this.props.toggleable) {
+            return content;
         }
 
         return null;
