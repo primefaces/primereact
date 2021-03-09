@@ -42,6 +42,7 @@ export class TreeTable extends Component {
         multiSortMeta: null,
         sortMode: 'single',
         defaultSortOrder: 1,
+        removableSort: false,
         selectionMode: null,
         selectionKeys: null,
         contextMenuSelectionKey: null,
@@ -116,6 +117,7 @@ export class TreeTable extends Component {
         multiSortMeta: PropTypes.array,
         sortMode: PropTypes.string,
         defaultSortOrder: PropTypes.number,
+        removableSort: PropTypes.bool,
         selectionMode: PropTypes.string,
         selectionKeys: PropTypes.any,
         contextMenuSelectionKey: PropTypes.any,
@@ -220,11 +222,13 @@ export class TreeTable extends Component {
 
     onSort(event) {
         let sortField = event.sortField;
-        let sortOrder = (this.getSortField() === event.sortField) ? this.getSortOrder() * -1 : this.props.defaultSortOrder;
+        let sortOrder = this.props.defaultSortOrder;
         let multiSortMeta;
+        let eventMeta;
 
         this.columnSortable = event.sortable;
         this.columnSortFunction = event.sortFunction;
+        this.columnField = event.sortField;
 
         if (this.props.sortMode === 'multiple') {
             let metaKey = event.originalEvent.metaKey || event.originalEvent.ctrlKey;
@@ -235,32 +239,47 @@ export class TreeTable extends Component {
                 sortOrder = sortMeta ? this.getCalculatedSortOrder(sortMeta.order) : sortOrder;
             }
 
-            if (!multiSortMeta || !metaKey) {
-                multiSortMeta = [];
+            const newMetaData = {field: sortField, order: sortOrder};
+
+            if (sortOrder) {
+                if(!multiSortMeta || !metaKey) {
+                    multiSortMeta = [];
+                }
+
+                this.addSortMeta(newMetaData, multiSortMeta);
+            }
+            else if (this.props.removableSort && multiSortMeta) {
+                this.removeSortMeta(newMetaData, multiSortMeta);
             }
 
-            multiSortMeta = this.addSortMeta({field: sortField, order: sortOrder}, multiSortMeta);
+            eventMeta = {
+                multiSortMeta: multiSortMeta
+            };
+        }
+        else {
+            sortOrder = (this.getSortField() === sortField) ? this.getCalculatedSortOrder(this.getSortOrder()) : sortOrder;
+
+            if (this.props.removableSort) {
+                sortField = sortOrder ? sortField : null;
+            }
+
+            eventMeta = {
+                sortField: sortField,
+                sortOrder: sortOrder
+            };
         }
 
         if (this.props.onSort) {
-            this.props.onSort({
-                sortField: sortField,
-                sortOrder: sortOrder,
-                multiSortMeta: multiSortMeta
-            });
+            this.props.onSort(eventMeta);
         }
         else {
-            this.setState({
-                sortField: sortField,
-                sortOrder: sortOrder,
-                first: 0,
-                multiSortMeta: multiSortMeta
-            });
+            eventMeta.first = 0;
+            this.setState(eventMeta);
         }
     }
 
     getCalculatedSortOrder(currentOrder) {
-        return currentOrder * -1;
+        return this.props.removableSort ? (this.props.defaultSortOrder === currentOrder ? currentOrder * -1 : 0) : currentOrder * -1;
     }
 
     addSortMeta(meta, multiSortMeta) {
@@ -272,13 +291,26 @@ export class TreeTable extends Component {
             }
         }
 
-        let value = [...multiSortMeta];
-        if(index >= 0)
-            value[index] = meta;
+        if (index >= 0)
+            multiSortMeta[index] = meta;
         else
-            value.push(meta);
+            multiSortMeta.push(meta);
+    }
 
-        return value;
+    removeSortMeta(meta, multiSortMeta) {
+        let index = -1;
+        for (let i = 0; i < multiSortMeta.length; i++) {
+            if(multiSortMeta[i].field === meta.field) {
+                index = i;
+                break;
+            }
+        }
+
+        if (index >= 0) {
+            multiSortMeta.splice(index, 1);
+        }
+
+        multiSortMeta = multiSortMeta.length > 0 ? multiSortMeta : null;
     }
 
     sortSingle(data) {
