@@ -9,6 +9,7 @@ interface OverlayPanelProps {
     className?: string;
     appendTo?: any;
     ariaCloseLabel?: string;
+    breakpoints?: {[key: string]: string};
     onHide?(): void;
 }
 

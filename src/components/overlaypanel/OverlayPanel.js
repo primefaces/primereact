@@ -18,6 +18,7 @@ export class OverlayPanel extends Component {
         style: null,
         className: null,
         appendTo: null,
+        breakpoints: null,
         ariaCloseLabel: 'close',
         onHide: null
     }
@@ -29,6 +30,7 @@ export class OverlayPanel extends Component {
         style: PropTypes.object,
         className: PropTypes.string,
         appendTo: PropTypes.any,
+        breakpoints: PropTypes.object,
         ariaCloseLabel: PropTypes.string,
         onHide: PropTypes.func
     }
@@ -47,6 +49,7 @@ export class OverlayPanel extends Component {
         this.onExit = this.onExit.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
+        this.attributeSelector = UniqueComponentId();
         this.overlayRef = React.createRef();
     }
 
@@ -176,6 +179,7 @@ export class OverlayPanel extends Component {
 
     onEnter() {
         this.overlayRef.current.style.zIndex = String(DomHandler.generateZIndex());
+        this.overlayRef.current.setAttribute(this.attributeSelector, '');
         this.align();
     }
 
@@ -210,12 +214,43 @@ export class OverlayPanel extends Component {
         }
     }
 
+    createStyle() {
+        if (!this.styleElement) {
+            this.styleElement = document.createElement('style');
+            document.head.appendChild(this.styleElement);
+
+            let innerHTML = '';
+            for (let breakpoint in this.props.breakpoints) {
+                innerHTML += `
+                    @media screen and (max-width: ${breakpoint}) {
+                        .p-overlaypanel[${this.attributeSelector}] {
+                            width: ${this.props.breakpoints[breakpoint]} !important;
+                        }
+                    }
+                `
+            }
+
+            this.styleElement.innerHTML = innerHTML;
+        }
+    }
+
+    componentDidMount() {
+        if (this.props.breakpoints) {
+            this.createStyle();
+        }
+    }
+
     componentWillUnmount() {
         this.unbindDocumentClickListener();
         this.unbindResizeListener();
         if (this.scrollHandler) {
             this.scrollHandler.destroy();
             this.scrollHandler = null;
+        }
+
+        if (this.styleElement) {
+            document.head.removeChild(this.styleElement);
+            this.styleElement = null;
         }
     }
 

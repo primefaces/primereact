@@ -280,6 +280,18 @@ import { OverlayPanel } from 'primereact/overlaypanel';
 `}
 </CodeHighlight>
 
+            <h5>Responsive</h5>
+            <p>OverlayPanel width can be adjusted per screen size with the <i>breakpoints</i> option. In example below, default width is set to 450px and below 961px, width would be 75vw and finally below 641px width becomes
+                100%. The value of <i>breakpoints</i> should be an object literal whose keys are the maximum screen sizes and values are the widths per screen.</p>
+
+<CodeHighlight>
+{`
+<OverlayPanel ref={op} breakpoints={{'960px': '75vw', '640px': '100vw'}} style={{width: '450px'}}>
+    // Content
+</OverlayPanel>
+`}
+</CodeHighlight>
+
             <h5>Properties</h5>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
@@ -333,6 +345,12 @@ import { OverlayPanel } from 'primereact/overlaypanel';
                             <td>string</td>
                             <td>close</td>
                             <td>Aria label of the close icon.</td>
+                        </tr>
+                        <tr>
+                            <td>breakpoints</td>
+                            <td>object</td>
+                            <td>null</td>
+                            <td>Object literal to define widths per screen size.</td>
                         </tr>
                     </tbody>
                 </table>
