@@ -36,6 +36,13 @@
                 "url": "https://github.com/primefaces/primereact/issues/862"
             }
         ],
+        "panel": [
+            {
+                "number": 1858,
+                "title": "Add headerTemplate property to Panel",
+                "url": "https://github.com/primefaces/primereact/issues/1858"
+            }
+        ],
         "panelmenu": [
             {
                 "number": 1846,
