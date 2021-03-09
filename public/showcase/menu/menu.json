@@ -30,21 +30,6 @@
                     "meta": [
                         "accessibility"
                     ]
-                },
-                {
-                    "name": "Source Code",
-                    "href": "https://github.com/primefaces/primereact",
-                    "meta": [
-                        "source code"
-                    ]
-                },
-                {
-                    "name": "Store",
-                    "href": "https://www.primefaces.org/store/",
-                    "meta": [
-                        "store",
-                        "primestore"
-                    ]
                 }
             ]
         },
@@ -78,6 +63,34 @@
             ]
         },
         {
+            "name": "Resources",
+            "meta": [
+                "resources"
+            ],
+            "children": [
+                {
+                    "name": "PrimeTV",
+                    "href": "https://www.youtube.com/channel/UCTgmp69aBOlLnPEqlUyetWw"
+                },
+                {
+                    "name": "Source Code",
+                    "href": "https://github.com/primefaces/primereact"
+                },
+                {
+                    "name": "Store",
+                    "href": "https://www.primefaces.org/store/",
+                    "meta": [
+                        "store",
+                        "primestore"
+                    ]
+                },
+                {
+                    "name": "Twitter",
+                    "href": "https://twitter.com/primereact?lang=en"
+                }
+            ]
+        },
+        {
             "name": "Theming",
             "meta": [
                 "theming"
@@ -103,6 +116,11 @@
                     "meta": [
                         "visual editor"
                     ]
+                },
+                {
+                    "name": "Colors",
+                    "to": "/colors",
+                    "badge": "New"
                 },
                 {
                     "name": "SASS API",

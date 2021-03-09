@@ -167,6 +167,7 @@ import { ChipDemo } from './showcase/chip/ChipDemo';
 import { ConfirmDialogDemo } from './showcase/confirmdialog/ConfirmDialogDemo';
 import { ConfirmPopupDemo } from './showcase/confirmpopup/ConfirmPopupDemo';
 import { InvalidDemo } from './showcase/invalid/InvalidDemo';
+import { ColorsDemo } from './showcase/colors/ColorsDemo';
 
 class AppRouter extends Component {
 
@@ -359,6 +360,7 @@ class AppRouter extends Component {
                 <Route path="/confirmdialog" component={ConfirmDialogDemo} />
                 <Route path="/confirmpopup" component={ConfirmPopupDemo} />
                 <Route path="/invalid" component={InvalidDemo} />
+                <Route path="/colors" component={ColorsDemo} />
             </>
         );
     }
