@@ -48,7 +48,7 @@ export class BodyCell extends Component {
     }
 
     onClick(event) {
-        if (this.props.editMode !== 'row' && this.props.editor && !this.state.editing && (!this.props.tableSelectionMode || (this.props.tableSelectionMode && this.props.selected))) {
+        if (this.props.editMode !== 'row' && this.props.editor && !this.state.editing && (this.props.selectOnEdit || (!this.props.selectOnEdit && this.props.selected))) {
             this.selfClick = true;
 
             if (this.props.onBeforeEditorShow) {

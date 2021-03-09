@@ -52,6 +52,7 @@ export class DataTable extends Component {
         compareSelectionBy: 'deepEquals',
         dataKey: null,
         metaKeySelection: true,
+        selectOnEdit: true,
         headerColumnGroup: null,
         footerColumnGroup: null,
         frozenHeaderColumnGroup: null,
@@ -155,6 +156,7 @@ export class DataTable extends Component {
         compareSelectionBy: PropTypes.string,
         dataKey: PropTypes.string,
         metaKeySelection: PropTypes.bool,
+        selectOnEdit: PropTypes.bool,
         headerColumnGroup: PropTypes.any,
         footerColumnGroup: PropTypes.any,
         frozenHeaderColumnGroup: PropTypes.any,
@@ -1328,7 +1330,7 @@ export class DataTable extends Component {
                         selectionMode={this.props.selectionMode} selection={this.props.selection} metaKeySelection={this.props.metaKeySelection} frozen={frozen} frozenSelectionMode={this.frozenSelectionMode}
                         onSelectionChange={this.props.onSelectionChange} onRowClick={this.props.onRowClick} onRowDoubleClick={this.props.onRowDoubleClick} onRowSelect={this.props.onRowSelect} onRowUnselect={this.props.onRowUnselect}
                         contextMenuSelection={this.props.contextMenuSelection} onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu}
-                        expandedRows={this.props.expandedRows} onRowToggle={this.props.onRowToggle} rowExpansionTemplate={this.props.rowExpansionTemplate}
+                        expandedRows={this.props.expandedRows} onRowToggle={this.props.onRowToggle} rowExpansionTemplate={this.props.rowExpansionTemplate} selectOnEdit={this.props.selectOnEdit}
                         onRowExpand={this.props.onRowExpand} onRowCollapse={this.props.onRowCollapse} emptyMessage={this.props.emptyMessage}
                         virtualScroll={this.props.virtualScroll} virtualRowHeight={this.props.virtualRowHeight} loading={this.props.loading}
                         groupField={this.props.groupField} rowGroupMode={this.props.rowGroupMode} rowGroupHeaderTemplate={this.props.rowGroupHeaderTemplate} rowGroupFooterTemplate={this.props.rowGroupFooterTemplate}

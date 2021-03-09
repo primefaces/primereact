@@ -37,6 +37,7 @@ interface DataTableProps {
     compareSelectionBy?: string;
     dataKey?: string;
     metaKeySelection?: boolean;
+    selectOnEdit?: boolean;
     headerColumnGroup?: any;
     footerColumnGroup?: any;
     frozenHeaderColumnGroup?: any;
