@@ -1090,13 +1090,13 @@ export class DataTable extends Component {
     exportCSV(options) {
         let data;
         let csv = '\ufeff';
-        let columns = React.Children.toArray(this.props.children);
+        let columns = this.getColumns();
 
         if (options && options.selectionOnly) {
             data = this.props.selection || [];
         }
         else {
-            data = this.processData();
+            data = [...(this.props.frozenValue||[]), ...(this.processData()||[])];
         }
 
         //headers
@@ -1143,7 +1143,7 @@ export class DataTable extends Component {
         });
 
         let blob = new Blob([csv],{
-            type: 'text/csv;charset=utf-8;'
+            type: 'application/csv;charset=utf-8;'
         });
 
         if(window.navigator.msSaveOrOpenBlob) {
@@ -1151,18 +1151,18 @@ export class DataTable extends Component {
         }
         else {
             let link = document.createElement("a");
-            link.style.display = 'none';
-            document.body.appendChild(link);
             if(link.download !== undefined) {
                 link.setAttribute('href', URL.createObjectURL(blob));
                 link.setAttribute('download', this.props.exportFilename + '.csv');
+                link.style.display = 'none';
+                document.body.appendChild(link);
                 link.click();
+                document.body.removeChild(link);
             }
             else {
                 csv = 'data:text/csv;charset=utf-8,' + csv;
                 window.open(encodeURI(csv));
             }
-            document.body.removeChild(link);
         }
     }
 
