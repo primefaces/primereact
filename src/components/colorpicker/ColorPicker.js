@@ -58,6 +58,12 @@ export class ColorPicker extends Component {
         this.onOverlayEntered = this.onOverlayEntered.bind(this);
         this.onOverlayExit = this.onOverlayExit.bind(this);
         this.onPanelClick = this.onPanelClick.bind(this);
+        this.onColorMousedown = this.onColorMousedown.bind(this);
+        this.onHueMousedown = this.onHueMousedown.bind(this);
+        this.onColorDragStart = this.onColorDragStart.bind(this);
+        this.onHueDragStart = this.onHueDragStart.bind(this);
+        this.onDrag = this.onDrag.bind(this);
+        this.onDragEnd = this.onDragEnd.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
         this.overlayRef = React.createRef();
@@ -77,9 +83,16 @@ export class ColorPicker extends Component {
             return;
         }
 
+        this.bindDragListeners();
+        this.onHueDragStart(event);
+    }
+
+    onHueDragStart(event) {
+        if (this.props.disabled) {
+            return;
+        }
+
         this.hueDragging = true;
-        this.bindDocumentMouseMoveListener();
-        this.bindDocumentMouseUpListener();
         this.pickHue(event);
         DomHandler.addClass(this.container, 'p-colorpicker-dragging');
     }
@@ -102,11 +115,48 @@ export class ColorPicker extends Component {
             return;
         }
 
+        this.bindDragListeners();
+        this.onColorDragStart(event);
+    }
+
+    onColorDragStart(event) {
+        if (this.props.disabled) {
+            return;
+        }
+
         this.colorDragging = true;
-        this.bindDocumentMouseMoveListener();
-        this.bindDocumentMouseUpListener();
         this.pickColor(event);
         DomHandler.addClass(this.container, 'p-colorpicker-dragging');
+        event.preventDefault();
+    }
+
+    onDrag(event) {
+        if (this.colorDragging) {
+            this.pickColor(event);
+            event.preventDefault();
+        }
+
+        if (this.hueDragging) {
+            this.pickHue(event);
+            event.preventDefault();
+        }
+    }
+
+    onDragEnd() {
+        this.colorDragging = false;
+        this.hueDragging = false;
+        DomHandler.removeClass(this.container, 'p-colorpicker-dragging');
+        this.unbindDragListeners();
+    }
+
+    bindDragListeners() {
+        this.bindDocumentMouseMoveListener();
+        this.bindDocumentMouseUpListener();
+    }
+
+    unbindDragListeners() {
+        this.unbindDocumentMouseMoveListener();
+        this.unbindDocumentMouseUpListener();
     }
 
     pickColor(event) {
@@ -568,7 +618,8 @@ export class ColorPicker extends Component {
 
     renderColorSelector() {
         return (
-            <div ref={(el) => this.colorSelector = el} className="p-colorpicker-color-selector" onMouseDown={this.onColorMousedown.bind(this)}>
+            <div ref={(el) => this.colorSelector = el} className="p-colorpicker-color-selector" onMouseDown={this.onColorMousedown}
+                onTouchStart={this.onColorDragStart} onTouchMove={this.onDrag} onTouchEnd={this.onDragEnd}>
                 <div className="p-colorpicker-color">
                     <div ref={(el) => this.colorHandle = el} className="p-colorpicker-color-handle"></div>
                 </div>
@@ -578,7 +629,8 @@ export class ColorPicker extends Component {
 
     renderHue() {
         return (
-            <div ref={(el) => this.hueView = el} className="p-colorpicker-hue" onMouseDown={this.onHueMousedown.bind(this)}>
+            <div ref={(el) => this.hueView = el} className="p-colorpicker-hue" onMouseDown={this.onHueMousedown}
+                onTouchStart={this.onHueDragStart} onTouchMove={this.onDrag} onTouchEnd={this.onDragEnd}>
                 <div ref={(el) => this.hueHandle = el} className="p-colorpicker-hue-handle"></div>
             </div>
         );
