@@ -1,4 +1,628 @@
 {
+    "6.1.0": {
+        "overlaypanel": [
+            {
+                "number": 1856,
+                "title": "Add breakpoints property to Dialog, ConfirmDialog and OverlayPanel",
+                "url": "https://github.com/primefaces/primereact/issues/1856"
+            },
+            {
+                "number": 1832,
+                "title": "Improve the interaction of nested overlays",
+                "url": "https://github.com/primefaces/primereact/issues/1832"
+            }
+        ],
+        "confirmdialog": [
+            {
+                "number": 1856,
+                "title": "Add breakpoints property to Dialog, ConfirmDialog and OverlayPanel",
+                "url": "https://github.com/primefaces/primereact/issues/1856"
+            }
+        ],
+        "dialog": [
+            {
+                "number": 1856,
+                "title": "Add breakpoints property to Dialog, ConfirmDialog and OverlayPanel",
+                "url": "https://github.com/primefaces/primereact/issues/1856"
+            },
+            {
+                "number": 1616,
+                "title": "Add draggable and resizable features to Dialog",
+                "url": "https://github.com/primefaces/primereact/issues/1616"
+            },
+            {
+                "number": 862,
+                "title": "Accessibility issues in Tooltip and Dialog components",
+                "url": "https://github.com/primefaces/primereact/issues/862"
+            }
+        ],
+        "panelmenu": [
+            {
+                "number": 1846,
+                "title": "Add multiple property to PanelMenu",
+                "url": "https://github.com/primefaces/primereact/issues/1846"
+            },
+            {
+                "number": 1844,
+                "title": "PanelMenu animation is not working as expected",
+                "url": "https://github.com/primefaces/primereact/issues/1844"
+            },
+            {
+                "number": 1434,
+                "title": "Disabling a Menu Item doesnt add aria-disabled label",
+                "url": "https://github.com/primefaces/primereact/issues/1434"
+            },
+            {
+                "number": 1011,
+                "title": "PanelMenu collapses on clicking the menu link instead of being in expanded state",
+                "url": "https://github.com/primefaces/primereact/issues/1011"
+            }
+        ],
+        "datatable": [
+            {
+                "number": 1855,
+                "title": "DataTable is not working with defaultSortOrder={-1}",
+                "url": "https://github.com/primefaces/primereact/issues/1855"
+            },
+            {
+                "number": 1853,
+                "title": "Add selectionOnly options to CSV export on DataTable",
+                "url": "https://github.com/primefaces/primereact/issues/1853"
+            },
+            {
+                "number": 1832,
+                "title": "Improve the interaction of nested overlays",
+                "url": "https://github.com/primefaces/primereact/issues/1832"
+            },
+            {
+                "number": 1839,
+                "title": "Improve template option on Paginator",
+                "url": "https://github.com/primefaces/primereact/issues/1839"
+            },
+            {
+                "number": 1820,
+                "title": "When the 'rows' property changes, Pagination component does not update",
+                "url": "https://github.com/primefaces/primereact/issues/1820"
+            },
+            {
+                "number": 1817,
+                "title": "Improve checkbox selection on DataTable",
+                "url": "https://github.com/primefaces/primereact/issues/1817"
+            },
+            {
+                "number": 1292,
+                "title": "TreeTable/DataTable goes to edit mode when selected (single click)",
+                "url": "https://github.com/primefaces/primereact/issues/1292"
+            },
+            {
+                "number": 1440,
+                "title": "DataTable/TreeTable: implement configurable filterDelay",
+                "url": "https://github.com/primefaces/primereact/issues/1440"
+            },
+            {
+                "number": 1828,
+                "title": "Editing DataTable and TreeTable are not working as expected on React/ReactDOM ^17.0.1",
+                "url": "https://github.com/primefaces/primereact/issues/1828"
+            },
+            {
+                "number": 589,
+                "title": "Add onBeforeEditorShow and onBeforeEditorHide callbacks to Column on DataTable with cell editing",
+                "url": "https://github.com/primefaces/primereact/issues/589"
+            },
+            {
+                "number": 1098,
+                "title": "DataTable csv export fails in chrome but is working in IE",
+                "url": "https://github.com/primefaces/primereact/issues/1098"
+            },
+            {
+                "number": 1813,
+                "title": "DataTable - accessibility of sorting buttons",
+                "url": "https://github.com/primefaces/primereact/issues/1813"
+            },
+            {
+                "number": 1135,
+                "title": "Trigger row editing on datatable programmatically",
+                "url": "https://github.com/primefaces/primereact/issues/1135"
+            },
+            {
+                "number": 921,
+                "title": "Accessibility of the DataTable expander cell button",
+                "url": "https://github.com/primefaces/primereact/issues/921"
+            },
+            {
+                "number": 1162,
+                "title": "Change row navigation structure on DataTable with selection",
+                "url": "https://github.com/primefaces/primereact/issues/1162"
+            },
+            {
+                "number": 1840,
+                "title": "Add paginatorClassName to DataTable, TreeTable and DataView",
+                "url": "https://github.com/primefaces/primereact/issues/1840"
+            }
+        ],
+        "avatar": [
+            {
+                "number": 1819,
+                "title": "Add onClick event to Avatar",
+                "url": "https://github.com/primefaces/primereact/issues/1819"
+            }
+        ],
+        "colorpicker": [
+            {
+                "number": 1857,
+                "title": "Add touch support to ColorPicker",
+                "url": "https://github.com/primefaces/primereact/issues/1857"
+            },
+            {
+                "number": 1832,
+                "title": "Improve the interaction of nested overlays",
+                "url": "https://github.com/primefaces/primereact/issues/1832"
+            },
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            }
+        ],
+        "treetable": [
+            {
+                "number": 1275,
+                "title": "Add removableSort property on TreeTable component",
+                "url": "https://github.com/primefaces/primereact/issues/1275"
+            },
+            {
+                "number": 1832,
+                "title": "Improve the interaction of nested overlays",
+                "url": "https://github.com/primefaces/primereact/issues/1832"
+            },
+            {
+                "number": 1839,
+                "title": "Improve template option on Paginator",
+                "url": "https://github.com/primefaces/primereact/issues/1839"
+            },
+            {
+                "number": 1292,
+                "title": "TreeTable/DataTable goes to edit mode when selected (single click)",
+                "url": "https://github.com/primefaces/primereact/issues/1292"
+            },
+            {
+                "number": 1440,
+                "title": "DataTable/TreeTable: implement configurable filterDelay",
+                "url": "https://github.com/primefaces/primereact/issues/1440"
+            },
+            {
+                "number": 1828,
+                "title": "Editing DataTable and TreeTable are not working as expected on React/ReactDOM ^17.0.1",
+                "url": "https://github.com/primefaces/primereact/issues/1828"
+            },
+            {
+                "number": 1840,
+                "title": "Add paginatorClassName to DataTable, TreeTable and DataView",
+                "url": "https://github.com/primefaces/primereact/issues/1840"
+            }
+        ],
+        "confirmpopup": [
+            {
+                "number": 1832,
+                "title": "Improve the interaction of nested overlays",
+                "url": "https://github.com/primefaces/primereact/issues/1832"
+            }
+        ],
+        "tieredmenu": [
+            {
+                "number": 1832,
+                "title": "Improve the interaction of nested overlays",
+                "url": "https://github.com/primefaces/primereact/issues/1832"
+            },
+            {
+                "number": 1434,
+                "title": "Disabling a Menu Item doesnt add aria-disabled label",
+                "url": "https://github.com/primefaces/primereact/issues/1434"
+            }
+        ],
+        "splitbutton": [
+            {
+                "number": 1832,
+                "title": "Improve the interaction of nested overlays",
+                "url": "https://github.com/primefaces/primereact/issues/1832"
+            },
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            }
+        ],
+        "autocomplete": [
+            {
+                "number": 1832,
+                "title": "Improve the interaction of nested overlays",
+                "url": "https://github.com/primefaces/primereact/issues/1832"
+            },
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            },
+            {
+                "number": 1808,
+                "title": "Dropdown menu is separate from the input field",
+                "url": "https://github.com/primefaces/primereact/issues/1808"
+            }
+        ],
+        "calendar": [
+            {
+                "number": 1832,
+                "title": "Improve the interaction of nested overlays",
+                "url": "https://github.com/primefaces/primereact/issues/1832"
+            },
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            },
+            {
+                "number": 765,
+                "title": "Add mask property to Calendar",
+                "url": "https://github.com/primefaces/primereact/issues/765"
+            }
+        ],
+        "cascadeselect": [
+            {
+                "number": 1832,
+                "title": "Improve the interaction of nested overlays",
+                "url": "https://github.com/primefaces/primereact/issues/1832"
+            },
+            {
+                "number": 1833,
+                "title": "CascadeSelect is not working with appendTo property",
+                "url": "https://github.com/primefaces/primereact/issues/1833"
+            }
+        ],
+        "dropdown": [
+            {
+                "number": 1832,
+                "title": "Improve the interaction of nested overlays",
+                "url": "https://github.com/primefaces/primereact/issues/1832"
+            },
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            },
+            {
+                "number": 1081,
+                "title": "Add showFilterClear proprty to Dropdown",
+                "url": "https://github.com/primefaces/primereact/issues/1081"
+            }
+        ],
+        "menu": [
+            {
+                "number": 1832,
+                "title": "Improve the interaction of nested overlays",
+                "url": "https://github.com/primefaces/primereact/issues/1832"
+            },
+            {
+                "number": 1434,
+                "title": "Disabling a Menu Item doesnt add aria-disabled label",
+                "url": "https://github.com/primefaces/primereact/issues/1434"
+            }
+        ],
+        "multiselect": [
+            {
+                "number": 1832,
+                "title": "Improve the interaction of nested overlays",
+                "url": "https://github.com/primefaces/primereact/issues/1832"
+            },
+            {
+                "number": 1841,
+                "title": "Add panelHeaderTemplate and panelFooterTemplate properties to MultiSelect",
+                "url": "https://github.com/primefaces/primereact/issues/1841"
+            },
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            },
+            {
+                "number": 1815,
+                "title": "[Multiselect] Feature request: Configure Maximum allowed number of items selectable in Multiselect",
+                "url": "https://github.com/primefaces/primereact/issues/1815"
+            }
+        ],
+        "overlayeventbus": [
+            {
+                "number": 1832,
+                "title": "Improve the interaction of nested overlays",
+                "url": "https://github.com/primefaces/primereact/issues/1832"
+            }
+        ],
+        "password": [
+            {
+                "number": 1832,
+                "title": "Improve the interaction of nested overlays",
+                "url": "https://github.com/primefaces/primereact/issues/1832"
+            },
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            }
+        ],
+        "slidemenu": [
+            {
+                "number": 1832,
+                "title": "Improve the interaction of nested overlays",
+                "url": "https://github.com/primefaces/primereact/issues/1832"
+            },
+            {
+                "number": 1434,
+                "title": "Disabling a Menu Item doesnt add aria-disabled label",
+                "url": "https://github.com/primefaces/primereact/issues/1434"
+            }
+        ],
+        "utils": [
+            {
+                "number": 1832,
+                "title": "Improve the interaction of nested overlays",
+                "url": "https://github.com/primefaces/primereact/issues/1832"
+            },
+            {
+                "number": 765,
+                "title": "Add mask property to Calendar",
+                "url": "https://github.com/primefaces/primereact/issues/765"
+            },
+            {
+                "number": 862,
+                "title": "Accessibility issues in Tooltip and Dialog components",
+                "url": "https://github.com/primefaces/primereact/issues/862"
+            }
+        ],
+        "toast": [
+            {
+                "number": 1805,
+                "title": "Add onClose callback to custom content on ToastMessage",
+                "url": "https://github.com/primefaces/primereact/issues/1805"
+            }
+        ],
+        "paginator": [
+            {
+                "number": 1839,
+                "title": "Improve template option on Paginator",
+                "url": "https://github.com/primefaces/primereact/issues/1839"
+            },
+            {
+                "number": 1820,
+                "title": "When the 'rows' property changes, Pagination component does not update",
+                "url": "https://github.com/primefaces/primereact/issues/1820"
+            }
+        ],
+        "tooltip": [
+            {
+                "number": 1811,
+                "title": "data-pr-{options} on Global Tooltip  doesn't work",
+                "url": "https://github.com/primefaces/primereact/issues/1811"
+            },
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            },
+            {
+                "number": 1827,
+                "title": "Add disabled option to Tooltip",
+                "url": "https://github.com/primefaces/primereact/issues/1827"
+            },
+            {
+                "number": 862,
+                "title": "Accessibility issues in Tooltip and Dialog components",
+                "url": "https://github.com/primefaces/primereact/issues/862"
+            }
+        ],
+        "dataview": [
+            {
+                "number": 1839,
+                "title": "Improve template option on Paginator",
+                "url": "https://github.com/primefaces/primereact/issues/1839"
+            },
+            {
+                "number": 1840,
+                "title": "Add paginatorClassName to DataTable, TreeTable and DataView",
+                "url": "https://github.com/primefaces/primereact/issues/1840"
+            }
+        ],
+        "button": [
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            }
+        ],
+        "checkbox": [
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            }
+        ],
+        "chips": [
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            }
+        ],
+        "inputmask": [
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            }
+        ],
+        "inputnumber": [
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            }
+        ],
+        "inputswitch": [
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            }
+        ],
+        "inputtext": [
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            },
+            {
+                "number": 1818,
+                "title": "InputText component reference returns Invalid prop forwardRef",
+                "url": "https://github.com/primefaces/primereact/issues/1818"
+            },
+            {
+                "number": 971,
+                "title": "Support for svg element in icon properties",
+                "url": "https://github.com/primefaces/primereact/issues/971"
+            }
+        ],
+        "inputtextarea": [
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            }
+        ],
+        "listbox": [
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            }
+        ],
+        "radiobutton": [
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            }
+        ],
+        "rating": [
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            }
+        ],
+        "selectbutton": [
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            }
+        ],
+        "togglebutton": [
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            }
+        ],
+        "tristatecheckbox": [
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            }
+        ],
+        "menubar": [
+            {
+                "number": 1809,
+                "title": "Menubar and Toolbar, start/end wrong prop types, that don't accept JSX.Element type",
+                "url": "https://github.com/primefaces/primereact/issues/1809"
+            }
+        ],
+        "toolbar": [
+            {
+                "number": 1809,
+                "title": "Menubar and Toolbar, start/end wrong prop types, that don't accept JSX.Element type",
+                "url": "https://github.com/primefaces/primereact/issues/1809"
+            }
+        ],
+        "breadcrumb": [
+            {
+                "number": 1434,
+                "title": "Disabling a Menu Item doesnt add aria-disabled label",
+                "url": "https://github.com/primefaces/primereact/issues/1434"
+            }
+        ],
+        "contextmenu": [
+            {
+                "number": 1434,
+                "title": "Disabling a Menu Item doesnt add aria-disabled label",
+                "url": "https://github.com/primefaces/primereact/issues/1434"
+            }
+        ],
+        "megamenu": [
+            {
+                "number": 1434,
+                "title": "Disabling a Menu Item doesnt add aria-disabled label",
+                "url": "https://github.com/primefaces/primereact/issues/1434"
+            }
+        ],
+        "steps": [
+            {
+                "number": 1434,
+                "title": "Disabling a Menu Item doesnt add aria-disabled label",
+                "url": "https://github.com/primefaces/primereact/issues/1434"
+            }
+        ],
+        "tabmenu": [
+            {
+                "number": 1434,
+                "title": "Disabling a Menu Item doesnt add aria-disabled label",
+                "url": "https://github.com/primefaces/primereact/issues/1434"
+            }
+        ],
+        "picklist": [
+            {
+                "number": 1814,
+                "title": "PickList: Move Up (Single) and Move Down buttons are not working",
+                "url": "https://github.com/primefaces/primereact/issues/1814"
+            }
+        ],
+        "menuitem": [
+            {
+                "number": 1823,
+                "title": "MenuItem interface missing template property",
+                "url": "https://github.com/primefaces/primereact/issues/1823"
+            }
+        ],
+        "slider": [
+            {
+                "number": 694,
+                "title": "Keyboard Accessibility for Slider",
+                "url": "https://github.com/primefaces/primereact/issues/694"
+            }
+        ],
+        "column": [
+            {
+                "number": 589,
+                "title": "Add onBeforeEditorShow and onBeforeEditorHide callbacks to Column on DataTable with cell editing",
+                "url": "https://github.com/primefaces/primereact/issues/589"
+            }
+        ],
+        "tree": [
+            {
+                "number": 1020,
+                "title": "Improve the parameters of onDragDrop callback on Tree",
+                "url": "https://github.com/primefaces/primereact/issues/1020"
+            }
+        ]
+    },
     "6.0.2": {
         "autocomplete": [
             {
