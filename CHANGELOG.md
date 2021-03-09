@@ -54,6 +54,7 @@
 - DataTable - accessibility of sorting buttons [\#1813](https://github.com/primefaces/primereact/issues/1813)
 - Dropdown menu is separate from the input field [\#1808](https://github.com/primefaces/primereact/issues/1808)
 - DataTable csv export fails in chrome but is working in IE [\#1098](https://github.com/primefaces/primereact/issues/1098)
+- The toggler icon of Tree/TreeTable is not displaying correctly in mobile mode [\#1859](https://github.com/primefaces/primereact/issues/1859)
 
 ## [6.0.2](https://github.com/primefaces/primereact/tree/6.0.2) (2021-02-04)
 

@@ -206,6 +206,11 @@
                 "number": 1840,
                 "title": "Add paginatorClassName to DataTable, TreeTable and DataView",
                 "url": "https://github.com/primefaces/primereact/issues/1840"
+            },
+            {
+                "number": 1859,
+                "title": "The toggler icon of Tree/TreeTable is not displaying correctly in mobile mode",
+                "url": "https://github.com/primefaces/primereact/issues/1859"
             }
         ],
         "confirmpopup": [
@@ -627,6 +632,11 @@
                 "number": 1020,
                 "title": "Improve the parameters of onDragDrop callback on Tree",
                 "url": "https://github.com/primefaces/primereact/issues/1020"
+            },
+            {
+                "number": 1859,
+                "title": "The toggler icon of Tree/TreeTable is not displaying correctly in mobile mode",
+                "url": "https://github.com/primefaces/primereact/issues/1859"
             }
         ]
     },
