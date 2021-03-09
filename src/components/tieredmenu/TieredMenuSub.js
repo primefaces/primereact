@@ -233,7 +233,7 @@ export class TieredMenuSub extends Component {
         const submenu = this.renderSubmenu(item);
         let content = (
             <a href={item.url || '#'} className={linkClassName} target={item.target} role="menuitem" aria-haspopup={item.items != null}
-                onClick={(event) => this.onItemClick(event, item)} onKeyDown={(event) => this.onItemKeyDown(event, item)}>
+                onClick={(event) => this.onItemClick(event, item)} onKeyDown={(event) => this.onItemKeyDown(event, item)} aria-disabled={item.disabled}>
                 {icon}
                 {label}
                 {submenuIcon}

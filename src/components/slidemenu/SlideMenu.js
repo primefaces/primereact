@@ -90,7 +90,7 @@ export class SlideMenuSub extends Component {
         const submenuIcon = item.items && <span className={submenuIconClassName}></span>;
         const submenu = this.renderSubmenu(item);
         let content = (
-            <a href={item.url || '#'} className="p-menuitem-link" target={item.target} onClick={(event) => this.onItemClick(event, item, index)}>
+            <a href={item.url || '#'} className="p-menuitem-link" target={item.target} onClick={(event) => this.onItemClick(event, item, index)} aria-disabled={item.disabled}>
                 {icon}
                 {label}
                 {submenuIcon}

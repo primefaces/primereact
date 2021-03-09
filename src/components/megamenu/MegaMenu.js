@@ -279,7 +279,7 @@ export class MegaMenu extends Component {
             const icon = item.icon && <span className={iconClassName}></span>;
             const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
             let content = (
-                <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => this.onLeafClick(event, item)} role="menuitem">
+                <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => this.onLeafClick(event, item)} role="menuitem" aria-disabled={item.disabled}>
                     {icon}
                     {label}
                     <Ripple />
@@ -315,7 +315,7 @@ export class MegaMenu extends Component {
 
         return (
             <React.Fragment key={submenu.label}>
-                <li className={className} style={submenu.style} role="presentation">{submenu.label}</li>
+                <li className={className} style={submenu.style} role="presentation" aria-disabled={submenu.disabled}>{submenu.label}</li>
                 {items}
             </React.Fragment>
         );

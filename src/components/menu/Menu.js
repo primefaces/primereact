@@ -248,7 +248,7 @@ export class Menu extends Component {
 
         return (
             <React.Fragment key={submenu.label + '_' + index}>
-                <li className={className} style={submenu.style} role="presentation">{submenu.label}</li>
+                <li className={className} style={submenu.style} role="presentation" aria-disabled={submenu.disabled}>{submenu.label}</li>
                 {items}
             </React.Fragment>
         );
@@ -268,7 +268,7 @@ export class Menu extends Component {
         const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
         const tabIndex = item.disabled ? null : 0;
         let content = (
-            <a href={item.url || '#'} className={linkClassName} role="menuitem" target={item.target} onClick={(event) => this.onItemClick(event, item)} onKeyDown={(event) => this.onItemKeyDown(event, item)} tabIndex={tabIndex}>
+            <a href={item.url || '#'} className={linkClassName} role="menuitem" target={item.target} onClick={(event) => this.onItemClick(event, item)} onKeyDown={(event) => this.onItemKeyDown(event, item)} tabIndex={tabIndex} aria-disabled={item.disabled}>
                 {icon}
                 {label}
             </a>

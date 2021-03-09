@@ -122,7 +122,7 @@ class PanelMenuSub extends Component {
         const submenuIcon = item.items && <span className={submenuIconClassName}></span>;
         const submenu = this.renderSubmenu(item, active);
         let content = (
-            <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => this.onItemClick(event, item, index)} role="menuitem">
+            <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => this.onItemClick(event, item, index)} role="menuitem" aria-disabled={item.disabled}>
                 {submenuIcon}
                 {icon}
                 {label}
@@ -309,7 +309,7 @@ export class PanelMenu extends Component {
             <div key={item.label + '_' + index} className={className} style={item.style}>
                 <div className={headerClassName} style={item.style}>
                     <a href={item.url || '#'} className="p-panelmenu-header-link" onClick={(e) => this.onItemClick(e, item)} aria-expanded={active}
-                        id={this.id + '_header'} aria-controls={this.id + 'content'}>
+                        id={this.id + '_header'} aria-controls={this.id + 'content'} aria-disabled={item.disabled}>
                         {toggleIcon}
                         {itemIcon}
                         <span className="p-menuitem-text">{item.label}</span>

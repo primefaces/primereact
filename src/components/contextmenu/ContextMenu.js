@@ -137,7 +137,7 @@ class ContextMenuSub extends Component {
         const submenu = this.renderSubmenu(item);
         let content = (
             <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => this.onItemClick(event, item, index)} role="menuitem"
-                aria-haspopup={item.items != null}>
+                aria-haspopup={item.items != null} aria-disabled={item.disabled}>
                 {icon}
                 {label}
                 {submenuIcon}
