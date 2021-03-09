@@ -604,19 +604,19 @@ export class DataTable extends Component {
     }
 
     getCalculatedSortOrder(currentOrder) {
-        return this.props.removableSort ? (currentOrder ? (currentOrder < 0 ? 0 : -1) : 1) : currentOrder * -1;
+        return this.props.removableSort ? (this.props.defaultSortOrder === currentOrder ? currentOrder * -1 : 0) : currentOrder * -1;
     }
 
     addSortMeta(meta, multiSortMeta) {
         let index = -1;
-        for(let i = 0; i < multiSortMeta.length; i++) {
-            if(multiSortMeta[i].field === meta.field) {
+        for (let i = 0; i < multiSortMeta.length; i++) {
+            if (multiSortMeta[i].field === meta.field) {
                 index = i;
                 break;
             }
         }
 
-        if(index >= 0)
+        if (index >= 0)
             multiSortMeta[index] = meta;
         else
             multiSortMeta.push(meta);
@@ -624,14 +624,14 @@ export class DataTable extends Component {
 
     removeSortMeta(meta, multiSortMeta) {
         let index = -1;
-        for(let i = 0; i < multiSortMeta.length; i++) {
-            if(multiSortMeta[i].field === meta.field) {
+        for (let i = 0; i < multiSortMeta.length; i++) {
+            if (multiSortMeta[i].field === meta.field) {
                 index = i;
                 break;
             }
         }
 
-        if(index >= 0) {
+        if (index >= 0) {
             multiSortMeta.splice(index, 1);
         }
 
