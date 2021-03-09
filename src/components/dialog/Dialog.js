@@ -42,6 +42,7 @@ export class Dialog extends Component {
         minY: 0,
         keepInViewport: true,
         maximized: false,
+        breakpoints: null,
         onMaximize: null,
         onDragStart: null,
         onDrag: null,
@@ -83,6 +84,7 @@ export class Dialog extends Component {
         minY: PropTypes.number,
         keepInViewport: PropTypes.bool,
         maximized: PropTypes.bool,
+        breakpoints: PropTypes.object,
         onMaximize: PropTypes.func,
         onDragStart: PropTypes.func,
         onDrag: PropTypes.func,
@@ -108,10 +110,12 @@ export class Dialog extends Component {
         this.onDragStart = this.onDragStart.bind(this);
         this.onResizeStart = this.onResizeStart.bind(this);
         this.onMaskClick = this.onMaskClick.bind(this);
+        this.onEnter = this.onEnter.bind(this);
         this.onEntered = this.onEntered.bind(this);
         this.onExited = this.onExited.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
+        this.attributeSelector = UniqueComponentId();
         this.dialogRef = React.createRef();
     }
 
@@ -307,6 +311,10 @@ export class Dialog extends Component {
         return this.dialogRef.current;
     }
 
+    onEnter() {
+        this.dialogEl.setAttribute(this.attributeSelector, '');
+    }
+
     onEntered() {
         if (this.props.onShow) {
             this.props.onShow();
@@ -459,11 +467,35 @@ export class Dialog extends Component {
         }
     }
 
+    createStyle() {
+        if (!this.styleElement) {
+            this.styleElement = document.createElement('style');
+            document.head.appendChild(this.styleElement);
+
+            let innerHTML = '';
+            for (let breakpoint in this.props.breakpoints) {
+                innerHTML += `
+                    @media screen and (max-width: ${breakpoint}) {
+                        .p-dialog[${this.attributeSelector}] {
+                            width: ${this.props.breakpoints[breakpoint]} !important;
+                        }
+                    }
+                `
+            }
+
+            this.styleElement.innerHTML = innerHTML;
+        }
+    }
+
     componentDidMount() {
         if (this.props.visible) {
             this.setState({ visible: true }, () => {
                 this.mask.style.zIndex = String(this.zIndex);
             });
+        }
+
+        if (this.props.breakpoints) {
+            this.createStyle();
         }
     }
 
@@ -494,6 +526,11 @@ export class Dialog extends Component {
 
     componentWillUnmount() {
         this.disableDocumentSettings();
+
+        if (this.styleElement) {
+            document.head.removeChild(this.styleElement);
+            this.styleElement = null;
+        }
     }
 
     renderCloseIcon() {
@@ -596,7 +633,7 @@ export class Dialog extends Component {
         return (
             <div ref={(el) => this.mask = el} className={maskClassName} onClick={this.onMaskClick}>
                 <CSSTransition nodeRef={this.dialogRef} classNames="p-dialog" timeout={transitionTimeout} in={this.state.visible} unmountOnExit
-                    onEntered={this.onEntered} onExited={this.onExited}>
+                    onEnter={this.onEnter} onEntered={this.onEntered} onExited={this.onExited}>
                     <div ref={this.dialogRef} id={this.id} className={className} style={this.props.style}
                         role="dialog" aria-labelledby={this.id + '_header'} aria-describedby={this.id + '_content'} aria-modal={this.props.modal}>
                         {header}

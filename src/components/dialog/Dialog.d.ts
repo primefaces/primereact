@@ -29,6 +29,7 @@ export interface DialogProps {
     minY?: number;
     keepInViewport?: boolean;
     maximized?: boolean;
+    breakpoints?: {[key: string]: string};
     icons?: ((props: object) => any | any);
     onMaximize?(e: {originalEvent: Event, maximized: boolean}): void;
     onDragStart?(e: Event): void;

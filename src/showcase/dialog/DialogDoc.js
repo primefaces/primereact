@@ -28,6 +28,7 @@ export class DialogDemo extends Component {
             displayModal: false,
             displayMaximizable: false,
             displayPosition: false,
+            displayResponsive: false,
             position: 'center'
         };
 
@@ -120,6 +121,15 @@ export class DialogDemo extends Component {
                         Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                     </Dialog>
 
+                    <h5>Responsive</h5>
+                    <Button label="Show" icon="pi pi-external-link" onClick={() => this.onClick('displayResponsive')} />
+                    <Dialog header="Header" visible={this.state.displayResponsive} onHide={() => this.onHide('displayResponsive')} breakpoints={{'960px': '75vw'}} style={{width: '50vw'}} footer={this.renderFooter('displayResponsive')}>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </Dialog>
+
                     <h5>Maximizable</h5>
                     <Button label="Show" icon="pi pi-external-link" onClick={() => this.onClick('displayMaximizable')} />
                     <Dialog header="Header" visible={this.state.displayMaximizable} maximizable modal style={{ width: '50vw' }} footer={this.renderFooter('displayMaximizable')} onHide={() => this.onHide('displayMaximizable')}>
@@ -173,6 +183,7 @@ const DialogDemo = () => {
     const [displayModal, setDisplayModal] = useState(false);
     const [displayMaximizable, setDisplayMaximizable] = useState(false);
     const [displayPosition, setDisplayPosition] = useState(false);
+    const [displayResponsive, setDisplayResponsive] = useState(false);
     const [position, setPosition] = useState('center');
 
     const dialogFuncMap = {
@@ -180,7 +191,8 @@ const DialogDemo = () => {
         'displayBasic2': setDisplayBasic2,
         'displayModal': setDisplayModal,
         'displayMaximizable': setDisplayMaximizable,
-        'displayPosition': setDisplayPosition
+        'displayPosition': setDisplayPosition,
+        'displayResponsive': setDisplayResponsive
     }
 
     const onClick = (name, position) => {
@@ -256,6 +268,15 @@ const DialogDemo = () => {
                     <p className="p-m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                     laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                     Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </Dialog>
+
+                <h5>Responsive</h5>
+                <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayResponsive')} />
+                <Dialog header="Header" visible={displayResponsive} onHide={() => onHide('displayResponsive')} breakpoints={{'960px': '75vw'}} style={{width: '50vw'}} footer={renderFooter('displayResponsive')}>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                 </Dialog>
 
                 <h5>Maximizable</h5>
@@ -310,6 +331,7 @@ const DialogDemo = () => {
     const [displayModal, setDisplayModal] = useState(false);
     const [displayMaximizable, setDisplayMaximizable] = useState(false);
     const [displayPosition, setDisplayPosition] = useState(false);
+    const [displayResponsive, setDisplayResponsive] = useState(false);
     const [position, setPosition] = useState('center');
 
     const dialogFuncMap = {
@@ -317,7 +339,8 @@ const DialogDemo = () => {
         'displayBasic2': setDisplayBasic2,
         'displayModal': setDisplayModal,
         'displayMaximizable': setDisplayMaximizable,
-        'displayPosition': setDisplayPosition
+        'displayPosition': setDisplayPosition,
+        'displayResponsive': setDisplayResponsive
     }
 
     const onClick = (name, position) => {
@@ -393,6 +416,15 @@ const DialogDemo = () => {
                     <p className="p-m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                     laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                     Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </Dialog>
+
+                <h5>Responsive</h5>
+                <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayResponsive')} />
+                <Dialog header="Header" visible={displayResponsive} onHide={() => onHide('displayResponsive')} breakpoints={{'960px': '75vw'}} style={{width: '50vw'}} footer={renderFooter('displayResponsive')}>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                 </Dialog>
 
                 <h5>Maximizable</h5>
@@ -506,6 +538,18 @@ const myIcon = (
 )
 
 <Dialog header="Header Text" footer={footer} icons={myIcon} visible={visible} style={{width: '50vw'}} modal onHide={onHide}>
+    Content
+</Dialog>
+`}
+</CodeHighlight>
+
+                        <h5>Responsive</h5>
+                        <p>Dialog width can be adjusted per screen size with the <i>breakpoints</i> option. In example below, default width is set to 50vw and below 961px, width would be 75vw and finally below 641px width becomes
+                            100%. The value of <i>breakpoints</i> should be an object literal whose keys are the maximum screen sizes and values are the widths per screen.</p>
+
+<CodeHighlight>
+{`
+<Dialog visible={visible} onHide={onHide} breakpoints={{'960px': '75vw', '640px': '100vw'}} style={{width: '50vw'}}>
     Content
 </Dialog>
 `}
@@ -699,6 +743,12 @@ const myIcon = (
                                         <td>boolean</td>
                                         <td>false</td>
                                         <td>When enabled, the dialog is initially displayed full screen.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>breakpoints</td>
+                                        <td>object</td>
+                                        <td>null</td>
+                                        <td>Object literal to define widths per screen size.</td>
                                     </tr>
                                 </tbody>
                             </table>
