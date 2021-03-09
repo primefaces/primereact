@@ -2204,6 +2204,12 @@ export const TreeTableResponsiveDemo = () => {
                                         <td>Default sort order of an unsorted column.</td>
                                     </tr>
                                     <tr>
+                                        <td>removableSort</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>When enabled, columns can have an un-sorted state.</td>
+                                    </tr>
+                                    <tr>
                                         <td>selectionMode</td>
                                         <td>string</td>
                                         <td>null</td>

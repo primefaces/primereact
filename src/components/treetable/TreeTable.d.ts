@@ -31,6 +31,7 @@ interface TreeTableProps {
     multiSortMeta?: any[];
     sortMode?: string;
     defaultSortOrder?: number;
+    removableSort?: boolean;
     selectionMode?: string;
     selectionKeys?: any;
     contextMenuSelectionKey?: any;
