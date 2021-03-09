@@ -62,7 +62,7 @@ export class TreeTableBody extends Component {
 
     createRow(node, index) {
         return (
-            <TreeTableRow key={node.key||JSON.stringify(node.data)} level={0} rowIndex={index}
+            <TreeTableRow key={node.key||JSON.stringify(node.data)} level={0} rowIndex={index} selectOnEdit={this.props.selectOnEdit}
                             node={node} columns={this.props.columns} expandedKeys={this.props.expandedKeys}
                             onToggle={this.props.onToggle} onExpand={this.props.onExpand} onCollapse={this.props.onCollapse}
                             selectionMode={this.props.selectionMode} selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange}

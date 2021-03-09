@@ -46,6 +46,7 @@ export class TreeTable extends Component {
         selectionKeys: null,
         contextMenuSelectionKey: null,
         metaKeySelection: true,
+        selectOnEdit: true,
         propagateSelectionUp: true,
         propagateSelectionDown: true,
         autoLayout: false,
@@ -119,6 +120,7 @@ export class TreeTable extends Component {
         selectionKeys: PropTypes.any,
         contextMenuSelectionKey: PropTypes.any,
         metaKeySelection: PropTypes.bool,
+        selectOnEdit: PropTypes.bool,
         propagateSelectionUp: PropTypes.bool,
         propagateSelectionDown: PropTypes.bool,
         autoLayout: PropTypes.bool,
@@ -908,7 +910,7 @@ export class TreeTable extends Component {
 
     createTableBody(value, columns) {
         return (
-            <TreeTableBody value={value} columns={columns} expandedKeys={this.getExpandedKeys()}
+            <TreeTableBody value={value} columns={columns} expandedKeys={this.getExpandedKeys()} selectOnEdit={this.props.selectOnEdit}
                         onToggle={this.onToggle} onExpand={this.props.onExpand} onCollapse={this.props.onCollapse}
                         paginator={this.props.paginator} first={this.getFirst()} rows={this.getRows()}
                         selectionMode={this.props.selectionMode} selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange}

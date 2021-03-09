@@ -35,6 +35,7 @@ interface TreeTableProps {
     selectionKeys?: any;
     contextMenuSelectionKey?: any;
     metaKeySelection?: boolean;
+    selectOnEdit?: boolean;
     propagateSelectionUp?: boolean;
     propagateSelectionDown?: boolean;
     autoLayout?:boolean;

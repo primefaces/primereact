@@ -21,7 +21,7 @@ export class TreeTableBodyCell extends Component {
     }
 
     onClick() {
-        if (this.props.editor && !this.state.editing && (!this.props.treeTableSelectionMode || (this.props.treeTableSelectionMode && this.props.selected))) {
+        if (this.props.editor && !this.state.editing && (this.props.selectOnEdit || (!this.props.selectOnEdit && this.props.selected))) {
             this.selfClick = true;
 
             this.setState({
