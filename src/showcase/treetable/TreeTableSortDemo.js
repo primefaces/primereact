@@ -20,9 +20,9 @@ export class TreeTableSortDemo extends Component {
 
     componentDidMount() {
         this.nodeservice.getTreeTableNodes().then(data => {
-            this.setState({ nodes1: data });
+            this.setState({ nodes1: [...data] });
 
-            let nodes2 = data;
+            let nodes2 = [...data];
             nodes2.push({
                 data: {
                     name: 'Documents',
@@ -50,7 +50,7 @@ export class TreeTableSortDemo extends Component {
                 <div className="content-section implementation">
                     <div className="card">
                         <h5>Single Column Sorting</h5>
-                        <TreeTable value={this.state.nodes1} defaultSortOrder={-1}>
+                        <TreeTable value={this.state.nodes1}>
                             <Column field="name" header="Name" expander sortable></Column>
                             <Column field="size" header="Size" sortable></Column>
                             <Column field="type" header="Type" sortable></Column>
@@ -59,7 +59,7 @@ export class TreeTableSortDemo extends Component {
 
                     <div className="card">
                         <h5>Multiple Column Sorting</h5>
-                        <TreeTable value={this.state.nodes2} sortMode="multiple" defaultSortOrder={-1}>
+                        <TreeTable value={this.state.nodes2} sortMode="multiple">
                             <Column field="name" header="Name" expander sortable></Column>
                             <Column field="size" header="Size" sortable></Column>
                             <Column field="type" header="Type" sortable></Column>
@@ -123,7 +123,7 @@ export class TreeTableSortDemo extends Component {
             <div>
                 <div className="card">
                     <h5>Single Column Sorting</h5>
-                    <TreeTable value={this.state.nodes1} defaultSortOrder={-1}>
+                    <TreeTable value={this.state.nodes1}>
                         <Column field="name" header="Name" expander sortable></Column>
                         <Column field="size" header="Size" sortable></Column>
                         <Column field="type" header="Type" sortable></Column>
@@ -132,7 +132,7 @@ export class TreeTableSortDemo extends Component {
 
                 <div className="card">
                     <h5>Multiple Column Sorting</h5>
-                    <TreeTable value={this.state.nodes2} sortMode="multiple" defaultSortOrder={-1}>
+                    <TreeTable value={this.state.nodes2} sortMode="multiple">
                         <Column field="name" header="Name" expander sortable></Column>
                         <Column field="size" header="Size" sortable></Column>
                         <Column field="type" header="Type" sortable></Column>
@@ -178,7 +178,7 @@ const TreeTableSortDemo = () => {
         <div>
             <div className="card">
                 <h5>Single Column Sorting</h5>
-                <TreeTable value={nodes1} defaultSortOrder={-1}>
+                <TreeTable value={nodes1}>
                     <Column field="name" header="Name" expander sortable></Column>
                     <Column field="size" header="Size" sortable></Column>
                     <Column field="type" header="Type" sortable></Column>
@@ -187,7 +187,7 @@ const TreeTableSortDemo = () => {
 
             <div className="card">
                 <h5>Multiple Column Sorting</h5>
-                <TreeTable value={nodes2} sortMode="multiple" defaultSortOrder={-1}>
+                <TreeTable value={nodes2} sortMode="multiple">
                     <Column field="name" header="Name" expander sortable></Column>
                     <Column field="size" header="Size" sortable></Column>
                     <Column field="type" header="Type" sortable></Column>
@@ -232,7 +232,7 @@ const TreeTableSortDemo = () => {
         <div>
             <div className="card">
                 <h5>Single Column Sorting</h5>
-                <TreeTable value={nodes1} defaultSortOrder={-1}>
+                <TreeTable value={nodes1}>
                     <Column field="name" header="Name" expander sortable></Column>
                     <Column field="size" header="Size" sortable></Column>
                     <Column field="type" header="Type" sortable></Column>
@@ -241,7 +241,7 @@ const TreeTableSortDemo = () => {
 
             <div className="card">
                 <h5>Multiple Column Sorting</h5>
-                <TreeTable value={nodes2} sortMode="multiple" defaultSortOrder={-1}>
+                <TreeTable value={nodes2} sortMode="multiple">
                     <Column field="name" header="Name" expander sortable></Column>
                     <Column field="size" header="Size" sortable></Column>
                     <Column field="type" header="Type" sortable></Column>
