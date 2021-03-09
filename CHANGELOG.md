@@ -10,7 +10,7 @@
 - Add breakpoints property to Dialog, ConfirmDialog and OverlayPanel [\#1856](https://github.com/primefaces/primereact/issues/1856)
 - Add selectionOnly options to CSV export on DataTable [\#1853](https://github.com/primefaces/primereact/issues/1853)
 - Add multiple property to PanelMenu [\#1846](https://github.com/primefaces/primereact/issues/1846)
-- Added expanded option to MenuModel [\#1845](https://github.com/primefaces/primereact/issues/1845)
+- Add expanded option to MenuModel [\#1845](https://github.com/primefaces/primereact/issues/1845)
 - Add panelHeaderTemplate and panelFooterTemplate properties to MultiSelect [\#1841](https://github.com/primefaces/primereact/issues/1841)
 - Add paginatorClassName to DataTable, TreeTable and DataView [\#1840](https://github.com/primefaces/primereact/issues/1840)
 - Improve template option on Paginator [\#1839](https://github.com/primefaces/primereact/issues/1839)
