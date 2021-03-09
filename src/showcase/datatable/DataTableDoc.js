@@ -2708,6 +2708,12 @@ const bodyTemplate = (data, props) => {
                                 can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.</td>
                         </tr>
                         <tr>
+                            <td>selectOnEdit</td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>Determines whether the cell editor will be opened when clicking to select any row on Selection and Cell Edit modes.</td>
+                        </tr>
+                        <tr>
                             <td>headerColumnGroup</td>
                             <td>ColumnGroup</td>
                             <td>null</td>
