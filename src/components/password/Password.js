@@ -37,7 +37,8 @@ export class Password extends Component {
         inputStyle: null,
         inputClassName: null,
         panelStyle: null,
-        panelClassName: null
+        panelClassName: null,
+        onInput: null
     };
 
     static propTypes = {
@@ -63,7 +64,8 @@ export class Password extends Component {
         inputStyle: PropTypes.object,
         inputClassName: PropTypes.string,
         panelStyle: PropTypes.object,
-        panelClassName: PropTypes.string
+        panelClassName: PropTypes.string,
+        onInput: PropTypes.func
     };
 
     constructor(props) {
@@ -80,6 +82,7 @@ export class Password extends Component {
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
         this.onKeyup = this.onKeyup.bind(this);
+        this.onInput = this.onInput.bind(this);
         this.onMaskToggle = this.onMaskToggle.bind(this);
         this.onOverlayEnter = this.onOverlayEnter.bind(this);
         this.onOverlayEntered = this.onOverlayEntered.bind(this);
@@ -109,7 +112,7 @@ export class Password extends Component {
     }
 
     isFilled() {
-        return this.props.value != null && this.props.value.toString().length > 0;
+        return (this.props.value != null && this.props.value.toString().length > 0) || (this.props.defaultValue != null && this.props.defaultValue.toString().length > 0)
     }
 
     getInputType() {
@@ -277,6 +280,19 @@ export class Password extends Component {
         }
     }
 
+    onInput(event, validatePattern) {
+        if (this.props.onInput) {
+            this.props.onInput(event, validatePattern);
+        }
+
+        if (!this.props.onChange) {
+            if (event.target.value.length > 0)
+                DomHandler.addClass(this.container, 'p-inputwrapper-filled');
+            else
+                DomHandler.removeClass(this.container, 'p-inputwrapper-filled');
+        }
+    }
+
     testStrength(str) {
         let level = 0;
 
@@ -441,8 +457,8 @@ export class Password extends Component {
 
         return (
             <div ref={el => this.container = el} className={containerClassName} style={this.props.style}>
-                <InputText id={this.id} ref={(el) => this.inputEl = el} {...inputProps} type={type} className={inputClassName} style={this.props.inputStyle}
-                    onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyup} />
+                <InputText id={this.id} ref={(el) => this.inputEl = el} defaultValue={this.props.value} {...inputProps} type={type} className={inputClassName} style={this.props.inputStyle}
+                    onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyup} onInput={this.onInput} />
                 {icon}
                 {panel}
             </div>
