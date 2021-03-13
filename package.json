@@ -30,7 +30,6 @@
     "classnames": "^2.2.6",
     "codesandbox": "2.1.14",
     "core-js": "^3.6.5",
-    "del": "^2.2.0",
     "gulp": "^4.0.2",
     "gulp-concat": "^2.6.1",
     "gulp-flatten": "^0.4.0",
@@ -63,7 +62,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "compile-components": "./node_modules/\\@babel/cli/bin/babel.js src/components --out-dir components --presets=@babel/env,@babel/react --plugins=@babel/plugin-proposal-class-properties --copy-files",
+    "build-lib": "npm run compile-components && npm run build-resources && npm run build-exports",
+    "compile-components": "./node_modules/\\@babel/cli/bin/babel.js src/components --out-dir dist/components --presets=@babel/env,@babel/react --plugins=@babel/plugin-proposal-class-properties --copy-files",
     "build-resources": "gulp build-resources",
     "build-exports": "gulp build-exports"
   },
