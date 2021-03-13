@@ -513,7 +513,7 @@ export class TreeTableRow extends Component {
             return this.props.node.children.map((childNode, index) => {
                 return (
                     <TreeTableRow key={childNode.key||JSON.stringify(childNode.data)} level={this.props.level + 1} rowIndex={this.props.rowIndex + '_' + index}
-                        node={childNode} columns={this.props.columns} expandedKeys={this.props.expandedKeys}
+                        node={childNode} columns={this.props.columns} expandedKeys={this.props.expandedKeys} selectOnEdit={this.props.selectOnEdit}
                         onToggle={this.props.onToggle} onExpand={this.props.onExpand} onCollapse={this.props.onCollapse}
                         selectionMode={this.props.selectionMode} selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange}
                         metaKeySelection={this.props.metaKeySelection} onRowClick={this.props.onRowClick} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect}
