@@ -225,7 +225,9 @@ export class DataTable extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            d_rows: props.rows
+        };
 
         if (!this.props.onPage) {
             this.state.first = props.first;
@@ -530,7 +532,6 @@ export class DataTable extends Component {
 
     createPaginator(position, totalRecords, data) {
         const className = classNames('p-paginator-' + position, this.props.paginatorClassName);
-
         return (
             <Paginator first={this.getFirst()} rows={this.getRows()} pageLinkSize={this.props.pageLinkSize} className={className} onPageChange={this.onPageChange} template={this.props.paginatorTemplate}
                         totalRecords={totalRecords} rowsPerPageOptions={this.props.rowsPerPageOptions} currentPageReportTemplate={this.props.currentPageReportTemplate}
@@ -1463,9 +1464,10 @@ export class DataTable extends Component {
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
-        if (nextProps.rows !== prevState.rows && !nextProps.onPage) {
+        if (nextProps.rows !== prevState.d_rows && !nextProps.onPage) {
             return {
-                rows: nextProps.rows
+                rows: nextProps.rows,
+                d_rows: nextProps.rows
             }
         }
 
