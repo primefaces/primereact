@@ -21,6 +21,10 @@ export class MultiSelect extends Component {
         options: null,
         optionLabel: null,
         optionValue: null,
+        optionDisabled: null,
+        optionGroupLabel: null,
+        optionGroupChildren: null,
+        optionGroupTemplate: null,
         display: 'comma',
         style: null,
         className: null,
@@ -65,6 +69,10 @@ export class MultiSelect extends Component {
         options: PropTypes.array,
         optionLabel: PropTypes.string,
         optionValue: PropTypes.string,
+        optionDisabled: PropTypes.bool,
+        optionGroupLabel: PropTypes.string,
+        optionGroupChildren: PropTypes.string,
+        optionGroupTemplate: PropTypes.any,
         display: PropTypes.string,
         style: PropTypes.object,
         className: PropTypes.string,
@@ -112,7 +120,7 @@ export class MultiSelect extends Component {
 
         this.onClick = this.onClick.bind(this);
         this.onKeyDown = this.onKeyDown.bind(this);
-        this.onOptionClick = this.onOptionClick.bind(this);
+        this.onOptionSelect = this.onOptionSelect.bind(this);
         this.onOptionKeyDown = this.onOptionKeyDown.bind(this);
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
@@ -140,14 +148,19 @@ export class MultiSelect extends Component {
         return !this.props.selectionLimit || !this.props.value || (this.props.value && this.props.value.length < this.props.selectionLimit);
     }
 
-    onOptionClick(event) {
+    onOptionSelect(event) {
         let { originalEvent, option } = event;
+
+        if (this.props.disabled || this.isOptionDisabled(option)) {
+            return;
+        }
+
         let optionValue = this.getOptionValue(option);
-        let selectionIndex = this.findSelectionIndex(optionValue);
+        let selected = this.isSelected(option);
         let allowOptionSelect = this.allowOptionSelect();
 
-        if (selectionIndex !== -1)
-            this.updateModel(originalEvent, this.props.value.filter((val, i) => i !== selectionIndex));
+        if (selected)
+            this.updateModel(originalEvent, this.props.value.filter(val => !ObjectUtils.equals(this.getOptionValue(val), optionValue, this.equalityKey())));
         else if (allowOptionSelect)
             this.updateModel(originalEvent, [...this.props.value || [], optionValue]);
     }
@@ -180,7 +193,7 @@ export class MultiSelect extends Component {
             //enter and space
             case 13:
             case 32:
-                this.onOptionClick(event);
+                this.onOptionSelect(event);
                 originalEvent.preventDefault();
                 break;
 
@@ -199,7 +212,7 @@ export class MultiSelect extends Component {
         let nextItem = item.nextElementSibling;
 
         if (nextItem)
-            return !DomHandler.hasClass(nextItem, 'p-multiselect-item') ? this.findNextItem(nextItem) : nextItem;
+            return DomHandler.hasClass(nextItem, 'p-disabled') || DomHandler.hasClass(nextItem, 'p-multiselect-item-group') ? this.findNextItem(nextItem) : nextItem;
         else
             return null;
     }
@@ -208,7 +221,7 @@ export class MultiSelect extends Component {
         let prevItem = item.previousElementSibling;
 
         if (prevItem)
-            return !DomHandler.hasClass(prevItem, 'p-multiselect-item') ? this.findPrevItem(prevItem) : prevItem;
+            return DomHandler.hasClass(prevItem, 'p-disabled') || DomHandler.hasClass(prevItem, 'p-multiselect-item-group') ? this.findPrevItem(prevItem) : prevItem;
         else
             return null;
     }
@@ -255,22 +268,23 @@ export class MultiSelect extends Component {
     }
 
     onToggleAll(event) {
-        let newValue;
+        let value = null;
+        let visibleOptions = this.getVisibleOptions();
 
         if (event.checked) {
-            newValue = [];
+            value = [];
         }
-        else {
-            let options = this.hasFilter() ? this.filterOptions(this.props.options) : this.props.options;
-            if (options) {
-                newValue = [];
-                for (let option of options) {
-                    newValue.push(this.getOptionValue(option));
-                }
+        else if (visibleOptions) {
+            if (this.props.optionGroupLabel) {
+                value = [];
+                visibleOptions.forEach(optionGroup => value = [...value, ...this.getOptionGroupChildren(optionGroup)]);
+            }
+            else  {
+                value = visibleOptions.map(option => this.getOptionValue(option));
             }
         }
 
-        this.updateModel(event.originalEvent, newValue);
+        this.updateModel(event.originalEvent, value);
     }
 
     updateModel(event, value) {
@@ -346,41 +360,55 @@ export class MultiSelect extends Component {
         event.stopPropagation();
     }
 
-    findSelectionIndex(value) {
-        let index = -1;
+    isSelected(option) {
+        let selected = false;
 
         if (this.props.value) {
-            const key = this.equalityKey();
-            for (let i = 0; i < this.props.value.length; i++) {
-                if (ObjectUtils.equals(this.props.value[i], value, key)) {
-                    index = i;
+            let optionValue = this.getOptionValue(option);
+            let key = this.equalityKey();
+
+            for (let val of this.props.value) {
+                if (ObjectUtils.equals(this.getOptionValue(val), optionValue, key)) {
+                    selected = true;
                     break;
                 }
             }
         }
 
-        return index;
-    }
-
-    isSelected(option) {
-        return this.findSelectionIndex(this.getOptionValue(option)) !== -1;
+        return selected;
     }
 
     getLabelByValue(val) {
-        let label = null;
-
-        for (let i = 0; i < this.props.options.length; i++) {
-            let option = this.props.options[i];
-            let optionValue = this.getOptionValue(option);
-            let key = this.equalityKey();
-
-            if (ObjectUtils.equals(optionValue, val, key)) {
-                label = this.getOptionLabel(option);
-                break;
+        let option;
+        if (this.props.options) {
+            if (this.props.optionGroupLabel) {
+                for (let optionGroup of this.props.options) {
+                    option = this.findOptionByValue(val, this.getOptionGroupChildren(optionGroup));
+                    if (option) {
+                        break;
+                    }
+                }
+            }
+            else {
+                option = this.findOptionByValue(val, this.props.options);
             }
         }
 
-        return label;
+        return option ? this.getOptionLabel(option): null;
+    }
+
+    findOptionByValue(val, list) {
+        let key = this.equalityKey();
+
+        for (let option of list) {
+            let optionValue = this.getOptionValue(option);
+
+            if (ObjectUtils.equals(optionValue, val, key)) {
+                return option;
+            }
+        }
+
+        return null;
     }
 
     onFocus(event) {
@@ -504,18 +532,44 @@ export class MultiSelect extends Component {
         return this.state.filter && this.state.filter.trim().length > 0;
     }
 
-    isAllChecked(visibleOptions) {
-        if (this.hasFilter())
-            return this.props.value && visibleOptions && visibleOptions.length && (this.props.value.length === visibleOptions.length);
-        else
-            return this.props.value && this.props.options && (this.props.value.length === this.props.options.length);
-    }
+    isAllSelected() {
+        if (this.hasFilter()) {
+            let visibleOptions = this.getVisibleOptions();
+            if (visibleOptions.length === 0) {
+                return false;
+            }
 
-    filterOptions(options) {
-        if (options) {
-            let filterValue = this.state.filter.trim().toLocaleLowerCase(this.props.filterLocale);
-            let searchFields = this.props.filterBy ? this.props.filterBy.split(',') : [this.props.optionLabel || 'label'];
-            return FilterUtils.filter(options, searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
+            if (this.props.optionGroupLabel) {
+                for (let optionGroup of visibleOptions) {
+                    for (let option of this.getOptionGroupChildren(optionGroup)) {
+                        if (!this.isSelected(option)) {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else {
+                for (let option of visibleOptions) {
+                    if (!this.isSelected(option)) {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+        else {
+            if (this.props.value && this.props.options) {
+                let optionCount = 0;
+                if (this.props.optionGroupLabel)
+                    this.props.options.forEach(optionGroup => optionCount += this.getOptionGroupChildren(optionGroup).length);
+                else
+                    optionCount = this.props.options.length;
+
+                return optionCount > 0 && optionCount === this.props.value.length;
+            }
+
+            return false;
         }
     }
 
@@ -525,6 +579,50 @@ export class MultiSelect extends Component {
 
     getOptionValue(option) {
         return this.props.optionValue ? ObjectUtils.resolveFieldData(option, this.props.optionValue) : (option && option['value'] !== undefined ? option['value'] : option);
+    }
+
+    getOptionRenderKey(option) {
+        return this.props.dataKey ? ObjectUtils.resolveFieldData(option, this.props.dataKey) : this.getOptionLabel(option);
+    }
+
+    getOptionGroupRenderKey(optionGroup) {
+        return ObjectUtils.resolveFieldData(optionGroup, this.props.optionGroupLabel);
+    }
+
+    getOptionGroupLabel(optionGroup) {
+        return ObjectUtils.resolveFieldData(optionGroup, this.props.optionGroupLabel);
+    }
+
+    getOptionGroupChildren(optionGroup) {
+        return ObjectUtils.resolveFieldData(optionGroup, this.props.optionGroupChildren);
+    }
+
+    isOptionDisabled(option) {
+        return this.props.optionDisabled ? ObjectUtils.resolveFieldData(option, this.props.optionDisabled) : false;
+    }
+
+    getVisibleOptions() {
+        if (this.hasFilter()) {
+            let filterValue = this.state.filter.trim().toLocaleLowerCase(this.props.filterLocale);
+            let searchFields = this.props.filterBy ? this.props.filterBy.split(',') : [this.props.optionLabel || 'label'];
+
+            if (this.props.optionGroupLabel) {
+                let filteredGroups = [];
+                for (let optgroup of this.props.options) {
+                    let filteredSubOptions = FilterUtils.filter(this.getOptionGroupChildren(optgroup), searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
+                    if (filteredSubOptions && filteredSubOptions.length) {
+                        filteredGroups.push({...optgroup, ...{items: filteredSubOptions}});
+                    }
+                }
+                return filteredGroups;
+            }
+            else {
+                return FilterUtils.filter(this.props.options, searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
+            }
+        }
+        else {
+            return this.props.options;
+        }
     }
 
     isEmpty() {
@@ -625,10 +723,10 @@ export class MultiSelect extends Component {
         });
     }
 
-    renderHeader(items) {
+    renderHeader() {
         return (
             <MultiSelectHeader filter={this.props.filter} filterValue={this.state.filter} onFilter={this.onFilter} filterPlaceholder={this.props.filterPlaceholder}
-                onClose={this.onCloseClick} onToggleAll={this.onToggleAll} allChecked={this.isAllChecked(items)} template={this.props.panelHeaderTemplate} />
+                onClose={this.onCloseClick} onToggleAll={this.onToggleAll} allSelected={this.isAllSelected()} template={this.props.panelHeaderTemplate} />
         );
     }
 
@@ -685,6 +783,69 @@ export class MultiSelect extends Component {
         );
     }
 
+    renderGroupChildren(optionGroup) {
+        const groupChildren = this.getOptionGroupChildren(optionGroup);
+        return (
+            groupChildren.map((option, j) => {
+                let optionLabel = this.getOptionLabel(option);
+                let optionKey = j + '_' + this.getOptionRenderKey(option);
+                let disabled = this.isOptionDisabled(option)
+                let tabIndex = disabled ? null : this.props.tabIndex || 0;
+
+                return (
+                    <MultiSelectItem key={optionKey} label={optionLabel} option={option} template={this.props.itemTemplate}
+                        selected={this.isSelected(option)} onClick={this.onOptionSelect} onKeyDown={this.onOptionKeyDown} tabIndex={tabIndex} disabled={disabled} />
+                );
+            })
+        )
+    }
+
+    renderItems() {
+        const visibleOptions = this.getVisibleOptions();
+
+        if (visibleOptions) {
+            if (this.props.optionGroupLabel) {
+                return visibleOptions.map((option, i) => {
+                    const groupContent = this.props.optionGroupTemplate ? ObjectUtils.getJSXElement(this.props.optionGroupTemplate, option, i) : this.getOptionGroupLabel(option);
+                    const groupChildrenContent = this.renderGroupChildren(option);
+                    const key = i + '_' + this.getOptionGroupRenderKey(option);
+
+                    return (
+                        <React.Fragment key={key}>
+                            <li className="p-multiselect-item-group">
+                                {groupContent}
+                            </li>
+                            {groupChildrenContent}
+                        </React.Fragment>
+                    )
+                });
+            }
+            else {
+                return visibleOptions.map((option, index) => {
+                    let optionLabel = this.getOptionLabel(option);
+                    let optionKey = index + '_' + this.getOptionRenderKey(option);
+                    let disabled = this.isOptionDisabled(option)
+                    let tabIndex = disabled ? null : this.props.tabIndex || 0;
+
+                    return (
+                        <MultiSelectItem key={optionKey} label={optionLabel} option={option} template={this.props.itemTemplate}
+                            selected={this.isSelected(option)} onClick={this.onOptionSelect} onKeyDown={this.onOptionKeyDown} tabIndex={tabIndex} disabled={disabled} />
+                    );
+                });
+            }
+        }
+        else if (this.hasFilter()) {
+            const emptyFilterMessage = ObjectUtils.getJSXElement(this.props.emptyFilterMessage, this.props);
+            return (
+                <li className="p-multiselect-empty-message">
+                    {emptyFilterMessage}
+                </li>
+            );
+        }
+
+        return null;
+    }
+
     render() {
         let className = classNames('p-multiselect p-component p-inputwrapper', {
             'p-multiselect-chip': this.props.display === 'chip',
@@ -698,33 +859,8 @@ export class MultiSelect extends Component {
         let label = this.renderLabel();
         let clearIcon = this.renderClearIcon();
         let hiddenSelect = this.renderHiddenSelect();
-        let items = this.props.options;
-        const hasFilter = this.hasFilter();
-
-        if (hasFilter) {
-            items = this.filterOptions(items);
-        }
-
-        if (items && items.length) {
-            items = items.map((option, index) => {
-                let optionLabel = this.getOptionLabel(option);
-
-                return (
-                    <MultiSelectItem key={optionLabel + '_' + index} label={optionLabel} option={option} disabled={option.disabled} template={this.props.itemTemplate}
-                        selected={this.isSelected(option)} onClick={this.onOptionClick} onKeyDown={this.onOptionKeyDown} tabIndex={this.props.tabIndex} />
-                );
-            });
-        }
-        else if (hasFilter) {
-            const emptyFilterMessage = ObjectUtils.getJSXElement(this.props.emptyFilterMessage, this.props);
-            items = (
-                <li className="p-multiselect-empty-message">
-                    {emptyFilterMessage}
-                </li>
-            );
-        }
-
-        let header = this.renderHeader(items);
+        let items = this.renderItems();
+        let header = this.renderHeader();
         let footer = this.renderFooter();
 
         return (

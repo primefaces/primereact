@@ -14,7 +14,7 @@ export class MultiSelectHeader extends Component {
         onFilter: null,
         onClose: null,
         onToggleAll: null,
-        allChecked: false,
+        allSelected: false,
         template: null
     }
 
@@ -22,7 +22,7 @@ export class MultiSelectHeader extends Component {
         filter: PropTypes.bool,
         filterValue: PropTypes.string,
         filterPlaceholder: PropTypes.string,
-        allChecked: PropTypes.bool,
+        allSelected: PropTypes.bool,
         onFilter: PropTypes.func,
         onClose: PropTypes.func,
         onToggleAll: PropTypes.func,
@@ -49,7 +49,7 @@ export class MultiSelectHeader extends Component {
         if (this.props.onToggleAll) {
             this.props.onToggleAll({
                 originalEvent: event,
-                checked: this.props.allChecked
+                checked: this.props.allSelected
             });
         }
     }
@@ -70,7 +70,7 @@ export class MultiSelectHeader extends Component {
 
     render() {
         const filterElement = this.renderFilterElement();
-        const checkboxElement = <Checkbox checked={this.props.allChecked} onChange={this.onToggleAll} role="checkbox" aria-checked={this.props.allChecked} />;
+        const checkboxElement = <Checkbox checked={this.props.allSelected} onChange={this.onToggleAll} role="checkbox" aria-checked={this.props.allSelected} />;
         const closeElement = (
             <button type="button" className="p-multiselect-close p-link" onClick={this.props.onClose}>
                 <span className="p-multiselect-close-icon pi pi-times"></span>
@@ -89,7 +89,7 @@ export class MultiSelectHeader extends Component {
             const defaultOptions = {
                 className: 'p-multiselect-header',
                 checkboxElement,
-                checked: this.props.allChecked,
+                checked: this.props.allSelected,
                 onChange: this.onToggleAll,
                 filterElement,
                 closeElement,

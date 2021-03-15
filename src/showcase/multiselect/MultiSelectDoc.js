@@ -427,6 +427,48 @@ panelFooterTemplate(options) {
 `}
 </CodeHighlight>
 
+                    <h5>Grouping</h5>
+                    <p>Options groups are specified with the <i>optionGroupLabel</i> and <i>optionGroupChildren</i> properties.</p>
+<CodeHighlight>
+{`
+const groupedCities = [
+    {
+        label: 'Germany', code: 'DE',
+        items: [
+            { label: 'Berlin', value: 'Berlin' },
+            { label: 'Frankfurt', value: 'Frankfurt' },
+            { label: 'Hamburg', value: 'Hamburg' },
+            { label: 'Munich', value: 'Munich' }
+        ]
+    },
+    {
+        label: 'USA', code: 'US',
+        items: [
+            { label: 'Chicago', value: 'Chicago' },
+            { label: 'Los Angeles', value: 'Los Angeles' },
+            { label: 'New York', value: 'New York' },
+            { label: 'San Francisco', value: 'San Francisco' }
+        ]
+    },
+    {
+        label: 'Japan', code: 'JP',
+        items: [
+            { label: 'Kyoto', value: 'Kyoto' },
+            { label: 'Osaka', value: 'Osaka' },
+            { label: 'Tokyo', value: 'Tokyo' },
+            { label: 'Yokohama', value: 'Yokohama' }
+        ]
+    }
+];
+`}
+</CodeHighlight>
+
+<CodeHighlight>
+{`
+<MultiSelect value={selectedGroupedCities} options={groupedCities} onChange={(e) => setSelectedGroupedCities(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items" />
+`}
+</CodeHighlight>
+
             <h5>Filtering</h5>
             <p>Options can be filtered using an input field in the overlay by enabling the <i>filter</i> property. By default filtering is done against
                 label of the items and <i>filterBy</i> property is available to choose one or more properties of the options. In addition <i>filterMatchMode</i> can be utilized
@@ -525,6 +567,30 @@ panelFooterTemplate(options) {
                             <td>string</td>
                             <td>null</td>
                             <td>Name of the label field of an option when an arbitrary objects instead of SelectItems are used as options.</td>
+                        </tr>
+                        <tr>
+                            <td>optionValue</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Property name or getter function to use as the value of an option, defaults to the option itself when not defined.</td>
+                        </tr>
+                        <tr>
+                            <td>optionDisabled</td>
+                            <td>boolean</td>
+                            <td>null</td>
+                            <td>Property name or getter function to use as the disabled flag of an option, defaults to false when not defined.</td>
+                        </tr>
+                        <tr>
+                            <td>optionGroupLabel</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Property name or getter function to use as the label of an option group.</td>
+                        </tr>
+                        <tr>
+                            <td>optionGroupChildren</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Property name or getter function that refers to the children options of option group.</td>
                         </tr>
                         <tr>
                             <td>style</td>
@@ -663,6 +729,12 @@ panelFooterTemplate(options) {
                             <td>function</td>
                             <td>null</td>
                             <td>Function that gets the option and returns the content for it.</td>
+                        </tr>
+                        <tr>
+                            <td>optionGroupTemplate</td>
+                            <td>any</td>
+                            <td>null</td>
+                            <td>Template of an option group item.</td>
                         </tr>
                         <tr>
                             <td>selectedItemTemplate</td>

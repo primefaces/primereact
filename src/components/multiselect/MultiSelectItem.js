@@ -59,7 +59,7 @@ export class MultiSelectItem extends Component {
         const checkboxClassName = classNames('p-checkbox-box', { 'p-highlight': this.props.selected });
         const checkboxIcon = classNames('p-checkbox-icon p-c', { 'pi pi-check': this.props.selected });
         const content = this.props.template ? ObjectUtils.getJSXElement(this.props.template, this.props.option) : this.props.label;
-        const tabIndex = this.props.disabled ? null : this.props.tabIndex;
+        const tabIndex = this.props.disabled ? null : this.props.tabIndex || 0;
 
         return (
             <li className={className} onClick={this.onClick} tabIndex={tabIndex} onKeyDown={this.onKeyDown} role="option" aria-selected={this.props.selected}>
