@@ -8,6 +8,9 @@ interface MultiSelectProps {
     options?: any[];
     optionLabel?: string;
     optionValue?: string;
+    optionDisabled?: boolean;
+    optionGroupLabel?: string;
+    optionGroupChildren?: string;
     display?: string;
     style?: object;
     className?: string;
@@ -39,6 +42,7 @@ interface MultiSelectProps {
     panelHeaderTemplate?: any;
     panelFooterTemplate?: any;
     itemTemplate?(item: any): JSX.Element | undefined;
+    optionGroupTemplate?:((option: any) => any | any);
     selectedItemTemplate?(value: any): JSX.Element | undefined;
     onChange?(e: {originalEvent: Event, value: any, target: {name: string, id: string, value: any}}): void;
     onFocus?(event: Event): void;
