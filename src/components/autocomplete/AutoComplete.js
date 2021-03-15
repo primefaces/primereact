@@ -20,6 +20,9 @@ export class AutoComplete extends Component {
         type: 'text',
         suggestions: null,
         field: null,
+        optionGroupLabel: null,
+        optionGroupChildren: null,
+        optionGroupTemplate: null,
         forceSelection: false,
         autoHighlight: false,
         scrollHeight: '200px',
@@ -71,6 +74,9 @@ export class AutoComplete extends Component {
         type: PropTypes.string,
         suggestions: PropTypes.array,
         field: PropTypes.string,
+        optionGroupLabel: PropTypes.string,
+        optionGroupChildren: PropTypes.string,
+        optionGroupTemplate: PropTypes.any,
         forceSelection: PropTypes.bool,
         autoHighlight: PropTypes.bool,
         scrollHeight: PropTypes.string,
@@ -133,6 +139,8 @@ export class AutoComplete extends Component {
         this.onMultiInputFocus = this.onMultiInputFocus.bind(this);
         this.onMultiInputBlur = this.onMultiInputBlur.bind(this);
         this.selectItem = this.selectItem.bind(this);
+        this.getOptionGroupLabel = this.getOptionGroupLabel.bind(this);
+        this.getOptionGroupChildren = this.getOptionGroupChildren.bind(this);
         this.onOverlayEnter = this.onOverlayEnter.bind(this);
         this.onOverlayEntering = this.onOverlayEntering.bind(this);
         this.onOverlayEntered = this.onOverlayEntered.bind(this);
@@ -349,7 +357,7 @@ export class AutoComplete extends Component {
                 //down
                 case 40:
                     if (highlightItem) {
-                        let nextElement = highlightItem.nextElementSibling;
+                        let nextElement = this.findNextItem(highlightItem);
                         if (nextElement) {
                             DomHandler.addClass(nextElement, 'p-highlight');
                             DomHandler.removeClass(highlightItem, 'p-highlight');
@@ -357,7 +365,14 @@ export class AutoComplete extends Component {
                         }
                     }
                     else {
-                        DomHandler.addClass(this.overlayRef.current.firstChild.firstChild, 'p-highlight');
+                        highlightItem = this.overlayRef.current.firstChild.firstChild;
+                        if (DomHandler.hasClass(highlightItem, 'p-autocomplete-item-group')) {
+                            highlightItem = this.findNextItem(highlightItem);
+                        }
+
+                        if (highlightItem) {
+                            DomHandler.addClass(highlightItem, 'p-highlight');
+                        }
                     }
 
                     event.preventDefault();
@@ -366,7 +381,7 @@ export class AutoComplete extends Component {
                 //up
                 case 38:
                     if (highlightItem) {
-                        let previousElement = highlightItem.previousElementSibling;
+                        let previousElement = this.findPrevItem(highlightItem);
                         if (previousElement) {
                             DomHandler.addClass(previousElement, 'p-highlight');
                             DomHandler.removeClass(highlightItem, 'p-highlight');
@@ -377,10 +392,10 @@ export class AutoComplete extends Component {
                     event.preventDefault();
                     break;
 
-                //enter,tab
+                //enter
                 case 13:
                     if (highlightItem) {
-                        this.selectItem(event, this.props.suggestions[DomHandler.index(highlightItem)]);
+                        this.selectHighlightItem(event, highlightItem);
                         this.hideOverlay();
                     }
 
@@ -396,7 +411,7 @@ export class AutoComplete extends Component {
                 //tab
                 case 9:
                     if (highlightItem) {
-                        this.selectItem(event, this.props.suggestions[DomHandler.index(highlightItem)]);
+                        this.selectHighlightItem(event, highlightItem);
                     }
 
                     this.hideOverlay();
@@ -430,6 +445,28 @@ export class AutoComplete extends Component {
                     break;
             }
         }
+    }
+
+    selectHighlightItem(event, item) {
+        if (this.props.optionGroupLabel) {
+            let optionGroup = this.props.suggestions[item.dataset.group];
+            this.selectItem(event, this.getOptionGroupChildren(optionGroup)[item.dataset.index]);
+        }
+        else {
+            this.selectItem(event, this.props.suggestions[DomHandler.index(item)]);
+        }
+    }
+
+    findNextItem(item) {
+        let nextItem = item.nextElementSibling;
+
+        return nextItem ? (DomHandler.hasClass(nextItem, 'p-autocomplete-item-group') ? this.findNextItem(nextItem) : nextItem) : null;
+    }
+
+    findPrevItem(item) {
+        let prevItem = item.previousElementSibling;
+
+        return prevItem ? (DomHandler.hasClass(prevItem, 'p-autocomplete-item-group') ? this.findPrevItem(prevItem) : prevItem) : null;
     }
 
     onInputFocus(event) {
@@ -525,6 +562,14 @@ export class AutoComplete extends Component {
         }
 
         return index;
+    }
+
+    getOptionGroupLabel(optionGroup) {
+        return this.props.optionGroupLabel ? ObjectUtils.resolveFieldData(optionGroup, this.props.optionGroupLabel) : optionGroup;
+    }
+
+    getOptionGroupChildren(optionGroup) {
+        return ObjectUtils.resolveFieldData(optionGroup, this.props.optionGroupChildren);
     }
 
     bindDocumentClickListener() {
@@ -760,6 +805,8 @@ export class AutoComplete extends Component {
                 <AutoCompletePanel ref={this.overlayRef} suggestions={this.props.suggestions} field={this.props.field} listId={this.listId}
                     appendTo={this.props.appendTo} itemTemplate={this.props.itemTemplate} onItemClick={this.selectItem} ariaSelected={this.ariaSelected}
                     panelStyle={this.props.panelStyle} panelClassName={this.props.panelClassName} onClick={this.onPanelClick}
+                    optionGroupLabel={this.props.optionGroupLabel} optionGroupChildren={this.props.optionGroupChildren} optionGroupTemplate={this.props.optionGroupTemplate}
+                    getOptionGroupLabel={this.getOptionGroupLabel} getOptionGroupChildren={this.getOptionGroupChildren}
                     in={this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntering={this.onOverlayEntering} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} />
             </span>
         );

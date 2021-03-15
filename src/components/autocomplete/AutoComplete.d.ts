@@ -8,6 +8,8 @@ interface AutoCompleteProps {
     type?: string;
     suggestions?: any[];
     field?: string;
+    optionGroupLabel?: string;
+    optionGroupChildren?: string;
     forceSelection?: boolean;
     autoHighlight?: boolean;
     scrollHeight?: string;
@@ -35,7 +37,8 @@ interface AutoCompleteProps {
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
     completeMethod?(e: {originalEvent: Event, query: string}): void;
-    itemTemplate?:((data: any) => any | any);
+    itemTemplate?:((data: any, index: number) => any | any);
+    optionGroupTemplate?:((data: any, index: number) => any | any);
     selectedItemTemplate?:((data: any) => any | any);
     onChange?(e: {originalEvent: Event, value: any, target: {name: string, id: string, value: any}}): void;
     onFocus?(event: Event): void;

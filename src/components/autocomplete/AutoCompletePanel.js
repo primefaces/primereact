@@ -12,6 +12,9 @@ class AutoCompletePanelComponent extends Component {
         suggestions: null,
         field: null,
         appendTo: null,
+        optionGroupLabel: null,
+        optionGroupChildren: null,
+        optionGroupTemplate: null,
         itemTemplate: null,
         onItemClick: null,
         scrollHeight: '200px',
@@ -20,13 +23,18 @@ class AutoCompletePanelComponent extends Component {
         panelClassName: null,
         panelStyle: null,
         forwardRef: null,
-        onClick: null
+        onClick: null,
+        getOptionGroupLabel: null,
+        getOptionGroupChildren: null
     }
 
     static propTypes = {
         suggestions: PropTypes.array,
         field: PropTypes.string,
         appendTo: PropTypes.any,
+        optionGroupLabel: PropTypes.string,
+        optionGroupChildren: PropTypes.string,
+        optionGroupTemplate: PropTypes.any,
         itemTemplate: PropTypes.any,
         onItemClick: PropTypes.func,
         scrollHeight: PropTypes.string,
@@ -35,26 +43,70 @@ class AutoCompletePanelComponent extends Component {
         panelClassName: PropTypes.string,
         panelStyle: PropTypes.object,
         forwardRef: PropTypes.any,
-        onClick: PropTypes.func
+        onClick: PropTypes.func,
+        getOptionGroupLabel: PropTypes.func,
+        getOptionGroupChildren: PropTypes.func
     };
 
-    renderElement() {
-        const panelClassName = classNames('p-autocomplete-panel p-component', this.props.panelClassName);
-        const panelStyle = { maxHeight: this.props.scrollHeight, ...this.props.panelStyle };
-        let items;
+    getOptionGroupRenderKey(optionGroup) {
+        return ObjectUtils.resolveFieldData(optionGroup, this.props.optionGroupLabel);
+    }
 
-        if (this.props.suggestions) {
-            items = this.props.suggestions.map((suggestion, index) => {
-                let itemContent = this.props.itemTemplate ? ObjectUtils.getJSXElement(this.props.itemTemplate, suggestion) : this.props.field ? ObjectUtils.resolveFieldData(suggestion, this.props.field) : suggestion;
+    renderGroupChildren(optionGroup, i) {
+        const groupChildren = this.props.getOptionGroupChildren(optionGroup);
+        return (
+            groupChildren.map((item, j) => {
+                let itemContent = this.props.itemTemplate ? ObjectUtils.getJSXElement(this.props.itemTemplate, item, j) : this.props.field ? ObjectUtils.resolveFieldData(item, this.props.field) : item;
 
                 return (
-                    <li key={index + '_item'} role="option" aria-selected={this.props.ariaSelected === suggestion} className="p-autocomplete-item" onClick={(e) => this.props.onItemClick(e, suggestion)}>
+                    <li key={j + '_item'} role="option" aria-selected={this.props.ariaSelected === item} className="p-autocomplete-item" onClick={(e) => this.props.onItemClick(e, item)} data-group={i} data-index={j}>
                         {itemContent}
                         <Ripple />
                     </li>
                 );
-            });
+            })
+        )
+    }
+
+    renderItems() {
+        if (this.props.suggestions) {
+            if (this.props.optionGroupLabel) {
+                return this.props.suggestions.map((suggestion, i) => {
+                    const groupContent = this.props.optionGroupTemplate ? ObjectUtils.getJSXElement(this.props.optionGroupTemplate, suggestion, i) : this.props.getOptionGroupLabel(suggestion);
+                    const groupChildrenContent = this.renderGroupChildren(suggestion, i);
+                    const key = i + '_' + this.getOptionGroupRenderKey(suggestion);
+
+                    return (
+                        <React.Fragment key={key}>
+                            <li  className="p-autocomplete-item-group">
+                                {groupContent}
+                            </li>
+                            {groupChildrenContent}
+                        </React.Fragment>
+                    )
+                });
+            }
+            else {
+                return this.props.suggestions.map((suggestion, index) => {
+                    let itemContent = this.props.itemTemplate ? ObjectUtils.getJSXElement(this.props.itemTemplate, suggestion, index) : this.props.field ? ObjectUtils.resolveFieldData(suggestion, this.props.field) : suggestion;
+
+                    return (
+                        <li key={index + '_item'} role="option" aria-selected={this.props.ariaSelected === suggestion} className="p-autocomplete-item" onClick={(e) => this.props.onItemClick(e, suggestion)}>
+                            {itemContent}
+                            <Ripple />
+                        </li>
+                    );
+                });
+            }
         }
+
+        return null;
+    }
+
+    renderElement() {
+        const panelClassName = classNames('p-autocomplete-panel p-component', this.props.panelClassName);
+        const panelStyle = { maxHeight: this.props.scrollHeight, ...this.props.panelStyle };
+        let items = this.renderItems();
 
         return (
             <CSSTransition nodeRef={this.props.forwardRef} classNames="p-connected-overlay" in={this.props.in} timeout={{ enter: 120, exit: 100 }}

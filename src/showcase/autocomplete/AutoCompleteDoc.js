@@ -280,6 +280,48 @@ render() {
 `}
 </CodeHighlight>
 
+                        <h5>Grouping</h5>
+				        <p>Options groups are specified with the <i>optionGroupLabel</i> and <i>optionGroupChildren</i> properties.</p>
+<CodeHighlight>
+{`
+this.groupedCities = [
+    {
+        label: 'Germany', code: 'DE',
+        items: [
+            { label: 'Berlin', value: 'Berlin' },
+            { label: 'Frankfurt', value: 'Frankfurt' },
+            { label: 'Hamburg', value: 'Hamburg' },
+            { label: 'Munich', value: 'Munich' }
+        ]
+    },
+    {
+        label: 'USA', code: 'US',
+        items: [
+            { label: 'Chicago', value: 'Chicago' },
+            { label: 'Los Angeles', value: 'Los Angeles' },
+            { label: 'New York', value: 'New York' },
+            { label: 'San Francisco', value: 'San Francisco' }
+        ]
+    },
+    {
+        label: 'Japan', code: 'JP',
+        items: [
+            { label: 'Kyoto', value: 'Kyoto' },
+            { label: 'Osaka', value: 'Osaka' },
+            { label: 'Tokyo', value: 'Tokyo' },
+            { label: 'Yokohama', value: 'Yokohama' }
+        ]
+    }
+];
+`}
+</CodeHighlight>
+
+<CodeHighlight>
+{`
+<AutoComplete value={selectedCity} suggestions={filteredCities} completeMethod={searchCity} field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} onChange={(e) => setSelectedCity(e.value)}/>
+`}
+</CodeHighlight>
+
                         <h5>Force Selection</h5>
                         <p>ForceSelection mode validates the manual input to check whether it also exists in the suggestions list, if not the input value is cleared
                         to make sure the value passed to the model is always one of the suggestions. Simply enable <i>forceSelection</i> to enforce that input is always from the suggestion list.</p>
@@ -355,6 +397,18 @@ itemTemplate(item) {
                                         <td>any</td>
                                         <td>null</td>
                                         <td>Field of a suggested object to resolve and display.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>optionGroupLabel</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Property name or getter function to use as the label of an option group.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>optionGroupChildren</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Property name or getter function that refers to the children options of option group.</td>
                                     </tr>
                                     <tr>
                                         <td>forceSelection</td>
@@ -524,6 +578,12 @@ itemTemplate(item) {
                                         <td>any</td>
                                         <td>null</td>
                                         <td>Template of a selected item.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>optionGroupTemplate</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Template of an option group item.</td>
                                     </tr>
                                 </tbody>
                             </table>
