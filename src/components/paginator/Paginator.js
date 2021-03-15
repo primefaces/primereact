@@ -200,21 +200,25 @@ export class Paginator extends Component {
     renderElements() {
         const template = this.props.template;
 
-        if (typeof template === 'object') {
-            return template.layout ?
-                template.layout.split(' ').map((value) => {
-                    const key = value.trim();
-                    return this.renderElement(key, template[key]);
-                })
-                :
-                Object.entries(template).map(([key, _template]) => {
-                    return this.renderElement(key, _template);
-                });
+        if (template) {
+            if (typeof template === 'object') {
+                return template.layout ?
+                    template.layout.split(' ').map((value) => {
+                        const key = value.trim();
+                        return this.renderElement(key, template[key]);
+                    })
+                    :
+                    Object.entries(template).map(([key, _template]) => {
+                        return this.renderElement(key, _template);
+                    });
+            }
+
+            return template.split(' ').map((value) => {
+                return this.renderElement(value.trim());
+            });
         }
 
-        return template.split(' ').map((value) => {
-            return this.renderElement(value.trim());
-        });
+        return null;
     }
 
     render() {
