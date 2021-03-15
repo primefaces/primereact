@@ -284,7 +284,7 @@ render() {
 				        <p>Options groups are specified with the <i>optionGroupLabel</i> and <i>optionGroupChildren</i> properties.</p>
 <CodeHighlight>
 {`
-this.groupedCities = [
+const groupedCities = [
     {
         label: 'Germany', code: 'DE',
         items: [

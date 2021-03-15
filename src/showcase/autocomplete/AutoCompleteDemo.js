@@ -101,7 +101,7 @@ export class AutoCompleteDemo extends Component {
     groupedItemTemplate(item) {
         return (
             <div className="p-d-flex p-ai-center country-item">
-                <img alt={item.name} src={`showcase/demo/images/flag_placeholder.png`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={`flag flag-${item.code.toLowerCase()}`} width="18" />
+                <img alt={item.name} src={`showcase/demo/images/flag_placeholder.png`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={`flag flag-${item.code.toLowerCase()}`} />
                 <div>{item.label}</div>
             </div>
         );

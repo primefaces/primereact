@@ -78,7 +78,7 @@ class AutoCompletePanelComponent extends Component {
 
                     return (
                         <React.Fragment key={key}>
-                            <li  className="p-autocomplete-item-group">
+                            <li className="p-autocomplete-item-group">
                                 {groupContent}
                             </li>
                             {groupChildrenContent}
