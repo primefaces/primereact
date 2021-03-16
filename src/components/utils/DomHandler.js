@@ -716,4 +716,14 @@ export default class DomHandler {
 
         return visibleFocusableElements;
     }
+
+    static getFirstFocusableElement(element) {
+        const focusableElements = DomHandler.getFocusableElements(element);
+        return focusableElements.length > 0 ? focusableElements[0] : null;
+    }
+
+    static getLastFocusableElement(element) {
+        const focusableElements = DomHandler.getFocusableElements(element);
+        return focusableElements.length > 0 ? focusableElements[focusableElements.length - 1] : null;
+    }
 }
