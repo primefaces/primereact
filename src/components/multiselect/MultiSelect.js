@@ -353,6 +353,8 @@ export class MultiSelect extends Component {
         if (this.props.filter && this.props.resetFilterOnHide) {
             this.resetFilter();
         }
+
+        DomHandler.revertZIndex();
     }
 
     alignPanel() {
