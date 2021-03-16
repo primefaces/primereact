@@ -339,9 +339,6 @@ export class Menu extends Component {
     render() {
         const element = this.renderElement();
 
-        if (this.props.appendTo)
-            return ReactDOM.createPortal(element, this.props.appendTo);
-        else
-            return element;
+        return this.props.popup ? ReactDOM.createPortal(element, this.props.appendTo || document.body) : element;
     }
 }
