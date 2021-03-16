@@ -296,6 +296,8 @@ export class SlideMenu extends Component {
     }
 
     onExited() {
+        DomHandler.revertZIndex();
+
         this.setState({ level: 0 });
     }
 
