@@ -329,7 +329,9 @@ export class Dialog extends Component {
 
     onExited() {
         this.dragging = false;
-        this.setState({ maskVisible: false });
+        this.setState({ maskVisible: false }, () => {
+            DomHandler.revertZIndex();
+        });
         this.disableDocumentSettings();
     }
 
