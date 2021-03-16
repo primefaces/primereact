@@ -303,14 +303,8 @@ export class AutoComplete extends Component {
 
     alignOverlay() {
         let target = this.props.multiple ? this.multiContainer : this.inputEl;
-
-        if (this.props.appendTo) {
-            this.overlayRef.current.style.minWidth = DomHandler.getWidth(target) + 'px';
-            DomHandler.absolutePosition(this.overlayRef.current, target);
-        }
-        else {
-            DomHandler.relativePosition(this.overlayRef.current, target);
-        }
+        this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(target) + 'px';
+        DomHandler.absolutePosition(this.overlayRef.current, target);
     }
 
     onPanelClick(event) {
@@ -655,7 +649,6 @@ export class AutoComplete extends Component {
     componentDidUpdate(prevProps) {
         if (prevProps.suggestions !== this.props.suggestions && this.state.searching) {
             if (this.props.suggestions && this.props.suggestions.length) {
-                this.alignOverlay()
                 this.showOverlay();
             }
             else {
