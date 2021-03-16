@@ -246,6 +246,7 @@ export class ContextMenu extends Component {
         this.onEnter = this.onEnter.bind(this);
         this.onEntered = this.onEntered.bind(this);
         this.onExit = this.onExit.bind(this);
+        this.onExited = this.onExited.bind(this);
 
         this.menuRef = React.createRef();
     }
@@ -324,6 +325,10 @@ export class ContextMenu extends Component {
     onExit() {
         this.currentEvent = null;
         this.unbindDocumentListeners();
+    }
+
+    onExited() {
+        DomHandler.revertZIndex();
     }
 
     position(event) {
@@ -458,7 +463,7 @@ export class ContextMenu extends Component {
 
         return (
             <CSSTransition nodeRef={this.menuRef} classNames="p-contextmenu" in={this.state.visible} timeout={{ enter: 250, exit: 0 }}
-                unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit}>
+                unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit} onExited={this.onExited}>
                 <div ref={this.menuRef} id={this.props.id} className={className} style={this.props.style} onClick={this.onMenuClick} onMouseEnter={this.onMenuMouseEnter}>
                     <ContextMenuSub model={this.props.model} root resetMenu={this.state.resetMenu} onLeafClick={this.onLeafClick} />
                 </div>
