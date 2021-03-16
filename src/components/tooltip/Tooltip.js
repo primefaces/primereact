@@ -237,6 +237,8 @@ export class Tooltip extends Component {
                     this.currentTarget = null;
                     this.scrollHandler = null;
                     this.sendCallback(this.props.onHide, { originalEvent: e, target: this.currentTarget });
+
+                    DomHandler.revertZIndex();
                 });
             });
         }
