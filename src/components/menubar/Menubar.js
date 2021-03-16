@@ -42,8 +42,14 @@ export class Menubar extends Component {
         this.setState((prevState) => ({
             mobileActive: !prevState.mobileActive
         }), () => {
-            this.rootmenu.style.zIndex = String(DomHandler.generateZIndex());
-            this.bindDocumentClickListener();
+            if (this.state.mobileActive) {
+                this.rootmenu.style.zIndex = String(DomHandler.generateZIndex());
+                this.bindDocumentClickListener();
+            }
+            else {
+                this.unbindDocumentClickListener();
+                DomHandler.revertZIndex();
+            }
         });
     }
 
@@ -51,7 +57,10 @@ export class Menubar extends Component {
         if (!this.documentClickListener) {
             this.documentClickListener = (event) => {
                 if (this.state.mobileActive && this.isOutsideClicked(event)) {
-                    this.setState({ mobileActive: false });
+                    this.setState({ mobileActive: false }, () => {
+                        this.unbindDocumentClickListener();
+                        DomHandler.revertZIndex();
+                    });
                 }
             };
             document.addEventListener('click', this.documentClickListener);
@@ -71,7 +80,10 @@ export class Menubar extends Component {
     }
 
     onLeafClick() {
-        this.setState({ mobileActive: false });
+        this.setState({ mobileActive: false }, () => {
+            this.unbindDocumentClickListener();
+            DomHandler.revertZIndex();
+        });
     }
 
     renderCustomContent() {
