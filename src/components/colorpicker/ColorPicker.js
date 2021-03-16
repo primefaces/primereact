@@ -57,6 +57,7 @@ export class ColorPicker extends Component {
         this.onOverlayEnter = this.onOverlayEnter.bind(this);
         this.onOverlayEntered = this.onOverlayEntered.bind(this);
         this.onOverlayExit = this.onOverlayExit.bind(this);
+        this.onOverlayExited = this.onOverlayExited.bind(this);
         this.onPanelClick = this.onPanelClick.bind(this);
         this.onColorMousedown = this.onColorMousedown.bind(this);
         this.onHueMousedown = this.onHueMousedown.bind(this);
@@ -299,6 +300,10 @@ export class ColorPicker extends Component {
         this.unbindDocumentClickListener();
         this.unbindScrollListener();
         this.unbindResizeListener();
+    }
+
+    onOverlayExited() {
+        DomHandler.revertZIndex();
     }
 
     onInputClick() {
@@ -672,7 +677,7 @@ export class ColorPicker extends Component {
             <div ref={(el) => this.container = el} id={this.id} style={this.props.style} className={containerClassName}>
                 {input}
                 <ColorPickerPanel ref={this.overlayRef} appendTo={this.props.appendTo} inline={this.props.inline} disabled={this.props.disabled} onClick={this.onPanelClick}
-                    in={this.props.inline || this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit}>
+                    in={this.props.inline || this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
                     {content}
                 </ColorPickerPanel>
             </div>
