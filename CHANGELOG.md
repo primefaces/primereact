@@ -1,5 +1,27 @@
 # Changelog
 
+## [6.2.0](https://github.com/primefaces/primereact/tree/6.2.0) (2021-03-16)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/6.1.0...6.2.0)
+
+**Implemented New Features and Enhancements:**
+
+- Add zIndex options to PrimeReact api [\#1878](https://github.com/primefaces/primereact/issues/1878)
+- Set appendTo as body by default [\#1875](https://github.com/primefaces/primereact/issues/1875)
+- Add option group support to Dropdown [\#1874](https://github.com/primefaces/primereact/issues/1874)
+- Add option group support to MultiSelect [\#1873](https://github.com/primefaces/primereact/issues/1873)
+- Add option group support to Listbox [\#1872](https://github.com/primefaces/primereact/issues/1872)
+- Add option group support to Autocomplete [\#1871](https://github.com/primefaces/primereact/issues/1871)
+- Improve close button style on Inplace [\#1861](https://github.com/primefaces/primereact/issues/1861)
+- Improve type definition of  completeMethod event on AutoComplete [\#1680](https://github.com/primefaces/primereact/issues/1680)
+
+**Fixed bugs:**
+
+- Datatable rows per page doesn't work [\#1870](https://github.com/primefaces/primereact/issues/1870)
+- Server side error because OverlayEventBus [\#1869](https://github.com/primefaces/primereact/issues/1869)
+- Cell Editing doesn't work on child nodes in TreeTable [\#1865](https://github.com/primefaces/primereact/issues/1865)
+- Ability to clear password \(set value of password to blank\) [\#1854](https://github.com/primefaces/primereact/issues/1854)
+
 ## [6.1.0](https://github.com/primefaces/primereact/tree/6.1.0) (2021-03-09)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/6.0.2...6.1.0)

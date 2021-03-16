@@ -1,4 +1,298 @@
 {
+    "6.2.0": {
+        "utils": [
+            {
+                "number": 1869,
+                "title": "Server side error because OverlayEventBus",
+                "url": "https://github.com/primefaces/primereact/issues/1869"
+            },
+            {
+                "number": 1871,
+                "title": "Add option group support to Autocomplete",
+                "url": "https://github.com/primefaces/primereact/issues/1871"
+            },
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            },
+            {
+                "number": 1873,
+                "title": "Add option group support to MultiSelect",
+                "url": "https://github.com/primefaces/primereact/issues/1873"
+            }
+        ],
+        "autocomplete": [
+            {
+                "number": 1871,
+                "title": "Add option group support to Autocomplete",
+                "url": "https://github.com/primefaces/primereact/issues/1871"
+            },
+            {
+                "number": 1680,
+                "title": "Improve type definition of  completeMethod event on AutoComplete",
+                "url": "https://github.com/primefaces/primereact/issues/1680"
+            },
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            },
+            {
+                "number": 1875,
+                "title": "Set appendTo as body by default",
+                "url": "https://github.com/primefaces/primereact/issues/1875"
+            }
+        ],
+        "inplace": [
+            {
+                "number": 1861,
+                "title": "Improve close button style on Inplace",
+                "url": "https://github.com/primefaces/primereact/issues/1861"
+            }
+        ],
+        "cascadeselect": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            },
+            {
+                "number": 1875,
+                "title": "Set appendTo as body by default",
+                "url": "https://github.com/primefaces/primereact/issues/1875"
+            }
+        ],
+        "datatable": [
+            {
+                "number": 1870,
+                "title": "Datatable rows per page doesn't work",
+                "url": "https://github.com/primefaces/primereact/issues/1870"
+            }
+        ],
+        "treetable": [
+            {
+                "number": 1865,
+                "title": "Cell Editing doesn't work on child nodes in TreeTable",
+                "url": "https://github.com/primefaces/primereact/issues/1865"
+            }
+        ],
+        "sidebar": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            }
+        ],
+        "api": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            }
+        ],
+        "confirmpopup": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            }
+        ],
+        "contextmenu": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            },
+            {
+                "number": 1875,
+                "title": "Set appendTo as body by default",
+                "url": "https://github.com/primefaces/primereact/issues/1875"
+            }
+        ],
+        "dropdown": [
+            {
+                "number": 1874,
+                "title": "Add option group support to Dropdown",
+                "url": "https://github.com/primefaces/primereact/issues/1874"
+            },
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            },
+            {
+                "number": 1875,
+                "title": "Set appendTo as body by default",
+                "url": "https://github.com/primefaces/primereact/issues/1875"
+            }
+        ],
+        "galleria": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            }
+        ],
+        "password": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            },
+            {
+                "number": 1854,
+                "title": "Ability to clear password (set value of password to blank)",
+                "url": "https://github.com/primefaces/primereact/issues/1854"
+            },
+            {
+                "number": 1875,
+                "title": "Set appendTo as body by default",
+                "url": "https://github.com/primefaces/primereact/issues/1875"
+            }
+        ],
+        "menubar": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            }
+        ],
+        "menu": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            },
+            {
+                "number": 1875,
+                "title": "Set appendTo as body by default",
+                "url": "https://github.com/primefaces/primereact/issues/1875"
+            }
+        ],
+        "colorpicker": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            },
+            {
+                "number": 1875,
+                "title": "Set appendTo as body by default",
+                "url": "https://github.com/primefaces/primereact/issues/1875"
+            }
+        ],
+        "tieredmenu": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            },
+            {
+                "number": 1875,
+                "title": "Set appendTo as body by default",
+                "url": "https://github.com/primefaces/primereact/issues/1875"
+            }
+        ],
+        "dialog": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            },
+            {
+                "number": 1875,
+                "title": "Set appendTo as body by default",
+                "url": "https://github.com/primefaces/primereact/issues/1875"
+            }
+        ],
+        "listbox": [
+            {
+                "number": 1872,
+                "title": "Add option group support to Listbox",
+                "url": "https://github.com/primefaces/primereact/issues/1872"
+            }
+        ],
+        "overlaypanel": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            },
+            {
+                "number": 1875,
+                "title": "Set appendTo as body by default",
+                "url": "https://github.com/primefaces/primereact/issues/1875"
+            }
+        ],
+        "scrolltop": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            }
+        ],
+        "splitbutton": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            },
+            {
+                "number": 1875,
+                "title": "Set appendTo as body by default",
+                "url": "https://github.com/primefaces/primereact/issues/1875"
+            }
+        ],
+        "calendar": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            },
+            {
+                "number": 1875,
+                "title": "Set appendTo as body by default",
+                "url": "https://github.com/primefaces/primereact/issues/1875"
+            }
+        ],
+        "multiselect": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            },
+            {
+                "number": 1875,
+                "title": "Set appendTo as body by default",
+                "url": "https://github.com/primefaces/primereact/issues/1875"
+            },
+            {
+                "number": 1873,
+                "title": "Add option group support to MultiSelect",
+                "url": "https://github.com/primefaces/primereact/issues/1873"
+            }
+        ],
+        "slidemenu": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            },
+            {
+                "number": 1875,
+                "title": "Set appendTo as body by default",
+                "url": "https://github.com/primefaces/primereact/issues/1875"
+            }
+        ],
+        "tooltip": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            }
+        ]
+    },
     "6.1.0": {
         "overlaypanel": [
             {
