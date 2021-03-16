@@ -1593,13 +1593,9 @@ export class Calendar extends Component {
             this.enableModality();
         }
         else {
-            if (this.props.appendTo) {
-                DomHandler.absolutePosition(this.overlayRef.current, this.inputElement);
-                this.overlayRef.current.style.minWidth = DomHandler.getWidth(this.container) + 'px';
-            }
-            else {
-                DomHandler.relativePosition(this.overlayRef.current, this.inputElement);
-            }
+            const container = this.inputElement.parentElement;
+            this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
+            DomHandler.absolutePosition(this.overlayRef.current, container);
         }
     }
 
@@ -2715,18 +2711,22 @@ export class Calendar extends Component {
     }
 
     renderMonthView() {
-        const backwardNavigator = this.renderBackwardNavigator();
-        const forwardNavigator = this.renderForwardNavigator();
+        const backwardNavigator = this.renderBackwardNavigator(true);
+        const forwardNavigator = this.renderForwardNavigator(true);
         const yearElement = this.renderTitleYearElement(this.getViewDate().getFullYear());
         const months = this.renderMonthViewMonths();
 
         return (
             <>
-                <div className="p-datepicker-header">
-                    {backwardNavigator}
-                    {forwardNavigator}
-                    <div className="p-datepicker-title">
-                        {yearElement}
+                <div className="p-datepicker-group-container">
+                    <div className="p-datepicker-group">
+                        <div className="p-datepicker-header">
+                            {backwardNavigator}
+                            <div className="p-datepicker-title">
+                                {yearElement}
+                            </div>
+                            {forwardNavigator}
+                        </div>
                     </div>
                 </div>
                 <div className="p-monthpicker">
@@ -2986,7 +2986,7 @@ export class Calendar extends Component {
             <span ref={(el) => this.container = el} id={this.id} className={className} style={this.props.style}>
                 {input}
                 {button}
-                <CalendarPanel ref={this.overlayRef} className={panelClassName} style={this.props.panelStyle} appendTo={this.props.appendTo} onClick={this.onPanelClick}
+                <CalendarPanel ref={this.overlayRef} className={panelClassName} style={this.props.panelStyle} appendTo={this.props.appendTo} inline={this.props.inline} onClick={this.onPanelClick}
                     in={this.props.inline || this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit}>
                     {datePicker}
                     {timePicker}
@@ -2997,4 +2997,3 @@ export class Calendar extends Component {
         );
     }
 }
-

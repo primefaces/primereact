@@ -31,10 +31,7 @@ class CalendarPanelComponent extends Component {
     render() {
         let element = this.renderElement();
 
-        if (this.props.appendTo)
-            return ReactDOM.createPortal(element, this.props.appendTo);
-        else
-            return element;
+        return this.props.inline ? element : ReactDOM.createPortal(element, this.props.appendTo || document.body);
     }
 
 }
