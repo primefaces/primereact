@@ -599,13 +599,8 @@ export class ColorPicker extends Component {
 
     alignPanel() {
         const container = this.input.parentElement;
-        if (this.props.appendTo) {
-            this.overlayRef.current.style.minWidth = DomHandler.getWidth(container) + 'px';
-            DomHandler.absolutePosition(this.overlayRef.current, container);
-        }
-        else {
-            DomHandler.relativePosition(this.overlayRef.current, container);
-        }
+        this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
+        DomHandler.absolutePosition(this.overlayRef.current, container);
     }
 
     renderTooltip() {
