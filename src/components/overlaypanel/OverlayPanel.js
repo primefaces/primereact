@@ -47,6 +47,7 @@ export class OverlayPanel extends Component {
         this.onEnter = this.onEnter.bind(this);
         this.onEntered = this.onEntered.bind(this);
         this.onExit = this.onExit.bind(this);
+        this.onExited = this.onExited.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
         this.attributeSelector = UniqueComponentId();
@@ -195,6 +196,10 @@ export class OverlayPanel extends Component {
         this.unbindResizeListener();
     }
 
+    onExited() {
+        DomHandler.revertZIndex();
+    }
+
     align() {
         if (this.target) {
             DomHandler.absolutePosition(this.overlayRef.current, this.target);
@@ -273,7 +278,7 @@ export class OverlayPanel extends Component {
 
         return (
             <CSSTransition nodeRef={this.overlayRef} classNames="p-overlaypanel" in={this.state.visible} timeout={{ enter: 120, exit: 100 }}
-                unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit}>
+                unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit} onExited={this.onExited}>
                 <div ref={this.overlayRef} id={this.id} className={className} style={this.props.style} onClick={this.onPanelClick}>
                     <div className="p-overlaypanel-content">
                         {this.props.children}
