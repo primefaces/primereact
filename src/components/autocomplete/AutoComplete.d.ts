@@ -1,6 +1,11 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
+type CompleteMethodParams = {
+    originalEvent: Event,
+    query: string
+}
+
 interface AutoCompleteProps {
     id?: string;
     value?: any;
@@ -36,7 +41,7 @@ interface AutoCompleteProps {
     tooltip?: any;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
-    completeMethod?(e: {originalEvent: Event, query: string}): void;
+    completeMethod?(e: CompleteMethodParams): void;
     itemTemplate?:((data: any, index: number) => any | any);
     optionGroupTemplate?:((data: any, index: number) => any | any);
     selectedItemTemplate?:((data: any) => any | any);
