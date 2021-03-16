@@ -181,6 +181,8 @@ export class Galleria extends Component {
         if (this.state.slideShowActive) {
             this.stopSlideShow();
         }
+
+        DomHandler.revertZIndex();
     }
 
     renderHeader() {

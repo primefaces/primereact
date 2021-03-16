@@ -206,6 +206,8 @@ export class SplitButton extends Component {
             this.tooltip.destroy();
             this.tooltip = null;
         }
+
+        DomHandler.revertZIndex();
     }
 
     renderTooltip() {

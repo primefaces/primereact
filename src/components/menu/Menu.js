@@ -243,6 +243,8 @@ export class Menu extends Component {
             this.scrollHandler.destroy();
             this.scrollHandler = null;
         }
+
+        DomHandler.revertZIndex();
     }
 
     renderSubmenu(submenu, index) {

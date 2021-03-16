@@ -691,6 +691,8 @@ export class AutoComplete extends Component {
         if (this.timeout) {
             clearTimeout(this.timeout);
         }
+
+        DomHandler.revertZIndex();
     }
 
     renderTooltip() {

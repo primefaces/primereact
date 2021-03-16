@@ -86,6 +86,10 @@ export class Menubar extends Component {
         });
     }
 
+    componentWillUnmount() {
+        DomHandler.revertZIndex();
+    }
+
     renderCustomContent() {
         if (this.props.children) {
             return (

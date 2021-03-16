@@ -186,6 +186,8 @@ export class TieredMenu extends Component {
             this.scrollHandler.destroy();
             this.scrollHandler = null;
         }
+
+        DomHandler.revertZIndex();
     }
 
     renderElement() {

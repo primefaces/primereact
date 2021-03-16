@@ -257,6 +257,8 @@ export class OverlayPanel extends Component {
             document.head.removeChild(this.styleElement);
             this.styleElement = null;
         }
+
+        DomHandler.revertZIndex();
     }
 
     renderCloseIcon() {

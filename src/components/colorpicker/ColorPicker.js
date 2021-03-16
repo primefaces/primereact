@@ -593,6 +593,8 @@ export class ColorPicker extends Component {
             this.tooltip.destroy();
             this.tooltip = null;
         }
+
+        DomHandler.revertZIndex();
     }
 
     updateUI() {

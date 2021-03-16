@@ -456,6 +456,8 @@ export class ContextMenu extends Component {
     componentWillUnmount() {
         this.unbindDocumentListeners();
         this.unbindDocumentContextMenuListener();
+
+        DomHandler.revertZIndex();
     }
 
     renderContextMenu() {

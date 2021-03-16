@@ -445,6 +445,8 @@ export class Tooltip extends Component {
             this.scrollHandler.destroy();
             this.scrollHandler = null;
         }
+
+        DomHandler.revertZIndex();
     }
 
     renderElement() {

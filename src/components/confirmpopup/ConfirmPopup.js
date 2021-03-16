@@ -291,6 +291,8 @@ export class ConfirmPopup extends Component {
             this.scrollHandler.destroy();
             this.scrollHandler = null;
         }
+
+        DomHandler.revertZIndex();
     }
 
     renderContent() {

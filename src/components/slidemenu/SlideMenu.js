@@ -376,6 +376,8 @@ export class SlideMenu extends Component {
             this.scrollHandler.destroy();
             this.scrollHandler = null;
         }
+
+        DomHandler.revertZIndex();
     }
 
     renderElement() {

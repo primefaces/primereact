@@ -191,6 +191,8 @@ export class Sidebar extends Component {
     componentWillUnmount() {
         this.unbindMaskClickListener();
         this.disableModality();
+
+        DomHandler.revertZIndex();
     }
 
     renderCloseIcon() {

@@ -377,6 +377,8 @@ export class Password extends Component {
             this.tooltip.destroy();
             this.tooltip = null;
         }
+
+        DomHandler.revertZIndex();
     }
 
     renderTooltip() {

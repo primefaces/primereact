@@ -536,6 +536,8 @@ export class MultiSelect extends Component {
             this.tooltip.destroy();
             this.tooltip = null;
         }
+
+        DomHandler.revertZIndex();
     }
 
     hasFilter() {

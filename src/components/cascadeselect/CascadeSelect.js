@@ -347,6 +347,8 @@ export class CascadeSelect extends Component {
             this.scrollHandler.destroy();
             this.scrollHandler = null;
         }
+
+        DomHandler.revertZIndex();
     }
 
     componentDidUpdate(prevProps) {

@@ -100,6 +100,8 @@ export class ScrollTop extends Component {
             this.unbindDocumentScrollListener();
         else if (this.props.target === 'parent')
             this.unbindParentScrollListener();
+
+        DomHandler.revertZIndex();
     }
 
     render() {

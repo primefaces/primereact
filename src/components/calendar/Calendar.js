@@ -301,6 +301,8 @@ export class Calendar extends Component {
             this.scrollHandler.destroy();
             this.scrollHandler = null;
         }
+
+        DomHandler.revertZIndex();
     }
 
     renderTooltip() {

@@ -788,6 +788,8 @@ export class Dropdown extends Component {
             clearTimeout(this.hideTimeout);
             this.hideTimeout = null;
         }
+
+        DomHandler.revertZIndex();
     }
 
     componentDidUpdate(prevProps) {
