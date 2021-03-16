@@ -211,6 +211,7 @@ export class Calendar extends Component {
         this.onOverlayEnter = this.onOverlayEnter.bind(this);
         this.onOverlayEntered = this.onOverlayEntered.bind(this);
         this.onOverlayExit = this.onOverlayExit.bind(this);
+        this.onOverlayExited = this.onOverlayExited.bind(this);
         this.reFocusInputField = this.reFocusInputField.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
@@ -1519,6 +1520,10 @@ export class Calendar extends Component {
         this.unbindDocumentClickListener();
         this.unbindDocumentResizeListener();
         this.unbindScrollListener();
+    }
+
+    onOverlayExited() {
+        DomHandler.revertZIndex();
     }
 
     bindDocumentClickListener() {
@@ -2987,7 +2992,7 @@ export class Calendar extends Component {
                 {input}
                 {button}
                 <CalendarPanel ref={this.overlayRef} className={panelClassName} style={this.props.panelStyle} appendTo={this.props.appendTo} inline={this.props.inline} onClick={this.onPanelClick}
-                    in={this.props.inline || this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit}>
+                    in={this.props.inline || this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
                     {datePicker}
                     {timePicker}
                     {buttonBar}
