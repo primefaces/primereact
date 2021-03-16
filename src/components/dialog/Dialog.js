@@ -650,10 +650,7 @@ export class Dialog extends Component {
         if (this.state.maskVisible) {
             const element = this.renderElement();
 
-            if (this.props.appendTo)
-                return ReactDOM.createPortal(element, this.props.appendTo);
-            else
-                return element;
+            return ReactDOM.createPortal(element, this.props.appendTo || document.body);
         }
 
         return null;
