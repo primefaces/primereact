@@ -60,6 +60,7 @@ export class SplitButton extends Component {
         this.onOverlayEnter = this.onOverlayEnter.bind(this);
         this.onOverlayEntered = this.onOverlayEntered.bind(this);
         this.onOverlayExit = this.onOverlayExit.bind(this);
+        this.onOverlayExited = this.onOverlayExited.bind(this);
         this.onPanelClick = this.onPanelClick.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
@@ -107,6 +108,10 @@ export class SplitButton extends Component {
         this.unbindDocumentClickListener();
         this.unbindScrollListener();
         this.unbindResizeListener();
+    }
+
+    onOverlayExited() {
+        DomHandler.revertZIndex();
     }
 
     alignPanel() {
@@ -235,7 +240,7 @@ export class SplitButton extends Component {
                     aria-expanded={this.state.overlayVisible} aria-haspopup aria-owns={this.id + '_overlay'} />
                 <SplitButtonPanel ref={this.overlayRef} appendTo={this.props.appendTo} id={this.id + '_overlay'}
                     menuStyle={this.props.menuStyle} menuClassName={this.props.menuClassName} onClick={this.onPanelClick}
-                    in={this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit}>
+                    in={this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
                     {items}
                 </SplitButtonPanel>
             </div>

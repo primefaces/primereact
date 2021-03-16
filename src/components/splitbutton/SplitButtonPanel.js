@@ -27,7 +27,7 @@ class SplitButtonPanelComponent extends Component {
 
         return (
             <CSSTransition nodeRef={this.props.forwardRef} classNames="p-connected-overlay" in={this.props.in} timeout={{ enter: 120, exit: 100 }}
-                unmountOnExit onEnter={this.props.onEnter} onEntered={this.props.onEntered} onExit={this.props.onExit}>
+                unmountOnExit onEnter={this.props.onEnter} onEntered={this.props.onEntered} onExit={this.props.onExit} onExited={this.props.onExited}>
                 <div ref={this.props.forwardRef} className={className} style={this.props.menuStyle} id={this.props.id} onClick={this.onClick}>
                     <ul className="p-menu-list p-reset" role="menu">
                         {this.props.children}
