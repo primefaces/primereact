@@ -251,15 +251,28 @@ export class MultiSelect extends Component {
 
             //space
             case 32:
-                if (!this.state.overlayVisible) {
+                if (this.state.overlayVisible)
+                    this.hide();
+                else
                     this.show();
-                    event.preventDefault();
-                }
+
+                event.preventDefault();
                 break;
 
             //escape
             case 27:
                 this.hide();
+                break;
+
+            //tab
+            case 9:
+                if (this.state.overlayVisible) {
+                    const firstFocusableElement = DomHandler.getFirstFocusableElement(this.overlayRef.current);
+                    if (firstFocusableElement) {
+                        firstFocusableElement.focus();
+                        event.preventDefault();
+                    }
+                }
                 break;
 
             default:
@@ -344,13 +357,8 @@ export class MultiSelect extends Component {
 
     alignPanel() {
         const container = this.label.parentElement;
-        if (this.props.appendTo) {
-            this.overlayRef.current.style.minWidth = DomHandler.getWidth(container) + 'px';
-            DomHandler.absolutePosition(this.overlayRef.current, container);
-        }
-        else {
-            DomHandler.relativePosition(this.overlayRef.current, container);
-        }
+        this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
+        DomHandler.absolutePosition(this.overlayRef.current, container);
     }
 
     onCloseClick(event) {

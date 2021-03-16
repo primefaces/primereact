@@ -49,12 +49,7 @@ class MultiSelectPanelComponent extends Component {
     render() {
         let element = this.renderElement();
 
-        if (this.props.appendTo) {
-            return ReactDOM.createPortal(element, this.props.appendTo);
-        }
-        else {
-            return element;
-        }
+        return ReactDOM.createPortal(element, this.props.appendTo || document.body);
     }
 }
 
