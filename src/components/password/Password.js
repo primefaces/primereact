@@ -87,6 +87,7 @@ export class Password extends Component {
         this.onOverlayEnter = this.onOverlayEnter.bind(this);
         this.onOverlayEntered = this.onOverlayEntered.bind(this);
         this.onOverlayExit = this.onOverlayExit.bind(this);
+        this.onOverlayExited = this.onOverlayExited.bind(this);
         this.onPanelClick = this.onPanelClick.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
@@ -196,6 +197,10 @@ export class Password extends Component {
     onOverlayExit() {
         this.unbindScrollListener();
         this.unbindResizeListener();
+    }
+
+    onOverlayExited() {
+        DomHandler.revertZIndex();
     }
 
     onFocus(event) {
@@ -422,7 +427,7 @@ export class Password extends Component {
 
         const panel = (
             <CSSTransition nodeRef={this.overlayRef} classNames="p-connected-overlay" in={this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }}
-                unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit}>
+                unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
                 <div ref={this.overlayRef} className={panelClassName} style={this.props.panelStyle} onClick={this.onPanelClick}>
                     {header}
                     {content}
