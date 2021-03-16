@@ -178,13 +178,9 @@ export class Password extends Component {
     }
 
     alignOverlay() {
-        if (this.props.appendTo) {
-            this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(this.inputEl) + 'px';
-            DomHandler.absolutePosition(this.overlayRef.current, this.inputEl);
-        }
-        else {
-            DomHandler.relativePosition(this.overlayRef.current, this.inputEl);
-        }
+        const container = this.inputEl.parentElement;
+        this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
+        DomHandler.absolutePosition(this.overlayRef.current, container);
     }
 
     onOverlayEnter() {
@@ -435,11 +431,7 @@ export class Password extends Component {
             </CSSTransition>
         );
 
-        if (this.props.appendTo) {
-            return ReactDOM.createPortal(panel, this.props.appendTo);
-        }
-
-        return panel;
+        return ReactDOM.createPortal(panel, this.props.appendTo || document.body);
     }
 
     render() {
