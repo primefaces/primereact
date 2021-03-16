@@ -53,6 +53,7 @@ export class Sidebar extends Component {
         this.onEnter = this.onEnter.bind(this);
         this.onEntered = this.onEntered.bind(this);
         this.onExit = this.onExit.bind(this);
+        this.onExited = this.onExited.bind(this);
 
         this.sidebarRef = React.createRef();
     }
@@ -90,6 +91,10 @@ export class Sidebar extends Component {
         if (this.props.modal) {
             this.disableModality();
         }
+    }
+
+    onExited() {
+        DomHandler.revertZIndex();
     }
 
     enableModality() {
@@ -222,7 +227,7 @@ export class Sidebar extends Component {
 
         return (
             <CSSTransition nodeRef={this.sidebarRef} classNames="p-sidebar" in={this.props.visible} timeout={transitionTimeout}
-                unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit}>
+                unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit} onExited={this.onExited}>
                 <div ref={this.sidebarRef} id={this.props.id} className={className} style={this.props.style} role="complementary">
                     <div className="p-sidebar-icons">
                         {icons}
