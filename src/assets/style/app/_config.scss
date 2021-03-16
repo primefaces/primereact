@@ -5,7 +5,7 @@
     right: 0;
     display: block;
     width: 550px;
-    z-index: 998;
+    z-index: 1101;
     height: 100%;
     transition: transform .4s cubic-bezier(.05,.74,.2,.99);
     transform: translateX(100%);
@@ -108,7 +108,7 @@
         text-align: center;
         right: 20px;
         top: 20px;
-        z-index: 999;
+        z-index: 1102;
         background-color: var(--primary-color);
         border-radius: 50%;
         transition: background-color .2s, box-shadow .2s, transform .2s;
