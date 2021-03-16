@@ -77,6 +77,7 @@ export class CascadeSelect extends Component {
         this.id = this.props.id || UniqueComponentId();
         this.overlayRef = React.createRef();
 
+        this.hide = this.hide.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onInputFocus = this.onInputFocus.bind(this);
         this.onInputBlur = this.onInputBlur.bind(this);
@@ -185,9 +186,9 @@ export class CascadeSelect extends Component {
     }
 
     onInputKeyDown(event) {
-        switch (event.key) {
-            case 'Down':
-            case 'ArrowDown':
+        switch (event.which) {
+            //down
+            case 40:
                 if (this.state.overlayVisible) {
                     DomHandler.findSingle(this.overlayRef.current, '.p-cascadeselect-item').children[0].focus();
                 }
@@ -197,14 +198,18 @@ export class CascadeSelect extends Component {
                 event.preventDefault();
                 break;
 
-            case 'Escape':
-                if (this.state.overlayVisible) {
+            //space
+            case 32:
+                if (this.state.overlayVisible)
                     this.hide();
-                    event.preventDefault();
-                }
+                else
+                    this.show();
+
+                event.preventDefault();
                 break;
 
-            case 'Tab':
+            //tab
+            case 9:
                 this.hide();
                 break;
 
@@ -231,7 +236,9 @@ export class CascadeSelect extends Component {
         if (this.props.onBeforeHide) {
             this.props.onBeforeHide();
         }
-        this.setState({ overlayVisible: false });
+        this.setState({ overlayVisible: false }, () => {
+            this.focusInput.focus();
+        });
     }
 
     onOverlayEnter() {
@@ -260,13 +267,8 @@ export class CascadeSelect extends Component {
 
     alignOverlay() {
         const container = this.input.parentElement;
-        if (this.props.appendTo) {
-            DomHandler.absolutePosition(this.overlayRef.current, container);
-            this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
-        }
-        else {
-            DomHandler.relativePosition(this.overlayRef.current, container);
-        }
+        DomHandler.absolutePosition(this.overlayRef.current, container);
+        this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
     }
 
     bindOutsideClickListener() {
@@ -384,13 +386,13 @@ export class CascadeSelect extends Component {
                     <div className="p-cascadeselect-items-wrapper">
                         <CascadeSelectSub options={this.props.options} selectionPath={this.selectionPath} className={"p-cascadeselect-items"} optionLabel={this.props.optionLabel}
                             optionValue={this.props.optionValue} level={0} optionGroupLabel={this.props.optionGroupLabel} optionGroupChildren={this.props.optionGroupChildren}
-                            onOptionSelect={this.onOptionSelect} onOptionGroupSelect={this.onOptionGroupSelect} root template={this.props.itemTemplate} />
+                            onOptionSelect={this.onOptionSelect} onOptionGroupSelect={this.onOptionGroupSelect} root template={this.props.itemTemplate} onPanelHide={this.hide} />
                     </div>
                 </div>
             </CSSTransition>
         );
 
-        return this.props.appendTo ? ReactDOM.createPortal(overlay, this.props.appendTo) : overlay;
+        return ReactDOM.createPortal(overlay, this.props.appendTo || document.body);
     }
 
     renderElement() {
