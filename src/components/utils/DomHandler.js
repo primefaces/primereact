@@ -1,3 +1,5 @@
+import PrimeReact from '../api/PrimeReact';
+
 export default class DomHandler {
 
     static innerWidth(el) {
@@ -102,12 +104,16 @@ export default class DomHandler {
     }
 
     static generateZIndex() {
-        this.zindex = this.zindex||999;
-        return ++this.zindex;
+        this.zIndex = this.zIndex||PrimeReact.zIndex;
+        return ++this.zIndex;
+    }
+
+    static revertZIndex() {
+        this.zIndex = PrimeReact.zIndex < this.zIndex ? --this.zIndex : PrimeReact.zIndex;
     }
 
     static getCurrentZIndex() {
-        return this.zindex;
+        return this.zIndex;
     }
 
     static index(element) {
