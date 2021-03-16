@@ -85,6 +85,7 @@ export class CascadeSelect extends Component {
         this.onOverlayEnter = this.onOverlayEnter.bind(this);
         this.onOverlayEntered = this.onOverlayEntered.bind(this);
         this.onOverlayExit = this.onOverlayExit.bind(this);
+        this.onOverlayExited = this.onOverlayExited.bind(this);
         this.onOptionSelect = this.onOptionSelect.bind(this);
         this.onOptionGroupSelect = this.onOptionGroupSelect.bind(this);
         this.onPanelClick = this.onPanelClick.bind(this);
@@ -265,6 +266,10 @@ export class CascadeSelect extends Component {
         }
     }
 
+    onOverlayExited() {
+        DomHandler.revertZIndex();
+    }
+
     alignOverlay() {
         const container = this.input.parentElement;
         DomHandler.absolutePosition(this.overlayRef.current, container);
@@ -381,7 +386,7 @@ export class CascadeSelect extends Component {
     renderOverlay() {
         const overlay = (
             <CSSTransition nodeRef={this.overlayRef} classNames="p-connected-overlay" in={this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }}
-                unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit}>
+                unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
                 <div ref={this.overlayRef} className="p-cascadeselect-panel p-component" onClick={this.onPanelClick}>
                     <div className="p-cascadeselect-items-wrapper">
                         <CascadeSelectSub options={this.props.options} selectionPath={this.selectionPath} className={"p-cascadeselect-items"} optionLabel={this.props.optionLabel}
