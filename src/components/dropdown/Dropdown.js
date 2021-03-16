@@ -202,10 +202,12 @@ export class Dropdown extends Component {
 
             //space
             case 32:
-                if (!this.state.overlayVisible) {
+                if (this.state.overlayVisible)
+                    this.hideOverlay();
+                else
                     this.showOverlay();
-                    event.preventDefault();
-                }
+
+                event.preventDefault();
                 break;
 
             //enter
@@ -604,19 +606,14 @@ export class Dropdown extends Component {
 
     alignPanel() {
         const container = this.input.parentElement;
-        if (this.props.appendTo) {
-            this.overlayRef.current.style.minWidth = DomHandler.getWidth(container) + 'px';
-            DomHandler.absolutePosition(this.overlayRef.current, container);
-        }
-        else {
-            DomHandler.relativePosition(this.overlayRef.current, container);
-        }
+        this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
+        DomHandler.absolutePosition(this.overlayRef.current, container);
     }
 
     scrollInView() {
         let highlightItem = DomHandler.findSingle(this.overlayRef.current, 'li.p-highlight');
         if (highlightItem) {
-            highlightItem.scrollIntoView({ block: 'end' });
+            highlightItem.scrollIntoView({ block: 'nearest', inline: 'start' });
         }
     }
 
