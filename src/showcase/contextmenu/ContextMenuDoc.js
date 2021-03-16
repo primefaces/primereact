@@ -714,7 +714,7 @@ const items = [
                                     <tr>
                                         <td>appendTo</td>
                                         <td>Dom Element</td>
-                                        <td>null</td>
+                                        <td>document.body</td>
                                         <td>DOM element instance where the menu should be mounted.</td>
                                     </tr>
                                 </tbody>

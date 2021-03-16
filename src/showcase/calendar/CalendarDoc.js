@@ -988,8 +988,8 @@ dateTemplate(date) {
                                     <tr>
                                         <td>appendTo</td>
                                         <td>DOM element</td>
-                                        <td>null</td>
-                                        <td>DOM element instance where the dialog should be mounted.</td>
+                                        <td>document.body</td>
+                                        <td>DOM element instance where the overlay panel should be mounted.</td>
                                     </tr>
                                     <tr>
                                         <td>tooltip</td>

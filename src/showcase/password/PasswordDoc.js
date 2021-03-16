@@ -277,8 +277,8 @@ import {Password} from 'primereact/password';
                                     <tr>
                                         <td>appendTo</td>
                                         <td>string</td>
-                                        <td>null</td>
-                                        <td>Id of the element or "body" for document where the overlay should be appended to.</td>
+                                        <td>document.body</td>
+                                        <td>DOM element instance where the overlay panel should be mounted.</td>
                                     </tr>
                                     <tr>
                                         <td>header</td>

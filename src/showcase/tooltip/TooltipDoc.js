@@ -351,7 +351,7 @@ import { Tooltip } from 'primereact/tooltip';
                                     <tr>
                                         <td>appendTo</td>
                                         <td>DOM element</td>
-                                        <td>null</td>
+                                        <td>document.body</td>
                                         <td>DOM element instance where the tooltip should be mounted.</td>
                                     </tr>
                                     <tr>

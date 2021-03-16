@@ -63,13 +63,13 @@ export class OverlayPanelDemo extends Component {
 
     render() {
         return (
-            <div className="overlaypanel-demo">
+            <div>
                 <Toast ref={(el) => this.toast = el} />
 
                 <div className="card">
                     <Button type="button" icon="pi pi-search" label={this.state.selectedProduct ? this.state.selectedProduct.name : 'Select a Product'} onClick={(e) => this.op.toggle(e)} aria-haspopup aria-controls="overlay_panel" className="select-product-button" />
 
-                    <OverlayPanel ref={(el) => this.op = el} showCloseIcon id="overlay_panel" style={{width: '450px'}}>
+                    <OverlayPanel ref={(el) => this.op = el} showCloseIcon id="overlay_panel" style={{width: '450px'}} className="overlaypanel-demo">
                         <DataTable value={this.state.products} selectionMode="single" paginator rows={5}
                             selection={this.state.selectedProduct} onSelectionChange={this.onProductSelect}>
                             <Column field="name" header="Name" sortable />
@@ -133,13 +133,13 @@ const OverlayPanelDemo = () => {
     }
 
     return (
-        <div className="overlaypanel-demo">
+        <div>
             <Toast ref={toast} />
 
             <div className="card">
                 <Button type="button" icon="pi pi-search" label={selectedProduct ? selectedProduct.name : 'Select a Product'} onClick={(e) => op.current.toggle(e)} aria-haspopup aria-controls="overlay_panel" className="select-product-button" />
 
-                <OverlayPanel ref={op} showCloseIcon id="overlay_panel" style={{width: '450px'}}>
+                <OverlayPanel ref={op} showCloseIcon id="overlay_panel" style={{width: '450px'}} className="overlaypanel-demo">
                     <DataTable value={products} selectionMode="single" paginator rows={5}
                         selection={selectedProduct} onSelectionChange={onProductSelect}>
                         <Column field="name" header="Name" sortable />
@@ -202,13 +202,13 @@ const OverlayPanelDemo = () => {
     }
 
     return (
-        <div className="overlaypanel-demo">
+        <div>
             <Toast ref={toast} />
 
             <div className="card">
                 <Button type="button" icon="pi pi-search" label={selectedProduct ? selectedProduct.name : 'Select a Product'} onClick={(e) => op.current.toggle(e)} aria-haspopup aria-controls="overlay_panel" className="select-product-button" />
 
-                <OverlayPanel ref={op} showCloseIcon id="overlay_panel" style={{width: '450px'}}>
+                <OverlayPanel ref={op} showCloseIcon id="overlay_panel" style={{width: '450px'}} className="overlaypanel-demo">
                     <DataTable value={products} selectionMode="single" paginator rows={5}
                         selection={selectedProduct} onSelectionChange={onProductSelect}>
                         <Column field="name" header="Name" sortable />
@@ -337,8 +337,8 @@ import { OverlayPanel } from 'primereact/overlaypanel';
                         <tr>
                             <td>appendTo</td>
                             <td>DOM element</td>
-                            <td>null</td>
-                            <td>DOM element instance where the dialog should be mounted.</td>
+                            <td>document.body</td>
+                            <td>DOM element instance where the overlay panel should be mounted.</td>
                         </tr>
                         <tr>
                             <td>ariaCloseLabel</td>
