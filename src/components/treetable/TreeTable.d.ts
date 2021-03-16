@@ -1,6 +1,10 @@
 import * as React from 'react';
 import TreeNode from '../treenode/TreeNode';
 
+type ExpandedKeysType = {
+    [key: string]: boolean
+}
+
 interface TreeTableProps {
     id?: string;
     value?: TreeNode[];
@@ -10,7 +14,7 @@ interface TreeTableProps {
     className?: string;
     tableStyle?: object;
     tableClassName?: string;
-    expandedKeys?: any;
+    expandedKeys?: ExpandedKeysType;
     paginator?: boolean;
     paginatorPosition?: string;
     alwaysShowPaginator?: boolean;
