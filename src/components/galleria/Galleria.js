@@ -97,6 +97,7 @@ export class Galleria extends Component {
         this.onEnter = this.onEnter.bind(this);
         this.onEntering = this.onEntering.bind(this);
         this.onExit = this.onExit.bind(this);
+        this.onExited = this.onExited.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
         this.galleriaRef = React.createRef();
@@ -137,6 +138,10 @@ export class Galleria extends Component {
     onExit() {
         DomHandler.removeClass(document.body, 'p-overflow-hidden');
         DomHandler.addClass(this.mask, 'p-galleria-mask-leave');
+    }
+
+    onExited() {
+        DomHandler.revertZIndex();
     }
 
     isAutoPlayActive() {
@@ -253,7 +258,7 @@ export class Galleria extends Component {
             const galleriaWrapper = (
                 <div ref={(el) => this.mask = el} className={maskClassName}>
                     <CSSTransition nodeRef={this.galleriaRef} classNames="p-galleria" in={this.state.visible} timeout={{ enter: 150, exit: 150 }}
-                        unmountOnExit onEnter={this.onEnter} onEntering={this.onEntering} onExit={this.onExit} >
+                        unmountOnExit onEnter={this.onEnter} onEntering={this.onEntering} onExit={this.onExit} onExited={this.onExited}>
                         {element}
                     </CSSTransition>
                 </div>
