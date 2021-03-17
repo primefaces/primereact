@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 import { CSSTransition } from 'react-transition-group';
+import { Portal } from '../portal/Portal';
 
 class CalendarPanelComponent extends Component {
 
@@ -31,7 +31,7 @@ class CalendarPanelComponent extends Component {
     render() {
         let element = this.renderElement();
 
-        return this.props.inline ? element : ReactDOM.createPortal(element, this.props.appendTo || document.body);
+        return this.props.inline ? element : <Portal element={element} appendTo={this.props.appendTo} />;
     }
 
 }
