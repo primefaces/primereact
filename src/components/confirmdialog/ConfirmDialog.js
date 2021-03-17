@@ -7,6 +7,7 @@ import { Button } from '../button/Button';
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
 import { localeOption } from '../api/Locale';
+import { Portal } from '../portal/Portal';
 
 export function confirmDialog(props) {
     let appendTo = props.appendTo || document.body;
@@ -89,8 +90,6 @@ export class ConfirmDialog extends Component {
             visible: props.visible
         };
 
-        this.appendTo = props.appendTo || document.body;
-
         this.reject = this.reject.bind(this);
         this.accept = this.accept.bind(this);
         this.hide = this.hide.bind(this);
@@ -171,6 +170,6 @@ export class ConfirmDialog extends Component {
     render() {
         const element = this.renderElement();
 
-        return ReactDOM.createPortal(element, this.appendTo);
+        return <Portal element={element} appendTo={this.props.appendTo} />;
     }
 }
