@@ -143,7 +143,7 @@ export class CalendarDemo extends Component {
                             </div>
                             <div className="p-field p-col-12 p-md-4">
                                 <label htmlFor="touchUI">TouchUI</label>
-                                <Calendar id="touchUI" value={this.state.date13} onChange={(e) => this.setState({ date13: e.value })} touchUI />
+                                <Calendar id="touchUI" value={this.state.date13} onChange={(e) => this.setState({ date13: e.value })} touchUI baseZIndex={1000} />
                             </div>
                             <div className="p-field p-col-12 p-md-4">
                                 <label htmlFor="mask">Mask</label>
