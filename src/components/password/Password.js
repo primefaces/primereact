@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import { tip } from '../tooltip/Tooltip';
@@ -11,6 +10,7 @@ import { classNames } from '../utils/ClassNames';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import { localeOption } from '../api/Locale';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
+import { Portal } from '../portal/Portal';
 
 export class Password extends Component {
 
@@ -438,7 +438,7 @@ export class Password extends Component {
             </CSSTransition>
         );
 
-        return ReactDOM.createPortal(panel, this.props.appendTo || document.body);
+        return <Portal element={panel} appendTo={this.props.appendTo} />;
     }
 
     render() {
