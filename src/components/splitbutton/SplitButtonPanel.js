@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 import { classNames } from '../utils/ClassNames';
 import { CSSTransition } from 'react-transition-group';
+import { Portal } from '../portal/Portal';
 
 class SplitButtonPanelComponent extends Component {
 
@@ -40,7 +40,7 @@ class SplitButtonPanelComponent extends Component {
     render() {
         let element = this.renderElement();
 
-        return ReactDOM.createPortal(element, this.props.appendTo || document.body);
+        return <Portal element={element} appendTo={this.props.appendTo} />;
     }
 }
 
