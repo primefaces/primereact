@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
@@ -8,6 +7,7 @@ import { CSSTransition } from 'react-transition-group';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
+import { Portal } from '../portal/Portal';
 
 export class TieredMenu extends Component {
 
@@ -206,6 +206,6 @@ export class TieredMenu extends Component {
     render() {
         const element = this.renderElement();
 
-        return this.props.popup ? ReactDOM.createPortal(element, this.props.appendTo || document.body) : element;
+        return this.props.popup ? <Portal element={element} appendTo={this.props.appendTo} /> : element;
     }
 }
