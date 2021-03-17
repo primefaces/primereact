@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
+import { Portal } from '../portal/Portal';
 
 export function tip(props) {
     let appendTo = props.appendTo || document.body;
@@ -100,8 +101,6 @@ export class Tooltip extends Component {
             visible: false,
             position: this.props.position
         };
-
-        this.appendTo = this.props.appendTo || document.body;
 
         this.show = this.show.bind(this);
         this.hide = this.hide.bind(this);
@@ -466,7 +465,7 @@ export class Tooltip extends Component {
         if (this.state.visible) {
             const element = this.renderElement();
 
-            return ReactDOM.createPortal(element, this.appendTo);
+            return <Portal element={element} appendTo={this.props.appendTo} visible />;
         }
 
         return null;
