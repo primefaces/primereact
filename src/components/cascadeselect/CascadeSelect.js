@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from "react-dom";
 import { classNames } from '../utils/ClassNames';
 import ObjectUtils from '../utils/ObjectUtils';
 import DomHandler from '../utils/DomHandler';
@@ -9,6 +8,7 @@ import { CSSTransition } from "react-transition-group";
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import { CascadeSelectSub } from "./CascadeSelectSub";
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
+import { Portal } from '../portal/Portal';
 
 export class CascadeSelect extends Component {
 
@@ -399,7 +399,7 @@ export class CascadeSelect extends Component {
             </CSSTransition>
         );
 
-        return ReactDOM.createPortal(overlay, this.props.appendTo || document.body);
+        return <Portal element={overlay} appendTo={this.props.appendTo} />;
     }
 
     renderElement() {
