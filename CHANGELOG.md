@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.2.1](https://github.com/primefaces/primereact/tree/6.2.1) (2021-03-17)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/6.2.0...6.2.1)
+
+**Fixed bugs:**
+
+- Overlay Components throw an exception with Next.js [\#1880](https://github.com/primefaces/primereact/issues/1880)
+
 ## [6.2.0](https://github.com/primefaces/primereact/tree/6.2.0) (2021-03-16)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/6.1.0...6.2.0)

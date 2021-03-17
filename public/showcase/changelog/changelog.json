@@ -1,4 +1,139 @@
 {
+    "6.2.1": {
+        "autocomplete": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ],
+        "dialog": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ],
+        "calendar": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ],
+        "galleria": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ],
+        "cascadeselect": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ],
+        "colorpicker": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ],
+        "confirmpopup": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ],
+        "tooltip": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ],
+        "menu": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ],
+        "splitbutton": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ],
+        "contextmenu": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ],
+        "slidemenu": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ],
+        "password": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ],
+        "tieredmenu": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ],
+        "dropdown": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ],
+        "confirmdialog": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ],
+        "portal": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ],
+        "multiselect": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ],
+        "overlaypanel": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ]
+    },
     "6.2.0": {
         "utils": [
             {
