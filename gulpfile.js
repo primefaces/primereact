@@ -21,9 +21,13 @@ gulp.task('build-css', function() {
 gulp.task('build-themes', function() {
     return gulp.src([
         'public/themes/**/*',
+        '!public/themes/soho-*',
         '!public/themes/soho-*/**/*',
+        '!public/themes/viva-*',
         '!public/themes/viva-*/**/*',
+        '!public/themes/mira',
         '!public/themes/mira/**/*',
+        '!public/themes/nano',
         '!public/themes/nano/**/*'
     ])
     //.pipe(uglifycss({"uglyComments": true}))
