@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
-import ReactDOM from 'react-dom';
 import DomHandler from '../utils/DomHandler';
 import { CSSTransition } from 'react-transition-group';
 import { Ripple } from '../ripple/Ripple';
 import ObjectUtils from '../utils/ObjectUtils';
+import { Portal } from '../portal/Portal';
 
 class ContextMenuSub extends Component {
 
@@ -476,6 +476,6 @@ export class ContextMenu extends Component {
     render() {
         const element = this.renderContextMenu();
 
-        return ReactDOM.createPortal(element, this.props.appendTo || document.body);
+        return <Portal element={element} appendTo={this.props.appendTo} />;
     }
 }
