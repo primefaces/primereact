@@ -10,6 +10,7 @@ import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
 import { localeOption } from '../api/Locale';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
+import { Portal } from '../portal/Portal';
 
 export function confirmPopup(props) {
     let appendTo = props.appendTo || document.body;
@@ -95,8 +96,6 @@ export class ConfirmPopup extends Component {
         this.state = {
             visible: false
         };
-
-        this.appendTo = props.appendTo || document.body;
 
         this.reject = this.reject.bind(this);
         this.accept = this.accept.bind(this);
@@ -346,6 +345,6 @@ export class ConfirmPopup extends Component {
     render() {
         let element = this.renderElement();
 
-        return ReactDOM.createPortal(element, this.appendTo);
+        return <Portal element={element} appendTo={this.props.appendTo} visible />;
     }
 }
