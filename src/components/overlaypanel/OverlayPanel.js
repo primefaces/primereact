@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
 import { CSSTransition } from 'react-transition-group';
@@ -8,6 +7,7 @@ import { Ripple } from '../ripple/Ripple';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
+import { Portal } from '../portal/Portal';
 
 export class OverlayPanel extends Component {
 
@@ -294,6 +294,6 @@ export class OverlayPanel extends Component {
     render() {
         let element = this.renderElement();
 
-        return ReactDOM.createPortal(element, this.props.appendTo || document.body);
+        return <Portal element={element} appendTo={this.props.appendTo} />;
     }
 }
