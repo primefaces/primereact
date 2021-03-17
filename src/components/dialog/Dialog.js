@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import { classNames } from '../utils/ClassNames';
@@ -7,6 +6,7 @@ import UniqueComponentId from '../utils/UniqueComponentId';
 import { CSSTransition } from 'react-transition-group';
 import ObjectUtils from '../utils/ObjectUtils';
 import { Ripple } from '../ripple/Ripple';
+import { Portal } from '../portal/Portal';
 
 export class Dialog extends Component {
 
@@ -182,8 +182,8 @@ export class Dialog extends Component {
             let deltaX = event.pageX - this.lastPageX;
             let deltaY = event.pageY - this.lastPageY;
             let offset = DomHandler.getOffset(this.dialogEl);
-            let leftPos = offset.left + deltaX;
-            let topPos = offset.top + deltaY;
+            let leftPos = offset.left - DomHandler.getWindowScrollLeft() + deltaX;
+            let topPos = offset.top - DomHandler.getWindowScrollTop() + deltaY;
             let viewport = DomHandler.getViewport();
 
             this.dialogEl.style.position = 'fixed';
@@ -654,7 +654,7 @@ export class Dialog extends Component {
         if (this.state.maskVisible) {
             const element = this.renderElement();
 
-            return ReactDOM.createPortal(element, this.props.appendTo || document.body);
+            return <Portal element={element} appendTo={this.props.appendTo} visible />;
         }
 
         return null;
