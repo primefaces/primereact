@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import UniqueComponentId from '../utils/UniqueComponentId';
@@ -8,6 +7,7 @@ import { GalleriaThumbnails } from './GalleriaThumbnails';
 import DomHandler from '../utils/DomHandler';
 import { CSSTransition } from 'react-transition-group';
 import { Ripple } from '../ripple/Ripple';
+import { Portal } from '../portal/Portal';
 
 export class Galleria extends Component {
 
@@ -266,7 +266,7 @@ export class Galleria extends Component {
                 </div>
             );
 
-            return ReactDOM.createPortal(galleriaWrapper, document.body);
+            return <Portal element={galleriaWrapper} />;
         }
         else {
             return element;
