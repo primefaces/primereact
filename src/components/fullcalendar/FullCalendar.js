@@ -54,18 +54,18 @@ export class FullCalendar extends Component {
         }
     }
 
-    async initialize() {
-        const fullCalendarModule = await import('@fullcalendar/core');
+    initialize() {
+        import('@fullcalendar/core').then((module) => {
+            if (module && module.Calendar) {
+                this.calendar = new module.Calendar(this.element, this.config);
+                this.calendar.render();
 
-        if (fullCalendarModule && fullCalendarModule.Calendar) {
-            this.calendar = new fullCalendarModule.Calendar(this.element, this.config);
-            this.calendar.render();
-
-            if (this.props.events) {
-                this.calendar.removeAllEventSources();
-                this.calendar.addEventSource(this.props.events);
+                if (this.props.events) {
+                    this.calendar.removeAllEventSources();
+                    this.calendar.addEventSource(this.props.events);
+                }
             }
-        }
+        });
     }
 
     componentWillUnmount() {

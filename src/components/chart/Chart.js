@@ -26,16 +26,16 @@ export class Chart extends Component {
         className: PropTypes.string
     };
 
-    async initChart() {
-        const chartModule = await import('chart.js');
-
-        if (chartModule && chartModule.default) {
-            this.chart = new chartModule.default(this.canvas, {
-                type: this.props.type,
-                data: this.props.data,
-                options: this.props.options
-            });
-        }
+    initChart() {
+        import('chart.js').then((module) => {
+            if (module && module.default) {
+                this.chart = new module.default(this.canvas, {
+                    type: this.props.type,
+                    data: this.props.data,
+                    options: this.props.options
+                });
+            }
+        });
     }
 
     getCanvas() {
@@ -59,10 +59,10 @@ export class Chart extends Component {
     }
 
     reinit() {
-        if(this.chart) {
+        if (this.chart) {
             this.chart.destroy();
-            this.initChart();
         }
+        this.initChart();
     }
 
     shouldComponentUpdate(nextProps) {

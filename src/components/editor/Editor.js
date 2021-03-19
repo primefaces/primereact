@@ -34,52 +34,52 @@ export class Editor extends Component {
 		onSelectionChange: PropTypes.func
     };
 
-    async componentDidMount() {
-        const quillModule = await import('quill');
+    componentDidMount() {
+        import('quill').then((module) => {
+            if (module && module.default) {
+                this.quill = new module.default(this.editorElement, {
+                    modules: {
+                        toolbar: this.toolbarElement,
+                        ...this.props.modules
+                    },
+                    placeholder: this.props.placeholder,
+                    readOnly: this.props.readOnly,
+                    theme: this.props.theme,
+                    formats: this.props.formats
+                });
 
-        if (quillModule && quillModule.default) {
-            this.quill = new quillModule.default(this.editorElement, {
-                modules: {
-                    toolbar: this.toolbarElement,
-                    ...this.props.modules
-                },
-                placeholder: this.props.placeholder,
-                readOnly: this.props.readOnly,
-                theme: this.props.theme,
-                formats: this.props.formats
-            });
+                if (this.props.value) {
+                    this.quill.pasteHTML(this.props.value);
+                }
 
-            if (this.props.value) {
-                this.quill.pasteHTML(this.props.value);
+                this.quill.on('text-change', (delta, source) => {
+                    let html = this.editorElement.children[0].innerHTML;
+                    let text = this.quill.getText();
+                    if (html === '<p><br></p>') {
+                        html = null;
+                    }
+
+                    if (this.props.onTextChange) {
+                        this.props.onTextChange({
+                            htmlValue: html,
+                            textValue: text,
+                            delta: delta,
+                            source: source
+                        });
+                    }
+                });
+
+                this.quill.on('selection-change', (range, oldRange, source) => {
+                    if(this.props.onSelectionChange) {
+                        this.props.onSelectionChange({
+                            range: range,
+                            oldRange: oldRange,
+                            source: source
+                        });
+                    }
+                });
             }
-
-            this.quill.on('text-change', (delta, source) => {
-                let html = this.editorElement.children[0].innerHTML;
-                let text = this.quill.getText();
-                if (html === '<p><br></p>') {
-                    html = null;
-                }
-
-                if (this.props.onTextChange) {
-                    this.props.onTextChange({
-                        htmlValue: html,
-                        textValue: text,
-                        delta: delta,
-                        source: source
-                    });
-                }
-            });
-
-            this.quill.on('selection-change', (range, oldRange, source) => {
-                if(this.props.onSelectionChange) {
-                    this.props.onSelectionChange({
-                        range: range,
-                        oldRange: oldRange,
-                        source: source
-                    });
-                }
-            });
-        }
+        });
     }
 
     componentDidUpdate(prevProps) {
