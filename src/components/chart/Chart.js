@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import * as ChartJS from 'chart.js';
 import { classNames } from '../utils/ClassNames';
 
 export class Chart extends Component {
@@ -27,12 +26,16 @@ export class Chart extends Component {
         className: PropTypes.string
     };
 
-    initChart() {
-        this.chart = new ChartJS.Chart(this.canvas, {
-            type: this.props.type,
-            data: this.props.data,
-            options: this.props.options
-        });
+    async initChart() {
+        const chartModule = await import('chart.js');
+
+        if (chartModule && chartModule.default) {
+            this.chart = new chartModule.default(this.canvas, {
+                type: this.props.type,
+                data: this.props.data,
+                options: this.props.options
+            });
+        }
     }
 
     getCanvas() {
