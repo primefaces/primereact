@@ -12,6 +12,7 @@ export class TableBody extends Component {
         this.onRowRightClick = this.onRowRightClick.bind(this);
         this.onRowTouchEnd = this.onRowTouchEnd.bind(this);
         this.onRowToggle = this.onRowToggle.bind(this);
+        this.onRowEditingToggle = this.onRowEditingToggle.bind(this);
         this.onRadioClick = this.onRadioClick.bind(this);
         this.onCheckboxClick = this.onCheckboxClick.bind(this);
         this.onRowDragEnd = this.onRowDragEnd.bind(this);
@@ -29,12 +30,12 @@ export class TableBody extends Component {
             this.props.onRowClick(event);
         }
 
-        if(this.props.selectionMode) {
+        if (this.props.selectionMode) {
             let rowData = event.data;
             let rowIndex = event.index;
             let selection;
 
-            if(this.isMultipleSelectionMode() && event.originalEvent.shiftKey && this.anchorRowIndex !== null) {
+            if (this.isMultipleSelectionMode() && event.originalEvent.shiftKey && this.anchorRowIndex !== null) {
                 DomHandler.clearSelection();
                 this.rangeRowIndex = rowIndex;
                 selection = this.selectRange(event);
@@ -44,8 +45,9 @@ export class TableBody extends Component {
                 let metaSelection = this.rowTouched ? false : this.props.metaKeySelection;
                 this.anchorRowIndex = rowIndex;
                 this.rangeRowIndex = rowIndex;
+                this.anchorRowFirst = this.props.first;
 
-                if(metaSelection) {
+                if (metaSelection) {
                     let metaKey = event.originalEvent.metaKey || event.originalEvent.ctrlKey;
 
                     if(selected && metaKey) {
@@ -62,11 +64,11 @@ export class TableBody extends Component {
                         }
                     }
                     else {
-                        if(this.isSingleSelectionMode()) {
+                        if (this.isSingleSelectionMode()) {
                             selection = rowData;
                         }
-                        else if(this.isMultipleSelectionMode()) {
-                            if(metaKey)
+                        else if (this.isMultipleSelectionMode()) {
+                            if (metaKey)
                                 selection = this.props.selection ? [...this.props.selection] : [];
                             else
                                 selection = [];
@@ -95,7 +97,7 @@ export class TableBody extends Component {
                         }
                     }
                     else {
-                        if(selected) {
+                        if (selected) {
                             let selectionIndex = this.findIndexInSelection(rowData);
                             selection = this.props.selection.filter((val,i) => i !== selectionIndex);
                             if(this.props.onRowSelect) {
@@ -125,6 +127,12 @@ export class TableBody extends Component {
 
     selectRange(event) {
         let rangeStart, rangeEnd;
+        let isLazyAndPaginator = this.props.lazy && this.props.paginator;
+
+        if (isLazyAndPaginator) {
+            this.anchorRowIndex += this.anchorRowFirst;
+            this.rangeRowIndex += this.props.first;
+        }
 
         if (this.rangeRowIndex > this.anchorRowIndex) {
             rangeStart = this.anchorRowIndex;
@@ -139,9 +147,9 @@ export class TableBody extends Component {
             rangeEnd = this.rangeRowIndex;
         }
 
-        if (this.props.lazy && this.props.paginator) {
-            rangeStart -= this.first;
-            rangeEnd -= this.first;
+        if (isLazyAndPaginator) {
+            rangeStart = Math.max(rangeStart - this.props.first, 0);
+            rangeEnd -= this.props.first;
         }
 
         const value = this.props.value;
@@ -263,8 +271,7 @@ export class TableBody extends Component {
     }
 
     equals(data1, data2) {
-        let dataKey = this.getDataKeyOnRowToggle();
-        return this.props.compareSelectionBy === 'equals' ? (data1 === data2) : ObjectUtils.equals(data1, data2, dataKey);
+        return this.compareSelectionBy === 'equals' ? (data1 === data2) : ObjectUtils.equals(data1, data2, this.props.dataKey);
     }
 
     findIndexInSelection(rowData) {
@@ -281,13 +288,9 @@ export class TableBody extends Component {
         return index;
     }
 
-    getDataKeyOnRowToggle() {
-        return (this.props.rowGroupMode === 'subheader' && this.props.expandableRowGroups) ? this.props.groupField : this.props.dataKey;
-    }
-
     onRowToggle(event) {
         let expandedRows;
-        let dataKey = this.getDataKeyOnRowToggle();
+        let dataKey = this.props.dataKey;
 
         if (dataKey) {
             let dataKeyValue = String(ObjectUtils.resolveFieldData(event.data, dataKey));
@@ -307,7 +310,7 @@ export class TableBody extends Component {
             }
         }
         else {
-            let expandedRowIndex = this.findExpandedRowIndex(event.data);
+            let expandedRowIndex = this.findRowIndex(this.props.expandedRows, event.data);
             expandedRows = this.props.expandedRows ? [...this.props.expandedRows] : [];
 
             if (expandedRowIndex !== -1) {
@@ -331,21 +334,17 @@ export class TableBody extends Component {
         }
     }
 
-    findExpandedRowIndex(row) {
+    findRowIndex(rows, row) {
         let index = -1;
-        if(this.props.expandedRows) {
-            for(let i = 0; i < this.props.expandedRows.length; i++) {
-                if(ObjectUtils.equals(this.props.expandedRows[i], row)) {
-                    index = i;
-                    break;
-                }
-            }
+        if (rows) {
+            rows.some((r, i) => (ObjectUtils.equals(rows[i], row) ? (index = i, true) : false));
         }
+
         return index;
     }
 
     isRowExpanded(row) {
-        let dataKey = this.getDataKeyOnRowToggle();
+        let dataKey = this.props.dataKey;
 
         if (dataKey) {
             let dataKeyValue = String(ObjectUtils.resolveFieldData(row, dataKey));
@@ -353,12 +352,57 @@ export class TableBody extends Component {
             return this.props.expandedRows && this.props.expandedRows[dataKeyValue] != null;
         }
         else {
-            return this.findExpandedRowIndex(row) !== -1
+            return this.findRowIndex(this.props.expandedRows, row) !== -1
+        }
+    }
+
+    onRowEditingToggle(event) {
+        let editingRows;
+        let dataKey = this.props.dataKey;
+
+        if (dataKey) {
+            let dataKeyValue = String(ObjectUtils.resolveFieldData(event.data, dataKey));
+            editingRows = this.props.editingRows ? {...this.props.editingRows} : {};
+
+            if (editingRows[dataKeyValue] != null)
+                delete editingRows[dataKeyValue];
+            else
+                editingRows[dataKeyValue] = true;
+        }
+        else {
+            let editingRowIndex = this.findRowIndex(this.props.editingRows, event.data);
+            editingRows = this.props.editingRows ? [...this.props.editingRows] : [];
+
+            if (editingRowIndex !== -1)
+                editingRows = editingRows.filter((val,i) => i !== editingRowIndex);
+            else
+                editingRows.push(event.data);
+        }
+
+        if (this.props.onRowEditChange) {
+            this.props.onRowEditChange({
+                originalEvent: event.originalEvent,
+                data: editingRows,
+                index: event.rowIndex
+            });
+        }
+    }
+
+    isRowEditing(row) {
+        let dataKey = this.props.dataKey;
+
+        if (dataKey) {
+            let dataKeyValue = String(ObjectUtils.resolveFieldData(row, dataKey));
+
+            return this.props.editingRows && this.props.editingRows[dataKeyValue] != null;
+        }
+        else {
+            return this.findRowIndex(this.props.editingRows, row) !== -1
         }
     }
 
     isSelectionEnabled() {
-        if(this.props.selectionMode || this.props.frozenSelectionMode != null) {
+        if (this.props.selectionMode || this.props.frozenSelectionMode != null) {
             return true;
         }
         else {
@@ -458,8 +502,8 @@ export class TableBody extends Component {
         }
 
         return (
-            <tr key={index + '_rowgroupheader'} className="p-rowgroup-header">
-                <td colSpan={React.Children.count(this.props.children)}>
+            <tr role="row" key={index + '_rowgroupheader'} className="p-rowgroup-header">
+                <td role="cell" colSpan={React.Children.count(this.props.children)}>
                     { content }
                     <span className="p-rowgroup-header-name">
                         {this.props.rowGroupHeaderTemplate(rowData, index)}
@@ -471,7 +515,7 @@ export class TableBody extends Component {
 
     renderRowGroupFooter(rowData, index) {
         return (
-            <tr key={index + '_rowgroupfooter'} className="p-rowgroup-footer">
+            <tr role="row" key={index + '_rowgroupfooter'} className="p-rowgroup-footer">
                 {this.props.rowGroupFooterTemplate(rowData, index)}
             </tr>
         );
@@ -479,99 +523,115 @@ export class TableBody extends Component {
 
     render() {
         let rows;
-        let rpp = this.props.rows||0;
-        let first = this.props.first||0;
-        let selectionEnabled = this.isSelectionEnabled();
-        let rowGroupMode = this.props.rowGroupMode;
-        let hasSubheaderGrouping = (rowGroupMode && rowGroupMode === 'subheader');
-        let rowSpanGrouping = (rowGroupMode && rowGroupMode === 'rowspan');
-        let rowGroupHeaderExpanded = false;
 
-        if(this.props.value && this.props.value.length) {
-            rows = [];
-            let startIndex = this.props.lazy ? 0 : first;
-            let endIndex = this.props.virtualScroll ? (startIndex + rpp * 2) : (startIndex + rpp||this.props.value.length);
+        if (this.props.children) {
+            let rpp = this.props.rows||0;
+            let first = this.props.first||0;
+            let selectionEnabled = this.isSelectionEnabled();
+            let rowGroupMode = this.props.rowGroupMode;
+            let hasSubheaderGrouping = (rowGroupMode && rowGroupMode === 'subheader');
+            let rowSpanGrouping = (rowGroupMode && rowGroupMode === 'rowspan');
+            let rowGroupHeaderExpanded = false;
 
-            for(let i = startIndex; i < endIndex; i++) {
-                if(i >= this.props.value.length) {
-                    break;
-                }
+            if(this.props.value && this.props.value.length) {
+                rows = [];
+                let startIndex = this.props.lazy ? 0 : (this.props.value.length > first ? first : 0);
+                let endIndex = this.props.virtualScroll ? (startIndex + rpp * 2) : (startIndex + rpp||this.props.value.length);
 
-                let rowData = this.props.value[i];
-                let expanded = this.isRowExpanded(rowData);
-                let selected = selectionEnabled ? this.isSelected(this.props.value[i]) : false;
-                let contextMenuSelected = this.isContextMenuSelected(rowData);
-                let groupRowSpan;
-
-                //header row group
-                if(hasSubheaderGrouping) {
-                    let currentRowFieldData = ObjectUtils.resolveFieldData(rowData, this.props.groupField);
-                    let previousRowFieldData = ObjectUtils.resolveFieldData(this.props.value[i - 1], this.props.groupField);
-
-                    if(i === 0 || (currentRowFieldData !== previousRowFieldData)) {
-                        rows.push(this.renderRowGroupHeader(rowData, i));
-                        rowGroupHeaderExpanded = expanded;
+                for(let i = startIndex; i < endIndex; i++) {
+                    if(i >= this.props.value.length) {
+                        break;
                     }
-                }
 
-                if(rowSpanGrouping) {
-                    let rowSpanIndex = i;
-                    let currentRowFieldData = ObjectUtils.resolveFieldData(rowData, this.props.sortField);
-                    let shouldCountRowSpan = (i === startIndex) || ObjectUtils.resolveFieldData(this.props.value[i - 1], this.props.sortField) !== currentRowFieldData ;
+                    let rowData = this.props.value[i];
+                    let expanded = this.isRowExpanded(rowData);
+                    let editing = this.isRowEditing(rowData);
+                    let selected = selectionEnabled ? this.isSelected(this.props.value[i]) : false;
+                    let contextMenuSelected = this.isContextMenuSelected(rowData);
+                    let groupRowSpan;
 
-                    if(shouldCountRowSpan) {
-                        let nextRowFieldData = currentRowFieldData;
-                        groupRowSpan = 0;
+                    //header row group
+                    if(hasSubheaderGrouping) {
+                        let currentRowFieldData = ObjectUtils.resolveFieldData(rowData, this.props.groupField);
+                        let previousRowFieldData = ObjectUtils.resolveFieldData(this.props.value[i - 1], this.props.groupField);
 
-                        while(currentRowFieldData === nextRowFieldData) {
-                            groupRowSpan++;
-                            let nextRowData = this.props.value[++rowSpanIndex];
-                            if(nextRowData) {
-                                nextRowFieldData = ObjectUtils.resolveFieldData(nextRowData, this.props.sortField);
-                            }
-                            else {
-                                break;
+                        if(i === 0 || (currentRowFieldData !== previousRowFieldData)) {
+                            rows.push(this.renderRowGroupHeader(rowData, i));
+                            rowGroupHeaderExpanded = expanded;
+                        }
+                    }
+
+                    if(rowSpanGrouping) {
+                        let rowSpanIndex = i;
+                        let currentRowFieldData = ObjectUtils.resolveFieldData(rowData, this.props.sortField);
+                        let shouldCountRowSpan = (i === startIndex) || ObjectUtils.resolveFieldData(this.props.value[i - 1], this.props.sortField) !== currentRowFieldData ;
+
+                        if(shouldCountRowSpan) {
+                            let nextRowFieldData = currentRowFieldData;
+                            groupRowSpan = 0;
+
+                            while(currentRowFieldData === nextRowFieldData) {
+                                groupRowSpan++;
+                                let nextRowData = this.props.value[++rowSpanIndex];
+                                if(nextRowData) {
+                                    nextRowFieldData = ObjectUtils.resolveFieldData(nextRowData, this.props.sortField);
+                                }
+                                else {
+                                    break;
+                                }
                             }
                         }
                     }
-                }
 
-                let isRowGroupExpanded = this.props.expandableRowGroups && hasSubheaderGrouping && rowGroupHeaderExpanded;
-                if (!this.props.expandableRowGroups || isRowGroupExpanded) {
-                    //row content
-                    let bodyRow = <BodyRow key={i} value={this.props.value} rowData={rowData} rowIndex={i} onClick={this.onRowClick} onDoubleClick={this.props.onRowDoubleClick} onRightClick={this.onRowRightClick} onTouchEnd={this.onRowTouchEnd}
-                                        onRowToggle={this.onRowToggle} expanded={expanded} responsive={this.props.responsive} selectionMode={this.props.selectionMode}
-                                        onRadioClick={this.onRadioClick} onCheckboxClick={this.onCheckboxClick} selected={selected} contextMenuSelected={contextMenuSelected} rowClassName={this.props.rowClassName}
-                                        sortField={this.props.sortField} rowGroupMode={this.props.rowGroupMode} groupRowSpan={groupRowSpan}
-                                        onDragStart={(e) => this.onRowDragStart(e, i)} onDragEnd={this.onRowDragEnd} onDragOver={(e) => this.onRowDragOver(e, i)} onDragLeave={this.onRowDragLeave}
-                                        onDrop={this.onRowDrop} virtualRowHeight={this.props.virtualRowHeight}
-                                        editMode={this.props.editMode} rowEditorValidator={this.props.rowEditorValidator} onRowEditInit={this.props.onRowEditInit} onRowEditSave={this.props.onRowEditSave} onRowEditCancel={this.props.onRowEditCancel}>
-                                        {this.props.children}
-                                </BodyRow>
+                    let isRowGroupExpanded = this.props.expandableRowGroups && hasSubheaderGrouping && rowGroupHeaderExpanded;
+                    if (!this.props.expandableRowGroups || isRowGroupExpanded) {
+                        //row content
+                        let bodyRow = <BodyRow tableId={this.props.tableId} key={i} value={this.props.value} rowData={rowData} rowIndex={i} onClick={this.onRowClick} onDoubleClick={this.props.onRowDoubleClick} onRightClick={this.onRowRightClick} onTouchEnd={this.onRowTouchEnd}
+                                            onRowToggle={this.onRowToggle} expanded={expanded} selectionMode={this.props.selectionMode} selectOnEdit={this.props.selectOnEdit}
+                                            onRadioClick={this.onRadioClick} onCheckboxClick={this.onCheckboxClick} selected={selected} contextMenuSelected={contextMenuSelected} rowClassName={this.props.rowClassName}
+                                            sortField={this.props.sortField} rowGroupMode={this.props.rowGroupMode} groupRowSpan={groupRowSpan}
+                                            onDragStart={(e) => this.onRowDragStart(e, i)} onDragEnd={this.onRowDragEnd} onDragOver={(e) => this.onRowDragOver(e, i)} onDragLeave={this.onRowDragLeave}
+                                            onDrop={this.onRowDrop} virtualScroll={this.props.virtualScroll} virtualRowHeight={this.props.virtualRowHeight}
+                                            editMode={this.props.editMode} editing={editing} isRowEditingControlled={!!this.props.onRowEditChange} rowEditorValidator={this.props.rowEditorValidator}
+                                            onRowEditInit={this.props.onRowEditInit} onRowEditSave={this.props.onRowEditSave} onRowEditCancel={this.props.onRowEditCancel} onRowEditingToggle={this.onRowEditingToggle}
+                                            showRowReorderElement={this.props.showRowReorderElement} showSelectionElement={this.props.showSelectionElement}>
+                                            {this.props.children}
+                                    </BodyRow>
 
-                    rows.push(bodyRow);
-                }
+                        rows.push(bodyRow);
+                    }
 
-                //row expansion
-                if(expanded && !(hasSubheaderGrouping && this.props.expandableRowGroups)) {
-                    let expandedRowContent = this.props.rowExpansionTemplate(rowData);
-                    let expandedRow = <tr key={i + '_expanded'}><td colSpan={this.props.children.length}>{expandedRowContent}</td></tr>
-                    rows.push(expandedRow);
-                }
+                    //row expansion
+                    if (expanded && !(hasSubheaderGrouping && this.props.expandableRowGroups)) {
+                        let expandedRowContent = this.props.rowExpansionTemplate(rowData);
+                        let id = `${this.props.tableId ? this.props.tableId + '_' : ''}content_${i}_expanded`;
+                        let expandedRow = <tr key={id} id={id} role="row"><td role="cell" colSpan={this.props.children.length}>{expandedRowContent}</td></tr>
+                        rows.push(expandedRow);
+                    }
 
-                //footer row group
-                if(hasSubheaderGrouping && (!this.props.expandableRowGroups || isRowGroupExpanded)) {
-                    let currentRowFieldData = ObjectUtils.resolveFieldData(rowData, this.props.groupField);
-                    let nextRowFieldData = ObjectUtils.resolveFieldData(this.props.value[i + 1], this.props.groupField);
+                    //footer row group
+                    if (hasSubheaderGrouping && (!this.props.expandableRowGroups || isRowGroupExpanded)) {
+                        let currentRowFieldData = ObjectUtils.resolveFieldData(rowData, this.props.groupField);
+                        let nextRowFieldData = ObjectUtils.resolveFieldData(this.props.value[i + 1], this.props.groupField);
 
-                    if((i === this.props.value.length - 1) || (currentRowFieldData !== nextRowFieldData)) {
-                        rows.push(this.renderRowGroupFooter(rowData, i));
+                        if((i === this.props.value.length - 1) || (currentRowFieldData !== nextRowFieldData)) {
+                            rows.push(this.renderRowGroupFooter(rowData, i));
+                        }
                     }
                 }
             }
-        }
-        else {
-            rows = !this.props.loading && this.props.emptyMessage ? <tr className="p-datatable-emptymessage"><td colSpan={this.props.children.length}>{this.props.emptyMessage}</td></tr> : null;
+            else {
+                let emptyMessage = this.props.emptyMessage;
+
+                rows = !this.props.loading && emptyMessage !== null ?
+                    <tr role="row" className="p-datatable-emptymessage">
+                        <td role="cell" colSpan={this.props.children.length}>
+                            {
+                                (typeof emptyMessage === 'function') ? emptyMessage(this.props.frozen) : emptyMessage
+                            }
+                            </td>
+                    </tr> : null;
+            }
         }
 
         return (

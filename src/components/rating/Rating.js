@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import Tooltip from "../tooltip/Tooltip";
+import { classNames } from '../utils/ClassNames';
+import { tip } from '../tooltip/Tooltip';
 
 export class Rating extends Component {
 
@@ -9,7 +9,7 @@ export class Rating extends Component {
         id: null,
         value: null,
         disabled: false,
-        readonly: false,
+        readOnly: false,
         stars: 5,
         cancel: true,
         style: null,
@@ -23,7 +23,7 @@ export class Rating extends Component {
         id: PropTypes.string,
         value: PropTypes.number,
         disabled: PropTypes.bool,
-        readonly: PropTypes.bool,
+        readOnly: PropTypes.bool,
         stars: PropTypes.number,
         cancel: PropTypes.bool,
         style: PropTypes.object,
@@ -41,7 +41,7 @@ export class Rating extends Component {
     }
 
     rate(event, i) {
-        if (!this.props.readonly && !this.props.disabled && this.props.onChange) {
+        if (!this.props.readOnly && !this.props.disabled && this.props.onChange) {
             this.props.onChange({
                 originalEvent: event,
                 value: i,
@@ -54,12 +54,12 @@ export class Rating extends Component {
                 }
             });
         }
-        
-        event.preventDefault();        
+
+        event.preventDefault();
     }
-    
+
     clear(event) {
-        if (!this.props.readonly && !this.props.disabled && this.props.onChange) {
+        if (!this.props.readOnly && !this.props.disabled && this.props.onChange) {
             this.props.onChange({
                 originalEvent: event,
                 value: null,
@@ -72,7 +72,7 @@ export class Rating extends Component {
                 }
             });
         }
-        
+
         event.preventDefault();
     }
 
@@ -96,35 +96,8 @@ export class Rating extends Component {
         }
     }
 
-    renderStars() {
-        let starsArray = [];
-        for (var i = 0; i < this.props.stars; i++) {
-            starsArray[i] = i + 1;
-        }
-
-        let stars = starsArray.map((value) => {
-            let iconClass = classNames('p-rating-icon pi', {
-                'pi-star-o': (!this.props.value || value > this.props.value),
-                'pi-star': (value <= this.props.value)
-            });
-            
-            return (
-                <span className={iconClass} onClick={(e) => this.rate(e, value)} key={value} tabIndex={this.props.disabled||this.props.readonly ? null : '0'} onKeyDown={(e) => this.onStarKeyDown(e, value)}></span>
-            );
-        });
-
-        return stars;
-    }
-
-    renderCancelIcon() {
-        if (this.props.cancel) {
-            return (
-                <span className="p-rating-icon p-rating-cancel pi pi-ban" onClick={this.clear} tabIndex={this.props.disabled||this.props.readonly ? null : '0'}   onKeyDown={this.onCancelKeyDown}></span>
-            );
-        }
-        else {
-            return null;
-        }
+    getFocusIndex() {
+        return (this.props.disabled || this.props.readOnly) ? null : 0;
     }
 
     componentDidMount() {
@@ -134,9 +107,9 @@ export class Rating extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.tooltip !== this.props.tooltip) {
+        if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
             if (this.tooltip)
-                this.tooltip.updateContent(this.props.tooltip);
+                this.tooltip.update({ content: this.props.tooltip, ...(this.props.tooltipOptions || {}) });
             else
                 this.renderTooltip();
         }
@@ -150,18 +123,51 @@ export class Rating extends Component {
     }
 
     renderTooltip() {
-        this.tooltip = new Tooltip({
+        this.tooltip = tip({
             target: this.element,
             content: this.props.tooltip,
             options: this.props.tooltipOptions
         });
     }
 
+    renderStars() {
+        let starsArray = [];
+        for (let i = 0; i < this.props.stars; i++) {
+            starsArray[i] = i + 1;
+        }
+
+        let stars = starsArray.map((value) => {
+            let iconClass = classNames('p-rating-icon', {
+                'pi pi-star-o': (!this.props.value || value > this.props.value),
+                'pi pi-star': (value <= this.props.value)
+            });
+
+            return (
+                <span className={iconClass} onClick={(e) => this.rate(e, value)} key={value} tabIndex={this.getFocusIndex()} onKeyDown={(e) => this.onStarKeyDown(e, value)}></span>
+            );
+        });
+
+        return stars;
+    }
+
+    renderCancelIcon() {
+        if (this.props.cancel) {
+            return (
+                <span className="p-rating-icon p-rating-cancel pi pi-ban" onClick={this.clear} tabIndex={this.getFocusIndex()}   onKeyDown={this.onCancelKeyDown}></span>
+            );
+        }
+
+        return null;
+    }
+
     render() {
-        let className = classNames('p-rating', this.props.className, {'p-disabled': this.props.disabled, 'p-rating-readonly': this.props.readonly});
-        let cancelIcon = this.renderCancelIcon();        
+        let className = classNames('p-rating', {
+            'p-disabled': this.props.disabled,
+            'p-rating-readonly': this.props.readOnly
+        }, this.props.className);
+        let cancelIcon = this.renderCancelIcon();
         let stars = this.renderStars();
-                        
+
         return (
             <div ref={(el) => this.element = el} id={this.props.id} className={className} style={this.props.style}>
                 {cancelIcon}

@@ -1,398 +1,167 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
-import {Dialog} from '../../components/dialog/Dialog';
-import {Button} from '../../components/button/Button';
-import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
+import React, { Component } from 'react';
+import { Dialog } from '../../components/dialog/Dialog';
+import { Button } from '../../components/button/Button';
+import { DialogDoc } from './DialogDoc';
+import { AppInlineHeader } from '../../AppInlineHeader';
+import './DialogDemo.scss';
 
 export class DialogDemo extends Component {
 
-    constructor() {
-        super();
-        this.state = {visible: false};
+    constructor(props) {
+        super(props);
+        this.state = {
+            displayBasic: false,
+            displayBasic2: false,
+            displayModal: false,
+            displayMaximizable: false,
+            displayPosition: false,
+            displayResponsive: false,
+            position: 'center'
+        };
+
         this.onClick = this.onClick.bind(this);
         this.onHide = this.onHide.bind(this);
     }
 
-    onClick() {
-        this.setState({visible: true});
+    onClick(name, position) {
+        let state = {
+            [`${name}`]: true
+        };
+
+        if (position) {
+            state = {
+                ...state,
+                position
+            }
+        }
+
+        this.setState(state);
     }
 
-    onHide() {
-        this.setState({visible: false});
+    onHide(name) {
+        this.setState({
+            [`${name}`]: false
+        });
+    }
+
+    renderFooter(name) {
+        return (
+            <div>
+                <Button label="No" icon="pi pi-times" onClick={() => this.onHide(name)} className="p-button-text" />
+                <Button label="Yes" icon="pi pi-check" onClick={() => this.onHide(name)} autoFocus />
+            </div>
+        );
     }
 
     render() {
-        const footer = (
-            <div>
-                <Button label="Yes" icon="pi pi-check" onClick={this.onHide} />
-                <Button label="No" icon="pi pi-times" onClick={this.onHide} className="p-button-secondary"/>
-            </div>
-        );
-
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="dialog">
                         <h1>Dialog</h1>
                         <p>Dialog is a container to display content in an overlay window.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("dialog")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation dialog-demo">
-                    <Dialog header="Godfather I" visible={this.state.visible} style={{width: '50vw'}} modal={true} blockScroll={true} footer={footer} onHide={this.onHide} maximizable>
-                        <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-                        His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-                        Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
-                        kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
-                    </Dialog>
+                    <div className="card">
+                        <h5>Basic</h5>
+                        <Button label="Show" icon="pi pi-external-link" onClick={() => this.onClick('displayBasic')} />
+                        <Dialog header="Header" visible={this.state.displayBasic} style={{ width: '50vw' }} footer={this.renderFooter('displayBasic')} onHide={() => this.onHide('displayBasic')} baseZIndex={1000}>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        </Dialog>
 
-                    <Button label="Show" icon="pi pi-external-link" onClick={this.onClick} />
-                </div>
+                        <Button label="Long Content" icon="pi pi-external-link" onClick={() => this.onClick('displayBasic2')} />
+                        <Dialog header="Header" visible={this.state.displayBasic2} style={{ width: '50vw' }} footer={this.renderFooter('displayBasic2')} onHide={() => this.onHide('displayBasic2')} baseZIndex={1000}>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                            ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                            culpa qui officia deserunt mollit anim id est laborum.</p>
+                            <br />
+                            <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+                            dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est,
+                            qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam,
+                            quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur,
+                            vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+                            <br />
+                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident,
+                            similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio
+                            cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe
+                            eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
+                            <br />
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                            ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                            culpa qui officia deserunt mollit anim id est laborum.</p>
+                            <br />
+                            <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+                            dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est,
+                            qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam,
+                            quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur,
+                            vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+                            <br />
+                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident,
+                            similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio
+                            cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe
+                            eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
+                            <br />
+                        </Dialog>
 
-                <DialogDoc></DialogDoc>
-            </div>
-        )
-    }
-}
+                        <h5>Without Modal</h5>
+                        <Button label="Show" icon="pi pi-external-link" onClick={() => this.onClick('displayModal')} />
+                        <Dialog header="Header" visible={this.state.displayModal} modal={false} style={{ width: '50vw' }} footer={this.renderFooter('displayModal')} onHide={() => this.onHide('displayModal')} baseZIndex={1000}>
+                            <p className="p-m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        </Dialog>
 
-export class DialogDoc extends Component {
+                        <h5>Responsive</h5>
+                        <Button label="Show" icon="pi pi-external-link" onClick={() => this.onClick('displayResponsive')} />
+                        <Dialog header="Header" visible={this.state.displayResponsive} onHide={() => this.onHide('displayResponsive')} breakpoints={{'960px': '75vw'}} style={{width: '50vw'}} footer={this.renderFooter('displayResponsive')} baseZIndex={1000}>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                                cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        </Dialog>
 
-    shouldComponentUpdate(){
-        return false;
-    }
+                        <h5>Maximizable</h5>
+                        <Button label="Show" icon="pi pi-external-link" onClick={() => this.onClick('displayMaximizable')} />
+                        <Dialog header="Header" visible={this.state.displayMaximizable} maximizable modal style={{ width: '50vw' }} footer={this.renderFooter('displayMaximizable')} onHide={() => this.onHide('displayMaximizable')} baseZIndex={1000}>
+                            <p className="p-m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        </Dialog>
 
-    render() {
-        return (
-            <div className="content-section documentation">
-                <TabView>
-                    <TabPanel header="Documentation">
-                        <h3>Import</h3>
-<CodeHighlight className="language-javascript">
-{`
-import {Dialog} from 'primereact/dialog';
+                        <h5>Position</h5>
+                        <div className="p-grid p-dir-col">
+                            <div className="p-col">
+                                <Button label="Left" icon="pi pi-arrow-right" onClick={() => this.onClick('displayPosition', 'left')} className="p-button-warning" />
+                                <Button label="Right" icon="pi pi-arrow-left" onClick={() => this.onClick('displayPosition', 'right')} className="p-button-warning" />
+                            </div>
+                            <div className="p-col">
+                                <Button label="Top" icon="pi pi-arrow-down" onClick={() => this.onClick('displayPosition', 'top')} className="p-button-warning" />
+                                <Button label="TopLeft" icon="pi pi-arrow-down" onClick={() => this.onClick('displayPosition', 'top-left')} className="p-button-warning" />
+                                <Button label="TopRight" icon="pi pi-arrow-down" onClick={() => this.onClick('displayPosition', 'top-right')} className="p-button-warning" />
+                            </div>
+                            <div className="p-col">
+                                <Button label="Bottom" icon="pi pi-arrow-up" onClick={() => this.onClick('displayPosition', 'bottom')} className="p-button-warning" />
+                                <Button label="BottomLeft" icon="pi pi-arrow-up" onClick={() => this.onClick('displayPosition', 'bottom-left')} className="p-button-warning" />
+                                <Button label="BottomRight" icon="pi pi-arrow-up" onClick={() => this.onClick('displayPosition', 'bottom-right')} className="p-button-warning" />
+                            </div>
+                        </div>
 
-`}
-</CodeHighlight>
-
-            <h3>Getting Started</h3>
-            <p>Dialog is used as a container and visibility is managed with <i>visible</i> property where <i>onHide</i> event is required to update the visibility state.</p>
-<CodeHighlight className="language-jsx">
-{`
-<Dialog header="Godfather I" visible={this.state.visible} style={{width: '50vw'}} modal={true} onHide={() => this.setState({visible: false})}>
-    The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-    His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-    Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
-    kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
-</Dialog>
-
-<Button label="Show" icon="pi pi-info-circle" onClick={(e) => this.setState({visible: true})} />
-
-`}
-</CodeHighlight>
-
-            <h3>Header and Footer</h3>
-            <p>Header and Footer sections are defined using properties with the same name that accept simple strings or JSX for custom content. In addition <i>iconsTemplate</i> property enables
-            adding more icons at the header section.</p>
-<CodeHighlight className="language-jsx">
-{`
-const footer = (
-    <div>
-        <Button label="Yes" icon="pi pi-check" onClick={this.onHide} />
-        <Button label="No" icon="pi pi-times" onClick={this.onHide} />
-    </div>
-);
-
-const myIcon = (
-    <button className="p-dialog-titlebar-icon p-link">
-        <span className="pi pi-search"></span>
-    </button>
-)
-
-<Dialog header="Header Text" footer={footer} iconsTemplate={myIcon} visible={this.state.visible} style={{width: '50vw'}} modal={true} onHide={this.onHide}>
-    Content
-</Dialog>
-
-`}
-</CodeHighlight>
-
-            <h3>Dynamic Content</h3>
-            <p>Dynamic content may move the dialog boundaries outside of the viewport. Common solution is defining max-height via <i>contentStyle</i> so longer content displays a scrollbar.</p>
-
-            <h3>Properties</h3>
-            <div className="doc-tablewrapper">
-                <table className="doc-table">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Default</th>
-                        <th>Description</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>id</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Unique identifier of the element.</td>
-                        </tr>
-                        <tr>
-                            <td>header</td>
-                            <td>any</td>
-                            <td>null</td>
-                            <td>Title content of the dialog.</td>
-                        </tr>
-                        <tr>
-                            <td>footer</td>
-                            <td>any</td>
-                            <td>null</td>
-                            <td>Footer content of the dialog.</td>
-                        </tr>
-                        <tr>
-                            <td>visible</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>Specifies the visibility of the dialog.</td>
-                        </tr>
-                        <tr>
-                            <td>modal</td>
-                            <td>boolean</td>
-                            <td>true</td>
-                            <td>Defines if background should be blocked when dialog is displayed.</td>
-                        </tr>
-                        <tr>
-                            <td>contentStyle</td>
-                            <td>object</td>
-                            <td>null</td>
-                            <td>Style of the content section.</td>
-                        </tr>
-                        <tr>
-                            <td>closeOnEscape</td>
-                            <td>boolean</td>
-                            <td>true</td>
-                            <td>Specifices if pressing escape key should hide the dialog.</td>
-                        </tr>
-                        <tr>
-                            <td>dismissableMask</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>Specifices if clicking the modal background should hide the dialog.</td>
-                        </tr>
-                        <tr>
-                            <td>rtl</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>When enabled dialog is displayed in RTL direction.</td>
-                        </tr>
-                        <tr>
-                            <td>closable</td>
-                            <td>boolean</td>
-                            <td>true</td>
-                            <td>Adds a close icon to the header to hide the dialog.</td>
-                        </tr>
-                        <tr>
-                            <td>style</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Inline style of the component.</td>
-                        </tr>
-                        <tr>
-                            <td>className</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Style class of the component.</td>
-                        </tr>
-                        <tr>
-                            <td>showHeader</td>
-                            <td>boolean</td>
-                            <td>true</td>
-                            <td>Whether to show the header or not.</td>
-                        </tr>
-                        <tr>
-                            <td>appendTo</td>
-                            <td>DOM element</td>
-                            <td>null</td>
-                            <td>DOM element instance where the dialog should be mounted.</td>
-                        </tr>
-                        <tr>
-                            <td>baseZIndex</td>
-                            <td>number</td>
-                            <td>0</td>
-                            <td>Base zIndex value to use in layering.</td>
-                        </tr>
-                        <tr>
-                            <td>maximizable</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>Whether the dialog can be displayed full screen.</td>
-                        </tr>
-                        <tr>
-                            <td>blockScroll</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>Whether background scroll should be blocked when dialog is visible.</td>
-                        </tr>
-                        <tr>
-                            <td>iconsTemplate</td>
-                            <td>Element</td>
-                            <td>null</td>
-                            <td>Custom icons template for the header.</td>
-                        </tr>
-                        <tr>
-                            <td>ariaCloseIconLabel</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Defines a string that labels the close icon.</td>
-                        </tr>
-                        <tr>
-                            <td>focusOnShow</td>
-                            <td>boolean</td>
-                            <td>true</td>
-                            <td>When enabled, first button receives focus on show.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <h3>Events</h3>
-            <div className="doc-tablewrapper">
-                <table className="doc-table">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Parameters</th>
-                        <th>Description</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>onHide</td>
-                            <td>null</td>
-                            <td>Callback to invoke when dialog is hidden (Required).</td>
-                        </tr>
-                        <tr>
-                            <td>onShow</td>
-                            <td>null</td>
-                            <td>Callback to invoke when dialog is showed.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <h3>Styling</h3>
-            <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
-            <div className="doc-tablewrapper">
-                <table className="doc-table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Element</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>p-dialog</td>
-                            <td>Container element.</td>
-                        </tr>
-                        <tr>
-                            <td>p-dialog-titlebar</td>
-                            <td>Container of header.</td>
-                        </tr>
-                        <tr>
-                            <td>p-dialog-title</td>
-                            <td>Header element.</td>
-                        </tr>
-                        <tr>
-                            <td>p-dialog-titlebar-icon</td>
-                            <td>Icon container inside header.</td>
-                        </tr>
-                        <tr>
-                            <td>p-dialog-titlebar-close</td>
-                            <td>Close icon element.</td>
-                        </tr>
-                        <tr>
-                            <td>p-dialog-content</td>
-                            <td>Content element</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h3>Dependencies</h3>
-                <p>None.</p>
-            </div>
-
-            </TabPanel>
-
-            <TabPanel header="Source">
-                <a href="https://github.com/primefaces/primereact/tree/master/src/showcase/dialog" className="btn-viewsource" target="_blank" rel="noopener noreferrer">
-                    <span>View on GitHub</span>
-                </a>
-<CodeHighlight className="language-javascript">
-{`
-import React, {Component} from 'react';
-import {Dialog} from 'primereact/dialog';
-import {Button} from 'primereact/button';
-
-export class DialogDemo extends Component {
-
-    constructor() {
-        super();
-        this.state = {visible: false};
-        this.onClick = this.onClick.bind(this);
-        this.onHide = this.onHide.bind(this);
-    }
-
-    onClick() {
-        this.setState({visible: true});
-    }
-
-    onHide() {
-        this.setState({visible: false});
-    }
-
-    render() {
-        const footer = (
-            <div>
-                <Button label="Yes" icon="pi pi-check" onClick={this.onHide} />
-                <Button label="No" icon="pi pi-times" onClick={this.onHide} className="p-button-secondary" />
-            </div>
-        );
-
-        return (
-            <div>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Dialog</h1>
-                        <p>Dialog is a container to display content in an overlay window.</p>
+                        <Dialog header="Header" visible={this.state.displayPosition} position={this.state.position} modal style={{ width: '50vw' }} footer={this.renderFooter('displayPosition')} onHide={() => this.onHide('displayPosition')}
+                            draggable={false} resizable={false} baseZIndex={1000}>
+                            <p className="p-m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        </Dialog>
                     </div>
                 </div>
 
-                <div className="content-section implementation">
-                    <Dialog header="Godfather I" visible={this.state.visible} style={{width: '50vw'}} footer={footer} onHide={this.onHide} maximizable>
-                        The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-                        His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-                        Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
-                        kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
-                    </Dialog>
-
-                    <Button label="Show" icon="pi pi-external-link" onClick={this.onClick} />
-                </div>
+                <DialogDoc />
             </div>
         )
-    }
-}
-
-`}
-</CodeHighlight>
-                    </TabPanel>
-                </TabView>
-            </div>
-        );
     }
 }

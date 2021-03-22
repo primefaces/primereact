@@ -8,6 +8,7 @@ interface ProgressBarProps {
     style?: object;
     className?: string;
     mode?: string;
+    color?: string;
     displayValueTemplate?(value: any): JSX.Element;
 }
 

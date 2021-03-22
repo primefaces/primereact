@@ -16,11 +16,11 @@ export class TableFooter extends Component {
         if(this.props.columnGroup) {
             let rows = React.Children.toArray(this.props.columnGroup.props.children);
             content = rows.map((row, i) => {
-                return <tr key={i}>{this.createFooterCells(row)}</tr>;
+                return <tr key={i} role="row">{this.createFooterCells(row)}</tr>;
             });
         }
         else {
-            content = <tr>{this.createFooterCells(this)}</tr>;
+            content = <tr role="row">{this.createFooterCells(this)}</tr>;
         }
 
         return (

@@ -1,0 +1,13 @@
+.layout-changelog-dialog {
+    .p-dialog-content {
+        a {
+            text-decoration: none;
+            color: #2196f3;
+            font-weight: 600;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}

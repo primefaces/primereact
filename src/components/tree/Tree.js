@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import ObjectUtils from '../utils/ObjectUtils';
 import {UITreeNode} from './UITreeNode';
 
@@ -30,6 +30,7 @@ export class Tree extends Component {
         filterBy: 'label',
         filterMode: 'lenient',
         filterPlaceholder: null,
+        filterLocale: undefined,
         nodeTemplate: null,
         onSelect: null,
         onUnselect: null,
@@ -64,6 +65,7 @@ export class Tree extends Component {
         filterBy: PropTypes.any,
         filterMode: PropTypes.string,
         filterPlaceholder: PropTypes.string,
+        filterLocale: PropTypes.string,
         nodeTemplate: PropTypes.func,
         onSelect: PropTypes.func,
         onUnselect: PropTypes.func,
@@ -77,13 +79,14 @@ export class Tree extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            filter: ''
+        };
+
         if (!this.props.onToggle) {
-            this.state = {
-                expandedKeys: this.props.expandedKeys,
-                filter: ''
-            };
+            this.state['expandedKeys'] = this.props.expandedKeys;
         }
-        
+
         this.isNodeLeaf = this.isNodeLeaf.bind(this);
         this.onToggle = this.onToggle.bind(this);
         this.onDragStart = this.onDragStart.bind(this);
@@ -132,7 +135,7 @@ export class Tree extends Component {
             let dragNodeParent = this.findNode(value, dragPaths);
             let dragNode = dragNodeParent ? dragNodeParent.children[this.dragState.index] : value[this.dragState.index];
             let dropNode = this.findNode(value, event.path.split('-'));
-            
+
             if (dropNode.children)
                 dropNode.children.push(dragNode);
             else
@@ -146,7 +149,10 @@ export class Tree extends Component {
             if (this.props.onDragDrop) {
                 this.props.onDragDrop({
                     originalEvent: event.originalEvent,
-                    value: value
+                    value: value,
+                    dragNode,
+                    dropNode,
+                    dropIndex: event.index
                 });
             }
         }
@@ -183,11 +189,14 @@ export class Tree extends Component {
                 else
                     value.push(dragNode);
             }
-            
+
             if (this.props.onDragDrop) {
                 this.props.onDragDrop({
                     originalEvent: event.originalEvent,
-                    value: value
+                    value: value,
+                    dragNode,
+                    dropNode: dropNodeParent,
+                    dropIndex: event.index
                 });
             }
         }
@@ -197,7 +206,7 @@ export class Tree extends Component {
         if (!dragPath) {
             return false;
         }
-        else {   
+        else {
             //same node
             if (dragPath === dropPath) {
                 return false;
@@ -294,7 +303,7 @@ export class Tree extends Component {
         else {
             this.filteredNodes = [];
             const searchFields = this.props.filterBy.split(',');
-            const filterText = this.state.filter.toLowerCase();
+            const filterText = this.state.filter.toLocaleLowerCase(this.props.filterLocale);
             const isStrictMode = this.props.filterMode === 'strict';
             for(let node of this.props.value) {
                 let copyNode = {...node};
@@ -305,7 +314,7 @@ export class Tree extends Component {
                 }
             }
         }
-        
+
         this.filterChanged = false;
     }
 
@@ -323,7 +332,7 @@ export class Tree extends Component {
                     }
                 }
             }
-            
+
             if (matched) {
                 return true;
             }
@@ -333,7 +342,7 @@ export class Tree extends Component {
     isFilterMatched(node, {searchFields, filterText, isStrictMode}) {
         let matched = false;
         for(let field of searchFields) {
-            let fieldValue = String(ObjectUtils.resolveFieldData(node, field)).toLowerCase();
+            let fieldValue = String(ObjectUtils.resolveFieldData(node, field)).toLocaleLowerCase(this.props.filterLocale);
             if(fieldValue.indexOf(filterText) > -1) {
                 matched = true;
             }
@@ -348,7 +357,7 @@ export class Tree extends Component {
 
     renderRootChild(node, index, last) {
         return (
-            <UITreeNode key={node.key||node.label} node={node} index={index} last={last} path={String(index)} disabled={this.props.disabled} selectionMode={this.props.selectionMode} 
+            <UITreeNode key={node.key||node.label} node={node} index={index} last={last} path={String(index)} disabled={this.props.disabled} selectionMode={this.props.selectionMode}
                     selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange} metaKeySelection={this.props.metaKeySelection}
                     contextMenuSelectionKey={this.props.contextMenuSelectionKey} onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu}
                     propagateSelectionDown={this.props.propagateSelectionDown} propagateSelectionUp={this.props.propagateSelectionUp}
@@ -360,6 +369,7 @@ export class Tree extends Component {
 
     renderRootChildren() {
         if (this.props.filter) {
+            this.filterChanged = true;
             this.filter();
         }
 
@@ -380,27 +390,22 @@ export class Tree extends Component {
                 </ul>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
-    
+
     renderLoader() {
         if (this.props.loading) {
             let icon = classNames('p-tree-loading-icon pi-spin', this.props.loadingIcon);
 
             return (
-                <React.Fragment>
-                    <div className="p-tree-loading-mask p-component-overlay"></div>
-                    <div className="p-tree-loading-content">
-                        <i className={icon} />
-                    </div>
-                </React.Fragment>
+                <div className="p-tree-loading-overlay p-component-overlay">
+                    <i className={icon} />
+                </div>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderFilter() {
@@ -411,14 +416,13 @@ export class Tree extends Component {
                         <span className="p-tree-filter-icon pi pi-search"></span>
                    </div>;
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     render() {
         const className = classNames('p-tree p-component', this.props.className, {
-            'p-tree-selectable': this.props.selectionMode, 
+            'p-tree-selectable': this.props.selectionMode,
             'p-tree-loading': this.props.loading,
             'p-disabled': this.props.disabled
         });

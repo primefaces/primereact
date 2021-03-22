@@ -5,6 +5,7 @@ interface AccordionTabProps {
     disabled?: boolean;
     headerStyle?: object;
     headerClassName?: string;
+    headerTemplate?: any;
     contentStyle?: object;
     contentClassName?: string;
 }
@@ -17,6 +18,8 @@ interface AccordionProps {
     className?: string;
     style?: object;
     multiple?: boolean;
+    expandIcon?: string;
+    collapseIcon?: string;
     onTabOpen?(e: {originalEvent: Event, index: number}): void;
     onTabClose?(e: {originalEvent: Event, index: number}): void;
     onTabChange?(e: {originalEvent: Event, index: number}): void;

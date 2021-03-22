@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 
 export class UITreeTableNode extends Component {
-    
+
     static defaultProps = {
         node: null,
         index: null
@@ -16,9 +16,9 @@ export class UITreeTableNode extends Component {
 
     render() {
         return (
-            <React.Fragment>
-                
-            </React.Fragment>
+            <>
+
+            </>
         );
     }
 }

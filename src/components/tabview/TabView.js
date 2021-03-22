@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import UniqueComponentId from '../utils/UniqueComponentId';
+import DomHandler from '../utils/DomHandler';
+import { Ripple } from '../ripple/Ripple';
 
 export class TabPanel extends Component {
-    
+
     static defaultProps = {
         header: null,
         leftIcon: null,
@@ -17,7 +19,7 @@ export class TabPanel extends Component {
     }
 
     static propTypes = {
-        header: PropTypes.string,
+        header: PropTypes.any,
         leftIcon: PropTypes.string,
         rightIcon: PropTypes.string,
         disabled: PropTypes.bool,
@@ -26,7 +28,7 @@ export class TabPanel extends Component {
         contentStyle: PropTypes.object,
         contentClassName: PropTypes.string
     };
-    
+
 }
 
 export class TabView extends Component {
@@ -48,7 +50,7 @@ export class TabView extends Component {
         renderActiveOnly: PropTypes.bool,
         onTabChange: PropTypes.func
     };
-    
+
     constructor(props) {
         super(props);
         if (!this.props.onTabChange) {
@@ -60,12 +62,14 @@ export class TabView extends Component {
         this.id = this.props.id || UniqueComponentId();
     }
 
-    isSelected(index) {
-        const activeIndex = this.props.onTabChange ? this.props.activeIndex : this.state.activeIndex;
-
-        return (activeIndex === index);
+    getActiveIndex() {
+        return this.props.onTabChange ? this.props.activeIndex : this.state.activeIndex;
     }
-    
+
+    isSelected(index) {
+        return (index === this.getActiveIndex());
+    }
+
     onTabHeaderClick(event, tab, index) {
         if (!tab.props.disabled) {
             if (this.props.onTabChange) {
@@ -80,20 +84,41 @@ export class TabView extends Component {
 
         event.preventDefault();
     }
-             
+
+    updateInkBar() {
+        const activeIndex = this.getActiveIndex();
+        const tabHeader = this[`tab_${activeIndex}`];
+
+        this.inkbar.style.width = DomHandler.getWidth(tabHeader) + 'px';
+        this.inkbar.style.left =  DomHandler.getOffset(tabHeader).left - DomHandler.getOffset(this.nav).left + 'px';
+    }
+
+    componentDidMount() {
+        this.updateInkBar();
+    }
+
+    componentDidUpdate() {
+        this.updateInkBar();
+    }
+
     renderTabHeader(tab, index) {
         const selected = this.isSelected(index);
-        const className = classNames(tab.props.headerClassName, 'p-unselectable-text', {'p-tabview-selected p-highlight': selected, 'p-disabled': tab.props.disabled});
+        const className = classNames('p-unselectable-text', {'p-tabview-selected p-highlight': selected, 'p-disabled': tab.props.disabled}, tab.props.headerClassName);
         const id = this.id + '_header_' + index;
         const ariaControls = this.id + '_content_' + index;
+        const tabIndex = tab.props.disabled ? null : 0;
 
         return (
-            <li className={className} style={tab.props.headerStyle} role="presentation" >
-                <a role="tab" href={'#' + ariaControls} onClick={(event) => this.onTabHeaderClick(event, tab, index)} id={id} aria-controls={ariaControls} aria-selected={selected}>
-                    {tab.props.leftIcon && <span className={classNames('p-tabview-left-icon ', tab.props.leftIcon)}></span>}
+            <li ref={(el) => this[`tab_${index}`] = el} className={className} style={tab.props.headerStyle} role="presentation">
+                {/* eslint-disable */}
+                <a role="tab" className="p-tabview-nav-link" onClick={(event) => this.onTabHeaderClick(event, tab, index)} id={id}
+                    aria-controls={ariaControls} aria-selected={selected} tabIndex={tabIndex}>
+                    {tab.props.leftIcon && <i className={tab.props.leftIcon}></i>}
                     <span className="p-tabview-title">{tab.props.header}</span>
-                    {tab.props.rightIcon && <span className={classNames('p-tabview-right-icon ', tab.props.rightIcon)}></span>}
+                    {tab.props.rightIcon && <i className={tab.props.rightIcon}></i>}
+                    <Ripple />
                 </a>
+                {/* eslint-enable */}
             </li>
         );
     }
@@ -105,17 +130,18 @@ export class TabView extends Component {
             })
         );
     }
-    
+
     renderNavigator() {
         const headers = this.renderTabHeaders();
-            
+
         return (
-            <ul className="p-tabview-nav p-reset" role="tablist">
+            <ul ref={(el) => this.nav = el} className="p-tabview-nav" role="tablist">
                 {headers}
+                <li ref={(el) => this.inkbar = el} className="p-tabview-ink-bar"></li>
             </ul>
         );
     }
-    
+
     renderContent() {
         const contents = React.Children.map(this.props.children, (tab, index) => {
             if (!this.props.renderActiveOnly || this.isSelected(index)) {
@@ -145,10 +171,10 @@ export class TabView extends Component {
     }
 
     render() {
-        const className = classNames('p-tabview p-component p-tabview-top', this.props.className)
+        const className = classNames('p-tabview p-component', this.props.className);
         const navigator = this.renderNavigator();
         const content = this.renderContent();
-        
+
         return (
             <div id={this.props.id} className={className} style={this.props.style}>
                 {navigator}

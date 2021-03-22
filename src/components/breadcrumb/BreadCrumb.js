@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
+import ObjectUtils from '../utils/ObjectUtils';
 
 export class BreadCrumb extends Component {
 
@@ -40,19 +41,19 @@ export class BreadCrumb extends Component {
 
     renderHome() {
         if(this.props.home) {
-            const className = classNames('p-breadcrumb-home', this.props.home.className,  {'p-disabled': this.props.home.disabled});
+            const className = classNames('p-breadcrumb-home',  {'p-disabled': this.props.home.disabled}, this.props.home.className);
+            const iconClassName = classNames('p-menuitem-icon', this.props.home.icon);
 
             return (
                 <li className={className} style={this.props.home.style}>
-                    <a href={this.props.home.url || '#'} className="p-menuitem-link" target={this.props.home.target} onClick={event => this.itemClick(event, this.props.home)}>
-                        <span className={this.props.home.icon}></span>
+                    <a href={this.props.home.url || '#'} className="p-menuitem-link" aria-disabled={this.props.home.disabled} target={this.props.home.target} onClick={event => this.itemClick(event, this.props.home)}>
+                        <span className={iconClassName}></span>
                     </a>
                 </li>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderSeparator() {
@@ -61,14 +62,30 @@ export class BreadCrumb extends Component {
         );
     }
 
-    renderMenuitem(item, index) {
+    renderMenuitem(item) {
         const className = classNames(item.className, {'p-disabled': item.disabled});
+        const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
+        let content = (
+            <a href={item.url || '#'} className="p-menuitem-link" target={item.target} onClick={event => this.itemClick(event, item)} aria-disabled={item.disabled}>
+                {label}
+            </a>
+        );
+
+        if (item.template) {
+            const defaultContentOptions = {
+                onClick: (event) => this.itemClick(event, item),
+                className: 'p-menuitem-link',
+                labelClassName: 'p-menuitem-text',
+                element: content,
+                props: this.props
+            };
+
+            content = ObjectUtils.getJSXElement(item.template, item, defaultContentOptions);
+        }
 
         return (
             <li className={className} style={item.style}>
-                <a href={item.url || '#'} className="p-menuitem-link" target={item.target} onClick={event => this.itemClick(event, item)}>
-                    <span className="p-menuitem-text">{item.label}</span>
-                </a>
+                {content}
             </li>
         );
     }
@@ -76,7 +93,7 @@ export class BreadCrumb extends Component {
     renderMenuitems() {
         if (this.props.model) {
             const items = this.props.model.map((item, index)=> {
-                const menuitem = this.renderMenuitem(item, index);
+                const menuitem = this.renderMenuitem(item);
                 const separator = (index === this.props.model.length - 1) ? null : this.renderSeparator();
 
                 return (
@@ -89,9 +106,8 @@ export class BreadCrumb extends Component {
 
             return items;
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     render() {

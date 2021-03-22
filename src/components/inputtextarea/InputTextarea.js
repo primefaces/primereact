@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import Tooltip from "../tooltip/Tooltip";
+import { classNames } from '../utils/ClassNames';
+import { tip } from '../tooltip/Tooltip';
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
 
@@ -77,24 +77,26 @@ export class InputTextarea extends Component {
     }
 
     resize() {
-        if (!this.cachedScrollHeight) {
-            this.cachedScrollHeight = this.element.scrollHeight;
-            this.element.style.overflow = "hidden";
-        }
-
-        if (this.cachedScrollHeight !== this.element.scrollHeight) {
-            this.element.style.height = ''
-            this.element.style.height = this.element.scrollHeight + 'px';
-
-            if (parseFloat(this.element.style.height) >= parseFloat(this.element.style.maxHeight)) {
-                this.element.style.overflowY = "scroll";
-                this.element.style.height = this.element.style.maxHeight;
-            }
-            else {
+        if (DomHandler.isVisible(this.element)) {
+            if (!this.cachedScrollHeight) {
+                this.cachedScrollHeight = this.element.scrollHeight;
                 this.element.style.overflow = "hidden";
             }
 
-            this.cachedScrollHeight = this.element.scrollHeight;
+            if (this.cachedScrollHeight !== this.element.scrollHeight) {
+                this.element.style.height = ''
+                this.element.style.height = this.element.scrollHeight + 'px';
+
+                if (parseFloat(this.element.style.height) >= parseFloat(this.element.style.maxHeight)) {
+                    this.element.style.overflowY = "scroll";
+                    this.element.style.height = this.element.style.maxHeight;
+                }
+                else {
+                    this.element.style.overflow = "hidden";
+                }
+
+                this.cachedScrollHeight = this.element.scrollHeight;
+            }
         }
     }
 
@@ -109,13 +111,9 @@ export class InputTextarea extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (!DomHandler.isVisible(this.element)) {
-            return;
-        }
-
-        if (prevProps.tooltip !== this.props.tooltip) {
+        if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
             if (this.tooltip)
-                this.tooltip.updateContent(this.props.tooltip);
+                this.tooltip.update({ content: this.props.tooltip, ...(this.props.tooltipOptions || {}) });
             else
                 this.renderTooltip();
         }
@@ -133,7 +131,7 @@ export class InputTextarea extends Component {
     }
 
     renderTooltip() {
-        this.tooltip = new Tooltip({
+        this.tooltip = tip({
             target: this.element,
             content: this.props.tooltip,
             options: this.props.tooltipOptions
@@ -141,11 +139,11 @@ export class InputTextarea extends Component {
     }
 
     render() {
-        const className = classNames('p-inputtext p-inputtextarea p-component', this.props.className, {
+        const className = classNames('p-inputtextarea p-inputtext p-component', {
             'p-disabled': this.props.disabled,
             'p-filled': (this.props.value != null && this.props.value.toString().length > 0) || (this.props.defaultValue != null && this.props.defaultValue.toString().length > 0),
             'p-inputtextarea-resizable': this.props.autoResize
-        });
+        }, this.props.className);
 
         let textareaProps = ObjectUtils.findDiffKeys(this.props, InputTextarea.defaultProps);
 

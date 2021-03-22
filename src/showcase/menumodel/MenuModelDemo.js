@@ -1,21 +1,16 @@
-import React, {Component} from 'react';
-import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import React, { Component } from 'react';
+import { CodeHighlight } from '../codehighlight/CodeHighlight';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class MenuModelDemo extends Component {
-
-    constructor() {
-        super();
-        this.state = {};
-    }
-
     render() {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="menu">
                         <h1>MenuModel API</h1>
                         <p>PrimeReact menus components share a common api to specify the menuitems and submenus.</p>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <MenuModelDoc/>
@@ -36,9 +31,9 @@ class MenuModelDoc extends Component {
             <div className="content-section documentation">
                 <h3 style={{marginTop: 0}}>MenuItem</h3>
                 <p>Core of the API is the MenuItem class that defines various options such as the label, icon and children of an item in a menu.</p>
-                <CodeHighlight className="language-javascript">
+                <CodeHighlight lang="js">
                     {`
-const items: [
+const items = [
     {
         label: 'Options',
         items: [{label: 'New', icon: 'pi pi-fw pi-plus',command:()=>{ window.location.hash="/fileupload"; }},
@@ -98,6 +93,12 @@ const items: [
                                 <td>An array of children menuitems.</td>
                             </tr>
                             <tr>
+                                <td>expanded</td>
+                                <td>boolean</td>
+                                <td>false</td>
+                                <td>Visibility of submenu.</td>
+                            </tr>
+                            <tr>
                                 <td>disabled</td>
                                 <td>boolean</td>
                                 <td>false</td>
@@ -127,13 +128,58 @@ const items: [
                                 <td>null</td>
                                 <td>Style class of the menuitem.</td>
                             </tr>
+                            <tr>
+                                <td>template</td>
+                                <td>any</td>
+                                <td>null</td>
+                                <td>Template of the menuitem.</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
 
+                <h3>Template</h3>
+                <p>Used to create custom menuitem elements.</p>
+<CodeHighlight lang="js">
+    {`
+const items =
+[
+    {
+        label: 'New',
+        template: (item, options) => {
+            return (
+                /* custom element */
+                <a className={options.className} target={item.target} onClick={options.onClick}>
+                    <span className={classNames(options.iconClassName, 'pi pi-home')}></span>;
+                    <span className={options.labelClassName}>{item.label}</span>;
+                </a>
+            );
+        }
+    }
+];
+
+`}
+</CodeHighlight>
+
+<CodeHighlight lang="js">
+    {`
+template: (item, options) => {
+    // item: Current item object.
+    // options.onClick: Click event for the default element.
+    // options.className: Style class of the default element.
+    // options.labelClassName: Style class of the default label element.
+    // options.iconClassName: Style class of the default icon element.
+    // options.element: Default element created by the component.
+    // options.props: component props.
+
+    // Note: Extra options may come according to the components.
+}
+`}
+</CodeHighlight>
+
                 <h3>Command</h3>
                 <p>The function to invoke when an item is clicked is defined using the command property.</p>
-<CodeHighlight className="language-javascript">
+<CodeHighlight lang="js">
     {`
 const items =
 [
@@ -152,7 +198,7 @@ const items =
 
                 <h3>Navigation</h3>
                 <p>Navigation is specified using url property for external links or using command function for internal router.</p>
-                <CodeHighlight className="language-javascript">
+                <CodeHighlight lang="js">
                     {`
 const items =
 [

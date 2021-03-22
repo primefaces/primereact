@@ -1,79 +1,66 @@
-import React, {Component} from 'react';
-import {DataScroller} from '../../components/datascroller/DataScroller';
-import {Button} from '../../components/button/Button';
-import {CarService} from '../service/CarService';
-import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
-import {DataScrollerSubmenu} from '../../showcase/datascroller/DataScrollerSubmenu';
+import React, { Component } from 'react';
+import { DataScroller } from '../../components/datascroller/DataScroller';
+import { Button } from '../../components/button/Button';
+import { Rating } from '../../components/rating/Rating';
+import ProductService from '../service/ProductService';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
+import './DataScrollerDemo.scss';
 
 export class DataScrollerLoaderDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
-            cars: []
+            products: []
         };
-        this.carservice = new CarService();
-        this.carTemplate = this.carTemplate.bind(this);
+
+        this.productService = new ProductService();
+        this.itemTemplate = this.itemTemplate.bind(this);
     }
 
     componentDidMount() {
-        this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
+        this.productService.getProducts().then(data => this.setState({ products: data }));
     }
 
-    carTemplate(car) {
-        if (!car) {
-            return;
-        }
-
-        const src = "showcase/resources/demo/images/car/" + car.brand + ".png";
-
+    itemTemplate(data) {
         return (
-            <div className="p-grid car-item">
-                <div className="p-col-12 p-md-3">
-                    <img src={src} alt="Car" />
+            <div className="product-item">
+                <img src={`showcase/demo/images/product/${data.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
+                <div className="product-detail">
+                    <div className="product-name">{data.name}</div>
+                    <div className="product-description">{data.description}</div>
+                    <Rating value={data.rating} readOnly cancel={false}></Rating>
+                    <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
                 </div>
-                <div className="p-col-12 p-md-9">
-                    <div className="p-grid">
-                        <div className="p-col-2 p-sm-6">Vin: </div>
-                        <div className="p-col-10 p-sm-6">{car.vin}</div>
-
-                        <div className="p-col-2 p-sm-6">Year: </div>
-                        <div className="p-col-10 p-sm-6">{car.year}</div>
-
-                        <div className="p-col-2 p-sm-6">Brand: </div>
-                        <div className="p-col-10 p-sm-6">{car.brand}</div>
-
-                        <div className="p-col-2 p-sm-6">Color: </div>
-                        <div className="p-col-10 p-sm-6">{car.color}</div>
-                    </div>
+                <div className="product-action">
+                    <span className="product-price">${data.price}</span>
+                    <Button icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                    <span className={`product-badge status-${data.inventoryStatus.toLowerCase()}`}>{data.inventoryStatus}</span>
                 </div>
             </div>
         );
     }
 
     render() {
-        const footer = <Button ref={(el) => this.loadButton = el} type="text" icon="pi pi-plus" label="Load" />;
+        const footer = <Button type="text" icon="pi pi-plus" label="Load" onClick={() => this.ds.load()} />;
 
         return (
-            <div className="datascroll-demo">
-                <DataScrollerSubmenu />
-
+            <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>DataScroller - Loader</h1>
+                    <AppInlineHeader changelogText="dataScroller">
+                        <h1>DataScroller <span>Loader</span></h1>
                         <p>Instead of scrolling, a custom element can be used to load data.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("dataScroller")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
-                <div className="content-section implementation">
-                    <DataScroller value={this.state.cars} itemTemplate={this.carTemplate} rows={5}
-                        loader={this.loadButton} footer={footer} header="Click Load Button at Footer to Load More"/>
+                <div className="content-section implementation datascroller-demo">
+                    <div className="card">
+                        <DataScroller ref={(el) => this.ds = el} value={this.state.products} itemTemplate={this.itemTemplate} rows={5}
+                            loader footer={footer} header="Click Load Button at Footer to Load More" />
+                    </div>
                 </div>
 
                 <DataScrollerLoaderDoc />
@@ -84,88 +71,282 @@ export class DataScrollerLoaderDemo extends Component {
 
 export class DataScrollerLoaderDoc extends Component {
 
-    render() {
-        return (
-            <div className="content-section documentation">
-                <TabView>
-                    <TabPanel header="Source">
-<CodeHighlight className="language-javascript">
-{`
-import React, {Component} from 'react';
-import {DataScroller} from 'primereact/datascroller';
-import {Button} from 'primereact/button';
-import {CarService} from '../service/CarService';
+    constructor(props) {
+        super(props);
+
+        this.sources = {
+            'class': {
+                tabName: 'Class Source',
+                content: `
+import React, { Component } from 'react';
+import { DataScroller } from 'primereact/datascroller';
+import { Button } from 'primereact/button';
+import { Rating } from 'primereact/rating';
+import ProductService from '../service/ProductService';
+import './DataScrollerDemo.css';
 
 export class DataScrollerLoaderDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
-            cars: []
+            products: []
         };
-        this.carservice = new CarService();
-        this.carTemplate = this.carTemplate.bind(this);
+
+        this.productService = new ProductService();
+        this.itemTemplate = this.itemTemplate.bind(this);
     }
 
     componentDidMount() {
-        this.carservice.getCarsLarge().then(data => this.setState({cars: data}));
+        this.productService.getProducts().then(data => this.setState({ products: data }));
     }
 
-    carTemplate(car) {
-        if (!car) {
-            return;
-        }
-
-        const src = "showcase/resources/demo/images/car/" + car.brand + ".png";
-
+    itemTemplate(data) {
         return (
-            <div className="p-grid car-item">
-                <div className="p-col-12 p-md-3">
-                    <img src={src} alt="Car" />
+            <div className="product-item">
+                <img src={\`showcase/demo/images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
+                <div className="product-detail">
+                    <div className="product-name">{data.name}</div>
+                    <div className="product-description">{data.description}</div>
+                    <Rating value={data.rating} readOnly cancel={false}></Rating>
+                    <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
                 </div>
-                <div className="p-col-12 p-md-9">
-                    <div className="p-grid">
-                        <div className="p-col-2 p-sm-6">Vin: </div>
-                        <div className="p-col-10 p-sm-6">{car.vin}</div>
-
-                        <div className="p-col-2 p-sm-6">Year: </div>
-                        <div className="p-col-10 p-sm-6">{car.year}</div>
-
-                        <div className="p-col-2 p-sm-6">Brand: </div>
-                        <div className="p-col-10 p-sm-6">{car.brand}</div>
-
-                        <div className="p-col-2 p-sm-6">Color: </div>
-                        <div className="p-col-10 p-sm-6">{car.color}</div>
-                    </div>
+                <div className="product-action">
+                    <span className="product-price">\${data.price}</span>
+                    <Button icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                    <span className={\`product-badge status-\${data.inventoryStatus.toLowerCase()}\`}>{data.inventoryStatus}</span>
                 </div>
             </div>
         );
     }
 
     render() {
-        const footer = <Button ref={(el) => this.loadButton = el} type="text" icon="pi pi-plus" label="Load" />;
+        const footer = <Button type="text" icon="pi pi-plus" label="Load" onClick={() => this.ds.load()} />;
 
         return (
-            <div className="datascroll-demo">
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>DataScroller - Loader</h1>
-                        <p>Instead of scrolling, a custom element can be used to load data.</p>
-                    </div>
-                </div>
-
-                <div className="content-section implementation">
-                    <DataScroller value={this.state.cars} itemTemplate={this.carTemplate} rows={5}
-                        loader={this.loadButton} footer={footer} header="Click Load Button at Footer to Load More"/>
+            <div className="datascroller-demo">
+                <div className="card">
+                    <DataScroller ref={(el) => this.ds = el} value={this.state.products} itemTemplate={this.itemTemplate} rows={5}
+                        loader footer={footer} header="Click Load Button at Footer to Load More" />
                 </div>
             </div>
         );
     }
 }
+                `
+            },
+            'hooks': {
+                tabName: 'Hooks Source',
+                content: `
+import React, { useState, useEffect, useRef } from 'react';
+import { DataScroller } from 'primereact/datascroller';
+import { Button } from 'primereact/button';
+import { Rating } from 'primereact/rating';
+import ProductService from '../service/ProductService';
+import './DataScrollerDemo.css';
 
-`}
-</CodeHighlight>
-                    </TabPanel>
+const DataScrollerLoaderDemo = () => {
+    const [products, setProducts] = useState([]);
+    const ds = useRef(null);
+    const productService = new ProductService();
+
+    useEffect(() => {
+        this.productService.getProducts().then(data => this.setState({ products: data }));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const itemTemplate = (data) => {
+        return (
+            <div className="product-item">
+                <img src={\`showcase/demo/images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
+                <div className="product-detail">
+                    <div className="product-name">{data.name}</div>
+                    <div className="product-description">{data.description}</div>
+                    <Rating value={data.rating} readOnly cancel={false}></Rating>
+                    <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
+                </div>
+                <div className="product-action">
+                    <span className="product-price">\${data.price}</span>
+                    <Button icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                    <span className={\`product-badge status-\${data.inventoryStatus.toLowerCase()}\`}>{data.inventoryStatus}</span>
+                </div>
+            </div>
+        );
+    }
+
+    const footer = <Button type="text" icon="pi pi-plus" label="Load" onClick={() => ds.load()} />;
+
+    return (
+        <div className="datascroller-demo">
+            <div className="card">
+                <DataScroller ref={ds} value={products} itemTemplate={itemTemplate} rows={5}
+                    loader footer={footer} header="Click Load Button at Footer to Load More" />
+            </div>
+        </div>
+    );
+}
+                `
+            },
+            'ts': {
+                tabName: 'TS Source',
+                content: `
+import React, { useState, useEffect, useRef } from 'react';
+import { DataScroller } from 'primereact/datascroller';
+import { Button } from 'primereact/button';
+import { Rating } from 'primereact/rating';
+import ProductService from '../service/ProductService';
+import './DataScrollerDemo.css';
+
+const DataScrollerLoaderDemo = () => {
+    const [products, setProducts] = useState([]);
+    const ds = useRef(null);
+    const productService = new ProductService();
+
+    useEffect(() => {
+        this.productService.getProducts().then(data => this.setState({ products: data }));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const itemTemplate = (data) => {
+        return (
+            <div className="product-item">
+                <img src={\`showcase/demo/images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
+                <div className="product-detail">
+                    <div className="product-name">{data.name}</div>
+                    <div className="product-description">{data.description}</div>
+                    <Rating value={data.rating} readOnly cancel={false}></Rating>
+                    <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
+                </div>
+                <div className="product-action">
+                    <span className="product-price">\${data.price}</span>
+                    <Button icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                    <span className={\`product-badge status-\${data.inventoryStatus.toLowerCase()}\`}>{data.inventoryStatus}</span>
+                </div>
+            </div>
+        );
+    }
+
+    const footer = <Button type="text" icon="pi pi-plus" label="Load" onClick={() => ds.load()} />;
+
+    return (
+        <div className="datascroller-demo">
+            <div className="card">
+                <DataScroller ref={ds} value={products} itemTemplate={itemTemplate} rows={5}
+                    loader footer={footer} header="Click Load Button at Footer to Load More" />
+            </div>
+        </div>
+    );
+}
+                `
+            }
+        }
+
+        this.extFiles = {
+            'src/demo/DataScrollerDemo.css': {
+                content: `
+.datascroller-demo .product-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.datascroller-demo .product-description {
+    margin: 0 0 1rem 0;
+}
+
+.datascroller-demo .product-category-icon {
+    vertical-align: middle;
+    margin-right: .5rem;
+}
+
+.datascroller-demo .product-category {
+    font-weight: 600;
+    vertical-align: middle;
+}
+
+.datascroller-demo .product-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    width: 100%;
+}
+
+.datascroller-demo .product-item img {
+    width: 150px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    margin-right: 2rem;
+}
+
+.datascroller-demo .product-item .product-detail {
+    flex: 1 1 0;
+}
+
+.datascroller-demo .product-item .p-rating {
+    margin: 0 0 .5rem 0;
+}
+
+.datascroller-demo .product-item .product-price {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: .5rem;
+    align-self: flex-end;
+}
+
+.datascroller-demo .product-item .product-action {
+    display: flex;
+    flex-direction: column;
+}
+
+.datascroller-demo .product-item .p-button {
+    margin-bottom: .5rem;
+}
+
+@media screen and (max-width: 576px) {
+    .datascroller-demo .product-item {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .datascroller-demo .product-item img {
+        width: 75%;
+        margin: 2rem 0;
+    }
+
+    .datascroller-demo .product-item .product-detail {
+        text-align: center;
+    }
+
+    .datascroller-demo .product-item .product-price {
+        align-self: center;
+    }
+
+    .datascroller-demo .product-item .product-action {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .datascroller-demo .product-item .product-action {
+        margin-top: 2rem;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+}
+                `
+            }
+        }
+    }
+
+    shouldComponentUpdate() {
+        return false;
+    }
+
+    render() {
+        return (
+            <div className="content-section documentation">
+                <TabView>
+                    {
+                        useLiveEditorTabs({ name: 'DataScrollerLoaderDemo', sources: this.sources, service: 'ProductService', data: 'products', extFiles: this.extFiles })
+                    }
                 </TabView>
             </div>
         );

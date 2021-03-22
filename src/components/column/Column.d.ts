@@ -4,6 +4,7 @@ interface ColumnProps {
     columnKey?: string;
     field?: string;
     sortField?: string;
+    filterField?: string;
     header?: any;
     body?: any;
     loadingBody?: any;
@@ -15,6 +16,8 @@ interface ColumnProps {
     filterType?: string;
     filterMaxLength?: number;
     filterElement?: object;
+    filterHeaderStyle?: object;
+    filterHeaderClassName?: string;
     style?: object;
     className?: string;
     headerStyle?: object;
@@ -33,13 +36,17 @@ interface ColumnProps {
     editorValidatorEvent?: string;
     rowEditor?: boolean;
     exportable?: boolean;
-    onEditorSubmit?(props: any): void;
-    onEditorCancel?(props: any): void;
+    reorderable?: boolean;
     excludeGlobalFilter?: boolean;
+    onEditorInit?(e: {originalEvent: Event, columnProps: any}): void;
+    onEditorSubmit?(e: {originalEvent: Event, columnProps: any}): void;
+    onEditorCancel?(e: {originalEvent: Event, columnProps: any}): void;
     sortFunction?(e: {field: string, order: number}): void;
     filterFunction?(value: any, filter: any): void;
     editor?(props: any): JSX.Element | undefined;
-    editorValidator?(props: any): boolean;
+    editorValidator?(e: {originalEvent: Event, columnProps: any}): boolean;
+    onBeforeEditorHide?(e: {originalEvent: Event, columnProps: any}): any;
+    onBeforeEditorShow?(e: {originalEvent: Event, columnProps: any}): any;
 }
 
 export class Column extends React.Component<ColumnProps,any> {}

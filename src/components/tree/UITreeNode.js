@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
+import { Ripple } from '../ripple/Ripple';
 
 export class UITreeNode extends Component {
 
@@ -163,6 +164,10 @@ export class UITreeNode extends Component {
 
         const nodeElement = event.target.parentElement;
 
+        if (!DomHandler.hasClass(nodeElement, 'p-treenode')) {
+            return;
+        }
+
         switch (event.which) {
             //down arrow
             case 40:
@@ -267,7 +272,7 @@ export class UITreeNode extends Component {
     }
 
     onClick(event) {
-        if ((event.target.className && event.target.className.indexOf('p-tree-toggler') === 0) || this.props.disabled) {
+        if ((event.target.className && event.target.className.constructor === String && event.target.className.indexOf('p-tree-toggler') === 0) || this.props.disabled) {
             return;
         }
 
@@ -538,20 +543,20 @@ export class UITreeNode extends Component {
     }
 
     onDropPointDragOver(event) {
-        if (event.dataTransfer.types[1] === this.props.dragdropScope) {
+        if (event.dataTransfer.types[1] === this.props.dragdropScope.toLocaleLowerCase()) {
             event.dataTransfer.dropEffect = 'move';
             event.preventDefault();
         }
     }
 
     onDropPointDragEnter(event) {
-        if (event.dataTransfer.types[1] === this.props.dragdropScope) {
+        if (event.dataTransfer.types[1] === this.props.dragdropScope.toLocaleLowerCase()) {
             DomHandler.addClass(event.target, 'p-treenode-droppoint-active');
         }
     }
 
     onDropPointDragLeave(event) {
-        if (event.dataTransfer.types[1] === this.props.dragdropScope) {
+        if (event.dataTransfer.types[1] === this.props.dragdropScope.toLocaleLowerCase()) {
             DomHandler.removeClass(event.target, 'p-treenode-droppoint-active');
         }
     }
@@ -565,14 +570,15 @@ export class UITreeNode extends Component {
             if (this.props.onDrop) {
                 this.props.onDrop({
                     originalEvent: event,
-                    path: this.props.path
+                    path: this.props.path,
+                    index: this.props.index
                 });
             }
         }
     }
 
     onDragOver(event) {
-        if (event.dataTransfer.types[1] === this.props.dragdropScope && this.props.node.droppable !== false) {
+        if (event.dataTransfer.types[1] === this.props.dragdropScope.toLocaleLowerCase() && this.props.node.droppable !== false) {
             event.dataTransfer.dropEffect = 'move';
             event.preventDefault();
             event.stopPropagation();
@@ -580,13 +586,13 @@ export class UITreeNode extends Component {
     }
 
     onDragEnter(event) {
-        if (event.dataTransfer.types[1] === this.props.dragdropScope && this.props.node.droppable !== false) {
+        if (event.dataTransfer.types[1] === this.props.dragdropScope.toLocaleLowerCase() && this.props.node.droppable !== false) {
             DomHandler.addClass(this.contentElement, 'p-treenode-dragover');
         }
     }
 
     onDragLeave(event) {
-        if (event.dataTransfer.types[1] === this.props.dragdropScope && this.props.node.droppable !== false) {
+        if (event.dataTransfer.types[1] === this.props.dragdropScope.toLocaleLowerCase() && this.props.node.droppable !== false) {
             let rect = event.currentTarget.getBoundingClientRect();
             if (event.nativeEvent.x > rect.left + rect.width || event.nativeEvent.x < rect.left || event.nativeEvent.y >= Math.floor(rect.top + rect.height) || event.nativeEvent.y < rect.top) {
                 DomHandler.removeClass(this.contentElement, 'p-treenode-dragover');
@@ -629,7 +635,7 @@ export class UITreeNode extends Component {
         if (this.isCheckboxSelectionMode() && this.props.node.selectable !== false) {
             const checked = this.isChecked();
             const partialChecked = this.isPartialChecked();
-            const className = classNames('p-checkbox-box', {'p-highlight': checked, 'p-disabled': this.props.disabled});
+            const className = classNames('p-checkbox-box', {'p-highlight': checked, 'p-indeterminate': partialChecked, 'p-disabled': this.props.disabled});
             const icon = classNames('p-checkbox-icon p-c', {'pi pi-check': checked, 'pi pi-minus': partialChecked});
 
             return (
@@ -640,9 +646,8 @@ export class UITreeNode extends Component {
                 </div>
             )
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderIcon(expanded) {
@@ -655,18 +660,18 @@ export class UITreeNode extends Component {
                <span className={className}></span>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderToggler(expanded) {
-        const iconClassName = classNames('p-tree-toggler-icon pi pi-fw', {'pi-caret-right': !expanded, 'pi-caret-down': expanded});
+        const iconClassName = classNames('p-tree-toggler-icon pi pi-fw', {'pi-chevron-right': !expanded, 'pi-chevron-down': expanded});
 
         return (
-            <span className="p-tree-toggler p-unselectable-text p-link" onClick={this.onTogglerClick}>
+            <button type="button" className="p-tree-toggler p-link" tabIndex={-1} onClick={this.onTogglerClick}>
                 <span className={iconClassName}></span>
-            </span>
+                <Ripple />
+            </button>
         );
     }
 
@@ -677,9 +682,8 @@ export class UITreeNode extends Component {
                         onDragEnter={this.onDropPointDragEnter} onDragLeave={this.onDropPointDragLeave}></li>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderContent() {
@@ -696,7 +700,7 @@ export class UITreeNode extends Component {
         const checkbox = this.renderCheckbox();
         const icon = this.renderIcon(expanded);
         const label = this.renderLabel();
-        const tabIndex = this.props.disabled ? undefined : '0';
+        const tabIndex = this.props.disabled ? undefined : 0;
 
         return (
             <div ref={(el) => this.contentElement = el} className={className} style={this.props.node.style} onClick={this.onClick} onContextMenu={this.onRightClick} onTouchEnd={this.onTouchEnd} draggable={this.props.dragdropScope && this.props.node.draggable !== false && !this.props.disabled}
@@ -731,13 +735,12 @@ export class UITreeNode extends Component {
                 </ul>
             )
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderNode() {
-        const className = classNames('p-treenode', this.props.node.className, {'p-treenode-leaf': this.isLeaf()})
+        const className = classNames('p-treenode', {'p-treenode-leaf': this.isLeaf()}, this.props.node.className)
         const content = this.renderContent();
         const children = this.renderChildren();
 
@@ -757,11 +760,11 @@ export class UITreeNode extends Component {
             const afterDropPoint = this.props.last ? this.renderDropPoint(1) : null;
 
             return (
-                <React.Fragment>
+                <>
                     {beforeDropPoint}
                     {node}
                     {afterDropPoint}
-                </React.Fragment>
+                </>
             );
         }
         else {

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import * as ChartJS from 'chart.js';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 
 export class Chart extends Component {
 
@@ -28,52 +27,57 @@ export class Chart extends Component {
     };
 
     initChart() {
-        this.chart = new ChartJS.Chart(this.canvas, {
-            type: this.props.type,
-            data: this.props.data,
-            options: this.props.options
+        import('chart.js').then((module) => {
+            if (module && module.default) {
+                this.chart = new module.default(this.canvas, {
+                    type: this.props.type,
+                    data: this.props.data,
+                    options: this.props.options
+                });
+            }
         });
     }
 
     getCanvas() {
         return this.canvas;
     }
-    
+
     getBase64Image() {
         return this.chart.toBase64Image();
     }
-    
+
     generateLegend() {
         if(this.chart) {
             this.chart.generateLegend();
         }
     }
-    
+
     refresh() {
         if(this.chart) {
             this.chart.update();
         }
     }
-    
+
     reinit() {
-        if(this.chart) {
+        if (this.chart) {
             this.chart.destroy();
-            this.initChart();
         }
+        this.initChart();
     }
 
-    shouldComponentUpdate(nextProps){	
-        if(nextProps.data === this.props.data) {	
-            return false;	
+    shouldComponentUpdate(nextProps) {
+        if (nextProps.data === this.props.data && nextProps.options === this.props.options && nextProps.type === this.props.type) {
+            return false;
         }
-        return true;	
+
+        return true;
     }
 
     componentDidMount() {
         this.initChart();
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate() {
         this.reinit();
     }
 

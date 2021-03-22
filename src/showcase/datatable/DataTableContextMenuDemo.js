@@ -1,76 +1,83 @@
 import React, { Component } from 'react';
-import {DataTable} from '../../components/datatable/DataTable';
-import {Column} from '../../components/column/Column';
-import {ContextMenu} from '../../components/contextmenu/ContextMenu';
-import {Growl} from '../../components/growl/Growl';
-import {CarService} from '../service/CarService';
-import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
-import {TabView,TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../codehighlight/CodeHighlight';
-import AppContentContext from '../../AppContentContext';
+import { DataTable } from '../../components/datatable/DataTable';
+import { Column } from '../../components/column/Column';
+import { ContextMenu } from '../../components/contextmenu/ContextMenu';
+import { Toast } from '../../components/toast/Toast';
+import ProductService from '../service/ProductService';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class DataTableContextMenuDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
-            menu: [
-                {label: 'View', icon: 'pi pi-fw pi-search', command: (event) => this.viewCar(this.state.selectedCar)},
-                {label: 'Delete', icon: 'pi pi-fw pi-times', command: (event) => this.deleteCar(this.state.selectedCar)}
-            ]
+            products: [],
+            selectedProduct: null
         };
-        this.carservice = new CarService();
-        this.viewCar = this.viewCar.bind(this);
-        this.deleteCar = this.deleteCar.bind(this);
+
+        this.menuModel = [
+            {label: 'View', icon: 'pi pi-fw pi-search', command: () => this.viewProduct(this.state.selectedProduct)},
+            {label: 'Delete', icon: 'pi pi-fw pi-times', command: () => this.deleteProduct(this.state.selectedProduct)}
+        ];
+
+        this.productService = new ProductService();
+        this.viewProduct = this.viewProduct.bind(this);
+        this.deleteProduct = this.deleteProduct.bind(this);
+        this.priceBodyTemplate = this.priceBodyTemplate.bind(this);
     }
 
     componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
     }
 
-    viewCar(car) {
-        this.growl.show({severity: 'info', summary: 'Car Selected', detail: car.vin + ' - ' + car.brand});
+    viewProduct(product) {
+        this.toast.show({severity: 'info', summary: 'Product Selected', detail: product.name});
     }
 
-    deleteCar(car) {
-        let carsList = [...this.state.cars];
-        carsList = carsList.filter((c) => c.vin !== car.vin);
+    deleteProduct(product) {
+        let products = [...this.state.products];
+        products = products.filter((p) => p.id !== product.id);
 
-        this.growl.show({severity: 'info', summary: 'Car Delete', detail: car.vin + ' - ' + car.brand});
-        this.setState({
-            cars: carsList
-        });
+        this.toast.show({severity: 'info', summary: 'Product Deleted', detail: product.name});
+        this.setState({ products });
+    }
+
+    formatCurrency(value) {
+        return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+    }
+
+    priceBodyTemplate(rowData) {
+        return this.formatCurrency(rowData.price);
     }
 
     render() {
         return (
             <div>
-                <DataTableSubmenu />
-
                 <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>DataTable - ContextMenu</h1>
+                    <AppInlineHeader changelogText="dataTable">
+                        <h1>DataTable <span>ContextMenu</span></h1>
                         <p>DataTable has exclusive integration with ContextMenu.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("dataTable")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
                 </div>
 
                 <div className="content-section implementation">
-                    <Growl ref={(el) => { this.growl = el; }}></Growl>
+                    <Toast ref={(el) => { this.toast = el; }}></Toast>
 
-                    <ContextMenu model={this.state.menu} ref={el => this.cm = el} onHide={() => this.setState({selectedCar: null})}/>
+                    <ContextMenu model={this.menuModel} ref={el => this.cm = el} onHide={() => this.setState({ selectedProduct: null })}/>
 
-                    <DataTable value={this.state.cars} header="Right Click"
-                        contextMenuSelection={this.state.selectedCar} onContextMenuSelectionChange={e => this.setState({selectedCar: e.value})}
-                        onContextMenu={e => this.cm.show(e.originalEvent)}>
-                        <Column field="vin" header="Vin" />
-                        <Column field="year" header="Year" />
-                        <Column field="brand" header="Brand" />
-                        <Column field="color" header="Color" />
-                    </DataTable>
+                    <div className="card">
+                        <DataTable value={this.state.products} contextMenuSelection={this.state.selectedProduct}
+                            onContextMenuSelectionChange={e => this.setState({ selectedProduct: e.value })}
+                            onContextMenu={e => this.cm.show(e.originalEvent)}>
+                            <Column field="code" header="Code"></Column>
+                            <Column field="name" header="Name"></Column>
+                            <Column field="category" header="Category"></Column>
+                            <Column field="price" header="Price" body={this.priceBodyTemplate} />
+                        </DataTable>
+                    </div>
                 </div>
 
                 <DataTableContextMenuDemoDoc></DataTableContextMenuDemoDoc>
@@ -81,7 +88,224 @@ export class DataTableContextMenuDemo extends Component {
 
 export class DataTableContextMenuDemoDoc extends Component {
 
-    shouldComponentUpdate(){
+    constructor(props) {
+        super(props);
+
+        this.sources = {
+            'class': {
+                tabName: 'Class Source',
+                content: `
+import React, { Component } from 'react';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { ContextMenu } from 'primereact/contextmenu';
+import { Toast } from 'primereact/toast';
+import ProductService from '../service/ProductService';
+
+export class DataTableContextMenuDemo extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            products: [],
+            selectedProduct: null
+        };
+
+        this.menuModel = [
+            {label: 'View', icon: 'pi pi-fw pi-search', command: () => this.viewProduct(this.state.selectedProduct)},
+            {label: 'Delete', icon: 'pi pi-fw pi-times', command: () => this.deleteProduct(this.state.selectedProduct)}
+        ];
+
+        this.productService = new ProductService();
+        this.viewProduct = this.viewProduct.bind(this);
+        this.deleteProduct = this.deleteProduct.bind(this);
+        this.priceBodyTemplate = this.priceBodyTemplate.bind(this);
+    }
+
+    componentDidMount() {
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
+    }
+
+    viewProduct(product) {
+        this.toast.show({severity: 'info', summary: 'Product Selected', detail: product.name});
+    }
+
+    deleteProduct(product) {
+        let products = [...this.state.products];
+        products = products.filter((p) => p.id !== product.id);
+
+        this.toast.show({severity: 'info', summary: 'Product Deleted', detail: product.name});
+        this.setState({ products });
+    }
+
+    formatCurrency(value) {
+        return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+    }
+
+    priceBodyTemplate(rowData) {
+        return this.formatCurrency(rowData.price);
+    }
+
+    render() {
+        return (
+            <div>
+                <Toast ref={(el) => { this.toast = el; }}></Toast>
+
+                <ContextMenu model={this.menuModel} ref={el => this.cm = el} onHide={() => this.setState({ selectedProduct: null })}/>
+
+                <div className="card">
+                    <DataTable value={this.state.products} contextMenuSelection={this.state.selectedProduct}
+                        onContextMenuSelectionChange={e => this.setState({ selectedProduct: e.value })}
+                        onContextMenu={e => this.cm.show(e.originalEvent)}>
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="price" header="Price" body={this.priceBodyTemplate} />
+                    </DataTable>
+                </div>
+            </div>
+        );
+    }
+}
+                `
+            },
+            'hooks': {
+                tabName: 'Hooks Source',
+                content: `
+import React, { useState, useEffect, useRef } from 'react';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { ContextMenu } from 'primereact/contextmenu';
+import { Toast } from 'primereact/toast';
+import ProductService from '../service/ProductService';
+
+const DataTableContextMenuDemo = () => {
+    const [products, setProducts] = useState([]);
+    const [selectedProduct, setSelectedProduct] = useState(null);
+    const toast = useRef(null);
+    const cm = useRef(null);
+    const menuModel = [
+        {label: 'View', icon: 'pi pi-fw pi-search', command: () => viewProduct(selectedProduct)},
+        {label: 'Delete', icon: 'pi pi-fw pi-times', command: () => deleteProduct(selectedProduct)}
+    ];
+    const productService = new ProductService();
+
+    useEffect(() => {
+        productService.getProductsSmall().then(data => setProducts(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const viewProduct = (product) => {
+        toast.current.show({severity: 'info', summary: 'Product Selected', detail: product.name});
+    }
+
+    const deleteProduct = (product) => {
+        let _products = [...products];
+        _products = _products.filter((p) => p.id !== product.id);
+
+        toast.current.show({severity: 'info', summary: 'Product Deleted', detail: product.name});
+        setProducts(_products);
+    }
+
+    const formatCurrency = (value) => {
+        return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+    }
+
+    const priceBodyTemplate = (rowData) => {
+        return formatCurrency(rowData.price);
+    }
+
+    return (
+        <div>
+            <Toast ref={toast}></Toast>
+
+            <ContextMenu model={menuModel} ref={cm} onHide={() => setSelectedProduct(null)}/>
+
+            <div className="card">
+                <DataTable value={products} contextMenuSelection={selectedProduct}
+                    onContextMenuSelectionChange={e => setSelectedProduct(e.value)}
+                    onContextMenu={e => cm.current.show(e.originalEvent)}>
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="price" header="Price" body={priceBodyTemplate} />
+                </DataTable>
+            </div>
+        </div>
+    );
+}
+                `
+            },
+            'ts': {
+                tabName: 'TS Source',
+                content: `
+import React, { useState, useEffect, useRef } from 'react';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { ContextMenu } from 'primereact/contextmenu';
+import { Toast } from 'primereact/toast';
+import ProductService from '../service/ProductService';
+
+const DataTableContextMenuDemo = () => {
+    const [products, setProducts] = useState([]);
+    const [selectedProduct, setSelectedProduct] = useState(null);
+    const toast = useRef(null);
+    const cm = useRef(null);
+    const menuModel = [
+        {label: 'View', icon: 'pi pi-fw pi-search', command: () => viewProduct(selectedProduct)},
+        {label: 'Delete', icon: 'pi pi-fw pi-times', command: () => deleteProduct(selectedProduct)}
+    ];
+    const productService = new ProductService();
+
+    useEffect(() => {
+        productService.getProductsSmall().then(data => setProducts(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const viewProduct = (product) => {
+        toast.current.show({severity: 'info', summary: 'Product Selected', detail: product.name});
+    }
+
+    const deleteProduct = (product) => {
+        let _products = [...products];
+        _products = _products.filter((p) => p.id !== product.id);
+
+        toast.current.show({severity: 'info', summary: 'Product Deleted', detail: product.name});
+        setProducts(_products);
+    }
+
+    const formatCurrency = (value) => {
+        return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+    }
+
+    const priceBodyTemplate = (rowData) => {
+        return formatCurrency(rowData.price);
+    }
+
+    return (
+        <div>
+            <Toast ref={toast}></Toast>
+
+            <ContextMenu model={menuModel} ref={cm} onHide={() => setSelectedProduct(null)}/>
+
+            <div className="card">
+                <DataTable value={products} contextMenuSelection={selectedProduct}
+                    onContextMenuSelectionChange={e => setSelectedProduct(e.value)}
+                    onContextMenu={e => cm.current.show(e.originalEvent)}>
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="price" header="Price" body={priceBodyTemplate} />
+                </DataTable>
+            </div>
+        </div>
+    );
+}
+                `
+            }
+        }
+    }
+
+    shouldComponentUpdate() {
         return false;
     }
 
@@ -89,81 +313,9 @@ export class DataTableContextMenuDemoDoc extends Component {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    <TabPanel header="Source">
-<CodeHighlight className="language-javascript">
-{`
-import React, { Component } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {ContextMenu} from 'primereact/contextmenu';
-import {Growl} from 'primereact/growl';
-import {CarService} from '../service/CarService';
-
-export class DataTableContextMenuDemo extends Component {
-
-    constructor() {
-        super();
-        this.state = {
-            menu: [
-                {label: 'View', icon: 'pi pi-fw pi-search', command: (event) => this.viewCar(this.state.selectedCar)},
-                {label: 'Delete', icon: 'pi pi-fw pi-times', command: (event) => this.deleteCar(this.state.selectedCar)}
-            ]
-        };
-        this.carservice = new CarService();
-        this.viewCar = this.viewCar.bind(this);
-        this.deleteCar = this.deleteCar.bind(this);
-    }
-
-    componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
-    }
-
-    viewCar(car) {
-        this.growl.show({severity: 'info', summary: 'Car Selected', detail: car.vin + ' - ' + car.brand});
-    }
-
-    deleteCar(car) {
-        let carsList = [...this.state.cars];
-        carsList = carsList.filter((c) => c.vin !== car.vin);
-
-        this.growl.show({severity: 'info', summary: 'Car Delete', detail: car.vin + ' - ' + car.brand});
-        this.setState({
-            cars: carsList
-        });
-    }
-
-    render() {
-        return (
-            <div>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>DataTable - ContextMenu</h1>
-                        <p>DataTable has exclusive integration with ContextMenu.</p>
-                    </div>
-                </div>
-
-                <div className="content-section implementation">
-                    <Growl ref={(el) => { this.growl = el; }}></Growl>
-
-                    <ContextMenu model={this.state.menu} ref={el => this.cm = el} onHide={() => this.setState({selectedCar: null})}/>
-
-                    <DataTable value={this.state.cars} header="Right Click"
-                        contextMenuSelection={this.state.selectedCar} onContextMenuSelectionChange={e => this.setState({selectedCar: e.value})}
-                        onContextMenu={e => this.cm.show(e.originalEvent)}>
-                        <Column field="vin" header="Vin" />
-                        <Column field="year" header="Year" />
-                        <Column field="brand" header="Brand" />
-                        <Column field="color" header="Color" />
-                    </DataTable>
-                </div>
-            </div>
-        );
-    }
-}
-
-`}
-</CodeHighlight>
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'DataTableContextMenuDemo', sources: this.sources, service: 'ProductService', data: 'products-small' })
+                    }
                 </TabView>
             </div>
         )

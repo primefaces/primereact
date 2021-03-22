@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export interface PageState{
+export interface PageState {
     first: number,
     rows: number,
     page: number,
@@ -16,10 +16,11 @@ interface PaginatorProps {
     alwaysShow?: boolean;
     style?: object;
     className?: string;
-    template?: string;
+    template?: string | object;
     leftContent?: JSX.Element | undefined;
     rightContent?: JSX.Element | undefined;
     currentPageReportTemplate?: string;
+    dropdownAppendTo?: any;
     onPageChange?(event: PageState): void;
 }
 

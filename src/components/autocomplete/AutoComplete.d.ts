@@ -1,6 +1,11 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
+type CompleteMethodParams = {
+    originalEvent: Event,
+    query: string
+}
+
 interface AutoCompleteProps {
     id?: string;
     value?: any;
@@ -8,6 +13,10 @@ interface AutoCompleteProps {
     type?: string;
     suggestions?: any[];
     field?: string;
+    optionGroupLabel?: string;
+    optionGroupChildren?: string;
+    forceSelection?: boolean;
+    autoHighlight?: boolean;
     scrollHeight?: string;
     dropdown?: boolean;
     dropdownMode?: string;
@@ -19,21 +28,24 @@ interface AutoCompleteProps {
     inputId?: string;
     inputStyle?: object;
     inputClassName?: string;
+    panelClassName?: string;
+    panelStyle?: object;
     placeholder?: string;
-    readonly?: boolean;
+    readOnly?: boolean;
     disabled?: boolean;
     maxlength?: number;
     size?: number;
     appendTo?: any;
-    tabindex?: number;
+    tabIndex?: number;
     autoFocus?: boolean;
     tooltip?: any;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
-    completeMethod?(e: {originalEvent: Event, query: string}): void;
-    itemTemplate?(data: any): JSX.Element | undefined;
-    selectedItemTemplate?(data: any): JSX.Element | undefined;
-    onChange?(e: {originalEvent: Event, value: any}): void;
+    completeMethod?(e: CompleteMethodParams): void;
+    itemTemplate?:((data: any, index: number) => any | any);
+    optionGroupTemplate?:((data: any, index: number) => any | any);
+    selectedItemTemplate?:((data: any) => any | any);
+    onChange?(e: {originalEvent: Event, value: any, target: {name: string, id: string, value: any}}): void;
     onFocus?(event: Event): void;
     onBlur?(event: Event): void;
     onSelect?(e: {originalEvent: Event, value: any}): void;

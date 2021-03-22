@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import Tooltip from "../tooltip/Tooltip";
+import { classNames } from '../utils/ClassNames';
+import { tip } from '../tooltip/Tooltip';
 
 export class RadioButton extends Component {
 
@@ -64,6 +64,7 @@ export class RadioButton extends Component {
                     name: this.props.name,
                     id: this.props.id,
                     value:  this.props.value,
+                    checked: !this.props.checked
                 }
             });
 
@@ -87,9 +88,9 @@ export class RadioButton extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.tooltip !== this.props.tooltip) {
+        if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
             if (this.tooltip)
-                this.tooltip.updateContent(this.props.tooltip);
+                this.tooltip.update({ content: this.props.tooltip, ...(this.props.tooltipOptions || {}) });
             else
                 this.renderTooltip();
         }
@@ -103,7 +104,7 @@ export class RadioButton extends Component {
     }
 
     renderTooltip() {
-        this.tooltip = new Tooltip({
+        this.tooltip = tip({
             target: this.element,
             content: this.props.tooltip,
             options: this.props.tooltipOptions
@@ -111,13 +112,20 @@ export class RadioButton extends Component {
     }
 
     render() {
-        if(this.input) {
+        if (this.input) {
             this.input.checked = this.props.checked;
         }
 
-        let containerClass = classNames('p-radiobutton p-component', this.props.className);
-        let boxClass = classNames('p-radiobutton-box p-component', {'p-highlight': this.props.checked, 'p-disabled': this.props.disabled, 'p-focus': this.state.focused});
-        let iconClass = classNames('p-radiobutton-icon p-c', { 'pi pi-circle-on': this.props.checked });
+        let containerClass = classNames('p-radiobutton p-component', {
+            'p-radiobutton-checked': this.props.checked,
+            'p-radiobutton-disabled': this.props.disabled,
+            'p-radiobutton-focused': this.state.focused
+        }, this.props.className);
+        let boxClass = classNames('p-radiobutton-box', {
+            'p-highlight': this.props.checked,
+            'p-disabled': this.props.disabled,
+            'p-focus': this.state.focused
+        });
 
         return (
             <div ref={(el) => this.element = el} id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick}>
@@ -126,7 +134,7 @@ export class RadioButton extends Component {
                         onFocus={this.onFocus} onBlur={this.onBlur} disabled={this.props.disabled} required={this.props.required} tabIndex={this.props.tabIndex}/>
                 </div>
                 <div className={boxClass} ref={(el) => { this.box = el; }} role="radio" aria-checked={this.props.checked}>
-                    <span className={iconClass}></span>
+                    <div className="p-radiobutton-icon"></div>
                 </div>
             </div>
         )

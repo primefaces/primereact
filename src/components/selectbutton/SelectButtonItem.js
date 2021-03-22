@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
+import { Ripple } from '../ripple/Ripple';
 
 export class SelectButtonItem extends Component {
 
@@ -10,23 +11,29 @@ export class SelectButtonItem extends Component {
         className: null,
         selected: null,
         tabIndex: null,
-        ariaLabelledBy:null,
+        ariaLabelledBy: null,
+        template: null,
         onClick: null
     };
 
     static propTypes = {
-        option: PropTypes.object,
-        label: PropTypes.string,
+        option: PropTypes.any,
+        label: PropTypes.any,
         className: PropTypes.string,
         selected: PropTypes.bool,
         tabIndex: PropTypes.number,
         ariaLabelledBy: PropTypes.string,
+        template: PropTypes.func,
         onClick: PropTypes.func
     };
 
     constructor(props) {
         super(props);
-        this.state = {};
+
+        this.state = {
+            focused: false
+        };
+
         this.onClick = this.onClick.bind(this);
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
@@ -39,44 +46,49 @@ export class SelectButtonItem extends Component {
                 originalEvent: event,
                 option: this.props.option
             });
-
-            this.input.focus();
         }
     }
 
     onFocus() {
-        this.setState({focused: true});
+        this.setState({ focused: true });
     }
 
     onBlur() {
-        this.setState({focused: false});
+        this.setState({ focused: false });
     }
 
     onKeyDown(event) {
-        if (event.key === 'Enter') {
+        const keyCode = event.which;
+        if (keyCode === 32 || keyCode === 13) { //space and enter
             this.onClick(event);
             event.preventDefault();
         }
     }
 
-    componentDidUpdate() {
-        this.input.checked = this.props.selected;
+    renderContent() {
+        if (this.props.template) {
+            return this.props.template(this.props.option);
+        }
+        else {
+            return (
+                <span className="p-button-label p-c">{this.props.label}</span>
+            );
+        }
     }
 
     render() {
-        let className = classNames('p-button p-component p-button-text-only', this.props.className, {
+        const className = classNames('p-button p-component', {
             'p-highlight': this.props.selected,
             'p-disabled': this.props.disabled,
             'p-focus': this.state.focused
-        });
+        }, this.props.className);
+        const content = this.renderContent();
 
         return (
-            <div ref={(el) => this.el = el} className={className} onClick={this.onClick} role="button" aria-pressed={this.props.selected} aria-labelledby={this.props.ariaLabelledBy}>
-                <span className="p-button-text p-c">{this.props.label}</span>
-                <div className="p-hidden-accessible">
-                    <input ref={(el) => this.input = el} type="checkbox" defaultChecked={this.props.selected} onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.onKeyDown}
-                        tabIndex={this.props.tabIndex} disabled={this.props.disabled} value={this.props.label}/>
-                </div>
+            <div className={className} role="button" aria-label={this.props.label} aria-pressed={this.props.selected} aria-labelledby={this.props.ariaLabelledBy}
+                onClick={this.onClick} onKeyDown={this.onKeyDown} tabIndex={this.props.tabIndex} onFocus={this.onFocus} onBlur={this.onBlur}>
+                {content}
+                { !this.props.disabled && <Ripple /> }
             </div>
         );
     }

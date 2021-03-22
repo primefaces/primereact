@@ -1,0 +1,15 @@
+.custom-scrolltop {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 4px;
+    background-color: var(--primary-color) !important;
+
+    &:hover {
+		background-color: var(--primary-color) !important;
+	}
+
+    .p-scrolltop-icon {
+        font-size: 1rem;
+        color: var(--primary-color-text);
+    }
+}

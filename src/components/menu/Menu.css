@@ -1,43 +1,22 @@
-.p-menu {
-    width: 12.5em;
-    padding: .25em;
-}
-
-.p-menu.p-menu-dynamic {
+.p-menu-overlay {
     position: absolute;
-    display: none;
-}
-
-.p-menu .p-menu-separator {
-    border-width: 1px 0 0 0;
 }
 
 .p-menu ul {
-    list-style: none;
     margin: 0;
     padding: 0;
-}
-
-.p-menu .p-submenu-header {
-    padding: .25em .5em;
-    margin: .125em 0;
-}
-
-.p-menu .p-menuitem {
-    margin: .125em 0;
+    list-style: none;
 }
 
 .p-menu .p-menuitem-link {
-    padding: .25em;
-    display: block;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
     text-decoration: none;
-}
-
-.p-menu .p-menuitem-icon {
-    margin-right: .25em;
-    vertical-align: middle;
+    overflow: hidden;
+    position: relative;
 }
 
 .p-menu .p-menuitem-text {
-    vertical-align: middle;
+    line-height: 1;
 }

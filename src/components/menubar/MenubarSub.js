@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
+import { Ripple } from '../ripple/Ripple';
+import ObjectUtils from '../utils/ObjectUtils';
 
-export class MenubarSub extends Component {
+export class MenubarSubComponent extends Component {
 
     static defaultProps = {
         model: null,
@@ -12,7 +14,9 @@ export class MenubarSub extends Component {
         popup: false,
         onLeafClick: null,
         onKeyDown: null,
-        parentActive: false
+        parentActive: false,
+        mobileActive: false,
+        forwardRef: null
     };
 
     static propTypes = {
@@ -22,7 +26,9 @@ export class MenubarSub extends Component {
         popup: PropTypes.bool,
         onLeafClick: PropTypes.func,
         onKeyDown: PropTypes.func,
-        parentActive: PropTypes.bool
+        parentActive: PropTypes.bool,
+        mobileActive: PropTypes.bool,
+        forwardRef: PropTypes.any
     };
 
     constructor(props) {
@@ -35,35 +41,18 @@ export class MenubarSub extends Component {
         this.onChildItemKeyDown = this.onChildItemKeyDown.bind(this);
     }
 
-    componentDidUpdate(prevProps) {
-        if (prevProps.parentActive && !this.props.parentActive) {
-            this.setState({
-                activeItem: null
-            });
-        }
-    }
+    getElementRef(el) {
+        this.element = el;
 
-    componentDidMount() {
-        if (!this.documentClickListener) {
-            this.documentClickListener = (event) => {
-                if (this.element && !this.element.contains(event.target)) {
-                    this.setState({activeItem: null});
-                }
-            };
-
-            document.addEventListener('click', this.documentClickListener);
+        if (this.props.forwardRef) {
+            return this.props.forwardRef(el);
         }
-    }
 
-    componentWillUnmount() {
-        if (this.documentClickListener) {
-            document.removeEventListener('click', this.documentClickListener);
-            this.documentClickListener = null;
-        }
+        return this.element;
     }
 
     onItemMouseEnter(event, item) {
-        if (item.disabled) {
+        if (item.disabled || this.props.mobileActive) {
             event.preventDefault();
             return;
         }
@@ -99,22 +88,20 @@ export class MenubarSub extends Component {
             });
         }
 
-        if (this.props.root) {
-            if (item.items) {
-                if (this.state.activeItem && item === this.state.activeItem) {
-                    this.setState({
-                        activeItem: null
-                    });
-                }
-                else {
-                    this.setState({
-                        activeItem: item
-                    });
-                }
+
+        if (item.items) {
+            if (this.state.activeItem && item === this.state.activeItem) {
+                this.setState({
+                    activeItem: null
+                });
+            }
+            else {
+                this.setState({
+                    activeItem: item
+                });
             }
         }
-
-        if (!item.items) {
+        else {
             this.onLeafClick();
         }
     }
@@ -149,7 +136,7 @@ export class MenubarSub extends Component {
             //right
             case 39:
                 if (this.props.root) {
-                    var nextItem = this.findNextItem(listItem);
+                    let nextItem = this.findNextItem(listItem);
                     if (nextItem) {
                         nextItem.children[0].focus();
                     }
@@ -212,14 +199,14 @@ export class MenubarSub extends Component {
     }
 
     navigateToNextItem(listItem) {
-        var nextItem = this.findNextItem(listItem);
+        let nextItem = this.findNextItem(listItem);
         if (nextItem) {
             nextItem.children[0].focus();
         }
     }
 
     navigateToPrevItem(listItem) {
-        var prevItem = this.findPrevItem(listItem);
+        let prevItem = this.findPrevItem(listItem);
         if (prevItem) {
             prevItem.children[0].focus();
         }
@@ -253,63 +240,86 @@ export class MenubarSub extends Component {
         }
     }
 
+    componentDidMount() {
+        if (!this.documentClickListener) {
+            this.documentClickListener = (event) => {
+                if (this.element && !this.element.contains(event.target)) {
+                    this.setState({activeItem: null});
+                }
+            };
+
+            document.addEventListener('click', this.documentClickListener);
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.parentActive && !this.props.parentActive) {
+            this.setState({
+                activeItem: null
+            });
+        }
+    }
+
+    componentWillUnmount() {
+        if (this.documentClickListener) {
+            document.removeEventListener('click', this.documentClickListener);
+            this.documentClickListener = null;
+        }
+    }
+
     renderSeparator(index) {
         return (
             <li key={'separator_' + index} className="p-menu-separator" role="separator"></li>
         );
     }
 
-    renderIcon(item) {
-        const className = classNames('p-menuitem-icon', item.icon);
-
-        if (item.icon) {
-            return (
-                <span className={className}></span>
-            );
-        }
-        else {
-            return null;
-        }
-    }
-
-    renderSubmenuIcon(item) {
-        const icon = classNames('p-submenu-icon pi pi-fw', {'pi-caret-down': this.props.root, 'pi-caret-right': !this.props.root});
-
+    renderSubmenu(item) {
         if (item.items) {
             return (
-                <span className={icon}></span>
+                <MenubarSub model={item.items} mobileActive={this.props.mobileActive} onLeafClick={this.onLeafClick} onKeyDown={this.onChildItemKeyDown} parentActive={item === this.state.activeItem} />
             );
         }
-        else {
-            return null;
-        }
-    }
 
-    renderSubmenu(item) {
-        if(item.items) {
-            return (
-                <MenubarSub model={item.items} onLeafClick={this.onLeafClick} onKeyDown={this.onChildItemKeyDown} parentActive={item === this.state.activeItem} />
-            );
-        }
-        else {
-            return null;
-        }
+        return null;
     }
 
     renderMenuitem(item, index) {
-        const className = classNames('p-menuitem', {'p-menuitem-active': this.state.activeItem === item, 'p-disabled': item.disabled}, item.className);
-        const icon = this.renderIcon(item);
-        const submenuIcon = this.renderSubmenuIcon(item);
+        const className = classNames('p-menuitem', {'p-menuitem-active': this.state.activeItem === item}, item.className);
+        const linkClassName = classNames('p-menuitem-link', {'p-disabled': item.disabled});
+        const iconClassName = classNames('p-menuitem-icon', item.icon);
+        const submenuIconClassName = classNames('p-submenu-icon pi', {'pi-angle-down': this.props.root, 'pi-angle-right': !this.props.root});
+        const icon = item.icon && <span className={iconClassName}></span>;
+        const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
+        const submenuIcon = item.items && <span className={submenuIconClassName}></span>;
         const submenu = this.renderSubmenu(item);
+        let content = (
+            <a href={item.url || '#'} role="menuitem" className={linkClassName} target={item.target} aria-haspopup={item.items != null}
+                onClick={(event) => this.onItemClick(event, item)} onKeyDown={(event) => this.onItemKeyDown(event, item)}>
+                {icon}
+                {label}
+                {submenuIcon}
+                <Ripple />
+            </a>
+        );
+
+        if (item.template) {
+            const defaultContentOptions = {
+                onClick: (event) => this.onItemClick(event, item),
+                onKeyDown: (event) => this.onItemKeyDown(event, item),
+                className: linkClassName,
+                labelClassName: 'p-menuitem-text',
+                iconClassName,
+                submenuIconClassName,
+                element: content,
+                props: this.props
+            };
+
+            content = ObjectUtils.getJSXElement(item.template, item, defaultContentOptions);
+        }
 
         return (
             <li key={item.label + '_' + index} role="none" className={className} style={item.style} onMouseEnter={(event) => this.onItemMouseEnter(event, item)}>
-                <a href={item.url || '#'} role="menuitem" className="p-menuitem-link" target={item.target} aria-haspopup={item.items != null}
-                    onClick={(event) => this.onItemClick(event, item)} onKeyDown={(event) => this.onItemKeyDown(event, item)}>
-                    {icon}
-                    <span className="p-menuitem-text">{item.label}</span>
-                    {submenuIcon}
-                </a>
+                {content}
                 {submenu}
             </li>
         );
@@ -330,9 +340,8 @@ export class MenubarSub extends Component {
                 })
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     render() {
@@ -340,9 +349,11 @@ export class MenubarSub extends Component {
         const submenu = this.renderMenu();
 
         return (
-            <ul ref={el => this.element = el} className={className} role={this.props.root ? 'menubar' : 'menu'}>
+            <ul ref={(el) => this.getElementRef(el)} className={className} role={this.props.root ? 'menubar' : 'menu'}>
                 {submenu}
             </ul>
         );
     }
 }
+
+export const MenubarSub = React.forwardRef((props, ref) => <MenubarSubComponent forwardRef={ref} {...props}/>);

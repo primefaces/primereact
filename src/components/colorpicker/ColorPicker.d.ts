@@ -11,11 +11,11 @@ interface ColorPickerProps {
     format?: string;
     appendTo?: any;
     disabled?: boolean;
-    tabindex?: string;
+    tabIndex?: number;
     inputId?: string;
     tooltip?: any;
     tooltipOptions?: TooltipOptions;
-    onChange?(value: any): void;
+    onChange?(value: any, target: {name: string, id: string, value: any}): void;
 }
 
 export class ColorPicker extends React.Component<ColorPickerProps,any> {}

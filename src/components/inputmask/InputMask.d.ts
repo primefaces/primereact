@@ -14,16 +14,18 @@ interface InputMaskProps {
     placeholder?: string;
     size?: number;
     maxlength?: number;
-    tabindex?: number;
+    tabIndex?: number;
     disabled?: boolean;
-    readonly?: boolean;
+    readOnly?: boolean;
     name?: string;
     required?: boolean;
     tooltip?: any;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
-    onComplete?(e: Event): void;
-    onChange?(e: {originalEvent: Event, value: any}): void;
+    onComplete?(e: {originalEvent: Event, value: any}): void;
+    onChange?(e: {originalEvent: Event, value: any, target: {name: string, id: string, value: any}}): void;
+    onFocus?(e: Event): void;
+    onBlur?(e: Event): void;
 }
 
 export class InputMask extends React.Component<InputMaskProps,any> {}

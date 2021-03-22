@@ -1,6 +1,4 @@
-.p-progressbar { 
-    height: 1.2em; 
-    text-align: left; 
+.p-progressbar {
     position: relative;
     overflow: hidden;
 }
@@ -14,9 +12,6 @@
 }
 
 .p-progressbar-determinate .p-progressbar-value-animate {
-    -webkit-transition: width 1s ease-in-out;
-    -moz-transition: width 1s ease-in-out;
-    -o-transition: width 1s ease-in-out;
     transition: width 1s ease-in-out;
 }
 
@@ -26,14 +21,6 @@
     width: 100%;
     position: absolute;
     font-weight: bold;
-}
-
-.p-progressbar-indeterminate {
-    height: .5em;
-}
-
-.p-progressbar-indeterminate .p-progressbar-value {
-    border: 0 none;
 }
 
 .p-progressbar-indeterminate .p-progressbar-value::before {
@@ -61,7 +48,7 @@
     -webkit-animation-delay: 1.15s;
             animation-delay: 1.15s;
 }
-    
+
 @-webkit-keyframes p-progressbar-indeterminate-anim {
   0% {
     left: -35%;
@@ -71,7 +58,7 @@
     right: -90%; }
   100% {
     left: 100%;
-    right: -90%; } 
+    right: -90%; }
 }
 @keyframes p-progressbar-indeterminate-anim {
   0% {
@@ -82,7 +69,7 @@
     right: -90%; }
   100% {
     left: 100%;
-    right: -90%; } 
+    right: -90%; }
 }
 
 @-webkit-keyframes p-progressbar-indeterminate-anim-short {
@@ -94,7 +81,7 @@
     right: -8%; }
   100% {
     left: 107%;
-    right: -8%; } 
+    right: -8%; }
 }
 @keyframes p-progressbar-indeterminate-anim-short {
   0% {
@@ -105,5 +92,5 @@
     right: -8%; }
   100% {
     left: 107%;
-    right: -8%; } 
+    right: -8%; }
 }

@@ -1,12 +1,12 @@
-import React, {Component} from 'react';
+import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import KeyFilter from "../keyfilter/KeyFilter";
-import Tooltip from "../tooltip/Tooltip";
+import { classNames } from '../utils/ClassNames';
+import KeyFilter from '../keyfilter/KeyFilter';
+import { tip } from '../tooltip/Tooltip';
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
 
-export class InputText extends Component {
+class InputTextComponent extends Component {
 
     static defaultProps = {
         onInput: null,
@@ -14,7 +14,8 @@ export class InputText extends Component {
         keyfilter: null,
         validateOnly: false,
         tooltip: null,
-        tooltipOptions: null
+        tooltipOptions: null,
+        forwardRef: null
     };
 
     static propTypes = {
@@ -23,13 +24,20 @@ export class InputText extends Component {
         keyfilter: PropTypes.any,
         validateOnly: PropTypes.bool,
         tooltip: PropTypes.string,
-        tooltipOptions: PropTypes.object
+        tooltipOptions: PropTypes.object,
+        forwardRef: PropTypes.any
     };
 
     constructor(props) {
         super(props);
         this.onInput = this.onInput.bind(this);
         this.onKeyPress = this.onKeyPress.bind(this);
+
+        this.elementRef = createRef(this.props.forwardRef);
+    }
+
+    isFilled() {
+        return (this.props.value != null && this.props.value.toString().length > 0) || (this.props.defaultValue != null && this.props.defaultValue.toString().length > 0)
     }
 
     onKeyPress(event) {
@@ -60,16 +68,31 @@ export class InputText extends Component {
         }
     }
 
+    updateForwardRef() {
+        let ref = this.props.forwardRef;
+
+        if (ref) {
+            if (typeof ref === 'function') {
+                ref(this.elementRef.current);
+            }
+            else {
+                ref.current = this.elementRef.current;
+            }
+        }
+    }
+
     componentDidMount() {
+        this.updateForwardRef();
+
         if (this.props.tooltip) {
             this.renderTooltip();
         }
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.tooltip !== this.props.tooltip) {
+        if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
             if (this.tooltip)
-                this.tooltip.updateContent(this.props.tooltip);
+                this.tooltip.update({ content: this.props.tooltip, ...(this.props.tooltipOptions || {}) });
             else
                 this.renderTooltip();
         }
@@ -83,21 +106,23 @@ export class InputText extends Component {
     }
 
     renderTooltip() {
-        this.tooltip = new Tooltip({
-            target: this.element,
+        this.tooltip = tip({
+            target: this.elementRef.current,
             content: this.props.tooltip,
             options: this.props.tooltipOptions
         });
     }
 
     render() {
-        const className = classNames('p-inputtext p-component', this.props.className, {
+        const className = classNames('p-inputtext p-component', {
             'p-disabled': this.props.disabled,
-            'p-filled': (this.props.value != null && this.props.value.toString().length > 0) || (this.props.defaultValue != null && this.props.defaultValue.toString().length > 0)
-        });
+            'p-filled': this.isFilled()
+        }, this.props.className);
 
-        let inputProps = ObjectUtils.findDiffKeys(this.props, InputText.defaultProps);
+        let inputProps = ObjectUtils.findDiffKeys(this.props, InputTextComponent.defaultProps);
 
-        return <input ref={(el) => this.element = el} {...inputProps} className={className} onInput={this.onInput} onKeyPress={this.onKeyPress}/>;
+        return <input ref={this.elementRef} {...inputProps} className={className} onInput={this.onInput} onKeyPress={this.onKeyPress} />;
     }
 }
+
+export const InputText = React.forwardRef((props, ref) => <InputTextComponent forwardRef={ref} {...props} />);

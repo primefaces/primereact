@@ -7,6 +7,7 @@ export class Column extends Component {
         columnKey: null,
         field: null,
         sortField: null,
+        filterField: null,
         header: null,
         body: null,
         loadingBody: null,
@@ -20,6 +21,8 @@ export class Column extends Component {
         filterMaxLength: null,
         filterElement: null,
         filterFunction: null,
+        filterHeaderStyle: null,
+        filterHeaderClassName: null,
         style: null,
         className: null,
         headerStyle: null,
@@ -36,19 +39,24 @@ export class Column extends Component {
         editor: null,
         editorValidator: null,
         editorValidatorEvent: 'click',
+        onBeforeEditorHide: null,
+        onBeforeEditorShow: null,
+        onEditorInit: null,
         onEditorSubmit: null,
         onEditorCancel: null,
         excludeGlobalFilter: false,
         rowReorder: false,
         rowReorderIcon: 'pi pi-bars',
         rowEditor: false,
-        exportable: true
+        exportable: true,
+        reorderable: true
     }
 
     static propTypes = {
         columnKey: PropTypes.string,
         field: PropTypes.string,
         sortField: PropTypes.string,
+        filterField: PropTypes.string,
         header: PropTypes.any,
         body: PropTypes.any,
         loadingBody: PropTypes.func,
@@ -62,6 +70,8 @@ export class Column extends Component {
         filterMaxLength: PropTypes.number,
         filterElement: PropTypes.object,
         filterFunction: PropTypes.func,
+        filterHeaderStyle: PropTypes.object,
+        filterHeaderClassName: PropTypes.string,
         style: PropTypes.object,
         className: PropTypes.string,
         headerStyle: PropTypes.object,
@@ -77,13 +87,17 @@ export class Column extends Component {
         rowSpan: PropTypes.number,
         editor: PropTypes.func,
         editorValidator: PropTypes.func,
+        editorValidatorEvent: PropTypes.string,
+        onBeforeEditorHide: PropTypes.func,
+        onBeforeEditorShow: PropTypes.func,
+        onEditorInit: PropTypes.func,
         onEditorSubmit: PropTypes.func,
         onEditorCancel: PropTypes.func,
-        editorValidatorEvent: PropTypes.string,
         excludeGlobalFilter: PropTypes.bool,
         rowReorder: PropTypes.bool,
         rowReorderIcon: PropTypes.string,
         rowEditor: PropTypes.bool,
-        exportable: PropTypes.bool
+        exportable: PropTypes.bool,
+        reorderable: PropTypes.bool
     }
 }

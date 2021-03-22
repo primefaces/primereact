@@ -4,8 +4,8 @@ interface CardProps {
     id?: string;
     header?: any;
     footer?: any;
-    title?: string;
-    subTitle?: string;
+    title?: any;
+    subTitle?: any;
     style?: object;
     className?: string;
 }

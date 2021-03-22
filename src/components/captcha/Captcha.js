@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 export class Captcha extends Component {
@@ -22,7 +21,7 @@ export class Captcha extends Component {
         theme: PropTypes.string,
         type: PropTypes.string,
         size: PropTypes.string,
-        tabindex: PropTypes.number,
+        tabIndex: PropTypes.number,
         language: PropTypes.string,
         onResponse: PropTypes.func,
         onExpire: PropTypes.func
@@ -44,17 +43,17 @@ export class Captcha extends Component {
     reset() {
         if(this._instance === null)
             return;
-        
+
         (window).grecaptcha.reset(this._instance);
     }
-    
+
     getResponse() {
         if (this._instance === null)
             return null;
-        
+
         return (window).grecaptcha.getResponse(this._instance);
     }
-    
+
     recaptchaCallback(response) {
         if(this.props.onResponse) {
             this.props.onResponse({
@@ -68,15 +67,25 @@ export class Captcha extends Component {
             this.props.onExpire();
         }
     }
-    
+
     addRecaptchaScript() {
         this.recaptchaScript = null;
         if (!(window).grecaptcha) {
-            var head = document.head || document.getElementsByTagName('head')[0];
+            let head = document.head || document.getElementsByTagName('head')[0];
             this.recaptchaScript = document.createElement('script');
             this.recaptchaScript.src = "https://www.google.com/recaptcha/api.js?render=explicit";
             this.recaptchaScript.async = true;
             this.recaptchaScript.defer = true;
+            this.recaptchaScript.onload = () => {
+                if (!(window).grecaptcha) {
+                    console.warn("Recaptcha is not loaded");
+                    return;
+                }
+
+                window.grecaptcha.ready(() => {
+                    this.init();
+                });
+            }
             head.appendChild(this.recaptchaScript);
         }
     }
@@ -85,16 +94,7 @@ export class Captcha extends Component {
         this.addRecaptchaScript();
 
         if ((window).grecaptcha) {
-            this.init(); 
-        }
-        else {
-            setTimeout(() => {
-                if (!(window).grecaptcha) {
-                    console.warn("Recaptcha is not loaded");
-                    return;
-                }
-                this.init();
-            },500);
+            this.init();
         }
     }
 
@@ -105,6 +105,6 @@ export class Captcha extends Component {
     }
 
     render() {
-        return <div id={this.props.id} ref={(el) => this.targetEL = ReactDOM.findDOMNode(el)}></div>
+        return <div id={this.props.id} ref={(el) => this.targetEL = el}></div>
     }
 }

@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {Button} from '../button/Button';
-import classNames from 'classnames';
+import { Button } from '../button/Button';
+import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
 import { SplitButtonItem } from './SplitButtonItem';
 import { SplitButtonPanel } from './SplitButtonPanel';
-import Tooltip from "../tooltip/Tooltip";
-import UniqueComponentId from "../utils/UniqueComponentId";
+import { tip } from '../tooltip/Tooltip';
+import UniqueComponentId from '../utils/UniqueComponentId';
+import ObjectUtils from '../utils/ObjectUtils';
+import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
+import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 
 export class SplitButton extends Component {
 
@@ -24,7 +27,8 @@ export class SplitButton extends Component {
         onClick: null,
         appendTo: null,
         tooltip: null,
-        tooltipOptions: null
+        tooltipOptions: null,
+        buttonTemplate: null
     }
 
     static propTypes = {
@@ -37,91 +41,139 @@ export class SplitButton extends Component {
         className: PropTypes.string,
         menustyle: PropTypes.object,
         menuClassName: PropTypes.string,
-        tabIndex: PropTypes.string,
+        tabIndex: PropTypes.number,
         onClick: PropTypes.func,
         appendTo: PropTypes.object,
         tooltip: PropTypes.string,
-        tooltipOptions: PropTypes.object
+        tooltipOptions: PropTypes.object,
+        buttonTemplate: PropTypes.any
     }
 
     constructor(props) {
         super(props);
         this.state = {
-            overlayVisible: null
+            overlayVisible: false
         };
 
         this.onDropdownButtonClick = this.onDropdownButtonClick.bind(this);
+        this.onItemClick = this.onItemClick.bind(this);
+        this.onOverlayEnter = this.onOverlayEnter.bind(this);
+        this.onOverlayEntered = this.onOverlayEntered.bind(this);
+        this.onOverlayExit = this.onOverlayExit.bind(this);
+        this.onOverlayExited = this.onOverlayExited.bind(this);
+        this.onPanelClick = this.onPanelClick.bind(this);
+
         this.id = this.props.id || UniqueComponentId();
+        this.overlayRef = React.createRef();
     }
 
-    onDropdownButtonClick(event) {
-        if(this.documentClickListener) {
-            this.dropdownClick = true;
-        }
+    onPanelClick(event) {
+        OverlayEventBus.emit('overlay-click', {
+            originalEvent: event,
+            target: this.container
+        });
+    }
 
-        if(this.panel.element.offsetParent)
+    onDropdownButtonClick() {
+        if (this.state.overlayVisible)
             this.hide();
         else
             this.show();
     }
 
+    onItemClick() {
+        this.hide();
+    }
+
     show() {
-        this.panel.element.style.zIndex = String(DomHandler.generateZIndex());
-        this.panel.element.style.display = 'block';
-
-        setTimeout(() => {
-            DomHandler.addClass(this.panel.element, 'p-menu-overlay-visible');
-            DomHandler.removeClass(this.panel.element, 'p-menu-overlay-hidden');
-        }, 1);
-
-        this.alignPanel();
-        this.bindDocumentListener();
-        this.setState({overlayVisible: true})
+        this.setState({ overlayVisible: true });
     }
 
     hide() {
-        if (this.panel && this.panel.element) {
-            DomHandler.addClass(this.panel.element, 'p-menu-overlay-hidden');
-            DomHandler.removeClass(this.panel.element, 'p-menu-overlay-visible');
+        this.setState({ overlayVisible: false });
+    }
 
-            setTimeout(() => {
-                if (this.panel && this.panel.element) {
-                    this.panel.element.style.display = 'none';
-                    DomHandler.removeClass(this.panel.element, 'p-menu-overlay-hidden');
-                }
-            }, 150);
-            this.setState({overlayVisible: false})
-        }
+    onOverlayEnter() {
+        this.overlayRef.current.style.zIndex = String(DomHandler.generateZIndex());
+        this.alignPanel();
+    }
 
-        this.unbindDocumentListener();
-        this.dropdownClick = false;
+    onOverlayEntered() {
+        this.bindDocumentClickListener();
+        this.bindScrollListener();
+        this.bindResizeListener();
+    }
+
+    onOverlayExit() {
+        this.unbindDocumentClickListener();
+        this.unbindScrollListener();
+        this.unbindResizeListener();
+    }
+
+    onOverlayExited() {
+        DomHandler.revertZIndex();
     }
 
     alignPanel() {
-        if (this.props.appendTo) {
-            this.panel.element.style.minWidth = DomHandler.getWidth(this.container) + 'px';
-            DomHandler.absolutePosition(this.panel.element, this.container);
-        }
-        else {
-            DomHandler.relativePosition(this.panel.element, this.container);
-        }
+        const container = this.defaultButton.parentElement;
+        this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
+        DomHandler.absolutePosition(this.overlayRef.current, container);
     }
 
-    bindDocumentListener() {
-        if(!this.documentClickListener) {
-            this.documentClickListener = () => {
-                if(this.dropdownClick)
-                    this.dropdownClick = false;
-                else
+    bindDocumentClickListener() {
+        if (!this.documentClickListener) {
+            this.documentClickListener = (event) => {
+                if (this.state.overlayVisible && this.isOutsideClicked(event)) {
                     this.hide();
+                }
             };
 
             document.addEventListener('click', this.documentClickListener);
         }
     }
 
-    unbindDocumentListener() {
-        if(this.documentClickListener) {
+    bindScrollListener() {
+        if (!this.scrollHandler) {
+            this.scrollHandler = new ConnectedOverlayScrollHandler(this.container, () => {
+                if (this.state.overlayVisible) {
+                    this.hide();
+                }
+            });
+        }
+
+        this.scrollHandler.bindScrollListener();
+    }
+
+    unbindScrollListener() {
+        if (this.scrollHandler) {
+            this.scrollHandler.unbindScrollListener();
+        }
+    }
+
+    bindResizeListener() {
+        if (!this.resizeListener) {
+            this.resizeListener = () => {
+                if (this.state.overlayVisible) {
+                    this.hide();
+                }
+            };
+            window.addEventListener('resize', this.resizeListener);
+        }
+    }
+
+    unbindResizeListener() {
+        if (this.resizeListener) {
+            window.removeEventListener('resize', this.resizeListener);
+            this.resizeListener = null;
+        }
+    }
+
+    isOutsideClicked(event) {
+        return this.container && (this.overlayRef && this.overlayRef.current && !this.overlayRef.current.contains(event.target));
+    }
+
+    unbindDocumentClickListener() {
+        if (this.documentClickListener) {
             document.removeEventListener('click', this.documentClickListener);
             this.documentClickListener = null;
         }
@@ -134,25 +186,32 @@ export class SplitButton extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.tooltip !== this.props.tooltip) {
+        if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
             if (this.tooltip)
-                this.tooltip.updateContent(this.props.tooltip);
+                this.tooltip.update({ content: this.props.tooltip, ...(this.props.tooltipOptions || {}) });
             else
                 this.renderTooltip();
         }
     }
 
     componentWillUnmount() {
-        this.unbindDocumentListener();
+        this.unbindDocumentClickListener();
+        this.unbindResizeListener();
+        if (this.scrollHandler) {
+            this.scrollHandler.destroy();
+            this.scrollHandler = null;
+        }
 
         if (this.tooltip) {
             this.tooltip.destroy();
             this.tooltip = null;
         }
+
+        DomHandler.revertZIndex();
     }
 
     renderTooltip() {
-        this.tooltip = new Tooltip({
+        this.tooltip = tip({
             target: this.container,
             content: this.props.tooltip,
             options: this.props.tooltipOptions
@@ -162,25 +221,28 @@ export class SplitButton extends Component {
     renderItems() {
         if (this.props.model) {
             return this.props.model.map((menuitem, index) => {
-                return <SplitButtonItem menuitem={menuitem} key={index} />
+                return <SplitButtonItem menuitem={menuitem} key={index} onItemClick={this.onItemClick} />
             });
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     render() {
-        let className = classNames('p-splitbutton p-buttonset p-component', this.props.className, {'p-disabled': this.props.disabled});
+        let className = classNames('p-splitbutton p-component', this.props.className, { 'p-disabled': this.props.disabled });
         let items = this.renderItems();
+        const buttonContent = this.props.buttonTemplate ? ObjectUtils.getJSXElement(this.props.buttonTemplate, this.props) : null;
 
         return (
-            <div id={this.props.id} className={className} style={this.props.style}  ref={el => this.container = el}>
-                <Button type="button" icon={this.props.icon} label={this.props.label} onClick={this.props.onClick} disabled={this.props.disabled} tabIndex={this.props.tabIndex}/>
-                <Button type="button" className="p-splitbutton-menubutton" icon="pi pi-caret-down" onClick={this.onDropdownButtonClick} disabled={this.props.disabled}
-                        aria-expanded={this.state.overlayVisible} aria-haspopup={true} aria-owns={this.id + '_overlay'}/>
-                <SplitButtonPanel ref={(el) => this.panel = el} appendTo={this.props.appendTo} id={this.id + '_overlay'}
-                                menuStyle={this.props.menuStyle} menuClassName={this.props.menuClassName}>
+            <div id={this.id} className={className} style={this.props.style} ref={el => this.container = el}>
+                <Button ref={(el) => this.defaultButton = el} type="button" className="p-splitbutton-defaultbutton" icon={this.props.icon} label={this.props.label} onClick={this.props.onClick} disabled={this.props.disabled} tabIndex={this.props.tabIndex}>
+                    {buttonContent}
+                </Button>
+                <Button type="button" className="p-splitbutton-menubutton" icon="pi pi-chevron-down" onClick={this.onDropdownButtonClick} disabled={this.props.disabled}
+                    aria-expanded={this.state.overlayVisible} aria-haspopup aria-owns={this.id + '_overlay'} />
+                <SplitButtonPanel ref={this.overlayRef} appendTo={this.props.appendTo} id={this.id + '_overlay'}
+                    menuStyle={this.props.menuStyle} menuClassName={this.props.menuClassName} onClick={this.onPanelClick}
+                    in={this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
                     {items}
                 </SplitButtonPanel>
             </div>

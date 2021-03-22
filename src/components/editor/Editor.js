@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import Quill from "quill";
-import 'quill/dist/quill.snow.css';
-import 'quill/dist/quill.bubble.css';
+import { classNames } from '../utils/ClassNames';
 
 export class Editor extends Component {
 
@@ -38,44 +35,48 @@ export class Editor extends Component {
     };
 
     componentDidMount() {
-        this.quill = new Quill(this.editorElement, {
-            modules: {
-                toolbar: this.toolbarElement,
-                ...this.props.modules
-            },
-            placeholder: this.props.placeholder,
-            readOnly: this.props.readOnly,
-            theme: this.props.theme,
-            formats: this.props.formats
-        });
-
-        if (this.props.value) {
-            this.quill.pasteHTML(this.props.value);
-        }
-
-        this.quill.on('text-change', (delta, source) => {
-            let html = this.editorElement.children[0].innerHTML;
-            let text = this.quill.getText();
-            if (html === '<p><br></p>') {
-                html = null;
-            }
-
-            if (this.props.onTextChange) {
-                this.props.onTextChange({
-                    htmlValue: html,
-                    textValue: text,
-                    delta: delta,
-                    source: source
+        import('quill').then((module) => {
+            if (module && module.default) {
+                this.quill = new module.default(this.editorElement, {
+                    modules: {
+                        toolbar: this.toolbarElement,
+                        ...this.props.modules
+                    },
+                    placeholder: this.props.placeholder,
+                    readOnly: this.props.readOnly,
+                    theme: this.props.theme,
+                    formats: this.props.formats
                 });
-            }
-        });
 
-        this.quill.on('selection-change', (range, oldRange, source) => {
-            if(this.props.onSelectionChange) {
-                this.props.onSelectionChange({
-                    range: range,
-                    oldRange: oldRange,
-                    source: source
+                if (this.props.value) {
+                    this.quill.pasteHTML(this.props.value);
+                }
+
+                this.quill.on('text-change', (delta, source) => {
+                    let html = this.editorElement.children[0].innerHTML;
+                    let text = this.quill.getText();
+                    if (html === '<p><br></p>') {
+                        html = null;
+                    }
+
+                    if (this.props.onTextChange) {
+                        this.props.onTextChange({
+                            htmlValue: html,
+                            textValue: text,
+                            delta: delta,
+                            source: source
+                        });
+                    }
+                });
+
+                this.quill.on('selection-change', (range, oldRange, source) => {
+                    if(this.props.onSelectionChange) {
+                        this.props.onSelectionChange({
+                            range: range,
+                            oldRange: oldRange,
+                            source: source
+                        });
+                    }
                 });
             }
         });

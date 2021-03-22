@@ -7,13 +7,20 @@ interface DropdownProps {
     value?: any;
     options?: any[];
     optionLabel?: string;
+    optionValue?: string;
+    optionDisabled?: boolean;
+    optionGroupLabel?: string;
+    optionGroupChildren?: string;
     style?: object;
     className?: string;
     autoWidth?: boolean;
     scrollHeight?: string;
     filter?: boolean;
     filterBy?: string;
+    filterMatchMode?: string;
     filterPlaceholder?: string;
+    filterLocale?: string;
+    emptyFilterMessage?: any;
     editable?:boolean;
     placeholder?: string;
     required?: boolean;
@@ -22,6 +29,8 @@ interface DropdownProps {
     tabIndex?: number;
     autoFocus?: boolean;
     filterInputAutoFocus?: boolean;
+    resetFilterOnHide?: boolean;
+    showFilterClear?: boolean;
     lazy?: boolean;
     panelClassName?: string;
     panelStyle?: object;
@@ -33,8 +42,12 @@ interface DropdownProps {
     tooltipOptions?: TooltipOptions;
     ariaLabel?: string,
     ariaLabelledBy?: string,
-    itemTemplate?(option:any): React.ReactNode;
-    onChange?(e: {originalEvent: Event, value: any}): void;
+    valueTemplate?:((option: any, props: object) => any | any);
+    itemTemplate?:((option: any) => any | any);
+    optionGroupTemplate?:((option: any) => any | any);
+    onChange?(e: {originalEvent: Event, value: any, target: {name: string, id: string, value: any}}): void;
+    onFocus?(e: Event): void;
+    onBlur?(e: Event): void;
     onMouseDown?(event: Event): void;
     onContextMenu?(event: Event): void;
 }

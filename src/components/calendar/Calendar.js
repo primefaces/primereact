@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import {InputText} from '../inputtext/InputText';
-import {Button} from '../button/Button';
-import {CalendarPanel} from './CalendarPanel';
+import { InputText } from '../inputtext/InputText';
+import { Button } from '../button/Button';
+import { CalendarPanel } from './CalendarPanel';
 import DomHandler from '../utils/DomHandler';
-import classNames from 'classnames';
-import Tooltip from "../tooltip/Tooltip";
+import { classNames } from '../utils/ClassNames';
+import { tip } from '../tooltip/Tooltip';
+import { Ripple } from '../ripple/Ripple';
+import UniqueComponentId from '../utils/UniqueComponentId';
+import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
+import { localeOption, localeOptions } from '../api/Locale';
+import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
+import { mask } from '../utils/Mask';
 
 export class Calendar extends Component {
 
@@ -24,6 +29,8 @@ export class Calendar extends Component {
         inputClassName: null,
         required: false,
         readOnlyInput: false,
+        keepInvalid: false,
+        mask: null,
         disabled: false,
         tabIndex: null,
         placeholder: null,
@@ -36,25 +43,17 @@ export class Calendar extends Component {
         showTime: false,
         timeOnly: false,
         showSeconds: false,
+        showMillisec: false,
         hourFormat: '24',
         stepHour: 1,
         stepMinute: 1,
         stepSecond: 1,
+        stepMillisec: 1,
         shortYearCutoff: '+10',
         hideOnDateTimeSelect: false,
         showWeek: false,
-        locale: {
-            firstDayOfWeek: 0,
-            dayNames: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-            dayNamesShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-            dayNamesMin: ["Su","Mo","Tu","We","Th","Fr","Sa"],
-            monthNames: [ "January","February","March","April","May","June","July","August","September","October","November","December" ],
-            monthNamesShort: [ "Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ],
-            today: 'Today',
-            clear: 'Clear',
-            weekHeader: 'Wk'
-        },
-        dateFormat: 'mm/dd/yy',
+        locale: null,
+        dateFormat: null,
         panelStyle: null,
         panelClassName: null,
         monthNavigator: false,
@@ -68,7 +67,7 @@ export class Calendar extends Component {
         selectOtherMonths: false,
         showButtonBar: false,
         todayButtonClassName: 'p-button-secondary',
-        clearButtonStyleClass: 'p-button-secondary',
+        clearButtonClassName: 'p-button-secondary',
         autoZIndex: true,
         baseZIndex: 0,
         appendTo: null,
@@ -102,8 +101,10 @@ export class Calendar extends Component {
         inputClassName: PropTypes.string,
         required: PropTypes.bool,
         readOnlyInput: PropTypes.bool,
+        keepInvalid: PropTypes.bool,
+        mask: PropTypes.string,
         disabled: PropTypes.bool,
-        tabIndex: PropTypes.string,
+        tabIndex: PropTypes.number,
         placeholder: PropTypes.string,
         showIcon: PropTypes.bool,
         icon: PropTypes.string,
@@ -114,14 +115,16 @@ export class Calendar extends Component {
         showTime: PropTypes.bool,
         timeOnly: PropTypes.bool,
         showSeconds: PropTypes.bool,
+        showMillisec: PropTypes.bool,
         hourFormat: PropTypes.string,
         stepHour: PropTypes.number,
         stepMinute: PropTypes.number,
         stepSecond: PropTypes.number,
+        stepMillisec: PropTypes.number,
         shortYearCutoff: PropTypes.string,
         hideOnDateTimeSelect: PropTypes.bool,
         showWeek: PropTypes.bool,
-        locale: PropTypes.object,
+        locale: PropTypes.string,
         dateFormat: PropTypes.string,
         panelStyle: PropTypes.object,
         panelClassName: PropTypes.string,
@@ -136,7 +139,7 @@ export class Calendar extends Component {
         selectOtherMonths: PropTypes.bool,
         showButtonBar: PropTypes.bool,
         todayButtonClassName: PropTypes.string,
-        clearButtonStyleClass: PropTypes.string,
+        clearButtonClassName: PropTypes.string,
         autoZIndex: PropTypes.bool,
         baseZIndex: PropTypes.number,
         appendTo: PropTypes.any,
@@ -159,20 +162,31 @@ export class Calendar extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            focused: false,
+            overlayVisible: false
+        };
+
         if (!this.props.onViewDateChange) {
             let propValue = this.props.value;
             if (Array.isArray(propValue)) {
                 propValue = propValue[0];
             }
 
+            let viewDate = this.props.viewDate && this.isValidDate(this.props.viewDate) ?
+                this.props.viewDate : (propValue && this.isValidDate(propValue) ? propValue : new Date());
+
+            this.validateDate(viewDate);
+
             this.state = {
-                viewDate: (this.props.viewDate || propValue || new Date())
+                ...this.state,
+                viewDate
             }
         }
 
         this.navigation = null;
 
-        this.onInputChange = this.onInputChange.bind(this);
+        this.onUserInput = this.onUserInput.bind(this);
         this.onInputFocus = this.onInputFocus.bind(this);
         this.onInputBlur = this.onInputBlur.bind(this);
         this.onInputKeyDown = this.onInputKeyDown.bind(this);
@@ -183,16 +197,25 @@ export class Calendar extends Component {
         this.onYearDropdownChange = this.onYearDropdownChange.bind(this);
         this.onTodayButtonClick = this.onTodayButtonClick.bind(this);
         this.onClearButtonClick = this.onClearButtonClick.bind(this);
+        this.onPanelClick = this.onPanelClick.bind(this);
         this.incrementHour = this.incrementHour.bind(this);
         this.decrementHour = this.decrementHour.bind(this);
         this.incrementMinute = this.incrementMinute.bind(this);
         this.decrementMinute = this.decrementMinute.bind(this);
         this.incrementSecond = this.incrementSecond.bind(this);
-        this.decrementSecond= this.decrementSecond.bind(this);
+        this.decrementSecond = this.decrementSecond.bind(this);
         this.toggleAmPm = this.toggleAmPm.bind(this);
         this.onTimePickerElementMouseDown = this.onTimePickerElementMouseDown.bind(this);
         this.onTimePickerElementMouseUp = this.onTimePickerElementMouseUp.bind(this);
         this.onTimePickerElementMouseLeave = this.onTimePickerElementMouseLeave.bind(this);
+        this.onOverlayEnter = this.onOverlayEnter.bind(this);
+        this.onOverlayEntered = this.onOverlayEntered.bind(this);
+        this.onOverlayExit = this.onOverlayExit.bind(this);
+        this.onOverlayExited = this.onOverlayExited.bind(this);
+        this.reFocusInputField = this.reFocusInputField.bind(this);
+
+        this.id = this.props.id || UniqueComponentId();
+        this.overlayRef = React.createRef();
     }
 
     componentDidMount() {
@@ -200,15 +223,26 @@ export class Calendar extends Component {
             this.renderTooltip();
         }
 
-        if(this.props.inline) {
+        if (this.props.inline) {
             this.initFocusableCell();
+        }
+        else if (this.props.mask) {
+            mask(this.inputElement, {
+                mask: this.props.mask,
+                readOnly: this.props.readOnlyInput || this.props.disabled,
+                onChange: (e) => this.updateValueOnInput(e.originalEvent, e.value)
+            });
+        }
+
+        if (this.props.value) {
+            this.updateInputfield(this.props.value);
         }
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.tooltip !== this.props.tooltip) {
+        if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
             if (this.tooltip)
-                this.tooltip.updateContent(this.props.tooltip);
+                this.tooltip.update({ content: this.props.tooltip, ...(this.props.tooltipOptions || {}) });
             else
                 this.renderTooltip();
         }
@@ -225,14 +259,25 @@ export class Calendar extends Component {
             }
 
             if ((!prevPropValue && propValue) || (propValue && propValue instanceof Date && propValue.getTime() !== prevPropValue.getTime())) {
+                let viewDate = this.props.viewDate && this.isValidDate(this.props.viewDate) ?
+                    this.props.viewDate : (propValue && this.isValidDate(propValue) ? propValue : new Date());
+
+                this.validateDate(viewDate);
+
                 this.setState({
-                    viewDate: (this.props.viewDate || propValue || new Date())
+                    viewDate
+                }, () => {
+                    this.viewStateChanged = true;
                 });
             }
         }
 
-        if(this.panel) {
+        if (this.overlayRef && this.overlayRef.current) {
             this.updateFocus();
+        }
+
+        if ((prevProps.value !== this.props.value && (!this.viewStateChanged || !this.state.overlayVisible)) || this.isOptionChanged(prevProps)) {
+            this.updateInputfield(this.props.value);
         }
     }
 
@@ -240,9 +285,9 @@ export class Calendar extends Component {
         if (this.hideTimeout) {
             clearTimeout(this.hideTimeout);
         }
-        if (this.mask) {
+        if (this.touchUIMask) {
             this.disableModality();
-            this.mask = null;
+            this.touchUIMask = null;
         }
 
         if (this.tooltip) {
@@ -252,46 +297,64 @@ export class Calendar extends Component {
 
         this.unbindDocumentClickListener();
         this.unbindDocumentResizeListener();
+        if (this.scrollHandler) {
+            this.scrollHandler.destroy();
+            this.scrollHandler = null;
+        }
+
+        DomHandler.revertZIndex();
     }
 
     renderTooltip() {
-        this.tooltip = new Tooltip({
+        this.tooltip = tip({
             target: this.inputElement,
             content: this.props.tooltip,
             options: this.props.tooltipOptions
         });
     }
 
+    isOptionChanged(prevProps) {
+        const optionProps = ['dateFormat', 'hourFormat', 'timeOnly', 'showSeconds', 'showMillisec'];
+        return optionProps.some((option) => prevProps[option] !== this.props[option]);
+    }
+
+    getDateFormat() {
+        return this.props.dateFormat || localeOption('dateFormat', this.props.locale);
+    }
+
     onInputFocus(event) {
-        if (this.props.showOnFocus && !this.panel.offsetParent) {
-            this.showOverlay();
+        if (this.ignoreFocusFunctionality) {
+            this.setState({ focused: true }, () => {
+                this.ignoreFocusFunctionality = false;
+            });
         }
+        else {
+            event.persist();
 
-        if (this.props.onFocus) {
-            this.props.onFocus(event);
+            if (this.props.showOnFocus && !this.state.overlayVisible) {
+                this.showOverlay();
+            }
+
+            this.setState({ focused: true }, () => {
+                if (this.props.onFocus) {
+                    this.props.onFocus(event);
+                }
+            });
         }
-
-        DomHandler.addClass(this.container, 'p-inputwrapper-focus');
     }
 
     onInputBlur(event) {
-        let rawValue = event.target.value;
+        event.persist();
 
-        try {
-            let value = this.parseValueFromString(rawValue);
-            if(this.isValidSelection(value)) {
-                this.updateModel(event, value);
+        this.setState({ focused: false }, () => {
+            if (this.props.onBlur) {
+                this.props.onBlur(event);
             }
-        }
-        catch(err) {
-            this.updateModel(event, null);
-        }
 
-        if (this.props.onBlur) {
-            this.props.onBlur(event);
-        }
-
-        DomHandler.removeClass(this.container, 'p-inputwrapper-focus');
+            if (!this.props.keepInvalid) {
+                this.updateInputfield(this.props.value);
+            }
+        });
     }
 
     onInputKeyDown(event) {
@@ -306,12 +369,12 @@ export class Calendar extends Component {
 
             //tab
             case 9: {
-                if(this.props.touchUI) {
-                    this.disableModality();
+                if (this.state.overlayVisible) {
+                    this.trapFocus(event);
                 }
 
-                if (event.shiftKey) {
-                    this.hideOverlay();
+                if (this.props.touchUI) {
+                    this.disableModality();
                 }
                 break;
             }
@@ -322,38 +385,49 @@ export class Calendar extends Component {
         }
     }
 
-    onInputChange(event) {
+    onUserInput(event) {
         // IE 11 Workaround for input placeholder
         if (!this.isKeydown) {
             return;
         }
         this.isKeydown = false;
 
-        let rawValue = event.target.value;
-
-        try {
-            let value = this.parseValueFromString(rawValue);
-            if(this.isValidSelection(value)) {
-                this.updateModel(event, value);
-                this.updateViewDate(event, value.length ? value[0] : value);
-            }
-        }
-        catch(err) {
-            this.updateModel(event, rawValue);
-        }
+        this.updateValueOnInput(event, event.target.value);
 
         if (this.props.onInput) {
             this.props.onInput(event);
         }
     }
 
+    updateValueOnInput(event, rawValue) {
+        try {
+            let value = this.parseValueFromString(rawValue);
+            if (this.isValidSelection(value)) {
+                this.updateModel(event, value);
+                this.updateViewDate(event, value.length ? value[0] : value);
+            }
+        }
+        catch (err) {
+            //invalid date
+            let value = this.props.keepInvalid ? rawValue : null;
+            this.updateModel(event, value);
+        }
+    }
+
+    reFocusInputField() {
+        if (!this.props.inline && this.inputElement) {
+            this.ignoreFocusFunctionality = true;
+            this.inputElement.focus();
+        }
+    }
+
     isValidSelection(value) {
         let isValid = true;
         if (this.isSingleSelection()) {
-            if (!this.isSelectable(value.getDate(), value.getMonth(), value.getFullYear(), false)) {
+            if (!(this.isSelectable(value.getDate(), value.getMonth(), value.getFullYear(), false) && this.isSelectableTime(value))) {
                 isValid = false;
             }
-        } else if (value.every(v => this.isSelectable(v.getDate(), v.getMonth(), v.getFullYear(), false))) {
+        } else if (value.every(v => (this.isSelectable(v.getDate(), v.getMonth(), v.getFullYear(), false) && this.isSelectableTime(value)))) {
             if (this.isRangeSelection()) {
                 isValid = value.length > 1 && value[1] > value[0] ? true : false;
             }
@@ -361,22 +435,22 @@ export class Calendar extends Component {
         return isValid;
     }
 
-    onButtonClick(event) {
-        if (!this.panel.offsetParent) {
-            this.showOverlay();
+    onButtonClick() {
+        if (this.state.overlayVisible) {
+            this.hideOverlay();
         }
         else {
-            this.hideOverlay();
+            this.showOverlay();
         }
     }
 
     onPrevButtonClick(event) {
-        this.navigation = {backward: true, button: true};
+        this.navigation = { backward: true, button: true };
         this.navBackward(event);
     }
 
     onNextButtonClick(event) {
-        this.navigation = {backward: false, button: true};
+        this.navigation = { backward: false, button: true };
         this.navForward(event);
     }
 
@@ -389,7 +463,7 @@ export class Calendar extends Component {
 
             //escape
             case 27:
-                this.hideOverlay();
+                this.hideOverlay(this.reFocusInputField);
                 event.preventDefault();
                 break;
 
@@ -401,7 +475,7 @@ export class Calendar extends Component {
 
     trapFocus(event) {
         event.preventDefault();
-        let focusableElements = DomHandler.getFocusableElements(this.panel);
+        let focusableElements = DomHandler.getFocusableElements(this.overlayRef.current);
 
         if (focusableElements && focusableElements.length > 0) {
             if (!document.activeElement) {
@@ -433,17 +507,17 @@ export class Calendar extends Component {
                 this.initFocusableCell();
 
                 if (this.navigation.backward)
-                    DomHandler.findSingle(this.panel, '.p-datepicker-prev').focus();
+                    DomHandler.findSingle(this.overlayRef.current, '.p-datepicker-prev').focus();
                 else
-                    DomHandler.findSingle(this.panel, '.p-datepicker-next').focus();
+                    DomHandler.findSingle(this.overlayRef.current, '.p-datepicker-next').focus();
             }
             else {
                 if (this.navigation.backward) {
-                    let cells = DomHandler.find(this.panel, '.p-datepicker-calendar td span:not(.p-disabled)');
+                    let cells = DomHandler.find(this.overlayRef.current, '.p-datepicker-calendar td span:not(.p-disabled)');
                     cell = cells[cells.length - 1];
                 }
                 else {
-                    cell = DomHandler.findSingle(this.panel, '.p-datepicker-calendar td span:not(.p-disabled)');
+                    cell = DomHandler.findSingle(this.overlayRef.current, '.p-datepicker-calendar td span:not(.p-disabled)');
                 }
 
                 if (cell) {
@@ -462,19 +536,19 @@ export class Calendar extends Component {
     initFocusableCell() {
         let cell;
         if (this.view === 'month') {
-            let cells = DomHandler.find(this.panel, '.p-monthpicker .p-monthpicker-month');
-            let selectedCell= DomHandler.findSingle(this.panel, '.p-monthpicker .p-monthpicker-month.p-highlight');
+            let cells = DomHandler.find(this.overlayRef.current, '.p-monthpicker .p-monthpicker-month');
+            let selectedCell = DomHandler.findSingle(this.overlayRef.current, '.p-monthpicker .p-monthpicker-month.p-highlight');
             cells.forEach(cell => cell.tabIndex = -1);
             cell = selectedCell || cells[0];
         }
         else {
-            cell = DomHandler.findSingle(this.panel, 'span.p-highlight');
+            cell = DomHandler.findSingle(this.overlayRef.current, 'span.p-highlight');
             if (!cell) {
-                let todayCell = DomHandler.findSingle(this.panel, 'td.p-datepicker-today span:not(.p-disabled)');
+                let todayCell = DomHandler.findSingle(this.overlayRef.current, 'td.p-datepicker-today span:not(.p-disabled)');
                 if (todayCell)
                     cell = todayCell;
                 else
-                    cell = DomHandler.findSingle(this.panel, '.p-datepicker-calendar td span:not(.p-disabled)');
+                    cell = DomHandler.findSingle(this.overlayRef.current, '.p-datepicker-calendar td span:not(.p-disabled)');
             }
         }
 
@@ -484,15 +558,16 @@ export class Calendar extends Component {
     }
 
     navBackward(event) {
-        if(this.props.disabled) {
+        if (this.props.disabled) {
             event.preventDefault();
             return;
         }
 
         let newViewDate = new Date(this.getViewDate().getTime());
+        newViewDate.setDate(1);
 
         if (this.props.view === 'date') {
-            if(newViewDate.getMonth() === 0) {
+            if (newViewDate.getMonth() === 0) {
                 newViewDate.setMonth(11);
                 newViewDate.setFullYear(newViewDate.getFullYear() - 1);
             }
@@ -504,10 +579,10 @@ export class Calendar extends Component {
             let currentYear = newViewDate.getFullYear();
             let newYear = currentYear - 1;
 
-            if(this.props.yearNavigator) {
+            if (this.props.yearNavigator) {
                 const minYear = parseInt(this.props.yearRange.split(':')[0], 10);
 
-                if(newYear < minYear) {
+                if (newYear < minYear) {
                     newYear = minYear;
                 }
             }
@@ -521,15 +596,16 @@ export class Calendar extends Component {
     }
 
     navForward(event) {
-        if(this.props.disabled) {
+        if (this.props.disabled) {
             event.preventDefault();
             return;
         }
 
         let newViewDate = new Date(this.getViewDate().getTime());
+        newViewDate.setDate(1);
 
         if (this.props.view === 'date') {
-            if(newViewDate.getMonth() === 11) {
+            if (newViewDate.getMonth() === 11) {
                 newViewDate.setMonth(0);
                 newViewDate.setFullYear(newViewDate.getFullYear() + 1);
             }
@@ -541,10 +617,10 @@ export class Calendar extends Component {
             let currentYear = newViewDate.getFullYear();
             let newYear = currentYear + 1;
 
-            if(this.props.yearNavigator) {
+            if (this.props.yearNavigator) {
                 const maxYear = parseInt(this.props.yearRange.split(':')[1], 10);
 
-                if(newYear > maxYear) {
+                if (newYear > maxYear) {
                     newYear = maxYear;
                 }
             }
@@ -558,7 +634,7 @@ export class Calendar extends Component {
     }
 
     onMonthDropdownChange(event) {
-        const currentViewDate = this.props.onViewDateChange ? this.props.viewDate : this.state.viewDate;
+        const currentViewDate = this.getViewDate();
         let newViewDate = new Date(currentViewDate.getTime());
         newViewDate.setMonth(parseInt(event.target.value, 10));
 
@@ -566,7 +642,7 @@ export class Calendar extends Component {
     }
 
     onYearDropdownChange(event) {
-        const currentViewDate = this.props.onViewDateChange ? this.props.viewDate : this.state.viewDate;
+        const currentViewDate = this.getViewDate();
         let newViewDate = new Date(currentViewDate.getTime());
         newViewDate.setFullYear(parseInt(event.target.value, 10));
 
@@ -575,10 +651,11 @@ export class Calendar extends Component {
 
     onTodayButtonClick(event) {
         const today = new Date();
-        const dateMeta = {day: today.getDate(), month: today.getMonth(), year: today.getFullYear(), today: true, selectable: true};
+        const dateMeta = { day: today.getDate(), month: today.getMonth(), year: today.getFullYear(), today: true, selectable: true };
+        const timeMeta = { hours: today.getHours(), minutes: today.getMinutes(), seconds: today.getSeconds(), milliseconds: today.getMilliseconds() };
 
         this.updateViewDate(event, today);
-        this.onDateSelect(event, dateMeta);
+        this.onDateSelect(event, dateMeta, timeMeta);
 
         if (this.props.onTodayButtonClick) {
             this.props.onTodayButtonClick(event);
@@ -587,9 +664,20 @@ export class Calendar extends Component {
 
     onClearButtonClick(event) {
         this.updateModel(event, null);
+        this.updateInputfield(null);
+        this.hideOverlay(this.reFocusInputField);
 
         if (this.props.onClearButtonClick) {
             this.props.onClearButtonClick(event);
+        }
+    }
+
+    onPanelClick(event) {
+        if (!this.props.inline) {
+            OverlayEventBus.emit('overlay-click', {
+                originalEvent: event,
+                target: this.container
+            });
         }
     }
 
@@ -615,14 +703,14 @@ export class Calendar extends Component {
     repeat(event, interval, type, direction) {
         event.persist();
 
-        let i = interval||500;
+        let i = interval || 500;
 
         this.clearTimePickerTimer();
         this.timePickerTimer = setTimeout(() => {
             this.repeat(event, 100, type, direction);
         }, i);
 
-        switch(type) {
+        switch (type) {
             case 0:
                 if (direction === 1)
                     this.incrementHour(event);
@@ -644,6 +732,13 @@ export class Calendar extends Component {
                     this.decrementSecond(event);
                 break;
 
+            case 3:
+                if (direction === 1)
+                    this.incrementMilliSecond(event);
+                else
+                    this.decrementMilliSecond(event);
+                break;
+
             default:
                 break;
         }
@@ -662,7 +757,41 @@ export class Calendar extends Component {
         newHour = (newHour >= 24) ? (newHour - 24) : newHour;
 
         if (this.validateHour(newHour, currentTime)) {
-            this.updateTime(event, newHour, currentTime.getMinutes(), currentTime.getSeconds());
+
+            if (this.props.maxDate && this.props.maxDate.toDateString() === currentTime.toDateString() && this.props.maxDate.getHours() === newHour) {
+                if (this.props.maxDate.getMinutes() < currentTime.getMinutes()) {
+                    if (this.props.maxDate.getSeconds() < currentTime.getSeconds()) {
+                        if (this.props.maxDate.getMilliseconds() < currentTime.getMilliseconds()) {
+                            this.updateTime(event, newHour, this.props.maxDate.getMinutes(), this.props.maxDate.getSeconds(), this.props.maxDate.getMilliseconds());
+                        }
+                        else {
+                            this.updateTime(event, newHour, this.props.maxDate.getMinutes(), this.props.maxDate.getSeconds(), currentTime.getMilliseconds());
+                        }
+                    }
+                    else {
+                        this.updateTime(event, newHour, this.props.maxDate.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
+                    }
+                }
+                else if (this.props.maxDate.getMinutes() === currentTime.getMinutes()) {
+                    if (this.props.maxDate.getSeconds() < currentTime.getSeconds()) {
+                        if (this.props.maxDate.getMilliseconds() < currentTime.getMilliseconds()) {
+                            this.updateTime(event, newHour, this.props.maxDate.getMinutes(), this.props.maxDate.getSeconds(), this.props.maxDate.getMilliseconds());
+                        }
+                        else {
+                            this.updateTime(event, newHour, this.props.maxDate.getMinutes(), this.props.maxDate.getSeconds(), currentTime.getMilliseconds());
+                        }
+                    }
+                    else {
+                        this.updateTime(event, newHour, this.props.maxDate.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
+                    }
+                }
+                else {
+                    this.updateTime(event, newHour, currentTime.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
+                }
+            }
+            else {
+                this.updateTime(event, newHour, currentTime.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
+            }
         }
 
         event.preventDefault();
@@ -675,7 +804,40 @@ export class Calendar extends Component {
         newHour = (newHour < 0) ? (newHour + 24) : newHour;
 
         if (this.validateHour(newHour, currentTime)) {
-            this.updateTime(event, newHour, currentTime.getMinutes(), currentTime.getSeconds());
+            if (this.props.minDate && this.props.minDate.toDateString() === currentTime.toDateString() && this.props.minDate.getHours() === newHour) {
+                if (this.props.minDate.getMinutes() > currentTime.getMinutes()) {
+                    if (this.props.minDate.getSeconds() > currentTime.getSeconds()) {
+                        if (this.props.minDate.getMilliseconds() > currentTime.getMilliseconds()) {
+                            this.updateTime(event, newHour, this.props.minDate.getMinutes(), this.props.minDate.getSeconds(), this.props.minDate.getMilliseconds());
+                        }
+                        else {
+                            this.updateTime(event, newHour, this.props.minDate.getMinutes(), this.props.minDate.getSeconds(), currentTime.getMilliseconds());
+                        }
+                    }
+                    else {
+                        this.updateTime(event, newHour, this.props.minDate.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
+                    }
+                }
+                else if (this.props.minDate.getMinutes() === currentTime.getMinutes()) {
+                    if (this.props.minDate.getSeconds() > currentTime.getSeconds()) {
+                        if (this.props.minDate.getMilliseconds() > currentTime.getMilliseconds()) {
+                            this.updateTime(event, newHour, this.props.minDate.getMinutes(), this.props.minDate.getSeconds(), this.props.minDate.getMilliseconds());
+                        }
+                        else {
+                            this.updateTime(event, newHour, this.props.minDate.getMinutes(), this.props.minDate.getSeconds(), currentTime.getMilliseconds());
+                        }
+                    }
+                    else {
+                        this.updateTime(event, newHour, this.props.minDate.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
+                    }
+                }
+                else {
+                    this.updateTime(event, newHour, currentTime.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
+                }
+            }
+            else {
+                this.updateTime(event, newHour, currentTime.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
+            }
         }
 
         event.preventDefault();
@@ -688,7 +850,22 @@ export class Calendar extends Component {
         newMinute = (newMinute > 59) ? (newMinute - 60) : newMinute;
 
         if (this.validateMinute(newMinute, currentTime)) {
-            this.updateTime(event, currentTime.getHours(), newMinute, currentTime.getSeconds());
+            if (this.props.maxDate && this.props.maxDate.toDateString() === currentTime.toDateString() && this.props.maxDate.getMinutes() === newMinute) {
+                if (this.props.maxDate.getSeconds() < currentTime.getSeconds()) {
+                    if (this.props.maxDate.getMilliseconds() < currentTime.getMilliseconds()) {
+                        this.updateTime(event, currentTime.getHours(), newMinute, this.props.maxDate.getSeconds(), this.props.maxDate.getMilliseconds());
+                    }
+                    else {
+                        this.updateTime(event, currentTime.getHours(), newMinute, this.props.maxDate.getSeconds(), currentTime.getMilliseconds());
+                    }
+                }
+                else {
+                    this.updateTime(event, currentTime.getHours(), newMinute, currentTime.getSeconds(), currentTime.getMilliseconds());
+                }
+            }
+            else {
+                this.updateTime(event, currentTime.getHours(), newMinute, currentTime.getSeconds(), currentTime.getMilliseconds());
+            }
         }
 
         event.preventDefault();
@@ -701,7 +878,22 @@ export class Calendar extends Component {
         newMinute = (newMinute < 0) ? (newMinute + 60) : newMinute;
 
         if (this.validateMinute(newMinute, currentTime)) {
-            this.updateTime(event, currentTime.getHours(), newMinute, currentTime.getSeconds());
+            if (this.props.minDate && this.props.minDate.toDateString() === currentTime.toDateString() && this.props.minDate.getMinutes() === newMinute) {
+                if (this.props.minDate.getSeconds() > currentTime.getSeconds()) {
+                    if (this.props.minDate.getMilliseconds() > currentTime.getMilliseconds()) {
+                        this.updateTime(event, currentTime.getHours(), newMinute, this.props.minDate.getSeconds(), this.props.minDate.getMilliseconds());
+                    }
+                    else {
+                        this.updateTime(event, currentTime.getHours(), newMinute, this.props.minDate.getSeconds(), currentTime.getMilliseconds());
+                    }
+                }
+                else {
+                    this.updateTime(event, currentTime.getHours(), newMinute, currentTime.getSeconds(), currentTime.getMilliseconds());
+                }
+            }
+            else {
+                this.updateTime(event, currentTime.getHours(), newMinute, currentTime.getSeconds(), currentTime.getMilliseconds());
+            }
         }
 
         event.preventDefault();
@@ -714,7 +906,17 @@ export class Calendar extends Component {
         newSecond = (newSecond > 59) ? (newSecond - 60) : newSecond;
 
         if (this.validateSecond(newSecond, currentTime)) {
-            this.updateTime(event, currentTime.getHours(), currentTime.getMinutes(), newSecond);
+            if (this.props.maxDate && this.props.maxDate.toDateString() === currentTime.toDateString() && this.props.maxDate.getSeconds() === newSecond) {
+                if (this.props.maxDate.getMilliseconds() < currentTime.getMilliseconds()) {
+                    this.updateTime(event, currentTime.getHours(), currentTime.getMinutes(), newSecond, this.props.maxDate.getMilliseconds());
+                }
+                else {
+                    this.updateTime(event, currentTime.getHours(), currentTime.getMinutes(), newSecond, currentTime.getMilliseconds());
+                }
+            }
+            else {
+                this.updateTime(event, currentTime.getHours(), currentTime.getMinutes(), newSecond, currentTime.getMilliseconds());
+            }
         }
 
         event.preventDefault();
@@ -727,7 +929,43 @@ export class Calendar extends Component {
         newSecond = (newSecond < 0) ? (newSecond + 60) : newSecond;
 
         if (this.validateSecond(newSecond, currentTime)) {
-            this.updateTime(event, currentTime.getHours(), currentTime.getMinutes(), newSecond);
+            if (this.props.minDate && this.props.minDate.toDateString() === currentTime.toDateString() && this.props.minDate.getSeconds() === newSecond) {
+                if (this.props.minDate.getMilliseconds() > currentTime.getMilliseconds()) {
+                    this.updateTime(event, currentTime.getHours(), currentTime.getMinutes(), newSecond, this.props.minDate.getMilliseconds());
+                }
+                else {
+                    this.updateTime(event, currentTime.getHours(), currentTime.getMinutes(), newSecond, currentTime.getMilliseconds());
+                }
+            }
+            else {
+                this.updateTime(event, currentTime.getHours(), currentTime.getMinutes(), newSecond, currentTime.getMilliseconds());
+            }
+        }
+
+        event.preventDefault();
+    }
+
+    incrementMilliSecond(event) {
+        const currentTime = (this.props.value && this.props.value instanceof Date) ? this.props.value : this.getViewDate();
+        const currentMillisecond = currentTime.getMilliseconds();
+        let newMillisecond = currentMillisecond + this.props.stepMillisec;
+        newMillisecond = (newMillisecond > 999) ? (newMillisecond - 1000) : newMillisecond;
+
+        if (this.validateMillisecond(newMillisecond, currentTime)) {
+            this.updateTime(event, currentTime.getHours(), currentTime.getMinutes(), currentTime.getSeconds(), newMillisecond);
+        }
+
+        event.preventDefault();
+    }
+
+    decrementMilliSecond(event) {
+        const currentTime = (this.props.value && this.props.value instanceof Date) ? this.props.value : this.getViewDate();
+        const currentMillisecond = currentTime.getMilliseconds();
+        let newMillisecond = currentMillisecond - this.props.stepMillisec;
+        newMillisecond = (newMillisecond < 0) ? (newMillisecond + 999) : newMillisecond;
+
+        if (this.validateMillisecond(newMillisecond, currentTime)) {
+            this.updateTime(event, currentTime.getHours(), currentTime.getMinutes(), currentTime.getSeconds(), newMillisecond);
         }
 
         event.preventDefault();
@@ -736,28 +974,32 @@ export class Calendar extends Component {
     toggleAmPm(event) {
         const currentTime = (this.props.value && this.props.value instanceof Date) ? this.props.value : this.getViewDate();
         const currentHour = currentTime.getHours();
-        const newHour = (currentHour >= 12) ? currentHour - 12: currentHour + 12;
+        const newHour = (currentHour >= 12) ? currentHour - 12 : currentHour + 12;
 
-        this.updateTime(event, newHour, currentTime.getMinutes(), currentTime.getSeconds());
+        this.updateTime(event, newHour, currentTime.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
         event.preventDefault();
     }
 
     getViewDate() {
-        return this.props.onViewDateChange ? this.props.viewDate: this.state.viewDate;
+        return this.props.onViewDateChange ? this.props.viewDate : this.state.viewDate;
+    }
+
+    isValidDate(date) {
+        return date instanceof Date && !isNaN(date);
     }
 
     validateHour(hour, value) {
         let valid = true;
         let valueDateString = value ? value.toDateString() : null;
 
-        if(this.props.minDate && valueDateString && this.props.minDate.toDateString() === valueDateString) {
-            if(this.props.minDate.getHours() > hour) {
+        if (this.props.minDate && valueDateString && this.props.minDate.toDateString() === valueDateString) {
+            if (this.props.minDate.getHours() > hour) {
                 valid = false;
             }
         }
 
-        if(this.props.maxDate && valueDateString && this.props.maxDate.toDateString() === valueDateString) {
-            if(this.props.maxDate.getHours() < hour) {
+        if (this.props.maxDate && valueDateString && this.props.maxDate.toDateString() === valueDateString) {
+            if (this.props.maxDate.getHours() < hour) {
                 valid = false;
             }
         }
@@ -769,17 +1011,17 @@ export class Calendar extends Component {
         let valid = true;
         let valueDateString = value ? value.toDateString() : null;
 
-        if(this.props.minDate && valueDateString && this.props.minDate.toDateString() === valueDateString) {
-            if(value.getHours() === this.props.minDate.getHours()){
-                if(this.props.minDate.getMinutes() > minute) {
+        if (this.props.minDate && valueDateString && this.props.minDate.toDateString() === valueDateString) {
+            if (value.getHours() === this.props.minDate.getHours()) {
+                if (this.props.minDate.getMinutes() > minute) {
                     valid = false;
                 }
             }
         }
 
-        if(this.props.maxDate && valueDateString && this.props.maxDate.toDateString() === valueDateString) {
-            if(value.getHours() === this.props.maxDate.getHours()){
-                if(this.props.maxDate.getMinutes() < minute) {
+        if (this.props.maxDate && valueDateString && this.props.maxDate.toDateString() === valueDateString) {
+            if (value.getHours() === this.props.maxDate.getHours()) {
+                if (this.props.maxDate.getMinutes() < minute) {
                     valid = false;
                 }
             }
@@ -792,17 +1034,17 @@ export class Calendar extends Component {
         let valid = true;
         let valueDateString = value ? value.toDateString() : null;
 
-        if(this.props.minDate && valueDateString && this.props.minDate.toDateString() === valueDateString) {
-            if(value.getHours() === this.props.minDate.getHours() && value.getMinutes() === this.props.minDate.getMinutes()) {
-                if(this.props.minDate.getMinutes() > second) {
+        if (this.props.minDate && valueDateString && this.props.minDate.toDateString() === valueDateString) {
+            if (value.getHours() === this.props.minDate.getHours() && value.getMinutes() === this.props.minDate.getMinutes()) {
+                if (this.props.minDate.getSeconds() > second) {
                     valid = false;
                 }
             }
         }
 
-        if(this.props.maxDate && valueDateString && this.props.maxDate.toDateString() === valueDateString) {
-            if(value.getHours() === this.props.maxDate.getHours() && value.getMinutes() === this.props.maxDate.getMinutes()){
-                if(this.props.maxDate.getMinutes() < second) {
+        if (this.props.maxDate && valueDateString && this.props.maxDate.toDateString() === valueDateString) {
+            if (value.getHours() === this.props.maxDate.getHours() && value.getMinutes() === this.props.maxDate.getMinutes()) {
+                if (this.props.maxDate.getSeconds() < second) {
                     valid = false;
                 }
             }
@@ -811,32 +1053,43 @@ export class Calendar extends Component {
         return valid;
     }
 
-    updateTime(event, hour, minute, second) {
-        let newDateTime = (this.props.value && this.props.value instanceof Date) ? new Date(this.props.value) : new Date();
+    validateMillisecond(millisecond, value) {
+        let valid = true;
+        let valueDateString = value ? value.toDateString() : null;
 
-        newDateTime.setHours(hour);
-        newDateTime.setMinutes(minute);
-        newDateTime.setSeconds(second);
-
-        this.updateModel(event, newDateTime);
-
-        if (this.props.onSelect) {
-            this.props.onSelect({
-                originalEvent: event,
-                value: newDateTime
-            });
+        if (this.props.minDate && valueDateString && this.props.minDate.toDateString() === valueDateString) {
+            if (value.getHours() === this.props.minDate.getHours() && value.getSeconds() === this.props.minDate.getSeconds() && value.getMinutes() === this.props.minDate.getMinutes()) {
+                if (this.props.minDate.getMilliseconds() > millisecond) {
+                    valid = false;
+                }
+            }
         }
+
+        if (this.props.maxDate && valueDateString && this.props.maxDate.toDateString() === valueDateString) {
+            if (value.getHours() === this.props.maxDate.getHours() && value.getSeconds() === this.props.maxDate.getSeconds() && value.getMinutes() === this.props.maxDate.getMinutes()) {
+                if (this.props.maxDate.getMilliseconds() < millisecond) {
+                    valid = false;
+                }
+            }
+        }
+
+        return valid;
     }
 
-    updateViewDate(event, value) {
+    validateDate(value) {
         if (this.props.yearNavigator) {
             let viewYear = value.getFullYear();
 
-            if (this.props.minDate && this.props.minDate.getFullYear() > viewYear) {
-                viewYear = this.props.minDate.getFullYear();
+            const minRangeYear = this.props.yearRange ? parseInt(this.props.yearRange.split(':')[0], 10) : null;
+            const maxRangeYear = this.props.yearRange ? parseInt(this.props.yearRange.split(':')[1], 10) : null;
+            const minYear = this.props.minDate && minRangeYear != null ? Math.max(this.props.minDate.getFullYear(), minRangeYear) : this.props.minDate || minRangeYear;
+            const maxYear = this.props.maxDate && maxRangeYear != null ? Math.min(this.props.maxDate.getFullYear(), maxRangeYear) : this.props.maxDate || maxRangeYear;
+
+            if (minYear && minYear > viewYear) {
+                viewYear = minYear;
             }
-            if (this.props.maxDate && this.props.maxDate.getFullYear() < viewYear) {
-                viewYear = this.props.maxDate.getFullYear();
+            if (maxYear && maxYear < viewYear) {
+                viewYear = maxYear
             }
 
             value.setFullYear(viewYear);
@@ -848,6 +1101,30 @@ export class Calendar extends Component {
 
             value.setMonth(viewMonthWithMinMax);
         }
+    }
+
+    updateTime(event, hour, minute, second, millisecond) {
+        let newDateTime = (this.props.value && this.props.value instanceof Date) ? new Date(this.props.value) : new Date();
+
+        newDateTime.setHours(hour);
+        newDateTime.setMinutes(minute);
+        newDateTime.setSeconds(second);
+        newDateTime.setMilliseconds(millisecond);
+
+        this.updateModel(event, newDateTime);
+
+        if (this.props.onSelect) {
+            this.props.onSelect({
+                originalEvent: event,
+                value: newDateTime
+            });
+        }
+
+        this.updateInputfield(newDateTime);
+    }
+
+    updateViewDate(event, value) {
+        this.validateDate(value);
 
         if (this.props.onViewDateChange) {
             this.props.onViewDateChange({
@@ -876,7 +1153,7 @@ export class Calendar extends Component {
                 if (nextRow) {
                     let focusCell = nextRow.children[cellIndex].children[0];
                     if (DomHandler.hasClass(focusCell, 'p-disabled')) {
-                        this.navigation = {backward: false};
+                        this.navigation = { backward: false };
                         this.navForward(event);
                     }
                     else {
@@ -885,7 +1162,7 @@ export class Calendar extends Component {
                     }
                 }
                 else {
-                    this.navigation = {backward: false};
+                    this.navigation = { backward: false };
                     this.navForward(event);
                 }
                 event.preventDefault();
@@ -900,7 +1177,7 @@ export class Calendar extends Component {
                 if (prevRow) {
                     let focusCell = prevRow.children[cellIndex].children[0];
                     if (DomHandler.hasClass(focusCell, 'p-disabled')) {
-                        this.navigation = {backward: true};
+                        this.navigation = { backward: true };
                         this.navBackward(event);
                     }
                     else {
@@ -909,7 +1186,7 @@ export class Calendar extends Component {
                     }
                 }
                 else {
-                    this.navigation = {backward: true};
+                    this.navigation = { backward: true };
                     this.navBackward(event);
                 }
                 event.preventDefault();
@@ -952,7 +1229,7 @@ export class Calendar extends Component {
                     }
                 }
                 else {
-                    this.navigateToMonth(false, groupIndex,event);
+                    this.navigateToMonth(false, groupIndex, event);
                 }
                 event.preventDefault();
                 break;
@@ -967,7 +1244,7 @@ export class Calendar extends Component {
 
             //escape
             case 27: {
-                this.hideOverlay()
+                this.hideOverlay(this.reFocusInputField)
                 event.preventDefault();
                 break;
             }
@@ -987,11 +1264,11 @@ export class Calendar extends Component {
     navigateToMonth(prev, groupIndex, event) {
         if (prev) {
             if (this.props.numberOfMonths === 1 || (groupIndex === 0)) {
-                this.navigation = {backward: true};
+                this.navigation = { backward: true };
                 this.navBackward(event);
             }
             else {
-                let prevMonthContainer = this.panel.children[groupIndex - 1];
+                let prevMonthContainer = this.overlayRef.current.children[groupIndex - 1];
                 let cells = DomHandler.find(prevMonthContainer, '.p-datepicker-calendar td span:not(.p-disabled)');
                 let focusCell = cells[cells.length - 1];
                 focusCell.tabIndex = '0';
@@ -1000,11 +1277,11 @@ export class Calendar extends Component {
         }
         else {
             if (this.props.numberOfMonths === 1 || (groupIndex === this.props.numberOfMonths - 1)) {
-                this.navigation = {backward: false};
+                this.navigation = { backward: false };
                 this.navForward(event);
             }
             else {
-                let nextMonthContainer = this.panel.children[groupIndex + 1];
+                let nextMonthContainer = this.overlayRef.current.children[groupIndex + 1];
                 let focusCell = DomHandler.findSingle(nextMonthContainer, '.p-datepicker-calendar td span:not(.p-disabled)');
                 focusCell.tabIndex = '0';
                 focusCell.focus();
@@ -1020,9 +1297,9 @@ export class Calendar extends Component {
             case 38:
             case 40: {
                 cell.tabIndex = '-1';
-                var cells = cell.parentElement.children;
-                var cellIndex = DomHandler.index(cell);
-                let nextCell = cells[event.which === 40 ? cellIndex + 3 : cellIndex -3];
+                let cells = cell.parentElement.children;
+                let cellIndex = DomHandler.index(cell);
+                let nextCell = cells[event.which === 40 ? cellIndex + 3 : cellIndex - 3];
                 if (nextCell) {
                     nextCell.tabIndex = '0';
                     nextCell.focus();
@@ -1064,7 +1341,7 @@ export class Calendar extends Component {
 
             //escape
             case 27: {
-                this.hideOverlay();
+                this.hideOverlay(this.reFocusInputField);
                 event.preventDefault();
                 break;
             }
@@ -1081,13 +1358,13 @@ export class Calendar extends Component {
         }
     }
 
-    onDateSelect(event, dateMeta) {
-        if(this.props.disabled || !dateMeta.selectable) {
+    onDateSelect(event, dateMeta, timeMeta) {
+        if (this.props.disabled || !dateMeta.selectable) {
             event.preventDefault();
             return;
         }
 
-        DomHandler.find(this.panel, '.p-datepicker-calendar td span:not(.p-disabled)').forEach(cell => cell.tabIndex = -1);
+        DomHandler.find(this.overlayRef.current, '.p-datepicker-calendar td span:not(.p-disabled)').forEach(cell => cell.tabIndex = -1);
         event.currentTarget.focus();
 
         if (this.isMultipleSelection()) {
@@ -1097,20 +1374,20 @@ export class Calendar extends Component {
                 });
                 this.updateModel(event, value);
             }
-            else if(!this.props.maxDateCount || !this.props.value || this.props.maxDateCount > this.props.value.length) {
-                this.selectDate(event, dateMeta);
+            else if (!this.props.maxDateCount || !this.props.value || this.props.maxDateCount > this.props.value.length) {
+                this.selectDate(event, dateMeta, timeMeta);
             }
         }
         else {
-            this.selectDate(event, dateMeta);
+            this.selectDate(event, dateMeta, timeMeta);
         }
 
-        if(!this.props.inline && this.isSingleSelection() && (!this.props.showTime || this.props.hideOnDateTimeSelect)) {
+        if (!this.props.inline && this.isSingleSelection() && (!this.props.showTime || this.props.hideOnDateTimeSelect)) {
             setTimeout(() => {
                 this.hideOverlay();
             }, 100);
 
-            if(this.mask) {
+            if (this.touchUIMask) {
                 this.disableModality();
             }
         }
@@ -1118,29 +1395,46 @@ export class Calendar extends Component {
         event.preventDefault();
     }
 
-    selectDate(event, dateMeta) {
+    selectTime(date, timeMeta) {
+        if (this.props.showTime) {
+            let hours, minutes, seconds, milliseconds;
+
+            if (timeMeta) {
+                ({ hours, minutes, seconds, milliseconds } = timeMeta);
+            }
+            else {
+                let time = (this.props.value && this.props.value instanceof Date) ? this.props.value : new Date();
+                [hours, minutes, seconds, milliseconds] = [time.getHours(), time.getMinutes(), time.getSeconds(), time.getMilliseconds()];
+            }
+
+            date.setHours(hours);
+            date.setMinutes(minutes);
+            date.setSeconds(seconds);
+            date.setMilliseconds(milliseconds);
+        }
+    }
+
+    selectDate(event, dateMeta, timeMeta) {
         let date = new Date(dateMeta.year, dateMeta.month, dateMeta.day);
 
-        if(this.props.showTime) {
-            let time = (this.props.value && this.props.value instanceof Date) ? this.props.value : new Date();
-            date.setHours(time.getHours());
-            date.setMinutes(time.getMinutes());
-            date.setSeconds(time.getSeconds());
-        }
+        this.selectTime(date, timeMeta);
 
-        if(this.props.minDate && this.props.minDate > date) {
+        if (this.props.minDate && this.props.minDate > date) {
             date = this.props.minDate;
         }
 
-        if(this.props.maxDate && this.props.maxDate < date) {
+        if (this.props.maxDate && this.props.maxDate < date) {
             date = this.props.maxDate;
         }
+
+        let selectedValues = date;
 
         if (this.isSingleSelection()) {
             this.updateModel(event, date);
         }
-        else if(this.isMultipleSelection()) {
-            this.updateModel(event, this.props.value ? [...this.props.value, date] : [date]);
+        else if (this.isMultipleSelection()) {
+            selectedValues = this.props.value ? [...this.props.value, date] : [date];
+            this.updateModel(event, selectedValues);
         }
         else if (this.isRangeSelection()) {
             if (this.props.value && this.props.value.length) {
@@ -1155,10 +1449,12 @@ export class Calendar extends Component {
                     endDate = null;
                 }
 
-                this.updateModel(event, [startDate, endDate]);
+                selectedValues = [startDate, endDate];
+                this.updateModel(event, selectedValues);
             }
             else {
-                this.updateModel(event, [date, null]);
+                selectedValues = [date, null];
+                this.updateModel(event, selectedValues);
             }
         }
 
@@ -1168,76 +1464,85 @@ export class Calendar extends Component {
                 value: date
             });
         }
+
+        this.updateInputfield(selectedValues);
     }
 
     onMonthSelect(event, month) {
-        this.onDateSelect(event, {year: this.getViewDate().getFullYear(), month: month, day: 1, selectable: true});
+        this.onDateSelect(event, { year: this.getViewDate().getFullYear(), month: month, day: 1, selectable: true });
         event.preventDefault();
     }
 
     updateModel(event, value) {
         if (this.props.onChange) {
+            this.viewStateChanged = true;
+
             this.props.onChange({
                 originalEvent: event,
                 value: value,
-                stopPropagation : () =>{},
-                preventDefault : () =>{},
+                stopPropagation: () => { },
+                preventDefault: () => { },
                 target: {
                     name: this.props.name,
-                    id: this.props.id,
+                    id: this.id,
                     value: value
                 }
             });
-
-            this.viewStateChanged = true;
         }
     }
 
     showOverlay() {
-        if (this.props.autoZIndex) {
-            this.panel.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
-        }
-        this.panel.style.display = 'block';
-
-        setTimeout(() => {
-            DomHandler.addClass(this.panel, 'p-input-overlay-visible');
-            DomHandler.removeClass(this.panel, 'p-input-overlay-hidden');
-        }, 1);
-
-        this.alignPanel();
-        this.bindDocumentClickListener();
-        this.bindDocumentResizeListener();
+        this.setState({ overlayVisible: true });
     }
 
-    hideOverlay() {
-        if (this.panel) {
-            DomHandler.addClass(this.panel, 'p-input-overlay-hidden');
-            DomHandler.removeClass(this.panel, 'p-input-overlay-visible');
-            this.unbindDocumentClickListener();
-            this.unbindDocumentResizeListener();
+    hideOverlay(callback) {
+        this.setState({ overlayVisible: false }, () => {
+            this.viewStateChanged = false;
+            this.ignoreFocusFunctionality = false;
+            if (callback) {
+                callback();
+            }
+        });
+    }
 
-            this.hideTimeout = setTimeout(() => {
-                this.panel.style.display = 'none';
-                DomHandler.removeClass(this.panel, 'p-input-overlay-hidden');
-            }, 150);
+    onOverlayEnter() {
+        if (this.props.autoZIndex) {
+            this.overlayRef.current.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
         }
+        this.alignOverlay();
+    }
+
+    onOverlayEntered() {
+        this.bindDocumentClickListener();
+        this.bindDocumentResizeListener();
+        this.bindScrollListener();
+    }
+
+    onOverlayExit() {
+        this.unbindDocumentClickListener();
+        this.unbindDocumentResizeListener();
+        this.unbindScrollListener();
+    }
+
+    onOverlayExited() {
+        DomHandler.revertZIndex();
     }
 
     bindDocumentClickListener() {
         if (!this.documentClickListener) {
             this.documentClickListener = (event) => {
-                if (this.isOutsideClicked(event)) {
+                if (this.state.overlayVisible && this.isOutsideClicked(event)) {
                     this.hideOverlay();
                 }
             };
 
-            document.addEventListener('click', this.documentClickListener);
+            document.addEventListener('mousedown', this.documentClickListener);
         }
     }
 
     unbindDocumentClickListener() {
         if (this.documentClickListener) {
-            document.removeEventListener('click', this.documentClickListener);
+            document.removeEventListener('mousedown', this.documentClickListener);
             this.documentClickListener = null;
         }
     }
@@ -1256,9 +1561,27 @@ export class Calendar extends Component {
         }
     }
 
+    bindScrollListener() {
+        if (!this.scrollHandler) {
+            this.scrollHandler = new ConnectedOverlayScrollHandler(this.container, () => {
+                if (this.state.overlayVisible) {
+                    this.hideOverlay();
+                }
+            });
+        }
+
+        this.scrollHandler.bindScrollListener();
+    }
+
+    unbindScrollListener() {
+        if (this.scrollHandler) {
+            this.scrollHandler.unbindScrollListener();
+        }
+    }
+
     isOutsideClicked(event) {
         return this.container && !(this.container.isSameNode(event.target) || this.isNavIconClicked(event) ||
-            this.container.contains(event.target) || (this.panel && this.panel.contains(event.target)));
+            this.container.contains(event.target) || (this.overlayRef && this.overlayRef.current.contains(event.target)));
     }
 
     isNavIconClicked(event) {
@@ -1267,54 +1590,50 @@ export class Calendar extends Component {
     }
 
     onWindowResize() {
-        if (this.panel.offsetParent && !DomHandler.isAndroid()) {
+        if (this.state.overlayVisible && !DomHandler.isAndroid()) {
             this.hideOverlay();
         }
     }
 
-    alignPanel() {
+    alignOverlay() {
         if (this.props.touchUI) {
             this.enableModality();
         }
         else {
-            if(this.props.appendTo) {
-                DomHandler.absolutePosition(this.panel, this.inputElement);
-                this.panel.style.minWidth = DomHandler.getWidth(this.container) + 'px';
-            }
-            else {
-                DomHandler.relativePosition(this.panel, this.inputElement);
-            }
+            const container = this.inputElement.parentElement;
+            this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
+            DomHandler.absolutePosition(this.overlayRef.current, container);
         }
     }
 
     enableModality() {
-        if (!this.mask) {
-            this.mask = document.createElement('div');
-            this.mask.style.zIndex = String(parseInt(this.panel.style.zIndex, 10) - 1);
-            DomHandler.addMultipleClasses(this.mask, 'p-component-overlay p-datepicker-mask p-datepicker-mask-scrollblocker');
+        if (!this.touchUIMask) {
+            this.touchUIMask = document.createElement('div');
+            this.touchUIMask.style.zIndex = String(parseInt(this.overlayRef.current.style.zIndex, 10) - 1);
+            DomHandler.addMultipleClasses(this.touchUIMask, 'p-component-overlay p-datepicker-mask p-datepicker-mask-scrollblocker');
 
-            this.maskClickListener = () => {
+            this.touchUIMaskClickListener = () => {
                 this.disableModality();
             };
-            this.mask.addEventListener('click', this.maskClickListener);
+            this.touchUIMask.addEventListener('click', this.touchUIMaskClickListener);
 
-            document.body.appendChild(this.mask);
+            document.body.appendChild(this.touchUIMask);
             DomHandler.addClass(document.body, 'p-overflow-hidden');
         }
     }
 
     disableModality() {
-        if (this.mask) {
-            this.mask.removeEventListener('click', this.maskClickListener);
-            this.maskClickListener = null;
-            document.body.removeChild(this.mask);
-            this.mask = null;
+        if (this.touchUIMask) {
+            this.touchUIMask.removeEventListener('click', this.touchUIMaskClickListener);
+            this.touchUIMaskClickListener = null;
+            document.body.removeChild(this.touchUIMask);
+            this.touchUIMask = null;
 
             let bodyChildren = document.body.children;
             let hasBlockerMasks;
             for (let i = 0; i < bodyChildren.length; i++) {
                 let bodyChild = bodyChildren[i];
-                if(DomHandler.hasClass(bodyChild, 'p-datepicker-mask-scrollblocker')) {
+                if (DomHandler.hasClass(bodyChild, 'p-datepicker-mask-scrollblocker')) {
                     hasBlockerMasks = true;
                     break;
                 }
@@ -1360,7 +1679,7 @@ export class Calendar extends Component {
     getPreviousMonthAndYear(month, year) {
         let m, y;
 
-        if(month === 0) {
+        if (month === 0) {
             m = 11;
             y = year - 1;
         }
@@ -1369,13 +1688,13 @@ export class Calendar extends Component {
             y = year;
         }
 
-        return {'month':m, 'year':y};
+        return { 'month': m, 'year': y };
     }
 
     getNextMonthAndYear(month, year) {
         let m, y;
 
-        if(month === 11) {
+        if (month === 11) {
             m = 0;
             y = year + 1;
         }
@@ -1384,18 +1703,19 @@ export class Calendar extends Component {
             y = year;
         }
 
-        return {'month':m,'year':y};
+        return { 'month': m, 'year': y };
     }
 
     getSundayIndex() {
-        return this.props.locale.firstDayOfWeek > 0 ? 7 - this.props.locale.firstDayOfWeek : 0;
+        const firstDayOfWeek = localeOption('firstDayOfWeek', this.props.locale);
+        return firstDayOfWeek > 0 ? 7 - firstDayOfWeek : 0;
     }
 
     createWeekDays() {
         let weekDays = [];
-        let dayIndex = this.props.locale.firstDayOfWeek;
-        for(let i = 0; i < 7; i++) {
-            weekDays.push(this.props.locale.dayNamesMin[dayIndex]);
+        let { firstDayOfWeek: dayIndex, dayNamesMin } = localeOptions(this.props.locale);
+        for (let i = 0; i < 7; i++) {
+            weekDays.push(dayNamesMin[dayIndex]);
             dayIndex = (dayIndex === 6) ? 0 : ++dayIndex;
         }
 
@@ -1404,7 +1724,7 @@ export class Calendar extends Component {
 
     createMonths(month, year) {
         let months = [];
-        for (let i = 0 ; i < this.props.numberOfMonths; i++) {
+        for (let i = 0; i < this.props.numberOfMonths; i++) {
             let m = month + i;
             let y = year;
             if (m > 11) {
@@ -1428,34 +1748,42 @@ export class Calendar extends Component {
         let weekNumbers = [];
         let monthRows = Math.ceil((daysLength + firstDay) / 7);
 
-        for(let i = 0; i < monthRows; i++) {
+        for (let i = 0; i < monthRows; i++) {
             let week = [];
 
-            if(i === 0) {
-                for(let j = (prevMonthDaysLength - firstDay + 1); j <= prevMonthDaysLength; j++) {
+            if (i === 0) {
+                for (let j = (prevMonthDaysLength - firstDay + 1); j <= prevMonthDaysLength; j++) {
                     let prev = this.getPreviousMonthAndYear(month, year);
-                    week.push({day: j, month: prev.month, year: prev.year, otherMonth: true,
-                        today: this.isToday(today, j, prev.month, prev.year), selectable: this.isSelectable(j, prev.month, prev.year, true)});
+                    week.push({
+                        day: j, month: prev.month, year: prev.year, otherMonth: true,
+                        today: this.isToday(today, j, prev.month, prev.year), selectable: this.isSelectable(j, prev.month, prev.year, true)
+                    });
                 }
 
                 let remainingDaysLength = 7 - week.length;
-                for(let j = 0; j < remainingDaysLength; j++) {
-                    week.push({day: dayNo, month: month, year: year, today: this.isToday(today, dayNo, month, year),
-                        selectable: this.isSelectable(dayNo, month, year, false)});
+                for (let j = 0; j < remainingDaysLength; j++) {
+                    week.push({
+                        day: dayNo, month: month, year: year, today: this.isToday(today, dayNo, month, year),
+                        selectable: this.isSelectable(dayNo, month, year, false)
+                    });
                     dayNo++;
                 }
             }
             else {
                 for (let j = 0; j < 7; j++) {
-                    if(dayNo > daysLength) {
+                    if (dayNo > daysLength) {
                         let next = this.getNextMonthAndYear(month, year);
-                        week.push({day: dayNo - daysLength, month: next.month, year: next.year, otherMonth:true,
+                        week.push({
+                            day: dayNo - daysLength, month: next.month, year: next.year, otherMonth: true,
                             today: this.isToday(today, dayNo - daysLength, next.month, next.year),
-                            selectable: this.isSelectable((dayNo - daysLength), next.month, next.year, true)});
+                            selectable: this.isSelectable((dayNo - daysLength), next.month, next.year, true)
+                        });
                     }
                     else {
-                        week.push({day: dayNo, month: month, year: year, today: this.isToday(today, dayNo, month, year),
-                            selectable: this.isSelectable(dayNo, month, year, false)});
+                        week.push({
+                            day: dayNo, month: month, year: year, today: this.isToday(today, dayNo, month, year),
+                            selectable: this.isSelectable(dayNo, month, year, false)
+                        });
                     }
 
                     dayNo++;
@@ -1479,11 +1807,11 @@ export class Calendar extends Component {
 
     getWeekNumber(date) {
         let checkDate = new Date(date.getTime());
-        checkDate.setDate(checkDate.getDate() + 4 - ( checkDate.getDay() || 7 ));
+        checkDate.setDate(checkDate.getDate() + 4 - (checkDate.getDay() || 7));
         let time = checkDate.getTime();
-        checkDate.setMonth( 0 );
-        checkDate.setDate( 1 );
-        return Math.floor( Math.round((time - checkDate.getTime()) / 86400000 ) / 7 ) + 1;
+        checkDate.setMonth(0);
+        checkDate.setDate(1);
+        return Math.floor(Math.round((time - checkDate.getTime()) / 86400000) / 7) + 1;
     }
 
     isSelectable(day, month, year, otherMonth) {
@@ -1494,15 +1822,15 @@ export class Calendar extends Component {
         let validMonth = true;
 
         if (this.props.minDate) {
-            if(this.props.minDate.getFullYear() > year) {
+            if (this.props.minDate.getFullYear() > year) {
                 validMin = false;
             }
-            else if(this.props.minDate.getFullYear() === year) {
-                if(this.props.minDate.getMonth() > month) {
+            else if (this.props.minDate.getFullYear() === year) {
+                if (this.props.minDate.getMonth() > month) {
                     validMin = false;
                 }
-                else if(this.props.minDate.getMonth() === month) {
-                    if(this.props.minDate.getDate() > day) {
+                else if (this.props.minDate.getMonth() === month) {
+                    if (this.props.minDate.getDate() > day) {
                         validMin = false;
                     }
                 }
@@ -1510,15 +1838,15 @@ export class Calendar extends Component {
         }
 
         if (this.props.maxDate) {
-            if(this.props.maxDate.getFullYear() < year) {
+            if (this.props.maxDate.getFullYear() < year) {
                 validMax = false;
             }
-            else if(this.props.maxDate.getFullYear() === year) {
-                if(this.props.maxDate.getMonth() < month) {
+            else if (this.props.maxDate.getFullYear() === year) {
+                if (this.props.maxDate.getMonth() < month) {
                     validMax = false;
                 }
-                else if(this.props.maxDate.getMonth() === month) {
-                    if(this.props.maxDate.getDate() < day) {
+                else if (this.props.maxDate.getMonth() === month) {
+                    if (this.props.maxDate.getDate() < day) {
                         validMax = false;
                     }
                 }
@@ -1540,24 +1868,73 @@ export class Calendar extends Component {
         return validMin && validMax && validDate && validDay && validMonth;
     }
 
+    isSelectableTime(value) {
+        let validMin = true;
+        let validMax = true;
+
+        if (this.props.minDate && this.props.minDate.toDateString() === value.toDateString()) {
+            if (this.props.minDate.getHours() > value.getHours()) {
+                validMin = false;
+            }
+            else if (this.props.minDate.getHours() === value.getHours()) {
+                if (this.props.minDate.getMinutes() > value.getMinutes()) {
+                    validMin = false;
+                }
+                else if (this.props.minDate.getMinutes() === value.getMinutes()) {
+                    if (this.props.minDate.getSeconds() > value.getSeconds()) {
+                        validMin = false;
+                    }
+                    else if (this.props.minDate.getSeconds() === value.getSeconds()) {
+                        if (this.props.minDate.getMilliseconds() > value.getMilliseconds()) {
+                            validMin = false;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (this.props.maxDate && this.props.maxDate.toDateString() === value.toDateString()) {
+            if (this.props.maxDate.getHours() < value.getHours()) {
+                validMax = false;
+            }
+            else if (this.props.maxDate.getHours() === value.getHours()) {
+                if (this.props.maxDate.getMinutes() < value.getMinutes()) {
+                    validMax = false;
+                }
+                else if (this.props.maxDate.getMinutes() === value.getMinutes()) {
+                    if (this.props.maxDate.getSeconds() < value.getSeconds()) {
+                        validMax = false;
+                    }
+                    else if (this.props.maxDate.getSeconds() === value.getSeconds()) {
+                        if (this.props.maxDate.getMilliseconds() < value.getMilliseconds()) {
+                            validMax = false;
+                        }
+                    }
+                }
+            }
+        }
+
+        return validMin && validMax;
+    }
+
     isSelected(dateMeta) {
-        if(this.props.value) {
-            if(this.isSingleSelection()) {
+        if (this.props.value) {
+            if (this.isSingleSelection()) {
                 return this.isDateEquals(this.props.value, dateMeta);
             }
-            else if(this.isMultipleSelection()) {
+            else if (this.isMultipleSelection()) {
                 let selected = false;
-                for(let date of this.props.value) {
+                for (let date of this.props.value) {
                     selected = this.isDateEquals(date, dateMeta);
-                    if(selected) {
+                    if (selected) {
                         break;
                     }
                 }
 
                 return selected;
             }
-            else if(this.isRangeSelection()) {
-                if(this.props.value[1])
+            else if (this.isRangeSelection()) {
+                if (this.props.value[1])
                     return this.isDateEquals(this.props.value[0], dateMeta) || this.isDateEquals(this.props.value[1], dateMeta) || this.isDateBetween(this.props.value[0], this.props.value[1], dateMeta);
                 else {
                     return this.isDateEquals(this.props.value[0], dateMeta);
@@ -1573,14 +1950,14 @@ export class Calendar extends Component {
     isMonthSelected(month) {
         const viewDate = this.getViewDate();
 
-        if(this.props.value && this.props.value instanceof Date)
+        if (this.props.value && this.props.value instanceof Date)
             return this.props.value.getDate() === 1 && this.props.value.getMonth() === month && this.props.value.getFullYear() === viewDate.getFullYear();
         else
             return false;
     }
 
     isDateEquals(value, dateMeta) {
-        if(value && value instanceof Date)
+        if (value && value instanceof Date)
             return value.getDate() === dateMeta.day && value.getMonth() === dateMeta.month && value.getFullYear() === dateMeta.year;
         else
             return false;
@@ -1588,7 +1965,7 @@ export class Calendar extends Component {
 
     isDateBetween(start, end, dateMeta) {
         let between = false;
-        if(start && end) {
+        if (start && end) {
             let date = new Date(dateMeta.year, dateMeta.month, dateMeta.day);
             return start.getTime() <= date.getTime() && end.getTime() >= date.getTime();
         }
@@ -1614,7 +1991,7 @@ export class Calendar extends Component {
 
     isDateDisabled(day, month, year) {
         if (this.props.disabledDates) {
-            for (let i = 0 ; i < this.props.disabledDates.length; i++) {
+            for (let i = 0; i < this.props.disabledDates.length; i++) {
                 let disabledDate = this.props.disabledDates[i];
 
                 if (disabledDate.getFullYear() === year && disabledDate.getMonth() === month && disabledDate.getDate() === day) {
@@ -1627,7 +2004,7 @@ export class Calendar extends Component {
     }
 
     isDayDisabled(day, month, year) {
-        if(this.props.disabledDays) {
+        if (this.props.disabledDays) {
             let weekday = new Date(year, month, day);
             let weekdayNumber = weekday.getDay();
 
@@ -1637,52 +2014,57 @@ export class Calendar extends Component {
         return false;
     }
 
-    getValueToRender() {
+    updateInputfield(value) {
+        if (!this.inputElement) {
+            return;
+        }
+
         let formattedValue = '';
 
-        if(this.props.value) {
+        if (value) {
             try {
-                if(this.isSingleSelection()) {
-                    formattedValue = this.formatDateTime(this.props.value);
+                if (this.isSingleSelection()) {
+                    formattedValue = this.isValidDate(value) ? this.formatDateTime(value) : '';
                 }
-                else if(this.isMultipleSelection()) {
-                    for(let i = 0; i < this.props.value.length; i++) {
-                        let dateAsString = this.formatDateTime(this.props.value[i]);
+                else if (this.isMultipleSelection()) {
+                    for (let i = 0; i < value.length; i++) {
+                        let selectedValue = value[i];
+                        let dateAsString = this.isValidDate(selectedValue) ? this.formatDateTime(selectedValue) : '';
                         formattedValue += dateAsString;
-                        if(i !== (this.props.value.length - 1)) {
+                        if (i !== (value.length - 1)) {
                             formattedValue += ', ';
                         }
                     }
                 }
-                else if(this.isRangeSelection()) {
-                    if(this.props.value && this.props.value.length) {
-                        let startDate = this.props.value[0];
-                        let endDate = this.props.value[1];
+                else if (this.isRangeSelection()) {
+                    if (value && value.length) {
+                        let startDate = value[0];
+                        let endDate = value[1];
 
-                        formattedValue = this.formatDateTime(startDate);
-                        if(endDate) {
-                            formattedValue += ' - ' + this.formatDateTime(endDate);
+                        formattedValue = this.isValidDate(startDate) ? this.formatDateTime(startDate) : '';
+                        if (endDate) {
+                            formattedValue += (this.isValidDate(endDate) ? ' - ' + this.formatDateTime(endDate) : '');
                         }
                     }
                 }
             }
-            catch(err) {
-                formattedValue = this.props.value;
+            catch (err) {
+                formattedValue = value;
             }
         }
 
-        return formattedValue;
+        this.inputElement.value = formattedValue;
     }
 
     formatDateTime(date) {
         let formattedValue = null;
-        if(date) {
-            if(this.props.timeOnly) {
+        if (date) {
+            if (this.props.timeOnly) {
                 formattedValue = this.formatTime(date);
             }
             else {
-                formattedValue = this.formatDate(date, this.props.dateFormat);
-                if(this.props.showTime) {
+                formattedValue = this.formatDate(date, this.getDateFormat());
+                if (this.props.showTime) {
                     formattedValue += ' ' + this.formatTime(date);
                 }
             }
@@ -1698,12 +2080,12 @@ export class Calendar extends Component {
 
         let iFormat;
         const lookAhead = (match) => {
-                const matches = (iFormat + 1 < format.length && format.charAt(iFormat + 1) === match);
-                if (matches) {
-                    iFormat++;
-                }
-                return matches;
-            },
+            const matches = (iFormat + 1 < format.length && format.charAt(iFormat + 1) === match);
+            if (matches) {
+                iFormat++;
+            }
+            return matches;
+        },
             formatNumber = (match, value, len) => {
                 let num = '' + value;
                 if (lookAhead(match)) {
@@ -1718,6 +2100,7 @@ export class Calendar extends Component {
             };
         let output = '';
         let literal = false;
+        const { dayNamesShort, dayNames, monthNamesShort, monthNames } = localeOptions(this.props.locale);
 
         if (date) {
             for (iFormat = 0; iFormat < format.length; iFormat++) {
@@ -1733,7 +2116,7 @@ export class Calendar extends Component {
                             output += formatNumber('d', date.getDate(), 2);
                             break;
                         case 'D':
-                            output += formatName('D', date.getDay(), this.props.locale.dayNamesShort, this.props.locale.dayNames);
+                            output += formatName('D', date.getDay(), dayNamesShort, dayNames);
                             break;
                         case 'o':
                             output += formatNumber('o',
@@ -1745,7 +2128,7 @@ export class Calendar extends Component {
                             output += formatNumber('m', date.getMonth() + 1, 2);
                             break;
                         case 'M':
-                            output += formatName('M',date.getMonth(), this.props.locale.monthNamesShort, this.props.locale.monthNames);
+                            output += formatName('M', date.getMonth(), monthNamesShort, monthNames);
                             break;
                         case 'y':
                             output += lookAhead('y') ? date.getFullYear() : (date.getFullYear() % 100 < 10 ? '0' : '') + (date.getFullYear() % 100);
@@ -1781,6 +2164,7 @@ export class Calendar extends Component {
         let hours = date.getHours();
         let minutes = date.getMinutes();
         let seconds = date.getSeconds();
+        let milliseconds = date.getMilliseconds();
 
         if (this.props.hourFormat === '12' && hours > 11 && hours !== 12) {
             hours -= 12;
@@ -1800,6 +2184,11 @@ export class Calendar extends Component {
             output += (seconds < 10) ? '0' + seconds : seconds;
         }
 
+        if (this.props.showMillisec) {
+            output += '.';
+            output += milliseconds < 100 ? (milliseconds < 10 ? '00' : '0') + milliseconds : milliseconds;
+        }
+
         if (this.props.hourFormat === '12') {
             output += date.getHours() > 11 ? ' PM' : ' AM';
         }
@@ -1808,26 +2197,26 @@ export class Calendar extends Component {
     }
 
     parseValueFromString(text) {
-        if(!text || text.trim().length === 0) {
+        if (!text || text.trim().length === 0) {
             return null;
         }
 
         let value;
 
-        if(this.isSingleSelection()) {
+        if (this.isSingleSelection()) {
             value = this.parseDateTime(text);
         }
-        else if(this.isMultipleSelection()) {
+        else if (this.isMultipleSelection()) {
             let tokens = text.split(',');
             value = [];
-            for(let token of tokens) {
+            for (let token of tokens) {
                 value.push(this.parseDateTime(token.trim()));
             }
         }
-        else if(this.isRangeSelection()) {
+        else if (this.isRangeSelection()) {
             let tokens = text.split(' - ');
             value = [];
-            for(let i = 0; i < tokens.length; i++) {
+            for (let i = 0; i < tokens.length; i++) {
                 value[i] = this.parseDateTime(tokens[i].trim());
             }
         }
@@ -1839,17 +2228,17 @@ export class Calendar extends Component {
         let date;
         let parts = text.split(' ');
 
-        if(this.props.timeOnly) {
+        if (this.props.timeOnly) {
             date = new Date();
             this.populateTime(date, parts[0], parts[1]);
         }
         else {
-            if(this.props.showTime) {
-                date = this.parseDate(parts[0], this.props.dateFormat);
+            if (this.props.showTime) {
+                date = this.parseDate(parts[0], this.getDateFormat());
                 this.populateTime(date, parts[1], parts[2]);
             }
             else {
-                date = this.parseDate(text, this.props.dateFormat);
+                date = this.parseDate(text, this.getDateFormat());
             }
         }
 
@@ -1857,7 +2246,7 @@ export class Calendar extends Component {
     }
 
     populateTime(value, timeString, ampm) {
-        if(this.props.hourFormat === '12' && (ampm !== 'PM' && ampm !== 'AM')) {
+        if (this.props.hourFormat === '12' && (ampm !== 'PM' && ampm !== 'AM')) {
             throw new Error('Invalid Time');
         }
 
@@ -1865,40 +2254,48 @@ export class Calendar extends Component {
         value.setHours(time.hour);
         value.setMinutes(time.minute);
         value.setSeconds(time.second);
+        value.setMilliseconds(time.millisecond);
     }
 
     parseTime(value, ampm) {
+        value = this.props.showMillisec ? value.replace('.', ':') : value;
         let tokens = value.split(':');
         let validTokenLength = this.props.showSeconds ? 3 : 2;
+        validTokenLength = this.props.showMillisec ? validTokenLength + 1 : validTokenLength;
 
-        if(tokens.length !== validTokenLength || tokens[0].length !== 2 || tokens[1].length !== 2 || (this.props.showSeconds && tokens[2].length !== 2)) {
+        if (tokens.length !== validTokenLength || tokens[0].length !== 2 || tokens[1].length !== 2 ||
+            (this.props.showSeconds && tokens[2].length !== 2) ||
+            (this.props.showMillisec && tokens[3].length !== 3)) {
             throw new Error('Invalid time');
         }
 
         let h = parseInt(tokens[0], 10);
         let m = parseInt(tokens[1], 10);
         let s = this.props.showSeconds ? parseInt(tokens[2], 10) : null;
+        let ms = this.props.showMillisec ? parseInt(tokens[3], 10) : null;
 
-        if(isNaN(h) || isNaN(m) || h > 23 || m > 59 || (this.props.hourFormat === '12' && h > 12) || (this.props.showSeconds && (isNaN(s) || s > 59))) {
+        if (isNaN(h) || isNaN(m) || h > 23 || m > 59 || (this.props.hourFormat === '12' && h > 12) ||
+            (this.props.showSeconds && (isNaN(s) || s > 59)) ||
+            (this.props.showMillisec && (isNaN(s) || s > 1000))) {
             throw new Error('Invalid time');
         }
         else {
-            if(this.props.hourFormat === '12' && h !== 12 && ampm === 'PM') {
-                h+= 12;
+            if (this.props.hourFormat === '12' && h !== 12 && ampm === 'PM') {
+                h += 12;
             }
 
-            return {hour: h, minute: m, second: s};
+            return { hour: h, minute: m, second: s, millisecond: ms };
         }
     }
 
     // Ported from jquery-ui datepicker parseDate
     parseDate(value, format) {
-        if(format == null || value == null) {
+        if (format == null || value == null) {
             throw new Error('Invalid arguments');
         }
 
         value = (typeof value === "object" ? value.toString() : value + "");
-        if(value === "") {
+        if (value === "") {
             return null;
         }
 
@@ -1913,7 +2310,7 @@ export class Calendar extends Component {
             date,
             lookAhead = (match) => {
                 let matches = (iFormat + 1 < format.length && format.charAt(iFormat + 1) === match);
-                if(matches) {
+                if (matches) {
                     iFormat++;
                 }
                 return matches;
@@ -1925,41 +2322,41 @@ export class Calendar extends Component {
                     minSize = (match === "y" ? size : 1),
                     digits = new RegExp("^\\d{" + minSize + "," + size + "}"),
                     num = value.substring(iValue).match(digits);
-                if(!num) {
+                if (!num) {
                     throw new Error('Missing number at position ' + iValue);
                 }
-                iValue += num[ 0 ].length;
-                return parseInt(num[ 0 ], 10);
+                iValue += num[0].length;
+                return parseInt(num[0], 10);
             },
             getName = (match, shortNames, longNames) => {
                 let index = -1;
                 let arr = lookAhead(match) ? longNames : shortNames;
                 let names = [];
 
-                for(let i = 0; i < arr.length; i++) {
-                    names.push([i,arr[i]]);
+                for (let i = 0; i < arr.length; i++) {
+                    names.push([i, arr[i]]);
                 }
-                names.sort((a,b) => {
-                    return -(a[ 1 ].length - b[ 1 ].length);
+                names.sort((a, b) => {
+                    return -(a[1].length - b[1].length);
                 });
 
-                for(let i = 0; i < names.length; i++) {
+                for (let i = 0; i < names.length; i++) {
                     let name = names[i][1];
-                    if(value.substr(iValue, name.length).toLowerCase() === name.toLowerCase()) {
+                    if (value.substr(iValue, name.length).toLowerCase() === name.toLowerCase()) {
                         index = names[i][0];
                         iValue += name.length;
                         break;
                     }
                 }
 
-                if(index !== -1) {
+                if (index !== -1) {
                     return index + 1;
                 } else {
                     throw new Error('Unknown name at position ' + iValue);
                 }
             },
             checkLiteral = () => {
-                if(value.charAt(iValue) !== format.charAt(iFormat)) {
+                if (value.charAt(iValue) !== format.charAt(iFormat)) {
                     throw new Error('Unexpected literal at position ' + iValue);
                 }
                 iValue++;
@@ -1969,9 +2366,11 @@ export class Calendar extends Component {
             day = 1;
         }
 
+        const { dayNamesShort, dayNames, monthNamesShort, monthNames } = localeOptions(this.props.locale);
+
         for (iFormat = 0; iFormat < format.length; iFormat++) {
-            if(literal) {
-                if(format.charAt(iFormat) === "'" && !lookAhead("'")) {
+            if (literal) {
+                if (format.charAt(iFormat) === "'" && !lookAhead("'")) {
                     literal = false;
                 } else {
                     checkLiteral();
@@ -1982,7 +2381,7 @@ export class Calendar extends Component {
                         day = getNumber("d");
                         break;
                     case "D":
-                        getName("D", this.props.locale.dayNamesShort, this.props.locale.dayNames);
+                        getName("D", dayNamesShort, dayNames);
                         break;
                     case "o":
                         doy = getNumber("o");
@@ -1991,7 +2390,7 @@ export class Calendar extends Component {
                         month = getNumber("m");
                         break;
                     case "M":
-                        month = getName("M", this.props.locale.monthNamesShort, this.props.locale.monthNames);
+                        month = getName("M", monthNamesShort, monthNames);
                         break;
                     case "y":
                         year = getNumber("y");
@@ -2009,7 +2408,7 @@ export class Calendar extends Component {
                         day = date.getDate();
                         break;
                     case "'":
-                        if(lookAhead("'")) {
+                        if (lookAhead("'")) {
                             checkLiteral();
                         } else {
                             literal = true;
@@ -2021,26 +2420,26 @@ export class Calendar extends Component {
             }
         }
 
-        if(iValue < value.length) {
+        if (iValue < value.length) {
             extra = value.substr(iValue);
-            if(!/^\s+/.test(extra)) {
+            if (!/^\s+/.test(extra)) {
                 throw new Error('Extra/unparsed characters found in date: ' + extra);
             }
         }
 
-        if(year === -1) {
+        if (year === -1) {
             year = new Date().getFullYear();
-        } else if(year < 100) {
+        } else if (year < 100) {
             year += new Date().getFullYear() - new Date().getFullYear() % 100 +
                 (year <= shortYearCutoff ? 0 : -100);
         }
 
-        if(doy > -1) {
+        if (doy > -1) {
             month = 1;
             day = doy;
             do {
                 dim = this.getDaysCountInMonth(year, month - 1);
-                if(day <= dim) {
+                if (day <= dim) {
                     break;
                 }
                 month++;
@@ -2056,18 +2455,22 @@ export class Calendar extends Component {
         return date;
     }
 
-    renderBackwardNavigator() {
+    renderBackwardNavigator(isVisible) {
+        let navigatorProps = isVisible ? { 'onClick': this.onPrevButtonClick, 'onKeyDown': e => this.onContainerButtonKeydown(e) } : { 'style': { visibility: 'hidden' } };
         return (
-            <button type="button" className="p-datepicker-prev p-link" onClick={this.onPrevButtonClick} onKeyDown={e => this.onContainerButtonKeydown(e)}>
+            <button type="button" className="p-datepicker-prev p-link" {...navigatorProps}>
                 <span className="p-datepicker-prev-icon pi pi-chevron-left"></span>
+                <Ripple />
             </button>
         );
     }
 
-    renderForwardNavigator() {
+    renderForwardNavigator(isVisible) {
+        let navigatorProps = isVisible ? { 'onClick': this.onNextButtonClick, 'onKeyDown': e => this.onContainerButtonKeydown(e) } : { 'style': { visibility: 'hidden' } };
         return (
-            <button type="button" className="p-datepicker-next p-link" onClick={this.onNextButtonClick} onKeyDown={e => this.onContainerButtonKeydown(e)}>
+            <button type="button" className="p-datepicker-next p-link" {...navigatorProps}>
                 <span className="p-datepicker-next-icon pi pi-chevron-right"></span>
+                <Ripple />
             </button>
         );
     }
@@ -2081,14 +2484,16 @@ export class Calendar extends Component {
     }
 
     renderTitleMonthElement(month) {
+        const monthNames = localeOption('monthNames', this.props.locale);
+
         if (this.props.monthNavigator && this.props.view !== 'month') {
-            let viewDate = this.props.onViewDateChange ? this.props.viewDate : this.state.viewDate;
-            let viewMonth = viewDate.getMonth();
+            const viewDate = this.getViewDate();
+            const viewMonth = viewDate.getMonth();
 
             return (
                 <select className="p-datepicker-month" onChange={this.onMonthDropdownChange} value={viewMonth}>
                     {
-                        this.props.locale.monthNames.map((month, index) => {
+                        monthNames.map((month, index) => {
                             if ((!this.isInMinYear(viewDate) || index >= this.props.minDate.getMonth()) && (!this.isInMaxYear(viewDate) || index <= this.props.maxDate.getMonth())) {
                                 return <option key={month} value={index}>{month}</option>
                             }
@@ -2100,7 +2505,7 @@ export class Calendar extends Component {
         }
         else {
             return (
-                <span className="p-datepicker-month">{this.props.locale.monthNames[month]}</span>
+                <span className="p-datepicker-month">{monthNames[month]}</span>
             );
         }
     }
@@ -2112,11 +2517,11 @@ export class Calendar extends Component {
             const yearStart = parseInt(years[0], 10);
             const yearEnd = parseInt(years[1], 10);
 
-            for(let i = yearStart; i <= yearEnd; i++) {
+            for (let i = yearStart; i <= yearEnd; i++) {
                 yearOptions.push(i);
             }
 
-            let viewDate = this.props.onViewDateChange ? this.props.viewDate : this.state.viewDate;
+            let viewDate = this.getViewDate();
             let viewYear = viewDate.getFullYear();
 
             return (
@@ -2153,17 +2558,17 @@ export class Calendar extends Component {
 
     renderDayNames(weekDays) {
         const dayNames = weekDays.map(weekDay =>
-            (
-                <th key={weekDay} scope="col">
-                    <span>{weekDay}</span>
-                </th>
-            )
+        (
+            <th key={weekDay} scope="col">
+                <span>{weekDay}</span>
+            </th>
+        )
         );
 
         if (this.props.showWeek) {
             const weekHeader = (
                 <th scope="col" key={'wn'} className="p-datepicker-weekheader p-disabled">
-                    <span>{this.props.locale['weekHeader']}</span>
+                    <span>{localeOption('weekHeader', this.props.locale)}</span>
                 </th>
             );
 
@@ -2180,6 +2585,7 @@ export class Calendar extends Component {
         return (
             <span className={className} onClick={e => this.onDateSelect(e, date)} onKeyDown={e => this.onDateCellKeydown(e, date, groupIndex)}>
                 {content}
+                <Ripple />
             </span>
         );
     }
@@ -2187,9 +2593,9 @@ export class Calendar extends Component {
     renderWeek(weekDates, weekNumber, groupIndex) {
         const week = weekDates.map((date) => {
             const selected = this.isSelected(date);
-            const cellClassName = classNames({'p-datepicker-other-month': date.otherMonth, 'p-datepicker-today': date.today});
-            const dateClassName = classNames({'p-highlight': selected, 'p-disabled': !date.selectable});
-            const content = this.renderDateCellContent(date, dateClassName, groupIndex);
+            const cellClassName = classNames({ 'p-datepicker-other-month': date.otherMonth, 'p-datepicker-today': date.today });
+            const dateClassName = classNames({ 'p-highlight': selected, 'p-disabled': !date.selectable });
+            const content = (date.otherMonth && !this.props.showOtherMonths) ? null : this.renderDateCellContent(date, dateClassName, groupIndex);
 
             return (
                 <td key={date.day} className={cellClassName}>
@@ -2232,12 +2638,12 @@ export class Calendar extends Component {
             <div className="p-datepicker-calendar-container">
                 <table className="p-datepicker-calendar">
                     <thead>
-                    <tr>
-                        {dayNames}
-                    </tr>
+                        <tr>
+                            {dayNames}
+                        </tr>
                     </thead>
                     <tbody>
-                    {dates}
+                        {dates}
                     </tbody>
                 </table>
             </div>
@@ -2246,8 +2652,8 @@ export class Calendar extends Component {
 
     renderMonth(monthMetaData, index) {
         const weekDays = this.createWeekDays();
-        const backwardNavigator = (index === 0) ? this.renderBackwardNavigator(): null;
-        const forwardNavigator = (this.props.numberOfMonths === 1) || (index === this.props.numberOfMonths -1) ? this.renderForwardNavigator(): null;
+        const backwardNavigator = this.renderBackwardNavigator((index === 0));
+        const forwardNavigator = this.renderForwardNavigator((this.props.numberOfMonths === 1) || (index === this.props.numberOfMonths - 1));
         const title = this.renderTitle(monthMetaData);
         const dateViewGrid = this.renderDateViewGrid(monthMetaData, weekDays, index);
         const header = this.props.headerTemplate ? this.props.headerTemplate() : null;
@@ -2257,8 +2663,8 @@ export class Calendar extends Component {
                 <div className="p-datepicker-header">
                     {header}
                     {backwardNavigator}
-                    {forwardNavigator}
                     {title}
+                    {forwardNavigator}
                 </div>
                 {dateViewGrid}
             </div>
@@ -2266,39 +2672,45 @@ export class Calendar extends Component {
     }
 
     renderMonths(monthsMetaData) {
+        const groups = monthsMetaData.map((monthMetaData, index) => {
+            return this.renderMonth(monthMetaData, index);
+        });
+
         return (
-            monthsMetaData.map((monthMetaData, index) => {
-                return this.renderMonth(monthMetaData, index);
-            })
-        );
+            <div className="p-datepicker-group-container">
+                {groups}
+            </div>
+        )
     }
 
     renderDateView() {
-        let viewDate = this.props.onViewDateChange ? this.props.viewDate : this.state.viewDate;
+        let viewDate = this.getViewDate();
         const monthsMetaData = this.createMonths(viewDate.getMonth(), viewDate.getFullYear());
         const months = this.renderMonths(monthsMetaData);
 
         return (
-            <React.Fragment>
+            <>
                 {months}
-            </React.Fragment>
+            </>
         );
     }
 
     renderMonthViewMonth(index) {
-        const className = classNames('p-monthpicker-month', {'p-highlight': this.isMonthSelected(index)});
-        const monthName = this.props.locale.monthNamesShort[index];
+        const className = classNames('p-monthpicker-month', { 'p-highlight': this.isMonthSelected(index) });
+        const monthNamesShort = localeOption('monthNamesShort', this.props.locale);
+        const monthName = monthNamesShort[index];
 
         return (
             <span key={monthName} className={className} onClick={event => this.onMonthSelect(event, index)} onKeyDown={event => this.onMonthCellKeydown(event, index)}>
                 {monthName}
+                <Ripple />
             </span>
         );
     }
 
     renderMonthViewMonths() {
         let months = [];
-        for(let i = 0; i <= 11; i++) {
+        for (let i = 0; i <= 11; i++) {
             months.push(this.renderMonthViewMonth(i));
         }
 
@@ -2306,24 +2718,28 @@ export class Calendar extends Component {
     }
 
     renderMonthView() {
-        const backwardNavigator = this.renderBackwardNavigator();
-        const forwardNavigator = this.renderForwardNavigator();
+        const backwardNavigator = this.renderBackwardNavigator(true);
+        const forwardNavigator = this.renderForwardNavigator(true);
         const yearElement = this.renderTitleYearElement(this.getViewDate().getFullYear());
         const months = this.renderMonthViewMonths();
 
         return (
-            <React.Fragment>
-                <div className="p-datepicker-header">
-                    {backwardNavigator}
-                    {forwardNavigator}
-                    <div className="p-datepicker-title">
-                        {yearElement}
+            <>
+                <div className="p-datepicker-group-container">
+                    <div className="p-datepicker-group">
+                        <div className="p-datepicker-header">
+                            {backwardNavigator}
+                            <div className="p-datepicker-title">
+                                {yearElement}
+                            </div>
+                            {forwardNavigator}
+                        </div>
                     </div>
                 </div>
                 <div className="p-monthpicker">
                     {months}
                 </div>
-            </React.Fragment>
+            </>
         );
     }
 
@@ -2352,18 +2768,20 @@ export class Calendar extends Component {
                 hour = hour - 12;
         }
 
-        const hourDisplay = hour < 10 ? '0' + hour: hour;
+        const hourDisplay = hour < 10 ? '0' + hour : hour;
 
         return (
             <div className="p-hour-picker">
                 <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 0, 1)} onMouseUp={this.onTimePickerElementMouseUp}
-                        onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
+                    onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
                     <span className="pi pi-chevron-up"></span>
+                    <Ripple />
                 </button>
                 <span>{hourDisplay}</span>
                 <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 0, -1)} onMouseUp={this.onTimePickerElementMouseUp}
-                        onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
+                    onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
                     <span className="pi pi-chevron-down"></span>
+                    <Ripple />
                 </button>
             </div>
         );
@@ -2372,18 +2790,20 @@ export class Calendar extends Component {
     renderMinutePicker() {
         let currentTime = (this.props.value && this.props.value instanceof Date) ? this.props.value : this.getViewDate();
         let minute = currentTime.getMinutes();
-        let minuteDisplay = minute < 10 ? '0' + minute: minute;
+        let minuteDisplay = minute < 10 ? '0' + minute : minute;
 
         return (
             <div className="p-minute-picker">
                 <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 1, 1)} onMouseUp={this.onTimePickerElementMouseUp}
-                        onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
+                    onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
                     <span className="pi pi-chevron-up"></span>
+                    <Ripple />
                 </button>
                 <span>{minuteDisplay}</span>
                 <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 1, -1)} onMouseUp={this.onTimePickerElementMouseUp}
-                        onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
+                    onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
                     <span className="pi pi-chevron-down"></span>
+                    <Ripple />
                 </button>
             </div>
         );
@@ -2393,25 +2813,52 @@ export class Calendar extends Component {
         if (this.props.showSeconds) {
             let currentTime = (this.props.value && this.props.value instanceof Date) ? this.props.value : this.getViewDate();
             let second = currentTime.getSeconds();
-            let secondDisplay = second < 10 ? '0' + second: second;
+            let secondDisplay = second < 10 ? '0' + second : second;
 
             return (
                 <div className="p-second-picker">
                     <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 2, 1)} onMouseUp={this.onTimePickerElementMouseUp}
-                            onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
+                        onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
                         <span className="pi pi-chevron-up"></span>
+                        <Ripple />
                     </button>
                     <span>{secondDisplay}</span>
                     <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 2, -1)} onMouseUp={this.onTimePickerElementMouseUp}
-                            onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
+                        onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
                         <span className="pi pi-chevron-down"></span>
+                        <Ripple />
                     </button>
                 </div>
             );
         }
-        else {
-            return null;
+
+        return null;
+    }
+
+    renderMiliSecondPicker() {
+        if (this.props.showMillisec) {
+            let currentTime = (this.props.value && this.props.value instanceof Date) ? this.props.value : this.getViewDate();
+            let millisecond = currentTime.getMilliseconds();
+            let millisecondDisplay = millisecond < 100 ? (millisecond < 10 ? '00' : '0') + millisecond : millisecond;
+
+            return (
+                <div className="p-millisecond-picker">
+                    <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 3, 1)} onMouseUp={this.onTimePickerElementMouseUp}
+                        onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
+                        <span className="pi pi-chevron-up"></span>
+                        <Ripple />
+                    </button>
+                    <span>{millisecondDisplay}</span>
+                    <button type="button" className="p-link" onMouseDown={(e) => this.onTimePickerElementMouseDown(e, 3, -1)} onMouseUp={this.onTimePickerElementMouseUp}
+                        onMouseLeave={this.onTimePickerElementMouseLeave} onKeyDown={e => this.onContainerButtonKeydown(e)}>
+                        <span className="pi pi-chevron-down"></span>
+                        <Ripple />
+                    </button>
+                </div>
+            );
         }
+
+        return null;
     }
 
     renderAmPmPicker() {
@@ -2424,29 +2871,24 @@ export class Calendar extends Component {
                 <div className="p-ampm-picker">
                     <button type="button" className="p-link" onClick={this.toggleAmPm}>
                         <span className="pi pi-chevron-up"></span>
+                        <Ripple />
                     </button>
                     <span>{display}</span>
                     <button type="button" className="p-link" onClick={this.toggleAmPm}>
                         <span className="pi pi-chevron-down"></span>
+                        <Ripple />
                     </button>
                 </div>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
-    renderSeparator() {
+    renderSeparator(separator) {
         return (
             <div className="p-separator">
-                <span className="p-separator-spacer">
-                    <span className="pi pi-chevron-up"></span>
-                </span>
-                <span>:</span>
-                <span className="p-separator-spacer">
-                    <span className="pi pi-chevron-down"></span>
-                </span>
+                <span>{separator}</span>
             </div>
         );
     }
@@ -2456,60 +2898,59 @@ export class Calendar extends Component {
             return (
                 <div className="p-timepicker">
                     {this.renderHourPicker()}
-                    {this.renderSeparator()}
+                    {this.renderSeparator(':')}
                     {this.renderMinutePicker()}
-                    {this.props.showSeconds && this.renderSeparator()}
+                    {this.props.showSeconds && this.renderSeparator(':')}
                     {this.renderSecondPicker()}
-                    {this.props.hourFormat === '12' && this.renderSeparator()}
+                    {this.props.showMillisec && this.renderSeparator('.')}
+                    {this.renderMiliSecondPicker()}
+                    {this.props.hourFormat === '12' && this.renderSeparator(':')}
                     {this.renderAmPmPicker()}
                 </div>
             )
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderInputElement() {
         if (!this.props.inline) {
-            const className = classNames('p-inputtext p-component', this.props.inputClassName);
-            const value = this.getValueToRender();
-
             return (
-                <InputText ref={(el) => this.inputElement = ReactDOM.findDOMNode(el)} id={this.props.inputId} name={this.props.name} value={value} type="text" className={className} style={this.props.inputStyle}
-                           readOnly={this.props.readOnlyInput} disabled={this.props.disabled} required={this.props.required} autoComplete="off" placeholder={this.props.placeholder}
-                           onChange={this.onInputChange} onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onInputKeyDown} aria-labelledby={this.props.ariaLabelledBy}/>
+                <InputText ref={(el) => this.inputElement = el} id={this.props.inputId} name={this.props.name} type="text" className={this.props.inputClassName} style={this.props.inputStyle}
+                    readOnly={this.props.readOnlyInput} disabled={this.props.disabled} required={this.props.required} autoComplete="off" placeholder={this.props.placeholder}
+                    onInput={this.onUserInput} onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onInputKeyDown} aria-labelledby={this.props.ariaLabelledBy} inputMode="none" />
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderButton() {
         if (this.props.showIcon) {
             return (
                 <Button type="button" icon={this.props.icon} onClick={this.onButtonClick} tabIndex="-1"
-                        disabled={this.props.disabled} className="p-datepicker-trigger p-calendar-button" />
+                    disabled={this.props.disabled} className="p-datepicker-trigger" />
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderButtonBar() {
         if (this.props.showButtonBar) {
+            const todayClassName = classNames('p-button-text', this.props.todayButtonClassName);
+            const clearClassName = classNames('p-button-text', this.props.clearButtonClassName);
+            const { today, clear } = localeOptions(this.props.locale);
+
             return (
                 <div className="p-datepicker-buttonbar">
-                    <Button type="button" label={this.props.locale.today} onClick={this.onTodayButtonClick} onKeyDown={e => this.onContainerButtonKeydown(e)} className={this.props.todayButtonClassName} />
-                    <Button type="button" label={this.props.locale.clear} onClick={this.onClearButtonClick} onKeyDown={e => this.onContainerButtonKeydown(e)} className={this.props.clearButtonStyleClass} />
+                    <Button type="button" label={today} onClick={this.onTodayButtonClick} onKeyDown={e => this.onContainerButtonKeydown(e)} className={todayClassName} />
+                    <Button type="button" label={clear} onClick={this.onClearButtonClick} onKeyDown={e => this.onContainerButtonKeydown(e)} className={clearClassName} />
                 </div>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderFooter() {
@@ -2522,21 +2963,19 @@ export class Calendar extends Component {
                 </div>
             )
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     render() {
-        const className = classNames('p-calendar', this.props.className, {
+        const className = classNames('p-calendar p-component p-inputwrapper', this.props.className, {
             'p-calendar-w-btn': this.props.showIcon,
             'p-calendar-timeonly': this.props.timeOnly,
-            'p-inputwrapper-filled': this.props.value
+            'p-inputwrapper-filled': this.props.value || (DomHandler.hasClass(this.inputElement, 'p-filled') && this.inputElement.value !== ''),
+            'p-inputwrapper-focus': this.state.focused
         });
         const panelClassName = classNames('p-datepicker p-component', this.props.panelClassName, {
             'p-datepicker-inline': this.props.inline,
-            'p-input-overlay': !this.props.inline,
-            'p-shadow': !this.props.inline,
             'p-disabled': this.props.disabled,
             'p-datepicker-timeonly': this.props.timeOnly,
             'p-datepicker-multiple-month': this.props.numberOfMonths > 1,
@@ -2551,11 +2990,11 @@ export class Calendar extends Component {
         const footer = this.renderFooter();
 
         return (
-            <span ref={(el) => this.container = el} id={this.props.id} className={className} style={this.props.style}>
+            <span ref={(el) => this.container = el} id={this.id} className={className} style={this.props.style}>
                 {input}
                 {button}
-                <CalendarPanel ref={(el) => this.panel = ReactDOM.findDOMNode(el)} className={panelClassName} style={this.props.panelStyle}
-                               appendTo={this.props.appendTo}>
+                <CalendarPanel ref={this.overlayRef} className={panelClassName} style={this.props.panelStyle} appendTo={this.props.appendTo} inline={this.props.inline} onClick={this.onPanelClick}
+                    in={this.props.inline || this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
                     {datePicker}
                     {timePicker}
                     {buttonBar}
@@ -2565,4 +3004,3 @@ export class Calendar extends Component {
         );
     }
 }
-

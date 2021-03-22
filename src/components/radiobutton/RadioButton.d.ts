@@ -15,7 +15,7 @@ interface RadioButtonProps {
     tooltip?: any;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
-    onChange(e: {originalEvent: Event, value: any, checked: boolean}): void;
+    onChange?(e: {originalEvent: Event, value: any, checked: boolean, target: {type: string, name: string, id: string, value: any, checked: boolean}}): void;
 }
 
 export class RadioButton extends React.Component<RadioButtonProps,any> {}

@@ -5,7 +5,7 @@ interface ListBoxItemProps {
     selected?: boolean;
     onClick?(e: {originalEvent: Event, option: any}): void;
     onTouchEnd?(e: {originalEvent: Event, option: any}): void;
-    template?(item: any): JSX.Element | undefined;
+    template?: any;
 }
 
 export class ListBoxItem extends React.Component<ListBoxItemProps,any> {}

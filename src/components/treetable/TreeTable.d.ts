@@ -1,5 +1,9 @@
 import * as React from 'react';
-import TreeNode from "../treenode/TreeNode";
+import TreeNode from '../treenode/TreeNode';
+
+type ExpandedKeysType = {
+    [key: string]: boolean
+}
 
 interface TreeTableProps {
     id?: string;
@@ -10,14 +14,16 @@ interface TreeTableProps {
     className?: string;
     tableStyle?: object;
     tableClassName?: string;
-    expandedKeys?: any;
+    expandedKeys?: ExpandedKeysType;
     paginator?: boolean;
     paginatorPosition?: string;
     alwaysShowPaginator?: boolean;
-    paginatorTemplate?: string;
+    paginatorClassName?: string;
+    paginatorTemplate?: string | object;
     paginatorLeft?: any;
     paginatorRight?: any;
     pageLinkSize?: number;
+    paginatorDropdownAppendTo?: any;
     rowsPerPageOptions?: number[];
     currentPageReportTemplate?: string;
     first?: number;
@@ -29,17 +35,19 @@ interface TreeTableProps {
     multiSortMeta?: any[];
     sortMode?: string;
     defaultSortOrder?: number;
+    removableSort?: boolean;
     selectionMode?: string;
     selectionKeys?: any;
     contextMenuSelectionKey?: any;
     metaKeySelection?: boolean;
+    selectOnEdit?: boolean;
     propagateSelectionUp?: boolean;
     propagateSelectionDown?: boolean;
     autoLayout?:boolean;
     rowClassName?(rowData: any): object;
     loading?: boolean;
     loadingIcon?: string;
-    tabIndex?:string;
+    tabIndex?: number;
     scrollable?: boolean;
     scrollHeight?: string;
     reorderableColumns?: boolean;
@@ -54,6 +62,8 @@ interface TreeTableProps {
     filters?: object;
     globalFilter?: any;
     filterMode?: string;
+    filterDelay?: number;
+    filterLocale?: string;
     onFilter?(filters: any[]): void;
     onExpand?(e: {originalEvent: Event, node: TreeNode}): void;
     onCollapse?(e: {originalEvent: Event, node: TreeNode}): void;
@@ -71,4 +81,5 @@ interface TreeTableProps {
 }
 
 export class TreeTable extends React.Component<TreeTableProps, any> {
+    public filter<T>(value:T, field:string, mode:string):void;
 }

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 import DomHandler from '../utils/DomHandler';
 import { InputText } from '../inputtext/InputText';
-import Tooltip from "../tooltip/Tooltip";
+import { classNames } from '../utils/ClassNames';
+import { tip } from '../tooltip/Tooltip';
 
 export class InputMask extends Component {
 
@@ -20,16 +20,18 @@ export class InputMask extends Component {
         placeholder: null,
         size: null,
         maxlength: null,
-        tabindex: null,
+        tabIndex: null,
         disabled: false,
-        readonly: false,
+        readOnly: false,
         name: null,
         required: false,
         tooltip: null,
         tooltipOptions: null,
         ariaLabelledBy: null,
         onComplete: null,
-        onChange: null
+        onChange: null,
+        onFocus: null,
+        onBlur: null
     }
 
     static propTypes = {
@@ -45,16 +47,18 @@ export class InputMask extends Component {
         placeholder: PropTypes.string,
         size: PropTypes.number,
         maxlength: PropTypes.number,
-        tabindex: PropTypes.number,
+        tabIndex: PropTypes.number,
         disabled: PropTypes.bool,
-        readonly: PropTypes.bool,
+        readOnly: PropTypes.bool,
         name: PropTypes.string,
         required: PropTypes.bool,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
         ariaLabelledBy: PropTypes.string,
         onComplete: PropTypes.func,
-        onChange: PropTypes.func
+        onChange: PropTypes.func,
+        onFocus: PropTypes.func,
+        onBlur: PropTypes.func
     }
 
     constructor(props) {
@@ -121,6 +125,10 @@ export class InputMask extends Component {
         return this.props.slotChar.charAt(0);
     }
 
+    getValue() {
+        return this.props.unmask ? this.getUnmaskedValue() : this.input && this.input.value;
+    }
+
     seekNext(pos) {
         while (++pos < this.len && !this.tests[pos]);
         return pos;
@@ -172,8 +180,8 @@ export class InputMask extends Component {
     }
 
     handleAndroidInput(e) {
-        var curVal = this.input.value;
-        var pos = this.caret();
+        let curVal = this.input.value;
+        let pos = this.caret();
         if (this.oldVal && this.oldVal.length && this.oldVal.length > curVal.length) {
             // a deletion or backspace happened
             this.checkVal(true);
@@ -193,7 +201,10 @@ export class InputMask extends Component {
         }
 
         if (this.props.onComplete && this.isCompleted()) {
-            this.props.onComplete(e);
+            this.props.onComplete({
+                originalEvent: e,
+                value: this.getValue()
+            });
         }
     }
 
@@ -203,6 +214,10 @@ export class InputMask extends Component {
         this.updateModel(e);
         this.updateFilledState();
 
+        if (this.props.onBlur) {
+            this.props.onBlur(e);
+        }
+
         if (this.input.value !== this.focusText) {
             let event = document.createEvent('HTMLEvents');
             event.initEvent('change', true, false);
@@ -211,7 +226,7 @@ export class InputMask extends Component {
     }
 
     onKeyDown(e) {
-        if (this.props.readonly) {
+        if (this.props.readOnly) {
             return;
         }
 
@@ -251,11 +266,11 @@ export class InputMask extends Component {
     }
 
     onKeyPress(e) {
-        if (this.props.readonly) {
+        if (this.props.readOnly) {
             return;
         }
 
-        var k = e.which || e.keyCode,
+        let k = e.which || e.keyCode,
             pos = this.caret(),
             p,
             c,
@@ -302,8 +317,9 @@ export class InputMask extends Component {
 
         if (this.props.onComplete && completed) {
             this.props.onComplete({
-                originalEvent: e
-            })
+                originalEvent: e,
+                value: this.getValue()
+            });
         }
     }
 
@@ -373,8 +389,8 @@ export class InputMask extends Component {
         return (this.partialPosition ? i : this.firstNonMaskPos);
     }
 
-    onFocus(event) {
-        if (this.props.readonly) {
+    onFocus(e) {
+        if (this.props.readOnly) {
             return;
         }
 
@@ -399,6 +415,10 @@ export class InputMask extends Component {
             }
             this.updateFilledState();
         }, 10);
+
+        if (this.props.onFocus) {
+            this.props.onFocus(e);
+        }
     }
 
     onInput(event) {
@@ -408,18 +428,19 @@ export class InputMask extends Component {
             this.handleInputChange(event);
     }
 
-    handleInputChange(event) {
-        if (this.props.readonly) {
+    handleInputChange(e) {
+        if (this.props.readOnly) {
             return;
         }
 
-        var pos = this.checkVal(true);
+        let pos = this.checkVal(true);
         this.caret(pos);
-        this.updateModel(event);
+        this.updateModel(e);
         if (this.props.onComplete && this.isCompleted()) {
             this.props.onComplete({
-                originalEvent: event
-            })
+                originalEvent: e,
+                value: this.getValue()
+            });
         }
     }
 
@@ -437,7 +458,7 @@ export class InputMask extends Component {
 
     updateModel(e) {
         if (this.props.onChange) {
-            var val = this.props.unmask ? this.getUnmaskedValue() : e && e.target.value;
+            let val = this.props.unmask ? this.getUnmaskedValue() : e && e.target.value;
             this.props.onChange({
                 originalEvent: e,
                 value: (this.defaultBuffer !== val) ? val : '',
@@ -459,27 +480,37 @@ export class InputMask extends Component {
             DomHandler.removeClass(this.input, 'p-filled');
     }
 
-    updateValue() {
+    updateValue(allow) {
+        let pos;
+
         if (this.input) {
             if (this.props.value == null) {
                 this.input.value = '';
             }
             else {
                 this.input.value = this.props.value;
-                this.checkVal();
-            }
+                pos = this.checkVal(allow);
 
-            setTimeout(() => {
-                if(this.input) {
-                    this.writeBuffer();
-                    this.checkVal();
-                }
-            }, 10);
+                setTimeout(() => {
+                    if(this.input) {
+                        this.writeBuffer();
+                        return this.checkVal(allow);
+                    }
+                }, 10);
+            }
 
             this.focusText = this.input.value;
         }
 
         this.updateFilledState();
+
+        return pos;
+    }
+
+    isValueUpdated() {
+        return this.props.unmask ?
+                        (this.props.value !== this.getUnmaskedValue()) :
+                        (this.defaultBuffer !== this.input.value && this.input.value !== this.props.value);
     }
 
     init() {
@@ -540,21 +571,20 @@ export class InputMask extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.tooltip !== this.props.tooltip) {
+        if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
             if (this.tooltip)
-                this.tooltip.updateContent(this.props.tooltip);
+                this.tooltip.update({ content: this.props.tooltip, ...(this.props.tooltipOptions || {}) });
             else
                 this.renderTooltip();
         }
 
-        let isValueUpdated = this.props.value && (this.props.unmask ? this.props.value !== this.getUnmaskedValue() : this.props.value.length && this.input.value !== this.props.value);
-        if (isValueUpdated) {
+        if (this.isValueUpdated()) {
             this.updateValue();
         }
 
         if (prevProps.mask !== this.props.mask) {
             this.init();
-            this.updateValue();
+            this.caret(this.updateValue(true));
             this.updateModel();
         }
     }
@@ -567,7 +597,7 @@ export class InputMask extends Component {
     }
 
     renderTooltip() {
-        this.tooltip = new Tooltip({
+        this.tooltip = tip({
             target: this.input,
             content: this.props.tooltip,
             options: this.props.tooltipOptions
@@ -575,9 +605,10 @@ export class InputMask extends Component {
     }
 
     render() {
+        let inputMaskClassName = classNames('p-inputmask', this.props.className);
         return (
-            <InputText id={this.props.id} ref={(el) => this.input = ReactDOM.findDOMNode(el)} type={this.props.type} name={this.props.name} style={this.props.style} className={this.props.className} placeholder={this.props.placeholder}
-                size={this.props.size} maxLength={this.props.maxlength} tabIndex={this.props.tabindex} disabled={this.props.disabled} readOnly={this.props.readonly}
+            <InputText id={this.props.id} ref={(el) => this.input = el} type={this.props.type} name={this.props.name} style={this.props.style} className={inputMaskClassName} placeholder={this.props.placeholder}
+                size={this.props.size} maxLength={this.props.maxlength} tabIndex={this.props.tabIndex} disabled={this.props.disabled} readOnly={this.props.readOnly}
                 onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.onKeyDown} onKeyPress={this.onKeyPress}
                 onInput={this.onInput} onPaste={this.handleInputChange} required={this.props.required} aria-labelledby={this.props.ariaLabelledBy} />
         );

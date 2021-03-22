@@ -13,24 +13,25 @@ export class AppNews extends Component {
 
     render() {
         return (
-            <React.Fragment>
+            <>
                 {
-                    this.props.newsActive && <div className="layout-news">
-                        <div className="layout-news-container">
-                            <img src="showcase/resources/images/news/asset-1-endofyear-2019.png" alt="New Year" />
-                            <span className="layout-news-details">
-                                <span className="helper-text">NEW YEAR SALE</span> SAVE UP TO <span className="rate">60%</span> AT PRIMESTORE
-                            </span>
-                            <a href="https://www.primefaces.org/store" target="_blank" rel="noopener noreferrer" className="layout-news-button">
-                                SHOP NOW<i className="pi pi-angle-right"></i>
-                            </a>
-                            <button type="button" className="p-link layout-news-close" onClick={this.props.onHideNews}>
-                                <i className="pi pi-times"></i>
-                            </button>
+                    this.props.newsActive && (
+                        <div className="layout-news">
+                            <div className="layout-news-container">
+                                <a href="https://www.primefaces.org/store" target="_blank" rel="noopener noreferrer" tabIndex="-1" style={{textDecoration: 'none'}}>
+                                    <img className="layouts-news-mockup-image" src="showcase/images/news/topbar-primesale-2021.png" alt="News" />
+                                </a>
+                                <a href="https://www.primefaces.org/store" target="_blank" rel="noopener noreferrer" tabIndex="-1" style={{textDecoration: 'none'}} className="layout-news-button">
+                                    LEARN MORE
+                                </a>
+                                <button type="button" className="p-link layout-news-close" onClick={this.props.onHideNews}>
+                                    <i className="pi pi-times"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                    )
                 }
-            </React.Fragment>
+            </>
         );
     }
 }

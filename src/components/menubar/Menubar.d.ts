@@ -6,6 +6,8 @@ interface MenubarProps {
     model?: MenuItem[];
     style?: object;
     className?: string;
+    start?: ((props: object) => any | any) | JSX.Element;
+    end?: ((props: object) => any | any) | JSX.Element;
 }
 
 export class Menubar extends React.Component<MenubarProps,any> {}

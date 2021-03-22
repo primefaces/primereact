@@ -1,15 +1,6 @@
 .p-menubar {
-    padding: .25em;
-}
-
-.p-menubar .p-menu-separator {
-    border-width: 1px 0 0 0;
-}
-
-.p-menubar:after {
-    content: "";
-    clear: both;
-    display: table;
+    display: flex;
+    align-items: center;
 }
 
 .p-menubar ul {
@@ -19,53 +10,40 @@
 }
 
 .p-menubar .p-menuitem-link {
-    display: block;
-    padding: .25em;
-    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
     text-decoration: none;
-}
-
-.p-menubar .p-menuitem-icon {
-    margin-right: .25em;
-}
-
-.p-menubar .p-menubar-root-list {
-    display: inline-block;
-}
-
-.p-menubar .p-menubar-root-list > .p-menuitem {
-    display: inline-block;
+    overflow: hidden;
     position: relative;
 }
 
-.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link {
-    padding: .5em;
+.p-menubar .p-menuitem-text {
+    line-height: 1;
 }
 
-.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link > .p-submenu-icon {
-    vertical-align: middle;
-    margin-left: .25em;
+.p-menubar .p-menuitem {
+    position: relative;
 }
 
-.p-menubar .p-menubar-root-list > li ul {
+.p-menubar-root-list {
+    display: flex;
+    align-items: center;
+}
+
+.p-menubar-root-list > li ul {
     display: none;
     z-index: 1;
 }
 
-.p-menubar .p-menubar-root-list > .p-menuitem-active > .p-submenu-list {
+.p-menubar-root-list > .p-menuitem-active > .p-submenu-list {
     display: block;
 }
 
 .p-menubar .p-submenu-list {
     display: none;
     position: absolute;
-    min-width: 12.5em;
-    padding: .25em;
-}
-
-.p-menubar .p-submenu-list .p-menuitem {
-    margin: .125em 0;
-    position: relative;
+    z-index: 1;
 }
 
 .p-menubar .p-submenu-list > .p-menuitem-active > .p-submenu-list  {
@@ -74,27 +52,19 @@
     top: 0;
 }
 
-.p-menubar .p-menuitem-icon {
-    margin-right: .25em;
-    vertical-align: middle;
-}
-
-.p-menubar .p-menuitem-text {
-    vertical-align: middle;
-}
-
 .p-menubar .p-submenu-list .p-menuitem-link .p-submenu-icon {
-    position: absolute;
-    margin-top: -.5em;
-    right: 0;
-    top: 50%;
+    margin-left: auto;
 }
 
-.p-menubar .p-menuitem-active > .p-submenu > .p-submenu-list {
-    display: block;
+.p-menubar .p-menubar-custom,
+.p-menubar .p-menubar-end {
+    margin-left: auto;
+    align-self: center;
 }
 
-.p-menubar .p-menubar-custom {
-    float: right;
-    padding: .25em;
+.p-menubar-button {
+    display: none;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
 }

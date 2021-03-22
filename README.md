@@ -1,22 +1,12 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![npm version](https://badge.fury.io/js/primereact.svg)](https://badge.fury.io/js/primereact)
-[![Join the chat at https://gitter.im/primefaces/primereact](https://badges.gitter.im/primefaces/primereact.svg)](https://gitter.im/primefaces/primereact?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Discord Chat](https://img.shields.io/discord/557940238991753223.svg?color=7289da&label=chat&logo=discord)](https://discord.gg/gzKFYnpmCY)
 
+[![PrimeReact Hero](https://www.primefaces.org/wp-content/uploads/2020/08/primereact-promotion-21aug2020@2x.jpg)](https://www.primefaces.org/primereact)
 
 # PrimeReact
 
-PrimeReact is a rich set of open source UI Components for React.
-
-[![PrimeReact Logo](https://www.primefaces.org/wp-content/uploads/2017/09/primereact-transparent-250.png "PrimeReact")](https://www.primefaces.org/primereact)
-
-See [PrimeReact homepage](https://www.primefaces.org/primereact) for live showcase and documentation.
-
-
-<p align="center">
-  <a href="https://bitsrc.io/primefaces/primereact"><img src="https://i.imagesup.co/images2/0__05c8234cb5e0df.jpg"></a>
-</p>
-
-[Components demo](https://bitsrc.io/primefaces/primereact)
+PrimeReact is a rich set of open source UI Components for React. See [PrimeReact homepage](https://www.primefaces.org/primereact) for live showcase and documentation.
 
 ## Download
 
@@ -39,15 +29,14 @@ import {Accordion,AccordionTab} from 'primereact/accordion';
 
 Majority of PrimeReact components (95%) are native and there are some exceptions having 3rd party dependencies such as Google Maps for GMap.
 
-In addition, components require PrimeIcons for icons, classNames package to manage style classes and react-transition-group for animations.
+In addition, components require PrimeIcons for icons and react-transition-group for animations.
 
 ```json
 dependencies: {
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "react-transition-group": "^2.2.1",
-    "classnames": "^2.2.5",
-    "primeicons": "^2.0.0"
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-transition-group": "^4.4.1",
+    "primeicons": "^4.1.0"
 }
 ```
 
@@ -55,7 +44,7 @@ dependencies: {
 The css dependencies are as follows, note that you may change the theme with another one of your choice.
 
 ```
-primereact/resources/themes/nova-light/theme.css
+primereact/resources/themes/saga-blue/theme.css
 primereact/resources/primereact.min.css
 primeicons/primeicons.css
 ```
@@ -63,7 +52,7 @@ primeicons/primeicons.css
 If you are using a bundler such as webpack with a css loader you may also import them to your main application component, an example from create-react-app would be.
 
 ```javascript
-import 'primereact/resources/themes/nova-light/theme.css';
+import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 ```
@@ -74,5 +63,4 @@ An [example application](https://github.com/primefaces/primereact-quickstart) ba
 
 ## TypeScript
 
-Typescript
 Typescript is fully supported as type definition files are provided in the npm package of PrimeReact. A sample [typescript-primereact application](https://github.com/primefaces/primereact-typescript-quickstart) is available as well at github.
