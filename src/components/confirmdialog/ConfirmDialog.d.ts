@@ -14,6 +14,7 @@ interface ConfirmDialogProps extends DialogProps {
     appendTo?: any;
     className?: string;
     footer?: any;
+    breakpoints?: {[key: string]: string};
     onHide?(result: string): void;
     accept?(): void;
     reject?(): void;

@@ -811,10 +811,16 @@ const onSortChange = (event) => {
                                         <td>Whether to show it even there is only one page.</td>
                                     </tr>
                                     <tr>
-                                        <td>paginatorTemplate</td>
+                                        <td>paginatorClassName</td>
                                         <td>string</td>
+                                        <td>null</td>
+                                        <td>Style class of the paginator element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>paginatorTemplate</td>
+                                        <td>string|object</td>
                                         <td>FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown</td>
-                                        <td>Template of the paginator.</td>
+                                        <td>Template of the paginator. For details, refer to the template section of the <Link to="/paginator">paginator documentation</Link> for further options.</td>
                                     </tr>
                                     <tr>
                                         <td>paginatorLeft</td>

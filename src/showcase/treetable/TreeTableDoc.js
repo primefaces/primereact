@@ -792,6 +792,12 @@ export const TreeTableDemo = () => {
                                         <td>Defines placeholder of the input fields.</td>
                                     </tr>
                                     <tr>
+                                        <td>filterDelay</td>
+                                        <td>number</td>
+                                        <td>300</td>
+                                        <td>Delay in milliseconds before filtering the data.</td>
+                                    </tr>
+                                    <tr>
                                         <td>filterLocale</td>
                                         <td>string</td>
                                         <td>undefined</td>
@@ -2094,10 +2100,16 @@ export const TreeTableResponsiveDemo = () => {
                                         <td>Whether to show it even there is only one page.</td>
                                     </tr>
                                     <tr>
-                                        <td>paginatorTemplate</td>
+                                        <td>paginatorClassName</td>
                                         <td>string</td>
+                                        <td>null</td>
+                                        <td>Style class of the paginator element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>paginatorTemplate</td>
+                                        <td>string|object</td>
                                         <td>FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown</td>
-                                        <td>Template of the paginator.</td>
+                                        <td>Template of the paginator. For details, refer to the template section of the <Link to="/paginator">paginator documentation</Link> for further options.</td>
                                     </tr>
                                     <tr>
                                         <td>paginatorLeft</td>
@@ -2192,6 +2204,12 @@ export const TreeTableResponsiveDemo = () => {
                                         <td>Default sort order of an unsorted column.</td>
                                     </tr>
                                     <tr>
+                                        <td>removableSort</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>When enabled, columns can have an un-sorted state.</td>
+                                    </tr>
+                                    <tr>
                                         <td>selectionMode</td>
                                         <td>string</td>
                                         <td>null</td>
@@ -2215,6 +2233,12 @@ export const TreeTableResponsiveDemo = () => {
                                         <td>true</td>
                                         <td>Defines whether metaKey is requred or not for the selection. When true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item
                                             can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>selectOnEdit</td>
+                                        <td>boolean</td>
+                                        <td>true</td>
+                                        <td>Determines whether the cell editor will be opened when clicking to select any row on Selection and Cell Edit modes.</td>
                                     </tr>
                                     <tr>
                                         <td>propagateSelectionUp</td>

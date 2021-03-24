@@ -24,6 +24,7 @@ interface CalendarProps {
     required?: boolean;
     readOnlyInput?: boolean;
     keepInvalid?: boolean;
+    mask?: string;
     disabled?: boolean;
     tabIndex?: number;
     placeholder?: string;

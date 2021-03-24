@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import ObjectUtils from '../utils/ObjectUtils';
 
 export class CurrentPageReport extends Component {
 
@@ -9,7 +10,8 @@ export class CurrentPageReport extends Component {
         first: null,
         rows: null,
         totalRecords: null,
-        template: '({currentPage} of {totalPages})'
+        reportTemplate: '({currentPage} of {totalPages})',
+        template: null
     }
 
     static propTypes = {
@@ -18,18 +20,40 @@ export class CurrentPageReport extends Component {
         first: PropTypes.number,
         rows: PropTypes.number,
         totalRecords: PropTypes.number,
-        template: PropTypes.string
+        reportTemplate: PropTypes.string,
+        template: PropTypes.any
     }
 
     render() {
-        let text = this.props.template
-            .replace("{currentPage}", this.props.page + 1)
-            .replace("{totalPages}", this.props.pageCount)
-            .replace("{first}", Math.min(this.props.first + 1, this.props.totalRecords))
-            .replace("{last}", Math.min(this.props.first + this.props.rows, this.props.totalRecords))
-            .replace("{rows}", this.props.rows)
-            .replace("{totalRecords}", this.props.totalRecords);
+        const report = {
+            currentPage: this.props.page + 1,
+            totalPages: this.props.pageCount,
+            first: Math.min(this.props.first + 1, this.props.totalRecords),
+            last: Math.min(this.props.first + this.props.rows, this.props.totalRecords),
+            rows: this.props.rows,
+            totalRecords: this.props.totalRecords
+        };
 
-        return <span className="p-paginator-current">{text}</span>
+        const text = this.props.reportTemplate
+            .replace("{currentPage}", report.currentPage)
+            .replace("{totalPages}", report.totalPages)
+            .replace("{first}", report.first)
+            .replace("{last}", report.last)
+            .replace("{rows}", report.rows)
+            .replace("{totalRecords}", report.totalRecords);
+
+        const element = <span className="p-paginator-current">{text}</span>;
+
+        if (this.props.template) {
+            const defaultOptions = {...report, ...{
+                className: 'p-paginator-current',
+                element,
+                props: this.props
+            }};
+
+            return ObjectUtils.getJSXElement(this.props.template, defaultOptions);
+        }
+
+        return element;
     }
 }

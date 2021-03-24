@@ -159,10 +159,10 @@ export class SlideMenuDemo extends Component {
             <div>
                 <div className="card">
                     <h5>Basic</h5>
-                    <SlideMenu model={this.items} viewportHeight={250} menuWidth={175}></SlideMenu>
+                    <SlideMenu model={this.items} viewportHeight={220} menuWidth={175}></SlideMenu>
 
                     <h5>Popup</h5>
-                    <SlideMenu ref={(el) => this.menu = el} model={this.items} popup viewportHeight={250} menuWidth={175}></SlideMenu>
+                    <SlideMenu ref={(el) => this.menu = el} model={this.items} popup viewportHeight={220} menuWidth={175}></SlideMenu>
                     <Button type="button" icon="pi pi-bars" label="Show" onClick={(event) => this.menu.toggle(event)}></Button>
                 </div>
             </div>
@@ -315,10 +315,10 @@ const SlideMenuDemo = () => {
         <div>
             <div className="card">
                 <h5>Basic</h5>
-                <SlideMenu model={items} viewportHeight={250} menuWidth={175}></SlideMenu>
+                <SlideMenu model={items} viewportHeight={220} menuWidth={175}></SlideMenu>
 
                 <h5>Popup</h5>
-                <SlideMenu ref={menu} model={items} popup viewportHeight={250} menuWidth={175}></SlideMenu>
+                <SlideMenu ref={menu} model={items} popup viewportHeight={220} menuWidth={175}></SlideMenu>
                 <Button type="button" icon="pi pi-bars" label="Show" onClick={(event) => menu.current.toggle(event)}></Button>
             </div>
         </div>
@@ -470,10 +470,10 @@ const SlideMenuDemo = () => {
         <div>
             <div className="card">
                 <h5>Basic</h5>
-                <SlideMenu model={items} viewportHeight={250} menuWidth={175}></SlideMenu>
+                <SlideMenu model={items} viewportHeight={220} menuWidth={175}></SlideMenu>
 
                 <h5>Popup</h5>
-                <SlideMenu ref={menu} model={items} popup viewportHeight={250} menuWidth={175}></SlideMenu>
+                <SlideMenu ref={menu} model={items} popup viewportHeight={220} menuWidth={175}></SlideMenu>
                 <Button type="button" icon="pi pi-bars" label="Show" onClick={(event) => menu.current.toggle(event)}></Button>
             </div>
         </div>
@@ -756,8 +756,8 @@ const items = [
                                     <tr>
                                         <td>appendTo</td>
                                         <td>DOM element</td>
-                                        <td>null</td>
-                                        <td>DOM element instance where the dialog should be mounted.</td>
+                                        <td>document.body</td>
+                                        <td>DOM element instance where the overlay menu should be mounted.</td>
                                     </tr>
                                 </tbody>
                             </table>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import { tip } from '../tooltip/Tooltip';
@@ -10,12 +9,13 @@ import { CSSTransition } from 'react-transition-group';
 import { classNames } from '../utils/ClassNames';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import { localeOption } from '../api/Locale';
+import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
+import { Portal } from '../portal/Portal';
 
 export class Password extends Component {
 
     static defaultProps = {
         id: null,
-        value: null,
         promptLabel: null,
         weakLabel: null,
         mediumLabel: null,
@@ -36,12 +36,12 @@ export class Password extends Component {
         inputStyle: null,
         inputClassName: null,
         panelStyle: null,
-        panelClassName: null
+        panelClassName: null,
+        onInput: null
     };
 
     static propTypes = {
         id: PropTypes.string,
-        value: PropTypes.string,
         promptLabel: PropTypes.string,
         weakLabel: PropTypes.string,
         mediumLabel: PropTypes.string,
@@ -62,7 +62,8 @@ export class Password extends Component {
         inputStyle: PropTypes.object,
         inputClassName: PropTypes.string,
         panelStyle: PropTypes.object,
-        panelClassName: PropTypes.string
+        panelClassName: PropTypes.string,
+        onInput: PropTypes.func
     };
 
     constructor(props) {
@@ -79,10 +80,13 @@ export class Password extends Component {
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
         this.onKeyup = this.onKeyup.bind(this);
+        this.onInput = this.onInput.bind(this);
         this.onMaskToggle = this.onMaskToggle.bind(this);
         this.onOverlayEnter = this.onOverlayEnter.bind(this);
         this.onOverlayEntered = this.onOverlayEntered.bind(this);
         this.onOverlayExit = this.onOverlayExit.bind(this);
+        this.onOverlayExited = this.onOverlayExited.bind(this);
+        this.onPanelClick = this.onPanelClick.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
         this.overlayRef = React.createRef();
@@ -107,7 +111,7 @@ export class Password extends Component {
     }
 
     isFilled() {
-        return this.props.value != null && this.props.value.toString().length > 0;
+        return (this.props.value != null && this.props.value.toString().length > 0) || (this.props.defaultValue != null && this.props.defaultValue.toString().length > 0)
     }
 
     getInputType() {
@@ -146,6 +150,15 @@ export class Password extends Component {
         }
     }
 
+    onPanelClick(event) {
+        if (this.props.feedback) {
+            OverlayEventBus.emit('overlay-click', {
+                originalEvent: event,
+                target: this.container
+            });
+        }
+    }
+
     onMaskToggle() {
         this.setState((prevState) => {
             return {
@@ -164,13 +177,9 @@ export class Password extends Component {
     }
 
     alignOverlay() {
-        if (this.props.appendTo) {
-            this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(this.inputEl) + 'px';
-            DomHandler.absolutePosition(this.overlayRef.current, this.inputEl);
-        }
-        else {
-            DomHandler.relativePosition(this.overlayRef.current, this.inputEl);
-        }
+        const container = this.inputEl.parentElement;
+        this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
+        DomHandler.absolutePosition(this.overlayRef.current, container);
     }
 
     onOverlayEnter() {
@@ -186,6 +195,10 @@ export class Password extends Component {
     onOverlayExit() {
         this.unbindScrollListener();
         this.unbindResizeListener();
+    }
+
+    onOverlayExited() {
+        DomHandler.revertZIndex();
     }
 
     onFocus(event) {
@@ -266,6 +279,19 @@ export class Password extends Component {
         }
     }
 
+    onInput(event, validatePattern) {
+        if (this.props.onInput) {
+            this.props.onInput(event, validatePattern);
+        }
+
+        if (!this.props.onChange) {
+            if (event.target.value.length > 0)
+                DomHandler.addClass(this.container, 'p-inputwrapper-filled');
+            else
+                DomHandler.removeClass(this.container, 'p-inputwrapper-filled');
+        }
+    }
+
     testStrength(str) {
         let level = 0;
 
@@ -322,9 +348,9 @@ export class Password extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.tooltip !== this.props.tooltip) {
+        if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
             if (this.tooltip)
-                this.tooltip.updateContent(this.props.tooltip);
+                this.tooltip.update({ content: this.props.tooltip, ...(this.props.tooltipOptions || {}) });
             else
                 this.renderTooltip();
         }
@@ -349,6 +375,8 @@ export class Password extends Component {
             this.tooltip.destroy();
             this.tooltip = null;
         }
+
+        DomHandler.revertZIndex();
     }
 
     renderTooltip() {
@@ -399,8 +427,8 @@ export class Password extends Component {
 
         const panel = (
             <CSSTransition nodeRef={this.overlayRef} classNames="p-connected-overlay" in={this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }}
-                unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit}>
-                <div ref={this.overlayRef} className={panelClassName} style={this.props.panelStyle}>
+                unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
+                <div ref={this.overlayRef} className={panelClassName} style={this.props.panelStyle} onClick={this.onPanelClick}>
                     {header}
                     {content}
                     {footer}
@@ -408,11 +436,7 @@ export class Password extends Component {
             </CSSTransition>
         );
 
-        if (this.props.appendTo) {
-            return ReactDOM.createPortal(panel, this.props.appendTo);
-        }
-
-        return panel;
+        return <Portal element={panel} appendTo={this.props.appendTo} />;
     }
 
     render() {
@@ -429,9 +453,9 @@ export class Password extends Component {
         const panel = this.renderPanel();
 
         return (
-            <div className={containerClassName} style={this.props.style}>
+            <div ref={el => this.container = el} className={containerClassName} style={this.props.style}>
                 <InputText id={this.id} ref={(el) => this.inputEl = el} {...inputProps} type={type} className={inputClassName} style={this.props.inputStyle}
-                    onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyup} />
+                    onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyup} onInput={this.onInput} />
                 {icon}
                 {panel}
             </div>

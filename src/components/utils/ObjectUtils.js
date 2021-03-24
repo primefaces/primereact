@@ -1,7 +1,7 @@
 export default class ObjectUtils {
 
     static equals(obj1, obj2, field) {
-        if(field && obj1 && typeof obj1 === 'object' && obj2 && typeof obj2 === 'object')
+        if (field && obj1 && typeof obj1 === 'object' && obj2 && typeof obj2 === 'object')
             return (this.resolveFieldData(obj1, field) === this.resolveFieldData(obj2, field));
         else
             return this.deepEquals(obj1, obj2);
@@ -59,29 +59,27 @@ export default class ObjectUtils {
     }
 
     static resolveFieldData(data, field) {
-        if (this.isFunction(field)) {
-            return field(data);
-        }
-        else {
-            if (data && field) {
-                if (field.indexOf('.') === -1) {
-                    return data[field];
-                }
-                else {
-                    let fields = field.split('.');
-                    let value = data;
-                    for(let i = 0, len = fields.length; i < len; ++i) {
-                        if (value == null) {
-                            return null;
-                        }
-                        value = value[fields[i]];
-                    }
-                    return value;
-                }
+        if (data && Object.keys(data).length && field) {
+            if (this.isFunction(field)) {
+                return field(data);
+            }
+            else if(field.indexOf('.') === -1) {
+                return data[field];
             }
             else {
-                return null;
+                let fields = field.split('.');
+                let value = data;
+                for(var i = 0, len = fields.length; i < len; ++i) {
+                    if (value == null) {
+                        return null;
+                    }
+                    value = value[fields[i]];
+                }
+                return value;
             }
+        }
+        else {
+            return null;
         }
     }
 

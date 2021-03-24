@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
+import { Portal } from '../portal/Portal';
 
 export function tip(props) {
     let appendTo = props.appendTo || document.body;
@@ -26,6 +27,7 @@ export function tip(props) {
             ReactDOM.unmountComponentAtNode(tooltipWrapper);
         },
         updateContent: (newContent) => {
+            console.warn("The 'updateContent' method has been deprecated on Tooltip. Use update(newProps) method.");
             updateTooltip({ content: newContent });
         },
         update: (newProps) => {
@@ -37,8 +39,10 @@ export function tip(props) {
 export class Tooltip extends Component {
 
     static defaultProps = {
+        id: null,
         target: null,
         content: null,
+        disabled: false,
         className: null,
         style: null,
         appendTo: null,
@@ -63,8 +67,10 @@ export class Tooltip extends Component {
     }
 
     static propTypes = {
+        id: PropTypes.string,
         target: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.array]),
         content: PropTypes.string,
+        disabled: PropTypes.bool,
         className: PropTypes.string,
         style: PropTypes.object,
         appendTo: PropTypes.object,
@@ -79,6 +85,9 @@ export class Tooltip extends Component {
         mouseTrack: PropTypes.bool,
         mouseTrackTop: PropTypes.number,
         mouseTrackLeft: PropTypes.number,
+        showDelay: PropTypes.number,
+        updateDelay: PropTypes.number,
+        hideDelay: PropTypes.number,
         onBeforeShow: PropTypes.func,
         onBeforeHide: PropTypes.func,
         onShow: PropTypes.func,
@@ -93,34 +102,63 @@ export class Tooltip extends Component {
             position: this.props.position
         };
 
-        this.appendTo = this.props.appendTo || document.body;
-
         this.show = this.show.bind(this);
         this.hide = this.hide.bind(this);
     }
 
-    getEvents() {
-        let { showEvent, hideEvent } = this.props;
+    isContentEmpty(target) {
+        return !(this.props.content || this.getTargetOption(target, 'tooltip') || this.props.children);
+    }
 
-        if (this.props.mouseTrack) {
+    isMouseTrack(target) {
+        return this.getTargetOption(target, 'mousetrack') || this.props.mouseTrack;
+    }
+
+    isDisabled(target) {
+        return this.getTargetOption(target, 'disabled') === 'true' || this.props.disabled;
+    }
+
+    getTargetOption(target, option) {
+        if (target && target.hasAttribute(`data-pr-${option}`)) {
+            return target.getAttribute(`data-pr-${option}`);
+        }
+
+        return null;
+    }
+
+    getEvents(target) {
+        let showEvent = this.getTargetOption(target, 'showevent') || this.props.showEvent;
+        let hideEvent = this.getTargetOption(target, 'hideevent') || this.props.hideEvent;
+
+        if (this.isMouseTrack(target)) {
             showEvent = 'mousemove';
             hideEvent = 'mouseleave';
         }
-        else if (this.props.event === 'focus') {
-            showEvent = 'focus';
-            hideEvent = 'blur';
+        else {
+            let event = this.getTargetOption(target, 'event') || this.props.event;
+            if (event === 'focus') {
+                showEvent = 'focus';
+                hideEvent = 'blur';
+            }
         }
 
         return { showEvent, hideEvent };
     }
 
+    getPosition(target) {
+        return this.getTargetOption(target, 'position') || this.state.position;
+    }
+
+    getMouseTrackPosition(target) {
+        let top = this.getTargetOption(target, 'mousetracktop') || this.props.mouseTrackTop;
+        let left = this.getTargetOption(target, 'mousetrackleft') || this.props.mouseTrackLeft;
+
+        return { top, left };
+    }
+
     updateText(target, callback) {
         if (this.tooltipTextEl) {
-            let content = this.props.content;
-
-            if (target && target.hasAttribute('data-pr-tooltip')) {
-                content = target.getAttribute('data-pr-tooltip');
-            }
+            let content = this.getTargetOption(target, 'tooltip') || this.props.content;
 
             if (content) {
                 this.tooltipTextEl.innerHTML = ''; // remove children
@@ -137,7 +175,7 @@ export class Tooltip extends Component {
     show(e) {
         this.currentTarget = e.currentTarget;
 
-        if (this.isContentEmpty(this.currentTarget)) {
+        if (this.isContentEmpty(this.currentTarget) || this.isDisabled(this.currentTarget)) {
             return;
         }
 
@@ -160,7 +198,8 @@ export class Tooltip extends Component {
             this.sendCallback(this.props.onBeforeShow, { originalEvent: e, target: this.currentTarget });
             this.applyDelay('showDelay', () => {
                 this.setState({
-                    visible: true
+                    visible: true,
+                    position: this.getPosition(this.currentTarget)
                 }, () => {
                     updateTooltipState();
                     this.sendCallback(this.props.onShow, { originalEvent: e, target: this.currentTarget });
@@ -168,6 +207,8 @@ export class Tooltip extends Component {
 
                 this.bindDocumentResizeListener();
                 this.bindScrollListener();
+
+                DomHandler.addClass(this.currentTarget, this.getTargetOption(this.currentTarget, 'classname'));
             });
         }
     }
@@ -176,6 +217,8 @@ export class Tooltip extends Component {
         this.clearTimeouts();
 
         if (this.state.visible) {
+            DomHandler.removeClass(this.currentTarget, this.getTargetOption(this.currentTarget, 'classname'));
+
             this.sendCallback(this.props.onBeforeHide, { originalEvent: e, target: this.currentTarget });
             this.applyDelay('hideDelay', () => {
                 DomHandler.removeClass(this.containerEl, 'p-tooltip-active');
@@ -193,6 +236,8 @@ export class Tooltip extends Component {
                     this.currentTarget = null;
                     this.scrollHandler = null;
                     this.sendCallback(this.props.onHide, { originalEvent: e, target: this.currentTarget });
+
+                    DomHandler.revertZIndex();
                 });
             });
         }
@@ -201,7 +246,7 @@ export class Tooltip extends Component {
     align(target, coordinate) {
         let left = 0, top = 0;
 
-        if (this.props.mouseTrack && coordinate) {
+        if (this.isMouseTrack(target) && coordinate) {
             const container = {
                 width: DomHandler.getOuterWidth(this.containerEl),
                 height: DomHandler.getOuterHeight(this.containerEl)
@@ -209,22 +254,25 @@ export class Tooltip extends Component {
 
             left = coordinate.x;
             top = coordinate.y;
+
+            let { top: mouseTrackTop, left: mouseTrackLeft } = this.getMouseTrackPosition(target);
+
             switch (this.state.position) {
                 case 'left':
-                    left -= (container.width + this.props.mouseTrackLeft);
-                    top -= (container.height / 2) - this.props.mouseTrackTop;
+                    left -= (container.width + mouseTrackLeft);
+                    top -= (container.height / 2) - mouseTrackTop;
                     break;
                 case 'right':
-                    left += this.props.mouseTrackLeft;
-                    top -= (container.height / 2) - this.props.mouseTrackTop;
+                    left += mouseTrackLeft;
+                    top -= (container.height / 2) - mouseTrackTop;
                     break;
                 case 'top':
-                    left -= (container.width / 2) - this.props.mouseTrackLeft;
-                    top -= (container.height + this.props.mouseTrackTop);
+                    left -= (container.width / 2) - mouseTrackLeft;
+                    top -= (container.height + mouseTrackTop);
                     break;
                 case 'bottom':
-                    left -= (container.width / 2) - this.props.mouseTrackLeft;
-                    top += this.props.mouseTrackTop;
+                    left -= (container.width / 2) - mouseTrackLeft;
+                    top += mouseTrackTop;
                     break;
                 default:
                     break;
@@ -236,8 +284,8 @@ export class Tooltip extends Component {
         }
         else {
             const pos = DomHandler.findCollisionPosition(this.state.position);
-            const my = (this.props.my || pos.my);
-            const at = (this.props.at || pos.at);
+            const my = (this.getTargetOption(target, 'my') || this.props.my || pos.my);
+            const at = (this.getTargetOption(target, 'at') || this.props.at || pos.at);
             DomHandler.flipfitCollision(this.containerEl, target, my, at, (currentPosition) => {
                 const { x, y } = currentPosition.at;
                 let position = this.props.at ? (x !== 'center' ? x : y) : currentPosition.at[`${pos.axis}`];
@@ -284,7 +332,7 @@ export class Tooltip extends Component {
 
     bindTargetEvent(target) {
         if (target) {
-            const { showEvent, hideEvent } = this.getEvents();
+            const { showEvent, hideEvent } = this.getEvents(target);
             target.addEventListener(showEvent, this.show);
             target.addEventListener(hideEvent, this.hide);
         }
@@ -292,7 +340,7 @@ export class Tooltip extends Component {
 
     unbindTargetEvent(target) {
         if (target) {
-            const { showEvent, hideEvent } = this.getEvents();
+            const { showEvent, hideEvent } = this.getEvents(target);
             target.removeEventListener(showEvent, this.show);
             target.removeEventListener(hideEvent, this.hide);
         }
@@ -301,7 +349,7 @@ export class Tooltip extends Component {
     applyDelay(delayProp, callback) {
         this.clearTimeouts();
 
-        const delay = this.props[delayProp];
+        const delay = this.getTargetOption(this.currentTarget, delayProp.toLowerCase()) || this.props[delayProp];
         if (!!delay) {
             this[`${delayProp}Timeout`] = setTimeout(() => callback(), delay);
         }
@@ -322,12 +370,17 @@ export class Tooltip extends Component {
         clearTimeout(this.hideDelayTimeout);
     }
 
-    loadTargetEvents() {
-        this.setTargetEventOperations(this.props.target, 'bindTargetEvent');
+    updateTargetEvents(target) {
+        this.unloadTargetEvents(target);
+        this.loadTargetEvents(target);
     }
 
-    unloadTargetEvents() {
-        this.setTargetEventOperations(this.props.target, 'unbindTargetEvent');
+    loadTargetEvents(target) {
+        this.setTargetEventOperations(target || this.props.target, 'bindTargetEvent');
+    }
+
+    unloadTargetEvents(target) {
+        this.setTargetEventOperations(target || this.props.target, 'unbindTargetEvent');
     }
 
     setTargetEventOperations(target, operation) {
@@ -355,10 +408,6 @@ export class Tooltip extends Component {
         }
     }
 
-    isContentEmpty(target) {
-        return !(this.props.content || (target && target.getAttribute('data-pr-tooltip')) || this.props.children);
-    }
-
     componentDidMount() {
         if (this.props.target) {
             this.loadTargetEvents();
@@ -367,15 +416,22 @@ export class Tooltip extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.target !== this.props.target) {
+            this.unloadTargetEvents(prevProps.target);
             this.loadTargetEvents();
         }
 
-        if (this.state.visible && prevProps.content !== this.props.content) {
-            this.applyDelay('updateDelay', () => {
-                this.updateText(this.currentTarget, () => {
-                    this.align(this.currentTarget);
+        if (this.state.visible) {
+            if (prevProps.content !== this.props.content) {
+                this.applyDelay('updateDelay', () => {
+                    this.updateText(this.currentTarget, () => {
+                        this.align(this.currentTarget);
+                    });
                 });
-            });
+            }
+
+            if (this.currentTarget && this.isDisabled(this.currentTarget)) {
+                this.hide();
+            }
         }
     }
 
@@ -388,6 +444,8 @@ export class Tooltip extends Component {
             this.scrollHandler.destroy();
             this.scrollHandler = null;
         }
+
+        DomHandler.revertZIndex();
     }
 
     renderElement() {
@@ -396,7 +454,7 @@ export class Tooltip extends Component {
         }, this.props.className);
 
         return (
-            <div ref={(el) => this.containerEl = el} className={tooltipClass} style={this.props.style}>
+            <div id={this.props.id} ref={(el) => this.containerEl = el} className={tooltipClass} style={this.props.style} role="tooltip" aria-hidden={this.state.visible}>
                 <div className="p-tooltip-arrow"></div>
                 <div ref={(el) => this.tooltipTextEl = el} className="p-tooltip-text"></div>
             </div>
@@ -407,7 +465,7 @@ export class Tooltip extends Component {
         if (this.state.visible) {
             const element = this.renderElement();
 
-            return ReactDOM.createPortal(element, this.appendTo);
+            return <Portal element={element} appendTo={this.props.appendTo} visible />;
         }
 
         return null;

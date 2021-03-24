@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import UniqueComponentId from '../utils/UniqueComponentId';
@@ -8,6 +7,7 @@ import { GalleriaThumbnails } from './GalleriaThumbnails';
 import DomHandler from '../utils/DomHandler';
 import { CSSTransition } from 'react-transition-group';
 import { Ripple } from '../ripple/Ripple';
+import { Portal } from '../portal/Portal';
 
 export class Galleria extends Component {
 
@@ -97,6 +97,7 @@ export class Galleria extends Component {
         this.onEnter = this.onEnter.bind(this);
         this.onEntering = this.onEntering.bind(this);
         this.onExit = this.onExit.bind(this);
+        this.onExited = this.onExited.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
         this.galleriaRef = React.createRef();
@@ -139,6 +140,10 @@ export class Galleria extends Component {
         DomHandler.addClass(this.mask, 'p-galleria-mask-leave');
     }
 
+    onExited() {
+        DomHandler.revertZIndex();
+    }
+
     isAutoPlayActive() {
         return this.state.slideShowActive;
     }
@@ -176,6 +181,8 @@ export class Galleria extends Component {
         if (this.state.slideShowActive) {
             this.stopSlideShow();
         }
+
+        DomHandler.revertZIndex();
     }
 
     renderHeader() {
@@ -253,13 +260,13 @@ export class Galleria extends Component {
             const galleriaWrapper = (
                 <div ref={(el) => this.mask = el} className={maskClassName}>
                     <CSSTransition nodeRef={this.galleriaRef} classNames="p-galleria" in={this.state.visible} timeout={{ enter: 150, exit: 150 }}
-                        unmountOnExit onEnter={this.onEnter} onEntering={this.onEntering} onExit={this.onExit} >
+                        unmountOnExit onEnter={this.onEnter} onEntering={this.onEntering} onExit={this.onExit} onExited={this.onExited}>
                         {element}
                     </CSSTransition>
                 </div>
             );
 
-            return ReactDOM.createPortal(galleriaWrapper, document.body);
+            return <Portal element={galleriaWrapper} />;
         }
         else {
             return element;

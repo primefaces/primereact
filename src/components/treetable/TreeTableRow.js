@@ -501,7 +501,7 @@ export class TreeTableRow extends Component {
         }
 
         return (
-            <TreeTableBodyCell key={column.props.columnKey||column.props.field} {...column.props} node={this.props.node}>
+            <TreeTableBodyCell key={column.props.columnKey||column.props.field} {...column.props} selectOnEdit={this.props.selectOnEdit} selected={this.isSelected()} node={this.props.node} rowIndex={this.props.rowIndex}>
                 {toggler}
                 {checkbox}
             </TreeTableBodyCell>
@@ -510,10 +510,10 @@ export class TreeTableRow extends Component {
 
     renderChildren() {
         if (this.isExpanded() && this.props.node.children) {
-            return this.props.node.children.map(childNode => {
+            return this.props.node.children.map((childNode, index) => {
                 return (
-                    <TreeTableRow key={childNode.key||JSON.stringify(childNode.data)} level={this.props.level + 1}
-                        node={childNode} columns={this.props.columns} expandedKeys={this.props.expandedKeys}
+                    <TreeTableRow key={childNode.key||JSON.stringify(childNode.data)} level={this.props.level + 1} rowIndex={this.props.rowIndex + '_' + index}
+                        node={childNode} columns={this.props.columns} expandedKeys={this.props.expandedKeys} selectOnEdit={this.props.selectOnEdit}
                         onToggle={this.props.onToggle} onExpand={this.props.onExpand} onCollapse={this.props.onCollapse}
                         selectionMode={this.props.selectionMode} selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange}
                         metaKeySelection={this.props.metaKeySelection} onRowClick={this.props.onRowClick} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect}

@@ -11,10 +11,10 @@ export class PasswordDemo extends Component {
         super(props);
 
         this.state = {
-            value1: null,
-            value2: null,
-            value3: null,
-            value4: null
+            value1: '',
+            value2: '',
+            value3: '',
+            value4: ''
         };
     }
 

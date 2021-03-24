@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { classNames } from '../utils/ClassNames';
+import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 import ObjectUtils from '../utils/ObjectUtils';
 import DomHandler from '../utils/DomHandler';
-import {RowRadioButton} from './RowRadioButton';
-import {RowCheckbox} from './RowCheckbox';
+import { RowRadioButton } from './RowRadioButton';
+import { RowCheckbox } from './RowCheckbox';
 import { Ripple } from '../ripple/Ripple';
 
 export class BodyCell extends Component {
@@ -19,6 +20,8 @@ export class BodyCell extends Component {
         this.onBlur = this.onBlur.bind(this);
         this.onKeyDown = this.onKeyDown.bind(this);
         this.onEditorFocus = this.onEditorFocus.bind(this);
+
+        this.eventBusKey = `${this.props.field}_${this.props.rowIndex}`;
     }
 
     onExpanderClick(event) {
@@ -45,7 +48,16 @@ export class BodyCell extends Component {
     }
 
     onClick(event) {
-        if (this.props.editMode !== 'row' && this.props.editor && !this.state.editing) {
+        if (this.props.editMode !== 'row' && this.props.editor && !this.state.editing && (this.props.selectOnEdit || (!this.props.selectOnEdit && this.props.selected))) {
+            this.selfClick = true;
+
+            if (this.props.onBeforeEditorShow) {
+                this.props.onBeforeEditorShow({
+                    originalEvent: event,
+                    columnProps: this.props
+                });
+            }
+
             this.setState({
                 editing: true
             }, () => {
@@ -58,12 +70,20 @@ export class BodyCell extends Component {
 
                 if (this.props.editorValidatorEvent === 'click') {
                     this.bindDocumentEditListener();
+
+                    OverlayEventBus.on('overlay-click', (e) => {
+                        if (!this.isOutsideClicked(e.target)) {
+                            this.selfClick = true;
+                        }
+                    }, this.eventBusKey);
                 }
             });
         }
     }
 
     onBlur(event) {
+        this.selfClick = false;
+
         if (this.props.editMode !== 'row' && this.state.editing && this.props.editorValidatorEvent === 'blur') {
             this.switchCellToViewMode(event, true);
         }
@@ -76,26 +96,36 @@ export class BodyCell extends Component {
     bindDocumentEditListener() {
         if (!this.documentEditListener) {
             this.documentEditListener = (e) => {
-                if (this.isOutsideClicked(e)) {
+                if (!this.selfClick && this.isOutsideClicked(e.target)) {
                     this.switchCellToViewMode(e, true);
                 }
+
+                this.selfClick = false;
             };
 
             document.addEventListener('click', this.documentEditListener);
         }
     }
 
-    isOutsideClicked(event) {
-        return this.container && !(this.container.isSameNode(event.target) || this.container.contains(event.target));
+    isOutsideClicked(target) {
+        return this.container && !(this.container.isSameNode(target) || this.container.contains(target));
     }
 
-    closeCell() {
+    closeCell(event) {
+        if (this.props.onBeforeEditorHide) {
+            this.props.onBeforeEditorHide({
+                originalEvent: event,
+                columnProps: this.props
+            });
+        }
+
         /* When using the 'tab' key, the focus event of the next cell is not called in IE. */
         setTimeout(() => {
             this.setState({
                 editing: false
             }, () => {
                 this.unbindDocumentEditListener();
+                OverlayEventBus.off('overlay-click', this.eventBusKey);
             });
         }, 1);
     }
@@ -120,7 +150,7 @@ export class BodyCell extends Component {
                 this.props.onEditorSubmit(params);
             }
 
-            this.closeCell();
+            this.closeCell(event);
         }
     }
 
@@ -128,6 +158,7 @@ export class BodyCell extends Component {
         if (this.documentEditListener) {
             document.removeEventListener('click', this.documentEditListener);
             this.documentEditListener = null;
+            this.selfClick = false;
         }
     }
 
@@ -169,14 +200,15 @@ export class BodyCell extends Component {
 
     render() {
         let content, header, editorKeyHelper;
-        let cellClassName = classNames(this.props.bodyClassName||this.props.className, {
-                                'p-selection-column': this.props.selectionMode,
-                                'p-editable-column': this.props.editor,
-                                'p-cell-editing': this.state.editing && this.props.editor
-                            });
+        let cellClassName = classNames(this.props.bodyClassName || this.props.className, {
+            'p-selection-column': this.props.selectionMode,
+            'p-editable-column': this.props.editor,
+            'p-cell-editing': this.state.editing && this.props.editor
+        });
 
         if (this.props.expander) {
-            const iconClassName = classNames('p-row-toggler-icon pi pi-fw p-clickable', {'pi-chevron-down': this.props.expanded, 'pi-chevron-right': !this.props.expanded});
+            const iconClassName = classNames('p-row-toggler-icon pi pi-fw p-clickable', { 'pi-chevron-down': this.props.expanded, 'pi-chevron-right': !this.props.expanded });
+            const ariaControls = `${this.props.tableId ? this.props.tableId + '_' : ''}content_${this.props.rowIndex}_expanded`;
             let expanderProps = {
                 onClick: this.onExpanderClick,
                 className: 'p-row-toggler p-link',
@@ -184,7 +216,7 @@ export class BodyCell extends Component {
             };
 
             content = (
-                <button type="button" onClick={expanderProps.onClick} className={expanderProps.className}>
+                <button type="button" onClick={expanderProps.onClick} className={expanderProps.className} aria-expanded={this.props.expanded} aria-controls={ariaControls}>
                     <span className={expanderProps.iconClassName}></span>
                     <Ripple />
                 </button>
@@ -192,7 +224,7 @@ export class BodyCell extends Component {
 
             if (this.props.body) {
                 expanderProps['element'] = content;
-                content = this.props.body(this.props.rowData, { ...this.props, ...{expander: expanderProps} });
+                content = this.props.body(this.props.rowData, { ...this.props, ...{ expander: expanderProps } });
             }
         }
         else if (this.props.selectionMode) {
@@ -203,9 +235,9 @@ export class BodyCell extends Component {
 
             if (showSelection) {
                 if (this.props.selectionMode === 'single')
-                    content = <RowRadioButton onClick={this.props.onRadioClick} rowData={this.props.rowData} selected={this.props.selected}/>;
+                    content = <RowRadioButton onClick={this.props.onRadioClick} rowData={this.props.rowData} selected={this.props.selected} tableId={this.props.tableId} />;
                 else
-                    content = <RowCheckbox onClick={this.props.onCheckboxClick} rowData={this.props.rowData} selected={this.props.selected}/>;
+                    content = <RowCheckbox onClick={this.props.onCheckboxClick} rowData={this.props.rowData} selected={this.props.selected} />;
             }
         }
         else if (this.props.rowReorder) {
@@ -266,7 +298,7 @@ export class BodyCell extends Component {
 
             if (this.props.body) {
                 rowEditorProps['element'] = content;
-                content = this.props.body(this.props.rowData, { ...this.props, ...{rowEditor: rowEditorProps} });
+                content = this.props.body(this.props.rowData, { ...this.props, ...{ rowEditor: rowEditorProps } });
             }
         }
         else {
@@ -283,12 +315,12 @@ export class BodyCell extends Component {
 
         if (this.props.editMode !== 'row') {
             /* eslint-disable */
-            editorKeyHelper = this.props.editor && <a tabIndex="0" ref={(el) => {this.keyHelper = el;}} className="p-cell-editor-key-helper p-hidden-accessible" onFocus={this.onEditorFocus}><span></span></a>;
+            editorKeyHelper = this.props.editor && <a tabIndex="0" ref={(el) => { this.keyHelper = el; }} className="p-cell-editor-key-helper p-hidden-accessible" onFocus={this.onEditorFocus}><span></span></a>;
             /* eslint-enable */
         }
 
         return (
-            <td ref={(el) => {this.container = el;}} className={cellClassName} style={this.props.bodyStyle||this.props.style} onClick={this.onClick} onKeyDown={this.onKeyDown}
+            <td ref={(el) => { this.container = el; }} role="cell" className={cellClassName} style={this.props.bodyStyle || this.props.style} onClick={this.onClick} onKeyDown={this.onKeyDown}
                 rowSpan={this.props.rowSpan} onBlur={this.onBlur}>
                 {header}
                 {editorKeyHelper}

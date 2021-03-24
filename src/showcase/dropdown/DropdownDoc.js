@@ -24,7 +24,8 @@ export class DropdownDemo extends Component {
         this.state = {
             selectedCity1: null,
             selectedCity2: null,
-            selectedCountry: null
+            selectedCountry: null,
+            selectedGroupedCity: null
         };
 
         this.cities = [
@@ -48,9 +49,40 @@ export class DropdownDemo extends Component {
             {name: 'United States', code: 'US'}
         ];
 
+        this.groupedCities = [
+            {
+                label: 'Germany', code: 'DE',
+                items: [
+                    { label: 'Berlin', value: 'Berlin' },
+                    { label: 'Frankfurt', value: 'Frankfurt' },
+                    { label: 'Hamburg', value: 'Hamburg' },
+                    { label: 'Munich', value: 'Munich' }
+                ]
+            },
+            {
+                label: 'USA', code: 'US',
+                items: [
+                    { label: 'Chicago', value: 'Chicago' },
+                    { label: 'Los Angeles', value: 'Los Angeles' },
+                    { label: 'New York', value: 'New York' },
+                    { label: 'San Francisco', value: 'San Francisco' }
+                ]
+            },
+            {
+                label: 'Japan', code: 'JP',
+                items: [
+                    { label: 'Kyoto', value: 'Kyoto' },
+                    { label: 'Osaka', value: 'Osaka' },
+                    { label: 'Tokyo', value: 'Tokyo' },
+                    { label: 'Yokohama', value: 'Yokohama' }
+                ]
+            }
+        ];
+
         this.onCityChange = this.onCityChange.bind(this);
         this.onCityChange2 = this.onCityChange2.bind(this);
         this.onCountryChange = this.onCountryChange.bind(this);
+        this.onGroupedCityChange = this.onGroupedCityChange.bind(this);
     }
 
     onCityChange(e) {
@@ -63,6 +95,10 @@ export class DropdownDemo extends Component {
 
     onCountryChange(e) {
         this.setState({ selectedCountry: e.value });
+    }
+
+    onGroupedCityChange(e) {
+        this.setState({ selectedGroupedCity: e.value });
     }
 
     selectedCountryTemplate(option, props) {
@@ -91,6 +127,15 @@ export class DropdownDemo extends Component {
         );
     }
 
+    groupedItemTemplate(option) {
+        return (
+            <div className="p-d-flex p-ai-center country-item">
+                <img alt={option.label} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <div>{option.label}</div>
+            </div>
+        );
+    }
+
     render() {
         return (
             <div className="dropdown-demo">
@@ -100,6 +145,10 @@ export class DropdownDemo extends Component {
 
                     <h5>Editable</h5>
                     <Dropdown value={this.state.selectedCity2} options={this.cities} onChange={this.onCityChange2} optionLabel="name" editable />
+
+                    <h5>Grouped</h5>
+                    <Dropdown value={this.state.selectedGroupedCity} options={this.groupedCities} onChange={this.onGroupedCityChange} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
+                        optionGroupTemplate={this.groupedItemTemplate} />
 
                     <h5>Advanced with Templating, Filtering and Clear Icon</h5>
                     <Dropdown value={this.state.selectedCountry} options={this.countries} onChange={this.onCountryChange} optionLabel="name" filter showClear filterBy="name" placeholder="Select a Country"
@@ -122,6 +171,7 @@ const DropdownDemo = () => {
     const [selectedCity1, setSelectedCity1] = useState(null);
     const [selectedCity2, setSelectedCity2] = useState(null);
     const [selectedCountry, setSelectedCountry] = useState(null);
+    const [selectedGroupedCity, setSelectedGroupedCity] = useState(null);
     const cities = [
         { name: 'New York', code: 'NY' },
         { name: 'Rome', code: 'RM' },
@@ -141,6 +191,35 @@ const DropdownDemo = () => {
         {name: 'Spain', code: 'ES'},
         {name: 'United States', code: 'US'}
     ];
+    const groupedCities = [
+        {
+            label: 'Germany', code: 'DE',
+            items: [
+                { label: 'Berlin', value: 'Berlin' },
+                { label: 'Frankfurt', value: 'Frankfurt' },
+                { label: 'Hamburg', value: 'Hamburg' },
+                { label: 'Munich', value: 'Munich' }
+            ]
+        },
+        {
+            label: 'USA', code: 'US',
+            items: [
+                { label: 'Chicago', value: 'Chicago' },
+                { label: 'Los Angeles', value: 'Los Angeles' },
+                { label: 'New York', value: 'New York' },
+                { label: 'San Francisco', value: 'San Francisco' }
+            ]
+        },
+        {
+            label: 'Japan', code: 'JP',
+            items: [
+                { label: 'Kyoto', value: 'Kyoto' },
+                { label: 'Osaka', value: 'Osaka' },
+                { label: 'Tokyo', value: 'Tokyo' },
+                { label: 'Yokohama', value: 'Yokohama' }
+            ]
+        }
+    ];
 
     const onCityChange = (e) => {
         setSelectedCity1(e.value);
@@ -152,6 +231,10 @@ const DropdownDemo = () => {
 
     const onCountryChange = (e) => {
         setSelectedCountry(e.value);
+    }
+
+    const onGroupedCityChange = (e) => {
+        setSelectedGroupedCity(e.value);
     }
 
     const selectedCountryTemplate = (option, props) => {
@@ -180,6 +263,15 @@ const DropdownDemo = () => {
         );
     }
 
+    const groupedItemTemplate = (option) => {
+        return (
+            <div className="p-d-flex p-ai-center country-item">
+                <img alt={option.label} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <div>{option.label}</div>
+            </div>
+        );
+    }
+
     return (
         <div className="dropdown-demo">
             <div className="card">
@@ -188,6 +280,10 @@ const DropdownDemo = () => {
 
                 <h5>Editable</h5>
                 <Dropdown value={selectedCity2} options={cities} onChange={onCityChange2} optionLabel="name" editable />
+
+                <h5>Grouped</h5>
+                <Dropdown value={selectedGroupedCity} options={groupedCities} onChange={onGroupedCityChange} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
+                    optionGroupTemplate={groupedItemTemplate} />
 
                 <h5>Advanced with Templating, Filtering and Clear Icon</h5>
                 <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" filter showClear filterBy="name" placeholder="Select a Country"
@@ -209,6 +305,7 @@ const DropdownDemo = () => {
     const [selectedCity1, setSelectedCity1] = useState<any>(null);
     const [selectedCity2, setSelectedCity2] = useState<any>(null);
     const [selectedCountry, setSelectedCountry] = useState<any>(null);
+    const [selectedGroupedCity, setSelectedGroupedCity] = useState<any>(null);
     const cities = [
         { name: 'New York', code: 'NY' },
         { name: 'Rome', code: 'RM' },
@@ -228,6 +325,35 @@ const DropdownDemo = () => {
         {name: 'Spain', code: 'ES'},
         {name: 'United States', code: 'US'}
     ];
+    const groupedCities = [
+        {
+            label: 'Germany', code: 'DE',
+            items: [
+                { label: 'Berlin', value: 'Berlin' },
+                { label: 'Frankfurt', value: 'Frankfurt' },
+                { label: 'Hamburg', value: 'Hamburg' },
+                { label: 'Munich', value: 'Munich' }
+            ]
+        },
+        {
+            label: 'USA', code: 'US',
+            items: [
+                { label: 'Chicago', value: 'Chicago' },
+                { label: 'Los Angeles', value: 'Los Angeles' },
+                { label: 'New York', value: 'New York' },
+                { label: 'San Francisco', value: 'San Francisco' }
+            ]
+        },
+        {
+            label: 'Japan', code: 'JP',
+            items: [
+                { label: 'Kyoto', value: 'Kyoto' },
+                { label: 'Osaka', value: 'Osaka' },
+                { label: 'Tokyo', value: 'Tokyo' },
+                { label: 'Yokohama', value: 'Yokohama' }
+            ]
+        }
+    ];
 
     const onCityChange = (e: { value: any }) => {
         setSelectedCity1(e.value);
@@ -239,6 +365,10 @@ const DropdownDemo = () => {
 
     const onCountryChange = (e: { value: any }) => {
         setSelectedCountry(e.value);
+    }
+
+    const onGroupedCityChange = (e: { value: any }) => {
+        setSelectedGroupedCity(e.value);
     }
 
     const selectedCountryTemplate = (option: { name: string, code: string }, props: { placeholder: string }) => {
@@ -267,6 +397,15 @@ const DropdownDemo = () => {
         );
     }
 
+    const groupedItemTemplate = (option: any) => {
+        return (
+            <div className="p-d-flex p-ai-center country-item">
+                <img alt={option.label} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <div>{option.label}</div>
+            </div>
+        );
+    }
+
     return (
         <div className="dropdown-demo">
             <div className="card">
@@ -275,6 +414,10 @@ const DropdownDemo = () => {
 
                 <h5>Editable</h5>
                 <Dropdown value={selectedCity2} options={cities} onChange={onCityChange2} optionLabel="name" editable />
+
+                <h5>Grouped</h5>
+                <Dropdown value={selectedGroupedCity} options={groupedCities} onChange={onGroupedCityChange} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
+                    optionGroupTemplate={groupedItemTemplate} />
 
                 <h5>Advanced with Templating, Filtering and Clear Icon</h5>
                 <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" filter showClear filterBy="name" placeholder="Select a Country"
@@ -418,6 +561,47 @@ const countryOptionTemplate = (option) => {
 `}
 </CodeHighlight>
 
+                        <h5>Grouping</h5>
+                        <p>Options groups are specified with the <i>optionGroupLabel</i> and <i>optionGroupChildren</i> properties.</p>
+<CodeHighlight>
+{`
+const groupedCities = [
+    {
+        label: 'Germany', code: 'DE',
+        items: [
+            { label: 'Berlin', value: 'Berlin' },
+            { label: 'Frankfurt', value: 'Frankfurt' },
+            { label: 'Hamburg', value: 'Hamburg' },
+            { label: 'Munich', value: 'Munich' }
+        ]
+    },
+    {
+        label: 'USA', code: 'US',
+        items: [
+            { label: 'Chicago', value: 'Chicago' },
+            { label: 'Los Angeles', value: 'Los Angeles' },
+            { label: 'New York', value: 'New York' },
+            { label: 'San Francisco', value: 'San Francisco' }
+        ]
+    },
+    {
+        label: 'Japan', code: 'JP',
+        items: [
+            { label: 'Kyoto', value: 'Kyoto' },
+            { label: 'Osaka', value: 'Osaka' },
+            { label: 'Tokyo', value: 'Tokyo' },
+            { label: 'Yokohama', value: 'Yokohama' }
+        ]
+    }
+];
+`}
+</CodeHighlight>
+
+<CodeHighlight>
+{`
+<Dropdown value={selectedGroupedCity} options={groupedCities} onChange={e => setSelectedGroupedCity(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items" />
+`}
+</CodeHighlight>
                         <h5>SelectItem API</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -513,6 +697,24 @@ const countryOptionTemplate = (option) => {
                                         <td>Name of the value field of an option when arbitrary objects are used as options instead of SelectItems.</td>
                                     </tr>
                                     <tr>
+                                        <td>optionDisabled</td>
+                                        <td>boolean</td>
+                                        <td>null</td>
+                                        <td>Property name or getter function to use as the disabled flag of an option, defaults to false when not defined.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>optionGroupLabel</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Property name or getter function to use as the label of an option group.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>optionGroupChildren</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Property name or getter function that refers to the children options of option group.</td>
+                                    </tr>
+                                    <tr>
                                         <td>valueTemplate</td>
                                         <td>any</td>
                                         <td>null</td>
@@ -523,6 +725,12 @@ const countryOptionTemplate = (option) => {
                                         <td>any</td>
                                         <td>null</td>
                                         <td>The template of items.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>optionGroupTemplate</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Template of an option group item.</td>
                                     </tr>
                                     <tr>
                                         <td>style</td>
@@ -611,8 +819,8 @@ const countryOptionTemplate = (option) => {
                                     <tr>
                                         <td>appendTo</td>
                                         <td>DOM element</td>
-                                        <td>null</td>
-                                        <td>DOM element instance where the dialog should be mounted.</td>
+                                        <td>document.body</td>
+                                        <td>DOM element instance where the overlay panel should be mounted.</td>
                                     </tr>
                                     <tr>
                                         <td>tabIndex</td>
@@ -631,6 +839,12 @@ const countryOptionTemplate = (option) => {
                                         <td>boolean</td>
                                         <td>true</td>
                                         <td>When the panel is opened, it specifies that the filter input should focus automatically.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>showFilterClear</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>When enabled, a clear icon is displayed to clear the filtered value.</td>
                                     </tr>
                                     <tr>
                                         <td>panelClassName</td>

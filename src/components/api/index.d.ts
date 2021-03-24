@@ -1,7 +1,8 @@
 // Config
 export default PrimeReact = {
     ripple?: boolean,
-    locale?: string
+    locale?: string,
+    zIndex?: number
 };
 
 // Locale

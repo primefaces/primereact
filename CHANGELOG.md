@@ -1,5 +1,92 @@
 # Changelog
 
+## [6.2.1](https://github.com/primefaces/primereact/tree/6.2.1) (2021-03-17)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/6.2.0...6.2.1)
+
+**Fixed bugs:**
+
+- Overlay Components throw an exception with Next.js [\#1880](https://github.com/primefaces/primereact/issues/1880)
+
+## [6.2.0](https://github.com/primefaces/primereact/tree/6.2.0) (2021-03-16)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/6.1.0...6.2.0)
+
+**Implemented New Features and Enhancements:**
+
+- Add zIndex options to PrimeReact api [\#1878](https://github.com/primefaces/primereact/issues/1878)
+- Set appendTo as body by default [\#1875](https://github.com/primefaces/primereact/issues/1875)
+- Add option group support to Dropdown [\#1874](https://github.com/primefaces/primereact/issues/1874)
+- Add option group support to MultiSelect [\#1873](https://github.com/primefaces/primereact/issues/1873)
+- Add option group support to Listbox [\#1872](https://github.com/primefaces/primereact/issues/1872)
+- Add option group support to Autocomplete [\#1871](https://github.com/primefaces/primereact/issues/1871)
+- Improve close button style on Inplace [\#1861](https://github.com/primefaces/primereact/issues/1861)
+- Improve type definition of  completeMethod event on AutoComplete [\#1680](https://github.com/primefaces/primereact/issues/1680)
+
+**Fixed bugs:**
+
+- Datatable rows per page doesn't work [\#1870](https://github.com/primefaces/primereact/issues/1870)
+- Server side error because OverlayEventBus [\#1869](https://github.com/primefaces/primereact/issues/1869)
+- Cell Editing doesn't work on child nodes in TreeTable [\#1865](https://github.com/primefaces/primereact/issues/1865)
+- Ability to clear password \(set value of password to blank\) [\#1854](https://github.com/primefaces/primereact/issues/1854)
+
+## [6.1.0](https://github.com/primefaces/primereact/tree/6.1.0) (2021-03-09)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/6.0.2...6.1.0)
+
+**Implemented New Features and Enhancements:**
+
+- Color Palettes for Each Theme [\#1860](https://github.com/primefaces/primereact/issues/1860)
+- Add touch support to ColorPicker [\#1857](https://github.com/primefaces/primereact/issues/1857)
+- Add breakpoints property to Dialog, ConfirmDialog and OverlayPanel [\#1856](https://github.com/primefaces/primereact/issues/1856)
+- Add selectionOnly options to CSV export on DataTable [\#1853](https://github.com/primefaces/primereact/issues/1853)
+- Add multiple property to PanelMenu [\#1846](https://github.com/primefaces/primereact/issues/1846)
+- Add expanded option to MenuModel [\#1845](https://github.com/primefaces/primereact/issues/1845)
+- Add panelHeaderTemplate and panelFooterTemplate properties to MultiSelect [\#1841](https://github.com/primefaces/primereact/issues/1841)
+- Add paginatorClassName to DataTable, TreeTable and DataView [\#1840](https://github.com/primefaces/primereact/issues/1840)
+- Improve template option on Paginator [\#1839](https://github.com/primefaces/primereact/issues/1839)
+- Improve the interaction of nested overlays [\#1832](https://github.com/primefaces/primereact/issues/1832)
+- Add disabled option to Tooltip [\#1827](https://github.com/primefaces/primereact/issues/1827)
+- Add onClick event to Avatar [\#1819](https://github.com/primefaces/primereact/issues/1819)
+- Improve checkbox selection on DataTable [\#1817](https://github.com/primefaces/primereact/issues/1817)
+- \[Multiselect\] Feature request: Configure Maximum allowed number of items selectable in Multiselect [\#1815](https://github.com/primefaces/primereact/issues/1815)
+- data-pr-{options} on Global Tooltip  doesn't work [\#1811](https://github.com/primefaces/primereact/issues/1811)
+- Menubar and Toolbar, start/end wrong prop types, that don't accept JSX.Element type [\#1809](https://github.com/primefaces/primereact/issues/1809)
+- Tooltip does not disappear when components are disabled [\#1806](https://github.com/primefaces/primereact/issues/1806)
+- Add onClose callback to custom content on ToastMessage [\#1805](https://github.com/primefaces/primereact/issues/1805)
+- Add draggable and resizable features to Dialog [\#1616](https://github.com/primefaces/primereact/issues/1616)
+- DataTable/TreeTable: implement configurable filterDelay [\#1440](https://github.com/primefaces/primereact/issues/1440)
+- Disabling a Menu Item doesnt add aria-disabled label [\#1434](https://github.com/primefaces/primereact/issues/1434)
+- TreeTable/DataTable goes to edit mode when selected \(single click\) [\#1292](https://github.com/primefaces/primereact/issues/1292)
+- Add removableSort property on TreeTable component [\#1275](https://github.com/primefaces/primereact/issues/1275)
+- Change row navigation structure on DataTable with selection [\#1162](https://github.com/primefaces/primereact/issues/1162)
+- Trigger row editing on datatable programmatically [\#1135](https://github.com/primefaces/primereact/issues/1135)
+- Add showFilterClear proprty to Dropdown [\#1081](https://github.com/primefaces/primereact/issues/1081)
+- Improve the parameters of onDragDrop callback on Tree [\#1020](https://github.com/primefaces/primereact/issues/1020)
+- PanelMenu collapses on clicking the menu link instead of being in expanded state [\#1011](https://github.com/primefaces/primereact/issues/1011)
+- Support for svg element in icon properties [\#971](https://github.com/primefaces/primereact/issues/971)
+- Accessibility of the DataTable expander cell button [\#921](https://github.com/primefaces/primereact/issues/921)
+- Accessibility issues in Tooltip and Dialog components [\#862](https://github.com/primefaces/primereact/issues/862)
+- Add mask property to Calendar [\#765](https://github.com/primefaces/primereact/issues/765)
+- Keyboard Accessibility for Slider [\#694](https://github.com/primefaces/primereact/issues/694)
+- Add onBeforeEditorShow and onBeforeEditorHide callbacks to Column on DataTable with cell editing [\#589](https://github.com/primefaces/primereact/issues/589)
+- Add headerTemplate property to Panel [\#1858](https://github.com/primefaces/primereact/issues/1858)
+
+**Fixed bugs:**
+
+- DataTable is not working with defaultSortOrder={-1} [\#1855](https://github.com/primefaces/primereact/issues/1855)
+- PanelMenu animation is not working as expected [\#1844](https://github.com/primefaces/primereact/issues/1844)
+- CascadeSelect is not working with appendTo property [\#1833](https://github.com/primefaces/primereact/issues/1833)
+- Editing DataTable and TreeTable are not working as expected on React/ReactDOM ^17.0.1 [\#1828](https://github.com/primefaces/primereact/issues/1828)
+- MenuItem interface missing template property [\#1823](https://github.com/primefaces/primereact/issues/1823)
+- When the 'rows' property changes, Pagination component does not update [\#1820](https://github.com/primefaces/primereact/issues/1820)
+- InputText component reference returns Invalid prop forwardRef [\#1818](https://github.com/primefaces/primereact/issues/1818)
+- PickList: Move Up \(Single\) and Move Down buttons are not working [\#1814](https://github.com/primefaces/primereact/issues/1814)
+- DataTable - accessibility of sorting buttons [\#1813](https://github.com/primefaces/primereact/issues/1813)
+- Dropdown menu is separate from the input field [\#1808](https://github.com/primefaces/primereact/issues/1808)
+- DataTable csv export fails in chrome but is working in IE [\#1098](https://github.com/primefaces/primereact/issues/1098)
+- The toggler icon of Tree/TreeTable is not displaying correctly in mobile mode [\#1859](https://github.com/primefaces/primereact/issues/1859)
+
 ## [6.0.2](https://github.com/primefaces/primereact/tree/6.0.2) (2021-02-04)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/6.0.1...6.0.2)

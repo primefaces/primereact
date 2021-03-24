@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 import { classNames } from '../utils/ClassNames';
 import { CSSTransition } from 'react-transition-group';
+import { Portal } from '../portal/Portal';
 
 class ColorPickerPanelComponent extends Component {
 
@@ -28,7 +28,7 @@ class ColorPickerPanelComponent extends Component {
 
         return (
             <CSSTransition nodeRef={this.props.forwardRef} classNames="p-connected-overlay" in={this.props.in} timeout={{ enter: 120, exit: 100 }}
-                unmountOnExit onEnter={this.props.onEnter} onEntered={this.props.onEntered} onExit={this.props.onExit}>
+                unmountOnExit onEnter={this.props.onEnter} onEntered={this.props.onEntered} onExit={this.props.onExit} onExited={this.props.onExited}>
                 <div ref={this.props.forwardRef} className={className} onClick={this.props.onClick}>
                     {this.props.children}
                 </div>
@@ -39,12 +39,7 @@ class ColorPickerPanelComponent extends Component {
     render() {
         let element = this.renderElement();
 
-        if (this.props.appendTo) {
-            return ReactDOM.createPortal(element, this.props.appendTo);
-        }
-        else {
-            return element;
-        }
+        return this.props.inline ? element : <Portal element={element} appendTo={this.props.appendTo} />;
     }
 }
 

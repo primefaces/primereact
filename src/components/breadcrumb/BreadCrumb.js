@@ -46,7 +46,7 @@ export class BreadCrumb extends Component {
 
             return (
                 <li className={className} style={this.props.home.style}>
-                    <a href={this.props.home.url || '#'} className="p-menuitem-link" target={this.props.home.target} onClick={event => this.itemClick(event, this.props.home)}>
+                    <a href={this.props.home.url || '#'} className="p-menuitem-link" aria-disabled={this.props.home.disabled} target={this.props.home.target} onClick={event => this.itemClick(event, this.props.home)}>
                         <span className={iconClassName}></span>
                     </a>
                 </li>
@@ -66,7 +66,7 @@ export class BreadCrumb extends Component {
         const className = classNames(item.className, {'p-disabled': item.disabled});
         const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
         let content = (
-            <a href={item.url || '#'} className="p-menuitem-link" target={item.target} onClick={event => this.itemClick(event, item)}>
+            <a href={item.url || '#'} className="p-menuitem-link" target={item.target} onClick={event => this.itemClick(event, item)} aria-disabled={item.disabled}>
                 {label}
             </a>
         );

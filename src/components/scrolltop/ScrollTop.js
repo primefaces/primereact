@@ -34,6 +34,7 @@ export class ScrollTop extends Component {
 
         this.onClick = this.onClick.bind(this);
         this.onEnter = this.onEnter.bind(this);
+        this.onExited = this.onExited.bind(this);
         this.scrollElementRef = React.createRef();
     }
 
@@ -83,6 +84,10 @@ export class ScrollTop extends Component {
         this.scrollElementRef.current.style.zIndex = String(DomHandler.generateZIndex());
     }
 
+    onExited() {
+        DomHandler.revertZIndex();
+    }
+
     componentDidMount() {
         if (this.props.target === 'window')
             this.bindDocumentScrollListener();
@@ -95,6 +100,8 @@ export class ScrollTop extends Component {
             this.unbindDocumentScrollListener();
         else if (this.props.target === 'parent')
             this.unbindParentScrollListener();
+
+        DomHandler.revertZIndex();
     }
 
     render() {
@@ -106,7 +113,8 @@ export class ScrollTop extends Component {
 
         return (
             <>
-                <CSSTransition nodeRef={this.scrollElementRef} classNames="p-scrolltop" in={this.state.visible} timeout={{ enter: 150, exit: 150 }} unmountOnExit onEnter={this.onEnter}>
+                <CSSTransition nodeRef={this.scrollElementRef} classNames="p-scrolltop" in={this.state.visible} timeout={{ enter: 150, exit: 150 }} unmountOnExit
+                    onEnter={this.onEnter} onExited={this.onExited}>
                     <button ref={this.scrollElementRef} type="button" className={className} style={this.props.style} onClick={this.onClick}>
                         <span className={iconClassName}></span>
                         <Ripple />

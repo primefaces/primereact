@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
@@ -7,6 +6,8 @@ import { classNames } from '../utils/ClassNames';
 import { CSSTransition } from 'react-transition-group';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
+import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
+import { Portal } from '../portal/Portal';
 
 export class Menu extends Component {
 
@@ -46,9 +47,20 @@ export class Menu extends Component {
         this.onEnter = this.onEnter.bind(this);
         this.onEntered = this.onEntered.bind(this);
         this.onExit = this.onExit.bind(this);
+        this.onExited = this.onExited.bind(this);
+        this.onPanelClick = this.onPanelClick.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
         this.menuRef = React.createRef();
+    }
+
+    onPanelClick(event) {
+        if (this.props.popup) {
+            OverlayEventBus.emit('overlay-click', {
+                originalEvent: event,
+                target: this.target
+            });
+        }
     }
 
     onItemClick(event, item) {
@@ -165,6 +177,10 @@ export class Menu extends Component {
         this.unbindScrollListener();
     }
 
+    onExited() {
+        DomHandler.revertZIndex();
+    }
+
     bindDocumentListeners() {
         if (!this.documentClickListener) {
             this.documentClickListener = (event) => {
@@ -227,6 +243,8 @@ export class Menu extends Component {
             this.scrollHandler.destroy();
             this.scrollHandler = null;
         }
+
+        DomHandler.revertZIndex();
     }
 
     renderSubmenu(submenu, index) {
@@ -237,7 +255,7 @@ export class Menu extends Component {
 
         return (
             <React.Fragment key={submenu.label + '_' + index}>
-                <li className={className} style={submenu.style} role="presentation">{submenu.label}</li>
+                <li className={className} style={submenu.style} role="presentation" aria-disabled={submenu.disabled}>{submenu.label}</li>
                 {items}
             </React.Fragment>
         );
@@ -257,7 +275,7 @@ export class Menu extends Component {
         const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
         const tabIndex = item.disabled ? null : 0;
         let content = (
-            <a href={item.url || '#'} className={linkClassName} role="menuitem" target={item.target} onClick={(event) => this.onItemClick(event, item)} onKeyDown={(event) => this.onItemKeyDown(event, item)} tabIndex={tabIndex}>
+            <a href={item.url || '#'} className={linkClassName} role="menuitem" target={item.target} onClick={(event) => this.onItemClick(event, item)} onKeyDown={(event) => this.onItemKeyDown(event, item)} tabIndex={tabIndex} aria-disabled={item.disabled}>
                 {icon}
                 {label}
             </a>
@@ -312,8 +330,8 @@ export class Menu extends Component {
 
             return (
                 <CSSTransition nodeRef={this.menuRef} classNames="p-connected-overlay" in={this.state.visible} timeout={{ enter: 120, exit: 100 }}
-                    unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit}>
-                    <div ref={this.menuRef} id={this.id} className={className} style={this.props.style}>
+                    unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit} onExited={this.onExited}>
+                    <div ref={this.menuRef} id={this.id} className={className} style={this.props.style} onClick={this.onPanelClick}>
                         <ul className="p-menu-list p-reset" role="menu">
                             {menuitems}
                         </ul>
@@ -328,9 +346,6 @@ export class Menu extends Component {
     render() {
         const element = this.renderElement();
 
-        if (this.props.appendTo)
-            return ReactDOM.createPortal(element, this.props.appendTo);
-        else
-            return element;
+        return this.props.popup ? <Portal element={element} appendTo={this.props.appendTo} /> : element;
     }
 }

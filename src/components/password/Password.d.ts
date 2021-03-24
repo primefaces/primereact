@@ -26,6 +26,7 @@ interface PasswordProps extends React.HTMLProps<HTMLInputElement> {
     inputClassName?: string;
     panelStyle?: object;
     panelClassName?: string;
+    onInput?(event: React.FormEvent<HTMLInputElement>): void;
 }
 
 export class Password extends React.Component<PasswordProps,any> {}

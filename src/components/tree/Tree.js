@@ -149,7 +149,10 @@ export class Tree extends Component {
             if (this.props.onDragDrop) {
                 this.props.onDragDrop({
                     originalEvent: event.originalEvent,
-                    value: value
+                    value: value,
+                    dragNode,
+                    dropNode,
+                    dropIndex: event.index
                 });
             }
         }
@@ -190,7 +193,10 @@ export class Tree extends Component {
             if (this.props.onDragDrop) {
                 this.props.onDragDrop({
                     originalEvent: event.originalEvent,
-                    value: value
+                    value: value,
+                    dragNode,
+                    dropNode: dropNodeParent,
+                    dropIndex: event.index
                 });
             }
         }

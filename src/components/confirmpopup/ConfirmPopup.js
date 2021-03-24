@@ -9,6 +9,8 @@ import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandle
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
 import { localeOption } from '../api/Locale';
+import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
+import { Portal } from '../portal/Portal';
 
 export function confirmPopup(props) {
     let appendTo = props.appendTo || document.body;
@@ -95,8 +97,6 @@ export class ConfirmPopup extends Component {
             visible: false
         };
 
-        this.appendTo = props.appendTo || document.body;
-
         this.reject = this.reject.bind(this);
         this.accept = this.accept.bind(this);
         this.hide = this.hide.bind(this);
@@ -105,6 +105,7 @@ export class ConfirmPopup extends Component {
         this.onEnter = this.onEnter.bind(this);
         this.onEntered = this.onEntered.bind(this);
         this.onExit = this.onExit.bind(this);
+        this.onExited = this.onExited.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
         this.overlayRef = React.createRef();
@@ -121,7 +122,7 @@ export class ConfirmPopup extends Component {
     bindDocumentClickListener() {
         if(!this.documentClickListener && this.props.dismissable) {
             this.documentClickListener = (event) => {
-                if (!this.isPanelClicked && this.isOutsideClicked(event)) {
+                if (!this.isPanelClicked && this.isOutsideClicked(event.target)) {
                     this.hide();
                 }
 
@@ -175,12 +176,8 @@ export class ConfirmPopup extends Component {
         }
     }
 
-    isOutsideClicked(event) {
-        return this.overlayRef && this.overlayRef.current && !(this.overlayRef.current.isSameNode(event.target) || this.overlayRef.current.contains(event.target));
-    }
-
-    hasTargetChanged(event, target) {
-        return this.target != null && this.target !== (target||event.currentTarget||event.target);
+    isOutsideClicked(target) {
+        return this.overlayRef && this.overlayRef.current && !(this.overlayRef.current.isSameNode(target) || this.overlayRef.current.contains(target));
     }
 
     onCloseClick(event) {
@@ -189,8 +186,13 @@ export class ConfirmPopup extends Component {
         event.preventDefault();
     }
 
-    onPanelClick() {
+    onPanelClick(event) {
         this.isPanelClicked = true;
+
+        OverlayEventBus.emit('overlay-click', {
+            originalEvent: event,
+            target: this.props.target
+        });
     }
 
     accept() {
@@ -210,11 +212,19 @@ export class ConfirmPopup extends Component {
     }
 
     show() {
-        this.setState({ visible: true });
+        this.setState({ visible: true }, () => {
+            OverlayEventBus.on('overlay-click', (e) => {
+                if (!this.isOutsideClicked(e.target)) {
+                    this.isPanelClicked = true;
+                }
+            });
+        });
     }
 
     hide(result) {
         this.setState({ visible: false }, () => {
+            OverlayEventBus.off('overlay-click');
+
             if (this.props.onHide) {
                 this.props.onHide(result);
             }
@@ -236,6 +246,10 @@ export class ConfirmPopup extends Component {
         this.unbindDocumentClickListener();
         this.unbindScrollListener();
         this.unbindResizeListener();
+    }
+
+    onExited() {
+        DomHandler.revertZIndex();
     }
 
     align() {
@@ -276,6 +290,8 @@ export class ConfirmPopup extends Component {
             this.scrollHandler.destroy();
             this.scrollHandler = null;
         }
+
+        DomHandler.revertZIndex();
     }
 
     renderContent() {
@@ -317,7 +333,7 @@ export class ConfirmPopup extends Component {
 
         return (
             <CSSTransition nodeRef={this.overlayRef} classNames="p-connected-overlay" in={this.state.visible} timeout={{ enter: 120, exit: 100 }}
-                unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit}>
+                unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit} onExited={this.onExited}>
                 <div ref={this.overlayRef} id={this.id} className={className} style={this.props.style} onClick={this.onPanelClick}>
                     {content}
                     {footer}
@@ -329,6 +345,6 @@ export class ConfirmPopup extends Component {
     render() {
         let element = this.renderElement();
 
-        return ReactDOM.createPortal(element, this.appendTo);
+        return <Portal element={element} appendTo={this.props.appendTo} visible />;
     }
 }

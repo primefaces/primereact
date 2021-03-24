@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
 import { CSSTransition } from 'react-transition-group';
 import { Ripple } from '../ripple/Ripple';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
+import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
+import { Portal } from '../portal/Portal';
 
 export class OverlayPanel extends Component {
 
@@ -17,6 +18,7 @@ export class OverlayPanel extends Component {
         style: null,
         className: null,
         appendTo: null,
+        breakpoints: null,
         ariaCloseLabel: 'close',
         onHide: null
     }
@@ -28,6 +30,7 @@ export class OverlayPanel extends Component {
         style: PropTypes.object,
         className: PropTypes.string,
         appendTo: PropTypes.any,
+        breakpoints: PropTypes.object,
         ariaCloseLabel: PropTypes.string,
         onHide: PropTypes.func
     }
@@ -44,15 +47,17 @@ export class OverlayPanel extends Component {
         this.onEnter = this.onEnter.bind(this);
         this.onEntered = this.onEntered.bind(this);
         this.onExit = this.onExit.bind(this);
+        this.onExited = this.onExited.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
+        this.attributeSelector = UniqueComponentId();
         this.overlayRef = React.createRef();
     }
 
     bindDocumentClickListener() {
         if(!this.documentClickListener && this.props.dismissable) {
             this.documentClickListener = (event) => {
-                if (!this.isPanelClicked && this.isOutsideClicked(event)) {
+                if (!this.isPanelClicked && this.isOutsideClicked(event.target)) {
                     this.hide();
                 }
 
@@ -106,8 +111,8 @@ export class OverlayPanel extends Component {
         }
     }
 
-    isOutsideClicked(event) {
-        return this.overlayRef && this.overlayRef.current && !(this.overlayRef.current.isSameNode(event.target) || this.overlayRef.current.contains(event.target));
+    isOutsideClicked(target) {
+        return this.overlayRef && this.overlayRef.current && !(this.overlayRef.current.isSameNode(target) || this.overlayRef.current.contains(target));
     }
 
     hasTargetChanged(event, target) {
@@ -120,8 +125,13 @@ export class OverlayPanel extends Component {
         event.preventDefault();
     }
 
-    onPanelClick() {
+    onPanelClick(event) {
         this.isPanelClicked = true;
+
+        OverlayEventBus.emit('overlay-click', {
+            originalEvent: event,
+            target: this.target
+        });
     }
 
     toggle(event, target) {
@@ -148,12 +158,20 @@ export class OverlayPanel extends Component {
             this.align();
         }
         else {
-            this.setState({ visible: true });
+            this.setState({ visible: true }, () => {
+                OverlayEventBus.on('overlay-click', (e) => {
+                    if (!this.isOutsideClicked(e.target)) {
+                        this.isPanelClicked = true;
+                    }
+                });
+            });
         }
     }
 
     hide() {
         this.setState({ visible: false }, () => {
+            OverlayEventBus.off('overlay-click');
+
             if (this.props.onHide) {
                 this.props.onHide();
             }
@@ -162,6 +180,7 @@ export class OverlayPanel extends Component {
 
     onEnter() {
         this.overlayRef.current.style.zIndex = String(DomHandler.generateZIndex());
+        this.overlayRef.current.setAttribute(this.attributeSelector, '');
         this.align();
     }
 
@@ -175,6 +194,10 @@ export class OverlayPanel extends Component {
         this.unbindDocumentClickListener();
         this.unbindScrollListener();
         this.unbindResizeListener();
+    }
+
+    onExited() {
+        DomHandler.revertZIndex();
     }
 
     align() {
@@ -196,6 +219,32 @@ export class OverlayPanel extends Component {
         }
     }
 
+    createStyle() {
+        if (!this.styleElement) {
+            this.styleElement = document.createElement('style');
+            document.head.appendChild(this.styleElement);
+
+            let innerHTML = '';
+            for (let breakpoint in this.props.breakpoints) {
+                innerHTML += `
+                    @media screen and (max-width: ${breakpoint}) {
+                        .p-overlaypanel[${this.attributeSelector}] {
+                            width: ${this.props.breakpoints[breakpoint]} !important;
+                        }
+                    }
+                `
+            }
+
+            this.styleElement.innerHTML = innerHTML;
+        }
+    }
+
+    componentDidMount() {
+        if (this.props.breakpoints) {
+            this.createStyle();
+        }
+    }
+
     componentWillUnmount() {
         this.unbindDocumentClickListener();
         this.unbindResizeListener();
@@ -203,6 +252,13 @@ export class OverlayPanel extends Component {
             this.scrollHandler.destroy();
             this.scrollHandler = null;
         }
+
+        if (this.styleElement) {
+            document.head.removeChild(this.styleElement);
+            this.styleElement = null;
+        }
+
+        DomHandler.revertZIndex();
     }
 
     renderCloseIcon() {
@@ -224,7 +280,7 @@ export class OverlayPanel extends Component {
 
         return (
             <CSSTransition nodeRef={this.overlayRef} classNames="p-overlaypanel" in={this.state.visible} timeout={{ enter: 120, exit: 100 }}
-                unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit}>
+                unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit} onExited={this.onExited}>
                 <div ref={this.overlayRef} id={this.id} className={className} style={this.props.style} onClick={this.onPanelClick}>
                     <div className="p-overlaypanel-content">
                         {this.props.children}
@@ -238,11 +294,6 @@ export class OverlayPanel extends Component {
     render() {
         let element = this.renderElement();
 
-        if (this.props.appendTo) {
-            return ReactDOM.createPortal(element, this.props.appendTo);
-        }
-        else {
-            return element;
-        }
+        return <Portal element={element} appendTo={this.props.appendTo} />;
     }
 }

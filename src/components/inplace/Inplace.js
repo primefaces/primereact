@@ -123,7 +123,7 @@ export class Inplace extends Component {
     renderCloseButton() {
         if (this.props.closable) {
             return (
-                <Button type="button" icon="pi pi-times" onClick={this.close} />
+                <Button type="button" className="p-inplace-content-close" icon="pi pi-times" onClick={this.close} />
             )
         }
 

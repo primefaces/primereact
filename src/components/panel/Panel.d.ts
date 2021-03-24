@@ -3,6 +3,7 @@ import * as React from 'react';
 interface PanelProps {
     id?: string;
     header?: any;
+    headerTemplate?: any;
     toggleable?: boolean;
     style?: object;
     className?: string;

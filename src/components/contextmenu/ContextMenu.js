@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
-import ReactDOM from 'react-dom';
 import DomHandler from '../utils/DomHandler';
 import { CSSTransition } from 'react-transition-group';
 import { Ripple } from '../ripple/Ripple';
 import ObjectUtils from '../utils/ObjectUtils';
+import { Portal } from '../portal/Portal';
 
 class ContextMenuSub extends Component {
 
@@ -137,7 +137,7 @@ class ContextMenuSub extends Component {
         const submenu = this.renderSubmenu(item);
         let content = (
             <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => this.onItemClick(event, item, index)} role="menuitem"
-                aria-haspopup={item.items != null}>
+                aria-haspopup={item.items != null} aria-disabled={item.disabled}>
                 {icon}
                 {label}
                 {submenuIcon}
@@ -246,6 +246,7 @@ export class ContextMenu extends Component {
         this.onEnter = this.onEnter.bind(this);
         this.onEntered = this.onEntered.bind(this);
         this.onExit = this.onExit.bind(this);
+        this.onExited = this.onExited.bind(this);
 
         this.menuRef = React.createRef();
     }
@@ -324,6 +325,10 @@ export class ContextMenu extends Component {
     onExit() {
         this.currentEvent = null;
         this.unbindDocumentListeners();
+    }
+
+    onExited() {
+        DomHandler.revertZIndex();
     }
 
     position(event) {
@@ -451,6 +456,8 @@ export class ContextMenu extends Component {
     componentWillUnmount() {
         this.unbindDocumentListeners();
         this.unbindDocumentContextMenuListener();
+
+        DomHandler.revertZIndex();
     }
 
     renderContextMenu() {
@@ -458,7 +465,7 @@ export class ContextMenu extends Component {
 
         return (
             <CSSTransition nodeRef={this.menuRef} classNames="p-contextmenu" in={this.state.visible} timeout={{ enter: 250, exit: 0 }}
-                unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit}>
+                unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit} onExited={this.onExited}>
                 <div ref={this.menuRef} id={this.props.id} className={className} style={this.props.style} onClick={this.onMenuClick} onMouseEnter={this.onMenuMouseEnter}>
                     <ContextMenuSub model={this.props.model} root resetMenu={this.state.resetMenu} onLeafClick={this.onLeafClick} />
                 </div>
@@ -469,9 +476,6 @@ export class ContextMenu extends Component {
     render() {
         const element = this.renderContextMenu();
 
-        if (this.props.appendTo)
-            return ReactDOM.createPortal(element, this.props.appendTo);
-        else
-            return element;
+        return <Portal element={element} appendTo={this.props.appendTo} />;
     }
 }

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
@@ -7,6 +6,8 @@ import ObjectUtils from '../utils/ObjectUtils';
 import { CSSTransition } from 'react-transition-group';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
+import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
+import { Portal } from '../portal/Portal';
 
 export class SlideMenuSub extends Component {
 
@@ -89,7 +90,7 @@ export class SlideMenuSub extends Component {
         const submenuIcon = item.items && <span className={submenuIconClassName}></span>;
         const submenu = this.renderSubmenu(item);
         let content = (
-            <a href={item.url || '#'} className="p-menuitem-link" target={item.target} onClick={(event) => this.onItemClick(event, item, index)}>
+            <a href={item.url || '#'} className="p-menuitem-link" target={item.target} onClick={(event) => this.onItemClick(event, item, index)} aria-disabled={item.disabled}>
                 {icon}
                 {label}
                 {submenuIcon}
@@ -207,9 +208,19 @@ export class SlideMenu extends Component {
         this.onEntered = this.onEntered.bind(this);
         this.onExit = this.onExit.bind(this);
         this.onExited = this.onExited.bind(this);
+        this.onPanelClick = this.onPanelClick.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
         this.menuRef = React.createRef();
+    }
+
+    onPanelClick(event) {
+        if (this.props.popup) {
+            OverlayEventBus.emit('overlay-click', {
+                originalEvent: event,
+                target: this.target
+            });
+        }
     }
 
     navigateForward() {
@@ -285,6 +296,8 @@ export class SlideMenu extends Component {
     }
 
     onExited() {
+        DomHandler.revertZIndex();
+
         this.setState({ level: 0 });
     }
 
@@ -363,6 +376,8 @@ export class SlideMenu extends Component {
             this.scrollHandler.destroy();
             this.scrollHandler = null;
         }
+
+        DomHandler.revertZIndex();
     }
 
     renderElement() {
@@ -372,7 +387,7 @@ export class SlideMenu extends Component {
         return (
             <CSSTransition nodeRef={this.menuRef} classNames="p-connected-overlay" in={!this.props.popup || this.state.visible} timeout={{ enter: 120, exit: 100 }}
                 unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit} onExited={this.onExited}>
-                <div ref={this.menuRef} id={this.id} className={className} style={this.props.style}>
+                <div ref={this.menuRef} id={this.id} className={className} style={this.props.style} onClick={this.onPanelClick}>
                     <div className="p-slidemenu-wrapper" style={{ height: this.props.viewportHeight + 'px' }}>
                         <div className="p-slidemenu-content" ref={el => this.slideMenuContent = el}>
                             <SlideMenuSub model={this.props.model} root index={0} menuWidth={this.props.menuWidth} effectDuration={this.props.effectDuration}
@@ -388,9 +403,6 @@ export class SlideMenu extends Component {
     render() {
         const element = this.renderElement();
 
-        if (this.props.appendTo)
-            return ReactDOM.createPortal(element, this.props.appendTo);
-        else
-            return element;
+        return this.props.popup ? <Portal element={element} appendTo={this.props.appendTo} /> : element;
     }
 }

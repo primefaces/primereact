@@ -7,6 +7,7 @@ import { Button } from '../button/Button';
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
 import { localeOption } from '../api/Locale';
+import { Portal } from '../portal/Portal';
 
 export function confirmDialog(props) {
     let appendTo = props.appendTo || document.body;
@@ -57,6 +58,7 @@ export class ConfirmDialog extends Component {
         className: null,
         appendTo: null,
         footer: null,
+        breakpoints: null,
         onHide: null,
         accept: null,
         reject: null
@@ -75,6 +77,7 @@ export class ConfirmDialog extends Component {
         appendTo: PropTypes.any,
         className: PropTypes.string,
         footer: PropTypes.any,
+        breakpoints: PropTypes.object,
         onHide: PropTypes.func,
         accept: PropTypes.func,
         reject: PropTypes.func
@@ -86,8 +89,6 @@ export class ConfirmDialog extends Component {
         this.state = {
             visible: props.visible
         };
-
-        this.appendTo = props.appendTo || document.body;
 
         this.reject = this.reject.bind(this);
         this.accept = this.accept.bind(this);
@@ -159,7 +160,7 @@ export class ConfirmDialog extends Component {
         const footer = this.renderFooter();
 
         return (
-            <Dialog visible={this.state.visible} {...dialogProps} className={className} footer={footer} onHide={this.hide}>
+            <Dialog visible={this.state.visible} {...dialogProps} className={className} footer={footer} onHide={this.hide} breakpoints={this.props.breakpoints}>
                 <i className={iconClassName} />
                 <span className="p-confirm-dialog-message">{message}</span>
             </Dialog>
@@ -169,6 +170,6 @@ export class ConfirmDialog extends Component {
     render() {
         const element = this.renderElement();
 
-        return ReactDOM.createPortal(element, this.appendTo);
+        return <Portal element={element} appendTo={this.props.appendTo} />;
     }
 }

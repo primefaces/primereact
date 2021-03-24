@@ -11,6 +11,7 @@ interface AvatarProps {
     template?: any;
     imageAlt?: string;
     onImageError?(event: Event): void;
+    onClick?(event: Event): void;
 }
 
 export class Avatar extends React.Component<AvatarProps,any> {}

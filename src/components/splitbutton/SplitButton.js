@@ -9,6 +9,7 @@ import { tip } from '../tooltip/Tooltip';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import ObjectUtils from '../utils/ObjectUtils';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
+import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 
 export class SplitButton extends Component {
 
@@ -59,9 +60,18 @@ export class SplitButton extends Component {
         this.onOverlayEnter = this.onOverlayEnter.bind(this);
         this.onOverlayEntered = this.onOverlayEntered.bind(this);
         this.onOverlayExit = this.onOverlayExit.bind(this);
+        this.onOverlayExited = this.onOverlayExited.bind(this);
+        this.onPanelClick = this.onPanelClick.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
         this.overlayRef = React.createRef();
+    }
+
+    onPanelClick(event) {
+        OverlayEventBus.emit('overlay-click', {
+            originalEvent: event,
+            target: this.container
+        });
     }
 
     onDropdownButtonClick() {
@@ -100,15 +110,14 @@ export class SplitButton extends Component {
         this.unbindResizeListener();
     }
 
+    onOverlayExited() {
+        DomHandler.revertZIndex();
+    }
+
     alignPanel() {
         const container = this.defaultButton.parentElement;
-        if (this.props.appendTo) {
-            this.overlayRef.current.style.minWidth = DomHandler.getWidth(container) + 'px';
-            DomHandler.absolutePosition(this.overlayRef.current, container);
-        }
-        else {
-            DomHandler.relativePosition(this.overlayRef.current, container);
-        }
+        this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
+        DomHandler.absolutePosition(this.overlayRef.current, container);
     }
 
     bindDocumentClickListener() {
@@ -177,9 +186,9 @@ export class SplitButton extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.tooltip !== this.props.tooltip) {
+        if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
             if (this.tooltip)
-                this.tooltip.updateContent(this.props.tooltip);
+                this.tooltip.update({ content: this.props.tooltip, ...(this.props.tooltipOptions || {}) });
             else
                 this.renderTooltip();
         }
@@ -197,6 +206,8 @@ export class SplitButton extends Component {
             this.tooltip.destroy();
             this.tooltip = null;
         }
+
+        DomHandler.revertZIndex();
     }
 
     renderTooltip() {
@@ -230,8 +241,8 @@ export class SplitButton extends Component {
                 <Button type="button" className="p-splitbutton-menubutton" icon="pi pi-chevron-down" onClick={this.onDropdownButtonClick} disabled={this.props.disabled}
                     aria-expanded={this.state.overlayVisible} aria-haspopup aria-owns={this.id + '_overlay'} />
                 <SplitButtonPanel ref={this.overlayRef} appendTo={this.props.appendTo} id={this.id + '_overlay'}
-                    menuStyle={this.props.menuStyle} menuClassName={this.props.menuClassName}
-                    in={this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit}>
+                    menuStyle={this.props.menuStyle} menuClassName={this.props.menuClassName} onClick={this.onPanelClick}
+                    in={this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
                     {items}
                 </SplitButtonPanel>
             </div>

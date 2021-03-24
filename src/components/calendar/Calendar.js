@@ -10,6 +10,8 @@ import { Ripple } from '../ripple/Ripple';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import { localeOption, localeOptions } from '../api/Locale';
+import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
+import { mask } from '../utils/Mask';
 
 export class Calendar extends Component {
 
@@ -28,6 +30,7 @@ export class Calendar extends Component {
         required: false,
         readOnlyInput: false,
         keepInvalid: false,
+        mask: null,
         disabled: false,
         tabIndex: null,
         placeholder: null,
@@ -99,6 +102,7 @@ export class Calendar extends Component {
         required: PropTypes.bool,
         readOnlyInput: PropTypes.bool,
         keepInvalid: PropTypes.bool,
+        mask: PropTypes.string,
         disabled: PropTypes.bool,
         tabIndex: PropTypes.number,
         placeholder: PropTypes.string,
@@ -193,6 +197,7 @@ export class Calendar extends Component {
         this.onYearDropdownChange = this.onYearDropdownChange.bind(this);
         this.onTodayButtonClick = this.onTodayButtonClick.bind(this);
         this.onClearButtonClick = this.onClearButtonClick.bind(this);
+        this.onPanelClick = this.onPanelClick.bind(this);
         this.incrementHour = this.incrementHour.bind(this);
         this.decrementHour = this.decrementHour.bind(this);
         this.incrementMinute = this.incrementMinute.bind(this);
@@ -206,6 +211,7 @@ export class Calendar extends Component {
         this.onOverlayEnter = this.onOverlayEnter.bind(this);
         this.onOverlayEntered = this.onOverlayEntered.bind(this);
         this.onOverlayExit = this.onOverlayExit.bind(this);
+        this.onOverlayExited = this.onOverlayExited.bind(this);
         this.reFocusInputField = this.reFocusInputField.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
@@ -220,6 +226,13 @@ export class Calendar extends Component {
         if (this.props.inline) {
             this.initFocusableCell();
         }
+        else if (this.props.mask) {
+            mask(this.inputElement, {
+                mask: this.props.mask,
+                readOnly: this.props.readOnlyInput || this.props.disabled,
+                onChange: (e) => this.updateValueOnInput(e.originalEvent, e.value)
+            });
+        }
 
         if (this.props.value) {
             this.updateInputfield(this.props.value);
@@ -227,9 +240,9 @@ export class Calendar extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.tooltip !== this.props.tooltip) {
+        if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
             if (this.tooltip)
-                this.tooltip.updateContent(this.props.tooltip);
+                this.tooltip.update({ content: this.props.tooltip, ...(this.props.tooltipOptions || {}) });
             else
                 this.renderTooltip();
         }
@@ -272,9 +285,9 @@ export class Calendar extends Component {
         if (this.hideTimeout) {
             clearTimeout(this.hideTimeout);
         }
-        if (this.mask) {
+        if (this.touchUIMask) {
             this.disableModality();
-            this.mask = null;
+            this.touchUIMask = null;
         }
 
         if (this.tooltip) {
@@ -288,6 +301,8 @@ export class Calendar extends Component {
             this.scrollHandler.destroy();
             this.scrollHandler = null;
         }
+
+        DomHandler.revertZIndex();
     }
 
     renderTooltip() {
@@ -377,8 +392,14 @@ export class Calendar extends Component {
         }
         this.isKeydown = false;
 
-        let rawValue = event.target.value;
+        this.updateValueOnInput(event, event.target.value);
 
+        if (this.props.onInput) {
+            this.props.onInput(event);
+        }
+    }
+
+    updateValueOnInput(event, rawValue) {
         try {
             let value = this.parseValueFromString(rawValue);
             if (this.isValidSelection(value)) {
@@ -390,10 +411,6 @@ export class Calendar extends Component {
             //invalid date
             let value = this.props.keepInvalid ? rawValue : null;
             this.updateModel(event, value);
-        }
-
-        if (this.props.onInput) {
-            this.props.onInput(event);
         }
     }
 
@@ -652,6 +669,15 @@ export class Calendar extends Component {
 
         if (this.props.onClearButtonClick) {
             this.props.onClearButtonClick(event);
+        }
+    }
+
+    onPanelClick(event) {
+        if (!this.props.inline) {
+            OverlayEventBus.emit('overlay-click', {
+                originalEvent: event,
+                target: this.container
+            });
         }
     }
 
@@ -1361,7 +1387,7 @@ export class Calendar extends Component {
                 this.hideOverlay();
             }, 100);
 
-            if (this.mask) {
+            if (this.touchUIMask) {
                 this.disableModality();
             }
         }
@@ -1449,6 +1475,8 @@ export class Calendar extends Component {
 
     updateModel(event, value) {
         if (this.props.onChange) {
+            this.viewStateChanged = true;
+
             this.props.onChange({
                 originalEvent: event,
                 value: value,
@@ -1460,8 +1488,6 @@ export class Calendar extends Component {
                     value: value
                 }
             });
-
-            this.viewStateChanged = true;
         }
     }
 
@@ -1496,6 +1522,10 @@ export class Calendar extends Component {
         this.unbindDocumentClickListener();
         this.unbindDocumentResizeListener();
         this.unbindScrollListener();
+    }
+
+    onOverlayExited() {
+        DomHandler.revertZIndex();
     }
 
     bindDocumentClickListener() {
@@ -1570,38 +1600,34 @@ export class Calendar extends Component {
             this.enableModality();
         }
         else {
-            if (this.props.appendTo) {
-                DomHandler.absolutePosition(this.overlayRef.current, this.inputElement);
-                this.overlayRef.current.style.minWidth = DomHandler.getWidth(this.container) + 'px';
-            }
-            else {
-                DomHandler.relativePosition(this.overlayRef.current, this.inputElement);
-            }
+            const container = this.inputElement.parentElement;
+            this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
+            DomHandler.absolutePosition(this.overlayRef.current, container);
         }
     }
 
     enableModality() {
-        if (!this.mask) {
-            this.mask = document.createElement('div');
-            this.mask.style.zIndex = String(parseInt(this.overlayRef.current.style.zIndex, 10) - 1);
-            DomHandler.addMultipleClasses(this.mask, 'p-component-overlay p-datepicker-mask p-datepicker-mask-scrollblocker');
+        if (!this.touchUIMask) {
+            this.touchUIMask = document.createElement('div');
+            this.touchUIMask.style.zIndex = String(parseInt(this.overlayRef.current.style.zIndex, 10) - 1);
+            DomHandler.addMultipleClasses(this.touchUIMask, 'p-component-overlay p-datepicker-mask p-datepicker-mask-scrollblocker');
 
-            this.maskClickListener = () => {
+            this.touchUIMaskClickListener = () => {
                 this.disableModality();
             };
-            this.mask.addEventListener('click', this.maskClickListener);
+            this.touchUIMask.addEventListener('click', this.touchUIMaskClickListener);
 
-            document.body.appendChild(this.mask);
+            document.body.appendChild(this.touchUIMask);
             DomHandler.addClass(document.body, 'p-overflow-hidden');
         }
     }
 
     disableModality() {
-        if (this.mask) {
-            this.mask.removeEventListener('click', this.maskClickListener);
-            this.maskClickListener = null;
-            document.body.removeChild(this.mask);
-            this.mask = null;
+        if (this.touchUIMask) {
+            this.touchUIMask.removeEventListener('click', this.touchUIMaskClickListener);
+            this.touchUIMaskClickListener = null;
+            document.body.removeChild(this.touchUIMask);
+            this.touchUIMask = null;
 
             let bodyChildren = document.body.children;
             let hasBlockerMasks;
@@ -2692,18 +2718,22 @@ export class Calendar extends Component {
     }
 
     renderMonthView() {
-        const backwardNavigator = this.renderBackwardNavigator();
-        const forwardNavigator = this.renderForwardNavigator();
+        const backwardNavigator = this.renderBackwardNavigator(true);
+        const forwardNavigator = this.renderForwardNavigator(true);
         const yearElement = this.renderTitleYearElement(this.getViewDate().getFullYear());
         const months = this.renderMonthViewMonths();
 
         return (
             <>
-                <div className="p-datepicker-header">
-                    {backwardNavigator}
-                    {forwardNavigator}
-                    <div className="p-datepicker-title">
-                        {yearElement}
+                <div className="p-datepicker-group-container">
+                    <div className="p-datepicker-group">
+                        <div className="p-datepicker-header">
+                            {backwardNavigator}
+                            <div className="p-datepicker-title">
+                                {yearElement}
+                            </div>
+                            {forwardNavigator}
+                        </div>
                     </div>
                 </div>
                 <div className="p-monthpicker">
@@ -2963,8 +2993,8 @@ export class Calendar extends Component {
             <span ref={(el) => this.container = el} id={this.id} className={className} style={this.props.style}>
                 {input}
                 {button}
-                <CalendarPanel ref={this.overlayRef} className={panelClassName} style={this.props.panelStyle} appendTo={this.props.appendTo}
-                    in={this.props.inline || this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit}>
+                <CalendarPanel ref={this.overlayRef} className={panelClassName} style={this.props.panelStyle} appendTo={this.props.appendTo} inline={this.props.inline} onClick={this.onPanelClick}
+                    in={this.props.inline || this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
                     {datePicker}
                     {timePicker}
                     {buttonBar}
@@ -2974,4 +3004,3 @@ export class Calendar extends Component {
         );
     }
 }
-

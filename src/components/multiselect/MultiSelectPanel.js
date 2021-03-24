@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 import { classNames } from '../utils/ClassNames';
 import { CSSTransition } from 'react-transition-group';
+import { Portal } from '../portal/Portal';
 
 class MultiSelectPanelComponent extends Component {
 
     static defaultProps = {
         appendTo: null,
         header: null,
+        footer: null,
         onClick: null,
         scrollHeight: null,
         panelClassName: null,
@@ -18,6 +19,7 @@ class MultiSelectPanelComponent extends Component {
     static propTypes = {
         appendTo: PropTypes.object,
         header: PropTypes.any,
+        footer: PropTypes.any,
         onClick: PropTypes.func,
         scrollHeight: PropTypes.string,
         panelClassName: PropTypes.string,
@@ -37,6 +39,7 @@ class MultiSelectPanelComponent extends Component {
                             {this.props.children}
                         </ul>
                     </div>
+                    {this.props.footer}
                 </div>
             </CSSTransition>
 
@@ -46,12 +49,7 @@ class MultiSelectPanelComponent extends Component {
     render() {
         let element = this.renderElement();
 
-        if (this.props.appendTo) {
-            return ReactDOM.createPortal(element, this.props.appendTo);
-        }
-        else {
-            return element;
-        }
+        return <Portal element={element} appendTo={this.props.appendTo} />;
     }
 }
 

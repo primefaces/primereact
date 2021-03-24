@@ -53,7 +53,7 @@ export class HeaderCell extends Component {
                     matchMode: this.props.columnProps.filterMatchMode
                 });
                 this.filterTimeout = null;
-            }, this.filterDelay);
+            }, this.props.filterDelay);
         }
 
         this.setState({ filterValue });
@@ -101,11 +101,7 @@ export class HeaderCell extends Component {
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
-        const filterField = nextProps.columnProps.filterField || nextProps.columnProps.field;
-        const value = nextProps.filters && nextProps.filters[filterField] ? nextProps.filters[filterField].value : null;
-
         return {
-            filterValue: value !== null ? value : '',
             badgeVisible: nextProps.multiSortMeta && nextProps.multiSortMeta.length > 1
         }
     }
@@ -161,7 +157,7 @@ export class HeaderCell extends Component {
 
         if (this.props.renderOptions.filterOnly) {
             return (
-                <th ref={(el) => this.el = el} className={classNames('p-filter-column', this.props.columnProps.filterHeaderClassName)} style={this.props.columnProps.filterHeaderStyle||this.props.columnProps.style}
+                <th ref={(el) => this.el = el} role="columnheader" className={classNames('p-filter-column', this.props.columnProps.filterHeaderClassName)} style={this.props.columnProps.filterHeaderStyle||this.props.columnProps.style}
                     colSpan={this.props.columnProps.colSpan} rowSpan={this.props.columnProps.rowSpan}>
                     {filterElement}
                     {headerCheckbox}
@@ -192,7 +188,7 @@ export class HeaderCell extends Component {
             let sortBadge = this.renderSortBadge(sortMetaDataIndex);
 
             return (
-                <th ref={(el) => this.el = el} tabIndex={this.props.columnProps.sortable ? this.props.columnProps.tabIndex : null}
+                <th ref={(el) => this.el = el} role="columnheader" tabIndex={this.props.columnProps.sortable ? this.props.tabIndex : null}
                     className={className} style={this.props.columnProps.headerStyle||this.props.columnProps.style} onClick={this.onClick} onMouseDown={this.onMouseDown} onKeyDown={this.onKeyDown}
                     colSpan={this.props.columnProps.colSpan} rowSpan={this.props.columnProps.rowSpan} aria-sort={ariaSortData}
                     onDragStart={this.props.onDragStart} onDragOver={this.props.onDragOver} onDragLeave={this.props.onDragLeave} onDrop={this.props.onDrop}>

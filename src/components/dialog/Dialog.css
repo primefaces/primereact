@@ -26,6 +26,7 @@
     pointer-events: auto;
     max-height: 90%;
     transform: scale(1);
+    position: relative;
 }
 
 .p-dialog-content {
@@ -201,4 +202,20 @@
 .p-confirm-dialog .p-dialog-content {
     display: flex;
     align-items: center;
+}
+
+/* Resizable */
+.p-dialog .p-resizable-handle {
+    position: absolute;
+    font-size: 0.1px;
+    display: block;
+    cursor: se-resize;
+    width: 12px;
+    height: 12px;
+    right: 1px;
+    bottom: 1px;
+}
+
+.p-dialog-resizable .p-dialog-header {
+    cursor: move;
 }

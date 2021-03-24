@@ -28,7 +28,7 @@ export class MenubarSubComponent extends Component {
         onKeyDown: PropTypes.func,
         parentActive: PropTypes.bool,
         mobileActive: PropTypes.bool,
-        forwardRef: PropTypes.func
+        forwardRef: PropTypes.any
     };
 
     constructor(props) {

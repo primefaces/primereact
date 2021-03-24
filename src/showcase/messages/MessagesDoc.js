@@ -430,36 +430,36 @@ messages.current.show({severity: 'success', summary: 'Success Message', detail: 
 
 <CodeHighlight>
 {`
-<Messages ref={(el) => this.messages = el}></Messages>
+<Messages ref={messages}></Messages>
 
-<Button onClick={this.showSuccess} label="Success" className="p-button-success" />
-<Button onClick={this.showInfo} label="Info" className="p-button-info" />
-<Button onClick={this.showWarn} label="Warn" className="p-button-warning" />
-<Button onClick={this.showError} label="Error" className="p-button-danger" />
-<Button onClick={this.showMultiple} label="Multiple" />
+<Button onClick={showSuccess} label="Success" className="p-button-success" />
+<Button onClick={showInfo} label="Info" className="p-button-info" />
+<Button onClick={showWarn} label="Warn" className="p-button-warning" />
+<Button onClick={showError} label="Error" className="p-button-danger" />
+<Button onClick={showMultiple} label="Multiple" />
 `}
 </CodeHighlight>
 
 <CodeHighlight lang="js">
 {`
-showSuccess() {
-    this.messages.show({ severity: 'success', summary: 'Success Message', detail: 'Order submitted' });
+const showSuccess = () => {
+    messages.current.show({ severity: 'success', summary: 'Success Message', detail: 'Order submitted' });
 }
 
-showInfo() {
-    this.messages.show({ severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks' });
+const showInfo = () => {
+    messages.current.show({ severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks' });
 }
 
-showWarn() {
-    this.messages.show({ severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes' });
+const showWarn = () => {
+    messages.current.show({ severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes' });
 }
 
-showError() {
-    this.messages.show({ severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
+const showError = () => {
+    messages.current.show({ severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
 }
 
-showMultiple() {
-    this.messages.show([
+const showMultiple = () => {
+    messages.current.show([
         {severity:'info', summary:'Message 1', detail:'PrimeReact rocks'},
         {severity:'info', summary:'Message 2', detail:'PrimeReact rocks'},
         {severity:'info', summary:'Message 3', detail:'PrimeFaces rocks'}
@@ -473,7 +473,7 @@ showMultiple() {
 
 <CodeHighlight lang="js">
 {`
-this.messages.clear();
+messages.current.clear();
 `}
 </CodeHighlight>
 
@@ -482,7 +482,7 @@ this.messages.clear();
 
 <CodeHighlight lang="js">
 {`
-this.messages.replace(newMessages);
+messages.current.replace(newMessages);
 `}
 </CodeHighlight>
 
@@ -491,7 +491,7 @@ this.messages.replace(newMessages);
 
 <CodeHighlight lang="js">
 {`
-this.messages.show({closable: false, severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
+messages.current.show({closable: false, severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
 `}
 </CodeHighlight>
 
@@ -502,10 +502,10 @@ this.messages.show({closable: false, severity: 'error', summary: 'Error Message'
 <CodeHighlight lang="js">
 {`
 //sticky
-this.messages.show({ sticky: true, severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
+messages.current.show({ sticky: true, severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
 
 //automatically removed after 5 seconds
-this.messages.show({ life: 5000, severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
+messages.current.show({ life: 5000, severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
 `}
 </CodeHighlight>
 

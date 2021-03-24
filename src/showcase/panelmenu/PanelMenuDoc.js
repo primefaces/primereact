@@ -606,6 +606,12 @@ const items = [
                                         <td>null</td>
                                         <td>Style class of the component.</td>
                                     </tr>
+                                    <tr>
+                                        <td>multiple</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>Whether multiple tabs can be activated at the same time or not.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

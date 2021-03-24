@@ -69,7 +69,7 @@ export class Steps extends Component {
         const label = item.label && <span className="p-steps-title">{item.label}</span>;
         const tabIndex = disabled ? -1 : '';
         let content = (
-            <a href={item.url || '#'} className="p-menuitem-link" role="presentation" target={item.target} onClick={event => this.itemClick(event, item, index)} tabIndex={tabIndex}>
+            <a href={item.url || '#'} className="p-menuitem-link" role="presentation" target={item.target} onClick={event => this.itemClick(event, item, index)} tabIndex={tabIndex} aria-disabled={disabled}>
                 <span className="p-steps-number">{index + 1}</span>
                 {label}
             </a>

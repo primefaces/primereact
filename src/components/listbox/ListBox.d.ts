@@ -7,6 +7,9 @@ interface ListBoxProps {
     options?: any[];
     optionLabel?: string;
     optionValue?: string;
+    optionDisabled?: boolean;
+    optionGroupLabel?: string;
+    optionGroupChildren?: string;
     style?: object;
     listStyle?: object;
     listClassName?: string;
@@ -26,6 +29,7 @@ interface ListBoxProps {
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
     itemTemplate?: any;
+    optionGroupTemplate?: any;
     onChange?(e: {originalEvent: Event, value: any, target: {name: string, id: string, value: any}}): void;
     onFilterValueChange?(e: {originalEvent: Event, value: string}): void;
 }

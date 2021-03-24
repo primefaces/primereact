@@ -64,7 +64,7 @@ export class TreeTableHeader extends Component {
 
                 this.props.onSort({
                     originalEvent: event,
-                    sortField: column.props.field,
+                    sortField: column.props.sortField || column.props.field,
                     sortFunction: column.props.sortFunction,
                     sortable: column.props.sortable
                 });
@@ -126,7 +126,7 @@ export class TreeTableHeader extends Component {
                     matchMode: column.props.filterMatchMode
                 });
                 this.filterTimeout = null;
-            }, this.filterDelay);
+            }, this.props.filterDelay);
         }
     }
 

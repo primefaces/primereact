@@ -7,7 +7,7 @@ export class TableHeader extends Component {
         return React.Children.map(columns, (column, i) => {
             return <HeaderCell key={column.columnKey||column.field||i} columnProps={column.props} value={this.props.value} onSort={this.props.onSort}
                         sortField={this.props.sortField} sortOrder={this.props.sortOrder} multiSortMeta={this.props.multiSortMeta}
-                        resizableColumns={this.props.resizableColumns} onColumnResizeStart={this.props.onColumnResizeStart}
+                        resizableColumns={this.props.resizableColumns} onColumnResizeStart={this.props.onColumnResizeStart} filterDelay={this.props.filterDelay}
                         onFilter={this.props.onFilter} renderOptions={renderOptions} onHeaderCheckboxClick={this.props.onHeaderCheckboxClick} headerCheckboxSelected={this.props.headerCheckboxSelected}
                         reorderableColumns={this.props.reorderableColumns} onDragStart={this.props.onColumnDragStart} onDragOver={this.props.onColumnDragOver}
                         onDragLeave={this.props.onColumnDragLeave} onDrop={this.props.onColumnDrop} filters={this.props.filters} tabIndex={this.props.tabIndex} />;
@@ -31,7 +31,7 @@ export class TableHeader extends Component {
         if (this.props.columnGroup) {
             let rows = React.Children.toArray(this.props.columnGroup.props.children);
             content = rows.map((row, i) => {
-                return <tr key={i}>{this.createHeaderCells(React.Children.toArray(row.props.children), {filterOnly: false, renderFilter: true, renderHeaderCheckbox: true})}</tr>;
+                return <tr key={i} role="row">{this.createHeaderCells(React.Children.toArray(row.props.children), {filterOnly: false, renderFilter: true, renderHeaderCheckbox: true})}</tr>;
             });
         }
         else {
@@ -40,13 +40,13 @@ export class TableHeader extends Component {
             if (this.hasColumnFilter(columns)) {
                 content = (
                     <>
-                        <tr>{this.createHeaderCells(columns, {filterOnly: false, renderFilter: false, renderHeaderCheckbox: false})}</tr>
-                        <tr>{this.createHeaderCells(columns, {filterOnly: true, renderFilter: true, renderHeaderCheckbox: true})}</tr>
+                        <tr role="row">{this.createHeaderCells(columns, {filterOnly: false, renderFilter: false, renderHeaderCheckbox: false})}</tr>
+                        <tr role="row">{this.createHeaderCells(columns, {filterOnly: true, renderFilter: true, renderHeaderCheckbox: true})}</tr>
                     </>
                 );
             }
             else {
-                content = <tr>{this.createHeaderCells(columns, {filterOnly: false, renderFilter: false, renderHeaderCheckbox: true})}</tr>;
+                content = <tr role="row">{this.createHeaderCells(columns, {filterOnly: false, renderFilter: false, renderHeaderCheckbox: true})}</tr>;
             }
         }
 

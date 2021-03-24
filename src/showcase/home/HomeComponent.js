@@ -135,6 +135,11 @@ export class HomeComponent extends Component {
 
                     <div className="p-grid">
                         <div className="p-col-12 p-md-3">
+                            <a href="https://www.primefaces.org/layouts/ultima-react">
+                                <img alt="Ultima" src="showcase/images/layouts/ultima-react.jpg" />
+                            </a>
+                        </div>
+                        <div className="p-col-12 p-md-3">
 							<a href="https://www.primefaces.org/layouts/diamond-react">
 								<img alt="Diamond" src="showcase/images/layouts/diamond-react.jpg" />
 							</a>
@@ -147,11 +152,6 @@ export class HomeComponent extends Component {
                         <div className="p-col-12 p-md-3">
                             <a href="https://www.primefaces.org/layouts/serenity-react">
                                 <img alt="Serenity" src="showcase/images/layouts/serenity-react.jpg" />
-                            </a>
-                        </div>
-                        <div className="p-col-12 p-md-3">
-                            <a href="https://www.primefaces.org/layouts/ultima-react">
-                                <img alt="Ultima" src="showcase/images/layouts/ultima-react.jpg" />
                             </a>
                         </div>
                         <div className="p-col-12 p-md-3">

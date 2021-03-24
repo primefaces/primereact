@@ -154,7 +154,7 @@ export class AppTopbar extends Component {
     render() {
         return (
             <div className="layout-topbar">
-                <Tooltip target=".app-theme" position="bottom" />
+                <Tooltip target=".app-theme" position="bottom" baseZIndex={1000}/>
 
                 <button type="button" className="p-link menu-button" onClick={this.onMenuButtonClick} aria-haspopup aria-label="Menu">
                     <i className="pi pi-bars"></i>
@@ -264,6 +264,11 @@ export class AppTopbar extends Component {
                                     </a>
                                 </li>
                                 <li role="none">
+                                    <a href="https://www.primefaces.org/layouts/ultima-react" role="menuitem" rel="noopener noreferrer" target="_blank">
+                                        <img src="showcase/images/layouts/themeswitcher-ultima.png" alt="Ultima (Material)" /><span>Ultima</span><span className="theme-badge material">MATERIAL</span>
+                                    </a>
+                                </li>
+                                <li role="none">
                                     <a href="https://www.primefaces.org/layouts/roma-react" role="menuitem" rel="noopener noreferrer" target="_blank">
                                         <img src="showcase/images/layouts/themeswitcher-roma.jpg" alt="Roma" /><span>Roma</span>
                                     </a>
@@ -276,11 +281,6 @@ export class AppTopbar extends Component {
                                 <li role="none">
                                     <a href="https://www.primefaces.org/layouts/serenity-react" role="menuitem" rel="noopener noreferrer" target="_blank">
                                         <img src="showcase/images/layouts/themeswitcher-serenity.png" alt="Serenity (Material)" /><span>Serenity</span><span className="theme-badge material">MATERIAL</span>
-                                    </a>
-                                </li>
-                                <li role="none">
-                                    <a href="https://www.primefaces.org/layouts/ultima-react" role="menuitem" rel="noopener noreferrer" target="_blank">
-                                        <img src="showcase/images/layouts/themeswitcher-ultima.png" alt="Ultima (Material)" /><span>Ultima</span><span className="theme-badge material">MATERIAL</span>
                                     </a>
                                 </li>
                                 <li role="none">

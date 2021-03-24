@@ -47,6 +47,7 @@ export class ConfirmDialogDemo extends Component {
             message: 'Are you sure you want to proceed?',
             header: 'Confirmation',
             icon: 'pi pi-exclamation-triangle',
+            baseZIndex: 1000,
             accept: this.accept,
             reject: this.reject
         });
@@ -58,6 +59,7 @@ export class ConfirmDialogDemo extends Component {
             header: 'Delete Confirmation',
             icon: 'pi pi-info-circle',
             acceptClassName: 'p-button-danger',
+            baseZIndex: 1000,
             accept: this.accept,
             reject: this.reject
         });
@@ -69,6 +71,7 @@ export class ConfirmDialogDemo extends Component {
             header: 'Delete Confirmation',
             icon: 'pi pi-info-circle',
             position,
+            baseZIndex: 1000,
             accept: this.accept,
             reject: this.reject
         });
@@ -104,7 +107,7 @@ export class ConfirmDialogDemo extends Component {
 
                     <h5>Using ConfirmDialog tag</h5>
                     <ConfirmDialog visible={this.state.visible} onHide={() => this.setState({ visible: false })} message="Are you sure you want to proceed?"
-                        header="Confirmation" icon="pi pi-exclamation-triangle" accept={this.accept} reject={this.reject} />
+                        header="Confirmation" icon="pi pi-exclamation-triangle" accept={this.accept} reject={this.reject} baseZIndex={1000}/>
                     <Button onClick={() => this.setState({ visible: true })} icon="pi pi-check" label="Confirm" />
                 </div>
             </div>
@@ -138,6 +141,7 @@ const ConfirmDialogDemo = () => {
             message: 'Are you sure you want to proceed?',
             header: 'Confirmation',
             icon: 'pi pi-exclamation-triangle',
+            baseZIndex: 1000,
             accept,
             reject
         });
@@ -149,6 +153,7 @@ const ConfirmDialogDemo = () => {
             header: 'Delete Confirmation',
             icon: 'pi pi-info-circle',
             acceptClassName: 'p-button-danger',
+            baseZIndex: 1000,
             accept,
             reject
         });
@@ -160,6 +165,7 @@ const ConfirmDialogDemo = () => {
             header: 'Delete Confirmation',
             icon: 'pi pi-info-circle',
             position,
+            baseZIndex: 1000,
             accept,
             reject
         });
@@ -194,7 +200,7 @@ const ConfirmDialogDemo = () => {
 
                 <h5>Using ConfirmDialog tag</h5>
                 <ConfirmDialog visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?"
-                    header="Confirmation" icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
+                    header="Confirmation" icon="pi pi-exclamation-triangle" accept={accept} reject={reject} baseZIndex={1000} />
                 <Button onClick={() => setVisible(true)} icon="pi pi-check" label="Confirm" />
             </div>
         </div>
@@ -227,6 +233,7 @@ const ConfirmDialogDemo = () => {
             message: 'Are you sure you want to proceed?',
             header: 'Confirmation',
             icon: 'pi pi-exclamation-triangle',
+            baseZIndex: 1000,
             accept,
             reject
         });
@@ -238,6 +245,7 @@ const ConfirmDialogDemo = () => {
             header: 'Delete Confirmation',
             icon: 'pi pi-info-circle',
             acceptClassName: 'p-button-danger',
+            baseZIndex: 1000,
             accept,
             reject
         });
@@ -249,6 +257,7 @@ const ConfirmDialogDemo = () => {
             header: 'Delete Confirmation',
             icon: 'pi pi-info-circle',
             position,
+            baseZIndex: 1000,
             accept,
             reject
         });
@@ -283,7 +292,7 @@ const ConfirmDialogDemo = () => {
 
                 <h5>Using ConfirmDialog tag</h5>
                 <ConfirmDialog visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?"
-                    header="Confirmation" icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
+                    header="Confirmation" icon="pi pi-exclamation-triangle" accept={accept} reject={reject} baseZIndex={1000} />
                 <Button onClick={() => setVisible(true)} icon="pi pi-check" label="Confirm" />
             </div>
         </div>
@@ -341,6 +350,15 @@ const confirm = () => {
     header="Confirmation" icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
 
 <Button onClick={() => setVisible(true)} icon="pi pi-check" label="Confirm" />
+`}
+</CodeHighlight>
+
+                        <h5>Responsive</h5>
+                        <p>ConfirmDialog width can be adjusted per screen size with the <i>breakpoints</i> option. In example below, default width is set to 50vw and below 961px, width would be 75vw and finally below 641px width becomes
+                        100%. The value of <i>breakpoints</i> should be an object literal whose keys are the maximum screen sizes and values are the widths per screen.</p>
+<CodeHighlight>
+{`
+<ConfirmDialog breakpoints={{'960px': '75vw', '640px': '100vw'}} style={{width: '50vw'}} ... />
 `}
 </CodeHighlight>
 

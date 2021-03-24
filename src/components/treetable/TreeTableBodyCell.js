@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { classNames } from '../utils/ClassNames';
 import ObjectUtils from '../utils/ObjectUtils';
 import DomHandler from '../utils/DomHandler';
+import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 
 export class TreeTableBodyCell extends Component {
 
@@ -15,53 +16,70 @@ export class TreeTableBodyCell extends Component {
         this.onClick = this.onClick.bind(this);
         this.onKeyDown = this.onKeyDown.bind(this);
         this.onEditorFocus = this.onEditorFocus.bind(this);
+
+        this.eventBusKey = `${this.props.field}_${this.props.rowIndex}`;
     }
 
     onClick() {
-        if (this.props.editor) {
+        if (this.props.editor && !this.state.editing && (this.props.selectOnEdit || (!this.props.selectOnEdit && this.props.selected))) {
+            this.selfClick = true;
+
             this.setState({
                 editing: true
-            });
-
-            if(this.documentEditListener)
-                this.cellClick = true;
-            else
+            }, () => {
                 this.bindDocumentEditListener();
+
+                OverlayEventBus.on('overlay-click', (e) => {
+                    if (!this.isOutsideClicked(e.target)) {
+                        this.selfClick = true;
+                    }
+                }, this.eventBusKey);
+            });
         }
     }
 
     onKeyDown(event) {
-        if(event.which === 13 || event.which === 9) {
+        if (event.which === 13 || event.which === 9) {
             this.switchCellToViewMode(event);
         }
     }
 
     bindDocumentEditListener() {
-        if(!this.documentEditListener) {
-            this.documentEditListener = (event) => {
-                if(!this.cellClick) {
-                    this.switchCellToViewMode(event);
+        if (!this.documentEditListener) {
+            this.documentEditListener = (e) => {
+                if (!this.selfClick && this.isOutsideClicked(e.target)) {
+                    this.switchCellToViewMode(e);
                 }
 
-                this.cellClick = false;
+                this.selfClick = false;
             };
 
             document.addEventListener('click', this.documentEditListener);
         }
     }
 
+    isOutsideClicked(target) {
+        return this.container && !(this.container.isSameNode(target) || this.container.contains(target));
+    }
+
     unbindDocumentEditListener() {
         if(this.documentEditListener) {
             document.removeEventListener('click', this.documentEditListener);
             this.documentEditListener = null;
+            this.selfClick = false;
         }
     }
 
     closeCell() {
-        this.setState({
-            editing: false
-        });
-        this.unbindDocumentEditListener();
+        /* When using the 'tab' key, the focus event of the next cell is not called in IE. */
+        setTimeout(() => {
+            this.setState({
+                editing: false
+            }, () => {
+                this.unbindDocumentEditListener();
+                OverlayEventBus.off('overlay-click', this.eventBusKey);
+            });
+        }, 1);
     }
 
     onEditorFocus(event) {
@@ -104,6 +122,10 @@ export class TreeTableBodyCell extends Component {
                 }, 50);
             }
         }
+    }
+
+    componentWillUnmount() {
+        this.unbindDocumentEditListener();
     }
 
     render() {

@@ -24,7 +24,8 @@ export class MultiSelectDemo extends Component {
         this.state = {
             selectedCities1: null,
             selectedCities2: null,
-            selectedCountries: null
+            selectedCountries: null,
+            selectedGroupedCities: null
         };
 
         this.cities = [
@@ -48,8 +49,40 @@ export class MultiSelectDemo extends Component {
             {name: 'United States', code: 'US'}
         ];
 
+        this.groupedCities = [
+            {
+                label: 'Germany', code: 'DE',
+                items: [
+                    { label: 'Berlin', value: 'Berlin' },
+                    { label: 'Frankfurt', value: 'Frankfurt' },
+                    { label: 'Hamburg', value: 'Hamburg' },
+                    { label: 'Munich', value: 'Munich' }
+                ]
+            },
+            {
+                label: 'USA', code: 'US',
+                items: [
+                    { label: 'Chicago', value: 'Chicago' },
+                    { label: 'Los Angeles', value: 'Los Angeles' },
+                    { label: 'New York', value: 'New York' },
+                    { label: 'San Francisco', value: 'San Francisco' }
+                ]
+            },
+            {
+                label: 'Japan', code: 'JP',
+                items: [
+                    { label: 'Kyoto', value: 'Kyoto' },
+                    { label: 'Osaka', value: 'Osaka' },
+                    { label: 'Tokyo', value: 'Tokyo' },
+                    { label: 'Yokohama', value: 'Yokohama' }
+                ]
+            }
+        ];
+
         this.countryTemplate = this.countryTemplate.bind(this);
+        this.groupedItemTemplate = this.groupedItemTemplate.bind(this);
         this.selectedCountriesTemplate = this.selectedCountriesTemplate.bind(this);
+        this.panelFooterTemplate = this.panelFooterTemplate.bind(this);
     }
 
     countryTemplate(option) {
@@ -74,6 +107,25 @@ export class MultiSelectDemo extends Component {
         return "Select Countries";
     }
 
+    panelFooterTemplate() {
+        const selectedItems = this.state.selectedCountries;
+        const length = selectedItems ? selectedItems.length : 0;
+        return (
+            <div className="p-py-2 p-px-3">
+                <b>{length}</b> item{length > 1 ? 's' : ''} selected.
+            </div>
+        );
+    }
+
+    groupedItemTemplate(option) {
+        return (
+            <div className="p-d-flex p-ai-center country-item">
+                <img alt={option.label} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <div>{option.label}</div>
+            </div>
+        );
+    }
+
     render() {
         return (
             <div className="multiselect-demo">
@@ -84,9 +136,13 @@ export class MultiSelectDemo extends Component {
                     <h5>Chips</h5>
                     <MultiSelect value={this.state.selectedCities2} options={this.cities} onChange={(e) => this.setState({ selectedCities2: e.value })} optionLabel="name" placeholder="Select a City" display="chip" />
 
+                    <h5>Grouped</h5>
+                    <MultiSelect value={this.state.selectedGroupedCities} options={this.groupedCities} onChange={(e) => this.setState({ selectedGroupedCities: e.value })} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
+                        optionGroupTemplate={this.groupedItemTemplate} placeholder="Select Cities" />
+
                     <h5>Advanced with Templating and Filtering</h5>
                     <MultiSelect value={this.state.selectedCountries} options={this.countries}  onChange={(e) => this.setState({ selectedCountries: e.value })} optionLabel="name" placeholder="Select Countries" filter className="multiselect-custom"
-                        itemTemplate={this.countryTemplate} selectedItemTemplate={this.selectedCountriesTemplate} />
+                        itemTemplate={this.countryTemplate} selectedItemTemplate={this.selectedCountriesTemplate} panelFooterTemplate={this.panelFooterTemplate}/>
                 </div>
             </div>
         );
@@ -105,6 +161,7 @@ const MultiSelectDemo = () => {
     const [selectedCities1, setSelectedCities1] = useState(null);
     const [selectedCities2, setSelectedCities2] = useState(null);
     const [selectedCountries, setSelectedCountries] = useState(null);
+    const [selectedGroupedCities, setSelectedGroupedCities] = useState(null);
     const cities = [
         {name: 'New York', code: 'NY'},
         {name: 'Rome', code: 'RM'},
@@ -123,6 +180,35 @@ const MultiSelectDemo = () => {
         {name: 'Japan', code: 'JP'},
         {name: 'Spain', code: 'ES'},
         {name: 'United States', code: 'US'}
+    ];
+    const groupedCities = [
+        {
+            label: 'Germany', code: 'DE',
+            items: [
+                { label: 'Berlin', value: 'Berlin' },
+                { label: 'Frankfurt', value: 'Frankfurt' },
+                { label: 'Hamburg', value: 'Hamburg' },
+                { label: 'Munich', value: 'Munich' }
+            ]
+        },
+        {
+            label: 'USA', code: 'US',
+            items: [
+                { label: 'Chicago', value: 'Chicago' },
+                { label: 'Los Angeles', value: 'Los Angeles' },
+                { label: 'New York', value: 'New York' },
+                { label: 'San Francisco', value: 'San Francisco' }
+            ]
+        },
+        {
+            label: 'Japan', code: 'JP',
+            items: [
+                { label: 'Kyoto', value: 'Kyoto' },
+                { label: 'Osaka', value: 'Osaka' },
+                { label: 'Tokyo', value: 'Tokyo' },
+                { label: 'Yokohama', value: 'Yokohama' }
+            ]
+        }
     ];
 
     const countryTemplate = (option) => {
@@ -147,6 +233,24 @@ const MultiSelectDemo = () => {
         return "Select Countries";
     }
 
+    const panelFooterTemplate = () => {
+        const length = selectedCountries ? selectedCountries.length : 0;
+        return (
+            <div className="p-py-2 p-px-3">
+                <b>{length}</b> item{length > 1 ? 's' : ''} selected.
+            </div>
+        );
+    }
+
+    const groupedItemTemplate = (option) => {
+        return (
+            <div className="p-d-flex p-ai-center country-item">
+                <img alt={option.label} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <div>{option.label}</div>
+            </div>
+        );
+    }
+
     return (
         <div className="multiselect-demo">
             <div className="card">
@@ -156,9 +260,13 @@ const MultiSelectDemo = () => {
                 <h5>Chips</h5>
                 <MultiSelect value={selectedCities2} options={cities} onChange={(e) => setSelectedCities2(e.value)} optionLabel="name" placeholder="Select a City" display="chip" />
 
+                <h5>Grouped</h5>
+                <MultiSelect value={selectedGroupedCities} options={groupedCities} onChange={(e) => setSelectedGroupedCities(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
+                    optionGroupTemplate={groupedItemTemplate} placeholder="Select Cities" />
+
                 <h5>Advanced with Templating and Filtering</h5>
                 <MultiSelect value={selectedCountries} options={countries}  onChange={(e) => setSelectedCountries(e.value)} optionLabel="name" placeholder="Select Countries" filter className="multiselect-custom"
-                    itemTemplate={countryTemplate} selectedItemTemplate={selectedCountriesTemplate} />
+                    itemTemplate={countryTemplate} selectedItemTemplate={selectedCountriesTemplate} panelFooterTemplate={panelFooterTemplate}/>
             </div>
         </div>
     );
@@ -176,6 +284,7 @@ const MultiSelectDemo = () => {
     const [selectedCities1, setSelectedCities1] = useState(null);
     const [selectedCities2, setSelectedCities2] = useState(null);
     const [selectedCountries, setSelectedCountries] = useState(null);
+    const [selectedGroupedCities, setSelectedGroupedCities] = useState(null);
     const cities = [
         {name: 'New York', code: 'NY'},
         {name: 'Rome', code: 'RM'},
@@ -194,6 +303,35 @@ const MultiSelectDemo = () => {
         {name: 'Japan', code: 'JP'},
         {name: 'Spain', code: 'ES'},
         {name: 'United States', code: 'US'}
+    ];
+    const groupedCities = [
+        {
+            label: 'Germany', code: 'DE',
+            items: [
+                { label: 'Berlin', value: 'Berlin' },
+                { label: 'Frankfurt', value: 'Frankfurt' },
+                { label: 'Hamburg', value: 'Hamburg' },
+                { label: 'Munich', value: 'Munich' }
+            ]
+        },
+        {
+            label: 'USA', code: 'US',
+            items: [
+                { label: 'Chicago', value: 'Chicago' },
+                { label: 'Los Angeles', value: 'Los Angeles' },
+                { label: 'New York', value: 'New York' },
+                { label: 'San Francisco', value: 'San Francisco' }
+            ]
+        },
+        {
+            label: 'Japan', code: 'JP',
+            items: [
+                { label: 'Kyoto', value: 'Kyoto' },
+                { label: 'Osaka', value: 'Osaka' },
+                { label: 'Tokyo', value: 'Tokyo' },
+                { label: 'Yokohama', value: 'Yokohama' }
+            ]
+        }
     ];
 
     const countryTemplate = (option) => {
@@ -218,6 +356,24 @@ const MultiSelectDemo = () => {
         return "Select Countries";
     }
 
+    const panelFooterTemplate = () => {
+        const length = selectedCountries ? selectedCountries.length : 0;
+        return (
+            <div className="p-py-2 p-px-3">
+                <b>{length}</b> item{length > 1 ? 's' : ''} selected.
+            </div>
+        );
+    }
+
+    const groupedItemTemplate = (option) => {
+        return (
+            <div className="p-d-flex p-ai-center country-item">
+                <img alt={option.label} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <div>{option.label}</div>
+            </div>
+        );
+    }
+
     return (
         <div className="multiselect-demo">
             <div className="card">
@@ -227,9 +383,13 @@ const MultiSelectDemo = () => {
                 <h5>Chips</h5>
                 <MultiSelect value={selectedCities2} options={cities} onChange={(e) => setSelectedCities2(e.value)} optionLabel="name" placeholder="Select a City" display="chip" />
 
+                <h5>Grouped</h5>
+                <MultiSelect value={selectedGroupedCities} options={groupedCities} onChange={(e) => setSelectedGroupedCities(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
+                    optionGroupTemplate={groupedItemTemplate} placeholder="Select Cities" />
+
                 <h5>Advanced with Templating and Filtering</h5>
                 <MultiSelect value={selectedCountries} options={countries}  onChange={(e) => setSelectedCountries(e.value)} optionLabel="name" placeholder="Select Countries" filter className="multiselect-custom"
-                    itemTemplate={countryTemplate} selectedItemTemplate={selectedCountriesTemplate} />
+                    itemTemplate={countryTemplate} selectedItemTemplate={selectedCountriesTemplate} panelFooterTemplate={panelFooterTemplate}/>
             </div>
         </div>
     );
@@ -353,7 +513,7 @@ itemTemplate(option) {
 }
 `}
 </CodeHighlight>
-                        <p>In addition <i>selectedItemTemplate</i> can be used to customize the selected values display instead of the default comma separated list.</p>
+                        <p><i>selectedItemTemplate</i> can be used to customize the selected values display instead of the default comma separated list.</p>
 
 <CodeHighlight>
 {`
@@ -366,6 +526,77 @@ itemTemplate(option) {
 selectedItemTemplate(option) {
     // custom selected item content
 }
+`}
+</CodeHighlight>
+
+                        <p>In addition <i>panelHeaderTemplate</i> and <i>panelFooterTemplate</i> can be used to customize the header and footer of panel.</p>
+<CodeHighlight>
+{`
+<MultiSelect value={cities} options={citySelectItems} onChange={(e) => setCities(e.value)} panelHeaderTemplate={panelHeaderTemplate} panelFooterTemplate={panelFooterTemplate} />
+`}
+</CodeHighlight>
+
+<CodeHighlight lang="js">
+{`
+panelHeaderTemplate(options) {
+    // options.className: Style class of the panel header.
+    // options.checkboxElement: Default checkbox element created by the component.
+    // options.checked: Whether the all checkbox is checked.
+    // options.onChange: Change event of toggleable checkbox.
+    // options.filterElement: Default filter element created by the component.
+    // options.closeElement: Default close element created by the component.
+    // options.closeElementClassName: Style class of the close container
+    // options.closeIconClassName: Style class of the close icon
+    // options.onCloseClick: Click event for the close icon.
+    // options.element: Default element created by the component.
+    // options.props: component props.
+}
+
+panelFooterTemplate(options) {
+    // options.props: component props.
+}
+`}
+</CodeHighlight>
+
+                    <h5>Grouping</h5>
+                    <p>Options groups are specified with the <i>optionGroupLabel</i> and <i>optionGroupChildren</i> properties.</p>
+<CodeHighlight>
+{`
+const groupedCities = [
+    {
+        label: 'Germany', code: 'DE',
+        items: [
+            { label: 'Berlin', value: 'Berlin' },
+            { label: 'Frankfurt', value: 'Frankfurt' },
+            { label: 'Hamburg', value: 'Hamburg' },
+            { label: 'Munich', value: 'Munich' }
+        ]
+    },
+    {
+        label: 'USA', code: 'US',
+        items: [
+            { label: 'Chicago', value: 'Chicago' },
+            { label: 'Los Angeles', value: 'Los Angeles' },
+            { label: 'New York', value: 'New York' },
+            { label: 'San Francisco', value: 'San Francisco' }
+        ]
+    },
+    {
+        label: 'Japan', code: 'JP',
+        items: [
+            { label: 'Kyoto', value: 'Kyoto' },
+            { label: 'Osaka', value: 'Osaka' },
+            { label: 'Tokyo', value: 'Tokyo' },
+            { label: 'Yokohama', value: 'Yokohama' }
+        ]
+    }
+];
+`}
+</CodeHighlight>
+
+<CodeHighlight>
+{`
+<MultiSelect value={selectedGroupedCities} options={groupedCities} onChange={(e) => setSelectedGroupedCities(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items" />
 `}
 </CodeHighlight>
 
@@ -467,6 +698,30 @@ selectedItemTemplate(option) {
                             <td>string</td>
                             <td>null</td>
                             <td>Name of the label field of an option when an arbitrary objects instead of SelectItems are used as options.</td>
+                        </tr>
+                        <tr>
+                            <td>optionValue</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Property name or getter function to use as the value of an option, defaults to the option itself when not defined.</td>
+                        </tr>
+                        <tr>
+                            <td>optionDisabled</td>
+                            <td>boolean</td>
+                            <td>null</td>
+                            <td>Property name or getter function to use as the disabled flag of an option, defaults to false when not defined.</td>
+                        </tr>
+                        <tr>
+                            <td>optionGroupLabel</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Property name or getter function to use as the label of an option group.</td>
+                        </tr>
+                        <tr>
+                            <td>optionGroupChildren</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Property name or getter function that refers to the children options of option group.</td>
                         </tr>
                         <tr>
                             <td>style</td>
@@ -607,22 +862,46 @@ selectedItemTemplate(option) {
                             <td>Function that gets the option and returns the content for it.</td>
                         </tr>
                         <tr>
+                            <td>optionGroupTemplate</td>
+                            <td>any</td>
+                            <td>null</td>
+                            <td>Template of an option group item.</td>
+                        </tr>
+                        <tr>
                             <td>selectedItemTemplate</td>
                             <td>function</td>
                             <td>null</td>
                             <td>Function that gets an item in the value and returns the content for it.</td>
                         </tr>
                         <tr>
+                            <td>panelHeaderTemplate</td>
+                            <td>any</td>
+                            <td>null</td>
+                            <td>Template of the panel header.</td>
+                        </tr>
+                        <tr>
+                            <td>panelFooterTemplate</td>
+                            <td>any</td>
+                            <td>null</td>
+                            <td>Template of the panel footer.</td>
+                        </tr>
+                        <tr>
                             <td>appendTo</td>
                             <td>DOM element</td>
-                            <td>null</td>
-                            <td>DOM element instance where the dialog should be mounted.</td>
+                            <td>document.body</td>
+                            <td>DOM element instance where the overlay menu should be mounted.</td>
                         </tr>
                         <tr>
                             <td>maxSelectedLabels</td>
                             <td>number</td>
                             <td>3</td>
                             <td>Decides how many selected item labels to show at most.</td>
+                        </tr>
+                        <tr>
+                            <td>selectionLimit</td>
+                            <td>number</td>
+                            <td>null</td>
+                            <td>Number of maximum options that can be selected.</td>
                         </tr>
                         <tr>
                             <td>selectedItemsLabel</td>

@@ -1168,6 +1168,18 @@ export const DataTableDemo = () => {
                             <td>Event to trigger the validation, possible values are "click" and "blur".</td>
                         </tr>
                         <tr>
+                            <td>onBeforeEditorShow</td>
+                            <td>function</td>
+                            <td>null</td>
+                            <td>Callback to invoke before the cell editor is shown.</td>
+                        </tr>
+                        <tr>
+                            <td>onBeforeEditorHide</td>
+                            <td>function</td>
+                            <td>null</td>
+                            <td>Callback to invoke before the cell editor is hidden.</td>
+                        </tr>
+                        <tr>
                             <td>onEditorInit</td>
                             <td>function</td>
                             <td>null</td>
@@ -2518,7 +2530,7 @@ const bodyTemplate = (data, props) => {
                         </tr>
                         <tr>
                             <td>tableClassName</td>
-                            <td>any</td>
+                            <td>string</td>
                             <td>null</td>
                             <td>Style class of the table element.</td>
                         </tr>
@@ -2541,10 +2553,16 @@ const bodyTemplate = (data, props) => {
                             <td>Whether to show it even there is only one page.</td>
                         </tr>
                         <tr>
-                            <td>paginatorTemplate</td>
+                            <td>paginatorClassName</td>
                             <td>string</td>
+                            <td>null</td>
+                            <td>Style class of the paginator element.</td>
+                        </tr>
+                        <tr>
+                            <td>paginatorTemplate</td>
+                            <td>string|object</td>
                             <td>FirstPageLink PrevPageLink PageLinks <br /> NextPageLink LastPageLink RowsPerPageDropdown</td>
-                            <td>Template of the paginator.</td>
+                            <td>Template of the paginator. For details, refer to the template section of the <Link to="/paginator">paginator documentation</Link> for further options.</td>
                         </tr>
                         <tr>
                             <td>paginatorLeft</td>
@@ -2575,7 +2593,7 @@ const bodyTemplate = (data, props) => {
                             <td>string</td>
                             <td>(&#123;currentPage&#125; of &#123;totalPages&#125;)</td>
                             <td>Template of the current page report element. Available placeholders are
-                                &123;currentPage&125;,&123;totalPages&125;,&123;rows&125;,&123;first&125;,&123;last&125; and &123;totalRecords&125;
+                                &#123;currentPage&#125;, &#123;totalPages&#125;, &#123;rows&#125;, &#123;first&#125;, &#123;last&#125; and &#123;totalRecords&#125;
                             </td>
                         </tr>
                         <tr>
@@ -2690,6 +2708,12 @@ const bodyTemplate = (data, props) => {
                                 can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.</td>
                         </tr>
                         <tr>
+                            <td>selectOnEdit</td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>Determines whether the cell editor will be opened when clicking to select any row on Selection and Cell Edit modes.</td>
+                        </tr>
+                        <tr>
                             <td>headerColumnGroup</td>
                             <td>ColumnGroup</td>
                             <td>null</td>
@@ -2721,7 +2745,7 @@ const bodyTemplate = (data, props) => {
                         </tr>
                         <tr>
                             <td>expandedRows</td>
-                            <td>array/object</td>
+                            <td>array|object</td>
                             <td>null</td>
                             <td>A collection of rows or a map object row data keys that are expanded.</td>
                         </tr>
@@ -2754,6 +2778,12 @@ const bodyTemplate = (data, props) => {
                             <td>any</td>
                             <td>null</td>
                             <td>Value of the global filter to use in filtering.</td>
+                        </tr>
+                        <tr>
+                            <td>filterDelay</td>
+                            <td>number</td>
+                            <td>300</td>
+                            <td>Delay in milliseconds before filtering the data.</td>
                         </tr>
                         <tr>
                             <td>filterLocale</td>
@@ -2882,6 +2912,12 @@ const bodyTemplate = (data, props) => {
                             <td>Defines editing mode, options are "cell" and "row".</td>
                         </tr>
                         <tr>
+                            <td>editingRows</td>
+                            <td>array|object</td>
+                            <td>null</td>
+                            <td>A collection of rows to represent the current editing data in row edit mode.</td>
+                        </tr>
+                        <tr>
                             <td>exportFunction</td>
                             <td>function</td>
                             <td>null</td>
@@ -2962,7 +2998,7 @@ const bodyTemplate = (data, props) => {
                         </tr>
                         <tr>
                             <td>onColumnResizeEnd</td>
-                            <td>event.element: DOM element of the resized column.
+                            <td>event.element: DOM element of the resized column.<br />
                                 event.column: Properties of the resized column.<br />
                                 event.delta: Change in column width</td>
                             <td>Callback to invoke when a column is resized.</td>
@@ -3081,6 +3117,13 @@ const bodyTemplate = (data, props) => {
                                 event.data: Editing row data <br />
                                 event.index: Editing row data index</td>
                             <td>Callback to invoke when the cancel icon is clicked on row editing mode.</td>
+                        </tr>
+                        <tr>
+                            <td>onRowEditChange</td>
+                            <td>event.originalEvent: Browser event <br />
+                                event.data: Editing rows data <br />
+                                event.index: Current editing row data index</td>
+                            <td>Callback to invoke when the row editor is programmatically shown/hidden on row editing mode.</td>
                         </tr>
                         <tr>
                             <td>onStateSave</td>

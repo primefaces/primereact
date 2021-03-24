@@ -8,7 +8,7 @@ export class FooterCell extends Component {
         let footer = ObjectUtils.getJSXElement(this.props.footer, this.props);
 
         return (
-            <td className={className} style={this.props.footerStyle||this.props.style}
+            <td role="cell" className={className} style={this.props.footerStyle||this.props.style}
                 colSpan={this.props.colSpan} rowSpan={this.props.rowSpan}>
                {footer}
             </td>

@@ -46,6 +46,7 @@ export class CalendarDemo extends Component {
             date12: null,
             date13: null,
             date14: null,
+            date15: null,
             dates1: null,
             dates2: null
         };
@@ -148,12 +149,16 @@ export class CalendarDemo extends Component {
                         </div>
                         <div className="p-field p-col-12 p-md-4">
                             <label htmlFor="touchUI">TouchUI</label>
-                            <Calendar id="touchUI" value={this.state.date13} onChange={(e) => this.setState({ date13: e.value })} touchUI />
+                            <Calendar id="touchUI" value={this.state.date13} onChange={(e) => this.setState({ date13: e.value })} touchUI baseZIndex={1000} />
+                        </div>
+                        <div className="p-field p-col-12 p-md-4">
+                            <label htmlFor="mask">Mask</label>
+                            <Calendar id="mask" value={this.state.date14} onChange={(e) => this.setState({ date14: e.value })} mask="99/99/9999"/>
                         </div>
                     </div>
 
                     <h5>Inline</h5>
-                    <Calendar value={this.state.date14} onChange={(e) => this.setState({ date14: e.value })} inline showWeek />
+                    <Calendar value={this.state.date15} onChange={(e) => this.setState({ date15: e.value })} inline showWeek />
                 </div>
             </div>
         );
@@ -192,6 +197,7 @@ const CalendarDemo = () => {
     const [date12, setDate12] = useState(null);
     const [date13, setDate13] = useState(null);
     const [date14, setDate14] = useState(null);
+    const [date15, setDate15] = useState(null);
     const [dates1, setDates1] = useState(null);
     const [dates2, setDates2] = useState(null);
 
@@ -290,12 +296,16 @@ const CalendarDemo = () => {
                     </div>
                     <div className="p-field p-col-12 p-md-4">
                         <label htmlFor="touchUI">TouchUI</label>
-                        <Calendar id="touchUI" value={date13} onChange={(e) => setDate13(e.value)} touchUI />
+                        <Calendar id="touchUI" value={date13} onChange={(e) => setDate13(e.value)} touchUI baseZIndex={1000} />
+                    </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <label htmlFor="mask">Mask</label>
+                        <Calendar id="mask" value={date14} onChange={(e) => setDate14(e.value)} mask="99/99/9999"/>
                     </div>
                 </div>
 
                 <h5>Inline</h5>
-                <Calendar value={date14} onChange={(e) => setDate14(e.value)} inline showWeek />
+                <Calendar value={date15} onChange={(e) => setDate15(e.value)} inline showWeek />
             </div>
         </div>
     );
@@ -333,6 +343,7 @@ const CalendarDemo = () => {
     const [date12, setDate12] = useState<Date | Date[] | undefined>(undefined);
     const [date13, setDate13] = useState<Date | Date[] | undefined>(undefined);
     const [date14, setDate14] = useState<Date | Date[] | undefined>(undefined);
+    const [date15, setDate15] = useState<Date | Date[] | undefined>(undefined);
     const [dates1, setDates1] = useState<Date | Date[] | undefined>(undefined);
     const [dates2, setDates2] = useState<Date | Date[] | undefined>(undefined);
 
@@ -431,12 +442,16 @@ const CalendarDemo = () => {
                     </div>
                     <div className="p-field p-col-12 p-md-4">
                         <label htmlFor="touchUI">TouchUI</label>
-                        <Calendar id="touchUI" value={date13} onChange={(e) => setDate13(e.value)} touchUI />
+                        <Calendar id="touchUI" value={date13} onChange={(e) => setDate13(e.value)} touchUI baseZIndex={1000} />
+                    </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <label htmlFor="mask">Mask</label>
+                        <Calendar id="mask" value={date14} onChange={(e) => setDate14(e.value)} mask="99/99/9999"/>
                     </div>
                 </div>
 
                 <h5>Inline</h5>
-                <Calendar value={date14} onChange={(e) => setDate14(e.value)} inline showWeek />
+                <Calendar value={date15} onChange={(e) => setDate15(e.value)} inline showWeek />
             </div>
         </div>
     );
@@ -731,6 +746,12 @@ dateTemplate(date) {
                                         <td>Keep invalid value when input blur.</td>
                                     </tr>
                                     <tr>
+                                        <td>mask</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Mask pattern for input element.</td>
+                                    </tr>
+                                    <tr>
                                         <td>disabled</td>
                                         <td>boolean</td>
                                         <td>false</td>
@@ -967,8 +988,8 @@ dateTemplate(date) {
                                     <tr>
                                         <td>appendTo</td>
                                         <td>DOM element</td>
-                                        <td>null</td>
-                                        <td>DOM element instance where the dialog should be mounted.</td>
+                                        <td>document.body</td>
+                                        <td>DOM element instance where the overlay panel should be mounted.</td>
                                     </tr>
                                     <tr>
                                         <td>tooltip</td>

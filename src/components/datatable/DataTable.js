@@ -25,6 +25,7 @@ export class DataTable extends Component {
         paginator: false,
         paginatorPosition: 'bottom',
         alwaysShowPaginator: true,
+        paginatorClassName: null,
         paginatorTemplate: 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown',
         paginatorLeft:null,
         paginatorRight: null,
@@ -51,6 +52,7 @@ export class DataTable extends Component {
         compareSelectionBy: 'deepEquals',
         dataKey: null,
         metaKeySelection: true,
+        selectOnEdit: true,
         headerColumnGroup: null,
         footerColumnGroup: null,
         frozenHeaderColumnGroup: null,
@@ -63,6 +65,7 @@ export class DataTable extends Component {
         reorderableColumns: false,
         filters: null,
         globalFilter: null,
+        filterDelay: 300,
         filterLocale: undefined,
         scrollable: false,
         scrollHeight: null,
@@ -84,6 +87,7 @@ export class DataTable extends Component {
         stateKey: null,
         stateStorage: 'session',
         editMode: 'cell',
+        editingRows: null,
         expandableRowGroups: false,
         rowHover: false,
         showSelectionElement: null,
@@ -107,6 +111,7 @@ export class DataTable extends Component {
         onRowEditInit: null,
         onRowEditSave: null,
         onRowEditCancel: null,
+        onRowEditChange: null,
         exportFunction: null,
         customSaveState: null,
         customRestoreState: null,
@@ -126,7 +131,8 @@ export class DataTable extends Component {
         paginator: PropTypes.bool,
         paginatorPosition: PropTypes.string,
         alwaysShowPaginator: PropTypes.bool,
-        paginatorTemplate: PropTypes.string,
+        paginatorClassName: PropTypes.string,
+        paginatorTemplate: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
         paginatorLeft: PropTypes.any,
         paginatorRight: PropTypes.any,
         paginatorDropdownAppendTo: PropTypes.any,
@@ -150,6 +156,7 @@ export class DataTable extends Component {
         compareSelectionBy: PropTypes.string,
         dataKey: PropTypes.string,
         metaKeySelection: PropTypes.bool,
+        selectOnEdit: PropTypes.bool,
         headerColumnGroup: PropTypes.any,
         footerColumnGroup: PropTypes.any,
         frozenHeaderColumnGroup: PropTypes.any,
@@ -162,6 +169,7 @@ export class DataTable extends Component {
         reorderableColumns: PropTypes.bool,
         filters: PropTypes.object,
         globalFilter: PropTypes.any,
+        filterDelay: PropTypes.number,
         filterLocale: PropTypes.string,
         scrollable: PropTypes.bool,
         scrollHeight: PropTypes.string,
@@ -183,6 +191,7 @@ export class DataTable extends Component {
         stateKey: PropTypes.string,
         stateStorage: PropTypes.string,
         editMode: PropTypes.string,
+        editingRows: PropTypes.oneOfType([PropTypes.array,PropTypes.object]),
         expandableRowGroups: PropTypes.bool,
         rowHover: PropTypes.bool,
         showSelectionElement: PropTypes.func,
@@ -206,6 +215,7 @@ export class DataTable extends Component {
         onRowEditInit: PropTypes.func,
         onRowEditSave: PropTypes.func,
         onRowEditCancel: PropTypes.func,
+        onRowEditChange: PropTypes.func,
         exportFunction: PropTypes.func,
         customSaveState: PropTypes.func,
         customRestoreState: PropTypes.func,
@@ -215,7 +225,9 @@ export class DataTable extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            d_rows: props.rows
+        };
 
         if (!this.props.onPage) {
             this.state.first = props.first;
@@ -519,8 +531,7 @@ export class DataTable extends Component {
     }
 
     createPaginator(position, totalRecords, data) {
-        let className = 'p-paginator-' + position;
-
+        const className = classNames('p-paginator-' + position, this.props.paginatorClassName);
         return (
             <Paginator first={this.getFirst()} rows={this.getRows()} pageLinkSize={this.props.pageLinkSize} className={className} onPageChange={this.onPageChange} template={this.props.paginatorTemplate}
                         totalRecords={totalRecords} rowsPerPageOptions={this.props.rowsPerPageOptions} currentPageReportTemplate={this.props.currentPageReportTemplate}
@@ -594,19 +605,19 @@ export class DataTable extends Component {
     }
 
     getCalculatedSortOrder(currentOrder) {
-        return this.props.removableSort ? (currentOrder ? (currentOrder < 0 ? 0 : -1) : 1) : currentOrder * -1;
+        return this.props.removableSort ? (this.props.defaultSortOrder === currentOrder ? currentOrder * -1 : 0) : currentOrder * -1;
     }
 
     addSortMeta(meta, multiSortMeta) {
         let index = -1;
-        for(let i = 0; i < multiSortMeta.length; i++) {
-            if(multiSortMeta[i].field === meta.field) {
+        for (let i = 0; i < multiSortMeta.length; i++) {
+            if (multiSortMeta[i].field === meta.field) {
                 index = i;
                 break;
             }
         }
 
-        if(index >= 0)
+        if (index >= 0)
             multiSortMeta[index] = meta;
         else
             multiSortMeta.push(meta);
@@ -614,14 +625,14 @@ export class DataTable extends Component {
 
     removeSortMeta(meta, multiSortMeta) {
         let index = -1;
-        for(let i = 0; i < multiSortMeta.length; i++) {
-            if(multiSortMeta[i].field === meta.field) {
+        for (let i = 0; i < multiSortMeta.length; i++) {
+            if (multiSortMeta[i].field === meta.field) {
                 index = i;
                 break;
             }
         }
 
-        if(index >= 0) {
+        if (index >= 0) {
             multiSortMeta.splice(index, 1);
         }
 
@@ -1077,10 +1088,17 @@ export class DataTable extends Component {
         }, this.props.virtualScrollDelay);
     }
 
-    exportCSV() {
-        let data = this.processData();
+    exportCSV(options) {
+        let data;
         let csv = '\ufeff';
-        let columns = React.Children.toArray(this.props.children);
+        let columns = this.getColumns();
+
+        if (options && options.selectionOnly) {
+            data = this.props.selection || [];
+        }
+        else {
+            data = [...(this.props.frozenValue||[]), ...(this.processData()||[])];
+        }
 
         //headers
         for(let i = 0; i < columns.length; i++) {
@@ -1126,7 +1144,7 @@ export class DataTable extends Component {
         });
 
         let blob = new Blob([csv],{
-            type: 'text/csv;charset=utf-8;'
+            type: 'application/csv;charset=utf-8;'
         });
 
         if(window.navigator.msSaveOrOpenBlob) {
@@ -1134,18 +1152,18 @@ export class DataTable extends Component {
         }
         else {
             let link = document.createElement("a");
-            link.style.display = 'none';
-            document.body.appendChild(link);
             if(link.download !== undefined) {
                 link.setAttribute('href', URL.createObjectURL(blob));
                 link.setAttribute('download', this.props.exportFilename + '.csv');
+                link.style.display = 'none';
+                document.body.appendChild(link);
                 link.click();
+                document.body.removeChild(link);
             }
             else {
                 csv = 'data:text/csv;charset=utf-8,' + csv;
                 window.open(encodeURI(csv));
             }
-            document.body.removeChild(link);
         }
     }
 
@@ -1300,7 +1318,7 @@ export class DataTable extends Component {
 
     createTableHeader(value, columns, columnGroup) {
         return <TableHeader value={value} onSort={this.onSort} sortField={this.getSortField()} sortOrder={this.getSortOrder()} multiSortMeta={this.getMultiSortMeta()} columnGroup={columnGroup}
-                            resizableColumns={this.props.resizableColumns} onColumnResizeStart={this.onColumnResizeStart} onFilter={this.onFilter}
+                            resizableColumns={this.props.resizableColumns} onColumnResizeStart={this.onColumnResizeStart} onFilter={this.onFilter} filterDelay={this.props.filterDelay}
                             onHeaderCheckboxClick={this.onHeaderCheckboxClick} headerCheckboxSelected={this.isAllSelected()}
                             reorderableColumns={this.props.reorderableColumns} onColumnDragStart={this.onColumnDragStart} filters={this.getFilters()}
                             onColumnDragOver={this.onColumnDragOver} onColumnDragLeave={this.onColumnDragLeave} onColumnDrop={this.onColumnDrop} tabIndex={this.props.tabIndex}>
@@ -1309,16 +1327,17 @@ export class DataTable extends Component {
     }
 
     createTableBody(value, columns, frozen) {
-        return <TableBody value={value} first={this.getFirst()} rows={this.getRows()} lazy={this.props.lazy} paginator={this.props.paginator} dataKey={this.props.dataKey} compareSelectionBy={this.props.compareSelectionBy}
+        return <TableBody tableId={this.props.id} value={value} first={this.getFirst()} rows={this.getRows()} lazy={this.props.lazy} paginator={this.props.paginator} dataKey={this.props.dataKey} compareSelectionBy={this.props.compareSelectionBy}
                         selectionMode={this.props.selectionMode} selection={this.props.selection} metaKeySelection={this.props.metaKeySelection} frozen={frozen} frozenSelectionMode={this.frozenSelectionMode}
                         onSelectionChange={this.props.onSelectionChange} onRowClick={this.props.onRowClick} onRowDoubleClick={this.props.onRowDoubleClick} onRowSelect={this.props.onRowSelect} onRowUnselect={this.props.onRowUnselect}
                         contextMenuSelection={this.props.contextMenuSelection} onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu}
-                        expandedRows={this.props.expandedRows} onRowToggle={this.props.onRowToggle} rowExpansionTemplate={this.props.rowExpansionTemplate}
+                        expandedRows={this.props.expandedRows} onRowToggle={this.props.onRowToggle} rowExpansionTemplate={this.props.rowExpansionTemplate} selectOnEdit={this.props.selectOnEdit}
                         onRowExpand={this.props.onRowExpand} onRowCollapse={this.props.onRowCollapse} emptyMessage={this.props.emptyMessage}
                         virtualScroll={this.props.virtualScroll} virtualRowHeight={this.props.virtualRowHeight} loading={this.props.loading}
                         groupField={this.props.groupField} rowGroupMode={this.props.rowGroupMode} rowGroupHeaderTemplate={this.props.rowGroupHeaderTemplate} rowGroupFooterTemplate={this.props.rowGroupFooterTemplate}
                         sortField={this.getSortField()} rowClassName={this.props.rowClassName} onRowReorder={this.props.onRowReorder}
-                        editMode={this.props.editMode} rowEditorValidator={this.props.rowEditorValidator} onRowEditInit={this.props.onRowEditInit} onRowEditSave={this.props.onRowEditSave} onRowEditCancel={this.props.onRowEditCancel}
+                        editMode={this.props.editMode} editingRows={this.props.editingRows} rowEditorValidator={this.props.rowEditorValidator}
+                        onRowEditInit={this.props.onRowEditInit} onRowEditSave={this.props.onRowEditSave} onRowEditCancel={this.props.onRowEditCancel} onRowEditChange={this.props.onRowEditChange}
                         expandableRowGroups={this.props.expandableRowGroups} showRowReorderElement={this.props.showRowReorderElement} showSelectionElement={this.props.showSelectionElement}>
                         {columns}
                 </TableBody>;
@@ -1442,6 +1461,17 @@ export class DataTable extends Component {
         if (this.isStateful() && this.props.resizableColumns) {
             this.restoreColumnWidths();
         }
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.rows !== prevState.d_rows && !nextProps.onPage) {
+            return {
+                rows: nextProps.rows,
+                d_rows: nextProps.rows
+            }
+        }
+
+        return null;
     }
 
     componentDidUpdate(prevProps, prevState) {

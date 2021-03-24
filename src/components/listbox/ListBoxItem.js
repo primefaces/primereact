@@ -11,6 +11,7 @@ export class ListBoxItem extends Component {
         option: null,
         label: null,
         selected: false,
+        disabled: false,
         tabIndex: null,
         onClick: null,
         onTouchEnd: null,
@@ -21,6 +22,7 @@ export class ListBoxItem extends Component {
         option: PropTypes.any,
         label: PropTypes.string,
         selected: PropTypes.bool,
+        disabled: PropTypes.bool,
         tabIndex: PropTypes.number,
         onClick: PropTypes.func,
         onTouchEnd: PropTypes.func,
@@ -93,7 +95,7 @@ export class ListBoxItem extends Component {
         let nextItem = item.nextElementSibling;
 
         if (nextItem)
-            return DomHandler.hasClass(nextItem, 'p-disabled') ? this.findNextItem(nextItem) : nextItem;
+            return DomHandler.hasClass(nextItem, 'p-disabled') || DomHandler.hasClass(nextItem, 'p-listbox-item-group') ? this.findNextItem(nextItem) : nextItem;
         else
             return null;
     }
@@ -102,14 +104,15 @@ export class ListBoxItem extends Component {
         let prevItem = item.previousElementSibling;
 
         if (prevItem)
-            return DomHandler.hasClass(prevItem, 'p-disabled') ? this.findPrevItem(prevItem) : prevItem;
+            return DomHandler.hasClass(prevItem, 'p-disabled') || DomHandler.hasClass(prevItem, 'p-listbox-item-group') ? this.findPrevItem(prevItem) : prevItem;
         else
             return null;
     }
 
     render() {
         let className = classNames('p-listbox-item', {
-            'p-highlight': this.props.selected
+            'p-highlight': this.props.selected,
+            'p-disabled': this.props.disabled
         }, this.props.option.className);
         let content = this.props.template ? ObjectUtils.getJSXElement(this.props.template, this.props.option) : this.props.label;
 

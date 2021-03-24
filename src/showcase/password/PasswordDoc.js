@@ -24,10 +24,10 @@ export class PasswordDemo extends Component {
         super(props);
 
         this.state = {
-            value1: null,
-            value2: null,
-            value3: null,
-            value4: null
+            value1: '',
+            value2: '',
+            value3: '',
+            value4: ''
         };
     }
 
@@ -76,10 +76,10 @@ import { Divider } from 'primereact/divider';
 import './PasswordDemo.css';
 
 const PasswordDemo = () => {
-    const [value1, setValue1] = useState(null);
-    const [value2, setValue2] = useState(null);
-    const [value3, setValue3] = useState(null);
-    const [value4, setValue4] = useState(null);
+    const [value1, setValue1] = useState('');
+    const [value2, setValue2] = useState('');
+    const [value3, setValue3] = useState('');
+    const [value4, setValue4] = useState('');
 
     const header = <h6>Pick a password</h6>;
     const footer = (
@@ -124,10 +124,10 @@ import { Divider } from 'primereact/divider';
 import './PasswordDemo.css';
 
 const PasswordDemo = () => {
-    const [value1, setValue1] = useState(null);
-    const [value2, setValue2] = useState(null);
-    const [value3, setValue3] = useState(null);
-    const [value4, setValue4] = useState(null);
+    const [value1, setValue1] = useState('');
+    const [value2, setValue2] = useState('');
+    const [value3, setValue3] = useState('');
+    const [value4, setValue4] = useState('');
 
     const header = <h6>Pick a password</h6>;
     const footer = (
@@ -221,12 +221,6 @@ import {Password} from 'primereact/password';
                                         <td>Unique identifier of the element.</td>
                                     </tr>
                                     <tr>
-                                        <td>value</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Value of the component.</td>
-                                    </tr>
-                                    <tr>
                                         <td>promptLabel</td>
                                         <td>string</td>
                                         <td>Please enter a password</td>
@@ -277,8 +271,8 @@ import {Password} from 'primereact/password';
                                     <tr>
                                         <td>appendTo</td>
                                         <td>string</td>
-                                        <td>null</td>
-                                        <td>Id of the element or "body" for document where the overlay should be appended to.</td>
+                                        <td>document.body</td>
+                                        <td>DOM element instance where the overlay panel should be mounted.</td>
                                     </tr>
                                     <tr>
                                         <td>header</td>

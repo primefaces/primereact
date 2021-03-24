@@ -29,7 +29,7 @@ export class Splitter extends Component {
         style: null,
         layout: 'horizontal',
         gutterSize: 4,
-        stateKey: '',
+        stateKey: null,
         stateStorage: 'session',
         onResizeEnd: null
     }

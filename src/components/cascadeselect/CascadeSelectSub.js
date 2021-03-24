@@ -136,6 +136,14 @@ export class CascadeSelectSub extends Component {
                 this.onOptionClick(event, option);
                 break;
 
+            case 'Tab':
+            case 'Escape':
+                if (this.props.onPanelHide) {
+                    this.props.onPanelHide();
+                    event.preventDefault();
+                }
+                break;
+
             default:
                 break;
         }
@@ -218,7 +226,7 @@ export class CascadeSelectSub extends Component {
                 <CascadeSelectSub options={this.getOptionGroupChildren(option)} className={"p-cascadeselect-sublist"} selectionPath={this.props.selectionPath} optionLabel={this.props.optionLabel}
                     optionValue={this.props.optionValue} level={this.props.level + 1} onOptionSelect={this.onOptionSelect} onOptionGroupSelect={this.onOptionGroupSelect}
                     parentActive={this.state.activeOption === option} optionGroupLabel={this.props.optionGroupLabel} optionGroupChildren={this.props.optionGroupChildren}
-                    dirty={this.props.dirty} template={this.props.template} />
+                    dirty={this.props.dirty} template={this.props.template} onPanelHide={this.props.onPanelHide} />
             );
         }
 
