@@ -30,6 +30,24 @@ export class FileUpload extends Component {
         chooseLabel: null,
         uploadLabel: null,
         cancelLabel: null,
+        chooseOptions: {
+            label: null,
+            icon: null,
+            className: null,
+            style: null
+        },
+        uploadOptions: {
+            label: null,
+            icon: null,
+            className: null,
+            style: null
+        },
+        cancelOptions: {
+            label: null,
+            icon: null,
+            className: null,
+            style: null
+        },
         customUpload: false,
         emptyTemplate: null,
         onBeforeUpload: null,
@@ -63,6 +81,9 @@ export class FileUpload extends Component {
         chooseLabel: PropTypes.string,
         uploadLabel: PropTypes.string,
         cancelLabel: PropTypes.string,
+        chooseOptions: PropTypes.object,
+        uploadOptions: PropTypes.object,
+        cancelOptions: PropTypes.object,
         customUpload: PropTypes.bool,
         emptyTemplate: PropTypes.any,
         onBeforeUpload: PropTypes.func,
@@ -122,15 +143,15 @@ export class FileUpload extends Component {
     }
 
     chooseButtonLabel() {
-        return this.props.chooseLabel || localeOption('choose');
+        return this.props.chooseLabel || this.props.chooseOptions.label || localeOption('choose');
     }
 
     uploadButtonLabel() {
-        return this.props.uploadLabel || localeOption('upload');
+        return this.props.uploadLabel || this.props.uploadOptions.label || localeOption('upload');
     }
 
     cancelButtonLabel() {
-        return this.props.cancelLabel || localeOption('cancel');
+        return this.props.cancelLabel || this.props.cancelOptions.label || localeOption('cancel');
     }
 
     remove(event, index) {
@@ -401,16 +422,21 @@ export class FileUpload extends Component {
     }
 
     renderChooseButton() {
-        let className = classNames('p-button p-fileupload-choose p-component', {
+        const { className, style, icon } = this.props.chooseOptions;
+
+        const chooseClassName = classNames('p-button p-fileupload-choose p-component', {
             'p-disabled': this.props.disabled,
             'p-focus': this.state.focused
-        });
+        }, className);
+        const chooseIconClassName = classNames('p-button-icon p-button-icon-left p-clickable', {
+            'pi pi-fw pi-plus': !icon
+        }, icon);
 
         return (
-            <span className={className} onClick={this.choose} onKeyDown={this.onKeyDown} onFocus={this.onFocus} onBlur={this.onBlur} tabIndex={0}>
+            <span className={chooseClassName} style={style} onClick={this.choose} onKeyDown={this.onKeyDown} onFocus={this.onFocus} onBlur={this.onBlur} tabIndex={0}>
                 <input ref={(el) => this.fileInput = el} type="file" onChange={this.onFileSelect}
                     multiple={this.props.multiple} accept={this.props.accept} disabled={this.chooseDisabled()} />
-                <span className="p-button-icon p-button-icon-left p-clickable pi pi-fw pi-plus"></span>
+                <span className={chooseIconClassName}></span>
                 <span className="p-button-label p-clickable">{this.chooseButtonLabel()}</span>
                 <Ripple />
             </span>
@@ -454,8 +480,11 @@ export class FileUpload extends Component {
         const emptyContent = this.renderEmptyContent();
 
         if (!this.props.auto) {
-            uploadButton = <Button type="button" label={this.uploadButtonLabel()} icon="pi pi-upload" onClick={this.upload} disabled={this.uploadDisabled()} />;
-            cancelButton = <Button type="button" label={this.cancelButtonLabel()} icon="pi pi-times" onClick={this.clear} disabled={this.cancelDisabled()} />;
+            const uploadOptions = this.props.uploadOptions;
+            const cancelOptions = this.props.cancelOptions;
+
+            uploadButton = <Button type="button" label={this.uploadButtonLabel()} icon={uploadOptions.icon || 'pi pi-upload'} onClick={this.upload} disabled={this.uploadDisabled()} style={uploadOptions.style} className={uploadOptions.className}/>;
+            cancelButton = <Button type="button" label={this.cancelButtonLabel()} icon={cancelOptions.icon || 'pi pi-times'} onClick={this.clear} disabled={this.cancelDisabled()} style={cancelOptions.style} className={cancelOptions.className}/>;
         }
 
         if (this.hasFiles()) {
@@ -482,16 +511,17 @@ export class FileUpload extends Component {
     }
 
     renderBasic() {
+        const chooseOptions = this.props.chooseOptions;
         const className = classNames('p-fileupload p-fileupload-basic p-component', this.props.className);
-        const buttonClassName = classNames('p-button p-component p-fileupload-choose', { 'p-fileupload-choose-selected': this.hasFiles(), 'p-disabled': this.props.disabled, 'p-focus': this.state.focused });
-        const iconClassName = classNames('p-button-icon p-button-icon-left pi', { 'pi-plus': !this.hasFiles() || this.props.auto, 'pi-upload': this.hasFiles() && !this.props.auto });
+        const buttonClassName = classNames('p-button p-component p-fileupload-choose', { 'p-fileupload-choose-selected': this.hasFiles(), 'p-disabled': this.props.disabled, 'p-focus': this.state.focused }, chooseOptions.className);
+        const iconClassName = classNames('p-button-icon p-button-icon-left pi', { 'pi-plus': !chooseOptions.icon && (!this.hasFiles() || this.props.auto), 'pi-upload': !chooseOptions.icon && this.hasFiles() && !this.props.auto }, chooseOptions.icon);
         const chooseLabel = this.chooseButtonLabel();
         const label = this.props.auto ? chooseLabel : this.hasFiles() ? this.state.files[0].name : chooseLabel;
 
         return (
-            <div className={className}>
+            <div className={className} style={this.props.style}>
                 <Messages ref={(el) => this.messagesUI = el } />
-                <span className={buttonClassName} onMouseUp={this.onSimpleUploaderClick} onKeyDown={this.onKeyDown} onFocus={this.onFocus} onBlur={this.onBlur} tabIndex={0}>
+                <span className={buttonClassName} style={chooseOptions.style} onMouseUp={this.onSimpleUploaderClick} onKeyDown={this.onKeyDown} onFocus={this.onFocus} onBlur={this.onBlur} tabIndex={0}>
                     <span className={iconClassName}></span>
                     <span className="p-button-label p-clickable">{label}</span>
                     { !this.hasFiles() && <input ref={(el) => this.fileInput = el} type="file" accept={this.props.accept} disabled={this.props.disabled} onChange={this.onFileSelect} /> }

@@ -377,6 +377,24 @@ const myUploader = (event) => {
                             <td>Label of the cancel button. Defaults to global value in Locale configuration.</td>
                         </tr>
                         <tr>
+                            <td>chooseOptions</td>
+                            <td>object (OptionsType)</td>
+                            <td>null</td>
+                            <td>Options used to customize the choose button. These options have "label", "icon", "className" and "style" properties.</td>
+                        </tr>
+                        <tr>
+                            <td>uploadOptions</td>
+                            <td>object (OptionsType)</td>
+                            <td>null</td>
+                            <td>Options used to customize the upload button. These options have "label", "icon", "className" and "style" properties.</td>
+                        </tr>
+                        <tr>
+                            <td>cancelOptions</td>
+                            <td>object (OptionsType)</td>
+                            <td>null</td>
+                            <td>Options used to customize the cancel button. These options have "label", "icon", "className" and "style" properties.</td>
+                        </tr>
+                        <tr>
                             <td>customUpload</td>
                             <td>boolean</td>
                             <td>false</td>

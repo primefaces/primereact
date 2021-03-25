@@ -1,5 +1,12 @@
 import * as React from 'react';
 
+type OptionsType = {
+    label?: string;
+    icon?: string;
+    className?: string;
+    style?: object
+};
+
 interface FileUploadProps {
     id?: string;
     name?: string;
@@ -19,6 +26,9 @@ interface FileUploadProps {
     chooseLabel?: string;
     uploadLabel?: string;
     cancelLabel?: string;
+    chooseOptions?: OptionsType;
+    uploadOptions?: OptionsType;
+    cancelOptions?: OptionsType;
     customUpload?: boolean;
     emptyTemplate?: ((props: object) => any | any);
     onBeforeUpload?(e: { xhr: XMLHttpRequest, formData: any }): void;
