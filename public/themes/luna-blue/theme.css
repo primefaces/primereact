@@ -1235,11 +1235,35 @@
   font-size: 1rem;
   transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
   border-radius: 3px; }
-  .p-button:enabled:hover {
+  .p-buttonbutton:enabled:hover {
     background: #4FC3F7;
     color: #212529;
     border-color: #4FC3F7; }
-  .p-button:enabled:active {
+  .p-buttonbutton:enabled:active {
+    background: #29B6F6;
+    color: #212529;
+    border-color: #29B6F6; }
+  .p-button:not(button):not(.p-disabled):hover {
+    background: #4FC3F7;
+    color: #212529;
+    border-color: #4FC3F7; }
+  .p-button:not(button):not(.p-disabled):active {
+    background: #29B6F6;
+    color: #212529;
+    border-color: #29B6F6; }
+  .p-buttona:enabled:hover {
+    background: #4FC3F7;
+    color: #212529;
+    border-color: #4FC3F7; }
+  .p-buttona:enabled:active {
+    background: #29B6F6;
+    color: #212529;
+    border-color: #29B6F6; }
+  .p-button:not(a):not(.p-disabled):hover {
+    background: #4FC3F7;
+    color: #212529;
+    border-color: #4FC3F7; }
+  .p-button:not(a):not(.p-disabled):active {
     background: #29B6F6;
     color: #212529;
     border-color: #29B6F6; }
@@ -1247,41 +1271,125 @@
     background-color: transparent;
     color: #81D4FA;
     border: 1px solid; }
-    .p-button.p-button-outlined:enabled:hover {
+    .p-button.p-button-outlinedbutton:enabled:hover {
       background: rgba(129, 212, 250, 0.04);
       color: #81D4FA;
       border: 1px solid; }
-    .p-button.p-button-outlined:enabled:active {
+    .p-button.p-button-outlinedbutton:enabled:active {
+      background: rgba(129, 212, 250, 0.16);
+      color: #81D4FA;
+      border: 1px solid; }
+    .p-button.p-button-outlined:not(button):not(.p-disabled):hover {
+      background: rgba(129, 212, 250, 0.04);
+      color: #81D4FA;
+      border: 1px solid; }
+    .p-button.p-button-outlined:not(button):not(.p-disabled):active {
+      background: rgba(129, 212, 250, 0.16);
+      color: #81D4FA;
+      border: 1px solid; }
+    .p-button.p-button-outlineda:enabled:hover {
+      background: rgba(129, 212, 250, 0.04);
+      color: #81D4FA;
+      border: 1px solid; }
+    .p-button.p-button-outlineda:enabled:active {
+      background: rgba(129, 212, 250, 0.16);
+      color: #81D4FA;
+      border: 1px solid; }
+    .p-button.p-button-outlined:not(a):not(.p-disabled):hover {
+      background: rgba(129, 212, 250, 0.04);
+      color: #81D4FA;
+      border: 1px solid; }
+    .p-button.p-button-outlined:not(a):not(.p-disabled):active {
       background: rgba(129, 212, 250, 0.16);
       color: #81D4FA;
       border: 1px solid; }
     .p-button.p-button-outlined.p-button-plain {
       color: #888888;
       border-color: #888888; }
-      .p-button.p-button-outlined.p-button-plain:enabled:hover {
+      .p-button.p-button-outlined.p-button-plainbutton:enabled:hover {
         background: #4c4c4c;
         color: #888888; }
-      .p-button.p-button-outlined.p-button-plain:enabled:active {
+      .p-button.p-button-outlined.p-button-plainbutton:enabled:active {
+        background: #3c3c3c;
+        color: #888888; }
+      .p-button.p-button-outlined.p-button-plain:not(button):not(.p-disabled):hover {
+        background: #4c4c4c;
+        color: #888888; }
+      .p-button.p-button-outlined.p-button-plain:not(button):not(.p-disabled):active {
+        background: #3c3c3c;
+        color: #888888; }
+      .p-button.p-button-outlined.p-button-plaina:enabled:hover {
+        background: #4c4c4c;
+        color: #888888; }
+      .p-button.p-button-outlined.p-button-plaina:enabled:active {
+        background: #3c3c3c;
+        color: #888888; }
+      .p-button.p-button-outlined.p-button-plain:not(a):not(.p-disabled):hover {
+        background: #4c4c4c;
+        color: #888888; }
+      .p-button.p-button-outlined.p-button-plain:not(a):not(.p-disabled):active {
         background: #3c3c3c;
         color: #888888; }
   .p-button.p-button-text {
     background-color: transparent;
     color: #81D4FA;
     border-color: transparent; }
-    .p-button.p-button-text:enabled:hover {
+    .p-button.p-button-textbutton:enabled:hover {
       background: rgba(129, 212, 250, 0.04);
       color: #81D4FA;
       border-color: transparent; }
-    .p-button.p-button-text:enabled:active {
+    .p-button.p-button-textbutton:enabled:active {
+      background: rgba(129, 212, 250, 0.16);
+      color: #81D4FA;
+      border-color: transparent; }
+    .p-button.p-button-text:not(button):not(.p-disabled):hover {
+      background: rgba(129, 212, 250, 0.04);
+      color: #81D4FA;
+      border-color: transparent; }
+    .p-button.p-button-text:not(button):not(.p-disabled):active {
+      background: rgba(129, 212, 250, 0.16);
+      color: #81D4FA;
+      border-color: transparent; }
+    .p-button.p-button-texta:enabled:hover {
+      background: rgba(129, 212, 250, 0.04);
+      color: #81D4FA;
+      border-color: transparent; }
+    .p-button.p-button-texta:enabled:active {
+      background: rgba(129, 212, 250, 0.16);
+      color: #81D4FA;
+      border-color: transparent; }
+    .p-button.p-button-text:not(a):not(.p-disabled):hover {
+      background: rgba(129, 212, 250, 0.04);
+      color: #81D4FA;
+      border-color: transparent; }
+    .p-button.p-button-text:not(a):not(.p-disabled):active {
       background: rgba(129, 212, 250, 0.16);
       color: #81D4FA;
       border-color: transparent; }
     .p-button.p-button-text.p-button-plain {
       color: #888888; }
-      .p-button.p-button-text.p-button-plain:enabled:hover {
+      .p-button.p-button-text.p-button-plainbutton:enabled:hover {
         background: #4c4c4c;
         color: #888888; }
-      .p-button.p-button-text.p-button-plain:enabled:active {
+      .p-button.p-button-text.p-button-plainbutton:enabled:active {
+        background: #3c3c3c;
+        color: #888888; }
+      .p-button.p-button-text.p-button-plain:not(button):not(.p-disabled):hover {
+        background: #4c4c4c;
+        color: #888888; }
+      .p-button.p-button-text.p-button-plain:not(button):not(.p-disabled):active {
+        background: #3c3c3c;
+        color: #888888; }
+      .p-button.p-button-text.p-button-plaina:enabled:hover {
+        background: #4c4c4c;
+        color: #888888; }
+      .p-button.p-button-text.p-button-plaina:enabled:active {
+        background: #3c3c3c;
+        color: #888888; }
+      .p-button.p-button-text.p-button-plain:not(a):not(.p-disabled):hover {
+        background: #4c4c4c;
+        color: #888888; }
+      .p-button.p-button-text.p-button-plain:not(a):not(.p-disabled):active {
         background: #3c3c3c;
         color: #888888; }
   .p-button:focus {
@@ -1336,236 +1444,704 @@
   .p-fluid .p-buttonset .p-button {
     flex: 1; }
 
-.p-button.p-button-secondary, .p-buttonset.p-button-secondary > .p-button, .p-splitbutton.p-button-secondary > .p-button {
+.p-button.p-button-secondary, .p-buttonset.p-button-secondary > .p-button, .p-splitbutton.p-button-secondary > .p-button, .p-fileupload-choose.p-button-secondary {
   color: #121212;
   background: #B0BEC5;
   border: 1px solid #B0BEC5; }
-  .p-button.p-button-secondary:enabled:hover, .p-buttonset.p-button-secondary > .p-button:enabled:hover, .p-splitbutton.p-button-secondary > .p-button:enabled:hover {
+  .p-button.p-button-secondarybutton:enabled:hover, .p-buttonset.p-button-secondary > .p-buttonbutton:enabled:hover, .p-splitbutton.p-button-secondary > .p-buttonbutton:enabled:hover, .p-fileupload-choose.p-button-secondarybutton:enabled:hover {
     background: #90A4AE;
     color: #121212;
     border-color: #90A4AE; }
-  .p-button.p-button-secondary:enabled:focus, .p-buttonset.p-button-secondary > .p-button:enabled:focus, .p-splitbutton.p-button-secondary > .p-button:enabled:focus {
+  .p-button.p-button-secondarybutton:enabled:focus, .p-buttonset.p-button-secondary > .p-buttonbutton:enabled:focus, .p-splitbutton.p-button-secondary > .p-buttonbutton:enabled:focus, .p-fileupload-choose.p-button-secondarybutton:enabled:focus {
     box-shadow: 0 0 0 0.1rem #CFD8DC; }
-  .p-button.p-button-secondary:enabled:active, .p-buttonset.p-button-secondary > .p-button:enabled:active, .p-splitbutton.p-button-secondary > .p-button:enabled:active {
+  .p-button.p-button-secondarybutton:enabled:active, .p-buttonset.p-button-secondary > .p-buttonbutton:enabled:active, .p-splitbutton.p-button-secondary > .p-buttonbutton:enabled:active, .p-fileupload-choose.p-button-secondarybutton:enabled:active {
     background: #78909C;
     color: #121212;
     border-color: #78909C; }
-  .p-button.p-button-secondary.p-button-outlined, .p-buttonset.p-button-secondary > .p-button.p-button-outlined, .p-splitbutton.p-button-secondary > .p-button.p-button-outlined {
+  .p-button.p-button-secondary:not(button):not(.p-disabled):hover, .p-buttonset.p-button-secondary > .p-button:not(button):not(.p-disabled):hover, .p-splitbutton.p-button-secondary > .p-button:not(button):not(.p-disabled):hover, .p-fileupload-choose.p-button-secondary:not(button):not(.p-disabled):hover {
+    background: #90A4AE;
+    color: #121212;
+    border-color: #90A4AE; }
+  .p-button.p-button-secondary:not(button):not(.p-disabled):focus, .p-buttonset.p-button-secondary > .p-button:not(button):not(.p-disabled):focus, .p-splitbutton.p-button-secondary > .p-button:not(button):not(.p-disabled):focus, .p-fileupload-choose.p-button-secondary:not(button):not(.p-disabled):focus {
+    box-shadow: 0 0 0 0.1rem #CFD8DC; }
+  .p-button.p-button-secondary:not(button):not(.p-disabled):active, .p-buttonset.p-button-secondary > .p-button:not(button):not(.p-disabled):active, .p-splitbutton.p-button-secondary > .p-button:not(button):not(.p-disabled):active, .p-fileupload-choose.p-button-secondary:not(button):not(.p-disabled):active {
+    background: #78909C;
+    color: #121212;
+    border-color: #78909C; }
+  .p-button.p-button-secondarya:enabled:hover, .p-buttonset.p-button-secondary > .p-buttona:enabled:hover, .p-splitbutton.p-button-secondary > .p-buttona:enabled:hover, .p-fileupload-choose.p-button-secondarya:enabled:hover {
+    background: #90A4AE;
+    color: #121212;
+    border-color: #90A4AE; }
+  .p-button.p-button-secondarya:enabled:focus, .p-buttonset.p-button-secondary > .p-buttona:enabled:focus, .p-splitbutton.p-button-secondary > .p-buttona:enabled:focus, .p-fileupload-choose.p-button-secondarya:enabled:focus {
+    box-shadow: 0 0 0 0.1rem #CFD8DC; }
+  .p-button.p-button-secondarya:enabled:active, .p-buttonset.p-button-secondary > .p-buttona:enabled:active, .p-splitbutton.p-button-secondary > .p-buttona:enabled:active, .p-fileupload-choose.p-button-secondarya:enabled:active {
+    background: #78909C;
+    color: #121212;
+    border-color: #78909C; }
+  .p-button.p-button-secondary:not(a):not(.p-disabled):hover, .p-buttonset.p-button-secondary > .p-button:not(a):not(.p-disabled):hover, .p-splitbutton.p-button-secondary > .p-button:not(a):not(.p-disabled):hover, .p-fileupload-choose.p-button-secondary:not(a):not(.p-disabled):hover {
+    background: #90A4AE;
+    color: #121212;
+    border-color: #90A4AE; }
+  .p-button.p-button-secondary:not(a):not(.p-disabled):focus, .p-buttonset.p-button-secondary > .p-button:not(a):not(.p-disabled):focus, .p-splitbutton.p-button-secondary > .p-button:not(a):not(.p-disabled):focus, .p-fileupload-choose.p-button-secondary:not(a):not(.p-disabled):focus {
+    box-shadow: 0 0 0 0.1rem #CFD8DC; }
+  .p-button.p-button-secondary:not(a):not(.p-disabled):active, .p-buttonset.p-button-secondary > .p-button:not(a):not(.p-disabled):active, .p-splitbutton.p-button-secondary > .p-button:not(a):not(.p-disabled):active, .p-fileupload-choose.p-button-secondary:not(a):not(.p-disabled):active {
+    background: #78909C;
+    color: #121212;
+    border-color: #78909C; }
+  .p-button.p-button-secondary.p-button-outlined, .p-buttonset.p-button-secondary > .p-button.p-button-outlined, .p-splitbutton.p-button-secondary > .p-button.p-button-outlined, .p-fileupload-choose.p-button-secondary.p-button-outlined {
     background-color: transparent;
     color: #B0BEC5;
     border: 1px solid; }
-    .p-button.p-button-secondary.p-button-outlined:enabled:hover, .p-buttonset.p-button-secondary > .p-button.p-button-outlined:enabled:hover, .p-splitbutton.p-button-secondary > .p-button.p-button-outlined:enabled:hover {
+    .p-button.p-button-secondary.p-button-outlinedbutton:enabled:hover, .p-buttonset.p-button-secondary > .p-button.p-button-outlinedbutton:enabled:hover, .p-splitbutton.p-button-secondary > .p-button.p-button-outlinedbutton:enabled:hover, .p-fileupload-choose.p-button-secondary.p-button-outlinedbutton:enabled:hover {
       background: rgba(176, 190, 197, 0.04);
       color: #B0BEC5;
       border: 1px solid; }
-    .p-button.p-button-secondary.p-button-outlined:enabled:active, .p-buttonset.p-button-secondary > .p-button.p-button-outlined:enabled:active, .p-splitbutton.p-button-secondary > .p-button.p-button-outlined:enabled:active {
+    .p-button.p-button-secondary.p-button-outlinedbutton:enabled:active, .p-buttonset.p-button-secondary > .p-button.p-button-outlinedbutton:enabled:active, .p-splitbutton.p-button-secondary > .p-button.p-button-outlinedbutton:enabled:active, .p-fileupload-choose.p-button-secondary.p-button-outlinedbutton:enabled:active {
       background: rgba(176, 190, 197, 0.16);
       color: #B0BEC5;
       border: 1px solid; }
-  .p-button.p-button-secondary.p-button-text, .p-buttonset.p-button-secondary > .p-button.p-button-text, .p-splitbutton.p-button-secondary > .p-button.p-button-text {
+    .p-button.p-button-secondary.p-button-outlined:not(button):not(.p-disabled):hover, .p-buttonset.p-button-secondary > .p-button.p-button-outlined:not(button):not(.p-disabled):hover, .p-splitbutton.p-button-secondary > .p-button.p-button-outlined:not(button):not(.p-disabled):hover, .p-fileupload-choose.p-button-secondary.p-button-outlined:not(button):not(.p-disabled):hover {
+      background: rgba(176, 190, 197, 0.04);
+      color: #B0BEC5;
+      border: 1px solid; }
+    .p-button.p-button-secondary.p-button-outlined:not(button):not(.p-disabled):active, .p-buttonset.p-button-secondary > .p-button.p-button-outlined:not(button):not(.p-disabled):active, .p-splitbutton.p-button-secondary > .p-button.p-button-outlined:not(button):not(.p-disabled):active, .p-fileupload-choose.p-button-secondary.p-button-outlined:not(button):not(.p-disabled):active {
+      background: rgba(176, 190, 197, 0.16);
+      color: #B0BEC5;
+      border: 1px solid; }
+    .p-button.p-button-secondary.p-button-outlineda:enabled:hover, .p-buttonset.p-button-secondary > .p-button.p-button-outlineda:enabled:hover, .p-splitbutton.p-button-secondary > .p-button.p-button-outlineda:enabled:hover, .p-fileupload-choose.p-button-secondary.p-button-outlineda:enabled:hover {
+      background: rgba(176, 190, 197, 0.04);
+      color: #B0BEC5;
+      border: 1px solid; }
+    .p-button.p-button-secondary.p-button-outlineda:enabled:active, .p-buttonset.p-button-secondary > .p-button.p-button-outlineda:enabled:active, .p-splitbutton.p-button-secondary > .p-button.p-button-outlineda:enabled:active, .p-fileupload-choose.p-button-secondary.p-button-outlineda:enabled:active {
+      background: rgba(176, 190, 197, 0.16);
+      color: #B0BEC5;
+      border: 1px solid; }
+    .p-button.p-button-secondary.p-button-outlined:not(a):not(.p-disabled):hover, .p-buttonset.p-button-secondary > .p-button.p-button-outlined:not(a):not(.p-disabled):hover, .p-splitbutton.p-button-secondary > .p-button.p-button-outlined:not(a):not(.p-disabled):hover, .p-fileupload-choose.p-button-secondary.p-button-outlined:not(a):not(.p-disabled):hover {
+      background: rgba(176, 190, 197, 0.04);
+      color: #B0BEC5;
+      border: 1px solid; }
+    .p-button.p-button-secondary.p-button-outlined:not(a):not(.p-disabled):active, .p-buttonset.p-button-secondary > .p-button.p-button-outlined:not(a):not(.p-disabled):active, .p-splitbutton.p-button-secondary > .p-button.p-button-outlined:not(a):not(.p-disabled):active, .p-fileupload-choose.p-button-secondary.p-button-outlined:not(a):not(.p-disabled):active {
+      background: rgba(176, 190, 197, 0.16);
+      color: #B0BEC5;
+      border: 1px solid; }
+  .p-button.p-button-secondary.p-button-text, .p-buttonset.p-button-secondary > .p-button.p-button-text, .p-splitbutton.p-button-secondary > .p-button.p-button-text, .p-fileupload-choose.p-button-secondary.p-button-text {
     background-color: transparent;
     color: #B0BEC5;
     border-color: transparent; }
-    .p-button.p-button-secondary.p-button-text:enabled:hover, .p-buttonset.p-button-secondary > .p-button.p-button-text:enabled:hover, .p-splitbutton.p-button-secondary > .p-button.p-button-text:enabled:hover {
+    .p-button.p-button-secondary.p-button-textbutton:enabled:hover, .p-buttonset.p-button-secondary > .p-button.p-button-textbutton:enabled:hover, .p-splitbutton.p-button-secondary > .p-button.p-button-textbutton:enabled:hover, .p-fileupload-choose.p-button-secondary.p-button-textbutton:enabled:hover {
       background: rgba(176, 190, 197, 0.04);
       border-color: transparent;
       color: #B0BEC5; }
-    .p-button.p-button-secondary.p-button-text:enabled:active, .p-buttonset.p-button-secondary > .p-button.p-button-text:enabled:active, .p-splitbutton.p-button-secondary > .p-button.p-button-text:enabled:active {
+    .p-button.p-button-secondary.p-button-textbutton:enabled:active, .p-buttonset.p-button-secondary > .p-button.p-button-textbutton:enabled:active, .p-splitbutton.p-button-secondary > .p-button.p-button-textbutton:enabled:active, .p-fileupload-choose.p-button-secondary.p-button-textbutton:enabled:active {
+      background: rgba(176, 190, 197, 0.16);
+      border-color: transparent;
+      color: #B0BEC5; }
+    .p-button.p-button-secondary.p-button-text:not(button):not(.p-disabled):hover, .p-buttonset.p-button-secondary > .p-button.p-button-text:not(button):not(.p-disabled):hover, .p-splitbutton.p-button-secondary > .p-button.p-button-text:not(button):not(.p-disabled):hover, .p-fileupload-choose.p-button-secondary.p-button-text:not(button):not(.p-disabled):hover {
+      background: rgba(176, 190, 197, 0.04);
+      border-color: transparent;
+      color: #B0BEC5; }
+    .p-button.p-button-secondary.p-button-text:not(button):not(.p-disabled):active, .p-buttonset.p-button-secondary > .p-button.p-button-text:not(button):not(.p-disabled):active, .p-splitbutton.p-button-secondary > .p-button.p-button-text:not(button):not(.p-disabled):active, .p-fileupload-choose.p-button-secondary.p-button-text:not(button):not(.p-disabled):active {
+      background: rgba(176, 190, 197, 0.16);
+      border-color: transparent;
+      color: #B0BEC5; }
+    .p-button.p-button-secondary.p-button-texta:enabled:hover, .p-buttonset.p-button-secondary > .p-button.p-button-texta:enabled:hover, .p-splitbutton.p-button-secondary > .p-button.p-button-texta:enabled:hover, .p-fileupload-choose.p-button-secondary.p-button-texta:enabled:hover {
+      background: rgba(176, 190, 197, 0.04);
+      border-color: transparent;
+      color: #B0BEC5; }
+    .p-button.p-button-secondary.p-button-texta:enabled:active, .p-buttonset.p-button-secondary > .p-button.p-button-texta:enabled:active, .p-splitbutton.p-button-secondary > .p-button.p-button-texta:enabled:active, .p-fileupload-choose.p-button-secondary.p-button-texta:enabled:active {
+      background: rgba(176, 190, 197, 0.16);
+      border-color: transparent;
+      color: #B0BEC5; }
+    .p-button.p-button-secondary.p-button-text:not(a):not(.p-disabled):hover, .p-buttonset.p-button-secondary > .p-button.p-button-text:not(a):not(.p-disabled):hover, .p-splitbutton.p-button-secondary > .p-button.p-button-text:not(a):not(.p-disabled):hover, .p-fileupload-choose.p-button-secondary.p-button-text:not(a):not(.p-disabled):hover {
+      background: rgba(176, 190, 197, 0.04);
+      border-color: transparent;
+      color: #B0BEC5; }
+    .p-button.p-button-secondary.p-button-text:not(a):not(.p-disabled):active, .p-buttonset.p-button-secondary > .p-button.p-button-text:not(a):not(.p-disabled):active, .p-splitbutton.p-button-secondary > .p-button.p-button-text:not(a):not(.p-disabled):active, .p-fileupload-choose.p-button-secondary.p-button-text:not(a):not(.p-disabled):active {
       background: rgba(176, 190, 197, 0.16);
       border-color: transparent;
       color: #B0BEC5; }
 
-.p-button.p-button-info, .p-buttonset.p-button-info > .p-button, .p-splitbutton.p-button-info > .p-button {
+.p-button.p-button-info, .p-buttonset.p-button-info > .p-button, .p-splitbutton.p-button-info > .p-button, .p-fileupload-choose.p-button-info {
   color: #212529;
   background: #4FC3F7;
   border: 1px solid #4FC3F7; }
-  .p-button.p-button-info:enabled:hover, .p-buttonset.p-button-info > .p-button:enabled:hover, .p-splitbutton.p-button-info > .p-button:enabled:hover {
+  .p-button.p-button-infobutton:enabled:hover, .p-buttonset.p-button-info > .p-buttonbutton:enabled:hover, .p-splitbutton.p-button-info > .p-buttonbutton:enabled:hover, .p-fileupload-choose.p-button-infobutton:enabled:hover {
     background: #29B6F6;
     color: #212529;
     border-color: #29B6F6; }
-  .p-button.p-button-info:enabled:focus, .p-buttonset.p-button-info > .p-button:enabled:focus, .p-splitbutton.p-button-info > .p-button:enabled:focus {
+  .p-button.p-button-infobutton:enabled:focus, .p-buttonset.p-button-info > .p-buttonbutton:enabled:focus, .p-splitbutton.p-button-info > .p-buttonbutton:enabled:focus, .p-fileupload-choose.p-button-infobutton:enabled:focus {
     box-shadow: 0 0 0 0.1rem #E1F5FE; }
-  .p-button.p-button-info:enabled:active, .p-buttonset.p-button-info > .p-button:enabled:active, .p-splitbutton.p-button-info > .p-button:enabled:active {
+  .p-button.p-button-infobutton:enabled:active, .p-buttonset.p-button-info > .p-buttonbutton:enabled:active, .p-splitbutton.p-button-info > .p-buttonbutton:enabled:active, .p-fileupload-choose.p-button-infobutton:enabled:active {
     background: #03A9F4;
     color: #212529;
     border-color: #03A9F4; }
-  .p-button.p-button-info.p-button-outlined, .p-buttonset.p-button-info > .p-button.p-button-outlined, .p-splitbutton.p-button-info > .p-button.p-button-outlined {
+  .p-button.p-button-info:not(button):not(.p-disabled):hover, .p-buttonset.p-button-info > .p-button:not(button):not(.p-disabled):hover, .p-splitbutton.p-button-info > .p-button:not(button):not(.p-disabled):hover, .p-fileupload-choose.p-button-info:not(button):not(.p-disabled):hover {
+    background: #29B6F6;
+    color: #212529;
+    border-color: #29B6F6; }
+  .p-button.p-button-info:not(button):not(.p-disabled):focus, .p-buttonset.p-button-info > .p-button:not(button):not(.p-disabled):focus, .p-splitbutton.p-button-info > .p-button:not(button):not(.p-disabled):focus, .p-fileupload-choose.p-button-info:not(button):not(.p-disabled):focus {
+    box-shadow: 0 0 0 0.1rem #E1F5FE; }
+  .p-button.p-button-info:not(button):not(.p-disabled):active, .p-buttonset.p-button-info > .p-button:not(button):not(.p-disabled):active, .p-splitbutton.p-button-info > .p-button:not(button):not(.p-disabled):active, .p-fileupload-choose.p-button-info:not(button):not(.p-disabled):active {
+    background: #03A9F4;
+    color: #212529;
+    border-color: #03A9F4; }
+  .p-button.p-button-infoa:enabled:hover, .p-buttonset.p-button-info > .p-buttona:enabled:hover, .p-splitbutton.p-button-info > .p-buttona:enabled:hover, .p-fileupload-choose.p-button-infoa:enabled:hover {
+    background: #29B6F6;
+    color: #212529;
+    border-color: #29B6F6; }
+  .p-button.p-button-infoa:enabled:focus, .p-buttonset.p-button-info > .p-buttona:enabled:focus, .p-splitbutton.p-button-info > .p-buttona:enabled:focus, .p-fileupload-choose.p-button-infoa:enabled:focus {
+    box-shadow: 0 0 0 0.1rem #E1F5FE; }
+  .p-button.p-button-infoa:enabled:active, .p-buttonset.p-button-info > .p-buttona:enabled:active, .p-splitbutton.p-button-info > .p-buttona:enabled:active, .p-fileupload-choose.p-button-infoa:enabled:active {
+    background: #03A9F4;
+    color: #212529;
+    border-color: #03A9F4; }
+  .p-button.p-button-info:not(a):not(.p-disabled):hover, .p-buttonset.p-button-info > .p-button:not(a):not(.p-disabled):hover, .p-splitbutton.p-button-info > .p-button:not(a):not(.p-disabled):hover, .p-fileupload-choose.p-button-info:not(a):not(.p-disabled):hover {
+    background: #29B6F6;
+    color: #212529;
+    border-color: #29B6F6; }
+  .p-button.p-button-info:not(a):not(.p-disabled):focus, .p-buttonset.p-button-info > .p-button:not(a):not(.p-disabled):focus, .p-splitbutton.p-button-info > .p-button:not(a):not(.p-disabled):focus, .p-fileupload-choose.p-button-info:not(a):not(.p-disabled):focus {
+    box-shadow: 0 0 0 0.1rem #E1F5FE; }
+  .p-button.p-button-info:not(a):not(.p-disabled):active, .p-buttonset.p-button-info > .p-button:not(a):not(.p-disabled):active, .p-splitbutton.p-button-info > .p-button:not(a):not(.p-disabled):active, .p-fileupload-choose.p-button-info:not(a):not(.p-disabled):active {
+    background: #03A9F4;
+    color: #212529;
+    border-color: #03A9F4; }
+  .p-button.p-button-info.p-button-outlined, .p-buttonset.p-button-info > .p-button.p-button-outlined, .p-splitbutton.p-button-info > .p-button.p-button-outlined, .p-fileupload-choose.p-button-info.p-button-outlined {
     background-color: transparent;
     color: #4FC3F7;
     border: 1px solid; }
-    .p-button.p-button-info.p-button-outlined:enabled:hover, .p-buttonset.p-button-info > .p-button.p-button-outlined:enabled:hover, .p-splitbutton.p-button-info > .p-button.p-button-outlined:enabled:hover {
+    .p-button.p-button-info.p-button-outlinedbutton:enabled:hover, .p-buttonset.p-button-info > .p-button.p-button-outlinedbutton:enabled:hover, .p-splitbutton.p-button-info > .p-button.p-button-outlinedbutton:enabled:hover, .p-fileupload-choose.p-button-info.p-button-outlinedbutton:enabled:hover {
       background: rgba(79, 195, 247, 0.04);
       color: #4FC3F7;
       border: 1px solid; }
-    .p-button.p-button-info.p-button-outlined:enabled:active, .p-buttonset.p-button-info > .p-button.p-button-outlined:enabled:active, .p-splitbutton.p-button-info > .p-button.p-button-outlined:enabled:active {
+    .p-button.p-button-info.p-button-outlinedbutton:enabled:active, .p-buttonset.p-button-info > .p-button.p-button-outlinedbutton:enabled:active, .p-splitbutton.p-button-info > .p-button.p-button-outlinedbutton:enabled:active, .p-fileupload-choose.p-button-info.p-button-outlinedbutton:enabled:active {
       background: rgba(79, 195, 247, 0.16);
       color: #4FC3F7;
       border: 1px solid; }
-  .p-button.p-button-info.p-button-text, .p-buttonset.p-button-info > .p-button.p-button-text, .p-splitbutton.p-button-info > .p-button.p-button-text {
+    .p-button.p-button-info.p-button-outlined:not(button):not(.p-disabled):hover, .p-buttonset.p-button-info > .p-button.p-button-outlined:not(button):not(.p-disabled):hover, .p-splitbutton.p-button-info > .p-button.p-button-outlined:not(button):not(.p-disabled):hover, .p-fileupload-choose.p-button-info.p-button-outlined:not(button):not(.p-disabled):hover {
+      background: rgba(79, 195, 247, 0.04);
+      color: #4FC3F7;
+      border: 1px solid; }
+    .p-button.p-button-info.p-button-outlined:not(button):not(.p-disabled):active, .p-buttonset.p-button-info > .p-button.p-button-outlined:not(button):not(.p-disabled):active, .p-splitbutton.p-button-info > .p-button.p-button-outlined:not(button):not(.p-disabled):active, .p-fileupload-choose.p-button-info.p-button-outlined:not(button):not(.p-disabled):active {
+      background: rgba(79, 195, 247, 0.16);
+      color: #4FC3F7;
+      border: 1px solid; }
+    .p-button.p-button-info.p-button-outlineda:enabled:hover, .p-buttonset.p-button-info > .p-button.p-button-outlineda:enabled:hover, .p-splitbutton.p-button-info > .p-button.p-button-outlineda:enabled:hover, .p-fileupload-choose.p-button-info.p-button-outlineda:enabled:hover {
+      background: rgba(79, 195, 247, 0.04);
+      color: #4FC3F7;
+      border: 1px solid; }
+    .p-button.p-button-info.p-button-outlineda:enabled:active, .p-buttonset.p-button-info > .p-button.p-button-outlineda:enabled:active, .p-splitbutton.p-button-info > .p-button.p-button-outlineda:enabled:active, .p-fileupload-choose.p-button-info.p-button-outlineda:enabled:active {
+      background: rgba(79, 195, 247, 0.16);
+      color: #4FC3F7;
+      border: 1px solid; }
+    .p-button.p-button-info.p-button-outlined:not(a):not(.p-disabled):hover, .p-buttonset.p-button-info > .p-button.p-button-outlined:not(a):not(.p-disabled):hover, .p-splitbutton.p-button-info > .p-button.p-button-outlined:not(a):not(.p-disabled):hover, .p-fileupload-choose.p-button-info.p-button-outlined:not(a):not(.p-disabled):hover {
+      background: rgba(79, 195, 247, 0.04);
+      color: #4FC3F7;
+      border: 1px solid; }
+    .p-button.p-button-info.p-button-outlined:not(a):not(.p-disabled):active, .p-buttonset.p-button-info > .p-button.p-button-outlined:not(a):not(.p-disabled):active, .p-splitbutton.p-button-info > .p-button.p-button-outlined:not(a):not(.p-disabled):active, .p-fileupload-choose.p-button-info.p-button-outlined:not(a):not(.p-disabled):active {
+      background: rgba(79, 195, 247, 0.16);
+      color: #4FC3F7;
+      border: 1px solid; }
+  .p-button.p-button-info.p-button-text, .p-buttonset.p-button-info > .p-button.p-button-text, .p-splitbutton.p-button-info > .p-button.p-button-text, .p-fileupload-choose.p-button-info.p-button-text {
     background-color: transparent;
     color: #4FC3F7;
     border-color: transparent; }
-    .p-button.p-button-info.p-button-text:enabled:hover, .p-buttonset.p-button-info > .p-button.p-button-text:enabled:hover, .p-splitbutton.p-button-info > .p-button.p-button-text:enabled:hover {
+    .p-button.p-button-info.p-button-textbutton:enabled:hover, .p-buttonset.p-button-info > .p-button.p-button-textbutton:enabled:hover, .p-splitbutton.p-button-info > .p-button.p-button-textbutton:enabled:hover, .p-fileupload-choose.p-button-info.p-button-textbutton:enabled:hover {
       background: rgba(79, 195, 247, 0.04);
       border-color: transparent;
       color: #4FC3F7; }
-    .p-button.p-button-info.p-button-text:enabled:active, .p-buttonset.p-button-info > .p-button.p-button-text:enabled:active, .p-splitbutton.p-button-info > .p-button.p-button-text:enabled:active {
+    .p-button.p-button-info.p-button-textbutton:enabled:active, .p-buttonset.p-button-info > .p-button.p-button-textbutton:enabled:active, .p-splitbutton.p-button-info > .p-button.p-button-textbutton:enabled:active, .p-fileupload-choose.p-button-info.p-button-textbutton:enabled:active {
+      background: rgba(79, 195, 247, 0.16);
+      border-color: transparent;
+      color: #4FC3F7; }
+    .p-button.p-button-info.p-button-text:not(button):not(.p-disabled):hover, .p-buttonset.p-button-info > .p-button.p-button-text:not(button):not(.p-disabled):hover, .p-splitbutton.p-button-info > .p-button.p-button-text:not(button):not(.p-disabled):hover, .p-fileupload-choose.p-button-info.p-button-text:not(button):not(.p-disabled):hover {
+      background: rgba(79, 195, 247, 0.04);
+      border-color: transparent;
+      color: #4FC3F7; }
+    .p-button.p-button-info.p-button-text:not(button):not(.p-disabled):active, .p-buttonset.p-button-info > .p-button.p-button-text:not(button):not(.p-disabled):active, .p-splitbutton.p-button-info > .p-button.p-button-text:not(button):not(.p-disabled):active, .p-fileupload-choose.p-button-info.p-button-text:not(button):not(.p-disabled):active {
+      background: rgba(79, 195, 247, 0.16);
+      border-color: transparent;
+      color: #4FC3F7; }
+    .p-button.p-button-info.p-button-texta:enabled:hover, .p-buttonset.p-button-info > .p-button.p-button-texta:enabled:hover, .p-splitbutton.p-button-info > .p-button.p-button-texta:enabled:hover, .p-fileupload-choose.p-button-info.p-button-texta:enabled:hover {
+      background: rgba(79, 195, 247, 0.04);
+      border-color: transparent;
+      color: #4FC3F7; }
+    .p-button.p-button-info.p-button-texta:enabled:active, .p-buttonset.p-button-info > .p-button.p-button-texta:enabled:active, .p-splitbutton.p-button-info > .p-button.p-button-texta:enabled:active, .p-fileupload-choose.p-button-info.p-button-texta:enabled:active {
+      background: rgba(79, 195, 247, 0.16);
+      border-color: transparent;
+      color: #4FC3F7; }
+    .p-button.p-button-info.p-button-text:not(a):not(.p-disabled):hover, .p-buttonset.p-button-info > .p-button.p-button-text:not(a):not(.p-disabled):hover, .p-splitbutton.p-button-info > .p-button.p-button-text:not(a):not(.p-disabled):hover, .p-fileupload-choose.p-button-info.p-button-text:not(a):not(.p-disabled):hover {
+      background: rgba(79, 195, 247, 0.04);
+      border-color: transparent;
+      color: #4FC3F7; }
+    .p-button.p-button-info.p-button-text:not(a):not(.p-disabled):active, .p-buttonset.p-button-info > .p-button.p-button-text:not(a):not(.p-disabled):active, .p-splitbutton.p-button-info > .p-button.p-button-text:not(a):not(.p-disabled):active, .p-fileupload-choose.p-button-info.p-button-text:not(a):not(.p-disabled):active {
       background: rgba(79, 195, 247, 0.16);
       border-color: transparent;
       color: #4FC3F7; }
 
-.p-button.p-button-success, .p-buttonset.p-button-success > .p-button, .p-splitbutton.p-button-success > .p-button {
+.p-button.p-button-success, .p-buttonset.p-button-success > .p-button, .p-splitbutton.p-button-success > .p-button, .p-fileupload-choose.p-button-success {
   color: #212529;
   background: #AED581;
   border: 1px solid #AED581; }
-  .p-button.p-button-success:enabled:hover, .p-buttonset.p-button-success > .p-button:enabled:hover, .p-splitbutton.p-button-success > .p-button:enabled:hover {
+  .p-button.p-button-successbutton:enabled:hover, .p-buttonset.p-button-success > .p-buttonbutton:enabled:hover, .p-splitbutton.p-button-success > .p-buttonbutton:enabled:hover, .p-fileupload-choose.p-button-successbutton:enabled:hover {
     background: #9CCC65;
     color: #212529;
     border-color: #9CCC65; }
-  .p-button.p-button-success:enabled:focus, .p-buttonset.p-button-success > .p-button:enabled:focus, .p-splitbutton.p-button-success > .p-button:enabled:focus {
+  .p-button.p-button-successbutton:enabled:focus, .p-buttonset.p-button-success > .p-buttonbutton:enabled:focus, .p-splitbutton.p-button-success > .p-buttonbutton:enabled:focus, .p-fileupload-choose.p-button-successbutton:enabled:focus {
     box-shadow: 0 0 0 0.1rem #F1F8E9; }
-  .p-button.p-button-success:enabled:active, .p-buttonset.p-button-success > .p-button:enabled:active, .p-splitbutton.p-button-success > .p-button:enabled:active {
+  .p-button.p-button-successbutton:enabled:active, .p-buttonset.p-button-success > .p-buttonbutton:enabled:active, .p-splitbutton.p-button-success > .p-buttonbutton:enabled:active, .p-fileupload-choose.p-button-successbutton:enabled:active {
     background: #8BC34A;
     color: #212529;
     border-color: #8BC34A; }
-  .p-button.p-button-success.p-button-outlined, .p-buttonset.p-button-success > .p-button.p-button-outlined, .p-splitbutton.p-button-success > .p-button.p-button-outlined {
+  .p-button.p-button-success:not(button):not(.p-disabled):hover, .p-buttonset.p-button-success > .p-button:not(button):not(.p-disabled):hover, .p-splitbutton.p-button-success > .p-button:not(button):not(.p-disabled):hover, .p-fileupload-choose.p-button-success:not(button):not(.p-disabled):hover {
+    background: #9CCC65;
+    color: #212529;
+    border-color: #9CCC65; }
+  .p-button.p-button-success:not(button):not(.p-disabled):focus, .p-buttonset.p-button-success > .p-button:not(button):not(.p-disabled):focus, .p-splitbutton.p-button-success > .p-button:not(button):not(.p-disabled):focus, .p-fileupload-choose.p-button-success:not(button):not(.p-disabled):focus {
+    box-shadow: 0 0 0 0.1rem #F1F8E9; }
+  .p-button.p-button-success:not(button):not(.p-disabled):active, .p-buttonset.p-button-success > .p-button:not(button):not(.p-disabled):active, .p-splitbutton.p-button-success > .p-button:not(button):not(.p-disabled):active, .p-fileupload-choose.p-button-success:not(button):not(.p-disabled):active {
+    background: #8BC34A;
+    color: #212529;
+    border-color: #8BC34A; }
+  .p-button.p-button-successa:enabled:hover, .p-buttonset.p-button-success > .p-buttona:enabled:hover, .p-splitbutton.p-button-success > .p-buttona:enabled:hover, .p-fileupload-choose.p-button-successa:enabled:hover {
+    background: #9CCC65;
+    color: #212529;
+    border-color: #9CCC65; }
+  .p-button.p-button-successa:enabled:focus, .p-buttonset.p-button-success > .p-buttona:enabled:focus, .p-splitbutton.p-button-success > .p-buttona:enabled:focus, .p-fileupload-choose.p-button-successa:enabled:focus {
+    box-shadow: 0 0 0 0.1rem #F1F8E9; }
+  .p-button.p-button-successa:enabled:active, .p-buttonset.p-button-success > .p-buttona:enabled:active, .p-splitbutton.p-button-success > .p-buttona:enabled:active, .p-fileupload-choose.p-button-successa:enabled:active {
+    background: #8BC34A;
+    color: #212529;
+    border-color: #8BC34A; }
+  .p-button.p-button-success:not(a):not(.p-disabled):hover, .p-buttonset.p-button-success > .p-button:not(a):not(.p-disabled):hover, .p-splitbutton.p-button-success > .p-button:not(a):not(.p-disabled):hover, .p-fileupload-choose.p-button-success:not(a):not(.p-disabled):hover {
+    background: #9CCC65;
+    color: #212529;
+    border-color: #9CCC65; }
+  .p-button.p-button-success:not(a):not(.p-disabled):focus, .p-buttonset.p-button-success > .p-button:not(a):not(.p-disabled):focus, .p-splitbutton.p-button-success > .p-button:not(a):not(.p-disabled):focus, .p-fileupload-choose.p-button-success:not(a):not(.p-disabled):focus {
+    box-shadow: 0 0 0 0.1rem #F1F8E9; }
+  .p-button.p-button-success:not(a):not(.p-disabled):active, .p-buttonset.p-button-success > .p-button:not(a):not(.p-disabled):active, .p-splitbutton.p-button-success > .p-button:not(a):not(.p-disabled):active, .p-fileupload-choose.p-button-success:not(a):not(.p-disabled):active {
+    background: #8BC34A;
+    color: #212529;
+    border-color: #8BC34A; }
+  .p-button.p-button-success.p-button-outlined, .p-buttonset.p-button-success > .p-button.p-button-outlined, .p-splitbutton.p-button-success > .p-button.p-button-outlined, .p-fileupload-choose.p-button-success.p-button-outlined {
     background-color: transparent;
     color: #AED581;
     border: 1px solid; }
-    .p-button.p-button-success.p-button-outlined:enabled:hover, .p-buttonset.p-button-success > .p-button.p-button-outlined:enabled:hover, .p-splitbutton.p-button-success > .p-button.p-button-outlined:enabled:hover {
+    .p-button.p-button-success.p-button-outlinedbutton:enabled:hover, .p-buttonset.p-button-success > .p-button.p-button-outlinedbutton:enabled:hover, .p-splitbutton.p-button-success > .p-button.p-button-outlinedbutton:enabled:hover, .p-fileupload-choose.p-button-success.p-button-outlinedbutton:enabled:hover {
       background: rgba(174, 213, 129, 0.04);
       color: #AED581;
       border: 1px solid; }
-    .p-button.p-button-success.p-button-outlined:enabled:active, .p-buttonset.p-button-success > .p-button.p-button-outlined:enabled:active, .p-splitbutton.p-button-success > .p-button.p-button-outlined:enabled:active {
+    .p-button.p-button-success.p-button-outlinedbutton:enabled:active, .p-buttonset.p-button-success > .p-button.p-button-outlinedbutton:enabled:active, .p-splitbutton.p-button-success > .p-button.p-button-outlinedbutton:enabled:active, .p-fileupload-choose.p-button-success.p-button-outlinedbutton:enabled:active {
       background: rgba(174, 213, 129, 0.16);
       color: #AED581;
       border: 1px solid; }
-  .p-button.p-button-success.p-button-text, .p-buttonset.p-button-success > .p-button.p-button-text, .p-splitbutton.p-button-success > .p-button.p-button-text {
+    .p-button.p-button-success.p-button-outlined:not(button):not(.p-disabled):hover, .p-buttonset.p-button-success > .p-button.p-button-outlined:not(button):not(.p-disabled):hover, .p-splitbutton.p-button-success > .p-button.p-button-outlined:not(button):not(.p-disabled):hover, .p-fileupload-choose.p-button-success.p-button-outlined:not(button):not(.p-disabled):hover {
+      background: rgba(174, 213, 129, 0.04);
+      color: #AED581;
+      border: 1px solid; }
+    .p-button.p-button-success.p-button-outlined:not(button):not(.p-disabled):active, .p-buttonset.p-button-success > .p-button.p-button-outlined:not(button):not(.p-disabled):active, .p-splitbutton.p-button-success > .p-button.p-button-outlined:not(button):not(.p-disabled):active, .p-fileupload-choose.p-button-success.p-button-outlined:not(button):not(.p-disabled):active {
+      background: rgba(174, 213, 129, 0.16);
+      color: #AED581;
+      border: 1px solid; }
+    .p-button.p-button-success.p-button-outlineda:enabled:hover, .p-buttonset.p-button-success > .p-button.p-button-outlineda:enabled:hover, .p-splitbutton.p-button-success > .p-button.p-button-outlineda:enabled:hover, .p-fileupload-choose.p-button-success.p-button-outlineda:enabled:hover {
+      background: rgba(174, 213, 129, 0.04);
+      color: #AED581;
+      border: 1px solid; }
+    .p-button.p-button-success.p-button-outlineda:enabled:active, .p-buttonset.p-button-success > .p-button.p-button-outlineda:enabled:active, .p-splitbutton.p-button-success > .p-button.p-button-outlineda:enabled:active, .p-fileupload-choose.p-button-success.p-button-outlineda:enabled:active {
+      background: rgba(174, 213, 129, 0.16);
+      color: #AED581;
+      border: 1px solid; }
+    .p-button.p-button-success.p-button-outlined:not(a):not(.p-disabled):hover, .p-buttonset.p-button-success > .p-button.p-button-outlined:not(a):not(.p-disabled):hover, .p-splitbutton.p-button-success > .p-button.p-button-outlined:not(a):not(.p-disabled):hover, .p-fileupload-choose.p-button-success.p-button-outlined:not(a):not(.p-disabled):hover {
+      background: rgba(174, 213, 129, 0.04);
+      color: #AED581;
+      border: 1px solid; }
+    .p-button.p-button-success.p-button-outlined:not(a):not(.p-disabled):active, .p-buttonset.p-button-success > .p-button.p-button-outlined:not(a):not(.p-disabled):active, .p-splitbutton.p-button-success > .p-button.p-button-outlined:not(a):not(.p-disabled):active, .p-fileupload-choose.p-button-success.p-button-outlined:not(a):not(.p-disabled):active {
+      background: rgba(174, 213, 129, 0.16);
+      color: #AED581;
+      border: 1px solid; }
+  .p-button.p-button-success.p-button-text, .p-buttonset.p-button-success > .p-button.p-button-text, .p-splitbutton.p-button-success > .p-button.p-button-text, .p-fileupload-choose.p-button-success.p-button-text {
     background-color: transparent;
     color: #AED581;
     border-color: transparent; }
-    .p-button.p-button-success.p-button-text:enabled:hover, .p-buttonset.p-button-success > .p-button.p-button-text:enabled:hover, .p-splitbutton.p-button-success > .p-button.p-button-text:enabled:hover {
+    .p-button.p-button-success.p-button-textbutton:enabled:hover, .p-buttonset.p-button-success > .p-button.p-button-textbutton:enabled:hover, .p-splitbutton.p-button-success > .p-button.p-button-textbutton:enabled:hover, .p-fileupload-choose.p-button-success.p-button-textbutton:enabled:hover {
       background: rgba(174, 213, 129, 0.04);
       border-color: transparent;
       color: #AED581; }
-    .p-button.p-button-success.p-button-text:enabled:active, .p-buttonset.p-button-success > .p-button.p-button-text:enabled:active, .p-splitbutton.p-button-success > .p-button.p-button-text:enabled:active {
+    .p-button.p-button-success.p-button-textbutton:enabled:active, .p-buttonset.p-button-success > .p-button.p-button-textbutton:enabled:active, .p-splitbutton.p-button-success > .p-button.p-button-textbutton:enabled:active, .p-fileupload-choose.p-button-success.p-button-textbutton:enabled:active {
+      background: rgba(174, 213, 129, 0.16);
+      border-color: transparent;
+      color: #AED581; }
+    .p-button.p-button-success.p-button-text:not(button):not(.p-disabled):hover, .p-buttonset.p-button-success > .p-button.p-button-text:not(button):not(.p-disabled):hover, .p-splitbutton.p-button-success > .p-button.p-button-text:not(button):not(.p-disabled):hover, .p-fileupload-choose.p-button-success.p-button-text:not(button):not(.p-disabled):hover {
+      background: rgba(174, 213, 129, 0.04);
+      border-color: transparent;
+      color: #AED581; }
+    .p-button.p-button-success.p-button-text:not(button):not(.p-disabled):active, .p-buttonset.p-button-success > .p-button.p-button-text:not(button):not(.p-disabled):active, .p-splitbutton.p-button-success > .p-button.p-button-text:not(button):not(.p-disabled):active, .p-fileupload-choose.p-button-success.p-button-text:not(button):not(.p-disabled):active {
+      background: rgba(174, 213, 129, 0.16);
+      border-color: transparent;
+      color: #AED581; }
+    .p-button.p-button-success.p-button-texta:enabled:hover, .p-buttonset.p-button-success > .p-button.p-button-texta:enabled:hover, .p-splitbutton.p-button-success > .p-button.p-button-texta:enabled:hover, .p-fileupload-choose.p-button-success.p-button-texta:enabled:hover {
+      background: rgba(174, 213, 129, 0.04);
+      border-color: transparent;
+      color: #AED581; }
+    .p-button.p-button-success.p-button-texta:enabled:active, .p-buttonset.p-button-success > .p-button.p-button-texta:enabled:active, .p-splitbutton.p-button-success > .p-button.p-button-texta:enabled:active, .p-fileupload-choose.p-button-success.p-button-texta:enabled:active {
+      background: rgba(174, 213, 129, 0.16);
+      border-color: transparent;
+      color: #AED581; }
+    .p-button.p-button-success.p-button-text:not(a):not(.p-disabled):hover, .p-buttonset.p-button-success > .p-button.p-button-text:not(a):not(.p-disabled):hover, .p-splitbutton.p-button-success > .p-button.p-button-text:not(a):not(.p-disabled):hover, .p-fileupload-choose.p-button-success.p-button-text:not(a):not(.p-disabled):hover {
+      background: rgba(174, 213, 129, 0.04);
+      border-color: transparent;
+      color: #AED581; }
+    .p-button.p-button-success.p-button-text:not(a):not(.p-disabled):active, .p-buttonset.p-button-success > .p-button.p-button-text:not(a):not(.p-disabled):active, .p-splitbutton.p-button-success > .p-button.p-button-text:not(a):not(.p-disabled):active, .p-fileupload-choose.p-button-success.p-button-text:not(a):not(.p-disabled):active {
       background: rgba(174, 213, 129, 0.16);
       border-color: transparent;
       color: #AED581; }
 
-.p-button.p-button-warning, .p-buttonset.p-button-warning > .p-button, .p-splitbutton.p-button-warning > .p-button {
+.p-button.p-button-warning, .p-buttonset.p-button-warning > .p-button, .p-splitbutton.p-button-warning > .p-button, .p-fileupload-choose.p-button-warning {
   color: #212529;
   background: #FFB74D;
   border: 1px solid #FFB74D; }
-  .p-button.p-button-warning:enabled:hover, .p-buttonset.p-button-warning > .p-button:enabled:hover, .p-splitbutton.p-button-warning > .p-button:enabled:hover {
+  .p-button.p-button-warningbutton:enabled:hover, .p-buttonset.p-button-warning > .p-buttonbutton:enabled:hover, .p-splitbutton.p-button-warning > .p-buttonbutton:enabled:hover, .p-fileupload-choose.p-button-warningbutton:enabled:hover {
     background: #FFA726;
     color: #212529;
     border-color: #FFA726; }
-  .p-button.p-button-warning:enabled:focus, .p-buttonset.p-button-warning > .p-button:enabled:focus, .p-splitbutton.p-button-warning > .p-button:enabled:focus {
+  .p-button.p-button-warningbutton:enabled:focus, .p-buttonset.p-button-warning > .p-buttonbutton:enabled:focus, .p-splitbutton.p-button-warning > .p-buttonbutton:enabled:focus, .p-fileupload-choose.p-button-warningbutton:enabled:focus {
     box-shadow: 0 0 0 0.1rem #FFFDE7; }
-  .p-button.p-button-warning:enabled:active, .p-buttonset.p-button-warning > .p-button:enabled:active, .p-splitbutton.p-button-warning > .p-button:enabled:active {
+  .p-button.p-button-warningbutton:enabled:active, .p-buttonset.p-button-warning > .p-buttonbutton:enabled:active, .p-splitbutton.p-button-warning > .p-buttonbutton:enabled:active, .p-fileupload-choose.p-button-warningbutton:enabled:active {
     background: #FF9800;
     color: #212529;
     border-color: #FF9800; }
-  .p-button.p-button-warning.p-button-outlined, .p-buttonset.p-button-warning > .p-button.p-button-outlined, .p-splitbutton.p-button-warning > .p-button.p-button-outlined {
+  .p-button.p-button-warning:not(button):not(.p-disabled):hover, .p-buttonset.p-button-warning > .p-button:not(button):not(.p-disabled):hover, .p-splitbutton.p-button-warning > .p-button:not(button):not(.p-disabled):hover, .p-fileupload-choose.p-button-warning:not(button):not(.p-disabled):hover {
+    background: #FFA726;
+    color: #212529;
+    border-color: #FFA726; }
+  .p-button.p-button-warning:not(button):not(.p-disabled):focus, .p-buttonset.p-button-warning > .p-button:not(button):not(.p-disabled):focus, .p-splitbutton.p-button-warning > .p-button:not(button):not(.p-disabled):focus, .p-fileupload-choose.p-button-warning:not(button):not(.p-disabled):focus {
+    box-shadow: 0 0 0 0.1rem #FFFDE7; }
+  .p-button.p-button-warning:not(button):not(.p-disabled):active, .p-buttonset.p-button-warning > .p-button:not(button):not(.p-disabled):active, .p-splitbutton.p-button-warning > .p-button:not(button):not(.p-disabled):active, .p-fileupload-choose.p-button-warning:not(button):not(.p-disabled):active {
+    background: #FF9800;
+    color: #212529;
+    border-color: #FF9800; }
+  .p-button.p-button-warninga:enabled:hover, .p-buttonset.p-button-warning > .p-buttona:enabled:hover, .p-splitbutton.p-button-warning > .p-buttona:enabled:hover, .p-fileupload-choose.p-button-warninga:enabled:hover {
+    background: #FFA726;
+    color: #212529;
+    border-color: #FFA726; }
+  .p-button.p-button-warninga:enabled:focus, .p-buttonset.p-button-warning > .p-buttona:enabled:focus, .p-splitbutton.p-button-warning > .p-buttona:enabled:focus, .p-fileupload-choose.p-button-warninga:enabled:focus {
+    box-shadow: 0 0 0 0.1rem #FFFDE7; }
+  .p-button.p-button-warninga:enabled:active, .p-buttonset.p-button-warning > .p-buttona:enabled:active, .p-splitbutton.p-button-warning > .p-buttona:enabled:active, .p-fileupload-choose.p-button-warninga:enabled:active {
+    background: #FF9800;
+    color: #212529;
+    border-color: #FF9800; }
+  .p-button.p-button-warning:not(a):not(.p-disabled):hover, .p-buttonset.p-button-warning > .p-button:not(a):not(.p-disabled):hover, .p-splitbutton.p-button-warning > .p-button:not(a):not(.p-disabled):hover, .p-fileupload-choose.p-button-warning:not(a):not(.p-disabled):hover {
+    background: #FFA726;
+    color: #212529;
+    border-color: #FFA726; }
+  .p-button.p-button-warning:not(a):not(.p-disabled):focus, .p-buttonset.p-button-warning > .p-button:not(a):not(.p-disabled):focus, .p-splitbutton.p-button-warning > .p-button:not(a):not(.p-disabled):focus, .p-fileupload-choose.p-button-warning:not(a):not(.p-disabled):focus {
+    box-shadow: 0 0 0 0.1rem #FFFDE7; }
+  .p-button.p-button-warning:not(a):not(.p-disabled):active, .p-buttonset.p-button-warning > .p-button:not(a):not(.p-disabled):active, .p-splitbutton.p-button-warning > .p-button:not(a):not(.p-disabled):active, .p-fileupload-choose.p-button-warning:not(a):not(.p-disabled):active {
+    background: #FF9800;
+    color: #212529;
+    border-color: #FF9800; }
+  .p-button.p-button-warning.p-button-outlined, .p-buttonset.p-button-warning > .p-button.p-button-outlined, .p-splitbutton.p-button-warning > .p-button.p-button-outlined, .p-fileupload-choose.p-button-warning.p-button-outlined {
     background-color: transparent;
     color: #FFB74D;
     border: 1px solid; }
-    .p-button.p-button-warning.p-button-outlined:enabled:hover, .p-buttonset.p-button-warning > .p-button.p-button-outlined:enabled:hover, .p-splitbutton.p-button-warning > .p-button.p-button-outlined:enabled:hover {
+    .p-button.p-button-warning.p-button-outlinedbutton:enabled:hover, .p-buttonset.p-button-warning > .p-button.p-button-outlinedbutton:enabled:hover, .p-splitbutton.p-button-warning > .p-button.p-button-outlinedbutton:enabled:hover, .p-fileupload-choose.p-button-warning.p-button-outlinedbutton:enabled:hover {
       background: rgba(255, 183, 77, 0.04);
       color: #FFB74D;
       border: 1px solid; }
-    .p-button.p-button-warning.p-button-outlined:enabled:active, .p-buttonset.p-button-warning > .p-button.p-button-outlined:enabled:active, .p-splitbutton.p-button-warning > .p-button.p-button-outlined:enabled:active {
+    .p-button.p-button-warning.p-button-outlinedbutton:enabled:active, .p-buttonset.p-button-warning > .p-button.p-button-outlinedbutton:enabled:active, .p-splitbutton.p-button-warning > .p-button.p-button-outlinedbutton:enabled:active, .p-fileupload-choose.p-button-warning.p-button-outlinedbutton:enabled:active {
       background: rgba(255, 183, 77, 0.16);
       color: #FFB74D;
       border: 1px solid; }
-  .p-button.p-button-warning.p-button-text, .p-buttonset.p-button-warning > .p-button.p-button-text, .p-splitbutton.p-button-warning > .p-button.p-button-text {
+    .p-button.p-button-warning.p-button-outlined:not(button):not(.p-disabled):hover, .p-buttonset.p-button-warning > .p-button.p-button-outlined:not(button):not(.p-disabled):hover, .p-splitbutton.p-button-warning > .p-button.p-button-outlined:not(button):not(.p-disabled):hover, .p-fileupload-choose.p-button-warning.p-button-outlined:not(button):not(.p-disabled):hover {
+      background: rgba(255, 183, 77, 0.04);
+      color: #FFB74D;
+      border: 1px solid; }
+    .p-button.p-button-warning.p-button-outlined:not(button):not(.p-disabled):active, .p-buttonset.p-button-warning > .p-button.p-button-outlined:not(button):not(.p-disabled):active, .p-splitbutton.p-button-warning > .p-button.p-button-outlined:not(button):not(.p-disabled):active, .p-fileupload-choose.p-button-warning.p-button-outlined:not(button):not(.p-disabled):active {
+      background: rgba(255, 183, 77, 0.16);
+      color: #FFB74D;
+      border: 1px solid; }
+    .p-button.p-button-warning.p-button-outlineda:enabled:hover, .p-buttonset.p-button-warning > .p-button.p-button-outlineda:enabled:hover, .p-splitbutton.p-button-warning > .p-button.p-button-outlineda:enabled:hover, .p-fileupload-choose.p-button-warning.p-button-outlineda:enabled:hover {
+      background: rgba(255, 183, 77, 0.04);
+      color: #FFB74D;
+      border: 1px solid; }
+    .p-button.p-button-warning.p-button-outlineda:enabled:active, .p-buttonset.p-button-warning > .p-button.p-button-outlineda:enabled:active, .p-splitbutton.p-button-warning > .p-button.p-button-outlineda:enabled:active, .p-fileupload-choose.p-button-warning.p-button-outlineda:enabled:active {
+      background: rgba(255, 183, 77, 0.16);
+      color: #FFB74D;
+      border: 1px solid; }
+    .p-button.p-button-warning.p-button-outlined:not(a):not(.p-disabled):hover, .p-buttonset.p-button-warning > .p-button.p-button-outlined:not(a):not(.p-disabled):hover, .p-splitbutton.p-button-warning > .p-button.p-button-outlined:not(a):not(.p-disabled):hover, .p-fileupload-choose.p-button-warning.p-button-outlined:not(a):not(.p-disabled):hover {
+      background: rgba(255, 183, 77, 0.04);
+      color: #FFB74D;
+      border: 1px solid; }
+    .p-button.p-button-warning.p-button-outlined:not(a):not(.p-disabled):active, .p-buttonset.p-button-warning > .p-button.p-button-outlined:not(a):not(.p-disabled):active, .p-splitbutton.p-button-warning > .p-button.p-button-outlined:not(a):not(.p-disabled):active, .p-fileupload-choose.p-button-warning.p-button-outlined:not(a):not(.p-disabled):active {
+      background: rgba(255, 183, 77, 0.16);
+      color: #FFB74D;
+      border: 1px solid; }
+  .p-button.p-button-warning.p-button-text, .p-buttonset.p-button-warning > .p-button.p-button-text, .p-splitbutton.p-button-warning > .p-button.p-button-text, .p-fileupload-choose.p-button-warning.p-button-text {
     background-color: transparent;
     color: #FFB74D;
     border-color: transparent; }
-    .p-button.p-button-warning.p-button-text:enabled:hover, .p-buttonset.p-button-warning > .p-button.p-button-text:enabled:hover, .p-splitbutton.p-button-warning > .p-button.p-button-text:enabled:hover {
+    .p-button.p-button-warning.p-button-textbutton:enabled:hover, .p-buttonset.p-button-warning > .p-button.p-button-textbutton:enabled:hover, .p-splitbutton.p-button-warning > .p-button.p-button-textbutton:enabled:hover, .p-fileupload-choose.p-button-warning.p-button-textbutton:enabled:hover {
       background: rgba(255, 183, 77, 0.04);
       border-color: transparent;
       color: #FFB74D; }
-    .p-button.p-button-warning.p-button-text:enabled:active, .p-buttonset.p-button-warning > .p-button.p-button-text:enabled:active, .p-splitbutton.p-button-warning > .p-button.p-button-text:enabled:active {
+    .p-button.p-button-warning.p-button-textbutton:enabled:active, .p-buttonset.p-button-warning > .p-button.p-button-textbutton:enabled:active, .p-splitbutton.p-button-warning > .p-button.p-button-textbutton:enabled:active, .p-fileupload-choose.p-button-warning.p-button-textbutton:enabled:active {
+      background: rgba(255, 183, 77, 0.16);
+      border-color: transparent;
+      color: #FFB74D; }
+    .p-button.p-button-warning.p-button-text:not(button):not(.p-disabled):hover, .p-buttonset.p-button-warning > .p-button.p-button-text:not(button):not(.p-disabled):hover, .p-splitbutton.p-button-warning > .p-button.p-button-text:not(button):not(.p-disabled):hover, .p-fileupload-choose.p-button-warning.p-button-text:not(button):not(.p-disabled):hover {
+      background: rgba(255, 183, 77, 0.04);
+      border-color: transparent;
+      color: #FFB74D; }
+    .p-button.p-button-warning.p-button-text:not(button):not(.p-disabled):active, .p-buttonset.p-button-warning > .p-button.p-button-text:not(button):not(.p-disabled):active, .p-splitbutton.p-button-warning > .p-button.p-button-text:not(button):not(.p-disabled):active, .p-fileupload-choose.p-button-warning.p-button-text:not(button):not(.p-disabled):active {
+      background: rgba(255, 183, 77, 0.16);
+      border-color: transparent;
+      color: #FFB74D; }
+    .p-button.p-button-warning.p-button-texta:enabled:hover, .p-buttonset.p-button-warning > .p-button.p-button-texta:enabled:hover, .p-splitbutton.p-button-warning > .p-button.p-button-texta:enabled:hover, .p-fileupload-choose.p-button-warning.p-button-texta:enabled:hover {
+      background: rgba(255, 183, 77, 0.04);
+      border-color: transparent;
+      color: #FFB74D; }
+    .p-button.p-button-warning.p-button-texta:enabled:active, .p-buttonset.p-button-warning > .p-button.p-button-texta:enabled:active, .p-splitbutton.p-button-warning > .p-button.p-button-texta:enabled:active, .p-fileupload-choose.p-button-warning.p-button-texta:enabled:active {
+      background: rgba(255, 183, 77, 0.16);
+      border-color: transparent;
+      color: #FFB74D; }
+    .p-button.p-button-warning.p-button-text:not(a):not(.p-disabled):hover, .p-buttonset.p-button-warning > .p-button.p-button-text:not(a):not(.p-disabled):hover, .p-splitbutton.p-button-warning > .p-button.p-button-text:not(a):not(.p-disabled):hover, .p-fileupload-choose.p-button-warning.p-button-text:not(a):not(.p-disabled):hover {
+      background: rgba(255, 183, 77, 0.04);
+      border-color: transparent;
+      color: #FFB74D; }
+    .p-button.p-button-warning.p-button-text:not(a):not(.p-disabled):active, .p-buttonset.p-button-warning > .p-button.p-button-text:not(a):not(.p-disabled):active, .p-splitbutton.p-button-warning > .p-button.p-button-text:not(a):not(.p-disabled):active, .p-fileupload-choose.p-button-warning.p-button-text:not(a):not(.p-disabled):active {
       background: rgba(255, 183, 77, 0.16);
       border-color: transparent;
       color: #FFB74D; }
 
-.p-button.p-button-help, .p-buttonset.p-button-help > .p-button, .p-splitbutton.p-button-help > .p-button {
+.p-button.p-button-help, .p-buttonset.p-button-help > .p-button, .p-splitbutton.p-button-help > .p-button, .p-fileupload-choose.p-button-help {
   color: #121212;
   background: #CE93D8;
   border: 1px solid #CE93D8; }
-  .p-button.p-button-help:enabled:hover, .p-buttonset.p-button-help > .p-button:enabled:hover, .p-splitbutton.p-button-help > .p-button:enabled:hover {
+  .p-button.p-button-helpbutton:enabled:hover, .p-buttonset.p-button-help > .p-buttonbutton:enabled:hover, .p-splitbutton.p-button-help > .p-buttonbutton:enabled:hover, .p-fileupload-choose.p-button-helpbutton:enabled:hover {
     background: #BA68C8;
     color: #121212;
     border-color: #BA68C8; }
-  .p-button.p-button-help:enabled:focus, .p-buttonset.p-button-help > .p-button:enabled:focus, .p-splitbutton.p-button-help > .p-button:enabled:focus {
+  .p-button.p-button-helpbutton:enabled:focus, .p-buttonset.p-button-help > .p-buttonbutton:enabled:focus, .p-splitbutton.p-button-help > .p-buttonbutton:enabled:focus, .p-fileupload-choose.p-button-helpbutton:enabled:focus {
     box-shadow: 0 0 0 1px #CE93D8; }
-  .p-button.p-button-help:enabled:active, .p-buttonset.p-button-help > .p-button:enabled:active, .p-splitbutton.p-button-help > .p-button:enabled:active {
+  .p-button.p-button-helpbutton:enabled:active, .p-buttonset.p-button-help > .p-buttonbutton:enabled:active, .p-splitbutton.p-button-help > .p-buttonbutton:enabled:active, .p-fileupload-choose.p-button-helpbutton:enabled:active {
     background: #AB47BC;
     color: #121212;
     border-color: #AB47BC; }
-  .p-button.p-button-help.p-button-outlined, .p-buttonset.p-button-help > .p-button.p-button-outlined, .p-splitbutton.p-button-help > .p-button.p-button-outlined {
+  .p-button.p-button-help:not(button):not(.p-disabled):hover, .p-buttonset.p-button-help > .p-button:not(button):not(.p-disabled):hover, .p-splitbutton.p-button-help > .p-button:not(button):not(.p-disabled):hover, .p-fileupload-choose.p-button-help:not(button):not(.p-disabled):hover {
+    background: #BA68C8;
+    color: #121212;
+    border-color: #BA68C8; }
+  .p-button.p-button-help:not(button):not(.p-disabled):focus, .p-buttonset.p-button-help > .p-button:not(button):not(.p-disabled):focus, .p-splitbutton.p-button-help > .p-button:not(button):not(.p-disabled):focus, .p-fileupload-choose.p-button-help:not(button):not(.p-disabled):focus {
+    box-shadow: 0 0 0 1px #CE93D8; }
+  .p-button.p-button-help:not(button):not(.p-disabled):active, .p-buttonset.p-button-help > .p-button:not(button):not(.p-disabled):active, .p-splitbutton.p-button-help > .p-button:not(button):not(.p-disabled):active, .p-fileupload-choose.p-button-help:not(button):not(.p-disabled):active {
+    background: #AB47BC;
+    color: #121212;
+    border-color: #AB47BC; }
+  .p-button.p-button-helpa:enabled:hover, .p-buttonset.p-button-help > .p-buttona:enabled:hover, .p-splitbutton.p-button-help > .p-buttona:enabled:hover, .p-fileupload-choose.p-button-helpa:enabled:hover {
+    background: #BA68C8;
+    color: #121212;
+    border-color: #BA68C8; }
+  .p-button.p-button-helpa:enabled:focus, .p-buttonset.p-button-help > .p-buttona:enabled:focus, .p-splitbutton.p-button-help > .p-buttona:enabled:focus, .p-fileupload-choose.p-button-helpa:enabled:focus {
+    box-shadow: 0 0 0 1px #CE93D8; }
+  .p-button.p-button-helpa:enabled:active, .p-buttonset.p-button-help > .p-buttona:enabled:active, .p-splitbutton.p-button-help > .p-buttona:enabled:active, .p-fileupload-choose.p-button-helpa:enabled:active {
+    background: #AB47BC;
+    color: #121212;
+    border-color: #AB47BC; }
+  .p-button.p-button-help:not(a):not(.p-disabled):hover, .p-buttonset.p-button-help > .p-button:not(a):not(.p-disabled):hover, .p-splitbutton.p-button-help > .p-button:not(a):not(.p-disabled):hover, .p-fileupload-choose.p-button-help:not(a):not(.p-disabled):hover {
+    background: #BA68C8;
+    color: #121212;
+    border-color: #BA68C8; }
+  .p-button.p-button-help:not(a):not(.p-disabled):focus, .p-buttonset.p-button-help > .p-button:not(a):not(.p-disabled):focus, .p-splitbutton.p-button-help > .p-button:not(a):not(.p-disabled):focus, .p-fileupload-choose.p-button-help:not(a):not(.p-disabled):focus {
+    box-shadow: 0 0 0 1px #CE93D8; }
+  .p-button.p-button-help:not(a):not(.p-disabled):active, .p-buttonset.p-button-help > .p-button:not(a):not(.p-disabled):active, .p-splitbutton.p-button-help > .p-button:not(a):not(.p-disabled):active, .p-fileupload-choose.p-button-help:not(a):not(.p-disabled):active {
+    background: #AB47BC;
+    color: #121212;
+    border-color: #AB47BC; }
+  .p-button.p-button-help.p-button-outlined, .p-buttonset.p-button-help > .p-button.p-button-outlined, .p-splitbutton.p-button-help > .p-button.p-button-outlined, .p-fileupload-choose.p-button-help.p-button-outlined {
     background-color: transparent;
     color: #CE93D8;
     border: 1px solid; }
-    .p-button.p-button-help.p-button-outlined:enabled:hover, .p-buttonset.p-button-help > .p-button.p-button-outlined:enabled:hover, .p-splitbutton.p-button-help > .p-button.p-button-outlined:enabled:hover {
+    .p-button.p-button-help.p-button-outlinedbutton:enabled:hover, .p-buttonset.p-button-help > .p-button.p-button-outlinedbutton:enabled:hover, .p-splitbutton.p-button-help > .p-button.p-button-outlinedbutton:enabled:hover, .p-fileupload-choose.p-button-help.p-button-outlinedbutton:enabled:hover {
       background: rgba(206, 147, 216, 0.04);
       color: #CE93D8;
       border: 1px solid; }
-    .p-button.p-button-help.p-button-outlined:enabled:active, .p-buttonset.p-button-help > .p-button.p-button-outlined:enabled:active, .p-splitbutton.p-button-help > .p-button.p-button-outlined:enabled:active {
+    .p-button.p-button-help.p-button-outlinedbutton:enabled:active, .p-buttonset.p-button-help > .p-button.p-button-outlinedbutton:enabled:active, .p-splitbutton.p-button-help > .p-button.p-button-outlinedbutton:enabled:active, .p-fileupload-choose.p-button-help.p-button-outlinedbutton:enabled:active {
       background: rgba(206, 147, 216, 0.16);
       color: #CE93D8;
       border: 1px solid; }
-  .p-button.p-button-help.p-button-text, .p-buttonset.p-button-help > .p-button.p-button-text, .p-splitbutton.p-button-help > .p-button.p-button-text {
+    .p-button.p-button-help.p-button-outlined:not(button):not(.p-disabled):hover, .p-buttonset.p-button-help > .p-button.p-button-outlined:not(button):not(.p-disabled):hover, .p-splitbutton.p-button-help > .p-button.p-button-outlined:not(button):not(.p-disabled):hover, .p-fileupload-choose.p-button-help.p-button-outlined:not(button):not(.p-disabled):hover {
+      background: rgba(206, 147, 216, 0.04);
+      color: #CE93D8;
+      border: 1px solid; }
+    .p-button.p-button-help.p-button-outlined:not(button):not(.p-disabled):active, .p-buttonset.p-button-help > .p-button.p-button-outlined:not(button):not(.p-disabled):active, .p-splitbutton.p-button-help > .p-button.p-button-outlined:not(button):not(.p-disabled):active, .p-fileupload-choose.p-button-help.p-button-outlined:not(button):not(.p-disabled):active {
+      background: rgba(206, 147, 216, 0.16);
+      color: #CE93D8;
+      border: 1px solid; }
+    .p-button.p-button-help.p-button-outlineda:enabled:hover, .p-buttonset.p-button-help > .p-button.p-button-outlineda:enabled:hover, .p-splitbutton.p-button-help > .p-button.p-button-outlineda:enabled:hover, .p-fileupload-choose.p-button-help.p-button-outlineda:enabled:hover {
+      background: rgba(206, 147, 216, 0.04);
+      color: #CE93D8;
+      border: 1px solid; }
+    .p-button.p-button-help.p-button-outlineda:enabled:active, .p-buttonset.p-button-help > .p-button.p-button-outlineda:enabled:active, .p-splitbutton.p-button-help > .p-button.p-button-outlineda:enabled:active, .p-fileupload-choose.p-button-help.p-button-outlineda:enabled:active {
+      background: rgba(206, 147, 216, 0.16);
+      color: #CE93D8;
+      border: 1px solid; }
+    .p-button.p-button-help.p-button-outlined:not(a):not(.p-disabled):hover, .p-buttonset.p-button-help > .p-button.p-button-outlined:not(a):not(.p-disabled):hover, .p-splitbutton.p-button-help > .p-button.p-button-outlined:not(a):not(.p-disabled):hover, .p-fileupload-choose.p-button-help.p-button-outlined:not(a):not(.p-disabled):hover {
+      background: rgba(206, 147, 216, 0.04);
+      color: #CE93D8;
+      border: 1px solid; }
+    .p-button.p-button-help.p-button-outlined:not(a):not(.p-disabled):active, .p-buttonset.p-button-help > .p-button.p-button-outlined:not(a):not(.p-disabled):active, .p-splitbutton.p-button-help > .p-button.p-button-outlined:not(a):not(.p-disabled):active, .p-fileupload-choose.p-button-help.p-button-outlined:not(a):not(.p-disabled):active {
+      background: rgba(206, 147, 216, 0.16);
+      color: #CE93D8;
+      border: 1px solid; }
+  .p-button.p-button-help.p-button-text, .p-buttonset.p-button-help > .p-button.p-button-text, .p-splitbutton.p-button-help > .p-button.p-button-text, .p-fileupload-choose.p-button-help.p-button-text {
     background-color: transparent;
     color: #CE93D8;
     border-color: transparent; }
-    .p-button.p-button-help.p-button-text:enabled:hover, .p-buttonset.p-button-help > .p-button.p-button-text:enabled:hover, .p-splitbutton.p-button-help > .p-button.p-button-text:enabled:hover {
+    .p-button.p-button-help.p-button-textbutton:enabled:hover, .p-buttonset.p-button-help > .p-button.p-button-textbutton:enabled:hover, .p-splitbutton.p-button-help > .p-button.p-button-textbutton:enabled:hover, .p-fileupload-choose.p-button-help.p-button-textbutton:enabled:hover {
       background: rgba(206, 147, 216, 0.04);
       border-color: transparent;
       color: #CE93D8; }
-    .p-button.p-button-help.p-button-text:enabled:active, .p-buttonset.p-button-help > .p-button.p-button-text:enabled:active, .p-splitbutton.p-button-help > .p-button.p-button-text:enabled:active {
+    .p-button.p-button-help.p-button-textbutton:enabled:active, .p-buttonset.p-button-help > .p-button.p-button-textbutton:enabled:active, .p-splitbutton.p-button-help > .p-button.p-button-textbutton:enabled:active, .p-fileupload-choose.p-button-help.p-button-textbutton:enabled:active {
+      background: rgba(206, 147, 216, 0.16);
+      border-color: transparent;
+      color: #CE93D8; }
+    .p-button.p-button-help.p-button-text:not(button):not(.p-disabled):hover, .p-buttonset.p-button-help > .p-button.p-button-text:not(button):not(.p-disabled):hover, .p-splitbutton.p-button-help > .p-button.p-button-text:not(button):not(.p-disabled):hover, .p-fileupload-choose.p-button-help.p-button-text:not(button):not(.p-disabled):hover {
+      background: rgba(206, 147, 216, 0.04);
+      border-color: transparent;
+      color: #CE93D8; }
+    .p-button.p-button-help.p-button-text:not(button):not(.p-disabled):active, .p-buttonset.p-button-help > .p-button.p-button-text:not(button):not(.p-disabled):active, .p-splitbutton.p-button-help > .p-button.p-button-text:not(button):not(.p-disabled):active, .p-fileupload-choose.p-button-help.p-button-text:not(button):not(.p-disabled):active {
+      background: rgba(206, 147, 216, 0.16);
+      border-color: transparent;
+      color: #CE93D8; }
+    .p-button.p-button-help.p-button-texta:enabled:hover, .p-buttonset.p-button-help > .p-button.p-button-texta:enabled:hover, .p-splitbutton.p-button-help > .p-button.p-button-texta:enabled:hover, .p-fileupload-choose.p-button-help.p-button-texta:enabled:hover {
+      background: rgba(206, 147, 216, 0.04);
+      border-color: transparent;
+      color: #CE93D8; }
+    .p-button.p-button-help.p-button-texta:enabled:active, .p-buttonset.p-button-help > .p-button.p-button-texta:enabled:active, .p-splitbutton.p-button-help > .p-button.p-button-texta:enabled:active, .p-fileupload-choose.p-button-help.p-button-texta:enabled:active {
+      background: rgba(206, 147, 216, 0.16);
+      border-color: transparent;
+      color: #CE93D8; }
+    .p-button.p-button-help.p-button-text:not(a):not(.p-disabled):hover, .p-buttonset.p-button-help > .p-button.p-button-text:not(a):not(.p-disabled):hover, .p-splitbutton.p-button-help > .p-button.p-button-text:not(a):not(.p-disabled):hover, .p-fileupload-choose.p-button-help.p-button-text:not(a):not(.p-disabled):hover {
+      background: rgba(206, 147, 216, 0.04);
+      border-color: transparent;
+      color: #CE93D8; }
+    .p-button.p-button-help.p-button-text:not(a):not(.p-disabled):active, .p-buttonset.p-button-help > .p-button.p-button-text:not(a):not(.p-disabled):active, .p-splitbutton.p-button-help > .p-button.p-button-text:not(a):not(.p-disabled):active, .p-fileupload-choose.p-button-help.p-button-text:not(a):not(.p-disabled):active {
       background: rgba(206, 147, 216, 0.16);
       border-color: transparent;
       color: #CE93D8; }
 
-.p-button.p-button-danger, .p-buttonset.p-button-danger > .p-button, .p-splitbutton.p-button-danger > .p-button {
+.p-button.p-button-danger, .p-buttonset.p-button-danger > .p-button, .p-splitbutton.p-button-danger > .p-button, .p-fileupload-choose.p-button-danger {
   color: #212529;
   background: #E57373;
   border: 1px solid #E57373; }
-  .p-button.p-button-danger:enabled:hover, .p-buttonset.p-button-danger > .p-button:enabled:hover, .p-splitbutton.p-button-danger > .p-button:enabled:hover {
+  .p-button.p-button-dangerbutton:enabled:hover, .p-buttonset.p-button-danger > .p-buttonbutton:enabled:hover, .p-splitbutton.p-button-danger > .p-buttonbutton:enabled:hover, .p-fileupload-choose.p-button-dangerbutton:enabled:hover {
     background: #EF5350;
     color: #212529;
     border-color: #EF5350; }
-  .p-button.p-button-danger:enabled:focus, .p-buttonset.p-button-danger > .p-button:enabled:focus, .p-splitbutton.p-button-danger > .p-button:enabled:focus {
+  .p-button.p-button-dangerbutton:enabled:focus, .p-buttonset.p-button-danger > .p-buttonbutton:enabled:focus, .p-splitbutton.p-button-danger > .p-buttonbutton:enabled:focus, .p-fileupload-choose.p-button-dangerbutton:enabled:focus {
     box-shadow: 0 0 0 0.1rem #FFEBEE; }
-  .p-button.p-button-danger:enabled:active, .p-buttonset.p-button-danger > .p-button:enabled:active, .p-splitbutton.p-button-danger > .p-button:enabled:active {
+  .p-button.p-button-dangerbutton:enabled:active, .p-buttonset.p-button-danger > .p-buttonbutton:enabled:active, .p-splitbutton.p-button-danger > .p-buttonbutton:enabled:active, .p-fileupload-choose.p-button-dangerbutton:enabled:active {
     background: #F44336;
     color: #212529;
     border-color: #F44336; }
-  .p-button.p-button-danger.p-button-outlined, .p-buttonset.p-button-danger > .p-button.p-button-outlined, .p-splitbutton.p-button-danger > .p-button.p-button-outlined {
+  .p-button.p-button-danger:not(button):not(.p-disabled):hover, .p-buttonset.p-button-danger > .p-button:not(button):not(.p-disabled):hover, .p-splitbutton.p-button-danger > .p-button:not(button):not(.p-disabled):hover, .p-fileupload-choose.p-button-danger:not(button):not(.p-disabled):hover {
+    background: #EF5350;
+    color: #212529;
+    border-color: #EF5350; }
+  .p-button.p-button-danger:not(button):not(.p-disabled):focus, .p-buttonset.p-button-danger > .p-button:not(button):not(.p-disabled):focus, .p-splitbutton.p-button-danger > .p-button:not(button):not(.p-disabled):focus, .p-fileupload-choose.p-button-danger:not(button):not(.p-disabled):focus {
+    box-shadow: 0 0 0 0.1rem #FFEBEE; }
+  .p-button.p-button-danger:not(button):not(.p-disabled):active, .p-buttonset.p-button-danger > .p-button:not(button):not(.p-disabled):active, .p-splitbutton.p-button-danger > .p-button:not(button):not(.p-disabled):active, .p-fileupload-choose.p-button-danger:not(button):not(.p-disabled):active {
+    background: #F44336;
+    color: #212529;
+    border-color: #F44336; }
+  .p-button.p-button-dangera:enabled:hover, .p-buttonset.p-button-danger > .p-buttona:enabled:hover, .p-splitbutton.p-button-danger > .p-buttona:enabled:hover, .p-fileupload-choose.p-button-dangera:enabled:hover {
+    background: #EF5350;
+    color: #212529;
+    border-color: #EF5350; }
+  .p-button.p-button-dangera:enabled:focus, .p-buttonset.p-button-danger > .p-buttona:enabled:focus, .p-splitbutton.p-button-danger > .p-buttona:enabled:focus, .p-fileupload-choose.p-button-dangera:enabled:focus {
+    box-shadow: 0 0 0 0.1rem #FFEBEE; }
+  .p-button.p-button-dangera:enabled:active, .p-buttonset.p-button-danger > .p-buttona:enabled:active, .p-splitbutton.p-button-danger > .p-buttona:enabled:active, .p-fileupload-choose.p-button-dangera:enabled:active {
+    background: #F44336;
+    color: #212529;
+    border-color: #F44336; }
+  .p-button.p-button-danger:not(a):not(.p-disabled):hover, .p-buttonset.p-button-danger > .p-button:not(a):not(.p-disabled):hover, .p-splitbutton.p-button-danger > .p-button:not(a):not(.p-disabled):hover, .p-fileupload-choose.p-button-danger:not(a):not(.p-disabled):hover {
+    background: #EF5350;
+    color: #212529;
+    border-color: #EF5350; }
+  .p-button.p-button-danger:not(a):not(.p-disabled):focus, .p-buttonset.p-button-danger > .p-button:not(a):not(.p-disabled):focus, .p-splitbutton.p-button-danger > .p-button:not(a):not(.p-disabled):focus, .p-fileupload-choose.p-button-danger:not(a):not(.p-disabled):focus {
+    box-shadow: 0 0 0 0.1rem #FFEBEE; }
+  .p-button.p-button-danger:not(a):not(.p-disabled):active, .p-buttonset.p-button-danger > .p-button:not(a):not(.p-disabled):active, .p-splitbutton.p-button-danger > .p-button:not(a):not(.p-disabled):active, .p-fileupload-choose.p-button-danger:not(a):not(.p-disabled):active {
+    background: #F44336;
+    color: #212529;
+    border-color: #F44336; }
+  .p-button.p-button-danger.p-button-outlined, .p-buttonset.p-button-danger > .p-button.p-button-outlined, .p-splitbutton.p-button-danger > .p-button.p-button-outlined, .p-fileupload-choose.p-button-danger.p-button-outlined {
     background-color: transparent;
     color: #E57373;
     border: 1px solid; }
-    .p-button.p-button-danger.p-button-outlined:enabled:hover, .p-buttonset.p-button-danger > .p-button.p-button-outlined:enabled:hover, .p-splitbutton.p-button-danger > .p-button.p-button-outlined:enabled:hover {
+    .p-button.p-button-danger.p-button-outlinedbutton:enabled:hover, .p-buttonset.p-button-danger > .p-button.p-button-outlinedbutton:enabled:hover, .p-splitbutton.p-button-danger > .p-button.p-button-outlinedbutton:enabled:hover, .p-fileupload-choose.p-button-danger.p-button-outlinedbutton:enabled:hover {
       background: rgba(229, 115, 115, 0.04);
       color: #E57373;
       border: 1px solid; }
-    .p-button.p-button-danger.p-button-outlined:enabled:active, .p-buttonset.p-button-danger > .p-button.p-button-outlined:enabled:active, .p-splitbutton.p-button-danger > .p-button.p-button-outlined:enabled:active {
+    .p-button.p-button-danger.p-button-outlinedbutton:enabled:active, .p-buttonset.p-button-danger > .p-button.p-button-outlinedbutton:enabled:active, .p-splitbutton.p-button-danger > .p-button.p-button-outlinedbutton:enabled:active, .p-fileupload-choose.p-button-danger.p-button-outlinedbutton:enabled:active {
       background: rgba(229, 115, 115, 0.16);
       color: #E57373;
       border: 1px solid; }
-  .p-button.p-button-danger.p-button-text, .p-buttonset.p-button-danger > .p-button.p-button-text, .p-splitbutton.p-button-danger > .p-button.p-button-text {
+    .p-button.p-button-danger.p-button-outlined:not(button):not(.p-disabled):hover, .p-buttonset.p-button-danger > .p-button.p-button-outlined:not(button):not(.p-disabled):hover, .p-splitbutton.p-button-danger > .p-button.p-button-outlined:not(button):not(.p-disabled):hover, .p-fileupload-choose.p-button-danger.p-button-outlined:not(button):not(.p-disabled):hover {
+      background: rgba(229, 115, 115, 0.04);
+      color: #E57373;
+      border: 1px solid; }
+    .p-button.p-button-danger.p-button-outlined:not(button):not(.p-disabled):active, .p-buttonset.p-button-danger > .p-button.p-button-outlined:not(button):not(.p-disabled):active, .p-splitbutton.p-button-danger > .p-button.p-button-outlined:not(button):not(.p-disabled):active, .p-fileupload-choose.p-button-danger.p-button-outlined:not(button):not(.p-disabled):active {
+      background: rgba(229, 115, 115, 0.16);
+      color: #E57373;
+      border: 1px solid; }
+    .p-button.p-button-danger.p-button-outlineda:enabled:hover, .p-buttonset.p-button-danger > .p-button.p-button-outlineda:enabled:hover, .p-splitbutton.p-button-danger > .p-button.p-button-outlineda:enabled:hover, .p-fileupload-choose.p-button-danger.p-button-outlineda:enabled:hover {
+      background: rgba(229, 115, 115, 0.04);
+      color: #E57373;
+      border: 1px solid; }
+    .p-button.p-button-danger.p-button-outlineda:enabled:active, .p-buttonset.p-button-danger > .p-button.p-button-outlineda:enabled:active, .p-splitbutton.p-button-danger > .p-button.p-button-outlineda:enabled:active, .p-fileupload-choose.p-button-danger.p-button-outlineda:enabled:active {
+      background: rgba(229, 115, 115, 0.16);
+      color: #E57373;
+      border: 1px solid; }
+    .p-button.p-button-danger.p-button-outlined:not(a):not(.p-disabled):hover, .p-buttonset.p-button-danger > .p-button.p-button-outlined:not(a):not(.p-disabled):hover, .p-splitbutton.p-button-danger > .p-button.p-button-outlined:not(a):not(.p-disabled):hover, .p-fileupload-choose.p-button-danger.p-button-outlined:not(a):not(.p-disabled):hover {
+      background: rgba(229, 115, 115, 0.04);
+      color: #E57373;
+      border: 1px solid; }
+    .p-button.p-button-danger.p-button-outlined:not(a):not(.p-disabled):active, .p-buttonset.p-button-danger > .p-button.p-button-outlined:not(a):not(.p-disabled):active, .p-splitbutton.p-button-danger > .p-button.p-button-outlined:not(a):not(.p-disabled):active, .p-fileupload-choose.p-button-danger.p-button-outlined:not(a):not(.p-disabled):active {
+      background: rgba(229, 115, 115, 0.16);
+      color: #E57373;
+      border: 1px solid; }
+  .p-button.p-button-danger.p-button-text, .p-buttonset.p-button-danger > .p-button.p-button-text, .p-splitbutton.p-button-danger > .p-button.p-button-text, .p-fileupload-choose.p-button-danger.p-button-text {
     background-color: transparent;
     color: #E57373;
     border-color: transparent; }
-    .p-button.p-button-danger.p-button-text:enabled:hover, .p-buttonset.p-button-danger > .p-button.p-button-text:enabled:hover, .p-splitbutton.p-button-danger > .p-button.p-button-text:enabled:hover {
+    .p-button.p-button-danger.p-button-textbutton:enabled:hover, .p-buttonset.p-button-danger > .p-button.p-button-textbutton:enabled:hover, .p-splitbutton.p-button-danger > .p-button.p-button-textbutton:enabled:hover, .p-fileupload-choose.p-button-danger.p-button-textbutton:enabled:hover {
       background: rgba(229, 115, 115, 0.04);
       border-color: transparent;
       color: #E57373; }
-    .p-button.p-button-danger.p-button-text:enabled:active, .p-buttonset.p-button-danger > .p-button.p-button-text:enabled:active, .p-splitbutton.p-button-danger > .p-button.p-button-text:enabled:active {
+    .p-button.p-button-danger.p-button-textbutton:enabled:active, .p-buttonset.p-button-danger > .p-button.p-button-textbutton:enabled:active, .p-splitbutton.p-button-danger > .p-button.p-button-textbutton:enabled:active, .p-fileupload-choose.p-button-danger.p-button-textbutton:enabled:active {
+      background: rgba(229, 115, 115, 0.16);
+      border-color: transparent;
+      color: #E57373; }
+    .p-button.p-button-danger.p-button-text:not(button):not(.p-disabled):hover, .p-buttonset.p-button-danger > .p-button.p-button-text:not(button):not(.p-disabled):hover, .p-splitbutton.p-button-danger > .p-button.p-button-text:not(button):not(.p-disabled):hover, .p-fileupload-choose.p-button-danger.p-button-text:not(button):not(.p-disabled):hover {
+      background: rgba(229, 115, 115, 0.04);
+      border-color: transparent;
+      color: #E57373; }
+    .p-button.p-button-danger.p-button-text:not(button):not(.p-disabled):active, .p-buttonset.p-button-danger > .p-button.p-button-text:not(button):not(.p-disabled):active, .p-splitbutton.p-button-danger > .p-button.p-button-text:not(button):not(.p-disabled):active, .p-fileupload-choose.p-button-danger.p-button-text:not(button):not(.p-disabled):active {
+      background: rgba(229, 115, 115, 0.16);
+      border-color: transparent;
+      color: #E57373; }
+    .p-button.p-button-danger.p-button-texta:enabled:hover, .p-buttonset.p-button-danger > .p-button.p-button-texta:enabled:hover, .p-splitbutton.p-button-danger > .p-button.p-button-texta:enabled:hover, .p-fileupload-choose.p-button-danger.p-button-texta:enabled:hover {
+      background: rgba(229, 115, 115, 0.04);
+      border-color: transparent;
+      color: #E57373; }
+    .p-button.p-button-danger.p-button-texta:enabled:active, .p-buttonset.p-button-danger > .p-button.p-button-texta:enabled:active, .p-splitbutton.p-button-danger > .p-button.p-button-texta:enabled:active, .p-fileupload-choose.p-button-danger.p-button-texta:enabled:active {
+      background: rgba(229, 115, 115, 0.16);
+      border-color: transparent;
+      color: #E57373; }
+    .p-button.p-button-danger.p-button-text:not(a):not(.p-disabled):hover, .p-buttonset.p-button-danger > .p-button.p-button-text:not(a):not(.p-disabled):hover, .p-splitbutton.p-button-danger > .p-button.p-button-text:not(a):not(.p-disabled):hover, .p-fileupload-choose.p-button-danger.p-button-text:not(a):not(.p-disabled):hover {
+      background: rgba(229, 115, 115, 0.04);
+      border-color: transparent;
+      color: #E57373; }
+    .p-button.p-button-danger.p-button-text:not(a):not(.p-disabled):active, .p-buttonset.p-button-danger > .p-button.p-button-text:not(a):not(.p-disabled):active, .p-splitbutton.p-button-danger > .p-button.p-button-text:not(a):not(.p-disabled):active, .p-fileupload-choose.p-button-danger.p-button-text:not(a):not(.p-disabled):active {
       background: rgba(229, 115, 115, 0.16);
       border-color: transparent;
       color: #E57373; }
@@ -1574,17 +2150,59 @@
   color: #81D4FA;
   background: transparent;
   border: transparent; }
-  .p-button.p-button-link:enabled:hover {
+  .p-button.p-button-linkbutton:enabled:hover {
     background: transparent;
     color: #81D4FA;
     border-color: transparent; }
-    .p-button.p-button-link:enabled:hover .p-button-label {
+    .p-button.p-button-linkbutton:enabled:hover .p-button-label {
       text-decoration: underline; }
-  .p-button.p-button-link:enabled:focus {
+  .p-button.p-button-linkbutton:enabled:focus {
     background: transparent;
     box-shadow: 0 0 0 0.2rem white;
     border-color: transparent; }
-  .p-button.p-button-link:enabled:active {
+  .p-button.p-button-linkbutton:enabled:active {
+    background: transparent;
+    color: #81D4FA;
+    border-color: transparent; }
+  .p-button.p-button-link:not(button):not(.p-disabled):hover {
+    background: transparent;
+    color: #81D4FA;
+    border-color: transparent; }
+    .p-button.p-button-link:not(button):not(.p-disabled):hover .p-button-label {
+      text-decoration: underline; }
+  .p-button.p-button-link:not(button):not(.p-disabled):focus {
+    background: transparent;
+    box-shadow: 0 0 0 0.2rem white;
+    border-color: transparent; }
+  .p-button.p-button-link:not(button):not(.p-disabled):active {
+    background: transparent;
+    color: #81D4FA;
+    border-color: transparent; }
+  .p-button.p-button-linka:enabled:hover {
+    background: transparent;
+    color: #81D4FA;
+    border-color: transparent; }
+    .p-button.p-button-linka:enabled:hover .p-button-label {
+      text-decoration: underline; }
+  .p-button.p-button-linka:enabled:focus {
+    background: transparent;
+    box-shadow: 0 0 0 0.2rem white;
+    border-color: transparent; }
+  .p-button.p-button-linka:enabled:active {
+    background: transparent;
+    color: #81D4FA;
+    border-color: transparent; }
+  .p-button.p-button-link:not(a):not(.p-disabled):hover {
+    background: transparent;
+    color: #81D4FA;
+    border-color: transparent; }
+    .p-button.p-button-link:not(a):not(.p-disabled):hover .p-button-label {
+      text-decoration: underline; }
+  .p-button.p-button-link:not(a):not(.p-disabled):focus {
+    background: transparent;
+    box-shadow: 0 0 0 0.2rem white;
+    border-color: transparent; }
+  .p-button.p-button-link:not(a):not(.p-disabled):active {
     background: transparent;
     color: #81D4FA;
     border-color: transparent; }
@@ -2763,10 +3381,6 @@
   border-top-left-radius: 3px; }
   .p-fileupload .p-fileupload-buttonbar .p-button {
     margin-right: 0.5rem; }
-    .p-fileupload .p-fileupload-buttonbar .p-button.p-fileupload-choose.p-focus {
-      outline: 0 none;
-      outline-offset: 0;
-      box-shadow: 0 0 0 0.1rem white; }
 .p-fileupload .p-fileupload-content {
   background: #323232;
   padding: 0.571rem 1rem;
@@ -2780,15 +3394,6 @@
   padding: 0.571rem 0.857rem; }
 .p-fileupload.p-fileupload-advanced .p-message {
   margin-top: 0; }
-
-.p-fileupload-choose:not(.p-disabled):hover {
-  background: #4FC3F7;
-  color: #212529;
-  border-color: #4FC3F7; }
-.p-fileupload-choose:not(.p-disabled):active {
-  background: #29B6F6;
-  color: #212529;
-  border-color: #29B6F6; }
 
 .p-breadcrumb {
   background: #252525;
