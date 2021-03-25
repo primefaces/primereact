@@ -159,7 +159,7 @@ export class DataTableExportDemo extends Component {
 
     onImportSelectionChange(e) {
         this.setState({ selectedImportedData: e.value }, () => {
-            const detail = this.state.selectedImportedData.map(d => Object.values(d)[0]).join(',');
+            const detail = this.state.selectedImportedData.map(d => Object.values(d)[0]).join(', ');
             this.toast.show({ severity: 'info', summary: 'Data Selected', detail, life: 3000 });
         });
     }
@@ -194,8 +194,8 @@ export class DataTableExportDemo extends Component {
                         <Toast ref={(el) => this.toast = el} />
 
                         <div className="p-d-flex p-ai-center p-py-2">
-                            <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file-o' }} mode="basic" name="demo[]" auto url="./upload.php" accept=".csv" className="p-mr-2" onUpload={this.importCSV} />
-                            <FileUpload chooseOptions={{ label: 'Excel', icon: 'pi pi-file-excel', className: 'p-button-success' }} mode="basic" name="demo[]" auto url="./upload.php"
+                            <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file-o' }} mode="basic" name="demo[]" auto url="http://0.0.0.0:8000/" accept=".csv" className="p-mr-2" onUpload={this.importCSV} />
+                            <FileUpload chooseOptions={{ label: 'Excel', icon: 'pi pi-file-excel', className: 'p-button-success' }} mode="basic" name="demo[]" auto url="http://0.0.0.0:8000/"
                                 accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" className="p-mr-2" onUpload={this.importExcel} />
                             <Button type="button" label="Clear" icon="pi pi-times" onClick={this.clear} className="p-button-info p-ml-auto" />
                         </div>
@@ -395,7 +395,7 @@ export class DataTableExportDemo extends Component {
 
     onImportSelectionChange(e) {
         this.setState({ selectedImportedData: e.value }, () => {
-            const detail = this.state.selectedImportedData.map(d => Object.values(d)[0]).join(',');
+            const detail = this.state.selectedImportedData.map(d => Object.values(d)[0]).join(', ');
             this.toast.show({ severity: 'info', summary: 'Data Selected', detail, life: 3000 });
         });
     }
@@ -593,7 +593,7 @@ export const DataTableExportDemo = () => {
 
     const onImportSelectionChange = (e) => {
         setSelectedImportedData(e.value);
-        const detail = e.value.map(d => Object.values(d)[0]).join(',');
+        const detail = e.value.map(d => Object.values(d)[0]).join(', ');
         toast.current.show({ severity: 'info', summary: 'Data Selected', detail, life: 3000 });
     }
 
@@ -788,7 +788,7 @@ export const DataTableExportDemo = () => {
 
     const onImportSelectionChange = (e) => {
         setSelectedImportedData(e.value);
-        const detail = e.value.map(d => Object.values(d)[0]).join(',');
+        const detail = e.value.map(d => Object.values(d)[0]).join(', ');
         toast.current.show({ severity: 'info', summary: 'Data Selected', detail, life: 3000 });
     }
 
