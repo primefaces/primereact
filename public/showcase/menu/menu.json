@@ -609,10 +609,11 @@
                             ]
                         },
                         {
-                            "name": "Export",
+                            "name": "Import/Export",
                             "to": "/datatable/export",
                             "meta": [
-                                "export"
+                                "export",
+                                "import"
                             ]
                         },
                         {
