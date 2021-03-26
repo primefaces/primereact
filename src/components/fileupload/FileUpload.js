@@ -497,7 +497,7 @@ export class FileUpload extends Component {
     renderFiles() {
         return (
             <div className="p-fileupload-files">
-                {this.state.files.map(this.renderFile)}
+                {this.state.files.map((file, index) => this.renderFile(file, index))}
             </div>
         );
     }
