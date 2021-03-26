@@ -27,8 +27,9 @@ export class SliderDemo extends Component {
             value1: null,
             value2: 50,
             value3: 20,
-            value4: [20,80],
-            value5: 50
+            value4: 30.5,
+            value5: [20,80],
+            value6: 50
         };
     }
 
@@ -37,7 +38,7 @@ export class SliderDemo extends Component {
             <div className="slider-demo">
                 <div className="card">
                     <h5>Basic: {this.state.value1}</h5>
-                    <Slider value={this.state.value1} onChange={(e) => this.setState({ value1: e.value })} />
+                    <Slider value={this.state.value1} onChange={(e) => this.setState({ value1: e.value })} step={2.5} />
 
                     <h5>Input: {this.state.value2}</h5>
                     <InputText value={this.state.value2} onChange={(e) => this.setState({ value2: e.target.value })} />
@@ -46,11 +47,14 @@ export class SliderDemo extends Component {
                     <h5>Step: {this.state.value3}</h5>
                     <Slider value={this.state.value3} onChange={(e) => this.setState({ value3: e.value })} step={20} />
 
-                    <h5>Range: [{this.state.value4[0]}, {this.state.value4[1]}]</h5>
-                    <Slider value={this.state.value4} onChange={(e) => this.setState({ value4: e.value })} range />
+                    <h5>Decimal Step: {this.state.value4}</h5>
+                    <Slider value={this.state.value4} onChange={(e) => this.setState({ value4: e.value })} step={0.5} />
 
-                    <h5>Vertical: {this.state.value5}</h5>
-                    <Slider value={this.state.value5} onChange={(e) => this.setState({ value5: e.value })} orientation="vertical" />
+                    <h5>Range: [{this.state.value5[0]}, {this.state.value5[1]}]</h5>
+                    <Slider value={this.state.value5} onChange={(e) => this.setState({ value5: e.value })} range />
+
+                    <h5>Vertical: {this.state.value6}</h5>
+                    <Slider value={this.state.value6} onChange={(e) => this.setState({ value6: e.value })} orientation="vertical" />
                 </div>
             </div>
         );
@@ -70,8 +74,9 @@ const SliderDemo = () => {
     const [value1, setValue1] = useState(null);
     const [value2, setValue2] = useState(50);
     const [value3, setValue3] = useState(20);
-    const [value4, setValue4] = useState([20,80]);
-    const [value5, setValue5] = useState(50);
+    const [value4, setValue4] = useState(30.5);
+    const [value5, setValue5] = useState([20,80]);
+    const [value6, setValue6] = useState(50);
 
     return (
         <div className="slider-demo">
@@ -86,11 +91,14 @@ const SliderDemo = () => {
                 <h5>Step: {value3}</h5>
                 <Slider value={value3} onChange={(e) => setValue3(e.value)} step={20} />
 
-                <h5>Range: [{value4[0]}, {value4[1]}]</h5>
-                <Slider value={value4} onChange={(e) => setValue4(e.value)} range />
+                <h5>Decimal Step: {value4}</h5>
+                <Slider value={value4} onChange={(e) => setValue4(e.value)} step={0.5} />
 
-                <h5>Vertical: {value5}</h5>
-                <Slider value={value5} onChange={(e) => setValue5(e.value)} orientation="vertical" />
+                <h5>Range: [{value5[0]}, {value5[1]}]</h5>
+                <Slider value={value5} onChange={(e) => setValue5(e.value)} range />
+
+                <h5>Vertical: {value6}</h5>
+                <Slider value={value6} onChange={(e) => setValue6(e.value)} orientation="vertical" />
             </div>
         </div>
     );
@@ -109,8 +117,9 @@ const SliderDemo = () => {
     const [value1, setValue1] = useState(null);
     const [value2, setValue2] = useState(50);
     const [value3, setValue3] = useState(20);
-    const [value4, setValue4] = useState([20,80]);
-    const [value5, setValue5] = useState(50);
+    const [value4, setValue4] = useState(30.5);
+    const [value5, setValue5] = useState([20,80]);
+    const [value6, setValue6] = useState(50);
 
     return (
         <div className="slider-demo">
@@ -125,11 +134,14 @@ const SliderDemo = () => {
                 <h5>Step: {value3}</h5>
                 <Slider value={value3} onChange={(e) => setValue3(e.value)} step={20} />
 
-                <h5>Range: [{value4[0]}, {value4[1]}]</h5>
-                <Slider value={value4} onChange={(e) => setValue4(e.value)} range />
+                <h5>Decimal Step: {value4}</h5>
+                <Slider value={value4} onChange={(e) => setValue4(e.value)} step={0.5} />
 
-                <h5>Vertical: {value5}</h5>
-                <Slider value={value5} onChange={(e) => setValue5(e.value)} orientation="vertical" />
+                <h5>Range: [{value5[0]}, {value5[1]}]</h5>
+                <Slider value={value5} onChange={(e) => setValue5(e.value)} range />
+
+                <h5>Vertical: {value6}</h5>
+                <Slider value={value6} onChange={(e) => setValue6(e.value)} orientation="vertical" />
             </div>
         </div>
     );
