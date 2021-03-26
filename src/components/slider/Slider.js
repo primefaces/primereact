@@ -203,6 +203,9 @@ export class Slider extends Component {
             else if (diff > 0)
                 newValue = oldValue + Math.floor(newValue / this.props.step - oldValue / this.props.step) * this.props.step;
         }
+        else {
+            newValue = Math.floor(newValue);
+        }
 
         this.updateValue(event, newValue);
     }
@@ -245,7 +248,7 @@ export class Slider extends Component {
             if (this.props.onChange) {
                 this.props.onChange({
                     originalEvent: event,
-                    value: Math.floor(newValue)
+                    value: newValue
                 });
             }
         }
