@@ -3,6 +3,7 @@ import * as React from 'react';
 type OptionsType = {
     label?: string;
     icon?: string;
+    iconOnly?: boolean;
     className?: string;
     style?: object
 };
