@@ -49,6 +49,7 @@ export class FileUpload extends Component {
             style: null
         },
         customUpload: false,
+        itemTemplate: null,
         emptyTemplate: null,
         onBeforeUpload: null,
         onBeforeSend: null,
@@ -84,6 +85,7 @@ export class FileUpload extends Component {
         chooseOptions: PropTypes.object,
         uploadOptions: PropTypes.object,
         cancelOptions: PropTypes.object,
+        itemTemplate: PropTypes.any,
         customUpload: PropTypes.bool,
         emptyTemplate: PropTypes.any,
         onBeforeUpload: PropTypes.func,
@@ -443,24 +445,46 @@ export class FileUpload extends Component {
         );
     }
 
+    renderFile(file, index) {
+        let preview = this.isImage(file) ? <div><img alt={file.name} role="presentation" src={file.objectURL} width={this.props.previewWidth} /></div> : null;
+        let fileName = <div>{file.name}</div>;
+        let size = <div>{this.formatSize(file.size)}</div>;
+        let removeButton = <div><Button type="button" icon="pi pi-times" onClick={(e) => this.remove(e, index)} /></div>
+        let content = (
+            <>
+                {preview}
+                {fileName}
+                {size}
+                {removeButton}
+            </>
+        );
+
+        if (this.props.itemTemplate) {
+            const defaultContentOptions = {
+                onRemove: (event) => this.remove(event, index),
+                previewElement: preview,
+                fileNameElement: fileName,
+                sizeElement: size,
+                removeElement: removeButton,
+                formatSize: this.formatSize(file.size),
+                element: content,
+                props: this.props
+            };
+
+            content = ObjectUtils.getJSXElement(this.props.itemTemplate, file, defaultContentOptions);
+        }
+
+        return (
+            <div className="p-fileupload-row" key={file.name + file.type + file.size}>
+                {content}
+            </div>
+        )
+    }
+
     renderFiles() {
         return (
             <div className="p-fileupload-files">
-                {
-                    this.state.files.map((file, index) => {
-                        let preview = this.isImage(file) ? <div><img alt={file.name} role="presentation" src={file.objectURL} width={this.props.previewWidth} /></div> : null;
-                        let fileName = <div>{file.name}</div>;
-                        let size = <div>{this.formatSize(file.size)}</div>;
-                        let removeButton = <div><Button type="button" icon="pi pi-times" onClick={(e) => this.remove(e, index)} /></div>
-
-                        return <div className="p-fileupload-row" key={file.name + file.type + file.size}>
-                                 {preview}
-                                 {fileName}
-                                 {size}
-                                 {removeButton}
-                            </div>
-                    })
-                }
+                {this.state.files.map(this.renderFile)}
             </div>
         );
     }
