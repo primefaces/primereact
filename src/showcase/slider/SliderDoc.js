@@ -38,7 +38,7 @@ export class SliderDemo extends Component {
             <div className="slider-demo">
                 <div className="card">
                     <h5>Basic: {this.state.value1}</h5>
-                    <Slider value={this.state.value1} onChange={(e) => this.setState({ value1: e.value })} step={2.5} />
+                    <Slider value={this.state.value1} onChange={(e) => this.setState({ value1: e.value })} />
 
                     <h5>Input: {this.state.value2}</h5>
                     <InputText value={this.state.value2} onChange={(e) => this.setState({ value2: e.target.value })} />
