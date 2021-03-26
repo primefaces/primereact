@@ -381,7 +381,7 @@ export class SlideMenu extends Component {
     }
 
     renderElement() {
-        const className = classNames('p-slidemenu p-component', { 'p-slidemenu-overlay': this.props.popup });
+        const className = classNames('p-slidemenu p-component', { 'p-slidemenu-overlay': this.props.popup }, this.props.className);
         const backward = this.renderBackward();
 
         return (
