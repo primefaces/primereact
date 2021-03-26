@@ -256,6 +256,54 @@ const myUploader = (event) => {
 `}
 </CodeHighlight>
 
+            <h5>ItemTemplate</h5>
+            <p>Used to create custom item elements in the container.</p>
+<CodeHighlight>
+{`
+<FileUpload name="demo[]" url="./upload" itemTemplate={customItemTemplate} uploadHandler={myUploader} />
+`}
+</CodeHighlight>
+<CodeHighlight lang="js">
+{`
+const customItemTemplate = (file, props) => {
+    // file: Current file object.
+    // options.onRemove: Event used to remove current file in the container.
+    // options.previewElement: The default preview element in the container.
+    // options.fileNameElement: The default fileName element in the container.
+    // options.sizeElement: The default size element in the container.
+    // options.removeElement: The default remove element in the container.
+    // options.formatSize: The formated size of file.
+    // options.element: Default element created by the component.
+    // options.props: component props.
+}
+`}
+</CodeHighlight>
+
+            <h5>Button Options</h5>
+            <p>Used to customize choose, upload and cancel buttons.</p>
+<CodeHighlight lang="js">
+{`
+const chooseOptions = {label: 'Choose', icon: 'pi pi-fw pi-plus'};
+const uploadOptions = {label: 'Uplaod', icon: 'pi pi-upload', className: 'p-button-success'};
+const cancelOptions = {label: 'Cancel', icon: 'pi pi-times', className: 'p-button-danger'};
+`}
+</CodeHighlight>
+<CodeHighlight>
+{`
+<FileUpload name="demo[]" url="./upload" chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} uploadHandler={myUploader} />
+`}
+</CodeHighlight>
+<CodeHighlight lang="js">
+{`
+const buttonOptions = {
+    // label: The label of button.
+    // icon: The icon of button.
+    // className: Style class of button.
+    // style: Style of button.
+}
+`}
+</CodeHighlight>
+
             <h5>Properties</h5>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
@@ -404,7 +452,13 @@ const myUploader = (event) => {
                             <td>emptyTemplate</td>
                             <td>any</td>
                             <td>null</td>
-                            <td>The template of empty content in container.</td>
+                            <td>The template of empty content in the container.</td>
+                        </tr>
+                        <tr>
+                            <td>itemTemplate</td>
+                            <td>any</td>
+                            <td>null</td>
+                            <td>The template of each item content in the container.</td>
                         </tr>
                     </tbody>
                 </table>
