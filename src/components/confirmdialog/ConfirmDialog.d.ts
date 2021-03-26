@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { DialogProps } from '../dialog/Dialog.d.ts';
+import { DialogProps } from '../dialog/Dialog';
 
-interface ConfirmDialogProps extends DialogProps {
+interface ConfirmDialogProps extends Omit<DialogProps, 'onHide'> {
     visible?: boolean;
     message?: any;
     rejectLabel?: string;
