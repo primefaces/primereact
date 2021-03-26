@@ -56,6 +56,7 @@ export class FileUpload extends Component {
         headerStyle: null,
         contentClassName: null,
         contentStyle: null,
+        headerTemplate: null,
         itemTemplate: null,
         emptyTemplate: null,
         onBeforeUpload: null,
@@ -92,12 +93,13 @@ export class FileUpload extends Component {
         chooseOptions: PropTypes.object,
         uploadOptions: PropTypes.object,
         cancelOptions: PropTypes.object,
-        itemTemplate: PropTypes.any,
         customUpload: PropTypes.bool,
         headerClassName: PropTypes.string,
         headerStyle: PropTypes.object,
         contentClassName: PropTypes.string,
         contentStyle: PropTypes.object,
+        headerTemplate: PropTypes.any,
+        itemTemplate: PropTypes.any,
         emptyTemplate: PropTypes.any,
         onBeforeUpload: PropTypes.func,
         onBeforeSend: PropTypes.func,
@@ -533,13 +535,30 @@ export class FileUpload extends Component {
             progressBar = <ProgressBar value={this.state.progress} showValue={false} />;
         }
 
+        let header = (
+            <div className={headerClassName} style={this.props.headerStyle}>
+                {chooseButton}
+                {uploadButton}
+                {cancelButton}
+            </div>
+        );
+
+        if (this.props.headerTemplate) {
+            const defaultContentOptions = {
+                className: headerClassName,
+                chooseButton,
+                uploadButton,
+                cancelButton,
+                element: header,
+                props: this.props
+            };
+
+            header = ObjectUtils.getJSXElement(this.props.headerTemplate, defaultContentOptions);
+        }
+
         return (
             <div id={this.props.id} className={className} style={this.props.style}>
-                <div className={headerClassName} style={this.props.headerStyle}>
-                    {chooseButton}
-                    {uploadButton}
-                    {cancelButton}
-                </div>
+                {header}
                 <div ref={(el) => {this.content = el;}} className={contentClassName} style={this.props.contentStyle}
                     onDragEnter={this.onDragEnter} onDragOver={this.onDragOver} onDragLeave={this.onDragLeave} onDrop={this.onDrop}>
                     {progressBar}

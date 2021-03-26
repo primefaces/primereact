@@ -461,6 +461,12 @@ const buttonOptions = {
                             <td>The template of each item content in the container.</td>
                         </tr>
                         <tr>
+                            <td>headerTemplate</td>
+                            <td>any</td>
+                            <td>null</td>
+                            <td>The template of the header.</td>
+                        </tr>
+                        <tr>
                             <td>headerStyle</td>
                             <td>object</td>
                             <td>null</td>
