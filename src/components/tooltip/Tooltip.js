@@ -115,15 +115,19 @@ export class Tooltip extends Component {
     }
 
     isDisabled(target) {
-        return this.getTargetOption(target, 'disabled') === 'true' || this.props.disabled;
+        return this.getTargetOption(target, 'disabled') === 'true' || this.hasTargetOption(target, 'disabled') || this.props.disabled;
     }
 
     getTargetOption(target, option) {
-        if (target && target.hasAttribute(`data-pr-${option}`)) {
+        if (this.hasTargetOption(target, `data-pr-${option}`)) {
             return target.getAttribute(`data-pr-${option}`);
         }
 
         return null;
+    }
+
+    hasTargetOption(target, option) {
+        return target && target.hasAttribute(option);
     }
 
     getEvents(target) {
