@@ -384,7 +384,7 @@ const buttonOptions = {
                         </tr>
                         <tr>
                             <td>style</td>
-                            <td>string</td>
+                            <td>object</td>
                             <td>null</td>
                             <td>Inline style of the component.</td>
                         </tr>
@@ -459,6 +459,30 @@ const buttonOptions = {
                             <td>any</td>
                             <td>null</td>
                             <td>The template of each item content in the container.</td>
+                        </tr>
+                        <tr>
+                            <td>headerStyle</td>
+                            <td>object</td>
+                            <td>null</td>
+                            <td>Inline style of the header.</td>
+                        </tr>
+                        <tr>
+                            <td>headerClassName</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Style class of the header.</td>
+                        </tr>
+                        <tr>
+                            <td>contentStyle</td>
+                            <td>object</td>
+                            <td>null</td>
+                            <td>Inline style of the content.</td>
+                        </tr>
+                        <tr>
+                            <td>contentClassName</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Style class of the content.</td>
                         </tr>
                     </tbody>
                 </table>

@@ -52,6 +52,10 @@ export class FileUpload extends Component {
             style: null
         },
         customUpload: false,
+        headerClassName: null,
+        headerStyle: null,
+        contentClassName: null,
+        contentStyle: null,
         itemTemplate: null,
         emptyTemplate: null,
         onBeforeUpload: null,
@@ -90,6 +94,10 @@ export class FileUpload extends Component {
         cancelOptions: PropTypes.object,
         itemTemplate: PropTypes.any,
         customUpload: PropTypes.bool,
+        headerClassName: PropTypes.string,
+        headerStyle: PropTypes.object,
+        contentClassName: PropTypes.string,
+        contentStyle: PropTypes.object,
         emptyTemplate: PropTypes.any,
         onBeforeUpload: PropTypes.func,
         onBeforeSend: PropTypes.func,
@@ -504,6 +512,8 @@ export class FileUpload extends Component {
 
     renderAdvanced() {
         const className = classNames('p-fileupload p-fileupload-advanced p-component', this.props.className);
+        const headerClassName = classNames('p-fileupload-buttonbar', this.props.headerClassName);
+        const contentClassName = classNames('p-fileupload-content', this.props.contentClassName);
         let uploadButton, cancelButton, filesList, progressBar;
         const chooseButton = this.renderChooseButton();
         const emptyContent = this.renderEmptyContent();
@@ -525,12 +535,12 @@ export class FileUpload extends Component {
 
         return (
             <div id={this.props.id} className={className} style={this.props.style}>
-                <div className="p-fileupload-buttonbar">
+                <div className={headerClassName} style={this.props.headerStyle}>
                     {chooseButton}
                     {uploadButton}
                     {cancelButton}
                 </div>
-                <div ref={(el) => {this.content = el;}} className="p-fileupload-content"
+                <div ref={(el) => {this.content = el;}} className={contentClassName} style={this.props.contentStyle}
                     onDragEnter={this.onDragEnter} onDragOver={this.onDragOver} onDragLeave={this.onDragLeave} onDrop={this.onDrop}>
                     {progressBar}
                     <Messages ref={(el) => this.messagesUI = el } />

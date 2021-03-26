@@ -33,6 +33,10 @@ interface FileUploadProps {
     uploadOptions?: OptionsType;
     cancelOptions?: OptionsType;
     customUpload?: boolean;
+    headerClassName?: string;
+    headerStyle?: object;
+    contentClassName?: string;
+    contentStyle?: object;
     itemTemplate?: ItemTemplateType;
     emptyTemplate?: ((props: object) => any | any);
     onBeforeUpload?(e: { xhr: XMLHttpRequest, formData: any }): void;
