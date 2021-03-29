@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import ObjectUtils from '../utils/ObjectUtils';
 import { SelectButtonItem } from './SelectButtonItem';
-import { tip } from "../tooltip/Tooltip";
+import { tip } from '../tooltip/Tooltip';
 
 export class SelectButton extends Component {
 
@@ -132,9 +132,9 @@ export class SelectButton extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.tooltip !== this.props.tooltip) {
+        if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
             if (this.tooltip)
-                this.tooltip.updateContent(this.props.tooltip);
+                this.tooltip.update({ content: this.props.tooltip, ...(this.props.tooltipOptions || {}) });
             else
                 this.renderTooltip();
         }

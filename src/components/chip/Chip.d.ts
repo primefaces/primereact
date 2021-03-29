@@ -9,6 +9,8 @@ interface ChipProps {
     className?: string;
     style?: object;
     template?: any;
+    imageAlt?: string;
+    onImageError?(event: Event): void;
     onRemove?(event: Event): void;
 }
 

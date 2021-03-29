@@ -7,8 +7,8 @@ import { Dropdown } from '../../components/dropdown/Dropdown';
 import { ProgressBar } from '../../components/progressbar/ProgressBar';
 import { Calendar } from '../../components/calendar/Calendar';
 import { MultiSelect } from '../../components/multiselect/MultiSelect';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './DataTableDemo.scss';
 
@@ -912,9 +912,9 @@ const DataTableFilterDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="DataTableFilterDemo" sources={this.sources} service="CustomerService" data="customers-large" extFiles={this.extFiles} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'DataTableFilterDemo', sources: this.sources, service: 'CustomerService', data: 'customers-large', extFiles: this.extFiles })
+                    }
                 </TabView>
             </div>
         )

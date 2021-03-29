@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
 
 export class InputTextDoc extends Component {
@@ -66,7 +66,7 @@ export class InputTextDemo extends Component {
                     <div className="p-field">
                         <label htmlFor="username2" className="p-d-block">Username</label>
                         <InputText id="username2" aria-describedby="username2-help" className="p-invalid p-d-block" />
-                        <small id="username2-help" className="p-invalid p-d-block">Username is not available.</small>
+                        <small id="username2-help" className="p-error p-d-block">Username is not available.</small>
                     </div>
 
                     <h5>Disabled</h5>
@@ -134,7 +134,7 @@ const InputTextDemo = () => {
                 <div className="p-field">
                     <label htmlFor="username2" className="p-d-block">Username</label>
                     <InputText id="username2" aria-describedby="username2-help" className="p-invalid p-d-block" />
-                    <small id="username2-help" className="p-invalid p-d-block">Username is not available.</small>
+                    <small id="username2-help" className="p-error p-d-block">Username is not available.</small>
                 </div>
 
                 <h5>Disabled</h5>
@@ -201,7 +201,7 @@ const InputTextDemo = () => {
                 <div className="p-field">
                     <label htmlFor="username2" className="p-d-block">Username</label>
                     <InputText id="username2" aria-describedby="username2-help" className="p-invalid p-d-block" />
-                    <small id="username2-help" className="p-invalid p-d-block">Username is not available.</small>
+                    <small id="username2-help" className="p-error p-d-block">Username is not available.</small>
                 </div>
 
                 <h5>Disabled</h5>
@@ -242,7 +242,7 @@ import { InputText } from 'primereact/inputtext';
                         <p>InputText is used as a controlled input with <i>value</i> and <i>onChange</i> properties.</p>
 <CodeHighlight>
 {`
-<InputText value={this.state.value} onChange={(e) => this.setState({value: e.target.value})} />
+<InputText value={value} onChange={(e) => setValue(e.target.value)} />
 `}
 </CodeHighlight>
 
@@ -251,8 +251,8 @@ import { InputText } from 'primereact/inputtext';
 <CodeHighlight>
 {`
 <span className="p-float-label">
-    <InputText id="in" value={this.state.value} onChange={(e) => this.setState({value: e.target.value})} />
-    <label htmlhtmlFor="in">Username</label>
+    <InputText id="in" value={value} onChange={(e) => setValue(e.target.value)} />
+    <label htmlFor="in">Username</label>
 </span>
 `}
 </CodeHighlight>
@@ -325,9 +325,9 @@ import { InputText } from 'primereact/inputtext';
                         <p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="InputTextDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'InputTextDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         )

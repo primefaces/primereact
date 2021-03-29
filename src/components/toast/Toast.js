@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
-import {ToastMessage} from './ToastMessage';
+import { ToastMessage } from './ToastMessage';
 import DomHandler from '../utils/DomHandler';
-import {CSSTransition, TransitionGroup} from 'react-transition-group';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
-var messageIdx = 0;
+let messageIdx = 0;
 
 export class Toast extends Component {
 
@@ -86,11 +86,15 @@ export class Toast extends Component {
             <div ref={(el) => { this.container = el; }} id={this.props.id} className={className} style={this.props.style}>
                 <TransitionGroup>
                     {
-                        this.state.messages.map((message) =>
-                            <CSSTransition key={message.id} classNames="p-toast-message" unmountOnExit timeout={{ enter: 300, exit: 300 }}>
-                                <ToastMessage message={message} onClick={this.props.onClick} onClose={this.onClose} />
-                            </CSSTransition>
-                        )
+                        this.state.messages.map((message) => {
+                            const messageRef = React.createRef();
+
+                            return (
+                                <CSSTransition nodeRef={messageRef} key={message.id} classNames="p-toast-message" unmountOnExit timeout={{ enter: 300, exit: 300 }}>
+                                    <ToastMessage ref={messageRef} message={message} onClick={this.props.onClick} onClose={this.onClose} />
+                                </CSSTransition>
+                            )
+                        })
                     }
                 </TransitionGroup>
             </div>

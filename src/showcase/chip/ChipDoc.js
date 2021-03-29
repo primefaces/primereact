@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class ChipDoc extends Component {
 
@@ -15,6 +15,7 @@ export class ChipDoc extends Component {
                 content: `
 import React, { Component } from 'react';
 import { Chip } from 'primereact/chip';
+import './ChipDemo.css';
 
 export class ChipDemo extends Component {
 
@@ -63,8 +64,9 @@ export class ChipDemo extends Component {
             'hooks': {
                 tabName: 'Hooks Source',
                 content: `
-import React, { useState } from 'react';
+import React from 'react';
 import { Chip } from 'primereact/chip';
+import './ChipDemo.css';
 
 const ChipDemo = () => {
     return (
@@ -110,8 +112,9 @@ const ChipDemo = () => {
             'ts': {
                 tabName: 'TS Source',
                 content: `
-import React, { useState } from 'react';
-import { Checkbox } from 'primereact/checkbox';
+import React from 'react';
+import { Chip } from 'primereact/chip';
+import './ChipDemo.css';
 
 const ChipDemo = () => {
     return (
@@ -151,6 +154,16 @@ const ChipDemo = () => {
             </div>
         </div>
     );
+}
+                `
+            }
+        }
+        this.extFiles = {
+            'src/demo/ChipDemo.css': {
+                content: `
+.p-chip.custom-chip {
+    background: var(--primary-color);
+    color: var(--primary-color-text);
 }
                 `
             }
@@ -263,6 +276,12 @@ import { Chip } from 'primereact/chip';
                                         <td>null</td>
                                         <td>Template of an item.</td>
                                     </tr>
+                                    <tr>
+                                        <td>imageAlt</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>It specifies an alternate text for an image, if the image cannot be displayed.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -282,6 +301,11 @@ import { Chip } from 'primereact/chip';
                                         <td>onRemove</td>
                                         <td>event: Browser event</td>
                                         <td>Callback to invoke when a chip is removed.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onImageError</td>
+                                        <td>event: Browser event</td>
+                                        <td>This event is triggered if an error occurs while loading an image file.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -322,9 +346,9 @@ import { Chip } from 'primereact/chip';
                         <p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="ChipDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'ChipDemo', sources: this.sources, extFiles: this.extFiles })
+                    }
                 </TabView>
             </div>
         )

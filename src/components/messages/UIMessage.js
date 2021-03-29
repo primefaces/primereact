@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import { Ripple } from '../ripple/Ripple';
 
-export class UIMessage extends Component {
+class UIMessageComponent extends Component {
 
     static defaultProps = {
         message: null,
@@ -101,7 +101,7 @@ export class UIMessage extends Component {
         let message = this.renderMessage();
 
         return (
-            <div ref={(el) => { this.container = el; }} className={className} onClick={this.onClick}>
+            <div ref={this.props.forwardRef} className={className} onClick={this.onClick}>
                 <div className="p-message-wrapper">
                     {message}
                     {closeIcon}
@@ -110,3 +110,5 @@ export class UIMessage extends Component {
         );
     }
 }
+
+export const UIMessage = React.forwardRef((props, ref) => <UIMessageComponent forwardRef={ref} {...props} />);

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class TagDoc extends Component {
 
@@ -247,9 +247,9 @@ import { Tag } from 'primereact/tag';
                         <p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="TagDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'TagDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         );

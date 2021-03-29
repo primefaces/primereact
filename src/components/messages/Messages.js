@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { UIMessage } from './UIMessage';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
-var messageIdx = 0;
+let messageIdx = 0;
 
 export class Messages extends Component {
 
@@ -81,11 +81,15 @@ export class Messages extends Component {
             <div id={this.props.id} className={this.props.className} style={this.props.style}>
                 <TransitionGroup>
                     {
-                        this.state.messages.map((message) =>
-                            <CSSTransition key={message.id} classNames="p-message" unmountOnExit timeout={{ enter: 300, exit: 300 }}>
-                                <UIMessage message={message} onClick={this.props.onClick} onClose={this.onClose} />
-                            </CSSTransition>
-                        )
+                        this.state.messages.map((message) => {
+                            const messageRef = React.createRef();
+
+                            return (
+                                <CSSTransition nodeRef={messageRef} key={message.id} classNames="p-message" unmountOnExit timeout={{ enter: 300, exit: 300 }}>
+                                    <UIMessage ref={messageRef} message={message} onClick={this.props.onClick} onClose={this.onClose} />
+                                </CSSTransition>
+                            )
+                        })
                     }
                 </TransitionGroup>
             </div>

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Knob} from '../../components/knob/Knob';
 import {AppInlineHeader} from '../../AppInlineHeader';
 import {KnobDoc} from './KnobDoc';
+import {Button} from '../../components/button/Button';
 
 export class KnobDemo extends Component {
 
@@ -17,7 +18,35 @@ export class KnobDemo extends Component {
             value7 : 40,
             value8 : 60,
             value9 : 50,
+            value10: 0,
+            disabledIncrementBtn: false,
+            disabledDecrementBtn: true
         }
+
+        this.increment = this.increment.bind(this);
+        this.decrement = this.decrement.bind(this);
+    }
+
+    increment() {
+        this.setState((prevState) => {
+            const value = prevState.value10 + 1;
+            return {
+                value10: value,
+                disabledIncrementBtn: value === 100,
+                disabledDecrementBtn: false
+            }
+        });
+    }
+
+    decrement() {
+        this.setState((prevState) => {
+            const value = prevState.value10 - 1;
+            return {
+                value10: value,
+                disabledIncrementBtn: false,
+                disabledDecrementBtn: value === 0
+            }
+        });
     }
 
     render() {
@@ -70,6 +99,13 @@ export class KnobDemo extends Component {
                                 <Knob value={this.state.value9} valueColor={"SlateGray"} rangeColor={"MediumTurquoise"} onChange={(e)=>this.setState({value9: e.value})}/>
                             </div>
                         </div>
+                    </div>
+
+                    <div className="card p-text-center">
+                        <h5>Reactive Knob</h5>
+                        <Knob value={this.state.value10} size={150} readOnly />
+                        <Button label="Increment" onClick={this.increment} className="p-mr-2" disabled={this.state.disabledIncrementBtn} />
+                        <Button label="Decrement" onClick={this.decrement} disabled={this.state.disabledDecrementBtn} />
                     </div>
                 </div>
 

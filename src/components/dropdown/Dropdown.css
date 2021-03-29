@@ -71,7 +71,8 @@ input.p-dropdown-label  {
     position: relative;
 }
 
-.p-dropdown-filter-icon {
+.p-dropdown-filter-icon,
+.p-dropdown-filter-clear-icon {
     position: absolute;
     top: 50%;
     margin-top: -.5rem;

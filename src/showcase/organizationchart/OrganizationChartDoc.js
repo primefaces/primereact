@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class OrganizationChartDoc extends Component {
 
@@ -512,49 +512,42 @@ import { OrganizationChart } from 'primereact/organizationchart';
                         <p>OrganizationChart requires a model of TreeNode as its value.</p>
 <CodeHighlight lang="js">
 {`
-export class OrganizationChartDemo extends Component {
+export const OrganizationChartDemo = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: [{
+    const data = [{
+        label: 'F.C Barcelona',
+        expanded: true,
+        children: [
+            {
                 label: 'F.C Barcelona',
                 expanded: true,
                 children: [
                     {
-                        label: 'F.C Barcelona',
-                        expanded: true,
-                        children: [
-                            {
-                                label: 'Chelsea FC'
-                            },
-                            {
-                                label: 'F.C. Barcelona'
-                            }
-                        ]
+                        label: 'Chelsea FC'
                     },
                     {
-                        label: 'Real Madrid',
-                        expanded: true,
-                        children: [
-                            {
-                                label: 'Bayern Munich'
-                            },
-                            {
-                                label: 'Real Madrid'
-                            }
-                        ]
+                        label: 'F.C. Barcelona'
                     }
                 ]
-            }]
-        };
-    }
+            },
+            {
+                label: 'Real Madrid',
+                expanded: true,
+                children: [
+                    {
+                        label: 'Bayern Munich'
+                    },
+                    {
+                        label: 'Real Madrid'
+                    }
+                ]
+            }
+        ]
+    }];
 
-    render() {
-        return (
-            <OrganizationChart value={this.state.data}></OrganizationChart>
-        )
-    }
+    return (
+        <OrganizationChart value={data}></OrganizationChart>
+    )
 }
 `}
 </CodeHighlight>
@@ -564,14 +557,14 @@ export class OrganizationChartDemo extends Component {
 
 <CodeHighlight>
 {`
-<OrganizationChart value={this.state.data} nodeTemplate={this.nodeTemplate}></OrganizationChart>
+<OrganizationChart value={data} nodeTemplate={nodeTemplate}></OrganizationChart>
 `}
 </CodeHighlight>
 
 <CodeHighlight lang="js">
 {`
 
-nodeTemplate(node) {
+const nodeTemplate = (node) => {
     if (node.type === "person") {
         return (
             <div>
@@ -598,7 +591,7 @@ nodeTemplate(node) {
                         <p>OrganizationChart supports two selection methods; single or multiple. Selection is enabled by setting <i>selectionMode</i> property to the corresponding mode, defining <i>selection</i> property along with <i>selectionChange</i> callback.</p>
 <CodeHighlight>
 {`
-<OrganizationChart value={this.state.data} selectionMode="single" selection={this.state.selectedNode} onSelectionChange={event => this.setState({selectedNode: event.data})}></OrganizationChart>
+<OrganizationChart value={data} selectionMode="single" selection={selectedNode} onSelectionChange={event => setSelectedNode(event.data)}></OrganizationChart>
 `}
 </CodeHighlight>
 
@@ -741,9 +734,9 @@ nodeTemplate(node) {
 
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="OrganizationChartDemo" sources={this.sources} extFiles={this.extFiles} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'OrganizationChartDemo', sources: this.sources, extFiles: this.extFiles })
+                    }
                 </TabView>
             </div>
         );

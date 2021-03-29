@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class PickListDoc extends Component {
 
@@ -264,8 +264,16 @@ import { PickList } from 'primereact/picklist';
                         <p>PickList requires two arrays as <i>source</i> and <i>target</i> lists, an <i>itemTemplate</i> for the item content and <i>onChange</i> callback to update the value after reorder or transfer.</p>
 <CodeHighlight>
 {`
-<PickList source={this.state.source} target={this.state.target} itemTemplate={this.itemTemplate}
-    onChange={(e) => this.setState({source: e.source, target: e.target})} />
+const onChange = (e) => {
+    setSource(e.source);
+    setTarget(e.target);
+}
+`}
+</CodeHighlight>
+<CodeHighlight>
+{`
+<PickList source={source} target={target} itemTemplate={itemTemplate}
+    onChange={onChange} />
 `}
 </CodeHighlight>
 
@@ -275,8 +283,8 @@ import { PickList } from 'primereact/picklist';
 
 <CodeHighlight>
 {`
-<PickList source={this.state.source} target={this.state.target} itemTemplate={this.itemTemplate}
-    onChange={(e) => this.setState({source: e.source, target: e.target})} sourceHeader="Available" targetHeader="Seleced"/>
+<PickList source={source} target={target} itemTemplate={itemTemplate}
+    onChange={onChange} sourceHeader="Available" targetHeader="Seleced"/>
 `}
 </CodeHighlight>
 
@@ -499,9 +507,9 @@ import { PickList } from 'primereact/picklist';
 
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="PickListDemo" sources={this.sources} service="ProductService" data="products-small" extFiles={this.extFiles} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'PickListDemo', sources: this.sources, service: 'ProductService', data: 'products-small', extFiles: this.extFiles })
+                    }
                 </TabView>
             </div>
         );

@@ -3,6 +3,8 @@ import { PropTypes } from 'prop-types'
 import { Link } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 import { Tooltip } from './components/tooltip/Tooltip';
+import { Badge } from './components/badge/Badge';
+import { VersionService } from './showcase/service/VersionService';
 
 export class AppTopbar extends Component {
 
@@ -24,8 +26,11 @@ export class AppTopbar extends Component {
         super(props);
 
         this.state = {
-            activeMenuIndex: null
+            activeMenuIndex: null,
+            versions: []
         };
+        this.versionService = new VersionService();
+        this.version = require('../package.json') && require('../package.json').version;
 
         this.logoMap = {
             'bootstrap4-light-blue': 'bootstrap4-light-blue.svg',
@@ -63,6 +68,8 @@ export class AppTopbar extends Component {
             'fluent-light': 'fluent-light.png',
             'soho-light': 'soho-light.png',
             'soho-dark': 'soho-dark.png',
+            'viva-light': 'viva-light.svg',
+            'viva-dark': 'viva-dark.svg',
             'mira': 'mira.jpg',
             'nano': 'nano.jpg'
         };
@@ -71,6 +78,15 @@ export class AppTopbar extends Component {
         this.onThemeChange = this.onThemeChange.bind(this);
         this.onMenuEnter = this.onMenuEnter.bind(this);
         this.resetMenuActive = this.resetMenuActive.bind(this);
+
+        this.themesOverlayRef = React.createRef();
+        this.templatesOverlayRef = React.createRef();
+        this.resourcesOverlayRef = React.createRef();
+        this.versionsOverlayRef = React.createRef();
+    }
+
+    componentDidMount() {
+        this.versionService.getVersions().then(data => this.setState({ versions: data }));
     }
 
     onMenuButtonClick(event) {
@@ -138,7 +154,7 @@ export class AppTopbar extends Component {
     render() {
         return (
             <div className="layout-topbar">
-                <Tooltip target=".app-theme" position="bottom" />
+                <Tooltip target=".app-theme" position="bottom" baseZIndex={1000}/>
 
                 <button type="button" className="p-link menu-button" onClick={this.onMenuButtonClick} aria-haspopup aria-label="Menu">
                     <i className="pi pi-bars"></i>
@@ -156,17 +172,22 @@ export class AppTopbar extends Component {
                     </li>
 
                     <li role="none" className="topbar-submenu">
-                        {/* eslint-disable */}
-                        <button type="button" role="menuitem" onClick={(e) => this.toggleMenu(e, 0)} aria-haspopup aria-expanded={this.state.activeMenuIndex === 0} className="p-link">Themes</button>
-                        {/* eslint-enable */}
-                        <CSSTransition classNames="p-connected-overlay" timeout={{ enter: 120, exit: 100 }} in={this.state.activeMenuIndex === 0}
+                        <button type="button" role="menuitem" onClick={(e) => this.toggleMenu(e, 0)} aria-haspopup className="p-link">
+                            <span className="p-overlay-badge">
+                                Themes
+                                <Badge severity="danger"></Badge>
+                            </span>
+                        </button>
+                        <CSSTransition nodeRef={this.themesOverlayRef} classNames="p-connected-overlay" timeout={{ enter: 120, exit: 100 }} in={this.state.activeMenuIndex === 0}
                             unmountOnExit onEntered={this.onMenuEnter}>
-                            <ul role="menu" aria-label="Themes">
+                            <ul ref={this.themesOverlayRef} role="menu" aria-label="Themes">
                                 <li role="none" className="topbar-submenu-header">THEMING</li>
                                 <li role="none"><Link to="/theming" onClick={this.onThemesMenuRouteChange} role="menuitem"><i className="pi pi-fw pi-file" /><span>Guide</span></Link></li>
                                 <li role="none"><a href="https://www.primefaces.org/designer/primereact" role="menuitem"><i className="pi pi-fw pi-palette" /><span>Designer</span></a></li>
                                 <li role="none"><a href="https://www.primefaces.org/designer-react" role="menuitem"><i className="pi pi-fw pi-desktop" /><span>Visual Editor</span></a></li>
                                 <li role="none"><Link to="/icons" onClick={this.onThemesMenuRouteChange} role="menuitem" className="no-border"><i className="pi pi-fw pi-info-circle" /><span>Icons</span></Link></li>
+                                <li role="none"><a href="https://www.figma.com/community/file/890589747170608208" role="menuitem"><i className="pi pi-fw pi-pencil" /><span>Figma UI Kit</span></a></li>
+
 
                                 <li role="none" className="topbar-submenu-header">BOOTSTRAP</li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'bootstrap4-light-blue')} role="menuitem"><img src="showcase/images/themes/bootstrap4-light-blue.svg" alt="Blue Light" /><span>Blue Light</span></button></li>
@@ -206,6 +227,8 @@ export class AppTopbar extends Component {
                                 <li role="none" className="topbar-submenu-header">PREMIUM</li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'soho-light')} role="menuitem"><img src="showcase/images/themes/soho-light.png" alt="Soho Light" /><span>Soho Light</span></button></li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'soho-dark', true)} role="menuitem"><img src="showcase/images/themes/soho-dark.png" alt="Soho Dark" /><span>Soho Dark</span></button></li>
+                                <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'viva-light')} role="menuitem"><img src="showcase/images/themes/viva-light.svg" alt="Viva Light" /><span>Viva Light</span></button></li>
+                                <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'viva-dark', true)} role="menuitem"><img src="showcase/images/themes/viva-dark.svg" alt="Viva Dark" /><span>Viva Dark</span></button></li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'mira')} role="menuitem"><img src="showcase/images/themes/mira.jpg" alt="Mira" /><span>Mira</span></button></li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'nano')} role="menuitem"><img src="showcase/images/themes/nano.jpg" alt="Nano" /><span>Nano</span></button></li>
 
@@ -223,12 +246,10 @@ export class AppTopbar extends Component {
                     </li>
 
                     <li role="none" className="topbar-submenu">
-                        {/* eslint-disable */}
-                        <button type="button" role="menuitem" onClick={(e) => this.toggleMenu(e, 1)} aria-haspopup aria-expanded={this.props.activeTopbarItem === 1} className="p-link">Templates</button>
-                        {/* eslint-enable */}
-                        <CSSTransition classNames="p-connected-overlay" timeout={{ enter: 120, exit: 100 }} in={this.state.activeMenuIndex === 1}
+                        <button type="button" role="menuitem" onClick={(e) => this.toggleMenu(e, 1)} aria-haspopup className="p-link">Templates</button>
+                        <CSSTransition nodeRef={this.templatesOverlayRef} classNames="p-connected-overlay" timeout={{ enter: 120, exit: 100 }} in={this.state.activeMenuIndex === 1}
                             unmountOnExit onEntered={this.onMenuEnter}>
-                            <ul role="menu" aria-label="Templates">
+                            <ul ref={this.templatesOverlayRef} role="menu" aria-label="Templates">
                                 <li role="none" className="topbar-submenu-header">FREE ADMIN TEMPLATES</li>
                                 <li role="none">
                                     <a href="https://www.primefaces.org/sigma-react" role="menuitem" rel="noopener noreferrer" target="_blank" className="no-border">
@@ -240,6 +261,11 @@ export class AppTopbar extends Component {
                                 <li role="none">
                                     <a href="https://www.primefaces.org/layouts/diamond-react" role="menuitem" rel="noopener noreferrer" target="_blank">
                                         <img src="showcase/images/layouts/themeswitcher-diamond.png" alt="Diamond" /><span>Diamond</span><span className="theme-badge new p-tag p-tag-success">NEW</span>
+                                    </a>
+                                </li>
+                                <li role="none">
+                                    <a href="https://www.primefaces.org/layouts/ultima-react" role="menuitem" rel="noopener noreferrer" target="_blank">
+                                        <img src="showcase/images/layouts/themeswitcher-ultima.png" alt="Ultima (Material)" /><span>Ultima</span><span className="theme-badge material">MATERIAL</span>
                                     </a>
                                 </li>
                                 <li role="none">
@@ -255,11 +281,6 @@ export class AppTopbar extends Component {
                                 <li role="none">
                                     <a href="https://www.primefaces.org/layouts/serenity-react" role="menuitem" rel="noopener noreferrer" target="_blank">
                                         <img src="showcase/images/layouts/themeswitcher-serenity.png" alt="Serenity (Material)" /><span>Serenity</span><span className="theme-badge material">MATERIAL</span>
-                                    </a>
-                                </li>
-                                <li role="none">
-                                    <a href="https://www.primefaces.org/layouts/ultima-react" role="menuitem" rel="noopener noreferrer" target="_blank">
-                                        <img src="showcase/images/layouts/themeswitcher-ultima.png" alt="Ultima (Material)" /><span>Ultima</span><span className="theme-badge material">MATERIAL</span>
                                     </a>
                                 </li>
                                 <li role="none">
@@ -281,13 +302,11 @@ export class AppTopbar extends Component {
                         </CSSTransition>
                     </li>
 
-                    <li role="none" className="topbar-submenu topbar-resources-submenu">
-                        {/* eslint-disable */}
-                        <button type="button" role="menuitem" onClick={(e) => this.toggleMenu(e, 2)} aria-haspopup aria-expanded={this.state.activeMenuIndex === 2} className="p-link">Resources</button>
-                        {/* eslint-enable */}
-                        <CSSTransition classNames="p-connected-overlay" timeout={{ enter: 120, exit: 100 }} in={this.state.activeMenuIndex === 2}
+                    <li role="none" className="topbar-submenu">
+                        <button type="button" role="menuitem" onClick={(e) => this.toggleMenu(e, 2)} aria-haspopup className="p-link">Resources</button>
+                        <CSSTransition nodeRef={this.resourcesOverlayRef} classNames="p-connected-overlay" timeout={{ enter: 120, exit: 100 }} in={this.state.activeMenuIndex === 2}
                             unmountOnExit onEntered={this.onMenuEnter}>
-                            <ul role="menu" aria-label="Resources">
+                            <ul ref={this.resourcesOverlayRef} role="menu" aria-label="Resources">
                                 <li role="none"><Link to="/support" role="menuitem"><span>Support</span></Link></li>
                                 <li role="none"><a href="https://forum.primefaces.org/viewforum.php?f=57" role="menuitem" target="_blank" rel="noopener noreferrer"><span>Forum</span></a></li>
                                 <li role="none"><a href="https://discord.gg/gzKFYnpmCY" role="menuitem" target="_blank" rel="noopener noreferrer"><span>Discord Chat</span></a></li>
@@ -298,6 +317,26 @@ export class AppTopbar extends Component {
                                 <li role="none"><a href="https://www.primefaces.org/whouses" role="menuitem" target="_blank" rel="noopener noreferrer"><span>Who Uses</span></a></li>
                                 <li role="none"><a href="https://www.primefaces.org/newsletter" role="menuitem" target="_blank" rel="noopener noreferrer"><span>Newsletter</span></a></li>
                                 <li role="none"><a href="https://www.primetek.com.tr/" role="menuitem" target="_blank" rel="noopener noreferrer"><span>About PrimeTek</span></a></li>
+                            </ul>
+                        </CSSTransition>
+                    </li>
+
+                    <li role="none" className="topbar-submenu">
+                        <button type="button" role="menuitem" onClick={(e) => this.toggleMenu(e, 3)} aria-haspopup className="p-link">v{this.version}</button>
+                        <CSSTransition nodeRef={this.versionsOverlayRef} classNames="p-connected-overlay" timeout={{ enter: 120, exit: 100 }} in={this.state.activeMenuIndex === 3}
+                            unmountOnExit onEntered={this.onMenuEnter}>
+                            <ul ref={this.versionsOverlayRef} role="menu" aria-label="Versions" style={{width: '100%'}}>
+                                {
+                                        this.state.versions.map(version => {
+                                            return (
+                                                <li role="none" key={version.version}>
+                                                    <a href={version.url} role="menuitem">
+                                                        {version.version}
+                                                    </a>
+                                                </li>
+                                            )
+                                        })
+                                }
                             </ul>
                         </CSSTransition>
                     </li>

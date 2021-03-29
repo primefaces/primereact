@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
 
 export class InputMaskDoc extends Component {
@@ -204,7 +204,7 @@ import { InputMask } from 'primereact/inputmask';
 
 <CodeHighlight>
 {`
-<InputMask mask="99-999999" value={this.state.value} onChange={(e) => this.setState({value: e.value})}></InputMask>
+<InputMask mask="99-999999" value={value} onChange={(e) => setValue(e.value)}></InputMask>
 `}
 </CodeHighlight>
 
@@ -225,7 +225,7 @@ import { InputMask } from 'primereact/inputmask';
 
 <CodeHighlight>
 {`
-<InputMask mask="a*-999-a999" value={this.state.value} onChange={(e) => this.setState({value: e.value})}></InputMask>
+<InputMask mask="a*-999-a999" value={value} onChange={(e) => setValue(e.value)}></InputMask>
 `}
 </CodeHighlight>
 
@@ -234,7 +234,7 @@ import { InputMask } from 'primereact/inputmask';
 
 <CodeHighlight>
 {`
-<InputMask mask="99/99/9999" value={this.state.value} slotChar="mm/dd/yyyy" onChange={(e) => this.setState({value: e.value})}></InputMask>
+<InputMask mask="99/99/9999" slotChar="mm/dd/yyyy" value={value} onChange={(e) => setValue(e.value)}></InputMask>
 `}
 </CodeHighlight>
 
@@ -246,7 +246,7 @@ import { InputMask } from 'primereact/inputmask';
 
 <CodeHighlight>
 {`
-<InputMask mask="(999) 999-9999? x99999" value={this.state.value} onChange={(e) => this.setState({value: e.value})}></InputMask>
+<InputMask mask="(999) 999-9999? x99999" value={value} onChange={(e) => setValue(e.value)}></InputMask>
 `}
 </CodeHighlight>
 
@@ -424,9 +424,9 @@ import { InputMask } from 'primereact/inputmask';
                         <p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="InputMaskDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'InputMaskDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         );

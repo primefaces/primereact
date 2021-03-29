@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
 import { Ripple } from '../ripple/Ripple';
+import ObjectUtils from '../utils/ObjectUtils';
 
 export class MegaMenu extends Component {
 
@@ -180,14 +181,14 @@ export class MegaMenu extends Component {
     }
 
     navigateToNextItem(listItem) {
-        var nextItem = this.findNextItem(listItem);
+        let nextItem = this.findNextItem(listItem);
         if (nextItem) {
             nextItem.children[0].focus();
         }
     }
 
     navigateToPrevItem(listItem) {
-        var prevItem = this.findPrevItem(listItem);
+        let prevItem = this.findPrevItem(listItem);
         if (prevItem) {
             prevItem.children[0].focus();
         }
@@ -276,14 +277,31 @@ export class MegaMenu extends Component {
             const linkClassName = classNames('p-menuitem-link', {'p-disabled': item.disabled});
             const iconClassName = classNames(item.icon, 'p-menuitem-icon');
             const icon = item.icon && <span className={iconClassName}></span>;
+            const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
+            let content = (
+                <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => this.onLeafClick(event, item)} role="menuitem" aria-disabled={item.disabled}>
+                    {icon}
+                    {label}
+                    <Ripple />
+                </a>
+            );
+
+            if (item.template) {
+                const defaultContentOptions = {
+                    onClick: (event) => this.onLeafClick(event, item),
+                    className: linkClassName,
+                    labelClassName: 'p-menuitem-text',
+                    iconClassName,
+                    element: content,
+                    props: this.props
+                };
+
+                content = ObjectUtils.getJSXElement(item.template, item, defaultContentOptions);
+            }
 
             return (
                 <li key={item.label + '_' + index} className={className} style={item.style} role="none">
-                    <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => this.onLeafClick(event, item)} role="menuitem">
-                        {icon}
-                        <span className="p-menuitem-text">{item.label}</span>
-                        <Ripple />
-                    </a>
+                    {content}
                 </li>
             );
         }
@@ -297,7 +315,7 @@ export class MegaMenu extends Component {
 
         return (
             <React.Fragment key={submenu.label}>
-                <li className={className} style={submenu.style} role="presentation">{submenu.label}</li>
+                <li className={className} style={submenu.style} role="presentation" aria-disabled={submenu.disabled}>{submenu.label}</li>
                 {items}
             </React.Fragment>
         );
@@ -358,6 +376,8 @@ export class MegaMenu extends Component {
         const linkClassName = classNames('p-menuitem-link', {'p-disabled': category.disabled});
         const iconClassName = classNames('p-menuitem-icon', category.icon);
         const icon = category.icon && <span className={iconClassName}></span>;
+        const label = category.label && <span className="p-menuitem-text">{category.label}</span>;
+        const itemContent = category.template ? ObjectUtils.getJSXElement(category.template, category) : null;
         const submenuIcon = this.renderSubmenuIcon(category);
         const panel = this.renderCategoryPanel(category);
 
@@ -366,7 +386,8 @@ export class MegaMenu extends Component {
                 <a href={category.url || '#'} className={linkClassName} target={category.target} onClick={e => this.onCategoryClick(e, category)} onKeyDown={e => this.onCategoryKeyDown(e, category)}
                    role="menuitem" aria-haspopup={category.items != null}>
                     {icon}
-                    <span className="p-menuitem-text">{category.label}</span>
+                    {label}
+                    {itemContent}
                     {submenuIcon}
                     <Ripple />
                 </a>

@@ -25,16 +25,16 @@ import { Galleria } from 'primereact/galleria';
 
 <CodeHighlight>
 {`
-<Galleria value={this.state.images} item={this.itemTemplate} thumbnail={this.thumbnailTemplate}></Galleria>
+<Galleria value={images} item={itemTemplate} thumbnail={thumbnailTemplate}></Galleria>
 `}
 </CodeHighlight>
 <CodeHighlight lang="js">
 {`
-itemTemplate(item) {
+const itemTemplate = (item) => {
     // custom item content
 }
 
-thumbnailTemplate(item) {
+const thumbnailTemplate = (item) => {
     // custom thumbnail content
 }
 `}
@@ -44,7 +44,7 @@ thumbnailTemplate(item) {
             <p>Number of items per page is defined using the <i>numVisible</i> property.</p>
 <CodeHighlight>
 {`
-<Galleria value={this.state.images} item={this.itemTemplate} thumbnail={this.thumbnailTemplate}
+<Galleria value={images} item={itemTemplate} thumbnail={thumbnailTemplate}
     numVisible={5}></Galleria>
 `}
 </CodeHighlight>
@@ -54,7 +54,7 @@ thumbnailTemplate(item) {
             objects whose breakpoint defines the max-width to apply the settings.</p>
 <CodeHighlight>
 {`
-<Galleria value={this.state.images} item={this.itemTemplate} thumbnail={this.thumbnailTemplate}
+<Galleria value={images} item={itemTemplate} thumbnail={thumbnailTemplate}
     numVisible={5} responsiveOptions={responsiveOptions}></Galleria>
 `}
 </CodeHighlight>
@@ -82,7 +82,7 @@ const responsiveOptions = [
             <p>Custom content projection is available using the <i>header</i> and <i>footer</i> properties.</p>
 <CodeHighlight>
 {`
-<Galleria value={this.state.images} item={this.itemTemplate} thumbnail={this.thumbnailTemplate}
+<Galleria value={images} item={itemTemplate} thumbnail={thumbnailTemplate}
     header={<h1>Header</h1>}></Galleria>
 
 `}
@@ -93,8 +93,8 @@ const responsiveOptions = [
 
 <CodeHighlight>
 {`
-<Galleria value={this.state.images} item={this.itemTemplate} thumbnail={this.thumbnailTemplate}
-    activeIndex={this.state.activeIndex} onItemChange={(e) => this.setState({ activeIndex: e.index })}></Galleria>
+<Galleria value={images} item={itemTemplate} thumbnail={thumbnailTemplate}
+    activeIndex={activeIndex} onItemChange={(e) => setActiveIndex(e.index)}></Galleria>
 `}
 </CodeHighlight>
 
@@ -104,7 +104,7 @@ const responsiveOptions = [
 
 <CodeHighlight>
 {`
-<Galleria value={this.state.images} item={this.itemTemplate} thumbnail={this.thumbnailTemplate}></Galleria>
+<Galleria value={images} item={itemTemplate} thumbnail={thumbnailTemplate}></Galleria>
 `}
 </CodeHighlight>
 

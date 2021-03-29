@@ -8,6 +8,9 @@ interface DropdownProps {
     options?: any[];
     optionLabel?: string;
     optionValue?: string;
+    optionDisabled?: boolean;
+    optionGroupLabel?: string;
+    optionGroupChildren?: string;
     style?: object;
     className?: string;
     autoWidth?: boolean;
@@ -27,6 +30,7 @@ interface DropdownProps {
     autoFocus?: boolean;
     filterInputAutoFocus?: boolean;
     resetFilterOnHide?: boolean;
+    showFilterClear?: boolean;
     lazy?: boolean;
     panelClassName?: string;
     panelStyle?: object;
@@ -40,6 +44,7 @@ interface DropdownProps {
     ariaLabelledBy?: string,
     valueTemplate?:((option: any, props: object) => any | any);
     itemTemplate?:((option: any) => any | any);
+    optionGroupTemplate?:((option: any) => any | any);
     onChange?(e: {originalEvent: Event, value: any, target: {name: string, id: string, value: any}}): void;
     onFocus?(e: Event): void;
     onBlur?(e: Event): void;

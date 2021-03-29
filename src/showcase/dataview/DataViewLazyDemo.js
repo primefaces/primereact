@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { DataView, DataViewLayoutOptions } from '../../components/dataview/DataView';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import ProductService from '../service/ProductService';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { Rating } from '../../components/rating/Rating';
@@ -739,9 +739,9 @@ const DataViewLazyDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="DataViewLazyDemo" sources={this.sources} service="ProductService" data="products" extFiles={this.extFiles} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'DataViewLazyDemo', sources: this.sources, service: 'ProductService', data: 'products', extFiles: this.extFiles })
+                    }
                 </TabView>
             </div>
         )

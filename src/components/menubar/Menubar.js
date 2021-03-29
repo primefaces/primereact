@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import {MenubarSub} from './MenubarSub';
@@ -43,8 +42,14 @@ export class Menubar extends Component {
         this.setState((prevState) => ({
             mobileActive: !prevState.mobileActive
         }), () => {
-            this.rootmenu.style.zIndex = String(DomHandler.generateZIndex());
-            this.bindDocumentClickListener();
+            if (this.state.mobileActive) {
+                this.rootmenu.style.zIndex = String(DomHandler.generateZIndex());
+                this.bindDocumentClickListener();
+            }
+            else {
+                this.unbindDocumentClickListener();
+                DomHandler.revertZIndex();
+            }
         });
     }
 
@@ -52,7 +57,10 @@ export class Menubar extends Component {
         if (!this.documentClickListener) {
             this.documentClickListener = (event) => {
                 if (this.state.mobileActive && this.isOutsideClicked(event)) {
-                    this.setState({ mobileActive: false });
+                    this.setState({ mobileActive: false }, () => {
+                        this.unbindDocumentClickListener();
+                        DomHandler.revertZIndex();
+                    });
                 }
             };
             document.addEventListener('click', this.documentClickListener);
@@ -72,7 +80,14 @@ export class Menubar extends Component {
     }
 
     onLeafClick() {
-        this.setState({ mobileActive: false });
+        this.setState({ mobileActive: false }, () => {
+            this.unbindDocumentClickListener();
+            DomHandler.revertZIndex();
+        });
+    }
+
+    componentWillUnmount() {
+        DomHandler.revertZIndex();
     }
 
     renderCustomContent() {
@@ -137,7 +152,7 @@ export class Menubar extends Component {
             <div id={this.props.id} className={className} style={this.props.style}>
                 {start}
                 {menuButton}
-                <MenubarSub ref={(el) => this.rootmenu = ReactDOM.findDOMNode(el)} model={this.props.model} root mobileActive={this.state.mobileActive} onLeafClick={this.onLeafClick} />
+                <MenubarSub ref={(el) => this.rootmenu = el} model={this.props.model} root mobileActive={this.state.mobileActive} onLeafClick={this.onLeafClick} />
                 {end}
             </div>
         );

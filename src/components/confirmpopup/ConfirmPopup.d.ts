@@ -17,6 +17,10 @@ interface ConfirmPopupProps {
     dismissable?: boolean;
     footer?: any;
     onHide?(result: string): void;
+    accept?(): void;
+    reject?(): void;
 }
 
 export class ConfirmPopup extends React.Component<ConfirmPopupProps,any> {}
+
+export function confirmPopup(props: ConfirmPopupProps):any;

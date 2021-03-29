@@ -10,6 +10,7 @@ interface ColumnProps {
     loadingBody?: any;
     footer?: any;
     sortable?: boolean;
+    sortableDisabled?: boolean;
     filter?: boolean;
     filterMatchMode?: string;
     filterPlaceholder?: string;
@@ -45,6 +46,8 @@ interface ColumnProps {
     filterFunction?(value: any, filter: any): void;
     editor?(props: any): JSX.Element | undefined;
     editorValidator?(e: {originalEvent: Event, columnProps: any}): boolean;
+    onBeforeEditorHide?(e: {originalEvent: Event, columnProps: any}): any;
+    onBeforeEditorShow?(e: {originalEvent: Event, columnProps: any}): any;
 }
 
 export class Column extends React.Component<ColumnProps,any> {}

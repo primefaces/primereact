@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class CascadeSelectDoc extends Component {
 
@@ -136,7 +136,7 @@ export class CascadeSelectDemo extends Component {
             'hooks': {
                 tabName: 'Hooks Source',
                 content: `
-import React from 'react';
+import React, { useState } from 'react';
 import { CascadeSelect } from 'primereact/cascadeselect';
 
 const CascadeSelectDemo = () => {
@@ -250,7 +250,7 @@ const CascadeSelectDemo = () => {
             'ts': {
                 tabName: 'TS Source',
                 content: `
-import React from 'react';
+import React, { useState } from 'react';
 import { CascadeSelect } from 'primereact/cascadeselect';
 
 const CascadeSelectDemo = () => {
@@ -386,14 +386,14 @@ import { CascadeSelect } from 'primereact/cascadeselect';
                             matters and it should correspond to the data hierarchy.</p>
 <CodeHighlight>
 {`
-<CascadeSelect  value={this.state.selectedCity} options={this.state.countries}  optionLabel={"cname"} optionGroupLabel={"name"} optionGroupChildren={['states', 'cities']}
-                style={{minWidth: '14rem'}} placeholder={"Select a City"} onChange={event => this.setState({selectedCity1: event.value})}/>
+<CascadeSelect  value={selectedCity} options={countries}  optionLabel={"cname"} optionGroupLabel={"name"} optionGroupChildren={['states', 'cities']}
+                style={{minWidth: '14rem'}} placeholder={"Select a City"} onChange={event => setSelectedCity1(event.value)}/>
 `}
 </CodeHighlight>
 
 <CodeHighlight lang="js">
 {`
-countries: [
+const countries = [
     {
         name: 'Australia',
         code: 'AU',
@@ -477,13 +477,13 @@ countries: [
                         <p>Content of an item can be customized with the <i>itemTemplate</i> prop.</p>
 <CodeHighlight>
 {`
-<CascadeSelect value={this.state.selectedCity2} options={this.state.countries}  optionLabel={"cname"} optionGroupLabel={"name"} optionGroupChildren={['states', 'cities']}
-    style={{minWidth: '14rem'}} placeholder={"Select a City"} onChange={event => this.setState({selectedCity2: event.value})} itemTemplate={this.countryOptionTemplate}/>
+<CascadeSelect value={selectedCity2} options={countries}  optionLabel={"cname"} optionGroupLabel={"name"} optionGroupChildren={['states', 'cities']}
+    style={{minWidth: '14rem'}} placeholder={"Select a City"} onChange={event => setSelectedCity2(event.value)} itemTemplate={countryOptionTemplate}/>
 `}
 </CodeHighlight>
 <CodeHighlight lang="js">
 {`
-countryOptionTemplate(option){
+const countryOptionTemplate = (option) => {
     return (
         <div className="country-item">
             {option.states && <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'}
@@ -596,8 +596,8 @@ countryOptionTemplate(option){
                                     <tr>
                                         <td>appendTo</td>
                                         <td>string</td>
-                                        <td>null</td>
-                                        <td>Id of the element or "body" for document where the overlay should be appended to.</td>
+                                        <td>document.body</td>
+                                        <td>DOM element instance where the overlay panel should be mounted.</td>
                                     </tr>
                                     <tr>
                                         <td>itemTemplate</td>
@@ -702,9 +702,9 @@ countryOptionTemplate(option){
                         <p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="CascadeSelectDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'CascadeSelectDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         )

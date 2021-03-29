@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { DataTable } from '../../components/datatable/DataTable';
 import { Column } from '../../components/column/Column';
 import { CustomerService } from '../service/CustomerService';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './DataTableDemo.scss';
 
@@ -759,9 +759,9 @@ const DataTableScrollDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="DataTableScrollDemo" sources={this.sources} service="CustomerService" data="customers-large,customers-xlarge" extFiles={this.extFiles} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'DataTableScrollDemo', sources: this.sources, service: 'CustomerService', data: 'customers-large,customers-xlarge', extFiles: this.extFiles })
+                    }
                 </TabView>
             </div>
         )

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class ColorPickerDoc extends Component {
 
@@ -124,7 +124,7 @@ import {ColorPicker} from 'primereact/colorpicker';
 
 <CodeHighlight>
 {`
-<ColorPicker value={this.state.color} onChange={(e) => this.setState({color: e.value})} />
+<ColorPicker value={color} onChange={(e) => setColor(e.value)} />
 `}
 </CodeHighlight>
 
@@ -133,11 +133,11 @@ import {ColorPicker} from 'primereact/colorpicker';
 
 <CodeHighlight>
 {`
-<ColorPicker value={this.state.color1} onChange={(e) => this.setState({color1: e.value})} />
+<ColorPicker value={color1} onChange={(e) => setColor1(e.value)} />
 
-<ColorPicker format="rgb" value={this.state.color2} onChange={(e) => this.setState({color2: e.value})} />
+<ColorPicker format="rgb" value={color2} onChange={(e) => setColor2(e.value)} />
 
-<ColorPicker format="hsb" value={this.state.color3} onChange={(e) => this.setState({color3: e.value})}/>
+<ColorPicker format="hsb" value={color3} onChange={(e) => setColor3(e.value)}/>
 `}
 </CodeHighlight>
 
@@ -199,8 +199,8 @@ import {ColorPicker} from 'primereact/colorpicker';
                                     <tr>
                                         <td>appendTo</td>
                                         <td>DOM element</td>
-                                        <td>null</td>
-                                        <td>DOM element instance where the dialog should be mounted.</td>
+                                        <td>document.body</td>
+                                        <td>DOM element instance where the overlay panel should be mounted.</td>
                                     </tr>
                                     <tr>
                                         <td>disabled</td>
@@ -315,9 +315,9 @@ import {ColorPicker} from 'primereact/colorpicker';
                         <p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="ColorPickerDemo" sources={this.sources} extFiles={this.extFiles} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'ColorPickerDemo', sources: this.sources, extFiles: this.extFiles })
+                    }
                 </TabView>
             </div>
         )

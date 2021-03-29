@@ -12,6 +12,7 @@ export class TableBody extends Component {
         this.onRowRightClick = this.onRowRightClick.bind(this);
         this.onRowTouchEnd = this.onRowTouchEnd.bind(this);
         this.onRowToggle = this.onRowToggle.bind(this);
+        this.onRowEditingToggle = this.onRowEditingToggle.bind(this);
         this.onRadioClick = this.onRadioClick.bind(this);
         this.onCheckboxClick = this.onCheckboxClick.bind(this);
         this.onRowDragEnd = this.onRowDragEnd.bind(this);
@@ -309,7 +310,7 @@ export class TableBody extends Component {
             }
         }
         else {
-            let expandedRowIndex = this.findExpandedRowIndex(event.data);
+            let expandedRowIndex = this.findRowIndex(this.props.expandedRows, event.data);
             expandedRows = this.props.expandedRows ? [...this.props.expandedRows] : [];
 
             if (expandedRowIndex !== -1) {
@@ -333,16 +334,12 @@ export class TableBody extends Component {
         }
     }
 
-    findExpandedRowIndex(row) {
+    findRowIndex(rows, row) {
         let index = -1;
-        if (this.props.expandedRows) {
-            for (let i = 0; i < this.props.expandedRows.length; i++) {
-                if (ObjectUtils.equals(this.props.expandedRows[i], row)) {
-                    index = i;
-                    break;
-                }
-            }
+        if (rows) {
+            rows.some((r, i) => (ObjectUtils.equals(rows[i], row) ? (index = i, true) : false));
         }
+
         return index;
     }
 
@@ -355,21 +352,40 @@ export class TableBody extends Component {
             return this.props.expandedRows && this.props.expandedRows[dataKeyValue] != null;
         }
         else {
-            return this.findExpandedRowIndex(row) !== -1
+            return this.findRowIndex(this.props.expandedRows, row) !== -1
         }
     }
 
-    findEditingRowIndex(row) {
-        let index = -1;
-        if (this.props.editingRows) {
-            for (let i = 0; i < this.props.editingRows.length; i++) {
-                if (ObjectUtils.equals(this.props.editingRows[i], row)) {
-                    index = i;
-                    break;
-                }
-            }
+    onRowEditingToggle(event) {
+        let editingRows;
+        let dataKey = this.props.dataKey;
+
+        if (dataKey) {
+            let dataKeyValue = String(ObjectUtils.resolveFieldData(event.data, dataKey));
+            editingRows = this.props.editingRows ? {...this.props.editingRows} : {};
+
+            if (editingRows[dataKeyValue] != null)
+                delete editingRows[dataKeyValue];
+            else
+                editingRows[dataKeyValue] = true;
         }
-        return index;
+        else {
+            let editingRowIndex = this.findRowIndex(this.props.editingRows, event.data);
+            editingRows = this.props.editingRows ? [...this.props.editingRows] : [];
+
+            if (editingRowIndex !== -1)
+                editingRows = editingRows.filter((val,i) => i !== editingRowIndex);
+            else
+                editingRows.push(event.data);
+        }
+
+        if (this.props.onRowEditChange) {
+            this.props.onRowEditChange({
+                originalEvent: event.originalEvent,
+                data: editingRows,
+                index: event.rowIndex
+            });
+        }
     }
 
     isRowEditing(row) {
@@ -381,12 +397,12 @@ export class TableBody extends Component {
             return this.props.editingRows && this.props.editingRows[dataKeyValue] != null;
         }
         else {
-            return this.findEditingRowIndex(row) !== -1
+            return this.findRowIndex(this.props.editingRows, row) !== -1
         }
     }
 
     isSelectionEnabled() {
-        if(this.props.selectionMode || this.props.frozenSelectionMode != null) {
+        if (this.props.selectionMode || this.props.frozenSelectionMode != null) {
             return true;
         }
         else {
@@ -486,8 +502,8 @@ export class TableBody extends Component {
         }
 
         return (
-            <tr key={index + '_rowgroupheader'} className="p-rowgroup-header">
-                <td colSpan={React.Children.count(this.props.children)}>
+            <tr role="row" key={index + '_rowgroupheader'} className="p-rowgroup-header">
+                <td role="cell" colSpan={React.Children.count(this.props.children)}>
                     { content }
                     <span className="p-rowgroup-header-name">
                         {this.props.rowGroupHeaderTemplate(rowData, index)}
@@ -499,7 +515,7 @@ export class TableBody extends Component {
 
     renderRowGroupFooter(rowData, index) {
         return (
-            <tr key={index + '_rowgroupfooter'} className="p-rowgroup-footer">
+            <tr role="row" key={index + '_rowgroupfooter'} className="p-rowgroup-footer">
                 {this.props.rowGroupFooterTemplate(rowData, index)}
             </tr>
         );
@@ -519,7 +535,7 @@ export class TableBody extends Component {
 
             if(this.props.value && this.props.value.length) {
                 rows = [];
-                let startIndex = this.props.lazy ? 0 : first;
+                let startIndex = this.props.lazy ? 0 : (this.props.value.length > first ? first : 0);
                 let endIndex = this.props.virtualScroll ? (startIndex + rpp * 2) : (startIndex + rpp||this.props.value.length);
 
                 for(let i = startIndex; i < endIndex; i++) {
@@ -570,13 +586,14 @@ export class TableBody extends Component {
                     let isRowGroupExpanded = this.props.expandableRowGroups && hasSubheaderGrouping && rowGroupHeaderExpanded;
                     if (!this.props.expandableRowGroups || isRowGroupExpanded) {
                         //row content
-                        let bodyRow = <BodyRow key={i} value={this.props.value} rowData={rowData} rowIndex={i} onClick={this.onRowClick} onDoubleClick={this.props.onRowDoubleClick} onRightClick={this.onRowRightClick} onTouchEnd={this.onRowTouchEnd}
-                                            onRowToggle={this.onRowToggle} expanded={expanded} selectionMode={this.props.selectionMode}
+                        let bodyRow = <BodyRow tableId={this.props.tableId} key={i} value={this.props.value} rowData={rowData} rowIndex={i} onClick={this.onRowClick} onDoubleClick={this.props.onRowDoubleClick} onRightClick={this.onRowRightClick} onTouchEnd={this.onRowTouchEnd}
+                                            onRowToggle={this.onRowToggle} expanded={expanded} selectionMode={this.props.selectionMode} selectOnEdit={this.props.selectOnEdit}
                                             onRadioClick={this.onRadioClick} onCheckboxClick={this.onCheckboxClick} selected={selected} contextMenuSelected={contextMenuSelected} rowClassName={this.props.rowClassName}
                                             sortField={this.props.sortField} rowGroupMode={this.props.rowGroupMode} groupRowSpan={groupRowSpan}
                                             onDragStart={(e) => this.onRowDragStart(e, i)} onDragEnd={this.onRowDragEnd} onDragOver={(e) => this.onRowDragOver(e, i)} onDragLeave={this.onRowDragLeave}
                                             onDrop={this.onRowDrop} virtualScroll={this.props.virtualScroll} virtualRowHeight={this.props.virtualRowHeight}
-                                            editMode={this.props.editMode} editing={editing} rowEditorValidator={this.props.rowEditorValidator} onRowEditInit={this.props.onRowEditInit} onRowEditSave={this.props.onRowEditSave} onRowEditCancel={this.props.onRowEditCancel}
+                                            editMode={this.props.editMode} editing={editing} isRowEditingControlled={!!this.props.onRowEditChange} rowEditorValidator={this.props.rowEditorValidator}
+                                            onRowEditInit={this.props.onRowEditInit} onRowEditSave={this.props.onRowEditSave} onRowEditCancel={this.props.onRowEditCancel} onRowEditingToggle={this.onRowEditingToggle}
                                             showRowReorderElement={this.props.showRowReorderElement} showSelectionElement={this.props.showSelectionElement}>
                                             {this.props.children}
                                     </BodyRow>
@@ -585,14 +602,15 @@ export class TableBody extends Component {
                     }
 
                     //row expansion
-                    if(expanded && !(hasSubheaderGrouping && this.props.expandableRowGroups)) {
+                    if (expanded && !(hasSubheaderGrouping && this.props.expandableRowGroups)) {
                         let expandedRowContent = this.props.rowExpansionTemplate(rowData);
-                        let expandedRow = <tr key={i + '_expanded'}><td colSpan={this.props.children.length}>{expandedRowContent}</td></tr>
+                        let id = `${this.props.tableId ? this.props.tableId + '_' : ''}content_${i}_expanded`;
+                        let expandedRow = <tr key={id} id={id} role="row"><td role="cell" colSpan={this.props.children.length}>{expandedRowContent}</td></tr>
                         rows.push(expandedRow);
                     }
 
                     //footer row group
-                    if(hasSubheaderGrouping && (!this.props.expandableRowGroups || isRowGroupExpanded)) {
+                    if (hasSubheaderGrouping && (!this.props.expandableRowGroups || isRowGroupExpanded)) {
                         let currentRowFieldData = ObjectUtils.resolveFieldData(rowData, this.props.groupField);
                         let nextRowFieldData = ObjectUtils.resolveFieldData(this.props.value[i + 1], this.props.groupField);
 
@@ -606,8 +624,8 @@ export class TableBody extends Component {
                 let emptyMessage = this.props.emptyMessage;
 
                 rows = !this.props.loading && emptyMessage !== null ?
-                    <tr className="p-datatable-emptymessage">
-                        <td colSpan={this.props.children.length}>
+                    <tr role="row" className="p-datatable-emptymessage">
+                        <td role="cell" colSpan={this.props.children.length}>
                             {
                                 (typeof emptyMessage === 'function') ? emptyMessage(this.props.frozen) : emptyMessage
                             }

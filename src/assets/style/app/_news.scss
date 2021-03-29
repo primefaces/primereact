@@ -2,14 +2,14 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 997;
+    z-index: 1100;
     height: 70px;
     width: 100%;
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url("../../images/news/topbar-diamond-bg.png");
+    background-image: linear-gradient(to left, #e2821a, #e49e18);
     cursor: pointer;
 
     .layout-news-container {
@@ -43,14 +43,14 @@
         }
 
         img.layouts-news-mockup-image {
-            height: 70px;
+            max-width: 350px;
         }
 
         .layout-news-button {
-            border: 1px solid #ffffff;
-            color: #ffffff;
+            border: 2px solid #212121;
+            color: #212121;
             font-size: 15px;
-            padding: .3em .3em .5em 1em;
+            padding: 0.5em 1em;
             font-weight: bold;
             border-radius: 3px;
             display: flex;
@@ -58,7 +58,7 @@
             align-items: center;
             flex-shrink: 0;
             transition: background-color 0.15s;
-            margin-left: 2em;
+            margin-left: 1rem;
             position: relative;
             z-index: 1;
 

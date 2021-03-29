@@ -39,19 +39,34 @@ export class SplitButtonItem extends Component {
     }
 
     renderMenuitem() {
-        let { disabled, icon, label, template } = this.props.menuitem;
+        let { disabled, icon, label, template, url, target } = this.props.menuitem;
         const className = classNames('p-menuitem-link', { 'p-disabled': disabled });
-        const itemContent = template ? ObjectUtils.getJSXElement(template, this.props.menuitem) : null;
-        icon = icon && <span className={classNames('p-menuitem-icon', icon)}></span>;
+        const iconClassName = classNames('p-menuitem-icon', icon);
+        icon = icon && <span className={iconClassName}></span>;
         label = label && <span className="p-menuitem-text">{label}</span>;
+        let content = (
+            <a href={url || '#'} role="menuitem" className={className} target={target} onClick={this.onClick}>
+                {icon}
+                {label}
+            </a>
+        );
+
+        if (template) {
+            const defaultContentOptions = {
+                onClick: (event) => this.onClick(event),
+                className,
+                labelClassName: 'p-menuitem-text',
+                iconClassName,
+                element: content,
+                props: this.props
+            };
+
+            content = ObjectUtils.getJSXElement(template, this.props.menuitem, defaultContentOptions);
+        }
 
         return (
             <li className="p-menuitem" role="none">
-                <a href={this.props.menuitem.url || '#'} role="menuitem" className={className} target={this.props.menuitem.target} onClick={this.onClick}>
-                    {icon}
-                    {label}
-                    {itemContent}
-                </a>
+                {content}
             </li>
         );
     }

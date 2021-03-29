@@ -2,8 +2,9 @@ import * as React from 'react';
 
 export interface ToastMessage {
     severity?: 'success' | 'info' | 'warn' | 'error',
-    summary?: React.ReactNode;
-    detail?: React.ReactNode;
+    summary?: any;
+    detail?: any;
+    content?: any;
     closable?: boolean;
     sticky?: boolean;
     life?: number;

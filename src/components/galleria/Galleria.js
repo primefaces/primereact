@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import UniqueComponentId from '../utils/UniqueComponentId';
@@ -8,6 +7,7 @@ import { GalleriaThumbnails } from './GalleriaThumbnails';
 import DomHandler from '../utils/DomHandler';
 import { CSSTransition } from 'react-transition-group';
 import { Ripple } from '../ripple/Ripple';
+import { Portal } from '../portal/Portal';
 
 export class Galleria extends Component {
 
@@ -97,8 +97,10 @@ export class Galleria extends Component {
         this.onEnter = this.onEnter.bind(this);
         this.onEntering = this.onEntering.bind(this);
         this.onExit = this.onExit.bind(this);
+        this.onExited = this.onExited.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
+        this.galleriaRef = React.createRef();
     }
 
     get activeItemIndex() {
@@ -138,6 +140,10 @@ export class Galleria extends Component {
         DomHandler.addClass(this.mask, 'p-galleria-mask-leave');
     }
 
+    onExited() {
+        DomHandler.revertZIndex();
+    }
+
     isAutoPlayActive() {
         return this.state.slideShowActive;
     }
@@ -145,7 +151,7 @@ export class Galleria extends Component {
     startSlideShow() {
         this.interval = setInterval(() => {
             let activeIndex = (this.props.circular && (this.props.value.length - 1) === this.activeItemIndex) ? 0 : (this.activeItemIndex + 1);
-            this.onActiveItemChange({index: activeIndex});
+            this.onActiveItemChange({ index: activeIndex });
 
         }, this.props.transitionInterval);
 
@@ -175,13 +181,15 @@ export class Galleria extends Component {
         if (this.state.slideShowActive) {
             this.stopSlideShow();
         }
+
+        DomHandler.revertZIndex();
     }
 
     renderHeader() {
         if (this.props.header) {
             return (<div className="p-galleria-header">
-                        { this.props.header }
-                    </div>);
+                { this.props.header}
+            </div>);
         }
 
         return null;
@@ -190,8 +198,8 @@ export class Galleria extends Component {
     renderFooter() {
         if (this.props.footer) {
             return (<div className="p-galleria-footer">
-                        { this.props.footer }
-                    </div>);
+                { this.props.footer}
+            </div>);
         }
 
         return null;
@@ -217,15 +225,15 @@ export class Galleria extends Component {
         const header = this.renderHeader();
         const footer = this.renderFooter();
         const element = (
-            <div id={this.id} className={galleriaClassName} style={this.props.style}>
-                { closeIcon }
-                { header }
+            <div ref={this.galleriaRef} id={this.id} className={galleriaClassName} style={this.props.style}>
+                { closeIcon}
+                { header}
                 <div className="p-galleria-content">
-                    <GalleriaItem ref={(el) => this.previewContent = ReactDOM.findDOMNode(el)} value={this.props.value} activeItemIndex={this.activeItemIndex} onActiveItemChange={this.onActiveItemChange}
+                    <GalleriaItem ref={(el) => this.previewContent = el} value={this.props.value} activeItemIndex={this.activeItemIndex} onActiveItemChange={this.onActiveItemChange}
                         itemTemplate={this.props.item} circular={this.props.circular} caption={this.props.caption}
                         showIndicators={this.props.showIndicators} changeItemOnIndicatorHover={this.props.changeItemOnIndicatorHover} indicator={this.props.indicator}
                         showItemNavigators={this.props.showItemNavigators} autoPlay={this.props.autoPlay} slideShowActive={this.state.slideShowActive}
-                        startSlideShow={this.startSlideShow} stopSlideShow={this.stopSlideShow}/>
+                        startSlideShow={this.startSlideShow} stopSlideShow={this.stopSlideShow} />
 
                     {
                         this.props.showThumbnails && <GalleriaThumbnails containerId={this.id} value={this.props.value} activeItemIndex={this.activeItemIndex} onActiveItemChange={this.onActiveItemChange}
@@ -234,7 +242,7 @@ export class Galleria extends Component {
                             autoPlay={this.props.autoPlay} slideShowActive={this.state.slideShowActive} stopSlideShow={this.stopSlideShow} />
                     }
                 </div>
-                { footer }
+                { footer}
             </div>
         );
 
@@ -251,14 +259,14 @@ export class Galleria extends Component {
 
             const galleriaWrapper = (
                 <div ref={(el) => this.mask = el} className={maskClassName}>
-                    <CSSTransition classNames="p-galleria" in={this.state.visible} timeout={{enter: 150, exit: 150}}
-                        unmountOnExit onEnter={this.onEnter} onEntering={this.onEntering} onExit={this.onExit} >
-                        { element }
+                    <CSSTransition nodeRef={this.galleriaRef} classNames="p-galleria" in={this.state.visible} timeout={{ enter: 150, exit: 150 }}
+                        unmountOnExit onEnter={this.onEnter} onEntering={this.onEntering} onExit={this.onExit} onExited={this.onExited}>
+                        {element}
                     </CSSTransition>
                 </div>
             );
 
-            return ReactDOM.createPortal(galleriaWrapper, document.body);
+            return <Portal element={galleriaWrapper} />;
         }
         else {
             return element;

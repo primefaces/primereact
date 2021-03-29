@@ -1,5 +1,14 @@
 import * as React from 'react';
 
+interface SplitterPanelProps {
+    size?: number;
+    minSize?: number;
+    style?: object;
+    className?: string;
+}
+
+export class SplitterPanel extends React.Component<SplitterPanelProps,any> {}
+
 interface SplitterProps {
     id?: string;
     className?: string;

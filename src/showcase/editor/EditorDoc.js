@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class EditorDoc extends Component {
 
@@ -150,7 +150,7 @@ import { Editor } from 'primereact/editor';
 
 <CodeHighlight>
 {`
-<Editor style={{height:'320px'}} value={this.state.text} onTextChange={(e) => this.setState({text: e.htmlValue})} />
+<Editor style={{height:'320px'}} value={text} onTextChange={(e) => setText(e.htmlValue)} />
 `}
 </CodeHighlight>
 
@@ -167,7 +167,7 @@ const header = (
     </span>
 );
 
-<Editor style={{height:'320px'}} value={this.state.text} onTextChange={(e) => this.setState({text: e.htmlValue})} headerTemplate={header}/>
+<Editor style={{height:'320px'}} value={text} onTextChange={(e) => setText(e.htmlValue)} headerTemplate={header}/>
 `}
 </CodeHighlight>
 
@@ -311,9 +311,9 @@ npm install quill --save
 </CodeHighlight>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="EditorDemo" sources={this.sources} dependencies={{ "quill": "1.3.7" }} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'EditorDemo', sources: this.sources, dependencies: { "quill": "1.3.7" } })
+                    }
                 </TabView>
             </div>
         )

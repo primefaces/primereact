@@ -21,7 +21,7 @@ import AppConfig from './AppConfig';
 
 import AppContentContext from './AppContentContext';
 import { Toast } from './components/toast/Toast';
-import PrimeReact from './components/utils/PrimeReact';
+import PrimeReact from './components/api/PrimeReact';
 import { AppChangelogDialog } from './AppChangelogDialog';
 
 export class App extends Component {
@@ -30,12 +30,14 @@ export class App extends Component {
         super(props);
 
         this.news_key = 'primenews-react';
+        this.theme_key = 'primetheme-react';
 
         this.state = {
             theme: 'saga-blue',
             inputStyle: 'outlined',
-            ripple: true,
+            ripple: false,
             darkTheme: false,
+            themeCategory: null,
             sidebarActive: false,
             newsActive: this.isNewsStorageExpired(),
             configuratorActive: false,
@@ -54,18 +56,45 @@ export class App extends Component {
         this.showChangelogDialog = this.showChangelogDialog.bind(this);
         this.hideChangelogDialog = this.hideChangelogDialog.bind(this);
 
-        PrimeReact.ripple = true;
+        PrimeReact.ripple = false;
+    }
+
+    initTheme() {
+        const queryString = window.location.search;
+        const theme = queryString ? new URLSearchParams(queryString.substring(1)).get('theme') : localStorage.getItem(this.theme_key);
+
+        if (theme) {
+            const dark = this.isDarkTheme(theme);
+            this.onThemeChange({
+                theme,
+                dark
+            });
+        }
     }
 
     onThemeChange(event) {
+        let { theme, dark: darkTheme} = event;
         let themeElement = document.getElementById('theme-link');
-        themeElement.setAttribute('href', themeElement.getAttribute('href').replace(this.state.theme, event.theme));
-        this.setState({
-            theme: event.theme,
-            darkTheme: event.dark
-        });
+        let themeCategory = /^(md-|mdc-)/i.test(theme) ? 'material' : (/^(bootstrap)/i.test(theme) ? 'bootstrap' : null);
+        let state = {};
 
-        event.originalEvent.preventDefault();
+        if (theme.startsWith('md')) {
+            PrimeReact.ripple = true;
+            state = { ripple: true };
+        }
+
+        themeElement.setAttribute('href', themeElement.getAttribute('href').replace(this.state.theme, event.theme));
+
+        state = {...state, ...{
+                theme,
+                darkTheme,
+                themeCategory
+            }
+        };
+
+        this.setState(state, () => {
+            localStorage.setItem(this.theme_key, this.state.theme);
+        });
     }
 
     onMenuButtonClick() {
@@ -117,6 +146,10 @@ export class App extends Component {
         }
 
         return false;
+    }
+
+    isDarkTheme(theme) {
+        return /(dark|vela|arya|luna)/i.test(theme);
     }
 
     onInputStyleChange(inputStyle) {
@@ -174,13 +207,16 @@ export class App extends Component {
         if (this.isOutdatedIE()) {
             this.showcaseToast.show({ severity: 'warn', summary: 'Limited Functionality', detail: 'Although PrimeReact supports IE11, ThemeSwitcher in this application cannot be not fully supported by your browser. Please use a modern browser for the best experience of the showcase.', life: 6000 });
         }
+
+        this.initTheme();
     }
 
     render() {
         const wrapperClassName = classNames('layout-wrapper', {
             'layout-news-active': this.state.newsActive,
             'p-input-filled': this.state.inputStyle === 'filled',
-            'p-ripple-disabled': this.state.ripple === false
+            'p-ripple-disabled': this.state.ripple === false,
+            [`theme-${this.state.themeCategory}`]: !!this.state.themeCategory
         });
         const maskClassName = classNames('layout-mask', {
             'layout-mask-active': this.state.sidebarActive

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class AutoCompleteDoc extends Component {
 
@@ -24,13 +24,47 @@ export class AutoCompleteDemo extends Component {
             countries: [],
             selectedCountry1: null,
             selectedCountry2: null,
+            selectedCity: null,
             selectedCountries: null,
-            filteredCountries: null
+            filteredCountries: null,
+            filteredCities: null
         };
 
         this.searchCountry = this.searchCountry.bind(this);
+        this.searchCity = this.searchCity.bind(this);
         this.itemTemplate = this.itemTemplate.bind(this);
+        this.groupedItemTemplate = this.groupedItemTemplate.bind(this);
         this.countryservice = new CountryService();
+
+        this.groupedCities = [
+            {
+                label: 'Germany', code: 'DE',
+                items: [
+                    { label: 'Berlin', value: 'Berlin' },
+                    { label: 'Frankfurt', value: 'Frankfurt' },
+                    { label: 'Hamburg', value: 'Hamburg' },
+                    { label: 'Munich', value: 'Munich' }
+                ]
+            },
+            {
+                label: 'USA', code: 'US',
+                items: [
+                    { label: 'Chicago', value: 'Chicago' },
+                    { label: 'Los Angeles', value: 'Los Angeles' },
+                    { label: 'New York', value: 'New York' },
+                    { label: 'San Francisco', value: 'San Francisco' }
+                ]
+            },
+            {
+                label: 'Japan', code: 'JP',
+                items: [
+                    { label: 'Kyoto', value: 'Kyoto' },
+                    { label: 'Osaka', value: 'Osaka' },
+                    { label: 'Tokyo', value: 'Tokyo' },
+                    { label: 'Yokohama', value: 'Yokohama' }
+                ]
+            }
+        ];
     }
 
     componentDidMount() {
@@ -53,11 +87,34 @@ export class AutoCompleteDemo extends Component {
         }, 250);
     }
 
+    searchCity(event) {
+        let query = event.query;
+        let filteredCities = [];
+
+        for (let country of this.groupedCities) {
+            let filteredItems = country.items.filter((item) => item.label.toLowerCase().indexOf(query.toLowerCase()) !== -1);
+            if (filteredItems && filteredItems.length) {
+                filteredCities.push({...country, ...{items: filteredItems}});
+            }
+        }
+
+        this.setState({ filteredCities });
+    }
+
     itemTemplate(item) {
         return (
             <div className="country-item">
                 <img alt={item.name} src={\`showcase/demo/images/flag_placeholder.png\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${item.code.toLowerCase()}\`} />
                 <div>{item.name}</div>
+            </div>
+        );
+    }
+
+    groupedItemTemplate(item) {
+        return (
+            <div className="p-d-flex p-ai-center country-item">
+                <img alt={item.name} src={\`showcase/demo/images/flag_placeholder.png\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${item.code.toLowerCase()}\`} />
+                <div>{item.label}</div>
             </div>
         );
     }
@@ -68,8 +125,11 @@ export class AutoCompleteDemo extends Component {
                 <h5>Basic</h5>
                 <AutoComplete value={this.state.selectedCountry1} suggestions={this.state.filteredCountries} completeMethod={this.searchCountry} field="name" onChange={(e) => this.setState({ selectedCountry1: e.value })} />
 
-                <h5>Dropdown and Templating</h5>
-                <AutoComplete value={this.state.selectedCountry2} suggestions={this.state.filteredCountries} completeMethod={this.searchCountry} field="name" dropdown itemTemplate={this.itemTemplate} onChange={(e) => this.setState({ selectedCountry2: e.value })} />
+                <h5>Grouped</h5>
+                <AutoComplete value={this.state.selectedCity} suggestions={this.state.filteredCities} completeMethod={this.searchCity} field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={this.groupedItemTemplate} onChange={(e) => this.setState({ selectedCity: e.value })}/>
+
+                <h5>Dropdown, Templating and Force Selection</h5>
+                <AutoComplete value={this.state.selectedCountry2} suggestions={this.state.filteredCountries} completeMethod={this.searchCountry} field="name" dropdown forceSelection itemTemplate={this.itemTemplate} onChange={(e) => this.setState({ selectedCountry2: e.value })} />
 
                 <h5>Multiple</h5>
                 <span className="p-fluid">
@@ -92,9 +152,41 @@ const AutoCompleteDemo = () => {
     const [countries, setCountries] = useState([]);
     const [selectedCountry1, setSelectedCountry1] = useState(null);
     const [selectedCountry2, setSelectedCountry2] = useState(null);
+    const [selectedCity, setSelectedCity] = useState(null);
     const [selectedCountries, setSelectedCountries] = useState(null);
     const [filteredCountries, setFilteredCountries] = useState(null);
+    const [filteredCities, setFilteredCities] = useState(null);
     const countryservice = new CountryService();
+
+    const groupedCities = [
+        {
+            label: 'Germany', code: 'DE',
+            items: [
+                { label: 'Berlin', value: 'Berlin' },
+                { label: 'Frankfurt', value: 'Frankfurt' },
+                { label: 'Hamburg', value: 'Hamburg' },
+                { label: 'Munich', value: 'Munich' }
+            ]
+        },
+        {
+            label: 'USA', code: 'US',
+            items: [
+                { label: 'Chicago', value: 'Chicago' },
+                { label: 'Los Angeles', value: 'Los Angeles' },
+                { label: 'New York', value: 'New York' },
+                { label: 'San Francisco', value: 'San Francisco' }
+            ]
+        },
+        {
+            label: 'Japan', code: 'JP',
+            items: [
+                { label: 'Kyoto', value: 'Kyoto' },
+                { label: 'Osaka', value: 'Osaka' },
+                { label: 'Tokyo', value: 'Tokyo' },
+                { label: 'Yokohama', value: 'Yokohama' }
+            ]
+        }
+    ];
 
     useEffect(() => {
         countryservice.getCountries().then(data => setCountries(data));
@@ -102,18 +194,32 @@ const AutoCompleteDemo = () => {
 
     const searchCountry = (event) => {
         setTimeout(() => {
-            let filteredCountries;
+            let _filteredCountries;
             if (!event.query.trim().length) {
-                filteredCountries = [...countries];
+                _filteredCountries = [...countries];
             }
             else {
-                filteredCountries = countries.filter((country) => {
+                _filteredCountries = countries.filter((country) => {
                     return country.name.toLowerCase().startsWith(event.query.toLowerCase());
                 });
             }
 
-            setFilteredCountries(filteredCountries);
+            setFilteredCountries(_filteredCountries);
         }, 250);
+    }
+
+    const searchCity = (event) => {
+        let query = event.query;
+        let _filteredCities = [];
+
+        for (let country of groupedCities) {
+            let filteredItems = country.items.filter((item) => item.label.toLowerCase().indexOf(query.toLowerCase()) !== -1);
+            if (filteredItems && filteredItems.length) {
+                _filteredCities.push({...country, ...{items: filteredItems}});
+            }
+        }
+
+        setFilteredCities(_filteredCities);
     }
 
     const itemTemplate = (item) => {
@@ -125,13 +231,25 @@ const AutoCompleteDemo = () => {
         );
     }
 
+    const groupedItemTemplate = (item) => {
+        return (
+            <div className="p-d-flex p-ai-center country-item">
+                <img alt={item.name} src={\`showcase/demo/images/flag_placeholder.png\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${item.code.toLowerCase()}\`} />
+                <div>{item.label}</div>
+            </div>
+        );
+    }
+
     return (
         <div className="card">
             <h5>Basic</h5>
             <AutoComplete value={selectedCountry1} suggestions={filteredCountries} completeMethod={searchCountry} field="name" onChange={(e) => setSelectedCountry1(e.value)} />
 
-            <h5>Dropdown and Templating</h5>
-            <AutoComplete value={selectedCountry2} suggestions={filteredCountries} completeMethod={searchCountry} field="name" dropdown itemTemplate={itemTemplate} onChange={(e) => setSelectedCountry2(e.value)} />
+            <h5>Grouped</h5>
+            <AutoComplete value={selectedCity} suggestions={filteredCities} completeMethod={searchCity} field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} onChange={(e) => setSelectedCity(e.value)}/>
+
+            <h5>Dropdown, Templating and Force Selection</h5>
+            <AutoComplete value={selectedCountry2} suggestions={filteredCountries} completeMethod={searchCountry} field="name" dropdown forceSelection itemTemplate={itemTemplate} onChange={(e) => setSelectedCountry2(e.value)} />
 
             <h5>Multiple</h5>
             <span className="p-fluid">
@@ -150,12 +268,44 @@ import { AutoComplete } from 'primereact/autocomplete';
 import { CountryService } from '../service/CountryService';
 
 const AutoCompleteDemo = () => {
-    const [countries, setCountries] = useState<any[]>([]);
+    const [countries, setCountries] = useState<any>([]);
     const [selectedCountry1, setSelectedCountry1] = useState<any>(null);
     const [selectedCountry2, setSelectedCountry2] = useState<any>(null);
+    const [selectedCity, setSelectedCity] =  useState<any>(null);
     const [selectedCountries, setSelectedCountries] = useState<any>(null);
     const [filteredCountries, setFilteredCountries] = useState<any>(null);
+    const [filteredCities, setFilteredCities] = useState<any>(null);
     const countryservice = new CountryService();
+
+    const groupedCities = [
+        {
+            label: 'Germany', code: 'DE',
+            items: [
+                { label: 'Berlin', value: 'Berlin' },
+                { label: 'Frankfurt', value: 'Frankfurt' },
+                { label: 'Hamburg', value: 'Hamburg' },
+                { label: 'Munich', value: 'Munich' }
+            ]
+        },
+        {
+            label: 'USA', code: 'US',
+            items: [
+                { label: 'Chicago', value: 'Chicago' },
+                { label: 'Los Angeles', value: 'Los Angeles' },
+                { label: 'New York', value: 'New York' },
+                { label: 'San Francisco', value: 'San Francisco' }
+            ]
+        },
+        {
+            label: 'Japan', code: 'JP',
+            items: [
+                { label: 'Kyoto', value: 'Kyoto' },
+                { label: 'Osaka', value: 'Osaka' },
+                { label: 'Tokyo', value: 'Tokyo' },
+                { label: 'Yokohama', value: 'Yokohama' }
+            ]
+        }
+    ];
 
     useEffect(() => {
         countryservice.getCountries().then(data => setCountries(data));
@@ -163,18 +313,32 @@ const AutoCompleteDemo = () => {
 
     const searchCountry = (event: { query: string }) => {
         setTimeout(() => {
-            let filteredCountries;
+            let _filteredCountries;
             if (!event.query.trim().length) {
-                filteredCountries = [...countries];
+                _filteredCountries = [...countries];
             }
             else {
-                filteredCountries = countries.filter((country) => {
+                _filteredCountries = countries.filter((country) => {
                     return country.name.toLowerCase().startsWith(event.query.toLowerCase());
                 });
             }
 
-            setFilteredCountries(filteredCountries);
+            setFilteredCountries(_filteredCountries);
         }, 250);
+    }
+
+    const searchCity = (event: { query: string }) => {
+        let query = event.query;
+        let _filteredCities = [];
+
+        for (let country of groupedCities) {
+            let filteredItems = country.items.filter((item) => item.label.toLowerCase().indexOf(query.toLowerCase()) !== -1);
+            if (filteredItems && filteredItems.length) {
+                _filteredCities.push({...country, ...{items: filteredItems}});
+            }
+        }
+
+        setFilteredCities(_filteredCities);
     }
 
     const itemTemplate = (item: any) => {
@@ -186,13 +350,25 @@ const AutoCompleteDemo = () => {
         );
     }
 
+    const groupedItemTemplate = (item: any) => {
+        return (
+            <div className="p-d-flex p-ai-center country-item">
+                <img alt={item.name} src={\`showcase/demo/images/flag_placeholder.png\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${item.code.toLowerCase()}\`} />
+                <div>{item.label}</div>
+            </div>
+        );
+    }
+
     return (
         <div className="card">
             <h5>Basic</h5>
             <AutoComplete value={selectedCountry1} suggestions={filteredCountries} completeMethod={searchCountry} field="name" onChange={(e) => setSelectedCountry1(e.value)} />
 
-            <h5>Dropdown and Templating</h5>
-            <AutoComplete value={selectedCountry2} suggestions={filteredCountries} completeMethod={searchCountry} field="name" dropdown itemTemplate={itemTemplate} onChange={(e) => setSelectedCountry2(e.value)} />
+            <h5>Grouped</h5>
+            <AutoComplete value={selectedCity} suggestions={filteredCities} completeMethod={searchCity} field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} onChange={(e) => setSelectedCity(e.value)}/>
+
+            <h5>Dropdown, Templating and Force Selection</h5>
+            <AutoComplete value={selectedCountry2} suggestions={filteredCountries} completeMethod={searchCountry} field="name" dropdown forceSelection itemTemplate={itemTemplate} onChange={(e) => setSelectedCountry2(e.value)} />
 
             <h5>Multiple</h5>
             <span className="p-fluid">
@@ -228,45 +404,22 @@ import { AutoComplete } from 'primereact/autocomplete';
 
 <CodeHighlight>
 {`
-<AutoComplete value={this.state.selectedCountry} suggestions={this.state.filteredCountries}
-            completeMethod={this.searchCountry} field="name" onChange={(e) => this.setState({ selectedCountry: e.value })} />
+<AutoComplete value={selectedCountry} suggestions={filteredCountries} completeMethod={searchCountry} field="name" onChange={(e) => setSelectedCountry(e.value)} />
 `}
 </CodeHighlight>
 
 <CodeHighlight lang="js">
 {`
-constructor(props) {
-    super(props);
-    this.state = {
-        selectedCountry: null
-        filteredCountries: null
-    };
+const countries = // datasource
 
-    this.countries: ['Country-1', 'Country-2', 'Country-3', 'Country-4', 'Country-5'];
-    this.searchCountry = this.searchCountry.bind(this);
-    this.countryservice = new CountryService();
-}
-
-searchCountry(event) {
-    setTimeout(() => {
-        let filteredCountries;
-        if (!event.query.trim().length) {
-            filteredCountries = [...this.countries];
-        }
-        else {
-            filteredCountries = this.countries.filter((country) => {
-                return country.name.toLowerCase().startsWith(event.query.toLowerCase());
-            });
-        }
-
-        this.setState({ filteredCountries });
-    }, 250);
+const searchCountry = (event) => {
+    let filteredCountries = //suggestions
+    setFilteredCountries(filteredCountries);
 }
 
 render() {
     return (
-        <AutoComplete value={this.state.selectedCountry} suggestions={this.state.filteredCountries}
-            completeMethod={this.searchCountry} onChange={(e) => this.setState({ selectedCountry: e.value })} />
+        <AutoComplete value={selectedCountry} suggestions={filteredCountries} completeMethod={searchCountry} onChange={(e) => setSelectedCountry(e.value)} />
     );
 }
 `}
@@ -280,8 +433,7 @@ render() {
 
 <CodeHighlight>
 {`
-<AutoComplete dropdown value={this.state.selectedCountry} suggestions={this.state.filteredCountries}
-    completeMethod={this.searchCountry} onChange={(e) => this.setState({ selectedCountry: e.value })} />
+<AutoComplete dropdown value={selectedCountry} suggestions={filteredCountries} completeMethod={searchCountry} onChange={(e) => setSelectedCountry(e.value)} />
 `}
 </CodeHighlight>
 
@@ -289,8 +441,7 @@ render() {
                         <p>Multiple mode is enabled using <i>multiple</i> property used to select more than one value from the autocomplete. In this case, value reference should be an array.</p>
 <CodeHighlight>
 {`
-<AutoComplete multiple value={this.state.selectedCountry} suggestions={this.state.filteredCountries}
-    completeMethod={this.searchCountry} onChange={(e) => this.setState({ selectedCountry: e.value })} />
+<AutoComplete multiple value={selectedCountry} suggestions={filteredCountries} completeMethod={searchCountry} onChange={(e) => setSelectedCountry(e.value)} />
 `}
 </CodeHighlight>
 
@@ -301,8 +452,58 @@ render() {
 
 <CodeHighlight>
 {`
-<AutoComplete field="name" value={this.state.selectedCountry} suggestions={this.state.filteredCountries}
-    completeMethod={this.searchCountry} onChange={(e) => this.setState({ selectedCountry: e.value })} />
+<AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={searchCountry} onChange={(e) => setSelectedCountry(e.value)} />
+`}
+</CodeHighlight>
+
+                        <h5>Grouping</h5>
+				        <p>Options groups are specified with the <i>optionGroupLabel</i> and <i>optionGroupChildren</i> properties.</p>
+<CodeHighlight>
+{`
+const groupedCities = [
+    {
+        label: 'Germany', code: 'DE',
+        items: [
+            { label: 'Berlin', value: 'Berlin' },
+            { label: 'Frankfurt', value: 'Frankfurt' },
+            { label: 'Hamburg', value: 'Hamburg' },
+            { label: 'Munich', value: 'Munich' }
+        ]
+    },
+    {
+        label: 'USA', code: 'US',
+        items: [
+            { label: 'Chicago', value: 'Chicago' },
+            { label: 'Los Angeles', value: 'Los Angeles' },
+            { label: 'New York', value: 'New York' },
+            { label: 'San Francisco', value: 'San Francisco' }
+        ]
+    },
+    {
+        label: 'Japan', code: 'JP',
+        items: [
+            { label: 'Kyoto', value: 'Kyoto' },
+            { label: 'Osaka', value: 'Osaka' },
+            { label: 'Tokyo', value: 'Tokyo' },
+            { label: 'Yokohama', value: 'Yokohama' }
+        ]
+    }
+];
+`}
+</CodeHighlight>
+
+<CodeHighlight>
+{`
+<AutoComplete value={selectedCity} suggestions={filteredCities} completeMethod={searchCity} field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} onChange={(e) => setSelectedCity(e.value)}/>
+`}
+</CodeHighlight>
+
+                        <h5>Force Selection</h5>
+                        <p>ForceSelection mode validates the manual input to check whether it also exists in the suggestions list, if not the input value is cleared
+                        to make sure the value passed to the model is always one of the suggestions. Simply enable <i>forceSelection</i> to enforce that input is always from the suggestion list.</p>
+<CodeHighlight>
+{`
+<AutoComplete forceSelection value={selectedCountry} suggestions={filteredCountries} completeMethod={searchCountry} onChange={(e) => setSelectedCountry(e.value)} />
 `}
 </CodeHighlight>
 
@@ -313,9 +514,7 @@ render() {
 
 <CodeHighlight>
 {`
-<AutoComplete value={this.state.selectedCountry} suggestions={this.state.filteredCountries}
-    completeMethod={this.searchCountry} onChange={(e) => this.setState({ selectedCountry: e.value })}
-    itemTemplate={this.itemTemplate} />
+<AutoComplete value={selectedCountry} suggestions={filteredCountries} completeMethod={searchCountry} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} />
 `}
 </CodeHighlight>
 
@@ -374,6 +573,31 @@ itemTemplate(item) {
                                         <td>any</td>
                                         <td>null</td>
                                         <td>Field of a suggested object to resolve and display.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>optionGroupLabel</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Property name or getter function to use as the label of an option group.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>optionGroupChildren</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Property name or getter function that refers to the children options of option group.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>forceSelection</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>When present, autocomplete clears the manual input if it does not match of the suggestions to force only
+                                        accepting values from the suggestions.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>autoHighlight</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>When enabled, highlights the first item in the list by default.</td>
                                     </tr>
                                     <tr>
                                         <td>scrollHeight</td>
@@ -486,7 +710,7 @@ itemTemplate(item) {
                                     <tr>
                                         <td>appendTo</td>
                                         <td>DOM element</td>
-                                        <td>null</td>
+                                        <td>document.body</td>
                                         <td>DOM element instance where the overlay panel should be mounted.</td>
                                     </tr>
                                     <tr>
@@ -530,6 +754,12 @@ itemTemplate(item) {
                                         <td>any</td>
                                         <td>null</td>
                                         <td>Template of a selected item.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>optionGroupTemplate</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Template of an option group item.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -676,9 +906,9 @@ itemTemplate(item) {
                         <p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="AutoCompleteDemo" sources={this.sources} service="CountryService" data="countries" />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'AutoCompleteDemo', sources: this.sources, service: 'CountryService', data: 'countries' })
+                    }
                 </TabView>
             </div>
         )

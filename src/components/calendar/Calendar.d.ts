@@ -1,17 +1,5 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
-
-export interface LocaleSettings {
-    firstDayOfWeek?: number;
-    dayNames: string[];
-    dayNamesShort: string[];
-    dayNamesMin: string[];
-    monthNames: string[];
-    monthNamesShort: string[];
-    today: string;
-    clear: string;
-}
-
 export interface DateMetaData {
     day: number;
     month: number;
@@ -36,6 +24,7 @@ interface CalendarProps {
     required?: boolean;
     readOnlyInput?: boolean;
     keepInvalid?: boolean;
+    mask?: string;
     disabled?: boolean;
     tabIndex?: number;
     placeholder?: string;
@@ -57,7 +46,7 @@ interface CalendarProps {
     shortYearCutoff?: string;
     hideOnDateTimeSelect?: boolean;
     showWeek?: boolean;
-    locale?: LocaleSettings;
+    locale?: string;
     dateFormat?: string;
     panelStyle?: object;
     panelClassName?: string;

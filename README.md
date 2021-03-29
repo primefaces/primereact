@@ -1,6 +1,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![npm version](https://badge.fury.io/js/primereact.svg)](https://badge.fury.io/js/primereact)
-[![Discord](https://img.shields.io/discord/557940238991753223.svg)](https://discord.gg/gzKFYnpmCY)
+[![Discord Chat](https://img.shields.io/discord/557940238991753223.svg?color=7289da&label=chat&logo=discord)](https://discord.gg/gzKFYnpmCY)
 
 [![PrimeReact Hero](https://www.primefaces.org/wp-content/uploads/2020/08/primereact-promotion-21aug2020@2x.jpg)](https://www.primefaces.org/primereact)
 
@@ -36,7 +36,7 @@ dependencies: {
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-transition-group": "^4.4.1",
-    "primeicons": "^4.0.0"
+    "primeicons": "^4.1.0"
 }
 ```
 

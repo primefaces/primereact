@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
+import { TabView } from '../../components/tabview/TabView';
 import { Chart } from '../../components/chart/Chart';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import AppContentContext from '../../AppContentContext';
 
@@ -226,9 +226,9 @@ const PieChartDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="PieChartDemo" sources={this.sources} dependencies={{ 'chart.js': '2.7.3' }}/>
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'PieChartDemo', sources: this.sources, dependencies: { 'chart.js': '2.7.3' } })
+                    }
                 </TabView>
             </div>
         )

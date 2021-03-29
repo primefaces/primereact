@@ -5,7 +5,7 @@ import ObjectUtils from '../utils/ObjectUtils';
 import FilterUtils from '../utils/FilterUtils';
 import {ListBoxItem} from './ListBoxItem';
 import {ListBoxHeader} from './ListBoxHeader';
-import {tip} from "../tooltip/Tooltip";
+import { tip } from '../tooltip/Tooltip';
 
 export class ListBox extends Component {
 
@@ -15,6 +15,10 @@ export class ListBox extends Component {
         options: null,
         optionLabel: null,
         optionValue: null,
+        optionDisabled: null,
+        optionGroupLabel: null,
+        optionGroupChildren: null,
+        optionGroupTemplate: null,
         itemTemplate: null,
         style: null,
         listStyle: null,
@@ -44,7 +48,11 @@ export class ListBox extends Component {
         options: PropTypes.array,
         optionLabel: PropTypes.string,
         optionValue: PropTypes.string,
-        itemTemplate: PropTypes.func,
+        optionDisabled: PropTypes.bool,
+        optionGroupLabel: PropTypes.string,
+        optionGroupChildren: PropTypes.string,
+        optionGroupTemplate: PropTypes.any,
+        itemTemplate: PropTypes.any,
         style: PropTypes.object,
         listStyle: PropTypes.object,
         listClassName: PropTypes.string,
@@ -75,7 +83,7 @@ export class ListBox extends Component {
         }
 
         this.onFilter = this.onFilter.bind(this);
-        this.onOptionClick = this.onOptionClick.bind(this);
+        this.onOptionSelect = this.onOptionSelect.bind(this);
     }
 
     componentDidMount() {
@@ -85,9 +93,9 @@ export class ListBox extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.tooltip !== this.props.tooltip) {
+        if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
             if (this.tooltip)
-                this.tooltip.updateContent(this.props.tooltip);
+                this.tooltip.update({ content: this.props.tooltip, ...(this.props.tooltipOptions || {}) });
             else
                 this.renderTooltip();
         }
@@ -112,15 +120,16 @@ export class ListBox extends Component {
         return (this.props.onFilterValueChange ? this.props.filterValue : this.state.filterValue) || '';
     }
 
-    onOptionClick(event) {
-        if (this.props.disabled) {
+    onOptionSelect(event) {
+        const option = event.option;
+        if (this.props.disabled || this.isOptionDisabled(option)) {
             return;
         }
 
         if (this.props.multiple)
-            this.onOptionClickMultiple(event.originalEvent, event.option);
+            this.onOptionSelectMultiple(event.originalEvent, option);
         else
-            this.onOptionClickSingle(event.originalEvent, event.option);
+            this.onOptionSelectSingle(event.originalEvent, option);
 
         this.optionTouched = false;
     }
@@ -133,7 +142,7 @@ export class ListBox extends Component {
         this.optionTouched = true;
     }
 
-    onOptionClickSingle(event, option) {
+    onOptionSelectSingle(event, option) {
         let selected = this.isSelected(option);
         let valueChanged = false;
         let value = null;
@@ -163,7 +172,7 @@ export class ListBox extends Component {
         }
     }
 
-    onOptionClickMultiple(event, option) {
+    onOptionSelectMultiple(event, option) {
         let selected = this.isSelected(option);
         let valueChanged = false;
         let value = null;
@@ -284,31 +293,112 @@ export class ListBox extends Component {
         return this.props.optionValue ? ObjectUtils.resolveFieldData(option, this.props.optionValue) : (option['value'] !== undefined ? option['value'] : option);
     }
 
+    getOptionRenderKey(option) {
+        return this.props.dataKey ? ObjectUtils.resolveFieldData(option, this.props.dataKey) : this.getOptionLabel(option);
+    }
+
+    isOptionDisabled(option) {
+        return this.props.optionDisabled ? ObjectUtils.resolveFieldData(option, this.props.optionDisabled) : false;
+    }
+
+    getOptionGroupRenderKey(optionGroup) {
+        return ObjectUtils.resolveFieldData(optionGroup, this.props.optionGroupLabel);
+    }
+
+    getOptionGroupLabel(optionGroup) {
+        return ObjectUtils.resolveFieldData(optionGroup, this.props.optionGroupLabel);
+    }
+
+    getOptionGroupChildren(optionGroup) {
+        return ObjectUtils.resolveFieldData(optionGroup, this.props.optionGroupChildren);
+    }
+
+    getVisibleOptions() {
+        if (this.hasFilter()) {
+            let filterValue = this.getFilterValue().trim().toLocaleLowerCase(this.props.filterLocale)
+            let searchFields = this.props.filterBy ? this.props.filterBy.split(',') : [this.props.optionLabel || 'label'];
+
+            if (this.props.optionGroupLabel) {
+                let filteredGroups = [];
+                for (let optgroup of this.props.options) {
+                    let filteredSubOptions = FilterUtils.filter(this.getOptionGroupChildren(optgroup), searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
+                    if (filteredSubOptions && filteredSubOptions.length) {
+                        filteredGroups.push({...optgroup, ...{items: filteredSubOptions}});
+                    }
+                }
+                return filteredGroups;
+            }
+            else {
+                return FilterUtils.filter(this.props.options, searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
+            }
+        }
+        else {
+            return this.props.options;
+        }
+    }
+
+    renderGroupChildren(optionGroup) {
+        const groupChildren = this.getOptionGroupChildren(optionGroup);
+        return (
+            groupChildren.map((option, j) => {
+                let optionLabel = this.getOptionLabel(option);
+                let optionKey = j + '_' + this.getOptionRenderKey(option);
+                let disabled = this.isOptionDisabled(option)
+                let tabIndex = disabled ? null : this.props.tabIndex || 0;
+
+                return (
+                    <ListBoxItem key={optionKey} label={optionLabel} option={option} template={this.props.itemTemplate} selected={this.isSelected(option)}
+                        onClick={this.onOptionSelect} onTouchEnd={this.onOptionTouchEnd} tabIndex={tabIndex} disabled={disabled}/>
+                );
+            })
+        )
+    }
+
+    renderItems() {
+        const visibleOptions = this.getVisibleOptions();
+
+        if (visibleOptions) {
+            if (this.props.optionGroupLabel) {
+                return visibleOptions.map((option, i) => {
+                    const groupContent = this.props.optionGroupTemplate ? ObjectUtils.getJSXElement(this.props.optionGroupTemplate, option, i) : this.getOptionGroupLabel(option);
+                    const groupChildrenContent = this.renderGroupChildren(option);
+                    const key = i + '_' + this.getOptionGroupRenderKey(option);
+
+                    return (
+                        <React.Fragment key={key}>
+                            <li className="p-listbox-item-group">
+                                {groupContent}
+                            </li>
+                            {groupChildrenContent}
+                        </React.Fragment>
+                    )
+                });
+            }
+            else {
+                return visibleOptions.map((option, index) => {
+                    let optionLabel = this.getOptionLabel(option);
+                    let optionKey = index + '_' + this.getOptionRenderKey(option);
+                    let disabled = this.isOptionDisabled(option)
+                    let tabIndex = disabled ? null : this.props.tabIndex || 0;
+
+                    return (
+                        <ListBoxItem key={optionKey} label={optionLabel} option={option} template={this.props.itemTemplate} selected={this.isSelected(option)}
+                            onClick={this.onOptionSelect} onTouchEnd={this.onOptionTouchEnd} tabIndex={tabIndex} disabled={disabled}/>
+                    );
+                });
+            }
+        }
+
+        return null;
+    }
+
     render() {
         let className = classNames('p-listbox p-component', {
             'p-disabled': this.props.disabled
         }, this.props.className);
         let listClassName = classNames('p-listbox-list-wrapper', this.props.listClassName);
-        let items = this.props.options;
+        let items = this.renderItems();
         let header;
-
-        if (this.props.options) {
-            if (this.hasFilter()) {
-                let filterValue = this.getFilterValue().trim().toLocaleLowerCase(this.props.filterLocale)
-                let searchFields = this.props.filterBy ? this.props.filterBy.split(',') : [this.props.optionLabel || 'label'];
-                items = FilterUtils.filter(items, searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
-            }
-
-            items = items.map((option, index) => {
-                let optionLabel = this.getOptionLabel(option);
-                let optionKey = `pr_id__${optionLabel}-${index}`;
-
-                return (
-                    <ListBoxItem key={optionKey} label={optionLabel} option={option} template={this.props.itemTemplate} selected={this.isSelected(option)}
-                        onClick={this.onOptionClick} onTouchEnd={(e) => this.onOptionTouchEnd(e, option, index)} tabIndex={this.props.tabIndex} />
-                );
-            });
-        }
 
         if (this.props.filter) {
             header = <ListBoxHeader filter={this.getFilterValue()} onFilter={this.onFilter} disabled={this.props.disabled} filterPlaceholder={this.props.filterPlaceholder} />

@@ -53,6 +53,9 @@ export class Sidebar extends Component {
         this.onEnter = this.onEnter.bind(this);
         this.onEntered = this.onEntered.bind(this);
         this.onExit = this.onExit.bind(this);
+        this.onExited = this.onExited.bind(this);
+
+        this.sidebarRef = React.createRef();
     }
 
     onCloseClick(event) {
@@ -61,7 +64,7 @@ export class Sidebar extends Component {
     }
 
     onEnter() {
-        this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
+        this.sidebarRef.current.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
         if (this.props.modal) {
             this.enableModality();
         }
@@ -90,12 +93,16 @@ export class Sidebar extends Component {
         }
     }
 
+    onExited() {
+        DomHandler.revertZIndex();
+    }
+
     enableModality() {
         if (!this.mask) {
             this.mask = document.createElement('div');
-            this.mask.style.zIndex = String(parseInt(this.container.style.zIndex, 10) - 1);
+            this.mask.style.zIndex = String(parseInt(this.sidebarRef.current.style.zIndex, 10) - 1);
             let maskClassName = 'p-component-overlay p-sidebar-mask';
-            if(this.props.blockScroll) {
+            if (this.props.blockScroll) {
                 maskClassName += ' p-sidebar-mask-scrollblocker';
             }
             DomHandler.addMultipleClasses(this.mask, maskClassName);
@@ -139,7 +146,7 @@ export class Sidebar extends Component {
     bindDocumentEscapeListener() {
         this.documentEscapeListener = (event) => {
             if (event.which === 27) {
-                if (parseInt(this.container.style.zIndex, 10) === (DomHandler.getCurrentZIndex() + this.props.baseZIndex)) {
+                if (parseInt(this.sidebarRef.current.style.zIndex, 10) === (DomHandler.getCurrentZIndex() + this.props.baseZIndex)) {
                     this.onCloseClick(event);
                 }
             }
@@ -184,13 +191,15 @@ export class Sidebar extends Component {
     componentWillUnmount() {
         this.unbindMaskClickListener();
         this.disableModality();
+
+        DomHandler.revertZIndex();
     }
 
     renderCloseIcon() {
         if (this.props.showCloseIcon) {
             return (
                 <button type="button" ref={el => this.closeIcon = el} className="p-sidebar-close p-sidebar-icon p-link" onClick={this.onCloseClick} aria-label={this.props.ariaCloseLabel}>
-                    <span className="p-sidebar-close-icon pi pi-times"/>
+                    <span className="p-sidebar-close-icon pi pi-times" />
                     <Ripple />
                 </button>
             );
@@ -209,7 +218,7 @@ export class Sidebar extends Component {
 
     render() {
         const className = classNames('p-sidebar p-component', this.props.className, 'p-sidebar-' + this.props.position,
-                                       {'p-sidebar-active': this.props.visible, 'p-sidebar-full': this.props.fullScreen});
+            { 'p-sidebar-active': this.props.visible, 'p-sidebar-full': this.props.fullScreen });
         const closeIcon = this.renderCloseIcon();
         const icons = this.renderIcons();
 
@@ -219,9 +228,9 @@ export class Sidebar extends Component {
         };
 
         return (
-            <CSSTransition classNames="p-sidebar" in={this.props.visible} timeout={transitionTimeout}
-                    unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit}>
-                <div ref={(el) => this.container=el} id={this.props.id} className={className} style={this.props.style} role="complementary">
+            <CSSTransition nodeRef={this.sidebarRef} classNames="p-sidebar" in={this.props.visible} timeout={transitionTimeout}
+                unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit} onExited={this.onExited}>
+                <div ref={this.sidebarRef} id={this.props.id} className={className} style={this.props.style} role="complementary">
                     <div className="p-sidebar-icons">
                         {icons}
                         {closeIcon}

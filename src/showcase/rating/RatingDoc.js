@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class RatingDoc extends Component {
 
@@ -132,7 +132,7 @@ import { Rating } from 'primereact/rating';
 
 <CodeHighlight>
 {`
-<Rating value={this.state.value} onChange={(e) => this.setState({value: e.value})} />
+<Rating value={value} onChange={(e) => setValue(e.value)} />
 `}
 </CodeHighlight>
 
@@ -141,7 +141,7 @@ import { Rating } from 'primereact/rating';
 
 <CodeHighlight>
 {`
-<Rating value={this.state.value} onChange={(e) => this.setState({value: e.value})} stars={5} />
+<Rating value={value} onChange={(e) => setValue(e.value)} stars={5} />
 `}
 </CodeHighlight>
 
@@ -150,7 +150,7 @@ import { Rating } from 'primereact/rating';
 
 <CodeHighlight>
 {`
-<Rating value={this.state.value} onChange={(e) => this.setState({value: e.value})} cancel={5} />
+<Rating value={value} onChange={(e) => setValue(e.value)} cancel={5} />
 `}
 </CodeHighlight>
 
@@ -287,9 +287,9 @@ import { Rating } from 'primereact/rating';
                         <p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="RatingDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'RatingDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         )

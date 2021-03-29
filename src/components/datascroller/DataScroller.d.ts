@@ -6,7 +6,7 @@ interface DataScrollerProps {
     rows?: number;
     inline?: boolean;
     scrollHeight?: any;
-    loader?: any;
+    loader?: boolean;
     buffer?: number;
     style?: object;
     className?: string;
@@ -17,4 +17,6 @@ interface DataScrollerProps {
     itemTemplate?(item: any): JSX.Element | undefined;
 }
 
-export class DataScroller extends React.Component<DataScrollerProps,any> {}
+export class DataScroller extends React.Component<DataScrollerProps,any> {
+    public load(): void;
+}

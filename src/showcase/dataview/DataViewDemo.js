@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { DataView, DataViewLayoutOptions } from "../../components/dataview/DataView";
-import { Button } from "../../components/button/Button";
-import { Dropdown } from "../../components/dropdown/Dropdown";
+import { DataView, DataViewLayoutOptions } from '../../components/dataview/DataView';
+import { Button } from '../../components/button/Button';
+import { Dropdown } from '../../components/dropdown/Dropdown';
 import ProductService from '../service/ProductService';
 import { Rating } from '../../components/rating/Rating';
 import { AppInlineHeader } from '../../AppInlineHeader';

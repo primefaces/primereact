@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { DeferredContent } from '../../components/deferredcontent/DeferredContent';
-import { DataTable } from "../../components/datatable/DataTable";
-import { Column } from "../../components/column/Column";
-import { Toast } from "../../components/toast/Toast";
+import { DataTable } from '../../components/datatable/DataTable';
+import { Column } from '../../components/column/Column';
+import { Toast } from '../../components/toast/Toast';
 import { DeferredContentDoc } from './DeferredContentDoc';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import ProductService from '../service/ProductService';

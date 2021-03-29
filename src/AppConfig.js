@@ -318,6 +318,18 @@ export class AppConfig extends Component {
                                 </div>
                                 <div className="p-col-3">
                                     <button className="p-link">
+                                        <img src="showcase/images/themes/viva-light.svg" alt="Viva Light" onClick={(e) => this.onThemeChange(e, 'viva-light')}/>
+                                    </button>
+                                    <span>Viva Light</span>
+                                </div>
+                                <div className="p-col-3">
+                                    <button className="p-link">
+                                        <img src="showcase/images/themes/viva-dark.svg" alt="Viva Dark" onClick={(e) => this.onThemeChange(e, 'viva-dark', true)}/>
+                                    </button>
+                                    <span>Viva Dark</span>
+                                </div>
+                                <div className="p-col-3">
+                                    <button className="p-link">
                                         <img src="showcase/images/themes/mira.jpg" alt="Mira" onClick={(e) => this.onThemeChange(e, 'mira')}/>
                                     </button>
                                     <span>Mira</span>
@@ -386,6 +398,11 @@ export class AppConfig extends Component {
                             <p>Beautifully crafted premium <a href="https://github.com/facebookincubator/create-react-app">create-react-app</a> application templates by the PrimeTek design team.</p>
                             <div className="p-grid premium-themes">
                                 <div className="p-col-12 p-md-6">
+                                    <a href="https://www.primefaces.org/layouts/ultima-react" rel="noopener noreferrer" target="_blank">
+                                        <img alt="Ultima" src="showcase/images/layouts/ultima-react.jpg" />
+                                    </a>
+                                </div>
+                                <div className="p-col-12 p-md-6">
                                     <a href="https://www.primefaces.org/layouts/diamond-react" rel="noopener noreferrer" target="_blank">
                                         <img alt="Diamond" src="showcase/images/layouts/diamond-react.jpg" />
                                     </a>
@@ -398,11 +415,6 @@ export class AppConfig extends Component {
                                 <div className="p-col-12 p-md-6">
                                     <a href="https://www.primefaces.org/layouts/serenity-react" rel="noopener noreferrer" target="_blank">
                                         <img alt="Serenity" src="showcase/images/layouts/serenity-react.jpg" />
-                                    </a>
-                                </div>
-                                <div className="p-col-12 p-md-6">
-                                    <a href="https://www.primefaces.org/layouts/ultima-react" rel="noopener noreferrer" target="_blank">
-                                        <img alt="Ultima" src="showcase/images/layouts/ultima-react.jpg" />
                                     </a>
                                 </div>
                                 <div className="p-col-12 p-md-6">

@@ -8,6 +8,9 @@ import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
+import { localeOption } from '../api/Locale';
+import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
+import { Portal } from '../portal/Portal';
 
 export function confirmPopup(props) {
     let appendTo = props.appendTo || document.body;
@@ -49,8 +52,8 @@ export class ConfirmPopup extends Component {
         target: null,
         visible: false,
         message: null,
-        rejectLabel: 'No',
-        acceptLabel: 'Yes',
+        rejectLabel: null,
+        acceptLabel: null,
         icon: null,
         rejectIcon: null,
         acceptIcon: null,
@@ -61,7 +64,9 @@ export class ConfirmPopup extends Component {
         appendTo: null,
         dismissable: true,
         footer: null,
-        onHide: null
+        onHide: null,
+        accept: null,
+        reject: null
     }
 
     static propTypes = {
@@ -80,7 +85,9 @@ export class ConfirmPopup extends Component {
         appendTo: PropTypes.any,
         dismissable: PropTypes.bool,
         footer: PropTypes.any,
-        onHide: PropTypes.func
+        onHide: PropTypes.func,
+        accept: PropTypes.func,
+        reject: PropTypes.func
     }
 
     constructor(props) {
@@ -90,8 +97,6 @@ export class ConfirmPopup extends Component {
             visible: false
         };
 
-        this.appendTo = props.appendTo || document.body;
-
         this.reject = this.reject.bind(this);
         this.accept = this.accept.bind(this);
         this.hide = this.hide.bind(this);
@@ -100,14 +105,24 @@ export class ConfirmPopup extends Component {
         this.onEnter = this.onEnter.bind(this);
         this.onEntered = this.onEntered.bind(this);
         this.onExit = this.onExit.bind(this);
+        this.onExited = this.onExited.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
+        this.overlayRef = React.createRef();
+    }
+
+    acceptLabel() {
+        return this.props.acceptLabel || localeOption('accept');
+    }
+
+    rejectLabel() {
+        return this.props.rejectLabel || localeOption('reject');
     }
 
     bindDocumentClickListener() {
         if(!this.documentClickListener && this.props.dismissable) {
             this.documentClickListener = (event) => {
-                if (!this.isPanelClicked && this.isOutsideClicked(event)) {
+                if (!this.isPanelClicked && this.isOutsideClicked(event.target)) {
                     this.hide();
                 }
 
@@ -161,12 +176,8 @@ export class ConfirmPopup extends Component {
         }
     }
 
-    isOutsideClicked(event) {
-        return this.container && !(this.container.isSameNode(event.target) || this.container.contains(event.target));
-    }
-
-    hasTargetChanged(event, target) {
-        return this.target != null && this.target !== (target||event.currentTarget||event.target);
+    isOutsideClicked(target) {
+        return this.overlayRef && this.overlayRef.current && !(this.overlayRef.current.isSameNode(target) || this.overlayRef.current.contains(target));
     }
 
     onCloseClick(event) {
@@ -175,8 +186,13 @@ export class ConfirmPopup extends Component {
         event.preventDefault();
     }
 
-    onPanelClick() {
+    onPanelClick(event) {
         this.isPanelClicked = true;
+
+        OverlayEventBus.emit('overlay-click', {
+            originalEvent: event,
+            target: this.props.target
+        });
     }
 
     accept() {
@@ -196,11 +212,19 @@ export class ConfirmPopup extends Component {
     }
 
     show() {
-        this.setState({ visible: true });
+        this.setState({ visible: true }, () => {
+            OverlayEventBus.on('overlay-click', (e) => {
+                if (!this.isOutsideClicked(e.target)) {
+                    this.isPanelClicked = true;
+                }
+            });
+        });
     }
 
     hide(result) {
         this.setState({ visible: false }, () => {
+            OverlayEventBus.off('overlay-click');
+
             if (this.props.onHide) {
                 this.props.onHide(result);
             }
@@ -208,7 +232,7 @@ export class ConfirmPopup extends Component {
     }
 
     onEnter() {
-        this.container.style.zIndex = String(DomHandler.generateZIndex());
+        this.overlayRef.current.style.zIndex = String(DomHandler.generateZIndex());
         this.align();
     }
 
@@ -224,21 +248,25 @@ export class ConfirmPopup extends Component {
         this.unbindResizeListener();
     }
 
+    onExited() {
+        DomHandler.revertZIndex();
+    }
+
     align() {
         if (this.props.target) {
-            DomHandler.absolutePosition(this.container, this.props.target);
+            DomHandler.absolutePosition(this.overlayRef.current, this.props.target);
 
-            const containerOffset = DomHandler.getOffset(this.container);
+            const containerOffset = DomHandler.getOffset(this.overlayRef.current);
             const targetOffset = DomHandler.getOffset(this.props.target);
             let arrowLeft = 0;
 
             if (containerOffset.left < targetOffset.left) {
                 arrowLeft = targetOffset.left - containerOffset.left;
             }
-            this.container.style.setProperty('--overlayArrowLeft', `${arrowLeft}px`);
+            this.overlayRef.current.style.setProperty('--overlayArrowLeft', `${arrowLeft}px`);
 
             if (containerOffset.top < targetOffset.top) {
-                DomHandler.addClass(this.container, 'p-confirm-popup-flipped');
+                DomHandler.addClass(this.overlayRef.current, 'p-confirm-popup-flipped');
             }
         }
     }
@@ -262,6 +290,8 @@ export class ConfirmPopup extends Component {
             this.scrollHandler.destroy();
             this.scrollHandler = null;
         }
+
+        DomHandler.revertZIndex();
     }
 
     renderContent() {
@@ -284,8 +314,8 @@ export class ConfirmPopup extends Component {
 
         const content = this.props.footer ? ObjectUtils.getJSXElement(this.props.footer, this.props) : (
             <>
-                <Button label={this.props.rejectLabel} icon={this.props.rejectIcon} className={rejectClassName} onClick={this.reject} />
-                <Button label={this.props.acceptLabel} icon={this.props.acceptIcon} className={acceptClassName} onClick={this.accept} autoFocus />
+                <Button label={this.rejectLabel()} icon={this.props.rejectIcon} className={rejectClassName} onClick={this.reject} />
+                <Button label={this.acceptLabel()} icon={this.props.acceptIcon} className={acceptClassName} onClick={this.accept} autoFocus />
             </>
         )
 
@@ -302,9 +332,9 @@ export class ConfirmPopup extends Component {
         const footer = this.renderFooter();
 
         return (
-            <CSSTransition classNames="p-connected-overlay" in={this.state.visible} timeout={{ enter: 120, exit: 100 }}
-                unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit}>
-                <div ref={el => this.container = el} id={this.id} className={className} style={this.props.style} onClick={this.onPanelClick}>
+            <CSSTransition nodeRef={this.overlayRef} classNames="p-connected-overlay" in={this.state.visible} timeout={{ enter: 120, exit: 100 }}
+                unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit} onExited={this.onExited}>
+                <div ref={this.overlayRef} id={this.id} className={className} style={this.props.style} onClick={this.onPanelClick}>
                     {content}
                     {footer}
                 </div>
@@ -315,6 +345,6 @@ export class ConfirmPopup extends Component {
     render() {
         let element = this.renderElement();
 
-        return ReactDOM.createPortal(element, this.appendTo);
+        return <Portal element={element} appendTo={this.props.appendTo} visible />;
     }
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class SlideMenuDoc extends Component {
 
@@ -159,10 +159,10 @@ export class SlideMenuDemo extends Component {
             <div>
                 <div className="card">
                     <h5>Basic</h5>
-                    <SlideMenu model={this.items} viewportHeight={250} menuWidth={175}></SlideMenu>
+                    <SlideMenu model={this.items} viewportHeight={220} menuWidth={175}></SlideMenu>
 
                     <h5>Popup</h5>
-                    <SlideMenu ref={(el) => this.menu = el} model={this.items} popup viewportHeight={250} menuWidth={175}></SlideMenu>
+                    <SlideMenu ref={(el) => this.menu = el} model={this.items} popup viewportHeight={220} menuWidth={175}></SlideMenu>
                     <Button type="button" icon="pi pi-bars" label="Show" onClick={(event) => this.menu.toggle(event)}></Button>
                 </div>
             </div>
@@ -315,10 +315,10 @@ const SlideMenuDemo = () => {
         <div>
             <div className="card">
                 <h5>Basic</h5>
-                <SlideMenu model={items} viewportHeight={250} menuWidth={175}></SlideMenu>
+                <SlideMenu model={items} viewportHeight={220} menuWidth={175}></SlideMenu>
 
                 <h5>Popup</h5>
-                <SlideMenu ref={menu} model={items} popup viewportHeight={250} menuWidth={175}></SlideMenu>
+                <SlideMenu ref={menu} model={items} popup viewportHeight={220} menuWidth={175}></SlideMenu>
                 <Button type="button" icon="pi pi-bars" label="Show" onClick={(event) => menu.current.toggle(event)}></Button>
             </div>
         </div>
@@ -470,10 +470,10 @@ const SlideMenuDemo = () => {
         <div>
             <div className="card">
                 <h5>Basic</h5>
-                <SlideMenu model={items} viewportHeight={250} menuWidth={175}></SlideMenu>
+                <SlideMenu model={items} viewportHeight={220} menuWidth={175}></SlideMenu>
 
                 <h5>Popup</h5>
-                <SlideMenu ref={menu} model={items} popup viewportHeight={250} menuWidth={175}></SlideMenu>
+                <SlideMenu ref={menu} model={items} popup viewportHeight={220} menuWidth={175}></SlideMenu>
                 <Button type="button" icon="pi pi-bars" label="Show" onClick={(event) => menu.current.toggle(event)}></Button>
             </div>
         </div>
@@ -508,7 +508,7 @@ import { SlideMenu } from 'primereact/slidemenu';
 
 <CodeHighlight lang="js">
 {`
-const items:[
+const items = [
     {
        label:'File',
        icon:'pi pi-fw pi-file',
@@ -653,9 +653,9 @@ const items:[
                         <p>SlideMenu is inline by default whereas popup mode is supported by enabling popup property and calling toggle method with an event of the target.</p>
 <CodeHighlight>
 {`
-<SlideMenu ref={(el) => this.menu = el} model={items} popup />
+<SlideMenu ref={menu} model={items} popup />
 
-<Button type="button" icon="pi pi-bars" label="Show" onClick={(event) => this.menu.toggle(event)}></Button>
+<Button type="button" icon="pi pi-bars" label="Show" onClick={(event) => menu.current.toggle(event)}></Button>
 `}
 </CodeHighlight>
 
@@ -665,7 +665,7 @@ const items:[
 
 <CodeHighlight>
 {`
-<SlideMenu model={this.items} effectDuration={1000} easing="ease-in" />
+<SlideMenu model={items} effectDuration={1000} easing="ease-in" />
 `}
 </CodeHighlight>
 
@@ -756,8 +756,8 @@ const items:[
                                     <tr>
                                         <td>appendTo</td>
                                         <td>DOM element</td>
-                                        <td>null</td>
-                                        <td>DOM element instance where the dialog should be mounted.</td>
+                                        <td>document.body</td>
+                                        <td>DOM element instance where the overlay menu should be mounted.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -873,9 +873,9 @@ const items:[
                         <p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="SlideMenuDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'SlideMenuDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         )

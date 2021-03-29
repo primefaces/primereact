@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class AvatarDoc extends Component {
 
@@ -441,12 +441,49 @@ import { AvatarGroup } from 'primereact/avatargroup';
 								<td>square</td>
 								<td>Shape of the element, valid options are "square" and "circle".</td>
 							</tr>
+                            <tr>
+								<td>template</td>
+								<td>any</td>
+								<td>null</td>
+								<td>Template of the content.</td>
+							</tr>
+                            <tr>
+								<td>imageAlt</td>
+								<td>any</td>
+								<td>null</td>
+								<td>It specifies an alternate text for an image, if the image cannot be displayed.</td>
+							</tr>
 						</tbody>
 					</table>
 				</div>
 
 				<h5>Properties of AvatarGroup</h5>
 				<p>Any property as style and class are passed to the main container element. There are no additional properties.</p>
+
+                <h5>Events</h5>
+                <div className="doc-tablewrapper">
+                    <table className="doc-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Parameters</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+								<td>onImageError</td>
+								<td>event: Browser event</td>
+								<td>This event is triggered if an error occurs while loading an image file.</td>
+							</tr>
+                            <tr>
+								<td>onClick</td>
+								<td>event: Browser event</td>
+								<td>Callback to invoke on click.</td>
+							</tr>
+                        </tbody>
+                    </table>
+                </div>
 
 				<h5>Styling of Avatar</h5>
 				<p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
@@ -512,9 +549,10 @@ import { AvatarGroup } from 'primereact/avatargroup';
 				<h5>Dependencies</h5>
 				<p>None.</p>
                     </TabPanel>
-                    <TabPanel header="Source">
-                        <LiveEditor name="AvatarDemo" sources={this.sources} />
-                    </TabPanel>
+
+                    {
+                        useLiveEditorTabs({ name: 'AvatarDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         );

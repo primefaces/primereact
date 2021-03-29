@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 import DomHandler from '../utils/DomHandler';
 import { InputText } from '../inputtext/InputText';
 import { classNames } from '../utils/ClassNames';
-import {tip} from "../tooltip/Tooltip";
+import { tip } from '../tooltip/Tooltip';
 
 export class InputMask extends Component {
 
@@ -181,8 +180,8 @@ export class InputMask extends Component {
     }
 
     handleAndroidInput(e) {
-        var curVal = this.input.value;
-        var pos = this.caret();
+        let curVal = this.input.value;
+        let pos = this.caret();
         if (this.oldVal && this.oldVal.length && this.oldVal.length > curVal.length) {
             // a deletion or backspace happened
             this.checkVal(true);
@@ -271,7 +270,7 @@ export class InputMask extends Component {
             return;
         }
 
-        var k = e.which || e.keyCode,
+        let k = e.which || e.keyCode,
             pos = this.caret(),
             p,
             c,
@@ -434,7 +433,7 @@ export class InputMask extends Component {
             return;
         }
 
-        var pos = this.checkVal(true);
+        let pos = this.checkVal(true);
         this.caret(pos);
         this.updateModel(e);
         if (this.props.onComplete && this.isCompleted()) {
@@ -459,7 +458,7 @@ export class InputMask extends Component {
 
     updateModel(e) {
         if (this.props.onChange) {
-            var val = this.props.unmask ? this.getUnmaskedValue() : e && e.target.value;
+            let val = this.props.unmask ? this.getUnmaskedValue() : e && e.target.value;
             this.props.onChange({
                 originalEvent: e,
                 value: (this.defaultBuffer !== val) ? val : '',
@@ -481,19 +480,21 @@ export class InputMask extends Component {
             DomHandler.removeClass(this.input, 'p-filled');
     }
 
-    updateValue() {
+    updateValue(allow) {
+        let pos;
+
         if (this.input) {
             if (this.props.value == null) {
                 this.input.value = '';
             }
             else {
                 this.input.value = this.props.value;
-                this.checkVal();
+                pos = this.checkVal(allow);
 
                 setTimeout(() => {
                     if(this.input) {
                         this.writeBuffer();
-                        this.checkVal();
+                        return this.checkVal(allow);
                     }
                 }, 10);
             }
@@ -502,6 +503,8 @@ export class InputMask extends Component {
         }
 
         this.updateFilledState();
+
+        return pos;
     }
 
     isValueUpdated() {
@@ -568,9 +571,9 @@ export class InputMask extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.tooltip !== this.props.tooltip) {
+        if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
             if (this.tooltip)
-                this.tooltip.updateContent(this.props.tooltip);
+                this.tooltip.update({ content: this.props.tooltip, ...(this.props.tooltipOptions || {}) });
             else
                 this.renderTooltip();
         }
@@ -581,7 +584,7 @@ export class InputMask extends Component {
 
         if (prevProps.mask !== this.props.mask) {
             this.init();
-            this.updateValue();
+            this.caret(this.updateValue(true));
             this.updateModel();
         }
     }
@@ -604,7 +607,7 @@ export class InputMask extends Component {
     render() {
         let inputMaskClassName = classNames('p-inputmask', this.props.className);
         return (
-            <InputText id={this.props.id} ref={(el) => this.input = ReactDOM.findDOMNode(el)} type={this.props.type} name={this.props.name} style={this.props.style} className={inputMaskClassName} placeholder={this.props.placeholder}
+            <InputText id={this.props.id} ref={(el) => this.input = el} type={this.props.type} name={this.props.name} style={this.props.style} className={inputMaskClassName} placeholder={this.props.placeholder}
                 size={this.props.size} maxLength={this.props.maxlength} tabIndex={this.props.tabIndex} disabled={this.props.disabled} readOnly={this.props.readOnly}
                 onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.onKeyDown} onKeyPress={this.onKeyPress}
                 onInput={this.onInput} onPaste={this.handleInputChange} required={this.props.required} aria-labelledby={this.props.ariaLabelledBy} />

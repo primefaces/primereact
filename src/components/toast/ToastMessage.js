@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
+import ObjectUtils from '../utils/ObjectUtils';
 import { Ripple } from '../ripple/Ripple';
 
-export class ToastMessage extends Component {
+class ToastMessageComponent extends Component {
 
     static defaultProps = {
         message: null,
@@ -71,6 +72,7 @@ export class ToastMessage extends Component {
     renderMessage() {
         if (this.props.message) {
             const { severity, content, summary, detail } = this.props.message;
+            const contentEl = ObjectUtils.getJSXElement(content, {...this.props, onClose: this.onClose});
             let iconClassName = classNames('p-toast-message-icon pi', {
                 'pi-info-circle': severity === 'info',
                 'pi-exclamation-triangle': severity === 'warn',
@@ -78,7 +80,7 @@ export class ToastMessage extends Component {
                 'pi-check': severity === 'success'
             });
 
-            return content || (
+            return contentEl || (
                 <>
                     <span className={iconClassName}></span>
                     <div className="p-toast-message-text">
@@ -104,7 +106,7 @@ export class ToastMessage extends Component {
         const closeIcon = this.renderCloseIcon();
 
         return (
-            <div ref={(el) => { this.element = el; }} className={className} role="alert" aria-live="assertive" aria-atomic="true" onClick={this.onClick}>
+            <div ref={this.props.forwardRef} className={className} role="alert" aria-live="assertive" aria-atomic="true" onClick={this.onClick}>
                 <div className="p-toast-message-content">
                     {message}
                     {closeIcon}
@@ -113,3 +115,5 @@ export class ToastMessage extends Component {
         );
     }
 }
+
+export const ToastMessage = React.forwardRef((props, ref) => <ToastMessageComponent forwardRef={ref} {...props} />);

@@ -134,10 +134,11 @@ export class Accordion extends Component {
     renderTabContent(tab, selected, index) {
         const className = classNames('p-toggleable-content', tab.props.contentClassName);
         const id = this.id + '_content_' + index;
+        const toggleableContentRef = React.createRef();
 
         return (
-            <CSSTransition classNames="p-toggleable-content" timeout={{enter: 1000, exit: 450}} in={selected} unmountOnExit>
-                <div id={id} className={className} style={tab.props.contentStyle} role="region" aria-labelledby={this.id + '_header_' +index}>
+            <CSSTransition nodeRef={toggleableContentRef} classNames="p-toggleable-content" timeout={{enter: 1000, exit: 450}} in={selected} unmountOnExit>
+                <div ref={toggleableContentRef} id={id} className={className} style={tab.props.contentStyle} role="region" aria-labelledby={this.id + '_header_' +index}>
                     <div className="p-accordion-content">
                         {tab.props.children}
                     </div>

@@ -14,10 +14,36 @@
                     ]
                 },
                 {
-                    "name": "Community Forum",
+                    "name": "Locale",
+                    "to": "/locale",
+                    "meta": [
+                        "i18N",
+                        "locale",
+                        "translate",
+                        "internationalization"
+                    ],
+                    "badge": "new"
+                },
+                {
+                    "name": "Accessibility",
+                    "to": "/accessibility",
+                    "meta": [
+                        "accessibility"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Support",
+            "meta": [
+                "support"
+            ],
+            "children": [
+                {
+                    "name": "Forum",
                     "href": "https://forum.primefaces.org/viewforum.php?f=57",
                     "meta": [
-                        "get started"
+                        "forum"
                     ]
                 },
                 {
@@ -28,18 +54,27 @@
                     ]
                 },
                 {
-                    "name": "Source Code",
-                    "href": "https://github.com/primefaces/primereact",
-                    "meta": [
-                        "source code"
-                    ]
-                },
-                {
-                    "name": "Support",
+                    "name": "PRO Support",
                     "to": "/support",
                     "meta": [
-                        "support"
+                        "pro support"
                     ]
+                }
+            ]
+        },
+        {
+            "name": "Resources",
+            "meta": [
+                "resources"
+            ],
+            "children": [
+                {
+                    "name": "PrimeTV",
+                    "href": "https://www.youtube.com/channel/UCTgmp69aBOlLnPEqlUyetWw"
+                },
+                {
+                    "name": "Source Code",
+                    "href": "https://github.com/primefaces/primereact"
                 },
                 {
                     "name": "Store",
@@ -50,11 +85,8 @@
                     ]
                 },
                 {
-                    "name": "Accessibility",
-                    "to": "/accessibility",
-                    "meta": [
-                        "accessibility"
-                    ]
+                    "name": "Twitter",
+                    "href": "https://twitter.com/primereact?lang=en"
                 }
             ]
         },
@@ -86,8 +118,13 @@
                     ]
                 },
                 {
+                    "name": "Colors",
+                    "to": "/colors",
+                    "badge": "New"
+                },
+                {
                     "name": "SASS API",
-                    "href": "https://www.primefaces.org/designer/api/primereact/5.0.0",
+                    "href": "https://www.primefaces.org/designer/api/primereact/6.0.0",
                     "meta": [
                         "sass api"
                     ]
@@ -119,7 +156,8 @@
                     "name": "Elevation",
                     "to": "/elevation",
                     "meta": [
-                        "elevation"
+                        "elevation",
+                        "shadow"
                     ]
                 },
                 {
@@ -167,11 +205,12 @@
             ],
             "children": [
                 {
-                    "name": "Icons v4.0",
+                    "name": "Icons v4.1",
                     "to": "/icons",
                     "meta": [
                         "icons"
-                    ]
+                    ],
+                    "badge": "updated"
                 }
             ]
         },
@@ -241,6 +280,13 @@
                     ]
                 },
                 {
+                    "name": "FloatLabel",
+                    "to": "/floatlabel",
+                    "meta": [
+                        "floatlabel"
+                    ]
+                },
+                {
                     "name": "InputGroup",
                     "to": "/inputgroup",
                     "meta": [
@@ -252,13 +298,6 @@
                     "to": "/inputmask",
                     "meta": [
                         "inputmask"
-                    ]
-                },
-                {
-                    "name": "InputNumber",
-                    "to": "/inputnumber",
-                    "meta": [
-                        "inputnumber"
                     ]
                 },
                 {
@@ -276,11 +315,26 @@
                     ]
                 },
                 {
-                    "name": "FloatLabel",
-                    "to": "/floatlabel",
+                    "name": "InputTextarea",
+                    "to": "/inputtextarea",
                     "meta": [
-                        "floatlabel"
+                        "inputtextarea"
                     ]
+                },
+                {
+                    "name": "InputNumber",
+                    "to": "/inputnumber",
+                    "meta": [
+                        "inputnumber"
+                    ]
+                },
+                {
+                    "name": "InvalidState",
+                    "to": "/invalid",
+                    "meta": [
+                        "invalid state"
+                    ],
+                    "badge": "new"
                 },
                 {
                     "name": "Knob",
@@ -289,13 +343,6 @@
                         "knob"
                     ],
                     "badge": "new"
-                },
-                {
-                    "name": "InputTextarea",
-                    "to": "/inputtextarea",
-                    "meta": [
-                        "inputtextarea"
-                    ]
                 },
                 {
                     "name": "KeyFilter",
@@ -460,7 +507,8 @@
                             "to": "/datatable/paginator",
                             "meta": [
                                 "paginator"
-                            ]
+                            ],
+                            "badge":"updated"
                         },
                         {
                             "name": "Sort",
@@ -561,10 +609,11 @@
                             ]
                         },
                         {
-                            "name": "Export",
+                            "name": "Import/Export",
                             "to": "/datatable/export",
                             "meta": [
-                                "export"
+                                "export",
+                                "import"
                             ]
                         },
                         {
@@ -637,7 +686,8 @@
                             "to": "/datascroller/loader",
                             "meta": [
                                 "loader"
-                            ]
+                            ],
+                            "badge": "updated"
                         }
                     ]
                 },
@@ -677,7 +727,8 @@
                     "to": "/paginator",
                     "meta": [
                         "paginator"
-                    ]
+                    ],
+                    "badge":"updated"
                 },
                 {
                     "name": "PickList",
@@ -771,11 +822,13 @@
                             ]
                         },
                         {
-                            "name": "Page",
+                            "name": "Paginator",
                             "to": "/treetable/page",
                             "meta": [
-                                "page"
-                            ]
+                                "page",
+                                "paginator"
+                            ],
+                            "badge":"updated"
                         },
                         {
                             "name": "Sort",
@@ -1008,7 +1061,8 @@
                     "to": "/tooltip",
                     "meta": [
                         "tooltip"
-                    ]
+                    ],
+                    "badge":"updated"
                 }
             ]
         },
@@ -1366,7 +1420,8 @@
                     "to": "/ripple",
                     "meta": [
                         "ripple"
-                    ]
+                    ],
+                    "badge": "updated"
                 },
                 {
                     "name": "Captcha",

@@ -3,8 +3,8 @@ import { TreeTable } from '../../components/treetable/TreeTable';
 import { Column } from '../../components/column/Column';
 import { ColumnGroup } from '../../components/columngroup/ColumnGroup';
 import { Row } from '../../components/row/Row';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class TreeTableColGroupDemo extends Component {
@@ -871,9 +871,9 @@ const TreeTableColGroupDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="TreeTableColGroupDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'TreeTableColGroupDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         )

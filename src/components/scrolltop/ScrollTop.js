@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import { CSSTransition } from 'react-transition-group';
 import DomHandler from '../utils/DomHandler';
+import { Ripple } from '../ripple/Ripple';
 
 export class ScrollTop extends Component {
 
@@ -32,6 +33,9 @@ export class ScrollTop extends Component {
         };
 
         this.onClick = this.onClick.bind(this);
+        this.onEnter = this.onEnter.bind(this);
+        this.onExited = this.onExited.bind(this);
+        this.scrollElementRef = React.createRef();
     }
 
     onClick() {
@@ -76,8 +80,12 @@ export class ScrollTop extends Component {
         }
     }
 
-    onEnter(el) {
-        el.style.zIndex = String(DomHandler.generateZIndex());
+    onEnter() {
+        this.scrollElementRef.current.style.zIndex = String(DomHandler.generateZIndex());
+    }
+
+    onExited() {
+        DomHandler.revertZIndex();
     }
 
     componentDidMount() {
@@ -92,6 +100,8 @@ export class ScrollTop extends Component {
             this.unbindDocumentScrollListener();
         else if (this.props.target === 'parent')
             this.unbindParentScrollListener();
+
+        DomHandler.revertZIndex();
     }
 
     render() {
@@ -103,12 +113,14 @@ export class ScrollTop extends Component {
 
         return (
             <>
-                <CSSTransition classNames="p-scrolltop" in={this.state.visible} timeout={{ enter: 150, exit: 150 }} unmountOnExit onEnter={this.onEnter}>
-                    <button type="button" className={className} style={this.props.style} onClick={this.onClick}>
+                <CSSTransition nodeRef={this.scrollElementRef} classNames="p-scrolltop" in={this.state.visible} timeout={{ enter: 150, exit: 150 }} unmountOnExit
+                    onEnter={this.onEnter} onExited={this.onExited}>
+                    <button ref={this.scrollElementRef} type="button" className={className} style={this.props.style} onClick={this.onClick}>
                         <span className={iconClassName}></span>
+                        <Ripple />
                     </button>
                 </CSSTransition>
-                { isTargetParent && <span ref={(el) => this.helper = el} className="p-scrolltop-helper"></span> }
+                {isTargetParent && <span ref={(el) => this.helper = el} className="p-scrolltop-helper"></span>}
             </>
         );
     }

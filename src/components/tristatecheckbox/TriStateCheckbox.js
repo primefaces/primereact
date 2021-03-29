@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
-import {tip} from "../tooltip/Tooltip";
+import { tip } from '../tooltip/Tooltip';
 
 export class TriStateCheckbox extends Component {
 
@@ -91,9 +91,9 @@ export class TriStateCheckbox extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.tooltip !== this.props.tooltip) {
+        if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
             if (this.tooltip)
-                this.tooltip.updateContent(this.props.tooltip);
+                this.tooltip.update({ content: this.props.tooltip, ...(this.props.tooltipOptions || {}) });
             else
                 this.renderTooltip();
         }

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Tree } from '../../components/tree/Tree';
 import { NodeService } from '../service/NodeService';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class TreeFilterDemo extends Component {
@@ -161,9 +161,9 @@ const TreeFilterDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="TreeFilterDemo" sources={this.sources} service="NodeService" data="treenodes" />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'TreeFilterDemo', sources: this.sources, service: 'NodeService', data: 'treenodes' })
+                    }
                 </TabView>
             </div>
         );

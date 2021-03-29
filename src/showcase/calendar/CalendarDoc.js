@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class CalendarDoc extends Component {
 
@@ -15,6 +15,7 @@ export class CalendarDoc extends Component {
                 content: `
 import React, { Component } from 'react';
 import { Calendar } from 'primereact/calendar';
+import { addLocale } from 'primereact/api';
 import 'primeflex/primeflex.css';
 
 export class CalendarDemo extends Component {
@@ -45,6 +46,7 @@ export class CalendarDemo extends Component {
             date12: null,
             date13: null,
             date14: null,
+            date15: null,
             dates1: null,
             dates2: null
         };
@@ -60,6 +62,17 @@ export class CalendarDemo extends Component {
         this.invalidDates = [today];
 
         this.dateTemplate = this.dateTemplate.bind(this);
+
+        addLocale('es', {
+            firstDayOfWeek: 1,
+            dayNames: ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'],
+            dayNamesShort: ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'],
+            dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
+            monthNames: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'],
+            monthNamesShort: ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'],
+            today: 'Hoy',
+            clear: 'Claro'
+        });
     }
 
     dateTemplate(date) {
@@ -73,17 +86,6 @@ export class CalendarDemo extends Component {
     }
 
     render() {
-        const es = {
-            firstDayOfWeek: 1,
-            dayNames: ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"],
-            dayNamesShort: ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"],
-            dayNamesMin: ["D", "L", "M", "X", "J", "V", "S"],
-            monthNames: ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"],
-            monthNamesShort: ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"],
-            today: "Hoy",
-            clear: "Claro"
-        };
-
         return (
             <div>
                 <div className="card">
@@ -99,7 +101,7 @@ export class CalendarDemo extends Component {
                         </div>
                         <div className="p-field p-col-12 p-md-4">
                             <label htmlFor="spanish">Spanish</label>
-                            <Calendar id="spanish" value={this.state.date3} onChange={(e) => this.setState({ date3: e.value })} locale={es} dateFormat="dd/mm/yy" />
+                            <Calendar id="spanish" value={this.state.date3} onChange={(e) => this.setState({ date3: e.value })} locale="es" dateFormat="dd/mm/yy" />
                         </div>
                         <div className="p-field p-col-12 p-md-4">
                             <label htmlFor="minmax">MinMax</label>
@@ -147,12 +149,16 @@ export class CalendarDemo extends Component {
                         </div>
                         <div className="p-field p-col-12 p-md-4">
                             <label htmlFor="touchUI">TouchUI</label>
-                            <Calendar id="touchUI" value={this.state.date13} onChange={(e) => this.setState({ date13: e.value })} touchUI />
+                            <Calendar id="touchUI" value={this.state.date13} onChange={(e) => this.setState({ date13: e.value })} touchUI baseZIndex={1000} />
+                        </div>
+                        <div className="p-field p-col-12 p-md-4">
+                            <label htmlFor="mask">Mask</label>
+                            <Calendar id="mask" value={this.state.date14} onChange={(e) => this.setState({ date14: e.value })} mask="99/99/9999"/>
                         </div>
                     </div>
 
                     <h5>Inline</h5>
-                    <Calendar value={this.state.date14} onChange={(e) => this.setState({ date14: e.value })} inline showWeek />
+                    <Calendar value={this.state.date15} onChange={(e) => this.setState({ date15: e.value })} inline showWeek />
                 </div>
             </div>
         );
@@ -165,6 +171,7 @@ export class CalendarDemo extends Component {
                 content: `
 import React, { useState } from 'react';
 import { Calendar } from 'primereact/calendar';
+import { addLocale } from 'primereact/api';
 import 'primeflex/primeflex.css';
 
 const CalendarDemo = () => {
@@ -190,6 +197,7 @@ const CalendarDemo = () => {
     const [date12, setDate12] = useState(null);
     const [date13, setDate13] = useState(null);
     const [date14, setDate14] = useState(null);
+    const [date15, setDate15] = useState(null);
     const [dates1, setDates1] = useState(null);
     const [dates2, setDates2] = useState(null);
 
@@ -204,6 +212,17 @@ const CalendarDemo = () => {
 
     let invalidDates = [today];
 
+    addLocale('es', {
+        firstDayOfWeek: 1,
+        dayNames: ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'],
+        dayNamesShort: ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'],
+        dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
+        monthNames: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'],
+        monthNamesShort: ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'],
+        today: 'Hoy',
+        clear: 'Claro'
+    });
+
     const dateTemplate = (date: any) => {
         if (date.day > 10 && date.day < 15) {
             return (
@@ -213,17 +232,6 @@ const CalendarDemo = () => {
 
         return date.day;
     }
-
-    const es = {
-        firstDayOfWeek: 1,
-        dayNames: ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"],
-        dayNamesShort: ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"],
-        dayNamesMin: ["D", "L", "M", "X", "J", "V", "S"],
-        monthNames: ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"],
-        monthNamesShort: ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"],
-        today: "Hoy",
-        clear: "Claro"
-    };
 
     return (
         <div>
@@ -240,7 +248,7 @@ const CalendarDemo = () => {
                     </div>
                     <div className="p-field p-col-12 p-md-4">
                         <label htmlFor="spanish">Spanish</label>
-                        <Calendar id="spanish" value={date3} onChange={(e) => setDate3(e.value)} locale={es} dateFormat="dd/mm/yy" />
+                        <Calendar id="spanish" value={date3} onChange={(e) => setDate3(e.value)} locale="es" dateFormat="dd/mm/yy" />
                     </div>
                     <div className="p-field p-col-12 p-md-4">
                         <label htmlFor="minmax">MinMax</label>
@@ -288,12 +296,16 @@ const CalendarDemo = () => {
                     </div>
                     <div className="p-field p-col-12 p-md-4">
                         <label htmlFor="touchUI">TouchUI</label>
-                        <Calendar id="touchUI" value={date13} onChange={(e) => setDate13(e.value)} touchUI />
+                        <Calendar id="touchUI" value={date13} onChange={(e) => setDate13(e.value)} touchUI baseZIndex={1000} />
+                    </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <label htmlFor="mask">Mask</label>
+                        <Calendar id="mask" value={date14} onChange={(e) => setDate14(e.value)} mask="99/99/9999"/>
                     </div>
                 </div>
 
                 <h5>Inline</h5>
-                <Calendar value={date14} onChange={(e) => setDate14(e.value)} inline showWeek />
+                <Calendar value={date15} onChange={(e) => setDate15(e.value)} inline showWeek />
             </div>
         </div>
     );
@@ -305,6 +317,7 @@ const CalendarDemo = () => {
                 content: `
 import React, { useState } from 'react';
 import { Calendar } from 'primereact/calendar';
+import { addLocale } from 'primereact/api';
 import 'primeflex/primeflex.css';
 
 const CalendarDemo = () => {
@@ -330,6 +343,7 @@ const CalendarDemo = () => {
     const [date12, setDate12] = useState<Date | Date[] | undefined>(undefined);
     const [date13, setDate13] = useState<Date | Date[] | undefined>(undefined);
     const [date14, setDate14] = useState<Date | Date[] | undefined>(undefined);
+    const [date15, setDate15] = useState<Date | Date[] | undefined>(undefined);
     const [dates1, setDates1] = useState<Date | Date[] | undefined>(undefined);
     const [dates2, setDates2] = useState<Date | Date[] | undefined>(undefined);
 
@@ -344,6 +358,17 @@ const CalendarDemo = () => {
 
     let invalidDates = [today];
 
+    addLocale('es', {
+        firstDayOfWeek: 1,
+        dayNames: ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'],
+        dayNamesShort: ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'],
+        dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
+        monthNames: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'],
+        monthNamesShort: ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'],
+        today: 'Hoy',
+        clear: 'Claro'
+    });
+
     const dateTemplate = (date: any) => {
         if (date.day > 10 && date.day < 15) {
             return (
@@ -353,17 +378,6 @@ const CalendarDemo = () => {
 
         return date.day;
     }
-
-    const es = {
-        firstDayOfWeek: 1,
-        dayNames: ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"],
-        dayNamesShort: ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"],
-        dayNamesMin: ["D", "L", "M", "X", "J", "V", "S"],
-        monthNames: ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"],
-        monthNamesShort: ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"],
-        today: "Hoy",
-        clear: "Claro"
-    };
 
     return (
         <div>
@@ -380,7 +394,7 @@ const CalendarDemo = () => {
                     </div>
                     <div className="p-field p-col-12 p-md-4">
                         <label htmlFor="spanish">Spanish</label>
-                        <Calendar id="spanish" value={date3} onChange={(e) => setDate3(e.value)} locale={es} dateFormat="dd/mm/yy" />
+                        <Calendar id="spanish" value={date3} onChange={(e) => setDate3(e.value)} locale="es" dateFormat="dd/mm/yy" />
                     </div>
                     <div className="p-field p-col-12 p-md-4">
                         <label htmlFor="minmax">MinMax</label>
@@ -428,12 +442,16 @@ const CalendarDemo = () => {
                     </div>
                     <div className="p-field p-col-12 p-md-4">
                         <label htmlFor="touchUI">TouchUI</label>
-                        <Calendar id="touchUI" value={date13} onChange={(e) => setDate13(e.value)} touchUI />
+                        <Calendar id="touchUI" value={date13} onChange={(e) => setDate13(e.value)} touchUI baseZIndex={1000} />
+                    </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <label htmlFor="mask">Mask</label>
+                        <Calendar id="mask" value={date14} onChange={(e) => setDate14(e.value)} mask="99/99/9999"/>
                     </div>
                 </div>
 
                 <h5>Inline</h5>
-                <Calendar value={date14} onChange={(e) => setDate14(e.value)} inline showWeek />
+                <Calendar value={date15} onChange={(e) => setDate15(e.value)} inline showWeek />
             </div>
         </div>
     );
@@ -464,7 +482,7 @@ import { Calendar } from 'primereact/calendar';
 
 <CodeHighlight>
 {`
-<Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
+<Calendar value={date} onChange={(e) => setDate(e.value)}></Calendar>
 `}
 </CodeHighlight>
 
@@ -473,7 +491,7 @@ import { Calendar } from 'primereact/calendar';
 
 <CodeHighlight>
 {`
-<Calendar inline value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
+<Calendar inline value={date} onChange={(e) => setDate(e.value)}></Calendar>
 `}
 </CodeHighlight>
 
@@ -483,7 +501,7 @@ import { Calendar } from 'primereact/calendar';
             uncontrolled mode, viewDate is used only once in initial rendering and ignored in updates. If you'd like to change the displayed month/year programmatically, use the onViewDateChange in controlled mode.</p>
 <CodeHighlight>
 {`
-<Calendar value={this.state.dates} onChange={(e) => this.setState({date: e.value})} viewDate={this.state.viewDate} onViewDateChange={(e) => this.setState({viewDate: e.value})}></Calendar>
+<Calendar value={dates} onChange={(e) => setDate(e.value)} viewDate={viewDate} onViewDateChange={(e) => setViewDate(e.value)}></Calendar>
 `}
 </CodeHighlight>
 
@@ -493,7 +511,7 @@ import { Calendar } from 'primereact/calendar';
             is the end date. Note that time picker is not currently supported in multiple and range modes.</p>
 <CodeHighlight>
 {`
-<Calendar selectionMode="multiple" value={this.state.dates} onChange={(e) => this.setState({dates: e.value})}></Calendar>
+<Calendar selectionMode="multiple" value={dates} onChange={(e) => setDates(e.value)}></Calendar>
 `}
 </CodeHighlight>
 
@@ -502,7 +520,7 @@ import { Calendar } from 'primereact/calendar';
 
 <CodeHighlight>
 {`
-<Calendar dateFormat="dd/mm/yy" value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
+<Calendar dateFormat="dd/mm/yy" value={date} onChange={(e) => setDate(e.value)}></Calendar>
 `}
 </CodeHighlight>
 
@@ -527,15 +545,18 @@ import { Calendar } from 'primereact/calendar';
                             <li>anything else - literal text</li>
                         </ul>
 
+                        <h5>Locale</h5>
+                        <p>Translations for the calendar are defined with the <Link to="/locale">Locale API</Link>.</p>
+
                         <h5>Time</h5>
                         <p>TimePicker is enabled with <i>showTime</i> property and <i>hourFormat</i> is used to select the 24 (default) or 12 hour mode. Optionally enabling <i>timeOnly</i>
                 displays a calendare with time controls only.</p>
 
 <CodeHighlight>
 {`
-<Calendar showTime hourFormat="12" value={this.state.date1} onChange={(e) => this.setState({date1: e.value})}></Calendar>
-<Calendar showTime hourFormat="24" value={this.state.date2} onChange={(e) => this.setState({date2: e.value})}></Calendar>
-<Calendar timeOnly showTime hourFormat="24" value={this.state.date3} onChange={(e) => this.setState({date3: e.value})}></Calendar>
+<Calendar showTime hourFormat="12" value={date1} onChange={(e) => setDate1(e.value)}></Calendar>
+<Calendar showTime hourFormat="24" value={date2} onChange={(e) => setDate2(e.value)}></Calendar>
+<Calendar timeOnly showTime hourFormat="24" value={date3} onChange={(e) => setDate3(e.value)}></Calendar>
 `}
 </CodeHighlight>
 
@@ -544,7 +565,7 @@ import { Calendar } from 'primereact/calendar';
 
 <CodeHighlight>
 {`
-<Calendar minDate={minDate} maxDate={maxDate} readOnlyInput value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
+<Calendar minDate={minDate} maxDate={maxDate} readOnlyInput value={date} onChange={(e) => setDate(e.value)}></Calendar>
 `}
 </CodeHighlight>
 
@@ -554,7 +575,7 @@ import { Calendar } from 'primereact/calendar';
 
 <CodeHighlight>
 {`
-<Calendar disabledDates={invalidDates}" disabledDays={[0,6]} readOnlyInput value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
+<Calendar disabledDates={invalidDates} disabledDays={[0,6]} readOnlyInput value={date} onChange={(e) => setDate(e.value)}></Calendar>
 `}
 </CodeHighlight>
 
@@ -562,7 +583,7 @@ import { Calendar } from 'primereact/calendar';
                         <p>Button bar displays today and clear buttons and activated using the <i>showButtonBar</i> property.</p>
 <CodeHighlight>
 {`
-<Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} showButtonBar></Calendar>
+<Calendar value={date} onChange={(e) => setDate(e.value)} showButtonBar></Calendar>
 `}
 </CodeHighlight>
 
@@ -570,33 +591,7 @@ import { Calendar } from 'primereact/calendar';
                         <p>Displaying multiple months is enabled by setting <i>numberOfMonths</i> property to a value greater than 1.</p>
 <CodeHighlight>
 {`
-<Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} numberOfMonths={3}></Calendar>
-`}
-</CodeHighlight>
-
-                        <h5>Localization</h5>
-                        <p>Localization for different languages and formats is defined by binding the locale settings object to the <i>locale</i> property. Following is a Spanish calendar.</p>
-
-<CodeHighlight>
-{`
-<Calendar locale={es} dateFormat="dd/mm/yy" value={this.state.date} onChange={(e) => this.setState({date: e.value})}></Calendar>
-`}
-</CodeHighlight>
-
-<CodeHighlight lang="js">
-{`
-let es = {
-    firstDayOfWeek: 1,
-    dayNames: ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"],
-    dayNamesShort: ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"],
-    dayNamesMin: ["D", "L", "M", "X", "J", "V", "S"],
-    monthNames: ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"],
-    monthNamesShort: ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"],
-    today: 'Hoy',
-    clear: 'Limpiar',
-    dateFormat: 'dd/mm/yy',
-    weekHeader: 'Sm'
-};
+<Calendar value={date} onChange={(e) => setDate(e.value)} numberOfMonths={3}></Calendar>
 `}
 </CodeHighlight>
 
@@ -606,7 +601,7 @@ let es = {
 
 <CodeHighlight>
 {`
-<Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} dateTemplate={this.dateTemplate} />
+<Calendar value={date} onChange={(e) => setDate(e.value)} dateTemplate={dateTemplate} />
 `}
 </CodeHighlight>
 
@@ -629,7 +624,7 @@ dateTemplate(date) {
                         <p><i>headerTemplate</i> and <i>footerTemplate</i> properties are available to place custom content at these sections.</p>
 <CodeHighlight>
 {`
-<Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} headerTemplate={<Button label="Custom Button" />} footerTemplate={<div>Footer Content</div>} />
+<Calendar value={date} onChange={(e) => setDate(e.value)} headerTemplate={<Button label="Custom Button" />} footerTemplate={<div>Footer Content</div>} />
 `}
 </CodeHighlight>
 
@@ -639,7 +634,7 @@ dateTemplate(date) {
 
 <CodeHighlight>
 {`
-<Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} monthNavigator yearNavigator yearRange="2010:2030" />
+<Calendar value={date} onChange={(e) => setDate(e.value)} monthNavigator yearNavigator yearRange="2010:2030" />
 `}
 </CodeHighlight>
 
@@ -647,7 +642,7 @@ dateTemplate(date) {
                         <p>Month picker is used to select month and year only without the date, set <i>view</i> mode as "month" to activate month picker.</p>
 <CodeHighlight>
 {`
-<Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} view="month" dateFormat="mm/yy" yearNavigator yearRange="2010:2030"/>
+<Calendar value={date} onChange={(e) => setDate(e.value)} view="month" dateFormat="mm/yy" yearNavigator yearRange="2010:2030"/>
 `}
 </CodeHighlight>
 
@@ -655,7 +650,7 @@ dateTemplate(date) {
                         <p>Touch UI mode displays the calendar overlay at the center of the screen as optimized for touch devices.</p>
 <CodeHighlight>
 {`
-<Calendar value={this.state.date} onChange={(e) => this.setState({date: e.value})} touchUI />
+<Calendar value={date} onChange={(e) => setDate(e.value)} touchUI />
 `}
 </CodeHighlight>
 
@@ -751,6 +746,12 @@ dateTemplate(date) {
                                         <td>Keep invalid value when input blur.</td>
                                     </tr>
                                     <tr>
+                                        <td>mask</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Mask pattern for input element.</td>
+                                    </tr>
+                                    <tr>
                                         <td>disabled</td>
                                         <td>boolean</td>
                                         <td>false</td>
@@ -833,6 +834,12 @@ dateTemplate(date) {
                                         <td>string</td>
                                         <td>24</td>
                                         <td>Specifies 12 or 24 hour format.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>locale</td>
+                                        <td>string</td>
+                                        <td>en</td>
+                                        <td>Used to display the values ​​of the locale object defined in the Locale API</td>
                                     </tr>
                                     <tr>
                                         <td>stepHour</td>
@@ -981,8 +988,8 @@ dateTemplate(date) {
                                     <tr>
                                         <td>appendTo</td>
                                         <td>DOM element</td>
-                                        <td>null</td>
-                                        <td>DOM element instance where the dialog should be mounted.</td>
+                                        <td>document.body</td>
+                                        <td>DOM element instance where the overlay panel should be mounted.</td>
                                     </tr>
                                     <tr>
                                         <td>tooltip</td>
@@ -1138,9 +1145,9 @@ dateTemplate(date) {
 
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="CalendarDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'CalendarDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         );

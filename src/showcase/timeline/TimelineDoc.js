@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class TimelineDoc extends Component {
 
@@ -327,7 +327,7 @@ import { Timeline } from 'primereact/timeline';
                             Example below is a sample events array that is used throughout the documentation.</p>
 <CodeHighlight lang="js">
 {`
-this.events = [
+const events = [
     { status: 'Ordered', date: '15/10/2020 10:30', icon: 'pi pi-shopping-cart', color: '#9C27B0', image: 'game-controller.jpg' },
     { status: 'Processing', date: '15/10/2020 14:00', icon: 'pi pi-cog', color: '#673AB7' },
     { status: 'Shipped', date: '15/10/2020 16:15', icon: 'pi pi-shopping-cart', color: '#FF9800' },
@@ -338,7 +338,7 @@ this.events = [
 
 <CodeHighlight>
 {`
-<Timeline value={this.events} content={(item) => item.status} />
+<Timeline value={events} content={(item) => item.status} />
 `}
 </CodeHighlight>
 
@@ -346,7 +346,7 @@ this.events = [
                         <p>Default layout of the timeline is vertical, setting <i>layout</i> to "horizontal" displays the items horizontally.</p>
 <CodeHighlight>
 {`
-<Timeline value={this.events} layout="horizontal" content={(item) => item.status} />
+<Timeline value={events} layout="horizontal" content={(item) => item.status} />
 `}
 </CodeHighlight>
 
@@ -354,14 +354,14 @@ this.events = [
                         <p>Location of the timeline bar is defined using the <i>align</i> property.</p>
 <CodeHighlight>
 {`
-<Timeline value={this.events} align="right" content={(item) => item.status} />
+<Timeline value={events} align="right" content={(item) => item.status} />
 `}
 </CodeHighlight>
 
                         <p>In addition, the "alternate" alignment option make the contents take turns around the timeline bar.</p>
 <CodeHighlight>
 {`
-<Timeline value={this.events} align="alternate" content={(item) => item.status} />
+<Timeline value={events} align="alternate" content={(item) => item.status} />
 `}
 </CodeHighlight>
 
@@ -369,7 +369,7 @@ this.events = [
                         <p>Content to be placed at the other side of the bar is defined with the <i>opposite</i> property.</p>
 <CodeHighlight>
 {`
-<Timeline value={this.events} opposite={(item) => item.status} content={(item) => <small className="p-text-secondary">{item.date}</small>} />
+<Timeline value={events} opposite={(item) => item.status} content={(item) => <small className="p-text-secondary">{item.date}</small>} />
 `}
 </CodeHighlight>
 
@@ -377,7 +377,7 @@ this.events = [
                         <p><i>marker</i> property allows placing a custom event marker instead of the default one. Below is an example with custom markers and content.</p>
 <CodeHighlight>
 {`
-<Timeline value={this.events} marker={(item) => <i className={item.icon}></i>} content={(item) => item.status}} />
+<Timeline value={events} marker={(item) => <i className={item.icon}></i>} content={(item) => item.status}} />
 `}
 </CodeHighlight>
 
@@ -514,9 +514,9 @@ this.events = [
                         <p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="TimelineDemo" sources={this.sources} extFiles={this.extFiles} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'TimelineDemo', sources: this.sources, extFiles: this.extFiles })
+                    }
                 </TabView>
             </div>
         )

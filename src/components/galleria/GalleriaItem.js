@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { classNames } from '../utils/ClassNames';
 import { Ripple } from '../ripple/Ripple';
 
-export class GalleriaItem extends Component {
+class GalleriaItemComponent extends Component {
 
     constructor(props) {
         super(props);
@@ -134,7 +134,7 @@ export class GalleriaItem extends Component {
             const content = this.props.caption(this.props.value[this.props.activeItemIndex]);
             return (
                 <div className="p-galleria-caption">
-                    { content }
+                    { content}
                 </div>
             );
         }
@@ -160,7 +160,7 @@ export class GalleriaItem extends Component {
         return (
             <li className={indicatorItemClassName} key={'p-galleria-indicator-' + index} tabIndex={0}
                 onClick={() => this.onIndicatorClick(index)} onMouseEnter={() => this.onIndicatorMouseEnter(index)} onKeyDown={(e) => this.onIndicatorKeyDown(e, index)}>
-                { indicator }
+                { indicator}
             </li>
         );
     }
@@ -176,7 +176,7 @@ export class GalleriaItem extends Component {
 
             return (
                 <ul className={indicatorsContentClassName}>
-                    { indicators }
+                    { indicators}
                 </ul>
             );
         }
@@ -192,18 +192,20 @@ export class GalleriaItem extends Component {
         const indicators = this.renderIndicators();
 
         return (
-            <div className="p-galleria-item-wrapper">
+            <div ref={(el) => this.props.forwardRef(el)} className="p-galleria-item-wrapper">
                 <div className="p-galleria-item-container">
-                    { backwardNavigator }
+                    {backwardNavigator}
                     <div className="p-galleria-item">
-                        { content }
+                        {content}
                     </div>
-                    { forwardNavigator }
-                    { caption }
+                    {forwardNavigator}
+                    {caption}
                 </div>
 
-                { indicators }
+                {indicators}
             </div>
         );
     }
 }
+
+export const GalleriaItem = React.forwardRef((props, ref) => <GalleriaItemComponent forwardRef={ref} {...props} />);

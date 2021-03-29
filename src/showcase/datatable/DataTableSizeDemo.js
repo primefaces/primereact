@@ -3,8 +3,8 @@ import { DataTable } from '../../components/datatable/DataTable';
 import { Column } from '../../components/column/Column';
 import ProductService from '../service/ProductService';
 import { AppInlineHeader } from '../../AppInlineHeader';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class DataTableSizeDemo extends Component {
 
@@ -241,9 +241,9 @@ const DataTableSizeDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="DataTableSizeDemo" sources={this.sources} service="ProductService" data="products-small" />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'DataTableSizeDemo', sources: this.sources, service: 'ProductService', data: 'products-small' })
+                    }
                 </TabView>
             </div>
         )

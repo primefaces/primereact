@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { InputText } from "../../components/inputtext/InputText";
-import { Button } from "../../components/button/Button";
-import { Checkbox } from "../../components/checkbox/Checkbox";
-import { RadioButton } from "../../components/radiobutton/RadioButton";
+import { InputText } from '../../components/inputtext/InputText';
+import { Button } from '../../components/button/Button';
+import { Checkbox } from '../../components/checkbox/Checkbox';
+import { RadioButton } from '../../components/radiobutton/RadioButton';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { InputGroupDoc } from './InputGroupDoc';
 

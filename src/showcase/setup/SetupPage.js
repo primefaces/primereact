@@ -48,10 +48,10 @@ import { Accordion,AccordionTab } from 'primereact/accordion';
 <CodeHighlight lang="js">
 {`
 dependencies: {
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
-    "react-transition-group": "^2.5.1"
-    "primeicons": "^4.0.0"
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-transition-group": "^4.4.1",
+    "primeicons": "^4.1.0",
 }
 `}
 </CodeHighlight>
@@ -157,18 +157,18 @@ primereact/resources/themes/rhea/theme.css
                     </p>
 <CodeHighlight lang="js">
 {`
-import PrimeReact from 'primereact/utils';
+import PrimeReact from 'primereact/api';
 
 PrimeReact.ripple = true;
 `}
 </CodeHighlight>
 
                     <h5>Quickstart</h5>
-                    <p>An example application based on create-react-app is available at <a href="https://github.com/primefaces/primereact-quickstart" className="layout-content-link">github</a>.</p>
+                    <p>An example application based on create-react-app is available at <a href="https://github.com/primefaces/primereact-quickstart" className="layout-content-link">GitHub</a>.</p>
 
                     <h5>Typescript</h5>
                     <p>Typescript is fully supported as type definition files are provided in the npm package of PrimeReact. A sample typescript-primereact application
-                    is available as well at <a href="https://github.com/primefaces/primereact-typescript-quickstart" className="layout-content-link">github</a>.</p>
+                    is available as well at <a href="https://github.com/primefaces/primereact-typescript-quickstart" className="layout-content-link">GitHub</a>.</p>
 
                     <p>Note: A shorthand API is available to import APIs such as MenuModel and SelectItem.</p>
 <CodeHighlight lang="js">
@@ -179,7 +179,7 @@ import { MenuItem } from 'primereact/api';
 </CodeHighlight>
 
 					<h5>Next.js</h5>
-					<p>A sample next.js-primereact application is available as well at <a href="https://github.com/primefaces/primereact-nextjs-quickstart" className="layout-content-link">github</a>.</p>
+					<p>A sample next.js-primereact application is available as well at <a href="https://github.com/primefaces/primereact-nextjs-quickstart" className="layout-content-link">GitHub</a>.</p>
                 </div>
             </div>
         );

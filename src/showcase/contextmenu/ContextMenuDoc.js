@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class ContextMenuDoc extends Component {
 
@@ -494,7 +494,7 @@ import { ContextMenu } from 'primereact/contextmenu';
                         <p>Menu requires a collection of menuitems as its model.</p>
 <CodeHighlight lang="js">
 {`
-const items: [
+const items = [
     {
        label:'File',
        icon:'pi pi-fw pi-file',
@@ -650,8 +650,8 @@ const items: [
 
 <CodeHighlight>
 {`
-<ContextMenu model={this.state.imageItems} ref={el => this.cm = el}></ContextMenu>
-<img src="showcase/images/logo.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => this.cm.show(e)}/>
+<ContextMenu model={imageItems} ref={cm}></ContextMenu>
+<img src="showcase/images/logo.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => cm.current.show(e)}/>
 `}
 </CodeHighlight>
 
@@ -714,7 +714,7 @@ const items: [
                                     <tr>
                                         <td>appendTo</td>
                                         <td>Dom Element</td>
-                                        <td>null</td>
+                                        <td>document.body</td>
                                         <td>DOM element instance where the menu should be mounted.</td>
                                     </tr>
                                 </tbody>
@@ -814,9 +814,9 @@ const items: [
                         <p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="ContextMenuDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'ContextMenuDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         )

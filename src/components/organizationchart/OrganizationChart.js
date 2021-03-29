@@ -59,7 +59,7 @@ export class OrganizationChartNode extends Component {
     render() {
         this.node = this.props.node;
 
-        var colspan = this.getColspan();
+        let colspan = this.getColspan();
         let nodeClassName = classNames('p-organizationchart-node-content', this.node.className, {
                 'p-organizationchart-selectable-node': this.props.selectionMode && this.node.selectable !== false,
                 'p-highlight': this.isSelected()

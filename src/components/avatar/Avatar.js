@@ -13,7 +13,10 @@ export class Avatar extends Component {
         shape: 'square',
         style: null,
         className: null,
-        template: null
+        template: null,
+        imageAlt: 'avatar',
+        onImageError: null,
+        onClick: null
     }
 
     static propTypes = {
@@ -24,7 +27,10 @@ export class Avatar extends Component {
         shape: PropTypes.string,
         style: PropTypes.object,
         className: PropTypes.string,
-        template: PropTypes.any
+        template: PropTypes.any,
+        imageAlt: PropTypes.string,
+        onImageError: PropTypes.func,
+        onClick: PropTypes.func
     };
 
     renderContent() {
@@ -36,7 +42,13 @@ export class Avatar extends Component {
             return <span className={iconClassName}></span>;
         }
         else if (this.props.image) {
-            return <img src={this.props.image} alt="avatar"></img>
+            const onError = (e) => {
+                if (this.props.onImageError) {
+                    this.props.onImageError(e);
+                }
+            };
+
+            return <img src={this.props.image} alt={this.props.imageAlt} onError={onError}></img>
         }
 
         return null;
@@ -47,13 +59,14 @@ export class Avatar extends Component {
             'p-avatar-image': this.props.image != null,
             'p-avatar-circle': this.props.shape === 'circle',
             'p-avatar-lg': this.props.size === 'large',
-            'p-avatar-xl': this.props.size === 'xlarge'
+            'p-avatar-xl': this.props.size === 'xlarge',
+            'p-avatar-clickable': !!this.props.onClick
         }, this.props.className);
 
         const content = this.props.template ? ObjectUtils.getJSXElement(this.props.template, this.props) : this.renderContent();
 
         return (
-            <div className={containerClassName} style={this.props.style}>
+            <div className={containerClassName} style={this.props.style} onClick={this.props.onClick}>
                 {content}
                 {this.props.children}
             </div>

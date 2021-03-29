@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class ScrollTopDoc extends Component {
 
@@ -16,7 +16,7 @@ export class ScrollTopDoc extends Component {
 import React, { Component } from 'react';
 import { ScrollTop } from 'primereact/scrolltop';
 import { ScrollPanel } from 'primereact/scrollpanel';
-import './ScrollTopDemo.scss';
+import './ScrollTopDemo.css';
 
 export class ScrollTopDemo extends Component {
     render() {
@@ -58,7 +58,7 @@ export class ScrollTopDemo extends Component {
 import React from 'react';
 import { ScrollTop } from 'primereact/scrolltop';
 import { ScrollPanel } from 'primereact/scrollpanel';
-import './ScrollTopDemo.scss';
+import './ScrollTopDemo.css';
 
 export const ScrollTopDemo = () => {
     return (
@@ -98,7 +98,7 @@ export const ScrollTopDemo = () => {
 import React from 'react';
 import { ScrollTop } from 'primereact/scrolltop';
 import { ScrollPanel } from 'primereact/scrollpanel';
-import './ScrollTopDemo.scss';
+import './ScrollTopDemo.css';
 
 export const ScrollTopDemo = () => {
     return (
@@ -129,9 +129,30 @@ export const ScrollTopDemo = () => {
 
         </div>
     );
+}
 `
             }
         };
+        this.extFiles = {
+            'src/demo/ScrollTopDemo.css': {
+                content: `
+.custom-scrolltop {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 4px;
+    background-color: var(--primary-color) !important;
+}
+.custom-scrolltop:hover {
+    background-color: var(--primary-color) !important;
+}
+
+.custom-scrolltop .p-scrolltop-icon {
+    font-size: 1rem;
+    color: var(--primary-color-text);
+}
+                `
+            }
+        }
     }
 
     render() {
@@ -239,9 +260,9 @@ import { ScrollTop } from 'primereact/scrolltop';
                         <p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="ScrollTopDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'ScrollTopDemo', sources: this.sources, extFiles: this.extFiles })
+                    }
                 </TabView>
             </div>
         );

@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 interface TimelineProps {
     id?: string;
     value?: Array<any>;
@@ -7,9 +8,9 @@ interface TimelineProps {
     dataKey?: string;
     className?: string;
     style?: object;
-    opposite?: ((item: any, index: number) => any | any);
-    marker?: ((item: any, index: number) => any | any);
-    content?: ((item: any, index: number) => any | any);
+    opposite?: any;
+    marker?: any;
+    content?: any;
 }
 
 export class Timeline extends React.Component<TimelineProps,any> {}

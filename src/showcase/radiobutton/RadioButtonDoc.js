@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import { TabView,TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class RadioButtonDoc extends Component {
 
@@ -190,8 +190,8 @@ import { RadioButton } from 'primereact/radiobutton';
                         <p>RadioButton is used as a controlled input with checked and onChange properties.</p>
 <CodeHighlight>
 {`
-<RadioButton value="val1" name="city" onChange={(e) => this.setState({value: e.value})} checked={this.state.value === 'val1'} />
-<RadioButton value="val2" name="city" onChange={(e) => this.setState({value: e.value})} checked={this.state.value === 'val2'} />
+<RadioButton value="val1" name="city" onChange={(e) => setValue(e.value)} checked={value === 'val1'} />
+<RadioButton value="val2" name="city" onChange={(e) => setValue(e.value)} checked={value === 'val2'} />
 `}
 </CodeHighlight>
 
@@ -340,9 +340,9 @@ import { RadioButton } from 'primereact/radiobutton';
                     <p>None.</p>
                 </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="RadioButtonDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'RadioButtonDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         )

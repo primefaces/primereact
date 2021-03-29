@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class SkeletonDoc extends Component {
-    
+
     constructor(props){
         super(props)
 
@@ -17,7 +17,7 @@ import React, { Component } from "react";
 import { Skeleton } from 'primereact/skeleton';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import './SkeletonDemo.scss';
+import './SkeletonDemo.css';
 
 export class SkeletonDemo extends Component {
 
@@ -158,7 +158,7 @@ import React from "react";
 import { Skeleton } from 'primereact/skeleton';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import './SkeletonDemo.scss';
+import './SkeletonDemo.css';
 
 export const SkeletonDemo = () => {
 
@@ -284,7 +284,7 @@ export const SkeletonDemo = () => {
                 </DataTable>
             </div>
 
-        </div> 
+        </div>
     );
 }
 `
@@ -296,7 +296,7 @@ import React from "react";
 import { Skeleton } from 'primereact/skeleton';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import './SkeletonDemo.scss';
+import './SkeletonDemo.css';
 
 export const SkeletonDemo = () => {
 
@@ -421,15 +421,29 @@ export const SkeletonDemo = () => {
                     <Column field="quantity" header="Quantity" body={bodyTemplate}></Column>
                 </DataTable>
             </div>
-            
+
         </div>
     );
 }
 `
             }
         };
+
+        this.extFiles = {
+            'src/demo/SkeletonDemo.css': {
+                content: `
+.custom-skeleton {
+    border: 1px solid var(--surface-d);
+    border-borderRadius: 4px;
+}
+.custom-skeleton ul {
+    list-style: none;
+}
+                `
+            }
+        }
     }
-    
+
     render() {
         return (
             <div className="content-section documentation">
@@ -560,11 +574,11 @@ import { Skeleton } from 'primereact/skeleton';
 				<h5>Dependencies</h5>
 				<p>None.</p>
                     </TabPanel>
-                    <TabPanel header="Source">
-                        <LiveEditor name="SkeletonDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'SkeletonDemo', sources: this.sources, extFiles: this.extFiles })
+                    }
                 </TabView>
             </div>
         );
-    }   
+    }
 }

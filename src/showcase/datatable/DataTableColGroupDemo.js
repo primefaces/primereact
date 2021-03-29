@@ -3,8 +3,8 @@ import { DataTable } from '../../components/datatable/DataTable';
 import { Column } from '../../components/column/Column';
 import { ColumnGroup } from '../../components/columngroup/ColumnGroup';
 import { Row } from '../../components/row/Row';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class DataTableColGroupDemo extends Component {
@@ -457,9 +457,9 @@ const DataTableColGroupDemo = () => {
         return (
             <div className="content-section documentation">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="DataTableColGroupDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'DataTableColGroupDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         )

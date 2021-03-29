@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView,TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class ToolbarDoc extends Component {
 
@@ -219,7 +219,7 @@ const leftContents = (
         <Button label="New" icon="pi pi-plus" className="p-mr-2" />
         <Button label="Upload" icon="pi pi-upload" className="p-button-success" />
         <i className="pi pi-bars p-toolbar-separator p-mr-2" />
-        <SplitButton label="Save" icon="pi pi-check" model={this.items} className="p-button-warning"></SplitButton>
+        <SplitButton label="Save" icon="pi pi-check" model={items} className="p-button-warning"></SplitButton>
     </React.Fragment>
 );
 
@@ -310,9 +310,9 @@ const rightContents = (
                         <p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="ToolbarDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'ToolbarDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         )

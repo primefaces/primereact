@@ -6,6 +6,8 @@ import { Dialog } from '../dialog/Dialog';
 import { Button } from '../button/Button';
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
+import { localeOption } from '../api/Locale';
+import { Portal } from '../portal/Portal';
 
 export function confirmDialog(props) {
     let appendTo = props.appendTo || document.body;
@@ -46,8 +48,8 @@ export class ConfirmDialog extends Component {
     static defaultProps = {
         visible: false,
         message: null,
-        rejectLabel: 'No',
-        acceptLabel: 'Yes',
+        rejectLabel: null,
+        acceptLabel: null,
         icon: null,
         rejectIcon: null,
         acceptIcon: null,
@@ -56,7 +58,10 @@ export class ConfirmDialog extends Component {
         className: null,
         appendTo: null,
         footer: null,
-        onHide: null
+        breakpoints: null,
+        onHide: null,
+        accept: null,
+        reject: null
     }
 
     static propTypes = {
@@ -72,7 +77,10 @@ export class ConfirmDialog extends Component {
         appendTo: PropTypes.any,
         className: PropTypes.string,
         footer: PropTypes.any,
-        onHide: PropTypes.func
+        breakpoints: PropTypes.object,
+        onHide: PropTypes.func,
+        accept: PropTypes.func,
+        reject: PropTypes.func
     }
 
     constructor(props) {
@@ -82,11 +90,17 @@ export class ConfirmDialog extends Component {
             visible: props.visible
         };
 
-        this.appendTo = props.appendTo || document.body;
-
         this.reject = this.reject.bind(this);
         this.accept = this.accept.bind(this);
         this.hide = this.hide.bind(this);
+    }
+
+    acceptLabel() {
+        return this.props.acceptLabel || localeOption('accept');
+    }
+
+    rejectLabel() {
+        return this.props.rejectLabel || localeOption('reject');
     }
 
     accept() {
@@ -131,8 +145,8 @@ export class ConfirmDialog extends Component {
 
         return this.props.footer ? ObjectUtils.getJSXElement(this.props.footer, this.props) : (
             <>
-                <Button label={this.props.rejectLabel} icon={this.props.rejectIcon} className={rejectClassName} onClick={this.reject} />
-                <Button label={this.props.acceptLabel} icon={this.props.acceptIcon} className={acceptClassName} onClick={this.accept} autoFocus />
+                <Button label={this.rejectLabel()} icon={this.props.rejectIcon} className={rejectClassName} onClick={this.reject} />
+                <Button label={this.acceptLabel()} icon={this.props.acceptIcon} className={acceptClassName} onClick={this.accept} autoFocus />
             </>
         )
     }
@@ -146,7 +160,7 @@ export class ConfirmDialog extends Component {
         const footer = this.renderFooter();
 
         return (
-            <Dialog visible={this.state.visible} {...dialogProps} className={className} footer={footer} onHide={this.hide}>
+            <Dialog visible={this.state.visible} {...dialogProps} className={className} footer={footer} onHide={this.hide} breakpoints={this.props.breakpoints}>
                 <i className={iconClassName} />
                 <span className="p-confirm-dialog-message">{message}</span>
             </Dialog>
@@ -156,6 +170,6 @@ export class ConfirmDialog extends Component {
     render() {
         const element = this.renderElement();
 
-        return ReactDOM.createPortal(element, this.appendTo);
+        return <Portal element={element} appendTo={this.props.appendTo} />;
     }
 }

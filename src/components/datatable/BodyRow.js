@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { classNames } from '../utils/ClassNames';
-import {BodyCell} from './BodyCell';
+import { BodyCell } from './BodyCell';
 import DomHandler from '../utils/DomHandler';
 
 export class BodyRow extends Component {
 
     constructor(props) {
         super(props);
+
+        if (!this.props.isRowEditingControlled) {
+            this.state = {
+                editing: false
+            };
+        }
 
         this.onClick = this.onClick.bind(this);
         this.onDoubleClick = this.onDoubleClick.bind(this);
@@ -21,10 +27,15 @@ export class BodyRow extends Component {
         this.onRowEditInit = this.onRowEditInit.bind(this);
         this.onRowEditSave = this.onRowEditSave.bind(this);
         this.onRowEditCancel = this.onRowEditCancel.bind(this);
+        this.updateEditingState = this.updateEditingState.bind(this);
+    }
+
+    getEditing() {
+        return this.props.isRowEditingControlled ? this.props.editing : this.state.editing;
     }
 
     onClick(event) {
-        if(this.props.onClick) {
+        if (this.props.onClick) {
             this.props.onClick({
                 originalEvent: event,
                 data: this.props.rowData,
@@ -34,7 +45,7 @@ export class BodyRow extends Component {
     }
 
     onDoubleClick(event) {
-        if(this.props.onDoubleClick) {
+        if (this.props.onDoubleClick) {
             this.props.onDoubleClick({
                 originalEvent: event,
                 data: this.props.rowData,
@@ -44,13 +55,13 @@ export class BodyRow extends Component {
     }
 
     onTouchEnd(event) {
-        if(this.props.onTouchEnd) {
+        if (this.props.onTouchEnd) {
             this.props.onTouchEnd(event);
         }
     }
 
     onRightClick(event) {
-        if(this.props.onRightClick) {
+        if (this.props.onRightClick) {
             this.props.onRightClick({
                 originalEvent: event,
                 data: this.props.rowData,
@@ -67,14 +78,14 @@ export class BodyRow extends Component {
     }
 
     onDragEnd(event) {
-        if(this.props.onDragEnd) {
+        if (this.props.onDragEnd) {
             this.props.onDragEnd(event);
         }
         event.currentTarget.draggable = false;
     }
 
     onDragOver(event) {
-        if(this.props.onDragOver) {
+        if (this.props.onDragOver) {
             this.props.onDragOver({
                 originalEvent: event,
                 rowElement: this.container
@@ -84,7 +95,7 @@ export class BodyRow extends Component {
     }
 
     onDragLeave(event) {
-        if(this.props.onDragLeave) {
+        if (this.props.onDragLeave) {
             this.props.onDragLeave({
                 originalEvent: event,
                 rowElement: this.container
@@ -93,7 +104,7 @@ export class BodyRow extends Component {
     }
 
     onDrop(event) {
-        if(this.props.onDrop) {
+        if (this.props.onDrop) {
             this.props.onDrop({
                 originalEvent: event,
                 rowElement: this.container
@@ -104,38 +115,49 @@ export class BodyRow extends Component {
 
     onKeyDown(event) {
         if (this.props.selectionMode) {
-            const row = event.target;
+            const row = event.currentTarget;
 
             switch (event.which) {
                 //down arrow
                 case 40:
                     let nextRow = this.findNextSelectableRow(row);
                     if (nextRow) {
+                        this.changeTabIndex(row, nextRow);
                         nextRow.focus();
                     }
 
                     event.preventDefault();
-                break;
+                    break;
 
                 //up arrow
                 case 38:
                     let prevRow = this.findPrevSelectableRow(row);
                     if (prevRow) {
+                        this.changeTabIndex(row, prevRow);
                         prevRow.focus();
                     }
 
                     event.preventDefault();
-                break;
+                    break;
 
-                //enter
-                case 13:
+                //enter or space
+                case 13: // @deprecated
+                case 32:
                     this.onClick(event);
-                break;
+                    event.preventDefault();
+                    break;
 
                 default:
                     //no op
-                break;
+                    break;
             }
+        }
+    }
+
+    changeTabIndex(currentRow, nextRow) {
+        if (currentRow && nextRow) {
+            currentRow.tabIndex = -1;
+            nextRow.tabIndex = 0;
         }
     }
 
@@ -165,6 +187,19 @@ export class BodyRow extends Component {
         }
     }
 
+    updateEditingState(event, editing) {
+        if (this.props.isRowEditingControlled) {
+            this.props.onRowEditingToggle({
+                originalEvent: event,
+                data: this.props.rowData,
+                index: this.props.rowIndex
+            });
+        }
+        else {
+            this.setState({ editing });
+        }
+    }
+
     onRowEditInit(event) {
         if (this.props.onRowEditInit) {
             this.props.onRowEditInit({
@@ -173,6 +208,8 @@ export class BodyRow extends Component {
                 index: this.props.rowIndex
             });
         }
+
+        this.updateEditingState(event, true);
 
         event.preventDefault();
     }
@@ -189,8 +226,12 @@ export class BodyRow extends Component {
                 originalEvent: event,
                 data: this.props.rowData,
                 index: this.props.rowIndex,
-                valid: valid
+                valid
             });
+        }
+
+        if (valid) {
+            this.updateEditingState(event, false);
         }
 
         event.preventDefault();
@@ -205,7 +246,13 @@ export class BodyRow extends Component {
             });
         }
 
+        this.updateEditingState(event, false);
+
         event.preventDefault();
+    }
+
+    getTabIndex() {
+        return this.props.selectionMode ? (this.props.rowIndex === 0 ? 0 : -1) : null;
     }
 
     render() {
@@ -218,19 +265,20 @@ export class BodyRow extends Component {
 
         if (this.props.rowClassName) {
             let rowClassNameCondition = this.props.rowClassName(this.props.rowData);
-            conditionalClassNames = {...conditionalClassNames, ...rowClassNameCondition};
+            conditionalClassNames = { ...conditionalClassNames, ...rowClassNameCondition };
         }
         let className = classNames(conditionalClassNames);
-        let style = this.props.virtualScroll ? {height: this.props.virtualRowHeight} : {};
+        let style = this.props.virtualScroll ? { height: this.props.virtualRowHeight } : {};
         let hasRowSpanGrouping = this.props.rowGroupMode === 'rowspan';
+        let tabIndex = this.getTabIndex();
         let cells = [];
 
         for (let i = 0; i < columns.length; i++) {
             let column = columns[i];
             let rowSpan;
-            if(hasRowSpanGrouping) {
-                if(this.props.sortField === column.props.field) {
-                    if(this.props.groupRowSpan) {
+            if (hasRowSpanGrouping) {
+                if (this.props.sortField === column.props.field) {
+                    if (this.props.groupRowSpan) {
                         rowSpan = this.props.groupRowSpan;
                         className += ' p-datatable-rowspan-group'
                     }
@@ -240,16 +288,17 @@ export class BodyRow extends Component {
                 }
             }
 
-            let cell = <BodyCell key={i} {...column.props} value={this.props.value} rowSpan={rowSpan} rowData={this.props.rowData} rowIndex={this.props.rowIndex} onRowToggle={this.props.onRowToggle} expanded={this.props.expanded}
-                        onRadioClick={this.props.onRadioClick} onCheckboxClick={this.props.onCheckboxClick} selected={this.props.selected}
-                        editMode={this.props.editMode} editing={this.props.editing} onRowEditInit={this.onRowEditInit} onRowEditSave={this.onRowEditSave} onRowEditCancel={this.onRowEditCancel}
-                        showRowReorderElement={this.props.showRowReorderElement} showSelectionElement={this.props.showSelectionElement}/>;
+            let editing = this.getEditing();
+            let cell = <BodyCell tableId={this.props.tableId} key={i} {...column.props} value={this.props.value} rowSpan={rowSpan} rowData={this.props.rowData} rowIndex={this.props.rowIndex} onRowToggle={this.props.onRowToggle} expanded={this.props.expanded}
+                            onRadioClick={this.props.onRadioClick} onCheckboxClick={this.props.onCheckboxClick} selected={this.props.selected} selectOnEdit={this.props.selectOnEdit}
+                            editMode={this.props.editMode} editing={editing} onRowEditInit={this.onRowEditInit} onRowEditSave={this.onRowEditSave} onRowEditCancel={this.onRowEditCancel}
+                            showRowReorderElement={this.props.showRowReorderElement} showSelectionElement={this.props.showSelectionElement} />;
 
             cells.push(cell);
         }
 
         return (
-            <tr tabIndex={this.props.selectionMode ? 0 : null} ref={(el) => {this.container = el;}} className={className} onClick={this.onClick} onDoubleClick={this.onDoubleClick} onTouchEnd={this.onTouchEnd} onContextMenu={this.onRightClick} onMouseDown={this.onMouseDown}
+            <tr role="row" tabIndex={tabIndex} ref={(el) => { this.container = el; }} className={className} onClick={this.onClick} onDoubleClick={this.onDoubleClick} onTouchEnd={this.onTouchEnd} onContextMenu={this.onRightClick} onMouseDown={this.onMouseDown}
                 onDragStart={this.props.onDragStart} onDragEnd={this.onDragEnd} onDragOver={this.onDragOver} onDragLeave={this.onDragLeave} onDrop={this.onDrop} style={style} onKeyDown={this.onKeyDown}>
                 {cells}
             </tr>

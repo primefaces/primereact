@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 import {InputText} from '../inputtext/InputText';
 import { classNames } from '../utils/ClassNames';
-import {tip} from "../tooltip/Tooltip";
+import { tip } from '../tooltip/Tooltip';
 import { Ripple } from '../ripple/Ripple';
 
 export class InputNumber extends Component {
@@ -44,6 +43,7 @@ export class InputNumber extends Component {
         style: null,
         className: null,
         inputId: null,
+        autoFocus: false,
         inputStyle: null,
         inputClassName: null,
         tooltip: null,
@@ -92,6 +92,7 @@ export class InputNumber extends Component {
         style: PropTypes.object,
         className: PropTypes.string,
         inputId: PropTypes.string,
+        autoFocus: PropTypes.bool,
         inputStyle: PropTypes.object,
         inputClassName: PropTypes.string,
         tooltip: PropTypes.string,
@@ -806,6 +807,9 @@ export class InputNumber extends Component {
                 this._group.lastIndex = 0;
                 this.inputEl.setSelectionRange(selectionEnd, selectionEnd);
             }
+            else if (inputValue === '-' && operation === 'insert') {
+                this.inputEl.setSelectionRange(selectionEnd + 1, selectionEnd + 1);
+            }
             else {
                 selectionEnd = selectionEnd + (newLength - currentLength);
                 this.inputEl.setSelectionRange(selectionEnd, selectionEnd);
@@ -892,9 +896,9 @@ export class InputNumber extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.tooltip !== this.props.tooltip) {
+        if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
             if (this.tooltip)
-                this.tooltip.updateContent(this.props.tooltip);
+                this.tooltip.update({ content: this.props.tooltip, ...(this.props.tooltipOptions || {}) });
             else
                 this.renderTooltip();
         }
@@ -939,10 +943,10 @@ export class InputNumber extends Component {
         const valueToRender = this.formatValue(this.props.value);
 
         return (
-            <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} id={this.props.inputId} style={this.props.inputStyle} role="spinbutton"
+            <InputText ref={(el) => this.inputEl = el} id={this.props.inputId} style={this.props.inputStyle} role="spinbutton"
                        className={className} defaultValue={valueToRender} type={this.props.type} size={this.props.size} tabIndex={this.props.tabIndex} inputMode={this.getInputMode()}
                        maxLength={this.props.maxlength} disabled={this.props.disabled} required={this.props.required} pattern={this.props.pattern}
-                       placeholder={this.props.placeholder} readOnly={this.props.readOnly} name={this.props.name}
+                       placeholder={this.props.placeholder} readOnly={this.props.readOnly} name={this.props.name} autoFocus={this.props.autoFocus}
                        onKeyDown={this.onInputKeyDown} onKeyPress={this.onInputKeyPress} onInput={this.onInput} onClick={this.onInputClick}
                        onBlur={this.onInputBlur} onFocus={this.onInputFocus} onPaste={this.onPaste} min={this.props.min} max={this.props.max}
                        aria-valuemin={this.props.min} aria-valuemax={this.props.max} aria-valuenow={this.props.value} aria-labelledby={this.props.ariaLabelledBy} />

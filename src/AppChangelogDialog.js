@@ -79,6 +79,7 @@ export class AppChangelogDialog extends Component {
                 this.setState({
                     currentChangelog: { version: currentVersion, index: 0 },
                     prevChangelog: { version: Object.keys(this.state.changelog)[1], index: 1 },
+                    nextChangelog: null,
                     filteredChangelog: this.state.changelog[currentVersion][this.props.searchVal.toLowerCase()],
                     totalVersion
                 });

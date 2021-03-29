@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import UniqueComponentId from '../utils/UniqueComponentId';
+import ObjectUtils from '../utils/ObjectUtils';
 
 export class Steps extends Component {
 
@@ -59,18 +60,40 @@ export class Steps extends Component {
     }
 
     renderItem(item, index) {
-        const isDisabled = (item.disabled || (index !== this.props.activeIndex && this.props.readOnly))
+        const active = index === this.props.activeIndex;
+        const disabled = (item.disabled || (index !== this.props.activeIndex && this.props.readOnly))
         const className = classNames('p-steps-item', item.className, {
-            'p-highlight p-steps-current': (index === this.props.activeIndex),
-            'p-disabled': isDisabled
+            'p-highlight p-steps-current': active,
+            'p-disabled': disabled
         });
+        const label = item.label && <span className="p-steps-title">{item.label}</span>;
+        const tabIndex = disabled ? -1 : '';
+        let content = (
+            <a href={item.url || '#'} className="p-menuitem-link" role="presentation" target={item.target} onClick={event => this.itemClick(event, item, index)} tabIndex={tabIndex} aria-disabled={disabled}>
+                <span className="p-steps-number">{index + 1}</span>
+                {label}
+            </a>
+        );
+
+        if (item.template) {
+            const defaultContentOptions = {
+                onClick: (event) => this.onItemClick(event, item, index),
+                className: 'p-menuitem-link',
+                labelClassName: 'p-steps-title',
+                numberClassName: 'p-steps-number',
+                element: content,
+                props: this.props,
+                tabIndex,
+                active,
+                disabled
+            };
+
+            content = ObjectUtils.getJSXElement(item.template, item, defaultContentOptions);
+        }
 
         return (
-            <li key={item.label + '_' + index} className={className} style={item.style} role="tab" aria-selected={index === this.props.activeIndex} aria-expanded={index === this.props.activeIndex}>
-                <a href={item.url || '#'} className="p-menuitem-link" role="presentation" target={item.target} onClick={event => this.itemClick(event, item, index)} tabIndex={isDisabled ? -1 : ''}>
-                    <span className="p-steps-number">{index + 1}</span>
-                    <span className="p-steps-title">{item.label}</span>
-                </a>
+            <li key={item.label + '_' + index} className={className} style={item.style} role="tab" aria-selected={active} aria-expanded={active}>
+                {content}
             </li>
         );
     }

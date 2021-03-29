@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import { tip } from '../tooltip/Tooltip';
 import ObjectUtils from '../utils/ObjectUtils';
 import { Ripple } from '../ripple/Ripple';
 
-export class Button extends Component {
+export class ButtonComponent extends Component {
 
     static defaultProps = {
         label: null,
@@ -14,7 +14,8 @@ export class Button extends Component {
         badge: null,
         badgeClassName: null,
         tooltip: null,
-        tooltipOptions: null
+        tooltipOptions: null,
+        forwardRef: null
     }
 
     static propTypes = {
@@ -24,8 +25,24 @@ export class Button extends Component {
         badge: PropTypes.string,
         badgeClassName: PropTypes.string,
         tooltip: PropTypes.string,
-        tooltipOptions: PropTypes.object
+        tooltipOptions: PropTypes.object,
+        forwardRef: PropTypes.any
     };
+
+    getElementRef(el) {
+        this.element = el;
+
+        if (this.props.forwardRef) {
+            if (ObjectUtils.isFunction(this.props.forwardRef)) {
+                return this.props.forwardRef(el);
+            }
+            else {
+                return this.props.forwardRef;
+            }
+        }
+
+        return this.element;
+    }
 
     componentDidMount() {
         if (this.props.tooltip) {
@@ -34,9 +51,9 @@ export class Button extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.tooltip !== this.props.tooltip) {
+        if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
             if (this.tooltip)
-                this.tooltip.updateContent(this.props.tooltip);
+                this.tooltip.update({ content: this.props.tooltip, ...(this.props.tooltipOptions || {}) });
             else
                 this.renderTooltip();
         }
@@ -58,7 +75,7 @@ export class Button extends Component {
     }
 
     renderIcon() {
-        if(this.props.icon) {
+        if (this.props.icon) {
             let className = classNames(this.props.icon, 'p-c', {
                 'p-button-icon-left': this.props.iconPos === 'left' && this.props.label,
                 'p-button-icon-right': this.props.iconPos === 'right' && this.props.label,
@@ -75,11 +92,11 @@ export class Button extends Component {
     }
 
     renderLabel() {
-        if (!this.props.label) {
-            return <span className="p-button-label p-c" dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
+        if (this.props.label) {
+            return <span className="p-button-label p-c">{this.props.label}</span>;
         }
 
-        return <span className="p-button-label p-c">{this.props.label}</span>
+        return !this.props.children && !this.props.label && <span className="p-button-label p-c" dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
     }
 
     renderBadge() {
@@ -102,10 +119,10 @@ export class Button extends Component {
         let label = this.renderLabel();
         let badge = this.renderBadge();
 
-        let buttonProps = ObjectUtils.findDiffKeys(this.props, Button.defaultProps);
+        let buttonProps = ObjectUtils.findDiffKeys(this.props, ButtonComponent.defaultProps);
 
         return (
-            <button ref={(el) => this.element = el} {...buttonProps} className={className}>
+            <button ref={(el) => this.getElementRef(el)} {...buttonProps} className={className}>
                 {icon}
                 {label}
                 {this.props.children}
@@ -115,3 +132,5 @@ export class Button extends Component {
         );
     }
 }
+
+export const Button = React.forwardRef((props, ref) => <ButtonComponent forwardRef={ref} {...props} />);

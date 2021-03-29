@@ -15,7 +15,7 @@ export class SplitterPanel extends Component {
 
     static propTypes = {
         header: PropTypes.number,
-        disabled: PropTypes.number,
+        minSize: PropTypes.number,
         style: PropTypes.object,
         className: PropTypes.string
     }
@@ -29,7 +29,7 @@ export class Splitter extends Component {
         style: null,
         layout: 'horizontal',
         gutterSize: 4,
-        stateKey: '',
+        stateKey: null,
         stateStorage: 'session',
         onResizeEnd: null
     }

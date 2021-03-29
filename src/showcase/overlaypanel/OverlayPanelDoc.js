@@ -2,7 +2,7 @@ import React, { Component}  from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class OverlayPanelDoc extends Component {
 
@@ -63,13 +63,13 @@ export class OverlayPanelDemo extends Component {
 
     render() {
         return (
-            <div className="overlaypanel-demo">
+            <div>
                 <Toast ref={(el) => this.toast = el} />
 
                 <div className="card">
                     <Button type="button" icon="pi pi-search" label={this.state.selectedProduct ? this.state.selectedProduct.name : 'Select a Product'} onClick={(e) => this.op.toggle(e)} aria-haspopup aria-controls="overlay_panel" className="select-product-button" />
 
-                    <OverlayPanel ref={(el) => this.op = el} showCloseIcon id="overlay_panel" style={{width: '450px'}}>
+                    <OverlayPanel ref={(el) => this.op = el} showCloseIcon id="overlay_panel" style={{width: '450px'}} className="overlaypanel-demo">
                         <DataTable value={this.state.products} selectionMode="single" paginator rows={5}
                             selection={this.state.selectedProduct} onSelectionChange={this.onProductSelect}>
                             <Column field="name" header="Name" sortable />
@@ -133,13 +133,13 @@ const OverlayPanelDemo = () => {
     }
 
     return (
-        <div className="overlaypanel-demo">
+        <div>
             <Toast ref={toast} />
 
             <div className="card">
                 <Button type="button" icon="pi pi-search" label={selectedProduct ? selectedProduct.name : 'Select a Product'} onClick={(e) => op.current.toggle(e)} aria-haspopup aria-controls="overlay_panel" className="select-product-button" />
 
-                <OverlayPanel ref={op} showCloseIcon id="overlay_panel" style={{width: '450px'}}>
+                <OverlayPanel ref={op} showCloseIcon id="overlay_panel" style={{width: '450px'}} className="overlaypanel-demo">
                     <DataTable value={products} selectionMode="single" paginator rows={5}
                         selection={selectedProduct} onSelectionChange={onProductSelect}>
                         <Column field="name" header="Name" sortable />
@@ -202,13 +202,13 @@ const OverlayPanelDemo = () => {
     }
 
     return (
-        <div className="overlaypanel-demo">
+        <div>
             <Toast ref={toast} />
 
             <div className="card">
                 <Button type="button" icon="pi pi-search" label={selectedProduct ? selectedProduct.name : 'Select a Product'} onClick={(e) => op.current.toggle(e)} aria-haspopup aria-controls="overlay_panel" className="select-product-button" />
 
-                <OverlayPanel ref={op} showCloseIcon id="overlay_panel" style={{width: '450px'}}>
+                <OverlayPanel ref={op} showCloseIcon id="overlay_panel" style={{width: '450px'}} className="overlaypanel-demo">
                     <DataTable value={products} selectionMode="single" paginator rows={5}
                         selection={selectedProduct} onSelectionChange={onProductSelect}>
                         <Column field="name" header="Name" sortable />
@@ -260,9 +260,9 @@ import { OverlayPanel } from 'primereact/overlaypanel';
             <p>OverlayPanel is accessed via its reference where visibility is controlled using toggle, show and hide methods.</p>
 <CodeHighlight>
 {`
-<Button type="button" label="Basic" onClick={(e) => this.op.toggle(e)} />
+<Button type="button" label="Basic" onClick={(e) => op.current.toggle(e)} />
 
-<OverlayPanel ref={(el) => this.op = el}>
+<OverlayPanel ref={op}>
     // Content
 </OverlayPanel>
 `}
@@ -274,7 +274,19 @@ import { OverlayPanel } from 'primereact/overlaypanel';
 
 <CodeHighlight>
 {`
-<OverlayPanel ref={(el) => this.op = el} showCloseIcon dismissable>
+<OverlayPanel ref={op} showCloseIcon dismissable>
+    // Content
+</OverlayPanel>
+`}
+</CodeHighlight>
+
+            <h5>Responsive</h5>
+            <p>OverlayPanel width can be adjusted per screen size with the <i>breakpoints</i> option. In example below, default width is set to 450px and below 961px, width would be 75vw and finally below 641px width becomes
+                100%. The value of <i>breakpoints</i> should be an object literal whose keys are the maximum screen sizes and values are the widths per screen.</p>
+
+<CodeHighlight>
+{`
+<OverlayPanel ref={op} breakpoints={{'960px': '75vw', '640px': '100vw'}} style={{width: '450px'}}>
     // Content
 </OverlayPanel>
 `}
@@ -325,14 +337,20 @@ import { OverlayPanel } from 'primereact/overlaypanel';
                         <tr>
                             <td>appendTo</td>
                             <td>DOM element</td>
-                            <td>null</td>
-                            <td>DOM element instance where the dialog should be mounted.</td>
+                            <td>document.body</td>
+                            <td>DOM element instance where the overlay panel should be mounted.</td>
                         </tr>
                         <tr>
                             <td>ariaCloseLabel</td>
                             <td>string</td>
                             <td>close</td>
                             <td>Aria label of the close icon.</td>
+                        </tr>
+                        <tr>
+                            <td>breakpoints</td>
+                            <td>object</td>
+                            <td>null</td>
+                            <td>Object literal to define widths per screen size.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -421,9 +439,9 @@ import { OverlayPanel } from 'primereact/overlaypanel';
 
             </TabPanel>
 
-            <TabPanel header="Source">
-                <LiveEditor name="OverlayPanelDemo" sources={this.sources} service="ProductService" data="products-small" extFiles={this.extFiles} />
-            </TabPanel>
+            {
+                useLiveEditorTabs({ name: 'OverlayPanelDemo', sources: this.sources, service: 'ProductService', data: 'products-small', extFiles: this.extFiles })
+            }
         </TabView>
     </div>
         );

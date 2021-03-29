@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class TieredMenuDoc extends Component {
 
@@ -503,7 +503,7 @@ import { TieredMenu } from 'primereact/tieredmenu';
                         <p>Menu requires a collection of menuitems as its model.</p>
 <CodeHighlight lang="js">
 {`
-const items: [
+const items = [
     {
        label:'File',
        icon:'pi pi-fw pi-file',
@@ -648,8 +648,8 @@ const items: [
 
 <CodeHighlight>
 {`
-<TieredMenu model={items} popup ref={el => this.menu = el} />
-<Button label="Show" icon="pi pi-bars" onClick={(event) => this.menu.toggle(event)}/>
+<TieredMenu model={items} popup ref={menu} />
+<Button label="Show" icon="pi pi-bars" onClick={(event) => menu.current.toggle(event)}/>
 `}
 </CodeHighlight>
 
@@ -710,8 +710,8 @@ const items: [
                                     <tr>
                                         <td>appendTo</td>
                                         <td>DOM element</td>
-                                        <td>null</td>
-                                        <td>DOM element instance where the dialog should be mounted.</td>
+                                        <td>document.body</td>
+                                        <td>DOM element instance where the overlay menu should be mounted.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -815,9 +815,9 @@ const items: [
                         <p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="TieredMenuDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'TieredMenuDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         )

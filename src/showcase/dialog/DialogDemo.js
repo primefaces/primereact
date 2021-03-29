@@ -13,9 +13,9 @@ export class DialogDemo extends Component {
             displayBasic: false,
             displayBasic2: false,
             displayModal: false,
-            displayConfirmation: false,
             displayMaximizable: false,
             displayPosition: false,
+            displayResponsive: false,
             position: 'center'
         };
 
@@ -67,7 +67,7 @@ export class DialogDemo extends Component {
                     <div className="card">
                         <h5>Basic</h5>
                         <Button label="Show" icon="pi pi-external-link" onClick={() => this.onClick('displayBasic')} />
-                        <Dialog header="Header" visible={this.state.displayBasic} style={{ width: '50vw' }} footer={this.renderFooter('displayBasic')} onHide={() => this.onHide('displayBasic')}>
+                        <Dialog header="Header" visible={this.state.displayBasic} style={{ width: '50vw' }} footer={this.renderFooter('displayBasic')} onHide={() => this.onHide('displayBasic')} baseZIndex={1000}>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                             Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
@@ -75,7 +75,7 @@ export class DialogDemo extends Component {
                         </Dialog>
 
                         <Button label="Long Content" icon="pi pi-external-link" onClick={() => this.onClick('displayBasic2')} />
-                        <Dialog header="Header" visible={this.state.displayBasic2} style={{ width: '50vw' }} footer={this.renderFooter('displayBasic2')} onHide={() => this.onHide('displayBasic2')}>
+                        <Dialog header="Header" visible={this.state.displayBasic2} style={{ width: '50vw' }} footer={this.renderFooter('displayBasic2')} onHide={() => this.onHide('displayBasic2')} baseZIndex={1000}>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
                             ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
                             culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -110,24 +110,24 @@ export class DialogDemo extends Component {
 
                         <h5>Without Modal</h5>
                         <Button label="Show" icon="pi pi-external-link" onClick={() => this.onClick('displayModal')} />
-                        <Dialog header="Header" visible={this.state.displayModal} modal={false} style={{ width: '50vw' }} footer={this.renderFooter('displayModal')} onHide={() => this.onHide('displayModal')}>
+                        <Dialog header="Header" visible={this.state.displayModal} modal={false} style={{ width: '50vw' }} footer={this.renderFooter('displayModal')} onHide={() => this.onHide('displayModal')} baseZIndex={1000}>
                             <p className="p-m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                             laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                             Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                         </Dialog>
 
-                        <h5>Confirmation</h5>
-                        <Button label="Confirm" icon="pi pi-external-link" onClick={() => this.onClick('displayConfirmation')} />
-                        <Dialog header="Confirmation" visible={this.state.displayConfirmation} modal style={{ width: '350px' }} footer={this.renderFooter('displayConfirmation')} onHide={() => this.onHide('displayConfirmation')}>
-                            <div className="confirmation-content">
-                                <i className="pi pi-exclamation-triangle p-mr-3" style={{ fontSize: '2rem' }} />
-                                <span>Are you sure you want to proceed?</span>
-                            </div>
+                        <h5>Responsive</h5>
+                        <Button label="Show" icon="pi pi-external-link" onClick={() => this.onClick('displayResponsive')} />
+                        <Dialog header="Header" visible={this.state.displayResponsive} onHide={() => this.onHide('displayResponsive')} breakpoints={{'960px': '75vw'}} style={{width: '50vw'}} footer={this.renderFooter('displayResponsive')} baseZIndex={1000}>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                                cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                         </Dialog>
 
                         <h5>Maximizable</h5>
                         <Button label="Show" icon="pi pi-external-link" onClick={() => this.onClick('displayMaximizable')} />
-                        <Dialog header="Header" visible={this.state.displayMaximizable} maximizable modal style={{ width: '50vw' }} footer={this.renderFooter('displayMaximizable')} onHide={() => this.onHide('displayMaximizable')}>
+                        <Dialog header="Header" visible={this.state.displayMaximizable} maximizable modal style={{ width: '50vw' }} footer={this.renderFooter('displayMaximizable')} onHide={() => this.onHide('displayMaximizable')} baseZIndex={1000}>
                             <p className="p-m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                             laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                             Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -151,7 +151,8 @@ export class DialogDemo extends Component {
                             </div>
                         </div>
 
-                        <Dialog header="Header" visible={this.state.displayPosition} position={this.state.position} modal style={{ width: '50vw' }} footer={this.renderFooter('displayPosition')} onHide={() => this.onHide('displayPosition')}>
+                        <Dialog header="Header" visible={this.state.displayPosition} position={this.state.position} modal style={{ width: '50vw' }} footer={this.renderFooter('displayPosition')} onHide={() => this.onHide('displayPosition')}
+                            draggable={false} resizable={false} baseZIndex={1000}>
                             <p className="p-m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                             laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                             Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>

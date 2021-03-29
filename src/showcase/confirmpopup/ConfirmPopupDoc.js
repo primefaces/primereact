@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class ConfirmPopupDoc extends Component {
 
@@ -94,14 +94,13 @@ import { Toast } from 'primereact/toast';
 const ConfirmPopupDemo = () => {
     const [visible, setVisible] = useState(false);
     const toast = useRef(null);
-    const button = useRef(null);
 
     const accept = () => {
-        toast.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
+        toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
     };
 
     const reject = () => {
-        toast.show({ severity: 'info', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
+        toast.current.show({ severity: 'info', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
     };
 
     const confirm1 = (event) => {
@@ -155,14 +154,13 @@ import { Toast } from 'primereact/toast';
 const ConfirmPopupDemo = () => {
     const [visible, setVisible] = useState<boolean>(false);
     const toast = useRef(null);
-    const button = useRef(null);
 
     const accept = () => {
-        toast.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
+        toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
     };
 
     const reject = () => {
-        toast.show({ severity: 'info', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
+        toast.current.show({ severity: 'info', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
     };
 
     const confirm1 = (event) => {
@@ -232,18 +230,17 @@ import { confirmPopup } from 'primereact/confirmpopup'; // To use confirmPopup m
                         <h6>1. confirmPopup method</h6>
 <CodeHighlight lang="js">
 {`
-confirm(event) {
+const confirm = (event) => {
     confirmPopup({
         target: event.currentTarget,
         message: 'Are you sure you want to proceed?',
-        header: 'Confirmation',
         icon: 'pi pi-exclamation-triangle',
-        accept: this.accept,
-        reject: this.reject
+        accept: () => acceptFunc(),
+        reject: () => rejectFunc()
     });
 }
 
-<Button onClick={this.confirm} icon="pi pi-check" label="Confirm"></Button>
+<Button onClick={confirm} icon="pi pi-check" label="Confirm"></Button>
 `}
 </CodeHighlight>
 
@@ -252,10 +249,10 @@ confirm(event) {
 
 <CodeHighlight>
 {`
-<ConfirmPopup target={document.getElementById('button')} visible={this.state.visible} onHide={() => this.setState({ visible: false })} message="Are you sure you want to proceed?"
-    icon="pi pi-exclamation-triangle" accept={this.accept} reject={this.reject} />
+<ConfirmPopup target={document.getElementById('button')} visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?"
+    icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
 
-<Button id="button onClick={() => this.setState({ visible: true })} icon="pi pi-check" label="Confirm" />
+<Button id="button onClick={() => setVisible(true)} icon="pi pi-check" label="Confirm" />
 `}
 </CodeHighlight>
 
@@ -436,9 +433,9 @@ confirm(event) {
                         <p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="ConfirmPopupDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'ConfirmPopupDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         )

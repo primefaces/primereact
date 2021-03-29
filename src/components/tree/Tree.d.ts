@@ -1,5 +1,9 @@
 import * as React from 'react';
-import TreeNode from "../treenode/TreeNode";
+import TreeNode from '../treenode/TreeNode';
+
+type ExpandedKeysType = {
+    [key: string]: boolean
+}
 
 interface TreeProps {
     id?: string;
@@ -10,7 +14,7 @@ interface TreeProps {
     onSelectionChange?(e: {originalEvent: Event, value: any}): void;
     contextMenuSelectionKey?: any;
     onContextMenuSelectionChange?(e: {originalEvent: Event, value: any}): void;
-    expandedKeys?: any;
+    expandedKeys?: ExpandedKeysType;
     style?: object;
     className?: string;
     contentStyle?: object;
@@ -32,7 +36,7 @@ interface TreeProps {
     onExpand?(e: {originalEvent: Event, node: TreeNode}): void;
     onCollapse?(e: {originalEvent: Event, node: TreeNode}): void;
     onToggle?(e: {originalEvent: Event, value: any}): void;
-    onDragDrop?(e: {originalEvent: Event, value: any}): void;
+    onDragDrop?(e: {originalEvent: Event, value: any, dragNode: any, dropNode: any, dropIndex: number}): void;
     onContextMenu?(e: {originalEvent: Event, node: TreeNode}): void;
 }
 

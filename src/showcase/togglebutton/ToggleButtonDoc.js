@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import { TabView,TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class ToggleButtonDoc extends Component {
 
@@ -115,7 +115,7 @@ import { ToggleButton } from 'primereact/togglebutton';
 
 <CodeHighlight>
 {`
-<ToggleButton checked={this.state.checked1} onChange={(e) => this.setState({checked1: e.value})} />
+<ToggleButton checked={checked1} onChange={(e) => setChecked1(e.value)} />
 `}
 </CodeHighlight>
 
@@ -124,8 +124,7 @@ import { ToggleButton } from 'primereact/togglebutton';
 
 <CodeHighlight>
 {`
-ToggleButton onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIcon="pi pi-times"
-                                checked={this.state.checked2} onChange={(e) => this.setState({checked2: e.value})} />
+<ToggleButton onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIcon="pi pi-times" checked={checked2} onChange={(e) => setChecked2(e.value)} />
 `}
 </CodeHighlight>
 
@@ -285,9 +284,9 @@ ToggleButton onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIco
             <p>None.</p>
         </TabPanel>
 
-        <TabPanel header="Source">
-            <LiveEditor name="ToggleButtonDemo" sources={this.sources} />
-        </TabPanel>
+        {
+            useLiveEditorTabs({ name: 'ToggleButtonDemo', sources: this.sources })
+        }
     </TabView>
 </div>
         );

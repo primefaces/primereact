@@ -1,5 +1,15 @@
 import * as React from 'react';
 
+type OptionsType = {
+    label?: string;
+    icon?: string;
+    iconOnly?: boolean;
+    className?: string;
+    style?: object
+};
+
+type ItemTemplateType = (file?: object, props?: FileUploadProps) => any | any;
+
 interface FileUploadProps {
     id?: string;
     name?: string;
@@ -19,7 +29,16 @@ interface FileUploadProps {
     chooseLabel?: string;
     uploadLabel?: string;
     cancelLabel?: string;
+    chooseOptions?: OptionsType;
+    uploadOptions?: OptionsType;
+    cancelOptions?: OptionsType;
     customUpload?: boolean;
+    headerClassName?: string;
+    headerStyle?: object;
+    contentClassName?: string;
+    contentStyle?: object;
+    headerTemplate?: ((props: object) => any | any);
+    itemTemplate?: ItemTemplateType;
     emptyTemplate?: ((props: object) => any | any);
     onBeforeUpload?(e: { xhr: XMLHttpRequest, formData: any }): void;
     onBeforeSend?(e: { xhr: XMLHttpRequest, formData: any }): void;

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class KnobDoc extends Component {
 
@@ -15,11 +15,13 @@ export class KnobDoc extends Component {
                 content: `
 import React, {Component} from 'react';
 import { Knob } from 'primereact/knob';
+import { Button } from 'primereact/button';
 
 export class KnobDemo extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            value: 0,
             value1 : 0,
             value2 : 50,
             value3 : 75,
@@ -29,7 +31,35 @@ export class KnobDemo extends Component {
             value7 : 40,
             value8 : 60,
             value9 : 50,
+            value10: 0,
+            disabledIncrementBtn: false,
+            disabledDecrementBtn: true
         }
+
+        this.increment = this.increment.bind(this);
+        this.decrement = this.decrement.bind(this);
+    }
+
+    increment() {
+        this.setState((prevState) => {
+            const value = prevState.value10 + 1;
+            return {
+                value10: value,
+                disabledIncrementBtn: value === 100,
+                disabledDecrementBtn: false
+            }
+        });
+    }
+
+    decrement() {
+        this.setState((prevState) => {
+            const value = prevState.value10 - 1;
+            return {
+                value10: value,
+                disabledIncrementBtn: false,
+                disabledDecrementBtn: value === 0
+            }
+        });
     }
 
     render() {
@@ -75,6 +105,13 @@ export class KnobDemo extends Component {
                         </div>
                     </div>
                 </div>
+
+                <div className="card p-text-center">
+                    <h5>Reactive Knob</h5>
+                    <Knob value={this.state.value10} size={150} readOnly />
+                    <Button label="Increment" onClick={this.increment} className="p-mr-2" disabled={this.state.disabledIncrementBtn} />
+                    <Button label="Decrement" onClick={this.decrement} disabled={this.state.disabledDecrementBtn} />
+                </div>
             </div>
         )
     }
@@ -84,10 +121,12 @@ export class KnobDemo extends Component {
             'hooks': {
                 tabName: 'Hooks Source',
                 content: `
-import React from 'react';
+import React, { useState } from 'react';
 import { Knob } from 'primereact/knob';
+import { Button } from 'primereact/button';
 
 const KnobDemo = () => {
+    const [value, setValue] = useState(0);
     const [value1, setValue1] = useState(0);
     const [value2, setValue2] = useState(50);
     const [value3, setValue3] = useState(75);
@@ -97,6 +136,23 @@ const KnobDemo = () => {
     const [value7, setValue7] = useState(40);
     const [value8, setValue8] = useState(60);
     const [value9, setValue9] = useState(50);
+    const [value10, setValue10] = useState(0);
+    const [disabledIncrementBtn, setDisabledIncrementBtn] = useState(false);
+    const [disabledDecrementBtn, setDisabledDecrementBtn] = useState(true);
+
+    const increment = () => {
+        const value = value10 + 1;
+        setValue10(value);
+        setDisabledIncrementBtn(value === 100);
+        setDisabledDecrementBtn(false);
+    }
+
+    const decrement = () => {
+        const value = value10 - 1;
+        setValue10(value);
+        setDisabledIncrementBtn(false);
+        setDisabledDecrementBtn(value === 0);
+    }
 
     return (
         <div>
@@ -140,6 +196,13 @@ const KnobDemo = () => {
                     </div>
                 </div>
             </div>
+
+            <div className="card p-text-center">
+                <h5>Reactive Knob</h5>
+                <Knob value={value10} size={150} readOnly />
+                <Button label="Increment" onClick={increment} className="p-mr-2" disabled={disabledIncrementBtn} />
+                <Button label="Decrement" onClick={decrement} disabled={disabledDecrementBtn} />
+            </div>
         </div>
     )
 }
@@ -148,10 +211,12 @@ const KnobDemo = () => {
             'ts': {
                 tabName: 'TS Source',
                 content: `
-import React from 'react';
+import React, { useState } from 'react';
 import { Knob } from 'primereact/knob';
+import { Button } from 'primereact/button';
 
 const KnobDemo = () => {
+    const [value, setValue] = useState(0);
     const [value1, setValue1] = useState(0);
     const [value2, setValue2] = useState(50);
     const [value3, setValue3] = useState(75);
@@ -161,6 +226,23 @@ const KnobDemo = () => {
     const [value7, setValue7] = useState(40);
     const [value8, setValue8] = useState(60);
     const [value9, setValue9] = useState(50);
+    const [value10, setValue10] = useState(0);
+    const [disabledIncrementBtn, setDisabledIncrementBtn] = useState(false);
+    const [disabledDecrementBtn, setDisabledDecrementBtn] = useState(true);
+
+    const increment = () => {
+        const value = value10 + 1;
+        setValue10(value);
+        setDisabledIncrementBtn(value === 100);
+        setDisabledDecrementBtn(false);
+    }
+
+    const decrement = () => {
+        const value = value10 - 1;
+        setValue10(value);
+        setDisabledIncrementBtn(false);
+        setDisabledDecrementBtn(value === 0);
+    }
 
     return (
         <div>
@@ -204,6 +286,13 @@ const KnobDemo = () => {
                     </div>
                 </div>
             </div>
+
+            <div className="card p-text-center">
+                <h5>Reactive Knob</h5>
+                <Knob value={value10} size={150} readOnly />
+                <Button label="Increment" onClick={increment} className="p-mr-2" disabled={disabledIncrementBtn} />
+                <Button label="Decrement" onClick={decrement} disabled={disabledDecrementBtn} />
+            </div>
         </div>
     )
 }
@@ -232,7 +321,7 @@ import { Knob } from 'primereact/knob';
                         <p>Knob is used as a controlled input with value and onChange properties.</p>
                         <CodeHighlight>
                             {`
-<Knob value={this.state.value} onChange={(e)=>this.setState({value: e.value})}/>
+<Knob value={value} onChange={(e) => setValue(value)} />
 `}
                         </CodeHighlight>
 
@@ -240,7 +329,7 @@ import { Knob } from 'primereact/knob';
                         <p>Boundaries are configured with the <i>min</i> and <i>max</i> values whose defaults are 0 and 100 respectively.</p>
                         <CodeHighlight>
                             {`
-<Knob value={this.state.value} min={0} max={100} onChange={(e)=>this.setState({value: e.value})}/>
+<Knob value={value} min={0} max={100} onChange={(e) => setValue(value)} />
 `}
                         </CodeHighlight>
 
@@ -248,7 +337,7 @@ import { Knob } from 'primereact/knob';
                         <p>Step factor is 1 by default and can be customized with <i>step</i> option.</p>
                         <CodeHighlight>
                             {`
-<Knob value={this.state.value} step={10} onChange={(e)=>this.setState({value: e.value})}/>
+<Knob value={value} step={10} onChange={(e) => setValue(value)} />
 `}
                         </CodeHighlight>
 
@@ -257,7 +346,7 @@ import { Knob } from 'primereact/knob';
                             In addition, <i>strokeWidth</i> is used to determine the width of the stroke of range and value sections.</p>
                         <CodeHighlight>
                             {`
-<Knob value={this.state.value} valueColor={"SlateGray"} rangeColor={"MediumTurquoise"} onChange={(e)=>this.setState({value: e.value})}/>
+<Knob value={value} valueColor={"SlateGray"} rangeColor={"MediumTurquoise"} onChange={(e) => setValue(value)} />
 `}
                         </CodeHighlight>
 
@@ -265,7 +354,7 @@ import { Knob } from 'primereact/knob';
                         <p>Default size of the Knob is 100 pixels for width and height, use the <i>size</i> property to customize it per your requirements.</p>
                         <CodeHighlight>
                             {`
-<Knob value={this.state.value} size={200} onChange={(e)=>this.setState({value: e.value})}/>
+<Knob value={value} size={200} onChange={(e) => setValue(value)} />
 `}
                         </CodeHighlight>
 
@@ -427,9 +516,9 @@ import { Knob } from 'primereact/knob';
                         <p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="KnobDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'KnobDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         )

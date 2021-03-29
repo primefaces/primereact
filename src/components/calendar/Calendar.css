@@ -39,6 +39,7 @@
 
 .p-datepicker-inline {
     display: inline-flex;
+    flex-direction: column;
     position: static;
 }
 

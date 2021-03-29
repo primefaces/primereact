@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 
 export class SplitterDoc extends Component {
 
@@ -78,7 +78,7 @@ export class SplitterDemo extends Component {
             'hooks': {
                 tabName: 'Hooks Source',
                 content: `
-import React, { useState } from 'react';
+import React from 'react';
 import { Splitter, SplitterPanel } from 'primereact/splitter';
 
 const SplitterDemo = () => {
@@ -141,7 +141,7 @@ const SplitterDemo = () => {
             'ts': {
                 tabName: 'TS Source',
                 content: `
-import React, { useState } from 'react';
+import React from 'react';
 import { Splitter, SplitterPanel } from 'primereact/splitter';
 
 const SplitterDemo = () => {
@@ -506,9 +506,9 @@ import { Splitter, SplitterPanel } from 'primereact/splitter';
                         <p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="SplitterDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'SplitterDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         )
