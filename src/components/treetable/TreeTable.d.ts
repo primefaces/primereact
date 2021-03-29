@@ -75,7 +75,7 @@ interface TreeTableProps {
     onRowClick?(e: {originalEvent: Event, node: TreeNode}): void;
     onSelectionChange?(e: {originalEvent: Event, value: any}): void;
     onContextMenuSelectionChange?(e: {originalEvent: Event, value: any}): void;
-    onColumnResizeEnd?(e: {element: HTMLElement, delta: number}): void;
+    onColumnResizeEnd?(e: {element: HTMLElement, column: any, delta: number}): void;
     onColReorder?(e: {dragIndex: number, dropIndex: number, columns: any}): void;
     onContextMenu?(e: {originalEvent: Event, node: any}): void;
 }
