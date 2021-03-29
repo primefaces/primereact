@@ -551,6 +551,7 @@ export class DataTable extends Component {
 
         if (this.props.sortMode === 'multiple') {
             let metaKey = event.originalEvent.metaKey || event.originalEvent.ctrlKey;
+            let sortableDisabledFields = event.sortableDisabledFields;
             multiSortMeta = this.getMultiSortMeta();
 
             if (multiSortMeta && multiSortMeta instanceof Array) {
@@ -562,7 +563,7 @@ export class DataTable extends Component {
 
             if (sortOrder) {
                 if(!multiSortMeta || !metaKey) {
-                    multiSortMeta = [];
+                    multiSortMeta = multiSortMeta ? multiSortMeta.filter((meta) => sortableDisabledFields.some((field) => field === meta.field)) : [];
                 }
 
                 this.addSortMeta(newMetaData, multiSortMeta);
@@ -572,7 +573,7 @@ export class DataTable extends Component {
             }
 
             eventMeta = {
-                multiSortMeta: multiSortMeta
+                multiSortMeta
             };
         }
         else {
@@ -582,8 +583,8 @@ export class DataTable extends Component {
             }
 
             eventMeta = {
-                sortField: sortField,
-                sortOrder: sortOrder
+                sortField,
+                sortOrder
             };
         }
 
@@ -1317,7 +1318,7 @@ export class DataTable extends Component {
     }
 
     createTableHeader(value, columns, columnGroup) {
-        return <TableHeader value={value} onSort={this.onSort} sortField={this.getSortField()} sortOrder={this.getSortOrder()} multiSortMeta={this.getMultiSortMeta()} columnGroup={columnGroup}
+        return <TableHeader value={value} sortMode={this.props.sortMode} onSort={this.onSort} sortField={this.getSortField()} sortOrder={this.getSortOrder()} multiSortMeta={this.getMultiSortMeta()} columnGroup={columnGroup}
                             resizableColumns={this.props.resizableColumns} onColumnResizeStart={this.onColumnResizeStart} onFilter={this.onFilter} filterDelay={this.props.filterDelay}
                             onHeaderCheckboxClick={this.onHeaderCheckboxClick} headerCheckboxSelected={this.isAllSelected()}
                             reorderableColumns={this.props.reorderableColumns} onColumnDragStart={this.onColumnDragStart} filters={this.getFilters()}

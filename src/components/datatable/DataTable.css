@@ -13,6 +13,10 @@
     user-select: none;
 }
 
+.p-datatable .p-sortable-disabled {
+    cursor: auto;
+}
+
 .p-datatable .p-sortable-column .p-column-title,
 .p-datatable .p-sortable-column .p-sortable-column-icon,
 .p-datatable .p-sortable-column .p-sortable-column-badge {

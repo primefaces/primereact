@@ -22,15 +22,17 @@ export class HeaderCell extends Component {
     }
 
     onClick(event) {
-        if (this.props.columnProps.sortable) {
+        const { field, sortField, sortable, sortFunction } = this.props.columnProps;
+        if (!this.isSortableDisabled()) {
             let targetNode = event.target;
-            if(DomHandler.hasClass(targetNode, 'p-sortable-column') || DomHandler.hasClass(targetNode, 'p-column-title')
+            if (DomHandler.hasClass(targetNode, 'p-sortable-column') || DomHandler.hasClass(targetNode, 'p-column-title')
                 || DomHandler.hasClass(targetNode, 'p-sortable-column-icon') || DomHandler.hasClass(targetNode.parentElement, 'p-sortable-column-icon')) {
                 this.props.onSort({
                     originalEvent: event,
-                    sortField: this.props.columnProps.sortField || this.props.columnProps.field,
-                    sortFunction: this.props.columnProps.sortFunction,
-                    sortable: this.props.columnProps.sortable
+                    sortField: sortField || field,
+                    sortFunction,
+                    sortable,
+                    sortableDisabledFields: this.props.sortableDisabledFields
                 });
 
                 DomHandler.clearSelection();
@@ -106,12 +108,21 @@ export class HeaderCell extends Component {
         }
     }
 
+    componentDidUpdate(prevProps) {
+        const prevColumnProps = prevProps.columnProps;
+        const columnProps = this.props.columnProps;
+
+        if (prevColumnProps.sortableDisabled !== columnProps.sortableDisabled || prevColumnProps.sortable !== columnProps.sortable) {
+            this.props.onSortableChange();
+        }
+    }
+
     getAriaSort(sorted, sortOrder) {
         if (this.props.columnProps.sortable) {
             let sortIcon = sorted ? sortOrder < 0 ? 'pi-sort-amount-down' : 'pi-sort-amount-up-alt': 'pi-sort-alt';
-            if (sortIcon === 'pi-sort-down')
+            if (sortIcon === 'pi-sort-amount-down')
                 return 'descending';
-            else if (sortIcon === 'pi-sort-up')
+            else if (sortIcon === 'pi-sort-amount-up-alt')
                 return 'ascending';
             else
                 return 'none';
@@ -119,6 +130,14 @@ export class HeaderCell extends Component {
         else {
             return null;
         }
+    }
+
+    isSortableDisabled() {
+        return this.props.columnProps.sortable && (this.props.allSortableDisabled || this.props.columnProps.sortableDisabled);
+    }
+
+    isSingleSorted() {
+        return this.props.sortField !== null ? (this.props.columnProps.field === this.props.sortField || this.props.columnProps.sortField === this.props.sortField) : false;
     }
 
     renderSortIcon(sorted, sortOrder) {
@@ -167,7 +186,7 @@ export class HeaderCell extends Component {
         else {
             let sortMetaDataIndex = this.getMultiSortMetaDataIndex();
             let multiSortMetaData = sortMetaDataIndex !== -1 ? this.props.multiSortMeta[sortMetaDataIndex] : null;
-            let singleSorted = this.props.sortField !== null ? (this.props.columnProps.field === this.props.sortField || this.props.columnProps.sortField === this.props.sortField) : false;
+            let singleSorted = this.isSingleSorted();
             let multipleSorted = multiSortMetaData !== null;
             let sortOrder = 0;
             let resizer = this.props.resizableColumns && <span className="p-column-resizer p-clickable" onMouseDown={this.onResizerMouseDown}></span>;
@@ -178,17 +197,20 @@ export class HeaderCell extends Component {
                 sortOrder = multiSortMetaData.order;
 
             let sorted = this.props.columnProps.sortable && (singleSorted || multipleSorted);
+            let isSortableDisabled = this.isSortableDisabled();
             let className = classNames({'p-sortable-column': this.props.columnProps.sortable,
                             'p-highlight': sorted,
+                            'p-sortable-disabled': isSortableDisabled,
                             'p-resizable-column': this.props.resizableColumns,
                             'p-selection-column': this.props.columnProps.selectionMode}, this.props.columnProps.headerClassName||this.props.columnProps.className);
 
             let sortIconElement = this.renderSortIcon(sorted, sortOrder);
             let ariaSortData = this.getAriaSort(sorted, sortOrder);
             let sortBadge = this.renderSortBadge(sortMetaDataIndex);
+            let tabIndex = !isSortableDisabled ? this.props.tabIndex : null
 
             return (
-                <th ref={(el) => this.el = el} role="columnheader" tabIndex={this.props.columnProps.sortable ? this.props.tabIndex : null}
+                <th ref={(el) => this.el = el} role="columnheader" tabIndex={tabIndex}
                     className={className} style={this.props.columnProps.headerStyle||this.props.columnProps.style} onClick={this.onClick} onMouseDown={this.onMouseDown} onKeyDown={this.onKeyDown}
                     colSpan={this.props.columnProps.colSpan} rowSpan={this.props.columnProps.rowSpan} aria-sort={ariaSortData}
                     onDragStart={this.props.onDragStart} onDragOver={this.props.onDragOver} onDragLeave={this.props.onDragLeave} onDrop={this.props.onDrop}>

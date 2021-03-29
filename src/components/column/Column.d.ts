@@ -10,6 +10,7 @@ interface ColumnProps {
     loadingBody?: any;
     footer?: any;
     sortable?: boolean;
+    sortableDisabled?: boolean;
     filter?: boolean;
     filterMatchMode?: string;
     filterPlaceholder?: string;
