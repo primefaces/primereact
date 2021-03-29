@@ -80,7 +80,7 @@ interface DataTableProps {
     rowClassName?(rowData: any): object;
     rowGroupHeaderTemplate?(data: any, index: number): React.ReactNode | undefined;
     rowGroupFooterTemplate?(data: any, index: number): React.ReactNode | undefined;
-    onColumnResizeEnd?(e: {element: HTMLElement, delta: number}): void;
+    onColumnResizeEnd?(e: {element: HTMLElement, column: any, delta: number}): void;
     onSort?(e: {sortField: string, sortOrder: number, multiSortMeta: any}): void;
     onPage?(e: {first: number, rows: number}): void;
     onFilter?(e: {filters: any}): void;
