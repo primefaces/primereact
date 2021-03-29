@@ -820,8 +820,13 @@ export class InputNumber extends Component {
     }
 
     updateInputValue(newValue) {
-        this.inputEl.value = this.formatValue(newValue);
-        this.inputEl.setAttribute('aria-valuenow', newValue);
+        const value = this.inputEl.value;
+        const formattedValue = this.formatValue(newValue);
+
+        if (value !== formattedValue) {
+            this.inputEl.value = formattedValue;
+            this.inputEl.setAttribute('aria-valuenow', newValue);
+        }
     }
 
     updateModel(event, value) {
