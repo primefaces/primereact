@@ -2292,20 +2292,20 @@
   color: #212529;
   background: #F48FB1;
   margin-left: 0.5rem; }
-.p-datatable .p-sortable-column:not(.p-highlight):hover {
+.p-datatable .p-sortable-column:not(.p-highlight):not(.p-sortable-disabled):hover {
   background: #4c4c4c;
   color: #dedede; }
-  .p-datatable .p-sortable-column:not(.p-highlight):hover .p-sortable-column-icon {
+  .p-datatable .p-sortable-column:not(.p-highlight):not(.p-sortable-disabled):hover .p-sortable-column-icon {
     color: #dedede; }
 .p-datatable .p-sortable-column.p-highlight {
   background: #F48FB1;
   color: #212529; }
   .p-datatable .p-sortable-column.p-highlight .p-sortable-column-icon {
     color: #212529; }
-  .p-datatable .p-sortable-column.p-highlight:hover {
+  .p-datatable .p-sortable-column.p-highlight:not(.p-sortable-disabled):hover {
     background: #F48FB1;
     color: #212529; }
-    .p-datatable .p-sortable-column.p-highlight:hover .p-sortable-column-icon {
+    .p-datatable .p-sortable-column.p-highlight:not(.p-sortable-disabled):hover .p-sortable-column-icon {
       color: #212529; }
 .p-datatable .p-sortable-column:focus {
   box-shadow: inset 0 0 0 0.2rem white;

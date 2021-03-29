@@ -2283,20 +2283,20 @@
   color: #495057;
   background: #E3F2FD;
   margin-left: 0.5rem; }
-.p-datatable .p-sortable-column:not(.p-highlight):hover {
+.p-datatable .p-sortable-column:not(.p-highlight):not(.p-sortable-disabled):hover {
   background: #e9ecef;
   color: #495057; }
-  .p-datatable .p-sortable-column:not(.p-highlight):hover .p-sortable-column-icon {
+  .p-datatable .p-sortable-column:not(.p-highlight):not(.p-sortable-disabled):hover .p-sortable-column-icon {
     color: #6c757d; }
 .p-datatable .p-sortable-column.p-highlight {
   background: #f8f9fa;
   color: #2196F3; }
   .p-datatable .p-sortable-column.p-highlight .p-sortable-column-icon {
     color: #2196F3; }
-  .p-datatable .p-sortable-column.p-highlight:hover {
+  .p-datatable .p-sortable-column.p-highlight:not(.p-sortable-disabled):hover {
     background: #e9ecef;
     color: #2196F3; }
-    .p-datatable .p-sortable-column.p-highlight:hover .p-sortable-column-icon {
+    .p-datatable .p-sortable-column.p-highlight:not(.p-sortable-disabled):hover .p-sortable-column-icon {
       color: #2196F3; }
 .p-datatable .p-sortable-column:focus {
   box-shadow: inset 0 0 0 0.15rem #a6d5fa;

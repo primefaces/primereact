@@ -2283,20 +2283,20 @@
   color: #ffffff;
   background: #e02365;
   margin-left: 0.5rem; }
-.p-datatable .p-sortable-column:not(.p-highlight):hover {
+.p-datatable .p-sortable-column:not(.p-highlight):not(.p-sortable-disabled):hover {
   background: #e0e0e0;
   color: #333333; }
-  .p-datatable .p-sortable-column:not(.p-highlight):hover .p-sortable-column-icon {
+  .p-datatable .p-sortable-column:not(.p-highlight):not(.p-sortable-disabled):hover .p-sortable-column-icon {
     color: #333333; }
 .p-datatable .p-sortable-column.p-highlight {
   background: #e02365;
   color: #ffffff; }
   .p-datatable .p-sortable-column.p-highlight .p-sortable-column-icon {
     color: #ffffff; }
-  .p-datatable .p-sortable-column.p-highlight:hover {
+  .p-datatable .p-sortable-column.p-highlight:not(.p-sortable-disabled):hover {
     background: #e02365;
     color: #ffffff; }
-    .p-datatable .p-sortable-column.p-highlight:hover .p-sortable-column-icon {
+    .p-datatable .p-sortable-column.p-highlight:not(.p-sortable-disabled):hover .p-sortable-column-icon {
       color: #ffffff; }
 .p-datatable .p-sortable-column:focus {
   box-shadow: inset 0 0 0 0.2rem #8dcdff;

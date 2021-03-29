@@ -2283,20 +2283,20 @@
   color: rgba(255, 255, 255, 0.87);
   background: rgba(255, 213, 79, 0.16);
   margin-left: 0.5rem; }
-.p-datatable .p-sortable-column:not(.p-highlight):hover {
+.p-datatable .p-sortable-column:not(.p-highlight):not(.p-sortable-disabled):hover {
   background: rgba(255, 255, 255, 0.03);
   color: rgba(255, 255, 255, 0.87); }
-  .p-datatable .p-sortable-column:not(.p-highlight):hover .p-sortable-column-icon {
+  .p-datatable .p-sortable-column:not(.p-highlight):not(.p-sortable-disabled):hover .p-sortable-column-icon {
     color: rgba(255, 255, 255, 0.87); }
 .p-datatable .p-sortable-column.p-highlight {
   background: #1f2d40;
   color: #FFD54F; }
   .p-datatable .p-sortable-column.p-highlight .p-sortable-column-icon {
     color: #FFD54F; }
-  .p-datatable .p-sortable-column.p-highlight:hover {
+  .p-datatable .p-sortable-column.p-highlight:not(.p-sortable-disabled):hover {
     background: rgba(255, 255, 255, 0.03);
     color: #FFD54F; }
-    .p-datatable .p-sortable-column.p-highlight:hover .p-sortable-column-icon {
+    .p-datatable .p-sortable-column.p-highlight:not(.p-sortable-disabled):hover .p-sortable-column-icon {
       color: #FFD54F; }
 .p-datatable .p-sortable-column:focus {
   box-shadow: inset 0 0 0 1px #ffe284;

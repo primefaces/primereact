@@ -2304,20 +2304,20 @@
   color: #673AB7;
   background: rgba(103, 58, 183, 0.12);
   margin-left: 0.5rem; }
-.p-datatable .p-sortable-column:not(.p-highlight):hover {
+.p-datatable .p-sortable-column:not(.p-highlight):not(.p-sortable-disabled):hover {
   background: rgba(0, 0, 0, 0.04);
   color: rgba(0, 0, 0, 0.87); }
-  .p-datatable .p-sortable-column:not(.p-highlight):hover .p-sortable-column-icon {
+  .p-datatable .p-sortable-column:not(.p-highlight):not(.p-sortable-disabled):hover .p-sortable-column-icon {
     color: rgba(0, 0, 0, 0.6); }
 .p-datatable .p-sortable-column.p-highlight {
   background: #ffffff;
   color: rgba(0, 0, 0, 0.87); }
   .p-datatable .p-sortable-column.p-highlight .p-sortable-column-icon {
     color: rgba(0, 0, 0, 0.87); }
-  .p-datatable .p-sortable-column.p-highlight:hover {
+  .p-datatable .p-sortable-column.p-highlight:not(.p-sortable-disabled):hover {
     background: rgba(0, 0, 0, 0.04);
     color: rgba(0, 0, 0, 0.87); }
-    .p-datatable .p-sortable-column.p-highlight:hover .p-sortable-column-icon {
+    .p-datatable .p-sortable-column.p-highlight:not(.p-sortable-disabled):hover .p-sortable-column-icon {
       color: rgba(0, 0, 0, 0.87); }
 .p-datatable .p-sortable-column:focus {
   box-shadow: none;
