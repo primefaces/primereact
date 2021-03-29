@@ -3,7 +3,7 @@ import { DataTable } from '../../components/datatable/DataTable';
 import { Column } from '../../components/column/Column';
 import ProductService from '../service/ProductService';
 import { TabView } from '../../components/tabview/TabView';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 
 export class DataTableSortDemo extends Component {
@@ -12,7 +12,8 @@ export class DataTableSortDemo extends Component {
         super(props);
 
         this.state = {
-            products: []
+            products: [],
+            multiSortMeta: [{ field: 'category', order: -1 }]
         };
 
         this.productService = new ProductService();
@@ -24,7 +25,7 @@ export class DataTableSortDemo extends Component {
     }
 
     formatCurrency(value) {
-        return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+        return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
     }
 
     priceBodyTemplate(rowData) {
@@ -87,6 +88,18 @@ export class DataTableSortDemo extends Component {
                             <Column field="price" header="Price" body={this.priceBodyTemplate} sortable></Column>
                         </DataTable>
                     </div>
+
+                    <div className="card">
+                        <h5>Sortable Disabled</h5>
+                        <p>Use metakey to add a column to the multiple sort selection.</p>
+                        <DataTable value={this.state.products} sortMode="multiple" multiSortMeta={this.state.multiSortMeta} onSort={(e) => this.setState({multiSortMeta: e.multiSortMeta})}>
+                            <Column field="code" header="Code" sortable></Column>
+                            <Column field="name" header="Name" sortable></Column>
+                            <Column field="category" header="Category (Disabled)" sortable sortableDisabled></Column>
+                            <Column field="quantity" header="Quantity" sortable></Column>
+                            <Column field="price" header="Price" body={this.priceBodyTemplate} sortable></Column>
+                        </DataTable>
+                    </div>
                 </div>
 
                 <DataTableSortDemoDoc></DataTableSortDemoDoc>
@@ -115,7 +128,8 @@ export class DataTableSortDemo extends Component {
         super(props);
 
         this.state = {
-            products: []
+            products: [],
+            multiSortMeta: [{ field: 'category', order: -1 }]
         };
 
         this.productService = new ProductService();
@@ -181,6 +195,18 @@ export class DataTableSortDemo extends Component {
                         <Column field="price" header="Price" body={this.priceBodyTemplate} sortable></Column>
                     </DataTable>
                 </div>
+
+                <div className="card">
+                    <h5>Sortable Disabled</h5>
+                    <p>Use metakey to add a column to the multiple sort selection.</p>
+                    <DataTable value={this.state.products} sortMode="multiple" multiSortMeta={this.state.multiSortMeta} onSort={(e) => this.setState({multiSortMeta: e.multiSortMeta})}>
+                        <Column field="code" header="Code" sortable></Column>
+                        <Column field="name" header="Name" sortable></Column>
+                        <Column field="category" header="Category (Disabled)" sortable sortableDisabled></Column>
+                        <Column field="quantity" header="Quantity" sortable></Column>
+                        <Column field="price" header="Price" body={this.priceBodyTemplate} sortable></Column>
+                    </DataTable>
+                </div>
             </div>
         );
     }
@@ -197,6 +223,7 @@ import ProductService from '../service/ProductService';
 
 const DataTableSortDemo = () => {
     const [products, setProducts] = useState([]);
+    const [multiSortMeta, setMultiSortMeta] = useState([{ field: 'category', order: -1 }]);
     const productService = new ProductService();
 
     useEffect(() => {
@@ -253,6 +280,18 @@ const DataTableSortDemo = () => {
                     <Column field="code" header="Code" sortable></Column>
                     <Column field="name" header="Name" sortable></Column>
                     <Column field="category" header="Category" sortable></Column>
+                    <Column field="quantity" header="Quantity" sortable></Column>
+                    <Column field="price" header="Price" body={priceBodyTemplate} sortable></Column>
+                </DataTable>
+            </div>
+
+            <div className="card">
+                <h5>Sortable Disabled</h5>
+                <p>Use metakey to add a column to the multiple sort selection.</p>
+                <DataTable value={products} sortMode="multiple" multiSortMeta={multiSortMeta} onSort={(e) => setMultiSortMeta(e.multiSortMeta)}>
+                    <Column field="code" header="Code" sortable></Column>
+                    <Column field="name" header="Name" sortable></Column>
+                    <Column field="category" header="Category (Disabled)" sortable sortableDisabled></Column>
                     <Column field="quantity" header="Quantity" sortable></Column>
                     <Column field="price" header="Price" body={priceBodyTemplate} sortable></Column>
                 </DataTable>
@@ -272,6 +311,7 @@ import ProductService from '../service/ProductService';
 
 const DataTableSortDemo = () => {
     const [products, setProducts] = useState([]);
+    const [multiSortMeta, setMultiSortMeta] = useState([{ field: 'category', order: -1 }]);
     const productService = new ProductService();
 
     useEffect(() => {
@@ -328,6 +368,18 @@ const DataTableSortDemo = () => {
                     <Column field="code" header="Code" sortable></Column>
                     <Column field="name" header="Name" sortable></Column>
                     <Column field="category" header="Category" sortable></Column>
+                    <Column field="quantity" header="Quantity" sortable></Column>
+                    <Column field="price" header="Price" body={priceBodyTemplate} sortable></Column>
+                </DataTable>
+            </div>
+
+            <div className="card">
+                <h5>Sortable Disabled</h5>
+                <p>Use metakey to add a column to the multiple sort selection.</p>
+                <DataTable value={products} sortMode="multiple" multiSortMeta={multiSortMeta} onSort={(e) => setMultiSortMeta(e.multiSortMeta)}>
+                    <Column field="code" header="Code" sortable></Column>
+                    <Column field="name" header="Name" sortable></Column>
+                    <Column field="category" header="Category (Disabled)" sortable sortableDisabled></Column>
                     <Column field="quantity" header="Quantity" sortable></Column>
                     <Column field="price" header="Price" body={priceBodyTemplate} sortable></Column>
                 </DataTable>
