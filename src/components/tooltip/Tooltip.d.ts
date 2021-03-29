@@ -8,7 +8,7 @@ interface TooltipProps {
     className?: string;
     style?: object;
     appendTo?: object;
-    position?: "top" | "right" | "bottom" | "left";
+    position?: string;
     my?: string;
     at?: string;
     event?: string;
