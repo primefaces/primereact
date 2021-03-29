@@ -1015,7 +1015,7 @@ export const DataTableDemo = () => {
                             <td>sortableDisabled</td>
                             <td>boolean</td>
                             <td>false</td>
-                            <td>When enabled, the data of columns with this property can never be sorted or changed by the user.</td>
+                            <td>When enabled, the data of columns with this property cannot be sorted or changed by the user.</td>
                         </tr>
                         <tr>
                             <td>filter</td>
