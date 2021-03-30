@@ -34,7 +34,7 @@ export class PasswordDemo extends Component {
     render() {
         const header = <h6>Pick a password</h6>;
         const footer = (
-            <>
+            <React.Fragment>
                 <Divider />
                 <p className="p-mt-2">Suggestions</p>
                 <ul className="p-pl-2 p-ml-2 p-mt-0" style={{lineHeight: '1.5'}}>
@@ -43,7 +43,7 @@ export class PasswordDemo extends Component {
                     <li>At least one numeric</li>
                     <li>Minimum 8 characters</li>
                 </ul>
-            </>
+            </React.Fragment>
         );
 
         return (
@@ -83,7 +83,7 @@ const PasswordDemo = () => {
 
     const header = <h6>Pick a password</h6>;
     const footer = (
-        <>
+        <React.Fragment>
             <Divider />
             <p className="p-mt-2">Suggestions</p>
             <ul className="p-pl-2 p-ml-2 p-mt-0" style={{lineHeight: '1.5'}}>
@@ -92,7 +92,7 @@ const PasswordDemo = () => {
                 <li>At least one numeric</li>
                 <li>Minimum 8 characters</li>
             </ul>
-        </>
+        </React.Fragment>
     );
 
     return (
@@ -131,7 +131,7 @@ const PasswordDemo = () => {
 
     const header = <h6>Pick a password</h6>;
     const footer = (
-        <>
+        <React.Fragment>
             <Divider />
             <p className="p-mt-2">Suggestions</p>
             <ul className="p-pl-2 p-ml-2 p-mt-0" style={{lineHeight: '1.5'}}>
@@ -140,7 +140,7 @@ const PasswordDemo = () => {
                 <li>At least one numeric</li>
                 <li>Minimum 8 characters</li>
             </ul>
-        </>
+        </React.Fragment>
     );
 
     return (

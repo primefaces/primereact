@@ -171,10 +171,10 @@ export class PaginatorDemo extends Component {
                 ];
 
                 return (
-                    <>
+                    <React.Fragment>
                         <span className="p-mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
                         <Dropdown value={options.value} options={dropdownOptions} onChange={options.onChange} appendTo={document.body} />
-                    </>
+                    </React.Fragment>
                 );
             },
             'CurrentPageReport': (options) => {
@@ -249,7 +249,7 @@ import './PaginatorDemo.css';
 const PaginatorDemo = () => {
     const [basicFirst, setBasicFirst] = useState(0);
     const [basicRows, setBasicRows] = useState(10);
-    const [basicCustomFirst1, setBasicCustomFirst1] = useState(0);
+    const [customFirst1, setCustomFirst1] = useState(0);
     const [customRows1, setCustomRows1] = useState(10);
     const [customFirst2, setCustomFirst2] = useState(0);
     const [customRows2, setCustomRows2] = useState(10);
@@ -257,7 +257,7 @@ const PaginatorDemo = () => {
     const [customRows3, setCustomRows3] = useState(10);
     const [contentFirst, setContentFirst] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
-    const [pageInputTooltip, setPageInputTooltip]: useState('Press \\'Enter\\' key to go to this page.');
+    const [pageInputTooltip, setPageInputTooltip] = useState('Press \\'Enter\\' key to go to this page.');
 
     const onBasicPageChange = (event) => {
         setBasicFirst(event.first);
@@ -368,10 +368,10 @@ const PaginatorDemo = () => {
             ];
 
             return (
-                <>
+                <React.Fragment>
                     <span className="p-mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
                     <Dropdown value={options.value} options={dropdownOptions} onChange={options.onChange} appendTo={document.body} />
-                </>
+                </React.Fragment>
             );
         },
         'CurrentPageReport': (options) => {
@@ -445,7 +445,7 @@ import './PaginatorDemo.css';
 const PaginatorDemo = () => {
     const [basicFirst, setBasicFirst] = useState(0);
     const [basicRows, setBasicRows] = useState(10);
-    const [basicCustomFirst1, setBasicCustomFirst1] = useState(0);
+    const [customFirst1, setCustomFirst1] = useState(0);
     const [customRows1, setCustomRows1] = useState(10);
     const [customFirst2, setCustomFirst2] = useState(0);
     const [customRows2, setCustomRows2] = useState(10);
@@ -564,10 +564,10 @@ const PaginatorDemo = () => {
             ];
 
             return (
-                <>
+                <React.Fragment>
                     <span className="p-mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
                     <Dropdown value={options.value} options={dropdownOptions} onChange={options.onChange} appendTo={document.body} />
-                </>
+                </React.Fragment>
             );
         },
         'CurrentPageReport': (options) => {
