@@ -449,17 +449,19 @@ export class Dropdown extends Component {
     }
 
     onEditableInputChange(event) {
-        this.props.onChange({
-            originalEvent: event.originalEvent,
-            value: event.target.value,
-            stopPropagation: () => { },
-            preventDefault: () => { },
-            target: {
-                name: this.props.name,
-                id: this.id,
+        if (this.props.onChange) {
+            this.props.onChange({
+                originalEvent: event.originalEvent,
                 value: event.target.value,
-            }
-        });
+                stopPropagation: () => { },
+                preventDefault: () => { },
+                target: {
+                    name: this.props.name,
+                    id: this.id,
+                    value: event.target.value,
+                }
+            });
+        }
     }
 
     onEditableInputFocus(event) {
@@ -493,17 +495,19 @@ export class Dropdown extends Component {
     }
 
     clear(event) {
-        this.props.onChange({
-            originalEvent: event,
-            value: undefined,
-            stopPropagation: () => { },
-            preventDefault: () => { },
-            target: {
-                name: this.props.name,
-                id: this.id,
-                value: undefined
-            }
-        });
+        if (this.props.onChange) {
+            this.props.onChange({
+                originalEvent: event,
+                value: undefined,
+                stopPropagation: () => { },
+                preventDefault: () => { },
+                target: {
+                    name: this.props.name,
+                    id: this.id,
+                    value: undefined
+                }
+            });
+        }
 
         this.updateEditableLabel();
     }
@@ -515,17 +519,19 @@ export class Dropdown extends Component {
             this.updateEditableLabel(event.option);
             const optionValue = this.getOptionValue(event.option);
 
-            this.props.onChange({
-                originalEvent: event.originalEvent,
-                value: optionValue,
-                stopPropagation: () => { },
-                preventDefault: () => { },
-                target: {
-                    name: this.props.name,
-                    id: this.id,
-                    value: optionValue
-                }
-            });
+            if (this.props.onChange) {
+                this.props.onChange({
+                    originalEvent: event.originalEvent,
+                    value: optionValue,
+                    stopPropagation: () => { },
+                    preventDefault: () => { },
+                    target: {
+                        name: this.props.name,
+                        id: this.id,
+                        value: optionValue
+                    }
+                });
+            }
         }
     }
 
