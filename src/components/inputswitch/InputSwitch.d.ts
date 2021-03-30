@@ -3,6 +3,8 @@ import TooltipOptions from '../tooltip/TooltipOptions';
 
 interface InputSwitchProps {
     id?: string;
+    inputRef?: any;
+    name?: string;
     offLabel?: string;
     onLabel?: string;
     style?: object;

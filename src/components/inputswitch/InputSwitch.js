@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import { tip } from '../tooltip/Tooltip';
@@ -8,6 +8,7 @@ export class InputSwitch extends Component {
 
     static defaultProps = {
         id: null,
+        inputRef: null,
         style: null,
         className: null,
         inputId: null,
@@ -24,6 +25,7 @@ export class InputSwitch extends Component {
 
     static propTypes = {
         id: PropTypes.string,
+        inputRef: PropTypes.any,
         style: PropTypes.object,
         className: PropTypes.string,
         inputId: PropTypes.string,
@@ -50,6 +52,8 @@ export class InputSwitch extends Component {
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
         this.onKeyDown = this.onKeyDown.bind(this);
+
+        this.inputRef = createRef(this.props.inputRef);
     }
 
     onClick(event) {
@@ -58,7 +62,7 @@ export class InputSwitch extends Component {
         }
 
         this.toggle(event);
-        this.input.focus();
+        this.inputRef.current.focus();
     }
 
     toggle(event) {
@@ -101,7 +105,22 @@ export class InputSwitch extends Component {
         }
     }
 
+    updateInputRef() {
+        let ref = this.props.inputRef;
+
+        if (ref) {
+            if (typeof ref === 'function') {
+                ref(this.inputRef.current);
+            }
+            else {
+                ref.current = this.inputRef.current;
+            }
+        }
+    }
+
     componentDidMount() {
+        this.updateInputRef();
+
         if (this.props.tooltip) {
             this.renderTooltip();
         }
@@ -144,7 +163,7 @@ export class InputSwitch extends Component {
             <div ref={el => this.container = el} id={this.props.id} className={className} style={this.props.style} onClick={this.onClick}
                 role="checkbox" aria-checked={this.props.checked} {...inputSwitchProps}>
                 <div className="p-hidden-accessible">
-                    <input ref={el => this.input = el} type="checkbox" id={this.props.inputId} name={this.props.name} checked={this.props.checked} onChange={this.toggle}
+                    <input ref={this.inputRef} type="checkbox" id={this.props.inputId} name={this.props.name} checked={this.props.checked} onChange={this.toggle}
                         onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.onKeyDown} disabled={this.props.disabled}  role="switch" aria-checked={this.props.checked}
                         aria-labelledby={this.props.ariaLabelledBy}/>
                 </div>
