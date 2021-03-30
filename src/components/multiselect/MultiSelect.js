@@ -1,6 +1,6 @@
-import { classNames } from '../utils/ClassNames';
+import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import { classNames } from '../utils/ClassNames';
 import { tip } from '../tooltip/Tooltip';
 import DomHandler from '../utils/DomHandler';
 import FilterUtils from '../utils/FilterUtils';
@@ -16,6 +16,7 @@ export class MultiSelect extends Component {
 
     static defaultProps = {
         id: null,
+        inputRef: null,
         name: null,
         value: null,
         options: null,
@@ -64,6 +65,7 @@ export class MultiSelect extends Component {
 
     static propTypes = {
         id: PropTypes.string,
+        inputRef: PropTypes.any,
         name: PropTypes.string,
         value: PropTypes.any,
         options: PropTypes.array,
@@ -134,7 +136,8 @@ export class MultiSelect extends Component {
         this.onPanelClick = this.onPanelClick.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
-        this.overlayRef = React.createRef();
+        this.overlayRef = createRef();
+        this.inputRef = createRef(this.props.inputRef);
     }
 
     onPanelClick(event) {
@@ -509,7 +512,22 @@ export class MultiSelect extends Component {
         }
     }
 
+    updateInputRef() {
+        let ref = this.props.inputRef;
+
+        if (ref) {
+            if (typeof ref === 'function') {
+                ref(this.inputRef.current);
+            }
+            else {
+                ref.current = this.inputRef.current;
+            }
+        }
+    }
+
     componentDidMount() {
+        this.updateInputRef();
+
         if (this.props.tooltip) {
             this.renderTooltip();
         }
@@ -646,7 +664,7 @@ export class MultiSelect extends Component {
     }
 
     checkValidity() {
-        return this.nativeSelect.checkValidity();
+        return this.inputRef.current.checkValidity();
     }
 
     removeChip(event, item) {
@@ -788,7 +806,7 @@ export class MultiSelect extends Component {
 
         return (
             <div className="p-hidden-accessible p-multiselect-hidden-select">
-                <select ref={(el) => this.nativeSelect = el} required={this.props.required} name={this.props.name} tabIndex={-1} aria-hidden="true" multiple>
+                <select ref={this.inputRef} required={this.props.required} name={this.props.name} tabIndex={-1} aria-hidden="true" multiple>
                     {selectedOptions}
                 </select>
             </div>

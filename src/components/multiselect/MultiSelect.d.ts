@@ -3,6 +3,7 @@ import TooltipOptions from '../tooltip/TooltipOptions';
 
 interface MultiSelectProps {
     id?: string;
+    inputRef?: any;
     name?: string;
     value?: any;
     options?: any[];
