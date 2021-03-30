@@ -5,11 +5,11 @@ interface CascadeSelectProps {
     style?: object;
     className?: string;
     value?: any;
-    options?: Array<any>;
+    options?: any[];
     optionLabel?: string;
     optionValue?: string;
     optionGroupLabel?: string;
-    optionGroupChildren?: Array<any>;
+    options?: any[];
     placeholder?: string;
     itemTemplate?: any;
     disabled?: boolean;
