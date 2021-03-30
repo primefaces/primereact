@@ -822,6 +822,9 @@
   color: #666666;
   transition-duration: 0.2s; }
 
+.p-float-label > label.p-error {
+  color: #a80000; }
+
 .p-input-icon-left > i:first-of-type,
 .p-input-icon-left > svg:first-of-type,
 .p-input-icon-left > .p-input-prefix {

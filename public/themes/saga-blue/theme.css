@@ -819,6 +819,9 @@
   color: #6c757d;
   transition-duration: 0.2s; }
 
+.p-float-label > label.p-error {
+  color: #f44336; }
+
 .p-input-icon-left > i:first-of-type,
 .p-input-icon-left > svg:first-of-type,
 .p-input-icon-left > .p-input-prefix {
