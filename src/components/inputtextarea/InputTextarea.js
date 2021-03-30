@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
+import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import { tip } from '../tooltip/Tooltip';
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
 
-export class InputTextarea extends Component {
+class InputTextareaComponent extends Component {
 
     static defaultProps = {
         autoResize: false,
@@ -27,6 +27,8 @@ export class InputTextarea extends Component {
         this.onBlur = this.onBlur.bind(this);
         this.onKeyUp = this.onKeyUp.bind(this);
         this.onInput = this.onInput.bind(this);
+
+        this.elementRef = createRef(this.props.forwardRef);
     }
 
     onFocus(e) {
@@ -77,30 +79,46 @@ export class InputTextarea extends Component {
     }
 
     resize() {
-        if (DomHandler.isVisible(this.element)) {
+        const inputEl = this.elementRef && this.elementRef.current;
+        if (inputEl && DomHandler.isVisible(inputEl)) {
             if (!this.cachedScrollHeight) {
-                this.cachedScrollHeight = this.element.scrollHeight;
-                this.element.style.overflow = "hidden";
+                this.cachedScrollHeight = inputEl.scrollHeight;
+                inputEl.style.overflow = "hidden";
             }
 
-            if (this.cachedScrollHeight !== this.element.scrollHeight) {
-                this.element.style.height = ''
-                this.element.style.height = this.element.scrollHeight + 'px';
+            if (this.cachedScrollHeight !== inputEl.scrollHeight) {
+                inputEl.style.height = ''
+                inputEl.style.height = inputEl.scrollHeight + 'px';
 
-                if (parseFloat(this.element.style.height) >= parseFloat(this.element.style.maxHeight)) {
-                    this.element.style.overflowY = "scroll";
-                    this.element.style.height = this.element.style.maxHeight;
+                if (parseFloat(inputEl.style.height) >= parseFloat(inputEl.style.maxHeight)) {
+                    inputEl.style.overflowY = "scroll";
+                    inputEl.style.height = inputEl.style.maxHeight;
                 }
                 else {
-                    this.element.style.overflow = "hidden";
+                    inputEl.style.overflow = "hidden";
                 }
 
-                this.cachedScrollHeight = this.element.scrollHeight;
+                this.cachedScrollHeight = inputEl.scrollHeight;
+            }
+        }
+    }
+
+    updateForwardRef() {
+        let ref = this.props.forwardRef;
+
+        if (ref) {
+            if (typeof ref === 'function') {
+                ref(this.elementRef.current);
+            }
+            else {
+                ref.current = this.elementRef.current;
             }
         }
     }
 
     componentDidMount() {
+        this.updateForwardRef();
+
         if (this.props.tooltip) {
             this.renderTooltip();
         }
@@ -132,7 +150,7 @@ export class InputTextarea extends Component {
 
     renderTooltip() {
         this.tooltip = tip({
-            target: this.element,
+            target: this.elementRef.current,
             content: this.props.tooltip,
             options: this.props.tooltipOptions
         });
@@ -145,11 +163,13 @@ export class InputTextarea extends Component {
             'p-inputtextarea-resizable': this.props.autoResize
         }, this.props.className);
 
-        let textareaProps = ObjectUtils.findDiffKeys(this.props, InputTextarea.defaultProps);
+        let textareaProps = ObjectUtils.findDiffKeys(this.props, InputTextareaComponent.defaultProps);
 
         return (
-            <textarea {...textareaProps} className={className} ref={input => this.element = input}
+            <textarea ref={this.elementRef} {...textareaProps} className={className}
                 onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyUp} onInput={this.onInput}></textarea>
         );
     }
 }
+
+export const InputTextarea = React.forwardRef((props, ref) => <InputTextareaComponent forwardRef={ref} {...props} />);
