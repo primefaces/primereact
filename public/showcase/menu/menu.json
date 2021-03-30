@@ -21,8 +21,7 @@
                         "locale",
                         "translate",
                         "internationalization"
-                    ],
-                    "badge": "new"
+                    ]
                 },
                 {
                     "name": "Accessibility",
@@ -120,7 +119,7 @@
                 {
                     "name": "Colors",
                     "to": "/colors",
-                    "badge": "New"
+                    "badge": "new"
                 },
                 {
                     "name": "SASS API",
@@ -209,8 +208,7 @@
                     "to": "/icons",
                     "meta": [
                         "icons"
-                    ],
-                    "badge": "updated"
+                    ]
                 }
             ]
         },
@@ -240,8 +238,7 @@
                     "to": "/cascadeselect",
                     "meta": [
                         "cascadeselect"
-                    ],
-                    "badge": "new"
+                    ]
                 },
                 {
                     "name": "Checkbox",
@@ -333,16 +330,14 @@
                     "to": "/invalid",
                     "meta": [
                         "invalid state"
-                    ],
-                    "badge": "new"
+                    ]
                 },
                 {
                     "name": "Knob",
                     "to": "/knob",
                     "meta": [
                         "knob"
-                    ],
-                    "badge": "new"
+                    ]
                 },
                 {
                     "name": "KeyFilter",
@@ -515,7 +510,8 @@
                             "to": "/datatable/sort",
                             "meta": [
                                 "sort"
-                            ]
+                            ],
+                            "badge":"updated"
                         },
                         {
                             "name": "Filter",
@@ -686,8 +682,7 @@
                             "to": "/datascroller/loader",
                             "meta": [
                                 "loader"
-                            ],
-                            "badge": "updated"
+                            ]
                         }
                     ]
                 },
@@ -964,8 +959,7 @@
                     "to": "/divider",
                     "meta": [
                         "divider"
-                    ],
-                    "badge": "new"
+                    ]
                 },
                 {
                     "name": "Fieldset",
@@ -986,8 +980,7 @@
                     "to": "/splitter",
                     "meta": [
                         "splitter"
-                    ],
-                    "badge": "new"
+                    ]
                 },
                 {
                     "name": "ScrollPanel",
@@ -1023,24 +1016,21 @@
                     "to": "/confirmdialog",
                     "meta": [
                         "confirmdialog"
-                    ],
-                    "badge": "new"
+                    ]
                 },
                 {
                     "name": "ConfirmPopup",
                     "to": "/confirmpopup",
                     "meta": [
                         "confirmpopup"
-                    ],
-                    "badge": "new"
+                    ]
                 },
                 {
                     "name": "Dialog",
                     "to": "/dialog",
                     "meta": [
                         "dialog"
-                    ],
-                    "badge": "updated"
+                    ]
                 },
                 {
                     "name": "OverlayPanel",
@@ -1349,6 +1339,41 @@
             ]
         },
         {
+            "name": "Validation",
+            "meta": [
+                "validation"
+            ],
+            "children": [
+                {
+                    "name": "Formik",
+                    "to": "/formik",
+                    "meta": [
+                        "formik",
+                        "validation"
+                    ],
+                    "badge": "new"
+                },
+                {
+                    "name": "React Hook Form",
+                    "to": "/reacthookform",
+                    "meta": [
+                        "react hook form",
+                        "validation"
+                    ],
+                    "badge": "new"
+                },
+                {
+                    "name": "React Final Form",
+                    "to": "/reactfinalform",
+                    "meta": [
+                        "react final form",
+                        "validation"
+                    ],
+                    "badge": "new"
+                }
+            ]
+        },
+        {
             "name": "Misc",
             "meta": [
                 "misc"
@@ -1359,24 +1384,21 @@
                     "to": "/avatar",
                     "meta": [
                         "avatar"
-                    ],
-                    "badge": "new"
+                    ]
                 },
                 {
                     "name": "Badge",
                     "to": "/badge",
                     "meta": [
                         "badge"
-                    ],
-                    "badge": "new"
+                    ]
                 },
                 {
                     "name": "Chip",
                     "to": "/chip",
                     "meta": [
                         "chip"
-                    ],
-                    "badge": "new"
+                    ]
                 },
                 {
                     "name": "Inplace",
@@ -1390,16 +1412,14 @@
                     "to": "/scrolltop",
                     "meta": [
                         "scrolltop"
-                    ],
-                    "badge": "new"
+                    ]
                 },
                 {
                     "name": "Skeleton",
                     "to": "/skeleton",
                     "meta": [
                         "skeleton"
-                    ],
-                    "badge": "new"
+                    ]
                 },
                 {
                     "name": "ProgressBar",
@@ -1420,8 +1440,7 @@
                     "to": "/ripple",
                     "meta": [
                         "ripple"
-                    ],
-                    "badge": "updated"
+                    ]
                 },
                 {
                     "name": "Captcha",
@@ -1436,8 +1455,7 @@
                     "to": "/tag",
                     "meta": [
                         "tag"
-                    ],
-                    "badge": "new"
+                    ]
                 }
             ]
         }

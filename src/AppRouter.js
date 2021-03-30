@@ -169,6 +169,9 @@ import { ConfirmDialogDemo } from './showcase/confirmdialog/ConfirmDialogDemo';
 import { ConfirmPopupDemo } from './showcase/confirmpopup/ConfirmPopupDemo';
 import { InvalidDemo } from './showcase/invalid/InvalidDemo';
 import { ColorsDemo } from './showcase/colors/ColorsDemo';
+import { FormikFormDemo } from './showcase/validate/FormikFormDemo';
+import { ReactHookFormDemo } from './showcase/validate/ReactHookFormDemo';
+import { ReactFinalFormDemo } from './showcase/validate/ReactFinalFormDemo';
 
 class AppRouter extends Component {
 
@@ -365,6 +368,9 @@ class AppRouter extends Component {
                             <Route path="/confirmpopup" component={ConfirmPopupDemo} />
                             <Route path="/invalid" component={InvalidDemo} />
                             <Route path="/colors" render={() => <ColorsDemo darkTheme={context.darkTheme} />} />
+                            <Route path="/formik" component={FormikFormDemo} />
+                            <Route path="/reacthookform" component={ReactHookFormDemo} />
+                            <Route path="/reactfinalform" component={ReactFinalFormDemo} />
                         </>
                     )
                 }

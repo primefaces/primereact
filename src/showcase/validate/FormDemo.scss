@@ -1,0 +1,19 @@
+.form-demo {
+    .card {
+        min-width: 500px;
+
+        form {
+            margin-top: 2rem;
+        }
+
+        .p-field {
+            margin-bottom: 1.5rem;
+        }
+    }
+
+    @media screen and (max-width: 960px) {
+        .card {
+            width: 80%;
+        }
+    }
+}
