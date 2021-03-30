@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import {InputText} from '../inputtext/InputText';
 import { classNames } from '../utils/ClassNames';
@@ -9,6 +9,7 @@ export class InputNumber extends Component {
 
     static defaultProps = {
         value: null,
+        inputRef: null,
         format: true,
         showButtons: false,
         buttonLayout: 'stacked',
@@ -58,6 +59,7 @@ export class InputNumber extends Component {
 
     static propTypes = {
         value: PropTypes.number,
+        inputRef: PropTypes.any,
         format: PropTypes.bool,
         showButtons: PropTypes.bool,
         buttonLayout: PropTypes.string,
@@ -133,6 +135,8 @@ export class InputNumber extends Component {
         this.onDownButtonMouseUp = this.onDownButtonMouseUp.bind(this);
         this.onDownButtonKeyDown = this.onDownButtonKeyDown.bind(this);
         this.onDownButtonKeyUp = this.onDownButtonKeyUp.bind(this);
+
+        this.inputRef = createRef(this.props.inputRef);
     }
 
     getOptions() {
@@ -278,7 +282,7 @@ export class InputNumber extends Component {
 
     spin(event, dir) {
         let step = this.props.step * dir;
-        let currentValue = this.parseValue(this.inputEl.value) || 0;
+        let currentValue = this.parseValue(this.inputRef.current.value) || 0;
         let newValue = this.validateValue(currentValue + step);
 
         this.updateInput(newValue, null, 'spin');
@@ -289,7 +293,7 @@ export class InputNumber extends Component {
 
     onUpButtonMouseDown(event) {
         if (!this.props.disabled) {
-            this.inputEl.focus();
+            this.inputRef.current.focus();
             this.repeat(event, null, 1);
             event.preventDefault();
         }
@@ -321,7 +325,7 @@ export class InputNumber extends Component {
 
     onDownButtonMouseDown(event, focusInput) {
         if (!this.props.disabled) {
-            this.inputEl.focus();
+            this.inputRef.current.focus();
             this.repeat(event, null, -1);
 
             event.preventDefault();
@@ -407,8 +411,8 @@ export class InputNumber extends Component {
             //enter
             case 13:
                 newValueStr = this.validateValue(this.parseValue(inputValue));
-                this.inputEl.value = this.formatValue(newValueStr);
-                this.inputEl.setAttribute('aria-valuenow', newValueStr);
+                this.inputRef.current.value = this.formatValue(newValueStr);
+                this.inputRef.current.setAttribute('aria-valuenow', newValueStr);
                 this.updateModel(event, newValueStr);
             break;
 
@@ -428,7 +432,7 @@ export class InputNumber extends Component {
                         }
                         else if (this._decimal.test(deleteChar)) {
                             this._decimal.lastIndex = 0;
-                            this.inputEl.setSelectionRange(selectionStart - 1, selectionStart - 1);
+                            this.inputRef.current.setSelectionRange(selectionStart - 1, selectionStart - 1);
                         }
                         else if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
                             newValueStr = inputValue.slice(0, selectionStart - 1) + '0' + inputValue.slice(selectionStart);
@@ -466,7 +470,7 @@ export class InputNumber extends Component {
                         }
                         else if (this._decimal.test(deleteChar)) {
                             this._decimal.lastIndex = 0;
-                            this.inputEl.setSelectionRange(selectionStart + 1, selectionStart + 1);
+                            this.inputRef.current.setSelectionRange(selectionStart + 1, selectionStart + 1);
                         }
                         else if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
                             newValueStr = inputValue.slice(0, selectionStart) + '0' + inputValue.slice(selectionStart + 1);
@@ -549,9 +553,9 @@ export class InputNumber extends Component {
             return;
         }
 
-        const selectionStart = this.inputEl.selectionStart;
-        const selectionEnd = this.inputEl.selectionEnd;
-        let inputValue = this.inputEl.value.trim();
+        const selectionStart = this.inputRef.current.selectionStart;
+        const selectionEnd = this.inputRef.current.selectionEnd;
+        let inputValue = this.inputRef.current.value.trim();
         const decimalCharIndex = inputValue.search(this._decimal);
         this._decimal.lastIndex = 0;
         const minusCharIndex = inputValue.search(this._minusSign);
@@ -632,8 +636,8 @@ export class InputNumber extends Component {
     }
 
     initCursor() {
-        let selectionStart = this.inputEl.selectionStart;
-        let inputValue = this.inputEl.value;
+        let selectionStart = this.inputRef.current.selectionStart;
+        let inputValue = this.inputRef.current.value;
         let valueLength = inputValue.length;
         let index = null;
 
@@ -656,7 +660,7 @@ export class InputNumber extends Component {
         }
 
         if (index !== null) {
-            this.inputEl.setSelectionRange(index + 1, index + 1);
+            this.inputRef.current.setSelectionRange(index + 1, index + 1);
         }
         else {
             i = selectionStart + 1;
@@ -672,7 +676,7 @@ export class InputNumber extends Component {
             }
 
             if (index !== null) {
-                this.inputEl.setSelectionRange(index, index);
+                this.inputRef.current.setSelectionRange(index, index);
             }
         }
     }
@@ -699,7 +703,7 @@ export class InputNumber extends Component {
     }
 
     updateValue(event, valueStr, insertedValueStr, operation) {
-        let currentValue = this.inputEl.value;
+        let currentValue = this.inputRef.current.value;
         let newValue = null;
 
         if (valueStr != null) {
@@ -751,22 +755,23 @@ export class InputNumber extends Component {
     updateInput(value, insertedValueStr, operation) {
         insertedValueStr = insertedValueStr || '';
 
-        let inputValue = this.inputEl.value;
+        let inputEl = this.inputRef.current;
+        let inputValue = inputEl.value;
         let newValue = this.formatValue(value);
         let currentLength = inputValue.length;
 
         if (currentLength === 0) {
-            this.inputEl.value = newValue;
-            this.inputEl.setSelectionRange(0, 0);
+            inputEl.value = newValue;
+            inputEl.setSelectionRange(0, 0);
             this.initCursor();
             const prefixLength = (this.prefixChar || '').length;
             const selectionEnd = prefixLength + insertedValueStr.length;
-            this.inputEl.setSelectionRange(selectionEnd, selectionEnd);
+            inputEl.setSelectionRange(selectionEnd, selectionEnd);
         }
         else {
-            let selectionStart = this.inputEl.selectionStart;
-            let selectionEnd = this.inputEl.selectionEnd;
-            this.inputEl.value = newValue;
+            let selectionStart = inputEl.selectionStart;
+            let selectionEnd = inputEl.selectionEnd;
+            inputEl.value = newValue;
             let newLength = newValue.length;
 
             if (operation === 'range-insert') {
@@ -781,15 +786,15 @@ export class InputNumber extends Component {
                 tRegex.test(newValue.slice(sRegex.lastIndex));
 
                 selectionEnd = sRegex.lastIndex + tRegex.lastIndex;
-                this.inputEl.setSelectionRange(selectionEnd, selectionEnd);
+                inputEl.setSelectionRange(selectionEnd, selectionEnd);
             }
             else if (newLength === currentLength) {
                 if (operation === 'insert' || operation === 'delete-back-single')
-                    this.inputEl.setSelectionRange(selectionEnd + 1, selectionEnd + 1);
+                    inputEl.setSelectionRange(selectionEnd + 1, selectionEnd + 1);
                 else if (operation === 'delete-single')
-                    this.inputEl.setSelectionRange(selectionEnd - 1, selectionEnd - 1);
+                    inputEl.setSelectionRange(selectionEnd - 1, selectionEnd - 1);
                 else if (operation === 'delete-range' || operation === 'spin')
-                    this.inputEl.setSelectionRange(selectionEnd, selectionEnd);
+                    inputEl.setSelectionRange(selectionEnd, selectionEnd);
             }
             else if (operation === 'delete-back-single') {
                 let prevChar = inputValue.charAt(selectionEnd - 1);
@@ -805,27 +810,28 @@ export class InputNumber extends Component {
                 }
 
                 this._group.lastIndex = 0;
-                this.inputEl.setSelectionRange(selectionEnd, selectionEnd);
+                inputEl.setSelectionRange(selectionEnd, selectionEnd);
             }
             else if (inputValue === '-' && operation === 'insert') {
-                this.inputEl.setSelectionRange(selectionEnd + 1, selectionEnd + 1);
+                inputEl.setSelectionRange(selectionEnd + 1, selectionEnd + 1);
             }
             else {
                 selectionEnd = selectionEnd + (newLength - currentLength);
-                this.inputEl.setSelectionRange(selectionEnd, selectionEnd);
+                inputEl.setSelectionRange(selectionEnd, selectionEnd);
             }
         }
 
-        this.inputEl.setAttribute('aria-valuenow', value);
+        inputEl.setAttribute('aria-valuenow', value);
     }
 
     updateInputValue(newValue) {
-        const value = this.inputEl.value;
+        const inputEl = this.inputRef.current;
+        const value = inputEl.value;
         const formattedValue = this.formatValue(newValue);
 
         if (value !== formattedValue) {
-            this.inputEl.value = formattedValue;
-            this.inputEl.setAttribute('aria-valuenow', newValue);
+            inputEl.value = formattedValue;
+            inputEl.setAttribute('aria-valuenow', newValue);
         }
     }
 
@@ -857,7 +863,7 @@ export class InputNumber extends Component {
     onInputBlur(event) {
         event.persist();
         this.setState({ focused: false }, () => {
-            let newValue = this.validateValue(this.parseValue(this.inputEl.value));
+            let newValue = this.validateValue(this.parseValue(this.inputRef.current.value));
             this.updateInputValue(newValue);
             this.updateModel(event, newValue);
 
@@ -889,7 +895,22 @@ export class InputNumber extends Component {
         return this.props.inputMode || ((this.props.mode === 'decimal' && !this.props.minFractionDigits) ? 'numeric' : 'decimal');
     }
 
+    updateInputRef() {
+        let ref = this.props.inputRef;
+
+        if (ref) {
+            if (typeof ref === 'function') {
+                ref(this.inputRef.current);
+            }
+            else {
+                ref.current = this.inputRef.current;
+            }
+        }
+    }
+
     componentDidMount() {
+        this.updateInputRef();
+
         if (this.props.tooltip) {
             this.renderTooltip();
         }
@@ -948,7 +969,7 @@ export class InputNumber extends Component {
         const valueToRender = this.formatValue(this.props.value);
 
         return (
-            <InputText ref={(el) => this.inputEl = el} id={this.props.inputId} style={this.props.inputStyle} role="spinbutton"
+            <InputText ref={this.inputRef} id={this.props.inputId} style={this.props.inputStyle} role="spinbutton"
                        className={className} defaultValue={valueToRender} type={this.props.type} size={this.props.size} tabIndex={this.props.tabIndex} inputMode={this.getInputMode()}
                        maxLength={this.props.maxlength} disabled={this.props.disabled} required={this.props.required} pattern={this.props.pattern}
                        placeholder={this.props.placeholder} readOnly={this.props.readOnly} name={this.props.name} autoFocus={this.props.autoFocus}

@@ -3,6 +3,7 @@ import TooltipOptions from '../tooltip/TooltipOptions';
 
 interface InputNumberProps {
     value?: number;
+    inputRef?: any;
     format?: boolean;
     showButtons?: boolean;
     buttonLayout?: string;
