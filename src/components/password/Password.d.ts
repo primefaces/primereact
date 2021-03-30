@@ -3,6 +3,7 @@ import TooltipOptions from '../tooltip/TooltipOptions';
 
 interface PasswordProps extends React.HTMLProps<HTMLInputElement> {
     id?: string;
+    inputRef?: any;
     value?: string;
     promptLabel?: string;
     weakLabel?: string;

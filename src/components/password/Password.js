@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import { tip } from '../tooltip/Tooltip';
@@ -16,6 +16,7 @@ export class Password extends Component {
 
     static defaultProps = {
         id: null,
+        inputRef: null,
         promptLabel: null,
         weakLabel: null,
         mediumLabel: null,
@@ -42,6 +43,7 @@ export class Password extends Component {
 
     static propTypes = {
         id: PropTypes.string,
+        inputRef: PropTypes.any,
         promptLabel: PropTypes.string,
         weakLabel: PropTypes.string,
         mediumLabel: PropTypes.string,
@@ -89,7 +91,8 @@ export class Password extends Component {
         this.onPanelClick = this.onPanelClick.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
-        this.overlayRef = React.createRef();
+        this.overlayRef = createRef();
+        this.inputRef = createRef(this.props.inputRef);
         this.mediumCheckRegExp = new RegExp(this.props.mediumRegex);
         this.strongCheckRegExp = new RegExp(this.props.strongRegex);
     }
@@ -177,9 +180,11 @@ export class Password extends Component {
     }
 
     alignOverlay() {
-        const container = this.inputEl.parentElement;
-        this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
-        DomHandler.absolutePosition(this.overlayRef.current, container);
+        if (this.inputRef && this.inputRef.current) {
+            const container = this.inputRef.current.parentElement;
+            this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
+            DomHandler.absolutePosition(this.overlayRef.current, container);
+        }
     }
 
     onOverlayEnter() {
@@ -341,7 +346,22 @@ export class Password extends Component {
         }
     }
 
+    updateInputRef() {
+        let ref = this.props.inputRef;
+
+        if (ref) {
+            if (typeof ref === 'function') {
+                ref(this.inputRef.current);
+            }
+            else {
+                ref.current = this.inputRef.current;
+            }
+        }
+    }
+
     componentDidMount() {
+        this.updateInputRef();
+
         if (this.props.tooltip) {
             this.renderTooltip();
         }
@@ -454,7 +474,7 @@ export class Password extends Component {
 
         return (
             <div ref={el => this.container = el} className={containerClassName} style={this.props.style}>
-                <InputText id={this.id} ref={(el) => this.inputEl = el} {...inputProps} type={type} className={inputClassName} style={this.props.inputStyle}
+                <InputText id={this.id} ref={this.inputRef} {...inputProps} type={type} className={inputClassName} style={this.props.inputStyle}
                     onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyup} onInput={this.onInput} />
                 {icon}
                 {panel}
