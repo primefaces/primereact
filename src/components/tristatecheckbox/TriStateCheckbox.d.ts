@@ -3,6 +3,7 @@ import TooltipOptions from '../tooltip/TooltipOptions';
 
 interface TriStateCheckboxProps {
     id?: string;
+    inputRef?: any;
     inputId?: string;
     value?: boolean | null;
     name?: string;
