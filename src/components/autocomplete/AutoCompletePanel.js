@@ -17,7 +17,7 @@ class AutoCompletePanelComponent extends Component {
         optionGroupTemplate: null,
         itemTemplate: null,
         onItemClick: null,
-        scrollHeight: '200px',
+        scrollHeight: null,
         listId: null,
         ariaSelected: null,
         panelClassName: null,
@@ -112,7 +112,7 @@ class AutoCompletePanelComponent extends Component {
             <CSSTransition nodeRef={this.props.forwardRef} classNames="p-connected-overlay" in={this.props.in} timeout={{ enter: 120, exit: 100 }}
                 unmountOnExit onEnter={this.props.onEnter} onEntering={this.props.onEntering} onEntered={this.props.onEntered} onExit={this.props.onExit} onExited={this.props.onExited}>
                 <div ref={this.props.forwardRef} className={panelClassName} style={panelStyle} onClick={this.props.onClick}>
-                    <ul className="p-autocomplete-items" role="listbox" id={this.props.listId}>
+                    <ul className="p-autocomplete-items" role="listbox" id={this.props.listId} style={{ maxHeight: this.props.scrollHeight || 'auto' }}>
                         {items}
                     </ul>
                 </div>
