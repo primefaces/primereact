@@ -3,6 +3,7 @@ import TooltipOptions from '../tooltip/TooltipOptions';
 
 interface RadioButtonProps {
     id?: string;
+    inputRef?: any;
     inputId?: string;
     name?: string;
     value?: any;
