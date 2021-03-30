@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import { InputText } from '../inputtext/InputText';
 import { Button } from '../button/Button';
@@ -17,6 +17,7 @@ export class Calendar extends Component {
 
     static defaultProps = {
         id: null,
+        inputRef: null,
         name: null,
         value: null,
         viewDate: null,
@@ -89,6 +90,7 @@ export class Calendar extends Component {
 
     static propTypes = {
         id: PropTypes.string,
+        inputRef: PropTypes.any,
         name: PropTypes.string,
         value: PropTypes.any,
         viewDate: PropTypes.any,
@@ -215,10 +217,26 @@ export class Calendar extends Component {
         this.reFocusInputField = this.reFocusInputField.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
-        this.overlayRef = React.createRef();
+        this.overlayRef = createRef();
+        this.inputRef = createRef(this.props.inputRef);
+    }
+
+    updateInputRef() {
+        let ref = this.props.inputRef;
+
+        if (ref) {
+            if (typeof ref === 'function') {
+                ref(this.inputRef.current);
+            }
+            else {
+                ref.current = this.inputRef.current;
+            }
+        }
     }
 
     componentDidMount() {
+        this.updateInputRef();
+
         if (this.props.tooltip) {
             this.renderTooltip();
         }
@@ -227,7 +245,7 @@ export class Calendar extends Component {
             this.initFocusableCell();
         }
         else if (this.props.mask) {
-            mask(this.inputElement, {
+            mask(this.inputRef.current, {
                 mask: this.props.mask,
                 readOnly: this.props.readOnlyInput || this.props.disabled,
                 onChange: (e) => this.updateValueOnInput(e.originalEvent, e.value)
@@ -307,7 +325,7 @@ export class Calendar extends Component {
 
     renderTooltip() {
         this.tooltip = tip({
-            target: this.inputElement,
+            target: this.inputRef.current,
             content: this.props.tooltip,
             options: this.props.tooltipOptions
         });
@@ -415,9 +433,9 @@ export class Calendar extends Component {
     }
 
     reFocusInputField() {
-        if (!this.props.inline && this.inputElement) {
+        if (!this.props.inline && this.inputRef.current) {
             this.ignoreFocusFunctionality = true;
-            this.inputElement.focus();
+            this.inputRef.current.focus();
         }
     }
 
@@ -1600,7 +1618,7 @@ export class Calendar extends Component {
             this.enableModality();
         }
         else {
-            const container = this.inputElement.parentElement;
+            const container = this.inputRef.current.parentElement;
             this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
             DomHandler.absolutePosition(this.overlayRef.current, container);
         }
@@ -2015,7 +2033,7 @@ export class Calendar extends Component {
     }
 
     updateInputfield(value) {
-        if (!this.inputElement) {
+        if (!(this.inputRef && this.inputRef.current)) {
             return;
         }
 
@@ -2053,7 +2071,7 @@ export class Calendar extends Component {
             }
         }
 
-        this.inputElement.value = formattedValue;
+        this.inputRef.current.value = formattedValue;
     }
 
     formatDateTime(date) {
@@ -2916,7 +2934,7 @@ export class Calendar extends Component {
     renderInputElement() {
         if (!this.props.inline) {
             return (
-                <InputText ref={(el) => this.inputElement = el} id={this.props.inputId} name={this.props.name} type="text" className={this.props.inputClassName} style={this.props.inputStyle}
+                <InputText ref={this.inputRef} id={this.props.inputId} name={this.props.name} type="text" className={this.props.inputClassName} style={this.props.inputStyle}
                     readOnly={this.props.readOnlyInput} disabled={this.props.disabled} required={this.props.required} autoComplete="off" placeholder={this.props.placeholder}
                     onInput={this.onUserInput} onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onInputKeyDown} aria-labelledby={this.props.ariaLabelledBy} inputMode="none" />
             );
@@ -2971,7 +2989,7 @@ export class Calendar extends Component {
         const className = classNames('p-calendar p-component p-inputwrapper', this.props.className, {
             'p-calendar-w-btn': this.props.showIcon,
             'p-calendar-timeonly': this.props.timeOnly,
-            'p-inputwrapper-filled': this.props.value || (DomHandler.hasClass(this.inputElement, 'p-filled') && this.inputElement.value !== ''),
+            'p-inputwrapper-filled': this.props.value || (DomHandler.hasClass(this.inputRef.current, 'p-filled') && this.inputRef.current.value !== ''),
             'p-inputwrapper-focus': this.state.focused
         });
         const panelClassName = classNames('p-datepicker p-component', this.props.panelClassName, {

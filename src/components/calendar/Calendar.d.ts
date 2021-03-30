@@ -11,6 +11,7 @@ export interface DateMetaData {
 
 interface CalendarProps {
     id?: string;
+    inputRef?: any;
     name?: string;
     value?: Date|Date[];
     viewDate?: Date;
