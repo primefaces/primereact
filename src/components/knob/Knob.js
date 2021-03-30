@@ -18,7 +18,7 @@ export class Knob extends Component {
         min: 0,
         max: 100,
         strokeWidth: 14,
-        name: '',
+        name: null,
         valueColor: 'var(--primary-color, Black)',
         rangeColor: 'var(--surface-d, LightGray)',
         textColor: 'var(--text-color-secondary, Black)',
