@@ -116,7 +116,7 @@ export class Password extends Component {
     isFilled() {
         return (this.props.value != null && this.props.value.toString().length > 0) ||
             (this.props.defaultValue != null && this.props.defaultValue.toString().length > 0) ||
-            (this.inputRef && this.inputRef.current && this.inputRef.current.value.toString().length > 0);
+            (this.inputRef && this.inputRef.current && DomHandler.hasClass(this.inputRef.current, 'p-filled'));
     }
 
     getInputType() {
@@ -383,6 +383,10 @@ export class Password extends Component {
 
         if (prevProps.strongRegex !== this.props.strongRegex) {
             this.strongCheckRegExp = new RegExp(this.props.strongRegex);
+        }
+
+        if (!this.isFilled() && DomHandler.hasClass(this.container, 'p-inputwrapper-filled')) {
+            DomHandler.removeClass(this.container, 'p-inputwrapper-filled');
         }
     }
 
