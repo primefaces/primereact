@@ -153,7 +153,7 @@ primereact/resources/themes/rhea/theme.css
 
                     <h5>Ripple</h5>
                     <p>Ripple is an optional animation for the supported components such as buttons. It is disabled by default and needs to be enabled at
-                        your app's entry file (e.g. main.js) using the <i>PrimeReact</i> variable.
+                        your app's entry file (e.g. App.js) using the <i>PrimeReact</i> variable.
                     </p>
 <CodeHighlight lang="js">
 {`
