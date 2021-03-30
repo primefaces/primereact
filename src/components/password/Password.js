@@ -114,7 +114,9 @@ export class Password extends Component {
     }
 
     isFilled() {
-        return (this.props.value != null && this.props.value.toString().length > 0) || (this.props.defaultValue != null && this.props.defaultValue.toString().length > 0)
+        return (this.props.value != null && this.props.value.toString().length > 0) ||
+            (this.props.defaultValue != null && this.props.defaultValue.toString().length > 0) ||
+            (this.inputRef && this.inputRef.current && this.inputRef.current.value.toString().length > 0);
     }
 
     getInputType() {

@@ -127,7 +127,7 @@ export class Dialog extends Component {
     focus() {
         let activeElement = document.activeElement;
         let isActiveElementInDialog = activeElement && this.dialogRef && this.dialogRef.current.contains(activeElement);
-        if (!isActiveElementInDialog && this.props.closable) {
+        if (!isActiveElementInDialog && this.props.closable && this.props.showHeader) {
             this.closeElement.focus();
         }
     }
