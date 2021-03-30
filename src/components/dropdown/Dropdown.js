@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
@@ -15,6 +15,7 @@ export class Dropdown extends Component {
 
     static defaultProps = {
         id: null,
+        inputRef: null,
         name: null,
         value: null,
         options: null,
@@ -64,6 +65,7 @@ export class Dropdown extends Component {
 
     static propTypes = {
         id: PropTypes.string,
+        inputRef: PropTypes.any,
         name: PropTypes.string,
         value: PropTypes.any,
         options: PropTypes.array,
@@ -139,7 +141,8 @@ export class Dropdown extends Component {
         this.clear = this.clear.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
-        this.overlayRef = React.createRef();
+        this.overlayRef = createRef();
+        this.inputRef = createRef(this.props.inputRef);
     }
 
     onClick(event) {
@@ -722,7 +725,7 @@ export class Dropdown extends Component {
     }
 
     checkValidity() {
-        return this.nativeSelect.checkValidity();
+        return this.inputRef.current.checkValidity();
     }
 
     getVisibleOptions() {
@@ -758,7 +761,22 @@ export class Dropdown extends Component {
         }
     }
 
+    updateInputRef() {
+        let ref = this.props.inputRef;
+
+        if (ref) {
+            if (typeof ref === 'function') {
+                ref(this.inputRef.current);
+            }
+            else {
+                ref.current = this.inputRef.current;
+            }
+        }
+    }
+
     componentDidMount() {
+        this.updateInputRef();
+
         if (this.props.autoFocus && this.focusInput) {
             this.focusInput.focus();
         }
@@ -768,7 +786,7 @@ export class Dropdown extends Component {
         }
 
         this.updateInputField();
-        this.nativeSelect.selectedIndex = 1;
+        this.inputRef.current.selectedIndex = 1;
     }
 
     componentWillUnmount() {
@@ -815,7 +833,7 @@ export class Dropdown extends Component {
         }
 
         this.updateInputField();
-        this.nativeSelect.selectedIndex = 1;
+        this.inputRef.current.selectedIndex = 1;
     }
 
     renderHiddenSelect(selectedOption) {
@@ -824,7 +842,7 @@ export class Dropdown extends Component {
 
         return (
             <div className="p-hidden-accessible p-dropdown-hidden-select">
-                <select ref={(el) => this.nativeSelect = el} required={this.props.required} name={this.props.name} tabIndex={-1} aria-hidden="true">
+                <select ref={this.inputRef} required={this.props.required} name={this.props.name} tabIndex={-1} aria-hidden="true">
                     {placeHolderOption}
                     {option}
                 </select>
