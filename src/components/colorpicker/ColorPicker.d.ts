@@ -3,6 +3,7 @@ import TooltipOptions from '../tooltip/TooltipOptions';
 
 interface ColorPickerProps {
     id?: string;
+    inputRef?: any;
     value?: any;
     style?: object;
     className?: string;

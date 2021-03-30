@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import { classNames } from '../utils/ClassNames';
@@ -13,6 +13,7 @@ export class ColorPicker extends Component {
 
     static defaultProps = {
         id: null,
+        inputRef: null,
         value: null,
         style: null,
         className: null,
@@ -30,6 +31,7 @@ export class ColorPicker extends Component {
 
     static propTypes = {
         id: PropTypes.string,
+        inputRef: PropTypes.any,
         value: PropTypes.any,
         style: PropTypes.object,
         className: PropTypes.string,
@@ -67,7 +69,8 @@ export class ColorPicker extends Component {
         this.onDragEnd = this.onDragEnd.bind(this);
 
         this.id = this.props.id || UniqueComponentId();
-        this.overlayRef = React.createRef();
+        this.overlayRef = createRef();
+        this.inputRef = createRef(this.props.inputRef);
     }
 
     onPanelClick(event) {
@@ -272,8 +275,8 @@ export class ColorPicker extends Component {
     }
 
     updateInput() {
-        if (this.input) {
-            this.input.style.backgroundColor = '#' + this.HSBtoHEX(this.hsbValue);
+        if (this.inputRef && this.inputRef.current) {
+            this.inputRef.current.style.backgroundColor = '#' + this.HSBtoHEX(this.hsbValue);
         }
     }
 
@@ -560,7 +563,21 @@ export class ColorPicker extends Component {
         return this.RGBtoHEX(this.HSBtoRGB(hsb));
     }
 
+    updateInputRef() {
+        let ref = this.props.inputRef;
+
+        if (ref) {
+            if (typeof ref === 'function') {
+                ref(this.inputRef.current);
+            }
+            else {
+                ref.current = this.inputRef.current;
+            }
+        }
+    }
+
     componentDidMount() {
+        this.updateInputRef();
         this.updateHSBValue(this.props.value);
         this.updateUI();
 
@@ -605,9 +622,11 @@ export class ColorPicker extends Component {
     }
 
     alignPanel() {
-        const container = this.input.parentElement;
-        this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
-        DomHandler.absolutePosition(this.overlayRef.current, container);
+        if (this.inputRef && this.inputRef.current) {
+            const container = this.inputRef.current.parentElement;
+            this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
+            DomHandler.absolutePosition(this.overlayRef.current, container);
+        }
     }
 
     renderTooltip() {
@@ -659,7 +678,7 @@ export class ColorPicker extends Component {
             let inputProps = ObjectUtils.findDiffKeys(this.props, ColorPicker.defaultProps);
 
             return (
-                <input ref={(el) => this.input = el} type="text" className={inputClassName} readOnly id={this.props.inputId} tabIndex={this.props.tabIndex} disabled={this.props.disabled}
+                <input ref={this.inputRef} type="text" className={inputClassName} readOnly id={this.props.inputId} tabIndex={this.props.tabIndex} disabled={this.props.disabled}
                     onClick={this.onInputClick} onKeyDown={this.onInputKeydown} {...inputProps} />
             );
         }
