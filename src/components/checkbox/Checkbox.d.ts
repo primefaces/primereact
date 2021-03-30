@@ -3,6 +3,7 @@ import TooltipOptions from '../tooltip/TooltipOptions';
 
 interface CheckboxProps {
     id?: string;
+    inputRef?: any;
     inputId?: string;
     value?: any;
     name?: string;
