@@ -3,6 +3,7 @@ import TooltipOptions from '../tooltip/TooltipOptions';
 
 interface InputMaskProps {
     id?: string;
+    inputRef?: any;
     value?: string;
     type?: string;
     mask?: string;
