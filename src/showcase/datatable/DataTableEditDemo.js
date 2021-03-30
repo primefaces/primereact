@@ -684,7 +684,7 @@ const DataTableEditDemo = () => {
 
     const setActiveRowIndex = (index) => {
         let products = [...products4];
-        riginalRows2[index] = { ...products[index] };
+        originalRows2[index] = { ...products[index] };
         let _editingRows = { ...editingRows, ...{ [\`\${products[index].id}\`]: true } };
         setEditingRows(_editingRows);
     }
