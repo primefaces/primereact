@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import ObjectUtils from '../utils/ObjectUtils';
@@ -14,9 +14,11 @@ export class CascadeSelect extends Component {
 
     static defaultProps = {
         id: null,
+        inputRef: null,
         style: null,
         className: null,
         value: null,
+        name: null,
         options: null,
         optionLabel: null,
         optionValue: null,
@@ -40,9 +42,11 @@ export class CascadeSelect extends Component {
 
     static propTypes = {
         id: PropTypes.string,
+        inputRef: PropTypes.any,
         style: PropTypes.object,
         className: PropTypes.string,
         value: PropTypes.any,
+        name: PropTypes.string,
         options: PropTypes.array,
         optionLabel: PropTypes.string,
         optionValue: PropTypes.string,
@@ -75,7 +79,8 @@ export class CascadeSelect extends Component {
         this.dirty = false;
         this.selectionPath = null;
         this.id = this.props.id || UniqueComponentId();
-        this.overlayRef = React.createRef();
+        this.overlayRef = createRef();
+        this.inputRef = createRef(this.props.inputRef);
 
         this.hide = this.hide.bind(this);
         this.onClick = this.onClick.bind(this);
@@ -101,7 +106,7 @@ export class CascadeSelect extends Component {
 
         this.updateSelectionPath();
         this.hide();
-        this.focusInput.focus();
+        this.inputRef.current.focus();
     }
 
     onOptionGroupSelect(event) {
@@ -167,7 +172,7 @@ export class CascadeSelect extends Component {
 
         const overlay = this.overlayRef ? this.overlayRef.current : null;
         if (!overlay || !overlay.contains(event.target)) {
-            this.focusInput.focus();
+            this.inputRef.current.focus();
 
             if (this.state.overlayVisible) {
                 this.hide();
@@ -238,7 +243,7 @@ export class CascadeSelect extends Component {
             this.props.onBeforeHide();
         }
         this.setState({ overlayVisible: false }, () => {
-            this.focusInput.focus();
+            this.inputRef.current.focus();
         });
     }
 
@@ -271,7 +276,7 @@ export class CascadeSelect extends Component {
     }
 
     alignOverlay() {
-        const container = this.input.parentElement;
+        const container = this.label.parentElement;
         DomHandler.absolutePosition(this.overlayRef.current, container);
         this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
     }
@@ -335,7 +340,21 @@ export class CascadeSelect extends Component {
             || (this.overlayRef && this.overlayRef.current.contains(event.target)));
     }
 
+    updateInputRef() {
+        let ref = this.props.inputRef;
+
+        if (ref) {
+            if (typeof ref === 'function') {
+                ref(this.inputRef.current);
+            }
+            else {
+                ref.current = this.inputRef.current;
+            }
+        }
+    }
+
     componentDidMount() {
+        this.updateInputRef();
         this.updateSelectionPath();
     }
 
@@ -358,23 +377,25 @@ export class CascadeSelect extends Component {
     }
 
     renderKeyboardHelper() {
+        const value = this.props.value ? this.getOptionLabel(this.props.value) : null;
+
         return (
             <div className="p-hidden-accessible">
-                <input ref={(el) => this.focusInput = el} type="text" id={this.props.inputId} readOnly disabled={this.props.disabled}
+                <input ref={this.inputRef} type="text" id={this.props.inputId} name={this.props.name} defaultValue={value} readOnly disabled={this.props.disabled}
                     onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onInputKeyDown}
                     tabIndex={this.props.tabIndex} aria-haspopup="listbox" aria-labelledby={this.props.ariaLabelledBy} />
             </div>
         );
     }
 
-    renderLabel(value) {
-        let label = value ? this.getOptionLabel(this.props.value) : this.props.placeholder || 'p-emptylabel';
+    renderLabel() {
+        let label = this.props.value ? this.getOptionLabel(this.props.value) : this.props.placeholder || 'p-emptylabel';
         let labelClassName = classNames('p-cascadeselect-label ', {
             'p-placeholder': label === this.props.placeholder,
             'p-cascadeselect-label-empty': !this.props.value && label === 'p-emptylabel'
         });
 
-        return <span ref={(el) => this.input = el} className={labelClassName}>{label}</span>;
+        return <span ref={(el) => this.label = el} className={labelClassName}>{label}</span>;
     }
 
     renderDropdownIcon() {
@@ -411,7 +432,7 @@ export class CascadeSelect extends Component {
         });
 
         let keyboardHelper = this.renderKeyboardHelper();
-        let labelElement = this.renderLabel(this.props.value);
+        let labelElement = this.renderLabel();
         let dropdownIcon = this.renderDropdownIcon();
         let overlay = this.renderOverlay();
 

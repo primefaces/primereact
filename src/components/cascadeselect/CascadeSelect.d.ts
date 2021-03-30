@@ -2,6 +2,8 @@ import * as React from 'react';
 
 interface CascadeSelectProps {
     id?: string;
+    inputRef?: any;
+    name?: string;
     style?: object;
     className?: string;
     value?: any;
