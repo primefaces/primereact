@@ -3,6 +3,7 @@ import TooltipOptions from '../tooltip/TooltipOptions';
 
 interface ChipsProps {
     id?: string;
+    inputRef?: any;
     name?: string;
     placeholder?: string;
     value?: any[];

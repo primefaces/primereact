@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import { tip } from '../tooltip/Tooltip';
@@ -7,6 +7,7 @@ export class Chips extends Component {
 
     static defaultProps = {
         id: null,
+        inputRef: null,
         name: null,
         placeholder: null,
         value: null,
@@ -29,6 +30,7 @@ export class Chips extends Component {
 
     static propTypes = {
         id: PropTypes.string,
+        inputRef: PropTypes.any,
         name: PropTypes.string,
         placeholder: PropTypes.string,
         value: PropTypes.array,
@@ -61,6 +63,8 @@ export class Chips extends Component {
         this.onPaste = this.onPaste.bind(this);
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
+
+        this.inputRef = createRef(this.props.inputRef);
     }
 
     removeItem(event, index) {
@@ -113,7 +117,7 @@ export class Chips extends Component {
     }
 
     onWrapperClick() {
-        this.inputElement.focus();
+        this.inputRef.current.focus();
     }
 
     onKeyDown(event) {
@@ -123,7 +127,7 @@ export class Chips extends Component {
         switch(event.which) {
             //backspace
             case 8:
-                if (this.inputElement.value.length === 0 && values.length > 0) {
+                if (this.inputRef.current.value.length === 0 && values.length > 0) {
                     this.removeItem(event, values.length - 1);
                 }
             break;
@@ -163,7 +167,7 @@ export class Chips extends Component {
             });
         }
 
-        this.inputElement.value = '';
+        this.inputRef.current.value = '';
 
         if (preventDefault) {
             event.preventDefault();
@@ -209,10 +213,25 @@ export class Chips extends Component {
     }
 
     isFilled() {
-        return (this.props.value && this.props.value.length) || (this.inputElement && this.inputElement.value && this.inputElement.value.length);
+        return (this.props.value && this.props.value.length) || (this.inputRef && this.inputRef.current && this.inputRef.current.value && this.inputRef.current.value.length);
+    }
+
+    updateInputRef() {
+        let ref = this.props.inputRef;
+
+        if (ref) {
+            if (typeof ref === 'function') {
+                ref(this.inputRef.current);
+            }
+            else {
+                ref.current = this.inputRef.current;
+            }
+        }
     }
 
     componentDidMount() {
+        this.updateInputRef();
+
         if (this.props.tooltip) {
             this.renderTooltip();
         }
@@ -243,7 +262,7 @@ export class Chips extends Component {
 
     renderTooltip() {
         this.tooltip = tip({
-            target: this.inputElement,
+            target: this.inputRef.current,
             targetContainer: this.listElement,
             content: this.props.tooltip,
             options: this.props.tooltipOptions
@@ -265,7 +284,7 @@ export class Chips extends Component {
     renderInputElement() {
         return (
             <li className="p-chips-input-token">
-                <input ref={(el) => this.inputElement = el} placeholder={this.props.placeholder} type="text" name={this.props.name} disabled={this.props.disabled||this.isMaxedOut()}
+                <input ref={this.inputRef} placeholder={this.props.placeholder} type="text" name={this.props.name} disabled={this.props.disabled||this.isMaxedOut()}
                             onKeyDown={this.onKeyDown} onPaste={this.onPaste} onFocus={this.onFocus} onBlur={this.onBlur} aria-labelledby={this.props.ariaLabelledBy}/>
             </li>
         );
