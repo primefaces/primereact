@@ -8,6 +8,7 @@ type CompleteMethodParams = {
 
 interface AutoCompleteProps {
     id?: string;
+    inputRef?: any;
     value?: any;
     name?: string;
     type?: string;

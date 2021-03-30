@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import { InputText } from '../inputtext/InputText';
 import { Button } from '../button/Button';
@@ -15,6 +15,7 @@ export class AutoComplete extends Component {
 
     static defaultProps = {
         id: null,
+        inputRef: null,
         value: null,
         name: null,
         type: 'text',
@@ -69,6 +70,7 @@ export class AutoComplete extends Component {
 
     static propTypes = {
         id: PropTypes.string,
+        inputRef: PropTypes.any,
         value: PropTypes.any,
         name: PropTypes.string,
         type: PropTypes.string,
@@ -150,7 +152,8 @@ export class AutoComplete extends Component {
 
         this.id = this.props.id || UniqueComponentId();
         this.listId = this.id + '_list';
-        this.overlayRef = React.createRef();
+        this.overlayRef = createRef();
+        this.inputRef = createRef(this.props.inputRef);
     }
 
     onInputChange(event) {
@@ -204,7 +207,7 @@ export class AutoComplete extends Component {
 
     selectItem(event, option, preventInputFocus) {
         if (this.props.multiple) {
-            this.inputEl.value = '';
+            this.inputRef.current.value = '';
             if (!this.isSelected(option)) {
                 let newValue = this.props.value ? [...this.props.value, option] : [option];
                 this.updateModel(event, newValue);
@@ -223,7 +226,7 @@ export class AutoComplete extends Component {
         }
 
         if (!preventInputFocus) {
-            this.inputEl.focus();
+            this.inputRef.current.focus();
             this.hideOverlay();
         }
     }
@@ -265,7 +268,7 @@ export class AutoComplete extends Component {
 
     updateInputField(value) {
         const formattedValue = this.formatValue(value);
-        this.inputEl.value = formattedValue;
+        this.inputRef.current.value = formattedValue;
     }
 
     showOverlay() {
@@ -307,7 +310,7 @@ export class AutoComplete extends Component {
     }
 
     alignOverlay() {
-        let target = this.props.multiple ? this.multiContainer : this.inputEl;
+        let target = this.props.multiple ? this.multiContainer : this.inputRef.current;
         this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(target) + 'px';
         DomHandler.absolutePosition(this.overlayRef.current, target);
     }
@@ -320,17 +323,17 @@ export class AutoComplete extends Component {
     }
 
     onDropdownClick(event) {
-        this.inputEl.focus();
+        this.inputRef.current.focus();
 
         if (this.props.dropdownMode === 'blank')
             this.search(event, '', 'dropdown');
         else if (this.props.dropdownMode === 'current')
-            this.search(event, this.inputEl.value, 'dropdown');
+            this.search(event, this.inputRef.current.value, 'dropdown');
 
         if (this.props.onDropdownClick) {
             this.props.onDropdownClick({
                 originalEvent: event,
-                query: this.inputEl.value
+                query: this.inputRef.current.value
             });
         }
     }
@@ -425,7 +428,7 @@ export class AutoComplete extends Component {
             switch (event.which) {
                 //backspace
                 case 8:
-                    if (this.props.value && this.props.value.length && !this.inputEl.value) {
+                    if (this.props.value && this.props.value.length && !this.inputRef.current.value) {
                         let removedValue = this.props.value[this.props.value.length - 1];
                         let newValue = this.props.value.slice(0, -1);
 
@@ -494,7 +497,7 @@ export class AutoComplete extends Component {
         }
 
         if (!valid) {
-            this.inputEl.value = '';
+            this.inputRef.current.value = '';
             this.updateModel(event, null);
 
             if (this.props.onClear) {
@@ -518,7 +521,7 @@ export class AutoComplete extends Component {
     }
 
     onMultiContainerClick(event) {
-        this.inputEl.focus();
+        this.inputRef.current.focus();
 
         if (this.props.onClick) {
             this.props.onClick(event);
@@ -638,12 +641,27 @@ export class AutoComplete extends Component {
         if (this.props.multiple)
             return event.target === this.multiContainer || this.multiContainer.contains(event.target);
         else
-            return event.target === this.inputEl;
+            return event.target === this.inputRef.current;
+    }
+
+    updateInputRef() {
+        let ref = this.props.inputRef;
+
+        if (ref) {
+            if (typeof ref === 'function') {
+                ref(this.inputRef.current);
+            }
+            else {
+                ref.current = this.inputRef.current;
+            }
+        }
     }
 
     componentDidMount() {
-        if (this.props.autoFocus && this.inputEl) {
-            this.inputEl.focus();
+        this.updateInputRef();
+
+        if (this.props.autoFocus && this.inputRef && this.inputRef.current) {
+            this.inputRef.current.focus();
         }
 
         if (this.props.tooltip) {
@@ -663,7 +681,7 @@ export class AutoComplete extends Component {
             this.setState({ searching: false });
         }
 
-        if (this.inputEl && !this.props.multiple) {
+        if (this.inputRef && this.inputRef.current && !this.props.multiple) {
             this.updateInputField(this.props.value);
         }
 
@@ -709,7 +727,7 @@ export class AutoComplete extends Component {
         });
 
         return (
-            <InputText ref={(el) => this.inputEl = el} id={this.props.inputId} type={this.props.type} name={this.props.name}
+            <InputText ref={this.inputRef} id={this.props.inputId} type={this.props.type} name={this.props.name}
                 defaultValue={this.formatValue(this.props.value)} role="searchbox" aria-autocomplete="list" aria-controls={this.listId}
                 aria-labelledby={this.props.ariaLabelledBy} className={inputClassName} style={this.props.inputStyle} autoComplete="off"
                 readOnly={this.props.readOnly} disabled={this.props.disabled} placeholder={this.props.placeholder} size={this.props.size}
@@ -739,7 +757,7 @@ export class AutoComplete extends Component {
     renderMultiInput() {
         return (
             <li className="p-autocomplete-input-token">
-                <input ref={(el) => this.inputEl = el} type={this.props.type} disabled={this.props.disabled} placeholder={this.props.placeholder}
+                <input ref={this.inputRef} type={this.props.type} disabled={this.props.disabled} placeholder={this.props.placeholder}
                     role="searchbox" aria-autocomplete="list" aria-controls={this.listId} aria-labelledby={this.props.ariaLabelledBy}
                     autoComplete="off" tabIndex={this.props.tabIndex} onChange={this.onInputChange} id={this.props.inputId} name={this.props.name}
                     style={this.props.inputStyle} className={this.props.inputClassName} maxLength={this.props.maxlength}
