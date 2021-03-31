@@ -97,6 +97,7 @@ export class Dialog extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            id: props.id,
             maskVisible: props.visible,
             visible: false
         };
@@ -114,7 +115,6 @@ export class Dialog extends Component {
         this.onEntered = this.onEntered.bind(this);
         this.onExited = this.onExited.bind(this);
 
-        this.id = this.props.id || UniqueComponentId();
         this.attributeSelector = UniqueComponentId();
         this.dialogRef = React.createRef();
     }
@@ -418,7 +418,7 @@ export class Dialog extends Component {
                 let paramLength = params.length;
                 let dialogId = params[paramLength - 1].id;
 
-                if (dialogId === this.id) {
+                if (dialogId === this.state.id) {
                     let dialog = document.getElementById(dialogId);
 
                     if (event.which === 27) {
@@ -455,7 +455,7 @@ export class Dialog extends Component {
             }
         };
 
-        let newParam = { id: this.id, hasBlockScroll: this.props.blockScroll };
+        let newParam = { id: this.state.id, hasBlockScroll: this.props.blockScroll };
         document.primeDialogParams = document.primeDialogParams ? [ ...document.primeDialogParams, newParam ] : [ newParam ];
 
         document.addEventListener('keydown', this.documentKeyDownListener);
@@ -464,7 +464,7 @@ export class Dialog extends Component {
     unbindDocumentKeyDownListener() {
         if (this.documentKeyDownListener) {
             document.removeEventListener('keydown', this.documentKeyDownListener);
-            document.primeDialogParams = document.primeDialogParams && document.primeDialogParams.filter(param => param.id !== this.id);
+            document.primeDialogParams = document.primeDialogParams && document.primeDialogParams.filter(param => param.id !== this.state.id);
             this.documentKeyDownListener = null;
         }
     }
@@ -490,6 +490,10 @@ export class Dialog extends Component {
     }
 
     componentDidMount() {
+        if (!this.state.id) {
+            this.setState({ id: UniqueComponentId() });
+        }
+
         if (this.props.visible) {
             this.setState({ visible: true }, () => {
                 this.mask.style.zIndex = String(this.zIndex);
@@ -574,7 +578,7 @@ export class Dialog extends Component {
 
             return (
                 <div ref={el => this.headerEl = el} className="p-dialog-header" onMouseDown={this.onDragStart}>
-                    <span id={this.id + '_header'} className="p-dialog-title">{header}</span>
+                    <span id={this.state.id + '_header'} className="p-dialog-title">{header}</span>
                     <div className="p-dialog-header-icons">
                         {icons}
                         {maximizeIcon}
@@ -591,7 +595,7 @@ export class Dialog extends Component {
         let contentClassName = classNames('p-dialog-content', this.props.contentClassName)
 
         return (
-            <div id={this.id + '_content'} ref={el => this.contentEl = el} className={contentClassName} style={this.props.contentStyle}>
+            <div id={this.state.id + '_content'} ref={el => this.contentEl = el} className={contentClassName} style={this.props.contentStyle}>
                 {this.props.children}
             </div>
         );
@@ -638,8 +642,8 @@ export class Dialog extends Component {
             <div ref={(el) => this.mask = el} className={maskClassName} onClick={this.onMaskClick}>
                 <CSSTransition nodeRef={this.dialogRef} classNames="p-dialog" timeout={transitionTimeout} in={this.state.visible} unmountOnExit
                     onEnter={this.onEnter} onEntered={this.onEntered} onExited={this.onExited}>
-                    <div ref={this.dialogRef} id={this.id} className={className} style={this.props.style}
-                        role="dialog" aria-labelledby={this.id + '_header'} aria-describedby={this.id + '_content'} aria-modal={this.props.modal}>
+                    <div ref={this.dialogRef} id={this.state.id} className={className} style={this.props.style}
+                        role="dialog" aria-labelledby={this.state.id + '_header'} aria-describedby={this.state.id + '_content'} aria-modal={this.props.modal}>
                         {header}
                         {content}
                         {footer}

@@ -140,7 +140,6 @@ export class Dropdown extends Component {
         this.resetFilter = this.resetFilter.bind(this);
         this.clear = this.clear.bind(this);
 
-        this.id = this.props.id || UniqueComponentId();
         this.overlayRef = createRef();
         this.inputRef = createRef(this.props.inputRef);
     }
@@ -457,7 +456,7 @@ export class Dropdown extends Component {
                 preventDefault: () => { },
                 target: {
                     name: this.props.name,
-                    id: this.id,
+                    id: this.props.id,
                     value: event.target.value,
                 }
             });
@@ -503,7 +502,7 @@ export class Dropdown extends Component {
                 preventDefault: () => { },
                 target: {
                     name: this.props.name,
-                    id: this.id,
+                    id: this.props.id,
                     value: undefined
                 }
             });
@@ -527,7 +526,7 @@ export class Dropdown extends Component {
                     preventDefault: () => { },
                     target: {
                         name: this.props.name,
-                        id: this.id,
+                        id: this.props.id,
                         value: optionValue
                     }
                 });
@@ -1018,7 +1017,7 @@ export class Dropdown extends Component {
         let clearIcon = this.renderClearIcon();
 
         return (
-            <div id={this.id} ref={(el) => this.container = el} className={className} style={this.props.style} onClick={this.onClick}
+            <div id={this.props.id} ref={(el) => this.container = el} className={className} style={this.props.style} onClick={this.onClick}
                 onMouseDown={this.props.onMouseDown} onContextMenu={this.props.onContextMenu}>
                 {keyboardHelper}
                 {hiddenSelect}

@@ -205,10 +205,9 @@ export class PanelMenu extends Component {
         super(props);
 
         this.state = {
+            id: props.id,
             activeItem: this.findActiveItem()
         };
-
-        this.id = this.props.id || UniqueComponentId();
     }
 
     onItemClick(event, item) {
@@ -276,6 +275,12 @@ export class PanelMenu extends Component {
         return this.state.activeItem && (this.props.multiple ? this.state.activeItem.indexOf(item) > -1: this.state.activeItem === item);
     }
 
+    componentDidMount() {
+        if (!this.state.id) {
+            this.setState({ id: UniqueComponentId() });
+        }
+    }
+
     renderPanelIcon(item) {
         const className = classNames('p-menuitem-icon', item.icon);
 
@@ -309,14 +314,14 @@ export class PanelMenu extends Component {
             <div key={item.label + '_' + index} className={className} style={item.style}>
                 <div className={headerClassName} style={item.style}>
                     <a href={item.url || '#'} className="p-panelmenu-header-link" onClick={(e) => this.onItemClick(e, item)} aria-expanded={active}
-                        id={this.id + '_header'} aria-controls={this.id + 'content'} aria-disabled={item.disabled}>
+                        id={this.state.id + '_header'} aria-controls={this.state.id + 'content'} aria-disabled={item.disabled}>
                         {toggleIcon}
                         {itemIcon}
                         <span className="p-menuitem-text">{item.label}</span>
                     </a>
                 </div>
                 <CSSTransition nodeRef={menuContentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={active} unmountOnExit>
-                    <div ref={menuContentRef} className={contentWrapperClassName} role="region" id={this.id + '_content'} aria-labelledby={this.id + '_header'}>
+                    <div ref={menuContentRef} className={contentWrapperClassName} role="region" id={this.state.id + '_content'} aria-labelledby={this.state.id + '_header'}>
                         <div className="p-panelmenu-content">
                             <PanelMenuSub model={item.items} className="p-panelmenu-root-submenu" multiple={this.props.multiple} />
                         </div>

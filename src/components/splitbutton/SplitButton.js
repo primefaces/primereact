@@ -52,6 +52,7 @@ export class SplitButton extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            id: props.id,
             overlayVisible: false
         };
 
@@ -63,7 +64,6 @@ export class SplitButton extends Component {
         this.onOverlayExited = this.onOverlayExited.bind(this);
         this.onPanelClick = this.onPanelClick.bind(this);
 
-        this.id = this.props.id || UniqueComponentId();
         this.overlayRef = React.createRef();
     }
 
@@ -180,6 +180,10 @@ export class SplitButton extends Component {
     }
 
     componentDidMount() {
+        if (!this.state.id) {
+            this.setState({ id: UniqueComponentId() });
+        }
+
         if (this.props.tooltip) {
             this.renderTooltip();
         }
@@ -234,13 +238,13 @@ export class SplitButton extends Component {
         const buttonContent = this.props.buttonTemplate ? ObjectUtils.getJSXElement(this.props.buttonTemplate, this.props) : null;
 
         return (
-            <div id={this.id} className={className} style={this.props.style} ref={el => this.container = el}>
+            <div id={this.state.id} className={className} style={this.props.style} ref={el => this.container = el}>
                 <Button ref={(el) => this.defaultButton = el} type="button" className="p-splitbutton-defaultbutton" icon={this.props.icon} label={this.props.label} onClick={this.props.onClick} disabled={this.props.disabled} tabIndex={this.props.tabIndex}>
                     {buttonContent}
                 </Button>
                 <Button type="button" className="p-splitbutton-menubutton" icon="pi pi-chevron-down" onClick={this.onDropdownButtonClick} disabled={this.props.disabled}
-                    aria-expanded={this.state.overlayVisible} aria-haspopup aria-owns={this.id + '_overlay'} />
-                <SplitButtonPanel ref={this.overlayRef} appendTo={this.props.appendTo} id={this.id + '_overlay'}
+                    aria-expanded={this.state.overlayVisible} aria-haspopup aria-owns={this.state.id + '_overlay'} />
+                <SplitButtonPanel ref={this.overlayRef} appendTo={this.props.appendTo} id={this.state.id + '_overlay'}
                     menuStyle={this.props.menuStyle} menuClassName={this.props.menuClassName} onClick={this.onPanelClick}
                     in={this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
                     {items}

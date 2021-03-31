@@ -58,14 +58,19 @@ export class Accordion extends Component {
 
     constructor(props) {
         super(props);
+        let state = {
+            id: this.props.id
+        };
+
         if (!this.props.onTabChange) {
-            this.state = {
+            state = {
+                ...state,
                 activeIndex: props.activeIndex
             };
         }
 
+        this.state = state;
         this.contentWrappers = [];
-        this.id = this.props.id || UniqueComponentId();
     }
 
     onTabHeaderClick(event, tab, index) {
@@ -113,11 +118,17 @@ export class Accordion extends Component {
         return this.props.multiple ? (activeIndex && activeIndex.indexOf(index) >= 0) : activeIndex === index;
     }
 
+    componentDidMount() {
+        if (!this.state.id) {
+            this.setState({ id: UniqueComponentId() });
+        }
+    }
+
     renderTabHeader(tab, selected, index) {
         const tabHeaderClass = classNames('p-accordion-header', {'p-highlight': selected, 'p-disabled': tab.props.disabled}, tab.props.headerClassName);
         const iconClassName = classNames('p-accordion-toggle-icon', { [`${this.props.expandIcon}`]: !selected, [`${this.props.collapseIcon}`]: selected });
-        const id = this.id + '_header_' + index;
-        const ariaControls = this.id + '_content_' + index;
+        const id = this.state.id + '_header_' + index;
+        const ariaControls = this.state.id + '_content_' + index;
         const tabIndex = tab.props.disabled ? -1 : null;
         const header = tab.props.headerTemplate ? ObjectUtils.getJSXElement(tab.props.headerTemplate, tab.props) : <span className="p-accordion-header-text">{tab.props.header}</span>;
 
@@ -133,12 +144,12 @@ export class Accordion extends Component {
 
     renderTabContent(tab, selected, index) {
         const className = classNames('p-toggleable-content', tab.props.contentClassName);
-        const id = this.id + '_content_' + index;
+        const id = this.state.id + '_content_' + index;
         const toggleableContentRef = React.createRef();
 
         return (
             <CSSTransition nodeRef={toggleableContentRef} classNames="p-toggleable-content" timeout={{enter: 1000, exit: 450}} in={selected} unmountOnExit>
-                <div ref={toggleableContentRef} id={id} className={className} style={tab.props.contentStyle} role="region" aria-labelledby={this.id + '_header_' +index}>
+                <div ref={toggleableContentRef} id={id} className={className} style={tab.props.contentStyle} role="region" aria-labelledby={this.state.id + '_header_' +index}>
                     <div className="p-accordion-content">
                         {tab.props.children}
                     </div>
@@ -176,7 +187,7 @@ export class Accordion extends Component {
         const tabs = this.renderTabs();
 
         return (
-            <div ref={(el) => this.container = el} id={this.id} className={className} style={this.props.style}>
+            <div ref={(el) => this.container = el} id={this.state.id} className={className} style={this.props.style}>
                 {tabs}
             </div>
         );

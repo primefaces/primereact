@@ -5,7 +5,6 @@ import { classNames } from '../utils/ClassNames';
 import { ColorPickerPanel } from './ColorPickerPanel';
 import { tip } from '../tooltip/Tooltip';
 import ObjectUtils from '../utils/ObjectUtils';
-import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 
@@ -68,7 +67,6 @@ export class ColorPicker extends Component {
         this.onDrag = this.onDrag.bind(this);
         this.onDragEnd = this.onDragEnd.bind(this);
 
-        this.id = this.props.id || UniqueComponentId();
         this.overlayRef = createRef();
         this.inputRef = createRef(this.props.inputRef);
     }
@@ -243,7 +241,7 @@ export class ColorPicker extends Component {
                 preventDefault: () => { },
                 target: {
                     name: this.props.name,
-                    id: this.id,
+                    id: this.props.id,
                     value: value
                 }
             })
@@ -695,7 +693,7 @@ export class ColorPicker extends Component {
         let input = this.renderInput();
 
         return (
-            <div ref={(el) => this.container = el} id={this.id} style={this.props.style} className={containerClassName}>
+            <div ref={(el) => this.container = el} id={this.props.id} style={this.props.style} className={containerClassName}>
                 {input}
                 <ColorPickerPanel ref={this.overlayRef} appendTo={this.props.appendTo} inline={this.props.inline} disabled={this.props.disabled} onClick={this.onPanelClick}
                     in={this.props.inline || this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>

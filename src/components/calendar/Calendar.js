@@ -7,7 +7,6 @@ import DomHandler from '../utils/DomHandler';
 import { classNames } from '../utils/ClassNames';
 import { tip } from '../tooltip/Tooltip';
 import { Ripple } from '../ripple/Ripple';
-import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import { localeOption, localeOptions } from '../api/Locale';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
@@ -216,7 +215,6 @@ export class Calendar extends Component {
         this.onOverlayExited = this.onOverlayExited.bind(this);
         this.reFocusInputField = this.reFocusInputField.bind(this);
 
-        this.id = this.props.id || UniqueComponentId();
         this.overlayRef = createRef();
         this.inputRef = createRef(this.props.inputRef);
     }
@@ -1502,7 +1500,7 @@ export class Calendar extends Component {
                 preventDefault: () => { },
                 target: {
                     name: this.props.name,
-                    id: this.id,
+                    id: this.props.id,
                     value: value
                 }
             });
@@ -3008,7 +3006,7 @@ export class Calendar extends Component {
         const footer = this.renderFooter();
 
         return (
-            <span ref={(el) => this.container = el} id={this.id} className={className} style={this.props.style}>
+            <span ref={(el) => this.container = el} id={this.props.id} className={className} style={this.props.style}>
                 {input}
                 {button}
                 <CalendarPanel ref={this.overlayRef} className={panelClassName} style={this.props.panelStyle} appendTo={this.props.appendTo} inline={this.props.inline} onClick={this.onPanelClick}

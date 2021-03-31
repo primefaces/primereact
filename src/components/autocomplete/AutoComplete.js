@@ -127,6 +127,7 @@ export class AutoComplete extends Component {
         super(props);
 
         this.state = {
+            id: this.props.id,
             searching: false,
             focused: false,
             overlayVisible: false
@@ -150,8 +151,6 @@ export class AutoComplete extends Component {
         this.onOverlayExited = this.onOverlayExited.bind(this);
         this.onPanelClick = this.onPanelClick.bind(this);
 
-        this.id = this.props.id || UniqueComponentId();
-        this.listId = this.id + '_list';
         this.overlayRef = createRef();
         this.inputRef = createRef(this.props.inputRef);
     }
@@ -240,7 +239,7 @@ export class AutoComplete extends Component {
                 preventDefault: () => { },
                 target: {
                     name: this.props.name,
-                    id: this.id,
+                    id: this.state.id,
                     value: value
                 }
             });
@@ -660,6 +659,10 @@ export class AutoComplete extends Component {
     componentDidMount() {
         this.updateInputRef();
 
+        if (!this.state.id) {
+            this.setState({ id: UniqueComponentId() });
+        }
+
         if (this.props.autoFocus && this.inputRef && this.inputRef.current) {
             this.inputRef.current.focus();
         }
@@ -728,7 +731,7 @@ export class AutoComplete extends Component {
 
         return (
             <InputText ref={this.inputRef} id={this.props.inputId} type={this.props.type} name={this.props.name}
-                defaultValue={this.formatValue(this.props.value)} role="searchbox" aria-autocomplete="list" aria-controls={this.listId}
+                defaultValue={this.formatValue(this.props.value)} role="searchbox" aria-autocomplete="list" aria-controls={this.state.id + '_list'}
                 aria-labelledby={this.props.ariaLabelledBy} className={inputClassName} style={this.props.inputStyle} autoComplete="off"
                 readOnly={this.props.readOnly} disabled={this.props.disabled} placeholder={this.props.placeholder} size={this.props.size}
                 maxLength={this.props.maxlength} tabIndex={this.props.tabIndex}
@@ -758,7 +761,7 @@ export class AutoComplete extends Component {
         return (
             <li className="p-autocomplete-input-token">
                 <input ref={this.inputRef} type={this.props.type} disabled={this.props.disabled} placeholder={this.props.placeholder}
-                    role="searchbox" aria-autocomplete="list" aria-controls={this.listId} aria-labelledby={this.props.ariaLabelledBy}
+                    role="searchbox" aria-autocomplete="list" aria-controls={this.state.id + '_list'} aria-labelledby={this.props.ariaLabelledBy}
                     autoComplete="off" tabIndex={this.props.tabIndex} onChange={this.onInputChange} id={this.props.inputId} name={this.props.name}
                     style={this.props.inputStyle} className={this.props.inputClassName} maxLength={this.props.maxlength}
                     onKeyUp={this.props.onKeyUp} onKeyDown={this.onInputKeyDown} onKeyPress={this.props.onKeyPress}
@@ -815,12 +818,12 @@ export class AutoComplete extends Component {
         }
 
         return (
-            <span ref={(el) => this.container = el} id={this.id} style={this.props.style} className={className} aria-haspopup="listbox"
-                aria-expanded={this.state.overlayVisible} aria-owns={this.listId}>
+            <span ref={(el) => this.container = el} id={this.state.id} style={this.props.style} className={className} aria-haspopup="listbox"
+                aria-expanded={this.state.overlayVisible} aria-owns={this.state.id + '_list'}>
                 {input}
                 {loader}
                 {dropdown}
-                <AutoCompletePanel ref={this.overlayRef} suggestions={this.props.suggestions} field={this.props.field} listId={this.listId}
+                <AutoCompletePanel ref={this.overlayRef} suggestions={this.props.suggestions} field={this.props.field} listId={this.state.id + '_list'}
                     appendTo={this.props.appendTo} scrollHeight={this.props.scrollHeight} itemTemplate={this.props.itemTemplate} onItemClick={this.selectItem} ariaSelected={this.ariaSelected}
                     panelStyle={this.props.panelStyle} panelClassName={this.props.panelClassName} onClick={this.onPanelClick}
                     optionGroupLabel={this.props.optionGroupLabel} optionGroupChildren={this.props.optionGroupChildren} optionGroupTemplate={this.props.optionGroupTemplate}

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import ObjectUtils from '../utils/ObjectUtils';
 import DomHandler from '../utils/DomHandler';
-import UniqueComponentId from '../utils/UniqueComponentId';
 import { CSSTransition } from "react-transition-group";
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import { CascadeSelectSub } from "./CascadeSelectSub";
@@ -78,7 +77,6 @@ export class CascadeSelect extends Component {
 
         this.dirty = false;
         this.selectionPath = null;
-        this.id = this.props.id || UniqueComponentId();
         this.overlayRef = createRef();
         this.inputRef = createRef(this.props.inputRef);
 
@@ -437,7 +435,7 @@ export class CascadeSelect extends Component {
         let overlay = this.renderOverlay();
 
         return (
-            <div id={this.id} ref={(el) => this.container = el} className={className} style={this.props.style} onClick={this.onClick}>
+            <div id={this.props.id} ref={(el) => this.container = el} className={className} style={this.props.style} onClick={this.onClick}>
                 {keyboardHelper}
                 {labelElement}
                 {dropdownIcon}

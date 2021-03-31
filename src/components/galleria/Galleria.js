@@ -78,6 +78,7 @@ export class Galleria extends Component {
         super(props);
 
         this.state = {
+            id: props.id,
             visible: false,
             slideShowActive: false
         }
@@ -99,7 +100,6 @@ export class Galleria extends Component {
         this.onExit = this.onExit.bind(this);
         this.onExited = this.onExited.bind(this);
 
-        this.id = this.props.id || UniqueComponentId();
         this.galleriaRef = React.createRef();
     }
 
@@ -177,6 +177,12 @@ export class Galleria extends Component {
         return this.props.thumbnailsPosition === 'left' || this.props.thumbnailsPosition === 'right';
     }
 
+    componentDidMount() {
+        if (!this.state.id) {
+            this.setState({ id: UniqueComponentId() });
+        }
+    }
+
     componentWillUnmount() {
         if (this.state.slideShowActive) {
             this.stopSlideShow();
@@ -225,7 +231,7 @@ export class Galleria extends Component {
         const header = this.renderHeader();
         const footer = this.renderFooter();
         const element = (
-            <div ref={this.galleriaRef} id={this.id} className={galleriaClassName} style={this.props.style}>
+            <div ref={this.galleriaRef} id={this.state.id} className={galleriaClassName} style={this.props.style}>
                 { closeIcon}
                 { header}
                 <div className="p-galleria-content">
@@ -236,7 +242,7 @@ export class Galleria extends Component {
                         startSlideShow={this.startSlideShow} stopSlideShow={this.stopSlideShow} />
 
                     {
-                        this.props.showThumbnails && <GalleriaThumbnails containerId={this.id} value={this.props.value} activeItemIndex={this.activeItemIndex} onActiveItemChange={this.onActiveItemChange}
+                        this.props.showThumbnails && <GalleriaThumbnails containerId={this.state.id} value={this.props.value} activeItemIndex={this.activeItemIndex} onActiveItemChange={this.onActiveItemChange}
                             itemTemplate={this.props.thumbnail} numVisible={this.props.numVisible} responsiveOptions={this.props.responsiveOptions} circular={this.props.circular}
                             isVertical={isVertical} contentHeight={this.props.verticalThumbnailViewPortHeight} showThumbnailNavigators={this.props.showThumbnailNavigators}
                             autoPlay={this.props.autoPlay} slideShowActive={this.state.slideShowActive} stopSlideShow={this.stopSlideShow} />

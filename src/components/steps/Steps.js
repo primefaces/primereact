@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
-import UniqueComponentId from '../utils/UniqueComponentId';
 import ObjectUtils from '../utils/ObjectUtils';
 
 export class Steps extends Component {
@@ -25,12 +24,6 @@ export class Steps extends Component {
         className: PropTypes.string,
         onSelect: PropTypes.func
     };
-
-    constructor(props) {
-        super(props);
-
-        this.id = this.props.id || UniqueComponentId();
-    }
 
     itemClick(event, item, index) {
         if (this.props.readOnly || item.disabled) {
@@ -119,7 +112,7 @@ export class Steps extends Component {
         const items = this.renderItems();
 
         return (
-            <div id={this.id} className={className} style={this.props.style}>
+            <div id={this.props.id} className={className} style={this.props.style}>
                 {items}
             </div>
         );

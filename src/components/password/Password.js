@@ -90,7 +90,6 @@ export class Password extends Component {
         this.onOverlayExited = this.onOverlayExited.bind(this);
         this.onPanelClick = this.onPanelClick.bind(this);
 
-        this.id = this.props.id || UniqueComponentId();
         this.overlayRef = createRef();
         this.inputRef = createRef(this.props.inputRef);
         this.mediumCheckRegExp = new RegExp(this.props.mediumRegex);
@@ -479,8 +478,8 @@ export class Password extends Component {
         const panel = this.renderPanel();
 
         return (
-            <div ref={el => this.container = el} className={containerClassName} style={this.props.style}>
-                <InputText id={this.id} ref={this.inputRef} {...inputProps} type={type} className={inputClassName} style={this.props.inputStyle}
+            <div ref={el => this.container = el} id={this.props.id} className={containerClassName} style={this.props.style}>
+                <InputText ref={this.inputRef} {...inputProps} type={type} className={inputClassName} style={this.props.inputStyle}
                     onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyup} onInput={this.onInput} />
                 {icon}
                 {panel}

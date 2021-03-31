@@ -45,12 +45,6 @@ export class Splitter extends Component {
         onResizeEnd: PropTypes.func
     };
 
-    constructor(props) {
-        super(props);
-
-        this.id = this.props.id || UniqueComponentId();
-    }
-
     bindMouseListeners() {
         if (!this.mouseMoveListener) {
             this.mouseMoveListener = event => this.onResize(event)
@@ -280,7 +274,7 @@ export class Splitter extends Component {
         const panels = this.renderPanels();
 
         return (
-            <div ref={(el) => this.container = el} id={this.id} className={className} style={this.props.style}>
+            <div ref={(el) => this.container = el} id={this.props.id} className={className} style={this.props.style}>
                 {panels}
             </div>
         );
