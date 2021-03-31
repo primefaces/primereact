@@ -181,9 +181,9 @@ export class Dialog extends Component {
             let height = DomHandler.getOuterHeight(this.dialogEl);
             let deltaX = event.pageX - this.lastPageX;
             let deltaY = event.pageY - this.lastPageY;
-            let offset = DomHandler.getOffset(this.dialogEl);
-            let leftPos = offset.left - DomHandler.getWindowScrollLeft() + deltaX;
-            let topPos = offset.top - DomHandler.getWindowScrollTop() + deltaY;
+            let offset = this.dialogEl.getBoundingClientRect();
+            let leftPos = offset.left + deltaX;
+            let topPos = offset.top + deltaY;
             let viewport = DomHandler.getViewport();
 
             this.dialogEl.style.position = 'fixed';
@@ -247,7 +247,7 @@ export class Dialog extends Component {
             let newHeight = height + deltaY;
             let minWidth = this.dialogEl.style.minWidth;
             let minHeight = this.dialogEl.style.minHeight;
-            let offset = DomHandler.getOffset(this.dialogEl);
+            let offset = this.dialogEl.getBoundingClientRect();
             let viewport = DomHandler.getViewport();
             let hasBeenDragged = !parseInt(this.dialogEl.style.top) || !parseInt(this.dialogEl.style.left);
 
