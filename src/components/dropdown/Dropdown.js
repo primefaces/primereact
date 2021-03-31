@@ -7,7 +7,6 @@ import { classNames } from '../utils/ClassNames';
 import { DropdownPanel } from './DropdownPanel';
 import { DropdownItem } from './DropdownItem';
 import { tip } from '../tooltip/Tooltip';
-import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 
