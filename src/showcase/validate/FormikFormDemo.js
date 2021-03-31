@@ -475,7 +475,7 @@ export const FormikFormDemo = () => {
         'src/demo/FormDemo.css': {
             content: `
 .form-demo .card {
-    min-width: 500px;
+    min-width: 450px;
 }
 .form-demo .card form {
     margin-top: 2rem;
