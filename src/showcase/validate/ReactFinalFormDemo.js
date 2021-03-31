@@ -181,7 +181,7 @@ import { Password } from 'primereact/password';
 import { Checkbox } from 'primereact/checkbox';
 import { Dialog } from 'primereact/dialog';
 import { Divider } from 'primereact/divider';
-import { classNames } from 'primereact/utils/ClassNames';
+import { classNames } from 'primereact/utils';
 import { CountryService } from '../service/CountryService';
 import './FormDemo.css';
 
@@ -338,7 +338,7 @@ import { Password } from 'primereact/password';
 import { Checkbox } from 'primereact/checkbox';
 import { Dialog } from 'primereact/dialog';
 import { Divider } from 'primereact/divider';
-import { classNames } from 'primereact/utils/ClassNames';
+import { classNames } from 'primereact/utils';
 import { CountryService } from '../service/CountryService';
 import './FormDemo.css';
 

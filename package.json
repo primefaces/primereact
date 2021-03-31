@@ -27,7 +27,6 @@
     "@fullcalendar/timegrid": "4.0.1",
     "axios": "^0.21.1",
     "chart.js": "2.7.3",
-    "classnames": "^2.2.6",
     "codesandbox": "2.1.14",
     "core-js": "^3.6.5",
     "gulp": "^4.0.2",

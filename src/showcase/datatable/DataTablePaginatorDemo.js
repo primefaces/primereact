@@ -9,7 +9,7 @@ import { Dropdown } from '../../components/dropdown/Dropdown';
 import { InputText } from '../../components/inputtext/InputText';
 import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
-import classNames from 'classnames';
+import { classNames } from '../../components/utils/ClassNames';
 
 export class DataTablePaginatorDemo extends Component {
 
@@ -218,7 +218,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
 import { CustomerService } from '../service/CustomerService';
 import { Button } from 'primereact/button';
-import classNames from 'classnames';
+import { classNames } from 'primereact/utils';
 
 export class DataTablePaginatorDemo extends Component {
 
@@ -411,7 +411,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
 import { CustomerService } from '../service/CustomerService';
 import { Button } from 'primereact/button';
-import classNames from 'classnames';
+import { classNames } from 'primereact/utils';
 
 const DataTablePaginatorDemo = () => {
     const [customers1, setCustomers1] = useState([]);
@@ -587,7 +587,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
 import { CustomerService } from '../service/CustomerService';
 import { Button } from 'primereact/button';
-import classNames from 'classnames';
+import { classNames } from 'primereact/utils';
 
 const DataTablePaginatorDemo = () => {
     const [customers1, setCustomers1] = useState([]);

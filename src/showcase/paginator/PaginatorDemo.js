@@ -9,7 +9,7 @@ import { Tooltip } from '../../components/tooltip/Tooltip';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './PaginatorDemo.scss';
 import { PaginatorDoc } from './PaginatorDoc';
-import classNames from 'classnames';
+import { classNames } from '../../components/utils/ClassNames';
 
 export class PaginatorDemo extends Component {
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import classNames from 'classnames';
+import { classNames } from '../../components/utils/ClassNames';
 import { PhotoService } from '../service/PhotoService';
 import { Button } from '../../components/button/Button';
 import { Galleria } from '../../components/galleria/Galleria';
@@ -231,7 +231,7 @@ export class GalleriaAdvancedDemoDoc extends Component {
 {`
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import classNames from 'classnames';
+import { classNames } from 'primereact/utils';
 import { PhotoService } from '../service/PhotoService';
 import { Button } from 'primereact/button';
 import { Galleria } from 'primereact/galleria';

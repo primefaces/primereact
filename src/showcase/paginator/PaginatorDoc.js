@@ -21,7 +21,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
 import { Slider } from 'primereact/slider';
 import { Tooltip } from 'primereact/tooltip';
-import classNames from 'classnames';
+import { classNames } from 'primereact/utils';
 import './PaginatorDemo.css';
 
 export class PaginatorDemo extends Component {
@@ -243,7 +243,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
 import { Slider } from 'primereact/slider';
 import { Tooltip } from 'primereact/tooltip';
-import classNames from 'classnames';
+import { classNames } from 'primereact/utils';
 import './PaginatorDemo.css';
 
 const PaginatorDemo = () => {
@@ -439,7 +439,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
 import { Slider } from 'primereact/slider';
 import { Tooltip } from 'primereact/tooltip';
-import classNames from 'classnames';
+import { classNames } from 'primereact/utils';
 import './PaginatorDemo.css';
 
 const PaginatorDemo = () => {

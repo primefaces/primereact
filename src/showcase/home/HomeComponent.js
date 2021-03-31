@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import classNames from 'classnames';
+import { classNames } from '../../components/utils/ClassNames';
 import { Link } from 'react-router-dom';
 import AppContentContext from '../../AppContentContext';
 
