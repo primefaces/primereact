@@ -37,7 +37,7 @@ export class AppMenu extends Component {
             let filteredMenu = [];
             for (let item of this.state.menu) {
                 let copyItem = { ...item };
-                if (this.findFilteredItems(copyItem, searchVal) || this.isFilterMatched(copyItem, searchVal)) {
+                if (this.isFilterMatched(copyItem, searchVal) || this.findFilteredItems(copyItem, searchVal)) {
                     filteredMenu.push(copyItem);
                 }
             }
