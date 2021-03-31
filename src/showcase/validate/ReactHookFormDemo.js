@@ -41,7 +41,7 @@ export const ReactHookFormDemo = () => {
     const dialogFooter = <div className="p-d-flex p-jc-center"><Button label="OK" className="p-button-text" autoFocus onClick={() => setShowMessage(false)} /></div>;
     const passwordHeader = <h6>Pick a password</h6>;
     const passwordFooter = (
-        <>
+        <React.Fragment>
             <Divider />
             <p className="p-mt-2">Suggestions</p>
             <ul className="p-pl-2 p-ml-2 p-mt-0" style={{ lineHeight: '1.5' }}>
@@ -50,7 +50,7 @@ export const ReactHookFormDemo = () => {
                 <li>At least one numeric</li>
                 <li>Minimum 8 characters</li>
             </ul>
-        </>
+        </React.Fragment>
     );
 
     return (
@@ -181,7 +181,7 @@ export const ReactHookFormDemo = () => {
     const dialogFooter = <div className="p-d-flex p-jc-center"><Button label="OK" className="p-button-text" autoFocus onClick={() => setShowMessage(false)} /></div>;
     const passwordHeader = <h6>Pick a password</h6>;
     const passwordFooter = (
-        <>
+        <React.Fragment>
             <Divider />
             <p className="p-mt-2">Suggestions</p>
             <ul className="p-pl-2 p-ml-2 p-mt-0" style={{ lineHeight: '1.5' }}>
@@ -190,7 +190,7 @@ export const ReactHookFormDemo = () => {
                 <li>At least one numeric</li>
                 <li>Minimum 8 characters</li>
             </ul>
-        </>
+        </React.Fragment>
     );
 
     return (
@@ -308,7 +308,7 @@ export const ReactHookFormDemo = () => {
     const dialogFooter = <div className="p-d-flex p-jc-center"><Button label="OK" className="p-button-text" autoFocus onClick={() => setShowMessage(false)} /></div>;
     const passwordHeader = <h6>Pick a password</h6>;
     const passwordFooter = (
-        <>
+        <React.Fragment>
             <Divider />
             <p className="p-mt-2">Suggestions</p>
             <ul className="p-pl-2 p-ml-2 p-mt-0" style={{ lineHeight: '1.5' }}>
@@ -317,7 +317,7 @@ export const ReactHookFormDemo = () => {
                 <li>At least one numeric</li>
                 <li>Minimum 8 characters</li>
             </ul>
-        </>
+        </React.Fragment>
     );
 
     return (
