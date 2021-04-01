@@ -95,7 +95,7 @@ export class SplitButton extends Component {
     }
 
     onOverlayEnter() {
-        ZIndexUtils.clear('overlay', this.overlayRef.current);
+        ZIndexUtils.set('overlay', this.overlayRef.current);
         this.alignPanel();
     }
 
