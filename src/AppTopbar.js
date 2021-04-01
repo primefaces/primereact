@@ -154,7 +154,7 @@ export class AppTopbar extends Component {
     render() {
         return (
             <div className="layout-topbar">
-                <Tooltip target=".app-theme" position="bottom" baseZIndex={1000}/>
+                <Tooltip target=".app-theme" position="bottom" />
 
                 <button type="button" className="p-link menu-button" onClick={this.onMenuButtonClick} aria-haspopup aria-label="Menu">
                     <i className="pi pi-bars"></i>

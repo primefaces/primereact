@@ -34,7 +34,6 @@ export class ConfirmDialogDemo extends Component {
             message: 'Are you sure you want to proceed?',
             header: 'Confirmation',
             icon: 'pi pi-exclamation-triangle',
-            baseZIndex: 1000,
             accept: this.accept,
             reject: this.reject
         });
@@ -46,7 +45,6 @@ export class ConfirmDialogDemo extends Component {
             header: 'Delete Confirmation',
             icon: 'pi pi-info-circle',
             acceptClassName: 'p-button-danger',
-            baseZIndex: 1000,
             accept: this.accept,
             reject: this.reject
         });
@@ -58,7 +56,6 @@ export class ConfirmDialogDemo extends Component {
             header: 'Delete Confirmation',
             icon: 'pi pi-info-circle',
             position,
-            baseZIndex: 1000,
             accept: this.accept,
             reject: this.reject
         });
@@ -102,7 +99,7 @@ export class ConfirmDialogDemo extends Component {
 
                         <h5>Using ConfirmDialog tag</h5>
                         <ConfirmDialog visible={this.state.visible} onHide={() => this.setState({ visible: false })} message="Are you sure you want to proceed?"
-                            header="Confirmation" icon="pi pi-exclamation-triangle" accept={this.accept} reject={this.reject} baseZIndex={1000}/>
+                            header="Confirmation" icon="pi pi-exclamation-triangle" accept={this.accept} reject={this.reject}/>
                         <Button onClick={() => this.setState({ visible: true })} icon="pi pi-check" label="Confirm" />
                     </div>
                 </div>
