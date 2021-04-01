@@ -9,6 +9,7 @@ import { DropdownItem } from './DropdownItem';
 import { tip } from '../tooltip/Tooltip';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
+import { ZIndexUtils } from '../utils/ZIndexUtils';
 
 export class Dropdown extends Component {
 
@@ -584,7 +585,7 @@ export class Dropdown extends Component {
     }
 
     onOverlayEnter() {
-        this.overlayRef.current.style.zIndex = String(DomHandler.generateZIndex());
+        ZIndexUtils.set('overlay', this.overlayRef.current);
         this.alignPanel();
         this.scrollInView();
     }
@@ -610,7 +611,7 @@ export class Dropdown extends Component {
             this.resetFilter();
         }
 
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.overlayRef.current);
     }
 
     alignPanel() {
@@ -811,7 +812,7 @@ export class Dropdown extends Component {
             this.hideTimeout = null;
         }
 
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.overlayRef.current);
     }
 
     componentDidUpdate(prevProps) {

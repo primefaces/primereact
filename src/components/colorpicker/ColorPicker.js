@@ -7,6 +7,7 @@ import { tip } from '../tooltip/Tooltip';
 import ObjectUtils from '../utils/ObjectUtils';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
+import { ZIndexUtils } from '../utils/ZIndexUtils';
 
 export class ColorPicker extends Component {
 
@@ -287,7 +288,7 @@ export class ColorPicker extends Component {
     }
 
     onOverlayEnter() {
-        this.overlayRef.current.style.zIndex = String(DomHandler.generateZIndex());
+        ZIndexUtils.set('overlay', this.overlayRef.current);
         this.alignPanel();
     }
 
@@ -304,7 +305,7 @@ export class ColorPicker extends Component {
     }
 
     onOverlayExited() {
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.overlayRef.current);
     }
 
     onInputClick() {
@@ -609,7 +610,7 @@ export class ColorPicker extends Component {
             this.tooltip = null;
         }
 
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.overlayRef.current);
     }
 
     updateUI() {

@@ -10,6 +10,7 @@ import ObjectUtils from '../utils/ObjectUtils';
 import { localeOption } from '../api/Locale';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 import { Portal } from '../portal/Portal';
+import { ZIndexUtils } from '../utils/ZIndexUtils';
 
 export function confirmPopup(props) {
     let appendTo = props.appendTo || document.body;
@@ -230,7 +231,7 @@ export class ConfirmPopup extends Component {
     }
 
     onEnter() {
-        this.overlayRef.current.style.zIndex = String(DomHandler.generateZIndex());
+        ZIndexUtils.set('overlay', this.overlayRef.current);
         this.align();
     }
 
@@ -247,7 +248,7 @@ export class ConfirmPopup extends Component {
     }
 
     onExited() {
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.overlayRef.current);
     }
 
     align() {
@@ -289,7 +290,7 @@ export class ConfirmPopup extends Component {
             this.scrollHandler = null;
         }
 
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.overlayRef.current);
     }
 
     renderContent() {

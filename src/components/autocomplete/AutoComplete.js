@@ -10,6 +10,7 @@ import { tip } from '../tooltip/Tooltip';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
+import { ZIndexUtils } from '../utils/ZIndexUtils';
 
 export class AutoComplete extends Component {
 
@@ -282,7 +283,7 @@ export class AutoComplete extends Component {
     }
 
     onOverlayEnter() {
-        this.overlayRef.current.style.zIndex = String(DomHandler.generateZIndex());
+        ZIndexUtils.set('overlay', this.overlayRef.current);
         this.alignOverlay();
     }
 
@@ -305,7 +306,7 @@ export class AutoComplete extends Component {
     }
 
     onOverlayExited() {
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.overlayRef.current);
     }
 
     alignOverlay() {
@@ -713,7 +714,7 @@ export class AutoComplete extends Component {
             clearTimeout(this.timeout);
         }
 
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.overlayRef.current);
     }
 
     renderTooltip() {

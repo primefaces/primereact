@@ -8,6 +8,7 @@ import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandle
 import { CascadeSelectSub } from "./CascadeSelectSub";
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 import { Portal } from '../portal/Portal';
+import { ZIndexUtils } from '../utils/ZIndexUtils';
 
 export class CascadeSelect extends Component {
 
@@ -246,7 +247,7 @@ export class CascadeSelect extends Component {
     }
 
     onOverlayEnter() {
-        this.overlayRef.current.style.zIndex = String(DomHandler.generateZIndex());
+        ZIndexUtils.set('overlay', this.overlayRef.current);
         this.alignOverlay();
     }
 
@@ -270,7 +271,7 @@ export class CascadeSelect extends Component {
     }
 
     onOverlayExited() {
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.overlayRef.current);
     }
 
     alignOverlay() {
@@ -365,7 +366,7 @@ export class CascadeSelect extends Component {
             this.scrollHandler = null;
         }
 
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.overlayRef.current);
     }
 
     componentDidUpdate(prevProps) {

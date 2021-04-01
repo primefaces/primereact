@@ -8,6 +8,7 @@ import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 import { Portal } from '../portal/Portal';
+import { ZIndexUtils } from '../utils/ZIndexUtils';
 
 export class OverlayPanel extends Component {
 
@@ -178,7 +179,7 @@ export class OverlayPanel extends Component {
     }
 
     onEnter() {
-        this.overlayRef.current.style.zIndex = String(DomHandler.generateZIndex());
+        ZIndexUtils.set('overlay', this.overlayRef.current);
         this.overlayRef.current.setAttribute(this.attributeSelector, '');
         this.align();
     }
@@ -196,7 +197,7 @@ export class OverlayPanel extends Component {
     }
 
     onExited() {
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.overlayRef.current);
     }
 
     align() {
@@ -257,7 +258,7 @@ export class OverlayPanel extends Component {
             this.styleElement = null;
         }
 
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.overlayRef.current);
     }
 
     renderCloseIcon() {

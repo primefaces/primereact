@@ -4,6 +4,7 @@ import { classNames } from '../utils/ClassNames';
 import { CSSTransition } from 'react-transition-group';
 import DomHandler from '../utils/DomHandler';
 import { Ripple } from '../ripple/Ripple';
+import { ZIndexUtils } from '../utils/ZIndexUtils';
 
 export class ScrollTop extends Component {
 
@@ -81,11 +82,11 @@ export class ScrollTop extends Component {
     }
 
     onEnter() {
-        this.scrollElementRef.current.style.zIndex = String(DomHandler.generateZIndex());
+        ZIndexUtils.set('overlay', this.scrollElementRef.current);
     }
 
     onExited() {
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.scrollElementRef.current);
     }
 
     componentDidMount() {
@@ -101,7 +102,7 @@ export class ScrollTop extends Component {
         else if (this.props.target === 'parent')
             this.unbindParentScrollListener();
 
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.scrollElementRef.current);
     }
 
     render() {

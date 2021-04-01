@@ -10,6 +10,7 @@ import UniqueComponentId from '../utils/UniqueComponentId';
 import ObjectUtils from '../utils/ObjectUtils';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
+import { ZIndexUtils } from '../utils/ZIndexUtils';
 
 export class SplitButton extends Component {
 
@@ -94,7 +95,7 @@ export class SplitButton extends Component {
     }
 
     onOverlayEnter() {
-        this.overlayRef.current.style.zIndex = String(DomHandler.generateZIndex());
+        ZIndexUtils.clear('overlay', this.overlayRef.current);
         this.alignPanel();
     }
 
@@ -111,7 +112,7 @@ export class SplitButton extends Component {
     }
 
     onOverlayExited() {
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.overlayRef.current);
     }
 
     alignPanel() {
@@ -211,7 +212,7 @@ export class SplitButton extends Component {
             this.tooltip = null;
         }
 
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.overlayRef.current);
     }
 
     renderTooltip() {

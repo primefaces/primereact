@@ -11,6 +11,7 @@ import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandle
 import { localeOption, localeOptions } from '../api/Locale';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 import { mask } from '../utils/Mask';
+import { ZIndexUtils } from '../utils/ZIndexUtils';
 
 export class Calendar extends Component {
 
@@ -318,7 +319,7 @@ export class Calendar extends Component {
             this.scrollHandler = null;
         }
 
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.overlayRef.current);
     }
 
     renderTooltip() {
@@ -1523,7 +1524,7 @@ export class Calendar extends Component {
 
     onOverlayEnter() {
         if (this.props.autoZIndex) {
-            this.overlayRef.current.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
+            ZIndexUtils.set(this.props.touchUI ? 'modal': 'overlay', this.overlayRef.current, this.props.baseZIndex);
         }
         this.alignOverlay();
     }
@@ -1541,7 +1542,7 @@ export class Calendar extends Component {
     }
 
     onOverlayExited() {
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.overlayRef.current);
     }
 
     bindDocumentClickListener() {
@@ -1625,7 +1626,7 @@ export class Calendar extends Component {
     enableModality() {
         if (!this.touchUIMask) {
             this.touchUIMask = document.createElement('div');
-            this.touchUIMask.style.zIndex = String(parseInt(this.overlayRef.current.style.zIndex, 10) - 1);
+            this.touchUIMask.style.zIndex = String(ZIndexUtils.get(this.overlayRef.current) - 1);
             DomHandler.addMultipleClasses(this.touchUIMask, 'p-component-overlay p-datepicker-mask p-datepicker-mask-scrollblocker');
 
             this.touchUIMaskClickListener = () => {
