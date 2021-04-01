@@ -5,6 +5,7 @@ import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
 import { CSSTransition } from 'react-transition-group';
 import { Ripple } from '../ripple/Ripple';
+import { ZIndexUtils } from '../utils/ZIndexUtils';
 
 export class Sidebar extends Component {
 
@@ -64,7 +65,7 @@ export class Sidebar extends Component {
     }
 
     onEnter() {
-        this.sidebarRef.current.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
+        ZIndexUtils.set('modal', this.sidebarRef.current, this.props.baseZIndex);
         if (this.props.modal) {
             this.enableModality();
         }
@@ -94,13 +95,13 @@ export class Sidebar extends Component {
     }
 
     onExited() {
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.sidebarRef.current);
     }
 
     enableModality() {
         if (!this.mask) {
             this.mask = document.createElement('div');
-            this.mask.style.zIndex = String(parseInt(this.sidebarRef.current.style.zIndex, 10) - 1);
+            this.mask.style.zIndex = String(ZIndexUtils.get(this.sidebarRef.current) - 1);
             let maskClassName = 'p-component-overlay p-sidebar-mask';
             if (this.props.blockScroll) {
                 maskClassName += ' p-sidebar-mask-scrollblocker';
@@ -146,7 +147,7 @@ export class Sidebar extends Component {
     bindDocumentEscapeListener() {
         this.documentEscapeListener = (event) => {
             if (event.which === 27) {
-                if (parseInt(this.sidebarRef.current.style.zIndex, 10) === (DomHandler.getCurrentZIndex() + this.props.baseZIndex)) {
+                if (ZIndexUtils.get(this.sidebarRef.current) === ZIndexUtils.getCurrent()) {
                     this.onCloseClick(event);
                 }
             }
@@ -192,7 +193,7 @@ export class Sidebar extends Component {
         this.unbindMaskClickListener();
         this.disableModality();
 
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.sidebarRef.current);
     }
 
     renderCloseIcon() {

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import { ToastMessage } from './ToastMessage';
-import DomHandler from '../utils/DomHandler';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { ZIndexUtils } from '../utils/ZIndexUtils';
 
 let messageIdx = 0;
 
@@ -58,14 +58,16 @@ export class Toast extends Component {
                 messages: newMessages
             });
 
-            this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
+            ZIndexUtils.set('modal', this.container, this.props.baseZIndex);
         }
     }
 
     clear() {
+        ZIndexUtils.clear(this.container);
+
         this.setState({
             messages: []
-        })
+        });
     }
 
     onClose(message) {
@@ -77,6 +79,10 @@ export class Toast extends Component {
         if (this.props.onRemove) {
             this.props.onRemove(message);
         }
+    }
+
+    componentWillUnmount() {
+        ZIndexUtils.clear(this.container);
     }
 
     render() {

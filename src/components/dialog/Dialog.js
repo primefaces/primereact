@@ -7,6 +7,7 @@ import { CSSTransition } from 'react-transition-group';
 import ObjectUtils from '../utils/ObjectUtils';
 import { Ripple } from '../ripple/Ripple';
 import { Portal } from '../portal/Portal';
+import { ZIndexUtils } from '../utils/ZIndexUtils';
 
 export class Dialog extends Component {
 
@@ -299,10 +300,6 @@ export class Dialog extends Component {
         return pos ? `p-dialog-${pos}` : '';
     }
 
-    get zIndex() {
-        return this.props.baseZIndex + DomHandler.generateZIndex();
-    }
-
     get maximized() {
         return this.props.onMaximize ? this.props.maximized : this.state.maximized;
     }
@@ -329,9 +326,8 @@ export class Dialog extends Component {
 
     onExited() {
         this.dragging = false;
-        this.setState({ maskVisible: false }, () => {
-            DomHandler.revertZIndex();
-        });
+        ZIndexUtils.clear(this.mask);
+        this.setState({ maskVisible: false });
         this.disableDocumentSettings();
     }
 
@@ -496,7 +492,7 @@ export class Dialog extends Component {
 
         if (this.props.visible) {
             this.setState({ visible: true }, () => {
-                this.mask.style.zIndex = String(this.zIndex);
+                ZIndexUtils.set('modal', this.mask, this.props.baseZIndex);
             });
         }
 
@@ -508,7 +504,7 @@ export class Dialog extends Component {
     componentDidUpdate(prevProps) {
         if (this.props.visible && !this.state.maskVisible) {
             this.setState({ maskVisible: true }, () => {
-                this.mask.style.zIndex = String(this.zIndex);
+                ZIndexUtils.set('modal', this.mask, this.props.baseZIndex);
             });
         }
 
@@ -538,7 +534,7 @@ export class Dialog extends Component {
             this.styleElement = null;
         }
 
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.mask);
     }
 
     renderCloseIcon() {

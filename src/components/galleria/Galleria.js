@@ -8,6 +8,7 @@ import DomHandler from '../utils/DomHandler';
 import { CSSTransition } from 'react-transition-group';
 import { Ripple } from '../ripple/Ripple';
 import { Portal } from '../portal/Portal';
+import { ZIndexUtils } from '../utils/ZIndexUtils';
 
 export class Galleria extends Component {
 
@@ -131,7 +132,7 @@ export class Galleria extends Component {
     }
 
     onEntering() {
-        this.mask.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
+        ZIndexUtils.set('modal', this.mask, this.props.baseZIndex);
         DomHandler.addClass(this.mask, 'p-component-overlay');
     }
 
@@ -141,7 +142,7 @@ export class Galleria extends Component {
     }
 
     onExited() {
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.mask);
     }
 
     isAutoPlayActive() {
@@ -188,7 +189,7 @@ export class Galleria extends Component {
             this.stopSlideShow();
         }
 
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.mask);
     }
 
     renderHeader() {
