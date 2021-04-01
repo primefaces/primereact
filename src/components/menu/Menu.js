@@ -7,6 +7,7 @@ import { CSSTransition } from 'react-transition-group';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 import { Portal } from '../portal/Portal';
+import { ZIndexUtils } from '../utils/ZIndexUtils';
 
 export class Menu extends Component {
 
@@ -160,7 +161,7 @@ export class Menu extends Component {
     }
 
     onEnter() {
-        this.menuRef.current.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
+        ZIndexUtils.set('menu', this.menuRef.current, this.props.baseZIndex);
         DomHandler.absolutePosition(this.menuRef.current, this.target);
     }
 
@@ -176,7 +177,7 @@ export class Menu extends Component {
     }
 
     onExited() {
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.menuRef.current);
     }
 
     bindDocumentListeners() {
@@ -242,7 +243,7 @@ export class Menu extends Component {
             this.scrollHandler = null;
         }
 
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.menuRef.current);
     }
 
     renderSubmenu(submenu, index) {

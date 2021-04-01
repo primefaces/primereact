@@ -7,6 +7,7 @@ import { CSSTransition } from 'react-transition-group';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 import { Portal } from '../portal/Portal';
+import { ZIndexUtils } from '../utils/ZIndexUtils';
 
 export class SlideMenuSub extends Component {
 
@@ -275,7 +276,7 @@ export class SlideMenu extends Component {
 
     onEnter() {
         if (this.props.autoZIndex) {
-            this.menuRef.current.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
+            ZIndexUtils.set('menu', this.menuRef.current, this.props.baseZIndex);
         }
         DomHandler.absolutePosition(this.menuRef.current, this.target);
     }
@@ -294,7 +295,7 @@ export class SlideMenu extends Component {
     }
 
     onExited() {
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.menuRef.current);
 
         this.setState({ level: 0 });
     }
@@ -375,7 +376,7 @@ export class SlideMenu extends Component {
             this.scrollHandler = null;
         }
 
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.menuRef.current);
     }
 
     renderElement() {

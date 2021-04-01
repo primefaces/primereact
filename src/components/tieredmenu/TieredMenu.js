@@ -7,6 +7,7 @@ import { CSSTransition } from 'react-transition-group';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 import { Portal } from '../portal/Portal';
+import { ZIndexUtils } from '../utils/ZIndexUtils';
 
 export class TieredMenu extends Component {
 
@@ -92,7 +93,7 @@ export class TieredMenu extends Component {
 
     onEnter() {
         if (this.props.autoZIndex) {
-            this.menuRef.current.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
+            ZIndexUtils.set('menu', this.menuRef.current, this.props.baseZIndex);
         }
         DomHandler.absolutePosition(this.menuRef.current, this.target);
     }
@@ -109,7 +110,7 @@ export class TieredMenu extends Component {
     }
 
     onExited() {
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.menuRef.current);
     }
 
     bindDocumentListeners() {
@@ -185,7 +186,7 @@ export class TieredMenu extends Component {
             this.scrollHandler = null;
         }
 
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.menuRef.current);
     }
 
     renderElement() {

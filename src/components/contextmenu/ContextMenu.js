@@ -6,6 +6,7 @@ import { CSSTransition } from 'react-transition-group';
 import { Ripple } from '../ripple/Ripple';
 import ObjectUtils from '../utils/ObjectUtils';
 import { Portal } from '../portal/Portal';
+import { ZIndexUtils } from '../utils/ZIndexUtils';
 
 class ContextMenuSub extends Component {
 
@@ -312,7 +313,7 @@ export class ContextMenu extends Component {
 
     onEnter() {
         if (this.props.autoZIndex) {
-            this.menuRef.current.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
+            ZIndexUtils.set('menu', this.menuRef.current, this.props.baseZIndex);
         }
 
         this.position(this.currentEvent);
@@ -328,7 +329,7 @@ export class ContextMenu extends Component {
     }
 
     onExited() {
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.menuRef.current);
     }
 
     position(event) {
@@ -457,7 +458,7 @@ export class ContextMenu extends Component {
         this.unbindDocumentListeners();
         this.unbindDocumentContextMenuListener();
 
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.menuRef.current);
     }
 
     renderContextMenu() {
