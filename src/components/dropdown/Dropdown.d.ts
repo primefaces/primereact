@@ -9,7 +9,7 @@ interface DropdownProps {
     options?: any[];
     optionLabel?: string;
     optionValue?: string;
-    optionDisabled?: boolean;
+    optionDisabled?: string;
     optionGroupLabel?: string;
     optionGroupChildren?: string;
     style?: object;
