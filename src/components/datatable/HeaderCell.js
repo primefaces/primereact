@@ -207,7 +207,7 @@ export class HeaderCell extends Component {
             let sortIconElement = this.renderSortIcon(sorted, sortOrder);
             let ariaSortData = this.getAriaSort(sorted, sortOrder);
             let sortBadge = this.renderSortBadge(sortMetaDataIndex);
-            let tabIndex = !isSortableDisabled ? this.props.tabIndex : null
+            let tabIndex = this.props.columnProps.sortable && !isSortableDisabled ? this.props.tabIndex : null
 
             return (
                 <th ref={(el) => this.el = el} role="columnheader" tabIndex={tabIndex}
