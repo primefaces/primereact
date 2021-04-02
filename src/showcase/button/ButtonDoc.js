@@ -314,7 +314,7 @@ const ButtonDemo = () => {
             'ts': {
                 tabName: 'TS Source',
                 content: `
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from 'primereact/button';
 import './ButtonDemo.css';
 
