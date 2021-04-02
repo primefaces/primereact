@@ -45,6 +45,7 @@ export class DataTable extends Component {
         removableSort: false,
         emptyMessage: null,
         selectionMode: null,
+        rowSelectionMode: 'new',
         selection: null,
         onSelectionChange: null,
         contextMenuSelection: null,
@@ -151,6 +152,7 @@ export class DataTable extends Component {
         removableSort: PropTypes.bool,
         emptyMessage: PropTypes.any,
         selectionMode: PropTypes.string,
+        rowSelectionMode: PropTypes.string,
         selection: PropTypes.any,
         onSelectionChange: PropTypes.func,
         compareSelectionBy: PropTypes.string,
@@ -258,7 +260,6 @@ export class DataTable extends Component {
         this.onColumnDragLeave = this.onColumnDragLeave.bind(this);
         this.onColumnDrop = this.onColumnDrop.bind(this);
         this.onVirtualScroll = this.onVirtualScroll.bind(this);
-        this.frozenSelectionMode = null;
     }
 
     getFirst() {
@@ -1306,8 +1307,8 @@ export class DataTable extends Component {
         return scrollableColumns;
     }
 
-    getFrozenSelectionModeInColumn(columns) {
-        if(Array.isArray(columns)) {
+    getSelectionModeInColumn(columns) {
+        if (Array.isArray(columns)) {
             for(let col of columns) {
                 if(col.props.selectionMode)
                    return col.props.selectionMode;
@@ -1327,9 +1328,9 @@ export class DataTable extends Component {
                           </TableHeader>;
     }
 
-    createTableBody(value, columns, frozen) {
+    createTableBody(value, columns, frozen, selectionModeInColumn) {
         return <TableBody tableId={this.props.id} value={value} first={this.getFirst()} rows={this.getRows()} lazy={this.props.lazy} paginator={this.props.paginator} dataKey={this.props.dataKey} compareSelectionBy={this.props.compareSelectionBy}
-                        selectionMode={this.props.selectionMode} selection={this.props.selection} metaKeySelection={this.props.metaKeySelection} frozen={frozen} frozenSelectionMode={this.frozenSelectionMode}
+                        selectionMode={this.props.selectionMode} rowSelectionMode={this.props.rowSelectionMode} selection={this.props.selection} metaKeySelection={this.props.metaKeySelection} frozen={frozen} selectionModeInColumn={selectionModeInColumn}
                         onSelectionChange={this.props.onSelectionChange} onRowClick={this.props.onRowClick} onRowDoubleClick={this.props.onRowDoubleClick} onRowSelect={this.props.onRowSelect} onRowUnselect={this.props.onRowUnselect}
                         contextMenuSelection={this.props.contextMenuSelection} onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu}
                         expandedRows={this.props.expandedRows} onRowToggle={this.props.onRowToggle} rowExpansionTemplate={this.props.rowExpansionTemplate} selectOnEdit={this.props.selectOnEdit}
@@ -1360,9 +1361,9 @@ export class DataTable extends Component {
             return null;
     }
 
-    createScrollableView(value, columns, frozen, headerColumnGroup, footerColumnGroup, totalRecords) {
+    createScrollableView(value, columns, frozen, headerColumnGroup, footerColumnGroup, totalRecords, selectionModeInColumn) {
         return <ScrollableView columns={columns} header={this.createTableHeader(value, columns, headerColumnGroup)}
-                body={this.createTableBody(value, columns, frozen)} loadingBody={this.createTableLoadingBody(columns)} frozenBody={this.props.frozenValue ? this.createTableBody(this.props.frozenValue, columns, true): null}
+                body={this.createTableBody(value, columns, frozen, selectionModeInColumn)} loadingBody={this.createTableLoadingBody(columns)} frozenBody={this.props.frozenValue ? this.createTableBody(this.props.frozenValue, columns, true, selectionModeInColumn): null}
                 footer={this.createTableFooter(columns, footerColumnGroup)} tableStyle={this.props.tableStyle} tableClassName={this.props.tableClassName}
                 scrollHeight={this.props.scrollHeight} frozen={frozen} frozenWidth={this.props.frozenWidth}
                 virtualScroll={this.props.virtualScroll} virtualRowHeight={this.props.virtualRowHeight} rows={this.props.rows} totalRecords={totalRecords}
@@ -1489,10 +1490,11 @@ export class DataTable extends Component {
         let value = this.processData();
         let columns = this.getColumns();
         let totalRecords = this.getTotalRecords(value);
+        let selectionModeInColumn = this.getSelectionModeInColumn(columns);
         let className = classNames('p-datatable p-component', {
                         'p-datatable-resizable': this.props.resizableColumns, 'p-datatable-resizable-fit': this.props.resizableColumns && this.props.columnResizeMode === 'fit',
                         'p-datatable-scrollable': this.props.scrollable, 'p-datatable-virtual-scrollable': this.props.virtualScroll,
-                        'p-datatable-auto-layout': this.props.autoLayout, 'p-datatable-hoverable-rows': this.props.rowHover || this.props.selectionMode}, this.props.className);
+                        'p-datatable-auto-layout': this.props.autoLayout, 'p-datatable-hoverable-rows': this.props.rowHover || this.props.selectionMode || selectionModeInColumn}, this.props.className);
         let paginatorTop = this.props.paginator && this.props.paginatorPosition !== 'bottom' && this.createPaginator('top', totalRecords);
         let paginatorBottom = this.props.paginator && this.props.paginatorPosition !== 'top' && this.createPaginator('bottom', totalRecords);
         let headerFacet = this.props.header && <div className="p-datatable-header">{this.props.header}</div>;
@@ -1503,21 +1505,20 @@ export class DataTable extends Component {
         let resizeIndicatorDown = this.props.reorderableColumns && <span ref={(el) => {this.reorderIndicatorDown = el;}} className="pi pi-arrow-up p-datatable-reorder-indicator-down" style={{position: 'absolute', display: 'none'}} />;
         let loader;
 
-        if(this.props.loading) {
+        if (this.props.loading) {
             loader = this.renderLoader();
         }
 
         if (Array.isArray(columns)) {
             if (this.props.scrollable) {
-                this.frozenSelectionMode = this.frozenSelectionMode || this.getFrozenSelectionModeInColumn(columns);
                 let frozenColumns = this.getFrozenColumns(columns);
                 let scrollableColumns = frozenColumns ? this.getScrollableColumns(columns) : columns;
                 let frozenView, scrollableView;
                 if (frozenColumns) {
-                    frozenView = this.createScrollableView(value, frozenColumns, true, this.props.frozenHeaderColumnGroup, this.props.frozenFooterColumnGroup, totalRecords);
+                    frozenView = this.createScrollableView(value, frozenColumns, true, this.props.frozenHeaderColumnGroup, this.props.frozenFooterColumnGroup, totalRecords, selectionModeInColumn);
                 }
 
-                scrollableView = this.createScrollableView(value, scrollableColumns, false, this.props.headerColumnGroup, this.props.footerColumnGroup, totalRecords);
+                scrollableView = this.createScrollableView(value, scrollableColumns, false, this.props.headerColumnGroup, this.props.footerColumnGroup, totalRecords, selectionModeInColumn);
 
                 tableContent = <div className="p-datatable-scrollable-wrapper">
                                     {frozenView}
@@ -1526,7 +1527,7 @@ export class DataTable extends Component {
             }
             else {
                 let tableHeader = this.createTableHeader(value, columns, this.props.headerColumnGroup);
-                let tableBody = this.createTableBody(value, columns, false);
+                let tableBody = this.createTableBody(value, columns, false, selectionModeInColumn);
                 let tableFooter = this.createTableFooter(columns, this.props.footerColumnGroup);
 
                 tableContent = <div className="p-datatable-wrapper">

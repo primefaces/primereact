@@ -32,6 +32,7 @@ interface DataTableProps {
     removableSort?: boolean;
     emptyMessage?: any;
     selectionMode?: string;
+    rowSelectionMode?: 'new' | 'add' | 'checkbox' | 'radio';
     selection?: any;
     contextMenuSelection?: any;
     compareSelectionBy?: string;
