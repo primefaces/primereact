@@ -19,6 +19,24 @@ import './ButtonDemo.css';
 
 export class ButtonDemo extends Component {
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            loading: false,
+            check: false,
+            disabled: false
+        }
+
+        this.onClick = this.onClick.bind(this);
+    }
+
+    onClick = () => {
+        this.setState({ check: false, loading: true, disabled: true })
+        setTimeout(() => {
+            this.setState({ loading: false, check: true, disabled: false })
+        }, 2000)
+    }
+
     render() {
         return (
             <div className="button-demo">
@@ -32,6 +50,9 @@ export class ButtonDemo extends Component {
                     <Button icon="pi pi-check" />
                     <Button label="Submit" icon="pi pi-check" />
                     <Button label="Submit" icon="pi pi-check" iconPos="right" />
+
+                    <h5>Loading</h5>
+                    <Button label="Submit" disabled={this.state.disabled} onClick={this.onClick} loading={this.state.loading} icon={this.state.check ? 'pi pi-check' : null} iconPos="right" />
 
                     <h5>Severities</h5>
                     <Button label="Primary" />
@@ -144,11 +165,28 @@ export class ButtonDemo extends Component {
             'hooks': {
                 tabName: 'Hooks Source',
                 content: `
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from 'primereact/button';
 import './ButtonDemo.css';
 
 const ButtonDemo = () => {
+
+    const [loading, setLoading] = useState(false);
+    const [check, setCheck] = useState(false);
+    const [disabled, setDisabled] = useState(false);
+
+    const onClick = () => {
+        setLoading(true);
+        setCheck(false);
+        setDisabled(true);
+
+        setTimeout(() => {
+            setLoading(false);
+            setCheck(true);
+            setDisabled(false);
+        }, 2000)
+    }
+
     return (
         <div className="button-demo">
             <div className="card">
@@ -161,6 +199,10 @@ const ButtonDemo = () => {
                 <Button icon="pi pi-check" />
                 <Button label="Submit" icon="pi pi-check" />
                 <Button label="Submit" icon="pi pi-check" iconPos="right" />
+
+
+                <h5>Loading</h5>
+                <Button label="Submit" disabled={disabled} onClick={onClick} loading={loading} icon={check ? 'pi pi-check' : null} iconPos="right" />
 
                 <h5>Severities</h5>
                 <Button label="Primary" />
@@ -278,6 +320,22 @@ import './ButtonDemo.css';
 
 const ButtonDemo = () => {
 
+    const [loading, setLoading] = useState(false);
+    const [check, setCheck] = useState(false);
+    const [disabled, setDisabled] = useState(false);
+
+    const onClick = () => {
+        setLoading(true);
+        setCheck(false);
+        setDisabled(true);
+
+        setTimeout(() => {
+            setLoading(false);
+            setCheck(true);
+            setDisabled(false);
+        }, 2000)
+    }
+
     return (
         <div className="button-demo">
             <div className="card">
@@ -290,6 +348,9 @@ const ButtonDemo = () => {
                 <Button icon="pi pi-check" />
                 <Button label="Submit" icon="pi pi-check" />
                 <Button label="Submit" icon="pi pi-check" iconPos="right" />
+
+                <h5>Loading</h5>
+                <Button label="Submit" disabled={disabled} onClick={onClick} loading={loading} icon={check ? 'pi pi-check' : null} iconPos="right" />
 
                 <h5>Severities</h5>
                 <Button label="Primary" />
@@ -480,6 +541,14 @@ import { Button } from 'primereact/button';
 <Button label="Click" icon="pi pi-check" />
 <Button label="Click" icon="pi pi-check" iconPos="right" />
 <Button icon="pi pi-check" iconPos="right" />
+`}
+</CodeHighlight>
+                        <h5>Loading</h5>
+                        <p>Loading on a button is specified with <i>loading</i> property and position is configured using <i>iconPos</i> attribute. Default
+                        loading position is "left" and alternative is "right". To display only a loading, leave label as undefined.</p>
+<CodeHighlight>
+{`
+<Button label="Submit" loading iconPos="right" />
 `}
 </CodeHighlight>
 

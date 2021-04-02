@@ -6,6 +6,23 @@ import './ButtonDemo.scss';
 
 export class ButtonDemo extends Component {
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            loading: false,
+            check: false,
+            disabled: false
+        }
+        this.onClick = this.onClick.bind(this);
+    }
+
+    onClick() {
+        this.setState({ check: false, loading: true, disabled: true })
+        setTimeout(() => {
+            this.setState({ loading: false, check: true, disabled: false })
+        }, 2000)
+    }
+
     render() {
         return (
             <div>
@@ -27,6 +44,9 @@ export class ButtonDemo extends Component {
                         <Button icon="pi pi-check" />
                         <Button label="Submit" icon="pi pi-check" />
                         <Button label="Submit" icon="pi pi-check" iconPos="right" />
+
+                        <h5>Loading</h5>
+                        <Button label="Submit" disabled={this.state.disabled} onClick={this.onClick} loading={this.state.loading} icon={this.state.check ? 'pi pi-check' : null} iconPos="right" />
 
                         <h5>Severities</h5>
                         <Button label="Primary" />
@@ -125,8 +145,8 @@ export class ButtonDemo extends Component {
 
                         <h5>Sizes</h5>
                         <div className="sizes">
-                            <Button label="Small" icon="pi pi-check" className="p-button-sm"  />
-                            <Button label="Normal" icon="pi pi-check" className="p-button"  />
+                            <Button label="Small" icon="pi pi-check" className="p-button-sm" />
+                            <Button label="Normal" icon="pi pi-check" className="p-button" />
                             <Button label="Large" icon="pi pi-check" className="p-button-lg" />
                         </div>
                     </div>
