@@ -1,1 +1,1 @@
-export * from './components/multicheckbox/MultiCheckbox';
+export * from './components/multistatecheckbox/MultiStateCheckbox';

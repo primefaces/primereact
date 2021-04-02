@@ -1,14 +1,14 @@
 import React from 'react';
-import {DisabledRoDemo, SimpleDemo} from "./MultiCheckboxDemo";
+import {DisabledRoDemo, SimpleDemo} from "./MultiStateCheckboxDemo";
 import {TabPanel, TabView} from "../../components/tabview/TabView";
 import {CodeHighlight} from "../codehighlight/CodeHighlight";
 import {Link} from "react-router-dom";
 import {useLiveEditorTabs} from "../liveeditor/LiveEditor";
 
-export default function MultiCheckboxDoc() {
+export default function MultiStateCheckboxDoc() {
     const importsSource = `
 import React from 'react';
-import { MultiCheckbox } from 'primereact/multicheckbox';
+import { MultiStateCheckbox } from 'primereact/multistatecheckbox';
 `
 
     const hooksSource = `
@@ -20,11 +20,11 @@ export function SimpleDemo() {
         <>
             <h3>Simple</h3>
             <div className="p-field-checkbox p-m-0">
-                <MultiCheckbox value={value} onChange={e => setValue(e.value)}>
-                    <MultiCheckbox.Option value="public" icon="pi pi-globe"/>
-                    <MultiCheckbox.Option value="protected" icon="pi pi-lock-open"/>
-                    <MultiCheckbox.Option value="private" icon="pi pi-lock"/>
-                </MultiCheckbox>
+                <MultiStateCheckbox value={value} onChange={e => setValue(e.value)}>
+                    <MultiStateCheckbox.Option value="public" icon="pi pi-globe"/>
+                    <MultiStateCheckbox.Option value="protected" icon="pi pi-lock-open"/>
+                    <MultiStateCheckbox.Option value="private" icon="pi pi-lock"/>
+                </MultiStateCheckbox>
                 <label>{value}</label>
             </div>
         </>
@@ -38,20 +38,20 @@ export function DisabledRoDemo() {
         <>
             <h3>Disabled and Readonly</h3>
             <div className="p-field-checkbox p-m-0 p-pb-2">
-                <MultiCheckbox value={value} onChange={e => setValue(e.value)} disabled>
-                    <MultiCheckbox.Option value="public" icon="pi pi-globe"/>
-                    <MultiCheckbox.Option value="protected" icon="pi pi-lock-open"/>
-                    <MultiCheckbox.Option value="private" icon="pi pi-lock"/>
-                </MultiCheckbox>
+                <MultiStateCheckbox value={value} onChange={e => setValue(e.value)} disabled>
+                    <MultiStateCheckbox.Option value="public" icon="pi pi-globe"/>
+                    <MultiStateCheckbox.Option value="protected" icon="pi pi-lock-open"/>
+                    <MultiStateCheckbox.Option value="private" icon="pi pi-lock"/>
+                </MultiStateCheckbox>
 
                 <label>Disabled</label>
             </div>
             <div className="p-field-checkbox p-m-0">
-                <MultiCheckbox value={value} onChange={e => setValue(e.value)} readOnly>
-                    <MultiCheckbox.Option value="public" icon="pi pi-globe"/>
-                    <MultiCheckbox.Option value="protected" icon="pi pi-lock-open"/>
-                    <MultiCheckbox.Option value="private" icon="pi pi-lock"/>
-                </MultiCheckbox>
+                <MultiStateCheckbox value={value} onChange={e => setValue(e.value)} readOnly>
+                    <MultiStateCheckbox.Option value="public" icon="pi pi-globe"/>
+                    <MultiStateCheckbox.Option value="protected" icon="pi pi-lock-open"/>
+                    <MultiStateCheckbox.Option value="private" icon="pi pi-lock"/>
+                </MultiStateCheckbox>
 
                 <label>Read Only</label>
             </div>
@@ -59,7 +59,7 @@ export function DisabledRoDemo() {
     )
 }
 
-export function MultiCheckboxDemo() {
+export function MultiStateCheckboxDemo() {
     return (
         <>
             <div>
@@ -85,11 +85,11 @@ export class SimpleDemo extends React.Component {
         <React.Fragment>
             <h3>Simple</h3>
             <div className="p-field-checkbox p-m-0">
-                <MultiCheckbox value={value} onChange={e => setState({ value: e.value })}>
-                    <MultiCheckbox.Option value="public" icon="pi pi-globe"/>
-                    <MultiCheckbox.Option value="protected" icon="pi pi-lock-open"/>
-                    <MultiCheckbox.Option value="private" icon="pi pi-lock"/>
-                </MultiCheckbox>
+                <MultiStateCheckbox value={value} onChange={e => setState({ value: e.value })}>
+                    <MultiStateCheckbox.Option value="public" icon="pi pi-globe"/>
+                    <MultiStateCheckbox.Option value="protected" icon="pi pi-lock-open"/>
+                    <MultiStateCheckbox.Option value="private" icon="pi pi-lock"/>
+                </MultiStateCheckbox>
                 <label>{value}</label>
             </div>
         <React.Fragment/>
@@ -105,20 +105,20 @@ export class DisabledRoDemo extends React.Component {
         <React.Fragment>
             <h3>Disabled and Readonly</h3>
             <div className="p-field-checkbox p-m-0 p-pb-2">
-                <MultiCheckbox value={value} onChange={e => setValue({ value: e.value} )} disabled>
-                    <MultiCheckbox.Option value="public" icon="pi pi-globe"/>
-                    <MultiCheckbox.Option value="protected" icon="pi pi-lock-open"/>
-                    <MultiCheckbox.Option value="private" icon="pi pi-lock"/>
-                </MultiCheckbox>
+                <MultiStateCheckbox value={value} onChange={e => setValue({ value: e.value} )} disabled>
+                    <MultiStateCheckbox.Option value="public" icon="pi pi-globe"/>
+                    <MultiStateCheckbox.Option value="protected" icon="pi pi-lock-open"/>
+                    <MultiStateCheckbox.Option value="private" icon="pi pi-lock"/>
+                </MultiStateCheckbox>
 
                 <label>Disabled</label>
             </div>
             <div className="p-field-checkbox p-m-0">
-                <MultiCheckbox value={value} onChange={e => setValue({ value: e.value })} readOnly>
-                    <MultiCheckbox.Option value="public" icon="pi pi-globe"/>
-                    <MultiCheckbox.Option value="protected" icon="pi pi-lock-open"/>
-                    <MultiCheckbox.Option value="private" icon="pi pi-lock"/>
-                </MultiCheckbox>
+                <MultiStateCheckbox value={value} onChange={e => setValue({ value: e.value })} readOnly>
+                    <MultiStateCheckbox.Option value="public" icon="pi pi-globe"/>
+                    <MultiStateCheckbox.Option value="protected" icon="pi pi-lock-open"/>
+                    <MultiStateCheckbox.Option value="private" icon="pi pi-lock"/>
+                </MultiStateCheckbox>
 
                 <label>Read Only</label>
             </div>
@@ -126,7 +126,7 @@ export class DisabledRoDemo extends React.Component {
     )
 }
 
-export class MultiCheckboxDemo extends React.Component {
+export class MultiStateCheckboxDemo extends React.Component {
     render() {
         return (
             <React.Fragment>
@@ -150,11 +150,11 @@ export const SimpleDemo = () => {
         <>
             <h3>Simple</h3>
             <div className="p-field-checkbox p-m-0">
-                <MultiCheckbox value={value} onChange={e => setValue(e.value)}>
-                    <MultiCheckbox.Option value="public" icon="pi pi-globe"/>
-                    <MultiCheckbox.Option value="protected" icon="pi pi-lock-open"/>
-                    <MultiCheckbox.Option value="private" icon="pi pi-lock"/>
-                </MultiCheckbox>
+                <MultiStateCheckbox value={value} onChange={e => setValue(e.value)}>
+                    <MultiStateCheckbox.Option value="public" icon="pi pi-globe"/>
+                    <MultiStateCheckbox.Option value="protected" icon="pi pi-lock-open"/>
+                    <MultiStateCheckbox.Option value="private" icon="pi pi-lock"/>
+                </MultiStateCheckbox>
                 <label>{value}</label>
             </div>
         </>
@@ -168,20 +168,20 @@ export const DisabledRoDemo = () => {
         <>
             <h3>Disabled and Readonly</h3>
             <div className="p-field-checkbox p-m-0 p-pb-2">
-                <MultiCheckbox value={value} onChange={e => setValue(e.value)} disabled>
-                    <MultiCheckbox.Option value="public" icon="pi pi-globe"/>
-                    <MultiCheckbox.Option value="protected" icon="pi pi-lock-open"/>
-                    <MultiCheckbox.Option value="private" icon="pi pi-lock"/>
-                </MultiCheckbox>
+                <MultiStateCheckbox value={value} onChange={e => setValue(e.value)} disabled>
+                    <MultiStateCheckbox.Option value="public" icon="pi pi-globe"/>
+                    <MultiStateCheckbox.Option value="protected" icon="pi pi-lock-open"/>
+                    <MultiStateCheckbox.Option value="private" icon="pi pi-lock"/>
+                </MultiStateCheckbox>
 
                 <label>Disabled</label>
             </div>
             <div className="p-field-checkbox p-m-0">
-                <MultiCheckbox value={value} onChange={e => setValue(e.value)} readOnly>
-                    <MultiCheckbox.Option value="public" icon="pi pi-globe"/>
-                    <MultiCheckbox.Option value="protected" icon="pi pi-lock-open"/>
-                    <MultiCheckbox.Option value="private" icon="pi pi-lock"/>
-                </MultiCheckbox>
+                <MultiStateCheckbox value={value} onChange={e => setValue(e.value)} readOnly>
+                    <MultiStateCheckbox.Option value="public" icon="pi pi-globe"/>
+                    <MultiStateCheckbox.Option value="protected" icon="pi pi-lock-open"/>
+                    <MultiStateCheckbox.Option value="private" icon="pi pi-lock"/>
+                </MultiStateCheckbox>
 
                 <label>Read Only</label>
             </div>
@@ -189,7 +189,7 @@ export const DisabledRoDemo = () => {
     )
 }
 
-export const MultiCheckboxDemo = () => {
+export const MultiStateCheckboxDemo = () => {
     return (
         <>
             <div>
@@ -224,42 +224,42 @@ export const MultiCheckboxDemo = () => {
                 <TabPanel header="Documentation">
                     <h5>Import</h5>
                     <CodeHighlight lang="js">
-{`import {MultiCheckbox} from 'primereact/multicheckbox';`}
+{`import {MultiStateCheckbox} from 'primereact/multistatecheckbox';`}
                     </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>MultiCheckbox is used as a controlled input with <i>value</i> and <i>onChange</i> properties.</p>
+                    <p>MultiStateCheckbox is used as a controlled input with <i>value</i> and <i>onChange</i> properties.</p>
                     <CodeHighlight>
 {`
-<MultiCheckbox value={value} onChange={(e) => setValue(e.value)}>
-    <MultiCheckbox.Option value="public" icon="pi pi-globe"/>
-    <MultiCheckbox.Option value="protected" icon="pi pi-lock-open"/>
-    <MultiCheckbox.Option value="private" icon="pi pi-lock"/>
-</MultiCheckbox>
+<MultiStateCheckbox value={value} onChange={(e) => setValue(e.value)}>
+    <MultiStateCheckbox.Option value="public" icon="pi pi-globe"/>
+    <MultiStateCheckbox.Option value="protected" icon="pi pi-lock-open"/>
+    <MultiStateCheckbox.Option value="private" icon="pi pi-lock"/>
+</MultiStateCheckbox>
 `}
                     </CodeHighlight>
 
                     <h5>Styling</h5>
-                    <p>The <i>MultiCheckbox</i> component exposes the properties <i>style</i> and <i>className</i>, which applies the styles to the component's root element.</p>
+                    <p>The <i>MultiStateCheckbox</i> component exposes the properties <i>style</i> and <i>className</i>, which applies the styles to the component's root element.</p>
 
-                    <p>The <i>MultiCheckbox.Option</i> component exposes the properties <i>style</i> and <i>className</i>, which applies the styles to the option's icon.</p>
-                    <p>Also, the <i>MultiCheckbox.Option</i> component exposes the properties <i>boxStyle</i> and <i>boxClassName</i>, which applies the styles to the checkbox inner component.</p>
+                    <p>The <i>MultiStateCheckbox.Option</i> component exposes the properties <i>style</i> and <i>className</i>, which applies the styles to the option's icon.</p>
+                    <p>Also, the <i>MultiStateCheckbox.Option</i> component exposes the properties <i>boxStyle</i> and <i>boxClassName</i>, which applies the styles to the checkbox inner component.</p>
 
                     <h5>Non-Eligible Options</h5>
-                    <p>A <i>MultiCheckbox.Option</i> component with a falsy value different of <i>undefined</i> in the <i>eligible</i> property will prevent it from being selected by the <i>MultiCheckbox</i></p>
+                    <p>A <i>MultiStateCheckbox.Option</i> component with a falsy value different of <i>undefined</i> in the <i>eligible</i> property will prevent it from being selected by the <i>MultiStateCheckbox</i></p>
 
                     <CodeHighlight>
 {`
-<MultiCheckbox value={privacy} onChange={(e) => setPrivacy(e.value)}>
-    <MultiCheckbox.Option value="everyone" icon="pi pi-globe"/>
-    <MultiCheckbox.Option value="friends_only" icon="pi pi-users" eligible={user.hasFriends}/>
-    <MultiCheckbox.Option value="just_me" icon="pi pi-lock"/>
-</MultiCheckbox>
+<MultiStateCheckbox value={privacy} onChange={(e) => setPrivacy(e.value)}>
+    <MultiStateCheckbox.Option value="everyone" icon="pi pi-globe"/>
+    <MultiStateCheckbox.Option value="friends_only" icon="pi pi-users" eligible={user.hasFriends}/>
+    <MultiStateCheckbox.Option value="just_me" icon="pi pi-lock"/>
+</MultiStateCheckbox>
 `}
                     </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <h6>MultiCheckbox</h6>
+                    <h6>MultiStateCheckbox</h6>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -287,7 +287,7 @@ export const MultiCheckboxDemo = () => {
                                 <td>value</td>
                                 <td>any</td>
                                 <td>null</td>
-                                <td>Value of the MultiCheckbox.</td>
+                                <td>Value of the MultiStateCheckbox.</td>
                             </tr>
                             <tr>
                                 <td>name</td>
@@ -329,7 +329,7 @@ export const MultiCheckboxDemo = () => {
                         </table>
                     </div>
 
-                    <h6>MultiCheckbox.Option</h6>
+                    <h6>MultiStateCheckbox.Option</h6>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -389,7 +389,7 @@ export const MultiCheckboxDemo = () => {
                     </div>
 
                     <h5>Events</h5>
-                    <h6>MultiCheckbox</h6>
+                    <h6>MultiStateCheckbox</h6>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -429,7 +429,7 @@ export const MultiCheckboxDemo = () => {
                                 <td>Container element</td>
                             </tr>
                             <tr>
-                                <td>p-multicheckbox</td>
+                                <td>p-multistatecheckbox</td>
                                 <td>Container element</td>
                             </tr>
                             <tr>
@@ -448,7 +448,7 @@ export const MultiCheckboxDemo = () => {
                     <p>None.</p>
                 </TabPanel>
 
-                { useLiveEditorTabs({ name: 'MultiCheckboxDemo', sources }) }
+                { useLiveEditorTabs({ name: 'MultiStateCheckboxDemo', sources }) }
             </TabView>
         </div>
     )

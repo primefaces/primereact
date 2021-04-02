@@ -168,7 +168,7 @@ import { ChipDemo } from './showcase/chip/ChipDemo';
 import { ConfirmDialogDemo } from './showcase/confirmdialog/ConfirmDialogDemo';
 import { ConfirmPopupDemo } from './showcase/confirmpopup/ConfirmPopupDemo';
 import { InvalidDemo } from './showcase/invalid/InvalidDemo';
-import MultiCheckboxDemo from "./showcase/multicheckbox/MultiCheckboxDemo";
+import MultiStateCheckboxDemo from "./showcase/multistatecheckbox/MultiStateCheckboxDemo";
 import { ColorsDemo } from './showcase/colors/ColorsDemo';
 
 class AppRouter extends Component {
@@ -366,7 +366,7 @@ class AppRouter extends Component {
                             <Route path="/confirmpopup" component={ConfirmPopupDemo} />
                             <Route path="/invalid" component={InvalidDemo} />
                             <Route path="/colors" render={() => <ColorsDemo darkTheme={context.darkTheme} />} />
-                            <Route path="/multicheckbox" component={MultiCheckboxDemo} />
+                            <Route path="/multistatecheckbox" component={MultiStateCheckboxDemo} />
                         </>
                     )
                 }

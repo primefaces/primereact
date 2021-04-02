@@ -418,10 +418,10 @@
                     ]
                 },
                 {
-                    "name": "MultiCheckbox",
-                    "to": "/multicheckbox",
+                    "name": "MultiStateCheckbox",
+                    "to": "/multistatecheckbox",
                     "meta": [
-                        "multicheckbox"
+                        "multistatecheckbox"
                     ],
                     "badge": "new"
                 }

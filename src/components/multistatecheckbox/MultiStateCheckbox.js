@@ -30,7 +30,7 @@ export const propTypes = {
     onChange: PropTypes.func
 }
 
-export function MultiCheckbox(props) {
+export function MultiStateCheckbox(props) {
     const { value, children, id } = props;
     const { style, className } = props;
     const { inputId, name, ariaLabelledBy, disabled, readOnly } = props;
@@ -44,7 +44,7 @@ export function MultiCheckbox(props) {
             .filter(it => it.eligible === undefined || !!it.eligible)
 
         if (new Set(options.map(it => it.value)).size !== options.length) {
-            console.warn("MultiCheckbox contains one or more Options with duplicated values, which are not supported. Expect weird behavior")
+            console.warn("MultiStateCheckbox contains one or more Options with duplicated values, which are not supported. Expect weird behavior")
         }
 
         return options;
@@ -85,7 +85,7 @@ export function MultiCheckbox(props) {
 
     const currentOption = options.find(option => value === option.value)
 
-    const containerClass = classNames('p-multicheckbox p-checkbox p-component', className);
+    const containerClass = classNames('p-multistatecheckbox p-checkbox p-component', className);
     const boxClass = classNames('p-checkbox-box', currentOption?.boxClassName,{
         'p-highlight': !!currentOption,
         'p-disabled': disabled || readOnly,

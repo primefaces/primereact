@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 /*
- * This component's "value" prop is meant to be used by the MultiCheckbox component
+ * This component's "value" prop is meant to be used by the MultiStateCheckbox component
  *   to perform the conditional render of only the selected Option component
  *   by using reflection to introspect the Option's prop.
  */
