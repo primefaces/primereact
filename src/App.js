@@ -39,7 +39,7 @@ export class App extends Component {
             darkTheme: false,
             themeCategory: null,
             sidebarActive: false,
-            newsActive: this.isNewsStorageExpired(),
+            newsActive: false, //this.isNewsStorageExpired(),
             configuratorActive: false,
             changelogActive: false,
             searchVal: null
