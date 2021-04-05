@@ -2402,6 +2402,9 @@
 .p-datatable.p-datatable-lg .p-datatable-footer {
   padding: 1.25rem 1.25rem; }
 
+.p-datatable-drag-selection-helper {
+  background: rgba(33, 150, 243, 0.16); }
+
 .p-dataview .p-paginator-top {
   border-width: 0 0 1px 0;
   border-radius: 0; }
