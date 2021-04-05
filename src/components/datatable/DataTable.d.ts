@@ -33,6 +33,7 @@ interface DataTableProps {
     emptyMessage?: any;
     selectionMode?: string;
     rowSelectionMode?: 'new' | 'add' | 'checkbox' | 'radio';
+    dragSelection?: boolean;
     selection?: any;
     contextMenuSelection?: any;
     compareSelectionBy?: string;
