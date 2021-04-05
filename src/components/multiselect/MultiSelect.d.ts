@@ -9,7 +9,7 @@ interface MultiSelectProps {
     options?: any[];
     optionLabel?: string;
     optionValue?: string;
-    optionDisabled?: boolean;
+    optionDisabled?: string;
     optionGroupLabel?: string;
     optionGroupChildren?: string;
     display?: string;
