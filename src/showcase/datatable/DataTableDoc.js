@@ -2687,6 +2687,12 @@ const bodyTemplate = (data, props) => {
                             <td>Defines row selection mode. Valid values are "new", "add", "radio" and "checkbox".</td>
                         </tr>
                         <tr>
+                            <td>dragSelection</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>When enabled, a rectangle that can be dragged can be used to make a range selection.</td>
+                        </tr>
+                        <tr>
                             <td>selection</td>
                             <td>any</td>
                             <td>null</td>
