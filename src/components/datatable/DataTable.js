@@ -46,6 +46,7 @@ export class DataTable extends Component {
         emptyMessage: null,
         selectionMode: null,
         rowSelectionMode: 'new',
+        dragSelection: false,
         selection: null,
         onSelectionChange: null,
         contextMenuSelection: null,
@@ -153,6 +154,7 @@ export class DataTable extends Component {
         emptyMessage: PropTypes.any,
         selectionMode: PropTypes.string,
         rowSelectionMode: PropTypes.string,
+        dragSelection: PropTypes.bool,
         selection: PropTypes.any,
         onSelectionChange: PropTypes.func,
         compareSelectionBy: PropTypes.string,
@@ -1340,7 +1342,8 @@ export class DataTable extends Component {
                         sortField={this.getSortField()} rowClassName={this.props.rowClassName} onRowReorder={this.props.onRowReorder}
                         editMode={this.props.editMode} editingRows={this.props.editingRows} rowEditorValidator={this.props.rowEditorValidator}
                         onRowEditInit={this.props.onRowEditInit} onRowEditSave={this.props.onRowEditSave} onRowEditCancel={this.props.onRowEditCancel} onRowEditChange={this.props.onRowEditChange}
-                        expandableRowGroups={this.props.expandableRowGroups} showRowReorderElement={this.props.showRowReorderElement} showSelectionElement={this.props.showSelectionElement}>
+                        expandableRowGroups={this.props.expandableRowGroups} showRowReorderElement={this.props.showRowReorderElement} showSelectionElement={this.props.showSelectionElement}
+                        dragSelection={this.props.dragSelection}>
                         {columns}
                 </TableBody>;
     }

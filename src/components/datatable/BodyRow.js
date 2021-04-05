@@ -19,6 +19,7 @@ export class BodyRow extends Component {
         this.onTouchEnd = this.onTouchEnd.bind(this);
         this.onRightClick = this.onRightClick.bind(this);
         this.onMouseDown = this.onMouseDown.bind(this);
+        this.onMouseUp = this.onMouseUp.bind(this);
         this.onDragEnd = this.onDragEnd.bind(this);
         this.onDragOver = this.onDragOver.bind(this);
         this.onDragLeave = this.onDragLeave.bind(this);
@@ -71,10 +72,30 @@ export class BodyRow extends Component {
     }
 
     onMouseDown(event) {
-        if (DomHandler.hasClass(event.target, 'p-table-reorderablerow-handle'))
+        if (DomHandler.hasClass(event.target, 'p-datatable-reorderablerow-handle'))
             event.currentTarget.draggable = true;
         else
             event.currentTarget.draggable = false;
+
+        this.enableDragSelection(event);
+
+        if (this.props.onMouseDown) {
+            this.props.onMouseDown({
+                originalEvent: event,
+                data: this.props.rowData,
+                index: this.props.rowIndex
+            });
+        }
+    }
+
+    onMouseUp(event) {
+        if (this.props.onMouseUp) {
+            this.props.onMouseUp({
+                originalEvent: event,
+                data: this.props.rowData,
+                index: this.props.rowIndex
+            });
+        }
     }
 
     onDragEnd(event) {
@@ -151,6 +172,49 @@ export class BodyRow extends Component {
                     //no op
                     break;
             }
+        }
+    }
+
+    enableDragSelection(event) {
+        if (this.props.dragSelection && !this.dragSelectionHelper) {
+            this.dragSelectionHelper = document.createElement('div');
+            DomHandler.addClass(this.dragSelectionHelper, 'p-datatable-drag-selection-helper');
+
+            const currentX = event.clientX;
+            const currentY = event.clientY;
+
+            this.dragSelectionHelper.style.top = `${event.pageY}px`;
+            this.dragSelectionHelper.style.left = `${event.pageX}px`;
+
+            let dragSelectionMouseMove = (e) => {
+                const dx = e.clientX - currentX;
+                const dy = e.clientY - currentY;
+
+                if (dy < 0)
+                    this.dragSelectionHelper.style.top = `${e.pageY}px`;
+                if (dx < 0)
+                    this.dragSelectionHelper.style.left = `${e.pageX}px`;
+
+                this.dragSelectionHelper.style.height = `${Math.abs(dy)}px`;
+                this.dragSelectionHelper.style.width = `${Math.abs(dx)}px`;
+
+                e.preventDefault();
+            };
+
+            let dragSelectionMouseUp = () => {
+                if (this.dragSelectionHelper) {
+                    this.dragSelectionHelper.remove();
+                    this.dragSelectionHelper = null;
+                }
+
+                document.removeEventListener('mousemove', dragSelectionMouseMove);
+                document.removeEventListener('mouseup', dragSelectionMouseUp);
+                dragSelectionMouseMove = dragSelectionMouseUp = null;
+            };
+
+            document.addEventListener('mousemove', dragSelectionMouseMove);
+            document.addEventListener('mouseup', dragSelectionMouseUp);
+            document.body.appendChild(this.dragSelectionHelper);
         }
     }
 
@@ -298,7 +362,7 @@ export class BodyRow extends Component {
         }
 
         return (
-            <tr role="row" tabIndex={tabIndex} ref={(el) => { this.container = el; }} className={className} onClick={this.onClick} onDoubleClick={this.onDoubleClick} onTouchEnd={this.onTouchEnd} onContextMenu={this.onRightClick} onMouseDown={this.onMouseDown}
+            <tr role="row" tabIndex={tabIndex} ref={(el) => { this.container = el; }} className={className} onClick={this.onClick} onDoubleClick={this.onDoubleClick} onTouchEnd={this.onTouchEnd} onContextMenu={this.onRightClick} onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp}
                 onDragStart={this.props.onDragStart} onDragEnd={this.onDragEnd} onDragOver={this.onDragOver} onDragLeave={this.onDragLeave} onDrop={this.onDrop} style={style} onKeyDown={this.onKeyDown}>
                 {cells}
             </tr>

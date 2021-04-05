@@ -247,7 +247,7 @@ export class BodyCell extends Component {
             }
 
             if (showReorder) {
-                let reorderIcon = classNames('p-table-reorderablerow-handle', this.props.rowReorderIcon);
+                let reorderIcon = classNames('p-datatable-reorderablerow-handle', this.props.rowReorderIcon);
                 content = (
                     <i className={reorderIcon}></i>
                 );

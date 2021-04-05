@@ -18,6 +18,8 @@ export class TableBody extends Component {
         this.onRowDragEnd = this.onRowDragEnd.bind(this);
         this.onRowDragLeave = this.onRowDragLeave.bind(this);
         this.onRowDrop = this.onRowDrop.bind(this);
+        this.onRowMouseDown = this.onRowMouseDown.bind(this);
+        this.onRowMouseUp = this.onRowMouseUp.bind(this);
     }
 
     onRowClick(event) {
@@ -176,6 +178,20 @@ export class TableBody extends Component {
         }
 
         return selection;
+    }
+
+    onRowMouseDown(event) {
+        if (this.props.dragSelection) {
+            this.anchorRowIndex = event.index;
+            this.rangeRowIndex = event.index;
+            this.anchorRowFirst = this.props.first;
+        }
+    }
+
+    onRowMouseUp(event) {
+        if (this.props.dragSelection) {
+            this.onRangeSelection(event);
+        }
     }
 
     onRowTouchEnd(event) {
@@ -579,7 +595,8 @@ export class TableBody extends Component {
                     let isRowGroupExpanded = this.props.expandableRowGroups && hasSubheaderGrouping && rowGroupHeaderExpanded;
                     if (!this.props.expandableRowGroups || isRowGroupExpanded) {
                         //row content
-                        let bodyRow = <BodyRow tableId={this.props.tableId} key={i} value={this.props.value} rowData={rowData} rowIndex={i} onClick={this.onRowClick} onDoubleClick={this.props.onRowDoubleClick} onRightClick={this.onRowRightClick} onTouchEnd={this.onRowTouchEnd}
+                        let bodyRow = <BodyRow tableId={this.props.tableId} key={i} value={this.props.value} rowData={rowData} rowIndex={i} onClick={this.onRowClick} onDoubleClick={this.props.onRowDoubleClick}
+                            onRightClick={this.onRowRightClick} onTouchEnd={this.onRowTouchEnd} onMouseDown={this.onRowMouseDown} onMouseUp={this.onRowMouseUp}
                             onRowToggle={this.onRowToggle} expanded={expanded} selectionMode={this.props.selectionMode} selectOnEdit={this.props.selectOnEdit}
                             onRadioClick={this.onRadioClick} onCheckboxClick={this.onCheckboxClick} selected={selected} contextMenuSelected={contextMenuSelected} rowClassName={this.props.rowClassName}
                             sortField={this.props.sortField} rowGroupMode={this.props.rowGroupMode} groupRowSpan={groupRowSpan}
@@ -587,7 +604,8 @@ export class TableBody extends Component {
                             onDrop={this.onRowDrop} virtualScroll={this.props.virtualScroll} virtualRowHeight={this.props.virtualRowHeight}
                             editMode={this.props.editMode} editing={editing} isRowEditingControlled={!!this.props.onRowEditChange} rowEditorValidator={this.props.rowEditorValidator}
                             onRowEditInit={this.props.onRowEditInit} onRowEditSave={this.props.onRowEditSave} onRowEditCancel={this.props.onRowEditCancel} onRowEditingToggle={this.onRowEditingToggle}
-                            showRowReorderElement={this.props.showRowReorderElement} showSelectionElement={this.props.showSelectionElement} selectionModeInColumn={this.props.selectionModeInColumn} rowSelectionMode={this.props.rowSelectionMode}>
+                            showRowReorderElement={this.props.showRowReorderElement} showSelectionElement={this.props.showSelectionElement}
+                            selectionModeInColumn={this.props.selectionModeInColumn} rowSelectionMode={this.props.rowSelectionMode} dragSelection={this.props.dragSelection}>
                             {this.props.children}
                         </BodyRow>
 
