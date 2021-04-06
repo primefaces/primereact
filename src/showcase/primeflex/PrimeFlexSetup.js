@@ -9,7 +9,7 @@ export class PrimeFlexSetup extends Component {
                 <div className="content-section documentation">
                     <h1>PrimeFlex</h1>
                     <p>PrimeFlex is a CSS utility library featuring various helpers such as a grid system, flexbox, spacing, elevation and more. Although it is not required, it is highly
-                        recommended to add PrimeFlex as it is likely to need such utilities when developing applications with PrimeVue.</p>
+                        recommended to add PrimeFlex as it is likely to need such utilities when developing applications with PrimeReact.</p>
 
                     <h5>Download</h5>
                     <p>PrimeFlex is available at <a href="https://www.npmjs.com/package/primeflex">npm</a>, if you have an existing application run the following commands to install it.</p>
