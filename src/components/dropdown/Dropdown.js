@@ -300,7 +300,7 @@ export class Dropdown extends Component {
             if (option)
                 return option;
             else if ((groupIndex + 1) !== visibleOptions.length)
-                return this.findNextOption({group: (groupIndex + 1), option: -1});
+                return this.findNextOption({ group: (groupIndex + 1), option: -1 });
             else
                 return null;
         }
@@ -310,16 +310,16 @@ export class Dropdown extends Component {
     }
 
     findNextOptionInList(list, index) {
-            let i = index + 1;
-            if (i === list.length) {
-                return null;
-            }
+        let i = index + 1;
+        if (i === list.length) {
+            return null;
+        }
 
-            let option = list[i];
-            if (this.isOptionDisabled(option))
-                return this.findNextOptionInList(i);
-            else
-                return option;
+        let option = list[i];
+        if (this.isOptionDisabled(option))
+            return this.findNextOptionInList(i);
+        else
+            return option;
     }
 
     findPrevOption(index) {
@@ -337,7 +337,7 @@ export class Dropdown extends Component {
             if (option)
                 return option;
             else if (groupIndex > 0)
-                return this.findPrevOption({group: (groupIndex - 1), option: this.getOptionGroupChildren(visibleOptions[groupIndex - 1]).length});
+                return this.findPrevOption({ group: (groupIndex - 1), option: this.getOptionGroupChildren(visibleOptions[groupIndex - 1]).length });
             else
                 return null;
         }
@@ -418,7 +418,7 @@ export class Dropdown extends Component {
     }
 
     searchOptionInGroup(index) {
-        let searchIndex = index === -1 ? {group: 0, option: -1} : index;
+        let searchIndex = index === -1 ? { group: 0, option: -1 } : index;
         let visibleOptions = this.getVisibleOptions();
 
         for (let i = searchIndex.group; i < visibleOptions.length; i++) {
@@ -432,7 +432,7 @@ export class Dropdown extends Component {
 
         for (let i = 0; i <= searchIndex.group; i++) {
             let groupOptions = this.getOptionGroupChildren(visibleOptions[i]);
-            for (let j = 0; j < (searchIndex.group === i ? searchIndex.option: groupOptions.length); j++) {
+            for (let j = 0; j < (searchIndex.group === i ? searchIndex.option : groupOptions.length); j++) {
                 if (this.matchesSearchValue(groupOptions[j])) {
                     return groupOptions[j];
                 }
@@ -536,7 +536,7 @@ export class Dropdown extends Component {
 
     getSelectedOption() {
         let index = this.getSelectedOptionIndex();
-        return index !== -1 ? (this.props.optionGroupLabel ? this.getOptionGroupChildren(this.props.options[index.group])[index.option]: this.props.options[index]) : null;
+        return index !== -1 ? (this.props.optionGroupLabel ? this.getOptionGroupChildren(this.props.options[index.group])[index.option] : this.props.options[index]) : null;
     }
 
     getSelectedOptionIndex() {
@@ -545,7 +545,7 @@ export class Dropdown extends Component {
                 for (let i = 0; i < this.props.options.length; i++) {
                     let selectedOptionIndex = this.findOptionIndexInList(this.props.value, this.getOptionGroupChildren(this.props.options[i]));
                     if (selectedOptionIndex !== -1) {
-                        return {group: i, option: selectedOptionIndex};
+                        return { group: i, option: selectedOptionIndex };
                     }
                 }
             }
@@ -714,7 +714,7 @@ export class Dropdown extends Component {
     }
 
     isOptionDisabled(option) {
-        return this.props.optionDisabled ? ObjectUtils.resolveFieldData(option, this.props.optionDisabled) : false;
+        return this.props.optionDisabled ? ObjectUtils.resolveFieldData(option, this.props.optionDisabled) : (option.disabled !== undefined ? option.disabled : false);
     }
 
     getOptionGroupRenderKey(optionGroup) {
@@ -743,7 +743,7 @@ export class Dropdown extends Component {
                 for (let optgroup of this.props.options) {
                     let filteredSubOptions = FilterUtils.filter(this.getOptionGroupChildren(optgroup), searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
                     if (filteredSubOptions && filteredSubOptions.length) {
-                        filteredGroups.push({...optgroup, ...{items: filteredSubOptions}});
+                        filteredGroups.push({ ...optgroup, ...{ items: filteredSubOptions } });
                     }
                 }
                 return filteredGroups;

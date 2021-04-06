@@ -627,7 +627,7 @@ export class MultiSelect extends Component {
     }
 
     isOptionDisabled(option) {
-        return this.props.optionDisabled ? ObjectUtils.resolveFieldData(option, this.props.optionDisabled) : false;
+        return this.props.optionDisabled ? ObjectUtils.resolveFieldData(option, this.props.optionDisabled) : (option.disabled !== undefined ? option.disabled : false);
     }
 
     getVisibleOptions() {
