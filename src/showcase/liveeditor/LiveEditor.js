@@ -7,11 +7,15 @@ import { SplitButton } from '../../components/splitbutton/SplitButton';
 import { TabPanel } from '../../components/tabview/TabView';
 
 export function useLiveEditorTabs(props) {
-    let tabs = [(
-        <TabPanel key="source" header="Source">
-            <LiveEditor {...props} />
-        </TabPanel>
-    )];
+    let tabs = Object.entries(props.sources).map(([key, value]) => {
+        return (
+            <TabPanel key={key} header={value.tabName}>
+                <CodeHighlight lang="js">
+                    {value.content}
+                </CodeHighlight>
+            </TabPanel>
+        );
+    });
 
     if (props.service) {
         tabs.push(
