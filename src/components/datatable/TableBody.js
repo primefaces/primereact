@@ -132,12 +132,10 @@ export class TableBody extends Component {
 
         if (this.isCheckboxSelectionMode() && !this.props.cellSelection) {
             const checkbox = DomHandler.findSingle(target, 'td.p-selection-column .p-checkbox-box');
-            if (checkbox) {
-                checkbox.focus();
-            }
+            checkbox && checkbox.focus();
         }
-        else if (target) {
-            target.focus();
+        else {
+            target && target.focus();
         }
     }
 
