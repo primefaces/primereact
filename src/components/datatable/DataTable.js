@@ -46,7 +46,7 @@ export class DataTable extends Component {
         emptyMessage: null,
         selectionMode: null,
         rowSelectionMode: 'new',
-        cellSelectionMode: 'add',
+        cellSelectionMode: 'new',
         dragSelection: false,
         cellSelection: false,
         selection: null,

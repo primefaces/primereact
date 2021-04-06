@@ -109,7 +109,6 @@ export class DataTableSelectionDemo extends Component {
 
                     <div className="card">
                         <h5>Checkbox</h5>
-
                         <DataTable value={this.state.products} selection={this.state.selectedProducts3} onSelectionChange={e => this.setState({ selectedProducts3: e.value })} dataKey="id">
                             <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>
                             <Column field="code" header="Code"></Column>
