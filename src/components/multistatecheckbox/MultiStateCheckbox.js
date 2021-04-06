@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {classNames} from "../utils/ClassNames";
-import Option from "./Option";
+import useDeepCompareMemoized from "../utils/useDeepCompareMemoized";
+import classnames from "classnames";
 
 export const defaultProps = {
     id: null,
     inputId: null,
+    options: [],
     value: null,
     name: null,
     style: null,
@@ -20,6 +22,7 @@ export const defaultProps = {
 export const propTypes = {
     id: PropTypes.string,
     inputId: PropTypes.string,
+    options: PropTypes.arrayOf(PropTypes.object),
     value: PropTypes.bool,
     name: PropTypes.string,
     style: PropTypes.object,
@@ -31,24 +34,21 @@ export const propTypes = {
 }
 
 export function MultiStateCheckbox(props) {
-    const { value, children, id } = props;
+    const { value, id } = props;
     const { style, className } = props;
     const { inputId, name, ariaLabelledBy, disabled, readOnly } = props;
     const [focused, setFocused] = React.useState(false);
     const input = React.useRef();
 
     const options = React.useMemo(() => {
-        const optionsComponents = Array.isArray(children) ? children : [children]
-        const options = optionsComponents
-            .map(it => it.props)
-            .filter(it => it.eligible === undefined || !!it.eligible)
+        const options = props.options.filter(it => it.eligible === undefined || !!it.eligible)
 
         if (new Set(options.map(it => it.value)).size !== options.length) {
             console.warn("MultiStateCheckbox contains one or more Options with duplicated values, which are not supported. Expect weird behavior")
         }
 
         return options;
-    }, [children])
+    }, [ useDeepCompareMemoized(props.options) ])
 
     function onFocus() {
         !disabled && setFocused(true)
@@ -109,10 +109,13 @@ export function MultiStateCheckbox(props) {
                 />
             </div>
             <div className={boxClass} style={currentOption?.boxStyle} role="checkbox" aria-checked={!!currentOption}>
-                { currentOption && <Option {...currentOption}/> }
+                {
+                    currentOption && <span
+                        className={classnames('p-checkbox-icon p-c', currentOption.icon, currentOption.className)}
+                        style={currentOption.style}
+                    />
+                }
             </div>
         </div>
     )
 }
-
-export { Option }

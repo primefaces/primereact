@@ -1,6 +1,16 @@
+interface Option {
+    value: any,
+    icon: string,
+    style?: any,
+    boxStyle?: any,
+    className?: string,
+    boxClassName?: string,
+}
+
 interface MultiStateCheckboxProps {
     id?: string;
     inputId?: string;
+    options?: Option[]
     value?: any;
     name?: string;
     style?: object;
