@@ -2313,7 +2313,8 @@
     text-align: left;
     border: 1px solid #383838;
     border-width: 0 0 1px 0;
-    padding: 1rem 1rem; }
+    padding: 1rem 1rem;
+    outline-color: #a7d8a9; }
     .p-datatable .p-datatable-tbody > tr > td .p-row-toggler,
     .p-datatable .p-datatable-tbody > tr > td .p-row-editor-init,
     .p-datatable .p-datatable-tbody > tr > td .p-row-editor-save,
@@ -2341,6 +2342,9 @@
         box-shadow: 0 0 0 1px #a7d8a9; }
     .p-datatable .p-datatable-tbody > tr > td .p-row-editor-save {
       margin-right: 0.5rem; }
+    .p-datatable .p-datatable-tbody > tr > td.p-highlight {
+      background: rgba(129, 199, 132, 0.16);
+      color: rgba(255, 255, 255, 0.87); }
   .p-datatable .p-datatable-tbody > tr.p-highlight {
     background: rgba(129, 199, 132, 0.16);
     color: rgba(255, 255, 255, 0.87); }
