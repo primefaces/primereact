@@ -33,7 +33,9 @@ interface DataTableProps {
     emptyMessage?: any;
     selectionMode?: string;
     rowSelectionMode?: 'new' | 'add' | 'checkbox' | 'radio';
+    cellSelectionMode?: 'new' | 'add';
     dragSelection?: boolean;
+    cellSelection?: boolean;
     selection?: any;
     contextMenuSelection?: any;
     compareSelectionBy?: string;
@@ -93,6 +95,8 @@ interface DataTableProps {
     onRowUnselect?(e: {originalEvent: Event, data: any, type: string}): void;
     onRowExpand?(e: {originalEvent: Event, data: any}): void;
     onRowCollapse?(e: {originalEvent: Event, data: any}): void;
+    onCellSelect?(e: {originalEvent: Event, data: any, type: string}): void;
+    onCellUnselect?(e: {originalEvent: Event, data: any, type: string}): void;
     onContextMenu?(e: {originalEvent: Event, data: any}): void;
     onColReorder?(e: {originalEvent: Event, dragIndex: number, dropIndex: number, columns: any}): void;
     onRowReorder?(e: {originalEvent: Event, value: any, dragIndex: number, dropIndex: number}): void;
