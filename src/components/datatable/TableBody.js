@@ -281,9 +281,9 @@ export class TableBody extends Component {
                 };
 
                 selection.push(rangeRowData);
-            }
 
-            this.onSelect({ originalEvent: event.originalEvent, data: rangeRowData, type: 'cell' });
+                this.onSelect({ originalEvent: event.originalEvent, data: rangeRowData, type: 'cell' });
+            }
         }
         return selection;
     }
