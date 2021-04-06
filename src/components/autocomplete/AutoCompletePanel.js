@@ -17,7 +17,7 @@ class AutoCompletePanelComponent extends Component {
         optionGroupTemplate: null,
         itemTemplate: null,
         onItemClick: null,
-        scrollHeight: null,
+        scrollHeight: '200px',
         listId: null,
         ariaSelected: null,
         panelClassName: null,
