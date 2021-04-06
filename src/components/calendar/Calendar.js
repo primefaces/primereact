@@ -2987,6 +2987,7 @@ export class Calendar extends Component {
     render() {
         const className = classNames('p-calendar p-component p-inputwrapper', this.props.className, {
             'p-calendar-w-btn': this.props.showIcon,
+            'p-calendar-disabled': this.props.disabled,
             'p-calendar-timeonly': this.props.timeOnly,
             'p-inputwrapper-filled': this.props.value || (DomHandler.hasClass(this.inputRef.current, 'p-filled') && this.inputRef.current.value !== ''),
             'p-inputwrapper-focus': this.state.focused
