@@ -43,11 +43,11 @@ export class TableBody extends Component {
         const allowCheckboxRowSelection = this.isCheckboxSelectionMode() && !this.isCheckboxRowSelectionMode();
 
         if (this.props.selectionMode || allowRadioRowSelection || allowCheckboxRowSelection) {
-            if (this.isMultipleSelectionMode() && event.originalEvent.shiftKey && this.anchorRowIndex !== null) {
+            if ((this.isMultipleSelectionMode() || allowCheckboxRowSelection) && event.originalEvent.shiftKey && this.anchorRowIndex !== null) {
                 this.onRangeSelection(event);
             }
             else {
-                let metaKey = this.rowTouched && this.props.metaKeySelection && (event.originalEvent.metaKey || event.originalEvent.ctrlKey);
+                let metaKey = !this.rowTouched && this.props.metaKeySelection && (event.originalEvent.metaKey || event.originalEvent.ctrlKey);
                 this.anchorRowIndex = event.index;
                 this.rangeRowIndex = event.index;
                 this.anchorRowFirst = this.props.first;
@@ -75,7 +75,7 @@ export class TableBody extends Component {
                 this.onRangeSelection(event);
             }
             else {
-                let metaKey = this.rowTouched && this.props.metaKeySelection && (event.originalEvent.metaKey || event.originalEvent.ctrlKey);
+                let metaKey = !this.rowTouched && this.props.metaKeySelection && (event.originalEvent.metaKey || event.originalEvent.ctrlKey);
                 let { originalEvent, ...data } = event;
                 this.anchorRowIndex = event.rowIndex;
                 this.rangeRowIndex = event.rowIndex;
@@ -130,7 +130,13 @@ export class TableBody extends Component {
         this.anchorRowIndex = this.rangeRowIndex;
         this.anchorCellIndex = event.cellIndex;
 
-        if (target) {
+        if (this.isCheckboxSelectionMode() && !this.props.cellSelection) {
+            const checkbox = DomHandler.findSingle(target, 'td.p-selection-column .p-checkbox-box');
+            if (checkbox) {
+                checkbox.focus();
+            }
+        }
+        else if (target) {
             target.focus();
         }
     }
