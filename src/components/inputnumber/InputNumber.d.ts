@@ -1,9 +1,28 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
+interface OnValueChangeTargetOptions {
+    name: string;
+    id: string;
+    value: string;
+}
+
+interface OnValueChangeParams {
+    originalEvent: Event;
+    value: string;
+    stopPropagation(): void;
+    preventDefault(): void;
+    target: OnValueChangeTargetOptions;
+}
+
+interface OnChangeParams {
+    originalEvent: Event;
+    value: string;
+}
+
 interface InputNumberProps {
     value?: number;
-    inputRef?: any;
+    inputRef?: React.Ref<HTMLInputElement>;
     format?: boolean;
     showButtons?: boolean;
     buttonLayout?: string;
@@ -44,11 +63,11 @@ interface InputNumberProps {
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
-    onValueChange?(e: {originalEvent: Event, value: any, target: {name: string, id: string, value: any}}): void;
-    onChange?(e: {originalEvent: Event, value: any}): void;
-    onBlur?(e: Event): void;
-    onFocus?(e: Event): void;
-    onKeyDown?(e: Event): void;
+    onValueChange?(e: OnValueChangeParams): void;
+    onChange?(e: OnChangeParams): void;
+    onFocus?(event: React.FormEvent<HTMLInputElement>): void;
+    onBlur?(event: React.FormEvent<HTMLInputElement>): void;
+    onKeyDown?(event: React.KeyboardEvent<HTMLInputElement>): void;
 }
 
-export class InputNumber extends React.Component<InputNumberProps,any> {}
+export class InputNumber extends React.Component<InputNumberProps, any> { }
