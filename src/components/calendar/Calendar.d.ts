@@ -104,8 +104,8 @@ interface CalendarProps {
     onSelect?(e: OnSelectParams): void;
     onChange?(e: OnChangeParams): void;
     onViewDateChange?(e: OnViewChangeParams): void;
-    onTodayButtonClick?(event: React.MouseEvent<HTMLElement>): void;
-    onClearButtonClick?(event: React.MouseEvent<HTMLElement>): void;
+    onTodayButtonClick?(event: React.MouseEvent<HTMLButtonElement>): void;
+    onClearButtonClick?(event: React.MouseEvent<HTMLButtonElement>): void;
 }
 
 export class Calendar extends React.Component<CalendarProps, any> { }
