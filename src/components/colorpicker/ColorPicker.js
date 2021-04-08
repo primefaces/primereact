@@ -19,7 +19,7 @@ export class ColorPicker extends Component {
         className: null,
         defaultColor: 'ff0000',
         inline: false,
-        format: "hex",
+        format: 'hex',
         appendTo: null,
         disabled: false,
         tabIndex: null,
