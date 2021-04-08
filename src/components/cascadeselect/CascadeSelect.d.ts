@@ -1,31 +1,40 @@
 import * as React from 'react';
 
+type ItemTemplateType = string | JSX.Element | ((option: any) => JSX.Element);
+
+interface OnChangeParams {
+    originalEvent: Event;
+    value: any;
+}
+
+interface OnGroupChangeParams extends OnChangeParams { }
+
 interface CascadeSelectProps {
     id?: string;
-    inputRef?: any;
-    name?: string;
+    inputRef?: React.Ref<HTMLInputElement>;
     style?: object;
     className?: string;
     value?: any;
+    name?: string;
     options?: any[];
     optionLabel?: string;
     optionValue?: string;
     optionGroupLabel?: string;
-    options?: any[];
+    optionGroupChildren?: string[];
     placeholder?: string;
-    itemTemplate?: any;
+    itemTemplate?: ItemTemplateType;
     disabled?: boolean;
     dataKey?: string;
     inputId?: string;
     tabIndex?: number;
     ariaLabelledBy?: string;
-    appendTo?: any;
-    onChange?(e: {originalEvent: Event, value: any}): void;
-    onGroupChange?(e: {originalEvent: Event, value: any}): void;
+    appendTo?: React.HTMLElement;
+    onChange?(e: OnChangeParams): void;
+    onGroupChange?(e: OnGroupChangeParams): void;
     onBeforeShow?(): void;
     onBeforeHide?(): void;
     onShow?(): void;
     onHide?(): void;
 }
 
-export class CascadeSelect extends React.Component<CascadeSelectProps,any> {}
+export class CascadeSelect extends React.Component<CascadeSelectProps, any> { }
