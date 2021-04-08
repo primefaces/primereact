@@ -1,9 +1,9 @@
 // Config
-export default PrimeReact = {
+export default interface PrimeReact {
     ripple?: boolean,
     locale?: string,
     zIndex?: number
-};
+}
 
 // Locale
 export function locale(locale: string): object;
@@ -14,7 +14,7 @@ export function localeOption(key: string, locale: string): void;
 export function localeOptions(locale: string): void;
 
 // Icons
-export const PrimeIcons = {
+export interface PrimeIcons {
     ALIGN_CENTER?: string,
     ALIGN_JUSTIFY?: string,
     ALIGN_LEFT?: string,
