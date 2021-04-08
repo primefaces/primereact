@@ -59,6 +59,7 @@ export class Calendar extends Component {
         panelClassName: null,
         monthNavigator: false,
         yearNavigator: false,
+        yearRange: null,
         disabledDates: null,
         disabledDays: null,
         minDate: null,
@@ -132,6 +133,7 @@ export class Calendar extends Component {
         panelClassName: PropTypes.string,
         monthNavigator: PropTypes.bool,
         yearNavigator: PropTypes.bool,
+        yearRange: PropTypes.string,
         disabledDates: PropTypes.array,
         disabledDays: PropTypes.array,
         minDate: PropTypes.any,
@@ -158,7 +160,7 @@ export class Calendar extends Component {
         onChange: PropTypes.func,
         onViewDateChange: PropTypes.func,
         onTodayButtonClick: PropTypes.func,
-        onClearButtonClick: PropTypes.func,
+        onClearButtonClick: PropTypes.func
     }
 
     constructor(props) {
