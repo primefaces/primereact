@@ -1,16 +1,15 @@
 import * as React from 'react';
-import {Omit} from '../util';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-interface ButtonProps extends Omit<React.HTMLProps<HTMLButtonElement>, 'ref'> {
+interface ButtonProps extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
     label?: string;
     icon?: string;
     iconPos?: string;
-    badge?: string,
-    badgeClassName?: string,
-    tooltip?: any;
+    badge?: string;
+    badgeClassName?: string;
+    tooltip?: string;
     tooltipOptions?: TooltipOptions;
     [key: string]: any;
 }
 
-export class Button extends React.Component<ButtonProps,any> {}
+export class Button extends React.Component<ButtonProps, any> { }
