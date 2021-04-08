@@ -1,22 +1,35 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-interface InputSwitchProps {
-    id?: string;
-    inputRef?: any;
-    name?: string;
-    offLabel?: string;
-    onLabel?: string;
-    style?: object;
-    className?: string;
-    checked?: boolean;
-    disabled?: boolean;
-    tooltip?: any;
-    tooltipOptions?: TooltipOptions;
-    ariaLabelledBy?: string,
-    onChange?(e: {originalEvent: Event, value: boolean, target: {name: string, id: string, value: boolean}}): void;
-    onFocus?(event: Event): void;
-    onBlur?(event: Event): void;
+interface OnChangeTargetOptions {
+    name: string;
+    id: string;
+    value: boolean;
 }
 
-export class InputSwitch extends React.Component<InputSwitchProps,any> {}
+interface OnChangeParams {
+    originalEvent: Event;
+    value: boolean;
+    stopPropagation(): void;
+    preventDefault(): void;
+    target: OnChangeTargetOptions;
+}
+
+interface InputSwitchProps {
+    id?: string;
+    inputRef?: React.Ref<HTMLInputElement>;
+    style?: object;
+    className?: string;
+    inputId?: string;
+    name?: string;
+    checked?: boolean;
+    disabled?: boolean;
+    tooltip?: string;
+    tooltipOptions?: TooltipOptions;
+    ariaLabelledBy?: string;
+    onChange?(e: OnChangeParams): void;
+    onFocus?(event: React.FormEvent<HTMLInputElement>): void;
+    onBlur?(event: React.FormEvent<HTMLInputElement>): void;
+}
+
+export class InputSwitch extends React.Component<InputSwitchProps, any> { }
