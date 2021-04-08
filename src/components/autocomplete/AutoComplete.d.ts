@@ -40,7 +40,7 @@ interface CompleteMethodParams {
 
 interface AutoCompleteProps {
     id?: string;
-    inputRef?: string;
+    inputRef?: React.Ref<HTMLInputElement>;
     value?: any;
     name?: string;
     type?: string;
