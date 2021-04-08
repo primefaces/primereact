@@ -1,9 +1,49 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
+type OptionGroupTemplateType = string | JSX.Element | ((option: any, index: number) => JSX.Element);
+
+type ItemTemplateType = string | JSX.Element | ((option: any) => JSX.Element);
+
+type SelectedItemTemplateType = string | JSX.Element | ((value: any) => JSX.Element);
+
+type EmptyFilterMessageType = string | JSX.Element | ((props: MultiSelectProps) => JSX.Element);
+
+interface PanelHeaderTemplateParams {
+    className: string;
+    checkboxElement: HTMLElement;
+    checked: boolean;
+    onChange(e: { originalEvent: Event, checked: boolean }): void;
+    filterElement: HTMLElement;
+    closeElement: HTMLElement;
+    closeElementClassName: string;
+    closeIconClassName: string;
+    onCloseClick(event: React.MouseEvent<HTMLElement>): void;
+    element: HTMLElement;
+    props: MultiSelectProps;
+}
+
+type PanelHeaderTemplateType = string | JSX.Element | ((e: PanelHeaderTemplateParams) => JSX.Element);
+
+type PanelFooterTemplateType = string | JSX.Element | ((props: MultiSelectProps) => JSX.Element);
+
+interface OnChangeTargetOptions {
+    name: string;
+    id: string;
+    value: any;
+}
+
+interface OnChangeParams {
+    originalEvent: Event;
+    value: any;
+    stopPropagation(): void;
+    preventDefault(): void;
+    target: OnChangeTargetOptions;
+}
+
 interface MultiSelectProps {
     id?: string;
-    inputRef?: any;
+    inputRef?: React.Ref<HTMLSelectElement>;
     name?: string;
     value?: any;
     options?: any[];
@@ -12,6 +52,7 @@ interface MultiSelectProps {
     optionDisabled?: boolean;
     optionGroupLabel?: string;
     optionGroupChildren?: string;
+    optionGroupTemplate?: OptionGroupTemplateType;
     display?: string;
     style?: object;
     className?: string;
@@ -27,27 +68,26 @@ interface MultiSelectProps {
     filterMatchMode?: string;
     filterPlaceholder?: string;
     filterLocale?: string;
-    emptyFilterMessage?: any;
+    emptyFilterMessage?: EmptyFilterMessageType;
     resetFilterOnHide?: boolean;
     tabIndex?: number;
     dataKey?: string;
     inputId?: string;
     required?: boolean;
     appendTo?: HTMLElement;
-    tooltip?: any;
+    tooltip?: string;
     tooltipOptions?: TooltipOptions;
-    ariaLabelledBy?: string;
     maxSelectedLabels?: number;
     selectionLimit?: number;
     selectedItemsLabel?: string;
-    panelHeaderTemplate?: any;
-    panelFooterTemplate?: any;
-    itemTemplate?(item: any): JSX.Element | undefined;
-    optionGroupTemplate?:((option: any) => any | any);
-    selectedItemTemplate?(value: any): JSX.Element | undefined;
-    onChange?(e: {originalEvent: Event, value: any, target: {name: string, id: string, value: any}}): void;
-    onFocus?(event: Event): void;
-    onBlur?(event: Event): void;
+    ariaLabelledBy?: string;
+    itemTemplate?: ItemTemplateType;
+    selectedItemTemplate?: SelectedItemTemplateType;
+    panelHeaderTemplate?: PanelHeaderTemplateType;
+    panelFooterTemplate?: PanelFooterTemplateType;
+    onChange?(e: OnChangeParams): void;
+    onFocus?(event: React.FormEvent<HTMLInputElement>): void;
+    onBlur?(event: React.FormEvent<HTMLInputElement>): void;
 }
 
-export class MultiSelect extends React.Component<MultiSelectProps,any> {}
+export class MultiSelect extends React.Component<MultiSelectProps, any> { }
