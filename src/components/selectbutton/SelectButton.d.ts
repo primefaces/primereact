@@ -1,6 +1,20 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
+interface OnChangeTargetOptions {
+    name: string;
+    id: string;
+    value: any;
+}
+
+interface OnChangeParams {
+    originalEvent: Event;
+    value: any;
+    stopPropagation(): void;
+    preventDefault(): void;
+    target: OnChangeTargetOptions;
+}
+
 interface SelectButtonProps {
     id?: string;
     value?: any;
@@ -14,11 +28,11 @@ interface SelectButtonProps {
     style?: object;
     className?: string;
     dataKey?: string;
-    tooltip?: any;
+    tooltip?: string;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
-    itemTemplate?(option:any): React.ReactNode;
-    onChange?(e: {originalEvent: Event, value: any, target: {name: string, id: string, value: any}}): void;
+    itemTemplate?(option: any): React.ReactNode;
+    onChange?(e: OnChangeParams): void;
 }
 
-export class SelectButton extends React.Component<SelectButtonProps,any> {}
+export class SelectButton extends React.Component<SelectButtonProps, any> { }
