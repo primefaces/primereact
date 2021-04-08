@@ -91,7 +91,7 @@ interface CalendarProps {
     clearButtonClassName?: string;
     autoZIndex?: boolean;
     baseZIndex?: number;
-    appendTo?: React.HTMLElement;
+    appendTo?: HTMLElement;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
