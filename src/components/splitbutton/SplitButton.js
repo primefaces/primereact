@@ -25,11 +25,11 @@ export class SplitButton extends Component {
         menuStyle: null,
         menuClassName: null,
         tabIndex: null,
-        onClick: null,
         appendTo: null,
         tooltip: null,
         tooltipOptions: null,
-        buttonTemplate: null
+        buttonTemplate: null,
+        onClick: null
     }
 
     static propTypes = {
@@ -43,11 +43,11 @@ export class SplitButton extends Component {
         menustyle: PropTypes.object,
         menuClassName: PropTypes.string,
         tabIndex: PropTypes.number,
-        onClick: PropTypes.func,
         appendTo: PropTypes.object,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
-        buttonTemplate: PropTypes.any
+        buttonTemplate: PropTypes.any,
+        onClick: PropTypes.func
     }
 
     constructor(props) {

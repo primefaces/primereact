@@ -1,6 +1,8 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
+type ButtonTemplateType = string | JSX.Element | ((props: SplitButtonProps) => JSX.Element);
+
 interface SplitButtonProps {
     id?: string;
     label?: string;
@@ -13,10 +15,10 @@ interface SplitButtonProps {
     menuClassName?: string;
     tabIndex?: number;
     appendTo?: HTMLElement;
-    tooltip?: any;
+    tooltip?: string;
     tooltipOptions?: TooltipOptions;
-    buttonTemplate?: any;
-    onClick?(event: Event): void;
+    buttonTemplate?: ButtonTemplateType;
+    onClick?(event: React.MouseEvent<HTMLElement>): void;
 }
 
-export class SplitButton extends React.Component<SplitButtonProps,any> {}
+export class SplitButton extends React.Component<SplitButtonProps, any> { }
