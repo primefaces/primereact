@@ -29,7 +29,7 @@ export class Knob extends Component {
         id: PropTypes.string,
         style: PropTypes.object,
         className: PropTypes.string,
-        value: PropTypes.any,
+        value: PropTypes.number,
         size: PropTypes.number,
         disabled: PropTypes.bool,
         readOnly: PropTypes.bool,
