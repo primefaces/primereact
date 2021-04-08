@@ -1,10 +1,10 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
-import KeyFilterOptions from '../keyfilter/KeyFilterOptions';
+import { KeyFilterType } from '../keyfilter/KeyFilterOptions';
 
 interface InputTextProps extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
     [key: string]: any;
-    keyfilter?: KeyFilterOptions;
+    keyfilter?: KeyFilterType;
     validateOnly?: boolean;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
