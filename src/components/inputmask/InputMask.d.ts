@@ -1,9 +1,28 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
+interface OnCompleteParams {
+    originalEvent: Event;
+    value: string | undefined | null;
+}
+
+interface OnChangeTargetOptions {
+    name: string;
+    id: string;
+    value: string;
+}
+
+interface OnChangeParams {
+    originalEvent: Event;
+    value: string;
+    stopPropagation(): void;
+    preventDefault(): void;
+    target: OnChangeTargetOptions;
+}
+
 interface InputMaskProps {
     id?: string;
-    inputRef?: any;
+    inputRef?: React.Ref<HTMLInputElement>;
     value?: string;
     type?: string;
     mask?: string;
@@ -20,13 +39,13 @@ interface InputMaskProps {
     readOnly?: boolean;
     name?: string;
     required?: boolean;
-    tooltip?: any;
+    tooltip?: string;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
-    onComplete?(e: {originalEvent: Event, value: any}): void;
-    onChange?(e: {originalEvent: Event, value: any, target: {name: string, id: string, value: any}}): void;
-    onFocus?(e: Event): void;
-    onBlur?(e: Event): void;
+    onComplete?(e: OnCompleteParams): void;
+    onChange?(e: OnChangeParams): void;
+    onFocus?(event: React.FormEvent<HTMLInputElement>): void;
+    onBlur?(event: React.FormEvent<HTMLInputElement>): void;
 }
 
-export class InputMask extends React.Component<InputMaskProps,any> {}
+export class InputMask extends React.Component<InputMaskProps, any> { }
