@@ -9,17 +9,17 @@ class InputTextareaComponent extends Component {
 
     static defaultProps = {
         autoResize: false,
-        onInput: null,
         tooltip: null,
         tooltipOptions: null,
+        onInput: null,
         forwardRef: null
     };
 
     static propTypes = {
         autoResize: PropTypes.bool,
-        onInput: PropTypes.func,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
+        onInput: PropTypes.func,
         forwardRef: PropTypes.any
     };
 
