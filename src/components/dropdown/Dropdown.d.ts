@@ -1,9 +1,31 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
+type OptionGroupTemplateType = string | JSX.Element | ((option: any, index: number) => JSX.Element);
+
+type ValueTemplateType = string | JSX.Element | ((option: any, props: DropdownProps) => JSX.Element);
+
+type ItemTemplateType = string | JSX.Element | ((option: any) => JSX.Element);
+
+type EmptyFilterMessageType = string | JSX.Element | ((props: DropdownProps) => JSX.Element);
+
+interface OnChangeTargetOptions {
+    name: string;
+    id: string;
+    value: string | undefined | null;
+}
+
+interface OnChangeParams {
+    originalEvent: Event;
+    value: string | undefined | null;
+    stopPropagation(): void;
+    preventDefault(): void;
+    target: OnChangeTargetOptions;
+}
+
 interface DropdownProps {
     id?: string;
-    inputRef?: any;
+    inputRef?: React.Ref<HTMLSelectElement>;
     name?: string;
     value?: any;
     options?: any[];
@@ -12,21 +34,23 @@ interface DropdownProps {
     optionDisabled?: string;
     optionGroupLabel?: string;
     optionGroupChildren?: string;
+    optionGroupTemplate?: OptionGroupTemplateType;
+    valueTemplate?: ValueTemplateType;
+    itemTemplate?: ItemTemplateType;
     style?: object;
     className?: string;
-    autoWidth?: boolean;
     scrollHeight?: string;
     filter?: boolean;
     filterBy?: string;
     filterMatchMode?: string;
     filterPlaceholder?: string;
     filterLocale?: string;
-    emptyFilterMessage?: any;
-    editable?:boolean;
+    emptyFilterMessage?: EmptyFilterMessageType;
+    editable?: boolean;
     placeholder?: string;
     required?: boolean;
     disabled?: boolean;
-    appendTo?: any;
+    appendTo?: HTMLElement;
     tabIndex?: number;
     autoFocus?: boolean;
     filterInputAutoFocus?: boolean;
@@ -39,18 +63,15 @@ interface DropdownProps {
     inputId?: string;
     showClear?: boolean;
     maxLength?: number;
-    tooltip?: any;
+    tooltip?: string;
     tooltipOptions?: TooltipOptions;
-    ariaLabel?: string,
-    ariaLabelledBy?: string,
-    valueTemplate?:((option: any, props: object) => any | any);
-    itemTemplate?:((option: any) => any | any);
-    optionGroupTemplate?:((option: any) => any | any);
-    onChange?(e: {originalEvent: Event, value: any, target: {name: string, id: string, value: any}}): void;
-    onFocus?(e: Event): void;
-    onBlur?(e: Event): void;
-    onMouseDown?(event: Event): void;
-    onContextMenu?(event: Event): void;
+    ariaLabel?: string;
+    ariaLabelledBy?: string;
+    onChange?(e: OnChangeParams): void;
+    onFocus?(event: React.FormEvent<HTMLInputElement>): void;
+    onBlur?(event: React.FormEvent<HTMLInputElement>): void;
+    onMouseDown?(event: React.MouseEvent<HTMLElement>): void;
+    onContextMenu?(event: React.MouseEvent<HTMLElement>): void;
 }
 
-export class Dropdown extends React.Component<DropdownProps,any> {}
+export class Dropdown extends React.Component<DropdownProps, any> { }
