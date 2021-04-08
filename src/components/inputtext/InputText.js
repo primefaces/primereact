@@ -9,22 +9,22 @@ import ObjectUtils from '../utils/ObjectUtils';
 class InputTextComponent extends Component {
 
     static defaultProps = {
-        onInput: null,
-        onKeyPress: null,
         keyfilter: null,
         validateOnly: false,
         tooltip: null,
         tooltipOptions: null,
+        onInput: null,
+        onKeyPress: null,
         forwardRef: null
     };
 
     static propTypes = {
-        onInput: PropTypes.func,
-        onKeyPress: PropTypes.func,
         keyfilter: PropTypes.any,
         validateOnly: PropTypes.bool,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
+        onInput: PropTypes.func,
+        onKeyPress: PropTypes.func,
         forwardRef: PropTypes.any
     };
 
