@@ -1,10 +1,24 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-interface PasswordProps extends React.HTMLProps<HTMLInputElement> {
+type HeaderType = string | JSX.Element | ((props: PasswordProps) => JSX.Element);
+
+type FooterType = string | JSX.Element | ((props: PasswordProps) => JSX.Element);
+
+type ContentType = string | JSX.Element | ((props: PasswordProps) => JSX.Element);
+
+interface IconParams {
+    onClick(): void;
+    className: string;
+    element: HTMLElement;
+    props: PasswordProps;
+}
+
+type IconType = string | JSX.Element | ((e: IconParams) => JSX.Element);
+
+interface PasswordProps extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
     id?: string;
-    inputRef?: any;
-    value?: string;
+    inputRef?: React.Ref<HTMLInputElement>;
     promptLabel?: string;
     weakLabel?: string;
     mediumLabel?: string;
@@ -13,21 +27,21 @@ interface PasswordProps extends React.HTMLProps<HTMLInputElement> {
     strongRegex?: string;
     feedback?: boolean;
     toggleMask?: boolean;
-    appendTo?: any;
-    header?: any;
-    content?: any;
-    footer?: any;
-    icon?: any;
-    tooltip?: any;
+    appendTo?: HTMLElement;
+    header?: HeaderType;
+    content?: ContentType;
+    footer?: FooterType;
+    icon?: IconParams;
+    tooltip?: string;
     tooltipOptions?: TooltipOptions;
-    [key: string]: any;
     style?: object;
     className?: string;
     inputStyle?: object;
     inputClassName?: string;
     panelStyle?: object;
     panelClassName?: string;
-    onInput?(event: React.FormEvent<HTMLInputElement>): void;
+    onInput?(event: React.FormEvent<HTMLInputElement>, validatePattern: boolean): void;
+    [key: string]: any;
 }
 
-export class Password extends React.Component<PasswordProps,any> {}
+export class Password extends React.Component<PasswordProps, any> { }
