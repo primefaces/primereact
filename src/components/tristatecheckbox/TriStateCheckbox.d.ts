@@ -1,19 +1,33 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
+interface OnChangeTargetOptions {
+    name: string;
+    id: string;
+    value: boolean | undefined | null;
+}
+
+interface OnChangeParams {
+    originalEvent: Event;
+    value: boolean | undefined | null;
+    stopPropagation(): void;
+    preventDefault(): void;
+    target: OnChangeTargetOptions;
+}
+
 interface TriStateCheckboxProps {
     id?: string;
-    inputRef?: any;
+    inputRef?: React.Ref<HTMLInputElement>;
     inputId?: string;
-    value?: boolean | null;
+    value?: boolean | undefined | null;
     name?: string;
     style?: object;
     className?: string;
     disabled?: boolean;
-    tooltip?: any;
+    tooltip?: string;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
-    onChange?(e: {originalEvent: Event, value: any, target: {name: string, id: string, value: any}}): void;
+    onChange?(e: OnChangeParams): void;
 }
 
-export class TriStateCheckbox extends React.Component<TriStateCheckboxProps,any> {}
+export class TriStateCheckbox extends React.Component<TriStateCheckboxProps, any> { }
