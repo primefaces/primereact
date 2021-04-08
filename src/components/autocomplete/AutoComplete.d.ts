@@ -1,14 +1,46 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-type CompleteMethodParams = {
-    originalEvent: Event,
-    query: string
+type OptionGroupTemplateType = string | JSX.Element | ((suggestion: any, index: number) => JSX.Element);
+
+type ItemTemplateType = string | JSX.Element | ((suggestion: any, index: number) => JSX.Element);
+
+type SelectedItemTemplateType = string | JSX.Element | ((value: any) => JSX.Element);
+
+interface OnChangeTargetOptions {
+    name: string;
+    id: string;
+    value: any;
+}
+
+interface OnChangeParams {
+    originalEvent: Event;
+    value: any;
+    stopPropagation(): void;
+    preventDefault(): void;
+    target: OnChangeTargetOptions;
+}
+
+interface OnSelectParams {
+    originalEvent: Event;
+    value: any;
+}
+
+interface OnUnSelectParams extends OnSelectParams { }
+
+interface OnDropdownClickParams {
+    originalEvent: Event;
+    query: string;
+}
+
+interface CompleteMethodParams {
+    originalEvent: Event;
+    query: string;
 }
 
 interface AutoCompleteProps {
     id?: string;
-    inputRef?: any;
+    inputRef?: string;
     value?: any;
     name?: string;
     type?: string;
@@ -16,6 +48,7 @@ interface AutoCompleteProps {
     field?: string;
     optionGroupLabel?: string;
     optionGroupChildren?: string;
+    optionGroupTemplate?: OptionGroupTemplateType;
     forceSelection?: boolean;
     autoHighlight?: boolean;
     scrollHeight?: string;
@@ -36,29 +69,28 @@ interface AutoCompleteProps {
     disabled?: boolean;
     maxlength?: number;
     size?: number;
-    appendTo?: any;
+    appendTo?: HTMLElement;
     tabIndex?: number;
     autoFocus?: boolean;
-    tooltip?: any;
+    tooltip?: string;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
     completeMethod?(e: CompleteMethodParams): void;
-    itemTemplate?:((data: any, index: number) => any | any);
-    optionGroupTemplate?:((data: any, index: number) => any | any);
-    selectedItemTemplate?:((data: any) => any | any);
-    onChange?(e: {originalEvent: Event, value: any, target: {name: string, id: string, value: any}}): void;
-    onFocus?(event: Event): void;
-    onBlur?(event: Event): void;
-    onSelect?(e: {originalEvent: Event, value: any}): void;
-    onUnselect?(e: {originalEvent: Event, value: any}): void;
-    onDropdownClick?(e: {originalEvent: Event, query: string}): void;
-    onClick?(event:Event): void;
-    onDblClick?(event:Event): void;
-    onMouseDown?(event:Event): void;
-    onKeyUp?(event:Event): void;
-    onKeyPress?(event:Event): void;
-    onContextMenu?(event:Event): void;
-    onClear?(event:Event): void;
+    itemTemplate?: ItemTemplateType;
+    selectedItemTemplate?: SelectedItemTemplateType;
+    onChange?(e: OnChangeParams): void;
+    onFocus?(event: React.FormEvent<HTMLInputElement>): void;
+    onBlur?(event: React.FormEvent<HTMLInputElement>): void;
+    onSelect?(e: OnSelectParams): void;
+    onUnselect?(e: OnUnSelectParams): void;
+    onDropdownClick?(e: OnDropdownClickParams): void;
+    onClick?(event: React.MouseEvent<HTMLElement>): void;
+    onDblClick?(event: React.MouseEvent<HTMLElement>): void;
+    onMouseDown?(event: React.MouseEvent<HTMLElement>): void;
+    onKeyUp?(event: React.KeyboardEvent<HTMLInputElement>): void;
+    onKeyPress?(event: React.KeyboardEvent<HTMLInputElement>): void;
+    onContextMenu?(event: React.MouseEvent<HTMLElement>): void;
+    onClear?(event: Event): void;
 }
 
-export class AutoComplete extends React.Component<AutoCompleteProps,any> {}
+export class AutoComplete extends React.Component<AutoCompleteProps, any> { }
