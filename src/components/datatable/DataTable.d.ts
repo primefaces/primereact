@@ -27,8 +27,6 @@ type CompareSelectionByType = 'deepEquals' | 'equals';
 
 type StateStorageType = 'session' | 'local' | 'custom';
 
-type RowGroupTemplateType = React.ReactNode | ((data: any, index: number) => React.ReactNode);
-
 interface SortMeta {
     field: string;
     order: SortOrderType;
@@ -189,9 +187,6 @@ interface DataTableProps {
     exportFilename?: string;
     rowGroupMode?: string;
     autoLayout?: boolean;
-    rowClassName?: string;
-    rowGroupHeaderTemplate?: RowGroupTemplateType;
-    rowGroupFooterTemplate?: RowGroupTemplateType;
     loading?: boolean;
     loadingIcon?: string;
     tabIndex?: number;
