@@ -14,12 +14,12 @@ interface PanelHeaderTemplateParams {
     checkboxElement: HTMLElement;
     checked: boolean;
     onChange(e: { originalEvent: Event, checked: boolean }): void;
-    filterElement: HTMLElement;
-    closeElement: HTMLElement;
+    filterElement: JSX.Element;
+    closeElement: JSX.Element;
     closeElementClassName: string;
     closeIconClassName: string;
     onCloseClick(event: React.MouseEvent<HTMLElement>): void;
-    element: HTMLElement;
+    element: JSX.Element;
     props: MultiSelectProps;
 }
 

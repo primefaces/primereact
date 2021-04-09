@@ -10,7 +10,7 @@ type ContentType = string | JSX.Element | ((props: PasswordProps) => JSX.Element
 interface IconParams {
     onClick(): void;
     className: string;
-    element: HTMLElement;
+    element: JSX.Element;
     props: PasswordProps;
 }
 
