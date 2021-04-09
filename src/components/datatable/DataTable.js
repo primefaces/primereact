@@ -90,6 +90,7 @@ export class DataTable extends Component {
         tabIndex: 0,
         stateKey: null,
         stateStorage: 'session',
+        groupField: null,
         editMode: 'cell',
         editingRows: null,
         expandableRowGroups: false,
@@ -122,7 +123,7 @@ export class DataTable extends Component {
         customSaveState: null,
         customRestoreState: null,
         onStateSave: null,
-        onStateRestore: null,
+        onStateRestore: null
     }
 
     static propTypes = {
@@ -163,6 +164,8 @@ export class DataTable extends Component {
         cellSelection: PropTypes.bool,
         selection: PropTypes.any,
         onSelectionChange: PropTypes.func,
+        contextMenuSelection: PropTypes.bool,
+        onContextMenuSelectionChange: PropTypes.func,
         compareSelectionBy: PropTypes.string,
         dataKey: PropTypes.string,
         metaKeySelection: PropTypes.bool,
@@ -200,6 +203,7 @@ export class DataTable extends Component {
         tabIndex: PropTypes.number,
         stateKey: PropTypes.string,
         stateStorage: PropTypes.string,
+        groupField: PropTypes.string,
         editMode: PropTypes.string,
         editingRows: PropTypes.oneOfType([PropTypes.array,PropTypes.object]),
         expandableRowGroups: PropTypes.bool,
