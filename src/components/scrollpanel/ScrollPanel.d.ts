@@ -6,4 +6,4 @@ interface ScrollPanelProps {
     className?: string;
 }
 
-export class ScrollPanel extends React.Component<ScrollPanelProps,any> {}
+export class ScrollPanel extends React.Component<ScrollPanelProps, any> { }
