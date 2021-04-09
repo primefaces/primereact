@@ -12,4 +12,4 @@ interface CaptchaProps {
     onExpire?(): void;
 }
 
-export class Captcha extends React.Component<CaptchaProps,any> {}
+export class Captcha extends React.Component<CaptchaProps, any> { }

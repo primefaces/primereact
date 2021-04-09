@@ -9,4 +9,4 @@ interface ProgressSpinnerProps {
     animationDuration?: string
 }
 
-export class ProgressSpinner extends React.Component<ProgressSpinnerProps,any> {}
+export class ProgressSpinner extends React.Component<ProgressSpinnerProps, any> { }
