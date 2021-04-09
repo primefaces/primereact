@@ -1,26 +1,31 @@
 import * as React from 'react';
 
 interface TabPanelProps {
-    header?: any;
+    header?: React.ReactNode;
     leftIcon?: string;
     rightIcon?: string;
     disabled?: boolean;
-    headerStyle?: any;
+    headerStyle?: object;
     headerClassName?: string;
-    contentStyle?: any;
+    contentStyle?: object;
     contentClassName?: string;
 }
 
-export class TabPanel extends React.Component<TabPanelProps,any> {}
+export class TabPanel extends React.Component<TabPanelProps, any> { }
+
+interface OnTabChangeParams {
+    originalEvent: Event;
+    index: number;
+}
 
 interface TabViewProps {
     id?: string;
     activeIndex?: number;
-    style?: any;
+    style?: object;
     className?: string;
     renderActiveOnly?: boolean;
-    onTabChange?(e: {originalEvent: Event, index: number}): void;
+    onTabChange?(e: OnTabChangeParams): void;
 }
 
 // tslint:disable-next-line:max-classes-per-file
-export class TabView extends React.Component<TabViewProps,any> {}
+export class TabView extends React.Component<TabViewProps, any> { }
