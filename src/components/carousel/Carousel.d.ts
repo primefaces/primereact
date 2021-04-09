@@ -1,25 +1,37 @@
 import * as React from 'react';
 
+type OrientationType = 'vertical' | 'horizontal';
+
+interface ResponsiveOptions {
+    breakpoint: string;
+    numVisible: number;
+    numScroll: number;
+}
+
+interface OnPageChangeParams {
+    page: number;
+}
+
 interface CarouselProps {
     id?: string;
     value?: any;
     page?: number;
-    header?: any;
-    footer?: any;
+    header?: React.ReactNode;
+    footer?: React.ReactNode;
     style?: object;
     className?: string;
-    itemTemplate?: any;
+    itemTemplate?(item: any): React.ReactNode;
     circular?: boolean;
     autoplayInterval?: number;
     numVisible?: number;
     numScroll?: number;
-    responsiveOptions?: any;
-    orientation?: string;
+    responsiveOptions?: ResponsiveOptions;
+    orientation?: OrientationType;
     verticalViewPortHeight?: string;
     contentClassName?: string;
     containerClassName?: string;
     indicatorsContentClassName?: string;
-    onPageChange?(e: {page: number}): void;
+    onPageChange?(e: OnPageChangeParams): void;
 }
 
-export class Carousel extends React.Component<CarouselProps,any> {}
+export class Carousel extends React.Component<CarouselProps, any> { }
