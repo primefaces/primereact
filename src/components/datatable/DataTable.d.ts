@@ -10,7 +10,7 @@ type SortOrderType = 1 | 0 | -1 | undefined | null;
 
 type EmptyMessageType = React.ReactNode | ((frozen: boolean) => React.ReactNode);
 
-type SelectionMode = 'single' | 'multiple';
+type SelectionModeType = 'single' | 'multiple';
 
 type RowSelectionModeType = 'new' | 'add' | 'checkbox' | 'radio';
 
@@ -88,7 +88,7 @@ interface RowEventParams extends EventParams {
     index: number;
 }
 
-interface RowClickEventParams extends RowEventParams {
+interface RowClickEventParams extends Omit<RowEventParams, 'originalEvent'> {
     originalEvent: React.MouseEvent<HTMLElement>;
 }
 
