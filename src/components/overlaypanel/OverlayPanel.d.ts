@@ -1,5 +1,10 @@
 import * as React from 'react';
-import {SyntheticEvent} from "react";
+
+type TemplateType = React.ReactNode | ((props: DialogProps) => React.ReactNode);
+
+interface Breakpoints {
+    [key: string]: string
+}
 
 interface OverlayPanelProps {
     id?: string;
@@ -7,14 +12,14 @@ interface OverlayPanelProps {
     showCloseIcon?: boolean;
     style?: object;
     className?: string;
-    appendTo?: any;
+    appendTo?: HTMLElement;
     ariaCloseLabel?: string;
-    breakpoints?: {[key: string]: string};
+    breakpoints?: Breakpoints;
     onHide?(): void;
 }
 
-export class OverlayPanel extends React.Component<OverlayPanelProps,any> {
-    public toggle(event:SyntheticEvent):void;
-    public show(event:SyntheticEvent,target:EventTarget):void;
-    public hide():void;
+export class OverlayPanel extends React.Component<OverlayPanelProps, any> {
+    public toggle(event: Event, target: HTMLElement): void;
+    public show(event: Event, target: HTMLElement): void;
+    public hide(): void;
 }
