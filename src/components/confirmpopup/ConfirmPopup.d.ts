@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-type TemplateType = React.ReactNode | ((props: ConfirmDialogProps) => React.ReactNode);
+type TemplateType = React.ReactNode | ((props: ConfirmPopupProps) => React.ReactNode);
 
 interface ConfirmPopupProps {
     target?: HTMLElement;

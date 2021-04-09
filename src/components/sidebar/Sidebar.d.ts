@@ -1,11 +1,19 @@
 import * as React from 'react';
 
+type PositionType = 'top' | 'bottom' | 'left' | 'right';
+
+type TemplateType = React.ReactNode | ((props: SidebarProps) => React.ReactNode);
+
+interface Breakpoints {
+    [key: string]: string
+}
+
 interface SidebarProps {
     id?: string;
     style?: object;
     className?: string;
     visible?: boolean;
-    position?: string;
+    position?: PositionType;
     fullScreen?: boolean;
     blockScroll?: boolean;
     baseZIndex?: number;
@@ -13,10 +21,10 @@ interface SidebarProps {
     showCloseIcon?: boolean;
     ariaCloseLabel?: string;
     closeOnEscape?: boolean;
-    icons?: ((props: object) => any | any);
+    icons?: TemplateType;
     modal?: boolean;
     onShow?(): void;
     onHide(): void;
 }
 
-export class Sidebar extends React.Component<SidebarProps,any> {}
+export class Sidebar extends React.Component<SidebarProps, any> { }
