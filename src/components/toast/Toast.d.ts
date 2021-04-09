@@ -1,10 +1,14 @@
 import * as React from 'react';
 
+type SeverityType = 'success' | 'info' | 'warn' | 'error';
+
+type PositionType = 'center' | 'top' | 'bottom' | 'left' | 'right' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
+
 export interface ToastMessage {
-    severity?: 'success' | 'info' | 'warn' | 'error',
-    summary?: any;
-    detail?: any;
-    content?: any;
+    severity?: SeverityType;
+    summary?: React.ReactNode;
+    detail?: React.ReactNode;
+    content?: React.ReactNode;
     closable?: boolean;
     sticky?: boolean;
     life?: number;
@@ -15,13 +19,12 @@ interface ToastProps {
     className?: string;
     style?: object;
     baseZIndex?: number;
-    position?: string;
+    position?: PositionType;
     onClick?(message: ToastMessage): void;
-    onClose?(message: ToastMessage): void;
     onRemove?(message: ToastMessage): void;
 }
 
 export class Toast extends React.Component<ToastProps, any> {
     public show(message: ToastMessage | ToastMessage[]): void;
-    public clear():void;
+    public clear(): void;
 }
