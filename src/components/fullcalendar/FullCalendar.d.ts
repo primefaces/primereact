@@ -8,4 +8,4 @@ interface FullCalendarProps {
     options?: object;
 }
 
-export class FullCalendar extends React.Component<FullCalendarProps,any> {}
+export class FullCalendar extends React.Component<FullCalendarProps, any> { }
