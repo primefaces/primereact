@@ -9,15 +9,24 @@ interface SplitterPanelProps {
 
 export class SplitterPanel extends React.Component<SplitterPanelProps,any> {}
 
+type LayoutType = 'vertical' | 'horizontal';
+
+type StateStorageType = 'session' | 'local';
+
+interface OnResizeEndParams {
+    originalEvent: Event;
+    sizes: number[];
+}
+
 interface SplitterProps {
     id?: string;
     className?: string;
     style?: object;
-    layout?: string;
+    layout?: LayoutType;
     gutterSize?: number;
     stateKey?: string;
-    stateStorage?: string;
-    onResizeEnd?(e: {originalEvent: Event, sizes: any}): void;
+    stateStorage?: StateStorageType;
+    onResizeEnd?(e: OnResizeEndParams): void;
 }
 
 export class Splitter extends React.Component<SplitterProps,any> {}
