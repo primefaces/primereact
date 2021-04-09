@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { ColumnProps } from '../column/Column';
+import { PaginatorTemplate } from '../paginator/Paginator';
 
 type PaginatorPositionType = 'top' | 'bottom' | 'both';
 
@@ -135,7 +136,7 @@ interface DataTableProps {
     paginatorPosition?: PaginatorPositionType;
     alwaysShowPaginator?: boolean;
     paginatorClassName?: string;
-    paginatorTemplate?: string | object;
+    paginatorTemplate?: PaginatorTemplate;
     paginatorLeft?: React.ReactNode;
     paginatorRight?: React.ReactNode;
     paginatorDropdownAppendTo?: HTMLElement;

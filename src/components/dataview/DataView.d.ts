@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { PaginatorTemplate } from '../paginator/Paginator';
 
 type LayoutType = 'list' | 'grid';
 
@@ -40,7 +41,7 @@ interface DataViewProps {
     paginatorPosition?: PaginatorPositionType;
     alwaysShowPaginator?: boolean;
     paginatorClassName?: string;
-    paginatorTemplate?: string | object;
+    paginatorTemplate?: PaginatorTemplate;
     paginatorLeft?: React.ReactNode;
     paginatorRight?: React.ReactNode;
     pageLinkSize?: number;

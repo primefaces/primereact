@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { PaginatorTemplate } from '../paginator/Paginator';
 import TreeNode from '../treenode/TreeNode';
 
 type ExpandedKeysType = {
@@ -19,7 +20,7 @@ interface TreeTableProps {
     paginatorPosition?: string;
     alwaysShowPaginator?: boolean;
     paginatorClassName?: string;
-    paginatorTemplate?: string | object;
+    paginatorTemplate?: PaginatorTemplate;
     paginatorLeft?: any;
     paginatorRight?: any;
     pageLinkSize?: number;
