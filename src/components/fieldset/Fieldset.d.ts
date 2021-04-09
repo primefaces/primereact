@@ -1,16 +1,21 @@
 import * as React from 'react';
 
+interface OnToggleParams {
+    originalEvent: React.MouseEvent<HTMLElement>;
+    value: boolean;
+}
+
 interface FieldsetProps {
     id?: string;
-    legend?: any;
+    legend?: React.ReactNode;
     className?: string;
     style?: object;
     toggleable?: boolean;
     collapsed?: boolean;
-    onExpand?(event: Event): void;
-    onCollapse?(event: Event): void;
-    onToggle?(e:{event: Event, value: boolean}): void;
-    onClick?(event: Event): void;
+    onExpand?(event: React.MouseEvent<HTMLElement>): void;
+    onCollapse?(event: React.MouseEvent<HTMLElement>): void;
+    onToggle?(e: OnToggleParams): void;
+    onClick?(event: React.MouseEvent<HTMLElement>): void;
 }
 
-export class Fieldset extends React.Component<FieldsetProps,any> {}
+export class Fieldset extends React.Component<FieldsetProps, any> { }
