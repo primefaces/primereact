@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-export interface PageState {
-    first: number,
-    rows: number,
-    page: number,
-    pageCount: number
+interface PageState {
+    first: number;
+    rows: number;
+    page: number;
+    pageCount: number;
 }
 
 interface PaginatorProps {
@@ -12,16 +12,16 @@ interface PaginatorProps {
     rows?: number;
     first?: number;
     pageLinkSize?: number;
-    rowsPerPageOptions?: any[];
+    rowsPerPageOptions?: number[];
     alwaysShow?: boolean;
     style?: object;
     className?: string;
     template?: string | object;
-    leftContent?: JSX.Element | undefined;
-    rightContent?: JSX.Element | undefined;
+    leftContent?: React.ReactNode;
+    rightContent?: React.ReactNode;
     currentPageReportTemplate?: string;
-    dropdownAppendTo?: any;
+    dropdownAppendTo?: HTMLElement;
     onPageChange?(event: PageState): void;
 }
 
-export class Paginator extends React.Component<PaginatorProps,any> {}
+export class Paginator extends React.Component<PaginatorProps, any> { }

@@ -18,6 +18,7 @@ export class Paginator extends Component {
         first: 0,
         pageLinkSize: 5,
         rowsPerPageOptions: null,
+        alwaysShow: true,
         style: null,
         className: null,
         template: 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown',
@@ -25,8 +26,7 @@ export class Paginator extends Component {
         leftContent: null,
         rightContent: null,
         dropdownAppendTo: null,
-        currentPageReportTemplate: '({currentPage} of {totalPages})',
-        alwaysShow: true
+        currentPageReportTemplate: '({currentPage} of {totalPages})'
     }
 
     static propTypes = {
@@ -35,6 +35,7 @@ export class Paginator extends Component {
         first: PropTypes.number,
         pageLinkSize: PropTypes.number,
         rowsPerPageOptions: PropTypes.array,
+        alwaysShow: PropTypes.bool,
         style: PropTypes.object,
         className: PropTypes.string,
         template: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
@@ -42,8 +43,7 @@ export class Paginator extends Component {
         leftContent: PropTypes.any,
         rightContent: PropTypes.any,
         dropdownAppendTo: PropTypes.any,
-        currentPageReportTemplate: PropTypes.any,
-        alwaysShow: PropTypes.bool
+        currentPageReportTemplate: PropTypes.any
     }
 
     constructor(props) {
