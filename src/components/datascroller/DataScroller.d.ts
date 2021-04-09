@@ -1,22 +1,27 @@
 import * as React from 'react';
 
+interface OnLazyLoadParams {
+    first: number;
+    rows: number;
+}
+
 interface DataScrollerProps {
     id?: string;
     value?: any[];
     rows?: number;
     inline?: boolean;
-    scrollHeight?: any;
+    scrollHeight?: string;
     loader?: boolean;
     buffer?: number;
     style?: object;
     className?: string;
-    header?: any;
-    footer?: any;
+    header?: React.ReactNode;
+    footer?: React.ReactNode;
     lazy?: boolean;
-    onLazyLoad?(e: {first: number, rows: number}): void;
-    itemTemplate?(item: any): JSX.Element | undefined;
+    onLazyLoad?(e: OnLazyLoadParams): void;
+    itemTemplate?(item: any): React.ReactNode;
 }
 
-export class DataScroller extends React.Component<DataScrollerProps,any> {
+export class DataScroller extends React.Component<DataScrollerProps, any> {
     public load(): void;
 }

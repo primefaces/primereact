@@ -26,7 +26,7 @@ export class DataScroller extends Component {
         value: PropTypes.array,
         rows: PropTypes.number,
         inline: PropTypes.bool,
-        scrollHeight: PropTypes.any,
+        scrollHeight: PropTypes.string,
         loader: PropTypes.bool,
         buffer: PropTypes.number,
         style: PropTypes.object,
