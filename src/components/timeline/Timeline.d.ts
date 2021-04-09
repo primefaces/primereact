@@ -4,6 +4,8 @@ type AlignType = 'left' | 'right';
 
 type LayoutType = 'vertical' | 'horizontal';
 
+type TemplateType = React.ReactNode | ((item: any, index: number) => React.ReactNode);
+
 interface TimelineProps {
     id?: string;
     value?: any[];
@@ -12,9 +14,9 @@ interface TimelineProps {
     dataKey?: string;
     className?: string;
     style?: object;
-    opposite?(item: any, index: number): React.ReactNode;
-    marker?(item: any, index: number): React.ReactNode;
-    content?(item: any, index: number): React.ReactNode;
+    opposite?: TemplateType;
+    marker?: TemplateType;
+    content?: TemplateType;
 }
 
 export class Timeline extends React.Component<TimelineProps, any> { }
