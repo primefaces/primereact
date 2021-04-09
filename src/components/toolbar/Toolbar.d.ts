@@ -1,11 +1,13 @@
 import * as React from 'react';
 
+type TemplateType = React.ReactNode | ((props: ToolbarProps) => React.ReactNode);
+
 interface ToolbarProps {
     id?: string;
     style?: object;
     className?: string;
-    left?:((props: object) => any | any) | JSX.Element;
-    right?:((props: object) => any | any) | JSX.Element;
+    left?: TemplateType;
+    right?: TemplateType;
 }
 
-export class Toolbar extends React.Component<ToolbarProps,any> {}
+export class Toolbar extends React.Component<ToolbarProps, any> { }
