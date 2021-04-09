@@ -11,4 +11,4 @@ interface ChartProps {
     className?: string;
 }
 
-export class Chart extends React.Component<ChartProps,any> {}
+export class Chart extends React.Component<ChartProps, any> { }
