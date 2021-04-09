@@ -1,19 +1,45 @@
 import * as React from 'react';
 import TreeNode from '../treenode/TreeNode';
 
-type ExpandedKeysType = {
+type SelectionModeType = 'single' | 'multiple' | 'checkbox';
+
+type SelectionKeys = string | SelectionKeysType;
+
+type FilterModeType = 'lenient' | 'strict';
+
+interface SelectionKeysType {
+    [key: string]: boolean;
+}
+
+interface ExpandedKeysType {
     [key: string]: boolean
+}
+
+interface EventKeyParams {
+    originalEvent: Event;
+    value: ExpandedKeysType;
+}
+
+interface EventNodeParams {
+    originalEvent: Event;
+    node: TreeNode;
+}
+
+interface OnDragDropParams {
+    originalEvent: Event,
+    value: TreeNode[];
+    dragNode: TreeNode;
+    dropNode: TreeNode;
+    dropIndex: number;
 }
 
 interface TreeProps {
     id?: string;
     value?: TreeNode[];
     disabled?: boolean;
-    selectionMode?: string;
-    selectionKeys?: any;
-    onSelectionChange?(e: {originalEvent: Event, value: any}): void;
-    contextMenuSelectionKey?: any;
-    onContextMenuSelectionChange?(e: {originalEvent: Event, value: any}): void;
+    selectionMode?: SelectionModeType;
+    selectionKeys?: SelectionKeys;
+    contextMenuSelectionKey?: string;
     expandedKeys?: ExpandedKeysType;
     style?: object;
     className?: string;
@@ -26,18 +52,20 @@ interface TreeProps {
     loadingIcon?: string;
     dragdropScope?: string;
     filter?: boolean;
-    filterBy?: any;
-    filterMode?: string;
+    filterBy?: string;
+    filterMode?: FilterModeType;
     filterPlaceholder?: string;
     filterLocale?: string;
-    nodeTemplate?(node: any): JSX.Element;
-    onSelect?(e: {originalEvent: Event, node: TreeNode}): void;
-    onUnselect?(e: {originalEvent: Event, node: TreeNode}): void;
-    onExpand?(e: {originalEvent: Event, node: TreeNode}): void;
-    onCollapse?(e: {originalEvent: Event, node: TreeNode}): void;
-    onToggle?(e: {originalEvent: Event, value: any}): void;
-    onDragDrop?(e: {originalEvent: Event, value: any, dragNode: any, dropNode: any, dropIndex: number}): void;
-    onContextMenu?(e: {originalEvent: Event, node: TreeNode}): void;
+    onSelectionChange?(e: EventKeyParams): void;
+    onContextMenuSelectionChange?(e: EventKeyParams): void;
+    nodeTemplate?(node: TreeNode): React.ReactNode;
+    onSelect?(e: EventNodeParams): void;
+    onUnselect?(e: EventNodeParams): void;
+    onExpand?(e: EventNodeParams): void;
+    onCollapse?(e: EventNodeParams): void;
+    onToggle?(e: EventKeyParams): void;
+    onDragDrop?(e: OnDragDropParams): void;
+    onContextMenu?(e: EventNodeParams): void;
 }
 
-export class Tree extends React.Component<TreeProps,any> {}
+export class Tree extends React.Component<TreeProps, any> { }
