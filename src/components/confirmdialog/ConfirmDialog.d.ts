@@ -1,9 +1,7 @@
 import * as React from 'react';
 import { DialogProps } from '../dialog/Dialog';
 
-type MessageTemplateType = React.ReactNode | ((props: ConfirmDialogProps) => React.ReactNode);
-
-type FooterTemplateType = React.ReactNode | ((props: ConfirmDialogProps) => React.ReactNode);
+type TemplateType = React.ReactNode | ((props: ConfirmDialogProps) => React.ReactNode);
 
 interface Breakpoints {
     [key: string]: string
@@ -11,7 +9,7 @@ interface Breakpoints {
 
 interface ConfirmDialogProps extends Omit<DialogProps, 'onHide'> {
     visible?: boolean;
-    message?: MessageTemplateType;
+    message?: TemplateType;
     rejectLabel?: string;
     acceptLabel?: string;
     icon?: string;
@@ -21,7 +19,7 @@ interface ConfirmDialogProps extends Omit<DialogProps, 'onHide'> {
     acceptClassName?: string;
     appendTo?: HTMLElement;
     className?: string;
-    footer?: FooterTemplateType;
+    footer?: TemplateType;
     breakpoints?: Breakpoints;
     onHide?(result: string): void;
     accept?(): void;

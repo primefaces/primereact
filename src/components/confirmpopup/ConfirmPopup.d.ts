@@ -1,9 +1,11 @@
 import * as React from 'react';
 
+type TemplateType = React.ReactNode | ((props: ConfirmDialogProps) => React.ReactNode);
+
 interface ConfirmPopupProps {
-    target?: any;
+    target?: HTMLElement;
     visible?: boolean;
-    message?: any;
+    message?: TemplateType;
     rejectLabel?: string;
     acceptLabel?: string;
     icon?: string;
@@ -13,14 +15,19 @@ interface ConfirmPopupProps {
     acceptClassName?: string;
     className?: string;
     style?: object;
-    appendTo?: any;
+    appendTo?: HTMLElement;
     dismissable?: boolean;
-    footer?: any;
+    footer?: TemplateType;
     onHide?(result: string): void;
     accept?(): void;
     reject?(): void;
 }
 
-export class ConfirmPopup extends React.Component<ConfirmPopupProps,any> {}
+export class ConfirmPopup extends React.Component<ConfirmPopupProps, any> { }
 
-export function confirmPopup(props: ConfirmPopupProps):any;
+interface ConfirmPopupReturn {
+    show(): void;
+    hide(): void;
+}
+
+export function confirmPopup(props: ConfirmPopupProps): ConfirmPopupReturn;
