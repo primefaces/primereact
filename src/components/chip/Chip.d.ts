@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+type TemplateType = React.ReactNode | ((props: ChipProps) => React.ReactNode);
+
 interface ChipProps {
     label?: string;
     icon?: string;
@@ -8,10 +10,10 @@ interface ChipProps {
     removeIcon?: string;
     className?: string;
     style?: object;
-    template?: any;
+    template?: TemplateType;
     imageAlt?: string;
-    onImageError?(event: Event): void;
-    onRemove?(event: Event): void;
+    onImageError?(event: React.SyntheticEvent): void;
+    onRemove?(event: React.MouseEvent<HTMLElement>): void;
 }
 
-export class Chip extends React.Component<ChipProps,any> {}
+export class Chip extends React.Component<ChipProps, any> { }
