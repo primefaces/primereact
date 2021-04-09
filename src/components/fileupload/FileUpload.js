@@ -316,15 +316,15 @@ export class FileUpload extends Component {
 
             xhr.upload.addEventListener('progress', (event) => {
                 if (event.lengthComputable) {
-                    this.setState({progress: Math.round((event.loaded * 100) / event.total)});
-                }
-
-                if (this.props.onProgress) {
-                    this.props.onProgress({
-                        originalEvent: event,
-                        progress: this.progress
+                    this.setState({ progress: Math.round((event.loaded * 100) / event.total) }, () => {
+                        if (this.props.onProgress) {
+                            this.props.onProgress({
+                                originalEvent: event,
+                                progress: this.state.progress
+                            });
+                        };
                     });
-                };
+                }
             });
 
             xhr.onreadystatechange = () => {
