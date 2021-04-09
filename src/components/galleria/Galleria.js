@@ -195,7 +195,7 @@ export class Galleria extends Component {
     renderHeader() {
         if (this.props.header) {
             return (<div className="p-galleria-header">
-                { this.props.header}
+                {this.props.header}
             </div>);
         }
 
@@ -205,7 +205,7 @@ export class Galleria extends Component {
     renderFooter() {
         if (this.props.footer) {
             return (<div className="p-galleria-footer">
-                { this.props.footer}
+                {this.props.footer}
             </div>);
         }
 

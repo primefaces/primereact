@@ -14,7 +14,7 @@ interface OnPageChangeParams {
 
 interface CarouselProps {
     id?: string;
-    value?: any;
+    value?: any[];
     page?: number;
     header?: React.ReactNode;
     footer?: React.ReactNode;
@@ -25,7 +25,7 @@ interface CarouselProps {
     autoplayInterval?: number;
     numVisible?: number;
     numScroll?: number;
-    responsiveOptions?: ResponsiveOptions;
+    responsiveOptions?: ResponsiveOptions[];
     orientation?: OrientationType;
     verticalViewPortHeight?: string;
     contentClassName?: string;
