@@ -1,9 +1,17 @@
 import * as React from 'react';
 import { DialogProps } from '../dialog/Dialog';
 
+type MessageTemplateType = React.ReactNode | ((props: ConfirmDialogProps) => React.ReactNode);
+
+type FooterTemplateType = React.ReactNode | ((props: ConfirmDialogProps) => React.ReactNode);
+
+interface Breakpoints {
+    [key: string]: string
+}
+
 interface ConfirmDialogProps extends Omit<DialogProps, 'onHide'> {
     visible?: boolean;
-    message?: any;
+    message?: MessageTemplateType;
     rejectLabel?: string;
     acceptLabel?: string;
     icon?: string;
@@ -11,15 +19,20 @@ interface ConfirmDialogProps extends Omit<DialogProps, 'onHide'> {
     acceptIcon?: string;
     rejectClassName?: string;
     acceptClassName?: string;
-    appendTo?: any;
+    appendTo?: HTMLElement;
     className?: string;
-    footer?: any;
-    breakpoints?: {[key: string]: string};
+    footer?: FooterTemplateType;
+    breakpoints?: Breakpoints;
     onHide?(result: string): void;
     accept?(): void;
     reject?(): void;
 }
 
-export class ConfirmDialog extends React.Component<ConfirmDialogProps,any> {}
+export class ConfirmDialog extends React.Component<ConfirmDialogProps, any> { }
 
-export function confirmDialog(props: ConfirmDialogProps):any;
+interface ConfirmDialogReturn {
+    show(): void;
+    hide(): void;
+}
+
+export function confirmDialog(props: ConfirmDialogProps): ConfirmDialogReturn;
