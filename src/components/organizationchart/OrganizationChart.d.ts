@@ -1,11 +1,24 @@
 import * as React from 'react';
 
-export interface OrganizationChartNodeData {
-    className?: string,
-    expanded?: boolean,
-    children?: OrganizationChartNodeData[]
-    selectable?: boolean
-    label?: string,
+type SelectionModeType = 'single' | 'multiple';
+
+type NodeDataType = OrganizationChartNodeData | undefined | null;
+
+type SelectionNodeDataType = OrganizationChartNodeData | OrganizationChartNodeData[] | undefined | null;
+
+interface OnNodeSelectParams {
+    originalEvent: Event;
+    node: NodeDataType;
+}
+
+interface OnNodeUnselectParams extends OnNodeSelectParams { }
+
+interface OrganizationChartNodeData {
+    className?: string;
+    expanded?: boolean;
+    children?: OrganizationChartNodeData[];
+    selectable?: boolean;
+    label?: string;
 }
 
 interface OrganizationChartProps {
@@ -13,13 +26,12 @@ interface OrganizationChartProps {
     value?: OrganizationChartNodeData[];
     style?: object;
     className?: string;
-    selectionMode?: string;
-    selection?: any;
+    selectionMode?: SelectionModeType;
+    selection?: SelectionNodeDataType;
     nodeTemplate?(node: OrganizationChartNodeData): React.ReactNode;
-    selectionChange?(data: any): void;
-    onNodeSelect?(e: { originalEvent: Event, node: any }): void;
-    onNodeUnselect?(e: { originalEvent: Event, node: any }): void;
+    selectionChange?(node: SelectionNodeDataType): void;
+    onNodeSelect?(e: OnNodeSelectParams): void;
+    onNodeUnselect?(e: OnNodeUnselectParams): void;
 }
 
-export class OrganizationChart extends React.Component<OrganizationChartProps, any> {
-}
+export class OrganizationChart extends React.Component<OrganizationChartProps, any> { }
