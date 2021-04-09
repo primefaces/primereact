@@ -1,14 +1,25 @@
 import * as React from 'react';
 
+type PositionType = 'top' | 'bottom' | 'left' | 'right';
+
+type TargetType = string | string[] | HTMLElement;
+
+type TemplateType = React.ReactNode | ((props: SidebarProps) => React.ReactNode);
+
+interface EventParams {
+    originalEvent: Event;
+    target: HTMLElement;
+}
+
 interface TooltipProps {
     id?: string;
-    target?: any;
+    target?: TargetType;
     content?: string;
     disabled?: boolean;
     className?: string;
     style?: object;
-    appendTo?: object;
-    position?: "top" | "right" | "bottom" | "left";
+    appendTo?: HTMLElement;
+    position?: PositionType;
     my?: string;
     at?: string;
     event?: string;
@@ -22,13 +33,13 @@ interface TooltipProps {
     showDelay?: number;
     updateDelay?: number;
     hideDelay?: number;
-    onBeforeShow?(e: {originalEvent: Event, target: HTMLElement}): void;
-    onBeforeHide?(e: {originalEvent: Event, target: HTMLElement}): void;
-    onShow?(e: {originalEvent: Event, target: HTMLElement}): void;
-    onHide?(e: {originalEvent: Event, target: HTMLElement}): void;
+    onBeforeShow?(e: EventParams): void;
+    onBeforeHide?(e: EventParams): void;
+    onShow?(e: EventParams): void;
+    onHide?(e: EventParams): void;
 }
 
-export class Tooltip extends React.Component<TooltipProps,any> {
+export class Tooltip extends React.Component<TooltipProps, any> {
     public updateTargetEvents(target: HTMLElement): void;
     public loadTargetEvents(target: HTMLElement): void;
     public unloadTargetEvents(target: HTMLElement): void;
