@@ -1,13 +1,18 @@
 import * as React from 'react';
-import {MenuItem} from '../menuitem/MenuItem';
+import { MenuItem } from '../menuitem/MenuItem';
+
+interface OnTabChangeParams {
+    originalEvent: Event;
+    value: MenuItem;
+}
 
 interface TabMenuProps {
     id?: string;
     model?: MenuItem[];
-    activeItem?: any;
-    style?: any;
+    activeItem?: MenuItem;
+    style?: object;
     className?: string;
-    onTabChange?(e: { originalEvent: Event, value: any}): void;
+    onTabChange?(e: OnTabChangeParams): void;
 }
 
-export class TabMenu extends React.Component<TabMenuProps,any> {}
+export class TabMenu extends React.Component<TabMenuProps, any> { }

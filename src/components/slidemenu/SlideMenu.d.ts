@@ -1,6 +1,5 @@
 import * as React from 'react';
-import {MenuItem} from '../menuitem/MenuItem';
-import {SyntheticEvent} from "react";
+import { MenuItem } from '../menuitem/MenuItem';
 
 interface SlideMenuProps {
     id?: string;
@@ -15,13 +14,13 @@ interface SlideMenuProps {
     viewportHeight?: number;
     autoZIndex?: boolean;
     baseZIndex?: number;
-    appendTo?: any;
-    onShow?(e: Event): void;
-    onHide?(e: Event): void;
+    appendTo?: HTMLElement;
+    onShow?(e: React.SyntheticEvent): void;
+    onHide?(e: React.SyntheticEvent): void;
 }
 
-export class SlideMenu extends React.Component<SlideMenuProps,any> {
-    public show(event:SyntheticEvent):void;
-    public hide(event:SyntheticEvent):void;
-    public toggle(event:SyntheticEvent):void;
+export class SlideMenu extends React.Component<SlideMenuProps, any> {
+    public show(event: React.SyntheticEvent): void;
+    public hide(event: React.SyntheticEvent): void;
+    public toggle(event: React.SyntheticEvent): void;
 }

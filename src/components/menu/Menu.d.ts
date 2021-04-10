@@ -1,6 +1,5 @@
 import * as React from 'react';
-import {MenuItem} from '../menuitem/MenuItem';
-import {SyntheticEvent} from "react";
+import { MenuItem } from '../menuitem/MenuItem';
 
 interface MenuProps {
     id?: string;
@@ -10,11 +9,11 @@ interface MenuProps {
     className?: string;
     autoZIndex?: boolean;
     bazeZIndex?: number;
-    appendTo?: any;
-    onShow?(e: Event): void;
-    onHide?(e: Event): void;
+    appendTo?: HTMLElement;
+    onShow?(e: React.SyntheticEvent): void;
+    onHide?(e: React.SyntheticEvent): void;
 }
 
-export class Menu extends React.Component<MenuProps ,any> {
-    public toggle(event:SyntheticEvent):void;
+export class Menu extends React.Component<MenuProps, any> {
+    public toggle(event: React.SyntheticEvent): void;
 }

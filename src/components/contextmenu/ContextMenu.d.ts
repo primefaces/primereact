@@ -1,6 +1,5 @@
 import * as React from 'react';
-import {MenuItem} from '../menuitem/MenuItem';
-import {SyntheticEvent} from "react";
+import { MenuItem } from '../menuitem/MenuItem';
 
 interface ContextMenuProps {
     id?: string;
@@ -10,12 +9,12 @@ interface ContextMenuProps {
     global?: boolean;
     autoZIndex?: boolean;
     baseZIndex?: number;
-    appendTo?: any;
-    onShow?(e: Event): void;
-    onHide?(e: Event): void;
+    appendTo?: HTMLElement;
+    onShow?(e: React.SyntheticEvent): void;
+    onHide?(e: React.SyntheticEvent): void;
 }
 
-export class ContextMenu extends React.Component<ContextMenuProps,any> {
-    public show(event:SyntheticEvent):void;
-    public hide(event:SyntheticEvent):void;
+export class ContextMenu extends React.Component<ContextMenuProps, any> {
+    public show(event: React.SyntheticEvent): void;
+    public hide(event: React.SyntheticEvent): void;
 }
