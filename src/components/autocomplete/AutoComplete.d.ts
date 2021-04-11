@@ -90,7 +90,7 @@ interface AutoCompleteProps {
     onKeyUp?(event: React.KeyboardEvent<HTMLInputElement>): void;
     onKeyPress?(event: React.KeyboardEvent<HTMLInputElement>): void;
     onContextMenu?(event: React.MouseEvent<HTMLElement>): void;
-    onClear?(event: Event): void;
+    onClear?(event: React.SyntheticEvent): void;
 }
 
 export class AutoComplete extends React.Component<AutoCompleteProps, any> { }

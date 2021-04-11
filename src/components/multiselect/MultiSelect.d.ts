@@ -9,11 +9,16 @@ type SelectedItemTemplateType = React.ReactNode | ((value: any) => React.ReactNo
 
 type EmptyFilterMessageType = React.ReactNode | ((props: MultiSelectProps) => React.ReactNode);
 
+interface HeaderCheckboxChangeParams {
+    originalEvent: React.FormEvent<HTMLInputElement>;
+    checked: boolean;
+}
+
 interface PanelHeaderTemplateParams {
     className: string;
     checkboxElement: HTMLElement;
     checked: boolean;
-    onChange(e: { originalEvent: Event, checked: boolean }): void;
+    onChange(e: HeaderCheckboxChangeParams): void;
     filterElement: JSX.Element;
     closeElement: JSX.Element;
     closeElementClassName: string;

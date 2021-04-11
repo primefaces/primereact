@@ -22,7 +22,7 @@ interface HeaderTemplateOptions {
 type HeaderTemplateType = React.ReactNode | ((options: HeaderTemplateOptions) => React.ReactNode);
 
 interface ItemTemplateOptions {
-    onRemove(event: Event): void;
+    onRemove(event: React.SyntheticEvent): void;
     previewElement: JSX.Element;
     fileNameElement: JSX.Element;
     sizeElement: JSX.Element;
