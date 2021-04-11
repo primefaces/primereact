@@ -10,8 +10,8 @@ interface TieredMenuProps {
     autoZIndex?: boolean;
     bazeZIndex?: number;
     appendTo?: HTMLElement;
-    onShow?(e: Event): void;
-    onHide?(e: Event): void;
+    onShow?(e: React.SyntheticEvent): void;
+    onHide?(e: React.SyntheticEvent): void;
 }
 
 export declare class TieredMenu extends React.Component<TieredMenuProps, any> {

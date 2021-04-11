@@ -26,7 +26,7 @@ interface EventNodeParams {
 }
 
 interface DragDropParams {
-    originalEvent: Event,
+    originalEvent: React.SyntheticEvent,
     value: TreeNode[];
     dragNode: TreeNode;
     dropNode: TreeNode;

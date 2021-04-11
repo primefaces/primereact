@@ -23,7 +23,7 @@ type RowsPerPageDropdownType = React.ReactNode | ((options: RowsPerPageDropdownO
 type CurrentPageReportType = React.ReactNode | ((options: CurrentPageReportOptions) => React.ReactNode);
 
 interface FirstPageLinkOptions {
-    onClick(event: Event): void;
+    onClick(event: React.SyntheticEvent): void;
     className: string;
     iconClassName: string;
     disabled: boolean;
@@ -32,7 +32,7 @@ interface FirstPageLinkOptions {
 }
 
 interface PrevPageLinkOptions {
-    onClick(event: Event): void;
+    onClick(event: React.SyntheticEvent): void;
     className: string;
     iconClassName: string;
     disabled: boolean;
@@ -45,7 +45,7 @@ interface ViewOptions {
     endPage: number;
 }
 interface PageLinksOptions {
-    onClick(event: Event): void;
+    onClick(event: React.SyntheticEvent): void;
     className: string;
     view: ViewOptions;
     page: number;
@@ -56,7 +56,7 @@ interface PageLinksOptions {
 }
 
 interface NextPageLinkOptions {
-    onClick(event: Event): void;
+    onClick(event: React.SyntheticEvent): void;
     className: string;
     iconClassName: string;
     disabled: boolean;
@@ -65,7 +65,7 @@ interface NextPageLinkOptions {
 }
 
 interface LastPageLinkOptions {
-    onClick(event: Event): void;
+    onClick(event: React.SyntheticEvent): void;
     className: string;
     iconClassName: string;
     disabled: boolean;
