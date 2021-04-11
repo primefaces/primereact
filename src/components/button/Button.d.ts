@@ -9,7 +9,6 @@ interface ButtonProps extends React.DetailedHTMLProps<React.ButtonHTMLAttributes
     badgeClassName?: string;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
-    [key: string]: any;
 }
 
 export class Button extends React.Component<ButtonProps, any> { }

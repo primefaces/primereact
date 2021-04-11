@@ -3,7 +3,7 @@ import * as React from 'react';
 type TemplateType = React.ReactNode | ((props: OverlayPanelProps) => React.ReactNode);
 
 interface Breakpoints {
-    [key: string]: string
+    [key: string]: string;
 }
 
 interface OverlayPanelProps {

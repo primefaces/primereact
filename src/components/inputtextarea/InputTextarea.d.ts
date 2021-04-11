@@ -5,7 +5,6 @@ interface InputTextareaProps extends React.DetailedHTMLProps<React.TextareaHTMLA
     autoResize?: boolean;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
-    [key: string]: any;
 }
 
 export class InputTextarea extends React.Component<InputTextareaProps, any> { }

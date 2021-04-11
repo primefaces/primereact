@@ -4,7 +4,7 @@ import { DialogProps } from '../dialog/Dialog';
 type TemplateType = React.ReactNode | ((props: ConfirmDialogProps) => React.ReactNode);
 
 interface Breakpoints {
-    [key: string]: string
+    [key: string]: string;
 }
 
 interface ConfirmDialogProps extends Omit<DialogProps, 'onHide'> {

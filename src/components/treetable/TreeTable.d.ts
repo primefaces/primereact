@@ -28,7 +28,7 @@ interface SelectionKeysType {
 }
 
 type ExpandedKeysType = {
-    [key: string]: boolean
+    [key: string]: boolean;
 }
 
 interface SortMeta {

@@ -5,7 +5,7 @@ type PositionType = 'center' | 'top' | 'bottom' | 'left' | 'right' | 'top-left' 
 type TemplateType = React.ReactNode | ((props: DialogProps) => React.ReactNode);
 
 interface Breakpoints {
-    [key: string]: string
+    [key: string]: string;
 }
 
 interface MaximizeParams {

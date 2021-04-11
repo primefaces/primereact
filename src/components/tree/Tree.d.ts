@@ -12,7 +12,7 @@ interface SelectionKeysType {
 }
 
 interface ExpandedKeysType {
-    [key: string]: boolean
+    [key: string]: boolean;
 }
 
 interface EventKeyParams {
