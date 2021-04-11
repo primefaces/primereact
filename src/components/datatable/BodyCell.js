@@ -396,7 +396,7 @@ export class BodyCell extends Component {
     }
 
     render() {
-        let content, header, editorKeyHelper;
+        let content, editorKeyHelper;
         let cellSelected = this.props.cellSelection && this.isSelected()
         let cellClassName = classNames(this.props.bodyClassName || this.props.className, {
             'p-selection-column': this.props.selectionMode,
@@ -524,7 +524,6 @@ export class BodyCell extends Component {
         return (
             <td ref={(el) => { this.container = el; }} role="cell" tabIndex={tabIndex} className={cellClassName} style={this.props.bodyStyle || this.props.style} onClick={this.onClick} onKeyDown={this.onKeyDown}
                 rowSpan={this.props.rowSpan} onBlur={this.onBlur} onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp}>
-                {header}
                 {editorKeyHelper}
                 {content}
             </td>

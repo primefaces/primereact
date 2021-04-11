@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-interface OnToggleParams {
+interface ToggleParams {
     originalEvent: React.MouseEvent<HTMLElement>;
     value: boolean;
 }
@@ -14,7 +14,7 @@ interface FieldsetProps {
     collapsed?: boolean;
     onExpand?(event: React.MouseEvent<HTMLElement>): void;
     onCollapse?(event: React.MouseEvent<HTMLElement>): void;
-    onToggle?(e: OnToggleParams): void;
+    onToggle?(e: ToggleParams): void;
     onClick?(event: React.MouseEvent<HTMLElement>): void;
 }
 

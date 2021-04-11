@@ -1,13 +1,14 @@
 import * as React from 'react';
+import { MenuItem } from '../menuitem/MenuItem';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-type ButtonTemplateType = string | JSX.Element | ((props: SplitButtonProps) => JSX.Element);
+type ButtonTemplateType = React.ReactNode | ((props: SplitButtonProps) => React.ReactNode);
 
 interface SplitButtonProps {
     id?: string;
     label?: string;
     icon?: string;
-    model?: any[];
+    model?: MenuItem[];
     disabled?: boolean;
     style?: object;
     className?: string;

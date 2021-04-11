@@ -4,10 +4,10 @@ type PositionType = 'top' | 'bottom' | 'left' | 'right';
 
 type TargetType = string | string[] | HTMLElement;
 
-type TemplateType = React.ReactNode | ((props: SidebarProps) => React.ReactNode);
+type TemplateType = React.ReactNode | ((props: TooltipProps) => React.ReactNode);
 
 interface EventParams {
-    originalEvent: Event;
+    originalEvent: React.SyntheticEvent;
     target: HTMLElement;
 }
 
@@ -39,7 +39,7 @@ interface TooltipProps {
     onHide?(e: EventParams): void;
 }
 
-export class Tooltip extends React.Component<TooltipProps, any> {
+export declare class Tooltip extends React.Component<TooltipProps, any> {
     public updateTargetEvents(target: HTMLElement): void;
     public loadTargetEvents(target: HTMLElement): void;
     public unloadTargetEvents(target: HTMLElement): void;

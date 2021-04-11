@@ -1,20 +1,20 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-interface OnChangeTargetOptions {
+interface ChangeTargetOptions {
     name: string;
     id: string;
     value: any;
     checked: boolean;
 }
 
-interface OnChangeParams {
-    originalEvent: Event;
+interface ChangeParams {
+    originalEvent: React.SyntheticEvent;
     value: any;
     checked: boolean;
     stopPropagation(): void;
     preventDefault(): void;
-    target: OnChangeTargetOptions;
+    target: ChangeTargetOptions;
 }
 
 interface RadioButtonProps {
@@ -32,7 +32,7 @@ interface RadioButtonProps {
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
-    onChange?(e: OnChangeParams): void;
+    onChange?(e: ChangeParams): void;
 }
 
 export class RadioButton extends React.Component<RadioButtonProps, any> { }

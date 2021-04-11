@@ -1,26 +1,26 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-type OptionGroupTemplateType = string | JSX.Element | ((option: any, index: number) => JSX.Element);
+type OptionGroupTemplateType = React.ReactNode | ((option: any, index: number) => React.ReactNode);
 
-type ValueTemplateType = string | JSX.Element | ((option: any, props: DropdownProps) => JSX.Element);
+type ValueTemplateType = React.ReactNode | ((option: any, props: DropdownProps) => React.ReactNode);
 
-type ItemTemplateType = string | JSX.Element | ((option: any) => JSX.Element);
+type ItemTemplateType = React.ReactNode | ((option: any) => React.ReactNode);
 
-type EmptyFilterMessageType = string | JSX.Element | ((props: DropdownProps) => JSX.Element);
+type EmptyFilterMessageType = React.ReactNode | ((props: DropdownProps) => React.ReactNode);
 
-interface OnChangeTargetOptions {
+interface ChangeTargetOptions {
     name: string;
     id: string;
     value: string | undefined | null;
 }
 
-interface OnChangeParams {
-    originalEvent: Event;
+interface ChangeParams {
+    originalEvent: React.SyntheticEvent;
     value: string | undefined | null;
     stopPropagation(): void;
     preventDefault(): void;
-    target: OnChangeTargetOptions;
+    target: ChangeTargetOptions;
 }
 
 interface DropdownProps {
@@ -67,7 +67,7 @@ interface DropdownProps {
     tooltipOptions?: TooltipOptions;
     ariaLabel?: string;
     ariaLabelledBy?: string;
-    onChange?(e: OnChangeParams): void;
+    onChange?(e: ChangeParams): void;
     onFocus?(event: React.FormEvent<HTMLInputElement>): void;
     onBlur?(event: React.FormEvent<HTMLInputElement>): void;
     onMouseDown?(event: React.MouseEvent<HTMLElement>): void;

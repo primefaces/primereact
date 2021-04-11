@@ -24,7 +24,7 @@ interface ToastProps {
     onRemove?(message: ToastMessage): void;
 }
 
-export class Toast extends React.Component<ToastProps, any> {
+export declare class Toast extends React.Component<ToastProps, any> {
     public show(message: ToastMessage | ToastMessage[]): void;
     public clear(): void;
 }

@@ -1,25 +1,25 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-interface OnAddParams {
-    originalEvent: Event;
+interface AddParams {
+    originalEvent: React.SyntheticEvent;
     value: any;
 }
 
-interface OnRemoveParams extends OnAddParams { }
+interface RemoveParams extends AddParams { }
 
-interface OnChangeTargetOptions {
+interface ChangeTargetOptions {
     name: string;
     id: string;
     value: any[];
 }
 
-interface OnChangeParams {
-    originalEvent: Event;
+interface ChangeParams {
+    originalEvent: React.SyntheticEvent;
     value: any[];
     stopPropagation(): void;
     preventDefault(): void;
-    target: OnChangeTargetOptions;
+    target: ChangeTargetOptions;
 }
 
 interface ChipsProps {
@@ -38,9 +38,9 @@ interface ChipsProps {
     separator?: string;
     allowDuplicate?: boolean;
     itemTemplate?(item: any): React.ReactNode;
-    onAdd?(e: OnAddParams): void;
-    onRemove?(e: OnRemoveParams): void;
-    onChange?(e: OnChangeParams): void;
+    onAdd?(e: AddParams): void;
+    onRemove?(e: RemoveParams): void;
+    onChange?(e: ChangeParams): void;
     onFocus?(event: React.FormEvent<HTMLInputElement>): void;
     onBlur?(event: React.FormEvent<HTMLInputElement>): void;
 }

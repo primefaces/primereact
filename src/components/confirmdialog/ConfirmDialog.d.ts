@@ -33,4 +33,4 @@ interface ConfirmDialogReturn {
     hide(): void;
 }
 
-export function confirmDialog(props: ConfirmDialogProps): ConfirmDialogReturn;
+export declare function confirmDialog(props: ConfirmDialogProps): ConfirmDialogReturn;

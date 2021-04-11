@@ -4,12 +4,12 @@ type OrientationType = 'horizontal' | 'vertical';
 
 type ValueType = number | [number, number];
 
-interface OnChangeParams {
-    originalEvent: Event;
+interface ChangeParams {
+    originalEvent: React.SyntheticEvent;
     value: ValueType;
 }
 
-interface OnSlideEndParams extends OnChangeParams { }
+interface SlideEndParams extends ChangeParams { }
 
 interface SliderProps {
     id?: string;
@@ -24,8 +24,8 @@ interface SliderProps {
     disabled?: boolean;
     tabIndex?: number;
     ariaLabelledBy?: string;
-    onChange?(e: OnChangeParams): void;
-    onSlideEnd?(e: OnSlideEndParams): void;
+    onChange?(e: ChangeParams): void;
+    onSlideEnd?(e: SlideEndParams): void;
 }
 
 export class Slider extends React.Component<SliderProps, any> { }

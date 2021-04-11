@@ -1,23 +1,23 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-interface OnCompleteParams {
-    originalEvent: Event;
+interface CompleteParams {
+    originalEvent: React.SyntheticEvent;
     value: string | undefined | null;
 }
 
-interface OnChangeTargetOptions {
+interface ChangeTargetOptions {
     name: string;
     id: string;
     value: string;
 }
 
-interface OnChangeParams {
-    originalEvent: Event;
+interface ChangeParams {
+    originalEvent: React.SyntheticEvent;
     value: string;
     stopPropagation(): void;
     preventDefault(): void;
-    target: OnChangeTargetOptions;
+    target: ChangeTargetOptions;
 }
 
 interface InputMaskProps {
@@ -42,8 +42,8 @@ interface InputMaskProps {
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
-    onComplete?(e: OnCompleteParams): void;
-    onChange?(e: OnChangeParams): void;
+    onComplete?(e: CompleteParams): void;
+    onChange?(e: ChangeParams): void;
     onFocus?(event: React.FormEvent<HTMLInputElement>): void;
     onBlur?(event: React.FormEvent<HTMLInputElement>): void;
 }

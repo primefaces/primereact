@@ -6,12 +6,12 @@ export default interface PrimeReact {
 }
 
 // Locale
-export function locale(locale: string): object;
-export function addLocale(locale: string, options: object): void;
-export function updateLocaleOption(key: string, value: any, locale: string): void;
-export function updateLocaleOptions(options: object, locale: string): void;
-export function localeOption(key: string, locale: string): void;
-export function localeOptions(locale: string): void;
+export declare function locale(locale: string): object;
+export declare function addLocale(locale: string, options: object): void;
+export declare function updateLocaleOption(key: string, value: any, locale: string): void;
+export declare function updateLocaleOptions(options: object, locale: string): void;
+export declare function localeOption(key: string, locale: string): void;
+export declare function localeOptions(locale: string): void;
 
 // Icons
 export interface PrimeIcons {

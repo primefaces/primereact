@@ -8,8 +8,8 @@ interface Breakpoints {
     [key: string]: string
 }
 
-interface OnMaximizeParams {
-    originalEvent: Event;
+interface MaximizeParams {
+    originalEvent: React.SyntheticEvent;
     maximized: boolean;
 }
 
@@ -44,7 +44,7 @@ export interface DialogProps {
     keepInViewport?: boolean;
     maximized?: boolean;
     breakpoints?: Breakpoints;
-    onMaximize?(e: OnMaximizeParams): void;
+    onMaximize?(e: MaximizeParams): void;
     onDragStart?(e: React.DragEvent<HTMLElement>): void;
     onDrag?(e: React.DragEvent<HTMLElement>): void;
     onDragEnd?(e: React.DragEvent<HTMLElement>): void;

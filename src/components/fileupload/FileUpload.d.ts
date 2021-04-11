@@ -8,7 +8,7 @@ interface OptionsType {
     iconOnly?: boolean;
     className?: string;
     style?: object
-};
+}
 
 interface HeaderTemplateOptions {
     className: string;
@@ -36,33 +36,33 @@ type ItemTemplateType = React.ReactNode | ((file: object, options: ItemTemplateO
 
 type EmptyTemplateType = React.ReactNode | ((props: FileUploadProps) => React.ReactNode);
 
-interface OnBeforeUploadParams {
+interface BeforeUploadParams {
     xhr: XMLHttpRequest;
     formData: FormData;
 }
 
-interface OnBeforeSendParams extends OnBeforeUploadParams { }
+interface BeforeSendParams extends BeforeUploadParams { }
 
 interface FilesParam {
     files: File[];
 }
 
-interface OnUploadParams extends FilesParam {
+interface UploadParams extends FilesParam {
     xhr: XMLHttpRequest;
 }
 
-interface OnErrorParams extends OnUploadParams { }
+interface ErrorParams extends UploadParams { }
 
-interface OnSelectParams extends FilesParam {
-    originalEvent: Event;
+interface SelectParams extends FilesParam {
+    originalEvent: React.SyntheticEvent;
 }
 
-interface OnProgressParams {
-    originalEvent: Event;
+interface ProgressParams {
+    originalEvent: React.SyntheticEvent;
     progress: number;
 }
 
-interface OnRemoveParams extends OnSelectParams { }
+interface RemoveParams extends SelectParams { }
 
 interface FileUploadProps {
     id?: string;
@@ -94,19 +94,19 @@ interface FileUploadProps {
     headerTemplate?: HeaderTemplateType;
     itemTemplate?: ItemTemplateType;
     emptyTemplate?: EmptyTemplateType;
-    onBeforeUpload?(e: OnBeforeUploadParams): void;
-    onBeforeSend?(e: OnBeforeSendParams): void;
-    onUpload?(e: OnUploadParams): void;
-    onError?(e: OnErrorParams): void;
+    onBeforeUpload?(e: BeforeUploadParams): void;
+    onBeforeSend?(e: BeforeSendParams): void;
+    onUpload?(e: UploadParams): void;
+    onError?(e: ErrorParams): void;
     onClear?(): void;
-    onSelect?(e: OnSelectParams): void;
-    onProgress?(e: OnProgressParams): void;
+    onSelect?(e: SelectParams): void;
+    onProgress?(e: ProgressParams): void;
     onValidationFail?(file: File): void;
     uploadHandler?(e: FilesParam): void;
-    onRemove?(e: OnRemoveParams): void;
+    onRemove?(e: RemoveParams): void;
 }
 
-export class FileUpload extends React.Component<FileUploadProps, any> {
+export declare class FileUpload extends React.Component<FileUploadProps, any> {
     public upload(): void;
     public clear(): void;
 }

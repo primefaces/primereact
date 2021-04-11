@@ -73,24 +73,24 @@ interface LastPageLinkOptions {
     props: PaginatorProps;
 }
 
-interface OnChangeTargetOptions {
+interface ChangeTargetOptions {
     name: string;
     id: string;
     value: string | undefined | null;
 }
 
-interface OnChangeParams {
-    originalEvent: Event;
+interface ChangeParams {
+    originalEvent: React.SyntheticEvent;
     value: string | undefined | null;
     stopPropagation(): void;
     preventDefault(): void;
-    target: OnChangeTargetOptions;
+    target: ChangeTargetOptions;
 }
 
 interface RowsPerPageDropdownOptions {
     value: any;
     options: any[];
-    onChange(e: OnChangeParams): void;
+    onChange(e: ChangeParams): void;
     appendTo: HTMLElement;
     currentPage: number;
     totalPages: number;

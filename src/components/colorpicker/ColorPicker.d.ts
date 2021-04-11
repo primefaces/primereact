@@ -1,17 +1,17 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-interface OnChangeTargetOptions {
+interface ChangeTargetOptions {
     name: string;
     id: string;
     value: string;
 }
 
-interface OnChangeParams {
+interface ChangeParams {
     value: string;
     stopPropagation(): void;
     preventDefault(): void;
-    target: OnChangeTargetOptions;
+    target: ChangeTargetOptions;
 }
 
 interface ColorPickerProps {
@@ -29,7 +29,7 @@ interface ColorPickerProps {
     inputId?: string;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
-    onChange?(e: OnChangeParams): void;
+    onChange?(e: ChangeParams): void;
 }
 
 export class ColorPicker extends React.Component<ColorPickerProps, any> { }

@@ -3,18 +3,18 @@ import TooltipOptions from '../tooltip/TooltipOptions';
 
 type IconPositionType = 'left' | 'right';
 
-interface OnChangeTargetOptions {
+interface ChangeTargetOptions {
     name: string;
     id: string;
     value: boolean;
 }
 
-interface OnChangeParams {
-    originalEvent: Event;
+interface ChangeParams {
+    originalEvent: React.SyntheticEvent;
     value: boolean;
     stopPropagation(): void;
     preventDefault(): void;
-    target: OnChangeTargetOptions;
+    target: ChangeTargetOptions;
 }
 
 interface ToggleButtonProps {
@@ -31,7 +31,7 @@ interface ToggleButtonProps {
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
-    onChange?(e: OnChangeParams): void;
+    onChange?(e: ChangeParams): void;
     onFocus?(event: React.FormEvent<HTMLElement>): void;
     onBlur?(event: React.FormEvent<HTMLElement>): void;
 }

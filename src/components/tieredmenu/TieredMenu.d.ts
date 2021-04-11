@@ -14,6 +14,6 @@ interface TieredMenuProps {
     onHide?(e: Event): void;
 }
 
-export class TieredMenu extends React.Component<TieredMenuProps, any> {
+export declare class TieredMenu extends React.Component<TieredMenuProps, any> {
     public toggle(event: React.SyntheticEvent): void;
 }

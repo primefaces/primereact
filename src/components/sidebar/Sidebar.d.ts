@@ -4,10 +4,6 @@ type PositionType = 'top' | 'bottom' | 'left' | 'right';
 
 type TemplateType = React.ReactNode | ((props: SidebarProps) => React.ReactNode);
 
-interface Breakpoints {
-    [key: string]: string
-}
-
 interface SidebarProps {
     id?: string;
     style?: object;

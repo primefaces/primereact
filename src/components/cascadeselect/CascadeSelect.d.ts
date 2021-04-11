@@ -1,13 +1,13 @@
 import * as React from 'react';
 
-type ItemTemplateType = string | JSX.Element | ((option: any) => JSX.Element);
+type ItemTemplateType = React.ReactNode | ((option: any) => React.ReactNode);
 
-interface OnChangeParams {
-    originalEvent: Event;
+interface ChangeParams {
+    originalEvent: React.SyntheticEvent;
     value: any;
 }
 
-interface OnGroupChangeParams extends OnChangeParams { }
+interface GroupChangeParams extends ChangeParams { }
 
 interface CascadeSelectProps {
     id?: string;
@@ -29,8 +29,8 @@ interface CascadeSelectProps {
     tabIndex?: number;
     ariaLabelledBy?: string;
     appendTo?: HTMLElement;
-    onChange?(e: OnChangeParams): void;
-    onGroupChange?(e: OnGroupChangeParams): void;
+    onChange?(e: ChangeParams): void;
+    onGroupChange?(e: GroupChangeParams): void;
     onBeforeShow?(): void;
     onBeforeHide?(): void;
     onShow?(): void;

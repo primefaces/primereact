@@ -1,27 +1,27 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-interface OnChangeTargetOptions {
+interface ChangeTargetOptions {
     name: string;
     id: string;
     value: Date | Date[] | undefined | null;
 }
 
-interface OnChangeParams {
-    originalEvent: Event;
+interface ChangeParams {
+    originalEvent: React.SyntheticEvent;
     value: Date | Date[] | undefined | null;
     stopPropagation(): void;
     preventDefault(): void;
-    target: OnChangeTargetOptions;
+    target: ChangeTargetOptions;
 }
 
-interface OnViewChangeParams {
-    originalEvent: Event;
+interface ViewChangeParams {
+    originalEvent: React.SyntheticEvent;
     value: Date;
 }
 
-interface OnSelectParams {
-    originalEvent: Event;
+interface SelectParams {
+    originalEvent: React.SyntheticEvent;
     value: Date | Date[];
 }
 
@@ -101,9 +101,9 @@ interface CalendarProps {
     onFocus?(event: React.FormEvent<HTMLInputElement>): void;
     onBlur?(event: React.FormEvent<HTMLInputElement>): void;
     onInput?(event: React.FormEvent<HTMLInputElement>): void;
-    onSelect?(e: OnSelectParams): void;
-    onChange?(e: OnChangeParams): void;
-    onViewDateChange?(e: OnViewChangeParams): void;
+    onSelect?(e: SelectParams): void;
+    onChange?(e: ChangeParams): void;
+    onViewDateChange?(e: ViewChangeParams): void;
     onTodayButtonClick?(event: React.MouseEvent<HTMLButtonElement>): void;
     onClearButtonClick?(event: React.MouseEvent<HTMLButtonElement>): void;
 }

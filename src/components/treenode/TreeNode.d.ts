@@ -1,5 +1,5 @@
 export default interface TreeNode {
-    key?: any;
+    key?: string | number;
     label?: string;
     data?: any;
     icon?: string;

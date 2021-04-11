@@ -55,7 +55,7 @@ interface ShowElementParams {
 }
 
 interface EventParams {
-    originalEvent: Event;
+    originalEvent: React.SyntheticEvent;
     value: any;
 }
 
@@ -64,23 +64,23 @@ interface PageParams {
     rows: number;
 }
 
-interface OnRowToggleParams {
+interface RowToggleParams {
     data: any[];
 }
 
-interface OnColumnResizeEndParams {
+interface ColumnResizeEndParams {
     element: HTMLElement;
     column: ColumnProps;
     delta: number;
 }
 
-interface OnSortParams {
+interface SortParams {
     sortField: string;
     sortOrder: SortOrderType;
     multiSortMeta: MultiSortMetaType;
 }
 
-interface OnFilterParams {
+interface FilterParams {
     filters: FilterMeta;
 }
 
@@ -92,12 +92,12 @@ interface RowClickEventParams extends Omit<RowEventParams, 'originalEvent'> {
     originalEvent: React.MouseEvent<HTMLElement>;
 }
 
-interface OnRowEditSaveParams extends RowEventParams {
+interface RowEditSaveParams extends RowEventParams {
     valid: boolean;
 }
 
 interface SelectParams {
-    originalEvent: Event;
+    originalEvent: React.SyntheticEvent;
     data: any;
     type: string;
 }
@@ -109,14 +109,14 @@ interface ExportFunctionParams {
     field: string;
 }
 
-interface OnColReorderParams {
+interface ColReorderParams {
     originalEvent: React.DragEvent<HTMLElement>;
     dragIndex: number;
     dropIndex: number;
     columns: React.ReactElement;
 }
 
-interface OnRowReorderParams {
+interface RowReorderParams {
     originalEvent: React.DragEvent<HTMLElement>;
     value: any;
     dragIndex: number;
@@ -203,14 +203,14 @@ interface DataTableProps {
     onSelectionChange?(e: EventParams): void;
     onContextMenuSelectionChange?(e: EventParams): void;
     rowExpansionTemplate?(data: any): React.ReactNode;
-    onRowToggle?(e: OnRowToggleParams): void;
+    onRowToggle?(e: RowToggleParams): void;
     rowClassName?(data: any): object;
     rowGroupHeaderTemplate?(data: any, index: number): React.ReactNode;
     rowGroupFooterTemplate?(data: any, index: number): React.ReactNode;
-    onColumnResizeEnd?(e: OnColumnResizeEndParams): void;
-    onSort?(e: OnSortParams): void;
+    onColumnResizeEnd?(e: ColumnResizeEndParams): void;
+    onSort?(e: SortParams): void;
     onPage?(e: PageParams): void;
-    onFilter?(e: OnFilterParams): void;
+    onFilter?(e: FilterParams): void;
     onVirtualScroll?(e: PageParams): void;
     onRowClick?(e: RowClickEventParams): void;
     onRowDoubleClick?(e: RowClickEventParams): void;
@@ -221,12 +221,12 @@ interface DataTableProps {
     onCellSelect?(e: SelectParams): void;
     onCellUnselect?(e: UnselectParams): void;
     onContextMenu?(e: EventParams): void;
-    onColReorder?(e: OnColReorderParams): void;
-    onRowReorder?(e: OnRowReorderParams): void;
+    onColReorder?(e: ColReorderParams): void;
+    onRowReorder?(e: RowReorderParams): void;
     onValueChange?(value: any[]): void;
     rowEditorValidator?(data: any): boolean;
     onRowEditInit?(e: RowEventParams): void;
-    onRowEditSave?(e: OnRowEditSaveParams): void;
+    onRowEditSave?(e: RowEditSaveParams): void;
     onRowEditCancel?(e: RowEventParams): void;
     onRowEditChange?(e: RowEventParams): void;
     exportFunction?(e: ExportFunctionParams): any;
@@ -236,7 +236,7 @@ interface DataTableProps {
     onStateRestore?(state: object): void;
 }
 
-export class DataTable extends React.Component<DataTableProps, any> {
+export declare class DataTable extends React.Component<DataTableProps, any> {
     public reset(): void;
     public exportCSV(options: { selectionOnly: boolean }): void;
     public filter<T>(value: T, field: string, mode: FilterMatchModeType): void;

@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface CommandParams {
-    originalEvent: Event;
+    originalEvent: React.SyntheticEvent;
     item: MenuItem;
 }
 
@@ -30,4 +30,5 @@ export interface MenuItem {
     className?: string;
     command?(e: CommandParams): void;
     template?: TemplateType;
+    [key: string]: any;
 }

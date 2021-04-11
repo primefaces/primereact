@@ -1,40 +1,40 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-type OptionGroupTemplateType = string | JSX.Element | ((suggestion: any, index: number) => JSX.Element);
+type OptionGroupTemplateType = React.ReactNode | ((suggestion: any, index: number) => React.ReactNode);
 
-type ItemTemplateType = string | JSX.Element | ((suggestion: any, index: number) => JSX.Element);
+type ItemTemplateType = React.ReactNode | ((suggestion: any, index: number) => React.ReactNode);
 
-type SelectedItemTemplateType = string | JSX.Element | ((value: any) => JSX.Element);
+type SelectedItemTemplateType = React.ReactNode | ((value: any) => React.ReactNode);
 
-interface OnChangeTargetOptions {
+interface ChangeTargetOptions {
     name: string;
     id: string;
     value: any;
 }
 
-interface OnChangeParams {
-    originalEvent: Event;
+interface ChangeParams {
+    originalEvent: React.SyntheticEvent;
     value: any;
     stopPropagation(): void;
     preventDefault(): void;
-    target: OnChangeTargetOptions;
+    target: ChangeTargetOptions;
 }
 
-interface OnSelectParams {
-    originalEvent: Event;
+interface SelectParams {
+    originalEvent: React.SyntheticEvent;
     value: any;
 }
 
-interface OnUnSelectParams extends OnSelectParams { }
+interface UnselectParams extends SelectParams { }
 
-interface OnDropdownClickParams {
-    originalEvent: Event;
+interface DropdownClickParams {
+    originalEvent: React.SyntheticEvent;
     query: string;
 }
 
 interface CompleteMethodParams {
-    originalEvent: Event;
+    originalEvent: React.SyntheticEvent;
     query: string;
 }
 
@@ -78,12 +78,12 @@ interface AutoCompleteProps {
     completeMethod?(e: CompleteMethodParams): void;
     itemTemplate?: ItemTemplateType;
     selectedItemTemplate?: SelectedItemTemplateType;
-    onChange?(e: OnChangeParams): void;
+    onChange?(e: ChangeParams): void;
     onFocus?(event: React.FormEvent<HTMLInputElement>): void;
     onBlur?(event: React.FormEvent<HTMLInputElement>): void;
-    onSelect?(e: OnSelectParams): void;
-    onUnselect?(e: OnUnSelectParams): void;
-    onDropdownClick?(e: OnDropdownClickParams): void;
+    onSelect?(e: SelectParams): void;
+    onUnselect?(e: UnselectParams): void;
+    onDropdownClick?(e: DropdownClickParams): void;
     onClick?(event: React.MouseEvent<HTMLElement>): void;
     onDblClick?(event: React.MouseEvent<HTMLElement>): void;
     onMouseDown?(event: React.MouseEvent<HTMLElement>): void;

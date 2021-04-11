@@ -13,8 +13,8 @@ type LayoutType = 'vertical' | 'horizontal';
 
 type StateStorageType = 'session' | 'local';
 
-interface OnResizeEndParams {
-    originalEvent: Event;
+interface ResizeEndParams {
+    originalEvent: React.SyntheticEvent;
     sizes: number[];
 }
 
@@ -26,7 +26,7 @@ interface SplitterProps {
     gutterSize?: number;
     stateKey?: string;
     stateStorage?: StateStorageType;
-    onResizeEnd?(e: OnResizeEndParams): void;
+    onResizeEnd?(e: ResizeEndParams): void;
 }
 
 export class Splitter extends React.Component<SplitterProps,any> {}

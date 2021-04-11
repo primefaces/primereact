@@ -30,4 +30,4 @@ interface ConfirmPopupReturn {
     hide(): void;
 }
 
-export function confirmPopup(props: ConfirmPopupProps): ConfirmPopupReturn;
+export declare function confirmPopup(props: ConfirmPopupProps): ConfirmPopupReturn;

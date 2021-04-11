@@ -1,13 +1,13 @@
 import * as React from 'react';
 
-interface OnTextChangeParams {
+interface TextChangeParams {
     htmlValue: string | null;
     textValue: string;
     delta: any;
     source: string;
 }
 
-interface OnSelectionChangeParams {
+interface SelectionChangeParams {
     range: any;
     oldRange: any;
     source: string;
@@ -24,8 +24,8 @@ interface EditorProps {
     formats?: string[];
     theme?: string;
     headerTemplate?: React.ReactNode;
-    onTextChange?(e: OnTextChangeParams): void;
-    onSelectionChange?(e: OnSelectionChangeParams): void;
+    onTextChange?(e: TextChangeParams): void;
+    onSelectionChange?(e: SelectionChangeParams): void;
 }
 
 export class Editor extends React.Component<EditorProps, any> { }

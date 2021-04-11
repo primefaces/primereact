@@ -1,26 +1,26 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-type OptionGroupTemplateType = string | JSX.Element | ((option: any, index: number) => JSX.Element);
+type OptionGroupTemplateType = React.ReactNode | ((option: any, index: number) => React.ReactNode);
 
-type ItemTemplateType = string | JSX.Element | ((option: any) => JSX.Element);
+type ItemTemplateType = React.ReactNode | ((option: any) => React.ReactNode);
 
-interface OnChangeTargetOptions {
+interface ChangeTargetOptions {
     name: string;
     id: string;
     value: any;
 }
 
-interface OnChangeParams {
-    originalEvent: Event;
+interface ChangeParams {
+    originalEvent: React.SyntheticEvent;
     value: any;
     stopPropagation(): void;
     preventDefault(): void;
-    target: OnChangeTargetOptions;
+    target: ChangeTargetOptions;
 }
 
-interface OnFilterValueChangeParams {
-    originalEvent: Event;
+interface FilterValueChangeParams {
+    originalEvent: React.SyntheticEvent;
     value: any;
 }
 
@@ -53,8 +53,8 @@ interface ListBoxProps {
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
-    onChange?(e: OnChangeParams): void;
-    onFilterValueChange(e: OnFilterValueChangeParams): void;
+    onChange?(e: ChangeParams): void;
+    onFilterValueChange(e: FilterValueChangeParams): void;
 }
 
 export class ListBox extends React.Component<ListBoxProps, any> { }

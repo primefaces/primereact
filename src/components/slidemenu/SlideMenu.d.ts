@@ -19,7 +19,7 @@ interface SlideMenuProps {
     onHide?(e: React.SyntheticEvent): void;
 }
 
-export class SlideMenu extends React.Component<SlideMenuProps, any> {
+export declare class SlideMenu extends React.Component<SlideMenuProps, any> {
     public show(event: React.SyntheticEvent): void;
     public hide(event: React.SyntheticEvent): void;
     public toggle(event: React.SyntheticEvent): void;

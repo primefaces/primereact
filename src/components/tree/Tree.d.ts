@@ -16,16 +16,16 @@ interface ExpandedKeysType {
 }
 
 interface EventKeyParams {
-    originalEvent: Event;
+    originalEvent: React.SyntheticEvent;
     value: ExpandedKeysType;
 }
 
 interface EventNodeParams {
-    originalEvent: Event;
+    originalEvent: React.SyntheticEvent;
     node: TreeNode;
 }
 
-interface OnDragDropParams {
+interface DragDropParams {
     originalEvent: Event,
     value: TreeNode[];
     dragNode: TreeNode;
@@ -64,7 +64,7 @@ interface TreeProps {
     onExpand?(e: EventNodeParams): void;
     onCollapse?(e: EventNodeParams): void;
     onToggle?(e: EventKeyParams): void;
-    onDragDrop?(e: OnDragDropParams): void;
+    onDragDrop?(e: DragDropParams): void;
     onContextMenu?(e: EventNodeParams): void;
 }
 

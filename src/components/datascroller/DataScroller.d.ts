@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-interface OnLazyLoadParams {
+interface LazyLoadParams {
     first: number;
     rows: number;
 }
@@ -18,10 +18,10 @@ interface DataScrollerProps {
     header?: React.ReactNode;
     footer?: React.ReactNode;
     lazy?: boolean;
-    onLazyLoad?(e: OnLazyLoadParams): void;
+    onLazyLoad?(e: LazyLoadParams): void;
     itemTemplate?(item: any): React.ReactNode;
 }
 
-export class DataScroller extends React.Component<DataScrollerProps, any> {
+export declare class DataScroller extends React.Component<DataScrollerProps, any> {
     public load(): void;
 }

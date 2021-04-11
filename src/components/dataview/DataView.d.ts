@@ -3,7 +3,7 @@ import { PaginatorTemplate } from '../paginator/Paginator';
 
 type LayoutType = 'list' | 'grid';
 
-interface OnChangeParams {
+interface ChangeParams {
     originalEvent: React.MouseEvent<HTMLButtonElement>;
     value: LayoutType;
 }
@@ -13,7 +13,7 @@ interface DataViewLayoutOptionsProps {
     layout?: LayoutType;
     style?: object;
     className?: string;
-    onChange(e: OnChangeParams): void;
+    onChange(e: ChangeParams): void;
 }
 
 export class DataViewLayoutOptions extends React.Component<DataViewLayoutOptionsProps, any> { }
@@ -22,8 +22,8 @@ type PaginatorPositionType = 'top' | 'bottom' | 'both';
 
 type SortOrderType = 1 | 0 | -1 | undefined | null;
 
-interface OnPageParams {
-    originalEvent: Event;
+interface PageParams {
+    originalEvent: React.SyntheticEvent;
     first: number;
     rows: number;
 }
@@ -56,7 +56,7 @@ interface DataViewProps {
     lazy?: boolean;
     loading?: boolean;
     loadingIcon?: string;
-    onPage?(e: OnPageParams): void;
+    onPage?(e: PageParams): void;
     itemTemplate?(item: any, layout: LayoutType): React.ReactNode;
 }
 

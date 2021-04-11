@@ -1,18 +1,18 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-interface OnChangeTargetOptions {
+interface ChangeTargetOptions {
     name: string;
     id: string;
     value: any;
 }
 
-interface OnChangeParams {
-    originalEvent: Event;
+interface ChangeParams {
+    originalEvent: React.SyntheticEvent;
     value: any;
     stopPropagation(): void;
     preventDefault(): void;
-    target: OnChangeTargetOptions;
+    target: ChangeTargetOptions;
 }
 
 interface SelectButtonProps {
@@ -32,7 +32,7 @@ interface SelectButtonProps {
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
     itemTemplate?(option: any): React.ReactNode;
-    onChange?(e: OnChangeParams): void;
+    onChange?(e: ChangeParams): void;
 }
 
 export class SelectButton extends React.Component<SelectButtonProps, any> { }

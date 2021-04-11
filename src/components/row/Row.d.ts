@@ -5,4 +5,4 @@ interface RowProps {
     className?: string;
 }
 
-export class Row extends React.Component<RowProps,any> {}
+export class Row extends React.Component<RowProps, any> { }

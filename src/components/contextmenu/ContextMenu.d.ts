@@ -14,7 +14,7 @@ interface ContextMenuProps {
     onHide?(e: React.SyntheticEvent): void;
 }
 
-export class ContextMenu extends React.Component<ContextMenuProps, any> {
+export declare class ContextMenu extends React.Component<ContextMenuProps, any> {
     public show(event: React.SyntheticEvent): void;
     public hide(event: React.SyntheticEvent): void;
 }

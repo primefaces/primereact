@@ -8,7 +8,7 @@ interface ResponsiveOptions {
     numScroll: number;
 }
 
-interface OnPageChangeParams {
+interface PageChangeParams {
     page: number;
 }
 
@@ -31,7 +31,7 @@ interface CarouselProps {
     contentClassName?: string;
     containerClassName?: string;
     indicatorsContentClassName?: string;
-    onPageChange?(e: OnPageChangeParams): void;
+    onPageChange?(e: PageChangeParams): void;
 }
 
 export class Carousel extends React.Component<CarouselProps, any> { }

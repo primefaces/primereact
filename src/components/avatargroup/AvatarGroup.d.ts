@@ -5,4 +5,4 @@ interface AvatarGroupProps {
     className?: string;
 }
 
-export class AvatarGroup extends React.Component<AvatarGroupProps,any> {}
+export class AvatarGroup extends React.Component<AvatarGroupProps, any> { }

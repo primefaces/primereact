@@ -1,13 +1,13 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-type OptionGroupTemplateType = string | JSX.Element | ((option: any, index: number) => JSX.Element);
+type OptionGroupTemplateType = React.ReactNode | ((option: any, index: number) => React.ReactNode);
 
-type ItemTemplateType = string | JSX.Element | ((option: any) => JSX.Element);
+type ItemTemplateType = React.ReactNode | ((option: any) => React.ReactNode);
 
-type SelectedItemTemplateType = string | JSX.Element | ((value: any) => JSX.Element);
+type SelectedItemTemplateType = React.ReactNode | ((value: any) => React.ReactNode);
 
-type EmptyFilterMessageType = string | JSX.Element | ((props: MultiSelectProps) => JSX.Element);
+type EmptyFilterMessageType = React.ReactNode | ((props: MultiSelectProps) => React.ReactNode);
 
 interface PanelHeaderTemplateParams {
     className: string;
@@ -23,22 +23,22 @@ interface PanelHeaderTemplateParams {
     props: MultiSelectProps;
 }
 
-type PanelHeaderTemplateType = string | JSX.Element | ((e: PanelHeaderTemplateParams) => JSX.Element);
+type PanelHeaderTemplateType = React.ReactNode | ((e: PanelHeaderTemplateParams) => React.ReactNode);
 
-type PanelFooterTemplateType = string | JSX.Element | ((props: MultiSelectProps) => JSX.Element);
+type PanelFooterTemplateType = React.ReactNode | ((props: MultiSelectProps) => React.ReactNode);
 
-interface OnChangeTargetOptions {
+interface ChangeTargetOptions {
     name: string;
     id: string;
     value: any;
 }
 
-interface OnChangeParams {
-    originalEvent: Event;
+interface ChangeParams {
+    originalEvent: React.SyntheticEvent;
     value: any;
     stopPropagation(): void;
     preventDefault(): void;
-    target: OnChangeTargetOptions;
+    target: ChangeTargetOptions;
 }
 
 interface MultiSelectProps {
@@ -85,7 +85,7 @@ interface MultiSelectProps {
     selectedItemTemplate?: SelectedItemTemplateType;
     panelHeaderTemplate?: PanelHeaderTemplateType;
     panelFooterTemplate?: PanelFooterTemplateType;
-    onChange?(e: OnChangeParams): void;
+    onChange?(e: ChangeParams): void;
     onFocus?(event: React.FormEvent<HTMLInputElement>): void;
     onBlur?(event: React.FormEvent<HTMLInputElement>): void;
 }

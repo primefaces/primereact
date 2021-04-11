@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-interface OnToggleParams {
-    originalEvent: Event;
+interface ToggleParams {
+    originalEvent: React.SyntheticEvent;
     value: boolean;
 }
 interface InplaceProps {
@@ -14,7 +14,7 @@ interface InplaceProps {
     ariaLabel?: string;
     onOpen?(event: React.MouseEvent<HTMLElement>): void;
     onClose?(event: React.MouseEvent<HTMLElement>): void;
-    onToggle?(e: OnToggleParams): void;
+    onToggle?(e: ToggleParams): void;
 }
 
 export class Inplace extends React.Component<InplaceProps, any> { }

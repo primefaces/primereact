@@ -4,4 +4,4 @@ import * as React from 'react';
 interface ColumnGroupProps {
 }
 
-export class ColumnGroup extends React.Component<ColumnGroupProps,any> {}
+export class ColumnGroup extends React.Component<ColumnGroupProps, any> { }

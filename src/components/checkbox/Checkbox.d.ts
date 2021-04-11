@@ -1,7 +1,7 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-interface OnChangeTargetOptions {
+interface ChangeTargetOptions {
     type: 'checkbox';
     name: string;
     id: string;
@@ -9,13 +9,13 @@ interface OnChangeTargetOptions {
     checked: boolean;
 }
 
-interface OnChangeParams {
-    originalEvent: Event;
+interface ChangeParams {
+    originalEvent: React.SyntheticEvent;
     value: any;
     checked: boolean;
     stopPropagation(): void;
     preventDefault(): void;
-    target: OnChangeTargetOptions;
+    target: ChangeTargetOptions;
 }
 
 interface CheckboxProps {
@@ -34,7 +34,7 @@ interface CheckboxProps {
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
-    onChange?(e: OnChangeParams): void;
+    onChange?(e: ChangeParams): void;
     onMouseDown?(event: React.MouseEvent<HTMLElement>): void;
     onContextMenu?(event: React.MouseEvent<HTMLElement>): void;
 }

@@ -18,7 +18,7 @@ interface OverlayPanelProps {
     onHide?(): void;
 }
 
-export class OverlayPanel extends React.Component<OverlayPanelProps, any> {
+export declare class OverlayPanel extends React.Component<OverlayPanelProps, any> {
     public toggle(event: Event, target: HTMLElement): void;
     public show(event: Event, target: HTMLElement): void;
     public hide(): void;

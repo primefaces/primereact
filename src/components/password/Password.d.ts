@@ -1,11 +1,11 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-type HeaderType = string | JSX.Element | ((props: PasswordProps) => JSX.Element);
+type HeaderType = React.ReactNode | ((props: PasswordProps) => React.ReactNode);
 
-type FooterType = string | JSX.Element | ((props: PasswordProps) => JSX.Element);
+type FooterType = React.ReactNode | ((props: PasswordProps) => React.ReactNode);
 
-type ContentType = string | JSX.Element | ((props: PasswordProps) => JSX.Element);
+type ContentType = React.ReactNode | ((props: PasswordProps) => React.ReactNode);
 
 interface IconParams {
     onClick(): void;
@@ -14,9 +14,9 @@ interface IconParams {
     props: PasswordProps;
 }
 
-type IconType = string | JSX.Element | ((e: IconParams) => JSX.Element);
+type IconType = React.ReactNode | ((e: IconParams) => React.ReactNode);
 
-interface PasswordProps extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
+interface PasswordProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onInput'> {
     id?: string;
     inputRef?: React.Ref<HTMLInputElement>;
     promptLabel?: string;
@@ -31,7 +31,7 @@ interface PasswordProps extends React.DetailedHTMLProps<React.InputHTMLAttribute
     header?: HeaderType;
     content?: ContentType;
     footer?: FooterType;
-    icon?: IconParams;
+    icon?: IconType;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     style?: object;

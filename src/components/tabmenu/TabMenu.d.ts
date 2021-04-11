@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { MenuItem } from '../menuitem/MenuItem';
 
-interface OnTabChangeParams {
-    originalEvent: Event;
+interface TabChangeParams {
+    originalEvent: React.SyntheticEvent;
     value: MenuItem;
 }
 
@@ -12,7 +12,7 @@ interface TabMenuProps {
     activeItem?: MenuItem;
     style?: object;
     className?: string;
-    onTabChange?(e: OnTabChangeParams): void;
+    onTabChange?(e: TabChangeParams): void;
 }
 
 export class TabMenu extends React.Component<TabMenuProps, any> { }

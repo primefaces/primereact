@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { ColumnProps } from '../column/Column';
 import { PaginatorTemplate } from '../paginator/Paginator';
 import TreeNode from '../treenode/TreeNode';
 
@@ -45,38 +46,38 @@ interface FilterMeta {
 }
 
 interface EventParams {
-    originalEvent: Event;
+    originalEvent: React.SyntheticEvent;
     node: TreeNode;
 }
 
-interface OnToggleParams {
-    originalEvent: Event;
+interface ToggleParams {
+    originalEvent: React.SyntheticEvent;
     value: ExpandedKeysType;
 }
 
-interface OnPageParams {
+interface PageParams {
     first: number;
     rows: number;
 }
 
-interface OnSortParams {
+interface SortParams {
     sortField: string;
     sortOrder: SortOrderType;
     multiSortMeta: MultiSortMetaType;
 }
 
 interface SelectionParams {
-    originalEvent: Event;
+    originalEvent: React.SyntheticEvent;
     value: TreeNode | TreeNode[];
 }
 
-interface OnColumnResizeEndParams {
+interface ColumnResizeEndParams {
     element: HTMLElement;
     column: ColumnProps;
     delta: number;
 }
 
-interface OnColReorderParams {
+interface ColReorderParams {
     originalEvent: React.DragEvent<HTMLElement>;
     dragIndex: number;
     dropIndex: number;
@@ -145,19 +146,19 @@ interface TreeTableProps {
     onFilter?(filters: FilterMeta[]): void;
     onExpand?(e: EventParams): void;
     onCollapse?(e: EventParams): void;
-    onToggle?(e: OnToggleParams): void;
-    onPage?(e: OnPageParams): void;
-    onSort?(e: OnSortParams): void;
+    onToggle?(e: ToggleParams): void;
+    onPage?(e: PageParams): void;
+    onSort?(e: SortParams): void;
     onSelect?(e: EventParams): void;
     onUnselect?(e: EventParams): void;
     onRowClick?(e: EventParams): void;
     onSelectionChange?(e: SelectionParams): void;
     onContextMenuSelectionChange?(e: SelectionParams): void;
-    onColumnResizeEnd?(e: OnColumnResizeEndParams): void;
-    onColReorder?(e: OnColReorderParams): void;
+    onColumnResizeEnd?(e: ColumnResizeEndParams): void;
+    onColReorder?(e: ColReorderParams): void;
     onContextMenu?(e: EventParams): void;
 }
 
-export class TreeTable extends React.Component<TreeTableProps, any> {
+export declare class TreeTable extends React.Component<TreeTableProps, any> {
     public filter<T>(value: T, field: string, mode: FilterMatchModeType): void;
 }

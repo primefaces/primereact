@@ -13,8 +13,8 @@ interface TabPanelProps {
 
 export class TabPanel extends React.Component<TabPanelProps, any> { }
 
-interface OnTabChangeParams {
-    originalEvent: Event;
+interface TabChangeParams {
+    originalEvent: React.SyntheticEvent;
     index: number;
 }
 
@@ -24,7 +24,7 @@ interface TabViewProps {
     style?: object;
     className?: string;
     renderActiveOnly?: boolean;
-    onTabChange?(e: OnTabChangeParams): void;
+    onTabChange?(e: TabChangeParams): void;
 }
 
 // tslint:disable-next-line:max-classes-per-file

@@ -7,7 +7,7 @@ interface ResponsiveOptions {
     numVisible: number;
 }
 
-interface OnItemChangeParams {
+interface ItemChangeParams {
     index: number;
 }
 
@@ -39,10 +39,10 @@ interface GalleriaProps {
     showIndicatorsOnItem?: boolean;
     indicatorsPosition?: PositionType;
     baseZIndex?: number;
-    onItemChange?(e: OnItemChangeParams): void;
+    onItemChange?(e: ItemChangeParams): void;
 }
 
-export class Galleria extends React.Component<GalleriaProps, any> {
+export declare class Galleria extends React.Component<GalleriaProps, any> {
     public show(): void;
     public hide(): void;
     public isAutoPlayActive(): boolean;

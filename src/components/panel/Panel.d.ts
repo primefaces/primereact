@@ -10,7 +10,7 @@ interface HeaderTemplateOptions {
     iconsClassName: string;
     togglerClassName: string;
     togglerIconClassName: string;
-    onTogglerClick(event: React.MouseEvent<HTMLElement>);
+    onTogglerClick(event: React.MouseEvent<HTMLElement>): void;
     titleElement: JSX.Element;
     iconsElement: JSX.Element;
     togglerElement: JSX.Element;
@@ -19,7 +19,7 @@ interface HeaderTemplateOptions {
     collapsed: boolean;
 }
 
-interface OnToggleParams {
+interface ToggleParams {
     originalEvent: React.MouseEvent<HTMLElement>;
     value: boolean;
 }
@@ -37,7 +37,7 @@ interface PanelProps {
     icons?: IconsTemplateType;
     onExpand?(event: Event): void;
     onCollapse?(event: Event): void;
-    onToggle?(e: OnToggleParams): void;
+    onToggle?(e: ToggleParams): void;
 }
 
 export class Panel extends React.Component<PanelProps, any> { }

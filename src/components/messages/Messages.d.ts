@@ -20,7 +20,7 @@ interface MessagesProps {
     onClick?(message: MessageOptions): void;
 }
 
-export class Messages extends React.Component<MessagesProps, any> {
+export declare class Messages extends React.Component<MessagesProps, any> {
     public show(message: MessageOptions | MessageOptions[]): void;
     public clear(): void;
     public replace(message: MessageOptions | MessageOptions[]): void;

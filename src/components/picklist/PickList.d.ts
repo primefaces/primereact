@@ -1,12 +1,12 @@
 import * as React from 'react';
 
 interface EventParams {
-    originalEvent: Event;
+    originalEvent: React.SyntheticEvent;
     value: any;
 }
 
-interface OnChangeParams {
-    originalEvent: Event;
+interface ChangeParams {
+    originalEvent: React.SyntheticEvent;
     source: any;
     target: any;
 }
@@ -28,7 +28,7 @@ interface PickListProps {
     metaKeySelection?: boolean;
     tabIndex?: number;
     itemTemplate?(item: any): React.ReactNode;
-    onChange?(e: OnChangeParams): void;
+    onChange?(e: ChangeParams): void;
     onMoveToSource?(e: EventParams): void;
     onMoveAllToSource?(e: EventParams): void;
     onMoveToTarget?(e: EventParams): void;

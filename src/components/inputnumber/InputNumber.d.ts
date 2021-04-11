@@ -1,22 +1,22 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-interface OnValueChangeTargetOptions {
+interface ValueChangeTargetOptions {
     name: string;
     id: string;
     value: string;
 }
 
-interface OnValueChangeParams {
-    originalEvent: Event;
+interface ValueChangeParams {
+    originalEvent: React.SyntheticEvent;
     value: string;
     stopPropagation(): void;
     preventDefault(): void;
-    target: OnValueChangeTargetOptions;
+    target: ValueChangeTargetOptions;
 }
 
-interface OnChangeParams {
-    originalEvent: Event;
+interface ChangeParams {
+    originalEvent: React.SyntheticEvent;
     value: string;
 }
 
@@ -63,8 +63,8 @@ interface InputNumberProps {
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
-    onValueChange?(e: OnValueChangeParams): void;
-    onChange?(e: OnChangeParams): void;
+    onValueChange?(e: ValueChangeParams): void;
+    onChange?(e: ChangeParams): void;
     onFocus?(event: React.FormEvent<HTMLInputElement>): void;
     onBlur?(event: React.FormEvent<HTMLInputElement>): void;
     onKeyDown?(event: React.KeyboardEvent<HTMLInputElement>): void;

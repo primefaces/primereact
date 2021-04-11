@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-interface OnChangeParams {
+interface ChangeParams {
     value: number;
 }
 
@@ -22,7 +22,7 @@ interface KnobProps {
     rangeColor?: string;
     textColor?: string;
     valueTemplate?: string;
-    onChange?(e: OnChangeParams): void;
+    onChange?(e: ChangeParams): void;
 }
 
 export class Knob extends React.Component<KnobProps, any> { }

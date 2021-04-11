@@ -6,12 +6,12 @@ type NodeDataType = OrganizationChartNodeData | undefined | null;
 
 type SelectionNodeDataType = OrganizationChartNodeData | OrganizationChartNodeData[] | undefined | null;
 
-interface OnNodeSelectParams {
-    originalEvent: Event;
+interface NodeSelectParams {
+    originalEvent: React.SyntheticEvent;
     node: NodeDataType;
 }
 
-interface OnNodeUnselectParams extends OnNodeSelectParams { }
+interface NodeUnselectParams extends NodeSelectParams { }
 
 interface OrganizationChartNodeData {
     className?: string;
@@ -30,8 +30,8 @@ interface OrganizationChartProps {
     selection?: SelectionNodeDataType;
     nodeTemplate?(node: OrganizationChartNodeData): React.ReactNode;
     selectionChange?(node: SelectionNodeDataType): void;
-    onNodeSelect?(e: OnNodeSelectParams): void;
-    onNodeUnselect?(e: OnNodeUnselectParams): void;
+    onNodeSelect?(e: NodeSelectParams): void;
+    onNodeUnselect?(e: NodeUnselectParams): void;
 }
 
 export class OrganizationChart extends React.Component<OrganizationChartProps, any> { }

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-interface OnChangeParams {
-    originalEvent: Event;
+interface ChangeParams {
+    originalEvent: React.SyntheticEvent;
     value: any;
 }
 
@@ -14,7 +14,7 @@ interface OrderListProps {
     listStyle?: object;
     dragdrop?: boolean;
     tabIndex?: number;
-    onChange?(e: OnChangeParams): void;
+    onChange?(e: ChangeParams): void;
     itemTemplate?(item: any): React.ReactNode;
 }
 
