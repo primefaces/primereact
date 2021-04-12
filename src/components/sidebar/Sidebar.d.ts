@@ -19,6 +19,7 @@ interface SidebarProps {
     closeOnEscape?: boolean;
     icons?: TemplateType;
     modal?: boolean;
+    transitionOptions?: object;
     onShow?(): void;
     onHide(): void;
 }

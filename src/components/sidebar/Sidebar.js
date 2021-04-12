@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
-import { CSSTransition } from 'react-transition-group';
+import { CSSTransition } from '../transition/CSSTransition';
 import { Ripple } from '../ripple/Ripple';
 import { ZIndexUtils } from '../utils/ZIndexUtils';
 
@@ -24,6 +24,7 @@ export class Sidebar extends Component {
         closeOnEscape: true,
         icons: null,
         modal: true,
+        transitionOptions: null,
         onShow: null,
         onHide: null
     };
@@ -43,6 +44,7 @@ export class Sidebar extends Component {
         closeOnEscape: PropTypes.bool,
         icons: PropTypes.any,
         modal: PropTypes.bool,
+        transitionOptions: PropTypes.object,
         onShow: PropTypes.func,
         onHide: PropTypes.func.isRequired
     };
@@ -229,7 +231,7 @@ export class Sidebar extends Component {
         };
 
         return (
-            <CSSTransition nodeRef={this.sidebarRef} classNames="p-sidebar" in={this.props.visible} timeout={transitionTimeout}
+            <CSSTransition nodeRef={this.sidebarRef} classNames="p-sidebar" in={this.props.visible} timeout={transitionTimeout} options={this.props.transitionOptions}
                 unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit} onExited={this.onExited}>
                 <div ref={this.sidebarRef} id={this.props.id} className={className} style={this.props.style} role="complementary">
                     <div className="p-sidebar-icons">
