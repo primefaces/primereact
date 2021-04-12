@@ -82,9 +82,7 @@ export class Sidebar extends Component {
             this.closeIcon.focus();
         }
 
-        if (this.props.onShow) {
-            this.props.onShow();
-        }
+        this.props.onShow && this.props.onShow();
     }
 
     onExit() {

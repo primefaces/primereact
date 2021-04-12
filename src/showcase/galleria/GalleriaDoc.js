@@ -314,6 +314,16 @@ const responsiveOptions = [
                             <td>event.index = index of the new item.</td>
                             <td>Callback to invoke after changing item.</td>
                         </tr>
+                        <tr>
+                            <td>onShow</td>
+                            <td>-</td>
+                            <td>Callback to invoke when modal becomes visible.</td>
+                        </tr>
+                        <tr>
+                            <td>onHide</td>
+                            <td>-</td>
+                            <td>Callback to invoke when modal becomes hidden.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

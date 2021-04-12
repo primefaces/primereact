@@ -41,6 +41,8 @@ interface GalleriaProps {
     baseZIndex?: number;
     transitionOptions?: object;
     onItemChange?(e: ItemChangeParams): void;
+    onShow?(): void;
+    onHide?(): void;
 }
 
 export declare class Galleria extends React.Component<GalleriaProps, any> {

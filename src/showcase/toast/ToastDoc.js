@@ -646,6 +646,16 @@ toast.current.show({life: 5000, severity: 'error', summary: 'Error Message', det
                                         <td>message: Clicked message </td>
                                         <td>Callback to invoke when a message gets clicked.</td>
                                     </tr>
+                                    <tr>
+                                        <td>onShow</td>
+                                        <td>-</td>
+                                        <td>Callback to invoke when message becomes visible.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onHide</td>
+                                        <td>-</td>
+                                        <td>Callback to invoke when message becomes hidden.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

@@ -23,6 +23,8 @@ interface ToastProps {
     transitionOptions?: object;
     onClick?(message: ToastMessage): void;
     onRemove?(message: ToastMessage): void;
+    onShow?(): void;
+    onHide?(): void;
 }
 
 export declare class Toast extends React.Component<ToastProps, any> {

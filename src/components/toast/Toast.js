@@ -18,7 +18,9 @@ export class Toast extends Component {
         position: 'top-right',
         transitionOptions: null,
         onClick: null,
-        onRemove: null
+        onRemove: null,
+        onShow: null,
+        onHide: null
     }
 
     static propTypes = {
@@ -29,7 +31,9 @@ export class Toast extends Component {
         position: PropTypes.string,
         transitionOptions: PropTypes.object,
         onClick: PropTypes.func,
-        onRemove: PropTypes.func
+        onRemove: PropTypes.func,
+        onShow: PropTypes.func,
+        onHide: PropTypes.func
     };
 
     constructor(props) {
@@ -40,6 +44,8 @@ export class Toast extends Component {
         };
 
         this.onClose = this.onClose.bind(this);
+        this.onEntered = this.onEntered.bind(this);
+        this.onExited = this.onExited.bind(this);
     }
 
     show(value) {
@@ -84,6 +90,14 @@ export class Toast extends Component {
         }
     }
 
+    onEntered() {
+        this.props.onShow && this.props.onShow();
+    }
+
+    onExited() {
+        this.props.onHide && this.props.onHide();
+    }
+
     componentWillUnmount() {
         ZIndexUtils.clear(this.container);
     }
@@ -99,7 +113,7 @@ export class Toast extends Component {
                             const messageRef = React.createRef();
 
                             return (
-                                <CSSTransition nodeRef={messageRef} key={message.id} classNames="p-toast-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} options={this.props.transitionOptions}>
+                                <CSSTransition nodeRef={messageRef} key={message.id} classNames="p-toast-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} onEntered={this.onEntered} onExited={this.onExited} options={this.props.transitionOptions}>
                                     <ToastMessage ref={messageRef} message={message} onClick={this.props.onClick} onClose={this.onClose} />
                                 </CSSTransition>
                             )

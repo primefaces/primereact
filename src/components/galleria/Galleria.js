@@ -100,6 +100,7 @@ export class Galleria extends Component {
         this.stopSlideShow = this.stopSlideShow.bind(this);
         this.onEnter = this.onEnter.bind(this);
         this.onEntering = this.onEntering.bind(this);
+        this.onEntered = this.onEntered.bind(this);
         this.onExit = this.onExit.bind(this);
         this.onExited = this.onExited.bind(this);
 
@@ -138,6 +139,10 @@ export class Galleria extends Component {
         DomHandler.addClass(this.mask, 'p-component-overlay');
     }
 
+    onEntered() {
+        this.props.onShow && this.props.onShow();
+    }
+
     onExit() {
         DomHandler.removeClass(document.body, 'p-overflow-hidden');
         DomHandler.addClass(this.mask, 'p-galleria-mask-leave');
@@ -145,6 +150,8 @@ export class Galleria extends Component {
 
     onExited() {
         ZIndexUtils.clear(this.mask);
+
+        this.props.onHide && this.props.onHide();
     }
 
     isAutoPlayActive() {
@@ -269,7 +276,7 @@ export class Galleria extends Component {
             const galleriaWrapper = (
                 <div ref={(el) => this.mask = el} className={maskClassName}>
                     <CSSTransition nodeRef={this.galleriaRef} classNames="p-galleria" in={this.state.visible} timeout={{ enter: 150, exit: 150 }} options={this.props.transitionOptions}
-                        unmountOnExit onEnter={this.onEnter} onEntering={this.onEntering} onExit={this.onExit} onExited={this.onExited}>
+                        unmountOnExit onEnter={this.onEnter} onEntering={this.onEntering} onEntered={this.onEntered} onExit={this.onExit} onExited={this.onExited}>
                         {element}
                     </CSSTransition>
                 </div>
