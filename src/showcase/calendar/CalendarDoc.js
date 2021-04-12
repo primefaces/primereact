@@ -1079,6 +1079,16 @@ dateTemplate(date) {
                                 value: New date</td>
                                         <td>Callback to invoke when the displayed month/year is changed.</td>
                                     </tr>
+                                    <tr>
+                                        <td>onShow</td>
+                                        <td>-</td>
+                                        <td>Callback to invoke when overlay panel or modal becomes visible.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onHide</td>
+                                        <td>-</td>
+                                        <td>Callback to invoke when overlay panel or modal becomes hidden.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

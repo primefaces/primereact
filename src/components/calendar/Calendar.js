@@ -87,7 +87,9 @@ export class Calendar extends Component {
         onChange: null,
         onViewDateChange: null,
         onTodayButtonClick: null,
-        onClearButtonClick: null
+        onClearButtonClick: null,
+        onShow: null,
+        onHide: null
     }
 
     static propTypes = {
@@ -162,7 +164,9 @@ export class Calendar extends Component {
         onChange: PropTypes.func,
         onViewDateChange: PropTypes.func,
         onTodayButtonClick: PropTypes.func,
-        onClearButtonClick: PropTypes.func
+        onClearButtonClick: PropTypes.func,
+        onShow: PropTypes.func,
+        onHide: PropTypes.func
     }
 
     constructor(props) {
@@ -1537,6 +1541,8 @@ export class Calendar extends Component {
         this.bindDocumentClickListener();
         this.bindDocumentResizeListener();
         this.bindScrollListener();
+
+        this.props.onShow && this.props.onShow();
     }
 
     onOverlayExit() {
@@ -1547,6 +1553,8 @@ export class Calendar extends Component {
 
     onOverlayExited() {
         ZIndexUtils.clear(this.overlayRef.current);
+
+        this.props.onHide && this.props.onHide();
     }
 
     bindDocumentClickListener() {
