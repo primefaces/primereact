@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { UIMessage } from './UIMessage';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { TransitionGroup } from 'react-transition-group';
+import { CSSTransition } from '../transition/CSSTransition';
 
 let messageIdx = 0;
 
@@ -11,6 +12,7 @@ export class Messages extends Component {
         id: null,
         className: null,
         style: null,
+        transitionOptions: null,
         onRemove: null,
         onClick: null
     }
@@ -19,6 +21,7 @@ export class Messages extends Component {
         id: PropTypes.string,
         className: PropTypes.string,
         style: PropTypes.object,
+        transitionOptions: PropTypes.object,
         onRemove: PropTypes.func,
         onClick: PropTypes.func
     };
@@ -85,7 +88,7 @@ export class Messages extends Component {
                             const messageRef = React.createRef();
 
                             return (
-                                <CSSTransition nodeRef={messageRef} key={message.id} classNames="p-message" unmountOnExit timeout={{ enter: 300, exit: 300 }}>
+                                <CSSTransition nodeRef={messageRef} key={message.id} classNames="p-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} options={this.props.transitionOptions}>
                                     <UIMessage ref={messageRef} message={message} onClick={this.props.onClick} onClose={this.onClose} />
                                 </CSSTransition>
                             )

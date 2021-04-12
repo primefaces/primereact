@@ -16,6 +16,7 @@ interface MessagesProps {
     id?: string;
     className?: string;
     style?: object;
+    transitionOptions?: object;
     onRemove?(message: MessageOptions): void;
     onClick?(message: MessageOptions): void;
 }
