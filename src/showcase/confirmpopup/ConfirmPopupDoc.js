@@ -396,6 +396,11 @@ const confirm = (event) => {
                                             Valid values are 'accept', 'reject' and undefined (outside click).</td>
                                         <td>Callback to invoke when confirm popup is hidden.</td>
                                     </tr>
+                                    <tr>
+                                        <td>onShow</td>
+                                        <td>-</td>
+                                        <td>Callback to invoke when overlay panel becomes visible.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

@@ -64,6 +64,7 @@ export class ConfirmPopup extends Component {
         appendTo: null,
         dismissable: true,
         footer: null,
+        onShow: null,
         onHide: null,
         accept: null,
         reject: null,
@@ -86,6 +87,7 @@ export class ConfirmPopup extends Component {
         appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         dismissable: PropTypes.bool,
         footer: PropTypes.any,
+        onShow: PropTypes.func,
         onHide: PropTypes.func,
         accept: PropTypes.func,
         reject: PropTypes.func,
@@ -241,6 +243,8 @@ export class ConfirmPopup extends Component {
         this.bindDocumentClickListener();
         this.bindScrollListener();
         this.bindResizeListener();
+
+        this.props.onShow && this.props.onShow();
     }
 
     onExit() {
