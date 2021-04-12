@@ -29,6 +29,7 @@ interface AccordionProps {
     multiple?: boolean;
     expandIcon?: string;
     collapseIcon?: string;
+    transitionOptions?: object;
     onTabOpen?(e: EventParams): void;
     onTabClose?(e: EventParams): void;
     onTabChange?(e: EventParams): void;
