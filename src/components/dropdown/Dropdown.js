@@ -56,6 +56,7 @@ export class Dropdown extends Component {
         tooltipOptions: null,
         ariaLabel: null,
         ariaLabelledBy: null,
+        transitionOptions: null,
         onChange: null,
         onFocus: null,
         onBlur: null,
@@ -107,6 +108,7 @@ export class Dropdown extends Component {
         tooltipOptions: PropTypes.object,
         ariaLabel: PropTypes.string,
         ariaLabelledBy: PropTypes.string,
+        transitionOptions: PropTypes.object,
         onChange: PropTypes.func,
         onFocus: PropTypes.func,
         onBlur: PropTypes.func,
@@ -1025,7 +1027,7 @@ export class Dropdown extends Component {
                 {clearIcon}
                 {dropdownIcon}
                 <DropdownPanel ref={this.overlayRef} appendTo={this.props.appendTo} panelStyle={this.props.panelStyle} panelClassName={this.props.panelClassName}
-                    scrollHeight={this.props.scrollHeight} filter={filterElement} onClick={this.onPanelClick}
+                    scrollHeight={this.props.scrollHeight} filter={filterElement} onClick={this.onPanelClick} transitionOptions={this.props.transitionOptions}
                     in={this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
                     {items}
                 </DropdownPanel>

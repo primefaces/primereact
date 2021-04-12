@@ -67,6 +67,7 @@ interface DropdownProps {
     tooltipOptions?: TooltipOptions;
     ariaLabel?: string;
     ariaLabelledBy?: string;
+    transitionOptions?: object;
     onChange?(e: ChangeParams): void;
     onFocus?(event: React.FormEvent<HTMLInputElement>): void;
     onBlur?(event: React.FormEvent<HTMLInputElement>): void;
