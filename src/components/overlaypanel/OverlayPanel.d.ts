@@ -20,6 +20,7 @@ interface OverlayPanelProps {
     ariaCloseLabel?: string;
     breakpoints?: Breakpoints;
     transitionOptions?: object;
+    onShow?(): void;
     onHide?(): void;
 }
 

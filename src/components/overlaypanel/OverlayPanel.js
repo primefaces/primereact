@@ -22,6 +22,7 @@ export class OverlayPanel extends Component {
         breakpoints: null,
         ariaCloseLabel: 'close',
         transitionOptions: null,
+        onShow: null,
         onHide: null
     }
 
@@ -35,6 +36,7 @@ export class OverlayPanel extends Component {
         breakpoints: PropTypes.object,
         ariaCloseLabel: PropTypes.string,
         transitionOptions: PropTypes.object,
+        onShow: PropTypes.func,
         onHide: PropTypes.func
     }
 
@@ -173,10 +175,6 @@ export class OverlayPanel extends Component {
     hide() {
         this.setState({ visible: false }, () => {
             OverlayEventBus.off('overlay-click');
-
-            if (this.props.onHide) {
-                this.props.onHide();
-            }
         });
     }
 
@@ -190,6 +188,8 @@ export class OverlayPanel extends Component {
         this.bindDocumentClickListener();
         this.bindScrollListener();
         this.bindResizeListener();
+
+        this.props.onShow && this.props.onShow();
     }
 
     onExit() {
@@ -200,6 +200,8 @@ export class OverlayPanel extends Component {
 
     onExited() {
         ZIndexUtils.clear(this.overlayRef.current);
+
+        this.props.onHide && this.props.onHide();
     }
 
     align() {

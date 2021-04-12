@@ -374,9 +374,14 @@ import { OverlayPanel } from 'primereact/overlaypanel';
                     </thead>
                     <tbody>
                         <tr>
+                            <td>onShow</td>
+                            <td>-</td>
+                            <td>Callback to invoke when overlay becomes visible.</td>
+                        </tr>
+                        <tr>
                             <td>onHide</td>
                             <td>-</td>
-                            <td>Callback to invoke when overlay gets hidden.</td>
+                            <td>Callback to invoke when overlay becomes hidden.</td>
                         </tr>
                     </tbody>
                 </table>
