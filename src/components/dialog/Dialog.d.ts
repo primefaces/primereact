@@ -44,6 +44,7 @@ export interface DialogProps {
     keepInViewport?: boolean;
     maximized?: boolean;
     breakpoints?: Breakpoints;
+    transitionOptions?: object;
     onMaximize?(e: MaximizeParams): void;
     onDragStart?(e: React.DragEvent<HTMLElement>): void;
     onDrag?(e: React.DragEvent<HTMLElement>): void;

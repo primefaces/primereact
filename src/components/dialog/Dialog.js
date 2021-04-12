@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import { classNames } from '../utils/ClassNames';
 import UniqueComponentId from '../utils/UniqueComponentId';
-import { CSSTransition } from 'react-transition-group';
+import { CSSTransition } from '../transition/CSSTransition';
 import ObjectUtils from '../utils/ObjectUtils';
 import { Ripple } from '../ripple/Ripple';
 import { Portal } from '../portal/Portal';
@@ -44,6 +44,7 @@ export class Dialog extends Component {
         keepInViewport: true,
         maximized: false,
         breakpoints: null,
+        transitionOptions: null,
         onMaximize: null,
         onDragStart: null,
         onDrag: null,
@@ -86,6 +87,7 @@ export class Dialog extends Component {
         keepInViewport: PropTypes.bool,
         maximized: PropTypes.bool,
         breakpoints: PropTypes.object,
+        transitionOptions: PropTypes.object,
         onMaximize: PropTypes.func,
         onDragStart: PropTypes.func,
         onDrag: PropTypes.func,
@@ -636,8 +638,8 @@ export class Dialog extends Component {
 
         return (
             <div ref={(el) => this.mask = el} className={maskClassName} onClick={this.onMaskClick}>
-                <CSSTransition nodeRef={this.dialogRef} classNames="p-dialog" timeout={transitionTimeout} in={this.state.visible} unmountOnExit
-                    onEnter={this.onEnter} onEntered={this.onEntered} onExited={this.onExited}>
+                <CSSTransition nodeRef={this.dialogRef} classNames="p-dialog" timeout={transitionTimeout} in={this.state.visible} options={this.props.transitionOptions}
+                    unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExited={this.onExited}>
                     <div ref={this.dialogRef} id={this.state.id} className={className} style={this.props.style}
                         role="dialog" aria-labelledby={this.state.id + '_header'} aria-describedby={this.state.id + '_content'} aria-modal={this.props.modal}>
                         {header}
