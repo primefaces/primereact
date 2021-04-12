@@ -356,6 +356,31 @@ import {Password} from 'primereact/password';
                             </table>
                         </div>
 
+                        <h5>Events</h5>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>onShow</td>
+                                        <td>-</td>
+                                        <td>Callback to invoke when overlay becomes visible.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onHide</td>
+                                        <td>-</td>
+                                        <td>Callback to invoke when overlay becomes hidden.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
                         <h5>Styling</h5>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">

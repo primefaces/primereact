@@ -39,7 +39,9 @@ export class Password extends Component {
         panelStyle: null,
         panelClassName: null,
         transitionOptions: null,
-        onInput: null
+        onInput: null,
+        onShow: null,
+        onHide: null
     };
 
     static propTypes = {
@@ -67,7 +69,9 @@ export class Password extends Component {
         panelStyle: PropTypes.object,
         panelClassName: PropTypes.string,
         transitionOptions: PropTypes.object,
-        onInput: PropTypes.func
+        onInput: PropTypes.func,
+        onShow: PropTypes.func,
+        onHide: PropTypes.func
     };
 
     constructor(props) {
@@ -204,6 +208,8 @@ export class Password extends Component {
     onOverlayEntered() {
         this.bindScrollListener();
         this.bindResizeListener();
+
+        this.props.onShow && this.props.onShow();
     }
 
     onOverlayExit() {
@@ -213,6 +219,8 @@ export class Password extends Component {
 
     onOverlayExited() {
         ZIndexUtils.clear(this.overlayRef.current);
+
+        this.props.onHide && this.props.onHide();
     }
 
     onFocus(event) {
