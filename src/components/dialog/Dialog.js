@@ -414,7 +414,7 @@ export class Dialog extends Component {
             if (currentTarget && currentTarget.primeDialogParams) {
                 let params = currentTarget.primeDialogParams;
                 let paramLength = params.length;
-                let dialogId = params[paramLength - 1].id;
+                let dialogId = params[paramLength - 1] ? params[paramLength - 1].id : undefined;
 
                 if (dialogId === this.state.id) {
                     let dialog = document.getElementById(dialogId);
