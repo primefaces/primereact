@@ -15,6 +15,7 @@ interface OverlayPanelProps {
     appendTo?: HTMLElement;
     ariaCloseLabel?: string;
     breakpoints?: Breakpoints;
+    transitionOptions?: object;
     onHide?(): void;
 }
 

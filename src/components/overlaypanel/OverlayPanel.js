@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
-import { CSSTransition } from 'react-transition-group';
+import { CSSTransition } from '../transition/CSSTransition';
 import { Ripple } from '../ripple/Ripple';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
@@ -21,6 +21,7 @@ export class OverlayPanel extends Component {
         appendTo: null,
         breakpoints: null,
         ariaCloseLabel: 'close',
+        transitionOptions: null,
         onHide: null
     }
 
@@ -33,6 +34,7 @@ export class OverlayPanel extends Component {
         appendTo: PropTypes.any,
         breakpoints: PropTypes.object,
         ariaCloseLabel: PropTypes.string,
+        transitionOptions: PropTypes.object,
         onHide: PropTypes.func
     }
 
@@ -279,7 +281,7 @@ export class OverlayPanel extends Component {
         let closeIcon = this.renderCloseIcon();
 
         return (
-            <CSSTransition nodeRef={this.overlayRef} classNames="p-overlaypanel" in={this.state.visible} timeout={{ enter: 120, exit: 100 }}
+            <CSSTransition nodeRef={this.overlayRef} classNames="p-overlaypanel" in={this.state.visible} timeout={{ enter: 120, exit: 100 }} options={this.props.transitionOptions}
                 unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit} onExited={this.onExited}>
                 <div ref={this.overlayRef} id={this.props.id} className={className} style={this.props.style} onClick={this.onPanelClick}>
                     <div className="p-overlaypanel-content">
