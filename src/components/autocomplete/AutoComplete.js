@@ -54,6 +54,7 @@ export class AutoComplete extends Component {
         completeMethod: null,
         itemTemplate: null,
         selectedItemTemplate: null,
+        transitionOptions: null,
         onChange: null,
         onFocus: null,
         onBlur: null,
@@ -109,6 +110,7 @@ export class AutoComplete extends Component {
         completeMethod: PropTypes.func,
         itemTemplate: PropTypes.any,
         selectedItemTemplate: PropTypes.any,
+        transitionOptions: PropTypes.object,
         onChange: PropTypes.func,
         onFocus: PropTypes.func,
         onBlur: PropTypes.func,
@@ -829,7 +831,8 @@ export class AutoComplete extends Component {
                     panelStyle={this.props.panelStyle} panelClassName={this.props.panelClassName} onClick={this.onPanelClick}
                     optionGroupLabel={this.props.optionGroupLabel} optionGroupChildren={this.props.optionGroupChildren} optionGroupTemplate={this.props.optionGroupTemplate}
                     getOptionGroupLabel={this.getOptionGroupLabel} getOptionGroupChildren={this.getOptionGroupChildren}
-                    in={this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntering={this.onOverlayEntering} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}/>
+                    in={this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntering={this.onOverlayEntering} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}
+                    transitionOptions={this.props.transitionOptions} />
             </span>
         );
     }

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ObjectUtils from '../utils/ObjectUtils';
 import { Ripple } from '../ripple/Ripple';
 import { classNames } from '../utils/ClassNames';
-import { CSSTransition } from 'react-transition-group';
+import { CSSTransition } from '../transition/CSSTransition';
 import { Portal } from '../portal/Portal';
 
 class AutoCompletePanelComponent extends Component {
@@ -109,7 +109,7 @@ class AutoCompletePanelComponent extends Component {
         let items = this.renderItems();
 
         return (
-            <CSSTransition nodeRef={this.props.forwardRef} classNames="p-connected-overlay" in={this.props.in} timeout={{ enter: 120, exit: 100 }}
+            <CSSTransition nodeRef={this.props.forwardRef} classNames="p-connected-overlay" in={this.props.in} timeout={{ enter: 120, exit: 100 }} options={this.props.transitionOptions}
                 unmountOnExit onEnter={this.props.onEnter} onEntering={this.props.onEntering} onEntered={this.props.onEntered} onExit={this.props.onExit} onExited={this.props.onExited}>
                 <div ref={this.props.forwardRef} className={panelClassName} style={panelStyle} onClick={this.props.onClick}>
                     <ul className="p-autocomplete-items" role="listbox" id={this.props.listId} style={{ maxHeight: this.props.scrollHeight || 'auto' }}>

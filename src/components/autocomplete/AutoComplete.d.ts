@@ -78,6 +78,7 @@ interface AutoCompleteProps {
     completeMethod?(e: CompleteMethodParams): void;
     itemTemplate?: ItemTemplateType;
     selectedItemTemplate?: SelectedItemTemplateType;
+    transitionOptions?: object;
     onChange?(e: ChangeParams): void;
     onFocus?(event: React.FormEvent<HTMLInputElement>): void;
     onBlur?(event: React.FormEvent<HTMLInputElement>): void;
