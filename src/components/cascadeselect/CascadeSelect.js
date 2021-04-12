@@ -257,9 +257,8 @@ export class CascadeSelect extends Component {
         this.bindOutsideClickListener();
         this.bindScrollListener();
         this.bindResizeListener();
-        if (this.props.onShow) {
-            this.props.onShow();
-        }
+
+        this.props.onShow && this.props.onShow();
     }
 
     onOverlayExit() {
@@ -267,13 +266,12 @@ export class CascadeSelect extends Component {
         this.unbindScrollListener();
         this.unbindResizeListener();
         this.dirty = false;
-        if (this.props.onHide) {
-            this.props.onHide();
-        }
     }
 
     onOverlayExited() {
         ZIndexUtils.clear(this.overlayRef.current);
+
+        this.props.onHide && this.props.onHide();
     }
 
     alignOverlay() {
