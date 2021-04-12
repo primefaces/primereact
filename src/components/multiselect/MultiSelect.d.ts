@@ -94,8 +94,8 @@ interface MultiSelectProps {
     onChange?(e: ChangeParams): void;
     onFocus?(event: React.FormEvent<HTMLInputElement>): void;
     onBlur?(event: React.FormEvent<HTMLInputElement>): void;
-    onPanelShow?(): void;
-    onPanelHide?(): void;
+    onShow?(): void;
+    onHide?(): void;
 }
 
 export class MultiSelect extends React.Component<MultiSelectProps, any> { }

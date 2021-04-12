@@ -62,8 +62,8 @@ export class MultiSelect extends Component {
         onChange: null,
         onFocus: null,
         onBlur: null,
-        onPanelShow: null,
-        onPanelHide: null
+        onShow: null,
+        onHide: null
     };
 
     static propTypes = {
@@ -114,8 +114,8 @@ export class MultiSelect extends Component {
         onChange: PropTypes.func,
         onFocus: PropTypes.func,
         onBlur: PropTypes.func,
-        onPanelShow: PropTypes.func,
-        onPanelHide: PropTypes.func
+        onShow: PropTypes.func,
+        onHide: PropTypes.func
     };
 
     constructor(props) {
@@ -334,13 +334,13 @@ export class MultiSelect extends Component {
 
     show() {
         this.setState({ overlayVisible: true }, () => {
-            this.props.onPanelShow && this.props.onPanelShow();
+            this.props.onShow && this.props.onShow();
         });
     }
 
     hide() {
         this.setState({ overlayVisible: false }, () => {
-            this.props.onPanelHide && this.props.onPanelHide();
+            this.props.onHide && this.props.onHide();
         });
     }
 
