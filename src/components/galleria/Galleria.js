@@ -5,7 +5,7 @@ import UniqueComponentId from '../utils/UniqueComponentId';
 import { GalleriaItem } from './GalleriaItem';
 import { GalleriaThumbnails } from './GalleriaThumbnails';
 import DomHandler from '../utils/DomHandler';
-import { CSSTransition } from 'react-transition-group';
+import { CSSTransition } from '../transition/CSSTransition';
 import { Ripple } from '../ripple/Ripple';
 import { Portal } from '../portal/Portal';
 import { ZIndexUtils } from '../utils/ZIndexUtils';
@@ -41,6 +41,7 @@ export class Galleria extends Component {
         showIndicatorsOnItem: false,
         indicatorsPosition: "bottom",
         baseZIndex: 0,
+        transitionOptions: null,
         onItemChange: null
     }
 
@@ -72,6 +73,7 @@ export class Galleria extends Component {
         showIndicatorsOnItem: PropTypes.bool,
         indicatorsPosition: PropTypes.string,
         baseZIndex: PropTypes.number,
+        transitionOptions: PropTypes.object,
         onItemChange: PropTypes.func
     }
 
@@ -266,7 +268,7 @@ export class Galleria extends Component {
 
             const galleriaWrapper = (
                 <div ref={(el) => this.mask = el} className={maskClassName}>
-                    <CSSTransition nodeRef={this.galleriaRef} classNames="p-galleria" in={this.state.visible} timeout={{ enter: 150, exit: 150 }}
+                    <CSSTransition nodeRef={this.galleriaRef} classNames="p-galleria" in={this.state.visible} timeout={{ enter: 150, exit: 150 }} options={this.props.transitionOptions}
                         unmountOnExit onEnter={this.onEnter} onEntering={this.onEntering} onExit={this.onExit} onExited={this.onExited}>
                         {element}
                     </CSSTransition>

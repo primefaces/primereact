@@ -39,6 +39,7 @@ interface GalleriaProps {
     showIndicatorsOnItem?: boolean;
     indicatorsPosition?: PositionType;
     baseZIndex?: number;
+    transitionOptions?: object;
     onItemChange?(e: ItemChangeParams): void;
 }
 

@@ -288,6 +288,12 @@ const responsiveOptions = [
                             <td>0</td>
                             <td>Base zIndex value to use in layering.</td>
                         </tr>
+                        <tr>
+                            <td>transitionOptions</td>
+                            <td>object</td>
+                            <td>null</td>
+                            <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
