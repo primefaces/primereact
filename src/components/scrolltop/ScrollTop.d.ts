@@ -11,6 +11,7 @@ interface ScrollTopProps {
     behavior?: ScrollBehavior;
     className?: string;
     style?: object;
+    transitionOptions?: object;
 }
 
 export class ScrollTop extends React.Component<ScrollTopProps, any> { }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
-import { CSSTransition } from 'react-transition-group';
+import { CSSTransition } from '../transition/CSSTransition';
 import DomHandler from '../utils/DomHandler';
 import { Ripple } from '../ripple/Ripple';
 import { ZIndexUtils } from '../utils/ZIndexUtils';
@@ -14,7 +14,8 @@ export class ScrollTop extends Component {
         icon: 'pi pi-chevron-up',
         behavior: 'smooth',
         className: null,
-        style: null
+        style: null,
+        transitionOptions: null
     };
 
     static propTypes = {
@@ -23,7 +24,8 @@ export class ScrollTop extends Component {
         icon: PropTypes.string,
         behavior: PropTypes.string,
         className: PropTypes.string,
-        style: PropTypes.object
+        style: PropTypes.object,
+        transitionOptions: PropTypes.object
     };
 
     constructor(props) {
@@ -114,8 +116,8 @@ export class ScrollTop extends Component {
 
         return (
             <>
-                <CSSTransition nodeRef={this.scrollElementRef} classNames="p-scrolltop" in={this.state.visible} timeout={{ enter: 150, exit: 150 }} unmountOnExit
-                    onEnter={this.onEnter} onExited={this.onExited}>
+                <CSSTransition nodeRef={this.scrollElementRef} classNames="p-scrolltop" in={this.state.visible} timeout={{ enter: 150, exit: 150 }} options={this.props.transitionOptions}
+                    unmountOnExit onEnter={this.onEnter} onExited={this.onExited}>
                     <button ref={this.scrollElementRef} type="button" className={className} style={this.props.style} onClick={this.onClick}>
                         <span className={iconClassName}></span>
                         <Ripple />

@@ -229,6 +229,12 @@ import { ScrollTop } from 'primereact/scrolltop';
                                         <td>smooth</td>
                                         <td>Defines the scrolling behavi, "smooth" adds an animation and "auto" scrolls with a jump.</td>
                                     </tr>
+                                    <tr>
+                                        <td>transitionOptions</td>
+                                        <td>object</td>
+                                        <td>null</td>
+                                        <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
