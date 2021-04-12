@@ -2604,9 +2604,9 @@ const bodyTemplate = (data, props) => {
                         </tr>
                         <tr>
                             <td>paginatorDropdownAppendTo</td>
-                            <td>any</td>
-                            <td>null</td>
-                            <td>Target element to attach the paginator dropdown overlay.</td>
+                            <td>DOM element | string</td>
+                            <td>document.body</td>
+                            <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
                         </tr>
                         <tr>
                             <td>first</td>
