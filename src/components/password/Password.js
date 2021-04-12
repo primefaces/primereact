@@ -4,7 +4,7 @@ import DomHandler from '../utils/DomHandler';
 import { tip } from '../tooltip/Tooltip';
 import { InputText } from '../inputtext/InputText';
 import ObjectUtils from '../utils/ObjectUtils';
-import { CSSTransition } from 'react-transition-group';
+import { CSSTransition } from '../transition/CSSTransition';
 import { classNames } from '../utils/ClassNames';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import { localeOption } from '../api/Locale';
@@ -38,6 +38,7 @@ export class Password extends Component {
         inputClassName: null,
         panelStyle: null,
         panelClassName: null,
+        transitionOptions: null,
         onInput: null
     };
 
@@ -65,6 +66,7 @@ export class Password extends Component {
         inputClassName: PropTypes.string,
         panelStyle: PropTypes.object,
         panelClassName: PropTypes.string,
+        transitionOptions: PropTypes.object,
         onInput: PropTypes.func
     };
 
@@ -451,7 +453,7 @@ export class Password extends Component {
         );
 
         const panel = (
-            <CSSTransition nodeRef={this.overlayRef} classNames="p-connected-overlay" in={this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }}
+            <CSSTransition nodeRef={this.overlayRef} classNames="p-connected-overlay" in={this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }} options={this.props.transitionOptions}
                 unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
                 <div ref={this.overlayRef} className={panelClassName} style={this.props.panelStyle} onClick={this.onPanelClick}>
                     {header}
