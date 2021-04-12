@@ -35,6 +35,7 @@ interface PanelProps {
     expandIcon?: string;
     collapseIcon?: string;
     icons?: IconsTemplateType;
+    transitionOptions?: object;
     onExpand?(event: React.SyntheticEvent): void;
     onCollapse?(event: React.SyntheticEvent): void;
     onToggle?(e: ToggleParams): void;
