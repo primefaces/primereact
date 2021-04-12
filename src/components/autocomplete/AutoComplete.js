@@ -67,7 +67,9 @@ export class AutoComplete extends Component {
         onKeyUp: null,
         onKeyPress: null,
         onContextMenu: null,
-        onClear: null
+        onClear: null,
+        onShow: null,
+        onHide: null
     }
 
     static propTypes = {
@@ -123,7 +125,9 @@ export class AutoComplete extends Component {
         onKeyUp: PropTypes.func,
         onKeyPress: PropTypes.func,
         onContextMenu: PropTypes.func,
-        onClear: PropTypes.func
+        onClear: PropTypes.func,
+        onShow: PropTypes.func,
+        onHide: PropTypes.func
     };
 
     constructor(props) {
@@ -299,6 +303,8 @@ export class AutoComplete extends Component {
         this.bindDocumentClickListener();
         this.bindScrollListener();
         this.bindResizeListener();
+
+        this.props.onShow && this.props.onShow();
     }
 
     onOverlayExit() {
@@ -309,6 +315,8 @@ export class AutoComplete extends Component {
 
     onOverlayExited() {
         ZIndexUtils.clear(this.overlayRef.current);
+
+        this.props.onHide && this.props.onHide();
     }
 
     alignOverlay() {

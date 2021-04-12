@@ -92,6 +92,8 @@ interface AutoCompleteProps {
     onKeyPress?(event: React.KeyboardEvent<HTMLInputElement>): void;
     onContextMenu?(event: React.MouseEvent<HTMLElement>): void;
     onClear?(event: React.SyntheticEvent): void;
+    onShow?(): void;
+    onHide?(): void;
 }
 
 export class AutoComplete extends React.Component<AutoCompleteProps, any> { }
