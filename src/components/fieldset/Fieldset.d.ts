@@ -12,6 +12,7 @@ interface FieldsetProps {
     style?: object;
     toggleable?: boolean;
     collapsed?: boolean;
+    transitionOptions?: object;
     onExpand?(event: React.MouseEvent<HTMLElement>): void;
     onCollapse?(event: React.MouseEvent<HTMLElement>): void;
     onToggle?(e: ToggleParams): void;
