@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
 import { classNames } from '../utils/ClassNames';
-import { CSSTransition } from 'react-transition-group';
+import { CSSTransition } from '../transition/CSSTransition';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 import { Portal } from '../portal/Portal';
@@ -20,6 +20,7 @@ export class Menu extends Component {
         autoZIndex: true,
         baseZIndex: 0,
         appendTo: null,
+        transitionOptions: null,
         onShow: null,
         onHide: null
     };
@@ -33,6 +34,7 @@ export class Menu extends Component {
         autoZIndex: PropTypes.bool,
         baseZIndex: PropTypes.number,
         appendTo: PropTypes.any,
+        transitionOptions: PropTypes.object,
         onShow: PropTypes.func,
         onHide: PropTypes.func
     };
@@ -328,7 +330,7 @@ export class Menu extends Component {
             const menuitems = this.renderMenu();
 
             return (
-                <CSSTransition nodeRef={this.menuRef} classNames="p-connected-overlay" in={this.state.visible} timeout={{ enter: 120, exit: 100 }}
+                <CSSTransition nodeRef={this.menuRef} classNames="p-connected-overlay" in={this.state.visible} timeout={{ enter: 120, exit: 100 }} options={this.props.transitionOptions}
                     unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit} onExited={this.onExited}>
                     <div ref={this.menuRef} id={this.props.id} className={className} style={this.props.style} onClick={this.onPanelClick}>
                         <ul className="p-menu-list p-reset" role="menu">

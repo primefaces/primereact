@@ -10,6 +10,7 @@ interface MenuProps {
     autoZIndex?: boolean;
     bazeZIndex?: number;
     appendTo?: HTMLElement;
+    transitionOptions?: object;
     onShow?(e: React.SyntheticEvent): void;
     onHide?(e: React.SyntheticEvent): void;
 }
