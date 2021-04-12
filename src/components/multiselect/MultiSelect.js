@@ -333,15 +333,11 @@ export class MultiSelect extends Component {
     }
 
     show() {
-        this.setState({ overlayVisible: true }, () => {
-            this.props.onShow && this.props.onShow();
-        });
+        this.setState({ overlayVisible: true });
     }
 
     hide() {
-        this.setState({ overlayVisible: false }, () => {
-            this.props.onHide && this.props.onHide();
-        });
+        this.setState({ overlayVisible: false });
     }
 
     onOverlayEnter() {
@@ -353,6 +349,8 @@ export class MultiSelect extends Component {
         this.bindDocumentClickListener();
         this.bindScrollListener();
         this.bindResizeListener();
+
+        this.props.onShow && this.props.onShow();
     }
 
     onOverlayExit() {
@@ -367,6 +365,8 @@ export class MultiSelect extends Component {
         }
 
         ZIndexUtils.clear(this.overlayRef.current);
+
+        this.props.onHide && this.props.onHide();
     }
 
     alignPanel() {
