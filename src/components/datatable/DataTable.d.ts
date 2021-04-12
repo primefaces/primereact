@@ -160,7 +160,7 @@ interface DataTableProps {
     dragSelection?: boolean;
     cellSelection?: boolean;
     selection?: any | any[];
-    contextMenuSelection?: boolean;
+    contextMenuSelection?: object;
     compareSelectionBy?: CompareSelectionByType;
     dataKey?: string;
     metaKeySelection?: boolean;

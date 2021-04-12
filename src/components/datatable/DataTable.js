@@ -164,7 +164,7 @@ export class DataTable extends Component {
         cellSelection: PropTypes.bool,
         selection: PropTypes.any,
         onSelectionChange: PropTypes.func,
-        contextMenuSelection: PropTypes.bool,
+        contextMenuSelection: PropTypes.object,
         onContextMenuSelectionChange: PropTypes.func,
         compareSelectionBy: PropTypes.string,
         dataKey: PropTypes.string,
