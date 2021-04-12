@@ -73,6 +73,8 @@ interface DropdownProps {
     onBlur?(event: React.FormEvent<HTMLInputElement>): void;
     onMouseDown?(event: React.MouseEvent<HTMLElement>): void;
     onContextMenu?(event: React.MouseEvent<HTMLElement>): void;
+    onShow?(): void;
+    onHide?(): void;
 }
 
 export class Dropdown extends React.Component<DropdownProps, any> { }

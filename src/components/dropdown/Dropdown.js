@@ -61,7 +61,9 @@ export class Dropdown extends Component {
         onFocus: null,
         onBlur: null,
         onMouseDown: null,
-        onContextMenu: null
+        onContextMenu: null,
+        onShow: null,
+        onHide: null
     };
 
     static propTypes = {
@@ -113,7 +115,9 @@ export class Dropdown extends Component {
         onFocus: PropTypes.func,
         onBlur: PropTypes.func,
         onMouseDown: PropTypes.func,
-        onContextMenu: PropTypes.func
+        onContextMenu: PropTypes.func,
+        onShow: PropTypes.func,
+        onHide: PropTypes.func
     };
 
     constructor(props) {
@@ -600,6 +604,8 @@ export class Dropdown extends Component {
         if (this.props.filter && this.props.filterInputAutoFocus) {
             this.filterInput.focus();
         }
+
+        this.props.onShow && this.props.onShow();
     }
 
     onOverlayExit() {
@@ -614,6 +620,8 @@ export class Dropdown extends Component {
         }
 
         ZIndexUtils.clear(this.overlayRef.current);
+
+        this.props.onHide && this.props.onHide();
     }
 
     alignPanel() {
