@@ -29,6 +29,7 @@ interface ColorPickerProps {
     inputId?: string;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
+    transitionOptions?: object;
     onChange?(e: ChangeParams): void;
 }
 

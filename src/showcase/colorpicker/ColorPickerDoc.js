@@ -232,6 +232,12 @@ import {ColorPicker} from 'primereact/colorpicker';
                                         <td>null</td>
                                         <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
                                     </tr>
+                                    <tr>
+                                        <td>transitionOptions</td>
+                                        <td>object</td>
+                                        <td>null</td>
+                                        <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

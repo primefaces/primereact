@@ -26,6 +26,7 @@ export class ColorPicker extends Component {
         inputId: null,
         tooltip: null,
         tooltipOptions: null,
+        transitionOptions: null,
         onChange: null
     }
 
@@ -44,6 +45,7 @@ export class ColorPicker extends Component {
         inputId: PropTypes.string,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
+        transitionOptions: PropTypes.object,
         onChange: PropTypes.func
     }
 
@@ -697,7 +699,8 @@ export class ColorPicker extends Component {
             <div ref={(el) => this.container = el} id={this.props.id} style={this.props.style} className={containerClassName}>
                 {input}
                 <ColorPickerPanel ref={this.overlayRef} appendTo={this.props.appendTo} inline={this.props.inline} disabled={this.props.disabled} onClick={this.onPanelClick}
-                    in={this.props.inline || this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
+                    in={this.props.inline || this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}
+                    transitionOptions={this.props.transitionOptions}>
                     {content}
                 </ColorPickerPanel>
             </div>
