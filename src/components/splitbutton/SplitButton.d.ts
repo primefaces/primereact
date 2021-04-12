@@ -19,6 +19,7 @@ interface SplitButtonProps {
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     buttonTemplate?: ButtonTemplateType;
+    transitionOptions?: object;
     onClick?(event: React.MouseEvent<HTMLElement>): void;
 }
 

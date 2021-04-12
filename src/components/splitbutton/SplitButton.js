@@ -29,6 +29,7 @@ export class SplitButton extends Component {
         tooltip: null,
         tooltipOptions: null,
         buttonTemplate: null,
+        transitionOptions: null,
         onClick: null
     }
 
@@ -47,6 +48,7 @@ export class SplitButton extends Component {
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
         buttonTemplate: PropTypes.any,
+        transitionOptions: PropTypes.object,
         onClick: PropTypes.func
     }
 
@@ -247,7 +249,8 @@ export class SplitButton extends Component {
                     aria-expanded={this.state.overlayVisible} aria-haspopup aria-owns={this.state.id + '_overlay'} />
                 <SplitButtonPanel ref={this.overlayRef} appendTo={this.props.appendTo} id={this.state.id + '_overlay'}
                     menuStyle={this.props.menuStyle} menuClassName={this.props.menuClassName} onClick={this.onPanelClick}
-                    in={this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
+                    in={this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}
+                    transitionOptions={this.props.transitionOptions}>
                     {items}
                 </SplitButtonPanel>
             </div>
