@@ -15,7 +15,9 @@ export class ScrollTop extends Component {
         behavior: 'smooth',
         className: null,
         style: null,
-        transitionOptions: null
+        transitionOptions: null,
+        onShow: null,
+        onHide: null
     };
 
     static propTypes = {
@@ -25,7 +27,9 @@ export class ScrollTop extends Component {
         behavior: PropTypes.string,
         className: PropTypes.string,
         style: PropTypes.object,
-        transitionOptions: PropTypes.object
+        transitionOptions: PropTypes.object,
+        onShow: PropTypes.func,
+        onHide: PropTypes.func
     };
 
     constructor(props) {
@@ -37,6 +41,7 @@ export class ScrollTop extends Component {
 
         this.onClick = this.onClick.bind(this);
         this.onEnter = this.onEnter.bind(this);
+        this.onEntered = this.onEntered.bind(this);
         this.onExited = this.onExited.bind(this);
         this.scrollElementRef = React.createRef();
     }
@@ -87,8 +92,14 @@ export class ScrollTop extends Component {
         ZIndexUtils.set('overlay', this.scrollElementRef.current);
     }
 
+    onEntered() {
+        this.props.onShow && this.props.onShow();
+    }
+
     onExited() {
         ZIndexUtils.clear(this.scrollElementRef.current);
+
+        this.props.onHide && this.props.onHide();
     }
 
     componentDidMount() {
@@ -117,7 +128,7 @@ export class ScrollTop extends Component {
         return (
             <>
                 <CSSTransition nodeRef={this.scrollElementRef} classNames="p-scrolltop" in={this.state.visible} timeout={{ enter: 150, exit: 150 }} options={this.props.transitionOptions}
-                    unmountOnExit onEnter={this.onEnter} onExited={this.onExited}>
+                    unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExited={this.onExited}>
                     <button ref={this.scrollElementRef} type="button" className={className} style={this.props.style} onClick={this.onClick}>
                         <span className={iconClassName}></span>
                         <Ripple />
