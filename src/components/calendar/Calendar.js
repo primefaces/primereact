@@ -79,6 +79,7 @@ export class Calendar extends Component {
         dateTemplate: null,
         headerTemplate: null,
         footerTemplate: null,
+        transitionOptions: null,
         onFocus: null,
         onBlur: null,
         onInput: null,
@@ -153,6 +154,7 @@ export class Calendar extends Component {
         dateTemplate: PropTypes.func,
         headerTemplate: PropTypes.func,
         footerTemplate: PropTypes.func,
+        transitionOptions: PropTypes.object,
         onFocus: PropTypes.func,
         onBlur: PropTypes.func,
         onInput: PropTypes.func,
@@ -1526,7 +1528,7 @@ export class Calendar extends Component {
 
     onOverlayEnter() {
         if (this.props.autoZIndex) {
-            ZIndexUtils.set(this.props.touchUI ? 'modal': 'overlay', this.overlayRef.current, this.props.baseZIndex);
+            ZIndexUtils.set(this.props.touchUI ? 'modal' : 'overlay', this.overlayRef.current, this.props.baseZIndex);
         }
         this.alignOverlay();
     }
@@ -3014,7 +3016,8 @@ export class Calendar extends Component {
                 {input}
                 {button}
                 <CalendarPanel ref={this.overlayRef} className={panelClassName} style={this.props.panelStyle} appendTo={this.props.appendTo} inline={this.props.inline} onClick={this.onPanelClick}
-                    in={this.props.inline || this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
+                    in={this.props.inline || this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}
+                    transitionOptions={this.props.transitionOptions}>
                     {datePicker}
                     {timePicker}
                     {buttonBar}

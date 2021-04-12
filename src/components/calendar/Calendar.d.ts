@@ -95,6 +95,7 @@ interface CalendarProps {
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
+    transitionOptions?: object;
     dateTemplate?(e: DateTemplateParams): React.ReactNode;
     headerTemplate?(): React.ReactNode;
     footerTemplate?(): React.ReactNode;
