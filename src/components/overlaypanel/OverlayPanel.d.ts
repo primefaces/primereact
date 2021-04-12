@@ -2,6 +2,10 @@ import * as React from 'react';
 
 type TemplateType = React.ReactNode | ((props: OverlayPanelProps) => React.ReactNode);
 
+type EventType = React.SyntheticEvent | undefined | null;
+
+type TargetType = HTMLElement | EventTarget | undefined | null;
+
 interface Breakpoints {
     [key: string]: string;
 }
@@ -20,7 +24,7 @@ interface OverlayPanelProps {
 }
 
 export declare class OverlayPanel extends React.Component<OverlayPanelProps, any> {
-    public toggle(event: React.SyntheticEvent, target: HTMLElement): void;
-    public show(event: React.SyntheticEvent, target: HTMLElement): void;
+    public toggle(event: EventType, target: TargetType): void;
+    public show(event: EventType, target: TargetType): void;
     public hide(): void;
 }
