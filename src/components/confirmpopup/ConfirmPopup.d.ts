@@ -18,6 +18,7 @@ interface ConfirmPopupProps {
     appendTo?: HTMLElement;
     dismissable?: boolean;
     footer?: TemplateType;
+    transitionOptions?: object;
     onHide?(result: string): void;
     accept?(): void;
     reject?(): void;

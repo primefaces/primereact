@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import { Button } from '../button/Button';
-import { CSSTransition } from 'react-transition-group';
+import { CSSTransition } from '../transition/CSSTransition';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
@@ -66,7 +66,8 @@ export class ConfirmPopup extends Component {
         footer: null,
         onHide: null,
         accept: null,
-        reject: null
+        reject: null,
+        transitionOptions: null
     }
 
     static propTypes = {
@@ -87,7 +88,8 @@ export class ConfirmPopup extends Component {
         footer: PropTypes.any,
         onHide: PropTypes.func,
         accept: PropTypes.func,
-        reject: PropTypes.func
+        reject: PropTypes.func,
+        transitionOptions: PropTypes.object
     }
 
     constructor(props) {
@@ -331,7 +333,7 @@ export class ConfirmPopup extends Component {
         const footer = this.renderFooter();
 
         return (
-            <CSSTransition nodeRef={this.overlayRef} classNames="p-connected-overlay" in={this.state.visible} timeout={{ enter: 120, exit: 100 }}
+            <CSSTransition nodeRef={this.overlayRef} classNames="p-connected-overlay" in={this.state.visible} timeout={{ enter: 120, exit: 100 }} options={this.props.transitionOptions}
                 unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit} onExited={this.onExited}>
                 <div ref={this.overlayRef} id={this.props.id} className={className} style={this.props.style} onClick={this.onPanelClick}>
                     {content}
