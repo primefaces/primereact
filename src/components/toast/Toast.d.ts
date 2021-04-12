@@ -20,6 +20,7 @@ interface ToastProps {
     style?: object;
     baseZIndex?: number;
     position?: PositionType;
+    transitionOptions?: object;
     onClick?(message: ToastMessage): void;
     onRemove?(message: ToastMessage): void;
 }
