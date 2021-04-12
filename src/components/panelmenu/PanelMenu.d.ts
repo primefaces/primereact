@@ -7,6 +7,7 @@ interface PanelMenuProps {
     style?: object;
     className?: string;
     multiple?: boolean;
+    transitionOptions?: object;
 }
 
 export class PanelMenu extends React.Component<PanelMenuProps, any> { }

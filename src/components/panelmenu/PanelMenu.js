@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import UniqueComponentId from '../utils/UniqueComponentId';
-import { CSSTransition } from 'react-transition-group';
+import { CSSTransition } from '../transition/CSSTransition';
 import ObjectUtils from '../utils/ObjectUtils';
 
 class PanelMenuSub extends Component {
@@ -190,7 +190,8 @@ export class PanelMenu extends Component {
         model: null,
         style: null,
         className: null,
-        multiple: false
+        multiple: false,
+        transitionOptions: null
     };
 
     static propTypes = {
@@ -198,7 +199,8 @@ export class PanelMenu extends Component {
         model: PropTypes.array,
         style: PropTypes.object,
         className: PropTypes.string,
-        multiple: PropTypes.bool
+        multiple: PropTypes.bool,
+        transitionOptions: PropTypes.object
     };
 
     constructor(props) {
@@ -320,7 +322,7 @@ export class PanelMenu extends Component {
                         <span className="p-menuitem-text">{item.label}</span>
                     </a>
                 </div>
-                <CSSTransition nodeRef={menuContentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={active} unmountOnExit>
+                <CSSTransition nodeRef={menuContentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={active} unmountOnExit options={this.props.transitionOptions}>
                     <div ref={menuContentRef} className={contentWrapperClassName} role="region" id={this.state.id + '_content'} aria-labelledby={this.state.id + '_header'}>
                         <div className="p-panelmenu-content">
                             <PanelMenuSub model={item.items} className="p-panelmenu-root-submenu" multiple={this.props.multiple} />
