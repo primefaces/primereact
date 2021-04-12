@@ -7,6 +7,7 @@ import { TabView } from '../../components/tabview/TabView';
 import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './DataTableDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DataTableStyleDemo extends Component {
 
@@ -53,7 +54,8 @@ export class DataTableStyleDemo extends Component {
                     <AppInlineHeader changelogText="dataTable">
                         <h1>DataTable <span>Styling</span></h1>
                         <p>Particular rows and cells can be styled based on data.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="datatable/DataTableStyleDemo.js" />
                 </div>
 
                 <div className="content-section implementation datatable-style-demo">
@@ -285,7 +287,7 @@ const DataTableStyleDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'DataTableStyleDemo', sources: this.sources, service: 'ProductService', data: 'products-small', extFiles: this.extFiles })

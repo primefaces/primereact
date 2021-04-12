@@ -5,6 +5,7 @@ import { TabView } from '../../components/tabview/TabView';
 import { Toast } from '../../components/toast/Toast';
 import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class TreeSelectionDemo extends Component {
 
@@ -42,7 +43,8 @@ export class TreeSelectionDemo extends Component {
                     <AppInlineHeader changelogText="tree">
                         <h1>Tree <span>Selection</span></h1>
                         <p>Tree supports "single", "multiple" and "checkbox" as selection modes.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="tree/TreeSelectionDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -242,7 +244,7 @@ const TreeSelectionDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'TreeSelectionDemo', sources: this.sources, service: 'NodeService', data: 'treenodes' })

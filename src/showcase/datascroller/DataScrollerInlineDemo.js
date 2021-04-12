@@ -7,6 +7,7 @@ import { TabView } from '../../components/tabview/TabView';
 import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './DataScrollerDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DataScrollerInlineDemo extends Component {
 
@@ -51,7 +52,8 @@ export class DataScrollerInlineDemo extends Component {
                     <AppInlineHeader changelogText="dataScroller">
                         <h1>DataScroller <span>Inline</span></h1>
                         <p>DataScroller can listen scroll event of itself rather than document in inline mode.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="datascroller/DataScrollerInlineDemo.js" />
                 </div>
 
                 <div className="content-section implementation datascroller-demo">
@@ -328,7 +330,7 @@ const DataScrollerInlineDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'DataScrollerInlineDemo', sources: this.sources, service: 'ProductService', data: 'products', extFiles: this.extFiles })

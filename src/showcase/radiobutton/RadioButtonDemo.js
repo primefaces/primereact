@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { RadioButton } from '../../components/radiobutton/RadioButton';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { RadioButtonDoc } from './RadioButtonDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class RadioButtonDemo extends Component {
 
@@ -23,7 +24,8 @@ export class RadioButtonDemo extends Component {
                     <AppInlineHeader changelogText="radioButton" showInputStyle>
                         <h1>RadioButton</h1>
                         <p>RadioButton is an extension to standard radio button element with skinning capabilities.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="radiobutton/RadioButtonDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

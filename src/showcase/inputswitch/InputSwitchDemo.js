@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { InputSwitch } from '../../components/inputswitch/InputSwitch';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { InputSwitchDoc } from './InputSwitchDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class InputSwitchDemo extends Component {
 
@@ -20,7 +21,8 @@ export class InputSwitchDemo extends Component {
                     <AppInlineHeader changelogText="inputSwitch" showInputStyle>
                         <h1>InputSwitch</h1>
                         <p>InputSwitch is used to select a boolean value.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="inputswitch/InputSwitchDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

@@ -5,6 +5,7 @@ import { Button } from '../../components/button/Button';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class GalleriaFullScreenDemo extends Component {
 
@@ -79,7 +80,8 @@ export class GalleriaFullScreenDemo extends Component {
                     <AppInlineHeader changelogText="galleria">
                         <h1>Galleria <span>FullScreen</span></h1>
                         <p>In fullscreen mode content covers the whole page over a mask.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="galleria/GalleriaFullScreenDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -137,7 +139,7 @@ export class GalleriaFullScreenDemoDoc extends Component {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Source">
 <CodeHighlight lang="js">

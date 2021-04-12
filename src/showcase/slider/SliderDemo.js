@@ -4,6 +4,7 @@ import { InputText } from '../../components/inputtext/InputText';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { SliderDoc } from './SliderDoc';
 import './SliderDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export class SliderDemo extends Component {
 
@@ -27,7 +28,8 @@ export class SliderDemo extends Component {
                     <AppInlineHeader changelogText="slider" showInputStyle>
                         <h1>Slider</h1>
                         <p>Slider is a component to provide input using dragging of a handle.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="slider/SliderDemo.js" />
                 </div>
 
                 <div className="content-section implementation slider-demo">

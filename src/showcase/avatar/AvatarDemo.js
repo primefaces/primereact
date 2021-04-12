@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AppDemoActions from '../../AppDemoActions';
 import { Avatar } from '../../components/avatar/Avatar';
 import { AvatarGroup } from '../../components/avatargroup/AvatarGroup';
 import { Badge } from '../../components/badge/Badge';
@@ -17,6 +18,7 @@ export class AvatarDemo extends Component {
                             <p>Avatar represents people using icons, labels and images.</p>
                         </AppInlineHeader>
                     </div>
+                    <AppDemoActions github="avatar/AvatarDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

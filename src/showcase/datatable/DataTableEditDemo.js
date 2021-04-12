@@ -11,6 +11,7 @@ import { TabView } from '../../components/tabview/TabView';
 import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './DataTableDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DataTableEditDemo extends Component {
 
@@ -211,7 +212,8 @@ export class DataTableEditDemo extends Component {
                     <AppInlineHeader changelogText="dataTable">
                         <h1>DataTable <span>Edit</span></h1>
                         <p>Cell and Row editing provides a rapid and user friendly way to manipulate data.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="datatable/DataTableEditDemo.js"/>
                 </div>
 
                 <div className="content-section implementation datatable-editing-demo">
@@ -1081,7 +1083,7 @@ const DataTableEditDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'DataTableEditDemo', sources: this.sources, service: 'ProductService', data: 'products-small', extFiles: this.extFiles })

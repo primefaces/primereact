@@ -5,6 +5,7 @@ import ProductService from '../service/ProductService';
 import { TabView } from '../../components/tabview/TabView';
 import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DataTableSortDemo extends Component {
 
@@ -40,7 +41,8 @@ export class DataTableSortDemo extends Component {
                         <h1>DataTable <span>Sort</span></h1>
                         <p>Enabling sortable property on a column is enough to make a column sortable. Multiple column sorting is enabled using sortMode property and
                             used with metaKey.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="datatable/DataTableSortDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -398,7 +400,7 @@ const DataTableSortDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'DataTableSortDemo', sources: this.sources, service: 'ProductService', data: 'products-small' })

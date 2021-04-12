@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { SelectButton } from '../../components/selectbutton/SelectButton';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { SelectButtonDoc } from './SelectButtonDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class SelectButtonDemo extends Component {
 
@@ -40,7 +41,8 @@ export class SelectButtonDemo extends Component {
                     <AppInlineHeader changelogText="selectButton" showInputStyle>
                         <h1>SelectButton</h1>
                         <p>SelectButton is used to choose single or multiple items from a list using buttons.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="selectbutton/SelectButtonDemo.js"  />
                 </div>
 
                 <div className="content-section implementation">

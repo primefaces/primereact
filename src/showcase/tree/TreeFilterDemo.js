@@ -4,6 +4,7 @@ import { NodeService } from '../service/NodeService';
 import { TabView } from '../../components/tabview/TabView';
 import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class TreeFilterDemo extends Component {
 
@@ -27,7 +28,8 @@ export class TreeFilterDemo extends Component {
                     <AppInlineHeader changelogText="tree">
                         <h1>Tree <span>Filter</span></h1>
                         <p>Filtering updates the node based on the constraints.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="tree/TreeFilterDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -159,7 +161,7 @@ const TreeFilterDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'TreeFilterDemo', sources: this.sources, service: 'NodeService', data: 'treenodes' })

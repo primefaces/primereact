@@ -3,6 +3,7 @@ import { Panel } from '../../components/panel/Panel';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { PanelDoc } from './PanelDoc';
 import { Ripple } from '../../components/ripple/Ripple';
+import AppDemoActions from '../../AppDemoActions';
 
 export class PanelDemo extends Component {
 
@@ -37,7 +38,8 @@ export class PanelDemo extends Component {
                     <AppInlineHeader changelogText="panel" showInputStyle>
                         <h1>Panel</h1>
                         <p>Panel is a grouping component providing with content toggle feature.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="panel/PanelDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

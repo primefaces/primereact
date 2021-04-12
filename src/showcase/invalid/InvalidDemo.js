@@ -12,6 +12,7 @@ import { InputTextarea } from '../../components/inputtextarea/InputTextarea';
 import { MultiSelect } from '../../components/multiselect/MultiSelect';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { InvalidDoc } from './InvalidDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class InvalidDemo extends Component {
 
@@ -140,7 +141,8 @@ export class InvalidDemo extends Component {
                     <AppInlineHeader changelogText="invalid" showInputStyle>
                         <h1>Invalid State</h1>
                         <p>All form components have an invalid state style to display the validation errors.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="invalid/InvalidDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

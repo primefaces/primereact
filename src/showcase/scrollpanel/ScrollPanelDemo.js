@@ -3,6 +3,7 @@ import { ScrollPanel } from '../../components/scrollpanel/ScrollPanel';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { ScrollPanelDoc } from './ScrollPanelDoc';
 import './ScrollPanelDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export class ScrollPanelDemo extends Component {
 
@@ -13,7 +14,8 @@ export class ScrollPanelDemo extends Component {
                     <AppInlineHeader changelogText="scrollPanel">
                         <h1>ScrollPanel</h1>
                         <p>ScrollPanel is a cross browser, lightweight and skinnable alternative to native browser scrollbar.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="scrollpanel/ScrollPanelDemo.js" />
                 </div>
 
                 <div className="content-section implementation scrollpanel-demo">

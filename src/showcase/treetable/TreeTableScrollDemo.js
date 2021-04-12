@@ -5,6 +5,7 @@ import { NodeService } from '../service/NodeService';
 import { TabView } from '../../components/tabview/TabView';
 import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class TreeTableScrollDemo extends Component {
 
@@ -27,7 +28,8 @@ export class TreeTableScrollDemo extends Component {
                     <AppInlineHeader changelogText="treeTable">
                         <h1>TreeTable <span>Scroll</span></h1>
                         <p>Scrolling data is available horizontally, vertically or both with optional support for frozen columns.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="treetable/TreeTableScrollDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -287,7 +289,7 @@ const TreeTableScrollDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'TreeTableScrollDemo', sources: this.sources, service: 'NodeService', data: 'treetablenodes' })

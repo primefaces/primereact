@@ -4,6 +4,7 @@ import { Chart } from '../../components/chart/Chart';
 import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import AppContentContext from '../../AppContentContext';
+import AppDemoActions from '../../AppDemoActions';
 
 export class LineChartDemo extends Component {
 
@@ -235,7 +236,8 @@ export class LineChartDemo extends Component {
                     <AppInlineHeader changelogText="chart">
                         <h1>LineChart</h1>
                         <p>A line chart or line graph is a type of chart which displays information as a series of data points called 'markers' connected by straight line segments.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="chart/LineChartDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -786,7 +788,7 @@ const LineChartDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'LineChartDemo', sources: this.sources, dependencies: { 'chart.js': '2.7.3' } })

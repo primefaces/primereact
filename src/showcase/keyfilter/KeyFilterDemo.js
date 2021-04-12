@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { InputText } from '../../components/inputtext/InputText';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { KeyFilterDoc } from './KeyFilterDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class KeyFilterDemo extends Component {
 
@@ -12,7 +13,8 @@ export class KeyFilterDemo extends Component {
                     <AppInlineHeader changelogText="keyFilter" showInputStyle>
                         <h1>KeyFilter</h1>
                         <p>KeyFilter feature restricts user input based on a regular expression.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="keyfilter/KeyFilterDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

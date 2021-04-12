@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Rating } from '../../components/rating/Rating';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { RatingDoc } from './RatingDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class RatingDemo extends Component {
 
@@ -21,7 +22,8 @@ export class RatingDemo extends Component {
                     <AppInlineHeader changelogText="rating" showInputStyle>
                         <h1>Rating</h1>
                         <p>Rating componentsis a star based selection input.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="rating/RatingDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

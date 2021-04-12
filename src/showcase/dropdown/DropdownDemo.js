@@ -3,6 +3,7 @@ import { Dropdown } from '../../components/dropdown/Dropdown';
 import { DropdownDoc } from './DropdownDoc';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './DropdownDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DropdownDemo extends Component {
 
@@ -130,7 +131,8 @@ export class DropdownDemo extends Component {
                     <AppInlineHeader changelogText="dropdown" showInputStyle>
                         <h1>Dropdown</h1>
                         <p>Dropdown is used to select an item from a collection of options.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="dropdown/DropdownDemo.js" />
                 </div>
 
                 <div className="content-section implementation dropdown-demo">

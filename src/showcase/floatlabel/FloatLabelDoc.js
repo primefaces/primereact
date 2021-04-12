@@ -714,7 +714,7 @@ const FloatLabelDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'FloatLabelDemo', sources: this.sources, service: 'CountryService', data: 'countries' })

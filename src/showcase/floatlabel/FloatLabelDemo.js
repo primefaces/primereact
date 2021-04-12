@@ -12,6 +12,7 @@ import { InputTextarea } from '../../components/inputtextarea/InputTextarea';
 import { MultiSelect } from '../../components/multiselect/MultiSelect';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { FloatLabelDoc } from './FloatLabelDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class FloatLabelDemo extends Component {
 
@@ -144,7 +145,8 @@ export class FloatLabelDemo extends Component {
                     <AppInlineHeader changelogText="floatLabel" showInputStyle>
                         <h1>Float Label</h1>
                         <p>A floating label is implemented by wrapping the input and the label inside a container having .p-float-label style class.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="floatlabel/FloatLabelDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

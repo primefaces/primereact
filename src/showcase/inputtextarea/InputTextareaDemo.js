@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { InputTextarea } from '../../components/inputtextarea/InputTextarea';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { InputTextareaDoc } from './InputTextareaDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class InputTextareaDemo extends Component {
 
@@ -21,7 +22,8 @@ export class InputTextareaDemo extends Component {
                     <AppInlineHeader changelogText="inputTextarea" showInputStyle>
                         <h1>InputTextarea</h1>
                         <p>Inputtextarea add styling and autoResize functionality to standard textarea element.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="inputtextarea/InputTextareaDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

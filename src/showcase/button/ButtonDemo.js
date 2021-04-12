@@ -1,10 +1,25 @@
 import React, { Component } from 'react';
+import AppDemoActions from '../../AppDemoActions';
 import { Button } from '../../components/button/Button';
 import { ButtonDoc } from './ButtonDoc';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './ButtonDemo.scss';
 
 export class ButtonDemo extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            sources: null,
+            extFiles: null,
+            name: null
+        }
+    }
+
+    setSourceAndExtFiles = (sources, extFiles, name) => {
+        this.setState({ sources, extFiles, name })
+    }
 
     render() {
         return (
@@ -14,6 +29,7 @@ export class ButtonDemo extends Component {
                         <h1>Button</h1>
                         <p>Button is an extension to standard input element with icons and theming.</p>
                     </AppInlineHeader>
+                    {this.state.sources && this.state.extFiles && <AppDemoActions github="button/ButtonDemo.js" sources={this.state.sources} extFiles={this.state.extFiles} name={this.state.name} />}
                 </div>
 
                 <div className="content-section implementation button-demo">
@@ -125,14 +141,14 @@ export class ButtonDemo extends Component {
 
                         <h5>Sizes</h5>
                         <div className="sizes">
-                            <Button label="Small" icon="pi pi-check" className="p-button-sm"  />
-                            <Button label="Normal" icon="pi pi-check" className="p-button"  />
+                            <Button label="Small" icon="pi pi-check" className="p-button-sm" />
+                            <Button label="Normal" icon="pi pi-check" className="p-button" />
                             <Button label="Large" icon="pi pi-check" className="p-button-lg" />
                         </div>
                     </div>
                 </div>
 
-                <ButtonDoc></ButtonDoc>
+                <ButtonDoc setSourceAndExtFiles={this.setSourceAndExtFiles}></ButtonDoc>
             </div>
         )
     }

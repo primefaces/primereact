@@ -4,6 +4,7 @@ import ProductService from '../service/ProductService';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './PickListDemo.scss';
 import { PickListDoc } from './PickListDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class PickListDemo extends Component {
 
@@ -57,7 +58,8 @@ export class PickListDemo extends Component {
                     <AppInlineHeader changelogText="pickList">
                         <h1>PickList</h1>
                         <p>PickList is used to reorder items between different lists.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="picklist/PickListDemo.js" />
                 </div>
 
                 <div className="content-section implementation picklist-demo">

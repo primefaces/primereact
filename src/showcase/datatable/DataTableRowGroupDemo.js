@@ -7,6 +7,7 @@ import { TabView } from '../../components/tabview/TabView';
 import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './DataTableDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DataTableRowGroupDemo extends Component {
 
@@ -100,7 +101,8 @@ export class DataTableRowGroupDemo extends Component {
                     <AppInlineHeader changelogText="dataTable">
                         <h1>DataTable <span>Row Grouping</span></h1>
                         <p>Rows can either be grouped by a separate grouping row or using rowspan.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="datatable/DataTableRowGroupDemo.js" />
                 </div>
 
                 <div className="content-section implementation datatable-rowgroup-demo">
@@ -615,7 +617,7 @@ const DataTableRowGroupDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'DataTableRowGroupDemo', sources: this.sources, service: 'CustomerService', data: 'customers-medium', extFiles: this.extFiles  })

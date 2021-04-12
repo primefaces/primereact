@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AppDemoActions from '../../AppDemoActions';
 import { Carousel } from '../../components/carousel/Carousel';
 import { Button } from '../../components/button/Button';
 import { CarouselDoc } from './CarouselDoc';
@@ -70,7 +71,8 @@ export class CarouselDemo extends Component {
                     <AppInlineHeader changelogText="carousel">
                         <h1>Carousel</h1>
                         <p>Carousel is a content slider featuring various customization options.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="carousel/CarouselDemo.js" />
                 </div>
 
                 <div className="content-section implementation carousel-demo">

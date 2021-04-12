@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { PanelMenu } from '../../components/panelmenu/PanelMenu';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { PanelMenuDoc } from './PanelMenuDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class PanelMenuDemo extends Component {
 
@@ -133,7 +134,8 @@ export class PanelMenuDemo extends Component {
                     <AppInlineHeader changelogText="panelMenu">
                         <h1>PanelMenu</h1>
                         <p>PanelMenu is a hybrid of accordion-tree components.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="panelmenu/PanelMenuDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

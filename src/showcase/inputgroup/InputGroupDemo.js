@@ -5,6 +5,7 @@ import { Checkbox } from '../../components/checkbox/Checkbox';
 import { RadioButton } from '../../components/radiobutton/RadioButton';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { InputGroupDoc } from './InputGroupDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class InputGroupDemo extends Component {
 
@@ -25,7 +26,8 @@ export class InputGroupDemo extends Component {
                     <AppInlineHeader changelogText="inputGroup" showInputStyle>
                         <h1>InputGroup</h1>
                         <p>Text, icon, buttons and other content can be grouped next to an input.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="inputgroup/InputGroupDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AppDemoActions from '../../AppDemoActions';
 import './ElevationDemo.scss';
 import { ElevationDoc } from './ElevationDoc';
 
@@ -26,6 +27,7 @@ export class ElevationDemo extends Component {
                         <h1>Elevation</h1>
                         <p>Elevation is an add-on utility of <a href="https://github.com/primefaces/primeflex">PrimeFlex</a> and used to specify the separation between surfaces and elements along the z-axis.</p>
                     </div>
+                    <AppDemoActions github="elevation/ElevationDemo.js" />
                 </div>
 
                 <div className="content-section implementation elevation-demo">

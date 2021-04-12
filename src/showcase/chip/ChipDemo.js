@@ -3,6 +3,7 @@ import { Chip } from '../../components/chip/Chip';
 import { ChipDoc } from './ChipDoc';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './ChipDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export class ChipDemo extends Component {
 
@@ -14,6 +15,7 @@ export class ChipDemo extends Component {
                         <h1>Chip</h1>
                         <p>Chip represents entities using icons, labels and images.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="chip/ChipDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

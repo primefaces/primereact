@@ -3,6 +3,7 @@ import { Button } from '../../components/button/Button';
 import { InputText } from '../../components/inputtext/InputText';
 import { SpacingDoc } from './SpacingDoc';
 import './SpacingDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export class SpacingDemo extends Component {
     render() {
@@ -13,6 +14,7 @@ export class SpacingDemo extends Component {
                         <h1>Spacing</h1>
                         <p><a href="https://github.com/primefaces/primeflex">PrimeFlex</a> provides various spacing utilities to modify an element's layout.</p>
                     </div>
+                    <AppDemoActions github="spacing/SpacingDemo.js" />
                 </div>
 
                 <div className="content-section implementation spacing-demo">

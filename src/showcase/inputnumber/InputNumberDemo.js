@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {InputNumber} from '../../components/inputnumber/InputNumber';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { InputNumberDoc } from './InputNumberDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class InputNumberDemo extends Component {
 
@@ -38,7 +39,8 @@ export class InputNumberDemo extends Component {
                     <AppInlineHeader changelogText="inputNumber" showInputStyle>
                         <h1>InputNumber</h1>
                         <p>InputNumber is an input component to provide numerical input.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="inputnumber/InputNumberDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

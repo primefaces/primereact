@@ -4,6 +4,7 @@ import { Button } from '../../components/button/Button';
 import { Toast } from '../../components/toast/Toast';
 import { ConfirmDialogDoc } from './ConfirmDialogDoc';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class ConfirmDialogDemo extends Component {
 
@@ -69,6 +70,7 @@ export class ConfirmDialogDemo extends Component {
                         <h1>ConfirmDialog</h1>
                         <p>ConfirmDialog uses a Dialog UI with <b>confirmDialog</b> method or <b>&lt;ConfirmDialog&gt;</b> tag.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="confirmdialog/ConfirmDialogDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -99,7 +101,7 @@ export class ConfirmDialogDemo extends Component {
 
                         <h5>Using ConfirmDialog tag</h5>
                         <ConfirmDialog visible={this.state.visible} onHide={() => this.setState({ visible: false })} message="Are you sure you want to proceed?"
-                            header="Confirmation" icon="pi pi-exclamation-triangle" accept={this.accept} reject={this.reject}/>
+                            header="Confirmation" icon="pi pi-exclamation-triangle" accept={this.accept} reject={this.reject} />
                         <Button onClick={() => this.setState({ visible: true })} icon="pi pi-check" label="Confirm" />
                     </div>
                 </div>

@@ -4,6 +4,7 @@ import { Chart } from '../../components/chart/Chart';
 import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import AppContentContext from '../../AppContentContext';
+import AppDemoActions from '../../AppDemoActions';
 
 export class PolarAreaChartDemo extends Component {
 
@@ -71,7 +72,8 @@ export class PolarAreaChartDemo extends Component {
                     <AppInlineHeader changelogText="chart">
                         <h1>PolarAreaChart</h1>
                         <p>Polar area charts are similar to pie charts, but each segment has the same angle - the radius of the segment differs depending on the value.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="chart/PolarAreaChartDemo.js"/>
                 </div>
 
                 <div className="content-section implementation">
@@ -281,7 +283,7 @@ const PolarAreaChartDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'PolarAreaChartDemo', sources: this.sources, dependencies: { 'chart.js': '2.7.3' } })

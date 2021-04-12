@@ -6,6 +6,7 @@ import { Toast } from '../../components/toast/Toast';
 import { TabView } from '../../components/tabview/TabView';
 import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DataTableSelectionDemo extends Component {
 
@@ -47,7 +48,8 @@ export class DataTableSelectionDemo extends Component {
                         <h1>DataTable <span>Selection</span></h1>
                         <p>DataTable provides single and multiple selection modes on click of a row. Selected rows are bound to the selection property and onRowSelect-onRowUnselect
                             events are provided as optional callbacks. In addition built-in radio button and checkbox based selections are available as alternatives.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="datatable/DataTableSelectionDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -469,7 +471,7 @@ const DataTableSelectionDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'DataTableSelectionDemo', sources: this.sources, service: 'ProductService', data: 'products-small' })

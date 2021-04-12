@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AppDemoActions from '../../AppDemoActions';
 import { Calendar } from '../../components/calendar/Calendar';
 import { CalendarDoc } from './CalendarDoc';
 import { AppInlineHeader } from '../../AppInlineHeader';
@@ -78,7 +79,8 @@ export class CalendarDemo extends Component {
                     <AppInlineHeader changelogText="calendar" showInputStyle>
                         <h1>Calendar</h1>
                         <p>Calendar is a form component to work with dates.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="calendar/CalendarDemo.js"/>
                 </div>
 
                 <div className="content-section implementation">

@@ -14,6 +14,7 @@ import { classNames } from '../../components/utils/ClassNames';
 import { TabView } from '../../components/tabview/TabView';
 import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import './FormDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export const ReactFinalFormDemo = () => {
     const [countries, setCountries] = useState([]);
@@ -83,7 +84,8 @@ export const ReactFinalFormDemo = () => {
                 <AppInlineHeader showInputStyle showChangelog={false}>
                     <h1>React Final Form</h1>
                     <p>PrimeReact components can be easily used/integrated with <a href="https://final-form.org/react">React Final Form</a>. In this example, a register panel is simulated using React Final Form.</p>
-                </AppInlineHeader>
+                </AppInlineHeader> 
+                <AppDemoActions github="validate/ReactFinalFormDemo.js" />
             </div>
 
             <div className="content-section implementation form-demo">
@@ -506,7 +508,7 @@ export const ReactFinalFormDemo = () => {
     }
 
     return (
-        <div className="content-section documentation">
+        <div className="content-section documentation" id="app-doc">
             <TabView>
                 {
                     useLiveEditorTabs({ name: 'ReactFinalFormDemo', sources, service: 'CountryService', data: 'countries', extFiles, dependencies: { 'final-form': '^4.20.2', 'react-final-form': '^6.5.3' } })

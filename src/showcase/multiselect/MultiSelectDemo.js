@@ -3,6 +3,7 @@ import { MultiSelect } from '../../components/multiselect/MultiSelect';
 import { MultiSelectDoc } from './MultiSelectDoc';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './MultiSelectDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export class MultiSelectDemo extends Component {
 
@@ -120,7 +121,8 @@ export class MultiSelectDemo extends Component {
                     <AppInlineHeader changelogText="multiSelect" showInputStyle>
                         <h1>MultiSelect</h1>
                         <p>MultiSelect is used to select multiple items from a collection.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="multiselect/MultiSelectDemo.js" />
                 </div>
 
                 <div className="content-section implementation multiselect-demo">

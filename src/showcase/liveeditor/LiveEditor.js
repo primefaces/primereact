@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 
 import { services, data } from './LiveEditorData';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { SplitButton } from '../../components/splitbutton/SplitButton';
 import { TabPanel } from '../../components/tabview/TabView';
+import { Button } from '../../components/button/Button';
+import { Menu } from '../../components/menu/Menu';
 
 export function useLiveEditorTabs(props) {
     let tabs = Object.entries(props.sources).map(([key, value]) => {
@@ -33,13 +34,14 @@ export function useLiveEditorTabs(props) {
         dataArr.forEach((el, i) => {
             tabs.push(
                 <TabPanel key={`${el}_i`} header={`${el}.json`}>
-                    <CodeHighlight lang="js" style={{maxHeight: '500px'}}>
+                    <CodeHighlight lang="js" style={{ maxHeight: '500px' }}>
                         {data[el]}
                     </CodeHighlight>
                 </TabPanel>
             )
         });
     }
+
 
     return tabs;
 }
@@ -80,7 +82,7 @@ export class LiveEditor extends Component {
                         /* eslint-disable */
                         <a href="#" role="menuitem" className={options.className} target={item.target} onClick={options.onClick}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--text-color)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-codesandbox"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="7.5 4.21 12 6.81 16.5 4.21"></polyline><polyline points="7.5 19.79 7.5 14.6 3 12"></polyline><polyline points="21 12 16.5 14.6 16.5 19.79"></polyline><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
-                            <span className="p-ml-2" style={{color: 'var(--text-color)'}}>Class source</span>
+                            <span className="p-ml-2" style={{ color: 'var(--text-color)' }}>Class source</span>
                         </a>
                         /* eslint-enable */
                     );
@@ -95,7 +97,7 @@ export class LiveEditor extends Component {
                         /* eslint-disable */
                         <a href="#" role="menuitem" className={options.className} target={item.target} onClick={options.onClick}>
                             <i className="pi pi-external-link" />
-                            <span className="p-ml-2" style={{color: 'var(--text-color)'}}>Hooks source</span>
+                            <span className="p-ml-2" style={{ color: 'var(--text-color)' }}>Hooks source</span>
                         </a>
                         /* eslint-enable */
                     );
@@ -108,9 +110,9 @@ export class LiveEditor extends Component {
                 template: (item, options) => {
                     return this.props.sources['ts'] && (
                         /* eslint-disable */
-                        <a href="#" role="menuitem" className={options.className} target={item.target} onClick={options.onClick}>
+                        <a href="#" role="menuitem" className={`${options.className} liveEditorPanel`} target={item.target} onClick={options.onClick}>
                             <img src="showcase/images/typescript-icon.png" alt="TypeScript"></img>
-                            <span className="p-ml-2" style={{color: 'var(--text-color)'}}>TS source</span>
+                            <span className="p-ml-2" style={{ color: 'var(--text-color)' }}>TS source</span>
                         </a>
                         /* eslint-enable */
                     );
@@ -131,13 +133,13 @@ export class LiveEditor extends Component {
             },
             body: JSON.stringify(this.getSandboxParameters(sourceType))
         })
-        .then(response => response.json())
-        .then(data => window.open(`https://codesandbox.io/s/${data.sandbox_id}`, '_blank'))
-        .catch(() => this.setState({ showCodeHighlight: true }));
+            .then(response => response.json())
+            .then(data => window.open(`https://codesandbox.io/s/${data.sandbox_id}`, '_blank'))
+            .catch(() => this.setState({ showCodeHighlight: true }));
     }
 
     createSandboxParameters(nameWithExt, files, extDependencies) {
-        let extFiles = !!this.props.extFiles ? {...this.props.extFiles} : {};
+        let extFiles = !!this.props.extFiles ? { ...this.props.extFiles } : {};
         let extIndexCSS = extFiles['index.css'] || '';
         delete extFiles['index.css'];
 
@@ -450,7 +452,7 @@ ReactDOM.render(<${name} />, rootElement);`
                 content: services[this.props.service]
             }
 
-            extDependencies['axios'] =  "^0.19.0";
+            extDependencies['axios'] = "^0.19.0";
         }
 
         if (this.props.data) {
@@ -465,48 +467,32 @@ ReactDOM.render(<${name} />, rootElement);`
         return this.createSandboxParameters(`${name}${extension}`, _files, extDependencies);
     }
 
-    renderElement() {
-        const buttonContent = (
-            <>
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--primary-color-text)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-codesandbox"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="7.5 4.21 12 6.81 16.5 4.21"></polyline><polyline points="7.5 19.79 7.5 14.6 3 12"></polyline><polyline points="21 12 16.5 14.6 16.5 19.79"></polyline><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
-                <span className="p-ml-2">Edit in CodeSandbox</span>
-            </>
-        );
+    toggleMenu = (event) => {
+        this.menu.toggle(event);
+    }
 
-        return (
-            <div className="p-d-flex p-jc-end" style={{marginTop: '-1rem'}}>
-                <div className="p-d-flex p-flex-column p-ai-end">
-                    <span className="liveEditorHelperText">*Hooks, TS and Class sources can be accessed using</span>
-                    <SplitButton model={this.items} buttonTemplate={buttonContent} onClick={() => this.postSandboxParameters(this.props.defaultSourceType)} appendTo={document.body} className="liveEditorSplitButton p-m-2" menuClassName="liveEditorPanel"></SplitButton>
-                </div>
-            </div>
-        );
+    scrollToDocs = () => {
+        document.getElementById('app-doc').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    viewOnGitHub = () => {
+        window.open('https://github.com/primefaces/primereact/blob/master/src/showcase/' + this.props.github, '_blank');
     }
 
     render() {
-        const element = this.renderElement();
 
         return (
             <>
-                {element}
-                <CodeHighlight lang="js">
-                    {this.props.sources[this.props.defaultSourceType].content}
-                </CodeHighlight>
-
-                {
-                    this.props.extFiles && Object.entries(this.props.extFiles).map(([key, value], i) => {
-                        if (key === 'index.css') {
-                            return null;
-                        }
-
-                        const lang = key.indexOf('.css') !== -1 ? 'css' : 'js';
-                        return (
-                            <CodeHighlight key={`${key}_${i}`} lang={lang}>
-                                {value.content}
-                            </CodeHighlight>
-                        )
-                    })
-                }
+                <div className="app-demoactions p-d-flex p-ai-end p-jc-end p-mt-3">
+                    <Button className="p-button-text p-button-rounded p-button-plain p-button-lg p-button-icon-only" onClick={this.toggleMenu}>
+                        <svg role="img" viewBox="0 0 24 24" width={17} height={17} fill={'var(--text-color-secondary)'} style={{ display: 'block' }}>
+                            <path d="M2 6l10.455-6L22.91 6 23 17.95 12.455 24 2 18V6zm2.088 2.481v4.757l3.345 1.86v3.516l3.972 2.296v-8.272L4.088 8.481zm16.739 0l-7.317 4.157v8.272l3.972-2.296V15.1l3.345-1.861V8.48zM5.134 6.601l7.303 4.144 7.32-4.18-3.871-2.197-3.41 1.945-3.43-1.968L5.133 6.6z" />
+                        </svg>
+                    </Button>
+                    <Button icon="pi pi-github" className="p-button-text p-button-rounded p-button-plain p-button-lg p-ml-2" onClick={this.viewOnGitHub} ></Button >
+                    <Button icon="pi pi-info-circle" className="p-button-text p-button-rounded p-button-plain p-button-lg p-ml-2 " onClick={this.scrollToDocs} ></Button >
+                    <Menu ref={(el) => this.menu = el} model={this.items} popup style={{ width: '14rem' }} />
+                </div >
             </>
         )
     }

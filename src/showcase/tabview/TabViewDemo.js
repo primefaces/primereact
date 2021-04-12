@@ -4,6 +4,7 @@ import { AppInlineHeader } from '../../AppInlineHeader';
 import { Button } from '../../components/button/Button';
 import { TabViewDoc } from './TabViewDoc';
 import './TabViewDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export class TabViewDemo extends Component {
 
@@ -21,7 +22,8 @@ export class TabViewDemo extends Component {
                     <AppInlineHeader changelogText="tabView">
                         <h1>TabView</h1>
                         <p>TabView is a container component to group content with tabs.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="tabview/TabViewDemo.js" />
                 </div>
 
                 <div className="content-section implementation tabview-demo">

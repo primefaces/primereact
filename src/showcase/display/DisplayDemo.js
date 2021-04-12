@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { InputText } from '../../components/inputtext/InputText';
 import { Button } from '../../components/button/Button';
 import { DisplayDoc } from './DisplayDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DisplayDemo extends Component {
 
@@ -13,6 +14,7 @@ export class DisplayDemo extends Component {
                         <h1>Display</h1>
                         <p>Efficiently configure the display of the component with <a href="https://github.com/primefaces/primeflex">PrimeFlex</a> display utilities.</p>
                     </div>
+                    <AppDemoActions github="display/DisplayDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

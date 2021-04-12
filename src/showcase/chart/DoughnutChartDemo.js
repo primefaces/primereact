@@ -4,6 +4,7 @@ import { Chart } from '../../components/chart/Chart';
 import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import AppContentContext from '../../AppContentContext';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DoughnutChartDemo extends Component {
 
@@ -52,7 +53,8 @@ export class DoughnutChartDemo extends Component {
                     <AppInlineHeader changelogText="chart">
                         <h1>DoughnutChart</h1>
                         <p>A doughnut chart is a variant of the pie chart, with a blank center allowing for additional information about the data as a whole to be included.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="chart/DoughnutChartDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -220,7 +222,7 @@ const DoughnutChartDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'DoughnutChartDemo', sources: this.sources, dependencies: { 'chart.js': '2.7.3' } })

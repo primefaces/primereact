@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ToggleButton } from '../../components/togglebutton/ToggleButton';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { ToggleButtonDoc } from './ToggleButtonDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class ToggleButtonDemo extends Component {
 
@@ -21,7 +22,8 @@ export class ToggleButtonDemo extends Component {
                     <AppInlineHeader changelogText="toggleButton" showInputStyle>
                         <h1>ToggleButton</h1>
                         <p>ToggleButton is used to select a boolean value using a button.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="togglebutton/ToggleButtonDemo.js"/>
                 </div>
 
                 <div className="content-section implementation">

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { TriStateCheckbox } from '../../components/tristatecheckbox/TriStateCheckbox';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { TriStateCheckboxDoc } from './TriStateCheckboxDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class TriStateCheckboxDemo extends Component {
 
@@ -20,7 +21,8 @@ export class TriStateCheckboxDemo extends Component {
                     <AppInlineHeader changelogText="triStateCheckbox" showInputStyle>
                         <h1>TriStateCheckbox</h1>
                         <p>TriStateCheckbox is used to select either "true", "false" or "null" as the value.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="tristatecheckbox/TriStateCheckboxDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

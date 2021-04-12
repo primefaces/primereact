@@ -4,6 +4,7 @@ import { Button } from '../../components/button/Button';
 import { DialogDoc } from './DialogDoc';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './DialogDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DialogDemo extends Component {
 
@@ -60,7 +61,8 @@ export class DialogDemo extends Component {
                     <AppInlineHeader changelogText="dialog">
                         <h1>Dialog</h1>
                         <p>Dialog is a container to display content in an overlay window.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="dialog/DialogDemo.js" />
                 </div>
 
                 <div className="content-section implementation dialog-demo">

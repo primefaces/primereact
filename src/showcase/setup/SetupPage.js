@@ -14,7 +14,7 @@ export class SetupPage extends Component {
                     </div>
                 </div>
 
-                <div className="content-section documentation">
+                <div className="content-section documentation" id="app-doc">
                     <h5>Download</h5>
                     <p>PrimeReact is available at npm, if you have an existing application run the following commands to download PrimeReact and PrimeIcons to your project.</p>
 

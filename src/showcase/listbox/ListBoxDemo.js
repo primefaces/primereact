@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ListBox } from '../../components/listbox/ListBox';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { ListBoxDoc } from './ListBoxDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class ListBoxDemo extends Component {
 
@@ -93,7 +94,8 @@ export class ListBoxDemo extends Component {
                     <AppInlineHeader changelogText="listBox" showInputStyle>
                         <h1>ListBox</h1>
                         <p>ListBox is used to select one or more values from a list of items.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="listbox/ListBoxDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Checkbox } from '../../components/checkbox/Checkbox';
 import { CheckboxDoc } from './CheckboxDoc';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class CheckboxDemo extends Component {
 
@@ -59,7 +60,8 @@ export class CheckboxDemo extends Component {
                     <AppInlineHeader changelogText="checkbox" showInputStyle>
                         <h1>Checkbox</h1>
                         <p>Checkbox is an extension to standard checkbox element with skinning capabilities.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="checkbox/CheckboxDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

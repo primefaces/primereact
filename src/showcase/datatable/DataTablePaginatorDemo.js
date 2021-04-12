@@ -10,6 +10,7 @@ import { InputText } from '../../components/inputtext/InputText';
 import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { classNames } from '../../components/utils/ClassNames';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DataTablePaginatorDemo extends Component {
 
@@ -160,7 +161,8 @@ export class DataTablePaginatorDemo extends Component {
                     <AppInlineHeader changelogText="dataTable">
                         <h1>DataTable <span>Paginator</span></h1>
                         <p>Pagination is enabled by setting paginator property to true, rows attribute defines the number of rows per page and pageLinks specify the the number of page links to display.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="datatable/DataTablePaginatorDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -760,7 +762,7 @@ const DataTablePaginatorDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'DataTablePaginatorDemo', sources: this.sources, service: 'CustomerService', data: 'customers-large' })

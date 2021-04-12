@@ -4,6 +4,7 @@ import { Button } from '../../components/button/Button';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { SplitButton } from '../../components/splitbutton/SplitButton';
 import { ToolbarDoc } from './ToolbarDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class ToolbarDemo extends Component {
 
@@ -59,7 +60,8 @@ export class ToolbarDemo extends Component {
                     <AppInlineHeader changelogText="toolbar" showInputStyle>
                         <h1>Toolbar</h1>
                         <p>Toolbar is a grouping component for buttons and other content.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="toolbar/ToolbarDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

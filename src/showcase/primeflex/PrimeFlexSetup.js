@@ -6,7 +6,7 @@ export class PrimeFlexSetup extends Component {
     render() {
         return (
             <div>
-                <div className="content-section documentation">
+                <div className="content-section documentation" id="app-doc">
                     <h1>PrimeFlex</h1>
                     <p>PrimeFlex is a CSS utility library featuring various helpers such as a grid system, flexbox, spacing, elevation and more. Although it is not required, it is highly
                         recommended to add PrimeFlex as it is likely to need such utilities when developing applications with PrimeReact.</p>
