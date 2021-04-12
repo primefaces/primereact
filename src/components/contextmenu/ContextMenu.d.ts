@@ -10,6 +10,7 @@ interface ContextMenuProps {
     autoZIndex?: boolean;
     baseZIndex?: number;
     appendTo?: HTMLElement;
+    transitionOptions?: object;
     onShow?(e: React.SyntheticEvent): void;
     onHide?(e: React.SyntheticEvent): void;
 }
