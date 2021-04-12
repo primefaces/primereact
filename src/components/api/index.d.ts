@@ -1,9 +1,13 @@
 // Config
-export default interface PrimeReact {
-    ripple: boolean;
-    locale: string;
-    zIndex: number;
+interface APIOptions {
+    ripple?: boolean;
+    locale?: string;
+    zIndex?: number;
 }
+
+declare const PrimeReact: APIOptions;
+
+export default PrimeReact;
 
 // Locale
 export declare function locale(locale: string): object;

@@ -54,7 +54,7 @@ interface ListBoxProps {
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
     onChange?(e: ChangeParams): void;
-    onFilterValueChange(e: FilterValueChangeParams): void;
+    onFilterValueChange?(e: FilterValueChangeParams): void;
 }
 
 export class ListBox extends React.Component<ListBoxProps, any> { }

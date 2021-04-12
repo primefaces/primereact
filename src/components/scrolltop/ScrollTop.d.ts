@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-type TargetType = 'window' | undefined | null;
+type TargetType = 'window' | 'parent';
 
 type ScrollBehavior = 'auto' | 'smooth';
 

@@ -11,7 +11,7 @@ type SortOrderType = 1 | 0 | -1 | undefined | null;
 
 type MultiSortMetaType = SortMeta[] | undefined | null;
 
-type SelectionModeType = 'single' | 'multiple';
+type SelectionModeType = 'single' | 'multiple' | 'checkbox';
 
 type ColumnResizeModeType = 'fit' | 'expand';
 
@@ -19,7 +19,7 @@ type FilterMatchModeType = 'startsWith' | 'contains' | 'endsWith' | 'equals' | '
 
 type GlobalFilterType = string | undefined | null;
 
-type SelectionKeys = string | SelectionKeysType;
+type SelectionKeys = string | SelectionKeysType | undefined | null;
 
 type FilterModeType = 'lenient' | 'strict';
 

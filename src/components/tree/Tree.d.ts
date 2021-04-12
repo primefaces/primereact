@@ -3,7 +3,7 @@ import TreeNode from '../treenode/TreeNode';
 
 type SelectionModeType = 'single' | 'multiple' | 'checkbox';
 
-type SelectionKeys = string | SelectionKeysType;
+type SelectionKeys = string | SelectionKeysType | undefined | null;
 
 type FilterModeType = 'lenient' | 'strict';
 

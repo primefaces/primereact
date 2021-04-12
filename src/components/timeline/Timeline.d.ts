@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-type AlignType = 'left' | 'right';
+type AlignType = 'left' | 'right' | 'alternate';
 
 type LayoutType = 'vertical' | 'horizontal';
 

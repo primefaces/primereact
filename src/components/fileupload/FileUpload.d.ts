@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-type ModeType = 'single' | 'advanced';
+type ModeType = 'basic' | 'advanced';
 
 interface OptionsType {
     label?: string;

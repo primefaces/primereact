@@ -12,12 +12,12 @@ type EmptyFilterMessageType = React.ReactNode | ((props: DropdownProps) => React
 interface ChangeTargetOptions {
     name: string;
     id: string;
-    value: string | undefined | null;
+    value: any;
 }
 
 interface ChangeParams {
     originalEvent: React.SyntheticEvent;
-    value: string | undefined | null;
+    value: any;
     stopPropagation(): void;
     preventDefault(): void;
     target: ChangeTargetOptions;

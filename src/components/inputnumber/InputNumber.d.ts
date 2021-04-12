@@ -4,12 +4,12 @@ import TooltipOptions from '../tooltip/TooltipOptions';
 interface ValueChangeTargetOptions {
     name: string;
     id: string;
-    value: string;
+    value: number;
 }
 
 interface ValueChangeParams {
     originalEvent: React.SyntheticEvent;
-    value: string;
+    value: number;
     stopPropagation(): void;
     preventDefault(): void;
     target: ValueChangeTargetOptions;
@@ -17,7 +17,7 @@ interface ValueChangeParams {
 
 interface ChangeParams {
     originalEvent: React.SyntheticEvent;
-    value: string;
+    value: number;
 }
 
 interface InputNumberProps {
