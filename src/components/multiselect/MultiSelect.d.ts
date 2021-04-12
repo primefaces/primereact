@@ -90,6 +90,7 @@ interface MultiSelectProps {
     selectedItemTemplate?: SelectedItemTemplateType;
     panelHeaderTemplate?: PanelHeaderTemplateType;
     panelFooterTemplate?: PanelFooterTemplateType;
+    transitionOptions?: object;
     onChange?(e: ChangeParams): void;
     onFocus?(event: React.FormEvent<HTMLInputElement>): void;
     onBlur?(event: React.FormEvent<HTMLInputElement>): void;

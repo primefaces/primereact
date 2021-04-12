@@ -58,6 +58,7 @@ export class MultiSelect extends Component {
         selectedItemTemplate: null,
         panelHeaderTemplate: null,
         panelFooterTemplate: null,
+        transitionOptions: null,
         onChange: null,
         onFocus: null,
         onBlur: null
@@ -107,6 +108,7 @@ export class MultiSelect extends Component {
         selectedItemTemplate: PropTypes.any,
         panelHeaderTemplate: PropTypes.any,
         panelFooterTemplate: PropTypes.any,
+        transitionOptions: PropTypes.object,
         onChange: PropTypes.func,
         onFocus: PropTypes.func,
         onBlur: PropTypes.func
@@ -905,7 +907,7 @@ export class MultiSelect extends Component {
                     <span className="p-multiselect-trigger-icon pi pi-chevron-down p-c"></span>
                 </div>
                 <MultiSelectPanel ref={this.overlayRef} header={header} footer={footer} appendTo={this.props.appendTo} onClick={this.onPanelClick}
-                    scrollHeight={this.props.scrollHeight} panelClassName={panelClassName} panelStyle={this.props.panelStyle}
+                    scrollHeight={this.props.scrollHeight} panelClassName={panelClassName} panelStyle={this.props.panelStyle} transitionOptions={this.props.transitionOptions}
                     in={this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
                     {items}
                 </MultiSelectPanel>
