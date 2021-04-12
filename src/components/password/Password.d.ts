@@ -27,7 +27,7 @@ interface PasswordProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttr
     strongRegex?: string;
     feedback?: boolean;
     toggleMask?: boolean;
-    appendTo?: HTMLElement;
+    appendTo?: HTMLElement | string;
     header?: HeaderType;
     content?: ContentType;
     footer?: FooterType;

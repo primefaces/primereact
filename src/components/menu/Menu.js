@@ -33,7 +33,7 @@ export class Menu extends Component {
         className: PropTypes.string,
         autoZIndex: PropTypes.bool,
         baseZIndex: PropTypes.number,
-        appendTo: PropTypes.any,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         transitionOptions: PropTypes.object,
         onShow: PropTypes.func,
         onHide: PropTypes.func

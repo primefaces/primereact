@@ -101,7 +101,7 @@ export class AutoComplete extends Component {
         disabled: PropTypes.bool,
         maxlength: PropTypes.number,
         size: PropTypes.number,
-        appendTo: PropTypes.any,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         tabIndex: PropTypes.number,
         autoFocus: PropTypes.bool,
         tooltip: PropTypes.string,
@@ -313,8 +313,14 @@ export class AutoComplete extends Component {
 
     alignOverlay() {
         let target = this.props.multiple ? this.multiContainer : this.inputRef.current;
-        this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(target) + 'px';
-        DomHandler.absolutePosition(this.overlayRef.current, target);
+
+        if (this.props.appendTo === 'self') {
+            DomHandler.relativePosition(this.overlayRef.current, target);
+        }
+        else {
+            this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(target) + 'px';
+            DomHandler.absolutePosition(this.overlayRef.current, target);
+        }
     }
 
     onPanelClick(event) {

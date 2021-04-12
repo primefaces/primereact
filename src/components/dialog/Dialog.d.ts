@@ -32,7 +32,7 @@ export interface DialogProps {
     className?: string;
     maskClassName?: string;
     showHeader?: boolean;
-    appendTo?: HTMLElement;
+    appendTo?: HTMLElement | string;
     baseZIndex?: number;
     maximizable?: boolean;
     blockScroll?: boolean;

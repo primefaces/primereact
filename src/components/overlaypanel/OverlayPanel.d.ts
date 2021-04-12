@@ -12,7 +12,7 @@ interface OverlayPanelProps {
     showCloseIcon?: boolean;
     style?: object;
     className?: string;
-    appendTo?: HTMLElement;
+    appendTo?: HTMLElement | string;
     ariaCloseLabel?: string;
     breakpoints?: Breakpoints;
     transitionOptions?: object;

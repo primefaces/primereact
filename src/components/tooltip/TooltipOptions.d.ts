@@ -10,7 +10,7 @@ interface EventParams {
 export default interface TooltipOptions {
     className?: string;
     style?: object;
-    appendTo?: HTMLElement;
+    appendTo?: HTMLElement | string;
     position?: PositionType;
     my?: string;
     at?: string;

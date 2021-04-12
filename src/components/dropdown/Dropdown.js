@@ -91,7 +91,7 @@ export class Dropdown extends Component {
         placeholder: PropTypes.string,
         required: PropTypes.bool,
         disabled: PropTypes.bool,
-        appendTo: PropTypes.any,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         tabIndex: PropTypes.number,
         autoFocus: PropTypes.bool,
         filterInputAutoFocus: PropTypes.bool,
@@ -618,8 +618,13 @@ export class Dropdown extends Component {
 
     alignPanel() {
         const container = this.input.parentElement;
-        this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
-        DomHandler.absolutePosition(this.overlayRef.current, container);
+        if (this.props.appendTo === 'self') {
+            DomHandler.relativePosition(this.overlayRef.current, container);
+        }
+        else {
+            this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
+            DomHandler.absolutePosition(this.overlayRef.current, container);
+        }
     }
 
     scrollInView() {

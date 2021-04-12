@@ -74,7 +74,7 @@ export class Tooltip extends Component {
         disabled: PropTypes.bool,
         className: PropTypes.string,
         style: PropTypes.object,
-        appendTo: PropTypes.object,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         position: PropTypes.string,
         my: PropTypes.string,
         at: PropTypes.string,

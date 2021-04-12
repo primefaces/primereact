@@ -139,7 +139,7 @@ interface DataTableProps {
     paginatorTemplate?: PaginatorTemplate;
     paginatorLeft?: React.ReactNode;
     paginatorRight?: React.ReactNode;
-    paginatorDropdownAppendTo?: HTMLElement;
+    paginatorDropdownAppendTo?: HTMLElement | string;
     pageLinkSize?: number;
     rowsPerPageOptions?: number[];
     currentPageReportTemplate?: string;

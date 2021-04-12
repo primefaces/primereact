@@ -39,7 +39,7 @@ export class ColorPicker extends Component {
         defaultColor: PropTypes.string,
         inline: PropTypes.bool,
         format: PropTypes.string,
-        appendTo: PropTypes.any,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         disabled: PropTypes.bool,
         tabIndex: PropTypes.number,
         inputId: PropTypes.string,
@@ -625,8 +625,14 @@ export class ColorPicker extends Component {
     alignPanel() {
         if (this.inputRef && this.inputRef.current) {
             const container = this.inputRef.current.parentElement;
-            this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
-            DomHandler.absolutePosition(this.overlayRef.current, container);
+
+            if (this.props.appendTo === 'self') {
+                DomHandler.relativePosition(this.overlayRef.current, container);
+            }
+            else {
+                this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
+                DomHandler.absolutePosition(this.overlayRef.current, container);
+            }
         }
     }
 

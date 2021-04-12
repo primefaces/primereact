@@ -53,7 +53,7 @@ export class Password extends Component {
         strongRegex: PropTypes.string,
         feedback: PropTypes.bool,
         toggleMask: PropTypes.bool,
-        appendTo: PropTypes.any,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         header: PropTypes.any,
         content: PropTypes.any,
         footer: PropTypes.any,
@@ -185,8 +185,14 @@ export class Password extends Component {
     alignOverlay() {
         if (this.inputRef && this.inputRef.current) {
             const container = this.inputRef.current.parentElement;
-            this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
-            DomHandler.absolutePosition(this.overlayRef.current, container);
+
+            if (this.props.appendTo === 'self') {
+                DomHandler.relativePosition(this.overlayRef.current, container);
+            }
+            else {
+                this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
+                DomHandler.absolutePosition(this.overlayRef.current, container);
+            }
         }
     }
 

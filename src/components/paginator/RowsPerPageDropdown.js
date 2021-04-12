@@ -22,7 +22,7 @@ export class RowsPerPageDropdown extends Component {
         page: PropTypes.number,
         pageCount: PropTypes.number,
         totalRecords: PropTypes.number,
-        appendTo: PropTypes.any,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         onChange: PropTypes.func,
         template: PropTypes.any
     }

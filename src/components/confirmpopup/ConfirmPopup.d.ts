@@ -15,7 +15,7 @@ interface ConfirmPopupProps {
     acceptClassName?: string;
     className?: string;
     style?: object;
-    appendTo?: HTMLElement;
+    appendTo?: HTMLElement | string;
     dismissable?: boolean;
     footer?: TemplateType;
     transitionOptions?: object;

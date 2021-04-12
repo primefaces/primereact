@@ -18,7 +18,7 @@ interface TooltipProps {
     disabled?: boolean;
     className?: string;
     style?: object;
-    appendTo?: HTMLElement;
+    appendTo?: HTMLElement | string;
     position?: PositionType;
     my?: string;
     at?: string;

@@ -50,7 +50,7 @@ interface DropdownProps {
     placeholder?: string;
     required?: boolean;
     disabled?: boolean;
-    appendTo?: HTMLElement;
+    appendTo?: HTMLElement | string;
     tabIndex?: number;
     autoFocus?: boolean;
     filterInputAutoFocus?: boolean;

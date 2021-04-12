@@ -131,7 +131,7 @@ interface PaginatorProps {
     leftContent?: React.ReactNode;
     rightContent?: React.ReactNode;
     currentPageReportTemplate?: string;
-    dropdownAppendTo?: HTMLElement;
+    dropdownAppendTo?: HTMLElement | string;
     onPageChange?(event: PageState): void;
 }
 

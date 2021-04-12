@@ -60,7 +60,7 @@ export class CascadeSelect extends Component {
         inputId: PropTypes.string,
         tabIndex: PropTypes.number,
         ariaLabelledBy: PropTypes.string,
-        appendTo: PropTypes.any,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         transitionOptions: PropTypes.object,
         onChange: PropTypes.func,
         onGroupChange: PropTypes.func,
@@ -278,8 +278,14 @@ export class CascadeSelect extends Component {
 
     alignOverlay() {
         const container = this.label.parentElement;
-        DomHandler.absolutePosition(this.overlayRef.current, container);
-        this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
+
+        if (this.props.appendTo === 'self') {
+            DomHandler.relativePosition(this.overlayRef.current, container);
+        }
+        else {
+            DomHandler.absolutePosition(this.overlayRef.current, container);
+            this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
+        }
     }
 
     bindOutsideClickListener() {

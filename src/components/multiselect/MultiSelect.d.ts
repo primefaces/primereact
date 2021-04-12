@@ -79,7 +79,7 @@ interface MultiSelectProps {
     dataKey?: string;
     inputId?: string;
     required?: boolean;
-    appendTo?: HTMLElement;
+    appendTo?: HTMLElement | string;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     maxSelectedLabels?: number;

@@ -75,7 +75,7 @@ export class Dialog extends Component {
         className: PropTypes.string,
         maskClassName: PropTypes.string,
         showHeader: PropTypes.bool,
-        appendTo: PropTypes.object,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         baseZIndex: PropTypes.number,
         maximizable: PropTypes.bool,
         blockScroll: PropTypes.bool,

@@ -69,7 +69,7 @@ interface AutoCompleteProps {
     disabled?: boolean;
     maxlength?: number;
     size?: number;
-    appendTo?: HTMLElement;
+    appendTo?: HTMLElement | string;
     tabIndex?: number;
     autoFocus?: boolean;
     tooltip?: string;

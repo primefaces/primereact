@@ -28,7 +28,7 @@ interface CascadeSelectProps {
     inputId?: string;
     tabIndex?: number;
     ariaLabelledBy?: string;
-    appendTo?: HTMLElement;
+    appendTo?: HTMLElement | string;
     transitionOptions?: object;
     onChange?(e: ChangeParams): void;
     onGroupChange?(e: GroupChangeParams): void;

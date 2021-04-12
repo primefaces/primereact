@@ -74,7 +74,7 @@ export class ConfirmDialog extends Component {
         acceptIcon: PropTypes.string,
         rejectClassName: PropTypes.string,
         acceptClassName: PropTypes.string,
-        appendTo: PropTypes.any,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         className: PropTypes.string,
         footer: PropTypes.any,
         breakpoints: PropTypes.object,

@@ -97,7 +97,7 @@ export class MultiSelect extends Component {
         dataKey: PropTypes.string,
         inputId: PropTypes.string,
         required: PropTypes.bool,
-        appendTo: PropTypes.object,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
         maxSelectedLabels: PropTypes.number,
@@ -363,8 +363,14 @@ export class MultiSelect extends Component {
 
     alignPanel() {
         const container = this.label.parentElement;
-        this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
-        DomHandler.absolutePosition(this.overlayRef.current, container);
+
+        if (this.props.appendTo === 'self') {
+            DomHandler.relativePosition(this.overlayRef.current, container);
+        }
+        else {
+            this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
+            DomHandler.absolutePosition(this.overlayRef.current, container);
+        }
     }
 
     onCloseClick(event) {

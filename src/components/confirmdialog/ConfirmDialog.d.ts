@@ -17,7 +17,7 @@ interface ConfirmDialogProps extends Omit<DialogProps, 'onHide'> {
     acceptIcon?: string;
     rejectClassName?: string;
     acceptClassName?: string;
-    appendTo?: HTMLElement;
+    appendTo?: HTMLElement | string;
     className?: string;
     footer?: TemplateType;
     breakpoints?: Breakpoints;

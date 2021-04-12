@@ -44,7 +44,7 @@ export class SplitButton extends Component {
         menustyle: PropTypes.object,
         menuClassName: PropTypes.string,
         tabIndex: PropTypes.number,
-        appendTo: PropTypes.object,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
         buttonTemplate: PropTypes.any,
@@ -119,8 +119,14 @@ export class SplitButton extends Component {
 
     alignPanel() {
         const container = this.defaultButton.parentElement;
-        this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
-        DomHandler.absolutePosition(this.overlayRef.current, container);
+
+        if (this.props.appendTo === 'self') {
+            DomHandler.relativePosition(this.overlayRef.current, container);
+        }
+        else {
+            this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
+            DomHandler.absolutePosition(this.overlayRef.current, container);
+        }
     }
 
     bindDocumentClickListener() {

@@ -228,7 +228,7 @@ export class ContextMenu extends Component {
         global: PropTypes.bool,
         autoZIndex: PropTypes.bool,
         baseZIndex: PropTypes.number,
-        appendTo: PropTypes.any,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         transitionOptions: PropTypes.object,
         onShow: PropTypes.func,
         onHide: PropTypes.func

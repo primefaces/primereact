@@ -102,7 +102,7 @@ interface TreeTableProps {
     paginatorLeft?: React.ReactNode;
     paginatorRight?: React.ReactNode;
     pageLinkSize?: number;
-    paginatorDropdownAppendTo?: HTMLElement;
+    paginatorDropdownAppendTo?: HTMLElement | string;
     rowsPerPageOptions?: number[];
     currentPageReportTemplate?: string;
     first?: number;

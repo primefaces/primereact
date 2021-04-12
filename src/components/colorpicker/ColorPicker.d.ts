@@ -23,7 +23,7 @@ interface ColorPickerProps {
     defaultColor?: string;
     inline?: boolean;
     format?: string;
-    appendTo?: HTMLElement;
+    appendTo?: HTMLElement | string;
     disabled?: boolean;
     tabIndex?: number;
     inputId?: string;

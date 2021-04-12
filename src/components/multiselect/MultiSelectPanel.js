@@ -17,7 +17,7 @@ class MultiSelectPanelComponent extends Component {
     };
 
     static propTypes = {
-        appendTo: PropTypes.object,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         header: PropTypes.any,
         footer: PropTypes.any,
         onClick: PropTypes.func,

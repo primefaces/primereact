@@ -14,7 +14,7 @@ interface SlideMenuProps {
     viewportHeight?: number;
     autoZIndex?: boolean;
     baseZIndex?: number;
-    appendTo?: HTMLElement;
+    appendTo?: HTMHTMLElement | stringLElement;
     transitionOptions?: object;
     onShow?(e: React.SyntheticEvent): void;
     onHide?(e: React.SyntheticEvent): void;

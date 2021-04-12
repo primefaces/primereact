@@ -31,7 +31,7 @@ export class OverlayPanel extends Component {
         showCloseIcon: PropTypes.bool,
         style: PropTypes.object,
         className: PropTypes.string,
-        appendTo: PropTypes.any,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         breakpoints: PropTypes.object,
         ariaCloseLabel: PropTypes.string,
         transitionOptions: PropTypes.object,

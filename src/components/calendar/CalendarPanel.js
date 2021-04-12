@@ -12,7 +12,7 @@ class CalendarPanelComponent extends Component {
     };
 
     static propTypes = {
-        appendTo: PropTypes.object,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         style: PropTypes.object,
         className: PropTypes.string
     };

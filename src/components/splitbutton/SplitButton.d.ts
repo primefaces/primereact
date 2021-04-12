@@ -15,7 +15,7 @@ interface SplitButtonProps {
     menuStyle?: object;
     menuClassName?: string;
     tabIndex?: number;
-    appendTo?: HTMLElement;
+    appendTo?: HTMLElement | string;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     buttonTemplate?: ButtonTemplateType;

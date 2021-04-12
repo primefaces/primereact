@@ -14,7 +14,7 @@ class ColorPickerPanelComponent extends Component {
     }
 
     static propTypes = {
-        appendTo: PropTypes.any,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         inline: PropTypes.bool,
         disabled: PropTypes.bool,
         onClick: PropTypes.func

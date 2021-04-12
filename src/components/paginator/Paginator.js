@@ -42,7 +42,7 @@ export class Paginator extends Component {
         onPageChange: PropTypes.func,
         leftContent: PropTypes.any,
         rightContent: PropTypes.any,
-        dropdownAppendTo: PropTypes.any,
+        dropdownAppendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         currentPageReportTemplate: PropTypes.any
     }
 

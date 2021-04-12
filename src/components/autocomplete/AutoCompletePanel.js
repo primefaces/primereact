@@ -31,7 +31,7 @@ class AutoCompletePanelComponent extends Component {
     static propTypes = {
         suggestions: PropTypes.array,
         field: PropTypes.string,
-        appendTo: PropTypes.any,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         optionGroupLabel: PropTypes.string,
         optionGroupChildren: PropTypes.string,
         optionGroupTemplate: PropTypes.any,

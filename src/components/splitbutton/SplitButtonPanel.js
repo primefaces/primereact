@@ -15,7 +15,7 @@ class SplitButtonPanelComponent extends Component {
     };
 
     static propTypes = {
-        appendTo: PropTypes.object,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         menustyle: PropTypes.object,
         menuClassName: PropTypes.string,
         id: PropTypes.any,

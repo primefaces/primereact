@@ -83,7 +83,7 @@ export class ConfirmPopup extends Component {
         acceptClassName: PropTypes.string,
         className: PropTypes.string,
         style: PropTypes.object,
-        appendTo: PropTypes.any,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         dismissable: PropTypes.bool,
         footer: PropTypes.any,
         onHide: PropTypes.func,

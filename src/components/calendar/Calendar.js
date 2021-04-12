@@ -147,7 +147,7 @@ export class Calendar extends Component {
         clearButtonClassName: PropTypes.string,
         autoZIndex: PropTypes.bool,
         baseZIndex: PropTypes.number,
-        appendTo: PropTypes.any,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
         ariaLabelledBy: PropTypes.string,
@@ -1622,8 +1622,14 @@ export class Calendar extends Component {
         }
         else {
             const container = this.inputRef.current.parentElement;
-            this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
-            DomHandler.absolutePosition(this.overlayRef.current, container);
+
+            if (this.props.appendTo === 'self') {
+                DomHandler.relativePosition(this.overlayRef.current, container);
+            }
+            else {
+                this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
+                DomHandler.absolutePosition(this.overlayRef.current, container);
+            }
         }
     }
 

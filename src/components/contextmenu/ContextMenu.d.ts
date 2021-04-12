@@ -9,7 +9,7 @@ interface ContextMenuProps {
     global?: boolean;
     autoZIndex?: boolean;
     baseZIndex?: number;
-    appendTo?: HTMLElement;
+    appendTo?: HTMLElement | string;
     transitionOptions?: object;
     onShow?(e: React.SyntheticEvent): void;
     onHide?(e: React.SyntheticEvent): void;
