@@ -258,6 +258,16 @@ import {ColorPicker} from 'primereact/colorpicker';
                                         <td>value: Selected color value whose type depends on the format.</td>
                                         <td>Callback to invoke when a color is selected.</td>
                                     </tr>
+                                    <tr>
+                                        <td>onShow</td>
+                                        <td>-</td>
+                                        <td>Callback to invoke when overlay panel becomes visible.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onHide</td>
+                                        <td>-</td>
+                                        <td>Callback to invoke when overlay panel becomes hidden.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

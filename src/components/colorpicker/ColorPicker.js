@@ -27,7 +27,9 @@ export class ColorPicker extends Component {
         tooltip: null,
         tooltipOptions: null,
         transitionOptions: null,
-        onChange: null
+        onChange: null,
+        onShow: null,
+        onHide: null
     }
 
     static propTypes = {
@@ -46,7 +48,9 @@ export class ColorPicker extends Component {
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
         transitionOptions: PropTypes.object,
-        onChange: PropTypes.func
+        onChange: PropTypes.func,
+        onShow: PropTypes.func,
+        onHide: PropTypes.func
     }
 
     constructor(props) {
@@ -298,6 +302,8 @@ export class ColorPicker extends Component {
         this.bindDocumentClickListener();
         this.bindScrollListener();
         this.bindResizeListener();
+
+        this.props.onShow && this.props.onShow();
     }
 
     onOverlayExit() {
@@ -308,6 +314,8 @@ export class ColorPicker extends Component {
 
     onOverlayExited() {
         ZIndexUtils.clear(this.overlayRef.current);
+
+        this.props.onHide && this.props.onHide();
     }
 
     onInputClick() {

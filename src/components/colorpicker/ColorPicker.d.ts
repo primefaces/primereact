@@ -31,6 +31,8 @@ interface ColorPickerProps {
     tooltipOptions?: TooltipOptions;
     transitionOptions?: object;
     onChange?(e: ChangeParams): void;
+    onShow?(): void;
+    onHide?(): void;
 }
 
 export class ColorPicker extends React.Component<ColorPickerProps, any> { }
