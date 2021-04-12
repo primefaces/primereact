@@ -21,6 +21,8 @@ interface SplitButtonProps {
     buttonTemplate?: ButtonTemplateType;
     transitionOptions?: object;
     onClick?(event: React.MouseEvent<HTMLElement>): void;
+    onShow?(): void;
+    onHide?(): void;
 }
 
 export class SplitButton extends React.Component<SplitButtonProps, any> { }

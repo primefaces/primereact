@@ -30,7 +30,9 @@ export class SplitButton extends Component {
         tooltipOptions: null,
         buttonTemplate: null,
         transitionOptions: null,
-        onClick: null
+        onClick: null,
+        onShow: null,
+        onHide: null
     }
 
     static propTypes = {
@@ -49,7 +51,9 @@ export class SplitButton extends Component {
         tooltipOptions: PropTypes.object,
         buttonTemplate: PropTypes.any,
         transitionOptions: PropTypes.object,
-        onClick: PropTypes.func
+        onClick: PropTypes.func,
+        onShow: PropTypes.func,
+        onHide: PropTypes.func
     }
 
     constructor(props) {
@@ -105,6 +109,8 @@ export class SplitButton extends Component {
         this.bindDocumentClickListener();
         this.bindScrollListener();
         this.bindResizeListener();
+
+        this.props.onShow && this.props.onShow();
     }
 
     onOverlayExit() {
@@ -115,6 +121,8 @@ export class SplitButton extends Component {
 
     onOverlayExited() {
         ZIndexUtils.clear(this.overlayRef.current);
+
+        this.props.onHide && this.props.onHide();
     }
 
     alignPanel() {
