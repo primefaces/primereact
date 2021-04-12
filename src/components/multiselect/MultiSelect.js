@@ -61,7 +61,9 @@ export class MultiSelect extends Component {
         transitionOptions: null,
         onChange: null,
         onFocus: null,
-        onBlur: null
+        onBlur: null,
+        onPanelShow: null,
+        onPanelHide: null
     };
 
     static propTypes = {
@@ -111,7 +113,9 @@ export class MultiSelect extends Component {
         transitionOptions: PropTypes.object,
         onChange: PropTypes.func,
         onFocus: PropTypes.func,
-        onBlur: PropTypes.func
+        onBlur: PropTypes.func,
+        onPanelShow: PropTypes.func,
+        onPanelHide: PropTypes.func
     };
 
     constructor(props) {
@@ -329,11 +333,15 @@ export class MultiSelect extends Component {
     }
 
     show() {
-        this.setState({ overlayVisible: true });
+        this.setState({ overlayVisible: true }, () => {
+            this.props.onPanelShow && this.props.onPanelShow();
+        });
     }
 
     hide() {
-        this.setState({ overlayVisible: false });
+        this.setState({ overlayVisible: false }, () => {
+            this.props.onPanelHide && this.props.onPanelHide();
+        });
     }
 
     onOverlayEnter() {
@@ -769,7 +777,7 @@ export class MultiSelect extends Component {
 
     renderFooter() {
         if (this.props.panelFooterTemplate) {
-            const content = ObjectUtils.getJSXElement(this.props.panelFooterTemplate, this.props);
+            const content = ObjectUtils.getJSXElement(this.props.panelFooterTemplate, this.props, this.hide);
 
             return (
                 <div className="p-multiselect-footer">

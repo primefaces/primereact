@@ -30,7 +30,7 @@ interface PanelHeaderTemplateParams {
 
 type PanelHeaderTemplateType = React.ReactNode | ((e: PanelHeaderTemplateParams) => React.ReactNode);
 
-type PanelFooterTemplateType = React.ReactNode | ((props: MultiSelectProps) => React.ReactNode);
+type PanelFooterTemplateType = React.ReactNode | ((props: MultiSelectProps, hide: () => void) => React.ReactNode);
 
 interface ChangeTargetOptions {
     name: string;
@@ -94,6 +94,8 @@ interface MultiSelectProps {
     onChange?(e: ChangeParams): void;
     onFocus?(event: React.FormEvent<HTMLInputElement>): void;
     onBlur?(event: React.FormEvent<HTMLInputElement>): void;
+    onPanelShow?(): void;
+    onPanelHide?(): void;
 }
 
 export class MultiSelect extends React.Component<MultiSelectProps, any> { }
