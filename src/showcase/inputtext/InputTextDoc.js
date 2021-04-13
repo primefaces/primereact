@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
-<<<<<<< Updated upstream
 import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
-=======
-import {  useLiveEditorTabs } from '../liveeditor/LiveEditor';
->>>>>>> Stashed changes
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
 
 export class InputTextDoc extends Component {
