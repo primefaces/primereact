@@ -912,6 +912,12 @@ const groupedCities = [
                                         <td>null</td>
                                         <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
                                     </tr>
+                                    <tr>
+                                        <td>showOnFocus</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>When enabled, overlay panel will be visible with input focus.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

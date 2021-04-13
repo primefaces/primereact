@@ -57,6 +57,7 @@ export class Dropdown extends Component {
         ariaLabel: null,
         ariaLabelledBy: null,
         transitionOptions: null,
+        showOnFocus: false,
         onChange: null,
         onFocus: null,
         onBlur: null,
@@ -111,6 +112,7 @@ export class Dropdown extends Component {
         ariaLabel: PropTypes.string,
         ariaLabelledBy: PropTypes.string,
         transitionOptions: PropTypes.object,
+        showOnFocus: PropTypes.bool,
         onChange: PropTypes.func,
         onFocus: PropTypes.func,
         onBlur: PropTypes.func,
@@ -173,6 +175,11 @@ export class Dropdown extends Component {
 
     onInputFocus(event) {
         event.persist();
+
+        if (this.props.showOnFocus && !this.state.overlayVisible) {
+            this.showOverlay();
+        }
+
         this.setState({ focused: true }, () => {
             if (this.props.onFocus) {
                 this.props.onFocus(event);

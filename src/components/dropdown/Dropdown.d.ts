@@ -70,6 +70,7 @@ declare namespace Dropdown {
         ariaLabel?: string;
         ariaLabelledBy?: string;
         transitionOptions?: object;
+        showOnFocus?: boolean;
         onChange?(e: ChangeParams): void;
         onFocus?(event: React.FormEvent<HTMLInputElement>): void;
         onBlur?(event: React.FormEvent<HTMLInputElement>): void;
