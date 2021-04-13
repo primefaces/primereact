@@ -3,14 +3,25 @@ import TooltipOptions from '../tooltip/TooltipOptions';
 
 declare namespace Button {
 
+    type PositionType = 'top' | 'bottom' | 'left' | 'right';
+
+    type LoadingIconType = React.ReactNode | ((props: ButtonProps) => React.ReactNode);
+
+    interface LoadingOption {
+        icon: LoadingIconType,
+        position: PositionType
+    }
+
     interface ButtonProps extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
         label?: string;
         icon?: string;
-        iconPos?: string;
+        iconPos?: PositionType;
         badge?: string;
         badgeClassName?: string;
         tooltip?: string;
         tooltipOptions?: TooltipOptions;
+        loading?: boolean;
+        loadingOptions?: LoadingOptions;
     }
 }
 

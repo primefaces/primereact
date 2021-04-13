@@ -16,7 +16,11 @@ export class ButtonComponent extends Component {
         tooltip: null,
         tooltipOptions: null,
         forwardRef: null,
-        loading: false
+        loading: false,
+        loadingOptions: {
+            icon: 'pi pi-spin pi-spinner',
+            position: 'left'
+        }
     }
 
     static propTypes = {
@@ -28,7 +32,8 @@ export class ButtonComponent extends Component {
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
         forwardRef: PropTypes.any,
-        loading: PropTypes.bool
+        loading: PropTypes.bool,
+        loadingOptions: PropTypes.any
     };
 
     getElementRef(el) {
@@ -76,18 +81,22 @@ export class ButtonComponent extends Component {
         });
     }
 
-    renderIcon() {
-        if (this.props.icon) {
-            let className = classNames(this.props.icon, 'p-c', {
-                'p-button-icon-left': this.props.iconPos === 'left' && this.props.label,
-                'p-button-icon-right': this.props.iconPos === 'right' && this.props.label,
-                'p-button-icon-top': this.props.iconPos === 'top' && this.props.label,
-                'p-button-icon-bottom': this.props.iconPos === 'bottom' && this.props.label
-            });
+    renderIcon(icon, position) {
+        if (icon) {
+            if (typeof icon === 'string') {
+                let className = classNames(icon, 'p-c', {
+                    'p-button-icon-left': position === 'left' && this.props.label,
+                    'p-button-icon-right': position === 'right' && this.props.label,
+                    'p-button-icon-top': position === 'top' && this.props.label,
+                    'p-button-icon-bottom': position === 'bottom' && this.props.label
+                });
 
-            return (
-                <span className={className}></span>
-            );
+                return (
+                    <span className={className}></span>
+                );
+            }
+
+            return ObjectUtils.getJSXElement(icon, this.props);
         }
 
         return null;
@@ -111,33 +120,16 @@ export class ButtonComponent extends Component {
         return null;
     }
 
-    renderLoading() {
-        if (this.props.loading) {
-            let className = classNames('pi pi-spin pi-spinner', 'p-c', {
-                'p-button-icon-left': this.props.iconPos === 'left' && this.props.label,
-                'p-button-icon-right': this.props.iconPos === 'right' && this.props.label,
-                'p-button-icon-top': this.props.iconPos === 'top' && this.props.label,
-                'p-button-icon-bottom': this.props.iconPos === 'bottom' && this.props.label
-            });
-
-            return (
-                <span className={className}></span>
-            );
-        }
-
-        return null;
-    }
-
     render() {
         let className = classNames('p-button p-component', this.props.className, {
             'p-button-icon-only': this.props.icon && !this.props.label,
             'p-button-vertical': (this.props.iconPos === 'top' || this.props.iconPos === 'bottom') && this.label,
             'p-disabled': this.props.disabled
         });
-        let icon = this.renderIcon();
+        let icon = this.renderIcon(this.props.icon, this.props.iconPos);
         let label = this.renderLabel();
         let badge = this.renderBadge();
-        let loading = this.renderLoading();
+        let loading = this.props.loading && this.renderIcon(this.props.loadingOptions.icon, this.props.loadingOptions.position);
 
         let buttonProps = ObjectUtils.findDiffKeys(this.props, ButtonComponent.defaultProps);
 
