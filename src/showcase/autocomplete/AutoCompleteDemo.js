@@ -112,7 +112,7 @@ export class AutoCompleteDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="autoComplete" showInputStyle>
+                    <AppInlineHeader changelogText="autoComplete">
                         <h1>AutoComplete</h1>
                         <p>AutoComplete is an input component that provides real-time suggestions when being typed.</p>
                     </AppInlineHeader> 

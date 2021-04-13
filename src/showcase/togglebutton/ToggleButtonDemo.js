@@ -19,7 +19,7 @@ export class ToggleButtonDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="toggleButton" showInputStyle>
+                    <AppInlineHeader changelogText="toggleButton">
                         <h1>ToggleButton</h1>
                         <p>ToggleButton is used to select a boolean value using a button.</p>
                     </AppInlineHeader> 

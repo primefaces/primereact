@@ -25,7 +25,7 @@ export class SliderDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="slider" showInputStyle>
+                    <AppInlineHeader changelogText="slider">
                         <h1>Slider</h1>
                         <p>Slider is a component to provide input using dragging of a handle.</p>
                     </AppInlineHeader> 

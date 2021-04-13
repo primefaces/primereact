@@ -38,7 +38,7 @@ export class SelectButtonDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="selectButton" showInputStyle>
+                    <AppInlineHeader changelogText="selectButton">
                         <h1>SelectButton</h1>
                         <p>SelectButton is used to choose single or multiple items from a list using buttons.</p>
                     </AppInlineHeader> 

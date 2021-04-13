@@ -443,10 +443,6 @@ const ButtonDemo = () => {
         return false;
     }
 
-    componentDidMount() {
-        this.props.setSourceAndExtFiles(this.sources, this.extFiles, "ButtonDemo");
-    }
-
     render() {
 
         return (

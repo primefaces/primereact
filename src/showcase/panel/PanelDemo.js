@@ -35,7 +35,7 @@ export class PanelDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="panel" showInputStyle>
+                    <AppInlineHeader changelogText="panel">
                         <h1>Panel</h1>
                         <p>Panel is a grouping component providing with content toggle feature.</p>
                     </AppInlineHeader> 

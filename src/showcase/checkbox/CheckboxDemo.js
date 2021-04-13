@@ -57,7 +57,7 @@ export class CheckboxDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="checkbox" showInputStyle>
+                    <AppInlineHeader changelogText="checkbox">
                         <h1>Checkbox</h1>
                         <p>Checkbox is an extension to standard checkbox element with skinning capabilities.</p>
                     </AppInlineHeader> 

@@ -37,7 +37,7 @@ export class PasswordDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="password" showInputStyle>
+                    <AppInlineHeader changelogText="password">
                         <h1>Password</h1>
                         <p>Password displays strength indicator for password fields.</p>
                     </AppInlineHeader> 

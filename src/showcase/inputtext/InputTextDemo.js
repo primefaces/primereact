@@ -21,7 +21,7 @@ export class InputTextDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="inputText" showInputStyle>
+                    <AppInlineHeader changelogText="inputText">
                         <h1>InputText</h1>
                         <p>InputText is an extension to standard input element with theming and keyfiltering.</p>
                     </AppInlineHeader>

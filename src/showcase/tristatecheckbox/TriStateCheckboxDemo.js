@@ -18,7 +18,7 @@ export class TriStateCheckboxDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="triStateCheckbox" showInputStyle>
+                    <AppInlineHeader changelogText="triStateCheckbox">
                         <h1>TriStateCheckbox</h1>
                         <p>TriStateCheckbox is used to select either "true", "false" or "null" as the value.</p>
                     </AppInlineHeader> 

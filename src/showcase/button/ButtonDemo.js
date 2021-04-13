@@ -7,20 +7,6 @@ import './ButtonDemo.scss';
 
 export class ButtonDemo extends Component {
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            sources: null,
-            extFiles: null,
-            name: null
-        }
-    }
-
-    setSourceAndExtFiles = (sources, extFiles, name) => {
-        this.setState({ sources, extFiles, name })
-    }
-
     render() {
         return (
             <div>
@@ -29,7 +15,7 @@ export class ButtonDemo extends Component {
                         <h1>Button</h1>
                         <p>Button is an extension to standard input element with icons and theming.</p>
                     </AppInlineHeader>
-                    {this.state.sources && this.state.extFiles && <AppDemoActions github="button/ButtonDemo.js" sources={this.state.sources} extFiles={this.state.extFiles} name={this.state.name} />}
+                    <AppDemoActions github="button/ButtonDemo.js" />
                 </div>
 
                 <div className="content-section implementation button-demo">
@@ -148,7 +134,7 @@ export class ButtonDemo extends Component {
                     </div>
                 </div>
 
-                <ButtonDoc setSourceAndExtFiles={this.setSourceAndExtFiles}></ButtonDoc>
+                <ButtonDoc></ButtonDoc>
             </div>
         )
     }

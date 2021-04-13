@@ -18,7 +18,7 @@ export class InputSwitchDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="inputSwitch" showInputStyle>
+                    <AppInlineHeader changelogText="inputSwitch">
                         <h1>InputSwitch</h1>
                         <p>InputSwitch is used to select a boolean value.</p>
                     </AppInlineHeader> 

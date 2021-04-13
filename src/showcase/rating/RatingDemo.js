@@ -19,7 +19,7 @@ export class RatingDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="rating" showInputStyle>
+                    <AppInlineHeader changelogText="rating">
                         <h1>Rating</h1>
                         <p>Rating componentsis a star based selection input.</p>
                     </AppInlineHeader> 

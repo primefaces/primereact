@@ -91,7 +91,7 @@ export class ListBoxDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="listBox" showInputStyle>
+                    <AppInlineHeader changelogText="listBox">
                         <h1>ListBox</h1>
                         <p>ListBox is used to select one or more values from a list of items.</p>
                     </AppInlineHeader> 

@@ -10,7 +10,7 @@ export class KeyFilterDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="keyFilter" showInputStyle>
+                    <AppInlineHeader changelogText="keyFilter">
                         <h1>KeyFilter</h1>
                         <p>KeyFilter feature restricts user input based on a regular expression.</p>
                     </AppInlineHeader> 

@@ -21,7 +21,7 @@ export class RadioButtonDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="radioButton" showInputStyle>
+                    <AppInlineHeader changelogText="radioButton">
                         <h1>RadioButton</h1>
                         <p>RadioButton is an extension to standard radio button element with skinning capabilities.</p>
                     </AppInlineHeader> 

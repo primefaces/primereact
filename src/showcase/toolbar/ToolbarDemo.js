@@ -57,7 +57,7 @@ export class ToolbarDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="toolbar" showInputStyle>
+                    <AppInlineHeader changelogText="toolbar">
                         <h1>Toolbar</h1>
                         <p>Toolbar is a grouping component for buttons and other content.</p>
                     </AppInlineHeader> 

@@ -30,7 +30,7 @@ export class EditorDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="editor" showInputStyle>
+                    <AppInlineHeader changelogText="editor">
                         <h1>Editor</h1>
                         <p>Editor is rich text editor component based on Quill.</p>
                     </AppInlineHeader> 

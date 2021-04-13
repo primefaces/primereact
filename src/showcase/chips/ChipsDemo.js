@@ -28,7 +28,7 @@ export class ChipsDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="chips" showInputStyle>
+                    <AppInlineHeader changelogText="chips">
                         <h1>Chips</h1>
                         <p>Chips is used to enter multiple values on an input field.</p>
                     </AppInlineHeader>

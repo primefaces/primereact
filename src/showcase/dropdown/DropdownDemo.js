@@ -128,7 +128,7 @@ export class DropdownDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="dropdown" showInputStyle>
+                    <AppInlineHeader changelogText="dropdown">
                         <h1>Dropdown</h1>
                         <p>Dropdown is used to select an item from a collection of options.</p>
                     </AppInlineHeader> 

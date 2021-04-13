@@ -36,7 +36,7 @@ export class InputNumberDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="inputNumber" showInputStyle>
+                    <AppInlineHeader changelogText="inputNumber">
                         <h1>InputNumber</h1>
                         <p>InputNumber is an input component to provide numerical input.</p>
                     </AppInlineHeader> 

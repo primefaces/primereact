@@ -23,7 +23,7 @@ export class InputGroupDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="inputGroup" showInputStyle>
+                    <AppInlineHeader changelogText="inputGroup">
                         <h1>InputGroup</h1>
                         <p>Text, icon, buttons and other content can be grouped next to an input.</p>
                     </AppInlineHeader> 

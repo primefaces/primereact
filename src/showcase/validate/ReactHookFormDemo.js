@@ -57,7 +57,7 @@ export const ReactHookFormDemo = () => {
     return (
         <div>
             <div className="content-section introduction">
-                <AppInlineHeader showInputStyle showChangelog={false}>
+                <AppInlineHeader showChangelog={false}>
                     <h1>React Hook Form</h1>
                     <p>PrimeReact components can be easily used/integrated with <a href="https://react-hook-form.com/">React Hook Form</a>. In this example, a register panel is simulated using React Hook Form.</p>
                 </AppInlineHeader> 

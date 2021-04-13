@@ -118,7 +118,7 @@ export class MultiSelectDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="multiSelect" showInputStyle>
+                    <AppInlineHeader changelogText="multiSelect">
                         <h1>MultiSelect</h1>
                         <p>MultiSelect is used to select multiple items from a collection.</p>
                     </AppInlineHeader> 

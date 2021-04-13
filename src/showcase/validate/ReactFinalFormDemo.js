@@ -81,7 +81,7 @@ export const ReactFinalFormDemo = () => {
     return (
         <div>
             <div className="content-section introduction">
-                <AppInlineHeader showInputStyle showChangelog={false}>
+                <AppInlineHeader showChangelog={false}>
                     <h1>React Final Form</h1>
                     <p>PrimeReact components can be easily used/integrated with <a href="https://final-form.org/react">React Final Form</a>. In this example, a register panel is simulated using React Final Form.</p>
                 </AppInlineHeader> 

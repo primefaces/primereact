@@ -65,7 +65,7 @@ export class FormLayoutDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="formLayout" showInputStyle>
+                    <AppInlineHeader changelogText="formLayout">
                         <h1>Form Layout</h1>
                         <p>Form layout is a CSS utility optimized for creating forms with ease. FormLayout is not included in PrimeReact as it is provided by <a href="https://github.com/primefaces/primeflex">PrimeFlex</a>,
                             a shared grid library between PrimeFaces, PrimeNG, PrimeReact and PrimeVue projects.</p>

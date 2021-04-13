@@ -108,7 +108,7 @@ export class CascadeSelectDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="cascadeSelect" showInputStyle>
+                    <AppInlineHeader changelogText="cascadeSelect">
                         <h1>CascadeSelect</h1>
                         <p>CascadeSelect displays a nested structure of options.</p>
                     </AppInlineHeader> 

@@ -90,7 +90,7 @@ export const FormikFormDemo = () => {
     return (
         <div>
             <div className="content-section introduction">
-                <AppInlineHeader showInputStyle showChangelog={false}>
+                <AppInlineHeader showChangelog={false}>
                     <h1>Formik</h1>
                     <p>PrimeReact components can be easily used/integrated with <a href="https://formik.org/">Formik</a>. In this example, a register panel is simulated using Formik.</p>
                 </AppInlineHeader> 

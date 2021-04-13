@@ -76,7 +76,7 @@ export class CalendarDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="calendar" showInputStyle>
+                    <AppInlineHeader changelogText="calendar">
                         <h1>Calendar</h1>
                         <p>Calendar is a form component to work with dates.</p>
                     </AppInlineHeader> 
