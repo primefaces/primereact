@@ -2,26 +2,31 @@ import React, { Component } from 'react';
 import { Button } from './components/button/Button';
 import { Menu } from './components/menu/Menu';
 import DomHandler from './components/utils/DomHandler';
+import { useLiveEditor } from './showcase/liveeditor/LiveEditor';
 
 export default class AppDemoActions extends Component {
 
     constructor(props) {
         super(props);
 
+        this.toggleMenu = this.toggleMenu.bind(this);
+        this.scrollToDocs = this.scrollToDocs.bind(this);
+        this.viewOnGitHub = this.viewOnGitHub.bind(this);
+
         this.items = [
             {
-                label: 'Hooks Source Demo',
-
+                label: 'Class Source Demo',
+                command: () => this.liveEditor.postSandboxParameters('class')
             },
             {
-                label: 'Class Source Demo',
-
+                label: 'Hooks Source Demo',
+                command: () => this.liveEditor.postSandboxParameters('hooks')
             },
             {
                 label: 'TS Source Demo',
-
+                command: () => this.liveEditor.postSandboxParameters('ts')
             }
-        ]
+        ];
     }
 
     toggleMenu(event) {
@@ -39,6 +44,10 @@ export default class AppDemoActions extends Component {
 
     viewOnGitHub() {
         window.open('https://github.com/primefaces/primereact/blob/master/src/showcase/' + this.props.github, '_blank');
+    }
+
+    componentDidMount() {
+        this.liveEditor = useLiveEditor();
     }
 
     render() {
