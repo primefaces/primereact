@@ -138,6 +138,7 @@ class PanelMenuSub extends Component {
                 submenuIconClassName,
                 element: content,
                 props: this.props,
+                leaf: !item.items,
                 active
             };
 
@@ -283,44 +284,46 @@ export class PanelMenu extends Component {
         }
     }
 
-    renderPanelIcon(item) {
-        const className = classNames('p-menuitem-icon', item.icon);
-
-        if (item.icon) {
-            return <span className={className}></span>
-        }
-
-        return null;
-    }
-
-    renderPanelToggleIcon(item, active) {
-        const className = classNames('p-panelmenu-icon pi', { 'pi-chevron-right': !active, ' pi-chevron-down': active });
-
-        if (item.items) {
-            return <span className={className}></span>;
-        }
-
-        return null;
-    }
-
     renderPanel(item, index) {
         const active = this.isItemActive(item);
         const className = classNames('p-panelmenu-panel', item.className);
         const headerClassName = classNames('p-component p-panelmenu-header', { 'p-highlight': active, 'p-disabled': item.disabled });
-        const toggleIcon = this.renderPanelToggleIcon(item, active);
-        const itemIcon = this.renderPanelIcon(item);
+        const submenuIconClassName = classNames('p-panelmenu-icon pi', { 'pi-chevron-right': !active, ' pi-chevron-down': active });
+        const iconClassName = classNames('p-menuitem-icon', item.icon);
+        const submenuIcon = item.items && <span className={submenuIconClassName}></span>;
+        const itemIcon = item.icon && <span className={iconClassName}></span>;
+        const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
         const contentWrapperClassName = classNames('p-toggleable-content', { 'p-toggleable-content-collapsed': !active });
         const menuContentRef = React.createRef();
+        let content = (
+            <a href={item.url || '#'} className="p-panelmenu-header-link" onClick={(e) => this.onItemClick(e, item)} aria-expanded={active}
+                id={this.state.id + '_header'} aria-controls={this.state.id + 'content'} aria-disabled={item.disabled}>
+                {submenuIcon}
+                {itemIcon}
+                {label}
+            </a>
+        );
+
+        if (item.template) {
+            const defaultContentOptions = {
+                onClick: (event) => this.onItemClick(event, item),
+                className: 'p-panelmenu-header-link',
+                labelClassName: 'p-menuitem-text',
+                submenuIconClassName,
+                iconClassName,
+                element: content,
+                props: this.props,
+                leaf: !item.items,
+                active
+            };
+
+            content = ObjectUtils.getJSXElement(item.template, item, defaultContentOptions);
+        }
 
         return (
             <div key={item.label + '_' + index} className={className} style={item.style}>
                 <div className={headerClassName} style={item.style}>
-                    <a href={item.url || '#'} className="p-panelmenu-header-link" onClick={(e) => this.onItemClick(e, item)} aria-expanded={active}
-                        id={this.state.id + '_header'} aria-controls={this.state.id + 'content'} aria-disabled={item.disabled}>
-                        {toggleIcon}
-                        {itemIcon}
-                        <span className="p-menuitem-text">{item.label}</span>
-                    </a>
+                    {content}
                 </div>
                 <CSSTransition nodeRef={menuContentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={active} unmountOnExit options={this.props.transitionOptions}>
                     <div ref={menuContentRef} className={contentWrapperClassName} role="region" id={this.state.id + '_content'} aria-labelledby={this.state.id + '_header'}>
