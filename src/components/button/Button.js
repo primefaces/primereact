@@ -117,8 +117,18 @@ export class ButtonComponent extends Component {
         return null;
     }
 
+    renderLoadingIcon() {
+        if (this.props.loading) {
+            let icon = (this.props.loadingOptions && this.loadingOptions.icon) || 'pi pi-spin pi-spinner';
+            let position = this.props.loadingOptions && this.props.loadingOptions.position;
+
+            return this.renderIcon(icon, position);
+        }
+
+        return null;
+    }
+
     render() {
-        let { icon: loadingIcon , position: loadingPosition } = this.props.loadingOptions;
         let className = classNames('p-button p-component', this.props.className, {
             'p-button-icon-only': this.props.icon && !this.props.label,
             'p-button-vertical': (this.props.iconPos === 'top' || this.props.iconPos === 'bottom') && this.label,
@@ -127,7 +137,7 @@ export class ButtonComponent extends Component {
         let icon = this.renderIcon(this.props.icon, this.props.iconPos);
         let label = this.renderLabel();
         let badge = this.renderBadge();
-        let loading = this.props.loading && this.renderIcon(loadingIcon || 'pi pi-spin pi-spinner', loadingPosition);
+        let loading = this.renderLoadingIcon();
 
         let buttonProps = ObjectUtils.findDiffKeys(this.props, ButtonComponent.defaultProps);
 
