@@ -7,7 +7,7 @@ declare namespace Button {
 
     type LoadingIconType = React.ReactNode | ((props: ButtonProps) => React.ReactNode);
 
-    interface LoadingOption {
+    interface LoadingOptions {
         icon: LoadingIconType,
         position: PositionType
     }
