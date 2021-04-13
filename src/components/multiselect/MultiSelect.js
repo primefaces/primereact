@@ -168,7 +168,7 @@ export class MultiSelect extends Component {
         let allowOptionSelect = this.allowOptionSelect();
 
         if (selected)
-            this.updateModel(originalEvent, this.props.value.filter(val => !ObjectUtils.equals(this.getOptionValue(val), optionValue, this.equalityKey())));
+            this.updateModel(originalEvent, this.props.value.filter(val => !ObjectUtils.equals(val, optionValue, this.equalityKey())));
         else if (allowOptionSelect)
             this.updateModel(originalEvent, [...this.props.value || [], optionValue]);
     }
@@ -395,12 +395,7 @@ export class MultiSelect extends Component {
             let optionValue = this.getOptionValue(option);
             let key = this.equalityKey();
 
-            for (let val of this.props.value) {
-                if (ObjectUtils.equals(this.getOptionValue(val), optionValue, key)) {
-                    selected = true;
-                    break;
-                }
-            }
+            selected = this.props.value.some(val => ObjectUtils.equals(val, optionValue, key));
         }
 
         return selected;
@@ -643,7 +638,7 @@ export class MultiSelect extends Component {
     }
 
     isOptionDisabled(option) {
-        return this.props.optionDisabled ? ObjectUtils.resolveFieldData(option, this.props.optionDisabled) : (option.disabled !== undefined ? option.disabled : false);
+        return this.props.optionDisabled ? ObjectUtils.resolveFieldData(option, this.props.optionDisabled) : (option && option['disabled'] !== undefined ? option['disabled'] : false);
     }
 
     getVisibleOptions() {
