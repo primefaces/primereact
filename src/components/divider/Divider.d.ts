@@ -1,17 +1,20 @@
 import * as React from 'react';
 
-type AlignType = 'center' | 'left' | 'right' | 'bottom' | 'top';
+declare namespace Divider {
 
-type LayoutType = 'vertical' | 'horizontal';
+    type AlignType = 'center' | 'left' | 'right' | 'bottom' | 'top';
 
-type BorderType = 'solid' | 'dashed' | 'dotted';
+    type LayoutType = 'vertical' | 'horizontal';
 
-interface DividerProps {
-    align?: AlignType;
-    layout?: LayoutType;
-    type?: BorderType;
-    style?: object;
-    className?: string;
+    type BorderType = 'solid' | 'dashed' | 'dotted';
+
+    interface DividerProps {
+        align?: AlignType;
+        layout?: LayoutType;
+        type?: BorderType;
+        style?: object;
+        className?: string;
+    }
 }
 
-export class Divider extends React.Component<DividerProps, any> { }
+export declare class Divider extends React.Component<Divider.DividerProps, any> { }

@@ -1,12 +1,15 @@
 import * as React from 'react';
 
-interface ProgressSpinnerProps {
-    id?: string;
-    style?: object;
-    className?: string;
-    strokeWidth?: string;
-    fill?: string;
-    animationDuration?: string
+declare namespace ProgressSpinner {
+
+    interface ProgressSpinnerProps {
+        id?: string;
+        style?: object;
+        className?: string;
+        strokeWidth?: string;
+        fill?: string;
+        animationDuration?: string
+    }
 }
 
-export class ProgressSpinner extends React.Component<ProgressSpinnerProps, any> { }
+export declare class ProgressSpinner extends React.Component<ProgressSpinner.ProgressSpinnerProps, any> { }

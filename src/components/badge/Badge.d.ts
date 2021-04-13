@@ -1,15 +1,18 @@
 import * as React from 'react';
 
-type SizeType = 'normal' | 'large' | 'xlarge';
+declare namespace Badge {
 
-type SeverityType = 'info' | 'success' | 'warning' | 'danger';
+    type SizeType = 'normal' | 'large' | 'xlarge';
 
-interface BadgeProps {
-    value?: any;
-    severity?: SeverityType;
-    size?: SizeType;
-    style?: object;
-    className?: string;
+    type SeverityType = 'info' | 'success' | 'warning' | 'danger';
+
+    interface BadgeProps {
+        value?: any;
+        severity?: SeverityType;
+        size?: SizeType;
+        style?: object;
+        className?: string;
+    }
 }
 
-export class Badge extends React.Component<BadgeProps, any> { }
+export declare class Badge extends React.Component<Badge.BadgeProps, any> { }

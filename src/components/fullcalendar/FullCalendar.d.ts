@@ -1,11 +1,14 @@
 import * as React from 'react';
 
-interface FullCalendarProps {
-    id?: string;
-    events?: any[];
-    style?: object;
-    className?: string;
-    options?: object;
+declare namespace FullCalendar {
+
+    interface FullCalendarProps {
+        id?: string;
+        events?: any[];
+        style?: object;
+        className?: string;
+        options?: object;
+    }
 }
 
-export class FullCalendar extends React.Component<FullCalendarProps, any> { }
+export declare class FullCalendar extends React.Component<FullCalendar.FullCalendarProps, any> { }

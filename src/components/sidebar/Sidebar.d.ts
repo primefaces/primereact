@@ -1,27 +1,30 @@
 import * as React from 'react';
 
-type PositionType = 'top' | 'bottom' | 'left' | 'right';
+declare namespace Sidebar {
 
-type TemplateType = React.ReactNode | ((props: SidebarProps) => React.ReactNode);
+    type PositionType = 'top' | 'bottom' | 'left' | 'right';
 
-interface SidebarProps {
-    id?: string;
-    style?: object;
-    className?: string;
-    visible?: boolean;
-    position?: PositionType;
-    fullScreen?: boolean;
-    blockScroll?: boolean;
-    baseZIndex?: number;
-    dismissable?: boolean;
-    showCloseIcon?: boolean;
-    ariaCloseLabel?: string;
-    closeOnEscape?: boolean;
-    icons?: TemplateType;
-    modal?: boolean;
-    transitionOptions?: object;
-    onShow?(): void;
-    onHide(): void;
+    type TemplateType = React.ReactNode | ((props: SidebarProps) => React.ReactNode);
+
+    interface SidebarProps {
+        id?: string;
+        style?: object;
+        className?: string;
+        visible?: boolean;
+        position?: PositionType;
+        fullScreen?: boolean;
+        blockScroll?: boolean;
+        baseZIndex?: number;
+        dismissable?: boolean;
+        showCloseIcon?: boolean;
+        ariaCloseLabel?: string;
+        closeOnEscape?: boolean;
+        icons?: TemplateType;
+        modal?: boolean;
+        transitionOptions?: object;
+        onShow?(): void;
+        onHide(): void;
+    }
 }
 
-export class Sidebar extends React.Component<SidebarProps, any> { }
+export declare class Sidebar extends React.Component<Sidebar.SidebarProps, any> { }

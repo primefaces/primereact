@@ -1,32 +1,38 @@
 import * as React from 'react';
 
-interface SplitterPanelProps {
-    size?: number;
-    minSize?: number;
-    style?: object;
-    className?: string;
+declare namespace SplitterPanel {
+
+    interface SplitterPanelProps {
+        size?: number;
+        minSize?: number;
+        style?: object;
+        className?: string;
+    }
 }
 
-export class SplitterPanel extends React.Component<SplitterPanelProps,any> {}
+export declare class SplitterPanel extends React.Component<SplitterPanel.SplitterPanelProps, any> { }
 
-type LayoutType = 'vertical' | 'horizontal';
+declare namespace Splitter {
 
-type StateStorageType = 'session' | 'local';
+    type LayoutType = 'vertical' | 'horizontal';
 
-interface ResizeEndParams {
-    originalEvent: React.SyntheticEvent;
-    sizes: number[];
+    type StateStorageType = 'session' | 'local';
+
+    interface ResizeEndParams {
+        originalEvent: React.SyntheticEvent;
+        sizes: number[];
+    }
+
+    interface SplitterProps {
+        id?: string;
+        className?: string;
+        style?: object;
+        layout?: LayoutType;
+        gutterSize?: number;
+        stateKey?: string;
+        stateStorage?: StateStorageType;
+        onResizeEnd?(e: ResizeEndParams): void;
+    }
 }
 
-interface SplitterProps {
-    id?: string;
-    className?: string;
-    style?: object;
-    layout?: LayoutType;
-    gutterSize?: number;
-    stateKey?: string;
-    stateStorage?: StateStorageType;
-    onResizeEnd?(e: ResizeEndParams): void;
-}
-
-export class Splitter extends React.Component<SplitterProps,any> {}
+export declare class Splitter extends React.Component<Splitter.SplitterProps, any> { }

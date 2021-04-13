@@ -1,31 +1,34 @@
 import * as React from 'react';
 
-type OrientationType = 'horizontal' | 'vertical';
+declare namespace Slider {
 
-type ValueType = number | [number, number];
+    type OrientationType = 'horizontal' | 'vertical';
 
-interface ChangeParams {
-    originalEvent: React.SyntheticEvent;
-    value: ValueType;
+    type ValueType = number | [number, number];
+
+    interface ChangeParams {
+        originalEvent: React.SyntheticEvent;
+        value: ValueType;
+    }
+
+    interface SlideEndParams extends ChangeParams { }
+
+    interface SliderProps {
+        id?: string;
+        value?: ValueType;
+        min?: number;
+        max?: number;
+        orientation?: OrientationType;
+        step?: number;
+        range?: boolean;
+        style?: object;
+        className?: string;
+        disabled?: boolean;
+        tabIndex?: number;
+        ariaLabelledBy?: string;
+        onChange?(e: ChangeParams): void;
+        onSlideEnd?(e: SlideEndParams): void;
+    }
 }
 
-interface SlideEndParams extends ChangeParams { }
-
-interface SliderProps {
-    id?: string;
-    value?: ValueType;
-    min?: number;
-    max?: number;
-    orientation?: OrientationType;
-    step?: number;
-    range?: boolean;
-    style?: object;
-    className?: string;
-    disabled?: boolean;
-    tabIndex?: number;
-    ariaLabelledBy?: string;
-    onChange?(e: ChangeParams): void;
-    onSlideEnd?(e: SlideEndParams): void;
-}
-
-export class Slider extends React.Component<SliderProps, any> { }
+export declare class Slider extends React.Component<Slider.SliderProps, any> { }

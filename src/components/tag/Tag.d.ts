@@ -1,14 +1,17 @@
 import * as React from 'react';
 
-type SeverityType = 'info' | 'success' | 'warning' | 'danger';
+declare namespace Tag {
 
-interface TagProps {
-    value?: React.ReactNode;
-    severity?: SeverityType;
-    rounded?: boolean;
-    icon?: string;
-    style?: object;
-    className?: string;
+    type SeverityType = 'info' | 'success' | 'warning' | 'danger';
+
+    interface TagProps {
+        value?: React.ReactNode;
+        severity?: SeverityType;
+        rounded?: boolean;
+        icon?: string;
+        style?: object;
+        className?: string;
+    }
 }
 
-export class Tag extends React.Component<TagProps, any> { }
+export declare class Tag extends React.Component<Tag.TagProps, any> { }
