@@ -15,7 +15,8 @@ export class ButtonComponent extends Component {
         badgeClassName: null,
         tooltip: null,
         tooltipOptions: null,
-        forwardRef: null
+        forwardRef: null,
+        loading: false
     }
 
     static propTypes = {
@@ -26,7 +27,8 @@ export class ButtonComponent extends Component {
         badgeClassName: PropTypes.string,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
-        forwardRef: PropTypes.any
+        forwardRef: PropTypes.any,
+        loading: PropTypes.bool
     };
 
     getElementRef(el) {
@@ -109,6 +111,23 @@ export class ButtonComponent extends Component {
         return null;
     }
 
+    renderLoading() {
+        if (this.props.loading) {
+            let className = classNames('pi pi-spin pi-spinner', 'p-c', {
+                'p-button-icon-left': this.props.iconPos === 'left' && this.props.label,
+                'p-button-icon-right': this.props.iconPos === 'right' && this.props.label,
+                'p-button-icon-top': this.props.iconPos === 'top' && this.props.label,
+                'p-button-icon-bottom': this.props.iconPos === 'bottom' && this.props.label
+            });
+
+            return (
+                <span className={className}></span>
+            );
+        }
+
+        return null;
+    }
+
     render() {
         let className = classNames('p-button p-component', this.props.className, {
             'p-button-icon-only': this.props.icon && !this.props.label,
@@ -118,11 +137,13 @@ export class ButtonComponent extends Component {
         let icon = this.renderIcon();
         let label = this.renderLabel();
         let badge = this.renderBadge();
+        let loading = this.renderLoading();
 
         let buttonProps = ObjectUtils.findDiffKeys(this.props, ButtonComponent.defaultProps);
 
         return (
             <button ref={(el) => this.getElementRef(el)} {...buttonProps} className={className}>
+                {loading}
                 {icon}
                 {label}
                 {this.props.children}
