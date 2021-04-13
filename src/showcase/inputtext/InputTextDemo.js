@@ -24,7 +24,8 @@ export class InputTextDemo extends Component {
                     <AppInlineHeader changelogText="inputText" showInputStyle>
                         <h1>InputText</h1>
                         <p>InputText is an extension to standard input element with theming and keyfiltering.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
+
                     <AppDemoActions github="inputtext/InputTextDemo.js" />
                 </div>
 

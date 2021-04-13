@@ -1,33 +1,43 @@
 import React, { Component } from 'react';
 import { Button } from './components/button/Button';
 import { Menu } from './components/menu/Menu';
+import DomHandler from './components/utils/DomHandler';
 
 export default class AppDemoActions extends Component {
 
-    items =[
-        {
-            label: 'Hooks Source Demo',
- 
-        },
-        {
-            label: 'Class Source Demo',
+    constructor(props) {
+        super(props);
 
-        },
-        {
-            label: 'TS Source Demo',
- 
-        }
-    ]
+        this.items = [
+            {
+                label: 'Hooks Source Demo',
 
-    toggleMenu = (event) => {
+            },
+            {
+                label: 'Class Source Demo',
+
+            },
+            {
+                label: 'TS Source Demo',
+
+            }
+        ]
+    }
+
+    toggleMenu(event) {
         this.menu.toggle(event);
     }
 
-    scrollToDocs = () => {
-        document.getElementById('app-doc').scrollIntoView({ behavior: 'smooth' });
+    scrollToDocs() {
+        const top =  DomHandler.getOffset(document.getElementById('app-doc')).top - DomHandler.getOuterHeight(document.getElementsByClassName('layout-topbar')[0], true);
+
+        window.scroll({
+            top,
+            behavior: 'smooth'
+        });
     }
 
-    viewOnGitHub = () => {
+    viewOnGitHub() {
         window.open('https://github.com/primefaces/primereact/blob/master/src/showcase/' + this.props.github, '_blank');
     }
 
@@ -42,7 +52,7 @@ export default class AppDemoActions extends Component {
                 <Button icon="pi pi-github" className="p-button-text p-button-rounded p-button-plain p-button-lg p-ml-2" onClick={this.viewOnGitHub} ></Button >
                 <Button icon="pi pi-info-circle" className="p-button-text p-button-rounded p-button-plain p-button-lg p-ml-2" onClick={this.scrollToDocs} ></Button >
                 <Menu ref={(el) => this.menu = el} model={this.items} popup style={{ width: '14rem' }} />
-            </div >
+            </div>
         )
     }
 }

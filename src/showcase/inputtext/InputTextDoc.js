@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor, useLiveEditorTabs } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
 
 export class InputTextDoc extends Component {
@@ -232,30 +232,30 @@ const InputTextDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h5>Import</h5>
-                        <CodeHighlight lang="js">
-                            {`
+<CodeHighlight lang="js">
+{`
 import { InputText } from 'primereact/inputtext';
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h5>Getting Started</h5>
                         <p>InputText is used as a controlled input with <i>value</i> and <i>onChange</i> properties.</p>
-                        <CodeHighlight>
-                            {`
+<CodeHighlight>
+{`
 <InputText value={value} onChange={(e) => setValue(e.target.value)} />
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h5>Float Label</h5>
                         <p>A floating label is implemented by wrapping the input and the label inside a container having <i>.p-float-label</i> style class.</p>
-                        <CodeHighlight>
-                            {`
+<CodeHighlight>
+{`
 <span className="p-float-label">
     <InputText id="in" value={value} onChange={(e) => setValue(e.target.value)} />
     <label htmlFor="in">Username</label>
 </span>
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h5>KeyFilter</h5>
                         <p>InputText has built-in key filtering support to block certain keys, refer to <Link to="/keyfilter">keyfilter</Link> page for more information.</p>
