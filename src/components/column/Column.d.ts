@@ -20,6 +20,26 @@ declare namespace Column {
         order: SortOrderType;
     }
 
+    interface FilterMetaData {
+        value: any;
+        matchMode: FilterMatchModeType;
+    }
+
+    interface FilterMeta {
+        [key: string]: FilterMetaData;
+    }
+
+    interface FilterParams {
+        rowData: any;
+        filters: FilterMeta;
+        props: any;
+        column: {
+            filterMeta: object | undefined | null;
+            filterField: string;
+            props: ColumnProps;
+        }
+    }
+
     export interface ColumnProps {
         columnKey?: string;
         field?: string;
@@ -63,7 +83,7 @@ declare namespace Column {
         onEditorSubmit?(e: EventParams): void;
         onEditorCancel?(e: EventParams): void;
         sortFunction?(e: SortParams): void;
-        filterFunction?(value: any, filter: any, filterLocale: string): void;
+        filterFunction?(value: any, filter: any, filterLocale: string, params: FilterParams): void;
         editor?(props: ColumnProps): React.ReactNode;
         editorValidator?(e: EventParams): boolean;
         onBeforeEditorHide?(e: EventParams): void;
