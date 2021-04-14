@@ -783,6 +783,7 @@ const template = {
         // options.currentPage: Current selected page.
         // options.totalPages: Total pages in paginator.
         // options.first: Zero-relative number of the first row to be displayed.
+        // options.last: The number of the last row to be displayed.
         // options.rows: Row count in a page.
         // options.totalRecords: Total records in paginator.
         // options.className: Style class of the default element.
