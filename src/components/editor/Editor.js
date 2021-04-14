@@ -85,7 +85,8 @@ export class Editor extends Component {
     componentDidUpdate(prevProps) {
         if (this.props.value !== prevProps.value && this.quill && !this.quill.hasFocus()) {
             if (this.props.value)
-                this.quill.setContents(this.quill.clipboard.convert(this.props.value)); else
+                this.quill.setContents(this.quill.clipboard.convert(this.props.value));
+            else
                 this.quill.setText('');
         }
     }
