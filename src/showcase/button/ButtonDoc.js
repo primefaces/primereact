@@ -55,7 +55,7 @@ export class ButtonDemo extends Component {
                     <Button label="Submit" loading />
                     <Button label="Submit" icon="pi pi-check" loading loadingOptions={{ position: 'right' }} />
                     <Button label="Submit" icon={this.state.done && 'pi pi-check'} loading={this.state.loading} onClick={this.onLoadingClick} />
-                    
+
                     <h5>Severities</h5>
                     <Button label="Primary" />
                     <Button label="Secondary" className="p-button-secondary" />
@@ -152,10 +152,44 @@ export class ButtonDemo extends Component {
                     </span>
 
                     <h5>Sizes</h5>
-                    <div className="sizes">
-                        <Button label="Small" icon="pi pi-check" className="p-button-sm"  />
-                        <Button label="Normal" icon="pi pi-check" className="p-button"  />
-                        <Button label="Large" icon="pi pi-check" className="p-button-lg" />
+                    <Button label="Small" icon="pi pi-check" className="p-button-sm"  />
+                    <Button label="Normal" icon="pi pi-check" className="p-button"  />
+                    <Button label="Large" icon="pi pi-check" className="p-button-lg" />
+
+                    <h5>Template</h5>
+                    <div className="template">
+                        <Button className="google p-p-0">
+                            <i className="pi pi-google p-px-2"></i>
+                            <span className="p-px-3">Google</span>
+                        </Button>
+                        <Button className="youtube p-p-0">
+                            <i className="pi pi-youtube p-px-2"></i>
+                            <span className="p-px-3">Youtube</span>
+                        </Button>
+                        <Button className="vimeo p-p-0">
+                            <i className="pi pi-vimeo p-px-2"></i>
+                            <span className="p-px-3">Vimeo</span>
+                        </Button>
+                        <Button className="facebook p-p-0">
+                            <i className="pi pi-facebook p-px-2"></i>
+                            <span className="p-px-3">Facebook</span>
+                        </Button>
+                        <Button className="twitter p-p-0">
+                            <i className="pi pi-twitter p-px-2"></i>
+                            <span className="p-px-3">Twitter</span>
+                        </Button>
+                        <Button className="slack p-p-0">
+                            <i className="pi pi-slack p-px-2"></i>
+                            <span className="p-px-3">Slack</span>
+                        </Button>
+                        <Button className="amazon p-p-0">
+                            <i className="pi pi-amazon p-px-2"></i>
+                            <span className="p-px-3">Amazon</span>
+                        </Button>
+                        <Button className="discord p-p-0">
+                            <i className="pi pi-discord p-px-2"></i>
+                            <span className="p-px-3">Discord</span>
+                        </Button>
                     </div>
                 </div>
             </div>
@@ -301,10 +335,44 @@ const ButtonDemo = () => {
                 </span>
 
                 <h5>Sizes</h5>
-                <div className="sizes">
-                    <Button label="Small" icon="pi pi-check" className="p-button-sm"  />
-                    <Button label="Normal" icon="pi pi-check" className="p-button"  />
-                    <Button label="Large" icon="pi pi-check" className="p-button-lg" />
+                <Button label="Small" icon="pi pi-check" className="p-button-sm"  />
+                <Button label="Normal" icon="pi pi-check" className="p-button"  />
+                <Button label="Large" icon="pi pi-check" className="p-button-lg" />
+
+                <h5>Template</h5>
+                <div className="template">
+                    <Button className="google p-p-0">
+                        <i className="pi pi-google p-px-2"></i>
+                        <span className="p-px-3">Google</span>
+                    </Button>
+                    <Button className="youtube p-p-0">
+                        <i className="pi pi-youtube p-px-2"></i>
+                        <span className="p-px-3">Youtube</span>
+                    </Button>
+                    <Button className="vimeo p-p-0">
+                        <i className="pi pi-vimeo p-px-2"></i>
+                        <span className="p-px-3">Vimeo</span>
+                    </Button>
+                    <Button className="facebook p-p-0">
+                        <i className="pi pi-facebook p-px-2"></i>
+                        <span className="p-px-3">Facebook</span>
+                    </Button>
+                    <Button className="twitter p-p-0">
+                        <i className="pi pi-twitter p-px-2"></i>
+                        <span className="p-px-3">Twitter</span>
+                    </Button>
+                    <Button className="slack p-p-0">
+                        <i className="pi pi-slack p-px-2"></i>
+                        <span className="p-px-3">Slack</span>
+                    </Button>
+                    <Button className="amazon p-p-0">
+                        <i className="pi pi-amazon p-px-2"></i>
+                        <span className="p-px-3">Amazon</span>
+                    </Button>
+                    <Button className="discord p-p-0">
+                        <i className="pi pi-discord p-px-2"></i>
+                        <span className="p-px-3">Discord</span>
+                    </Button>
                 </div>
             </div>
         </div>
@@ -327,7 +395,7 @@ const ButtonDemo = () => {
     const onLoadingClick = () => {
         setLoading(true);
         setDone(false)
-        
+
         setTimeout(() => {
             setLoading(false);
             setDone(true);
@@ -449,10 +517,44 @@ const ButtonDemo = () => {
                 </span>
 
                 <h5>Sizes</h5>
-                <div className="sizes">
-                    <Button label="Small" icon="pi pi-check" className="p-button-sm"  />
-                    <Button label="Normal" icon="pi pi-check" className="p-button"  />
-                    <Button label="Large" icon="pi pi-check" className="p-button-lg" />
+                <Button label="Small" icon="pi pi-check" className="p-button-sm"  />
+                <Button label="Normal" icon="pi pi-check" className="p-button"  />
+                <Button label="Large" icon="pi pi-check" className="p-button-lg" />
+
+                <h5>Template</h5>
+                <div className="template">
+                    <Button className="google p-p-0">
+                        <i className="pi pi-google p-px-2"></i>
+                        <span className="p-px-3">Google</span>
+                    </Button>
+                    <Button className="youtube p-p-0">
+                        <i className="pi pi-youtube p-px-2"></i>
+                        <span className="p-px-3">Youtube</span>
+                    </Button>
+                    <Button className="vimeo p-p-0">
+                        <i className="pi pi-vimeo p-px-2"></i>
+                        <span className="p-px-3">Vimeo</span>
+                    </Button>
+                    <Button className="facebook p-p-0">
+                        <i className="pi pi-facebook p-px-2"></i>
+                        <span className="p-px-3">Facebook</span>
+                    </Button>
+                    <Button className="twitter p-p-0">
+                        <i className="pi pi-twitter p-px-2"></i>
+                        <span className="p-px-3">Twitter</span>
+                    </Button>
+                    <Button className="slack p-p-0">
+                        <i className="pi pi-slack p-px-2"></i>
+                        <span className="p-px-3">Slack</span>
+                    </Button>
+                    <Button className="amazon p-p-0">
+                        <i className="pi pi-amazon p-px-2"></i>
+                        <span className="p-px-3">Amazon</span>
+                    </Button>
+                    <Button className="discord p-p-0">
+                        <i className="pi pi-discord p-px-2"></i>
+                        <span className="p-px-3">Discord</span>
+                    </Button>
                 </div>
             </div>
         </div>
@@ -466,32 +568,158 @@ const ButtonDemo = () => {
             'src/demo/ButtonDemo.css': {
                 content: `
 .button-demo .p-button {
-    margin-right: .5rem;
+    margin-right: 0.5rem;
 }
-
 .button-demo .p-buttonset .p-button {
     margin-right: 0;
 }
-
-.button-demo .sizes .button {
-    margin-bottom: .5rem;
-    display: block;
+.button-demo .template .p-button i {
+    line-height: 2.25rem;
 }
-
-.button-demo .sizes .button:last-child {
-    margin-bottom: 0;
+.button-demo .template .p-button.google {
+    background: linear-gradient(to left, var(--purple-600) 50%, var(--purple-700) 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: background-position 0.5s ease-out;
+    color: #fff;
+    border-color: var(--purple-700);
 }
-
+.button-demo .template .p-button.google:hover {
+    background-position: left bottom;
+}
+.button-demo .template .p-button.google i {
+    background-color: var(--purple-700);
+}
+.button-demo .template .p-button.google:focus {
+    box-shadow: 0 0 0 1px var(--purple-400);
+}
+.button-demo .template .p-button.youtube {
+    background: linear-gradient(to left, var(--pink-600) 50%, var(--pink-700) 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: background-position 0.5s ease-out;
+    color: #fff;
+    border-color: var(--pink-700);
+}
+.button-demo .template .p-button.youtube:hover {
+    background-position: left bottom;
+}
+.button-demo .template .p-button.youtube i {
+    background-color: var(--pink-700);
+}
+.button-demo .template .p-button.youtube:focus {
+    box-shadow: 0 0 0 1px var(--pink-400);
+}
+.button-demo .template .p-button.vimeo {
+    background: linear-gradient(to left, var(--green-200) 50%, var(--green-300) 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: background-position 0.5s ease-out;
+    color: #000;
+    border-color: var(--green-300);
+}
+.button-demo .template .p-button.vimeo:hover {
+    background-position: left bottom;
+}
+.button-demo .template .p-button.vimeo i {
+    background-color: var(--green-300);
+}
+.button-demo .template .p-button.vimeo:focus {
+    box-shadow: 0 0 0 1px var(--green-400);
+}
+.button-demo .template .p-button.facebook {
+    background: linear-gradient(to left, var(--indigo-600) 50%, var(--indigo-700) 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: background-position 0.5s ease-out;
+    color: #fff;
+    border-color: var(--indigo-700);
+}
+.button-demo .template .p-button.facebook:hover {
+    background-position: left bottom;
+}
+.button-demo .template .p-button.facebook i {
+    background-color: var(--indigo-700);
+}
+.button-demo .template .p-button.facebook:focus {
+    box-shadow: 0 0 0 1px var(--indigo-400);
+}
+.button-demo .template .p-button.twitter {
+    background: linear-gradient(to left, var(--blue-400) 50%, var(--blue-500) 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: background-position 0.5s ease-out;
+    color: #fff;
+    border-color: var(--blue-500);
+}
+.button-demo .template .p-button.twitter:hover {
+    background-position: left bottom;
+}
+.button-demo .template .p-button.twitter i {
+    background-color: var(--blue-500);
+}
+.button-demo .template .p-button.twitter:focus {
+    box-shadow: 0 0 0 1px var(--blue-200);
+}
+.button-demo .template .p-button.slack {
+    background: linear-gradient(to left, var(--orange-400) 50%, var(--orange-500) 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: background-position 0.5s ease-out;
+    color: #fff;
+    border-color: var(--orange-500);
+}
+.button-demo .template .p-button.slack:hover {
+    background-position: left bottom;
+}
+.button-demo .template .p-button.slack i {
+    background-color: var(--orange-500);
+}
+.button-demo .template .p-button.slack:focus {
+    box-shadow: 0 0 0 1px var(--orange-200);
+}
+.button-demo .template .p-button.amazon {
+    background: linear-gradient(to left, var(--yellow-400) 50%, var(--yellow-500) 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: background-position 0.5s ease-out;
+    color: #000;
+    border-color: var(--yellow-500);
+}
+.button-demo .template .p-button.amazon:hover {
+    background-position: left bottom;
+}
+.button-demo .template .p-button.amazon i {
+    background-color: var(--yellow-500);
+}
+.button-demo .template .p-button.amazon:focus {
+    box-shadow: 0 0 0 1px var(--yellow-200);
+}
+.button-demo .template .p-button.discord {
+    background: linear-gradient(to left, var(--bluegray-700) 50%, var(--bluegray-800) 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: background-position 0.5s ease-out;
+    color: #fff;
+    border-color: var(--bluegray-800);
+}
+.button-demo .template .p-button.discord:hover {
+    background-position: left bottom;
+}
+.button-demo .template .p-button.discord i {
+    background-color: var(--bluegray-800);
+}
+.button-demo .template .p-button.discord:focus {
+    box-shadow: 0 0 0 1px var(--bluegray-500);
+}
 @media screen and (max-width: 960px) {
     .button-demo .p-button {
-        margin-bottom: .5rem;
+        margin-bottom: 0.5rem;
     }
-
     .button-demo .p-button:not(.p-button-icon-only) {
         display: flex;
         width: 100%;
     }
-
     .button-demo .p-buttonset .p-button {
         margin-bottom: 0;
     }
@@ -613,7 +841,7 @@ import { Button } from 'primereact/button';
                                     </tr>
                                     <tr>
                                         <td>icon</td>
-                                        <td>string</td>
+                                        <td>any</td>
                                         <td>null</td>
                                         <td>Name of the icon.</td>
                                     </tr>
@@ -651,7 +879,7 @@ import { Button } from 'primereact/button';
                                         <td>loading</td>
                                         <td>boolean</td>
                                         <td>false</td>
-                                        <td>Loading icon of the button</td>
+                                        <td>Display loading icon of the button</td>
                                     </tr>
                                     <tr>
                                         <td>loadingOptions</td>
