@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {classNames} from "../utils/ClassNames";
 import useDeepCompareMemoized from "../utils/useDeepCompareMemoized";
-import classnames from "classnames";
 
 export const defaultProps = {
     id: null,
@@ -111,7 +110,7 @@ export function MultiStateCheckbox(props) {
             <div className={boxClass} style={currentOption?.boxStyle} role="checkbox" aria-checked={!!currentOption}>
                 {
                     currentOption && <span
-                        className={classnames('p-checkbox-icon p-c', currentOption.icon, currentOption.className)}
+                        className={classNames('p-checkbox-icon p-c', currentOption.icon, currentOption.className)}
                         style={currentOption.style}
                     />
                 }
