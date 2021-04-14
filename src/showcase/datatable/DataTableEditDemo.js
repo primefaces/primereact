@@ -575,6 +575,7 @@ const DataTableEditDemo = () => {
     const [products3, setProducts3] = useState(null);
     const [products4, setProducts4] = useState(null);
     const [editingRows, setEditingRows] = useState({});
+    const [editingCellRows, setEditingCellRows] = useState([]);
     const toast = useRef(null);
     const columns = [
         { field: 'code', header: 'Code' },
@@ -589,7 +590,6 @@ const DataTableEditDemo = () => {
         { label: 'Out of Stock', value: 'OUTOFSTOCK' }
     ];
 
-    let editingCellRows = {};
     let originalRows = {};
     let originalRows2 = {};
 
@@ -636,25 +636,31 @@ const DataTableEditDemo = () => {
 
     const onEditorInit = (e) => {
         const { rowIndex: index, field, rowData } = e.columnProps;
+        let _editingCellRows = [...editingCellRows];
         if (!editingCellRows[index]) {
-            editingCellRows[index] = {...rowData};
+          _editingCellRows[index] = { ...rowData };
         }
-        editingCellRows[index][field] = products2[index][field];
-    }
+        _editingCellRows[index][field] = products2[index][field];
+        setEditingCellRows(_editingCellRows);
+    };
 
     const onEditorCancel = (e) => {
         const { rowIndex: index, field } = e.columnProps;
         let products = [...products2];
-        products[index][field] = editingCellRows[index][field];
-        delete editingCellRows[index][field];
-
+        let _editingCellRows = [...editingCellRows];
+        products[index][field] = _editingCellRows[index][field];
+        delete _editingCellRows[index][field];
+        setEditingCellRows(_editingCellRows);
+    
         setProducts2(products);
-    }
+    };
 
     const onEditorSubmit = (e) => {
         const { rowIndex: index, field } = e.columnProps;
-        delete editingCellRows[index][field];
-    }
+        let _editingCellRows = [...editingCellRows];
+        delete _editingCellRows[index][field];
+        setEditingCellRows(_editingCellRows);
+    };
 
     const onRowEditInit = (event) => {
         originalRows[event.index] = { ...products3[event.index] };
@@ -829,6 +835,7 @@ const DataTableEditDemo = () => {
     const [products3, setProducts3] = useState(null);
     const [products4, setProducts4] = useState(null);
     const [editingRows, setEditingRows] = useState({});
+    const [editingCellRows, setEditingCellRows] = useState([]);
     const toast = useRef(null);
     const columns = [
         { field: 'code', header: 'Code' },
@@ -843,7 +850,6 @@ const DataTableEditDemo = () => {
         { label: 'Out of Stock', value: 'OUTOFSTOCK' }
     ];
 
-    let editingCellRows = {};
     let originalRows = {};
     let originalRows2 = {};
 
@@ -856,21 +862,16 @@ const DataTableEditDemo = () => {
 
     const productService = new ProductService();
 
+    const fetchProductData = (productStateKey) => {
+        productService.getProductsSmall().then(data => dataTableFuncMap[\`\${productStateKey}\`](data));
+    }
+
     useEffect(() => {
         fetchProductData('products1');
         fetchProductData('products2');
         fetchProductData('products3');
         fetchProductData('products4');
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const fetchProductData = (productStateKey) => {
-        productService.getProductsSmall().then(data => dataTableFuncMap[\`\${productStateKey}\`](data));
-    }
-
-    const positiveIntegerValidator = (e) => {
-        const { rowData, field } = e.columnProps;
-        return isPositiveInteger(rowData[field]);
-    }
 
     const emptyValueValidator = (e) => {
         const { rowData, field } = e.columnProps;
@@ -888,27 +889,38 @@ const DataTableEditDemo = () => {
         return n !== Infinity && String(n) === str && n >= 0;
     }
 
+    const positiveIntegerValidator = (e) => {
+        const { rowData, field } = e.columnProps;
+        return isPositiveInteger(rowData[field]);
+    }
+
     const onEditorInit = (e) => {
         const { rowIndex: index, field, rowData } = e.columnProps;
+        let _editingCellRows = [...editingCellRows];
         if (!editingCellRows[index]) {
-            editingCellRows[index] = {...rowData};
+          _editingCellRows[index] = { ...rowData };
         }
-        editingCellRows[index][field] = products2[index][field];
-    }
+        _editingCellRows[index][field] = products2[index][field];
+        setEditingCellRows(_editingCellRows);
+    };
 
     const onEditorCancel = (e) => {
         const { rowIndex: index, field } = e.columnProps;
         let products = [...products2];
-        products[index][field] = editingCellRows[index][field];
-        delete editingCellRows[index][field];
-
+        let _editingCellRows = [...editingCellRows];
+        products[index][field] = _editingCellRows[index][field];
+        delete _editingCellRows[index][field];
+        setEditingCellRows(_editingCellRows);
+    
         setProducts2(products);
-    }
+    };
 
     const onEditorSubmit = (e) => {
         const { rowIndex: index, field } = e.columnProps;
-        delete editingCellRows[index][field];
-    }
+        let _editingCellRows = [...editingCellRows];
+        delete _editingCellRows[index][field];
+        setEditingCellRows(_editingCellRows);
+    };
 
     const onRowEditInit = (event) => {
         originalRows[event.index] = { ...products3[event.index] };
@@ -940,7 +952,7 @@ const DataTableEditDemo = () => {
 
     const setActiveRowIndex = (index) => {
         let products = [...products4];
-        riginalRows2[index] = { ...products[index] };
+        originalRows2[index] = { ...products[index] };
         let _editingRows = { ...editingRows, ...{ [\`\${products[index].id}\`]: true } };
         setEditingRows(_editingRows);
     }
