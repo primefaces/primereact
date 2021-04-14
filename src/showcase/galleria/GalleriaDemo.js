@@ -3,7 +3,6 @@ import { PhotoService } from '../service/PhotoService';
 import { Galleria } from '../../components/galleria/Galleria';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { GalleriaDoc } from './GalleriaDoc';
-import AppDemoActions from '../../AppDemoActions';
 
 export class GalleriaDemo extends Component {
 
@@ -39,7 +38,6 @@ export class GalleriaDemo extends Component {
                         <h1>Galleria</h1>
                         <p>Galleria is a content gallery component.</p>
                     </AppInlineHeader> 
-                    <AppDemoActions github="galleria/GalleriaDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
