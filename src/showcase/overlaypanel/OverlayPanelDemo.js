@@ -8,6 +8,7 @@ import ProductService from '../service/ProductService';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { OverlayPanelDoc } from './OverlayPanelDoc';
 import './OverlayPanelDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export class OverlayPanelDemo extends Component {
 
@@ -55,7 +56,8 @@ export class OverlayPanelDemo extends Component {
                     <AppInlineHeader changelogText="overlayPanel">
                         <h1>OverlayPanel</h1>
                         <p>OverlayPanel is a container component that can overlay other components on page.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="overlaypanel/OverlayPanelDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

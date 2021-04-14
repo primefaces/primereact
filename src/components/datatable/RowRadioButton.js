@@ -27,6 +27,7 @@ export class RowRadioButton extends Component {
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
         this.onChange = this.onChange.bind(this);
+        this.onKeyDown = this.onKeyDown.bind(this);
     }
 
     onClick(event) {
@@ -52,6 +53,13 @@ export class RowRadioButton extends Component {
         this.onClick(event);
     }
 
+    onKeyDown(event) {
+        if (event.code === 'Space') {
+            this.onClick(event);
+            event.preventDefault();
+        }
+    }
+
     render() {
         const className = classNames('p-radiobutton-box p-component p-clickable', { 'p-highlight': this.props.selected, 'p-focus': this.state.focused });
         const name = `${this.props.tableId ? this.props.tableId + '_' : ''}dt_radio`;
@@ -59,7 +67,7 @@ export class RowRadioButton extends Component {
         return (
             <div className="p-radiobutton p-component">
                 <div className="p-hidden-accessible">
-                    <input name={name} ref={(el) => this.input = el} type="radio" checked={this.props.selected} onFocus={this.onFocus} onBlur={this.onBlur} onChange={this.onChange} />
+                    <input name={name} ref={(el) => this.input = el} type="radio" checked={this.props.selected} onFocus={this.onFocus} onBlur={this.onBlur} onChange={this.onChange} onKeyDown={this.onKeyDown} />
                 </div>
                 <div className={className} onClick={this.onClick} role="radio" aria-checked={this.props.selected}>
                     <div className="p-radiobutton-icon p-clickable"></div>

@@ -1,5 +1,14 @@
 import * as React from 'react';
-import {SyntheticEvent} from "react";
+
+type TemplateType = React.ReactNode | ((props: OverlayPanelProps) => React.ReactNode);
+
+type EventType = React.SyntheticEvent | undefined | null;
+
+type TargetType = HTMLElement | EventTarget | undefined | null;
+
+interface Breakpoints {
+    [key: string]: string;
+}
 
 interface OverlayPanelProps {
     id?: string;
@@ -7,14 +16,16 @@ interface OverlayPanelProps {
     showCloseIcon?: boolean;
     style?: object;
     className?: string;
-    appendTo?: any;
+    appendTo?: HTMLElement | string;
     ariaCloseLabel?: string;
-    breakpoints?: {[key: string]: string};
+    breakpoints?: Breakpoints;
+    transitionOptions?: object;
+    onShow?(): void;
     onHide?(): void;
 }
 
-export class OverlayPanel extends React.Component<OverlayPanelProps,any> {
-    public toggle(event:SyntheticEvent):void;
-    public show(event:SyntheticEvent,target:EventTarget):void;
-    public hide():void;
+export declare class OverlayPanel extends React.Component<OverlayPanelProps, any> {
+    public toggle(event: EventType, target: TargetType): void;
+    public show(event: EventType, target: TargetType): void;
+    public hide(): void;
 }

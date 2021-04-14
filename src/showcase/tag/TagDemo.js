@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Tag } from '../../components/tag/Tag';
 import { TagDoc } from './TagDoc';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class TagDemo extends Component {
     render() {
@@ -14,6 +15,7 @@ export class TagDemo extends Component {
                             <p>Tag component is used to categorize content.</p>
                         </AppInlineHeader>
                     </div>
+                    <AppDemoActions github="tag/TagDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

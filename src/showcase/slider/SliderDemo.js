@@ -4,6 +4,7 @@ import { InputText } from '../../components/inputtext/InputText';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { SliderDoc } from './SliderDoc';
 import './SliderDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export class SliderDemo extends Component {
 
@@ -14,8 +15,9 @@ export class SliderDemo extends Component {
             value1: null,
             value2: 50,
             value3: 20,
-            value4: [20,80],
-            value5: 50
+            value4: 30.5,
+            value5: [20,80],
+            value6: 50
         };
     }
 
@@ -23,10 +25,11 @@ export class SliderDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="slider" showInputStyle>
+                    <AppInlineHeader changelogText="slider">
                         <h1>Slider</h1>
                         <p>Slider is a component to provide input using dragging of a handle.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="slider/SliderDemo.js" />
                 </div>
 
                 <div className="content-section implementation slider-demo">
@@ -41,11 +44,14 @@ export class SliderDemo extends Component {
                         <h5>Step: {this.state.value3}</h5>
                         <Slider value={this.state.value3} onChange={(e) => this.setState({ value3: e.value })} step={20} />
 
-                        <h5>Range: [{this.state.value4[0]}, {this.state.value4[1]}]</h5>
-                        <Slider value={this.state.value4} onChange={(e) => this.setState({ value4: e.value })} range />
+                        <h5>Decimal Step: {this.state.value4}</h5>
+                        <Slider value={this.state.value4} onChange={(e) => this.setState({ value4: e.value })} step={0.5} />
 
-                        <h5>Vertical: {this.state.value5}</h5>
-                        <Slider value={this.state.value5} onChange={(e) => this.setState({ value5: e.value })} orientation="vertical" />
+                        <h5>Range: [{this.state.value5[0]}, {this.state.value5[1]}]</h5>
+                        <Slider value={this.state.value5} onChange={(e) => this.setState({ value5: e.value })} range />
+
+                        <h5>Vertical: {this.state.value6}</h5>
+                        <Slider value={this.state.value6} onChange={(e) => this.setState({ value6: e.value })} orientation="vertical" />
                     </div>
                 </div>
 

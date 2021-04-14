@@ -5,6 +5,7 @@ import { Button } from '../../components/button/Button';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class GalleriaFullScreenDemo extends Component {
 
@@ -79,14 +80,15 @@ export class GalleriaFullScreenDemo extends Component {
                     <AppInlineHeader changelogText="galleria">
                         <h1>Galleria <span>FullScreen</span></h1>
                         <p>In fullscreen mode content covers the whole page over a mask.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="galleria/GalleriaFullScreenDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
                     <div className="card">
                         <h5>With Thumbnails</h5>
                         <Galleria ref={(el) => this.galleria1 = el} value={this.state.images} responsiveOptions={this.responsiveOptions2} numVisible={9} style={{ maxWidth: '50%' }}
-                            circular fullScreen showItemNavigators item={this.itemTemplate} thumbnail={this.thumbnailTemplate} baseZIndex={1000}/>
+                            circular fullScreen showItemNavigators item={this.itemTemplate} thumbnail={this.thumbnailTemplate}/>
 
                         <Button label="Show" icon="pi pi-external-link" onClick={() => this.galleria1.show()} />
                     </div>
@@ -94,7 +96,7 @@ export class GalleriaFullScreenDemo extends Component {
                     <div className="card">
                         <h5>Without Thumbnails</h5>
                         <Galleria ref={(el) => this.galleria2 = el} value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={7} style={{ maxWidth: '850px' }}
-                            circular fullScreen showItemNavigators showThumbnails={false} item={this.itemTemplate} thumbnail={this.thumbnailTemplate} baseZIndex={1000} />
+                            circular fullScreen showItemNavigators showThumbnails={false} item={this.itemTemplate} thumbnail={this.thumbnailTemplate} />
 
                         <Button label="Show" icon="pi pi-external-link" onClick={() => this.galleria2.show()} />
                     </div>
@@ -102,7 +104,7 @@ export class GalleriaFullScreenDemo extends Component {
                     <div className="card">
                         <h5>Custom Content</h5>
                         <Galleria ref={(el) => this.galleria3 = el} value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={7} style={{ maxWidth: '850px' }}
-                            activeIndex={this.state.activeIndex} onItemChange={(e) => this.setState({ activeIndex: e.index })} baseZIndex={1000}
+                            activeIndex={this.state.activeIndex} onItemChange={(e) => this.setState({ activeIndex: e.index })}
                             circular fullScreen showItemNavigators showThumbnails={false} item={this.itemTemplate} thumbnail={this.thumbnailTemplate} />
 
                         <div className="p-grid" style={{ maxWidth: '400px' }}>
@@ -137,7 +139,7 @@ export class GalleriaFullScreenDemoDoc extends Component {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Source">
 <CodeHighlight lang="js">
@@ -219,7 +221,7 @@ export class GalleriaFullScreenDemo extends Component {
                 <div className="card">
                     <h5>With Thumbnails</h5>
                     <Galleria ref={(el) => this.galleria1 = el} value={this.state.images} responsiveOptions={this.responsiveOptions2} numVisible={9} style={{ maxWidth: '50%' }}
-                        circular fullScreen showItemNavigators item={this.itemTemplate} thumbnail={this.thumbnailTemplate} baseZIndex={1000}/>
+                        circular fullScreen showItemNavigators item={this.itemTemplate} thumbnail={this.thumbnailTemplate}/>
 
                     <Button label="Show" icon="pi pi-external-link" onClick={() => this.galleria1.show()} />
                 </div>
@@ -227,7 +229,7 @@ export class GalleriaFullScreenDemo extends Component {
                 <div className="card">
                     <h5>Without Thumbnails</h5>
                     <Galleria ref={(el) => this.galleria2 = el} value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={7} style={{ maxWidth: '850px' }}
-                        circular fullScreen showItemNavigators showThumbnails={false} item={this.itemTemplate} thumbnail={this.thumbnailTemplate} baseZIndex={1000}/>
+                        circular fullScreen showItemNavigators showThumbnails={false} item={this.itemTemplate} thumbnail={this.thumbnailTemplate}/>
 
                     <Button label="Show" icon="pi pi-external-link" onClick={() => this.galleria2.show()} />
                 </div>
@@ -236,7 +238,7 @@ export class GalleriaFullScreenDemo extends Component {
                     <h5>Custom Content</h5>
                     <Galleria ref={(el) => this.galleria3 = el} value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={7} style={{ maxWidth: '850px' }}
                         activeIndex={this.state.activeIndex} onItemChange={(e) => this.setState({ activeIndex: e.index })}
-                        circular fullScreen showItemNavigators showThumbnails={false} item={this.itemTemplate} thumbnail={this.thumbnailTemplate} baseZIndex={1000}/>
+                        circular fullScreen showItemNavigators showThumbnails={false} item={this.itemTemplate} thumbnail={this.thumbnailTemplate}/>
 
                     <div className="p-grid" style={{ maxWidth: '400px' }}>
                         {

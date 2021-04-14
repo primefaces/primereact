@@ -9,7 +9,8 @@ import { Tooltip } from '../../components/tooltip/Tooltip';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './PaginatorDemo.scss';
 import { PaginatorDoc } from './PaginatorDoc';
-import classNames from 'classnames';
+import { classNames } from '../../components/utils/ClassNames';
+import AppDemoActions from '../../AppDemoActions';
 
 export class PaginatorDemo extends Component {
 
@@ -199,7 +200,8 @@ export class PaginatorDemo extends Component {
                     <AppInlineHeader changelogText="paginator">
                         <h1>Paginator</h1>
                         <p>Paginator is a generic widget to display content in paged format.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="paginator/PaginatorDemo.js" />
                 </div>
 
                 <div className="content-section implementation paginator-demo">

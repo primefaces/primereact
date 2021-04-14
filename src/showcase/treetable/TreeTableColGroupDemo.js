@@ -6,6 +6,7 @@ import { Row } from '../../components/row/Row';
 import { TabView } from '../../components/tabview/TabView';
 import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class TreeTableColGroupDemo extends Component {
 
@@ -202,7 +203,8 @@ export class TreeTableColGroupDemo extends Component {
                     <AppInlineHeader changelogText="treeTable">
                         <h1>TreeTable <span>Column Grouping</span></h1>
                         <p>Columns can be grouped at header and footer using headerColumnGroup and footerColumnGroup components that both define an array of columns each having colspan and rowspan.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="treetable/TreeTableColGroupDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -869,7 +871,7 @@ const TreeTableColGroupDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'TreeTableColGroupDemo', sources: this.sources })

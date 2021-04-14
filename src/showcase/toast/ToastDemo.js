@@ -4,6 +4,7 @@ import { Button } from '../../components/button/Button';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { ToastDoc } from './ToastDoc';
 import './ToastDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export class ToastDemo extends Component {
 
@@ -93,7 +94,8 @@ export class ToastDemo extends Component {
                     <AppInlineHeader changelogText="toast">
                         <h1>Toast</h1>
                         <p>Toast is used to display messages in an overlay.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="toast/ToastDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

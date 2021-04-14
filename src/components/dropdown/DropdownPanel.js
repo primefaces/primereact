@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
-import { CSSTransition } from 'react-transition-group';
+import { CSSTransition } from '../transition/CSSTransition';
 import { Portal } from '../portal/Portal';
 
 class DropdownPanelComponent extends Component {
@@ -16,7 +16,7 @@ class DropdownPanelComponent extends Component {
     };
 
     static propTypes = {
-        appendTo: PropTypes.any,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         filter: PropTypes.any,
         scrollHeight: PropTypes.string,
         panelClassName: PropTypes.string,
@@ -28,7 +28,7 @@ class DropdownPanelComponent extends Component {
         let className = classNames('p-dropdown-panel p-component', this.props.panelClassName);
 
         return (
-            <CSSTransition nodeRef={this.props.forwardRef} classNames="p-connected-overlay" in={this.props.in} timeout={{ enter: 120, exit: 100 }}
+            <CSSTransition nodeRef={this.props.forwardRef} classNames="p-connected-overlay" in={this.props.in} timeout={{ enter: 120, exit: 100 }} options={this.props.transitionOptions}
                 unmountOnExit onEnter={this.props.onEnter} onEntering={this.props.onEntering} onEntered={this.props.onEntered} onExit={this.props.onExit} onExited={this.props.onExited}>
                 <div ref={this.props.forwardRef} className={className} style={this.props.panelStyle} onClick={this.props.onClick}>
                     {this.props.filter}

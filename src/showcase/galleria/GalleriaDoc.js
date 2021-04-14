@@ -10,7 +10,7 @@ export class GalleriaDoc extends Component {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
                         <h5>Import</h5>
@@ -288,6 +288,12 @@ const responsiveOptions = [
                             <td>0</td>
                             <td>Base zIndex value to use in layering.</td>
                         </tr>
+                        <tr>
+                            <td>transitionOptions</td>
+                            <td>object</td>
+                            <td>null</td>
+                            <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -307,6 +313,16 @@ const responsiveOptions = [
                             <td>onItemChange</td>
                             <td>event.index = index of the new item.</td>
                             <td>Callback to invoke after changing item.</td>
+                        </tr>
+                        <tr>
+                            <td>onShow</td>
+                            <td>-</td>
+                            <td>Callback to invoke when modal becomes visible.</td>
+                        </tr>
+                        <tr>
+                            <td>onHide</td>
+                            <td>-</td>
+                            <td>Callback to invoke when modal becomes hidden.</td>
                         </tr>
                     </tbody>
                 </table>

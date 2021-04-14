@@ -1,10 +1,10 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import { classNames } from '../utils/ClassNames';
-import {PickListSubList} from './PickListSubList';
-import {PickListControls} from './PickListControls';
-import {PickListTransferControls} from './PickListTransferControls';
+import { PickListSubList } from './PickListSubList';
+import { PickListControls } from './PickListControls';
+import { PickListTransferControls } from './PickListTransferControls';
 
 export class PickList extends Component {
 
@@ -101,33 +101,33 @@ export class PickList extends Component {
         if (listElement) {
             let listContainer = DomHandler.findSingle(listElement, '.p-picklist-list');
 
-            switch(direction) {
+            switch (direction) {
                 case 'up':
                     this.scrollInView(listContainer, -1);
-                break;
+                    break;
 
                 case 'top':
                     listContainer.scrollTop = 0;
-                break;
+                    break;
 
                 case 'down':
                     this.scrollInView(listContainer, 1);
-                break;
+                    break;
 
                 case 'bottom':
                     listContainer.scrollTop = listContainer.scrollHeight;
-                break;
+                    break;
 
                 default:
-                break;
+                    break;
             }
         }
     }
 
     handleChange(event, source, target) {
-        if(this.props.onChange) {
+        if (this.props.onChange) {
             this.props.onChange({
-                event: event.originalEvent,
+                originalEvent: event.originalEvent,
                 source,
                 target,
             });
@@ -137,45 +137,45 @@ export class PickList extends Component {
     onTransfer(event) {
         const { originalEvent, source, target, direction } = event;
 
-        switch(direction) {
+        switch (direction) {
             case 'toTarget':
-                if(this.props.onMoveToTarget) {
+                if (this.props.onMoveToTarget) {
                     this.props.onMoveToTarget({
                         originalEvent,
                         value: this.getSourceSelection()
                     })
                 }
-            break;
+                break;
 
             case 'allToTarget':
-                if(this.props.onMoveAllToTarget) {
+                if (this.props.onMoveAllToTarget) {
                     this.props.onMoveAllToTarget({
                         originalEvent,
                         value: this.props.source
                     })
                 }
-            break;
+                break;
 
             case 'toSource':
-                if(this.props.onMoveToSource) {
+                if (this.props.onMoveToSource) {
                     this.props.onMoveToSource({
                         originalEvent,
                         value: this.getTargetSelection()
                     })
                 }
-            break;
+                break;
 
             case 'allToSource':
-                if(this.props.onMoveAllToSource) {
+                if (this.props.onMoveAllToSource) {
                     this.props.onMoveAllToSource({
                         originalEvent,
                         value: this.props.target
                     })
                 }
-            break;
+                break;
 
             default:
-            break;
+                break;
         }
 
         this.onSelectionChange({ originalEvent, value: [] }, 'sourceSelection', this.props.onSourceSelectionChange);
@@ -193,12 +193,19 @@ export class PickList extends Component {
             callback(e);
         }
         else {
-            this.setState({[stateKey]: e.value});
+            this.setState({ [stateKey]: e.value });
+        }
+
+        if (this.state.sourceSelection.length && stateKey === 'targetSelection') {
+            this.setState({ sourceSelection: [] })
+        }
+        else if (this.state.targetSelection.length && stateKey === 'sourceSelection') {
+            this.setState({ targetSelection: [] })
         }
     }
 
     componentDidUpdate() {
-        if(this.reorderedListElement) {
+        if (this.reorderedListElement) {
             this.handleScrollPosition(this.reorderedListElement, this.reorderDirection);
             this.reorderedListElement = null;
             this.reorderDirection = null;
@@ -213,19 +220,19 @@ export class PickList extends Component {
         return (
             <div id={this.props.id} className={className} style={this.props.style}>
                 {this.props.showSourceControls && <PickListControls list={this.props.source} selection={sourceSelection}
-                            onReorder={this.onSourceReorder} className="p-picklist-source-controls" />}
+                    onReorder={this.onSourceReorder} className="p-picklist-source-controls" />}
 
                 <PickListSubList ref={(el) => this.sourceListElement = el} list={this.props.source} selection={sourceSelection} onSelectionChange={(e) => this.onSelectionChange(e, 'sourceSelection', this.props.onSourceSelectionChange)} itemTemplate={this.props.itemTemplate}
-                    header={this.props.sourceHeader} style={this.props.sourceStyle} className="p-picklist-source-wrapper" listClassName="p-picklist-source" metaKeySelection={this.props.metaKeySelection} tabIndex={this.props.tabIndex}/>
+                    header={this.props.sourceHeader} style={this.props.sourceStyle} className="p-picklist-source-wrapper" listClassName="p-picklist-source" metaKeySelection={this.props.metaKeySelection} tabIndex={this.props.tabIndex} />
 
                 <PickListTransferControls onTransfer={this.onTransfer} source={this.props.source} target={this.props.target}
                     sourceSelection={sourceSelection} targetSelection={targetSelection} />
 
-                <PickListSubList ref={(el) => this.targetListElement = el} list={this.props.target} selection={targetSelection} onSelectionChange={(e) => this.onSelectionChange(e, 'targetSelection', this.props.onTargetSelectionChange)}  itemTemplate={this.props.itemTemplate}
-                    header={this.props.targetHeader} style={this.props.targetStyle} className="p-picklist-target-wrapper" listClassName="p-picklist-target" metaKeySelection={this.props.metaKeySelection} tabIndex={this.props.tabIndex}/>
+                <PickListSubList ref={(el) => this.targetListElement = el} list={this.props.target} selection={targetSelection} onSelectionChange={(e) => this.onSelectionChange(e, 'targetSelection', this.props.onTargetSelectionChange)} itemTemplate={this.props.itemTemplate}
+                    header={this.props.targetHeader} style={this.props.targetStyle} className="p-picklist-target-wrapper" listClassName="p-picklist-target" metaKeySelection={this.props.metaKeySelection} tabIndex={this.props.tabIndex} />
 
                 {this.props.showTargetControls && <PickListControls list={this.props.target} selection={targetSelection}
-                            onReorder={this.onTargetReorder} className="p-picklist-target-controls" />}
+                    onReorder={this.onTargetReorder} className="p-picklist-target-controls" />}
 
             </div>
         );

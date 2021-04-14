@@ -4,6 +4,7 @@ import { ScrollTopDoc } from './ScrollTopDoc';
 import { ScrollTop } from '../../components/scrolltop/ScrollTop';
 import { ScrollPanel } from '../../components/scrollpanel/ScrollPanel';
 import './ScrollTopDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 
 export class ScrollTopDemo extends Component {
@@ -15,8 +16,9 @@ export class ScrollTopDemo extends Component {
                         <AppInlineHeader changelogText="scrolltop">
                             <h1>ScrollTop</h1>
                             <p>ScrollTop gets displayed after a certain scroll position and used to navigates to the top of the page quickly.</p>
-                        </AppInlineHeader>
+                        </AppInlineHeader> 
                     </div>
+                    <AppDemoActions github="scrolltop/ScrollTopDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

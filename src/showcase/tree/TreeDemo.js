@@ -4,6 +4,7 @@ import { Button } from '../../components/button/Button';
 import { NodeService } from '../service/NodeService';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { TreeDoc } from './TreeDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class TreeDemo extends Component {
 
@@ -54,7 +55,8 @@ export class TreeDemo extends Component {
                     <AppInlineHeader changelogText="tree">
                         <h1>Tree</h1>
                         <p>Tree is used to display hierarchical data.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="tree/TreeDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

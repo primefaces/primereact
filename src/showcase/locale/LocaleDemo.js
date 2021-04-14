@@ -5,7 +5,7 @@ export class LocaleDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section documentation">
+                <div className="content-section documentation" id="app-doc">
                     <h1>Internationalization and Localization</h1>
                     <p>The Locale API allows setting i18n and l7n options globally for the components.</p>
 

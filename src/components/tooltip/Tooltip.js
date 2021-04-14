@@ -5,6 +5,7 @@ import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import { Portal } from '../portal/Portal';
+import { ZIndexUtils } from '../utils/ZIndexUtils';
 
 export function tip(props) {
     let appendTo = props.appendTo || document.body;
@@ -73,7 +74,7 @@ export class Tooltip extends Component {
         disabled: PropTypes.bool,
         className: PropTypes.string,
         style: PropTypes.object,
-        appendTo: PropTypes.object,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         position: PropTypes.string,
         my: PropTypes.string,
         at: PropTypes.string,
@@ -115,15 +116,19 @@ export class Tooltip extends Component {
     }
 
     isDisabled(target) {
-        return this.getTargetOption(target, 'disabled') === 'true' || this.props.disabled;
+        return this.getTargetOption(target, 'disabled') === 'true' || this.hasTargetOption(target, 'disabled') || this.props.disabled;
     }
 
     getTargetOption(target, option) {
-        if (target && target.hasAttribute(`data-pr-${option}`)) {
+        if (this.hasTargetOption(target, `data-pr-${option}`)) {
             return target.getAttribute(`data-pr-${option}`);
         }
 
         return null;
+    }
+
+    hasTargetOption(target, option) {
+        return target && target.hasAttribute(option);
     }
 
     getEvents(target) {
@@ -181,8 +186,8 @@ export class Tooltip extends Component {
 
         const updateTooltipState = () => {
             this.updateText(this.currentTarget, () => {
-                if (this.props.autoZIndex && !this.containerEl.style.zIndex) {
-                    this.containerEl.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
+                if (this.props.autoZIndex && !ZIndexUtils.get(this.containerEl)) {
+                    ZIndexUtils.set('tooltip', this.containerEl, this.props.baseZIndex);
                 }
 
                 this.containerEl.style.left = '';
@@ -221,6 +226,7 @@ export class Tooltip extends Component {
 
             this.sendCallback(this.props.onBeforeHide, { originalEvent: e, target: this.currentTarget });
             this.applyDelay('hideDelay', () => {
+                ZIndexUtils.clear(this.containerEl);
                 DomHandler.removeClass(this.containerEl, 'p-tooltip-active');
 
                 this.setState({
@@ -236,8 +242,6 @@ export class Tooltip extends Component {
                     this.currentTarget = null;
                     this.scrollHandler = null;
                     this.sendCallback(this.props.onHide, { originalEvent: e, target: this.currentTarget });
-
-                    DomHandler.revertZIndex();
                 });
             });
         }
@@ -445,7 +449,7 @@ export class Tooltip extends Component {
             this.scrollHandler = null;
         }
 
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.containerEl);
     }
 
     renderElement() {

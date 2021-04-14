@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import ObjectUtils from '../utils/ObjectUtils';
 import FilterUtils from '../utils/FilterUtils';
-import {ListBoxItem} from './ListBoxItem';
-import {ListBoxHeader} from './ListBoxHeader';
+import { ListBoxItem } from './ListBoxItem';
+import { ListBoxHeader } from './ListBoxHeader';
 import { tip } from '../tooltip/Tooltip';
 
 export class ListBox extends Component {
@@ -48,7 +48,7 @@ export class ListBox extends Component {
         options: PropTypes.array,
         optionLabel: PropTypes.string,
         optionValue: PropTypes.string,
-        optionDisabled: PropTypes.bool,
+        optionDisabled: PropTypes.string,
         optionGroupLabel: PropTypes.string,
         optionGroupChildren: PropTypes.string,
         optionGroupTemplate: PropTypes.any,
@@ -57,6 +57,7 @@ export class ListBox extends Component {
         listStyle: PropTypes.object,
         listClassName: PropTypes.string,
         className: PropTypes.string,
+        disabled: PropTypes.bool,
         dataKey: PropTypes.string,
         multiple: PropTypes.bool,
         metaKeySelection: PropTypes.bool,
@@ -208,8 +209,8 @@ export class ListBox extends Component {
             this.props.onChange({
                 originalEvent: event,
                 value: value,
-                stopPropagation : () =>{},
-                preventDefault : () =>{},
+                stopPropagation: () => { },
+                preventDefault: () => { },
                 target: {
                     name: this.props.name,
                     id: this.props.id,
@@ -237,8 +238,8 @@ export class ListBox extends Component {
             this.props.onChange({
                 originalEvent: event,
                 value: value,
-                stopPropagation : () =>{},
-                preventDefault : () =>{},
+                stopPropagation: () => { },
+                preventDefault: () => { },
                 target: {
                     name: this.props.name,
                     id: this.props.id,
@@ -286,11 +287,11 @@ export class ListBox extends Component {
     }
 
     getOptionLabel(option) {
-        return this.props.optionLabel ? ObjectUtils.resolveFieldData(option, this.props.optionLabel) : (option['label'] !== undefined ? option['label'] : option);
+        return this.props.optionLabel ? ObjectUtils.resolveFieldData(option, this.props.optionLabel) : (option && option['label'] !== undefined ? option['label'] : option);
     }
 
     getOptionValue(option) {
-        return this.props.optionValue ? ObjectUtils.resolveFieldData(option, this.props.optionValue) : (option['value'] !== undefined ? option['value'] : option);
+        return this.props.optionValue ? ObjectUtils.resolveFieldData(option, this.props.optionValue) : (option && option['value'] !== undefined ? option['value'] : option);
     }
 
     getOptionRenderKey(option) {
@@ -298,7 +299,7 @@ export class ListBox extends Component {
     }
 
     isOptionDisabled(option) {
-        return this.props.optionDisabled ? ObjectUtils.resolveFieldData(option, this.props.optionDisabled) : false;
+        return this.props.optionDisabled ? ObjectUtils.resolveFieldData(option, this.props.optionDisabled) : (option && option['disabled'] !== undefined ? option['disabled'] : false);
     }
 
     getOptionGroupRenderKey(optionGroup) {
@@ -323,7 +324,7 @@ export class ListBox extends Component {
                 for (let optgroup of this.props.options) {
                     let filteredSubOptions = FilterUtils.filter(this.getOptionGroupChildren(optgroup), searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
                     if (filteredSubOptions && filteredSubOptions.length) {
-                        filteredGroups.push({...optgroup, ...{items: filteredSubOptions}});
+                        filteredGroups.push({ ...optgroup, ...{ items: filteredSubOptions } });
                     }
                 }
                 return filteredGroups;
@@ -348,7 +349,7 @@ export class ListBox extends Component {
 
                 return (
                     <ListBoxItem key={optionKey} label={optionLabel} option={option} template={this.props.itemTemplate} selected={this.isSelected(option)}
-                        onClick={this.onOptionSelect} onTouchEnd={this.onOptionTouchEnd} tabIndex={tabIndex} disabled={disabled}/>
+                        onClick={this.onOptionSelect} onTouchEnd={this.onOptionTouchEnd} tabIndex={tabIndex} disabled={disabled} />
                 );
             })
         )
@@ -383,7 +384,7 @@ export class ListBox extends Component {
 
                     return (
                         <ListBoxItem key={optionKey} label={optionLabel} option={option} template={this.props.itemTemplate} selected={this.isSelected(option)}
-                            onClick={this.onOptionSelect} onTouchEnd={this.onOptionTouchEnd} tabIndex={tabIndex} disabled={disabled}/>
+                            onClick={this.onOptionSelect} onTouchEnd={this.onOptionTouchEnd} tabIndex={tabIndex} disabled={disabled} />
                     );
                 });
             }

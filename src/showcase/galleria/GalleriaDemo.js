@@ -37,7 +37,7 @@ export class GalleriaDemo extends Component {
                     <AppInlineHeader changelogText="galleria">
                         <h1>Galleria</h1>
                         <p>Galleria is a content gallery component.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
                 </div>
 
                 <div className="content-section implementation">

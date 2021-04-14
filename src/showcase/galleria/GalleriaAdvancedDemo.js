@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import classNames from 'classnames';
+import { classNames } from '../../components/utils/ClassNames';
 import { PhotoService } from '../service/PhotoService';
 import { Button } from '../../components/button/Button';
 import { Galleria } from '../../components/galleria/Galleria';
@@ -7,6 +7,7 @@ import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './GalleriaDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export class GalleriaAdvancedDemo extends Component {
 
@@ -197,7 +198,8 @@ export class GalleriaAdvancedDemo extends Component {
                     <AppInlineHeader changelogText="galleria">
                         <h1>Galleria <span>Advanced</span></h1>
                         <p>Galleria can be extended further to implement complex requirements.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="galleria/GalleriaAdvancedDemo.js" />
                 </div>
 
                 <div className="content-section implementation galleria-demo">
@@ -224,14 +226,14 @@ export class GalleriaAdvancedDemoDoc extends Component {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Source">
 <CodeHighlight lang="js">
 {`
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import classNames from 'classnames';
+import { classNames } from 'primereact/utils';
 import { PhotoService } from '../service/PhotoService';
 import { Button } from 'primereact/button';
 import { Galleria } from 'primereact/galleria';

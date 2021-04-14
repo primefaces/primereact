@@ -6,6 +6,7 @@ import { NodeService } from '../service/NodeService';
 import { TabView } from '../../components/tabview/TabView';
 import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class TreeTableTemplatingDemo extends Component {
 
@@ -39,7 +40,8 @@ export class TreeTableTemplatingDemo extends Component {
                     <AppInlineHeader changelogText="treeTable">
                         <h1>TreeTable <span>Templating</span></h1>
                         <p>Custom content at header, body and footer sections are supported via templating.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="treetable/TreeTableTemplatingDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -209,7 +211,7 @@ const TreeTableTemplatingDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'TreeTableTemplatingDemo', sources: this.sources, service: 'NodeService', data: 'treetablenodes' })

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
@@ -7,14 +7,15 @@ import { classNames } from '../utils/ClassNames';
 import { DropdownPanel } from './DropdownPanel';
 import { DropdownItem } from './DropdownItem';
 import { tip } from '../tooltip/Tooltip';
-import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
+import { ZIndexUtils } from '../utils/ZIndexUtils';
 
 export class Dropdown extends Component {
 
     static defaultProps = {
         id: null,
+        inputRef: null,
         name: null,
         value: null,
         options: null,
@@ -55,21 +56,26 @@ export class Dropdown extends Component {
         tooltipOptions: null,
         ariaLabel: null,
         ariaLabelledBy: null,
+        transitionOptions: null,
+        showOnFocus: false,
         onChange: null,
         onFocus: null,
         onBlur: null,
         onMouseDown: null,
-        onContextMenu: null
+        onContextMenu: null,
+        onShow: null,
+        onHide: null
     };
 
     static propTypes = {
         id: PropTypes.string,
+        inputRef: PropTypes.any,
         name: PropTypes.string,
         value: PropTypes.any,
         options: PropTypes.array,
         optionLabel: PropTypes.string,
         optionValue: PropTypes.string,
-        optionDisabled: PropTypes.bool,
+        optionDisabled: PropTypes.string,
         optionGroupLabel: PropTypes.string,
         optionGroupChildren: PropTypes.string,
         optionGroupTemplate: PropTypes.any,
@@ -88,7 +94,7 @@ export class Dropdown extends Component {
         placeholder: PropTypes.string,
         required: PropTypes.bool,
         disabled: PropTypes.bool,
-        appendTo: PropTypes.any,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         tabIndex: PropTypes.number,
         autoFocus: PropTypes.bool,
         filterInputAutoFocus: PropTypes.bool,
@@ -105,11 +111,15 @@ export class Dropdown extends Component {
         tooltipOptions: PropTypes.object,
         ariaLabel: PropTypes.string,
         ariaLabelledBy: PropTypes.string,
+        transitionOptions: PropTypes.object,
+        showOnFocus: PropTypes.bool,
         onChange: PropTypes.func,
         onFocus: PropTypes.func,
         onBlur: PropTypes.func,
         onMouseDown: PropTypes.func,
-        onContextMenu: PropTypes.func
+        onContextMenu: PropTypes.func,
+        onShow: PropTypes.func,
+        onHide: PropTypes.func
     };
 
     constructor(props) {
@@ -138,8 +148,8 @@ export class Dropdown extends Component {
         this.resetFilter = this.resetFilter.bind(this);
         this.clear = this.clear.bind(this);
 
-        this.id = this.props.id || UniqueComponentId();
-        this.overlayRef = React.createRef();
+        this.overlayRef = createRef();
+        this.inputRef = createRef(this.props.inputRef);
     }
 
     onClick(event) {
@@ -165,6 +175,11 @@ export class Dropdown extends Component {
 
     onInputFocus(event) {
         event.persist();
+
+        if (this.props.showOnFocus && !this.state.overlayVisible) {
+            this.showOverlay();
+        }
+
         this.setState({ focused: true }, () => {
             if (this.props.onFocus) {
                 this.props.onFocus(event);
@@ -298,7 +313,7 @@ export class Dropdown extends Component {
             if (option)
                 return option;
             else if ((groupIndex + 1) !== visibleOptions.length)
-                return this.findNextOption({group: (groupIndex + 1), option: -1});
+                return this.findNextOption({ group: (groupIndex + 1), option: -1 });
             else
                 return null;
         }
@@ -308,16 +323,16 @@ export class Dropdown extends Component {
     }
 
     findNextOptionInList(list, index) {
-            let i = index + 1;
-            if (i === list.length) {
-                return null;
-            }
+        let i = index + 1;
+        if (i === list.length) {
+            return null;
+        }
 
-            let option = list[i];
-            if (this.isOptionDisabled(option))
-                return this.findNextOptionInList(i);
-            else
-                return option;
+        let option = list[i];
+        if (this.isOptionDisabled(option))
+            return this.findNextOptionInList(i);
+        else
+            return option;
     }
 
     findPrevOption(index) {
@@ -335,7 +350,7 @@ export class Dropdown extends Component {
             if (option)
                 return option;
             else if (groupIndex > 0)
-                return this.findPrevOption({group: (groupIndex - 1), option: this.getOptionGroupChildren(visibleOptions[groupIndex - 1]).length});
+                return this.findPrevOption({ group: (groupIndex - 1), option: this.getOptionGroupChildren(visibleOptions[groupIndex - 1]).length });
             else
                 return null;
         }
@@ -416,7 +431,7 @@ export class Dropdown extends Component {
     }
 
     searchOptionInGroup(index) {
-        let searchIndex = index === -1 ? {group: 0, option: -1} : index;
+        let searchIndex = index === -1 ? { group: 0, option: -1 } : index;
         let visibleOptions = this.getVisibleOptions();
 
         for (let i = searchIndex.group; i < visibleOptions.length; i++) {
@@ -430,7 +445,7 @@ export class Dropdown extends Component {
 
         for (let i = 0; i <= searchIndex.group; i++) {
             let groupOptions = this.getOptionGroupChildren(visibleOptions[i]);
-            for (let j = 0; j < (searchIndex.group === i ? searchIndex.option: groupOptions.length); j++) {
+            for (let j = 0; j < (searchIndex.group === i ? searchIndex.option : groupOptions.length); j++) {
                 if (this.matchesSearchValue(groupOptions[j])) {
                     return groupOptions[j];
                 }
@@ -446,17 +461,19 @@ export class Dropdown extends Component {
     }
 
     onEditableInputChange(event) {
-        this.props.onChange({
-            originalEvent: event.originalEvent,
-            value: event.target.value,
-            stopPropagation: () => { },
-            preventDefault: () => { },
-            target: {
-                name: this.props.name,
-                id: this.id,
+        if (this.props.onChange) {
+            this.props.onChange({
+                originalEvent: event.originalEvent,
                 value: event.target.value,
-            }
-        });
+                stopPropagation: () => { },
+                preventDefault: () => { },
+                target: {
+                    name: this.props.name,
+                    id: this.props.id,
+                    value: event.target.value,
+                }
+            });
+        }
     }
 
     onEditableInputFocus(event) {
@@ -490,17 +507,19 @@ export class Dropdown extends Component {
     }
 
     clear(event) {
-        this.props.onChange({
-            originalEvent: event,
-            value: undefined,
-            stopPropagation: () => { },
-            preventDefault: () => { },
-            target: {
-                name: this.props.name,
-                id: this.id,
-                value: undefined
-            }
-        });
+        if (this.props.onChange) {
+            this.props.onChange({
+                originalEvent: event,
+                value: undefined,
+                stopPropagation: () => { },
+                preventDefault: () => { },
+                target: {
+                    name: this.props.name,
+                    id: this.props.id,
+                    value: undefined
+                }
+            });
+        }
 
         this.updateEditableLabel();
     }
@@ -512,23 +531,25 @@ export class Dropdown extends Component {
             this.updateEditableLabel(event.option);
             const optionValue = this.getOptionValue(event.option);
 
-            this.props.onChange({
-                originalEvent: event.originalEvent,
-                value: optionValue,
-                stopPropagation: () => { },
-                preventDefault: () => { },
-                target: {
-                    name: this.props.name,
-                    id: this.id,
-                    value: optionValue
-                }
-            });
+            if (this.props.onChange) {
+                this.props.onChange({
+                    originalEvent: event.originalEvent,
+                    value: optionValue,
+                    stopPropagation: () => { },
+                    preventDefault: () => { },
+                    target: {
+                        name: this.props.name,
+                        id: this.props.id,
+                        value: optionValue
+                    }
+                });
+            }
         }
     }
 
     getSelectedOption() {
         let index = this.getSelectedOptionIndex();
-        return index !== -1 ? (this.props.optionGroupLabel ? this.getOptionGroupChildren(this.props.options[index.group])[index.option]: this.props.options[index]) : null;
+        return index !== -1 ? (this.props.optionGroupLabel ? this.getOptionGroupChildren(this.props.options[index.group])[index.option] : this.props.options[index]) : null;
     }
 
     getSelectedOptionIndex() {
@@ -537,7 +558,7 @@ export class Dropdown extends Component {
                 for (let i = 0; i < this.props.options.length; i++) {
                     let selectedOptionIndex = this.findOptionIndexInList(this.props.value, this.getOptionGroupChildren(this.props.options[i]));
                     if (selectedOptionIndex !== -1) {
-                        return {group: i, option: selectedOptionIndex};
+                        return { group: i, option: selectedOptionIndex };
                     }
                 }
             }
@@ -577,7 +598,7 @@ export class Dropdown extends Component {
     }
 
     onOverlayEnter() {
-        this.overlayRef.current.style.zIndex = String(DomHandler.generateZIndex());
+        ZIndexUtils.set('overlay', this.overlayRef.current);
         this.alignPanel();
         this.scrollInView();
     }
@@ -590,6 +611,8 @@ export class Dropdown extends Component {
         if (this.props.filter && this.props.filterInputAutoFocus) {
             this.filterInput.focus();
         }
+
+        this.props.onShow && this.props.onShow();
     }
 
     onOverlayExit() {
@@ -603,13 +626,20 @@ export class Dropdown extends Component {
             this.resetFilter();
         }
 
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.overlayRef.current);
+
+        this.props.onHide && this.props.onHide();
     }
 
     alignPanel() {
         const container = this.input.parentElement;
-        this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
-        DomHandler.absolutePosition(this.overlayRef.current, container);
+        if (this.props.appendTo === 'self') {
+            DomHandler.relativePosition(this.overlayRef.current, container);
+        }
+        else {
+            this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
+            DomHandler.absolutePosition(this.overlayRef.current, container);
+        }
     }
 
     scrollInView() {
@@ -694,11 +724,11 @@ export class Dropdown extends Component {
     }
 
     getOptionLabel(option) {
-        return this.props.optionLabel ? ObjectUtils.resolveFieldData(option, this.props.optionLabel) : (option['label'] !== undefined ? option['label'] : option);
+        return this.props.optionLabel ? ObjectUtils.resolveFieldData(option, this.props.optionLabel) : (option && option['label'] !== undefined ? option['label'] : option);
     }
 
     getOptionValue(option) {
-        return this.props.optionValue ? ObjectUtils.resolveFieldData(option, this.props.optionValue) : (option['value'] !== undefined ? option['value'] : option);
+        return this.props.optionValue ? ObjectUtils.resolveFieldData(option, this.props.optionValue) : (option && option['value'] !== undefined ? option['value'] : option);
     }
 
     getOptionRenderKey(option) {
@@ -706,7 +736,7 @@ export class Dropdown extends Component {
     }
 
     isOptionDisabled(option) {
-        return this.props.optionDisabled ? ObjectUtils.resolveFieldData(option, this.props.optionDisabled) : false;
+        return this.props.optionDisabled ? ObjectUtils.resolveFieldData(option, this.props.optionDisabled) : (option && option['disabled'] !== undefined ? option['disabled'] : false);
     }
 
     getOptionGroupRenderKey(optionGroup) {
@@ -722,7 +752,7 @@ export class Dropdown extends Component {
     }
 
     checkValidity() {
-        return this.nativeSelect.checkValidity();
+        return this.inputRef.current.checkValidity();
     }
 
     getVisibleOptions() {
@@ -735,7 +765,7 @@ export class Dropdown extends Component {
                 for (let optgroup of this.props.options) {
                     let filteredSubOptions = FilterUtils.filter(this.getOptionGroupChildren(optgroup), searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
                     if (filteredSubOptions && filteredSubOptions.length) {
-                        filteredGroups.push({...optgroup, ...{items: filteredSubOptions}});
+                        filteredGroups.push({ ...optgroup, ...{ items: filteredSubOptions } });
                     }
                 }
                 return filteredGroups;
@@ -758,7 +788,22 @@ export class Dropdown extends Component {
         }
     }
 
+    updateInputRef() {
+        let ref = this.props.inputRef;
+
+        if (ref) {
+            if (typeof ref === 'function') {
+                ref(this.inputRef.current);
+            }
+            else {
+                ref.current = this.inputRef.current;
+            }
+        }
+    }
+
     componentDidMount() {
+        this.updateInputRef();
+
         if (this.props.autoFocus && this.focusInput) {
             this.focusInput.focus();
         }
@@ -768,7 +813,7 @@ export class Dropdown extends Component {
         }
 
         this.updateInputField();
-        this.nativeSelect.selectedIndex = 1;
+        this.inputRef.current.selectedIndex = 1;
     }
 
     componentWillUnmount() {
@@ -789,7 +834,7 @@ export class Dropdown extends Component {
             this.hideTimeout = null;
         }
 
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.overlayRef.current);
     }
 
     componentDidUpdate(prevProps) {
@@ -815,7 +860,7 @@ export class Dropdown extends Component {
         }
 
         this.updateInputField();
-        this.nativeSelect.selectedIndex = 1;
+        this.inputRef.current.selectedIndex = 1;
     }
 
     renderHiddenSelect(selectedOption) {
@@ -824,7 +869,7 @@ export class Dropdown extends Component {
 
         return (
             <div className="p-hidden-accessible p-dropdown-hidden-select">
-                <select ref={(el) => this.nativeSelect = el} required={this.props.required} name={this.props.name} tabIndex={-1} aria-hidden="true">
+                <select ref={this.inputRef} required={this.props.required} name={this.props.name} tabIndex={-1} aria-hidden="true">
                     {placeHolderOption}
                     {option}
                 </select>
@@ -994,7 +1039,7 @@ export class Dropdown extends Component {
         let clearIcon = this.renderClearIcon();
 
         return (
-            <div id={this.id} ref={(el) => this.container = el} className={className} style={this.props.style} onClick={this.onClick}
+            <div id={this.props.id} ref={(el) => this.container = el} className={className} style={this.props.style} onClick={this.onClick}
                 onMouseDown={this.props.onMouseDown} onContextMenu={this.props.onContextMenu}>
                 {keyboardHelper}
                 {hiddenSelect}
@@ -1002,7 +1047,7 @@ export class Dropdown extends Component {
                 {clearIcon}
                 {dropdownIcon}
                 <DropdownPanel ref={this.overlayRef} appendTo={this.props.appendTo} panelStyle={this.props.panelStyle} panelClassName={this.props.panelClassName}
-                    scrollHeight={this.props.scrollHeight} filter={filterElement} onClick={this.onPanelClick}
+                    scrollHeight={this.props.scrollHeight} filter={filterElement} onClick={this.onPanelClick} transitionOptions={this.props.transitionOptions}
                     in={this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
                     {items}
                 </DropdownPanel>

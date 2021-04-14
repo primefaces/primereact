@@ -1,8 +1,10 @@
 import * as React from 'react';
 
-interface AvatarGroupProps {
-    style?: object;
-    className?: string;
+declare namespace AvatarGroup {
+    interface AvatarGroupProps {
+        style?: object;
+        className?: string;
+    }
 }
 
-export class AvatarGroup extends React.Component<AvatarGroupProps,any> {}
+export declare class AvatarGroup extends React.Component<AvatarGroup.AvatarGroupProps, any> { }

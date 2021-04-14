@@ -9,7 +9,8 @@ import { Dropdown } from '../../components/dropdown/Dropdown';
 import { InputText } from '../../components/inputtext/InputText';
 import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
-import classNames from 'classnames';
+import { classNames } from '../../components/utils/ClassNames';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DataTablePaginatorDemo extends Component {
 
@@ -160,7 +161,8 @@ export class DataTablePaginatorDemo extends Component {
                     <AppInlineHeader changelogText="dataTable">
                         <h1>DataTable <span>Paginator</span></h1>
                         <p>Pagination is enabled by setting paginator property to true, rows attribute defines the number of rows per page and pageLinks specify the the number of page links to display.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="datatable/DataTablePaginatorDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -218,7 +220,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
 import { CustomerService } from '../service/CustomerService';
 import { Button } from 'primereact/button';
-import classNames from 'classnames';
+import { classNames } from 'primereact/utils';
 
 export class DataTablePaginatorDemo extends Component {
 
@@ -411,7 +413,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
 import { CustomerService } from '../service/CustomerService';
 import { Button } from 'primereact/button';
-import classNames from 'classnames';
+import { classNames } from 'primereact/utils';
 
 const DataTablePaginatorDemo = () => {
     const [customers1, setCustomers1] = useState([]);
@@ -587,7 +589,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
 import { CustomerService } from '../service/CustomerService';
 import { Button } from 'primereact/button';
-import classNames from 'classnames';
+import { classNames } from 'primereact/utils';
 
 const DataTablePaginatorDemo = () => {
     const [customers1, setCustomers1] = useState([]);
@@ -760,7 +762,7 @@ const DataTablePaginatorDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'DataTablePaginatorDemo', sources: this.sources, service: 'CustomerService', data: 'customers-large' })

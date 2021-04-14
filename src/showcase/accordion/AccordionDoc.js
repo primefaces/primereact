@@ -413,7 +413,7 @@ const AccordionDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
                         <h5>Import</h5>
@@ -595,6 +595,12 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
                                         <td>pi pi-chevron-down</td>
                                         <td>Icon of an expanded tab.</td>
                                     </tr>
+                                    <tr>
+                                        <td>transitionOptions</td>
+                                        <td>object</td>
+                                        <td>null</td>
+                                        <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -613,22 +619,22 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
                                     <tr>
                                         <td>onTabOpen</td>
                                         <td>event.originalEvent: browser event  <br />
-                                event.index: Index or indexes of the tab (number or array of numbers).
-                            </td>
+                                            event.index: Index or indexes of the tab (number or array of numbers).
+                                        </td>
                                         <td>Callback to invoke when a tab gets expanded.</td>
                                     </tr>
                                     <tr>
                                         <td>onTabClose</td>
                                         <td>event.originalEvent: browser event  <br />
-                                event.index: Index of the tab
-                            </td>
+                                            event.index: Index of the tab
+                                        </td>
                                         <td>Callback to invoke when an active tab is collapsed by clicking on the header.</td>
                                     </tr>
                                     <tr>
                                         <td>onTabChange</td>
                                         <td>event.originalEvent: browser event  <br />
-                                event.index: Index of the tab
-                            </td>
+                                            event.index: Index of the tab
+                                        </td>
                                         <td>Callback to invoke when state of the accordion changes.</td>
                                     </tr>
                                 </tbody>

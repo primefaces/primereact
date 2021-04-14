@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { MegaMenu } from '../../components/megamenu/MegaMenu';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { MegaMenuDoc } from './MegaMenuDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class MegaMenuDemo extends Component {
 
@@ -129,7 +130,8 @@ export class MegaMenuDemo extends Component {
                     <AppInlineHeader changelogText="megaMenu">
                         <h1>MegaMenu</h1>
                         <p>MegaMenu is navigation component that displays submenus together.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="megamenu/MegaMenuDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

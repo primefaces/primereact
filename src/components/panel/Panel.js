@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { CSSTransition } from 'react-transition-group';
+import { CSSTransition } from '../transition/CSSTransition';
 import { classNames } from '../utils/ClassNames';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import ObjectUtils from '../utils/ObjectUtils';
@@ -19,6 +19,7 @@ export class Panel extends Component {
         expandIcon: 'pi pi-plus',
         collapseIcon: 'pi pi-minus',
         icons: null,
+        transitionOptions: null,
         onExpand: null,
         onCollapse: null,
         onToggle: null
@@ -35,6 +36,7 @@ export class Panel extends Component {
         expandIcon: PropTypes.string,
         collapseIcon: PropTypes.string,
         icons: PropTypes.any,
+        transitionOptions: PropTypes.object,
         onExpand: PropTypes.func,
         onCollapse: PropTypes.func,
         onToggle: PropTypes.func
@@ -42,14 +44,20 @@ export class Panel extends Component {
 
     constructor(props) {
         super(props);
+        let state = {
+            id: this.props.id
+        };
+
         if (!this.props.onToggle) {
-            this.state = {
+            state = {
+                ...state,
                 collapsed: this.props.collapsed
             };
         }
 
+        this.state = state;
+
         this.toggle = this.toggle.bind(this);
-        this.id = this.props.id || UniqueComponentId();
         this.contentRef = React.createRef();
     }
 
@@ -97,10 +105,16 @@ export class Panel extends Component {
         return this.props.toggleable ? (this.props.onToggle ? this.props.collapsed : this.state.collapsed) : false;
     }
 
+    componentDidMount() {
+        if (!this.state.id) {
+            this.setState({ id: UniqueComponentId() });
+        }
+    }
+
     renderToggleIcon(collapsed) {
         if (this.props.toggleable) {
-            const id = this.id + '_label';
-            const ariaControls = this.id + '_content';
+            const id = this.state.id + '_label';
+            const ariaControls = this.state.id + '_content';
             const toggleIcon = collapsed ? this.props.expandIcon : this.props.collapseIcon;
 
             return (
@@ -119,7 +133,7 @@ export class Panel extends Component {
         const header = ObjectUtils.getJSXElement(this.props.header, this.props);
         const icons = ObjectUtils.getJSXElement(this.props.icons, this.props);
         const togglerElement = this.renderToggleIcon(collapsed);
-        const titleElement = <span className="p-panel-title" id={this.id + '_header'}>{header}</span>;
+        const titleElement = <span className="p-panel-title" id={this.state.id + '_header'}>{header}</span>;
         const iconsElement = (
             <div className="p-panel-icons">
                 {icons}
@@ -159,11 +173,11 @@ export class Panel extends Component {
     }
 
     renderContent(collapsed) {
-        const id = this.id + '_content';
+        const id = this.state.id + '_content';
 
         return (
-            <CSSTransition nodeRef={this.contentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={!collapsed} unmountOnExit>
-                <div ref={this.contentRef} className="p-toggleable-content" aria-hidden={collapsed} role="region" id={id} aria-labelledby={this.id + '_header'}>
+            <CSSTransition nodeRef={this.contentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={!collapsed} unmountOnExit options={this.props.transitionOptions}>
+                <div ref={this.contentRef} className="p-toggleable-content" aria-hidden={collapsed} role="region" id={id} aria-labelledby={this.state.id + '_header'}>
                     <div className="p-panel-content">
                         {this.props.children}
                     </div>

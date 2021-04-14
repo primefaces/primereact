@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ColorPicker } from '../../components/colorpicker/ColorPicker';
 import { ColorPickerDoc } from './ColorPickerDoc';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class ColorPickerDemo extends Component {
 
@@ -21,6 +22,7 @@ export class ColorPickerDemo extends Component {
                         <h1>ColorPicker</h1>
                         <p>ColorPicker is an input component to select a color.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="colorpicker/ColorPickerDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

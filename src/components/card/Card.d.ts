@@ -1,13 +1,18 @@
 import * as React from 'react';
 
-interface CardProps {
-    id?: string;
-    header?: any;
-    footer?: any;
-    title?: any;
-    subTitle?: any;
-    style?: object;
-    className?: string;
+declare namespace Card {
+
+    type TemplateTypes = React.ReactNode | ((props: CardProps) => React.ReactNode);
+
+    interface CardProps {
+        id?: string;
+        header?: TemplateTypes;
+        footer?: TemplateTypes;
+        title?: TemplateTypes;
+        subTitle?: TemplateTypes;
+        style?: object;
+        className?: string;
+    }
 }
 
-export class Card extends React.Component<CardProps,any> {}
+export declare class Card extends React.Component<Card.CardProps, any> { }

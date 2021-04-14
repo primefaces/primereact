@@ -5,6 +5,7 @@ import { NodeService } from '../service/NodeService';
 import { TabView } from '../../components/tabview/TabView';
 import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class TreeEventsDemo extends Component {
 
@@ -50,7 +51,8 @@ export class TreeEventsDemo extends Component {
                     <AppInlineHeader changelogText="tree">
                         <h1>Tree <span>Events</span></h1>
                         <p>An event is provided each type of user interaction such as expand, collapse and selection.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="tree/TreeEventsDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -237,7 +239,7 @@ const TreeEventsDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'TreeEventsDemo', sources: this.sources, service: 'NodeService', data: 'treenodes' })

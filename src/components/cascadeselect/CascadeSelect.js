@@ -1,22 +1,24 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import ObjectUtils from '../utils/ObjectUtils';
 import DomHandler from '../utils/DomHandler';
-import UniqueComponentId from '../utils/UniqueComponentId';
-import { CSSTransition } from "react-transition-group";
+import { CSSTransition } from '../transition/CSSTransition';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import { CascadeSelectSub } from "./CascadeSelectSub";
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 import { Portal } from '../portal/Portal';
+import { ZIndexUtils } from '../utils/ZIndexUtils';
 
 export class CascadeSelect extends Component {
 
     static defaultProps = {
         id: null,
+        inputRef: null,
         style: null,
         className: null,
         value: null,
+        name: null,
         options: null,
         optionLabel: null,
         optionValue: null,
@@ -30,6 +32,7 @@ export class CascadeSelect extends Component {
         tabIndex: null,
         ariaLabelledBy: null,
         appendTo: null,
+        transitionOptions: null,
         onChange: null,
         onGroupChange: null,
         onBeforeShow: null,
@@ -40,9 +43,11 @@ export class CascadeSelect extends Component {
 
     static propTypes = {
         id: PropTypes.string,
+        inputRef: PropTypes.any,
         style: PropTypes.object,
         className: PropTypes.string,
         value: PropTypes.any,
+        name: PropTypes.string,
         options: PropTypes.array,
         optionLabel: PropTypes.string,
         optionValue: PropTypes.string,
@@ -55,7 +60,8 @@ export class CascadeSelect extends Component {
         inputId: PropTypes.string,
         tabIndex: PropTypes.number,
         ariaLabelledBy: PropTypes.string,
-        appendTo: PropTypes.any,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+        transitionOptions: PropTypes.object,
         onChange: PropTypes.func,
         onGroupChange: PropTypes.func,
         onBeforeShow: PropTypes.func,
@@ -74,8 +80,8 @@ export class CascadeSelect extends Component {
 
         this.dirty = false;
         this.selectionPath = null;
-        this.id = this.props.id || UniqueComponentId();
-        this.overlayRef = React.createRef();
+        this.overlayRef = createRef();
+        this.inputRef = createRef(this.props.inputRef);
 
         this.hide = this.hide.bind(this);
         this.onClick = this.onClick.bind(this);
@@ -101,7 +107,7 @@ export class CascadeSelect extends Component {
 
         this.updateSelectionPath();
         this.hide();
-        this.focusInput.focus();
+        this.inputRef.current.focus();
     }
 
     onOptionGroupSelect(event) {
@@ -167,7 +173,7 @@ export class CascadeSelect extends Component {
 
         const overlay = this.overlayRef ? this.overlayRef.current : null;
         if (!overlay || !overlay.contains(event.target)) {
-            this.focusInput.focus();
+            this.inputRef.current.focus();
 
             if (this.state.overlayVisible) {
                 this.hide();
@@ -238,12 +244,12 @@ export class CascadeSelect extends Component {
             this.props.onBeforeHide();
         }
         this.setState({ overlayVisible: false }, () => {
-            this.focusInput.focus();
+            this.inputRef.current.focus();
         });
     }
 
     onOverlayEnter() {
-        this.overlayRef.current.style.zIndex = String(DomHandler.generateZIndex());
+        ZIndexUtils.set('overlay', this.overlayRef.current);
         this.alignOverlay();
     }
 
@@ -251,9 +257,8 @@ export class CascadeSelect extends Component {
         this.bindOutsideClickListener();
         this.bindScrollListener();
         this.bindResizeListener();
-        if (this.props.onShow) {
-            this.props.onShow();
-        }
+
+        this.props.onShow && this.props.onShow();
     }
 
     onOverlayExit() {
@@ -261,19 +266,24 @@ export class CascadeSelect extends Component {
         this.unbindScrollListener();
         this.unbindResizeListener();
         this.dirty = false;
-        if (this.props.onHide) {
-            this.props.onHide();
-        }
     }
 
     onOverlayExited() {
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.overlayRef.current);
+
+        this.props.onHide && this.props.onHide();
     }
 
     alignOverlay() {
-        const container = this.input.parentElement;
-        DomHandler.absolutePosition(this.overlayRef.current, container);
-        this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
+        const container = this.label.parentElement;
+
+        if (this.props.appendTo === 'self') {
+            DomHandler.relativePosition(this.overlayRef.current, container);
+        }
+        else {
+            DomHandler.absolutePosition(this.overlayRef.current, container);
+            this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
+        }
     }
 
     bindOutsideClickListener() {
@@ -335,7 +345,21 @@ export class CascadeSelect extends Component {
             || (this.overlayRef && this.overlayRef.current.contains(event.target)));
     }
 
+    updateInputRef() {
+        let ref = this.props.inputRef;
+
+        if (ref) {
+            if (typeof ref === 'function') {
+                ref(this.inputRef.current);
+            }
+            else {
+                ref.current = this.inputRef.current;
+            }
+        }
+    }
+
     componentDidMount() {
+        this.updateInputRef();
         this.updateSelectionPath();
     }
 
@@ -348,7 +372,7 @@ export class CascadeSelect extends Component {
             this.scrollHandler = null;
         }
 
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.overlayRef.current);
     }
 
     componentDidUpdate(prevProps) {
@@ -358,23 +382,25 @@ export class CascadeSelect extends Component {
     }
 
     renderKeyboardHelper() {
+        const value = this.props.value ? this.getOptionLabel(this.props.value) : null;
+
         return (
             <div className="p-hidden-accessible">
-                <input ref={(el) => this.focusInput = el} type="text" id={this.props.inputId} readOnly disabled={this.props.disabled}
+                <input ref={this.inputRef} type="text" id={this.props.inputId} name={this.props.name} defaultValue={value} readOnly disabled={this.props.disabled}
                     onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onInputKeyDown}
                     tabIndex={this.props.tabIndex} aria-haspopup="listbox" aria-labelledby={this.props.ariaLabelledBy} />
             </div>
         );
     }
 
-    renderLabel(value) {
-        let label = value ? this.getOptionLabel(this.props.value) : this.props.placeholder || 'p-emptylabel';
+    renderLabel() {
+        let label = this.props.value ? this.getOptionLabel(this.props.value) : this.props.placeholder || 'p-emptylabel';
         let labelClassName = classNames('p-cascadeselect-label ', {
             'p-placeholder': label === this.props.placeholder,
             'p-cascadeselect-label-empty': !this.props.value && label === 'p-emptylabel'
         });
 
-        return <span ref={(el) => this.input = el} className={labelClassName}>{label}</span>;
+        return <span ref={(el) => this.label = el} className={labelClassName}>{label}</span>;
     }
 
     renderDropdownIcon() {
@@ -387,7 +413,7 @@ export class CascadeSelect extends Component {
 
     renderOverlay() {
         const overlay = (
-            <CSSTransition nodeRef={this.overlayRef} classNames="p-connected-overlay" in={this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }}
+            <CSSTransition nodeRef={this.overlayRef} classNames="p-connected-overlay" in={this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }} options={this.props.transitionOptions}
                 unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
                 <div ref={this.overlayRef} className="p-cascadeselect-panel p-component" onClick={this.onPanelClick}>
                     <div className="p-cascadeselect-items-wrapper">
@@ -411,12 +437,12 @@ export class CascadeSelect extends Component {
         });
 
         let keyboardHelper = this.renderKeyboardHelper();
-        let labelElement = this.renderLabel(this.props.value);
+        let labelElement = this.renderLabel();
         let dropdownIcon = this.renderDropdownIcon();
         let overlay = this.renderOverlay();
 
         return (
-            <div id={this.id} ref={(el) => this.container = el} className={className} style={this.props.style} onClick={this.onClick}>
+            <div id={this.props.id} ref={(el) => this.container = el} className={className} style={this.props.style} onClick={this.onClick}>
                 {keyboardHelper}
                 {labelElement}
                 {dropdownIcon}

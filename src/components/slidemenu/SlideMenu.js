@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
-import { CSSTransition } from 'react-transition-group';
-import UniqueComponentId from '../utils/UniqueComponentId';
+import { CSSTransition } from '../transition/CSSTransition';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 import { Portal } from '../portal/Portal';
+import { ZIndexUtils } from '../utils/ZIndexUtils';
 
 export class SlideMenuSub extends Component {
 
@@ -173,6 +173,7 @@ export class SlideMenu extends Component {
         autoZIndex: true,
         baseZIndex: 0,
         appendTo: null,
+        transitionOptions: null,
         onShow: null,
         onHide: null
     }
@@ -190,7 +191,8 @@ export class SlideMenu extends Component {
         viewportHeight: PropTypes.number,
         autoZIndex: PropTypes.bool,
         baseZIndex: PropTypes.number,
-        appendTo: PropTypes.any,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+        transitionOptions: PropTypes.object,
         onShow: PropTypes.func,
         onHide: PropTypes.func
     }
@@ -210,7 +212,6 @@ export class SlideMenu extends Component {
         this.onExited = this.onExited.bind(this);
         this.onPanelClick = this.onPanelClick.bind(this);
 
-        this.id = this.props.id || UniqueComponentId();
         this.menuRef = React.createRef();
     }
 
@@ -277,7 +278,7 @@ export class SlideMenu extends Component {
 
     onEnter() {
         if (this.props.autoZIndex) {
-            this.menuRef.current.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
+            ZIndexUtils.set('menu', this.menuRef.current, this.props.baseZIndex);
         }
         DomHandler.absolutePosition(this.menuRef.current, this.target);
     }
@@ -296,7 +297,7 @@ export class SlideMenu extends Component {
     }
 
     onExited() {
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.menuRef.current);
 
         this.setState({ level: 0 });
     }
@@ -377,17 +378,17 @@ export class SlideMenu extends Component {
             this.scrollHandler = null;
         }
 
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.menuRef.current);
     }
 
     renderElement() {
-        const className = classNames('p-slidemenu p-component', { 'p-slidemenu-overlay': this.props.popup });
+        const className = classNames('p-slidemenu p-component', { 'p-slidemenu-overlay': this.props.popup }, this.props.className);
         const backward = this.renderBackward();
 
         return (
-            <CSSTransition nodeRef={this.menuRef} classNames="p-connected-overlay" in={!this.props.popup || this.state.visible} timeout={{ enter: 120, exit: 100 }}
+            <CSSTransition nodeRef={this.menuRef} classNames="p-connected-overlay" in={!this.props.popup || this.state.visible} timeout={{ enter: 120, exit: 100 }} options={this.props.transitionOptions}
                 unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit} onExited={this.onExited}>
-                <div ref={this.menuRef} id={this.id} className={className} style={this.props.style} onClick={this.onPanelClick}>
+                <div ref={this.menuRef} id={this.props.id} className={className} style={this.props.style} onClick={this.onPanelClick}>
                     <div className="p-slidemenu-wrapper" style={{ height: this.props.viewportHeight + 'px' }}>
                         <div className="p-slidemenu-content" ref={el => this.slideMenuContent = el}>
                             <SlideMenuSub model={this.props.model} root index={0} menuWidth={this.props.menuWidth} effectDuration={this.props.effectDuration}

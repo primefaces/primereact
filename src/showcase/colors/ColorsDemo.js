@@ -10,7 +10,7 @@ export class ColorsDemo extends Component {
 
         return (
             <div>
-                <div className="content-section documentation">
+                <div className="content-section documentation" id="app-doc">
                     <h1>Colors</h1>
                     <p>Each PrimeReact theme exports its own color palette.</p>
 

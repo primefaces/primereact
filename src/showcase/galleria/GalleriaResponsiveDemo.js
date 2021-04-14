@@ -4,6 +4,7 @@ import { Galleria } from '../../components/galleria/Galleria';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class GalleriaResponsiveDemo extends Component {
 
@@ -57,7 +58,8 @@ export class GalleriaResponsiveDemo extends Component {
                     <AppInlineHeader changelogText="galleria">
                         <h1>Galleria <span>Responsive</span></h1>
                         <p>Galleria responsiveness is defined with the <b>responsiveOptions</b> property.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="galleria/GalleriaResponsiveDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -81,7 +83,7 @@ export class GalleriaResponsiveDemoDoc extends Component {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Source">
 <CodeHighlight lang="js">

@@ -16,7 +16,7 @@
     text-align: right;
 }
 
-.p-fileupload-content .p-progressbar {
+.p-fileupload-content > .p-progressbar {
     width: 100%;
     position: absolute;
     top: 0;

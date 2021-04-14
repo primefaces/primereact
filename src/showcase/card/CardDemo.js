@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AppDemoActions from '../../AppDemoActions';
 import { Card } from '../../components/card/Card';
 import { Button } from '../../components/button/Button';
 import { CardDoc } from './CardDoc';
@@ -23,7 +24,8 @@ export class CardDemo extends Component {
                     <AppInlineHeader changelogText="card">
                         <h1>Card</h1>
                         <p>Card is a flexible container component.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="card/CardDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

@@ -196,7 +196,7 @@ const PanelDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
                         <h5>Import</h5>
@@ -342,6 +342,12 @@ template: (options) => {
                             <td>boolean</td>
                             <td>false</td>
                             <td>Defines the initial state of panel content, supports one or two-way binding as well.</td>
+                        </tr>
+                        <tr>
+                            <td>transitionOptions</td>
+                            <td>object</td>
+                            <td>null</td>
+                            <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
                         </tr>
                     </tbody>
                 </table>

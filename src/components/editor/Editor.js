@@ -16,7 +16,7 @@ export class Editor extends Component {
         theme: 'snow',
         headerTemplate: null,
         onTextChange: null,
-		onSelectionChange: null
+        onSelectionChange: null
     };
 
     static propTypes = {
@@ -31,7 +31,7 @@ export class Editor extends Component {
         theme: PropTypes.string,
         headerTemplate: PropTypes.any,
         onTextChange: PropTypes.func,
-		onSelectionChange: PropTypes.func
+        onSelectionChange: PropTypes.func
     };
 
     componentDidMount() {
@@ -49,7 +49,7 @@ export class Editor extends Component {
                 });
 
                 if (this.props.value) {
-                    this.quill.pasteHTML(this.props.value);
+                    this.quill.setContents(this.quill.clipboard.convert(this.props.value));
                 }
 
                 this.quill.on('text-change', (delta, source) => {
@@ -70,7 +70,7 @@ export class Editor extends Component {
                 });
 
                 this.quill.on('selection-change', (range, oldRange, source) => {
-                    if(this.props.onSelectionChange) {
+                    if (this.props.onSelectionChange) {
                         this.props.onSelectionChange({
                             range: range,
                             oldRange: oldRange,
@@ -84,8 +84,8 @@ export class Editor extends Component {
 
     componentDidUpdate(prevProps) {
         if (this.props.value !== prevProps.value && this.quill && !this.quill.hasFocus()) {
-            if(this.props.value)
-                this.quill.pasteHTML(this.props.value);
+            if (this.props.value)
+                this.quill.setContents(this.quill.clipboard.convert(this.props.value));
             else
                 this.quill.setText('');
         }
@@ -107,9 +107,9 @@ export class Editor extends Component {
                 <div ref={el => this.toolbarElement = el} className="p-editor-toolbar">
                     <span className="ql-formats">
                         <select className="ql-header" defaultValue="0">
-                          <option value="1">Heading</option>
-                          <option value="2">Subheading</option>
-                          <option value="0">Normal</option>
+                            <option value="1">Heading</option>
+                            <option value="2">Subheading</option>
+                            <option value="0">Normal</option>
                         </select>
                         <select className="ql-font">
                             <option ></option>

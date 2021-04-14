@@ -1,15 +1,22 @@
 import * as React from 'react';
 
-interface ProgressBarProps {
-    id?: string;
-    value?: number;
-    showValue?: boolean;
-    unit?: string;
-    style?: object;
-    className?: string;
-    mode?: string;
-    color?: string;
-    displayValueTemplate?(value: any): JSX.Element;
+declare namespace ProgressBar {
+
+    type ModeType = 'determinate' | 'indeterminate';
+
+    type ValueType = string | number | undefined | null;
+
+    interface ProgressBarProps {
+        id?: string;
+        value?: ValueType;
+        showValue?: boolean;
+        unit?: string;
+        style?: object;
+        className?: string;
+        mode?: ModeType;
+        color?: string;
+        displayValueTemplate?(value: ValueType): React.ReactNode;
+    }
 }
 
-export class ProgressBar extends React.Component<ProgressBarProps,any> {}
+export declare class ProgressBar extends React.Component<ProgressBar.ProgressBarProps, any> { }

@@ -3,6 +3,7 @@ import { Menubar } from '../../components/menubar/Menubar';
 import { InputText } from '../../components/inputtext/InputText';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { MenubarDoc } from './MenubarDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class MenubarDemo extends Component {
 
@@ -148,7 +149,8 @@ export class MenubarDemo extends Component {
                     <AppInlineHeader changelogText="menubar">
                         <h1>Menubar</h1>
                         <p>Menubar is a horizontal menu component.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="menubar/MenubarDemo.js" />
                 </div>
                 <div className="content-section implementation">
                     <div className="card">

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AppDemoActions from '../../AppDemoActions';
 import { Calendar } from '../../components/calendar/Calendar';
 import { CalendarDoc } from './CalendarDoc';
 import { AppInlineHeader } from '../../AppInlineHeader';
@@ -75,10 +76,11 @@ export class CalendarDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="calendar" showInputStyle>
+                    <AppInlineHeader changelogText="calendar">
                         <h1>Calendar</h1>
                         <p>Calendar is a form component to work with dates.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="calendar/CalendarDemo.js"/>
                 </div>
 
                 <div className="content-section implementation">
@@ -143,7 +145,7 @@ export class CalendarDemo extends Component {
                             </div>
                             <div className="p-field p-col-12 p-md-4">
                                 <label htmlFor="touchUI">TouchUI</label>
-                                <Calendar id="touchUI" value={this.state.date13} onChange={(e) => this.setState({ date13: e.value })} touchUI baseZIndex={1000} />
+                                <Calendar id="touchUI" value={this.state.date13} onChange={(e) => this.setState({ date13: e.value })} touchUI />
                             </div>
                             <div className="p-field p-col-12 p-md-4">
                                 <label htmlFor="mask">Mask</label>

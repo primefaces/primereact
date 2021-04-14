@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Splitter, SplitterPanel } from '../../components/splitter/Splitter';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { SplitterDoc } from './SplitterDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class SplitterDemo extends Component {
 
@@ -12,7 +13,8 @@ export class SplitterDemo extends Component {
                     <AppInlineHeader changelogText="splitter">
                         <h1>Splitter</h1>
                         <p>Splitter is utilized to separate and resize panels.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="splitter/SplitterDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

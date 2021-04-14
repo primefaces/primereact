@@ -6,6 +6,7 @@ import { MultiSelect } from '../../components/multiselect/MultiSelect';
 import { TabView } from '../../components/tabview/TabView';
 import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class TreeTableColTogglerDemo extends Component {
 
@@ -56,7 +57,8 @@ export class TreeTableColTogglerDemo extends Component {
                     <AppInlineHeader changelogText="treeTable">
                         <h1>TreeTable <span>Column Toggler</span></h1>
                         <p>MultiSelect component can be used to implement column toggler functionality.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="treetable/TreeTableColTogglerDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -269,7 +271,7 @@ const TreeTableColTogglerDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'TreeTableColTogglerDemo', sources: this.sources, service: 'NodeService', data: 'treetablenodes' })

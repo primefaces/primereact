@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import {MenubarSub} from './MenubarSub';
 import ObjectUtils from '../utils/ObjectUtils';
-import DomHandler from '../utils/DomHandler';
+import { ZIndexUtils } from '../utils/ZIndexUtils';
 
 export class Menubar extends Component {
 
@@ -43,12 +43,12 @@ export class Menubar extends Component {
             mobileActive: !prevState.mobileActive
         }), () => {
             if (this.state.mobileActive) {
-                this.rootmenu.style.zIndex = String(DomHandler.generateZIndex());
+                ZIndexUtils.set('menu', this.rootmenu);
                 this.bindDocumentClickListener();
             }
             else {
                 this.unbindDocumentClickListener();
-                DomHandler.revertZIndex();
+                ZIndexUtils.clear(this.rootmenu);
             }
         });
     }
@@ -59,7 +59,7 @@ export class Menubar extends Component {
                 if (this.state.mobileActive && this.isOutsideClicked(event)) {
                     this.setState({ mobileActive: false }, () => {
                         this.unbindDocumentClickListener();
-                        DomHandler.revertZIndex();
+                        ZIndexUtils.clear(this.rootmenu);
                     });
                 }
             };
@@ -82,12 +82,12 @@ export class Menubar extends Component {
     onLeafClick() {
         this.setState({ mobileActive: false }, () => {
             this.unbindDocumentClickListener();
-            DomHandler.revertZIndex();
+            ZIndexUtils.clear(this.rootmenu);
         });
     }
 
     componentWillUnmount() {
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.rootmenu);
     }
 
     renderCustomContent() {

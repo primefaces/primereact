@@ -170,6 +170,9 @@ import { ConfirmPopupDemo } from './showcase/confirmpopup/ConfirmPopupDemo';
 import { InvalidDemo } from './showcase/invalid/InvalidDemo';
 import MultiStateCheckboxDemo from "./showcase/multistatecheckbox/MultiStateCheckboxDemo";
 import { ColorsDemo } from './showcase/colors/ColorsDemo';
+import { FormikFormDemo } from './showcase/validate/FormikFormDemo';
+import { ReactHookFormDemo } from './showcase/validate/ReactHookFormDemo';
+import { ReactFinalFormDemo } from './showcase/validate/ReactFinalFormDemo';
 
 class AppRouter extends Component {
 
@@ -367,6 +370,9 @@ class AppRouter extends Component {
                             <Route path="/invalid" component={InvalidDemo} />
                             <Route path="/colors" render={() => <ColorsDemo darkTheme={context.darkTheme} />} />
                             <Route path="/multistatecheckbox" component={MultiStateCheckboxDemo} />
+                            <Route path="/formik" component={FormikFormDemo} />
+                            <Route path="/reacthookform" component={ReactHookFormDemo} />
+                            <Route path="/reactfinalform" component={ReactFinalFormDemo} />
                         </>
                     )
                 }

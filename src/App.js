@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { AppMenu } from './AppMenu';
-import classNames from 'classnames';
+import { classNames } from './components/utils/ClassNames';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import './assets/style/primereact.css';
@@ -39,7 +39,7 @@ export class App extends Component {
             darkTheme: false,
             themeCategory: null,
             sidebarActive: false,
-            newsActive: this.isNewsStorageExpired(),
+            newsActive: false, //this.isNewsStorageExpired(),
             configuratorActive: false,
             changelogActive: false,
             searchVal: null

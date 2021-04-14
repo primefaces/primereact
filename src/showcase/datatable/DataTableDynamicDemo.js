@@ -5,6 +5,7 @@ import ProductService from '../service/ProductService';
 import { TabView } from '../../components/tabview/TabView';
 import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DataTableDynamicDemo extends Component {
 
@@ -40,7 +41,8 @@ export class DataTableDynamicDemo extends Component {
                     <AppInlineHeader changelogText="dataTable">
                         <h1>DataTable <span>Dynamic Columns</span></h1>
                         <p>Columns can be defined dynamically.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="datatable/DataTableDynamicDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -199,7 +201,7 @@ const DataTableDynamicDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'DataTableDynamicDemo', sources: this.sources, service: 'ProductService', data: 'products-small' })

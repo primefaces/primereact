@@ -1,10 +1,28 @@
 import React, { Component } from 'react';
+import AppDemoActions from '../../AppDemoActions';
 import { Button } from '../../components/button/Button';
 import { ButtonDoc } from './ButtonDoc';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './ButtonDemo.scss';
 
 export class ButtonDemo extends Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            loading: false,
+            done: false
+        }
+
+        this.onLoadingClick = this.onLoadingClick.bind(this);
+    }
+
+    onLoadingClick() {
+        this.setState({ loading: true, done: false });
+        setTimeout(() => {
+            this.setState({ loading: false, done: true });
+        }, 2000);
+    }
 
     render() {
         return (
@@ -14,6 +32,8 @@ export class ButtonDemo extends Component {
                         <h1>Button</h1>
                         <p>Button is an extension to standard input element with icons and theming.</p>
                     </AppInlineHeader>
+
+                    <AppDemoActions github="button/ButtonDemo.js" />
                 </div>
 
                 <div className="content-section implementation button-demo">
@@ -27,6 +47,12 @@ export class ButtonDemo extends Component {
                         <Button icon="pi pi-check" />
                         <Button label="Submit" icon="pi pi-check" />
                         <Button label="Submit" icon="pi pi-check" iconPos="right" />
+
+                        <h5>Loading</h5>
+                        <Button loading />
+                        <Button label="Submit" loading />
+                        <Button label="Submit" icon="pi pi-check" loading loadingOptions={{ position: 'right' }} />
+                        <Button label="Submit" icon={this.state.done && 'pi pi-check'} loading={this.state.loading} onClick={this.onLoadingClick} />
 
                         <h5>Severities</h5>
                         <Button label="Primary" />
@@ -124,10 +150,44 @@ export class ButtonDemo extends Component {
                         </span>
 
                         <h5>Sizes</h5>
-                        <div className="sizes">
-                            <Button label="Small" icon="pi pi-check" className="p-button-sm"  />
-                            <Button label="Normal" icon="pi pi-check" className="p-button"  />
-                            <Button label="Large" icon="pi pi-check" className="p-button-lg" />
+                        <Button label="Small" icon="pi pi-check" className="p-button-sm" />
+                        <Button label="Normal" icon="pi pi-check" className="p-button" />
+                        <Button label="Large" icon="pi pi-check" className="p-button-lg" />
+
+                        <h5>Template</h5>
+                        <div className="template">
+                            <Button className="google p-p-0">
+                                <i className="pi pi-google p-px-2"></i>
+                                <span className="p-px-3">Google</span>
+                            </Button>
+                            <Button className="youtube p-p-0">
+                                <i className="pi pi-youtube p-px-2"></i>
+                                <span className="p-px-3">Youtube</span>
+                            </Button>
+                            <Button className="vimeo p-p-0">
+                                <i className="pi pi-vimeo p-px-2"></i>
+                                <span className="p-px-3">Vimeo</span>
+                            </Button>
+                            <Button className="facebook p-p-0">
+                                <i className="pi pi-facebook p-px-2"></i>
+                                <span className="p-px-3">Facebook</span>
+                            </Button>
+                            <Button className="twitter p-p-0">
+                                <i className="pi pi-twitter p-px-2"></i>
+                                <span className="p-px-3">Twitter</span>
+                            </Button>
+                            <Button className="slack p-p-0">
+                                <i className="pi pi-slack p-px-2"></i>
+                                <span className="p-px-3">Slack</span>
+                            </Button>
+                            <Button className="amazon p-p-0">
+                                <i className="pi pi-amazon p-px-2"></i>
+                                <span className="p-px-3">Amazon</span>
+                            </Button>
+                            <Button className="discord p-p-0">
+                                <i className="pi pi-discord p-px-2"></i>
+                                <span className="p-px-3">Discord</span>
+                            </Button>
                         </div>
                     </div>
                 </div>

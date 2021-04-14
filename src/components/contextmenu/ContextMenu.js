@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
-import { CSSTransition } from 'react-transition-group';
+import { CSSTransition } from '../transition/CSSTransition';
 import { Ripple } from '../ripple/Ripple';
 import ObjectUtils from '../utils/ObjectUtils';
 import { Portal } from '../portal/Portal';
+import { ZIndexUtils } from '../utils/ZIndexUtils';
 
 class ContextMenuSub extends Component {
 
@@ -214,6 +215,7 @@ export class ContextMenu extends Component {
         autoZIndex: true,
         baseZIndex: 0,
         appendTo: null,
+        transitionOptions: null,
         onShow: null,
         onHide: null
     };
@@ -226,7 +228,8 @@ export class ContextMenu extends Component {
         global: PropTypes.bool,
         autoZIndex: PropTypes.bool,
         baseZIndex: PropTypes.number,
-        appendTo: PropTypes.any,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+        transitionOptions: PropTypes.object,
         onShow: PropTypes.func,
         onHide: PropTypes.func
     };
@@ -312,7 +315,7 @@ export class ContextMenu extends Component {
 
     onEnter() {
         if (this.props.autoZIndex) {
-            this.menuRef.current.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
+            ZIndexUtils.set('menu', this.menuRef.current, this.props.baseZIndex);
         }
 
         this.position(this.currentEvent);
@@ -328,7 +331,7 @@ export class ContextMenu extends Component {
     }
 
     onExited() {
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.menuRef.current);
     }
 
     position(event) {
@@ -457,14 +460,14 @@ export class ContextMenu extends Component {
         this.unbindDocumentListeners();
         this.unbindDocumentContextMenuListener();
 
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.menuRef.current);
     }
 
     renderContextMenu() {
         const className = classNames('p-contextmenu p-component', this.props.className);
 
         return (
-            <CSSTransition nodeRef={this.menuRef} classNames="p-contextmenu" in={this.state.visible} timeout={{ enter: 250, exit: 0 }}
+            <CSSTransition nodeRef={this.menuRef} classNames="p-contextmenu" in={this.state.visible} timeout={{ enter: 250, exit: 0 }} options={this.props.transitionOptions}
                 unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit} onExited={this.onExited}>
                 <div ref={this.menuRef} id={this.props.id} className={className} style={this.props.style} onClick={this.onMenuClick} onMouseEnter={this.onMenuMouseEnter}>
                     <ContextMenuSub model={this.props.model} root resetMenu={this.state.resetMenu} onLeafClick={this.onLeafClick} />

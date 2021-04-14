@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import { classNames } from '../utils/ClassNames';
 import UniqueComponentId from '../utils/UniqueComponentId';
-import { CSSTransition } from 'react-transition-group';
+import { CSSTransition } from '../transition/CSSTransition';
 import ObjectUtils from '../utils/ObjectUtils';
 import { Ripple } from '../ripple/Ripple';
 import { Portal } from '../portal/Portal';
+import { ZIndexUtils } from '../utils/ZIndexUtils';
 
 export class Dialog extends Component {
 
@@ -43,6 +44,7 @@ export class Dialog extends Component {
         keepInViewport: true,
         maximized: false,
         breakpoints: null,
+        transitionOptions: null,
         onMaximize: null,
         onDragStart: null,
         onDrag: null,
@@ -73,7 +75,7 @@ export class Dialog extends Component {
         className: PropTypes.string,
         maskClassName: PropTypes.string,
         showHeader: PropTypes.bool,
-        appendTo: PropTypes.object,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         baseZIndex: PropTypes.number,
         maximizable: PropTypes.bool,
         blockScroll: PropTypes.bool,
@@ -85,6 +87,7 @@ export class Dialog extends Component {
         keepInViewport: PropTypes.bool,
         maximized: PropTypes.bool,
         breakpoints: PropTypes.object,
+        transitionOptions: PropTypes.object,
         onMaximize: PropTypes.func,
         onDragStart: PropTypes.func,
         onDrag: PropTypes.func,
@@ -97,6 +100,7 @@ export class Dialog extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            id: props.id,
             maskVisible: props.visible,
             visible: false
         };
@@ -114,7 +118,6 @@ export class Dialog extends Component {
         this.onEntered = this.onEntered.bind(this);
         this.onExited = this.onExited.bind(this);
 
-        this.id = this.props.id || UniqueComponentId();
         this.attributeSelector = UniqueComponentId();
         this.dialogRef = React.createRef();
     }
@@ -127,7 +130,7 @@ export class Dialog extends Component {
     focus() {
         let activeElement = document.activeElement;
         let isActiveElementInDialog = activeElement && this.dialogRef && this.dialogRef.current.contains(activeElement);
-        if (!isActiveElementInDialog && this.props.closable) {
+        if (!isActiveElementInDialog && this.props.closable && this.props.showHeader) {
             this.closeElement.focus();
         }
     }
@@ -181,9 +184,9 @@ export class Dialog extends Component {
             let height = DomHandler.getOuterHeight(this.dialogEl);
             let deltaX = event.pageX - this.lastPageX;
             let deltaY = event.pageY - this.lastPageY;
-            let offset = DomHandler.getOffset(this.dialogEl);
-            let leftPos = offset.left - DomHandler.getWindowScrollLeft() + deltaX;
-            let topPos = offset.top - DomHandler.getWindowScrollTop() + deltaY;
+            let offset = this.dialogEl.getBoundingClientRect();
+            let leftPos = offset.left + deltaX;
+            let topPos = offset.top + deltaY;
             let viewport = DomHandler.getViewport();
 
             this.dialogEl.style.position = 'fixed';
@@ -247,7 +250,7 @@ export class Dialog extends Component {
             let newHeight = height + deltaY;
             let minWidth = this.dialogEl.style.minWidth;
             let minHeight = this.dialogEl.style.minHeight;
-            let offset = DomHandler.getOffset(this.dialogEl);
+            let offset = this.dialogEl.getBoundingClientRect();
             let viewport = DomHandler.getViewport();
             let hasBeenDragged = !parseInt(this.dialogEl.style.top) || !parseInt(this.dialogEl.style.left);
 
@@ -299,10 +302,6 @@ export class Dialog extends Component {
         return pos ? `p-dialog-${pos}` : '';
     }
 
-    get zIndex() {
-        return this.props.baseZIndex + DomHandler.generateZIndex();
-    }
-
     get maximized() {
         return this.props.onMaximize ? this.props.maximized : this.state.maximized;
     }
@@ -329,9 +328,8 @@ export class Dialog extends Component {
 
     onExited() {
         this.dragging = false;
-        this.setState({ maskVisible: false }, () => {
-            DomHandler.revertZIndex();
-        });
+        ZIndexUtils.clear(this.mask);
+        this.setState({ maskVisible: false });
         this.disableDocumentSettings();
     }
 
@@ -416,9 +414,9 @@ export class Dialog extends Component {
             if (currentTarget && currentTarget.primeDialogParams) {
                 let params = currentTarget.primeDialogParams;
                 let paramLength = params.length;
-                let dialogId = params[paramLength - 1].id;
+                let dialogId = params[paramLength - 1] ? params[paramLength - 1].id : undefined;
 
-                if (dialogId === this.id) {
+                if (dialogId === this.state.id) {
                     let dialog = document.getElementById(dialogId);
 
                     if (event.which === 27) {
@@ -455,7 +453,7 @@ export class Dialog extends Component {
             }
         };
 
-        let newParam = { id: this.id, hasBlockScroll: this.props.blockScroll };
+        let newParam = { id: this.state.id, hasBlockScroll: this.props.blockScroll };
         document.primeDialogParams = document.primeDialogParams ? [ ...document.primeDialogParams, newParam ] : [ newParam ];
 
         document.addEventListener('keydown', this.documentKeyDownListener);
@@ -464,7 +462,7 @@ export class Dialog extends Component {
     unbindDocumentKeyDownListener() {
         if (this.documentKeyDownListener) {
             document.removeEventListener('keydown', this.documentKeyDownListener);
-            document.primeDialogParams = document.primeDialogParams && document.primeDialogParams.filter(param => param.id !== this.id);
+            document.primeDialogParams = document.primeDialogParams && document.primeDialogParams.filter(param => param.id !== this.state.id);
             this.documentKeyDownListener = null;
         }
     }
@@ -490,9 +488,13 @@ export class Dialog extends Component {
     }
 
     componentDidMount() {
+        if (!this.state.id) {
+            this.setState({ id: UniqueComponentId() });
+        }
+
         if (this.props.visible) {
             this.setState({ visible: true }, () => {
-                this.mask.style.zIndex = String(this.zIndex);
+                ZIndexUtils.set('modal', this.mask, this.props.baseZIndex);
             });
         }
 
@@ -504,7 +506,7 @@ export class Dialog extends Component {
     componentDidUpdate(prevProps) {
         if (this.props.visible && !this.state.maskVisible) {
             this.setState({ maskVisible: true }, () => {
-                this.mask.style.zIndex = String(this.zIndex);
+                ZIndexUtils.set('modal', this.mask, this.props.baseZIndex);
             });
         }
 
@@ -534,7 +536,7 @@ export class Dialog extends Component {
             this.styleElement = null;
         }
 
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.mask);
     }
 
     renderCloseIcon() {
@@ -574,7 +576,7 @@ export class Dialog extends Component {
 
             return (
                 <div ref={el => this.headerEl = el} className="p-dialog-header" onMouseDown={this.onDragStart}>
-                    <span id={this.id + '_header'} className="p-dialog-title">{header}</span>
+                    <span id={this.state.id + '_header'} className="p-dialog-title">{header}</span>
                     <div className="p-dialog-header-icons">
                         {icons}
                         {maximizeIcon}
@@ -591,7 +593,7 @@ export class Dialog extends Component {
         let contentClassName = classNames('p-dialog-content', this.props.contentClassName)
 
         return (
-            <div id={this.id + '_content'} ref={el => this.contentEl = el} className={contentClassName} style={this.props.contentStyle}>
+            <div id={this.state.id + '_content'} ref={el => this.contentEl = el} className={contentClassName} style={this.props.contentStyle}>
                 {this.props.children}
             </div>
         );
@@ -636,10 +638,10 @@ export class Dialog extends Component {
 
         return (
             <div ref={(el) => this.mask = el} className={maskClassName} onClick={this.onMaskClick}>
-                <CSSTransition nodeRef={this.dialogRef} classNames="p-dialog" timeout={transitionTimeout} in={this.state.visible} unmountOnExit
-                    onEnter={this.onEnter} onEntered={this.onEntered} onExited={this.onExited}>
-                    <div ref={this.dialogRef} id={this.id} className={className} style={this.props.style}
-                        role="dialog" aria-labelledby={this.id + '_header'} aria-describedby={this.id + '_content'} aria-modal={this.props.modal}>
+                <CSSTransition nodeRef={this.dialogRef} classNames="p-dialog" timeout={transitionTimeout} in={this.state.visible} options={this.props.transitionOptions}
+                    unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExited={this.onExited}>
+                    <div ref={this.dialogRef} id={this.state.id} className={className} style={this.props.style}
+                        role="dialog" aria-labelledby={this.state.id + '_header'} aria-describedby={this.state.id + '_content'} aria-modal={this.props.modal}>
                         {header}
                         {content}
                         {footer}

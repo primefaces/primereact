@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AppDemoActions from '../../AppDemoActions';
 import { AutoComplete } from '../../components/autocomplete/AutoComplete';
 import { CountryService } from '../service/CountryService';
 import { AutoCompleteDoc } from './AutoCompleteDoc';
@@ -111,10 +112,11 @@ export class AutoCompleteDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="autoComplete" showInputStyle>
+                    <AppInlineHeader changelogText="autoComplete">
                         <h1>AutoComplete</h1>
                         <p>AutoComplete is an input component that provides real-time suggestions when being typed.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="autocomplete/AutoCompleteDemo.js"/>
                 </div>
 
                 <div className="content-section implementation">

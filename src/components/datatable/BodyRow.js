@@ -19,6 +19,7 @@ export class BodyRow extends Component {
         this.onTouchEnd = this.onTouchEnd.bind(this);
         this.onRightClick = this.onRightClick.bind(this);
         this.onMouseDown = this.onMouseDown.bind(this);
+        this.onMouseUp = this.onMouseUp.bind(this);
         this.onDragEnd = this.onDragEnd.bind(this);
         this.onDragOver = this.onDragOver.bind(this);
         this.onDragLeave = this.onDragLeave.bind(this);
@@ -71,10 +72,28 @@ export class BodyRow extends Component {
     }
 
     onMouseDown(event) {
-        if (DomHandler.hasClass(event.target, 'p-table-reorderablerow-handle'))
+        if (DomHandler.hasClass(event.target, 'p-datatable-reorderablerow-handle'))
             event.currentTarget.draggable = true;
         else
             event.currentTarget.draggable = false;
+
+        if (this.props.onMouseDown) {
+            this.props.onMouseDown({
+                originalEvent: event,
+                data: this.props.rowData,
+                index: this.props.rowIndex
+            });
+        }
+    }
+
+    onMouseUp(event) {
+        if (this.props.onMouseUp) {
+            this.props.onMouseUp({
+                originalEvent: event,
+                data: this.props.rowData,
+                index: this.props.rowIndex
+            });
+        }
     }
 
     onDragEnd(event) {
@@ -114,7 +133,7 @@ export class BodyRow extends Component {
     }
 
     onKeyDown(event) {
-        if (this.props.selectionMode) {
+        if (this.props.selectionMode && !this.props.cellSelection) {
             const row = event.currentTarget;
 
             switch (event.which) {
@@ -252,13 +271,13 @@ export class BodyRow extends Component {
     }
 
     getTabIndex() {
-        return this.props.selectionMode ? (this.props.rowIndex === 0 ? 0 : -1) : null;
+        return this.props.selectionMode && !this.props.cellSelection ? (this.props.rowIndex === 0 ? 0 : -1) : null;
     }
 
     render() {
         let columns = React.Children.toArray(this.props.children);
         let conditionalClassNames = {
-            'p-highlight': this.props.selected,
+            'p-highlight': !this.props.cellSelection && this.props.selected,
             'p-highlight-contextmenu': this.props.contextMenuSelected,
             'p-selectable-row': this.props.selectionMode
         };
@@ -289,16 +308,16 @@ export class BodyRow extends Component {
             }
 
             let editing = this.getEditing();
-            let cell = <BodyCell tableId={this.props.tableId} key={i} {...column.props} value={this.props.value} rowSpan={rowSpan} rowData={this.props.rowData} rowIndex={this.props.rowIndex} onRowToggle={this.props.onRowToggle} expanded={this.props.expanded}
-                            onRadioClick={this.props.onRadioClick} onCheckboxClick={this.props.onCheckboxClick} selected={this.props.selected} selectOnEdit={this.props.selectOnEdit}
-                            editMode={this.props.editMode} editing={editing} onRowEditInit={this.onRowEditInit} onRowEditSave={this.onRowEditSave} onRowEditCancel={this.onRowEditCancel}
-                            showRowReorderElement={this.props.showRowReorderElement} showSelectionElement={this.props.showSelectionElement} />;
+            let cell = <BodyCell tableId={this.props.tableId} key={i} {...column.props} value={this.props.value} rowSpan={rowSpan} rowData={this.props.rowData} index={i} rowIndex={this.props.rowIndex} onRowToggle={this.props.onRowToggle} expanded={this.props.expanded}
+                onRadioClick={this.props.onRadioClick} onCheckboxClick={this.props.onCheckboxClick} selected={this.props.selected} selection={this.props.selection} selectOnEdit={this.props.selectOnEdit}
+                editMode={this.props.editMode} editing={editing} onRowEditInit={this.onRowEditInit} onRowEditSave={this.onRowEditSave} onRowEditCancel={this.onRowEditCancel} onMouseDown={this.props.onCellMouseDown} onMouseUp={this.props.onCellMouseUp}
+                showRowReorderElement={this.props.showRowReorderElement} showSelectionElement={this.props.showSelectionElement} cellSelection={this.props.cellSelection} onClick={this.props.onCellClick} />;
 
             cells.push(cell);
         }
 
         return (
-            <tr role="row" tabIndex={tabIndex} ref={(el) => { this.container = el; }} className={className} onClick={this.onClick} onDoubleClick={this.onDoubleClick} onTouchEnd={this.onTouchEnd} onContextMenu={this.onRightClick} onMouseDown={this.onMouseDown}
+            <tr role="row" tabIndex={tabIndex} ref={(el) => { this.container = el; }} className={className} onClick={this.onClick} onDoubleClick={this.onDoubleClick} onTouchEnd={this.onTouchEnd} onContextMenu={this.onRightClick} onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp}
                 onDragStart={this.props.onDragStart} onDragEnd={this.onDragEnd} onDragOver={this.onDragOver} onDragLeave={this.onDragLeave} onDrop={this.onDrop} style={style} onKeyDown={this.onKeyDown}>
                 {cells}
             </tr>

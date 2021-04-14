@@ -1,11 +1,20 @@
 import * as React from 'react';
 
-interface DividerProps {
-    align?: string;
-    layout?: string;
-    type?: string;
-    style?: object;
-    className?: string;
+declare namespace Divider {
+
+    type AlignType = 'center' | 'left' | 'right' | 'bottom' | 'top';
+
+    type LayoutType = 'vertical' | 'horizontal';
+
+    type BorderType = 'solid' | 'dashed' | 'dotted';
+
+    interface DividerProps {
+        align?: AlignType;
+        layout?: LayoutType;
+        type?: BorderType;
+        style?: object;
+        className?: string;
+    }
 }
 
-export class Divider extends React.Component<DividerProps,any> {}
+export declare class Divider extends React.Component<Divider.DividerProps, any> { }

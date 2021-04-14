@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AppDemoActions from '../../AppDemoActions';
 import { CascadeSelectDoc } from './CascadeSelectDoc';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { CascadeSelect } from '../../components/cascadeselect/CascadeSelect';
@@ -107,10 +108,11 @@ export class CascadeSelectDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="cascadeSelect" showInputStyle>
+                    <AppInlineHeader changelogText="cascadeSelect">
                         <h1>CascadeSelect</h1>
                         <p>CascadeSelect displays a nested structure of options.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="cascadeselect/CascadeSelectDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

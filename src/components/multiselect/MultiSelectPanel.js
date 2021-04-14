@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
-import { CSSTransition } from 'react-transition-group';
+import { CSSTransition } from '../transition/CSSTransition';
 import { Portal } from '../portal/Portal';
 
 class MultiSelectPanelComponent extends Component {
@@ -13,24 +13,24 @@ class MultiSelectPanelComponent extends Component {
         onClick: null,
         scrollHeight: null,
         panelClassName: null,
-        panelStyle: null,
+        panelStyle: null
     };
 
     static propTypes = {
-        appendTo: PropTypes.object,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         header: PropTypes.any,
         footer: PropTypes.any,
         onClick: PropTypes.func,
         scrollHeight: PropTypes.string,
         panelClassName: PropTypes.string,
-        panelStyle: PropTypes.object,
+        panelStyle: PropTypes.object
     };
 
     renderElement() {
         const panelClassName = classNames('p-multiselect-panel p-component', this.props.panelClassName);
 
         return (
-            <CSSTransition nodeRef={this.props.forwardRef} classNames="p-connected-overlay" in={this.props.in} timeout={{ enter: 120, exit: 100 }}
+            <CSSTransition nodeRef={this.props.forwardRef} classNames="p-connected-overlay" in={this.props.in} timeout={{ enter: 120, exit: 100 }} options={this.props.transitionOptions}
                 unmountOnExit onEnter={this.props.onEnter} onEntered={this.props.onEntered} onExit={this.props.onExit} onExited={this.props.onExited}>
                 <div ref={this.props.forwardRef} className={panelClassName} style={this.props.panelStyle} onClick={this.props.onClick}>
                     {this.props.header}

@@ -14,7 +14,7 @@ export class DataTableDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import classNames from 'classnames';
+import { classNames } from 'primereact/utils';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
@@ -275,7 +275,7 @@ export class DataTableDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState, useEffect, useRef } from 'react';
-import classNames from 'classnames';
+import { classNames } from 'primereact/utils';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
@@ -511,7 +511,7 @@ const DataTableDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState, useEffect, useRef } from 'react';
-import classNames from 'classnames';
+import { classNames } from 'primereact/utils';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
@@ -843,7 +843,7 @@ const DataTableDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
                         <h5>Import</h5>
@@ -1001,7 +1001,7 @@ export const DataTableDemo = () => {
                         </tr>
                         <tr>
                             <td>sortable</td>
-                            <td>any</td>
+                            <td>boolean</td>
                             <td>false</td>
                             <td>Defines if a column is sortable.</td>
                         </tr>
@@ -1010,6 +1010,12 @@ export const DataTableDemo = () => {
                             <td>function</td>
                             <td>null</td>
                             <td>Sort function for custom sorting.</td>
+                        </tr>
+                        <tr>
+                            <td>sortableDisabled</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>When enabled, the data of columns with this property cannot be sorted or changed by the user.</td>
                         </tr>
                         <tr>
                             <td>filter</td>
@@ -2598,9 +2604,9 @@ const bodyTemplate = (data, props) => {
                         </tr>
                         <tr>
                             <td>paginatorDropdownAppendTo</td>
-                            <td>any</td>
-                            <td>null</td>
-                            <td>Target element to attach the paginator dropdown overlay.</td>
+                            <td>DOM element | string</td>
+                            <td>document.body</td>
+                            <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
                         </tr>
                         <tr>
                             <td>first</td>
@@ -2673,6 +2679,18 @@ const bodyTemplate = (data, props) => {
                             <td>string</td>
                             <td>null</td>
                             <td>Specifies the selection mode, valid values are "single" and "multiple".</td>
+                        </tr>
+                        <tr>
+                            <td>rowSelectMode</td>
+                            <td>string</td>
+                            <td>new</td>
+                            <td>Defines row selection mode. Valid values are "new", "add", "radio" and "checkbox".</td>
+                        </tr>
+                        <tr>
+                            <td>dragSelection</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>When enabled, a rectangle that can be dragged can be used to make a range selection.</td>
                         </tr>
                         <tr>
                             <td>selection</td>

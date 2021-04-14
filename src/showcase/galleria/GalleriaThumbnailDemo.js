@@ -4,6 +4,7 @@ import { Galleria } from '../../components/galleria/Galleria';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class GalleriaThumbnailDemo extends Component {
 
@@ -64,7 +65,8 @@ export class GalleriaThumbnailDemo extends Component {
                     <AppInlineHeader changelogText="galleria">
                         <h1>Galleria <span>Thumbnail</span></h1>
                         <p>Thumbnails represent a smaller version of the actual content.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="galleria/GalleriaThumbnailDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -107,7 +109,7 @@ export class GalleriaThumbnailDemoDoc extends Component {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Source">
 <CodeHighlight lang="js">

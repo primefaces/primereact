@@ -3,6 +3,7 @@ import { Tree } from '../../components/tree/Tree';
 import { TabView } from '../../components/tabview/TabView';
 import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class TreeTemplatingDemo extends Component {
 
@@ -56,7 +57,8 @@ export class TreeTemplatingDemo extends Component {
                     <AppInlineHeader changelogText="tree">
                         <h1>Tree <span>Templating</span></h1>
                         <p>Tree nodes can be customized to display custom content.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="tree/TreeTemplatingDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -259,7 +261,7 @@ const TreeTemplatingDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'TreeTemplatingDemo', sources: this.sources })

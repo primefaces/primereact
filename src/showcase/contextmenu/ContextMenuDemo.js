@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ContextMenu } from '../../components/contextmenu/ContextMenu';
 import { ContextMenuDoc } from './ContextMenuDoc';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class ContextMenuDemo extends Component {
 
@@ -147,7 +148,8 @@ export class ContextMenuDemo extends Component {
                     <AppInlineHeader changelogText="contextMenu">
                         <h1>ContextMenu</h1>
                         <p>ContextMenu displays an overlay menu on right click of its target. Note that components like DataTable has special integration with ContextMenu. Refer to documentation of the individual documentation of the components having a special integration.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="contextmenu/ContextMenuDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

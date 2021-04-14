@@ -7,6 +7,7 @@ import { Slider } from '../../components/slider/Slider';
 import { Badge } from '../../components/badge/Badge';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { TooltipDoc } from './TooltipDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class TooltipDemo extends Component {
 
@@ -26,7 +27,8 @@ export class TooltipDemo extends Component {
                     <AppInlineHeader changelogText="tooltip">
                         <h1>Tooltip</h1>
                         <p>Tooltip functionality is integrated within various PrimeReact components.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="tooltip/TooltipDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

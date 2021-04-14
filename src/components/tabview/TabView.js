@@ -53,13 +53,18 @@ export class TabView extends Component {
 
     constructor(props) {
         super(props);
+        let state = {
+            id: props.id
+        };
+
         if (!this.props.onTabChange) {
-            this.state = {
-                activeIndex: this.props.activeIndex
+            state = {
+                ...state,
+                activeIndex: props.activeIndex
             };
         }
 
-        this.id = this.props.id || UniqueComponentId();
+        this.state = state;
     }
 
     getActiveIndex() {
@@ -94,6 +99,10 @@ export class TabView extends Component {
     }
 
     componentDidMount() {
+        if (!this.state.id) {
+            this.setState({ id: UniqueComponentId() });
+        }
+
         this.updateInkBar();
     }
 
@@ -104,8 +113,8 @@ export class TabView extends Component {
     renderTabHeader(tab, index) {
         const selected = this.isSelected(index);
         const className = classNames('p-unselectable-text', {'p-tabview-selected p-highlight': selected, 'p-disabled': tab.props.disabled}, tab.props.headerClassName);
-        const id = this.id + '_header_' + index;
-        const ariaControls = this.id + '_content_' + index;
+        const id = this.state.id + '_header_' + index;
+        const ariaControls = this.state.id + '_content_' + index;
         const tabIndex = tab.props.disabled ? null : 0;
 
         return (
@@ -159,8 +168,8 @@ export class TabView extends Component {
     createContent(tab, index) {
         const selected = this.isSelected(index);
         const className = classNames(tab.props.contentClassName, 'p-tabview-panel', {'p-hidden': !selected});
-        const id = this.id + '_content_' + index;
-        const ariaLabelledBy = this.id + '_header_' + index;
+        const id = this.state.id + '_content_' + index;
+        const ariaLabelledBy = this.state.id + '_header_' + index;
 
         return (
             <div id={id} aria-labelledby={ariaLabelledBy} aria-hidden={!selected} className={className}

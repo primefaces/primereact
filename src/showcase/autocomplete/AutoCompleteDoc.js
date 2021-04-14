@@ -388,7 +388,7 @@ const AutoCompleteDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
                         <h5>Import</h5>
@@ -709,9 +709,9 @@ itemTemplate(item) {
                                     </tr>
                                     <tr>
                                         <td>appendTo</td>
-                                        <td>DOM element</td>
+                                        <td>DOM element | string</td>
                                         <td>document.body</td>
-                                        <td>DOM element instance where the overlay panel should be mounted.</td>
+                                        <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
                                     </tr>
                                     <tr>
                                         <td>tabIndex</td>
@@ -760,6 +760,12 @@ itemTemplate(item) {
                                         <td>any</td>
                                         <td>null</td>
                                         <td>Template of an option group item.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>transitionOptions</td>
+                                        <td>object</td>
+                                        <td>null</td>
+                                        <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -854,6 +860,16 @@ itemTemplate(item) {
                                         <td>onClear</td>
                                         <td>event: Browser event</td>
                                         <td>Callback to invoke when input is cleared by the user.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onShow</td>
+                                        <td>-</td>
+                                        <td>Callback to invoke when overlay panel becomes visible.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onHide</td>
+                                        <td>-</td>
+                                        <td>Callback to invoke when overlay panel becomes hidden.</td>
                                     </tr>
                                 </tbody>
                             </table>

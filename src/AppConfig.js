@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from '../src/components/button/Button';
 import { InputSwitch } from '../src/components/inputswitch/InputSwitch';
-import classNames from 'classnames';
+import { classNames } from './components/utils/ClassNames';
 import { AppInputStyleSwitch } from './AppInputStyleSwitch';
 import AppContentContext from './AppContentContext';
 

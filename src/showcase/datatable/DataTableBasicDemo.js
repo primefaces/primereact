@@ -5,6 +5,7 @@ import ProductService from '../service/ProductService';
 import { TabView } from '../../components/tabview/TabView';
 import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DataTableBasicDemo extends Component {
 
@@ -28,7 +29,8 @@ export class DataTableBasicDemo extends Component {
                     <AppInlineHeader changelogText="dataTable">
                         <h1>DataTable <span>Basic</span></h1>
 				        <p>DataTable requires a collection to display along with column components for the representation of the data.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="datatable/DataTableBasicDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -165,7 +167,7 @@ const DataTableBasicDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'DataTableBasicDemo', sources: this.sources, service: 'ProductService', data: 'products-small' })

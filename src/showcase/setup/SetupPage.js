@@ -14,7 +14,7 @@ export class SetupPage extends Component {
                     </div>
                 </div>
 
-                <div className="content-section documentation">
+                <div className="content-section documentation" id="app-doc">
                     <h5>Download</h5>
                     <p>PrimeReact is available at npm, if you have an existing application run the following commands to download PrimeReact and PrimeIcons to your project.</p>
 
@@ -51,7 +51,7 @@ dependencies: {
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-transition-group": "^4.4.1",
-    "primeicons": "^4.1.0",
+    "primeicons": "^4.1.0"
 }
 `}
 </CodeHighlight>
@@ -153,7 +153,7 @@ primereact/resources/themes/rhea/theme.css
 
                     <h5>Ripple</h5>
                     <p>Ripple is an optional animation for the supported components such as buttons. It is disabled by default and needs to be enabled at
-                        your app's entry file (e.g. main.js) using the <i>PrimeReact</i> variable.
+                        your app's entry file (e.g. App.js) using the <i>PrimeReact</i> variable.
                     </p>
 <CodeHighlight lang="js">
 {`
