@@ -5,21 +5,29 @@ declare namespace Button {
 
     type PositionType = 'top' | 'bottom' | 'left' | 'right';
 
-    type LoadingIconType = React.ReactNode | ((props: ButtonProps) => React.ReactNode);
+    type IconType = React.ReactNode | ((options: IconOptions) => React.ReactNode);
 
-    interface LoadingOptions {
-        icon: LoadingIconType,
-        position: PositionType
+    interface IconOptions {
+        className: string;
+        element: React.ReactNode;
+        props: ButtonProps;
     }
 
-    interface ButtonProps extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
+    interface LoadingOptions {
+        icon: IconType;
+        position: PositionType;
+        disabled: boolean;
+    }
+
+    interface ButtonProps extends Omit<React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, 'disabled'> {
         label?: string;
-        icon?: string;
+        icon?: IconType;
         iconPos?: PositionType;
         badge?: string;
         badgeClassName?: string;
         tooltip?: string;
         tooltipOptions?: TooltipOptions;
+        disabled?: boolean;
         loading?: boolean;
         loadingOptions?: LoadingOptions;
     }

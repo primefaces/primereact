@@ -11,17 +11,17 @@ export class ButtonDemo extends Component {
         super(props)
         this.state = {
             loading: false,
-            check: false,
-            disabled: false
+            done: false
         }
-        this.onClick = this.onClick.bind(this);
+
+        this.onLoadingClick = this.onLoadingClick.bind(this);
     }
 
-    onClick() {
-        this.setState({ check: false, loading: true, disabled: true })
+    onLoadingClick() {
+        this.setState({ loading: true, done: false });
         setTimeout(() => {
-            this.setState({ loading: false, check: true, disabled: false })
-        }, 2000)
+            this.setState({ loading: false, done: true });
+        }, 2000);
     }
 
     render() {
@@ -32,6 +32,7 @@ export class ButtonDemo extends Component {
                         <h1>Button</h1>
                         <p>Button is an extension to standard input element with icons and theming.</p>
                     </AppInlineHeader>
+
                     <AppDemoActions github="button/ButtonDemo.js" />
                 </div>
 
@@ -48,7 +49,10 @@ export class ButtonDemo extends Component {
                         <Button label="Submit" icon="pi pi-check" iconPos="right" />
 
                         <h5>Loading</h5>
-                        <Button label="Submit" disabled={this.state.disabled} onClick={this.onClick} loading={this.state.loading} icon={this.state.check ? 'pi pi-check' : null} iconPos="right" />
+                        <Button loading />
+                        <Button label="Submit" loading />
+                        <Button label="Submit" icon="pi pi-check" loading loadingOptions={{ position: 'right' }} />
+                        <Button label="Submit" icon={this.state.done && 'pi pi-check'} loading={this.state.loading} onClick={this.onLoadingClick} />
 
                         <h5>Severities</h5>
                         <Button label="Primary" />
