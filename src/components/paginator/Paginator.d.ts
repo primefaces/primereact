@@ -101,6 +101,12 @@ declare namespace Paginator {
     }
 
     interface CurrentPageReportOptions {
+        currentPage: number;
+        totalPages: number;
+        first: number;
+        last: number;
+        rows: number;
+        totalRecords: number;
         className: string;
         element: JSX.Element;
         props: PaginatorProps;
