@@ -23,18 +23,17 @@ export class ButtonDemo extends Component {
         super(props)
         this.state = {
             loading: false,
-            check: false,
-            disabled: false
+            done: false
         }
 
-        this.onClick = this.onClick.bind(this);
+        this.onLoadingClick = this.onLoadingClick.bind(this);
     }
 
-    onClick = () => {
-        this.setState({ check: false, loading: true, disabled: true })
+    onLoadingClick() {
+        this.setState({ loading: true, done: false });
         setTimeout(() => {
-            this.setState({ loading: false, check: true, disabled: false })
-        }, 2000)
+            this.setState({ loading: false, done: true });
+        }, 2000);
     }
 
     render() {
@@ -52,8 +51,11 @@ export class ButtonDemo extends Component {
                     <Button label="Submit" icon="pi pi-check" iconPos="right" />
 
                     <h5>Loading</h5>
-                    <Button label="Submit" disabled={this.state.disabled} onClick={this.onClick} loading={this.state.loading} icon={this.state.check ? 'pi pi-check' : null} iconPos="right" />
-
+                    <Button loading />
+                    <Button label="Submit" loading />
+                    <Button label="Submit" icon="pi pi-check" loading loadingOptions={{ position: 'right' }} />
+                    <Button label="Submit" icon={this.state.done && 'pi pi-check'} loading={this.state.loading} onClick={this.onLoadingClick} />
+                    
                     <h5>Severities</h5>
                     <Button label="Primary" />
                     <Button label="Secondary" className="p-button-secondary" />
@@ -172,19 +174,16 @@ import './ButtonDemo.css';
 const ButtonDemo = () => {
 
     const [loading, setLoading] = useState(false);
-    const [check, setCheck] = useState(false);
-    const [disabled, setDisabled] = useState(false);
+    const [done, setDone] = useState(false);
 
-    const onClick = () => {
+    const onLoadingClick = () => {
         setLoading(true);
-        setCheck(false);
-        setDisabled(true);
+        setDone(false)
 
         setTimeout(() => {
             setLoading(false);
-            setCheck(true);
-            setDisabled(false);
-        }, 2000)
+            setDone(true);
+        }, 2000);
     }
 
     return (
@@ -200,9 +199,11 @@ const ButtonDemo = () => {
                 <Button label="Submit" icon="pi pi-check" />
                 <Button label="Submit" icon="pi pi-check" iconPos="right" />
 
-
                 <h5>Loading</h5>
-                <Button label="Submit" disabled={disabled} onClick={onClick} loading={loading} icon={check ? 'pi pi-check' : null} iconPos="right" />
+                <Button loading />
+                <Button label="Submit" loading />
+                <Button label="Submit" icon="pi pi-check" loading loadingOptions={{ position: 'right' }} />
+                <Button label="Submit" icon={done && 'pi pi-check'} loading={loading} onClick={onLoadingClick} />
 
                 <h5>Severities</h5>
                 <Button label="Primary" />
@@ -321,19 +322,16 @@ import './ButtonDemo.css';
 const ButtonDemo = () => {
 
     const [loading, setLoading] = useState(false);
-    const [check, setCheck] = useState(false);
-    const [disabled, setDisabled] = useState(false);
+    const [done, setDone] = useState(false);
 
-    const onClick = () => {
+    const onLoadingClick = () => {
         setLoading(true);
-        setCheck(false);
-        setDisabled(true);
-
+        setDone(false)
+        
         setTimeout(() => {
             setLoading(false);
-            setCheck(true);
-            setDisabled(false);
-        }, 2000)
+            setDone(true);
+        }, 2000);
     }
 
     return (
@@ -350,7 +348,10 @@ const ButtonDemo = () => {
                 <Button label="Submit" icon="pi pi-check" iconPos="right" />
 
                 <h5>Loading</h5>
-                <Button label="Submit" disabled={disabled} onClick={onClick} loading={loading} icon={check ? 'pi pi-check' : null} iconPos="right" />
+                <Button loading />
+                <Button label="Submit" loading />
+                <Button label="Submit" icon="pi pi-check" loading loadingOptions={{ position: 'right' }} />
+                <Button label="Submit" icon={done && 'pi pi-check'} loading={loading} onClick={onLoadingClick} />
 
                 <h5>Severities</h5>
                 <Button label="Primary" />
@@ -545,11 +546,11 @@ import { Button } from 'primereact/button';
 `}
 </CodeHighlight>
                         <h5>Loading</h5>
-                        <p>Loading on a button is specified with <i>loading</i> property and position is configured using <i>iconPos</i> attribute. Default
-                        loading position is "left" and alternative is "right". To display only a loading, leave label as undefined.</p>
+                        <p>Loading on a button is specified with <i>loading</i> attribute, and position is configured using <i>loadingOptions</i> attribute and it's <i>position</i> property. Default
+                        loading position is "left" and alternative is "right". Loading icon also can be change with icon property of <i>loadingOptions</i>. To display only a loading, leave label as undefined.</p>
 <CodeHighlight>
 {`
-<Button label="Submit" loading iconPos="right" />
+<Button label="Submit" loading loadingOptions={{ position: 'right' }} />
 `}
 </CodeHighlight>
 
@@ -645,6 +646,18 @@ import { Button } from 'primereact/button';
                                         <td>object</td>
                                         <td>null</td>
                                         <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>loading</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>Loading icon of the button</td>
+                                    </tr>
+                                    <tr>
+                                        <td>loadingOptions</td>
+                                        <td>object</td>
+                                        <td>null</td>
+                                        <td>Configuration of the loading that contains custom icon and position of the loading</td>
                                     </tr>
                                 </tbody>
                             </table>
