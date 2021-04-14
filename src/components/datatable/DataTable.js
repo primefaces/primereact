@@ -1231,8 +1231,18 @@ export class DataTable extends Component {
                     let dataFieldValue = ObjectUtils.resolveFieldData(value[i], columnField);
                     let filterMatchMode = filterMeta.matchMode||col.props.filterMatchMode;
                     let filterConstraint = filterMatchMode === 'custom' ? col.props.filterFunction : FilterUtils[filterMatchMode];
+                    let options = {
+                        rowData: value[i],
+                        filters,
+                        props: this.props,
+                        column: {
+                            filterMeta,
+                            filterField: columnField,
+                            props: col.props
+                        }
+                    };
 
-                    if (filterConstraint !== null && !filterConstraint(dataFieldValue, filterValue, this.props.filterLocale)) {
+                    if (filterConstraint !== null && !filterConstraint(dataFieldValue, filterValue, this.props.filterLocale, options)) {
                         localMatch = false;
                     }
 

@@ -817,14 +817,25 @@ export class TreeTable extends Component {
                 let col = columns[j];
                 let filterMeta = filters ? filters[col.props.field] : null;
                 let filterField = col.props.field;
-                let filterValue, filterConstraint, paramsWithoutNode;
+                let filterValue, filterConstraint, paramsWithoutNode, options;
 
                 //local
                 if (filterMeta) {
                     let filterMatchMode = filterMeta.matchMode || col.props.filterMatchMode;
                     filterValue = filterMeta.value;
                     filterConstraint = filterMatchMode === 'custom' ? col.props.filterFunction : FilterUtils[filterMatchMode];
-                    paramsWithoutNode = {filterField, filterValue, filterConstraint, isStrictMode};
+                    options = {
+                        rowData: node,
+                        filters,
+                        props: this.props,
+                        column: {
+                            filterMeta,
+                            filterField,
+                            props: col.props
+                        }
+                    };
+
+                    paramsWithoutNode = {filterField, filterValue, filterConstraint, isStrictMode, options};
                     if ((isStrictMode && !(this.findFilteredNodes(copyNode, paramsWithoutNode) || this.isFilterMatched(copyNode, paramsWithoutNode))) ||
                         (!isStrictMode && !(this.isFilterMatched(copyNode, paramsWithoutNode) || this.findFilteredNodes(copyNode, paramsWithoutNode)))) {
                             localMatch = false;
@@ -883,10 +894,10 @@ export class TreeTable extends Component {
         }
     }
 
-    isFilterMatched(node, {filterField, filterValue, filterConstraint, isStrictMode}) {
+    isFilterMatched(node, {filterField, filterValue, filterConstraint, isStrictMode, options}) {
         let matched = false;
         let dataFieldValue = ObjectUtils.resolveFieldData(node.data, filterField);
-        if (filterConstraint(dataFieldValue, filterValue, this.props.filterLocale)) {
+        if (filterConstraint(dataFieldValue, filterValue, this.props.filterLocale, options)) {
             matched = true;
         }
 
