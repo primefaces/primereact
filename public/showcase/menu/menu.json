@@ -406,19 +406,19 @@
                     ]
                 },
                 {
-                    "name": "ToggleButton",
-                    "to": "/togglebutton",
-                    "meta": [
-                        "togglebutton"
-                    ]
-                },
-                {
                     "name": "MultiStateCheckbox",
                     "to": "/multistatecheckbox",
                     "meta": [
                         "multistatecheckbox"
                     ],
                     "badge": "new"
+                },
+                {
+                    "name": "ToggleButton",
+                    "to": "/togglebutton",
+                    "meta": [
+                        "togglebutton"
+                    ]
                 }
             ]
         },
