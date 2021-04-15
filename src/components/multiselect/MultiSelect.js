@@ -296,9 +296,8 @@ export class MultiSelect extends Component {
             }
             else {
                 value = visibleOptions.map(option => this.getOptionValue(option));
-                if (value.some((val) => this.isOptionDisabled(val)))
-                    value = [...value].filter(val => !this.isOptionDisabled(val))
             }
+            value = [...value].filter(val => !this.isOptionDisabled(val))
         }
 
         this.updateModel(event.originalEvent, value);
@@ -592,14 +591,14 @@ export class MultiSelect extends Component {
         else {
             if (this.props.value && this.props.options) {
                 let optionCount = 0;
-                if (this.props.optionGroupLabel)
-                    this.props.options.forEach(optionGroup => optionCount += this.getOptionGroupChildren(optionGroup).length);
+                if (this.props.optionGroupLabel) {
+                    this.props.options.forEach(optionGroup => {
+                        optionCount += this.getOptionGroupChildren(optionGroup).filter((option) => !this.isOptionDisabled(option)).length
+                    });
+                }
                 else
-                    if (this.props.options.some((option) => this.isOptionDisabled(option)))
-                        optionCount = this.props.options.filter((option) => !this.isOptionDisabled(option)).length;
-                    else
-                        optionCount = this.props.options.length;
-                        
+                    optionCount = this.props.options.filter((option) => !this.isOptionDisabled(option)).length;
+
                 return optionCount > 0 && optionCount === this.props.value.length;
             }
             return false;
