@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
-import { CSSTransition } from 'react-transition-group';
+import { CSSTransition } from '../transition/CSSTransition';
 import { Ripple } from '../ripple/Ripple';
+import { ZIndexUtils } from '../utils/ZIndexUtils';
 
 export class Sidebar extends Component {
 
@@ -23,6 +24,7 @@ export class Sidebar extends Component {
         closeOnEscape: true,
         icons: null,
         modal: true,
+        transitionOptions: null,
         onShow: null,
         onHide: null
     };
@@ -42,6 +44,7 @@ export class Sidebar extends Component {
         closeOnEscape: PropTypes.bool,
         icons: PropTypes.any,
         modal: PropTypes.bool,
+        transitionOptions: PropTypes.object,
         onShow: PropTypes.func,
         onHide: PropTypes.func.isRequired
     };
@@ -53,6 +56,9 @@ export class Sidebar extends Component {
         this.onEnter = this.onEnter.bind(this);
         this.onEntered = this.onEntered.bind(this);
         this.onExit = this.onExit.bind(this);
+        this.onExited = this.onExited.bind(this);
+
+        this.sidebarRef = React.createRef();
     }
 
     onCloseClick(event) {
@@ -61,7 +67,7 @@ export class Sidebar extends Component {
     }
 
     onEnter() {
-        this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
+        ZIndexUtils.set('modal', this.sidebarRef.current, this.props.baseZIndex);
         if (this.props.modal) {
             this.enableModality();
         }
@@ -76,9 +82,7 @@ export class Sidebar extends Component {
             this.closeIcon.focus();
         }
 
-        if (this.props.onShow) {
-            this.props.onShow();
-        }
+        this.props.onShow && this.props.onShow();
     }
 
     onExit() {
@@ -90,12 +94,16 @@ export class Sidebar extends Component {
         }
     }
 
+    onExited() {
+        ZIndexUtils.clear(this.sidebarRef.current);
+    }
+
     enableModality() {
         if (!this.mask) {
             this.mask = document.createElement('div');
-            this.mask.style.zIndex = String(parseInt(this.container.style.zIndex, 10) - 1);
+            this.mask.style.zIndex = String(ZIndexUtils.get(this.sidebarRef.current) - 1);
             let maskClassName = 'p-component-overlay p-sidebar-mask';
-            if(this.props.blockScroll) {
+            if (this.props.blockScroll) {
                 maskClassName += ' p-sidebar-mask-scrollblocker';
             }
             DomHandler.addMultipleClasses(this.mask, maskClassName);
@@ -139,7 +147,7 @@ export class Sidebar extends Component {
     bindDocumentEscapeListener() {
         this.documentEscapeListener = (event) => {
             if (event.which === 27) {
-                if (parseInt(this.container.style.zIndex, 10) === (DomHandler.getCurrentZIndex() + this.props.baseZIndex)) {
+                if (ZIndexUtils.get(this.sidebarRef.current) === ZIndexUtils.getCurrent()) {
                     this.onCloseClick(event);
                 }
             }
@@ -184,13 +192,15 @@ export class Sidebar extends Component {
     componentWillUnmount() {
         this.unbindMaskClickListener();
         this.disableModality();
+
+        ZIndexUtils.clear(this.sidebarRef.current);
     }
 
     renderCloseIcon() {
         if (this.props.showCloseIcon) {
             return (
                 <button type="button" ref={el => this.closeIcon = el} className="p-sidebar-close p-sidebar-icon p-link" onClick={this.onCloseClick} aria-label={this.props.ariaCloseLabel}>
-                    <span className="p-sidebar-close-icon pi pi-times"/>
+                    <span className="p-sidebar-close-icon pi pi-times" />
                     <Ripple />
                 </button>
             );
@@ -209,7 +219,7 @@ export class Sidebar extends Component {
 
     render() {
         const className = classNames('p-sidebar p-component', this.props.className, 'p-sidebar-' + this.props.position,
-                                       {'p-sidebar-active': this.props.visible, 'p-sidebar-full': this.props.fullScreen});
+            { 'p-sidebar-active': this.props.visible, 'p-sidebar-full': this.props.fullScreen });
         const closeIcon = this.renderCloseIcon();
         const icons = this.renderIcons();
 
@@ -219,9 +229,9 @@ export class Sidebar extends Component {
         };
 
         return (
-            <CSSTransition classNames="p-sidebar" in={this.props.visible} timeout={transitionTimeout}
-                    unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit}>
-                <div ref={(el) => this.container=el} id={this.props.id} className={className} style={this.props.style} role="complementary">
+            <CSSTransition nodeRef={this.sidebarRef} classNames="p-sidebar" in={this.props.visible} timeout={transitionTimeout} options={this.props.transitionOptions}
+                unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit} onExited={this.onExited}>
+                <div ref={this.sidebarRef} id={this.props.id} className={className} style={this.props.style} role="complementary">
                     <div className="p-sidebar-icons">
                         {icons}
                         {closeIcon}

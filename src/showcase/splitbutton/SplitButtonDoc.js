@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 
 export class SplitButtonDoc extends Component {
 
@@ -222,7 +222,7 @@ const SplitButtonDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
                         <h5>Import</h5>
@@ -236,52 +236,44 @@ import {SplitButton} from 'primereact/splitbutton';
                         <p>SplitButton has a default command button and a collection of additional options defined by the <i>model</i> property.</p>
                         <CodeHighlight lang="js">
 {`
-export class SplitButtonDemo extends Component {
+export const SplitButtonDemo = () => {
 
-    constructor() {
-        super();
-        this.state = {
-            items: [
-                {
-                    label: 'Update',
-                    icon: 'pi pi-refresh',
-                    command: (e) => {
-                        this.toast.show({severity:'success', summary:'Updated', detail:'Data Updated'});
-                    }
-                },
-                {
-                    label: 'Delete',
-                    icon: 'pi pi-times',
-                    command: (e) => {
-                        this.toast.show({ severity: 'success', summary: 'Delete', detail: 'Data Deleted' });
-                    }
-                },
-                {
-                    label: 'React Website',
-                    icon: 'pi pi-external-link',
-                    command:(e) => {
-                        window.location.href = 'https://facebook.github.io/react/'
-                    }
-                },
-                {   label: 'Upload',
-                    icon: 'pi pi-upload',
-                    command:(e) => {
-                        window.location.hash = "/fileupload"
-                    }
-                }
-            ]
+    const items = [
+        {
+            label: 'Update',
+            icon: 'pi pi-refresh',
+            command: (e) => {
+                toast.current.show({severity:'success', summary:'Updated', detail:'Data Updated'});
+            }
+        },
+        {
+            label: 'Delete',
+            icon: 'pi pi-times',
+            command: (e) => {
+                toast.current.show({ severity: 'success', summary: 'Delete', detail: 'Data Deleted' });
+            }
+        },
+        {
+            label: 'React Website',
+            icon: 'pi pi-external-link',
+            command:(e) => {
+                window.location.href = 'https://facebook.github.io/react/'
+            }
+        },
+        {   label: 'Upload',
+            icon: 'pi pi-upload',
+            command:(e) => {
+                window.location.hash = "/fileupload"
+            }
         }
+    ]
 
-        this.save = this.save.bind(this);
+    const save = () => {
+        toast.current.show({severity: 'success', summary: 'Success', detail: 'Data Saved'});
     }
 
-    save() {
-        this.toast.show({severity: 'success', summary: 'Success', detail: 'Data Saved'});
-    }
-
-    render() {
         return (
-            <SplitButton label="Save" icon="pi pi-plus" onClick={this.save} model={this.state.items}></SplitButton>
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items}></SplitButton>
         )
     }
 }
@@ -306,11 +298,11 @@ export class SplitButtonDemo extends Component {
 <CodeHighlight>
 {`
 <SplitButton label="Primary" />
-<SplitButton label="Secondary" className="p-button-secondary" model={this.state.items} />
-<SplitButton label="Success" className="p-button-success" model={this.state.items} />
-<SplitButton label="Info" className="p-button-info" model={this.state.items} />
-<SplitButton label="Warning" className="p-button-warning" model={this.state.items} />
-<SplitButton label="Danger" className="p-button-danger" model={this.state.items} />
+<SplitButton label="Secondary" className="p-button-secondary" model={items} />
+<SplitButton label="Success" className="p-button-success" model={items} />
+<SplitButton label="Info" className="p-button-info" model={items} />
+<SplitButton label="Warning" className="p-button-warning" model={items} />
+<SplitButton label="Danger" className="p-button-danger" model={items} />
 
 `}
 </CodeHighlight>
@@ -383,15 +375,15 @@ export class SplitButtonDemo extends Component {
                                     </tr>
                                     <tr>
                                         <td>tabIndex</td>
-                                        <td>string</td>
+                                        <td>number</td>
                                         <td>null</td>
                                         <td>Index of the element in tabbing order.</td>
                                     </tr>
                                     <tr>
                                         <td>appendTo</td>
-                                        <td>DOM element</td>
-                                        <td>null</td>
-                                        <td>DOM element instance where the dialog should be mounted.</td>
+                                        <td>DOM element | string</td>
+                                        <td>document.body</td>
+                                        <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
                                     </tr>
                                     <tr>
                                         <td>tooltip</td>
@@ -410,6 +402,12 @@ export class SplitButtonDemo extends Component {
                                         <td>any</td>
                                         <td>null</td>
                                         <td>Template of the default button.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>transitionOptions</td>
+                                        <td>object</td>
+                                        <td>null</td>
+                                        <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -430,6 +428,16 @@ export class SplitButtonDemo extends Component {
                                         <td>onClick</td>
                                         <td>event: Browser event</td>
                                         <td>Callback to invoke when main button is clicked.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onShow</td>
+                                        <td>-</td>
+                                        <td>Callback to invoke when overlay panel becomes visible.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onHide</td>
+                                        <td>-</td>
+                                        <td>Callback to invoke when overlay panel becomes hidden.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -466,9 +474,9 @@ export class SplitButtonDemo extends Component {
                         <p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="SplitButtonDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'SplitButtonDemo', sources: this.sources })
+                    }
                 </TabView >
             </div>
         )

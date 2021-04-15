@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 
 export class DropdownDoc extends Component {
 
@@ -24,7 +24,8 @@ export class DropdownDemo extends Component {
         this.state = {
             selectedCity1: null,
             selectedCity2: null,
-            selectedCountry: null
+            selectedCountry: null,
+            selectedGroupedCity: null
         };
 
         this.cities = [
@@ -48,9 +49,40 @@ export class DropdownDemo extends Component {
             {name: 'United States', code: 'US'}
         ];
 
+        this.groupedCities = [
+            {
+                label: 'Germany', code: 'DE',
+                items: [
+                    { label: 'Berlin', value: 'Berlin' },
+                    { label: 'Frankfurt', value: 'Frankfurt' },
+                    { label: 'Hamburg', value: 'Hamburg' },
+                    { label: 'Munich', value: 'Munich' }
+                ]
+            },
+            {
+                label: 'USA', code: 'US',
+                items: [
+                    { label: 'Chicago', value: 'Chicago' },
+                    { label: 'Los Angeles', value: 'Los Angeles' },
+                    { label: 'New York', value: 'New York' },
+                    { label: 'San Francisco', value: 'San Francisco' }
+                ]
+            },
+            {
+                label: 'Japan', code: 'JP',
+                items: [
+                    { label: 'Kyoto', value: 'Kyoto' },
+                    { label: 'Osaka', value: 'Osaka' },
+                    { label: 'Tokyo', value: 'Tokyo' },
+                    { label: 'Yokohama', value: 'Yokohama' }
+                ]
+            }
+        ];
+
         this.onCityChange = this.onCityChange.bind(this);
         this.onCityChange2 = this.onCityChange2.bind(this);
         this.onCountryChange = this.onCountryChange.bind(this);
+        this.onGroupedCityChange = this.onGroupedCityChange.bind(this);
     }
 
     onCityChange(e) {
@@ -63,6 +95,10 @@ export class DropdownDemo extends Component {
 
     onCountryChange(e) {
         this.setState({ selectedCountry: e.value });
+    }
+
+    onGroupedCityChange(e) {
+        this.setState({ selectedGroupedCity: e.value });
     }
 
     selectedCountryTemplate(option, props) {
@@ -91,6 +127,15 @@ export class DropdownDemo extends Component {
         );
     }
 
+    groupedItemTemplate(option) {
+        return (
+            <div className="p-d-flex p-ai-center country-item">
+                <img alt={option.label} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <div>{option.label}</div>
+            </div>
+        );
+    }
+
     render() {
         return (
             <div className="dropdown-demo">
@@ -100,6 +145,10 @@ export class DropdownDemo extends Component {
 
                     <h5>Editable</h5>
                     <Dropdown value={this.state.selectedCity2} options={this.cities} onChange={this.onCityChange2} optionLabel="name" editable />
+
+                    <h5>Grouped</h5>
+                    <Dropdown value={this.state.selectedGroupedCity} options={this.groupedCities} onChange={this.onGroupedCityChange} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
+                        optionGroupTemplate={this.groupedItemTemplate} />
 
                     <h5>Advanced with Templating, Filtering and Clear Icon</h5>
                     <Dropdown value={this.state.selectedCountry} options={this.countries} onChange={this.onCountryChange} optionLabel="name" filter showClear filterBy="name" placeholder="Select a Country"
@@ -122,6 +171,7 @@ const DropdownDemo = () => {
     const [selectedCity1, setSelectedCity1] = useState(null);
     const [selectedCity2, setSelectedCity2] = useState(null);
     const [selectedCountry, setSelectedCountry] = useState(null);
+    const [selectedGroupedCity, setSelectedGroupedCity] = useState(null);
     const cities = [
         { name: 'New York', code: 'NY' },
         { name: 'Rome', code: 'RM' },
@@ -141,6 +191,35 @@ const DropdownDemo = () => {
         {name: 'Spain', code: 'ES'},
         {name: 'United States', code: 'US'}
     ];
+    const groupedCities = [
+        {
+            label: 'Germany', code: 'DE',
+            items: [
+                { label: 'Berlin', value: 'Berlin' },
+                { label: 'Frankfurt', value: 'Frankfurt' },
+                { label: 'Hamburg', value: 'Hamburg' },
+                { label: 'Munich', value: 'Munich' }
+            ]
+        },
+        {
+            label: 'USA', code: 'US',
+            items: [
+                { label: 'Chicago', value: 'Chicago' },
+                { label: 'Los Angeles', value: 'Los Angeles' },
+                { label: 'New York', value: 'New York' },
+                { label: 'San Francisco', value: 'San Francisco' }
+            ]
+        },
+        {
+            label: 'Japan', code: 'JP',
+            items: [
+                { label: 'Kyoto', value: 'Kyoto' },
+                { label: 'Osaka', value: 'Osaka' },
+                { label: 'Tokyo', value: 'Tokyo' },
+                { label: 'Yokohama', value: 'Yokohama' }
+            ]
+        }
+    ];
 
     const onCityChange = (e) => {
         setSelectedCity1(e.value);
@@ -152,6 +231,10 @@ const DropdownDemo = () => {
 
     const onCountryChange = (e) => {
         setSelectedCountry(e.value);
+    }
+
+    const onGroupedCityChange = (e) => {
+        setSelectedGroupedCity(e.value);
     }
 
     const selectedCountryTemplate = (option, props) => {
@@ -180,6 +263,15 @@ const DropdownDemo = () => {
         );
     }
 
+    const groupedItemTemplate = (option) => {
+        return (
+            <div className="p-d-flex p-ai-center country-item">
+                <img alt={option.label} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <div>{option.label}</div>
+            </div>
+        );
+    }
+
     return (
         <div className="dropdown-demo">
             <div className="card">
@@ -188,6 +280,10 @@ const DropdownDemo = () => {
 
                 <h5>Editable</h5>
                 <Dropdown value={selectedCity2} options={cities} onChange={onCityChange2} optionLabel="name" editable />
+
+                <h5>Grouped</h5>
+                <Dropdown value={selectedGroupedCity} options={groupedCities} onChange={onGroupedCityChange} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
+                    optionGroupTemplate={groupedItemTemplate} />
 
                 <h5>Advanced with Templating, Filtering and Clear Icon</h5>
                 <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" filter showClear filterBy="name" placeholder="Select a Country"
@@ -209,6 +305,7 @@ const DropdownDemo = () => {
     const [selectedCity1, setSelectedCity1] = useState<any>(null);
     const [selectedCity2, setSelectedCity2] = useState<any>(null);
     const [selectedCountry, setSelectedCountry] = useState<any>(null);
+    const [selectedGroupedCity, setSelectedGroupedCity] = useState<any>(null);
     const cities = [
         { name: 'New York', code: 'NY' },
         { name: 'Rome', code: 'RM' },
@@ -228,6 +325,35 @@ const DropdownDemo = () => {
         {name: 'Spain', code: 'ES'},
         {name: 'United States', code: 'US'}
     ];
+    const groupedCities = [
+        {
+            label: 'Germany', code: 'DE',
+            items: [
+                { label: 'Berlin', value: 'Berlin' },
+                { label: 'Frankfurt', value: 'Frankfurt' },
+                { label: 'Hamburg', value: 'Hamburg' },
+                { label: 'Munich', value: 'Munich' }
+            ]
+        },
+        {
+            label: 'USA', code: 'US',
+            items: [
+                { label: 'Chicago', value: 'Chicago' },
+                { label: 'Los Angeles', value: 'Los Angeles' },
+                { label: 'New York', value: 'New York' },
+                { label: 'San Francisco', value: 'San Francisco' }
+            ]
+        },
+        {
+            label: 'Japan', code: 'JP',
+            items: [
+                { label: 'Kyoto', value: 'Kyoto' },
+                { label: 'Osaka', value: 'Osaka' },
+                { label: 'Tokyo', value: 'Tokyo' },
+                { label: 'Yokohama', value: 'Yokohama' }
+            ]
+        }
+    ];
 
     const onCityChange = (e: { value: any }) => {
         setSelectedCity1(e.value);
@@ -239,6 +365,10 @@ const DropdownDemo = () => {
 
     const onCountryChange = (e: { value: any }) => {
         setSelectedCountry(e.value);
+    }
+
+    const onGroupedCityChange = (e: { value: any }) => {
+        setSelectedGroupedCity(e.value);
     }
 
     const selectedCountryTemplate = (option: { name: string, code: string }, props: { placeholder: string }) => {
@@ -267,6 +397,15 @@ const DropdownDemo = () => {
         );
     }
 
+    const groupedItemTemplate = (option: any) => {
+        return (
+            <div className="p-d-flex p-ai-center country-item">
+                <img alt={option.label} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <div>{option.label}</div>
+            </div>
+        );
+    }
+
     return (
         <div className="dropdown-demo">
             <div className="card">
@@ -275,6 +414,10 @@ const DropdownDemo = () => {
 
                 <h5>Editable</h5>
                 <Dropdown value={selectedCity2} options={cities} onChange={onCityChange2} optionLabel="name" editable />
+
+                <h5>Grouped</h5>
+                <Dropdown value={selectedGroupedCity} options={groupedCities} onChange={onGroupedCityChange} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
+                    optionGroupTemplate={groupedItemTemplate} />
 
                 <h5>Advanced with Templating, Filtering and Clear Icon</h5>
                 <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" filter showClear filterBy="name" placeholder="Select a Country"
@@ -308,7 +451,7 @@ const DropdownDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
                         <h5>Import</h5>
@@ -339,7 +482,7 @@ const citySelectItems = [
 
 <CodeHighlight>
 {`
-<Dropdown value={this.state.city} options={citySelectItems} onChange={(e) => {this.setState({city: e.value})}} placeholder="Select a City"/>
+<Dropdown value={city} options={citySelectItems} onChange={(e) => setCity(e.value)} placeholder="Select a City"/>
 `}
 </CodeHighlight>
 
@@ -358,8 +501,8 @@ const cities = [
 
 <CodeHighlight>
 {`
-<Dropdown optionLabel="name" value={this.state.city} options={cities} onChange={(e) => {this.setState({city: e.value})}} placeholder="Select a City"/>
-<Dropdown optionLabel="name" optionValue="code" value={this.state.city} options={cities} onChange={(e) => {this.setState({city: e.value})}} placeholder="Select a City"/>
+<Dropdown optionLabel="name" value={city} options={cities} onChange={(e) => setCity(e.value)} placeholder="Select a City"/>
+<Dropdown optionLabel="name" optionValue="code" value={city} options={cities} onChange={(e) => setCity(e.value)} placeholder="Select a City"/>
 `}
 </CodeHighlight>
                         <p>When <i>optionValue</i> is not defined, value of an option refers to the option object itself.</p>
@@ -374,8 +517,8 @@ const cities = [
 
 <CodeHighlight>
 {`
-<Dropdown value={this.state.selectedCountry} options={this.countries} onChange={(e) => this.setState({ selectedCountry: e.value })} optionLabel="name" filter showClear filterBy="name"
-    placeholder="Select a Country" itemTemplate={this.countryOptionTemplate} />
+<Dropdown value={selectedCountry} options={countries} onChange={(e) => setSelectedCountry(e.value)} optionLabel="name" filter showClear filterBy="name"
+    placeholder="Select a Country" itemTemplate={countryOptionTemplate} />
 `}
 </CodeHighlight>
 
@@ -383,14 +526,14 @@ const cities = [
                         <p>Label of an option is used as the display text of an item by default, for custom content support define an <i>itemTemplate</i> function that gets the option instance as a parameter and returns the content.</p>
 <CodeHighlight>
 {`
-<Dropdown value={this.state.selectedCountry} options={this.countries} onChange={(e) => this.setState({ selectedCountry: e.value })} optionLabel="name" placeholder="Select a Country"
-    valueTemplate={this.selectedCountryTemplate} itemTemplate={this.countryOptionTemplate} />
+<Dropdown value={selectedCountry} options={countries} onChange={(e) => setSelectedCountry(e.value)} optionLabel="name" placeholder="Select a Country"
+    valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
 `}
 </CodeHighlight>
 
 <CodeHighlight lang="js">
 {`
-selectedCountryTemplate(option, props) {
+const selectedCountryTemplate = (option, props) => {
     if (option) {
         return (
             <div className="country-item country-item-value">
@@ -407,7 +550,7 @@ selectedCountryTemplate(option, props) {
     );
 }
 
-countryOptionTemplate(option) {
+const countryOptionTemplate = (option) => {
     return (
         <div className="country-item">
             <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} />
@@ -418,6 +561,47 @@ countryOptionTemplate(option) {
 `}
 </CodeHighlight>
 
+                        <h5>Grouping</h5>
+                        <p>Options groups are specified with the <i>optionGroupLabel</i> and <i>optionGroupChildren</i> properties.</p>
+<CodeHighlight>
+{`
+const groupedCities = [
+    {
+        label: 'Germany', code: 'DE',
+        items: [
+            { label: 'Berlin', value: 'Berlin' },
+            { label: 'Frankfurt', value: 'Frankfurt' },
+            { label: 'Hamburg', value: 'Hamburg' },
+            { label: 'Munich', value: 'Munich' }
+        ]
+    },
+    {
+        label: 'USA', code: 'US',
+        items: [
+            { label: 'Chicago', value: 'Chicago' },
+            { label: 'Los Angeles', value: 'Los Angeles' },
+            { label: 'New York', value: 'New York' },
+            { label: 'San Francisco', value: 'San Francisco' }
+        ]
+    },
+    {
+        label: 'Japan', code: 'JP',
+        items: [
+            { label: 'Kyoto', value: 'Kyoto' },
+            { label: 'Osaka', value: 'Osaka' },
+            { label: 'Tokyo', value: 'Tokyo' },
+            { label: 'Yokohama', value: 'Yokohama' }
+        ]
+    }
+];
+`}
+</CodeHighlight>
+
+<CodeHighlight>
+{`
+<Dropdown value={selectedGroupedCity} options={groupedCities} onChange={e => setSelectedGroupedCity(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items" />
+`}
+</CodeHighlight>
                         <h5>SelectItem API</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -513,6 +697,24 @@ countryOptionTemplate(option) {
                                         <td>Name of the value field of an option when arbitrary objects are used as options instead of SelectItems.</td>
                                     </tr>
                                     <tr>
+                                        <td>optionDisabled</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Property name or getter function to use as the disabled flag of an option, defaults to false when not defined.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>optionGroupLabel</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Property name or getter function to use as the label of an option group.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>optionGroupChildren</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Property name or getter function that refers to the children options of option group.</td>
+                                    </tr>
+                                    <tr>
                                         <td>valueTemplate</td>
                                         <td>any</td>
                                         <td>null</td>
@@ -523,6 +725,12 @@ countryOptionTemplate(option) {
                                         <td>any</td>
                                         <td>null</td>
                                         <td>The template of items.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>optionGroupTemplate</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Template of an option group item.</td>
                                     </tr>
                                     <tr>
                                         <td>style</td>
@@ -610,9 +818,9 @@ countryOptionTemplate(option) {
                                     </tr>
                                     <tr>
                                         <td>appendTo</td>
-                                        <td>DOM element</td>
-                                        <td>null</td>
-                                        <td>DOM element instance where the dialog should be mounted.</td>
+                                        <td>DOM element | string</td>
+                                        <td>document.body</td>
+                                        <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
                                     </tr>
                                     <tr>
                                         <td>tabIndex</td>
@@ -633,6 +841,12 @@ countryOptionTemplate(option) {
                                         <td>When the panel is opened, it specifies that the filter input should focus automatically.</td>
                                     </tr>
                                     <tr>
+                                        <td>showFilterClear</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>When enabled, a clear icon is displayed to clear the filtered value.</td>
+                                    </tr>
+                                    <tr>
                                         <td>panelClassName</td>
                                         <td>string</td>
                                         <td>null</td>
@@ -640,7 +854,7 @@ countryOptionTemplate(option) {
                                     </tr>
                                     <tr>
                                         <td>panelStyle</td>
-                                        <td>string</td>
+                                        <td>object</td>
                                         <td>null</td>
                                         <td>Inline style of the overlay panel element.</td>
                                     </tr>
@@ -691,6 +905,18 @@ countryOptionTemplate(option) {
                                         <td>string</td>
                                         <td>null</td>
                                         <td>Contains the element IDs of labels.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>transitionOptions</td>
+                                        <td>object</td>
+                                        <td>null</td>
+                                        <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>showOnFocus</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>When enabled, overlay panel will be visible with input focus.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -758,6 +984,16 @@ countryOptionTemplate(option) {
                                         <td>-</td>
                                         <td>Reset the options filter.</td>
                                     </tr>
+                                    <tr>
+                                        <td>onShow</td>
+                                        <td>-</td>
+                                        <td>Callback to invoke when overlay panel becomes visible.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onHide</td>
+                                        <td>-</td>
+                                        <td>Callback to invoke when overlay panel becomes hidden.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -821,9 +1057,9 @@ countryOptionTemplate(option) {
                         <p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="DropdownDemo" sources={this.sources} extFiles={this.extFiles} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'DropdownDemo', sources: this.sources, extFiles: this.extFiles })
+                    }
                 </TabView>
             </div>
         )

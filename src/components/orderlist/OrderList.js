@@ -4,7 +4,7 @@ import {OrderListControls} from './OrderListControls';
 import {OrderListSubList} from './OrderListSubList';
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
-import classNames from 'classnames'
+import { classNames } from '../utils/ClassNames';
 
 export class OrderList extends Component {
 
@@ -16,7 +16,7 @@ export class OrderList extends Component {
         className: null,
         listStyle: null,
         dragdrop: false,
-        tabIndex: '0',
+        tabIndex: 0,
         onChange: null,
         itemTemplate: null
     }
@@ -29,7 +29,7 @@ export class OrderList extends Component {
         className: PropTypes.string,
         listStyle: PropTypes.object,
         dragdrop: PropTypes.bool,
-        tabIndex: PropTypes.string,
+        tabIndex: PropTypes.number,
         onChange: PropTypes.func,
         itemTemplate: PropTypes.func
     }
@@ -73,7 +73,7 @@ export class OrderList extends Component {
         switch(event.originalEvent.which) {
             //down
             case 40:
-                var nextItem = this.findNextItem(listItem);
+                let nextItem = this.findNextItem(listItem);
                 if (nextItem) {
                     nextItem.focus();
                 }
@@ -83,7 +83,7 @@ export class OrderList extends Component {
 
             //up
             case 38:
-                var prevItem = this.findPrevItem(listItem);
+                let prevItem = this.findPrevItem(listItem);
                 if (prevItem) {
                     prevItem.focus();
                 }

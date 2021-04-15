@@ -3,9 +3,10 @@ import { TreeTable } from '../../components/treetable/TreeTable';
 import { Column } from '../../components/column/Column';
 import { InputText } from '../../components/inputtext/InputText';
 import { NodeService } from '../service/NodeService';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class TreeTableFilterDemo extends Component {
 
@@ -47,6 +48,7 @@ export class TreeTableFilterDemo extends Component {
                         property of column object that also accepts "contains", "endsWith", "equals", "in" and "custom". An optional global filter feature is available to search all fields with a keyword.
                             By default input fields are generated as filter elements and using templating any component can be used as a filter.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="treetable/TreeTableFilterDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -279,11 +281,11 @@ const TreeTableFilterDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="TreeTableFilterDemo" sources={this.sources} service="NodeService" data="treetablenodes" />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'TreeTableFilterDemo', sources: this.sources, service: 'NodeService', data: 'treetablenodes' })
+                    }
                 </TabView>
             </div>
         )

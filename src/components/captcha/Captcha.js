@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 export class Captcha extends Component {
@@ -22,7 +21,7 @@ export class Captcha extends Component {
         theme: PropTypes.string,
         type: PropTypes.string,
         size: PropTypes.string,
-        tabindex: PropTypes.number,
+        tabIndex: PropTypes.number,
         language: PropTypes.string,
         onResponse: PropTypes.func,
         onExpire: PropTypes.func
@@ -72,7 +71,7 @@ export class Captcha extends Component {
     addRecaptchaScript() {
         this.recaptchaScript = null;
         if (!(window).grecaptcha) {
-            var head = document.head || document.getElementsByTagName('head')[0];
+            let head = document.head || document.getElementsByTagName('head')[0];
             this.recaptchaScript = document.createElement('script');
             this.recaptchaScript.src = "https://www.google.com/recaptcha/api.js?render=explicit";
             this.recaptchaScript.async = true;
@@ -106,6 +105,6 @@ export class Captcha extends Component {
     }
 
     render() {
-        return <div id={this.props.id} ref={(el) => this.targetEL = ReactDOM.findDOMNode(el)}></div>
+        return <div id={this.props.id} ref={(el) => this.targetEL = el}></div>
     }
 }

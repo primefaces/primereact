@@ -5,6 +5,7 @@ import { Button } from '../../components/button/Button';
 import { NodeService } from '../service/NodeService';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { TreeTableDoc } from './TreeTableDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class TreeTableDemo extends Component {
 
@@ -39,7 +40,8 @@ export class TreeTableDemo extends Component {
                     <AppInlineHeader changelogText="treeTable">
                         <h1>TreeTable</h1>
                         <p>TreeTable is used to display hierarchical data in tabular format.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="treetable/TreeTableDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

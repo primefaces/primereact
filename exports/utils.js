@@ -1,3 +1,3 @@
 'use strict';
 
-module.exports = require('./components/utils/PrimeReact');
+module.exports = require('./components/utils/ClassNames');

@@ -3,9 +3,10 @@ import { DataTable } from '../../components/datatable/DataTable';
 import { Column } from '../../components/column/Column';
 import ProductService from '../service/ProductService';
 import { MultiSelect } from '../../components/multiselect/MultiSelect';
-import { TabView,TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DataTableColTogglerDemo extends Component {
 
@@ -55,6 +56,7 @@ export class DataTableColTogglerDemo extends Component {
                         <h1>DataTable <span>Column Toggler</span></h1>
                         <p>MultiSelect component can be used to implement column toggler functionality.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="datatable/DataTableColTogglerDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -257,11 +259,11 @@ const DataTableColTogglerDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="DataTableColTogglerDemo" sources={this.sources} service="ProductService" data="products-small" />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'DataTableColTogglerDemo', sources: this.sources, service: 'ProductService', data: 'products-small' })
+                    }
                 </TabView>
             </div>
         )

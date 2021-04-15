@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { DeferredContent } from '../../components/deferredcontent/DeferredContent';
-import { DataTable } from "../../components/datatable/DataTable";
-import { Column } from "../../components/column/Column";
-import { Toast } from "../../components/toast/Toast";
+import { DataTable } from '../../components/datatable/DataTable';
+import { Column } from '../../components/column/Column';
+import { Toast } from '../../components/toast/Toast';
 import { DeferredContentDoc } from './DeferredContentDoc';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import ProductService from '../service/ProductService';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DeferredContentDemo extends Component {
 
@@ -36,7 +37,8 @@ export class DeferredContentDemo extends Component {
                     <AppInlineHeader changelogText="deferredContent">
                         <h1>DeferredContent</h1>
                         <p>DeferredContent postpones the loading the content that is initially not in the viewport until it becomes visible on scroll. </p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="deferredcontent/DeferredContentDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

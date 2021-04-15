@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 
 export class RippleDoc extends Component {
 
@@ -13,7 +13,7 @@ export class RippleDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import PrimeReact from 'primereact/utils';
+import PrimeReact from 'primereact/api';
 import { Ripple } from 'primereact/ripple';
 import './RippleDemo.css';
 
@@ -56,7 +56,7 @@ export class RippleDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React from 'react';
-import PrimeReact from 'primereact/utils';
+import PrimeReact from 'primereact/api';
 import { Ripple } from 'primereact/ripple';
 import './RippleDemo.css';
 
@@ -92,7 +92,7 @@ const RippleDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React from 'react';
-import PrimeReact from 'primereact/utils';
+import PrimeReact from 'primereact/api';
 import { Ripple } from 'primereact/ripple';
 import './RippleDemo.css';
 
@@ -172,13 +172,13 @@ const RippleDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
                         <h5>Import</h5>
 <CodeHighlight lang="js">
 {`
-import PrimeReact from 'primereact/utils';
+import PrimeReact from 'primereact/api';
 import { Ripple } from 'primereact/ripple';
 `}
 </CodeHighlight>
@@ -254,9 +254,9 @@ import { Ripple } from 'primereact/ripple';
                         <p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="RippleDemo" sources={this.sources} extFiles={this.extFiles} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'RippleDemo', sources: this.sources, extFiles: this.extFiles })
+                    }
                 </TabView>
             </div>
         );

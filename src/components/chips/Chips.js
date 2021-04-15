@@ -1,13 +1,13 @@
-import React, {Component} from 'react';
+import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
-import DomHandler from '../utils/DomHandler';
-import classNames from 'classnames';
-import {tip} from "../tooltip/Tooltip";
+import { classNames } from '../utils/ClassNames';
+import { tip } from '../tooltip/Tooltip';
 
 export class Chips extends Component {
 
     static defaultProps = {
         id: null,
+        inputRef: null,
         name: null,
         placeholder: null,
         value: null,
@@ -30,6 +30,7 @@ export class Chips extends Component {
 
     static propTypes = {
         id: PropTypes.string,
+        inputRef: PropTypes.any,
         name: PropTypes.string,
         placeholder: PropTypes.string,
         value: PropTypes.array,
@@ -62,6 +63,8 @@ export class Chips extends Component {
         this.onPaste = this.onPaste.bind(this);
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
+
+        this.inputRef = createRef(this.props.inputRef);
     }
 
     removeItem(event, index) {
@@ -114,23 +117,24 @@ export class Chips extends Component {
     }
 
     onWrapperClick() {
-        this.inputElement.focus();
+        this.inputRef.current.focus();
     }
 
     onKeyDown(event) {
         const inputValue = event.target.value;
+        const values = this.props.value || [];
 
         switch(event.which) {
             //backspace
             case 8:
-                if (this.inputElement.value.length === 0 && this.props.value && this.props.value.length > 0) {
-                    this.removeItem(event, this.props.value.length - 1);
+                if (this.inputRef.current.value.length === 0 && values.length > 0) {
+                    this.removeItem(event, values.length - 1);
                 }
             break;
 
             //enter
             case 13:
-                if (inputValue && inputValue.trim().length && (!this.props.max || this.props.max > this.props.value.length)) {
+                if (inputValue && inputValue.trim().length && (!this.props.max || this.props.max > values.length)) {
                     this.addItem(event, inputValue, true);
                 }
             break;
@@ -163,7 +167,7 @@ export class Chips extends Component {
             });
         }
 
-        this.inputElement.value = '';
+        this.inputRef.current.value = '';
 
         if (preventDefault) {
             event.preventDefault();
@@ -208,18 +212,37 @@ export class Chips extends Component {
         return this.props.max && this.props.value && this.props.max === this.props.value.length;
     }
 
+    isFilled() {
+        return (this.props.value && this.props.value.length) || (this.inputRef && this.inputRef.current && this.inputRef.current.value && this.inputRef.current.value.length);
+    }
+
+    updateInputRef() {
+        let ref = this.props.inputRef;
+
+        if (ref) {
+            if (typeof ref === 'function') {
+                ref(this.inputRef.current);
+            }
+            else {
+                ref.current = this.inputRef.current;
+            }
+        }
+    }
+
     componentDidMount() {
+        this.updateInputRef();
+
         if (this.props.tooltip) {
             this.renderTooltip();
         }
     }
 
     componentDidUpdate(prevProps) {
-        let isValueSame = this.props.value && prevProps.value.length === this.props.value.length;
+        let isValueSame = this.props.value && prevProps.value && prevProps.value.length === this.props.value.length;
         if (this.props.tooltip) {
-            if (prevProps.tooltip !== this.props.tooltip) {
+            if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
                 if (this.tooltip)
-                    this.tooltip.updateContent(this.props.tooltip);
+                    this.tooltip.update({ content: this.props.tooltip, ...(this.props.tooltipOptions || {}) });
                 else
                     this.renderTooltip();
             }
@@ -239,7 +262,7 @@ export class Chips extends Component {
 
     renderTooltip() {
         this.tooltip = tip({
-            target: this.inputElement,
+            target: this.inputRef.current,
             targetContainer: this.listElement,
             content: this.props.tooltip,
             options: this.props.tooltipOptions
@@ -261,7 +284,7 @@ export class Chips extends Component {
     renderInputElement() {
         return (
             <li className="p-chips-input-token">
-                <input ref={(el) => this.inputElement = el} placeholder={this.props.placeholder} type="text" name={this.props.name} disabled={this.props.disabled||this.isMaxedOut()}
+                <input ref={this.inputRef} placeholder={this.props.placeholder} type="text" name={this.props.name} disabled={this.props.disabled||this.isMaxedOut()}
                             onKeyDown={this.onKeyDown} onPaste={this.onPaste} onFocus={this.onFocus} onBlur={this.onBlur} aria-labelledby={this.props.ariaLabelledBy}/>
             </li>
         );
@@ -295,7 +318,7 @@ export class Chips extends Component {
 
     render() {
         const className = classNames('p-chips p-component p-inputwrapper', this.props.className, {
-            'p-inputwrapper-filled': (this.props.value && this.props.value.length > 0) || (DomHandler.hasClass(this.inputElement, 'p-filled') && this.inputElement.value !== ''),
+            'p-inputwrapper-filled': this.isFilled(),
             'p-inputwrapper-focus': this.state.focused
         });
         const list = this.renderList();

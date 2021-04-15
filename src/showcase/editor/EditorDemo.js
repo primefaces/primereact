@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Editor } from "../../components/editor/Editor";
+import { Editor } from '../../components/editor/Editor';
 import { EditorDoc } from './EditorDoc';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class EditorDemo extends Component {
 
@@ -29,10 +30,11 @@ export class EditorDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="editor" showInputStyle>
+                    <AppInlineHeader changelogText="editor">
                         <h1>Editor</h1>
                         <p>Editor is rich text editor component based on Quill.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="editor/EditorDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

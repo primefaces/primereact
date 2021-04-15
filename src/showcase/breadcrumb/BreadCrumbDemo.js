@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AppDemoActions from '../../AppDemoActions';
 import { BreadCrumb } from '../../components/breadcrumb/BreadCrumb';
 import { BreadCrumbDoc } from './BreadCrumbDoc';
 import { AppInlineHeader } from '../../AppInlineHeader';
@@ -22,7 +23,8 @@ export class BreadCrumbDemo extends Component {
                     <AppInlineHeader changelogText="breadcrumb">
                         <h1>Breadcrumb</h1>
                         <p>Breadcrumb provides contextual information about page hierarchy.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="breadcrumb/BreadCrumbDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

@@ -1,27 +1,43 @@
 import * as React from 'react';
 
-interface PickListProps {
-    id?: string;
-    source?: any[];
-    target?: any[];
-    sourceHeader?: any;
-    targetHeader?: any;
-    style?: object;
-    className?: string;
-    sourceStyle?: object;
-    targetStyle?: object;
-    showSourceControls?: boolean;
-    showTargetControls?: boolean;
-    metaKeySelection?: boolean;
-    tabIndex?: string;
-    itemTemplate?(item: any): JSX.Element | undefined;
-    onChange?(e: {event: Event, source: any, target: any}): void;
-    onMoveToSource?(e: {originalEvent: Event, value: any}): void;
-    onMoveAllToSource?(e: {originalEvent: Event, value: any}): void;
-    onMoveToTarget?(e: {originalEvent: Event, value: any}): void;
-    onMoveAllToTarget?(e: {originalEvent: Event, value: any}): void;
-    onSourceSelect?(e: {originalEvent: Event, value: any}): void;
-    onTargetSelect?(e: {originalEvent: Event, value: any}): void;
+declare namespace PickList {
+
+    interface EventParams {
+        originalEvent: React.SyntheticEvent;
+        value: any;
+    }
+
+    interface ChangeParams {
+        originalEvent: React.SyntheticEvent;
+        source: any;
+        target: any;
+    }
+
+    interface PickListProps {
+        id?: string;
+        source?: any[];
+        target?: any[];
+        sourceHeader?: React.ReactNode;
+        targetHeader?: React.ReactNode;
+        style?: object;
+        className?: string;
+        sourceStyle?: object;
+        targetStyle?: object;
+        sourceSelection?: any;
+        targetSelection?: any;
+        showSourceControls?: boolean;
+        showTargetControls?: boolean;
+        metaKeySelection?: boolean;
+        tabIndex?: number;
+        itemTemplate?(item: any): React.ReactNode;
+        onChange?(e: ChangeParams): void;
+        onMoveToSource?(e: EventParams): void;
+        onMoveAllToSource?(e: EventParams): void;
+        onMoveToTarget?(e: EventParams): void;
+        onMoveAllToTarget?(e: EventParams): void;
+        onSourceSelectionChange?(e: EventParams): void;
+        onTargetSelectionChange?(e: EventParams): void;
+    }
 }
 
-export class PickList extends React.Component<PickListProps,any> {}
+export declare class PickList extends React.Component<PickList.PickListProps, any> { }

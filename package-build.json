@@ -1,0 +1,25 @@
+{
+    "name": "primereact",
+    "version": "6.2.2",
+    "homepage": "https://www.primefaces.org/primereact",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/primefaces/primereact.git"
+    },
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/primefaces/primereact/issues"
+    },
+    "keywords": [
+        "primereact",
+        "react",
+        "ui framework",
+        "component framework",
+        "ui library",
+        "component library",
+        "material",
+        "bootstrap",
+        "react components",
+        "responsive components"
+    ]
+}

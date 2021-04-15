@@ -3,10 +3,11 @@ import { TreeTable } from '../../components/treetable/TreeTable';
 import { Column } from '../../components/column/Column';
 import { InputText } from '../../components/inputtext/InputText';
 import { NodeService } from '../service/NodeService';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './TreeTableDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export class TreeTableEditDemo extends Component {
 
@@ -64,7 +65,8 @@ export class TreeTableEditDemo extends Component {
         return this.inputTextEditor(props, 'type');
     }
 
-    requiredValidator(props) {
+    requiredValidator(e) {
+        let props = e.columnProps;
         let value = props.node.data[props.field];
 
         return value && value.length > 0;
@@ -78,6 +80,7 @@ export class TreeTableEditDemo extends Component {
                         <h1>TreeTable <span>Edit</span></h1>
                         <p>Incell editing provides a quick and user friendly way to manipulate data.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="treetable/TreeTableEditDemo.js" />
                 </div>
 
                 <div className="content-section implementation treetable-editing-demo">
@@ -168,7 +171,8 @@ export class TreeTableEditDemo extends Component {
         return this.inputTextEditor(props, 'type');
     }
 
-    requiredValidator(props) {
+    requiredValidator(e) {
+        let props = e.columnProps;
         let value = props.node.data[props.field];
 
         return value && value.length > 0;
@@ -244,7 +248,8 @@ const TreeTableEditDemo = () => {
         return inputTextEditor(props, 'type');
     }
 
-    const requiredValidator = (props) => {
+    const requiredValidator = (e) => {
+        let props = e.columnProps;
         let value = props.node.data[props.field];
 
         return value && value.length > 0;
@@ -318,7 +323,8 @@ const TreeTableEditDemo = () => {
         return inputTextEditor(props, 'type');
     }
 
-    const requiredValidator = (props) => {
+    const requiredValidator = (e) => {
+        let props = e.columnProps;
         let value = props.node.data[props.field];
 
         return value && value.length > 0;
@@ -358,11 +364,11 @@ const TreeTableEditDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="TreeTableEditDemo" sources={this.sources} service="NodeService" data="treetablenodes" extFiles={this.extFiles} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'TreeTableEditDemo', sources: this.sources, service: 'NodeService', data: 'treetablenodes', extFiles: this.extFiles })
+                    }
                 </TabView>
             </div>
         )

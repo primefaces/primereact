@@ -1,6 +1,5 @@
 .p-multiselect {
     display: inline-flex;
-    cursor: pointer;
     position: relative;
     user-select: none;
 }
@@ -10,6 +9,7 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    cursor: pointer;
 }
 
 .p-multiselect-label-container {
@@ -29,6 +29,17 @@
 .p-multiselect-label-empty {
     overflow: hidden;
     visibility: hidden;
+}
+
+.p-multiselect-token {
+    cursor: default;
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 auto;
+}
+
+.p-multiselect-token-icon {
+    cursor: pointer;
 }
 
 .p-multiselect .p-multiselect-panel {
@@ -87,6 +98,12 @@
     flex-shrink: 0;
     overflow: hidden;
     position: relative;
+}
+
+.p-multiselect-clear-icon {
+    position: absolute;
+    top: 50%;
+    margin-top: -.5rem;
 }
 
 .p-fluid .p-multiselect {

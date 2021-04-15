@@ -1,10 +1,12 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import ReactDOM from 'react-dom';
+import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
-import { CSSTransition } from 'react-transition-group';
+import { CSSTransition } from '../transition/CSSTransition';
 import { Ripple } from '../ripple/Ripple';
+import ObjectUtils from '../utils/ObjectUtils';
+import { Portal } from '../portal/Portal';
+import { ZIndexUtils } from '../utils/ZIndexUtils';
 
 class ContextMenuSub extends Component {
 
@@ -27,10 +29,11 @@ class ContextMenuSub extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            activeItem : null
+            activeItem: null
         };
 
         this.onEnter = this.onEnter.bind(this);
+        this.submenuRef = React.createRef();
     }
 
     onItemMouseEnter(event, item) {
@@ -67,19 +70,19 @@ class ContextMenuSub extends Component {
     }
 
     position() {
-        const parentItem = this.element.parentElement;
-        const containerOffset = DomHandler.getOffset(this.element.parentElement)
+        const parentItem = this.submenuRef.current.parentElement;
+        const containerOffset = DomHandler.getOffset(this.submenuRef.current.parentElement)
         const viewport = DomHandler.getViewport();
-        const sublistWidth = this.element.offsetParent ? this.element.offsetWidth : DomHandler.getHiddenElementOuterWidth(this.element);
+        const sublistWidth = this.submenuRef.current.offsetParent ? this.submenuRef.current.offsetWidth : DomHandler.getHiddenElementOuterWidth(this.submenuRef.current);
         const itemOuterWidth = DomHandler.getOuterWidth(parentItem.children[0]);
 
-        this.element.style.top = '0px';
+        this.submenuRef.current.style.top = '0px';
 
         if ((parseInt(containerOffset.left, 10) + itemOuterWidth + sublistWidth) > (viewport.width - DomHandler.calculateScrollbarWidth())) {
-            this.element.style.left = -1 * sublistWidth + 'px';
+            this.submenuRef.current.style.left = -1 * sublistWidth + 'px';
         }
         else {
-            this.element.style.left = itemOuterWidth + 'px';
+            this.submenuRef.current.style.left = itemOuterWidth + 'px';
         }
     }
 
@@ -113,27 +116,6 @@ class ContextMenuSub extends Component {
         );
     }
 
-    renderIcon(item) {
-        const className = classNames('p-menuitem-icon', item.icon);
-        if (item.icon) {
-            return (
-                <span className={className}></span>
-            );
-        }
-
-        return null;
-    }
-
-    renderSubmenuIcon(item) {
-        if (item.items) {
-            return (
-                <span className="p-submenu-icon pi pi-angle-right"></span>
-            );
-        }
-
-        return null;
-    }
-
     renderSubmenu(item) {
         if (item.items) {
             return (
@@ -145,21 +127,43 @@ class ContextMenuSub extends Component {
     }
 
     renderMenuitem(item, index) {
-        const className = classNames('p-menuitem', {'p-menuitem-active': this.state.activeItem === item}, item.className);
-        const linkClassName = classNames('p-menuitem-link', {'p-disabled': item.disabled});
-        const icon = this.renderIcon(item);
-        const submenuIcon = this.renderSubmenuIcon(item);
+        const active = this.state.activeItem === item;
+        const className = classNames('p-menuitem', { 'p-menuitem-active': active }, item.className);
+        const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
+        const iconClassName = classNames('p-menuitem-icon', item.icon);
+        const submenuIconClassName = 'p-submenu-icon pi pi-angle-right';
+        const icon = item.icon && <span className={iconClassName}></span>;
+        const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
+        const submenuIcon = item.items && <span className={submenuIconClassName}></span>;
         const submenu = this.renderSubmenu(item);
+        let content = (
+            <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => this.onItemClick(event, item, index)} role="menuitem"
+                aria-haspopup={item.items != null} aria-disabled={item.disabled}>
+                {icon}
+                {label}
+                {submenuIcon}
+                <Ripple />
+            </a>
+        );
+
+        if (item.template) {
+            const defaultContentOptions = {
+                onClick: (event) => this.onItemClick(event, item, index),
+                className: linkClassName,
+                labelClassName: 'p-menuitem-text',
+                iconClassName,
+                submenuIconClassName,
+                element: content,
+                props: this.props,
+                active
+            };
+
+            content = ObjectUtils.getJSXElement(item.template, item, defaultContentOptions);
+        }
 
         return (
             <li key={item.label + '_' + index} role="none" className={className} style={item.style} onMouseEnter={(event) => this.onItemMouseEnter(event, item)}>
-                <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => this.onItemClick(event, item, index)} role="menuitem"
-                   aria-haspopup={item.items != null}>
-                    {icon}
-                    <span className="p-menuitem-text">{item.label}</span>
-                    {submenuIcon}
-                    <Ripple />
-                </a>
+                {content}
                 {submenu}
             </li>
         );
@@ -185,20 +189,20 @@ class ContextMenuSub extends Component {
     }
 
     render() {
-        const className = classNames({'p-submenu-list': !this.props.root});
+        const className = classNames({ 'p-submenu-list': !this.props.root });
         const submenu = this.renderMenu();
         const isActive = this.isActive();
 
         return (
-            <CSSTransition classNames="p-contextmenusub" in={isActive} timeout={{ enter: 0, exit: 0 }}
+            <CSSTransition nodeRef={this.submenuRef} classNames="p-contextmenusub" in={isActive} timeout={{ enter: 0, exit: 0 }}
                 unmountOnExit onEnter={this.onEnter}>
-                <ul ref={el => this.element = el} className={className}>
+                <ul ref={this.submenuRef} className={className}>
                     {submenu}
                 </ul>
             </CSSTransition>
         );
     }
- }
+}
 
 export class ContextMenu extends Component {
 
@@ -211,6 +215,7 @@ export class ContextMenu extends Component {
         autoZIndex: true,
         baseZIndex: 0,
         appendTo: null,
+        transitionOptions: null,
         onShow: null,
         onHide: null
     };
@@ -223,7 +228,8 @@ export class ContextMenu extends Component {
         global: PropTypes.bool,
         autoZIndex: PropTypes.bool,
         baseZIndex: PropTypes.number,
-        appendTo: PropTypes.any,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+        transitionOptions: PropTypes.object,
         onShow: PropTypes.func,
         onHide: PropTypes.func
     };
@@ -233,6 +239,7 @@ export class ContextMenu extends Component {
 
         this.state = {
             visible: false,
+            reshow: false,
             resetMenu: false
         };
 
@@ -242,6 +249,9 @@ export class ContextMenu extends Component {
         this.onEnter = this.onEnter.bind(this);
         this.onEntered = this.onEntered.bind(this);
         this.onExit = this.onExit.bind(this);
+        this.onExited = this.onExited.bind(this);
+
+        this.menuRef = React.createRef();
     }
 
     onMenuClick() {
@@ -266,11 +276,28 @@ export class ContextMenu extends Component {
 
         this.currentEvent = event;
 
-        this.setState({ visible: true }, () => {
-            if (this.props.onShow) {
-                this.props.onShow(this.currentEvent);
-            }
-        });
+        if (this.state.visible) {
+            this.setState({ reshow: true });
+        }
+        else {
+            this.setState({ visible: true }, () => {
+                if (this.props.onShow) {
+                    this.props.onShow(this.currentEvent);
+                }
+            });
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.visible && prevState.reshow !== this.state.reshow) {
+            let event = this.currentEvent;
+            this.setState({
+                visible: false,
+                reshow: false,
+                rePosition: false,
+                resetMenu: true
+            }, () => this.show(event));
+        }
     }
 
     hide(event) {
@@ -279,7 +306,7 @@ export class ContextMenu extends Component {
         }
 
         this.currentEvent = event;
-        this.setState({ visible: false }, () => {
+        this.setState({ visible: false, reshow: false }, () => {
             if (this.props.onHide) {
                 this.props.onHide(this.currentEvent);
             }
@@ -288,7 +315,7 @@ export class ContextMenu extends Component {
 
     onEnter() {
         if (this.props.autoZIndex) {
-            this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
+            ZIndexUtils.set('menu', this.menuRef.current, this.props.baseZIndex);
         }
 
         this.position(this.currentEvent);
@@ -303,12 +330,16 @@ export class ContextMenu extends Component {
         this.unbindDocumentListeners();
     }
 
+    onExited() {
+        ZIndexUtils.clear(this.menuRef.current);
+    }
+
     position(event) {
         if (event) {
             let left = event.pageX + 1;
             let top = event.pageY + 1;
-            let width = this.container.offsetParent ? this.container.offsetWidth : DomHandler.getHiddenElementOuterWidth(this.container);
-            let height = this.container.offsetParent ? this.container.offsetHeight : DomHandler.getHiddenElementOuterHeight(this.container);
+            let width = this.menuRef.current.offsetParent ? this.menuRef.current.offsetWidth : DomHandler.getHiddenElementOuterWidth(this.menuRef.current);
+            let height = this.menuRef.current.offsetParent ? this.menuRef.current.offsetHeight : DomHandler.getHiddenElementOuterHeight(this.menuRef.current);
             let viewport = DomHandler.getViewport();
 
             //flip
@@ -331,8 +362,8 @@ export class ContextMenu extends Component {
                 top = document.body.scrollTop;
             }
 
-            this.container.style.left = left + 'px';
-            this.container.style.top = top + 'px';
+            this.menuRef.current.style.left = left + 'px';
+            this.menuRef.current.style.top = top + 'px';
         }
     }
 
@@ -347,7 +378,7 @@ export class ContextMenu extends Component {
     }
 
     isOutsideClicked(event) {
-        return this.container && !(this.container.isSameNode(event.target) || this.container.contains(event.target));
+        return this.menuRef && this.menuRef.current && !(this.menuRef.current.isSameNode(event.target) || this.menuRef.current.contains(event.target));
     }
 
     bindDocumentListeners() {
@@ -428,15 +459,17 @@ export class ContextMenu extends Component {
     componentWillUnmount() {
         this.unbindDocumentListeners();
         this.unbindDocumentContextMenuListener();
+
+        ZIndexUtils.clear(this.menuRef.current);
     }
 
     renderContextMenu() {
         const className = classNames('p-contextmenu p-component', this.props.className);
 
         return (
-            <CSSTransition classNames="p-contextmenu" in={this.state.visible} timeout={{ enter: 250, exit: 0 }}
-                unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit}>
-                <div id={this.props.id} className={className} style={this.props.style} ref={el => this.container = el} onClick={this.onMenuClick} onMouseEnter={this.onMenuMouseEnter}>
+            <CSSTransition nodeRef={this.menuRef} classNames="p-contextmenu" in={this.state.visible} timeout={{ enter: 250, exit: 0 }} options={this.props.transitionOptions}
+                unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit} onExited={this.onExited}>
+                <div ref={this.menuRef} id={this.props.id} className={className} style={this.props.style} onClick={this.onMenuClick} onMouseEnter={this.onMenuMouseEnter}>
                     <ContextMenuSub model={this.props.model} root resetMenu={this.state.resetMenu} onLeafClick={this.onLeafClick} />
                 </div>
             </CSSTransition>
@@ -446,9 +479,6 @@ export class ContextMenu extends Component {
     render() {
         const element = this.renderContextMenu();
 
-        if (this.props.appendTo)
-            return ReactDOM.createPortal(element, this.props.appendTo);
-        else
-            return element;
+        return <Portal element={element} appendTo={this.props.appendTo} />;
     }
 }

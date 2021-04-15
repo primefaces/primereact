@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Rating } from '../../components/rating/Rating';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { RatingDoc } from './RatingDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class RatingDemo extends Component {
 
@@ -18,10 +19,11 @@ export class RatingDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="rating" showInputStyle>
+                    <AppInlineHeader changelogText="rating">
                         <h1>Rating</h1>
                         <p>Rating componentsis a star based selection input.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="rating/RatingDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -33,7 +35,7 @@ export class RatingDemo extends Component {
                         <Rating value={this.state.val2} cancel={false} onChange={(e) => this.setState({val2: e.value})} />
 
                         <h5>ReadOnly</h5>
-                        <Rating value={5} readonly stars={10} cancel={false} />
+                        <Rating value={5} readOnly stars={10} cancel={false} />
 
                         <h5>Disabled</h5>
                         <Rating value={8} disabled stars={10} />

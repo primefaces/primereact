@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AppDemoActions from '../../AppDemoActions';
 import { Captcha } from '../../components/captcha/Captcha';
 import { Toast } from '../../components/toast/Toast';
 import { CaptchaDoc } from './CaptchaDoc';
@@ -22,7 +23,8 @@ export class CaptchaDemo extends Component {
                     <AppInlineHeader changelogText="captcha">
                         <h1>Captcha</h1>
                         <p>Captcha is a form validation component based on Recaptcha.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="captcha/CaptchaDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

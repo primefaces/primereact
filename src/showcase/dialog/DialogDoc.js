@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 
 export class DialogDoc extends Component {
 
@@ -26,9 +26,9 @@ export class DialogDemo extends Component {
             displayBasic: false,
             displayBasic2: false,
             displayModal: false,
-            displayConfirmation: false,
             displayMaximizable: false,
             displayPosition: false,
+            displayResponsive: false,
             position: 'center'
         };
 
@@ -121,13 +121,13 @@ export class DialogDemo extends Component {
                         Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                     </Dialog>
 
-                    <h5>Confirmation</h5>
-                    <Button label="Confirm" icon="pi pi-external-link" onClick={() => this.onClick('displayConfirmation')} />
-                    <Dialog header="Confirmation" visible={this.state.displayConfirmation} modal style={{ width: '350px' }} footer={this.renderFooter('displayConfirmation')} onHide={() => this.onHide('displayConfirmation')}>
-                        <div className="confirmation-content">
-                            <i className="pi pi-exclamation-triangle p-mr-3" style={{ fontSize: '2rem' }} />
-                            <span>Are you sure you want to proceed?</span>
-                        </div>
+                    <h5>Responsive</h5>
+                    <Button label="Show" icon="pi pi-external-link" onClick={() => this.onClick('displayResponsive')} />
+                    <Dialog header="Header" visible={this.state.displayResponsive} onHide={() => this.onHide('displayResponsive')} breakpoints={{'960px': '75vw'}} style={{width: '50vw'}} footer={this.renderFooter('displayResponsive')}>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                     </Dialog>
 
                     <h5>Maximizable</h5>
@@ -156,7 +156,8 @@ export class DialogDemo extends Component {
                         </div>
                     </div>
 
-                    <Dialog header="Header" visible={this.state.displayPosition} position={this.state.position} modal style={{ width: '50vw' }} footer={this.renderFooter('displayPosition')} onHide={() => this.onHide('displayPosition')}>
+                    <Dialog header="Header" visible={this.state.displayPosition} position={this.state.position} modal style={{ width: '50vw' }} footer={this.renderFooter('displayPosition')} onHide={() => this.onHide('displayPosition')}
+                        draggable={false} resizable={false}>
                         <p className="p-m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                         laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                         Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -180,18 +181,18 @@ const DialogDemo = () => {
     const [displayBasic, setDisplayBasic] = useState(false);
     const [displayBasic2, setDisplayBasic2] = useState(false);
     const [displayModal, setDisplayModal] = useState(false);
-    const [displayConfirmation, setDisplayConfirmation] = useState(false);
     const [displayMaximizable, setDisplayMaximizable] = useState(false);
     const [displayPosition, setDisplayPosition] = useState(false);
+    const [displayResponsive, setDisplayResponsive] = useState(false);
     const [position, setPosition] = useState('center');
 
     const dialogFuncMap = {
         'displayBasic': setDisplayBasic,
         'displayBasic2': setDisplayBasic2,
         'displayModal': setDisplayModal,
-        'displayConfirmation': setDisplayConfirmation,
         'displayMaximizable': setDisplayMaximizable,
-        'displayPosition': setDisplayPosition
+        'displayPosition': setDisplayPosition,
+        'displayResponsive': setDisplayResponsive
     }
 
     const onClick = (name, position) => {
@@ -269,13 +270,13 @@ const DialogDemo = () => {
                     Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                 </Dialog>
 
-                <h5>Confirmation</h5>
-                <Button label="Confirm" icon="pi pi-external-link" onClick={() => onClick('displayConfirmation')} />
-                <Dialog header="Confirmation" visible={displayConfirmation} modal style={{ width: '350px' }} footer={renderFooter('displayConfirmation')} onHide={() => onHide('displayConfirmation')}>
-                    <div className="confirmation-content">
-                        <i className="pi pi-exclamation-triangle p-mr-3" style={{ fontSize: '2rem' }} />
-                        <span>Are you sure you want to proceed?</span>
-                    </div>
+                <h5>Responsive</h5>
+                <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayResponsive')} />
+                <Dialog header="Header" visible={displayResponsive} onHide={() => onHide('displayResponsive')} breakpoints={{'960px': '75vw'}} style={{width: '50vw'}} footer={renderFooter('displayResponsive')}>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                 </Dialog>
 
                 <h5>Maximizable</h5>
@@ -304,7 +305,8 @@ const DialogDemo = () => {
                     </div>
                 </div>
 
-                <Dialog header="Header" visible={displayPosition} position={position} modal style={{ width: '50vw' }} footer={renderFooter('displayPosition')} onHide={() => onHide('displayPosition')}>
+                <Dialog header="Header" visible={displayPosition} position={position} modal style={{ width: '50vw' }} footer={renderFooter('displayPosition')} onHide={() => onHide('displayPosition')}
+                    draggable={false} resizable={false}>
                     <p className="p-m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                     laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                     Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -327,18 +329,18 @@ const DialogDemo = () => {
     const [displayBasic, setDisplayBasic] = useState(false);
     const [displayBasic2, setDisplayBasic2] = useState(false);
     const [displayModal, setDisplayModal] = useState(false);
-    const [displayConfirmation, setDisplayConfirmation] = useState(false);
     const [displayMaximizable, setDisplayMaximizable] = useState(false);
     const [displayPosition, setDisplayPosition] = useState(false);
+    const [displayResponsive, setDisplayResponsive] = useState(false);
     const [position, setPosition] = useState('center');
 
     const dialogFuncMap = {
         'displayBasic': setDisplayBasic,
         'displayBasic2': setDisplayBasic2,
         'displayModal': setDisplayModal,
-        'displayConfirmation': setDisplayConfirmation,
         'displayMaximizable': setDisplayMaximizable,
-        'displayPosition': setDisplayPosition
+        'displayPosition': setDisplayPosition,
+        'displayResponsive': setDisplayResponsive
     }
 
     const onClick = (name, position) => {
@@ -416,13 +418,13 @@ const DialogDemo = () => {
                     Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                 </Dialog>
 
-                <h5>Confirmation</h5>
-                <Button label="Confirm" icon="pi pi-external-link" onClick={() => onClick('displayConfirmation')} />
-                <Dialog header="Confirmation" visible={displayConfirmation} modal style={{ width: '350px' }} footer={renderFooter('displayConfirmation')} onHide={() => onHide('displayConfirmation')}>
-                    <div className="confirmation-content">
-                        <i className="pi pi-exclamation-triangle p-mr-3" style={{ fontSize: '2rem' }} />
-                        <span>Are you sure you want to proceed?</span>
-                    </div>
+                <h5>Responsive</h5>
+                <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayResponsive')} />
+                <Dialog header="Header" visible={displayResponsive} onHide={() => onHide('displayResponsive')} breakpoints={{'960px': '75vw'}} style={{width: '50vw'}} footer={renderFooter('displayResponsive')}>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                 </Dialog>
 
                 <h5>Maximizable</h5>
@@ -451,7 +453,8 @@ const DialogDemo = () => {
                     </div>
                 </div>
 
-                <Dialog header="Header" visible={displayPosition} position={position} modal style={{ width: '50vw' }} footer={renderFooter('displayPosition')} onHide={() => onHide('displayPosition')}>
+                <Dialog header="Header" visible={displayPosition} position={position} modal style={{ width: '50vw' }} footer={renderFooter('displayPosition')} onHide={() => onHide('displayPosition')}
+                    draggable={false} resizable={false}>
                     <p className="p-m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                     laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                     Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -477,12 +480,6 @@ const DialogDemo = () => {
     line-height: 1.5;
 }
 
-.dialog-demo .confirmation-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .dialog-demo .p-dialog .p-button {
     min-width: 6rem;
 }
@@ -497,7 +494,7 @@ const DialogDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
                         <h5>Import</h5>
@@ -511,9 +508,9 @@ import { Dialog } from 'primereact/dialog';
                         <p>Dialog is used as a container and visibility is managed with <i>visible</i> property where <i>onHide</i> event is required to update the visibility state.</p>
 <CodeHighlight>
 {`
-<Button label="Show" icon="pi pi-external-link" onClick={() => this.onClick('displayBasic')} />
+<Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayBasic')} />
 
-<Dialog header="Header" visible={this.state.displayBasic} style={{ width: '50vw' }} footer={this.renderFooter('displayBasic')} onHide={() => this.onHide('displayBasic')}>
+<Dialog header="Header" visible={displayBasic} style={{ width: '50vw' }} footer={renderFooter('displayBasic')} onHide={() => onHide('displayBasic')}>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
     Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
@@ -529,8 +526,8 @@ import { Dialog } from 'primereact/dialog';
 {`
 const footer = (
     <div>
-        <Button label="Yes" icon="pi pi-check" onClick={this.onHide} />
-        <Button label="No" icon="pi pi-times" onClick={this.onHide} />
+        <Button label="Yes" icon="pi pi-check" onClick={onHide} />
+        <Button label="No" icon="pi pi-times" onClick={onHide} />
     </div>
 );
 
@@ -540,7 +537,19 @@ const myIcon = (
     </button>
 )
 
-<Dialog header="Header Text" footer={footer} icons={myIcon} visible={this.state.visible} style={{width: '50vw'}} modal onHide={this.onHide}>
+<Dialog header="Header Text" footer={footer} icons={myIcon} visible={visible} style={{width: '50vw'}} modal onHide={onHide}>
+    Content
+</Dialog>
+`}
+</CodeHighlight>
+
+                        <h5>Responsive</h5>
+                        <p>Dialog width can be adjusted per screen size with the <i>breakpoints</i> option. In example below, default width is set to 50vw and below 961px, width would be 75vw and finally below 641px width becomes
+                            100%. The value of <i>breakpoints</i> should be an object literal whose keys are the maximum screen sizes and values are the widths per screen.</p>
+
+<CodeHighlight>
+{`
+<Dialog visible={visible} onHide={onHide} breakpoints={{'960px': '75vw', '640px': '100vw'}} style={{width: '50vw'}}>
     Content
 </Dialog>
 `}
@@ -596,6 +605,36 @@ const myIcon = (
                                         <td>boolean</td>
                                         <td>true</td>
                                         <td>Defines if background should be blocked when dialog is displayed.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>resizable</td>
+                                        <td>boolean</td>
+                                        <td>true</td>
+                                        <td>Enables resizing of the content.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>draggable</td>
+                                        <td>boolean</td>
+                                        <td>true</td>
+                                        <td>Enables dragging to change the position using header.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>minX</td>
+                                        <td>number</td>
+                                        <td>0</td>
+                                        <td>Minimum value for the left coordinate of dialog in dragging.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>minY</td>
+                                        <td>number</td>
+                                        <td>0</td>
+                                        <td>Minimum value for the top coordinate of dialog in dragging.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>keepInViewport</td>
+                                        <td>boolean</td>
+                                        <td>true</td>
+                                        <td>Keeps dialog in the viewport.</td>
                                     </tr>
                                     <tr>
                                         <td>contentStyle</td>
@@ -659,9 +698,9 @@ const myIcon = (
                                     </tr>
                                     <tr>
                                         <td>appendTo</td>
-                                        <td>DOM element</td>
-                                        <td>null</td>
-                                        <td>DOM element instance where the dialog should be mounted.</td>
+                                        <td>DOM element | string</td>
+                                        <td>document.body</td>
+                                        <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
                                     </tr>
                                     <tr>
                                         <td>baseZIndex</td>
@@ -705,6 +744,18 @@ const myIcon = (
                                         <td>false</td>
                                         <td>When enabled, the dialog is initially displayed full screen.</td>
                                     </tr>
+                                    <tr>
+                                        <td>breakpoints</td>
+                                        <td>object</td>
+                                        <td>null</td>
+                                        <td>Object literal to define widths per screen size.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>transitionOptions</td>
+                                        <td>object</td>
+                                        <td>null</td>
+                                        <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -736,6 +787,36 @@ const myIcon = (
                                             event.maximized: Whether to show the dialog or not on fullscreen.
                                         </td>
                                         <td>Callback to invoke when toggle maximize icon is clicked.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onDragStart</td>
+                                        <td>event: Browser event</td>
+                                        <td>Callback to invoke when dialog dragging is initiated.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onDrag</td>
+                                        <td>event: Browser event</td>
+                                        <td>Callback to invoke when dragging dialog.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onDragEnd</td>
+                                        <td>event: Browser event</td>
+                                        <td>Callback to invoke when dialog dragging is completed.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onResizeStart</td>
+                                        <td>event: Browser event</td>
+                                        <td>Callback to invoke when dialog resizing is initiated.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onResize</td>
+                                        <td>event: Browser event</td>
+                                        <td>Callback to invoke while resizing dialog.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onResizeEnd</td>
+                                        <td>event: Browser event</td>
+                                        <td>Callback to invoke when dialog resizing is completed.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -785,9 +866,9 @@ const myIcon = (
 
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="DialogDemo" sources={this.sources} extFiles={this.extFiles} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'DialogDemo', sources: this.sources, extFiles: this.extFiles })
+                    }
                 </TabView>
             </div>
         );

@@ -18,8 +18,8 @@ export class ListBoxHeader extends Component {
         onFilter: PropTypes.func
     }
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.onFilter = this.onFilter.bind(this);
     }
 
@@ -27,7 +27,7 @@ export class ListBoxHeader extends Component {
         if(this.props.onFilter) {
             this.props.onFilter({
                 originalEvent: event,
-                query: event.target.value
+                value: event.target.value
             });
         }
     }

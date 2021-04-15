@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import {Button} from '../button/Button';
 import ObjectUtils from '../utils/ObjectUtils';
 
@@ -114,14 +114,21 @@ export class PickListTransferControls extends Component {
         }
     }
 
+
+
     render() {
+        let moveRightDisabled = !this.props.sourceSelection.length;
+        let moveLeftDisabled = !this.props.targetSelection.length;
+        let moveAllRightDisabled = !this.props.source.length;
+        let moveAllLeftDisabled = !this.props.target.length;
+
         let className = classNames('p-picklist-buttons p-picklist-transfer-buttons', this.props.className);
 
         return <div className={className}>
-                    <Button type="button" icon="pi pi-angle-right" onClick={this.moveRight}></Button>
-                    <Button type="button" icon="pi pi-angle-double-right" onClick={this.moveAllRight}></Button>
-                    <Button type="button" icon="pi pi-angle-left" onClick={this.moveLeft}></Button>
-                    <Button type="button" icon="pi pi-angle-double-left" onClick={this.moveAllLeft}></Button>
+                    <Button disabled={moveRightDisabled} type="button" icon="pi pi-angle-right" onClick={this.moveRight}></Button>
+                    <Button disabled={moveAllRightDisabled} type="button" icon="pi pi-angle-double-right" onClick={this.moveAllRight}></Button>
+                    <Button disabled={moveLeftDisabled} type="button" icon="pi pi-angle-left" onClick={this.moveLeft}></Button>
+                    <Button disabled={moveAllLeftDisabled} type="button" icon="pi pi-angle-double-left" onClick={this.moveAllLeft}></Button>
                 </div>;
     }
 }

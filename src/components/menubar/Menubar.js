@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import {MenubarSub} from './MenubarSub';
 import ObjectUtils from '../utils/ObjectUtils';
-import DomHandler from '../utils/DomHandler';
+import { ZIndexUtils } from '../utils/ZIndexUtils';
 
 export class Menubar extends Component {
 
@@ -43,8 +42,14 @@ export class Menubar extends Component {
         this.setState((prevState) => ({
             mobileActive: !prevState.mobileActive
         }), () => {
-            this.rootmenu.style.zIndex = String(DomHandler.generateZIndex());
-            this.bindDocumentClickListener();
+            if (this.state.mobileActive) {
+                ZIndexUtils.set('menu', this.rootmenu);
+                this.bindDocumentClickListener();
+            }
+            else {
+                this.unbindDocumentClickListener();
+                ZIndexUtils.clear(this.rootmenu);
+            }
         });
     }
 
@@ -52,7 +57,10 @@ export class Menubar extends Component {
         if (!this.documentClickListener) {
             this.documentClickListener = (event) => {
                 if (this.state.mobileActive && this.isOutsideClicked(event)) {
-                    this.setState({ mobileActive: false });
+                    this.setState({ mobileActive: false }, () => {
+                        this.unbindDocumentClickListener();
+                        ZIndexUtils.clear(this.rootmenu);
+                    });
                 }
             };
             document.addEventListener('click', this.documentClickListener);
@@ -72,7 +80,14 @@ export class Menubar extends Component {
     }
 
     onLeafClick() {
-        this.setState({ mobileActive: false });
+        this.setState({ mobileActive: false }, () => {
+            this.unbindDocumentClickListener();
+            ZIndexUtils.clear(this.rootmenu);
+        });
+    }
+
+    componentWillUnmount() {
+        ZIndexUtils.clear(this.rootmenu);
     }
 
     renderCustomContent() {
@@ -118,7 +133,7 @@ export class Menubar extends Component {
     renderMenuButton() {
         /* eslint-disable */
         const button = (
-            <a ref={(el) => this.menubutton = el} href={'#'} role="button" tabIndex="0" className="p-menubar-button" onClick={this.toggle}>
+            <a ref={(el) => this.menubutton = el} href={'#'} role="button" tabIndex={0} className="p-menubar-button" onClick={this.toggle}>
                 <i className="pi pi-bars" />
             </a>
         );
@@ -137,7 +152,7 @@ export class Menubar extends Component {
             <div id={this.props.id} className={className} style={this.props.style}>
                 {start}
                 {menuButton}
-                <MenubarSub ref={(el) => this.rootmenu = ReactDOM.findDOMNode(el)} model={this.props.model} root mobileActive={this.state.mobileActive} onLeafClick={this.onLeafClick} />
+                <MenubarSub ref={(el) => this.rootmenu = el} model={this.props.model} root mobileActive={this.state.mobileActive} onLeafClick={this.onLeafClick} />
                 {end}
             </div>
         );

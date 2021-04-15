@@ -9,6 +9,7 @@ import { Toast } from '../../components/toast/Toast';
 import { loadGoogleMaps, removeGoogleMaps } from '../load/GoogleMaps';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { GMapDoc } from './GMapDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class GMapDemo extends Component {
 
@@ -126,7 +127,8 @@ export class GMapDemo extends Component {
                         <h1>GMap</h1>
                         <p>GMap component provides integration with Google Maps API. This sample demontrates
                         various uses cases like binding, overlays and events. Click the map to add a new item.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="gmap/GMapDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

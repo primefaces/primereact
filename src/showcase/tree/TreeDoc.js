@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 
 export class TreeDoc extends Component {
 
@@ -207,7 +207,7 @@ const TreeDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
                         <h5>Import</h5>
@@ -377,46 +377,37 @@ import { Tree } from 'primereact/tree';
 import { Button } from 'primereact/button';
 import { NodeService } from '../service/NodeService';
 
-export class TreeDemo extends Component {
+export const TreeDemo = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            nodes: null,
-            expandedKeys: {}
-        };
+    const [nodes, setNodes] = useState(null);
+    const [expandedKeys, setExpandedKeys] = useState({});
 
-        this.nodeService = new NodeService();
-        this.toggleMovies = this.toggleMovies.bind(this);
-    }
+    useEffect(() => {
+        nodeService = new NodeService();
+        nodeService.getTreeNodes().then(data => setNodes(data));
+    }, [])
 
-    toggleMovies() {
-        let expandedKeys = {...this.state.expandedKeys};
+    const toggleMovies = () => {
+        let expandedKeys = {...expandedKeys};
         if (expandedKeys['2'])
             delete expandedKeys['2'];
         else
             expandedKeys['2'] = true;
 
-        this.setState({expandedKeys: expandedKeys});
+        setExpandedKeys(expandedKeys);
     }
 
-    componentDidMount() {
-        this.nodeService.getTreeNodes().then(data => this.setState({nodes: data}));
-    }
+    return (
+        <div>
+            <h3 className="first">Uncontrolled</h5>
+            <Tree value={nodes} />
 
-    render() {
-        return (
-            <div>
-                <h3 className="first">Uncontrolled</h5>
-                <Tree value={this.state.nodes} />
-
-                <h5>Controlled</h5>
-                <Button onClick={this.toggleMovies} label="Toggle Movies" />
-                <Tree value={this.state.nodes} expandedKeys={this.state.expandedKeys}
-                    onToggle={e => this.setState({expandedKeys: e.value})} style={{marginTop: '.5em'}} />
-            </div>
-        )
-    }
+            <h5>Controlled</h5>
+            <Button onClick={toggleMovies} label="Toggle Movies" />
+            <Tree value={nodes} expandedKeys={expandedKeys}
+                onToggle={e => setExpandedKeys(e.value)} style={{marginTop: '.5em'}} />
+        </div>
+    )
 }
 `}
 </CodeHighlight>
@@ -431,42 +422,34 @@ import React, {Component} from 'react';
 import {Tree} from 'primereact/tree';
 import {NodeService} from '../service/NodeService';
 
-export class TreeSelectionDemo extends Component {
+export const TreeSelectionDemo = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            nodes: null,
-            selectedNodeKey: null,
-            selectedNodeKeys1: null,
-            selectedNodeKeys2: null,
-            selectedNodeKeys3: null
-        };
+    const [nodes, setNodes] = useState(null);
+    const [selectedNodeKey] = useState(null);
+    const [selectedNodeKeys1] = useState(null);
+    const [selectedNodeKeys2] = useState(null);
+    const [selectedNodeKeys3] = useState(null);
 
-        this.nodeService = new NodeService();
-    }
+    useEffect(() => {
+        nodeService = new NodeService();
+        nodeService.getTreeNodes().then(data => setNodes(data));
+    }, [])
 
-    componentDidMount() {
-        this.nodeService.getTreeNodes().then(data => this.setState({nodes: data}));
-    }
+    return (
+        <div>
+            <h5>Single Selection</h5>
+            <Tree value={nodes} selectionMode="single" selectionKeys={selectedNodeKey} onSelectionChange={e => setSelectedNodeKey(e.value)} />
 
-    render() {
-        return (
-            <div>
-                <h5>Single Selection</h5>
-                <Tree value={this.state.nodes} selectionMode="single" selectionKeys={this.state.selectedNodeKey} onSelectionChange={e => this.setState({selectedNodeKey: e.value})} />
+            <h5>Multiple Selection with MetaKey</h5>
+            <Tree value={nodes} selectionMode="multiple" selectionKeys={selectedNodeKeys1} onSelectionChange={e => setSelectedNodeKeys1(e.value)} />
 
-                <h5>Multiple Selection with MetaKey</h5>
-                <Tree value={this.state.nodes} selectionMode="multiple" selectionKeys={this.state.selectedNodeKeys1} onSelectionChange={e => this.setState({selectedNodeKeys1: e.value})} />
+            <h5>Multiple Selection without MetaKey</h5>
+            <Tree value={nodes} selectionMode="multiple" metaKeySelection={false} selectionKeys={selectedNodeKeys2} onSelectionChange={e => setSelectedNodeKeys2(e.value)} />
 
-                <h5>Multiple Selection without MetaKey</h5>
-                <Tree value={this.state.nodes} selectionMode="multiple" metaKeySelection={false} selectionKeys={this.state.selectedNodeKeys2} onSelectionChange={e => this.setState({selectedNodeKeys2: e.value})} />
-
-                <h5>Checkbox Selection</h5>
-                <Tree value={this.state.nodes} selectionMode="checkbox" selectionKeys={this.state.selectedNodeKeys3} onSelectionChange={e => this.setState({selectedNodeKeys3: e.value})} />
-            </div>
-        )
-    }
+            <h5>Checkbox Selection</h5>
+            <Tree value={nodes} selectionMode="checkbox" selectionKeys={selectedNodeKeys3} onSelectionChange={e => setSelectedNodeKeys3(e.value)} />
+        </div>
+    )
 }
 `}
 </CodeHighlight>
@@ -480,25 +463,24 @@ import React, {Component} from 'react';
 import {Tree} from 'primereact/tree';
 import {NodeService} from '../service/NodeService';
 
-export class TreeLazyDemo extends Component {
+export const TreeLazyDemo = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            nodes: null,
-            loading: true,
-        };
+    const [nodes, setNodes] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-        this.nodeService = new NodeService();
-
-        this.loadOnExpand = this.loadOnExpand.bind(this);
-    }
-
-    loadOnExpand(event) {
-        if (!event.node.children) {
-            this.setState({
-                loading: true
+    useEffect(() => {
+        nodeService = new NodeService();
+        setTimeout(() => {
+            nodeService.getTreeNodes().then(data => {
+                setNodes(data);
+                setLoading(false);
             });
+        }, 2000);
+    }, [])
+
+    const loadOnExpand = (event) => {
+        if (!event.node.children) {
+            setLoading(true)
 
             setTimeout(() => {
                 let node = {...event.node};
@@ -511,56 +493,34 @@ export class TreeLazyDemo extends Component {
                     });
                 }
 
-                let value = [...this.state.nodes];
+                let value = [...nodes];
                 value[parseInt(event.node.key, 10)] = node;
-                this.setState({
-                    nodes: value,
-                    loading: false
-                });
+                setNodes(value);
+                setLoading(false);
             }, 500);
         }
     }
 
-    componentDidMount() {
-        setTimeout(() => {
-            this.nodeService.getTreeNodes().then(data => this.setState(
-                {
-                    nodes: data,
-                    loading: false
-                }
-            ));
-        }, 2000);
-    }
-
-    render() {
-        return (
-            <Tree value={this.state.nodes} onExpand={this.loadOnExpand} loading={this.state.loading} />
-        )
-    }
+    return (
+        <Tree value={nodes} onExpand={loadOnExpand} loading={loading} />
+    )
 }
 `}
 </CodeHighlight>
 
                         <h5>Templating</h5>
-                        <p><i>label</i> property of a node is used to display as the content by default. Templating is supported as well with the <i>nodeTemplate</i> callback that gets the ndoe instance and returns JSX. Example
+                        <p><i>label</i> property of a node is used to display as the content by default. Templating is supported as well with the <i>nodeTemplate</i> callback that gets the node instance and returns JSX. Example
             below is a sample tree based navigation of React docs.</p>
 <CodeHighlight lang="js">
 {`
 import React, { Component } from 'react';
 import { Tree } from 'primereact/tree';
 
-export class TreeTemplatingDemo extends Component {
+export const TreeTemplatingDemo = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            nodes: this.createNavigation()
-        };
+    const [nodes, setNodes] = useState(createNavigation());
 
-        this.nodeTemplate = this.nodeTemplate.bind(this);
-    }
-
-    createNavigation() {
+    const createNavigation = () => {
         return [
             {
                 label: 'Insallation',
@@ -585,7 +545,7 @@ export class TreeTemplatingDemo extends Component {
         ];
     }
 
-    nodeTemplate(node) {
+    const nodeTemplate = (node) => {
         if (node.url) {
             return (
                 <a href={node.url}>{node.label}</a>
@@ -598,11 +558,9 @@ export class TreeTemplatingDemo extends Component {
         }
     }
 
-    render() {
-        return (
-            <Tree value={this.state.nodes} nodeTemplate={this.nodeTemplate} />
-        )
-    }
+    return (
+        <Tree value={nodes} nodeTemplate={nodeTemplate} />
+    )
 }
 `}
 </CodeHighlight>
@@ -616,28 +574,20 @@ import React, {Component} from 'react';
 import {Tree} from 'primereact/tree';
 import {NodeService} from '../service/NodeService';
 
-export class TreeDragDropDemo extends Component {
+export const TreeDragDropDemo = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            nodes: null
-        };
+    const [nodes, setNodes] = useState(null);
 
-        this.nodeService = new NodeService();
-    }
+    useEffect(() => {
+        nodeService = new NodeService();
+        nodeService.getTreeNodes().then(data => setNodes(data));
+    }, [])
 
-    componentDidMount() {
-        this.nodeService.getTreeNodes().then(data => this.setState({nodes: data}));
-    }
-
-    render() {
-        return (
-            <div>
-                <Tree value={this.state.nodes} dragdropScope="demo" onDragDrop={event => this.setState({nodes: event.value})} />
-            </div>
-        )
-    }
+    return (
+        <div>
+            <Tree value={nodes} dragdropScope="demo" onDragDrop={event => setNodes(event.value)} />
+        </div>
+    )
 }
 `}
 </CodeHighlight>
@@ -651,11 +601,11 @@ export class TreeDragDropDemo extends Component {
 
 <CodeHighlight lang="js">
 {`
-<Tree value={this.state.nodes} filter />
+<Tree value={nodes} filter />
 
-<Tree value={this.state.nodes} filter filterBy="data.name,data.age" />
+<Tree value={nodes} filter filterBy="data.name,data.age" />
 
-<Tree value={this.state.nodes} filter filterMode="strict" />
+<Tree value={nodes} filter filterMode="strict" />
 `}
 </CodeHighlight>
 
@@ -671,58 +621,51 @@ import {ContextMenu} from 'primereact/contextmenu';
 import {Toast} from 'primereact/toast';
 import {NodeService} from '../service/NodeService';
 
-export class TreeContextMenuDemo extends Component {
+export const TreeContextMenuDemo = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            nodes: null,
-            expandedKeys: {},
-            selectedNodeKey: null,
-            menu: [
-                {
-                    label: 'View Key',
-                    icon: 'pi pi-search',
-                    command: () => {
-                        this.toast.show({severity: 'success', summary: 'Node Key', detail: this.state.selectedNodeKey});
-                    }
-                },
-                {
-                    label: 'Toggle',
-                    icon: 'pi pi-cog',
-                    command: () => {
-                        let expandedKeys = {...this.state.expandedKeys};
-                        if (expandedKeys[this.state.selectedNodeKey])
-                            delete expandedKeys[this.state.selectedNodeKey];
-                        else
-                            expandedKeys[this.state.selectedNodeKey] = true;
+    const [nodes, setNodes] = useState(null);
+    const [expandedKeys, setExpandedKeys] = useState({});
+    const [selectedNodeKey, setSelectedNodeKey] = useState(null);
+    const toast = useRef(null);
+    const cm = useRef(null);
+    const menu = [
+        {
+            label: 'View Key',
+            icon: 'pi pi-search',
+            command: () => {
+                toast.current.show({severity: 'success', summary: 'Node Key', detail: selectedNodeKey});
+            }
+        },
+        {
+            label: 'Toggle',
+            icon: 'pi pi-cog',
+            command: () => {
+                let expandedKeys = {...expandedKeys};
+                if (expandedKeys[selectedNodeKey])
+                    delete expandedKeys[selectedNodeKey];
+                else
+                    expandedKeys[selectedNodeKey] = true;
+                setExpandedKeys(expandedKeys);
+            }
+        }
+    ];
 
-                        this.setState({expandedKeys: expandedKeys});
-                    }
-                }
-            ]
-        };
+    useEffect(() => {
+        nodeService = new NodeService();
+        nodeService.getTreeNodes().then(data => setNodes(data));
+    }, [])
 
-        this.nodeService = new NodeService();
-    }
+    return (
+        <div>
+            <Toast ref={toast} />
 
-    componentDidMount() {
-        this.nodeService.getTreeNodes().then(data => this.setState({nodes: data}));
-    }
+            <ContextMenu model={menu} ref={cm} />
 
-    render() {
-        return (
-            <div>
-                <Toast ref={(el) => this.toast = el} />
-
-                <ContextMenu model={this.state.menu} ref={el => this.cm = el} />
-
-                <Tree value={this.state.nodes} expandedKeys={this.state.expandedKeys} onToggle={e => this.setState({expandedKeys: e.value})}
-                    onContextMenuSelectionChange={event => this.setState({selectedNodeKey: event.value})}
-                    onContextMenu={event => this.cm.show(event.originalEvent)} />
-            </div>
-        )
-    }
+            <Tree value={nodes} expandedKeys={expandedKeys} onToggle={e => setExpandedkeys(e.value)}
+                onContextMenuSelectionChange={event => setSelectedNodeKey(event.value)}
+                onContextMenu={event => cm.current.show(event.originalEvent)} />
+        </div>
+    )
 }
 `}
 </CodeHighlight>
@@ -1023,9 +966,9 @@ export class TreeContextMenuDemo extends Component {
 
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="TreeDemo" sources={this.sources} service="NodeService" data="treenodes" />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'TreeDemo', sources: this.sources, service: 'NodeService', data: 'treenodes' })
+                    }
                 </TabView>
             </div>
         );

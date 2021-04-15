@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
 import { Ripple } from '../ripple/Ripple';
 
@@ -570,7 +570,8 @@ export class UITreeNode extends Component {
             if (this.props.onDrop) {
                 this.props.onDrop({
                     originalEvent: event,
-                    path: this.props.path
+                    path: this.props.path,
+                    index: this.props.index
                 });
             }
         }
@@ -667,7 +668,7 @@ export class UITreeNode extends Component {
         const iconClassName = classNames('p-tree-toggler-icon pi pi-fw', {'pi-chevron-right': !expanded, 'pi-chevron-down': expanded});
 
         return (
-            <button type="button" className="p-tree-toggler p-link" tabIndex="-1" onClick={this.onTogglerClick}>
+            <button type="button" className="p-tree-toggler p-link" tabIndex={-1} onClick={this.onTogglerClick}>
                 <span className={iconClassName}></span>
                 <Ripple />
             </button>
@@ -699,7 +700,7 @@ export class UITreeNode extends Component {
         const checkbox = this.renderCheckbox();
         const icon = this.renderIcon(expanded);
         const label = this.renderLabel();
-        const tabIndex = this.props.disabled ? undefined : '0';
+        const tabIndex = this.props.disabled ? undefined : 0;
 
         return (
             <div ref={(el) => this.contentElement = el} className={className} style={this.props.node.style} onClick={this.onClick} onContextMenu={this.onRightClick} onTouchEnd={this.onTouchEnd} draggable={this.props.dragdropScope && this.props.node.draggable !== false && !this.props.disabled}

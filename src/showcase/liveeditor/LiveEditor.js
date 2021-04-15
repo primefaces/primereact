@@ -1,101 +1,73 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-
+import React from 'react';
 import { services, data } from './LiveEditorData';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { SplitButton } from '../../components/splitbutton/SplitButton';
+import { TabPanel } from '../../components/tabview/TabView';
 
-export class LiveEditor extends Component {
+let currentProps = {};
 
-    static defaultProps = {
-        name: null,
-        sources: null,
-        service: null,
-        data: null,
-        dependencies: null,
-        extFiles: null,
-        activeButtonIndex: 0,
-        defaultSourceType: 'class'
-    };
-
-    static propTypes = {
-        name: PropTypes.string,
-        sources: PropTypes.object,
-        service: PropTypes.string,
-        data: PropTypes.string,
-        dependencies: PropTypes.object,
-        extFiles: PropTypes.object,
-        activeButtonIndex: PropTypes.number,
-        defaultSourceType: PropTypes.string
-    };
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            sandbox_id: null,
-            showCodeHighlight: false
+export const useLiveEditorTabs = (props) => {
+    let extFiles = props.extFiles && Object.entries(props.extFiles).map(([key, value], i) => {
+        if (key === 'index.css') {
+            return null;
         }
 
-        this.items = [
-            {
-                template: () => {
-                    return (
-                        <>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--text-color)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-codesandbox"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="7.5 4.21 12 6.81 16.5 4.21"></polyline><polyline points="7.5 19.79 7.5 14.6 3 12"></polyline><polyline points="21 12 16.5 14.6 16.5 19.79"></polyline><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
-                            <span className="p-ml-2" style={{color: 'var(--text-color)'}}>Class source</span>
-                        </>
-                    );
-                },
-                command: () => {
-                    this.postSandboxParameters('class');
-                }
-            },
-            {
-                template: () => {
-                    return (
-                        <>
-                            <i className="pi pi-external-link" />
-                            <span className="p-ml-2" style={{color: 'var(--text-color)'}}>Hooks source</span>
-                        </>
-                    );
-                },
-                command: () => {
-                    this.postSandboxParameters('hooks');
-                }
-            },
-            {
-                template: () => {
-                    return (
-                        <>
-                            <img src="showcase/images/typescript-icon.png" alt="TypeScript"></img>
-                            <span className="p-ml-2" style={{color: 'var(--text-color)'}}>TS source</span>
-                        </>
-                    );
-                },
-                command: () => {
-                    this.postSandboxParameters('ts');
-                }
-            }
-        ];
+        const lang = key.indexOf('.css') !== -1 ? 'css' : 'js';
+        return (
+            <CodeHighlight key={`${key}_${i}`} lang={lang}>
+{`
+/* ${key.replace('src/demo/', '')} */
+`}
+                {value.content}
+            </CodeHighlight>
+        )
+    });
+
+    let tabs = Object.entries(props.sources).map(([key, value]) => {
+        return (
+            <TabPanel key={key} header={value.tabName}>
+                <CodeHighlight lang="js">
+                    {value.content}
+                </CodeHighlight>
+
+                {extFiles}
+            </TabPanel>
+        );
+    });
+
+    if (props.service) {
+        tabs.push(
+            <TabPanel key="service" header={`${props.service}.js`}>
+                <CodeHighlight lang="js">
+                    {services[props.service]}
+                </CodeHighlight>
+                <span className="liveEditorHelperText">*Dependency: axios</span>
+            </TabPanel>
+        )
     }
 
-    postSandboxParameters(sourceType) {
-        fetch('https://codesandbox.io/api/v1/sandboxes/define?json=1', {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(this.getSandboxParameters(sourceType))
-        })
-        .then(response => response.json())
-        .then(data => window.open(`https://codesandbox.io/s/${data.sandbox_id}`, '_blank'))
-        .catch(() => this.setState({ showCodeHighlight: true }));
+    if (props.data) {
+        const dataArr = props.data.split(',');
+        dataArr.forEach((el, i) => {
+            tabs.push(
+                <TabPanel key={`${el}_i`} header={`${el}.json`}>
+                    <CodeHighlight lang="js" style={{ maxHeight: '500px' }}>
+                        {data[el]}
+                    </CodeHighlight>
+                </TabPanel>
+            )
+        });
     }
 
-    createSandboxParameters(nameWithExt, files, extDependencies) {
-        let extFiles = !!this.props.extFiles ? {...this.props.extFiles} : {};
+    currentProps = props;
+
+    return tabs;
+}
+
+export const useLiveEditor = () => {
+    const props = currentProps;
+
+    const createSandboxParameters = (nameWithExt, files, extDependencies) => {
+        let extFiles = !!props.extFiles ? { ...props.extFiles } : {};
         let extIndexCSS = extFiles['index.css'] || '';
         delete extFiles['index.css'];
 
@@ -111,9 +83,8 @@ export class LiveEditor extends Component {
                             'react': dependencies['react'],
                             'react-dom': dependencies['react-dom'],
                             'react-transition-group': dependencies['react-transition-group'],
-                            'classnames': dependencies['classnames'],
                             'axios': dependencies['axios'],
-                            'primereact': 'latest',
+                            'primereact': '^6.2.1', // latest
                             'primeflex': dependencies['primeflex'],
                             'primeicons': dependencies['primeicons']
                         }
@@ -334,13 +305,13 @@ ${extIndexCSS}
                 }
             }
         }
-    }
+    };
 
-    getSandboxParameters(sourceType) {
-        let name = this.props.name;
+    const getSandboxParameters = (sourceType) => {
+        let name = props.name;
         let extension = '.js';
-        let extDependencies = this.props.dependencies || {};
-        let content = this.props.sources[sourceType].content;
+        let extDependencies = props.dependencies || {};
+        let content = props.sources[sourceType].content;
 
         let _files = {};
         if (sourceType === 'class' || sourceType === 'hooks') {
@@ -403,16 +374,16 @@ const rootElement = document.getElementById("root");
 ReactDOM.render(<${name} />, rootElement);`
         }
 
-        if (this.props.service) {
-            _files[`src/service/${this.props.service}${extension}`] = {
-                content: services[this.props.service]
+        if (props.service) {
+            _files[`src/service/${props.service}${extension}`] = {
+                content: services[props.service]
             }
 
-            extDependencies['axios'] =  "^0.19.0";
+            extDependencies['axios'] = "^0.19.0";
         }
 
-        if (this.props.data) {
-            const dataArr = this.props.data.split(',');
+        if (props.data) {
+            const dataArr = props.data.split(',');
             dataArr.forEach(el => {
                 _files[`public/data/${el}.json`] = {
                     content: data[el]
@@ -420,49 +391,21 @@ ReactDOM.render(<${name} />, rootElement);`
             });
         }
 
-        return this.createSandboxParameters(`${name}${extension}`, _files, extDependencies);
+        return createSandboxParameters(`${name}${extension}`, _files, extDependencies);
     }
 
-    renderElement() {
-        const buttonContent = (
-            <>
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--primary-color-text)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-codesandbox"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="7.5 4.21 12 6.81 16.5 4.21"></polyline><polyline points="7.5 19.79 7.5 14.6 3 12"></polyline><polyline points="21 12 16.5 14.6 16.5 19.79"></polyline><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
-                <span className="p-ml-2">Edit in CodeSandbox</span>
-            </>
-        );
-
-        return (
-            <div className="p-d-flex p-jc-end" style={{marginTop: '-1rem'}}>
-                <SplitButton model={this.items} buttonTemplate={buttonContent} onClick={() => this.postSandboxParameters(this.props.defaultSourceType)} appendTo={document.body} className="liveEditorSplitButton" menuClassName="liveEditorPanel"></SplitButton>
-            </div>
-        );
-    }
-
-    render() {
-        const element = this.renderElement();
-
-        return (
-            <>
-                {element}
-                <CodeHighlight lang="js">
-                    {this.props.sources[this.props.defaultSourceType].content}
-                </CodeHighlight>
-
-                {
-                    this.props.extFiles && Object.entries(this.props.extFiles).map(([key, value], i) => {
-                        if (key === 'index.css') {
-                            return null;
-                        }
-
-                        const lang = key.indexOf('.css') !== -1 ? 'css' : 'js';
-                        return (
-                            <CodeHighlight key={`${key}_${i}`} lang={lang}>
-                                {value.content}
-                            </CodeHighlight>
-                        )
-                    })
-                }
-            </>
-        )
+    return {
+        postSandboxParameters(sourceType) {
+            fetch('https://codesandbox.io/api/v1/sandboxes/define?json=1', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(getSandboxParameters(sourceType))
+            })
+                .then(response => response.json())
+                .then(data => window.open(`https://codesandbox.io/s/${data.sandbox_id}`, '_blank'));
+        }
     }
 }

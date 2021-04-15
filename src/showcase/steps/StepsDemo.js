@@ -3,6 +3,8 @@ import { Steps } from '../../components/steps/Steps';
 import { Toast } from '../../components/toast/Toast';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { StepsDoc } from './StepsDoc';
+import './StepsDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export class StepsDemo extends Component {
 
@@ -47,10 +49,11 @@ export class StepsDemo extends Component {
                     <AppInlineHeader changelogText="steps">
                         <h1>Steps</h1>
                         <p>Steps component is an indicator for the steps in a workflow. Layout of steps component is optimized for responsive design.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="steps/StepsDemo.js" />
                 </div>
 
-                <div className="content-section implementation">
+                <div className="content-section implementation steps-demo">
                     <Toast ref={(el) => { this.toast = el }}></Toast>
 
                     <div className="card">

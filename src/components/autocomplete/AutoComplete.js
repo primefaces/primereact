@@ -1,26 +1,32 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 import { InputText } from '../inputtext/InputText';
 import { Button } from '../button/Button';
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
 import { AutoCompletePanel } from './AutoCompletePanel';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import { tip } from '../tooltip/Tooltip';
-import UniqueComponentId from "../utils/UniqueComponentId";
-import { CSSTransition } from 'react-transition-group';
+import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
+import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
+import { ZIndexUtils } from '../utils/ZIndexUtils';
 
 export class AutoComplete extends Component {
 
     static defaultProps = {
         id: null,
+        inputRef: null,
         value: null,
         name: null,
         type: 'text',
         suggestions: null,
         field: null,
+        optionGroupLabel: null,
+        optionGroupChildren: null,
+        optionGroupTemplate: null,
+        forceSelection: false,
+        autoHighlight: false,
         scrollHeight: '200px',
         dropdown: false,
         dropdownMode: 'blank',
@@ -35,12 +41,12 @@ export class AutoComplete extends Component {
         panelClassName: null,
         panelStyle: null,
         placeholder: null,
-        readonly: false,
+        readOnly: false,
         disabled: false,
         maxlength: null,
         size: null,
         appendTo: null,
-        tabindex: null,
+        tabIndex: null,
         autoFocus: false,
         tooltip: null,
         tooltipOptions: null,
@@ -48,6 +54,7 @@ export class AutoComplete extends Component {
         completeMethod: null,
         itemTemplate: null,
         selectedItemTemplate: null,
+        transitionOptions: null,
         onChange: null,
         onFocus: null,
         onBlur: null,
@@ -60,16 +67,24 @@ export class AutoComplete extends Component {
         onKeyUp: null,
         onKeyPress: null,
         onContextMenu: null,
-        onClear: null
+        onClear: null,
+        onShow: null,
+        onHide: null
     }
 
     static propTypes = {
         id: PropTypes.string,
+        inputRef: PropTypes.any,
         value: PropTypes.any,
         name: PropTypes.string,
         type: PropTypes.string,
         suggestions: PropTypes.array,
         field: PropTypes.string,
+        optionGroupLabel: PropTypes.string,
+        optionGroupChildren: PropTypes.string,
+        optionGroupTemplate: PropTypes.any,
+        forceSelection: PropTypes.bool,
+        autoHighlight: PropTypes.bool,
         scrollHeight: PropTypes.string,
         dropdown: PropTypes.bool,
         dropdownMode: PropTypes.string,
@@ -84,12 +99,12 @@ export class AutoComplete extends Component {
         panelClassName: PropTypes.string,
         panelStyle: PropTypes.object,
         placeholder: PropTypes.string,
-        readonly: PropTypes.bool,
+        readOnly: PropTypes.bool,
         disabled: PropTypes.bool,
         maxlength: PropTypes.number,
         size: PropTypes.number,
-        appendTo: PropTypes.any,
-        tabindex: PropTypes.number,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+        tabIndex: PropTypes.number,
         autoFocus: PropTypes.bool,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
@@ -97,6 +112,7 @@ export class AutoComplete extends Component {
         completeMethod: PropTypes.func,
         itemTemplate: PropTypes.any,
         selectedItemTemplate: PropTypes.any,
+        transitionOptions: PropTypes.object,
         onChange: PropTypes.func,
         onFocus: PropTypes.func,
         onBlur: PropTypes.func,
@@ -109,13 +125,16 @@ export class AutoComplete extends Component {
         onKeyUp: PropTypes.func,
         onKeyPress: PropTypes.func,
         onContextMenu: PropTypes.func,
-        onClear: PropTypes.func
+        onClear: PropTypes.func,
+        onShow: PropTypes.func,
+        onHide: PropTypes.func
     };
 
     constructor(props) {
         super(props);
 
         this.state = {
+            id: this.props.id,
             searching: false,
             focused: false,
             overlayVisible: false
@@ -130,12 +149,17 @@ export class AutoComplete extends Component {
         this.onMultiInputFocus = this.onMultiInputFocus.bind(this);
         this.onMultiInputBlur = this.onMultiInputBlur.bind(this);
         this.selectItem = this.selectItem.bind(this);
+        this.getOptionGroupLabel = this.getOptionGroupLabel.bind(this);
+        this.getOptionGroupChildren = this.getOptionGroupChildren.bind(this);
         this.onOverlayEnter = this.onOverlayEnter.bind(this);
+        this.onOverlayEntering = this.onOverlayEntering.bind(this);
         this.onOverlayEntered = this.onOverlayEntered.bind(this);
         this.onOverlayExit = this.onOverlayExit.bind(this);
+        this.onOverlayExited = this.onOverlayExited.bind(this);
+        this.onPanelClick = this.onPanelClick.bind(this);
 
-        this.id = this.props.id || UniqueComponentId();
-        this.listId = this.id + '_list';
+        this.overlayRef = createRef();
+        this.inputRef = createRef(this.props.inputRef);
     }
 
     onInputChange(event) {
@@ -187,9 +211,9 @@ export class AutoComplete extends Component {
         }
     }
 
-    selectItem(event, option) {
+    selectItem(event, option, preventInputFocus) {
         if (this.props.multiple) {
-            this.inputEl.value = '';
+            this.inputRef.current.value = '';
             if (!this.isSelected(option)) {
                 let newValue = this.props.value ? [...this.props.value, option] : [option];
                 this.updateModel(event, newValue);
@@ -207,8 +231,10 @@ export class AutoComplete extends Component {
             })
         }
 
-        this.inputEl.focus();
-        this.hideOverlay();
+        if (!preventInputFocus) {
+            this.inputRef.current.focus();
+            this.hideOverlay();
+        }
     }
 
     updateModel(event, value) {
@@ -216,11 +242,11 @@ export class AutoComplete extends Component {
             this.props.onChange({
                 originalEvent: event,
                 value: value,
-                stopPropagation : () =>{},
-                preventDefault : () =>{},
+                stopPropagation: () => { },
+                preventDefault: () => { },
                 target: {
                     name: this.props.name,
-                    id: this.id,
+                    id: this.state.id,
                     value: value
                 }
             });
@@ -248,7 +274,7 @@ export class AutoComplete extends Component {
 
     updateInputField(value) {
         const formattedValue = this.formatValue(value);
-        this.inputEl.value = formattedValue;
+        this.inputRef.current.value = formattedValue;
     }
 
     showOverlay() {
@@ -263,14 +289,22 @@ export class AutoComplete extends Component {
     }
 
     onOverlayEnter() {
-        this.overlay.element.style.zIndex = String(DomHandler.generateZIndex());
+        ZIndexUtils.set('overlay', this.overlayRef.current);
         this.alignOverlay();
+    }
+
+    onOverlayEntering() {
+        if (this.props.autoHighlight && this.props.suggestions && this.props.suggestions.length) {
+            DomHandler.addClass(this.overlayRef.current.firstChild.firstChild, 'p-highlight');
+        }
     }
 
     onOverlayEntered() {
         this.bindDocumentClickListener();
         this.bindScrollListener();
         this.bindResizeListener();
+
+        this.props.onShow && this.props.onShow();
     }
 
     onOverlayExit() {
@@ -279,30 +313,43 @@ export class AutoComplete extends Component {
         this.unbindResizeListener();
     }
 
-    alignOverlay() {
-        let target = this.props.multiple ? this.multiContainer : this.inputEl;
+    onOverlayExited() {
+        ZIndexUtils.clear(this.overlayRef.current);
 
-        if (this.props.appendTo) {
-            this.overlay.element.style.minWidth = DomHandler.getWidth(target) + 'px';
-            DomHandler.absolutePosition(this.overlay.element, target);
+        this.props.onHide && this.props.onHide();
+    }
+
+    alignOverlay() {
+        let target = this.props.multiple ? this.multiContainer : this.inputRef.current;
+
+        if (this.props.appendTo === 'self') {
+            DomHandler.relativePosition(this.overlayRef.current, target);
         }
         else {
-            DomHandler.relativePosition(this.overlay.element, target);
+            this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(target) + 'px';
+            DomHandler.absolutePosition(this.overlayRef.current, target);
         }
     }
 
+    onPanelClick(event) {
+        OverlayEventBus.emit('overlay-click', {
+            originalEvent: event,
+            target: this.container
+        });
+    }
+
     onDropdownClick(event) {
-        this.inputEl.focus();
+        this.inputRef.current.focus();
 
         if (this.props.dropdownMode === 'blank')
             this.search(event, '', 'dropdown');
         else if (this.props.dropdownMode === 'current')
-            this.search(event, this.inputEl.value, 'dropdown');
+            this.search(event, this.inputRef.current.value, 'dropdown');
 
         if (this.props.onDropdownClick) {
             this.props.onDropdownClick({
                 originalEvent: event,
-                query: this.inputEl.value
+                query: this.inputRef.current.value
             });
         }
     }
@@ -322,75 +369,82 @@ export class AutoComplete extends Component {
 
     onInputKeyDown(event) {
         if (this.state.overlayVisible) {
-            let highlightItem = DomHandler.findSingle(this.overlay.element, 'li.p-highlight');
+            let highlightItem = DomHandler.findSingle(this.overlayRef.current, 'li.p-highlight');
 
-            switch(event.which) {
+            switch (event.which) {
                 //down
                 case 40:
                     if (highlightItem) {
-                        let nextElement = highlightItem.nextElementSibling;
+                        let nextElement = this.findNextItem(highlightItem);
                         if (nextElement) {
                             DomHandler.addClass(nextElement, 'p-highlight');
                             DomHandler.removeClass(highlightItem, 'p-highlight');
-                            DomHandler.scrollInView(this.overlay.element, nextElement);
+                            DomHandler.scrollInView(this.overlayRef.current, nextElement);
                         }
                     }
                     else {
-                        DomHandler.addClass(this.overlay.element.firstChild.firstChild, 'p-highlight');
+                        highlightItem = this.overlayRef.current.firstChild.firstChild;
+                        if (DomHandler.hasClass(highlightItem, 'p-autocomplete-item-group')) {
+                            highlightItem = this.findNextItem(highlightItem);
+                        }
+
+                        if (highlightItem) {
+                            DomHandler.addClass(highlightItem, 'p-highlight');
+                        }
                     }
 
                     event.preventDefault();
-                break;
+                    break;
 
                 //up
                 case 38:
                     if (highlightItem) {
-                        let previousElement = highlightItem.previousElementSibling;
+                        let previousElement = this.findPrevItem(highlightItem);
                         if (previousElement) {
                             DomHandler.addClass(previousElement, 'p-highlight');
                             DomHandler.removeClass(highlightItem, 'p-highlight');
-                            DomHandler.scrollInView(this.overlay.element, previousElement);
+                            DomHandler.scrollInView(this.overlayRef.current, previousElement);
                         }
                     }
 
                     event.preventDefault();
-                break;
+                    break;
 
-                //enter,tab
+                //enter
                 case 13:
                     if (highlightItem) {
-                        this.selectItem(event, this.props.suggestions[DomHandler.index(highlightItem)]);
+                        this.selectHighlightItem(event, highlightItem);
                         this.hideOverlay();
                     }
 
                     event.preventDefault();
-                break;
+                    break;
 
                 //escape
                 case 27:
                     this.hideOverlay();
                     event.preventDefault();
-                break;
+                    break;
 
                 //tab
                 case 9:
                     if (highlightItem) {
-                        this.selectItem(event, this.props.suggestions[DomHandler.index(highlightItem)]);
+                        this.selectHighlightItem(event, highlightItem);
                     }
 
                     this.hideOverlay();
-                break;
+                    break;
 
                 default:
-                break;
+                    break;
             }
         }
 
         if (this.props.multiple) {
-            switch(event.which) {
+            switch (event.which) {
                 //backspace
                 case 8:
-                    if (this.props.value && this.props.value.length && !this.inputEl.value) {
+                    if (this.props.value && this.props.value.length && !this.inputRef.current.value) {
                         let removedValue = this.props.value[this.props.value.length - 1];
                         let newValue = this.props.value.slice(0, -1);
 
@@ -403,12 +457,34 @@ export class AutoComplete extends Component {
                             })
                         }
                     }
-                break;
+                    break;
 
                 default:
-                break;
+                    break;
             }
         }
+    }
+
+    selectHighlightItem(event, item) {
+        if (this.props.optionGroupLabel) {
+            let optionGroup = this.props.suggestions[item.dataset.group];
+            this.selectItem(event, this.getOptionGroupChildren(optionGroup)[item.dataset.index]);
+        }
+        else {
+            this.selectItem(event, this.props.suggestions[DomHandler.index(item)]);
+        }
+    }
+
+    findNextItem(item) {
+        let nextItem = item.nextElementSibling;
+
+        return nextItem ? (DomHandler.hasClass(nextItem, 'p-autocomplete-item-group') ? this.findNextItem(nextItem) : nextItem) : null;
+    }
+
+    findPrevItem(item) {
+        let prevItem = item.previousElementSibling;
+
+        return prevItem ? (DomHandler.hasClass(prevItem, 'p-autocomplete-item-group') ? this.findPrevItem(prevItem) : prevItem) : null;
     }
 
     onInputFocus(event) {
@@ -421,10 +497,39 @@ export class AutoComplete extends Component {
         });
     }
 
+    forceItemSelection(event) {
+        let valid = false;
+        let inputValue = event.target.value.trim();
+
+        if (this.props.suggestions)  {
+            for (let item of this.props.suggestions) {
+                let itemValue = this.props.field ? ObjectUtils.resolveFieldData(item, this.props.field) : item;
+                if (itemValue && inputValue === itemValue.trim()) {
+                    valid = true;
+                    this.selectItem(event, item, true);
+                    break;
+                }
+            }
+        }
+
+        if (!valid) {
+            this.inputRef.current.value = '';
+            this.updateModel(event, null);
+
+            if (this.props.onClear) {
+                this.props.onClear(event);
+            }
+        }
+    }
+
     onInputBlur(event) {
         event.persist();
 
         this.setState({ focused: false }, () => {
+            if (this.props.forceSelection) {
+                this.forceItemSelection(event);
+            }
+
             if (this.props.onBlur) {
                 this.props.onBlur(event);
             }
@@ -432,7 +537,7 @@ export class AutoComplete extends Component {
     }
 
     onMultiContainerClick(event) {
-        this.inputEl.focus();
+        this.inputRef.current.focus();
 
         if (this.props.onClick) {
             this.props.onClick(event);
@@ -477,6 +582,14 @@ export class AutoComplete extends Component {
         return index;
     }
 
+    getOptionGroupLabel(optionGroup) {
+        return this.props.optionGroupLabel ? ObjectUtils.resolveFieldData(optionGroup, this.props.optionGroupLabel) : optionGroup;
+    }
+
+    getOptionGroupChildren(optionGroup) {
+        return ObjectUtils.resolveFieldData(optionGroup, this.props.optionGroupChildren);
+    }
+
     bindDocumentClickListener() {
         if (!this.documentClickListener) {
             this.documentClickListener = (event) => {
@@ -484,7 +597,7 @@ export class AutoComplete extends Component {
                     return;
                 }
 
-                if (this.state.overlayVisible && this.overlay && this.isOutsideClicked(event)) {
+                if (this.state.overlayVisible && this.isOutsideClicked(event)) {
                     this.hideOverlay();
                 }
             };
@@ -537,19 +650,38 @@ export class AutoComplete extends Component {
     }
 
     isOutsideClicked(event) {
-        return this.container && (this.overlay && this.overlay.element && !this.overlay.element.contains(event.target)) && !this.isInputClicked(event);
+        return this.container && (this.overlayRef && this.overlayRef.current && !this.overlayRef.current.contains(event.target)) && !this.isInputClicked(event);
     }
 
     isInputClicked(event) {
         if (this.props.multiple)
             return event.target === this.multiContainer || this.multiContainer.contains(event.target);
         else
-            return event.target === this.inputEl;
+            return event.target === this.inputRef.current;
+    }
+
+    updateInputRef() {
+        let ref = this.props.inputRef;
+
+        if (ref) {
+            if (typeof ref === 'function') {
+                ref(this.inputRef.current);
+            }
+            else {
+                ref.current = this.inputRef.current;
+            }
+        }
     }
 
     componentDidMount() {
-        if (this.props.autoFocus && this.inputEl) {
-            this.inputEl.focus();
+        this.updateInputRef();
+
+        if (!this.state.id) {
+            this.setState({ id: UniqueComponentId() });
+        }
+
+        if (this.props.autoFocus && this.inputRef && this.inputRef.current) {
+            this.inputRef.current.focus();
         }
 
         if (this.props.tooltip) {
@@ -559,21 +691,23 @@ export class AutoComplete extends Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps.suggestions !== this.props.suggestions && this.state.searching) {
-            if (this.props.suggestions && this.props.suggestions.length)
+            if (this.props.suggestions && this.props.suggestions.length) {
                 this.showOverlay();
-            else
+            }
+            else {
                 this.hideOverlay();
+            }
 
             this.setState({ searching: false });
         }
 
-        if (this.inputEl && !this.props.multiple) {
+        if (this.inputRef && this.inputRef.current && !this.props.multiple) {
             this.updateInputField(this.props.value);
         }
 
-        if (prevProps.tooltip !== this.props.tooltip) {
+        if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
             if (this.tooltip)
-                this.tooltip.updateContent(this.props.tooltip);
+                this.tooltip.update({ content: this.props.tooltip, ...(this.props.tooltipOptions || {}) });
             else
                 this.renderTooltip();
         }
@@ -595,6 +729,8 @@ export class AutoComplete extends Component {
         if (this.timeout) {
             clearTimeout(this.timeout);
         }
+
+        ZIndexUtils.clear(this.overlayRef.current);
     }
 
     renderTooltip() {
@@ -611,15 +747,15 @@ export class AutoComplete extends Component {
         });
 
         return (
-            <InputText ref={(el) => this.inputEl = ReactDOM.findDOMNode(el)} id={this.props.inputId} type={this.props.type} name={this.props.name}
-                        defaultValue={this.formatValue(this.props.value)} role="searchbox" aria-autocomplete="list" aria-controls={this.listId}
-                        aria-labelledby={this.props.ariaLabelledBy} className={inputClassName} style={this.props.inputStyle} autoComplete="off"
-                        readOnly={this.props.readonly} disabled={this.props.disabled} placeholder={this.props.placeholder} size={this.props.size}
-                        maxLength={this.props.maxlength} tabIndex={this.props.tabindex}
-                        onBlur={this.onInputBlur} onFocus={this.onInputFocus} onChange={this.onInputChange}
-                        onMouseDown={this.props.onMouseDown} onKeyUp={this.props.onKeyUp} onKeyDown={this.onInputKeyDown}
-                        onKeyPress={this.props.onKeyPress} onContextMenu={this.props.onContextMenu}
-                        onClick={this.props.onClick} onDoubleClick={this.props.onDblClick} />
+            <InputText ref={this.inputRef} id={this.props.inputId} type={this.props.type} name={this.props.name}
+                defaultValue={this.formatValue(this.props.value)} role="searchbox" aria-autocomplete="list" aria-controls={this.state.id + '_list'}
+                aria-labelledby={this.props.ariaLabelledBy} className={inputClassName} style={this.props.inputStyle} autoComplete="off"
+                readOnly={this.props.readOnly} disabled={this.props.disabled} placeholder={this.props.placeholder} size={this.props.size}
+                maxLength={this.props.maxlength} tabIndex={this.props.tabIndex}
+                onBlur={this.onInputBlur} onFocus={this.onInputFocus} onChange={this.onInputChange}
+                onMouseDown={this.props.onMouseDown} onKeyUp={this.props.onKeyUp} onKeyDown={this.onInputKeyDown}
+                onKeyPress={this.props.onKeyPress} onContextMenu={this.props.onContextMenu}
+                onClick={this.props.onClick} onDoubleClick={this.props.onDblClick} />
         );
     }
 
@@ -641,12 +777,12 @@ export class AutoComplete extends Component {
     renderMultiInput() {
         return (
             <li className="p-autocomplete-input-token">
-                <input ref={(el) => this.inputEl = el} type={this.props.type} disabled={this.props.disabled} placeholder={this.props.placeholder}
-                       role="searchbox" aria-autocomplete="list" aria-controls={this.listId} aria-labelledby={this.props.ariaLabelledBy}
-                       autoComplete="off" tabIndex={this.props.tabindex} onChange={this.onInputChange} id={this.props.inputId} name={this.props.name}
-                       style={this.props.inputStyle} className={this.props.inputClassName} maxLength={this.props.maxlength}
-                       onKeyUp={this.props.onKeyUp} onKeyDown={this.onInputKeyDown} onKeyPress={this.props.onKeyPress}
-                       onFocus={this.onMultiInputFocus} onBlur={this.onMultiInputBlur} />
+                <input ref={this.inputRef} type={this.props.type} disabled={this.props.disabled} placeholder={this.props.placeholder}
+                    role="searchbox" aria-autocomplete="list" aria-controls={this.state.id + '_list'} aria-labelledby={this.props.ariaLabelledBy}
+                    autoComplete="off" tabIndex={this.props.tabIndex} onChange={this.onInputChange} id={this.props.inputId} name={this.props.name}
+                    style={this.props.inputStyle} className={this.props.inputClassName} maxLength={this.props.maxlength}
+                    onKeyUp={this.props.onKeyUp} onKeyDown={this.onInputKeyDown} onKeyPress={this.props.onKeyPress}
+                    onFocus={this.onMultiInputFocus} onBlur={this.onMultiInputBlur} />
             </li>
         );
     }
@@ -659,11 +795,11 @@ export class AutoComplete extends Component {
         let input = this.renderMultiInput();
 
         return (
-                <ul ref={(el) => {this.multiContainer = el}} className={multiContainerClass} onContextMenu={this.props.onContextMenu} onMouseDown={this.props.onMouseDown}
-                        onClick={this.onMultiContainerClick} onDoubleClick={this.props.onDblClick} >
-                    {tokens}
-                    {input}
-                </ul>
+            <ul ref={(el) => { this.multiContainer = el }} className={multiContainerClass} onContextMenu={this.props.onContextMenu} onMouseDown={this.props.onMouseDown}
+                onClick={this.onMultiContainerClick} onDoubleClick={this.props.onDblClick} >
+                {tokens}
+                {input}
+            </ul>
         );
     }
 
@@ -699,17 +835,18 @@ export class AutoComplete extends Component {
         }
 
         return (
-            <span ref={(el) => this.container = el} id={this.id} style={this.props.style} className={className} aria-haspopup="listbox"
-                  aria-expanded={this.state.overlayVisible} aria-owns={this.listId}>
+            <span ref={(el) => this.container = el} id={this.state.id} style={this.props.style} className={className} aria-haspopup="listbox"
+                aria-expanded={this.state.overlayVisible} aria-owns={this.state.id + '_list'}>
                 {input}
                 {loader}
                 {dropdown}
-                <CSSTransition classNames="p-connected-overlay" in={this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }}
-                    unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit}>
-                    <AutoCompletePanel ref={(el) => this.overlay = el} suggestions={this.props.suggestions} field={this.props.field} listId={this.listId}
-                            appendTo={this.props.appendTo} itemTemplate={this.props.itemTemplate} onItemClick={this.selectItem} ariaSelected={this.ariaSelected}
-                            panelStyle={this.props.panelStyle} panelClassName={this.props.panelClassName}/>
-                </CSSTransition>
+                <AutoCompletePanel ref={this.overlayRef} suggestions={this.props.suggestions} field={this.props.field} listId={this.state.id + '_list'}
+                    appendTo={this.props.appendTo} scrollHeight={this.props.scrollHeight} itemTemplate={this.props.itemTemplate} onItemClick={this.selectItem} ariaSelected={this.ariaSelected}
+                    panelStyle={this.props.panelStyle} panelClassName={this.props.panelClassName} onClick={this.onPanelClick}
+                    optionGroupLabel={this.props.optionGroupLabel} optionGroupChildren={this.props.optionGroupChildren} optionGroupTemplate={this.props.optionGroupTemplate}
+                    getOptionGroupLabel={this.getOptionGroupLabel} getOptionGroupChildren={this.getOptionGroupChildren}
+                    in={this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntering={this.onOverlayEntering} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}
+                    transitionOptions={this.props.transitionOptions} />
             </span>
         );
     }

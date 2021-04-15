@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 
 export class PanelDoc extends Component {
 
@@ -15,8 +15,33 @@ export class PanelDoc extends Component {
                 content: `
 import React, { Component } from 'react';
 import { Panel } from 'primereact/panel';
+import { Ripple } from 'primereact/ripple';
 
 export class PanelDemo extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.template = this.template.bind(this);
+    }
+
+    template(options) {
+        const toggleIcon = options.collapsed ? 'pi pi-chevron-down' : 'pi pi-chevron-up';
+        const className = \`\${options.className} p-jc-start\`;
+        const titleClassName = \`\${options.titleClassName} p-pl-1\`;
+
+        return (
+            <div className={className}>
+                <button className={options.togglerClassName} onClick={options.onTogglerClick}>
+                    <span className={toggleIcon}></span>
+                    <Ripple />
+                </button>
+                <span className={titleClassName}>
+                    Header
+                </span>
+            </div>
+        )
+    }
 
     render() {
         return (
@@ -29,8 +54,16 @@ export class PanelDemo extends Component {
                         cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                 </Panel>
 
-                <h5>Advanced</h5>
+                <h5>Toggleable</h5>
                 <Panel header="Header" toggleable>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </Panel>
+
+                <h5>Template</h5>
+                <Panel headerTemplate={this.template} toggleable>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                         Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
@@ -47,8 +80,27 @@ export class PanelDemo extends Component {
                 content: `
 import React from 'react';
 import { Panel } from 'primereact/panel';
+import { Ripple } from 'primereact/ripple';
 
 const PanelDemo = () => {
+    const template = (options) => {
+        const toggleIcon = options.collapsed ? 'pi pi-chevron-down' : 'pi pi-chevron-up';
+        const className = \`\${options.className} p-jc-start\`;
+        const titleClassName = \`\${options.titleClassName} p-pl-1\`;
+
+        return (
+            <div className={className}>
+                <button className={options.togglerClassName} onClick={options.onTogglerClick}>
+                    <span className={toggleIcon}></span>
+                    <Ripple />
+                </button>
+                <span className={titleClassName}>
+                    Header
+                </span>
+            </div>
+        )
+    }
+
     return (
         <div>
             <h5>Regular</h5>
@@ -59,8 +111,16 @@ const PanelDemo = () => {
                     cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             </Panel>
 
-            <h5>Advanced</h5>
+            <h5>Toggleable</h5>
             <Panel header="Header" toggleable>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                    cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </Panel>
+
+            <h5>Template</h5>
+            <Panel headerTemplate={template} toggleable>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                     Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
@@ -76,8 +136,27 @@ const PanelDemo = () => {
                 content: `
 import React from 'react';
 import { Panel } from 'primereact/panel';
+import { Ripple } from 'primereact/ripple';
 
 const PanelDemo = () => {
+    const template = (options) => {
+        const toggleIcon = options.collapsed ? 'pi pi-chevron-down' : 'pi pi-chevron-up';
+        const className = \`\${options.className} p-jc-start\`;
+        const titleClassName = \`\${options.titleClassName} p-pl-1\`;
+
+        return (
+            <div className={className}>
+                <button className={options.togglerClassName} onClick={options.onTogglerClick}>
+                    <span className={toggleIcon}></span>
+                    <Ripple />
+                </button>
+                <span className={titleClassName}>
+                    Header
+                </span>
+            </div>
+        )
+    }
+
     return (
         <div>
             <h5>Regular</h5>
@@ -88,8 +167,16 @@ const PanelDemo = () => {
                     cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             </Panel>
 
-            <h5>Advanced</h5>
+            <h5>Toggleable</h5>
             <Panel header="Header" toggleable>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                    cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </Panel>
+
+            <h5>Template</h5>
+            <Panel headerTemplate={template} toggleable>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                     Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
@@ -109,7 +196,7 @@ const PanelDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
                         <h5>Import</h5>
@@ -132,7 +219,7 @@ import { Panel } from 'primereact/panel';
 `}
 </CodeHighlight>
 
-            <p>Instead of simple strings, <i>header</i> propery also can be used to provide custom content as JSX.</p>
+            <p><i>header</i> propery also can be used to provide custom content as JSX.</p>
 
             <h5>Toggleable</h5>
             <p>Content of the panel can be expanded and collapsed using <i>toggleable</i> option. A toggleable panel can either be used as a Controlled or Uncontrolled component.</p>
@@ -141,7 +228,7 @@ import { Panel } from 'primereact/panel';
 
 <CodeHighlight>
 {`
-<Panel header="Header" toggleable collapsed={this.state.panelCollapsed} onToggle={(e) => this.setState({panelCollapsed: e.value})}>
+<Panel header="Header" toggleable collapsed={panelCollapsed} onToggle={(e) => setPanelCollapsed(e.value)}>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
@@ -161,6 +248,38 @@ import { Panel } from 'primereact/panel';
         Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
         cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 </Panel>
+`}
+</CodeHighlight>
+
+            <h5>Header Template</h5>
+            <p>The header element is fully customizable on Panel. To make special header, an object can be given to the <i>headerTemplate</i> property as below.</p>
+<CodeHighlight lang="js">
+{`
+<Panel headerTemplate={template} toggleable>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+</Panel>
+`}
+</CodeHighlight>
+
+<CodeHighlight lang="js">
+    {`
+template: (options) => {
+    // options.className: Style class of the default header element.
+    // options.titleClassName: Style class of the title element.
+    // options.iconsClassName: Style class of the icons wrapper element.
+    // options.togglerClassName: Style class of the toggler element.
+    // options.togglerIconClassName: Style class of the toggler icon element.
+    // options.onTogglerClick: Click event for the toggler element.
+    // options.titleElement: Default title element created by the component.
+    // options.iconsElement: Default icons wrapper element created by the component.
+    // options.togglerElement: Default toggler element created by the component.
+    // options.element: Default element created by the component.
+    // options.props: component props.
+    // options.collapsed: Whether the panel is collapsed.
+}
 `}
 </CodeHighlight>
 
@@ -184,15 +303,27 @@ import { Panel } from 'primereact/panel';
                         </tr>
                         <tr>
                             <td>header</td>
-                            <td>string</td>
+                            <td>any</td>
                             <td>null</td>
-                            <td>Header text of the panel.</td>
+                            <td>Custom header template of the panel.</td>
+                        </tr>
+                        <tr>
+                            <td>headerTemplate</td>
+                            <td>any</td>
+                            <td>null</td>
+                            <td>Header template of the panel to customize more.</td>
                         </tr>
                         <tr>
                             <td>toggleable</td>
                             <td>boolean</td>
                             <td>false</td>
                             <td>Defines if content of panel can be expanded and collapsed.</td>
+                        </tr>
+                        <tr>
+                            <td>icons</td>
+                            <td>any</td>
+                            <td>null</td>
+                            <td>Custom icons template for the header.</td>
                         </tr>
                         <tr>
                             <td>style</td>
@@ -211,6 +342,12 @@ import { Panel } from 'primereact/panel';
                             <td>boolean</td>
                             <td>false</td>
                             <td>Defines the initial state of panel content, supports one or two-way binding as well.</td>
+                        </tr>
+                        <tr>
+                            <td>transitionOptions</td>
+                            <td>object</td>
+                            <td>null</td>
+                            <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -290,9 +427,9 @@ import { Panel } from 'primereact/panel';
 
             </TabPanel>
 
-            <TabPanel header="Source">
-                <LiveEditor name="PanelDemo" sources={this.sources} />
-            </TabPanel>
+            {
+                useLiveEditorTabs({ name: 'PanelDemo', sources: this.sources })
+            }
         </TabView>
     </div>
         );

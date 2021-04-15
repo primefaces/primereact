@@ -1,11 +1,12 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import {ToastMessage} from './ToastMessage';
-import DomHandler from '../utils/DomHandler';
-import {CSSTransition, TransitionGroup} from 'react-transition-group';
+import { classNames } from '../utils/ClassNames';
+import { ToastMessage } from './ToastMessage';
+import { TransitionGroup } from 'react-transition-group';
+import { CSSTransition } from '../transition/CSSTransition';
+import { ZIndexUtils } from '../utils/ZIndexUtils';
 
-var messageIdx = 0;
+let messageIdx = 0;
 
 export class Toast extends Component {
 
@@ -15,8 +16,11 @@ export class Toast extends Component {
         style: null,
         baseZIndex: 0,
         position: 'top-right',
+        transitionOptions: null,
         onClick: null,
-        onRemove: null
+        onRemove: null,
+        onShow: null,
+        onHide: null
     }
 
     static propTypes = {
@@ -25,8 +29,11 @@ export class Toast extends Component {
         style: PropTypes.object,
         baseZIndex: PropTypes.number,
         position: PropTypes.string,
+        transitionOptions: PropTypes.object,
         onClick: PropTypes.func,
-        onRemove: PropTypes.func
+        onRemove: PropTypes.func,
+        onShow: PropTypes.func,
+        onHide: PropTypes.func
     };
 
     constructor(props) {
@@ -37,6 +44,8 @@ export class Toast extends Component {
         };
 
         this.onClose = this.onClose.bind(this);
+        this.onEntered = this.onEntered.bind(this);
+        this.onExited = this.onExited.bind(this);
     }
 
     show(value) {
@@ -58,14 +67,16 @@ export class Toast extends Component {
                 messages: newMessages
             });
 
-            this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
+            ZIndexUtils.set('modal', this.container, this.props.baseZIndex);
         }
     }
 
     clear() {
+        ZIndexUtils.clear(this.container);
+
         this.setState({
             messages: []
-        })
+        });
     }
 
     onClose(message) {
@@ -79,6 +90,18 @@ export class Toast extends Component {
         }
     }
 
+    onEntered() {
+        this.props.onShow && this.props.onShow();
+    }
+
+    onExited() {
+        this.props.onHide && this.props.onHide();
+    }
+
+    componentWillUnmount() {
+        ZIndexUtils.clear(this.container);
+    }
+
     render() {
         let className = classNames('p-toast p-component p-toast-' + this.props.position, this.props.className);
 
@@ -86,11 +109,15 @@ export class Toast extends Component {
             <div ref={(el) => { this.container = el; }} id={this.props.id} className={className} style={this.props.style}>
                 <TransitionGroup>
                     {
-                        this.state.messages.map((message) =>
-                            <CSSTransition key={message.id} classNames="p-toast-message" unmountOnExit timeout={{ enter: 300, exit: 300 }}>
-                                <ToastMessage message={message} onClick={this.props.onClick} onClose={this.onClose} />
-                            </CSSTransition>
-                        )
+                        this.state.messages.map((message) => {
+                            const messageRef = React.createRef();
+
+                            return (
+                                <CSSTransition nodeRef={messageRef} key={message.id} classNames="p-toast-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} onEntered={this.onEntered} onExited={this.onExited} options={this.props.transitionOptions}>
+                                    <ToastMessage ref={messageRef} message={message} onClick={this.props.onClick} onClose={this.onClose} />
+                                </CSSTransition>
+                            )
+                        })
                     }
                 </TransitionGroup>
             </div>

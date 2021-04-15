@@ -101,20 +101,11 @@ export default class DomHandler {
         };
     }
 
-    static generateZIndex() {
-        this.zindex = this.zindex||999;
-        return ++this.zindex;
-    }
-
-    static getCurrentZIndex() {
-        return this.zindex;
-    }
-
     static index(element) {
         if (element) {
             let children = element.parentNode.childNodes;
             let num = 0;
-            for (var i = 0; i < children.length; i++) {
+            for (let i = 0; i < children.length; i++) {
                 if (children[i] === element) return num;
                 if (children[i].nodeType === 1) num++;
             }
@@ -123,7 +114,7 @@ export default class DomHandler {
     }
 
     static addMultipleClasses(element, className) {
-        if (element) {
+        if (element && className) {
             if (element.classList) {
                 let styles = className.split(' ');
                 for (let i = 0; i < styles.length; i++) {
@@ -141,7 +132,7 @@ export default class DomHandler {
     }
 
     static addClass(element, className) {
-        if (element) {
+        if (element && className) {
             if (element.classList)
                 element.classList.add(className);
             else
@@ -150,7 +141,7 @@ export default class DomHandler {
     }
 
     static removeClass(element, className) {
-        if (element) {
+        if (element && className) {
             if (element.classList)
                 element.classList.remove(className);
             else
@@ -474,7 +465,7 @@ export default class DomHandler {
                     }
                 }
 
-                if (parent.nodeType === 9 || overflowCheck(parent)) {
+                if (parent.nodeType !== 9 && overflowCheck(parent)) {
                     scrollableParents.push(parent);
                 }
             }
@@ -715,5 +706,15 @@ export default class DomHandler {
         }
 
         return visibleFocusableElements;
+    }
+
+    static getFirstFocusableElement(element) {
+        const focusableElements = DomHandler.getFocusableElements(element);
+        return focusableElements.length > 0 ? focusableElements[0] : null;
+    }
+
+    static getLastFocusableElement(element) {
+        const focusableElements = DomHandler.getFocusableElements(element);
+        return focusableElements.length > 0 ? focusableElements[focusableElements.length - 1] : null;
     }
 }

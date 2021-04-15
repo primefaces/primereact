@@ -1,5 +1,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![npm version](https://badge.fury.io/js/primereact.svg)](https://badge.fury.io/js/primereact)
+[![Discord Chat](https://img.shields.io/discord/557940238991753223.svg?color=7289da&label=chat&logo=discord)](https://discord.gg/gzKFYnpmCY)
 
 [![PrimeReact Hero](https://www.primefaces.org/wp-content/uploads/2020/08/primereact-promotion-21aug2020@2x.jpg)](https://www.primefaces.org/primereact)
 
@@ -28,15 +29,14 @@ import {Accordion,AccordionTab} from 'primereact/accordion';
 
 Majority of PrimeReact components (95%) are native and there are some exceptions having 3rd party dependencies such as Google Maps for GMap.
 
-In addition, components require PrimeIcons for icons, classNames package to manage style classes and react-transition-group for animations.
+In addition, components require PrimeIcons for icons and react-transition-group for animations.
 
 ```json
 dependencies: {
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "react-transition-group": "^2.2.1",
-    "classnames": "^2.2.5",
-    "primeicons": "^2.0.0"
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-transition-group": "^4.4.1",
+    "primeicons": "^4.1.0"
 }
 ```
 

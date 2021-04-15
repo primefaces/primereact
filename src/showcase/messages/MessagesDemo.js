@@ -5,6 +5,7 @@ import { InputText } from '../../components/inputtext/InputText';
 import { Button } from '../../components/button/Button';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { MessagesDoc } from './MessagesDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class MessagesDemo extends Component {
 
@@ -53,7 +54,8 @@ export class MessagesDemo extends Component {
                     <AppInlineHeader changelogText="messages">
                         <h1>Messages</h1>
                         <p>Messages is used to display inline messages with various severities.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="messages/MessagesDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -103,7 +105,7 @@ export class MessagesDemo extends Component {
                         <div className="p-field p-fluid">
                             <label htmlFor="username2">Username</label>
                             <InputText id="username2" aria-describedby="username-help" className="p-invalid p-mr-2" />
-                            <small id="username-help" className="p-invalid">Username is not available.</small>
+                            <small id="username-help" className="p-error">Username is not available.</small>
                         </div>
                     </div>
                 </div>

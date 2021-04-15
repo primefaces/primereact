@@ -3,10 +3,11 @@ import { DataTable } from '../../components/datatable/DataTable';
 import { Column } from '../../components/column/Column';
 import { Toast } from '../../components/toast/Toast';
 import { CustomerService } from '../service/CustomerService';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './DataTableDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DataTableRowGroupDemo extends Component {
 
@@ -101,6 +102,7 @@ export class DataTableRowGroupDemo extends Component {
                         <h1>DataTable <span>Row Grouping</span></h1>
                         <p>Rows can either be grouped by a separate grouping row or using rowspan.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="datatable/DataTableRowGroupDemo.js" />
                 </div>
 
                 <div className="content-section implementation datatable-rowgroup-demo">
@@ -615,11 +617,11 @@ const DataTableRowGroupDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="DataTableRowGroupDemo" sources={this.sources} service="CustomerService" data="customers-medium" extFiles={this.extFiles} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'DataTableRowGroupDemo', sources: this.sources, service: 'CustomerService', data: 'customers-medium', extFiles: this.extFiles  })
+                    }
                 </TabView>
             </div>
         )

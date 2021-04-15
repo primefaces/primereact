@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 
 export class MenuDoc extends Component {
 
@@ -225,7 +225,7 @@ const MenuDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
                         <h5>Import</h5>
@@ -259,7 +259,7 @@ let items = [
                         <p>Menu supports one level of nesting via subitems of an item.</p>
 <CodeHighlight lang="js">
 {`
-let items: [
+let items = [
     {
         label: 'Options',
         items: [{label: 'New', icon: 'pi pi-fw pi-plus',command:()=>{ window.location.hash="/fileupload"; }},
@@ -279,8 +279,8 @@ let items: [
 
 <CodeHighlight>
 {`
-<Menu model={items} popup ref={el => this.menu = el} />
-<Button label="Show" icon="pi pi-bars" onClick={(event) => this.menu.toggle(event)}/>
+<Menu model={items} popup ref={menu} />
+<Button label="Show" icon="pi pi-bars" onClick={(event) => menu.current.toggle(event)}/>
 `}
 </CodeHighlight>
 
@@ -340,9 +340,15 @@ let items: [
                                     </tr>
                                     <tr>
                                         <td>appendTo</td>
-                                        <td>DOM element</td>
+                                        <td>DOM element | string</td>
+                                        <td>document.body</td>
+                                        <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>transitionOptions</td>
+                                        <td>object</td>
                                         <td>null</td>
-                                        <td>DOM element instance where the dialog should be mounted.</td>
+                                        <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -442,9 +448,9 @@ let items: [
                         <p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="MenuDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'MenuDemo', sources: this.sources })
+                    }
                 </TabView >
             </div>
         )

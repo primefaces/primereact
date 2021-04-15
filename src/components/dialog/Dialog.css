@@ -26,6 +26,7 @@
     pointer-events: auto;
     max-height: 90%;
     transform: scale(1);
+    position: relative;
 }
 
 .p-dialog-content {
@@ -94,7 +95,6 @@
 .p-dialog-bottom-left .p-dialog,
 .p-dialog-bottom-right .p-dialog {
     margin: .75em;
-    transition: all .3s ease-out;
 }
 
 .p-dialog-top .p-dialog-enter,
@@ -134,16 +134,29 @@
 .p-dialog-top-right .p-dialog-enter-active,
 .p-dialog-bottom-right .p-dialog-enter-active {
     transform: translate3d(0px, 0px, 0px);
+    transition: all .3s ease-out;
+}
+
+.p-dialog-top .p-dialog-exit-active,
+.p-dialog-bottom .p-dialog-exit-active,
+.p-dialog-left .p-dialog-exit-active,
+.p-dialog-top-left .p-dialog-exit-active,
+.p-dialog-bottom-left .p-dialog-exit-active,
+.p-dialog-right .p-dialog-exit-active,
+.p-dialog-top-right .p-dialog-exit-active,
+.p-dialog-bottom-right .p-dialog-exit-active {
+    transition: all .3s ease-out;
 }
 
 /* Maximize */
 .p-dialog-maximized {
-    -webkit-transition: none;
     transition: none;
     transform: none;
     width: 100vw !important;
+    height: 100vh !important;
     max-height: 100%;
-    height: 100%;
+    top: 0px !important;
+    left: 0px !important;
 }
 
 .p-dialog-maximized .p-dialog-content {
@@ -185,4 +198,25 @@
 .p-dialog-bottom-right {
     justify-content: flex-end;
     align-items: flex-end;
+}
+
+.p-confirm-dialog .p-dialog-content {
+    display: flex;
+    align-items: center;
+}
+
+/* Resizable */
+.p-dialog .p-resizable-handle {
+    position: absolute;
+    font-size: 0.1px;
+    display: block;
+    cursor: se-resize;
+    width: 12px;
+    height: 12px;
+    right: 1px;
+    bottom: 1px;
+}
+
+.p-dialog-resizable .p-dialog-header {
+    cursor: move;
 }

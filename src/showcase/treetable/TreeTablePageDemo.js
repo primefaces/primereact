@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { TreeTable } from '../../components/treetable/TreeTable';
 import { Column } from '../../components/column/Column';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class TreeTablePageDemo extends Component {
 
@@ -52,6 +53,7 @@ export class TreeTablePageDemo extends Component {
                         <h1>TreeTable <span>Page</span></h1>
                         <p>Pagination is enabled by setting paginator property to true and defining a rows property to specify the number of rows per page.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="treetable/TreeTablePageDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -251,11 +253,11 @@ const TreeTablePageDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="TreeTablePageDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'TreeTablePageDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         )

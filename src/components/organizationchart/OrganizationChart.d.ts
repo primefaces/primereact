@@ -1,25 +1,40 @@
 import * as React from 'react';
 
-export interface OrganizationChartNodeData {
-    className?: string,
-    expanded?: boolean,
-    children?: OrganizationChartNodeData[]
-    selectable?: boolean
-    label?: string,
+declare namespace OrganizationChart {
+
+    type SelectionModeType = 'single' | 'multiple';
+
+    type NodeDataType = OrganizationChartNodeData | undefined | null;
+
+    type SelectionNodeDataType = OrganizationChartNodeData | OrganizationChartNodeData[] | undefined | null;
+
+    interface NodeSelectParams {
+        originalEvent: React.SyntheticEvent;
+        node: NodeDataType;
+    }
+
+    interface NodeUnselectParams extends NodeSelectParams { }
+
+    interface OrganizationChartNodeData {
+        className?: string;
+        expanded?: boolean;
+        children?: OrganizationChartNodeData[];
+        selectable?: boolean;
+        label?: string;
+    }
+
+    interface OrganizationChartProps {
+        id?: string;
+        value?: OrganizationChartNodeData[];
+        style?: object;
+        className?: string;
+        selectionMode?: SelectionModeType;
+        selection?: SelectionNodeDataType;
+        nodeTemplate?(node: OrganizationChartNodeData): React.ReactNode;
+        selectionChange?(node: SelectionNodeDataType): void;
+        onNodeSelect?(e: NodeSelectParams): void;
+        onNodeUnselect?(e: NodeUnselectParams): void;
+    }
 }
 
-interface OrganizationChartProps {
-    id?: string;
-    value?: OrganizationChartNodeData[];
-    style?: object;
-    className?: string;
-    selectionMode?: string;
-    selection?: any;
-    nodeTemplate?(node: OrganizationChartNodeData): React.ReactNode;
-    selectionChange?(data: any): void;
-    onNodeSelect?(e: { originalEvent: Event, node: any }): void;
-    onNodeUnselect?(e: { originalEvent: Event, node: any }): void;
-}
-
-export class OrganizationChart extends React.Component<OrganizationChartProps, any> {
-}
+export declare class OrganizationChart extends React.Component<OrganizationChart.OrganizationChartProps, any> { }

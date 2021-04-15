@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import classNames from 'classnames';
+import { classNames } from '../../components/utils/ClassNames';
 import { Link } from 'react-router-dom';
 import AppContentContext from '../../AppContentContext';
 
@@ -31,8 +31,8 @@ export class HomeComponent extends Component {
                             <div className="feature-card">
                                 <img alt="components" src="showcase/images/home/react-components.png" />
                                 <div className="feature-card-detail">
-                                    <span className="feature-name">70+ COMPONENTS</span>
-                                    <p>The most complete set of native widgets featuring 70+ easy to use components for all your UI requirements.</p>
+                                    <span className="feature-name">80+ COMPONENTS</span>
+                                    <p>The most complete set of native widgets featuring 80+ easy to use components for all your UI requirements.</p>
                                 </div>
                             </div>
                         </div>
@@ -135,6 +135,16 @@ export class HomeComponent extends Component {
 
                     <div className="p-grid">
                         <div className="p-col-12 p-md-3">
+                            <a href="https://www.primefaces.org/layouts/ultima-react">
+                                <img alt="Ultima" src="showcase/images/layouts/ultima-react.jpg" />
+                            </a>
+                        </div>
+                        <div className="p-col-12 p-md-3">
+							<a href="https://www.primefaces.org/layouts/diamond-react">
+								<img alt="Diamond" src="showcase/images/layouts/diamond-react.jpg" />
+							</a>
+						</div>
+                        <div className="p-col-12 p-md-3">
 							<a href="https://www.primefaces.org/layouts/sapphire-react">
 								<img alt="Sapphire" src="showcase/images/layouts/sapphire-react.jpg" />
 							</a>
@@ -142,11 +152,6 @@ export class HomeComponent extends Component {
                         <div className="p-col-12 p-md-3">
                             <a href="https://www.primefaces.org/layouts/serenity-react">
                                 <img alt="Serenity" src="showcase/images/layouts/serenity-react.jpg" />
-                            </a>
-                        </div>
-                        <div className="p-col-12 p-md-3">
-                            <a href="https://www.primefaces.org/layouts/ultima-react">
-                                <img alt="Ultima" src="showcase/images/layouts/ultima-react.jpg" />
                             </a>
                         </div>
                         <div className="p-col-12 p-md-3">

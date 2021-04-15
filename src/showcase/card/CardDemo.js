@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AppDemoActions from '../../AppDemoActions';
 import { Card } from '../../components/card/Card';
 import { Button } from '../../components/button/Button';
 import { CardDoc } from './CardDoc';
@@ -23,7 +24,8 @@ export class CardDemo extends Component {
                     <AppInlineHeader changelogText="card">
                         <h1>Card</h1>
                         <p>Card is a flexible container component.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="card/CardDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -32,7 +34,7 @@ export class CardDemo extends Component {
                             quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
                     </Card>
 
-                    <Card title="Advanced Card" subTitle="Subtitle" style={{ width: '25em' }} className="ui-card-shadow" footer={footer} header={header}>
+                    <Card title="Advanced Card" subTitle="Subtitle" style={{ width: '25em' }} footer={footer} header={header}>
                         <p className="p-m-0" style={{lineHeight: '1.5'}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
                             quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
                     </Card>

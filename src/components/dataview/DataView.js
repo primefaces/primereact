@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Paginator} from '../paginator/Paginator';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import ObjectUtils from '../utils/ObjectUtils';
 import { Ripple } from '../ripple/Ripple';
 
@@ -90,6 +90,7 @@ export class DataView extends Component {
         paginator: false,
         paginatorPosition: 'bottom',
         alwaysShowPaginator: true,
+        paginatorClassName: null,
         paginatorTemplate: 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown',
         paginatorLeft:null,
         paginatorRight: null,
@@ -121,10 +122,11 @@ export class DataView extends Component {
         paginator: PropTypes.bool,
         paginatorPosition: PropTypes.string,
         alwaysShowPaginator: PropTypes.bool,
-        paginatorTemplate: PropTypes.string,
+        paginatorClassName: PropTypes.string,
+        paginatorTemplate: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
         paginatorLeft: PropTypes.any,
         paginatorRight: PropTypes.any,
-        paginatorDropdownAppendTo: PropTypes.any,
+        paginatorDropdownAppendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         pageLinkSize: PropTypes.number,
         rowsPerPageOptions: PropTypes.array,
         currentPageReportTemplate: PropTypes.string,
@@ -162,7 +164,7 @@ export class DataView extends Component {
     }
 
     createPaginator(position) {
-        const className = 'p-paginator-' + position;
+        const className = classNames('p-paginator-' + position, this.props.paginatorClassName);
         const first = this.props.onPage ? this.props.first: this.state.first;
         const rows = this.props.onPage ? this.props.rows : this.state.rows;
         const totalRecords = this.getTotalRecords();
@@ -283,7 +285,8 @@ export class DataView extends Component {
             if (this.props.paginator) {
                 const rows = this.props.onPage ? this.props.rows : this.state.rows;
                 const first = this.props.lazy ? 0 : this.props.onPage ? this.props.first : this.state.first;
-                const last = rows + first;
+                const totalRecords = this.getTotalRecords();
+                const last = Math.min(rows + first, totalRecords);
                 let items = [];
 
                 for (let i = first; i < last; i++) {

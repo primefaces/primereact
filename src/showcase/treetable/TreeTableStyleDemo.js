@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { TreeTable } from '../../components/treetable/TreeTable';
 import { Column } from '../../components/column/Column';
 import { NodeService } from '../service/NodeService';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class TreeTableStyleDemo extends Component {
 
@@ -41,6 +42,7 @@ export class TreeTableStyleDemo extends Component {
                         <h1>TreeTable <span>Styling</span></h1>
                         <p>Particular rows and cells can be styled based on data.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="treetable/TreeTableStyleDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -211,11 +213,11 @@ const TreeTableStyleDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="TreeTableStyleDemo" sources={this.sources} service="NodeService" data="treetablenodes" />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'TreeTableStyleDemo', sources: this.sources, service: 'NodeService', data: 'treetablenodes' })
+                    }
                 </TabView>
             </div>
         )

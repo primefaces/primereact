@@ -8,6 +8,7 @@ import ProductService from '../service/ProductService';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { OverlayPanelDoc } from './OverlayPanelDoc';
 import './OverlayPanelDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export class OverlayPanelDemo extends Component {
 
@@ -55,16 +56,17 @@ export class OverlayPanelDemo extends Component {
                     <AppInlineHeader changelogText="overlayPanel">
                         <h1>OverlayPanel</h1>
                         <p>OverlayPanel is a container component that can overlay other components on page.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="overlaypanel/OverlayPanelDemo.js" />
                 </div>
 
-                <div className="content-section implementation overlaypanel-demo">
+                <div className="content-section implementation">
                     <Toast ref={(el) => this.toast = el} />
 
                     <div className="card">
                         <Button type="button" icon="pi pi-search" label={this.state.selectedProduct ? this.state.selectedProduct.name : 'Select a Product'} onClick={(e) => this.op.toggle(e)} aria-haspopup aria-controls="overlay_panel" className="select-product-button" />
 
-                        <OverlayPanel ref={(el) => this.op = el} showCloseIcon id="overlay_panel" style={{width: '450px'}}>
+                        <OverlayPanel ref={(el) => this.op = el} showCloseIcon id="overlay_panel" style={{width: '450px'}} className="overlaypanel-demo">
                             <DataTable value={this.state.products} selectionMode="single" paginator rows={5}
                                 selection={this.state.selectedProduct} onSelectionChange={this.onProductSelect}>
                                 <Column field="name" header="Name" sortable />

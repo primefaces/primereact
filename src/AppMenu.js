@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import { CSSTransition } from 'react-transition-group';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
-import classNames from 'classnames';
-import { CSSTransition } from 'react-transition-group';
+import { classNames } from './components/utils/ClassNames';
 import { InputText } from '../src/components/inputtext/InputText';
 
 export class AppMenu extends Component {
@@ -16,27 +16,28 @@ export class AppMenu extends Component {
         };
 
         this.onSearchInputChange = this.onSearchInputChange.bind(this);
+        this.resetFilter = this.resetFilter.bind(this);
     }
 
     getMenu() {
-        axios.get('showcase/menu/menu.json', { headers: { 'Cache-Control' : 'no-cache' } })
+        axios.get('showcase/menu/menu.json', { headers: { 'Cache-Control': 'no-cache' } })
             .then(res => res.data.data)
             .then(data => this.setState({ menu: data, filteredMenu: data }));
     }
 
     onSearchInputChange(event) {
-        if (!this.state.menu){
-            this.setState({ filteredMenu : [] });
+        if (!this.state.menu) {
+            this.setState({ filteredMenu: [] });
         }
         else if (!event.target.value) {
-            this.setState({ filteredMenu : this.state.menu });
+            this.setState({ filteredMenu: this.state.menu });
         }
         else if (this.state.menu) {
             const searchVal = event.target.value && event.target.value.toLowerCase();
             let filteredMenu = [];
             for (let item of this.state.menu) {
-                let copyItem = {...item};
-                if (this.findFilteredItems(copyItem, searchVal) || this.isFilterMatched(copyItem, searchVal)) {
+                let copyItem = { ...item };
+                if (this.isFilterMatched(copyItem, searchVal) || this.findFilteredItems(copyItem, searchVal)) {
                     filteredMenu.push(copyItem);
                 }
             }
@@ -52,7 +53,7 @@ export class AppMenu extends Component {
                 let childItems = [...item.children];
                 item.children = [];
                 for (let childItem of childItems) {
-                    let copyChildItem = {...childItem};
+                    let copyChildItem = { ...childItem };
                     if (this.isFilterMatched(copyChildItem, searchVal)) {
                         matched = true;
                         item.children.push(copyChildItem);
@@ -69,7 +70,7 @@ export class AppMenu extends Component {
 
     isFilterMatched(item, searchVal) {
         let matched = false;
-        if(item.name.toLowerCase().indexOf(searchVal) > -1 || this.onFilterOnMeta(item, searchVal)) {
+        if (this.onFilterOnOptions(item, searchVal, ['name', 'meta', 'badge'])) {
             matched = true;
         }
 
@@ -80,17 +81,28 @@ export class AppMenu extends Component {
         return matched;
     }
 
-    onFilterOnMeta(item, searchVal) {
-        if (item && item.meta) {
-            return item.meta.filter(meta => meta.toLowerCase().indexOf(searchVal) > -1).length > 0
+    onFilterOnOptions(item, searchVal, optionKeys) {
+        if (item && optionKeys) {
+            return optionKeys.some(optionKey => {
+                let value = item[optionKey];
+
+                if (value) {
+                    if (typeof value === 'string')
+                        return value.toLowerCase().indexOf(searchVal) > -1;
+                    else
+                        return value.filter(meta => meta.toLowerCase().indexOf(searchVal) > -1).length > 0;
+                }
+
+                return false;
+            });
         }
 
         return false;
     }
 
     toggleSubmenu(event, name) {
-        let activeSubmenus = {...this.state.activeSubmenus};
-        activeSubmenus[name] = activeSubmenus[name] ? false: true;
+        let activeSubmenus = { ...this.state.activeSubmenus };
+        activeSubmenus[name] = activeSubmenus[name] ? false : true;
         this.setState({ activeSubmenus });
         event.preventDefault();
     }
@@ -103,6 +115,17 @@ export class AppMenu extends Component {
         return false;
     }
 
+    showSearchClearIcon() {
+        return this.state.filteredMenu && this.state.menu && this.state.filteredMenu.length !== this.state.menu.length;
+    }
+
+    resetFilter() {
+        this.setState({ filteredMenu: this.state.menu }, () => {
+            this.searchInput.value = '';
+            this.searchInput.focus();
+        });
+    }
+
     componentDidMount() {
         this.getMenu();
     }
@@ -112,7 +135,7 @@ export class AppMenu extends Component {
         const content = (
             <>
                 {name}
-                {badge && <span className={classNames('layout-menu-badge p-tag p-tag-rounded p-ml-2 p-text-uppercase', { [`${badge}`]: true, 'p-tag-success': badge === 'new', 'p-tag-info': badge === 'updated' })}>{badge}</span> }
+                {badge && <span className={classNames('layout-menu-badge p-tag p-tag-rounded p-ml-2 p-text-uppercase', { [`${badge}`]: true, 'p-tag-success': badge === 'new', 'p-tag-info': badge === 'updated' })}>{badge}</span>}
             </>
         );
 
@@ -127,9 +150,11 @@ export class AppMenu extends Component {
     }
 
     renderCategorySubmenuItems(item, submenuKey) {
+        const cSubmenuRef = React.createRef();
+
         return (
-            <CSSTransition classNames="p-toggleable-content" timeout={{enter: 1000, exit: 450}} in={this.isSubmenuActive(item.name) || item.expanded} unmountOnExit>
-                <div className="p-toggleable-content">
+            <CSSTransition nodeRef={cSubmenuRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={this.isSubmenuActive(item.name) || item.expanded} unmountOnExit>
+                <div ref={cSubmenuRef} className="p-toggleable-content">
                     <ul role="menu">
                         {
                             item.children.map((item, index) => {
@@ -154,7 +179,7 @@ export class AppMenu extends Component {
                     {
                         menuitem.children.map((item, index) => {
                             const submenuKey = `${menuitemIndex}_${index}`;
-                            const link = this.renderLink(item, {onClick: (e) => this.toggleSubmenu(e, item.name)});
+                            const link = this.renderLink(item, { onClick: (e) => this.toggleSubmenu(e, item.name) });
 
                             return (
                                 <React.Fragment key={`menuitem_${submenuKey}`}>
@@ -182,7 +207,7 @@ export class AppMenu extends Component {
                                 <React.Fragment key={`category_${index}`}>
                                     <div className="menu-category">{menuitem.name}</div>
                                     <div className="menu-items">
-                                        { categoryItem }
+                                        {categoryItem}
                                     </div>
                                 </React.Fragment>
                             )
@@ -196,18 +221,23 @@ export class AppMenu extends Component {
     }
 
     render() {
-        const sidebarClassName = classNames('layout-sidebar', {'active': this.props.active});
         const menuItems = this.renderCategoryItems();
+        const showClearIcon = this.showSearchClearIcon();
+        const sidebarClassName = classNames('layout-sidebar', { 'active': this.props.active });
+        const filterContentClassName = classNames('layout-sidebar-filter-content p-input-filled p-input-icon-left p-fluid', { 'p-input-icon-right': showClearIcon });
 
         return (
             <div className={sidebarClassName} role="navigation">
-                <span className="layout-sidebar-filter p-input-icon-left p-fluid p-my-2">
-                    <i className="pi pi-search" />
-                    <InputText type="text" onChange={this.onSearchInputChange}  placeholder="Search..." aria-label="Search input" autoComplete="off" />
-                </span>
+                <div className="layout-sidebar-filter">
+                    <div className={filterContentClassName}>
+                        <i className="pi pi-search" />
+                        <InputText ref={(el) => this.searchInput = el} type="text" onChange={this.onSearchInputChange} placeholder="Search by name, badge..." aria-label="Search input" autoComplete="off" />
+                        {showClearIcon && <i className="clear-icon pi pi-times" onClick={this.resetFilter} />}
+                    </div>
+                </div>
 
                 <div className="layout-menu" role="menubar">
-                    { menuItems }
+                    {menuItems}
                 </div>
             </div>
         );

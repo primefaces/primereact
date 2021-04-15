@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
+import { CSSTransition } from '../transition/CSSTransition';
+import { Portal } from '../portal/Portal';
 
-export class ColorPickerPanel extends Component {
+class ColorPickerPanelComponent extends Component {
 
     static defaultProps = {
         appendTo: null,
@@ -13,7 +14,7 @@ export class ColorPickerPanel extends Component {
     }
 
     static propTypes = {
-        appendTo: PropTypes.any,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         inline: PropTypes.bool,
         disabled: PropTypes.bool,
         onClick: PropTypes.func
@@ -26,20 +27,20 @@ export class ColorPickerPanel extends Component {
         });
 
         return (
-            <div ref={(el) => this.element = el} className={className} onClick={this.props.onClick}>
-                {this.props.children}
-            </div>
+            <CSSTransition nodeRef={this.props.forwardRef} classNames="p-connected-overlay" in={this.props.in} timeout={{ enter: 120, exit: 100 }} options={this.props.transitionOptions}
+                unmountOnExit onEnter={this.props.onEnter} onEntered={this.props.onEntered} onExit={this.props.onExit} onExited={this.props.onExited}>
+                <div ref={this.props.forwardRef} className={className} onClick={this.props.onClick}>
+                    {this.props.children}
+                </div>
+            </CSSTransition>
         );
     }
 
     render() {
         let element = this.renderElement();
 
-        if (this.props.appendTo) {
-            return ReactDOM.createPortal(element, this.props.appendTo);
-        }
-        else {
-            return element;
-        }
+        return this.props.inline ? element : <Portal element={element} appendTo={this.props.appendTo} />;
     }
 }
+
+export const ColorPickerPanel = React.forwardRef((props, ref) => <ColorPickerPanelComponent forwardRef={ref} {...props} />);

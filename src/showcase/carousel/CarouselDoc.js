@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 
 export class CarouselDoc extends Component {
 
@@ -282,7 +282,7 @@ const CarouselDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
                         <h5>Import</h5>
@@ -297,13 +297,13 @@ import { Carousel } from 'primereact/carousel';
 
 <CodeHighlight>
 {`
-<Carousel value={this.state.products} itemTemplate={this.itemTemplate}></Carousel>
+<Carousel value={products} itemTemplate={itemTemplate}></Carousel>
 `}
 </CodeHighlight>
 
 <CodeHighlight lang="js">
 {`
-itemTemplate(car) {
+const itemTemplate = (car) => {
     // return content;
 }
 `}
@@ -313,7 +313,7 @@ itemTemplate(car) {
                         <p>Number of items per page is defined using the <i>numVisible</i> property whereas number of items to scroll is defined with the <i>numScroll</i> property.</p>
 <CodeHighlight>
 {`
-<Carousel value={this.state.products} itemTemplate={this.itemTemplate} numVisible={3} numScroll={1}></Carousel>
+<Carousel value={products} itemTemplate={itemTemplate} numVisible={3} numScroll={1}></Carousel>
 `}
 </CodeHighlight>
 
@@ -322,7 +322,7 @@ itemTemplate(car) {
             objects whose breakpoint defines the max-width to apply the settings.</p>
 <CodeHighlight>
 {`
-<Carousel value={this.state.products} itemTemplate={this.itemTemplate} numVisible={3} numScroll={1} responsiveOptions={responsiveOptions}></Carousel>
+<Carousel value={products} itemTemplate={itemTemplate} numVisible={3} numScroll={1} responsiveOptions={responsiveOptions}></Carousel>
 `}
 </CodeHighlight>
 
@@ -352,7 +352,7 @@ const responsiveOptions = [
                         <p>Custom content projection is available using the <i>header</i> and <i>footer</i> properties.</p>
 <CodeHighlight>
 {`
-<Carousel value={this.state.products} itemTemplate={this.itemTemplate} header={<h1>Header</h1>}></Carousel>
+<Carousel value={products} itemTemplate={itemTemplate} header={<h1>Header</h1>}></Carousel>
 `}
 </CodeHighlight>
 
@@ -360,7 +360,7 @@ const responsiveOptions = [
                         <p>Default layout of the Carousel is horizontal, other possible option is the vertical mode that is configured with the <i>orientation</i> property.</p>
 <CodeHighlight>
 {`
-<Carousel value={this.state.products} itemTemplate={this.itemTemplate} orientation="vertical"></Carousel>
+<Carousel value={products} itemTemplate={itemTemplate} orientation="vertical"></Carousel>
 `}
 </CodeHighlight>
 
@@ -372,7 +372,7 @@ const responsiveOptions = [
 
 <CodeHighlight>
 {`
-<Carousel value={this.state.products} itemTemplate={this.itemTemplate} page={this.state.page} onPageChange={(e) => this.setState({page: e.page})}></Carousel>
+<Carousel value={products} itemTemplate={itemTemplate} page={page} onPageChange={(e) => setPage(e.page)}></Carousel>
 `}
 </CodeHighlight>
 
@@ -382,7 +382,7 @@ const responsiveOptions = [
 
 <CodeHighlight>
 {`
-<Carousel value={this.state.products} itemTemplate={this.itemTemplate}></Carousel>
+<Carousel value={products} itemTemplate={itemTemplate}></Carousel>
 `}
 </CodeHighlight>
 
@@ -582,9 +582,9 @@ const responsiveOptions = [
 
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="CarouselDemo" sources={this.sources} service="ProductService" data="products-small" extFiles={this.extFiles} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'CarouselDemo', sources: this.sources, service: 'ProductService', data: 'products-small', extFiles: this.extFiles })
+                    }
                 </TabView>
             </div>
         );

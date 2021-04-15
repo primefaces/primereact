@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import classNames from 'classnames';
+import { classNames } from '../../components/utils/ClassNames';
 import { DataTable } from '../../components/datatable/DataTable';
 import { Column } from '../../components/column/Column';
 import ProductService from '../service/ProductService';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
+import { TabView } from '../../components/tabview/TabView';
 import { Toast } from '../../components/toast/Toast';
 import { Button } from '../../components/button/Button';
 import { FileUpload } from '../../components/fileupload/FileUpload';
@@ -14,9 +14,10 @@ import { RadioButton } from '../../components/radiobutton/RadioButton';
 import { InputNumber } from '../../components/inputnumber/InputNumber';
 import { Dialog } from '../../components/dialog/Dialog';
 import { InputText } from '../../components/inputtext/InputText';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './DataTableDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DataTableCrudDemo extends Component {
 
@@ -107,7 +108,7 @@ export class DataTableCrudDemo extends Component {
 
         if (this.state.product.name.trim()) {
             let products = [...this.state.products];
-            let product = {...this.state.product};
+            let product = { ...this.state.product };
             if (this.state.product.id) {
                 const index = this.findIndexById(this.state.product.id);
 
@@ -196,14 +197,14 @@ export class DataTableCrudDemo extends Component {
     }
 
     onCategoryChange(e) {
-        let product = {...this.state.product};
+        let product = { ...this.state.product };
         product['category'] = e.value;
         this.setState({ product });
     }
 
     onInputChange(e, name) {
         const val = (e.target && e.target.value) || '';
-        let product = {...this.state.product};
+        let product = { ...this.state.product };
         product[`${name}`] = val;
 
         this.setState({ product });
@@ -211,7 +212,7 @@ export class DataTableCrudDemo extends Component {
 
     onInputNumberChange(e, name) {
         const val = e.value || 0;
-        let product = {...this.state.product};
+        let product = { ...this.state.product };
         product[`${name}`] = val;
 
         this.setState({ product });
@@ -236,7 +237,7 @@ export class DataTableCrudDemo extends Component {
     }
 
     imageBodyTemplate(rowData) {
-        return <img src={`showcase/demo/images/product/${rowData.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="product-image" />
+        return <img src={`showcase/demo/images/product/${rowData.image}`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="product-image" />
     }
 
     priceBodyTemplate(rowData) {
@@ -244,7 +245,7 @@ export class DataTableCrudDemo extends Component {
     }
 
     ratingBodyTemplate(rowData) {
-        return <Rating value={rowData.rating} readonly cancel={false} />;
+        return <Rating value={rowData.rating} readOnly cancel={false} />;
     }
 
     statusBodyTemplate(rowData) {
@@ -295,7 +296,8 @@ export class DataTableCrudDemo extends Component {
                     <AppInlineHeader changelogText="dataTable">
                         <h1>DataTable <span>Crud</span></h1>
                         <p>This samples demonstrates a CRUD implementation using various PrimeReact components.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="datatable/DataTableCrudDemo.js" />
                 </div>
 
                 <div className="content-section implementation datatable-crud-demo">
@@ -324,11 +326,11 @@ export class DataTableCrudDemo extends Component {
                     </div>
 
                     <Dialog visible={this.state.productDialog} style={{ width: '450px' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={this.hideDialog}>
-                        {this.state.product.image && <img src={`showcase/demo/images/product/${this.state.product.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={this.state.product.image} className="product-image" />}
+                        {this.state.product.image && <img src={`showcase/demo/images/product/${this.state.product.image}`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={this.state.product.image} className="product-image" />}
                         <div className="p-field">
                             <label htmlFor="name">Name</label>
                             <InputText id="name" value={this.state.product.name} onChange={(e) => this.onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': this.state.submitted && !this.state.product.name })} />
-                            {this.state.submitted && !this.state.product.name && <small className="p-invalid">Name is required.</small>}
+                            {this.state.submitted && !this.state.product.name && <small className="p-error">Name is required.</small>}
                         </div>
                         <div className="p-field">
                             <label htmlFor="description">Description</label>
@@ -371,14 +373,14 @@ export class DataTableCrudDemo extends Component {
 
                     <Dialog visible={this.state.deleteProductDialog} style={{ width: '450px' }} header="Confirm" modal footer={deleteProductDialogFooter} onHide={this.hideDeleteProductDialog}>
                         <div className="confirmation-content">
-                            <i className="pi pi-exclamation-triangle p-mr-3" style={{ fontSize: '2rem'}} />
+                            <i className="pi pi-exclamation-triangle p-mr-3" style={{ fontSize: '2rem' }} />
                             {this.state.product && <span>Are you sure you want to delete <b>{this.state.product.name}</b>?</span>}
                         </div>
                     </Dialog>
 
                     <Dialog visible={this.state.deleteProductsDialog} style={{ width: '450px' }} header="Confirm" modal footer={deleteProductsDialogFooter} onHide={this.hideDeleteProductsDialog}>
                         <div className="confirmation-content">
-                            <i className="pi pi-exclamation-triangle p-mr-3" style={{ fontSize: '2rem'}} />
+                            <i className="pi pi-exclamation-triangle p-mr-3" style={{ fontSize: '2rem' }} />
                             {this.state.product && <span>Are you sure you want to delete the selected products?</span>}
                         </div>
                     </Dialog>
@@ -401,7 +403,7 @@ export class DataTableCrudDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import classNames from 'classnames';
+import { classNames } from 'primereact/utils';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import ProductService from '../service/ProductService';
@@ -643,7 +645,7 @@ export class DataTableCrudDemo extends Component {
     }
 
     ratingBodyTemplate(rowData) {
-        return <Rating value={rowData.rating} readonly cancel={false} />;
+        return <Rating value={rowData.rating} readOnly cancel={false} />;
     }
 
     statusBodyTemplate(rowData) {
@@ -719,7 +721,7 @@ export class DataTableCrudDemo extends Component {
                     <div className="p-field">
                         <label htmlFor="name">Name</label>
                         <InputText id="name" value={this.state.product.name} onChange={(e) => this.onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': this.state.submitted && !this.state.product.name })} />
-                        {this.state.submitted && !this.state.product.name && <small className="p-invalid">Name is required.</small>}
+                        {this.state.submitted && !this.state.product.name && <small className="p-error">Name is required.</small>}
                     </div>
                     <div className="p-field">
                         <label htmlFor="description">Description</label>
@@ -783,7 +785,7 @@ export class DataTableCrudDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState, useEffect, useRef } from 'react';
-import classNames from 'classnames';
+import { classNames } from 'primereact/utils';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import ProductService from '../service/ProductService';
@@ -981,7 +983,7 @@ const DataTableCrudDemo = () => {
     }
 
     const ratingBodyTemplate = (rowData) => {
-        return <Rating value={rowData.rating} readonly cancel={false} />;
+        return <Rating value={rowData.rating} readOnly cancel={false} />;
     }
 
     const statusBodyTemplate = (rowData) => {
@@ -1056,7 +1058,7 @@ const DataTableCrudDemo = () => {
                 <div className="p-field">
                     <label htmlFor="name">Name</label>
                     <InputText id="name" value={product.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !product.name })} />
-                    {submitted && !product.name && <small className="p-invalid">Name is required.</small>}
+                    {submitted && !product.name && <small className="p-error">Name is required.</small>}
                 </div>
                 <div className="p-field">
                     <label htmlFor="description">Description</label>
@@ -1119,7 +1121,7 @@ const DataTableCrudDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState, useEffect, useRef } from 'react';
-import classNames from 'classnames';
+import { classNames } from 'primereact/utils';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import ProductService from '../service/ProductService';
@@ -1317,7 +1319,7 @@ const DataTableCrudDemo = () => {
     }
 
     const ratingBodyTemplate = (rowData) => {
-        return <Rating value={rowData.rating} readonly cancel={false} />;
+        return <Rating value={rowData.rating} readOnly cancel={false} />;
     }
 
     const statusBodyTemplate = (rowData) => {
@@ -1392,7 +1394,7 @@ const DataTableCrudDemo = () => {
                 <div className="p-field">
                     <label htmlFor="name">Name</label>
                     <InputText id="name" value={product.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !product.name })} />
-                    {submitted && !product.name && <small className="p-invalid">Name is required.</small>}
+                    {submitted && !product.name && <small className="p-error">Name is required.</small>}
                 </div>
                 <div className="p-field">
                     <label htmlFor="description">Description</label>
@@ -1489,11 +1491,11 @@ const DataTableCrudDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="DataTableCrudDemo" sources={this.sources} service="ProductService" data="products" extFiles={this.extFiles} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'DataTableCrudDemo', sources: this.sources, service: 'ProductService', data: 'products', extFiles: this.extFiles })
+                    }
                 </TabView>
             </div>
         )

@@ -14,25 +14,66 @@
                     ]
                 },
                 {
-                    "name": "Community Forum",
+                    "name": "Locale",
+                    "to": "/locale",
+                    "meta": [
+                        "i18N",
+                        "locale",
+                        "translate",
+                        "internationalization"
+                    ]
+                },
+                {
+                    "name": "Accessibility",
+                    "to": "/accessibility",
+                    "meta": [
+                        "accessibility"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Support",
+            "meta": [
+                "support"
+            ],
+            "children": [
+                {
+                    "name": "Forum",
                     "href": "https://forum.primefaces.org/viewforum.php?f=57",
                     "meta": [
-                        "get started"
+                        "forum"
                     ]
+                },
+                {
+                    "name": "Discord Chat",
+                    "href": "https://discord.gg/gzKFYnpmCY",
+                    "meta": [
+                        "discord"
+                    ]
+                },
+                {
+                    "name": "PRO Support",
+                    "to": "/support",
+                    "meta": [
+                        "pro support"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Resources",
+            "meta": [
+                "resources"
+            ],
+            "children": [
+                {
+                    "name": "PrimeTV",
+                    "href": "https://www.youtube.com/channel/UCTgmp69aBOlLnPEqlUyetWw"
                 },
                 {
                     "name": "Source Code",
-                    "href": "https://github.com/primefaces/primereact",
-                    "meta": [
-                        "source code"
-                    ]
-                },
-                {
-                    "name": "Support",
-                    "to": "/support",
-                    "meta": [
-                        "support"
-                    ]
+                    "href": "https://github.com/primefaces/primereact"
                 },
                 {
                     "name": "Store",
@@ -41,6 +82,10 @@
                         "store",
                         "primestore"
                     ]
+                },
+                {
+                    "name": "Twitter",
+                    "href": "https://twitter.com/primereact?lang=en"
                 }
             ]
         },
@@ -72,8 +117,13 @@
                     ]
                 },
                 {
+                    "name": "Colors",
+                    "to": "/colors",
+                    "badge": "new"
+                },
+                {
                     "name": "SASS API",
-                    "href": "https://www.primefaces.org/designer/api/primereact/5.0.0",
+                    "href": "https://www.primefaces.org/designer/api/primereact/6.0.0",
                     "meta": [
                         "sass api"
                     ]
@@ -105,7 +155,8 @@
                     "name": "Elevation",
                     "to": "/elevation",
                     "meta": [
-                        "elevation"
+                        "elevation",
+                        "shadow"
                     ]
                 },
                 {
@@ -153,7 +204,7 @@
             ],
             "children": [
                 {
-                    "name": "Icons v4.0",
+                    "name": "Icons v4.1",
                     "to": "/icons",
                     "meta": [
                         "icons"
@@ -180,6 +231,13 @@
                     "meta": [
                         "calendar",
                         "datepicker"
+                    ]
+                },
+                {
+                    "name": "CascadeSelect",
+                    "to": "/cascadeselect",
+                    "meta": [
+                        "cascadeselect"
                     ]
                 },
                 {
@@ -219,6 +277,13 @@
                     ]
                 },
                 {
+                    "name": "FloatLabel",
+                    "to": "/floatlabel",
+                    "meta": [
+                        "floatlabel"
+                    ]
+                },
+                {
                     "name": "InputGroup",
                     "to": "/inputgroup",
                     "meta": [
@@ -231,14 +296,6 @@
                     "meta": [
                         "inputmask"
                     ]
-                },
-                {
-                    "name": "InputNumber",
-                    "to": "/inputnumber",
-                    "meta": [
-                        "inputnumber"
-                    ],
-                    "badge": "new"
                 },
                 {
                     "name": "InputSwitch",
@@ -255,17 +312,31 @@
                     ]
                 },
                 {
-                    "name": "FloatLabel",
-                    "to": "/floatlabel",
-                    "meta": [
-                        "floatlabel"
-                    ]
-                },
-                {
                     "name": "InputTextarea",
                     "to": "/inputtextarea",
                     "meta": [
                         "inputtextarea"
+                    ]
+                },
+                {
+                    "name": "InputNumber",
+                    "to": "/inputnumber",
+                    "meta": [
+                        "inputnumber"
+                    ]
+                },
+                {
+                    "name": "InvalidState",
+                    "to": "/invalid",
+                    "meta": [
+                        "invalid state"
+                    ]
+                },
+                {
+                    "name": "Knob",
+                    "to": "/knob",
+                    "meta": [
+                        "knob"
                     ]
                 },
                 {
@@ -340,6 +411,14 @@
                     "meta": [
                         "togglebutton"
                     ]
+                },
+                {
+                    "name": "MultiStateCheckbox",
+                    "to": "/multistatecheckbox",
+                    "meta": [
+                        "multistatecheckbox"
+                    ],
+                    "badge": "new"
                 }
             ]
         },
@@ -431,14 +510,16 @@
                             "to": "/datatable/paginator",
                             "meta": [
                                 "paginator"
-                            ]
+                            ],
+                            "badge":"updated"
                         },
                         {
                             "name": "Sort",
                             "to": "/datatable/sort",
                             "meta": [
                                 "sort"
-                            ]
+                            ],
+                            "badge":"updated"
                         },
                         {
                             "name": "Filter",
@@ -532,10 +613,11 @@
                             ]
                         },
                         {
-                            "name": "Export",
+                            "name": "Import/Export",
                             "to": "/datatable/export",
                             "meta": [
-                                "export"
+                                "export",
+                                "import"
                             ]
                         },
                         {
@@ -648,7 +730,8 @@
                     "to": "/paginator",
                     "meta": [
                         "paginator"
-                    ]
+                    ],
+                    "badge":"updated"
                 },
                 {
                     "name": "PickList",
@@ -742,11 +825,13 @@
                             ]
                         },
                         {
-                            "name": "Page",
+                            "name": "Paginator",
                             "to": "/treetable/page",
                             "meta": [
-                                "page"
-                            ]
+                                "page",
+                                "paginator"
+                            ],
+                            "badge":"updated"
                         },
                         {
                             "name": "Sort",
@@ -840,6 +925,13 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "name": "Timeline",
+                    "to": "/timeline",
+                    "meta": [
+                        "timeline"
+                    ]
                 }
             ]
         },
@@ -871,6 +963,13 @@
                     ]
                 },
                 {
+                    "name": "Divider",
+                    "to": "/divider",
+                    "meta": [
+                        "divider"
+                    ]
+                },
+                {
                     "name": "Fieldset",
                     "to": "/fieldset",
                     "meta": [
@@ -882,6 +981,13 @@
                     "to": "/panel",
                     "meta": [
                         "panel"
+                    ]
+                },
+                {
+                    "name": "Splitter",
+                    "to": "/splitter",
+                    "meta": [
+                        "splitter"
                     ]
                 },
                 {
@@ -914,6 +1020,20 @@
             ],
             "children": [
                 {
+                    "name": "ConfirmDialog",
+                    "to": "/confirmdialog",
+                    "meta": [
+                        "confirmdialog"
+                    ]
+                },
+                {
+                    "name": "ConfirmPopup",
+                    "to": "/confirmpopup",
+                    "meta": [
+                        "confirmpopup"
+                    ]
+                },
+                {
                     "name": "Dialog",
                     "to": "/dialog",
                     "meta": [
@@ -939,7 +1059,8 @@
                     "to": "/tooltip",
                     "meta": [
                         "tooltip"
-                    ]
+                    ],
+                    "badge":"updated"
                 }
             ]
         },
@@ -1128,8 +1249,7 @@
                     "meta": [
                         "growl",
                         "toast"
-                    ],
-                    "badge": "updated"
+                    ]
                 }
             ]
         },
@@ -1151,7 +1271,6 @@
                     "meta": [
                         "galleria"
                     ],
-                    "badge": "new",
                     "children": [
                         {
                             "name": "Documentation",
@@ -1228,16 +1347,51 @@
             ]
         },
         {
+            "name": "Validation",
+            "meta": [
+                "validation"
+            ],
+            "children": [
+                {
+                    "name": "Formik",
+                    "to": "/formik",
+                    "meta": [
+                        "formik",
+                        "validation"
+                    ],
+                    "badge": "new"
+                },
+                {
+                    "name": "React Hook Form",
+                    "to": "/reacthookform",
+                    "meta": [
+                        "react hook form",
+                        "validation"
+                    ],
+                    "badge": "new"
+                },
+                {
+                    "name": "React Final Form",
+                    "to": "/reactfinalform",
+                    "meta": [
+                        "react final form",
+                        "validation"
+                    ],
+                    "badge": "new"
+                }
+            ]
+        },
+        {
             "name": "Misc",
             "meta": [
                 "misc"
             ],
             "children": [
                 {
-                    "name": "Accessibility",
-                    "to": "/accessibility",
+                    "name": "Avatar",
+                    "to": "/avatar",
                     "meta": [
-                        "accessibility"
+                        "avatar"
                     ]
                 },
                 {
@@ -1248,10 +1402,31 @@
                     ]
                 },
                 {
+                    "name": "Chip",
+                    "to": "/chip",
+                    "meta": [
+                        "chip"
+                    ]
+                },
+                {
                     "name": "Inplace",
                     "to": "/inplace",
                     "meta": [
                         "inplace"
+                    ]
+                },
+                {
+                    "name": "ScrollTop",
+                    "to": "/scrolltop",
+                    "meta": [
+                        "scrolltop"
+                    ]
+                },
+                {
+                    "name": "Skeleton",
+                    "to": "/skeleton",
+                    "meta": [
+                        "skeleton"
                     ]
                 },
                 {
@@ -1273,8 +1448,7 @@
                     "to": "/ripple",
                     "meta": [
                         "ripple"
-                    ],
-                    "badge": "new"
+                    ]
                 },
                 {
                     "name": "Captcha",
@@ -1282,6 +1456,13 @@
                     "meta": [
                         "captcha",
                         "recaptcha"
+                    ]
+                },
+                {
+                    "name": "Tag",
+                    "to": "/tag",
+                    "meta": [
+                        "tag"
                     ]
                 }
             ]

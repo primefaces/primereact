@@ -6,6 +6,7 @@ import { Column } from '../../components/column/Column';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import ProductService from '../service/ProductService';
 import { InplaceDoc } from './InplaceDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class InplaceDemo extends Component {
 
@@ -31,7 +32,8 @@ export class InplaceDemo extends Component {
                     <AppInlineHeader changelogText="inplace">
                         <h1>Inplace</h1>
                         <p>Inplace provides an easy to do editing and display at the same time where clicking the output displays the actual content.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="inplace/InplaceDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

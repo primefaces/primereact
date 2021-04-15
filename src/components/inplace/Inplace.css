@@ -15,3 +15,7 @@
     flex: 1 1 auto;
     width: 1%;
 }
+
+.p-inplace-content-close {
+    margin-left: .25rem;
+}

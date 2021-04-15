@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import classNames from 'classnames';
+import { classNames } from '../../components/utils/ClassNames';
 import { DataTable } from '../../components/datatable/DataTable';
 import { Column } from '../../components/column/Column';
 import ProductService from '../service/ProductService';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './DataTableDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DataTableStyleDemo extends Component {
 
@@ -54,6 +55,7 @@ export class DataTableStyleDemo extends Component {
                         <h1>DataTable <span>Styling</span></h1>
                         <p>Particular rows and cells can be styled based on data.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="datatable/DataTableStyleDemo.js" />
                 </div>
 
                 <div className="content-section implementation datatable-style-demo">
@@ -83,7 +85,7 @@ export class DataTableStyleDemoDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import classNames from 'classnames';
+import { classNames } from 'primereact/utils';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import ProductService from '../service/ProductService';
@@ -148,7 +150,7 @@ export class DataTableStyleDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState, useEffect } from 'react';
-import classNames from 'classnames';
+import { classNames } from 'primereact/utils';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import ProductService from '../service/ProductService';
@@ -201,7 +203,7 @@ const DataTableStyleDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState, useEffect } from 'react';
-import classNames from 'classnames';
+import { classNames } from 'primereact/utils';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import ProductService from '../service/ProductService';
@@ -285,11 +287,11 @@ const DataTableStyleDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="DataTableStyleDemo" sources={this.sources} service="ProductService" data="products-small" extFiles={this.extFiles} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'DataTableStyleDemo', sources: this.sources, service: 'ProductService', data: 'products-small', extFiles: this.extFiles })
+                    }
                 </TabView>
             </div>
         )

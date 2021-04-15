@@ -3,6 +3,7 @@ import { OrganizationChart } from '../../components/organizationchart/Organizati
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './OrganizationChartDemo.scss';
 import { OrganizationChartDoc } from './OrganizationChartDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class OrganizationChartDemo extends Component {
 
@@ -140,7 +141,8 @@ export class OrganizationChartDemo extends Component {
                     <AppInlineHeader changelogText="organizationChart">
                         <h1>OrganizationChart</h1>
                         <p>OrganizationChart visualizes hierarchical organization data.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="organizationchart/OrganizationChartDemo.js" />
                 </div>
 
                 <div className="content-section implementation organizationchart-demo">

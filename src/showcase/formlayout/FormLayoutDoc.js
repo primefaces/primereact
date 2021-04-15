@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 
 export class FormLayoutDoc extends Component {
 
@@ -638,7 +638,7 @@ const FormLayoutDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
                         <h5>Install</h5>
@@ -770,22 +770,22 @@ import 'primeflex/primeflex.css';
 {`
 <h5>Vertical Checkbox</h5>
 <div className="p-field-checkbox">
-    <Checkbox inputId="city1" value="Chicago" onChange={this.onCityChange1} checked={this.state.cities1.indexOf('Chicago') !== -1}/>
+    <Checkbox inputId="city1" value="Chicago" onChange={onCityChange1} checked={cities1.indexOf('Chicago') !== -1}/>
     <label htmlFor="city1">Chicago</label>
 </div>
 <div className="p-field-checkbox">
-    <Checkbox inputId="city2" value="Los Angeles" onChange={this.onCityChange1} checked={this.state.cities1.indexOf('Los Angeles') !== -1}/>
+    <Checkbox inputId="city2" value="Los Angeles" onChange={onCityChange1} checked={cities1.indexOf('Los Angeles') !== -1}/>
     <label htmlFor="city2">Los Angeles</label>
 </div>
 
 <h5>Horizontal Checkbox</h5>
 <div className="p-formgroup-inline">
     <div className="p-field-checkbox">
-        <Checkbox inputId="city3" value="Chicago" onChange={this.onCityChange2} checked={this.state.cities2.indexOf('Chicago') !== -1}/>
+        <Checkbox inputId="city3" value="Chicago" onChange={onCityChange2} checked={cities2.indexOf('Chicago') !== -1}/>
         <label htmlFor="city3">Chicago</label>
     </div>
     <div className="p-field-checkbox">
-        <Checkbox inputId="city4" value="Los Angeles" onChange={this.onCityChange2} checked={this.state.cities2.indexOf('Los Angeles') !== -1}/>
+        <Checkbox inputId="city4" value="Los Angeles" onChange={onCityChange2} checked={cities2.indexOf('Los Angeles') !== -1}/>
         <label htmlFor="city4">Los Angeles</label>
     </div>
 </div>
@@ -795,22 +795,22 @@ import 'primeflex/primeflex.css';
 {`
 <h5>Vertical RadioButton</h5>
 <div className="p-field-radiobutton">
-    <RadioButton inputId="city5" name="city1" value="Chicago" onChange={(e) => this.setState({city1: e.value})} checked={this.state.city1 === 'Chicago'} />
+    <RadioButton inputId="city5" name="city1" value="Chicago" onChange={(e) => setCity1(e.value)} checked={city1 === 'Chicago'} />
     <label htmlFor="city5">Chicago</label>
 </div>
 <div className="p-field-radiobutton">
-    <RadioButton inputId="city6" name="city1" value="Los Angeles" onChange={(e) => this.setState({city1: e.value})} checked={this.state.city1 === 'Los Angeles'} />
+    <RadioButton inputId="city6" name="city1" value="Los Angeles" onChange={(e) => setCity1(e.value)} checked={city1 === 'Los Angeles'} />
     <label htmlFor="city6">Los Angeles</label>
 </div>
 
 <h5>Horizontal RadioButton</h5>
 <div className="p-formgroup-inline">
     <div className="p-field-checkbox">
-        <RadioButton inputId="city5" name="city2" value="Chicago" onChange={(e) => this.setState({city2: e.value})} checked={this.state.city2 === 'Chicago'} />
+        <RadioButton inputId="city7" name="city2" value="Chicago" onChange={(e) => setCity2(e.value)} checked={city2 === 'Chicago'} />
         <label htmlFor="city7">Chicago</label>
     </div>
     <div className="p-field-checkbox">
-        <RadioButton inputId="city8" name="city2" value="Los Angeles" onChange={(e) => this.setState({city2: e.value})} checked={this.state.city2 === 'Los Angeles'} />
+        <RadioButton inputId="city8" name="city2" value="Los Angeles" onChange={(e) => setCity2(e.value)} checked={city2 === 'Los Angeles'} />
         <label htmlFor="city8">Los Angeles</label>
     </div>
 </div>
@@ -852,7 +852,7 @@ import 'primeflex/primeflex.css';
     </div>
     <div className="p-field p-col-12 p-md-3">
         <label htmlFor="state">State</label>
-        <Dropdown inputId="state" value={this.state.selectedState} options={this.states} onChange={this.onStateChange} placeholder="Select" optionLabel="name"/>
+        <Dropdown inputId="state" value={selectedState} options={states} onChange={onStateChange} placeholder="Select" optionLabel="name"/>
     </div>
     <div className="p-field p-col-12 p-md-3">
         <label htmlFor="zip">Zip</label>
@@ -890,9 +890,9 @@ import 'primeflex/primeflex.css';
                         </div>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="FormLayoutDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'FormLayoutDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         )

@@ -3,8 +3,9 @@ import { DataTable } from '../../components/datatable/DataTable';
 import { Column } from '../../components/column/Column';
 import ProductService from '../service/ProductService';
 import { AppInlineHeader } from '../../AppInlineHeader';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DataTableStripedDemo extends Component {
 
@@ -30,6 +31,7 @@ export class DataTableStripedDemo extends Component {
                         <h1>DataTable <span>Striped Rows</span></h1>
                         <p>Adding <i>p-datatable-striped</i> displays striped rows.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="datatable/DataTableStripedDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -167,11 +169,11 @@ const DataTableStripedDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="DataTableStripedDemo" sources={this.sources} service="ProductService" data="products-small" />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'DataTableStripedDemo', sources: this.sources, service: 'ProductService', data: 'products-small' })
+                    }
                 </TabView>
             </div>
         )

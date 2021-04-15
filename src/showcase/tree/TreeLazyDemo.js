@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Tree } from '../../components/tree/Tree';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class TreeLazyDemo extends Component {
 
@@ -80,6 +81,7 @@ export class TreeLazyDemo extends Component {
                         <h1>Tree <span>Lazy</span></h1>
                         <p>Lazy loading is useful when dealing with huge datasets.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="tree/TreeLazyDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -335,11 +337,11 @@ const TreeLazyDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="TreeLazyDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'TreeLazyDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         );

@@ -3,10 +3,11 @@ import { DataScroller } from '../../components/datascroller/DataScroller';
 import { Button } from '../../components/button/Button';
 import { Rating } from '../../components/rating/Rating';
 import ProductService from '../service/ProductService';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './DataScrollerDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DataScrollerInlineDemo extends Component {
 
@@ -32,7 +33,7 @@ export class DataScrollerInlineDemo extends Component {
                 <div className="product-detail">
                     <div className="product-name">{data.name}</div>
                     <div className="product-description">{data.description}</div>
-                    <Rating value={data.rating} readonly cancel={false}></Rating>
+                    <Rating value={data.rating} readOnly cancel={false}></Rating>
                     <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
                 </div>
                 <div className="product-action">
@@ -52,6 +53,7 @@ export class DataScrollerInlineDemo extends Component {
                         <h1>DataScroller <span>Inline</span></h1>
                         <p>DataScroller can listen scroll event of itself rather than document in inline mode.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="datascroller/DataScrollerInlineDemo.js" />
                 </div>
 
                 <div className="content-section implementation datascroller-demo">
@@ -106,7 +108,7 @@ export class DataScrollerInlineDemo extends Component {
                 <div className="product-detail">
                     <div className="product-name">{data.name}</div>
                     <div className="product-description">{data.description}</div>
-                    <Rating value={data.rating} readonly cancel={false}></Rating>
+                    <Rating value={data.rating} readOnly cancel={false}></Rating>
                     <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
                 </div>
                 <div className="product-action">
@@ -155,7 +157,7 @@ const DataScrollerInlineDemo = () => {
                 <div className="product-detail">
                     <div className="product-name">{data.name}</div>
                     <div className="product-description">{data.description}</div>
-                    <Rating value={data.rating} readonly cancel={false}></Rating>
+                    <Rating value={data.rating} readOnly cancel={false}></Rating>
                     <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
                 </div>
                 <div className="product-action">
@@ -202,7 +204,7 @@ const DataScrollerInlineDemo = () => {
                 <div className="product-detail">
                     <div className="product-name">{data.name}</div>
                     <div className="product-description">{data.description}</div>
-                    <Rating value={data.rating} readonly cancel={false}></Rating>
+                    <Rating value={data.rating} readOnly cancel={false}></Rating>
                     <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
                 </div>
                 <div className="product-action">
@@ -328,11 +330,11 @@ const DataScrollerInlineDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="DataScrollerInlineDemo" sources={this.sources} service="ProductService" data="products" extFiles={this.extFiles} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'DataScrollerInlineDemo', sources: this.sources, service: 'ProductService', data: 'products', extFiles: this.extFiles })
+                    }
                 </TabView>
             </div>
         );

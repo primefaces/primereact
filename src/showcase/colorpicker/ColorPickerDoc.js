@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 
 export class ColorPickerDoc extends Component {
 
@@ -109,7 +109,7 @@ const ColorPickerDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
                         <h5>Import</h5>
@@ -124,7 +124,7 @@ import {ColorPicker} from 'primereact/colorpicker';
 
 <CodeHighlight>
 {`
-<ColorPicker value={this.state.color} onChange={(e) => this.setState({color: e.value})} />
+<ColorPicker value={color} onChange={(e) => setColor(e.value)} />
 `}
 </CodeHighlight>
 
@@ -133,11 +133,11 @@ import {ColorPicker} from 'primereact/colorpicker';
 
 <CodeHighlight>
 {`
-<ColorPicker value={this.state.color1} onChange={(e) => this.setState({color1: e.value})} />
+<ColorPicker value={color1} onChange={(e) => setColor1(e.value)} />
 
-<ColorPicker format="rgb" value={this.state.color2} onChange={(e) => this.setState({color2: e.value})} />
+<ColorPicker format="rgb" value={color2} onChange={(e) => setColor2(e.value)} />
 
-<ColorPicker format="hsb" value={this.state.color3} onChange={(e) => this.setState({color3: e.value})}/>
+<ColorPicker format="hsb" value={color3} onChange={(e) => setColor3(e.value)}/>
 `}
 </CodeHighlight>
 
@@ -198,9 +198,9 @@ import {ColorPicker} from 'primereact/colorpicker';
                                     </tr>
                                     <tr>
                                         <td>appendTo</td>
-                                        <td>DOM element</td>
-                                        <td>null</td>
-                                        <td>DOM element instance where the dialog should be mounted.</td>
+                                        <td>DOM element | string</td>
+                                        <td>document.body</td>
+                                        <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
                                     </tr>
                                     <tr>
                                         <td>disabled</td>
@@ -232,6 +232,12 @@ import {ColorPicker} from 'primereact/colorpicker';
                                         <td>null</td>
                                         <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
                                     </tr>
+                                    <tr>
+                                        <td>transitionOptions</td>
+                                        <td>object</td>
+                                        <td>null</td>
+                                        <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -251,6 +257,16 @@ import {ColorPicker} from 'primereact/colorpicker';
                                         <td>onChange</td>
                                         <td>value: Selected color value whose type depends on the format.</td>
                                         <td>Callback to invoke when a color is selected.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onShow</td>
+                                        <td>-</td>
+                                        <td>Callback to invoke when overlay panel becomes visible.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onHide</td>
+                                        <td>-</td>
+                                        <td>Callback to invoke when overlay panel becomes hidden.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -315,9 +331,9 @@ import {ColorPicker} from 'primereact/colorpicker';
                         <p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="ColorPickerDemo" sources={this.sources} extFiles={this.extFiles} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'ColorPickerDemo', sources: this.sources, extFiles: this.extFiles })
+                    }
                 </TabView>
             </div>
         )

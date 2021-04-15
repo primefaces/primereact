@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
+import { TabView } from '../../components/tabview/TabView';
 import { Chart } from '../../components/chart/Chart';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import AppContentContext from '../../AppContentContext';
+import AppDemoActions from '../../AppDemoActions';
 
 export class RadarChartDemo extends Component {
 
@@ -77,6 +78,7 @@ export class RadarChartDemo extends Component {
                         <h1>RadarChart</h1>
                         <p>A radar chart is a graphical method of displaying multivariate data in the form of a two-dimensional chart of three or more quantitative variables represented on axes starting from the same point.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="chart/RadarChartDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -292,11 +294,11 @@ const RadarChartDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="RadarChartDemo" sources={this.sources} dependencies={{ 'chart.js': '2.7.3' }} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'RadarChartDemo', sources: this.sources, dependencies: { 'chart.js': '2.7.3' } })
+                    }
                 </TabView>
             </div>
         )

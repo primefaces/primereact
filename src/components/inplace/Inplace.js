@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import {Button} from '../button/Button';
 
 export class InplaceDisplay extends Component {
@@ -27,7 +27,8 @@ export class Inplace extends Component {
         active: false,
         closable: false,
         disabled: false,
-        tabIndex: '0',
+        tabIndex: 0,
+        ariaLabel: null,
         onOpen: null,
         onClose: null,
         onToggle: null
@@ -39,7 +40,8 @@ export class Inplace extends Component {
         active: PropTypes.bool,
         closable: PropTypes.bool,
         disabled: PropTypes.bool,
-        tabIndex: PropTypes.string,
+        tabIndex: PropTypes.number,
+        ariaLabel: PropTypes.string,
         onOpen: PropTypes.func,
         onClose: PropTypes.func,
         onToggle: PropTypes.func,
@@ -112,7 +114,7 @@ export class Inplace extends Component {
         const className = classNames('p-inplace-display', {'p-disabled': this.props.disabled});
 
         return (
-            <div className={className} onClick={this.open} onKeyDown={this.onDisplayKeyDown} tabIndex={this.props.tabIndex} >
+            <div className={className} onClick={this.open} onKeyDown={this.onDisplayKeyDown} tabIndex={this.props.tabIndex} aria-label={this.props.ariaLabel}>
                 {content}
             </div>
         );
@@ -121,7 +123,7 @@ export class Inplace extends Component {
     renderCloseButton() {
         if (this.props.closable) {
             return (
-                <Button type="button" icon="pi pi-times" onClick={this.close} />
+                <Button type="button" className="p-inplace-content-close" icon="pi pi-times" onClick={this.close} />
             )
         }
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView,TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 
 export class DataViewDoc extends Component {
 
@@ -74,7 +74,7 @@ export class DataViewDemo extends Component {
                     <div className="product-list-detail">
                         <div className="product-name">{data.name}</div>
                         <div className="product-description">{data.description}</div>
-                        <Rating value={data.rating} readonly cancel={false}></Rating>
+                        <Rating value={data.rating} readOnly cancel={false}></Rating>
                         <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
                     </div>
                     <div className="product-list-action">
@@ -102,7 +102,7 @@ export class DataViewDemo extends Component {
                     <img src={\`showcase/demo/images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
                         <div className="product-name">{data.name}</div>
                         <div className="product-description">{data.description}</div>
-                        <Rating value={data.rating} readonly cancel={false}></Rating>
+                        <Rating value={data.rating} readOnly cancel={false}></Rating>
                     </div>
                     <div className="product-grid-item-bottom">
                         <span className="product-price">\${data.price}</span>
@@ -204,7 +204,7 @@ const DataViewDemo = () => {
                     <div className="product-list-detail">
                         <div className="product-name">{data.name}</div>
                         <div className="product-description">{data.description}</div>
-                        <Rating value={data.rating} readonly cancel={false}></Rating>
+                        <Rating value={data.rating} readOnly cancel={false}></Rating>
                         <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
                     </div>
                     <div className="product-list-action">
@@ -232,7 +232,7 @@ const DataViewDemo = () => {
                     <img src={\`showcase/demo/images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
                         <div className="product-name">{data.name}</div>
                         <div className="product-description">{data.description}</div>
-                        <Rating value={data.rating} readonly cancel={false}></Rating>
+                        <Rating value={data.rating} readOnly cancel={false}></Rating>
                     </div>
                     <div className="product-grid-item-bottom">
                         <span className="product-price">\${data.price}</span>
@@ -332,7 +332,7 @@ const DataViewDemo = () => {
                     <div className="product-list-detail">
                         <div className="product-name">{data.name}</div>
                         <div className="product-description">{data.description}</div>
-                        <Rating value={data.rating} readonly cancel={false}></Rating>
+                        <Rating value={data.rating} readOnly cancel={false}></Rating>
                         <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
                     </div>
                     <div className="product-list-action">
@@ -360,7 +360,7 @@ const DataViewDemo = () => {
                     <img src={\`showcase/demo/images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
                         <div className="product-name">{data.name}</div>
                         <div className="product-description">{data.description}</div>
-                        <Rating value={data.rating} readonly cancel={false}></Rating>
+                        <Rating value={data.rating} readOnly cancel={false}></Rating>
                     </div>
                     <div className="product-grid-item-bottom">
                         <span className="product-price">\${data.price}</span>
@@ -546,7 +546,7 @@ const DataViewDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
                         <h5>Import</h5>
@@ -570,7 +570,7 @@ npm install primeflex --save
                         <p>DataView has two layout modes; <i>list</i> and <i>grid</i> where <i>itemTemplate</i> function is called by passing the item to render along with the layout mode.</p>
 <CodeHighlight lang="js">
 {`
-itemTemplate(data, layout) {
+const itemTemplate = (data, layout) => {
     if (layout === 'list') {
         return (
             // List content
@@ -589,7 +589,7 @@ itemTemplate(data, layout) {
 
 <CodeHighlight>
 {`
-<DataView value={this.state.products} layout={this.state.layout} itemTemplate={this.itemTemplate}></DataView>
+<DataView value={products} layout={layout} itemTemplate={itemTemplate}></DataView>
 `}
 </CodeHighlight>
 
@@ -598,7 +598,7 @@ itemTemplate(data, layout) {
 
 <CodeHighlight>
 {`
-<DataViewLayoutOptions layout={this.state.layout} onChange={(e) => this.setState({layout: e.value})} />
+<DataViewLayoutOptions layout={layout} onChange={(e) => setLayout(e.value)} />
 `}
 </CodeHighlight>
 
@@ -672,7 +672,7 @@ itemTemplate(data, layout) {
 
 <CodeHighlight>
 {`
-<DataView value={this.state.products} layout={this.state.layout} itemTemplate={this.itemTemplate} paginator rows={10} first={this.state.first} onPage={(e) => this.setState({first: e.first})}></DataView>
+<DataView value={products} layout={layout} itemTemplate={itemTemplate} paginator rows={10} first={first} onPage={(e) => setFirst(e.first)}></DataView>
 `}
 </CodeHighlight>
 
@@ -680,7 +680,7 @@ itemTemplate(data, layout) {
                         it is evaluated at initial rendering and ignored in further updates. If you programmatically need to update the paginator, prefer to use the component as controlled.</p>
 <CodeHighlight>
 {`
-<DataView value={this.state.products} layout={this.state.layout} itemTemplate={this.itemTemplate} paginator rows={10}></DataView>
+<DataView value={products} layout={layout} itemTemplate={itemTemplate} paginator rows={10}></DataView>
 `}
 </CodeHighlight>
 
@@ -690,7 +690,7 @@ itemTemplate(data, layout) {
 
 <CodeHighlight lang="js">
 {`
-this.sortOptions = [
+const sortOptions = [
     {label: 'Price High to Low', value: '!price'},
     {label: 'Price Low to High', value: 'price'},
 ];
@@ -698,34 +698,30 @@ this.sortOptions = [
 const header = (
     <div className="p-grid">
         <div className="p-col-12 p-md-4">
-            <Dropdown options={sortOptions} value={this.state.sortKey} placeholder="Sort By" onChange={this.onSortChange} />
+            <Dropdown options={sortOptions} value={sortKey} placeholder="Sort By" onChange={onSortChange} />
         </div>
     </div>
 );
 
-<DataView value={this.state.products} header={header} sortOrder={this.state.sortOrder} sortField={this.state.sortField} />
+<DataView value={products} header={header} sortOrder={sortOrder} sortField={sortField} />
 
 `}
 </CodeHighlight>
 
 <CodeHighlight className="js">
 {`
-onSortChange(event) {
+const onSortChange = (event) => {
     const value = event.value;
 
     if (value.indexOf('!') === 0) {
-        this.setState({
-            sortOrder: -1,
-            sortField: value.substring(1, value.length),
-            sortKey: value
-        });
+        setSortOrder(-1);
+        setSortField(value.substring(1, value.length));
+        setSortKey(value);
     }
     else {
-        this.setState({
-            sortOrder: 1,
-            sortField: value,
-            sortKey: value
-        });
+        setSortOrder(1);
+        setSortField(value);
+        setSortKey(value);
     }
 }
 `}
@@ -815,10 +811,16 @@ onSortChange(event) {
                                         <td>Whether to show it even there is only one page.</td>
                                     </tr>
                                     <tr>
-                                        <td>paginatorTemplate</td>
+                                        <td>paginatorClassName</td>
                                         <td>string</td>
+                                        <td>null</td>
+                                        <td>Style class of the paginator element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>paginatorTemplate</td>
+                                        <td>string|object</td>
                                         <td>FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown</td>
-                                        <td>Template of the paginator.</td>
+                                        <td>Template of the paginator. For details, refer to the template section of the <Link to="/paginator">paginator documentation</Link> for further options.</td>
                                     </tr>
                                     <tr>
                                         <td>paginatorLeft</td>
@@ -852,9 +854,9 @@ onSortChange(event) {
                                     </tr>
                                     <tr>
                                         <td>paginatorDropdownAppendTo</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Target element to attach the paginator dropdown overlay.</td>
+                                        <td>DOM element | string</td>
+                                        <td>document.body</td>
+                                        <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
                                     </tr>
                                     <tr>
                                         <td>emptyMessage</td>
@@ -917,7 +919,7 @@ onSortChange(event) {
                                         <td>onPage</td>
                                         <td>event.originalEvent: Browser event <br />
                                             event.first: Index of the first records on page. <br />
-                                            event.rows: Number of records to display per page.></td>
+                                            event.rows: Number of records to display per page.</td>
                                         <td>Callback to invoke on pagination.</td>
                                     </tr>
                                 </tbody>
@@ -968,9 +970,9 @@ onSortChange(event) {
 
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="DataViewDemo" sources={this.sources} service="ProductService" data="products" extFiles={this.extFiles} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'DataViewDemo', sources: this.sources, service: 'ProductService', data: 'products', extFiles: this.extFiles })
+                    }
                 </TabView>
             </div>
         );

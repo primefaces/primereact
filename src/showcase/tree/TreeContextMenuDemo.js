@@ -3,9 +3,10 @@ import { Tree } from '../../components/tree/Tree';
 import { ContextMenu } from '../../components/contextmenu/ContextMenu';
 import { Toast} from '../../components/toast/Toast';
 import { NodeService } from '../service/NodeService';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class TreeContextMenuDemo extends Component {
 
@@ -55,6 +56,7 @@ export class TreeContextMenuDemo extends Component {
                         <h1>Tree <span>ContextMenu</span></h1>
                         <p>Tree has exclusive integration with the ContextMenu component with support for different menus depending on the node.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="tree/TreeContextMenuDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -277,11 +279,11 @@ const TreeContextMenuDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="TreeContextMenuDemo" sources={this.sources} service="NodeService" data="treenodes" />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'TreeContextMenuDemo', sources: this.sources, service: 'NodeService', data: 'treenodes' })
+                    }
                 </TabView>
             </div>
         );

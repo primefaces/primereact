@@ -1,77 +1,167 @@
 import * as React from 'react';
-import TreeNode from "../treenode/TreeNode";
+import { Column } from '../column/Column';
+import { Paginator } from '../paginator/Paginator';
+import TreeNode from '../treenode/TreeNode';
 
-interface TreeTableProps {
-    id?: string;
-    value?: TreeNode[];
-    header?: any;
-    footer?: any;
-    style?: object;
-    className?: string;
-    tableStyle?: object;
-    tableClassName?: string;
-    expandedKeys?: any;
-    paginator?: boolean;
-    paginatorPosition?: string;
-    alwaysShowPaginator?: boolean;
-    paginatorTemplate?: string;
-    paginatorLeft?: any;
-    paginatorRight?: any;
-    pageLinkSize?: number;
-    paginatorDropdownAppendTo?: any;
-    rowsPerPageOptions?: number[];
-    currentPageReportTemplate?: string;
-    first?: number;
-    rows?: number;
-    totalRecords?: number;
-    lazy?: boolean;
-    sortField?: string;
-    sortOrder?: number;
-    multiSortMeta?: any[];
-    sortMode?: string;
-    defaultSortOrder?: number;
-    selectionMode?: string;
-    selectionKeys?: any;
-    contextMenuSelectionKey?: any;
-    metaKeySelection?: boolean;
-    propagateSelectionUp?: boolean;
-    propagateSelectionDown?: boolean;
-    autoLayout?:boolean;
-    rowClassName?(rowData: any): object;
-    loading?: boolean;
-    loadingIcon?: string;
-    tabIndex?:string;
-    scrollable?: boolean;
-    scrollHeight?: string;
-    reorderableColumns?: boolean;
-    headerColumnGroup?: any;
-    footerColumnGroup?: any;
-    frozenHeaderColumnGroup?: any;
-    frozenFooterColumnGroup?: any;
-    frozenWidth?: string;
-    resizableColumns?: boolean;
-    columnResizeMode?: string;
-    emptyMessage?: string;
-    filters?: object;
-    globalFilter?: any;
-    filterMode?: string;
-    filterLocale?: string;
-    onFilter?(filters: any[]): void;
-    onExpand?(e: {originalEvent: Event, node: TreeNode}): void;
-    onCollapse?(e: {originalEvent: Event, node: TreeNode}): void;
-    onToggle?(e: {originalEvent: Event, value: any}): void;
-    onPage?(e: {first: number, rows: number}): void;
-    onSort?(e: {sortField: string, sortOrder: number, multiSortMeta: any}): void;
-    onSelect?(e: {originalEvent: Event, node: TreeNode}): void;
-    onUnselect?(e: {originalEvent: Event, node: TreeNode}): void;
-    onRowClick?(e: {originalEvent: Event, node: TreeNode}): void;
-    onSelectionChange?(e: {originalEvent: Event, value: any}): void;
-    onContextMenuSelectionChange?(e: {originalEvent: Event, value: any}): void;
-    onColumnResizeEnd?(e: {element: HTMLElement, delta: number}): void;
-    onColReorder?(e: {dragIndex: number, dropIndex: number, columns: any}): void;
-    onContextMenu?(e: {originalEvent: Event, node: any}): void;
+declare namespace TreeTable {
+
+    type PaginatorPositionType = 'top' | 'bottom' | 'both';
+
+    type SortModeType = 'single' | 'multiple';
+
+    type SortOrderType = 1 | 0 | -1 | undefined | null;
+
+    type MultiSortMetaType = SortMeta[] | undefined | null;
+
+    type SelectionModeType = 'single' | 'multiple' | 'checkbox';
+
+    type ColumnResizeModeType = 'fit' | 'expand';
+
+    type FilterMatchModeType = 'startsWith' | 'contains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'lt' | 'lte' | 'gt' | 'gte' | 'custom';
+
+    type GlobalFilterType = string | undefined | null;
+
+    type SelectionKeys = string | SelectionKeysType | undefined | null;
+
+    type FilterModeType = 'lenient' | 'strict';
+
+    interface SelectionKeysType {
+        [key: string]: boolean;
+    }
+
+    type ExpandedKeysType = {
+        [key: string]: boolean;
+    }
+
+    interface SortMeta {
+        sortField: string;
+        sortOrder: SortOrderType;
+    }
+
+    interface FilterMetaData {
+        value: any;
+        matchMode: FilterMatchModeType;
+    }
+
+    interface FilterMeta {
+        [key: string]: FilterMetaData;
+    }
+
+    interface EventParams {
+        originalEvent: React.SyntheticEvent;
+        node: TreeNode;
+    }
+
+    interface ToggleParams {
+        originalEvent: React.SyntheticEvent;
+        value: ExpandedKeysType;
+    }
+
+    interface PageParams {
+        first: number;
+        rows: number;
+    }
+
+    interface SortParams {
+        sortField: string;
+        sortOrder: SortOrderType;
+        multiSortMeta: MultiSortMetaType;
+    }
+
+    interface SelectionParams {
+        originalEvent: React.SyntheticEvent;
+        value: SelectionKeysType
+    }
+
+    interface ColumnResizeEndParams {
+        element: HTMLElement;
+        column: Column.ColumnProps;
+        delta: number;
+    }
+
+    interface ColReorderParams {
+        originalEvent: React.DragEvent<HTMLElement>;
+        dragIndex: number;
+        dropIndex: number;
+        columns: React.ReactElement;
+    }
+
+    interface TreeTableProps {
+        id?: string;
+        value?: TreeNode[];
+        header?: React.ReactNode;
+        footer?: React.ReactNode;
+        style?: object;
+        className?: string;
+        tableStyle?: object;
+        tableClassName?: string;
+        expandedKeys?: ExpandedKeysType;
+        paginator?: boolean;
+        paginatorPosition?: PaginatorPositionType;
+        alwaysShowPaginator?: boolean;
+        paginatorClassName?: string;
+        paginatorTemplate?: Paginator.PaginatorTemplate;
+        paginatorLeft?: React.ReactNode;
+        paginatorRight?: React.ReactNode;
+        pageLinkSize?: number;
+        paginatorDropdownAppendTo?: HTMLElement | string;
+        rowsPerPageOptions?: number[];
+        currentPageReportTemplate?: string;
+        first?: number;
+        rows?: number;
+        totalRecords?: number;
+        lazy?: boolean;
+        sortField?: string;
+        sortOrder?: SortOrderType;
+        multiSortMeta?: MultiSortMetaType;
+        sortMode?: SortModeType;
+        defaultSortOrder?: SortOrderType;
+        removableSort?: boolean;
+        selectionMode?: SelectionModeType;
+        selectionKeys?: SelectionKeys;
+        contextMenuSelectionKey?: string;
+        metaKeySelection?: boolean;
+        selectOnEdit?: boolean;
+        propagateSelectionUp?: boolean;
+        propagateSelectionDown?: boolean;
+        autoLayout?: boolean;
+        loading?: boolean;
+        loadingIcon?: string;
+        tabIndex?: number;
+        scrollable?: boolean;
+        scrollHeight?: string;
+        reorderableColumns?: boolean;
+        headerColumnGroup?: React.ReactElement;
+        footerColumnGroup?: React.ReactElement;
+        frozenHeaderColumnGroup?: React.ReactElement;
+        frozenFooterColumnGroup?: React.ReactElement;
+        frozenWidth?: string;
+        resizableColumns?: boolean;
+        columnResizeMode?: ColumnResizeModeType;
+        emptyMessage?: string;
+        filters?: FilterMeta;
+        globalFilter?: GlobalFilterType;
+        filterMode?: string;
+        filterDelay?: number;
+        filterLocale?: string;
+        rowClassName?(data: TreeNode): object;
+        onFilter?(filters: FilterMeta[]): void;
+        onExpand?(e: EventParams): void;
+        onCollapse?(e: EventParams): void;
+        onToggle?(e: ToggleParams): void;
+        onPage?(e: PageParams): void;
+        onSort?(e: SortParams): void;
+        onSelect?(e: EventParams): void;
+        onUnselect?(e: EventParams): void;
+        onRowClick?(e: EventParams): void;
+        onSelectionChange?(e: SelectionParams): void;
+        onContextMenuSelectionChange?(e: SelectionParams): void;
+        onColumnResizeEnd?(e: ColumnResizeEndParams): void;
+        onColReorder?(e: ColReorderParams): void;
+        onContextMenu?(e: EventParams): void;
+    }
 }
 
-export class TreeTable extends React.Component<TreeTableProps, any> {
-    public filter<T>(value:T, field:string, mode:string):void;
+export declare class TreeTable extends React.Component<TreeTable.TreeTableProps, any> {
+    public filter<T>(value: T, field: string, mode: TreeTable.FilterMatchModeType): void;
 }

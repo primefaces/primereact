@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import AppDemoActions from '../../AppDemoActions';
 import { Calendar } from '../../components/calendar/Calendar';
 import { CalendarDoc } from './CalendarDoc';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import { addLocale } from '../../components/api/Locale';
 
 export class CalendarDemo extends Component {
 
@@ -31,6 +33,7 @@ export class CalendarDemo extends Component {
             date12: null,
             date13: null,
             date14: null,
+            date15: null,
             dates1: null,
             dates2: null
         };
@@ -46,6 +49,17 @@ export class CalendarDemo extends Component {
         this.invalidDates = [today];
 
         this.dateTemplate = this.dateTemplate.bind(this);
+
+        addLocale('es', {
+            firstDayOfWeek: 1,
+            dayNames: ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'],
+            dayNamesShort: ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'],
+            dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
+            monthNames: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'],
+            monthNamesShort: ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'],
+            today: 'Hoy',
+            clear: 'Claro'
+        });
     }
 
     dateTemplate(date) {
@@ -59,24 +73,14 @@ export class CalendarDemo extends Component {
     }
 
     render() {
-        const es = {
-            firstDayOfWeek: 1,
-            dayNames: ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"],
-            dayNamesShort: ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"],
-            dayNamesMin: ["D", "L", "M", "X", "J", "V", "S"],
-            monthNames: ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"],
-            monthNamesShort: ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"],
-            today: "Hoy",
-            clear: "Claro"
-        };
-
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="calendar" showInputStyle>
+                    <AppInlineHeader changelogText="calendar">
                         <h1>Calendar</h1>
                         <p>Calendar is a form component to work with dates.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="calendar/CalendarDemo.js"/>
                 </div>
 
                 <div className="content-section implementation">
@@ -93,7 +97,7 @@ export class CalendarDemo extends Component {
                             </div>
                             <div className="p-field p-col-12 p-md-4">
                                 <label htmlFor="spanish">Spanish</label>
-                                <Calendar id="spanish" value={this.state.date3} onChange={(e) => this.setState({ date3: e.value })} locale={es} dateFormat="dd/mm/yy" />
+                                <Calendar id="spanish" value={this.state.date3} onChange={(e) => this.setState({ date3: e.value })} locale="es" dateFormat="dd/mm/yy" />
                             </div>
                             <div className="p-field p-col-12 p-md-4">
                                 <label htmlFor="minmax">MinMax</label>
@@ -143,10 +147,14 @@ export class CalendarDemo extends Component {
                                 <label htmlFor="touchUI">TouchUI</label>
                                 <Calendar id="touchUI" value={this.state.date13} onChange={(e) => this.setState({ date13: e.value })} touchUI />
                             </div>
+                            <div className="p-field p-col-12 p-md-4">
+                                <label htmlFor="mask">Mask</label>
+                                <Calendar id="mask" value={this.state.date14} onChange={(e) => this.setState({ date14: e.value })} mask="99/99/9999"/>
+                            </div>
                         </div>
 
                         <h5>Inline</h5>
-                        <Calendar value={this.state.date14} onChange={(e) => this.setState({ date14: e.value })} inline showWeek />
+                        <Calendar value={this.state.date15} onChange={(e) => this.setState({ date15: e.value })} inline showWeek />
                     </div>
                 </div>
 

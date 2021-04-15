@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { DataTable } from '../../components/datatable/DataTable';
 import { Column } from '../../components/column/Column';
 import ProductService from '../service/ProductService';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DataTableColResizeDemo extends Component {
 
@@ -31,6 +32,7 @@ export class DataTableColResizeDemo extends Component {
                         <p>Columns can be resized using drag drop by setting the resizableColumns to true. There are two resize modes; "fit" and "expand". Fit is the default one and the overall table width does not change when a column is resized.
                             In "expand" mode, table width also changes along with the column width. onColumnResize is a callback that passes the resized column header as a parameter.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="datatable/DataTableColResizeDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -212,11 +214,11 @@ const DataTableColResizeDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="DataTableColResizeDemo" sources={this.sources} service="ProductService" data="products-small" />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'DataTableColResizeDemo', sources: this.sources, service: 'ProductService', data: 'products-small' })
+                    }
                 </TabView>
             </div>
         )

@@ -3,9 +3,10 @@ import { DataTable } from '../../components/datatable/DataTable';
 import { Column } from '../../components/column/Column';
 import ProductService from '../service/ProductService';
 import { Toast } from '../../components/toast/Toast';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DataTableSelectionDemo extends Component {
 
@@ -48,6 +49,7 @@ export class DataTableSelectionDemo extends Component {
                         <p>DataTable provides single and multiple selection modes on click of a row. Selected rows are bound to the selection property and onRowSelect-onRowUnselect
                             events are provided as optional callbacks. In addition built-in radio button and checkbox based selections are available as alternatives.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="datatable/DataTableSelectionDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -109,7 +111,6 @@ export class DataTableSelectionDemo extends Component {
 
                     <div className="card">
                         <h5>Checkbox</h5>
-
                         <DataTable value={this.state.products} selection={this.state.selectedProducts3} onSelectionChange={e => this.setState({ selectedProducts3: e.value })} dataKey="id">
                             <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>
                             <Column field="code" header="Code"></Column>
@@ -470,11 +471,11 @@ const DataTableSelectionDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="DataTableSelectionDemo" sources={this.sources} service="ProductService" data="products-small" />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'DataTableSelectionDemo', sources: this.sources, service: 'ProductService', data: 'products-small' })
+                    }
                 </TabView>
             </div>
         )

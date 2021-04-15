@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 
 export class InputTextareaDoc extends Component {
 
@@ -111,7 +111,7 @@ const InputTextareaDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
                         <h5>Import</h5>
@@ -125,7 +125,7 @@ import { InputTextarea } from 'primereact/inputtextarea';
                         <p>Textarea is used as a controlled input with <i>value</i> and <i>onChange</i> properties.</p>
 <CodeHighlight>
 {`
-<InputTextarea rows={5} cols={30} value={this.state.value} onChange={(e) => this.setState({value: e.target.value})} />
+<InputTextarea rows={5} cols={30} value={value} onChange={(e) => setValue(event.target.value)} />
 `}
 </CodeHighlight>
 
@@ -133,7 +133,7 @@ import { InputTextarea } from 'primereact/inputtextarea';
                         <p>In auto resize mode, textarea grows instead of displaying a scrollbar.</p>
 <CodeHighlight>
 {`
-<InputTextarea rows={5} cols={30} value={this.state.value} onChange={(e) => this.setState({value: e.target.value})} autoResize />
+<InputTextarea rows={5} cols={30} value={value} onChange={(e) => setValue(event.target.value)} autoResize />
 `}
 </CodeHighlight>
 
@@ -195,9 +195,9 @@ import { InputTextarea } from 'primereact/inputtextarea';
                         <p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="InputTextareaDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'InputTextareaDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         )

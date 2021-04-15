@@ -3,10 +3,11 @@ import { DataScroller } from '../../components/datascroller/DataScroller';
 import { Button } from '../../components/button/Button';
 import { Rating } from '../../components/rating/Rating';
 import ProductService from '../service/ProductService';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './DataScrollerDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DataScrollerLoaderDemo extends Component {
 
@@ -32,7 +33,7 @@ export class DataScrollerLoaderDemo extends Component {
                 <div className="product-detail">
                     <div className="product-name">{data.name}</div>
                     <div className="product-description">{data.description}</div>
-                    <Rating value={data.rating} readonly cancel={false}></Rating>
+                    <Rating value={data.rating} readOnly cancel={false}></Rating>
                     <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
                 </div>
                 <div className="product-action">
@@ -45,7 +46,7 @@ export class DataScrollerLoaderDemo extends Component {
     }
 
     render() {
-        const footer = <Button ref={(el) => this.loadButton = el} type="text" icon="pi pi-plus" label="Load" />;
+        const footer = <Button type="text" icon="pi pi-plus" label="Load" onClick={() => this.ds.load()} />;
 
         return (
             <div>
@@ -54,12 +55,13 @@ export class DataScrollerLoaderDemo extends Component {
                         <h1>DataScroller <span>Loader</span></h1>
                         <p>Instead of scrolling, a custom element can be used to load data.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="datascroller/DataScrollerLoaderDemo.js" />
                 </div>
 
                 <div className="content-section implementation datascroller-demo">
                     <div className="card">
-                        <DataScroller value={this.state.products} itemTemplate={this.itemTemplate} rows={5}
-                            loader={this.loadButton} footer={footer} header="Click Load Button at Footer to Load More" />
+                        <DataScroller ref={(el) => this.ds = el} value={this.state.products} itemTemplate={this.itemTemplate} rows={5}
+                            loader footer={footer} header="Click Load Button at Footer to Load More" />
                     </div>
                 </div>
 
@@ -109,7 +111,7 @@ export class DataScrollerLoaderDemo extends Component {
                 <div className="product-detail">
                     <div className="product-name">{data.name}</div>
                     <div className="product-description">{data.description}</div>
-                    <Rating value={data.rating} readonly cancel={false}></Rating>
+                    <Rating value={data.rating} readOnly cancel={false}></Rating>
                     <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
                 </div>
                 <div className="product-action">
@@ -122,13 +124,13 @@ export class DataScrollerLoaderDemo extends Component {
     }
 
     render() {
-        const footer = <Button ref={(el) => this.loadButton = el} type="text" icon="pi pi-plus" label="Load" />;
+        const footer = <Button type="text" icon="pi pi-plus" label="Load" onClick={() => this.ds.load()} />;
 
         return (
             <div className="datascroller-demo">
                 <div className="card">
-                    <DataScroller value={this.state.products} itemTemplate={this.itemTemplate} rows={5}
-                        loader={this.loadButton} footer={footer} header="Click Load Button at Footer to Load More" />
+                    <DataScroller ref={(el) => this.ds = el} value={this.state.products} itemTemplate={this.itemTemplate} rows={5}
+                        loader footer={footer} header="Click Load Button at Footer to Load More" />
                 </div>
             </div>
         );
@@ -148,7 +150,7 @@ import './DataScrollerDemo.css';
 
 const DataScrollerLoaderDemo = () => {
     const [products, setProducts] = useState([]);
-    const loadButton = useRef(null);
+    const ds = useRef(null);
     const productService = new ProductService();
 
     useEffect(() => {
@@ -162,7 +164,7 @@ const DataScrollerLoaderDemo = () => {
                 <div className="product-detail">
                     <div className="product-name">{data.name}</div>
                     <div className="product-description">{data.description}</div>
-                    <Rating value={data.rating} readonly cancel={false}></Rating>
+                    <Rating value={data.rating} readOnly cancel={false}></Rating>
                     <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
                 </div>
                 <div className="product-action">
@@ -174,13 +176,13 @@ const DataScrollerLoaderDemo = () => {
         );
     }
 
-    const footer = <Button ref={loadButton} type="text" icon="pi pi-plus" label="Load" />;
+    const footer = <Button type="text" icon="pi pi-plus" label="Load" onClick={() => ds.load()} />;
 
     return (
         <div className="datascroller-demo">
             <div className="card">
-                <DataScroller value={products} itemTemplate={itemTemplate} rows={5}
-                    loader={loadButton} footer={footer} header="Click Load Button at Footer to Load More" />
+                <DataScroller ref={ds} value={products} itemTemplate={itemTemplate} rows={5}
+                    loader footer={footer} header="Click Load Button at Footer to Load More" />
             </div>
         </div>
     );
@@ -199,7 +201,7 @@ import './DataScrollerDemo.css';
 
 const DataScrollerLoaderDemo = () => {
     const [products, setProducts] = useState([]);
-    const loadButton = useRef(null);
+    const ds = useRef(null);
     const productService = new ProductService();
 
     useEffect(() => {
@@ -213,7 +215,7 @@ const DataScrollerLoaderDemo = () => {
                 <div className="product-detail">
                     <div className="product-name">{data.name}</div>
                     <div className="product-description">{data.description}</div>
-                    <Rating value={data.rating} readonly cancel={false}></Rating>
+                    <Rating value={data.rating} readOnly cancel={false}></Rating>
                     <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
                 </div>
                 <div className="product-action">
@@ -225,13 +227,13 @@ const DataScrollerLoaderDemo = () => {
         );
     }
 
-    const footer = <Button ref={loadButton} type="text" icon="pi pi-plus" label="Load" />;
+    const footer = <Button type="text" icon="pi pi-plus" label="Load" onClick={() => ds.load()} />;
 
     return (
         <div className="datascroller-demo">
             <div className="card">
-                <DataScroller value={products} itemTemplate={itemTemplate} rows={5}
-                    loader={loadButton} footer={footer} header="Click Load Button at Footer to Load More" />
+                <DataScroller ref={ds} value={products} itemTemplate={itemTemplate} rows={5}
+                    loader footer={footer} header="Click Load Button at Footer to Load More" />
             </div>
         </div>
     );
@@ -342,11 +344,11 @@ const DataScrollerLoaderDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="DataScrollerLoaderDemo" sources={this.sources} service="ProductService" data="products" extFiles={this.extFiles} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'DataScrollerLoaderDemo', sources: this.sources, service: 'ProductService', data: 'products', extFiles: this.extFiles })
+                    }
                 </TabView>
             </div>
         );

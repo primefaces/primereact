@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
 
 export class InputSwitchDoc extends Component {
@@ -99,7 +99,7 @@ const InputSwitchDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
             <TabView>
                 <TabPanel header="Documentation">
                     <h5>Import</h5>
@@ -114,7 +114,7 @@ import {InputSwitch} from 'primereact/inputswitch';
 
 <CodeHighlight>
 {`
-<InputSwitch checked={this.state.value} onChange={(e) => this.setState({value: e.value})} />
+<InputSwitch checked={value} onChange={(e) => setValue(e.value)} />
 `}
 </CodeHighlight>
 
@@ -256,9 +256,9 @@ import {InputSwitch} from 'primereact/inputswitch';
                     <p>None.</p>
                 </TabPanel>
 
-                <TabPanel header="Source">
-                    <LiveEditor name="InputSwitchDemo" sources={this.sources} />
-                </TabPanel>
+                {
+                    useLiveEditorTabs({ name: 'InputSwitchDemo', sources: this.sources })
+                }
             </TabView>
         </div>
         );

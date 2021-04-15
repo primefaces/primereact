@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types';
-import {Button} from '../button/Button';
-import classNames from 'classnames';
+import { Button } from '../button/Button';
+import { classNames } from '../utils/ClassNames';
 import ObjectUtils from '../utils/ObjectUtils';
 
 export class PickListControls extends Component {
@@ -31,14 +31,14 @@ export class PickListControls extends Component {
     moveUp(event) {
         let selectedItems = this.props.selection;
 
-        if(selectedItems && selectedItems.length) {
+        if (selectedItems && selectedItems.length) {
             let list = [...this.props.list];
 
-            for(let i = 0; i < selectedItems.length; i++) {
+            for (let i = 0; i < selectedItems.length; i++) {
                 let selectedItem = selectedItems[i];
                 let selectedItemIndex = ObjectUtils.findIndexInList(selectedItem, list);
 
-                if(selectedItemIndex !== 0) {
+                if (selectedItemIndex !== 0) {
                     let movedItem = list[selectedItemIndex];
                     let temp = list[selectedItemIndex - 1];
                     list[selectedItemIndex - 1] = movedItem;
@@ -49,7 +49,7 @@ export class PickListControls extends Component {
                 }
             }
 
-            if(this.props.onReorder) {
+            if (this.props.onReorder) {
                 this.props.onReorder({
                     originalEvent: event,
                     value: list,
@@ -62,15 +62,15 @@ export class PickListControls extends Component {
     moveTop(event) {
         let selectedItems = this.props.selection;
 
-        if(selectedItems && selectedItems.length) {
+        if (selectedItems && selectedItems.length) {
             let list = [...this.props.list];
 
-            for(let i = 0; i < selectedItems.length; i++) {
+            for (let i = 0; i < selectedItems.length; i++) {
                 let selectedItem = selectedItems[i];
                 let selectedItemIndex = ObjectUtils.findIndexInList(selectedItem, list);
 
-                if(selectedItemIndex !== 0) {
-                    let movedItem = list.splice(selectedItemIndex,1)[0];
+                if (selectedItemIndex !== 0) {
+                    let movedItem = list.splice(selectedItemIndex, 1)[0];
                     list.unshift(movedItem);
                 }
                 else {
@@ -78,7 +78,7 @@ export class PickListControls extends Component {
                 }
             }
 
-            if(this.props.onReorder) {
+            if (this.props.onReorder) {
                 this.props.onReorder({
                     originalEvent: event,
                     value: list,
@@ -91,17 +91,17 @@ export class PickListControls extends Component {
     moveDown(event) {
         let selectedItems = this.props.selection;
 
-        if(selectedItems && selectedItems.length) {
+        if (selectedItems && selectedItems.length) {
             let list = [...this.props.list];
 
-            for(let i = selectedItems.length - 1; i >= 0; i--) {
+            for (let i = selectedItems.length - 1; i >= 0; i--) {
                 let selectedItem = selectedItems[i];
                 let selectedItemIndex = ObjectUtils.findIndexInList(selectedItem, list);
 
-                if(selectedItemIndex !== (list.length - 1)) {
+                if (selectedItemIndex !== (list.length - 1)) {
                     let movedItem = list[selectedItemIndex];
-                    let temp = list[selectedItemIndex+1];
-                    list[selectedItemIndex+1] = movedItem;
+                    let temp = list[selectedItemIndex + 1];
+                    list[selectedItemIndex + 1] = movedItem;
                     list[selectedItemIndex] = temp;
                 }
                 else {
@@ -109,7 +109,7 @@ export class PickListControls extends Component {
                 }
             }
 
-            if(this.props.onReorder) {
+            if (this.props.onReorder) {
                 this.props.onReorder({
                     originalEvent: event,
                     value: list,
@@ -124,15 +124,15 @@ export class PickListControls extends Component {
     moveBottom(event) {
         let selectedItems = this.props.selection;
 
-        if(selectedItems && selectedItems.length) {
+        if (selectedItems && selectedItems.length) {
             let list = [...this.props.list];
 
-            for(let i = selectedItems.length - 1; i >= 0; i--) {
+            for (let i = selectedItems.length - 1; i >= 0; i--) {
                 let selectedItem = selectedItems[i];
                 let selectedItemIndex = ObjectUtils.findIndexInList(selectedItem, list);
 
-                if(selectedItemIndex !== (list.length - 1)) {
-                    let movedItem = list.splice(selectedItemIndex,1)[0];
+                if (selectedItemIndex !== (list.length - 1)) {
+                    let movedItem = list.splice(selectedItemIndex, 1)[0];
                     list.push(movedItem);
                 }
                 else {
@@ -140,7 +140,7 @@ export class PickListControls extends Component {
                 }
             }
 
-            if(this.props.onReorder) {
+            if (this.props.onReorder) {
                 this.props.onReorder({
                     originalEvent: event,
                     value: list,
@@ -151,13 +151,14 @@ export class PickListControls extends Component {
     }
 
     render() {
+        let moveDisabled = !this.props.selection.length;
         let className = classNames('p-picklist-buttons', this.props.className);
 
         return <div className={className}>
-                    <Button type="button" icon="pi pi-angle-up" onClick={this.moveUp}></Button>
-                    <Button type="button" icon="pi pi-angle-double-up" onClick={this.moveTop}></Button>
-                    <Button type="button" icon="pi pi-angle-down" onClick={this.moveDown}></Button>
-                    <Button type="button" icon="pi pi-angle-double-down" onClick={this.moveBottom}></Button>
-                </div>;
+            <Button disabled={moveDisabled} type="button" icon="pi pi-angle-up" onClick={this.moveUp}></Button>
+            <Button disabled={moveDisabled} type="button" icon="pi pi-angle-double-up" onClick={this.moveTop}></Button>
+            <Button disabled={moveDisabled} type="button" icon="pi pi-angle-down" onClick={this.moveDown}></Button>
+            <Button disabled={moveDisabled} type="button" icon="pi pi-angle-double-down" onClick={this.moveBottom}></Button>
+        </div>;
     }
 }

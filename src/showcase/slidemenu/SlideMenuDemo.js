@@ -3,6 +3,7 @@ import { SlideMenu } from '../../components/slidemenu/SlideMenu';
 import { Button } from '../../components/button/Button';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { SlideMenuDoc } from './SlideMenuDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class SlideMenuDemo extends Component {
 
@@ -148,16 +149,17 @@ export class SlideMenuDemo extends Component {
                     <AppInlineHeader changelogText="slideMenu">
                         <h1>Slide Menu</h1>
                         <p>SlideMenu displays submenus with a slide animation.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="slidemenu/SlideMenuDemo.js"/>
                 </div>
 
                 <div className="content-section implementation">
                     <div className="card">
                         <h5>Basic</h5>
-                        <SlideMenu model={this.items} viewportHeight={250} menuWidth={175}></SlideMenu>
+                        <SlideMenu model={this.items} viewportHeight={220} menuWidth={175}></SlideMenu>
 
                         <h5>Popup</h5>
-                        <SlideMenu ref={(el) => this.menu = el} model={this.items} popup viewportHeight={250} menuWidth={175}></SlideMenu>
+                        <SlideMenu ref={(el) => this.menu = el} model={this.items} popup viewportHeight={220} menuWidth={175}></SlideMenu>
                         <Button type="button" icon="pi pi-bars" label="Show" onClick={(event) => this.menu.toggle(event)}></Button>
                     </div>
                 </div>

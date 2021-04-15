@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 
 export class PickListDoc extends Component {
 
@@ -250,7 +250,7 @@ const PickListDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
                         <h5>Import</h5>
@@ -264,8 +264,16 @@ import { PickList } from 'primereact/picklist';
                         <p>PickList requires two arrays as <i>source</i> and <i>target</i> lists, an <i>itemTemplate</i> for the item content and <i>onChange</i> callback to update the value after reorder or transfer.</p>
 <CodeHighlight>
 {`
-<PickList source={this.state.source} target={this.state.target} itemTemplate={this.itemTemplate}
-    onChange={(e) => this.setState({source: e.source, target: e.target})} />
+const onChange = (e) => {
+    setSource(e.source);
+    setTarget(e.target);
+}
+`}
+</CodeHighlight>
+<CodeHighlight>
+{`
+<PickList source={source} target={target} itemTemplate={itemTemplate}
+    onChange={onChange} />
 `}
 </CodeHighlight>
 
@@ -275,8 +283,8 @@ import { PickList } from 'primereact/picklist';
 
 <CodeHighlight>
 {`
-<PickList source={this.state.source} target={this.state.target} itemTemplate={this.itemTemplate}
-    onChange={(e) => this.setState({source: e.source, target: e.target})} sourceHeader="Available" targetHeader="Seleced"/>
+<PickList source={source} target={target} itemTemplate={itemTemplate}
+    onChange={onChange} sourceHeader="Available" targetHeader="Seleced"/>
 `}
 </CodeHighlight>
 
@@ -347,6 +355,18 @@ import { PickList } from 'primereact/picklist';
                                         <td>Inline style of the target list element.</td>
                                     </tr>
                                     <tr>
+                                        <td>sourceSelection</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Selected item in the source list.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>targetSelection</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Selected items in the target list.</td>
+                                    </tr>
+                                    <tr>
                                         <td>showSourceControls</td>
                                         <td>boolean</td>
                                         <td>true</td>
@@ -373,7 +393,7 @@ import { PickList } from 'primereact/picklist';
                                     </tr>
                                     <tr>
                                         <td>tabIndex</td>
-                                        <td>string</td>
+                                        <td>number</td>
                                         <td>null</td>
                                         <td>Index of the element in tabbing order.</td>
                                     </tr>
@@ -424,13 +444,13 @@ import { PickList } from 'primereact/picklist';
                                         <td>Callback to invoke when all items are moved from source to target.</td>
                                     </tr>
                                     <tr>
-                                        <td>onSourceSelect</td>
+                                        <td>onSourceSelectionChange</td>
                                         <td>event.originalEvent: Browser event <br />
                                 items: Selected items array</td>
                                         <td>Callback to invoke when items are selected within source list.</td>
                                     </tr>
                                     <tr>
-                                        <td>onTargetSelect</td>
+                                        <td>onTargetSelectionChange</td>
                                         <td>event.originalEvent: Browser event <br />
                                 items: Selected items array</td>
                                         <td>Callback to invoke when items are selected within target list.</td>
@@ -487,9 +507,9 @@ import { PickList } from 'primereact/picklist';
 
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="PickListDemo" sources={this.sources} service="ProductService" data="products-small" extFiles={this.extFiles} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'PickListDemo', sources: this.sources, service: 'ProductService', data: 'products-small', extFiles: this.extFiles })
+                    }
                 </TabView>
             </div>
         );

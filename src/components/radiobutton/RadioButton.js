@@ -1,12 +1,13 @@
-import React, {Component} from 'react';
+import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import {tip} from "../tooltip/Tooltip";
+import { classNames } from '../utils/ClassNames';
+import { tip } from '../tooltip/Tooltip';
 
 export class RadioButton extends Component {
 
     static defaultProps = {
         id: null,
+        inputRef: null,
         inputId: null,
         name: null,
         value: null,
@@ -24,7 +25,9 @@ export class RadioButton extends Component {
 
     static propTypes = {
         id: PropTypes.string,
+        inputRef: PropTypes.any,
         inputId: PropTypes.string,
+        name: PropTypes.string,
         value: PropTypes.any,
         checked: PropTypes.bool,
         style: PropTypes.object,
@@ -32,10 +35,10 @@ export class RadioButton extends Component {
         disabled: PropTypes.bool,
         required: PropTypes.bool,
         tabIndex: PropTypes.number,
-        onChange: PropTypes.func,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
-        ariaLabelledBy: PropTypes.string
+        ariaLabelledBy: PropTypes.string,
+        onChange: PropTypes.func
     };
 
     constructor(props) {
@@ -45,10 +48,12 @@ export class RadioButton extends Component {
         this.onClick = this.onClick.bind(this);
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
+
+        this.inputRef = createRef(this.props.inputRef);
     }
 
     select(e) {
-        this.input.checked = true;
+        this.inputRef.current.checked = true;
         this.onClick(e);
     }
 
@@ -68,8 +73,8 @@ export class RadioButton extends Component {
                 }
             });
 
-            this.input.checked = !this.props.checked;
-            this.input.focus();
+            this.inputRef.current.checked = !this.props.checked;
+            this.inputRef.current.focus();
         }
     }
 
@@ -81,16 +86,31 @@ export class RadioButton extends Component {
         this.setState({focused: false});
     }
 
+    updateInputRef() {
+        let ref = this.props.inputRef;
+
+        if (ref) {
+            if (typeof ref === 'function') {
+                ref(this.inputRef.current);
+            }
+            else {
+                ref.current = this.inputRef.current;
+            }
+        }
+    }
+
     componentDidMount() {
+        this.updateInputRef();
+
         if (this.props.tooltip) {
             this.renderTooltip();
         }
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.tooltip !== this.props.tooltip) {
+        if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
             if (this.tooltip)
-                this.tooltip.updateContent(this.props.tooltip);
+                this.tooltip.update({ content: this.props.tooltip, ...(this.props.tooltipOptions || {}) });
             else
                 this.renderTooltip();
         }
@@ -112,8 +132,8 @@ export class RadioButton extends Component {
     }
 
     render() {
-        if (this.input) {
-            this.input.checked = this.props.checked;
+        if (this.inputRef && this.inputRef.current) {
+            this.inputRef.current.checked = this.props.checked;
         }
 
         let containerClass = classNames('p-radiobutton p-component', {
@@ -130,7 +150,7 @@ export class RadioButton extends Component {
         return (
             <div ref={(el) => this.element = el} id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick}>
                 <div className="p-hidden-accessible">
-                    <input id={this.props.inputId} ref={(el) => this.input = el} type="radio" aria-labelledby={this.props.ariaLabelledBy} name={this.props.name} defaultChecked={this.props.checked}
+                    <input ref={this.inputRef} id={this.props.inputId} type="radio" aria-labelledby={this.props.ariaLabelledBy} name={this.props.name} defaultChecked={this.props.checked}
                         onFocus={this.onFocus} onBlur={this.onBlur} disabled={this.props.disabled} required={this.props.required} tabIndex={this.props.tabIndex}/>
                 </div>
                 <div className={boxClass} ref={(el) => { this.box = el; }} role="radio" aria-checked={this.props.checked}>

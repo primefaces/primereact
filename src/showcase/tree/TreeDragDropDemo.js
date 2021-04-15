@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Tree } from '../../components/tree/Tree';
 import { NodeService } from '../service/NodeService';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class TreeDragDropDemo extends Component {
 
@@ -28,6 +29,7 @@ export class TreeDragDropDemo extends Component {
                         <h1>Tree <span>DragDrop</span></h1>
                         <p>Nodes can be reordered using drag and drop.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="tree/TreeDragDropDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -141,11 +143,11 @@ const TreeDragDropDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="TreeDragDropDemo" sources={this.sources} service="NodeService" data="treenodes" />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'TreeDragDropDemo', sources: this.sources, service: 'NodeService', data: 'treenodes' })
+                    }
                 </TabView>
             </div>
         );

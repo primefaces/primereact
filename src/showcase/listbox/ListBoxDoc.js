@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 
 export class ListBoxDoc extends Component {
 
@@ -23,7 +23,8 @@ export class ListBoxDemo extends Component {
 
         this.state = {
             selectedCity: null,
-            selectedCountries: null
+            selectedCountries: null,
+            selectedGroupedCity: null
         };
 
         this.cities = [
@@ -47,6 +48,36 @@ export class ListBoxDemo extends Component {
             {name: 'United States', code: 'US'}
         ];
 
+        this.groupedCities = [
+            {
+                label: 'Germany', code: 'DE',
+                items: [
+                    { label: 'Berlin', value: 'Berlin' },
+                    { label: 'Frankfurt', value: 'Frankfurt' },
+                    { label: 'Hamburg', value: 'Hamburg' },
+                    { label: 'Munich', value: 'Munich' }
+                ]
+            },
+            {
+                label: 'USA', code: 'US',
+                items: [
+                    { label: 'Chicago', value: 'Chicago' },
+                    { label: 'Los Angeles', value: 'Los Angeles' },
+                    { label: 'New York', value: 'New York' },
+                    { label: 'San Francisco', value: 'San Francisco' }
+                ]
+            },
+            {
+                label: 'Japan', code: 'JP',
+                items: [
+                    { label: 'Kyoto', value: 'Kyoto' },
+                    { label: 'Osaka', value: 'Osaka' },
+                    { label: 'Tokyo', value: 'Tokyo' },
+                    { label: 'Yokohama', value: 'Yokohama' }
+                ]
+            }
+        ];
+
         this.countryTemplate = this.countryTemplate.bind(this);
     }
 
@@ -59,12 +90,25 @@ export class ListBoxDemo extends Component {
         );
     }
 
+    groupedItemTemplate(option) {
+        return (
+            <div className="p-d-flex p-ai-center country-item">
+                <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <div>{option.label}</div>
+            </div>
+        );
+    }
+
     render() {
         return (
             <div>
                 <div className="card">
                     <h5>Single</h5>
                     <ListBox value={this.state.selectedCity} options={this.cities} onChange={(e) => this.setState({selectedCity: e.value})} optionLabel="name" style={{width: '15rem'}} />
+
+                    <h5>Grouped</h5>
+                    <ListBox value={this.state.selectedGroupedCity} options={this.groupedCities} onChange={(e) => this.setState({ selectedGroupedCity: e.value })} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
+                        optionGroupTemplate={this.groupedItemTemplate} style={{ width: '15rem' }} listStyle={{ maxHeight: '250px' }}/>
 
                     <h5>Advanced with Templating, Filtering and Multiple Selection</h5>
                     <ListBox value={this.state.selectedCountries} options={this.countries} onChange={(e) => this.setState({selectedCountries: e.value})} multiple filter optionLabel="name"
@@ -85,6 +129,7 @@ import { ListBox } from 'primereact/listbox';
 const ListBoxDemo = () => {
     const [selectedCity, setSelectedCity] = useState(null);
     const [selectedCountries, setSelectedCountries] = useState(null);
+    const [selectedGroupedCity, setSelectedGroupedCity] = useState(null);
     const cities = [
         {name: 'New York', code: 'NY'},
         {name: 'Rome', code: 'RM'},
@@ -104,6 +149,35 @@ const ListBoxDemo = () => {
         {name: 'Spain', code: 'ES'},
         {name: 'United States', code: 'US'}
     ];
+    const groupedCities = [
+        {
+            label: 'Germany', code: 'DE',
+            items: [
+                { label: 'Berlin', value: 'Berlin' },
+                { label: 'Frankfurt', value: 'Frankfurt' },
+                { label: 'Hamburg', value: 'Hamburg' },
+                { label: 'Munich', value: 'Munich' }
+            ]
+        },
+        {
+            label: 'USA', code: 'US',
+            items: [
+                { label: 'Chicago', value: 'Chicago' },
+                { label: 'Los Angeles', value: 'Los Angeles' },
+                { label: 'New York', value: 'New York' },
+                { label: 'San Francisco', value: 'San Francisco' }
+            ]
+        },
+        {
+            label: 'Japan', code: 'JP',
+            items: [
+                { label: 'Kyoto', value: 'Kyoto' },
+                { label: 'Osaka', value: 'Osaka' },
+                { label: 'Tokyo', value: 'Tokyo' },
+                { label: 'Yokohama', value: 'Yokohama' }
+            ]
+        }
+    ];
 
     const countryTemplate = (option) => {
         return (
@@ -114,11 +188,24 @@ const ListBoxDemo = () => {
         );
     }
 
+    const groupedItemTemplate = (option) => {
+        return (
+            <div className="p-d-flex p-ai-center country-item">
+                <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <div>{option.label}</div>
+            </div>
+        );
+    }
+
     return (
         <div>
             <div className="card">
                 <h5>Single</h5>
                 <ListBox value={selectedCity} options={cities} onChange={(e) => setSelectedCity(e.value)} optionLabel="name" style={{width: '15rem'}} />
+
+                <h5>Grouped</h5>
+                <ListBox value={selectedGroupedCity} options={groupedCities} onChange={(e) => setSelectedGroupedCity(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
+                    optionGroupTemplate={groupedItemTemplate} style={{ width: '15rem' }} listStyle={{ maxHeight: '250px' }}/>
 
                 <h5>Advanced with Templating, Filtering and Multiple Selection</h5>
                 <ListBox value={selectedCountries} options={countries} onChange={(e) => setSelectedCountries(e.value)} multiple filter optionLabel="name"
@@ -138,6 +225,7 @@ import { ListBox } from 'primereact/listbox';
 const ListBoxDemo = () => {
     const [selectedCity, setSelectedCity] = useState(null);
     const [selectedCountries, setSelectedCountries] = useState(null);
+    const [selectedGroupedCity, setSelectedGroupedCity] = useState(null);
     const cities = [
         {name: 'New York', code: 'NY'},
         {name: 'Rome', code: 'RM'},
@@ -157,6 +245,35 @@ const ListBoxDemo = () => {
         {name: 'Spain', code: 'ES'},
         {name: 'United States', code: 'US'}
     ];
+    const groupedCities = [
+        {
+            label: 'Germany', code: 'DE',
+            items: [
+                { label: 'Berlin', value: 'Berlin' },
+                { label: 'Frankfurt', value: 'Frankfurt' },
+                { label: 'Hamburg', value: 'Hamburg' },
+                { label: 'Munich', value: 'Munich' }
+            ]
+        },
+        {
+            label: 'USA', code: 'US',
+            items: [
+                { label: 'Chicago', value: 'Chicago' },
+                { label: 'Los Angeles', value: 'Los Angeles' },
+                { label: 'New York', value: 'New York' },
+                { label: 'San Francisco', value: 'San Francisco' }
+            ]
+        },
+        {
+            label: 'Japan', code: 'JP',
+            items: [
+                { label: 'Kyoto', value: 'Kyoto' },
+                { label: 'Osaka', value: 'Osaka' },
+                { label: 'Tokyo', value: 'Tokyo' },
+                { label: 'Yokohama', value: 'Yokohama' }
+            ]
+        }
+    ];
 
     const countryTemplate = (option) => {
         return (
@@ -167,11 +284,24 @@ const ListBoxDemo = () => {
         );
     }
 
+    const groupedItemTemplate = (option) => {
+        return (
+            <div className="p-d-flex p-ai-center country-item">
+                <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <div>{option.label}</div>
+            </div>
+        );
+    }
+
     return (
         <div>
             <div className="card">
                 <h5>Single</h5>
                 <ListBox value={selectedCity} options={cities} onChange={(e) => setSelectedCity(e.value)} optionLabel="name" style={{width: '15rem'}} />
+
+                <h5>Grouped</h5>
+                <ListBox value={selectedGroupedCity} options={groupedCities} onChange={(e) => setSelectedGroupedCity(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
+                    optionGroupTemplate={groupedItemTemplate} style={{ width: '15rem' }} listStyle={{ maxHeight: '250px' }}/>
 
                 <h5>Advanced with Templating, Filtering and Multiple Selection</h5>
                 <ListBox value={selectedCountries} options={countries} onChange={(e) => setSelectedCountries(e.value)} multiple filter optionLabel="name"
@@ -191,7 +321,7 @@ const ListBoxDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
     <TabView>
         <TabPanel header="Documentation">
 
@@ -223,7 +353,7 @@ const citySelectItems = [
 
 <CodeHighlight>
 {`
-<Listbox value={this.state.city} options={citySelectItems} onChange={(e) => this.setState({city: e.value})} />
+<ListBox value={city} options={citySelectItems} onChange={(e) => setCity(e.value)} />
 `}
 </CodeHighlight>
 
@@ -242,8 +372,8 @@ const cities = [
 
             <CodeHighlight>
 {`
-<Listbox optionLabel="name" value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})} />
-<Listbox optionLabel="name" optionValue="code" value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})} />
+<ListBox optionLabel="name" value={city} options={cities} onChange={(e) => setCity(e.value)} />
+<ListBox optionLabel="name" optionValue="code" value={city} options={cities} onChange={(e) => setCity(e.value)} />
 `}
             </CodeHighlight>
             <p>When <i>optionValue</i> is not defined, value of an option refers to the option object itself.</p>
@@ -255,16 +385,16 @@ const cities = [
 
 <CodeHighlight>
 {`
-<Listbox value={this.state.cities} options={cities} onChange={(e) => this.setState({city: e.value})} multiple />
+<ListBox value={cities} options={cities} onChange={(e) => setCity(e.value)} multiple />
 `}
 </CodeHighlight>
 
             <h5>Custom Content</h5>
-            <p>Label of an option is used as the display text of an item by default, for custom content support define an itemTemplate function that gets the option as a parameter and returns the content.</p>
+            <p>Label of an option is used as the display text of an item by default, for custom content support define an itemTemplate property. Its value can be JSXElement, function or string.</p>
 
 <CodeHighlight>
 {`
-<Listbox value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})} itemTemplate={this.itemTemplate} />
+<ListBox value={city} options={cities} onChange={(e) => setCity(e.value)} itemTemplate={itemTemplate} />
 `}
 </CodeHighlight>
 
@@ -278,11 +408,54 @@ itemTemplate(option) {
             <h5>Filtering</h5>
             <p>Options can be filtered using an input field in the overlay by enabling the <i>filter</i> property. By default filtering is done against
             label of the items and <i>filterBy</i> property is available to choose one or more properties of the options. In addition <i>filterMatchMode</i> can be utilized
-            to define the filtering algorithm, valid options are "contains" (default), "startsWith", "endsWith", "equals" and "notEquals".</p>
+            to define the filtering algorithm, valid options are "contains" (default), "startsWith", "endsWith", "equals" and "notEquals".
+            Also, the <i>filterValue</i> and <i>onFilterValueChange</i> properties can be used to control the filter value.</p>
 
 <CodeHighlight>
 {`
-<Listbox value={this.state.city} options={cities} onChange={(e) => this.setState({city: e.value})} filter />
+<ListBox value={city} options={cities} onChange={(e) => setCity(e.value)} filter />
+`}
+</CodeHighlight>
+
+            <h5>Grouping</h5>
+			<p>Options groups are specified with the <i>optionGroupLabel</i> and <i>optionGroupChildren</i> properties.</p>
+<CodeHighlight>
+{`
+const groupedCities = [
+    {
+        label: 'Germany', code: 'DE',
+        items: [
+            { label: 'Berlin', value: 'Berlin' },
+            { label: 'Frankfurt', value: 'Frankfurt' },
+            { label: 'Hamburg', value: 'Hamburg' },
+            { label: 'Munich', value: 'Munich' }
+        ]
+    },
+    {
+        label: 'USA', code: 'US',
+        items: [
+            { label: 'Chicago', value: 'Chicago' },
+            { label: 'Los Angeles', value: 'Los Angeles' },
+            { label: 'New York', value: 'New York' },
+            { label: 'San Francisco', value: 'San Francisco' }
+        ]
+    },
+    {
+        label: 'Japan', code: 'JP',
+        items: [
+            { label: 'Kyoto', value: 'Kyoto' },
+            { label: 'Osaka', value: 'Osaka' },
+            { label: 'Tokyo', value: 'Tokyo' },
+            { label: 'Yokohama', value: 'Yokohama' }
+        ]
+    }
+];
+`}
+</CodeHighlight>
+
+<CodeHighlight>
+{`
+<ListBox value={selectedGroupedCity} options={groupedCities} onChange={(e) => setSelectedGroupedCity(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items" />
 `}
 </CodeHighlight>
 
@@ -375,10 +548,34 @@ itemTemplate(option) {
                             <td>Name of the value field of an option when arbitrary objects are used as options instead of SelectItems.</td>
                         </tr>
                         <tr>
-                            <td>itemTemplate</td>
-                            <td>function</td>
+                            <td>optionDisabled</td>
+                            <td>boolean</td>
                             <td>null</td>
-                            <td>Function that gets the option and returns the content for it.</td>
+                            <td>Property name or getter function to use as the disabled flag of an option, defaults to false when not defined.</td>
+                        </tr>
+                        <tr>
+                            <td>optionGroupLabel</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Property name or getter function to use as the label of an option group.</td>
+                        </tr>
+                        <tr>
+                            <td>optionGroupChildren</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Property name or getter function that refers to the children options of option group.</td>
+                        </tr>
+                        <tr>
+                            <td>itemTemplate</td>
+                            <td>any</td>
+                            <td>null</td>
+                            <td>Custom template for the items.</td>
+                        </tr>
+                        <tr>
+                            <td>optionGroupTemplate</td>
+                            <td>any</td>
+                            <td>null</td>
+                            <td>Template of an option group item.</td>
                         </tr>
                         <tr>
                             <td>style</td>
@@ -442,6 +639,12 @@ itemTemplate(option) {
                             <td>When filtering is enabled, filterBy decides which field or fields (comma separated) to search against.</td>
                         </tr>
                         <tr>
+                            <td>filterValue</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>When specified, filter displays with this value.</td>
+                        </tr>
+                        <tr>
                             <td>filterMatchMode</td>
                             <td>string</td>
                             <td>contains</td>
@@ -461,7 +664,7 @@ itemTemplate(option) {
                         </tr>
                         <tr>
                             <td>tabIndex</td>
-                            <td>string</td>
+                            <td>number</td>
                             <td>null</td>
                             <td>Index of the element in tabbing order.</td>
                         </tr>
@@ -498,6 +701,13 @@ itemTemplate(option) {
                                 event.value: Single value or an array of values depending on the selection mode <br/>
                             </td>
                             <td>Callback to invoke when value of listbox changes.</td>
+                        </tr>
+                        <tr>
+                            <td>onFilterValueChange</td>
+                            <td>event.originalEvent: Browser event <br/>
+                                event.value: the filtered value <br/>
+                            </td>
+                            <td>Callback to invoke when filter value changes.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -542,9 +752,9 @@ itemTemplate(option) {
             <p>None.</p>
         </TabPanel>
 
-        <TabPanel header="Source">
-            <LiveEditor name="ListBoxDemo" sources={this.sources} />
-        </TabPanel>
+        {
+            useLiveEditorTabs({ name: 'ListBoxDemo', sources: this.sources })
+        }
     </TabView>
 </div>
         );

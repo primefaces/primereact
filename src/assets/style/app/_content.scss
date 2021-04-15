@@ -37,6 +37,12 @@
             }
         }
 
+        .app-demoactions {
+            .p-button-icon-only {
+                padding: .5rem 0;
+            }
+        }
+
         &.implementation {
             background-color: var(--surface-b);
             color: var(--text-color);
@@ -125,7 +131,7 @@
                         &.p-highlight:hover a {
                             background: transparent;
                             color: var(--primary-color);
-                            border-bottom: 1px solid $linkColor;
+                            border-bottom: 1px solid var(--primary-color);
                         }
 
                         &:not(.p-highlight):not(.p-disabled):hover a {

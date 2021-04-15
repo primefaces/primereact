@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
 import {InputText} from '../inputtext/InputText';
 
@@ -64,7 +64,7 @@ export class TreeTableHeader extends Component {
 
                 this.props.onSort({
                     originalEvent: event,
-                    sortField: column.props.field,
+                    sortField: column.props.sortField || column.props.field,
                     sortFunction: column.props.sortFunction,
                     sortable: column.props.sortable
                 });
@@ -126,7 +126,7 @@ export class TreeTableHeader extends Component {
                     matchMode: column.props.filterMatchMode
                 });
                 this.filterTimeout = null;
-            }, this.filterDelay);
+            }, this.props.filterDelay);
         }
     }
 
@@ -277,7 +277,7 @@ export class TreeTableHeader extends Component {
                 return (
                     <tr>{columns.map((col, i) => this.renderHeaderCell(col, {index: i, filterOnly: false, renderFilter: false}))}</tr>
                 );
-            }            
+            }
         }
         else {
             return null;

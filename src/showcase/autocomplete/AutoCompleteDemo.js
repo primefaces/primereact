@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AppDemoActions from '../../AppDemoActions';
 import { AutoComplete } from '../../components/autocomplete/AutoComplete';
 import { CountryService } from '../service/CountryService';
 import { AutoCompleteDoc } from './AutoCompleteDoc';
@@ -12,13 +13,47 @@ export class AutoCompleteDemo extends Component {
             countries: [],
             selectedCountry1: null,
             selectedCountry2: null,
+            selectedCity: null,
             selectedCountries: null,
-            filteredCountries: null
+            filteredCountries: null,
+            filteredCities: null
         };
 
         this.searchCountry = this.searchCountry.bind(this);
+        this.searchCity = this.searchCity.bind(this);
         this.itemTemplate = this.itemTemplate.bind(this);
+        this.groupedItemTemplate = this.groupedItemTemplate.bind(this);
         this.countryservice = new CountryService();
+
+        this.groupedCities = [
+            {
+                label: 'Germany', code: 'DE',
+                items: [
+                    { label: 'Berlin', value: 'Berlin' },
+                    { label: 'Frankfurt', value: 'Frankfurt' },
+                    { label: 'Hamburg', value: 'Hamburg' },
+                    { label: 'Munich', value: 'Munich' }
+                ]
+            },
+            {
+                label: 'USA', code: 'US',
+                items: [
+                    { label: 'Chicago', value: 'Chicago' },
+                    { label: 'Los Angeles', value: 'Los Angeles' },
+                    { label: 'New York', value: 'New York' },
+                    { label: 'San Francisco', value: 'San Francisco' }
+                ]
+            },
+            {
+                label: 'Japan', code: 'JP',
+                items: [
+                    { label: 'Kyoto', value: 'Kyoto' },
+                    { label: 'Osaka', value: 'Osaka' },
+                    { label: 'Tokyo', value: 'Tokyo' },
+                    { label: 'Yokohama', value: 'Yokohama' }
+                ]
+            }
+        ];
     }
 
     componentDidMount() {
@@ -41,11 +76,34 @@ export class AutoCompleteDemo extends Component {
         }, 250);
     }
 
+    searchCity(event) {
+        let query = event.query;
+        let filteredCities = [];
+
+        for (let country of this.groupedCities) {
+            let filteredItems = country.items.filter((item) => item.label.toLowerCase().indexOf(query.toLowerCase()) !== -1);
+            if (filteredItems && filteredItems.length) {
+                filteredCities.push({...country, ...{items: filteredItems}});
+            }
+        }
+
+        this.setState({ filteredCities });
+    }
+
     itemTemplate(item) {
         return (
             <div className="country-item">
-                <img alt={item.name} src={`showcase/demo/images/flag_placeholder.png`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={`flag flag-${item.code.toLowerCase()}`} />
+                <img alt={item.name} src={`showcase/demo/images/flag_placeholder.png`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={`flag flag-${item.code.toLowerCase()}`} />
                 <div>{item.name}</div>
+            </div>
+        );
+    }
+
+    groupedItemTemplate(item) {
+        return (
+            <div className="p-d-flex p-ai-center country-item">
+                <img alt={item.name} src={`showcase/demo/images/flag_placeholder.png`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={`flag flag-${item.code.toLowerCase()}`} />
+                <div>{item.label}</div>
             </div>
         );
     }
@@ -54,10 +112,11 @@ export class AutoCompleteDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="autoComplete" showInputStyle>
+                    <AppInlineHeader changelogText="autoComplete">
                         <h1>AutoComplete</h1>
                         <p>AutoComplete is an input component that provides real-time suggestions when being typed.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="autocomplete/AutoCompleteDemo.js"/>
                 </div>
 
                 <div className="content-section implementation">
@@ -65,8 +124,11 @@ export class AutoCompleteDemo extends Component {
                         <h5>Basic</h5>
                         <AutoComplete value={this.state.selectedCountry1} suggestions={this.state.filteredCountries} completeMethod={this.searchCountry} field="name" onChange={(e) => this.setState({ selectedCountry1: e.value })} />
 
-                        <h5>Dropdown and Templating</h5>
-                        <AutoComplete value={this.state.selectedCountry2} suggestions={this.state.filteredCountries} completeMethod={this.searchCountry} field="name" dropdown itemTemplate={this.itemTemplate} onChange={(e) => this.setState({ selectedCountry2: e.value })} />
+                        <h5>Grouped</h5>
+                        <AutoComplete value={this.state.selectedCity} suggestions={this.state.filteredCities} completeMethod={this.searchCity} field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={this.groupedItemTemplate} onChange={(e) => this.setState({ selectedCity: e.value })}/>
+
+                        <h5>Dropdown, Templating and Force Selection</h5>
+                        <AutoComplete value={this.state.selectedCountry2} suggestions={this.state.filteredCountries} completeMethod={this.searchCountry} field="name" dropdown forceSelection itemTemplate={this.itemTemplate} onChange={(e) => this.setState({ selectedCountry2: e.value })} />
 
                         <h5>Multiple</h5>
                         <span className="p-fluid">

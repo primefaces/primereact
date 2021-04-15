@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
 
 export class InputMaskDoc extends Component {
@@ -189,7 +189,7 @@ const InputMaskDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
                         <h5>Import</h5>
@@ -204,7 +204,7 @@ import { InputMask } from 'primereact/inputmask';
 
 <CodeHighlight>
 {`
-<InputMask mask="99-999999" value={this.state.value} onChange={(e) => this.setState({value: e.value})}></InputMask>
+<InputMask mask="99-999999" value={value} onChange={(e) => setValue(e.value)}></InputMask>
 `}
 </CodeHighlight>
 
@@ -225,7 +225,7 @@ import { InputMask } from 'primereact/inputmask';
 
 <CodeHighlight>
 {`
-<InputMask mask="a*-999-a999" value={this.state.value} onChange={(e) => this.setState({value: e.value})}></InputMask>
+<InputMask mask="a*-999-a999" value={value} onChange={(e) => setValue(e.value)}></InputMask>
 `}
 </CodeHighlight>
 
@@ -234,7 +234,7 @@ import { InputMask } from 'primereact/inputmask';
 
 <CodeHighlight>
 {`
-<InputMask mask="99/99/9999" value={this.state.value} slotChar="mm/dd/yyyy" onChange={(e) => this.setState({value: e.value})}></InputMask>
+<InputMask mask="99/99/9999" slotChar="mm/dd/yyyy" value={value} onChange={(e) => setValue(e.value)}></InputMask>
 `}
 </CodeHighlight>
 
@@ -246,7 +246,7 @@ import { InputMask } from 'primereact/inputmask';
 
 <CodeHighlight>
 {`
-<InputMask mask="(999) 999-9999? x99999" value={this.state.value} onChange={(e) => this.setState({value: e.value})}></InputMask>
+<InputMask mask="(999) 999-9999? x99999" value={value} onChange={(e) => setValue(e.value)}></InputMask>
 `}
 </CodeHighlight>
 
@@ -335,7 +335,7 @@ import { InputMask } from 'primereact/inputmask';
                                         <td>Maximum number of character allows in the input field.</td>
                                     </tr>
                                     <tr>
-                                        <td>tabindex</td>
+                                        <td>tabIndex</td>
                                         <td>number</td>
                                         <td>null</td>
                                         <td>Specifies tab order of the element.</td>
@@ -347,7 +347,7 @@ import { InputMask } from 'primereact/inputmask';
                                         <td>When present, it specifies that the element value cannot be altered.</td>
                                     </tr>
                                     <tr>
-                                        <td>readonly</td>
+                                        <td>readOnly</td>
                                         <td>boolean</td>
                                         <td>false</td>
                                         <td>When present, it specifies that an input field is read-only.</td>
@@ -392,6 +392,16 @@ import { InputMask } from 'primereact/inputmask';
                                 </thead>
                                 <tbody>
                                     <tr>
+                                        <td>onFocus</td>
+                                        <td>event: Browser event</td>
+                                        <td>Callback to invoke when input receives focus.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onBlur</td>
+                                        <td>event: Browser event</td>
+                                        <td>Callback to invoke when input loses focus.</td>
+                                    </tr>
+                                    <tr>
                                         <td>onComplete</td>
                                         <td>event: Browser event<br/>
                                             value: New value of the component</td>
@@ -414,9 +424,9 @@ import { InputMask } from 'primereact/inputmask';
                         <p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="InputMaskDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'InputMaskDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         );

@@ -1,26 +1,49 @@
 import * as React from 'react';
 
-interface TooltipProps {
-    target?: any;
-    content?: string;
-    className?: string;
-    style?: object;
-    appendTo?: object;
-    position?: string;
-    my?: string;
-    at?: string;
-    event?: string;
-    showEvent?: string;
-    hideEvent?: string;
-    autoZIndex?: boolean;
-    baseZIndex?: number;
-    mouseTrack?: boolean;
-    mouseTrackTop?: number;
-    mouseTrackLeft?: number;
-    onBeforeShow?(e: {originalEvent: Event, target: HTMLElement}): void;
-    onBeforeHide?(e: {originalEvent: Event, target: HTMLElement}): void;
-    onShow?(e: {originalEvent: Event, target: HTMLElement}): void;
-    onHide?(e: {originalEvent: Event, target: HTMLElement}): void;
+declare namespace Tooltip {
+
+    type PositionType = 'top' | 'bottom' | 'left' | 'right';
+
+    type TargetType = string | string[] | HTMLElement;
+
+    type TemplateType = React.ReactNode | ((props: TooltipProps) => React.ReactNode);
+
+    interface EventParams {
+        originalEvent: React.SyntheticEvent;
+        target: HTMLElement;
+    }
+
+    interface TooltipProps {
+        id?: string;
+        target?: TargetType;
+        content?: string;
+        disabled?: boolean;
+        className?: string;
+        style?: object;
+        appendTo?: HTMLElement | string;
+        position?: PositionType;
+        my?: string;
+        at?: string;
+        event?: string;
+        showEvent?: string;
+        hideEvent?: string;
+        autoZIndex?: boolean;
+        baseZIndex?: number;
+        mouseTrack?: boolean;
+        mouseTrackTop?: number;
+        mouseTrackLeft?: number;
+        showDelay?: number;
+        updateDelay?: number;
+        hideDelay?: number;
+        onBeforeShow?(e: EventParams): void;
+        onBeforeHide?(e: EventParams): void;
+        onShow?(e: EventParams): void;
+        onHide?(e: EventParams): void;
+    }
 }
 
-export class Tooltip extends React.Component<TooltipProps,any> {}
+export declare class Tooltip extends React.Component<Tooltip.TooltipProps, any> {
+    public updateTargetEvents(target: HTMLElement): void;
+    public loadTargetEvents(target: HTMLElement): void;
+    public unloadTargetEvents(target: HTMLElement): void;
+}

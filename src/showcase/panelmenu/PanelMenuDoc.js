@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 
 export class PanelMenuDoc extends Component {
 
@@ -428,7 +428,7 @@ const PanelMenuDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
                         <h5>Import</h5>
@@ -450,7 +450,7 @@ import { PanelMenu } from 'primereact/panelmenu';
 
 <CodeHighlight lang="js">
 {`
-const items:[
+const items = [
     {
        label:'File',
        icon:'pi pi-fw pi-file',
@@ -606,6 +606,18 @@ const items:[
                                         <td>null</td>
                                         <td>Style class of the component.</td>
                                     </tr>
+                                    <tr>
+                                        <td>multiple</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>Whether multiple tabs can be activated at the same time or not.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>transitionOptions</td>
+                                        <td>object</td>
+                                        <td>null</td>
+                                        <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -661,9 +673,9 @@ const items:[
                         <p>None.</p>
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="PanelMenuDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'PanelMenuDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         )

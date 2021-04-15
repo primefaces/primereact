@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 
 export class MessagesDoc extends Component {
 
@@ -108,7 +108,7 @@ export class MessagesDemo extends Component {
                     <div className="p-field p-fluid">
                         <label htmlFor="username2">Username</label>
                         <InputText id="username2" aria-describedby="username-help" className="p-invalid p-mr-2" />
-                        <small id="username-help" className="p-invalid">Username is not available.</small>
+                        <small id="username-help" className="p-error">Username is not available.</small>
                     </div>
                 </div>
             </div>
@@ -210,7 +210,7 @@ const MessagesDemo = () => {
                 <div className="p-field p-fluid">
                     <label htmlFor="username2">Username</label>
                     <InputText id="username2" aria-describedby="username-help" className="p-invalid p-mr-2" />
-                    <small id="username-help" className="p-invalid">Username is not available.</small>
+                    <small id="username-help" className="p-error">Username is not available.</small>
                 </div>
             </div>
         </div>
@@ -311,7 +311,7 @@ const MessagesDemo = () => {
                 <div className="p-field p-fluid">
                     <label htmlFor="username2">Username</label>
                     <InputText id="username2" aria-describedby="username-help" className="p-invalid p-mr-2" />
-                    <small id="username-help" className="p-invalid">Username is not available.</small>
+                    <small id="username-help" className="p-error">Username is not available.</small>
                 </div>
             </div>
         </div>
@@ -328,7 +328,7 @@ const MessagesDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
                         <h5>Import</h5>
@@ -347,13 +347,13 @@ import { Message } from 'primereact/message';
 
 <CodeHighlight>
 {`
-<Messages ref={(el) => this.messages = el}></Messages>
+<Messages ref={messages}></Messages>
 `}
 </CodeHighlight>
 
 <CodeHighlight lang="js">
 {`
-this.messages.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
+messages.current.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
 `}
 </CodeHighlight>
 
@@ -430,36 +430,36 @@ this.messages.show({severity: 'success', summary: 'Success Message', detail: 'Or
 
 <CodeHighlight>
 {`
-<Messages ref={(el) => this.messages = el}></Messages>
+<Messages ref={messages}></Messages>
 
-<Button onClick={this.showSuccess} label="Success" className="p-button-success" />
-<Button onClick={this.showInfo} label="Info" className="p-button-info" />
-<Button onClick={this.showWarn} label="Warn" className="p-button-warning" />
-<Button onClick={this.showError} label="Error" className="p-button-danger" />
-<Button onClick={this.showMultiple} label="Multiple" />
+<Button onClick={showSuccess} label="Success" className="p-button-success" />
+<Button onClick={showInfo} label="Info" className="p-button-info" />
+<Button onClick={showWarn} label="Warn" className="p-button-warning" />
+<Button onClick={showError} label="Error" className="p-button-danger" />
+<Button onClick={showMultiple} label="Multiple" />
 `}
 </CodeHighlight>
 
 <CodeHighlight lang="js">
 {`
-showSuccess() {
-    this.messages.show({ severity: 'success', summary: 'Success Message', detail: 'Order submitted' });
+const showSuccess = () => {
+    messages.current.show({ severity: 'success', summary: 'Success Message', detail: 'Order submitted' });
 }
 
-showInfo() {
-    this.messages.show({ severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks' });
+const showInfo = () => {
+    messages.current.show({ severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks' });
 }
 
-showWarn() {
-    this.messages.show({ severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes' });
+const showWarn = () => {
+    messages.current.show({ severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes' });
 }
 
-showError() {
-    this.messages.show({ severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
+const showError = () => {
+    messages.current.show({ severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
 }
 
-showMultiple() {
-    this.messages.show([
+const showMultiple = () => {
+    messages.current.show([
         {severity:'info', summary:'Message 1', detail:'PrimeReact rocks'},
         {severity:'info', summary:'Message 2', detail:'PrimeReact rocks'},
         {severity:'info', summary:'Message 3', detail:'PrimeFaces rocks'}
@@ -473,7 +473,7 @@ showMultiple() {
 
 <CodeHighlight lang="js">
 {`
-this.messages.clear();
+messages.current.clear();
 `}
 </CodeHighlight>
 
@@ -482,7 +482,7 @@ this.messages.clear();
 
 <CodeHighlight lang="js">
 {`
-this.messages.replace(newMessages);
+messages.current.replace(newMessages);
 `}
 </CodeHighlight>
 
@@ -491,7 +491,7 @@ this.messages.replace(newMessages);
 
 <CodeHighlight lang="js">
 {`
-this.messages.show({closable: false, severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
+messages.current.show({closable: false, severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
 `}
 </CodeHighlight>
 
@@ -502,10 +502,10 @@ this.messages.show({closable: false, severity: 'error', summary: 'Error Message'
 <CodeHighlight lang="js">
 {`
 //sticky
-this.messages.show({ sticky: true, severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
+messages.current.show({ sticky: true, severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
 
 //automatically removed after 5 seconds
-this.messages.show({ life: 5000, severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
+messages.current.show({ life: 5000, severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
 `}
 </CodeHighlight>
 
@@ -605,6 +605,12 @@ this.messages.show({ life: 5000, severity: 'error', summary: 'Error Message', de
                                         <td>null</td>
                                         <td>Inline style of the element.</td>
                                     </tr>
+                                    <tr>
+                                        <td>transitionOptions</td>
+                                        <td>object</td>
+                                        <td>null</td>
+                                        <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -692,9 +698,9 @@ this.messages.show({ life: 5000, severity: 'error', summary: 'Error Message', de
 
                     </TabPanel>
 
-                    <TabPanel header="Source">
-                        <LiveEditor name="MessagesDemo" sources={this.sources} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'MessagesDemo', sources: this.sources })
+                    }
                 </TabView>
             </div>
         );

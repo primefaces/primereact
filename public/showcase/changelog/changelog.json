@@ -1,4 +1,2664 @@
 {
+    "6.2.1": {
+        "autocomplete": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ],
+        "dialog": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ],
+        "calendar": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ],
+        "galleria": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ],
+        "cascadeselect": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ],
+        "colorpicker": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ],
+        "confirmpopup": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ],
+        "tooltip": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ],
+        "menu": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ],
+        "splitbutton": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ],
+        "contextmenu": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ],
+        "slidemenu": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ],
+        "password": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ],
+        "tieredmenu": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ],
+        "dropdown": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ],
+        "confirmdialog": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ],
+        "portal": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ],
+        "multiselect": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ],
+        "overlaypanel": [
+            {
+                "number": 1880,
+                "title": "Overlay Components throw an exception with Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/1880"
+            }
+        ]
+    },
+    "6.2.0": {
+        "utils": [
+            {
+                "number": 1869,
+                "title": "Server side error because OverlayEventBus",
+                "url": "https://github.com/primefaces/primereact/issues/1869"
+            },
+            {
+                "number": 1871,
+                "title": "Add option group support to Autocomplete",
+                "url": "https://github.com/primefaces/primereact/issues/1871"
+            },
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            },
+            {
+                "number": 1873,
+                "title": "Add option group support to MultiSelect",
+                "url": "https://github.com/primefaces/primereact/issues/1873"
+            }
+        ],
+        "autocomplete": [
+            {
+                "number": 1871,
+                "title": "Add option group support to Autocomplete",
+                "url": "https://github.com/primefaces/primereact/issues/1871"
+            },
+            {
+                "number": 1680,
+                "title": "Improve type definition of  completeMethod event on AutoComplete",
+                "url": "https://github.com/primefaces/primereact/issues/1680"
+            },
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            },
+            {
+                "number": 1875,
+                "title": "Set appendTo as body by default",
+                "url": "https://github.com/primefaces/primereact/issues/1875"
+            }
+        ],
+        "inplace": [
+            {
+                "number": 1861,
+                "title": "Improve close button style on Inplace",
+                "url": "https://github.com/primefaces/primereact/issues/1861"
+            }
+        ],
+        "cascadeselect": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            },
+            {
+                "number": 1875,
+                "title": "Set appendTo as body by default",
+                "url": "https://github.com/primefaces/primereact/issues/1875"
+            }
+        ],
+        "datatable": [
+            {
+                "number": 1870,
+                "title": "Datatable rows per page doesn't work",
+                "url": "https://github.com/primefaces/primereact/issues/1870"
+            }
+        ],
+        "treetable": [
+            {
+                "number": 1865,
+                "title": "Cell Editing doesn't work on child nodes in TreeTable",
+                "url": "https://github.com/primefaces/primereact/issues/1865"
+            }
+        ],
+        "sidebar": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            }
+        ],
+        "api": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            }
+        ],
+        "confirmpopup": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            }
+        ],
+        "contextmenu": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            },
+            {
+                "number": 1875,
+                "title": "Set appendTo as body by default",
+                "url": "https://github.com/primefaces/primereact/issues/1875"
+            }
+        ],
+        "dropdown": [
+            {
+                "number": 1874,
+                "title": "Add option group support to Dropdown",
+                "url": "https://github.com/primefaces/primereact/issues/1874"
+            },
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            },
+            {
+                "number": 1875,
+                "title": "Set appendTo as body by default",
+                "url": "https://github.com/primefaces/primereact/issues/1875"
+            }
+        ],
+        "galleria": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            }
+        ],
+        "password": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            },
+            {
+                "number": 1854,
+                "title": "Ability to clear password (set value of password to blank)",
+                "url": "https://github.com/primefaces/primereact/issues/1854"
+            },
+            {
+                "number": 1875,
+                "title": "Set appendTo as body by default",
+                "url": "https://github.com/primefaces/primereact/issues/1875"
+            }
+        ],
+        "menubar": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            }
+        ],
+        "menu": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            },
+            {
+                "number": 1875,
+                "title": "Set appendTo as body by default",
+                "url": "https://github.com/primefaces/primereact/issues/1875"
+            }
+        ],
+        "colorpicker": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            },
+            {
+                "number": 1875,
+                "title": "Set appendTo as body by default",
+                "url": "https://github.com/primefaces/primereact/issues/1875"
+            }
+        ],
+        "tieredmenu": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            },
+            {
+                "number": 1875,
+                "title": "Set appendTo as body by default",
+                "url": "https://github.com/primefaces/primereact/issues/1875"
+            }
+        ],
+        "dialog": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            },
+            {
+                "number": 1875,
+                "title": "Set appendTo as body by default",
+                "url": "https://github.com/primefaces/primereact/issues/1875"
+            }
+        ],
+        "listbox": [
+            {
+                "number": 1872,
+                "title": "Add option group support to Listbox",
+                "url": "https://github.com/primefaces/primereact/issues/1872"
+            }
+        ],
+        "overlaypanel": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            },
+            {
+                "number": 1875,
+                "title": "Set appendTo as body by default",
+                "url": "https://github.com/primefaces/primereact/issues/1875"
+            }
+        ],
+        "scrolltop": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            }
+        ],
+        "splitbutton": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            },
+            {
+                "number": 1875,
+                "title": "Set appendTo as body by default",
+                "url": "https://github.com/primefaces/primereact/issues/1875"
+            }
+        ],
+        "calendar": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            },
+            {
+                "number": 1875,
+                "title": "Set appendTo as body by default",
+                "url": "https://github.com/primefaces/primereact/issues/1875"
+            }
+        ],
+        "multiselect": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            },
+            {
+                "number": 1875,
+                "title": "Set appendTo as body by default",
+                "url": "https://github.com/primefaces/primereact/issues/1875"
+            },
+            {
+                "number": 1873,
+                "title": "Add option group support to MultiSelect",
+                "url": "https://github.com/primefaces/primereact/issues/1873"
+            }
+        ],
+        "slidemenu": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            },
+            {
+                "number": 1875,
+                "title": "Set appendTo as body by default",
+                "url": "https://github.com/primefaces/primereact/issues/1875"
+            }
+        ],
+        "tooltip": [
+            {
+                "number": 1878,
+                "title": "Add zIndex options to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1878"
+            }
+        ]
+    },
+    "6.1.0": {
+        "overlaypanel": [
+            {
+                "number": 1856,
+                "title": "Add breakpoints property to Dialog, ConfirmDialog and OverlayPanel",
+                "url": "https://github.com/primefaces/primereact/issues/1856"
+            },
+            {
+                "number": 1832,
+                "title": "Improve the interaction of nested overlays",
+                "url": "https://github.com/primefaces/primereact/issues/1832"
+            }
+        ],
+        "confirmdialog": [
+            {
+                "number": 1856,
+                "title": "Add breakpoints property to Dialog, ConfirmDialog and OverlayPanel",
+                "url": "https://github.com/primefaces/primereact/issues/1856"
+            }
+        ],
+        "dialog": [
+            {
+                "number": 1856,
+                "title": "Add breakpoints property to Dialog, ConfirmDialog and OverlayPanel",
+                "url": "https://github.com/primefaces/primereact/issues/1856"
+            },
+            {
+                "number": 1616,
+                "title": "Add draggable and resizable features to Dialog",
+                "url": "https://github.com/primefaces/primereact/issues/1616"
+            },
+            {
+                "number": 862,
+                "title": "Accessibility issues in Tooltip and Dialog components",
+                "url": "https://github.com/primefaces/primereact/issues/862"
+            }
+        ],
+        "panel": [
+            {
+                "number": 1858,
+                "title": "Add headerTemplate property to Panel",
+                "url": "https://github.com/primefaces/primereact/issues/1858"
+            }
+        ],
+        "panelmenu": [
+            {
+                "number": 1846,
+                "title": "Add multiple property to PanelMenu",
+                "url": "https://github.com/primefaces/primereact/issues/1846"
+            },
+            {
+                "number": 1844,
+                "title": "PanelMenu animation is not working as expected",
+                "url": "https://github.com/primefaces/primereact/issues/1844"
+            },
+            {
+                "number": 1434,
+                "title": "Disabling a Menu Item doesnt add aria-disabled label",
+                "url": "https://github.com/primefaces/primereact/issues/1434"
+            },
+            {
+                "number": 1011,
+                "title": "PanelMenu collapses on clicking the menu link instead of being in expanded state",
+                "url": "https://github.com/primefaces/primereact/issues/1011"
+            }
+        ],
+        "datatable": [
+            {
+                "number": 1855,
+                "title": "DataTable is not working with defaultSortOrder={-1}",
+                "url": "https://github.com/primefaces/primereact/issues/1855"
+            },
+            {
+                "number": 1853,
+                "title": "Add selectionOnly options to CSV export on DataTable",
+                "url": "https://github.com/primefaces/primereact/issues/1853"
+            },
+            {
+                "number": 1832,
+                "title": "Improve the interaction of nested overlays",
+                "url": "https://github.com/primefaces/primereact/issues/1832"
+            },
+            {
+                "number": 1839,
+                "title": "Improve template option on Paginator",
+                "url": "https://github.com/primefaces/primereact/issues/1839"
+            },
+            {
+                "number": 1820,
+                "title": "When the 'rows' property changes, Pagination component does not update",
+                "url": "https://github.com/primefaces/primereact/issues/1820"
+            },
+            {
+                "number": 1817,
+                "title": "Improve checkbox selection on DataTable",
+                "url": "https://github.com/primefaces/primereact/issues/1817"
+            },
+            {
+                "number": 1292,
+                "title": "TreeTable/DataTable goes to edit mode when selected (single click)",
+                "url": "https://github.com/primefaces/primereact/issues/1292"
+            },
+            {
+                "number": 1440,
+                "title": "DataTable/TreeTable: implement configurable filterDelay",
+                "url": "https://github.com/primefaces/primereact/issues/1440"
+            },
+            {
+                "number": 1828,
+                "title": "Editing DataTable and TreeTable are not working as expected on React/ReactDOM ^17.0.1",
+                "url": "https://github.com/primefaces/primereact/issues/1828"
+            },
+            {
+                "number": 589,
+                "title": "Add onBeforeEditorShow and onBeforeEditorHide callbacks to Column on DataTable with cell editing",
+                "url": "https://github.com/primefaces/primereact/issues/589"
+            },
+            {
+                "number": 1098,
+                "title": "DataTable csv export fails in chrome but is working in IE",
+                "url": "https://github.com/primefaces/primereact/issues/1098"
+            },
+            {
+                "number": 1813,
+                "title": "DataTable - accessibility of sorting buttons",
+                "url": "https://github.com/primefaces/primereact/issues/1813"
+            },
+            {
+                "number": 1135,
+                "title": "Trigger row editing on datatable programmatically",
+                "url": "https://github.com/primefaces/primereact/issues/1135"
+            },
+            {
+                "number": 921,
+                "title": "Accessibility of the DataTable expander cell button",
+                "url": "https://github.com/primefaces/primereact/issues/921"
+            },
+            {
+                "number": 1162,
+                "title": "Change row navigation structure on DataTable with selection",
+                "url": "https://github.com/primefaces/primereact/issues/1162"
+            },
+            {
+                "number": 1840,
+                "title": "Add paginatorClassName to DataTable, TreeTable and DataView",
+                "url": "https://github.com/primefaces/primereact/issues/1840"
+            }
+        ],
+        "avatar": [
+            {
+                "number": 1819,
+                "title": "Add onClick event to Avatar",
+                "url": "https://github.com/primefaces/primereact/issues/1819"
+            }
+        ],
+        "colorpicker": [
+            {
+                "number": 1857,
+                "title": "Add touch support to ColorPicker",
+                "url": "https://github.com/primefaces/primereact/issues/1857"
+            },
+            {
+                "number": 1832,
+                "title": "Improve the interaction of nested overlays",
+                "url": "https://github.com/primefaces/primereact/issues/1832"
+            },
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            }
+        ],
+        "treetable": [
+            {
+                "number": 1275,
+                "title": "Add removableSort property on TreeTable component",
+                "url": "https://github.com/primefaces/primereact/issues/1275"
+            },
+            {
+                "number": 1832,
+                "title": "Improve the interaction of nested overlays",
+                "url": "https://github.com/primefaces/primereact/issues/1832"
+            },
+            {
+                "number": 1839,
+                "title": "Improve template option on Paginator",
+                "url": "https://github.com/primefaces/primereact/issues/1839"
+            },
+            {
+                "number": 1292,
+                "title": "TreeTable/DataTable goes to edit mode when selected (single click)",
+                "url": "https://github.com/primefaces/primereact/issues/1292"
+            },
+            {
+                "number": 1440,
+                "title": "DataTable/TreeTable: implement configurable filterDelay",
+                "url": "https://github.com/primefaces/primereact/issues/1440"
+            },
+            {
+                "number": 1828,
+                "title": "Editing DataTable and TreeTable are not working as expected on React/ReactDOM ^17.0.1",
+                "url": "https://github.com/primefaces/primereact/issues/1828"
+            },
+            {
+                "number": 1840,
+                "title": "Add paginatorClassName to DataTable, TreeTable and DataView",
+                "url": "https://github.com/primefaces/primereact/issues/1840"
+            },
+            {
+                "number": 1859,
+                "title": "The toggler icon of Tree/TreeTable is not displaying correctly in mobile mode",
+                "url": "https://github.com/primefaces/primereact/issues/1859"
+            }
+        ],
+        "confirmpopup": [
+            {
+                "number": 1832,
+                "title": "Improve the interaction of nested overlays",
+                "url": "https://github.com/primefaces/primereact/issues/1832"
+            }
+        ],
+        "tieredmenu": [
+            {
+                "number": 1832,
+                "title": "Improve the interaction of nested overlays",
+                "url": "https://github.com/primefaces/primereact/issues/1832"
+            },
+            {
+                "number": 1434,
+                "title": "Disabling a Menu Item doesnt add aria-disabled label",
+                "url": "https://github.com/primefaces/primereact/issues/1434"
+            }
+        ],
+        "splitbutton": [
+            {
+                "number": 1832,
+                "title": "Improve the interaction of nested overlays",
+                "url": "https://github.com/primefaces/primereact/issues/1832"
+            },
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            }
+        ],
+        "autocomplete": [
+            {
+                "number": 1832,
+                "title": "Improve the interaction of nested overlays",
+                "url": "https://github.com/primefaces/primereact/issues/1832"
+            },
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            },
+            {
+                "number": 1808,
+                "title": "Dropdown menu is separate from the input field",
+                "url": "https://github.com/primefaces/primereact/issues/1808"
+            }
+        ],
+        "calendar": [
+            {
+                "number": 1832,
+                "title": "Improve the interaction of nested overlays",
+                "url": "https://github.com/primefaces/primereact/issues/1832"
+            },
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            },
+            {
+                "number": 765,
+                "title": "Add mask property to Calendar",
+                "url": "https://github.com/primefaces/primereact/issues/765"
+            }
+        ],
+        "cascadeselect": [
+            {
+                "number": 1832,
+                "title": "Improve the interaction of nested overlays",
+                "url": "https://github.com/primefaces/primereact/issues/1832"
+            },
+            {
+                "number": 1833,
+                "title": "CascadeSelect is not working with appendTo property",
+                "url": "https://github.com/primefaces/primereact/issues/1833"
+            }
+        ],
+        "dropdown": [
+            {
+                "number": 1832,
+                "title": "Improve the interaction of nested overlays",
+                "url": "https://github.com/primefaces/primereact/issues/1832"
+            },
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            },
+            {
+                "number": 1081,
+                "title": "Add showFilterClear proprty to Dropdown",
+                "url": "https://github.com/primefaces/primereact/issues/1081"
+            }
+        ],
+        "menu": [
+            {
+                "number": 1832,
+                "title": "Improve the interaction of nested overlays",
+                "url": "https://github.com/primefaces/primereact/issues/1832"
+            },
+            {
+                "number": 1434,
+                "title": "Disabling a Menu Item doesnt add aria-disabled label",
+                "url": "https://github.com/primefaces/primereact/issues/1434"
+            }
+        ],
+        "multiselect": [
+            {
+                "number": 1832,
+                "title": "Improve the interaction of nested overlays",
+                "url": "https://github.com/primefaces/primereact/issues/1832"
+            },
+            {
+                "number": 1841,
+                "title": "Add panelHeaderTemplate and panelFooterTemplate properties to MultiSelect",
+                "url": "https://github.com/primefaces/primereact/issues/1841"
+            },
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            },
+            {
+                "number": 1815,
+                "title": "[Multiselect] Feature request: Configure Maximum allowed number of items selectable in Multiselect",
+                "url": "https://github.com/primefaces/primereact/issues/1815"
+            }
+        ],
+        "overlayeventbus": [
+            {
+                "number": 1832,
+                "title": "Improve the interaction of nested overlays",
+                "url": "https://github.com/primefaces/primereact/issues/1832"
+            }
+        ],
+        "password": [
+            {
+                "number": 1832,
+                "title": "Improve the interaction of nested overlays",
+                "url": "https://github.com/primefaces/primereact/issues/1832"
+            },
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            }
+        ],
+        "slidemenu": [
+            {
+                "number": 1832,
+                "title": "Improve the interaction of nested overlays",
+                "url": "https://github.com/primefaces/primereact/issues/1832"
+            },
+            {
+                "number": 1434,
+                "title": "Disabling a Menu Item doesnt add aria-disabled label",
+                "url": "https://github.com/primefaces/primereact/issues/1434"
+            }
+        ],
+        "utils": [
+            {
+                "number": 1832,
+                "title": "Improve the interaction of nested overlays",
+                "url": "https://github.com/primefaces/primereact/issues/1832"
+            },
+            {
+                "number": 765,
+                "title": "Add mask property to Calendar",
+                "url": "https://github.com/primefaces/primereact/issues/765"
+            },
+            {
+                "number": 862,
+                "title": "Accessibility issues in Tooltip and Dialog components",
+                "url": "https://github.com/primefaces/primereact/issues/862"
+            }
+        ],
+        "toast": [
+            {
+                "number": 1805,
+                "title": "Add onClose callback to custom content on ToastMessage",
+                "url": "https://github.com/primefaces/primereact/issues/1805"
+            }
+        ],
+        "paginator": [
+            {
+                "number": 1839,
+                "title": "Improve template option on Paginator",
+                "url": "https://github.com/primefaces/primereact/issues/1839"
+            },
+            {
+                "number": 1820,
+                "title": "When the 'rows' property changes, Pagination component does not update",
+                "url": "https://github.com/primefaces/primereact/issues/1820"
+            }
+        ],
+        "tooltip": [
+            {
+                "number": 1811,
+                "title": "data-pr-{options} on Global Tooltip  doesn't work",
+                "url": "https://github.com/primefaces/primereact/issues/1811"
+            },
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            },
+            {
+                "number": 1827,
+                "title": "Add disabled option to Tooltip",
+                "url": "https://github.com/primefaces/primereact/issues/1827"
+            },
+            {
+                "number": 862,
+                "title": "Accessibility issues in Tooltip and Dialog components",
+                "url": "https://github.com/primefaces/primereact/issues/862"
+            }
+        ],
+        "dataview": [
+            {
+                "number": 1839,
+                "title": "Improve template option on Paginator",
+                "url": "https://github.com/primefaces/primereact/issues/1839"
+            },
+            {
+                "number": 1840,
+                "title": "Add paginatorClassName to DataTable, TreeTable and DataView",
+                "url": "https://github.com/primefaces/primereact/issues/1840"
+            }
+        ],
+        "button": [
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            }
+        ],
+        "checkbox": [
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            }
+        ],
+        "chips": [
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            }
+        ],
+        "inputmask": [
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            }
+        ],
+        "inputnumber": [
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            }
+        ],
+        "inputswitch": [
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            }
+        ],
+        "inputtext": [
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            },
+            {
+                "number": 1818,
+                "title": "InputText component reference returns Invalid prop forwardRef",
+                "url": "https://github.com/primefaces/primereact/issues/1818"
+            },
+            {
+                "number": 971,
+                "title": "Support for svg element in icon properties",
+                "url": "https://github.com/primefaces/primereact/issues/971"
+            }
+        ],
+        "inputtextarea": [
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            }
+        ],
+        "listbox": [
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            }
+        ],
+        "radiobutton": [
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            }
+        ],
+        "rating": [
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            }
+        ],
+        "selectbutton": [
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            }
+        ],
+        "togglebutton": [
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            }
+        ],
+        "tristatecheckbox": [
+            {
+                "number": 1806,
+                "title": "Tooltip does not disappear when components are disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1806"
+            }
+        ],
+        "menubar": [
+            {
+                "number": 1809,
+                "title": "Menubar and Toolbar, start/end wrong prop types, that don't accept JSX.Element type",
+                "url": "https://github.com/primefaces/primereact/issues/1809"
+            }
+        ],
+        "toolbar": [
+            {
+                "number": 1809,
+                "title": "Menubar and Toolbar, start/end wrong prop types, that don't accept JSX.Element type",
+                "url": "https://github.com/primefaces/primereact/issues/1809"
+            }
+        ],
+        "breadcrumb": [
+            {
+                "number": 1434,
+                "title": "Disabling a Menu Item doesnt add aria-disabled label",
+                "url": "https://github.com/primefaces/primereact/issues/1434"
+            }
+        ],
+        "contextmenu": [
+            {
+                "number": 1434,
+                "title": "Disabling a Menu Item doesnt add aria-disabled label",
+                "url": "https://github.com/primefaces/primereact/issues/1434"
+            }
+        ],
+        "megamenu": [
+            {
+                "number": 1434,
+                "title": "Disabling a Menu Item doesnt add aria-disabled label",
+                "url": "https://github.com/primefaces/primereact/issues/1434"
+            }
+        ],
+        "steps": [
+            {
+                "number": 1434,
+                "title": "Disabling a Menu Item doesnt add aria-disabled label",
+                "url": "https://github.com/primefaces/primereact/issues/1434"
+            }
+        ],
+        "tabmenu": [
+            {
+                "number": 1434,
+                "title": "Disabling a Menu Item doesnt add aria-disabled label",
+                "url": "https://github.com/primefaces/primereact/issues/1434"
+            }
+        ],
+        "picklist": [
+            {
+                "number": 1814,
+                "title": "PickList: Move Up (Single) and Move Down buttons are not working",
+                "url": "https://github.com/primefaces/primereact/issues/1814"
+            }
+        ],
+        "menuitem": [
+            {
+                "number": 1823,
+                "title": "MenuItem interface missing template property",
+                "url": "https://github.com/primefaces/primereact/issues/1823"
+            }
+        ],
+        "slider": [
+            {
+                "number": 694,
+                "title": "Keyboard Accessibility for Slider",
+                "url": "https://github.com/primefaces/primereact/issues/694"
+            }
+        ],
+        "column": [
+            {
+                "number": 589,
+                "title": "Add onBeforeEditorShow and onBeforeEditorHide callbacks to Column on DataTable with cell editing",
+                "url": "https://github.com/primefaces/primereact/issues/589"
+            }
+        ],
+        "tree": [
+            {
+                "number": 1020,
+                "title": "Improve the parameters of onDragDrop callback on Tree",
+                "url": "https://github.com/primefaces/primereact/issues/1020"
+            },
+            {
+                "number": 1859,
+                "title": "The toggler icon of Tree/TreeTable is not displaying correctly in mobile mode",
+                "url": "https://github.com/primefaces/primereact/issues/1859"
+            }
+        ]
+    },
+    "6.0.2": {
+        "autocomplete": [
+            {
+                "number": 1798,
+                "title": "AutoComplete in FireFox does not pass focus on Tab",
+                "url": "https://github.com/primefaces/primereact/issues/1798"
+            },
+            {
+                "number": 1801,
+                "title": "Add autoHighlight property to AutoComplete",
+                "url": "https://github.com/primefaces/primereact/issues/1801"
+            },
+            {
+                "number": 1800,
+                "title": "Add forceSelection to AutoComplete",
+                "url": "https://github.com/primefaces/primereact/issues/1800"
+            },
+            {
+                "number": 1790,
+                "title": "Improve PrimeReact components for React.StrictMode",
+                "url": "https://github.com/primefaces/primereact/issues/1790"
+            }
+        ],
+        "calendar": [
+            {
+                "number": 1793,
+                "title": "Navigator Calendar taking current year when yearRange property is less than current year",
+                "url": "https://github.com/primefaces/primereact/issues/1793"
+            },
+            {
+                "number": 1790,
+                "title": "Improve PrimeReact components for React.StrictMode",
+                "url": "https://github.com/primefaces/primereact/issues/1790"
+            }
+        ],
+        "inputnumber": [
+            {
+                "number": 1794,
+                "title": "Add autoFocus property to InputNumber",
+                "url": "https://github.com/primefaces/primereact/issues/1794"
+            },
+            {
+                "number": 1790,
+                "title": "Improve PrimeReact components for React.StrictMode",
+                "url": "https://github.com/primefaces/primereact/issues/1790"
+            }
+        ],
+        "button": [
+            {
+                "number": 1790,
+                "title": "Improve PrimeReact components for React.StrictMode",
+                "url": "https://github.com/primefaces/primereact/issues/1790"
+            }
+        ],
+        "captcha": [
+            {
+                "number": 1790,
+                "title": "Improve PrimeReact components for React.StrictMode",
+                "url": "https://github.com/primefaces/primereact/issues/1790"
+            }
+        ],
+        "inputmask": [
+            {
+                "number": 1790,
+                "title": "Improve PrimeReact components for React.StrictMode",
+                "url": "https://github.com/primefaces/primereact/issues/1790"
+            }
+        ],
+        "inputtext": [
+            {
+                "number": 1790,
+                "title": "Improve PrimeReact components for React.StrictMode",
+                "url": "https://github.com/primefaces/primereact/issues/1790"
+            }
+        ],
+        "menubar": [
+            {
+                "number": 1790,
+                "title": "Improve PrimeReact components for React.StrictMode",
+                "url": "https://github.com/primefaces/primereact/issues/1790"
+            }
+        ],
+        "password": [
+            {
+                "number": 1790,
+                "title": "Improve PrimeReact components for React.StrictMode",
+                "url": "https://github.com/primefaces/primereact/issues/1790"
+            },
+            {
+                "number": 1799,
+                "title": "Improve Password implementation",
+                "url": "https://github.com/primefaces/primereact/issues/1799"
+            }
+        ],
+        "picklist": [
+            {
+                "number": 1790,
+                "title": "Improve PrimeReact components for React.StrictMode",
+                "url": "https://github.com/primefaces/primereact/issues/1790"
+            }
+        ],
+        "splitbutton": [
+            {
+                "number": 1790,
+                "title": "Improve PrimeReact components for React.StrictMode",
+                "url": "https://github.com/primefaces/primereact/issues/1790"
+            }
+        ],
+        "contextmenu": [
+            {
+                "number": 1789,
+                "title": "DataTable ContextMenu Third Reposition",
+                "url": "https://github.com/primefaces/primereact/issues/1789"
+            },
+            {
+                "number": 1790,
+                "title": "Improve PrimeReact components for React.StrictMode",
+                "url": "https://github.com/primefaces/primereact/issues/1790"
+            }
+        ],
+        "datatable": [
+            {
+                "number": 1792,
+                "title": "Datatable doesn't change page when the last element on a page is removed.",
+                "url": "https://github.com/primefaces/primereact/issues/1792"
+            },
+            {
+                "number": 1788,
+                "title": "Improve rowEditor buttons on DataTable with editMode=\"row\"",
+                "url": "https://github.com/primefaces/primereact/issues/1788"
+            }
+        ],
+        "treetable": [
+            {
+                "number": 1617,
+                "title": "TreeTable tabbing between editable cells not working",
+                "url": "https://github.com/primefaces/primereact/issues/1617"
+            }
+        ],
+        "galleria": [
+            {
+                "number": 1790,
+                "title": "Improve PrimeReact components for React.StrictMode",
+                "url": "https://github.com/primefaces/primereact/issues/1790"
+            }
+        ],
+        "datascroller": [
+            {
+                "number": 1791,
+                "title": "Change the type of loader property on DataScroller",
+                "url": "https://github.com/primefaces/primereact/issues/1791"
+            },
+            {
+                "number": 1790,
+                "title": "Improve PrimeReact components for React.StrictMode",
+                "url": "https://github.com/primefaces/primereact/issues/1790"
+            }
+        ],
+        "splitter": [
+            {
+                "number": 1795,
+                "title": "SplitterPanel is not exported in TypeScript",
+                "url": "https://github.com/primefaces/primereact/issues/1795"
+            }
+        ],
+        "inplace": [
+            {
+                "number": 1796,
+                "title": "InplaceDisplay has no ariaLabel property",
+                "url": "https://github.com/primefaces/primereact/issues/1796"
+            }
+        ],
+        "accordion": [
+            {
+                "number": 1790,
+                "title": "Improve PrimeReact components for React.StrictMode",
+                "url": "https://github.com/primefaces/primereact/issues/1790"
+            }
+        ],
+        "cascadeselect": [
+            {
+                "number": 1790,
+                "title": "Improve PrimeReact components for React.StrictMode",
+                "url": "https://github.com/primefaces/primereact/issues/1790"
+            }
+        ],
+        "colorpicker": [
+            {
+                "number": 1790,
+                "title": "Improve PrimeReact components for React.StrictMode",
+                "url": "https://github.com/primefaces/primereact/issues/1790"
+            }
+        ],
+        "confirmpopup": [
+            {
+                "number": 1790,
+                "title": "Improve PrimeReact components for React.StrictMode",
+                "url": "https://github.com/primefaces/primereact/issues/1790"
+            }
+        ],
+        "dialog": [
+            {
+                "number": 1790,
+                "title": "Improve PrimeReact components for React.StrictMode",
+                "url": "https://github.com/primefaces/primereact/issues/1790"
+            }
+        ],
+        "dropdown": [
+            {
+                "number": 1790,
+                "title": "Improve PrimeReact components for React.StrictMode",
+                "url": "https://github.com/primefaces/primereact/issues/1790"
+            }
+        ],
+        "fieldset": [
+            {
+                "number": 1790,
+                "title": "Improve PrimeReact components for React.StrictMode",
+                "url": "https://github.com/primefaces/primereact/issues/1790"
+            }
+        ],
+        "menu": [
+            {
+                "number": 1790,
+                "title": "Improve PrimeReact components for React.StrictMode",
+                "url": "https://github.com/primefaces/primereact/issues/1790"
+            }
+        ],
+        "messages": [
+            {
+                "number": 1790,
+                "title": "Improve PrimeReact components for React.StrictMode",
+                "url": "https://github.com/primefaces/primereact/issues/1790"
+            }
+        ],
+        "multiselect": [
+            {
+                "number": 1790,
+                "title": "Improve PrimeReact components for React.StrictMode",
+                "url": "https://github.com/primefaces/primereact/issues/1790"
+            }
+        ],
+        "overlaypanel": [
+            {
+                "number": 1790,
+                "title": "Improve PrimeReact components for React.StrictMode",
+                "url": "https://github.com/primefaces/primereact/issues/1790"
+            }
+        ],
+        "panel": [
+            {
+                "number": 1790,
+                "title": "Improve PrimeReact components for React.StrictMode",
+                "url": "https://github.com/primefaces/primereact/issues/1790"
+            }
+        ],
+        "panelmenu": [
+            {
+                "number": 1790,
+                "title": "Improve PrimeReact components for React.StrictMode",
+                "url": "https://github.com/primefaces/primereact/issues/1790"
+            }
+        ],
+        "scrolltop": [
+            {
+                "number": 1790,
+                "title": "Improve PrimeReact components for React.StrictMode",
+                "url": "https://github.com/primefaces/primereact/issues/1790"
+            }
+        ],
+        "sidebar": [
+            {
+                "number": 1790,
+                "title": "Improve PrimeReact components for React.StrictMode",
+                "url": "https://github.com/primefaces/primereact/issues/1790"
+            }
+        ],
+        "slidemenu": [
+            {
+                "number": 1790,
+                "title": "Improve PrimeReact components for React.StrictMode",
+                "url": "https://github.com/primefaces/primereact/issues/1790"
+            }
+        ],
+        "tieredmenu": [
+            {
+                "number": 1790,
+                "title": "Improve PrimeReact components for React.StrictMode",
+                "url": "https://github.com/primefaces/primereact/issues/1790"
+            }
+        ],
+        "toast": [
+            {
+                "number": 1790,
+                "title": "Improve PrimeReact components for React.StrictMode",
+                "url": "https://github.com/primefaces/primereact/issues/1790"
+            }
+        ]
+    },
+    "6.0.1": {
+        "chip": [
+            {
+                "number": 1778,
+                "title": "Add imageAlt and onImageError property to Chip",
+                "url": "https://github.com/primefaces/primereact/issues/1778"
+            }
+        ],
+        "cascadeselect": [
+            {
+                "number": 1780,
+                "title": "Improve float label support in overlay selects",
+                "url": "https://github.com/primefaces/primereact/issues/1780"
+            }
+        ],
+        "dropdown": [
+            {
+                "number": 1780,
+                "title": "Improve float label support in overlay selects",
+                "url": "https://github.com/primefaces/primereact/issues/1780"
+            },
+            {
+                "number": 1784,
+                "title": "Clearing Dropdown returns null instead of undefined",
+                "url": "https://github.com/primefaces/primereact/issues/1784"
+            }
+        ],
+        "multiselect": [
+            {
+                "number": 1780,
+                "title": "Improve float label support in overlay selects",
+                "url": "https://github.com/primefaces/primereact/issues/1780"
+            },
+            {
+                "number": 1698,
+                "title": "MultiSelect implement SelectItem disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1698"
+            }
+        ],
+        "avatar": [
+            {
+                "number": 1773,
+                "title": "Avatar with image and shape=\"circle\" doesn't have border-radius style",
+                "url": "https://github.com/primefaces/primereact/issues/1773"
+            },
+            {
+                "number": 1779,
+                "title": "Add imageAlt and onImageError to Avatar",
+                "url": "https://github.com/primefaces/primereact/issues/1779"
+            }
+        ],
+        "toast": [
+            {
+                "number": 1761,
+                "title": "Change the type of content property in ToastMessage",
+                "url": "https://github.com/primefaces/primereact/issues/1761"
+            }
+        ],
+        "breadcrumb": [
+            {
+                "number": 1635,
+                "title": "Add template property support to MenuModel API in all menu components",
+                "url": "https://github.com/primefaces/primereact/issues/1635"
+            },
+            {
+                "number": 1783,
+                "title": "Improve template property on MenuModel API",
+                "url": "https://github.com/primefaces/primereact/issues/1783"
+            }
+        ],
+        "contextmenu": [
+            {
+                "number": 1635,
+                "title": "Add template property support to MenuModel API in all menu components",
+                "url": "https://github.com/primefaces/primereact/issues/1635"
+            },
+            {
+                "number": 1783,
+                "title": "Improve template property on MenuModel API",
+                "url": "https://github.com/primefaces/primereact/issues/1783"
+            }
+        ],
+        "megamenu": [
+            {
+                "number": 1635,
+                "title": "Add template property support to MenuModel API in all menu components",
+                "url": "https://github.com/primefaces/primereact/issues/1635"
+            },
+            {
+                "number": 1783,
+                "title": "Improve template property on MenuModel API",
+                "url": "https://github.com/primefaces/primereact/issues/1783"
+            }
+        ],
+        "menu": [
+            {
+                "number": 1635,
+                "title": "Add template property support to MenuModel API in all menu components",
+                "url": "https://github.com/primefaces/primereact/issues/1635"
+            },
+            {
+                "number": 1783,
+                "title": "Improve template property on MenuModel API",
+                "url": "https://github.com/primefaces/primereact/issues/1783"
+            }
+        ],
+        "menubar": [
+            {
+                "number": 1635,
+                "title": "Add template property support to MenuModel API in all menu components",
+                "url": "https://github.com/primefaces/primereact/issues/1635"
+            },
+            {
+                "number": 1783,
+                "title": "Improve template property on MenuModel API",
+                "url": "https://github.com/primefaces/primereact/issues/1783"
+            }
+        ],
+        "panelmenu": [
+            {
+                "number": 1635,
+                "title": "Add template property support to MenuModel API in all menu components",
+                "url": "https://github.com/primefaces/primereact/issues/1635"
+            },
+            {
+                "number": 1783,
+                "title": "Improve template property on MenuModel API",
+                "url": "https://github.com/primefaces/primereact/issues/1783"
+            }
+        ],
+        "slidemenu": [
+            {
+                "number": 1635,
+                "title": "Add template property support to MenuModel API in all menu components",
+                "url": "https://github.com/primefaces/primereact/issues/1635"
+            },
+            {
+                "number": 1783,
+                "title": "Improve template property on MenuModel API",
+                "url": "https://github.com/primefaces/primereact/issues/1783"
+            }
+        ],
+        "steps": [
+            {
+                "number": 1635,
+                "title": "Add template property support to MenuModel API in all menu components",
+                "url": "https://github.com/primefaces/primereact/issues/1635"
+            },
+            {
+                "number": 1783,
+                "title": "Improve template property on MenuModel API",
+                "url": "https://github.com/primefaces/primereact/issues/1783"
+            }
+        ],
+        "tabmenu": [
+            {
+                "number": 1635,
+                "title": "Add template property support to MenuModel API in all menu components",
+                "url": "https://github.com/primefaces/primereact/issues/1635"
+            },
+            {
+                "number": 1783,
+                "title": "Improve template property on MenuModel API",
+                "url": "https://github.com/primefaces/primereact/issues/1783"
+            }
+        ],
+        "tieredmenu": [
+            {
+                "number": 1635,
+                "title": "Add template property support to MenuModel API in all menu components",
+                "url": "https://github.com/primefaces/primereact/issues/1635"
+            },
+            {
+                "number": 1783,
+                "title": "Improve template property on MenuModel API",
+                "url": "https://github.com/primefaces/primereact/issues/1783"
+            }
+        ],
+        "calendar": [
+            {
+                "number": 1782,
+                "title": "Inline Calendar doesn't display correctly with time/button bar ",
+                "url": "https://github.com/primefaces/primereact/issues/1782"
+            },
+            {
+                "number": 1711,
+                "title": "Calendar input does not update view when hourFormat changes",
+                "url": "https://github.com/primefaces/primereact/issues/1711"
+            },
+            {
+                "number": 1756,
+                "title": "Add p-component class to Calendar",
+                "url": "https://github.com/primefaces/primereact/issues/1756"
+            }
+        ],
+        "datatable": [
+            {
+                "number": 1763,
+                "title": "Get filtered rows from global filter action",
+                "url": "https://github.com/primefaces/primereact/issues/1763"
+            },
+            {
+                "number": 1762,
+                "title": "Feature Request: DataTable hide expander when there are no children rows",
+                "url": "https://github.com/primefaces/primereact/issues/1762"
+            },
+            {
+                "number": 1776,
+                "title": "Add restoreTableState method to DataTable",
+                "url": "https://github.com/primefaces/primereact/issues/1776"
+            },
+            {
+                "number": 1752,
+                "title": "DataTable with editMode=\"cell\" doesn't work as expected",
+                "url": "https://github.com/primefaces/primereact/issues/1752"
+            }
+        ],
+        "button": [
+            {
+                "number": 1777,
+                "title": "Improve custom content option on Button",
+                "url": "https://github.com/primefaces/primereact/issues/1777"
+            }
+        ],
+        "confirmdialog": [
+            {
+                "number": 1765,
+                "title": "No typing for confirmPopup and confirmDialog",
+                "url": "https://github.com/primefaces/primereact/issues/1765"
+            }
+        ],
+        "confirmpopup": [
+            {
+                "number": 1765,
+                "title": "No typing for confirmPopup and confirmDialog",
+                "url": "https://github.com/primefaces/primereact/issues/1765"
+            }
+        ],
+        "splitbutton": [
+            {
+                "number": 1783,
+                "title": "Improve template property on MenuModel API",
+                "url": "https://github.com/primefaces/primereact/issues/1783"
+            }
+        ],
+        "tooltip": [
+            {
+                "number": 1770,
+                "title": "If Tooltip's content is empty, the tooltip may not be rendered.",
+                "url": "https://github.com/primefaces/primereact/issues/1770"
+            }
+        ],
+        "knob": [
+            {
+                "number": 1766,
+                "title": "Controlled Knob does not react to value changes on props",
+                "url": "https://github.com/primefaces/primereact/issues/1766"
+            }
+        ],
+        "inputnumber": [
+            {
+                "number": 1746,
+                "title": "Problem in entering negative value in INPUTNUMBER. ",
+                "url": "https://github.com/primefaces/primereact/issues/1746"
+            }
+        ],
+        "utils": [
+            {
+                "number": 1655,
+                "title": "Do not hide overlays on body scroll",
+                "url": "https://github.com/primefaces/primereact/issues/1655"
+            }
+        ],
+        "inputmask": [
+            {
+                "number": 1718,
+                "title": "Improve dynamic mask on InputMask",
+                "url": "https://github.com/primefaces/primereact/issues/1718"
+            }
+        ]
+    },
+    "6.0": {
+        "chips": [
+            {
+                "number": 1754,
+                "title": "Chips throws a JS exception",
+                "url": "https://github.com/primefaces/primereact/issues/1754"
+            },
+            {
+                "number": 1740,
+                "title": "Chips and AutoComplete(multiple mode) support multiline input mode",
+                "url": "https://github.com/primefaces/primereact/issues/1740"
+            }
+        ],
+        "calendar": [
+            {
+                "number": 1750,
+                "title": "Change the type of locale property on Calendar",
+                "url": "https://github.com/primefaces/primereact/issues/1750"
+            },
+            {
+                "number": 1749,
+                "title": "Locale API",
+                "url": "https://github.com/primefaces/primereact/issues/1749"
+            },
+            {
+                "number": 1566,
+                "title": "Change the type of tabIndex property on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1566"
+            }
+        ],
+        "panel": [
+            {
+                "number": 1747,
+                "title": "Change the type of header property on Panel",
+                "url": "https://github.com/primefaces/primereact/issues/1747"
+            },
+            {
+                "number": 1748,
+                "title": "Add icons property to Panel",
+                "url": "https://github.com/primefaces/primereact/issues/1748"
+            }
+        ],
+        "checkbox": [
+            {
+                "number": 1716,
+                "title": "Add tabIndex property to Checkbox",
+                "url": "https://github.com/primefaces/primereact/issues/1716"
+            }
+        ],
+        "confirmpopup": [
+            {
+                "number": 1731,
+                "title": "New Component: ConfirmPopup",
+                "url": "https://github.com/primefaces/primereact/issues/1731"
+            }
+        ],
+        "badge": [
+            {
+                "number": 1719,
+                "title": "New Component: Badge",
+                "url": "https://github.com/primefaces/primereact/issues/1719"
+            }
+        ],
+        "scrolltop": [
+            {
+                "number": 1733,
+                "title": "New Component: ScrollTop",
+                "url": "https://github.com/primefaces/primereact/issues/1733"
+            }
+        ],
+        "confirmdialog": [
+            {
+                "number": 1730,
+                "title": "New Component: ConfirmDialog",
+                "url": "https://github.com/primefaces/primereact/issues/1730"
+            }
+        ],
+        "api": [
+            {
+                "number": 1749,
+                "title": "Locale API",
+                "url": "https://github.com/primefaces/primereact/issues/1749"
+            },
+            {
+                "number": 1625,
+                "title": "Constants for PrimeIcons",
+                "url": "https://github.com/primefaces/primereact/issues/1625"
+            }
+        ],
+        "datatable": [
+            {
+                "number": 1685,
+                "title": "DataTable edit not work (Input disappears immediately after clicking cell) in react-dom@17.0.1",
+                "url": "https://github.com/primefaces/primereact/issues/1685"
+            },
+            {
+                "number": 1697,
+                "title": "Datatable with stateStorage property saves filterheader as extra columnwidth",
+                "url": "https://github.com/primefaces/primereact/issues/1697"
+            },
+            {
+                "number": 1566,
+                "title": "Change the type of tabIndex property on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1566"
+            },
+            {
+                "number": 1703,
+                "title": "DataTable with empty frozen column throws a JS exception",
+                "url": "https://github.com/primefaces/primereact/issues/1703"
+            }
+        ],
+        "dialog": [
+            {
+                "number": 1732,
+                "title": "Improve Dialog implementation for ConfirmDialog",
+                "url": "https://github.com/primefaces/primereact/issues/1732"
+            },
+            {
+                "number": 1745,
+                "title": "Dialog dismissableMask didn't work if hide the close icon",
+                "url": "https://github.com/primefaces/primereact/issues/1745"
+            },
+            {
+                "number": 1737,
+                "title": "Improving the initial focus of the Dialog",
+                "url": "https://github.com/primefaces/primereact/issues/1737"
+            }
+        ],
+        "avatar": [
+            {
+                "number": 1717,
+                "title": "New Component: Avatar",
+                "url": "https://github.com/primefaces/primereact/issues/1717"
+            }
+        ],
+        "avatargroup": [
+            {
+                "number": 1717,
+                "title": "New Component: Avatar",
+                "url": "https://github.com/primefaces/primereact/issues/1717"
+            }
+        ],
+        "chip": [
+            {
+                "number": 1734,
+                "title": "New Component: Chip",
+                "url": "https://github.com/primefaces/primereact/issues/1734"
+            }
+        ],
+        "autocomplete": [
+            {
+                "number": 1740,
+                "title": "Chips and AutoComplete(multiple mode) support multiline input mode",
+                "url": "https://github.com/primefaces/primereact/issues/1740"
+            },
+            {
+                "number": 1738,
+                "title": "Rename 'readonly' property with 'readOnly' on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1738"
+            },
+            {
+                "number": 1710,
+                "title": "Typo in tabIndex property name",
+                "url": "https://github.com/primefaces/primereact/issues/1710"
+            }
+        ],
+        "knob": [
+            {
+                "number": 1727,
+                "title": "New Component: Knob ",
+                "url": "https://github.com/primefaces/primereact/issues/1727"
+            }
+        ],
+        "picklist": [
+            {
+                "number": 1707,
+                "title": "Remove onSourceSelect and onTargetSelect callbacks from PickList",
+                "url": "https://github.com/primefaces/primereact/issues/1707"
+            },
+            {
+                "number": 1566,
+                "title": "Change the type of tabIndex property on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1566"
+            },
+            {
+                "number": 1708,
+                "title": "Add sourceSelection and targetSelection properties to PickList",
+                "url": "https://github.com/primefaces/primereact/issues/1708"
+            }
+        ],
+        "skeleton": [
+            {
+                "number": 1725,
+                "title": "New Component: Skeleton",
+                "url": "https://github.com/primefaces/primereact/issues/1725"
+            }
+        ],
+        "colorpicker": [
+            {
+                "number": 1738,
+                "title": "Rename 'readonly' property with 'readOnly' on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1738"
+            },
+            {
+                "number": 1710,
+                "title": "Typo in tabIndex property name",
+                "url": "https://github.com/primefaces/primereact/issues/1710"
+            },
+            {
+                "number": 1566,
+                "title": "Change the type of tabIndex property on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1566"
+            }
+        ],
+        "inputmask": [
+            {
+                "number": 1738,
+                "title": "Rename 'readonly' property with 'readOnly' on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1738"
+            },
+            {
+                "number": 1710,
+                "title": "Typo in tabIndex property name",
+                "url": "https://github.com/primefaces/primereact/issues/1710"
+            }
+        ],
+        "inputnumber": [
+            {
+                "number": 1738,
+                "title": "Rename 'readonly' property with 'readOnly' on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1738"
+            },
+            {
+                "number": 1695,
+                "title": "Add onKeyDown event to InputNumber",
+                "url": "https://github.com/primefaces/primereact/issues/1695"
+            },
+            {
+                "number": 1566,
+                "title": "Change the type of tabIndex property on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1566"
+            }
+        ],
+        "rating": [
+            {
+                "number": 1738,
+                "title": "Rename 'readonly' property with 'readOnly' on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1738"
+            },
+            {
+                "number": 1566,
+                "title": "Change the type of tabIndex property on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1566"
+            }
+        ],
+        "steps": [
+            {
+                "number": 1738,
+                "title": "Rename 'readonly' property with 'readOnly' on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1738"
+            }
+        ],
+        "dropdown": [
+            {
+                "number": 1685,
+                "title": "DataTable edit not work (Input disappears immediately after clicking cell) in react-dom@17.0.1",
+                "url": "https://github.com/primefaces/primereact/issues/1685"
+            },
+            {
+                "number": 1566,
+                "title": "Change the type of tabIndex property on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1566"
+            }
+        ],
+        "tag": [
+            {
+                "number": 1723,
+                "title": "New Component: Tag",
+                "url": "https://github.com/primefaces/primereact/issues/1723"
+            }
+        ],
+        "captcha": [
+            {
+                "number": 1710,
+                "title": "Typo in tabIndex property name",
+                "url": "https://github.com/primefaces/primereact/issues/1710"
+            }
+        ],
+        "divider": [
+            {
+                "number": 1726,
+                "title": "New Component: Divider",
+                "url": "https://github.com/primefaces/primereact/issues/1726"
+            }
+        ],
+        "listbox": [
+            {
+                "number": 1706,
+                "title": "Add filterValue and onFilterValueChange properties to ListBox",
+                "url": "https://github.com/primefaces/primereact/issues/1706"
+            },
+            {
+                "number": 1566,
+                "title": "Change the type of tabIndex property on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1566"
+            }
+        ],
+        "timeline": [
+            {
+                "number": 1700,
+                "title": "Prop type incorrect for Timeline",
+                "url": "https://github.com/primefaces/primereact/issues/1700"
+            }
+        ],
+        "cascadeselect": [
+            {
+                "number": 1736,
+                "title": "New Component: CascadeSelect ",
+                "url": "https://github.com/primefaces/primereact/issues/1736"
+            }
+        ],
+        "galleria": [
+            {
+                "number": 1566,
+                "title": "Change the type of tabIndex property on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1566"
+            }
+        ],
+        "inplace": [
+            {
+                "number": 1566,
+                "title": "Change the type of tabIndex property on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1566"
+            }
+        ],
+        "menubar": [
+            {
+                "number": 1566,
+                "title": "Change the type of tabIndex property on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1566"
+            }
+        ],
+        "multiselect": [
+            {
+                "number": 1566,
+                "title": "Change the type of tabIndex property on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1566"
+            }
+        ],
+        "orderlist": [
+            {
+                "number": 1566,
+                "title": "Change the type of tabIndex property on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1566"
+            }
+        ],
+        "selectbutton": [
+            {
+                "number": 1566,
+                "title": "Change the type of tabIndex property on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1566"
+            }
+        ],
+        "slider": [
+            {
+                "number": 1566,
+                "title": "Change the type of tabIndex property on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1566"
+            }
+        ],
+        "splitbutton": [
+            {
+                "number": 1566,
+                "title": "Change the type of tabIndex property on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1566"
+            }
+        ],
+        "tabview": [
+            {
+                "number": 1566,
+                "title": "Change the type of tabIndex property on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1566"
+            }
+        ],
+        "tree": [
+            {
+                "number": 1566,
+                "title": "Change the type of tabIndex property on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1566"
+            }
+        ],
+        "treetable": [
+            {
+                "number": 1566,
+                "title": "Change the type of tabIndex property on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1566"
+            }
+        ],
+        "splitter": [
+            {
+                "number": 1729,
+                "title": "New Component: Splitter",
+                "url": "https://github.com/primefaces/primereact/issues/1729"
+            }
+        ],
+        "fileupload": [
+            {
+                "number": 1749,
+                "title": "Locale API",
+                "url": "https://github.com/primefaces/primereact/issues/1749"
+            }
+        ],
+        "password": [
+            {
+                "number": 1749,
+                "title": "Locale API",
+                "url": "https://github.com/primefaces/primereact/issues/1749"
+            }
+        ],
+        "ripple": [
+            {
+                "number": 1749,
+                "title": "Locale API",
+                "url": "https://github.com/primefaces/primereact/issues/1749"
+            }
+        ]
+    },
+    "5.0.2": {
+        "calendar": [
+            {
+                "number": 1672,
+                "title": "Calendar value change does not update UI",
+                "url": "https://github.com/primefaces/primereact/issues/1672"
+            },
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "datatable": [
+            {
+                "number": 1685,
+                "title": "DataTable edit not work (Input disappears immediately after clicking cell) in react-dom@17.0.1",
+                "url": "https://github.com/primefaces/primereact/issues/1685"
+            },
+            {
+                "number": 1692,
+                "title": "Change params of onEditorInit, onEditorSubmit, onEditorCancel and editorValidator callbacks on Column",
+                "url": "https://github.com/primefaces/primereact/issues/1692"
+            },
+            {
+                "number": 1636,
+                "title": "DataTable with lazy mode and multiple selection doesn't work as expected",
+                "url": "https://github.com/primefaces/primereact/issues/1636"
+            },
+            {
+                "number": 1577,
+                "title": "Add browser event param to editor callbacks on Datatable",
+                "url": "https://github.com/primefaces/primereact/issues/1577"
+            },
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "megamenu": [
+            {
+                "number": 1690,
+                "title": "Remove PrimeFlex dependency from MegaMenu",
+                "url": "https://github.com/primefaces/primereact/issues/1690"
+            },
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "multiselect": [
+            {
+                "number": 1689,
+                "title": "Chips display for MultiSelect",
+                "url": "https://github.com/primefaces/primereact/issues/1689"
+            },
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            },
+            {
+                "number": 1627,
+                "title": "Add showClear property to MultiSelect",
+                "url": "https://github.com/primefaces/primereact/issues/1627"
+            }
+        ],
+        "column": [
+            {
+                "number": 1692,
+                "title": "Change params of onEditorInit, onEditorSubmit, onEditorCancel and editorValidator callbacks on Column",
+                "url": "https://github.com/primefaces/primereact/issues/1692"
+            }
+        ],
+        "treetable": [
+            {
+                "number": 1692,
+                "title": "Change params of onEditorInit, onEditorSubmit, onEditorCancel and editorValidator callbacks on Column",
+                "url": "https://github.com/primefaces/primereact/issues/1692"
+            },
+            {
+                "number": 1442,
+                "title": "Multiple sort in TreeTable is not working when passing multisortmeta props",
+                "url": "https://github.com/primefaces/primereact/issues/1442"
+            },
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            },
+            {
+                "number": 1657,
+                "title": "When a partial selection is made among children of a node, the minus icon doesn't appear in the checkbox of that node.",
+                "url": "https://github.com/primefaces/primereact/issues/1657"
+            }
+        ],
+        "tooltip": [
+            {
+                "number": 1667,
+                "title": "Tooltip with `showDelay` appears despite cursor has already left the Input",
+                "url": "https://github.com/primefaces/primereact/issues/1667"
+            },
+            {
+                "number": 1683,
+                "title": "Improve Tooltip implementation",
+                "url": "https://github.com/primefaces/primereact/issues/1683"
+            },
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "inputmask": [
+            {
+                "number": 1677,
+                "title": "Add onFocus and onBlur events on InputMask",
+                "url": "https://github.com/primefaces/primereact/issues/1677"
+            },
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "timeline": [
+            {
+                "number": 1687,
+                "title": "New Component: Timeline",
+                "url": "https://github.com/primefaces/primereact/issues/1687"
+            }
+        ],
+        "common": [
+            {
+                "number": 1634,
+                "title": "pRipple working when disabled(etc menuitem)",
+                "url": "https://github.com/primefaces/primereact/issues/1634"
+            }
+        ],
+        "password": [
+            {
+                "number": 1684,
+                "title": "Improve Password implementation",
+                "url": "https://github.com/primefaces/primereact/issues/1684"
+            },
+            {
+                "number": 1623,
+                "title": "Add mediumRegex and strongRegex property to Password",
+                "url": "https://github.com/primefaces/primereact/issues/1623"
+            },
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "utils": [
+            {
+                "number": 1655,
+                "title": "Do not hide overlays on body scroll",
+                "url": "https://github.com/primefaces/primereact/issues/1655"
+            },
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "chips": [
+            {
+                "number": 1654,
+                "title": "Float label is not working on Chips",
+                "url": "https://github.com/primefaces/primereact/issues/1654"
+            },
+            {
+                "number": 1678,
+                "title": "Chips is not working when the initial value sets 'null'",
+                "url": "https://github.com/primefaces/primereact/issues/1678"
+            },
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "overlaypanel": [
+            {
+                "number": 1671,
+                "title": "OverlayPanel - arrow always on the left side of the panel. ",
+                "url": "https://github.com/primefaces/primereact/issues/1671"
+            },
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "contextmenu": [
+            {
+                "number": 1574,
+                "title": "DataTable Context Menu doesn't reposition",
+                "url": "https://github.com/primefaces/primereact/issues/1574"
+            },
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "inputnumber": [
+            {
+                "number": 1688,
+                "title": "Add the 'enter' key support to InputNumber",
+                "url": "https://github.com/primefaces/primereact/issues/1688"
+            },
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "card": [
+            {
+                "number": 1658,
+                "title": "Change the types of header, footer, title, subTitle properties on Card",
+                "url": "https://github.com/primefaces/primereact/issues/1658"
+            },
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "dataview": [
+            {
+                "number": 1691,
+                "title": "DataView throws an exception when the last page is reached using Paginator",
+                "url": "https://github.com/primefaces/primereact/issues/1691"
+            },
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "accordion": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "autocomplete": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "breadcrumb": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "button": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "carousel": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "chart": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "checkbox": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "colorpicker": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "datascroller": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "dialog": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "dropdown": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "editor": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "fieldset": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "fileupload": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "galleria": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "inplace": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "inputtext": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "inputtextarea": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "listbox": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "menu": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "menubar": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "message": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "messages": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "orderlist": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "organizationchart": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "paginator": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "panel": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "panelmenu": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "picklist": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "progressbar": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "progressspinner": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "radiobutton": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "rating": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "scrollpanel": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "selectbutton": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "sidebar": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "slidemenu": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "splitbutton": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            },
+            {
+                "number": 1656,
+                "title": "Add separator support to SplitButton",
+                "url": "https://github.com/primefaces/primereact/issues/1656"
+            }
+        ],
+        "steps": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "tabmenu": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "tabview": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "tieredmenu": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "toast": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "togglebutton": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "toolbar": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "tree": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ],
+        "tristatecheckbox": [
+            {
+                "number": 1653,
+                "title": "Remove 'classnames' dependency from PrimeReact components",
+                "url": "https://github.com/primefaces/primereact/issues/1653"
+            }
+        ]
+    },
+
     "5.0.1": {
         "tooltip": [
             {

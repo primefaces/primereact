@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { DataView, DataViewLayoutOptions } from '../../components/dataview/DataView';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import ProductService from '../service/ProductService';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { Rating } from '../../components/rating/Rating';
 import { Button } from '../../components/button/Button';
 import './DataViewDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DataViewLazyDemo extends Component {
 
@@ -65,7 +66,7 @@ export class DataViewLazyDemo extends Component {
                     <div className="product-list-detail">
                         <div className="product-name">{data.name}</div>
                         <div className="product-description">{data.description}</div>
-                        <Rating value={data.rating} readonly cancel={false}></Rating>
+                        <Rating value={data.rating} readOnly cancel={false}></Rating>
                         <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
                     </div>
                     <div className="product-list-action">
@@ -93,7 +94,7 @@ export class DataViewLazyDemo extends Component {
                     <img src={`showcase/demo/images/product/${data.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
                         <div className="product-name">{data.name}</div>
                         <div className="product-description">{data.description}</div>
-                        <Rating value={data.rating} readonly cancel={false}></Rating>
+                        <Rating value={data.rating} readOnly cancel={false}></Rating>
                     </div>
                     <div className="product-grid-item-bottom">
                         <span className="product-price">${data.price}</span>
@@ -146,6 +147,7 @@ export class DataViewLazyDemo extends Component {
                         lazy paging by using an in memory list. It is also important to assign the logical number of rows to totalRecords by doing a projection query for paginator configuration so that paginator displays the UI assuming
                             there are actually records of totalRecords size although in reality they aren't as in lazy mode, only the records that are displayed on the current page exist.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="dataview/DataViewLazyDemo.js" />
                 </div>
 
                 <div className="content-section implementation dataview-demo">
@@ -235,7 +237,7 @@ export class DataViewLazyDemo extends Component {
                     <div className="product-list-detail">
                         <div className="product-name">{data.name}</div>
                         <div className="product-description">{data.description}</div>
-                        <Rating value={data.rating} readonly cancel={false}></Rating>
+                        <Rating value={data.rating} readOnly cancel={false}></Rating>
                         <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
                     </div>
                     <div className="product-list-action">
@@ -263,7 +265,7 @@ export class DataViewLazyDemo extends Component {
                     <img src={\`showcase/demo/images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
                         <div className="product-name">{data.name}</div>
                         <div className="product-description">{data.description}</div>
-                        <Rating value={data.rating} readonly cancel={false}></Rating>
+                        <Rating value={data.rating} readOnly cancel={false}></Rating>
                     </div>
                     <div className="product-grid-item-bottom">
                         <span className="product-price">\${data.price}</span>
@@ -384,7 +386,7 @@ const DataViewLazyDemo = () => {
                     <div className="product-list-detail">
                         <div className="product-name">{data.name}</div>
                         <div className="product-description">{data.description}</div>
-                        <Rating value={data.rating} readonly cancel={false}></Rating>
+                        <Rating value={data.rating} readOnly cancel={false}></Rating>
                         <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
                     </div>
                     <div className="product-list-action">
@@ -412,7 +414,7 @@ const DataViewLazyDemo = () => {
                     <img src={\`showcase/demo/images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
                         <div className="product-name">{data.name}</div>
                         <div className="product-description">{data.description}</div>
-                        <Rating value={data.rating} readonly cancel={false}></Rating>
+                        <Rating value={data.rating} readOnly cancel={false}></Rating>
                     </div>
                     <div className="product-grid-item-bottom">
                         <span className="product-price">\${data.price}</span>
@@ -524,7 +526,7 @@ const DataViewLazyDemo = () => {
                     <div className="product-list-detail">
                         <div className="product-name">{data.name}</div>
                         <div className="product-description">{data.description}</div>
-                        <Rating value={data.rating} readonly cancel={false}></Rating>
+                        <Rating value={data.rating} readOnly cancel={false}></Rating>
                         <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
                     </div>
                     <div className="product-list-action">
@@ -552,7 +554,7 @@ const DataViewLazyDemo = () => {
                     <img src={\`showcase/demo/images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
                         <div className="product-name">{data.name}</div>
                         <div className="product-description">{data.description}</div>
-                        <Rating value={data.rating} readonly cancel={false}></Rating>
+                        <Rating value={data.rating} readOnly cancel={false}></Rating>
                     </div>
                     <div className="product-grid-item-bottom">
                         <span className="product-price">\${data.price}</span>
@@ -737,11 +739,11 @@ const DataViewLazyDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="DataViewLazyDemo" sources={this.sources} service="ProductService" data="products" extFiles={this.extFiles} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'DataViewLazyDemo', sources: this.sources, service: 'ProductService', data: 'products', extFiles: this.extFiles })
+                    }
                 </TabView>
             </div>
         )

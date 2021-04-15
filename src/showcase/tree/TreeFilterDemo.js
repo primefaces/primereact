@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Tree } from '../../components/tree/Tree';
 import { NodeService } from '../service/NodeService';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class TreeFilterDemo extends Component {
 
@@ -28,6 +29,7 @@ export class TreeFilterDemo extends Component {
                         <h1>Tree <span>Filter</span></h1>
                         <p>Filtering updates the node based on the constraints.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="tree/TreeFilterDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -159,11 +161,11 @@ const TreeFilterDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="TreeFilterDemo" sources={this.sources} service="NodeService" data="treenodes" />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'TreeFilterDemo', sources: this.sources, service: 'NodeService', data: 'treenodes' })
+                    }
                 </TabView>
             </div>
         );

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
+import { TabView } from '../../components/tabview/TabView';
 import { Chart } from '../../components/chart/Chart';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import AppContentContext from '../../AppContentContext';
+import AppDemoActions from '../../AppDemoActions';
 
 export class BarChartDemo extends Component {
 
@@ -339,6 +340,7 @@ export class BarChartDemo extends Component {
                         <h1>BarChart</h1>
                         <p>A bar chart or bar graph is a chart that presents grouped data with rectangular bars with lengths proportional to the values that they represent.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="chart/BarChartDemo.js"/>
                 </div>
 
                 <div className="content-section implementation">
@@ -1099,11 +1101,11 @@ const BarChartDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
-                    <TabPanel header="Source">
-                        <LiveEditor name="BarChartDemo" sources={this.sources} dependencies={{ 'chart.js': '2.7.3' }} />
-                    </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'BarChartDemo', sources: this.sources, dependencies: { 'chart.js': '2.7.3' } })
+                    }
                 </TabView>
             </div>
         )
