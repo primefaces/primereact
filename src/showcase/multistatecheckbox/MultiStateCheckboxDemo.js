@@ -1,89 +1,47 @@
-import React from 'react';
-import {AppInlineHeader} from "../../AppInlineHeader";
-import {MultiStateCheckbox} from "../../components/multistatecheckbox/MultiStateCheckbox";
-import MultiStateCheckboxDoc from "./MultiStateCheckboxDoc";
+import React, { Component } from 'react';
+import { MultiStateCheckbox } from '../../components/multistatecheckbox/MultiStateCheckbox';
+import { AppInlineHeader } from '../../AppInlineHeader';
+import { MultiStateCheckboxDoc } from './MultiStateCheckboxDoc';
+import AppDemoActions from '../../AppDemoActions';
 
-export function SimpleDemo() {
-    const [value, setValue] = React.useState("public")
+export class MultiStateCheckboxDemo extends Component {
 
-    return (
-        <>
-            <h3>Simple</h3>
-            <div className="p-field-checkbox p-m-0">
-                <MultiStateCheckbox
-                    options={[
-                        { value: 'public', icon: 'pi pi-globe' },
-                        { value: 'protected', icon: 'pi pi-lock-open' },
-                        { value: 'private', icon: 'pi pi-lock' }
-                    ]}
-                    value={value}
-                    onChange={e => setValue(e.value)}
-                />
-                <label>{value}</label>
-            </div>
-        </>
-    )
-}
+    constructor(props) {
+        super(props);
 
-export function DisabledRoDemo() {
-    const [value, setValue] = React.useState("public")
+        this.state = {
+            value: 'public'
+        };
 
-    return (
-        <>
-            <h3>Disabled and Readonly</h3>
-            <div className="p-field-checkbox p-m-0 p-pb-2">
-                <MultiStateCheckbox
-                    options={[
-                        { value: 'public', icon: 'pi pi-globe' },
-                        { value: 'protected', icon: 'pi pi-lock-open' },
-                        { value: 'private', icon: 'pi pi-lock' }
-                    ]}
-                    value={value}
-                    onChange={e => setValue(e.value)}
-                    disabled
-                />
+        this.options = [
+            { value: 'public', icon: 'pi pi-globe' },
+            { value: 'protected', icon: 'pi pi-lock-open' },
+            { value: 'private', icon: 'pi pi-lock' }
+        ];
+    }
 
-                <label>Disabled</label>
-            </div>
-            <div className="p-field-checkbox p-m-0">
-                <MultiStateCheckbox
-                    options={[
-                        { value: 'public', icon: 'pi pi-globe' },
-                        { value: 'protected', icon: 'pi pi-lock-open' },
-                        { value: 'private', icon: 'pi pi-lock' }
-                    ]}
-                    value={value}
-                    onChange={e => setValue(e.value)}
-                    readOnly
-                />
-
-                <label>Read Only</label>
-            </div>
-        </>
-    )
-}
-
-export default function MultiStateCheckboxDemo() {
-    return (
-        <div>
-            <div className="content-section introduction">
-                <AppInlineHeader changelogText="triStateCheckbox" showInputStyle>
-                    <h1>MultiStateCheckbox</h1>
-                    <p>MultiStateCheckbox is a checkbox component where you can cycle through multiple values.</p>
-                </AppInlineHeader>
-            </div>
-
-            <div className="content-section implementation">
-                <div className="card">
-                    <SimpleDemo/>
+    render() {
+        return (
+            <div>
+                <div className="content-section introduction">
+                    <AppInlineHeader changelogText="multiStateCheckbox">
+                        <h1>MultiStateCheckbox</h1>
+                        <p>MultiStateCheckbox is used to select a state from given multiple states.</p>
+                    </AppInlineHeader>
+                    <AppDemoActions github="multistatecheckbox/MultiStateCheckboxDemo.js" />
                 </div>
 
-                <div className="card">
-                    <DisabledRoDemo/>
+                <div className="content-section implementation">
+                    <div className="card">
+                        <div className="p-field-checkbox p-m-0">
+                            <MultiStateCheckbox value={this.state.value} options={this.options} optionValue="value" onChange={(e) => this.setState({ value: e.value })} />
+                            <label>{this.state.value}</label>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <MultiStateCheckboxDoc />
-        </div>
-    )
+                <MultiStateCheckboxDoc />
+            </div>
+        );
+    }
 }

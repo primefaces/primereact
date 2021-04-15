@@ -168,7 +168,7 @@ import { ChipDemo } from './showcase/chip/ChipDemo';
 import { ConfirmDialogDemo } from './showcase/confirmdialog/ConfirmDialogDemo';
 import { ConfirmPopupDemo } from './showcase/confirmpopup/ConfirmPopupDemo';
 import { InvalidDemo } from './showcase/invalid/InvalidDemo';
-import MultiStateCheckboxDemo from "./showcase/multistatecheckbox/MultiStateCheckboxDemo";
+import { MultiStateCheckboxDemo } from './showcase/multistatecheckbox/MultiStateCheckboxDemo';
 import { ColorsDemo } from './showcase/colors/ColorsDemo';
 import { FormikFormDemo } from './showcase/validate/FormikFormDemo';
 import { ReactHookFormDemo } from './showcase/validate/ReactHookFormDemo';
