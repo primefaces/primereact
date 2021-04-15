@@ -3,7 +3,7 @@ import { TreeTable } from '../../components/treetable/TreeTable';
 import { Column } from '../../components/column/Column';
 import { NodeService } from '../service/NodeService';
 import { TabView } from '../../components/tabview/TabView';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import AppDemoActions from '../../AppDemoActions';
 
@@ -45,7 +45,7 @@ export class TreeTableSortDemo extends Component {
                     <AppInlineHeader changelogText="treeTable">
                         <h1>TreeTable <span>Sort</span></h1>
                         <p>TreeTable supports both single column and multiple column sorting.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="treetable/TreeTableSortDemo.js" />
                 </div>
 

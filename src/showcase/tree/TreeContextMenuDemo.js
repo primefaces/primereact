@@ -4,7 +4,7 @@ import { ContextMenu } from '../../components/contextmenu/ContextMenu';
 import { Toast} from '../../components/toast/Toast';
 import { NodeService } from '../service/NodeService';
 import { TabView } from '../../components/tabview/TabView';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import AppDemoActions from '../../AppDemoActions';
 
@@ -55,7 +55,7 @@ export class TreeContextMenuDemo extends Component {
                     <AppInlineHeader changelogText="tree">
                         <h1>Tree <span>ContextMenu</span></h1>
                         <p>Tree has exclusive integration with the ContextMenu component with support for different menus depending on the node.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="tree/TreeContextMenuDemo.js" />
                 </div>
 

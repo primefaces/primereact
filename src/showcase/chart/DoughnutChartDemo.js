@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TabView } from '../../components/tabview/TabView';
 import { Chart } from '../../components/chart/Chart';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import AppContentContext from '../../AppContentContext';
 import AppDemoActions from '../../AppDemoActions';
@@ -53,7 +53,7 @@ export class DoughnutChartDemo extends Component {
                     <AppInlineHeader changelogText="chart">
                         <h1>DoughnutChart</h1>
                         <p>A doughnut chart is a variant of the pie chart, with a blank center allowing for additional information about the data as a whole to be included.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="chart/DoughnutChartDemo.js" />
                 </div>
 

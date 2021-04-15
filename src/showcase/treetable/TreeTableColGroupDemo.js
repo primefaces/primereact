@@ -4,7 +4,7 @@ import { Column } from '../../components/column/Column';
 import { ColumnGroup } from '../../components/columngroup/ColumnGroup';
 import { Row } from '../../components/row/Row';
 import { TabView } from '../../components/tabview/TabView';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import AppDemoActions from '../../AppDemoActions';
 
@@ -203,7 +203,7 @@ export class TreeTableColGroupDemo extends Component {
                     <AppInlineHeader changelogText="treeTable">
                         <h1>TreeTable <span>Column Grouping</span></h1>
                         <p>Columns can be grouped at header and footer using headerColumnGroup and footerColumnGroup components that both define an array of columns each having colspan and rowspan.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="treetable/TreeTableColGroupDemo.js" />
                 </div>
 

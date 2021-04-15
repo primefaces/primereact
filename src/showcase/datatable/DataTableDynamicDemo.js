@@ -3,7 +3,7 @@ import { DataTable } from '../../components/datatable/DataTable';
 import { Column } from '../../components/column/Column';
 import ProductService from '../service/ProductService';
 import { TabView } from '../../components/tabview/TabView';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import AppDemoActions from '../../AppDemoActions';
 
@@ -41,7 +41,7 @@ export class DataTableDynamicDemo extends Component {
                     <AppInlineHeader changelogText="dataTable">
                         <h1>DataTable <span>Dynamic Columns</span></h1>
                         <p>Columns can be defined dynamically.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="datatable/DataTableDynamicDemo.js" />
                 </div>
 

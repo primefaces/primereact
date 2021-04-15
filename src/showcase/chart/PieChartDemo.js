@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TabView } from '../../components/tabview/TabView';
 import { Chart } from '../../components/chart/Chart';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import AppContentContext from '../../AppContentContext';
 import AppDemoActions from '../../AppDemoActions';
@@ -54,7 +54,7 @@ export class PieChartDemo extends Component {
                     <AppInlineHeader changelogText="chart">
                         <h1>PieChart</h1>
                         <p>A pie chart is a circular statistical graphic, which is divided into slices to illustrate numerical proportion.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="chart/PieChartDemo.js" />
                 </div>
 

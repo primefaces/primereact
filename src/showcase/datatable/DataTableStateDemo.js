@@ -6,7 +6,7 @@ import { InputText } from '../../components/inputtext/InputText';
 import { MultiSelect } from '../../components/multiselect/MultiSelect';
 import { Dropdown } from '../../components/dropdown/Dropdown';
 import { TabView } from '../../components/tabview/TabView';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import AppDemoActions from '../../AppDemoActions';
 
@@ -105,7 +105,7 @@ export class DataTableStateDemo extends Component {
                         <h1>DataTable <span>State</span></h1>
                         <p>Stateful table allows keeping the state such as page, sort and filtering either at local storage or session storage so that when the page is visited again,
                             table would render the data using its last settings.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="datatable/DataTableStateDemo.js" />
                 </div>
 

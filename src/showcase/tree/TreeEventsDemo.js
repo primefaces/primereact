@@ -3,7 +3,7 @@ import { Tree } from '../../components/tree/Tree';
 import { Toast } from '../../components/toast/Toast';
 import { NodeService } from '../service/NodeService';
 import { TabView } from '../../components/tabview/TabView';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import AppDemoActions from '../../AppDemoActions';
 
@@ -51,7 +51,7 @@ export class TreeEventsDemo extends Component {
                     <AppInlineHeader changelogText="tree">
                         <h1>Tree <span>Events</span></h1>
                         <p>An event is provided each type of user interaction such as expand, collapse and selection.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="tree/TreeEventsDemo.js" />
                 </div>
 

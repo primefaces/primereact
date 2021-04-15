@@ -4,7 +4,7 @@ import { Column } from '../../components/column/Column';
 import { Toast } from '../../components/toast/Toast';
 import { CustomerService } from '../service/CustomerService';
 import { TabView } from '../../components/tabview/TabView';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './DataTableDemo.scss';
 import AppDemoActions from '../../AppDemoActions';
@@ -101,7 +101,7 @@ export class DataTableRowGroupDemo extends Component {
                     <AppInlineHeader changelogText="dataTable">
                         <h1>DataTable <span>Row Grouping</span></h1>
                         <p>Rows can either be grouped by a separate grouping row or using rowspan.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="datatable/DataTableRowGroupDemo.js" />
                 </div>
 

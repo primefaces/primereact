@@ -3,7 +3,7 @@ import { DataTable } from '../../components/datatable/DataTable';
 import { Column } from '../../components/column/Column';
 import { CustomerService } from '../service/CustomerService';
 import { TabView } from '../../components/tabview/TabView';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './DataTableDemo.scss';
 import AppDemoActions from '../../AppDemoActions';
@@ -125,7 +125,7 @@ export class DataTableScrollDemo extends Component {
                         <h1>DataTable <span>Scroll</span></h1>
                         <p>Data scrolling with fixed header is available horizontally, vertically or both. ScrollHeight and ScrollWidth values can either be fixed pixels or percentages. Certain columns can be fixed as well.
                             Virtual Scrolling mode is available to deal with large datasets by loading data on demand during scrolling.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="datatable/DataTableScrollDemo.js" />
                 </div>
 

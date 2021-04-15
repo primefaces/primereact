@@ -4,7 +4,7 @@ import { Button } from '../../components/button/Button';
 import { Rating } from '../../components/rating/Rating';
 import ProductService from '../service/ProductService';
 import { TabView } from '../../components/tabview/TabView';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './DataScrollerDemo.scss';
 import AppDemoActions from '../../AppDemoActions';
@@ -54,7 +54,7 @@ export class DataScrollerLoaderDemo extends Component {
                     <AppInlineHeader changelogText="dataScroller">
                         <h1>DataScroller <span>Loader</span></h1>
                         <p>Instead of scrolling, a custom element can be used to load data.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="datascroller/DataScrollerLoaderDemo.js" />
                 </div>
 

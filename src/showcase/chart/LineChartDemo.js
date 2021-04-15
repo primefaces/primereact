@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TabView } from '../../components/tabview/TabView';
 import { Chart } from '../../components/chart/Chart';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import AppContentContext from '../../AppContentContext';
 import AppDemoActions from '../../AppDemoActions';
@@ -236,7 +236,7 @@ export class LineChartDemo extends Component {
                     <AppInlineHeader changelogText="chart">
                         <h1>LineChart</h1>
                         <p>A line chart or line graph is a type of chart which displays information as a series of data points called 'markers' connected by straight line segments.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="chart/LineChartDemo.js" />
                 </div>
 

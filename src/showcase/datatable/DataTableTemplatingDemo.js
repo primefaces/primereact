@@ -5,7 +5,7 @@ import ProductService from '../service/ProductService';
 import { Button } from '../../components/button/Button';
 import { Rating } from '../../components/rating/Rating';
 import { TabView } from '../../components/tabview/TabView';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './DataTableDemo.scss';
 import AppDemoActions from '../../AppDemoActions';
@@ -65,7 +65,7 @@ export class DataTableTemplatingDemo extends Component {
                     <AppInlineHeader changelogText="dataTable">
                         <h1>DataTable <span>Templating</span></h1>
                         <p>Custom content at header, body and footer sections are supported via templating.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="datatable/DataTableTemplatingDemo.js" />
                 </div>
 

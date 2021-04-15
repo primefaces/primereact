@@ -4,7 +4,7 @@ import { Toast } from '../../components/toast/Toast';
 import { Column } from '../../components/column/Column';
 import { NodeService } from '../service/NodeService';
 import { TabView } from '../../components/tabview/TabView';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import AppDemoActions from '../../AppDemoActions';
 
@@ -45,7 +45,7 @@ export class TreeTableSelectionDemo extends Component {
                     <AppInlineHeader changelogText="treeTable">
                         <h1>TreeTable <span>Selection</span></h1>
                         <p>TreeTable supports single, multiple and checkbox based selection modes.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="treetable/TreeTableSelectionDemo.js" />
                 </div>
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Tree } from '../../components/tree/Tree';
 import { NodeService } from '../service/NodeService';
 import { TabView } from '../../components/tabview/TabView';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import AppDemoActions from '../../AppDemoActions';
 
@@ -28,7 +28,7 @@ export class TreeDragDropDemo extends Component {
                     <AppInlineHeader changelogText="tree">
                         <h1>Tree <span>DragDrop</span></h1>
                         <p>Nodes can be reordered using drag and drop.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="tree/TreeDragDropDemo.js" />
                 </div>
 

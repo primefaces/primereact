@@ -4,7 +4,7 @@ import { Column } from '../../components/column/Column';
 import ProductService from '../service/ProductService';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { TabView } from '../../components/tabview/TabView';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import AppDemoActions from '../../AppDemoActions';
 
 export class DataTableSizeDemo extends Component {
@@ -30,7 +30,7 @@ export class DataTableSizeDemo extends Component {
                     <AppInlineHeader changelogText="dataTable">
                         <h1>DataTable <span>Styling</span></h1>
                         <p>Particular rows and cells can be styled based on data.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="datatable/DataTableSizeDemo.js" />
                 </div>
 

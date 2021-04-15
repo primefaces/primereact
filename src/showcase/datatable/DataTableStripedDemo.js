@@ -4,7 +4,7 @@ import { Column } from '../../components/column/Column';
 import ProductService from '../service/ProductService';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { TabView } from '../../components/tabview/TabView';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import AppDemoActions from '../../AppDemoActions';
 
 export class DataTableStripedDemo extends Component {
@@ -30,7 +30,7 @@ export class DataTableStripedDemo extends Component {
                     <AppInlineHeader changelogText="dataTable">
                         <h1>DataTable <span>Striped Rows</span></h1>
                         <p>Adding <i>p-datatable-striped</i> displays striped rows.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="datatable/DataTableStripedDemo.js" />
                 </div>
 

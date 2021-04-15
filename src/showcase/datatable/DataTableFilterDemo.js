@@ -8,7 +8,7 @@ import { ProgressBar } from '../../components/progressbar/ProgressBar';
 import { Calendar } from '../../components/calendar/Calendar';
 import { MultiSelect } from '../../components/multiselect/MultiSelect';
 import { TabView } from '../../components/tabview/TabView';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './DataTableDemo.scss';
 import AppDemoActions from '../../AppDemoActions';
@@ -196,7 +196,7 @@ export class DataTableFilterDemo extends Component {
                         <p>Filtering is enabled by setting the filter property as true in column object. Default match mode is "startsWith" and this can be configured using filterMatchMode
                             property of column object that also accepts "contains", "endsWith", "equals", "in" and "custom". An optional global filter feature is available to search all fields with a keyword.
                             By default input fields are generated as filter elements and using templating any component can be used as a filter.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="datatable/DataTableFilterDemo.js" />
                 </div>
 

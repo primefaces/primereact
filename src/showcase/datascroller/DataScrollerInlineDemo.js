@@ -4,7 +4,7 @@ import { Button } from '../../components/button/Button';
 import { Rating } from '../../components/rating/Rating';
 import ProductService from '../service/ProductService';
 import { TabView } from '../../components/tabview/TabView';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './DataScrollerDemo.scss';
 import AppDemoActions from '../../AppDemoActions';
@@ -52,7 +52,7 @@ export class DataScrollerInlineDemo extends Component {
                     <AppInlineHeader changelogText="dataScroller">
                         <h1>DataScroller <span>Inline</span></h1>
                         <p>DataScroller can listen scroll event of itself rather than document in inline mode.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="datascroller/DataScrollerInlineDemo.js" />
                 </div>
 

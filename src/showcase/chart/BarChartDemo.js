@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TabView } from '../../components/tabview/TabView';
 import { Chart } from '../../components/chart/Chart';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import AppContentContext from '../../AppContentContext';
 import AppDemoActions from '../../AppDemoActions';
@@ -339,7 +339,7 @@ export class BarChartDemo extends Component {
                     <AppInlineHeader changelogText="chart">
                         <h1>BarChart</h1>
                         <p>A bar chart or bar graph is a chart that presents grouped data with rectangular bars with lengths proportional to the values that they represent.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="chart/BarChartDemo.js"/>
                 </div>
 
