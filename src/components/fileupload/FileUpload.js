@@ -590,7 +590,7 @@ export class FileUpload extends Component {
                 <span className={buttonClassName} style={chooseOptions.style} onMouseUp={this.onSimpleUploaderClick} onKeyDown={this.onKeyDown} onFocus={this.onFocus} onBlur={this.onBlur} tabIndex={0}>
                     {icon}
                     {label}
-                    { !this.hasFiles() && <input ref={(el) => this.fileInput = el} type="file" accept={this.props.accept} disabled={this.props.disabled} onChange={this.onFileSelect} /> }
+                    { !this.hasFiles() && <input ref={(el) => this.fileInput = el} type="file" accept={this.props.accept} multiple={this.props.multiple} disabled={this.props.disabled} onChange={this.onFileSelect} /> }
                     <Ripple />
                 </span>
             </div>
