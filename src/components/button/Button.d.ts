@@ -13,12 +13,6 @@ declare namespace Button {
         props: ButtonProps;
     }
 
-    interface LoadingOptions {
-        icon: IconType;
-        position: PositionType;
-        disabled: boolean;
-    }
-
     interface ButtonProps extends Omit<React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, 'disabled'> {
         label?: string;
         icon?: IconType;
@@ -29,7 +23,7 @@ declare namespace Button {
         tooltipOptions?: TooltipOptions;
         disabled?: boolean;
         loading?: boolean;
-        loadingOptions?: LoadingOptions;
+        loadingIcon?: IconType;
     }
 }
 

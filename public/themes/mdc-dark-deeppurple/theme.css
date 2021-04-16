@@ -1449,6 +1449,16 @@
     padding: 0.71375rem 0.9375rem; }
     .p-button.p-button-lg .p-button-icon {
       font-size: 1.25rem; }
+  .p-button.p-button-loading-label-only.p-button-loading-left .p-button-label {
+    margin-left: 0.5rem; }
+  .p-button.p-button-loading-label-only.p-button-loading-right .p-button-label {
+    margin-right: 0.5rem; }
+  .p-button.p-button-loading-label-only.p-button-loading-top .p-button-label {
+    margin-top: 0.5rem; }
+  .p-button.p-button-loading-label-only.p-button-loading-bottom .p-button-label {
+    margin-bottom: 0.5rem; }
+  .p-button.p-button-loading-label-only .p-button-loading-icon {
+    margin: 0; }
 
 .p-fluid .p-button {
   width: 100%; }

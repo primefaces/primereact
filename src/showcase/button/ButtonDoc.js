@@ -22,17 +22,25 @@ export class ButtonDemo extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            loading: false,
-            done: false
+            loading1: false,
+            loading2: false
         }
 
-        this.onLoadingClick = this.onLoadingClick.bind(this);
+        this.onLoadingClick1 = this.onLoadingClick1.bind(this);
+        this.onLoadingClick2 = this.onLoadingClick2.bind(this);
     }
 
-    onLoadingClick() {
-        this.setState({ loading: true, done: false });
+    onLoadingClick1() {
+        this.setState({ loading1: true });
         setTimeout(() => {
-            this.setState({ loading: false, done: true });
+            this.setState({ loading1: false });
+        }, 2000);
+    }
+
+    onLoadingClick2() {
+        this.setState({ loading2: true });
+        setTimeout(() => {
+            this.setState({ loading2: false });
         }, 2000);
     }
 
@@ -53,8 +61,9 @@ export class ButtonDemo extends Component {
                     <h5>Loading</h5>
                     <Button loading />
                     <Button label="Submit" loading />
-                    <Button label="Submit" icon="pi pi-check" loading loadingOptions={{ position: 'right' }} />
-                    <Button label="Submit" icon={this.state.done && 'pi pi-check'} loading={this.state.loading} onClick={this.onLoadingClick} />
+                    <Button label="Submit" iconPos="right" loading />
+                    <Button label="Submit" icon="pi pi-check" loading={this.state.loading1} onClick={this.onLoadingClick1} />
+                    <Button label="Submit" loading={this.state.loading2} onClick={this.onLoadingClick2} />
 
                     <h5>Severities</h5>
                     <Button label="Primary" />
@@ -207,16 +216,22 @@ import './ButtonDemo.css';
 
 const ButtonDemo = () => {
 
-    const [loading, setLoading] = useState(false);
-    const [done, setDone] = useState(false);
+    const [loading1, setLoading1] = useState(false);
+    const [loading2, setLoading2] = useState(false);
 
-    const onLoadingClick = () => {
-        setLoading(true);
-        setDone(false)
+    const onLoadingClick1 = () => {
+        setLoading1(true);
 
         setTimeout(() => {
-            setLoading(false);
-            setDone(true);
+            setLoading1(false);
+        }, 2000);
+    }
+
+    const onLoadingClick2 = () => {
+        setLoading2(true);
+
+        setTimeout(() => {
+            setLoading2(false);
         }, 2000);
     }
 
@@ -236,8 +251,9 @@ const ButtonDemo = () => {
                 <h5>Loading</h5>
                 <Button loading />
                 <Button label="Submit" loading />
-                <Button label="Submit" icon="pi pi-check" loading loadingOptions={{ position: 'right' }} />
-                <Button label="Submit" icon={done && 'pi pi-check'} loading={loading} onClick={onLoadingClick} />
+                <Button label="Submit" iconPos="right" loading />
+                <Button label="Submit" icon="pi pi-check" loading={loading1} onClick={onLoadingClick1} />
+                <Button label="Submit" loading={loading2} onClick={onLoadingClick2} />
 
                 <h5>Severities</h5>
                 <Button label="Primary" />
@@ -389,16 +405,22 @@ import './ButtonDemo.css';
 
 const ButtonDemo = () => {
 
-    const [loading, setLoading] = useState(false);
-    const [done, setDone] = useState(false);
+    const [loading1, setLoading1] = useState(false);
+    const [loading2, setLoading2] = useState(false);
 
-    const onLoadingClick = () => {
-        setLoading(true);
-        setDone(false)
+    const onLoadingClick1 = () => {
+        setLoading1(true);
 
         setTimeout(() => {
-            setLoading(false);
-            setDone(true);
+            setLoading1(false);
+        }, 2000);
+    }
+
+    const onLoadingClick2 = () => {
+        setLoading2(true);
+
+        setTimeout(() => {
+            setLoading2(false);
         }, 2000);
     }
 
@@ -418,8 +440,9 @@ const ButtonDemo = () => {
                 <h5>Loading</h5>
                 <Button loading />
                 <Button label="Submit" loading />
-                <Button label="Submit" icon="pi pi-check" loading loadingOptions={{ position: 'right' }} />
-                <Button label="Submit" icon={done && 'pi pi-check'} loading={loading} onClick={onLoadingClick} />
+                <Button label="Submit" iconPos="right" loading />
+                <Button label="Submit" icon="pi pi-check" loading={loading1} onClick={onLoadingClick1} />
+                <Button label="Submit" loading={loading2} onClick={onLoadingClick2} />
 
                 <h5>Severities</h5>
                 <Button label="Primary" />
@@ -843,13 +866,13 @@ import { Button } from 'primereact/button';
                                         <td>icon</td>
                                         <td>any</td>
                                         <td>null</td>
-                                        <td>Name of the icon.</td>
+                                        <td>Name of the icon or JSX.Element for icon.</td>
                                     </tr>
                                     <tr>
                                         <td>iconPos</td>
                                         <td>string</td>
                                         <td>left</td>
-                                        <td>Position of the icon, valid values are "left" and "right".</td>
+                                        <td>Position of the icon, valid values are "left", "right", "top" and "bottom".</td>
                                     </tr>
                                     <tr>
                                         <td>badge</td>
@@ -882,10 +905,10 @@ import { Button } from 'primereact/button';
                                         <td>Display loading icon of the button</td>
                                     </tr>
                                     <tr>
-                                        <td>loadingOptions</td>
-                                        <td>object</td>
+                                        <td>loadingIcon</td>
+                                        <td>any</td>
                                         <td>null</td>
-                                        <td>Configuration of the loading that contains custom icon and position of the loading</td>
+                                        <td>Name of the loading icon or JSX.Element for loading icon.</td>
                                     </tr>
                                 </tbody>
                             </table>

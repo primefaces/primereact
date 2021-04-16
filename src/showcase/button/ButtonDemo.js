@@ -10,17 +10,25 @@ export class ButtonDemo extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            loading: false,
-            done: false
+            loading1: false,
+            loading2: false
         }
 
-        this.onLoadingClick = this.onLoadingClick.bind(this);
+        this.onLoadingClick1 = this.onLoadingClick1.bind(this);
+        this.onLoadingClick2 = this.onLoadingClick2.bind(this);
     }
 
-    onLoadingClick() {
-        this.setState({ loading: true, done: false });
+    onLoadingClick1() {
+        this.setState({ loading1: true });
         setTimeout(() => {
-            this.setState({ loading: false, done: true });
+            this.setState({ loading1: false });
+        }, 2000);
+    }
+
+    onLoadingClick2() {
+        this.setState({ loading2: true });
+        setTimeout(() => {
+            this.setState({ loading2: false });
         }, 2000);
     }
 
@@ -51,8 +59,9 @@ export class ButtonDemo extends Component {
                         <h5>Loading</h5>
                         <Button loading />
                         <Button label="Submit" loading />
-                        <Button label="Submit" icon="pi pi-check" loading loadingOptions={{ position: 'right' }} />
-                        <Button label="Submit" icon={this.state.done && 'pi pi-check'} loading={this.state.loading} onClick={this.onLoadingClick} />
+                        <Button label="Submit" iconPos="right" loading />
+                        <Button label="Submit" icon="pi pi-check" loading={this.state.loading1} onClick={this.onLoadingClick1} />
+                        <Button label="Submit" loading={this.state.loading2} onClick={this.onLoadingClick2} />
 
                         <h5>Severities</h5>
                         <Button label="Primary" />
