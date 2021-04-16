@@ -48,7 +48,7 @@ export class BodyCell extends Component {
             }
         }
 
-        if (this.props.cellSelection) {
+        if (this.props.allowCellSelection) {
             const cell = event.currentTarget;
 
             switch (event.which) {
@@ -145,7 +145,7 @@ export class BodyCell extends Component {
             });
         }
 
-        if (this.props.cellSelection && this.props.onClick) {
+        if (this.props.allowCellSelection && this.props.onClick) {
             this.props.onClick({
                 originalEvent: event,
                 value: ObjectUtils.resolveFieldData(this.props.rowData, this.props.field),
@@ -262,53 +262,37 @@ export class BodyCell extends Component {
     findNextSelectableCell(cell) {
         let nextCell = cell.nextElementSibling;
         if (nextCell) {
-            if (DomHandler.hasClass(nextCell, 'p-selectable-cell'))
-                return nextCell;
-            else
-                return this.findNextSelectableRow(nextCell);
+            return DomHandler.hasClass(nextCell, 'p-selectable-cell') ? nextCell : this.findNextSelectableRow(nextCell);
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     findPrevSelectableCell(cell) {
         let prevCell = cell.previousElementSibling;
         if (prevCell) {
-            if (DomHandler.hasClass(prevCell, 'p-selectable-cell'))
-                return prevCell;
-            else
-                return this.findPrevSelectableRow(prevCell);
+            return DomHandler.hasClass(prevCell, 'p-selectable-cell') ? prevCell : this.findPrevSelectableRow(prevCell);
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     findNextSelectableRow(row) {
         let nextRow = row.nextElementSibling;
         if (nextRow) {
-            if (DomHandler.hasClass(nextRow, 'p-selectable-row'))
-                return nextRow;
-            else
-                return this.findNextSelectableRow(nextRow);
+            return DomHandler.hasClass(nextRow, 'p-selectable-row') ? nextRow : this.findNextSelectableRow(nextRow);
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     findPrevSelectableRow(row) {
         let prevRow = row.previousElementSibling;
         if (prevRow) {
-            if (DomHandler.hasClass(prevRow, 'p-selectable-row'))
-                return prevRow;
-            else
-                return this.findPrevSelectableRow(prevRow);
+            return DomHandler.hasClass(prevRow, 'p-selectable-row') ? prevRow : this.findPrevSelectableRow(prevRow);
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     changeTabIndex(currentCell, nextCell) {
@@ -319,36 +303,23 @@ export class BodyCell extends Component {
     }
 
     getTabIndex(cellSelected) {
-        return this.props.cellSelection ? (cellSelected ? 0 : (this.props.rowIndex === 0 && this.props.index === 0 ? 0 : -1)) : null;
+        return this.props.allowCellSelection ? (cellSelected ? 0 : (this.props.rowIndex === 0 && this.props.index === 0 ? 0 : -1)) : null;
     }
 
     isSelected() {
         if (this.props.selection) {
-            if (this.props.selection instanceof Array)
-                return this.findIndexInSelection() > -1;
-            else
-                return this.equals(this.props.selection);
+            return (this.props.selection instanceof Array) ? this.findIndexInSelection() > -1 : this.equals(this.props.selection);
         }
 
         return false;
     }
 
     equals(selectedCell) {
-        return selectedCell.rowIndex === this.props.rowIndex && (selectedCell.field === this.props.field || selectedCell.cellIndex === this.props.index);
+        return (selectedCell.rowIndex === this.props.rowIndex || selectedCell.rowData === this.props.rowData) && (selectedCell.field === this.props.field || selectedCell.cellIndex === this.props.index);
     }
 
     findIndexInSelection() {
-        let index = -1;
-        if (this.props.selection) {
-            for (let i = 0; i < this.props.selection.length; i++) {
-                if (this.equals(this.props.selection[i])) {
-                    index = i;
-                    break;
-                }
-            }
-        }
-
-        return index;
+        return this.props.selection ? this.props.selection.findIndex(d => this.equals(d)) : -1;
     }
 
     unbindDocumentEditListener() {
@@ -397,10 +368,10 @@ export class BodyCell extends Component {
 
     render() {
         let content, editorKeyHelper;
-        let cellSelected = this.props.cellSelection && this.isSelected()
+        let cellSelected = this.props.allowCellSelection && this.isSelected();
         let cellClassName = classNames(this.props.bodyClassName || this.props.className, {
             'p-selection-column': this.props.selectionMode,
-            'p-selectable-cell': this.props.cellSelection,
+            'p-selectable-cell': this.props.allowCellSelection,
             'p-highlight': cellSelected,
             'p-editable-column': this.props.editor,
             'p-cell-editing': this.state.editing && this.props.editor

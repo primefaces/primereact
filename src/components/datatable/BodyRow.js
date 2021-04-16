@@ -133,7 +133,7 @@ export class BodyRow extends Component {
     }
 
     onKeyDown(event) {
-        if (this.props.selectionMode && !this.props.cellSelection) {
+        if (this.isFocusable() && !this.props.allowCellSelection) {
             const row = event.currentTarget;
 
             switch (event.which) {
@@ -270,16 +270,20 @@ export class BodyRow extends Component {
         event.preventDefault();
     }
 
+    isFocusable() {
+        return this.props.selectionMode && this.props.selectionModeInColumn !== 'single' && this.props.selectionModeInColumn !== 'multiple';
+    }
+
     getTabIndex() {
-        return this.props.selectionMode && !this.props.cellSelection ? (this.props.rowIndex === 0 ? 0 : -1) : null;
+        return this.isFocusable() && !this.props.allowCellSelection ? (this.props.rowIndex === 0 ? 0 : -1) : null;
     }
 
     render() {
         let columns = React.Children.toArray(this.props.children);
         let conditionalClassNames = {
-            'p-highlight': !this.props.cellSelection && this.props.selected,
+            'p-highlight': !this.props.allowCellSelection && this.props.selected,
             'p-highlight-contextmenu': this.props.contextMenuSelected,
-            'p-selectable-row': this.props.selectionMode
+            'p-selectable-row': this.props.allowRowSelection
         };
 
         if (this.props.rowClassName) {
@@ -311,7 +315,7 @@ export class BodyRow extends Component {
             let cell = <BodyCell tableId={this.props.tableId} key={i} {...column.props} value={this.props.value} rowSpan={rowSpan} rowData={this.props.rowData} index={i} rowIndex={this.props.rowIndex} onRowToggle={this.props.onRowToggle} expanded={this.props.expanded}
                 onRadioClick={this.props.onRadioClick} onCheckboxClick={this.props.onCheckboxClick} selected={this.props.selected} selection={this.props.selection} selectOnEdit={this.props.selectOnEdit}
                 editMode={this.props.editMode} editing={editing} onRowEditInit={this.onRowEditInit} onRowEditSave={this.onRowEditSave} onRowEditCancel={this.onRowEditCancel} onMouseDown={this.props.onCellMouseDown} onMouseUp={this.props.onCellMouseUp}
-                showRowReorderElement={this.props.showRowReorderElement} showSelectionElement={this.props.showSelectionElement} cellSelection={this.props.cellSelection} onClick={this.props.onCellClick} />;
+                showRowReorderElement={this.props.showRowReorderElement} showSelectionElement={this.props.showSelectionElement} allowCellSelection={this.props.allowCellSelection} onClick={this.props.onCellClick} />;
 
             cells.push(cell);
         }

@@ -12,11 +12,7 @@ declare namespace DataTable {
 
     type EmptyMessageType = React.ReactNode | ((frozen: boolean) => React.ReactNode);
 
-    type SelectionModeType = 'single' | 'multiple';
-
-    type RowSelectionModeType = 'new' | 'add' | 'checkbox' | 'radio';
-
-    type CellSelectionModeType = 'new' | 'add';
+    type SelectionModeType = 'single' | 'multiple' | 'checkbox' | 'radioButton';
 
     type ColumnResizeModeType = 'fit' | 'expand';
 
@@ -94,6 +90,16 @@ declare namespace DataTable {
         originalEvent: React.MouseEvent<HTMLElement>;
     }
 
+    interface CellClickEventParams {
+        originalEvent: React.MouseEvent<HTMLElement>;
+        value: any;
+        field: string;
+        rowData: any;
+        rowIndex: number;
+        cellIndex: number;
+        selected: boolean;
+    }
+
     interface RowEditSaveParams extends RowEventParams {
         valid: boolean;
     }
@@ -157,8 +163,6 @@ declare namespace DataTable {
         removableSort?: boolean;
         emptyMessage?: EmptyMessageType;
         selectionMode?: SelectionModeType;
-        rowSelectionMode?: RowSelectionModeType;
-        cellSelectionMode?: CellSelectionModeType;
         dragSelection?: boolean;
         cellSelection?: boolean;
         selection?: any | any[];
@@ -220,6 +224,7 @@ declare namespace DataTable {
         onRowUnselect?(e: UnselectParams): void;
         onRowExpand?(e: EventParams): void;
         onRowCollapse?(e: EventParams): void;
+        onCellClick?(e: CellClickEventParams): void;
         onCellSelect?(e: SelectParams): void;
         onCellUnselect?(e: UnselectParams): void;
         onContextMenu?(e: EventParams): void;

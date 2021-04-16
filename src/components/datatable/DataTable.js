@@ -45,8 +45,6 @@ export class DataTable extends Component {
         removableSort: false,
         emptyMessage: null,
         selectionMode: null,
-        rowSelectionMode: 'new',
-        cellSelectionMode: 'new',
         dragSelection: false,
         cellSelection: false,
         selection: null,
@@ -110,6 +108,7 @@ export class DataTable extends Component {
         onRowCollapse: null,
         onContextMenu: null,
         onColReorder: null,
+        onCellClick: null,
         onCellSelect: null,
         onCellUnselect: null,
         onRowReorder: null,
@@ -158,8 +157,6 @@ export class DataTable extends Component {
         removableSort: PropTypes.bool,
         emptyMessage: PropTypes.any,
         selectionMode: PropTypes.string,
-        rowSelectionMode: PropTypes.string,
-        cellSelectionMode: PropTypes.string,
         dragSelection: PropTypes.bool,
         cellSelection: PropTypes.bool,
         selection: PropTypes.any,
@@ -221,6 +218,7 @@ export class DataTable extends Component {
         onRowUnselect: PropTypes.func,
         onRowExpand: PropTypes.func,
         onRowCollapse: PropTypes.func,
+        onCellClick: PropTypes.func,
         onCellSelect: PropTypes.func,
         onCellUnselect: PropTypes.func,
         onContextMenu: PropTypes.func,
@@ -1333,8 +1331,8 @@ export class DataTable extends Component {
 
     getSelectionModeInColumn(columns) {
         if (Array.isArray(columns)) {
-            for(let col of columns) {
-                if(col.props.selectionMode)
+            for (let col of columns) {
+                if (col.props.selectionMode)
                    return col.props.selectionMode;
             }
         }
@@ -1354,7 +1352,7 @@ export class DataTable extends Component {
 
     createTableBody(value, columns, frozen, selectionModeInColumn) {
         return <TableBody tableId={this.props.id} value={value} first={this.getFirst()} rows={this.getRows()} lazy={this.props.lazy} paginator={this.props.paginator} dataKey={this.props.dataKey} compareSelectionBy={this.props.compareSelectionBy}
-                        selectionMode={this.props.selectionMode} rowSelectionMode={this.props.rowSelectionMode} cellSelectionMode={this.props.cellSelectionMode} selection={this.props.selection} metaKeySelection={this.props.metaKeySelection} frozen={frozen} selectionModeInColumn={selectionModeInColumn}
+                        selectionMode={this.props.selectionMode} selection={this.props.selection} metaKeySelection={this.props.metaKeySelection} frozen={frozen} selectionModeInColumn={selectionModeInColumn}
                         onSelectionChange={this.props.onSelectionChange} onRowClick={this.props.onRowClick} onRowDoubleClick={this.props.onRowDoubleClick} onRowSelect={this.props.onRowSelect} onRowUnselect={this.props.onRowUnselect}
                         contextMenuSelection={this.props.contextMenuSelection} onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu}
                         expandedRows={this.props.expandedRows} onRowToggle={this.props.onRowToggle} rowExpansionTemplate={this.props.rowExpansionTemplate} selectOnEdit={this.props.selectOnEdit}
@@ -1365,7 +1363,7 @@ export class DataTable extends Component {
                         editMode={this.props.editMode} editingRows={this.props.editingRows} rowEditorValidator={this.props.rowEditorValidator}
                         onRowEditInit={this.props.onRowEditInit} onRowEditSave={this.props.onRowEditSave} onRowEditCancel={this.props.onRowEditCancel} onRowEditChange={this.props.onRowEditChange}
                         expandableRowGroups={this.props.expandableRowGroups} showRowReorderElement={this.props.showRowReorderElement} showSelectionElement={this.props.showSelectionElement}
-                        dragSelection={this.props.dragSelection} cellSelection={this.props.cellSelection} onCellSelect={this.props.onCellSelect} onCellUnselect={this.props.onCellUnselect}>
+                        dragSelection={this.props.dragSelection} cellSelection={this.props.cellSelection} onCellClick={this.props.onCellClick} onCellSelect={this.props.onCellSelect} onCellUnselect={this.props.onCellUnselect}>
                         {columns}
                 </TableBody>;
     }
