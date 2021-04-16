@@ -2678,13 +2678,7 @@ const bodyTemplate = (data, props) => {
                             <td>selectionMode</td>
                             <td>string</td>
                             <td>null</td>
-                            <td>Specifies the selection mode, valid values are "single" and "multiple".</td>
-                        </tr>
-                        <tr>
-                            <td>rowSelectMode</td>
-                            <td>string</td>
-                            <td>new</td>
-                            <td>Defines row selection mode. Valid values are "new", "add", "radio" and "checkbox".</td>
+                            <td>Specifies the selection mode, valid values are "single", "multiple", "radioButton" and "checkbox".</td>
                         </tr>
                         <tr>
                             <td>dragSelection</td>
