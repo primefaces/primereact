@@ -1,39 +1,23 @@
 export default function() {
-    let eventTarget, eventListener, eventKey;
+    const allHandlers = new Map();
 
     return {
-        on(type, listener, key) {
-            eventTarget = eventTarget || document.body.appendChild(document.createComment(''));
-            eventKey = key;
-            eventListener = function(e) { listener(e.detail); };
-            eventTarget.addEventListener(type, eventListener);
-            return this;
+        on(type, handler) {
+            let handlers = allHandlers.get(type);
+            if (!handlers)
+                handlers = [handler];
+            else
+                handlers.push(handler);
+
+            allHandlers.set(type, handlers);
         },
-        once(type, listener, key) {
-            eventTarget = eventTarget || document.body.appendChild(document.createComment(''));
-            eventKey = key;
-            eventListener = function(e) { listener(e.detail); };
-            eventTarget.addEventListener(type, eventListener, { once: true });
-            return this;
+        off(type, handler) {
+            let handlers = allHandlers.get(type);
+            handlers && handlers.splice(handlers.indexOf(handler) >>> 0, 1);
         },
-        off(type, key) {
-            if (eventTarget && eventListener && eventKey === key) {
-                eventTarget.removeEventListener(type, eventListener);
-            }
-            return this;
-        },
-        emit(type, detail) {
-            if (eventTarget) {
-                eventTarget.dispatchEvent(new CustomEvent(type, { detail }));
-            }
-            return this;
-        },
-        reset() {
-            if (eventTarget) {
-                document.body.removeChild(eventTarget);
-                eventTarget = eventListener = eventKey = undefined;
-            }
-            return this;
+        emit(type, evt) {
+            let handlers = allHandlers.get(type);
+            handlers && handlers.slice().forEach(handler => handler(evt));
         }
     }
 }

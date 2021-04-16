@@ -216,17 +216,20 @@ export class ConfirmPopup extends Component {
 
     show() {
         this.setState({ visible: true }, () => {
-            OverlayEventBus.on('overlay-click', (e) => {
+            this.overlayEventListener = (e) => {
                 if (!this.isOutsideClicked(e.target)) {
                     this.isPanelClicked = true;
                 }
-            });
+            };
+
+            OverlayEventBus.on('overlay-click', this.overlayEventListener);
         });
     }
 
     hide(result) {
         this.setState({ visible: false }, () => {
-            OverlayEventBus.off('overlay-click');
+            OverlayEventBus.off('overlay-click', this.overlayEventListener);
+            this.overlayEventListener = null;
 
             if (this.props.onHide) {
                 this.props.onHide(result);
@@ -294,6 +297,11 @@ export class ConfirmPopup extends Component {
         if (this.scrollHandler) {
             this.scrollHandler.destroy();
             this.scrollHandler = null;
+        }
+
+        if (this.overlayEventListener) {
+            OverlayEventBus.off('overlay-click', this.overlayEventListener);
+            this.overlayEventListener = null;
         }
 
         ZIndexUtils.clear(this.overlayRef.current);

@@ -22,8 +22,6 @@ export class BodyCell extends Component {
         this.onMouseDown = this.onMouseDown.bind(this);
         this.onMouseUp = this.onMouseUp.bind(this);
         this.onEditorFocus = this.onEditorFocus.bind(this);
-
-        this.eventBusKey = `${this.props.field}_${this.props.rowIndex}`;
     }
 
     onExpanderClick(event) {
@@ -136,11 +134,13 @@ export class BodyCell extends Component {
                 if (this.props.editorValidatorEvent === 'click') {
                     this.bindDocumentEditListener();
 
-                    OverlayEventBus.on('overlay-click', (e) => {
+                    this.overlayEventListener = (e) => {
                         if (!this.isOutsideClicked(e.target)) {
                             this.selfClick = true;
                         }
-                    }, this.eventBusKey);
+                    };
+
+                    OverlayEventBus.on('overlay-click', this.overlayEventListener);
                 }
             });
         }
@@ -230,7 +230,8 @@ export class BodyCell extends Component {
                 editing: false
             }, () => {
                 this.unbindDocumentEditListener();
-                OverlayEventBus.off('overlay-click', this.eventBusKey);
+                OverlayEventBus.off('overlay-click', this.overlayEventListener);
+                this.overlayEventListener = null;
             });
         }, 1);
     }
@@ -364,6 +365,11 @@ export class BodyCell extends Component {
 
     componentWillUnmount() {
         this.unbindDocumentEditListener();
+
+        if (this.overlayEventListener) {
+            OverlayEventBus.off('overlay-click', this.overlayEventListener);
+            this.overlayEventListener = null;
+        }
     }
 
     render() {

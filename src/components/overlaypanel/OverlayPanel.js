@@ -163,18 +163,21 @@ export class OverlayPanel extends Component {
         }
         else {
             this.setState({ visible: true }, () => {
-                OverlayEventBus.on('overlay-click', (e) => {
+                this.overlayEventListener = (e) => {
                     if (!this.isOutsideClicked(e.target)) {
                         this.isPanelClicked = true;
                     }
-                });
+                };
+
+                OverlayEventBus.on('overlay-click', this.overlayEventListener);
             });
         }
     }
 
     hide() {
         this.setState({ visible: false }, () => {
-            OverlayEventBus.off('overlay-click');
+            OverlayEventBus.off('overlay-click', this.overlayEventListener);
+            this.overlayEventListener = null;
         });
     }
 
@@ -260,6 +263,11 @@ export class OverlayPanel extends Component {
         if (this.styleElement) {
             document.head.removeChild(this.styleElement);
             this.styleElement = null;
+        }
+
+        if (this.overlayEventListener) {
+            OverlayEventBus.off('overlay-click', this.overlayEventListener);
+            this.overlayEventListener = null;
         }
 
         ZIndexUtils.clear(this.overlayRef.current);
