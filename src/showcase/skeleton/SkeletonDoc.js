@@ -564,7 +564,7 @@ import { Skeleton } from 'primereact/skeleton';
                                 <td>Container element of a determinate progressbar.</td>
                             </tr>
                             <tr>
-                                <td>p-skeleton-animation-none</td>
+                                <td>p-skeleton-none</td>
                                 <td>Container element of an indeterminate progressbar.</td>
                             </tr>
 						</tbody>
