@@ -8,3 +8,4 @@ module_prime_react.updateLocaleOptions = require('./components/api/Locale').upda
 module_prime_react.localeOption = require('./components/api/Locale').localeOption;
 module_prime_react.localeOptions = require('./components/api/Locale').localeOptions;
 module_prime_react.PrimeIcons = require('./components/api/PrimeIcons').PrimeIcons;
+module_prime_react.MessageSeverity = require('./components/api/MessageSeverity').MessageSeverity;

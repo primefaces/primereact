@@ -222,3 +222,11 @@ export interface PrimeIcons {
     readonly WINDOW_MAXIMIZE: string;
     readonly WINDOW_MINIMIZE: string;
 }
+
+// Severity
+export interface MessageSeverity {
+    readonly SUCCESS: string;
+    readonly INFO: string;
+    readonly WARN: string;
+    readonly ERROR: string;
+}

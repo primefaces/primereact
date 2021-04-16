@@ -1,12 +1,11 @@
 import * as React from 'react';
+import { MessageSeverity } from '../api';
 
 declare namespace Tag {
 
-    type SeverityType = 'info' | 'success' | 'warning' | 'danger';
-
     interface TagProps {
         value?: React.ReactNode;
-        severity?: SeverityType;
+        severity?: MessageSeverity;
         rounded?: boolean;
         icon?: string;
         style?: object;

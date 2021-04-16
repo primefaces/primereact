@@ -1,14 +1,13 @@
 import * as React from 'react';
+import { MessageSeverity } from '../api';
 
 declare namespace Badge {
 
     type SizeType = 'normal' | 'large' | 'xlarge';
 
-    type SeverityType = 'info' | 'success' | 'warning' | 'danger';
-
     interface BadgeProps {
         value?: any;
-        severity?: SeverityType;
+        severity?: MessageSeverity;
         size?: SizeType;
         style?: object;
         className?: string;
