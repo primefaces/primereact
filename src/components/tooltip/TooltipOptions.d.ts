@@ -2,6 +2,8 @@ import * as React from 'react';
 
 type PositionType = 'top' | 'bottom' | 'left' | 'right';
 
+type EventType = 'hover' | 'focus';
+
 interface EventParams {
     originalEvent: React.SyntheticEvent;
     target: HTMLElement;
@@ -14,7 +16,7 @@ export default interface TooltipOptions {
     position?: PositionType;
     my?: string;
     at?: string;
-    event?: string;
+    event?: EventType;
     showEvent?: string;
     hideEvent?: string;
     autoZIndex?: boolean;

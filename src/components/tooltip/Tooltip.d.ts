@@ -6,6 +6,8 @@ declare namespace Tooltip {
 
     type TargetType = string | string[] | HTMLElement;
 
+    type EventType = 'hover' | 'focus';
+
     type TemplateType = React.ReactNode | ((props: TooltipProps) => React.ReactNode);
 
     interface EventParams {
@@ -24,7 +26,7 @@ declare namespace Tooltip {
         position?: PositionType;
         my?: string;
         at?: string;
-        event?: string;
+        event?: EventType;
         showEvent?: string;
         hideEvent?: string;
         autoZIndex?: boolean;
