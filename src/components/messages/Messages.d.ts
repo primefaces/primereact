@@ -1,13 +1,14 @@
 import * as React from 'react';
-import { MessageSeverity } from '../api';
 
 declare namespace Messages {
+
+    type SeverityType = 'success' | 'info' | 'warn' | 'error' | (string & {});
 
     type MessageType = MessageOptions | MessageOptions[];
 
     interface MessageOptions {
         id?: string;
-        severity?: MessageSeverity;
+        severity?: SeverityType;
         summary?: React.ReactNode;
         detail?: React.ReactNode;
         closable?: boolean;

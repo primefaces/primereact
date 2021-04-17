@@ -18,7 +18,7 @@ export declare function localeOption(key: string, locale: string): void;
 export declare function localeOptions(locale: string): void;
 
 // Icons
-export interface PrimeIcons {
+export interface PrimeIconsOptions {
     readonly ALIGN_CENTER: string;
     readonly ALIGN_JUSTIFY: string;
     readonly ALIGN_LEFT: string;
@@ -223,10 +223,14 @@ export interface PrimeIcons {
     readonly WINDOW_MINIMIZE: string;
 }
 
+export declare const PrimeIcons: PrimeIconsOptions;
+
 // Severity
-export interface MessageSeverity {
+export interface MessageSeverityOptions {
     readonly SUCCESS: string;
     readonly INFO: string;
     readonly WARN: string;
     readonly ERROR: string;
 }
+
+export declare const MessageSeverity: MessageSeverityOptions;

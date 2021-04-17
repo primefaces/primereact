@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { MessageSeverity } from '../api';
 
 declare namespace Message {
+
+    type SeverityType = 'success' | 'info' | 'warn' | 'error' | (string & {});
 
     type ContentType = React.ReactNode | ((props: MessageProps) => React.ReactNode);
 
@@ -10,7 +11,7 @@ declare namespace Message {
         className?: string;
         style?: object;
         text?: string;
-        severity?: MessageSeverity;
+        severity?: SeverityType;
         content?: ContentType;
     }
 }

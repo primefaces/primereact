@@ -1,14 +1,15 @@
 import * as React from 'react';
-import { MessageSeverity } from '../api';
 
 declare namespace Toast {
+
+    type SeverityType = 'success' | 'info' | 'warn' | 'error' | (string & {});
 
     type MessageType = ToastMessage | ToastMessage[];
 
     type PositionType = 'center' | 'top' | 'bottom' | 'left' | 'right' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
 
     export interface ToastMessage {
-        severity?: MessageSeverity;
+        severity?: SeverityType;
         summary?: React.ReactNode;
         detail?: React.ReactNode;
         content?: React.ReactNode;
