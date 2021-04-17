@@ -19,6 +19,7 @@ import { Knob } from 'primereact/knob';
 import { Badge } from 'primereact/badge';
 import { Slider } from 'primereact/slider';
 import { Tooltip } from 'primereact/tooltip';
+import './TooltipDemo.css';
 
 export class TooltipDemo extends Component {
 
@@ -90,12 +91,24 @@ export class TooltipDemo extends Component {
                             <Badge severity="danger"></Badge>
                         </i>
                     </div>
+
+                    <h5>Color</h5>
+                    <div className="p-d-flex p-ai-center p-flex-wrap">
+                        <Button label="Blue" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Blue" tooltipOptions={{ className: 'blue-tooltip', position: 'top' }} />
+                        <Button label="Green" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Green" tooltipOptions={{ className: 'green-tooltip', position: 'top' }} />
+                        <Button label="Yellow" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Yellow" tooltipOptions={{ className: 'yellow-tooltip', position: 'top' }} />
+                        <Button label="Cyan" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Cyan" tooltipOptions={{ className: 'cyan-tooltip', position: 'top' }} />
+                        <Button label="Pink" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Pink" tooltipOptions={{ className: 'pink-tooltip', position: 'top' }} />
+                        <Button label="Indigo" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Indigo" tooltipOptions={{ className: 'indigo-tooltip', position: 'top' }} />
+                        <Button label="Teal" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Teal" tooltipOptions={{ className: 'teal-tooltip', position: 'top' }} />
+                        <Button label="Blue Gray" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Blue Gray" tooltipOptions={{ className: 'bluegray-tooltip', position: 'top' }} />
+                        <Button label="Purple Gray" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Purple" tooltipOptions={{ className: 'purple-tooltip', position: 'top' }} />
+                    </div>
                 </div>
             </div>
         )
     }
 }
-
                 `
             },
             'hooks': {
@@ -108,6 +121,7 @@ import { Knob } from 'primereact/knob';
 import { Badge } from 'primereact/badge';
 import { Slider } from 'primereact/slider';
 import { Tooltip } from 'primereact/tooltip';
+import './TooltipDemo.css';
 
 const TooltipDemo = () => {
     const [saveBtnTooltipText, setSaveBtnTooltipText] = useState('Click to proceed');
@@ -172,11 +186,23 @@ const TooltipDemo = () => {
                         <Badge severity="danger"></Badge>
                     </i>
                 </div>
+
+                <h5>Color</h5>
+                <div className="p-d-flex p-ai-center p-flex-wrap">
+                    <Button label="Blue" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Blue" tooltipOptions={{ className: 'blue-tooltip', position: 'top' }} />
+                    <Button label="Green" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Green" tooltipOptions={{ className: 'green-tooltip', position: 'top' }} />
+                    <Button label="Yellow" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Yellow" tooltipOptions={{ className: 'yellow-tooltip', position: 'top' }} />
+                    <Button label="Cyan" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Cyan" tooltipOptions={{ className: 'cyan-tooltip', position: 'top' }} />
+                    <Button label="Pink" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Pink" tooltipOptions={{ className: 'pink-tooltip', position: 'top' }} />
+                    <Button label="Indigo" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Indigo" tooltipOptions={{ className: 'indigo-tooltip', position: 'top' }} />
+                    <Button label="Teal" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Teal" tooltipOptions={{ className: 'teal-tooltip', position: 'top' }} />
+                    <Button label="Blue Gray" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Blue Gray" tooltipOptions={{ className: 'bluegray-tooltip', position: 'top' }} />
+                    <Button label="Purple Gray" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Purple" tooltipOptions={{ className: 'purple-tooltip', position: 'top' }} />
+                </div>
             </div>
         </div>
     )
 }
-
                 `
             },
             'ts': {
@@ -189,6 +215,7 @@ import { Knob } from 'primereact/knob';
 import { Badge } from 'primereact/badge';
 import { Slider } from 'primereact/slider';
 import { Tooltip } from 'primereact/tooltip';
+import './TooltipDemo.css';
 
 const TooltipDemo = () => {
     const [saveBtnTooltipText, setSaveBtnTooltipText] = useState('Click to proceed');
@@ -253,11 +280,84 @@ const TooltipDemo = () => {
                         <Badge severity="danger"></Badge>
                     </i>
                 </div>
+
+                <h5>Color</h5>
+                <div className="p-d-flex p-ai-center p-flex-wrap">
+                    <Button label="Blue" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Blue" tooltipOptions={{ className: 'blue-tooltip', position: 'top' }} />
+                    <Button label="Green" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Green" tooltipOptions={{ className: 'green-tooltip', position: 'top' }} />
+                    <Button label="Yellow" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Yellow" tooltipOptions={{ className: 'yellow-tooltip', position: 'top' }} />
+                    <Button label="Cyan" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Cyan" tooltipOptions={{ className: 'cyan-tooltip', position: 'top' }} />
+                    <Button label="Pink" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Pink" tooltipOptions={{ className: 'pink-tooltip', position: 'top' }} />
+                    <Button label="Indigo" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Indigo" tooltipOptions={{ className: 'indigo-tooltip', position: 'top' }} />
+                    <Button label="Teal" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Teal" tooltipOptions={{ className: 'teal-tooltip', position: 'top' }} />
+                    <Button label="Blue Gray" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Blue Gray" tooltipOptions={{ className: 'bluegray-tooltip', position: 'top' }} />
+                    <Button label="Purple Gray" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Purple" tooltipOptions={{ className: 'purple-tooltip', position: 'top' }} />
+                </div>
             </div>
         </div>
     )
 }
+                `
+            }
+        };
 
+        this.extFiles = {
+            'src/demo/TooltipDemo.css': {
+                content: `
+.blue-tooltip.p-tooltip .p-tooltip-arrow {
+    border-top-color: var(--blue-500);
+}
+.blue-tooltip.p-tooltip .p-tooltip-text {
+    background-color: var(--blue-500);
+}
+.green-tooltip.p-tooltip .p-tooltip-arrow {
+    border-top-color: var(--green-500);
+}
+.green-tooltip.p-tooltip .p-tooltip-text {
+    background-color: var(--green-500);
+}
+.yellow-tooltip.p-tooltip .p-tooltip-arrow {
+    border-top-color: var(--yellow-500);
+}
+.yellow-tooltip.p-tooltip .p-tooltip-text {
+    background-color: var(--yellow-500);
+}
+.cyan-tooltip.p-tooltip .p-tooltip-arrow {
+    border-top-color: var(--cyan-500);
+}
+.cyan-tooltip.p-tooltip .p-tooltip-text {
+    background-color: var(--cyan-500);
+}
+.pink-tooltip.p-tooltip .p-tooltip-arrow {
+    border-top-color: var(--pink-500);
+}
+.pink-tooltip.p-tooltip .p-tooltip-text {
+    background-color: var(--pink-500);
+}
+.indigo-tooltip.p-tooltip .p-tooltip-arrow {
+    border-top-color: var(--indigo-500);
+}
+.indigo-tooltip.p-tooltip .p-tooltip-text {
+    background-color: var(--indigo-500);
+}
+.teal-tooltip.p-tooltip .p-tooltip-arrow {
+    border-top-color: var(--teal-500);
+}
+.teal-tooltip.p-tooltip .p-tooltip-text {
+    background-color: var(--teal-500);
+}
+.bluegray-tooltip.p-tooltip .p-tooltip-arrow {
+    border-top-color: var(--bluegray-500);
+}
+.bluegray-tooltip.p-tooltip .p-tooltip-text {
+    background-color: var(--bluegray-500);
+}
+.purple-tooltip.p-tooltip .p-tooltip-arrow {
+    border-top-color: var(--purple-500);
+}
+.purple-tooltip.p-tooltip .p-tooltip-text {
+    background-color: var(--purple-500);
+}
                 `
             }
         }
@@ -686,7 +786,7 @@ import { Tooltip } from 'primereact/tooltip';
                     </TabPanel>
 
                     {
-                        useLiveEditorTabs({ name: 'TooltipDemo', sources: this.sources })
+                        useLiveEditorTabs({ name: 'TooltipDemo', sources: this.sources, extFiles: this.extFiles })
                     }
                 </TabView>
             </div>

@@ -91,11 +91,16 @@ export class TooltipDemo extends Component {
                         </div>
 
                         <h5>Color</h5>
-                        <div className="p-d-flex p-ai-center">
-                            <Button icon="pi pi-check" className="p-button-success p-mr-3" tooltip="Success" tooltipOptions={{ className: 'success-tooltip', position: 'top' }} />
-                            <Button icon="pi pi-info-circle" className="p-button-info p-mr-3" tooltip="Info" tooltipOptions={{ className: 'info-tooltip', position: 'top' }} />
-                            <Button icon="pi pi-exclamation-triangle" className="p-button-warning p-mr-3" tooltip="Warn" tooltipOptions={{ className: 'warn-tooltip', position: 'top' }} />
-                            <Button icon="pi pi-times-circle" className="p-button-danger" tooltip="Error" tooltipOptions={{ className: 'danger-tooltip', position: 'top' }} />
+                        <div className="p-d-flex p-ai-center p-flex-wrap">
+                            <Button label="Blue" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Blue" tooltipOptions={{ className: 'blue-tooltip', position: 'top' }} />
+                            <Button label="Green" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Green" tooltipOptions={{ className: 'green-tooltip', position: 'top' }} />
+                            <Button label="Yellow" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Yellow" tooltipOptions={{ className: 'yellow-tooltip', position: 'top' }} />
+                            <Button label="Cyan" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Cyan" tooltipOptions={{ className: 'cyan-tooltip', position: 'top' }} />
+                            <Button label="Pink" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Pink" tooltipOptions={{ className: 'pink-tooltip', position: 'top' }} />
+                            <Button label="Indigo" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Indigo" tooltipOptions={{ className: 'indigo-tooltip', position: 'top' }} />
+                            <Button label="Teal" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Teal" tooltipOptions={{ className: 'teal-tooltip', position: 'top' }} />
+                            <Button label="Blue Gray" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Blue Gray" tooltipOptions={{ className: 'bluegray-tooltip', position: 'top' }} />
+                            <Button label="Purple Gray" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Purple" tooltipOptions={{ className: 'purple-tooltip', position: 'top' }} />
                         </div>
                     </div>
                 </div>

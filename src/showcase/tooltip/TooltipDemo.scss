@@ -1,47 +1,47 @@
-.success-tooltip {
+@mixin tooltip-color($color) {
     &.p-tooltip {
         .p-tooltip-arrow {
-            border-top-color: var(--green-600);
+            border-top-color: var(#{$color});
         }
 
         .p-tooltip-text {
-            background-color: var(--green-600);
+            background-color: var(#{$color});
         }
     }
 }
 
-.info-tooltip {
-    &.p-tooltip {
-        .p-tooltip-arrow {
-            border-top-color: var(--blue-600);
-        }
-
-        .p-tooltip-text {
-            background-color: var(--blue-600);
-        }
-    }
+.blue-tooltip {
+    @include tooltip-color(--blue-500);
 }
 
-.warn-tooltip {
-    &.p-tooltip {
-        .p-tooltip-arrow {
-            border-top-color: var(--yellow-500);
-        }
-
-        .p-tooltip-text {
-            background-color: var(--yellow-500);
-        }
-    }
+.green-tooltip {
+    @include tooltip-color(--green-500);
 }
 
-.danger-tooltip {
-    &.p-tooltip {
-        .p-tooltip-arrow {
-            border-top-color: var(--pink-600);
-        }
+.yellow-tooltip {
+    @include tooltip-color(--yellow-500);
+}
 
-        .p-tooltip-text {
-            background-color: var(--pink-600);
-        }
-    }
+.cyan-tooltip {
+    @include tooltip-color(--cyan-500);
+}
+
+.pink-tooltip {
+    @include tooltip-color(--pink-500);
+}
+
+.indigo-tooltip {
+    @include tooltip-color(--indigo-500);
+}
+
+.teal-tooltip {
+    @include tooltip-color(--teal-500);
+}
+
+.bluegray-tooltip {
+    @include tooltip-color(--bluegray-500);
+}
+
+.purple-tooltip {
+    @include tooltip-color(--purple-500);
 }
