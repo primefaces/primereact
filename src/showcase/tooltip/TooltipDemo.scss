@@ -1,0 +1,47 @@
+.success-tooltip {
+    &.p-tooltip {
+        .p-tooltip-arrow {
+            border-top-color: var(--green-600);
+        }
+
+        .p-tooltip-text {
+            background-color: var(--green-600);
+        }
+    }
+}
+
+.info-tooltip {
+    &.p-tooltip {
+        .p-tooltip-arrow {
+            border-top-color: var(--blue-600);
+        }
+
+        .p-tooltip-text {
+            background-color: var(--blue-600);
+        }
+    }
+}
+
+.warn-tooltip {
+    &.p-tooltip {
+        .p-tooltip-arrow {
+            border-top-color: var(--yellow-500);
+        }
+
+        .p-tooltip-text {
+            background-color: var(--yellow-500);
+        }
+    }
+}
+
+.danger-tooltip {
+    &.p-tooltip {
+        .p-tooltip-arrow {
+            border-top-color: var(--pink-600);
+        }
+
+        .p-tooltip-text {
+            background-color: var(--pink-600);
+        }
+    }
+}

@@ -8,6 +8,7 @@ import { Badge } from '../../components/badge/Badge';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { TooltipDoc } from './TooltipDoc';
 import AppDemoActions from '../../AppDemoActions';
+import './TooltipDemo.scss';
 
 export class TooltipDemo extends Component {
 
@@ -27,7 +28,7 @@ export class TooltipDemo extends Component {
                     <AppInlineHeader changelogText="tooltip">
                         <h1>Tooltip</h1>
                         <p>Tooltip functionality is integrated within various PrimeReact components.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="tooltip/TooltipDemo.js" />
                 </div>
 
@@ -87,6 +88,14 @@ export class TooltipDemo extends Component {
                             <i className="custom-target-icon pi pi-envelope p-text-secondary p-overlay-badge" data-pr-tooltip="No notifications" data-pr-position="right" data-pr-at="right+5 top" data-pr-my="left center-2" style={{ fontSize: '2rem', cursor: 'pointer' }}>
                                 <Badge severity="danger"></Badge>
                             </i>
+                        </div>
+
+                        <h5>Color</h5>
+                        <div className="p-d-flex p-ai-center">
+                            <Button icon="pi pi-check" className="p-button-success p-mr-3" tooltip="Success" tooltipOptions={{ className: 'success-tooltip', position: 'top' }} />
+                            <Button icon="pi pi-info-circle" className="p-button-info p-mr-3" tooltip="Info" tooltipOptions={{ className: 'info-tooltip', position: 'top' }} />
+                            <Button icon="pi pi-exclamation-triangle" className="p-button-warning p-mr-3" tooltip="Warn" tooltipOptions={{ className: 'warn-tooltip', position: 'top' }} />
+                            <Button icon="pi pi-times-circle" className="p-button-danger" tooltip="Error" tooltipOptions={{ className: 'danger-tooltip', position: 'top' }} />
                         </div>
                     </div>
                 </div>
