@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
+import PrimeReact from '../api/PrimeReact';
 
 export class Portal extends Component {
 
@@ -36,7 +37,8 @@ export class Portal extends Component {
 
     render() {
         if (this.props.element && this.state.mounted) {
-            return this.props.appendTo === 'self' ? this.props.element : ReactDOM.createPortal(this.props.element, this.props.appendTo || document.body);
+            const appendTo = this.props.appendTo || PrimeReact.appendTo || document.body;
+            return appendTo === 'self' ? this.props.element : ReactDOM.createPortal(this.props.element, appendTo);
         }
 
         return null;

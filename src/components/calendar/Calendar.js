@@ -12,6 +12,7 @@ import { localeOption, localeOptions } from '../api/Locale';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 import { mask } from '../utils/Mask';
 import { ZIndexUtils } from '../utils/ZIndexUtils';
+import PrimeReact from '../api/PrimeReact';
 
 export class Calendar extends Component {
 
@@ -1629,15 +1630,7 @@ export class Calendar extends Component {
             this.enableModality();
         }
         else {
-            const container = this.inputRef.current.parentElement;
-
-            if (this.props.appendTo === 'self') {
-                DomHandler.relativePosition(this.overlayRef.current, container);
-            }
-            else {
-                this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
-                DomHandler.absolutePosition(this.overlayRef.current, container);
-            }
+            DomHandler.alignOverlay(this.overlayRef.current, this.inputRef.current.parentElement, this.props.appendTo || PrimeReact.appendTo);
         }
     }
 

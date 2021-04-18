@@ -11,6 +11,7 @@ import { MultiSelectPanel } from './MultiSelectPanel';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 import { ZIndexUtils } from '../utils/ZIndexUtils';
+import PrimeReact from '../api/PrimeReact';
 
 export class MultiSelect extends Component {
 
@@ -342,7 +343,7 @@ export class MultiSelect extends Component {
 
     onOverlayEnter() {
         ZIndexUtils.set('overlay', this.overlayRef.current);
-        this.alignPanel();
+        this.alignOverlay();
     }
 
     onOverlayEntered() {
@@ -369,16 +370,8 @@ export class MultiSelect extends Component {
         this.props.onHide && this.props.onHide();
     }
 
-    alignPanel() {
-        const container = this.label.parentElement;
-
-        if (this.props.appendTo === 'self') {
-            DomHandler.relativePosition(this.overlayRef.current, container);
-        }
-        else {
-            this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
-            DomHandler.absolutePosition(this.overlayRef.current, container);
-        }
+    alignOverlay() {
+        DomHandler.alignOverlay(this.overlayRef.current, this.label.parentElement, this.props.appendTo || PrimeReact.appendTo);
     }
 
     onCloseClick(event) {

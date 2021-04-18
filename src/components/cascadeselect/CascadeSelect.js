@@ -9,6 +9,7 @@ import { CascadeSelectSub } from "./CascadeSelectSub";
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 import { Portal } from '../portal/Portal';
 import { ZIndexUtils } from '../utils/ZIndexUtils';
+import PrimeReact from '../api/PrimeReact';
 
 export class CascadeSelect extends Component {
 
@@ -275,15 +276,7 @@ export class CascadeSelect extends Component {
     }
 
     alignOverlay() {
-        const container = this.label.parentElement;
-
-        if (this.props.appendTo === 'self') {
-            DomHandler.relativePosition(this.overlayRef.current, container);
-        }
-        else {
-            DomHandler.absolutePosition(this.overlayRef.current, container);
-            this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
-        }
+        DomHandler.alignOverlay(this.overlayRef.current, this.label.parentElement, this.props.appendTo || PrimeReact.appendTo);
     }
 
     bindOutsideClickListener() {

@@ -10,6 +10,7 @@ import { tip } from '../tooltip/Tooltip';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 import { ZIndexUtils } from '../utils/ZIndexUtils';
+import PrimeReact from '../api/PrimeReact';
 
 export class Dropdown extends Component {
 
@@ -599,7 +600,7 @@ export class Dropdown extends Component {
 
     onOverlayEnter() {
         ZIndexUtils.set('overlay', this.overlayRef.current);
-        this.alignPanel();
+        this.alignOverlay();
         this.scrollInView();
     }
 
@@ -631,15 +632,8 @@ export class Dropdown extends Component {
         this.props.onHide && this.props.onHide();
     }
 
-    alignPanel() {
-        const container = this.input.parentElement;
-        if (this.props.appendTo === 'self') {
-            DomHandler.relativePosition(this.overlayRef.current, container);
-        }
-        else {
-            this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
-            DomHandler.absolutePosition(this.overlayRef.current, container);
-        }
+    alignOverlay() {
+        DomHandler.alignOverlay(this.overlayRef.current, this.input.parentElement, this.props.appendTo || PrimeReact.appendTo);
     }
 
     scrollInView() {
@@ -840,7 +834,7 @@ export class Dropdown extends Component {
     componentDidUpdate(prevProps) {
         if (this.state.overlayVisible) {
             if (this.props.filter) {
-                this.alignPanel();
+                this.alignOverlay();
             }
 
             if (prevProps.value !== this.props.value) {

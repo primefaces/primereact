@@ -8,6 +8,7 @@ import ObjectUtils from '../utils/ObjectUtils';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 import { ZIndexUtils } from '../utils/ZIndexUtils';
+import PrimeReact from '../api/PrimeReact';
 
 export class ColorPicker extends Component {
 
@@ -295,7 +296,7 @@ export class ColorPicker extends Component {
 
     onOverlayEnter() {
         ZIndexUtils.set('overlay', this.overlayRef.current);
-        this.alignPanel();
+        this.alignOverlay();
     }
 
     onOverlayEntered() {
@@ -630,17 +631,9 @@ export class ColorPicker extends Component {
         this.updateColorSelector();
     }
 
-    alignPanel() {
+    alignOverlay() {
         if (this.inputRef && this.inputRef.current) {
-            const container = this.inputRef.current.parentElement;
-
-            if (this.props.appendTo === 'self') {
-                DomHandler.relativePosition(this.overlayRef.current, container);
-            }
-            else {
-                this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
-                DomHandler.absolutePosition(this.overlayRef.current, container);
-            }
+            DomHandler.alignOverlay(this.overlayRef.current, this.inputRef.current.parentElement, this.props.appendTo || PrimeReact.appendTo);
         }
     }
 

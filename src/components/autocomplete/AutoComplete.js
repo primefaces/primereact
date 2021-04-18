@@ -11,6 +11,7 @@ import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 import { ZIndexUtils } from '../utils/ZIndexUtils';
+import PrimeReact from '../api/PrimeReact';
 
 export class AutoComplete extends Component {
 
@@ -321,14 +322,7 @@ export class AutoComplete extends Component {
 
     alignOverlay() {
         let target = this.props.multiple ? this.multiContainer : this.inputRef.current;
-
-        if (this.props.appendTo === 'self') {
-            DomHandler.relativePosition(this.overlayRef.current, target);
-        }
-        else {
-            this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(target) + 'px';
-            DomHandler.absolutePosition(this.overlayRef.current, target);
-        }
+        DomHandler.alignOverlay(this.overlayRef.current, target, this.props.appendTo || PrimeReact.appendTo);
     }
 
     onPanelClick(event) {

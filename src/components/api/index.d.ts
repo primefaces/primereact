@@ -3,6 +3,7 @@ interface APIOptions {
     ripple?: boolean;
     locale?: string;
     zIndex?: number;
+    appendTo?: 'self' | HTMLElement | undefined | null;
 }
 
 declare const PrimeReact: APIOptions;

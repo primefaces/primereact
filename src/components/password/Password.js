@@ -11,6 +11,7 @@ import { localeOption } from '../api/Locale';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 import { Portal } from '../portal/Portal';
 import { ZIndexUtils } from '../utils/ZIndexUtils';
+import PrimeReact from '../api/PrimeReact';
 
 export class Password extends Component {
 
@@ -188,15 +189,7 @@ export class Password extends Component {
 
     alignOverlay() {
         if (this.inputRef && this.inputRef.current) {
-            const container = this.inputRef.current.parentElement;
-
-            if (this.props.appendTo === 'self') {
-                DomHandler.relativePosition(this.overlayRef.current, container);
-            }
-            else {
-                this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
-                DomHandler.absolutePosition(this.overlayRef.current, container);
-            }
+            DomHandler.alignOverlay(this.overlayRef.current, this.inputRef.current.parentElement, this.props.appendTo || PrimeReact.appendTo);
         }
     }
 
