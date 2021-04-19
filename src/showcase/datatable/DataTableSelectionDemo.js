@@ -184,7 +184,7 @@ export class DataTableSelectionDemo extends Component {
 
                         <h6>Row Selection</h6>
                         <DataTable value={this.state.products} selection={this.state.selectedProduct5} onSelectionChange={e => this.setState({ selectedProduct5: e.value })} dataKey="id">
-                            <Column selectionMode="single" headerStyle={{width: '3em'}}></Column>
+                            <Column selectionMode="single" headerStyle={{ width: '3em' }}></Column>
                             <Column field="code" header="Code"></Column>
                             <Column field="name" header="Name"></Column>
                             <Column field="category" header="Category"></Column>
@@ -193,7 +193,7 @@ export class DataTableSelectionDemo extends Component {
 
                         <h6>RadioButton-Only Selection</h6>
                         <DataTable value={this.state.products} selectionMode="radiobutton" selection={this.state.selectedProduct6} onSelectionChange={e => this.setState({ selectedProduct6: e.value })} dataKey="id">
-                            <Column selectionMode="single" headerStyle={{width: '3em'}}></Column>
+                            <Column selectionMode="single" headerStyle={{ width: '3em' }}></Column>
                             <Column field="code" header="Code"></Column>
                             <Column field="name" header="Name"></Column>
                             <Column field="category" header="Category"></Column>
@@ -206,7 +206,7 @@ export class DataTableSelectionDemo extends Component {
 
                         <h6>Row Selection</h6>
                         <DataTable value={this.state.products} selection={this.state.selectedProducts7} onSelectionChange={e => this.setState({ selectedProducts7: e.value })} dataKey="id">
-                            <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>
+                            <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
                             <Column field="code" header="Code"></Column>
                             <Column field="name" header="Name"></Column>
                             <Column field="category" header="Category"></Column>
@@ -215,7 +215,7 @@ export class DataTableSelectionDemo extends Component {
 
                         <h6>Checkbox-Only Selection</h6>
                         <DataTable value={this.state.products} selectionMode="checkbox" selection={this.state.selectedProducts8} onSelectionChange={e => this.setState({ selectedProducts8: e.value })} dataKey="id">
-                            <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>
+                            <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
                             <Column field="code" header="Code"></Column>
                             <Column field="name" header="Name"></Column>
                             <Column field="category" header="Category"></Column>
@@ -244,7 +244,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import ProductService from '../service/ProductService';
 import { Toast } from 'primereact/toast';
-import './DataTableDemo.scss';
+import './DataTableDemo.css';
 
 export class DataTableSelectionDemo extends Component {
 
@@ -463,7 +463,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import ProductService from '../service/ProductService';
 import { Toast } from 'primereact/toast';
-import './DataTableDemo.scss';
+import './DataTableDemo.css';
 
 const DataTableSelectionDemo = () => {
 
@@ -671,7 +671,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import ProductService from '../service/ProductService';
 import { Toast } from 'primereact/toast';
-import './DataTableDemo.scss';
+import './DataTableDemo.css';
 
 const DataTableSelectionDemo = () => {
 
@@ -896,7 +896,7 @@ const DataTableSelectionDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
-                        useLiveEditorTabs({ name: 'DataTableSelectionDemo', sources: this.sources, service: 'ProductService', data: 'products-small' })
+                        useLiveEditorTabs({ name: 'DataTableSelectionDemo', sources: this.sources, service: 'ProductService', data: 'products-small', extFiles: this.extFiles })
                     }
                 </TabView>
             </div>
