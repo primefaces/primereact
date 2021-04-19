@@ -102,7 +102,7 @@ export class TooltipDemo extends Component {
                         <Button label="Indigo" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Indigo" tooltipOptions={{ className: 'indigo-tooltip', position: 'top' }} />
                         <Button label="Teal" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Teal" tooltipOptions={{ className: 'teal-tooltip', position: 'top' }} />
                         <Button label="Blue Gray" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Blue Gray" tooltipOptions={{ className: 'bluegray-tooltip', position: 'top' }} />
-                        <Button label="Purple Gray" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Purple" tooltipOptions={{ className: 'purple-tooltip', position: 'top' }} />
+                        <Button label="Purple" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Purple" tooltipOptions={{ className: 'purple-tooltip', position: 'top' }} />
                     </div>
                 </div>
             </div>
@@ -197,7 +197,7 @@ const TooltipDemo = () => {
                     <Button label="Indigo" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Indigo" tooltipOptions={{ className: 'indigo-tooltip', position: 'top' }} />
                     <Button label="Teal" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Teal" tooltipOptions={{ className: 'teal-tooltip', position: 'top' }} />
                     <Button label="Blue Gray" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Blue Gray" tooltipOptions={{ className: 'bluegray-tooltip', position: 'top' }} />
-                    <Button label="Purple Gray" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Purple" tooltipOptions={{ className: 'purple-tooltip', position: 'top' }} />
+                    <Button label="Purple" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Purple" tooltipOptions={{ className: 'purple-tooltip', position: 'top' }} />
                 </div>
             </div>
         </div>
@@ -291,7 +291,7 @@ const TooltipDemo = () => {
                     <Button label="Indigo" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Indigo" tooltipOptions={{ className: 'indigo-tooltip', position: 'top' }} />
                     <Button label="Teal" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Teal" tooltipOptions={{ className: 'teal-tooltip', position: 'top' }} />
                     <Button label="Blue Gray" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Blue Gray" tooltipOptions={{ className: 'bluegray-tooltip', position: 'top' }} />
-                    <Button label="Purple Gray" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Purple" tooltipOptions={{ className: 'purple-tooltip', position: 'top' }} />
+                    <Button label="Purple" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Purple" tooltipOptions={{ className: 'purple-tooltip', position: 'top' }} />
                 </div>
             </div>
         </div>
@@ -539,6 +539,12 @@ import { Tooltip } from 'primereact/tooltip';
                                         <td>Delay to hide the tooltip in milliseconds.</td>
                                     </tr>
                                     <tr>
+                                        <td>autoHide</td>
+                                        <td>boolean</td>
+                                        <td>true</td>
+                                        <td>Whether to hide tooltip when hovering over tooltip content.</td>
+                                    </tr>
+                                    <tr>
                                         <td>onBeforeShow</td>
                                         <td>function</td>
                                         <td>null</td>
@@ -689,6 +695,12 @@ import { Tooltip } from 'primereact/tooltip';
                                         <td>number</td>
                                         <td>0</td>
                                         <td>Delay to hide the tooltip in milliseconds.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>data-pr-autohide</td>
+                                        <td>boolean</td>
+                                        <td>true</td>
+                                        <td>Whether to hide tooltip when hovering over tooltip content.</td>
                                     </tr>
                                 </tbody>
                             </table>

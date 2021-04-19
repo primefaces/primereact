@@ -27,6 +27,7 @@ export default interface TooltipOptions {
     showDelay?: number;
     updateDelay?: number;
     hideDelay?: number;
+    autoHide?: boolean;
     onBeforeShow?(e: EventParams): void;
     onBeforeHide?(e: EventParams): void;
     onShow?(e: EventParams): void;

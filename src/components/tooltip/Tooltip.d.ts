@@ -1,46 +1,15 @@
 import * as React from 'react';
+import TooltipOptions from './TooltipOptions';
 
 declare namespace Tooltip {
 
-    type PositionType = 'top' | 'bottom' | 'left' | 'right';
-
     type TargetType = string | string[] | HTMLElement;
 
-    type EventType = 'hover' | 'focus';
-
-    type TemplateType = React.ReactNode | ((props: TooltipProps) => React.ReactNode);
-
-    interface EventParams {
-        originalEvent: React.SyntheticEvent;
-        target: HTMLElement;
-    }
-
-    interface TooltipProps {
+    interface TooltipProps extends TooltipOptions {
         id?: string;
         target?: TargetType;
         content?: string;
         disabled?: boolean;
-        className?: string;
-        style?: object;
-        appendTo?: HTMLElement | string;
-        position?: PositionType;
-        my?: string;
-        at?: string;
-        event?: EventType;
-        showEvent?: string;
-        hideEvent?: string;
-        autoZIndex?: boolean;
-        baseZIndex?: number;
-        mouseTrack?: boolean;
-        mouseTrackTop?: number;
-        mouseTrackLeft?: number;
-        showDelay?: number;
-        updateDelay?: number;
-        hideDelay?: number;
-        onBeforeShow?(e: EventParams): void;
-        onBeforeHide?(e: EventParams): void;
-        onShow?(e: EventParams): void;
-        onHide?(e: EventParams): void;
     }
 }
 
