@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import { classNames } from '../utils/ClassNames';
@@ -160,7 +160,7 @@ export class Dialog extends Component {
     }
 
     onDragStart(event) {
-        if (DomHandler.hasClass(event.target, 'p-dialog-header-icon') || DomHandler.hasClass(event.target.parentElement, 'p-dialog-header-icon')) {
+        if (DomHandler.hasClass(event.target, 'p-dialog-header-icon') || DomHandler.hasClass(event.target.parentElement, 'p-dialog-header-icon')) {
             return;
         }
 
@@ -246,10 +246,15 @@ export class Dialog extends Component {
             let width = DomHandler.getOuterWidth(this.dialogEl);
             let height = DomHandler.getOuterHeight(this.dialogEl);
             let contentHeight = DomHandler.getOuterHeight(this.contentEl);
+            let screenHight = window.screen.height;
+            let screenWidth = window.screen.width;
+
             let newWidth = width + deltaX;
             let newHeight = height + deltaY;
-            let minWidth = this.dialogEl.style.minWidth;
-            let minHeight = this.dialogEl.style.minHeight;
+            //Converts from percentage to pixel if Dialog's minWidth is percentage
+            let minWidth = /^(\d+|(\.\d+))(\.\d+)?%$/.test(this.dialogEl.style.minWidth) ? parseInt(this.dialogEl.style.minWidth) * (screenWidth / 100) : parseInt(this.dialogEl.style.minWidth);
+            //Converts from percentage to pixel if Dialog's minHeight is percentage
+            let minHeight = /^(\d+|(\.\d+))(\.\d+)?%$/.test(this.dialogEl.style.minHeight) ? parseInt(this.dialogEl.style.minHeight) * (screenHight / 100) : parseInt(this.dialogEl.style.minHeight);
             let offset = this.dialogEl.getBoundingClientRect();
             let viewport = DomHandler.getViewport();
             let hasBeenDragged = !parseInt(this.dialogEl.style.top) || !parseInt(this.dialogEl.style.left);
@@ -259,11 +264,11 @@ export class Dialog extends Component {
                 newHeight += deltaY;
             }
 
-            if ((!minWidth || newWidth > parseInt(minWidth)) && (offset.left + newWidth) < viewport.width) {
+            if ((!minWidth || newWidth > minWidth) && (offset.left + newWidth) < viewport.width) {
                 this.dialogEl.style.width = newWidth + 'px';
             }
 
-            if ((!minHeight || newHeight > parseInt(minHeight)) && (offset.top + newHeight) < viewport.height) {
+            if ((!minHeight || newHeight > minHeight) && (offset.top + newHeight) < viewport.height) {
                 this.contentEl.style.height = contentHeight + newHeight - height + 'px';
                 this.dialogEl.style.height = newHeight + 'px';
             }
@@ -274,6 +279,7 @@ export class Dialog extends Component {
             if (this.props.onResize) {
                 this.props.onResize(event);
             }
+            
         }
     }
 
@@ -454,7 +460,7 @@ export class Dialog extends Component {
         };
 
         let newParam = { id: this.state.id, hasBlockScroll: this.props.blockScroll };
-        document.primeDialogParams = document.primeDialogParams ? [ ...document.primeDialogParams, newParam ] : [ newParam ];
+        document.primeDialogParams = document.primeDialogParams ? [...document.primeDialogParams, newParam] : [newParam];
 
         document.addEventListener('keydown', this.documentKeyDownListener);
     }
@@ -553,7 +559,7 @@ export class Dialog extends Component {
     }
 
     renderMaximizeIcon() {
-        const iconClassName = classNames('p-dialog-header-maximize-icon pi', {'pi-window-maximize': !this.maximized, 'pi-window-minimize': this.maximized});
+        const iconClassName = classNames('p-dialog-header-maximize-icon pi', { 'pi-window-maximize': !this.maximized, 'pi-window-minimize': this.maximized });
 
         if (this.props.maximizable) {
             return (
@@ -607,7 +613,7 @@ export class Dialog extends Component {
 
     renderResizer() {
         if (this.props.resizable) {
-            return <div className="p-resizable-handle" style={{zIndex: 90}} onMouseDown={this.onResizeStart}></div>
+            return <div className="p-resizable-handle" style={{ zIndex: 90 }} onMouseDown={this.onResizeStart}></div>
         }
 
         return null;
