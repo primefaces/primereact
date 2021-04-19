@@ -239,6 +239,15 @@ export class Dialog extends Component {
         }
     }
 
+    calculatePercentageToPx(dimension, axis) {
+        console.log(window.screen[axis])
+        if (/^(\d+|(\.\d+))(\.\d+)?%$/.test(dimension)) {
+            return parseInt(dimension) * (window.screen[axis] / 100)
+        } else {
+            return parseInt(dimension);
+        }
+    }
+
     onResize(event) {
         if (this.resizing) {
             let deltaX = event.pageX - this.lastPageX;
@@ -246,15 +255,12 @@ export class Dialog extends Component {
             let width = DomHandler.getOuterWidth(this.dialogEl);
             let height = DomHandler.getOuterHeight(this.dialogEl);
             let contentHeight = DomHandler.getOuterHeight(this.contentEl);
-            let screenHight = window.screen.height;
-            let screenWidth = window.screen.width;
 
             let newWidth = width + deltaX;
             let newHeight = height + deltaY;
-            //Converts from percentage to pixel if Dialog's minWidth is percentage
-            let minWidth = /^(\d+|(\.\d+))(\.\d+)?%$/.test(this.dialogEl.style.minWidth) ? parseInt(this.dialogEl.style.minWidth) * (screenWidth / 100) : parseInt(this.dialogEl.style.minWidth);
-            //Converts from percentage to pixel if Dialog's minHeight is percentage
-            let minHeight = /^(\d+|(\.\d+))(\.\d+)?%$/.test(this.dialogEl.style.minHeight) ? parseInt(this.dialogEl.style.minHeight) * (screenHight / 100) : parseInt(this.dialogEl.style.minHeight);
+
+            let minWidth = this.calculatePercentageToPx(this.dialogEl.style.minWidth, 'width')
+            let minHeight = this.calculatePercentageToPx(this.dialogEl.style.minHeight, 'height')
             let offset = this.dialogEl.getBoundingClientRect();
             let viewport = DomHandler.getViewport();
             let hasBeenDragged = !parseInt(this.dialogEl.style.top) || !parseInt(this.dialogEl.style.left);
@@ -279,7 +285,7 @@ export class Dialog extends Component {
             if (this.props.onResize) {
                 this.props.onResize(event);
             }
-            
+
         }
     }
 
