@@ -458,7 +458,7 @@ export class DataTableSelectionDemo extends Component {
             'hooks': {
                 tabName: 'Hooks Source',
                 content: `
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import ProductService from '../service/ProductService';
@@ -666,7 +666,7 @@ const DataTableSelectionDemo = () => {
             'ts': {
                 tabName: 'TS Source',
                 content: `
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import ProductService from '../service/ProductService';
