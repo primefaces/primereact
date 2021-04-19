@@ -486,7 +486,7 @@ const DataTableSelectionDemo = () => {
 
 
     useEffect(() => {
-        productService = new ProductService();
+        const productService = new ProductService();
         productService.getProductsSmall().then(data => setProducts(data));
     },[]);
 
@@ -694,9 +694,13 @@ const DataTableSelectionDemo = () => {
 
 
     useEffect(() => {
-        productService = new ProductService();
+        const productService = new ProductService();
         productService.getProductsSmall().then(data => setProducts(data));
     },[]);
+
+    const toCapitalize = (str) => {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
 
     const onRowSelect = (event) => {
         toast.current.show({ severity: 'info', summary: 'Product Selected', detail: \`Name: \${event.data.name}\`, life: 3000 });
@@ -712,10 +716,6 @@ const DataTableSelectionDemo = () => {
 
     const onCellUnselect = (event) => {
         toast.current.show({ severity: 'warn', summary: \`Item Unselected In Product\`, detail: \`\${toCapitalize(event.field)}: \${event.value}\`, life: 3000 });
-    }
-
-    const toCapitalize = (str) => {
-        return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
     return (
