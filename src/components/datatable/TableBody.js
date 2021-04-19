@@ -419,7 +419,7 @@ export class TableBody extends Component {
     }
 
     isRadioSelectionMode() {
-        return this.props.selectionMode === 'radioButton';
+        return this.props.selectionMode === 'radiobutton';
     }
 
     isCheckboxSelectionMode() {

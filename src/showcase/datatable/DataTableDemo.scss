@@ -334,3 +334,15 @@
         }
     }
 }
+
+.datatable-selection-demo {
+    .card {
+        h6 {
+            margin-top: 2rem;
+
+            &:first-of-type {
+                margin-top: 0;
+            }
+        }
+    }
+}

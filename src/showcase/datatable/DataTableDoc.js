@@ -2678,7 +2678,7 @@ const bodyTemplate = (data, props) => {
                             <td>selectionMode</td>
                             <td>string</td>
                             <td>null</td>
-                            <td>Specifies the selection mode, valid values are "single", "multiple", "radioButton" and "checkbox".</td>
+                            <td>Specifies the selection mode, valid values are "single", "multiple", "radiobutton" and "checkbox".</td>
                         </tr>
                         <tr>
                             <td>dragSelection</td>

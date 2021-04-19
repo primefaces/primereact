@@ -12,7 +12,7 @@ declare namespace DataTable {
 
     type EmptyMessageType = React.ReactNode | ((frozen: boolean) => React.ReactNode);
 
-    type SelectionModeType = 'single' | 'multiple' | 'checkbox' | 'radioButton';
+    type SelectionModeType = 'single' | 'multiple' | 'checkbox' | 'radiobutton';
 
     type ColumnResizeModeType = 'fit' | 'expand';
 
