@@ -182,7 +182,7 @@ export class DataTableSelectionDemo extends Component {
                         <h5>RadioButton</h5>
                         <p>Single selection can also be handled using radio buttons and rows by enabling the selectionMode property of column as "single".</p>
 
-                        <h6>Row Selection</h6>
+                        <h6>Row and RadioButton Selection</h6>
                         <DataTable value={this.state.products} selection={this.state.selectedProduct5} onSelectionChange={e => this.setState({ selectedProduct5: e.value })} dataKey="id">
                             <Column selectionMode="single" headerStyle={{ width: '3em' }}></Column>
                             <Column field="code" header="Code"></Column>
@@ -204,7 +204,7 @@ export class DataTableSelectionDemo extends Component {
                     <div className="card">
                         <h5>Checkbox</h5>
 
-                        <h6>Row Selection</h6>
+                        <h6>Row and Checkbox Selection</h6>
                         <DataTable value={this.state.products} selection={this.state.selectedProducts7} onSelectionChange={e => this.setState({ selectedProducts7: e.value })} dataKey="id">
                             <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
                             <Column field="code" header="Code"></Column>
@@ -409,7 +409,7 @@ export class DataTableSelectionDemo extends Component {
                     <h5>RadioButton</h5>
                     <p>Single selection can also be handled using radio buttons and rows by enabling the selectionMode property of column as "single".</p>
 
-                    <h6>Row Selection</h6>
+                    <h6>Row and RadioButton Selection</h6>
                     <DataTable value={this.state.products} selection={this.state.selectedProduct5} onSelectionChange={e => this.setState({ selectedProduct5: e.value })} dataKey="id">
                         <Column selectionMode="single" headerStyle={{width: '3em'}}></Column>
                         <Column field="code" header="Code"></Column>
@@ -431,7 +431,7 @@ export class DataTableSelectionDemo extends Component {
                 <div className="card">
                     <h5>Checkbox</h5>
 
-                    <h6>Row Selection</h6>
+                    <h6>Row and Checkbox Selection</h6>
                     <DataTable value={this.state.products} selection={this.state.selectedProducts7} onSelectionChange={e => this.setState({ selectedProducts7: e.value })} dataKey="id">
                         <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>
                         <Column field="code" header="Code"></Column>
@@ -618,7 +618,7 @@ const DataTableSelectionDemo = () => {
                 <h5>RadioButton</h5>
                 <p>Single selection can also be handled using radio buttons and rows by enabling the selectionMode property of column as "single".</p>
 
-                <h6>Row Selection</h6>
+                <h6>Row and RadioButton Selection</h6>
                 <DataTable value={products} selection={selectedProduct5} onSelectionChange={e => setSelectedProduct5(e.value)} dataKey="id">
                     <Column selectionMode="single" headerStyle={{width: '3em'}}></Column>
                     <Column field="code" header="Code"></Column>
@@ -640,7 +640,7 @@ const DataTableSelectionDemo = () => {
             <div className="card">
                 <h5>Checkbox</h5>
 
-                <h6>Row Selection</h6>
+                <h6>Row and Checkbox Selection</h6>
                 <DataTable value={products} selection={selectedProducts7} onSelectionChange={e => setSelectedProducts7(e.value)} dataKey="id">
                     <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>
                     <Column field="code" header="Code"></Column>
@@ -826,7 +826,7 @@ const DataTableSelectionDemo = () => {
                 <h5>RadioButton</h5>
                 <p>Single selection can also be handled using radio buttons and rows by enabling the selectionMode property of column as "single".</p>
 
-                <h6>Row Selection</h6>
+                <h6>Row and RadioButton Selection</h6>
                 <DataTable value={products} selection={selectedProduct5} onSelectionChange={e => setSelectedProduct5(e.value)} dataKey="id">
                     <Column selectionMode="single" headerStyle={{width: '3em'}}></Column>
                     <Column field="code" header="Code"></Column>
@@ -848,7 +848,7 @@ const DataTableSelectionDemo = () => {
             <div className="card">
                 <h5>Checkbox</h5>
 
-                <h6>Row Selection</h6>
+                <h6>Row and Checkbox Selection</h6>
                 <DataTable value={products} selection={selectedProducts7} onSelectionChange={e => setSelectedProducts7(e.value)} dataKey="id">
                     <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>
                     <Column field="code" header="Code"></Column>
