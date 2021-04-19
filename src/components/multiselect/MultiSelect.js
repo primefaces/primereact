@@ -75,7 +75,7 @@ export class MultiSelect extends Component {
         options: PropTypes.array,
         optionLabel: PropTypes.string,
         optionValue: PropTypes.string,
-        optionDisabled: PropTypes.bool,
+        optionDisabled: PropTypes.string,
         optionGroupLabel: PropTypes.string,
         optionGroupChildren: PropTypes.string,
         optionGroupTemplate: PropTypes.any,
@@ -301,9 +301,10 @@ export class MultiSelect extends Component {
                 value = [];
                 visibleOptions.forEach(optionGroup => value = [...value, ...this.getOptionGroupChildren(optionGroup)]);
             }
-            else  {
+            else {
                 value = visibleOptions.map(option => this.getOptionValue(option));
             }
+            value = [...value].filter(val => !this.isOptionDisabled(val))
         }
 
         this.updateModel(event.originalEvent, value);
@@ -410,7 +411,7 @@ export class MultiSelect extends Component {
             }
         }
 
-        return option ? this.getOptionLabel(option): null;
+        return option ? this.getOptionLabel(option) : null;
     }
 
     findOptionByValue(val, list) {
@@ -594,14 +595,16 @@ export class MultiSelect extends Component {
         else {
             if (this.props.value && this.props.options) {
                 let optionCount = 0;
-                if (this.props.optionGroupLabel)
-                    this.props.options.forEach(optionGroup => optionCount += this.getOptionGroupChildren(optionGroup).length);
+                if (this.props.optionGroupLabel) {
+                    this.props.options.forEach(optionGroup => {
+                        optionCount += this.getOptionGroupChildren(optionGroup).filter((option) => !this.isOptionDisabled(option)).length
+                    });
+                }
                 else
-                    optionCount = this.props.options.length;
+                    optionCount = this.props.options.filter((option) => !this.isOptionDisabled(option)).length;
 
                 return optionCount > 0 && optionCount === this.props.value.length;
             }
-
             return false;
         }
     }
@@ -644,7 +647,7 @@ export class MultiSelect extends Component {
                 for (let optgroup of this.props.options) {
                     let filteredSubOptions = FilterUtils.filter(this.getOptionGroupChildren(optgroup), searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
                     if (filteredSubOptions && filteredSubOptions.length) {
-                        filteredGroups.push({...optgroup, ...{items: filteredSubOptions}});
+                        filteredGroups.push({ ...optgroup, ...{ items: filteredSubOptions } });
                     }
                 }
                 return filteredGroups;
