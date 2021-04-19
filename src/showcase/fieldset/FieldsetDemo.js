@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Fieldset } from '../../components/fieldset/Fieldset';
 import { FieldsetDoc } from './FieldsetDoc';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class FieldsetDemo extends Component {
 
@@ -12,7 +13,8 @@ export class FieldsetDemo extends Component {
                     <AppInlineHeader changelogText="fieldset">
                         <h1>Fieldset</h1>
                         <p>Fieldset is a grouping component with a content toggle feature.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="fieldset/FieldsetDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

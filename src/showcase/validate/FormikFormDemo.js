@@ -14,6 +14,7 @@ import { classNames } from '../../components/utils/ClassNames';
 import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { TabView } from '../../components/tabview/TabView';
 import './FormDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export const FormikFormDemo = () => {
     const [countries, setCountries] = useState([]);
@@ -89,10 +90,11 @@ export const FormikFormDemo = () => {
     return (
         <div>
             <div className="content-section introduction">
-                <AppInlineHeader showInputStyle showChangelog={false}>
+                <AppInlineHeader showChangelog={false}>
                     <h1>Formik</h1>
                     <p>PrimeReact components can be easily used/integrated with <a href="https://formik.org/">Formik</a>. In this example, a register panel is simulated using Formik.</p>
-                </AppInlineHeader>
+                </AppInlineHeader> 
+                <AppDemoActions github="validate/FormikFormDemo.js" />
             </div>
             <div className="content-section implementation form-demo">
                 <Dialog visible={showMessage} onHide={() => setShowMessage(false)} position="top" footer={dialogFooter} showHeader={false} breakpoints={{ '960px': '80vw' }} style={{ width: '30vw' }}>
@@ -493,7 +495,7 @@ export const FormikFormDemo = () => {
     }
 
     return (
-        <div className="content-section documentation">
+        <div className="content-section documentation" id="app-doc">
             <TabView>
                 {
                     useLiveEditorTabs({ name: 'FormikFormDemo', sources, service: 'CountryService', data: 'countries', extFiles, dependencies: { 'formik': '^2.2.6' } })

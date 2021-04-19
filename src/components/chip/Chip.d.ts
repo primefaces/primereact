@@ -1,17 +1,22 @@
 import * as React from 'react';
 
-interface ChipProps {
-    label?: string;
-    icon?: string;
-    image?: string;
-    removable?: boolean;
-    removeIcon?: string;
-    className?: string;
-    style?: object;
-    template?: any;
-    imageAlt?: string;
-    onImageError?(event: Event): void;
-    onRemove?(event: Event): void;
+declare namespace Chip {
+
+    type TemplateType = React.ReactNode | ((props: ChipProps) => React.ReactNode);
+
+    interface ChipProps {
+        label?: string;
+        icon?: string;
+        image?: string;
+        removable?: boolean;
+        removeIcon?: string;
+        className?: string;
+        style?: object;
+        template?: TemplateType;
+        imageAlt?: string;
+        onImageError?(event: React.SyntheticEvent): void;
+        onRemove?(event: React.MouseEvent<HTMLElement>): void;
+    }
 }
 
-export class Chip extends React.Component<ChipProps,any> {}
+export declare class Chip extends React.Component<Chip.ChipProps, any> { }

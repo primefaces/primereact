@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import { ToastMessage } from './ToastMessage';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { TransitionGroup } from 'react-transition-group';
+import { CSSTransition } from '../transition/CSSTransition';
 import { ZIndexUtils } from '../utils/ZIndexUtils';
 
 let messageIdx = 0;
@@ -15,8 +16,11 @@ export class Toast extends Component {
         style: null,
         baseZIndex: 0,
         position: 'top-right',
+        transitionOptions: null,
         onClick: null,
-        onRemove: null
+        onRemove: null,
+        onShow: null,
+        onHide: null
     }
 
     static propTypes = {
@@ -25,8 +29,11 @@ export class Toast extends Component {
         style: PropTypes.object,
         baseZIndex: PropTypes.number,
         position: PropTypes.string,
+        transitionOptions: PropTypes.object,
         onClick: PropTypes.func,
-        onRemove: PropTypes.func
+        onRemove: PropTypes.func,
+        onShow: PropTypes.func,
+        onHide: PropTypes.func
     };
 
     constructor(props) {
@@ -37,6 +44,8 @@ export class Toast extends Component {
         };
 
         this.onClose = this.onClose.bind(this);
+        this.onEntered = this.onEntered.bind(this);
+        this.onExited = this.onExited.bind(this);
     }
 
     show(value) {
@@ -81,6 +90,14 @@ export class Toast extends Component {
         }
     }
 
+    onEntered() {
+        this.props.onShow && this.props.onShow();
+    }
+
+    onExited() {
+        this.props.onHide && this.props.onHide();
+    }
+
     componentWillUnmount() {
         ZIndexUtils.clear(this.container);
     }
@@ -96,7 +113,7 @@ export class Toast extends Component {
                             const messageRef = React.createRef();
 
                             return (
-                                <CSSTransition nodeRef={messageRef} key={message.id} classNames="p-toast-message" unmountOnExit timeout={{ enter: 300, exit: 300 }}>
+                                <CSSTransition nodeRef={messageRef} key={message.id} classNames="p-toast-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} onEntered={this.onEntered} onExited={this.onExited} options={this.props.transitionOptions}>
                                     <ToastMessage ref={messageRef} message={message} onClick={this.props.onClick} onClose={this.onClose} />
                                 </CSSTransition>
                             )

@@ -15,62 +15,79 @@ export class TableBody extends Component {
         this.onRowEditingToggle = this.onRowEditingToggle.bind(this);
         this.onRadioClick = this.onRadioClick.bind(this);
         this.onCheckboxClick = this.onCheckboxClick.bind(this);
+        this.onDragSelectionMouseMove = this.onDragSelectionMouseMove.bind(this);
+        this.onDragSelectionMouseUp = this.onDragSelectionMouseUp.bind(this);
         this.onRowDragEnd = this.onRowDragEnd.bind(this);
         this.onRowDragLeave = this.onRowDragLeave.bind(this);
         this.onRowDrop = this.onRowDrop.bind(this);
         this.onRowMouseDown = this.onRowMouseDown.bind(this);
         this.onRowMouseUp = this.onRowMouseUp.bind(this);
+        this.onCellClick = this.onCellClick.bind(this);
+        this.onCellMouseDown = this.onCellMouseDown.bind(this);
+        this.onCellMouseUp = this.onCellMouseUp.bind(this);
     }
 
     onRowClick(event) {
-        let targetNode = event.originalEvent.target.nodeName;
-        if (targetNode === 'INPUT' || targetNode === 'BUTTON' || targetNode === 'A' || (DomHandler.hasClass(event.originalEvent.target, 'p-clickable'))) {
+        if (this.allowCellSelection() || !this.allowSelection(event)) {
             return;
         }
 
-        if (this.props.onRowClick) {
-            this.props.onRowClick(event);
-        }
+        this.props.onRowClick && this.props.onRowClick(event);
 
-        const allowRadioRowSelection = this.isRadioSelectionMode() && !this.isRadioRowSelectionMode();
-        const allowCheckboxRowSelection = this.isCheckboxSelectionMode() && !this.isCheckboxRowSelectionMode();
-
-        if (this.props.selectionMode || allowRadioRowSelection || allowCheckboxRowSelection) {
-            if (this.isMultipleSelectionMode() && event.originalEvent.shiftKey && this.anchorRowIndex !== null) {
+        if (this.allowRowSelection()) {
+            if (this.allowRangeSelection(event)) {
                 this.onRangeSelection(event);
             }
             else {
-                let metaKey = this.props.metaKeySelection && (event.originalEvent.metaKey || event.originalEvent.ctrlKey);
+                const toggleable = this.isRadioSelectionModeInColumn() || this.isCheckboxSelectionModeInColumn() || this.allowMetaKeySelection(event);
                 this.anchorRowIndex = event.index;
                 this.rangeRowIndex = event.index;
                 this.anchorRowFirst = this.props.first;
 
-                if (this.isSingleSelectionMode() || this.isRadioSelectionMode()) {
-                    this.onSingleSelection({ ...event, toggleable: metaKey, type: 'row' });
+                if (this.isSingleSelection()) {
+                    this.onSingleSelection({ ...event, toggleable, type: 'row' });
                 }
                 else {
-                    this.onMultipleSelection({ ...event, toggleable: metaKey, type: 'row' });
+                    this.onMultipleSelection({ ...event, toggleable, type: 'row' });
                 }
             }
+        }
+        else {
+            this.focusOnElement(event.originalEvent);
         }
 
         this.rowTouched = false;
     }
 
-    onRangeSelection(event) {
-        const { originalEvent, index } = event;
-
-        DomHandler.clearSelection();
-        this.rangeRowIndex = index;
-        let selectionInRange = this.selectRange(event);
-        let selection = this.isAddRowSelectionMode() ? [...new Set([...(this.props.selection || []), ...selectionInRange])] : selectionInRange;
-
-        if (this.props.onSelectionChange && selection !== this.props.selection) {
-            this.props.onSelectionChange({
-                originalEvent,
-                value: selection
-            });
+    onCellClick(event) {
+        if (!this.allowSelection(event)) {
+            return;
         }
+
+        this.props.onCellClick && this.props.onCellClick(event);
+
+        if (this.allowCellSelection()) {
+            if (this.allowRangeSelection(event)) {
+                this.onRangeSelection(event);
+            }
+            else {
+                let toggleable = this.allowMetaKeySelection(event);
+                let { originalEvent, ...data } = event;
+                this.anchorRowIndex = event.rowIndex;
+                this.rangeRowIndex = event.rowIndex;
+                this.anchorRowFirst = this.props.first;
+                this.anchorCellIndex = event.cellIndex;
+
+                if (this.isSingleSelection()) {
+                    this.onSingleSelection({ originalEvent, data, toggleable, type: 'cell' });
+                }
+                else {
+                    this.onMultipleSelection({ originalEvent, data, toggleable, type: 'cell' });
+                }
+            }
+        }
+
+        this.rowTouched = false;
     }
 
     onSingleSelection({ originalEvent, data, toggleable, type }) {
@@ -80,21 +97,15 @@ export class TableBody extends Component {
         if (selected) {
             if (toggleable) {
                 selection = null;
-                this.props.onRowUnselect && this.props.onRowUnselect({ originalEvent, data, type });
+                this.onUnselect({ originalEvent, data, type });
             }
         }
         else {
             selection = data;
-            this.props.onRowSelect && this.props.onRowSelect({ originalEvent, data, type });
+            this.onSelect({ originalEvent, data, type });
         }
 
-        if (this.isRadioSelectionMode()) {
-            const target = originalEvent.currentTarget;
-            const radio = DomHandler.findSingle(target, 'td.p-selection-column input[type="radio"]');
-            if (radio) {
-                radio.focus();
-            }
-        }
+        this.focusOnElement(originalEvent, true);
 
         if (this.props.onSelectionChange && selection !== this.props.selection) {
             this.props.onSelectionChange({
@@ -106,32 +117,26 @@ export class TableBody extends Component {
 
     onMultipleSelection({ originalEvent, data, toggleable, type }) {
         let selected = this.isSelected(data);
-        let selection = this.props.selection;
+        let selection = this.props.selection || [];
 
         if (selected) {
             if (toggleable) {
                 let selectionIndex = this.findIndexInSelection(data);
                 selection = this.props.selection.filter((val, i) => i !== selectionIndex);
-                this.props.onRowUnSelect && this.props.onRowUnSelect({ originalEvent, data, type });
+                this.onUnselect({ originalEvent, data, type });
             }
-            else if (this.isNewRowSelectionMode()) {
-                (this.props.selection || []).forEach(d => this.props.onRowUnSelect && this.props.onRowUnSelect({ originalEvent, data: d, type }));
+            else if (selection.length) {
+                this.props.selection.forEach(d => this.onUnselect({ originalEvent, data: d, type }));
                 selection = [data];
-                this.props.onRowSelect && this.props.onRowSelect({ originalEvent, data, type });
+                this.onSelect({ originalEvent, data, type });
             }
         }
         else {
-            selection = toggleable || this.isAddRowSelectionMode() ? [...selection || [], data] : [data];
-            this.props.onRowSelect && this.props.onRowSelect({ originalEvent, data, type });
+            selection = toggleable && this.isMultipleSelection() ? [...selection, data] : [data];
+            this.onSelect({ originalEvent, data, type });
         }
 
-        if (this.isCheckboxSelectionMode()) {
-            const target = originalEvent.currentTarget;
-            const checkbox = DomHandler.findSingle(target, 'td.p-selection-column .p-checkbox-box');
-            if (checkbox) {
-                checkbox.focus();
-            }
-        }
+        this.focusOnElement(originalEvent, true);
 
         if (this.props.onSelectionChange && selection !== this.props.selection) {
             this.props.onSelectionChange({
@@ -139,6 +144,25 @@ export class TableBody extends Component {
                 value: selection
             });
         }
+    }
+
+    onRangeSelection(event) {
+        DomHandler.clearSelection();
+        this.rangeRowIndex = this.allowCellSelection() ? event.rowIndex : event.index;
+        let selectionInRange = this.selectRange(event);
+        let selection = this.isMultipleSelection() ? [...new Set([...(this.props.selection || []), ...selectionInRange])] : selectionInRange;
+
+        if (this.props.onSelectionChange && selection !== this.props.selection) {
+            this.props.onSelectionChange({
+                originalEvent: event.originalEvent,
+                value: selection
+            });
+        }
+
+        this.anchorRowIndex = this.rangeRowIndex;
+        this.anchorCellIndex = event.cellIndex;
+
+        this.focusOnElement(event.originalEvent, false);
     }
 
     selectRange(event) {
@@ -159,8 +183,7 @@ export class TableBody extends Component {
             rangeEnd = this.anchorRowIndex;
         }
         else {
-            rangeStart = this.rangeRowIndex;
-            rangeEnd = this.rangeRowIndex;
+            rangeStart = rangeEnd = this.rangeRowIndex;
         }
 
         if (isLazyAndPaginator) {
@@ -168,20 +191,132 @@ export class TableBody extends Component {
             rangeEnd -= this.props.first;
         }
 
+        return this.allowCellSelection() ? this.selectRangeOnCell(event, rangeStart, rangeEnd) : this.selectRangeOnRow(event, rangeStart, rangeEnd);
+    }
+
+    selectRangeOnRow(event, rowRangeStart, rowRangeEnd) {
         const value = this.props.value;
         let selection = [];
-        for (let i = rangeStart; i <= rangeEnd; i++) {
+
+        for (let i = rowRangeStart; i <= rowRangeEnd; i++) {
             let rangeRowData = value[i];
             selection.push(rangeRowData);
 
-            this.props.onRowSelect && this.props.onRowSelect({ originalEvent: event.originalEvent, data: rangeRowData, type: 'row' });
+            this.onSelect({ originalEvent: event.originalEvent, data: rangeRowData, type: 'row' });
         }
 
         return selection;
     }
 
+    selectRangeOnCell(event, rowRangeStart, rowRangeEnd) {
+        let cellRangeStart, cellRangeEnd, cellIndex = event.cellIndex;
+        if (cellIndex > this.anchorCellIndex) {
+            cellRangeStart = this.anchorCellIndex;
+            cellRangeEnd = cellIndex;
+        }
+        else if (cellIndex < this.anchorCellIndex) {
+            cellRangeStart = cellIndex;
+            cellRangeEnd = this.anchorCellIndex;
+        }
+        else {
+            cellRangeStart = cellRangeEnd = cellIndex;
+        }
+
+        const value = this.props.value;
+        let selection = [];
+
+        for (let i = rowRangeStart; i <= rowRangeEnd; i++) {
+            let rowData = value[i];
+            let columns = React.Children.toArray(this.props.children);
+
+            for (let j = cellRangeStart; j <= cellRangeEnd; j++) {
+                let field = columns[j].props.field;
+                let rangeRowData = {
+                    value: ObjectUtils.resolveFieldData(rowData, field),
+                    field,
+                    rowData,
+                    rowIndex: i,
+                    cellIndex: j,
+                    selected: true
+                };
+
+                selection.push(rangeRowData);
+
+                this.onSelect({ originalEvent: event.originalEvent, data: rangeRowData, type: 'cell' });
+            }
+        }
+
+        return selection;
+    }
+
+    onSelect(event) {
+        if (this.allowCellSelection())
+            this.props.onCellSelect && this.props.onCellSelect({ originalEvent: event.originalEvent, ...event.data, type: event.type });
+        else
+            this.props.onRowSelect && this.props.onRowSelect(event);
+    }
+
+    onUnselect(event) {
+        if (this.allowCellSelection())
+            this.props.onCellUnselect && this.props.onCellUnselect({ originalEvent: event.originalEvent, ...event.data, type: event.type });
+        else
+            this.props.onRowUnselect && this.props.onRowUnselect(event);
+    }
+
+    enableDragSelection(event) {
+        if (this.props.dragSelection && !this.dragSelectionHelper) {
+            this.dragSelectionHelper = document.createElement('div');
+            DomHandler.addClass(this.dragSelectionHelper, 'p-datatable-drag-selection-helper');
+
+            this.initialDragPosition = { x: event.clientX, y: event.clientY };
+            this.dragSelectionHelper.style.top = `${event.pageY}px`;
+            this.dragSelectionHelper.style.left = `${event.pageX}px`;
+
+            this.bindDragSelectionEvents();
+        }
+    }
+
+    bindDragSelectionEvents() {
+        document.addEventListener('mousemove', this.onDragSelectionMouseMove);
+        document.addEventListener('mouseup', this.onDragSelectionMouseUp);
+        document.body.appendChild(this.dragSelectionHelper);
+    }
+
+    unbindDragSelectionEvents() {
+        this.onDragSelectionMouseUp();
+    }
+
+    onDragSelectionMouseMove(event) {
+        const { x, y } = this.initialDragPosition;
+        const dx = event.clientX - x;
+        const dy = event.clientY - y;
+
+        if (dy < 0)
+            this.dragSelectionHelper.style.top = `${event.pageY + 5}px`;
+        if (dx < 0)
+            this.dragSelectionHelper.style.left = `${event.pageX + 5}px`;
+
+        this.dragSelectionHelper.style.height = `${Math.abs(dy)}px`;
+        this.dragSelectionHelper.style.width = `${Math.abs(dx)}px`;
+
+        event.preventDefault();
+    }
+
+    onDragSelectionMouseUp() {
+        if (this.dragSelectionHelper) {
+            this.dragSelectionHelper.remove();
+            this.dragSelectionHelper = null;
+        }
+
+        document.removeEventListener('mousemove', this.onDragSelectionMouseMove);
+        document.removeEventListener('mouseup', this.onDragSelectionMouseUp);
+    }
+
     onRowMouseDown(event) {
-        if (this.props.dragSelection) {
+        DomHandler.clearSelection();
+
+        if (this.allowRowDrag(event)) {
+            this.enableDragSelection(event.originalEvent);
             this.anchorRowIndex = event.index;
             this.rangeRowIndex = event.index;
             this.anchorRowFirst = this.props.first;
@@ -189,7 +324,25 @@ export class TableBody extends Component {
     }
 
     onRowMouseUp(event) {
-        if (this.props.dragSelection) {
+        const isSameRow = event.index === this.anchorRowIndex;
+        if (this.allowRowDrag(event) && !isSameRow) {
+            this.onRangeSelection(event);
+        }
+    }
+
+    onCellMouseDown(event) {
+        if (this.allowCellDrag(event)) {
+            this.enableDragSelection(event.originalEvent);
+            this.anchorRowIndex = event.rowIndex;
+            this.rangeRowIndex = event.rowIndex;
+            this.anchorRowFirst = this.props.first;
+            this.anchorCellIndex = event.cellIndex;
+        }
+    }
+
+    onCellMouseUp(event) {
+        const isSameCell = event.rowIndex === this.anchorRowIndex && event.cellIndex === this.anchorCellIndex;
+        if (this.allowCellDrag(event) && !isSameCell) {
             this.onRangeSelection(event);
         }
     }
@@ -228,44 +381,80 @@ export class TableBody extends Component {
         this.onMultipleSelection({ ...event, toggleable: true, type: 'checkbox' });
     }
 
-    isSingleSelectionMode() {
-        return this.props.selectionMode === 'single';
+    allowDrag(event) {
+        return this.props.dragSelection && this.isMultipleSelection() && !event.originalEvent.shiftKey;
     }
 
-    isMultipleSelectionMode() {
-        return this.props.selectionMode === 'multiple';
+    allowRowDrag(event) {
+        return !this.allowCellSelection() && this.allowDrag(event);
+    }
+
+    allowCellDrag(event) {
+        return this.allowCellSelection() && this.allowDrag(event);
+    }
+
+    allowSelection(event) {
+        let targetNode = event.originalEvent.target.nodeName;
+        if (targetNode === 'INPUT' || targetNode === 'BUTTON' || targetNode === 'A' || (DomHandler.hasClass(event.originalEvent.target, 'p-clickable'))) {
+            return false;
+        }
+
+        return true;
+    }
+
+    allowMetaKeySelection(event) {
+        return !this.rowTouched && (!this.props.metaKeySelection || (this.props.metaKeySelection && (event.originalEvent.metaKey || event.originalEvent.ctrlKey)))
+    }
+
+    allowRangeSelection(event) {
+        return this.isMultipleSelection() && event.originalEvent.shiftKey && this.anchorRowIndex !== null;
+    }
+
+    allowRowSelection() {
+        return (this.props.selectionMode || this.props.selectionModeInColumn) && !this.isRadioOnlySelection() && !this.isCheckboxOnlySelection();
+    }
+
+    allowCellSelection() {
+        return this.props.cellSelection && !this.isRadioSelectionModeInColumn() && !this.isCheckboxSelectionModeInColumn();
     }
 
     isRadioSelectionMode() {
-        return this.props.selectionModeInColumn === 'single';
+        return this.props.selectionMode === 'radiobutton';
     }
 
     isCheckboxSelectionMode() {
+        return this.props.selectionMode === 'checkbox';
+    }
+
+    isRadioSelectionModeInColumn() {
+        return this.props.selectionModeInColumn === 'single';
+    }
+
+    isCheckboxSelectionModeInColumn() {
         return this.props.selectionModeInColumn === 'multiple';
     }
 
-    isNewRowSelectionMode() {
-        return this.props.rowSelectionMode === 'new';
+    isSingleSelection() {
+        return (this.props.selectionMode === 'single' && !this.isCheckboxSelectionModeInColumn()) ||
+            (!this.isRadioSelectionMode() && this.isRadioSelectionModeInColumn());
     }
 
-    isAddRowSelectionMode() {
-        return this.props.rowSelectionMode === 'add';
+    isMultipleSelection() {
+        return (this.props.selectionMode === 'multiple' && !this.isRadioSelectionModeInColumn()) ||
+            (!this.isCheckboxSelectionMode() && this.isCheckboxSelectionModeInColumn());
     }
 
-    isRadioRowSelectionMode() {
-        return this.props.rowSelectionMode === 'radio';
+    isRadioOnlySelection() {
+        return this.isRadioSelectionMode() && this.isRadioSelectionModeInColumn();
     }
 
-    isCheckboxRowSelectionMode() {
-        return this.props.rowSelectionMode === 'checkbox';
+    isCheckboxOnlySelection() {
+        return this.isCheckboxSelectionMode() && this.isCheckboxSelectionModeInColumn();
     }
 
     isSelected(rowData) {
         if (rowData && this.props.selection) {
-            if (this.props.selection instanceof Array)
-                return this.findIndexInSelection(rowData) > -1;
-            else
-                return this.equals(rowData, this.props.selection);
+            return (this.props.selection instanceof Array) ? this.findIndexInSelection(rowData) > -1 : this.equals(rowData, this.props.selection);
         }
 
         return false;
@@ -279,22 +468,32 @@ export class TableBody extends Component {
         return false;
     }
 
-    equals(data1, data2) {
-        return this.compareSelectionBy === 'equals' ? (data1 === data2) : ObjectUtils.equals(data1, data2, this.props.dataKey);
-    }
+    focusOnElement(event, isFocused) {
+        const target = event.currentTarget;
 
-    findIndexInSelection(rowData) {
-        let index = -1;
-        if (this.props.selection) {
-            for (let i = 0; i < this.props.selection.length; i++) {
-                if (this.equals(rowData, this.props.selection[i])) {
-                    index = i;
-                    break;
-                }
+        if (!this.allowCellSelection()) {
+            if (this.isCheckboxSelectionModeInColumn()) {
+                const checkbox = DomHandler.findSingle(target, 'td.p-selection-column .p-checkbox-box');
+                checkbox && checkbox.focus();
+            }
+            else if (this.isRadioSelectionModeInColumn()) {
+                const radio = DomHandler.findSingle(target, 'td.p-selection-column input[type="radio"]');
+                radio && radio.focus();
             }
         }
 
-        return index;
+        !isFocused && target && target.focus();
+    }
+
+    equals(data1, data2) {
+        if (this.allowCellSelection())
+            return (data1.rowIndex === data2.rowIndex || data1.rowData === data2.rowData) && (data1.field === data2.field || data1.cellIndex === data2.cellIndex)
+        else
+            return this.compareSelectionBy === 'equals' ? (data1 === data2) : ObjectUtils.equals(data1, data2, this.props.dataKey);
+    }
+
+    findIndexInSelection(data) {
+        return this.props.selection ? this.props.selection.findIndex(d => this.equals(data, d)) : -1;
     }
 
     onRowToggle(event) {
@@ -344,12 +543,7 @@ export class TableBody extends Component {
     }
 
     findRowIndex(rows, row) {
-        let index = -1;
-        if (rows) {
-            rows.some((r, i) => (ObjectUtils.equals(rows[i], row) ? (index = i, true) : false));
-        }
-
-        return index;
+        return rows ? rows.findIndex(r => ObjectUtils.equals(row, r)) : -1;
     }
 
     isRowExpanded(row) {
@@ -503,6 +697,12 @@ export class TableBody extends Component {
         this.onRowDragEnd(event);
     }
 
+    componentWillUnmount() {
+        if (this.props.dragSelection) {
+            this.unbindDragSelectionEvents();
+        }
+    }
+
     renderRowGroupHeader(rowData, index) {
         let content = null;
 
@@ -596,7 +796,7 @@ export class TableBody extends Component {
                     if (!this.props.expandableRowGroups || isRowGroupExpanded) {
                         //row content
                         let bodyRow = <BodyRow tableId={this.props.tableId} key={i} value={this.props.value} rowData={rowData} rowIndex={i} onClick={this.onRowClick} onDoubleClick={this.props.onRowDoubleClick}
-                            onRightClick={this.onRowRightClick} onTouchEnd={this.onRowTouchEnd} onMouseDown={this.onRowMouseDown} onMouseUp={this.onRowMouseUp}
+                            onRightClick={this.onRowRightClick} onTouchEnd={this.onRowTouchEnd} onMouseDown={this.onRowMouseDown} onMouseUp={this.onRowMouseUp} onCellMouseDown={this.onCellMouseDown} onCellMouseUp={this.onCellMouseUp}
                             onRowToggle={this.onRowToggle} expanded={expanded} selectionMode={this.props.selectionMode} selectOnEdit={this.props.selectOnEdit}
                             onRadioClick={this.onRadioClick} onCheckboxClick={this.onCheckboxClick} selected={selected} contextMenuSelected={contextMenuSelected} rowClassName={this.props.rowClassName}
                             sortField={this.props.sortField} rowGroupMode={this.props.rowGroupMode} groupRowSpan={groupRowSpan}
@@ -604,8 +804,9 @@ export class TableBody extends Component {
                             onDrop={this.onRowDrop} virtualScroll={this.props.virtualScroll} virtualRowHeight={this.props.virtualRowHeight}
                             editMode={this.props.editMode} editing={editing} isRowEditingControlled={!!this.props.onRowEditChange} rowEditorValidator={this.props.rowEditorValidator}
                             onRowEditInit={this.props.onRowEditInit} onRowEditSave={this.props.onRowEditSave} onRowEditCancel={this.props.onRowEditCancel} onRowEditingToggle={this.onRowEditingToggle}
-                            showRowReorderElement={this.props.showRowReorderElement} showSelectionElement={this.props.showSelectionElement}
-                            selectionModeInColumn={this.props.selectionModeInColumn} rowSelectionMode={this.props.rowSelectionMode} dragSelection={this.props.dragSelection}>
+                            showRowReorderElement={this.props.showRowReorderElement} showSelectionElement={this.props.showSelectionElement} onSelectionChange={this.props.onSelectionChange}
+                            selectionModeInColumn={this.props.selectionModeInColumn} dragSelection={this.props.dragSelection} selection={this.props.selection}
+                            allowRowSelection={this.allowRowSelection()} allowCellSelection={this.allowCellSelection()} onCellClick={this.onCellClick}>
                             {this.props.children}
                         </BodyRow>
 

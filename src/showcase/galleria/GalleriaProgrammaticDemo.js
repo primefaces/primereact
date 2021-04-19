@@ -5,6 +5,7 @@ import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { Button } from '../../components/button/Button';
+import AppDemoActions from '../../AppDemoActions';
 
 export class GalleriaProgrammaticDemo extends Component {
 
@@ -69,7 +70,8 @@ export class GalleriaProgrammaticDemo extends Component {
                     <AppInlineHeader changelogText="galleria">
                         <h1>Galleria <span>Programmatic</span></h1>
                         <p>Galleria can be controlled programmatically using the <b>activeIndex</b> property.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="galleria/GalleriaProgrammaticDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -98,7 +100,7 @@ export class GalleriaProgrammaticDemoDoc extends Component {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Source">
 <CodeHighlight lang="js">

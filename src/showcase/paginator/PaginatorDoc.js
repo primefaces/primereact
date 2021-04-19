@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 
 export class PaginatorDoc extends Component {
 
@@ -648,7 +648,7 @@ const PaginatorDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
                         <h5>Import</h5>
@@ -783,6 +783,7 @@ const template = {
         // options.currentPage: Current selected page.
         // options.totalPages: Total pages in paginator.
         // options.first: Zero-relative number of the first row to be displayed.
+        // options.last: The number of the last row to be displayed.
         // options.rows: Row count in a page.
         // options.totalRecords: Total records in paginator.
         // options.className: Style class of the default element.
@@ -893,9 +894,9 @@ const template = {
                                     </tr>
                                     <tr>
                                         <td>dropdownAppendTo</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Target element to attach the paginator dropdown overlay.</td>
+                                        <td>DOM element | string</td>
+                                        <td>document.body</td>
+                                        <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
                                     </tr>
                                 </tbody>
                             </table>

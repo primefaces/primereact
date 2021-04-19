@@ -9,6 +9,7 @@ import ProductService from '../service/ProductService';
 import { TabView } from '../../components/tabview/TabView';
 import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DataTableExportDemo extends Component {
 
@@ -185,6 +186,7 @@ export class DataTableExportDemo extends Component {
                         <h1>DataTable <span>Import/Export</span></h1>
                         <p>DataTable can export its data to CSV format.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="datatable/DataTableExportDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -853,7 +855,7 @@ export const DataTableExportDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({

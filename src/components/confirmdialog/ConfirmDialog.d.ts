@@ -1,25 +1,39 @@
 import * as React from 'react';
-import { DialogProps } from '../dialog/Dialog.d.ts';
+import { Dialog } from '../dialog/Dialog';
 
-interface ConfirmDialogProps extends DialogProps {
-    visible?: boolean;
-    message?: any;
-    rejectLabel?: string;
-    acceptLabel?: string;
-    icon?: string;
-    rejectIcon?: string;
-    acceptIcon?: string;
-    rejectClassName?: string;
-    acceptClassName?: string;
-    appendTo?: any;
-    className?: string;
-    footer?: any;
-    breakpoints?: {[key: string]: string};
-    onHide?(result: string): void;
-    accept?(): void;
-    reject?(): void;
+declare namespace ConfirmDialog {
+
+    type TemplateType = React.ReactNode | ((props: ConfirmDialogProps) => React.ReactNode);
+
+    interface Breakpoints {
+        [key: string]: string;
+    }
+
+    interface ConfirmDialogProps extends Omit<Dialog.DialogProps, 'onHide'> {
+        visible?: boolean;
+        message?: TemplateType;
+        rejectLabel?: string;
+        acceptLabel?: string;
+        icon?: string;
+        rejectIcon?: string;
+        acceptIcon?: string;
+        rejectClassName?: string;
+        acceptClassName?: string;
+        appendTo?: HTMLElement | string;
+        className?: string;
+        footer?: TemplateType;
+        breakpoints?: Breakpoints;
+        onHide?(result: string): void;
+        accept?(): void;
+        reject?(): void;
+    }
+
+    interface ConfirmDialogReturn {
+        show(): void;
+        hide(): void;
+    }
 }
 
-export class ConfirmDialog extends React.Component<ConfirmDialogProps,any> {}
+export declare class ConfirmDialog extends React.Component<ConfirmDialog.ConfirmDialogProps, any> { }
 
-export function confirmDialog(props: ConfirmDialogProps):any;
+export declare function confirmDialog(props: ConfirmDialog.ConfirmDialogProps): ConfirmDialog.ConfirmDialogReturn;

@@ -3,6 +3,7 @@ import { ProgressBar } from '../../components/progressbar/ProgressBar';
 import { Toast } from '../../components/toast/Toast';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { ProgressBarDoc } from './ProgressBarDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class ProgressBarDemo extends Component {
 
@@ -54,7 +55,8 @@ export class ProgressBarDemo extends Component {
                     <AppInlineHeader changelogText="progressBar">
                         <h1>ProgressBar</h1>
                         <p>ProgressBar is a process status indicator</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="progressbar/ProgressBarDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

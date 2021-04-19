@@ -47,6 +47,10 @@ export class TreeTableScrollableView extends Component {
         }
     }
 
+    componentDidUpdate() {
+        this.setScrollHeight();  
+    }
+
     setScrollHeight() {
         if(this.props.scrollHeight) {
             if(this.props.scrollHeight.indexOf('%') !== -1) {

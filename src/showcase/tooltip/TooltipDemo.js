@@ -7,6 +7,8 @@ import { Slider } from '../../components/slider/Slider';
 import { Badge } from '../../components/badge/Badge';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { TooltipDoc } from './TooltipDoc';
+import AppDemoActions from '../../AppDemoActions';
+import './TooltipDemo.scss';
 
 export class TooltipDemo extends Component {
 
@@ -27,6 +29,7 @@ export class TooltipDemo extends Component {
                         <h1>Tooltip</h1>
                         <p>Tooltip functionality is integrated within various PrimeReact components.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="tooltip/TooltipDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -85,6 +88,19 @@ export class TooltipDemo extends Component {
                             <i className="custom-target-icon pi pi-envelope p-text-secondary p-overlay-badge" data-pr-tooltip="No notifications" data-pr-position="right" data-pr-at="right+5 top" data-pr-my="left center-2" style={{ fontSize: '2rem', cursor: 'pointer' }}>
                                 <Badge severity="danger"></Badge>
                             </i>
+                        </div>
+
+                        <h5>Color</h5>
+                        <div className="p-d-flex p-ai-center p-flex-wrap">
+                            <Button label="Blue" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Blue" tooltipOptions={{ className: 'blue-tooltip', position: 'top' }} />
+                            <Button label="Green" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Green" tooltipOptions={{ className: 'green-tooltip', position: 'top' }} />
+                            <Button label="Yellow" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Yellow" tooltipOptions={{ className: 'yellow-tooltip', position: 'top' }} />
+                            <Button label="Cyan" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Cyan" tooltipOptions={{ className: 'cyan-tooltip', position: 'top' }} />
+                            <Button label="Pink" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Pink" tooltipOptions={{ className: 'pink-tooltip', position: 'top' }} />
+                            <Button label="Indigo" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Indigo" tooltipOptions={{ className: 'indigo-tooltip', position: 'top' }} />
+                            <Button label="Teal" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Teal" tooltipOptions={{ className: 'teal-tooltip', position: 'top' }} />
+                            <Button label="Blue Gray" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Blue Gray" tooltipOptions={{ className: 'bluegray-tooltip', position: 'top' }} />
+                            <Button label="Purple" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Purple" tooltipOptions={{ className: 'purple-tooltip', position: 'top' }} />
                         </div>
                     </div>
                 </div>

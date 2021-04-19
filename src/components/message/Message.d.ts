@@ -1,12 +1,19 @@
 import * as React from 'react';
 
-interface MessageProps {
-    id?: string;
-    className?: string;
-    style?: object;
-    text?: string;
-    severity?: string,
-    content?: ((props: object) => any | any);
+declare namespace Message {
+
+    type SeverityType = 'success' | 'info' | 'warn' | 'error' | (string & {});
+
+    type ContentType = React.ReactNode | ((props: MessageProps) => React.ReactNode);
+
+    interface MessageProps {
+        id?: string;
+        className?: string;
+        style?: object;
+        text?: string;
+        severity?: SeverityType;
+        content?: ContentType;
+    }
 }
 
-export class Message extends React.Component<MessageProps,any> {}
+export declare class Message extends React.Component<Message.MessageProps, any> { }

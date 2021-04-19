@@ -5,8 +5,9 @@ import { Toast } from '../../components/toast/Toast';
 import { Column } from '../../components/column/Column';
 import { NodeService } from '../service/NodeService';
 import { TabView } from '../../components/tabview/TabView';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class TreeTableContextMenuDemo extends Component {
 
@@ -56,6 +57,7 @@ export class TreeTableContextMenuDemo extends Component {
                         <h1>TreeTable <span>ContextMenu</span></h1>
                         <p>TreeTable has exclusive integration with ContextMenu.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="treetable/TreeTableContextMenuDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -297,7 +299,7 @@ const TreeTableContextMenuDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'TreeTableContextMenuDemo', sources: this.sources, service: 'NodeService', data: 'treetablenodes' })

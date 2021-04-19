@@ -45,8 +45,8 @@ export class DataTable extends Component {
         removableSort: false,
         emptyMessage: null,
         selectionMode: null,
-        rowSelectionMode: 'new',
         dragSelection: false,
+        cellSelection: false,
         selection: null,
         onSelectionChange: null,
         contextMenuSelection: null,
@@ -88,6 +88,7 @@ export class DataTable extends Component {
         tabIndex: 0,
         stateKey: null,
         stateStorage: 'session',
+        groupField: null,
         editMode: 'cell',
         editingRows: null,
         expandableRowGroups: false,
@@ -107,6 +108,9 @@ export class DataTable extends Component {
         onRowCollapse: null,
         onContextMenu: null,
         onColReorder: null,
+        onCellClick: null,
+        onCellSelect: null,
+        onCellUnselect: null,
         onRowReorder: null,
         onValueChange: null,
         rowEditorValidator: null,
@@ -118,7 +122,7 @@ export class DataTable extends Component {
         customSaveState: null,
         customRestoreState: null,
         onStateSave: null,
-        onStateRestore: null,
+        onStateRestore: null
     }
 
     static propTypes = {
@@ -137,7 +141,7 @@ export class DataTable extends Component {
         paginatorTemplate: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
         paginatorLeft: PropTypes.any,
         paginatorRight: PropTypes.any,
-        paginatorDropdownAppendTo: PropTypes.any,
+        paginatorDropdownAppendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         pageLinkSize: PropTypes.number,
         rowsPerPageOptions: PropTypes.array,
         currentPageReportTemplate: PropTypes.string,
@@ -153,10 +157,12 @@ export class DataTable extends Component {
         removableSort: PropTypes.bool,
         emptyMessage: PropTypes.any,
         selectionMode: PropTypes.string,
-        rowSelectionMode: PropTypes.string,
         dragSelection: PropTypes.bool,
+        cellSelection: PropTypes.bool,
         selection: PropTypes.any,
         onSelectionChange: PropTypes.func,
+        contextMenuSelection: PropTypes.object,
+        onContextMenuSelectionChange: PropTypes.func,
         compareSelectionBy: PropTypes.string,
         dataKey: PropTypes.string,
         metaKeySelection: PropTypes.bool,
@@ -194,6 +200,7 @@ export class DataTable extends Component {
         tabIndex: PropTypes.number,
         stateKey: PropTypes.string,
         stateStorage: PropTypes.string,
+        groupField: PropTypes.string,
         editMode: PropTypes.string,
         editingRows: PropTypes.oneOfType([PropTypes.array,PropTypes.object]),
         expandableRowGroups: PropTypes.bool,
@@ -211,6 +218,9 @@ export class DataTable extends Component {
         onRowUnselect: PropTypes.func,
         onRowExpand: PropTypes.func,
         onRowCollapse: PropTypes.func,
+        onCellClick: PropTypes.func,
+        onCellSelect: PropTypes.func,
+        onCellUnselect: PropTypes.func,
         onContextMenu: PropTypes.func,
         onColReorder: PropTypes.func,
         onRowReorder: PropTypes.func,
@@ -1219,8 +1229,18 @@ export class DataTable extends Component {
                     let dataFieldValue = ObjectUtils.resolveFieldData(value[i], columnField);
                     let filterMatchMode = filterMeta.matchMode||col.props.filterMatchMode;
                     let filterConstraint = filterMatchMode === 'custom' ? col.props.filterFunction : FilterUtils[filterMatchMode];
+                    let options = {
+                        rowData: value[i],
+                        filters,
+                        props: this.props,
+                        column: {
+                            filterMeta,
+                            filterField: columnField,
+                            props: col.props
+                        }
+                    };
 
-                    if (filterConstraint !== null && !filterConstraint(dataFieldValue, filterValue, this.props.filterLocale)) {
+                    if (filterConstraint !== null && !filterConstraint(dataFieldValue, filterValue, this.props.filterLocale, options)) {
                         localMatch = false;
                     }
 
@@ -1311,8 +1331,8 @@ export class DataTable extends Component {
 
     getSelectionModeInColumn(columns) {
         if (Array.isArray(columns)) {
-            for(let col of columns) {
-                if(col.props.selectionMode)
+            for (let col of columns) {
+                if (col.props.selectionMode)
                    return col.props.selectionMode;
             }
         }
@@ -1332,7 +1352,7 @@ export class DataTable extends Component {
 
     createTableBody(value, columns, frozen, selectionModeInColumn) {
         return <TableBody tableId={this.props.id} value={value} first={this.getFirst()} rows={this.getRows()} lazy={this.props.lazy} paginator={this.props.paginator} dataKey={this.props.dataKey} compareSelectionBy={this.props.compareSelectionBy}
-                        selectionMode={this.props.selectionMode} rowSelectionMode={this.props.rowSelectionMode} selection={this.props.selection} metaKeySelection={this.props.metaKeySelection} frozen={frozen} selectionModeInColumn={selectionModeInColumn}
+                        selectionMode={this.props.selectionMode} selection={this.props.selection} metaKeySelection={this.props.metaKeySelection} frozen={frozen} selectionModeInColumn={selectionModeInColumn}
                         onSelectionChange={this.props.onSelectionChange} onRowClick={this.props.onRowClick} onRowDoubleClick={this.props.onRowDoubleClick} onRowSelect={this.props.onRowSelect} onRowUnselect={this.props.onRowUnselect}
                         contextMenuSelection={this.props.contextMenuSelection} onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu}
                         expandedRows={this.props.expandedRows} onRowToggle={this.props.onRowToggle} rowExpansionTemplate={this.props.rowExpansionTemplate} selectOnEdit={this.props.selectOnEdit}
@@ -1343,7 +1363,7 @@ export class DataTable extends Component {
                         editMode={this.props.editMode} editingRows={this.props.editingRows} rowEditorValidator={this.props.rowEditorValidator}
                         onRowEditInit={this.props.onRowEditInit} onRowEditSave={this.props.onRowEditSave} onRowEditCancel={this.props.onRowEditCancel} onRowEditChange={this.props.onRowEditChange}
                         expandableRowGroups={this.props.expandableRowGroups} showRowReorderElement={this.props.showRowReorderElement} showSelectionElement={this.props.showSelectionElement}
-                        dragSelection={this.props.dragSelection}>
+                        dragSelection={this.props.dragSelection} cellSelection={this.props.cellSelection} onCellClick={this.props.onCellClick} onCellSelect={this.props.onCellSelect} onCellUnselect={this.props.onCellUnselect}>
                         {columns}
                 </TableBody>;
     }

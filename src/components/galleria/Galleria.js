@@ -5,7 +5,7 @@ import UniqueComponentId from '../utils/UniqueComponentId';
 import { GalleriaItem } from './GalleriaItem';
 import { GalleriaThumbnails } from './GalleriaThumbnails';
 import DomHandler from '../utils/DomHandler';
-import { CSSTransition } from 'react-transition-group';
+import { CSSTransition } from '../transition/CSSTransition';
 import { Ripple } from '../ripple/Ripple';
 import { Portal } from '../portal/Portal';
 import { ZIndexUtils } from '../utils/ZIndexUtils';
@@ -41,6 +41,7 @@ export class Galleria extends Component {
         showIndicatorsOnItem: false,
         indicatorsPosition: "bottom",
         baseZIndex: 0,
+        transitionOptions: null,
         onItemChange: null
     }
 
@@ -72,6 +73,7 @@ export class Galleria extends Component {
         showIndicatorsOnItem: PropTypes.bool,
         indicatorsPosition: PropTypes.string,
         baseZIndex: PropTypes.number,
+        transitionOptions: PropTypes.object,
         onItemChange: PropTypes.func
     }
 
@@ -98,6 +100,7 @@ export class Galleria extends Component {
         this.stopSlideShow = this.stopSlideShow.bind(this);
         this.onEnter = this.onEnter.bind(this);
         this.onEntering = this.onEntering.bind(this);
+        this.onEntered = this.onEntered.bind(this);
         this.onExit = this.onExit.bind(this);
         this.onExited = this.onExited.bind(this);
 
@@ -136,6 +139,10 @@ export class Galleria extends Component {
         DomHandler.addClass(this.mask, 'p-component-overlay');
     }
 
+    onEntered() {
+        this.props.onShow && this.props.onShow();
+    }
+
     onExit() {
         DomHandler.removeClass(document.body, 'p-overflow-hidden');
         DomHandler.addClass(this.mask, 'p-galleria-mask-leave');
@@ -143,6 +150,8 @@ export class Galleria extends Component {
 
     onExited() {
         ZIndexUtils.clear(this.mask);
+
+        this.props.onHide && this.props.onHide();
     }
 
     isAutoPlayActive() {
@@ -195,7 +204,7 @@ export class Galleria extends Component {
     renderHeader() {
         if (this.props.header) {
             return (<div className="p-galleria-header">
-                { this.props.header}
+                {this.props.header}
             </div>);
         }
 
@@ -205,7 +214,7 @@ export class Galleria extends Component {
     renderFooter() {
         if (this.props.footer) {
             return (<div className="p-galleria-footer">
-                { this.props.footer}
+                {this.props.footer}
             </div>);
         }
 
@@ -266,8 +275,8 @@ export class Galleria extends Component {
 
             const galleriaWrapper = (
                 <div ref={(el) => this.mask = el} className={maskClassName}>
-                    <CSSTransition nodeRef={this.galleriaRef} classNames="p-galleria" in={this.state.visible} timeout={{ enter: 150, exit: 150 }}
-                        unmountOnExit onEnter={this.onEnter} onEntering={this.onEntering} onExit={this.onExit} onExited={this.onExited}>
+                    <CSSTransition nodeRef={this.galleriaRef} classNames="p-galleria" in={this.state.visible} timeout={{ enter: 150, exit: 150 }} options={this.props.transitionOptions}
+                        unmountOnExit onEnter={this.onEnter} onEntering={this.onEntering} onEntered={this.onEntered} onExit={this.onExit} onExited={this.onExited}>
                         {element}
                     </CSSTransition>
                 </div>

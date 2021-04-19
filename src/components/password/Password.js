@@ -4,13 +4,14 @@ import DomHandler from '../utils/DomHandler';
 import { tip } from '../tooltip/Tooltip';
 import { InputText } from '../inputtext/InputText';
 import ObjectUtils from '../utils/ObjectUtils';
-import { CSSTransition } from 'react-transition-group';
+import { CSSTransition } from '../transition/CSSTransition';
 import { classNames } from '../utils/ClassNames';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import { localeOption } from '../api/Locale';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 import { Portal } from '../portal/Portal';
 import { ZIndexUtils } from '../utils/ZIndexUtils';
+import PrimeReact from '../api/PrimeReact';
 
 export class Password extends Component {
 
@@ -38,7 +39,10 @@ export class Password extends Component {
         inputClassName: null,
         panelStyle: null,
         panelClassName: null,
-        onInput: null
+        transitionOptions: null,
+        onInput: null,
+        onShow: null,
+        onHide: null
     };
 
     static propTypes = {
@@ -52,7 +56,7 @@ export class Password extends Component {
         strongRegex: PropTypes.string,
         feedback: PropTypes.bool,
         toggleMask: PropTypes.bool,
-        appendTo: PropTypes.any,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         header: PropTypes.any,
         content: PropTypes.any,
         footer: PropTypes.any,
@@ -65,7 +69,10 @@ export class Password extends Component {
         inputClassName: PropTypes.string,
         panelStyle: PropTypes.object,
         panelClassName: PropTypes.string,
-        onInput: PropTypes.func
+        transitionOptions: PropTypes.object,
+        onInput: PropTypes.func,
+        onShow: PropTypes.func,
+        onHide: PropTypes.func
     };
 
     constructor(props) {
@@ -182,9 +189,7 @@ export class Password extends Component {
 
     alignOverlay() {
         if (this.inputRef && this.inputRef.current) {
-            const container = this.inputRef.current.parentElement;
-            this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
-            DomHandler.absolutePosition(this.overlayRef.current, container);
+            DomHandler.alignOverlay(this.overlayRef.current, this.inputRef.current.parentElement, this.props.appendTo || PrimeReact.appendTo);
         }
     }
 
@@ -196,6 +201,8 @@ export class Password extends Component {
     onOverlayEntered() {
         this.bindScrollListener();
         this.bindResizeListener();
+
+        this.props.onShow && this.props.onShow();
     }
 
     onOverlayExit() {
@@ -205,6 +212,8 @@ export class Password extends Component {
 
     onOverlayExited() {
         ZIndexUtils.clear(this.overlayRef.current);
+
+        this.props.onHide && this.props.onHide();
     }
 
     onFocus(event) {
@@ -451,7 +460,7 @@ export class Password extends Component {
         );
 
         const panel = (
-            <CSSTransition nodeRef={this.overlayRef} classNames="p-connected-overlay" in={this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }}
+            <CSSTransition nodeRef={this.overlayRef} classNames="p-connected-overlay" in={this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }} options={this.props.transitionOptions}
                 unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
                 <div ref={this.overlayRef} className={panelClassName} style={this.props.panelStyle} onClick={this.onPanelClick}>
                     {header}

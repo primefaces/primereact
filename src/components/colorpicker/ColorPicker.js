@@ -8,6 +8,7 @@ import ObjectUtils from '../utils/ObjectUtils';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 import { ZIndexUtils } from '../utils/ZIndexUtils';
+import PrimeReact from '../api/PrimeReact';
 
 export class ColorPicker extends Component {
 
@@ -19,14 +20,17 @@ export class ColorPicker extends Component {
         className: null,
         defaultColor: 'ff0000',
         inline: false,
-        format: "hex",
+        format: 'hex',
         appendTo: null,
         disabled: false,
         tabIndex: null,
         inputId: null,
         tooltip: null,
         tooltipOptions: null,
-        onChange: null
+        transitionOptions: null,
+        onChange: null,
+        onShow: null,
+        onHide: null
     }
 
     static propTypes = {
@@ -38,13 +42,16 @@ export class ColorPicker extends Component {
         defaultColor: PropTypes.string,
         inline: PropTypes.bool,
         format: PropTypes.string,
-        appendTo: PropTypes.any,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         disabled: PropTypes.bool,
         tabIndex: PropTypes.number,
         inputId: PropTypes.string,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
-        onChange: PropTypes.func
+        transitionOptions: PropTypes.object,
+        onChange: PropTypes.func,
+        onShow: PropTypes.func,
+        onHide: PropTypes.func
     }
 
     constructor(props) {
@@ -103,7 +110,7 @@ export class ColorPicker extends Component {
     pickHue(event) {
         let top = this.hueView.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0);
         this.hsbValue = this.validateHSB({
-            h: Math.floor(360 * (150 - Math.max(0, Math.min(150, (event.pageY - top)))) / 150),
+            h: Math.floor(360 * (150 - Math.max(0, Math.min(150, ((event.pageY || event.changedTouches[0].pageY) - top)))) / 150),
             s: 100,
             b: 100
         });
@@ -166,8 +173,8 @@ export class ColorPicker extends Component {
         let rect = this.colorSelector.getBoundingClientRect();
         let top = rect.top + (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0);
         let left = rect.left + document.body.scrollLeft;
-        let saturation = Math.floor(100 * (Math.max(0, Math.min(150, (event.pageX - left)))) / 150);
-        let brightness = Math.floor(100 * (150 - Math.max(0, Math.min(150, (event.pageY - top)))) / 150);
+        let saturation = Math.floor(100 * (Math.max(0, Math.min(150, ((event.pageX || event.changedTouches[0].pageX)- left)))) / 150);
+        let brightness = Math.floor(100 * (150 - Math.max(0, Math.min(150, ((event.pageY || event.changedTouches[0].pageY) - top)))) / 150);
         this.hsbValue = this.validateHSB({
             h: this.hsbValue.h,
             s: saturation,
@@ -289,13 +296,15 @@ export class ColorPicker extends Component {
 
     onOverlayEnter() {
         ZIndexUtils.set('overlay', this.overlayRef.current);
-        this.alignPanel();
+        this.alignOverlay();
     }
 
     onOverlayEntered() {
         this.bindDocumentClickListener();
         this.bindScrollListener();
         this.bindResizeListener();
+
+        this.props.onShow && this.props.onShow();
     }
 
     onOverlayExit() {
@@ -306,6 +315,8 @@ export class ColorPicker extends Component {
 
     onOverlayExited() {
         ZIndexUtils.clear(this.overlayRef.current);
+
+        this.props.onHide && this.props.onHide();
     }
 
     onInputClick() {
@@ -620,11 +631,9 @@ export class ColorPicker extends Component {
         this.updateColorSelector();
     }
 
-    alignPanel() {
+    alignOverlay() {
         if (this.inputRef && this.inputRef.current) {
-            const container = this.inputRef.current.parentElement;
-            this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
-            DomHandler.absolutePosition(this.overlayRef.current, container);
+            DomHandler.alignOverlay(this.overlayRef.current, this.inputRef.current.parentElement, this.props.appendTo || PrimeReact.appendTo);
         }
     }
 
@@ -697,7 +706,8 @@ export class ColorPicker extends Component {
             <div ref={(el) => this.container = el} id={this.props.id} style={this.props.style} className={containerClassName}>
                 {input}
                 <ColorPickerPanel ref={this.overlayRef} appendTo={this.props.appendTo} inline={this.props.inline} disabled={this.props.disabled} onClick={this.onPanelClick}
-                    in={this.props.inline || this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
+                    in={this.props.inline || this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}
+                    transitionOptions={this.props.transitionOptions}>
                     {content}
                 </ColorPickerPanel>
             </div>

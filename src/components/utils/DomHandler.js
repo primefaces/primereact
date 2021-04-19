@@ -193,6 +193,18 @@ export default class DomHandler {
         return 0;
     }
 
+    static alignOverlay(overlay, target, appendTo) {
+        if (overlay && target) {
+            if (appendTo === 'self') {
+                this.relativePosition(overlay, target);
+            }
+            else {
+                overlay.style.minWidth = DomHandler.getOuterWidth(target) + 'px';
+                this.absolutePosition(overlay, target);
+            }
+        }
+    }
+
     static absolutePosition(element, target) {
         if (element) {
             let elementDimensions = element.offsetParent ? { width: element.offsetWidth, height: element.offsetHeight } : this.getHiddenElementDimensions(element)

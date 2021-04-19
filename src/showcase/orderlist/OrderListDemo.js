@@ -4,6 +4,7 @@ import ProductService from '../service/ProductService';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './OrderListDemo.scss';
 import { OrderListDoc } from './OrderListDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class OrderListDemo extends Component {
 
@@ -48,7 +49,8 @@ export class OrderListDemo extends Component {
                     <AppInlineHeader changelogText="orderList">
                         <h1>OrderList</h1>
                         <p>OrderList is used to sort a collection.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="orderlist/OrderListDemo.js" />
                 </div>
 
                 <div className="content-section implementation orderlist-demo">

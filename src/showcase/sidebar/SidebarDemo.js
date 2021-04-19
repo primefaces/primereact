@@ -3,6 +3,7 @@ import { Sidebar } from '../../components/sidebar/Sidebar';
 import { Button } from '../../components/button/Button';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { SidebarDoc } from './SidebarDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class SidebarDemo extends Component {
 
@@ -36,7 +37,8 @@ export class SidebarDemo extends Component {
                     <AppInlineHeader changelogText="sidebar">
                         <h1>Sidebar</h1>
                         <p>Sidebar is a panel component displayed as an overlay.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="sidebar/SideberDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

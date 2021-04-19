@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import { Button } from '../button/Button';
-import { CSSTransition } from 'react-transition-group';
+import { CSSTransition } from '../transition/CSSTransition';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
@@ -64,9 +64,11 @@ export class ConfirmPopup extends Component {
         appendTo: null,
         dismissable: true,
         footer: null,
+        onShow: null,
         onHide: null,
         accept: null,
-        reject: null
+        reject: null,
+        transitionOptions: null
     }
 
     static propTypes = {
@@ -82,12 +84,14 @@ export class ConfirmPopup extends Component {
         acceptClassName: PropTypes.string,
         className: PropTypes.string,
         style: PropTypes.object,
-        appendTo: PropTypes.any,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         dismissable: PropTypes.bool,
         footer: PropTypes.any,
+        onShow: PropTypes.func,
         onHide: PropTypes.func,
         accept: PropTypes.func,
-        reject: PropTypes.func
+        reject: PropTypes.func,
+        transitionOptions: PropTypes.object
     }
 
     constructor(props) {
@@ -212,17 +216,20 @@ export class ConfirmPopup extends Component {
 
     show() {
         this.setState({ visible: true }, () => {
-            OverlayEventBus.on('overlay-click', (e) => {
+            this.overlayEventListener = (e) => {
                 if (!this.isOutsideClicked(e.target)) {
                     this.isPanelClicked = true;
                 }
-            });
+            };
+
+            OverlayEventBus.on('overlay-click', this.overlayEventListener);
         });
     }
 
     hide(result) {
         this.setState({ visible: false }, () => {
-            OverlayEventBus.off('overlay-click');
+            OverlayEventBus.off('overlay-click', this.overlayEventListener);
+            this.overlayEventListener = null;
 
             if (this.props.onHide) {
                 this.props.onHide(result);
@@ -239,6 +246,8 @@ export class ConfirmPopup extends Component {
         this.bindDocumentClickListener();
         this.bindScrollListener();
         this.bindResizeListener();
+
+        this.props.onShow && this.props.onShow();
     }
 
     onExit() {
@@ -290,6 +299,11 @@ export class ConfirmPopup extends Component {
             this.scrollHandler = null;
         }
 
+        if (this.overlayEventListener) {
+            OverlayEventBus.off('overlay-click', this.overlayEventListener);
+            this.overlayEventListener = null;
+        }
+
         ZIndexUtils.clear(this.overlayRef.current);
     }
 
@@ -331,7 +345,7 @@ export class ConfirmPopup extends Component {
         const footer = this.renderFooter();
 
         return (
-            <CSSTransition nodeRef={this.overlayRef} classNames="p-connected-overlay" in={this.state.visible} timeout={{ enter: 120, exit: 100 }}
+            <CSSTransition nodeRef={this.overlayRef} classNames="p-connected-overlay" in={this.state.visible} timeout={{ enter: 120, exit: 100 }} options={this.props.transitionOptions}
                 unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit} onExited={this.onExited}>
                 <div ref={this.overlayRef} id={this.props.id} className={className} style={this.props.style} onClick={this.onPanelClick}>
                     {content}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
 
 export class InputTextDoc extends Component {
@@ -228,7 +228,7 @@ const InputTextDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
                         <h5>Import</h5>
@@ -328,6 +328,7 @@ import { InputText } from 'primereact/inputtext';
                     {
                         useLiveEditorTabs({ name: 'InputTextDemo', sources: this.sources })
                     }
+
                 </TabView>
             </div>
         )

@@ -4,6 +4,7 @@ import { Panel } from '../../components/panel/Panel';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { FlexGridDoc } from './FlexGridDoc';
 import './FlexGridDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export class FlexGridDemo extends Component {
 
@@ -38,7 +39,8 @@ export class FlexGridDemo extends Component {
                     <AppInlineHeader changelogText="flexGrid">
                         <h1>Grid System</h1>
                         <p>Grid is a lightweight flex based responsive layout utility optimized for mobile phones, tablets and desktops.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="flexgrid/FlexGridDemo.js" />
                 </div>
 
                 <div className="content-section implementation flexgrid-demo">

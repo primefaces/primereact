@@ -3,6 +3,7 @@ import { SlideMenu } from '../../components/slidemenu/SlideMenu';
 import { Button } from '../../components/button/Button';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { SlideMenuDoc } from './SlideMenuDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class SlideMenuDemo extends Component {
 
@@ -148,7 +149,8 @@ export class SlideMenuDemo extends Component {
                     <AppInlineHeader changelogText="slideMenu">
                         <h1>Slide Menu</h1>
                         <p>SlideMenu displays submenus with a slide animation.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="slidemenu/SlideMenuDemo.js"/>
                 </div>
 
                 <div className="content-section implementation">

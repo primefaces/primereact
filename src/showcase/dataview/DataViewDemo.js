@@ -7,6 +7,7 @@ import { Rating } from '../../components/rating/Rating';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { DataViewDoc } from './DataViewDoc';
 import './DataViewDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DataViewDemo extends Component {
 
@@ -133,7 +134,8 @@ export class DataViewDemo extends Component {
                     <AppInlineHeader changelogText="dataView">
                         <h1>DataView</h1>
                         <p>DataView displays data in grid or list layout with pagination and sorting features.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="dataview/DataViewDemo.js" />
                 </div>
 
                 <div className="content-section implementation dataview-demo">

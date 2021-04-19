@@ -127,7 +127,7 @@ export class PickList extends Component {
     handleChange(event, source, target) {
         if (this.props.onChange) {
             this.props.onChange({
-                event: event.originalEvent,
+                originalEvent: event.originalEvent,
                 source,
                 target,
             });

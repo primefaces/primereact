@@ -1,34 +1,19 @@
 import * as React from 'react';
+import TooltipOptions from './TooltipOptions';
 
-interface TooltipProps {
-    id?: string;
-    target?: any;
-    content?: string;
-    disabled?: boolean;
-    className?: string;
-    style?: object;
-    appendTo?: object;
-    position?: "top" | "right" | "bottom" | "left";
-    my?: string;
-    at?: string;
-    event?: string;
-    showEvent?: string;
-    hideEvent?: string;
-    autoZIndex?: boolean;
-    baseZIndex?: number;
-    mouseTrack?: boolean;
-    mouseTrackTop?: number;
-    mouseTrackLeft?: number;
-    showDelay?: number;
-    updateDelay?: number;
-    hideDelay?: number;
-    onBeforeShow?(e: {originalEvent: Event, target: HTMLElement}): void;
-    onBeforeHide?(e: {originalEvent: Event, target: HTMLElement}): void;
-    onShow?(e: {originalEvent: Event, target: HTMLElement}): void;
-    onHide?(e: {originalEvent: Event, target: HTMLElement}): void;
+declare namespace Tooltip {
+
+    type TargetType = string | string[] | HTMLElement;
+
+    interface TooltipProps extends TooltipOptions {
+        id?: string;
+        target?: TargetType;
+        content?: string;
+        disabled?: boolean;
+    }
 }
 
-export class Tooltip extends React.Component<TooltipProps,any> {
+export declare class Tooltip extends React.Component<Tooltip.TooltipProps, any> {
     public updateTargetEvents(target: HTMLElement): void;
     public loadTargetEvents(target: HTMLElement): void;
     public unloadTargetEvents(target: HTMLElement): void;

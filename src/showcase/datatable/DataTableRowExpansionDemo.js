@@ -6,9 +6,10 @@ import { Rating } from '../../components/rating/Rating';
 import { Button } from '../../components/button/Button';
 import { Toast } from '../../components/toast/Toast';
 import { TabView } from '../../components/tabview/TabView';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './DataTableDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DataTableRowExpansionDemo extends Component {
 
@@ -129,6 +130,7 @@ export class DataTableRowExpansionDemo extends Component {
                         <h1>DataTable <span>Row Expansion</span></h1>
                         <p>A row can be expanded to display extra content by enabling expandableRows property and providing a row ng-template.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="datatable/DataTableRowExpansionDemo.js" />
                 </div>
 
                 <div className="content-section implementation datatable-rowexpansion-demo">
@@ -586,7 +588,7 @@ const DataTableRowExpansionDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'DataTableRowExpansionDemo', sources: this.sources, service: 'ProductService', data: 'products-orders-small', extFiles: this.extFiles })

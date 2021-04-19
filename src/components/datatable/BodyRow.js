@@ -77,8 +77,6 @@ export class BodyRow extends Component {
         else
             event.currentTarget.draggable = false;
 
-        this.enableDragSelection(event);
-
         if (this.props.onMouseDown) {
             this.props.onMouseDown({
                 originalEvent: event,
@@ -135,7 +133,7 @@ export class BodyRow extends Component {
     }
 
     onKeyDown(event) {
-        if (this.props.selectionMode) {
+        if (this.isFocusable() && !this.props.allowCellSelection) {
             const row = event.currentTarget;
 
             switch (event.which) {
@@ -172,49 +170,6 @@ export class BodyRow extends Component {
                     //no op
                     break;
             }
-        }
-    }
-
-    enableDragSelection(event) {
-        if (this.props.dragSelection && !this.dragSelectionHelper) {
-            this.dragSelectionHelper = document.createElement('div');
-            DomHandler.addClass(this.dragSelectionHelper, 'p-datatable-drag-selection-helper');
-
-            const currentX = event.clientX;
-            const currentY = event.clientY;
-
-            this.dragSelectionHelper.style.top = `${event.pageY}px`;
-            this.dragSelectionHelper.style.left = `${event.pageX}px`;
-
-            let dragSelectionMouseMove = (e) => {
-                const dx = e.clientX - currentX;
-                const dy = e.clientY - currentY;
-
-                if (dy < 0)
-                    this.dragSelectionHelper.style.top = `${e.pageY}px`;
-                if (dx < 0)
-                    this.dragSelectionHelper.style.left = `${e.pageX}px`;
-
-                this.dragSelectionHelper.style.height = `${Math.abs(dy)}px`;
-                this.dragSelectionHelper.style.width = `${Math.abs(dx)}px`;
-
-                e.preventDefault();
-            };
-
-            let dragSelectionMouseUp = () => {
-                if (this.dragSelectionHelper) {
-                    this.dragSelectionHelper.remove();
-                    this.dragSelectionHelper = null;
-                }
-
-                document.removeEventListener('mousemove', dragSelectionMouseMove);
-                document.removeEventListener('mouseup', dragSelectionMouseUp);
-                dragSelectionMouseMove = dragSelectionMouseUp = null;
-            };
-
-            document.addEventListener('mousemove', dragSelectionMouseMove);
-            document.addEventListener('mouseup', dragSelectionMouseUp);
-            document.body.appendChild(this.dragSelectionHelper);
         }
     }
 
@@ -315,16 +270,20 @@ export class BodyRow extends Component {
         event.preventDefault();
     }
 
+    isFocusable() {
+        return this.props.selectionMode && this.props.selectionModeInColumn !== 'single' && this.props.selectionModeInColumn !== 'multiple';
+    }
+
     getTabIndex() {
-        return this.props.selectionMode ? (this.props.rowIndex === 0 ? 0 : -1) : null;
+        return this.isFocusable() && !this.props.allowCellSelection ? (this.props.rowIndex === 0 ? 0 : -1) : null;
     }
 
     render() {
         let columns = React.Children.toArray(this.props.children);
         let conditionalClassNames = {
-            'p-highlight': this.props.selected,
+            'p-highlight': !this.props.allowCellSelection && this.props.selected,
             'p-highlight-contextmenu': this.props.contextMenuSelected,
-            'p-selectable-row': this.props.selectionMode
+            'p-selectable-row': this.props.allowRowSelection
         };
 
         if (this.props.rowClassName) {
@@ -353,10 +312,10 @@ export class BodyRow extends Component {
             }
 
             let editing = this.getEditing();
-            let cell = <BodyCell tableId={this.props.tableId} key={i} {...column.props} value={this.props.value} rowSpan={rowSpan} rowData={this.props.rowData} rowIndex={this.props.rowIndex} onRowToggle={this.props.onRowToggle} expanded={this.props.expanded}
-                            onRadioClick={this.props.onRadioClick} onCheckboxClick={this.props.onCheckboxClick} selected={this.props.selected} selectOnEdit={this.props.selectOnEdit}
-                            editMode={this.props.editMode} editing={editing} onRowEditInit={this.onRowEditInit} onRowEditSave={this.onRowEditSave} onRowEditCancel={this.onRowEditCancel}
-                            showRowReorderElement={this.props.showRowReorderElement} showSelectionElement={this.props.showSelectionElement} />;
+            let cell = <BodyCell tableId={this.props.tableId} key={i} {...column.props} value={this.props.value} rowSpan={rowSpan} rowData={this.props.rowData} index={i} rowIndex={this.props.rowIndex} onRowToggle={this.props.onRowToggle} expanded={this.props.expanded}
+                onRadioClick={this.props.onRadioClick} onCheckboxClick={this.props.onCheckboxClick} selected={this.props.selected} selection={this.props.selection} selectOnEdit={this.props.selectOnEdit}
+                editMode={this.props.editMode} editing={editing} onRowEditInit={this.onRowEditInit} onRowEditSave={this.onRowEditSave} onRowEditCancel={this.onRowEditCancel} onMouseDown={this.props.onCellMouseDown} onMouseUp={this.props.onCellMouseUp}
+                showRowReorderElement={this.props.showRowReorderElement} showSelectionElement={this.props.showSelectionElement} allowCellSelection={this.props.allowCellSelection} onClick={this.props.onCellClick} />;
 
             cells.push(cell);
         }

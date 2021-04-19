@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 
 export class SkeletonDoc extends Component {
 
@@ -446,7 +446,7 @@ export const SkeletonDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
                     <h5>Import</h5>
@@ -564,7 +564,7 @@ import { Skeleton } from 'primereact/skeleton';
                                 <td>Container element of a determinate progressbar.</td>
                             </tr>
                             <tr>
-                                <td>p-skeleton-animation-none</td>
+                                <td>p-skeleton-none</td>
                                 <td>Container element of an indeterminate progressbar.</td>
                             </tr>
 						</tbody>

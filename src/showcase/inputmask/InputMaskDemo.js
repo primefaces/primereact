@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { InputMask } from '../../components/inputmask/InputMask';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { InputMaskDoc } from './InputMaskDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class InputMaskDemo extends Component {
 
@@ -21,10 +22,11 @@ export class InputMaskDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="inputMask" showInputStyle>
+                    <AppInlineHeader changelogText="inputMask">
                         <h1>InputMask</h1>
                         <p>InputMask component is used to enter input in a certain format such as numeric, date, currency, email and phone.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="inputmask/InputMaskDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { CSSTransition } from 'react-transition-group';
+import { CSSTransition } from '../transition/CSSTransition';
 import { classNames } from '../utils/ClassNames';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import ObjectUtils from '../utils/ObjectUtils';
@@ -19,6 +19,7 @@ export class Panel extends Component {
         expandIcon: 'pi pi-plus',
         collapseIcon: 'pi pi-minus',
         icons: null,
+        transitionOptions: null,
         onExpand: null,
         onCollapse: null,
         onToggle: null
@@ -35,6 +36,7 @@ export class Panel extends Component {
         expandIcon: PropTypes.string,
         collapseIcon: PropTypes.string,
         icons: PropTypes.any,
+        transitionOptions: PropTypes.object,
         onExpand: PropTypes.func,
         onCollapse: PropTypes.func,
         onToggle: PropTypes.func
@@ -174,7 +176,7 @@ export class Panel extends Component {
         const id = this.state.id + '_content';
 
         return (
-            <CSSTransition nodeRef={this.contentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={!collapsed} unmountOnExit>
+            <CSSTransition nodeRef={this.contentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={!collapsed} unmountOnExit options={this.props.transitionOptions}>
                 <div ref={this.contentRef} className="p-toggleable-content" aria-hidden={collapsed} role="region" id={id} aria-labelledby={this.state.id + '_header'}>
                     <div className="p-panel-content">
                         {this.props.children}

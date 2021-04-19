@@ -1,10 +1,11 @@
 'use strict';
 
-var module_prime_react = module.exports = require('./components/api/PrimeReact');
-module_prime_react.locale = require('./components/api/Locale').locale;
-module_prime_react.addLocale = require('./components/api/Locale').addLocale;
-module_prime_react.updateLocaleOption = require('./components/api/Locale').updateLocaleOption;
-module_prime_react.updateLocaleOptions = require('./components/api/Locale').updateLocaleOptions;
-module_prime_react.localeOption = require('./components/api/Locale').localeOption;
-module_prime_react.localeOptions = require('./components/api/Locale').localeOptions;
-module_prime_react.PrimeIcons = require('./components/api/PrimeIcons').PrimeIcons;
+var module_primereact = module.exports = require('./components/api/PrimeReact');
+module_primereact.locale = require('./components/api/Locale').locale;
+module_primereact.addLocale = require('./components/api/Locale').addLocale;
+module_primereact.updateLocaleOption = require('./components/api/Locale').updateLocaleOption;
+module_primereact.updateLocaleOptions = require('./components/api/Locale').updateLocaleOptions;
+module_primereact.localeOption = require('./components/api/Locale').localeOption;
+module_primereact.localeOptions = require('./components/api/Locale').localeOptions;
+module_primereact.PrimeIcons = require('./components/api/PrimeIcons').PrimeIcons;
+module_primereact.MessageSeverity = require('./components/api/MessageSeverity').MessageSeverity;

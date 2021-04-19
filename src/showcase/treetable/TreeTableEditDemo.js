@@ -4,9 +4,10 @@ import { Column } from '../../components/column/Column';
 import { InputText } from '../../components/inputtext/InputText';
 import { NodeService } from '../service/NodeService';
 import { TabView } from '../../components/tabview/TabView';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './TreeTableDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export class TreeTableEditDemo extends Component {
 
@@ -79,6 +80,7 @@ export class TreeTableEditDemo extends Component {
                         <h1>TreeTable <span>Edit</span></h1>
                         <p>Incell editing provides a quick and user friendly way to manipulate data.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="treetable/TreeTableEditDemo.js" />
                 </div>
 
                 <div className="content-section implementation treetable-editing-demo">
@@ -362,7 +364,7 @@ const TreeTableEditDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'TreeTableEditDemo', sources: this.sources, service: 'NodeService', data: 'treetablenodes', extFiles: this.extFiles })

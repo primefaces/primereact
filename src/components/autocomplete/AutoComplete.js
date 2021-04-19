@@ -11,6 +11,7 @@ import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 import { ZIndexUtils } from '../utils/ZIndexUtils';
+import PrimeReact from '../api/PrimeReact';
 
 export class AutoComplete extends Component {
 
@@ -54,6 +55,7 @@ export class AutoComplete extends Component {
         completeMethod: null,
         itemTemplate: null,
         selectedItemTemplate: null,
+        transitionOptions: null,
         onChange: null,
         onFocus: null,
         onBlur: null,
@@ -66,7 +68,9 @@ export class AutoComplete extends Component {
         onKeyUp: null,
         onKeyPress: null,
         onContextMenu: null,
-        onClear: null
+        onClear: null,
+        onShow: null,
+        onHide: null
     }
 
     static propTypes = {
@@ -100,7 +104,7 @@ export class AutoComplete extends Component {
         disabled: PropTypes.bool,
         maxlength: PropTypes.number,
         size: PropTypes.number,
-        appendTo: PropTypes.any,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         tabIndex: PropTypes.number,
         autoFocus: PropTypes.bool,
         tooltip: PropTypes.string,
@@ -109,6 +113,7 @@ export class AutoComplete extends Component {
         completeMethod: PropTypes.func,
         itemTemplate: PropTypes.any,
         selectedItemTemplate: PropTypes.any,
+        transitionOptions: PropTypes.object,
         onChange: PropTypes.func,
         onFocus: PropTypes.func,
         onBlur: PropTypes.func,
@@ -121,7 +126,9 @@ export class AutoComplete extends Component {
         onKeyUp: PropTypes.func,
         onKeyPress: PropTypes.func,
         onContextMenu: PropTypes.func,
-        onClear: PropTypes.func
+        onClear: PropTypes.func,
+        onShow: PropTypes.func,
+        onHide: PropTypes.func
     };
 
     constructor(props) {
@@ -297,6 +304,8 @@ export class AutoComplete extends Component {
         this.bindDocumentClickListener();
         this.bindScrollListener();
         this.bindResizeListener();
+
+        this.props.onShow && this.props.onShow();
     }
 
     onOverlayExit() {
@@ -307,12 +316,13 @@ export class AutoComplete extends Component {
 
     onOverlayExited() {
         ZIndexUtils.clear(this.overlayRef.current);
+
+        this.props.onHide && this.props.onHide();
     }
 
     alignOverlay() {
         let target = this.props.multiple ? this.multiContainer : this.inputRef.current;
-        this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(target) + 'px';
-        DomHandler.absolutePosition(this.overlayRef.current, target);
+        DomHandler.alignOverlay(this.overlayRef.current, target, this.props.appendTo || PrimeReact.appendTo);
     }
 
     onPanelClick(event) {
@@ -829,7 +839,8 @@ export class AutoComplete extends Component {
                     panelStyle={this.props.panelStyle} panelClassName={this.props.panelClassName} onClick={this.onPanelClick}
                     optionGroupLabel={this.props.optionGroupLabel} optionGroupChildren={this.props.optionGroupChildren} optionGroupTemplate={this.props.optionGroupTemplate}
                     getOptionGroupLabel={this.getOptionGroupLabel} getOptionGroupChildren={this.getOptionGroupChildren}
-                    in={this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntering={this.onOverlayEntering} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}/>
+                    in={this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntering={this.onOverlayEntering} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}
+                    transitionOptions={this.props.transitionOptions} />
             </span>
         );
     }

@@ -1437,6 +1437,16 @@
     padding: 0.53625rem 1.25rem; }
     .p-button.p-button-lg .p-button-icon {
       font-size: 1.25rem; }
+  .p-button.p-button-loading-label-only.p-button-loading-left .p-button-label {
+    margin-left: 0.5rem; }
+  .p-button.p-button-loading-label-only.p-button-loading-right .p-button-label {
+    margin-right: 0.5rem; }
+  .p-button.p-button-loading-label-only.p-button-loading-top .p-button-label {
+    margin-top: 0.5rem; }
+  .p-button.p-button-loading-label-only.p-button-loading-bottom .p-button-label {
+    margin-bottom: 0.5rem; }
+  .p-button.p-button-loading-label-only .p-button-loading-icon {
+    margin: 0; }
 
 .p-fluid .p-button {
   width: 100%; }
@@ -2322,7 +2332,8 @@
     text-align: left;
     border: 1px solid #191919;
     border-width: 1px;
-    padding: 0.571rem 0.857rem; }
+    padding: 0.571rem 0.857rem;
+    outline-color: white; }
     .p-datatable .p-datatable-tbody > tr > td .p-row-toggler,
     .p-datatable .p-datatable-tbody > tr > td .p-row-editor-init,
     .p-datatable .p-datatable-tbody > tr > td .p-row-editor-save,
@@ -2350,6 +2361,9 @@
         box-shadow: 0 0 0 0.1rem white; }
     .p-datatable .p-datatable-tbody > tr > td .p-row-editor-save {
       margin-right: 0.5rem; }
+    .p-datatable .p-datatable-tbody > tr > td.p-highlight {
+      background: #FFE082;
+      color: #212529; }
   .p-datatable .p-datatable-tbody > tr.p-highlight {
     background: #FFE082;
     color: #212529; }
@@ -2776,7 +2790,7 @@
     .p-tree .p-tree-container .p-treenode .p-treenode-content {
       border-radius: 3px;
       transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
-      padding: 0.429rem; }
+      padding: 0; }
       .p-tree .p-tree-container .p-treenode .p-treenode-content .p-tree-toggler {
         margin-right: 0.5rem;
         width: 2rem;

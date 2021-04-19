@@ -10,7 +10,7 @@ export class MenuModelDemo extends Component {
                     <AppInlineHeader changelogText="menu">
                         <h1>MenuModel API</h1>
                         <p>PrimeReact menus components share a common api to specify the menuitems and submenus.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
                 </div>
 
                 <MenuModelDoc/>
@@ -28,7 +28,7 @@ class MenuModelDoc extends Component {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <h3 style={{marginTop: 0}}>MenuItem</h3>
                 <p>Core of the API is the MenuItem class that defines various options such as the label, icon and children of an item in a menu.</p>
                 <CodeHighlight lang="js">

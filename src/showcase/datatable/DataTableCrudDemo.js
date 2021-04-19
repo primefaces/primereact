@@ -17,6 +17,7 @@ import { InputText } from '../../components/inputtext/InputText';
 import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './DataTableDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DataTableCrudDemo extends Component {
 
@@ -295,7 +296,8 @@ export class DataTableCrudDemo extends Component {
                     <AppInlineHeader changelogText="dataTable">
                         <h1>DataTable <span>Crud</span></h1>
                         <p>This samples demonstrates a CRUD implementation using various PrimeReact components.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="datatable/DataTableCrudDemo.js" />
                 </div>
 
                 <div className="content-section implementation datatable-crud-demo">
@@ -1489,7 +1491,7 @@ const DataTableCrudDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'DataTableCrudDemo', sources: this.sources, service: 'ProductService', data: 'products', extFiles: this.extFiles })

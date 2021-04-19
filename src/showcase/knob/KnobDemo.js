@@ -3,6 +3,7 @@ import {Knob} from '../../components/knob/Knob';
 import {AppInlineHeader} from '../../AppInlineHeader';
 import {KnobDoc} from './KnobDoc';
 import {Button} from '../../components/button/Button';
+import AppDemoActions from '../../AppDemoActions';
 
 export class KnobDemo extends Component {
 
@@ -56,7 +57,8 @@ export class KnobDemo extends Component {
                     <AppInlineHeader changelogText="knob">
                         <h1>Knob</h1>
                         <p>Knob is a form component to define number inputs with a dial.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="konb/KnobDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

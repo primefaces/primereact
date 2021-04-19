@@ -12,6 +12,7 @@ import { ProgressBar } from '../../components/progressbar/ProgressBar';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './DataTableDemo.scss';
 import { DataTableDoc } from './DataTableDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DataTableDemo extends Component {
 
@@ -240,7 +241,8 @@ export class DataTableDemo extends Component {
                     <AppInlineHeader changelogText="dataTable">
                         <h1>DataTable</h1>
                         <p>DataTable displays data in tabular format.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="datatable/DataTableDemo.js"/>
                 </div>
 
                 <div className="content-section implementation datatable-doc-demo">

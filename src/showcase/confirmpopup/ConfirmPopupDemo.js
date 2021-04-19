@@ -4,6 +4,7 @@ import { Button } from '../../components/button/Button';
 import { Toast } from '../../components/toast/Toast';
 import { ConfirmPopupDoc } from './ConfirmPopupDoc';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class ConfirmPopupDemo extends Component {
 
@@ -56,7 +57,8 @@ export class ConfirmPopupDemo extends Component {
                     <AppInlineHeader changelogText="confirmPopup">
                         <h1>ConfirmPopup</h1>
                         <p>ConfirmPopup displays a confirmation overlay displayed relatively to its target.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="confirmpopup/ConfirmPopupDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

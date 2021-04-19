@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import UniqueComponentId from '../utils/UniqueComponentId';
-import { CSSTransition } from 'react-transition-group';
+import { CSSTransition } from '../transition/CSSTransition';
 import { Ripple } from '../ripple/Ripple';
 
 export class Fieldset extends Component {
@@ -14,6 +14,7 @@ export class Fieldset extends Component {
         style: null,
         toggleable: null,
         collapsed: null,
+        transitionOptions: null,
         onExpand: null,
         onCollapse: null,
         onToggle: null,
@@ -27,6 +28,7 @@ export class Fieldset extends Component {
         style: PropTypes.object,
         toggleable: PropTypes.bool,
         collapsed: PropTypes.bool,
+        transitionOptions: PropTypes.object,
         onExpand: PropTypes.func,
         onCollapse: PropTypes.func,
         onToggle: PropTypes.func,
@@ -106,7 +108,7 @@ export class Fieldset extends Component {
         const id = this.state.id + '_content';
 
         return (
-            <CSSTransition nodeRef={this.contentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={!collapsed} unmountOnExit>
+            <CSSTransition nodeRef={this.contentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={!collapsed} unmountOnExit options={this.props.transitionOptions}>
                 <div ref={this.contentRef} id={id} className="p-toggleable-content" aria-hidden={collapsed} role="region" aria-labelledby={this.state.id + '_header'}>
                     <div className="p-fieldset-content">
                         {this.props.children}

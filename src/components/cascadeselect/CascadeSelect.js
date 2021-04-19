@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import ObjectUtils from '../utils/ObjectUtils';
 import DomHandler from '../utils/DomHandler';
-import { CSSTransition } from "react-transition-group";
+import { CSSTransition } from '../transition/CSSTransition';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import { CascadeSelectSub } from "./CascadeSelectSub";
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 import { Portal } from '../portal/Portal';
 import { ZIndexUtils } from '../utils/ZIndexUtils';
+import PrimeReact from '../api/PrimeReact';
 
 export class CascadeSelect extends Component {
 
@@ -32,6 +33,7 @@ export class CascadeSelect extends Component {
         tabIndex: null,
         ariaLabelledBy: null,
         appendTo: null,
+        transitionOptions: null,
         onChange: null,
         onGroupChange: null,
         onBeforeShow: null,
@@ -59,7 +61,8 @@ export class CascadeSelect extends Component {
         inputId: PropTypes.string,
         tabIndex: PropTypes.number,
         ariaLabelledBy: PropTypes.string,
-        appendTo: PropTypes.any,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+        transitionOptions: PropTypes.object,
         onChange: PropTypes.func,
         onGroupChange: PropTypes.func,
         onBeforeShow: PropTypes.func,
@@ -255,9 +258,8 @@ export class CascadeSelect extends Component {
         this.bindOutsideClickListener();
         this.bindScrollListener();
         this.bindResizeListener();
-        if (this.props.onShow) {
-            this.props.onShow();
-        }
+
+        this.props.onShow && this.props.onShow();
     }
 
     onOverlayExit() {
@@ -265,19 +267,16 @@ export class CascadeSelect extends Component {
         this.unbindScrollListener();
         this.unbindResizeListener();
         this.dirty = false;
-        if (this.props.onHide) {
-            this.props.onHide();
-        }
     }
 
     onOverlayExited() {
         ZIndexUtils.clear(this.overlayRef.current);
+
+        this.props.onHide && this.props.onHide();
     }
 
     alignOverlay() {
-        const container = this.label.parentElement;
-        DomHandler.absolutePosition(this.overlayRef.current, container);
-        this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
+        DomHandler.alignOverlay(this.overlayRef.current, this.label.parentElement, this.props.appendTo || PrimeReact.appendTo);
     }
 
     bindOutsideClickListener() {
@@ -407,7 +406,7 @@ export class CascadeSelect extends Component {
 
     renderOverlay() {
         const overlay = (
-            <CSSTransition nodeRef={this.overlayRef} classNames="p-connected-overlay" in={this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }}
+            <CSSTransition nodeRef={this.overlayRef} classNames="p-connected-overlay" in={this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }} options={this.props.transitionOptions}
                 unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
                 <div ref={this.overlayRef} className="p-cascadeselect-panel p-component" onClick={this.onPanelClick}>
                     <div className="p-cascadeselect-items-wrapper">

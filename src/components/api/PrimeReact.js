@@ -10,4 +10,6 @@ export default class PrimeReact {
         menu: 1000,
         tooltip: 1100
     }
+
+    static appendTo = null;
 }

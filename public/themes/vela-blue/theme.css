@@ -1428,6 +1428,16 @@
     padding: 0.625rem 1.25rem; }
     .p-button.p-button-lg .p-button-icon {
       font-size: 1.25rem; }
+  .p-button.p-button-loading-label-only.p-button-loading-left .p-button-label {
+    margin-left: 0.5rem; }
+  .p-button.p-button-loading-label-only.p-button-loading-right .p-button-label {
+    margin-right: 0.5rem; }
+  .p-button.p-button-loading-label-only.p-button-loading-top .p-button-label {
+    margin-top: 0.5rem; }
+  .p-button.p-button-loading-label-only.p-button-loading-bottom .p-button-label {
+    margin-bottom: 0.5rem; }
+  .p-button.p-button-loading-label-only .p-button-loading-icon {
+    margin: 0; }
 
 .p-fluid .p-button {
   width: 100%; }
@@ -2313,7 +2323,8 @@
     text-align: left;
     border: 1px solid #304562;
     border-width: 0 0 1px 0;
-    padding: 1rem 1rem; }
+    padding: 1rem 1rem;
+    outline-color: #93cbf9; }
     .p-datatable .p-datatable-tbody > tr > td .p-row-toggler,
     .p-datatable .p-datatable-tbody > tr > td .p-row-editor-init,
     .p-datatable .p-datatable-tbody > tr > td .p-row-editor-save,
@@ -2341,6 +2352,9 @@
         box-shadow: 0 0 0 1px #93cbf9; }
     .p-datatable .p-datatable-tbody > tr > td .p-row-editor-save {
       margin-right: 0.5rem; }
+    .p-datatable .p-datatable-tbody > tr > td.p-highlight {
+      background: rgba(100, 181, 246, 0.16);
+      color: rgba(255, 255, 255, 0.87); }
   .p-datatable .p-datatable-tbody > tr.p-highlight {
     background: rgba(100, 181, 246, 0.16);
     color: rgba(255, 255, 255, 0.87); }
@@ -2767,7 +2781,7 @@
     .p-tree .p-tree-container .p-treenode .p-treenode-content {
       border-radius: 3px;
       transition: box-shadow 0.2s;
-      padding: 0.5rem; }
+      padding: 0; }
       .p-tree .p-tree-container .p-treenode .p-treenode-content .p-tree-toggler {
         margin-right: 0.5rem;
         width: 2rem;

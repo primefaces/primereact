@@ -4,6 +4,7 @@ import { Button } from '../../components/button/Button';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { Toast } from '../../components/toast/Toast';
 import { MenuDoc } from './MenuDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class MenuDemo extends Component {
 
@@ -57,7 +58,8 @@ export class MenuDemo extends Component {
                     <AppInlineHeader changelogText="menu">
                         <h1>Menu</h1>
                         <p>Menu is a navigation/command component that supports dynamic and static positioning.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="menu/MenuDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

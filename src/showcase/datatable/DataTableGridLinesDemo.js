@@ -4,7 +4,8 @@ import { Column } from '../../components/column/Column';
 import ProductService from '../service/ProductService';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { TabView } from '../../components/tabview/TabView';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DataTableGridLinesDemo extends Component {
 
@@ -30,6 +31,7 @@ export class DataTableGridLinesDemo extends Component {
                         <h1>DataTable <span>GridLines</span></h1>
                         <p>Adding <b>p-datatable-gridlines</b> displays borders between cells. Note: Some themes may always display gridlines by design.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="datatable/DataTableGridLinesDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -167,7 +169,7 @@ const DataTableGridLinesDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'DataTableGridLinesDemo', sources: this.sources, service: 'ProductService', data: 'products-small' })

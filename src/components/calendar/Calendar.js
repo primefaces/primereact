@@ -12,6 +12,7 @@ import { localeOption, localeOptions } from '../api/Locale';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 import { mask } from '../utils/Mask';
 import { ZIndexUtils } from '../utils/ZIndexUtils';
+import PrimeReact from '../api/PrimeReact';
 
 export class Calendar extends Component {
 
@@ -59,6 +60,7 @@ export class Calendar extends Component {
         panelClassName: null,
         monthNavigator: false,
         yearNavigator: false,
+        yearRange: null,
         disabledDates: null,
         disabledDays: null,
         minDate: null,
@@ -78,6 +80,7 @@ export class Calendar extends Component {
         dateTemplate: null,
         headerTemplate: null,
         footerTemplate: null,
+        transitionOptions: null,
         onFocus: null,
         onBlur: null,
         onInput: null,
@@ -85,7 +88,9 @@ export class Calendar extends Component {
         onChange: null,
         onViewDateChange: null,
         onTodayButtonClick: null,
-        onClearButtonClick: null
+        onClearButtonClick: null,
+        onShow: null,
+        onHide: null
     }
 
     static propTypes = {
@@ -132,6 +137,7 @@ export class Calendar extends Component {
         panelClassName: PropTypes.string,
         monthNavigator: PropTypes.bool,
         yearNavigator: PropTypes.bool,
+        yearRange: PropTypes.string,
         disabledDates: PropTypes.array,
         disabledDays: PropTypes.array,
         minDate: PropTypes.any,
@@ -144,13 +150,14 @@ export class Calendar extends Component {
         clearButtonClassName: PropTypes.string,
         autoZIndex: PropTypes.bool,
         baseZIndex: PropTypes.number,
-        appendTo: PropTypes.any,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
         ariaLabelledBy: PropTypes.string,
         dateTemplate: PropTypes.func,
         headerTemplate: PropTypes.func,
         footerTemplate: PropTypes.func,
+        transitionOptions: PropTypes.object,
         onFocus: PropTypes.func,
         onBlur: PropTypes.func,
         onInput: PropTypes.func,
@@ -159,6 +166,8 @@ export class Calendar extends Component {
         onViewDateChange: PropTypes.func,
         onTodayButtonClick: PropTypes.func,
         onClearButtonClick: PropTypes.func,
+        onShow: PropTypes.func,
+        onHide: PropTypes.func
     }
 
     constructor(props) {
@@ -1524,7 +1533,7 @@ export class Calendar extends Component {
 
     onOverlayEnter() {
         if (this.props.autoZIndex) {
-            ZIndexUtils.set(this.props.touchUI ? 'modal': 'overlay', this.overlayRef.current, this.props.baseZIndex);
+            ZIndexUtils.set(this.props.touchUI ? 'modal' : 'overlay', this.overlayRef.current, this.props.baseZIndex);
         }
         this.alignOverlay();
     }
@@ -1533,6 +1542,8 @@ export class Calendar extends Component {
         this.bindDocumentClickListener();
         this.bindDocumentResizeListener();
         this.bindScrollListener();
+
+        this.props.onShow && this.props.onShow();
     }
 
     onOverlayExit() {
@@ -1543,6 +1554,8 @@ export class Calendar extends Component {
 
     onOverlayExited() {
         ZIndexUtils.clear(this.overlayRef.current);
+
+        this.props.onHide && this.props.onHide();
     }
 
     bindDocumentClickListener() {
@@ -1617,9 +1630,7 @@ export class Calendar extends Component {
             this.enableModality();
         }
         else {
-            const container = this.inputRef.current.parentElement;
-            this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
-            DomHandler.absolutePosition(this.overlayRef.current, container);
+            DomHandler.alignOverlay(this.overlayRef.current, this.inputRef.current.parentElement, this.props.appendTo || PrimeReact.appendTo);
         }
     }
 
@@ -2987,6 +2998,7 @@ export class Calendar extends Component {
     render() {
         const className = classNames('p-calendar p-component p-inputwrapper', this.props.className, {
             'p-calendar-w-btn': this.props.showIcon,
+            'p-calendar-disabled': this.props.disabled,
             'p-calendar-timeonly': this.props.timeOnly,
             'p-inputwrapper-filled': this.props.value || (DomHandler.hasClass(this.inputRef.current, 'p-filled') && this.inputRef.current.value !== ''),
             'p-inputwrapper-focus': this.state.focused
@@ -3011,7 +3023,8 @@ export class Calendar extends Component {
                 {input}
                 {button}
                 <CalendarPanel ref={this.overlayRef} className={panelClassName} style={this.props.panelStyle} appendTo={this.props.appendTo} inline={this.props.inline} onClick={this.onPanelClick}
-                    in={this.props.inline || this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
+                    in={this.props.inline || this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}
+                    transitionOptions={this.props.transitionOptions}>
                     {datePicker}
                     {timePicker}
                     {buttonBar}

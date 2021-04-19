@@ -8,9 +8,10 @@ import { ProgressBar } from '../../components/progressbar/ProgressBar';
 import { Calendar } from '../../components/calendar/Calendar';
 import { MultiSelect } from '../../components/multiselect/MultiSelect';
 import { TabView } from '../../components/tabview/TabView';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './DataTableDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DataTableFilterDemo extends Component {
 
@@ -196,6 +197,7 @@ export class DataTableFilterDemo extends Component {
                             property of column object that also accepts "contains", "endsWith", "equals", "in" and "custom". An optional global filter feature is available to search all fields with a keyword.
                             By default input fields are generated as filter elements and using templating any component can be used as a filter.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="datatable/DataTableFilterDemo.js" />
                 </div>
 
                 <div className="content-section implementation datatable-filter-demo">
@@ -910,7 +912,7 @@ const DataTableFilterDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'DataTableFilterDemo', sources: this.sources, service: 'CustomerService', data: 'customers-large', extFiles: this.extFiles })

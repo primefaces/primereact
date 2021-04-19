@@ -11,6 +11,7 @@ import { MultiSelectPanel } from './MultiSelectPanel';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 import { ZIndexUtils } from '../utils/ZIndexUtils';
+import PrimeReact from '../api/PrimeReact';
 
 export class MultiSelect extends Component {
 
@@ -58,9 +59,12 @@ export class MultiSelect extends Component {
         selectedItemTemplate: null,
         panelHeaderTemplate: null,
         panelFooterTemplate: null,
+        transitionOptions: null,
         onChange: null,
         onFocus: null,
-        onBlur: null
+        onBlur: null,
+        onShow: null,
+        onHide: null
     };
 
     static propTypes = {
@@ -96,7 +100,7 @@ export class MultiSelect extends Component {
         dataKey: PropTypes.string,
         inputId: PropTypes.string,
         required: PropTypes.bool,
-        appendTo: PropTypes.object,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
         maxSelectedLabels: PropTypes.number,
@@ -107,9 +111,12 @@ export class MultiSelect extends Component {
         selectedItemTemplate: PropTypes.any,
         panelHeaderTemplate: PropTypes.any,
         panelFooterTemplate: PropTypes.any,
+        transitionOptions: PropTypes.object,
         onChange: PropTypes.func,
         onFocus: PropTypes.func,
-        onBlur: PropTypes.func
+        onBlur: PropTypes.func,
+        onShow: PropTypes.func,
+        onHide: PropTypes.func
     };
 
     constructor(props) {
@@ -162,7 +169,7 @@ export class MultiSelect extends Component {
         let allowOptionSelect = this.allowOptionSelect();
 
         if (selected)
-            this.updateModel(originalEvent, this.props.value.filter(val => !ObjectUtils.equals(this.getOptionValue(val), optionValue, this.equalityKey())));
+            this.updateModel(originalEvent, this.props.value.filter(val => !ObjectUtils.equals(val, optionValue, this.equalityKey())));
         else if (allowOptionSelect)
             this.updateModel(originalEvent, [...this.props.value || [], optionValue]);
     }
@@ -337,13 +344,15 @@ export class MultiSelect extends Component {
 
     onOverlayEnter() {
         ZIndexUtils.set('overlay', this.overlayRef.current);
-        this.alignPanel();
+        this.alignOverlay();
     }
 
     onOverlayEntered() {
         this.bindDocumentClickListener();
         this.bindScrollListener();
         this.bindResizeListener();
+
+        this.props.onShow && this.props.onShow();
     }
 
     onOverlayExit() {
@@ -358,12 +367,12 @@ export class MultiSelect extends Component {
         }
 
         ZIndexUtils.clear(this.overlayRef.current);
+
+        this.props.onHide && this.props.onHide();
     }
 
-    alignPanel() {
-        const container = this.label.parentElement;
-        this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
-        DomHandler.absolutePosition(this.overlayRef.current, container);
+    alignOverlay() {
+        DomHandler.alignOverlay(this.overlayRef.current, this.label.parentElement, this.props.appendTo || PrimeReact.appendTo);
     }
 
     onCloseClick(event) {
@@ -380,12 +389,7 @@ export class MultiSelect extends Component {
             let optionValue = this.getOptionValue(option);
             let key = this.equalityKey();
 
-            for (let val of this.props.value) {
-                if (ObjectUtils.equals(this.getOptionValue(val), optionValue, key)) {
-                    selected = true;
-                    break;
-                }
-            }
+            selected = this.props.value.some(val => ObjectUtils.equals(val, optionValue, key));
         }
 
         return selected;
@@ -630,7 +634,7 @@ export class MultiSelect extends Component {
     }
 
     isOptionDisabled(option) {
-        return this.props.optionDisabled ? ObjectUtils.resolveFieldData(option, this.props.optionDisabled) : false;
+        return this.props.optionDisabled ? ObjectUtils.resolveFieldData(option, this.props.optionDisabled) : (option && option['disabled'] !== undefined ? option['disabled'] : false);
     }
 
     getVisibleOptions() {
@@ -764,7 +768,7 @@ export class MultiSelect extends Component {
 
     renderFooter() {
         if (this.props.panelFooterTemplate) {
-            const content = ObjectUtils.getJSXElement(this.props.panelFooterTemplate, this.props);
+            const content = ObjectUtils.getJSXElement(this.props.panelFooterTemplate, this.props, this.hide);
 
             return (
                 <div className="p-multiselect-footer">
@@ -908,7 +912,7 @@ export class MultiSelect extends Component {
                     <span className="p-multiselect-trigger-icon pi pi-chevron-down p-c"></span>
                 </div>
                 <MultiSelectPanel ref={this.overlayRef} header={header} footer={footer} appendTo={this.props.appendTo} onClick={this.onPanelClick}
-                    scrollHeight={this.props.scrollHeight} panelClassName={panelClassName} panelStyle={this.props.panelStyle}
+                    scrollHeight={this.props.scrollHeight} panelClassName={panelClassName} panelStyle={this.props.panelStyle} transitionOptions={this.props.transitionOptions}
                     in={this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
                     {items}
                 </MultiSelectPanel>

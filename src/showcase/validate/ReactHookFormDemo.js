@@ -14,6 +14,7 @@ import { classNames } from '../../components/utils/ClassNames';
 import './FormDemo.scss';
 import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { TabView } from '../../components/tabview/TabView';
+import AppDemoActions from '../../AppDemoActions';
 
 export const ReactHookFormDemo = () => {
     const [countries, setCountries] = useState([]);
@@ -56,10 +57,11 @@ export const ReactHookFormDemo = () => {
     return (
         <div>
             <div className="content-section introduction">
-                <AppInlineHeader showInputStyle showChangelog={false}>
+                <AppInlineHeader showChangelog={false}>
                     <h1>React Hook Form</h1>
                     <p>PrimeReact components can be easily used/integrated with <a href="https://react-hook-form.com/">React Hook Form</a>. In this example, a register panel is simulated using React Hook Form.</p>
-                </AppInlineHeader>
+                </AppInlineHeader> 
+                <AppDemoActions github="validate/ReactHookFormDemo.js" />
             </div>
 
             <div className="content-section implementation form-demo">
@@ -416,7 +418,7 @@ export const ReactHookFormDemo = () => {
     }
 
     return (
-        <div className="content-section documentation">
+        <div className="content-section documentation" id="app-doc">
             <TabView>
                 {
                     useLiveEditorTabs({ name: 'ReactHookFormDemo', sources, service: 'CountryService', data: 'countries', extFiles, dependencies: { 'react-hook-form': '^6.15.5' } })

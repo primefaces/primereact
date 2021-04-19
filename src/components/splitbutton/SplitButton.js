@@ -11,6 +11,7 @@ import ObjectUtils from '../utils/ObjectUtils';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 import { ZIndexUtils } from '../utils/ZIndexUtils';
+import PrimeReact from '../api/PrimeReact';
 
 export class SplitButton extends Component {
 
@@ -25,11 +26,14 @@ export class SplitButton extends Component {
         menuStyle: null,
         menuClassName: null,
         tabIndex: null,
-        onClick: null,
         appendTo: null,
         tooltip: null,
         tooltipOptions: null,
-        buttonTemplate: null
+        buttonTemplate: null,
+        transitionOptions: null,
+        onClick: null,
+        onShow: null,
+        onHide: null
     }
 
     static propTypes = {
@@ -43,11 +47,14 @@ export class SplitButton extends Component {
         menustyle: PropTypes.object,
         menuClassName: PropTypes.string,
         tabIndex: PropTypes.number,
-        onClick: PropTypes.func,
-        appendTo: PropTypes.object,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
-        buttonTemplate: PropTypes.any
+        buttonTemplate: PropTypes.any,
+        transitionOptions: PropTypes.object,
+        onClick: PropTypes.func,
+        onShow: PropTypes.func,
+        onHide: PropTypes.func
     }
 
     constructor(props) {
@@ -96,13 +103,15 @@ export class SplitButton extends Component {
 
     onOverlayEnter() {
         ZIndexUtils.set('overlay', this.overlayRef.current);
-        this.alignPanel();
+        this.alignOverlay();
     }
 
     onOverlayEntered() {
         this.bindDocumentClickListener();
         this.bindScrollListener();
         this.bindResizeListener();
+
+        this.props.onShow && this.props.onShow();
     }
 
     onOverlayExit() {
@@ -113,12 +122,12 @@ export class SplitButton extends Component {
 
     onOverlayExited() {
         ZIndexUtils.clear(this.overlayRef.current);
+
+        this.props.onHide && this.props.onHide();
     }
 
-    alignPanel() {
-        const container = this.defaultButton.parentElement;
-        this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
-        DomHandler.absolutePosition(this.overlayRef.current, container);
+    alignOverlay() {
+        DomHandler.alignOverlay(this.overlayRef.current, this.defaultButton.parentElement, this.props.appendTo || PrimeReact.appendTo);
     }
 
     bindDocumentClickListener() {
@@ -247,7 +256,8 @@ export class SplitButton extends Component {
                     aria-expanded={this.state.overlayVisible} aria-haspopup aria-owns={this.state.id + '_overlay'} />
                 <SplitButtonPanel ref={this.overlayRef} appendTo={this.props.appendTo} id={this.state.id + '_overlay'}
                     menuStyle={this.props.menuStyle} menuClassName={this.props.menuClassName} onClick={this.onPanelClick}
-                    in={this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
+                    in={this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}
+                    transitionOptions={this.props.transitionOptions}>
                     {items}
                 </SplitButtonPanel>
             </div>

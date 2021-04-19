@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AppDemoActions from '../../AppDemoActions';
 import './TextDemo.scss';
 import { TextDoc } from './TextDoc';
 
@@ -11,6 +12,7 @@ export class TextDemo extends Component {
                         <h1>Text</h1>
                         <p>Manage the alignment and the styling of a text with <a href="https://github.com/primefaces/primeflex">PrimeFlex</a> text utilities.</p>
                     </div>
+                    <AppDemoActions github="text/TextDemo.js" />
                 </div>
 
                 <div className="content-section implementation text-demo">
@@ -21,9 +23,9 @@ export class TextDemo extends Component {
                         <div className="p-text-right">Right</div>
 
                         <h5>Wrap</h5>
-                        <div className="p-mb-3 demo-container" style={{width: '10rem'}}>Long text wraps and does not overlow.</div>
-                        <div className="p-mb-3 demo-container p-text-nowrap" style={{width: '10rem'}}>Long text does not wrap and overflows the parent.</div>
-                        <div className="p-mb-3 demo-container p-text-nowrap p-text-truncate" style={{width: '10rem'}}>Long text does not wrap and overflows the parent.</div>
+                        <div className="p-mb-3 demo-container" style={{ width: '10rem' }}>Long text wraps and does not overlow.</div>
+                        <div className="p-mb-3 demo-container p-text-nowrap" style={{ width: '10rem' }}>Long text does not wrap and overflows the parent.</div>
+                        <div className="p-mb-3 demo-container p-text-nowrap p-text-truncate" style={{ width: '10rem' }}>Long text does not wrap and overflows the parent.</div>
 
                         <h5>Transform</h5>
                         <div className="p-mb-3 p-text-lowercase">LOWERCASE</div>

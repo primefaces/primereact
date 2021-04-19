@@ -1,14 +1,21 @@
 import * as React from 'react';
 
-interface SkeletonProps {
-    shape?: string;
-    size?: string;
-    width?: string;
-    height?: string;
-    borderRadius?: string;
-    animation?: string;
-    style?: object;
-    className?: string;
+declare namespace Skeleton {
+
+    type ShapeType = 'rectangle' | 'circle';
+
+    type AnimationType = 'wave' | 'none';
+
+    interface SkeletonProps {
+        shape?: ShapeType;
+        size?: string;
+        width?: string;
+        height?: string;
+        borderRadius?: string;
+        animation?: AnimationType;
+        style?: object;
+        className?: string;
+    }
 }
 
-export class Skeleton extends React.Component<SkeletonProps,any> {}
+export declare class Skeleton extends React.Component<Skeleton.SkeletonProps, any> { }

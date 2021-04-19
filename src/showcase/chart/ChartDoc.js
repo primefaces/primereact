@@ -9,7 +9,7 @@ export class ChartDoc extends Component {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <h5>Import</h5>
 <CodeHighlight lang="js">
 {`

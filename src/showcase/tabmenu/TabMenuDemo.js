@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { TabMenu } from '../../components/tabmenu/TabMenu';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { TabMenuDoc } from './TabMenuDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class TabMenuDemo extends Component {
 
@@ -24,7 +25,8 @@ export class TabMenuDemo extends Component {
                     <AppInlineHeader changelogText="tabMenu">
                         <h1>TabMenu</h1>
                         <p>Menu is a navigation/command component that displays items as tab headers.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="tabmenu/TabMenuDemo.js"/>
                 </div>
 
                 <div className="content-section implementation">

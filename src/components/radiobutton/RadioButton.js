@@ -27,6 +27,7 @@ export class RadioButton extends Component {
         id: PropTypes.string,
         inputRef: PropTypes.any,
         inputId: PropTypes.string,
+        name: PropTypes.string,
         value: PropTypes.any,
         checked: PropTypes.bool,
         style: PropTypes.object,
@@ -34,10 +35,10 @@ export class RadioButton extends Component {
         disabled: PropTypes.bool,
         required: PropTypes.bool,
         tabIndex: PropTypes.number,
-        onChange: PropTypes.func,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
-        ariaLabelledBy: PropTypes.string
+        ariaLabelledBy: PropTypes.string,
+        onChange: PropTypes.func
     };
 
     constructor(props) {

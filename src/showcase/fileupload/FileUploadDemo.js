@@ -7,6 +7,7 @@ import { Tooltip } from '../../components/tooltip/Tooltip';
 import { Tag } from '../../components/tag/Tag';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { FileUploadDoc } from './FileUplodDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class FileUploadDemo extends Component {
 
@@ -126,7 +127,8 @@ export class FileUploadDemo extends Component {
                     <AppInlineHeader changelogText="fileUpload">
                         <h1>FileUpload</h1>
                         <p>FileUpload is an advanced uploader with dragdrop support, multi file uploads, auto uploading, progress tracking and validations.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="fileupload/FileUploadDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
