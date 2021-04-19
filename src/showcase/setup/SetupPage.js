@@ -172,6 +172,17 @@ PrimeReact.zIndex = {
 `}
 </CodeHighlight>
 
+                    <h5>AppendTo</h5>
+                    <p>On the all overlay components, the panels can be mounted into its component or DOM element instance using this option. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a panel where component is located.
+                    The appendTo property of any overlay component can be used to customize it.</p>
+<CodeHighlight lang="js">
+{`
+import PrimeReact from 'primereact/api';
+
+PrimeReact.appendTo = 'self'; // Default value is null(document.body).
+`}
+</CodeHighlight>
+
                     <h5>Locale</h5>
                     <p>PrimeReact provides a Locale API to support i18n and l7n, visit the <Link to="/locale">Locale</Link> documentation for more information.</p>
 
