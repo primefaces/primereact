@@ -389,12 +389,16 @@ export class MultiSelect extends Component {
             let optionValue = this.getOptionValue(option);
             let key = this.equalityKey();
 
-            selected = this.props.value.some(val => ObjectUtils.equals(val, optionValue, key));
+            for (let val of this.props.value) {
+                if (ObjectUtils.equals(this.getOptionValue(val), optionValue, key)) {
+                    selected = true;
+                    break;
+                }
+            }
         }
 
         return selected;
     }
-
     getLabelByValue(val) {
         let option;
         if (this.props.options) {
