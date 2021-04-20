@@ -79,6 +79,7 @@ declare namespace Tree {
         dragdropScope?: string;
         header?: HeaderTemplateType;
         footer?: FooterTemplateType;
+        showHeader?: boolean;
         filter?: boolean;
         filterValue?: string;
         filterBy?: string;
@@ -99,4 +100,6 @@ declare namespace Tree {
     }
 }
 
-export declare class Tree extends React.Component<Tree.TreeProps, any> { }
+export declare class Tree extends React.Component<Tree.TreeProps, any> {
+    public filter<T>(value: T): void;
+}

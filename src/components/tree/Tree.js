@@ -28,6 +28,7 @@ export class Tree extends Component {
         dragdropScope: null,
         header: null,
         footer: null,
+        showHeader: true,
         filter: false,
         filterValue: null,
         filterBy: 'label',
@@ -67,6 +68,7 @@ export class Tree extends Component {
         dragdropScope: PropTypes.string,
         header: PropTypes.any,
         footer: PropTypes.any,
+        showHeader: PropTypes.bool,
         filter: PropTypes.bool,
         filterValue: PropTypes.string,
         filterBy: PropTypes.any,
@@ -313,7 +315,11 @@ export class Tree extends Component {
         }
     }
 
-    filter() {
+    filter(value) {
+        this.setState({ filterValue: value||'' }, this._filter);
+    }
+
+    _filter() {
         if (!this.filterChanged) {
             return;
         }
@@ -393,7 +399,7 @@ export class Tree extends Component {
     renderRootChildren() {
         if (this.props.filter) {
             this.filterChanged = true;
-            this.filter();
+            this._filter();
         }
 
         const value = this.getRootNode();
@@ -444,31 +450,35 @@ export class Tree extends Component {
     }
 
     renderHeader() {
-        const filterElement = this.renderFilter();
-        let content = filterElement;
+        if (this.props.showHeader) {
+            const filterElement = this.renderFilter();
+            let content = filterElement;
 
-        if (this.props.header) {
-            const defaultContentOptions = {
-                filterContainerClassName: 'p-tree-filter-container',
-                filterIconClasssName: 'p-tree-filter-icon pi pi-search',
-                filterInput: {
-                    className: 'p-tree-filter p-inputtext p-component',
-                    onKeyDown: this.onFilterInputKeyDown,
-                    onChange: this.onFilterInputChange
-                },
-                filterElement,
-                element: content,
-                props: this.props
-            };
+            if (this.props.header) {
+                const defaultContentOptions = {
+                    filterContainerClassName: 'p-tree-filter-container',
+                    filterIconClasssName: 'p-tree-filter-icon pi pi-search',
+                    filterInput: {
+                        className: 'p-tree-filter p-inputtext p-component',
+                        onKeyDown: this.onFilterInputKeyDown,
+                        onChange: this.onFilterInputChange
+                    },
+                    filterElement,
+                    element: content,
+                    props: this.props
+                };
 
-            content = ObjectUtils.getJSXElement(this.props.header, defaultContentOptions);
+                content = ObjectUtils.getJSXElement(this.props.header, defaultContentOptions);
+            }
+
+            return (
+                <div className="p-tree-header">
+                    {content}
+                </div>
+            );
         }
 
-        return (
-            <div className="p-tree-header">
-                {content}
-            </div>
-        );
+        return null;
     }
 
     renderFooter() {

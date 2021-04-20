@@ -473,7 +473,7 @@ export class UITreeNode extends Component {
             if(childPartialSelected || (checkedChildCount > 0 && checkedChildCount !== this.props.node.children.length))
                 selectionKeys[this.props.node.key] = {checked: false, partialChecked: true};
             else
-                selectionKeys[this.props.node.key] = {checked: false, partialChecked: false};
+                delete selectionKeys[this.props.node.key];
         }
 
         if (this.props.propagateSelectionUp && this.props.onPropagateUp) {

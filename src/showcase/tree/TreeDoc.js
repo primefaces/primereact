@@ -810,6 +810,12 @@ export const TreeContextMenuDemo = () => {
                                         <td>Function that gets a TreeNode instance and returns the content for it.</td>
                                     </tr>
                                     <tr>
+                                        <td>showHeader</td>
+                                        <td>boolean</td>
+                                        <td>true</td>
+                                        <td>Whether to show the header or not.</td>
+                                    </tr>
+                                    <tr>
                                         <td>filter</td>
                                         <td>boolean</td>
                                         <td>false</td>
@@ -924,6 +930,26 @@ export const TreeContextMenuDemo = () => {
                                         <td>onFilterValueChange</td>
                                         <td>event: browser event</td>
                                         <td>Callback to invoke when the filter value is changed.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h5>Methods</h5>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Parameters</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>filter</td>
+                                        <td>value: the filter value</td>
+                                        <td>Filters the data.</td>
                                     </tr>
                                 </tbody>
                             </table>
