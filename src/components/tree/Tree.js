@@ -447,7 +447,7 @@ export class Tree extends Component {
         const filterElement = this.renderFilter();
         let content = filterElement;
 
-        if (this.props.headerTemplate) {
+        if (this.props.header) {
             const defaultContentOptions = {
                 filterContainerClassName: 'p-tree-filter-container',
                 filterIconClasssName: 'p-tree-filter-icon pi pi-search',
