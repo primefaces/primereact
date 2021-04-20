@@ -780,6 +780,18 @@ export const TreeContextMenuDemo = () => {
                                         <td>Unique key to enable dragdrop functionality.</td>
                                     </tr>
                                     <tr>
+                                        <td>header</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>The template of header.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>footer</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>The template of footer.</td>
+                                    </tr>
+                                    <tr>
                                         <td>ariaLabel</td>
                                         <td>string</td>
                                         <td>false</td>
@@ -802,6 +814,12 @@ export const TreeContextMenuDemo = () => {
                                         <td>boolean</td>
                                         <td>false</td>
                                         <td>When specified, displays an input field to filter the items.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>filterValue</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>When filtering is enabled, the value of input field.</td>
                                     </tr>
                                     <tr>
                                         <td>filterBy</td>
@@ -901,6 +919,11 @@ export const TreeContextMenuDemo = () => {
                                         <td>event.originalEvent: browser event <br />
                                 event.node: Selected node instance.</td>
                                         <td>Callback to invoke when a node is selected with a context menu.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onFilterValueChange</td>
+                                        <td>event: browser event</td>
+                                        <td>Callback to invoke when the filter value is changed.</td>
                                     </tr>
                                 </tbody>
                             </table>

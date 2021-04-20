@@ -9,6 +9,25 @@ declare namespace Tree {
 
     type FilterModeType = 'lenient' | 'strict';
 
+    type HeaderTemplateType = React.ReactNode | ((options: HeaderTemplateOptions) => React.ReactNode);
+
+    type FooterTemplateType = React.ReactNode | ((props: TreeProps) => React.ReactNode);
+
+    interface HeaderTemplateOptions {
+        filterContainerClassName: string;
+        filterIconClasssName: string;
+        filterInput: FilterInputOptions;
+        filterElement: JSX.Element;
+        element: JSX.Element;
+        props: TreeProps;
+    }
+
+    interface FilterInputOptions {
+        className: string;
+        onKeyDown(event: React.KeyboardEvent<HTMLInputElement>): void;
+        onChange(event: React.KeyboardEvent<HTMLInputElement>): void;
+    }
+
     interface SelectionKeysType {
         [key: string]: boolean;
     }
@@ -58,7 +77,10 @@ declare namespace Tree {
         loading?: boolean;
         loadingIcon?: string;
         dragdropScope?: string;
+        header?: HeaderTemplateType;
+        footer?: FooterTemplateType;
         filter?: boolean;
+        filterValue?: string;
         filterBy?: string;
         filterMode?: FilterModeType;
         filterPlaceholder?: string;
@@ -73,6 +95,7 @@ declare namespace Tree {
         onToggle?(e: ExpandedParams): void;
         onDragDrop?(e: DragDropParams): void;
         onContextMenu?(e: EventNodeParams): void;
+        onFilterValueChange?(e: React.FormEvent<HTMLInputElement>): void;
     }
 }
 
