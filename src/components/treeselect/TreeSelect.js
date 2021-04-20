@@ -121,8 +121,8 @@ export class TreeSelect extends Component {
         this.onNodeUnselect = this.onNodeUnselect.bind(this);
         this.onNodeToggle = this.onNodeToggle.bind(this);
         this.onFilterValueChange = this.onFilterValueChange.bind(this);
-        this.hideOverlay = this.hideOverlay.bind(this);
-        this.showOverlay = this.showOverlay.bind(this);
+        this.hide = this.hide.bind(this);
+        this.show = this.show.bind(this);
 
         this.overlayRef = createRef();
     }
@@ -150,11 +150,11 @@ export class TreeSelect extends Component {
         return !this.props.options || this.props.options.length === 0;
     }
 
-    showOverlay() {
+    show() {
         this.setState({ overlayVisible: true });
     }
 
-    hideOverlay() {
+    hide() {
         this.setState({ overlayVisible: false });
     }
 
@@ -171,10 +171,10 @@ export class TreeSelect extends Component {
             this.focusInput.focus();
 
             if (this.state.overlayVisible) {
-                this.hideOverlay();
+                this.hide();
             }
             else {
-                this.showOverlay();
+                this.show();
             }
         }
     }
@@ -201,7 +201,7 @@ export class TreeSelect extends Component {
         this.props.onNodeSelect && this.props.onNodeSelect(node);
 
         if (this.props.selectionMode === 'single') {
-            this.hideOverlay();
+            this.hide();
         }
     }
 
@@ -229,14 +229,14 @@ export class TreeSelect extends Component {
             //down
             case 40:
                 if (!this.state.overlayVisible && event.altKey) {
-                    this.showOverlay();
+                    this.show();
                 }
                 break;
 
             //space
             case 32:
                 if (!this.state.overlayVisible) {
-                    this.showOverlay();
+                    this.show();
                     event.preventDefault();
                 }
                 break;
@@ -245,14 +245,14 @@ export class TreeSelect extends Component {
             case 13:
             case 27:
                 if (this.state.overlayVisible) {
-                    this.hideOverlay();
+                    this.hide();
                     event.preventDefault();
                 }
                 break;
 
             //tab
             case 9:
-                this.hideOverlay();
+                this.hide();
                 break;
 
             default:
@@ -324,7 +324,7 @@ export class TreeSelect extends Component {
         if (!this.documentClickListener) {
             this.documentClickListener = (event) => {
                 if (this.state.overlayVisible && this.isOutsideClicked(event)) {
-                    this.hideOverlay();
+                    this.hide();
                 }
             };
 
@@ -343,7 +343,7 @@ export class TreeSelect extends Component {
         if (!this.scrollHandler) {
             this.scrollHandler = new ConnectedOverlayScrollHandler(this.container, () => {
                 if (this.state.overlayVisible) {
-                    this.hideOverlay();
+                    this.hide();
                 }
             });
         }
@@ -361,7 +361,7 @@ export class TreeSelect extends Component {
         if (!this.resizeListener) {
             this.resizeListener = () => {
                 if (this.state.overlayVisible) {
-                    this.hideOverlay();
+                    this.hide();
                 }
             };
             window.addEventListener('resize', this.resizeListener);
@@ -584,7 +584,7 @@ export class TreeSelect extends Component {
     renderHeader() {
         const filterElement = this.renderFilterElement();
         const closeElement = (
-            <button type="button" className="p-treeselect-close p-link" onClick={this.hideOverlay}>
+            <button type="button" className="p-treeselect-close p-link" onClick={this.hide}>
                 <span className="p-treeselect-close-icon pi pi-times"></span>
                 <Ripple />
             </button>
@@ -603,7 +603,7 @@ export class TreeSelect extends Component {
                 closeElement,
                 closeElementClassName: 'p-treeselect-close p-link',
                 closeIconClassName: 'p-treeselect-close-icon pi pi-times',
-                onCloseClick: this.hideOverlay,
+                onCloseClick: this.hide,
                 element: content,
                 props: this.props
             }
