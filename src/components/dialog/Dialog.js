@@ -239,13 +239,15 @@ export class Dialog extends Component {
         }
     }
 
-    calculatePercentageToPx(dimension, axis) {
-        console.log(window.screen[axis])
-        if (/^(\d+|(\.\d+))(\.\d+)?%$/.test(dimension)) {
-            return parseInt(dimension) * (window.screen[axis] / 100)
-        } else {
-            return parseInt(dimension);
+    convertToPx(value, property, viewport) {
+        !viewport && (viewport = DomHandler.getViewport());
+
+        const val = parseInt(value);
+        if (/^(\d+|(\.\d+))(\.\d+)?%$/.test(value)) {
+            return val * (viewport[property] / 100);
         }
+
+        return val;
     }
 
     onResize(event) {
@@ -255,14 +257,13 @@ export class Dialog extends Component {
             let width = DomHandler.getOuterWidth(this.dialogEl);
             let height = DomHandler.getOuterHeight(this.dialogEl);
             let contentHeight = DomHandler.getOuterHeight(this.contentEl);
+            let offset = this.dialogEl.getBoundingClientRect();
+            let viewport = DomHandler.getViewport();
 
             let newWidth = width + deltaX;
             let newHeight = height + deltaY;
-
-            let minWidth = this.calculatePercentageToPx(this.dialogEl.style.minWidth, 'width')
-            let minHeight = this.calculatePercentageToPx(this.dialogEl.style.minHeight, 'height')
-            let offset = this.dialogEl.getBoundingClientRect();
-            let viewport = DomHandler.getViewport();
+            let minWidth = this.convertToPx(this.dialogEl.style.minWidth, 'width', viewport);
+            let minHeight = this.convertToPx(this.dialogEl.style.minHeight, 'height', viewport);
             let hasBeenDragged = !parseInt(this.dialogEl.style.top) || !parseInt(this.dialogEl.style.left);
 
             if (hasBeenDragged) {
