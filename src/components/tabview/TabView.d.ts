@@ -2,8 +2,25 @@ import * as React from 'react';
 
 declare namespace TabPanel {
 
+    type HeaderTemplateType = React.ReactNode | ((options: HeaderTemplateOptions) => React.ReactNode);
+
+    interface HeaderTemplateOptions {
+        className: string;
+        titleClassName: string;
+        onClick(event: React.MouseEvent<HTMLElement>): void;
+        leftIconElement: JSX.Element;
+        titleElement: JSX.Element;
+        rightIconElement: JSX.Element;
+        element: JSX.Element;
+        props: TabPanelProps;
+        index: number;
+        selected: boolean;
+        ariaControls: string;
+    }
+
     interface TabPanelProps {
         header?: React.ReactNode;
+        headerTemplate?: HeaderTemplateType;
         leftIcon?: string;
         rightIcon?: string;
         disabled?: boolean;

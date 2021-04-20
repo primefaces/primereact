@@ -426,6 +426,36 @@ import { TabView,TabPanel } from 'primereact/tabview';
 `}
 </CodeHighlight>
 
+                        <h5>Header Template</h5>
+                        <p>The header element is fully customizable on TabPanel. To make special header, an object can be given to the <i>headerTemplate</i> property as below.</p>
+<CodeHighlight lang="js">
+{`
+<TabView>
+    <TabPanel header="Header I" headerTemplate={template}>
+        Content I
+    </TabPanel>
+</TabView>
+`}
+</CodeHighlight>
+
+<CodeHighlight lang="js">
+    {`
+template: (options) => {
+    // options.className: Style class of the default header element.
+    // options.titleClassName: Style class of the title element.
+    // options.onClick: Click event for the header element.
+    // options.leftIconElement: Default left icon element created by the component.
+    // options.titleElement: Default title element created by the component.
+    // options.rightIconElement: Default right icon element created by the component.
+    // options.element: Default element created by the component.
+    // options.props: component props.
+    // options.index: The index of tab.
+    // options.selected: Whether the panel is selected.
+    // options.ariaControls: The value of aria-controls property.
+}
+`}
+</CodeHighlight>
+
                         <h5>Properties For TabPanel</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -443,6 +473,12 @@ import { TabView,TabPanel } from 'primereact/tabview';
                                         <td>any</td>
                                         <td>null</td>
                                         <td>Orientation of tab headers.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>headerTemplate</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Header template of the tab to customize more.</td>
                                     </tr>
                                     <tr>
                                         <td>leftIcon</td>
