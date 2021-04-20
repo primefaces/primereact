@@ -173,6 +173,7 @@ import { ColorsDemo } from './showcase/colors/ColorsDemo';
 import { FormikFormDemo } from './showcase/validate/FormikFormDemo';
 import { ReactHookFormDemo } from './showcase/validate/ReactHookFormDemo';
 import { ReactFinalFormDemo } from './showcase/validate/ReactFinalFormDemo';
+import { TreeSelectDemo } from './showcase/treeselect/TreeSelectDemo';
 
 class AppRouter extends Component {
 
@@ -373,6 +374,7 @@ class AppRouter extends Component {
                             <Route path="/formik" component={FormikFormDemo} />
                             <Route path="/reacthookform" component={ReactHookFormDemo} />
                             <Route path="/reactfinalform" component={ReactFinalFormDemo} />
+                            <Route path="/treeselect" component={TreeSelectDemo} />
                         </>
                     )
                 }

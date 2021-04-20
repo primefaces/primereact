@@ -399,6 +399,14 @@
                     ]
                 },
                 {
+                    "name": "TreeSelect",
+                    "to": "/treeselect",
+                    "meta": [
+                        "treeselect"
+                    ],
+                    "badge": "new"
+                },
+                {
                     "name": "TriStateCheckbox",
                     "to": "/tristatecheckbox",
                     "meta": [
