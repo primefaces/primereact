@@ -2585,12 +2585,11 @@ export class Calendar extends Component {
     }
 
     renderDayNames(weekDays) {
-        const dayNames = weekDays.map( (weekDay, index) =>
-        (
-            <th key={index} scope="col">
-                <span>{weekDay}</span>
-            </th>
-        )
+        const dayNames = weekDays.map((weekDay, index) => (
+                <th key={`${weekDay}-${index}`} scope="col">
+                    <span>{weekDay}</span>
+                </th>
+            )
         );
 
         if (this.props.showWeek) {
