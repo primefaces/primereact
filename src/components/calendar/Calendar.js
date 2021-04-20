@@ -2585,9 +2585,9 @@ export class Calendar extends Component {
     }
 
     renderDayNames(weekDays) {
-        const dayNames = weekDays.map(weekDay =>
+        const dayNames = weekDays.map( (weekDay, index) =>
         (
-            <th key={weekDay} scope="col">
+            <th key={index} scope="col">
                 <span>{weekDay}</span>
             </th>
         )
