@@ -1748,8 +1748,8 @@ export const DataTableFilterDemo = () => {
 </CodeHighlight>
 
             <h5>Selection</h5>
-            <p>DataTable provides single and multiple selection modes on click of a row. Selected rows are bound to the <i>selection</i> property for reading and updated using <i>onSelectionChange</i> callback.
-                Alternatively column based selection can be done using radio buttons or checkboxes using <i>selectionMode</i> of a particular column. In addition <i>onRowSelect</i>-<i>onRowUnselect</i> events are provided as optional callbacks.</p>
+            <p>DataTable provides single and multiple selection modes on click of a row or cell. Selected rows are bound to the <i>selection</i> property for reading and updated using <i>onSelectionChange</i> callback.
+                Alternatively column based selection can be done using radio buttons or checkboxes using <i>selectionMode</i> of a particular column. In addition <i>onRowSelect</i>-<i>onRowUnselect</i> / <i>onCellSelect</i>-<i>onCellUnselect</i> events are provided as optional callbacks.</p>
 
             <p>In single mode, selection binding is an object reference.</p>
 
@@ -1758,7 +1758,8 @@ export const DataTableFilterDemo = () => {
 export const DataTableSelectionDemo = () => {
 
     const [products, setProducts] = useState([]);
-    const [selectedProduct, setSelectedProduct] = useState(null);
+    const [selectedProduct1, setSelectedProduct1] = useState(null);
+    const [selectedProduct2, setSelectedProduct2] = useState(null);
 
     useEffect(() => {
         productService = new ProductService();
@@ -1766,27 +1767,40 @@ export const DataTableSelectionDemo = () => {
     }, [])
 
     return (
-        <DataTable value={products} selectionMode="single"
-            selection={selectedProduct} onSelectionChange={e => setSelectedProduct(e.value)}>
-            <Column field="code" header="Code"></Column>
-            <Column field="name" header="Name"></Column>
-            <Column field="category" header="Category"></Column>
-            <Column field="inventoryStatus" header="Status"></Column>
-        </DataTable>
+        <>
+            <DataTable value={products} selectionMode="single"
+                selection={selectedProduct1} onSelectionChange={e => setSelectedProduct1(e.value)}>
+                <Column field="code" header="Code"></Column>
+                <Column field="name" header="Name"></Column>
+                <Column field="category" header="Category"></Column>
+                <Column field="inventoryStatus" header="Status"></Column>
+            </DataTable>
+
+            <DataTable value={products} selectionMode="single" cellSelection
+                selection={selectedProduct2} onSelectionChange={e => setSelectedProduct2(e.value)}>
+                <Column field="code" header="Code"></Column>
+                <Column field="name" header="Name"></Column>
+                <Column field="category" header="Category"></Column>
+                <Column field="inventoryStatus" header="Status"></Column>
+            </DataTable>
+        </>
     );
 }
 `}
 </CodeHighlight>
 
             <p>In multiple mode, selection binding should be an array and multiple items can either be selected using metaKey or toggled individually depending on the value of metaKeySelection property value which is true by default.
-                On touch enabled devices metaKeySelection is turned off automatically. Additionally ShiftKey is supported for range selection.</p>
+                On touch enabled devices metaKeySelection is turned off automatically. Also, ShiftKey is supported for range selection. In addition, the rectangular selection can be dragged over the desired rows or cells thanks to the dragSelection property. In this way, a range of rows or cells can be selected.</p>
 
 <CodeHighlight lang="js">
 {`
 export const DataTableSelectionDemo = () => {
 
     const [products, setProducts] = useState([]);
-    const [selectedProducts, setSelectedProducts] = useState(null);
+    const [selectedProducts1, setSelectedProducts1] = useState(null);
+    const [selectedProducts2, setSelectedProducts2] = useState(null);
+    const [selectedProducts3, setSelectedProducts3] = useState(null);
+    const [selectedProducts4, setSelectedProducts4] = useState(null);
 
     useEffect(() => {
         productService = new ProductService();
@@ -1794,25 +1808,61 @@ export const DataTableSelectionDemo = () => {
     }, []);
 
     return (
-        <DataTable value={products} selectionMode="multiple"
-            selection={selectedProducts} onSelectionChange={e => setSelectedProducts(e.value)}>
-            <Column field="code" header="Code"></Column>
-            <Column field="name" header="Name"></Column>
-            <Column field="category" header="Category"></Column>
-            <Column field="inventoryStatus" header="Status"></Column>
-        </DataTable>
+        <>
+            <DataTable value={products} selectionMode="multiple"
+                selection={selectedProducts1} onSelectionChange={e => setSelectedProducts1(e.value)}>
+                <Column field="code" header="Code"></Column>
+                <Column field="name" header="Name"></Column>
+                <Column field="category" header="Category"></Column>
+                <Column field="inventoryStatus" header="Status"></Column>
+            </DataTable>
+
+            <DataTable value={products} selectionMode="multiple"
+                selection={selectedProducts2} onSelectionChange={e => setSelectedProducts2(e.value)}>
+                <Column field="code" header="Code"></Column>
+                <Column field="name" header="Name"></Column>
+                <Column field="category" header="Category"></Column>
+                <Column field="inventoryStatus" header="Status"></Column>
+            </DataTable>
+
+            <DataTable value={products} selectionMode="multiple" cellSelection
+                selection={selectedProducts3} onSelectionChange={e => setSelectedProducts3(e.value)}>
+                <Column field="code" header="Code"></Column>
+                <Column field="name" header="Name"></Column>
+                <Column field="category" header="Category"></Column>
+                <Column field="inventoryStatus" header="Status"></Column>
+            </DataTable>
+
+            <DataTable value={products} selectionMode="multiple" cellSelection dragSelection
+                selection={selectedProducts4} onSelectionChange={e => setSelectedProducts4(e.value)}>
+                <Column field="code" header="Code"></Column>
+                <Column field="name" header="Name"></Column>
+                <Column field="category" header="Category"></Column>
+                <Column field="inventoryStatus" header="Status"></Column>
+            </DataTable>
+        </>
     );
 
 }
 `}
 </CodeHighlight>
 
-            <p>If you prefer a radioButton or a checkbox instead of a row click, use the <i>selectionMode</i> of a column instead.
+            <p>If you prefer a radiobutton or a checkbox instead of a row click, use the <i>selectionMode</i> of a column instead.
                  Following datatable displays a checkbox at the first column of each row and automatically adds a header checkbox to toggle selection of all rows.</p>
             <p>Tip: Use <i>showSelectionElement</i> function in case you need to hide selection element for a particular row.</p>
 <CodeHighlight>
 {`
+<h5>Row and Checkbox Selection</h5>
 <DataTable value={products} selection={selectedProducts} onSelectionChange={e => setSelectedProducts(e.value))}>
+    <Column selectionMode="multiple" />
+    <Column field="code" header="Code"></Column>
+    <Column field="name" header="Name"></Column>
+    <Column field="category" header="Category"></Column>
+    <Column field="inventoryStatus" header="Status"></Column>
+</DataTable>
+
+<h5>Checkbox-Only Selection</h5>
+<DataTable value={products} selection={selectedProducts} selectionMode="checkbox" onSelectionChange={e => setSelectedProducts(e.value))}>
     <Column selectionMode="multiple" />
     <Column field="code" header="Code"></Column>
     <Column field="name" header="Name"></Column>
