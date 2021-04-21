@@ -11,7 +11,8 @@
                     "to": "/setup",
                     "meta": [
                         "get started"
-                    ]
+                    ],
+                    "badge": "updated"
                 },
                 {
                     "name": "Locale",
@@ -441,7 +442,8 @@
                     "to": "/button",
                     "meta": [
                         "button"
-                    ]
+                    ],
+                    "badge": "updated"
                 },
                 {
                     "name": "SplitButton",
@@ -463,6 +465,7 @@
                     "meta": [
                         "datatable"
                     ],
+                    "badge": "updated",
                     "children": [
                         {
                             "name": "Documentation",
@@ -541,7 +544,8 @@
                             "to": "/datatable/selection",
                             "meta": [
                                 "selection"
-                            ]
+                            ],
+                            "badge": "new"
                         },
                         {
                             "name": "Edit",
@@ -1083,7 +1087,8 @@
                     "to": "/fileupload",
                     "meta": [
                         "fileupload"
-                    ]
+                    ],
+                    "badge": "updated"
                 }
             ]
         },
