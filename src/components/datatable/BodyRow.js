@@ -283,7 +283,8 @@ export class BodyRow extends Component {
         let conditionalClassNames = {
             'p-highlight': !this.props.allowCellSelection && this.props.selected,
             'p-highlight-contextmenu': this.props.contextMenuSelected,
-            'p-selectable-row': this.props.allowRowSelection
+            'p-selectable-row': this.props.allowRowSelection,
+            'p-row-odd': this.props.rowIndex % 2 !== 0
         };
 
         if (this.props.rowClassName) {
