@@ -1,4 +1,1334 @@
 {
+    "6.3.0": {
+        "panelmenu": [
+            {
+                "number": 1953,
+                "title": "The root menuitem does not support template option on PanelMenu",
+                "url": "https://github.com/primefaces/primereact/issues/1953"
+            },
+            {
+                "number": 1922,
+                "title": "Randomly generated IDs in components throw a warning on SSR",
+                "url": "https://github.com/primefaces/primereact/issues/1922"
+            },
+            {
+                "number": 1917,
+                "title": "Add transitionOptions property to Components that use CSSTransition API",
+                "url": "https://github.com/primefaces/primereact/issues/1917"
+            }
+        ],
+        "calendar": [
+            {
+                "number": 1951,
+                "title": "Add onShow and onHide callbacks to Overlay and Modal Components",
+                "url": "https://github.com/primefaces/primereact/issues/1951"
+            },
+            {
+                "number": 1917,
+                "title": "Add transitionOptions property to Components that use CSSTransition API",
+                "url": "https://github.com/primefaces/primereact/issues/1917"
+            },
+            {
+                "number": 1924,
+                "title": "Add zIndex option to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1924"
+            },
+            {
+                "number": 1920,
+                "title": "Improve ref property on Form components",
+                "url": "https://github.com/primefaces/primereact/issues/1920"
+            },
+            {
+                "number": 1964,
+                "title": "Add appendTo option to PrimeReact api ",
+                "url": "https://github.com/primefaces/primereact/issues/1964"
+            },
+            {
+                "number": 1922,
+                "title": "Randomly generated IDs in components throw a warning on SSR",
+                "url": "https://github.com/primefaces/primereact/issues/1922"
+            },
+            {
+                "number": 1949,
+                "title": "Add 'self' value to appendTo property on Components",
+                "url": "https://github.com/primefaces/primereact/issues/1949"
+            },
+            {
+                "number": 1877,
+                "title": "Improve type definitions on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1877"
+            }
+        ],
+        "autocomplete": [
+            {
+                "number": 1951,
+                "title": "Add onShow and onHide callbacks to Overlay and Modal Components",
+                "url": "https://github.com/primefaces/primereact/issues/1951"
+            },
+            {
+                "number": 1917,
+                "title": "Add transitionOptions property to Components that use CSSTransition API",
+                "url": "https://github.com/primefaces/primereact/issues/1917"
+            },
+            {
+                "number": 1918,
+                "title": "\"scrollHeight\" for autocomplete doesn't work",
+                "url": "https://github.com/primefaces/primereact/issues/1918"
+            },
+            {
+                "number": 1924,
+                "title": "Add zIndex option to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1924"
+            },
+            {
+                "number": 1964,
+                "title": "Add appendTo option to PrimeReact api ",
+                "url": "https://github.com/primefaces/primereact/issues/1964"
+            },
+            {
+                "number": 1920,
+                "title": "Improve ref property on Form components",
+                "url": "https://github.com/primefaces/primereact/issues/1920"
+            },
+            {
+                "number": 1922,
+                "title": "Randomly generated IDs in components throw a warning on SSR",
+                "url": "https://github.com/primefaces/primereact/issues/1922"
+            },
+            {
+                "number": 1877,
+                "title": "Improve type definitions on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1877"
+            },
+            {
+                "number": 1949,
+                "title": "Add 'self' value to appendTo property on Components",
+                "url": "https://github.com/primefaces/primereact/issues/1949"
+            }
+        ],
+        "dropdown": [
+            {
+                "number": 1951,
+                "title": "Add onShow and onHide callbacks to Overlay and Modal Components",
+                "url": "https://github.com/primefaces/primereact/issues/1951"
+            },
+            {
+                "number": 1917,
+                "title": "Add transitionOptions property to Components that use CSSTransition API",
+                "url": "https://github.com/primefaces/primereact/issues/1917"
+            },
+            {
+                "number": 1921,
+                "title": "Dropdown 'optionDisabled' is wrongly typed as boolean",
+                "url": "https://github.com/primefaces/primereact/issues/1921"
+            },
+            {
+                "number": 1924,
+                "title": "Add zIndex option to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1924"
+            },
+            {
+                "number": 1954,
+                "title": "Add showOnFocus property to Dropdown",
+                "url": "https://github.com/primefaces/primereact/issues/1954"
+            },
+            {
+                "number": 1964,
+                "title": "Add appendTo option to PrimeReact api ",
+                "url": "https://github.com/primefaces/primereact/issues/1964"
+            },
+            {
+                "number": 1936,
+                "title": "Dropdown, MultiSelect, Listbox option that has disabled property is not disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1936"
+            },
+            {
+                "number": 1897,
+                "title": "Multiselect malfunction with 'optionValue' prop setted",
+                "url": "https://github.com/primefaces/primereact/issues/1897"
+            },
+            {
+                "number": 1922,
+                "title": "Randomly generated IDs in components throw a warning on SSR",
+                "url": "https://github.com/primefaces/primereact/issues/1922"
+            },
+            {
+                "number": 1920,
+                "title": "Improve ref property on Form components",
+                "url": "https://github.com/primefaces/primereact/issues/1920"
+            },
+            {
+                "number": 1949,
+                "title": "Add 'self' value to appendTo property on Components",
+                "url": "https://github.com/primefaces/primereact/issues/1949"
+            },
+            {
+                "number": 1877,
+                "title": "Improve type definitions on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1877"
+            }
+        ],
+        "dialog": [
+            {
+                "number": 1940,
+                "title": "Dialog minWidth and minHeight issue",
+                "url": "https://github.com/primefaces/primereact/issues/1940"
+            },
+            {
+                "number": 1917,
+                "title": "Add transitionOptions property to Components that use CSSTransition API",
+                "url": "https://github.com/primefaces/primereact/issues/1917"
+            },
+            {
+                "number": 1615,
+                "title": "Use of \"[key: string]: any;\" in type definitions circumvents type safety",
+                "url": "https://github.com/primefaces/primereact/issues/1615"
+            },
+            {
+                "number": 1922,
+                "title": "Randomly generated IDs in components throw a warning on SSR",
+                "url": "https://github.com/primefaces/primereact/issues/1922"
+            },
+            {
+                "number": 1949,
+                "title": "Add 'self' value to appendTo property on Components",
+                "url": "https://github.com/primefaces/primereact/issues/1949"
+            },
+            {
+                "number": 1947,
+                "title": "Dialog can't close when you press ESC key",
+                "url": "https://github.com/primefaces/primereact/issues/1947"
+            },
+            {
+                "number": 1888,
+                "title": "A maximizable dialog cannot be maximized properly after its size or position has been changed",
+                "url": "https://github.com/primefaces/primereact/issues/1888"
+            },
+            {
+                "number": 1924,
+                "title": "Add zIndex option to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1924"
+            }
+        ],
+        "confirmpopup": [
+            {
+                "number": 1951,
+                "title": "Add onShow and onHide callbacks to Overlay and Modal Components",
+                "url": "https://github.com/primefaces/primereact/issues/1951"
+            },
+            {
+                "number": 1917,
+                "title": "Add transitionOptions property to Components that use CSSTransition API",
+                "url": "https://github.com/primefaces/primereact/issues/1917"
+            },
+            {
+                "number": 1924,
+                "title": "Add zIndex option to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1924"
+            },
+            {
+                "number": 1922,
+                "title": "Randomly generated IDs in components throw a warning on SSR",
+                "url": "https://github.com/primefaces/primereact/issues/1922"
+            },
+            {
+                "number": 1949,
+                "title": "Add 'self' value to appendTo property on Components",
+                "url": "https://github.com/primefaces/primereact/issues/1949"
+            },
+            {
+                "number": 1961,
+                "title": "Reimplement EventBus",
+                "url": "https://github.com/primefaces/primereact/issues/1961"
+            }
+        ],
+        "accordion": [
+            {
+                "number": 1917,
+                "title": "Add transitionOptions property to Components that use CSSTransition API",
+                "url": "https://github.com/primefaces/primereact/issues/1917"
+            },
+            {
+                "number": 1922,
+                "title": "Randomly generated IDs in components throw a warning on SSR",
+                "url": "https://github.com/primefaces/primereact/issues/1922"
+            }
+        ],
+        "tree": [
+            {
+                "number": 1968,
+                "title": "Add filterValue and onFilterValueChange property to Tree",
+                "url": "https://github.com/primefaces/primereact/issues/1968"
+            },
+            {
+                "number": 1970,
+                "title": "Add showHeader property to Tree",
+                "url": "https://github.com/primefaces/primereact/issues/1970"
+            },
+            {
+                "number": 1967,
+                "title": "Add header and footer to Tree",
+                "url": "https://github.com/primefaces/primereact/issues/1967"
+            },
+            {
+                "number": 1615,
+                "title": "Use of \"[key: string]: any;\" in type definitions circumvents type safety",
+                "url": "https://github.com/primefaces/primereact/issues/1615"
+            }
+        ],
+        "colorpicker": [
+            {
+                "number": 1960,
+                "title": "Touch event is not working on ColorPicker",
+                "url": "https://github.com/primefaces/primereact/issues/1960"
+            },
+            {
+                "number": 1951,
+                "title": "Add onShow and onHide callbacks to Overlay and Modal Components",
+                "url": "https://github.com/primefaces/primereact/issues/1951"
+            },
+            {
+                "number": 1931,
+                "title": "Uncaught Error: Cannot find module './images/color.png'",
+                "url": "https://github.com/primefaces/primereact/issues/1931"
+            },
+            {
+                "number": 1924,
+                "title": "Add zIndex option to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1924"
+            },
+            {
+                "number": 1964,
+                "title": "Add appendTo option to PrimeReact api ",
+                "url": "https://github.com/primefaces/primereact/issues/1964"
+            },
+            {
+                "number": 1922,
+                "title": "Randomly generated IDs in components throw a warning on SSR",
+                "url": "https://github.com/primefaces/primereact/issues/1922"
+            },
+            {
+                "number": 1917,
+                "title": "Add transitionOptions property to Components that use CSSTransition API",
+                "url": "https://github.com/primefaces/primereact/issues/1917"
+            },
+            {
+                "number": 1877,
+                "title": "Improve type definitions on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1877"
+            },
+            {
+                "number": 1949,
+                "title": "Add 'self' value to appendTo property on Components",
+                "url": "https://github.com/primefaces/primereact/issues/1949"
+            },
+            {
+                "number": 1920,
+                "title": "Improve ref property on Form components",
+                "url": "https://github.com/primefaces/primereact/issues/1920"
+            }
+        ],
+        "checkbox": [
+            {
+                "number": 1920,
+                "title": "Improve ref property on Form components",
+                "url": "https://github.com/primefaces/primereact/issues/1920"
+            },
+            {
+                "number": 1877,
+                "title": "Improve type definitions on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1877"
+            }
+        ],
+        "cascadeselect": [
+            {
+                "number": 1920,
+                "title": "Improve ref property on Form components",
+                "url": "https://github.com/primefaces/primereact/issues/1920"
+            },
+            {
+                "number": 1951,
+                "title": "Add onShow and onHide callbacks to Overlay and Modal Components",
+                "url": "https://github.com/primefaces/primereact/issues/1951"
+            },
+            {
+                "number": 1924,
+                "title": "Add zIndex option to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1924"
+            },
+            {
+                "number": 1964,
+                "title": "Add appendTo option to PrimeReact api ",
+                "url": "https://github.com/primefaces/primereact/issues/1964"
+            },
+            {
+                "number": 1908,
+                "title": "Incorrect types for CascadeSelectProps and ConfirmDialogProps",
+                "url": "https://github.com/primefaces/primereact/issues/1908"
+            },
+            {
+                "number": 1917,
+                "title": "Add transitionOptions property to Components that use CSSTransition API",
+                "url": "https://github.com/primefaces/primereact/issues/1917"
+            },
+            {
+                "number": 1922,
+                "title": "Randomly generated IDs in components throw a warning on SSR",
+                "url": "https://github.com/primefaces/primereact/issues/1922"
+            },
+            {
+                "number": 1949,
+                "title": "Add 'self' value to appendTo property on Components",
+                "url": "https://github.com/primefaces/primereact/issues/1949"
+            },
+            {
+                "number": 1877,
+                "title": "Improve type definitions on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1877"
+            }
+        ],
+        "multiselect": [
+            {
+                "number": 1934,
+                "title": "MultiSelect, selecting disabled options",
+                "url": "https://github.com/primefaces/primereact/issues/1934"
+            },
+            {
+                "number": 1924,
+                "title": "Add zIndex option to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1924"
+            },
+            {
+                "number": 1964,
+                "title": "Add appendTo option to PrimeReact api ",
+                "url": "https://github.com/primefaces/primereact/issues/1964"
+            },
+            {
+                "number": 1936,
+                "title": "Dropdown, MultiSelect, Listbox option that has disabled property is not disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1936"
+            },
+            {
+                "number": 1951,
+                "title": "Add onShow and onHide callbacks to Overlay and Modal Components",
+                "url": "https://github.com/primefaces/primereact/issues/1951"
+            },
+            {
+                "number": 1897,
+                "title": "Multiselect malfunction with 'optionValue' prop setted",
+                "url": "https://github.com/primefaces/primereact/issues/1897"
+            },
+            {
+                "number": 1922,
+                "title": "Randomly generated IDs in components throw a warning on SSR",
+                "url": "https://github.com/primefaces/primereact/issues/1922"
+            },
+            {
+                "number": 1891,
+                "title": "Close multiselect dropdown on button click of panelFooterTemplate / Add onShow & onHide event",
+                "url": "https://github.com/primefaces/primereact/issues/1891"
+            },
+            {
+                "number": 1949,
+                "title": "Add 'self' value to appendTo property on Components",
+                "url": "https://github.com/primefaces/primereact/issues/1949"
+            },
+            {
+                "number": 1920,
+                "title": "Improve ref property on Form components",
+                "url": "https://github.com/primefaces/primereact/issues/1920"
+            },
+            {
+                "number": 1877,
+                "title": "Improve type definitions on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1877"
+            },
+            {
+                "number": 1917,
+                "title": "Add transitionOptions property to Components that use CSSTransition API",
+                "url": "https://github.com/primefaces/primereact/issues/1917"
+            }
+        ],
+        "overlaypanel": [
+            {
+                "number": 1951,
+                "title": "Add onShow and onHide callbacks to Overlay and Modal Components",
+                "url": "https://github.com/primefaces/primereact/issues/1951"
+            },
+            {
+                "number": 1615,
+                "title": "Use of \"[key: string]: any;\" in type definitions circumvents type safety",
+                "url": "https://github.com/primefaces/primereact/issues/1615"
+            },
+            {
+                "number": 1924,
+                "title": "Add zIndex option to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1924"
+            },
+            {
+                "number": 1356,
+                "title": "OverlayPanel: incorrect type definitions for show/hide arguments",
+                "url": "https://github.com/primefaces/primereact/issues/1356"
+            },
+            {
+                "number": 1922,
+                "title": "Randomly generated IDs in components throw a warning on SSR",
+                "url": "https://github.com/primefaces/primereact/issues/1922"
+            },
+            {
+                "number": 1949,
+                "title": "Add 'self' value to appendTo property on Components",
+                "url": "https://github.com/primefaces/primereact/issues/1949"
+            },
+            {
+                "number": 1961,
+                "title": "Reimplement EventBus",
+                "url": "https://github.com/primefaces/primereact/issues/1961"
+            },
+            {
+                "number": 1917,
+                "title": "Add transitionOptions property to Components that use CSSTransition API",
+                "url": "https://github.com/primefaces/primereact/issues/1917"
+            }
+        ],
+        "button": [
+            {
+                "number": 1876,
+                "title": "Add loading property to Button",
+                "url": "https://github.com/primefaces/primereact/issues/1876"
+            },
+            {
+                "number": 1615,
+                "title": "Use of \"[key: string]: any;\" in type definitions circumvents type safety",
+                "url": "https://github.com/primefaces/primereact/issues/1615"
+            },
+            {
+                "number": 1877,
+                "title": "Improve type definitions on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1877"
+            }
+        ],
+        "galleria": [
+            {
+                "number": 1917,
+                "title": "Add transitionOptions property to Components that use CSSTransition API",
+                "url": "https://github.com/primefaces/primereact/issues/1917"
+            },
+            {
+                "number": 1951,
+                "title": "Add onShow and onHide callbacks to Overlay and Modal Components",
+                "url": "https://github.com/primefaces/primereact/issues/1951"
+            },
+            {
+                "number": 1922,
+                "title": "Randomly generated IDs in components throw a warning on SSR",
+                "url": "https://github.com/primefaces/primereact/issues/1922"
+            },
+            {
+                "number": 1924,
+                "title": "Add zIndex option to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1924"
+            }
+        ],
+        "confirmdialog": [
+            {
+                "number": 1615,
+                "title": "Use of \"[key: string]: any;\" in type definitions circumvents type safety",
+                "url": "https://github.com/primefaces/primereact/issues/1615"
+            },
+            {
+                "number": 1908,
+                "title": "Incorrect types for CascadeSelectProps and ConfirmDialogProps",
+                "url": "https://github.com/primefaces/primereact/issues/1908"
+            },
+            {
+                "number": 1949,
+                "title": "Add 'self' value to appendTo property on Components",
+                "url": "https://github.com/primefaces/primereact/issues/1949"
+            }
+        ],
+        "inputtext": [
+            {
+                "number": 1615,
+                "title": "Use of \"[key: string]: any;\" in type definitions circumvents type safety",
+                "url": "https://github.com/primefaces/primereact/issues/1615"
+            },
+            {
+                "number": 1877,
+                "title": "Improve type definitions on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1877"
+            }
+        ],
+        "inputtextarea": [
+            {
+                "number": 1615,
+                "title": "Use of \"[key: string]: any;\" in type definitions circumvents type safety",
+                "url": "https://github.com/primefaces/primereact/issues/1615"
+            },
+            {
+                "number": 1920,
+                "title": "Improve ref property on Form components",
+                "url": "https://github.com/primefaces/primereact/issues/1920"
+            },
+            {
+                "number": 1877,
+                "title": "Improve type definitions on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1877"
+            }
+        ],
+        "password": [
+            {
+                "number": 1615,
+                "title": "Use of \"[key: string]: any;\" in type definitions circumvents type safety",
+                "url": "https://github.com/primefaces/primereact/issues/1615"
+            },
+            {
+                "number": 1951,
+                "title": "Add onShow and onHide callbacks to Overlay and Modal Components",
+                "url": "https://github.com/primefaces/primereact/issues/1951"
+            },
+            {
+                "number": 1924,
+                "title": "Add zIndex option to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1924"
+            },
+            {
+                "number": 1920,
+                "title": "Improve ref property on Form components",
+                "url": "https://github.com/primefaces/primereact/issues/1920"
+            },
+            {
+                "number": 1964,
+                "title": "Add appendTo option to PrimeReact api ",
+                "url": "https://github.com/primefaces/primereact/issues/1964"
+            },
+            {
+                "number": 1885,
+                "title": "Password component doesn't visualize properly the value of the variable serving as it's value when it is programmatically changed",
+                "url": "https://github.com/primefaces/primereact/issues/1885"
+            },
+            {
+                "number": 1877,
+                "title": "Improve type definitions on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1877"
+            },
+            {
+                "number": 1922,
+                "title": "Randomly generated IDs in components throw a warning on SSR",
+                "url": "https://github.com/primefaces/primereact/issues/1922"
+            },
+            {
+                "number": 1917,
+                "title": "Add transitionOptions property to Components that use CSSTransition API",
+                "url": "https://github.com/primefaces/primereact/issues/1917"
+            },
+            {
+                "number": 1949,
+                "title": "Add 'self' value to appendTo property on Components",
+                "url": "https://github.com/primefaces/primereact/issues/1949"
+            }
+        ],
+        "treetable": [
+            {
+                "number": 1615,
+                "title": "Use of \"[key: string]: any;\" in type definitions circumvents type safety",
+                "url": "https://github.com/primefaces/primereact/issues/1615"
+            },
+            {
+                "number": 1956,
+                "title": "Add new params to filterFunction on Column",
+                "url": "https://github.com/primefaces/primereact/issues/1956"
+            },
+            {
+                "number": 1914,
+                "title": "DataTable and TreeTable Typing is wrong",
+                "url": "https://github.com/primefaces/primereact/issues/1914"
+            },
+            {
+                "number": 1949,
+                "title": "Add 'self' value to appendTo property on Components",
+                "url": "https://github.com/primefaces/primereact/issues/1949"
+            },
+            {
+                "number": 1961,
+                "title": "Reimplement EventBus",
+                "url": "https://github.com/primefaces/primereact/issues/1961"
+            },
+            {
+                "number": 1850,
+                "title": "TreeTable does not account for changes in scrollHeight",
+                "url": "https://github.com/primefaces/primereact/issues/1850"
+            }
+        ],
+        "scrolltop": [
+            {
+                "number": 1951,
+                "title": "Add onShow and onHide callbacks to Overlay and Modal Components",
+                "url": "https://github.com/primefaces/primereact/issues/1951"
+            },
+            {
+                "number": 1924,
+                "title": "Add zIndex option to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1924"
+            },
+            {
+                "number": 1917,
+                "title": "Add transitionOptions property to Components that use CSSTransition API",
+                "url": "https://github.com/primefaces/primereact/issues/1917"
+            }
+        ],
+        "splitbutton": [
+            {
+                "number": 1924,
+                "title": "Add zIndex option to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1924"
+            },
+            {
+                "number": 1951,
+                "title": "Add onShow and onHide callbacks to Overlay and Modal Components",
+                "url": "https://github.com/primefaces/primereact/issues/1951"
+            },
+            {
+                "number": 1964,
+                "title": "Add appendTo option to PrimeReact api ",
+                "url": "https://github.com/primefaces/primereact/issues/1964"
+            },
+            {
+                "number": 1922,
+                "title": "Randomly generated IDs in components throw a warning on SSR",
+                "url": "https://github.com/primefaces/primereact/issues/1922"
+            },
+            {
+                "number": 1949,
+                "title": "Add 'self' value to appendTo property on Components",
+                "url": "https://github.com/primefaces/primereact/issues/1949"
+            },
+            {
+                "number": 1917,
+                "title": "Add transitionOptions property to Components that use CSSTransition API",
+                "url": "https://github.com/primefaces/primereact/issues/1917"
+            }
+        ],
+        "multicheckbox": [
+            {
+                "number": 1812,
+                "title": "New Component: MultiStateCheckbox",
+                "url": "https://github.com/primefaces/primereact/issues/1812"
+            }
+        ],
+        "datatable": [
+            {
+                "number": 1942,
+                "title": "Add cellSelection property to DataTable",
+                "url": "https://github.com/primefaces/primereact/issues/1942"
+            },
+            {
+                "number": 1956,
+                "title": "Add new params to filterFunction on Column",
+                "url": "https://github.com/primefaces/primereact/issues/1956"
+            },
+            {
+                "number": 1914,
+                "title": "DataTable and TreeTable Typing is wrong",
+                "url": "https://github.com/primefaces/primereact/issues/1914"
+            },
+            {
+                "number": 1932,
+                "title": "Add dragSelection property to DataTable",
+                "url": "https://github.com/primefaces/primereact/issues/1932"
+            },
+            {
+                "number": 1911,
+                "title": "Add sortableDisabled property to Column",
+                "url": "https://github.com/primefaces/primereact/issues/1911"
+            },
+            {
+                "number": 1949,
+                "title": "Add 'self' value to appendTo property on Components",
+                "url": "https://github.com/primefaces/primereact/issues/1949"
+            },
+            {
+                "number": 1961,
+                "title": "Reimplement EventBus",
+                "url": "https://github.com/primefaces/primereact/issues/1961"
+            },
+            {
+                "number": 1926,
+                "title": "Improve selectionMode property on DataTable",
+                "url": "https://github.com/primefaces/primereact/issues/1926"
+            },
+            {
+                "number": 1972,
+                "title": "Striped class is not working as expected on DataTable with expanded rows",
+                "url": "https://github.com/primefaces/primereact/issues/1972"
+            }
+        ],
+        "tristatecheckbox": [
+            {
+                "number": 1920,
+                "title": "Improve ref property on Form components",
+                "url": "https://github.com/primefaces/primereact/issues/1920"
+            }
+        ],
+        "radiobutton": [
+            {
+                "number": 1920,
+                "title": "Improve ref property on Form components",
+                "url": "https://github.com/primefaces/primereact/issues/1920"
+            },
+            {
+                "number": 1877,
+                "title": "Improve type definitions on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1877"
+            }
+        ],
+        "tooltip": [
+            {
+                "number": 1946,
+                "title": "Add autoHide property to Tooltip",
+                "url": "https://github.com/primefaces/primereact/issues/1946"
+            },
+            {
+                "number": 1906,
+                "title": "Tooltip is not working with 'disabled' attribute of HTML element as expected.",
+                "url": "https://github.com/primefaces/primereact/issues/1906"
+            },
+            {
+                "number": 1924,
+                "title": "Add zIndex option to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1924"
+            },
+            {
+                "number": 1949,
+                "title": "Add 'self' value to appendTo property on Components",
+                "url": "https://github.com/primefaces/primereact/issues/1949"
+            },
+            {
+                "number": 1916,
+                "title": "Improve Typing for ToolTips",
+                "url": "https://github.com/primefaces/primereact/issues/1916"
+            }
+        ],
+        "column": [
+            {
+                "number": 1956,
+                "title": "Add new params to filterFunction on Column",
+                "url": "https://github.com/primefaces/primereact/issues/1956"
+            },
+            {
+                "number": 1911,
+                "title": "Add sortableDisabled property to Column",
+                "url": "https://github.com/primefaces/primereact/issues/1911"
+            }
+        ],
+        "multistatecheckbox": [
+            {
+                "number": 1812,
+                "title": "New Component: MultiStateCheckbox",
+                "url": "https://github.com/primefaces/primereact/issues/1812"
+            }
+        ],
+        "utils": [
+            {
+                "number": 1812,
+                "title": "New Component: MultiStateCheckbox",
+                "url": "https://github.com/primefaces/primereact/issues/1812"
+            },
+            {
+                "number": 1964,
+                "title": "Add appendTo option to PrimeReact api ",
+                "url": "https://github.com/primefaces/primereact/issues/1964"
+            },
+            {
+                "number": 1924,
+                "title": "Add zIndex option to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1924"
+            },
+            {
+                "number": 1961,
+                "title": "Reimplement EventBus",
+                "url": "https://github.com/primefaces/primereact/issues/1961"
+            }
+        ],
+        "api": [
+            {
+                "number": 1962,
+                "title": "Constants for Message Severities ",
+                "url": "https://github.com/primefaces/primereact/issues/1962"
+            },
+            {
+                "number": 1964,
+                "title": "Add appendTo option to PrimeReact api ",
+                "url": "https://github.com/primefaces/primereact/issues/1964"
+            },
+            {
+                "number": 1908,
+                "title": "Incorrect types for CascadeSelectProps and ConfirmDialogProps",
+                "url": "https://github.com/primefaces/primereact/issues/1908"
+            },
+            {
+                "number": 1924,
+                "title": "Add zIndex option to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1924"
+            }
+        ],
+        "badge": [
+            {
+                "number": 1962,
+                "title": "Constants for Message Severities ",
+                "url": "https://github.com/primefaces/primereact/issues/1962"
+            }
+        ],
+        "message": [
+            {
+                "number": 1962,
+                "title": "Constants for Message Severities ",
+                "url": "https://github.com/primefaces/primereact/issues/1962"
+            }
+        ],
+        "messages": [
+            {
+                "number": 1962,
+                "title": "Constants for Message Severities ",
+                "url": "https://github.com/primefaces/primereact/issues/1962"
+            },
+            {
+                "number": 1917,
+                "title": "Add transitionOptions property to Components that use CSSTransition API",
+                "url": "https://github.com/primefaces/primereact/issues/1917"
+            }
+        ],
+        "tag": [
+            {
+                "number": 1962,
+                "title": "Constants for Message Severities ",
+                "url": "https://github.com/primefaces/primereact/issues/1962"
+            }
+        ],
+        "toast": [
+            {
+                "number": 1962,
+                "title": "Constants for Message Severities ",
+                "url": "https://github.com/primefaces/primereact/issues/1962"
+            },
+            {
+                "number": 1951,
+                "title": "Add onShow and onHide callbacks to Overlay and Modal Components",
+                "url": "https://github.com/primefaces/primereact/issues/1951"
+            },
+            {
+                "number": 1917,
+                "title": "Add transitionOptions property to Components that use CSSTransition API",
+                "url": "https://github.com/primefaces/primereact/issues/1917"
+            },
+            {
+                "number": 1924,
+                "title": "Add zIndex option to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1924"
+            }
+        ],
+        "chart": [
+            {
+                "number": 1884,
+                "title": "FullCalendar, Editor and Chart are not working with NEXT.js",
+                "url": "https://github.com/primefaces/primereact/issues/1884"
+            }
+        ],
+        "treeselect": [
+            {
+                "number": 1971,
+                "title": "New Component: TreeSelect",
+                "url": "https://github.com/primefaces/primereact/issues/1971"
+            }
+        ],
+        "portal": [
+            {
+                "number": 1964,
+                "title": "Add appendTo option to PrimeReact api ",
+                "url": "https://github.com/primefaces/primereact/issues/1964"
+            },
+            {
+                "number": 1949,
+                "title": "Add 'self' value to appendTo property on Components",
+                "url": "https://github.com/primefaces/primereact/issues/1949"
+            }
+        ],
+        "listbox": [
+            {
+                "number": 1936,
+                "title": "Dropdown, MultiSelect, Listbox option that has disabled property is not disabled",
+                "url": "https://github.com/primefaces/primereact/issues/1936"
+            },
+            {
+                "number": 1897,
+                "title": "Multiselect malfunction with 'optionValue' prop setted",
+                "url": "https://github.com/primefaces/primereact/issues/1897"
+            },
+            {
+                "number": 1877,
+                "title": "Improve type definitions on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1877"
+            }
+        ],
+        "sidebar": [
+            {
+                "number": 1951,
+                "title": "Add onShow and onHide callbacks to Overlay and Modal Components",
+                "url": "https://github.com/primefaces/primereact/issues/1951"
+            },
+            {
+                "number": 1917,
+                "title": "Add transitionOptions property to Components that use CSSTransition API",
+                "url": "https://github.com/primefaces/primereact/issues/1917"
+            },
+            {
+                "number": 1924,
+                "title": "Add zIndex option to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1924"
+            }
+        ],
+        "panel": [
+            {
+                "number": 1917,
+                "title": "Add transitionOptions property to Components that use CSSTransition API",
+                "url": "https://github.com/primefaces/primereact/issues/1917"
+            },
+            {
+                "number": 1922,
+                "title": "Randomly generated IDs in components throw a warning on SSR",
+                "url": "https://github.com/primefaces/primereact/issues/1922"
+            }
+        ],
+        "transition": [
+            {
+                "number": 1917,
+                "title": "Add transitionOptions property to Components that use CSSTransition API",
+                "url": "https://github.com/primefaces/primereact/issues/1917"
+            }
+        ],
+        "slider": [
+            {
+                "number": 1901,
+                "title": "Slider does not work with fractional step values",
+                "url": "https://github.com/primefaces/primereact/issues/1901"
+            }
+        ],
+        "fileupload": [
+            {
+                "number": 1905,
+                "title": "Add headerClassName, headerStyle, contentClassName and contentStyle properties to FileUpload",
+                "url": "https://github.com/primefaces/primereact/issues/1905"
+            },
+            {
+                "number": 1903,
+                "title": "Add chooseOptions, uploadOptions and cancelOptions properties to FileUpload",
+                "url": "https://github.com/primefaces/primereact/issues/1903"
+            },
+            {
+                "number": 1904,
+                "title": "Add itemTemplate property to FileUpload",
+                "url": "https://github.com/primefaces/primereact/issues/1904"
+            },
+            {
+                "number": 1907,
+                "title": "Add headerTemplate property to FileUplaod",
+                "url": "https://github.com/primefaces/primereact/issues/1907"
+            },
+            {
+                "number": 1649,
+                "title": "Can't use multiple file upload when mode is set to \"basic\"",
+                "url": "https://github.com/primefaces/primereact/issues/1649"
+            }
+        ],
+        "chips": [
+            {
+                "number": 1920,
+                "title": "Improve ref property on Form components",
+                "url": "https://github.com/primefaces/primereact/issues/1920"
+            },
+            {
+                "number": 1877,
+                "title": "Improve type definitions on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1877"
+            }
+        ],
+        "picklist": [
+            {
+                "number": 1898,
+                "title": "PickList transfer buttons disable and items selection issue",
+                "url": "https://github.com/primefaces/primereact/issues/1898"
+            }
+        ],
+        "slidemenu": [
+            {
+                "number": 1894,
+                "title": "SlideMenu menu model template has wrong classname",
+                "url": "https://github.com/primefaces/primereact/issues/1894"
+            },
+            {
+                "number": 1924,
+                "title": "Add zIndex option to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1924"
+            },
+            {
+                "number": 1922,
+                "title": "Randomly generated IDs in components throw a warning on SSR",
+                "url": "https://github.com/primefaces/primereact/issues/1922"
+            },
+            {
+                "number": 1893,
+                "title": "SlideMenu does not correctly accept className prop",
+                "url": "https://github.com/primefaces/primereact/issues/1893"
+            },
+            {
+                "number": 1949,
+                "title": "Add 'self' value to appendTo property on Components",
+                "url": "https://github.com/primefaces/primereact/issues/1949"
+            },
+            {
+                "number": 1917,
+                "title": "Add transitionOptions property to Components that use CSSTransition API",
+                "url": "https://github.com/primefaces/primereact/issues/1917"
+            }
+        ],
+        "rating": [
+            {
+                "number": 1877,
+                "title": "Improve type definitions on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1877"
+            }
+        ],
+        "editor": [
+            {
+                "number": 1877,
+                "title": "Improve type definitions on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1877"
+            },
+            {
+                "number": 1884,
+                "title": "FullCalendar, Editor and Chart are not working with NEXT.js",
+                "url": "https://github.com/primefaces/primereact/issues/1884"
+            },
+            {
+                "number": 1851,
+                "title": "editor automatically gains focus when intializing model with data",
+                "url": "https://github.com/primefaces/primereact/issues/1851"
+            }
+        ],
+        "fullcalendar": [
+            {
+                "number": 1884,
+                "title": "FullCalendar, Editor and Chart are not working with NEXT.js",
+                "url": "https://github.com/primefaces/primereact/issues/1884"
+            }
+        ],
+        "inputswitch": [
+            {
+                "number": 1920,
+                "title": "Improve ref property on Form components",
+                "url": "https://github.com/primefaces/primereact/issues/1920"
+            },
+            {
+                "number": 1877,
+                "title": "Improve type definitions on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1877"
+            }
+        ],
+        "inputnumber": [
+            {
+                "number": 1920,
+                "title": "Improve ref property on Form components",
+                "url": "https://github.com/primefaces/primereact/issues/1920"
+            },
+            {
+                "number": 1912,
+                "title": "InputNumber with required property doesn't behave the same as html <input required> element.",
+                "url": "https://github.com/primefaces/primereact/issues/1912"
+            },
+            {
+                "number": 1877,
+                "title": "Improve type definitions on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1877"
+            }
+        ],
+        "tabview": [
+            {
+                "number": 1955,
+                "title": "Add headerTemplate property to TabPanel on TabView",
+                "url": "https://github.com/primefaces/primereact/issues/1955"
+            },
+            {
+                "number": 1922,
+                "title": "Randomly generated IDs in components throw a warning on SSR",
+                "url": "https://github.com/primefaces/primereact/issues/1922"
+            }
+        ],
+        "contextmenu": [
+            {
+                "number": 1924,
+                "title": "Add zIndex option to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1924"
+            },
+            {
+                "number": 1949,
+                "title": "Add 'self' value to appendTo property on Components",
+                "url": "https://github.com/primefaces/primereact/issues/1949"
+            },
+            {
+                "number": 1917,
+                "title": "Add transitionOptions property to Components that use CSSTransition API",
+                "url": "https://github.com/primefaces/primereact/issues/1917"
+            }
+        ],
+        "menu": [
+            {
+                "number": 1924,
+                "title": "Add zIndex option to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1924"
+            },
+            {
+                "number": 1922,
+                "title": "Randomly generated IDs in components throw a warning on SSR",
+                "url": "https://github.com/primefaces/primereact/issues/1922"
+            },
+            {
+                "number": 1917,
+                "title": "Add transitionOptions property to Components that use CSSTransition API",
+                "url": "https://github.com/primefaces/primereact/issues/1917"
+            },
+            {
+                "number": 1949,
+                "title": "Add 'self' value to appendTo property on Components",
+                "url": "https://github.com/primefaces/primereact/issues/1949"
+            }
+        ],
+        "menubar": [
+            {
+                "number": 1924,
+                "title": "Add zIndex option to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1924"
+            }
+        ],
+        "tieredmenu": [
+            {
+                "number": 1924,
+                "title": "Add zIndex option to PrimeReact api",
+                "url": "https://github.com/primefaces/primereact/issues/1924"
+            },
+            {
+                "number": 1922,
+                "title": "Randomly generated IDs in components throw a warning on SSR",
+                "url": "https://github.com/primefaces/primereact/issues/1922"
+            },
+            {
+                "number": 1949,
+                "title": "Add 'self' value to appendTo property on Components",
+                "url": "https://github.com/primefaces/primereact/issues/1949"
+            },
+            {
+                "number": 1917,
+                "title": "Add transitionOptions property to Components that use CSSTransition API",
+                "url": "https://github.com/primefaces/primereact/issues/1917"
+            }
+        ],
+        "selectbutton": [
+            {
+                "number": 1897,
+                "title": "Multiselect malfunction with 'optionValue' prop setted",
+                "url": "https://github.com/primefaces/primereact/issues/1897"
+            },
+            {
+                "number": 1877,
+                "title": "Improve type definitions on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1877"
+            }
+        ],
+        "carousel": [
+            {
+                "number": 1922,
+                "title": "Randomly generated IDs in components throw a warning on SSR",
+                "url": "https://github.com/primefaces/primereact/issues/1922"
+            }
+        ],
+        "fieldset": [
+            {
+                "number": 1922,
+                "title": "Randomly generated IDs in components throw a warning on SSR",
+                "url": "https://github.com/primefaces/primereact/issues/1922"
+            },
+            {
+                "number": 1917,
+                "title": "Add transitionOptions property to Components that use CSSTransition API",
+                "url": "https://github.com/primefaces/primereact/issues/1917"
+            }
+        ],
+        "knob": [
+            {
+                "number": 1922,
+                "title": "Randomly generated IDs in components throw a warning on SSR",
+                "url": "https://github.com/primefaces/primereact/issues/1922"
+            },
+            {
+                "number": 1877,
+                "title": "Improve type definitions on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1877"
+            }
+        ],
+        "splitter": [
+            {
+                "number": 1922,
+                "title": "Randomly generated IDs in components throw a warning on SSR",
+                "url": "https://github.com/primefaces/primereact/issues/1922"
+            }
+        ],
+        "steps": [
+            {
+                "number": 1922,
+                "title": "Randomly generated IDs in components throw a warning on SSR",
+                "url": "https://github.com/primefaces/primereact/issues/1922"
+            }
+        ],
+        "keyfilter": [
+            {
+                "number": 1877,
+                "title": "Improve type definitions on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1877"
+            }
+        ],
+        "skeleton": [
+            {
+                "number": 1900,
+                "title": "Animation \"none\" not working for Skeleton",
+                "url": "https://github.com/primefaces/primereact/issues/1900"
+            }
+        ],
+        "dataview": [
+            {
+                "number": 1949,
+                "title": "Add 'self' value to appendTo property on Components",
+                "url": "https://github.com/primefaces/primereact/issues/1949"
+            }
+        ],
+        "paginator": [
+            {
+                "number": 1949,
+                "title": "Add 'self' value to appendTo property on Components",
+                "url": "https://github.com/primefaces/primereact/issues/1949"
+            }
+        ],
+        "inputmask": [
+            {
+                "number": 1920,
+                "title": "Improve ref property on Form components",
+                "url": "https://github.com/primefaces/primereact/issues/1920"
+            },
+            {
+                "number": 1877,
+                "title": "Improve type definitions on all components",
+                "url": "https://github.com/primefaces/primereact/issues/1877"
+            }
+        ]
+    },
     "6.2.1": {
         "autocomplete": [
             {
