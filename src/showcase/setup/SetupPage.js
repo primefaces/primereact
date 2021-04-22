@@ -203,6 +203,54 @@ import { MenuItem } from 'primereact/api';
 
 					<h5>Next.js</h5>
 					<p>A sample next.js-primereact application is available as well at <a href="https://github.com/primefaces/primereact-nextjs-quickstart" className="layout-content-link">GitHub</a>.</p>
+                    <h5>Browser Support</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table browsers">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <div className="p-d-flex p-ai-center">
+                                            <img src="showcase/images/browsers/edge.svg" alt="edge" style={{width: '1.5rem'}} className="p-mr-2" />
+                                            IE / Edge
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div className="p-d-flex p-ai-center">
+                                            <img src="showcase/images/browsers/firefox.svg" alt="firefox" style={{width: '1.5rem'}} className="p-mr-2" />
+                                            Firefox
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div className="p-d-flex p-ai-center">
+                                            <img src="showcase/images/browsers/chrome.svg" alt="chrome" style={{width: '1.5rem'}} className="p-mr-2" />
+                                            Chrome
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div className="p-d-flex p-ai-center">
+                                            <img src="showcase/images/browsers/safari.svg" alt="safari" style={{width: '1.5rem'}} className="p-mr-2" />
+                                            Safari
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div className="p-d-flex p-ai-center">
+                                            <img src="showcase/images/browsers/opera.svg" alt="opera" style={{width: '1.5rem'}} className="p-mr-2" />
+                                            Opera
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>IE11, Edge</td>
+                                    <td>Last 2 versions</td>
+                                    <td>Last 2 versions</td>
+                                    <td>Last 2 versions</td>
+                                    <td>Last 2 versions</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         );
