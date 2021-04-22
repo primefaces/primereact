@@ -10,7 +10,8 @@
                     "name": "Get Started",
                     "to": "/setup",
                     "meta": [
-                        "get started"
+                        "get started",
+                        "browser support"
                     ],
                     "badge": "updated"
                 },
