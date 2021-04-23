@@ -60,7 +60,7 @@ export const ReactHookFormDemo = () => {
                 <AppInlineHeader showChangelog={false}>
                     <h1>React Hook Form</h1>
                     <p>PrimeReact components can be easily used/integrated with <a href="https://react-hook-form.com/">React Hook Form</a>. In this example, a register panel is simulated using React Hook Form.</p>
-                </AppInlineHeader> 
+                </AppInlineHeader>
                 <AppDemoActions github="validate/ReactHookFormDemo.js" />
             </div>
 
@@ -81,7 +81,7 @@ export const ReactHookFormDemo = () => {
                         <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
                             <div className="p-field">
                                 <span className="p-float-label">
-                                    <InputText id="name" name="name" ref={register({ required: 'Name is required.' })} className={classNames({ 'p-invalid': errors.name })} />
+                                    <InputText id="name" name="name" ref={register({ required: 'Name is required.' })} autoFocus className={classNames({ 'p-invalid': errors.name })} />
                                     <label htmlFor="name" className={classNames({ 'p-error': errors.name })}>Name*</label>
                                 </span>
                                 {getFormErrorMessage('name')}
@@ -213,7 +213,7 @@ export const ReactHookFormDemo = () => {
                     <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
                         <div className="p-field">
                             <span className="p-float-label">
-                                <InputText id="name" name="name" ref={register({ required: 'Name is required.' })} className={classNames({ 'p-invalid': errors.name })} />
+                                <InputText id="name" name="name" ref={register({ required: 'Name is required.' })} autoFocus className={classNames({ 'p-invalid': errors.name })} />
                                 <label htmlFor="name" className={classNames({ 'p-error': errors.name })}>Name*</label>
                             </span>
                             {getFormErrorMessage('name')}
@@ -340,7 +340,7 @@ export const ReactHookFormDemo = () => {
                     <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
                         <div className="p-field">
                             <span className="p-float-label">
-                                <InputText id="name" name="name" ref={register({ required: 'Name is required.' })} className={classNames({ 'p-invalid': errors.name })} />
+                                <InputText id="name" name="name" ref={register({ required: 'Name is required.' })} autoFocus className={classNames({ 'p-invalid': errors.name })} />
                                 <label htmlFor="name" className={classNames({ 'p-error': errors.name })}>Name*</label>
                             </span>
                             {getFormErrorMessage('name')}

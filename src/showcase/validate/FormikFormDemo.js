@@ -93,7 +93,7 @@ export const FormikFormDemo = () => {
                 <AppInlineHeader showChangelog={false}>
                     <h1>Formik</h1>
                     <p>PrimeReact components can be easily used/integrated with <a href="https://formik.org/">Formik</a>. In this example, a register panel is simulated using Formik.</p>
-                </AppInlineHeader> 
+                </AppInlineHeader>
                 <AppDemoActions github="validate/FormikFormDemo.js" />
             </div>
             <div className="content-section implementation form-demo">
@@ -113,7 +113,7 @@ export const FormikFormDemo = () => {
                         <form onSubmit={formik.handleSubmit} className="p-fluid">
                             <div className="p-field">
                                 <span className="p-float-label">
-                                    <InputText id="name" name="name" value={formik.values.name} onChange={formik.handleChange} className={classNames({ 'p-invalid': isFormFieldValid('name') })} />
+                                    <InputText id="name" name="name" value={formik.values.name} onChange={formik.handleChange} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('name') })} />
                                     <label htmlFor="name" className={classNames({ 'p-error': isFormFieldValid('name') })}>Name*</label>
                                 </span>
                                 {getFormErrorMessage('name')}
@@ -271,7 +271,7 @@ export const FormikFormDemo = () => {
                     <form onSubmit={formik.handleSubmit} className="p-fluid">
                         <div className="p-field">
                             <span className="p-float-label">
-                                <InputText id="name" name="name" value={formik.values.name} onChange={formik.handleChange} className={classNames({ 'p-invalid': isFormFieldValid('name') })} />
+                                <InputText id="name" name="name" value={formik.values.name} onChange={formik.handleChange} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('name') })} />
                                 <label htmlFor="name" className={classNames({ 'p-error': isFormFieldValid('name') })}>Name*</label>
                             </span>
                             {getFormErrorMessage('name')}
@@ -424,7 +424,7 @@ export const FormikFormDemo = () => {
                     <form onSubmit={formik.handleSubmit} className="p-fluid">
                         <div className="p-field">
                             <span className="p-float-label">
-                                <InputText id="name" name="name" value={formik.values.name} onChange={formik.handleChange} className={classNames({ 'p-invalid': isFormFieldValid('name') })} />
+                                <InputText id="name" name="name" value={formik.values.name} onChange={formik.handleChange} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('name') })} />
                                 <label htmlFor="name" className={classNames({ 'p-error': isFormFieldValid('name') })}>Name*</label>
                             </span>
                             {getFormErrorMessage('name')}

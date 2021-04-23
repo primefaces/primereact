@@ -84,7 +84,7 @@ export const ReactFinalFormDemo = () => {
                 <AppInlineHeader showChangelog={false}>
                     <h1>React Final Form</h1>
                     <p>PrimeReact components can be easily used/integrated with <a href="https://final-form.org/react">React Final Form</a>. In this example, a register panel is simulated using React Final Form.</p>
-                </AppInlineHeader> 
+                </AppInlineHeader>
                 <AppDemoActions github="validate/ReactFinalFormDemo.js" />
             </div>
 
@@ -107,7 +107,7 @@ export const ReactFinalFormDemo = () => {
                                 <Field name="name" render={({ input, meta }) => (
                                     <div className="p-field">
                                         <span className="p-float-label">
-                                            <InputText id="name" {...input} className={classNames({ 'p-invalid': isFormFieldValid(meta) })} />
+                                            <InputText id="name" {...input} autoFocus className={classNames({ 'p-invalid': isFormFieldValid(meta) })} />
                                             <label htmlFor="name" className={classNames({ 'p-error': isFormFieldValid(meta) })}>Name*</label>
                                         </span>
                                         {getFormErrorMessage(meta)}
@@ -269,7 +269,7 @@ export const ReactFinalFormDemo = () => {
                             <Field name="name" render={({ input, meta }) => (
                                 <div className="p-field">
                                     <span className="p-float-label">
-                                        <InputText id="name" {...input} className={classNames({ 'p-invalid': isFormFieldValid(meta) })} />
+                                        <InputText id="name" {...input} autoFocus className={classNames({ 'p-invalid': isFormFieldValid(meta) })} />
                                         <label htmlFor="name" className={classNames({ 'p-error': isFormFieldValid(meta) })}>Name*</label>
                                     </span>
                                     {getFormErrorMessage(meta)}
@@ -426,7 +426,7 @@ export const ReactFinalFormDemo = () => {
                             <Field name="name" render={({ input, meta }) => (
                                 <div className="p-field">
                                     <span className="p-float-label">
-                                        <InputText id="name" {...input} className={classNames({ 'p-invalid': isFormFieldValid(meta) })} />
+                                        <InputText id="name" {...input} autoFocus className={classNames({ 'p-invalid': isFormFieldValid(meta) })} />
                                         <label htmlFor="name" className={classNames({ 'p-error': isFormFieldValid(meta) })}>Name*</label>
                                     </span>
                                     {getFormErrorMessage(meta)}
