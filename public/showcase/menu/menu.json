@@ -631,7 +631,8 @@
                             "meta": [
                                 "export",
                                 "import"
-                            ]
+                            ],
+                            "badge": "updated"
                         },
                         {
                             "name": "ContextMenu",
