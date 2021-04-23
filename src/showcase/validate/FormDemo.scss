@@ -16,4 +16,11 @@
             width: 80%;
         }
     }
+
+    @media screen and (max-width: 640px) {
+        .card {
+            width: 100%;
+            min-width: 0;
+        }
+    }
 }

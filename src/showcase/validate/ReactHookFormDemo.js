@@ -413,6 +413,12 @@ export const ReactHookFormDemo = () => {
         width: 80%;
     }
 }
+@media screen and (max-width: 640px) {
+    .form-demo .card {
+        width: 100%;
+        min-width: 0;
+    }
+}
             `
         }
     }
