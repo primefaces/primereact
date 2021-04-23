@@ -91,7 +91,6 @@ export class Carousel extends Component {
         super(props);
 
         this.state = {
-            id: props.id,
             numVisible: props.numVisible,
             numScroll: props.numScroll,
             totalShiftedItems: (props.page * props.numScroll) * -1
@@ -114,6 +113,7 @@ export class Carousel extends Component {
         this.remainingItems = 0;
         this.allowAutoplay = !!this.props.autoplayInterval;
         this.circular = this.props.circular || this.allowAutoplay;
+        this.attributeSelector = UniqueComponentId();
         this.swipeThreshold = 20;
     }
 
@@ -379,7 +379,7 @@ export class Carousel extends Component {
         }
 
         let innerHTML = `
-            #${this.state.id} .p-carousel-item {
+            .p-carousel[${this.attributeSelector}] .p-carousel-item {
                 flex: 1 0 ${ (100/ this.state.numVisible) }%
             }
         `;
@@ -410,7 +410,7 @@ export class Carousel extends Component {
 
                 innerHTML += `
                     @media screen and (max-width: ${res.breakpoint}) {
-                        #${this.state.id} .p-carousel-item {
+                        .p-carousel[${this.attributeSelector}] .p-carousel-item {
                             flex: 1 0 ${ (100/ res.numVisible) }%
                         }
                     }
@@ -428,8 +428,8 @@ export class Carousel extends Component {
     }
 
     componentDidMount() {
-        if (!this.state.id) {
-            this.setState({ id: UniqueComponentId() });
+        if (this.container) {
+            this.container.setAttribute(this.attributeSelector, '');
         }
 
         this.createStyle();
@@ -707,7 +707,7 @@ export class Carousel extends Component {
         const footer = this.renderFooter();
 
         return (
-            <div id={this.state.id} className={className} style={this.props.style}>
+            <div ref={el => this.container = el} id={this.props.id} className={className} style={this.props.style}>
                 {header}
                 <div className={contentClassName}>
                     {content}
