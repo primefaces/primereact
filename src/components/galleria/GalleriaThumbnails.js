@@ -247,7 +247,6 @@ export class GalleriaThumbnails extends Component {
     createStyle() {
         if (!this.thumbnailsStyle) {
             this.thumbnailsStyle = document.createElement('style');
-            this.thumbnailsStyle.type = 'text/css';
             document.body.appendChild(this.thumbnailsStyle);
         }
 

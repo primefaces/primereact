@@ -374,7 +374,6 @@ export class Carousel extends Component {
     createStyle() {
         if (!this.carouselStyle) {
             this.carouselStyle = document.createElement('style');
-            this.carouselStyle.type = 'text/css';
             document.body.appendChild(this.carouselStyle);
         }
 
