@@ -4,6 +4,10 @@
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/6.2.1...6.3.0)
 
+**Breaking changes:**
+
+- Improve type definitions on all components [\#1877](https://github.com/primefaces/primereact/issues/1877)
+
 **Implemented New Features and Enhancements:**
 
 - New Component: TreeSelect [\#1971](https://github.com/primefaces/primereact/issues/1971)
@@ -34,7 +38,6 @@
 - Add itemTemplate property to FileUpload [\#1904](https://github.com/primefaces/primereact/issues/1904)
 - Add chooseOptions, uploadOptions and cancelOptions properties to FileUpload [\#1903](https://github.com/primefaces/primereact/issues/1903)
 - Close multiselect dropdown on button click of panelFooterTemplate / Add onShow & onHide event [\#1891](https://github.com/primefaces/primereact/issues/1891)
-- Improve type definitions on all components [\#1877](https://github.com/primefaces/primereact/issues/1877)
 - Add loading property to Button [\#1876](https://github.com/primefaces/primereact/issues/1876)
 - Can't use multiple file upload when mode is set to "basic" [\#1649](https://github.com/primefaces/primereact/issues/1649)
 - Use of "\[key: string\]: any;" in type definitions circumvents type safety [\#1615](https://github.com/primefaces/primereact/issues/1615)
