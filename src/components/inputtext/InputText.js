@@ -37,7 +37,9 @@ class InputTextComponent extends Component {
     }
 
     isFilled() {
-        return (this.props.value != null && this.props.value.toString().length > 0) || (this.props.defaultValue != null && this.props.defaultValue.toString().length > 0)
+        return (this.props.value != null && this.props.value.toString().length > 0) ||
+            (this.props.defaultValue != null && this.props.defaultValue.toString().length > 0) ||
+            (this.elementRef && this.elementRef.current && this.elementRef.current.value != null && this.elementRef.current.value.toString().length > 0);
     }
 
     onKeyPress(event) {
