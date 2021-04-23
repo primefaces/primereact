@@ -243,7 +243,9 @@ export class Password extends Component {
     }
 
     onKeyup(e) {
-        if(this.props.feedback) {
+        let keyCode = e.keyCode || e.which;
+
+        if (this.props.feedback) {
             let value = e.target.value;
             let label = null;
             let meter = null;
@@ -283,7 +285,7 @@ export class Password extends Component {
                 meter,
                 infoText: label
             }, () => {
-                if (!this.state.overlayVisible) {
+                if (!!keyCode && !this.state.overlayVisible) {
                     this.showOverlay();
                 }
             });
