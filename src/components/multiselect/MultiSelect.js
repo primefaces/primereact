@@ -75,7 +75,7 @@ export class MultiSelect extends Component {
         options: PropTypes.array,
         optionLabel: PropTypes.string,
         optionValue: PropTypes.string,
-        optionDisabled: PropTypes.string,
+        optionDisabled: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
         optionGroupLabel: PropTypes.string,
         optionGroupChildren: PropTypes.string,
         optionGroupTemplate: PropTypes.any,
@@ -640,7 +640,11 @@ export class MultiSelect extends Component {
     }
 
     isOptionDisabled(option) {
-        return this.props.optionDisabled ? ObjectUtils.resolveFieldData(option, this.props.optionDisabled) : (option && option['disabled'] !== undefined ? option['disabled'] : false);
+        if (this.props.optionDisabled) {
+            return ObjectUtils.isFunction(this.props.optionDisabled) ? this.props.optionDisabled(option) : ObjectUtils.resolveFieldData(option, this.props.optionDisabled);
+        }
+
+        return (option && option['disabled'] !== undefined ? option['disabled'] : false);
     }
 
     getVisibleOptions() {

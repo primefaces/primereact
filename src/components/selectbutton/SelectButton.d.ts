@@ -3,6 +3,8 @@ import TooltipOptions from '../tooltip/TooltipOptions';
 
 declare namespace SelectButton {
 
+    type OptionDisabledType = string | ((option: any) => boolean);
+
     interface ChangeTargetOptions {
         name: string;
         id: string;
@@ -23,7 +25,7 @@ declare namespace SelectButton {
         options?: any[];
         optionLabel?: string;
         optionValue?: string;
-        optionDisabled?: string;
+        optionDisabled?: OptionDisabledType;
         tabIndex?: number;
         multiple?: boolean;
         disabled?: boolean;

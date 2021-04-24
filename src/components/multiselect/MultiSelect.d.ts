@@ -34,6 +34,8 @@ declare namespace MultiSelect {
 
     type PanelFooterTemplateType = React.ReactNode | ((props: MultiSelectProps, hide: () => void) => React.ReactNode);
 
+    type OptionDisabledType = string | ((option: any) => boolean);
+
     interface ChangeTargetOptions {
         name: string;
         id: string;
@@ -56,7 +58,7 @@ declare namespace MultiSelect {
         options?: any[];
         optionLabel?: string;
         optionValue?: string;
-        optionDisabled?: boolean;
+        optionDisabled?: OptionDisabledType;
         optionGroupLabel?: string;
         optionGroupChildren?: string;
         optionGroupTemplate?: OptionGroupTemplateType;

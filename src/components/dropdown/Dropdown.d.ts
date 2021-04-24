@@ -11,6 +11,8 @@ declare namespace Dropdown {
 
     type EmptyFilterMessageType = React.ReactNode | ((props: DropdownProps) => React.ReactNode);
 
+    type OptionDisabledType = string | ((option: any) => boolean);
+
     interface ChangeTargetOptions {
         name: string;
         id: string;
@@ -33,7 +35,7 @@ declare namespace Dropdown {
         options?: any[];
         optionLabel?: string;
         optionValue?: string;
-        optionDisabled?: string;
+        optionDisabled?: OptionDisabledType;
         optionGroupLabel?: string;
         optionGroupChildren?: string;
         optionGroupTemplate?: OptionGroupTemplateType;

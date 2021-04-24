@@ -7,6 +7,8 @@ declare namespace ListBox {
 
     type ItemTemplateType = React.ReactNode | ((option: any) => React.ReactNode);
 
+    type OptionDisabledType = string | ((option: any) => boolean);
+
     interface ChangeTargetOptions {
         name: string;
         id: string;
@@ -32,7 +34,7 @@ declare namespace ListBox {
         options?: any[];
         optionLabel?: string;
         optionValue?: string;
-        optionDisabled?: string;
+        optionDisabled?: OptionDisabledType;
         optionGroupLabel?: string;
         optionGroupChildren?: string;
         optionGroupTemplate?: OptionGroupTemplateType;
