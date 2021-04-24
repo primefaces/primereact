@@ -1,13 +1,15 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-declare namespace AutoComplete {
+declare module 'primereact/autocomplete' {
 
     type OptionGroupTemplateType = React.ReactNode | ((suggestion: any, index: number) => React.ReactNode);
 
     type ItemTemplateType = React.ReactNode | ((suggestion: any, index: number) => React.ReactNode);
 
     type SelectedItemTemplateType = React.ReactNode | ((value: any) => React.ReactNode);
+
+    type AppendToType = 'self' | HTMLElement | undefined | null;
 
     interface ChangeTargetOptions {
         name: string;
@@ -40,7 +42,7 @@ declare namespace AutoComplete {
         query: string;
     }
 
-    interface AutoCompleteProps {
+    export interface AutoCompleteProps {
         id?: string;
         inputRef?: React.Ref<HTMLInputElement>;
         value?: any;
@@ -71,7 +73,7 @@ declare namespace AutoComplete {
         disabled?: boolean;
         maxlength?: number;
         size?: number;
-        appendTo?: HTMLElement | string;
+        appendTo?: AppendToType;
         tabIndex?: number;
         autoFocus?: boolean;
         tooltip?: string;
@@ -97,6 +99,6 @@ declare namespace AutoComplete {
         onShow?(): void;
         onHide?(): void;
     }
-}
 
-export declare class AutoComplete extends React.Component<AutoComplete.AutoCompleteProps, any> { }
+    export class AutoComplete extends React.Component<AutoCompleteProps, any> { }
+}

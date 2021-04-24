@@ -1,12 +1,12 @@
 import * as React from 'react';
 
-declare namespace ScrollTop {
+declare module 'primereact/scrolltop' {
 
     type TargetType = 'window' | 'parent';
 
     type ScrollBehavior = 'auto' | 'smooth';
 
-    interface ScrollTopProps {
+    export interface ScrollTopProps {
         target?: TargetType;
         threshold?: number;
         icon?: string;
@@ -17,6 +17,6 @@ declare namespace ScrollTop {
         onShow?(): void;
         onHide?(): void;
     }
-}
 
-export declare class ScrollTop extends React.Component<ScrollTop.ScrollTopProps, any> { }
+    export class ScrollTop extends React.Component<ScrollTopProps, any> { }
+}

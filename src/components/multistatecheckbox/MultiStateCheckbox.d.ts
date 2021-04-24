@@ -1,7 +1,7 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-declare namespace MultiStateCheckbox {
+declare module 'primereact/multistatecheckbox' {
 
     type OptionsType = Option[] | any[];
 
@@ -35,7 +35,7 @@ declare namespace MultiStateCheckbox {
         target: ChangeTargetOptions;
     }
 
-    interface MultiStateCheckboxProps {
+    export interface MultiStateCheckboxProps {
         id?: string;
         inputRef?: React.Ref<HTMLInputElement>;
         inputId?: string;
@@ -54,6 +54,6 @@ declare namespace MultiStateCheckbox {
         ariaLabelledBy?: string;
         onChange?(e: ChangeParams): void;
     }
-}
 
-export declare class MultiStateCheckbox extends React.Component<MultiStateCheckbox.MultiStateCheckboxProps, any> { }
+    export class MultiStateCheckbox extends React.Component<MultiStateCheckboxProps, any> { }
+}

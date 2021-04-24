@@ -1,7 +1,9 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-declare namespace ColorPicker {
+declare module 'primereact/colorpicker' {
+
+    type AppendToType = 'self' | HTMLElement | undefined | null;
 
     interface ChangeTargetOptions {
         name: string;
@@ -16,7 +18,7 @@ declare namespace ColorPicker {
         target: ChangeTargetOptions;
     }
 
-    interface ColorPickerProps {
+    export interface ColorPickerProps {
         id?: string;
         inputRef?: React.Ref<HTMLInputElement>;
         value?: string;
@@ -25,7 +27,7 @@ declare namespace ColorPicker {
         defaultColor?: string;
         inline?: boolean;
         format?: string;
-        appendTo?: HTMLElement | string;
+        appendTo?: AppendToType;
         disabled?: boolean;
         tabIndex?: number;
         inputId?: string;
@@ -36,6 +38,6 @@ declare namespace ColorPicker {
         onShow?(): void;
         onHide?(): void;
     }
-}
 
-export declare class ColorPicker extends React.Component<ColorPicker.ColorPickerProps, any> { }
+    export class ColorPicker extends React.Component<ColorPickerProps, any> { }
+}

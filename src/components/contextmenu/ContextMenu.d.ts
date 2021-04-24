@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { MenuItem } from '../menuitem/MenuItem';
 
-declare namespace ContextMenu {
+declare module 'primereact/contextmenu' {
 
-    interface ContextMenuProps {
+    type AppendToType = 'self' | HTMLElement | undefined | null;
+
+    export interface ContextMenuProps {
         id?: string;
         model?: MenuItem[];
         style?: object;
@@ -11,14 +13,14 @@ declare namespace ContextMenu {
         global?: boolean;
         autoZIndex?: boolean;
         baseZIndex?: number;
-        appendTo?: HTMLElement | string;
+        appendTo?: AppendToType;
         transitionOptions?: object;
         onShow?(e: React.SyntheticEvent): void;
         onHide?(e: React.SyntheticEvent): void;
     }
-}
 
-export declare class ContextMenu extends React.Component<ContextMenu.ContextMenuProps, any> {
-    public show(event: React.SyntheticEvent): void;
-    public hide(event: React.SyntheticEvent): void;
+    export class ContextMenu extends React.Component<ContextMenuProps, any> {
+        public show(event: React.SyntheticEvent): void;
+        public hide(event: React.SyntheticEvent): void;
+    }
 }

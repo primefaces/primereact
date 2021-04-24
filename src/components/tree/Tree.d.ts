@@ -1,7 +1,7 @@
 import * as React from 'react';
 import TreeNode from '../treenode/TreeNode';
 
-declare namespace Tree {
+declare module 'primereact/tree' {
 
     type SelectionModeType = 'single' | 'multiple' | 'checkbox';
 
@@ -59,7 +59,7 @@ declare namespace Tree {
         dropIndex: number;
     }
 
-    interface TreeProps {
+    export interface TreeProps {
         id?: string;
         value?: TreeNode[];
         disabled?: boolean;
@@ -98,8 +98,8 @@ declare namespace Tree {
         onContextMenu?(e: EventNodeParams): void;
         onFilterValueChange?(e: React.FormEvent<HTMLInputElement>): void;
     }
-}
 
-export declare class Tree extends React.Component<Tree.TreeProps, any> {
-    public filter<T>(value: T): void;
+    export class Tree extends React.Component<TreeProps, any> {
+        public filter<T>(value: T): void;
+    }
 }

@@ -1,12 +1,12 @@
 import * as React from 'react';
 
-declare namespace Skeleton {
+declare module 'primereact/skeleton' {
 
     type ShapeType = 'rectangle' | 'circle';
 
     type AnimationType = 'wave' | 'none';
 
-    interface SkeletonProps {
+    export interface SkeletonProps {
         shape?: ShapeType;
         size?: string;
         width?: string;
@@ -16,6 +16,6 @@ declare namespace Skeleton {
         style?: object;
         className?: string;
     }
-}
 
-export declare class Skeleton extends React.Component<Skeleton.SkeletonProps, any> { }
+    export class Skeleton extends React.Component<SkeletonProps, any> { }
+}

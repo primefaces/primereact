@@ -1,7 +1,7 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-declare namespace MultiSelect {
+declare module 'primereact/multiselect' {
 
     type OptionGroupTemplateType = React.ReactNode | ((option: any, index: number) => React.ReactNode);
 
@@ -36,6 +36,8 @@ declare namespace MultiSelect {
 
     type OptionDisabledType = string | ((option: any) => boolean);
 
+    type AppendToType = 'self' | HTMLElement | undefined | null;
+
     interface ChangeTargetOptions {
         name: string;
         id: string;
@@ -50,7 +52,7 @@ declare namespace MultiSelect {
         target: ChangeTargetOptions;
     }
 
-    interface MultiSelectProps {
+    export interface MultiSelectProps {
         id?: string;
         inputRef?: React.Ref<HTMLSelectElement>;
         name?: string;
@@ -83,7 +85,7 @@ declare namespace MultiSelect {
         dataKey?: string;
         inputId?: string;
         required?: boolean;
-        appendTo?: HTMLElement | string;
+        appendTo?: AppendToType;
         tooltip?: string;
         tooltipOptions?: TooltipOptions;
         maxSelectedLabels?: number;
@@ -101,6 +103,6 @@ declare namespace MultiSelect {
         onShow?(): void;
         onHide?(): void;
     }
-}
 
-export declare class MultiSelect extends React.Component<MultiSelect.MultiSelectProps, any> { }
+    export class MultiSelect extends React.Component<MultiSelectProps, any> { }
+}

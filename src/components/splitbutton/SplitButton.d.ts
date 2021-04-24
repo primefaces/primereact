@@ -2,11 +2,13 @@ import * as React from 'react';
 import { MenuItem } from '../menuitem/MenuItem';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-declare namespace SplitButton {
+declare module 'primereact/splitbutton' {
 
     type ButtonTemplateType = React.ReactNode | ((props: SplitButtonProps) => React.ReactNode);
 
-    interface SplitButtonProps {
+    type AppendToType = 'self' | HTMLElement | undefined | null;
+
+    export interface SplitButtonProps {
         id?: string;
         label?: string;
         icon?: string;
@@ -17,7 +19,7 @@ declare namespace SplitButton {
         menuStyle?: object;
         menuClassName?: string;
         tabIndex?: number;
-        appendTo?: HTMLElement | string;
+        appendTo?: AppendToType;
         tooltip?: string;
         tooltipOptions?: TooltipOptions;
         buttonTemplate?: ButtonTemplateType;
@@ -26,6 +28,6 @@ declare namespace SplitButton {
         onShow?(): void;
         onHide?(): void;
     }
-}
 
-export declare class SplitButton extends React.Component<SplitButton.SplitButtonProps, any> { }
+    export class SplitButton extends React.Component<SplitButtonProps, any> { }
+}

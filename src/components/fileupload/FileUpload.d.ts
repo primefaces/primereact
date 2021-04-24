@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-declare namespace FileUpload {
+declare module 'primereact/fileupload' {
 
     type ModeType = 'basic' | 'advanced';
 
@@ -66,7 +66,7 @@ declare namespace FileUpload {
 
     interface RemoveParams extends SelectParams { }
 
-    interface FileUploadProps {
+    export interface FileUploadProps {
         id?: string;
         name?: string;
         url?: string;
@@ -107,9 +107,9 @@ declare namespace FileUpload {
         uploadHandler?(e: FilesParam): void;
         onRemove?(e: RemoveParams): void;
     }
-}
 
-export declare class FileUpload extends React.Component<FileUpload.FileUploadProps, any> {
-    public upload(): void;
-    public clear(): void;
+    export class FileUpload extends React.Component<FileUploadProps, any> {
+        public upload(): void;
+        public clear(): void;
+    }
 }

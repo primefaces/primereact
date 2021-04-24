@@ -1,12 +1,12 @@
 import * as React from 'react';
 
-declare namespace Sidebar {
+declare module 'primereact/sidebar' {
 
     type PositionType = 'top' | 'bottom' | 'left' | 'right';
 
     type TemplateType = React.ReactNode | ((props: SidebarProps) => React.ReactNode);
 
-    interface SidebarProps {
+    export interface SidebarProps {
         id?: string;
         style?: object;
         className?: string;
@@ -25,6 +25,6 @@ declare namespace Sidebar {
         onShow?(): void;
         onHide(): void;
     }
-}
 
-export declare class Sidebar extends React.Component<Sidebar.SidebarProps, any> { }
+    export class Sidebar extends React.Component<SidebarProps, any> { }
+}

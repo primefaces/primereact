@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-declare namespace Galleria {
+declare module 'primereact/galleria' {
 
     type PositionType = 'top' | 'bottom' | 'left' | 'right';
 
@@ -13,7 +13,7 @@ declare namespace Galleria {
         index: number;
     }
 
-    interface GalleriaProps {
+    export interface GalleriaProps {
         id?: string;
         value?: any[];
         activeIndex?: number;
@@ -46,12 +46,12 @@ declare namespace Galleria {
         onShow?(): void;
         onHide?(): void;
     }
-}
 
-export declare class Galleria extends React.Component<Galleria.GalleriaProps, any> {
-    public show(): void;
-    public hide(): void;
-    public isAutoPlayActive(): boolean;
-    public startSlideShow(): void;
-    public stopSlideShow(): void;
+    export class Galleria extends React.Component<GalleriaProps, any> {
+        public show(): void;
+        public hide(): void;
+        public isAutoPlayActive(): boolean;
+        public startSlideShow(): void;
+        public stopSlideShow(): void;
+    }
 }

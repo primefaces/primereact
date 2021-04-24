@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-declare namespace Divider {
+declare module 'primereact/divider' {
 
     type AlignType = 'center' | 'left' | 'right' | 'bottom' | 'top';
 
@@ -8,13 +8,13 @@ declare namespace Divider {
 
     type BorderType = 'solid' | 'dashed' | 'dotted';
 
-    interface DividerProps {
+    export interface DividerProps {
         align?: AlignType;
         layout?: LayoutType;
         type?: BorderType;
         style?: object;
         className?: string;
     }
-}
 
-export declare class Divider extends React.Component<Divider.DividerProps, any> { }
+    export class Divider extends React.Component<DividerProps, any> { }
+}

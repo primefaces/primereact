@@ -1,7 +1,7 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-declare namespace Rating {
+declare module 'primereact/rating' {
 
     interface ChangeTargetOptions {
         name: string;
@@ -17,7 +17,7 @@ declare namespace Rating {
         target: ChangeTargetOptions;
     }
 
-    interface RatingProps {
+    export interface RatingProps {
         id?: string;
         value?: number;
         disabled?: boolean;
@@ -30,6 +30,6 @@ declare namespace Rating {
         tooltipOptions?: TooltipOptions;
         onChange?(e: ChangeParams): void;
     }
-}
 
-export declare class Rating extends React.Component<Rating.RatingProps, any> { }
+    export class Rating extends React.Component<RatingProps, any> { }
+}

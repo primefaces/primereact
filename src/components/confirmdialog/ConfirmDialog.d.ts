@@ -1,15 +1,17 @@
 import * as React from 'react';
-import { Dialog } from '../dialog/Dialog';
+import { DialogProps } from 'primereact/dialog';
 
-declare namespace ConfirmDialog {
+declare module 'primereact/confirmdialog' {
 
     type TemplateType = React.ReactNode | ((props: ConfirmDialogProps) => React.ReactNode);
+
+    type AppendToType = 'self' | HTMLElement | undefined | null;
 
     interface Breakpoints {
         [key: string]: string;
     }
 
-    interface ConfirmDialogProps extends Omit<Dialog.DialogProps, 'onHide'> {
+    export interface ConfirmDialogProps extends Omit<DialogProps, 'onHide'> {
         visible?: boolean;
         message?: TemplateType;
         rejectLabel?: string;
@@ -19,7 +21,7 @@ declare namespace ConfirmDialog {
         acceptIcon?: string;
         rejectClassName?: string;
         acceptClassName?: string;
-        appendTo?: HTMLElement | string;
+        appendTo?: AppendToType;
         className?: string;
         footer?: TemplateType;
         breakpoints?: Breakpoints;
@@ -32,8 +34,8 @@ declare namespace ConfirmDialog {
         show(): void;
         hide(): void;
     }
+
+    export class ConfirmDialog extends React.Component<ConfirmDialogProps, any> { }
+
+    export function confirmDialog(props: ConfirmDialogProps): ConfirmDialogReturn;
 }
-
-export declare class ConfirmDialog extends React.Component<ConfirmDialog.ConfirmDialogProps, any> { }
-
-export declare function confirmDialog(props: ConfirmDialog.ConfirmDialogProps): ConfirmDialog.ConfirmDialogReturn;

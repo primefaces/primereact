@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-declare namespace Chart {
-    interface ChartProps {
+declare module 'primereact/chart' {
+    export interface ChartProps {
         id?: string;
         type?: string;
         data?: object;
@@ -11,6 +11,6 @@ declare namespace Chart {
         style?: object;
         className?: string;
     }
-}
 
-export declare class Chart extends React.Component<Chart.ChartProps, any> { }
+    export class Chart extends React.Component<ChartProps, any> { }
+}

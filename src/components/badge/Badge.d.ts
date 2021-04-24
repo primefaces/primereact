@@ -1,18 +1,18 @@
 import * as React from 'react';
 
-declare namespace Badge {
+declare module 'primereact/badge' {
 
     type SeverityType = 'success' | 'info' | 'warn' | 'error' | (string & {});
 
     type SizeType = 'normal' | 'large' | 'xlarge';
 
-    interface BadgeProps {
+    export interface BadgeProps {
         value?: any;
         severity?: SeverityType;
         size?: SizeType;
         style?: object;
         className?: string;
     }
-}
 
-export declare class Badge extends React.Component<Badge.BadgeProps, any> { }
+    export class Badge extends React.Component<BadgeProps, any> { }
+}

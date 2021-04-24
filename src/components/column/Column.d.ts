@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-declare namespace Column {
+declare module 'primereact/column' {
 
     type BodyType = React.ReactNode | ((data: any, props: ColumnProps, ...parameters: any) => React.ReactNode);
 
@@ -89,6 +89,6 @@ declare namespace Column {
         onBeforeEditorHide?(e: EventParams): void;
         onBeforeEditorShow?(e: EventParams): void;
     }
-}
 
-export declare class Column extends React.Component<Column.ColumnProps, any> { }
+    export class Column extends React.Component<ColumnProps, any> { }
+}

@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Paginator } from '../paginator/Paginator';
+import { PaginatorTemplate } from 'primereact/paginator';
 
-declare namespace DataViewLayoutOptions {
+declare module 'primereact/dataview' {
 
     type LayoutType = 'list' | 'grid';
 
@@ -10,22 +10,21 @@ declare namespace DataViewLayoutOptions {
         value: LayoutType;
     }
 
-    interface DataViewLayoutOptionsProps {
+    export interface DataViewLayoutOptionsProps {
         id?: string;
         layout?: LayoutType;
         style?: object;
         className?: string;
         onChange(e: ChangeParams): void;
     }
-}
 
-export declare class DataViewLayoutOptions extends React.Component<DataViewLayoutOptions.DataViewLayoutOptionsProps, any> { }
-
-declare namespace DataView {
+    export class DataViewLayoutOptions extends React.Component<DataViewLayoutOptionsProps, any> { }
 
     type PaginatorPositionType = 'top' | 'bottom' | 'both';
 
     type SortOrderType = 1 | 0 | -1 | undefined | null;
+
+    type AppendToType = 'self' | HTMLElement | undefined | null;
 
     interface PageParams {
         originalEvent: React.SyntheticEvent;
@@ -33,12 +32,12 @@ declare namespace DataView {
         rows: number;
     }
 
-    interface DataViewProps {
+    export interface DataViewProps {
         id?: string;
         header?: React.ReactNode;
         footer?: React.ReactNode;
         value?: any[];
-        layout?: DataViewLayoutOptions.LayoutType;
+        layout?: LayoutType;
         rows?: number;
         first?: number;
         totalRecords?: number;
@@ -46,11 +45,11 @@ declare namespace DataView {
         paginatorPosition?: PaginatorPositionType;
         alwaysShowPaginator?: boolean;
         paginatorClassName?: string;
-        paginatorTemplate?: Paginator.PaginatorTemplate;
+        paginatorTemplate?: PaginatorTemplate;
         paginatorLeft?: React.ReactNode;
         paginatorRight?: React.ReactNode;
         pageLinkSize?: number;
-        paginatorDropdownAppendTo?: HTMLElement | string;
+        paginatorDropdownAppendTo?: AppendToType;
         rowsPerPageOptions?: number[];
         currentPageReportTemplate?: string;
         emptyMessage?: string;
@@ -62,9 +61,9 @@ declare namespace DataView {
         loading?: boolean;
         loadingIcon?: string;
         onPage?(e: PageParams): void;
-        itemTemplate?(item: any, layout: DataViewLayoutOptions.LayoutType): React.ReactNode;
+        itemTemplate?(item: any, layout: LayoutType): React.ReactNode;
     }
-}
 
-// tslint:disable-next-line:max-classes-per-file
-export declare class DataView extends React.Component<DataView.DataViewProps, any> { }
+    // tslint:disable-next-line:max-classes-per-file
+    export class DataView extends React.Component<DataViewProps, any> { }
+}

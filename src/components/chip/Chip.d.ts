@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-declare namespace Chip {
+declare module 'primereact/chip' {
 
     type TemplateType = React.ReactNode | ((props: ChipProps) => React.ReactNode);
 
-    interface ChipProps {
+    export interface ChipProps {
         label?: string;
         icon?: string;
         image?: string;
@@ -17,6 +17,6 @@ declare namespace Chip {
         onImageError?(event: React.SyntheticEvent): void;
         onRemove?(event: React.MouseEvent<HTMLElement>): void;
     }
-}
 
-export declare class Chip extends React.Component<Chip.ChipProps, any> { }
+    export class Chip extends React.Component<ChipProps, any> { }
+}

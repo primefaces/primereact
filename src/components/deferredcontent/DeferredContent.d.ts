@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-declare namespace DeferredContent {
+declare module 'primereact/deferredcontent' {
 
-    interface DeferredContentProps {
+    export interface DeferredContentProps {
         onLoad?(event: React.SyntheticEvent): void;
     }
-}
 
-export declare class DeferredContent extends React.Component<DeferredContent.DeferredContentProps, any> { }
+    export class DeferredContent extends React.Component<DeferredContentProps, any> { }
+}

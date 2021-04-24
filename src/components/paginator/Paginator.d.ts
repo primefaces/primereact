@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-declare namespace Paginator {
+declare module 'primereact/paginator' {
 
     interface PageState {
         first: number;
@@ -22,6 +22,8 @@ declare namespace Paginator {
     type RowsPerPageDropdownType = React.ReactNode | ((options: RowsPerPageDropdownOptions) => React.ReactNode);
 
     type CurrentPageReportType = React.ReactNode | ((options: CurrentPageReportOptions) => React.ReactNode);
+
+    type AppendToType = 'self' | HTMLElement | undefined | null;
 
     interface FirstPageLinkOptions {
         onClick(event: React.SyntheticEvent): void;
@@ -92,7 +94,7 @@ declare namespace Paginator {
         value: any;
         options: any[];
         onChange(e: ChangeParams): void;
-        appendTo: HTMLElement;
+        appendTo: AppendToType;
         currentPage: number;
         totalPages: number;
         totalRecords: number;
@@ -125,7 +127,7 @@ declare namespace Paginator {
 
     export type PaginatorTemplate = string | PaginatorTemplateOptions;
 
-    interface PaginatorProps {
+    export interface PaginatorProps {
         totalRecords?: number;
         rows?: number;
         first?: number;
@@ -138,9 +140,9 @@ declare namespace Paginator {
         leftContent?: React.ReactNode;
         rightContent?: React.ReactNode;
         currentPageReportTemplate?: string;
-        dropdownAppendTo?: HTMLElement | string;
+        dropdownAppendTo?: AppendToType;
         onPageChange?(event: PageState): void;
     }
-}
 
-export declare class Paginator extends React.Component<Paginator.PaginatorProps, any> { }
+    export class Paginator extends React.Component<PaginatorProps, any> { }
+}

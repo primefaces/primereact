@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-declare namespace Messages {
+declare module 'primereact/messages' {
 
     type SeverityType = 'success' | 'info' | 'warn' | 'error' | (string & {});
 
@@ -16,7 +16,7 @@ declare namespace Messages {
         life?: number;
     }
 
-    interface MessagesProps {
+    export interface MessagesProps {
         id?: string;
         className?: string;
         style?: object;
@@ -24,10 +24,10 @@ declare namespace Messages {
         onRemove?(message: MessageOptions): void;
         onClick?(message: MessageOptions): void;
     }
-}
 
-export declare class Messages extends React.Component<Messages.MessagesProps, any> {
-    public show(message: Messages.MessageType): void;
-    public clear(): void;
-    public replace(message: Messages.MessageType): void;
+    export class Messages extends React.Component<MessagesProps, any> {
+        public show(message: MessageType): void;
+        public clear(): void;
+        public replace(message: MessageType): void;
+    }
 }

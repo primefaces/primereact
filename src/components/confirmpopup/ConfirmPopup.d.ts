@@ -1,10 +1,12 @@
 import * as React from 'react';
 
-declare namespace ConfirmPopup {
+declare module 'primereact/confirmpopup' {
 
     type TemplateType = React.ReactNode | ((props: ConfirmPopupProps) => React.ReactNode);
 
-    interface ConfirmPopupProps {
+    type AppendToType = 'self' | HTMLElement | undefined | null;
+
+    export interface ConfirmPopupProps {
         target?: HTMLElement;
         visible?: boolean;
         message?: TemplateType;
@@ -17,7 +19,7 @@ declare namespace ConfirmPopup {
         acceptClassName?: string;
         className?: string;
         style?: object;
-        appendTo?: HTMLElement | string;
+        appendTo?: AppendToType;
         dismissable?: boolean;
         footer?: TemplateType;
         transitionOptions?: object;
@@ -31,8 +33,8 @@ declare namespace ConfirmPopup {
         show(): void;
         hide(): void;
     }
+
+    export class ConfirmPopup extends React.Component<ConfirmPopupProps, any> { }
+
+    export function confirmPopup(props: ConfirmPopupProps): ConfirmPopupReturn;
 }
-
-export declare class ConfirmPopup extends React.Component<ConfirmPopup.ConfirmPopupProps, any> { }
-
-export declare function confirmPopup(props: ConfirmPopup.ConfirmPopupProps): ConfirmPopup.ConfirmPopupReturn;

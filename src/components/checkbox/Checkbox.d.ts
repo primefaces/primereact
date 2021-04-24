@@ -1,7 +1,7 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-declare namespace Checkbox {
+declare module 'primereact/checkbox' {
     interface ChangeTargetOptions {
         type: 'checkbox';
         name: string;
@@ -19,7 +19,7 @@ declare namespace Checkbox {
         target: ChangeTargetOptions;
     }
 
-    interface CheckboxProps {
+    export interface CheckboxProps {
         id?: string;
         inputRef?: React.Ref<HTMLInputElement>;
         inputId?: string;
@@ -39,6 +39,6 @@ declare namespace Checkbox {
         onMouseDown?(event: React.MouseEvent<HTMLElement>): void;
         onContextMenu?(event: React.MouseEvent<HTMLElement>): void;
     }
-}
 
-export declare class Checkbox extends React.Component<Checkbox.CheckboxProps, any> { }
+    export class Checkbox extends React.Component<CheckboxProps, any> { }
+}

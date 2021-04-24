@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-declare namespace Slider {
+declare module 'primereact/slider' {
 
     type OrientationType = 'horizontal' | 'vertical';
 
@@ -13,7 +13,7 @@ declare namespace Slider {
 
     interface SlideEndParams extends ChangeParams { }
 
-    interface SliderProps {
+    export interface SliderProps {
         id?: string;
         value?: ValueType;
         min?: number;
@@ -29,6 +29,6 @@ declare namespace Slider {
         onChange?(e: ChangeParams): void;
         onSlideEnd?(e: SlideEndParams): void;
     }
-}
 
-export declare class Slider extends React.Component<Slider.SliderProps, any> { }
+    export class Slider extends React.Component<SliderProps, any> { }
+}

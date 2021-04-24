@@ -1,7 +1,7 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-declare namespace SelectButton {
+declare module 'primereact/selectbutton' {
 
     type OptionDisabledType = string | ((option: any) => boolean);
 
@@ -19,7 +19,7 @@ declare namespace SelectButton {
         target: ChangeTargetOptions;
     }
 
-    interface SelectButtonProps {
+    export interface SelectButtonProps {
         id?: string;
         value?: any;
         options?: any[];
@@ -38,6 +38,6 @@ declare namespace SelectButton {
         itemTemplate?(option: any): React.ReactNode;
         onChange?(e: ChangeParams): void;
     }
-}
 
-export declare class SelectButton extends React.Component<SelectButton.SelectButtonProps, any> { }
+    export class SelectButton extends React.Component<SelectButtonProps, any> { }
+}

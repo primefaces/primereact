@@ -1,7 +1,7 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-declare namespace Password {
+declare module 'primereact/password' {
 
     type HeaderType = React.ReactNode | ((props: PasswordProps) => React.ReactNode);
 
@@ -18,7 +18,9 @@ declare namespace Password {
 
     type IconType = React.ReactNode | ((e: IconParams) => React.ReactNode);
 
-    interface PasswordProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onInput'> {
+    type AppendToType = 'self' | HTMLElement | undefined | null;
+
+    export interface PasswordProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onInput'> {
         id?: string;
         inputRef?: React.Ref<HTMLInputElement>;
         promptLabel?: string;
@@ -29,7 +31,7 @@ declare namespace Password {
         strongRegex?: string;
         feedback?: boolean;
         toggleMask?: boolean;
-        appendTo?: HTMLElement | string;
+        appendTo?: AppendToType;
         header?: HeaderType;
         content?: ContentType;
         footer?: FooterType;
@@ -47,6 +49,6 @@ declare namespace Password {
         onShow?(): void;
         onHide?(): void;
     }
-}
 
-export declare class Password extends React.Component<Password.PasswordProps, any> { }
+    export class Password extends React.Component<PasswordProps, any> { }
+}

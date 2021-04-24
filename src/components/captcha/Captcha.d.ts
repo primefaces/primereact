@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-declare namespace Captcha {
+declare module 'primereact/captcha' {
 
-    interface CaptchaProps {
+    export interface CaptchaProps {
         id?: string;
         siteKey?: string;
         theme?: string;
@@ -13,6 +13,6 @@ declare namespace Captcha {
         onResponse?(response: any): void;
         onExpire?(): void;
     }
-}
 
-export declare class Captcha extends React.Component<Captcha.CaptchaProps, any> { }
+    export class Captcha extends React.Component<CaptchaProps, any> { }
+}

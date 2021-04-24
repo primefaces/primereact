@@ -1,7 +1,7 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-declare namespace InputMask {
+declare module 'primereact/inputmask' {
 
     interface CompleteParams {
         originalEvent: React.SyntheticEvent;
@@ -22,7 +22,7 @@ declare namespace InputMask {
         target: ChangeTargetOptions;
     }
 
-    interface InputMaskProps {
+    export interface InputMaskProps {
         id?: string;
         inputRef?: React.Ref<HTMLInputElement>;
         value?: string;
@@ -49,6 +49,6 @@ declare namespace InputMask {
         onFocus?(event: React.FormEvent<HTMLInputElement>): void;
         onBlur?(event: React.FormEvent<HTMLInputElement>): void;
     }
-}
 
-export declare class InputMask extends React.Component<InputMask.InputMaskProps, any> { }
+    export class InputMask extends React.Component<InputMaskProps, any> { }
+}

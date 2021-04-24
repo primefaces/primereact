@@ -1,7 +1,7 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-declare namespace TriStateCheckbox {
+declare module 'primereact/tristatecheckbox' {
 
     interface ChangeTargetOptions {
         name: string;
@@ -17,7 +17,7 @@ declare namespace TriStateCheckbox {
         target: ChangeTargetOptions;
     }
 
-    interface TriStateCheckboxProps {
+    export interface TriStateCheckboxProps {
         id?: string;
         inputRef?: React.Ref<HTMLInputElement>;
         inputId?: string;
@@ -31,6 +31,6 @@ declare namespace TriStateCheckbox {
         ariaLabelledBy?: string;
         onChange?(e: ChangeParams): void;
     }
-}
 
-export declare class TriStateCheckbox extends React.Component<TriStateCheckbox.TriStateCheckboxProps, any> { }
+    export class TriStateCheckbox extends React.Component<TriStateCheckboxProps, any> { }
+}

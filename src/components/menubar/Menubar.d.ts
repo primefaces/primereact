@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { MenuItem } from '../menuitem/MenuItem';
 
-declare namespace Menubar {
+declare module 'primereact/menubar' {
 
     type StartTemplate = React.ReactNode | ((props: MenubarProps) => React.ReactNode);
 
     type EndTemplate = React.ReactNode | ((props: MenubarProps) => React.ReactNode);
 
-    interface MenubarProps {
+    export interface MenubarProps {
         id?: string;
         model?: MenuItem[];
         style?: object;
@@ -15,6 +15,6 @@ declare namespace Menubar {
         start?: StartTemplate;
         end?: EndTemplate;
     }
-}
 
-export declare class Menubar extends React.Component<Menubar.MenubarProps, any> { }
+    export class Menubar extends React.Component<MenubarProps, any> { }
+}

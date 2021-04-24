@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-declare namespace Editor {
+declare module 'primereact/editor' {
 
     interface TextChangeParams {
         htmlValue: string | null;
@@ -15,7 +15,7 @@ declare namespace Editor {
         source: string;
     }
 
-    interface EditorProps {
+    export interface EditorProps {
         id?: string;
         value?: string;
         style?: object;
@@ -29,6 +29,6 @@ declare namespace Editor {
         onTextChange?(e: TextChangeParams): void;
         onSelectionChange?(e: SelectionChangeParams): void;
     }
-}
 
-export declare class Editor extends React.Component<Editor.EditorProps, any> { }
+    export class Editor extends React.Component<EditorProps, any> { }
+}

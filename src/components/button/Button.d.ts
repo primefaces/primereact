@@ -1,7 +1,7 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-declare namespace Button {
+declare module 'primereact/button' {
 
     type PositionType = 'top' | 'bottom' | 'left' | 'right';
 
@@ -13,7 +13,7 @@ declare namespace Button {
         props: ButtonProps;
     }
 
-    interface ButtonProps extends Omit<React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, 'disabled'> {
+    export interface ButtonProps extends Omit<React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, 'disabled'> {
         label?: string;
         icon?: IconType;
         iconPos?: PositionType;
@@ -25,6 +25,6 @@ declare namespace Button {
         loading?: boolean;
         loadingIcon?: IconType;
     }
-}
 
-export declare class Button extends React.Component<Button.ButtonProps, any> { }
+    export class Button extends React.Component<ButtonProps, any> { }
+}

@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Column } from '../column/Column';
-import { Paginator } from '../paginator/Paginator';
+import { ColumnProps } from 'primereact/column';
+import { PaginatorTemplate } from 'primereact/paginator';
 
-declare namespace DataTable {
+declare module 'primereact/datatable' {
 
     type PaginatorPositionType = 'top' | 'bottom' | 'both';
 
@@ -25,6 +25,8 @@ declare namespace DataTable {
     type CompareSelectionByType = 'deepEquals' | 'equals';
 
     type StateStorageType = 'session' | 'local' | 'custom';
+
+    type AppendToType = 'self' | HTMLElement | undefined | null;
 
     interface SortMeta {
         field: string;
@@ -68,7 +70,7 @@ declare namespace DataTable {
 
     interface ColumnResizeEndParams {
         element: HTMLElement;
-        column: Column.ColumnProps;
+        column: ColumnProps;
         delta: number;
     }
 
@@ -131,7 +133,7 @@ declare namespace DataTable {
         dropIndex: number;
     }
 
-    interface DataTableProps {
+    export interface DataTableProps {
         id?: string;
         value?: any[];
         header?: React.ReactNode;
@@ -144,10 +146,10 @@ declare namespace DataTable {
         paginatorPosition?: PaginatorPositionType;
         alwaysShowPaginator?: boolean;
         paginatorClassName?: string;
-        paginatorTemplate?: Paginator.PaginatorTemplate;
+        paginatorTemplate?: PaginatorTemplate;
         paginatorLeft?: React.ReactNode;
         paginatorRight?: React.ReactNode;
-        paginatorDropdownAppendTo?: HTMLElement | string;
+        paginatorDropdownAppendTo?: AppendToType;
         pageLinkSize?: number;
         rowsPerPageOptions?: number[];
         currentPageReportTemplate?: string;
@@ -242,12 +244,12 @@ declare namespace DataTable {
         onStateSave?(state: object): void;
         onStateRestore?(state: object): void;
     }
-}
 
-export declare class DataTable extends React.Component<DataTable.DataTableProps, any> {
-    public reset(): void;
-    public exportCSV(options: { selectionOnly: boolean }): void;
-    public filter<T>(value: T, field: string, mode: DataTable.FilterMatchModeType): void;
-    public resetColumnOrder(): void;
-    public closeEditingCell(): void;
+    export class DataTable extends React.Component<DataTableProps, any> {
+        public reset(): void;
+        public exportCSV(options: { selectionOnly: boolean }): void;
+        public filter<T>(value: T, field: string, mode: FilterMatchModeType): void;
+        public resetColumnOrder(): void;
+        public closeEditingCell(): void;
+    }
 }

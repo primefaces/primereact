@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-declare namespace Toast {
+declare module 'primereact/toast' {
 
     type SeverityType = 'success' | 'info' | 'warn' | 'error' | (string & {});
 
@@ -18,7 +18,7 @@ declare namespace Toast {
         life?: number;
     }
 
-    interface ToastProps {
+    export interface ToastProps {
         id?: string;
         className?: string;
         style?: object;
@@ -30,9 +30,9 @@ declare namespace Toast {
         onShow?(): void;
         onHide?(): void;
     }
-}
 
-export declare class Toast extends React.Component<Toast.ToastProps, any> {
-    public show(message: Toast.MessageType): void;
-    public clear(): void;
+    export class Toast extends React.Component<ToastProps, any> {
+        public show(message: MessageType): void;
+        public clear(): void;
+    }
 }

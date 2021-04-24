@@ -1,12 +1,12 @@
 import * as React from 'react';
 
-declare namespace Inplace {
+declare module 'primereact/inplace' {
 
     interface ToggleParams {
         originalEvent: React.SyntheticEvent;
         value: boolean;
     }
-    interface InplaceProps {
+    export interface InplaceProps {
         style?: object;
         className?: string;
         active?: boolean;
@@ -18,9 +18,9 @@ declare namespace Inplace {
         onClose?(event: React.MouseEvent<HTMLElement>): void;
         onToggle?(e: ToggleParams): void;
     }
-}
 
-export declare class Inplace extends React.Component<Inplace.InplaceProps, any> { }
+    export class Inplace extends React.Component<InplaceProps, any> { }
+}
 
 // tslint:disable-next-line:max-classes-per-file
 export declare class InplaceDisplay extends React.Component { }

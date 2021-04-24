@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-declare namespace SplitterPanel {
+declare module 'primereact/splitter' {
 
     interface SplitterPanelProps {
         size?: number;
@@ -8,11 +8,8 @@ declare namespace SplitterPanel {
         style?: object;
         className?: string;
     }
-}
 
-export declare class SplitterPanel extends React.Component<SplitterPanel.SplitterPanelProps, any> { }
-
-declare namespace Splitter {
+    export class SplitterPanel extends React.Component<SplitterPanelProps, any> { }
 
     type LayoutType = 'vertical' | 'horizontal';
 
@@ -23,7 +20,7 @@ declare namespace Splitter {
         sizes: number[];
     }
 
-    interface SplitterProps {
+    export interface SplitterProps {
         id?: string;
         className?: string;
         style?: object;
@@ -33,6 +30,6 @@ declare namespace Splitter {
         stateStorage?: StateStorageType;
         onResizeEnd?(e: ResizeEndParams): void;
     }
-}
 
-export declare class Splitter extends React.Component<Splitter.SplitterProps, any> { }
+    export class Splitter extends React.Component<SplitterProps, any> { }
+}

@@ -1,10 +1,12 @@
 import * as React from 'react';
 
-declare namespace Dialog {
+declare module 'primereact/dialog' {
 
     type PositionType = 'center' | 'top' | 'bottom' | 'left' | 'right' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
 
     type TemplateType = React.ReactNode | ((props: DialogProps) => React.ReactNode);
+
+    type AppendToType = 'self' | HTMLElement | undefined | null;
 
     interface Breakpoints {
         [key: string]: string;
@@ -34,7 +36,7 @@ declare namespace Dialog {
         className?: string;
         maskClassName?: string;
         showHeader?: boolean;
-        appendTo?: HTMLElement | string;
+        appendTo?: AppendToType;
         baseZIndex?: number;
         maximizable?: boolean;
         blockScroll?: boolean;
@@ -57,6 +59,6 @@ declare namespace Dialog {
         onHide(): void;
         onShow?(): void;
     }
-}
 
-export declare class Dialog extends React.Component<Dialog.DialogProps, any> { }
+    export class Dialog extends React.Component<DialogProps, any> { }
+}

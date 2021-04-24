@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-declare namespace GMap {
+declare module 'primereact/gmap' {
 
     interface EventParams {
         originalEvent: React.SyntheticEvent;
@@ -8,7 +8,7 @@ declare namespace GMap {
         map: any;
     }
 
-    interface GMapProps {
+    export interface GMapProps {
         options?: object;
         overlays?: any[];
         style?: object;
@@ -22,6 +22,6 @@ declare namespace GMap {
         onOverlayDragEnd?(event: React.SyntheticEvent): void;
         onOverlayClick?(e: EventParams): void;
     }
-}
 
-export declare class GMap extends React.Component<GMap.GMapProps, any> { }
+    export class GMap extends React.Component<GMapProps, any> { }
+}

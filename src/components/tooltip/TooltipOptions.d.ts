@@ -4,6 +4,8 @@ type PositionType = 'top' | 'bottom' | 'left' | 'right';
 
 type EventType = 'hover' | 'focus';
 
+type AppendToType = 'self' | HTMLElement | undefined | null;
+
 interface EventParams {
     originalEvent: React.SyntheticEvent;
     target: HTMLElement;
@@ -12,7 +14,7 @@ interface EventParams {
 export default interface TooltipOptions {
     className?: string;
     style?: object;
-    appendTo?: HTMLElement | string;
+    appendTo?: AppendToType;
     position?: PositionType;
     my?: string;
     at?: string;

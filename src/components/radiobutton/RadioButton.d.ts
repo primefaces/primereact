@@ -1,7 +1,7 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-declare namespace RadioButton {
+declare module 'primereact/radiobutton' {
 
     interface ChangeTargetOptions {
         name: string;
@@ -19,7 +19,7 @@ declare namespace RadioButton {
         target: ChangeTargetOptions;
     }
 
-    interface RadioButtonProps {
+    export interface RadioButtonProps {
         id?: string;
         inputRef?: React.Ref<HTMLInputElement>;
         inputId?: string;
@@ -36,6 +36,6 @@ declare namespace RadioButton {
         ariaLabelledBy?: string;
         onChange?(e: ChangeParams): void;
     }
-}
 
-export declare class RadioButton extends React.Component<RadioButton.RadioButtonProps, any> { }
+    export class RadioButton extends React.Component<RadioButtonProps, any> { }
+}

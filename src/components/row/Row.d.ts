@@ -1,11 +1,11 @@
 import * as React from 'react';
 
-declare namespace Row {
+declare module 'primereact/row' {
 
-    interface RowProps {
+    export interface RowProps {
         style?: object;
         className?: string;
     }
-}
 
-export declare class Row extends React.Component<Row.RowProps, any> { }
+    export class Row extends React.Component<RowProps, any> { }
+}

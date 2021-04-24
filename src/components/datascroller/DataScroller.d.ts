@@ -1,12 +1,12 @@
 import * as React from 'react';
 
-declare namespace DataScroller {
+declare module 'primereact/datascroller' {
     interface LazyLoadParams {
         first: number;
         rows: number;
     }
 
-    interface DataScrollerProps {
+    export interface DataScrollerProps {
         id?: string;
         value?: any[];
         rows?: number;
@@ -22,8 +22,8 @@ declare namespace DataScroller {
         onLazyLoad?(e: LazyLoadParams): void;
         itemTemplate?(item: any): React.ReactNode;
     }
-}
 
-export declare class DataScroller extends React.Component<DataScroller.DataScrollerProps, any> {
-    public load(): void;
+    export class DataScroller extends React.Component<DataScrollerProps, any> {
+        public load(): void;
+    }
 }

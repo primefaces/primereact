@@ -1,7 +1,7 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-declare namespace Dropdown {
+declare module 'primereact/dropdown' {
 
     type OptionGroupTemplateType = React.ReactNode | ((option: any, index: number) => React.ReactNode);
 
@@ -12,6 +12,8 @@ declare namespace Dropdown {
     type EmptyFilterMessageType = React.ReactNode | ((props: DropdownProps) => React.ReactNode);
 
     type OptionDisabledType = string | ((option: any) => boolean);
+
+    type AppendToType = 'self' | HTMLElement | undefined | null;
 
     interface ChangeTargetOptions {
         name: string;
@@ -27,7 +29,7 @@ declare namespace Dropdown {
         target: ChangeTargetOptions;
     }
 
-    interface DropdownProps {
+    export interface DropdownProps {
         id?: string;
         inputRef?: React.Ref<HTMLSelectElement>;
         name?: string;
@@ -54,7 +56,7 @@ declare namespace Dropdown {
         placeholder?: string;
         required?: boolean;
         disabled?: boolean;
-        appendTo?: HTMLElement | string;
+        appendTo?: AppendToType;
         tabIndex?: number;
         autoFocus?: boolean;
         filterInputAutoFocus?: boolean;
@@ -81,6 +83,6 @@ declare namespace Dropdown {
         onShow?(): void;
         onHide?(): void;
     }
-}
 
-export declare class Dropdown extends React.Component<Dropdown.DropdownProps, any> { }
+    export class Dropdown extends React.Component<DropdownProps, any> { }
+}
