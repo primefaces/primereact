@@ -50,15 +50,6 @@ declare module 'primereact/datatable' {
         [key: string]: boolean;
     }
 
-    interface ShowElementParams {
-        data: any;
-    }
-
-    interface EventParams {
-        originalEvent: React.SyntheticEvent;
-        value: any;
-    }
-
     interface PageParams {
         first: number;
         rows: number;
@@ -84,12 +75,20 @@ declare module 'primereact/datatable' {
         filters: FilterMeta;
     }
 
-    interface RowEventParams extends EventParams {
-        index: number;
+    interface SelectionChangeParams {
+        originalEvent: React.SyntheticEvent;
+        value: any;
+        [key: string]: any;
+    }
+
+    interface RowEventParams {
+        originalEvent: React.SyntheticEvent;
+        data: any;
     }
 
     interface RowClickEventParams extends Omit<RowEventParams, 'originalEvent'> {
         originalEvent: React.MouseEvent<HTMLElement>;
+        index: number;
     }
 
     interface CellClickEventParams {
@@ -102,7 +101,11 @@ declare module 'primereact/datatable' {
         selected: boolean;
     }
 
-    interface RowEditSaveParams extends RowEventParams {
+    interface RowEditParams extends RowEventParams {
+        index: number;
+    }
+
+    interface RowEditSaveParams extends RowEditParams {
         valid: boolean;
     }
 
@@ -206,10 +209,10 @@ declare module 'primereact/datatable' {
         editingRows?: any[] | EditingRows;
         expandableRowGroups?: boolean;
         rowHover?: boolean;
-        showSelectionElement?(e: ShowElementParams): boolean | undefined | null;
-        showReorderElement?(e: ShowElementParams): boolean | undefined | null;
-        onSelectionChange?(e: EventParams): void;
-        onContextMenuSelectionChange?(e: EventParams): void;
+        showSelectionElement?(data: any): boolean | undefined | null;
+        showRowReorderElement?(data: any): boolean | undefined | null;
+        onSelectionChange?(e: SelectionChangeParams): void;
+        onContextMenuSelectionChange?(e: RowEventParams): void;
         rowExpansionTemplate?(data: any): React.ReactNode;
         onRowToggle?(e: RowToggleParams): void;
         rowClassName?(data: any): object;
@@ -224,20 +227,20 @@ declare module 'primereact/datatable' {
         onRowDoubleClick?(e: RowClickEventParams): void;
         onRowSelect?(e: SelectParams): void;
         onRowUnselect?(e: UnselectParams): void;
-        onRowExpand?(e: EventParams): void;
-        onRowCollapse?(e: EventParams): void;
+        onRowExpand?(e: RowEventParams): void;
+        onRowCollapse?(e: RowEventParams): void;
         onCellClick?(e: CellClickEventParams): void;
         onCellSelect?(e: SelectParams): void;
         onCellUnselect?(e: UnselectParams): void;
-        onContextMenu?(e: EventParams): void;
+        onContextMenu?(e: RowEventParams): void;
         onColReorder?(e: ColReorderParams): void;
         onRowReorder?(e: RowReorderParams): void;
         onValueChange?(value: any[]): void;
         rowEditorValidator?(data: any): boolean;
-        onRowEditInit?(e: RowEventParams): void;
+        onRowEditInit?(e: RowEditParams): void;
         onRowEditSave?(e: RowEditSaveParams): void;
-        onRowEditCancel?(e: RowEventParams): void;
-        onRowEditChange?(e: RowEventParams): void;
+        onRowEditCancel?(e: RowEditParams): void;
+        onRowEditChange?(e: RowEditParams): void;
         exportFunction?(e: ExportFunctionParams): any;
         customSaveState?(state: object): void;
         customRestoreState?(): object;
