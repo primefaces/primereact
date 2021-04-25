@@ -1,4 +1,665 @@
 {
+    "6.3.1": {
+        "datatable": [
+            {
+                "number": 1983,
+                "title": "DataTable - EventParams - wrong interface attribute",
+                "url": "https://github.com/primefaces/primereact/issues/1983"
+            },
+            {
+                "number": 1976,
+                "title": "The rowData has wrong type on DataTable",
+                "url": "https://github.com/primefaces/primereact/issues/1976"
+            },
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "carousel": [
+            {
+                "number": 1981,
+                "title": "Galleria and Carousel is not working as expected",
+                "url": "https://github.com/primefaces/primereact/issues/1981"
+            },
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "galleria": [
+            {
+                "number": 1981,
+                "title": "Galleria and Carousel is not working as expected",
+                "url": "https://github.com/primefaces/primereact/issues/1981"
+            },
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "dropdown": [
+            {
+                "number": 1982,
+                "title": "The optionDisabled property is wrongly typed",
+                "url": "https://github.com/primefaces/primereact/issues/1982"
+            },
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "listbox": [
+            {
+                "number": 1982,
+                "title": "The optionDisabled property is wrongly typed",
+                "url": "https://github.com/primefaces/primereact/issues/1982"
+            },
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "multiselect": [
+            {
+                "number": 1982,
+                "title": "The optionDisabled property is wrongly typed",
+                "url": "https://github.com/primefaces/primereact/issues/1982"
+            },
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "selectbutton": [
+            {
+                "number": 1982,
+                "title": "The optionDisabled property is wrongly typed",
+                "url": "https://github.com/primefaces/primereact/issues/1982"
+            },
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "inputtext": [
+            {
+                "number": 1977,
+                "title": "Improve filled control on InputText",
+                "url": "https://github.com/primefaces/primereact/issues/1977"
+            },
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "password": [
+            {
+                "number": 1978,
+                "title": "The panel always stays open with browser's autofill feature on Password",
+                "url": "https://github.com/primefaces/primereact/issues/1978"
+            },
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "accordion": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "autocomplete": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "avatar": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "avatargroup": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "badge": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "breadcrumb": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "button": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "calendar": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "captcha": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "card": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "cascadeselect": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "chart": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "checkbox": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "chip": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "chips": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "colorpicker": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "column": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "columngroup": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "confirmdialog": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "confirmpopup": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "contextmenu": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "datascroller": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "dataview": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "deferredcontent": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "dialog": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "divider": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "editor": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "fieldset": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "fileupload": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "fullcalendar": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "gmap": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "inplace": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "inputmask": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "inputnumber": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "inputswitch": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "inputtextarea": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "knob": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "megamenu": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "menu": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "menubar": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "message": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "messages": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "multistatecheckbox": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "orderlist": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "organizationchart": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "overlaypanel": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "paginator": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "panel": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "panelmenu": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "picklist": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "progressbar": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "progressspinner": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "radiobutton": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "rating": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "ripple": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "row": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "scrollpanel": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "scrolltop": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "sidebar": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "skeleton": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "slidemenu": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "slider": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "splitbutton": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "splitter": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "steps": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "tabmenu": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "tabview": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "tag": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "tieredmenu": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "timeline": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "toast": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "togglebutton": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "toolbar": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "tooltip": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "tree": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "treeselect": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "treetable": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ],
+        "tristatecheckbox": [
+            {
+                "number": 1979,
+                "title": "Typescript: Props aren't exported anymore",
+                "url": "https://github.com/primefaces/primereact/issues/1979"
+            }
+        ]
+    },
     "6.3.0": {
         "panelmenu": [
             {
@@ -6026,1965 +6687,6 @@
                 "number": 1152,
                 "title": "Add onRemove callback to FileUpload",
                 "url": "https://github.com/primefaces/primereact/issues/1152"
-            }
-        ]
-    },
-
-    "3.4.0": {
-        "datatable": [
-            {
-                "number": 1148,
-                "title": "Add expandableRowGroups property to DataTable",
-                "url": "https://github.com/primefaces/primereact/issues/1148"
-            },
-            {
-                "number": 1155,
-                "title": "When the buttons inside the components are clicked, they submit the form",
-                "url": "https://github.com/primefaces/primereact/issues/1155"
-            },
-            {
-                "number": 1142,
-                "title": "Add removableSort property to DataTable",
-                "url": "https://github.com/primefaces/primereact/issues/1142"
-            }
-        ],
-        "inputtextarea": [
-            {
-                "number": 1127,
-                "title": "InputTextarea does not render props like cols and rows",
-                "url": "https://github.com/primefaces/primereact/issues/1127"
-            }
-        ],
-        "panelmenu": [
-            {
-                "number": 1121,
-                "title": "PanelMenu Icon does not show for entries without sub children",
-                "url": "https://github.com/primefaces/primereact/issues/1121"
-            }
-        ],
-        "inputmask": [
-            {
-                "number": 1156,
-                "title": "When the InputMask is focused, the mask disappears",
-                "url": "https://github.com/primefaces/primereact/issues/1156"
-            },
-            {
-                "number": 1021,
-                "title": "InputMask is not changing the mask at runtime.",
-                "url": "https://github.com/primefaces/primereact/issues/1021"
-            }
-        ],
-        "dropdown": [
-            {
-                "number": 1158,
-                "title": "Wrong property name on the propTypes definition of Dropdown ",
-                "url": "https://github.com/primefaces/primereact/issues/1158"
-            },
-            {
-                "number": 1053,
-                "title": "Dropdown cannot open the panel after double clicking an option",
-                "url": "https://github.com/primefaces/primereact/issues/1053"
-            }
-        ],
-        "dataview": [
-            {
-                "number": 1131,
-                "title": "Some DataView lazy and loading types missing",
-                "url": "https://github.com/primefaces/primereact/issues/1131"
-            },
-            {
-                "number": 1155,
-                "title": "When the buttons inside the components are clicked, they submit the form",
-                "url": "https://github.com/primefaces/primereact/issues/1155"
-            }
-        ],
-        "slider": [
-            {
-                "number": 1094,
-                "title": "Deadlock situation in range slider",
-                "url": "https://github.com/primefaces/primereact/issues/1094"
-            }
-        ],
-        "contextmenu": [
-            {
-                "number": 1118,
-                "title": "ContextMenu.d.ts has wrong property name",
-                "url": "https://github.com/primefaces/primereact/issues/1118"
-            }
-        ],
-        "calendar": [
-            {
-                "number": 1155,
-                "title": "When the buttons inside the components are clicked, they submit the form",
-                "url": "https://github.com/primefaces/primereact/issues/1155"
-            },
-            {
-                "number": 1157,
-                "title": "Calendar component keyboard support",
-                "url": "https://github.com/primefaces/primereact/issues/1157"
-            }
-        ],
-        "carousel": [
-            {
-                "number": 1155,
-                "title": "When the buttons inside the components are clicked, they submit the form",
-                "url": "https://github.com/primefaces/primereact/issues/1155"
-            },
-            {
-                "number": 1154,
-                "title": "The icon of the next button has wrong class name on Carousel",
-                "url": "https://github.com/primefaces/primereact/issues/1154"
-            }
-        ],
-        "dialog": [
-            {
-                "number": 1155,
-                "title": "When the buttons inside the components are clicked, they submit the form",
-                "url": "https://github.com/primefaces/primereact/issues/1155"
-            },
-            {
-                "number": 1138,
-                "title": "Enhance Dialog Positioning",
-                "url": "https://github.com/primefaces/primereact/issues/1138"
-            }
-        ],
-        "editor": [
-            {
-                "number": 1155,
-                "title": "When the buttons inside the components are clicked, they submit the form",
-                "url": "https://github.com/primefaces/primereact/issues/1155"
-            }
-        ],
-        "fileupload": [
-            {
-                "number": 1155,
-                "title": "When the buttons inside the components are clicked, they submit the form",
-                "url": "https://github.com/primefaces/primereact/issues/1155"
-            }
-        ],
-        "toast": [
-            {
-                "number": 1155,
-                "title": "When the buttons inside the components are clicked, they submit the form",
-                "url": "https://github.com/primefaces/primereact/issues/1155"
-            }
-        ],
-        "lightbox": [
-            {
-                "number": 1155,
-                "title": "When the buttons inside the components are clicked, they submit the form",
-                "url": "https://github.com/primefaces/primereact/issues/1155"
-            }
-        ],
-        "messages": [
-            {
-                "number": 1155,
-                "title": "When the buttons inside the components are clicked, they submit the form",
-                "url": "https://github.com/primefaces/primereact/issues/1155"
-            }
-        ],
-        "multiselect": [
-            {
-                "number": 1155,
-                "title": "When the buttons inside the components are clicked, they submit the form",
-                "url": "https://github.com/primefaces/primereact/issues/1155"
-            }
-        ],
-        "organizationchart": [
-            {
-                "number": 1155,
-                "title": "When the buttons inside the components are clicked, they submit the form",
-                "url": "https://github.com/primefaces/primereact/issues/1155"
-            }
-        ],
-        "overlaypanel": [
-            {
-                "number": 1155,
-                "title": "When the buttons inside the components are clicked, they submit the form",
-                "url": "https://github.com/primefaces/primereact/issues/1155"
-            }
-        ],
-        "paginator": [
-            {
-                "number": 1155,
-                "title": "When the buttons inside the components are clicked, they submit the form",
-                "url": "https://github.com/primefaces/primereact/issues/1155"
-            }
-        ],
-        "sidebar": [
-            {
-                "number": 1155,
-                "title": "When the buttons inside the components are clicked, they submit the form",
-                "url": "https://github.com/primefaces/primereact/issues/1155"
-            }
-        ],
-        "utils": [
-            {
-                "number": 1157,
-                "title": "Calendar component keyboard support",
-                "url": "https://github.com/primefaces/primereact/issues/1157"
-            }
-        ],
-        "treetable": [
-            {
-                "number": 1129,
-                "title": "TreeTable default filter value is not showing in the filter widget ",
-                "url": "https://github.com/primefaces/primereact/issues/1129"
-            }
-        ]
-    },
-
-    "3.3.3": {
-        "multiselect": [
-            {
-                "number": 1074,
-                "title": "Add maxSelectedLabels property to MultiSelect",
-                "url": "https://github.com/primefaces/primereact/issues/1074"
-            },
-            {
-                "number": 1075,
-                "title": "Add selectedItemsLabel property to MultiSelect",
-                "url": "https://github.com/primefaces/primereact/issues/1075"
-            }
-        ],
-        "tree": [
-            {
-                "number": 1078,
-                "title": "Add disabled property to Tree",
-                "url": "https://github.com/primefaces/primereact/issues/1078"
-            },
-            {
-                "number": 1068,
-                "title": "Tree className property not working ",
-                "url": "https://github.com/primefaces/primereact/issues/1068"
-            }
-        ],
-        "treetable": [
-            {
-                "number": 1085,
-                "title": "Properties of TreeNodes on TreeTable not Working",
-                "url": "https://github.com/primefaces/primereact/issues/1085"
-            }
-        ],
-        "toast": [
-            {
-                "number": 1095,
-                "title": "Growl messages from \"bottom*\" is not displaying as expected",
-                "url": "https://github.com/primefaces/primereact/issues/1095"
-            }
-        ],
-        "calendar": [
-            {
-                "number": 1101,
-                "title": "Add repeat functionality to timer buttons on Calendar",
-                "url": "https://github.com/primefaces/primereact/issues/1101"
-            },
-            {
-                "number": 1056,
-                "title": "selectDate() set date to undefined when minDate is set and selected date is <= minDate",
-                "url": "https://github.com/primefaces/primereact/issues/1056"
-            }
-        ],
-        "datatable": [
-            {
-                "number": 617,
-                "title": "Datatable multisort broken",
-                "url": "https://github.com/primefaces/primereact/issues/617"
-            },
-            {
-                "number": 1102,
-                "title": "Add exportFunction property to DataTable",
-                "url": "https://github.com/primefaces/primereact/issues/1102"
-            },
-            {
-                "number": 1088,
-                "title": "Add reset method to DataTable",
-                "url": "https://github.com/primefaces/primereact/issues/1088"
-            },
-            {
-                "number": 1080,
-                "title": "onColReorder in Datatable parameter missing",
-                "url": "https://github.com/primefaces/primereact/issues/1080"
-            }
-        ],
-        "utils": [
-            {
-                "number": 1104,
-                "title": "DomHandler functions throw NPE on components",
-                "url": "https://github.com/primefaces/primereact/issues/1104"
-            },
-            {
-                "number": 1073,
-                "title": "Passing of data-* Attributes as Props",
-                "url": "https://github.com/primefaces/primereact/issues/1073"
-            }
-        ],
-        "sidebar": [
-            {
-                "number": 1065,
-                "title": "Sidebar dismissable is only updating whenever the visible prop updates",
-                "url": "https://github.com/primefaces/primereact/issues/1065"
-            }
-        ],
-        "button": [
-            {
-                "number": 1073,
-                "title": "Passing of data-* Attributes as Props",
-                "url": "https://github.com/primefaces/primereact/issues/1073"
-            }
-        ],
-        "inputswitch": [
-            {
-                "number": 1073,
-                "title": "Passing of data-* Attributes as Props",
-                "url": "https://github.com/primefaces/primereact/issues/1073"
-            }
-        ],
-        "inputtext": [
-            {
-                "number": 1073,
-                "title": "Passing of data-* Attributes as Props",
-                "url": "https://github.com/primefaces/primereact/issues/1073"
-            }
-        ],
-        "inputtextarea": [
-            {
-                "number": 1073,
-                "title": "Passing of data-* Attributes as Props",
-                "url": "https://github.com/primefaces/primereact/issues/1073"
-            }
-        ],
-        "password": [
-            {
-                "number": 1073,
-                "title": "Passing of data-* Attributes as Props",
-                "url": "https://github.com/primefaces/primereact/issues/1073"
-            }
-        ],
-        "message": [
-            {
-                "number": 1076,
-                "title": "className property of Message component not working",
-                "url": "https://github.com/primefaces/primereact/issues/1076"
-            }
-        ],
-        "column": [
-            {
-                "number": 1103,
-                "title": "Add exportable property to Column",
-                "url": "https://github.com/primefaces/primereact/issues/1103"
-            }
-        ]
-    },
-    "3.3.2": {
-        "datatable": [
-            {
-                "number": 1061,
-                "title": "Table state is not working with columnResizeMode=\"expand\" on DataTable",
-                "url": "https://github.com/primefaces/primereact/issues/1061"
-            }
-        ],
-        "calendar": [
-            {
-                "number": 1060,
-                "title": "Calendar component throws NPE after updating the value",
-                "url": "https://github.com/primefaces/primereact/issues/1060"
-            }
-        ]
-    },
-    "3.3.1": {
-        "carousel": [
-            {
-                "number": 1051,
-                "title": "Improve Carousel styles",
-                "url": "https://github.com/primefaces/primereact/issues/1051"
-            }
-        ]
-    },
-    "3.3.0": {
-        "selectbutton": [
-            {
-                "number": 1019,
-                "title": "Add className support to SelectButtonItems",
-                "url": "https://github.com/primefaces/primereact/issues/1019"
-            }
-        ],
-        "sidebar": [
-            {
-                "number": 1046,
-                "title": "Add closeOnEscape property to Sidebar",
-                "url": "https://github.com/primefaces/primereact/issues/1046"
-            }
-        ],
-        "inputtextarea": [
-            {
-                "number": 1040,
-                "title": "InputTextarea: Floating Label",
-                "url": "https://github.com/primefaces/primereact/issues/1040"
-            }
-        ],
-        "calendar": [
-            {
-                "number": 999,
-                "title": "Calendar Overlay doesnt open with current date after value update",
-                "url": "https://github.com/primefaces/primereact/issues/999"
-            }
-        ],
-        "common": [
-            {
-                "number": 1040,
-                "title": "InputTextarea: Floating Label",
-                "url": "https://github.com/primefaces/primereact/issues/1040"
-            }
-        ],
-        "inputtext": [
-            {
-                "number": 1040,
-                "title": "InputTextarea: Floating Label",
-                "url": "https://github.com/primefaces/primereact/issues/1040"
-            }
-        ],
-        "dropdown": [
-            {
-                "number": 1036,
-                "title": "Add filterInputAutoFocus property to Dropdown",
-                "url": "https://github.com/primefaces/primereact/issues/1036"
-            }
-        ],
-        "carousel": [
-            {
-                "number": 1030,
-                "title": "New Component: Carousel",
-                "url": "https://github.com/primefaces/primereact/issues/1030"
-            }
-        ],
-        "autocomplete": [
-            {
-                "number": 1045,
-                "title": "AutoComplete mode multiple ignores maxlength property",
-                "url": "https://github.com/primefaces/primereact/issues/1045"
-            }
-        ],
-        "datatable": [
-            {
-                "number": 1044,
-                "title": "The datatable is broken with scrollable and no columns settings",
-                "url": "https://github.com/primefaces/primereact/issues/1044"
-            }
-        ]
-    },
-    "3.2.0": {
-        "fileupload": [
-            {
-                "number": 1008,
-                "title": "Add customUpload property to FileUpload",
-                "url": "https://github.com/primefaces/primereact/issues/1008"
-            }
-        ],
-        "datatable": [
-            {
-                "number": 1009,
-                "title": "DataTable column headers not displaying in nested table",
-                "url": "https://github.com/primefaces/primereact/issues/1009"
-            },
-            {
-                "number": 1007,
-                "title": "Improve columns' editor option on editing mode",
-                "url": "https://github.com/primefaces/primereact/issues/1007"
-            },
-            {
-                "number": 1003,
-                "title": "DataTable has null state under certain conditions",
-                "url": "https://github.com/primefaces/primereact/issues/1003"
-            },
-            {
-                "number": 809,
-                "title": "Add row edit support to DataTable",
-                "url": "https://github.com/primefaces/primereact/issues/809"
-            },
-            {
-                "number": 1012,
-                "title": "DataTable with global filter and header checkbox selection select all records",
-                "url": "https://github.com/primefaces/primereact/issues/1012"
-            },
-            {
-                "number": 1005,
-                "title": "Add keyboard support to DataTable with Checkbox selection",
-                "url": "https://github.com/primefaces/primereact/issues/1005"
-            }
-        ],
-        "autocomplete": [
-            {
-                "number": 1010,
-                "title": "Add type property to AutoComplete",
-                "url": "https://github.com/primefaces/primereact/issues/1010"
-            }
-        ],
-        "column": [
-            {
-                "number": 809,
-                "title": "Add row edit support to DataTable",
-                "url": "https://github.com/primefaces/primereact/issues/809"
-            }
-        ],
-        "inputmask": [
-            {
-                "number": 998,
-                "title": "Value doesnt change on Input mask when unmask is enabled",
-                "url": "https://github.com/primefaces/primereact/issues/998"
-            }
-        ]
-    },
-    "3.1.9": {
-        "progressbar": [
-            {
-                "number": 978,
-                "title": "Add displayValueTemplate property to ProgressBar",
-                "url": "https://github.com/primefaces/primereact/issues/978"
-            },
-            {
-                "number": 973,
-                "title": "ProgressBar does not show value for 0%",
-                "url": "https://github.com/primefaces/primereact/issues/973"
-            }
-        ],
-        "datatable": [
-            {
-                "number": 986,
-                "title": "Nested originalEvent in DataTable header RowCheckbox event ",
-                "url": "https://github.com/primefaces/primereact/issues/986"
-            },
-            {
-                "number": 980,
-                "title": "Typings missing in DataTable: resetColumnOrder",
-                "url": "https://github.com/primefaces/primereact/issues/980"
-            }
-        ],
-        "radiobutton": [
-            {
-                "number": 975,
-                "title": "Add tabIndex prop to RadioButton",
-                "url": "https://github.com/primefaces/primereact/issues/975"
-            },
-            {
-                "number": 972,
-                "title": "Tooltips appear with old contents after being undefined",
-                "url": "https://github.com/primefaces/primereact/issues/972"
-            }
-        ],
-        "dialog": [
-            {
-                "number": 988,
-                "title": "Add focusOnShow property to Dialog",
-                "url": "https://github.com/primefaces/primereact/issues/988"
-            }
-        ],
-        "tooltip": [
-            {
-                "number": 994,
-                "title": "Add className option to Tooltip",
-                "url": "https://github.com/primefaces/primereact/issues/994"
-            }
-        ],
-        "inputmask": [
-            {
-                "number": 996,
-                "title": "Style props doesnt update after re-rendering with Inputmask",
-                "url": "https://github.com/primefaces/primereact/issues/996"
-            },
-            {
-                "number": 972,
-                "title": "Tooltips appear with old contents after being undefined",
-                "url": "https://github.com/primefaces/primereact/issues/972"
-            }
-        ],
-        "spinner": [
-            {
-                "number": 976,
-                "title": "Add tabIndex prop to Spinner",
-                "url": "https://github.com/primefaces/primereact/issues/976"
-            },
-            {
-                "number": 972,
-                "title": "Tooltips appear with old contents after being undefined",
-                "url": "https://github.com/primefaces/primereact/issues/972"
-            },
-            {
-                "number": 1001,
-                "title": "Wrong typings for the property of Spinner",
-                "url": "https://github.com/primefaces/primereact/issues/1001"
-            }
-        ],
-        "button": [
-            {
-                "number": 972,
-                "title": "Tooltips appear with old contents after being undefined",
-                "url": "https://github.com/primefaces/primereact/issues/972"
-            }
-        ],
-        "autocomplete": [
-            {
-                "number": 972,
-                "title": "Tooltips appear with old contents after being undefined",
-                "url": "https://github.com/primefaces/primereact/issues/972"
-            }
-        ],
-        "calendar": [
-            {
-                "number": 972,
-                "title": "Tooltips appear with old contents after being undefined",
-                "url": "https://github.com/primefaces/primereact/issues/972"
-            }
-        ],
-        "checkbox": [
-            {
-                "number": 972,
-                "title": "Tooltips appear with old contents after being undefined",
-                "url": "https://github.com/primefaces/primereact/issues/972"
-            }
-        ],
-        "colorpicker": [
-            {
-                "number": 972,
-                "title": "Tooltips appear with old contents after being undefined",
-                "url": "https://github.com/primefaces/primereact/issues/972"
-            }
-        ],
-        "dropdown": [
-            {
-                "number": 972,
-                "title": "Tooltips appear with old contents after being undefined",
-                "url": "https://github.com/primefaces/primereact/issues/972"
-            }
-        ],
-        "inputswitch": [
-            {
-                "number": 972,
-                "title": "Tooltips appear with old contents after being undefined",
-                "url": "https://github.com/primefaces/primereact/issues/972"
-            }
-        ],
-        "inputtext": [
-            {
-                "number": 972,
-                "title": "Tooltips appear with old contents after being undefined",
-                "url": "https://github.com/primefaces/primereact/issues/972"
-            }
-        ],
-        "inputtextarea": [
-            {
-                "number": 972,
-                "title": "Tooltips appear with old contents after being undefined",
-                "url": "https://github.com/primefaces/primereact/issues/972"
-            }
-        ],
-        "listbox": [
-            {
-                "number": 972,
-                "title": "Tooltips appear with old contents after being undefined",
-                "url": "https://github.com/primefaces/primereact/issues/972"
-            }
-        ],
-        "multiselect": [
-            {
-                "number": 972,
-                "title": "Tooltips appear with old contents after being undefined",
-                "url": "https://github.com/primefaces/primereact/issues/972"
-            }
-        ],
-        "password": [
-            {
-                "number": 972,
-                "title": "Tooltips appear with old contents after being undefined",
-                "url": "https://github.com/primefaces/primereact/issues/972"
-            }
-        ],
-        "rating": [
-            {
-                "number": 972,
-                "title": "Tooltips appear with old contents after being undefined",
-                "url": "https://github.com/primefaces/primereact/issues/972"
-            }
-        ],
-        "selectbutton": [
-            {
-                "number": 972,
-                "title": "Tooltips appear with old contents after being undefined",
-                "url": "https://github.com/primefaces/primereact/issues/972"
-            }
-        ],
-        "splitbutton": [
-            {
-                "number": 972,
-                "title": "Tooltips appear with old contents after being undefined",
-                "url": "https://github.com/primefaces/primereact/issues/972"
-            }
-        ],
-        "togglebutton": [
-            {
-                "number": 972,
-                "title": "Tooltips appear with old contents after being undefined",
-                "url": "https://github.com/primefaces/primereact/issues/972"
-            }
-        ],
-        "tristatecheckbox": [
-            {
-                "number": 972,
-                "title": "Tooltips appear with old contents after being undefined",
-                "url": "https://github.com/primefaces/primereact/issues/972"
-            }
-        ],
-        "contextmenu": [
-            {
-                "number": 1000,
-                "title": "Export hide() for ContextMenu in type definition file",
-                "url": "https://github.com/primefaces/primereact/issues/1000"
-            }
-        ]
-    },
-    "3.1.8": {
-        "datatable": [
-            {
-                "number": 944,
-                "title": "The DataTable will sort a column when shrinking it on resize",
-                "url": "https://github.com/primefaces/primereact/issues/944"
-            },
-            {
-                "number": 959,
-                "title": "DataTable fails to render if columns are mapped and has a static column",
-                "url": "https://github.com/primefaces/primereact/issues/959"
-            },
-            {
-                "number": 961,
-                "title": "Datatable rowGroup with rowSpan mode and pagination fails on page break",
-                "url": "https://github.com/primefaces/primereact/issues/961"
-            },
-            {
-                "number": 934,
-                "title": "Add shift key selection support to DataTable with multiple mode",
-                "url": "https://github.com/primefaces/primereact/issues/934"
-            },
-            {
-                "number": 967,
-                "title": "Datatable rowGroup with rowSpan mode: row separator line style on group break",
-                "url": "https://github.com/primefaces/primereact/issues/967"
-            }
-        ],
-        "datascroller": [
-            {
-                "number": 955,
-                "title": "Simple DataScroller does not display items.",
-                "url": "https://github.com/primefaces/primereact/issues/955"
-            }
-        ],
-        "calendar": [
-            {
-                "number": 956,
-                "title": "Month View shows a redundant week on the calendar",
-                "url": "https://github.com/primefaces/primereact/issues/956"
-            },
-            {
-                "number": 968,
-                "title": "Calendar ButtonBar Clear button does not use clearButtonStyleClass prop",
-                "url": "https://github.com/primefaces/primereact/issues/968"
-            }
-        ],
-        "checkbox": [
-            {
-                "number": 952,
-                "title": "Add required prop to Checkbox",
-                "url": "https://github.com/primefaces/primereact/issues/952"
-            },
-            {
-                "number": 953,
-                "title": "Add required prop to RadioButton",
-                "url": "https://github.com/primefaces/primereact/issues/953"
-            }
-        ],
-        "radiobutton": [
-            {
-                "number": 952,
-                "title": "Add required prop to Checkbox",
-                "url": "https://github.com/primefaces/primereact/issues/952"
-            },
-            {
-                "number": 953,
-                "title": "Add required prop to RadioButton",
-                "url": "https://github.com/primefaces/primereact/issues/953"
-            }
-        ],
-        "autocomplete": [
-            {
-                "number": 963,
-                "title": "Add autoFocus attribute to Autocomplete",
-                "url": "https://github.com/primefaces/primereact/issues/963"
-            }
-        ],
-        "togglebutton": [
-            {
-                "number": 957,
-                "title": "Add tabIndex prop to ToggleButton",
-                "url": "https://github.com/primefaces/primereact/issues/957"
-            }
-        ],
-        "toast": [
-            {
-                "number": 965,
-                "title": "Growl detail should be placed in <div> not <p>",
-                "url": "https://github.com/primefaces/primereact/issues/965"
-            }
-        ],
-        "picklist": [
-            {
-                "number": 962,
-                "title": "Add onTargetSelect and onSourceSelect props to Picklist",
-                "url": "https://github.com/primefaces/primereact/issues/962"
-            }
-        ]
-    },
-    "3.1.7": {
-        "chart": [
-            {
-                "number": 946,
-                "title": "Charts always redraw when they are updated",
-                "url": "https://github.com/primefaces/primereact/issues/946"
-            }
-        ]
-    },
-    "3.1.6": {
-        "chart": [
-            {
-                "number": 945,
-                "title": "The ChartJs API is not imported correctly",
-                "url": "https://github.com/primefaces/primereact/issues/945"
-            }
-        ]
-    },
-    "3.1.5": {
-        "chips": [
-            {
-                "number": 932,
-                "title": "Tooltip in chips does not work properly",
-                "url": "https://github.com/primefaces/primereact/issues/932"
-            },
-            {
-                "number": 918,
-                "title": "Close icon is still active on the disabled Chips ",
-                "url": "https://github.com/primefaces/primereact/issues/918"
-            }
-        ],
-        "tooltip": [
-            {
-                "number": 932,
-                "title": "Tooltip in chips does not work properly",
-                "url": "https://github.com/primefaces/primereact/issues/932"
-            }
-        ],
-        "dropdown": [
-            {
-                "number": 937,
-                "title": "The hide method of Dropdown throws an exception on console",
-                "url": "https://github.com/primefaces/primereact/issues/937"
-            },
-            {
-                "number": 933,
-                "title": "The \"required\" prop is not working on Dropdown",
-                "url": "https://github.com/primefaces/primereact/issues/933"
-            }
-        ],
-        "spinner": [
-            {
-                "number": 924,
-                "title": "Add formatInput prop to Spinner",
-                "url": "https://github.com/primefaces/primereact/issues/924"
-            },
-            {
-                "number": 925,
-                "title": "Add decimalSeparator and thousandSeparator props to Spinner",
-                "url": "https://github.com/primefaces/primereact/issues/925"
-            },
-            {
-                "number": 920,
-                "title": "Add required, pattern and placeholder props to Spinner. ",
-                "url": "https://github.com/primefaces/primereact/issues/920"
-            }
-        ],
-        "sidebar": [
-            {
-                "number": 910,
-                "title": "Second Sidebar reset blockScroll",
-                "url": "https://github.com/primefaces/primereact/issues/910"
-            }
-        ],
-        "checkbox": [
-            {
-                "number": 940,
-                "title": "When components are placed placed inside a label element clicking on the component fires the click event twice",
-                "url": "https://github.com/primefaces/primereact/issues/940"
-            }
-        ],
-        "progressspinner": [
-            {
-                "number": 908,
-                "title": "ProgressSpinner not visible in IE11",
-                "url": "https://github.com/primefaces/primereact/issues/908"
-            }
-        ],
-        "editor": [
-            {
-                "number": 938,
-                "title": "Add theme prop to Editor",
-                "url": "https://github.com/primefaces/primereact/issues/938"
-            }
-        ],
-        "calendar": [
-            {
-                "number": 907,
-                "title": "Wrong type for showWeek in Calendar.d.ts",
-                "url": "https://github.com/primefaces/primereact/issues/907"
-            },
-            {
-                "number": 926,
-                "title": "The 'showWeek' prop throws an error with TypedScript on Calendar",
-                "url": "https://github.com/primefaces/primereact/issues/926"
-            }
-        ],
-        "dialog": [
-            {
-                "number": 916,
-                "title": "Add ariaCloseIconLabel prop to Dialog",
-                "url": "https://github.com/primefaces/primereact/issues/916"
-            }
-        ],
-        "chart": [
-            {
-                "number": 913,
-                "title": "Can't resolve 'chart.js/src/chart.js'",
-                "url": "https://github.com/primefaces/primereact/issues/913"
-            }
-        ],
-        "toast": [
-            {
-                "number": 914,
-                "title": "onRemove event does not exists on Growl component",
-                "url": "https://github.com/primefaces/primereact/issues/914"
-            }
-        ],
-        "messages": [
-            {
-                "number": 930,
-                "title": "Add \"replace\" method in Messages component",
-                "url": "https://github.com/primefaces/primereact/issues/930"
-            },
-            {
-                "number": 928,
-                "title": "Empty array crashes Messages component",
-                "url": "https://github.com/primefaces/primereact/issues/928"
-            }
-        ]
-    },
-    "3.1.4": {
-        "chips": [
-            {
-                "number": 897,
-                "title": "onFocus and onBlur for Chips",
-                "url": "https://github.com/primefaces/primereact/issues/897"
-            }
-        ],
-        "datatable": [
-            {
-                "number": 899,
-                "title": "The ability to reset columnOrder in DataTable",
-                "url": "https://github.com/primefaces/primereact/issues/899"
-            },
-            {
-                "number": 881,
-                "title": "The scroll bar is not moving correctly on the DataTable with resizeMode=\"expand\"",
-                "url": "https://github.com/primefaces/primereact/issues/881"
-            },
-            {
-                "number": 884,
-                "title": "DataTable expanded rows collapse when modifying one property of a record",
-                "url": "https://github.com/primefaces/primereact/issues/884"
-            },
-            {
-                "number": 777,
-                "title": "DataTable onValueChange callback one key press behind when using custom InputText filter ",
-                "url": "https://github.com/primefaces/primereact/issues/777"
-            },
-            {
-                "number": 843,
-                "title": "Unlogical editor navigation with shift+tab in DataTable",
-                "url": "https://github.com/primefaces/primereact/issues/843"
-            },
-            {
-                "number": 891,
-                "title": "CellEditor should have onSubmit and onCancel method.",
-                "url": "https://github.com/primefaces/primereact/issues/891"
-            },
-            {
-                "number": 896,
-                "title": "Data*: alwaysShowPaginator prop not used",
-                "url": "https://github.com/primefaces/primereact/issues/896"
-            }
-        ],
-        "utils": [
-            {
-                "number": 881,
-                "title": "The scroll bar is not moving correctly on the DataTable with resizeMode=\"expand\"",
-                "url": "https://github.com/primefaces/primereact/issues/881"
-            }
-        ],
-        "editor": [
-            {
-                "number": 904,
-                "title": "Modules property for Editor",
-                "url": "https://github.com/primefaces/primereact/issues/904"
-            }
-        ],
-        "panel": [
-            {
-                "number": 888,
-                "title": "Add expandIcon and collapseIcon props to Panel component",
-                "url": "https://github.com/primefaces/primereact/issues/888"
-            }
-        ],
-        "dialog": [
-            {
-                "number": 905,
-                "title": "Add iconsTemplate to Dialog",
-                "url": "https://github.com/primefaces/primereact/issues/905"
-            }
-        ],
-        "fileupload": [
-            {
-                "number": 802,
-                "title": "Cannot read property 'show' of undefined at FileUpload.validate ",
-                "url": "https://github.com/primefaces/primereact/issues/802"
-            }
-        ],
-        "dropdown": [
-            {
-                "number": 875,
-                "title": "Dropdown showClear not always displayed",
-                "url": "https://github.com/primefaces/primereact/issues/875"
-            },
-            {
-                "number": 844,
-                "title": "Editable Dropdown should support maxLength",
-                "url": "https://github.com/primefaces/primereact/issues/844"
-            },
-            {
-                "number": 903,
-                "title": "Not able to set focus on Dropdown component",
-                "url": "https://github.com/primefaces/primereact/issues/903"
-            },
-            {
-                "number": 874,
-                "title": "Support for disabling dropdown item(s).",
-                "url": "https://github.com/primefaces/primereact/issues/874"
-            }
-        ],
-        "column": [
-            {
-                "number": 891,
-                "title": "CellEditor should have onSubmit and onCancel method.",
-                "url": "https://github.com/primefaces/primereact/issues/891"
-            },
-            {
-                "number": 898,
-                "title": "DataTable sortFunction Typescript definition wrong",
-                "url": "https://github.com/primefaces/primereact/issues/898"
-            }
-        ],
-        "dataview": [
-            {
-                "number": 896,
-                "title": "Data*: alwaysShowPaginator prop not used",
-                "url": "https://github.com/primefaces/primereact/issues/896"
-            }
-        ],
-        "paginator": [
-            {
-                "number": 896,
-                "title": "Data*: alwaysShowPaginator prop not used",
-                "url": "https://github.com/primefaces/primereact/issues/896"
-            }
-        ],
-        "treetable": [
-            {
-                "number": 896,
-                "title": "Data*: alwaysShowPaginator prop not used",
-                "url": "https://github.com/primefaces/primereact/issues/896"
-            }
-        ],
-        "calendar": [
-            {
-                "number": 901,
-                "title": "Calendar time parsing broken for showSeconds == false",
-                "url": "https://github.com/primefaces/primereact/issues/901"
-            },
-            {
-                "number": 894,
-                "title": "Show week numbers for Calendar",
-                "url": "https://github.com/primefaces/primereact/issues/894"
-            }
-        ],
-        "selectitem": [
-            {
-                "number": 874,
-                "title": "Support for disabling dropdown item(s).",
-                "url": "https://github.com/primefaces/primereact/issues/874"
-            }
-        ]
-    },
-    "3.1.3": {
-        "calendar": [
-            {
-                "number": 869,
-                "title": "Improve outside click on Calendar",
-                "url": "https://github.com/primefaces/primereact/issues/869"
-            },
-            {
-                "number": 870,
-                "title": "Calendar panel is not aligned correctly on window resize",
-                "url": "https://github.com/primefaces/primereact/issues/870"
-            },
-            {
-                "number": 859,
-                "title": "The min/max date support is added to Calendar for monthNavigation and yearNavigation",
-                "url": "https://github.com/primefaces/primereact/issues/859"
-            },
-            {
-                "number": 856,
-                "title": "Calendar view=\"month\" does not allow typing",
-                "url": "https://github.com/primefaces/primereact/issues/856"
-            }
-        ],
-        "overlaypanel": [
-            {
-                "number": 865,
-                "title": "Missing method typings for OverlayPanel",
-                "url": "https://github.com/primefaces/primereact/issues/865"
-            },
-            {
-                "number": 873,
-                "title": "Multiple target support to OverlayPanel",
-                "url": "https://github.com/primefaces/primereact/issues/873"
-            },
-            {
-                "number": 872,
-                "title": "Improve outside click on OverlayPanel",
-                "url": "https://github.com/primefaces/primereact/issues/872"
-            },
-            {
-                "number": 871,
-                "title": "OverlayPanel's icon is in the wrong position after window is resized",
-                "url": "https://github.com/primefaces/primereact/issues/871"
-            }
-        ],
-        "dropdown": [
-            {
-                "number": 855,
-                "title": "Add ariaLabel and ariaLabelledBy properties to DropDown",
-                "url": "https://github.com/primefaces/primereact/issues/855"
-            }
-        ],
-        "datatable": [
-            {
-                "number": 849,
-                "title": "The tableStyle and tableClassName props have no effect on Scrollable DataTable",
-                "url": "https://github.com/primefaces/primereact/issues/849"
-            },
-            {
-                "number": 835,
-                "title": "onRowSelect called instead of onRowUnselect",
-                "url": "https://github.com/primefaces/primereact/issues/835"
-            },
-            {
-                "number": 662,
-                "title": "Datatable scrollHeight can't be changed",
-                "url": "https://github.com/primefaces/primereact/issues/662"
-            },
-            {
-                "number": 860,
-                "title": "Calendar used in DataTable is unable to switch months",
-                "url": "https://github.com/primefaces/primereact/issues/860"
-            },
-            {
-                "number": 851,
-                "title": "Add stateStorage property to DataTable.d.ts",
-                "url": "https://github.com/primefaces/primereact/issues/851"
-            }
-        ],
-        "utils": [
-            {
-                "number": 840,
-                "title": "Calendar is rendering behind the browser window.",
-                "url": "https://github.com/primefaces/primereact/issues/840"
-            },
-            {
-                "number": 868,
-                "title": "Flipped OverlayPanel rendered behind browser",
-                "url": "https://github.com/primefaces/primereact/issues/868"
-            }
-        ],
-        "chart": [
-            {
-                "number": 834,
-                "title": "Chart doesn't reload when new data is added to it",
-                "url": "https://github.com/primefaces/primereact/issues/834"
-            }
-        ],
-        "tree": [
-            {
-                "number": 842,
-                "title": "Add contentStyle and contentClassName props to Tree",
-                "url": "https://github.com/primefaces/primereact/issues/842"
-            }
-        ],
-        "dialog": [
-            {
-                "number": 854,
-                "title": "OnHide callback is not called when visibility property is changed",
-                "url": "https://github.com/primefaces/primereact/issues/854"
-            }
-        ]
-    },
-    "3.1.2": {
-        "datatable": [
-            {
-                "number": 830,
-                "title": "DataTable selection with uncontrolled sorting broken",
-                "url": "https://github.com/primefaces/primereact/issues/830"
-            }
-        ]
-    },
-    "3.1.1": {
-        "accordion": [
-            {
-                "number": 829,
-                "title": "On Accordion, the disabled head can be focused on ",
-                "url": "https://github.com/primefaces/primereact/issues/829"
-            }
-        ],
-        "datatable": [
-            {
-                "number": 813,
-                "title": "DataTable row selection slow with sortable columns",
-                "url": "https://github.com/primefaces/primereact/issues/813"
-            },
-            {
-                "number": 825,
-                "title": "Improve DataTable VirtualScrolling",
-                "url": "https://github.com/primefaces/primereact/issues/825"
-            },
-            {
-                "number": 800,
-                "title": "Exclude column from global filter",
-                "url": "https://github.com/primefaces/primereact/pull/800"
-            },
-            {
-                "number": 635,
-                "title": "Datatable does not scroll horizontally when there is no data",
-                "url": "https://github.com/primefaces/primereact/issues/635"
-            },
-            {
-                "number": 822,
-                "title": "Close datatable cell editor programmatically",
-                "url": "https://github.com/primefaces/primereact/issues/822"
-            }
-        ],
-        "autocomplete": [
-            {
-                "number": 814,
-                "title": "Overlays wrong position on initial/first render",
-                "url": "https://github.com/primefaces/primereact/issues/814"
-            }
-        ],
-        "colorpicker": [
-            {
-                "number": 814,
-                "title": "Overlays wrong position on initial/first render",
-                "url": "https://github.com/primefaces/primereact/issues/814"
-            },
-            {
-                "number": 784,
-                "title": "\"propTypes\" incorrectly named as \"propsTypes\"",
-                "url": "https://github.com/primefaces/primereact/issues/784"
-            }
-        ],
-        "dropdown": [
-            {
-                "number": 814,
-                "title": "Overlays wrong position on initial/first render",
-                "url": "https://github.com/primefaces/primereact/issues/814"
-            },
-            {
-                "number": 781,
-                "title": "Dropdown - TypeError: Cannot read property 'element' of null",
-                "url": "https://github.com/primefaces/primereact/issues/781"
-            },
-            {
-                "number": 826,
-                "title": "Remove autoWidth from Dropdown",
-                "url": "https://github.com/primefaces/primereact/issues/826"
-            },
-            {
-                "number": 805,
-                "title": "Dropdown duplicated IDs",
-                "url": "https://github.com/primefaces/primereact/issues/805"
-            }
-        ],
-        "multiselect": [
-            {
-                "number": 814,
-                "title": "Overlays wrong position on initial/first render",
-                "url": "https://github.com/primefaces/primereact/issues/814"
-            },
-            {
-                "number": 782,
-                "title": "Add onBlur and onFocus events to multiselect and chips",
-                "url": "https://github.com/primefaces/primereact/issues/782"
-            }
-        ],
-        "splitbutton": [
-            {
-                "number": 814,
-                "title": "Overlays wrong position on initial/first render",
-                "url": "https://github.com/primefaces/primereact/issues/814"
-            },
-            {
-                "number": 784,
-                "title": "\"propTypes\" incorrectly named as \"propsTypes\"",
-                "url": "https://github.com/primefaces/primereact/issues/784"
-            }
-        ],
-        "spinner": [
-            {
-                "number": 787,
-                "title": "Using \"maxlength\" of Spinner causes errors",
-                "url": "https://github.com/primefaces/primereact/issues/787"
-            },
-            {
-                "number": 784,
-                "title": "\"propTypes\" incorrectly named as \"propsTypes\"",
-                "url": "https://github.com/primefaces/primereact/issues/784"
-            }
-        ],
-        "progressbar": [
-            {
-                "number": 783,
-                "title": "Changes to prop does not render ProgressBar",
-                "url": "https://github.com/primefaces/primereact/issues/783"
-            }
-        ],
-        "column": [
-            {
-                "number": 825,
-                "title": "Improve DataTable VirtualScrolling",
-                "url": "https://github.com/primefaces/primereact/issues/825"
-            },
-            {
-                "number": 800,
-                "title": "Exclude column from global filter",
-                "url": "https://github.com/primefaces/primereact/pull/800"
-            },
-            {
-                "number": 784,
-                "title": "\"propTypes\" incorrectly named as \"propsTypes\"",
-                "url": "https://github.com/primefaces/primereact/issues/784"
-            }
-        ],
-        "overlaypanel": [
-            {
-                "number": 790,
-                "title": "Syntax error in optional typescript function interface",
-                "url": "https://github.com/primefaces/primereact/issues/790"
-            }
-        ],
-        "slidemenu": [
-            {
-                "number": 807,
-                "title": "SlideMenu empty after model change",
-                "url": "https://github.com/primefaces/primereact/issues/807"
-            },
-            {
-                "number": 784,
-                "title": "\"propTypes\" incorrectly named as \"propsTypes\"",
-                "url": "https://github.com/primefaces/primereact/issues/784"
-            }
-        ],
-        "utils": [
-            {
-                "number": 791,
-                "title": "DataTable crashes with a \"Cannot read property 'xxx' of undefined\" for nested objects",
-                "url": "https://github.com/primefaces/primereact/issues/791"
-            }
-        ],
-        "dialog": [
-            {
-                "number": 823,
-                "title": "Update dialog animations",
-                "url": "https://github.com/primefaces/primereact/issues/823"
-            }
-        ],
-        "fullcalendar": [
-            {
-                "number": 827,
-                "title": "Update to FullCalendar 4.0.1",
-                "url": "https://github.com/primefaces/primereact/issues/827"
-            },
-            {
-                "number": 784,
-                "title": "\"propTypes\" incorrectly named as \"propsTypes\"",
-                "url": "https://github.com/primefaces/primereact/issues/784"
-            }
-        ],
-        "dataview": [
-            {
-                "number": 824,
-                "title": "Fixed renderItem uses wrong [first] on lazy DataView.",
-                "url": "https://github.com/primefaces/primereact/pull/824"
-            },
-            {
-                "number": 784,
-                "title": "\"propTypes\" incorrectly named as \"propsTypes\"",
-                "url": "https://github.com/primefaces/primereact/issues/784"
-            }
-        ],
-        "fileupload": [
-            {
-                "number": 808,
-                "title": "FileUpload thows JS exception in Edge",
-                "url": "https://github.com/primefaces/primereact/issues/808"
-            }
-        ],
-        "calendar": [
-            {
-                "number": 784,
-                "title": "\"propTypes\" incorrectly named as \"propsTypes\"",
-                "url": "https://github.com/primefaces/primereact/issues/784"
-            }
-        ],
-        "datascroller": [
-            {
-                "number": 784,
-                "title": "\"propTypes\" incorrectly named as \"propsTypes\"",
-                "url": "https://github.com/primefaces/primereact/issues/784"
-            }
-        ],
-        "deferredcontent": [
-            {
-                "number": 784,
-                "title": "\"propTypes\" incorrectly named as \"propsTypes\"",
-                "url": "https://github.com/primefaces/primereact/issues/784"
-            }
-        ],
-        "editor": [
-            {
-                "number": 784,
-                "title": "\"propTypes\" incorrectly named as \"propsTypes\"",
-                "url": "https://github.com/primefaces/primereact/issues/784"
-            }
-        ],
-        "inputmask": [
-            {
-                "number": 784,
-                "title": "\"propTypes\" incorrectly named as \"propsTypes\"",
-                "url": "https://github.com/primefaces/primereact/issues/784"
-            }
-        ],
-        "inputswitch": [
-            {
-                "number": 784,
-                "title": "\"propTypes\" incorrectly named as \"propsTypes\"",
-                "url": "https://github.com/primefaces/primereact/issues/784"
-            }
-        ],
-        "orderlist": [
-            {
-                "number": 784,
-                "title": "\"propTypes\" incorrectly named as \"propsTypes\"",
-                "url": "https://github.com/primefaces/primereact/issues/784"
-            }
-        ],
-        "organizationchart": [
-            {
-                "number": 784,
-                "title": "\"propTypes\" incorrectly named as \"propsTypes\"",
-                "url": "https://github.com/primefaces/primereact/issues/784"
-            }
-        ],
-        "paginator": [
-            {
-                "number": 784,
-                "title": "\"propTypes\" incorrectly named as \"propsTypes\"",
-                "url": "https://github.com/primefaces/primereact/issues/784"
-            }
-        ],
-        "picklist": [
-            {
-                "number": 784,
-                "title": "\"propTypes\" incorrectly named as \"propsTypes\"",
-                "url": "https://github.com/primefaces/primereact/issues/784"
-            }
-        ],
-        "rating": [
-            {
-                "number": 784,
-                "title": "\"propTypes\" incorrectly named as \"propsTypes\"",
-                "url": "https://github.com/primefaces/primereact/issues/784"
-            }
-        ],
-        "row": [
-            {
-                "number": 784,
-                "title": "\"propTypes\" incorrectly named as \"propsTypes\"",
-                "url": "https://github.com/primefaces/primereact/issues/784"
-            }
-        ],
-        "slider": [
-            {
-                "number": 784,
-                "title": "\"propTypes\" incorrectly named as \"propsTypes\"",
-                "url": "https://github.com/primefaces/primereact/issues/784"
-            }
-        ],
-        "tree": [
-            {
-                "number": 784,
-                "title": "\"propTypes\" incorrectly named as \"propsTypes\"",
-                "url": "https://github.com/primefaces/primereact/issues/784"
-            }
-        ],
-        "treetable": [
-            {
-                "number": 784,
-                "title": "\"propTypes\" incorrectly named as \"propsTypes\"",
-                "url": "https://github.com/primefaces/primereact/issues/784"
-            }
-        ],
-        "sidebar": [
-            {
-                "number": 780,
-                "title": "propTypes error using new iconsTemplate",
-                "url": "https://github.com/primefaces/primereact/issues/780"
-            }
-        ],
-        "chart": [
-            {
-                "number": 812,
-                "title": "Chart with latest chart.js does not build",
-                "url": "https://github.com/primefaces/primereact/issues/812"
-            }
-        ]
-    },
-    "3.1.0": {
-        "datatable": [
-            {
-                "number": 774,
-                "title": "Datatable toggle issue after reordering",
-                "url": "https://github.com/primefaces/primereact/issues/774"
-            },
-            {
-                "number": 736,
-                "title": "TableState for DataTable",
-                "url": "https://github.com/primefaces/primereact/issues/736"
-            },
-            {
-                "number": 772,
-                "title": "TreeTableBodyCell.js: Uncaught TypeError: Cannot read property 'removeAttribute' of null",
-                "url": "https://github.com/primefaces/primereact/issues/772"
-            },
-            {
-                "number": 766,
-                "title": "Multiple selection in a table without data is selected by default",
-                "url": "https://github.com/primefaces/primereact/issues/766"
-            }
-        ],
-        "tree": [
-            {
-                "number": 769,
-                "title": "Filtering for Tree",
-                "url": "https://github.com/primefaces/primereact/issues/769"
-            }
-        ],
-        "common": [
-            {
-                "number": 760,
-                "title": "Improve style of p-link component",
-                "url": "https://github.com/primefaces/primereact/issues/760"
-            }
-        ],
-        "inputtextarea": [
-            {
-                "number": 773,
-                "title": "Inputtextarea autoresize invalid height issue after render",
-                "url": "https://github.com/primefaces/primereact/issues/773"
-            }
-        ],
-        "overlaypanel": [
-            {
-                "number": 763,
-                "title": "onClose event for OverlayPanel ",
-                "url": "https://github.com/primefaces/primereact/issues/763"
-            },
-            {
-                "number": 762,
-                "title": "Arrow for OverlayPanel",
-                "url": "https://github.com/primefaces/primereact/issues/762"
-            }
-        ],
-        "treetable": [
-            {
-                "number": 772,
-                "title": "TreeTableBodyCell.js: Uncaught TypeError: Cannot read property 'removeAttribute' of null",
-                "url": "https://github.com/primefaces/primereact/issues/772"
-            },
-            {
-                "number": 380,
-                "title": "Filtering for TreeTable",
-                "url": "https://github.com/primefaces/primereact/issues/380"
-            }
-        ],
-        "calendar": [
-            {
-                "number": 751,
-                "title": "code debugger in production mode \"component input calendar\"",
-                "url": "https://github.com/primefaces/primereact/issues/751"
-            }
-        ],
-        "dropdown": [
-            {
-                "number": 768,
-                "title": "Dropdown with dataKey attribute throws console errors.",
-                "url": "https://github.com/primefaces/primereact/issues/768"
-            }
-        ],
-        "sidebar": [
-            {
-                "number": 716,
-                "title": "Added customIcons render prop to Sidebar, to add new toolbar's icons",
-                "url": "https://github.com/primefaces/primereact/pull/716"
-            }
-        ],
-        "inputtext": [
-            {
-                "number": 761,
-                "title": "InputGroup border issue for using with other components",
-                "url": "https://github.com/primefaces/primereact/issues/761"
-            }
-        ],
-        "utils": [
-            {
-                "number": 736,
-                "title": "TableState for DataTable",
-                "url": "https://github.com/primefaces/primereact/issues/736"
-            }
-        ]
-    },
-    "3.0.0-Final": {
-        "spinner": [
-            {
-                "number": 743,
-                "title": "Spinner arrow keys not working",
-                "url": "https://github.com/primefaces/primereact/issues/743"
-            }
-        ],
-        "column": [
-            {
-                "number": 746,
-                "title": "Customizable editorValidatorEvent for IncellEditing",
-                "url": "https://github.com/primefaces/primereact/issues/746"
-            }
-        ],
-        "datatable": [
-            {
-                "number": 746,
-                "title": "Customizable editorValidatorEvent for IncellEditing",
-                "url": "https://github.com/primefaces/primereact/issues/746"
-            }
-        ],
-        "dropdown": [
-            {
-                "number": 739,
-                "title": "Paginator - Uncaught TypeError: this.getOptionLabel(...).toLowerCase is not a function",
-                "url": "https://github.com/primefaces/primereact/issues/739"
-            }
-        ],
-        "paginator": [
-            {
-                "number": 739,
-                "title": "Paginator - Uncaught TypeError: this.getOptionLabel(...).toLowerCase is not a function",
-                "url": "https://github.com/primefaces/primereact/issues/739"
-            }
-        ]
-    },
-    "3.0.0-rc.1": {
-        "datatable": [
-            {
-                "number": 668,
-                "title": "DataTable: hide column after reordering columns throws exception",
-                "url": "https://github.com/primefaces/primereact/issues/668"
-            },
-            {
-                "number": 730,
-                "title": "Incorrect column sortable prop type definition",
-                "url": "https://github.com/primefaces/primereact/issues/730"
-            },
-            {
-                "number": 734,
-                "title": "DataTable edit throws error on route change",
-                "url": "https://github.com/primefaces/primereact/issues/734"
-            }
-        ],
-        "inputswitch": [
-            {
-                "number": 735,
-                "title": "InputSwitch focus visuals are missing",
-                "url": "https://github.com/primefaces/primereact/issues/735"
-            }
-        ],
-        "scrollpanel": [
-            {
-                "number": 726,
-                "title": "ScrollPanel: Cannot read property 'classList' of null",
-                "url": "https://github.com/primefaces/primereact/issues/726"
-            }
-        ],
-        "multiselect": [
-            {
-                "number": 674,
-                "title": "MultiSelect - Support a fixed defaultLabel",
-                "url": "https://github.com/primefaces/primereact/issues/674"
-            },
-            {
-                "number": 733,
-                "title": "Rename defaultLabel to placeholder in MultiSelect",
-                "url": "https://github.com/primefaces/primereact/issues/733"
-            }
-        ],
-        "inputmask": [
-            {
-                "number": 686,
-                "title": "InputMask doesn't update the value according to state",
-                "url": "https://github.com/primefaces/primereact/issues/686"
-            }
-        ],
-        "editor": [
-            {
-                "number": 724,
-                "title": "Editor component cannot refresh it's value when the state change",
-                "url": "https://github.com/primefaces/primereact/issues/724"
-            }
-        ],
-        "checkbox": [
-            {
-                "number": 729,
-                "title": "Enhance accessibility for Checkbox with ARIA roles",
-                "url": "https://github.com/primefaces/primereact/issues/729"
-            }
-        ],
-        "dropdown": [
-            {
-                "number": 727,
-                "title": "Ability to use dataKey as the key in Dropdown",
-                "url": "https://github.com/primefaces/primereact/issues/727"
-            },
-            {
-                "number": 665,
-                "title": "Form validity is true, even though no Dropdown selection has been made.",
-                "url": "https://github.com/primefaces/primereact/issues/665"
-            }
-        ],
-        "calendar": [
-            {
-                "number": 706,
-                "title": "Header and Footer templates for Calendar component",
-                "url": "https://github.com/primefaces/primereact/issues/706"
-            }
-        ]
-    },
-    "3.0.0-beta.1": {
-        "sidebar": [
-            {
-                "number": 692,
-                "title": "Sidebar close icon should receive focus on open",
-                "url": "https://github.com/primefaces/primereact/issues/692"
-            }
-        ],
-        "inputswitch": [
-            {
-                "number": 695,
-                "title": "Keyboard Accessibility for InputSwitch",
-                "url": "https://github.com/primefaces/primereact/issues/695"
-            }
-        ],
-        "panel": [
-            {
-                "number": 710,
-                "title": "Reimplement Panel Animation with CSSTransition",
-                "url": "https://github.com/primefaces/primereact/issues/710"
-            },
-            {
-                "number": 712,
-                "title": "Reimplement Fieldset Animation with CSSTransition",
-                "url": "https://github.com/primefaces/primereact/issues/712"
-            }
-        ],
-        "orderlist": [
-            {
-                "number": 708,
-                "title": "OrderList droppoints are not highlighted",
-                "url": "https://github.com/primefaces/primereact/issues/708"
-            },
-            {
-                "number": 696,
-                "title": "Keyboard Accessibility for OrderList",
-                "url": "https://github.com/primefaces/primereact/issues/696"
-            }
-        ],
-        "togglebutton": [
-            {
-                "number": 689,
-                "title": "Improve ToggleButton Accessibility",
-                "url": "https://github.com/primefaces/primereact/issues/689"
-            }
-        ],
-        "listbox": [
-            {
-                "number": 690,
-                "title": "Improve Listbox Accessibility",
-                "url": "https://github.com/primefaces/primereact/issues/690"
-            }
-        ],
-        "menu": [
-            {
-                "number": 719,
-                "title": "Keyboard Accessibility for Menu",
-                "url": "https://github.com/primefaces/primereact/issues/719"
-            }
-        ],
-        "accordion": [
-            {
-                "number": 714,
-                "title": "Reimplement Accordion Animation with CSSTransition",
-                "url": "https://github.com/primefaces/primereact/issues/714"
-            },
-            {
-                "number": 717,
-                "title": "Remove certain props from Dialog",
-                "url": "https://github.com/primefaces/primereact/issues/717"
-            }
-        ],
-        "inplace": [
-            {
-                "number": 698,
-                "title": "Keyboard Accessibility for Inplace",
-                "url": "https://github.com/primefaces/primereact/issues/698"
-            }
-        ],
-        "tieredmenu": [
-            {
-                "number": 720,
-                "title": "Reimplement TieredMenu",
-                "url": "https://github.com/primefaces/primereact/issues/720"
-            },
-            {
-                "number": 700,
-                "title": "Keyboard Accessibility for TieredMenu",
-                "url": "https://github.com/primefaces/primereact/issues/700"
-            }
-        ],
-        "dialog": [
-            {
-                "number": 717,
-                "title": "Remove certain props from Dialog",
-                "url": "https://github.com/primefaces/primereact/issues/717"
-            },
-            {
-                "number": 715,
-                "title": "Reimplement Dialog Positioning",
-                "url": "https://github.com/primefaces/primereact/issues/715"
-            }
-        ],
-        "megamenu": [
-            {
-                "number": 702,
-                "title": "Keyboard Accessibility for MegaMenu",
-                "url": "https://github.com/primefaces/primereact/issues/702"
-            }
-        ],
-        "menubar": [
-            {
-                "number": 701,
-                "title": "Keyboard Accessibility for Menubar",
-                "url": "https://github.com/primefaces/primereact/issues/701"
-            },
-            {
-                "number": 721,
-                "title": "Reimplement Menubar",
-                "url": "https://github.com/primefaces/primereact/issues/721"
-            }
-        ],
-        "datatable": [
-            {
-                "number": 693,
-                "title": "DataTable/TreeTable sort headers should be keyboard accessible",
-                "url": "https://github.com/primefaces/primereact/issues/693"
-            }
-        ],
-        "treetable": [
-            {
-                "number": 693,
-                "title": "DataTable/TreeTable sort headers should be keyboard accessible",
-                "url": "https://github.com/primefaces/primereact/issues/693"
-            },
-            {
-                "number": 685,
-                "title": "TreeTable Pagination Error",
-                "url": "https://github.com/primefaces/primereact/issues/685"
-            }
-        ],
-        "panelmenu": [
-            {
-                "number": 703,
-                "title": "Keyboard Accessibility for PanelMenu",
-                "url": "https://github.com/primefaces/primereact/issues/703"
-            },
-            {
-                "number": 718,
-                "title": "Reimplement PanelMenu Animation with CSSTransition ",
-                "url": "https://github.com/primefaces/primereact/issues/718"
-            }
-        ],
-        "fieldset": [
-            {
-                "number": 712,
-                "title": "Reimplement Fieldset Animation with CSSTransition",
-                "url": "https://github.com/primefaces/primereact/issues/712"
-            }
-        ],
-        "picklist": [
-            {
-                "number": 697,
-                "title": "Keyboard accessibility for PickList",
-                "url": "https://github.com/primefaces/primereact/issues/697"
-            }
-        ],
-        "selectbutton": [
-            {
-                "number": 687,
-                "title": "Improve SelectButton Accessibility",
-                "url": "https://github.com/primefaces/primereact/issues/687"
-            }
-        ],
-        "multiselect": [
-            {
-                "number": 691,
-                "title": "Keyboard Accessibility for MultiSelect",
-                "url": "https://github.com/primefaces/primereact/issues/691"
             }
         ]
     }

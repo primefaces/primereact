@@ -1,5 +1,22 @@
 # Changelog
 
+## [6.3.1](https://github.com/primefaces/primereact/tree/6.3.1) (2021-04-25)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/6.3.0...6.3.1)
+
+**Implemented New Features and Enhancements:**
+
+- Improve filled control on InputText [\#1977](https://github.com/primefaces/primereact/issues/1977)
+
+**Fixed bugs:**
+
+- DataTable - EventParams - wrong interface attribute [\#1983](https://github.com/primefaces/primereact/issues/1983)
+- The optionDisabled property is wrongly typed [\#1982](https://github.com/primefaces/primereact/issues/1982)
+- Galleria and Carousel is not working as expected [\#1981](https://github.com/primefaces/primereact/issues/1981)
+- Typescript: Props aren't exported anymore [\#1979](https://github.com/primefaces/primereact/issues/1979)
+- The panel always stays open with browser's autofill feature on Password [\#1978](https://github.com/primefaces/primereact/issues/1978)
+- The rowData has wrong type on DataTable [\#1976](https://github.com/primefaces/primereact/issues/1976)
+
 ## [6.3.0](https://github.com/primefaces/primereact/tree/6.3.0) (2021-04-22)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/6.2.1...6.3.0)
