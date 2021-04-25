@@ -11,7 +11,7 @@ export class RowRadioButton extends Component {
     }
 
     static propTypes = {
-        rowData: PropTypes.object,
+        rowData: PropTypes.any,
         onClick: PropTypes.func,
         selected: PropTypes.bool
     }

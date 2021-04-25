@@ -12,7 +12,7 @@ export class RowTogglerButton extends Component {
     }
 
     static propTypes = {
-        rowData: PropTypes.object,
+        rowData: PropTypes.any,
         onClick: PropTypes.func,
         expanded: PropTypes.bool
     }
