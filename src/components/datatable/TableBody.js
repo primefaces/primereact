@@ -817,7 +817,7 @@ export class TableBody extends Component {
                     if (expanded && !(hasSubheaderGrouping && this.props.expandableRowGroups)) {
                         let expandedRowContent = this.props.rowExpansionTemplate(rowData);
                         let id = `${this.props.tableId ? this.props.tableId + '_' : ''}content_${i}_expanded`;
-                        let expandedRow = <tr key={id} id={id} role="row"><td role="cell" colSpan={this.props.children.length}>{expandedRowContent}</td></tr>
+                        let expandedRow = <tr key={id} id={id} role="row" className="p-row-expanded"><td role="cell" colSpan={this.props.children.length}>{expandedRowContent}</td></tr>
                         rows.push(expandedRow);
                     }
 
