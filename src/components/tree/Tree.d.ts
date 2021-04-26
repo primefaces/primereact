@@ -1,105 +1,102 @@
 import * as React from 'react';
 import TreeNode from '../treenode/TreeNode';
 
-declare module 'primereact/tree' {
+type TreeSelectionModeType = 'single' | 'multiple' | 'checkbox';
 
-    type SelectionModeType = 'single' | 'multiple' | 'checkbox';
+type TreeSelectionKeys = string | TreeSelectionKeysType | undefined | null;
 
-    type SelectionKeys = string | SelectionKeysType | undefined | null;
+type TreeFilterModeType = 'lenient' | 'strict';
 
-    type FilterModeType = 'lenient' | 'strict';
+type TreeHeaderTemplateType = React.ReactNode | ((options: TreeHeaderTemplateOptions) => React.ReactNode);
 
-    type HeaderTemplateType = React.ReactNode | ((options: HeaderTemplateOptions) => React.ReactNode);
+type TreeFooterTemplateType = React.ReactNode | ((props: TreeProps) => React.ReactNode);
 
-    type FooterTemplateType = React.ReactNode | ((props: TreeProps) => React.ReactNode);
+interface TreeHeaderTemplateOptions {
+    filterContainerClassName: string;
+    filterIconClasssName: string;
+    filterInput: TreeFilterInputOptions;
+    filterElement: JSX.Element;
+    element: JSX.Element;
+    props: TreeProps;
+}
 
-    interface HeaderTemplateOptions {
-        filterContainerClassName: string;
-        filterIconClasssName: string;
-        filterInput: FilterInputOptions;
-        filterElement: JSX.Element;
-        element: JSX.Element;
-        props: TreeProps;
-    }
+interface TreeFilterInputOptions {
+    className: string;
+    onKeyDown(event: React.KeyboardEvent<HTMLInputElement>): void;
+    onChange(event: React.KeyboardEvent<HTMLInputElement>): void;
+}
 
-    interface FilterInputOptions {
-        className: string;
-        onKeyDown(event: React.KeyboardEvent<HTMLInputElement>): void;
-        onChange(event: React.KeyboardEvent<HTMLInputElement>): void;
-    }
+interface TreeSelectionKeysType {
+    [key: string]: boolean;
+}
 
-    interface SelectionKeysType {
-        [key: string]: boolean;
-    }
+interface TreeExpandedKeysType {
+    [key: string]: boolean;
+}
 
-    interface ExpandedKeysType {
-        [key: string]: boolean;
-    }
+interface TreeExpandedParams {
+    originalEvent: React.SyntheticEvent;
+    value: TreeExpandedKeysType;
+}
 
-    interface ExpandedParams {
-        originalEvent: React.SyntheticEvent;
-        value: ExpandedKeysType;
-    }
+interface TreeSelectionParams {
+    originalEvent: React.SyntheticEvent;
+    value: TreeSelectionKeysType;
+}
 
-    interface SelectionParams {
-        originalEvent: React.SyntheticEvent;
-        value: SelectionKeysType;
-    }
+interface TreeEventNodeParams {
+    originalEvent: React.SyntheticEvent;
+    node: TreeNode;
+}
 
-    interface EventNodeParams {
-        originalEvent: React.SyntheticEvent;
-        node: TreeNode;
-    }
+interface TreeDragDropParams {
+    originalEvent: React.SyntheticEvent,
+    value: TreeNode[];
+    dragNode: TreeNode;
+    dropNode: TreeNode;
+    dropIndex: number;
+}
 
-    interface DragDropParams {
-        originalEvent: React.SyntheticEvent,
-        value: TreeNode[];
-        dragNode: TreeNode;
-        dropNode: TreeNode;
-        dropIndex: number;
-    }
+export interface TreeProps {
+    id?: string;
+    value?: TreeNode[];
+    disabled?: boolean;
+    selectionMode?: TreeSelectionModeType;
+    selectionKeys?: TreeSelectionKeys;
+    contextMenuSelectionKey?: string;
+    expandedKeys?: TreeExpandedKeysType;
+    style?: object;
+    className?: string;
+    contentStyle?: object;
+    contentClassName?: string;
+    metaKeySelection?: boolean;
+    propagateSelectionUp?: boolean;
+    propagateSelectionDown?: boolean;
+    loading?: boolean;
+    loadingIcon?: string;
+    dragdropScope?: string;
+    header?: TreeHeaderTemplateType;
+    footer?: TreeFooterTemplateType;
+    showHeader?: boolean;
+    filter?: boolean;
+    filterValue?: string;
+    filterBy?: string;
+    filterMode?: TreeFilterModeType;
+    filterPlaceholder?: string;
+    filterLocale?: string;
+    onSelectionChange?(e: TreeSelectionParams): void;
+    onContextMenuSelectionChange?(e: TreeSelectionParams): void;
+    nodeTemplate?(node: TreeNode): React.ReactNode;
+    onSelect?(e: TreeEventNodeParams): void;
+    onUnselect?(e: TreeEventNodeParams): void;
+    onExpand?(e: TreeEventNodeParams): void;
+    onCollapse?(e: TreeEventNodeParams): void;
+    onToggle?(e: TreeExpandedParams): void;
+    onDragDrop?(e: TreeDragDropParams): void;
+    onContextMenu?(e: TreeEventNodeParams): void;
+    onFilterValueChange?(e: React.FormEvent<HTMLInputElement>): void;
+}
 
-    export interface TreeProps {
-        id?: string;
-        value?: TreeNode[];
-        disabled?: boolean;
-        selectionMode?: SelectionModeType;
-        selectionKeys?: SelectionKeys;
-        contextMenuSelectionKey?: string;
-        expandedKeys?: ExpandedKeysType;
-        style?: object;
-        className?: string;
-        contentStyle?: object;
-        contentClassName?: string;
-        metaKeySelection?: boolean;
-        propagateSelectionUp?: boolean;
-        propagateSelectionDown?: boolean;
-        loading?: boolean;
-        loadingIcon?: string;
-        dragdropScope?: string;
-        header?: HeaderTemplateType;
-        footer?: FooterTemplateType;
-        showHeader?: boolean;
-        filter?: boolean;
-        filterValue?: string;
-        filterBy?: string;
-        filterMode?: FilterModeType;
-        filterPlaceholder?: string;
-        filterLocale?: string;
-        onSelectionChange?(e: SelectionParams): void;
-        onContextMenuSelectionChange?(e: SelectionParams): void;
-        nodeTemplate?(node: TreeNode): React.ReactNode;
-        onSelect?(e: EventNodeParams): void;
-        onUnselect?(e: EventNodeParams): void;
-        onExpand?(e: EventNodeParams): void;
-        onCollapse?(e: EventNodeParams): void;
-        onToggle?(e: ExpandedParams): void;
-        onDragDrop?(e: DragDropParams): void;
-        onContextMenu?(e: EventNodeParams): void;
-        onFilterValueChange?(e: React.FormEvent<HTMLInputElement>): void;
-    }
-
-    export class Tree extends React.Component<TreeProps, any> {
-        public filter<T>(value: T): void;
-    }
+export declare class Tree extends React.Component<TreeProps, any> {
+    public filter<T>(value: T): void;
 }

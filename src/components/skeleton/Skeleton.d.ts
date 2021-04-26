@@ -1,21 +1,18 @@
 import * as React from 'react';
 
-declare module 'primereact/skeleton' {
+type SkeletonShapeType = 'rectangle' | 'circle';
 
-    type ShapeType = 'rectangle' | 'circle';
+type SkeletonAnimationType = 'wave' | 'none';
 
-    type AnimationType = 'wave' | 'none';
-
-    export interface SkeletonProps {
-        shape?: ShapeType;
-        size?: string;
-        width?: string;
-        height?: string;
-        borderRadius?: string;
-        animation?: AnimationType;
-        style?: object;
-        className?: string;
-    }
-
-    export class Skeleton extends React.Component<SkeletonProps, any> { }
+export interface SkeletonProps {
+    shape?: SkeletonShapeType;
+    size?: string;
+    width?: string;
+    height?: string;
+    borderRadius?: string;
+    animation?: SkeletonAnimationType;
+    style?: object;
+    className?: string;
 }
+
+export declare class Skeleton extends React.Component<SkeletonProps, any> { }

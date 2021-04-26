@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface CommandParams {
+interface MenuItemCommandParams {
     originalEvent: React.SyntheticEvent;
     item: MenuItem;
 }
@@ -15,7 +15,7 @@ interface MenuItemOptions {
     [key: string]: any;
 }
 
-type TemplateType = React.ReactNode | ((item: MenuItem, options: MenuItemOptions) => React.ReactNode);
+type MenuItemTemplateType = React.ReactNode | ((item: MenuItem, options: MenuItemOptions) => React.ReactNode);
 
 export interface MenuItem {
     label?: string;
@@ -28,7 +28,7 @@ export interface MenuItem {
     separator?: boolean;
     style?: object;
     className?: string;
-    command?(e: CommandParams): void;
-    template?: TemplateType;
+    command?(e: MenuItemCommandParams): void;
+    template?: MenuItemTemplateType;
     [key: string]: any;
 }

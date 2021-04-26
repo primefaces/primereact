@@ -1,22 +1,19 @@
 import * as React from 'react';
 
-declare module 'primereact/progressbar' {
+type ProgressBarModeType = 'determinate' | 'indeterminate';
 
-    type ModeType = 'determinate' | 'indeterminate';
+type ProgressBarValueType = string | number | undefined | null;
 
-    type ValueType = string | number | undefined | null;
-
-    export interface ProgressBarProps {
-        id?: string;
-        value?: ValueType;
-        showValue?: boolean;
-        unit?: string;
-        style?: object;
-        className?: string;
-        mode?: ModeType;
-        color?: string;
-        displayValueTemplate?(value: ValueType): React.ReactNode;
-    }
-
-    export class ProgressBar extends React.Component<ProgressBarProps, any> { }
+export interface ProgressBarProps {
+    id?: string;
+    value?: ProgressBarValueType;
+    showValue?: boolean;
+    unit?: string;
+    style?: object;
+    className?: string;
+    mode?: ProgressBarModeType;
+    color?: string;
+    displayValueTemplate?(value: ProgressBarValueType): React.ReactNode;
 }
+
+export declare class ProgressBar extends React.Component<ProgressBarProps, any> { }

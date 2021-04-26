@@ -1,34 +1,31 @@
 import * as React from 'react';
 
-declare module 'primereact/slider' {
+type SliderOrientationType = 'horizontal' | 'vertical';
 
-    type OrientationType = 'horizontal' | 'vertical';
+type SliderValueType = number | [number, number];
 
-    type ValueType = number | [number, number];
-
-    interface ChangeParams {
-        originalEvent: React.SyntheticEvent;
-        value: ValueType;
-    }
-
-    interface SlideEndParams extends ChangeParams { }
-
-    export interface SliderProps {
-        id?: string;
-        value?: ValueType;
-        min?: number;
-        max?: number;
-        orientation?: OrientationType;
-        step?: number;
-        range?: boolean;
-        style?: object;
-        className?: string;
-        disabled?: boolean;
-        tabIndex?: number;
-        ariaLabelledBy?: string;
-        onChange?(e: ChangeParams): void;
-        onSlideEnd?(e: SlideEndParams): void;
-    }
-
-    export class Slider extends React.Component<SliderProps, any> { }
+interface SliderChangeParams {
+    originalEvent: React.SyntheticEvent;
+    value: SliderValueType;
 }
+
+interface SliderSlideEndParams extends SliderChangeParams { }
+
+export interface SliderProps {
+    id?: string;
+    value?: SliderValueType;
+    min?: number;
+    max?: number;
+    orientation?: SliderOrientationType;
+    step?: number;
+    range?: boolean;
+    style?: object;
+    className?: string;
+    disabled?: boolean;
+    tabIndex?: number;
+    ariaLabelledBy?: string;
+    onChange?(e: SliderChangeParams): void;
+    onSlideEnd?(e: SliderSlideEndParams): void;
+}
+
+export declare class Slider extends React.Component<SliderProps, any> { }

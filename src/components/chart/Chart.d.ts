@@ -1,16 +1,14 @@
 import * as React from 'react';
 
-declare module 'primereact/chart' {
-    export interface ChartProps {
-        id?: string;
-        type?: string;
-        data?: object;
-        options?: object;
-        width?: string;
-        height?: string;
-        style?: object;
-        className?: string;
-    }
-
-    export class Chart extends React.Component<ChartProps, any> { }
+export interface ChartProps {
+    id?: string;
+    type?: string;
+    data?: object;
+    options?: object;
+    width?: string;
+    height?: string;
+    style?: object;
+    className?: string;
 }
+
+export declare class Chart extends React.Component<ChartProps, any> { }

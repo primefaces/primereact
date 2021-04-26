@@ -1,115 +1,112 @@
 import * as React from 'react';
 
-declare module 'primereact/fileupload' {
+type FileUploadModeType = 'basic' | 'advanced';
 
-    type ModeType = 'basic' | 'advanced';
+interface FileUploadOptionsType {
+    label?: string;
+    icon?: string;
+    iconOnly?: boolean;
+    className?: string;
+    style?: object
+}
 
-    interface OptionsType {
-        label?: string;
-        icon?: string;
-        iconOnly?: boolean;
-        className?: string;
-        style?: object
-    }
+interface FileUploadHeaderTemplateOptions {
+    className: string;
+    chooseButton: JSX.Element;
+    uploadButton: JSX.Element;
+    cancelButton: JSX.Element;
+    element: JSX.Element;
+    props: FileUploadProps;
+}
 
-    interface HeaderTemplateOptions {
-        className: string;
-        chooseButton: JSX.Element;
-        uploadButton: JSX.Element;
-        cancelButton: JSX.Element;
-        element: JSX.Element;
-        props: FileUploadProps;
-    }
+type FileUploadHeaderTemplateType = React.ReactNode | ((options: FileUploadHeaderTemplateOptions) => React.ReactNode);
 
-    type HeaderTemplateType = React.ReactNode | ((options: HeaderTemplateOptions) => React.ReactNode);
+interface ItemTemplateOptions {
+    onRemove(event: React.SyntheticEvent): void;
+    previewElement: JSX.Element;
+    fileNameElement: JSX.Element;
+    sizeElement: JSX.Element;
+    removeElement: JSX.Element;
+    formatSize: string;
+    element: JSX.Element;
+    props: FileUploadProps;
+}
 
-    interface ItemTemplateOptions {
-        onRemove(event: React.SyntheticEvent): void;
-        previewElement: JSX.Element;
-        fileNameElement: JSX.Element;
-        sizeElement: JSX.Element;
-        removeElement: JSX.Element;
-        formatSize: string;
-        element: JSX.Element;
-        props: FileUploadProps;
-    }
+type FileUploadItemTemplateType = React.ReactNode | ((file: object, options: ItemTemplateOptions) => React.ReactNode);
 
-    type ItemTemplateType = React.ReactNode | ((file: object, options: ItemTemplateOptions) => React.ReactNode);
+type FileUploadEmptyTemplateType = React.ReactNode | ((props: FileUploadProps) => React.ReactNode);
 
-    type EmptyTemplateType = React.ReactNode | ((props: FileUploadProps) => React.ReactNode);
+interface FileUploadBeforeUploadParams {
+    xhr: XMLHttpRequest;
+    formData: FormData;
+}
 
-    interface BeforeUploadParams {
-        xhr: XMLHttpRequest;
-        formData: FormData;
-    }
+interface FileUploadBeforeSendParams extends FileUploadBeforeUploadParams { }
 
-    interface BeforeSendParams extends BeforeUploadParams { }
+interface FileUploadFilesParam {
+    files: File[];
+}
 
-    interface FilesParam {
-        files: File[];
-    }
+interface FileUploadUploadParams extends FileUploadFilesParam {
+    xhr: XMLHttpRequest;
+}
 
-    interface UploadParams extends FilesParam {
-        xhr: XMLHttpRequest;
-    }
+interface FileUploadErrorParams extends FileUploadUploadParams { }
 
-    interface ErrorParams extends UploadParams { }
+interface FileUploadSelectParams extends FileUploadFilesParam {
+    originalEvent: React.SyntheticEvent;
+}
 
-    interface SelectParams extends FilesParam {
-        originalEvent: React.SyntheticEvent;
-    }
+interface FileUploadProgressParams {
+    originalEvent: React.SyntheticEvent;
+    progress: number;
+}
 
-    interface ProgressParams {
-        originalEvent: React.SyntheticEvent;
-        progress: number;
-    }
+interface FileUploadRemoveParams extends FileUploadSelectParams { }
 
-    interface RemoveParams extends SelectParams { }
+interface FileUploadProps {
+    id?: string;
+    name?: string;
+    url?: string;
+    mode?: FileUploadModeType;
+    multiple?: boolean;
+    accept?: string;
+    disabled?: boolean;
+    auto?: boolean;
+    maxFileSize?: number;
+    invalidFileSizeMessageSummary?: string;
+    invalidFileSizeMessageDetail?: string;
+    style?: object;
+    className?: string;
+    withCredentials?: boolean;
+    previewWidth?: number;
+    chooseLabel?: string;
+    uploadLabel?: string;
+    cancelLabel?: string;
+    chooseOptions?: FileUploadOptionsType;
+    uploadOptions?: FileUploadOptionsType;
+    cancelOptions?: FileUploadOptionsType;
+    customUpload?: boolean;
+    headerClassName?: string;
+    headerStyle?: object;
+    contentClassName?: string;
+    contentStyle?: object;
+    headerTemplate?: FileUploadHeaderTemplateType;
+    itemTemplate?: FileUploadItemTemplateType;
+    emptyTemplate?: FileUploadEmptyTemplateType;
+    onBeforeUpload?(e: FileUploadBeforeUploadParams): void;
+    onBeforeSend?(e: FileUploadBeforeSendParams): void;
+    onUpload?(e: FileUploadUploadParams): void;
+    onError?(e: FileUploadErrorParams): void;
+    onClear?(): void;
+    onSelect?(e: FileUploadSelectParams): void;
+    onProgress?(e: FileUploadProgressParams): void;
+    onValidationFail?(file: File): void;
+    uploadHandler?(e: FileUploadFilesParam): void;
+    onRemove?(e: FileUploadRemoveParams): void;
+}
 
-    export interface FileUploadProps {
-        id?: string;
-        name?: string;
-        url?: string;
-        mode?: ModeType;
-        multiple?: boolean;
-        accept?: string;
-        disabled?: boolean;
-        auto?: boolean;
-        maxFileSize?: number;
-        invalidFileSizeMessageSummary?: string;
-        invalidFileSizeMessageDetail?: string;
-        style?: object;
-        className?: string;
-        withCredentials?: boolean;
-        previewWidth?: number;
-        chooseLabel?: string;
-        uploadLabel?: string;
-        cancelLabel?: string;
-        chooseOptions?: OptionsType;
-        uploadOptions?: OptionsType;
-        cancelOptions?: OptionsType;
-        customUpload?: boolean;
-        headerClassName?: string;
-        headerStyle?: object;
-        contentClassName?: string;
-        contentStyle?: object;
-        headerTemplate?: HeaderTemplateType;
-        itemTemplate?: ItemTemplateType;
-        emptyTemplate?: EmptyTemplateType;
-        onBeforeUpload?(e: BeforeUploadParams): void;
-        onBeforeSend?(e: BeforeSendParams): void;
-        onUpload?(e: UploadParams): void;
-        onError?(e: ErrorParams): void;
-        onClear?(): void;
-        onSelect?(e: SelectParams): void;
-        onProgress?(e: ProgressParams): void;
-        onValidationFail?(file: File): void;
-        uploadHandler?(e: FilesParam): void;
-        onRemove?(e: RemoveParams): void;
-    }
-
-    export class FileUpload extends React.Component<FileUploadProps, any> {
-        public upload(): void;
-        public clear(): void;
-    }
+export declare class FileUpload extends React.Component<FileUploadProps, any> {
+    public upload(): void;
+    public clear(): void;
 }

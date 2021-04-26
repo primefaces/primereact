@@ -1,25 +1,22 @@
 import * as React from 'react';
 
-declare module 'primereact/timeline' {
+type TimelineAlignType = 'left' | 'right' | 'alternate';
 
-    type AlignType = 'left' | 'right' | 'alternate';
+type TimelineLayoutType = 'vertical' | 'horizontal';
 
-    type LayoutType = 'vertical' | 'horizontal';
+type TimelineTemplateType = React.ReactNode | ((item: any, index: number) => React.ReactNode);
 
-    type TemplateType = React.ReactNode | ((item: any, index: number) => React.ReactNode);
-
-    export interface TimelineProps {
-        id?: string;
-        value?: any[];
-        align?: AlignType;
-        layout?: LayoutType;
-        dataKey?: string;
-        className?: string;
-        style?: object;
-        opposite?: TemplateType;
-        marker?: TemplateType;
-        content?: TemplateType;
-    }
-
-    export class Timeline extends React.Component<TimelineProps, any> { }
+export interface TimelineProps {
+    id?: string;
+    value?: any[];
+    align?: TimelineAlignType;
+    layout?: TimelineLayoutType;
+    dataKey?: string;
+    className?: string;
+    style?: object;
+    opposite?: TimelineTemplateType;
+    marker?: TimelineTemplateType;
+    content?: TimelineTemplateType;
 }
+
+export declare class Timeline extends React.Component<TimelineProps, any> { }

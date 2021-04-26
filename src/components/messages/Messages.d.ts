@@ -1,33 +1,30 @@
 import * as React from 'react';
 
-declare module 'primereact/messages' {
+type MessagesSeverityType = 'success' | 'info' | 'warn' | 'error' | (string & {});
 
-    type SeverityType = 'success' | 'info' | 'warn' | 'error' | (string & {});
+type MessagesMessageType = MessagesMessage | MessagesMessage[];
 
-    type MessageType = MessageOptions | MessageOptions[];
+export interface MessagesMessage {
+    id?: string;
+    severity?: MessagesSeverityType;
+    summary?: React.ReactNode;
+    detail?: React.ReactNode;
+    closable?: boolean;
+    sticky?: boolean;
+    life?: number;
+}
 
-    interface MessageOptions {
-        id?: string;
-        severity?: SeverityType;
-        summary?: React.ReactNode;
-        detail?: React.ReactNode;
-        closable?: boolean;
-        sticky?: boolean;
-        life?: number;
-    }
+export interface MessagesProps {
+    id?: string;
+    className?: string;
+    style?: object;
+    transitionOptions?: object;
+    onRemove?(message: MessagesMessage): void;
+    onClick?(message: MessagesMessage): void;
+}
 
-    export interface MessagesProps {
-        id?: string;
-        className?: string;
-        style?: object;
-        transitionOptions?: object;
-        onRemove?(message: MessageOptions): void;
-        onClick?(message: MessageOptions): void;
-    }
-
-    export class Messages extends React.Component<MessagesProps, any> {
-        public show(message: MessageType): void;
-        public clear(): void;
-        public replace(message: MessageType): void;
-    }
+export declare class Messages extends React.Component<MessagesProps, any> {
+    public show(message: MessagesMessageType): void;
+    public clear(): void;
+    public replace(message: MessagesMessageType): void;
 }
