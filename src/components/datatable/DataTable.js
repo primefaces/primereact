@@ -565,23 +565,19 @@ export class DataTable extends Component {
         if (this.props.sortMode === 'multiple') {
             let metaKey = event.originalEvent.metaKey || event.originalEvent.ctrlKey;
             let sortableDisabledFields = event.sortableDisabledFields;
-            multiSortMeta = this.getMultiSortMeta();
+            multiSortMeta = [...(this.getMultiSortMeta()||[])];
 
-            if (multiSortMeta && multiSortMeta instanceof Array) {
-                const sortMeta = multiSortMeta.find(sortMeta => sortMeta.field === sortField);
-                sortOrder = sortMeta ? this.getCalculatedSortOrder(sortMeta.order) : sortOrder;
-            }
+            const sortMeta = multiSortMeta.find(sortMeta => sortMeta.field === sortField);
+            sortOrder = sortMeta ? this.getCalculatedSortOrder(sortMeta.order) : sortOrder;
 
             const newMetaData = {field: sortField, order: sortOrder};
 
             if (sortOrder) {
-                if(!multiSortMeta || !metaKey) {
-                    multiSortMeta = multiSortMeta ? multiSortMeta.filter((meta) => sortableDisabledFields.some((field) => field === meta.field)) : [];
-                }
+                multiSortMeta = metaKey ? multiSortMeta : multiSortMeta.filter((meta) => sortableDisabledFields.some((field) => field === meta.field));
 
                 this.addSortMeta(newMetaData, multiSortMeta);
             }
-            else if (this.props.removableSort && multiSortMeta) {
+            else if (this.props.removableSort) {
                 this.removeSortMeta(newMetaData, multiSortMeta);
             }
 

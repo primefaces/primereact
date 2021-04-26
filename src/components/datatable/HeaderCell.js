@@ -133,7 +133,7 @@ export class HeaderCell extends Component {
     }
 
     isSortableDisabled() {
-        return this.props.columnProps.sortable && (this.props.allSortableDisabled || this.props.columnProps.sortableDisabled);
+        return !this.props.columnProps.sortable || (this.props.columnProps.sortable && (this.props.allSortableDisabled || this.props.columnProps.sortableDisabled));
     }
 
     isSingleSorted() {
