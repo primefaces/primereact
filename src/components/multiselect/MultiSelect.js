@@ -849,7 +849,7 @@ export class MultiSelect extends Component {
     renderItems() {
         const visibleOptions = this.getVisibleOptions();
 
-        if (visibleOptions) {
+        if (visibleOptions && visibleOptions.length) {
             if (this.props.optionGroupLabel) {
                 return visibleOptions.map((option, i) => {
                     const groupContent = this.props.optionGroupTemplate ? ObjectUtils.getJSXElement(this.props.optionGroupTemplate, option, i) : this.getOptionGroupLabel(option);

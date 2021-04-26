@@ -948,9 +948,9 @@ export class Dropdown extends Component {
     }
 
     renderItems() {
-        let visibleOptions = this.getVisibleOptions();
+        const visibleOptions = this.getVisibleOptions();
 
-        if (visibleOptions) {
+        if (visibleOptions && visibleOptions.length) {
             if (this.props.optionGroupLabel) {
                 return visibleOptions.map((option, i) => {
                     const groupContent = this.props.optionGroupTemplate ? ObjectUtils.getJSXElement(this.props.optionGroupTemplate, option, i) : this.getOptionGroupLabel(option);
