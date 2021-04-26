@@ -22,5 +22,5 @@ export function classNames(...args) {
         return classes.join(' ');
     }
 
-    return null;
+    return undefined;
 }

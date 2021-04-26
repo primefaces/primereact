@@ -1,1 +1,1 @@
-export * from './components/utils/ClassNames';
+export * from './components/utils';
