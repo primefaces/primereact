@@ -2485,6 +2485,8 @@
       color: #323130; }
       .p-datatable.p-datatable-striped .p-datatable-tbody > tr.p-row-odd.p-highlight .p-row-toggler:hover {
         color: #323130; }
+  .p-datatable.p-datatable-striped .p-datatable-tbody > tr.p-row-odd + .p-row-expanded {
+    background: #faf9f8; }
 .p-datatable.p-datatable-sm .p-datatable-header {
   padding: 0.375rem 0.375rem; }
 .p-datatable.p-datatable-sm .p-datatable-thead > tr > th {
