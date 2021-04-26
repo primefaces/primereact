@@ -111,6 +111,10 @@ export class Tooltip extends Component {
         this.onMouseLeave = this.onMouseLeave.bind(this);
     }
 
+    isTargetContentEmpty(target) {
+        return !(this.props.content || this.getTargetOption(target, 'tooltip'));
+    }
+
     isContentEmpty(target) {
         return !(this.props.content || this.getTargetOption(target, 'tooltip') || this.props.children);
     }
@@ -179,8 +183,7 @@ export class Tooltip extends Component {
                 callback();
             }
             else if (this.props.children) {
-                ReactDOM.unmountComponentAtNode(this.tooltipTextEl);
-                ReactDOM.render(this.props.children, this.tooltipTextEl, callback);
+                callback();
             }
         }
     }
@@ -479,15 +482,18 @@ export class Tooltip extends Component {
     }
 
     renderElement() {
-        const tooltipClass = classNames('p-tooltip p-component', {
+        const tooltipClassName = classNames('p-tooltip p-component', {
             [`p-tooltip-${this.state.position}`]: true
         }, this.props.className);
+        const isTargetContentEmpty = this.isTargetContentEmpty(this.currentTarget);
 
         return (
-            <div id={this.props.id} ref={(el) => this.containerEl = el} className={tooltipClass} style={this.props.style} role="tooltip" aria-hidden={this.state.visible}
+            <div id={this.props.id} ref={(el) => this.containerEl = el} className={tooltipClassName} style={this.props.style} role="tooltip" aria-hidden={this.state.visible}
                 onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
                 <div className="p-tooltip-arrow"></div>
-                <div ref={(el) => this.tooltipTextEl = el} className="p-tooltip-text"></div>
+                <div ref={(el) => this.tooltipTextEl = el} className="p-tooltip-text">
+                    {isTargetContentEmpty && this.props.children}
+                </div>
             </div>
         );
     }
