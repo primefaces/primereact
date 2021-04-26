@@ -28,7 +28,8 @@ export class TooltipDemo extends Component {
         this.state = {
             saveBtnTooltipText: 'Click to proceed',
             knobValue: 60,
-            sliderValue: 20
+            sliderValue: 20,
+            count: 0
         }
     }
 
@@ -72,6 +73,19 @@ export class TooltipDemo extends Component {
 
                         <Tooltip target=".logo" mouseTrack mouseTrackLeft={10}/>
                         <img className="logo p-ml-2" alt="logo" src="showcase/images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} data-pr-tooltip="PrimeReact-Logo" height="80px"/>
+                    </div>
+
+                    <div className="p-d-flex p-ai-center">
+                        <Button type="button" label="Save" icon="pi pi-check" tooltip="Save (autoHide: true)" />
+
+                        <Tooltip target=".tooltip-button" autoHide={false}>
+                            <div className="p-d-flex p-ai-center">
+                                <span style={{minWidth: '5rem'}}>Count: {this.state.count}</span>
+                                <Button type="button" icon="pi pi-plus" onClick={() => this.setState((prevState) => ({ count: prevState.count + 1 }))} className="p-button-rounded p-button-success p-ml-2"></Button>
+                                <Button type="button" icon="pi pi-minus" onClick={() => this.setState((prevState) => ({ count: prevState.count - 1 }))} className="p-button-rounded p-button-danger p-ml-2"></Button>
+                            </div>
+                        </Tooltip>
+                        <Button className="tooltip-button p-ml-2" type="button" label="Save" icon="pi pi-check" />
                     </div>
 
                     <h5>Template</h5>
@@ -127,6 +141,7 @@ const TooltipDemo = () => {
     const [saveBtnTooltipText, setSaveBtnTooltipText] = useState('Click to proceed');
     const [knobValue, setKnobValue] = useState(60);
     const [sliderValue, setSliderValue] = useState(20);
+    const [count, setCount] = useState(0);
 
     return (
         <div>
@@ -167,6 +182,19 @@ const TooltipDemo = () => {
 
                     <Tooltip target=".logo" mouseTrack mouseTrackLeft={10}/>
                     <img className="logo p-ml-2" alt="logo" src="showcase/images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} data-pr-tooltip="PrimeReact-Logo" height="80px"/>
+                </div>
+
+                <div className="p-d-flex p-ai-center">
+                    <Button type="button" label="Save" icon="pi pi-check" tooltip="Save (autoHide: true)" />
+
+                    <Tooltip target=".tooltip-button" autoHide={false}>
+                        <div className="p-d-flex p-ai-center">
+                            <span style={{minWidth: '5rem'}}>Count: {count}</span>
+                            <Button type="button" icon="pi pi-plus" onClick={() => setCount(count + 1)} className="p-button-rounded p-button-success p-ml-2"></Button>
+                            <Button type="button" icon="pi pi-minus" onClick={() => setCount(count - 1)} className="p-button-rounded p-button-danger p-ml-2"></Button>
+                        </div>
+                    </Tooltip>
+                    <Button className="tooltip-button p-ml-2" type="button" label="Save" icon="pi pi-check" />
                 </div>
 
                 <h5>Template</h5>
@@ -221,6 +249,7 @@ const TooltipDemo = () => {
     const [saveBtnTooltipText, setSaveBtnTooltipText] = useState('Click to proceed');
     const [knobValue, setKnobValue] = useState(60);
     const [sliderValue, setSliderValue] = useState(20);
+    const [count, setCount] = useState(0);
 
     return (
         <div>
@@ -261,6 +290,19 @@ const TooltipDemo = () => {
 
                     <Tooltip target=".logo" mouseTrack mouseTrackLeft={10}/>
                     <img className="logo p-ml-2" alt="logo" src="showcase/images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} data-pr-tooltip="PrimeReact-Logo" height="80px"/>
+                </div>
+
+                <div className="p-d-flex p-ai-center">
+                    <Button type="button" label="Save" icon="pi pi-check" tooltip="Save (autoHide: true)" />
+
+                    <Tooltip target=".tooltip-button" autoHide={false}>
+                        <div className="p-d-flex p-ai-center">
+                            <span style={{minWidth: '5rem'}}>Count: {count}</span>
+                            <Button type="button" icon="pi pi-plus" onClick={() => setCount(count + 1)} className="p-button-rounded p-button-success p-ml-2"></Button>
+                            <Button type="button" icon="pi pi-minus" onClick={() => setCount(count - 1)} className="p-button-rounded p-button-danger p-ml-2"></Button>
+                        </div>
+                    </Tooltip>
+                    <Button className="tooltip-button p-ml-2" type="button" label="Save" icon="pi pi-check" />
                 </div>
 
                 <h5>Template</h5>
