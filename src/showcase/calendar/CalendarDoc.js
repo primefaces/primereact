@@ -78,7 +78,7 @@ export class CalendarDemo extends Component {
     dateTemplate(date) {
         if (date.day > 10 && date.day < 15) {
             return (
-                <strong className="special-day">{date.day}</strong>
+                <strong style={{ textDecoration: 'line-through' }}>{date.day}</strong>
             );
         }
 
@@ -226,7 +226,7 @@ const CalendarDemo = () => {
     const dateTemplate = (date: any) => {
         if (date.day > 10 && date.day < 15) {
             return (
-                <strong className="special-day">{date.day}</strong>
+                <strong style={{ textDecoration: 'line-through' }}>{date.day}</strong>
             );
         }
 
@@ -372,7 +372,7 @@ const CalendarDemo = () => {
     const dateTemplate = (date: any) => {
         if (date.day > 10 && date.day < 15) {
             return (
-                <strong className="special-day">{date.day}</strong>
+                <strong style={{ textDecoration: 'line-through' }}>{date.day}</strong>
             );
         }
 

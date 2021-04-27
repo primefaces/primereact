@@ -65,7 +65,7 @@ export class CalendarDemo extends Component {
     dateTemplate(date) {
         if (date.day > 10 && date.day < 15) {
             return (
-                <strong className="special-day">{date.day}</strong>
+                <strong style={{ textDecoration: 'line-through' }}>{date.day}</strong>
             );
         }
 
@@ -79,7 +79,7 @@ export class CalendarDemo extends Component {
                     <AppInlineHeader changelogText="calendar">
                         <h1>Calendar</h1>
                         <p>Calendar is a form component to work with dates.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="calendar/CalendarDemo.js"/>
                 </div>
 
