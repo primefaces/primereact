@@ -1399,6 +1399,7 @@ export class Calendar extends Component {
                     return !this.isDateEquals(date, dateMeta);
                 });
                 this.updateModel(event, value);
+                this.updateInputfield(value);
             }
             else if (!this.props.maxDateCount || !this.props.value || this.props.maxDateCount > this.props.value.length) {
                 this.selectDate(event, dateMeta, timeMeta);
