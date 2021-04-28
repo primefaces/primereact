@@ -420,7 +420,7 @@ export class ContextMenu extends Component {
     bindDocumentResizeListener() {
         if (!this.documentResizeListener) {
             this.documentResizeListener = (event) => {
-                if (this.state.visible) {
+                if (this.state.visible && !DomHandler.isAndroid()) {
                     this.hide(event);
                 }
             };

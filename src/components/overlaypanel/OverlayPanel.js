@@ -100,7 +100,7 @@ export class OverlayPanel extends Component {
     bindResizeListener() {
         if (!this.resizeListener) {
             this.resizeListener = () => {
-                if (this.state.visible) {
+                if (this.state.visible && !DomHandler.isAndroid()) {
                     this.hide();
                 }
             };

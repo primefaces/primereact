@@ -388,7 +388,7 @@ export class ColorPicker extends Component {
     bindResizeListener() {
         if (!this.resizeListener) {
             this.resizeListener = () => {
-                if (this.state.overlayVisible) {
+                if (this.state.overlayVisible && !DomHandler.isAndroid()) {
                     this.hide();
                 }
             };
