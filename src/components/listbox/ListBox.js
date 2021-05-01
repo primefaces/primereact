@@ -85,6 +85,7 @@ export class ListBox extends Component {
 
         this.onFilter = this.onFilter.bind(this);
         this.onOptionSelect = this.onOptionSelect.bind(this);
+        this.onOptionTouchEnd = this.onOptionTouchEnd.bind(this);
     }
 
     componentDidMount() {
