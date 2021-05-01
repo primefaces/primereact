@@ -179,7 +179,9 @@ export class Accordion extends Component {
     renderTabs() {
         return (
             React.Children.map(this.props.children, (tab, index) => {
-                return this.renderTab(tab, index);
+                if (tab && tab.type === AccordionTab) {
+                    return this.renderTab(tab, index);
+                }
             })
         )
     }
