@@ -4,7 +4,7 @@ type ToastSeverityType = 'success' | 'info' | 'warn' | 'error' | (string & {});
 
 type ToastMessageType = ToastMessage | ToastMessage[];
 
-type ToastPositionType = 'center' | 'top' | 'bottom' | 'left' | 'right' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
+type ToastPositionType = 'center' | 'top' | 'bottom' | 'left' | 'right' | 'top-center' | 'top-left' | 'top-right' | 'bottom-center' | 'bottom-left' | 'bottom-right';
 
 export interface ToastMessage {
     severity?: ToastSeverityType;
