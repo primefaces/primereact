@@ -363,6 +363,7 @@ export class Tree extends Component {
             }
 
             if (matched) {
+                node.expanded = true;
                 return true;
             }
         }

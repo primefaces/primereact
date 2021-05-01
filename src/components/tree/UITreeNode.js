@@ -154,7 +154,7 @@ export class UITreeNode extends Component {
     }
 
     isExpanded() {
-        return this.props.expandedKeys ? this.props.expandedKeys[this.props.node.key] !== undefined : false;
+        return (this.props.expandedKeys ? this.props.expandedKeys[this.props.node.key] !== undefined : false) || this.props.node.expanded;
     }
 
     onNodeKeyDown(event) {
