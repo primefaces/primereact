@@ -551,7 +551,7 @@ export class TreeSelect extends Component {
                 <Tree value={this.props.options} selectionMode={this.props.selectionMode} selectionKeys={this.props.value} metaKeySelection={this.props.metaKeySelection}
                     onSelectionChange={this.onSelectionChange} onSelect={this.onNodeSelect} onUnselect={this.onNodeUnselect}
                     expandedKeys={this.state.expandedKeys} onToggle={this.onNodeToggle}
-                    onNodeExpand={this.props.onNodeExpand} onNodeCollapse={this.props.onNodeCollapse}
+                    onExpand={this.props.onNodeExpand} onCollapse={this.props.onNodeCollapse}
                     filter={this.props.filter} filterValue={this.state.filterValue} filterBy={this.props.filterBy} filterMode={this.props.filterMode}
                     filterPlaceholder={this.props.filterPlaceholder} filterLocale={this.props.filterLocale} showHeader={false} onFilterValueChange={this.onFilterValueChange}>
                 </Tree>
