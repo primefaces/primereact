@@ -184,9 +184,10 @@ export class Calendar extends Component {
             }
 
             let viewDate =
-                this.props.viewDate && this.isValidDate(this.props.viewDate)
+                this.props.viewDate &&
+                this.isValidDate(moment(this.props.viewDate))
                     ? this.props.viewDate
-                    : propValue && this.isValidDate(propValue)
+                    : propValue && this.isValidDate(moment(propValue))
                     ? propValue
                     : moment();
 
@@ -1340,7 +1341,7 @@ export class Calendar extends Component {
     }
 
     isValidDate(date) {
-        return date instanceof moment() && !isNaN(date);
+        return date instanceof moment.Moment && !isNaN(moment(date));
     }
 
     validateHour(hour, value) {
@@ -2146,7 +2147,11 @@ export class Calendar extends Component {
     }
 
     getDaysCountInMonth(month, year) {
-        return 32 - this.daylightSavingAdjust(moment([year, month, 32]).date());
+        var newDate = moment().year(year).month(month).date(32);
+
+        var temp = this.daylightSavingAdjust(newDate).date();
+
+        return 32 - temp;
     }
 
     getDaysCountInPrevMonth(month, year) {
@@ -2578,13 +2583,15 @@ export class Calendar extends Component {
         if (value) {
             try {
                 if (this.isSingleSelection()) {
-                    formattedValue = this.isValidDate(value)
+                    formattedValue = this.isValidDate(moment(value))
                         ? this.formatDateTime(value)
                         : "";
                 } else if (this.isMultipleSelection()) {
                     for (let i = 0; i < value.length; i++) {
                         let selectedValue = value[i];
-                        let dateAsString = this.isValidDate(selectedValue)
+                        let dateAsString = this.isValidDate(
+                            moment(selectedValue)
+                        )
                             ? this.formatDateTime(selectedValue)
                             : "";
                         formattedValue += dateAsString;
@@ -2597,11 +2604,11 @@ export class Calendar extends Component {
                         let startDate = value[0];
                         let endDate = value[1];
 
-                        formattedValue = this.isValidDate(startDate)
+                        formattedValue = this.isValidDate(moment(startDate))
                             ? this.formatDateTime(startDate)
                             : "";
                         if (endDate) {
-                            formattedValue += this.isValidDate(endDate)
+                            formattedValue += this.isValidDate(moment(endDate))
                                 ? " - " + this.formatDateTime(endDate)
                                 : "";
                         }
