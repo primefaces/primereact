@@ -4,15 +4,15 @@ import { Calendar } from '../../components/calendar/Calendar';
 import { CalendarDoc } from './CalendarDoc';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { addLocale } from '../../components/api/Locale';
-
+import * as moment from 'jalali-moment';
 export class CalendarDemo extends Component {
 
     constructor(props) {
         super(props);
 
-        let today = new Date();
-        let month = today.getMonth();
-        let year = today.getFullYear();
+        let today = moment();
+        let month = today.month();
+        let year = today.year();
         let prevMonth = (month === 0) ? 11 : month - 1;
         let prevYear = (prevMonth === 11) ? year - 1 : year;
         let nextMonth = (month === 11) ? 0 : month + 1;
@@ -38,13 +38,13 @@ export class CalendarDemo extends Component {
             dates2: null
         };
 
-        this.minDate = new Date();
-        this.minDate.setMonth(prevMonth);
-        this.minDate.setFullYear(prevYear);
+        this.minDate =moment();
+        this.minDate.set('month',prevMonth);
+        this.minDate.year(prevYear);
 
-        this.maxDate = new Date();
-        this.maxDate.setMonth(nextMonth);
-        this.maxDate.setFullYear(nextYear);
+        this.maxDate = moment();
+        this.maxDate.set('month' , nextMonth);
+        this.maxDate.year(nextYear);
 
         this.invalidDates = [today];
 
@@ -89,9 +89,9 @@ export class CalendarDemo extends Component {
                         <div className="p-fluid p-grid p-formgrid">
                             <div className="p-field p-col-12 p-md-4">
                                 <label htmlFor="basic">Basic</label>
-                                <Calendar id="basic" value={this.state.date1} onChange={(e) => this.setState({ date1: e.value })} />
+                                <Calendar id="basic" value={this.state.date1} onChange={(e) => this.setState({ date1: e.value })} showButtonBar/>
                             </div>
-                            <div className="p-field p-col-12 p-md-4">
+                            {/* <div className="p-field p-col-12 p-md-4">
                                 <label htmlFor="icon">Icon</label>
                                 <Calendar id="icon" value={this.state.date2} onChange={(e) => this.setState({ date2: e.value })} showIcon />
                             </div>
@@ -150,7 +150,7 @@ export class CalendarDemo extends Component {
                             <div className="p-field p-col-12 p-md-4">
                                 <label htmlFor="mask">Mask</label>
                                 <Calendar id="mask" value={this.state.date14} onChange={(e) => this.setState({ date14: e.value })} mask="99/99/9999"/>
-                            </div>
+                            </div> */}
                         </div>
 
                         <h5>Inline</h5>
