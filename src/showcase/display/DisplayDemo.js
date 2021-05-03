@@ -36,10 +36,10 @@ export class DisplayDemo extends Component {
                         <Button type="button" icon="pi pi-search" className="p-button-rounded p-button-success p-d-none p-d-md-inline-flex" />
 
                         <h5>Visible to Print, Invisible for Screen</h5>
-                        <p className="p-d-none p-print-block">Only visible when printed.</p>
+                        <p className="p-d-none p-d-print-block">Only visible when printed.</p>
 
                         <h5>Visible to Screen, Invisible for Print</h5>
-                        <p className="p-d-block p-print-none">Not available for printing.</p>
+                        <p className="p-d-block p-d-print-none">Not available for printing.</p>
                     </div>
                 </div>
 
