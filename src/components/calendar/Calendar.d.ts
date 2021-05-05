@@ -101,8 +101,8 @@ export interface CalendarProps {
     dateTemplate?(e: CalendarDateTemplateParams): React.ReactNode;
     headerTemplate?(): React.ReactNode;
     footerTemplate?(): React.ReactNode;
-    onFocus?(event: React.FormEvent<HTMLInputElement>): void;
-    onBlur?(event: React.FormEvent<HTMLInputElement>): void;
+    onFocus?(event: React.FocusEvent<HTMLInputElement>): void;
+    onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
     onInput?(event: React.FormEvent<HTMLInputElement>): void;
     onSelect?(e: CalendarSelectParams): void;
     onChange?(e: CalendarChangeParams): void;

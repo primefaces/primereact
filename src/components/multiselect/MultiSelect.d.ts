@@ -96,8 +96,8 @@ export interface MultiSelectProps {
     panelFooterTemplate?: MultiSelectPanelFooterTemplateType;
     transitionOptions?: object;
     onChange?(e: MultiSelectChangeParams): void;
-    onFocus?(event: React.FormEvent<HTMLInputElement>): void;
-    onBlur?(event: React.FormEvent<HTMLInputElement>): void;
+    onFocus?(event: React.FocusEvent<HTMLInputElement>): void;
+    onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
     onShow?(): void;
     onHide?(): void;
 }

@@ -82,8 +82,8 @@ export interface AutoCompleteProps {
     selectedItemTemplate?: AutoCompleteSelectedItemTemplateType;
     transitionOptions?: object;
     onChange?(e: AutoCompleteChangeParams): void;
-    onFocus?(event: React.FormEvent<HTMLInputElement>): void;
-    onBlur?(event: React.FormEvent<HTMLInputElement>): void;
+    onFocus?(event: React.FocusEvent<HTMLInputElement>): void;
+    onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
     onSelect?(e: AutoCompleteSelectParams): void;
     onUnselect?(e: AutoCompleteUnselectParams): void;
     onDropdownClick?(e: AutoCompleteDropdownClickParams): void;

@@ -74,8 +74,8 @@ export interface DropdownProps {
     transitionOptions?: object;
     showOnFocus?: boolean;
     onChange?(e: DropdownChangeParams): void;
-    onFocus?(event: React.FormEvent<HTMLInputElement>): void;
-    onBlur?(event: React.FormEvent<HTMLInputElement>): void;
+    onFocus?(event: React.FocusEvent<HTMLInputElement>): void;
+    onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
     onMouseDown?(event: React.MouseEvent<HTMLElement>): void;
     onContextMenu?(event: React.MouseEvent<HTMLElement>): void;
     onShow?(): void;

@@ -41,8 +41,8 @@ export interface ChipsProps {
     onAdd?(e: ChipsAddParams): void;
     onRemove?(e: ChipsRemoveParams): void;
     onChange?(e: ChipsChangeParams): void;
-    onFocus?(event: React.FormEvent<HTMLInputElement>): void;
-    onBlur?(event: React.FormEvent<HTMLInputElement>): void;
+    onFocus?(event: React.FocusEvent<HTMLInputElement>): void;
+    onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
 }
 
 export declare class Chips extends React.Component<ChipsProps, any> { }

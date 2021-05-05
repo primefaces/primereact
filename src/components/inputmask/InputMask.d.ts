@@ -44,8 +44,8 @@ export interface InputMaskProps {
     ariaLabelledBy?: string;
     onComplete?(e: InputMaskCompleteParams): void;
     onChange?(e: InputMaskChangeParams): void;
-    onFocus?(event: React.FormEvent<HTMLInputElement>): void;
-    onBlur?(event: React.FormEvent<HTMLInputElement>): void;
+    onFocus?(event: React.FocusEvent<HTMLInputElement>): void;
+    onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
 }
 
 export declare class InputMask extends React.Component<InputMaskProps, any> { }

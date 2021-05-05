@@ -28,8 +28,8 @@ export interface InputSwitchProps {
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
     onChange?(e: InputSwitchChangeParams): void;
-    onFocus?(event: React.FormEvent<HTMLInputElement>): void;
-    onBlur?(event: React.FormEvent<HTMLInputElement>): void;
+    onFocus?(event: React.FocusEvent<HTMLInputElement>): void;
+    onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
 }
 
 export declare class InputSwitch extends React.Component<InputSwitchProps, any> { }

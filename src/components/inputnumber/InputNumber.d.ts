@@ -65,8 +65,8 @@ export interface InputNumberProps {
     ariaLabelledBy?: string;
     onValueChange?(e: InputNumberValueChangeParams): void;
     onChange?(e: InputNumberChangeParams): void;
-    onFocus?(event: React.FormEvent<HTMLInputElement>): void;
-    onBlur?(event: React.FormEvent<HTMLInputElement>): void;
+    onFocus?(event: React.FocusEvent<HTMLInputElement>): void;
+    onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
     onKeyDown?(event: React.KeyboardEvent<HTMLInputElement>): void;
 }
 

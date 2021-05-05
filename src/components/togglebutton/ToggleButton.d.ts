@@ -32,8 +32,8 @@ export interface ToggleButtonProps {
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
     onChange?(e: ToggleButtonChangeParams): void;
-    onFocus?(event: React.FormEvent<HTMLElement>): void;
-    onBlur?(event: React.FormEvent<HTMLElement>): void;
+    onFocus?(event: React.FocusEvent<HTMLElement>): void;
+    onBlur?(event: React.FocusEvent<HTMLElement>): void;
 }
 
 export declare class ToggleButton extends React.Component<ToggleButtonProps, any> { }
