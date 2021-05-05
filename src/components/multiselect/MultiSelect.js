@@ -165,11 +165,12 @@ export class MultiSelect extends Component {
         }
 
         let optionValue = this.getOptionValue(option);
+        let isOptionValueUsed = this.isOptionValueUsed(option);
         let selected = this.isSelected(option);
         let allowOptionSelect = this.allowOptionSelect();
 
         if (selected)
-            this.updateModel(originalEvent, this.props.value.filter(val => !ObjectUtils.equals(this.getOptionValue(val), optionValue, this.equalityKey())));
+            this.updateModel(originalEvent, this.props.value.filter(val => !ObjectUtils.equals(isOptionValueUsed ? val : this.getOptionValue(val), optionValue, this.equalityKey())));
         else if (allowOptionSelect)
             this.updateModel(originalEvent, [...this.props.value || [], optionValue]);
     }
@@ -306,7 +307,7 @@ export class MultiSelect extends Component {
 
             if (this.props.optionGroupLabel) {
                 value = [];
-                visibleOptions.forEach(optionGroup => value = [...value, ...this.getOptionGroupChildren(optionGroup).filter((option) => !this.isOptionDisabled(option))]);
+                visibleOptions.forEach(optionGroup => value = [...value, ...this.getOptionGroupChildren(optionGroup).filter((option) => !this.isOptionDisabled(option)).map(option => this.getOptionValue(option))]);
             }
             else {
                 value = visibleOptions.map(option => this.getOptionValue(option));
@@ -403,9 +404,10 @@ export class MultiSelect extends Component {
 
         if (this.props.value) {
             let optionValue = this.getOptionValue(option);
+            let isOptionValueUsed = this.isOptionValueUsed(option);
             let key = this.equalityKey();
 
-            selected = this.props.value.some(val => ObjectUtils.equals(this.getOptionValue(val), optionValue, key));
+            selected = this.props.value.some(val => ObjectUtils.equals(isOptionValueUsed ? val : this.getOptionValue(val), optionValue, key));
         }
 
         return selected;
@@ -645,6 +647,10 @@ export class MultiSelect extends Component {
         }
 
         return (option && option['disabled'] !== undefined ? option['disabled'] : false);
+    }
+
+    isOptionValueUsed(option) {
+        return !this.props.optionValue && option && option['value'] !== undefined;
     }
 
     getVisibleOptions() {
