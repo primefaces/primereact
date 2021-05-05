@@ -1,7 +1,10 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
+import Omit from '../util';
 
 type ColorPickerAppendToType = 'self' | HTMLElement | undefined | null;
+
+type ColorPickerFormatType = 'hex' | 'rgb' | 'hsb';
 
 interface ColorPickerChangeTargetOptions {
     name: string;
@@ -16,8 +19,9 @@ interface ColorPickerChangeParams {
     target: ColorPickerChangeTargetOptions;
 }
 
-export interface ColorPickerProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onChange'> {
+export interface ColorPickerProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onChange' | 'value'> {
     inputRef?: React.Ref<HTMLInputElement>;
+    value?: any;
     defaultColor?: string;
     inline?: boolean;
     format?: string;
