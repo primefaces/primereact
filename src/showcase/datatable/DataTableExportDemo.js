@@ -76,7 +76,7 @@ export class DataTableExportDemo extends Component {
             });
         };
 
-        reader.readAsText(file);
+        reader.readAsText(file, 'UTF-8');
     }
 
     importExcel(e) {
@@ -313,7 +313,7 @@ export class DataTableExportDemo extends Component {
             });
         };
 
-        reader.readAsText(file);
+        reader.readAsText(file, 'UTF-8');
     }
 
     importExcel(e) {
@@ -424,8 +424,8 @@ export class DataTableExportDemo extends Component {
                     <Toast ref={(el) => this.toast = el} />
 
                     <div className="p-d-flex p-ai-center p-py-2">
-                        <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file-o' }} mode="basic" name="demo[]" auto url="./upload.php" accept=".csv" className="p-mr-2" onUpload={this.importCSV} />
-                        <FileUpload chooseOptions={{ label: 'Excel', icon: 'pi pi-file-excel', className: 'p-button-success' }} mode="basic" name="demo[]" auto url="./upload.php"
+                        <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file-o' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" className="p-mr-2" onUpload={this.importCSV} />
+                        <FileUpload chooseOptions={{ label: 'Excel', icon: 'pi pi-file-excel', className: 'p-button-success' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php"
                             accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" className="p-mr-2" onUpload={this.importExcel} />
                         <Button type="button" label="Clear" icon="pi pi-times" onClick={this.clear} className="p-button-info p-ml-auto" />
                     </div>
@@ -515,7 +515,7 @@ export const DataTableExportDemo = () => {
             setImportedData(_importedData);
         };
 
-        reader.readAsText(file);
+        reader.readAsText(file, 'UTF-8');
     }
 
     const importExcel = (e) => {
@@ -620,8 +620,8 @@ export const DataTableExportDemo = () => {
                 <Toast ref={toast} />
 
                 <div className="p-d-flex p-ai-center p-py-2">
-                    <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file-o' }} mode="basic" name="demo[]" auto url="./upload.php" accept=".csv" className="p-mr-2" onUpload={importCSV} />
-                    <FileUpload chooseOptions={{ label: 'Excel', icon: 'pi pi-file-excel', className: 'p-button-success' }} mode="basic" name="demo[]" auto url="./upload.php"
+                    <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file-o' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" className="p-mr-2" onUpload={importCSV} />
+                    <FileUpload chooseOptions={{ label: 'Excel', icon: 'pi pi-file-excel', className: 'p-button-success' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php"
                         accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" className="p-mr-2" onUpload={importExcel} />
                     <Button type="button" label="Clear" icon="pi pi-times" onClick={clear} className="p-button-info p-ml-auto" />
                 </div>
@@ -710,7 +710,7 @@ export const DataTableExportDemo = () => {
             setImportedData(_importedData);
         };
 
-        reader.readAsText(file);
+        reader.readAsText(file, 'UTF-8');
     }
 
     const importExcel = (e) => {
@@ -815,8 +815,8 @@ export const DataTableExportDemo = () => {
                 <Toast ref={toast} />
 
                 <div className="p-d-flex p-ai-center p-py-2">
-                    <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file-o' }} mode="basic" name="demo[]" auto url="./upload.php" accept=".csv" className="p-mr-2" onUpload={importCSV} />
-                    <FileUpload chooseOptions={{ label: 'Excel', icon: 'pi pi-file-excel', className: 'p-button-success' }} mode="basic" name="demo[]" auto url="./upload.php"
+                    <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file-o' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" className="p-mr-2" onUpload={importCSV} />
+                    <FileUpload chooseOptions={{ label: 'Excel', icon: 'pi pi-file-excel', className: 'p-button-success' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php"
                         accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" className="p-mr-2" onUpload={importExcel} />
                     <Button type="button" label="Clear" icon="pi pi-times" onClick={clear} className="p-button-info p-ml-auto" />
                 </div>
