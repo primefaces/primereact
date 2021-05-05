@@ -846,7 +846,18 @@ export const DataTableExportDemo = () => {
 }
                 `
             }
-        }
+        };
+
+        this.extFiles = {
+            'public/upload.php': {
+                content: `
+<?php
+header ("Access-Control-Allow-Origin: *");
+echo '<p>Fake Upload Process</p>'; ?>
+
+                `
+            }
+        };
     }
 
     shouldComponentUpdate() {
@@ -860,7 +871,8 @@ export const DataTableExportDemo = () => {
                     {
                         useLiveEditorTabs({
                             name: 'DataTableExportDemo', sources: this.sources, service: 'ProductService', data: 'products-small',
-                            dependencies: { 'jspdf': '^1.5.3', 'jspdf-autotable': '^3.2.5', 'xlsx': '^0.15.1', 'file-saver': '^2.0.2' }
+                            dependencies: { 'jspdf': '^1.5.3', 'jspdf-autotable': '^3.2.5', 'xlsx': '^0.15.1', 'file-saver': '^2.0.2' },
+                            extFiles: this.extFiles
                         })
                     }
                 </TabView>
