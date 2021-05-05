@@ -863,9 +863,13 @@ export class InputNumber extends Component {
     onInputBlur(event) {
         event.persist();
         this.setState({ focused: false }, () => {
-            let newValue = this.validateValue(this.parseValue(this.inputRef.current.value));
-            this.updateInputValue(newValue);
-            this.updateModel(event, newValue);
+            let currentValue = this.inputRef.current.value;
+
+            if (this.isValueChanged(currentValue, this.props.value)) {
+                let newValue = this.validateValue(this.parseValue(currentValue));
+                this.updateInputValue(newValue);
+                this.updateModel(event, newValue);
+            }
 
             if (this.props.onBlur) {
                 this.props.onBlur(event);
