@@ -16,18 +16,12 @@ interface ColorPickerChangeParams {
     target: ColorPickerChangeTargetOptions;
 }
 
-export interface ColorPickerProps {
-    id?: string;
+export interface ColorPickerProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onChange'> {
     inputRef?: React.Ref<HTMLInputElement>;
-    value?: string;
-    style?: object;
-    className?: string;
     defaultColor?: string;
     inline?: boolean;
     format?: string;
     appendTo?: ColorPickerAppendToType;
-    disabled?: boolean;
-    tabIndex?: number;
     inputId?: string;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
