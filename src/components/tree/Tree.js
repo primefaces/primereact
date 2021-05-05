@@ -36,6 +36,7 @@ export class Tree extends Component {
         filterPlaceholder: null,
         filterLocale: undefined,
         nodeTemplate: null,
+        togglerTemplate: null,
         onSelect: null,
         onUnselect: null,
         onExpand: null,
@@ -76,6 +77,7 @@ export class Tree extends Component {
         filterPlaceholder: PropTypes.string,
         filterLocale: PropTypes.string,
         nodeTemplate: PropTypes.func,
+        togglerTemplate: PropTypes.func,
         onSelect: PropTypes.func,
         onUnselect: PropTypes.func,
         onExpand: PropTypes.func,
@@ -392,7 +394,7 @@ export class Tree extends Component {
                 contextMenuSelectionKey={this.props.contextMenuSelectionKey} onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu}
                 propagateSelectionDown={this.props.propagateSelectionDown} propagateSelectionUp={this.props.propagateSelectionUp}
                 onExpand={this.props.onExpand} onCollapse={this.props.onCollapse} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect}
-                expandedKeys={this.getExpandedKeys()} onToggle={this.onToggle} nodeTemplate={this.props.nodeTemplate} isNodeLeaf={this.isNodeLeaf}
+                expandedKeys={this.getExpandedKeys()} onToggle={this.onToggle} nodeTemplate={this.props.nodeTemplate} togglerTemplate={this.props.togglerTemplate} isNodeLeaf={this.isNodeLeaf}
                 dragdropScope={this.props.dragdropScope} onDragStart={this.onDragStart} onDragEnd={this.onDragEnd} onDrop={this.onDrop} onDropPoint={this.onDropPoint} />
         );
     }

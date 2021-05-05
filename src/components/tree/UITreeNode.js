@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
 import { Ripple } from '../ripple/Ripple';
+import ObjectUtils from '../utils/ObjectUtils';
 
 export class UITreeNode extends Component {
 
@@ -24,6 +25,7 @@ export class UITreeNode extends Component {
         ariaLabel: null,
         ariaLabelledBy: null,
         nodeTemplate: null,
+        togglerTemplate: null,
         isNodeLeaf: null,
         onSelect: null,
         onUnselect: null,
@@ -58,6 +60,7 @@ export class UITreeNode extends Component {
         ariaLabel: PropTypes.string,
         ariaLabelledBy: PropTypes.string,
         nodeTemplate: PropTypes.func,
+        togglerTemplate: PropTypes.func,
         isNodeLeaf: PropTypes.func,
         onSelect: PropTypes.func,
         onUnselect: PropTypes.func,
@@ -666,13 +669,27 @@ export class UITreeNode extends Component {
 
     renderToggler(expanded) {
         const iconClassName = classNames('p-tree-toggler-icon pi pi-fw', {'pi-chevron-right': !expanded, 'pi-chevron-down': expanded});
-
-        return (
+        let content = (
             <button type="button" className="p-tree-toggler p-link" tabIndex={-1} onClick={this.onTogglerClick}>
                 <span className={iconClassName}></span>
                 <Ripple />
             </button>
         );
+
+        if (this.props.togglerTemplate) {
+            const defaultContentOptions = {
+                onClick: this.onTogglerClick,
+                containerClassName: 'p-tree-toggler p-link',
+                iconClassName: 'p-tree-toggler-icon',
+                element: content,
+                props: this.props,
+                expanded
+            };
+
+            content = ObjectUtils.getJSXElement(this.props.togglerTemplate, this.props.node, defaultContentOptions);
+        }
+
+        return content;
     }
 
     renderDropPoint(position) {
@@ -727,7 +744,7 @@ export class UITreeNode extends Component {
                                     propagateSelectionDown={this.props.propagateSelectionDown} propagateSelectionUp={this.props.propagateSelectionUp}
                                     contextMenuSelectionKey={this.props.contextMenuSelectionKey} onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu}
                                     onExpand={this.props.onExpand} onCollapse={this.props.onCollapse} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect}
-                                    expandedKeys={this.props.expandedKeys} onToggle={this.props.onToggle} onPropagateUp={this.propagateUp} nodeTemplate={this.props.nodeTemplate} isNodeLeaf={this.props.isNodeLeaf}
+                                    expandedKeys={this.props.expandedKeys} onToggle={this.props.onToggle} onPropagateUp={this.propagateUp} nodeTemplate={this.props.nodeTemplate} togglerTemplate={this.props.togglerTemplate} isNodeLeaf={this.props.isNodeLeaf}
                                     dragdropScope={this.props.dragdropScope} onDragStart={this.props.onDragStart} onDragEnd={this.props.onDragEnd} onDrop={this.props.onDrop} onDropPoint={this.props.onDropPoint} />
                             );
                         })
