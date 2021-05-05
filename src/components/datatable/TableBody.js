@@ -440,8 +440,7 @@ export class TableBody extends Component {
     }
 
     isMultipleSelection() {
-        return (this.props.selectionMode === 'multiple' && !this.isRadioSelectionModeInColumn()) ||
-            (!this.isCheckboxSelectionMode() && this.isCheckboxSelectionModeInColumn());
+        return (this.props.selectionMode === 'multiple' && !this.isRadioSelectionModeInColumn()) || this.isCheckboxSelectionModeInColumn();
     }
 
     isRadioOnlySelection() {
