@@ -622,7 +622,12 @@ export class MultiSelect extends Component {
     }
 
     getOptionValue(option) {
-        return this.props.optionValue ? ObjectUtils.resolveFieldData(option, this.props.optionValue) || option : (option && option['value'] !== undefined ? option['value'] : option);
+        if (this.props.optionValue) {
+            const data = ObjectUtils.resolveFieldData(option, this.props.optionValue);
+            return data !== null ? data : option;
+        }
+
+        return option && option['value'] !== undefined ? option['value'] : option;
     }
 
     getOptionRenderKey(option) {
