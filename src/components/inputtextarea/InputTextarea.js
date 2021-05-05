@@ -80,15 +80,16 @@ class InputTextareaComponent extends Component {
         }
     }
 
-    resize() {
+    resize(initial) {
         const inputEl = this.elementRef && this.elementRef.current;
+
         if (inputEl && DomHandler.isVisible(inputEl)) {
             if (!this.cachedScrollHeight) {
                 this.cachedScrollHeight = inputEl.scrollHeight;
                 inputEl.style.overflow = "hidden";
             }
 
-            if (this.cachedScrollHeight !== inputEl.scrollHeight) {
+            if (this.cachedScrollHeight !== inputEl.scrollHeight || initial) {
                 inputEl.style.height = ''
                 inputEl.style.height = inputEl.scrollHeight + 'px';
 
@@ -126,7 +127,7 @@ class InputTextareaComponent extends Component {
         }
 
         if (this.props.autoResize) {
-            this.resize();
+            this.resize(true);
         }
     }
 
@@ -139,7 +140,7 @@ class InputTextareaComponent extends Component {
         }
 
         if (this.props.autoResize) {
-            this.resize();
+            this.resize(true);
         }
     }
 
