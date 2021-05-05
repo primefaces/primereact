@@ -292,7 +292,7 @@ export class DataTableExportDemo extends Component {
         const reader = new FileReader();
         reader.onload = (e) => {
             const csv = e.target.result;
-            const data = csv.split('\n');
+            const data = csv.split('\\n');
 
             // Prepare DataTable
             const cols = data[0].split(',');
@@ -496,7 +496,7 @@ export const DataTableExportDemo = () => {
         const reader = new FileReader();
         reader.onload = (e) => {
             const csv = e.target.result;
-            const data = csv.split('\n');
+            const data = csv.split('\\n');
 
             // Prepare DataTable
             const cols = data[0].split(',');
@@ -691,7 +691,7 @@ export const DataTableExportDemo = () => {
         const reader = new FileReader();
         reader.onload = (e) => {
             const csv = e.target.result;
-            const data = csv.split('\n');
+            const data = csv.split('\\n');
 
             // Prepare DataTable
             const cols = data[0].split(',');
