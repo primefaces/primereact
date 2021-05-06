@@ -11,6 +11,8 @@ type TreeHeaderTemplateType = React.ReactNode | ((options: TreeHeaderTemplateOpt
 
 type TreeFooterTemplateType = React.ReactNode | ((props: TreeProps) => React.ReactNode);
 
+type TreeNodeTemplateType = React.ReactNode | ((node: TreeNode, options: TreeNodeTemplateOptions) => React.ReactNode);
+
 type TreeTogglerTemplateType = React.ReactNode | ((node: TreeNode, options: TreeTogglerTemplateOptions) => React.ReactNode);
 
 interface TreeHeaderTemplateOptions {
@@ -26,6 +28,14 @@ interface TreeFilterInputOptions {
     className: string;
     onKeyDown(event: React.KeyboardEvent<HTMLInputElement>): void;
     onChange(event: React.KeyboardEvent<HTMLInputElement>): void;
+}
+
+interface TreeNodeTemplateOptions {
+    onTogglerClick(e: React.SyntheticEvent): void;
+    className: string;
+    element: JSX.Element;
+    props: TreeProps;
+    expanded: boolean;
 }
 
 interface TreeTogglerTemplateOptions {
@@ -96,9 +106,9 @@ export interface TreeProps {
     filterPlaceholder?: string;
     filterLocale?: string;
     togglerTemplate?: TreeTogglerTemplateType;
+    nodeTemplate?: TreeNodeTemplateType;
     onSelectionChange?(e: TreeSelectionParams): void;
     onContextMenuSelectionChange?(e: TreeSelectionParams): void;
-    nodeTemplate?(node: TreeNode): React.ReactNode;
     onSelect?(e: TreeEventNodeParams): void;
     onUnselect?(e: TreeEventNodeParams): void;
     onExpand?(e: TreeEventNodeParams): void;

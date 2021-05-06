@@ -805,9 +805,9 @@ export const TreeContextMenuDemo = () => {
                                     </tr>
                                     <tr>
                                         <td>nodeTemplate</td>
-                                        <td>function</td>
+                                        <td>any</td>
                                         <td>false</td>
-                                        <td>Function that gets a TreeNode instance and returns the content for it.</td>
+                                        <td>Template of node element.</td>
                                     </tr>
                                     <tr>
                                         <td>togglerTemplate</td>

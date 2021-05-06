@@ -59,7 +59,7 @@ export class UITreeNode extends Component {
         dragdropScope: PropTypes.string,
         ariaLabel: PropTypes.string,
         ariaLabelledBy: PropTypes.string,
-        nodeTemplate: PropTypes.func,
+        nodeTemplate: PropTypes.any,
         togglerTemplate: PropTypes.func,
         isNodeLeaf: PropTypes.func,
         onSelect: PropTypes.func,
@@ -625,13 +625,25 @@ export class UITreeNode extends Component {
     }
 
     renderLabel() {
-        const label = this.props.nodeTemplate ? this.props.nodeTemplate(this.props.node) : this.props.node.label;
-
-        return (
+        let content = (
             <span className="p-treenode-label">
-                {label}
+                {this.props.node.label}
             </span>
         );
+
+        if (this.props.nodeTemplate) {
+            const defaultContentOptions = {
+                onTogglerClick: this.onTogglerClick,
+                className: 'p-treenode-label',
+                element: content,
+                props: this.props,
+                expanded: this.isExpanded()
+            };
+
+            content = ObjectUtils.getJSXElement(this.props.togglerTemplate, this.props.node, defaultContentOptions);
+        }
+
+        return content;
     }
 
     renderCheckbox() {

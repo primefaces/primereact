@@ -76,7 +76,7 @@ export class Tree extends Component {
         filterMode: PropTypes.string,
         filterPlaceholder: PropTypes.string,
         filterLocale: PropTypes.string,
-        nodeTemplate: PropTypes.func,
+        nodeTemplate: PropTypes.any,
         togglerTemplate: PropTypes.func,
         onSelect: PropTypes.func,
         onUnselect: PropTypes.func,
