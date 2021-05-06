@@ -37,17 +37,18 @@ export class TreeTemplatingDemo extends Component {
         this.nodeTemplate = this.nodeTemplate.bind(this);
     }
 
-    nodeTemplate(node) {
+    nodeTemplate(node, options) {
+        let label = <b>{node.label}</b>;
+
         if (node.url) {
-            return (
-                <a href={node.url}>{node.label}</a>
-            )
+            label = <a href={node.url}>{node.label}</a>;
         }
-        else {
-            return (
-                <b>{node.label}</b>
-            )
-        }
+
+        return (
+            <span className={options.className}>
+                {label}
+            </span>
+        )
     }
 
     render() {
@@ -117,17 +118,18 @@ export class TreeTemplatingDemo extends Component {
         this.nodeTemplate = this.nodeTemplate.bind(this);
     }
 
-    nodeTemplate(node) {
+    nodeTemplate(node, options) {
+        let label = <b>{node.label}</b>;
+
         if (node.url) {
-            return (
-                <a href={node.url}>{node.label}</a>
-            )
+            label = <a href={node.url}>{node.label}</a>;
         }
-        else {
-            return (
-                <b>{node.label}</b>
-            )
-        }
+
+        return (
+            <span className={options.className}>
+                {label}
+            </span>
+        )
     }
 
     render() {
@@ -174,17 +176,18 @@ const TreeTemplatingDemo = () => {
         }
     ];
 
-    const nodeTemplate = (node) => {
+    const nodeTemplate = (node, options) => {
+        let label = <b>{node.label}</b>;
+
         if (node.url) {
-            return (
-                <a href={node.url}>{node.label}</a>
-            )
+            label = <a href={node.url}>{node.label}</a>;
         }
-        else {
-            return (
-                <b>{node.label}</b>
-            )
-        }
+
+        return (
+            <span className={options.className}>
+                {label}
+            </span>
+        )
     }
 
     return (
@@ -229,17 +232,18 @@ const TreeTemplatingDemo = () => {
         }
     ];
 
-    const nodeTemplate = (node) => {
+    const nodeTemplate = (node, options) => {
+        let label = <b>{node.label}</b>;
+
         if (node.url) {
-            return (
-                <a href={node.url}>{node.label}</a>
-            )
+            label = <a href={node.url}>{node.label}</a>;
         }
-        else {
-            return (
-                <b>{node.label}</b>
-            )
-        }
+
+        return (
+            <span className={options.className}>
+                {label}
+            </span>
+        )
     }
 
     return (
