@@ -42,6 +42,10 @@ export class Chart extends Component {
         return this.canvas;
     }
 
+    getChart() {
+        return this.chart;
+    }    
+
     getBase64Image() {
         return this.chart.toBase64Image();
     }
