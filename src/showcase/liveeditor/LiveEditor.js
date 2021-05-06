@@ -6,6 +6,10 @@ import { TabPanel } from '../../components/tabview/TabView';
 let currentProps = {};
 
 export const useLiveEditorTabs = (props) => {
+    currentProps = props;
+
+    const liveEditor = useLiveEditor();
+
     let extFiles = props.extFiles && Object.entries(props.extFiles).map(([key, value], i) => {
         if (key === 'index.css') {
             return null;
@@ -25,6 +29,11 @@ export const useLiveEditorTabs = (props) => {
     let tabs = Object.entries(props.sources).map(([key, value]) => {
         return (
             <TabPanel key={key} header={value.tabName}>
+                {/* eslint-disable */}
+                <a style={{ color: 'var(--primary-color)', cursor: 'pointer' }} className="p-d-inline-block p-mb-1" onClick={() => liveEditor.postSandboxParameters(key)}>
+                    <span>Edit in CodeSandbox</span>
+                </a>
+                {/* eslint-enable */}
                 <CodeHighlight lang="js">
                     {value.content}
                 </CodeHighlight>
@@ -57,8 +66,6 @@ export const useLiveEditorTabs = (props) => {
             )
         });
     }
-
-    currentProps = props;
 
     return tabs;
 }
