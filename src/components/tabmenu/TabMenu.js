@@ -10,7 +10,7 @@ export class TabMenu extends Component {
     static defaultProps = {
         id: null,
         model: null,
-        activeItem: null,
+        activeIndex: 0,
         style: null,
         className: null,
         onTabChange: null
@@ -19,7 +19,7 @@ export class TabMenu extends Component {
     static propTypes = {
         id: PropTypes.string,
         model: PropTypes.array,
-        activeItem: PropTypes.any,
+        activeIndex: PropTypes.number,
         style: PropTypes.any,
         className: PropTypes.string,
         onTabChange: PropTypes.func
@@ -30,12 +30,12 @@ export class TabMenu extends Component {
 
         if (!this.props.onTabChange) {
             this.state = {
-                activeItem: props.activeItem
+                activeIndex: props.activeIndex
             };
         }
     }
 
-    itemClick(event, item) {
+    itemClick(event, item, index) {
         if (item.disabled) {
             event.preventDefault();
             return;
@@ -55,31 +55,23 @@ export class TabMenu extends Component {
         if (this.props.onTabChange) {
             this.props.onTabChange({
                 originalEvent: event,
-                value: item
+                value: item,
+                index
             });
         }
         else {
             this.setState({
-                activeItem: item
+                activeIndex: index
             });
         }
     }
 
-    getActiveItem() {
-        return this.props.onTabChange ? this.props.activeItem : this.state.activeItem;
+    getActiveIndex() {
+        return this.props.onTabChange ? this.props.activeIndex : this.state.activeIndex;
     }
 
-    getActiveIndex() {
-        const activeItem = this.getActiveItem();
-        if (this.props.model) {
-            for (let i = 0; i < this.props.model.length; i++) {
-                if (activeItem === this.props.model[i]) {
-                    return i;
-                }
-            }
-        }
-
-        return null;
+    isSelected(index) {
+        return (index === (this.getActiveIndex() || 0));
     }
 
     updateInkBar() {
@@ -99,8 +91,7 @@ export class TabMenu extends Component {
     }
 
     renderMenuItem(item, index) {
-        const activeItem = this.getActiveItem();
-        const active = activeItem ? activeItem === item : index === 0;
+        const active = this.isSelected(index);
         const className = classNames('p-tabmenuitem', {
             'p-highlight': active,
             'p-disabled': item.disabled
@@ -109,7 +100,7 @@ export class TabMenu extends Component {
         const icon = item.icon && <span className={iconClassName}></span>;
         const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
         let content = (
-            <a href={item.url||'#'} className="p-menuitem-link" target={item.target} onClick={(event) => this.itemClick(event, item)} role="presentation">
+            <a href={item.url||'#'} className="p-menuitem-link" target={item.target} onClick={(event) => this.itemClick(event, item, index)} role="presentation">
                 {icon}
                 {label}
                 <Ripple />
@@ -124,7 +115,8 @@ export class TabMenu extends Component {
                 iconClassName,
                 element: content,
                 props: this.props,
-                active
+                active,
+                index
             };
 
             content = ObjectUtils.getJSXElement(item.template, item, defaultContentOptions);

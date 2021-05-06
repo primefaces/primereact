@@ -4,12 +4,13 @@ import { MenuItem } from '../menuitem/MenuItem';
 interface TabMenuTabChangeParams {
     originalEvent: React.SyntheticEvent;
     value: MenuItem;
+    index: number;
 }
 
 export interface TabMenuProps {
     id?: string;
     model?: MenuItem[];
-    activeItem?: MenuItem;
+    activeIndex?: number;
     style?: object;
     className?: string;
     onTabChange?(e: TabMenuTabChangeParams): void;

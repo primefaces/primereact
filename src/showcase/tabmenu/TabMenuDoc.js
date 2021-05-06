@@ -130,16 +130,16 @@ const items = [
 </CodeHighlight>
 
                         <h5>Controlled Component</h5>
-                        <p>In controlled mode, <i>activeItem</i> and <i>onTabChange</i> properties must be defined along with the model.</p>
+                        <p>In controlled mode, <i>activeIndex</i> and <i>onTabChange</i> properties must be defined along with the model.</p>
 
 <CodeHighlight>
 {`
-<TabMenu model={items} activeItem={activeItem} onTabChange={(e) => setActiveItem(e.value)}/>
+<TabMenu model={items} activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.value)}/>
 `}
 </CodeHighlight>
 
                         <h5>Uncontrolled</h5>
-                        <p>In uncontrolled mode, only <i>model</i> is required. Initial active item can be provided using the activeItem property in uncontrolled mode however it is evaluated at initial rendering and ignored in further updates. If you programmatically
+                        <p>In uncontrolled mode, only <i>model</i> is required. Initial active item can be provided using the activeIndex property in uncontrolled mode however it is evaluated at initial rendering and ignored in further updates. If you programmatically
                             need to update the active item, prefer to use the component as controlled.</p>
 
 <CodeHighlight>
@@ -173,10 +173,10 @@ const items = [
                                         <td>An array of menuitems.</td>
                                     </tr>
                                     <tr>
-                                        <td>activeItem</td>
-                                        <td>MenuItem</td>
-                                        <td>null</td>
-                                        <td>Defines the default active menuitem</td>
+                                        <td>activeIndex</td>
+                                        <td>number</td>
+                                        <td>0</td>
+                                        <td>Active index of menuitem</td>
                                     </tr>
                                     <tr>
                                         <td>style</td>
@@ -208,7 +208,8 @@ const items = [
                                     <tr>
                                         <td>onTabChange</td>
                                         <td>event.originalEvent: Browser event <br />
-                                            event.value: Selected menuitem </td>
+                                            event.value: Selected menuitem <br />
+                                            event.index: Index of the selected tab </td>
                                         <td>Callback to invoke when active tab changes.</td>
                                     </tr>
                                 </tbody>
