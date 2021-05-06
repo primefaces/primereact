@@ -655,7 +655,7 @@ export class MultiSelect extends Component {
     }
 
     isOptionValueUsed(option) {
-        return !this.props.optionValue && option && option['value'] !== undefined;
+        return this.props.optionValue || (option && option['value'] !== undefined);
     }
 
     getVisibleOptions() {
