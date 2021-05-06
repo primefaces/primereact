@@ -549,7 +549,7 @@ const groupedCities = [
                         </tr>
                         <tr>
                             <td>optionDisabled</td>
-                            <td>boolean</td>
+                            <td>function | string</td>
                             <td>null</td>
                             <td>Property name or getter function to use as the disabled flag of an option, defaults to false when not defined.</td>
                         </tr>
