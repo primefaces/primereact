@@ -392,7 +392,9 @@ import { TabView,TabPanel } from 'primereact/tabview';
 
 <CodeHighlight>
 {`
-<TabView activeIndex={this.state.activeIndex} onTabChange={(e) => this.setState({activeIndex: e.index})}>
+const [activeIndex, setActiveIndex] = useState(0);
+
+<TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
     <TabPanel header="Header I">
         Content I
     </TabPanel>
