@@ -111,9 +111,14 @@ export class HeaderCell extends Component {
     componentDidUpdate(prevProps) {
         const prevColumnProps = prevProps.columnProps;
         const columnProps = this.props.columnProps;
+        const filterField = columnProps.filterField || columnProps.field;
 
         if (prevColumnProps.sortableDisabled !== columnProps.sortableDisabled || prevColumnProps.sortable !== columnProps.sortable) {
             this.props.onSortableChange();
+        }
+
+        if (this.state.filterValue && prevProps.filters && prevProps.filters[filterField] && (!this.props.filters || !this.props.filters[filterField])) {
+            this.setState({ filterValue: '' });
         }
     }
 
