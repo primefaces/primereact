@@ -70,7 +70,7 @@ export class Steps extends Component {
 
         if (item.template) {
             const defaultContentOptions = {
-                onClick: (event) => this.onItemClick(event, item, index),
+                onClick: (event) => this.itemClick(event, item, index),
                 className: 'p-menuitem-link',
                 labelClassName: 'p-steps-title',
                 numberClassName: 'p-steps-number',
