@@ -640,7 +640,7 @@ export class UITreeNode extends Component {
                 expanded: this.isExpanded()
             };
 
-            content = ObjectUtils.getJSXElement(this.props.togglerTemplate, this.props.node, defaultContentOptions);
+            content = ObjectUtils.getJSXElement(this.props.nodeTemplate, this.props.node, defaultContentOptions);
         }
 
         return content;
