@@ -210,7 +210,7 @@ export interface DataTableProps {
     showSelectionElement?(data: any): boolean | undefined | null;
     showRowReorderElement?(data: any): boolean | undefined | null;
     onSelectionChange?(e: DataTableSelectionChangeParams): void;
-    onContextMenuSelectionChange?(e: DataTableRowEventParams): void;
+    onContextMenuSelectionChange?(e: DataTableSelectionChangeParams): void;
     rowExpansionTemplate?(data: any): React.ReactNode;
     onRowToggle?(e: DataTableRowToggleParams): void;
     rowClassName?(data: any): object;

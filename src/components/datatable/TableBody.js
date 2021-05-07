@@ -358,7 +358,7 @@ export class TableBody extends Component {
             if (this.props.onContextMenuSelectionChange) {
                 this.props.onContextMenuSelectionChange({
                     originalEvent: event.originalEvent,
-                    data: event.data
+                    value: event.data
                 });
             }
 
