@@ -325,18 +325,30 @@ export class ConfirmPopup extends Component {
             'p-button-text': !this.props.rejectClassName
         }, this.props.rejectClassName);
 
-        const content = this.props.footer ? ObjectUtils.getJSXElement(this.props.footer, this.props) : (
-            <>
+        const content = (
+            <div className="p-confirm-popup-footer">
                 <Button label={this.rejectLabel()} icon={this.props.rejectIcon} className={rejectClassName} onClick={this.reject} />
                 <Button label={this.acceptLabel()} icon={this.props.acceptIcon} className={acceptClassName} onClick={this.accept} autoFocus />
-            </>
-        )
-
-        return (
-            <div className="p-confirm-popup-footer">
-                {content}
             </div>
         )
+
+        if (this.props.footer) {
+            const defaultContentOptions = {
+                accept: this.accept,
+                reject: this.reject,
+                className: 'p-confirm-popup-footer',
+                acceptClassName,
+                rejectClassName,
+                acceptLabel: this.acceptLabel(),
+                rejectLabel: this.rejectLabel(),
+                element: content,
+                props: this.props
+            };
+
+            return ObjectUtils.getJSXElement(this.props.footer, defaultContentOptions);
+        }
+
+        return content;
     }
 
     renderElement() {

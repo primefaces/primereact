@@ -1,12 +1,24 @@
 import * as React from 'react';
 import { DialogProps } from '../dialog/Dialog';
 
-type ConfirmDialogTemplateType = React.ReactNode | ((props: ConfirmDialogProps) => React.ReactNode);
+type ConfirmDialogTemplateType = React.ReactNode | ((options: ConfirmDialogOptions) => React.ReactNode);
 
 type ConfirmDialogAppendToType = 'self' | HTMLElement | undefined | null;
 
 interface ConfirmDialogBreakpoints {
     [key: string]: string;
+}
+
+interface ConfirmDialogOptions {
+    accept(): void;
+    reject(): void;
+    acceptClassName: string;
+    rejectClassName: string;
+    acceptLabel: string;
+    rejectLabel: string;
+    element: React.ReactNode;
+    props: ConfirmDialogProps;
+    [key: string]: any;
 }
 
 export interface ConfirmDialogProps extends Omit<DialogProps, 'onHide'> {

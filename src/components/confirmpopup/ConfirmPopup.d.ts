@@ -1,8 +1,21 @@
 import * as React from 'react';
 
-type ConfirmPopupTemplateType = React.ReactNode | ((props: ConfirmPopupProps) => React.ReactNode);
+type ConfirmPopupTemplateType = React.ReactNode | ((options: ConfirmPopupOptions) => React.ReactNode);
 
 type ConfirmPopupAppendToType = 'self' | HTMLElement | undefined | null;
+
+interface ConfirmPopupOptions {
+    accept(): void;
+    reject(): void;
+    className: string;
+    acceptClassName: string;
+    rejectClassName: string;
+    acceptLabel: string;
+    rejectLabel: string;
+    element: React.ReactNode;
+    props: ConfirmPopupProps;
+    [key: string]: any;
+}
 
 export interface ConfirmPopupProps {
     target?: HTMLElement;
