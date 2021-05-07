@@ -40,7 +40,7 @@ export class App extends Component {
             themeCategory: null,
             menuMode: null,
             sidebarActive: false,
-            newsActive: false, //this.isNewsStorageExpired(),
+            newsActive: true, //this.isNewsStorageExpired(),
             configuratorActive: false,
             changelogActive: false,
             searchVal: null

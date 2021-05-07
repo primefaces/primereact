@@ -9,8 +9,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: linear-gradient(to left, #e2821a, #e49e18);
-    cursor: pointer;
+    background-image: url("../../images/topbar-freya-bg.jpg");
 
     .layout-news-container {
         width: 100%;
@@ -43,15 +42,15 @@
         }
 
         img.layouts-news-mockup-image {
-            max-width: 350px;
+            max-width: 500px;
         }
 
         .layout-news-button {
-            border: 2px solid #212121;
-            color: #212121;
+            border: 2px solid #ffffff;
+            color: #ffffff;
             font-size: 15px;
             padding: 0.5em 1em;
-            font-weight: bold;
+            font-weight: bolder;
             border-radius: 3px;
             display: flex;
             justify-content: center;

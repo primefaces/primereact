@@ -259,6 +259,11 @@ export class AppTopbar extends Component {
 
                                 <li role="none" className="topbar-submenu-header">PREMIUM ADMIN TEMPLATES</li>
                                 <li role="none">
+                                    <a href="https://www.primefaces.org/layouts/freya-react" role="menuitem" rel="noopener noreferrer" target="_blank">
+                                        <img src="showcase/images/layouts/themeswitcher-freya.png" alt="Freya" /><span>Freya</span><span className="theme-badge new p-tag p-tag-success">NEW</span>
+                                    </a>
+                                </li>
+                                <li role="none">
                                     <a href="https://www.primefaces.org/layouts/diamond-react" role="menuitem" rel="noopener noreferrer" target="_blank">
                                         <img src="showcase/images/layouts/themeswitcher-diamond.png" alt="Diamond" /><span>Diamond</span><span className="theme-badge new p-tag p-tag-success">NEW</span>
                                     </a>

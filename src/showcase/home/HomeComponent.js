@@ -135,6 +135,11 @@ export class HomeComponent extends Component {
 
                     <div className="p-grid">
                         <div className="p-col-12 p-md-3">
+                            <a href="https://www.primefaces.org/layouts/freya-react">
+                                <img alt="Freya" src="showcase/images/layouts/freya-react.jpg" />
+                            </a>
+                        </div>
+                        <div className="p-col-12 p-md-3">
                             <a href="https://www.primefaces.org/layouts/ultima-react">
                                 <img alt="Ultima" src="showcase/images/layouts/ultima-react.jpg" />
                             </a>
