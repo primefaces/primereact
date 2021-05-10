@@ -838,6 +838,7 @@ const buttonOptions = {
                         <tr>
                             <td>uploadHandler</td>
                             <td>event.files: List of selected files.</td>
+                            <td>event.options: Handler options.</td>
                             <td>Callback to invoke in custom upload mode to upload the files manually.</td>
                         </tr>
                         <tr>

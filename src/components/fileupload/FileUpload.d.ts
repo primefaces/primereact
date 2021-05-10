@@ -62,6 +62,15 @@ interface FileUploadProgressParams {
     progress: number;
 }
 
+interface FileUploadHandlerOptions {
+    clear(): void;
+    props: FileUploadProps;
+}
+
+interface FileUploadHandlerParam extends FileUploadFilesParam {
+    options: FileUploadHandlerOptions;
+}
+
 interface FileUploadRemoveParams extends FileUploadSelectParams { }
 
 interface FileUploadProps {
@@ -102,7 +111,7 @@ interface FileUploadProps {
     onSelect?(e: FileUploadSelectParams): void;
     onProgress?(e: FileUploadProgressParams): void;
     onValidationFail?(file: File): void;
-    uploadHandler?(e: FileUploadFilesParam): void;
+    uploadHandler?(e: FileUploadHandlerParam): void;
     onRemove?(e: FileUploadRemoveParams): void;
 }
 

@@ -294,7 +294,11 @@ export class FileUpload extends Component {
 
             if (this.props.uploadHandler) {
                 this.props.uploadHandler({
-                    files: this.state.files
+                    files: this.state.files,
+                    options: {
+                        clear: this.clear,
+                        props: this.props
+                    }
                 })
             }
         }
