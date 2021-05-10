@@ -911,10 +911,10 @@
                             ]
                         },
                         {
-                            "name": "Toggle",
+                            "name": "ColToggle",
                             "to": "/treetable/toggle",
                             "meta": [
-                                "toggle"
+                                "coltoggle"
                             ]
                         },
                         {
