@@ -186,7 +186,9 @@ export class FileUpload extends Component {
     }
 
     clearInputElement() {
-        this.fileInput.value = '';
+        if (this.fileInput) {
+            this.fileInput.value = '';
+        }
     }
 
     clearIEInput() {
