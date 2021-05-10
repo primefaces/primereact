@@ -1,5 +1,47 @@
 # Changelog
 
+## [6.3.2](https://github.com/primefaces/primereact/tree/6.3.2) (2021-05-10)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/6.3.1...6.3.2)
+
+**Breaking changes:**
+
+- Remove activeItem property from TabMenu [\#2015](https://github.com/primefaces/primereact/issues/2015)
+- Replace 'data' params name with 'value' for onContextMenuSelectionChange on DataTable [\#2021](https://github.com/primefaces/primereact/issues/2021)
+- Improve nodeTemplate property on Tree [\#2019](https://github.com/primefaces/primereact/issues/2019)
+
+**Implemented New Features and Enhancements:**
+
+- Add options parameter to uploadHandler callback on FileUpload [\#2024](https://github.com/primefaces/primereact/issues/2024)
+- Improve footer template on ConfirmDialog and ConfirmPopup [\#2020](https://github.com/primefaces/primereact/issues/2020)
+- Add activeIndex property to TabMenu [\#2014](https://github.com/primefaces/primereact/issues/2014)
+- onBlur/onFocus's event argument should be typed as FocusEvent [\#2009](https://github.com/primefaces/primereact/issues/2009)
+- Add togglerTemplate property to Tree [\#2005](https://github.com/primefaces/primereact/issues/2005)
+- ColorPicker: wrong value type definitions when using rgb or hsb format [\#2004](https://github.com/primefaces/primereact/issues/2004)
+- Expand the root of filtered nodes on Tree [\#2001](https://github.com/primefaces/primereact/issues/2001)
+- Export classNames function from 'primereact/utils' package [\#1990](https://github.com/primefaces/primereact/issues/1990)
+- Striped class is not applied to expanded rows on DataTable [\#1987](https://github.com/primefaces/primereact/issues/1987)
+- Improve type definitions for IDEs [\#1986](https://github.com/primefaces/primereact/issues/1986)
+
+**Fixed bugs:**
+
+- Multiselect item on 0 index is getting selected [\#2012](https://github.com/primefaces/primereact/issues/2012)
+- MultiSelect is not working nested value option [\#2011](https://github.com/primefaces/primereact/issues/2011)
+- DataTable checkbox-only selection:: behave as "single" mode. [\#2008](https://github.com/primefaces/primereact/issues/2008)
+- ColorPicker: add missing input attributes, part 2: type definitions [\#2006](https://github.com/primefaces/primereact/issues/2006)
+- ListBox fails on tap item in mobile [\#2000](https://github.com/primefaces/primereact/issues/2000)
+- InputTextarea with auto resize isn't sized correctly when initially populated with a long string [\#1999](https://github.com/primefaces/primereact/issues/1999)
+- The Toast component missed the 'top-center' and 'bottom-center' positions in the typings [\#1996](https://github.com/primefaces/primereact/issues/1996)
+- TreeSelect onNodeExpand Event Never Fires [\#1995](https://github.com/primefaces/primereact/issues/1995)
+- AccordionTab cannot be rendered conditionally [\#1992](https://github.com/primefaces/primereact/issues/1992)
+- When a selected date is deselected, the inputfield is not updated. [\#1991](https://github.com/primefaces/primereact/issues/1991)
+- Non-sortable columns call onSort callback in DataTable [\#1989](https://github.com/primefaces/primereact/issues/1989)
+- Treetable break after toggle columns [\#1988](https://github.com/primefaces/primereact/issues/1988)
+- Tooltip: Fixed tooltip doesnt work with elements inside Tooltip children \( autoHide = false \) [\#1985](https://github.com/primefaces/primereact/issues/1985)
+- The emptyFilterMessage no longer working on Dropdown/MuliSelect components [\#1984](https://github.com/primefaces/primereact/issues/1984)
+- InputNumber's onValueChange is called unconditionally when the onBlur event occurs. [\#1842](https://github.com/primefaces/primereact/issues/1842)
+- Overlay Components not working for Mobile devices [\#1694](https://github.com/primefaces/primereact/issues/1694)
+
 ## [6.3.1](https://github.com/primefaces/primereact/tree/6.3.1) (2021-04-25)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/6.3.0...6.3.1)

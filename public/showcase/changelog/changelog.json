@@ -1,4 +1,879 @@
 {
+    "6.3.2": {
+        "fileupload": [
+            {
+                "number": 2024,
+                "title": "Add options parameter to uploadHandler callback on FileUpload",
+                "url": "https://github.com/primefaces/primereact/issues/2024"
+            },
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "datatable": [
+            {
+                "number": 2021,
+                "title": "Replace 'data' params name with 'value' for onContextMenuSelectionChange on DataTable",
+                "url": "https://github.com/primefaces/primereact/issues/2021"
+            },
+            {
+                "number": 1987,
+                "title": "Striped class is not applied to expanded rows on DataTable",
+                "url": "https://github.com/primefaces/primereact/issues/1987"
+            },
+            {
+                "number": 1989,
+                "title": "Non-sortable columns call onSort callback in DataTable",
+                "url": "https://github.com/primefaces/primereact/issues/1989"
+            },
+            {
+                "number": 2008,
+                "title": "DataTable checkbox-only selection:: behave as \"single\" mode.",
+                "url": "https://github.com/primefaces/primereact/issues/2008"
+            },
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "tabmenu": [
+            {
+                "number": 2014,
+                "title": "Add activeIndex property to TabMenu",
+                "url": "https://github.com/primefaces/primereact/issues/2014"
+            },
+            {
+                "number": 2015,
+                "title": "Remove activeItem property from TabMenu",
+                "url": "https://github.com/primefaces/primereact/issues/2015"
+            },
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "multiselect": [
+            {
+                "number": 2011,
+                "title": "MultiSelect is not working nested value option",
+                "url": "https://github.com/primefaces/primereact/issues/2011"
+            },
+            {
+                "number": 2009,
+                "title": "onBlur/onFocus's event argument should be typed as FocusEvent",
+                "url": "https://github.com/primefaces/primereact/issues/2009"
+            },
+            {
+                "number": 1984,
+                "title": "The emptyFilterMessage no longer working on Dropdown/MuliSelect components",
+                "url": "https://github.com/primefaces/primereact/issues/1984"
+            },
+            {
+                "number": 2012,
+                "title": "Multiselect item on 0 index is getting selected",
+                "url": "https://github.com/primefaces/primereact/issues/2012"
+            },
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            },
+            {
+                "number": 1694,
+                "title": "Overlay Components not working for Mobile devices",
+                "url": "https://github.com/primefaces/primereact/issues/1694"
+            }
+        ],
+        "colorpicker": [
+            {
+                "number": 2004,
+                "title": "ColorPicker: wrong value type definitions when using rgb or hsb format",
+                "url": "https://github.com/primefaces/primereact/issues/2004"
+            },
+            {
+                "number": 2006,
+                "title": "ColorPicker: add missing input attributes, part 2: type definitions",
+                "url": "https://github.com/primefaces/primereact/issues/2006"
+            },
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            },
+            {
+                "number": 1694,
+                "title": "Overlay Components not working for Mobile devices",
+                "url": "https://github.com/primefaces/primereact/issues/1694"
+            }
+        ],
+        "autocomplete": [
+            {
+                "number": 2009,
+                "title": "onBlur/onFocus's event argument should be typed as FocusEvent",
+                "url": "https://github.com/primefaces/primereact/issues/2009"
+            },
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            },
+            {
+                "number": 1694,
+                "title": "Overlay Components not working for Mobile devices",
+                "url": "https://github.com/primefaces/primereact/issues/1694"
+            }
+        ],
+        "calendar": [
+            {
+                "number": 2009,
+                "title": "onBlur/onFocus's event argument should be typed as FocusEvent",
+                "url": "https://github.com/primefaces/primereact/issues/2009"
+            },
+            {
+                "number": 1991,
+                "title": "When a selected date is deselected, the inputfield is not updated.",
+                "url": "https://github.com/primefaces/primereact/issues/1991"
+            },
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "chips": [
+            {
+                "number": 2009,
+                "title": "onBlur/onFocus's event argument should be typed as FocusEvent",
+                "url": "https://github.com/primefaces/primereact/issues/2009"
+            },
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "dropdown": [
+            {
+                "number": 2009,
+                "title": "onBlur/onFocus's event argument should be typed as FocusEvent",
+                "url": "https://github.com/primefaces/primereact/issues/2009"
+            },
+            {
+                "number": 1984,
+                "title": "The emptyFilterMessage no longer working on Dropdown/MuliSelect components",
+                "url": "https://github.com/primefaces/primereact/issues/1984"
+            },
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            },
+            {
+                "number": 1694,
+                "title": "Overlay Components not working for Mobile devices",
+                "url": "https://github.com/primefaces/primereact/issues/1694"
+            }
+        ],
+        "inputmask": [
+            {
+                "number": 2009,
+                "title": "onBlur/onFocus's event argument should be typed as FocusEvent",
+                "url": "https://github.com/primefaces/primereact/issues/2009"
+            },
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "inputnumber": [
+            {
+                "number": 2009,
+                "title": "onBlur/onFocus's event argument should be typed as FocusEvent",
+                "url": "https://github.com/primefaces/primereact/issues/2009"
+            },
+            {
+                "number": 1842,
+                "title": "InputNumber's onValueChange is called unconditionally when the onBlur event occurs.",
+                "url": "https://github.com/primefaces/primereact/issues/1842"
+            },
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "inputswitch": [
+            {
+                "number": 2009,
+                "title": "onBlur/onFocus's event argument should be typed as FocusEvent",
+                "url": "https://github.com/primefaces/primereact/issues/2009"
+            },
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "togglebutton": [
+            {
+                "number": 2009,
+                "title": "onBlur/onFocus's event argument should be typed as FocusEvent",
+                "url": "https://github.com/primefaces/primereact/issues/2009"
+            },
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "inputtextarea": [
+            {
+                "number": 1999,
+                "title": "InputTextarea with auto resize isn't sized correctly when initially populated with a long string",
+                "url": "https://github.com/primefaces/primereact/issues/1999"
+            },
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "toast": [
+            {
+                "number": 1996,
+                "title": "The Toast component missed the 'top-center' and 'bottom-center' positions in the typings",
+                "url": "https://github.com/primefaces/primereact/issues/1996"
+            },
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "tree": [
+            {
+                "number": 2001,
+                "title": "Expand the root of filtered nodes on Tree",
+                "url": "https://github.com/primefaces/primereact/issues/2001"
+            },
+            {
+                "number": 2005,
+                "title": "Add togglerTemplate property to Tree",
+                "url": "https://github.com/primefaces/primereact/issues/2005"
+            },
+            {
+                "number": 2019,
+                "title": "Improve nodeTemplate property on Tree",
+                "url": "https://github.com/primefaces/primereact/issues/2019"
+            },
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "accordion": [
+            {
+                "number": 1992,
+                "title": "AccordionTab cannot be rendered conditionally",
+                "url": "https://github.com/primefaces/primereact/issues/1992"
+            },
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "tooltip": [
+            {
+                "number": 1985,
+                "title": "Tooltip: Fixed tooltip doesnt work with elements inside Tooltip children ( autoHide = false )",
+                "url": "https://github.com/primefaces/primereact/issues/1985"
+            },
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "confirmdialog": [
+            {
+                "number": 2020,
+                "title": "Improve footer template on ConfirmDialog and ConfirmPopup",
+                "url": "https://github.com/primefaces/primereact/issues/2020"
+            },
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "confirmpopup": [
+            {
+                "number": 2020,
+                "title": "Improve footer template on ConfirmDialog and ConfirmPopup",
+                "url": "https://github.com/primefaces/primereact/issues/2020"
+            },
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            },
+            {
+                "number": 1694,
+                "title": "Overlay Components not working for Mobile devices",
+                "url": "https://github.com/primefaces/primereact/issues/1694"
+            }
+        ],
+        "listbox": [
+            {
+                "number": 2000,
+                "title": "ListBox fails on tap item in mobile",
+                "url": "https://github.com/primefaces/primereact/issues/2000"
+            },
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "utils": [
+            {
+                "number": 1990,
+                "title": "Export classNames function from 'primereact/utils' package",
+                "url": "https://github.com/primefaces/primereact/issues/1990"
+            }
+        ],
+        "treeselect": [
+            {
+                "number": 1995,
+                "title": "TreeSelect onNodeExpand Event Never Fires",
+                "url": "https://github.com/primefaces/primereact/issues/1995"
+            },
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            },
+            {
+                "number": 1694,
+                "title": "Overlay Components not working for Mobile devices",
+                "url": "https://github.com/primefaces/primereact/issues/1694"
+            }
+        ],
+        "treetable": [
+            {
+                "number": 1988,
+                "title": "Treetable break after toggle columns",
+                "url": "https://github.com/primefaces/primereact/issues/1988"
+            },
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "avatar": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "avatargroup": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "badge": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "breadcrumb": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "button": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "captcha": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "card": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "carousel": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "cascadeselect": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            },
+            {
+                "number": 1694,
+                "title": "Overlay Components not working for Mobile devices",
+                "url": "https://github.com/primefaces/primereact/issues/1694"
+            }
+        ],
+        "chart": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "checkbox": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "chip": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "column": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "columngroup": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "contextmenu": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            },
+            {
+                "number": 1694,
+                "title": "Overlay Components not working for Mobile devices",
+                "url": "https://github.com/primefaces/primereact/issues/1694"
+            }
+        ],
+        "datascroller": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "dataview": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "deferredcontent": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "dialog": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "divider": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "editor": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "fieldset": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "fullcalendar": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "galleria": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "gmap": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "inplace": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "inputtext": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "knob": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "megamenu": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "menu": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            },
+            {
+                "number": 1694,
+                "title": "Overlay Components not working for Mobile devices",
+                "url": "https://github.com/primefaces/primereact/issues/1694"
+            }
+        ],
+        "menubar": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "menuitem": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "message": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "messages": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "multistatecheckbox": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "orderlist": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "organizationchart": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "overlaypanel": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            },
+            {
+                "number": 1694,
+                "title": "Overlay Components not working for Mobile devices",
+                "url": "https://github.com/primefaces/primereact/issues/1694"
+            }
+        ],
+        "paginator": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "panel": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "panelmenu": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "password": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            },
+            {
+                "number": 1694,
+                "title": "Overlay Components not working for Mobile devices",
+                "url": "https://github.com/primefaces/primereact/issues/1694"
+            }
+        ],
+        "picklist": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "progressbar": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "progressspinner": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "radiobutton": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "rating": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "ripple": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "row": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "scrollpanel": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "scrolltop": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "selectbutton": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "sidebar": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "skeleton": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "slidemenu": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            },
+            {
+                "number": 1694,
+                "title": "Overlay Components not working for Mobile devices",
+                "url": "https://github.com/primefaces/primereact/issues/1694"
+            }
+        ],
+        "slider": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "splitbutton": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            },
+            {
+                "number": 1694,
+                "title": "Overlay Components not working for Mobile devices",
+                "url": "https://github.com/primefaces/primereact/issues/1694"
+            }
+        ],
+        "splitter": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "steps": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "tabview": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "tag": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "tieredmenu": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            },
+            {
+                "number": 1694,
+                "title": "Overlay Components not working for Mobile devices",
+                "url": "https://github.com/primefaces/primereact/issues/1694"
+            }
+        ],
+        "timeline": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "toolbar": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ],
+        "tristatecheckbox": [
+            {
+                "number": 1986,
+                "title": "Improve type definitions for IDEs",
+                "url": "https://github.com/primefaces/primereact/issues/1986"
+            }
+        ]
+    },
     "6.3.1": {
         "datatable": [
             {
@@ -5434,1259 +6309,6 @@
                 "number": 1463,
                 "title": "Add content property to Message component",
                 "url": "https://github.com/primefaces/primereact/issues/1463"
-            }
-        ]
-    },
-
-    "4.2.2": {
-        "dialog": [
-            {
-                "number": 1386,
-                "title": "Change the type of iconsTemplate property on Dialog",
-                "url": "https://github.com/primefaces/primereact/issues/1386"
-            }
-        ],
-        "utils": [
-            {
-                "number": 1386,
-                "title": "Change the type of iconsTemplate property on Dialog",
-                "url": "https://github.com/primefaces/primereact/issues/1386"
-            }
-        ],
-        "carousel": [
-            {
-                "number": 1387,
-                "title": "Incorrect work page parameter in carousel",
-                "url": "https://github.com/primefaces/primereact/issues/1387"
-            }
-        ],
-        "datatable": [
-            {
-                "number": 1384,
-                "title": "The className property of Column is not set to <col> element",
-                "url": "https://github.com/primefaces/primereact/issues/1384"
-            },
-            {
-                "number": 1389,
-                "title": "Add onStateSave and onStateRestore callbacks to DataTable with stateStorage",
-                "url": "https://github.com/primefaces/primereact/issues/1389"
-            },
-            {
-                "number": 1383,
-                "title": "EmptyMessage property is not working with empty string on DataTable",
-                "url": "https://github.com/primefaces/primereact/issues/1383"
-            },
-            {
-                "number": 1382,
-                "title": "Add custom mode to stateStorage",
-                "url": "https://github.com/primefaces/primereact/issues/1382"
-            }
-        ],
-        "dropdown": [
-            {
-                "number": 1360,
-                "title": "When the input filter element is clicked, the panel closes on DropDown",
-                "url": "https://github.com/primefaces/primereact/issues/1360"
-            }
-        ],
-        "overlaypanel": [
-            {
-                "number": 1381,
-                "title": "When the month is changed in Calendar inside OverlayPanel, the panel automatically closes.",
-                "url": "https://github.com/primefaces/primereact/issues/1381"
-            }
-        ],
-        "button": [
-            {
-                "number": 1262,
-                "title": "Deprecate *styleClass props in favor of *className",
-                "url": "https://github.com/primefaces/primereact/issues/1262"
-            }
-        ],
-        "calendar": [
-            {
-                "number": 1262,
-                "title": "Deprecate *styleClass props in favor of *className",
-                "url": "https://github.com/primefaces/primereact/issues/1262"
-            },
-            {
-                "number": 1388,
-                "title": "Calendar navigator skips one month",
-                "url": "https://github.com/primefaces/primereact/issues/1388"
-            },
-            {
-                "number": 1385,
-                "title": "Calendar uses : instead of . as seperator for milliseconds",
-                "url": "https://github.com/primefaces/primereact/issues/1385"
-            }
-        ],
-        "organizationchart": [
-            {
-                "number": 1262,
-                "title": "Deprecate *styleClass props in favor of *className",
-                "url": "https://github.com/primefaces/primereact/issues/1262"
-            }
-        ],
-        "sidebar": [
-            {
-                "number": 1262,
-                "title": "Deprecate *styleClass props in favor of *className",
-                "url": "https://github.com/primefaces/primereact/issues/1262"
-            }
-        ],
-        "togglebutton": [
-            {
-                "number": 1262,
-                "title": "Deprecate *styleClass props in favor of *className",
-                "url": "https://github.com/primefaces/primereact/issues/1262"
-            }
-        ],
-        "treetable": [
-            {
-                "number": 1366,
-                "title": "TreeTable column body prop function does not contain column argument",
-                "url": "https://github.com/primefaces/primereact/issues/1366"
-            }
-        ],
-        "colorpicker": [
-            {
-                "number": 1323,
-                "title": "ColorPicker: add missing input attributes",
-                "url": "https://github.com/primefaces/primereact/issues/1323"
-            }
-        ],
-        "tree": [
-            {
-                "number": 1390,
-                "title": "Tree filter with onToggle method doesn't work as expected",
-                "url": "https://github.com/primefaces/primereact/issues/1390"
-            }
-        ]
-    },
-
-    "4.2.1": {
-        "autocomplete": [
-            {
-                "number": 1296,
-                "title": "AutoComplete: selectedItemTemplate gets called for query",
-                "url": "https://github.com/primefaces/primereact/issues/1296"
-            }
-        ],
-        "inputmask": [
-            {
-                "number": 1342,
-                "title": "InputMask displayed value does not change when value changes to undefined or null",
-                "url": "https://github.com/primefaces/primereact/issues/1342"
-            }
-        ],
-        "datatable": [
-            {
-                "number": 1352,
-                "title": "DataTable: filters are not rerendered when their state is changed",
-                "url": "https://github.com/primefaces/primereact/issues/1352"
-            },
-            {
-                "number": 1351,
-                "title": "DataTable: wrong type definition for onFilter",
-                "url": "https://github.com/primefaces/primereact/issues/1351"
-            }
-        ],
-        "utils": [
-            {
-                "number": 1343,
-                "title": "Remove filter method from ObjectUtils",
-                "url": "https://github.com/primefaces/primereact/issues/1343"
-            }
-        ],
-        "dropdown": [
-            {
-                "number": 1359,
-                "title": "Editable Dropdown is not working as expected ",
-                "url": "https://github.com/primefaces/primereact/issues/1359"
-            },
-            {
-                "number": 1358,
-                "title": "Dropdown throws an exception on console after filtering and keyboard navigation",
-                "url": "https://github.com/primefaces/primereact/issues/1358"
-            },
-            {
-                "number": 1339,
-                "title": "Wrong import for FilterUtils",
-                "url": "https://github.com/primefaces/primereact/issues/1339"
-            }
-        ],
-        "editor": [
-            {
-                "number": 1346,
-                "title": "Editor Component readOnly property name wrong",
-                "url": "https://github.com/primefaces/primereact/issues/1346"
-            }
-        ],
-        "multiselect": [
-            {
-                "number": 1344,
-                "title": "React multiselect defaultValue warning",
-                "url": "https://github.com/primefaces/primereact/issues/1344"
-            },
-            {
-                "number": 1339,
-                "title": "Wrong import for FilterUtils",
-                "url": "https://github.com/primefaces/primereact/issues/1339"
-            }
-        ],
-        "inputtextarea": [
-            {
-                "number": 1350,
-                "title": "Autofocus property doesn't work as expected on Textarea",
-                "url": "https://github.com/primefaces/primereact/issues/1350"
-            }
-        ],
-        "listbox": [
-            {
-                "number": 1339,
-                "title": "Wrong import for FilterUtils",
-                "url": "https://github.com/primefaces/primereact/issues/1339"
-            }
-        ]
-    },
-
-    "4.2.0": {
-        "inputnumber": [
-            {
-                "number": 1311,
-                "title": "New Component: InputNumber",
-                "url": "https://github.com/primefaces/primereact/issues/1311"
-            }
-        ],
-        "multiselect": [
-            {
-                "number": 1336,
-                "title": "Add filterLocale property to MultiSelect",
-                "url": "https://github.com/primefaces/primereact/issues/1336"
-            },
-            {
-                "number": 1332,
-                "title": "Add checkValidity method to MultiSelect",
-                "url": "https://github.com/primefaces/primereact/issues/1332"
-            },
-            {
-                "number": 1319,
-                "title": "Refactor MultiSelect outside click detection",
-                "url": "https://github.com/primefaces/primereact/issues/1319"
-            },
-            {
-                "number": 1306,
-                "title": "MultiSelect/Dropdown expose input attributes for labeling and validation purposes",
-                "url": "https://github.com/primefaces/primereact/issues/1306"
-            },
-            {
-                "number": 1331,
-                "title": "Dropdown checkValidity fails",
-                "url": "https://github.com/primefaces/primereact/issues/1331"
-            }
-        ],
-        "listbox": [
-            {
-                "number": 1335,
-                "title": "Add filterLocale property to ListBox",
-                "url": "https://github.com/primefaces/primereact/issues/1335"
-            }
-        ],
-        "dropdown": [
-            {
-                "number": 1334,
-                "title": "Add filterLocale property to Dropdown",
-                "url": "https://github.com/primefaces/primereact/issues/1334"
-            },
-            {
-                "number": 1332,
-                "title": "Add checkValidity method to MultiSelect",
-                "url": "https://github.com/primefaces/primereact/issues/1332"
-            },
-            {
-                "number": 1310,
-                "title": "Refactor Dropdown outside click detection ",
-                "url": "https://github.com/primefaces/primereact/issues/1310"
-            },
-            {
-                "number": 1306,
-                "title": "MultiSelect/Dropdown expose input attributes for labeling and validation purposes",
-                "url": "https://github.com/primefaces/primereact/issues/1306"
-            },
-            {
-                "number": 1331,
-                "title": "Dropdown checkValidity fails",
-                "url": "https://github.com/primefaces/primereact/issues/1331"
-            }
-        ],
-        "tree": [
-            {
-                "number": 1338,
-                "title": "Add filterLocale property to Tree",
-                "url": "https://github.com/primefaces/primereact/issues/1338"
-            },
-            {
-                "number": 1182,
-                "title": "Tree drag&drop not working if dragdropScope contains upper case letter",
-                "url": "https://github.com/primefaces/primereact/issues/1182"
-            }
-        ],
-        "carousel": [
-            {
-                "number": 1300,
-                "title": "Carousel  - Button inside carousel-item is not clickable in mobile phones",
-                "url": "https://github.com/primefaces/primereact/issues/1300"
-            }
-        ],
-        "calendar": [
-            {
-                "number": 1293,
-                "title": "Add milliseconds support to Calendar",
-                "url": "https://github.com/primefaces/primereact/issues/1293"
-            },
-            {
-                "number": 1281,
-                "title": "Today Button doesn't work on prefilled Calendar with timeonly",
-                "url": "https://github.com/primefaces/primereact/issues/1281"
-            },
-            {
-                "number": 1294,
-                "title": "Improve timepicker style on Calendar",
-                "url": "https://github.com/primefaces/primereact/issues/1294"
-            },
-            {
-                "number": 1328,
-                "title": "Calendar.showOtherMonths property not being used",
-                "url": "https://github.com/primefaces/primereact/issues/1328"
-            }
-        ],
-        "autocomplete": [
-            {
-                "number": 1305,
-                "title": "Autocomplete dropdown button close behavior enhancement",
-                "url": "https://github.com/primefaces/primereact/issues/1305"
-            },
-            {
-                "number": 1308,
-                "title": "Refactor AutoComplete outside click detection",
-                "url": "https://github.com/primefaces/primereact/issues/1308"
-            },
-            {
-                "number": 1316,
-                "title": "IE11: Autocomplete with dropdown and multiple selection requires doubleclick",
-                "url": "https://github.com/primefaces/primereact/issues/1316"
-            },
-            {
-                "number": 1297,
-                "title": "AutoComplete: selectedItemTemplate ts binding claims to expect JSX.Element in return, but at runtime a string is expected",
-                "url": "https://github.com/primefaces/primereact/issues/1297"
-            }
-        ],
-        "utils": [
-            {
-                "number": 1286,
-                "title": "Not nullable `dataKey` in DropDown break `selectedOption` property",
-                "url": "https://github.com/primefaces/primereact/issues/1286"
-            }
-        ],
-        "datatable": [
-            {
-                "number": 1333,
-                "title": "Add filterLocale property to DataTable",
-                "url": "https://github.com/primefaces/primereact/issues/1333"
-            },
-            {
-                "number": 1307,
-                "title": "multiSortMeta depends on single sort",
-                "url": "https://github.com/primefaces/primereact/issues/1307"
-            },
-            {
-                "number": 1329,
-                "title": "Update sortIcons",
-                "url": "https://github.com/primefaces/primereact/issues/1329"
-            }
-        ],
-        "togglebutton": [
-            {
-                "number": 1321,
-                "title": "Disable prop on ToggleButton not working",
-                "url": "https://github.com/primefaces/primereact/issues/1321"
-            },
-            {
-                "number": 1330,
-                "title": "onFocus - onBlur for ToggleButton",
-                "url": "https://github.com/primefaces/primereact/issues/1330"
-            }
-        ],
-        "treetable": [
-            {
-                "number": 1337,
-                "title": "Add filterLocale property to TreeTable",
-                "url": "https://github.com/primefaces/primereact/issues/1337"
-            },
-            {
-                "number": 1276,
-                "title": "TreeTable goes to edit mode when expanded",
-                "url": "https://github.com/primefaces/primereact/issues/1276"
-            },
-            {
-                "number": 1329,
-                "title": "Update sortIcons",
-                "url": "https://github.com/primefaces/primereact/issues/1329"
-            }
-        ],
-        "inputmask": [
-            {
-                "number": 1309,
-                "title": "InputMask displayed value does not change when value changes to undefined or null",
-                "url": "https://github.com/primefaces/primereact/issues/1309"
-            }
-        ],
-        "menu": [
-            {
-                "number": 1318,
-                "title": "Refactor Menu outside click detection ",
-                "url": "https://github.com/primefaces/primereact/issues/1318"
-            }
-        ],
-        "tooltip": [
-            {
-                "number": 1327,
-                "title": "Adding missing type definition className to ToolTipOptions",
-                "url": "https://github.com/primefaces/primereact/pull/1327"
-            }
-        ],
-        "colorpicker": [
-            {
-                "number": 1317,
-                "title": "Refactor ColorPicker outside click detection",
-                "url": "https://github.com/primefaces/primereact/issues/1317"
-            }
-        ],
-        "overlaypanel": [
-            {
-                "number": 1320,
-                "title": "Refactor OverlayPanel outside click detection",
-                "url": "https://github.com/primefaces/primereact/issues/1320"
-            }
-        ],
-        "fileupload": [
-            {
-                "number": 1282,
-                "title": "FileUpload in auto mode sends two post requests in IE11",
-                "url": "https://github.com/primefaces/primereact/issues/1282"
-            }
-        ],
-        "chips": [
-            {
-                "number": 1285,
-                "title": "Separator for Chips",
-                "url": "https://github.com/primefaces/primereact/issues/1285"
-            }
-        ],
-        "tristatecheckbox": [
-            {
-                "number": 1325,
-                "title": "Disabled prop for TriStateCheckbox",
-                "url": "https://github.com/primefaces/primereact/issues/1325"
-            }
-        ]
-    },
-
-    "4.1.2": {
-        "datatable": [
-            {
-                "number": 1279,
-                "title": "Multiple Sort doesn't work as expected in the DataTable if a sortable column has sortField and field properties",
-                "url": "https://github.com/primefaces/primereact/issues/1279"
-            },
-            {
-                "number": 1269,
-                "title": "Tab-Key doesn't work in Datatable with cell editing on IE11 and Edge",
-                "url": "https://github.com/primefaces/primereact/issues/1269"
-            },
-            {
-                "number": 1271,
-                "title": "Setting state in onFocus of Datatable Editors crashes app",
-                "url": "https://github.com/primefaces/primereact/issues/1271"
-            }
-        ],
-        "autocomplete": [
-            {
-                "number": 1278,
-                "title": "Chips in disabled Autocomplete are not disabled",
-                "url": "https://github.com/primefaces/primereact/issues/1278"
-            },
-            {
-                "number": 1267,
-                "title": "IE11: Autocomplete with dropdown requires doubleclick",
-                "url": "https://github.com/primefaces/primereact/issues/1267"
-            }
-        ],
-        "calendar": [
-            {
-                "number": 1277,
-                "title": "Calendar display not update when value change.",
-                "url": "https://github.com/primefaces/primereact/issues/1277"
-            },
-            {
-                "number": 1272,
-                "title": "Calendar closes right away in Chrome when it has showTime={true}",
-                "url": "https://github.com/primefaces/primereact/issues/1272"
-            },
-            {
-                "number": 1270,
-                "title": "Invalid Date in Calendar in IE11 crashes the app",
-                "url": "https://github.com/primefaces/primereact/issues/1270"
-            }
-        ],
-        "inputmask": [
-            {
-                "number": 1265,
-                "title": "OnComplete callback has wrong property params on InputMask.d.ts",
-                "url": "https://github.com/primefaces/primereact/issues/1265"
-            }
-        ],
-        "dataview": [
-            {
-                "number": 1264,
-                "title": "DataView: lazy loading implementation",
-                "url": "https://github.com/primefaces/primereact/issues/1264"
-            }
-        ]
-    },
-
-    "4.1.1": {
-        "paginator": [
-            {
-                "number": 1251,
-                "title": "currentPageReport should check for {last} boundary",
-                "url": "https://github.com/primefaces/primereact/issues/1251"
-            }
-        ],
-        "tabview": [
-            {
-                "number": 1254,
-                "title": "Disabled TabPanel focussable with TAB-Key",
-                "url": "https://github.com/primefaces/primereact/issues/1254"
-            }
-        ],
-        "treetable": [
-            {
-                "number": 1253,
-                "title": "Error on TreeTable docs about responsive",
-                "url": "https://github.com/primefaces/primereact/issues/1253"
-            }
-        ],
-        "dropdown": [
-            {
-                "number": 1252,
-                "title": "Select components don't correctly return value",
-                "url": "https://github.com/primefaces/primereact/issues/1252"
-            },
-            {
-                "number": 1249,
-                "title": "resetFilter function for Dropdown",
-                "url": "https://github.com/primefaces/primereact/issues/1249"
-            },
-            {
-                "number": 1199,
-                "title": "Improve type definition for onChange of form components",
-                "url": "https://github.com/primefaces/primereact/issues/1199"
-            },
-            {
-                "number": 1260,
-                "title": "Add onFocus-onBlur to Dropdown",
-                "url": "https://github.com/primefaces/primereact/issues/1260"
-            }
-        ],
-        "listbox": [
-            {
-                "number": 1252,
-                "title": "Select components don't correctly return value",
-                "url": "https://github.com/primefaces/primereact/issues/1252"
-            },
-            {
-                "number": 1199,
-                "title": "Improve type definition for onChange of form components",
-                "url": "https://github.com/primefaces/primereact/issues/1199"
-            }
-        ],
-        "multiselect": [
-            {
-                "number": 1252,
-                "title": "Select components don't correctly return value",
-                "url": "https://github.com/primefaces/primereact/issues/1252"
-            },
-            {
-                "number": 1199,
-                "title": "Improve type definition for onChange of form components",
-                "url": "https://github.com/primefaces/primereact/issues/1199"
-            }
-        ],
-        "selectbutton": [
-            {
-                "number": 1252,
-                "title": "Select components don't correctly return value",
-                "url": "https://github.com/primefaces/primereact/issues/1252"
-            },
-            {
-                "number": 1199,
-                "title": "Improve type definition for onChange of form components",
-                "url": "https://github.com/primefaces/primereact/issues/1199"
-            }
-        ],
-        "toast": [
-            {
-                "number": 1248,
-                "title": "onClose of GrowlMessage is also allowing onClick to fire.",
-                "url": "https://github.com/primefaces/primereact/issues/1248"
-            }
-        ],
-        "inputmask": [
-            {
-                "number": 1255,
-                "title": "InputMask OnComplete does not contain the new value",
-                "url": "https://github.com/primefaces/primereact/issues/1255"
-            },
-            {
-                "number": 1199,
-                "title": "Improve type definition for onChange of form components",
-                "url": "https://github.com/primefaces/primereact/issues/1199"
-            }
-        ],
-        "autocomplete": [
-            {
-                "number": 1199,
-                "title": "Improve type definition for onChange of form components",
-                "url": "https://github.com/primefaces/primereact/issues/1199"
-            }
-        ],
-        "calendar": [
-            {
-                "number": 1199,
-                "title": "Improve type definition for onChange of form components",
-                "url": "https://github.com/primefaces/primereact/issues/1199"
-            }
-        ],
-        "checkbox": [
-            {
-                "number": 1199,
-                "title": "Improve type definition for onChange of form components",
-                "url": "https://github.com/primefaces/primereact/issues/1199"
-            }
-        ],
-        "chips": [
-            {
-                "number": 1199,
-                "title": "Improve type definition for onChange of form components",
-                "url": "https://github.com/primefaces/primereact/issues/1199"
-            }
-        ],
-        "colorpicker": [
-            {
-                "number": 1199,
-                "title": "Improve type definition for onChange of form components",
-                "url": "https://github.com/primefaces/primereact/issues/1199"
-            }
-        ],
-        "inputswitch": [
-            {
-                "number": 1199,
-                "title": "Improve type definition for onChange of form components",
-                "url": "https://github.com/primefaces/primereact/issues/1199"
-            }
-        ],
-        "radiobutton": [
-            {
-                "number": 1199,
-                "title": "Improve type definition for onChange of form components",
-                "url": "https://github.com/primefaces/primereact/issues/1199"
-            }
-        ],
-        "rating": [
-            {
-                "number": 1199,
-                "title": "Improve type definition for onChange of form components",
-                "url": "https://github.com/primefaces/primereact/issues/1199"
-            }
-        ],
-        "spinner": [
-            {
-                "number": 1199,
-                "title": "Improve type definition for onChange of form components",
-                "url": "https://github.com/primefaces/primereact/issues/1199"
-            }
-        ],
-        "togglebutton": [
-            {
-                "number": 1199,
-                "title": "Improve type definition for onChange of form components",
-                "url": "https://github.com/primefaces/primereact/issues/1199"
-            }
-        ],
-        "tristatecheckbox": [
-            {
-                "number": 1199,
-                "title": "Improve type definition for onChange of form components",
-                "url": "https://github.com/primefaces/primereact/issues/1199"
-            }
-        ],
-        "datatable": [
-            {
-                "number": 1261,
-                "title": "DataTable scrollHeight doesn't calculate correctly with frozen columns and header groups",
-                "url": "https://github.com/primefaces/primereact/issues/1261"
-            }
-        ]
-    },
-
-    "4.1.0": {
-        "column": [
-            {
-                "number": 1246,
-                "title": "Add reorderable to Column",
-                "url": "https://github.com/primefaces/primereact/issues/1246"
-            },
-            {
-                "number": 1221,
-                "title": "Add filterField to column",
-                "url": "https://github.com/primefaces/primereact/issues/1221"
-            },
-            {
-                "number": 1223,
-                "title": "New filtering modes for Table",
-                "url": "https://github.com/primefaces/primereact/issues/1223"
-            },
-            {
-                "number": 1222,
-                "title": "Accents support in Table filtering",
-                "url": "https://github.com/primefaces/primereact/issues/1222"
-            },
-            {
-                "number": 1032,
-                "title": "DataTable Columns: Conditional reorder",
-                "url": "https://github.com/primefaces/primereact/issues/1032"
-            },
-            {
-                "number": 1224,
-                "title": "New DataTable Customer Demo",
-                "url": "https://github.com/primefaces/primereact/issues/1224"
-            },
-            {
-                "number": 1220,
-                "title": "Move column filters to their own row",
-                "url": "https://github.com/primefaces/primereact/issues/1220"
-            },
-            {
-                "number": 1031,
-                "title": "Datatable Columns: Conditional select",
-                "url": "https://github.com/primefaces/primereact/issues/1031"
-            },
-            {
-                "number": 1226,
-                "title": "Add rowHover to DataTable",
-                "url": "https://github.com/primefaces/primereact/issues/1226"
-            },
-            {
-                "number": 1227,
-                "title": "Add filterHeaderStyle and filterHeaderClassName to Column",
-                "url": "https://github.com/primefaces/primereact/issues/1227"
-            }
-        ],
-        "datatable": [
-            {
-                "number": 1246,
-                "title": "Add reorderable to Column",
-                "url": "https://github.com/primefaces/primereact/issues/1246"
-            },
-            {
-                "number": 1219,
-                "title": " Remove tabIndex from the headers of the non-sortable dataTable.",
-                "url": "https://github.com/primefaces/primereact/issues/1219"
-            },
-            {
-                "number": 1236,
-                "title": "Change the type of emptyMessage property on DataTable",
-                "url": "https://github.com/primefaces/primereact/issues/1236"
-            },
-            {
-                "number": 1218,
-                "title": "The virtualScroll height is always added to rows on DataTable",
-                "url": "https://github.com/primefaces/primereact/issues/1218"
-            },
-            {
-                "number": 1198,
-                "title": "Added warnings to columnKeys in reorderable DataTables",
-                "url": "https://github.com/primefaces/primereact/pull/1198"
-            },
-            {
-                "number": 1221,
-                "title": "Add filterField to column",
-                "url": "https://github.com/primefaces/primereact/issues/1221"
-            },
-            {
-                "number": 1223,
-                "title": "New filtering modes for Table",
-                "url": "https://github.com/primefaces/primereact/issues/1223"
-            },
-            {
-                "number": 1222,
-                "title": "Accents support in Table filtering",
-                "url": "https://github.com/primefaces/primereact/issues/1222"
-            },
-            {
-                "number": 1032,
-                "title": "DataTable Columns: Conditional reorder",
-                "url": "https://github.com/primefaces/primereact/issues/1032"
-            },
-            {
-                "number": 1224,
-                "title": "New DataTable Customer Demo",
-                "url": "https://github.com/primefaces/primereact/issues/1224"
-            },
-            {
-                "number": 1220,
-                "title": "Move column filters to their own row",
-                "url": "https://github.com/primefaces/primereact/issues/1220"
-            },
-            {
-                "number": 1031,
-                "title": "Datatable Columns: Conditional select",
-                "url": "https://github.com/primefaces/primereact/issues/1031"
-            },
-            {
-                "number": 1226,
-                "title": "Add rowHover to DataTable",
-                "url": "https://github.com/primefaces/primereact/issues/1226"
-            },
-            {
-                "number": 1227,
-                "title": "Add filterHeaderStyle and filterHeaderClassName to Column",
-                "url": "https://github.com/primefaces/primereact/issues/1227"
-            }
-        ],
-        "treetable": [
-            {
-                "number": 1246,
-                "title": "Add reorderable to Column",
-                "url": "https://github.com/primefaces/primereact/issues/1246"
-            },
-            {
-                "number": 1220,
-                "title": "Move column filters to their own row",
-                "url": "https://github.com/primefaces/primereact/issues/1220"
-            },
-            {
-                "number": 1221,
-                "title": "Add filterField to column",
-                "url": "https://github.com/primefaces/primereact/issues/1221"
-            },
-            {
-                "number": 1223,
-                "title": "New filtering modes for Table",
-                "url": "https://github.com/primefaces/primereact/issues/1223"
-            },
-            {
-                "number": 1222,
-                "title": "Accents support in Table filtering",
-                "url": "https://github.com/primefaces/primereact/issues/1222"
-            },
-            {
-                "number": 1224,
-                "title": "New DataTable Customer Demo",
-                "url": "https://github.com/primefaces/primereact/issues/1224"
-            },
-            {
-                "number": 1226,
-                "title": "Add rowHover to DataTable",
-                "url": "https://github.com/primefaces/primereact/issues/1226"
-            }
-        ],
-        "paginator": [
-            {
-                "number": 1233,
-                "title": "Datatable doesn't change page when the last element on a page is removed.",
-                "url": "https://github.com/primefaces/primereact/issues/1233"
-            },
-            {
-                "number": 1225,
-                "title": "New options for CurrentPageReport",
-                "url": "https://github.com/primefaces/primereact/issues/1225"
-            }
-        ],
-        "listbox": [
-            {
-                "number": 1245,
-                "title": "Implement filterBy and filterMatchMode for ListBox",
-                "url": "https://github.com/primefaces/primereact/issues/1245"
-            },
-            {
-                "number": 1230,
-                "title": "Add optionValue to Select components",
-                "url": "https://github.com/primefaces/primereact/issues/1230"
-            },
-            {
-                "number": 1175,
-                "title": "Implement className in MultiSelect, Dropdown, SelectButton, ListBox options",
-                "url": "https://github.com/primefaces/primereact/issues/1175"
-            },
-            {
-                "number": 1242,
-                "title": "Add filterPlaceholder to MultiSelect",
-                "url": "https://github.com/primefaces/primereact/issues/1242"
-            },
-            {
-                "number": 1215,
-                "title": "Add filterPlaceholder to Listbox",
-                "url": "https://github.com/primefaces/primereact/issues/1215"
-            }
-        ],
-        "tree": [
-            {
-                "number": 1232,
-                "title": "Filter does not work after adding a new node to the root node on Tree",
-                "url": "https://github.com/primefaces/primereact/issues/1232"
-            }
-        ],
-        "calendar": [
-            {
-                "number": 1231,
-                "title": "Clear Button does not clear the input value on Calendar",
-                "url": "https://github.com/primefaces/primereact/issues/1231"
-            },
-            {
-                "number": 1217,
-                "title": "Time support for min date or max date in calendar component",
-                "url": "https://github.com/primefaces/primereact/issues/1217"
-            }
-        ],
-        "multiselect": [
-            {
-                "number": 1230,
-                "title": "Add optionValue to Select components",
-                "url": "https://github.com/primefaces/primereact/issues/1230"
-            },
-            {
-                "number": 1221,
-                "title": "Add filterField to column",
-                "url": "https://github.com/primefaces/primereact/issues/1221"
-            },
-            {
-                "number": 1223,
-                "title": "New filtering modes for Table",
-                "url": "https://github.com/primefaces/primereact/issues/1223"
-            },
-            {
-                "number": 1222,
-                "title": "Accents support in Table filtering",
-                "url": "https://github.com/primefaces/primereact/issues/1222"
-            },
-            {
-                "number": 1224,
-                "title": "New DataTable Customer Demo",
-                "url": "https://github.com/primefaces/primereact/issues/1224"
-            },
-            {
-                "number": 1220,
-                "title": "Move column filters to their own row",
-                "url": "https://github.com/primefaces/primereact/issues/1220"
-            },
-            {
-                "number": 1175,
-                "title": "Implement className in MultiSelect, Dropdown, SelectButton, ListBox options",
-                "url": "https://github.com/primefaces/primereact/issues/1175"
-            },
-            {
-                "number": 1242,
-                "title": "Add filterPlaceholder to MultiSelect",
-                "url": "https://github.com/primefaces/primereact/issues/1242"
-            },
-            {
-                "number": 1215,
-                "title": "Add filterPlaceholder to Listbox",
-                "url": "https://github.com/primefaces/primereact/issues/1215"
-            },
-            {
-                "number": 1226,
-                "title": "Add rowHover to DataTable",
-                "url": "https://github.com/primefaces/primereact/issues/1226"
-            },
-            {
-                "number": 1244,
-                "title": "Implement filterBy and filterMatchMode for MultiSelect",
-                "url": "https://github.com/primefaces/primereact/issues/1244"
-            }
-        ],
-        "dropdown": [
-            {
-                "number": 1230,
-                "title": "Add optionValue to Select components",
-                "url": "https://github.com/primefaces/primereact/issues/1230"
-            },
-            {
-                "number": 1221,
-                "title": "Add filterField to column",
-                "url": "https://github.com/primefaces/primereact/issues/1221"
-            },
-            {
-                "number": 1223,
-                "title": "New filtering modes for Table",
-                "url": "https://github.com/primefaces/primereact/issues/1223"
-            },
-            {
-                "number": 1222,
-                "title": "Accents support in Table filtering",
-                "url": "https://github.com/primefaces/primereact/issues/1222"
-            },
-            {
-                "number": 1179,
-                "title": "Reset filter textbox of dropdown if options changes",
-                "url": "https://github.com/primefaces/primereact/issues/1179"
-            },
-            {
-                "number": 1224,
-                "title": "New DataTable Customer Demo",
-                "url": "https://github.com/primefaces/primereact/issues/1224"
-            },
-            {
-                "number": 1220,
-                "title": "Move column filters to their own row",
-                "url": "https://github.com/primefaces/primereact/issues/1220"
-            },
-            {
-                "number": 1149,
-                "title": "Implement filterBy and filterMatchMode for Dropdown",
-                "url": "https://github.com/primefaces/primereact/issues/1149"
-            },
-            {
-                "number": 1175,
-                "title": "Implement className in MultiSelect, Dropdown, SelectButton, ListBox options",
-                "url": "https://github.com/primefaces/primereact/issues/1175"
-            },
-            {
-                "number": 1226,
-                "title": "Add rowHover to DataTable",
-                "url": "https://github.com/primefaces/primereact/issues/1226"
-            }
-        ],
-        "utils": [
-            {
-                "number": 1221,
-                "title": "Add filterField to column",
-                "url": "https://github.com/primefaces/primereact/issues/1221"
-            },
-            {
-                "number": 1223,
-                "title": "New filtering modes for Table",
-                "url": "https://github.com/primefaces/primereact/issues/1223"
-            },
-            {
-                "number": 1222,
-                "title": "Accents support in Table filtering",
-                "url": "https://github.com/primefaces/primereact/issues/1222"
-            },
-            {
-                "number": 1224,
-                "title": "New DataTable Customer Demo",
-                "url": "https://github.com/primefaces/primereact/issues/1224"
-            },
-            {
-                "number": 1220,
-                "title": "Move column filters to their own row",
-                "url": "https://github.com/primefaces/primereact/issues/1220"
-            },
-            {
-                "number": 1149,
-                "title": "Implement filterBy and filterMatchMode for Dropdown",
-                "url": "https://github.com/primefaces/primereact/issues/1149"
-            },
-            {
-                "number": 1226,
-                "title": "Add rowHover to DataTable",
-                "url": "https://github.com/primefaces/primereact/issues/1226"
-            }
-        ],
-        "dialog": [
-            {
-                "number": 1170,
-                "title": "Allow Dialogs already maximized ",
-                "url": "https://github.com/primefaces/primereact/issues/1170"
-            }
-        ],
-        "tabview": [
-            {
-                "number": 1079,
-                "title": "Change the type of the 'header' property on TabPanel",
-                "url": "https://github.com/primefaces/primereact/issues/1079"
-            }
-        ],
-        "slider": [
-            {
-                "number": 1094,
-                "title": "Deadlock situation in range slider",
-                "url": "https://github.com/primefaces/primereact/issues/1094"
-            }
-        ],
-        "selectbutton": [
-            {
-                "number": 1175,
-                "title": "Implement className in MultiSelect, Dropdown, SelectButton, ListBox options",
-                "url": "https://github.com/primefaces/primereact/issues/1175"
-            },
-            {
-                "number": 1230,
-                "title": "Add optionValue to Select components",
-                "url": "https://github.com/primefaces/primereact/issues/1230"
-            },
-            {
-                "number": 1238,
-                "title": "Templating support to SelectButton",
-                "url": "https://github.com/primefaces/primereact/issues/1238"
-            }
-        ],
-        "contextmenu": [
-            {
-                "number": 1189,
-                "title": "ContextMenu hide/onHide triggers even though already hidden",
-                "url": "https://github.com/primefaces/primereact/issues/1189"
-            }
-        ],
-        "common": [
-            {
-                "number": 1213,
-                "title": "Improve style of p-link component",
-                "url": "https://github.com/primefaces/primereact/issues/1213"
-            }
-        ],
-        "chips": [
-            {
-                "number": 1241,
-                "title": "Chips cover 100% although input is visually smaller",
-                "url": "https://github.com/primefaces/primereact/issues/1241"
-            }
-        ]
-    },
-
-    "4.0.0": {
-        "dialog": [
-            {
-                "number": 1174,
-                "title": "Dialog header not visible",
-                "url": "https://github.com/primefaces/primereact/issues/1174"
-            },
-            {
-                "number": 1169,
-                "title": "Maximizable property is not working correctly on dialog",
-                "url": "https://github.com/primefaces/primereact/issues/1169"
-            },
-            {
-                "number": 1203,
-                "title": "Add position property to Dialog",
-                "url": "https://github.com/primefaces/primereact/issues/1203"
-            },
-            {
-                "number": 1194,
-                "title": "Add maskClassName property to Dialog",
-                "url": "https://github.com/primefaces/primereact/issues/1194"
-            },
-            {
-                "number": 1165,
-                "title": "Dialog is not displayed correctly in mobile view",
-                "url": "https://github.com/primefaces/primereact/issues/1165"
-            },
-            {
-                "number": 1167,
-                "title": "Dismissable mask behaves over dialog",
-                "url": "https://github.com/primefaces/primereact/issues/1167"
-            },
-            {
-                "number": 1202,
-                "title": "Add FocusTrap support to Dialog",
-                "url": "https://github.com/primefaces/primereact/issues/1202"
-            }
-        ],
-        "steps": [
-            {
-                "number": 1192,
-                "title": "The  disabled items can be focused in the Steps",
-                "url": "https://github.com/primefaces/primereact/issues/1192"
-            },
-            {
-                "number": 1191,
-                "title": "ReImplemented Steps styles",
-                "url": "https://github.com/primefaces/primereact/issues/1191"
-            }
-        ],
-        "dropdown": [
-            {
-                "number": 1196,
-                "title": "Remove min-width style from Dropdown",
-                "url": "https://github.com/primefaces/primereact/issues/1196"
-            }
-        ],
-        "toast": [
-            {
-                "number": 1190,
-                "title": "Alignment problem on Growl message without details",
-                "url": "https://github.com/primefaces/primereact/issues/1190"
-            }
-        ],
-        "datatable": [
-            {
-                "number": 1164,
-                "title": "Add sort number feature to sortable columns on DataTable and TreeTable with multi sorting",
-                "url": "https://github.com/primefaces/primereact/issues/1164"
-            },
-            {
-                "number": 1163,
-                "title": "Typedefinition for DataTable OnFilter is wrong.",
-                "url": "https://github.com/primefaces/primereact/issues/1163"
-            },
-            {
-                "number": 1201,
-                "title": "Add sortFunction support to DataTable with multiple column sorting",
-                "url": "https://github.com/primefaces/primereact/issues/1201"
-            }
-        ],
-        "galleria": [
-            {
-                "number": 1105,
-                "title": "New Component: Galleria",
-                "url": "https://github.com/primefaces/primereact/issues/1105"
-            }
-        ],
-        "treetable": [
-            {
-                "number": 1164,
-                "title": "Add sort number feature to sortable columns on DataTable and TreeTable with multi sorting",
-                "url": "https://github.com/primefaces/primereact/issues/1164"
-            }
-        ],
-        "calendar": [
-            {
-                "number": 1141,
-                "title": "Add editing support to the input field on Calendar",
-                "url": "https://github.com/primefaces/primereact/issues/1141"
-            },
-            {
-                "number": 1204,
-                "title": "Add keepInvalid property to Calendar",
-                "url": "https://github.com/primefaces/primereact/issues/1204"
-            }
-        ],
-        "lightbox": [
-            {
-                "number": 1200,
-                "title": "Remove the legacy lifecycle method from Lightbox component",
-                "url": "https://github.com/primefaces/primereact/issues/1200"
-            }
-        ],
-        "fileupload": [
-            {
-                "number": 1152,
-                "title": "Add onRemove callback to FileUpload",
-                "url": "https://github.com/primefaces/primereact/issues/1152"
             }
         ]
     }
