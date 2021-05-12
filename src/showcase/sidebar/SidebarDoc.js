@@ -524,6 +524,10 @@ import { Sidebar } from 'primereact/sidebar';
                                         <td>p-sidebar-mask</td>
                                         <td>Modal layer of the sidebar.</td>
                                     </tr>
+                                    <tr>
+                                        <td>p-sidebar-scroll</td>
+                                        <td>Used to add a scroll to the container element in long content.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

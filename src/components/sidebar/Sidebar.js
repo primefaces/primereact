@@ -232,7 +232,7 @@ export class Sidebar extends Component {
             <CSSTransition nodeRef={this.sidebarRef} classNames="p-sidebar" in={this.props.visible} timeout={transitionTimeout} options={this.props.transitionOptions}
                 unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit} onExited={this.onExited}>
                 <div ref={this.sidebarRef} id={this.props.id} className={className} style={this.props.style} role="complementary">
-                    <div className="p-sidebar-icons">
+                    <div className="p-sidebar-header">
                         {icons}
                         {closeIcon}
                     </div>
