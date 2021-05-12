@@ -1,9 +1,12 @@
 .p-sidebar {
     position: fixed;
+    display: flex;
+    flex-direction: column;
 }
 
 .p-sidebar-content {
     position: relative;
+    overflow-y: auto;
 }
 
 .p-sidebar-header {
@@ -45,14 +48,14 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 12rem;
+    height: 10rem;
 }
 
 .p-sidebar-bottom {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 12rem;
+    height: 10rem;
 }
 
 .p-sidebar-full {
@@ -176,13 +179,4 @@
     .p-sidebar-right.p-sidebar-md {
         width: 20rem;
     }
-}
-
-.p-sidebar-scroll {
-    display: flex;
-    flex-direction: column;
-}
-
-.p-sidebar-scroll .p-sidebar-content {
-    overflow-y: auto;
 }
