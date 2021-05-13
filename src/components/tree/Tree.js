@@ -310,7 +310,10 @@ export class Tree extends Component {
         let filterValue = event.target.value;
 
         if (this.props.onFilterValueChange) {
-            this.props.onFilterValueChange(filterValue);
+            this.props.onFilterValueChange({
+                originalEvent: event,
+                value: filterValue
+            });
         }
         else {
             this.setState({ filterValue });
@@ -318,7 +321,7 @@ export class Tree extends Component {
     }
 
     filter(value) {
-        this.setState({ filterValue: value||'' }, this._filter);
+        this.setState({ filterValue: ObjectUtils.isNotEmpty(value) ? value : '' }, this._filter);
     }
 
     _filter() {
@@ -328,7 +331,7 @@ export class Tree extends Component {
 
         const filterValue = this.getFilterValue();
 
-        if (filterValue === '') {
+        if (ObjectUtils.isEmpty(filterValue)) {
             this.filteredNodes = this.props.value;
         }
         else {
@@ -442,11 +445,16 @@ export class Tree extends Component {
 
     renderFilter() {
         if (this.props.filter) {
-            return <div className="p-tree-filter-container">
-                <input type="text" autoComplete="off" className="p-tree-filter p-inputtext p-component" placeholder={this.props.filterPlaceholder}
-                    onKeyDown={this.onFilterInputKeyDown} onChange={this.onFilterInputChange} disabled={this.props.disabled} />
-                <span className="p-tree-filter-icon pi pi-search"></span>
-            </div>;
+            let filterValue = this.getFilterValue();
+            filterValue = ObjectUtils.isNotEmpty(filterValue) ? filterValue : '';
+
+            return (
+                <div className="p-tree-filter-container">
+                    <input type="text" value={filterValue} autoComplete="off" className="p-tree-filter p-inputtext p-component" placeholder={this.props.filterPlaceholder}
+                        onKeyDown={this.onFilterInputKeyDown} onChange={this.onFilterInputChange} disabled={this.props.disabled} />
+                    <span className="p-tree-filter-icon pi pi-search"></span>
+                </div>
+            );
         }
 
         return null;

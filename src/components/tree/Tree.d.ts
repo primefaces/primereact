@@ -78,6 +78,11 @@ interface TreeDragDropParams {
     dropIndex: number;
 }
 
+interface TreeFilterValueChangeParams {
+    originalEvent: React.FormEvent<HTMLInputElement>;
+    value: string;
+}
+
 export interface TreeProps {
     id?: string;
     value?: TreeNode[];
@@ -116,7 +121,7 @@ export interface TreeProps {
     onToggle?(e: TreeExpandedParams): void;
     onDragDrop?(e: TreeDragDropParams): void;
     onContextMenu?(e: TreeEventNodeParams): void;
-    onFilterValueChange?(e: React.FormEvent<HTMLInputElement>): void;
+    onFilterValueChange?(e: TreeFilterValueChangeParams): void;
 }
 
 export declare class Tree extends React.Component<TreeProps, any> {

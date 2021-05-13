@@ -935,8 +935,10 @@ export const TreeContextMenuDemo = () => {
                                     </tr>
                                     <tr>
                                         <td>onFilterValueChange</td>
-                                        <td>event: browser event</td>
-                                        <td>Callback to invoke when the filter value is changed.</td>
+                                        <td>event.originalEvent: Browser event <br/>
+                                            event.value: the filtered value <br/>
+                                        </td>
+                                        <td>Callback to invoke when filter value changes.</td>
                                     </tr>
                                 </tbody>
                             </table>
