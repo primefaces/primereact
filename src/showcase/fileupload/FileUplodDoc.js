@@ -815,20 +815,20 @@ const buttonOptions = {
                         </tr>
                         <tr>
                             <td>onClear</td>
-                            <td>-.</td>
+                            <td>-</td>
                             <td>Callback to invoke when files in queue are removed without uploading.</td>
                         </tr>
                         <tr>
                             <td>onSelect</td>
                             <td>event.originalEvent: Original browser event. <br />
                                 event.files: List of selected files.</td>
-                            <td>Callback to invoke when file upload is complete.</td>
+                            <td>Callback to invoke when files are selected.</td>
                         </tr>
                         <tr>
                             <td>onProgress</td>
                             <td>event.originalEvent: Original browser event. <br />
                                 event.progress: Calculated progress value.</td>
-                            <td>Callback to invoke when files are selected.</td>
+                            <td>Callback to invoke when files are being uploaded.</td>
                         </tr>
                         <tr>
                             <td>onValidationFail</td>
@@ -837,8 +837,8 @@ const buttonOptions = {
                         </tr>
                         <tr>
                             <td>uploadHandler</td>
-                            <td>event.files: List of selected files.</td>
-                            <td>event.options: Handler options.</td>
+                            <td>event.files: List of selected files.<br />
+                                event.options: Handler options.</td>
                             <td>Callback to invoke in custom upload mode to upload the files manually.</td>
                         </tr>
                         <tr>
