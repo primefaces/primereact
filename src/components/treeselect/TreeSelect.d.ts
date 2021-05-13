@@ -51,6 +51,11 @@ interface TreeSelectEventNodeParams {
     node: TreeNode;
 }
 
+interface TreeSelectFilterValueChangeParams {
+    originalEvent: React.FormEvent<HTMLInputElement>;
+    value: string;
+}
+
 export interface TreeSelectProps {
     id?: string;
     value?: TreeSelectSelectionKeys;
@@ -77,6 +82,7 @@ export interface TreeSelectProps {
     panelFooterTemplate?: TreeSelectPanelFooterTemplateType;
     transitionOptions?: object;
     filter?: boolean;
+    filterValue?: string;
     filterBy?: string;
     filterMode?: TreeSelectFilterModeType;
     filterPlaceholder?: string;
@@ -90,6 +96,7 @@ export interface TreeSelectProps {
     onNodeUnselect?(node: TreeNode): void;
     onNodeExpand?(e: TreeSelectEventNodeParams): void;
     onNodeCollapse?(e: TreeSelectEventNodeParams): void;
+    onFilterValueChange?(e: TreeSelectFilterValueChangeParams): void;
 }
 
 export declare class TreeSelect extends React.Component<TreeSelectProps, any> { }

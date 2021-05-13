@@ -39,6 +39,7 @@ export class TreeSelect extends Component {
         panelFooterTemplate: null,
         transitionOptions: null,
         filter: false,
+        filterValue: null,
         filterBy: 'label',
         filterMode: 'lenient',
         filterPlaceholder: null,
@@ -51,7 +52,8 @@ export class TreeSelect extends Component {
         onNodeSelect: null,
         onNodeUnselect: null,
         onNodeExpand: null,
-        onNodeCollapse: null
+        onNodeCollapse: null,
+        onFilterValueChange: null
     }
 
     static propTypes = {
@@ -80,6 +82,7 @@ export class TreeSelect extends Component {
         panelFooterTemplate: PropTypes.any,
         transitionOptions: PropTypes.object,
         filter: PropTypes.bool,
+        filterValue: PropTypes.string,
         filterBy: PropTypes.any,
         filterMode: PropTypes.string,
         filterPlaceholder: PropTypes.string,
@@ -92,7 +95,8 @@ export class TreeSelect extends Component {
         onNodeSelect: PropTypes.func,
         onNodeUnselect: PropTypes.func,
         onNodeExpand: PropTypes.func,
-        onNodeCollapse: PropTypes.func
+        onNodeCollapse: PropTypes.func,
+        onFilterValueChange: PropTypes.func
     }
 
     constructor(props) {
@@ -101,8 +105,11 @@ export class TreeSelect extends Component {
         this.state = {
             focused: false,
             overlayVisible: false,
-            expandedKeys: {},
-            filterValue: ''
+            expandedKeys: {}
+        }
+
+        if (!this.props.onFilterValueChange) {
+            this.state['filterValue'] = '';
         }
 
         this.onClick = this.onClick.bind(this);
@@ -125,6 +132,10 @@ export class TreeSelect extends Component {
         this.show = this.show.bind(this);
 
         this.overlayRef = createRef();
+    }
+
+    getFilterValue() {
+        return this.props.onFilterValueChange ? this.props.filterValue : this.state.filterValue;
     }
 
     getSelectedNodes() {
@@ -214,7 +225,7 @@ export class TreeSelect extends Component {
     }
 
     onFilterValueChange(e) {
-        this.setState({ filterValue: e.target.value });
+        this.setState({ filterValue: e.value });
     }
 
     onOverlayClick(event) {
@@ -268,7 +279,17 @@ export class TreeSelect extends Component {
     }
 
     onFilterInputChange(event) {
-        this.setState({ filterValue: event.target.value });
+        let filterValue = event.target.value;
+
+        if (this.props.onFilterValueChange) {
+            this.props.onFilterValueChange({
+                originalEvent: event,
+                value: filterValue
+            });
+        }
+        else {
+            this.setState({ filterValue });
+        }
     }
 
     resetFilter() {
@@ -546,13 +567,15 @@ export class TreeSelect extends Component {
     }
 
     renderContent() {
+        const filterValue = this.getFilterValue();
+
         return (
             <>
                 <Tree value={this.props.options} selectionMode={this.props.selectionMode} selectionKeys={this.props.value} metaKeySelection={this.props.metaKeySelection}
                     onSelectionChange={this.onSelectionChange} onSelect={this.onNodeSelect} onUnselect={this.onNodeUnselect}
                     expandedKeys={this.state.expandedKeys} onToggle={this.onNodeToggle}
                     onExpand={this.props.onNodeExpand} onCollapse={this.props.onNodeCollapse}
-                    filter={this.props.filter} filterValue={this.state.filterValue} filterBy={this.props.filterBy} filterMode={this.props.filterMode}
+                    filter={this.props.filter} filterValue={filterValue} filterBy={this.props.filterBy} filterMode={this.props.filterMode}
                     filterPlaceholder={this.props.filterPlaceholder} filterLocale={this.props.filterLocale} showHeader={false} onFilterValueChange={this.onFilterValueChange}>
                 </Tree>
 
@@ -569,9 +592,12 @@ export class TreeSelect extends Component {
 
     renderFilterElement() {
         if (this.props.filter) {
+            let filterValue = this.getFilterValue();
+            filterValue = ObjectUtils.isNotEmpty(filterValue) ? filterValue : '';
+
             return (
                 <div className="p-treeselect-filter-container">
-                    <input ref={(el) => this.filterInput = el} type="text" value={this.state.filterValue} autoComplete="off" className="p-treeselect-filter p-inputtext p-component" placeholder={this.props.filterPlaceholder}
+                    <input ref={(el) => this.filterInput = el} type="text" value={filterValue} autoComplete="off" className="p-treeselect-filter p-inputtext p-component" placeholder={this.props.filterPlaceholder}
                         onKeyDown={this.onFilterInputKeyDown} onChange={this.onFilterInputChange} disabled={this.props.disabled} />
                     <span className="p-treeselect-filter-icon pi pi-search"></span>
                 </div>

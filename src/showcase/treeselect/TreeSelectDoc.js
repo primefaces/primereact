@@ -598,6 +598,12 @@ data() {
                                         <td>When specified, displays an input field to filter the items.</td>
                                     </tr>
                                     <tr>
+                                        <td>filterValue</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>When filtering is enabled, the value of input field.</td>
+                                    </tr>
+                                    <tr>
                                         <td>filterBy</td>
                                         <td>string</td>
                                         <td>label</td>
@@ -687,6 +693,13 @@ data() {
                                         <td>event.originalEvent: browser event <br />
                                         event.node: Collapsed node instance.</td>
                                         <td>Callback to invoke when a node is collapsed.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onFilterValueChange</td>
+                                        <td>event.originalEvent: Browser event <br/>
+                                            event.value: the filtered value <br/>
+                                        </td>
+                                        <td>Callback to invoke when filter value changes.</td>
                                     </tr>
                                 </tbody>
                             </table>
