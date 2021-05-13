@@ -186,11 +186,12 @@ export class Slider extends Component {
     setValue(event) {
         let handleValue;
         let pageX = event.touches ? event.touches[0].pageX : event.pageX;
+        let pageY = event.touches ? event.touches[0].pageY : event.pageY;
 
         if (this.props.orientation === 'horizontal')
             handleValue = ((pageX - this.initX) * 100) / (this.barWidth);
         else
-            handleValue = (((this.initY + this.barHeight) - event.pageY) * 100) / (this.barHeight);
+            handleValue = (((this.initY + this.barHeight) - pageY) * 100) / (this.barHeight);
 
         let newValue = (this.props.max - this.props.min) * (handleValue / 100) + this.props.min;
 
@@ -211,9 +212,9 @@ export class Slider extends Component {
     }
 
     updateValue(event, value) {
-        if (this.props.range) {
-            let newValue = value;
+        let newValue = parseFloat(value.toFixed(10));
 
+        if (this.props.range) {
             if (this.handleIndex === 0) {
                 if (newValue < this.props.min)
                     newValue = this.props.min;
@@ -228,7 +229,7 @@ export class Slider extends Component {
             }
 
             let newValues = [...this.props.value];
-            newValues[this.handleIndex] = Math.floor(newValue);
+            newValues[this.handleIndex] = newValue;
 
             if (this.props.onChange) {
                 this.props.onChange({
@@ -238,8 +239,6 @@ export class Slider extends Component {
             }
         }
         else {
-            let newValue = value;
-
             if (newValue < this.props.min)
                 newValue = this.props.min;
             else if (newValue > this.props.max)
