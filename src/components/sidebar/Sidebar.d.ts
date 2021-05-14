@@ -4,6 +4,8 @@ type SidebarPositionType = 'top' | 'bottom' | 'left' | 'right';
 
 type SidebarTemplateType = React.ReactNode | ((props: SidebarProps) => React.ReactNode);
 
+type SidebarAppendToType = 'self' | HTMLElement | undefined | null;
+
 export interface SidebarProps {
     id?: string;
     style?: object;
@@ -19,6 +21,7 @@ export interface SidebarProps {
     closeOnEscape?: boolean;
     icons?: SidebarTemplateType;
     modal?: boolean;
+    appendTo?: SidebarAppendToType;
     transitionOptions?: object;
     onShow?(): void;
     onHide(): void;

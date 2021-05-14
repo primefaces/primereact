@@ -6,6 +6,7 @@ import ObjectUtils from '../utils/ObjectUtils';
 import { CSSTransition } from '../transition/CSSTransition';
 import { Ripple } from '../ripple/Ripple';
 import { ZIndexUtils } from '../utils/ZIndexUtils';
+import { Portal } from '../portal/Portal';
 
 export class Sidebar extends Component {
 
@@ -24,6 +25,7 @@ export class Sidebar extends Component {
         closeOnEscape: true,
         icons: null,
         modal: true,
+        appendTo: null,
         transitionOptions: null,
         onShow: null,
         onHide: null
@@ -44,6 +46,7 @@ export class Sidebar extends Component {
         closeOnEscape: PropTypes.bool,
         icons: PropTypes.any,
         modal: PropTypes.bool,
+        appendTo: PropTypes.any,
         transitionOptions: PropTypes.object,
         onShow: PropTypes.func,
         onHide: PropTypes.func.isRequired
@@ -217,7 +220,7 @@ export class Sidebar extends Component {
         return null;
     }
 
-    render() {
+    renderElement() {
         const className = classNames('p-sidebar p-component', this.props.className, 'p-sidebar-' + this.props.position,
             { 'p-sidebar-active': this.props.visible, 'p-sidebar-full': this.props.fullScreen });
         const closeIcon = this.renderCloseIcon();
@@ -242,5 +245,11 @@ export class Sidebar extends Component {
                 </div>
             </CSSTransition>
         );
+    }
+
+    render() {
+        let element = this.renderElement();
+
+        return <Portal element={element} appendTo={this.props.appendTo} />;
     }
 }

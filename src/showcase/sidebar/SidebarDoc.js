@@ -389,6 +389,12 @@ import { Sidebar } from 'primereact/sidebar';
                                         <td>Whether to a modal layer behind the sidebar.</td>
                                     </tr>
                                     <tr>
+                                        <td>appendTo</td>
+                                        <td>DOM element | string</td>
+                                        <td>document.body</td>
+                                        <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
+                                    </tr>
+                                    <tr>
                                         <td>closeOnEscape</td>
                                         <td>boolean</td>
                                         <td>true</td>
