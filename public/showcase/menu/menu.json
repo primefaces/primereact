@@ -456,6 +456,41 @@
             ]
         },
         {
+            "name": "Validation",
+            "meta": [
+                "validation"
+            ],
+            "children": [
+                {
+                    "name": "Formik",
+                    "to": "/formik",
+                    "meta": [
+                        "formik",
+                        "validation"
+                    ],
+                    "badge": "new"
+                },
+                {
+                    "name": "React Hook Form",
+                    "to": "/reacthookform",
+                    "meta": [
+                        "react hook form",
+                        "validation"
+                    ],
+                    "badge": "new"
+                },
+                {
+                    "name": "React Final Form",
+                    "to": "/reactfinalform",
+                    "meta": [
+                        "react final form",
+                        "validation"
+                    ],
+                    "badge": "new"
+                }
+            ]
+        },
+        {
             "name": "Data",
             "meta": [
                 "data"
@@ -1358,41 +1393,6 @@
                             ]
                         }
                     ]
-                }
-            ]
-        },
-        {
-            "name": "Validation",
-            "meta": [
-                "validation"
-            ],
-            "children": [
-                {
-                    "name": "Formik",
-                    "to": "/formik",
-                    "meta": [
-                        "formik",
-                        "validation"
-                    ],
-                    "badge": "new"
-                },
-                {
-                    "name": "React Hook Form",
-                    "to": "/reacthookform",
-                    "meta": [
-                        "react hook form",
-                        "validation"
-                    ],
-                    "badge": "new"
-                },
-                {
-                    "name": "React Final Form",
-                    "to": "/reactfinalform",
-                    "meta": [
-                        "react final form",
-                        "validation"
-                    ],
-                    "badge": "new"
                 }
             ]
         },
