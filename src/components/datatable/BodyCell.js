@@ -142,6 +142,14 @@ export class BodyCell extends Component {
 
                     OverlayEventBus.on('overlay-click', this.overlayEventListener);
                 }
+
+                if (this.props.onEditingCellChange) {
+                    this.props.onEditingCellChange({
+                        rowIndex: this.props.rowIndex,
+                        cellIndex: this.props.index,
+                        editing: true
+                    });
+                }
             });
         }
 
@@ -232,6 +240,14 @@ export class BodyCell extends Component {
                 this.unbindDocumentEditListener();
                 OverlayEventBus.off('overlay-click', this.overlayEventListener);
                 this.overlayEventListener = null;
+
+                if (this.props.onEditingCellChange) {
+                    this.props.onEditingCellChange({
+                        rowIndex: this.props.rowIndex,
+                        cellIndex: this.props.index,
+                        editing: false
+                    });
+                }
             });
         }, 1);
     }

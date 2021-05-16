@@ -805,7 +805,7 @@ export class TableBody extends Component {
                             onRowEditInit={this.props.onRowEditInit} onRowEditSave={this.props.onRowEditSave} onRowEditCancel={this.props.onRowEditCancel} onRowEditingToggle={this.onRowEditingToggle}
                             showRowReorderElement={this.props.showRowReorderElement} showSelectionElement={this.props.showSelectionElement} onSelectionChange={this.props.onSelectionChange}
                             selectionModeInColumn={this.props.selectionModeInColumn} dragSelection={this.props.dragSelection} selection={this.props.selection}
-                            allowRowSelection={this.allowRowSelection()} allowCellSelection={this.allowCellSelection()} onCellClick={this.onCellClick}>
+                            allowRowSelection={this.allowRowSelection()} allowCellSelection={this.allowCellSelection()} onCellClick={this.onCellClick} onEditingCellChange={this.props.onEditingCellChange}>
                             {this.props.children}
                         </BodyRow>
 

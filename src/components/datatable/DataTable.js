@@ -240,7 +240,8 @@ export class DataTable extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            d_rows: props.rows
+            d_rows: props.rows,
+            editingCells: []
         };
 
         if (!this.props.onPage) {
@@ -272,6 +273,7 @@ export class DataTable extends Component {
         this.onColumnDragLeave = this.onColumnDragLeave.bind(this);
         this.onColumnDrop = this.onColumnDrop.bind(this);
         this.onVirtualScroll = this.onVirtualScroll.bind(this);
+        this.onEditingCellChange = this.onEditingCellChange.bind(this);
     }
 
     getFirst() {
@@ -1045,15 +1047,15 @@ export class DataTable extends Component {
 
     onColumnDrop(event) {
         event.preventDefault();
-        if(this.draggedColumn) {
+        if (this.draggedColumn) {
             let dragIndex = DomHandler.index(this.draggedColumn);
             let dropIndex = DomHandler.index(this.findParentHeader(event.target));
             let allowDrop = (dragIndex !== dropIndex);
-            if(allowDrop && ((dropIndex - dragIndex === 1 && this.dropPosition === -1) || (dragIndex - dropIndex === 1 && this.dropPosition === 1))) {
+            if (allowDrop && ((dropIndex - dragIndex === 1 && this.dropPosition === -1) || (dragIndex - dropIndex === 1 && this.dropPosition === 1))) {
                 allowDrop = false;
             }
 
-            if(allowDrop) {
+            if (allowDrop) {
                 let columns = this.state.columnOrder ? this.getColumns() : React.Children.toArray(this.props.children);
                 ObjectUtils.reorderArray(columns, dragIndex, dropIndex);
                 let columnOrder = [];
@@ -1084,7 +1086,7 @@ export class DataTable extends Component {
     }
 
     onVirtualScroll(event) {
-        if(this.virtualScrollTimer) {
+        if (this.virtualScrollTimer) {
             clearTimeout(this.virtualScrollTimer);
         }
 
@@ -1096,6 +1098,26 @@ export class DataTable extends Component {
                 });
             }
         }, this.props.virtualScrollDelay);
+    }
+
+    hasEditingCell() {
+        return this.state.editingCells && this.state.editingCells.length !== 0;
+    }
+
+    onEditingCellChange(event) {
+        let { rowIndex, cellIndex, editing } = event;
+        let editingCells = [...this.state.editingCells];
+
+        if (editing)
+            editingCells.push({ rowIndex, cellIndex });
+        else
+            editingCells = editingCells.filter(cell => !(cell.rowIndex === rowIndex && cell.cellIndex === cellIndex));
+
+        this.setState({
+            editingCells
+        }, () => {
+            this.props.onValueChange && this.props.onValueChange(this.processData());
+        });
     }
 
     exportCSV(options) {
@@ -1270,13 +1292,13 @@ export class DataTable extends Component {
     processData(localState) {
         let data = this.props.value;
 
-        if(!this.props.lazy) {
-            if(data && data.length) {
+        if (!this.props.lazy && !this.hasEditingCell()) {
+            if (data && data.length) {
                 let sortField = (localState && localState.sortField) || this.getSortField();
                 let sortOrder = (localState && localState.sortOrder) || this.getSortOrder();
                 let multiSortMeta = (localState && localState.multiSortMeta) || this.getMultiSortMeta();
 
-                if(sortField || (multiSortMeta && multiSortMeta.length)) {
+                if (sortField || (multiSortMeta && multiSortMeta.length)) {
                     if(this.props.sortMode === 'single')
                         data = this.sortSingle(data, sortField, sortOrder);
                     else if(this.props.sortMode === 'multiple')
@@ -1359,7 +1381,8 @@ export class DataTable extends Component {
                         editMode={this.props.editMode} editingRows={this.props.editingRows} rowEditorValidator={this.props.rowEditorValidator}
                         onRowEditInit={this.props.onRowEditInit} onRowEditSave={this.props.onRowEditSave} onRowEditCancel={this.props.onRowEditCancel} onRowEditChange={this.props.onRowEditChange}
                         expandableRowGroups={this.props.expandableRowGroups} showRowReorderElement={this.props.showRowReorderElement} showSelectionElement={this.props.showSelectionElement}
-                        dragSelection={this.props.dragSelection} cellSelection={this.props.cellSelection} onCellClick={this.props.onCellClick} onCellSelect={this.props.onCellSelect} onCellUnselect={this.props.onCellUnselect}>
+                        dragSelection={this.props.dragSelection} cellSelection={this.props.cellSelection} onCellClick={this.props.onCellClick} onCellSelect={this.props.onCellSelect} onCellUnselect={this.props.onCellUnselect}
+                        onEditingCellChange={this.onEditingCellChange}>
                         {columns}
                 </TableBody>;
     }
