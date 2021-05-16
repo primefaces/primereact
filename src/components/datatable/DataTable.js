@@ -541,7 +541,7 @@ export class DataTable extends Component {
             this.setState({first: event.first, rows: event.rows});
 
         if (this.props.onValueChange) {
-            this.props.onValueChange();
+            this.props.onValueChange(this.processData());
         }
     }
 
