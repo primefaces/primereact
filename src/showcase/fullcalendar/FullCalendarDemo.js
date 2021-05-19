@@ -6,6 +6,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { FullCalendarDoc } from './FullCalendarDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class FullCalendarDemo extends Component {
 
@@ -43,7 +44,8 @@ export class FullCalendarDemo extends Component {
                     <AppInlineHeader changelogText="fullCalendar">
                         <h1>FullCalendar</h1>
                         <p>An event calendar based on the <a href="https://fullcalendar.io/">FullCalendar</a> library.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="fullcalendar/FullCalendarDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

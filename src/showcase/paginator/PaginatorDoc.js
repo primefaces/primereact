@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 
 export class PaginatorDoc extends Component {
 
@@ -21,7 +21,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
 import { Slider } from 'primereact/slider';
 import { Tooltip } from 'primereact/tooltip';
-import classNames from 'classnames';
+import { classNames } from 'primereact/utils';
 import './PaginatorDemo.css';
 
 export class PaginatorDemo extends Component {
@@ -171,10 +171,10 @@ export class PaginatorDemo extends Component {
                 ];
 
                 return (
-                    <>
+                    <React.Fragment>
                         <span className="p-mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
                         <Dropdown value={options.value} options={dropdownOptions} onChange={options.onChange} appendTo={document.body} />
-                    </>
+                    </React.Fragment>
                 );
             },
             'CurrentPageReport': (options) => {
@@ -243,13 +243,13 @@ import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
 import { Slider } from 'primereact/slider';
 import { Tooltip } from 'primereact/tooltip';
-import classNames from 'classnames';
+import { classNames } from 'primereact/utils';
 import './PaginatorDemo.css';
 
 const PaginatorDemo = () => {
     const [basicFirst, setBasicFirst] = useState(0);
     const [basicRows, setBasicRows] = useState(10);
-    const [basicCustomFirst1, setBasicCustomFirst1] = useState(0);
+    const [customFirst1, setCustomFirst1] = useState(0);
     const [customRows1, setCustomRows1] = useState(10);
     const [customFirst2, setCustomFirst2] = useState(0);
     const [customRows2, setCustomRows2] = useState(10);
@@ -257,7 +257,7 @@ const PaginatorDemo = () => {
     const [customRows3, setCustomRows3] = useState(10);
     const [contentFirst, setContentFirst] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
-    const [pageInputTooltip, setPageInputTooltip]: useState('Press \\'Enter\\' key to go to this page.');
+    const [pageInputTooltip, setPageInputTooltip] = useState('Press \\'Enter\\' key to go to this page.');
 
     const onBasicPageChange = (event) => {
         setBasicFirst(event.first);
@@ -368,10 +368,10 @@ const PaginatorDemo = () => {
             ];
 
             return (
-                <>
+                <React.Fragment>
                     <span className="p-mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
                     <Dropdown value={options.value} options={dropdownOptions} onChange={options.onChange} appendTo={document.body} />
-                </>
+                </React.Fragment>
             );
         },
         'CurrentPageReport': (options) => {
@@ -439,13 +439,13 @@ import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
 import { Slider } from 'primereact/slider';
 import { Tooltip } from 'primereact/tooltip';
-import classNames from 'classnames';
+import { classNames } from 'primereact/utils';
 import './PaginatorDemo.css';
 
 const PaginatorDemo = () => {
     const [basicFirst, setBasicFirst] = useState(0);
     const [basicRows, setBasicRows] = useState(10);
-    const [basicCustomFirst1, setBasicCustomFirst1] = useState(0);
+    const [customFirst1, setCustomFirst1] = useState(0);
     const [customRows1, setCustomRows1] = useState(10);
     const [customFirst2, setCustomFirst2] = useState(0);
     const [customRows2, setCustomRows2] = useState(10);
@@ -564,10 +564,10 @@ const PaginatorDemo = () => {
             ];
 
             return (
-                <>
+                <React.Fragment>
                     <span className="p-mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
                     <Dropdown value={options.value} options={dropdownOptions} onChange={options.onChange} appendTo={document.body} />
-                </>
+                </React.Fragment>
             );
         },
         'CurrentPageReport': (options) => {
@@ -648,7 +648,7 @@ const PaginatorDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
                         <h5>Import</h5>
@@ -783,6 +783,7 @@ const template = {
         // options.currentPage: Current selected page.
         // options.totalPages: Total pages in paginator.
         // options.first: Zero-relative number of the first row to be displayed.
+        // options.last: The number of the last row to be displayed.
         // options.rows: Row count in a page.
         // options.totalRecords: Total records in paginator.
         // options.className: Style class of the default element.
@@ -893,9 +894,9 @@ const template = {
                                     </tr>
                                     <tr>
                                         <td>dropdownAppendTo</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Target element to attach the paginator dropdown overlay.</td>
+                                        <td>DOM element | string</td>
+                                        <td>document.body</td>
+                                        <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
                                     </tr>
                                 </tbody>
                             </table>

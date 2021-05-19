@@ -1,16 +1,22 @@
 import * as React from 'react';
 
-interface TimelineProps {
+type TimelineAlignType = 'left' | 'right' | 'alternate';
+
+type TimelineLayoutType = 'vertical' | 'horizontal';
+
+type TimelineTemplateType = React.ReactNode | ((item: any, index: number) => React.ReactNode);
+
+export interface TimelineProps {
     id?: string;
-    value?: Array<any>;
-    align?: string;
-    layout?: string;
+    value?: any[];
+    align?: TimelineAlignType;
+    layout?: TimelineLayoutType;
     dataKey?: string;
     className?: string;
     style?: object;
-    opposite?: any;
-    marker?: any;
-    content?: any;
+    opposite?: TimelineTemplateType;
+    marker?: TimelineTemplateType;
+    content?: TimelineTemplateType;
 }
 
-export class Timeline extends React.Component<TimelineProps,any> {}
+export declare class Timeline extends React.Component<TimelineProps, any> { }

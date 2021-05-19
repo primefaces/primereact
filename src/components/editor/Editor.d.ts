@@ -1,6 +1,19 @@
 import * as React from 'react';
 
-interface EditorProps {
+interface EditorTextChangeParams {
+    htmlValue: string | null;
+    textValue: string;
+    delta: any;
+    source: string;
+}
+
+interface EditorSelectionChangeParams {
+    range: any;
+    oldRange: any;
+    source: string;
+}
+
+export interface EditorProps {
     id?: string;
     value?: string;
     style?: object;
@@ -8,12 +21,11 @@ interface EditorProps {
     placeholder?: string;
     readOnly?: boolean;
     modules?: any;
-    formats?: any[];
+    formats?: string[];
     theme?: string;
-    headerTemplate?: JSX.Element | undefined,
-    onTextChange?(e: { htmlValue: string|null, textValue: string, delta: any, source: string }): void;
-	onSelectionChange?(e: { range: any, oldRange: any, source: string }): void;
+    headerTemplate?: React.ReactNode;
+    onTextChange?(e: EditorTextChangeParams): void;
+    onSelectionChange?(e: EditorSelectionChangeParams): void;
 }
 
-export class Editor extends React.Component<EditorProps, any> {
-}
+export declare class Editor extends React.Component<EditorProps, any> { }

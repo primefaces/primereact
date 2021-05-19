@@ -144,8 +144,8 @@ class PickListSubListComponent extends Component {
         let wrapperClassName = classNames('p-picklist-list-wrapper', this.props.className);
         let listClassName = classNames('p-picklist-list', this.props.listClassName);
 
-        if(this.props.header) {
-            header = <div className="p-picklist-header">{this.props.header}</div>
+        if (this.props.header) {
+            header = <div className="p-picklist-header">{ObjectUtils.getJSXElement(this.props.header, this.props)}</div>
         }
 
         if(this.props.list) {

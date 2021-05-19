@@ -15,18 +15,24 @@ export class ButtonComponent extends Component {
         badgeClassName: null,
         tooltip: null,
         tooltipOptions: null,
-        forwardRef: null
+        forwardRef: null,
+        disabled: false,
+        loading: false,
+        loadingIcon: 'pi pi-spinner pi-spin'
     }
 
     static propTypes = {
         label: PropTypes.string,
-        icon: PropTypes.string,
+        icon: PropTypes.any,
         iconPos: PropTypes.string,
         badge: PropTypes.string,
         badgeClassName: PropTypes.string,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
-        forwardRef: PropTypes.any
+        forwardRef: PropTypes.any,
+        disabled: PropTypes.bool,
+        loading: PropTypes.bool,
+        loadingIcon: PropTypes.any
     };
 
     getElementRef(el) {
@@ -42,6 +48,10 @@ export class ButtonComponent extends Component {
         }
 
         return this.element;
+    }
+
+    isDisabled() {
+        return this.props.disabled || this.props.loading;
     }
 
     componentDidMount() {
@@ -75,20 +85,33 @@ export class ButtonComponent extends Component {
     }
 
     renderIcon() {
-        if (this.props.icon) {
-            let className = classNames(this.props.icon, 'p-c', {
+        let icon = this.props.loading ? this.props.loadingIcon : this.props.icon;
+        let content = null;
+
+        if (icon) {
+            let iconType = typeof icon;
+            let className = classNames('p-button-icon p-c', {
+                'p-button-loading-icon': this.props.loading,
+                [`${icon}`]: iconType === 'string',
                 'p-button-icon-left': this.props.iconPos === 'left' && this.props.label,
                 'p-button-icon-right': this.props.iconPos === 'right' && this.props.label,
                 'p-button-icon-top': this.props.iconPos === 'top' && this.props.label,
-                'p-button-icon-bottom': this.props.iconPos === 'bottom' && this.props.label
+                'p-button-icon-bottom': this.props.iconPos === 'bottom' && this.props.label,
             });
+            content = <span className={className}></span>;
 
-            return (
-                <span className={className}></span>
-            );
+            if (iconType !== 'string') {
+                const defaultContentOptions = {
+                    className,
+                    element: content,
+                    props: this.props
+                };
+
+                content = ObjectUtils.getJSXElement(icon, defaultContentOptions);
+            }
         }
 
-        return null;
+        return content;
     }
 
     renderLabel() {
@@ -110,10 +133,14 @@ export class ButtonComponent extends Component {
     }
 
     render() {
+        let disabled = this.isDisabled();
         let className = classNames('p-button p-component', this.props.className, {
-            'p-button-icon-only': this.props.icon && !this.props.label,
-            'p-button-vertical': (this.props.iconPos === 'top' || this.props.iconPos === 'bottom') && this.label,
-            'p-disabled': this.props.disabled
+            'p-button-icon-only': (this.props.icon || (this.props.loading && this.props.loadingIcon)) && !this.props.label,
+            'p-button-vertical': (this.props.iconPos === 'top' || this.props.iconPos === 'bottom') && this.props.label,
+            'p-disabled': disabled,
+            'p-button-loading': this.props.loading,
+            'p-button-loading-label-only': this.props.loading && !this.props.icon && this.props.label,
+            [`p-button-loading-${this.props.iconPos}`]: this.props.loading && this.props.loadingIcon && this.props.label
         });
         let icon = this.renderIcon();
         let label = this.renderLabel();
@@ -122,7 +149,7 @@ export class ButtonComponent extends Component {
         let buttonProps = ObjectUtils.findDiffKeys(this.props, ButtonComponent.defaultProps);
 
         return (
-            <button ref={(el) => this.getElementRef(el)} {...buttonProps} className={className}>
+            <button ref={(el) => this.getElementRef(el)} {...buttonProps} className={className} disabled={disabled}>
                 {icon}
                 {label}
                 {this.props.children}

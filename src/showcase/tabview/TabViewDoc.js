@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 
 export class TabViewDoc extends Component {
 
@@ -374,7 +374,7 @@ const TabViewDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
                         <h5>Import</h5>
@@ -392,7 +392,9 @@ import { TabView,TabPanel } from 'primereact/tabview';
 
 <CodeHighlight>
 {`
-<TabView activeIndex={this.state.activeIndex} onTabChange={(e) => this.setState({activeIndex: e.index})}>
+const [activeIndex, setActiveIndex] = useState(0);
+
+<TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
     <TabPanel header="Header I">
         Content I
     </TabPanel>
@@ -426,6 +428,36 @@ import { TabView,TabPanel } from 'primereact/tabview';
 `}
 </CodeHighlight>
 
+                        <h5>Header Template</h5>
+                        <p>The header element is fully customizable on TabPanel. To make special header, an object can be given to the <i>headerTemplate</i> property as below.</p>
+<CodeHighlight lang="js">
+{`
+<TabView>
+    <TabPanel header="Header I" headerTemplate={template}>
+        Content I
+    </TabPanel>
+</TabView>
+`}
+</CodeHighlight>
+
+<CodeHighlight lang="js">
+    {`
+template: (options) => {
+    // options.className: Style class of the default header element.
+    // options.titleClassName: Style class of the title element.
+    // options.onClick: Click event for the header element.
+    // options.leftIconElement: Default left icon element created by the component.
+    // options.titleElement: Default title element created by the component.
+    // options.rightIconElement: Default right icon element created by the component.
+    // options.element: Default element created by the component.
+    // options.props: component props.
+    // options.index: The index of tab.
+    // options.selected: Whether the panel is selected.
+    // options.ariaControls: The value of aria-controls property.
+}
+`}
+</CodeHighlight>
+
                         <h5>Properties For TabPanel</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -443,6 +475,12 @@ import { TabView,TabPanel } from 'primereact/tabview';
                                         <td>any</td>
                                         <td>null</td>
                                         <td>Orientation of tab headers.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>headerTemplate</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Header template of the tab to customize more.</td>
                                     </tr>
                                     <tr>
                                         <td>leftIcon</td>

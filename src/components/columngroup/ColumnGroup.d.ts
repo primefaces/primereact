@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 // tslint:disable-next-line:no-empty-interface
-interface ColumnGroupProps {
-}
+export interface ColumnGroupProps { }
 
-export class ColumnGroup extends React.Component<ColumnGroupProps,any> {}
+export declare class ColumnGroup extends React.Component<ColumnGroupProps, any> { }

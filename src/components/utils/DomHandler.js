@@ -1,5 +1,3 @@
-import PrimeReact from '../api/PrimeReact';
-
 export default class DomHandler {
 
     static innerWidth(el) {
@@ -103,19 +101,6 @@ export default class DomHandler {
         };
     }
 
-    static generateZIndex() {
-        this.zIndex = this.zIndex||PrimeReact.zIndex;
-        return ++this.zIndex;
-    }
-
-    static revertZIndex() {
-        this.zIndex = PrimeReact.zIndex < this.zIndex ? --this.zIndex : PrimeReact.zIndex;
-    }
-
-    static getCurrentZIndex() {
-        return this.zIndex;
-    }
-
     static index(element) {
         if (element) {
             let children = element.parentNode.childNodes;
@@ -206,6 +191,18 @@ export default class DomHandler {
             return width;
         }
         return 0;
+    }
+
+    static alignOverlay(overlay, target, appendTo) {
+        if (overlay && target) {
+            if (appendTo === 'self') {
+                this.relativePosition(overlay, target);
+            }
+            else {
+                overlay.style.minWidth = DomHandler.getOuterWidth(target) + 'px';
+                this.absolutePosition(overlay, target);
+            }
+        }
     }
 
     static absolutePosition(element, target) {

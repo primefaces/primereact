@@ -4,6 +4,7 @@ import { Divider } from '../../components/divider/Divider';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { PasswordDoc } from './PasswordDoc';
 import './PasswordDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export class PasswordDemo extends Component {
 
@@ -36,10 +37,11 @@ export class PasswordDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="password" showInputStyle>
+                    <AppInlineHeader changelogText="password">
                         <h1>Password</h1>
                         <p>Password displays strength indicator for password fields.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="password/PasswordDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

@@ -1,46 +1,66 @@
 import * as React from 'react';
+import { PaginatorTemplate } from '../paginator/Paginator';
 
-interface DataViewLayoutOptionsProps {
-    id?: string;
-    layout?: string;
-    style?: string;
-    className?: string;
-    onChange(e: {originalEvent: Event, value: string}): void;
+type DataViewLayoutType = 'list' | 'grid' | (string & {});
+
+type DataViewPaginatorPositionType = 'top' | 'bottom' | 'both';
+
+type DataViewSortOrderType = 1 | 0 | -1 | undefined | null;
+
+type DataViewAppendToType = 'self' | HTMLElement | undefined | null;
+
+interface DataViewPageParams {
+    originalEvent: React.SyntheticEvent;
+    first: number;
+    rows: number;
 }
 
-export class DataViewLayoutOptions extends React.Component<DataViewLayoutOptionsProps,any> {}
+interface DataViewLayoutOptionsChangeParams {
+    originalEvent: React.MouseEvent<HTMLButtonElement>;
+    value: DataViewLayoutType;
+}
 
-interface DataViewProps {
+export interface DataViewLayoutOptionsProps {
     id?: string;
-    header?: JSX.Element | string;
-    footer?: JSX.Element | string;
+    layout?: DataViewLayoutType;
+    style?: object;
+    className?: string;
+    onChange(e: DataViewLayoutOptionsChangeParams): void;
+}
+
+export declare class DataViewLayoutOptions extends React.Component<DataViewLayoutOptionsProps, any> { }
+
+export interface DataViewProps {
+    id?: string;
+    header?: React.ReactNode;
+    footer?: React.ReactNode;
     value?: any[];
-    layout?: string;
+    layout?: DataViewLayoutType;
     rows?: number;
     first?: number;
     totalRecords?: number;
     paginator?: boolean;
-    paginatorPosition?: string;
+    paginatorPosition?: DataViewPaginatorPositionType;
     alwaysShowPaginator?: boolean;
     paginatorClassName?: string;
-    paginatorTemplate?: string | object;
-    paginatorLeft?: any;
-    paginatorRight?: any;
+    paginatorTemplate?: PaginatorTemplate;
+    paginatorLeft?: React.ReactNode;
+    paginatorRight?: React.ReactNode;
     pageLinkSize?: number;
-    paginatorDropdownAppendTo?: any;
+    paginatorDropdownAppendTo?: DataViewAppendToType;
     rowsPerPageOptions?: number[];
     currentPageReportTemplate?: string;
     emptyMessage?: string;
     sortField?: string;
-    sortOrder?: number;
-    style?: string;
+    sortOrder?: DataViewSortOrderType;
+    style?: object;
     className?: string;
     lazy?: boolean;
     loading?: boolean;
     loadingIcon?: string;
-    onPage?(e: {originalEvent: Event, first: number, rows: number}): void;
-    itemTemplate?(item: any, layout: "grid" | "list"): JSX.Element | undefined;
+    onPage?(e: DataViewPageParams): void;
+    itemTemplate?(item: any, layout: DataViewLayoutType): React.ReactNode;
 }
 
 // tslint:disable-next-line:max-classes-per-file
-export class DataView extends React.Component<DataViewProps,any> {}
+export declare class DataView extends React.Component<DataViewProps, any> { }

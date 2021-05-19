@@ -1,5 +1,14 @@
 import * as React from 'react';
 
+type SplitterLayoutType = 'vertical' | 'horizontal';
+
+type SplitterStateStorageType = 'session' | 'local';
+
+interface SplitterResizeEndParams {
+    originalEvent: React.SyntheticEvent;
+    sizes: number[];
+}
+
 interface SplitterPanelProps {
     size?: number;
     minSize?: number;
@@ -7,17 +16,17 @@ interface SplitterPanelProps {
     className?: string;
 }
 
-export class SplitterPanel extends React.Component<SplitterPanelProps,any> {}
+export declare class SplitterPanel extends React.Component<SplitterPanelProps, any> { }
 
-interface SplitterProps {
+export interface SplitterProps {
     id?: string;
     className?: string;
     style?: object;
-    layout?: string;
+    layout?: SplitterLayoutType;
     gutterSize?: number;
     stateKey?: string;
-    stateStorage?: string;
-    onResizeEnd?(e: {originalEvent: Event, sizes: any}): void;
+    stateStorage?: SplitterStateStorageType;
+    onResizeEnd?(e: SplitterResizeEndParams): void;
 }
 
-export class Splitter extends React.Component<SplitterProps,any> {}
+export declare class Splitter extends React.Component<SplitterProps, any> { }

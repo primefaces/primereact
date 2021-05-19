@@ -11,7 +11,7 @@ export class RowCheckbox extends Component {
     }
 
     static propTypes = {
-        rowData: PropTypes.object,
+        rowData: PropTypes.any,
         onClick: PropTypes.func,
         disabled: PropTypes.bool
     }

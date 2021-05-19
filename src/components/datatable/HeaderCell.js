@@ -111,9 +111,14 @@ export class HeaderCell extends Component {
     componentDidUpdate(prevProps) {
         const prevColumnProps = prevProps.columnProps;
         const columnProps = this.props.columnProps;
+        const filterField = columnProps.filterField || columnProps.field;
 
         if (prevColumnProps.sortableDisabled !== columnProps.sortableDisabled || prevColumnProps.sortable !== columnProps.sortable) {
             this.props.onSortableChange();
+        }
+
+        if (this.state.filterValue && prevProps.filters && prevProps.filters[filterField] && (!this.props.filters || !this.props.filters[filterField])) {
+            this.setState({ filterValue: '' });
         }
     }
 
@@ -133,7 +138,7 @@ export class HeaderCell extends Component {
     }
 
     isSortableDisabled() {
-        return this.props.columnProps.sortable && (this.props.allSortableDisabled || this.props.columnProps.sortableDisabled);
+        return !this.props.columnProps.sortable || (this.props.columnProps.sortable && (this.props.allSortableDisabled || this.props.columnProps.sortableDisabled));
     }
 
     isSingleSorted() {
@@ -207,7 +212,7 @@ export class HeaderCell extends Component {
             let sortIconElement = this.renderSortIcon(sorted, sortOrder);
             let ariaSortData = this.getAriaSort(sorted, sortOrder);
             let sortBadge = this.renderSortBadge(sortMetaDataIndex);
-            let tabIndex = !isSortableDisabled ? this.props.tabIndex : null
+            let tabIndex = this.props.columnProps.sortable && !isSortableDisabled ? this.props.tabIndex : null
 
             return (
                 <th ref={(el) => this.el = el} role="columnheader" tabIndex={tabIndex}

@@ -4,6 +4,7 @@ import { DividerDoc } from './DividerDoc';
 import { InputText } from '../../components/inputtext/InputText';
 import { Button } from '../../components/button/Button';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DividerDemo extends Component {
     render() {
@@ -16,6 +17,8 @@ export class DividerDemo extends Component {
                             <p>Divider is used to separate contents.</p>
                         </AppInlineHeader>
                     </div>
+                    <AppDemoActions github="divider/DividerDemo.js" />
+
                 </div>
 
                 <div className="content-section implementation">

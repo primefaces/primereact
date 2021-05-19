@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
-import UniqueComponentId from '../utils/UniqueComponentId';
 
 export class Knob extends Component {
 
@@ -18,7 +17,7 @@ export class Knob extends Component {
         min: 0,
         max: 100,
         strokeWidth: 14,
-        name: '',
+        name: null,
         valueColor: 'var(--primary-color, Black)',
         rangeColor: 'var(--surface-d, LightGray)',
         textColor: 'var(--text-color-secondary, Black)',
@@ -30,7 +29,7 @@ export class Knob extends Component {
         id: PropTypes.string,
         style: PropTypes.object,
         className: PropTypes.string,
-        value: PropTypes.any,
+        value: PropTypes.number,
         size: PropTypes.number,
         disabled: PropTypes.bool,
         readOnly: PropTypes.bool,
@@ -57,7 +56,6 @@ export class Knob extends Component {
         this.midY = 50;
         this.minRadians = 4 * Math.PI / 3;
         this.maxRadians =  -Math.PI / 3;
-        this.id = this.props.id || UniqueComponentId();
 
         this.onClick = this.onClick.bind(this);
         this.onMouseDown = this.onMouseDown.bind(this);
@@ -230,7 +228,7 @@ export class Knob extends Component {
         let text = this.props.showValue && <text x={50} y={57} textAnchor={'middle'} fill={this.props.textColor} className={'p-knob-text'} name={this.props.name}>{this.valueToDisplay()}</text>
 
         return (
-            <div className={containerClassName} style={this.props.style} ref={(el) => this.element = el}>
+            <div id={this.props.id} className={containerClassName} style={this.props.style} ref={(el) => this.element = el}>
                 <svg viewBox="0 0 100 100" width={this.props.size} height={this.props.size} onClick={this.onClick} onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp}
                      onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}>
                     <path d={this.rangePath()} strokeWidth={this.props.strokeWidth} stroke={this.props.rangeColor} className={'p-knob-range'}></path>

@@ -1,24 +1,40 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-interface SelectButtonProps {
+type SelectButtonOptionDisabledType = string | ((option: any) => boolean);
+
+interface SelectButtonChangeTargetOptions {
+    name: string;
+    id: string;
+    value: any;
+}
+
+interface SelectButtonChangeParams {
+    originalEvent: React.SyntheticEvent;
+    value: any;
+    stopPropagation(): void;
+    preventDefault(): void;
+    target: SelectButtonChangeTargetOptions;
+}
+
+export interface SelectButtonProps {
     id?: string;
     value?: any;
     options?: any[];
     optionLabel?: string;
     optionValue?: string;
-    optionDisabled?: string;
+    optionDisabled?: SelectButtonOptionDisabledType;
     tabIndex?: number;
     multiple?: boolean;
     disabled?: boolean;
     style?: object;
     className?: string;
     dataKey?: string;
-    tooltip?: any;
+    tooltip?: string;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
-    itemTemplate?(option:any): React.ReactNode;
-    onChange?(e: {originalEvent: Event, value: any, target: {name: string, id: string, value: any}}): void;
+    itemTemplate?(option: any): React.ReactNode;
+    onChange?(e: SelectButtonChangeParams): void;
 }
 
-export class SelectButton extends React.Component<SelectButtonProps,any> {}
+export declare class SelectButton extends React.Component<SelectButtonProps, any> { }

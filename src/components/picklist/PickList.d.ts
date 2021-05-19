@@ -1,11 +1,22 @@
 import * as React from 'react';
 
-interface PickListProps {
+interface PickListEventParams {
+    originalEvent: React.SyntheticEvent;
+    value: any;
+}
+
+interface PickListChangeParams {
+    originalEvent: React.SyntheticEvent;
+    source: any;
+    target: any;
+}
+
+export interface PickListProps {
     id?: string;
     source?: any[];
     target?: any[];
-    sourceHeader?: any;
-    targetHeader?: any;
+    sourceHeader?: React.ReactNode;
+    targetHeader?: React.ReactNode;
     style?: object;
     className?: string;
     sourceStyle?: object;
@@ -16,14 +27,14 @@ interface PickListProps {
     showTargetControls?: boolean;
     metaKeySelection?: boolean;
     tabIndex?: number;
-    itemTemplate?(item: any): JSX.Element | undefined;
-    onChange?(e: {event: Event, source: any, target: any}): void;
-    onMoveToSource?(e: {originalEvent: Event, value: any}): void;
-    onMoveAllToSource?(e: {originalEvent: Event, value: any}): void;
-    onMoveToTarget?(e: {originalEvent: Event, value: any}): void;
-    onMoveAllToTarget?(e: {originalEvent: Event, value: any}): void;
-    onSourceSelectionChange?(e: {originalEvent: Event, value: any}): void;
-    onTargetSelectionChange?(e: {originalEvent: Event, value: any}): void;
+    itemTemplate?(item: any): React.ReactNode;
+    onChange?(e: PickListChangeParams): void;
+    onMoveToSource?(e: PickListEventParams): void;
+    onMoveAllToSource?(e: PickListEventParams): void;
+    onMoveToTarget?(e: PickListEventParams): void;
+    onMoveAllToTarget?(e: PickListEventParams): void;
+    onSourceSelectionChange?(e: PickListEventParams): void;
+    onTargetSelectionChange?(e: PickListEventParams): void;
 }
 
-export class PickList extends React.Component<PickListProps,any> {}
+export declare class PickList extends React.Component<PickListProps, any> { }

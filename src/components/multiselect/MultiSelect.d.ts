@@ -1,16 +1,67 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-interface MultiSelectProps {
+type MultiSelectOptionGroupTemplateType = React.ReactNode | ((option: any, index: number) => React.ReactNode);
+
+type MultiSelectItemTemplateType = React.ReactNode | ((option: any) => React.ReactNode);
+
+type MultiSelectSelectedItemTemplateType = React.ReactNode | ((value: any) => React.ReactNode);
+
+type MultiSelectEmptyFilterMessageType = React.ReactNode | ((props: MultiSelectProps) => React.ReactNode);
+
+interface MultiSelectHeaderCheckboxChangeParams {
+    originalEvent: React.FormEvent<HTMLInputElement>;
+    checked: boolean;
+}
+
+interface MultiSelectPanelHeaderTemplateParams {
+    className: string;
+    checkboxElement: HTMLElement;
+    checked: boolean;
+    onChange(e: MultiSelectHeaderCheckboxChangeParams): void;
+    filterElement: JSX.Element;
+    closeElement: JSX.Element;
+    closeElementClassName: string;
+    closeIconClassName: string;
+    onCloseClick(event: React.MouseEvent<HTMLElement>): void;
+    element: JSX.Element;
+    props: MultiSelectProps;
+}
+
+type MultiSelectPanelHeaderTemplateType = React.ReactNode | ((e: MultiSelectPanelHeaderTemplateParams) => React.ReactNode);
+
+type MultiSelectPanelFooterTemplateType = React.ReactNode | ((props: MultiSelectProps, hide: () => void) => React.ReactNode);
+
+type MultiSelectOptionDisabledType = string | ((option: any) => boolean);
+
+type MultiSelectAppendToType = 'self' | HTMLElement | undefined | null;
+
+interface MultiSelectChangeTargetOptions {
+    name: string;
+    id: string;
+    value: any;
+}
+
+interface MultiSelectChangeParams {
+    originalEvent: React.SyntheticEvent;
+    value: any;
+    stopPropagation(): void;
+    preventDefault(): void;
+    target: MultiSelectChangeTargetOptions;
+}
+
+export interface MultiSelectProps {
     id?: string;
+    inputRef?: React.Ref<HTMLSelectElement>;
     name?: string;
     value?: any;
     options?: any[];
     optionLabel?: string;
     optionValue?: string;
-    optionDisabled?: boolean;
+    optionDisabled?: MultiSelectOptionDisabledType;
     optionGroupLabel?: string;
     optionGroupChildren?: string;
+    optionGroupTemplate?: MultiSelectOptionGroupTemplateType;
     display?: string;
     style?: object;
     className?: string;
@@ -26,27 +77,29 @@ interface MultiSelectProps {
     filterMatchMode?: string;
     filterPlaceholder?: string;
     filterLocale?: string;
-    emptyFilterMessage?: any;
+    emptyFilterMessage?: MultiSelectEmptyFilterMessageType;
     resetFilterOnHide?: boolean;
     tabIndex?: number;
     dataKey?: string;
     inputId?: string;
     required?: boolean;
-    appendTo?: HTMLElement;
-    tooltip?: any;
+    appendTo?: MultiSelectAppendToType;
+    tooltip?: string;
     tooltipOptions?: TooltipOptions;
-    ariaLabelledBy?: string;
     maxSelectedLabels?: number;
     selectionLimit?: number;
     selectedItemsLabel?: string;
-    panelHeaderTemplate?: any;
-    panelFooterTemplate?: any;
-    itemTemplate?(item: any): JSX.Element | undefined;
-    optionGroupTemplate?:((option: any) => any | any);
-    selectedItemTemplate?(value: any): JSX.Element | undefined;
-    onChange?(e: {originalEvent: Event, value: any, target: {name: string, id: string, value: any}}): void;
-    onFocus?(event: Event): void;
-    onBlur?(event: Event): void;
+    ariaLabelledBy?: string;
+    itemTemplate?: MultiSelectItemTemplateType;
+    selectedItemTemplate?: MultiSelectSelectedItemTemplateType;
+    panelHeaderTemplate?: MultiSelectPanelHeaderTemplateType;
+    panelFooterTemplate?: MultiSelectPanelFooterTemplateType;
+    transitionOptions?: object;
+    onChange?(e: MultiSelectChangeParams): void;
+    onFocus?(event: React.FocusEvent<HTMLInputElement>): void;
+    onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
+    onShow?(): void;
+    onHide?(): void;
 }
 
-export class MultiSelect extends React.Component<MultiSelectProps,any> {}
+export declare class MultiSelect extends React.Component<MultiSelectProps, any> { }

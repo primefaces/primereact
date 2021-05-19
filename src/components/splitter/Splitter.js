@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
-import UniqueComponentId from '../utils/UniqueComponentId';
 import DomHandler from '../utils/DomHandler';
 
 export class SplitterPanel extends Component {
@@ -44,12 +43,6 @@ export class Splitter extends Component {
         stateStorage: PropTypes.string,
         onResizeEnd: PropTypes.func
     };
-
-    constructor(props) {
-        super(props);
-
-        this.id = this.props.id || UniqueComponentId();
-    }
 
     bindMouseListeners() {
         if (!this.mouseMoveListener) {
@@ -280,7 +273,7 @@ export class Splitter extends Component {
         const panels = this.renderPanels();
 
         return (
-            <div ref={(el) => this.container = el} id={this.id} className={className} style={this.props.style}>
+            <div ref={(el) => this.container = el} id={this.props.id} className={className} style={this.props.style}>
                 {panels}
             </div>
         );

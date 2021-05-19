@@ -4,13 +4,15 @@ import { Column } from '../../components/column/Column';
 import { InputText } from '../../components/inputtext/InputText';
 import { CustomerService } from '../service/CustomerService';
 import { Dropdown } from '../../components/dropdown/Dropdown';
+import { Button } from '../../components/button/Button';
 import { ProgressBar } from '../../components/progressbar/ProgressBar';
 import { Calendar } from '../../components/calendar/Calendar';
 import { MultiSelect } from '../../components/multiselect/MultiSelect';
 import { TabView } from '../../components/tabview/TabView';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './DataTableDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DataTableFilterDemo extends Component {
 
@@ -22,7 +24,7 @@ export class DataTableFilterDemo extends Component {
             selectedRepresentative: null,
             selectedDate: null,
             selectedStatus: null,
-            globalFilter: null
+            globalFilter: ''
         };
 
         this.representatives = [
@@ -55,6 +57,7 @@ export class DataTableFilterDemo extends Component {
         this.onDateChange = this.onDateChange.bind(this);
         this.onStatusChange = this.onStatusChange.bind(this);
         this.filterDate = this.filterDate.bind(this);
+        this.reset = this.reset.bind(this);
     }
 
     componentDidMount() {
@@ -172,13 +175,24 @@ export class DataTableFilterDemo extends Component {
         return <span className={`customer-badge status-${option}`}>{option}</span>;
     }
 
+    reset() {
+        this.setState({
+            selectedRepresentative: null,
+            selectedDate: null,
+            selectedStatus: null,
+            globalFilter: ''
+        });
+
+        this.dt.reset();
+    }
+
     render() {
         const header = (
             <div className="table-header">
-                List of Customers
+                <Button type="button" label="Clear" className="p-button-outlined" icon="pi pi-filter-slash" onClick={this.reset} />
                 <span className="p-input-icon-left">
                     <i className="pi pi-search" />
-                    <InputText type="search" onInput={(e) => this.setState({ globalFilter: e.target.value })} placeholder="Global Search" />
+                    <InputText type="search" value={this.state.globalFilter} onChange={(e) => this.setState({ globalFilter: e.target.value })} placeholder="Global Search" />
                 </span>
             </div>
         );
@@ -196,6 +210,7 @@ export class DataTableFilterDemo extends Component {
                             property of column object that also accepts "contains", "endsWith", "equals", "in" and "custom". An optional global filter feature is available to search all fields with a keyword.
                             By default input fields are generated as filter elements and using templating any component can be used as a filter.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="datatable/DataTableFilterDemo.js" />
                 </div>
 
                 <div className="content-section implementation datatable-filter-demo">
@@ -234,6 +249,7 @@ import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 import { CustomerService } from '../service/CustomerService';
 import { Dropdown } from 'primereact/dropdown';
+import { Button } from 'primereact/button';
 import { ProgressBar } from 'primereact/progressbar';
 import { Calendar } from 'primereact/calendar';
 import { MultiSelect } from 'primereact/multiselect';
@@ -249,7 +265,7 @@ export class DataTableFilterDemo extends Component {
             selectedRepresentative: null,
             selectedDate: null,
             selectedStatus: null,
-            globalFilter: null
+            globalFilter: ''
         };
 
         this.representatives = [
@@ -282,6 +298,7 @@ export class DataTableFilterDemo extends Component {
         this.onDateChange = this.onDateChange.bind(this);
         this.onStatusChange = this.onStatusChange.bind(this);
         this.filterDate = this.filterDate.bind(this);
+        this.reset = this.reset.bind(this);
     }
 
     componentDidMount() {
@@ -399,13 +416,24 @@ export class DataTableFilterDemo extends Component {
         return <span className={\`customer-badge status-\${option}\`}>{option}</span>;
     }
 
+    reset() {
+        this.setState({
+            selectedRepresentative: null,
+            selectedDate: null,
+            selectedStatus: null,
+            globalFilter: ''
+        });
+
+        this.dt.reset();
+    }
+
     render() {
         const header = (
             <div className="table-header">
-                List of Customers
+                <Button type="button" label="Clear" className="p-button-outlined" icon="pi pi-filter-slash" onClick={this.reset} />
                 <span className="p-input-icon-left">
                     <i className="pi pi-search" />
-                    <InputText type="search" onInput={(e) => this.setState({ globalFilter: e.target.value })} placeholder="Global Search" />
+                    <InputText type="search" value={this.state.globalFilter} onChange={(e) => this.setState({ globalFilter: e.target.value })} placeholder="Global Search" />
                 </span>
             </div>
         );
@@ -443,6 +471,7 @@ import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 import { CustomerService } from '../service/CustomerService';
 import { Dropdown } from 'primereact/dropdown';
+import { Button } from 'primereact/button';
 import { ProgressBar } from 'primereact/progressbar';
 import { Calendar } from 'primereact/calendar';
 import { MultiSelect } from 'primereact/multiselect';
@@ -453,7 +482,7 @@ const DataTableFilterDemo = () => {
     const [selectedRepresentative, setSelectedRepresentative] = useState(null);
     const [selectedDate, setSelectedDate] = useState(null);
     const [selectedStatus, setSelectedStatus] = useState(null);
-    const [globalFilter, setGlobalFilter] = useState(null);
+    const [globalFilter, setGlobalFilter] = useState('');
     const dt = useRef(null);
     const representatives = [
         {name: "Amy Elsner", image: 'amyelsner.png'},
@@ -589,12 +618,20 @@ const DataTableFilterDemo = () => {
         return <span className={\`customer-badge status-\${option}\`}>{option}</span>;
     }
 
+    const reset = () => {
+        setSelectedRepresentative(null);
+        setSelectedDate(null);
+        setSelectedStatus(null);
+        setGlobalFilter('');
+        dt.current.reset();
+    }
+
     const header = (
         <div className="table-header">
-            List of Customers
+            <Button type="button" label="Clear" className="p-button-outlined" icon="pi pi-filter-slash" onClick={reset} />
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
-                <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Global Search" />
+                <InputText type="search" value={globalFilter} onChange={(e) => setGlobalFilter(e.target.value)} placeholder="Global Search" />
             </span>
         </div>
     );
@@ -631,6 +668,7 @@ import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 import { CustomerService } from '../service/CustomerService';
 import { Dropdown } from 'primereact/dropdown';
+import { Button } from 'primereact/button';
 import { ProgressBar } from 'primereact/progressbar';
 import { Calendar } from 'primereact/calendar';
 import { MultiSelect } from 'primereact/multiselect';
@@ -641,7 +679,7 @@ const DataTableFilterDemo = () => {
     const [selectedRepresentative, setSelectedRepresentative] = useState(null);
     const [selectedDate, setSelectedDate] = useState(null);
     const [selectedStatus, setSelectedStatus] = useState(null);
-    const [globalFilter, setGlobalFilter] = useState(null);
+    const [globalFilter, setGlobalFilter] = useState('');
     const dt = useRef(null);
     const representatives = [
         {name: "Amy Elsner", image: 'amyelsner.png'},
@@ -777,12 +815,20 @@ const DataTableFilterDemo = () => {
         return <span className={\`customer-badge status-\${option}\`}>{option}</span>;
     }
 
+    const reset = () => {
+        setSelectedRepresentative(null);
+        setSelectedDate(null);
+        setSelectedStatus(null);
+        setGlobalFilter('');
+        dt.current.reset();
+    }
+
     const header = (
         <div className="table-header">
-            List of Customers
+            <Button type="button" label="Clear" className="p-button-outlined" icon="pi pi-filter-slash" onClick={reset} />
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
-                <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Global Search" />
+                <InputText type="search" value={globalFilter} onChange={(e) => setGlobalFilter(e.target.value)} placeholder="Global Search" />
             </span>
         </div>
     );
@@ -910,7 +956,7 @@ const DataTableFilterDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'DataTableFilterDemo', sources: this.sources, service: 'CustomerService', data: 'customers-large', extFiles: this.extFiles })

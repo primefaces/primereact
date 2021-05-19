@@ -1,23 +1,157 @@
 import * as React from 'react';
+import { ColumnProps } from '../column/Column';
+import { PaginatorTemplate } from '../paginator/Paginator';
 
-interface DataTableProps {
+type DataTablePaginatorPositionType = 'top' | 'bottom' | 'both';
+
+type DataTableSortModeType = 'single' | 'multiple';
+
+type DataTableSortOrderType = 1 | 0 | -1 | undefined | null;
+
+type DataTableEmptyMessageType = React.ReactNode | ((frozen: boolean) => React.ReactNode);
+
+type DataTableSelectionModeType = 'single' | 'multiple' | 'checkbox' | 'radiobutton';
+
+type DataTableColumnResizeModeType = 'fit' | 'expand';
+
+type DataTableFilterMatchModeType = 'startsWith' | 'contains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'lt' | 'lte' | 'gt' | 'gte' | 'custom';
+
+type DataTableGlobalFilterType = string | undefined | null;
+
+type DataTableMultiSortMetaType = DataTableSortMeta[] | undefined | null;
+
+type DataTableCompareSelectionByType = 'deepEquals' | 'equals';
+
+type DataTableStateStorageType = 'session' | 'local' | 'custom';
+
+type DataTableAppendToType = 'self' | HTMLElement | undefined | null;
+
+interface DataTableSortMeta {
+    field: string;
+    order: DataTableSortOrderType;
+}
+
+interface DataTableFilterMetaData {
+    value: any;
+    matchMode: DataTableFilterMatchModeType;
+}
+
+interface DataTableFilterMeta {
+    [key: string]: DataTableFilterMetaData;
+}
+
+interface DataTableExpandedRows {
+    [key: string]: boolean;
+}
+
+interface DataTableEditingRows {
+    [key: string]: boolean;
+}
+
+interface DataTablePageParams {
+    first: number;
+    rows: number;
+}
+
+interface DataTableRowToggleParams {
+    data: any[];
+}
+
+interface DataTableColumnResizeEndParams {
+    element: HTMLElement;
+    column: ColumnProps;
+    delta: number;
+}
+
+interface DataTableSortParams {
+    sortField: string;
+    sortOrder: DataTableSortOrderType;
+    multiSortMeta: DataTableMultiSortMetaType;
+}
+
+interface DataTableFilterParams {
+    filters: DataTableFilterMeta;
+}
+
+interface DataTableSelectionChangeParams {
+    originalEvent: React.SyntheticEvent;
+    value: any;
+    [key: string]: any;
+}
+
+interface DataTableRowEventParams {
+    originalEvent: React.SyntheticEvent;
+    data: any;
+}
+
+interface DataTableRowClickEventParams extends Omit<DataTableRowEventParams, 'originalEvent'> {
+    originalEvent: React.MouseEvent<HTMLElement>;
+    index: number;
+}
+
+interface DataTableCellClickEventParams {
+    originalEvent: React.MouseEvent<HTMLElement>;
+    value: any;
+    field: string;
+    rowData: any;
+    rowIndex: number;
+    cellIndex: number;
+    selected: boolean;
+}
+
+interface DataTableRowEditParams extends DataTableRowEventParams {
+    index: number;
+}
+
+interface DataTableRowEditSaveParams extends DataTableRowEditParams {
+    valid: boolean;
+}
+
+interface DataTableSelectParams {
+    originalEvent: React.SyntheticEvent;
+    data: any;
+    type: string;
+}
+
+interface DataTableUnselectParams extends DataTableSelectParams { }
+
+interface DataTableExportFunctionParams {
+    data: any;
+    field: string;
+}
+
+interface DataTableColReorderParams {
+    originalEvent: React.DragEvent<HTMLElement>;
+    dragIndex: number;
+    dropIndex: number;
+    columns: React.ReactElement;
+}
+
+interface DataTableRowReorderParams {
+    originalEvent: React.DragEvent<HTMLElement>;
+    value: any;
+    dragIndex: number;
+    dropIndex: number;
+}
+
+export interface DataTableProps {
     id?: string;
     value?: any[];
-    header?: any;
-    footer?: any;
+    header?: React.ReactNode;
+    footer?: React.ReactNode;
     style?: object;
     className?: string;
     tableStyle?: object;
     tableClassName?: string;
     paginator?: boolean;
-    paginatorPosition?: string;
+    paginatorPosition?: DataTablePaginatorPositionType;
     alwaysShowPaginator?: boolean;
     paginatorClassName?: string;
-    paginatorTemplate?: string | object;
-    paginatorLeft?: any;
-    paginatorRight?: any;
+    paginatorTemplate?: PaginatorTemplate;
+    paginatorLeft?: React.ReactNode;
+    paginatorRight?: React.ReactNode;
+    paginatorDropdownAppendTo?: DataTableAppendToType;
     pageLinkSize?: number;
-    paginatorDropdownAppendTo?: any;
     rowsPerPageOptions?: number[];
     currentPageReportTemplate?: string;
     first?: number;
@@ -25,29 +159,31 @@ interface DataTableProps {
     totalRecords?: number;
     lazy?: boolean;
     sortField?: string;
-    sortOrder?: number;
-    multiSortMeta?: any[];
-    sortMode?: string;
-    defaultSortOrder?: number;
+    sortOrder?: DataTableSortOrderType;
+    multiSortMeta?: DataTableMultiSortMetaType;
+    sortMode?: DataTableSortModeType;
+    defaultSortOrder?: DataTableSortOrderType;
     removableSort?: boolean;
-    emptyMessage?: any;
-    selectionMode?: string;
-    selection?: any;
-    contextMenuSelection?: any;
-    compareSelectionBy?: string;
+    emptyMessage?: DataTableEmptyMessageType;
+    selectionMode?: DataTableSelectionModeType;
+    dragSelection?: boolean;
+    cellSelection?: boolean;
+    selection?: any | any[];
+    contextMenuSelection?: object;
+    compareSelectionBy?: DataTableCompareSelectionByType;
     dataKey?: string;
     metaKeySelection?: boolean;
     selectOnEdit?: boolean;
-    headerColumnGroup?: any;
-    footerColumnGroup?: any;
-    frozenHeaderColumnGroup?: any;
-    frozenFooterColumnGroup?: any;
-    expandedRows?: any[] | object;
+    headerColumnGroup?: React.ReactNode;
+    footerColumnGroup?: React.ReactNode;
+    frozenHeaderColumnGroup?: React.ReactNode;
+    frozenFooterColumnGroup?: React.ReactNode;
+    expandedRows?: any[] | DataTableExpandedRows;
     resizableColumns?: boolean;
-    columnResizeMode?: string;
+    columnResizeMode?: DataTableColumnResizeModeType;
     reorderableColumns?: boolean;
-    filters?: object;
-    globalFilter?: any;
+    filters?: DataTableFilterMeta;
+    globalFilter?: DataTableGlobalFilterType;
     filterDelay?: number;
     filterLocale?: string;
     scrollable?: boolean;
@@ -60,57 +196,60 @@ interface DataTableProps {
     csvSeparator?: string;
     exportFilename?: string;
     rowGroupMode?: string;
-    autoLayout?:boolean;
-    loading?:boolean;
-    loadingIcon?:string;
-    tabIndex?:number;
-    stateKey?:string;
-    stateStorage?:string;
-    groupField?:string;
-    editMode?:string;
-    editingRows?: any[] | object;
-    expandableRowGroups?:boolean;
-    rowHover?:boolean;
-    showSelectionElement?(e: {data: any}): boolean;
-    showReorderElement?(e: {data: any}): boolean;
-    onSelectionChange?(e: {originalEvent: Event, value: any}): void;
-    onContextMenuSelectionChange?(e: {originalEvent: Event, value: any}): void;
-    rowExpansionTemplate?(data: any): JSX.Element | undefined;
-    onRowToggle?(e: {data: any[]}): void;
-    rowClassName?(rowData: any): object;
-    rowGroupHeaderTemplate?(data: any, index: number): React.ReactNode | undefined;
-    rowGroupFooterTemplate?(data: any, index: number): React.ReactNode | undefined;
-    onColumnResizeEnd?(e: {element: HTMLElement, delta: number}): void;
-    onSort?(e: {sortField: string, sortOrder: number, multiSortMeta: any}): void;
-    onPage?(e: {first: number, rows: number}): void;
-    onFilter?(e: {filters: any}): void;
-    onVirtualScroll?(e: {first: number, rows: number}): void;
-    onRowClick?(e: {originalEvent: Event, data: any, index: number}): void;
-    onRowDoubleClick?(e: {originalEvent: Event, data: any, index: number}): void;
-    onRowSelect?(e: {originalEvent: Event, data: any, type: string}): void;
-    onRowUnselect?(e: {originalEvent: Event, data: any, type: string}): void;
-    onRowExpand?(e: {originalEvent: Event, data: any}): void;
-    onRowCollapse?(e: {originalEvent: Event, data: any}): void;
-    onContextMenu?(e: {originalEvent: Event, data: any}): void;
-    onColReorder?(e: {originalEvent: Event, dragIndex: number, dropIndex: number, columns: any}): void;
-    onRowReorder?(e: {originalEvent: Event, value: any, dragIndex: number, dropIndex: number}): void;
+    autoLayout?: boolean;
+    loading?: boolean;
+    loadingIcon?: string;
+    tabIndex?: number;
+    stateKey?: string;
+    stateStorage?: DataTableStateStorageType;
+    groupField?: string;
+    editMode?: string;
+    editingRows?: any[] | DataTableEditingRows;
+    expandableRowGroups?: boolean;
+    rowHover?: boolean;
+    showSelectionElement?(data: any): boolean | undefined | null;
+    showRowReorderElement?(data: any): boolean | undefined | null;
+    onSelectionChange?(e: DataTableSelectionChangeParams): void;
+    onContextMenuSelectionChange?(e: DataTableSelectionChangeParams): void;
+    rowExpansionTemplate?(data: any): React.ReactNode;
+    onRowToggle?(e: DataTableRowToggleParams): void;
+    rowClassName?(data: any): object;
+    rowGroupHeaderTemplate?(data: any, index: number): React.ReactNode;
+    rowGroupFooterTemplate?(data: any, index: number): React.ReactNode;
+    onColumnResizeEnd?(e: DataTableColumnResizeEndParams): void;
+    onSort?(e: DataTableSortParams): void;
+    onPage?(e: DataTablePageParams): void;
+    onFilter?(e: DataTableFilterParams): void;
+    onVirtualScroll?(e: DataTablePageParams): void;
+    onRowClick?(e: DataTableRowClickEventParams): void;
+    onRowDoubleClick?(e: DataTableRowClickEventParams): void;
+    onRowSelect?(e: DataTableSelectParams): void;
+    onRowUnselect?(e: DataTableUnselectParams): void;
+    onRowExpand?(e: DataTableRowEventParams): void;
+    onRowCollapse?(e: DataTableRowEventParams): void;
+    onCellClick?(e: DataTableCellClickEventParams): void;
+    onCellSelect?(e: DataTableSelectParams): void;
+    onCellUnselect?(e: DataTableUnselectParams): void;
+    onContextMenu?(e: DataTableRowEventParams): void;
+    onColReorder?(e: DataTableColReorderParams): void;
+    onRowReorder?(e: DataTableRowReorderParams): void;
     onValueChange?(value: any[]): void;
-    rowEditorValidator?(rowData: any): boolean;
-    onRowEditInit?(e: {originalEvent: Event, data: any, index: number}): void;
-    onRowEditSave?(e: {originalEvent: Event, data: any, index: number, valid: boolean}): void;
-    onRowEditCancel?(e: {originalEvent: Event, data: any, index: number}): void;
-    onRowEditChange?(e: {originalEvent: Event, data: any, index: number}): void;
-    exportFunction?(e: {data: any, field: string}): any;
-    customSaveState?(state: any): void;
-    customRestoreState?(): any;
-    onStateSave?(state: any): void;
-    onStateRestore?(state: any): void;
+    rowEditorValidator?(data: any): boolean;
+    onRowEditInit?(e: DataTableRowEditParams): void;
+    onRowEditSave?(e: DataTableRowEditSaveParams): void;
+    onRowEditCancel?(e: DataTableRowEditParams): void;
+    onRowEditChange?(e: DataTableRowEditParams): void;
+    exportFunction?(e: DataTableExportFunctionParams): any;
+    customSaveState?(state: object): void;
+    customRestoreState?(): object;
+    onStateSave?(state: object): void;
+    onStateRestore?(state: object): void;
 }
 
-export class DataTable extends React.Component<DataTableProps,any> {
-    public reset():void;
-    public exportCSV(options?: {selectionOnly: boolean}):void;
-    public filter<T>(value:T, field:string, mode:string):void;
-    public resetColumnOrder():void;
-    public closeEditingCell():void;
+export declare class DataTable extends React.Component<DataTableProps, any> {
+    public reset(): void;
+    public exportCSV(options: { selectionOnly: boolean }): void;
+    public filter<T>(value: T, field: string, mode: DataTableFilterMatchModeType): void;
+    public resetColumnOrder(): void;
+    public closeEditingCell(): void;
 }

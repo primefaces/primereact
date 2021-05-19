@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { DataView, DataViewLayoutOptions } from '../../components/dataview/DataView';
 import { TabView } from '../../components/tabview/TabView';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import ProductService from '../service/ProductService';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { Rating } from '../../components/rating/Rating';
 import { Button } from '../../components/button/Button';
 import './DataViewDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DataViewLazyDemo extends Component {
 
@@ -146,6 +147,7 @@ export class DataViewLazyDemo extends Component {
                         lazy paging by using an in memory list. It is also important to assign the logical number of rows to totalRecords by doing a projection query for paginator configuration so that paginator displays the UI assuming
                             there are actually records of totalRecords size although in reality they aren't as in lazy mode, only the records that are displayed on the current page exist.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="dataview/DataViewLazyDemo.js" />
                 </div>
 
                 <div className="content-section implementation dataview-demo">
@@ -737,7 +739,7 @@ const DataViewLazyDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'DataViewLazyDemo', sources: this.sources, service: 'ProductService', data: 'products', extFiles: this.extFiles })

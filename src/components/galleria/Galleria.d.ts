@@ -1,19 +1,30 @@
 import * as React from 'react';
 
-interface GalleriaProps {
+type GalleriaPositionType = 'top' | 'bottom' | 'left' | 'right';
+
+interface GalleriaResponsiveOptions {
+    breakpoint: string;
+    numVisible: number;
+}
+
+interface GalleriaItemChangeParams {
+    index: number;
+}
+
+export interface GalleriaProps {
     id?: string;
     value?: any[];
     activeIndex?: number;
     fullScreen?: boolean;
-    item?: any;
-    thumbnail?: any;
-    indicator?: any;
+    item?(item: any): React.ReactNode;
+    thumbnail?(item: any): React.ReactNode;
+    indicator?(index: number): React.ReactNode;
     className?: string;
     style?: object;
-    header?: any;
-    footer?: any;
+    header?: React.ReactNode;
+    footer?: React.ReactNode;
     numVisible?: number;
-    responsiveOptions?: any;
+    responsiveOptions?: GalleriaResponsiveOptions[];
     showItemNavigators?: boolean;
     showThumbnailNavigators?: boolean;
     showItemNavigatorsOnHover?: boolean;
@@ -21,20 +32,23 @@ interface GalleriaProps {
     circular?: boolean;
     autoPlay?: boolean;
     transitionInterval?: number;
-    caption?: any;
+    caption?(item: any): React.ReactNode;
     showThumbnails?: boolean;
-    thumbnailsPosition?: string;
+    thumbnailsPosition?: GalleriaPositionType;
     showIndicators?: boolean;
     showIndicatorsOnItem?: boolean;
-    indicatorsPosition?: string;
+    indicatorsPosition?: GalleriaPositionType;
     baseZIndex?: number;
-    onItemChange?(e: {index: number}): void;
+    transitionOptions?: object;
+    onItemChange?(e: GalleriaItemChangeParams): void;
+    onShow?(): void;
+    onHide?(): void;
 }
 
-export class Galleria extends React.Component<GalleriaProps,any> {
-    public show():void;
-    public hide():void;
-    public isAutoPlayActive():boolean;
-    public startSlideShow():void;
-    public stopSlideShow():void;
+export declare class Galleria extends React.Component<GalleriaProps, any> {
+    public show(): void;
+    public hide(): void;
+    public isAutoPlayActive(): boolean;
+    public startSlideShow(): void;
+    public stopSlideShow(): void;
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 
 export class SelectButtonDoc extends Component {
 
@@ -161,7 +161,7 @@ const SelectButtonDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
     <TabView>
         <TabPanel header="Documentation">
             <h5>Import</h5>
@@ -328,7 +328,7 @@ const itemTemplate = (option) => {
                         </tr>
                         <tr>
                             <td>optionDisabled</td>
-                            <td>string</td>
+                            <td>function | string</td>
                             <td>null</td>
                             <td>Property name or getter function to use as the disabled flag of an option, defaults to false when not defined.</td>
                         </tr>

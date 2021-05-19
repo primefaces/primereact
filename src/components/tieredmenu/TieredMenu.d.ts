@@ -1,8 +1,9 @@
 import * as React from 'react';
-import {MenuItem} from '../menuitem/MenuItem';
-import {SyntheticEvent} from "react";
+import { MenuItem } from '../menuitem/MenuItem';
 
-interface TieredMenuProps {
+type TieredMenuAppendToType = 'self' | HTMLElement | undefined | null;
+
+export interface TieredMenuProps {
     id?: string;
     model?: MenuItem[];
     popup?: boolean;
@@ -10,11 +11,12 @@ interface TieredMenuProps {
     className?: string;
     autoZIndex?: boolean;
     bazeZIndex?: number;
-    appendTo?: any;
-    onShow?(e: Event): void;
-    onHide?(e: Event): void;
+    appendTo?: TieredMenuAppendToType;
+    transitionOptions?: object;
+    onShow?(e: React.SyntheticEvent): void;
+    onHide?(e: React.SyntheticEvent): void;
 }
 
-export class TieredMenu extends React.Component<TieredMenuProps, any> {
-    public toggle(event: SyntheticEvent): void;
+export declare class TieredMenu extends React.Component<TieredMenuProps, any> {
+    public toggle(event: React.SyntheticEvent): void;
 }

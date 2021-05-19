@@ -113,9 +113,8 @@ export class Carousel extends Component {
         this.remainingItems = 0;
         this.allowAutoplay = !!this.props.autoplayInterval;
         this.circular = this.props.circular || this.allowAutoplay;
+        this.attributeSelector = UniqueComponentId();
         this.swipeThreshold = 20;
-
-        this.id = this.props.id || UniqueComponentId();
     }
 
     step(dir, page) {
@@ -375,12 +374,11 @@ export class Carousel extends Component {
     createStyle() {
         if (!this.carouselStyle) {
             this.carouselStyle = document.createElement('style');
-            this.carouselStyle.type = 'text/css';
             document.body.appendChild(this.carouselStyle);
         }
 
         let innerHTML = `
-            #${this.id} .p-carousel-item {
+            .p-carousel[${this.attributeSelector}] .p-carousel-item {
                 flex: 1 0 ${ (100/ this.state.numVisible) }%
             }
         `;
@@ -411,7 +409,7 @@ export class Carousel extends Component {
 
                 innerHTML += `
                     @media screen and (max-width: ${res.breakpoint}) {
-                        #${this.id} .p-carousel-item {
+                        .p-carousel[${this.attributeSelector}] .p-carousel-item {
                             flex: 1 0 ${ (100/ res.numVisible) }%
                         }
                     }
@@ -429,6 +427,10 @@ export class Carousel extends Component {
     }
 
     componentDidMount() {
+        if (this.container) {
+            this.container.setAttribute(this.attributeSelector, '');
+        }
+
         this.createStyle();
         this.calculatePosition();
         this.changePosition(this.state.totalShiftedItems);
@@ -704,7 +706,7 @@ export class Carousel extends Component {
         const footer = this.renderFooter();
 
         return (
-            <div id={this.id} className={className} style={this.props.style}>
+            <div ref={el => this.container = el} id={this.props.id} className={className} style={this.props.style}>
                 {header}
                 <div className={contentClassName}>
                     {content}

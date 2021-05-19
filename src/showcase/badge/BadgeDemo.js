@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AppDemoActions from '../../AppDemoActions';
 import { Button } from '../../components/button/Button';
 import { Badge } from '../../components/badge/Badge';
 import { BadgeDoc } from './BadgeDoc';
@@ -15,6 +16,7 @@ export class BadgeDemo extends Component {
                             <p>Badge is a small status indicator for another element.</p>
                         </AppInlineHeader>
                     </div>
+                    <AppDemoActions github="badge/BadgeDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

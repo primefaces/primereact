@@ -1,13 +1,48 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-type CompleteMethodParams = {
-    originalEvent: Event,
-    query: string
+type AutoCompleteOptionGroupTemplateType = React.ReactNode | ((suggestion: any, index: number) => React.ReactNode);
+
+type AutoCompleteItemTemplateType = React.ReactNode | ((suggestion: any, index: number) => React.ReactNode);
+
+type AutoCompleteSelectedItemTemplateType = React.ReactNode | ((value: any) => React.ReactNode);
+
+type AutoCompleteAppendToType = 'self' | HTMLElement | undefined | null;
+
+interface AutoCompleteChangeTargetOptions {
+    name: string;
+    id: string;
+    value: any;
 }
 
-interface AutoCompleteProps {
+interface AutoCompleteChangeParams {
+    originalEvent: React.SyntheticEvent;
+    value: any;
+    stopPropagation(): void;
+    preventDefault(): void;
+    target: AutoCompleteChangeTargetOptions;
+}
+
+interface AutoCompleteSelectParams {
+    originalEvent: React.SyntheticEvent;
+    value: any;
+}
+
+interface AutoCompleteUnselectParams extends AutoCompleteSelectParams { }
+
+interface AutoCompleteDropdownClickParams {
+    originalEvent: React.SyntheticEvent;
+    query: string;
+}
+
+interface AutoCompleteCompleteMethodParams {
+    originalEvent: React.SyntheticEvent;
+    query: string;
+}
+
+export interface AutoCompleteProps {
     id?: string;
+    inputRef?: React.Ref<HTMLInputElement>;
     value?: any;
     name?: string;
     type?: string;
@@ -15,6 +50,7 @@ interface AutoCompleteProps {
     field?: string;
     optionGroupLabel?: string;
     optionGroupChildren?: string;
+    optionGroupTemplate?: AutoCompleteOptionGroupTemplateType;
     forceSelection?: boolean;
     autoHighlight?: boolean;
     scrollHeight?: string;
@@ -35,29 +71,31 @@ interface AutoCompleteProps {
     disabled?: boolean;
     maxlength?: number;
     size?: number;
-    appendTo?: any;
+    appendTo?: AutoCompleteAppendToType;
     tabIndex?: number;
     autoFocus?: boolean;
-    tooltip?: any;
+    tooltip?: string;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
-    completeMethod?(e: CompleteMethodParams): void;
-    itemTemplate?:((data: any, index: number) => any | any);
-    optionGroupTemplate?:((data: any, index: number) => any | any);
-    selectedItemTemplate?:((data: any) => any | any);
-    onChange?(e: {originalEvent: Event, value: any, target: {name: string, id: string, value: any}}): void;
-    onFocus?(event: Event): void;
-    onBlur?(event: Event): void;
-    onSelect?(e: {originalEvent: Event, value: any}): void;
-    onUnselect?(e: {originalEvent: Event, value: any}): void;
-    onDropdownClick?(e: {originalEvent: Event, query: string}): void;
-    onClick?(event:Event): void;
-    onDblClick?(event:Event): void;
-    onMouseDown?(event:Event): void;
-    onKeyUp?(event:Event): void;
-    onKeyPress?(event:Event): void;
-    onContextMenu?(event:Event): void;
-    onClear?(event:Event): void;
+    completeMethod?(e: AutoCompleteCompleteMethodParams): void;
+    itemTemplate?: AutoCompleteItemTemplateType;
+    selectedItemTemplate?: AutoCompleteSelectedItemTemplateType;
+    transitionOptions?: object;
+    onChange?(e: AutoCompleteChangeParams): void;
+    onFocus?(event: React.FocusEvent<HTMLInputElement>): void;
+    onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
+    onSelect?(e: AutoCompleteSelectParams): void;
+    onUnselect?(e: AutoCompleteUnselectParams): void;
+    onDropdownClick?(e: AutoCompleteDropdownClickParams): void;
+    onClick?(event: React.MouseEvent<HTMLElement>): void;
+    onDblClick?(event: React.MouseEvent<HTMLElement>): void;
+    onMouseDown?(event: React.MouseEvent<HTMLElement>): void;
+    onKeyUp?(event: React.KeyboardEvent<HTMLInputElement>): void;
+    onKeyPress?(event: React.KeyboardEvent<HTMLInputElement>): void;
+    onContextMenu?(event: React.MouseEvent<HTMLElement>): void;
+    onClear?(event: React.SyntheticEvent): void;
+    onShow?(): void;
+    onHide?(): void;
 }
 
-export class AutoComplete extends React.Component<AutoCompleteProps,any> {}
+export declare class AutoComplete extends React.Component<AutoCompleteProps, any> { }

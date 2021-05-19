@@ -1,23 +1,39 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-interface ToggleButtonProps {
+type ToggleButtonIconPositionType = 'left' | 'right';
+
+interface ToggleButtonChangeTargetOptions {
+    name: string;
+    id: string;
+    value: boolean;
+}
+
+interface ToggleButtonChangeParams {
+    originalEvent: React.SyntheticEvent;
+    value: boolean;
+    stopPropagation(): void;
+    preventDefault(): void;
+    target: ToggleButtonChangeTargetOptions;
+}
+
+export interface ToggleButtonProps {
     id?: string;
     onIcon?: string;
     offIcon?: string;
     onLabel?: string;
     offLabel?: string;
-    iconPos?: string;
+    iconPos?: ToggleButtonIconPositionType;
     style?: object;
     className?: string;
     checked?: boolean;
     tabIndex?: number;
-    tooltip?: any;
+    tooltip?: string;
     tooltipOptions?: TooltipOptions;
-    ariaLabelledBy?:string;
-    onChange?(e: {originalEvent: Event, value: boolean, target: {type: string, name: string, id: string, value: boolean}}): void;
-    onFocus?(event: Event): void;
-    onBlur?(event: Event): void;
+    ariaLabelledBy?: string;
+    onChange?(e: ToggleButtonChangeParams): void;
+    onFocus?(event: React.FocusEvent<HTMLElement>): void;
+    onBlur?(event: React.FocusEvent<HTMLElement>): void;
 }
 
-export class ToggleButton extends React.Component<ToggleButtonProps,any> {}
+export declare class ToggleButton extends React.Component<ToggleButtonProps, any> { }

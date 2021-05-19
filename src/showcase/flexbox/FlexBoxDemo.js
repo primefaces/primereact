@@ -532,16 +532,16 @@ export class FlexBoxDemo extends Component {
 <CodeHighlight>
 {`
 <div className="p-d-flex p-p-3 card">
-    <Button type="Button" icon="pi pi-check" className="p-mr-2" />
-    <Button type="Button" icon="pi pi-trash" className="p-button-danger"/>
-    <Button type="Button" icon="pi pi-search" className="p-ml-auto p-button-help"/>
+    <Button type="button" icon="pi pi-check" className="p-mr-2" />
+    <Button type="button" icon="pi pi-trash" className="p-button-danger"/>
+    <Button type="button" icon="pi pi-search" className="p-ml-auto p-button-help"/>
 </div>
 `}
 </CodeHighlight>
                     <div className="p-d-flex p-p-3 card">
-                        <Button type="Button" icon="pi pi-check" className="p-mr-2" />
-                        <Button type="Button" icon="pi pi-trash" className="p-button-danger" />
-                        <Button type="Button" icon="pi pi-search" className="p-ml-auto p-button-help" />
+                        <Button type="button" icon="pi pi-check" className="p-mr-2" />
+                        <Button type="button" icon="pi pi-trash" className="p-button-danger" />
+                        <Button type="button" icon="pi pi-search" className="p-ml-auto p-button-help" />
                     </div>
 
                     <h6>Vertical Spacing</h6>

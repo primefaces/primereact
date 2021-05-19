@@ -4,5 +4,12 @@ export default class PrimeReact {
 
     static locale = 'en';
 
-    static zIndex = 1000;
+    static zIndex = {
+        modal: 1100,
+        overlay: 1000,
+        menu: 1000,
+        tooltip: 1100
+    }
+
+    static appendTo = null;
 }

@@ -5,6 +5,7 @@ import { InputText } from '../../components/inputtext/InputText';
 import { Button } from '../../components/button/Button';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { MessagesDoc } from './MessagesDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class MessagesDemo extends Component {
 
@@ -53,7 +54,8 @@ export class MessagesDemo extends Component {
                     <AppInlineHeader changelogText="messages">
                         <h1>Messages</h1>
                         <p>Messages is used to display inline messages with various severities.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="messages/MessagesDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

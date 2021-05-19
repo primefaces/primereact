@@ -1,0 +1,47 @@
+@mixin tooltip-color($color) {
+    &.p-tooltip {
+        .p-tooltip-arrow {
+            border-top-color: var(#{$color});
+        }
+
+        .p-tooltip-text {
+            background-color: var(#{$color});
+        }
+    }
+}
+
+.blue-tooltip {
+    @include tooltip-color(--blue-500);
+}
+
+.green-tooltip {
+    @include tooltip-color(--green-500);
+}
+
+.yellow-tooltip {
+    @include tooltip-color(--yellow-500);
+}
+
+.cyan-tooltip {
+    @include tooltip-color(--cyan-500);
+}
+
+.pink-tooltip {
+    @include tooltip-color(--pink-500);
+}
+
+.indigo-tooltip {
+    @include tooltip-color(--indigo-500);
+}
+
+.teal-tooltip {
+    @include tooltip-color(--teal-500);
+}
+
+.bluegray-tooltip {
+    @include tooltip-color(--bluegray-500);
+}
+
+.purple-tooltip {
+    @include tooltip-color(--purple-500);
+}

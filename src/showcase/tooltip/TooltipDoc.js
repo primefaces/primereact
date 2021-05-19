@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 
 export class TooltipDoc extends Component {
 
@@ -19,6 +19,7 @@ import { Knob } from 'primereact/knob';
 import { Badge } from 'primereact/badge';
 import { Slider } from 'primereact/slider';
 import { Tooltip } from 'primereact/tooltip';
+import './TooltipDemo.css';
 
 export class TooltipDemo extends Component {
 
@@ -27,7 +28,8 @@ export class TooltipDemo extends Component {
         this.state = {
             saveBtnTooltipText: 'Click to proceed',
             knobValue: 60,
-            sliderValue: 20
+            sliderValue: 20,
+            count: 0
         }
     }
 
@@ -73,6 +75,19 @@ export class TooltipDemo extends Component {
                         <img className="logo p-ml-2" alt="logo" src="showcase/images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} data-pr-tooltip="PrimeReact-Logo" height="80px"/>
                     </div>
 
+                    <div className="p-d-flex p-ai-center">
+                        <Button type="button" label="Save" icon="pi pi-check" tooltip="Save (autoHide: true)" />
+
+                        <Tooltip target=".tooltip-button" autoHide={false}>
+                            <div className="p-d-flex p-ai-center">
+                                <span style={{minWidth: '5rem'}}>Count: {this.state.count}</span>
+                                <Button type="button" icon="pi pi-plus" onClick={() => this.setState((prevState) => ({ count: prevState.count + 1 }))} className="p-button-rounded p-button-success p-ml-2"></Button>
+                                <Button type="button" icon="pi pi-minus" onClick={() => this.setState((prevState) => ({ count: prevState.count - 1 }))} className="p-button-rounded p-button-danger p-ml-2"></Button>
+                            </div>
+                        </Tooltip>
+                        <Button className="tooltip-button p-ml-2" type="button" label="Save" icon="pi pi-check" />
+                    </div>
+
                     <h5>Template</h5>
                     <div className="p-d-flex p-ai-center">
                         <Tooltip target=".custom-tooltip-btn">
@@ -90,12 +105,24 @@ export class TooltipDemo extends Component {
                             <Badge severity="danger"></Badge>
                         </i>
                     </div>
+
+                    <h5>Color</h5>
+                    <div className="p-d-flex p-ai-center p-flex-wrap">
+                        <Button label="Blue" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Blue" tooltipOptions={{ className: 'blue-tooltip', position: 'top' }} />
+                        <Button label="Green" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Green" tooltipOptions={{ className: 'green-tooltip', position: 'top' }} />
+                        <Button label="Yellow" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Yellow" tooltipOptions={{ className: 'yellow-tooltip', position: 'top' }} />
+                        <Button label="Cyan" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Cyan" tooltipOptions={{ className: 'cyan-tooltip', position: 'top' }} />
+                        <Button label="Pink" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Pink" tooltipOptions={{ className: 'pink-tooltip', position: 'top' }} />
+                        <Button label="Indigo" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Indigo" tooltipOptions={{ className: 'indigo-tooltip', position: 'top' }} />
+                        <Button label="Teal" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Teal" tooltipOptions={{ className: 'teal-tooltip', position: 'top' }} />
+                        <Button label="Blue Gray" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Blue Gray" tooltipOptions={{ className: 'bluegray-tooltip', position: 'top' }} />
+                        <Button label="Purple" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Purple" tooltipOptions={{ className: 'purple-tooltip', position: 'top' }} />
+                    </div>
                 </div>
             </div>
         )
     }
 }
-
                 `
             },
             'hooks': {
@@ -108,11 +135,13 @@ import { Knob } from 'primereact/knob';
 import { Badge } from 'primereact/badge';
 import { Slider } from 'primereact/slider';
 import { Tooltip } from 'primereact/tooltip';
+import './TooltipDemo.css';
 
 const TooltipDemo = () => {
     const [saveBtnTooltipText, setSaveBtnTooltipText] = useState('Click to proceed');
     const [knobValue, setKnobValue] = useState(60);
     const [sliderValue, setSliderValue] = useState(20);
+    const [count, setCount] = useState(0);
 
     return (
         <div>
@@ -155,6 +184,19 @@ const TooltipDemo = () => {
                     <img className="logo p-ml-2" alt="logo" src="showcase/images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} data-pr-tooltip="PrimeReact-Logo" height="80px"/>
                 </div>
 
+                <div className="p-d-flex p-ai-center">
+                    <Button type="button" label="Save" icon="pi pi-check" tooltip="Save (autoHide: true)" />
+
+                    <Tooltip target=".tooltip-button" autoHide={false}>
+                        <div className="p-d-flex p-ai-center">
+                            <span style={{minWidth: '5rem'}}>Count: {count}</span>
+                            <Button type="button" icon="pi pi-plus" onClick={() => setCount(count + 1)} className="p-button-rounded p-button-success p-ml-2"></Button>
+                            <Button type="button" icon="pi pi-minus" onClick={() => setCount(count - 1)} className="p-button-rounded p-button-danger p-ml-2"></Button>
+                        </div>
+                    </Tooltip>
+                    <Button className="tooltip-button p-ml-2" type="button" label="Save" icon="pi pi-check" />
+                </div>
+
                 <h5>Template</h5>
                 <div className="p-d-flex p-ai-center">
                     <Tooltip target=".custom-tooltip-btn">
@@ -172,11 +214,23 @@ const TooltipDemo = () => {
                         <Badge severity="danger"></Badge>
                     </i>
                 </div>
+
+                <h5>Color</h5>
+                <div className="p-d-flex p-ai-center p-flex-wrap">
+                    <Button label="Blue" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Blue" tooltipOptions={{ className: 'blue-tooltip', position: 'top' }} />
+                    <Button label="Green" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Green" tooltipOptions={{ className: 'green-tooltip', position: 'top' }} />
+                    <Button label="Yellow" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Yellow" tooltipOptions={{ className: 'yellow-tooltip', position: 'top' }} />
+                    <Button label="Cyan" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Cyan" tooltipOptions={{ className: 'cyan-tooltip', position: 'top' }} />
+                    <Button label="Pink" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Pink" tooltipOptions={{ className: 'pink-tooltip', position: 'top' }} />
+                    <Button label="Indigo" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Indigo" tooltipOptions={{ className: 'indigo-tooltip', position: 'top' }} />
+                    <Button label="Teal" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Teal" tooltipOptions={{ className: 'teal-tooltip', position: 'top' }} />
+                    <Button label="Blue Gray" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Blue Gray" tooltipOptions={{ className: 'bluegray-tooltip', position: 'top' }} />
+                    <Button label="Purple" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Purple" tooltipOptions={{ className: 'purple-tooltip', position: 'top' }} />
+                </div>
             </div>
         </div>
     )
 }
-
                 `
             },
             'ts': {
@@ -189,11 +243,13 @@ import { Knob } from 'primereact/knob';
 import { Badge } from 'primereact/badge';
 import { Slider } from 'primereact/slider';
 import { Tooltip } from 'primereact/tooltip';
+import './TooltipDemo.css';
 
 const TooltipDemo = () => {
     const [saveBtnTooltipText, setSaveBtnTooltipText] = useState('Click to proceed');
     const [knobValue, setKnobValue] = useState(60);
     const [sliderValue, setSliderValue] = useState(20);
+    const [count, setCount] = useState(0);
 
     return (
         <div>
@@ -236,6 +292,19 @@ const TooltipDemo = () => {
                     <img className="logo p-ml-2" alt="logo" src="showcase/images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} data-pr-tooltip="PrimeReact-Logo" height="80px"/>
                 </div>
 
+                <div className="p-d-flex p-ai-center">
+                    <Button type="button" label="Save" icon="pi pi-check" tooltip="Save (autoHide: true)" />
+
+                    <Tooltip target=".tooltip-button" autoHide={false}>
+                        <div className="p-d-flex p-ai-center">
+                            <span style={{minWidth: '5rem'}}>Count: {count}</span>
+                            <Button type="button" icon="pi pi-plus" onClick={() => setCount(count + 1)} className="p-button-rounded p-button-success p-ml-2"></Button>
+                            <Button type="button" icon="pi pi-minus" onClick={() => setCount(count - 1)} className="p-button-rounded p-button-danger p-ml-2"></Button>
+                        </div>
+                    </Tooltip>
+                    <Button className="tooltip-button p-ml-2" type="button" label="Save" icon="pi pi-check" />
+                </div>
+
                 <h5>Template</h5>
                 <div className="p-d-flex p-ai-center">
                     <Tooltip target=".custom-tooltip-btn">
@@ -253,11 +322,84 @@ const TooltipDemo = () => {
                         <Badge severity="danger"></Badge>
                     </i>
                 </div>
+
+                <h5>Color</h5>
+                <div className="p-d-flex p-ai-center p-flex-wrap">
+                    <Button label="Blue" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Blue" tooltipOptions={{ className: 'blue-tooltip', position: 'top' }} />
+                    <Button label="Green" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Green" tooltipOptions={{ className: 'green-tooltip', position: 'top' }} />
+                    <Button label="Yellow" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Yellow" tooltipOptions={{ className: 'yellow-tooltip', position: 'top' }} />
+                    <Button label="Cyan" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Cyan" tooltipOptions={{ className: 'cyan-tooltip', position: 'top' }} />
+                    <Button label="Pink" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Pink" tooltipOptions={{ className: 'pink-tooltip', position: 'top' }} />
+                    <Button label="Indigo" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Indigo" tooltipOptions={{ className: 'indigo-tooltip', position: 'top' }} />
+                    <Button label="Teal" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Teal" tooltipOptions={{ className: 'teal-tooltip', position: 'top' }} />
+                    <Button label="Blue Gray" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Blue Gray" tooltipOptions={{ className: 'bluegray-tooltip', position: 'top' }} />
+                    <Button label="Purple" className="p-button-secondary p-button-outlined p-mr-3 p-mb-2" tooltip="Purple" tooltipOptions={{ className: 'purple-tooltip', position: 'top' }} />
+                </div>
             </div>
         </div>
     )
 }
+                `
+            }
+        };
 
+        this.extFiles = {
+            'src/demo/TooltipDemo.css': {
+                content: `
+.blue-tooltip.p-tooltip .p-tooltip-arrow {
+    border-top-color: var(--blue-500);
+}
+.blue-tooltip.p-tooltip .p-tooltip-text {
+    background-color: var(--blue-500);
+}
+.green-tooltip.p-tooltip .p-tooltip-arrow {
+    border-top-color: var(--green-500);
+}
+.green-tooltip.p-tooltip .p-tooltip-text {
+    background-color: var(--green-500);
+}
+.yellow-tooltip.p-tooltip .p-tooltip-arrow {
+    border-top-color: var(--yellow-500);
+}
+.yellow-tooltip.p-tooltip .p-tooltip-text {
+    background-color: var(--yellow-500);
+}
+.cyan-tooltip.p-tooltip .p-tooltip-arrow {
+    border-top-color: var(--cyan-500);
+}
+.cyan-tooltip.p-tooltip .p-tooltip-text {
+    background-color: var(--cyan-500);
+}
+.pink-tooltip.p-tooltip .p-tooltip-arrow {
+    border-top-color: var(--pink-500);
+}
+.pink-tooltip.p-tooltip .p-tooltip-text {
+    background-color: var(--pink-500);
+}
+.indigo-tooltip.p-tooltip .p-tooltip-arrow {
+    border-top-color: var(--indigo-500);
+}
+.indigo-tooltip.p-tooltip .p-tooltip-text {
+    background-color: var(--indigo-500);
+}
+.teal-tooltip.p-tooltip .p-tooltip-arrow {
+    border-top-color: var(--teal-500);
+}
+.teal-tooltip.p-tooltip .p-tooltip-text {
+    background-color: var(--teal-500);
+}
+.bluegray-tooltip.p-tooltip .p-tooltip-arrow {
+    border-top-color: var(--bluegray-500);
+}
+.bluegray-tooltip.p-tooltip .p-tooltip-text {
+    background-color: var(--bluegray-500);
+}
+.purple-tooltip.p-tooltip .p-tooltip-arrow {
+    border-top-color: var(--purple-500);
+}
+.purple-tooltip.p-tooltip .p-tooltip-text {
+    background-color: var(--purple-500);
+}
                 `
             }
         }
@@ -269,7 +411,7 @@ const TooltipDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
                         <h5>Import to use it as a component</h5>
@@ -350,9 +492,9 @@ import { Tooltip } from 'primereact/tooltip';
                                     </tr>
                                     <tr>
                                         <td>appendTo</td>
-                                        <td>DOM element</td>
+                                        <td>DOM element | string</td>
                                         <td>document.body</td>
-                                        <td>DOM element instance where the tooltip should be mounted.</td>
+                                        <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
                                     </tr>
                                     <tr>
                                         <td>position</td>
@@ -437,6 +579,12 @@ import { Tooltip } from 'primereact/tooltip';
                                         <td>number</td>
                                         <td>0</td>
                                         <td>Delay to hide the tooltip in milliseconds.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>autoHide</td>
+                                        <td>boolean</td>
+                                        <td>true</td>
+                                        <td>Whether to hide tooltip when hovering over tooltip content.</td>
                                     </tr>
                                     <tr>
                                         <td>onBeforeShow</td>
@@ -590,6 +738,12 @@ import { Tooltip } from 'primereact/tooltip';
                                         <td>0</td>
                                         <td>Delay to hide the tooltip in milliseconds.</td>
                                     </tr>
+                                    <tr>
+                                        <td>data-pr-autohide</td>
+                                        <td>boolean</td>
+                                        <td>true</td>
+                                        <td>Whether to hide tooltip when hovering over tooltip content.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -686,7 +840,7 @@ import { Tooltip } from 'primereact/tooltip';
                     </TabPanel>
 
                     {
-                        useLiveEditorTabs({ name: 'TooltipDemo', sources: this.sources })
+                        useLiveEditorTabs({ name: 'TooltipDemo', sources: this.sources, extFiles: this.extFiles })
                     }
                 </TabView>
             </div>

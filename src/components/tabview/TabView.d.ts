@@ -1,26 +1,48 @@
 import * as React from 'react';
 
-interface TabPanelProps {
-    header?: any;
+type TabPanelHeaderTemplateType = React.ReactNode | ((options: TabPanelHeaderTemplateOptions) => React.ReactNode);
+
+interface TabPanelHeaderTemplateOptions {
+    className: string;
+    titleClassName: string;
+    onClick(event: React.MouseEvent<HTMLElement>): void;
+    leftIconElement: JSX.Element;
+    titleElement: JSX.Element;
+    rightIconElement: JSX.Element;
+    element: JSX.Element;
+    props: TabPanelProps;
+    index: number;
+    selected: boolean;
+    ariaControls: string;
+}
+
+export interface TabPanelProps {
+    header?: React.ReactNode;
+    headerTemplate?: TabPanelHeaderTemplateType;
     leftIcon?: string;
     rightIcon?: string;
     disabled?: boolean;
-    headerStyle?: any;
+    headerStyle?: object;
     headerClassName?: string;
-    contentStyle?: any;
+    contentStyle?: object;
     contentClassName?: string;
 }
 
-export class TabPanel extends React.Component<TabPanelProps,any> {}
+export declare class TabPanel extends React.Component<TabPanelProps, any> { }
 
-interface TabViewProps {
+interface TabViewTabChangeParams {
+    originalEvent: React.SyntheticEvent;
+    index: number;
+}
+
+export interface TabViewProps {
     id?: string;
     activeIndex?: number;
-    style?: any;
+    style?: object;
     className?: string;
     renderActiveOnly?: boolean;
-    onTabChange?(e: {originalEvent: Event, index: number}): void;
+    onTabChange?(e: TabViewTabChangeParams): void;
 }
 
 // tslint:disable-next-line:max-classes-per-file
-export class TabView extends React.Component<TabViewProps,any> {}
+export declare class TabView extends React.Component<TabViewProps, any> { }

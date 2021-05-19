@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
+import PrimeReact from '../api/PrimeReact';
 
 export class Portal extends Component {
 
@@ -12,7 +13,7 @@ export class Portal extends Component {
 
     static propTypes = {
         element: PropTypes.any,
-        appendTo: PropTypes.any,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         visible: PropTypes.bool
     };
 
@@ -35,6 +36,11 @@ export class Portal extends Component {
     }
 
     render() {
-        return this.props.element && this.state.mounted ? ReactDOM.createPortal(this.props.element, this.props.appendTo || document.body) : null;
+        if (this.props.element && this.state.mounted) {
+            const appendTo = this.props.appendTo || PrimeReact.appendTo || document.body;
+            return appendTo === 'self' ? this.props.element : ReactDOM.createPortal(this.props.element, appendTo);
+        }
+
+        return null;
     }
 }

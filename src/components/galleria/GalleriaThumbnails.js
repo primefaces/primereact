@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
 import { Ripple } from '../ripple/Ripple';
+import UniqueComponentId from '../utils/UniqueComponentId';
 
 class GalleriaThumbnailItem extends Component {
 
@@ -90,6 +91,8 @@ export class GalleriaThumbnails extends Component {
         this.onTouchMove = this.onTouchMove.bind(this);
         this.onTouchEnd = this.onTouchEnd.bind(this);
         this.onItemClick = this.onItemClick.bind(this);
+
+        this.attributeSelector = UniqueComponentId();
     }
 
     step(dir) {
@@ -244,12 +247,11 @@ export class GalleriaThumbnails extends Component {
     createStyle() {
         if (!this.thumbnailsStyle) {
             this.thumbnailsStyle = document.createElement('style');
-            this.thumbnailsStyle.type = 'text/css';
             document.body.appendChild(this.thumbnailsStyle);
         }
 
         let innerHTML = `
-            #${this.props.containerId} .p-galleria-thumbnail-item {
+            .p-galleria-thumbnail-items[${this.attributeSelector}] .p-galleria-thumbnail-item {
                 flex: 1 0 ${ (100/ this.state.numVisible) }%
             }
         `;
@@ -280,7 +282,7 @@ export class GalleriaThumbnails extends Component {
 
                 innerHTML += `
                     @media screen and (max-width: ${res.breakpoint}) {
-                        #${this.props.containerId} .p-galleria-thumbnail-item {
+                        .p-galleria-thumbnail-items[${this.attributeSelector}] .p-galleria-thumbnail-item {
                             flex: 1 0 ${ (100/ res.numVisible) }%
                         }
                     }
@@ -332,6 +334,10 @@ export class GalleriaThumbnails extends Component {
     }
 
     componentDidMount() {
+        if (this.itemsContainer) {
+            this.itemsContainer.setAttribute(this.attributeSelector, '');
+        }
+
         this.createStyle();
         this.calculatePosition();
 

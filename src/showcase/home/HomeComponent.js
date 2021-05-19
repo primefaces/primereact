@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import classNames from 'classnames';
+import { classNames } from '../../components/utils/ClassNames';
 import { Link } from 'react-router-dom';
 import AppContentContext from '../../AppContentContext';
 
@@ -134,6 +134,11 @@ export class HomeComponent extends Component {
                         of PrimeReact and impress your users.</p>
 
                     <div className="p-grid">
+                        <div className="p-col-12 p-md-3">
+                            <a href="https://www.primefaces.org/layouts/freya-react">
+                                <img alt="Freya" src="showcase/images/layouts/freya-react.jpg" />
+                            </a>
+                        </div>
                         <div className="p-col-12 p-md-3">
                             <a href="https://www.primefaces.org/layouts/ultima-react">
                                 <img alt="Ultima" src="showcase/images/layouts/ultima-react.jpg" />

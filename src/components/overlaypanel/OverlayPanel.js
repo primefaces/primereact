@@ -2,12 +2,13 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
-import { CSSTransition } from 'react-transition-group';
+import { CSSTransition } from '../transition/CSSTransition';
 import { Ripple } from '../ripple/Ripple';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 import { Portal } from '../portal/Portal';
+import { ZIndexUtils } from '../utils/ZIndexUtils';
 
 export class OverlayPanel extends Component {
 
@@ -20,6 +21,8 @@ export class OverlayPanel extends Component {
         appendTo: null,
         breakpoints: null,
         ariaCloseLabel: 'close',
+        transitionOptions: null,
+        onShow: null,
         onHide: null
     }
 
@@ -29,9 +32,11 @@ export class OverlayPanel extends Component {
         showCloseIcon: PropTypes.bool,
         style: PropTypes.object,
         className: PropTypes.string,
-        appendTo: PropTypes.any,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         breakpoints: PropTypes.object,
         ariaCloseLabel: PropTypes.string,
+        transitionOptions: PropTypes.object,
+        onShow: PropTypes.func,
         onHide: PropTypes.func
     }
 
@@ -49,7 +54,6 @@ export class OverlayPanel extends Component {
         this.onExit = this.onExit.bind(this);
         this.onExited = this.onExited.bind(this);
 
-        this.id = this.props.id || UniqueComponentId();
         this.attributeSelector = UniqueComponentId();
         this.overlayRef = React.createRef();
     }
@@ -96,7 +100,7 @@ export class OverlayPanel extends Component {
     bindResizeListener() {
         if (!this.resizeListener) {
             this.resizeListener = () => {
-                if (this.state.visible) {
+                if (this.state.visible && !DomHandler.isAndroid()) {
                     this.hide();
                 }
             };
@@ -159,27 +163,26 @@ export class OverlayPanel extends Component {
         }
         else {
             this.setState({ visible: true }, () => {
-                OverlayEventBus.on('overlay-click', (e) => {
+                this.overlayEventListener = (e) => {
                     if (!this.isOutsideClicked(e.target)) {
                         this.isPanelClicked = true;
                     }
-                });
+                };
+
+                OverlayEventBus.on('overlay-click', this.overlayEventListener);
             });
         }
     }
 
     hide() {
         this.setState({ visible: false }, () => {
-            OverlayEventBus.off('overlay-click');
-
-            if (this.props.onHide) {
-                this.props.onHide();
-            }
+            OverlayEventBus.off('overlay-click', this.overlayEventListener);
+            this.overlayEventListener = null;
         });
     }
 
     onEnter() {
-        this.overlayRef.current.style.zIndex = String(DomHandler.generateZIndex());
+        ZIndexUtils.set('overlay', this.overlayRef.current);
         this.overlayRef.current.setAttribute(this.attributeSelector, '');
         this.align();
     }
@@ -188,6 +191,8 @@ export class OverlayPanel extends Component {
         this.bindDocumentClickListener();
         this.bindScrollListener();
         this.bindResizeListener();
+
+        this.props.onShow && this.props.onShow();
     }
 
     onExit() {
@@ -197,7 +202,9 @@ export class OverlayPanel extends Component {
     }
 
     onExited() {
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.overlayRef.current);
+
+        this.props.onHide && this.props.onHide();
     }
 
     align() {
@@ -258,7 +265,12 @@ export class OverlayPanel extends Component {
             this.styleElement = null;
         }
 
-        DomHandler.revertZIndex();
+        if (this.overlayEventListener) {
+            OverlayEventBus.off('overlay-click', this.overlayEventListener);
+            this.overlayEventListener = null;
+        }
+
+        ZIndexUtils.clear(this.overlayRef.current);
     }
 
     renderCloseIcon() {
@@ -279,9 +291,9 @@ export class OverlayPanel extends Component {
         let closeIcon = this.renderCloseIcon();
 
         return (
-            <CSSTransition nodeRef={this.overlayRef} classNames="p-overlaypanel" in={this.state.visible} timeout={{ enter: 120, exit: 100 }}
+            <CSSTransition nodeRef={this.overlayRef} classNames="p-overlaypanel" in={this.state.visible} timeout={{ enter: 120, exit: 100 }} options={this.props.transitionOptions}
                 unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit} onExited={this.onExited}>
-                <div ref={this.overlayRef} id={this.id} className={className} style={this.props.style} onClick={this.onPanelClick}>
+                <div ref={this.overlayRef} id={this.props.id} className={className} style={this.props.style} onClick={this.onPanelClick}>
                     <div className="p-overlaypanel-content">
                         {this.props.children}
                     </div>

@@ -5,6 +5,7 @@ import { Column } from '../../components/column/Column';
 import { SkeletonDoc } from './SkeletonDoc';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './SkeletonDemo.scss';
+import AppDemoActions from "../../AppDemoActions";
 
 export class SkeletonDemo extends Component {
 
@@ -23,7 +24,8 @@ export class SkeletonDemo extends Component {
                         <AppInlineHeader changelogText="skeleton">
                             <h1>Skeleton</h1>
                             <p>Skeleton is a placeholder to display instead of the actual content.</p>
-                        </AppInlineHeader>
+                        </AppInlineHeader> 
+                    <AppDemoActions github="skeleton/SkeletonDemo.js" />
                     </div>
                 </div>
 

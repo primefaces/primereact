@@ -5,8 +5,9 @@ import { ContextMenu } from '../../components/contextmenu/ContextMenu';
 import { Toast } from '../../components/toast/Toast';
 import ProductService from '../service/ProductService';
 import { TabView } from '../../components/tabview/TabView';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DataTableContextMenuDemo extends Component {
 
@@ -61,6 +62,7 @@ export class DataTableContextMenuDemo extends Component {
                         <h1>DataTable <span>ContextMenu</span></h1>
                         <p>DataTable has exclusive integration with ContextMenu.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="datatable/DataTableContextMenuDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -311,7 +313,7 @@ const DataTableContextMenuDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'DataTableContextMenuDemo', sources: this.sources, service: 'ProductService', data: 'products-small' })

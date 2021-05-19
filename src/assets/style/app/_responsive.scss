@@ -1,6 +1,5 @@
-
-@media screen and (max-width: 960px) {
-    .layout-wrapper.layout-news-active {
+@mixin overlay-menu {
+    &.layout-news-active {
         .layout-content {
             padding-top: 180px;
         }
@@ -132,46 +131,53 @@
     }
 
     .layout-config {
-        .layout-config-button {
-            left: auto;
-            right: -52px;
-        }
-
         &.layout-config-active {
             width: 100%;
         }
     }
+}
 
-    .blocked-scroll {
-        overflow: hidden;
+.blocked-scroll {
+    overflow: hidden;
+}
+
+.layout-overlay {
+    @include overlay-menu;
+}
+
+@media screen and (max-width: 960px) {
+    .layout-wrapper {
+        @include overlay-menu;
     }
 }
 
 @media screen and (max-width: 640px) {
-    .layout-wrapper.layout-news-active {
-        .topbar-menu {
-            > li {
-                &.topbar-submenu {
-                    > ul  {
-                        top: 180px;
+    .layout-wrapper {
+        &.layout-news-active {
+            .topbar-menu {
+                > li {
+                    &.topbar-submenu {
+                        > ul  {
+                            top: 180px;
+                        }
                     }
                 }
             }
         }
-    }
 
-    .layout-topbar {
-        .topbar-menu {
-            > li {
-                &.topbar-submenu {
-                    position: static;
+        .layout-topbar {
+            .topbar-menu {
+                > li {
+                    &.topbar-submenu {
+                        position: static;
 
-                    > ul {
-                        top: 110px;
-                        position: fixed;
-                        right: auto;
-                        left: 0;
-                        width: 100vw;
+                        > ul {
+                            top: 110px;
+                            position: fixed;
+                            right: auto;
+                            left: 0;
+                            width: 100vw;
+                        }
                     }
                 }
             }
@@ -180,7 +186,7 @@
 }
 
 @media screen and (max-width: 576px) {
-    .layout-news .layout-news-container img.layouts-news-mockup-image {
+    .layout-wrapper .layout-news .layout-news-container img.layouts-news-mockup-image {
         width: 95%;
     }
 }

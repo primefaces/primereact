@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { AppMenu } from './AppMenu';
-import classNames from 'classnames';
+import { classNames } from './components/utils/ClassNames';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import './assets/style/primereact.css';
@@ -38,6 +38,7 @@ export class App extends Component {
             ripple: false,
             darkTheme: false,
             themeCategory: null,
+            menuMode: null,
             sidebarActive: false,
             newsActive: this.isNewsStorageExpired(),
             configuratorActive: false,
@@ -59,9 +60,23 @@ export class App extends Component {
         PrimeReact.ripple = false;
     }
 
-    initTheme() {
-        const queryString = window.location.search;
-        const theme = queryString ? new URLSearchParams(queryString.substring(1)).get('theme') : localStorage.getItem(this.theme_key);
+    init() {
+        const href = window.location.href;
+        const queryParams = href.split('?');
+        let theme = this.state.theme;
+
+        if (queryParams && queryParams[1]) {
+            const searchParams = new URLSearchParams(queryParams[1]);
+            theme = searchParams.get('theme');
+
+            const menuMode = searchParams.get('menu');
+            if (menuMode) {
+                this.setState({ menuMode });
+            }
+        }
+        else {
+            theme = localStorage.getItem(this.theme_key);
+        }
 
         if (theme) {
             const dark = this.isDarkTheme(theme);
@@ -208,15 +223,16 @@ export class App extends Component {
             this.showcaseToast.show({ severity: 'warn', summary: 'Limited Functionality', detail: 'Although PrimeReact supports IE11, ThemeSwitcher in this application cannot be not fully supported by your browser. Please use a modern browser for the best experience of the showcase.', life: 6000 });
         }
 
-        this.initTheme();
+        this.init();
     }
 
     render() {
         const wrapperClassName = classNames('layout-wrapper', {
+            'layout-overlay': this.state.menuMode && this.state.menuMode === 'overlay',
             'layout-news-active': this.state.newsActive,
             'p-input-filled': this.state.inputStyle === 'filled',
             'p-ripple-disabled': this.state.ripple === false,
-            [`theme-${this.state.themeCategory}`]: !!this.state.themeCategory
+            [`theme-${this.state.themeCategory}`]: !!this.state.themeCategory,
         });
         const maskClassName = classNames('layout-mask', {
             'layout-mask-active': this.state.sidebarActive

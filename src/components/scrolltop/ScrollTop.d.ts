@@ -1,12 +1,19 @@
 import * as React from 'react';
 
-interface ScrollTopProps {
-    target?: string;
+type ScrollTopTargetType = 'window' | 'parent';
+
+type ScrollTopScrollBehavior = 'auto' | 'smooth';
+
+export interface ScrollTopProps {
+    target?: ScrollTopTargetType;
     threshold?: number;
     icon?: string;
-    behavior?: string;
+    behavior?: ScrollTopScrollBehavior;
     className?: string;
     style?: object;
+    transitionOptions?: object;
+    onShow?(): void;
+    onHide?(): void;
 }
 
-export class ScrollTop extends React.Component<ScrollTopProps,any> {}
+export declare class ScrollTop extends React.Component<ScrollTopProps, any> { }

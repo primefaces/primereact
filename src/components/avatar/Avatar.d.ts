@@ -1,17 +1,23 @@
 import * as React from 'react';
 
-interface AvatarProps {
+type AvatarSizeType = 'normal' | 'large' | 'xlarge';
+
+type AvatarShapeType = 'square' | 'circle';
+
+type AvatarTemplateType = React.ReactNode | ((props: AvatarProps) => React.ReactNode);
+
+export interface AvatarProps {
     label?: string;
     icon?: string;
     image?: string;
-    size?: string;
-    shape?: string;
+    size?: AvatarSizeType;
+    shape?: AvatarShapeType;
     style?: object;
     className?: string;
-    template?: any;
+    template?: AvatarTemplateType;
     imageAlt?: string;
-    onImageError?(event: Event): void;
-    onClick?(event: Event): void;
+    onImageError?(event: React.SyntheticEvent): void;
+    onClick?(event: React.MouseEvent<HTMLElement>): void;
 }
 
-export class Avatar extends React.Component<AvatarProps,any> {}
+export declare class Avatar extends React.Component<AvatarProps, any> { }

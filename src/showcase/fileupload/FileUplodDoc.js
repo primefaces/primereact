@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 
 export class FileUploadDoc extends Component {
 
@@ -143,20 +143,20 @@ export class FileUploadDemo extends Component {
 
                 <div className="card">
                     <h5>Advanced</h5>
-                    <FileUpload name="demo[]" url="./upload.php" onUpload={this.onUpload} multiple accept="image/*" maxFileSize={1000000}
+                    <FileUpload name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" onUpload={this.onUpload} multiple accept="image/*" maxFileSize={1000000}
                         emptyTemplate={<p className="p-m-0">Drag and drop files to here to upload.</p>} />
 
                     <h5>Template</h5>
-                    <FileUpload ref={(el) => this.fileUploadRef = el} name="demo[]" url="./upload.php" multiple accept="image/*" maxFileSize={1000000}
+                    <FileUpload ref={(el) => this.fileUploadRef = el} name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" multiple accept="image/*" maxFileSize={1000000}
                         onUpload={this.onTemplateUpload} onSelect={this.onTemplateSelect} onError={this.onTemplateClear} onClear={this.onTemplateClear}
                         headerTemplate={this.headerTemplate} itemTemplate={this.itemTemplate} emptyTemplate={this.emptyTemplate}
                         chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
 
                     <h5>Basic</h5>
-                    <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={this.onBasicUpload} />
+                    <FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" maxFileSize={1000000} onUpload={this.onBasicUpload} />
 
                     <h5>Basic with Auto</h5>
-                    <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={this.onBasicUploadAuto} auto chooseLabel="Browse" />
+                    <FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" maxFileSize={1000000} onUpload={this.onBasicUploadAuto} auto chooseLabel="Browse" />
                 </div>
             </div>
         )
@@ -274,20 +274,20 @@ export const FileUploadDemo = () => {
 
             <div className="card">
                 <h5>Advanced</h5>
-                <FileUpload name="demo[]" url="./upload.php" onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000}
+                <FileUpload name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000}
                     emptyTemplate={<p className="p-m-0">Drag and drop files to here to upload.</p>} />
 
                 <h5>Template</h5>
-                <FileUpload ref={fileUploadRef} name="demo[]" url="./upload.php" multiple accept="image/*" maxFileSize={1000000}
+                <FileUpload ref={fileUploadRef} name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" multiple accept="image/*" maxFileSize={1000000}
                     onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
                     headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate}
                     chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
 
                 <h5>Basic</h5>
-                <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUpload} />
+                <FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUpload} />
 
                 <h5>Basic with Auto</h5>
-                <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUploadAuto} auto chooseLabel="Browse" />
+                <FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUploadAuto} auto chooseLabel="Browse" />
             </div>
         </div>
     )
@@ -404,20 +404,20 @@ export const FileUploadDemo = () => {
 
             <div className="card">
                 <h5>Advanced</h5>
-                <FileUpload name="demo[]" url="./upload.php" onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000}
+                <FileUpload name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000}
                     emptyTemplate={<p className="p-m-0">Drag and drop files to here to upload.</p>} />
 
                 <h5>Template</h5>
-                <FileUpload ref={fileUploadRef} name="demo[]" url="./upload.php" multiple accept="image/*" maxFileSize={1000000}
+                <FileUpload ref={fileUploadRef} name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" multiple accept="image/*" maxFileSize={1000000}
                     onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
                     headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate}
                     chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
 
                 <h5>Basic</h5>
-                <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUpload} />
+                <FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUpload} />
 
                 <h5>Basic with Auto</h5>
-                <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUploadAuto} auto chooseLabel="Browse" />
+                <FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUploadAuto} auto chooseLabel="Browse" />
             </div>
         </div>
     )
@@ -429,7 +429,10 @@ export const FileUploadDemo = () => {
         this.extFiles = {
             'public/upload.php': {
                 content: `
-<?php echo '<p>Fake Upload Process</p>'; ?>
+<?php
+header ("Access-Control-Allow-Origin: *");
+echo '<p>Fake Upload Process</p>'; ?>
+
                 `
             }
         };
@@ -442,7 +445,7 @@ export const FileUploadDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
                         <h5>Import</h5>
@@ -812,20 +815,20 @@ const buttonOptions = {
                         </tr>
                         <tr>
                             <td>onClear</td>
-                            <td>-.</td>
+                            <td>-</td>
                             <td>Callback to invoke when files in queue are removed without uploading.</td>
                         </tr>
                         <tr>
                             <td>onSelect</td>
                             <td>event.originalEvent: Original browser event. <br />
                                 event.files: List of selected files.</td>
-                            <td>Callback to invoke when file upload is complete.</td>
+                            <td>Callback to invoke when files are selected.</td>
                         </tr>
                         <tr>
                             <td>onProgress</td>
                             <td>event.originalEvent: Original browser event. <br />
                                 event.progress: Calculated progress value.</td>
-                            <td>Callback to invoke when files are selected.</td>
+                            <td>Callback to invoke when files are being uploaded.</td>
                         </tr>
                         <tr>
                             <td>onValidationFail</td>
@@ -834,7 +837,8 @@ const buttonOptions = {
                         </tr>
                         <tr>
                             <td>uploadHandler</td>
-                            <td>event.files: List of selected files.</td>
+                            <td>event.files: List of selected files.<br />
+                                event.options: Handler options.</td>
                             <td>Callback to invoke in custom upload mode to upload the files manually.</td>
                         </tr>
                         <tr>

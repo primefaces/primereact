@@ -5,6 +5,7 @@ import { Button } from '../../components/button/Button';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { TimelineDoc } from './TimelineDoc';
 import './TimelineDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export class TimelineDemo extends Component {
 
@@ -49,7 +50,8 @@ export class TimelineDemo extends Component {
                     <AppInlineHeader changelogText="timeline">
                         <h1>Timeline</h1>
                         <p>Timeline visualizes a series of chained events.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="timeline/TimelineDemo.js" />
                 </div>
                 <div className="content-section implementation timeline-demo">
                     <div className="card">

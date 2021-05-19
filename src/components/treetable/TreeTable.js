@@ -104,7 +104,7 @@ export class TreeTable extends Component {
         paginatorTemplate: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
         paginatorLeft: PropTypes.any,
         paginatorRight: PropTypes.any,
-        paginatorDropdownAppendTo: PropTypes.any,
+        paginatorDropdownAppendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         pageLinkSize: PropTypes.number,
         rowsPerPageOptions: PropTypes.array,
         currentPageReportTemplate: PropTypes.string,
@@ -747,17 +747,26 @@ export class TreeTable extends Component {
     getColumns() {
         let columns = React.Children.toArray(this.props.children);
 
-        if(this.props.reorderableColumns && this.state.columnOrder) {
-            let orderedColumns = [];
-            for(let i = 0; i < this.state.columnOrder.length; i++) {
-                orderedColumns.push(this.findColumnByKey(columns, this.state.columnOrder[i]));
-            }
+        if (columns && columns.length) {
+            if (this.props.reorderableColumns && this.state.columnOrder) {
+                let orderedColumns = [];
+                for (let columnKey of this.state.columnOrder) {
+                    let column = this.findColumnByKey(columns, columnKey);
+                    if (column) {
+                        orderedColumns.push(column);
+                    }
+                }
 
-            return orderedColumns;
+                return [...orderedColumns, ...columns.filter((item) => {
+                    return orderedColumns.indexOf(item) < 0;
+                })];;
+            }
+            else {
+                return columns;
+            }
         }
-        else {
-            return columns;
-        }
+
+        return null;
     }
 
     getTotalRecords(data) {
@@ -817,14 +826,25 @@ export class TreeTable extends Component {
                 let col = columns[j];
                 let filterMeta = filters ? filters[col.props.field] : null;
                 let filterField = col.props.field;
-                let filterValue, filterConstraint, paramsWithoutNode;
+                let filterValue, filterConstraint, paramsWithoutNode, options;
 
                 //local
                 if (filterMeta) {
                     let filterMatchMode = filterMeta.matchMode || col.props.filterMatchMode;
                     filterValue = filterMeta.value;
                     filterConstraint = filterMatchMode === 'custom' ? col.props.filterFunction : FilterUtils[filterMatchMode];
-                    paramsWithoutNode = {filterField, filterValue, filterConstraint, isStrictMode};
+                    options = {
+                        rowData: node,
+                        filters,
+                        props: this.props,
+                        column: {
+                            filterMeta,
+                            filterField,
+                            props: col.props
+                        }
+                    };
+
+                    paramsWithoutNode = {filterField, filterValue, filterConstraint, isStrictMode, options};
                     if ((isStrictMode && !(this.findFilteredNodes(copyNode, paramsWithoutNode) || this.isFilterMatched(copyNode, paramsWithoutNode))) ||
                         (!isStrictMode && !(this.isFilterMatched(copyNode, paramsWithoutNode) || this.findFilteredNodes(copyNode, paramsWithoutNode)))) {
                             localMatch = false;
@@ -883,10 +903,10 @@ export class TreeTable extends Component {
         }
     }
 
-    isFilterMatched(node, {filterField, filterValue, filterConstraint, isStrictMode}) {
+    isFilterMatched(node, {filterField, filterValue, filterConstraint, isStrictMode, options}) {
         let matched = false;
         let dataFieldValue = ObjectUtils.resolveFieldData(node.data, filterField);
-        if (filterConstraint(dataFieldValue, filterValue, this.props.filterLocale)) {
+        if (filterConstraint(dataFieldValue, filterValue, this.props.filterLocale, options)) {
             matched = true;
         }
 

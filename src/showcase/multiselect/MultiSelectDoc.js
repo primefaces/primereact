@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 
 export class MultiSelectDoc extends Component {
 
@@ -433,7 +433,7 @@ const MultiSelectDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
                         <h5>Import</h5>
@@ -707,7 +707,7 @@ const groupedCities = [
                         </tr>
                         <tr>
                             <td>optionDisabled</td>
-                            <td>boolean</td>
+                            <td>function | string</td>
                             <td>null</td>
                             <td>Property name or getter function to use as the disabled flag of an option, defaults to false when not defined.</td>
                         </tr>
@@ -887,9 +887,9 @@ const groupedCities = [
                         </tr>
                         <tr>
                             <td>appendTo</td>
-                            <td>DOM element</td>
+                            <td>DOM element | string</td>
                             <td>document.body</td>
-                            <td>DOM element instance where the overlay menu should be mounted.</td>
+                            <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
                         </tr>
                         <tr>
                             <td>maxSelectedLabels</td>
@@ -920,6 +920,12 @@ const groupedCities = [
                             <td>string</td>
                             <td>comma</td>
                             <td>Used mode to display the selected item. Valid values are 'comma' and 'chip'.</td>
+                        </tr>
+                        <tr>
+                            <td>transitionOptions</td>
+                            <td>object</td>
+                            <td>null</td>
+                            <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -952,6 +958,16 @@ const groupedCities = [
                             <td>onBlur</td>
                             <td>event: Browser event.</td>
                             <td>Callback to invoke when the element loses focus.</td>
+                        </tr>
+                        <tr>
+                            <td>onShow</td>
+                            <td>-</td>
+                            <td>Callback to invoke when overlay panel becomes visible.</td>
+                        </tr>
+                        <tr>
+                            <td>onHide</td>
+                            <td>-</td>
+                            <td>Callback to invoke when overlay panel becomes hidden.</td>
                         </tr>
                     </tbody>
                 </table>

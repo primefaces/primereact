@@ -9,6 +9,7 @@ import ProductService from '../service/ProductService';
 import { TabView } from '../../components/tabview/TabView';
 import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DataTableExportDemo extends Component {
 
@@ -75,7 +76,7 @@ export class DataTableExportDemo extends Component {
             });
         };
 
-        reader.readAsText(file);
+        reader.readAsText(file, 'UTF-8');
     }
 
     importExcel(e) {
@@ -185,6 +186,7 @@ export class DataTableExportDemo extends Component {
                         <h1>DataTable <span>Import/Export</span></h1>
                         <p>DataTable can export its data to CSV format.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="datatable/DataTableExportDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -290,7 +292,7 @@ export class DataTableExportDemo extends Component {
         const reader = new FileReader();
         reader.onload = (e) => {
             const csv = e.target.result;
-            const data = csv.split('\n');
+            const data = csv.split('\\n');
 
             // Prepare DataTable
             const cols = data[0].split(',');
@@ -311,7 +313,7 @@ export class DataTableExportDemo extends Component {
             });
         };
 
-        reader.readAsText(file);
+        reader.readAsText(file, 'UTF-8');
     }
 
     importExcel(e) {
@@ -422,8 +424,8 @@ export class DataTableExportDemo extends Component {
                     <Toast ref={(el) => this.toast = el} />
 
                     <div className="p-d-flex p-ai-center p-py-2">
-                        <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file-o' }} mode="basic" name="demo[]" auto url="./upload.php" accept=".csv" className="p-mr-2" onUpload={this.importCSV} />
-                        <FileUpload chooseOptions={{ label: 'Excel', icon: 'pi pi-file-excel', className: 'p-button-success' }} mode="basic" name="demo[]" auto url="./upload.php"
+                        <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file-o' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" className="p-mr-2" onUpload={this.importCSV} />
+                        <FileUpload chooseOptions={{ label: 'Excel', icon: 'pi pi-file-excel', className: 'p-button-success' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php"
                             accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" className="p-mr-2" onUpload={this.importExcel} />
                         <Button type="button" label="Clear" icon="pi pi-times" onClick={this.clear} className="p-button-info p-ml-auto" />
                     </div>
@@ -494,7 +496,7 @@ export const DataTableExportDemo = () => {
         const reader = new FileReader();
         reader.onload = (e) => {
             const csv = e.target.result;
-            const data = csv.split('\n');
+            const data = csv.split('\\n');
 
             // Prepare DataTable
             const cols = data[0].split(',');
@@ -513,7 +515,7 @@ export const DataTableExportDemo = () => {
             setImportedData(_importedData);
         };
 
-        reader.readAsText(file);
+        reader.readAsText(file, 'UTF-8');
     }
 
     const importExcel = (e) => {
@@ -618,8 +620,8 @@ export const DataTableExportDemo = () => {
                 <Toast ref={toast} />
 
                 <div className="p-d-flex p-ai-center p-py-2">
-                    <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file-o' }} mode="basic" name="demo[]" auto url="./upload.php" accept=".csv" className="p-mr-2" onUpload={importCSV} />
-                    <FileUpload chooseOptions={{ label: 'Excel', icon: 'pi pi-file-excel', className: 'p-button-success' }} mode="basic" name="demo[]" auto url="./upload.php"
+                    <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file-o' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" className="p-mr-2" onUpload={importCSV} />
+                    <FileUpload chooseOptions={{ label: 'Excel', icon: 'pi pi-file-excel', className: 'p-button-success' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php"
                         accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" className="p-mr-2" onUpload={importExcel} />
                     <Button type="button" label="Clear" icon="pi pi-times" onClick={clear} className="p-button-info p-ml-auto" />
                 </div>
@@ -689,7 +691,7 @@ export const DataTableExportDemo = () => {
         const reader = new FileReader();
         reader.onload = (e) => {
             const csv = e.target.result;
-            const data = csv.split('\n');
+            const data = csv.split('\\n');
 
             // Prepare DataTable
             const cols = data[0].split(',');
@@ -708,7 +710,7 @@ export const DataTableExportDemo = () => {
             setImportedData(_importedData);
         };
 
-        reader.readAsText(file);
+        reader.readAsText(file, 'UTF-8');
     }
 
     const importExcel = (e) => {
@@ -813,8 +815,8 @@ export const DataTableExportDemo = () => {
                 <Toast ref={toast} />
 
                 <div className="p-d-flex p-ai-center p-py-2">
-                    <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file-o' }} mode="basic" name="demo[]" auto url="./upload.php" accept=".csv" className="p-mr-2" onUpload={importCSV} />
-                    <FileUpload chooseOptions={{ label: 'Excel', icon: 'pi pi-file-excel', className: 'p-button-success' }} mode="basic" name="demo[]" auto url="./upload.php"
+                    <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file-o' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" className="p-mr-2" onUpload={importCSV} />
+                    <FileUpload chooseOptions={{ label: 'Excel', icon: 'pi pi-file-excel', className: 'p-button-success' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php"
                         accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" className="p-mr-2" onUpload={importExcel} />
                     <Button type="button" label="Clear" icon="pi pi-times" onClick={clear} className="p-button-info p-ml-auto" />
                 </div>
@@ -844,7 +846,18 @@ export const DataTableExportDemo = () => {
 }
                 `
             }
-        }
+        };
+
+        this.extFiles = {
+            'public/upload.php': {
+                content: `
+<?php
+header ("Access-Control-Allow-Origin: *");
+echo '<p>Fake Upload Process</p>'; ?>
+
+                `
+            }
+        };
     }
 
     shouldComponentUpdate() {
@@ -853,12 +866,13 @@ export const DataTableExportDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({
                             name: 'DataTableExportDemo', sources: this.sources, service: 'ProductService', data: 'products-small',
-                            dependencies: { 'jspdf': '^1.5.3', 'jspdf-autotable': '^3.2.5', 'xlsx': '^0.15.1', 'file-saver': '^2.0.2' }
+                            dependencies: { 'jspdf': '^1.5.3', 'jspdf-autotable': '^3.2.5', 'xlsx': '^0.15.1', 'file-saver': '^2.0.2' },
+                            extFiles: this.extFiles
                         })
                     }
                 </TabView>

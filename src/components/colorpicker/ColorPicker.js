@@ -1,48 +1,57 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import { classNames } from '../utils/ClassNames';
 import { ColorPickerPanel } from './ColorPickerPanel';
 import { tip } from '../tooltip/Tooltip';
 import ObjectUtils from '../utils/ObjectUtils';
-import UniqueComponentId from '../utils/UniqueComponentId';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
+import { ZIndexUtils } from '../utils/ZIndexUtils';
+import PrimeReact from '../api/PrimeReact';
 
 export class ColorPicker extends Component {
 
     static defaultProps = {
         id: null,
+        inputRef: null,
         value: null,
         style: null,
         className: null,
         defaultColor: 'ff0000',
         inline: false,
-        format: "hex",
+        format: 'hex',
         appendTo: null,
         disabled: false,
         tabIndex: null,
         inputId: null,
         tooltip: null,
         tooltipOptions: null,
-        onChange: null
+        transitionOptions: null,
+        onChange: null,
+        onShow: null,
+        onHide: null
     }
 
     static propTypes = {
         id: PropTypes.string,
+        inputRef: PropTypes.any,
         value: PropTypes.any,
         style: PropTypes.object,
         className: PropTypes.string,
         defaultColor: PropTypes.string,
         inline: PropTypes.bool,
         format: PropTypes.string,
-        appendTo: PropTypes.any,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         disabled: PropTypes.bool,
         tabIndex: PropTypes.number,
         inputId: PropTypes.string,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
-        onChange: PropTypes.func
+        transitionOptions: PropTypes.object,
+        onChange: PropTypes.func,
+        onShow: PropTypes.func,
+        onHide: PropTypes.func
     }
 
     constructor(props) {
@@ -66,8 +75,8 @@ export class ColorPicker extends Component {
         this.onDrag = this.onDrag.bind(this);
         this.onDragEnd = this.onDragEnd.bind(this);
 
-        this.id = this.props.id || UniqueComponentId();
-        this.overlayRef = React.createRef();
+        this.overlayRef = createRef();
+        this.inputRef = createRef(this.props.inputRef);
     }
 
     onPanelClick(event) {
@@ -101,7 +110,7 @@ export class ColorPicker extends Component {
     pickHue(event) {
         let top = this.hueView.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0);
         this.hsbValue = this.validateHSB({
-            h: Math.floor(360 * (150 - Math.max(0, Math.min(150, (event.pageY - top)))) / 150),
+            h: Math.floor(360 * (150 - Math.max(0, Math.min(150, ((event.pageY || event.changedTouches[0].pageY) - top)))) / 150),
             s: 100,
             b: 100
         });
@@ -164,8 +173,8 @@ export class ColorPicker extends Component {
         let rect = this.colorSelector.getBoundingClientRect();
         let top = rect.top + (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0);
         let left = rect.left + document.body.scrollLeft;
-        let saturation = Math.floor(100 * (Math.max(0, Math.min(150, (event.pageX - left)))) / 150);
-        let brightness = Math.floor(100 * (150 - Math.max(0, Math.min(150, (event.pageY - top)))) / 150);
+        let saturation = Math.floor(100 * (Math.max(0, Math.min(150, ((event.pageX || event.changedTouches[0].pageX)- left)))) / 150);
+        let brightness = Math.floor(100 * (150 - Math.max(0, Math.min(150, ((event.pageY || event.changedTouches[0].pageY) - top)))) / 150);
         this.hsbValue = this.validateHSB({
             h: this.hsbValue.h,
             s: saturation,
@@ -240,7 +249,7 @@ export class ColorPicker extends Component {
                 preventDefault: () => { },
                 target: {
                     name: this.props.name,
-                    id: this.id,
+                    id: this.props.id,
                     value: value
                 }
             })
@@ -272,8 +281,8 @@ export class ColorPicker extends Component {
     }
 
     updateInput() {
-        if (this.input) {
-            this.input.style.backgroundColor = '#' + this.HSBtoHEX(this.hsbValue);
+        if (this.inputRef && this.inputRef.current) {
+            this.inputRef.current.style.backgroundColor = '#' + this.HSBtoHEX(this.hsbValue);
         }
     }
 
@@ -286,14 +295,16 @@ export class ColorPicker extends Component {
     }
 
     onOverlayEnter() {
-        this.overlayRef.current.style.zIndex = String(DomHandler.generateZIndex());
-        this.alignPanel();
+        ZIndexUtils.set('overlay', this.overlayRef.current);
+        this.alignOverlay();
     }
 
     onOverlayEntered() {
         this.bindDocumentClickListener();
         this.bindScrollListener();
         this.bindResizeListener();
+
+        this.props.onShow && this.props.onShow();
     }
 
     onOverlayExit() {
@@ -303,7 +314,9 @@ export class ColorPicker extends Component {
     }
 
     onOverlayExited() {
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.overlayRef.current);
+
+        this.props.onHide && this.props.onHide();
     }
 
     onInputClick() {
@@ -375,7 +388,7 @@ export class ColorPicker extends Component {
     bindResizeListener() {
         if (!this.resizeListener) {
             this.resizeListener = () => {
-                if (this.state.overlayVisible) {
+                if (this.state.overlayVisible && !DomHandler.isAndroid()) {
                     this.hide();
                 }
             };
@@ -560,7 +573,21 @@ export class ColorPicker extends Component {
         return this.RGBtoHEX(this.HSBtoRGB(hsb));
     }
 
+    updateInputRef() {
+        let ref = this.props.inputRef;
+
+        if (ref) {
+            if (typeof ref === 'function') {
+                ref(this.inputRef.current);
+            }
+            else {
+                ref.current = this.inputRef.current;
+            }
+        }
+    }
+
     componentDidMount() {
+        this.updateInputRef();
         this.updateHSBValue(this.props.value);
         this.updateUI();
 
@@ -594,7 +621,7 @@ export class ColorPicker extends Component {
             this.tooltip = null;
         }
 
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.overlayRef.current);
     }
 
     updateUI() {
@@ -604,10 +631,10 @@ export class ColorPicker extends Component {
         this.updateColorSelector();
     }
 
-    alignPanel() {
-        const container = this.input.parentElement;
-        this.overlayRef.current.style.minWidth = DomHandler.getOuterWidth(container) + 'px';
-        DomHandler.absolutePosition(this.overlayRef.current, container);
+    alignOverlay() {
+        if (this.inputRef && this.inputRef.current) {
+            DomHandler.alignOverlay(this.overlayRef.current, this.inputRef.current.parentElement, this.props.appendTo || PrimeReact.appendTo);
+        }
     }
 
     renderTooltip() {
@@ -659,7 +686,7 @@ export class ColorPicker extends Component {
             let inputProps = ObjectUtils.findDiffKeys(this.props, ColorPicker.defaultProps);
 
             return (
-                <input ref={(el) => this.input = el} type="text" className={inputClassName} readOnly id={this.props.inputId} tabIndex={this.props.tabIndex} disabled={this.props.disabled}
+                <input ref={this.inputRef} type="text" className={inputClassName} readOnly id={this.props.inputId} tabIndex={this.props.tabIndex} disabled={this.props.disabled}
                     onClick={this.onInputClick} onKeyDown={this.onInputKeydown} {...inputProps} />
             );
         }
@@ -676,10 +703,11 @@ export class ColorPicker extends Component {
         let input = this.renderInput();
 
         return (
-            <div ref={(el) => this.container = el} id={this.id} style={this.props.style} className={containerClassName}>
+            <div ref={(el) => this.container = el} id={this.props.id} style={this.props.style} className={containerClassName}>
                 {input}
                 <ColorPickerPanel ref={this.overlayRef} appendTo={this.props.appendTo} inline={this.props.inline} disabled={this.props.disabled} onClick={this.onPanelClick}
-                    in={this.props.inline || this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
+                    in={this.props.inline || this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}
+                    transitionOptions={this.props.transitionOptions}>
                     {content}
                 </ColorPickerPanel>
             </div>

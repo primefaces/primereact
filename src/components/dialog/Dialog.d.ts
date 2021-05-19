@@ -1,11 +1,26 @@
 import * as React from 'react';
 
+type DialogPositionType = 'center' | 'top' | 'bottom' | 'left' | 'right' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
+
+type DialogTemplateType = React.ReactNode | ((props: DialogProps) => React.ReactNode);
+
+type DialogAppendToType = 'self' | HTMLElement | undefined | null;
+
+interface DialogBreakpoints {
+    [key: string]: string;
+}
+
+interface DialogMaximizeParams {
+    originalEvent: React.SyntheticEvent;
+    maximized: boolean;
+}
+
 export interface DialogProps {
     id?: string;
-    header?: any;
-    footer?: any;
+    header?: DialogTemplateType;
+    footer?: DialogTemplateType;
     visible?: boolean;
-    position?: string;
+    position?: DialogPositionType;
     draggable?: boolean;
     resizable?: boolean;
     modal?: boolean;
@@ -19,27 +34,28 @@ export interface DialogProps {
     className?: string;
     maskClassName?: string;
     showHeader?: boolean;
-    appendTo?: HTMLElement;
+    appendTo?: DialogAppendToType;
     baseZIndex?: number;
     maximizable?: boolean;
     blockScroll?: boolean;
+    icons?: DialogTemplateType;
     ariaCloseIconLabel?: string;
     focusOnShow?: boolean;
     minX?: number;
     minY?: number;
     keepInViewport?: boolean;
     maximized?: boolean;
-    breakpoints?: {[key: string]: string};
-    icons?: ((props: object) => any | any);
-    onMaximize?(e: {originalEvent: Event, maximized: boolean}): void;
-    onDragStart?(e: Event): void;
-    onDrag?(e: Event): void;
-    onDragEnd?(e: Event): void;
-    onResizeStart?(e: Event): void;
-    onResize?(e: Event): void;
-    onResizeEnd?(e: Event): void;
+    breakpoints?: DialogBreakpoints;
+    transitionOptions?: object;
+    onMaximize?(e: DialogMaximizeParams): void;
+    onDragStart?(e: React.DragEvent<HTMLElement>): void;
+    onDrag?(e: React.DragEvent<HTMLElement>): void;
+    onDragEnd?(e: React.DragEvent<HTMLElement>): void;
+    onResizeStart?(e: React.MouseEvent<HTMLElement>): void;
+    onResize?(e: React.MouseEvent<HTMLElement>): void;
+    onResizeEnd?(e: React.MouseEvent<HTMLElement>): void;
     onHide(): void;
     onShow?(): void;
 }
 
-export class Dialog extends React.Component<DialogProps,any> {}
+export declare class Dialog extends React.Component<DialogProps, any> { }

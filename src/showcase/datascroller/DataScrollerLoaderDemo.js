@@ -4,9 +4,10 @@ import { Button } from '../../components/button/Button';
 import { Rating } from '../../components/rating/Rating';
 import ProductService from '../service/ProductService';
 import { TabView } from '../../components/tabview/TabView';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './DataScrollerDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DataScrollerLoaderDemo extends Component {
 
@@ -54,6 +55,7 @@ export class DataScrollerLoaderDemo extends Component {
                         <h1>DataScroller <span>Loader</span></h1>
                         <p>Instead of scrolling, a custom element can be used to load data.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="datascroller/DataScrollerLoaderDemo.js" />
                 </div>
 
                 <div className="content-section implementation datascroller-demo">
@@ -342,7 +344,7 @@ const DataScrollerLoaderDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'DataScrollerLoaderDemo', sources: this.sources, service: 'ProductService', data: 'products', extFiles: this.extFiles })

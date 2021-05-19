@@ -1,22 +1,59 @@
 import * as React from 'react';
 
-interface ColumnProps {
+type ColumnBodyType = React.ReactNode | ((data: any, props: ColumnProps, ...parameters: any) => React.ReactNode);
+
+type ColumnFilterMatchModeType = 'startsWith' | 'contains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'lt' | 'lte' | 'gt' | 'gte' | 'custom';
+
+type ColumnSelectionModeType = 'single' | 'multiple';
+
+type ColumnSortOrderType = 1 | 0 | -1 | undefined | null;
+
+interface ColumnEventParams {
+    originalEvent: React.SyntheticEvent;
+    columnProps: ColumnProps;
+}
+
+interface ColumnSortParams {
+    field: string;
+    order: ColumnSortOrderType;
+}
+
+interface ColumnFilterMetaData {
+    value: any;
+    matchMode: ColumnFilterMatchModeType;
+}
+
+interface ColumnFilterMeta {
+    [key: string]: ColumnFilterMetaData;
+}
+
+interface ColumnFilterParams {
+    rowData: any;
+    filters: ColumnFilterMeta;
+    props: any;
+    column: {
+        filterMeta: object | undefined | null;
+        filterField: string;
+        props: ColumnProps;
+    }
+}
+
+export interface ColumnProps {
     columnKey?: string;
     field?: string;
     sortField?: string;
     filterField?: string;
-    header?: any;
-    body?: any;
-    loadingBody?: any;
-    footer?: any;
+    header?: React.ReactNode;
+    body?: ColumnBodyType;
+    footer?: React.ReactNode;
     sortable?: boolean;
     sortableDisabled?: boolean;
     filter?: boolean;
-    filterMatchMode?: string;
+    filterMatchMode?: ColumnFilterMatchModeType;
     filterPlaceholder?: string;
     filterType?: string;
     filterMaxLength?: number;
-    filterElement?: object;
+    filterElement?: React.ReactNode;
     filterHeaderStyle?: object;
     filterHeaderClassName?: string;
     style?: object;
@@ -29,7 +66,7 @@ interface ColumnProps {
     footerClassName?: string;
     expander?: boolean;
     frozen?: boolean;
-    selectionMode?: string;
+    selectionMode?: ColumnSelectionModeType;
     colSpan?: number;
     rowSpan?: number;
     rowReorder?: boolean;
@@ -39,15 +76,16 @@ interface ColumnProps {
     exportable?: boolean;
     reorderable?: boolean;
     excludeGlobalFilter?: boolean;
-    onEditorInit?(e: {originalEvent: Event, columnProps: any}): void;
-    onEditorSubmit?(e: {originalEvent: Event, columnProps: any}): void;
-    onEditorCancel?(e: {originalEvent: Event, columnProps: any}): void;
-    sortFunction?(e: {field: string, order: number}): void;
-    filterFunction?(value: any, filter: any): void;
-    editor?(props: any): JSX.Element | undefined;
-    editorValidator?(e: {originalEvent: Event, columnProps: any}): boolean;
-    onBeforeEditorHide?(e: {originalEvent: Event, columnProps: any}): any;
-    onBeforeEditorShow?(e: {originalEvent: Event, columnProps: any}): any;
+    loadingBody?(): React.ReactNode;
+    onEditorInit?(e: ColumnEventParams): void;
+    onEditorSubmit?(e: ColumnEventParams): void;
+    onEditorCancel?(e: ColumnEventParams): void;
+    sortFunction?(e: ColumnSortParams): void;
+    filterFunction?(value: any, filter: any, filterLocale: string, params: ColumnFilterParams): void;
+    editor?(props: ColumnProps): React.ReactNode;
+    editorValidator?(e: ColumnEventParams): boolean;
+    onBeforeEditorHide?(e: ColumnEventParams): void;
+    onBeforeEditorShow?(e: ColumnEventParams): void;
 }
 
-export class Column extends React.Component<ColumnProps,any> {}
+export declare class Column extends React.Component<ColumnProps, any> { }

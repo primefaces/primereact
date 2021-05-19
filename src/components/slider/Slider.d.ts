@@ -1,11 +1,22 @@
 import * as React from 'react';
 
-interface SliderProps {
+type SliderOrientationType = 'horizontal' | 'vertical';
+
+type SliderValueType = number | [number, number];
+
+interface SliderChangeParams {
+    originalEvent: React.SyntheticEvent;
+    value: SliderValueType;
+}
+
+interface SliderSlideEndParams extends SliderChangeParams { }
+
+export interface SliderProps {
     id?: string;
-    value?: number|[number, number];
+    value?: SliderValueType;
     min?: number;
     max?: number;
-    orientation?: string;
+    orientation?: SliderOrientationType;
     step?: number;
     range?: boolean;
     style?: object;
@@ -13,8 +24,8 @@ interface SliderProps {
     disabled?: boolean;
     tabIndex?: number;
     ariaLabelledBy?: string;
-    onChange?(e: {originalEvent: Event, value: number|[number, number]}): void;
-    onSlideEnd?(e: {originalEvent: Event, value: number|[number, number]}): void;
+    onChange?(e: SliderChangeParams): void;
+    onSlideEnd?(e: SliderSlideEndParams): void;
 }
 
-export class Slider extends React.Component<SliderProps,any> {}
+export declare class Slider extends React.Component<SliderProps, any> { }

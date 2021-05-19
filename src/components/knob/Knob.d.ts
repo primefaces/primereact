@@ -1,10 +1,14 @@
 import * as React from 'react';
 
-interface KnobProps {
+interface KnobChangeParams {
+    value: number;
+}
+
+export interface KnobProps {
     id?: string;
     style?: object;
     className?: string;
-    value?: any;
+    value?: number;
     size?: number;
     disabled?: boolean;
     readOnly?: boolean;
@@ -18,7 +22,7 @@ interface KnobProps {
     rangeColor?: string;
     textColor?: string;
     valueTemplate?: string;
-    onChange?(e: {value: any}): void;
+    onChange?(e: KnobChangeParams): void;
 }
 
-export class Knob extends React.Component<KnobProps,any> {}
+export declare class Knob extends React.Component<KnobProps, any> { }

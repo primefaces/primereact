@@ -1,16 +1,27 @@
 import * as React from 'react';
-import {Omit} from '../util';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-interface ButtonProps extends Omit<React.HTMLProps<HTMLButtonElement>, 'ref'> {
-    label?: string;
-    icon?: string;
-    iconPos?: string;
-    badge?: string,
-    badgeClassName?: string,
-    tooltip?: any;
-    tooltipOptions?: TooltipOptions;
-    [key: string]: any;
+type ButtonPositionType = 'top' | 'bottom' | 'left' | 'right';
+
+type ButtonIconType = React.ReactNode | ((options: ButtonIconOptions) => React.ReactNode);
+
+export interface ButtonIconOptions {
+    className: string;
+    element: React.ReactNode;
+    props: ButtonProps;
 }
 
-export class Button extends React.Component<ButtonProps,any> {}
+export interface ButtonProps extends Omit<React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, 'disabled'> {
+    label?: string;
+    icon?: ButtonIconType;
+    iconPos?: ButtonPositionType;
+    badge?: string;
+    badgeClassName?: string;
+    tooltip?: string;
+    tooltipOptions?: TooltipOptions;
+    disabled?: boolean;
+    loading?: boolean;
+    loadingIcon?: ButtonIconType;
+}
+
+export declare class Button extends React.Component<ButtonProps, any> { }

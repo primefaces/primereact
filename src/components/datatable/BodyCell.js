@@ -19,9 +19,9 @@ export class BodyCell extends Component {
         this.onClick = this.onClick.bind(this);
         this.onBlur = this.onBlur.bind(this);
         this.onKeyDown = this.onKeyDown.bind(this);
+        this.onMouseDown = this.onMouseDown.bind(this);
+        this.onMouseUp = this.onMouseUp.bind(this);
         this.onEditorFocus = this.onEditorFocus.bind(this);
-
-        this.eventBusKey = `${this.props.field}_${this.props.rowIndex}`;
     }
 
     onExpanderClick(event) {
@@ -43,6 +43,69 @@ export class BodyCell extends Component {
 
             if (event.which === 27) { // escape
                 this.switchCellToViewMode(event, false);
+            }
+        }
+
+        if (this.props.allowCellSelection) {
+            const cell = event.currentTarget;
+
+            switch (event.which) {
+                //left arrow
+                case 37:
+                    let prevCell = this.findPrevSelectableCell(cell);
+                    if (prevCell) {
+                        this.changeTabIndex(cell, prevCell);
+                        prevCell.focus();
+                    }
+
+                    event.preventDefault();
+                    break;
+
+                //right arrow
+                case 39:
+                    let nextCell = this.findNextSelectableCell(cell);
+                    if (nextCell) {
+                        this.changeTabIndex(cell, nextCell);
+                        nextCell.focus();
+                    }
+
+                    event.preventDefault();
+                    break;
+
+                //up arrow
+                case 38:
+                    let prevRow = this.findPrevSelectableRow(cell.parentElement);
+                    if (prevRow) {
+                        let upCell = prevRow.children[this.props.index];
+                        this.changeTabIndex(cell, upCell);
+                        upCell.focus();
+                    }
+
+                    event.preventDefault();
+                    break;
+
+                //down arrow
+                case 40:
+                    let nextRow = this.findNextSelectableRow(cell.parentElement);
+                    if (nextRow) {
+                        let downCell = nextRow.children[this.props.index];
+                        this.changeTabIndex(cell, downCell);
+                        downCell.focus();
+                    }
+
+                    event.preventDefault();
+                    break;
+
+                //enter or space
+                case 13: // @deprecated
+                case 32:
+                    this.onClick(event);
+                    event.preventDefault();
+                    break;
+
+                default:
+                    //no op
+                    break;
             }
         }
     }
@@ -71,12 +134,34 @@ export class BodyCell extends Component {
                 if (this.props.editorValidatorEvent === 'click') {
                     this.bindDocumentEditListener();
 
-                    OverlayEventBus.on('overlay-click', (e) => {
+                    this.overlayEventListener = (e) => {
                         if (!this.isOutsideClicked(e.target)) {
                             this.selfClick = true;
                         }
-                    }, this.eventBusKey);
+                    };
+
+                    OverlayEventBus.on('overlay-click', this.overlayEventListener);
                 }
+
+                if (this.props.onEditingCellChange) {
+                    this.props.onEditingCellChange({
+                        rowIndex: this.props.rowIndex,
+                        cellIndex: this.props.index,
+                        editing: true
+                    });
+                }
+            });
+        }
+
+        if (this.props.allowCellSelection && this.props.onClick) {
+            this.props.onClick({
+                originalEvent: event,
+                value: ObjectUtils.resolveFieldData(this.props.rowData, this.props.field),
+                field: this.props.field,
+                rowData: this.props.rowData,
+                rowIndex: this.props.rowIndex,
+                cellIndex: this.props.index,
+                selected: this.isSelected()
             });
         }
     }
@@ -86,6 +171,34 @@ export class BodyCell extends Component {
 
         if (this.props.editMode !== 'row' && this.state.editing && this.props.editorValidatorEvent === 'blur') {
             this.switchCellToViewMode(event, true);
+        }
+    }
+
+    onMouseDown(event) {
+        if (this.props.onMouseDown) {
+            this.props.onMouseDown({
+                originalEvent: event,
+                value: ObjectUtils.resolveFieldData(this.props.rowData, this.props.field),
+                field: this.props.field,
+                rowData: this.props.rowData,
+                rowIndex: this.props.rowIndex,
+                cellIndex: this.props.index,
+                selected: this.isSelected()
+            });
+        }
+    }
+
+    onMouseUp(event) {
+        if (this.props.onMouseUp) {
+            this.props.onMouseUp({
+                originalEvent: event,
+                value: ObjectUtils.resolveFieldData(this.props.rowData, this.props.field),
+                field: this.props.field,
+                rowData: this.props.rowData,
+                rowIndex: this.props.rowIndex,
+                cellIndex: this.props.index,
+                selected: this.isSelected()
+            });
         }
     }
 
@@ -125,7 +238,16 @@ export class BodyCell extends Component {
                 editing: false
             }, () => {
                 this.unbindDocumentEditListener();
-                OverlayEventBus.off('overlay-click', this.eventBusKey);
+                OverlayEventBus.off('overlay-click', this.overlayEventListener);
+                this.overlayEventListener = null;
+
+                if (this.props.onEditingCellChange) {
+                    this.props.onEditingCellChange({
+                        rowIndex: this.props.rowIndex,
+                        cellIndex: this.props.index,
+                        editing: false
+                    });
+                }
             });
         }, 1);
     }
@@ -152,6 +274,69 @@ export class BodyCell extends Component {
 
             this.closeCell(event);
         }
+    }
+
+    findNextSelectableCell(cell) {
+        let nextCell = cell.nextElementSibling;
+        if (nextCell) {
+            return DomHandler.hasClass(nextCell, 'p-selectable-cell') ? nextCell : this.findNextSelectableRow(nextCell);
+        }
+
+        return null;
+    }
+
+    findPrevSelectableCell(cell) {
+        let prevCell = cell.previousElementSibling;
+        if (prevCell) {
+            return DomHandler.hasClass(prevCell, 'p-selectable-cell') ? prevCell : this.findPrevSelectableRow(prevCell);
+        }
+
+        return null;
+    }
+
+    findNextSelectableRow(row) {
+        let nextRow = row.nextElementSibling;
+        if (nextRow) {
+            return DomHandler.hasClass(nextRow, 'p-selectable-row') ? nextRow : this.findNextSelectableRow(nextRow);
+        }
+
+        return null;
+    }
+
+    findPrevSelectableRow(row) {
+        let prevRow = row.previousElementSibling;
+        if (prevRow) {
+            return DomHandler.hasClass(prevRow, 'p-selectable-row') ? prevRow : this.findPrevSelectableRow(prevRow);
+        }
+
+        return null;
+    }
+
+    changeTabIndex(currentCell, nextCell) {
+        if (currentCell && nextCell) {
+            currentCell.tabIndex = -1;
+            nextCell.tabIndex = 0;
+        }
+    }
+
+    getTabIndex(cellSelected) {
+        return this.props.allowCellSelection ? (cellSelected ? 0 : (this.props.rowIndex === 0 && this.props.index === 0 ? 0 : -1)) : null;
+    }
+
+    isSelected() {
+        if (this.props.selection) {
+            return (this.props.selection instanceof Array) ? this.findIndexInSelection() > -1 : this.equals(this.props.selection);
+        }
+
+        return false;
+    }
+
+    equals(selectedCell) {
+        return (selectedCell.rowIndex === this.props.rowIndex || selectedCell.rowData === this.props.rowData) && (selectedCell.field === this.props.field || selectedCell.cellIndex === this.props.index);
+    }
+
+    findIndexInSelection() {
+        return this.props.selection ? this.props.selection.findIndex(d => this.equals(d)) : -1;
     }
 
     unbindDocumentEditListener() {
@@ -196,15 +381,25 @@ export class BodyCell extends Component {
 
     componentWillUnmount() {
         this.unbindDocumentEditListener();
+
+        if (this.overlayEventListener) {
+            OverlayEventBus.off('overlay-click', this.overlayEventListener);
+            this.overlayEventListener = null;
+        }
     }
 
     render() {
-        let content, header, editorKeyHelper;
+        let content, editorKeyHelper;
+        let cellSelected = this.props.allowCellSelection && this.isSelected();
         let cellClassName = classNames(this.props.bodyClassName || this.props.className, {
             'p-selection-column': this.props.selectionMode,
+            'p-selectable-cell': this.props.allowCellSelection,
+            'p-highlight': cellSelected,
             'p-editable-column': this.props.editor,
             'p-cell-editing': this.state.editing && this.props.editor
         });
+
+        const tabIndex = this.getTabIndex(cellSelected);
 
         if (this.props.expander) {
             const iconClassName = classNames('p-row-toggler-icon pi pi-fw p-clickable', { 'pi-chevron-down': this.props.expanded, 'pi-chevron-right': !this.props.expanded });
@@ -247,7 +442,7 @@ export class BodyCell extends Component {
             }
 
             if (showReorder) {
-                let reorderIcon = classNames('p-table-reorderablerow-handle', this.props.rowReorderIcon);
+                let reorderIcon = classNames('p-datatable-reorderablerow-handle', this.props.rowReorderIcon);
                 content = (
                     <i className={reorderIcon}></i>
                 );
@@ -320,9 +515,8 @@ export class BodyCell extends Component {
         }
 
         return (
-            <td ref={(el) => { this.container = el; }} role="cell" className={cellClassName} style={this.props.bodyStyle || this.props.style} onClick={this.onClick} onKeyDown={this.onKeyDown}
-                rowSpan={this.props.rowSpan} onBlur={this.onBlur}>
-                {header}
+            <td ref={(el) => { this.container = el; }} role="cell" tabIndex={tabIndex} className={cellClassName} style={this.props.bodyStyle || this.props.style} onClick={this.onClick} onKeyDown={this.onKeyDown}
+                rowSpan={this.props.rowSpan} onBlur={this.onBlur} onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp}>
                 {editorKeyHelper}
                 {content}
             </td>

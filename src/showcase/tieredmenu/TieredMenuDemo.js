@@ -3,6 +3,7 @@ import { TieredMenu } from '../../components/tieredmenu/TieredMenu';
 import { Button } from '../../components/button/Button';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { TieredMenuDoc } from './TieredMenuDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class TieredMenuDemo extends Component {
 
@@ -147,7 +148,8 @@ export class TieredMenuDemo extends Component {
                     <AppInlineHeader changelogText="tieredMenu">
                         <h1>TieredMenu</h1>
                         <p>TieredMenu displays submenus in nested overlays.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="tieredmenu/TieredMenuDemo.js" />
                 </div>
                 <div className="content-section implementation">
                     <div className="card">

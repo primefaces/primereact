@@ -1,12 +1,14 @@
 import * as React from 'react';
-import {MenuItem} from '../menuitem/MenuItem';
+import { MenuItem } from '../menuitem/MenuItem';
 
-interface MegaMenuProps {
+type MegaMenuOrientationType = 'vertical' | 'horizontal';
+
+export interface MegaMenuProps {
     id?: string;
     model?: MenuItem[];
     style?: object;
     className?: string;
-    orientation?: string;
+    orientation?: MegaMenuOrientationType;
 }
 
-export class MegaMenu extends React.Component<MegaMenuProps,any> {}
+export declare class MegaMenu extends React.Component<MegaMenuProps, any> { }

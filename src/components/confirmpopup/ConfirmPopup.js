@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import { Button } from '../button/Button';
-import { CSSTransition } from 'react-transition-group';
-import UniqueComponentId from '../utils/UniqueComponentId';
+import { CSSTransition } from '../transition/CSSTransition';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
 import { localeOption } from '../api/Locale';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 import { Portal } from '../portal/Portal';
+import { ZIndexUtils } from '../utils/ZIndexUtils';
 
 export function confirmPopup(props) {
     let appendTo = props.appendTo || document.body;
@@ -64,9 +64,11 @@ export class ConfirmPopup extends Component {
         appendTo: null,
         dismissable: true,
         footer: null,
+        onShow: null,
         onHide: null,
         accept: null,
-        reject: null
+        reject: null,
+        transitionOptions: null
     }
 
     static propTypes = {
@@ -82,12 +84,14 @@ export class ConfirmPopup extends Component {
         acceptClassName: PropTypes.string,
         className: PropTypes.string,
         style: PropTypes.object,
-        appendTo: PropTypes.any,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         dismissable: PropTypes.bool,
         footer: PropTypes.any,
+        onShow: PropTypes.func,
         onHide: PropTypes.func,
         accept: PropTypes.func,
-        reject: PropTypes.func
+        reject: PropTypes.func,
+        transitionOptions: PropTypes.object
     }
 
     constructor(props) {
@@ -107,7 +111,6 @@ export class ConfirmPopup extends Component {
         this.onExit = this.onExit.bind(this);
         this.onExited = this.onExited.bind(this);
 
-        this.id = this.props.id || UniqueComponentId();
         this.overlayRef = React.createRef();
     }
 
@@ -161,7 +164,7 @@ export class ConfirmPopup extends Component {
     bindResizeListener() {
         if (!this.resizeListener) {
             this.resizeListener = () => {
-                if (this.state.visible) {
+                if (this.state.visible && !DomHandler.isAndroid()) {
                     this.hide();
                 }
             };
@@ -213,17 +216,20 @@ export class ConfirmPopup extends Component {
 
     show() {
         this.setState({ visible: true }, () => {
-            OverlayEventBus.on('overlay-click', (e) => {
+            this.overlayEventListener = (e) => {
                 if (!this.isOutsideClicked(e.target)) {
                     this.isPanelClicked = true;
                 }
-            });
+            };
+
+            OverlayEventBus.on('overlay-click', this.overlayEventListener);
         });
     }
 
     hide(result) {
         this.setState({ visible: false }, () => {
-            OverlayEventBus.off('overlay-click');
+            OverlayEventBus.off('overlay-click', this.overlayEventListener);
+            this.overlayEventListener = null;
 
             if (this.props.onHide) {
                 this.props.onHide(result);
@@ -232,7 +238,7 @@ export class ConfirmPopup extends Component {
     }
 
     onEnter() {
-        this.overlayRef.current.style.zIndex = String(DomHandler.generateZIndex());
+        ZIndexUtils.set('overlay', this.overlayRef.current);
         this.align();
     }
 
@@ -240,6 +246,8 @@ export class ConfirmPopup extends Component {
         this.bindDocumentClickListener();
         this.bindScrollListener();
         this.bindResizeListener();
+
+        this.props.onShow && this.props.onShow();
     }
 
     onExit() {
@@ -249,7 +257,7 @@ export class ConfirmPopup extends Component {
     }
 
     onExited() {
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.overlayRef.current);
     }
 
     align() {
@@ -291,7 +299,12 @@ export class ConfirmPopup extends Component {
             this.scrollHandler = null;
         }
 
-        DomHandler.revertZIndex();
+        if (this.overlayEventListener) {
+            OverlayEventBus.off('overlay-click', this.overlayEventListener);
+            this.overlayEventListener = null;
+        }
+
+        ZIndexUtils.clear(this.overlayRef.current);
     }
 
     renderContent() {
@@ -312,18 +325,30 @@ export class ConfirmPopup extends Component {
             'p-button-text': !this.props.rejectClassName
         }, this.props.rejectClassName);
 
-        const content = this.props.footer ? ObjectUtils.getJSXElement(this.props.footer, this.props) : (
-            <>
+        const content = (
+            <div className="p-confirm-popup-footer">
                 <Button label={this.rejectLabel()} icon={this.props.rejectIcon} className={rejectClassName} onClick={this.reject} />
                 <Button label={this.acceptLabel()} icon={this.props.acceptIcon} className={acceptClassName} onClick={this.accept} autoFocus />
-            </>
-        )
-
-        return (
-            <div className="p-confirm-popup-footer">
-                {content}
             </div>
         )
+
+        if (this.props.footer) {
+            const defaultContentOptions = {
+                accept: this.accept,
+                reject: this.reject,
+                className: 'p-confirm-popup-footer',
+                acceptClassName,
+                rejectClassName,
+                acceptLabel: this.acceptLabel(),
+                rejectLabel: this.rejectLabel(),
+                element: content,
+                props: this.props
+            };
+
+            return ObjectUtils.getJSXElement(this.props.footer, defaultContentOptions);
+        }
+
+        return content;
     }
 
     renderElement() {
@@ -332,9 +357,9 @@ export class ConfirmPopup extends Component {
         const footer = this.renderFooter();
 
         return (
-            <CSSTransition nodeRef={this.overlayRef} classNames="p-connected-overlay" in={this.state.visible} timeout={{ enter: 120, exit: 100 }}
+            <CSSTransition nodeRef={this.overlayRef} classNames="p-connected-overlay" in={this.state.visible} timeout={{ enter: 120, exit: 100 }} options={this.props.transitionOptions}
                 unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit} onExited={this.onExited}>
-                <div ref={this.overlayRef} id={this.id} className={className} style={this.props.style} onClick={this.onPanelClick}>
+                <div ref={this.overlayRef} id={this.props.id} className={className} style={this.props.style} onClick={this.onPanelClick}>
                     {content}
                     {footer}
                 </div>

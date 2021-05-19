@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
-import { CSSTransition } from 'react-transition-group';
+import { CSSTransition } from '../transition/CSSTransition';
 import { Ripple } from '../ripple/Ripple';
+import { ZIndexUtils } from '../utils/ZIndexUtils';
+import { Portal } from '../portal/Portal';
 
 export class Sidebar extends Component {
 
@@ -23,6 +25,8 @@ export class Sidebar extends Component {
         closeOnEscape: true,
         icons: null,
         modal: true,
+        appendTo: null,
+        transitionOptions: null,
         onShow: null,
         onHide: null
     };
@@ -42,6 +46,8 @@ export class Sidebar extends Component {
         closeOnEscape: PropTypes.bool,
         icons: PropTypes.any,
         modal: PropTypes.bool,
+        appendTo: PropTypes.any,
+        transitionOptions: PropTypes.object,
         onShow: PropTypes.func,
         onHide: PropTypes.func.isRequired
     };
@@ -64,7 +70,7 @@ export class Sidebar extends Component {
     }
 
     onEnter() {
-        this.sidebarRef.current.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
+        ZIndexUtils.set('modal', this.sidebarRef.current, this.props.baseZIndex);
         if (this.props.modal) {
             this.enableModality();
         }
@@ -79,9 +85,7 @@ export class Sidebar extends Component {
             this.closeIcon.focus();
         }
 
-        if (this.props.onShow) {
-            this.props.onShow();
-        }
+        this.props.onShow && this.props.onShow();
     }
 
     onExit() {
@@ -94,13 +98,13 @@ export class Sidebar extends Component {
     }
 
     onExited() {
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.sidebarRef.current);
     }
 
     enableModality() {
         if (!this.mask) {
             this.mask = document.createElement('div');
-            this.mask.style.zIndex = String(parseInt(this.sidebarRef.current.style.zIndex, 10) - 1);
+            this.mask.style.zIndex = String(ZIndexUtils.get(this.sidebarRef.current) - 1);
             let maskClassName = 'p-component-overlay p-sidebar-mask';
             if (this.props.blockScroll) {
                 maskClassName += ' p-sidebar-mask-scrollblocker';
@@ -146,7 +150,7 @@ export class Sidebar extends Component {
     bindDocumentEscapeListener() {
         this.documentEscapeListener = (event) => {
             if (event.which === 27) {
-                if (parseInt(this.sidebarRef.current.style.zIndex, 10) === (DomHandler.getCurrentZIndex() + this.props.baseZIndex)) {
+                if (ZIndexUtils.get(this.sidebarRef.current) === ZIndexUtils.getCurrent()) {
                     this.onCloseClick(event);
                 }
             }
@@ -192,7 +196,7 @@ export class Sidebar extends Component {
         this.unbindMaskClickListener();
         this.disableModality();
 
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.sidebarRef.current);
     }
 
     renderCloseIcon() {
@@ -216,7 +220,7 @@ export class Sidebar extends Component {
         return null;
     }
 
-    render() {
+    renderElement() {
         const className = classNames('p-sidebar p-component', this.props.className, 'p-sidebar-' + this.props.position,
             { 'p-sidebar-active': this.props.visible, 'p-sidebar-full': this.props.fullScreen });
         const closeIcon = this.renderCloseIcon();
@@ -228,10 +232,10 @@ export class Sidebar extends Component {
         };
 
         return (
-            <CSSTransition nodeRef={this.sidebarRef} classNames="p-sidebar" in={this.props.visible} timeout={transitionTimeout}
+            <CSSTransition nodeRef={this.sidebarRef} classNames="p-sidebar" in={this.props.visible} timeout={transitionTimeout} options={this.props.transitionOptions}
                 unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit} onExited={this.onExited}>
                 <div ref={this.sidebarRef} id={this.props.id} className={className} style={this.props.style} role="complementary">
-                    <div className="p-sidebar-icons">
+                    <div className="p-sidebar-header">
                         {icons}
                         {closeIcon}
                     </div>
@@ -241,5 +245,11 @@ export class Sidebar extends Component {
                 </div>
             </CSSTransition>
         );
+    }
+
+    render() {
+        let element = this.renderElement();
+
+        return <Portal element={element} appendTo={this.props.appendTo} />;
     }
 }

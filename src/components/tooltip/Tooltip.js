@@ -5,6 +5,7 @@ import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import { Portal } from '../portal/Portal';
+import { ZIndexUtils } from '../utils/ZIndexUtils';
 
 export function tip(props) {
     let appendTo = props.appendTo || document.body;
@@ -60,6 +61,7 @@ export class Tooltip extends Component {
         showDelay: 0,
         updateDelay: 0,
         hideDelay: 0,
+        autoHide: true,
         onBeforeShow: null,
         onBeforeHide: null,
         onShow: null,
@@ -73,7 +75,7 @@ export class Tooltip extends Component {
         disabled: PropTypes.bool,
         className: PropTypes.string,
         style: PropTypes.object,
-        appendTo: PropTypes.object,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         position: PropTypes.string,
         my: PropTypes.string,
         at: PropTypes.string,
@@ -88,6 +90,7 @@ export class Tooltip extends Component {
         showDelay: PropTypes.number,
         updateDelay: PropTypes.number,
         hideDelay: PropTypes.number,
+        autoHide: PropTypes.bool,
         onBeforeShow: PropTypes.func,
         onBeforeHide: PropTypes.func,
         onShow: PropTypes.func,
@@ -104,6 +107,12 @@ export class Tooltip extends Component {
 
         this.show = this.show.bind(this);
         this.hide = this.hide.bind(this);
+        this.onMouseEnter = this.onMouseEnter.bind(this);
+        this.onMouseLeave = this.onMouseLeave.bind(this);
+    }
+
+    isTargetContentEmpty(target) {
+        return !(this.props.content || this.getTargetOption(target, 'tooltip'));
     }
 
     isContentEmpty(target) {
@@ -116,6 +125,10 @@ export class Tooltip extends Component {
 
     isDisabled(target) {
         return this.getTargetOption(target, 'disabled') === 'true' || this.hasTargetOption(target, 'disabled') || this.props.disabled;
+    }
+
+    isAutoHide() {
+        return this.getTargetOption(this.currentTarget, 'autohide') || this.props.autoHide;
     }
 
     getTargetOption(target, option) {
@@ -170,8 +183,7 @@ export class Tooltip extends Component {
                 callback();
             }
             else if (this.props.children) {
-                ReactDOM.unmountComponentAtNode(this.tooltipTextEl);
-                ReactDOM.render(this.props.children, this.tooltipTextEl, callback);
+                callback();
             }
         }
     }
@@ -185,8 +197,8 @@ export class Tooltip extends Component {
 
         const updateTooltipState = () => {
             this.updateText(this.currentTarget, () => {
-                if (this.props.autoZIndex && !this.containerEl.style.zIndex) {
-                    this.containerEl.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
+                if (this.props.autoZIndex && !ZIndexUtils.get(this.containerEl)) {
+                    ZIndexUtils.set('tooltip', this.containerEl, this.props.baseZIndex);
                 }
 
                 this.containerEl.style.left = '';
@@ -225,7 +237,12 @@ export class Tooltip extends Component {
 
             this.sendCallback(this.props.onBeforeHide, { originalEvent: e, target: this.currentTarget });
             this.applyDelay('hideDelay', () => {
+                ZIndexUtils.clear(this.containerEl);
                 DomHandler.removeClass(this.containerEl, 'p-tooltip-active');
+
+                if (!this.isAutoHide() && this.allowHide === false) {
+                    return;
+                }
 
                 this.setState({
                     visible: false,
@@ -239,9 +256,8 @@ export class Tooltip extends Component {
                     this.unbindScrollListener();
                     this.currentTarget = null;
                     this.scrollHandler = null;
+                    this.allowHide = true;
                     this.sendCallback(this.props.onHide, { originalEvent: e, target: this.currentTarget });
-
-                    DomHandler.revertZIndex();
                 });
             });
         }
@@ -298,6 +314,19 @@ export class Tooltip extends Component {
                     position
                 }, () => DomHandler.addClass(this.containerEl, 'p-tooltip-active'));
             });
+        }
+    }
+
+    onMouseEnter() {
+        if (!this.isAutoHide()) {
+            this.allowHide = false;
+        }
+    }
+
+    onMouseLeave(e) {
+        if (!this.isAutoHide()) {
+            this.allowHide = true;
+            this.hide(e);
         }
     }
 
@@ -449,18 +478,22 @@ export class Tooltip extends Component {
             this.scrollHandler = null;
         }
 
-        DomHandler.revertZIndex();
+        ZIndexUtils.clear(this.containerEl);
     }
 
     renderElement() {
-        const tooltipClass = classNames('p-tooltip p-component', {
+        const tooltipClassName = classNames('p-tooltip p-component', {
             [`p-tooltip-${this.state.position}`]: true
         }, this.props.className);
+        const isTargetContentEmpty = this.isTargetContentEmpty(this.currentTarget);
 
         return (
-            <div id={this.props.id} ref={(el) => this.containerEl = el} className={tooltipClass} style={this.props.style} role="tooltip" aria-hidden={this.state.visible}>
+            <div id={this.props.id} ref={(el) => this.containerEl = el} className={tooltipClassName} style={this.props.style} role="tooltip" aria-hidden={this.state.visible}
+                onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
                 <div className="p-tooltip-arrow"></div>
-                <div ref={(el) => this.tooltipTextEl = el} className="p-tooltip-text"></div>
+                <div ref={(el) => this.tooltipTextEl = el} className="p-tooltip-text">
+                    {isTargetContentEmpty && this.props.children}
+                </div>
             </div>
         );
     }

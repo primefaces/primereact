@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TabView } from '../../components/tabview/TabView';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 
 export class InputGroupDoc extends Component {
 
@@ -400,7 +400,7 @@ const InputGroupDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'InputGroupDemo', sources: this.sources })

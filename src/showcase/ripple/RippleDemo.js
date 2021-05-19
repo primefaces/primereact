@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { RippleDoc } from './RippleDoc';
 import { Ripple } from '../../components/ripple/Ripple';
 import './RippleDemo.scss';
+import AppDemoActions from '../../AppDemoActions';
 
 export class RippleDemo extends Component {
 
@@ -13,6 +14,7 @@ export class RippleDemo extends Component {
                         <h1>Ripple</h1>
                         <p>Ripple component adds ripple effect to the host element.</p>
                     </div>
+                    <AppDemoActions github="ripple/RippleDemo.js" />
                 </div>
 
                 <div className="content-section implementation ripple-demo">

@@ -1,9 +1,26 @@
 import * as React from 'react';
 
-interface ConfirmPopupProps {
-    target?: any;
+type ConfirmPopupTemplateType = React.ReactNode | ((options: ConfirmPopupOptions) => React.ReactNode);
+
+type ConfirmPopupAppendToType = 'self' | HTMLElement | undefined | null;
+
+interface ConfirmPopupOptions {
+    accept(): void;
+    reject(): void;
+    className: string;
+    acceptClassName: string;
+    rejectClassName: string;
+    acceptLabel: string;
+    rejectLabel: string;
+    element: React.ReactNode;
+    props: ConfirmPopupProps;
+    [key: string]: any;
+}
+
+export interface ConfirmPopupProps {
+    target?: HTMLElement;
     visible?: boolean;
-    message?: any;
+    message?: ConfirmPopupTemplateType;
     rejectLabel?: string;
     acceptLabel?: string;
     icon?: string;
@@ -13,14 +30,21 @@ interface ConfirmPopupProps {
     acceptClassName?: string;
     className?: string;
     style?: object;
-    appendTo?: any;
+    appendTo?: ConfirmPopupAppendToType;
     dismissable?: boolean;
-    footer?: any;
+    footer?: ConfirmPopupTemplateType;
+    transitionOptions?: object;
+    onShow?(): void;
     onHide?(result: string): void;
     accept?(): void;
     reject?(): void;
 }
 
-export class ConfirmPopup extends React.Component<ConfirmPopupProps,any> {}
+interface ConfirmPopupReturn {
+    show(): void;
+    hide(): void;
+}
 
-export function confirmPopup(props: ConfirmPopupProps):any;
+export declare class ConfirmPopup extends React.Component<ConfirmPopupProps, any> { }
+
+export declare function confirmPopup(props: ConfirmPopupProps): ConfirmPopupReturn;

@@ -1,6 +1,6 @@
 {
   "name": "primereact",
-  "version": "6.2.2-SNAPSHOT",
+  "version": "6.4.0-SNAPSHOT",
   "homepage": ".",
   "repository": {
     "type": "git",
@@ -27,7 +27,6 @@
     "@fullcalendar/timegrid": "4.0.1",
     "axios": "^0.21.1",
     "chart.js": "2.7.3",
-    "classnames": "^2.2.6",
     "codesandbox": "2.1.14",
     "core-js": "^3.6.5",
     "gulp": "^4.0.2",
@@ -36,7 +35,7 @@
     "gulp-rename": "^2.0.0",
     "gulp-uglify": "^3.0.2",
     "gulp-uglifycss": "^1.1.0",
-    "node-sass": "^4.11.0",
+    "sass": "^1.32.8",
     "primeflex": "^2.0.0",
     "primeicons": "^4.1.0",
     "prismjs": "^1.15.0",
@@ -46,6 +45,10 @@
     "jspdf-autotable": "^3.2.5",
     "xlsx": "^0.15.1",
     "file-saver": "^2.0.2",
+    "formik": "^2.2.6",
+    "final-form": "^4.20.2",
+    "react-final-form": "^6.5.3",
+    "react-hook-form": "^6.15.5",
     "react": "^17.0.1",
     "react-app-polyfill": "^1.0.6",
     "react-dom": "^17.0.1",
@@ -53,9 +56,6 @@
     "react-scripts": "3.4.1",
     "react-transition-group": "^4.4.1",
     "regenerator-runtime": "^0.13.5"
-  },
-  "peerDependencies": {
-    "classnames": "^2.2.6"
   },
   "scripts": {
     "start": "react-scripts start",

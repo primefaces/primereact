@@ -1,8 +1,25 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-interface RadioButtonProps {
+interface RadioButtonChangeTargetOptions {
+    name: string;
+    id: string;
+    value: any;
+    checked: boolean;
+}
+
+interface RadioButtonChangeParams {
+    originalEvent: React.SyntheticEvent;
+    value: any;
+    checked: boolean;
+    stopPropagation(): void;
+    preventDefault(): void;
+    target: RadioButtonChangeTargetOptions;
+}
+
+export interface RadioButtonProps {
     id?: string;
+    inputRef?: React.Ref<HTMLInputElement>;
     inputId?: string;
     name?: string;
     value?: any;
@@ -12,10 +29,10 @@ interface RadioButtonProps {
     disabled?: boolean;
     required?: boolean;
     tabIndex?: number;
-    tooltip?: any;
+    tooltip?: string;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
-    onChange?(e: {originalEvent: Event, value: any, checked: boolean, target: {type: string, name: string, id: string, value: any, checked: boolean}}): void;
+    onChange?(e: RadioButtonChangeParams): void;
 }
 
-export class RadioButton extends React.Component<RadioButtonProps,any> {}
+export declare class RadioButton extends React.Component<RadioButtonProps, any> { }

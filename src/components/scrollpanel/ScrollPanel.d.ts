@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-interface ScrollPanelProps {
+export interface ScrollPanelProps {
     id?: string;
     style?: object;
     className?: string;
 }
 
-export class ScrollPanel extends React.Component<ScrollPanelProps,any> {}
+export declare class ScrollPanel extends React.Component<ScrollPanelProps, any> { }

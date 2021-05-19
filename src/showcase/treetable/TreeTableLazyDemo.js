@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { TreeTable } from '../../components/treetable/TreeTable';
 import { Column } from '../../components/column/Column';
 import { TabView } from '../../components/tabview/TabView';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class TreeTableLazyDemo extends Component {
 
@@ -120,6 +121,7 @@ export class TreeTableLazyDemo extends Component {
                             In addition, children of a node can be loaded on demand at onNodeExpand event as well. Sample belows imitates lazy paging by using an in memory list.</p>
 
                     </AppInlineHeader>
+                    <AppDemoActions github="treetable/TreeTableLazyDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -499,7 +501,7 @@ const TreeTableLazyDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'TreeTableLazyDemo', sources: this.sources, service: 'NodeService', data: 'treetablenodes' })

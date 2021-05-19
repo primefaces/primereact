@@ -41,6 +41,11 @@
     cursor: pointer;
 }
 
+.p-datatable-drag-selection-helper {
+    position: absolute;
+    z-index: 99999999;
+}
+
 /* Scrollable */
 .p-datatable-scrollable-wrapper {
     position: relative;

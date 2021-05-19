@@ -9,22 +9,22 @@ import ObjectUtils from '../utils/ObjectUtils';
 class InputTextComponent extends Component {
 
     static defaultProps = {
-        onInput: null,
-        onKeyPress: null,
         keyfilter: null,
         validateOnly: false,
         tooltip: null,
         tooltipOptions: null,
+        onInput: null,
+        onKeyPress: null,
         forwardRef: null
     };
 
     static propTypes = {
-        onInput: PropTypes.func,
-        onKeyPress: PropTypes.func,
         keyfilter: PropTypes.any,
         validateOnly: PropTypes.bool,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
+        onInput: PropTypes.func,
+        onKeyPress: PropTypes.func,
         forwardRef: PropTypes.any
     };
 
@@ -37,7 +37,9 @@ class InputTextComponent extends Component {
     }
 
     isFilled() {
-        return (this.props.value != null && this.props.value.toString().length > 0) || (this.props.defaultValue != null && this.props.defaultValue.toString().length > 0)
+        return (this.props.value != null && this.props.value.toString().length > 0) ||
+            (this.props.defaultValue != null && this.props.defaultValue.toString().length > 0) ||
+            (this.elementRef && this.elementRef.current && this.elementRef.current.value != null && this.elementRef.current.value.toString().length > 0);
     }
 
     onKeyPress(event) {

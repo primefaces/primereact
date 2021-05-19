@@ -3,8 +3,9 @@ import { TreeTable } from '../../components/treetable/TreeTable';
 import { Column } from '../../components/column/Column';
 import { NodeService } from '../service/NodeService';
 import { TabView } from '../../components/tabview/TabView';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class TreeTableColReorderDemo extends Component {
 
@@ -28,6 +29,7 @@ export class TreeTableColReorderDemo extends Component {
                         <h1>TreeTable <span>Column Reorder</span></h1>
                         <p>Order of the columns can be changed using drag and drop.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="treetable/TreeTableColReorderDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -159,7 +161,7 @@ const TreeTableColReorderDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'TreeTableColReorderDemo', sources: this.sources, service: 'NodeService', data: 'treetablenodes' })

@@ -25,12 +25,13 @@ export class AppInlineHeader extends Component {
                     context => (
                         <>
                             <div className="feature-intro">
-                                { this.props.children}
+                                {this.props.children}
 
-                                { this.props.showChangelog && <Button onClick={() => context.onChangelogBtnClick(this.props.changelogText)} className="layout-changelog-button p-button-outlined p-mt-3" icon="pi pi-list" label={context.changelogText}></Button> }
+                                {this.props.showChangelog && <Button onClick={() => context.onChangelogBtnClick(this.props.changelogText)} className="layout-changelog-button p-button-outlined p-mt-3" icon="pi pi-list" label={context.changelogText}></Button>}
                             </div>
+                            
+                            { this.props.showInputStyle && <AppInputStyleSwitch value={context.inputStyle} onChange={({ value }) => context.onInputStyleChange(value)} />}
 
-                            { this.props.showInputStyle && <AppInputStyleSwitch value={context.inputStyle} onChange={({value}) => context.onInputStyleChange(value)} /> }
                         </>
                     )
                 }

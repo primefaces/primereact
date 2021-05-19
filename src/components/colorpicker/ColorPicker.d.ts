@@ -1,21 +1,38 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
+import Omit from '../util';
 
-interface ColorPickerProps {
-    id?: string;
+type ColorPickerAppendToType = 'self' | HTMLElement | undefined | null;
+
+type ColorPickerFormatType = 'hex' | 'rgb' | 'hsb';
+
+interface ColorPickerChangeTargetOptions {
+    name: string;
+    id: string;
+    value: string;
+}
+
+interface ColorPickerChangeParams {
+    value: string;
+    stopPropagation(): void;
+    preventDefault(): void;
+    target: ColorPickerChangeTargetOptions;
+}
+
+export interface ColorPickerProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onChange' | 'value'> {
+    inputRef?: React.Ref<HTMLInputElement>;
     value?: any;
-    style?: object;
-    className?: string;
     defaultColor?: string;
     inline?: boolean;
     format?: string;
-    appendTo?: any;
-    disabled?: boolean;
-    tabIndex?: number;
+    appendTo?: ColorPickerAppendToType;
     inputId?: string;
-    tooltip?: any;
+    tooltip?: string;
     tooltipOptions?: TooltipOptions;
-    onChange?(value: any, target: {name: string, id: string, value: any}): void;
+    transitionOptions?: object;
+    onChange?(e: ColorPickerChangeParams): void;
+    onShow?(): void;
+    onHide?(): void;
 }
 
-export class ColorPicker extends React.Component<ColorPickerProps,any> {}
+export declare class ColorPicker extends React.Component<ColorPickerProps, any> { }

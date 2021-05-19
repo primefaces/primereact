@@ -4,8 +4,9 @@ import { Column } from '../../components/column/Column';
 import ProductService from '../service/ProductService';
 import { Toast } from '../../components/toast/Toast';
 import { TabView } from '../../components/tabview/TabView';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DataTableReorderDemo extends Component {
 
@@ -54,6 +55,7 @@ export class DataTableReorderDemo extends Component {
                         <h1>DataTable <span>Reorder</span></h1>
                         <p>Order of the columns and rows can be changed using drag and drop.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="datatable/DataTableReorderDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -273,7 +275,7 @@ const DataTableReorderDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'DataTableReorderDemo', sources: this.sources, service: 'ProductService', data: 'products-small' })

@@ -186,7 +186,9 @@ export class FileUpload extends Component {
     }
 
     clearInputElement() {
-        this.fileInput.value = '';
+        if (this.fileInput) {
+            this.fileInput.value = '';
+        }
     }
 
     clearIEInput() {
@@ -294,7 +296,11 @@ export class FileUpload extends Component {
 
             if (this.props.uploadHandler) {
                 this.props.uploadHandler({
-                    files: this.state.files
+                    files: this.state.files,
+                    options: {
+                        clear: this.clear,
+                        props: this.props
+                    }
                 })
             }
         }
@@ -316,15 +322,15 @@ export class FileUpload extends Component {
 
             xhr.upload.addEventListener('progress', (event) => {
                 if (event.lengthComputable) {
-                    this.setState({progress: Math.round((event.loaded * 100) / event.total)});
-                }
-
-                if (this.props.onProgress) {
-                    this.props.onProgress({
-                        originalEvent: event,
-                        progress: this.progress
+                    this.setState({ progress: Math.round((event.loaded * 100) / event.total) }, () => {
+                        if (this.props.onProgress) {
+                            this.props.onProgress({
+                                originalEvent: event,
+                                progress: this.state.progress
+                            });
+                        };
                     });
-                };
+                }
             });
 
             xhr.onreadystatechange = () => {
@@ -590,7 +596,7 @@ export class FileUpload extends Component {
                 <span className={buttonClassName} style={chooseOptions.style} onMouseUp={this.onSimpleUploaderClick} onKeyDown={this.onKeyDown} onFocus={this.onFocus} onBlur={this.onBlur} tabIndex={0}>
                     {icon}
                     {label}
-                    { !this.hasFiles() && <input ref={(el) => this.fileInput = el} type="file" accept={this.props.accept} disabled={this.props.disabled} onChange={this.onFileSelect} /> }
+                    { !this.hasFiles() && <input ref={(el) => this.fileInput = el} type="file" accept={this.props.accept} multiple={this.props.multiple} disabled={this.props.disabled} onChange={this.onFileSelect} /> }
                     <Ripple />
                 </span>
             </div>

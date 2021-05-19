@@ -6,6 +6,7 @@ import ProductService from '../service/ProductService';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './DataScrollerDemo.scss';
 import { DataScrollerDoc } from './DataScrollerDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DataScrollerDemo extends Component {
 
@@ -50,7 +51,8 @@ export class DataScrollerDemo extends Component {
                     <AppInlineHeader changelogText="dataScroller">
                         <h1>DataScroller</h1>
                         <p>DataScroller displays data with on demand loading using scroll.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="datascroller/DataScrollerDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

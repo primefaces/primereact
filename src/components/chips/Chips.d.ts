@@ -1,8 +1,30 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-interface ChipsProps {
+interface ChipsAddParams {
+    originalEvent: React.SyntheticEvent;
+    value: any;
+}
+
+interface ChipsRemoveParams extends ChipsAddParams { }
+
+interface ChipsChangeTargetOptions {
+    name: string;
+    id: string;
+    value: any[];
+}
+
+interface ChipsChangeParams {
+    originalEvent: React.SyntheticEvent;
+    value: any[];
+    stopPropagation(): void;
+    preventDefault(): void;
+    target: ChipsChangeTargetOptions;
+}
+
+export interface ChipsProps {
     id?: string;
+    inputRef?: React.Ref<HTMLInputElement>;
     name?: string;
     placeholder?: string;
     value?: any[];
@@ -10,17 +32,17 @@ interface ChipsProps {
     disabled?: boolean;
     style?: object;
     className?: string;
-    tooltip?: any;
+    tooltip?: string;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
     separator?: string;
     allowDuplicate?: boolean;
-    itemTemplate?(item: any): JSX.Element | undefined;
-    onAdd?(e: {originalEvent: Event, value: any}): void;
-    onRemove?(e: {originalEvent: Event, value: any}): void;
-    onChange?(e: {originalEvent: Event, value: any, target: {name: string, id: string, value: any}}): void;
-    onFocus?(event: Event): void;
-    onBlur?(event: Event): void;
+    itemTemplate?(item: any): React.ReactNode;
+    onAdd?(e: ChipsAddParams): void;
+    onRemove?(e: ChipsRemoveParams): void;
+    onChange?(e: ChipsChangeParams): void;
+    onFocus?(event: React.FocusEvent<HTMLInputElement>): void;
+    onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
 }
 
-export class Chips extends React.Component<ChipsProps,any> {}
+export declare class Chips extends React.Component<ChipsProps, any> { }

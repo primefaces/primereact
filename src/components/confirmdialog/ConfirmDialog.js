@@ -74,7 +74,7 @@ export class ConfirmDialog extends Component {
         acceptIcon: PropTypes.string,
         rejectClassName: PropTypes.string,
         acceptClassName: PropTypes.string,
-        appendTo: PropTypes.any,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         className: PropTypes.string,
         footer: PropTypes.any,
         breakpoints: PropTypes.object,
@@ -142,13 +142,29 @@ export class ConfirmDialog extends Component {
         const rejectClassName = classNames('p-confirm-dialog-reject', {
             'p-button-text': !this.props.rejectClassName
         }, this.props.rejectClassName);
-
-        return this.props.footer ? ObjectUtils.getJSXElement(this.props.footer, this.props) : (
+        const content = (
             <>
                 <Button label={this.rejectLabel()} icon={this.props.rejectIcon} className={rejectClassName} onClick={this.reject} />
                 <Button label={this.acceptLabel()} icon={this.props.acceptIcon} className={acceptClassName} onClick={this.accept} autoFocus />
             </>
-        )
+        );
+
+        if (this.props.footer) {
+            const defaultContentOptions = {
+                accept: this.accept,
+                reject: this.reject,
+                acceptClassName,
+                rejectClassName,
+                acceptLabel: this.acceptLabel(),
+                rejectLabel: this.rejectLabel(),
+                element: content,
+                props: this.props
+            };
+
+            return ObjectUtils.getJSXElement(this.props.footer, defaultContentOptions);
+        }
+
+        return content;
     }
 
     renderElement() {

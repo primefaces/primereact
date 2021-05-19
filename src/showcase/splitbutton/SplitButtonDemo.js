@@ -3,6 +3,7 @@ import { SplitButton } from '../../components/splitbutton/SplitButton';
 import { Toast } from '../../components/toast/Toast';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { SplitButtonDoc } from './SplitButtonDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class SplitButtonDemo extends Component {
 
@@ -53,7 +54,8 @@ export class SplitButtonDemo extends Component {
                     <AppInlineHeader changelogText="splitButton">
                         <h1>SplitButton</h1>
                         <p>SplitButton groups a set of commands in an overlay with a default command.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="splitbutton/SplitButtonDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

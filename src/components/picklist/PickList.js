@@ -38,8 +38,8 @@ export class PickList extends Component {
         id: PropTypes.string,
         source: PropTypes.array,
         target: PropTypes.array,
-        sourceHeader: PropTypes.string,
-        targetHeader: PropTypes.string,
+        sourceHeader: PropTypes.any,
+        targetHeader: PropTypes.any,
         style: PropTypes.object,
         className: PropTypes.string,
         sourcestyle: PropTypes.object,
@@ -127,7 +127,7 @@ export class PickList extends Component {
     handleChange(event, source, target) {
         if (this.props.onChange) {
             this.props.onChange({
-                event: event.originalEvent,
+                originalEvent: event.originalEvent,
                 source,
                 target,
             });

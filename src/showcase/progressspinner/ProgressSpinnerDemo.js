@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { ProgressSpinner } from '../../components/progressspinner/ProgressSpinner';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { ProgressSpinnerDoc } from './ProgressSpinnerDoc';
+import AppDemoActions from '../../AppDemoActions';
 
 export class ProgressSpinnerDemo extends Component {
 
@@ -12,7 +13,8 @@ export class ProgressSpinnerDemo extends Component {
                     <AppInlineHeader changelogText="progressSpinner">
                         <h1>ProgressSpinner</h1>
                         <p>ProgressSpinner is a process status indicator.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="progressspinner/ProgressSpinnerDemo.js" />
                 </div>
 
                 <div className="content-section implementation">

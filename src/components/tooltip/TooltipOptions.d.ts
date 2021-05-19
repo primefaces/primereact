@@ -1,11 +1,24 @@
+import * as React from 'react';
+
+type TooltipPositionType = 'top' | 'bottom' | 'left' | 'right';
+
+type TooltipEventType = 'hover' | 'focus';
+
+type TooltipAppendToType = 'self' | HTMLElement | undefined | null;
+
+interface TooltipEventParams {
+    originalEvent: React.SyntheticEvent;
+    target: HTMLElement;
+}
+
 export default interface TooltipOptions {
     className?: string;
     style?: object;
-    appendTo?: object;
-    position?: string;
+    appendTo?: TooltipAppendToType;
+    position?: TooltipPositionType;
     my?: string;
     at?: string;
-    event?: string;
+    event?: TooltipEventType;
     showEvent?: string;
     hideEvent?: string;
     autoZIndex?: boolean;
@@ -16,8 +29,9 @@ export default interface TooltipOptions {
     showDelay?: number;
     updateDelay?: number;
     hideDelay?: number;
-    onBeforeShow?(e: {originalEvent: Event, target: HTMLElement}): void;
-    onBeforeHide?(e: {originalEvent: Event, target: HTMLElement}): void;
-    onShow?(e: {originalEvent: Event, target: HTMLElement}): void;
-    onHide?(e: {originalEvent: Event, target: HTMLElement}): void;
+    autoHide?: boolean;
+    onBeforeShow?(e: TooltipEventParams): void;
+    onBeforeHide?(e: TooltipEventParams): void;
+    onShow?(e: TooltipEventParams): void;
+    onHide?(e: TooltipEventParams): void;
 }

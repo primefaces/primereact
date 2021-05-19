@@ -10,7 +10,7 @@ export class DisplayDoc extends Component {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
                         <h5>Getting Started</h5>
@@ -45,8 +45,8 @@ export class DisplayDoc extends Component {
 <div className="p-d-block p-d-lg-inline">Inline for larger screens and block for others.</div>
 <div className="p-d-md-none">Visible on a Small Screen</div>
 <div className="p-d-none p-d-md-inline-flex">Hidden on a Small Screen</div>
-<div className="p-d-none p-print-block">Only visible when printed.</div>
-<div className="p-d-block p-print-none">Not available for printing.</div>
+<div className="p-d-none p-d-print-block">Only visible when printed.</div>
+<div className="p-d-block p-d-print-none">Not available for printing.</div>
 `}
 </CodeHighlight>
 
@@ -78,10 +78,10 @@ export class DisplayDoc extends Component {
     <Button type="button" icon="pi pi-search" className="p-button-rounded p-button-success p-d-none p-d-md-inline-flex" />
 
     <h5>Visible to Print, Invisible for Screen</h5>
-    <p className="p-d-none p-print-block">Only visible when printed.</p>
+    <p className="p-d-none p-d-print-block">Only visible when printed.</p>
 
     <h5>Visible to Screen, Invisible for Print</h5>
-    <p className="p-d-block p-print-none">Not available for printing.</p>
+    <p className="p-d-block p-d-print-none">Not available for printing.</p>
 </div>
 `}
 </CodeHighlight>

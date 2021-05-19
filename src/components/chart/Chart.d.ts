@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-interface ChartProps {
+export interface ChartProps {
     id?: string;
     type?: string;
     data?: object;
@@ -11,4 +11,4 @@ interface ChartProps {
     className?: string;
 }
 
-export class Chart extends React.Component<ChartProps,any> {}
+export declare class Chart extends React.Component<ChartProps, any> { }

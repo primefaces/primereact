@@ -14,7 +14,7 @@ export class SetupPage extends Component {
                     </div>
                 </div>
 
-                <div className="content-section documentation">
+                <div className="content-section documentation" id="app-doc">
                     <h5>Download</h5>
                     <p>PrimeReact is available at npm, if you have an existing application run the following commands to download PrimeReact and PrimeIcons to your project.</p>
 
@@ -24,10 +24,6 @@ npm install primereact --save
 npm install primeicons --save
 `}
 </CodeHighlight>
-
-                    <h5>PrimeFlex</h5>
-                    <p>PrimeFlex is a CSS utility library featuring various helpers such as a grid system, flexbox, spacing, elevation and more. Although it is not required, it is highly
-                    recommended to add PrimeFlex as it is likely to need such utilities when developing applications. View the <Link to="/primeflex">PrimeFlex</Link> section for the installation.</p>
 
                     <h5>Import</h5>
                     <p>Path of each component is available at the "import" section of a component documentation.</p>
@@ -51,11 +47,12 @@ dependencies: {
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-transition-group": "^4.4.1",
-    "primeicons": "^4.1.0",
+    "primeicons": "^4.1.0"
 }
 `}
 </CodeHighlight>
 
+                    <h6>Optional</h6>
                     <p>Here is the list of components with 3rd party dependencies.</p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
@@ -91,22 +88,14 @@ dependencies: {
                     </div>
 
                     <h5>Styles</h5>
-                    <p>The css dependencies are as follows, note that you may change the theme with another one of your choice.</p>
+                    <p>The css dependencies are as follows, note that you may change the theme with another one of your choice. If you are using a bundler such as webpack with a css loader you
+                    may import them to your main application component.</p>
 
 <CodeHighlight lang="js">
 {`
 primereact/resources/themes/saga-blue/theme.css
 primereact/resources/primereact.min.css
 primeicons/primeicons.css
-`}
-</CodeHighlight>
-
-                    <p>If you are using a bundler such as webpack with a css loader you may also import them to your main application component, an example from create-react-app would be.</p>
-<CodeHighlight lang="js">
-{`
-import 'primereact/resources/themes/saga-blue/theme.css';
-import 'primereact/resources/primereact.min.css';
-import 'primeicons/primeicons.css';
 `}
 </CodeHighlight>
 
@@ -150,10 +139,13 @@ primereact/resources/themes/luna-pink/theme.css
 primereact/resources/themes/rhea/theme.css
 `}
 </CodeHighlight>
+                    <h5>PrimeFlex</h5>
+                    <p>PrimeFlex is a CSS utility library featuring various helpers such as a grid system, flexbox, spacing, elevation and more. Although it is not required, it is highly
+                    recommended to add PrimeFlex as it is likely to need such utilities when developing applications. View the <Link to="/primeflex">PrimeFlex</Link> section for the installation.</p>
 
                     <h5>Ripple</h5>
                     <p>Ripple is an optional animation for the supported components such as buttons. It is disabled by default and needs to be enabled at
-                        your app's entry file (e.g. main.js) using the <i>PrimeReact</i> variable.
+                        your app's entry file (e.g. App.js) using the <i>PrimeReact</i> variable.
                     </p>
 <CodeHighlight lang="js">
 {`
@@ -162,6 +154,37 @@ import PrimeReact from 'primereact/api';
 PrimeReact.ripple = true;
 `}
 </CodeHighlight>
+
+                    <h5>ZIndex Layering</h5>
+                    <p>ZIndexes are managed automatically to make sure layering of overlay components work seamlessly when combining multiple components. Still there may be cases where you'd like to configure
+                    the configure default values such as a custom layout where header section is fixed. In a case like this, dropdown needs to be displayed below the application header but a modal dialog should be displayed above. PrimeReact configuration
+                    offers the <i>zIndex</i> property to customize the default values for <a href="https://github.com/primefaces/primereact/issues/1924" className="layout-content-link">components categories</a>. Default values are described below and can be customized when setting up PrimeReact.</p>
+<CodeHighlight lang="js">
+{`
+import PrimeReact from 'primereact/api';
+
+PrimeReact.zIndex = {
+    modal: 1100,    // dialog, sidebar
+    overlay: 1000,  // dropdown, overlaypanel
+    menu: 1000,     // overlay menus
+    tooltip: 1100   // tooltip
+}
+`}
+</CodeHighlight>
+
+                    <h5>AppendTo</h5>
+                    <p>On the all overlay components, the panels can be mounted into its component or DOM element instance using this option. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a panel where component is located.
+                    The appendTo property of any overlay component can be used to customize it.</p>
+<CodeHighlight lang="js">
+{`
+import PrimeReact from 'primereact/api';
+
+PrimeReact.appendTo = 'self'; // Default value is null(document.body).
+`}
+</CodeHighlight>
+
+                    <h5>Locale</h5>
+                    <p>PrimeReact provides a Locale API to support i18n and l7n, visit the <Link to="/locale">Locale</Link> documentation for more information.</p>
 
                     <h5>Quickstart</h5>
                     <p>An example application based on create-react-app is available at <a href="https://github.com/primefaces/primereact-quickstart" className="layout-content-link">GitHub</a>.</p>
@@ -180,6 +203,54 @@ import { MenuItem } from 'primereact/api';
 
 					<h5>Next.js</h5>
 					<p>A sample next.js-primereact application is available as well at <a href="https://github.com/primefaces/primereact-nextjs-quickstart" className="layout-content-link">GitHub</a>.</p>
+                    <h5>Browser Support</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table browsers">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <div className="p-d-flex p-ai-center">
+                                            <img src="showcase/images/browsers/edge.svg" alt="edge" style={{width: '1.5rem'}} className="p-mr-2" />
+                                            IE / Edge
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div className="p-d-flex p-ai-center">
+                                            <img src="showcase/images/browsers/firefox.svg" alt="firefox" style={{width: '1.5rem'}} className="p-mr-2" />
+                                            Firefox
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div className="p-d-flex p-ai-center">
+                                            <img src="showcase/images/browsers/chrome.svg" alt="chrome" style={{width: '1.5rem'}} className="p-mr-2" />
+                                            Chrome
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div className="p-d-flex p-ai-center">
+                                            <img src="showcase/images/browsers/safari.svg" alt="safari" style={{width: '1.5rem'}} className="p-mr-2" />
+                                            Safari
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div className="p-d-flex p-ai-center">
+                                            <img src="showcase/images/browsers/opera.svg" alt="opera" style={{width: '1.5rem'}} className="p-mr-2" />
+                                            Opera
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>IE11, Edge</td>
+                                    <td>Last 2 versions</td>
+                                    <td>Last 2 versions</td>
+                                    <td>Last 2 versions</td>
+                                    <td>Last 2 versions</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         );

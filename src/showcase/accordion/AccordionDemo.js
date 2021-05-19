@@ -3,6 +3,7 @@ import { Accordion, AccordionTab } from '../../components/accordion/Accordion';
 import { AccordionDoc } from './AccordionDoc';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { Button } from '../../components/button/Button';
+import AppDemoActions from '../../AppDemoActions';
 import './AccordionDemo.scss';
 
 export class AccordionDemo extends Component {
@@ -41,7 +42,8 @@ export class AccordionDemo extends Component {
                     <AppInlineHeader changelogText="accordion">
                         <h1>Accordion</h1>
                         <p>Accordion groups a collection of contents in tabs.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="accordion/AccordionDemo.js" />
                 </div>
 
                 <div className="content-section implementation accordion-demo">

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 
 export class TreeDoc extends Component {
 
@@ -207,7 +207,7 @@ const TreeDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
                         <h5>Import</h5>
@@ -545,17 +545,18 @@ export const TreeTemplatingDemo = () => {
         ];
     }
 
-    const nodeTemplate = (node) => {
+    const nodeTemplate = (node, options) => {
+        let label = <b>{node.label}</b>;
+
         if (node.url) {
-            return (
-                <a href={node.url}>{node.label}</a>
-            )
+            label = <a href={node.url}>{node.label}</a>;
         }
-        else {
-            return (
-                <b>{node.label}</b>
-            )
-        }
+
+        return (
+            <span className={options.className}>
+                {label}
+            </span>
+        )
     }
 
     return (
@@ -780,6 +781,18 @@ export const TreeContextMenuDemo = () => {
                                         <td>Unique key to enable dragdrop functionality.</td>
                                     </tr>
                                     <tr>
+                                        <td>header</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>The template of header.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>footer</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>The template of footer.</td>
+                                    </tr>
+                                    <tr>
                                         <td>ariaLabel</td>
                                         <td>string</td>
                                         <td>false</td>
@@ -793,15 +806,33 @@ export const TreeContextMenuDemo = () => {
                                     </tr>
                                     <tr>
                                         <td>nodeTemplate</td>
-                                        <td>function</td>
+                                        <td>any</td>
                                         <td>false</td>
-                                        <td>Function that gets a TreeNode instance and returns the content for it.</td>
+                                        <td>Template of node element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>togglerTemplate</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Template of toggler element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>showHeader</td>
+                                        <td>boolean</td>
+                                        <td>true</td>
+                                        <td>Whether to show the header or not.</td>
                                     </tr>
                                     <tr>
                                         <td>filter</td>
                                         <td>boolean</td>
                                         <td>false</td>
                                         <td>When specified, displays an input field to filter the items.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>filterValue</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>When filtering is enabled, the value of input field.</td>
                                     </tr>
                                     <tr>
                                         <td>filterBy</td>
@@ -901,6 +932,33 @@ export const TreeContextMenuDemo = () => {
                                         <td>event.originalEvent: browser event <br />
                                 event.node: Selected node instance.</td>
                                         <td>Callback to invoke when a node is selected with a context menu.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onFilterValueChange</td>
+                                        <td>event.originalEvent: Browser event <br/>
+                                            event.value: the filtered value <br/>
+                                        </td>
+                                        <td>Callback to invoke when filter value changes.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h5>Methods</h5>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Parameters</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>filter</td>
+                                        <td>value: the filter value</td>
+                                        <td>Filters the data.</td>
                                     </tr>
                                 </tbody>
                             </table>

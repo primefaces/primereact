@@ -4,8 +4,9 @@ import { Column } from '../../components/column/Column';
 import { ColumnGroup } from '../../components/columngroup/ColumnGroup';
 import { Row } from '../../components/row/Row';
 import { TabView } from '../../components/tabview/TabView';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DataTableColGroupDemo extends Component {
 
@@ -103,6 +104,7 @@ export class DataTableColGroupDemo extends Component {
                         <h1>DataTable <span>ColumnGroup</span></h1>
                         <p>Columns can be grouped at header and footer using headerColumnGroup and footerColumnGroup components that both define an array of columns each having colspan and rowspan.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="datatable/DataTableColGroupDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -455,7 +457,7 @@ const DataTableColGroupDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'DataTableColGroupDemo', sources: this.sources })

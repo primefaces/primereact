@@ -1,16 +1,21 @@
 import * as React from 'react';
 
-interface OrderListProps {
+interface OrderListChangeParams {
+    originalEvent: React.SyntheticEvent;
+    value: any;
+}
+
+export interface OrderListProps {
     id?: string;
     value?: any[];
-    header?: any;
+    header?: React.ReactNode;
     style?: object;
     className?: string;
     listStyle?: object;
     dragdrop?: boolean;
     tabIndex?: number;
-    onChange?(e: {originalEvent: Event, value: any}): void;
-    itemTemplate?(item: any): JSX.Element | undefined;
+    onChange?(e: OrderListChangeParams): void;
+    itemTemplate?(item: any): React.ReactNode;
 }
 
-export class OrderList extends React.Component<OrderListProps,any> {}
+export declare class OrderList extends React.Component<OrderListProps, any> { }

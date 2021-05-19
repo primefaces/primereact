@@ -1,8 +1,28 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
 
-interface InputNumberProps {
+interface InputNumberValueChangeTargetOptions {
+    name: string;
+    id: string;
+    value: number;
+}
+
+interface InputNumberValueChangeParams {
+    originalEvent: React.SyntheticEvent;
+    value: number;
+    stopPropagation(): void;
+    preventDefault(): void;
+    target: InputNumberValueChangeTargetOptions;
+}
+
+interface InputNumberChangeParams {
+    originalEvent: React.SyntheticEvent;
+    value: number;
+}
+
+export interface InputNumberProps {
     value?: number;
+    inputRef?: React.Ref<HTMLInputElement>;
     format?: boolean;
     showButtons?: boolean;
     buttonLayout?: string;
@@ -43,11 +63,11 @@ interface InputNumberProps {
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
-    onValueChange?(e: {originalEvent: Event, value: any, target: {name: string, id: string, value: any}}): void;
-    onChange?(e: {originalEvent: Event, value: any}): void;
-    onBlur?(e: Event): void;
-    onFocus?(e: Event): void;
-    onKeyDown?(e: Event): void;
+    onValueChange?(e: InputNumberValueChangeParams): void;
+    onChange?(e: InputNumberChangeParams): void;
+    onFocus?(event: React.FocusEvent<HTMLInputElement>): void;
+    onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
+    onKeyDown?(event: React.KeyboardEvent<HTMLInputElement>): void;
 }
 
-export class InputNumber extends React.Component<InputNumberProps,any> {}
+export declare class InputNumber extends React.Component<InputNumberProps, any> { }

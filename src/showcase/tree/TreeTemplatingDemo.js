@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Tree } from '../../components/tree/Tree';
 import { TabView } from '../../components/tabview/TabView';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class TreeTemplatingDemo extends Component {
 
@@ -36,17 +37,18 @@ export class TreeTemplatingDemo extends Component {
         this.nodeTemplate = this.nodeTemplate.bind(this);
     }
 
-    nodeTemplate(node) {
+    nodeTemplate(node, options) {
+        let label = <b>{node.label}</b>;
+
         if (node.url) {
-            return (
-                <a href={node.url}>{node.label}</a>
-            )
+            label = <a href={node.url}>{node.label}</a>;
         }
-        else {
-            return (
-                <b>{node.label}</b>
-            )
-        }
+
+        return (
+            <span className={options.className}>
+                {label}
+            </span>
+        )
     }
 
     render() {
@@ -57,6 +59,7 @@ export class TreeTemplatingDemo extends Component {
                         <h1>Tree <span>Templating</span></h1>
                         <p>Tree nodes can be customized to display custom content.</p>
                     </AppInlineHeader>
+                    <AppDemoActions github="tree/TreeTemplatingDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -115,17 +118,18 @@ export class TreeTemplatingDemo extends Component {
         this.nodeTemplate = this.nodeTemplate.bind(this);
     }
 
-    nodeTemplate(node) {
+    nodeTemplate(node, options) {
+        let label = <b>{node.label}</b>;
+
         if (node.url) {
-            return (
-                <a href={node.url}>{node.label}</a>
-            )
+            label = <a href={node.url}>{node.label}</a>;
         }
-        else {
-            return (
-                <b>{node.label}</b>
-            )
-        }
+
+        return (
+            <span className={options.className}>
+                {label}
+            </span>
+        )
     }
 
     render() {
@@ -172,17 +176,18 @@ const TreeTemplatingDemo = () => {
         }
     ];
 
-    const nodeTemplate = (node) => {
+    const nodeTemplate = (node, options) => {
+        let label = <b>{node.label}</b>;
+
         if (node.url) {
-            return (
-                <a href={node.url}>{node.label}</a>
-            )
+            label = <a href={node.url}>{node.label}</a>;
         }
-        else {
-            return (
-                <b>{node.label}</b>
-            )
-        }
+
+        return (
+            <span className={options.className}>
+                {label}
+            </span>
+        )
     }
 
     return (
@@ -227,17 +232,18 @@ const TreeTemplatingDemo = () => {
         }
     ];
 
-    const nodeTemplate = (node) => {
+    const nodeTemplate = (node, options) => {
+        let label = <b>{node.label}</b>;
+
         if (node.url) {
-            return (
-                <a href={node.url}>{node.label}</a>
-            )
+            label = <a href={node.url}>{node.label}</a>;
         }
-        else {
-            return (
-                <b>{node.label}</b>
-            )
-        }
+
+        return (
+            <span className={options.className}>
+                {label}
+            </span>
+        )
     }
 
     return (
@@ -259,7 +265,7 @@ const TreeTemplatingDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
                         useLiveEditorTabs({ name: 'TreeTemplatingDemo', sources: this.sources })

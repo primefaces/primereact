@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { useLiveEditorTabs }from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 
 export class ListBoxDoc extends Component {
 
@@ -321,7 +321,7 @@ const ListBoxDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
     <TabView>
         <TabPanel header="Documentation">
 
@@ -549,7 +549,7 @@ const groupedCities = [
                         </tr>
                         <tr>
                             <td>optionDisabled</td>
-                            <td>boolean</td>
+                            <td>function | string</td>
                             <td>null</td>
                             <td>Property name or getter function to use as the disabled flag of an option, defaults to false when not defined.</td>
                         </tr>

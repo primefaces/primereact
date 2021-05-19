@@ -4,7 +4,7 @@ import {OrderListControls} from './OrderListControls';
 import {OrderListSubList} from './OrderListSubList';
 import DomHandler from '../utils/DomHandler';
 import ObjectUtils from '../utils/ObjectUtils';
-import classNames from 'classnames'
+import { classNames } from '../utils/ClassNames';
 
 export class OrderList extends Component {
 

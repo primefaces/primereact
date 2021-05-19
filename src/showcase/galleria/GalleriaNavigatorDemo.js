@@ -4,6 +4,7 @@ import { Galleria } from '../../components/galleria/Galleria';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class GalleriaNavigatorDemo extends Component {
 
@@ -53,7 +54,8 @@ export class GalleriaNavigatorDemo extends Component {
                     <AppInlineHeader changelogText="galleria">
                         <h1>Galleria <span>Navigator</span></h1>
                         <p>Combining item navigators, thumbnails and indicators provide various UI alternatives.</p>
-                    </AppInlineHeader>
+                    </AppInlineHeader> 
+                    <AppDemoActions github="galleria/GalleriaNavigatorDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
@@ -96,7 +98,7 @@ export class GalleriaNavigatorDemoDoc extends Component {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Source">
 <CodeHighlight lang="js">

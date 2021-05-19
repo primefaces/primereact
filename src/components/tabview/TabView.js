@@ -4,11 +4,13 @@ import { classNames } from '../utils/ClassNames';
 import UniqueComponentId from '../utils/UniqueComponentId';
 import DomHandler from '../utils/DomHandler';
 import { Ripple } from '../ripple/Ripple';
+import ObjectUtils from '../utils/ObjectUtils';
 
 export class TabPanel extends Component {
 
     static defaultProps = {
         header: null,
+        headerTemplate: null,
         leftIcon: null,
         rightIcon: null,
         disabled: false,
@@ -20,6 +22,7 @@ export class TabPanel extends Component {
 
     static propTypes = {
         header: PropTypes.any,
+        headerTemplate: PropTypes.any,
         leftIcon: PropTypes.string,
         rightIcon: PropTypes.string,
         disabled: PropTypes.bool,
@@ -53,13 +56,18 @@ export class TabView extends Component {
 
     constructor(props) {
         super(props);
+        let state = {
+            id: props.id
+        };
+
         if (!this.props.onTabChange) {
-            this.state = {
-                activeIndex: this.props.activeIndex
+            state = {
+                ...state,
+                activeIndex: props.activeIndex
             };
         }
 
-        this.id = this.props.id || UniqueComponentId();
+        this.state = state;
     }
 
     getActiveIndex() {
@@ -94,6 +102,10 @@ export class TabView extends Component {
     }
 
     componentDidMount() {
+        if (!this.state.id) {
+            this.setState({ id: UniqueComponentId() });
+        }
+
         this.updateInkBar();
     }
 
@@ -104,21 +116,46 @@ export class TabView extends Component {
     renderTabHeader(tab, index) {
         const selected = this.isSelected(index);
         const className = classNames('p-unselectable-text', {'p-tabview-selected p-highlight': selected, 'p-disabled': tab.props.disabled}, tab.props.headerClassName);
-        const id = this.id + '_header_' + index;
-        const ariaControls = this.id + '_content_' + index;
+        const id = this.state.id + '_header_' + index;
+        const ariaControls = this.state.id + '_content_' + index;
         const tabIndex = tab.props.disabled ? null : 0;
+        const leftIconElement = tab.props.leftIcon && <i className={tab.props.leftIcon}></i>;
+        const titleElement = <span className="p-tabview-title">{tab.props.header}</span>;
+        const rightIconElement = tab.props.rightIcon && <i className={tab.props.rightIcon}></i>;
+
+        let content = (
+            /* eslint-disable */
+            <a role="tab" className="p-tabview-nav-link" onClick={(event) => this.onTabHeaderClick(event, tab, index)} id={id}
+                aria-controls={ariaControls} aria-selected={selected} tabIndex={tabIndex}>
+                {leftIconElement}
+                {titleElement}
+                {rightIconElement}
+                <Ripple />
+            </a>
+            /* eslint-enable */
+        );
+
+        if (tab.props.headerTemplate) {
+            const defaultContentOptions = {
+                className: 'p-tabview-nav-link',
+                titleClassName: 'p-tabview-title',
+                onClick: (event) => this.onTabHeaderClick(event, tab, index),
+                leftIconElement,
+                titleElement,
+                rightIconElement,
+                element: content,
+                props: this.props,
+                index,
+                selected,
+                ariaControls
+            };
+
+            content = ObjectUtils.getJSXElement(tab.props.headerTemplate, defaultContentOptions);
+        }
 
         return (
             <li ref={(el) => this[`tab_${index}`] = el} className={className} style={tab.props.headerStyle} role="presentation">
-                {/* eslint-disable */}
-                <a role="tab" className="p-tabview-nav-link" onClick={(event) => this.onTabHeaderClick(event, tab, index)} id={id}
-                    aria-controls={ariaControls} aria-selected={selected} tabIndex={tabIndex}>
-                    {tab.props.leftIcon && <i className={tab.props.leftIcon}></i>}
-                    <span className="p-tabview-title">{tab.props.header}</span>
-                    {tab.props.rightIcon && <i className={tab.props.rightIcon}></i>}
-                    <Ripple />
-                </a>
-                {/* eslint-enable */}
+                {content}
             </li>
         );
     }
@@ -159,8 +196,8 @@ export class TabView extends Component {
     createContent(tab, index) {
         const selected = this.isSelected(index);
         const className = classNames(tab.props.contentClassName, 'p-tabview-panel', {'p-hidden': !selected});
-        const id = this.id + '_content_' + index;
-        const ariaLabelledBy = this.id + '_header_' + index;
+        const id = this.state.id + '_content_' + index;
+        const ariaLabelledBy = this.state.id + '_header_' + index;
 
         return (
             <div id={id} aria-labelledby={ariaLabelledBy} aria-hidden={!selected} className={className}

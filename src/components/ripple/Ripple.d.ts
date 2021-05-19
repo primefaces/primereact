@@ -1,7 +1,5 @@
 import * as React from 'react';
 
-interface RippleProps {
+export interface RippleProps {}
 
-}
-
-export class Ripple extends React.Component<RippleProps,any> {}
+export declare class Ripple extends React.Component<RippleProps, any> { }
