@@ -40,7 +40,7 @@ export interface CalendarProps {
     id?: string;
     inputRef?: React.Ref<HTMLInputElement>;
     name?: string;
-    value?: Date | Date[];
+    value?: Date | Date[]|undefined | null;;
     viewDate?: Date;
     style?: object;
     className?: string;
