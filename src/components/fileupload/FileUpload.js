@@ -468,7 +468,7 @@ export class FileUpload extends Component {
 
     renderFile(file, index) {
         let preview = this.isImage(file) ? <div><img alt={file.name} role="presentation" src={file.objectURL} width={this.props.previewWidth} /></div> : null;
-        let fileName = <div>{file.name}</div>;
+        let fileName = <div className="p-fileupload-filename">{file.name}</div>;
         let size = <div>{this.formatSize(file.size)}</div>;
         let removeButton = <div><Button type="button" icon="pi pi-times" onClick={(e) => this.remove(e, index)} /></div>
         let content = (

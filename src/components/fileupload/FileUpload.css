@@ -36,6 +36,10 @@
     display: none;
 }
 
+.p-fileupload-filename {
+    word-break: break-all;
+}
+
 .p-fluid .p-fileupload .p-button {
     width: auto;
 }
