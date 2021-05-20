@@ -63,6 +63,12 @@ interface DataTableColumnResizeEndParams {
     delta: number;
 }
 
+interface DataTableColumnResizerClickParams {
+    originalEvent: React.MouseEvent<HTMLElement>;
+    element: HTMLElement;
+    column: ColumnProps;
+}
+
 interface DataTableSortParams {
     sortField: string;
     sortOrder: DataTableSortOrderType;
@@ -217,6 +223,8 @@ export interface DataTableProps {
     rowGroupHeaderTemplate?(data: any, index: number): React.ReactNode;
     rowGroupFooterTemplate?(data: any, index: number): React.ReactNode;
     onColumnResizeEnd?(e: DataTableColumnResizeEndParams): void;
+    onColumnResizerClick?(e: DataTableColumnResizerClickParams): void;
+    onColumnResizerDoubleClick?(e: DataTableColumnResizerClickParams): void;
     onSort?(e: DataTableSortParams): void;
     onPage?(e: DataTablePageParams): void;
     onFilter?(e: DataTableFilterParams): void;

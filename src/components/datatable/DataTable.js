@@ -96,6 +96,8 @@ export class DataTable extends Component {
         showSelectionElement: null,
         showRowReorderElement: null,
         onColumnResizeEnd: null,
+        onColumnResizerClick: null,
+        onColumnResizerDoubleClick: null,
         onSort: null,
         onPage: null,
         onFilter: null,
@@ -208,6 +210,8 @@ export class DataTable extends Component {
         showSelectionElement: PropTypes.func,
         showRowReorderElement: PropTypes.func,
         onColumnResizeEnd: PropTypes.func,
+        onColumnResizerClick: PropTypes.func,
+        onColumnResizerDoubleClick: PropTypes.func,
         onSort: PropTypes.func,
         onPage: PropTypes.func,
         onFilter: PropTypes.func,
@@ -1360,7 +1364,8 @@ export class DataTable extends Component {
 
     createTableHeader(value, columns, columnGroup) {
         return <TableHeader value={value} sortMode={this.props.sortMode} onSort={this.onSort} sortField={this.getSortField()} sortOrder={this.getSortOrder()} multiSortMeta={this.getMultiSortMeta()} columnGroup={columnGroup}
-                            resizableColumns={this.props.resizableColumns} onColumnResizeStart={this.onColumnResizeStart} onFilter={this.onFilter} filterDelay={this.props.filterDelay}
+                            resizableColumns={this.props.resizableColumns} onColumnResizeStart={this.onColumnResizeStart} onColumnResizerClick={this.props.onColumnResizerClick} onColumnResizerDoubleClick={this.props.onColumnResizerDoubleClick} 
+                            onFilter={this.onFilter} filterDelay={this.props.filterDelay}
                             onHeaderCheckboxClick={this.onHeaderCheckboxClick} headerCheckboxSelected={this.isAllSelected()}
                             reorderableColumns={this.props.reorderableColumns} onColumnDragStart={this.onColumnDragStart} filters={this.getFilters()}
                             onColumnDragOver={this.onColumnDragOver} onColumnDragLeave={this.onColumnDragLeave} onColumnDrop={this.onColumnDrop} tabIndex={this.props.tabIndex}>

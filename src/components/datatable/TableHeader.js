@@ -18,8 +18,8 @@ export class TableHeader extends Component {
         return React.Children.map(columns, (column, i) => {
             return <HeaderCell key={column.props.columnKey||column.props.field||i} allSortableDisabled={this.isAllSortableDisabled()} onSortableChange={this.onSortableChange} columnProps={column.props} value={this.props.value} onSort={this.props.onSort}
                         sortableDisabledFields={this.state.sortableDisabledFields} sortMode={this.props.sortMode} sortField={this.props.sortField} sortOrder={this.props.sortOrder} multiSortMeta={this.props.multiSortMeta}
-                        resizableColumns={this.props.resizableColumns} onColumnResizeStart={this.props.onColumnResizeStart} filterDelay={this.props.filterDelay}
-                        onFilter={this.props.onFilter} renderOptions={renderOptions} onHeaderCheckboxClick={this.props.onHeaderCheckboxClick} headerCheckboxSelected={this.props.headerCheckboxSelected}
+                        resizableColumns={this.props.resizableColumns} onColumnResizeStart={this.props.onColumnResizeStart} onColumnResizerClick={this.props.onColumnResizerClick} onColumnResizerDoubleClick={this.props.onColumnResizerDoubleClick} 
+                        filterDelay={this.props.filterDelay} onFilter={this.props.onFilter} renderOptions={renderOptions} onHeaderCheckboxClick={this.props.onHeaderCheckboxClick} headerCheckboxSelected={this.props.headerCheckboxSelected}
                         reorderableColumns={this.props.reorderableColumns} onDragStart={this.props.onColumnDragStart} onDragOver={this.props.onColumnDragOver}
                         onDragLeave={this.props.onColumnDragLeave} onDrop={this.props.onColumnDrop} filters={this.props.filters} tabIndex={this.props.tabIndex} />;
         });

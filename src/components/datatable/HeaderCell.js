@@ -18,6 +18,8 @@ export class HeaderCell extends Component {
         this.onFilterChange = this.onFilterChange.bind(this);
         this.onMouseDown = this.onMouseDown.bind(this);
         this.onResizerMouseDown = this.onResizerMouseDown.bind(this);
+        this.onResizerClick = this.onResizerClick.bind(this);
+        this.onResizerDoubleClick = this.onResizerDoubleClick.bind(this);
         this.onKeyDown = this.onKeyDown.bind(this);
     }
 
@@ -64,6 +66,30 @@ export class HeaderCell extends Component {
     onResizerMouseDown(event) {
         if(this.props.resizableColumns && this.props.onColumnResizeStart) {
             this.props.onColumnResizeStart({
+                originalEvent: event,
+                columnEl: event.target.parentElement,
+                columnProps: this.props.columnProps
+            });
+
+            event.preventDefault();
+        }
+    }
+
+    onResizerClick(event) {
+        if(this.props.resizableColumns && this.props.onColumnResizerClick) {
+            this.props.onColumnResizerClick({
+                originalEvent: event,
+                columnEl: event.target.parentElement,
+                columnProps: this.props.columnProps
+            });
+
+            event.preventDefault();
+        }
+    }
+
+    onResizerDoubleClick(event) {
+        if(this.props.resizableColumns && this.props.onColumnResizerDoubleClick) {
+            this.props.onColumnResizerDoubleClick({
                 originalEvent: event,
                 columnEl: event.target.parentElement,
                 columnProps: this.props.columnProps
@@ -194,7 +220,7 @@ export class HeaderCell extends Component {
             let singleSorted = this.isSingleSorted();
             let multipleSorted = multiSortMetaData !== null;
             let sortOrder = 0;
-            let resizer = this.props.resizableColumns && <span className="p-column-resizer p-clickable" onMouseDown={this.onResizerMouseDown}></span>;
+            let resizer = this.props.resizableColumns && <span className="p-column-resizer p-clickable" onMouseDown={this.onResizerMouseDown} onClick={this.onResizerClick} onDoubleClick={this.onResizerDoubleClick}></span>;
 
             if(singleSorted)
                 sortOrder = this.props.sortOrder;
