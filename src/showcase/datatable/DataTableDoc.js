@@ -3066,6 +3066,20 @@ const bodyTemplate = (data, props) => {
                             <td>Callback to invoke when a column is resized.</td>
                         </tr>
                         <tr>
+                            <td>onColumnResizerClick</td>
+                            <td>event.originalEvent: Browser event <br />
+                                event.element: DOM element of the column.<br />
+                                event.column: Properties of the column.</td>
+                            <td>Callback to invoke when a resizer element is clicked.</td>
+                        </tr>
+                        <tr>
+                            <td>onColumnResizerDoubleClick</td>
+                            <td>event.originalEvent: Browser event <br />
+                                event.element: DOM element of the column.<br />
+                                event.column: Properties of the column.</td>
+                            <td>Callback to invoke when a resizer element is double clicked.</td>
+                        </tr>
+                        <tr>
                             <td>onSort</td>
                             <td>event.sortField: Field to sort against. <br />
                                 event.sortOrder: Sort order as integer. <br />
