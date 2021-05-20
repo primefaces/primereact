@@ -29,14 +29,14 @@ export class DataTableStripedDemo extends Component {
                 <div className="content-section introduction">
                     <AppInlineHeader changelogText="dataTable">
                         <h1>DataTable <span>Striped Rows</span></h1>
-                        <p>Adding <i>p-datatable-striped</i> displays striped rows.</p>
+                        <p>Adding <i>stripedRows</i> displays rows with alternating colors.</p>
                     </AppInlineHeader>
                     <AppDemoActions github="datatable/DataTableStripedDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
                     <div className="card">
-                        <DataTable value={this.state.products} className="p-datatable-striped">
+                        <DataTable value={this.state.products} stripedRows>
                             <Column field="code" header="Code"></Column>
                             <Column field="name" header="Name"></Column>
                             <Column field="category" header="Category"></Column>
@@ -85,7 +85,7 @@ export class DataTableStripedDemo extends Component {
         return (
             <div>
                 <div className="card">
-                    <DataTable value={this.state.products} className="p-datatable-striped">
+                    <DataTable value={this.state.products} stripedRows>
                         <Column field="code" header="Code"></Column>
                         <Column field="name" header="Name"></Column>
                         <Column field="category" header="Category"></Column>
@@ -117,7 +117,7 @@ const DataTableStripedDemo = () => {
     return (
         <div>
             <div className="card">
-                <DataTable value={products} className="p-datatable-striped">
+                <DataTable value={products} stripedRows>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -148,7 +148,7 @@ const DataTableStripedDemo = () => {
     return (
         <div>
             <div className="card">
-                <DataTable value={products} className="p-datatable-striped">
+                <DataTable value={products} stripedRows>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>

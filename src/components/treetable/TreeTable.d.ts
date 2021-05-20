@@ -144,6 +144,8 @@ export interface TreeTableProps {
     filterMode?: TreeTableFilterModeType;
     filterDelay?: number;
     filterLocale?: string;
+    showGridlines?: boolean;
+    stripedRows?: boolean;
     rowClassName?(data: TreeNode): object;
     onFilter?(filters: TreeTableFilterMeta[]): void;
     onExpand?(e: TreeTableEventParams): void;

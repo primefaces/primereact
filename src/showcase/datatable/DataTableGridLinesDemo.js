@@ -29,14 +29,14 @@ export class DataTableGridLinesDemo extends Component {
                 <div className="content-section introduction">
                     <AppInlineHeader changelogText="dataTable">
                         <h1>DataTable <span>GridLines</span></h1>
-                        <p>Adding <b>p-datatable-gridlines</b> displays borders between cells. Note: Some themes may always display gridlines by design.</p>
+                        <p>Enabling <b>showGridlines</b> displays borders between cells. Note: Some themes may always display gridlines by design.</p>
                     </AppInlineHeader>
                     <AppDemoActions github="datatable/DataTableGridLinesDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
                     <div className="card">
-                        <DataTable value={this.state.products} header="Header" footer="Footer" className="p-datatable-gridlines">
+                        <DataTable value={this.state.products} header="Header" footer="Footer" showGridlines>
                             <Column field="code" header="Code"></Column>
                             <Column field="name" header="Name"></Column>
                             <Column field="category" header="Category"></Column>
@@ -85,7 +85,7 @@ export class DataTableGridLinesDemo extends Component {
         return (
             <div>
                 <div className="card">
-                    <DataTable value={this.state.products} header="Header" footer="Footer" className="p-datatable-gridlines">
+                    <DataTable value={this.state.products} header="Header" footer="Footer" showGridlines>
                         <Column field="code" header="Code"></Column>
                         <Column field="name" header="Name"></Column>
                         <Column field="category" header="Category"></Column>
@@ -117,7 +117,7 @@ const DataTableGridLinesDemo = () => {
     return (
         <div>
             <div className="card">
-                <DataTable value={products} header="Header" footer="Footer" className="p-datatable-gridlines">
+                <DataTable value={products} header="Header" footer="Footer" showGridlines>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -148,7 +148,7 @@ const DataTableGridLinesDemo = () => {
     return (
         <div>
             <div className="card">
-                <DataTable value={products} header="Header" footer="Footer" className="p-datatable-gridlines">
+                <DataTable value={products} header="Header" footer="Footer" showGridlines>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>

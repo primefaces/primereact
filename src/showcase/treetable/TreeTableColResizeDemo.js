@@ -36,7 +36,7 @@ export class TreeTableColResizeDemo extends Component {
                 <div className="content-section implementation">
                     <div className="card">
                         <h5>Fit Mode</h5>
-                        <TreeTable value={this.state.nodes} resizableColumns columnResizeMode="fit">
+                        <TreeTable value={this.state.nodes} resizableColumns columnResizeMode="fit" showGridlines>
                             <Column field="name" header="Name" expander></Column>
                             <Column field="size" header="Size"></Column>
                             <Column field="type" header="Type"></Column>
@@ -45,7 +45,7 @@ export class TreeTableColResizeDemo extends Component {
 
                     <div className="card">
                         <h5>Expand Mode</h5>
-                        <TreeTable value={this.state.nodes} resizableColumns columnResizeMode="expand">
+                        <TreeTable value={this.state.nodes} resizableColumns columnResizeMode="expand" showGridlines>
                             <Column field="name" header="Name" expander></Column>
                             <Column field="size" header="Size"></Column>
                             <Column field="type" header="Type"></Column>
@@ -54,7 +54,7 @@ export class TreeTableColResizeDemo extends Component {
 
                     <div className="card">
                         <h5>Scrollable</h5>
-                        <TreeTable value={this.state.nodes} resizableColumns scrollable scrollHeight="200px">
+                        <TreeTable value={this.state.nodes} resizableColumns scrollable scrollHeight="200px" showGridlines>
                             <Column field="name" header="Name" expander></Column>
                             <Column field="size" header="Size"></Column>
                             <Column field="type" header="Type"></Column>
@@ -63,7 +63,7 @@ export class TreeTableColResizeDemo extends Component {
 
                     <div className="card">
                         <h5>Scrollable with Variable Width</h5>
-                        <TreeTable value={this.state.nodes} resizableColumns scrollable scrollHeight="200px">
+                        <TreeTable value={this.state.nodes} resizableColumns scrollable scrollHeight="200px" showGridlines>
                             <Column field="name" header="Name" expander style={{ width: '50%' }}></Column>
                             <Column field="size" header="Size" style={{ width: '30%' }}></Column>
                             <Column field="type" header="Type" style={{ width: '20%' }}></Column>
@@ -110,7 +110,7 @@ export class TreeTableColResizeDemo extends Component {
             <div>
                 <div className="card">
                     <h5>Fit Mode</h5>
-                    <TreeTable value={this.state.nodes} resizableColumns columnResizeMode="fit">
+                    <TreeTable value={this.state.nodes} resizableColumns columnResizeMode="fit" showGridlines>
                         <Column field="name" header="Name" expander></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
@@ -119,7 +119,7 @@ export class TreeTableColResizeDemo extends Component {
 
                 <div className="card">
                     <h5>Expand Mode</h5>
-                    <TreeTable value={this.state.nodes} resizableColumns columnResizeMode="expand">
+                    <TreeTable value={this.state.nodes} resizableColumns columnResizeMode="expand" showGridlines>
                         <Column field="name" header="Name" expander></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
@@ -128,7 +128,7 @@ export class TreeTableColResizeDemo extends Component {
 
                 <div className="card">
                     <h5>Scrollable</h5>
-                    <TreeTable value={this.state.nodes} resizableColumns scrollable scrollHeight="200px">
+                    <TreeTable value={this.state.nodes} resizableColumns scrollable scrollHeight="200px" showGridlines>
                         <Column field="name" header="Name" expander></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
@@ -137,7 +137,7 @@ export class TreeTableColResizeDemo extends Component {
 
                 <div className="card">
                     <h5>Scrollable with Variable Width</h5>
-                    <TreeTable value={this.state.nodes} resizableColumns scrollable scrollHeight="200px">
+                    <TreeTable value={this.state.nodes} resizableColumns scrollable scrollHeight="200px" showGridlines>
                         <Column field="name" header="Name" expander style={{ width: '50%' }}></Column>
                         <Column field="size" header="Size" style={{ width: '30%' }}></Column>
                         <Column field="type" header="Type" style={{ width: '20%' }}></Column>
@@ -170,7 +170,7 @@ const TreeTableColResizeDemo = () => {
             <div>
                 <div className="card">
                     <h5>Fit Mode</h5>
-                    <TreeTable value={nodes} resizableColumns columnResizeMode="fit">
+                    <TreeTable value={nodes} resizableColumns columnResizeMode="fit" showGridlines>
                         <Column field="name" header="Name" expander></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
@@ -179,7 +179,7 @@ const TreeTableColResizeDemo = () => {
 
                 <div className="card">
                     <h5>Expand Mode</h5>
-                    <TreeTable value={nodes} resizableColumns columnResizeMode="expand">
+                    <TreeTable value={nodes} resizableColumns columnResizeMode="expand" showGridlines>
                         <Column field="name" header="Name" expander></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
@@ -188,7 +188,7 @@ const TreeTableColResizeDemo = () => {
 
                 <div className="card">
                     <h5>Scrollable</h5>
-                    <TreeTable value={nodes} resizableColumns scrollable scrollHeight="200px">
+                    <TreeTable value={nodes} resizableColumns scrollable scrollHeight="200px" showGridlines>
                         <Column field="name" header="Name" expander></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
@@ -197,7 +197,7 @@ const TreeTableColResizeDemo = () => {
 
                 <div className="card">
                     <h5>Scrollable with Variable Width</h5>
-                    <TreeTable value={nodes} resizableColumns scrollable scrollHeight="200px">
+                    <TreeTable value={nodes} resizableColumns scrollable scrollHeight="200px" showGridlines>
                         <Column field="name" header="Name" expander style={{ width: '50%' }}></Column>
                         <Column field="size" header="Size" style={{ width: '30%' }}></Column>
                         <Column field="type" header="Type" style={{ width: '20%' }}></Column>
@@ -228,28 +228,28 @@ const TreeTableColResizeDemo = () => {
     return (
         <div>
             <h3>Fit Mode</h3>
-            <TreeTable value={nodes} resizableColumns columnResizeMode="fit">
+            <TreeTable value={nodes} resizableColumns columnResizeMode="fit" showGridlines>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
                 <Column field="type" header="Type"></Column>
             </TreeTable>
 
             <h3>Expand Mode</h3>
-            <TreeTable value={nodes} resizableColumns columnResizeMode="expand">
+            <TreeTable value={nodes} resizableColumns columnResizeMode="expand" showGridlines>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
                 <Column field="type" header="Type"></Column>
             </TreeTable>
 
             <h3>Scrollable</h3>
-            <TreeTable value={nodes} resizableColumns scrollable scrollHeight="200px">
+            <TreeTable value={nodes} resizableColumns scrollable scrollHeight="200px" showGridlines>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
                 <Column field="type" header="Type"></Column>
             </TreeTable>
 
             <h3>Scrollable with Variable Width</h3>
-            <TreeTable value={nodes} resizableColumns scrollable scrollHeight="200px">
+            <TreeTable value={nodes} resizableColumns scrollable scrollHeight="200px" showGridlines>
                 <Column field="name" header="Name" expander style={{width:'50%'}}></Column>
                 <Column field="size" header="Size" style={{width:'30%'}}></Column>
                 <Column field="type" header="Type" style={{width:'20%'}}></Column>

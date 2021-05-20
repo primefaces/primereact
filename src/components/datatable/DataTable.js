@@ -93,6 +93,8 @@ export class DataTable extends Component {
         editingRows: null,
         expandableRowGroups: false,
         rowHover: false,
+        showGridlines: false,
+        stripedRows: false,
         showSelectionElement: null,
         showRowReorderElement: null,
         onColumnResizeEnd: null,
@@ -207,6 +209,8 @@ export class DataTable extends Component {
         editingRows: PropTypes.oneOfType([PropTypes.array,PropTypes.object]),
         expandableRowGroups: PropTypes.bool,
         rowHover: PropTypes.bool,
+        showGridlines: PropTypes.bool,
+        stripedRows: PropTypes.bool,
         showSelectionElement: PropTypes.func,
         showRowReorderElement: PropTypes.func,
         onColumnResizeEnd: PropTypes.func,
@@ -1364,7 +1368,7 @@ export class DataTable extends Component {
 
     createTableHeader(value, columns, columnGroup) {
         return <TableHeader value={value} sortMode={this.props.sortMode} onSort={this.onSort} sortField={this.getSortField()} sortOrder={this.getSortOrder()} multiSortMeta={this.getMultiSortMeta()} columnGroup={columnGroup}
-                            resizableColumns={this.props.resizableColumns} onColumnResizeStart={this.onColumnResizeStart} onColumnResizerClick={this.props.onColumnResizerClick} onColumnResizerDoubleClick={this.props.onColumnResizerDoubleClick} 
+                            resizableColumns={this.props.resizableColumns} onColumnResizeStart={this.onColumnResizeStart} onColumnResizerClick={this.props.onColumnResizerClick} onColumnResizerDoubleClick={this.props.onColumnResizerDoubleClick}
                             onFilter={this.onFilter} filterDelay={this.props.filterDelay}
                             onHeaderCheckboxClick={this.onHeaderCheckboxClick} headerCheckboxSelected={this.isAllSelected()}
                             reorderableColumns={this.props.reorderableColumns} onColumnDragStart={this.onColumnDragStart} filters={this.getFilters()}
@@ -1541,6 +1545,7 @@ export class DataTable extends Component {
         let className = classNames('p-datatable p-component', {
                         'p-datatable-resizable': this.props.resizableColumns, 'p-datatable-resizable-fit': this.props.resizableColumns && this.props.columnResizeMode === 'fit',
                         'p-datatable-scrollable': this.props.scrollable, 'p-datatable-virtual-scrollable': this.props.virtualScroll,
+                        'p-datatable-striped': this.props.stripedRows, 'p-datatable-gridlines': this.props.showGridlines,
                         'p-datatable-auto-layout': this.props.autoLayout, 'p-datatable-hoverable-rows': this.props.rowHover || this.props.selectionMode || selectionModeInColumn}, this.props.className);
         let paginatorTop = this.props.paginator && this.props.paginatorPosition !== 'bottom' && this.createPaginator('top', totalRecords);
         let paginatorBottom = this.props.paginator && this.props.paginatorPosition !== 'top' && this.createPaginator('bottom', totalRecords);

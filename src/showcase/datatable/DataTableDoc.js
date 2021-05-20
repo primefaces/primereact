@@ -3000,6 +3000,18 @@ const bodyTemplate = (data, props) => {
                             <td>When enabled, background of the rows change on hover..</td>
                         </tr>
                         <tr>
+                            <td>showGridlines</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>Whether to show grid lines between cells.</td>
+                        </tr>
+                        <tr>
+                            <td>stripedRows</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>Whether to displays rows with alternating colors.</td>
+                        </tr>
+                        <tr>
                             <td>showSelectionElement</td>
                             <td>function</td>
                             <td>null</td>

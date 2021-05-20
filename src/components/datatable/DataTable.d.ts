@@ -213,6 +213,8 @@ export interface DataTableProps {
     editingRows?: any[] | DataTableEditingRows;
     expandableRowGroups?: boolean;
     rowHover?: boolean;
+    showGridlines?: boolean;
+    stripedRows?: boolean;
     showSelectionElement?(data: any): boolean | undefined | null;
     showRowReorderElement?(data: any): boolean | undefined | null;
     onSelectionChange?(e: DataTableSelectionChangeParams): void;

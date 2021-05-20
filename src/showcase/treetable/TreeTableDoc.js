@@ -2366,6 +2366,18 @@ export const TreeTableResponsiveDemo = () => {
                                         <td>No records found</td>
                                         <td>Text to display when there is no data.</td>
                                     </tr>
+                                    <tr>
+                                        <td>showGridlines</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>Whether to show grid lines between cells.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>stripedRows</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>Whether to displays rows with alternating colors.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
