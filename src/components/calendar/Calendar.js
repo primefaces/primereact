@@ -777,7 +777,7 @@ export class Calendar extends Component {
     }
 
     incrementHour(event) {
-        const currentTime = (this.props.value && this.props.value instanceof Date) ? this.props.value : this.getViewDate();
+        const currentTime = this.getCurrentDateTime();
         const currentHour = currentTime.getHours();
         let newHour = currentHour + this.props.stepHour;
         newHour = (newHour >= 24) ? (newHour - 24) : newHour;
@@ -824,7 +824,7 @@ export class Calendar extends Component {
     }
 
     decrementHour(event) {
-        const currentTime = (this.props.value && this.props.value instanceof Date) ? this.props.value : this.getViewDate();
+        const currentTime = this.getCurrentDateTime();
         const currentHour = currentTime.getHours();
         let newHour = currentHour - this.props.stepHour;
         newHour = (newHour < 0) ? (newHour + 24) : newHour;
@@ -870,7 +870,7 @@ export class Calendar extends Component {
     }
 
     incrementMinute(event) {
-        const currentTime = (this.props.value && this.props.value instanceof Date) ? this.props.value : this.getViewDate();
+        const currentTime = this.getCurrentDateTime();
         const currentMinute = currentTime.getMinutes();
         let newMinute = currentMinute + this.props.stepMinute;
         newMinute = (newMinute > 59) ? (newMinute - 60) : newMinute;
@@ -898,7 +898,7 @@ export class Calendar extends Component {
     }
 
     decrementMinute(event) {
-        const currentTime = (this.props.value && this.props.value instanceof Date) ? this.props.value : this.getViewDate();
+        const currentTime = this.getCurrentDateTime();
         const currentMinute = currentTime.getMinutes();
         let newMinute = currentMinute - this.props.stepMinute;
         newMinute = (newMinute < 0) ? (newMinute + 60) : newMinute;
@@ -926,7 +926,7 @@ export class Calendar extends Component {
     }
 
     incrementSecond(event) {
-        const currentTime = (this.props.value && this.props.value instanceof Date) ? this.props.value : this.getViewDate();
+        const currentTime = this.getCurrentDateTime();
         const currentSecond = currentTime.getSeconds();
         let newSecond = currentSecond + this.props.stepSecond;
         newSecond = (newSecond > 59) ? (newSecond - 60) : newSecond;
@@ -949,7 +949,7 @@ export class Calendar extends Component {
     }
 
     decrementSecond(event) {
-        const currentTime = (this.props.value && this.props.value instanceof Date) ? this.props.value : this.getViewDate();
+        const currentTime = this.getCurrentDateTime();
         const currentSecond = currentTime.getSeconds();
         let newSecond = currentSecond - this.props.stepSecond;
         newSecond = (newSecond < 0) ? (newSecond + 60) : newSecond;
@@ -972,7 +972,7 @@ export class Calendar extends Component {
     }
 
     incrementMilliSecond(event) {
-        const currentTime = (this.props.value && this.props.value instanceof Date) ? this.props.value : this.getViewDate();
+        const currentTime = this.getCurrentDateTime();
         const currentMillisecond = currentTime.getMilliseconds();
         let newMillisecond = currentMillisecond + this.props.stepMillisec;
         newMillisecond = (newMillisecond > 999) ? (newMillisecond - 1000) : newMillisecond;
@@ -985,7 +985,7 @@ export class Calendar extends Component {
     }
 
     decrementMilliSecond(event) {
-        const currentTime = (this.props.value && this.props.value instanceof Date) ? this.props.value : this.getViewDate();
+        const currentTime = this.getCurrentDateTime();
         const currentMillisecond = currentTime.getMilliseconds();
         let newMillisecond = currentMillisecond - this.props.stepMillisec;
         newMillisecond = (newMillisecond < 0) ? (newMillisecond + 999) : newMillisecond;
@@ -998,7 +998,7 @@ export class Calendar extends Component {
     }
 
     toggleAmPm(event) {
-        const currentTime = (this.props.value && this.props.value instanceof Date) ? this.props.value : this.getViewDate();
+        const currentTime = this.getCurrentDateTime();
         const currentHour = currentTime.getHours();
         const newHour = (currentHour >= 12) ? currentHour - 12 : currentHour + 12;
 
@@ -1008,6 +1008,27 @@ export class Calendar extends Component {
 
     getViewDate() {
         return this.props.onViewDateChange ? this.props.viewDate : this.state.viewDate;
+    }
+
+    getCurrentDateTime() {
+        if (this.isSingleSelection()) {
+            return (this.props.value && this.props.value instanceof Date) ? this.props.value : this.getViewDate();
+        }
+        else if (this.isMultipleSelection()) {
+            if (this.props.value && this.props.value.length) {
+                return this.props.value[this.props.value.length - 1];
+            }
+        }
+        else if (this.isRangeSelection()) {
+            if (this.props.value && this.props.value.length) {
+                let startDate = this.props.value[0];
+                let endDate = this.props.value[1];
+
+                return endDate || startDate;
+            }
+        }
+
+        return new Date();
     }
 
     isValidDate(date) {
@@ -1130,12 +1151,35 @@ export class Calendar extends Component {
     }
 
     updateTime(event, hour, minute, second, millisecond) {
-        let newDateTime = (this.props.value && this.props.value instanceof Date) ? new Date(this.props.value) : new Date();
+        let newDateTime = this.getCurrentDateTime();
 
         newDateTime.setHours(hour);
         newDateTime.setMinutes(minute);
         newDateTime.setSeconds(second);
         newDateTime.setMilliseconds(millisecond);
+
+        if (this.isMultipleSelection()) {
+            if (this.props.value && this.props.value.length) {
+                let value = [...this.props.value];
+                value[value.length - 1] = newDateTime;
+
+                newDateTime = value;
+            }
+            else {
+                newDateTime = [newDateTime];
+            }
+        }
+        else if (this.isRangeSelection()) {
+            if (this.props.value && this.props.value.length) {
+                let startDate = this.props.value[0];
+                let endDate = this.props.value[1];
+
+                newDateTime = endDate ? [startDate, newDateTime] : [newDateTime, null];
+            }
+            else {
+                newDateTime = [newDateTime, null];
+            }
+        }
 
         this.updateModel(event, newDateTime);
 
@@ -1430,7 +1474,7 @@ export class Calendar extends Component {
                 ({ hours, minutes, seconds, milliseconds } = timeMeta);
             }
             else {
-                let time = (this.props.value && this.props.value instanceof Date) ? this.props.value : new Date();
+                let time = this.getCurrentDateTime();
                 [hours, minutes, seconds, milliseconds] = [time.getHours(), time.getMinutes(), time.getSeconds(), time.getMilliseconds()];
             }
 
@@ -2786,7 +2830,7 @@ export class Calendar extends Component {
     }
 
     renderHourPicker() {
-        let currentTime = (this.props.value && this.props.value instanceof Date) ? this.props.value : this.getViewDate();
+        let currentTime = this.getCurrentDateTime();
         let hour = currentTime.getHours();
 
         if (this.props.hourFormat === '12') {
@@ -2816,7 +2860,7 @@ export class Calendar extends Component {
     }
 
     renderMinutePicker() {
-        let currentTime = (this.props.value && this.props.value instanceof Date) ? this.props.value : this.getViewDate();
+        let currentTime = this.getCurrentDateTime();
         let minute = currentTime.getMinutes();
         let minuteDisplay = minute < 10 ? '0' + minute : minute;
 
@@ -2839,7 +2883,7 @@ export class Calendar extends Component {
 
     renderSecondPicker() {
         if (this.props.showSeconds) {
-            let currentTime = (this.props.value && this.props.value instanceof Date) ? this.props.value : this.getViewDate();
+            let currentTime = this.getCurrentDateTime();
             let second = currentTime.getSeconds();
             let secondDisplay = second < 10 ? '0' + second : second;
 
@@ -2865,7 +2909,7 @@ export class Calendar extends Component {
 
     renderMiliSecondPicker() {
         if (this.props.showMillisec) {
-            let currentTime = (this.props.value && this.props.value instanceof Date) ? this.props.value : this.getViewDate();
+            let currentTime = this.getCurrentDateTime();
             let millisecond = currentTime.getMilliseconds();
             let millisecondDisplay = millisecond < 100 ? (millisecond < 10 ? '00' : '0') + millisecond : millisecond;
 
@@ -2891,7 +2935,7 @@ export class Calendar extends Component {
 
     renderAmPmPicker() {
         if (this.props.hourFormat === '12') {
-            let currentTime = (this.props.value && this.props.value instanceof Date) ? this.props.value : this.getViewDate();
+            let currentTime = this.getCurrentDateTime();
             let hour = currentTime.getHours();
             let display = hour > 11 ? 'PM' : 'AM';
 
