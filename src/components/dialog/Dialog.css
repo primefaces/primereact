@@ -46,6 +46,7 @@
 .p-dialog .p-dialog-header-icons {
     display: flex;
     align-items: center;
+    align-self: flex-start;
     flex-shrink: 0;
 }
 
