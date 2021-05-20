@@ -11,7 +11,7 @@ interface CalendarChangeTargetOptions {
 
 interface CalendarChangeParams {
     originalEvent: React.SyntheticEvent;
-    value: Date | Date[] | undefined | null;
+    value: Date | Date[] | undefined;
     stopPropagation(): void;
     preventDefault(): void;
     target: CalendarChangeTargetOptions;
