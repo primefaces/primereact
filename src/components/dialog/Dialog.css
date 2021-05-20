@@ -36,7 +36,6 @@
 .p-dialog-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     flex-shrink: 0;
 }
 
@@ -47,6 +46,7 @@
 .p-dialog .p-dialog-header-icons {
     display: flex;
     align-items: center;
+    flex-shrink: 0;
 }
 
 .p-dialog .p-dialog-header-icon {
@@ -55,6 +55,10 @@
     justify-content: center;
     overflow: hidden;
     position: relative;
+}
+
+.p-dialog .p-dialog-title {
+    flex-grow: 1;
 }
 
 /* Fluid */

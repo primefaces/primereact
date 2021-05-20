@@ -589,7 +589,7 @@ export class Dialog extends Component {
 
             return (
                 <div ref={el => this.headerEl = el} className="p-dialog-header" onMouseDown={this.onDragStart}>
-                    <span id={this.state.id + '_header'} className="p-dialog-title">{header}</span>
+                    <div id={this.state.id + '_header'} className="p-dialog-title">{header}</div>
                     <div className="p-dialog-header-icons">
                         {icons}
                         {maximizeIcon}
