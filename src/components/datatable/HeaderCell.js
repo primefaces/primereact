@@ -79,8 +79,8 @@ export class HeaderCell extends Component {
         if(this.props.resizableColumns && this.props.onColumnResizerClick) {
             this.props.onColumnResizerClick({
                 originalEvent: event,
-                columnEl: event.target.parentElement,
-                columnProps: this.props.columnProps
+                element: event.currentTarget.parentElement,
+                column: this.props.columnProps
             });
 
             event.preventDefault();
@@ -91,8 +91,8 @@ export class HeaderCell extends Component {
         if(this.props.resizableColumns && this.props.onColumnResizerDoubleClick) {
             this.props.onColumnResizerDoubleClick({
                 originalEvent: event,
-                columnEl: event.target.parentElement,
-                columnProps: this.props.columnProps
+                element: event.currentTarget.parentElement,
+                column: this.props.columnProps
             });
 
             event.preventDefault();
