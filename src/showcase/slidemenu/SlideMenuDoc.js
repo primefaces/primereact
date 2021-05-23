@@ -494,11 +494,11 @@ const SlideMenuDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h5>Import</h5>
-<CodeHighlight lang="js">
-{`
+                        <CodeHighlight lang="js">
+                            {`
 import { SlideMenu } from 'primereact/slidemenu';
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <h5>MenuItem API</h5>
                         <p>Menu uses the common menumodel api to define its items, visit <Link to="/menumodel"> MenuModel API</Link> for details.</p>
@@ -506,8 +506,8 @@ import { SlideMenu } from 'primereact/slidemenu';
                         <h5>Getting Started</h5>
                         <p>Menu requires a collection of menuitems as its model.</p>
 
-<CodeHighlight lang="js">
-{`
+                        <CodeHighlight lang="js">
+                            {`
 const items = [
     {
        label:'File',
@@ -640,34 +640,34 @@ const items = [
     }
 ];
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
-<CodeHighlight>
-{`
+                        <CodeHighlight>
+                            {`
 <SlideMenu model={items} />
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
 
                         <h5>Popup Mode</h5>
                         <p>SlideMenu is inline by default whereas popup mode is supported by enabling popup property and calling toggle method with an event of the target.</p>
-<CodeHighlight>
-{`
+                        <CodeHighlight>
+                            {`
 <SlideMenu ref={menu} model={items} popup />
 
 <Button type="button" icon="pi pi-bars" label="Show" onClick={(event) => menu.current.toggle(event)}></Button>
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <h5>Effects</h5>
                         <p>The easing function to use is "ease-out" by default which can be customized using easing property.
                             See <a href="http://www.w3schools.com/cssref/css3_pr_transition-timing-function.asp">here</a> for possible alternative values.</p>
 
-<CodeHighlight>
-{`
+                        <CodeHighlight>
+                            {`
 <SlideMenu model={items} effectDuration={1000} easing="ease-in" />
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
                         <h5>Properties</h5>
                         <div className="doc-tablewrapper">
@@ -698,6 +698,12 @@ const items = [
                                         <td>boolean</td>
                                         <td>false</td>
                                         <td>Defines if menu would displayed as a popup.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>dynamicRendering</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>If dynamicRendering is True, submenu components rendered only when the parent menu item is clicked. Prefer this if the model is too long to render at once.</td>
                                     </tr>
                                     <tr>
                                         <td>style</td>
@@ -769,7 +775,7 @@ const items = [
                             </table>
                         </div>
 
-                       <h5>Methods</h5>
+                        <h5>Methods</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -829,10 +835,10 @@ const items = [
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Element</th>
-                                </tr>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Element</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                     <tr>

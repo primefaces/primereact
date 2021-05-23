@@ -18,7 +18,8 @@ export class SlideMenuSub extends Component {
         effectDuration: 250,
         menuWidth: 190,
         parentActive: false,
-        onForward: null
+        onForward: null,
+        dynamicRendering: false,
     }
 
     static propTypes = {
@@ -28,17 +29,19 @@ export class SlideMenuSub extends Component {
         effectDuration: PropTypes.number,
         menuWidth: PropTypes.number,
         parentActive: PropTypes.bool,
-        onForward: PropTypes.func
+        onForward: PropTypes.func,
+        dynamicRendering: PropTypes.bool,
     }
 
     constructor(props) {
         super(props);
         this.state = {
-            activeItem: null
+            activeItem: null,
+            renderSubMenu: {},
         };
     }
 
-    onItemClick(event, item) {
+    onItemClick(event, item, index) {
         if (item.disabled) {
             event.preventDefault();
             return;
@@ -56,7 +59,9 @@ export class SlideMenuSub extends Component {
         }
 
         if (item.items) {
+            let key = item.label + '_' + index
             this.setState({
+                renderSubMenu: { ...this.state.renderSubMenu, [key]: true },
                 activeItem: item
             });
             this.props.onForward();
@@ -69,11 +74,12 @@ export class SlideMenuSub extends Component {
         );
     }
 
-    renderSubmenu(item) {
-        if (item.items) {
+    renderSubmenu(item, index) {
+        let renderPermitted = !this.props.dynamicRendering || this.state.renderSubMenu[item.label + '_' + index]
+        if (item.items && renderPermitted) {
             return (
                 <SlideMenuSub model={item.items} index={this.props.index + 1} menuWidth={this.props.menuWidth} effectDuration={this.props.effectDuration}
-                    onForward={this.props.onForward} parentActive={item === this.state.activeItem} />
+                    onForward={this.props.onForward} parentActive={item === this.state.activeItem} dynamicRendering={this.props.dynamicRendering} />
             );
         }
 
@@ -88,7 +94,7 @@ export class SlideMenuSub extends Component {
         const icon = item.icon && <span className={iconClassName}></span>;
         const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
         const submenuIcon = item.items && <span className={submenuIconClassName}></span>;
-        const submenu = this.renderSubmenu(item);
+        const submenu = this.renderSubmenu(item, index);
         let content = (
             <a href={item.url || '#'} className="p-menuitem-link" target={item.target} onClick={(event) => this.onItemClick(event, item, index)} aria-disabled={item.disabled}>
                 {icon}
@@ -175,7 +181,8 @@ export class SlideMenu extends Component {
         appendTo: null,
         transitionOptions: null,
         onShow: null,
-        onHide: null
+        onHide: null,
+        dynamicRendering: false
     }
 
     static propTypes = {
@@ -194,7 +201,8 @@ export class SlideMenu extends Component {
         appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         transitionOptions: PropTypes.object,
         onShow: PropTypes.func,
-        onHide: PropTypes.func
+        onHide: PropTypes.func,
+        dynamicRendering: PropTypes.bool
     }
 
     constructor(props) {
@@ -392,7 +400,7 @@ export class SlideMenu extends Component {
                     <div className="p-slidemenu-wrapper" style={{ height: this.props.viewportHeight + 'px' }}>
                         <div className="p-slidemenu-content" ref={el => this.slideMenuContent = el}>
                             <SlideMenuSub model={this.props.model} root index={0} menuWidth={this.props.menuWidth} effectDuration={this.props.effectDuration}
-                                level={this.state.level} parentActive={this.state.level === 0} onForward={this.navigateForward} />
+                                level={this.state.level} parentActive={this.state.level === 0} onForward={this.navigateForward} dynamicRendering={this.props.dynamicRendering} />
                         </div>
                         {backward}
                     </div>
