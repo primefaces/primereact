@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import { Accordion, AccordionTab } from './Accordion';
 
 describe('Accordion Component', () => {
@@ -8,7 +8,7 @@ describe('Accordion Component', () => {
         const accordionElement = container.firstChild;
 
         expect(accordionElement).toBeInTheDocument();
-        expect(accordionElement).toHaveClass('p-accordion p-component')
+        expect(accordionElement).toHaveClass('p-accordion p-component');
     });
 
     test('should display header', () => {
@@ -25,7 +25,7 @@ describe('Accordion Component', () => {
         const headerElement = accordionTabElement.firstChild
 
         expect(accordionTabElement).toBeInTheDocument();
-        expect(headerElement.firstChild).toHaveClass('p-accordion-header-link')
+        expect(headerElement.firstChild).toHaveClass('p-accordion-header-link');
     });
 
     test('should open tab', () => {
@@ -37,13 +37,12 @@ describe('Accordion Component', () => {
             </Accordion>
         );
 
-
-        let contentElement = container.querySelector('.p-accordion-content')
+        let contentElement = container.querySelector('.p-accordion-content');
         expect(contentElement).toBeFalsy();
 
-        const linkElement = container.querySelector('.p-accordion-header-link')
-        linkElement.click();
-        contentElement = container.querySelector('.p-accordion-content')
+        const linkElement = container.querySelector('.p-accordion-header-link');
+        fireEvent.click(linkElement)
+        contentElement = container.querySelector('.p-accordion-content');
 
         expect(contentElement).toBeInTheDocument();
         expect(contentElement.textContent).toContain('PrimeReact');
