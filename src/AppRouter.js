@@ -174,6 +174,7 @@ import { FormikFormDemo } from './showcase/validate/FormikFormDemo';
 import { ReactHookFormDemo } from './showcase/validate/ReactHookFormDemo';
 import { ReactFinalFormDemo } from './showcase/validate/ReactFinalFormDemo';
 import { TreeSelectDemo } from './showcase/treeselect/TreeSelectDemo';
+import { VirtualScrollDemo } from './showcase/virtualscroll/VirtualScrollDemo';
 
 class AppRouter extends Component {
 
@@ -375,6 +376,7 @@ class AppRouter extends Component {
                             <Route path="/reacthookform" component={ReactHookFormDemo} />
                             <Route path="/reactfinalform" component={ReactFinalFormDemo} />
                             <Route path="/treeselect" component={TreeSelectDemo} />
+                            <Route path="/virtualscroll" component={VirtualScrollDemo} />
                         </>
                     )
                 }

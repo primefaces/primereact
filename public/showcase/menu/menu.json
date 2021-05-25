@@ -1431,6 +1431,14 @@
                     ]
                 },
                 {
+                    "name": "VirtualScroll",
+                    "to": "/virtualscroll",
+                    "meta": [
+                        "virtualscroll"
+                    ],
+                    "badge": "new"
+                },
+                {
                     "name": "ScrollTop",
                     "to": "/scrolltop",
                     "meta": [
