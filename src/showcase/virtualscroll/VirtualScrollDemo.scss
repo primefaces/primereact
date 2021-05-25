@@ -1,0 +1,29 @@
+.virtual-scroll-demo {
+    .scroll-item {
+        display: flex;
+        align-items: center;
+    }
+
+    .custom-scroll-item {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .p-virtual-scroll {
+        height: 200px;
+        width: 200px;
+        border: 1px solid var(--surface-d);
+    }
+
+    .p-horizontal-scroll {
+        .p-virtual-scroll-content {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .scroll-item {
+            writing-mode: vertical-lr;
+
+        }
+    }
+}

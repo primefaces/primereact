@@ -3,8 +3,9 @@ import { VirtualScroll } from '../../components/virtualscroll/VirtualScroll';
 import { classNames } from '../../components/utils/ClassNames';
 import { Skeleton } from '../../components/skeleton/Skeleton';
 import { AppInlineHeader } from '../../AppInlineHeader';
+import { VirtualScrollDoc } from './VirtualScrollDoc';
 import AppDemoActions from '../../AppDemoActions';
-import './VirtualScrollDemo.css';
+import './VirtualScrollDemo.scss';
 
 export class VirtualScrollDemo extends Component {
 
@@ -205,6 +206,8 @@ export class VirtualScrollDemo extends Component {
                         <VirtualScroll items={this.basicItems} itemSize={25 * 7} itemTemplate={this.itemTemplate} showLoader delay={250} loadingTemplate={this.loadingTemplate} />
                     </div>
                 </div>
+
+                <VirtualScrollDoc />
             </div>
         )
     }
