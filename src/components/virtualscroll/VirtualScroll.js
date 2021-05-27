@@ -59,20 +59,20 @@ export class VirtualScroll extends Component {
         const isHorizontal = this.isHorizontal();
         const first = this.state.first;
         const itemSize = this.props.itemSize;
+        const contentPadding = this.getContentPadding();
         const calculateFirst = (_index = 0) => (_index <= this.props.numToleratedItems ? 0 : _index);
-        const calculateCoord = (_first, _size) => (_first * _size);
+        const calculateCoord = (_first, _size, _padding) => (_first * _size) + _padding;
         const scrollTo = (_x = 0, _y = 0) => this.element && this.element.scrollTo(_x, _y);
 
         if (isBoth) {
             const newFirst = { rows: calculateFirst(index[0]), cols: calculateFirst(index[1]) };
-            (newFirst.rows !== first.rows || newFirst.cols !== first.cols) && scrollTo(calculateCoord(newFirst.cols, itemSize[1]), calculateCoord(newFirst.rows, itemSize[0]));
+            (newFirst.rows !== first.rows || newFirst.cols !== first.cols) && scrollTo(calculateCoord(newFirst.cols, itemSize[1], contentPadding.left), calculateCoord(newFirst.rows, itemSize[0], contentPadding.top));
         }
         else {
             const newFirst = calculateFirst(index);
 
             if (newFirst !== first) {
-                const coord = calculateCoord(newFirst, itemSize);
-                isHorizontal ? scrollTo(coord, 0) : scrollTo(0, coord);
+                isHorizontal ? scrollTo(calculateCoord(newFirst, itemSize, contentPadding.left), 0) : scrollTo(0, calculateCoord(newFirst, itemSize, contentPadding.top));
             }
         }
     }
@@ -89,8 +89,9 @@ export class VirtualScroll extends Component {
         const isBoth = this.isBoth();
         const isHorizontal = this.isHorizontal();
         const itemSize = this.props.itemSize;
-        const contentWidth = this.element ? this.element.offsetWidth : 0;
-        const contentHeight = this.element ? this.element.offsetHeight : 0;
+        const contentPadding = this.getContentPadding();
+        const contentWidth = this.element ? this.element.offsetWidth - contentPadding.left : 0;
+        const contentHeight = this.element ? this.element.offsetHeight - contentPadding.top : 0;
         const calculateNumItemsInViewport = (_contentSize, _itemSize) => Math.ceil(_contentSize / (_itemSize || _contentSize));
         const numItemsInViewport = isBoth ?
             { rows: calculateNumItemsInViewport(contentHeight, itemSize[0]), cols: calculateNumItemsInViewport(contentWidth, itemSize[1]) } :
@@ -111,6 +112,20 @@ export class VirtualScroll extends Component {
         return isBoth ? { rows: calculateNumItems(numItemsInViewport.rows), cols: calculateNumItems(numItemsInViewport.cols) } : calculateNumItems(numItemsInViewport);
     }
 
+    getContentPadding() {
+        if (this.content) {
+            const style = getComputedStyle(this.content);
+            const left = parseInt(style.paddingLeft, 10);
+            const right = parseInt(style.paddingRight, 10);
+            const top = parseInt(style.paddingTop, 10);
+            const bottom = parseInt(style.paddingBottom, 10);
+
+            return { left, right, top, bottom, x: left + right, y: top + bottom };
+        }
+
+        return { left: 0, right: 0, top: 0, bottom: 0, x: 0, y: 0 };
+    }
+
     setSpacerSize() {
         const items = this.props.items;
 
@@ -118,14 +133,15 @@ export class VirtualScroll extends Component {
             const isBoth = this.isBoth();
             const isHorizontal = this.isHorizontal();
             const itemSize = this.props.itemSize;
-            const setProp = (_name, _value, _size) => this.spacer.style[_name] = ((_value || []).length * _size) + 'px';
+            const contentPadding = this.getContentPadding();
+            const setProp = (_name, _value, _size, _padding = 0) => this.spacer.style[_name] = (((_value || []).length * _size) + _padding) + 'px';
 
             if (isBoth) {
-                setProp('height', items[0], itemSize[0]);
-                setProp('width', items[1], itemSize[1]);
+                setProp('height', items[0], itemSize[0], contentPadding.y);
+                setProp('width', items[1], itemSize[1], contentPadding.x);
             }
             else {
-                setProp((isHorizontal ? 'width' : 'height'), items, itemSize);
+                isHorizontal ? setProp('width', items, itemSize, contentPadding.x) : setProp('height', items, itemSize, contentPadding.y);
             }
         }
     }
@@ -155,11 +171,13 @@ export class VirtualScroll extends Component {
         const isHorizontal = this.isHorizontal();
         const first = this.state.first;
         const itemSize = this.props.itemSize;
-        const scrollTop = target.scrollTop || 0;
-        const scrollLeft = target.scrollLeft || 0;
+        const contentPadding = this.getContentPadding();
         const calculateCurrentIndex = (_pos, _size) => Math.floor(_pos / (_size || _pos));
         const calculateTriggerIndex = (_first) => (_first + this.props.numToleratedItems);
         const calculateFirst = (_currentIndex) => (_currentIndex <= this.props.numToleratedItems ? 0 : (_currentIndex - this.props.numToleratedItems));
+        const calculateScrollPos = (_pos, _padding) => _pos ? (_pos > _padding ? _pos - _padding : _pos) : 0;
+        const scrollTop = calculateScrollPos(target.scrollTop, contentPadding.top);
+        const scrollLeft = calculateScrollPos(target.scrollLeft, contentPadding.left);
 
         let isFirstChanged = false;
         let newFirst = 0;
