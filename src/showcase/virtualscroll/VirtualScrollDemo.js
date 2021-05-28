@@ -44,11 +44,10 @@ export class VirtualScrollDemo extends Component {
 
         //imitate delay of a backend call
         this.loadLazyTimeout = setTimeout(() => {
-            const { first, numItems } = event;
+            const { first, last } = event;
             const lazyItems = [...this.state.lazyItems];
-            const end = Math.min(this.state.lazyItems.length, (first + numItems));
 
-            for (let i = first; i < end; i++) {
+            for (let i = first; i < last; i++) {
                 lazyItems[i] = `Item #${i}`;
             }
 
@@ -198,7 +197,7 @@ export class VirtualScrollDemo extends Component {
                     <div className="card">
                         <h5>Lazy</h5>
                         <VirtualScroll items={this.state.lazyItems} itemSize={50} itemTemplate={this.basicItemTemplate} lazy onScrollChange={this.onLazyLoad}
-                            showLoader loading={this.state.lazyLoading} />
+                            showLoader loading={this.state.lazyLoading} delay={150} />
                     </div>
 
                     <div className="card">
