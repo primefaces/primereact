@@ -55,7 +55,7 @@ export class Card extends Component {
         let className = classNames('p-card p-component', this.props.className);
 
         return (
-            <div className={className} style={this.props.style}>
+            <div className={className} style={this.props.style} id={this.props.id}>
                 {header}
                 {body}
             </div>
