@@ -161,11 +161,11 @@ export class VirtualScroller extends Component {
         }
     }
 
-    setContentPosition() {
+    setContentPosition(pos) {
         if (this.content) {
             const isBoth = this.isBoth();
             const isHorizontal = this.isHorizontal();
-            const first = this.state.first;
+            const first = pos ? pos.first : this.state.first;
             const itemSize = this.props.itemSize;
             const calculateTranslateVal = (_first, _size) => (_first * _size);
             const setTransform = (_x = 0, _y = 0) => this.content.style.transform = `translate3d(${_x}px, ${_y}px, 0)`;
@@ -258,38 +258,48 @@ export class VirtualScroller extends Component {
         }
     }
 
+    onScrollChange(event) {
+        const { first, last, isRangeChanged } = this.onScrollPositionChange(event);
+
+        if (isRangeChanged) {
+            const newState = { first, last };
+
+            this.setContentPosition(newState);
+
+            if (this.props.lazy) {
+                this.props.onLazyLoad && this.props.onLazyLoad(newState);
+            }
+
+            this.setState(newState, () => {
+                this.props.onScrollIndexChange && this.props.onScrollIndexChange(newState);
+            });
+        }
+    }
+
     onScroll(event) {
         this.props.onScroll && this.props.onScroll(event);
 
-        if (this.scrollTimeout) {
-            clearTimeout(this.scrollTimeout);
-        }
+        if (this.props.delay) {
+            if (this.scrollTimeout) {
+                clearTimeout(this.scrollTimeout);
+            }
 
-        if (!this.state.loading && this.props.showLoader) {
-            const { isRangeChanged: changed } = this.onScrollPositionChange(event);
-            changed && this.setState({ loading: true });
-        }
+            if (!this.state.loading && this.props.showLoader) {
+                const { isRangeChanged: changed } = this.onScrollPositionChange(event);
+                changed && this.setState({ loading: true });
+            }
 
-        this.scrollTimeout = setTimeout(() => {
-            const { first, last, isRangeChanged } = this.onScrollPositionChange(event);
+            this.scrollTimeout = setTimeout(() => {
+                this.onScrollChange(event);
 
-            if (isRangeChanged) {
-                const newState = { first, last };
-
-                if (this.props.lazy) {
-                    this.props.onLazyLoad && this.props.onLazyLoad(newState);
+                if (this.state.loading && this.props.showLoader && !this.props.lazy) {
+                    this.setState({ loading: false });
                 }
-
-                this.setState(newState, () => {
-                    this.setContentPosition();
-                    this.props.onScrollIndexChange && this.props.onScrollIndexChange(newState);
-                });
-            }
-
-            if (this.state.loading && this.props.showLoader && !this.props.lazy) {
-                this.setState({ loading: false });
-            }
-        }, this.props.delay);
+            }, this.props.delay);
+        }
+        else {
+            this.onScrollChange(event);
+        }
     }
 
     getOptions(index, count) {
