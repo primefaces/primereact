@@ -41,6 +41,9 @@ interface VirtualScrollContentTemplateOptions {
     children: any;
     element: JSX.Element;
     props: VirtualScrollProps;
+    loading: boolean;
+    first: number;
+    last: number;
 }
 
 interface VirtualScrollChangeParams {

@@ -414,12 +414,17 @@ export class VirtualScroll extends Component {
         );
 
         if (this.props.contentTemplate) {
+            const { loading, first, last } = this.state;
+
             const defaultOptions = {
                 className: 'p-virtual-scroll-content',
                 ref: (el) => this.content = el,
                 children: items,
                 element: content,
-                props: this.props
+                props: this.props,
+                loading,
+                first,
+                last
             };
 
             return ObjectUtils.getJSXElement(this.props.contentTemplate, defaultOptions);
