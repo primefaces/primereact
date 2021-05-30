@@ -60,7 +60,7 @@ export class VirtualScroller extends Component {
         this.lastScrollPos = isBoth ? { top: 0, left: 0 } : 0;
     }
 
-    scrollToIndex(index) {
+    scrollToIndex(index, behavior = 'auto') {
         const isBoth = this.isBoth();
         const isHorizontal = this.isHorizontal();
         const first = this.state.first;
@@ -68,7 +68,7 @@ export class VirtualScroller extends Component {
         const contentPadding = this.getContentPadding();
         const calculateFirst = (_index = 0) => (_index <= this.state.numToleratedItems ? 0 : _index);
         const calculateCoord = (_first, _size, _padding) => (_first * _size) + _padding;
-        const scrollTo = (_x = 0, _y = 0) => this.element && this.element.scrollTo(_x, _y);
+        const scrollTo = (left = 0, top = 0) => this.element && this.element.scrollTo({ left, top, behavior });
 
         if (isBoth) {
             const newFirst = { rows: calculateFirst(index[0]), cols: calculateFirst(index[1]) };

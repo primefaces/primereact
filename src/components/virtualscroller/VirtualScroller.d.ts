@@ -6,6 +6,8 @@ type VirtualScrollerItemSizeType = number | number[];
 
 type VirtualScrollerOrientationType = 'vertical' | 'horizontal' | 'both';
 
+type VirtualScrollerScrollBehavior = 'auto' | 'smooth';
+
 type VirtualScrollerLoadingTemplateType = React.ReactNode | ((options: VirtualScrollerLoadingTemplateOptions) => React.ReactNode);
 
 type VirtualScrollerItemTemplateType = React.ReactNode | ((item: any, options: VirtualScrollerTemplateOptions) => React.ReactNode);
@@ -71,5 +73,5 @@ export interface VirtualScrollerProps {
 }
 
 export declare class VirtualScroller extends React.Component<VirtualScrollerProps, any> {
-    public scrollToIndex(index: VirtualScrollerToIndexType): void;
+    public scrollToIndex(index: VirtualScrollerToIndexType, behavior?: VirtualScrollerScrollBehavior): void;
 }
