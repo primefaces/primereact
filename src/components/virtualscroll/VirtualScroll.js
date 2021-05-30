@@ -12,14 +12,16 @@ export class VirtualScroll extends Component {
         items: null,
         itemSize: 0,
         orientation: 'vertical',
-        numToleratedItems: 2,
+        numToleratedItems: null,
         delay: 0,
         lazy: false,
         showLoader: false,
         loadingTemplate: null,
         itemTemplate: null,
         contentTemplate: null,
-        onScrollChange: null
+        onScroll: null,
+        onScrollIndexChange: null,
+        onLazyLoad: null
     }
 
     static propTypes = {
@@ -36,7 +38,9 @@ export class VirtualScroll extends Component {
         loadingTemplate: PropTypes.any,
         itemTemplate: PropTypes.any,
         contentTemplate: PropTypes.any,
-        onScrollChange: PropTypes.func
+        onScroll: PropTypes.func,
+        onScrollIndexChange: PropTypes.func,
+        onLazyLoad: PropTypes.func
     }
 
     constructor(props) {
@@ -47,6 +51,7 @@ export class VirtualScroll extends Component {
             first: isBoth ? { rows: 0, cols: 0 } : 0,
             last: isBoth ? { rows: 0, cols: 0 } : 0,
             numItemsInViewport: isBoth ? { rows: 0, cols: 0 } : 0,
+            numToleratedItems: props.numToleratedItems,
             loading: false
         };
 
@@ -61,7 +66,7 @@ export class VirtualScroll extends Component {
         const first = this.state.first;
         const itemSize = this.props.itemSize;
         const contentPadding = this.getContentPadding();
-        const calculateFirst = (_index = 0) => (_index <= this.props.numToleratedItems ? 0 : _index);
+        const calculateFirst = (_index = 0) => (_index <= this.state.numToleratedItems ? 0 : _index);
         const calculateCoord = (_first, _size, _padding) => (_first * _size) + _padding;
         const scrollTo = (_x = 0, _y = 0) => this.element && this.element.scrollTo(_x, _y);
 
@@ -90,27 +95,30 @@ export class VirtualScroll extends Component {
         const isBoth = this.isBoth();
         const isHorizontal = this.isHorizontal();
         const first = this.state.first;
-        const { itemSize, numToleratedItems } = this.props;
+        const itemSize = this.props.itemSize;
         const contentPadding = this.getContentPadding();
         const contentWidth = this.element ? this.element.offsetWidth - contentPadding.left : 0;
         const contentHeight = this.element ? this.element.offsetHeight - contentPadding.top : 0;
         const calculateNumItemsInViewport = (_contentSize, _itemSize) => Math.ceil(_contentSize / (_itemSize || _contentSize));
-        const calculateLast = (_first, _num, _isCols) => this.getLast(_first + _num + ((_first < numToleratedItems ? 2 : 3) * numToleratedItems), _isCols);
         const numItemsInViewport = isBoth ?
             { rows: calculateNumItemsInViewport(contentHeight, itemSize[0]), cols: calculateNumItemsInViewport(contentWidth, itemSize[1]) } :
             calculateNumItemsInViewport((isHorizontal ? contentWidth : contentHeight), itemSize);
+
+        let numToleratedItems = this.state.numToleratedItems || Math.ceil((isBoth ? numItemsInViewport.rows : numItemsInViewport) / 2);
+
+        const calculateLast = (_first, _num, _isCols) => this.getLast(_first + _num + ((_first < numToleratedItems ? 2 : 3) * numToleratedItems), _isCols);
         const last = isBoth ?
             { rows: calculateLast(first.rows, numItemsInViewport.rows), cols: calculateLast(first.cols, numItemsInViewport.cols, true) } :
             calculateLast(first, numItemsInViewport);
 
-        let state = { numItemsInViewport, last };
+        let state = { numItemsInViewport, last, numToleratedItems };
         if (this.props.showLoader) {
             state['loaderArr'] = Array.from({ length: (isBoth ? numItemsInViewport.rows : numItemsInViewport) });
         }
 
         this.setState(state, () => {
             if (this.props.lazy) {
-                this.props.onScrollChange && this.props.onScrollChange({ first: this.state.first, last: this.state.last });
+                this.props.onLazyLoad && this.props.onLazyLoad({ first: this.state.first, last: this.state.last });
             }
         });
     }
@@ -176,8 +184,8 @@ export class VirtualScroll extends Component {
         const target = event.target;
         const isBoth = this.isBoth();
         const isHorizontal = this.isHorizontal();
-        const { first, last, numItemsInViewport } = this.state;
-        const { itemSize, numToleratedItems } = this.props;
+        const { first, last, numItemsInViewport, numToleratedItems } = this.state;
+        const itemSize = this.props.itemSize;
         const contentPadding = this.getContentPadding();
         const calculateScrollPos = (_pos, _padding) => _pos ? (_pos > _padding ? _pos - _padding : _pos) : 0;
         const calculateCurrentIndex = (_pos, _size) => Math.floor(_pos / (_size || _pos));
@@ -251,6 +259,8 @@ export class VirtualScroll extends Component {
     }
 
     onScroll(event) {
+        this.props.onScroll && this.props.onScroll(event);
+
         if (this.scrollTimeout) {
             clearTimeout(this.scrollTimeout);
         }
@@ -264,9 +274,16 @@ export class VirtualScroll extends Component {
             const { first, last, isRangeChanged } = this.onScrollPositionChange(event);
 
             if (isRangeChanged) {
-                this.props.onScrollChange && this.props.onScrollChange({ first, last });
+                const newState = { first, last };
 
-                this.setState({ first, last }, () => this.setContentPosition());
+                if (this.props.lazy) {
+                    this.props.onLazyLoad && this.props.onLazyLoad(newState);
+                }
+
+                this.setState(newState, () => {
+                    this.setContentPosition();
+                    this.props.onScrollIndexChange && this.props.onScrollIndexChange(newState);
+                });
             }
 
             if (this.state.loading && this.props.showLoader && !this.props.lazy) {

@@ -62,7 +62,9 @@ export interface VirtualScrollProps {
     loadingTemplate?: VirtualScrollLoadingTemplateType;
     itemTemplate?: VirtualScrollItemTemplateType;
     contentTemplate?: VirtualScrollContentTemplateType;
-    onScrollChange?(e: VirtualScrollChangeParams): void;
+    onScroll?(e: React.UIEvent<HTMLElement>): void;
+    onScrollIndexChange?(e: VirtualScrollChangeParams): void;
+    onLazyLoad?(e: VirtualScrollChangeParams): void;
 }
 
 export declare class VirtualScroll extends React.Component<VirtualScrollProps, any> {

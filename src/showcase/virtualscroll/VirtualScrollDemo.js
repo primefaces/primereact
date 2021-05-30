@@ -196,7 +196,7 @@ export class VirtualScrollDemo extends Component {
 
                     <div className="card">
                         <h5>Lazy</h5>
-                        <VirtualScroll items={this.state.lazyItems} itemSize={50} itemTemplate={this.basicItemTemplate} lazy onScrollChange={this.onLazyLoad}
+                        <VirtualScroll items={this.state.lazyItems} itemSize={50} itemTemplate={this.basicItemTemplate} lazy onLazyLoad={this.onLazyLoad}
                             showLoader loading={this.state.lazyLoading} delay={150} />
                     </div>
 
