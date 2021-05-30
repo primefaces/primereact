@@ -1,4 +1,4 @@
-.virtual-scroll-demo {
+.virtual-scroller-demo {
 	.scroll-item {
 		display: flex;
 		align-items: center;
@@ -13,14 +13,14 @@
 		background-color: var(--surface-b);
 	}
 
-	.p-virtual-scroll {
+	.p-virtual-scroller {
 		height: 200px;
 		width: 200px;
 		border: 1px solid var(--surface-d);
 	}
 
 	.p-horizontal-scroll {
-		.p-virtual-scroll-content {
+		.p-virtual-scroller-content {
 			display: flex;
 			flex-direction: row;
 		}

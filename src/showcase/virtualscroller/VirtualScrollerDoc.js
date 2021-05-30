@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 
-export class VirtualScrollDoc extends Component {
+export class VirtualScrollerDoc extends Component {
 
     constructor(props) {
         super(props);
@@ -12,12 +12,12 @@ export class VirtualScrollDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import { VirtualScroll } from 'primereact/virtualscroll';
+import { VirtualScroller } from 'primereact/virtualscroller';
 import { classNames } from 'primereact/utils';
 import { Skeleton } from 'primereact/skeleton';
-import './VirtualScrollDemo.css';
+import './VirtualScrollerDemo.css';
 
-export class VirtualScrollDemo extends Component {
+export class VirtualScrollerDemo extends Component {
 
     constructor(props) {
         super(props);
@@ -152,15 +152,15 @@ export class VirtualScrollDemo extends Component {
                     <div className="p-d-flex p-ai-center">
                         <div className="p-d-flex p-dir-col">
                             <h6>Vertical</h6>
-                            <VirtualScroll items={this.basicItems} itemSize={50} itemTemplate={this.basicItemTemplate} />
+                            <VirtualScroller items={this.basicItems} itemSize={50} itemTemplate={this.basicItemTemplate} />
                         </div>
                         <div className="p-d-flex p-dir-col p-mx-3">
                             <h6>Horizontal</h6>
-                            <VirtualScroll items={this.basicItems} itemSize={50} itemTemplate={this.basicItemTemplate} orientation="horizontal" />
+                            <VirtualScroller items={this.basicItems} itemSize={50} itemTemplate={this.basicItemTemplate} orientation="horizontal" />
                         </div>
                         <div className="p-d-flex p-dir-col p-mx-3">
                             <h6>Both</h6>
-                            <VirtualScroll items={this.multiItems} itemSize={[50, 100]} itemTemplate={this.multiItemTemplate} orientation="both" />
+                            <VirtualScroller items={this.multiItems} itemSize={[50, 100]} itemTemplate={this.multiItemTemplate} orientation="both" />
                         </div>
                     </div>
                 </div>
@@ -170,15 +170,15 @@ export class VirtualScrollDemo extends Component {
                     <div className="p-d-flex p-ai-center">
                         <div className="p-d-flex p-dir-col">
                             <h6>0ms Delay</h6>
-                            <VirtualScroll items={this.basicItems} itemSize={50} itemTemplate={this.basicItemTemplate} />
+                            <VirtualScroller items={this.basicItems} itemSize={50} itemTemplate={this.basicItemTemplate} />
                         </div>
                         <div className="p-d-flex p-dir-col p-mx-3">
                             <h6>150ms Delay</h6>
-                            <VirtualScroll items={this.basicItems} itemSize={50} itemTemplate={this.basicItemTemplate} delay={150}/>
+                            <VirtualScroller items={this.basicItems} itemSize={50} itemTemplate={this.basicItemTemplate} delay={150}/>
                         </div>
                         <div className="p-d-flex p-dir-col p-mx-3">
                             <h6>250ms Delay</h6>
-                            <VirtualScroll items={this.basicItems} itemSize={50} itemTemplate={this.basicItemTemplate} delay={250} />
+                            <VirtualScroller items={this.basicItems} itemSize={50} itemTemplate={this.basicItemTemplate} delay={250} />
                         </div>
                     </div>
                 </div>
@@ -188,42 +188,42 @@ export class VirtualScrollDemo extends Component {
                     <div className="p-d-flex p-ai-center">
                         <div className="p-d-flex p-dir-col">
                             <h6>Basic</h6>
-                            <VirtualScroll items={this.basicItems} itemSize={50} itemTemplate={this.basicItemTemplate} showLoader delay={250}/>
+                            <VirtualScroller items={this.basicItems} itemSize={50} itemTemplate={this.basicItemTemplate} showLoader delay={250}/>
                         </div>
                         <div className="p-d-flex p-dir-col p-mx-3">
                             <h6>Template</h6>
-                            <VirtualScroll items={this.basicItems} itemSize={50} itemTemplate={this.basicItemTemplate} showLoader delay={250} loadingTemplate={this.basicLoadingTemplate} />
+                            <VirtualScroller items={this.basicItems} itemSize={50} itemTemplate={this.basicItemTemplate} showLoader delay={250} loadingTemplate={this.basicLoadingTemplate} />
                         </div>
                     </div>
                 </div>
 
                 <div className="card">
                     <h5>Lazy</h5>
-                    <VirtualScroll items={this.state.lazyItems} itemSize={50} itemTemplate={this.basicItemTemplate} lazy onScrollChange={this.onLazyLoad}
+                    <VirtualScroller items={this.state.lazyItems} itemSize={50} itemTemplate={this.basicItemTemplate} lazy onScrollChange={this.onLazyLoad}
                         showLoader loading={this.state.lazyLoading} />
                 </div>
 
                 <div className="card">
                     <h5>Template</h5>
-                    <VirtualScroll items={this.basicItems} itemSize={25 * 7} itemTemplate={this.itemTemplate} showLoader delay={250} loadingTemplate={this.loadingTemplate} />
+                    <VirtualScroller items={this.basicItems} itemSize={25 * 7} itemTemplate={this.itemTemplate} showLoader delay={250} loadingTemplate={this.loadingTemplate} />
                 </div>
             </div>
 
         )
     }
-}                
+}
                 `
             },
             'hooks': {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useEffect, useState } from 'react';
-import { VirtualScroll } from 'primereact/virtualscroll';
+import { VirtualScroller } from 'primereact/virtualscroller';
 import { classNames } from 'primereact/utils';
 import { Skeleton } from 'primereact/skeleton';
-import './VirtualScrollDemo.css';
+import './VirtualScrollerDemo.css';
 
-const VirtualScrollDemo = () => {
+const VirtualScrollerDemo = () => {
 
     const [lazyItems, setLazyItems] = useState([]);
     const [lazyLoading, setLazyLoading] = useState(false);
@@ -341,15 +341,15 @@ const VirtualScrollDemo = () => {
                 <div className="p-d-flex p-ai-center">
                     <div className="p-d-flex p-dir-col">
                         <h6>Vertical</h6>
-                        <VirtualScroll items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} />
+                        <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} />
                     </div>
                     <div className="p-d-flex p-dir-col p-mx-3">
                         <h6>Horizontal</h6>
-                        <VirtualScroll items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} orientation="horizontal" />
+                        <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} orientation="horizontal" />
                     </div>
                     <div className="p-d-flex p-dir-col p-mx-3">
                         <h6>Both</h6>
-                        <VirtualScroll items={multiItems} itemSize={[50, 100]} itemTemplate={multiItemTemplate} orientation="both" />
+                        <VirtualScroller items={multiItems} itemSize={[50, 100]} itemTemplate={multiItemTemplate} orientation="both" />
                     </div>
                 </div>
             </div>
@@ -359,15 +359,15 @@ const VirtualScrollDemo = () => {
                 <div className="p-d-flex p-ai-center">
                     <div className="p-d-flex p-dir-col">
                         <h6>0ms Delay</h6>
-                        <VirtualScroll items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} />
+                        <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} />
                     </div>
                     <div className="p-d-flex p-dir-col p-mx-3">
                         <h6>150ms Delay</h6>
-                        <VirtualScroll items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} delay={150}/>
+                        <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} delay={150}/>
                     </div>
                     <div className="p-d-flex p-dir-col p-mx-3">
                         <h6>250ms Delay</h6>
-                        <VirtualScroll items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} delay={250} />
+                        <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} delay={250} />
                     </div>
                 </div>
             </div>
@@ -377,41 +377,41 @@ const VirtualScrollDemo = () => {
                 <div className="p-d-flex p-ai-center">
                     <div className="p-d-flex p-dir-col">
                         <h6>Basic</h6>
-                        <VirtualScroll items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} showLoader delay={250}/>
+                        <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} showLoader delay={250}/>
                     </div>
                     <div className="p-d-flex p-dir-col p-mx-3">
                         <h6>Template</h6>
-                        <VirtualScroll items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} showLoader delay={250} loadingTemplate={basicLoadingTemplate} />
+                        <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} showLoader delay={250} loadingTemplate={basicLoadingTemplate} />
                     </div>
                 </div>
             </div>
 
             <div className="card">
                 <h5>Lazy</h5>
-                <VirtualScroll items={lazyItems} itemSize={50} itemTemplate={basicItemTemplate} lazy onScrollChange={onLazyLoad}
+                <VirtualScroller items={lazyItems} itemSize={50} itemTemplate={basicItemTemplate} lazy onScrollChange={onLazyLoad}
                     showLoader loading={lazyLoading} />
             </div>
 
             <div className="card">
                 <h5>Template</h5>
-                <VirtualScroll items={basicItems} itemSize={25 * 7} itemTemplate={itemTemplate} showLoader delay={250} loadingTemplate={loadingTemplate} />
+                <VirtualScroller items={basicItems} itemSize={25 * 7} itemTemplate={itemTemplate} showLoader delay={250} loadingTemplate={loadingTemplate} />
             </div>
         </div>
 
     )
-} 
+}
                 `
             },
             'ts': {
                 tabName: 'TS Source',
                 content: `
 import React, { useEffect, useState } from 'react';
-import { VirtualScroll } from 'primereact/virtualscroll';
+import { VirtualScroller } from 'primereact/virtualscroller';
 import { classNames } from 'primereact/utils';
 import { Skeleton } from 'primereact/skeleton';
-import './VirtualScrollDemo.css';
+import './VirtualScrollerDemo.css';
 
-const VirtualScrollDemo = () => {
+const VirtualScrollerDemo = () => {
 
     const [lazyItems, setLazyItems] = useState([]);
     const [lazyLoading, setLazyLoading] = useState(false);
@@ -529,15 +529,15 @@ const VirtualScrollDemo = () => {
                 <div className="p-d-flex p-ai-center">
                     <div className="p-d-flex p-dir-col">
                         <h6>Vertical</h6>
-                        <VirtualScroll items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} />
+                        <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} />
                     </div>
                     <div className="p-d-flex p-dir-col p-mx-3">
                         <h6>Horizontal</h6>
-                        <VirtualScroll items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} orientation="horizontal" />
+                        <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} orientation="horizontal" />
                     </div>
                     <div className="p-d-flex p-dir-col p-mx-3">
                         <h6>Both</h6>
-                        <VirtualScroll items={multiItems} itemSize={[50, 100]} itemTemplate={multiItemTemplate} orientation="both" />
+                        <VirtualScroller items={multiItems} itemSize={[50, 100]} itemTemplate={multiItemTemplate} orientation="both" />
                     </div>
                 </div>
             </div>
@@ -547,15 +547,15 @@ const VirtualScrollDemo = () => {
                 <div className="p-d-flex p-ai-center">
                     <div className="p-d-flex p-dir-col">
                         <h6>0ms Delay</h6>
-                        <VirtualScroll items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} />
+                        <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} />
                     </div>
                     <div className="p-d-flex p-dir-col p-mx-3">
                         <h6>150ms Delay</h6>
-                        <VirtualScroll items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} delay={150}/>
+                        <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} delay={150}/>
                     </div>
                     <div className="p-d-flex p-dir-col p-mx-3">
                         <h6>250ms Delay</h6>
-                        <VirtualScroll items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} delay={250} />
+                        <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} delay={250} />
                     </div>
                 </div>
             </div>
@@ -565,34 +565,34 @@ const VirtualScrollDemo = () => {
                 <div className="p-d-flex p-ai-center">
                     <div className="p-d-flex p-dir-col">
                         <h6>Basic</h6>
-                        <VirtualScroll items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} showLoader delay={250}/>
+                        <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} showLoader delay={250}/>
                     </div>
                     <div className="p-d-flex p-dir-col p-mx-3">
                         <h6>Template</h6>
-                        <VirtualScroll items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} showLoader delay={250} loadingTemplate={basicLoadingTemplate} />
+                        <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} showLoader delay={250} loadingTemplate={basicLoadingTemplate} />
                     </div>
                 </div>
             </div>
 
             <div className="card">
                 <h5>Lazy</h5>
-                <VirtualScroll items={lazyItems} itemSize={50} itemTemplate={basicItemTemplate} lazy onScrollChange={onLazyLoad}
+                <VirtualScroller items={lazyItems} itemSize={50} itemTemplate={basicItemTemplate} lazy onScrollChange={onLazyLoad}
                     showLoader loading={lazyLoading} />
             </div>
 
             <div className="card">
                 <h5>Template</h5>
-                <VirtualScroll items={basicItems} itemSize={25 * 7} itemTemplate={itemTemplate} showLoader delay={250} loadingTemplate={loadingTemplate} />
+                <VirtualScroller items={basicItems} itemSize={25 * 7} itemTemplate={itemTemplate} showLoader delay={250} loadingTemplate={loadingTemplate} />
             </div>
         </div>
 
     )
-} 
+}
                 `
             }
         }
         this.extFiles = {
-            'src/demo/VirtualScrollDemo.css': {
+            'src/demo/VirtualScrollerDemo.css': {
                 content: `
 .virtual-scroll-demo .scroll-item {
     display: flex;
@@ -621,7 +621,7 @@ const VirtualScrollDemo = () => {
 
 .virtual-scroll-demo .p-horizontal-scroll .scroll-item {
     writing-mode: vertical-lr;
-}                
+}
                 `
             }
         }
@@ -641,7 +641,7 @@ const VirtualScrollDemo = () => {
                     </TabPanel>
 
                 {
-                    useLiveEditorTabs({ name: 'VirtualScrollDemo', sources: this.sources, extFiles: this.extFiles })
+                    useLiveEditorTabs({ name: 'VirtualScrollerDemo', sources: this.sources, extFiles: this.extFiles })
                 }
                 </TabView>
             </div>

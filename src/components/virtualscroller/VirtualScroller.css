@@ -1,4 +1,4 @@
-.p-virtual-scroll {
+.p-virtual-scroller {
     position: relative;
     overflow: auto;
     contain: strict;
@@ -6,7 +6,7 @@
     will-change: scroll-position;
 }
 
-.p-virtual-scroll-content {
+.p-virtual-scroller-content {
     position: absolute;
     top: 0;
     left: 0;
@@ -16,7 +16,7 @@
     will-change: transform;
 }
 
-.p-virtual-scroll-spacer {
+.p-virtual-scroller-spacer {
     position: absolute;
     top: 0;
     left: 0;
@@ -26,7 +26,7 @@
     pointer-events: none;
 }
 
-.p-virtual-scroll-loader {
+.p-virtual-scroller-loader {
     position: sticky;
     top: 0;
     left: 0;
@@ -34,7 +34,7 @@
     height: 100%;
 }
 
-.p-virtual-scroll-loader.p-component-overlay {
+.p-virtual-scroller-loader.p-component-overlay {
     display: flex;
     align-items: center;
     justify-content: center;

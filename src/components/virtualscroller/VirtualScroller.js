@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import ObjectUtils from '../utils/ObjectUtils';
 
-export class VirtualScroll extends Component {
+export class VirtualScroller extends Component {
 
     static defaultProps = {
         id: null,
@@ -379,11 +379,11 @@ export class VirtualScroll extends Component {
 
     renderLoader() {
         if (this.state.loading) {
-            const className = classNames('p-virtual-scroll-loader', {
+            const className = classNames('p-virtual-scroller-loader', {
                 'p-component-overlay': !this.props.loadingTemplate
             });
 
-            let content = <i className="p-virtual-scroll-loading-icon pi pi-spinner pi-spin"></i>;
+            let content = <i className="p-virtual-scroller-loading-icon pi pi-spinner pi-spin"></i>;
 
             if (this.props.loadingTemplate) {
                 const isBoth = this.isBoth();
@@ -408,7 +408,7 @@ export class VirtualScroll extends Component {
     renderContent() {
         const items = this.renderItems();
         const content = (
-            <div className="p-virtual-scroll-content" ref={(el) => this.content = el}>
+            <div className="p-virtual-scroller-content" ref={(el) => this.content = el}>
                 {items}
             </div>
         );
@@ -417,7 +417,7 @@ export class VirtualScroll extends Component {
             const { loading, first, last } = this.state;
 
             const defaultOptions = {
-                className: 'p-virtual-scroll-content',
+                className: 'p-virtual-scroller-content',
                 ref: (el) => this.content = el,
                 children: items,
                 element: content,
@@ -436,7 +436,7 @@ export class VirtualScroll extends Component {
     render() {
         const isBoth = this.isBoth();
         const isHorizontal = this.isHorizontal();
-        const className = classNames('p-virtual-scroll', {
+        const className = classNames('p-virtual-scroller', {
             'p-both-scroll': isBoth,
             'p-horizontal-scroll': isHorizontal
         }, this.props.className);
@@ -447,7 +447,7 @@ export class VirtualScroll extends Component {
         return (
             <div ref={(el) => this.element = el} className={className} style={this.props.style} onScroll={this.onScroll}>
                 {content}
-                <div ref={(el) => this.spacer = el} className="p-virtual-scroll-spacer"></div>
+                <div ref={(el) => this.spacer = el} className="p-virtual-scroller-spacer"></div>
                 {loader}
             </div>
         );

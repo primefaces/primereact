@@ -1431,10 +1431,10 @@
                     ]
                 },
                 {
-                    "name": "VirtualScroll",
-                    "to": "/virtualscroll",
+                    "name": "VirtualScroller",
+                    "to": "/virtualscroller",
                     "meta": [
-                        "virtualscroll"
+                        "virtualscroller"
                     ],
                     "badge": "new"
                 },
