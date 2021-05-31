@@ -389,11 +389,11 @@ export class VirtualScroller extends Component {
 
     renderLoader() {
         if (this.state.loading) {
-            const className = classNames('p-virtual-scroller-loader', {
+            const className = classNames('p-virtualscroller-loader', {
                 'p-component-overlay': !this.props.loadingTemplate
             });
 
-            let content = <i className="p-virtual-scroller-loading-icon pi pi-spinner pi-spin"></i>;
+            let content = <i className="p-virtualscroller-loading-icon pi pi-spinner pi-spin"></i>;
 
             if (this.props.loadingTemplate) {
                 const isBoth = this.isBoth();
@@ -418,7 +418,7 @@ export class VirtualScroller extends Component {
     renderContent() {
         const items = this.renderItems();
         const content = (
-            <div className="p-virtual-scroller-content" ref={(el) => this.content = el}>
+            <div className="p-virtualscroller-content" ref={(el) => this.content = el}>
                 {items}
             </div>
         );
@@ -427,7 +427,7 @@ export class VirtualScroller extends Component {
             const { loading, first, last } = this.state;
 
             const defaultOptions = {
-                className: 'p-virtual-scroller-content',
+                className: 'p-virtualscroller-content',
                 ref: (el) => this.content = el,
                 children: items,
                 element: content,
@@ -446,7 +446,7 @@ export class VirtualScroller extends Component {
     render() {
         const isBoth = this.isBoth();
         const isHorizontal = this.isHorizontal();
-        const className = classNames('p-virtual-scroller', {
+        const className = classNames('p-virtualscroller', {
             'p-both-scroll': isBoth,
             'p-horizontal-scroll': isHorizontal
         }, this.props.className);
@@ -457,7 +457,7 @@ export class VirtualScroller extends Component {
         return (
             <div ref={(el) => this.element = el} className={className} style={this.props.style} onScroll={this.onScroll}>
                 {content}
-                <div ref={(el) => this.spacer = el} className="p-virtual-scroller-spacer"></div>
+                <div ref={(el) => this.spacer = el} className="p-virtualscroller-spacer"></div>
                 {loader}
             </div>
         );

@@ -143,7 +143,7 @@ export class VirtualScrollerDemo extends Component {
                     <AppDemoActions github="virtualscroll/VirtualScrollDemo.js" />
                 </div>
 
-                <div className="content-section implementation virtual-scroller-demo">
+                <div className="content-section implementation virtualscroller-demo">
                     <div className="card">
                         <h5>Basic</h5>
                         <div className="p-d-flex p-ai-center">
