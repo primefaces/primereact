@@ -145,17 +145,17 @@ export class VirtualScrollerDemo extends Component {
 
                 <div className="content-section implementation virtualscroller-demo">
                     <div className="card">
-                        <h5>Basic</h5>
-                        <div className="p-d-flex p-ai-center">
-                            <div className="p-d-flex p-dir-col">
+                        <h5 className="p-mb-0">Basic</h5>
+                        <div className="p-d-flex p-ai-center p-flex-wrap">
+                            <div className="p-d-flex p-dir-col p-mr-3 p-mt-3">
                                 <h6>Vertical</h6>
                                 <VirtualScroller items={this.basicItems} itemSize={50} itemTemplate={this.basicItemTemplate} />
                             </div>
-                            <div className="p-d-flex p-dir-col p-mx-3">
+                            <div className="p-d-flex p-dir-col p-mr-3 p-mt-3">
                                 <h6>Horizontal</h6>
                                 <VirtualScroller items={this.basicItems} itemSize={50} itemTemplate={this.basicItemTemplate} orientation="horizontal" />
                             </div>
-                            <div className="p-d-flex p-dir-col p-mx-3">
+                            <div className="p-d-flex p-dir-col p-mt-3">
                                 <h6>Both</h6>
                                 <VirtualScroller items={this.multiItems} itemSize={[50, 100]} itemTemplate={this.multiItemTemplate} orientation="both" />
                             </div>
@@ -163,17 +163,17 @@ export class VirtualScrollerDemo extends Component {
                     </div>
 
                     <div className="card">
-                        <h5>Scroll Delay</h5>
-                        <div className="p-d-flex p-ai-center">
-                            <div className="p-d-flex p-dir-col">
+                        <h5 className="p-mb-0">Scroll Delay</h5>
+                        <div className="p-d-flex p-ai-center p-flex-wrap">
+                            <div className="p-d-flex p-dir-col p-mr-3 p-mt-3">
                                 <h6>0ms Delay</h6>
                                 <VirtualScroller items={this.basicItems} itemSize={50} itemTemplate={this.basicItemTemplate} />
                             </div>
-                            <div className="p-d-flex p-dir-col p-mx-3">
+                            <div className="p-d-flex p-dir-col p-mr-3 p-mt-3">
                                 <h6>150ms Delay</h6>
                                 <VirtualScroller items={this.basicItems} itemSize={50} itemTemplate={this.basicItemTemplate} delay={150}/>
                             </div>
-                            <div className="p-d-flex p-dir-col p-mx-3">
+                            <div className="p-d-flex p-dir-col p-mt-3">
                                 <h6>250ms Delay</h6>
                                 <VirtualScroller items={this.basicItems} itemSize={50} itemTemplate={this.basicItemTemplate} delay={250} />
                             </div>
@@ -181,13 +181,13 @@ export class VirtualScrollerDemo extends Component {
                     </div>
 
                     <div className="card">
-                        <h5>Loading</h5>
-                        <div className="p-d-flex p-ai-center">
-                            <div className="p-d-flex p-dir-col">
+                        <h5 className="p-mb-0">Loading</h5>
+                        <div className="p-d-flex p-ai-center p-flex-wrap">
+                            <div className="p-d-flex p-dir-col p-mr-3 p-mt-3">
                                 <h6>Basic</h6>
                                 <VirtualScroller items={this.basicItems} itemSize={50} itemTemplate={this.basicItemTemplate} showLoader delay={250}/>
                             </div>
-                            <div className="p-d-flex p-dir-col p-mx-3">
+                            <div className="p-d-flex p-dir-col p-mt-3">
                                 <h6>Template</h6>
                                 <VirtualScroller items={this.basicItems} itemSize={50} itemTemplate={this.basicItemTemplate} showLoader delay={250} loadingTemplate={this.basicLoadingTemplate} />
                             </div>
