@@ -232,6 +232,25 @@ export class VirtualScroller extends Component {
         return { left: 0, right: 0, top: 0, bottom: 0, x: 0, y: 0 };
     }
 
+    setSize() {
+        if (this.element) {
+            const isBoth = this.isBoth();
+            const isHorizontal = this.isHorizontal();
+            const parentElement = this.element.parentElement;
+            const width = this.props.scrollWidth || `${(this.element.offsetWidth || parentElement.offsetWidth)}px`;
+            const height = this.props.scrollHeight || `${(this.element.offsetHeight || parentElement.offsetHeight)}px`;
+            const setProp = (_name, _value) => this.element.style[_name] = _value;
+
+            if (isBoth) {
+                setProp('height', height);
+                setProp('width', width);
+            }
+            else {
+                isHorizontal ? setProp('width', width) : setProp('height', height);
+            }
+        }
+    }
+
     setSpacerSize() {
         const items = this.props.items;
 
@@ -406,6 +425,7 @@ export class VirtualScroller extends Component {
     }
 
     init() {
+        this.setSize();
         this.calculateOptions();
         this.setSpacerSize();
     }
@@ -541,16 +561,12 @@ export class VirtualScroller extends Component {
             'p-both-scroll': isBoth,
             'p-horizontal-scroll': isHorizontal
         }, this.props.className);
-        const style = {...(this.props.style || {}), ...{
-            height: this.props.scrollHeight || '',
-            width: this.props.scrollWidth || ''
-        }};
 
         const loader = this.renderLoader();
         const content = this.renderContent();
 
         return (
-            <div ref={(el) => this.element = el} className={className} style={style} onScroll={this.onScroll}>
+            <div ref={(el) => this.element = el} className={className} style={this.props.style} onScroll={this.onScroll}>
                 {content}
                 <div ref={(el) => this.spacer = el} className="p-virtualscroller-spacer"></div>
                 {loader}
