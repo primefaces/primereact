@@ -8,6 +8,8 @@ type VirtualScrollerOrientationType = 'vertical' | 'horizontal' | 'both';
 
 type VirtualScrollerScrollBehavior = 'auto' | 'smooth';
 
+type VirtualScrollerToType = 'to-start' | 'to-end';
+
 type VirtualScrollerLoadingTemplateType = React.ReactNode | ((options: VirtualScrollerLoadingTemplateOptions) => React.ReactNode);
 
 type VirtualScrollerItemTemplateType = React.ReactNode | ((item: any, options: VirtualScrollerTemplateOptions) => React.ReactNode);
@@ -17,6 +19,23 @@ type VirtualScrollerContentTemplateType = React.ReactNode | ((options: VirtualSc
 type VirtualScrollerStateType = number | VirtualScrollerState;
 
 type VirtualScrollerToIndexType = number | number[];
+
+interface VirtualScrollerOptionsType {
+    left: number;
+    top: number;
+    behavior: VirtualScrollerScrollBehavior;
+}
+
+interface VirtualScrollerViewportRenderedRange {
+    first: number;
+    last: number;
+}
+
+interface VirtualScrollerRenderedRange {
+    first: number;
+    last: number;
+    viewport: VirtualScrollerViewportRenderedRange;
+};
 
 interface VirtualScrollerState {
     rows: number;
@@ -73,5 +92,8 @@ export interface VirtualScrollerProps {
 }
 
 export declare class VirtualScroller extends React.Component<VirtualScrollerProps, any> {
+    public scrollTo(options: VirtualScrollerOptionsType): void;
     public scrollToIndex(index: VirtualScrollerToIndexType, behavior?: VirtualScrollerScrollBehavior): void;
+    public scrollInView(index: VirtualScrollerToIndexType, to: VirtualScrollerToType, behavior?: VirtualScrollerScrollBehavior): void;
+    public getRenderedRange(): VirtualScrollerRenderedRange;
 }
