@@ -15,12 +15,15 @@ export class AutoCompleteDemo extends Component {
             selectedCountry2: null,
             selectedCity: null,
             selectedCountries: null,
+            selectedItem: null,
             filteredCountries: null,
-            filteredCities: null
+            filteredCities: null,
+            filteredItems: null
         };
 
         this.searchCountry = this.searchCountry.bind(this);
         this.searchCity = this.searchCity.bind(this);
+        this.searchItems = this.searchItems.bind(this);
         this.itemTemplate = this.itemTemplate.bind(this);
         this.groupedItemTemplate = this.groupedItemTemplate.bind(this);
         this.countryservice = new CountryService();
@@ -54,6 +57,8 @@ export class AutoCompleteDemo extends Component {
                 ]
             }
         ];
+
+        this.items = Array.from({ length: 100000 }).map((_, i) => ({ label: `Item #${i}`, value: i }));
     }
 
     componentDidMount() {
@@ -90,6 +95,21 @@ export class AutoCompleteDemo extends Component {
         this.setState({ filteredCities });
     }
 
+    searchItems(event) {
+        //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
+        let query = event.query;
+        let filteredItems = [];
+
+        for(let i = 0; i < this.items.length; i++) {
+            let item = this.items[i];
+            if (item.label.toLowerCase().indexOf(query.toLowerCase()) === 0) {
+                filteredItems.push(item);
+            }
+        }
+
+        this.setState({ filteredItems });
+    }
+
     itemTemplate(item) {
         return (
             <div className="country-item">
@@ -115,7 +135,7 @@ export class AutoCompleteDemo extends Component {
                     <AppInlineHeader changelogText="autoComplete">
                         <h1>AutoComplete</h1>
                         <p>AutoComplete is an input component that provides real-time suggestions when being typed.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="autocomplete/AutoCompleteDemo.js"/>
                 </div>
 
@@ -129,6 +149,9 @@ export class AutoCompleteDemo extends Component {
 
                         <h5>Dropdown, Templating and Force Selection</h5>
                         <AutoComplete value={this.state.selectedCountry2} suggestions={this.state.filteredCountries} completeMethod={this.searchCountry} field="name" dropdown forceSelection itemTemplate={this.itemTemplate} onChange={(e) => this.setState({ selectedCountry2: e.value })} />
+
+                        <h5>Virtual Scroll (100000 Items)</h5>
+                        <AutoComplete value={this.state.selectedItem} suggestions={this.state.filteredItems} completeMethod={this.searchItems} virtualScrollerOptions={{ itemSize: 31 }} field="label" dropdown onChange={(e) => this.setState({ selectedItem: e.value })} />
 
                         <h5>Multiple</h5>
                         <span className="p-fluid">

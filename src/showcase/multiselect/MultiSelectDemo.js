@@ -3,6 +3,7 @@ import { MultiSelect } from '../../components/multiselect/MultiSelect';
 import { MultiSelectDoc } from './MultiSelectDoc';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import AppDemoActions from '../../AppDemoActions';
+import { Skeleton } from '../../components/skeleton/Skeleton';
 import './MultiSelectDemo.scss';
 
 export class MultiSelectDemo extends Component {
@@ -10,10 +11,14 @@ export class MultiSelectDemo extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            lazyItems: [],
+            lazyLoading: false,
             selectedCities1: null,
             selectedCities2: null,
             selectedCountries: null,
-            selectedGroupedCities: null
+            selectedGroupedCities: null,
+            selectedItems1: null,
+            selectedItems2: null
         };
 
         this.cities = [
@@ -67,10 +72,20 @@ export class MultiSelectDemo extends Component {
             }
         ];
 
+        this.items = Array.from({ length: 100000 }).map((_, i) => ({ label: `Item #${i}`, value: i }));
+
         this.countryTemplate = this.countryTemplate.bind(this);
         this.groupedItemTemplate = this.groupedItemTemplate.bind(this);
         this.selectedCountriesTemplate = this.selectedCountriesTemplate.bind(this);
         this.panelFooterTemplate = this.panelFooterTemplate.bind(this);
+        this.onLazyLoad = this.onLazyLoad.bind(this);
+    }
+
+    componentDidMount() {
+        this.setState({
+            lazyItems: Array.from({ length: 100000 }),
+            lazyLoading: false
+        });
     }
 
     countryTemplate(option) {
@@ -93,6 +108,29 @@ export class MultiSelectDemo extends Component {
         }
 
         return "Select Countries";
+    }
+
+    onLazyLoad(event) {
+        this.setState({ lazyLoading: true });
+
+        if (this.loadLazyTimeout) {
+            clearTimeout(this.loadLazyTimeout);
+        }
+
+        //imitate delay of a backend call
+        this.loadLazyTimeout = setTimeout(() => {
+            const { first, last } = event;
+            const lazyItems = [...this.state.lazyItems];
+
+            for (let i = first; i < last; i++) {
+                lazyItems[i] = { label: `Item #${i}`, value: i };
+            }
+
+            this.setState({
+                lazyItems,
+                lazyLoading: false
+            });
+        }, Math.random() * 1000 + 250);
     }
 
     panelFooterTemplate() {
@@ -140,6 +178,18 @@ export class MultiSelectDemo extends Component {
                         <h5>Advanced with Templating and Filtering</h5>
                         <MultiSelect value={this.state.selectedCountries} options={this.countries} onChange={(e) => this.setState({ selectedCountries: e.value })} optionLabel="name" placeholder="Select Countries" filter className="multiselect-custom"
                             itemTemplate={this.countryTemplate} selectedItemTemplate={this.selectedCountriesTemplate} panelFooterTemplate={this.panelFooterTemplate} />
+
+                        <h5>Virtual Scroll (100000 Items)</h5>
+                        <MultiSelect value={this.state.selectedItems1} options={this.items} onChange={(e) => this.setState({ selectedItems1: e.value })} virtualScrollerOptions={{ itemSize: 34 }} placeholder="Select Item"/>
+
+                        <h5>Virtual Scroll (100000 Items) and Lazy</h5>
+                        <MultiSelect value={this.state.selectedItems2} options={this.state.lazyItems} onChange={(e) => this.setState({ selectedItems2: e.value })} virtualScrollerOptions={{ lazy: true, onLazyLoad: this.onLazyLoad, itemSize: 34, showLoader: true, loading: this.state.lazyLoading, delay: 250, loadingTemplate: (options) => {
+                            return (
+                                <div className="p-d-flex p-ai-center p-p-2" style={{ height: '34px' }}>
+                                    <Skeleton width={options.even ? '70%' : '60%'} height="1.5rem" />
+                                </div>
+                            )}
+                        }} placeholder="Select Item"/>
                     </div>
                 </div>
 

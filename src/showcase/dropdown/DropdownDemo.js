@@ -4,16 +4,21 @@ import { DropdownDoc } from './DropdownDoc';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './DropdownDemo.scss';
 import AppDemoActions from '../../AppDemoActions';
+import { Skeleton } from '../../components/skeleton/Skeleton';
 
 export class DropdownDemo extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            lazyItems: [],
+            lazyLoading: false,
             selectedCity1: null,
             selectedCity2: null,
             selectedCountry: null,
-            selectedGroupedCity: null
+            selectedGroupedCity: null,
+            selectedItem: null,
+            selectedItem2: null
         };
 
         this.cities = [
@@ -67,10 +72,22 @@ export class DropdownDemo extends Component {
             }
         ];
 
+        this.items = Array.from({ length: 100000 }).map((_, i) => ({ label: `Item #${i}`, value: i }));
+
         this.onCityChange = this.onCityChange.bind(this);
         this.onCityChange2 = this.onCityChange2.bind(this);
         this.onCountryChange = this.onCountryChange.bind(this);
         this.onGroupedCityChange = this.onGroupedCityChange.bind(this);
+        this.onItemChange = this.onItemChange.bind(this);
+        this.onLazyItemChange = this.onLazyItemChange.bind(this);
+        this.onLazyLoad = this.onLazyLoad.bind(this);
+    }
+
+    componentDidMount() {
+        this.setState({
+            lazyItems: Array.from({ length: 100000 }),
+            lazyLoading: false
+        });
     }
 
     onCityChange(e) {
@@ -87,6 +104,37 @@ export class DropdownDemo extends Component {
 
     onGroupedCityChange(e) {
         this.setState({ selectedGroupedCity: e.value });
+    }
+
+    onItemChange(e) {
+        this.setState({ selectedItem: e.value });
+    }
+
+    onLazyItemChange(e) {
+        this.setState({ selectedItem2: e.value });
+    }
+
+    onLazyLoad(event) {
+        this.setState({ lazyLoading: true });
+
+        if (this.loadLazyTimeout) {
+            clearTimeout(this.loadLazyTimeout);
+        }
+
+        //imitate delay of a backend call
+        this.loadLazyTimeout = setTimeout(() => {
+            const { first, last } = event;
+            const lazyItems = [...this.state.lazyItems];
+
+            for (let i = first; i < last; i++) {
+                lazyItems[i] = { label: `Item #${i}`, value: i };
+            }
+
+            this.setState({
+                lazyItems,
+                lazyLoading: false
+            });
+        }, Math.random() * 1000 + 250);
     }
 
     selectedCountryTemplate(option, props) {
@@ -131,7 +179,7 @@ export class DropdownDemo extends Component {
                     <AppInlineHeader changelogText="dropdown">
                         <h1>Dropdown</h1>
                         <p>Dropdown is used to select an item from a collection of options.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="dropdown/DropdownDemo.js" />
                 </div>
 
@@ -150,6 +198,18 @@ export class DropdownDemo extends Component {
                         <h5>Advanced with Templating, Filtering and Clear Icon</h5>
                         <Dropdown value={this.state.selectedCountry} options={this.countries} onChange={this.onCountryChange} optionLabel="name" filter showClear filterBy="name" placeholder="Select a Country"
                             valueTemplate={this.selectedCountryTemplate} itemTemplate={this.countryOptionTemplate} />
+
+                        <h5>Virtual Scroll (100000 Items)</h5>
+                        <Dropdown value={this.state.selectedItem} options={this.items} onChange={this.onItemChange} virtualScrollerOptions={{ itemSize: 31 }} placeholder="Select Item"/>
+
+                        <h5>Virtual Scroll (100000 Items) and Lazy</h5>
+                        <Dropdown value={this.state.selectedItem2} options={this.state.lazyItems} onChange={this.onLazyItemChange} virtualScrollerOptions={{ lazy: true, onLazyLoad: this.onLazyLoad, itemSize: 31, showLoader: true, loading: this.state.lazyLoading, delay: 250, loadingTemplate: (options) => {
+                            return (
+                                <div className="p-d-flex p-ai-center p-p-2" style={{ height: '31px' }}>
+                                    <Skeleton width={options.even ? '60%' : '50%'} height="1rem" />
+                                </div>
+                            )}
+                        }} placeholder="Select Item"/>
                     </div>
                 </div>
 
