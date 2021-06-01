@@ -12,7 +12,8 @@ export class ListBoxDemo extends Component {
         this.state = {
             selectedCity: null,
             selectedCountries: null,
-            selectedGroupedCity: null
+            selectedGroupedCity: null,
+            selectedItem: null
         };
 
         this.cities = [
@@ -66,6 +67,8 @@ export class ListBoxDemo extends Component {
             }
         ];
 
+        this.items = Array.from({ length: 100000 }).map((_, i) => ({ label: `Item #${i}`, value: i }));
+
         this.countryTemplate = this.countryTemplate.bind(this);
     }
 
@@ -94,7 +97,7 @@ export class ListBoxDemo extends Component {
                     <AppInlineHeader changelogText="listBox">
                         <h1>ListBox</h1>
                         <p>ListBox is used to select one or more values from a list of items.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="listbox/ListBoxDemo.js" />
                 </div>
 
@@ -110,6 +113,9 @@ export class ListBoxDemo extends Component {
                         <h5>Advanced with Templating, Filtering and Multiple Selection</h5>
                         <ListBox value={this.state.selectedCountries} options={this.countries} onChange={(e) => this.setState({ selectedCountries: e.value })} multiple filter optionLabel="name"
                             itemTemplate={this.countryTemplate} style={{ width: '15rem' }} listStyle={{ maxHeight: '250px' }} />
+
+                        <h5>Virtual Scroll (100000 Items)</h5>
+                        <ListBox value={this.state.selectedItem} options={this.items} virtualScrollerOptions={{ itemSize: 31 }} onChange={(e) => this.setState({ selectedItem: e.value })} style={{ width: '15rem' }} listStyle={{ height: '250px' }}/>
                     </div>
                 </div>
 
