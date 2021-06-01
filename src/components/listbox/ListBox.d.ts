@@ -1,5 +1,6 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
+import { VirtualScrollerProps } from '../virtualscroller/VirtualScroller';
 
 
 type ListBoxOptionGroupTemplateType = React.ReactNode | ((option: any, index: number) => React.ReactNode);
@@ -42,6 +43,7 @@ export interface ListBoxProps {
     listStyle?: object;
     listClassName?: string;
     className?: string;
+    virtualScrollerOptions?: VirtualScrollerProps;
     disabled?: boolean;
     dataKey?: string;
     multiple?: boolean;

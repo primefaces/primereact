@@ -6,6 +6,7 @@ import FilterUtils from '../utils/FilterUtils';
 import { ListBoxItem } from './ListBoxItem';
 import { ListBoxHeader } from './ListBoxHeader';
 import { tip } from '../tooltip/Tooltip';
+import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 
 export class ListBox extends Component {
 
@@ -24,6 +25,7 @@ export class ListBox extends Component {
         listStyle: null,
         listClassName: null,
         className: null,
+        virtualScrollerOptions: null,
         disabled: null,
         dataKey: null,
         multiple: false,
@@ -57,6 +59,7 @@ export class ListBox extends Component {
         listStyle: PropTypes.object,
         listClassName: PropTypes.string,
         className: PropTypes.string,
+        virtualScrollerOptions: PropTypes.object,
         disabled: PropTypes.bool,
         dataKey: PropTypes.string,
         multiple: PropTypes.bool,
@@ -360,50 +363,79 @@ export class ListBox extends Component {
         )
     }
 
-    renderItems() {
-        const visibleOptions = this.getVisibleOptions();
+    renderItem(option, index) {
+        if (this.props.optionGroupLabel) {
+            const groupContent = this.props.optionGroupTemplate ? ObjectUtils.getJSXElement(this.props.optionGroupTemplate, option, index) : this.getOptionGroupLabel(option);
+            const groupChildrenContent = this.renderGroupChildren(option);
+            const key = index + '_' + this.getOptionGroupRenderKey(option);
 
-        if (visibleOptions) {
-            if (this.props.optionGroupLabel) {
-                return visibleOptions.map((option, i) => {
-                    const groupContent = this.props.optionGroupTemplate ? ObjectUtils.getJSXElement(this.props.optionGroupTemplate, option, i) : this.getOptionGroupLabel(option);
-                    const groupChildrenContent = this.renderGroupChildren(option);
-                    const key = i + '_' + this.getOptionGroupRenderKey(option);
+            return (
+                <React.Fragment key={key}>
+                    <li className="p-listbox-item-group">
+                        {groupContent}
+                    </li>
+                    {groupChildrenContent}
+                </React.Fragment>
+            )
+        }
+        else {
+            let optionLabel = this.getOptionLabel(option);
+            let optionKey = index + '_' + this.getOptionRenderKey(option);
+            let disabled = this.isOptionDisabled(option)
+            let tabIndex = disabled ? null : this.props.tabIndex || 0;
 
-                    return (
-                        <React.Fragment key={key}>
-                            <li className="p-listbox-item-group">
-                                {groupContent}
-                            </li>
-                            {groupChildrenContent}
-                        </React.Fragment>
-                    )
-                });
-            }
-            else {
-                return visibleOptions.map((option, index) => {
-                    let optionLabel = this.getOptionLabel(option);
-                    let optionKey = index + '_' + this.getOptionRenderKey(option);
-                    let disabled = this.isOptionDisabled(option)
-                    let tabIndex = disabled ? null : this.props.tabIndex || 0;
+            return (
+                <ListBoxItem key={optionKey} label={optionLabel} option={option} template={this.props.itemTemplate} selected={this.isSelected(option)}
+                    onClick={this.onOptionSelect} onTouchEnd={this.onOptionTouchEnd} tabIndex={tabIndex} disabled={disabled} />
+            );
+        }
+    }
 
-                    return (
-                        <ListBoxItem key={optionKey} label={optionLabel} option={option} template={this.props.itemTemplate} selected={this.isSelected(option)}
-                            onClick={this.onOptionSelect} onTouchEnd={this.onOptionTouchEnd} tabIndex={tabIndex} disabled={disabled} />
-                    );
-                });
-            }
+    renderItems(visibleOptions) {
+        if (visibleOptions && visibleOptions.length) {
+            return visibleOptions.map((option, index) => this.renderItem(option, index));
         }
 
         return null;
     }
 
+    renderList(visibleOptions) {
+        if (this.props.virtualScrollerOptions) {
+            const virtualScrollerProps = { ...this.props.virtualScrollerOptions, ...{
+                items: visibleOptions,
+                itemTemplate: (item, options) => item && this.renderItem(item, options.index),
+                contentTemplate: (options) => {
+                    const className = classNames('p-listbox-list', options.className);
+
+                    return (
+                        <ul ref={options.ref} className={className} role="listbox" aria-multiselectable={this.props.multiple}>
+                            {options.children}
+                        </ul>
+                    );
+                }
+            }};
+
+            return <VirtualScroller ref={(el) => this.virtualScrollerRef = el} {...virtualScrollerProps} />;
+        }
+        else {
+            let items = this.renderItems(visibleOptions);
+
+            return (
+                <ul className="p-listbox-list" role="listbox" aria-multiselectable={this.props.multiple}>
+                    {items}
+                </ul>
+            );
+        }
+    }
+
     render() {
-        let className = classNames('p-listbox p-component', {
+        const className = classNames('p-listbox p-component', {
             'p-disabled': this.props.disabled
         }, this.props.className);
-        let listClassName = classNames('p-listbox-list-wrapper', this.props.listClassName);
-        let items = this.renderItems();
+        const listClassName = classNames('p-listbox-list-wrapper', this.props.listClassName);
+        const visibleOptions = this.getVisibleOptions();
+        const list = this.renderList(visibleOptions);
+
         let header;
 
         if (this.props.filter) {
@@ -413,10 +445,8 @@ export class ListBox extends Component {
         return (
             <div ref={(el) => this.element = el} id={this.props.id} className={className} style={this.props.style}>
                 {header}
-                <div className={listClassName} style={this.props.listStyle}>
-                    <ul className="p-listbox-list" role="listbox" aria-multiselectable={this.props.multiple}>
-                        {items}
-                    </ul>
+                <div ref={(el) => this.wrapper = el} className={listClassName} style={this.props.listStyle}>
+                    {list}
                 </div>
             </div>
         );
