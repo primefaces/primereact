@@ -66,7 +66,7 @@ class AutoCompletePanelComponent extends Component {
     renderContent() {
         if (this.props.virtualScrollerOptions) {
             const virtualScrollerProps = { ...this.props.virtualScrollerOptions, ...{
-                style: {...this.props.virtualScrollerOptions.style, ...{ height: this.props.scrollHeight || 'auto' }},
+                style: {...this.props.virtualScrollerOptions.style, ...{ height: this.props.scrollHeight }},
                 items: this.props.suggestions,
                 itemTemplate: (item, options) => item && this.renderItem(item, options.index),
                 contentTemplate: (options) => {

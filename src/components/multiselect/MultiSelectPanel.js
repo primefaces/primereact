@@ -128,7 +128,7 @@ class MultiSelectPanelComponent extends Component {
     renderContent() {
         if (this.props.virtualScrollerOptions) {
             const virtualScrollerProps = { ...this.props.virtualScrollerOptions, ...{
-                style: {...this.props.virtualScrollerOptions.style, ...{ height: this.props.scrollHeight || 'auto' }},
+                style: {...this.props.virtualScrollerOptions.style, ...{ height: this.props.scrollHeight }},
                 className: classNames('p-multiselect-items-wrapper', this.props.virtualScrollerOptions.className),
                 items: this.props.visibleOptions,
                 itemTemplate: (item, options) => item && this.renderItem(item, options.index),
