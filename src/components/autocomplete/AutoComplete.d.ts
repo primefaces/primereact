@@ -53,8 +53,8 @@ export interface AutoCompleteProps {
     optionGroupChildren?: string;
     optionGroupTemplate?: AutoCompleteOptionGroupTemplateType;
     forceSelection?: boolean;
-    virtualScrollerOptions?: VirtualScrollerProps;
     autoHighlight?: boolean;
+    virtualScrollerOptions?: VirtualScrollerProps;
     scrollHeight?: string;
     dropdown?: boolean;
     dropdownMode?: string;

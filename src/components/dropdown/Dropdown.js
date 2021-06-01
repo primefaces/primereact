@@ -5,7 +5,6 @@ import ObjectUtils from '../utils/ObjectUtils';
 import FilterUtils from '../utils/FilterUtils';
 import { classNames } from '../utils/ClassNames';
 import { DropdownPanel } from './DropdownPanel';
-import { DropdownItem } from './DropdownItem';
 import { tip } from '../tooltip/Tooltip';
 import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
@@ -30,6 +29,7 @@ export class Dropdown extends Component {
         itemTemplate: null,
         style: null,
         className: null,
+        virtualScrollerOptions: null,
         scrollHeight: '200px',
         filter: false,
         filterBy: null,
@@ -65,7 +65,8 @@ export class Dropdown extends Component {
         onMouseDown: null,
         onContextMenu: null,
         onShow: null,
-        onHide: null
+        onHide: null,
+        onFilter: null
     };
 
     static propTypes = {
@@ -84,6 +85,7 @@ export class Dropdown extends Component {
         itemTemplate: PropTypes.any,
         style: PropTypes.object,
         className: PropTypes.string,
+        virtualScrollerOptions: PropTypes.object,
         scrollHeight: PropTypes.string,
         filter: PropTypes.bool,
         filterBy: PropTypes.string,
@@ -101,7 +103,6 @@ export class Dropdown extends Component {
         filterInputAutoFocus: PropTypes.bool,
         resetFilterOnHide: PropTypes.bool,
         showFilterClear: PropTypes.bool,
-        lazy: PropTypes.bool,
         panelClassName: PropTypes.string,
         panelStyle: PropTypes.object,
         dataKey: PropTypes.string,
@@ -120,7 +121,8 @@ export class Dropdown extends Component {
         onMouseDown: PropTypes.func,
         onContextMenu: PropTypes.func,
         onShow: PropTypes.func,
-        onHide: PropTypes.func
+        onHide: PropTypes.func,
+        onFilter: PropTypes.func
     };
 
     constructor(props) {
@@ -141,6 +143,7 @@ export class Dropdown extends Component {
         this.onOptionClick = this.onOptionClick.bind(this);
         this.onFilterInputChange = this.onFilterInputChange.bind(this);
         this.onFilterInputKeyDown = this.onFilterInputKeyDown.bind(this);
+        this.onFilterClearIconClick = this.onFilterClearIconClick.bind(this);
         this.onPanelClick = this.onPanelClick.bind(this);
         this.onOverlayEnter = this.onOverlayEnter.bind(this);
         this.onOverlayEntered = this.onOverlayEntered.bind(this);
@@ -148,6 +151,16 @@ export class Dropdown extends Component {
         this.onOverlayExited = this.onOverlayExited.bind(this);
         this.resetFilter = this.resetFilter.bind(this);
         this.clear = this.clear.bind(this);
+        this.hasFilter = this.hasFilter.bind(this);
+
+        this.getOptionLabel = this.getOptionLabel.bind(this);
+        this.getOptionRenderKey = this.getOptionRenderKey.bind(this);
+        this.isOptionDisabled = this.isOptionDisabled.bind(this);
+        this.getOptionGroupChildren = this.getOptionGroupChildren.bind(this);
+        this.getOptionGroupLabel = this.getOptionGroupLabel.bind(this);
+        this.getOptionGroupRenderKey = this.getOptionGroupRenderKey.bind(this);
+        this.getSelectedOptionIndex = this.getSelectedOptionIndex.bind(this);
+        this.isSelected = this.isSelected.bind(this);
 
         this.overlayRef = createRef();
         this.inputRef = createRef(this.props.inputRef);
@@ -500,11 +513,29 @@ export class Dropdown extends Component {
     }
 
     onFilterInputChange(event) {
-        this.setState({ filter: event.target.value });
+        const filter = event.target.value;
+
+        this.setState({ filter }, () => {
+            if (this.props.onFilter) {
+                this.props.onFilter({
+                    originalEvent: event,
+                    filter
+                });
+            }
+        });
+    }
+
+    onFilterClearIconClick(callback) {
+        this.resetFilter(callback);
     }
 
     resetFilter(callback) {
-        this.setState({ filter: '' }, callback);
+        const filter = '';
+
+        this.setState({ filter }, () => {
+            this.props.onFilter && this.props.onFilter({ filter });
+            callback && callback();
+        });
     }
 
     clear(event) {
@@ -598,21 +629,19 @@ export class Dropdown extends Component {
         this.setState({ overlayVisible: false });
     }
 
-    onOverlayEnter() {
+    onOverlayEnter(callback) {
         ZIndexUtils.set('overlay', this.overlayRef.current);
         this.alignOverlay();
         this.scrollInView();
+        callback && callback();
     }
 
-    onOverlayEntered() {
+    onOverlayEntered(callback) {
         this.bindDocumentClickListener();
         this.bindScrollListener();
         this.bindResizeListener();
 
-        if (this.props.filter && this.props.filterInputAutoFocus) {
-            this.filterInput.focus();
-        }
-
+        callback && callback();
         this.props.onShow && this.props.onShow();
     }
 
@@ -932,92 +961,6 @@ export class Dropdown extends Component {
         );
     }
 
-    renderGroupChildren(optionGroup) {
-        const groupChildren = this.getOptionGroupChildren(optionGroup);
-        return (
-            groupChildren.map((option, j) => {
-                let optionLabel = this.getOptionLabel(option);
-                let optionKey = j + '_' + this.getOptionRenderKey(option);
-                let disabled = this.isOptionDisabled(option);
-
-                return (
-                    <DropdownItem key={optionKey} label={optionLabel} option={option} template={this.props.itemTemplate} selected={this.isSelected(option)} disabled={disabled} onClick={this.onOptionClick} />
-                );
-            })
-        )
-    }
-
-    renderItems() {
-        const visibleOptions = this.getVisibleOptions();
-
-        if (visibleOptions && visibleOptions.length) {
-            if (this.props.optionGroupLabel) {
-                return visibleOptions.map((option, i) => {
-                    const groupContent = this.props.optionGroupTemplate ? ObjectUtils.getJSXElement(this.props.optionGroupTemplate, option, i) : this.getOptionGroupLabel(option);
-                    const groupChildrenContent = this.renderGroupChildren(option);
-                    const key = i + '_' + this.getOptionGroupRenderKey(option);
-
-                    return (
-                        <React.Fragment key={key}>
-                            <li className="p-dropdown-item-group">
-                                {groupContent}
-                            </li>
-                            {groupChildrenContent}
-                        </React.Fragment>
-                    )
-                });
-            }
-            else {
-                return visibleOptions.map((option, index) => {
-                    let optionLabel = this.getOptionLabel(option);
-                    let optionKey = index + '_' + this.getOptionRenderKey(option);
-                    let disabled = this.isOptionDisabled(option);
-
-                    return (
-                        <DropdownItem key={optionKey} label={optionLabel} option={option} template={this.props.itemTemplate} selected={this.isSelected(option)} disabled={disabled} onClick={this.onOptionClick} />
-                    );
-                });
-            }
-        }
-        else if (this.hasFilter()) {
-            const emptyFilterMessage = ObjectUtils.getJSXElement(this.props.emptyFilterMessage, this.props);
-            return (
-                <li className="p-dropdown-empty-message">
-                    {emptyFilterMessage}
-                </li>
-            );
-        }
-
-        return null;
-    }
-
-    renderFilterClearIcon() {
-        if (this.props.showFilterClear && this.state.filter) {
-            return <i className="p-dropdown-filter-clear-icon pi pi-times" onClick={() => this.resetFilter(() => this.filterInput.focus())}></i>
-        }
-
-        return null;
-    }
-
-    renderFilter() {
-        if (this.props.filter) {
-            const clearIcon = this.renderFilterClearIcon();
-            const containerClassName = classNames('p-dropdown-filter-container', { 'p-dropdown-clearable-filter': !!clearIcon });
-            return (
-                <div className="p-dropdown-header">
-                    <div className={containerClassName} onClick={this.onFilterContainerClick}>
-                        <input ref={(el) => this.filterInput = el} type="text" autoComplete="off" className="p-dropdown-filter p-inputtext p-component" placeholder={this.props.filterPlaceholder}
-                            onKeyDown={this.onFilterInputKeyDown} onChange={this.onFilterInputChange} value={this.state.filter} />
-                        {clearIcon}
-                        <i className="p-dropdown-filter-icon pi pi-search"></i>
-                    </div>
-                </div>
-            );
-        }
-
-        return null;
-    }
-
     render() {
         let className = classNames('p-dropdown p-component p-inputwrapper', this.props.className, {
             'p-disabled': this.props.disabled,
@@ -1026,14 +969,13 @@ export class Dropdown extends Component {
             'p-inputwrapper-filled': this.props.value,
             'p-inputwrapper-focus': this.state.focused || this.state.overlayVisible
         });
+        let visibleOptions = this.getVisibleOptions();
         let selectedOption = this.getSelectedOption();
 
         let hiddenSelect = this.renderHiddenSelect(selectedOption);
         let keyboardHelper = this.renderKeyboardHelper();
         let labelElement = this.renderLabel(selectedOption);
         let dropdownIcon = this.renderDropdownIcon();
-        let items = this.renderItems();
-        let filterElement = this.renderFilter();
         let clearIcon = this.renderClearIcon();
 
         return (
@@ -1044,11 +986,12 @@ export class Dropdown extends Component {
                 {labelElement}
                 {clearIcon}
                 {dropdownIcon}
-                <DropdownPanel ref={this.overlayRef} appendTo={this.props.appendTo} panelStyle={this.props.panelStyle} panelClassName={this.props.panelClassName}
-                    scrollHeight={this.props.scrollHeight} filter={filterElement} onClick={this.onPanelClick} transitionOptions={this.props.transitionOptions}
-                    in={this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
-                    {items}
-                </DropdownPanel>
+                <DropdownPanel ref={this.overlayRef} visibleOptions={visibleOptions} {...this.props} onClick={this.onPanelClick} onOptionClick={this.onOptionClick}
+                    filterValue={this.state.filter} hasFilter={this.hasFilter} onFilterClearIconClick={this.onFilterClearIconClick} onFilterInputKeyDown={this.onFilterInputKeyDown} onFilterInputChange={this.onFilterInputChange}
+                    getOptionLabel={this.getOptionLabel} getOptionRenderKey={this.getOptionRenderKey} isOptionDisabled={this.isOptionDisabled}
+                    getOptionGroupChildren={this.getOptionGroupChildren} getOptionGroupLabel={this.getOptionGroupLabel} getOptionGroupRenderKey={this.getOptionGroupRenderKey}
+                    isSelected={this.isSelected} getSelectedOptionIndex={this.getSelectedOptionIndex}
+                    in={this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited} />
             </div>
         );
     }

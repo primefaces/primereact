@@ -1,5 +1,6 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
+import { VirtualScrollerProps } from '../virtualscroller/VirtualScroller';
 
 type DropdownOptionGroupTemplateType = React.ReactNode | ((option: any, index: number) => React.ReactNode);
 
@@ -27,6 +28,11 @@ interface DropdownChangeParams {
     target: DropdownChangeTargetOptions;
 }
 
+interface DropdownFilterParams {
+    originalEvent: React.SyntheticEvent;
+    value: string;
+}
+
 export interface DropdownProps {
     id?: string;
     inputRef?: React.Ref<HTMLSelectElement>;
@@ -43,6 +49,7 @@ export interface DropdownProps {
     itemTemplate?: DropdownItemTemplateType;
     style?: object;
     className?: string;
+    virtualScrollerOptions?: VirtualScrollerProps;
     scrollHeight?: string;
     filter?: boolean;
     filterBy?: string;
@@ -60,7 +67,6 @@ export interface DropdownProps {
     filterInputAutoFocus?: boolean;
     resetFilterOnHide?: boolean;
     showFilterClear?: boolean;
-    lazy?: boolean;
     panelClassName?: string;
     panelStyle?: object;
     dataKey?: string;
@@ -80,6 +86,7 @@ export interface DropdownProps {
     onContextMenu?(event: React.MouseEvent<HTMLElement>): void;
     onShow?(): void;
     onHide?(): void;
+    onFilter?(e: DropdownFilterParams): void;
 }
 
 export declare class Dropdown extends React.Component<DropdownProps, any> { }
