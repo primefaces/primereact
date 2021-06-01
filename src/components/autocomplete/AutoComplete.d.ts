@@ -1,5 +1,6 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/TooltipOptions';
+import { VirtualScrollerProps } from '../virtualscroller/VirtualScroller';
 
 type AutoCompleteOptionGroupTemplateType = React.ReactNode | ((suggestion: any, index: number) => React.ReactNode);
 
@@ -52,6 +53,7 @@ export interface AutoCompleteProps {
     optionGroupChildren?: string;
     optionGroupTemplate?: AutoCompleteOptionGroupTemplateType;
     forceSelection?: boolean;
+    virtualScrollerOptions?: VirtualScrollerProps;
     autoHighlight?: boolean;
     scrollHeight?: string;
     dropdown?: boolean;
