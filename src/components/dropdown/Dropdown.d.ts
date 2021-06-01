@@ -30,7 +30,7 @@ interface DropdownChangeParams {
 
 interface DropdownFilterParams {
     originalEvent: React.SyntheticEvent;
-    value: string;
+    filter: string;
 }
 
 export interface DropdownProps {
