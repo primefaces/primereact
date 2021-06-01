@@ -78,6 +78,8 @@ export interface VirtualScrollerProps {
     className?: string;
     items?: VirtualScrollerItemsType;
     itemSize?: VirtualScrollerItemSizeType;
+    scrollHeight?: string;
+    scrollWidth?: string;
     orientation?: VirtualScrollerOrientationType;
     numToleratedItems?: number;
     delay?: number;

@@ -11,6 +11,8 @@ export class VirtualScroller extends Component {
         className: null,
         items: null,
         itemSize: 0,
+        scrollHeight: null,
+        scrollWidth: null,
         orientation: 'vertical',
         numToleratedItems: null,
         delay: 0,
@@ -30,6 +32,8 @@ export class VirtualScroller extends Component {
         className: PropTypes.string,
         items: PropTypes.any,
         itemSize: PropTypes.oneOfType([PropTypes.number, PropTypes.array]).isRequired,
+        scrollHeight: PropTypes.string,
+        scrollWidth: PropTypes.string,
         orientation: PropTypes.string,
         numToleratedItems: PropTypes.number,
         delay: PropTypes.number,
@@ -537,12 +541,16 @@ export class VirtualScroller extends Component {
             'p-both-scroll': isBoth,
             'p-horizontal-scroll': isHorizontal
         }, this.props.className);
+        const style = {...(this.props.style || {}), ...{
+            height: this.props.scrollHeight || '',
+            width: this.props.scrollWidth || ''
+        }};
 
         const loader = this.renderLoader();
         const content = this.renderContent();
 
         return (
-            <div ref={(el) => this.element = el} className={className} style={this.props.style} onScroll={this.onScroll}>
+            <div ref={(el) => this.element = el} className={className} style={style} onScroll={this.onScroll}>
                 {content}
                 <div ref={(el) => this.spacer = el} className="p-virtualscroller-spacer"></div>
                 {loader}
