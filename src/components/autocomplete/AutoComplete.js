@@ -28,6 +28,7 @@ export class AutoComplete extends Component {
         optionGroupTemplate: null,
         forceSelection: false,
         autoHighlight: false,
+        virtualScrollerOptions: null,
         scrollHeight: '200px',
         dropdown: false,
         dropdownMode: 'blank',
@@ -86,6 +87,7 @@ export class AutoComplete extends Component {
         optionGroupTemplate: PropTypes.any,
         forceSelection: PropTypes.bool,
         autoHighlight: PropTypes.bool,
+        virtualScrollerOptions: PropTypes.object,
         scrollHeight: PropTypes.string,
         dropdown: PropTypes.bool,
         dropdownMode: PropTypes.string,
@@ -160,6 +162,7 @@ export class AutoComplete extends Component {
         this.onPanelClick = this.onPanelClick.bind(this);
 
         this.overlayRef = createRef();
+        this.virtualScrollerRef = createRef();
         this.inputRef = createRef(this.props.inputRef);
     }
 
@@ -377,7 +380,7 @@ export class AutoComplete extends Component {
                         }
                     }
                     else {
-                        highlightItem = this.overlayRef.current.firstChild.firstChild;
+                        highlightItem = DomHandler.findSingle(this.overlayRef.current, 'li');
                         if (DomHandler.hasClass(highlightItem, 'p-autocomplete-item-group')) {
                             highlightItem = this.findNextItem(highlightItem);
                         }
@@ -834,13 +837,9 @@ export class AutoComplete extends Component {
                 {input}
                 {loader}
                 {dropdown}
-                <AutoCompletePanel ref={this.overlayRef} suggestions={this.props.suggestions} field={this.props.field} listId={this.state.id + '_list'}
-                    appendTo={this.props.appendTo} scrollHeight={this.props.scrollHeight} itemTemplate={this.props.itemTemplate} onItemClick={this.selectItem} ariaSelected={this.ariaSelected}
-                    panelStyle={this.props.panelStyle} panelClassName={this.props.panelClassName} onClick={this.onPanelClick}
-                    optionGroupLabel={this.props.optionGroupLabel} optionGroupChildren={this.props.optionGroupChildren} optionGroupTemplate={this.props.optionGroupTemplate}
-                    getOptionGroupLabel={this.getOptionGroupLabel} getOptionGroupChildren={this.getOptionGroupChildren}
-                    in={this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntering={this.onOverlayEntering} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}
-                    transitionOptions={this.props.transitionOptions} />
+                <AutoCompletePanel ref={this.overlayRef} virtualScrollerRef={this.virtualScrollerRef} {...this.props} listId={this.state.id + '_list'} onItemClick={this.selectItem} ariaSelected={this.ariaSelected}
+                    onClick={this.onPanelClick} getOptionGroupLabel={this.getOptionGroupLabel} getOptionGroupChildren={this.getOptionGroupChildren}
+                    in={this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntering={this.onOverlayEntering} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited} />
             </span>
         );
     }
