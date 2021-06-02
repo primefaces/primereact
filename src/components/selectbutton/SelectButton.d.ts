@@ -26,6 +26,7 @@ export interface SelectButtonProps {
     optionDisabled?: SelectButtonOptionDisabledType;
     tabIndex?: number;
     multiple?: boolean;
+    unselectable?: boolean;
     disabled?: boolean;
     style?: object;
     className?: string;

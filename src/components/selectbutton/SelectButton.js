@@ -15,8 +15,9 @@ export class SelectButton extends Component {
         optionValue: null,
         optionDisabled: null,
         tabIndex: null,
-        multiple: null,
-        disabled: null,
+        multiple: false,
+        unselectable: true,
+        disabled: false,
         style: null,
         className: null,
         dataKey: null,
@@ -36,6 +37,7 @@ export class SelectButton extends Component {
         optionDisabled: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
         tabIndex: PropTypes.number,
         multiple: PropTypes.bool,
+        unselectable: PropTypes.bool,
         disabled: PropTypes.bool,
         style: PropTypes.object,
         className: PropTypes.string,
@@ -59,6 +61,10 @@ export class SelectButton extends Component {
         }
 
         let selected = this.isSelected(event.option);
+        if (selected && !this.props.unselectable) {
+            return;
+        }
+
         let optionValue = this.getOptionValue(event.option);
         let newValue;
 
