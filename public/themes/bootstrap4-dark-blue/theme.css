@@ -964,6 +964,8 @@
 
 .p-inputwrapper-filled.p-multiselect.p-multiselect-chip .p-multiselect-label {
   padding: 0.25rem 0.75rem; }
+  .p-inputwrapper-filled.p-multiselect.p-multiselect-chip .p-multiselect-label.p-multiselect-items-label {
+    padding: 0.5rem 0.75rem; }
 .p-inputwrapper-filled.p-multiselect.p-multiselect-clearable .p-multiselect-label {
   padding-right: 1.75rem; }
 
@@ -4622,6 +4624,9 @@
   .p-tag.p-tag-danger {
     background-color: #f19ea6;
     color: #151515; }
+
+.p-virtualscroller-loading-icon {
+  font-size: 2rem; }
 
 /* Vendor extensions to the designer enhanced bootstrap compatibility */
 .p-breadcrumb .p-breadcrumb-chevron {

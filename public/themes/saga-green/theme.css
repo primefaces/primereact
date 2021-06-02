@@ -961,6 +961,8 @@
 
 .p-inputwrapper-filled.p-multiselect.p-multiselect-chip .p-multiselect-label {
   padding: 0.25rem 0.5rem; }
+  .p-inputwrapper-filled.p-multiselect.p-multiselect-chip .p-multiselect-label.p-multiselect-items-label {
+    padding: 0.5rem 0.5rem; }
 .p-inputwrapper-filled.p-multiselect.p-multiselect-clearable .p-multiselect-label {
   padding-right: 1.5rem; }
 
@@ -4613,6 +4615,9 @@
   .p-tag.p-tag-danger {
     background-color: #D32F2F;
     color: #ffffff; }
+
+.p-virtualscroller-loading-icon {
+  font-size: 2rem; }
 
 /* Customizations to the designer theme should be defined here */
 .p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {

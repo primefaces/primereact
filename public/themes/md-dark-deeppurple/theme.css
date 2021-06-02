@@ -982,6 +982,8 @@
 
 .p-inputwrapper-filled.p-multiselect.p-multiselect-chip .p-multiselect-label {
   padding: 0.5rem 1rem; }
+  .p-inputwrapper-filled.p-multiselect.p-multiselect-chip .p-multiselect-label.p-multiselect-items-label {
+    padding: 1rem 1rem; }
 .p-inputwrapper-filled.p-multiselect.p-multiselect-clearable .p-multiselect-label {
   padding-right: 2rem; }
 
@@ -4634,6 +4636,9 @@
   .p-tag.p-tag-danger {
     background-color: #EF9A9A;
     color: #212121; }
+
+.p-virtualscroller-loading-icon {
+  font-size: 2rem; }
 
 .p-accordion .p-accordion-tab {
   box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
