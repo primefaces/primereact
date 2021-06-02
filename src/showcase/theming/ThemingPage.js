@@ -111,6 +111,59 @@ html {
                             </tbody>
                         </table>
 				    </div>
+
+                    <h5>Styles</h5>
+                    <p>The css dependencies are as follows, note that you may change the theme with another one of your choice. If you are using a bundler such as webpack with a css loader you
+                    may import them to your main application component.</p>
+
+<CodeHighlight lang="js">
+{`
+primereact/resources/themes/saga-blue/theme.css
+primereact/resources/primereact.min.css
+primeicons/primeicons.css
+`}
+</CodeHighlight>
+
+                <h5>Free Themes</h5>
+                <p>PrimeReact ships with various free themes to choose from.</p>
+<CodeHighlight lang="js">
+{`
+primereact/resources/themes/bootstrap4-light-blue/theme.css
+primereact/resources/themes/bootstrap4-light-purple/theme.css
+primereact/resources/themes/bootstrap4-dark-blue/theme.css
+primereact/resources/themes/bootstrap4-dark-purple/theme.css
+primereact/resources/themes/md-light-indigo/theme.css
+primereact/resources/themes/md-light-deeppurple/theme.css
+primereact/resources/themes/md-dark-indigo/theme.css
+primereact/resources/themes/md-dark-deeppurple/theme.css
+primereact/resources/themes/mdc-light-indigo/theme.css
+primereact/resources/themes/mdc-light-deeppurple/theme.css
+primereact/resources/themes/mdc-dark-indigo/theme.css
+primereact/resources/themes/mdc-dark-deeppurple/theme.css
+primereact/resources/themes/fluent-light/theme.css
+primereact/resources/themes/saga-blue/theme.css
+primereact/resources/themes/saga-green/theme.css
+primereact/resources/themes/saga-orange/theme.css
+primereact/resources/themes/saga-purple/theme.css
+primereact/resources/themes/vela-blue/theme.css
+primereact/resources/themes/vela-green/theme.css
+primereact/resources/themes/vela-orange/theme.css
+primereact/resources/themes/vela-purple/theme.css
+primereact/resources/themes/arya-blue/theme.css
+primereact/resources/themes/arya-green/theme.css
+primereact/resources/themes/arya-orange/theme.css
+primereact/resources/themes/arya-purple/theme.css
+primereact/resources/themes/nova/theme.css
+primereact/resources/themes/nova-alt/theme.css
+primereact/resources/themes/nova-accent/theme.css
+primereact/resources/themes/nova-vue/theme.css
+primereact/resources/themes/luna-amber/theme.css
+primereact/resources/themes/luna-blue/theme.css
+primereact/resources/themes/luna-green/theme.css
+primereact/resources/themes/luna-pink/theme.css
+primereact/resources/themes/rhea/theme.css
+`}
+</CodeHighlight>
                 </div>
             </div>
         );
