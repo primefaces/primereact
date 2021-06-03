@@ -39,27 +39,35 @@ export class PolarAreaChartDemo extends Component {
         };
 
         this.lightOptions = {
-            legend: {
-                labels: {
-                    fontColor: '#495057'
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
                 }
             },
-            scale: {
-                gridLines: {
-                    color: '#ebedef'
+            scales: {
+                r: {
+                    grid: {
+                        color: '#ebedef'
+                    }
                 }
             }
         };
 
         this.darkOptions = {
-            legend: {
-                labels: {
-                    fontColor: '#ebedef'
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#ebedef'
+                    }
                 }
             },
-            scale: {
-                gridLines: {
-                    color: 'rgba(255,255,255,0.2)'
+            scales: {
+                r: {
+                    grid: {
+                        color: 'rgba(255,255,255,0.2)'
+                    }
                 }
             }
         };
@@ -73,17 +81,17 @@ export class PolarAreaChartDemo extends Component {
                         <h1>PolarAreaChart</h1>
                         <p>Polar area charts are similar to pie charts, but each segment has the same angle - the radius of the segment differs depending on the value.</p>
                     </AppInlineHeader>
-                    <AppDemoActions github="chart/PolarAreaChartDemo.js"/>
+                    <AppDemoActions github="chart/PolarAreaChartDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
-                    <div className="card">
+                    <div className="card p-d-flex p-jc-center">
                         <AppContentContext.Consumer>
                             {
                                 context => {
                                     let options = context.darkTheme ? this.darkOptions : this.lightOptions;
 
-                                    return <Chart type="polarArea" data={this.chartData} options={options} />
+                                    return <Chart type="polarArea" data={this.chartData} options={options} style={{ position: 'relative', width: '40%' }} />
                                 }
                             }
                         </AppContentContext.Consumer>
@@ -141,14 +149,18 @@ export class PolarAreaChartDemo extends Component {
         };
 
         this.lightOptions = {
-            legend: {
-                labels: {
-                    fontColor: '#495057'
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
                 }
             },
-            scale: {
-                gridLines: {
-                    color: '#ebedef'
+            scales: {
+                r: {
+                    grid: {
+                        color: '#ebedef'
+                    }
                 }
             }
         };
@@ -156,8 +168,8 @@ export class PolarAreaChartDemo extends Component {
 
     render() {
         return (
-            <div className="card">
-                <Chart type="polarArea" data={this.chartData} options={this.lightOptions} />
+            <div className="card p-d-flex p-jc-center">
+                <Chart type="polarArea" data={this.chartData} options={this.lightOptions} style={{ position: 'relative', width: '40%' }} />
             </div>
         )
     }
@@ -199,21 +211,25 @@ const PolarAreaChartDemo = () => {
     };
 
     const lightOptions = {
-        legend: {
-            labels: {
-                fontColor: '#495057'
+        plugins: {
+            legend: {
+                labels: {
+                    color: '#495057'
+                }
             }
         },
-        scale: {
-            gridLines: {
-                color: '#ebedef'
+        scales: {
+            r: {
+                grid: {
+                    color: '#ebedef'
+                }
             }
         }
     };
 
     return (
-        <div className="card">
-            <Chart type="polarArea" data={chartData} options={lightOptions} />
+        <div className="card p-d-flex p-jc-center">
+            <Chart type="polarArea" data={chartData} options={lightOptions} style={{ position: 'relative', width: '40%' }} />
         </div>
     );
 }
@@ -254,21 +270,25 @@ const PolarAreaChartDemo = () => {
     };
 
     const lightOptions = {
-        legend: {
-            labels: {
-                fontColor: '#495057'
+        plugins: {
+            legend: {
+                labels: {
+                    color: '#495057'
+                }
             }
         },
-        scale: {
-            gridLines: {
-                color: '#ebedef'
+        scales: {
+            r: {
+                grid: {
+                    color: '#ebedef'
+                }
             }
         }
     };
 
     return (
-        <div className="card">
-            <Chart type="polarArea" data={chartData} options={options} />
+        <div className="card p-d-flex p-jc-center">
+            <Chart type="polarArea" data={chartData} options={options} style={{ position: 'relative', width: '40%' }} />
         </div>
     );
 }
@@ -286,7 +306,7 @@ const PolarAreaChartDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
-                        useLiveEditorTabs({ name: 'PolarAreaChartDemo', sources: this.sources, dependencies: { 'chart.js': '2.7.3' } })
+                        useLiveEditorTabs({ name: 'PolarAreaChartDemo', sources: this.sources, dependencies: { 'chart.js': '3.3.2' } })
                     }
                 </TabView>
             </div>

@@ -18,13 +18,15 @@ export class LineChartDemo extends Component {
                     label: 'First Dataset',
                     data: [65, 59, 80, 81, 56, 55, 40],
                     fill: false,
-                    borderColor: '#42A5F5'
+                    borderColor: '#42A5F5',
+                    tension: .4
                 },
                 {
                     label: 'Second Dataset',
                     data: [28, 48, 40, 19, 86, 27, 90],
                     fill: false,
-                    borderColor: '#FFA726'
+                    borderColor: '#FFA726',
+                    tension: .4
                 }
             ]
         };
@@ -35,13 +37,15 @@ export class LineChartDemo extends Component {
                 label: 'Dataset 1',
                 fill: false,
                 borderColor: '#42A5F5',
-                yAxisID: 'y-axis-1',
+                yAxisID: 'y',
+                tension: .4,
                 data: [65, 59, 80, 81, 56, 55, 10]
             }, {
                 label: 'Dataset 2',
                 fill: false,
                 borderColor: '#00bb7e',
-                yAxisID: 'y-axis-2',
+                yAxisID: 'y1',
+                tension: .4,
                 data: [28, 48, 40, 19, 86, 27, 90]
             }]
         };
@@ -53,6 +57,7 @@ export class LineChartDemo extends Component {
                     label: 'First Dataset',
                     data: [65, 59, 80, 81, 56, 55, 40],
                     fill: false,
+                    tension: .4,
                     borderColor: '#42A5F5'
                 },
                 {
@@ -60,6 +65,7 @@ export class LineChartDemo extends Component {
                     data: [28, 48, 40, 19, 86, 27, 90],
                     fill: false,
                     borderDash: [5, 5],
+                    tension: .4,
                     borderColor: '#66BB6A'
                 },
                 {
@@ -67,6 +73,7 @@ export class LineChartDemo extends Component {
                     data: [12, 51, 62, 33, 21, 62, 45],
                     fill: true,
                     borderColor: '#FFA726',
+                    tension: .4,
                     backgroundColor: 'rgba(255,167,38,0.2)'
                 }
             ]
@@ -81,66 +88,77 @@ export class LineChartDemo extends Component {
 
     getLightTheme() {
         let basicOptions = {
-            legend: {
-                labels: {
-                    fontColor: '#495057'
+            maintainAspectRatio: false,
+            aspectRatio: .6,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
                 }
             },
             scales: {
-                xAxes: [{
+                x: {
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
                     }
-                }],
-                yAxes: [{
+                },
+                y: {
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
                     }
-                }]
+                }
             }
         };
 
         let multiAxisOptions = {
-            responsive: true,
-            hoverMode: 'index',
             stacked: false,
+            maintainAspectRatio: false,
+            aspectRatio: .6,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
+                }
+            },
             scales: {
-                xAxes: [{
+                x: {
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
                     },
-                    gridLines: {
+                    grid: {
                         color: '#ebedef'
                     }
-                }],
-                yAxes: [{
+                },
+                y: {
                     type: 'linear',
                     display: true,
                     position: 'left',
-                    id: 'y-axis-1',
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
                     },
-                    gridLines: {
+                    grid: {
                         color: '#ebedef'
                     }
-                }, {
+                },
+                y1: {
                     type: 'linear',
                     display: true,
                     position: 'right',
-                    id: 'y-axis-2',
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
                     },
-                    gridLines: {
+                    grid: {
                         drawOnChartArea: false,
                         color: '#ebedef'
                     }
-                }]
-            },
-            legend: {
-                labels: {
-                    fontColor: '#495057'
                 }
             }
         };
@@ -153,72 +171,77 @@ export class LineChartDemo extends Component {
 
     getDarkTheme() {
         let basicOptions = {
-            legend: {
-                labels: {
-                    fontColor: '#ebedef'
+            maintainAspectRatio: false,
+            aspectRatio: .6,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#ebedef'
+                    }
                 }
             },
             scales: {
-                xAxes: [{
+                x: {
                     ticks: {
-                        fontColor: '#ebedef'
+                        color: '#ebedef'
                     },
-                    gridLines: {
+                    grid: {
                         color: 'rgba(255,255,255,0.2)'
                     }
-                }],
-                yAxes: [{
+                },
+                y: {
                     ticks: {
-                        fontColor: '#ebedef'
+                        color: '#ebedef'
                     },
-                    gridLines: {
+                    grid: {
                         color: 'rgba(255,255,255,0.2)'
                     }
-                }]
+                }
             }
         };
 
         let multiAxisOptions = {
-            responsive: true,
-            hoverMode: 'index',
             stacked: false,
+            maintainAspectRatio: false,
+            aspectRatio: .6,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#ebedef'
+                    }
+                }
+            },
             scales: {
-                xAxes: [{
+                x: {
                     ticks: {
-                        fontColor: '#ebedef'
+                        color: '#ebedef'
                     },
-                    gridLines: {
+                    grid: {
                         color: 'rgba(255,255,255,0.2)'
                     }
-                }],
-                yAxes: [{
+                },
+                y: {
                     type: 'linear',
                     display: true,
                     position: 'left',
-                    id: 'y-axis-1',
                     ticks: {
-                        fontColor: '#ebedef'
+                        color: '#ebedef'
                     },
-                    gridLines: {
+                    grid: {
                         color: 'rgba(255,255,255,0.2)'
                     }
-                }, {
+                },
+                y1: {
                     type: 'linear',
                     display: true,
                     position: 'right',
-                    id: 'y-axis-2',
                     ticks: {
-                        fontColor: '#ebedef'
+                        color: '#ebedef'
                     },
-                    gridLines: {
+                    grid: {
                         drawOnChartArea: false,
                         color: 'rgba(255,255,255,0.2)'
                     }
-                }]
-            },
-            legend: {
-                labels: {
-                    fontColor: '#ebedef'
                 }
             }
         };
@@ -299,13 +322,15 @@ export class LineChartDemo extends Component {
                     label: 'First Dataset',
                     data: [65, 59, 80, 81, 56, 55, 40],
                     fill: false,
-                    borderColor: '#42A5F5'
+                    borderColor: '#42A5F5',
+                    tension: .4
                 },
                 {
                     label: 'Second Dataset',
                     data: [28, 48, 40, 19, 86, 27, 90],
                     fill: false,
-                    borderColor: '#FFA726'
+                    borderColor: '#FFA726',
+                    tension: .4
                 }
             ]
         };
@@ -316,13 +341,15 @@ export class LineChartDemo extends Component {
                 label: 'Dataset 1',
                 fill: false,
                 borderColor: '#42A5F5',
-                yAxisID: 'y-axis-1',
+                yAxisID: 'y',
+                tension: .4,
                 data: [65, 59, 80, 81, 56, 55, 10]
             }, {
                 label: 'Dataset 2',
                 fill: false,
                 borderColor: '#00bb7e',
-                yAxisID: 'y-axis-2',
+                yAxisID: 'y1',
+                tension: .4,
                 data: [28, 48, 40, 19, 86, 27, 90]
             }]
         };
@@ -334,6 +361,7 @@ export class LineChartDemo extends Component {
                     label: 'First Dataset',
                     data: [65, 59, 80, 81, 56, 55, 40],
                     fill: false,
+                    tension: .4,
                     borderColor: '#42A5F5'
                 },
                 {
@@ -341,6 +369,7 @@ export class LineChartDemo extends Component {
                     data: [28, 48, 40, 19, 86, 27, 90],
                     fill: false,
                     borderDash: [5, 5],
+                    tension: .4,
                     borderColor: '#66BB6A'
                 },
                 {
@@ -348,6 +377,7 @@ export class LineChartDemo extends Component {
                     data: [12, 51, 62, 33, 21, 62, 45],
                     fill: true,
                     borderColor: '#FFA726',
+                    tension: .4,
                     backgroundColor: 'rgba(255,167,38,0.2)'
                 }
             ]
@@ -358,66 +388,77 @@ export class LineChartDemo extends Component {
 
     getLightTheme() {
         let basicOptions = {
-            legend: {
-                labels: {
-                    fontColor: '#495057'
+            maintainAspectRatio: false,
+            aspectRatio: .6,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
                 }
             },
             scales: {
-                xAxes: [{
+                x: {
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
                     }
-                }],
-                yAxes: [{
+                },
+                y: {
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
                     }
-                }]
+                }
             }
         };
 
         let multiAxisOptions = {
-            responsive: true,
-            hoverMode: 'index',
             stacked: false,
+            maintainAspectRatio: false,
+            aspectRatio: .6,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
+                }
+            },
             scales: {
-                xAxes: [{
+                x: {
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
                     },
-                    gridLines: {
+                    grid: {
                         color: '#ebedef'
                     }
-                }],
-                yAxes: [{
+                },
+                y: {
                     type: 'linear',
                     display: true,
                     position: 'left',
-                    id: 'y-axis-1',
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
                     },
-                    gridLines: {
+                    grid: {
                         color: '#ebedef'
                     }
-                }, {
+                },
+                y1: {
                     type: 'linear',
                     display: true,
                     position: 'right',
-                    id: 'y-axis-2',
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
                     },
-                    gridLines: {
+                    grid: {
                         drawOnChartArea: false,
                         color: '#ebedef'
                     }
-                }]
-            },
-            legend: {
-                labels: {
-                    fontColor: '#495057'
                 }
             }
         };
@@ -467,13 +508,15 @@ const LineChartDemo = () => {
                 label: 'First Dataset',
                 data: [65, 59, 80, 81, 56, 55, 40],
                 fill: false,
-                borderColor: '#42A5F5'
+                borderColor: '#42A5F5',
+                tension: .4
             },
             {
                 label: 'Second Dataset',
                 data: [28, 48, 40, 19, 86, 27, 90],
                 fill: false,
-                borderColor: '#FFA726'
+                borderColor: '#FFA726',
+                tension: .4
             }
         ]
     };
@@ -484,13 +527,15 @@ const LineChartDemo = () => {
             label: 'Dataset 1',
             fill: false,
             borderColor: '#42A5F5',
-            yAxisID: 'y-axis-1',
+            yAxisID: 'y',
+            tension: .4,
             data: [65, 59, 80, 81, 56, 55, 10]
         }, {
             label: 'Dataset 2',
             fill: false,
             borderColor: '#00bb7e',
-            yAxisID: 'y-axis-2',
+            yAxisID: 'y1',
+            tension: .4,
             data: [28, 48, 40, 19, 86, 27, 90]
         }]
     };
@@ -502,6 +547,7 @@ const LineChartDemo = () => {
                 label: 'First Dataset',
                 data: [65, 59, 80, 81, 56, 55, 40],
                 fill: false,
+                tension: .4,
                 borderColor: '#42A5F5'
             },
             {
@@ -509,6 +555,7 @@ const LineChartDemo = () => {
                 data: [28, 48, 40, 19, 86, 27, 90],
                 fill: false,
                 borderDash: [5, 5],
+                tension: .4,
                 borderColor: '#66BB6A'
             },
             {
@@ -516,6 +563,7 @@ const LineChartDemo = () => {
                 data: [12, 51, 62, 33, 21, 62, 45],
                 fill: true,
                 borderColor: '#FFA726',
+                tension: .4,
                 backgroundColor: 'rgba(255,167,38,0.2)'
             }
         ]
@@ -523,66 +571,77 @@ const LineChartDemo = () => {
 
     const getLightTheme = () => {
         let basicOptions = {
-            legend: {
-                labels: {
-                    fontColor: '#495057'
+            maintainAspectRatio: false,
+            aspectRatio: .6,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
                 }
             },
             scales: {
-                xAxes: [{
+                x: {
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
                     }
-                }],
-                yAxes: [{
+                },
+                y: {
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
                     }
-                }]
+                }
             }
         };
 
         let multiAxisOptions = {
-            responsive: true,
-            hoverMode: 'index',
             stacked: false,
+            maintainAspectRatio: false,
+            aspectRatio: .6,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
+                }
+            },
             scales: {
-                xAxes: [{
+                x: {
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
                     },
-                    gridLines: {
+                    grid: {
                         color: '#ebedef'
                     }
-                }],
-                yAxes: [{
+                },
+                y: {
                     type: 'linear',
                     display: true,
                     position: 'left',
-                    id: 'y-axis-1',
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
                     },
-                    gridLines: {
+                    grid: {
                         color: '#ebedef'
                     }
-                }, {
+                },
+                y1: {
                     type: 'linear',
                     display: true,
                     position: 'right',
-                    id: 'y-axis-2',
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
                     },
-                    gridLines: {
+                    grid: {
                         drawOnChartArea: false,
                         color: '#ebedef'
                     }
-                }]
-            },
-            legend: {
-                labels: {
-                    fontColor: '#495057'
                 }
             }
         };
@@ -630,13 +689,15 @@ const LineChartDemo = () => {
                 label: 'First Dataset',
                 data: [65, 59, 80, 81, 56, 55, 40],
                 fill: false,
-                borderColor: '#42A5F5'
+                borderColor: '#42A5F5',
+                tension: .4
             },
             {
                 label: 'Second Dataset',
                 data: [28, 48, 40, 19, 86, 27, 90],
                 fill: false,
-                borderColor: '#FFA726'
+                borderColor: '#FFA726',
+                tension: .4
             }
         ]
     };
@@ -647,13 +708,15 @@ const LineChartDemo = () => {
             label: 'Dataset 1',
             fill: false,
             borderColor: '#42A5F5',
-            yAxisID: 'y-axis-1',
+            yAxisID: 'y',
+            tension: .4,
             data: [65, 59, 80, 81, 56, 55, 10]
         }, {
             label: 'Dataset 2',
             fill: false,
             borderColor: '#00bb7e',
-            yAxisID: 'y-axis-2',
+            yAxisID: 'y1',
+            tension: .4,
             data: [28, 48, 40, 19, 86, 27, 90]
         }]
     };
@@ -665,6 +728,7 @@ const LineChartDemo = () => {
                 label: 'First Dataset',
                 data: [65, 59, 80, 81, 56, 55, 40],
                 fill: false,
+                tension: .4,
                 borderColor: '#42A5F5'
             },
             {
@@ -672,6 +736,7 @@ const LineChartDemo = () => {
                 data: [28, 48, 40, 19, 86, 27, 90],
                 fill: false,
                 borderDash: [5, 5],
+                tension: .4,
                 borderColor: '#66BB6A'
             },
             {
@@ -679,6 +744,7 @@ const LineChartDemo = () => {
                 data: [12, 51, 62, 33, 21, 62, 45],
                 fill: true,
                 borderColor: '#FFA726',
+                tension: .4,
                 backgroundColor: 'rgba(255,167,38,0.2)'
             }
         ]
@@ -686,66 +752,77 @@ const LineChartDemo = () => {
 
     const getLightTheme = () => {
         let basicOptions = {
-            legend: {
-                labels: {
-                    fontColor: '#495057'
+            maintainAspectRatio: false,
+            aspectRatio: .6,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
                 }
             },
             scales: {
-                xAxes: [{
+                x: {
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
                     }
-                }],
-                yAxes: [{
+                },
+                y: {
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
                     }
-                }]
+                }
             }
         };
 
         let multiAxisOptions = {
-            responsive: true,
-            hoverMode: 'index',
             stacked: false,
+            maintainAspectRatio: false,
+            aspectRatio: .6,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
+                }
+            },
             scales: {
-                xAxes: [{
+                x: {
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
                     },
-                    gridLines: {
+                    grid: {
                         color: '#ebedef'
                     }
-                }],
-                yAxes: [{
+                },
+                y: {
                     type: 'linear',
                     display: true,
                     position: 'left',
-                    id: 'y-axis-1',
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
                     },
-                    gridLines: {
+                    grid: {
                         color: '#ebedef'
                     }
-                }, {
+                },
+                y1: {
                     type: 'linear',
                     display: true,
                     position: 'right',
-                    id: 'y-axis-2',
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
                     },
-                    gridLines: {
+                    grid: {
                         drawOnChartArea: false,
                         color: '#ebedef'
                     }
-                }]
-            },
-            legend: {
-                labels: {
-                    fontColor: '#495057'
                 }
             }
         };
@@ -791,7 +868,7 @@ const LineChartDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
-                        useLiveEditorTabs({ name: 'LineChartDemo', sources: this.sources, dependencies: { 'chart.js': '2.7.3' } })
+                        useLiveEditorTabs({ name: 'LineChartDemo', sources: this.sources, dependencies: { 'chart.js': '3.3.2' } })
                     }
                 </TabView>
             </div>

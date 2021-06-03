@@ -17,6 +17,16 @@ import { Chart } from 'primereact/chart';
 `}
 </CodeHighlight>
 
+                <h5>Getting Started</h5>
+                <p>Chart component is a wrapper around on <a href="https://www.chartjs.org/docs/3.3.2/">Chart.js 3.3.2+</a> so chart.js needs to be included in your project.
+                For a complete documentation and samples please refer to the <a href="https://www.chartjs.org/">chart.js website</a>.</p>
+
+<CodeHighlight lang="js">
+{`
+npm install chart.js --save
+`}
+</CodeHighlight>
+
                 <h5>Chart Types</h5>
                 <p>Chart type is defined using the <i>type</i> property. Currently there are 6 options available; "pie", "doughtnut", "line", "bar", "radar" and "polarArea".</p>
 
@@ -64,10 +74,13 @@ const data = {
 <CodeHighlight lang="js">
 {`
 const options = {
+    plugins: {
         title: {
             display: true,
             text: 'My Title',
-            fontSize: 16
+            font: {
+                size: 16
+            }
         },
         legend: {
             position: 'bottom'

@@ -38,33 +38,47 @@ export class RadarChartDemo extends Component {
         };
 
         this.lightOptions = {
-            legend: {
-                labels: {
-                    fontColor: '#495057'
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
                 }
             },
-            scale: {
-                pointLabels: {
-                    fontColor: '#495057'
-                },
-                gridLines: {
-                    color: '#ebedef'
+            scales: {
+                r: {
+                    pointLabels: {
+                        color: '#495057',
+                    },
+                    grid: {
+                        color: '#ebedef',
+                    },
+                    angleLines: {
+                        color: '#ebedef'
+                    }
                 }
             }
         };
 
         this.darkOptions = {
-            legend: {
-                labels: {
-                    fontColor: '#ebedef'
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#ebedef'
+                    }
                 }
             },
-            scale: {
-                pointLabels: {
-                    fontColor: '#ebedef'
-                },
-                gridLines: {
-                    color: 'rgba(255,255,255,0.2)'
+            scales: {
+                r: {
+                    pointLabels: {
+                        color: '#ebedef',
+                    },
+                    grid: {
+                        color: 'rgba(255,255,255,0.2)',
+                    },
+                    angleLines: {
+                        color: 'rgba(255,255,255,0.2)'
+                    }
                 }
             }
         };
@@ -82,13 +96,13 @@ export class RadarChartDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <div className="card">
+                    <div className="card p-d-flex p-jc-center">
                         <AppContentContext.Consumer>
                             {
                                 context => {
                                     let options = context.darkTheme ? this.darkOptions : this.lightOptions;
 
-                                    return <Chart type="radar" data={this.chartData} options={options} />
+                                    return <Chart type="radar" data={this.chartData} options={options} style={{ position: 'relative', width: '40%' }} />
                                 }
                             }
                         </AppContentContext.Consumer>
@@ -145,17 +159,24 @@ export class RadarChartDemo extends Component {
         };
 
         this.lightOptions = {
-            legend: {
-                labels: {
-                    fontColor: '#495057'
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
                 }
             },
-            scale: {
-                pointLabels: {
-                    fontColor: '#495057'
-                },
-                gridLines: {
-                    color: '#ebedef'
+            scales: {
+                r: {
+                    pointLabels: {
+                        color: '#495057',
+                    },
+                    grid: {
+                        color: '#ebedef',
+                    },
+                    angleLines: {
+                        color: '#ebedef'
+                    }
                 }
             }
         };
@@ -163,8 +184,8 @@ export class RadarChartDemo extends Component {
 
     render() {
         return (
-            <div className="card">
-                <Chart type="radar" data={this.chartData} options={this.lightOptions} />
+            <div className="card p-d-flex p-jc-center">
+                <Chart type="radar" data={this.chartData} options={this.lightOptions} style={{ position: 'relative', width: '40%' }} />
             </div>
         )
     }
@@ -205,24 +226,31 @@ const RadarChartDemo = () => {
     };
 
     const lightOptions = {
-        legend: {
-            labels: {
-                fontColor: '#495057'
+        plugins: {
+            legend: {
+                labels: {
+                    color: '#495057'
+                }
             }
         },
-        scale: {
-            pointLabels: {
-                fontColor: '#495057'
-            },
-            gridLines: {
-                color: '#ebedef'
+        scales: {
+            r: {
+                pointLabels: {
+                    color: '#495057',
+                },
+                grid: {
+                    color: '#ebedef',
+                },
+                angleLines: {
+                    color: '#ebedef'
+                }
             }
         }
     };
 
     return (
-        <div className="card">
-            <Chart type="radar" data={chartData} options={lightOptions} />
+        <div className="card p-d-flex p-jc-center">
+            <Chart type="radar" data={chartData} options={lightOptions} style={{ position: 'relative', width: '40%' }} />
         </div>
     );
 }
@@ -262,24 +290,31 @@ const RadarChartDemo = () => {
     };
 
     const lightOptions = {
-        legend: {
-            labels: {
-                fontColor: '#495057'
+        plugins: {
+            legend: {
+                labels: {
+                    color: '#495057'
+                }
             }
         },
-        scale: {
-            pointLabels: {
-                fontColor: '#495057'
-            },
-            gridLines: {
-                color: '#ebedef'
+        scales: {
+            r: {
+                pointLabels: {
+                    color: '#495057',
+                },
+                grid: {
+                    color: '#ebedef',
+                },
+                angleLines: {
+                    color: '#ebedef'
+                }
             }
         }
     };
 
     return (
-        <div className="card">
-            <Chart type="radar" data={chartData} options={lightOptions} />
+        <div className="card p-d-flex p-jc-center">
+            <Chart type="radar" data={chartData} options={lightOptions} style={{ position: 'relative', width: '40%' }} />
         </div>
     );
 }
@@ -297,7 +332,7 @@ const RadarChartDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
-                        useLiveEditorTabs({ name: 'RadarChartDemo', sources: this.sources, dependencies: { 'chart.js': '2.7.3' } })
+                        useLiveEditorTabs({ name: 'RadarChartDemo', sources: this.sources, dependencies: { 'chart.js': '3.3.2' } })
                     }
                 </TabView>
             </div>

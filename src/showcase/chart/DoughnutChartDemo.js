@@ -30,17 +30,21 @@ export class DoughnutChartDemo extends Component {
         };
 
         this.lightOptions = {
-            legend: {
-                labels: {
-                    fontColor: '#495057'
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
                 }
             }
         };
 
         this.darkOptions = {
-            legend: {
-                labels: {
-                    fontColor: '#ebedef'
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#ebedef'
+                    }
                 }
             }
         };
@@ -58,13 +62,13 @@ export class DoughnutChartDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <div className="card">
+                    <div className="card p-d-flex p-jc-center">
                         <AppContentContext.Consumer>
                             {
                                 context => {
                                     let options = context.darkTheme ? this.darkOptions : this.lightOptions;
 
-                                    return <Chart type="doughnut" data={this.chartData} options={options} />
+                                    return <Chart type="doughnut" data={this.chartData} options={options} style={{ position: 'relative', width: '40%' }} />
                                 }
                             }
                         </AppContentContext.Consumer>
@@ -113,9 +117,11 @@ export class DoughnutChartDemo extends Component {
         };
 
         this.lightOptions = {
-            legend: {
-                labels: {
-                    fontColor: '#495057'
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
                 }
             }
         };
@@ -123,8 +129,8 @@ export class DoughnutChartDemo extends Component {
 
     render() {
         return (
-            <div className="card">
-                <Chart type="doughnut" data={this.chartData} options={this.lightOptions} />
+            <div className="card p-d-flex p-jc-center">
+                <Chart type="doughnut" data={this.chartData} options={this.lightOptions} style={{ position: 'relative', width: '40%' }} />
             </div>
         )
     }
@@ -157,16 +163,18 @@ const DoughnutChartDemo = () => {
     };
 
     const lightOptions = {
-        legend: {
-            labels: {
-                fontColor: '#495057'
+        plugins: {
+            legend: {
+                labels: {
+                    color: '#495057'
+                }
             }
         }
     };
 
     return (
-        <div className="card">
-            <Chart type="doughnut" data={chartData} options={lightOptions} />
+        <div className="card p-d-flex p-jc-center">
+            <Chart type="doughnut" data={chartData} options={lightOptions} style={{ position: 'relative', width: '40%' }} />
         </div>
     )
 }
@@ -198,16 +206,18 @@ const DoughnutChartDemo = () => {
     };
 
     const lightOptions = {
-        legend: {
-            labels: {
-                fontColor: '#495057'
+        plugins: {
+            legend: {
+                labels: {
+                    color: '#495057'
+                }
             }
         }
     };
 
     return (
-        <div className="card">
-            <Chart type="doughnut" data={chartData} options={lightOptions} />
+        <div className="card p-d-flex p-jc-center">
+            <Chart type="doughnut" data={chartData} options={lightOptions} style={{ position: 'relative', width: '40%' }} />
         </div>
     )
 }
@@ -225,7 +235,7 @@ const DoughnutChartDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
-                        useLiveEditorTabs({ name: 'DoughnutChartDemo', sources: this.sources, dependencies: { 'chart.js': '2.7.3' } })
+                        useLiveEditorTabs({ name: 'DoughnutChartDemo', sources: this.sources, dependencies: { 'chart.js': '3.3.2' } })
                     }
                 </TabView>
             </div>

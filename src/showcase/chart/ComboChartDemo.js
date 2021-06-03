@@ -19,6 +19,7 @@ export class ComboChartDemo extends Component {
                 borderColor: '#42A5F5',
                 borderWidth: 2,
                 fill: false,
+                tension: .4,
                 data: [
                     50,
                     25,
@@ -60,48 +61,62 @@ export class ComboChartDemo extends Component {
         };
 
         this.lightOptions = {
-            legend: {
-                labels: {
-                    fontColor: '#495057'
+            maintainAspectRatio: false,
+            aspectRatio: .6,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
                 }
             },
             scales: {
-                xAxes: [{
+                x: {
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
                     }
-                }],
-                yAxes: [{
+                },
+                y: {
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
                     }
-                }]
+                }
             }
         };
 
         this.darkOptions = {
-            legend: {
-                labels: {
-                    fontColor: '#ebedef'
+            maintainAspectRatio: false,
+            aspectRatio: .6,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#ebedef'
+                    }
                 }
             },
             scales: {
-                xAxes: [{
+                x: {
                     ticks: {
-                        fontColor: '#ebedef'
+                        color: '#ebedef'
                     },
-                    gridLines: {
+                    grid: {
                         color: 'rgba(255,255,255,0.2)'
                     }
-                }],
-                yAxes: [{
+                },
+                y: {
                     ticks: {
-                        fontColor: '#ebedef'
+                        color: '#ebedef'
                     },
-                    gridLines: {
+                    grid: {
                         color: 'rgba(255,255,255,0.2)'
                     }
-                }]
+                }
             }
         };
     }
@@ -162,6 +177,7 @@ export class ComboChartDemo extends Component {
                 borderColor: '#42A5F5',
                 borderWidth: 2,
                 fill: false,
+                tension: .4,
                 data: [
                     50,
                     25,
@@ -203,22 +219,32 @@ export class ComboChartDemo extends Component {
         };
 
         this.lightOptions = {
-            legend: {
-                labels: {
-                    fontColor: '#495057'
+            maintainAspectRatio: false,
+            aspectRatio: .6,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
                 }
             },
             scales: {
-                xAxes: [{
+                x: {
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
                     }
-                }],
-                yAxes: [{
+                },
+                y: {
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
                     }
-                }]
+                }
             }
         };
     }
@@ -248,6 +274,7 @@ const ComboChartDemo = () => {
             borderColor: '#42A5F5',
             borderWidth: 2,
             fill: false,
+            tension: .4,
             data: [
                 50,
                 25,
@@ -289,22 +316,32 @@ const ComboChartDemo = () => {
     };
 
     const lightOptions = {
-        legend: {
-            labels: {
-                fontColor: '#495057'
+        maintainAspectRatio: false,
+        aspectRatio: .6,
+        plugins: {
+            legend: {
+                labels: {
+                    color: '#495057'
+                }
             }
         },
         scales: {
-            xAxes: [{
+            x: {
                 ticks: {
-                    fontColor: '#495057'
+                    color: '#495057'
+                },
+                grid: {
+                    color: '#ebedef'
                 }
-            }],
-            yAxes: [{
+            },
+            y: {
                 ticks: {
-                    fontColor: '#495057'
+                    color: '#495057'
+                },
+                grid: {
+                    color: '#ebedef'
                 }
-            }]
+            }
         }
     };
 
@@ -331,6 +368,7 @@ const ComboChartDemo = () => {
             borderColor: '#42A5F5',
             borderWidth: 2,
             fill: false,
+            tension: .4,
             data: [
                 50,
                 25,
@@ -372,22 +410,32 @@ const ComboChartDemo = () => {
     };
 
     const lightOptions = {
-        legend: {
-            labels: {
-                fontColor: '#495057'
+        maintainAspectRatio: false,
+        aspectRatio: .6,
+        plugins: {
+            legend: {
+                labels: {
+                    color: '#495057'
+                }
             }
         },
         scales: {
-            xAxes: [{
+            x: {
                 ticks: {
-                    fontColor: '#495057'
+                    color: '#495057'
+                },
+                grid: {
+                    color: '#ebedef'
                 }
-            }],
-            yAxes: [{
+            },
+            y: {
                 ticks: {
-                    fontColor: '#495057'
+                    color: '#495057'
+                },
+                grid: {
+                    color: '#ebedef'
                 }
-            }]
+            }
         }
     };
 
@@ -411,7 +459,7 @@ const ComboChartDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
-                        useLiveEditorTabs({ name: 'ComboChartDemo', sources: this.sources, dependencies: { 'chart.js': '2.7.3' } })
+                        useLiveEditorTabs({ name: 'ComboChartDemo', sources: this.sources, dependencies: { 'chart.js': '3.3.2' } })
                     }
                 </TabView>
             </div>

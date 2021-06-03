@@ -40,12 +40,12 @@ export class BarChartDemo extends Component {
                     '#FFCA28',
                     '#26A69A'
                 ],
-                yAxisID: 'y-axis-1',
+                yAxisID: 'y',
                 data: [65, 59, 80, 81, 56, 55, 10]
             }, {
                 label: 'Dataset 2',
                 backgroundColor: '#78909C',
-                yAxisID: 'y-axis-2',
+                yAxisID: 'y1',
                 data: [28, 48, 40, 19, 86, 27, 90]
             }]
         };
@@ -102,112 +102,158 @@ export class BarChartDemo extends Component {
 
     getLightTheme() {
         let basicOptions = {
-            legend: {
-                labels: {
-                    fontColor: '#495057'
+            maintainAspectRatio: false,
+            aspectRatio: .8,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
                 }
             },
             scales: {
-                xAxes: [{
+                x: {
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
                     }
-                }],
-                yAxes: [{
+                },
+                y: {
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
                     }
-                }]
+                }
+            }
+        };
+
+        let horizontalOptions = {
+            indexAxis: 'y',
+            maintainAspectRatio: false,
+            aspectRatio: .8,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
+                    }
+                },
+                y: {
+                    ticks: {
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
+                    }
+                }
             }
         };
 
         let stackedOptions = {
-            tooltips: {
-                mode: 'index',
-                intersect: false
+            maintainAspectRatio: false,
+            aspectRatio: .8,
+            plugins: {
+                tooltips: {
+                    mode: 'index',
+                    intersect: false
+                },
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
+                }
             },
-            responsive: true,
             scales: {
-                xAxes: [{
+                x: {
                     stacked: true,
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
                     },
-                    gridLines: {
+                    grid: {
                         color: '#ebedef'
                     }
-                }],
-                yAxes: [{
+                },
+                y: {
                     stacked: true,
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
                     },
-                    gridLines: {
+                    grid: {
                         color: '#ebedef'
                     }
-                }]
-            },
-            legend: {
-                labels: {
-                    fontColor: '#495057'
                 }
             }
         };
 
         let multiAxisOptions = {
-            responsive: true,
-            tooltips: {
-                mode: 'index',
-                intersect: true
+            maintainAspectRatio: false,
+            aspectRatio: .8,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: true
+                }
             },
             scales: {
-                xAxes: [{
+                x: {
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
                     },
-                    gridLines: {
-                        color: '#ebedef'
-                    }
-                }],
-                yAxes: [{
-                    type: 'linear',
-                    display: true,
-                    position: 'left',
-                    id: 'y-axis-1',
-                    ticks: {
-                        min: 0,
-                        max: 100,
-                        fontColor: '#495057'
-                    },
-                    gridLines: {
+                    grid: {
                         color: '#ebedef'
                     }
                 },
-                {
+                y: {
+                    type: 'linear',
+                    display: true,
+                    position: 'left',
+                    ticks: {
+                        min: 0,
+                        max: 100,
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
+                    }
+                },
+                y1: {
                     type: 'linear',
                     display: true,
                     position: 'right',
-                    id: 'y-axis-2',
-                    gridLines: {
+                    grid: {
                         drawOnChartArea: false,
                         color: '#ebedef'
                     },
                     ticks: {
                         min: 0,
                         max: 100,
-                        fontColor: '#495057'
+                        color: '#495057'
                     }
-                }]
-            },
-            legend: {
-                labels: {
-                    fontColor: '#495057'
                 }
             }
         };
 
         return {
             basicOptions,
+            horizontalOptions,
             stackedOptions,
             multiAxisOptions
         }
@@ -215,118 +261,158 @@ export class BarChartDemo extends Component {
 
     getDarkTheme() {
         let basicOptions = {
-            legend: {
-                labels: {
-                    fontColor: '#ebedef'
+            maintainAspectRatio: false,
+            aspectRatio: .8,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#ebedef'
+                    }
                 }
             },
             scales: {
-                xAxes: [{
+                x: {
                     ticks: {
-                        fontColor: '#ebedef'
+                        color: '#ebedef'
                     },
-                    gridLines: {
+                    grid: {
                         color: 'rgba(255,255,255,0.2)'
                     }
-                }],
-                yAxes: [{
+                },
+                y: {
                     ticks: {
-                        fontColor: '#ebedef'
+                        color: '#ebedef'
                     },
-                    gridLines: {
+                    grid: {
                         color: 'rgba(255,255,255,0.2)'
                     }
-                }]
+                }
+            }
+        };
+
+        let horizontalOptions = {
+            indexAxis: 'y',
+            maintainAspectRatio: false,
+            aspectRatio: .8,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#ebedef'
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: '#ebedef'
+                    },
+                    grid: {
+                        color: 'rgba(255,255,255,0.2)'
+                    }
+                },
+                y: {
+                    ticks: {
+                        color: '#ebedef'
+                    },
+                    grid: {
+                        color: 'rgba(255,255,255,0.2)'
+                    }
+                }
             }
         };
 
         let stackedOptions = {
-            tooltips: {
-                mode: 'index',
-                intersect: false
+            maintainAspectRatio: false,
+            aspectRatio: .8,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#ebedef'
+                    }
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false
+                }
             },
-            responsive: true,
             scales: {
-                xAxes: [{
+                x: {
                     stacked: true,
                     ticks: {
-                        fontColor: '#ebedef'
+                        color: '#ebedef'
                     },
-                    gridLines: {
+                    grid: {
                         color: 'rgba(255,255,255,0.2)'
                     }
-                }],
-                yAxes: [{
+                },
+                y: {
                     stacked: true,
                     ticks: {
-                        fontColor: '#ebedef'
+                        color: '#ebedef'
                     },
-                    gridLines: {
+                    grid: {
                         color: 'rgba(255,255,255,0.2)'
                     }
-                }]
-            },
-            legend: {
-                labels: {
-                    fontColor: '#ebedef'
                 }
             }
         };
 
         let multiAxisOptions = {
-            responsive: true,
-            tooltips: {
-                mode: 'index',
-                intersect: true
+            maintainAspectRatio: false,
+            aspectRatio: .8,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#ebedef'
+                    }
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: true
+                }
             },
             scales: {
-                xAxes: [{
+                x: {
                     ticks: {
-                        fontColor: '#ebedef'
+                        color: '#ebedef'
                     },
-                    gridLines: {
-                        color: 'rgba(255,255,255,0.2)'
-                    }
-                }],
-                yAxes: [{
-                    type: 'linear',
-                    display: true,
-                    position: 'left',
-                    id: 'y-axis-1',
-                    ticks: {
-                        min: 0,
-                        max: 100,
-                        fontColor: '#ebedef'
-                    },
-                    gridLines: {
+                    grid: {
                         color: 'rgba(255,255,255,0.2)'
                     }
                 },
-                {
+                y: {
+                    type: 'linear',
+                    display: true,
+                    position: 'left',
+                    ticks: {
+                        min: 0,
+                        max: 100,
+                        color: '#ebedef'
+                    },
+                    grid: {
+                        color: 'rgba(255,255,255,0.2)'
+                    }
+                },
+                y1: {
                     type: 'linear',
                     display: true,
                     position: 'right',
-                    id: 'y-axis-2',
-                    gridLines: {
+                    grid: {
                         drawOnChartArea: false,
                         color: 'rgba(255,255,255,0.2)'
                     },
                     ticks: {
                         min: 0,
                         max: 100,
-                        fontColor: '#ebedef'
+                        color: '#ebedef'
                     }
-                }]
-            },
-            legend: {
-                labels: {
-                    fontColor: '#ebedef'
                 }
             }
         };
 
         return {
             basicOptions,
+            horizontalOptions,
             stackedOptions,
             multiAxisOptions
         }
@@ -340,14 +426,14 @@ export class BarChartDemo extends Component {
                         <h1>BarChart</h1>
                         <p>A bar chart or bar graph is a chart that presents grouped data with rectangular bars with lengths proportional to the values that they represent.</p>
                     </AppInlineHeader>
-                    <AppDemoActions github="chart/BarChartDemo.js"/>
+                    <AppDemoActions github="chart/BarChartDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
                     <AppContentContext.Consumer>
                         {
                             context => {
-                                const { basicOptions, multiAxisOptions, stackedOptions } = this.options[`${context.darkTheme ? 'dark' : 'light'}`];
+                                const { basicOptions, horizontalOptions, multiAxisOptions, stackedOptions } = this.options[`${context.darkTheme ? 'dark' : 'light'}`];
 
                                 return (
                                     <>
@@ -358,7 +444,7 @@ export class BarChartDemo extends Component {
 
                                         <div className="card">
                                             <h5>Horizontal</h5>
-                                            <Chart type="horizontalBar" data={this.basicData} options={basicOptions} />
+                                            <Chart type="bar" data={this.basicData} options={horizontalOptions} />
                                         </div>
 
                                         <div className="card">
@@ -429,12 +515,12 @@ export class BarChartDemo extends Component {
                     '#FFCA28',
                     '#26A69A'
                 ],
-                yAxisID: 'y-axis-1',
+                yAxisID: 'y',
                 data: [65, 59, 80, 81, 56, 55, 10]
             }, {
                 label: 'Dataset 2',
                 backgroundColor: '#78909C',
-                yAxisID: 'y-axis-2',
+                yAxisID: 'y1',
                 data: [28, 48, 40, 19, 86, 27, 90]
             }]
         };
@@ -488,119 +574,165 @@ export class BarChartDemo extends Component {
 
     getLightTheme() {
         let basicOptions = {
-            legend: {
-                labels: {
-                    fontColor: '#495057'
+            maintainAspectRatio: false,
+            aspectRatio: .8,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
                 }
             },
             scales: {
-                xAxes: [{
+                x: {
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
                     }
-                }],
-                yAxes: [{
+                },
+                y: {
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
                     }
-                }]
+                }
+            }
+        };
+
+        let horizontalOptions = {
+            indexAxis: 'y',
+            maintainAspectRatio: false,
+            aspectRatio: .8,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
+                    }
+                },
+                y: {
+                    ticks: {
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
+                    }
+                }
             }
         };
 
         let stackedOptions = {
-            tooltips: {
-                mode: 'index',
-                intersect: false
+            maintainAspectRatio: false,
+            aspectRatio: .8,
+            plugins: {
+                tooltips: {
+                    mode: 'index',
+                    intersect: false
+                },
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
+                }
             },
-            responsive: true,
             scales: {
-                xAxes: [{
+                x: {
                     stacked: true,
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
                     },
-                    gridLines: {
+                    grid: {
                         color: '#ebedef'
                     }
-                }],
-                yAxes: [{
+                },
+                y: {
                     stacked: true,
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
                     },
-                    gridLines: {
+                    grid: {
                         color: '#ebedef'
                     }
-                }]
-            },
-            legend: {
-                labels: {
-                    fontColor: '#495057'
                 }
             }
         };
 
         let multiAxisOptions = {
-            responsive: true,
-            tooltips: {
-                mode: 'index',
-                intersect: true
+            maintainAspectRatio: false,
+            aspectRatio: .8,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: true
+                }
             },
             scales: {
-                xAxes: [{
+                x: {
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
                     },
-                    gridLines: {
-                        color: '#ebedef'
-                    }
-                }],
-                yAxes: [{
-                    type: 'linear',
-                    display: true,
-                    position: 'left',
-                    id: 'y-axis-1',
-                    ticks: {
-                        min: 0,
-                        max: 100,
-                        fontColor: '#495057'
-                    },
-                    gridLines: {
+                    grid: {
                         color: '#ebedef'
                     }
                 },
-                {
+                y: {
+                    type: 'linear',
+                    display: true,
+                    position: 'left',
+                    ticks: {
+                        min: 0,
+                        max: 100,
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
+                    }
+                },
+                y1: {
                     type: 'linear',
                     display: true,
                     position: 'right',
-                    id: 'y-axis-2',
-                    gridLines: {
+                    grid: {
                         drawOnChartArea: false,
                         color: '#ebedef'
                     },
                     ticks: {
                         min: 0,
                         max: 100,
-                        fontColor: '#495057'
+                        color: '#495057'
                     }
-                }]
-            },
-            legend: {
-                labels: {
-                    fontColor: '#495057'
                 }
             }
         };
 
         return {
             basicOptions,
+            horizontalOptions,
             stackedOptions,
             multiAxisOptions
         }
     }
 
     render() {
-        const { basicOptions, multiAxisOptions, stackedOptions } = this.options;
+        const { basicOptions, horizontalOptions, multiAxisOptions, stackedOptions } = this.options;
 
         return (
             <div>
@@ -611,7 +743,7 @@ export class BarChartDemo extends Component {
 
                 <div className="card">
                     <h5>Horizontal</h5>
-                    <Chart type="horizontalBar" data={this.basicData} options={basicOptions} />
+                    <Chart type="bar" data={this.basicData} options={horizontalOptions} />
                 </div>
 
                 <div className="card">
@@ -665,12 +797,12 @@ const BarChartDemo = () => {
                 '#FFCA28',
                 '#26A69A'
             ],
-            yAxisID: 'y-axis-1',
+            yAxisID: 'y',
             data: [65, 59, 80, 81, 56, 55, 10]
         }, {
             label: 'Dataset 2',
             backgroundColor: '#78909C',
-            yAxisID: 'y-axis-2',
+            yAxisID: 'y1',
             data: [28, 48, 40, 19, 86, 27, 90]
         }]
     };
@@ -721,118 +853,164 @@ const BarChartDemo = () => {
 
     const getLightTheme = () => {
         let basicOptions = {
-            legend: {
-                labels: {
-                    fontColor: '#495057'
+            maintainAspectRatio: false,
+            aspectRatio: .8,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
                 }
             },
             scales: {
-                xAxes: [{
+                x: {
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
                     }
-                }],
-                yAxes: [{
+                },
+                y: {
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
                     }
-                }]
+                }
+            }
+        };
+
+        let horizontalOptions = {
+            indexAxis: 'y',
+            maintainAspectRatio: false,
+            aspectRatio: .8,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
+                    }
+                },
+                y: {
+                    ticks: {
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
+                    }
+                }
             }
         };
 
         let stackedOptions = {
-            tooltips: {
-                mode: 'index',
-                intersect: false
+            maintainAspectRatio: false,
+            aspectRatio: .8,
+            plugins: {
+                tooltips: {
+                    mode: 'index',
+                    intersect: false
+                },
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
+                }
             },
-            responsive: true,
             scales: {
-                xAxes: [{
+                x: {
                     stacked: true,
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
                     },
-                    gridLines: {
+                    grid: {
                         color: '#ebedef'
                     }
-                }],
-                yAxes: [{
+                },
+                y: {
                     stacked: true,
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
                     },
-                    gridLines: {
+                    grid: {
                         color: '#ebedef'
                     }
-                }]
-            },
-            legend: {
-                labels: {
-                    fontColor: '#495057'
                 }
             }
         };
 
         let multiAxisOptions = {
-            responsive: true,
-            tooltips: {
-                mode: 'index',
-                intersect: true
+            maintainAspectRatio: false,
+            aspectRatio: .8,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: true
+                }
             },
             scales: {
-                xAxes: [{
+                x: {
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
                     },
-                    gridLines: {
-                        color: '#ebedef'
-                    }
-                }],
-                yAxes: [{
-                    type: 'linear',
-                    display: true,
-                    position: 'left',
-                    id: 'y-axis-1',
-                    ticks: {
-                        min: 0,
-                        max: 100,
-                        fontColor: '#495057'
-                    },
-                    gridLines: {
+                    grid: {
                         color: '#ebedef'
                     }
                 },
-                {
+                y: {
+                    type: 'linear',
+                    display: true,
+                    position: 'left',
+                    ticks: {
+                        min: 0,
+                        max: 100,
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
+                    }
+                },
+                y1: {
                     type: 'linear',
                     display: true,
                     position: 'right',
-                    id: 'y-axis-2',
-                    gridLines: {
+                    grid: {
                         drawOnChartArea: false,
                         color: '#ebedef'
                     },
                     ticks: {
                         min: 0,
                         max: 100,
-                        fontColor: '#495057'
+                        color: '#495057'
                     }
-                }]
-            },
-            legend: {
-                labels: {
-                    fontColor: '#495057'
                 }
             }
         };
 
         return {
             basicOptions,
+            horizontalOptions,
             stackedOptions,
             multiAxisOptions
         }
     }
 
-    const { basicOptions, multiAxisOptions, stackedOptions } = getLightTheme();
+    const { basicOptions, horizontalOptions, multiAxisOptions, stackedOptions } = getLightTheme();
 
         return (
             <div>
@@ -843,7 +1021,7 @@ const BarChartDemo = () => {
 
                 <div className="card">
                     <h5>Horizontal</h5>
-                    <Chart type="horizontalBar" data={basicData} options={basicOptions} />
+                    <Chart type="bar" data={this.basicData} options={horizontalOptions} />
                 </div>
 
                 <div className="card">
@@ -896,12 +1074,12 @@ const BarChartDemo = () => {
                 '#FFCA28',
                 '#26A69A'
             ],
-            yAxisID: 'y-axis-1',
+            yAxisID: 'y',
             data: [65, 59, 80, 81, 56, 55, 10]
         }, {
             label: 'Dataset 2',
             backgroundColor: '#78909C',
-            yAxisID: 'y-axis-2',
+            yAxisID: 'y1',
             data: [28, 48, 40, 19, 86, 27, 90]
         }]
     };
@@ -952,118 +1130,164 @@ const BarChartDemo = () => {
 
     const getLightTheme = () => {
         let basicOptions = {
-            legend: {
-                labels: {
-                    fontColor: '#495057'
+            maintainAspectRatio: false,
+            aspectRatio: .8,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
                 }
             },
             scales: {
-                xAxes: [{
+                x: {
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
                     }
-                }],
-                yAxes: [{
+                },
+                y: {
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
                     }
-                }]
+                }
+            }
+        };
+
+        let horizontalOptions = {
+            indexAxis: 'y',
+            maintainAspectRatio: false,
+            aspectRatio: .8,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
+                    }
+                },
+                y: {
+                    ticks: {
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
+                    }
+                }
             }
         };
 
         let stackedOptions = {
-            tooltips: {
-                mode: 'index',
-                intersect: false
+            maintainAspectRatio: false,
+            aspectRatio: .8,
+            plugins: {
+                tooltips: {
+                    mode: 'index',
+                    intersect: false
+                },
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
+                }
             },
-            responsive: true,
             scales: {
-                xAxes: [{
+                x: {
                     stacked: true,
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
                     },
-                    gridLines: {
+                    grid: {
                         color: '#ebedef'
                     }
-                }],
-                yAxes: [{
+                },
+                y: {
                     stacked: true,
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
                     },
-                    gridLines: {
+                    grid: {
                         color: '#ebedef'
                     }
-                }]
-            },
-            legend: {
-                labels: {
-                    fontColor: '#495057'
                 }
             }
         };
 
         let multiAxisOptions = {
-            responsive: true,
-            tooltips: {
-                mode: 'index',
-                intersect: true
+            maintainAspectRatio: false,
+            aspectRatio: .8,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: true
+                }
             },
             scales: {
-                xAxes: [{
+                x: {
                     ticks: {
-                        fontColor: '#495057'
+                        color: '#495057'
                     },
-                    gridLines: {
-                        color: '#ebedef'
-                    }
-                }],
-                yAxes: [{
-                    type: 'linear',
-                    display: true,
-                    position: 'left',
-                    id: 'y-axis-1',
-                    ticks: {
-                        min: 0,
-                        max: 100,
-                        fontColor: '#495057'
-                    },
-                    gridLines: {
+                    grid: {
                         color: '#ebedef'
                     }
                 },
-                {
+                y: {
+                    type: 'linear',
+                    display: true,
+                    position: 'left',
+                    ticks: {
+                        min: 0,
+                        max: 100,
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
+                    }
+                },
+                y1: {
                     type: 'linear',
                     display: true,
                     position: 'right',
-                    id: 'y-axis-2',
-                    gridLines: {
+                    grid: {
                         drawOnChartArea: false,
                         color: '#ebedef'
                     },
                     ticks: {
                         min: 0,
                         max: 100,
-                        fontColor: '#495057'
+                        color: '#495057'
                     }
-                }]
-            },
-            legend: {
-                labels: {
-                    fontColor: '#495057'
                 }
             }
         };
 
         return {
             basicOptions,
+            horizontalOptions,
             stackedOptions,
             multiAxisOptions
         }
     }
 
-    const { basicOptions, multiAxisOptions, stackedOptions } = getLightTheme();
+    const { basicOptions, horizontalOptions, multiAxisOptions, stackedOptions } = getLightTheme();
 
         return (
             <div>
@@ -1074,7 +1298,7 @@ const BarChartDemo = () => {
 
                 <div className="card">
                     <h5>Horizontal</h5>
-                    <Chart type="horizontalBar" data={basicData} options={basicOptions} />
+                    <Chart type="bar" data={this.basicData} options={horizontalOptions} />
                 </div>
 
                 <div className="card">
@@ -1104,7 +1328,7 @@ const BarChartDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
-                        useLiveEditorTabs({ name: 'BarChartDemo', sources: this.sources, dependencies: { 'chart.js': '2.7.3' } })
+                        useLiveEditorTabs({ name: 'BarChartDemo', sources: this.sources, dependencies: { 'chart.js': '3.3.2' } })
                     }
                 </TabView>
             </div>
