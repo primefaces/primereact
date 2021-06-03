@@ -27,7 +27,12 @@ export class Chart extends Component {
     };
 
     initChart() {
-        import('chart.js').then((module) => {
+        import('chart.js/auto').then((module) => {
+            if (this.chart) {
+                this.chart.destroy();
+                this.chart = null;
+            }
+
             if (module && module.default) {
                 this.chart = new module.default(this.canvas, {
                     type: this.props.type,
@@ -44,7 +49,7 @@ export class Chart extends Component {
 
     getChart() {
         return this.chart;
-    }    
+    }
 
     getBase64Image() {
         return this.chart.toBase64Image();
@@ -63,9 +68,6 @@ export class Chart extends Component {
     }
 
     reinit() {
-        if (this.chart) {
-            this.chart.destroy();
-        }
         this.initChart();
     }
 
@@ -86,7 +88,7 @@ export class Chart extends Component {
     }
 
     componentWillUnmount() {
-        if(this.chart) {
+        if (this.chart) {
             this.chart.destroy();
             this.chart = null;
         }
