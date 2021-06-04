@@ -48,11 +48,12 @@ export class DataViewLazyDemo extends Component {
         //imitate delay of a backend call
         setTimeout(() => {
             const startIndex = event.first;
-            const endIndex = event.first + this.rows;
+            const endIndex = Math.min(event.first + this.rows, this.state.totalRecords - 1);
+            const newProducts = startIndex === endIndex ? this.datasource.slice(startIndex) : this.datasource.slice(startIndex, endIndex);
 
             this.setState({
                 first: startIndex,
-                products: this.datasource.slice(startIndex, endIndex),
+                products: newProducts,
                 loading: false
             });
         }, 1000);
@@ -219,11 +220,12 @@ export class DataViewLazyDemo extends Component {
         //imitate delay of a backend call
         setTimeout(() => {
             const startIndex = event.first;
-            const endIndex = event.first + this.rows;
+            const endIndex = Math.min(event.first + this.rows, this.state.totalRecords - 1);
+            const newProducts = startIndex === endIndex ? this.datasource.slice(startIndex) : this.datasource.slice(startIndex, endIndex);
 
             this.setState({
                 first: startIndex,
-                products: this.datasource.slice(startIndex, endIndex),
+                products: newProducts,
                 loading: false
             });
         }, 1000);
@@ -362,7 +364,7 @@ const DataViewLazyDemo = () => {
                 setLoading(false);
             });
         }, 1000);
-    }
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onPage = (event) => {
         setLoading(true);
@@ -370,10 +372,11 @@ const DataViewLazyDemo = () => {
         //imitate delay of a backend call
         setTimeout(() => {
             const startIndex = event.first;
-            const endIndex = event.first + this.rows;
+            const endIndex = Math.min(event.first + this.rows, this.state.totalRecords - 1);
+            const newProducts = startIndex === endIndex ? datasource.slice(startIndex) : datasource.slice(startIndex, endIndex);
 
             setFirst(startIndex);
-            setProducts(datasource.slice(startIndex, endIndex));
+            setProducts(newProducts);
             setLoading(false);
         }, 1000);
     }
@@ -502,7 +505,7 @@ const DataViewLazyDemo = () => {
                 setLoading(false);
             });
         }, 1000);
-    }
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onPage = (event) => {
         setLoading(true);
@@ -510,10 +513,11 @@ const DataViewLazyDemo = () => {
         //imitate delay of a backend call
         setTimeout(() => {
             const startIndex = event.first;
-            const endIndex = event.first + this.rows;
+            const endIndex = Math.min(event.first + this.rows, this.state.totalRecords - 1);
+            const newProducts = startIndex === endIndex ? datasource.slice(startIndex) : datasource.slice(startIndex, endIndex);
 
             setFirst(startIndex);
-            setProducts(datasource.slice(startIndex, endIndex));
+            setProducts(newProducts);
             setLoading(false);
         }, 1000);
     }
