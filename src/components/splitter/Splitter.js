@@ -60,11 +60,11 @@ export class Splitter extends Component {
     }
 
     validateResize(newPrevPanelSize, newNextPanelSize) {
-        if (this.props.children[0].props && this.props.children[0].props.minSize && this.props.children[0].props.minSize > newPrevPanelSize) {
+        if (this.props.children[this.prevPanelIndex].props && this.props.children[this.prevPanelIndex].props.minSize && this.props.children[this.prevPanelIndex].props.minSize > newPrevPanelSize) {
             return false;
         }
 
-        if (this.props.children[1].props && this.props.children[1].props.minSize && this.props.children[1].props.minSize > newNextPanelSize) {
+        if (this.props.children[this.prevPanelIndex+1].props && this.props.children[this.prevPanelIndex+1].props.minSize && this.props.children[this.prevPanelIndex+1].props.minSize > newNextPanelSize) {
             return false;
         }
 
