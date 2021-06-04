@@ -491,6 +491,15 @@ import { Sidebar } from 'primereact/sidebar';
                                         <td>Large sized sidebar.</td>
                                     </tr>
                                     <tr>
+                                        <td>p-sidebar-view</td>
+                                        <td>The page view is displayed according to the sidebar position.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>p-sidebar-content</td>
+                                        <td>A content is displayed according to the sidebar position.
+                                            To use this style, a sidebar must be created inside that content using the appendTo property and this content must have position:"relative" style.</td>
+                                    </tr>
+                                    <tr>
                                         <td>p-sidebar-mask</td>
                                         <td>Modal layer of the sidebar.</td>
                                     </tr>
