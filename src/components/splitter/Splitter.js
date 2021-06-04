@@ -135,7 +135,7 @@ export class Splitter extends Component {
 
     onResizeStart(event, index) {
         this.gutterElement = event.currentTarget;
-        this.size = this.horizontal ? DomHandler.getWidth(this.container) : DomHandler.getHeight(this.container);
+        this.size = this.props.layout === 'horizontal' ? DomHandler.getWidth(this.container) : DomHandler.getHeight(this.container);
         this.dragging = true;
         this.startPos = this.props.layout === 'horizontal' ? event.pageX : event.pageY;
         this.prevPanelElement = this.gutterElement.previousElementSibling;
