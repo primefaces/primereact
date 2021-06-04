@@ -290,7 +290,8 @@ export class DataView extends Component {
                 let items = [];
 
                 for (let i = first; i < last; i++) {
-                    items.push(<DataViewItem key={i} template={this.props.itemTemplate} layout={this.props.layout} item={value[i]} />);
+                    const val = value[i];
+                    val && items.push(<DataViewItem key={i} template={this.props.itemTemplate} layout={this.props.layout} item={val} />);
                 }
 
                 return items;
