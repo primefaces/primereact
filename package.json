@@ -20,7 +20,7 @@
     "responsive components"
   ],
   "devDependencies": {
-    "@babel/cli": "^7.2.0",
+    "@babel/cli": "^7.14.3",
     "@fullcalendar/core": "4.0.1",
     "@fullcalendar/daygrid": "4.0.1",
     "@fullcalendar/interaction": "4.0.1",
