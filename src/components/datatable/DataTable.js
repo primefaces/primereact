@@ -1000,8 +1000,10 @@ export class DataTable extends Component {
         }
     }
 
-    onColumnDragStart(event) {
-        if(this.columnResizing) {
+    onColumnDragStart(e) {
+        const { originalEvent: event, column } = e;
+
+        if (this.columnResizing) {
             event.preventDefault();
             return;
         }
@@ -1009,18 +1011,20 @@ export class DataTable extends Component {
         this.iconWidth = DomHandler.getHiddenElementOuterWidth(this.reorderIndicatorUp);
         this.iconHeight = DomHandler.getHiddenElementOuterHeight(this.reorderIndicatorUp);
 
-        this.draggedColumn = this.findParentHeader(event.target);
+        this.draggedColumnEl = this.findParentHeader(event.currentTarget);
+        this.draggedColumn = column;
         event.dataTransfer.setData('text', 'b'); // Firefox requires this to make dragging possible
     }
 
-    onColumnDragOver(event) {
-        let dropHeader = this.findParentHeader(event.target);
-        if(this.props.reorderableColumns && this.draggedColumn && dropHeader) {
+    onColumnDragOver(e) {
+        const event = e.originalEvent;
+        const dropHeader = this.findParentHeader(event.currentTarget);
+        if (this.props.reorderableColumns && this.draggedColumnEl && dropHeader) {
             event.preventDefault();
             let containerOffset = DomHandler.getOffset(this.container);
             let dropHeaderOffset = DomHandler.getOffset(dropHeader);
 
-            if(this.draggedColumn !== dropHeader) {
+            if (this.draggedColumnEl !== dropHeader) {
                 let targetLeft =  dropHeaderOffset.left - containerOffset.left;
                 //let targetTop =  containerOffset.top - dropHeaderOffset.top;
                 let columnCenter = dropHeaderOffset.left + dropHeader.offsetWidth / 2;
@@ -1045,19 +1049,22 @@ export class DataTable extends Component {
         }
     }
 
-    onColumnDragLeave(event) {
-        if(this.props.reorderableColumns && this.draggedColumn) {
+    onColumnDragLeave(e) {
+        const event = e.originalEvent;
+        if (this.props.reorderableColumns && this.draggedColumnEl) {
             event.preventDefault();
             this.reorderIndicatorUp.style.display = 'none';
             this.reorderIndicatorDown.style.display = 'none';
         }
     }
 
-    onColumnDrop(event) {
+    onColumnDrop(e) {
+        const { originalEvent: event, column } = e;
+
         event.preventDefault();
-        if (this.draggedColumn) {
-            let dragIndex = DomHandler.index(this.draggedColumn);
-            let dropIndex = DomHandler.index(this.findParentHeader(event.target));
+        if (this.draggedColumnEl) {
+            let dragIndex = DomHandler.index(this.draggedColumnEl);
+            let dropIndex = DomHandler.index(this.findParentHeader(event.currentTarget));
             let allowDrop = (dragIndex !== dropIndex);
             if (allowDrop && ((dropIndex - dragIndex === 1 && this.dropPosition === -1) || (dragIndex - dropIndex === 1 && this.dropPosition === 1))) {
                 allowDrop = false;
@@ -1065,21 +1072,33 @@ export class DataTable extends Component {
 
             if (allowDrop) {
                 let columns = this.state.columnOrder ? this.getColumns() : React.Children.toArray(this.props.children);
-                ObjectUtils.reorderArray(columns, dragIndex, dropIndex);
+                let dragColIndex = columns.findIndex((child) => child.props.columnKey === this.draggedColumn.columnKey || (this.draggedColumn.field && child.props.field === this.draggedColumn.field));
+                let dropColIndex = columns.findIndex((child) => child.props.columnKey === column.columnKey || (column.field && child.props.field === column.field));
+
+                if (dropColIndex < dragColIndex && this.dropPosition === 1) {
+                    dropColIndex++;
+                }
+
+                if (dropColIndex > dragColIndex && this.dropPosition === -1) {
+                    dropColIndex--;
+                }
+
+                ObjectUtils.reorderArray(columns, dragColIndex, dropColIndex);
+
                 let columnOrder = [];
-                for(let column of columns) {
+                for (let column of columns) {
                     columnOrder.push(column.props.columnKey||column.props.field);
                 }
 
                 this.setState({
-                    columnOrder: columnOrder
+                    columnOrder
                 });
 
                 if (this.props.onColReorder) {
                     this.props.onColReorder({
                         originalEvent: event,
-                        dragIndex: dragIndex,
-                        dropIndex: dropIndex,
+                        dragIndex: dragColIndex,
+                        dropIndex: dropColIndex,
                         columns: columns
                     });
                 }
@@ -1087,8 +1106,8 @@ export class DataTable extends Component {
 
             this.reorderIndicatorUp.style.display = 'none';
             this.reorderIndicatorDown.style.display = 'none';
-            this.draggedColumn.draggable = false;
-            this.draggedColumn = null;
+            this.draggedColumnEl.draggable = false;
+            this.draggedColumnEl = null;
             this.dropPosition = null;
         }
     }

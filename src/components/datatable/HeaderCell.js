@@ -21,6 +21,10 @@ export class HeaderCell extends Component {
         this.onResizerClick = this.onResizerClick.bind(this);
         this.onResizerDoubleClick = this.onResizerDoubleClick.bind(this);
         this.onKeyDown = this.onKeyDown.bind(this);
+        this.onDragStart = this.onDragStart.bind(this);
+        this.onDragOver = this.onDragOver.bind(this);
+        this.onDragLeave = this.onDragLeave.bind(this);
+        this.onDrop = this.onDrop.bind(this);
     }
 
     onClick(event) {
@@ -112,6 +116,42 @@ export class HeaderCell extends Component {
         if (event.key === 'Enter' && event.currentTarget === this.el) {
             this.onClick(event);
             event.preventDefault();
+        }
+    }
+
+    onDragStart(event) {
+        if (this.props.onDragStart) {
+            this.props.onDragStart({
+                originalEvent: event,
+                column: this.props.columnProps
+            });
+        }
+    }
+
+    onDragOver(event) {
+        if (this.props.onDragOver) {
+            this.props.onDragOver({
+                originalEvent: event,
+                column: this.props.columnProps
+            });
+        }
+    }
+
+    onDragLeave(event) {
+        if (this.props.onDragLeave) {
+            this.props.onDragLeave({
+                originalEvent: event,
+                column: this.props.columnProps
+            });
+        }
+    }
+
+    onDrop(event) {
+        if (this.props.onDrop) {
+            this.props.onDrop({
+                originalEvent: event,
+                column: this.props.columnProps
+            });
         }
     }
 
@@ -244,7 +284,7 @@ export class HeaderCell extends Component {
                 <th ref={(el) => this.el = el} role="columnheader" tabIndex={tabIndex}
                     className={className} style={this.props.columnProps.headerStyle||this.props.columnProps.style} onClick={this.onClick} onMouseDown={this.onMouseDown} onKeyDown={this.onKeyDown}
                     colSpan={this.props.columnProps.colSpan} rowSpan={this.props.columnProps.rowSpan} aria-sort={ariaSortData}
-                    onDragStart={this.props.onDragStart} onDragOver={this.props.onDragOver} onDragLeave={this.props.onDragLeave} onDrop={this.props.onDrop}>
+                    onDragStart={this.onDragStart} onDragOver={this.onDragOver} onDragLeave={this.onDragLeave} onDrop={this.onDrop}>
                     {resizer}
                     <span className="p-column-title">{this.props.columnProps.header}</span>
                     {sortIconElement}
