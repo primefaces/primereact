@@ -90,11 +90,11 @@ export class ToastDemo extends Component {
     render() {
         return (
             <div>
-                <div className="content-section introduction toast-demo">
+                <div className="content-section introduction">
                     <AppInlineHeader changelogText="toast">
                         <h1>Toast</h1>
                         <p>Toast is used to display messages in an overlay.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="toast/ToastDemo.js" />
                 </div>
 
