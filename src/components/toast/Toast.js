@@ -63,11 +63,11 @@ export class Toast extends Component {
                 newMessages = this.state.messages ? [...this.state.messages, value] : [value];
             }
 
+            this.state.messages.length === 0 && ZIndexUtils.set('toast', this.container, this.props.baseZIndex);
+
             this.setState({
                 messages: newMessages
             });
-
-            ZIndexUtils.set('toast', this.container, this.props.baseZIndex);
         }
     }
 
@@ -95,6 +95,8 @@ export class Toast extends Component {
     }
 
     onExited() {
+        this.state.messages.length === 0 && ZIndexUtils.clear(this.container);
+
         this.props.onHide && this.props.onHide();
     }
 
