@@ -168,7 +168,17 @@ PrimeReact.zIndex = {
     overlay: 1000,  // dropdown, overlaypanel
     menu: 1000,     // overlay menus
     tooltip: 1100   // tooltip
+    toast: 1200     // toast
 }
+`}
+</CodeHighlight>
+
+                    <p>The ZIndex of all components is increased according to their groups in harmony with each other. If false, each group increments its ZIndex within itself.</p>
+<CodeHighlight lang="js">
+{`
+import PrimeReact from 'primereact/api';
+
+PrimeReact.autoZIndex = true;
 `}
 </CodeHighlight>
 
