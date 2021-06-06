@@ -1,9 +1,17 @@
 // Config
+interface ZIndexOptions {
+    modal: number;
+    overlay: number;
+    menu: number;
+    tooltip: number;
+    toast: number;
+}
+
 interface APIOptions {
     ripple?: boolean;
     locale?: string;
     autoZIndex?: false;
-    zIndex?: number;
+    zIndex?: ZIndexOptions;
     appendTo?: 'self' | HTMLElement | undefined | null;
 }
 
