@@ -67,7 +67,7 @@ export class Toast extends Component {
                 messages: newMessages
             });
 
-            ZIndexUtils.set('modal', this.container, this.props.baseZIndex);
+            ZIndexUtils.set('toast', this.container, this.props.baseZIndex);
         }
     }
 

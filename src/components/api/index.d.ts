@@ -2,6 +2,7 @@
 interface APIOptions {
     ripple?: boolean;
     locale?: string;
+    autoZIndex?: false;
     zIndex?: number;
     appendTo?: 'self' | HTMLElement | undefined | null;
 }

@@ -150,7 +150,7 @@ export class Sidebar extends Component {
     bindDocumentEscapeListener() {
         this.documentEscapeListener = (event) => {
             if (event.which === 27) {
-                if (ZIndexUtils.get(this.sidebarRef.current) === ZIndexUtils.getCurrent()) {
+                if (ZIndexUtils.get(this.sidebarRef.current) === ZIndexUtils.getCurrent('modal')) {
                     this.onCloseClick(event);
                 }
             }

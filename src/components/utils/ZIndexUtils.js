@@ -6,8 +6,8 @@ function handler() {
     const generateZIndex = (key, baseZIndex) => {
         baseZIndex = baseZIndex || getBaseZIndex(key);
 
-        let lastZIndex = zIndexes.length > 0 ? zIndexes[zIndexes.length - 1] : { key, value: baseZIndex };
-        let newZIndex = lastZIndex.value + (lastZIndex.key === key ? 0 : baseZIndex) + 1;
+        const lastZIndex = getLastZIndex(key, baseZIndex);
+        const newZIndex = lastZIndex.value + (lastZIndex.key === key ? 0 : baseZIndex) + 1;
 
         zIndexes.push({ key, value: newZIndex });
         return newZIndex;
@@ -21,8 +21,12 @@ function handler() {
         return PrimeReact.zIndex[key] || 999;
     }
 
-    const getCurrentZIndex = () => {
-        return zIndexes.length > 0 ? zIndexes[zIndexes.length - 1].value : 0;
+    const getCurrentZIndex = (key) => {
+        return getLastZIndex(key).value;
+    }
+
+    const getLastZIndex = (key, baseZIndex = 0) => {
+        return (zIndexes || []).reverse().find(obj => (PrimeReact.autoZIndex ? true : obj.key === key)) || { key, value: baseZIndex };
     }
 
     return {
@@ -39,7 +43,7 @@ function handler() {
             }
         },
         getBase: (key) => getBaseZIndex(key),
-        getCurrent: () => getCurrentZIndex()
+        getCurrent: (key) => getCurrentZIndex(key)
     };
 }
 
