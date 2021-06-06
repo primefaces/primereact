@@ -60,11 +60,11 @@ export class Splitter extends Component {
     }
 
     validateResize(newPrevPanelSize, newNextPanelSize) {
-        if (this.props.children[0].props && this.props.children[0].props.minSize && this.props.children[0].props.minSize > newPrevPanelSize) {
+        if (this.props.children[this.prevPanelIndex].props && this.props.children[this.prevPanelIndex].props.minSize && this.props.children[this.prevPanelIndex].props.minSize > newPrevPanelSize) {
             return false;
         }
 
-        if (this.props.children[1].props && this.props.children[1].props.minSize && this.props.children[1].props.minSize > newNextPanelSize) {
+        if (this.props.children[this.prevPanelIndex+1].props && this.props.children[this.prevPanelIndex+1].props.minSize && this.props.children[this.prevPanelIndex+1].props.minSize > newNextPanelSize) {
             return false;
         }
 
@@ -134,10 +134,12 @@ export class Splitter extends Component {
     }
 
     onResizeStart(event, index) {
+        let pageX = event.type === 'touchstart' ? event.touches[0].pageX : event.pageX;
+        let pageY = event.type === 'touchstart' ? event.touches[0].pageY : event.pageY;
         this.gutterElement = event.currentTarget;
         this.size = this.props.layout === 'horizontal' ? DomHandler.getWidth(this.container) : DomHandler.getHeight(this.container);
         this.dragging = true;
-        this.startPos = this.props.layout === 'horizontal' ? event.pageX : event.pageY;
+        this.startPos = this.props.layout === 'horizontal' ? pageX : pageY;
         this.prevPanelElement = this.gutterElement.previousElementSibling;
         this.nextPanelElement = this.gutterElement.nextElementSibling;
         this.prevPanelSize = 100 * (this.props.layout === 'horizontal' ? DomHandler.getOuterWidth(this.prevPanelElement, true) : DomHandler.getOuterHeight(this.prevPanelElement, true)) / this.size;
@@ -149,10 +151,12 @@ export class Splitter extends Component {
 
     onResize(event) {
         let newPos;
+        let pageX = event.type === 'touchmove' ? event.touches[0].pageX : event.pageX;
+        let pageY = event.type === 'touchmove' ? event.touches[0].pageY : event.pageY;
         if (this.props.layout === 'horizontal')
-            newPos = (event.pageX * 100 / this.size) - (this.startPos * 100 / this.size);
+            newPos = (pageX * 100 / this.size) - (this.startPos * 100 / this.size);
         else
-            newPos = (event.pageY * 100 / this.size) - (this.startPos * 100 / this.size);
+            newPos = (pageY * 100 / this.size) - (this.startPos * 100 / this.size);
 
         let newPrevPanelSize = this.prevPanelSize + newPos;
         let newNextPanelSize = this.nextPanelSize - newPos;
