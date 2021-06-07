@@ -13,14 +13,11 @@ export class FullCalendarDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import { FullCalendar } from 'primereact/fullcalendar';
-import { EventService } from '../service/EventService';
+import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
-import '@fullcalendar/core/main.css';
-import '@fullcalendar/daygrid/main.css';
-import '@fullcalendar/timegrid/main.css';
+import { EventService } from '../service/EventService';
 
 export class FullCalendarDemo extends Component {
 
@@ -29,18 +26,6 @@ export class FullCalendarDemo extends Component {
 
         this.state = {
             events: []
-        };
-
-        this.options = {
-            plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-            defaultView: 'dayGridMonth',
-            defaultDate: '2017-02-01',
-            header: {
-                left: 'prev,next',
-                center: 'title',
-                right: 'dayGridMonth,timeGridWeek,timeGridDay'
-            },
-            editable: true
         };
 
         this.eventService = new EventService();
@@ -55,7 +40,8 @@ export class FullCalendarDemo extends Component {
         return (
             <div>
                 <div className="card">
-                    <FullCalendar events={this.state.events} options={this.options} />
+                    <FullCalendar events={this.state.events} initialDate="2017-02-01" initialView='dayGridMonth' plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+                        headerToolbar={{ left: 'prev,next today', center: 'title', right: 'dayGridMonth,timeGridWeek,timeGridDay' }} editable selectable selectMirror dayMaxEvents />
                 </div>
             </div>
         );
@@ -67,28 +53,14 @@ export class FullCalendarDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState, useEffect } from 'react';
-import { FullCalendar } from 'primereact/fullcalendar';
-import { EventService } from '../service/EventService';
+import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
-import '@fullcalendar/core/main.css';
-import '@fullcalendar/daygrid/main.css';
-import '@fullcalendar/timegrid/main.css';
+import { EventService } from '../service/EventService';
 
 const FullCalendarDemo = () => {
     const [events, setEvents] = useState([]);
-    const options = {
-        plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-        defaultView: 'dayGridMonth',
-        defaultDate: '2017-02-01',
-        header: {
-            left: 'prev,next',
-            center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay'
-        },
-        editable: true
-    };
 
     const eventService = new EventService();
 
@@ -99,7 +71,8 @@ const FullCalendarDemo = () => {
     return (
         <div>
             <div className="card">
-                <FullCalendar events={events} options={options} />
+                <FullCalendar events={events} initialDate="2017-02-01" initialView='dayGridMonth' plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+                    headerToolbar={{ left: 'prev,next today', center: 'title', right: 'dayGridMonth,timeGridWeek,timeGridDay' }} editable selectable selectMirror dayMaxEvents />
             </div>
         </div>
     );
@@ -110,28 +83,14 @@ const FullCalendarDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState, useEffect } from 'react';
-import { FullCalendar } from 'primereact/fullcalendar';
-import { EventService } from '../service/EventService';
+import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
-import '@fullcalendar/core/main.css';
-import '@fullcalendar/daygrid/main.css';
-import '@fullcalendar/timegrid/main.css';
+import { EventService } from '../service/EventService';
 
 const FullCalendarDemo = () => {
     const [events, setEvents] = useState([]);
-    const options = {
-        plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-        defaultView: 'dayGridMonth',
-        defaultDate: '2017-02-01',
-        header: {
-            left: 'prev,next',
-            center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay'
-        },
-        editable: true
-    };
 
     const eventService = new EventService();
 
@@ -142,7 +101,8 @@ const FullCalendarDemo = () => {
     return (
         <div>
             <div className="card">
-                <FullCalendar events={events} options={options} />
+                <FullCalendar events={events} initialDate="2017-02-01" initialView='dayGridMonth' plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+                    headerToolbar={{ left: 'prev,next today', center: 'title', right: 'dayGridMonth,timeGridWeek,timeGridDay' }} editable selectable selectMirror dayMaxEvents />
             </div>
         </div>
     );
@@ -152,10 +112,11 @@ const FullCalendarDemo = () => {
         }
 
         this.dependencies = {
-            "@fullcalendar/core": "4.2.0",
-            "@fullcalendar/daygrid": "4.2.0",
-            "@fullcalendar/timegrid": "4.2.0",
-            "@fullcalendar/interaction": "4.2.0"
+            "@fullcalendar/core": "^5.7.2",
+            "@fullcalendar/react": "^5.7.0",
+            "@fullcalendar/daygrid": "^5.7.2",
+            "@fullcalendar/interaction": "^5.7.2",
+            "@fullcalendar/timegrid": "^5.7.2",
         }
     }
 

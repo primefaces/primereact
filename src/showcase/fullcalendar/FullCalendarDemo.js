@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { FullCalendar } from '../../components/fullcalendar/FullCalendar';
-import { EventService } from '../service/EventService';
+import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import { EventService } from '../service/EventService';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { FullCalendarDoc } from './FullCalendarDoc';
 import AppDemoActions from '../../AppDemoActions';
@@ -17,23 +17,11 @@ export class FullCalendarDemo extends Component {
             events: []
         };
 
-        this.options = {
-            plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-            defaultView: 'dayGridMonth',
-            defaultDate: '2017-02-01',
-            header: {
-                left: 'prev,next',
-                center: 'title',
-                right: 'dayGridMonth,timeGridWeek,timeGridDay'
-            },
-            editable: true
-        };
-
         this.eventService = new EventService();
     }
 
     componentDidMount() {
-        this.eventService.getEvents().then(data => this.setState({events: data}));
+        this.eventService.getEvents().then(data => this.setState({ events: data }));
     }
 
     render() {
@@ -44,13 +32,14 @@ export class FullCalendarDemo extends Component {
                     <AppInlineHeader changelogText="fullCalendar">
                         <h1>FullCalendar</h1>
                         <p>An event calendar based on the <a href="https://fullcalendar.io/">FullCalendar</a> library.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="fullcalendar/FullCalendarDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
                     <div className="card">
-                        <FullCalendar events={this.state.events} options={this.options} />
+                        <FullCalendar events={this.state.events} initialDate="2017-02-01" initialView='dayGridMonth' plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+                            headerToolbar={{ left: 'prev,next today', center: 'title', right: 'dayGridMonth,timeGridWeek,timeGridDay' }} editable selectable selectMirror dayMaxEvents />
                     </div>
                 </div>
 
