@@ -21,6 +21,8 @@ export class FullCalendar extends Component {
     }
 
     componentDidMount() {
+        console.warn("FullCalendar component is deprecated. Use FullCalendar component of '@fullcalendar/react' package.");
+
         this.config = {
             theme: true
         };

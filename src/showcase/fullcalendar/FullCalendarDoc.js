@@ -116,7 +116,7 @@ const FullCalendarDemo = () => {
             "@fullcalendar/react": "^5.7.0",
             "@fullcalendar/daygrid": "^5.7.2",
             "@fullcalendar/interaction": "^5.7.2",
-            "@fullcalendar/timegrid": "^5.7.2",
+            "@fullcalendar/timegrid": "^5.7.2"
         }
     }
 
