@@ -223,7 +223,8 @@
                     "to": "/autocomplete",
                     "meta": [
                         "autocomplete"
-                    ]
+                    ],
+                    "badge": "updated"
                 },
                 {
                     "name": "Calendar",
@@ -267,7 +268,8 @@
                     "meta": [
                         "dropdown",
                         "selectOneMenu"
-                    ]
+                    ],
+                    "badge": "updated"
                 },
                 {
                     "name": "Editor",
@@ -351,7 +353,8 @@
                     "to": "/listbox",
                     "meta": [
                         "listbox"
-                    ]
+                    ],
+                    "badge": "updated"
                 },
                 {
                     "name": "MultiSelect",
@@ -359,7 +362,8 @@
                     "meta": [
                         "multiselect",
                         "selectCheckboxMenu"
-                    ]
+                    ],
+                    "badge": "updated"
                 },
                 {
                     "name": "Password",
