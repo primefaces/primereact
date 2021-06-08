@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { InputText } from '../../components/inputtext/InputText';
 import { AutoComplete } from '../../components/autocomplete/AutoComplete';
 import { CountryService } from '../service/CountryService';
+import { NodeService } from '../service/NodeService';
 import { Calendar } from '../../components/calendar/Calendar';
 import { CascadeSelect } from '../../components/cascadeselect/CascadeSelect';
 import { Chips } from '../../components/chips/Chips';
@@ -10,6 +11,8 @@ import { InputMask } from '../../components/inputmask/InputMask';
 import { InputNumber } from '../../components/inputnumber/InputNumber';
 import { InputTextarea } from '../../components/inputtextarea/InputTextarea';
 import { MultiSelect } from '../../components/multiselect/MultiSelect';
+import { TreeSelect } from '../../components/treeselect/TreeSelect';
+import { Password } from '../../components/password/Password';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { InvalidDoc } from './InvalidDoc';
 import AppDemoActions from '../../AppDemoActions';
@@ -28,6 +31,8 @@ export class InvalidDemo extends Component {
                 { name: 'Istanbul', code: 'IST' },
                 { name: 'Paris', code: 'PRS' }
             ],
+            nodes: null,
+            selectedNodeKey: null,
             value1: '',
             value2: null,
             value3: null,
@@ -37,7 +42,8 @@ export class InvalidDemo extends Component {
             value7: null,
             value8: null,
             value9: '',
-            value10: null
+            value10: null,
+            value11: ''
         };
 
         this.cascadeSelectCountries = [
@@ -118,11 +124,13 @@ export class InvalidDemo extends Component {
         ];
 
         this.countryservice = new CountryService();
+        this.nodeService = new NodeService();
         this.searchCountry = this.searchCountry.bind(this);
     }
 
     componentDidMount() {
         this.countryservice.getCountries().then(data => this.setState({ countries: data }));
+        this.nodeService.getTreeNodes().then(data => this.setState({ nodes: data }));
     }
 
     searchCountry(event) {
@@ -141,7 +149,7 @@ export class InvalidDemo extends Component {
                     <AppInlineHeader changelogText="invalid">
                         <h1>Invalid State</h1>
                         <p>All form components have an invalid state style to display the validation errors.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="invalid/InvalidDemo.js" />
                 </div>
 
@@ -170,23 +178,31 @@ export class InvalidDemo extends Component {
                             </div>
                             <div className="p-field p-col-12 p-md-4">
                                 <label htmlFor="inputnumber">InputNumber</label>
-                                <InputNumber id="inputnumber" value={this.state.value6} onChange={(e) => this.setState({ value6: e.value })} className="p-invalid" />
+                                <InputNumber inputId="inputnumber" value={this.state.value6} onChange={(e) => this.setState({ value6: e.value })} className="p-invalid" />
                             </div>
                             <div className="p-field p-col-12 p-md-4">
                                 <label htmlFor="cascadeselect">CascadeSelect</label>
-                                <CascadeSelect id="cascadeselect" value={this.state.value10} options={this.cascadeSelectCountries} optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']} onChange={event => this.setState({ value10: event.value })} className="p-invalid"/>
+                                <CascadeSelect inputId="cascadeselect" value={this.state.value10} options={this.cascadeSelectCountries} optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']} onChange={event => this.setState({ value10: event.value })} className="p-invalid"/>
                             </div>
                             <div className="p-field p-col-12 p-md-4">
                                 <label htmlFor="dropdown">Dropdown</label>
-                                <Dropdown id="dropdown" value={this.state.value7} options={this.state.cities} onChange={(e) => this.setState({ value7: e.value })} optionLabel="name" className="p-invalid" />
+                                <Dropdown inputId="dropdown" value={this.state.value7} options={this.state.cities} onChange={(e) => this.setState({ value7: e.value })} optionLabel="name" className="p-invalid" />
                             </div>
                             <div className="p-field p-col-12 p-md-4">
                                 <label htmlFor="multiselect">MultiSelect</label>
-                                <MultiSelect id="multiselect" value={this.state.value8} options={this.state.cities} onChange={(e) => this.setState({ value8: e.value })} optionLabel="name" className="p-invalid" />
+                                <MultiSelect inputId="multiselect" value={this.state.value8} options={this.state.cities} onChange={(e) => this.setState({ value8: e.value })} optionLabel="name" className="p-invalid" />
+                            </div>
+                            <div className="p-field p-col-12 p-md-4">
+                                <label htmlFor="treeselect">TreeSelect</label>
+                                <TreeSelect inputId="treeselect" value={this.state.selectedNodeKey} options={this.state.nodes} onChange={(e) => this.setState({ selectedNodeKey: e.value })} className="p-invalid"></TreeSelect>
+                            </div>
+                            <div className="p-field p-col-12 p-md-4">
+                                <label htmlFor="password">Password</label>
+                                <Password inputId="password" value={this.state.value9} onChange={(e) => this.setState({ value9: e.target.value })} className="p-invalid" />
                             </div>
                             <div className="p-field p-col-12 p-md-4">
                                 <label htmlFor="textarea">Textarea</label>
-                                <InputTextarea id="textarea" value={this.state.value9} onChange={(e) => this.setState({ value9: e.target.value })} rows={3} className="p-invalid" />
+                                <InputTextarea id="textarea" value={this.state.value11} onChange={(e) => this.setState({ value11: e.target.value })} rows={3} className="p-invalid" />
                             </div>
                         </div>
                     </div>

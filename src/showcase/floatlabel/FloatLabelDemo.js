@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { InputText } from '../../components/inputtext/InputText';
 import { AutoComplete } from '../../components/autocomplete/AutoComplete';
 import { CountryService } from '../service/CountryService';
+import { NodeService } from '../service/NodeService';
 import { Calendar } from '../../components/calendar/Calendar';
 import { CascadeSelect } from '../../components/cascadeselect/CascadeSelect';
 import { Chips } from '../../components/chips/Chips';
@@ -10,6 +11,8 @@ import { InputMask } from '../../components/inputmask/InputMask';
 import { InputNumber } from '../../components/inputnumber/InputNumber';
 import { InputTextarea } from '../../components/inputtextarea/InputTextarea';
 import { MultiSelect } from '../../components/multiselect/MultiSelect';
+import { TreeSelect } from '../../components/treeselect/TreeSelect';
+import { Password } from '../../components/password/Password';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { FloatLabelDoc } from './FloatLabelDoc';
 import AppDemoActions from '../../AppDemoActions';
@@ -28,6 +31,8 @@ export class FloatLabelDemo extends Component {
                 { name: 'Istanbul', code: 'IST' },
                 { name: 'Paris', code: 'PRS' }
             ],
+            nodes: null,
+            selectedNodeKey: null,
             value1: '',
             value2: '',
             value3: '',
@@ -40,7 +45,8 @@ export class FloatLabelDemo extends Component {
             value10: null,
             value11: null,
             value12: null,
-            value13: ''
+            value13: '',
+            value14: ''
         };
 
         this.cascadeSelectCountries = [
@@ -122,11 +128,13 @@ export class FloatLabelDemo extends Component {
 
 
         this.countryservice = new CountryService();
+        this.nodeService = new NodeService();
         this.searchCountry = this.searchCountry.bind(this);
     }
 
     componentDidMount() {
         this.countryservice.getCountries().then(data => this.setState({ countries: data }));
+        this.nodeService.getTreeNodes().then(data => this.setState({ nodes: data }));
     }
 
     searchCountry(event) {
@@ -145,7 +153,7 @@ export class FloatLabelDemo extends Component {
                     <AppInlineHeader changelogText="floatLabel">
                         <h1>Float Label</h1>
                         <p>A floating label is implemented by wrapping the input and the label inside a container having .p-float-label style class.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="floatlabel/FloatLabelDemo.js" />
                 </div>
 
@@ -198,7 +206,7 @@ export class FloatLabelDemo extends Component {
                             </div>
                             <div className="p-field p-col-12 p-md-4">
                                 <span className="p-float-label">
-                                    <InputNumber id="inputnumber" value={this.state.value8} onChange={(e) => this.setState({ value8: e.value })} />
+                                    <InputNumber inputId="inputnumber" value={this.state.value8} onChange={(e) => this.setState({ value8: e.value })} />
                                     <label htmlFor="inputnumber">InputNumber</label>
                                 </span>
                             </div>
@@ -215,25 +223,37 @@ export class FloatLabelDemo extends Component {
                             </div>
                             <div className="p-field p-col-12 p-md-4">
                                 <span className="p-float-label">
-                                    <CascadeSelect id="cascadeselect" value={this.state.value10} options={this.cascadeSelectCountries} optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']} onChange={event => this.setState({ value10: event.value })} />
+                                    <CascadeSelect inputId="cascadeselect" value={this.state.value10} options={this.cascadeSelectCountries} optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']} onChange={event => this.setState({ value10: event.value })} />
                                     <label htmlFor="cascadeselect">CascadeSelect</label>
                                 </span>
                             </div>
                             <div className="p-field p-col-12 p-md-4">
                                 <span className="p-float-label">
-                                    <Dropdown id="dropdown" value={this.state.value11} options={this.state.cities} onChange={(e) => this.setState({ value11: e.value })} optionLabel="name" />
+                                    <Dropdown inputId="dropdown" value={this.state.value11} options={this.state.cities} onChange={(e) => this.setState({ value11: e.value })} optionLabel="name" />
                                     <label htmlFor="dropdown">Dropdown</label>
                                 </span>
                             </div>
                             <div className="p-field p-col-12 p-md-4">
                                 <span className="p-float-label">
-                                    <MultiSelect id="multiselect" value={this.state.value12} options={this.state.cities} onChange={(e) => this.setState({ value12: e.value })} optionLabel="name" />
+                                    <MultiSelect inputId="multiselect" value={this.state.value12} options={this.state.cities} onChange={(e) => this.setState({ value12: e.value })} optionLabel="name" />
                                     <label htmlFor="multiselect">MultiSelect</label>
+                                </span>
+                            </div>
+                            <div className="p-field p-col-12 p-md-4">
+                                <span className="p-float-label">
+                                    <TreeSelect inputId="treeselect" value={this.state.selectedNodeKey} options={this.state.nodes} onChange={(e) => this.setState({ selectedNodeKey: e.value })}></TreeSelect>
+                                    <label htmlFor="treeselect">TreeSelect</label>
+                                </span>
+                            </div>
+                            <div className="p-field p-col-12 p-md-4">
+                                <span className="p-float-label">
+                                    <Password inputId="password" value={this.state.value13} onChange={(e) => this.setState({ value13: e.target.value })}/>
+                                    <label htmlFor="password">Password</label>
                                 </span>
                             </div>
                             <div className="p-field p-col-12">
                                 <span className="p-float-label">
-                                    <InputTextarea id="textarea" value={this.state.value13} onChange={(e) => this.setState({ value13: e.target.value })} rows={3} />
+                                    <InputTextarea id="textarea" value={this.state.value14} onChange={(e) => this.setState({ value14: e.target.value })} rows={3} />
                                     <label htmlFor="textarea">Textarea</label>
                                 </span>
                             </div>

@@ -44,23 +44,26 @@ export const useLiveEditorTabs = (props) => {
     });
 
     if (props.service) {
-        tabs.push(
-            <TabPanel key="service" header={`${props.service}.js`}>
-                <CodeHighlight lang="js">
-                    {services[props.service]}
-                </CodeHighlight>
-                <span className="liveEditorHelperText">*Dependency: axios</span>
-            </TabPanel>
-        )
+        const serviceArr = props.service.replace(/\s/g,'').split(',');
+        serviceArr.forEach((s, i) => {
+            tabs.push(
+                <TabPanel key={`${s}_${i}`} header={`${s}.js`}>
+                    <CodeHighlight lang="js">
+                        {services[s]}
+                    </CodeHighlight>
+                    <span className="liveEditorHelperText">*Dependency: axios</span>
+                </TabPanel>
+            )
+        });
     }
 
     if (props.data) {
-        const dataArr = props.data.split(',');
-        dataArr.forEach((el, i) => {
+        const dataArr = props.data.replace(/\s/g,'').split(',');
+        dataArr.forEach((d, i) => {
             tabs.push(
-                <TabPanel key={`${el}_i`} header={`${el}.json`}>
+                <TabPanel key={`${d}_${i}`} header={`${d}.json`}>
                     <CodeHighlight lang="js" style={{ maxHeight: '500px' }}>
-                        {data[el]}
+                        {data[d]}
                     </CodeHighlight>
                 </TabPanel>
             )
@@ -382,18 +385,21 @@ ReactDOM.render(<${name} />, rootElement);`
         }
 
         if (props.service) {
-            _files[`src/service/${props.service}${extension}`] = {
-                content: services[props.service]
-            }
+            const serviceArr = props.service.replace(/\s/g,'').split(',');
+            serviceArr.forEach(s => {
+                _files[`src/service/${s}${extension}`] = {
+                    content: services[s]
+                }
+            });
 
             extDependencies['axios'] = "^0.19.0";
         }
 
         if (props.data) {
-            const dataArr = props.data.split(',');
-            dataArr.forEach(el => {
-                _files[`public/data/${el}.json`] = {
-                    content: data[el]
+            const dataArr = props.data.replace(/\s/g,'').split(',');
+            dataArr.forEach(d => {
+                _files[`public/data/${d}.json`] = {
+                    content: data[d]
                 }
             });
         }
