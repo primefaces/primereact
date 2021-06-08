@@ -980,15 +980,14 @@
     margin: 0;
     border-top-right-radius: 3px;
     border-top-left-radius: 3px; }
-    .p-multiselect-panel .p-multiselect-header .p-multiselect-filter-container .p-inputtext {
-      padding-right: 1.429rem; }
-    .p-multiselect-panel .p-multiselect-header .p-multiselect-filter-container .p-multiselect-filter-icon {
-      right: 0.429rem;
-      color: #848484; }
-    .p-multiselect-panel .p-multiselect-header .p-checkbox {
-      margin-right: 0.5rem; }
+    .p-multiselect-panel .p-multiselect-header .p-multiselect-filter-container {
+      margin: 0 0.5rem; }
+      .p-multiselect-panel .p-multiselect-header .p-multiselect-filter-container .p-inputtext {
+        padding-right: 1.429rem; }
+      .p-multiselect-panel .p-multiselect-header .p-multiselect-filter-container .p-multiselect-filter-icon {
+        right: 0.429rem;
+        color: #848484; }
     .p-multiselect-panel .p-multiselect-header .p-multiselect-close {
-      margin-left: 0.5rem;
       width: 2rem;
       height: 2rem;
       color: #a6a6a6;

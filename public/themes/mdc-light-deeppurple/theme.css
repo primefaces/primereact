@@ -1001,15 +1001,14 @@
     margin: 0;
     border-top-right-radius: 4px;
     border-top-left-radius: 4px; }
-    .p-multiselect-panel .p-multiselect-header .p-multiselect-filter-container .p-inputtext {
-      padding-right: 1.75rem; }
-    .p-multiselect-panel .p-multiselect-header .p-multiselect-filter-container .p-multiselect-filter-icon {
-      right: 0.75rem;
-      color: rgba(0, 0, 0, 0.6); }
-    .p-multiselect-panel .p-multiselect-header .p-checkbox {
-      margin-right: 0.5rem; }
+    .p-multiselect-panel .p-multiselect-header .p-multiselect-filter-container {
+      margin: 0 0.5rem; }
+      .p-multiselect-panel .p-multiselect-header .p-multiselect-filter-container .p-inputtext {
+        padding-right: 1.75rem; }
+      .p-multiselect-panel .p-multiselect-header .p-multiselect-filter-container .p-multiselect-filter-icon {
+        right: 0.75rem;
+        color: rgba(0, 0, 0, 0.6); }
     .p-multiselect-panel .p-multiselect-header .p-multiselect-close {
-      margin-left: 0.5rem;
       width: 2rem;
       height: 2rem;
       color: rgba(0, 0, 0, 0.6);
