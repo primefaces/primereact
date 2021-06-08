@@ -680,6 +680,12 @@ const groupedCities = [
                             <td>null</td>
                             <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
                         </tr>
+                        <tr>
+                            <td>virtualScrollerOptions</td>
+                            <td>object</td>
+                            <td>null</td>
+                            <td>Whether to use the virtualScroller feature. The properties of <Link to="virtualscroller">VirtualScroller</Link> component can be used like an object in it.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

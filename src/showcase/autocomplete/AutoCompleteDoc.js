@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
 import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
@@ -766,6 +767,12 @@ itemTemplate(item) {
                                         <td>object</td>
                                         <td>null</td>
                                         <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>virtualScrollerOptions</td>
+                                        <td>object</td>
+                                        <td>null</td>
+                                        <td>Whether to use the virtualScroller feature. The properties of <Link to="virtualscroller">VirtualScroller</Link> component can be used like an object in it.</td>
                                     </tr>
                                 </tbody>
                             </table>

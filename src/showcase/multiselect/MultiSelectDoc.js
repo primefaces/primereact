@@ -832,12 +832,6 @@ const groupedCities = [
                             <td>A property to uniquely match the value in options for better performance.</td>
                         </tr>
                         <tr>
-                            <td>required</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>When present, it specifies that an input field must be filled out before submitting the form.</td>
-                        </tr>
-                        <tr>
                             <td>inputId</td>
                             <td>string</td>
                             <td>null</td>
@@ -927,6 +921,24 @@ const groupedCities = [
                             <td>null</td>
                             <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
                         </tr>
+                        <tr>
+                            <td>virtualScrollerOptions</td>
+                            <td>object</td>
+                            <td>null</td>
+                            <td>Whether to use the virtualScroller feature. The properties of <Link to="virtualscroller">VirtualScroller</Link> component can be used like an object in it.</td>
+                        </tr>
+                        <tr>
+                            <td>showSelectAll</td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>Whether to show the select all checkbox inside the panel's header.</td>
+                        </tr>
+                        <tr>
+                            <td>selectAll</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>Whether all data is selected.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -969,6 +981,18 @@ const groupedCities = [
                             <td>-</td>
                             <td>Callback to invoke when overlay panel becomes hidden.</td>
                         </tr>
+                        <tr>
+                            <td>onFilter</td>
+                            <td>event.originalEvent: Browser event<br />
+                                event.filter: Filter value.</td>
+                            <td>Callback to invoke on filtering.</td>
+                        </tr>
+                        <tr>
+                            <td>onSelectAll</td>
+                            <td>event.originalEvent: Browser event<br />
+                                event.filter: Filter value.</td>
+                            <td>Callback to invoke when all data is selected.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -987,7 +1011,7 @@ const groupedCities = [
                         <tr>
                             <td>checkValidity</td>
                             <td>-</td>
-                            <td>Checks whether the native hidden select element has any constraints and returns a boolean for the result.</td>
+                            <td>Checks whether the native hidden input element has any constraints and returns a boolean for the result.</td>
                         </tr>
                     </tbody>
                 </table>

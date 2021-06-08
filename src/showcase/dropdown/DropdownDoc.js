@@ -918,6 +918,12 @@ const groupedCities = [
                                         <td>false</td>
                                         <td>When enabled, overlay panel will be visible with input focus.</td>
                                     </tr>
+                                    <tr>
+                                        <td>virtualScrollerOptions</td>
+                                        <td>object</td>
+                                        <td>null</td>
+                                        <td>Whether to use the virtualScroller feature. The properties of <Link to="virtualscroller">VirtualScroller</Link> component can be used like an object in it.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
