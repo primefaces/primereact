@@ -492,7 +492,7 @@ export class Password extends Component {
 
         return (
             <div ref={el => this.container = el} id={this.props.id} className={containerClassName} style={this.props.style}>
-                <InputText ref={this.inputRef} inputId={this.props.inputId} {...inputProps} type={type} className={inputClassName} style={this.props.inputStyle}
+                <InputText ref={this.inputRef} id={this.props.inputId} {...inputProps} type={type} className={inputClassName} style={this.props.inputStyle}
                     onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyup} onInput={this.onInput} />
                 {icon}
                 {panel}
