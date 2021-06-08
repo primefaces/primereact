@@ -136,11 +136,11 @@ export class VirtualScrollerDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <AppInlineHeader changelogText="virtualscroll">
+                    <AppInlineHeader changelogText="virtualScroller">
                         <h1>VirtualScroller</h1>
-                        <p></p>
+                        <p>VirtualScroller is a performant approach to handle huge data efficiently.</p>
                     </AppInlineHeader>
-                    <AppDemoActions github="virtualscroll/VirtualScrollDemo.js" />
+                    <AppDemoActions github="virtualscroller/VirtualScrollerDemo.js" />
                 </div>
 
                 <div className="content-section implementation virtualscroller-demo">
@@ -197,7 +197,7 @@ export class VirtualScrollerDemo extends Component {
                     <div className="card">
                         <h5>Lazy</h5>
                         <VirtualScroller items={this.state.lazyItems} itemSize={50} itemTemplate={this.basicItemTemplate} lazy onLazyLoad={this.onLazyLoad}
-                            showLoader loading={this.state.lazyLoading} delay={150} />
+                            showLoader loading={this.state.lazyLoading} />
                     </div>
 
                     <div className="card">
