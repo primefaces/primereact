@@ -17,6 +17,7 @@ export class Password extends Component {
 
     static defaultProps = {
         id: null,
+        inputId: null,
         inputRef: null,
         promptLabel: null,
         weakLabel: null,
@@ -47,6 +48,7 @@ export class Password extends Component {
 
     static propTypes = {
         id: PropTypes.string,
+        inputId: PropTypes.string,
         inputRef: PropTypes.any,
         promptLabel: PropTypes.string,
         weakLabel: PropTypes.string,
@@ -490,7 +492,7 @@ export class Password extends Component {
 
         return (
             <div ref={el => this.container = el} id={this.props.id} className={containerClassName} style={this.props.style}>
-                <InputText ref={this.inputRef} {...inputProps} type={type} className={inputClassName} style={this.props.inputStyle}
+                <InputText ref={this.inputRef} inputId={this.props.inputId} {...inputProps} type={type} className={inputClassName} style={this.props.inputStyle}
                     onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyup} onInput={this.onInput} />
                 {icon}
                 {panel}
