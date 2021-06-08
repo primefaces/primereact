@@ -3116,6 +3116,20 @@ const bodyTemplate = (data, props) => {
                             <td>Callback to invoke during virtual scrolling.</td>
                         </tr>
                         <tr>
+                            <td>onAllRowsSelect</td>
+                            <td>event.originalEvent: Browser event. <br />
+                                event.data: Selected rows data. <br />
+                                event.type: Type of the selection, valid value is "all".</td>
+                            <td>Callback to invoke when all rows are selected using the header checkbox.</td>
+                        </tr>
+                        <tr>
+                            <td>onAllRowsUnselect</td>
+                            <td>event.originalEvent: Browser event. <br />
+                                event.data: Unselected rows data. <br />
+                                event.type: Type of the selection, valid value is "all".</td>
+                            <td>Callback to invoke when all rows is unselected using the header checkbox.</td>
+                        </tr>
+                        <tr>
                             <td>onRowClick</td>
                             <td>event.originalEvent: Browser event <br />
                                 event.data: Clicked row data <br />
