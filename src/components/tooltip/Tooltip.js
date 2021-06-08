@@ -203,6 +203,14 @@ export class Tooltip extends Component {
 
                 this.containerEl.style.left = '';
                 this.containerEl.style.top = '';
+
+                if (this.isMouseTrack(this.currentTarget) && !this.containerSize) {
+                    this.containerSize = {
+                        width: DomHandler.getOuterWidth(this.containerEl),
+                        height: DomHandler.getOuterHeight(this.containerEl)
+                    };
+                }
+
                 this.align(this.currentTarget, { x: e.pageX, y: e.pageY });
             });
         }
@@ -256,6 +264,7 @@ export class Tooltip extends Component {
                     this.unbindScrollListener();
                     this.currentTarget = null;
                     this.scrollHandler = null;
+                    this.containerSize = null;
                     this.allowHide = true;
                     this.sendCallback(this.props.onHide, { originalEvent: e, target: this.currentTarget });
                 });
@@ -267,7 +276,7 @@ export class Tooltip extends Component {
         let left = 0, top = 0;
 
         if (this.isMouseTrack(target) && coordinate) {
-            const container = {
+            const containerSize = {
                 width: DomHandler.getOuterWidth(this.containerEl),
                 height: DomHandler.getOuterHeight(this.containerEl)
             };
@@ -279,26 +288,34 @@ export class Tooltip extends Component {
 
             switch (this.state.position) {
                 case 'left':
-                    left -= (container.width + mouseTrackLeft);
-                    top -= (container.height / 2) - mouseTrackTop;
+                    left -= (containerSize.width + mouseTrackLeft);
+                    top -= (containerSize.height / 2) - mouseTrackTop;
                     break;
                 case 'right':
                     left += mouseTrackLeft;
-                    top -= (container.height / 2) - mouseTrackTop;
+                    top -= (containerSize.height / 2) - mouseTrackTop;
                     break;
                 case 'top':
-                    left -= (container.width / 2) - mouseTrackLeft;
-                    top -= (container.height + mouseTrackTop);
+                    left -= (containerSize.width / 2) - mouseTrackLeft;
+                    top -= (containerSize.height + mouseTrackTop);
                     break;
                 case 'bottom':
-                    left -= (container.width / 2) - mouseTrackLeft;
+                    left -= (containerSize.width / 2) - mouseTrackLeft;
                     top += mouseTrackTop;
                     break;
                 default:
                     break;
             }
 
-            this.containerEl.style.left = left + 'px';
+            if (left <= 0 || this.containerSize.width > containerSize.width) {
+                this.containerEl.style.left = '0px';
+                this.containerEl.style.right = window.innerWidth - containerSize.width - left + 'px';
+            }
+            else {
+                this.containerEl.style.right = '';
+                this.containerEl.style.left = left + 'px';
+            }
+
             this.containerEl.style.top = top + 'px';
             DomHandler.addClass(this.containerEl, 'p-tooltip-active');
         }
