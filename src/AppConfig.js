@@ -126,7 +126,7 @@ export class AppConfig extends Component {
 
 
                             <h4>Ripple Effect</h4>
-                            <InputSwitch checked={this.props.ripple} onChange={(e) => this.props.onRippleChange(e.value)} />
+                            <InputSwitch checked={this.props.ripple} onChange={(e) => this.props.onRippleChange(e.value)} disabled={this.props.isRippleConfigDisabled}/>
 
                             <h4>Free Themes</h4>
                             <p>Built-in component themes created by the <a href="https://www.primefaces.org/designer/primereact">PrimeReact Theme Designer</a>.</p>

@@ -40,7 +40,8 @@ export class App extends Component {
             newsActive: this.isNewsStorageExpired(),
             configuratorActive: false,
             changelogActive: false,
-            searchVal: null
+            searchVal: null,
+            isRippleConfigDisabled: false
         };
 
         this.onThemeChange = this.onThemeChange.bind(this);
@@ -168,10 +169,10 @@ export class App extends Component {
         this.setState({ inputStyle });
     }
 
-    onRippleChange(value) {
+    onRippleChange(value, isRippleConfigDisabled) {
         PrimeReact.ripple = value;
 
-        this.setState({ ripple: value });
+        this.setState({ ripple: value, isRippleConfigDisabled });
     }
 
     showChangelogDialog(searchVal) {
@@ -246,11 +247,13 @@ export class App extends Component {
                 <AppMenu active={this.state.sidebarActive} onMenuItemClick={this.onMenuItemClick} />
 
                 <AppContentContext.Provider value={{
+                    ripple: this.state.ripple,
                     inputStyle: this.state.inputStyle,
                     darkTheme: this.state.darkTheme,
                     changelogText: "VIEW CHANGELOG",
                     onChangelogBtnClick: this.showChangelogDialog,
-                    onInputStyleChange: this.onInputStyleChange
+                    onInputStyleChange: this.onInputStyleChange,
+                    onRippleChange: this.onRippleChange
                 }}>
                     <div className="layout-content">
                         <AppRouter />
@@ -260,7 +263,7 @@ export class App extends Component {
                         <AppFooter />
                     </div>
 
-                    <AppConfig theme={this.state.theme} ripple={this.state.ripple} onThemeChange={this.onThemeChange} onRippleChange={this.onRippleChange} />
+                    <AppConfig theme={this.state.theme} ripple={this.state.ripple} isRippleConfigDisabled={this.state.isRippleConfigDisabled} onThemeChange={this.onThemeChange} onRippleChange={this.onRippleChange} />
                 </AppContentContext.Provider>
 
                 <div className={maskClassName} onClick={this.onMaskClick}></div>

@@ -6,6 +6,20 @@ import AppDemoActions from '../../AppDemoActions';
 
 export class RippleDemo extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.ripple = this.props.ripple;
+    }
+
+    componentDidMount() {
+        this.props.onRippleChange(true, true);
+    }
+
+    componentWillUnmount() {
+        this.props.onRippleChange(this.ripple, false);
+    }
+
     render() {
         return (
             <div>

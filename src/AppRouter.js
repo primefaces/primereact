@@ -355,7 +355,7 @@ class AppRouter extends Component {
                             <Route path="/text" component={TextDemo} />
                             <Route path="/accessibility" component={AccessibilityDemo} />
                             <Route path="/locale" component={LocaleDemo} />
-                            <Route path="/ripple" component={RippleDemo} />
+                            <Route path="/ripple" render={() => <RippleDemo ripple={context.ripple} onRippleChange={context.onRippleChange} />} />
                             <Route path="/timeline" component={TimelineDemo} />
                             <Route path="/avatar" component={AvatarDemo} />
                             <Route path="/badge" component={BadgeDemo} />
