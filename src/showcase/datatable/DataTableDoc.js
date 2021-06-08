@@ -3127,7 +3127,7 @@ const bodyTemplate = (data, props) => {
                             <td>event.originalEvent: Browser event. <br />
                                 event.data: Unselected rows data. <br />
                                 event.type: Type of the selection, valid value is "all".</td>
-                            <td>Callback to invoke when all rows is unselected using the header checkbox.</td>
+                            <td>Callback to invoke when all rows are unselected using the header checkbox.</td>
                         </tr>
                         <tr>
                             <td>onRowClick</td>
