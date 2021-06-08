@@ -46,7 +46,6 @@ export class MultiSelect extends Component {
         tabIndex: 0,
         dataKey: null,
         inputId: null,
-        required: false,
         appendTo: null,
         tooltip: null,
         tooltipOptions: null,
@@ -59,12 +58,15 @@ export class MultiSelect extends Component {
         panelHeaderTemplate: null,
         panelFooterTemplate: null,
         transitionOptions: null,
+        showSelectAll: true,
+        selectAll: false,
         onChange: null,
         onFocus: null,
         onBlur: null,
         onShow: null,
         onHide: null,
-        onFilter: null
+        onFilter: null,
+        onSelectAll: null
     };
 
     static propTypes = {
@@ -100,7 +102,6 @@ export class MultiSelect extends Component {
         tabIndex: PropTypes.number,
         dataKey: PropTypes.string,
         inputId: PropTypes.string,
-        required: PropTypes.bool,
         appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
@@ -113,12 +114,15 @@ export class MultiSelect extends Component {
         panelHeaderTemplate: PropTypes.any,
         panelFooterTemplate: PropTypes.any,
         transitionOptions: PropTypes.object,
+        showSelectAll: PropTypes.bool,
+        selectAll: PropTypes.bool,
         onChange: PropTypes.func,
         onFocus: PropTypes.func,
         onBlur: PropTypes.func,
         onShow: PropTypes.func,
         onHide: PropTypes.func,
-        onFilter: PropTypes.func
+        onFilter: PropTypes.func,
+        onSelectAll: PropTypes.func
     };
 
     constructor(props) {
@@ -137,7 +141,7 @@ export class MultiSelect extends Component {
         this.onBlur = this.onBlur.bind(this);
         this.onFilterInputChange = this.onFilterInputChange.bind(this);
         this.onCloseClick = this.onCloseClick.bind(this);
-        this.onToggleAll = this.onToggleAll.bind(this);
+        this.onSelectAll = this.onSelectAll.bind(this);
         this.onOverlayEnter = this.onOverlayEnter.bind(this);
         this.onOverlayEntered = this.onOverlayEntered.bind(this);
         this.onOverlayExit = this.onOverlayExit.bind(this);
@@ -226,7 +230,7 @@ export class MultiSelect extends Component {
             //escape
             case 27:
                 this.hide();
-                this.focusInput.focus();
+                this.inputRef.current.focus();
                 break;
 
             default:
@@ -261,7 +265,7 @@ export class MultiSelect extends Component {
                 this.show();
             }
 
-            this.focusInput.focus();
+            this.inputRef.current.focus();
         }
     }
 
@@ -306,33 +310,38 @@ export class MultiSelect extends Component {
         }
     }
 
-    onToggleAll(event) {
-        let value = null;
-        let visibleOptions = this.getVisibleOptions();
-
-        if (event.checked) {
-            value = [];
-
-            if (visibleOptions) {
-                const selectedOptions = visibleOptions.filter(option => this.isOptionDisabled(option) && this.isSelected(option));
-                value = selectedOptions.map(option => this.getOptionValue(option));
-            }
+    onSelectAll(event) {
+        if (this.props.onSelectAll) {
+            this.props.onSelectAll(event);
         }
-        else if (visibleOptions) {
-            visibleOptions = visibleOptions.filter(option => !this.isOptionDisabled(option));
+        else {
+            let value = null;
+            let visibleOptions = this.getVisibleOptions();
 
-            if (this.props.optionGroupLabel) {
+            if (event.checked) {
                 value = [];
-                visibleOptions.forEach(optionGroup => value = [...value, ...this.getOptionGroupChildren(optionGroup).filter((option) => !this.isOptionDisabled(option)).map(option => this.getOptionValue(option))]);
+
+                if (visibleOptions) {
+                    const selectedOptions = visibleOptions.filter(option => this.isOptionDisabled(option) && this.isSelected(option));
+                    value = selectedOptions.map(option => this.getOptionValue(option));
+                }
             }
-            else {
-                value = visibleOptions.map(option => this.getOptionValue(option));
+            else if (visibleOptions) {
+                visibleOptions = visibleOptions.filter(option => !this.isOptionDisabled(option));
+
+                if (this.props.optionGroupLabel) {
+                    value = [];
+                    visibleOptions.forEach(optionGroup => value = [...value, ...this.getOptionGroupChildren(optionGroup).filter((option) => !this.isOptionDisabled(option)).map(option => this.getOptionValue(option))]);
+                }
+                else {
+                    value = visibleOptions.map(option => this.getOptionValue(option));
+                }
+
+                value = [...new Set([...value, ...(this.props.value||[])])];
             }
 
-            value = [...new Set([...value, ...(this.props.value||[])])];
+            this.updateModel(event.originalEvent, value);
         }
-
-        this.updateModel(event.originalEvent, value);
     }
 
     updateModel(event, value) {
@@ -425,7 +434,7 @@ export class MultiSelect extends Component {
 
     onCloseClick(event) {
         this.hide();
-        this.focusInput.focus();
+        this.inputRef.current.focus();
         event.preventDefault();
         event.stopPropagation();
     }
@@ -644,27 +653,32 @@ export class MultiSelect extends Component {
     }
 
     isAllSelected() {
-        let visibleOptions = this.getVisibleOptions();
-        if (visibleOptions.length === 0) {
-            return false;
+        if (this.props.onSelectAll) {
+            return this.props.selectAll;
         }
+        else {
+            let visibleOptions = this.getVisibleOptions();
+            if (visibleOptions.length === 0) {
+                return false;
+            }
 
-        visibleOptions = visibleOptions.filter((option) => !this.isOptionDisabled(option));
+            visibleOptions = visibleOptions.filter((option) => !this.isOptionDisabled(option));
 
-        if (this.props.optionGroupLabel) {
-            for (let optionGroup of visibleOptions) {
-                const visibleOptionsGroupChildren = this.getOptionGroupChildren(optionGroup).filter((option) => !this.isOptionDisabled(option));
-                for (let option of visibleOptionsGroupChildren) {
-                    if (!this.isSelected(option)) {
-                        return false;
+            if (this.props.optionGroupLabel) {
+                for (let optionGroup of visibleOptions) {
+                    const visibleOptionsGroupChildren = this.getOptionGroupChildren(optionGroup).filter((option) => !this.isOptionDisabled(option));
+                    for (let option of visibleOptionsGroupChildren) {
+                        if (!this.isSelected(option)) {
+                            return false;
+                        }
                     }
                 }
             }
-        }
-        else {
-            for (let option of visibleOptions) {
-                if (!this.isSelected(option)) {
-                    return false;
+            else {
+                for (let option of visibleOptions) {
+                    if (!this.isSelected(option)) {
+                        return false;
+                    }
                 }
             }
         }
@@ -769,15 +783,15 @@ export class MultiSelect extends Component {
         let label;
 
         if (!this.isEmpty() && !this.props.fixedPlaceholder) {
-            label = '';
-            for (let i = 0; i < this.props.value.length; i++) {
-                if (i !== 0) {
-                    label += ',';
-                }
-                label += this.getLabelByValue(this.props.value[i]);
-            }
-
             if (this.props.value.length <= this.props.maxSelectedLabels) {
+                label = '';
+                for (let i = 0; i < this.props.value.length; i++) {
+                    if (i !== 0) {
+                        label += ',';
+                    }
+                    label += this.getLabelByValue(this.props.value[i]);
+                }
+
                 return label;
             }
             else {
@@ -862,18 +876,6 @@ export class MultiSelect extends Component {
         );
     }
 
-    renderHiddenSelect() {
-        let selectedOptions = this.props.value ? this.props.value.map((option, index) => <option key={this.getOptionLabel(option) + '_' + index} value={this.getOptionValue(option)}></option>) : null;
-
-        return (
-            <div className="p-hidden-accessible p-multiselect-hidden-select">
-                <select ref={this.inputRef} required={this.props.required} name={this.props.name} tabIndex={-1} aria-hidden="true" multiple>
-                    {selectedOptions}
-                </select>
-            </div>
-        );
-    }
-
     render() {
         let className = classNames('p-multiselect p-component p-inputwrapper', {
             'p-multiselect-chip': this.props.display === 'chip',
@@ -887,13 +889,11 @@ export class MultiSelect extends Component {
 
         let label = this.renderLabel();
         let clearIcon = this.renderClearIcon();
-        let hiddenSelect = this.renderHiddenSelect();
 
         return (
             <div id={this.props.id} className={className} onClick={this.onClick} ref={el => this.container = el} style={this.props.style}>
-                {hiddenSelect}
                 <div className="p-hidden-accessible">
-                    <input ref={el => this.focusInput = el} id={this.props.inputId} readOnly type="text" onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.onKeyDown}
+                    <input ref={this.inputRef} id={this.props.inputId} name={this.props.name} readOnly type="text" onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.onKeyDown}
                         role="listbox" aria-haspopup="listbox" aria-labelledby={this.props.ariaLabelledBy} aria-expanded={this.state.overlayVisible} disabled={this.props.disabled} tabIndex={this.props.tabIndex} />
                 </div>
                 {label}
@@ -902,7 +902,7 @@ export class MultiSelect extends Component {
                     <span className="p-multiselect-trigger-icon pi pi-chevron-down p-c"></span>
                 </div>
                 <MultiSelectPanel ref={this.overlayRef} visibleOptions={visibleOptions} {...this.props} onClick={this.onPanelClick} onOverlayHide={this.hide}
-                    filterValue={this.state.filter} hasFilter={this.hasFilter} onFilterInputChange={this.onFilterInputChange} onCloseClick={this.onCloseClick} onToggleAll={this.onToggleAll}
+                    filterValue={this.state.filter} hasFilter={this.hasFilter} onFilterInputChange={this.onFilterInputChange} onCloseClick={this.onCloseClick} onSelectAll={this.onSelectAll}
                     getOptionLabel={this.getOptionLabel} getOptionRenderKey={this.getOptionRenderKey} isOptionDisabled={this.isOptionDisabled}
                     getOptionGroupChildren={this.getOptionGroupChildren} getOptionGroupLabel={this.getOptionGroupLabel} getOptionGroupRenderKey={this.getOptionGroupRenderKey}
                     isSelected={this.isSelected} getSelectedOptionIndex={this.getSelectedOptionIndex} isAllSelected={this.isAllSelected} onOptionSelect={this.onOptionSelect} allowOptionSelect={this.allowOptionSelect} onOptionKeyDown={this.onOptionKeyDown}

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { InputText } from '../inputtext/InputText';
 import { Checkbox } from '../checkbox/Checkbox';
 import { Ripple } from '../ripple/Ripple';
@@ -7,33 +6,11 @@ import ObjectUtils from '../utils/ObjectUtils';
 
 export class MultiSelectHeader extends Component {
 
-    static defaultProps = {
-        filter: false,
-        filterValue: null,
-        filterPlaceholder: null,
-        onFilter: null,
-        onClose: null,
-        onToggleAll: null,
-        allSelected: false,
-        template: null
-    }
-
-    static propTypes = {
-        filter: PropTypes.bool,
-        filterValue: PropTypes.string,
-        filterPlaceholder: PropTypes.string,
-        allSelected: PropTypes.bool,
-        onFilter: PropTypes.func,
-        onClose: PropTypes.func,
-        onToggleAll: PropTypes.func,
-        template: PropTypes.any
-    }
-
     constructor(props) {
         super(props);
 
         this.onFilter = this.onFilter.bind(this);
-        this.onToggleAll = this.onToggleAll.bind(this);
+        this.onSelectAll = this.onSelectAll.bind(this);
     }
 
     onFilter(event) {
@@ -45,11 +22,11 @@ export class MultiSelectHeader extends Component {
         }
     }
 
-    onToggleAll(event) {
-        if (this.props.onToggleAll) {
-            this.props.onToggleAll({
+    onSelectAll(event) {
+        if (this.props.onSelectAll) {
+            this.props.onSelectAll({
                 originalEvent: event,
-                checked: this.props.allSelected
+                checked: this.props.selectAll
             });
         }
     }
@@ -70,7 +47,7 @@ export class MultiSelectHeader extends Component {
 
     render() {
         const filterElement = this.renderFilterElement();
-        const checkboxElement = <Checkbox checked={this.props.allSelected} onChange={this.onToggleAll} role="checkbox" aria-checked={this.props.allSelected} />;
+        const checkboxElement = this.props.showSelectAll && <Checkbox checked={this.props.selectAll} onChange={this.onSelectAll} role="checkbox" aria-checked={this.props.selectAll} />;
         const closeElement = (
             <button type="button" className="p-multiselect-close p-link" onClick={this.props.onClose}>
                 <span className="p-multiselect-close-icon pi pi-times"></span>
@@ -89,8 +66,8 @@ export class MultiSelectHeader extends Component {
             const defaultOptions = {
                 className: 'p-multiselect-header',
                 checkboxElement,
-                checked: this.props.allSelected,
-                onChange: this.onToggleAll,
+                checked: this.props.selectAll,
+                onChange: this.onSelectAll,
                 filterElement,
                 closeElement,
                 closeElementClassName: 'p-multiselect-close p-link',

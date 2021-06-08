@@ -56,6 +56,11 @@ interface MultiSelectFilterParams {
     filter: string;
 }
 
+interface MultiSelectAllParams {
+    originalEvent: React.SyntheticEvent;
+    checked: boolean;
+}
+
 export interface MultiSelectProps {
     id?: string;
     inputRef?: React.Ref<HTMLSelectElement>;
@@ -89,7 +94,6 @@ export interface MultiSelectProps {
     tabIndex?: number;
     dataKey?: string;
     inputId?: string;
-    required?: boolean;
     appendTo?: MultiSelectAppendToType;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
@@ -102,12 +106,15 @@ export interface MultiSelectProps {
     panelHeaderTemplate?: MultiSelectPanelHeaderTemplateType;
     panelFooterTemplate?: MultiSelectPanelFooterTemplateType;
     transitionOptions?: object;
+    showSelectAll?: boolean;
+    selectAll?: boolean;
     onChange?(e: MultiSelectChangeParams): void;
     onFocus?(event: React.FocusEvent<HTMLInputElement>): void;
     onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
     onShow?(): void;
     onHide?(): void;
     onFilter?(e: MultiSelectFilterParams): void;
+    onSelectAll?(e: MultiSelectAllParams): void;
 }
 
 export declare class MultiSelect extends React.Component<MultiSelectProps, any> { }

@@ -42,7 +42,7 @@ class MultiSelectPanelComponent extends Component {
     renderHeader() {
         return (
             <MultiSelectHeader filter={this.props.filter} filterValue={this.props.filterValue} onFilter={this.onFilterInputChange} filterPlaceholder={this.props.filterPlaceholder}
-                onClose={this.props.onCloseClick} onToggleAll={this.props.onToggleAll} allSelected={this.props.isAllSelected()} template={this.props.panelHeaderTemplate} />
+                onClose={this.props.onCloseClick} showSelectAll={this.props.showSelectAll} selectAll={this.props.isAllSelected()} onSelectAll={this.props.onSelectAll} template={this.props.panelHeaderTemplate} />
         );
     }
 
