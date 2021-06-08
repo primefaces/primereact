@@ -130,12 +130,24 @@ export class AppMenu extends Component {
         this.getMenu();
     }
 
+    renderBadge(item) {
+        const badge = item.badge;
+        if (badge) {
+            return (
+                <span className={classNames('layout-menu-badge p-tag p-tag-rounded p-ml-2 p-text-uppercase', { [`${badge}`]: true, 'p-tag-success': badge === 'new', 'p-tag-info': badge === 'updated' })}>{badge}</span>
+            );
+        }
+
+        return null;
+    }
+
     renderLink(item, props) {
-        const { name, to, href, badge } = item;
+        const { name, to, href } = item;
+        const badge = this.renderBadge(item);
         const content = (
             <>
                 {name}
-                {badge && <span className={classNames('layout-menu-badge p-tag p-tag-rounded p-ml-2 p-text-uppercase', { [`${badge}`]: true, 'p-tag-success': badge === 'new', 'p-tag-info': badge === 'updated' })}>{badge}</span>}
+                {badge}
             </>
         );
 
@@ -203,9 +215,13 @@ export class AppMenu extends Component {
                     {
                         this.state.filteredMenu && this.state.filteredMenu.map((menuitem, index) => {
                             const categoryItem = this.renderCategoryItem(menuitem, index);
+                            const badge = this.renderBadge(menuitem);
                             return (
                                 <React.Fragment key={`category_${index}`}>
-                                    <div className="menu-category">{menuitem.name}</div>
+                                    <div className="menu-category">
+                                        {menuitem.name}
+                                        {badge}
+                                    </div>
                                     <div className="menu-items">
                                         {categoryItem}
                                     </div>

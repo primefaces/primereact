@@ -65,7 +65,7 @@ dependencies: {
                             <tbody>
                                 <tr>
                                     <td>Charts</td>
-                                    <td>Charts.js 2.1.x</td>
+                                    <td>Charts.js 3.x</td>
                                 </tr>
                                 <tr>
                                     <td>GMap</td>
@@ -76,7 +76,7 @@ dependencies: {
                                     <td>Quill.js</td>
                                 </tr>
                                 <tr>
-                                    <td>FullCalendar</td>
+                                    <td>FullCalendar*</td>
                                     <td>FullCalendar 4.0 Alpha.2+.</td>
                                 </tr>
                                 <tr>
@@ -85,6 +85,7 @@ dependencies: {
                                 </tr>
                             </tbody>
                         </table>
+                        <small>* Deprecated</small>
                     </div>
 
                     <h5>Styles</h5>

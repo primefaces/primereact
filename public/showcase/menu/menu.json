@@ -12,8 +12,7 @@
                     "meta": [
                         "get started",
                         "browser support"
-                    ],
-                    "badge": "updated"
+                    ]
                 },
                 {
                     "name": "Locale",
@@ -120,8 +119,7 @@
                 },
                 {
                     "name": "Colors",
-                    "to": "/colors",
-                    "badge": "new"
+                    "to": "/colors"
                 },
                 {
                     "name": "SASS API",
@@ -405,8 +403,7 @@
                     "to": "/treeselect",
                     "meta": [
                         "treeselect"
-                    ],
-                    "badge": "new"
+                    ]
                 },
                 {
                     "name": "TriStateCheckbox",
@@ -420,8 +417,7 @@
                     "to": "/multistatecheckbox",
                     "meta": [
                         "multistatecheckbox"
-                    ],
-                    "badge": "new"
+                    ]
                 },
                 {
                     "name": "ToggleButton",
@@ -443,8 +439,7 @@
                     "to": "/button",
                     "meta": [
                         "button"
-                    ],
-                    "badge": "updated"
+                    ]
                 },
                 {
                     "name": "SplitButton",
@@ -467,8 +462,7 @@
                     "meta": [
                         "formik",
                         "validation"
-                    ],
-                    "badge": "new"
+                    ]
                 },
                 {
                     "name": "React Hook Form",
@@ -476,8 +470,7 @@
                     "meta": [
                         "react hook form",
                         "validation"
-                    ],
-                    "badge": "new"
+                    ]
                 },
                 {
                     "name": "React Final Form",
@@ -485,8 +478,7 @@
                     "meta": [
                         "react final form",
                         "validation"
-                    ],
-                    "badge": "new"
+                    ]
                 }
             ]
         },
@@ -501,7 +493,6 @@
                     "meta": [
                         "datatable"
                     ],
-                    "badge": "updated",
                     "children": [
                         {
                             "name": "Documentation",
@@ -557,16 +548,14 @@
                             "to": "/datatable/paginator",
                             "meta": [
                                 "paginator"
-                            ],
-                            "badge":"updated"
+                            ]
                         },
                         {
                             "name": "Sort",
                             "to": "/datatable/sort",
                             "meta": [
                                 "sort"
-                            ],
-                            "badge":"updated"
+                            ]
                         },
                         {
                             "name": "Filter",
@@ -580,8 +569,7 @@
                             "to": "/datatable/selection",
                             "meta": [
                                 "selection"
-                            ],
-                            "badge": "new"
+                            ]
                         },
                         {
                             "name": "Edit",
@@ -666,8 +654,7 @@
                             "meta": [
                                 "export",
                                 "import"
-                            ],
-                            "badge": "updated"
+                            ]
                         },
                         {
                             "name": "ContextMenu",
@@ -779,8 +766,7 @@
                     "to": "/paginator",
                     "meta": [
                         "paginator"
-                    ],
-                    "badge":"updated"
+                    ]
                 },
                 {
                     "name": "PickList",
@@ -879,8 +865,7 @@
                             "meta": [
                                 "page",
                                 "paginator"
-                            ],
-                            "badge":"updated"
+                            ]
                         },
                         {
                             "name": "Sort",
@@ -1108,8 +1093,7 @@
                     "to": "/tooltip",
                     "meta": [
                         "tooltip"
-                    ],
-                    "badge":"updated"
+                    ]
                 }
             ]
         },
@@ -1124,8 +1108,7 @@
                     "to": "/fileupload",
                     "meta": [
                         "fileupload"
-                    ],
-                    "badge": "updated"
+                    ]
                 }
             ]
         },
@@ -1220,6 +1203,7 @@
             "meta": [
                 "chart"
             ],
+            "badge": "updated",
             "children": [
                 {
                     "name": "ChartModel",

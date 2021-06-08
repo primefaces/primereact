@@ -40,7 +40,8 @@
         flex-grow: 1;
 
         .menu-category {
-            display: block;
+            display: flex;
+            align-items: center;
             color: var(--text-color-secondary);
             font-weight: 600;
             user-select: none;
@@ -51,6 +52,12 @@
 
             &:first-child {
                 border-top: 0 none;
+            }
+
+            .layout-menu-badge {
+                padding: .14rem .5rem;
+                font-size: .7rem;
+                line-height: 1.4;
             }
         }
 
