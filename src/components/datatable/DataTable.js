@@ -104,6 +104,8 @@ export class DataTable extends Component {
         onPage: null,
         onFilter: null,
         onVirtualScroll: null,
+        onAllRowsSelect: null,
+        onAllRowsUnselect: null,
         onRowClick: null,
         onRowDoubleClick: null,
         onRowSelect: null,
@@ -220,6 +222,8 @@ export class DataTable extends Component {
         onPage: PropTypes.func,
         onFilter: PropTypes.func,
         onVirtualScroll: PropTypes.func,
+        onAllRowsSelect: PropTypes.func,
+        onAllRowsUnselect: PropTypes.func,
         onRowClick: PropTypes.func,
         onRowDoubleClick: PropTypes.func,
         onRowSelect: PropTypes.func,
@@ -1233,23 +1237,25 @@ export class DataTable extends Component {
     }
 
     onHeaderCheckboxClick(event) {
+        const { originalEvent } = event;
         let selection;
 
-        if(!event.checked) {
+        if (!event.checked) {
             let visibleData = this.hasFilter() ? this.processData() : this.props.value;
             selection = [...visibleData];
+
+            this.props.onAllRowsSelect && this.props.onAllRowsSelect({ originalEvent, data: selection, type: 'all' });
         }
         else {
             selection = [];
+
+            this.props.onAllRowsUnselect && this.props.onAllRowsUnselect({ originalEvent, data: selection, type: 'all' });
         }
 
-        if(this.props.onSelectionChange) {
-            const { originalEvent, ...rest } = event;
-
+        if (this.props.onSelectionChange) {
             this.props.onSelectionChange({
                 originalEvent,
-                value: selection,
-                ...rest
+                value: selection
             });
         }
     }

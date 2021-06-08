@@ -26,6 +26,8 @@ type DataTableStateStorageType = 'session' | 'local' | 'custom';
 
 type DataTableAppendToType = 'self' | HTMLElement | undefined | null;
 
+type DataTableSelectType = 'row' | 'cell' | 'checkbox' | 'radio' | 'all';
+
 interface DataTableSortMeta {
     field: string;
     order: DataTableSortOrderType;
@@ -116,7 +118,7 @@ interface DataTableRowEditSaveParams extends DataTableRowEditParams {
 interface DataTableSelectParams {
     originalEvent: React.SyntheticEvent;
     data: any;
-    type: string;
+    type: DataTableSelectType;
 }
 
 interface DataTableUnselectParams extends DataTableSelectParams { }
@@ -231,6 +233,8 @@ export interface DataTableProps {
     onPage?(e: DataTablePageParams): void;
     onFilter?(e: DataTableFilterParams): void;
     onVirtualScroll?(e: DataTablePageParams): void;
+    onAllRowsSelect?(e: DataTableSelectParams): void;
+    onAllRowsUnselect?(e: DataTableUnselectParams): void;
     onRowClick?(e: DataTableRowClickEventParams): void;
     onRowDoubleClick?(e: DataTableRowClickEventParams): void;
     onRowSelect?(e: DataTableSelectParams): void;
