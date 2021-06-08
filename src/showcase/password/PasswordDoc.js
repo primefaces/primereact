@@ -221,6 +221,12 @@ import {Password} from 'primereact/password';
                                         <td>Unique identifier of the element.</td>
                                     </tr>
                                     <tr>
+                                        <td>inputId</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Identifier of the input element.</td>
+                                    </tr>
+                                    <tr>
                                         <td>promptLabel</td>
                                         <td>string</td>
                                         <td>Please enter a password</td>
