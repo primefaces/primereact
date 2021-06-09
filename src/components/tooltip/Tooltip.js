@@ -323,14 +323,34 @@ export class Tooltip extends Component {
             const pos = DomHandler.findCollisionPosition(this.state.position);
             const my = (this.getTargetOption(target, 'my') || this.props.my || pos.my);
             const at = (this.getTargetOption(target, 'at') || this.props.at || pos.at);
+
+            this.containerEl.style.padding = '0px';
+
             DomHandler.flipfitCollision(this.containerEl, target, my, at, (currentPosition) => {
-                const { x, y } = currentPosition.at;
-                let position = this.props.at ? (x !== 'center' ? x : y) : currentPosition.at[`${pos.axis}`];
+                const { x: atX, y:atY } = currentPosition.at;
+                const { x: myX } = currentPosition.my;
+                const position = this.props.at ? (atX !== 'center' && atX !== myX ? atX : atY) : currentPosition.at[`${pos.axis}`];
+
+                this.containerEl.style.padding = '';
 
                 this.setState({
                     position
-                }, () => DomHandler.addClass(this.containerEl, 'p-tooltip-active'));
+                }, () => {
+                    this.updateContainerPosition();
+                    DomHandler.addClass(this.containerEl, 'p-tooltip-active')
+                });
             });
+        }
+    }
+
+    updateContainerPosition() {
+        if (this.containerEl) {
+            const style = getComputedStyle(this.containerEl);
+
+            if (this.state.position === 'left')
+                this.containerEl.style.left = (parseFloat(style.left) - (parseFloat(style.paddingLeft) * 2)) + 'px';
+            else if (this.state.position === 'top')
+                this.containerEl.style.top = (parseFloat(style.top) - (parseFloat(style.paddingTop) * 2)) + 'px';
         }
     }
 
