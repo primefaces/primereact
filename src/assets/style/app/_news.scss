@@ -9,7 +9,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url("../../images/topbar-freya-bg.jpg");
+    background-image: linear-gradient(90deg, #2a206c, #221b5c);
 
     .layout-news-container {
         width: 100%;
@@ -42,7 +42,7 @@
         }
 
         img.layouts-news-mockup-image {
-            max-width: 500px;
+            height: 50px;
         }
 
         .layout-news-button {

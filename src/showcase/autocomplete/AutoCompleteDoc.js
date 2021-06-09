@@ -27,12 +27,15 @@ export class AutoCompleteDemo extends Component {
             selectedCountry2: null,
             selectedCity: null,
             selectedCountries: null,
+            selectedItem: null,
             filteredCountries: null,
-            filteredCities: null
+            filteredCities: null,
+            filteredItems: null
         };
 
         this.searchCountry = this.searchCountry.bind(this);
         this.searchCity = this.searchCity.bind(this);
+        this.searchItems = this.searchItems.bind(this);
         this.itemTemplate = this.itemTemplate.bind(this);
         this.groupedItemTemplate = this.groupedItemTemplate.bind(this);
         this.countryservice = new CountryService();
@@ -66,6 +69,8 @@ export class AutoCompleteDemo extends Component {
                 ]
             }
         ];
+
+        this.items = Array.from({ length: 100000 }).map((_, i) => ({ label: \`Item #\${i}\`, value: i }));
     }
 
     componentDidMount() {
@@ -102,10 +107,25 @@ export class AutoCompleteDemo extends Component {
         this.setState({ filteredCities });
     }
 
+    searchItems(event) {
+        //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
+        let query = event.query;
+        let filteredItems = [];
+
+        for(let i = 0; i < this.items.length; i++) {
+            let item = this.items[i];
+            if (item.label.toLowerCase().indexOf(query.toLowerCase()) === 0) {
+                filteredItems.push(item);
+            }
+        }
+
+        this.setState({ filteredItems });
+    }
+
     itemTemplate(item) {
         return (
             <div className="country-item">
-                <img alt={item.name} src={\`showcase/demo/images/flag_placeholder.png\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${item.code.toLowerCase()}\`} />
+                <img alt={item.name} src={\`showcase/demo/images/flag_placeholder.png\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${item.code.toLowerCase()}\`} />
                 <div>{item.name}</div>
             </div>
         );
@@ -132,6 +152,9 @@ export class AutoCompleteDemo extends Component {
                 <h5>Dropdown, Templating and Force Selection</h5>
                 <AutoComplete value={this.state.selectedCountry2} suggestions={this.state.filteredCountries} completeMethod={this.searchCountry} field="name" dropdown forceSelection itemTemplate={this.itemTemplate} onChange={(e) => this.setState({ selectedCountry2: e.value })} />
 
+                <h5>Virtual Scroll (100000 Items)</h5>
+                <AutoComplete value={this.state.selectedItem} suggestions={this.state.filteredItems} completeMethod={this.searchItems} virtualScrollerOptions={{ itemSize: 31 }} field="label" dropdown onChange={(e) => this.setState({ selectedItem: e.value })} />
+
                 <h5>Multiple</h5>
                 <span className="p-fluid">
                     <AutoComplete value={this.state.selectedCountries} suggestions={this.state.filteredCountries} completeMethod={this.searchCountry} field="name" multiple onChange={(e) => this.setState({ selectedCountries: e.value })} />
@@ -150,13 +173,16 @@ import { AutoComplete } from 'primereact/autocomplete';
 import { CountryService } from '../service/CountryService';
 
 const AutoCompleteDemo = () => {
+
     const [countries, setCountries] = useState([]);
     const [selectedCountry1, setSelectedCountry1] = useState(null);
-    const [selectedCountry2, setSelectedCountry2] = useState(null);
+    const [selectedCountry2, setSelectedCountry2] = usaState(null);
     const [selectedCity, setSelectedCity] = useState(null);
     const [selectedCountries, setSelectedCountries] = useState(null);
-    const [filteredCountries, setFilteredCountries] = useState(null);
+    const [selectedItem, setSelectedItem] = useState(null);
+    const [filteredCountries, setFilteredCountries] = useState(filteredCountries) = useState(null);
     const [filteredCities, setFilteredCities] = useState(null);
+    const [filteredItems, setFilteredItems] = useState(null);
     const countryservice = new CountryService();
 
     const groupedCities = [
@@ -188,6 +214,8 @@ const AutoCompleteDemo = () => {
             ]
         }
     ];
+
+    const items = Array.from({ length: 100000 }).map((_, i) => ({ label: \`Item #\${i}\`, value: i }));
 
     useEffect(() => {
         countryservice.getCountries().then(data => setCountries(data));
@@ -220,19 +248,34 @@ const AutoCompleteDemo = () => {
             }
         }
 
-        setFilteredCities(_filteredCities);
+        setFilteredCities(_filteredCities)
     }
 
-    const itemTemplate = (item) => {
+    const searchItems = (event) => {
+        //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
+        let query = event.query;
+        let _filteredItems = [];
+
+        for(let i = 0; i < this.items.length; i++) {
+            let item = this.items[i];
+            if (item.label.toLowerCase().indexOf(query.toLowerCase()) === 0) {
+                _filteredItems.push(item);
+            }
+        }
+
+        setFilteredItems(_filteredItems);
+    }
+
+    itemTemplate(item) {
         return (
             <div className="country-item">
-                <img alt={item.name} src={\`showcase/demo/images/flag_placeholder.png\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${item.code.toLowerCase()}\`} />
+                <img alt={item.name} src={\`showcase/demo/images/flag_placeholder.png\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${item.code.toLowerCase()}\`} />
                 <div>{item.name}</div>
             </div>
         );
     }
 
-    const groupedItemTemplate = (item) => {
+    groupedItemTemplate(item) {
         return (
             <div className="p-d-flex p-ai-center country-item">
                 <img alt={item.name} src={\`showcase/demo/images/flag_placeholder.png\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${item.code.toLowerCase()}\`} />
@@ -241,23 +284,28 @@ const AutoCompleteDemo = () => {
         );
     }
 
-    return (
-        <div className="card">
-            <h5>Basic</h5>
-            <AutoComplete value={selectedCountry1} suggestions={filteredCountries} completeMethod={searchCountry} field="name" onChange={(e) => setSelectedCountry1(e.value)} />
+    render() {
+        return (
+            <div className="card">
+                <h5>Basic</h5>
+                <AutoComplete value={selectedCountry1} suggestions={filteredCountries} completeMethod={searchCountry} field="name" onChange={(e) => setSelectedCountry1(e.value)} />
 
-            <h5>Grouped</h5>
-            <AutoComplete value={selectedCity} suggestions={filteredCities} completeMethod={searchCity} field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} onChange={(e) => setSelectedCity(e.value)}/>
+                <h5>Grouped</h5>
+                <AutoComplete value={selectedCity} suggestions={filteredCities} completeMethod={searchCity} field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={this.groupedItemTemplate} onChange={(e) => setSelectedCity(e.value)}/>
 
-            <h5>Dropdown, Templating and Force Selection</h5>
-            <AutoComplete value={selectedCountry2} suggestions={filteredCountries} completeMethod={searchCountry} field="name" dropdown forceSelection itemTemplate={itemTemplate} onChange={(e) => setSelectedCountry2(e.value)} />
+                <h5>Dropdown, Templating and Force Selection</h5>
+                <AutoComplete value={selectedCountry2} suggestions={filteredCountries} completeMethod={searchCountry} field="name" dropdown forceSelection itemTemplate={this.itemTemplate} onChange={(e) => setSelectedCountry2(e.value)} />
 
-            <h5>Multiple</h5>
-            <span className="p-fluid">
-                <AutoComplete value={selectedCountries} suggestions={filteredCountries} completeMethod={searchCountry} field="name" multiple onChange={(e) => setSelectedCountries(e.value)} />
-            </span>
-        </div>
-    )
+                <h5>Virtual Scroll (100000 Items)</h5>
+                <AutoComplete value={selectedItem} suggestions={filteredItems} completeMethod={searchItems} virtualScrollerOptions={{ itemSize: 31 }} field="label" dropdown onChange={(e) => setSelectedItem(e.value)} />
+
+                <h5>Multiple</h5>
+                <span className="p-fluid">
+                    <AutoComplete value={selectedCountries} suggestions={filteredCountries} completeMethod={searchCountry} field="name" multiple onChange={(e) => setSelectedCountries(e.value)} />
+                </span>
+            </div>
+        )
+    }
 }
                 `
             },
@@ -269,13 +317,16 @@ import { AutoComplete } from 'primereact/autocomplete';
 import { CountryService } from '../service/CountryService';
 
 const AutoCompleteDemo = () => {
+
     const [countries, setCountries] = useState<any>([]);
     const [selectedCountry1, setSelectedCountry1] = useState<any>(null);
-    const [selectedCountry2, setSelectedCountry2] = useState<any>(null);
-    const [selectedCity, setSelectedCity] =  useState<any>(null);
+    const [selectedCountry2, setSelectedCountry2] = usaState(null);
+    const [selectedCity, setSelectedCity] = useState<any>(null);
     const [selectedCountries, setSelectedCountries] = useState<any>(null);
+    const [selectedItem, setSelectedItem] = useState<any>(null);
     const [filteredCountries, setFilteredCountries] = useState<any>(null);
     const [filteredCities, setFilteredCities] = useState<any>(null);
+    const [filteredItems, setFilteredItems] = useState<any>(null);
     const countryservice = new CountryService();
 
     const groupedCities = [
@@ -308,6 +359,8 @@ const AutoCompleteDemo = () => {
         }
     ];
 
+    const items = Array.from({ length: 100000 }).map((_, i) => ({ label: \`Item #\${i}\`, value: i }));
+
     useEffect(() => {
         countryservice.getCountries().then(data => setCountries(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -339,19 +392,34 @@ const AutoCompleteDemo = () => {
             }
         }
 
-        setFilteredCities(_filteredCities);
+        setFilteredCities(_filteredCities)
     }
 
-    const itemTemplate = (item: any) => {
+    const searchItems = (event) => {
+        //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
+        let query = event.query;
+        let _filteredItems = [];
+
+        for(let i = 0; i < this.items.length; i++) {
+            let item = this.items[i];
+            if (item.label.toLowerCase().indexOf(query.toLowerCase()) === 0) {
+                _filteredItems.push(item);
+            }
+        }
+
+        setFilteredItems(_filteredItems);
+    }
+
+    itemTemplate(item: any) {
         return (
             <div className="country-item">
-                <img alt={item.name} src={\`showcase/demo/images/flag_placeholder.png\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${item.code.toLowerCase()}\`} />
+                <img alt={item.name} src={\`showcase/demo/images/flag_placeholder.png\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${item.code.toLowerCase()}\`} />
                 <div>{item.name}</div>
             </div>
         );
     }
 
-    const groupedItemTemplate = (item: any) => {
+    groupedItemTemplate(item: any) {
         return (
             <div className="p-d-flex p-ai-center country-item">
                 <img alt={item.name} src={\`showcase/demo/images/flag_placeholder.png\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${item.code.toLowerCase()}\`} />
@@ -360,23 +428,28 @@ const AutoCompleteDemo = () => {
         );
     }
 
-    return (
-        <div className="card">
-            <h5>Basic</h5>
-            <AutoComplete value={selectedCountry1} suggestions={filteredCountries} completeMethod={searchCountry} field="name" onChange={(e) => setSelectedCountry1(e.value)} />
+    render() {
+        return (
+            <div className="card">
+                <h5>Basic</h5>
+                <AutoComplete value={selectedCountry1} suggestions={filteredCountries} completeMethod={searchCountry} field="name" onChange={(e) => setSelectedCountry1(e.value)} />
 
-            <h5>Grouped</h5>
-            <AutoComplete value={selectedCity} suggestions={filteredCities} completeMethod={searchCity} field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} onChange={(e) => setSelectedCity(e.value)}/>
+                <h5>Grouped</h5>
+                <AutoComplete value={selectedCity} suggestions={filteredCities} completeMethod={searchCity} field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={this.groupedItemTemplate} onChange={(e) => setSelectedCity(e.value)}/>
 
-            <h5>Dropdown, Templating and Force Selection</h5>
-            <AutoComplete value={selectedCountry2} suggestions={filteredCountries} completeMethod={searchCountry} field="name" dropdown forceSelection itemTemplate={itemTemplate} onChange={(e) => setSelectedCountry2(e.value)} />
+                <h5>Dropdown, Templating and Force Selection</h5>
+                <AutoComplete value={selectedCountry2} suggestions={filteredCountries} completeMethod={searchCountry} field="name" dropdown forceSelection itemTemplate={this.itemTemplate} onChange={(e) => setSelectedCountry2(e.value)} />
 
-            <h5>Multiple</h5>
-            <span className="p-fluid">
-                <AutoComplete value={selectedCountries} suggestions={filteredCountries} completeMethod={searchCountry} field="name" multiple onChange={(e) => setSelectedCountries(e.value)} />
-            </span>
-        </div>
-    )
+                <h5>Virtual Scroll (100000 Items)</h5>
+                <AutoComplete value={selectedItem} suggestions={filteredItems} completeMethod={searchItems} virtualScrollerOptions={{ itemSize: 31 }} field="label" dropdown onChange={(e) => setSelectedItem(e.value)} />
+
+                <h5>Multiple</h5>
+                <span className="p-fluid">
+                    <AutoComplete value={selectedCountries} suggestions={filteredCountries} completeMethod={searchCountry} field="name" multiple onChange={(e) => setSelectedCountries(e.value)} />
+                </span>
+            </div>
+        )
+    }
 }
                 `
             }
