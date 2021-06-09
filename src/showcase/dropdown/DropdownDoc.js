@@ -15,6 +15,7 @@ export class DropdownDoc extends Component {
                 content: `
 import React, { Component } from 'react';
 import { Dropdown } from 'primereact/dropdown';
+import { Skeleton } from 'primereact/skeleton';
 import './DropdownDemo.css';
 
 export class DropdownDemo extends Component {
@@ -22,10 +23,14 @@ export class DropdownDemo extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            lazyItems: [],
+            lazyLoading: false,
             selectedCity1: null,
             selectedCity2: null,
             selectedCountry: null,
-            selectedGroupedCity: null
+            selectedGroupedCity: null,
+            selectedItem: null,
+            selectedItem2: null
         };
 
         this.cities = [
@@ -37,16 +42,16 @@ export class DropdownDemo extends Component {
         ];
 
         this.countries = [
-            {name: 'Australia', code: 'AU'},
-            {name: 'Brazil', code: 'BR'},
-            {name: 'China', code: 'CN'},
-            {name: 'Egypt', code: 'EG'},
-            {name: 'France', code: 'FR'},
-            {name: 'Germany', code: 'DE'},
-            {name: 'India', code: 'IN'},
-            {name: 'Japan', code: 'JP'},
-            {name: 'Spain', code: 'ES'},
-            {name: 'United States', code: 'US'}
+            { name: 'Australia', code: 'AU' },
+            { name: 'Brazil', code: 'BR' },
+            { name: 'China', code: 'CN' },
+            { name: 'Egypt', code: 'EG' },
+            { name: 'France', code: 'FR' },
+            { name: 'Germany', code: 'DE' },
+            { name: 'India', code: 'IN' },
+            { name: 'Japan', code: 'JP' },
+            { name: 'Spain', code: 'ES' },
+            { name: 'United States', code: 'US' }
         ];
 
         this.groupedCities = [
@@ -79,10 +84,22 @@ export class DropdownDemo extends Component {
             }
         ];
 
+        this.items = Array.from({ length: 100000 }).map((_, i) => ({ label: \`Item #\${i}\`, value: i }));
+
         this.onCityChange = this.onCityChange.bind(this);
         this.onCityChange2 = this.onCityChange2.bind(this);
         this.onCountryChange = this.onCountryChange.bind(this);
         this.onGroupedCityChange = this.onGroupedCityChange.bind(this);
+        this.onItemChange = this.onItemChange.bind(this);
+        this.onLazyItemChange = this.onLazyItemChange.bind(this);
+        this.onLazyLoad = this.onLazyLoad.bind(this);
+    }
+
+    componentDidMount() {
+        this.setState({
+            lazyItems: Array.from({ length: 100000 }),
+            lazyLoading: false
+        });
     }
 
     onCityChange(e) {
@@ -101,11 +118,42 @@ export class DropdownDemo extends Component {
         this.setState({ selectedGroupedCity: e.value });
     }
 
+    onItemChange(e) {
+        this.setState({ selectedItem: e.value });
+    }
+
+    onLazyItemChange(e) {
+        this.setState({ selectedItem2: e.value });
+    }
+
+    onLazyLoad(event) {
+        this.setState({ lazyLoading: true });
+
+        if (this.loadLazyTimeout) {
+            clearTimeout(this.loadLazyTimeout);
+        }
+
+        //imitate delay of a backend call
+        this.loadLazyTimeout = setTimeout(() => {
+            const { first, last } = event;
+            const lazyItems = [...this.state.lazyItems];
+
+            for (let i = first; i < last; i++) {
+                lazyItems[i] = { label: \`Item #\${i}\`, value: i };
+            }
+
+            this.setState({
+                lazyItems,
+                lazyLoading: false
+            });
+        }, Math.random() * 1000 + 250);
+    }
+
     selectedCountryTemplate(option, props) {
         if (option) {
             return (
                 <div className="country-item country-item-value">
-                    <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                    <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
                     <div>{option.name}</div>
                 </div>
             );
@@ -121,7 +169,7 @@ export class DropdownDemo extends Component {
     countryOptionTemplate(option) {
         return (
             <div className="country-item">
-                <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
                 <div>{option.name}</div>
             </div>
         );
@@ -138,22 +186,32 @@ export class DropdownDemo extends Component {
 
     render() {
         return (
-            <div className="dropdown-demo">
-                <div className="card">
-                    <h5>Basic</h5>
-                    <Dropdown value={this.state.selectedCity1} options={this.cities} onChange={this.onCityChange} optionLabel="name" placeholder="Select a City" />
+            <div className="card">
+                <h5>Basic</h5>
+                <Dropdown value={this.state.selectedCity1} options={this.cities} onChange={this.onCityChange} optionLabel="name" placeholder="Select a City" />
 
-                    <h5>Editable</h5>
-                    <Dropdown value={this.state.selectedCity2} options={this.cities} onChange={this.onCityChange2} optionLabel="name" editable />
+                <h5>Editable</h5>
+                <Dropdown value={this.state.selectedCity2} options={this.cities} onChange={this.onCityChange2} optionLabel="name" editable />
 
-                    <h5>Grouped</h5>
-                    <Dropdown value={this.state.selectedGroupedCity} options={this.groupedCities} onChange={this.onGroupedCityChange} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
-                        optionGroupTemplate={this.groupedItemTemplate} />
+                <h5>Grouped</h5>
+                <Dropdown value={this.state.selectedGroupedCity} options={this.groupedCities} onChange={this.onGroupedCityChange} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
+                    optionGroupTemplate={this.groupedItemTemplate} />
 
-                    <h5>Advanced with Templating, Filtering and Clear Icon</h5>
-                    <Dropdown value={this.state.selectedCountry} options={this.countries} onChange={this.onCountryChange} optionLabel="name" filter showClear filterBy="name" placeholder="Select a Country"
-                        valueTemplate={this.selectedCountryTemplate} itemTemplate={this.countryOptionTemplate} />
-                </div>
+                <h5>Advanced with Templating, Filtering and Clear Icon</h5>
+                <Dropdown value={this.state.selectedCountry} options={this.countries} onChange={this.onCountryChange} optionLabel="name" filter showClear filterBy="name" placeholder="Select a Country"
+                    valueTemplate={this.selectedCountryTemplate} itemTemplate={this.countryOptionTemplate} />
+
+                <h5>Virtual Scroll (100000 Items)</h5>
+                <Dropdown value={this.state.selectedItem} options={this.items} onChange={this.onItemChange} virtualScrollerOptions={{ itemSize: 31 }} placeholder="Select Item"/>
+
+                <h5>Virtual Scroll (100000 Items) and Lazy</h5>
+                <Dropdown value={this.state.selectedItem2} options={this.state.lazyItems} onChange={this.onLazyItemChange} virtualScrollerOptions={{ lazy: true, onLazyLoad: this.onLazyLoad, itemSize: 31, showLoader: true, loading: this.state.lazyLoading, delay: 250, loadingTemplate: (options) => {
+                    return (
+                        <div className="p-d-flex p-ai-center p-p-2" style={{ height: '31px' }}>
+                            <Skeleton width={options.even ? '60%' : '50%'} height="1rem" />
+                        </div>
+                    )}
+                }} placeholder="Select Item"/>
             </div>
         );
     }
@@ -163,15 +221,22 @@ export class DropdownDemo extends Component {
             'hooks': {
                 tabName: 'Hooks Source',
                 content: `
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Dropdown } from 'primereact/dropdown';
+import { Skeleton } from 'primereact/skeleton';
 import './DropdownDemo.css';
 
 const DropdownDemo = () => {
+    
+    const [lazyItems, setLazyItems] = useState([]);
+    const [lazyLoading, setLazyLoading] = useState(false);
     const [selectedCity1, setSelectedCity1] = useState(null);
     const [selectedCity2, setSelectedCity2] = useState(null);
     const [selectedCountry, setSelectedCountry] = useState(null);
     const [selectedGroupedCity, setSelectedGroupedCity] = useState(null);
+    const [selectedItem, setSelectedItem] = useState(null);
+    const [selectedItem2, setSelectedItem2] = useState(null);
+
     const cities = [
         { name: 'New York', code: 'NY' },
         { name: 'Rome', code: 'RM' },
@@ -179,18 +244,20 @@ const DropdownDemo = () => {
         { name: 'Istanbul', code: 'IST' },
         { name: 'Paris', code: 'PRS' }
     ];
+
     const countries = [
-        {name: 'Australia', code: 'AU'},
-        {name: 'Brazil', code: 'BR'},
-        {name: 'China', code: 'CN'},
-        {name: 'Egypt', code: 'EG'},
-        {name: 'France', code: 'FR'},
-        {name: 'Germany', code: 'DE'},
-        {name: 'India', code: 'IN'},
-        {name: 'Japan', code: 'JP'},
-        {name: 'Spain', code: 'ES'},
-        {name: 'United States', code: 'US'}
+        { name: 'Australia', code: 'AU' },
+        { name: 'Brazil', code: 'BR' },
+        { name: 'China', code: 'CN' },
+        { name: 'Egypt', code: 'EG' },
+        { name: 'France', code: 'FR' },
+        { name: 'Germany', code: 'DE' },
+        { name: 'India', code: 'IN' },
+        { name: 'Japan', code: 'JP' },
+        { name: 'Spain', code: 'ES' },
+        { name: 'United States', code: 'US' }
     ];
+
     const groupedCities = [
         {
             label: 'Germany', code: 'DE',
@@ -221,6 +288,13 @@ const DropdownDemo = () => {
         }
     ];
 
+    const items = Array.from({ length: 100000 }).map((_, i) => ({ label: \`Item #\${i}\`, value: i }));
+
+    useEffect(() => {
+        setLazyItems(Array.from({ length: 100000 }));
+        setLazyLoading(false);
+    },[]); // eslint-disable-line react-hooks/exhaustive-deps
+    
     const onCityChange = (e) => {
         setSelectedCity1(e.value);
     }
@@ -234,14 +308,43 @@ const DropdownDemo = () => {
     }
 
     const onGroupedCityChange = (e) => {
-        setSelectedGroupedCity(e.value);
+        setSelectedGroupedCity(e.valıue);
+    }
+
+    const onItemChange = (e) => {
+        setSelectedItem(e.value);
+    }
+
+    const onLazyItemChange = (e) => {
+        setSelectedItem2(e.value)
+    }
+
+    const onLazyLoad = (event) => {
+        setLazyLoading(true);
+
+        if (loadLazyTimeout) {
+            clearTimeout(loadLazyTimeout);
+        }
+
+        //imitate delay of a backend call
+        loadLazyTimeout = setTimeout(() => {
+            const { first, last } = event;
+            const _lazyItems = [...lazyItems];
+
+            for (let i = first; i < last; i++) {
+                _lazyItems[i] = { label: \`Item #\${i}\`, value: i };
+            }
+
+            setLazyItems(_lazyItems);
+            setLazyLoading(false);
+        }, Math.random() * 1000 + 250);
     }
 
     const selectedCountryTemplate = (option, props) => {
         if (option) {
             return (
                 <div className="country-item country-item-value">
-                    <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                    <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
                     <div>{option.name}</div>
                 </div>
             );
@@ -257,7 +360,7 @@ const DropdownDemo = () => {
     const countryOptionTemplate = (option) => {
         return (
             <div className="country-item">
-                <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
                 <div>{option.name}</div>
             </div>
         );
@@ -273,39 +376,56 @@ const DropdownDemo = () => {
     }
 
     return (
-        <div className="dropdown-demo">
-            <div className="card">
-                <h5>Basic</h5>
-                <Dropdown value={selectedCity1} options={cities} onChange={onCityChange} optionLabel="name" placeholder="Select a City" />
+        <div className="card">
+            <h5>Basic</h5>
+            <Dropdown value={selectedCity1} options={cities} onChange={onCityChange} optionLabel="name" placeholder="Select a City" />
 
-                <h5>Editable</h5>
-                <Dropdown value={selectedCity2} options={cities} onChange={onCityChange2} optionLabel="name" editable />
+            <h5>Editable</h5>
+            <Dropdown value={selectedCity2} options={cities} onChange={onCityChange2} optionLabel="name" editable />
 
-                <h5>Grouped</h5>
-                <Dropdown value={selectedGroupedCity} options={groupedCities} onChange={onGroupedCityChange} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
-                    optionGroupTemplate={groupedItemTemplate} />
+            <h5>Grouped</h5>
+            <Dropdown value={selectedGroupedCity} options={groupedCities} onChange={onGroupedCityChange} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
+                optionGroupTemplate={groupedItemTemplate} />
 
-                <h5>Advanced with Templating, Filtering and Clear Icon</h5>
-                <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" filter showClear filterBy="name" placeholder="Select a Country"
-                    valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
-            </div>
+            <h5>Advanced with Templating, Filtering and Clear Icon</h5>
+            <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" filter showClear filterBy="name" placeholder="Select a Country"
+                valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
+
+            <h5>Virtual Scroll (100000 Items)</h5>
+            <Dropdown value={selectedItem} options={items} onChange={onItemChange} virtualScrollerOptions={{ itemSize: 31 }} placeholder="Select Item"/>
+
+            <h5>Virtual Scroll (100000 Items) and Lazy</h5>
+            <Dropdown value={selectedItem2} options={lazyItems} onChange={onLazyItemChange} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 31, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
+                return (
+                    <div className="p-d-flex p-ai-center p-p-2" style={{ height: '31px' }}>
+                        <Skeleton width={options.even ? '60%' : '50%'} height="1rem" />
+                    </div>
+                )}
+            }} placeholder="Select Item"/>
         </div>
-    );
+    ); 
 }
                 `
             },
             'ts': {
                 tabName: 'TS Source',
                 content: `
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Dropdown } from 'primereact/dropdown';
+import { Skeleton } from 'primereact/skeleton';
 import './DropdownDemo.css';
 
 const DropdownDemo = () => {
+    
+    const [lazyItems, setLazyItems] = useState<any>([]);
+    const [lazyLoading, setLazyLoading] = useState<any>(false);
     const [selectedCity1, setSelectedCity1] = useState<any>(null);
     const [selectedCity2, setSelectedCity2] = useState<any>(null);
     const [selectedCountry, setSelectedCountry] = useState<any>(null);
     const [selectedGroupedCity, setSelectedGroupedCity] = useState<any>(null);
+    const [selectedItem, setSelectedItem] = useState<any>(null);
+    const [selectedItem2, setSelectedItem2] = useState<any>(null);
+
     const cities = [
         { name: 'New York', code: 'NY' },
         { name: 'Rome', code: 'RM' },
@@ -313,18 +433,20 @@ const DropdownDemo = () => {
         { name: 'Istanbul', code: 'IST' },
         { name: 'Paris', code: 'PRS' }
     ];
+
     const countries = [
-        {name: 'Australia', code: 'AU'},
-        {name: 'Brazil', code: 'BR'},
-        {name: 'China', code: 'CN'},
-        {name: 'Egypt', code: 'EG'},
-        {name: 'France', code: 'FR'},
-        {name: 'Germany', code: 'DE'},
-        {name: 'India', code: 'IN'},
-        {name: 'Japan', code: 'JP'},
-        {name: 'Spain', code: 'ES'},
-        {name: 'United States', code: 'US'}
+        { name: 'Australia', code: 'AU' },
+        { name: 'Brazil', code: 'BR' },
+        { name: 'China', code: 'CN' },
+        { name: 'Egypt', code: 'EG' },
+        { name: 'France', code: 'FR' },
+        { name: 'Germany', code: 'DE' },
+        { name: 'India', code: 'IN' },
+        { name: 'Japan', code: 'JP' },
+        { name: 'Spain', code: 'ES' },
+        { name: 'United States', code: 'US' }
     ];
+
     const groupedCities = [
         {
             label: 'Germany', code: 'DE',
@@ -355,27 +477,63 @@ const DropdownDemo = () => {
         }
     ];
 
-    const onCityChange = (e: { value: any }) => {
+    const items = Array.from({ length: 100000 }).map((_, i) => ({ label: \`Item #\${i}\`, value: i }));
+
+    useEffect(() => {
+        setLazyItems(Array.from({ length: 100000 }));
+        setLazyLoading(false);
+    },[]); // eslint-disable-line react-hooks/exhaustive-deps
+    
+    const onCityChange = (e: { value: any}) => {
         setSelectedCity1(e.value);
     }
 
-    const onCityChange2 = (e: { value: any }) => {
+    const onCityChange2 = (e: {value: any} ) => {
         setSelectedCity2(e.value);
     }
 
-    const onCountryChange = (e: { value: any }) => {
+    const onCountryChange = (e: {value: any}) => {
         setSelectedCountry(e.value);
     }
 
-    const onGroupedCityChange = (e: { value: any }) => {
-        setSelectedGroupedCity(e.value);
+    onGroupedCityChange(e: {value: any}) {
+        setSelectedGroupedCity(e.valıue);
+    }
+
+    const onItemChange = (e: {value: any}) => {
+        setSelectedItem(e.value);
+    }
+
+    const onLazyItemChange = (e: {value: any}) => {
+        setSelectedItem2(e.value)
+    }
+
+    const onLazyLoad = (event) => {
+        setLazyLoading(true);
+
+        if (loadLazyTimeout) {
+            clearTimeout(loadLazyTimeout);
+        }
+
+        //imitate delay of a backend call
+        loadLazyTimeout = setTimeout(() => {
+            const { first, last } = event;
+            const _lazyItems = [...lazyItems];
+
+            for (let i = first; i < last; i++) {
+                _lazyItems[i] = { label: \`Item #\${i}\`, value: i };
+            }
+
+            setLazyItems(_lazyItems);
+            setLazyLoading(false);
+        }, Math.random() * 1000 + 250);
     }
 
     const selectedCountryTemplate = (option: { name: string, code: string }, props: { placeholder: string }) => {
         if (option) {
             return (
                 <div className="country-item country-item-value">
-                    <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                    <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
                     <div>{option.name}</div>
                 </div>
             );
@@ -391,7 +549,7 @@ const DropdownDemo = () => {
     const countryOptionTemplate = (option: any) => {
         return (
             <div className="country-item">
-                <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
                 <div>{option.name}</div>
             </div>
         );
@@ -422,9 +580,21 @@ const DropdownDemo = () => {
                 <h5>Advanced with Templating, Filtering and Clear Icon</h5>
                 <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" filter showClear filterBy="name" placeholder="Select a Country"
                     valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
+
+                <h5>Virtual Scroll (100000 Items)</h5>
+                <Dropdown value={selectedItem} options={items} onChange={onItemChange} virtualScrollerOptions={{ itemSize: 31 }} placeholder="Select Item"/>
+
+                <h5>Virtual Scroll (100000 Items) and Lazy</h5>
+                <Dropdown value={selectedItem2} options={lazyItems} onChange={onLazyItemChange} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 31, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
+                    return (
+                        <div className="p-d-flex p-ai-center p-p-2" style={{ height: '31px' }}>
+                            <Skeleton width={options.even ? '60%' : '50%'} height="1rem" />
+                        </div>
+                    )}
+                }} placeholder="Select Item"/>
             </div>
-        </div>
-    );
+        <div>
+    ); 
 }
                 `
             },
