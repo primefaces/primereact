@@ -5,10 +5,10 @@ import { AvatarGroup } from './AvatarGroup';
 describe('AvatarGroup Component', () => {
     test('should display the AvatarGroup' , () => {
         const { container } = render(<AvatarGroup />);
-        const inputElement = container.firstChild;
+        const groupElement = container.firstChild;
 
         expect(container).toBeInTheDocument();
-        expect(inputElement).toBeInTheDocument();
-        expect(inputElement).toHaveClass('p-avatar-group p-component');
+        expect(groupElement).toBeInTheDocument();
+        expect(groupElement).toHaveClass('p-avatar-group p-component');
     })
 })

@@ -44,8 +44,8 @@ const GalleriaTestComponent = () => {
 describe('Galleria Component', () => {
     test('should display the Galleria', () => {
         const { container } = render(<GalleriaTestComponent />);
+        const galleriaElement = container.firstChild;
 
         expect(container).toBeInTheDocument();
-
     })
 })

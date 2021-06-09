@@ -1,10 +1,10 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { InputText } from './InputText'
+import { InputMask } from './InputMask'
 
-describe('InputText Component', () => {
-    test('should display the InputText' , () => {
-        const { container } = render(<InputText />);
+describe('InputMask Component', () => {
+    test('should display the InputMask' , () => {
+        const { container } = render(<InputMask mask="99-999999" />);
         const inputElement = container.firstChild;
 
         expect(container).toBeInTheDocument();
@@ -13,20 +13,12 @@ describe('InputText Component', () => {
     })
 
     test('should display be disabled' , () => {
-        const { container } = render(<InputText disabled />);
+        const { container } = render(<InputMask mask="99-999999" disabled />);
         const inputElement = container.firstChild;
 
         expect(inputElement).toBeInTheDocument()
         expect(inputElement).toHaveAttribute('disabled')
         expect(inputElement).toHaveClass('p-disabled')
-
-    })
-    test('should have placeholder' , () => {
-        const { container } = render(<InputText placeholder="Lorem Ipsum" />);
-        const inputElement = container.firstChild;
-
-        expect(inputElement).toBeInTheDocument();
-        expect(inputElement).toHaveAttribute('placeholder');
 
     })
 })

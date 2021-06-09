@@ -5,10 +5,10 @@ import { Badge } from './Badge';
 describe('Badge Component', () => {
     test('should display the Badge' , () => {
         const { container } = render(<Badge />);
-        const inputElement = container.firstChild;
+        const badgeElement = container.firstChild;
 
         expect(container).toBeInTheDocument();
-        expect(inputElement).toBeInTheDocument();
-        expect(inputElement).toHaveClass('p-badge p-component');
+        expect(badgeElement).toBeInTheDocument();
+        expect(badgeElement).toHaveClass('p-badge p-component');
     })
 })

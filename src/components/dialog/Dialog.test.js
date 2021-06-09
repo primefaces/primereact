@@ -1,20 +1,18 @@
-import React, { useState } from 'react'
-import { render, fireEvent, getByTestId, getByText } from '@testing-library/react'
+import React, { useEffect, useState } from 'react'
+import { render, fireEvent, screen, getByTestId, waitFor } from '@testing-library/react'
 import { Button } from '../button/Button'
 import { Dialog } from './Dialog'
 
-const TestComponent = () => {
+
+const DialogTestComponent = (props) => {
+
     const [displayBasic, setDisplayBasic] = useState(false);
-    const [count, setCount] = useState(0);
 
     return (
         <>
-            <Button data-testid="test-b" label="Show" icon="pi pi-external-link" onClick={() => setDisplayBasic(true)}>Click</Button>
-            <Button data-testid="test-button" onClick={() => setCount(prevState => prevState + 1)}></Button>
-            <p data-testid="test-p">{count}</p>
-            {displayBasic && <p data-testid="test">shows</p>}
-            <Dialog header="Header" visible={displayBasic} style={{ width: '50vw' }} onHide={() => setDisplayBasic(false)}>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            <Button data-testid="test-button" label="Show" icon="pi pi-external-link" onClick={() => setDisplayBasic(true)}>Click</Button>
+            <Dialog header="Dialog Header" appendTo={props.appendTo} visible={displayBasic} style={{ width: '50vw' }} onHide={() => setDisplayBasic(false)}>
+                <p  >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
             </Dialog>
@@ -22,16 +20,20 @@ const TestComponent = () => {
     )
 }
 
-
 describe('Dialog Component', () => {
-    test('should display the Dialog', () => {
-        const { container, getByTestId, asFragment, getByText } = render(<TestComponent />)
-        const firstRender = asFragment()
+    test('should display the Dialog in container', () => {
+        const { container, getByTestId } = render(<DialogTestComponent appendTo="self" />)
 
-        fireEvent.click(getByTestId('test-b'));
+        expect(container.querySelector('.p-dialog')).not.toBeInTheDocument();
+
         fireEvent.click(getByTestId('test-button'));
+        expect(container.querySelector('.p-dialog')).toBeInTheDocument();
+    })
 
-        // console.log(getByTestId('test-p').innerHTML);
+    test('should display the Dialog', () => {
+        const { container, getByTestId } = render(<DialogTestComponentr />)
 
+        fireEvent.click(getByTestId('test-button'));
+        expect(container.parentElement.querySelector(".p-dialog")).toBeInTheDocument();
     })
 })

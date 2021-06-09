@@ -5,10 +5,10 @@ import { Chips } from './Chips';
 describe('Chips Component', () => {
     test('should display the Chips' , () => {
         const { container } = render(<Chips />);
-        const inputElement = container.firstChild;
+        const chipsElement = container.firstChild;
 
         expect(container).toBeInTheDocument();
-        expect(inputElement).toBeInTheDocument();
-        expect(inputElement).toHaveClass('p-chips p-component');
+        expect(chipsElement).toBeInTheDocument();
+        expect(chipsElement).toHaveClass('p-chips p-component');
     })
 })

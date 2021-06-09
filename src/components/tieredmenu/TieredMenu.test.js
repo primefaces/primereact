@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { ContextMenu } from './ContextMenu';
+import { TieredMenu } from './TieredMenu';
 
 const items = [
     {
@@ -134,10 +134,13 @@ const items = [
     }
 ];
 
-describe('ContextMenu Component', () => {
-    test('should display the ContextMenu', () => {
-        const { container } = render(<ContextMenu model={items} />);
+describe('TieredMenu Component', () => {
+    test('should display the TieredMenu', () => {
+        const { container } = render(<TieredMenu model={items} />);
         const menuElement = container.firstChild;
 
+        expect(container).toBeInTheDocument();
+        expect(menuElement).toBeInTheDocument();
+        expect(menuElement).toHaveClass('p-tieredmenu p-component');
     })
 })
