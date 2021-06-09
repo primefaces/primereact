@@ -256,7 +256,6 @@ export class Dialog extends Component {
             let deltaY = event.pageY - this.lastPageY;
             let width = DomHandler.getOuterWidth(this.dialogEl);
             let height = DomHandler.getOuterHeight(this.dialogEl);
-            let contentHeight = DomHandler.getOuterHeight(this.contentEl);
             let offset = this.dialogEl.getBoundingClientRect();
             let viewport = DomHandler.getViewport();
 
@@ -276,7 +275,6 @@ export class Dialog extends Component {
             }
 
             if ((!minHeight || newHeight > minHeight) && (offset.top + newHeight) < viewport.height) {
-                this.contentEl.style.height = contentHeight + newHeight - height + 'px';
                 this.dialogEl.style.height = newHeight + 'px';
             }
 
