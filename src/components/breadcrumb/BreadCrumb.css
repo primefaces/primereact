@@ -13,4 +13,6 @@
 
 .p-breadcrumb .p-menuitem-link {
     text-decoration: none;
+    display: flex;
+    align-items: center;
 }
