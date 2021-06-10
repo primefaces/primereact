@@ -1075,6 +1075,12 @@ const groupedCities = [
                             <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
                         </tr>
                         <tr>
+                            <td>dropdownIcon</td>
+                            <td>string</td>
+                            <td>pi pi-chevron-down</td>
+                            <td>Icon class of the dropdown icon.</td>
+                        </tr>
+                        <tr>
                             <td>virtualScrollerOptions</td>
                             <td>object</td>
                             <td>null</td>

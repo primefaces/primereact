@@ -227,7 +227,7 @@ import { Skeleton } from 'primereact/skeleton';
 import './DropdownDemo.css';
 
 const DropdownDemo = () => {
-    
+
     const [lazyItems, setLazyItems] = useState([]);
     const [lazyLoading, setLazyLoading] = useState(false);
     const [selectedCity1, setSelectedCity1] = useState(null);
@@ -294,7 +294,7 @@ const DropdownDemo = () => {
         setLazyItems(Array.from({ length: 100000 }));
         setLazyLoading(false);
     },[]); // eslint-disable-line react-hooks/exhaustive-deps
-    
+
     const onCityChange = (e) => {
         setSelectedCity1(e.value);
     }
@@ -403,7 +403,7 @@ const DropdownDemo = () => {
                 )}
             }} placeholder="Select Item"/>
         </div>
-    ); 
+    );
 }
                 `
             },
@@ -416,7 +416,7 @@ import { Skeleton } from 'primereact/skeleton';
 import './DropdownDemo.css';
 
 const DropdownDemo = () => {
-    
+
     const [lazyItems, setLazyItems] = useState<any>([]);
     const [lazyLoading, setLazyLoading] = useState<any>(false);
     const [selectedCity1, setSelectedCity1] = useState<any>(null);
@@ -483,7 +483,7 @@ const DropdownDemo = () => {
         setLazyItems(Array.from({ length: 100000 }));
         setLazyLoading(false);
     },[]); // eslint-disable-line react-hooks/exhaustive-deps
-    
+
     const onCityChange = (e: { value: any}) => {
         setSelectedCity1(e.value);
     }
@@ -594,7 +594,7 @@ const DropdownDemo = () => {
                 }} placeholder="Select Item"/>
             </div>
         <div>
-    ); 
+    );
 }
                 `
             },
@@ -1081,6 +1081,12 @@ const groupedCities = [
                                         <td>object</td>
                                         <td>null</td>
                                         <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>dropdownIcon</td>
+                                        <td>string</td>
+                                        <td>pi pi-chevron-down</td>
+                                        <td>Icon class of the dropdown icon.</td>
                                     </tr>
                                     <tr>
                                         <td>showOnFocus</td>
