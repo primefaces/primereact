@@ -31,6 +31,7 @@ export class SplitButton extends Component {
         tooltipOptions: null,
         buttonTemplate: null,
         transitionOptions: null,
+        dropdownIcon: 'pi pi-chevron-down',
         onClick: null,
         onShow: null,
         onHide: null
@@ -52,6 +53,7 @@ export class SplitButton extends Component {
         tooltipOptions: PropTypes.object,
         buttonTemplate: PropTypes.any,
         transitionOptions: PropTypes.object,
+        dropdownIcon: PropTypes.string,
         onClick: PropTypes.func,
         onShow: PropTypes.func,
         onHide: PropTypes.func
@@ -252,7 +254,7 @@ export class SplitButton extends Component {
                 <Button ref={(el) => this.defaultButton = el} type="button" className="p-splitbutton-defaultbutton" icon={this.props.icon} label={this.props.label} onClick={this.props.onClick} disabled={this.props.disabled} tabIndex={this.props.tabIndex}>
                     {buttonContent}
                 </Button>
-                <Button type="button" className="p-splitbutton-menubutton" icon="pi pi-chevron-down" onClick={this.onDropdownButtonClick} disabled={this.props.disabled}
+                <Button type="button" className="p-splitbutton-menubutton" icon={this.props.dropdownIcon} onClick={this.onDropdownButtonClick} disabled={this.props.disabled}
                     aria-expanded={this.state.overlayVisible} aria-haspopup aria-owns={this.state.id + '_overlay'} />
                 <SplitButtonPanel ref={this.overlayRef} appendTo={this.props.appendTo} id={this.state.id + '_overlay'}
                     menuStyle={this.props.menuStyle} menuClassName={this.props.menuClassName} onClick={this.onPanelClick}

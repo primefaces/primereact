@@ -22,6 +22,7 @@ export interface SplitButtonProps {
     tooltipOptions?: TooltipOptions;
     buttonTemplate?: SplitButtonButtonTemplateType;
     transitionOptions?: object;
+    dropdownIcon?: string;
     onClick?(event: React.MouseEvent<HTMLElement>): void;
     onShow?(): void;
     onHide?(): void;
