@@ -951,6 +951,12 @@ const groupedCities = [
                                         <td>Locale to use in filtering. The default locale is the host environment's current locale.</td>
                                     </tr>
                                     <tr>
+                                        <td>emptyMessage</td>
+                                        <td>string</td>
+                                        <td>No results found</td>
+                                        <td>Text to display when there are no options available.</td>
+                                    </tr>
+                                    <tr>
                                         <td>emptyFilterMessage</td>
                                         <td>any</td>
                                         <td>No results found</td>
