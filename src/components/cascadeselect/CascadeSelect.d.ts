@@ -32,6 +32,7 @@ export interface CascadeSelectProps {
     ariaLabelledBy?: string;
     appendTo?: CascadeSelectAppendToType;
     transitionOptions?: object;
+    dropdownIcon?: string;
     onChange?(e: CascadeSelectChangeParams): void;
     onGroupChange?(e: CascadeSelectGroupChangeParams): void;
     onBeforeShow?(): void;

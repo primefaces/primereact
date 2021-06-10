@@ -34,6 +34,7 @@ export class CascadeSelect extends Component {
         ariaLabelledBy: null,
         appendTo: null,
         transitionOptions: null,
+        dropdownIcon: 'pi pi-chevron-down',
         onChange: null,
         onGroupChange: null,
         onBeforeShow: null,
@@ -63,6 +64,7 @@ export class CascadeSelect extends Component {
         ariaLabelledBy: PropTypes.string,
         appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         transitionOptions: PropTypes.object,
+        dropdownIcon: PropTypes.string,
         onChange: PropTypes.func,
         onGroupChange: PropTypes.func,
         onBeforeShow: PropTypes.func,
@@ -397,9 +399,11 @@ export class CascadeSelect extends Component {
     }
 
     renderDropdownIcon() {
+        const iconClassName = classNames('p-cascadeselect-trigger-icon', this.props.dropdownIcon);
+
         return (
             <div className="p-cascadeselect-trigger" role="button" aria-haspopup="listbox" aria-expanded={this.state.overlayVisible}>
-                <span className="p-cascadeselect-trigger-icon pi pi-chevron-down"></span>
+                <span className={iconClassName}></span>
             </div>
         );
     }
