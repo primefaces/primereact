@@ -58,6 +58,7 @@ export class Dropdown extends Component {
         ariaLabel: null,
         ariaLabelledBy: null,
         transitionOptions: null,
+        dropdownIcon: 'pi pi-chevron-down',
         showOnFocus: false,
         onChange: null,
         onFocus: null,
@@ -114,6 +115,7 @@ export class Dropdown extends Component {
         ariaLabel: PropTypes.string,
         ariaLabelledBy: PropTypes.string,
         transitionOptions: PropTypes.object,
+        dropdownIcon: PropTypes.string,
         showOnFocus: PropTypes.bool,
         onChange: PropTypes.func,
         onFocus: PropTypes.func,
@@ -954,9 +956,11 @@ export class Dropdown extends Component {
     }
 
     renderDropdownIcon() {
+        const iconClassName = classNames('p-dropdown-trigger-icon p-clickable', this.props.dropdownIcon);
+
         return (
             <div ref={(el) => this.trigger = el} className="p-dropdown-trigger" role="button" aria-haspopup="listbox" aria-expanded={this.state.overlayVisible}>
-                <span className="p-dropdown-trigger-icon pi pi-chevron-down p-clickable"></span>
+                <span className={iconClassName}></span>
             </div>
         );
     }

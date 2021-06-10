@@ -78,6 +78,7 @@ export interface DropdownProps {
     ariaLabel?: string;
     ariaLabelledBy?: string;
     transitionOptions?: object;
+    dropdownIcon?: string;
     showOnFocus?: boolean;
     onChange?(e: DropdownChangeParams): void;
     onFocus?(event: React.FocusEvent<HTMLInputElement>): void;
