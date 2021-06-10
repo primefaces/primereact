@@ -8,6 +8,8 @@ type DropdownValueTemplateType = React.ReactNode | ((option: any, props: Dropdow
 
 type DropdownItemTemplateType = React.ReactNode | ((option: any) => React.ReactNode);
 
+type DropdownEmptyMessageType = React.ReactNode | ((props: DropdownProps) => React.ReactNode);
+
 type DropdownEmptyFilterMessageType = React.ReactNode | ((props: DropdownProps) => React.ReactNode);
 
 type DropdownOptionDisabledType = string | ((option: any) => boolean);
@@ -56,6 +58,7 @@ export interface DropdownProps {
     filterMatchMode?: string;
     filterPlaceholder?: string;
     filterLocale?: string;
+    emptyMessage?: DropdownEmptyMessageType;
     emptyFilterMessage?: DropdownEmptyFilterMessageType;
     editable?: boolean;
     placeholder?: string;

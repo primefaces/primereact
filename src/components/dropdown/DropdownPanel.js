@@ -62,11 +62,11 @@ class DropdownPanelComponent extends Component {
         )
     }
 
-    renderEmptyFilter() {
-        const emptyFilterMessage = ObjectUtils.getJSXElement(this.props.emptyFilterMessage, this.props);
+    renderEmptyMessage(emptyMessage) {
+        const message = ObjectUtils.getJSXElement(emptyMessage, this.props);
         return (
             <li className="p-dropdown-empty-message">
-                {emptyFilterMessage}
+                {message}
             </li>
         );
     }
@@ -102,10 +102,10 @@ class DropdownPanelComponent extends Component {
             return this.props.visibleOptions.map((option, index) => this.renderItem(option, index));
         }
         else if (this.props.hasFilter()) {
-            return this.renderEmptyFilter();
+            return this.renderEmptyMessage(this.props.emptyFilterMessage);
         }
 
-        return null;
+        return this.renderEmptyMessage(this.props.emptyMessage);
     }
 
     renderFilterClearIcon() {
