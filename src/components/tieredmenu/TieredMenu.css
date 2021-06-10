@@ -41,3 +41,7 @@
     left: 100%;
     top: 0;
 }
+
+.p-tieredmenu .p-menuitem-active > .p-submenu-list-flipped {
+    left: -100%;
+}

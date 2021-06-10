@@ -491,8 +491,8 @@ export default class DomHandler {
             element.style.visibility = 'hidden';
             element.style.display = 'block';
             let elementHeight = element.offsetHeight;
-            element.style.display = 'none';
-            element.style.visibility = 'visible';
+            element.style.display = '';
+            element.style.visibility = '';
 
             return elementHeight;
         }
@@ -504,8 +504,8 @@ export default class DomHandler {
             element.style.visibility = 'hidden';
             element.style.display = 'block';
             let elementWidth = element.offsetWidth;
-            element.style.display = 'none';
-            element.style.visibility = 'visible';
+            element.style.display = '';
+            element.style.visibility = '';
 
             return elementWidth;
         }
@@ -519,8 +519,8 @@ export default class DomHandler {
             element.style.display = 'block';
             dimensions.width = element.offsetWidth;
             dimensions.height = element.offsetHeight;
-            element.style.display = 'none';
-            element.style.visibility = 'visible';
+            element.style.display = '';
+            element.style.visibility = '';
         }
         return dimensions;
     }

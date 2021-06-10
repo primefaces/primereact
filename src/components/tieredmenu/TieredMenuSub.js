@@ -43,6 +43,10 @@ export class TieredMenuSub extends Component {
                 activeItem: null
             });
         }
+
+        if (this.props.parentActive && !this.props.root) {
+            this.position();
+        }
     }
 
     componentDidMount() {
@@ -61,6 +65,20 @@ export class TieredMenuSub extends Component {
         if (this.documentClickListener) {
             document.removeEventListener('click', this.documentClickListener);
             this.documentClickListener = null;
+        }
+    }
+
+    position() {
+        if (this.element) {
+            const parentItem = this.element.parentElement;
+            const containerOffset = DomHandler.getOffset(parentItem);
+            const viewport = DomHandler.getViewport();
+            const sublistWidth = this.element.offsetParent ? this.element.offsetWidth : DomHandler.getHiddenElementOuterWidth(this.element);
+            const itemOuterWidth = DomHandler.getOuterWidth(parentItem.children[0]);
+
+            if ((parseInt(containerOffset.left, 10) + itemOuterWidth + sublistWidth) > (viewport.width - DomHandler.calculateScrollbarWidth())) {
+                DomHandler.addClass(this.element, 'p-submenu-list-flipped');
+            }
         }
     }
 
