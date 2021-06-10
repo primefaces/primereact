@@ -431,10 +431,15 @@ export class DataTable extends Component {
         if (restoredState && Object.keys(restoredState).length) {
             if (this.props.paginator) {
                 if (this.props.onPage) {
-                    this.props.onPage({
-                        first: restoredState.first,
-                        rows: restoredState.rows
-                    });
+                    const getOnPageParams = (first, rows) => {
+                        const totalRecords = this.getTotalRecords(this.processData());
+                        const pageCount = Math.ceil(totalRecords / rows) || 1;
+                        const page = Math.floor(first / rows);
+
+                        return { first, rows, page, pageCount };
+                    }
+
+                    this.props.onPage(getOnPageParams(restoredState.first, restoredState.rows));
                 }
                 else {
                     state.first = restoredState.first;

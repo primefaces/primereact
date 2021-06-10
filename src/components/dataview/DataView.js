@@ -178,16 +178,12 @@ export class DataView extends Component {
 
     onPageChange(event) {
         if (this.props.onPage) {
-            this.props.onPage({
-                originalEvent: event,
-                first: event.first,
-                rows: event.rows
-            });
+            this.props.onPage(event);
         }
         else {
             this.setState({
-                first:event.first,
-                rows:event.rows
+                first: event.first,
+                rows: event.rows
             });
         }
     }

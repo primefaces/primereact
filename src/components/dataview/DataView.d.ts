@@ -10,9 +10,10 @@ type DataViewSortOrderType = 1 | 0 | -1 | undefined | null;
 type DataViewAppendToType = 'self' | HTMLElement | undefined | null;
 
 interface DataViewPageParams {
-    originalEvent: React.SyntheticEvent;
     first: number;
     rows: number;
+    page: number;
+    pageCount: number;
 }
 
 interface DataViewLayoutOptionsChangeParams {

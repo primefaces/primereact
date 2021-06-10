@@ -53,6 +53,13 @@ interface DataTableEditingRows {
 interface DataTablePageParams {
     first: number;
     rows: number;
+    page: number;
+    pageCount: number;
+}
+
+interface DataTableVirtualScrollParams {
+    first: number;
+    rows: number;
 }
 
 interface DataTableRowToggleParams {
@@ -232,7 +239,7 @@ export interface DataTableProps {
     onSort?(e: DataTableSortParams): void;
     onPage?(e: DataTablePageParams): void;
     onFilter?(e: DataTableFilterParams): void;
-    onVirtualScroll?(e: DataTablePageParams): void;
+    onVirtualScroll?(e: DataTableVirtualScrollParams): void;
     onAllRowsSelect?(e: DataTableSelectParams): void;
     onAllRowsUnselect?(e: DataTableUnselectParams): void;
     onRowClick?(e: DataTableRowClickEventParams): void;

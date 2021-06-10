@@ -60,6 +60,8 @@ interface TreeTableToggleParams {
 interface TreeTablePageParams {
     first: number;
     rows: number;
+    page: number;
+    pageCount: number;
 }
 
 interface TreeTableSortParams {
