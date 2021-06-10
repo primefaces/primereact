@@ -1,5 +1,66 @@
 # Changelog
 
+## [6.4.0](https://github.com/primefaces/primereact/tree/6.4.0) (2021-06-10)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/6.3.2...6.4.0)
+
+**Breaking changes:**
+
+- Improve onFilterValueChange event on Tree [\#2037](https://github.com/primefaces/primereact/issues/2037)
+- FullCalendar component is deprecated [\#2092](https://github.com/primefaces/primereact/issues/2092)
+- Remove hidden select tag and required property from MultiSelect [\#2099](https://github.com/primefaces/primereact/issues/2099)
+
+**Implemented New Features and Enhancements:**
+
+- New Component: VirtualScroller [\#2063](https://github.com/primefaces/primereact/issues/2063)
+- Add virtualScrollerOptions property to components [\#2075](https://github.com/primefaces/primereact/issues/2075)
+- Update to Chart.js 3.3.2 [\#1802](https://github.com/primefaces/primereact/issues/1802)
+- Improve resize feature of Dialog [\#2102](https://github.com/primefaces/primereact/issues/2102)
+- Add showSelectAll, selectAll and onSelectAll properties to MultiSelect [\#2098](https://github.com/primefaces/primereact/issues/2098)
+- Add inputId property to Password [\#2096](https://github.com/primefaces/primereact/issues/2096)
+- Add onAllRowsSelect and onAllRowsUnselect callbacks to DataTable [\#2093](https://github.com/primefaces/primereact/issues/2093)
+- TieredMenu sub-items are not visible when there's not enough space on the right side [\#2091](https://github.com/primefaces/primereact/issues/2091)
+- Add 'toast' key to ZIndex option on PrimeReact api [\#2089](https://github.com/primefaces/primereact/issues/2089)
+- Add autoZIndex option to PrimReact api [\#2088](https://github.com/primefaces/primereact/issues/2088)
+- Add Vite support [\#2087](https://github.com/primefaces/primereact/issues/2087)
+- Add p-sidebar-view and p-sidebar-content classes to Sidebar [\#2081](https://github.com/primefaces/primereact/issues/2081)
+- Add unselectable property to SelectButton [\#2077](https://github.com/primefaces/primereact/issues/2077)
+- Add dropdownIcon property to components [\#2074](https://github.com/primefaces/primereact/issues/2074)
+- Add emptyMessage property to Dropdown [\#2062](https://github.com/primefaces/primereact/issues/2062)
+- Add showGridlines and stripedRows props to DataTable [\#2054](https://github.com/primefaces/primereact/issues/2054)
+- Rangepicker for Date and Time [\#2051](https://github.com/primefaces/primereact/issues/2051)
+- Add onColumnResizerClick and onColumnResizerDoubleClick callbacks for column resizers on DataTable [\#2047](https://github.com/primefaces/primereact/issues/2047)
+- Improve header element on Dialog [\#2044](https://github.com/primefaces/primereact/issues/2044)
+- ScrollPanel pushes content to the left in order to show scrollbar [\#2039](https://github.com/primefaces/primereact/issues/2039)
+- Add appendTo property to Sidebar [\#2038](https://github.com/primefaces/primereact/issues/2038)
+- Add filterValue and onFilterValueChange properties to TreeSelect [\#2033](https://github.com/primefaces/primereact/issues/2033)
+- Improve Tooltip alignment [\#1973](https://github.com/primefaces/primereact/issues/1973)
+
+**Fixed bugs:**
+
+- The id property has no effect on Card [\#2105](https://github.com/primefaces/primereact/issues/2105)
+- Items are not aligned on BreadCrumb [\#2104](https://github.com/primefaces/primereact/issues/2104)
+- Drag and drop not working properly with frozen columns on TreeTable [\#2100](https://github.com/primefaces/primereact/issues/2100)
+- \(Datatable\) EmptyMessage is not 'No records found' but null [\#2094](https://github.com/primefaces/primereact/issues/2094)
+- Freezing Columns leads to wrong order on Column reorder of DataTable [\#2086](https://github.com/primefaces/primereact/issues/2086)
+- Resizing of splitter panels doesn't work on touch devices [\#2083](https://github.com/primefaces/primereact/issues/2083)
+- validateResize in splitter doesn't validate sizes if there are more than two panels [\#2082](https://github.com/primefaces/primereact/issues/2082)
+- Tooltip: wrong arrow position and orientation for certain combinations of my, at, position [\#2073](https://github.com/primefaces/primereact/issues/2073)
+- PageParams TypeScript interface improvement on DataTable, TreeTable and DataView [\#2070](https://github.com/primefaces/primereact/issues/2070)
+- Splitter considers the height as the size of the container irrespective of the layout [\#2067](https://github.com/primefaces/primereact/issues/2067)
+- DataView throws an exception when the last page is reached using Paginator [\#2066](https://github.com/primefaces/primereact/issues/2066)
+- Calender Component Type Error [\#2057](https://github.com/primefaces/primereact/issues/2057)
+- FileUpload - long filename [\#2055](https://github.com/primefaces/primereact/issues/2055)
+- Slider doesn't work with decimal step value [\#2036](https://github.com/primefaces/primereact/issues/2036)
+- PickList type definition is not in line with proptypes [\#2035](https://github.com/primefaces/primereact/issues/2035)
+- Sidebar content overflows its container [\#2034](https://github.com/primefaces/primereact/issues/2034)
+- options.clear\(\) NOT works in FileUpload [\#2026](https://github.com/primefaces/primereact/issues/2026)
+- Edit and Sort combination support for DataTable [\#878](https://github.com/primefaces/primereact/issues/878)
+
+**Deprecated:**
+
+- FullCalendar component is deprecated [\#2092](https://github.com/primefaces/primereact/issues/2092)
+
 ## [6.3.2](https://github.com/primefaces/primereact/tree/6.3.2) (2021-05-10)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/6.3.1...6.3.2)
