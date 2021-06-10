@@ -1076,8 +1076,9 @@ export class DataTable extends Component {
 
             if (allowDrop) {
                 let columns = this.state.columnOrder ? this.getColumns() : React.Children.toArray(this.props.children);
-                let dragColIndex = columns.findIndex((child) => child.props.columnKey === this.draggedColumn.columnKey || (this.draggedColumn.field && child.props.field === this.draggedColumn.field));
-                let dropColIndex = columns.findIndex((child) => child.props.columnKey === column.columnKey || (column.field && child.props.field === column.field));
+                let isSameColumn = (col1, col2) => (col1.columnKey || col2.columnKey) ? ObjectUtils.equals(col1, col2, 'columnKey') : ObjectUtils.equals(col1, col2, 'field');
+                let dragColIndex = columns.findIndex((child) => isSameColumn(child.props, this.draggedColumn));
+                let dropColIndex = columns.findIndex((child) => isSameColumn(child.props, column));
 
                 if (dropColIndex < dragColIndex && this.dropPosition === 1) {
                     dropColIndex++;
