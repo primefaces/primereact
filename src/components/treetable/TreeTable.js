@@ -601,8 +601,10 @@ export class TreeTable extends Component {
         document.removeEventListener('document', this.documentColumnResizeEndListener);
     }
 
-    onColumnDragStart(event) {
-        if(this.columnResizing) {
+    onColumnDragStart(e) {
+        const { originalEvent: event, column } = e;
+
+        if (this.columnResizing) {
             event.preventDefault();
             return;
         }
@@ -610,18 +612,20 @@ export class TreeTable extends Component {
         this.iconWidth = DomHandler.getHiddenElementOuterWidth(this.reorderIndicatorUp);
         this.iconHeight = DomHandler.getHiddenElementOuterHeight(this.reorderIndicatorUp);
 
-        this.draggedColumn = this.findParentHeader(event.target);
+        this.draggedColumnEl = this.findParentHeader(event.currentTarget);
+        this.draggedColumn = column;
         event.dataTransfer.setData('text', 'b'); // Firefox requires this to make dragging possible
     }
 
-    onColumnDragOver(event) {
-        let dropHeader = this.findParentHeader(event.target);
-        if(this.props.reorderableColumns && this.draggedColumn && dropHeader) {
+    onColumnDragOver(e) {
+        const event = e.originalEvent;
+        const dropHeader = this.findParentHeader(event.currentTarget);
+        if (this.props.reorderableColumns && this.draggedColumnEl && dropHeader) {
             event.preventDefault();
             let containerOffset = DomHandler.getOffset(this.container);
             let dropHeaderOffset = DomHandler.getOffset(dropHeader);
 
-            if(this.draggedColumn !== dropHeader) {
+            if (this.draggedColumnEl !== dropHeader) {
                 let targetLeft =  dropHeaderOffset.left - containerOffset.left;
                 //let targetTop =  containerOffset.top - dropHeaderOffset.top;
                 let columnCenter = dropHeaderOffset.left + dropHeader.offsetWidth / 2;
@@ -646,40 +650,56 @@ export class TreeTable extends Component {
         }
     }
 
-    onColumnDragLeave(event) {
-        if(this.props.reorderableColumns && this.draggedColumn) {
+    onColumnDragLeave(e) {
+        const event = e.originalEvent;
+        if (this.props.reorderableColumns && this.draggedColumnEl) {
             event.preventDefault();
             this.reorderIndicatorUp.style.display = 'none';
             this.reorderIndicatorDown.style.display = 'none';
         }
     }
 
-    onColumnDrop(event) {
+    onColumnDrop(e) {
+        const { originalEvent: event, column } = e;
+
         event.preventDefault();
-        if(this.draggedColumn) {
-            let dragIndex = DomHandler.index(this.draggedColumn);
-            let dropIndex = DomHandler.index(this.findParentHeader(event.target));
+        if (this.draggedColumnEl) {
+            let dragIndex = DomHandler.index(this.draggedColumnEl);
+            let dropIndex = DomHandler.index(this.findParentHeader(event.currentTarget));
             let allowDrop = (dragIndex !== dropIndex);
-            if(allowDrop && ((dropIndex - dragIndex === 1 && this.dropPosition === -1) || (dragIndex - dropIndex === 1 && this.dropPosition === 1))) {
+            if (allowDrop && ((dropIndex - dragIndex === 1 && this.dropPosition === -1) || (dragIndex - dropIndex === 1 && this.dropPosition === 1))) {
                 allowDrop = false;
             }
 
-            if(allowDrop) {
+            if (allowDrop) {
                 let columns = this.state.columnOrder ? this.getColumns() : React.Children.toArray(this.props.children);
-                ObjectUtils.reorderArray(columns, dragIndex, dropIndex);
+                let isSameColumn = (col1, col2) => (col1.props.columnKey || col2.props.columnKey) ? ObjectUtils.equals(col1, col2, 'props.columnKey') : ObjectUtils.equals(col1, col2, 'props.field');
+                let dragColIndex = columns.findIndex((child) => isSameColumn(child, this.draggedColumn));
+                let dropColIndex = columns.findIndex((child) => isSameColumn(child, column));
+
+                if (dropColIndex < dragColIndex && this.dropPosition === 1) {
+                    dropColIndex++;
+                }
+
+                if (dropColIndex > dragColIndex && this.dropPosition === -1) {
+                    dropColIndex--;
+                }
+
+                ObjectUtils.reorderArray(columns, dragColIndex, dropColIndex);
+
                 let columnOrder = [];
-                for(let column of columns) {
+                for (let column of columns) {
                     columnOrder.push(column.props.columnKey||column.props.field);
                 }
 
                 this.setState({
-                    columnOrder: columnOrder
+                    columnOrder
                 });
 
                 if (this.props.onColReorder) {
                     this.props.onColReorder({
-                        dragIndex: dragIndex,
-                        dropIndex: dropIndex,
+                        dragIndex: dragColIndex,
+                        dropIndex: dropColIndex,
                         columns: columns
                     });
                 }
@@ -687,8 +707,8 @@ export class TreeTable extends Component {
 
             this.reorderIndicatorUp.style.display = 'none';
             this.reorderIndicatorDown.style.display = 'none';
-            this.draggedColumn.draggable = false;
-            this.draggedColumn = null;
+            this.draggedColumnEl.draggable = false;
+            this.draggedColumnEl = null;
             this.dropPosition = null;
         }
     }

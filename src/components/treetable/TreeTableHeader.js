@@ -1,44 +1,9 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { classNames } from '../utils/ClassNames';
 import DomHandler from '../utils/DomHandler';
 import {InputText} from '../inputtext/InputText';
 
 export class TreeTableHeader extends Component {
-
-    static defaultProps = {
-        columns: null,
-        columnGroup: null,
-        sortField: null,
-        sortOrder: null,
-        multiSortMeta: null,
-        resizableColumns: false,
-        reorderableColumns: false,
-        onSort: null,
-        onResizeStart: null,
-        onDragStart: null,
-        onDragOver: null,
-        onDragLeave: null,
-        onDrop: null,
-        onFilter: null
-    }
-
-    static propTypes = {
-        columns: PropTypes.array,
-        columnGroup: PropTypes.any,
-        sortField: PropTypes.string,
-        sortOrder: PropTypes.number,
-        multiSortMeta: PropTypes.array,
-        resizableColumns: PropTypes.bool,
-        reorderableColumns: PropTypes.bool,
-        onSort: PropTypes.func,
-        onResizeStart: PropTypes.func,
-        onDragStart: PropTypes.func,
-        onDragOver: PropTypes.func,
-        onDragLeave: PropTypes.func,
-        onDrop: PropTypes.func,
-        onFilter: PropTypes.func
-    }
 
     constructor(props) {
         super(props);
@@ -108,6 +73,42 @@ export class TreeTableHeader extends Component {
                 originalEvent: event,
                 columnEl: event.target.parentElement,
                 column: column
+            });
+        }
+    }
+
+    onDragStart(event, column) {
+        if (this.props.onDragStart) {
+            this.props.onDragStart({
+                originalEvent: event,
+                column
+            });
+        }
+    }
+
+    onDragOver(event, column) {
+        if (this.props.onDragOver) {
+            this.props.onDragOver({
+                originalEvent: event,
+                column
+            });
+        }
+    }
+
+    onDragLeave(event, column) {
+        if (this.props.onDragLeave) {
+            this.props.onDragLeave({
+                originalEvent: event,
+                column
+            });
+        }
+    }
+
+    onDrop(event, column) {
+        if (this.props.onDrop) {
+            this.props.onDrop({
+                originalEvent: event,
+                column
             });
         }
     }
@@ -235,7 +236,7 @@ export class TreeTableHeader extends Component {
                 <th key={column.columnKey||column.field||options.index} className={className} style={column.props.headerStyle||column.props.style} tabIndex={column.props.sortable ? this.props.tabIndex: null}
                     onClick={e => this.onHeaderClick(e, column)} onMouseDown={e => this.onHeaderMouseDown(e, column)} onKeyDown={e => this.onHeaderKeyDown(e, column)}
                     rowSpan={column.props.rowSpan} colSpan={column.props.colSpan} aria-sort={ariaSortData}
-                    onDragStart={this.props.onDragStart} onDragOver={this.props.onDragOver} onDragLeave={this.props.onDragLeave} onDrop={this.props.onDrop}>
+                    onDragStart={e => this.onDragStart(e, column)} onDragOver={e => this.onDragOver(e, column)} onDragLeave={e => this.onDragLeave(e, column)} onDrop={e => this.onDrop(e, column)}>
                     {resizer}
                     <span className="p-column-title">{column.props.header}</span>
                     {sortIconElement}
