@@ -81,6 +81,7 @@ export interface TreeSelectProps {
     panelHeaderTemplate?: TreeSelectPanelHeaderTemplateType;
     panelFooterTemplate?: TreeSelectPanelFooterTemplateType;
     transitionOptions?: object;
+    dropdownIcon?: string;
     filter?: boolean;
     filterValue?: string;
     filterBy?: string;

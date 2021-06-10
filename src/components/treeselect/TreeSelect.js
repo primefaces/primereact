@@ -38,6 +38,7 @@ export class TreeSelect extends Component {
         panelHeaderTemplate: null,
         panelFooterTemplate: null,
         transitionOptions: null,
+        dropdownIcon: 'pi pi-chevron-down',
         filter: false,
         filterValue: null,
         filterBy: 'label',
@@ -81,6 +82,7 @@ export class TreeSelect extends Component {
         panelHeaderTemplate: PropTypes.any,
         panelFooterTemplate: PropTypes.any,
         transitionOptions: PropTypes.object,
+        dropdownIcon: PropTypes.string,
         filter: PropTypes.bool,
         filterValue: PropTypes.string,
         filterBy: PropTypes.any,
@@ -559,9 +561,11 @@ export class TreeSelect extends Component {
     }
 
     renderDropdownIcon() {
+        let iconClassName = classNames('p-treeselect-trigger-icon p-clickable', this.props.dropdownIcon);
+
         return (
             <div ref={(el) => this.trigger = el} className="p-treeselect-trigger" role="button" aria-haspopup="listbox" aria-expanded={this.state.overlayVisible}>
-                <span className="p-treeselect-trigger-icon pi pi-chevron-down p-clickable"></span>
+                <span className={iconClassName}></span>
             </div>
         );
     }
