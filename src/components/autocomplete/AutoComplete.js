@@ -57,6 +57,7 @@ export class AutoComplete extends Component {
         itemTemplate: null,
         selectedItemTemplate: null,
         transitionOptions: null,
+        dropdownIcon: 'pi pi-chevron-down',
         onChange: null,
         onFocus: null,
         onBlur: null,
@@ -116,6 +117,7 @@ export class AutoComplete extends Component {
         itemTemplate: PropTypes.any,
         selectedItemTemplate: PropTypes.any,
         transitionOptions: PropTypes.object,
+        dropdownIcon: PropTypes.string,
         onChange: PropTypes.func,
         onFocus: PropTypes.func,
         onBlur: PropTypes.func,
@@ -801,7 +803,7 @@ export class AutoComplete extends Component {
     }
 
     renderDropdown() {
-        return <Button ref={(el) => this.dropdownButton = el} type="button" icon="pi pi-chevron-down" className="p-autocomplete-dropdown" disabled={this.props.disabled} onClick={this.onDropdownClick} />
+        return <Button ref={(el) => this.dropdownButton = el} type="button" icon={this.props.dropdownIcon} className="p-autocomplete-dropdown" disabled={this.props.disabled} onClick={this.onDropdownClick} />
     }
 
     renderLoader() {

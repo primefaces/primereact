@@ -83,6 +83,7 @@ export interface AutoCompleteProps {
     itemTemplate?: AutoCompleteItemTemplateType;
     selectedItemTemplate?: AutoCompleteSelectedItemTemplateType;
     transitionOptions?: object;
+    dropdownIcon?: string;
     onChange?(e: AutoCompleteChangeParams): void;
     onFocus?(event: React.FocusEvent<HTMLInputElement>): void;
     onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
