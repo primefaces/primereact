@@ -58,6 +58,7 @@ export class MultiSelect extends Component {
         panelHeaderTemplate: null,
         panelFooterTemplate: null,
         transitionOptions: null,
+        dropdownIcon: 'pi pi-chevron-down',
         showSelectAll: true,
         selectAll: false,
         onChange: null,
@@ -114,6 +115,7 @@ export class MultiSelect extends Component {
         panelHeaderTemplate: PropTypes.any,
         panelFooterTemplate: PropTypes.any,
         transitionOptions: PropTypes.object,
+        dropdownIcon: PropTypes.string,
         showSelectAll: PropTypes.bool,
         selectAll: PropTypes.bool,
         onChange: PropTypes.func,
@@ -885,6 +887,7 @@ export class MultiSelect extends Component {
             'p-inputwrapper-filled': this.props.value && this.props.value.length > 0,
             'p-inputwrapper-focus': this.state.focused || this.state.overlayVisible
         }, this.props.className);
+        let iconClassName = classNames('p-multiselect-trigger-icon p-c', this.props.dropdownIcon);
         let visibleOptions = this.getVisibleOptions();
 
         let label = this.renderLabel();
@@ -899,7 +902,7 @@ export class MultiSelect extends Component {
                 {label}
                 {clearIcon}
                 <div className="p-multiselect-trigger">
-                    <span className="p-multiselect-trigger-icon pi pi-chevron-down p-c"></span>
+                    <span className={iconClassName}></span>
                 </div>
                 <MultiSelectPanel ref={this.overlayRef} visibleOptions={visibleOptions} {...this.props} onClick={this.onPanelClick} onOverlayHide={this.hide}
                     filterValue={this.state.filter} hasFilter={this.hasFilter} onFilterInputChange={this.onFilterInputChange} onCloseClick={this.onCloseClick} onSelectAll={this.onSelectAll}

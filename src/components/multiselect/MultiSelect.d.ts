@@ -106,6 +106,7 @@ export interface MultiSelectProps {
     panelHeaderTemplate?: MultiSelectPanelHeaderTemplateType;
     panelFooterTemplate?: MultiSelectPanelFooterTemplateType;
     transitionOptions?: object;
+    dropdownIcon?: string;
     showSelectAll?: boolean;
     selectAll?: boolean;
     onChange?(e: MultiSelectChangeParams): void;
