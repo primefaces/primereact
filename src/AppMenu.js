@@ -83,17 +83,19 @@ export class AppMenu extends Component {
 
     onFilterOnOptions(item, searchVal, optionKeys) {
         if (item && optionKeys) {
-            return optionKeys.some(optionKey => {
-                let value = item[optionKey];
-
-                if (value) {
-                    if (typeof value === 'string')
-                        return value.toLowerCase().indexOf(searchVal) > -1;
-                    else
-                        return value.filter(meta => meta.toLowerCase().indexOf(searchVal) > -1).length > 0;
+            const isMatched = (val) => {
+                if (searchVal.indexOf('&') < 0) {
+                    return val.toLowerCase().indexOf(searchVal) > -1;
                 }
+                else {
+                    return searchVal.split('&').some(s => !!s && val.toLowerCase().indexOf(s) > -1);
+                }
+            };
 
-                return false;
+            return optionKeys.some(optionKey => {
+                const value = item[optionKey];
+
+                return value && (typeof value === 'string' ? isMatched(value) : value.filter(meta => isMatched(meta)).length > 0);
             });
         }
 
