@@ -43,7 +43,7 @@ export class DataTableExportDemo extends Component {
             { field: 'quantity', header: 'Quantity' }
         ];
 
-        this.exportColumns = this.cols.map(col => ({ title: col.header, dataKey: col.field }));
+        this.exportColumns = this.cols.filter(col => col.exportable !== false).map(col => ({ title: col.header, dataKey: col.field }));
     }
 
     componentDidMount() {
@@ -218,7 +218,7 @@ export class DataTableExportDemo extends Component {
                         <DataTable ref={(el) => { this.dt = el; }} value={this.state.products} header={header} dataKey="id"
                             selectionMode="multiple" selection={this.state.selectedProducts} onSelectionChange={this.onSelectionChange}>
                             {
-                                this.cols.map((col, index) => <Column key={index} field={col.field} header={col.header} />)
+                                this.cols.map((col, index) => <Column key={index} field={col.field} header={col.header}  exportable={col.exportable} />)
                             }
                         </DataTable>
                     </div>
@@ -446,7 +446,7 @@ export class DataTableExportDemo extends Component {
                     <DataTable ref={(el) => { this.dt = el; }} value={this.state.products} header={header} dataKey="id"
                         selectionMode="multiple" selection={this.state.selectedProducts} onSelectionChange={this.onSelectionChange}>
                         {
-                            this.cols.map((col, index) => <Column key={index} field={col.field} header={col.header} />)
+                            this.cols.map((col, index) => <Column key={index} field={col.field} header={col.header}  exportable={col.exportable} />)
                         }
                     </DataTable>
                 </div>
@@ -642,7 +642,7 @@ export const DataTableExportDemo = () => {
                 <DataTable ref={dt} value={products} header={header} dataKey="id"
                     selectionMode="multiple" selection={selectedProducts} onSelectionChange={onSelectionChange}>
                     {
-                        cols.map((col, index) => <Column key={index} field={col.field} header={col.header} />)
+                        cols.map((col, index) => <Column key={index} field={col.field} header={col.header} exportable={col.exportable}/>)
                     }
                 </DataTable>
             </div>
@@ -837,7 +837,7 @@ export const DataTableExportDemo = () => {
                 <DataTable ref={dt} value={products} header={header} dataKey="id"
                     selectionMode="multiple" selection={selectedProducts} onSelectionChange={onSelectionChange}>
                     {
-                        cols.map((col, index) => <Column key={index} field={col.field} header={col.header} />)
+                        cols.map((col, index) => <Column key={index} field={col.field} header={col.header} exportable={col.exportable}/> )
                     }
                 </DataTable>
             </div>
