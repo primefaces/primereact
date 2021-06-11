@@ -31,7 +31,7 @@ export class FullCalendarDemo extends Component {
                 <div className="content-section introduction">
                     <AppInlineHeader changelogText="fullCalendar">
                         <h1>FullCalendar</h1>
-                        <p>An event calendar based on the <a href="https://fullcalendar.io/">FullCalendar</a> library.</p>
+                        <p><a href="https://fullcalendar.io/docs/react">FullCalendar React</a> library is fully compatible with PrimeReact themes.</p>
                     </AppInlineHeader>
                     <AppDemoActions github="fullcalendar/FullCalendarDemo.js" />
                 </div>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Divider } from '../../components/divider/Divider';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
 import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
@@ -129,6 +130,11 @@ const FullCalendarDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
+                        <h4><strong>Note:</strong> This documentation explains how to use PrimeReact's FullCalendar component and <a href="https://fullcalendar.io/docs/v4">FullCalendar 4.0.1+</a>.
+                            In PrimeReact 6.4.0+, FullCalendar component is deprecated. Now, PrimeReact provides full theming support to the <a href="https://fullcalendar.io/docs/react">FullCalendar React</a> library.
+                            In this way, it is aimed to use it compatible with other PrimeReact components.</h4>
+                        <Divider />
+
                         <h5>Import</h5>
 <CodeHighlight lang="js">
 {`

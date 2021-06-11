@@ -1,6 +1,6 @@
 # Changelog
 
-## [6.4.0](https://github.com/primefaces/primereact/tree/6.4.0) (2021-06-10)
+## [6.4.0](https://github.com/primefaces/primereact/tree/6.4.0) (2021-06-11)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/6.3.2...6.4.0)
 
