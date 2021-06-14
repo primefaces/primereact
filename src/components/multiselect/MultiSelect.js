@@ -159,6 +159,7 @@ export class MultiSelect extends Component {
         this.allowOptionSelect = this.allowOptionSelect.bind(this);
         this.isSelected = this.isSelected.bind(this);
         this.isAllSelected = this.isAllSelected.bind(this);
+        this.hasFilter = this.hasFilter.bind(this);
         this.getSelectedOptionIndex = this.getSelectedOptionIndex.bind(this);
 
         this.hide = this.hide.bind(this);
