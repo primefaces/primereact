@@ -360,22 +360,20 @@ export class BodyCell extends Component {
     componentDidUpdate() {
         if (this.props.editMode !== 'row' && this.container && this.props.editor) {
             clearTimeout(this.tabindexTimeout);
-            if (this.state.editing) {
-                let focusable = DomHandler.findSingle(this.container, 'input');
-                if (focusable && document.activeElement !== focusable && !focusable.hasAttribute('data-isCellEditing')) {
-                    focusable.setAttribute('data-isCellEditing', true);
-                    focusable.focus();
-                }
-
-                this.keyHelper.tabIndex = -1;
-            }
-            else {
-                this.tabindexTimeout = setTimeout(() => {
-                    if (this.keyHelper) {
-                        this.keyHelper.setAttribute('tabindex', 0);
+            this.tabindexTimeout = setTimeout(() => {
+                if (this.state.editing) {
+                    let focusable = DomHandler.findSingle(this.container, 'input');
+                    if (focusable && document.activeElement !== focusable && !focusable.hasAttribute('data-isCellEditing')) {
+                        focusable.setAttribute('data-isCellEditing', true);
+                        focusable.focus();
                     }
-                }, 50);
-            }
+
+                    this.keyHelper.tabIndex = -1;
+                }
+                else if (this.keyHelper) {
+                    this.keyHelper.setAttribute('tabindex', 0);
+                }
+            }, 1);
         }
     }
 
