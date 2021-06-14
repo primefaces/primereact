@@ -1170,46 +1170,39 @@ export class DataTable extends Component {
         }
 
         //headers
-        for(let i = 0; i < columns.length; i++) {
-            if(columns[i].props.field) {
-                csv += '"' + (columns[i].props.header || columns[i].props.field) + '"';
+        columns.forEach((column, i) => {
+            const { field, header, exportable } = column.props;
 
-                if(i < (columns.length - 1)) {
+            if (exportable && field) {
+                csv += '"' + (header || field) + '"';
+
+                if (i < (columns.length - 1)) {
                     csv += this.props.csvSeparator;
                 }
             }
-        }
+        });
 
         //body
-        data.forEach((record, i) => {
+        data.forEach((record) => {
             csv += '\n';
-            for(let i = 0; i < columns.length; i++) {
-                let column = columns[i],
-                field = column.props.field;
+            columns.forEach((column, i) => {
+                const { field, exportable } = column.props;
 
-                if (column.props.exportable && field) {
+                if (exportable && field) {
                     let cellData = ObjectUtils.resolveFieldData(record, field);
 
-                    if (cellData != null) {
-                        if (this.props.exportFunction) {
-                            cellData = this.props.exportFunction({
-                                data: cellData,
-                                field: field
-                            });
-                        }
-                        else
-                            cellData = String(cellData).replace(/"/g, '""');
-                    }
+                    if (cellData != null)
+                        cellData = this.props.exportFunction ? this.props.exportFunction({ data: cellData, field }) : String(cellData).replace(/"/g, '""');
                     else
                         cellData = '';
 
                     csv += '"' + cellData + '"';
 
-                    if(i < (columns.length - 1)) {
+                    if (i < (columns.length - 1)) {
                         csv += this.props.csvSeparator;
                     }
                 }
-            }
+            });
         });
 
         let blob = new Blob([csv],{
