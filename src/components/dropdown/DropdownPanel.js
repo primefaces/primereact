@@ -144,7 +144,7 @@ class DropdownPanelComponent extends Component {
                 itemTemplate: (item, options) => item && this.renderItem(item, options.index),
                 contentTemplate: (options) => {
                     const className = classNames('p-dropdown-items', options.className);
-                    const content = this.isEmptyFilter() ? this.renderEmptyFilter() : options.children;
+                    const content = this.isEmptyFilter() ? this.renderEmptyMessage() : options.children;
 
                     return (
                         <ul ref={options.ref} className={className} role="listbox">
