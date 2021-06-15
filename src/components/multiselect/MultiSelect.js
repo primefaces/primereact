@@ -652,7 +652,7 @@ export class MultiSelect extends Component {
     }
 
     hasFilter() {
-        return this.state.filter && this.state.filter.trim().length > 0;
+        return this.state && this.state.filter && this.state.filter.trim().length > 0;
     }
 
     isAllSelected() {
