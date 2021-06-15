@@ -597,6 +597,10 @@ export class ColorPicker extends Component {
     }
 
     componentDidUpdate(prevProps) {
+        if (!this.colorDragging && !this.hueDragging && this.props.value !== prevProps.value) {
+            this.updateHSBValue(this.props.value);
+        }
+
         this.updateUI();
         if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
             if (this.tooltip)
