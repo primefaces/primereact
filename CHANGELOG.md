@@ -9,12 +9,12 @@
 - Improve onFilterValueChange event on Tree [\#2037](https://github.com/primefaces/primereact/issues/2037)
 - FullCalendar component is deprecated [\#2092](https://github.com/primefaces/primereact/issues/2092)
 - Remove hidden select tag and required property from MultiSelect [\#2099](https://github.com/primefaces/primereact/issues/2099)
+- Update to Chart.js 3.3.2 [\#1802](https://github.com/primefaces/primereact/issues/1802)
 
 **Implemented New Features and Enhancements:**
 
 - New Component: VirtualScroller [\#2063](https://github.com/primefaces/primereact/issues/2063)
 - Add virtualScrollerOptions property to components [\#2075](https://github.com/primefaces/primereact/issues/2075)
-- Update to Chart.js 3.3.2 [\#1802](https://github.com/primefaces/primereact/issues/1802)
 - Improve resize feature of Dialog [\#2102](https://github.com/primefaces/primereact/issues/2102)
 - Add showSelectAll, selectAll and onSelectAll properties to MultiSelect [\#2098](https://github.com/primefaces/primereact/issues/2098)
 - Add inputId property to Password [\#2096](https://github.com/primefaces/primereact/issues/2096)
