@@ -15,6 +15,7 @@ export class CalendarDoc extends Component {
                 content: `
 import React, { Component } from 'react';
 import { Calendar } from 'primereact/calendar';
+import { Dropdown } from 'primereact/dropdown';
 import { addLocale } from 'primereact/api';
 import 'primeflex/primeflex.css';
 
@@ -48,6 +49,7 @@ export class CalendarDemo extends Component {
             date14: null,
             date15: null,
             date16: null,
+            date17: null,
             dates1: null,
             dates2: null,
             visible: false
@@ -64,6 +66,8 @@ export class CalendarDemo extends Component {
         this.invalidDates = [today];
 
         this.dateTemplate = this.dateTemplate.bind(this);
+        this.monthNavigatorTemplate = this.monthNavigatorTemplate.bind(this);
+        this.yearNavigatorTemplate = this.yearNavigatorTemplate.bind(this);
         this.onVisibleChange = this.onVisibleChange.bind(this);
 
         addLocale('es', {
@@ -86,6 +90,14 @@ export class CalendarDemo extends Component {
         }
 
         return date.day;
+    }
+
+    monthNavigatorTemplate(e) {
+        return <Dropdown value={e.value} options={e.options} onChange={(event) => e.onChange(event.originalEvent, event.value)} style={{ lineHeight: 1 }} />;
+    }
+
+    yearNavigatorTemplate(e) {
+        return <Dropdown value={e.value} options={e.options} onChange={(event) => e.onChange(event.originalEvent, event.value)} className="p-ml-2" style={{ lineHeight: 1 }} />;
     }
 
     onVisibleChange(e) {
@@ -168,10 +180,15 @@ export class CalendarDemo extends Component {
                             <label htmlFor="controlled">Visibility Control</label>
                             <Calendar id="controlled" value={this.state.date15} onChange={(e) => this.setState({ date15: e.value })} visible={this.state.visible} onVisibleChange={this.onVisibleChange} />
                         </div>
+                        <div className="p-field p-col-12 p-md-4">
+                            <label htmlFor="navigatorstemplate">Navigators Template</label>
+                            <Calendar id="navigatorstemplate" value={this.state.date16} onChange={(e) => this.setState({ date16: e.value })} monthNavigator yearNavigator yearRange="2010:2030"
+                                monthNavigatorTemplate={this.monthNavigatorTemplate} yearNavigatorTemplate={this.yearNavigatorTemplate} />
+                        </div>
                     </div>
 
                     <h5>Inline</h5>
-                    <Calendar value={this.state.date16} onChange={(e) => this.setState({ date16: e.value })} inline showWeek />
+                    <Calendar value={this.state.date17} onChange={(e) => this.setState({ date17: e.value })} inline showWeek />
                 </div>
             </div>
         );
@@ -184,6 +201,7 @@ export class CalendarDemo extends Component {
                 content: `
 import React, { useState } from 'react';
 import { Calendar } from 'primereact/calendar';
+import { Dropdown } from 'primereact/dropdown';
 import { addLocale } from 'primereact/api';
 import 'primeflex/primeflex.css';
 
@@ -212,6 +230,7 @@ const CalendarDemo = () => {
     const [date14, setDate14] = useState(null);
     const [date15, setDate15] = useState(null);
     const [date16, setDate16] = useState(null);
+    const [date17, setDate17] = useState(null);
     const [dates1, setDates1] = useState(null);
     const [dates2, setDates2] = useState(null);
     const [visible, setVisible] = useState(false);
@@ -245,6 +264,14 @@ const CalendarDemo = () => {
         }
 
         return date.day;
+    }
+
+    const monthNavigatorTemplate = (e) => {
+        return <Dropdown value={e.value} options={e.options} onChange={(event) => e.onChange(event.originalEvent, event.value)} style={{ lineHeight: 1 }} />;
+    }
+
+    const yearNavigatorTemplate = (e) => {
+        return <Dropdown value={e.value} options={e.options} onChange={(event) => e.onChange(event.originalEvent, event.value)} className="p-ml-2" style={{ lineHeight: 1 }} />;
     }
 
     const onVisibleChange = (e) {
@@ -327,10 +354,15 @@ const CalendarDemo = () => {
                         <label htmlFor="controlled">Visibility Control</label>
                         <Calendar id="controlled" value={date15} onChange={(e) => setDate15(e.value)} visible={visible} onVisibleChange={onVisibleChange} />
                     </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <label htmlFor="navigatorstemplate">Navigators Template</label>
+                        <Calendar id="navigatorstemplate" value={date16} onChange={(e) => setDate16(e.value)} monthNavigator yearNavigator yearRange="2010:2030"
+                            monthNavigatorTemplate={monthNavigatorTemplate} yearNavigatorTemplate={yearNavigatorTemplate} />
+                    </div>
                 </div>
 
                 <h5>Inline</h5>
-                <Calendar value={date16} onChange={(e) => setDate16(e.value)} inline showWeek />
+                <Calendar value={date17} onChange={(e) => setDate17(e.value)} inline showWeek />
             </div>
         </div>
     );
@@ -342,6 +374,7 @@ const CalendarDemo = () => {
                 content: `
 import React, { useState } from 'react';
 import { Calendar } from 'primereact/calendar';
+import { Dropdown } from 'primereact/dropdown';
 import { addLocale } from 'primereact/api';
 import 'primeflex/primeflex.css';
 
@@ -370,6 +403,7 @@ const CalendarDemo = () => {
     const [date14, setDate14] = useState<Date | Date[] | undefined>(undefined);
     const [date15, setDate15] = useState<Date | Date[] | undefined>(undefined);
     const [date16, setDate16] = useState<Date | Date[] | undefined>(undefined);
+    const [date17, setDate17] = useState<Date | Date[] | undefined>(undefined);
     const [dates1, setDates1] = useState<Date | Date[] | undefined>(undefined);
     const [dates2, setDates2] = useState<Date | Date[] | undefined>(undefined);
     const [visible, setVisible] = useState<boolean>(false);
@@ -403,6 +437,14 @@ const CalendarDemo = () => {
         }
 
         return date.day;
+    }
+
+    const monthNavigatorTemplate = (e: any) => {
+        return <Dropdown value={e.value} options={e.options} onChange={(event) => e.onChange(event.originalEvent, event.value)} style={{ lineHeight: 1 }} />;
+    }
+
+    const yearNavigatorTemplate = (e: any) => {
+        return <Dropdown value={e.value} options={e.options} onChange={(event) => e.onChange(event.originalEvent, event.value)} className="p-ml-2" style={{ lineHeight: 1 }} />;
     }
 
     const onVisibleChange = (e: any) {
@@ -482,13 +524,14 @@ const CalendarDemo = () => {
                         <Calendar id="mask" value={date14} onChange={(e) => setDate14(e.value)} mask="99/99/9999"/>
                     </div>
                     <div className="p-field p-col-12 p-md-4">
-                        <label htmlFor="controlled">Visibility Control</label>
-                        <Calendar id="controlled" value={date15} onChange={(e) => setDate15(e.value)} visible={visible} onVisibleChange={onVisibleChange} />
+                        <label htmlFor="navigatorstemplate">Navigators Template</label>
+                        <Calendar id="navigatorstemplate" value={date16} onChange={(e) => setDate16(e.value)} monthNavigator yearNavigator yearRange="2010:2030"
+                            monthNavigatorTemplate={monthNavigatorTemplate} yearNavigatorTemplate={yearNavigatorTemplate} />
                     </div>
                 </div>
 
                 <h5>Inline</h5>
-                <Calendar value={date16} onChange={(e) => setDate16(e.value)} inline showWeek />
+                <Calendar value={date17} onChange={(e) => setDate17(e.value)} inline showWeek />
             </div>
         </div>
     );
@@ -658,10 +701,10 @@ dateTemplate(date) {
 </CodeHighlight>
 
                         <h5>Header and Footer</h5>
-                        <p><i>headerTemplate</i> and <i>footerTemplate</i> properties are available to place custom content at these sections.</p>
+                        <p>The <i>headerTemplate</i> and <i>footerTemplate</i> properties are available to place custom content at these sections.</p>
 <CodeHighlight>
 {`
-<Calendar value={date} onChange={(e) => setDate(e.value)} headerTemplate={<Button label="Custom Button" />} footerTemplate={<div>Footer Content</div>} />
+<Calendar value={date} onChange={(e) => setDate(e.value)} headerTemplate={() => <Button label="Custom Button" />} footerTemplate={() => <div>Footer Content</div>} />
 `}
 </CodeHighlight>
 
@@ -672,6 +715,27 @@ dateTemplate(date) {
 <CodeHighlight>
 {`
 <Calendar value={date} onChange={(e) => setDate(e.value)} monthNavigator yearNavigator yearRange="2010:2030" />
+`}
+</CodeHighlight>
+                        <h5>Navigator Templates</h5>
+                        <p>The <i>monthNavigatorTemplate</i> and <i>yearNavigatorTemplate</i> properties are available to place custom content at the navigator sections.</p>
+<CodeHighlight>
+{`
+<Calendar value={date} onChange={(e) => setDate(e.value)} monthNavigator yearNavigator yearRange="2010:2030" monthNavigatorTemplate={this.monthNavigatorTemplate} />
+`}
+</CodeHighlight>
+
+<CodeHighlight lang="js">
+    {`
+const monthNavigatorTemplate = (options) => {
+    // options.onChange: Change event for the default element.
+    // options.className: Style class of the default element.
+    // options.value: Selected value.
+    // options.names: Names of options.
+    // options.options: Options as SelectItem API.
+    // options.element: Default element created by the component.
+    // options.props: component props.
+}
 `}
 </CodeHighlight>
 
@@ -1057,6 +1121,18 @@ dateTemplate(date) {
                                         <td>function</td>
                                         <td>null</td>
                                         <td>Function that gets a date information and returns the cell content in datepicker.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>monthNavigatorTemplate</td>
+                                        <td>function</td>
+                                        <td>null</td>
+                                        <td>Function that gets a navigator information and returns the navigator element in header.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>yearNavigatorTemplate</td>
+                                        <td>function</td>
+                                        <td>null</td>
+                                        <td>Function that gets a navigator information and returns the novigator in header.</td>
                                     </tr>
                                     <tr>
                                         <td>transitionOptions</td>

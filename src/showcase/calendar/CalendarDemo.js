@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AppDemoActions from '../../AppDemoActions';
 import { Calendar } from '../../components/calendar/Calendar';
+import { Dropdown } from '../../components/dropdown/Dropdown';
 import { CalendarDoc } from './CalendarDoc';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { addLocale } from '../../components/api/Locale';
@@ -35,6 +36,7 @@ export class CalendarDemo extends Component {
             date14: null,
             date15: null,
             date16: null,
+            date17: null,
             dates1: null,
             dates2: null,
             visible: false
@@ -51,6 +53,8 @@ export class CalendarDemo extends Component {
         this.invalidDates = [today];
 
         this.dateTemplate = this.dateTemplate.bind(this);
+        this.monthNavigatorTemplate = this.monthNavigatorTemplate.bind(this);
+        this.yearNavigatorTemplate = this.yearNavigatorTemplate.bind(this);
         this.onVisibleChange = this.onVisibleChange.bind(this);
 
         addLocale('es', {
@@ -73,6 +77,14 @@ export class CalendarDemo extends Component {
         }
 
         return date.day;
+    }
+
+    monthNavigatorTemplate(e) {
+        return <Dropdown value={e.value} options={e.options} onChange={(event) => e.onChange(event.originalEvent, event.value)} style={{ lineHeight: 1 }} />;
+    }
+
+    yearNavigatorTemplate(e) {
+        return <Dropdown value={e.value} options={e.options} onChange={(event) => e.onChange(event.originalEvent, event.value)} className="p-ml-2" style={{ lineHeight: 1 }} />;
     }
 
     onVisibleChange(e) {
@@ -164,10 +176,15 @@ export class CalendarDemo extends Component {
                                 <label htmlFor="controlled">Visibility Control</label>
                                 <Calendar id="controlled" value={this.state.date15} onChange={(e) => this.setState({ date15: e.value })} visible={this.state.visible} onVisibleChange={this.onVisibleChange} />
                             </div>
+                            <div className="p-field p-col-12 p-md-4">
+                                <label htmlFor="navigatorstemplate">Navigators Template</label>
+                                <Calendar id="navigatorstemplate" value={this.state.date16} onChange={(e) => this.setState({ date16: e.value })} monthNavigator yearNavigator yearRange="2010:2030"
+                                    monthNavigatorTemplate={this.monthNavigatorTemplate} yearNavigatorTemplate={this.yearNavigatorTemplate} />
+                            </div>
                         </div>
 
                         <h5>Inline</h5>
-                        <Calendar value={this.state.date16} onChange={(e) => this.setState({ date16: e.value })} inline showWeek />
+                        <Calendar value={this.state.date17} onChange={(e) => this.setState({ date17: e.value })} inline showWeek />
                     </div>
                 </div>
 
