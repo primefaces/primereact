@@ -3,6 +3,8 @@ import TooltipOptions from '../tooltip/TooltipOptions';
 
 type CalendarAppendToType = 'self' | HTMLElement | undefined | null;
 
+type CalendarVisibleType = 'outside' | 'dateselect' | undefined | null;
+
 interface CalendarChangeTargetOptions {
     name: string;
     id: string;
@@ -36,11 +38,18 @@ interface CalendarDateTemplateParams {
     selectable: boolean;
 }
 
+interface CalendarVisibleChangeParams {
+    visible: boolean;
+    type: CalendarVisibleType;
+    callback?(): void;
+}
+
 export interface CalendarProps {
     id?: string;
     inputRef?: React.Ref<HTMLInputElement>;
     name?: string;
     value?: Date | Date[];
+    visible?: boolean;
     viewDate?: Date;
     style?: object;
     className?: string;
@@ -101,6 +110,7 @@ export interface CalendarProps {
     dateTemplate?(e: CalendarDateTemplateParams): React.ReactNode;
     headerTemplate?(): React.ReactNode;
     footerTemplate?(): React.ReactNode;
+    onVisibleChange?(e: CalendarVisibleChangeParams): void;
     onFocus?(event: React.FocusEvent<HTMLInputElement>): void;
     onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
     onInput?(event: React.FormEvent<HTMLInputElement>): void;

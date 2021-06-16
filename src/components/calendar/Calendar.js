@@ -21,6 +21,7 @@ export class Calendar extends Component {
         inputRef: null,
         name: null,
         value: null,
+        visible: false,
         viewDate: null,
         style: null,
         className: null,
@@ -81,6 +82,7 @@ export class Calendar extends Component {
         headerTemplate: null,
         footerTemplate: null,
         transitionOptions: null,
+        onVisibleChange: null,
         onFocus: null,
         onBlur: null,
         onInput: null,
@@ -98,6 +100,7 @@ export class Calendar extends Component {
         inputRef: PropTypes.any,
         name: PropTypes.string,
         value: PropTypes.any,
+        visible: PropTypes.bool,
         viewDate: PropTypes.any,
         style: PropTypes.object,
         className: PropTypes.string,
@@ -158,6 +161,7 @@ export class Calendar extends Component {
         headerTemplate: PropTypes.func,
         footerTemplate: PropTypes.func,
         transitionOptions: PropTypes.object,
+        onVisibleChange: PropTypes.func,
         onFocus: PropTypes.func,
         onBlur: PropTypes.func,
         onInput: PropTypes.func,
@@ -302,7 +306,7 @@ export class Calendar extends Component {
             this.updateFocus();
         }
 
-        if ((prevProps.value !== this.props.value && (!this.viewStateChanged || !this.state.overlayVisible)) || this.isOptionChanged(prevProps)) {
+        if ((prevProps.value !== this.props.value && (!this.viewStateChanged || !this.isVisible())) || this.isOptionChanged(prevProps)) {
             this.updateInputfield(this.props.value);
         }
     }
@@ -339,6 +343,10 @@ export class Calendar extends Component {
         });
     }
 
+    isVisible() {
+        return this.props.onVisibleChange ? this.props.visible : this.state.overlayVisible;
+    }
+
     isOptionChanged(prevProps) {
         const optionProps = ['dateFormat', 'hourFormat', 'timeOnly', 'showSeconds', 'showMillisec'];
         return optionProps.some((option) => prevProps[option] !== this.props[option]);
@@ -357,7 +365,7 @@ export class Calendar extends Component {
         else {
             event.persist();
 
-            if (this.props.showOnFocus && !this.state.overlayVisible) {
+            if (this.props.showOnFocus && !this.isVisible()) {
                 this.showOverlay();
             }
 
@@ -395,7 +403,7 @@ export class Calendar extends Component {
 
             //tab
             case 9: {
-                if (this.state.overlayVisible) {
+                if (this.isVisible()) {
                     this.trapFocus(event);
                 }
 
@@ -462,7 +470,7 @@ export class Calendar extends Component {
     }
 
     onButtonClick() {
-        if (this.state.overlayVisible) {
+        if (this.isVisible()) {
             this.hideOverlay();
         }
         else {
@@ -489,7 +497,7 @@ export class Calendar extends Component {
 
             //escape
             case 27:
-                this.hideOverlay(this.reFocusInputField);
+                this.hideOverlay(null, this.reFocusInputField);
                 event.preventDefault();
                 break;
 
@@ -691,7 +699,7 @@ export class Calendar extends Component {
     onClearButtonClick(event) {
         this.updateModel(event, null);
         this.updateInputfield(null);
-        this.hideOverlay(this.reFocusInputField);
+        this.hideOverlay(null, this.reFocusInputField);
 
         if (this.props.onClearButtonClick) {
             this.props.onClearButtonClick(event);
@@ -1314,7 +1322,7 @@ export class Calendar extends Component {
 
             //escape
             case 27: {
-                this.hideOverlay(this.reFocusInputField)
+                this.hideOverlay(null, this.reFocusInputField)
                 event.preventDefault();
                 break;
             }
@@ -1411,7 +1419,7 @@ export class Calendar extends Component {
 
             //escape
             case 27: {
-                this.hideOverlay(this.reFocusInputField);
+                this.hideOverlay(null, this.reFocusInputField);
                 event.preventDefault();
                 break;
             }
@@ -1455,7 +1463,7 @@ export class Calendar extends Component {
 
         if (!this.props.inline && this.isSingleSelection() && (!this.props.showTime || this.props.hideOnDateTimeSelect)) {
             setTimeout(() => {
-                this.hideOverlay();
+                this.hideOverlay('dateselect');
             }, 100);
 
             if (this.touchUIMask) {
@@ -1562,18 +1570,33 @@ export class Calendar extends Component {
         }
     }
 
-    showOverlay() {
-        this.setState({ overlayVisible: true });
+    showOverlay(type) {
+        if (this.props.onVisibleChange)
+            this.props.onVisibleChange({
+                visible: true,
+                type
+            });
+        else
+            this.setState({ overlayVisible: true });
     }
 
-    hideOverlay(callback) {
-        this.setState({ overlayVisible: false }, () => {
+    hideOverlay(type, callback) {
+        const _hideCallback = () => {
             this.viewStateChanged = false;
             this.ignoreFocusFunctionality = false;
             if (callback) {
                 callback();
             }
-        });
+        };
+
+        if (this.props.onVisibleChange)
+            this.props.onVisibleChange({
+                visible: false,
+                type,
+                callback: _hideCallback
+            });
+        else
+            this.setState({ overlayVisible: false }, _hideCallback);
     }
 
     onOverlayEnter() {
@@ -1606,8 +1629,8 @@ export class Calendar extends Component {
     bindDocumentClickListener() {
         if (!this.documentClickListener) {
             this.documentClickListener = (event) => {
-                if (this.state.overlayVisible && this.isOutsideClicked(event)) {
-                    this.hideOverlay();
+                if (this.isVisible() && this.isOutsideClicked(event)) {
+                    this.hideOverlay('outside');
                 }
             };
 
@@ -1639,7 +1662,7 @@ export class Calendar extends Component {
     bindScrollListener() {
         if (!this.scrollHandler) {
             this.scrollHandler = new ConnectedOverlayScrollHandler(this.container, () => {
-                if (this.state.overlayVisible) {
+                if (this.isVisible()) {
                     this.hideOverlay();
                 }
             });
@@ -1665,7 +1688,7 @@ export class Calendar extends Component {
     }
 
     onWindowResize() {
-        if (this.state.overlayVisible && !DomHandler.isAndroid()) {
+        if (this.isVisible() && !DomHandler.isAndroid()) {
             this.hideOverlay();
         }
     }
@@ -3062,12 +3085,14 @@ export class Calendar extends Component {
         const buttonBar = this.renderButtonBar();
         const footer = this.renderFooter();
 
+        const isVisible = this.props.inline || this.isVisible();
+
         return (
             <span ref={(el) => this.container = el} id={this.props.id} className={className} style={this.props.style}>
                 {input}
                 {button}
                 <CalendarPanel ref={this.overlayRef} className={panelClassName} style={this.props.panelStyle} appendTo={this.props.appendTo} inline={this.props.inline} onClick={this.onPanelClick}
-                    in={this.props.inline || this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}
+                    in={isVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}
                     transitionOptions={this.props.transitionOptions}>
                     {datePicker}
                     {timePicker}
