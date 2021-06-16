@@ -34,8 +34,10 @@ export class CalendarDemo extends Component {
             date13: null,
             date14: null,
             date15: null,
+            date16: null,
             dates1: null,
-            dates2: null
+            dates2: null,
+            visible: false
         };
 
         this.minDate = new Date();
@@ -49,6 +51,7 @@ export class CalendarDemo extends Component {
         this.invalidDates = [today];
 
         this.dateTemplate = this.dateTemplate.bind(this);
+        this.onVisibleChange = this.onVisibleChange.bind(this);
 
         addLocale('es', {
             firstDayOfWeek: 1,
@@ -70,6 +73,12 @@ export class CalendarDemo extends Component {
         }
 
         return date.day;
+    }
+
+    onVisibleChange(e) {
+        this.setState((prevState) => ({
+            visible: e.type === 'dateselect' || !prevState.visible
+        }), e.callback);
     }
 
     render() {
@@ -151,10 +160,14 @@ export class CalendarDemo extends Component {
                                 <label htmlFor="mask">Mask</label>
                                 <Calendar id="mask" value={this.state.date14} onChange={(e) => this.setState({ date14: e.value })} mask="99/99/9999"/>
                             </div>
+                            <div className="p-field p-col-12 p-md-4">
+                                <label htmlFor="controlled">Visibility Control</label>
+                                <Calendar id="controlled" value={this.state.date15} onChange={(e) => this.setState({ date15: e.value })} visible={this.state.visible} onVisibleChange={this.onVisibleChange} />
+                            </div>
                         </div>
 
                         <h5>Inline</h5>
-                        <Calendar value={this.state.date15} onChange={(e) => this.setState({ date15: e.value })} inline showWeek />
+                        <Calendar value={this.state.date16} onChange={(e) => this.setState({ date16: e.value })} inline showWeek />
                     </div>
                 </div>
 

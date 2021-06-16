@@ -47,8 +47,10 @@ export class CalendarDemo extends Component {
             date13: null,
             date14: null,
             date15: null,
+            date16: null,
             dates1: null,
-            dates2: null
+            dates2: null,
+            visible: false
         };
 
         this.minDate = new Date();
@@ -62,6 +64,7 @@ export class CalendarDemo extends Component {
         this.invalidDates = [today];
 
         this.dateTemplate = this.dateTemplate.bind(this);
+        this.onVisibleChange = this.onVisibleChange.bind(this);
 
         addLocale('es', {
             firstDayOfWeek: 1,
@@ -83,6 +86,12 @@ export class CalendarDemo extends Component {
         }
 
         return date.day;
+    }
+
+    onVisibleChange(e) {
+        this.setState((prevState) => ({
+            visible: e.type === 'dateselect' || !prevState.visible
+        }), e.callback);
     }
 
     render() {
@@ -155,10 +164,14 @@ export class CalendarDemo extends Component {
                             <label htmlFor="mask">Mask</label>
                             <Calendar id="mask" value={this.state.date14} onChange={(e) => this.setState({ date14: e.value })} mask="99/99/9999"/>
                         </div>
+                        <div className="p-field p-col-12 p-md-4">
+                            <label htmlFor="controlled">Visibility Control</label>
+                            <Calendar id="controlled" value={this.state.date15} onChange={(e) => this.setState({ date15: e.value })} visible={this.state.visible} onVisibleChange={this.onVisibleChange} />
+                        </div>
                     </div>
 
                     <h5>Inline</h5>
-                    <Calendar value={this.state.date15} onChange={(e) => this.setState({ date15: e.value })} inline showWeek />
+                    <Calendar value={this.state.date16} onChange={(e) => this.setState({ date16: e.value })} inline showWeek />
                 </div>
             </div>
         );
@@ -198,9 +211,10 @@ const CalendarDemo = () => {
     const [date13, setDate13] = useState(null);
     const [date14, setDate14] = useState(null);
     const [date15, setDate15] = useState(null);
+    const [date16, setDate16] = useState(null);
     const [dates1, setDates1] = useState(null);
     const [dates2, setDates2] = useState(null);
-
+    const [visible, setVisible] = useState(false);
 
     let minDate = new Date();
     minDate.setMonth(prevMonth);
@@ -223,7 +237,7 @@ const CalendarDemo = () => {
         clear: 'Claro'
     });
 
-    const dateTemplate = (date: any) => {
+    const dateTemplate = (date) => {
         if (date.day > 10 && date.day < 15) {
             return (
                 <strong style={{ textDecoration: 'line-through' }}>{date.day}</strong>
@@ -231,6 +245,13 @@ const CalendarDemo = () => {
         }
 
         return date.day;
+    }
+
+    const onVisibleChange = (e) {
+        setVisible(e.type === 'dateselect' || !visible);
+        if (e.callback) {
+            e.callback();
+        }
     }
 
     return (
@@ -302,10 +323,14 @@ const CalendarDemo = () => {
                         <label htmlFor="mask">Mask</label>
                         <Calendar id="mask" value={date14} onChange={(e) => setDate14(e.value)} mask="99/99/9999"/>
                     </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <label htmlFor="controlled">Visibility Control</label>
+                        <Calendar id="controlled" value={date15} onChange={(e) => setDate15(e.value)} visible={visible} onVisibleChange={onVisibleChange} />
+                    </div>
                 </div>
 
                 <h5>Inline</h5>
-                <Calendar value={date15} onChange={(e) => setDate15(e.value)} inline showWeek />
+                <Calendar value={date16} onChange={(e) => setDate16(e.value)} inline showWeek />
             </div>
         </div>
     );
@@ -344,9 +369,10 @@ const CalendarDemo = () => {
     const [date13, setDate13] = useState<Date | Date[] | undefined>(undefined);
     const [date14, setDate14] = useState<Date | Date[] | undefined>(undefined);
     const [date15, setDate15] = useState<Date | Date[] | undefined>(undefined);
+    const [date16, setDate16] = useState<Date | Date[] | undefined>(undefined);
     const [dates1, setDates1] = useState<Date | Date[] | undefined>(undefined);
     const [dates2, setDates2] = useState<Date | Date[] | undefined>(undefined);
-
+    const [visible, setVisible] = useState<boolean>(false);
 
     let minDate = new Date();
     minDate.setMonth(prevMonth);
@@ -377,6 +403,13 @@ const CalendarDemo = () => {
         }
 
         return date.day;
+    }
+
+    const onVisibleChange = (e: any) {
+        setVisible(e.type === 'dateselect' || !visible);
+        if (e.callback) {
+            e.callback();
+        }
     }
 
     return (
@@ -448,10 +481,14 @@ const CalendarDemo = () => {
                         <label htmlFor="mask">Mask</label>
                         <Calendar id="mask" value={date14} onChange={(e) => setDate14(e.value)} mask="99/99/9999"/>
                     </div>
+                    <div className="p-field p-col-12 p-md-4">
+                        <label htmlFor="controlled">Visibility Control</label>
+                        <Calendar id="controlled" value={date15} onChange={(e) => setDate15(e.value)} visible={visible} onVisibleChange={onVisibleChange} />
+                    </div>
                 </div>
 
                 <h5>Inline</h5>
-                <Calendar value={date15} onChange={(e) => setDate15(e.value)} inline showWeek />
+                <Calendar value={date16} onChange={(e) => setDate16(e.value)} inline showWeek />
             </div>
         </div>
     );
