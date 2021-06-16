@@ -132,7 +132,6 @@ primereact/resources/themes/arya-purple/theme.css
 primereact/resources/themes/nova/theme.css
 primereact/resources/themes/nova-alt/theme.css
 primereact/resources/themes/nova-accent/theme.css
-primereact/resources/themes/nova-vue/theme.css
 primereact/resources/themes/luna-amber/theme.css
 primereact/resources/themes/luna-blue/theme.css
 primereact/resources/themes/luna-green/theme.css
