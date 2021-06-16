@@ -723,6 +723,12 @@ dateTemplate(date) {
                                         <td>Value of the component.</td>
                                     </tr>
                                     <tr>
+                                        <td>visible</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>Specifies the visibility of the overlay.</td>
+                                    </tr>
+                                    <tr>
                                         <td>viewDate</td>
                                         <td>date</td>
                                         <td>null</td>
@@ -1125,6 +1131,14 @@ dateTemplate(date) {
                                         <td>onHide</td>
                                         <td>-</td>
                                         <td>Callback to invoke when overlay panel or modal becomes hidden.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onVisibleChange</td>
+                                        <td>event.visible: Whether the overlay is visible  <br />
+                                            event.type: Action type when the overlay is visible/hidden <br />
+                                            event.callback: It is used to refocus the input field in some cases when the overlay is hidden.
+                                        </td>
+                                        <td>Callback to invoke when visible is changed.</td>
                                     </tr>
                                 </tbody>
                             </table>
