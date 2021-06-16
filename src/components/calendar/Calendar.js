@@ -13,6 +13,7 @@ import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 import { mask } from '../utils/Mask';
 import { ZIndexUtils } from '../utils/ZIndexUtils';
 import PrimeReact from '../api/PrimeReact';
+import ObjectUtils from '../utils/ObjectUtils';
 
 export class Calendar extends Component {
 
@@ -81,6 +82,8 @@ export class Calendar extends Component {
         dateTemplate: null,
         headerTemplate: null,
         footerTemplate: null,
+        monthNavigatorTemplate: null,
+        yearNavigatorTemplate: null,
         transitionOptions: null,
         onVisibleChange: null,
         onFocus: null,
@@ -160,6 +163,8 @@ export class Calendar extends Component {
         dateTemplate: PropTypes.func,
         headerTemplate: PropTypes.func,
         footerTemplate: PropTypes.func,
+        monthNavigatorTemplate: PropTypes.func,
+        yearNavigatorTemplate: PropTypes.func,
         transitionOptions: PropTypes.object,
         onVisibleChange: PropTypes.func,
         onFocus: PropTypes.func,
@@ -667,18 +672,18 @@ export class Calendar extends Component {
         event.preventDefault();
     }
 
-    onMonthDropdownChange(event) {
+    onMonthDropdownChange(event, value) {
         const currentViewDate = this.getViewDate();
         let newViewDate = new Date(currentViewDate.getTime());
-        newViewDate.setMonth(parseInt(event.target.value, 10));
+        newViewDate.setMonth(parseInt(value, 10));
 
         this.updateViewDate(event, newViewDate);
     }
 
-    onYearDropdownChange(event) {
+    onYearDropdownChange(event, value) {
         const currentViewDate = this.getViewDate();
         let newViewDate = new Date(currentViewDate.getTime());
-        newViewDate.setFullYear(parseInt(event.target.value, 10));
+        newViewDate.setFullYear(parseInt(value, 10));
 
         this.updateViewDate(event, newViewDate);
     }
@@ -708,6 +713,8 @@ export class Calendar extends Component {
 
     onPanelClick(event) {
         if (!this.props.inline) {
+            this.isPanelClicked = true;
+
             OverlayEventBus.emit('overlay-click', {
                 originalEvent: event,
                 target: this.container
@@ -1571,13 +1578,23 @@ export class Calendar extends Component {
     }
 
     showOverlay(type) {
-        if (this.props.onVisibleChange)
+        if (this.props.onVisibleChange) {
             this.props.onVisibleChange({
                 visible: true,
                 type
             });
-        else
-            this.setState({ overlayVisible: true });
+        }
+        else {
+            this.setState({ overlayVisible: true }, () => {
+                this.overlayEventListener = (e) => {
+                    if (!this.isOutsideClicked(e.target)) {
+                        this.isPanelClicked = true;
+                    }
+                };
+
+                OverlayEventBus.on('overlay-click', this.overlayEventListener);
+            });
+        }
     }
 
     hideOverlay(type, callback) {
@@ -1587,6 +1604,9 @@ export class Calendar extends Component {
             if (callback) {
                 callback();
             }
+
+            OverlayEventBus.off('overlay-click', this.overlayEventListener);
+            this.overlayEventListener = null;
         };
 
         if (this.props.onVisibleChange)
@@ -1629,9 +1649,11 @@ export class Calendar extends Component {
     bindDocumentClickListener() {
         if (!this.documentClickListener) {
             this.documentClickListener = (event) => {
-                if (this.isVisible() && this.isOutsideClicked(event)) {
+                if (!this.isPanelClicked && this.isVisible() && this.isOutsideClicked(event.target)) {
                     this.hideOverlay('outside');
                 }
+
+                this.isPanelClicked = false;
             };
 
             document.addEventListener('mousedown', this.documentClickListener);
@@ -1677,14 +1699,14 @@ export class Calendar extends Component {
         }
     }
 
-    isOutsideClicked(event) {
-        return this.container && !(this.container.isSameNode(event.target) || this.isNavIconClicked(event) ||
-            this.container.contains(event.target) || (this.overlayRef && this.overlayRef.current.contains(event.target)));
+    isOutsideClicked(target) {
+        return this.container && !(this.container.isSameNode(target) || this.isNavIconClicked(target) ||
+            this.container.contains(target) || (this.overlayRef && this.overlayRef.current.contains(target)));
     }
 
-    isNavIconClicked(event) {
-        return (DomHandler.hasClass(event.target, 'p-datepicker-prev') || DomHandler.hasClass(event.target, 'p-datepicker-prev-icon')
-            || DomHandler.hasClass(event.target, 'p-datepicker-next') || DomHandler.hasClass(event.target, 'p-datepicker-next-icon'));
+    isNavIconClicked(target) {
+        return (DomHandler.hasClass(target, 'p-datepicker-prev') || DomHandler.hasClass(target, 'p-datepicker-prev-icon')
+            || DomHandler.hasClass(target, 'p-datepicker-next') || DomHandler.hasClass(target, 'p-datepicker-next-icon'));
     }
 
     onWindowResize() {
@@ -2585,19 +2607,31 @@ export class Calendar extends Component {
         if (this.props.monthNavigator && this.props.view !== 'month') {
             const viewDate = this.getViewDate();
             const viewMonth = viewDate.getMonth();
-
-            return (
-                <select className="p-datepicker-month" onChange={this.onMonthDropdownChange} value={viewMonth}>
+            const displayedMonthNames = monthNames.filter((month, index) => (!this.isInMinYear(viewDate) || index >= this.props.minDate.getMonth()) && (!this.isInMaxYear(viewDate) || index <= this.props.maxDate.getMonth()));
+            const content = (
+                <select className="p-datepicker-month" onChange={(e) => this.onMonthDropdownChange(e, e.target.value)} value={viewMonth}>
                     {
-                        monthNames.map((month, index) => {
-                            if ((!this.isInMinYear(viewDate) || index >= this.props.minDate.getMonth()) && (!this.isInMaxYear(viewDate) || index <= this.props.maxDate.getMonth())) {
-                                return <option key={month} value={index}>{month}</option>
-                            }
-                            return null;
-                        })
+                        displayedMonthNames.map((month, index) => <option key={month} value={index}>{month}</option>)
                     }
                 </select>
             );
+
+            if (this.props.monthNavigatorTemplate) {
+                const options = displayedMonthNames.map((name, i) => ({ label: name, value: i, index: i }));
+                const defaultContentOptions = {
+                    onChange: this.onMonthDropdownChange,
+                    className: 'p-datepicker-month',
+                    value: viewMonth,
+                    names: displayedMonthNames,
+                    options,
+                    element: content,
+                    props: this.props
+                };
+
+                return ObjectUtils.getJSXElement(this.props.monthNavigatorTemplate, defaultContentOptions);
+            }
+
+            return content;
         }
         else {
             return (
@@ -2617,21 +2651,33 @@ export class Calendar extends Component {
                 yearOptions.push(i);
             }
 
-            let viewDate = this.getViewDate();
-            let viewYear = viewDate.getFullYear();
-
-            return (
+            const viewDate = this.getViewDate();
+            const viewYear = viewDate.getFullYear();
+            const displayedYearNames = yearOptions.filter(year => (!(this.props.minDate && this.props.minDate.getFullYear() > year) && !(this.props.maxDate && this.props.maxDate.getFullYear() < year)));
+            const content = (
                 <select className="p-datepicker-year" onChange={this.onYearDropdownChange} value={viewYear}>
                     {
-                        yearOptions.map(year => {
-                            if (!(this.props.minDate && this.props.minDate.getFullYear() > year) && !(this.props.maxDate && this.props.maxDate.getFullYear() < year)) {
-                                return <option key={year} value={year}>{year}</option>
-                            }
-                            return null;
-                        })
+                        displayedYearNames.map(year => <option key={year} value={year}>{year}</option>)
                     }
                 </select>
             );
+
+            if (this.props.yearNavigatorTemplate) {
+                const options = displayedYearNames.map((name, i) => ({ label: name, value: name, index: i }));
+                const defaultContentOptions = {
+                    onChange: this.onYearDropdownChange,
+                    className: 'p-datepicker-year',
+                    value: viewYear,
+                    names: displayedYearNames,
+                    options,
+                    element: content,
+                    props: this.props
+                };
+
+                return ObjectUtils.getJSXElement(this.props.yearNavigatorTemplate, defaultContentOptions);
+            }
+
+            return content;
         }
         else {
             return (

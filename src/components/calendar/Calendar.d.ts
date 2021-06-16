@@ -44,6 +44,24 @@ interface CalendarVisibleChangeParams {
     callback?(): void;
 }
 
+interface CalendarNavigatorTemplateChangeParams {
+    event: React.SyntheticEvent;
+    value: string | number | undefined | null;
+}
+interface CalendarNavigatorTemplateParams {
+    onChange(e: CalendarNavigatorTemplateChangeParams): void;
+    className: string;
+    value: string | number | undefined | null;
+    names: any[];
+    options: any[];
+    element: React.ReactNode;
+    props: any;
+}
+
+interface CalendarMonthNavigatorTemplateParams extends CalendarNavigatorTemplateParams {}
+
+interface CalendarYearNavigatorTemplateParams extends CalendarNavigatorTemplateParams {}
+
 export interface CalendarProps {
     id?: string;
     inputRef?: React.Ref<HTMLInputElement>;
@@ -110,6 +128,8 @@ export interface CalendarProps {
     dateTemplate?(e: CalendarDateTemplateParams): React.ReactNode;
     headerTemplate?(): React.ReactNode;
     footerTemplate?(): React.ReactNode;
+    monthNavigatorTemplate?(e: CalendarMonthNavigatorTemplateParams): React.ReactNode;
+    yearNavigatorTemplate?(e: CalendarYearNavigatorTemplateParams): React.ReactNode;
     onVisibleChange?(e: CalendarVisibleChangeParams): void;
     onFocus?(event: React.FocusEvent<HTMLInputElement>): void;
     onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
