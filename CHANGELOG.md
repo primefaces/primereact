@@ -1,5 +1,25 @@
 # Changelog
 
+## [6.4.1](https://github.com/primefaces/primereact/tree/6.4.1) (2021-06-16)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/6.4.0...6.4.1)
+
+**Implemented New Features and Enhancements:**
+
+- Responsive TabMenu and Breadcrumb [\#2120](https://github.com/primefaces/primereact/issues/2120)
+- Add visible and onVisibleChange properties to Calendar [\#2119](https://github.com/primefaces/primereact/issues/2119)
+- Add monthNavigatorTemplate and yearNavigatorTemplate properties to Calendar [\#2116](https://github.com/primefaces/primereact/issues/2116)
+- Toast center positioning enhancement [\#2108](https://github.com/primefaces/primereact/issues/2108)
+
+**Fixed bugs:**
+
+- InputMask cannot read property 'length' of null [\#2113](https://github.com/primefaces/primereact/issues/2113)
+- Dropdown search crashes when no match with VirtualScrollar [\#2112](https://github.com/primefaces/primereact/issues/2112)
+- The panel of Calendar is not aligned inside editable DataTable [\#2111](https://github.com/primefaces/primereact/issues/2111)
+- MultiSelect filtering broken in v6.4.0 [\#2110](https://github.com/primefaces/primereact/issues/2110)
+- DataTable - Headers of Columns with exportable at false are exported [\#2107](https://github.com/primefaces/primereact/issues/2107)
+- ColorPicker doesn't change its color \(react-hook-form\) [\#2071](https://github.com/primefaces/primereact/issues/2071)
+
 ## [6.4.0](https://github.com/primefaces/primereact/tree/6.4.0) (2021-06-11)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/6.3.2...6.4.0)

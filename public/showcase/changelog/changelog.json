@@ -1,4 +1,79 @@
 {
+    "6.4.1": {
+        "calendar": [
+            {
+                "number": 2119,
+                "title": "Add visible and onVisibleChange properties to Calendar",
+                "url": "https://github.com/primefaces/primereact/issues/2119"
+            },
+            {
+                "number": 2116,
+                "title": "Add monthNavigatorTemplate and yearNavigatorTemplate properties to Calendar",
+                "url": "https://github.com/primefaces/primereact/issues/2116"
+            }
+        ],
+        "inputmask": [
+            {
+                "number": 2113,
+                "title": "InputMask cannot read property 'length' of null",
+                "url": "https://github.com/primefaces/primereact/issues/2113"
+            }
+        ],
+        "breadcrumb": [
+            {
+                "number": 2120,
+                "title": "Responsive TabMenu and Breadcrumb",
+                "url": "https://github.com/primefaces/primereact/issues/2120"
+            }
+        ],
+        "tabmenu": [
+            {
+                "number": 2120,
+                "title": "Responsive TabMenu and Breadcrumb",
+                "url": "https://github.com/primefaces/primereact/issues/2120"
+            }
+        ],
+        "multiselect": [
+            {
+                "number": 2110,
+                "title": "MultiSelect filtering broken in v6.4.0",
+                "url": "https://github.com/primefaces/primereact/issues/2110"
+            }
+        ],
+        "toast": [
+            {
+                "number": 2108,
+                "title": "Toast center positioning enhancement",
+                "url": "https://github.com/primefaces/primereact/issues/2108"
+            }
+        ],
+        "datatable": [
+            {
+                "number": 2111,
+                "title": "The panel of Calendar is not aligned inside editable DataTable",
+                "url": "https://github.com/primefaces/primereact/issues/2111"
+            },
+            {
+                "number": 2107,
+                "title": "DataTable - Headers of Columns with exportable at false are exported",
+                "url": "https://github.com/primefaces/primereact/issues/2107"
+            }
+        ],
+        "dropdown": [
+            {
+                "number": 2112,
+                "title": "Dropdown search crashes when no match with VirtualScrollar",
+                "url": "https://github.com/primefaces/primereact/issues/2112"
+            }
+        ],
+        "colorpicker": [
+            {
+                "number": 2071,
+                "title": "ColorPicker doesn't change its color (react-hook-form)",
+                "url": "https://github.com/primefaces/primereact/issues/2071"
+            }
+        ]
+    },
     "6.4.0": {
         "breadcrumb": [
             {
