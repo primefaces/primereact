@@ -20,6 +20,7 @@ import AppContentContext from './AppContentContext';
 import { Toast } from './components/toast/Toast';
 import PrimeReact from './components/api/PrimeReact';
 import { AppChangelogDialog } from './AppChangelogDialog';
+import { VersionService } from './showcase/service/VersionService';
 
 export class App extends Component {
 
@@ -37,11 +38,12 @@ export class App extends Component {
             themeCategory: null,
             menuMode: null,
             sidebarActive: false,
-            newsActive: this.isNewsStorageExpired(),
+            newsActive: false,
             configuratorActive: false,
             changelogActive: false,
             searchVal: null,
-            isRippleConfigDisabled: false
+            isRippleConfigDisabled: false,
+            versions: []
         };
 
         this.onThemeChange = this.onThemeChange.bind(this);
@@ -54,6 +56,8 @@ export class App extends Component {
 
         this.showChangelogDialog = this.showChangelogDialog.bind(this);
         this.hideChangelogDialog = this.hideChangelogDialog.bind(this);
+
+        this.versionService = new VersionService();
 
         PrimeReact.ripple = false;
     }
@@ -83,6 +87,11 @@ export class App extends Component {
                 dark
             });
         }
+
+        this.versionService.getVersions().then(data => this.setState({
+            versions: data,
+            newsActive: (data && data[0].news) && this.isNewsStorageExpired(),
+        }));
     }
 
     onThemeChange(event) {
@@ -242,7 +251,7 @@ export class App extends Component {
 
                 <AppNews newsActive={this.state.newsActive} onHideNews={this.onHideNews}/>
 
-                <AppTopbar onMenuButtonClick={this.onMenuButtonClick} onThemeChange={this.onThemeChange} theme={this.state.theme} darkTheme={this.state.darkTheme} />
+                <AppTopbar onMenuButtonClick={this.onMenuButtonClick} onThemeChange={this.onThemeChange} theme={this.state.theme} darkTheme={this.state.darkTheme} versions={this.state.versions} />
 
                 <AppMenu active={this.state.sidebarActive} onMenuItemClick={this.onMenuItemClick} />
 

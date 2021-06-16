@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 import { Tooltip } from './components/tooltip/Tooltip';
 import { Badge } from './components/badge/Badge';
-import { VersionService } from './showcase/service/VersionService';
 
 export class AppTopbar extends Component {
 
@@ -26,10 +25,8 @@ export class AppTopbar extends Component {
         super(props);
 
         this.state = {
-            activeMenuIndex: null,
-            versions: []
+            activeMenuIndex: null
         };
-        this.versionService = new VersionService();
         this.version = require('../package.json') && require('../package.json').version;
 
         this.logoMap = {
@@ -83,10 +80,6 @@ export class AppTopbar extends Component {
         this.templatesOverlayRef = React.createRef();
         this.resourcesOverlayRef = React.createRef();
         this.versionsOverlayRef = React.createRef();
-    }
-
-    componentDidMount() {
-        this.versionService.getVersions().then(data => this.setState({ versions: data }));
     }
 
     onMenuButtonClick(event) {
@@ -332,7 +325,7 @@ export class AppTopbar extends Component {
                             unmountOnExit onEntered={this.onMenuEnter}>
                             <ul ref={this.versionsOverlayRef} role="menu" aria-label="Versions" style={{width: '100%'}}>
                                 {
-                                        this.state.versions.map(version => {
+                                        this.props.versions.map(version => {
                                             return (
                                                 <li role="none" key={version.version}>
                                                     <a href={version.url} role="menuitem">
