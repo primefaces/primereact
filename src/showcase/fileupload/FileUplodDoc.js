@@ -251,7 +251,7 @@ export const FileUploadDemo = () => {
         )
     }
 
-    emptyTemplate() {
+    const emptyTemplate = () => {
         return (
             <div className="p-d-flex p-ai-center p-dir-col">
                 <i className="pi pi-image p-mt-3 p-p-5" style={{'fontSize': '5em', borderRadius: '50%', backgroundColor: 'var(--surface-b)', color: 'var(--surface-d)'}}></i>
@@ -381,7 +381,7 @@ export const FileUploadDemo = () => {
         )
     }
 
-    emptyTemplate() {
+    const emptyTemplate = () => {
         return (
             <div className="p-d-flex p-ai-center p-dir-col">
                 <i className="pi pi-image p-mt-3 p-p-5" style={{'fontSize': '5em', borderRadius: '50%', backgroundColor: 'var(--surface-b)', color: 'var(--surface-d)'}}></i>
