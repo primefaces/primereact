@@ -713,8 +713,6 @@ export class Calendar extends Component {
 
     onPanelClick(event) {
         if (!this.props.inline) {
-            this.isPanelClicked = true;
-
             OverlayEventBus.emit('overlay-click', {
                 originalEvent: event,
                 target: this.container
@@ -1588,7 +1586,7 @@ export class Calendar extends Component {
             this.setState({ overlayVisible: true }, () => {
                 this.overlayEventListener = (e) => {
                     if (!this.isOutsideClicked(e.target)) {
-                        this.isPanelClicked = true;
+                        this.isOverlayClicked = true;
                     }
                 };
 
@@ -1601,6 +1599,8 @@ export class Calendar extends Component {
         const _hideCallback = () => {
             this.viewStateChanged = false;
             this.ignoreFocusFunctionality = false;
+            this.isOverlayClicked = false;
+
             if (callback) {
                 callback();
             }
@@ -1649,20 +1649,20 @@ export class Calendar extends Component {
     bindDocumentClickListener() {
         if (!this.documentClickListener) {
             this.documentClickListener = (event) => {
-                if (!this.isPanelClicked && this.isVisible() && this.isOutsideClicked(event.target)) {
+                if (!this.isOverlayClicked && this.isVisible() && this.isOutsideClicked(event.target)) {
                     this.hideOverlay('outside');
                 }
 
-                this.isPanelClicked = false;
+                this.isOverlayClicked = false;
             };
 
-            document.addEventListener('mousedown', this.documentClickListener);
+            document.addEventListener('click', this.documentClickListener);
         }
     }
 
     unbindDocumentClickListener() {
         if (this.documentClickListener) {
-            document.removeEventListener('mousedown', this.documentClickListener);
+            document.removeEventListener('click', this.documentClickListener);
             this.documentClickListener = null;
         }
     }
