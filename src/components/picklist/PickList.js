@@ -196,10 +196,10 @@ export class PickList extends Component {
             this.setState({ [stateKey]: e.value });
         }
 
-        if (this.state.sourceSelection.length && stateKey === 'targetSelection') {
+        if (this.state.sourceSelection && this.state.sourceSelection.length && stateKey === 'targetSelection') {
             this.setState({ sourceSelection: [] })
         }
-        else if (this.state.targetSelection.length && stateKey === 'sourceSelection') {
+        else if (this.state.targetSelection && this.state.targetSelection.length && stateKey === 'sourceSelection') {
             this.setState({ targetSelection: [] })
         }
     }
