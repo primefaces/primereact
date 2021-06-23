@@ -31,7 +31,7 @@ describe('Dialog Component', () => {
     })
 
     test('should display the Dialog', () => {
-        const { container, getByTestId } = render(<DialogTestComponentr />)
+        const { container, getByTestId } = render(<DialogTestComponent />)
 
         fireEvent.click(getByTestId('test-button'));
         expect(container.parentElement.querySelector(".p-dialog")).toBeInTheDocument();
