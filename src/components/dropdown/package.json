@@ -1,0 +1,6 @@
+{
+    "main": "./dropdown.cjs.js",
+    "module": "./dropdown.esm.js",
+    "unpkg": "./dropdown.min.js",
+    "types": "./dropdown.d.ts"
+}

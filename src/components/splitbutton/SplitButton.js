@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '../button/Button';
-import { classNames } from '../utils/ClassNames';
-import DomHandler from '../utils/DomHandler';
+import { DomHandler, ObjectUtils, classNames, UniqueComponentId, ConnectedOverlayScrollHandler, ZIndexUtils } from '../utils/Utils';
 import { SplitButtonItem } from './SplitButtonItem';
 import { SplitButtonPanel } from './SplitButtonPanel';
 import { tip } from '../tooltip/Tooltip';
-import UniqueComponentId from '../utils/UniqueComponentId';
-import ObjectUtils from '../utils/ObjectUtils';
-import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
-import { ZIndexUtils } from '../utils/ZIndexUtils';
-import PrimeReact from '../api/PrimeReact';
+import PrimeReact from '../api/Api';
 
 export class SplitButton extends Component {
 

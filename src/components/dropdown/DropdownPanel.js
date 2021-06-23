@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import ObjectUtils from '../utils/ObjectUtils';
+import { ObjectUtils, classNames } from '../utils/Utils';
 import { DropdownItem } from './DropdownItem';
-import { classNames } from '../utils/ClassNames';
-import { CSSTransition } from '../transition/CSSTransition';
+import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 

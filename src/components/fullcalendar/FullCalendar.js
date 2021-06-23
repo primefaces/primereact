@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ObjectUtils from '../utils/ObjectUtils';
+import { ObjectUtils } from '../utils/Utils';
 
 export class FullCalendar extends Component {
 

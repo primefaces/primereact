@@ -1,14 +1,10 @@
 import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
-import { classNames } from '../utils/ClassNames';
-import ObjectUtils from '../utils/ObjectUtils';
-import PrimeReact from '../api/PrimeReact';
-import { ZIndexUtils } from '../utils/ZIndexUtils';
+import { DomHandler, ObjectUtils, classNames, ZIndexUtils, ConnectedOverlayScrollHandler } from '../utils/Utils';
+import PrimeReact from '../api/Api';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
-import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import { Tree } from '../tree/Tree';
 import { TreeSelectPanel } from './TreeSelectPanel';
-import DomHandler from '../utils/DomHandler';
 import { Ripple } from '../ripple/Ripple';
 
 export class TreeSelect extends Component {

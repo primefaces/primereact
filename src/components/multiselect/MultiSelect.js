@@ -1,15 +1,10 @@
 import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
-import { classNames } from '../utils/ClassNames';
+import { DomHandler, FilterUtils, ObjectUtils, ZIndexUtils, classNames, ConnectedOverlayScrollHandler } from '../utils/Utils';
 import { tip } from '../tooltip/Tooltip';
-import DomHandler from '../utils/DomHandler';
-import FilterUtils from '../utils/FilterUtils';
-import ObjectUtils from '../utils/ObjectUtils';
 import { MultiSelectPanel } from './MultiSelectPanel';
-import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
-import { ZIndexUtils } from '../utils/ZIndexUtils';
-import PrimeReact from '../api/PrimeReact';
+import PrimeReact from '../api/Api';
 
 export class MultiSelect extends Component {
 

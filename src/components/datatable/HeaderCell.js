@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import {InputText} from '../inputtext/InputText';
-import { classNames } from '../utils/ClassNames';
-import {RowCheckbox} from './RowCheckbox';
-import DomHandler from '../utils/DomHandler';
+import { InputText } from '../inputtext/InputText';
+import { DomHandler, classNames } from '../utils/Utils';
+import { RowCheckbox } from './RowCheckbox';
 
 export class HeaderCell extends Component {
 
@@ -31,8 +30,8 @@ export class HeaderCell extends Component {
         const { field, sortField, sortable, sortFunction } = this.props.columnProps;
         if (!this.isSortableDisabled()) {
             let targetNode = event.target;
-            if (DomHandler.hasClass(targetNode, 'p-sortable-column') || DomHandler.hasClass(targetNode, 'p-column-title')
-                || DomHandler.hasClass(targetNode, 'p-sortable-column-icon') || DomHandler.hasClass(targetNode.parentElement, 'p-sortable-column-icon')) {
+            if (DomHandler.hasClass(targetNode, 'p-sortable-column') || DomHandler.hasClass(targetNode, 'p-column-title')
+                || DomHandler.hasClass(targetNode, 'p-sortable-column-icon') || DomHandler.hasClass(targetNode.parentElement, 'p-sortable-column-icon')) {
                 this.props.onSort({
                     originalEvent: event,
                     sortField: sortField || field,
@@ -50,7 +49,7 @@ export class HeaderCell extends Component {
         let filterValue = e.target.value;
 
         if (this.props.columnProps.filter && this.props.onFilter) {
-            if(this.filterTimeout) {
+            if (this.filterTimeout) {
                 clearTimeout(this.filterTimeout);
             }
 
@@ -68,7 +67,7 @@ export class HeaderCell extends Component {
     }
 
     onResizerMouseDown(event) {
-        if(this.props.resizableColumns && this.props.onColumnResizeStart) {
+        if (this.props.resizableColumns && this.props.onColumnResizeStart) {
             this.props.onColumnResizeStart({
                 originalEvent: event,
                 columnEl: event.target.parentElement,
@@ -80,7 +79,7 @@ export class HeaderCell extends Component {
     }
 
     onResizerClick(event) {
-        if(this.props.resizableColumns && this.props.onColumnResizerClick) {
+        if (this.props.resizableColumns && this.props.onColumnResizerClick) {
             this.props.onColumnResizerClick({
                 originalEvent: event,
                 element: event.currentTarget.parentElement,
@@ -92,7 +91,7 @@ export class HeaderCell extends Component {
     }
 
     onResizerDoubleClick(event) {
-        if(this.props.resizableColumns && this.props.onColumnResizerDoubleClick) {
+        if (this.props.resizableColumns && this.props.onColumnResizerDoubleClick) {
             this.props.onColumnResizerDoubleClick({
                 originalEvent: event,
                 element: event.currentTarget.parentElement,
@@ -103,7 +102,7 @@ export class HeaderCell extends Component {
         }
     }
 
-    onMouseDown(event) {
+    onMouseDown(event) {
         if (this.props.reorderableColumns && this.props.columnProps.reorderable) {
             if (event.target.nodeName !== 'INPUT')
                 this.el.draggable = true;
@@ -190,7 +189,7 @@ export class HeaderCell extends Component {
 
     getAriaSort(sorted, sortOrder) {
         if (this.props.columnProps.sortable) {
-            let sortIcon = sorted ? sortOrder < 0 ? 'pi-sort-amount-down' : 'pi-sort-amount-up-alt': 'pi-sort-alt';
+            let sortIcon = sorted ? sortOrder < 0 ? 'pi-sort-amount-down' : 'pi-sort-amount-up-alt' : 'pi-sort-alt';
             if (sortIcon === 'pi-sort-amount-down')
                 return 'descending';
             else if (sortIcon === 'pi-sort-amount-up-alt')
@@ -213,7 +212,7 @@ export class HeaderCell extends Component {
 
     renderSortIcon(sorted, sortOrder) {
         if (this.props.columnProps.sortable) {
-            let sortIcon = sorted ? sortOrder < 0 ? 'pi-sort-amount-down' : 'pi-sort-amount-up-alt': 'pi-sort-alt';
+            let sortIcon = sorted ? sortOrder < 0 ? 'pi-sort-amount-down' : 'pi-sort-amount-up-alt' : 'pi-sort-alt';
             let sortIconClassName = classNames('p-sortable-column-icon pi pi-fw', sortIcon);
 
             return (
@@ -237,8 +236,8 @@ export class HeaderCell extends Component {
         let filterElement, headerCheckbox;
 
         if (this.props.columnProps.filter && this.props.renderOptions.renderFilter) {
-            filterElement = this.props.columnProps.filterElement||<InputText onChange={this.onFilterChange} type={this.props.columnProps.filterType} value={this.state.filterValue}
-                        className="p-column-filter" placeholder={this.props.columnProps.filterPlaceholder} maxLength={this.props.columnProps.filterMaxLength} />;
+            filterElement = this.props.columnProps.filterElement || <InputText onChange={this.onFilterChange} type={this.props.columnProps.filterType} value={this.state.filterValue}
+                className="p-column-filter" placeholder={this.props.columnProps.filterPlaceholder} maxLength={this.props.columnProps.filterMaxLength} />;
         }
 
         if (this.props.columnProps.selectionMode === 'multiple' && this.props.renderOptions.renderHeaderCheckbox) {
@@ -247,7 +246,7 @@ export class HeaderCell extends Component {
 
         if (this.props.renderOptions.filterOnly) {
             return (
-                <th ref={(el) => this.el = el} role="columnheader" className={classNames('p-filter-column', this.props.columnProps.filterHeaderClassName)} style={this.props.columnProps.filterHeaderStyle||this.props.columnProps.style}
+                <th ref={(el) => this.el = el} role="columnheader" className={classNames('p-filter-column', this.props.columnProps.filterHeaderClassName)} style={this.props.columnProps.filterHeaderStyle || this.props.columnProps.style}
                     colSpan={this.props.columnProps.colSpan} rowSpan={this.props.columnProps.rowSpan}>
                     {filterElement}
                     {headerCheckbox}
@@ -262,18 +261,20 @@ export class HeaderCell extends Component {
             let sortOrder = 0;
             let resizer = this.props.resizableColumns && <span className="p-column-resizer p-clickable" onMouseDown={this.onResizerMouseDown} onClick={this.onResizerClick} onDoubleClick={this.onResizerDoubleClick}></span>;
 
-            if(singleSorted)
+            if (singleSorted)
                 sortOrder = this.props.sortOrder;
-            else if(multipleSorted)
+            else if (multipleSorted)
                 sortOrder = multiSortMetaData.order;
 
             let sorted = this.props.columnProps.sortable && (singleSorted || multipleSorted);
             let isSortableDisabled = this.isSortableDisabled();
-            let className = classNames({'p-sortable-column': this.props.columnProps.sortable,
-                            'p-highlight': sorted,
-                            'p-sortable-disabled': isSortableDisabled,
-                            'p-resizable-column': this.props.resizableColumns,
-                            'p-selection-column': this.props.columnProps.selectionMode}, this.props.columnProps.headerClassName||this.props.columnProps.className);
+            let className = classNames({
+                'p-sortable-column': this.props.columnProps.sortable,
+                'p-highlight': sorted,
+                'p-sortable-disabled': isSortableDisabled,
+                'p-resizable-column': this.props.resizableColumns,
+                'p-selection-column': this.props.columnProps.selectionMode
+            }, this.props.columnProps.headerClassName || this.props.columnProps.className);
 
             let sortIconElement = this.renderSortIcon(sorted, sortOrder);
             let ariaSortData = this.getAriaSort(sorted, sortOrder);
@@ -282,7 +283,7 @@ export class HeaderCell extends Component {
 
             return (
                 <th ref={(el) => this.el = el} role="columnheader" tabIndex={tabIndex}
-                    className={className} style={this.props.columnProps.headerStyle||this.props.columnProps.style} onClick={this.onClick} onMouseDown={this.onMouseDown} onKeyDown={this.onKeyDown}
+                    className={className} style={this.props.columnProps.headerStyle || this.props.columnProps.style} onClick={this.onClick} onMouseDown={this.onMouseDown} onKeyDown={this.onKeyDown}
                     colSpan={this.props.columnProps.colSpan} rowSpan={this.props.columnProps.rowSpan} aria-sort={ariaSortData}
                     onDragStart={this.onDragStart} onDragOver={this.onDragOver} onDragLeave={this.onDragLeave} onDrop={this.onDrop}>
                     {resizer}

@@ -1,0 +1,6 @@
+{
+    "main": "./fileupload.cjs.js",
+    "module": "./fileupload.esm.js",
+    "unpkg": "./fileupload.min.js",
+    "types": "./fileupload.d.ts"
+}

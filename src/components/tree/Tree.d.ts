@@ -1,5 +1,5 @@
 import * as React from 'react';
-import TreeNode from '../treenode/TreeNode';
+import TreeNode from '../treenode';
 
 type TreeSelectionModeType = 'single' | 'multiple' | 'checkbox';
 

@@ -1,0 +1,6 @@
+{
+    "main": "./knob.cjs.js",
+    "module": "./knob.esm.js",
+    "unpkg": "./knob.min.js",
+    "types": "./knob.d.ts"
+}

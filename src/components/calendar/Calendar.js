@@ -3,17 +3,11 @@ import PropTypes from 'prop-types';
 import { InputText } from '../inputtext/InputText';
 import { Button } from '../button/Button';
 import { CalendarPanel } from './CalendarPanel';
-import DomHandler from '../utils/DomHandler';
-import { classNames } from '../utils/ClassNames';
+import { DomHandler, ObjectUtils, classNames, ConnectedOverlayScrollHandler, mask, ZIndexUtils } from '../utils/Utils';
 import { tip } from '../tooltip/Tooltip';
 import { Ripple } from '../ripple/Ripple';
-import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
-import { localeOption, localeOptions } from '../api/Locale';
+import PrimeReact, { localeOption, localeOptions } from '../api/Api';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
-import { mask } from '../utils/Mask';
-import { ZIndexUtils } from '../utils/ZIndexUtils';
-import PrimeReact from '../api/PrimeReact';
-import ObjectUtils from '../utils/ObjectUtils';
 
 export class Calendar extends Component {
 

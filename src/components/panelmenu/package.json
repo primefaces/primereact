@@ -1,0 +1,6 @@
+{
+    "main": "./panelmenu.cjs.js",
+    "module": "./panelmenu.esm.js",
+    "unpkg": "./panelmenu.min.js",
+    "types": "./panelmenu.d.ts"
+}

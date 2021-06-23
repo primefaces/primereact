@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { classNames } from '../utils/ClassNames';
+import { ObjectUtils, DomHandler, classNames } from '../utils/Utils';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
-import ObjectUtils from '../utils/ObjectUtils';
-import DomHandler from '../utils/DomHandler';
 import { RowRadioButton } from './RowRadioButton';
 import { RowCheckbox } from './RowCheckbox';
 import { Ripple } from '../ripple/Ripple';

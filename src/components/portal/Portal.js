@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import PrimeReact from '../api/PrimeReact';
+import PrimeReact from '../api/Api';
 
 export class Portal extends Component {
 

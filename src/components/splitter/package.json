@@ -1,0 +1,6 @@
+{
+    "main": "./splitter.cjs.js",
+    "module": "./splitter.esm.js",
+    "unpkg": "./splitter.min.js",
+    "types": "./splitter.d.ts"
+}

@@ -1,0 +1,6 @@
+{
+    "main": "./fullcalendar.cjs.js",
+    "module": "./fullcalendar.esm.js",
+    "unpkg": "./fullcalendar.min.js",
+    "types": "./fullcalendar.d.ts"
+}

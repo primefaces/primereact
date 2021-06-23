@@ -1,3 +1,3 @@
-import EventBus from '../utils/EventBus';
+import { EventBus } from '../utils/Utils';
 
 export default EventBus();

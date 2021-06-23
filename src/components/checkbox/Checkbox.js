@@ -1,6 +1,6 @@
 import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
-import { classNames } from '../utils/ClassNames';
+import { classNames } from '../utils/Utils';
 import { tip } from '../tooltip/Tooltip';
 
 export class Checkbox extends Component {

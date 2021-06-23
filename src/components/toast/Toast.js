@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { classNames } from '../utils/ClassNames';
+import { classNames, ZIndexUtils } from '../utils/Utils';
 import { ToastMessage } from './ToastMessage';
 import { TransitionGroup } from 'react-transition-group';
-import { CSSTransition } from '../transition/CSSTransition';
-import { ZIndexUtils } from '../utils/ZIndexUtils';
+import { CSSTransition } from '../csstransition/CSSTransition';
 
 let messageIdx = 0;
 

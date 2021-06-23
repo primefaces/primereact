@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import { Button } from '../button/Button';
-import ObjectUtils from '../utils/ObjectUtils';
+import { ObjectUtils } from '../utils/Utils';
 
 export class OrderListControls extends Component {
 

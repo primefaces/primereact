@@ -1,0 +1,6 @@
+{
+    "main": "./treetable.cjs.js",
+    "module": "./treetable.esm.js",
+    "unpkg": "./treetable.min.js",
+    "types": "./treetable.d.ts"
+}

@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { classNames } from '../utils/ClassNames';
+import { classNames, DomHandler, ZIndexUtils } from '../utils/Utils';
 import { GalleriaItem } from './GalleriaItem';
 import { GalleriaThumbnails } from './GalleriaThumbnails';
-import DomHandler from '../utils/DomHandler';
-import { CSSTransition } from '../transition/CSSTransition';
+import { CSSTransition } from '../csstransition/CSSTransition';
 import { Ripple } from '../ripple/Ripple';
 import { Portal } from '../portal/Portal';
-import { ZIndexUtils } from '../utils/ZIndexUtils';
 
 export class Galleria extends Component {
 

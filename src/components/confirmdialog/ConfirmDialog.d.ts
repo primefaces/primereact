@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { DialogProps } from '../dialog/Dialog';
+import { DialogProps } from '../dialog';
 
 type ConfirmDialogTemplateType = React.ReactNode | ((options: ConfirmDialogOptions) => React.ReactNode);
 

@@ -1,9 +1,7 @@
 import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
-import { classNames } from '../utils/ClassNames';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 import { tip } from '../tooltip/Tooltip';
-import DomHandler from '../utils/DomHandler';
-import ObjectUtils from '../utils/ObjectUtils';
 
 class InputTextareaComponent extends Component {
 

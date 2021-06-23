@@ -1,10 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {OrderListControls} from './OrderListControls';
-import {OrderListSubList} from './OrderListSubList';
-import DomHandler from '../utils/DomHandler';
-import ObjectUtils from '../utils/ObjectUtils';
-import { classNames } from '../utils/ClassNames';
+import { OrderListControls } from './OrderListControls';
+import { OrderListSubList } from './OrderListSubList';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 
 export class OrderList extends Component {
 
@@ -64,13 +62,13 @@ export class OrderList extends Component {
                 selection = [event.value];
         }
 
-        this.setState({selection: selection});
+        this.setState({ selection: selection });
     }
 
     onItemKeyDown(event) {
         let listItem = event.originalEvent.currentTarget;
 
-        switch(event.originalEvent.which) {
+        switch (event.originalEvent.which) {
             //down
             case 40:
                 let nextItem = this.findNextItem(listItem);
@@ -79,7 +77,7 @@ export class OrderList extends Component {
                 }
 
                 event.originalEvent.preventDefault();
-            break;
+                break;
 
             //up
             case 38:
@@ -89,16 +87,16 @@ export class OrderList extends Component {
                 }
 
                 event.originalEvent.preventDefault();
-            break;
+                break;
 
             //enter
             case 13:
                 this.onItemClick(event);
                 event.originalEvent.preventDefault();
-            break;
+                break;
 
             default:
-            break;
+                break;
         }
     }
 
@@ -132,7 +130,7 @@ export class OrderList extends Component {
     }
 
     componentDidUpdate() {
-        if(this.reorderDirection) {
+        if (this.reorderDirection) {
             this.updateListScroll();
             this.reorderDirection = null;
         }
@@ -141,26 +139,26 @@ export class OrderList extends Component {
     updateListScroll() {
         let listItems = DomHandler.find(this.subList.listElement, '.p-orderlist-item.p-highlight');
 
-        if(listItems && listItems.length) {
-            switch(this.reorderDirection) {
+        if (listItems && listItems.length) {
+            switch (this.reorderDirection) {
                 case 'up':
                     DomHandler.scrollInView(this.subList.listElement, listItems[0]);
-                break;
+                    break;
 
                 case 'top':
                     this.subList.listElement.scrollTop = 0;
-                break;
+                    break;
 
                 case 'down':
                     DomHandler.scrollInView(this.subList.listElement, listItems[listItems.length - 1]);
-                break;
+                    break;
 
                 case 'bottom':
                     this.subList.listElement.scrollTop = this.subList.listElement.scrollHeight;
-                break;
+                    break;
 
                 default:
-                break;
+                    break;
             }
         }
     }
@@ -172,9 +170,9 @@ export class OrderList extends Component {
             <div ref={(el) => this.element = el} id={this.props.id} className={className} style={this.props.style}>
                 <OrderListControls value={this.props.value} selection={this.state.selection} onReorder={this.onReorder} />
                 <OrderListSubList ref={(el) => this.subList = el} value={this.props.value} selection={this.state.selection} onItemClick={this.onItemClick} onItemKeyDown={this.onItemKeyDown}
-                            itemTemplate={this.props.itemTemplate} header={this.props.header} listStyle={this.props.listStyle}
-                            dragdrop={this.props.dragdrop} onDragStart={this.onDragStart} onDragEnter={this.onDragEnter} onDragEnd={this.onDragEnd} onDragLeave={this.onDragEnter} onDrop={this.onDrop}
-                            onChange={this.props.onChange} tabIndex={this.props.tabIndex} />
+                    itemTemplate={this.props.itemTemplate} header={this.props.header} listStyle={this.props.listStyle}
+                    dragdrop={this.props.dragdrop} onDragStart={this.onDragStart} onDragEnter={this.onDragEnter} onDragEnd={this.onDragEnd} onDragLeave={this.onDragEnter} onDrop={this.onDrop}
+                    onChange={this.props.onChange} tabIndex={this.props.tabIndex} />
             </div>
         );
     }

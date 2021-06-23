@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import { classNames } from '../utils/ClassNames';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 import { Dialog } from '../dialog/Dialog';
 import { Button } from '../button/Button';
-import DomHandler from '../utils/DomHandler';
-import ObjectUtils from '../utils/ObjectUtils';
-import { localeOption } from '../api/Locale';
+import { localeOption } from '../api/Api';
 import { Portal } from '../portal/Portal';
 
 export function confirmDialog(props) {

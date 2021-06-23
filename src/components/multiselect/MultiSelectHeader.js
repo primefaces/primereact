@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { InputText } from '../inputtext/InputText';
 import { Checkbox } from '../checkbox/Checkbox';
 import { Ripple } from '../ripple/Ripple';
-import ObjectUtils from '../utils/ObjectUtils';
+import { ObjectUtils } from '../utils/Utils';
 
 export class MultiSelectHeader extends Component {
 

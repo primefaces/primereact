@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { classNames } from '../utils/ClassNames';
-import DomHandler from '../utils/DomHandler';
+import { DomHandler, classNames } from '../utils/Utils';
 
 export class SplitterPanel extends Component {
 

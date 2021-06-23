@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
-import DomHandler from '../utils/DomHandler';
-import { classNames } from '../utils/ClassNames';
+import { DomHandler, classNames } from '../utils/Utils';
 
 export class Slider extends Component {
 

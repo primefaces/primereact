@@ -1,0 +1,6 @@
+{
+    "main": "./tieredmenu.cjs.js",
+    "module": "./tieredmenu.esm.js",
+    "unpkg": "./tieredmenu.min.js",
+    "types": "./tieredmenu.d.ts"
+}

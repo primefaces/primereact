@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { MenuItem } from '../menuitem/MenuItem';
-import TooltipOptions from '../tooltip/TooltipOptions';
+import { MenuItem } from '../menuitem';
+import TooltipOptions from '../tooltip/tooltipoptions';
 
 type SplitButtonButtonTemplateType = React.ReactNode | ((props: SplitButtonProps) => React.ReactNode);
 

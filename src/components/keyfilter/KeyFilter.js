@@ -1,6 +1,6 @@
-import DomHandler from '../utils/DomHandler';
+import { DomHandler } from '../utils/Utils';
 
-export default class KeyFilter {
+export class KeyFilter {
 
     /* eslint-disable */
     static DEFAULT_MASKS = {
@@ -91,7 +91,7 @@ export default class KeyFilter {
     static validate(e, keyfilter) {
         let value = e.target.value,
         validatePattern = true;
-            
+
         if (value && !keyfilter.test(value)) {
             validatePattern = false;
         }

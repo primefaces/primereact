@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { classNames } from '../utils/ClassNames';
-import {Button} from '../button/Button';
+import { classNames } from '../utils/Utils';
+import { Button } from '../button/Button';
 
 export class InplaceDisplay extends Component {
 
@@ -47,7 +47,7 @@ export class Inplace extends Component {
         onToggle: PropTypes.func,
     };
 
-    constructor(props) {
+    constructor(props) {
         super(props);
         if (!this.props.onToggle) {
             this.state = {
@@ -65,7 +65,7 @@ export class Inplace extends Component {
             return;
         }
 
-        if(this.props.onOpen) {
+        if (this.props.onOpen) {
             this.props.onOpen(event);
         }
         if (this.props.onToggle) {
@@ -81,7 +81,7 @@ export class Inplace extends Component {
         }
     }
 
-    close(event) {
+    close(event) {
         if (this.props.onClose) {
             this.props.onClose(event);
         }
@@ -107,11 +107,11 @@ export class Inplace extends Component {
     }
 
     isActive() {
-        return this.props.onToggle ? this.props.active: this.state.active;
+        return this.props.onToggle ? this.props.active : this.state.active;
     }
 
     renderDisplay(content) {
-        const className = classNames('p-inplace-display', {'p-disabled': this.props.disabled});
+        const className = classNames('p-inplace-display', { 'p-disabled': this.props.disabled });
 
         return (
             <div className={className} onClick={this.open} onKeyDown={this.onDisplayKeyDown} tabIndex={this.props.tabIndex} aria-label={this.props.ariaLabel}>
@@ -157,7 +157,7 @@ export class Inplace extends Component {
     }
 
     render() {
-        const className = classNames('p-inplace p-component', {'p-inplace-closable': this.props.closable}, this.props.className);
+        const className = classNames('p-inplace p-component', { 'p-inplace-closable': this.props.closable }, this.props.className);
 
         return (
             <div className={className}>

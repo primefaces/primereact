@@ -1,8 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {Paginator} from '../paginator/Paginator';
-import { classNames } from '../utils/ClassNames';
-import ObjectUtils from '../utils/ObjectUtils';
+import { Paginator } from '../paginator/Paginator';
+import { ObjectUtils, classNames } from '../utils/Utils';
 import { Ripple } from '../ripple/Ripple';
 
 export class DataViewLayoutOptions extends Component {
@@ -38,8 +37,8 @@ export class DataViewLayoutOptions extends Component {
 
     render() {
         const className = classNames('p-dataview-layout-options p-selectbutton p-buttonset', this.props.className);
-        const buttonListClass = classNames('p-button p-button-icon-only', {'p-highlight': this.props.layout === 'list'});
-        const buttonGridClass = classNames('p-button p-button-icon-only', {'p-highlight': this.props.layout === 'grid'});
+        const buttonListClass = classNames('p-button p-button-icon-only', { 'p-highlight': this.props.layout === 'list' });
+        const buttonGridClass = classNames('p-button p-button-icon-only', { 'p-highlight': this.props.layout === 'grid' });
 
         return (
             <div id={this.props.id} style={this.props.style} className={className}>
@@ -92,7 +91,7 @@ export class DataView extends Component {
         alwaysShowPaginator: true,
         paginatorClassName: null,
         paginatorTemplate: 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown',
-        paginatorLeft:null,
+        paginatorLeft: null,
         paginatorRight: null,
         paginatorDropdownAppendTo: null,
         pageLinkSize: 5,
@@ -165,14 +164,14 @@ export class DataView extends Component {
 
     createPaginator(position) {
         const className = classNames('p-paginator-' + position, this.props.paginatorClassName);
-        const first = this.props.onPage ? this.props.first: this.state.first;
+        const first = this.props.onPage ? this.props.first : this.state.first;
         const rows = this.props.onPage ? this.props.rows : this.state.rows;
         const totalRecords = this.getTotalRecords();
 
         return (
             <Paginator first={first} rows={rows} pageLinkSize={this.props.pageLinkSize} className={className} onPageChange={this.onPageChange} template={this.props.paginatorTemplate}
-                        totalRecords={totalRecords} rowsPerPageOptions={this.props.rowsPerPageOptions} currentPageReportTemplate={this.props.currentPageReportTemplate}
-                        leftContent={this.props.paginatorLeft} rightContent={this.props.paginatorRight} alwaysShow={this.props.alwaysShowPaginator} dropdownAppendTo={this.props.paginatorDropdownAppendTo} />
+                totalRecords={totalRecords} rowsPerPageOptions={this.props.rowsPerPageOptions} currentPageReportTemplate={this.props.currentPageReportTemplate}
+                leftContent={this.props.paginatorLeft} rightContent={this.props.paginatorRight} alwaysShow={this.props.alwaysShowPaginator} dropdownAppendTo={this.props.paginatorDropdownAppendTo} />
         );
     }
 
@@ -237,7 +236,7 @@ export class DataView extends Component {
     }
 
     renderTopPaginator() {
-        if (this.props.paginator && (this.props.paginatorPosition !== 'bottom' || this.props.paginatorPosition === 'both')){
+        if (this.props.paginator && (this.props.paginatorPosition !== 'bottom' || this.props.paginatorPosition === 'both')) {
             return this.createPaginator('top');
         }
 
@@ -331,11 +330,11 @@ export class DataView extends Component {
 
     render() {
         const value = this.processData();
-        const className = classNames('p-dataview p-component', {'p-dataview-list': (this.props.layout === 'list'), 'p-dataview-grid': (this.props.layout === 'grid'), 'p-dataview-loading': this.props.loading}, this.props.className);
+        const className = classNames('p-dataview p-component', { 'p-dataview-list': (this.props.layout === 'list'), 'p-dataview-grid': (this.props.layout === 'grid'), 'p-dataview-loading': this.props.loading }, this.props.className);
         const loader = this.renderLoader();
         const topPaginator = this.renderTopPaginator();
-        const bottomPaginator = this.renderBottomPaginator() ;
-        const header =  this.renderHeader();
+        const bottomPaginator = this.renderBottomPaginator();
+        const header = this.renderHeader();
         const footer = this.renderFooter();
         const content = this.renderContent(value);
 

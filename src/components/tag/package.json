@@ -1,0 +1,6 @@
+{
+    "main": "./tag.cjs.js",
+    "module": "./tag.esm.js",
+    "unpkg": "./tag.min.js",
+    "types": "./tag.d.ts"
+}

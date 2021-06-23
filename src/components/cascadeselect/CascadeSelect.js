@@ -1,15 +1,11 @@
 import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
-import { classNames } from '../utils/ClassNames';
-import ObjectUtils from '../utils/ObjectUtils';
-import DomHandler from '../utils/DomHandler';
-import { CSSTransition } from '../transition/CSSTransition';
-import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
-import { CascadeSelectSub } from "./CascadeSelectSub";
+import { DomHandler, ObjectUtils, classNames, ConnectedOverlayScrollHandler, ZIndexUtils } from '../utils/Utils';
+import { CSSTransition } from '../csstransition/CSSTransition';
+import { CascadeSelectSub } from './CascadeSelectSub';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 import { Portal } from '../portal/Portal';
-import { ZIndexUtils } from '../utils/ZIndexUtils';
-import PrimeReact from '../api/PrimeReact';
+import PrimeReact from '../api/Api';
 
 export class CascadeSelect extends Component {
 

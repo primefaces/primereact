@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { classNames } from '../utils/ClassNames';
-import DomHandler from '../utils/DomHandler';
-import ObjectUtils from '../utils/ObjectUtils';
-import { CSSTransition } from '../transition/CSSTransition';
+import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
+import { CSSTransition } from '../csstransition/CSSTransition';
 import { Ripple } from '../ripple/Ripple';
-import { ZIndexUtils } from '../utils/ZIndexUtils';
 import { Portal } from '../portal/Portal';
 
 export class Sidebar extends Component {

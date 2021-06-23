@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { classNames } from '../utils/ClassNames';
+import { ObjectUtils, classNames } from '../utils/Utils';
 import { FirstPageLink } from './FirstPageLink';
 import { NextPageLink } from './NextPageLink';
 import { PrevPageLink } from './PrevPageLink';
@@ -8,7 +8,6 @@ import { LastPageLink } from './LastPageLink';
 import { PageLinks } from './PageLinks';
 import { RowsPerPageDropdown } from './RowsPerPageDropdown';
 import { CurrentPageReport } from './CurrentPageReport';
-import ObjectUtils from '../utils/ObjectUtils';
 
 export class Paginator extends Component {
 

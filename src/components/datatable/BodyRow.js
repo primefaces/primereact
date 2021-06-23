@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { classNames } from '../utils/ClassNames';
+import { DomHandler, classNames } from '../utils/Utils';
 import { BodyCell } from './BodyCell';
-import DomHandler from '../utils/DomHandler';
 
 export class BodyRow extends Component {
 

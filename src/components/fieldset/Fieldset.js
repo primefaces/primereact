@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { classNames } from '../utils/ClassNames';
-import UniqueComponentId from '../utils/UniqueComponentId';
-import { CSSTransition } from '../transition/CSSTransition';
+import { classNames, UniqueComponentId } from '../utils/Utils';
+import { CSSTransition } from '../csstransition/CSSTransition';
 import { Ripple } from '../ripple/Ripple';
 
 export class Fieldset extends Component {

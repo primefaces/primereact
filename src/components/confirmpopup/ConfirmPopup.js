@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import { classNames } from '../utils/ClassNames';
+import { DomHandler, ObjectUtils, classNames, ZIndexUtils, ConnectedOverlayScrollHandler } from '../utils/Utils';
 import { Button } from '../button/Button';
-import { CSSTransition } from '../transition/CSSTransition';
-import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
-import DomHandler from '../utils/DomHandler';
-import ObjectUtils from '../utils/ObjectUtils';
-import { localeOption } from '../api/Locale';
+import { CSSTransition } from '../csstransition/CSSTransition';
+import { localeOption } from '../api/Api';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 import { Portal } from '../portal/Portal';
-import { ZIndexUtils } from '../utils/ZIndexUtils';
 
 export function confirmPopup(props) {
     let appendTo = props.appendTo || document.body;

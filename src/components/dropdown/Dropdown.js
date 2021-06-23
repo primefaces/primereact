@@ -1,15 +1,10 @@
 import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
-import DomHandler from '../utils/DomHandler';
-import ObjectUtils from '../utils/ObjectUtils';
-import FilterUtils from '../utils/FilterUtils';
-import { classNames } from '../utils/ClassNames';
+import { DomHandler, ObjectUtils, FilterUtils, classNames, ZIndexUtils, ConnectedOverlayScrollHandler } from '../utils/Utils';
 import { DropdownPanel } from './DropdownPanel';
 import { tip } from '../tooltip/Tooltip';
-import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
-import { ZIndexUtils } from '../utils/ZIndexUtils';
-import PrimeReact from '../api/PrimeReact';
+import PrimeReact from '../api/Api';
 
 export class Dropdown extends Component {
 

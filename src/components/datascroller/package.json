@@ -1,0 +1,6 @@
+{
+    "main": "./datascroller.cjs.js",
+    "module": "./datascroller.esm.js",
+    "unpkg": "./datascroller.min.js",
+    "types": "./datascroller.d.ts"
+}

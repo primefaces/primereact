@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { CSSTransition } from '../transition/CSSTransition';
-import { classNames } from '../utils/ClassNames';
-import UniqueComponentId from '../utils/UniqueComponentId';
-import ObjectUtils from '../utils/ObjectUtils';
+import { CSSTransition } from '../csstransition/CSSTransition';
+import { ObjectUtils, classNames, UniqueComponentId } from '../utils/Utils';
 import { Ripple } from '../ripple/Ripple';
 
 export class Panel extends Component {

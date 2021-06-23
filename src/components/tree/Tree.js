@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { classNames } from '../utils/ClassNames';
-import ObjectUtils from '../utils/ObjectUtils';
+import { ObjectUtils, classNames } from '../utils/Utils';
 import { UITreeNode } from './UITreeNode';
 
 export class Tree extends Component {

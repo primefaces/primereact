@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { CSSTransition } from '../transition/CSSTransition';
+import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
 
 class CalendarPanelComponent extends Component {

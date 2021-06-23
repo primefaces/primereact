@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ObjectUtils from '../utils/ObjectUtils';
+import { ObjectUtils } from '../utils/Utils';
 
 export class FooterCell extends Component {
 

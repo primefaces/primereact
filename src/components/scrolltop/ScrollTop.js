@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { classNames } from '../utils/ClassNames';
-import { CSSTransition } from '../transition/CSSTransition';
-import DomHandler from '../utils/DomHandler';
+import { DomHandler, classNames, ZIndexUtils } from '../utils/Utils';
+import { CSSTransition } from '../csstransition/CSSTransition';
 import { Ripple } from '../ripple/Ripple';
-import { ZIndexUtils } from '../utils/ZIndexUtils';
 
 export class ScrollTop extends Component {
 

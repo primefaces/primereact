@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { ColumnProps } from '../column/Column';
-import { PaginatorTemplate } from '../paginator/Paginator';
+import { ColumnProps } from '../column';
+import { PaginatorTemplate } from '../paginator';
 
 type DataTablePaginatorPositionType = 'top' | 'bottom' | 'both';
 

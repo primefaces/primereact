@@ -1,0 +1,6 @@
+{
+    "main": "./badge.cjs.js",
+    "module": "./badge.esm.js",
+    "unpkg": "./badge.min.js",
+    "types": "./badge.d.ts"
+}

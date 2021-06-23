@@ -1,7 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { classNames } from '../utils/ClassNames';
-import ObjectUtils from '../utils/ObjectUtils';
+import { ObjectUtils, classNames } from '../utils/Utils';
 
 export class Message extends Component {
 
@@ -56,7 +55,7 @@ export class Message extends Component {
 
         return (
             <div id={this.props.id} aria-live="polite" className={className} style={this.props.style} role="alert">
-                { content }
+                {content}
             </div>
         );
     }

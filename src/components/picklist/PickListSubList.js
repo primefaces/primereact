@@ -1,9 +1,7 @@
-import { classNames } from '../utils/ClassNames';
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import ObjectUtils from '../utils/ObjectUtils';
+import PropTypes from 'prop-types';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 import { PickListItem } from './PickListItem';
-import DomHandler from '../utils/DomHandler';
 
 class PickListSubListComponent extends Component {
 

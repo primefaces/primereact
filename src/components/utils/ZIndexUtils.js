@@ -1,4 +1,4 @@
-import PrimeReact from '../api/PrimeReact';
+import PrimeReact from '../api/Api';
 
 function handler() {
     let zIndexes = [];

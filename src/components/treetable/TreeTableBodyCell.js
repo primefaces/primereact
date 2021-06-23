@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { classNames } from '../utils/ClassNames';
-import ObjectUtils from '../utils/ObjectUtils';
-import DomHandler from '../utils/DomHandler';
+import { ObjectUtils, DomHandler, classNames } from '../utils/Utils';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 
 export class TreeTableBodyCell extends Component {

@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { classNames } from '../utils/ClassNames';
-import UniqueComponentId from '../utils/UniqueComponentId';
-import ObjectUtils from '../utils/ObjectUtils';
-import { CSSTransition } from '../transition/CSSTransition';
+import { classNames, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { CSSTransition } from '../csstransition/CSSTransition';
 
 export class AccordionTab extends Component {
 

@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import DomHandler from '../utils/DomHandler';
-import { classNames } from '../utils/ClassNames';
-import UniqueComponentId from '../utils/UniqueComponentId';
-import { CSSTransition } from '../transition/CSSTransition';
-import ObjectUtils from '../utils/ObjectUtils';
+import { DomHandler, ObjectUtils, classNames, ZIndexUtils, UniqueComponentId}  from '../utils/Utils';
+import { CSSTransition } from '../csstransition/CSSTransition';
 import { Ripple } from '../ripple/Ripple';
 import { Portal } from '../portal/Portal';
-import { ZIndexUtils } from '../utils/ZIndexUtils';
 
 export class Dialog extends Component {
 

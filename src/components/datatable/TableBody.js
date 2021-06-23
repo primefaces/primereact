@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BodyRow } from './BodyRow';
-import DomHandler from '../utils/DomHandler';
-import ObjectUtils from '../utils/ObjectUtils';
+import { DomHandler, ObjectUtils } from '../utils/Utils';
 import { RowTogglerButton } from './RowTogglerButton';
 
 export class TableBody extends Component {

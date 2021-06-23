@@ -1,9 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { classNames } from '../utils/ClassNames';
-import {MenubarSub} from './MenubarSub';
-import ObjectUtils from '../utils/ObjectUtils';
-import { ZIndexUtils } from '../utils/ZIndexUtils';
+import { ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
+import { MenubarSub } from './MenubarSub';
 
 export class Menubar extends Component {
 
@@ -143,7 +141,7 @@ export class Menubar extends Component {
     }
 
     render() {
-        const className = classNames('p-menubar p-component', {'p-menubar-mobile-active': this.state.mobileActive}, this.props.className);
+        const className = classNames('p-menubar p-component', { 'p-menubar-mobile-active': this.state.mobileActive }, this.props.className);
         const start = this.renderStartContent();
         const end = this.renderEndContent();
         const menuButton = this.renderMenuButton();

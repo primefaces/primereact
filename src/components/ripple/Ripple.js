@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import DomHandler from '../utils/DomHandler';
-import PrimeReact from '../api/PrimeReact';
+import { DomHandler } from '../utils/Utils';
+import PrimeReact from '../api/Api';
 
 export class Ripple extends Component {
 

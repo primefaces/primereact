@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { MenuItem } from '../menuitem/MenuItem';
+import { MenuItem } from '../menuitem';
 
 export interface BreadCrumbProps {
     id?: string;

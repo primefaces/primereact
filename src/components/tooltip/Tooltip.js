@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import { classNames } from '../utils/ClassNames';
-import DomHandler from '../utils/DomHandler';
-import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
+import { DomHandler, classNames, ConnectedOverlayScrollHandler, ZIndexUtils } from '../utils/Utils';
 import { Portal } from '../portal/Portal';
-import { ZIndexUtils } from '../utils/ZIndexUtils';
 
 export function tip(props) {
     let appendTo = props.appendTo || document.body;

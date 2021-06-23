@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { classNames } from '../utils/ClassNames';
-import { CSSTransition } from '../transition/CSSTransition';
+import { ObjectUtils, classNames } from '../utils/Utils';
+import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
 import { MultiSelectHeader } from './MultiSelectHeader';
 import { MultiSelectItem } from './MultiSelectItem';
-import ObjectUtils from '../utils/ObjectUtils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 
 class MultiSelectPanelComponent extends Component {

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PaginatorTemplate } from '../paginator/Paginator';
+import { PaginatorTemplate } from '../paginator';
 
 type DataViewLayoutType = 'list' | 'grid' | (string & {});
 

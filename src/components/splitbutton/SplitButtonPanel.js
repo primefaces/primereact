@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { classNames } from '../utils/ClassNames';
-import { CSSTransition } from '../transition/CSSTransition';
+import { classNames } from '../utils/Utils';
+import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
 
 class SplitButtonPanelComponent extends Component {

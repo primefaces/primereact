@@ -1,0 +1,6 @@
+{
+    "main": "./virtualscroller.cjs.js",
+    "module": "./virtualscroller.esm.js",
+    "unpkg": "./virtualscroller.min.js",
+    "types": "./virtualscroller.d.ts"
+}

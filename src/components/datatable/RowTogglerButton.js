@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { classNames } from '../utils/ClassNames';
+import { classNames } from '../utils/Utils';
 import { Ripple } from '../ripple/Ripple';
 
 export class RowTogglerButton extends Component {

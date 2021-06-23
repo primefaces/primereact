@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { classNames } from '../utils/ClassNames';
-import DomHandler from '../utils/DomHandler';
+import { DomHandler, classNames } from '../utils/Utils';
 import {InputText} from '../inputtext/InputText';
 
 export class TreeTableHeader extends Component {

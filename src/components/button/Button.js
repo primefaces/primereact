@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { classNames } from '../utils/ClassNames';
+import { ObjectUtils, classNames } from '../utils/Utils';
 import { tip } from '../tooltip/Tooltip';
-import ObjectUtils from '../utils/ObjectUtils';
 import { Ripple } from '../ripple/Ripple';
 
 export class ButtonComponent extends Component {

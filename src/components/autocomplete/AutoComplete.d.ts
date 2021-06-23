@@ -1,6 +1,6 @@
 import * as React from 'react';
-import TooltipOptions from '../tooltip/TooltipOptions';
-import { VirtualScrollerProps } from '../virtualscroller/VirtualScroller';
+import TooltipOptions from '../tooltip/tooltipoptions';
+import { VirtualScrollerProps } from '../virtualscroller';
 
 type AutoCompleteOptionGroupTemplateType = React.ReactNode | ((suggestion: any, index: number) => React.ReactNode);
 

@@ -1,10 +1,8 @@
 import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
-import { classNames } from '../utils/ClassNames';
-import KeyFilter from '../keyfilter/KeyFilter';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import { KeyFilter } from '../keyfilter/KeyFilter';
 import { tip } from '../tooltip/Tooltip';
-import DomHandler from '../utils/DomHandler';
-import ObjectUtils from '../utils/ObjectUtils';
 
 class InputTextComponent extends Component {
 

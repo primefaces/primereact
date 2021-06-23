@@ -1,5 +1,5 @@
 import * as React from 'react';
-import TooltipOptions from '../tooltip/TooltipOptions';
+import TooltipOptions from '../tooltip/tooltipoptions';
 
 interface ChipsAddParams {
     originalEvent: React.SyntheticEvent;

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { classNames } from '../utils/ClassNames';
-import DomHandler from '../utils/DomHandler';
+import { DomHandler, classNames } from '../utils/Utils';
 import { TreeTableBodyCell } from './TreeTableBodyCell';
 import { Ripple } from '../ripple/Ripple';
 

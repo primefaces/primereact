@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { classNames } from '../utils/ClassNames';
+import { classNames } from '../utils/Utils';
 
 export class ProgressSpinner extends Component {
 
@@ -23,12 +23,12 @@ export class ProgressSpinner extends Component {
     };
 
     render() {
-        let spinnerClass = classNames('p-progress-spinner',this.props.className);
+        let spinnerClass = classNames('p-progress-spinner', this.props.className);
 
         return <div id={this.props.id} style={this.props.style} className={spinnerClass} role="alert" aria-busy>
-            <svg className="p-progress-spinner-svg" viewBox="25 25 50 50" style={{animationDuration: this.props.animationDuration}}>
+            <svg className="p-progress-spinner-svg" viewBox="25 25 50 50" style={{ animationDuration: this.props.animationDuration }}>
                 <circle className="p-progress-spinner-circle" cx="50" cy="50" r="20" fill={this.props.fill}
-                        strokeWidth={this.props.strokeWidth} strokeMiterlimit="10"/>
+                    strokeWidth={this.props.strokeWidth} strokeMiterlimit="10" />
             </svg>
         </div>;
     }

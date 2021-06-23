@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { ColumnProps } from '../column/Column';
-import { PaginatorTemplate } from '../paginator/Paginator';
-import TreeNode from '../treenode/TreeNode';
+import { ColumnProps } from '../column';
+import { PaginatorTemplate } from '../paginator';
+import TreeNode from '../treenode';
 
 type TreeTablePaginatorPositionType = 'top' | 'bottom' | 'both';
 

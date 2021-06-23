@@ -1,17 +1,12 @@
 import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
-import DomHandler from '../utils/DomHandler';
+import { DomHandler, ObjectUtils, ZIndexUtils, classNames, ConnectedOverlayScrollHandler } from '../utils/Utils';
 import { tip } from '../tooltip/Tooltip';
 import { InputText } from '../inputtext/InputText';
-import ObjectUtils from '../utils/ObjectUtils';
-import { CSSTransition } from '../transition/CSSTransition';
-import { classNames } from '../utils/ClassNames';
-import ConnectedOverlayScrollHandler from '../utils/ConnectedOverlayScrollHandler';
-import { localeOption } from '../api/Locale';
+import { CSSTransition } from '../csstransition/CSSTransition';
+import PrimeReact, { localeOption } from '../api/Api';
 import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
 import { Portal } from '../portal/Portal';
-import { ZIndexUtils } from '../utils/ZIndexUtils';
-import PrimeReact from '../api/PrimeReact';
 
 export class Password extends Component {
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { UIMessage } from './UIMessage';
 import { TransitionGroup } from 'react-transition-group';
-import { CSSTransition } from '../transition/CSSTransition';
+import { CSSTransition } from '../csstransition/CSSTransition';
 
 let messageIdx = 0;
 

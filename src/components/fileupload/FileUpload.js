@@ -1,13 +1,11 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {Button} from '../button/Button';
-import {Messages} from '../messages/Messages';
-import {ProgressBar} from '../progressbar/ProgressBar';
-import DomHandler from '../utils/DomHandler';
-import { classNames } from '../utils/ClassNames';
+import { Button } from '../button/Button';
+import { Messages } from '../messages/Messages';
+import { ProgressBar } from '../progressbar/ProgressBar';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 import { Ripple } from '../ripple/Ripple';
-import ObjectUtils from '../utils/ObjectUtils';
-import { localeOption } from '../api/Locale';
+import { localeOption } from '../api/Api';
 
 export class FileUpload extends Component {
 
@@ -113,7 +111,7 @@ export class FileUpload extends Component {
         onRemove: PropTypes.func
     };
 
-    constructor(props) {
+    constructor(props) {
         super(props);
         this.state = {
             files: [],
@@ -199,13 +197,13 @@ export class FileUpload extends Component {
     }
 
     formatSize(bytes) {
-        if(bytes === 0) {
+        if (bytes === 0) {
             return '0 B';
         }
         let k = 1000,
-        dm = 3,
-        sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
-        i = Math.floor(Math.log(bytes) / Math.log(k));
+            dm = 3,
+            sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+            i = Math.floor(Math.log(bytes) / Math.log(k));
 
         return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
     }
@@ -216,7 +214,7 @@ export class FileUpload extends Component {
             return;
         }
 
-        this.setState({msgs:[]});
+        this.setState({ msgs: [] });
         this.files = this.state.files || [];
         let files = event.dataTransfer ? event.dataTransfer.files : event.target.files;
         for (let i = 0; i < files.length; i++) {
@@ -232,14 +230,14 @@ export class FileUpload extends Component {
             }
         }
 
-        this.setState({files: this.files}, () => {
+        this.setState({ files: this.files }, () => {
             if (this.hasFiles() && this.props.auto) {
                 this.upload();
             }
         });
 
-        if(this.props.onSelect) {
-            this.props.onSelect({originalEvent: event, files: files});
+        if (this.props.onSelect) {
+            this.props.onSelect({ originalEvent: event, files: files });
         }
 
         if (event.type !== 'drop' && this.isIE11()) {
@@ -249,14 +247,14 @@ export class FileUpload extends Component {
             this.clearInputElement();
         }
 
-        if(this.props.mode === 'basic' && this.files.length > 0) {
+        if (this.props.mode === 'basic' && this.files.length > 0) {
             this.fileInput.style.display = 'none';
         }
     }
 
-    isFileSelected(file){
-        for (let sFile of this.state.files){
-            if ((sFile.name + sFile.type + sFile.size) === (file.name + file.type+file.size))
+    isFileSelected(file) {
+        for (let sFile of this.state.files) {
+            if ((sFile.name + sFile.type + sFile.size) === (file.name + file.type + file.size))
                 return true;
         }
         return false;
@@ -305,7 +303,7 @@ export class FileUpload extends Component {
             }
         }
         else {
-            this.setState({msgs:[]});
+            this.setState({ msgs: [] });
             let xhr = new XMLHttpRequest();
             let formData = new FormData();
 
@@ -343,12 +341,12 @@ export class FileUpload extends Component {
                         }
 
                         if (this.props.onUpload) {
-                            this.props.onUpload({xhr: xhr, files: this.state.files});
+                            this.props.onUpload({ xhr: xhr, files: this.state.files });
                         }
                     }
                     else {
                         if (this.props.onError) {
-                            this.props.onError({xhr: xhr, files: this.state.files});
+                            this.props.onError({ xhr: xhr, files: this.state.files });
                         }
                     }
 
@@ -358,7 +356,7 @@ export class FileUpload extends Component {
 
             xhr.open('POST', this.props.url, true);
 
-            if(this.props.onBeforeSend) {
+            if (this.props.onBeforeSend) {
                 this.props.onBeforeSend({
                     'xhr': xhr,
                     'formData': formData
@@ -372,7 +370,7 @@ export class FileUpload extends Component {
     }
 
     clear() {
-        this.setState({ files:[] });
+        this.setState({ files: [] });
         if (this.props.onClear) {
             this.props.onClear();
         }
@@ -398,7 +396,7 @@ export class FileUpload extends Component {
     }
 
     onDragEnter(event) {
-        if(!this.props.disabled) {
+        if (!this.props.disabled) {
             event.stopPropagation();
             event.preventDefault();
         }
@@ -425,9 +423,9 @@ export class FileUpload extends Component {
             event.preventDefault();
 
             let files = event.dataTransfer ? event.dataTransfer.files : event.target.files;
-            let allowDrop = this.props.multiple||(files && files.length === 1);
+            let allowDrop = this.props.multiple || (files && files.length === 1);
 
-            if(allowDrop) {
+            if (allowDrop) {
                 this.onFileSelect(event);
             }
         }
@@ -442,7 +440,7 @@ export class FileUpload extends Component {
         }
     }
 
-    renderChooseButton() {
+    renderChooseButton() {
         const { className, style, icon, iconOnly } = this.props.chooseOptions;
         const chooseClassName = classNames('p-button p-fileupload-choose p-component', {
             'p-disabled': this.props.disabled,
@@ -532,8 +530,8 @@ export class FileUpload extends Component {
             const uploadLabel = !uploadOptions.iconOnly ? this.uploadButtonLabel() : '';
             const cancelLabel = !cancelOptions.iconOnly ? this.cancelButtonLabel() : '';
 
-            uploadButton = <Button type="button" label={uploadLabel} icon={uploadOptions.icon || 'pi pi-upload'} onClick={this.upload} disabled={this.uploadDisabled()} style={uploadOptions.style} className={uploadOptions.className}/>;
-            cancelButton = <Button type="button" label={cancelLabel} icon={cancelOptions.icon || 'pi pi-times'} onClick={this.clear} disabled={this.cancelDisabled()} style={cancelOptions.style} className={cancelOptions.className}/>;
+            uploadButton = <Button type="button" label={uploadLabel} icon={uploadOptions.icon || 'pi pi-upload'} onClick={this.upload} disabled={this.uploadDisabled()} style={uploadOptions.style} className={uploadOptions.className} />;
+            cancelButton = <Button type="button" label={cancelLabel} icon={cancelOptions.icon || 'pi pi-times'} onClick={this.clear} disabled={this.cancelDisabled()} style={cancelOptions.style} className={cancelOptions.className} />;
         }
 
         if (this.hasFiles()) {
@@ -565,10 +563,10 @@ export class FileUpload extends Component {
         return (
             <div id={this.props.id} className={className} style={this.props.style}>
                 {header}
-                <div ref={(el) => {this.content = el;}} className={contentClassName} style={this.props.contentStyle}
+                <div ref={(el) => { this.content = el; }} className={contentClassName} style={this.props.contentStyle}
                     onDragEnter={this.onDragEnter} onDragOver={this.onDragOver} onDragLeave={this.onDragLeave} onDrop={this.onDrop}>
                     {progressBar}
-                    <Messages ref={(el) => this.messagesUI = el } />
+                    <Messages ref={(el) => this.messagesUI = el} />
                     {filesList}
                     {emptyContent}
                 </div>
@@ -592,11 +590,11 @@ export class FileUpload extends Component {
 
         return (
             <div className={className} style={this.props.style}>
-                <Messages ref={(el) => this.messagesUI = el } />
+                <Messages ref={(el) => this.messagesUI = el} />
                 <span className={buttonClassName} style={chooseOptions.style} onMouseUp={this.onSimpleUploaderClick} onKeyDown={this.onKeyDown} onFocus={this.onFocus} onBlur={this.onBlur} tabIndex={0}>
                     {icon}
                     {label}
-                    { !this.hasFiles() && <input ref={(el) => this.fileInput = el} type="file" accept={this.props.accept} multiple={this.props.multiple} disabled={this.props.disabled} onChange={this.onFileSelect} /> }
+                    {!this.hasFiles() && <input ref={(el) => this.fileInput = el} type="file" accept={this.props.accept} multiple={this.props.multiple} disabled={this.props.disabled} onChange={this.onFileSelect} />}
                     <Ripple />
                 </span>
             </div>

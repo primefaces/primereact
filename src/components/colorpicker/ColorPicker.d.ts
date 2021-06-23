@@ -1,5 +1,5 @@
 import * as React from 'react';
-import TooltipOptions from '../tooltip/TooltipOptions';
+import TooltipOptions from '../tooltip/tooltipoptions';
 import Omit from '../util';
 
 type ColorPickerAppendToType = 'self' | HTMLElement | undefined | null;

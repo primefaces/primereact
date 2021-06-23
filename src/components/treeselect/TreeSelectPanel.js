@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { classNames } from '../utils/ClassNames';
-import { CSSTransition } from '../transition/CSSTransition';
+import { classNames } from '../utils/Utils';
+import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
 
 class TreeSelectPanelComponent extends Component {

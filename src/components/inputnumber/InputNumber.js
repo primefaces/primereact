@@ -1,7 +1,7 @@
 import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import {InputText} from '../inputtext/InputText';
-import { classNames } from '../utils/ClassNames';
+import { classNames } from '../utils/Utils';
 import { tip } from '../tooltip/Tooltip';
 import { Ripple } from '../ripple/Ripple';
 

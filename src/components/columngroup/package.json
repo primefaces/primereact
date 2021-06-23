@@ -1,0 +1,6 @@
+{
+    "main": "./columngroup.cjs.js",
+    "module": "./columngroup.esm.js",
+    "unpkg": "./columngroup.min.js",
+    "types": "./columngroup.d.ts"
+}

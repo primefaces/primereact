@@ -1,10 +1,7 @@
-import { classNames } from '../utils/ClassNames';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Paginator } from '../paginator/Paginator';
-import DomHandler from '../utils/DomHandler';
-import ObjectUtils from '../utils/ObjectUtils';
-import FilterUtils from '../utils/FilterUtils';
+import { classNames, DomHandler, ObjectUtils, FilterUtils } from '../utils/Utils';
 import { ScrollableView } from './ScrollableView';
 import { TableBody } from './TableBody';
 import { TableFooter } from './TableFooter';
