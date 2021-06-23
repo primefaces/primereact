@@ -35,7 +35,7 @@ interface VirtualScrollerRenderedRange {
     first: number;
     last: number;
     viewport: VirtualScrollerViewportRenderedRange;
-};
+}
 
 interface VirtualScrollerState {
     rows: number;
