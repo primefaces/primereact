@@ -178,8 +178,8 @@ function addComponent() {
 }
 
 function addPrimeReact() {
-    const input = INPUT_DIR + 'primereact.js';
-    const output = OUTPUT_DIR + 'primereact';
+    const input = INPUT_DIR + 'primereact.all.js';
+    const output = OUTPUT_DIR + 'primereact.all';
 
     addEntry('primereact', input, output, false);
 }
