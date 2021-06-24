@@ -735,6 +735,14 @@
                     ]
                 },
                 {
+                    "name": "VirtualScroller",
+                    "to": "/virtualscroller",
+                    "meta": [
+                        "virtualscroller"
+                    ],
+                    "badge": "new"
+                },
+                {
                     "name": "Google Maps",
                     "to": "/gmap",
                     "meta": [
@@ -1417,14 +1425,6 @@
                     "meta": [
                         "inplace"
                     ]
-                },
-                {
-                    "name": "VirtualScroller",
-                    "to": "/virtualscroller",
-                    "meta": [
-                        "virtualscroller"
-                    ],
-                    "badge": "new"
                 },
                 {
                     "name": "ScrollTop",

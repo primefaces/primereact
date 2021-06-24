@@ -1,4 +1,386 @@
 {
+    "6.5.0-rc1": {
+        "tooltip": [
+            {
+                "number": 2140,
+                "title": "Tooltips closed on window resize after system keyboard appears on mobile devices",
+                "url": "https://github.com/primefaces/primereact/issues/2140"
+            }
+        ],
+        "picklist": [
+            {
+                "number": 2133,
+                "title": "PickList crashes Application when using SourceSelection",
+                "url": "https://github.com/primefaces/primereact/issues/2133"
+            }
+        ],
+        "calendar": [
+            {
+                "number": 2131,
+                "title": "Calendar yearNavigator not working ",
+                "url": "https://github.com/primefaces/primereact/issues/2131"
+            },
+            {
+                "number": 2139,
+                "title": "Overlay components are not aligned correctly",
+                "url": "https://github.com/primefaces/primereact/issues/2139"
+            },
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "autocomplete": [
+            {
+                "number": 2139,
+                "title": "Overlay components are not aligned correctly",
+                "url": "https://github.com/primefaces/primereact/issues/2139"
+            },
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "cascadeselect": [
+            {
+                "number": 2139,
+                "title": "Overlay components are not aligned correctly",
+                "url": "https://github.com/primefaces/primereact/issues/2139"
+            },
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "colorpicker": [
+            {
+                "number": 2139,
+                "title": "Overlay components are not aligned correctly",
+                "url": "https://github.com/primefaces/primereact/issues/2139"
+            },
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "dropdown": [
+            {
+                "number": 2139,
+                "title": "Overlay components are not aligned correctly",
+                "url": "https://github.com/primefaces/primereact/issues/2139"
+            },
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "multiselect": [
+            {
+                "number": 2139,
+                "title": "Overlay components are not aligned correctly",
+                "url": "https://github.com/primefaces/primereact/issues/2139"
+            }
+        ],
+        "password": [
+            {
+                "number": 2139,
+                "title": "Overlay components are not aligned correctly",
+                "url": "https://github.com/primefaces/primereact/issues/2139"
+            }
+        ],
+        "treeselect": [
+            {
+                "number": 2139,
+                "title": "Overlay components are not aligned correctly",
+                "url": "https://github.com/primefaces/primereact/issues/2139"
+            }
+        ],
+        "virtualscroller": [
+            {
+                "number": 2123,
+                "title": "Building against primereact 6.4.1 generates TS1036 error against VirtualScroller.d.ts:38",
+                "url": "https://github.com/primefaces/primereact/issues/2123"
+            }
+        ],
+        "accordion": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "api": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "avatar": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "avatargroup": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "badge": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "breadcrumb": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "button": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "captcha": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "card": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "carousel": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "chart": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "checkbox": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "chip": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "chips": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "column": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "columngroup": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "confirmdialog": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "confirmpopup": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "contextmenu": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "csstransition": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "datascroller": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "datatable": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "dataview": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "deferredcontent": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "dialog": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "divider": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "editor": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "fieldset": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "fileupload": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "fullcalendar": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "galleria": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "gmap": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "inplace": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "inputmask": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "inputnumber": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "inputswitch": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "inputtext": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "inputtextarea": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ],
+        "keyfilter": [
+            {
+                "number": 2135,
+                "title": "New PrimeReact Build",
+                "url": "https://github.com/primefaces/primereact/issues/2135"
+            }
+        ]
+    },
     "6.4.1": {
         "calendar": [
             {
