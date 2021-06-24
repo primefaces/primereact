@@ -56,7 +56,17 @@ const ProgressBarProps = [
 ];
 
 const ProgressBarEvents = [
-
+    {
+        name: 'displayValueTemplate',
+        description: 'TODO',
+        arguments: [
+            {
+                name: 'event.value',
+                type: 'any',
+                description: 'TODO'
+            }
+        ]
+    },
 ];
 
 const ProgressBarStyles = [
