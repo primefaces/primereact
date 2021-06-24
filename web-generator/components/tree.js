@@ -182,7 +182,166 @@ const TreeProps = [
 ];
 
 const TreeEvents = [
-
+    {
+        name: 'onSelect',
+        description: 'Callback to invoke when a node is selected.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.node',
+                type: 'any',
+                description: 'Unselected node instance.'
+            }
+        ]
+    },
+    {
+        name: 'onUnselect',
+        description: 'Callback to invoke when a node is unselected.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.node',
+                type: 'any',
+                description: 'Expanded node instance.'
+            }
+        ]
+    },
+    {
+        name: 'onExpand',
+        description: 'Callback to invoke when a node is expanded.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.node',
+                type: 'any',
+                description: 'Expanded node instance.'
+            }
+        ]
+    },
+    {
+        name: 'onCollapse',
+        description: 'Callback to invoke when a node is collapsed.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.node',
+                type: 'any',
+                description: 'Collapsed node instance.'
+            }
+        ]
+    },
+    {
+        name: 'onSelectionChange',
+        description: 'Callback to invoke when selection changes.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.value',
+                type: 'any',
+                description: 'Selected node key(s).'
+            }
+        ]
+    },
+    {
+        name: 'onContextMenuSelectionChange',
+        description: 'Callback to invoke when selection changes with a context menu.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.value',
+                type: 'any',
+                description: 'Selected node key.'
+            }
+        ]
+    },
+    {
+        name: 'onToggle',
+        description: 'Callback to invoke when a node is toggled.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.node',
+                type: 'any',
+                description: 'Toggled node instance.'
+            }
+        ]
+    },
+    {
+        name: 'onDragDrop',
+        description: 'Callback to invoke when a node is toggled.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.value',
+                type: 'any',
+                description: 'New value after the dragdrop.'
+            }
+        ]
+    },
+    {
+        name: 'onContextMenu',
+        description: 'Callback to invoke when a node is selected with a context menu.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.node',
+                type: 'any',
+                description: 'Selected node instance.'
+            }
+        ]
+    },
+    {
+        name: 'onFilterValueChange',
+        description: 'Callback to invoke when filter value changes.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.value',
+                type: 'any',
+                description: 'the filtered value'
+            }
+        ]
+    }
 ];
 
 const TreeStyles = [

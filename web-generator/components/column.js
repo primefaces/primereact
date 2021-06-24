@@ -284,7 +284,130 @@ const ColumnProps = [
 ];
 
 const ColumnEvents = [
-
+    {
+        name: 'loadingBody',
+        description: 'TODO',
+    },
+    {
+        name: 'onEditorInit',
+        description: 'TODO',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onEditorSubmit',
+        description: 'TODO',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onEditorCancel',
+        description: 'TODO',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'sortFunction',
+        description: 'TODO',
+        arguments: [
+            {
+                name: 'event.field',
+                type: 'string',
+                description: 'TODO'
+            }
+        ]
+    },
+    {
+        name: 'filterFunction',
+        description: 'TODO',
+        arguments: [
+            {
+                name: 'event.value',
+                type: 'any',
+                description: 'TODO'
+            },
+            {
+                name: 'event.filter',
+                type: 'any',
+                description: 'TODO'
+            },
+            {
+                name: 'event.filterLocale',
+                type: 'string',
+                description: 'TODO'
+            }
+        ]
+    },
+    {
+        name: 'editorValidator',
+        description: 'TODO',
+        arguments: [
+            {
+                name: 'event.original Event',
+                type: 'object',
+                description: 'Browser Event'
+            }
+        ]
+    },
+    {
+        name: 'editorValidator',
+        description: 'TODO',
+        arguments: [
+            {
+                name: 'event.original Event',
+                type: 'object',
+                description: 'Browser Event'
+            }
+        ]
+    },
+    {
+        name: 'editorValidator',
+        description: 'TODO',
+        arguments: [
+            {
+                name: 'event.original Event',
+                type: 'object',
+                description: 'Browser Event'
+            }
+        ]
+    },
+    {
+        name: 'onBeforeEditorHide',
+        description: 'TODO',
+        arguments: [
+            {
+                name: 'event.original Event',
+                type: 'object',
+                description: 'Browser Event'
+            }
+        ]
+    },
+    {
+        name: 'onBeforeEditorShow',
+        description: 'TODO',
+        arguments: [
+            {
+                name: 'event.original Event',
+                type: 'object',
+                description: 'Browser Event'
+            }
+        ]
+    }
 ];
 
 const ColumnStyles = [

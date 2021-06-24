@@ -188,7 +188,107 @@ const DialogProps = [
 ];
 
 const DialogEvents = [
-
+    {
+        name: 'onHide',
+        description: 'Callback to invoke when dialog is hidden (Required).'
+    },
+    {
+        name: 'onShow',
+        description: 'Callback to invoke when dialog is showed.'
+    },
+    {
+        name: 'onMaximize',
+        description: 'Callback to invoke when toggle maximize icon is clicked.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.maximized',
+                type: 'any',
+                description: 'Whether to show the dialog or not on fullscreen.'
+            }
+        ]
+    },
+    {
+        name: 'onDragStart',
+        description: 'Callback to invoke when dialog dragging is initiated.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onDrag',
+        description: 'Callback to invoke when dragging dialog.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onDragEnd',
+        description: 'Callback to invoke when dialog dragging is completed.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onDragEnd',
+        description: 'Callback to invoke when dialog dragging is completed.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onResizeStart',
+        description: 'Callback to invoke when dialog resizing is initiated.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onResize',
+        description: 'Callback to invoke while resizing dialog.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onResizeEnd',
+        description: 'Callback to invoke when dialog resizing is completed.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    }
 ];
 
 const DialogStyles = [

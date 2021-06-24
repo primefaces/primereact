@@ -44,7 +44,22 @@ const SplitterProps = [
 ];
 
 const SplitterEvents = [
-
+    {
+        name: 'onResizeEnd',
+        description: 'Callback to invoke when resize ends.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.sizes',
+                type: 'number[]',
+                description: 'Sizes of the panels as an array'
+            }
+        ]
+    }
 ];
 
 const SplitterStyles = [

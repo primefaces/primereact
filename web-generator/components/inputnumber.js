@@ -248,7 +248,71 @@ const InputNumberProps = [
 ];
 
 const InputNumberEvents = [
-
+    {
+        name: 'onValueChange',
+        description: 'Callback to invoke after validation check and value change.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.value',
+                type: 'number',
+                description: 'New value'
+            }
+        ]
+    },
+    {
+        name: 'onChange',
+        description: 'Callback to invoke on value change.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.value',
+                type: 'number',
+                description: 'New value'
+            }
+        ]
+    },
+    {
+        name: 'onFocus',
+        description: 'Callback to invoke when input receives focus.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onBlur',
+        description: 'Callback to invoke when input loses focus.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onKeyDown',
+        description: 'Callback to invoke when the key pressed.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    }
 ];
 
 const InputNumberStyles = [

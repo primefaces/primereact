@@ -98,7 +98,123 @@ const PickListProps = [
 ];
 
 const PickListEvents = [
-
+    {
+        name: 'onChange',
+        description: 'Callback to invoke when items are moved from source to target.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.source',
+                type: 'any',
+                description: 'Source list'
+            },
+            {
+                name: 'event.target',
+                type: 'any',
+                description: 'Target list'
+            }
+        ]
+    },
+    {
+        name: 'onMoveToSource',
+        description: 'Callback to invoke when items are moved from target to source.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.value',
+                type: 'any',
+                description: 'Moved items'
+            }
+        ]
+    },
+    {
+        name: 'onMoveAllToSource',
+        description: 'Callback to invoke when all items are moved from target to source.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.value',
+                type: 'any',
+                description: 'Moved items'
+            }
+        ]
+    },
+    {
+        name: 'onMoveToTarget',
+        description: 'Callback to invoke when items are moved from source to target.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.value',
+                type: 'any',
+                description: 'Moved items'
+            }
+        ]
+    },
+    {
+        name: 'onMoveAllToTarget',
+        description: 'Callback to invoke when all items are moved from source to target.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.value',
+                type: 'any',
+                description: 'Moved items'
+            }
+        ]
+    },
+    {
+        name: 'onSourceSelectionChange',
+        description: 'Callback to invoke when items are selected within source list.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'items',
+                type: 'any',
+                description: 'Selected items array'
+            }
+        ]
+    },
+    {
+        name: 'onTargetSelectionChange',
+        description: 'Callback to invoke when items are selected within target list.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'items',
+                type: 'any',
+                description: 'Selected items array'
+            }
+        ]
+    }
 ];
 
 const PickListStyles = [

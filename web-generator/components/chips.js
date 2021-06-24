@@ -86,7 +86,71 @@ const ChipsProps = [
 ];
 
 const ChipsEvents = [
-
+    {
+        name: 'onChange',
+        description: 'Callback to invoke when a chip is added or removed.',
+        arguments: [
+            {
+                name: 'originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onAdd',
+        description: 'Callback to invoke when a chip is added.',
+        arguments: [
+            {
+                name: 'originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'value',
+                type: 'any',
+                description: 'Added item value'
+            }
+        ]
+    },
+    {
+        name: 'onRemove',
+        description: 'Callback to invoke when a chip is removed.',
+        arguments: [
+            {
+                name: 'originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'value',
+                type: 'any',
+                description: 'Removed item value'
+            }
+        ]
+    },
+    {
+        name: 'onFocus',
+        description: 'Callback to invoke when the component gets focus.',
+        arguments: [
+            {
+                name: 'originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onBlur',
+        description: 'Callback to invoke when the component loses focus',
+        arguments: [
+            {
+                name: 'originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    }
 ];
 
 const ChipsStyles = [

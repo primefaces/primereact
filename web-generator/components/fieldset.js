@@ -44,7 +44,55 @@ const FieldsetProps = [
 ];
 
 const FieldsetEvents = [
-
+    {
+        name: 'onCollapse',
+        description: 'Callback to invoke when an active tab is collapsed by clicking on the header.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onExpand',
+        description: 'Callback to invoke when a tab gets expanded.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onToggle',
+        description: 'Callback to invoke when a tab gets toggled.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.value',
+                type: 'boolean',
+                description: ' Collapsed state as a boolean'
+            }
+        ]
+    },
+    {
+        name: 'onClick',
+        description: 'Callback to invoke when fieldset is clicked.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    }
 ];
 
 const FieldsetStyles = [

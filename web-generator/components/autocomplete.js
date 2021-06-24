@@ -242,7 +242,193 @@ const AutoCompleteProps = [
 ];
 
 const AutoCompleteEvents = [
-
+    {
+        name: 'completeMethod',
+        description: 'Callback to invoke to search for suggestions.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.query',
+                type: 'string',
+                description: 'Value to search with'
+            }
+        ]
+    },
+    {
+        name: 'onChange',
+        description: 'Callback to invoke when autocomplete value changes.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.value',
+                type: 'any',
+                description: 'Value of the component'
+            }
+        ]
+    },
+    {
+        name: 'onFocus',
+        description: 'Callback to invoke when autocomplete gets focus.',
+        arguments: [
+            {
+                name: 'event',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onBlur',
+        description: 'Callback to invoke when autocomplete loses focus.',
+        arguments: [
+            {
+                name: 'event',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onSelect',
+        description: 'Callback to invoke when a suggestion is selected.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.value',
+                type: 'any',
+                description: 'Value of the component'
+            }
+        ]
+    },
+    {
+        name: 'onUnselect',
+        description: 'Callback to invoke when a suggestion is selected.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.value',
+                type: 'any',
+                description: 'Value of the component'
+            }
+        ]
+    },
+    {
+        name: 'onDropdownClick',
+        description: 'Callback to invoke to when dropdown button is clicked.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.query',
+                type: 'string',
+                description: 'Current value of the input field'
+            }
+        ]
+    },
+    {
+        name: 'onClick',
+        description: 'Callback to invoke on click.',
+        arguments: [
+            {
+                name: 'event',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onDblClick',
+        description: 'Callback to invoke on double click.',
+        arguments: [
+            {
+                name: 'event',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onMouseDown',
+        description: 'Callback to invoke to when a mouse button is pressed.',
+        arguments: [
+            {
+                name: 'event',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onKeyUp',
+        description: 'Callback to invoke to when a key is released.',
+        arguments: [
+            {
+                name: 'event',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onKeyPress',
+        description: 'Callback to invoke to when a key is pressed.',
+        arguments: [
+            {
+                name: 'event',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onContextMenu',
+        description: 'Callback to invoke on right-click.',
+        arguments: [
+            {
+                name: 'event',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onClear',
+        description: 'Callback to invoke when input is cleared by the user.',
+        arguments: [
+            {
+                name: 'event',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onShow',
+        description: 'Callback to invoke when overlay panel becomes visible.'
+    },
+    {
+        name: 'onHide',
+        description: 'Callback to invoke when overlay panel becomes hidden.'
+    }
 ];
 
 const AutoCompleteStyles = [

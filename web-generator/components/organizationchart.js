@@ -44,7 +44,54 @@ const OrganizationChartProps = [
 ];
 
 const OrganizationChartEvents = [
-
+    {
+        name: 'onNodeSelect',
+        description: 'Callback to invoke when a node is selected.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.node',
+                type: 'any',
+                description: 'Selected node instance.'
+            }
+        ]
+    },
+    {
+        name: 'onNodeUnselect',
+        description: 'Callback to invoke when a node is unselected.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.node',
+                type: 'any',
+                description: 'Unselected node instance.'
+            }
+        ]
+    },
+    {
+        name: 'onSelectionChange',
+        description: 'Callback to invoke when node selection changes.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.data',
+                type: 'any',
+                description: 'New selection.'
+            }
+        ]
+    }
 ];
 
 const OrganizationChartStyles = [

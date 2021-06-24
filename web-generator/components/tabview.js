@@ -32,7 +32,22 @@ const TabViewProps = [
 ];
 
 const TabViewEvents = [
-
+    {
+        name: 'onTabChange',
+        description: 'Callback to invoke when an active tab is changed.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.index',
+                type: 'number',
+                description: 'Index of the selected tab'
+            }
+        ]
+    }
 ];
 
 const TabViewStyles = [

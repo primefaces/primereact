@@ -56,7 +56,44 @@ const PanelProps = [
 ];
 
 const PanelEvents = [
-
+    {
+        name: 'onCollapse',
+        description: 'Callback to invoke when an active tab is collapsed by clicking on the header.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onExpand',
+        description: 'Callback to invoke when a tab gets expanded.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onToggle',
+        description: 'Callback to invoke when a tab gets expanded.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.value',
+                type: 'any',
+                description: 'collapsed state as a boolean'
+            }
+        ]
+    }
 ];
 
 const PanelStyles = [

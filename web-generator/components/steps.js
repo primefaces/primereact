@@ -38,7 +38,27 @@ const StepsProps = [
 ];
 
 const StepsEvents = [
-
+    {
+        name: 'onSelect',
+        description: 'Callback to invoke when the new step is selected.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.item',
+                type: 'any',
+                description: 'Selected item instance'
+            },
+            {
+                name: 'event.index',
+                type: 'number',
+                description: 'Index of selected item instance'
+            }
+        ]
+    }
 ];
 
 const StepsStyles = [

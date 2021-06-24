@@ -62,7 +62,44 @@ const InputSwitchProps = [
 ];
 
 const InputSwitchEvents = [
-
+    {
+        name: 'onChange',
+        description: 'Callback to invoke on value change.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.value',
+                type: 'boolean',
+                description: 'Checked state as a boolean.'
+            }
+        ]
+    },
+    {
+        name: 'onFocus',
+        description: 'Callback to invoke when the element receives focus.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onBlur',
+        description: 'Callback to invoke when the element loses focus.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    }
 ];
 
 const InputSwitchStyles = [

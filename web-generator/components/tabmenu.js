@@ -32,7 +32,27 @@ const TabMenuProps = [
 ];
 
 const TabMenuEvents = [
-
+    {
+        name: 'onTabChange',
+        description: 'Callback to invoke when active tab changes.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.value',
+                type: 'any',
+                description: 'Selected menuitem'
+            },
+            {
+                name: 'event.index',
+                type: 'number',
+                description: 'Index of the selected tab'
+            }
+        ]
+    }
 ];
 
 const TabMenuStyles = [

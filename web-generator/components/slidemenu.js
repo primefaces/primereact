@@ -86,7 +86,28 @@ const SlideMenuProps = [
 ];
 
 const SlideMenuEvents = [
-
+    {
+        name: 'onShow',
+        description: 'Callback to invoke when a popup menu is shown.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onHide',
+        description: 'Callback to invoke when a popup menu is hidden.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    }
 ];
 
 const SlideMenuStyles = [

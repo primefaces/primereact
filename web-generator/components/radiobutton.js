@@ -74,7 +74,27 @@ const RadioButtonProps = [
 ];
 
 const RadioButtonEvents = [
-
+    {
+        name: 'onChange',
+        description: 'Callback to invoke on radio button click.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Original event'
+            },
+            {
+                name: 'event.value',
+                type: 'any',
+                description: 'Value of the radiobutton'
+            },
+            {
+                name: 'event.checked',
+                type: 'any',
+                description: 'Checked state as a boolean.'
+            }
+        ]
+    }
 ];
 
 const RadioButtonStyles = [

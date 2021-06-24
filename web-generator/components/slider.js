@@ -80,7 +80,33 @@ const SliderProps = [
 ];
 
 const SliderEvents = [
-
+    {
+        name: 'onChange',
+        description: 'Callback to invoke on value change via slide.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'any',
+                description: 'Slide event'
+            }
+        ]
+    },
+    {
+        name: 'onSlideEnd',
+        description: 'Callback to invoke when slide ends.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'any',
+                description: 'Slide event'
+            },
+            {
+                name: 'event.value',
+                type: 'any',
+                description: 'New value.'
+            }
+        ]
+    }
 ];
 
 const SliderStyles = [

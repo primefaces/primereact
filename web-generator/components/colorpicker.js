@@ -86,7 +86,25 @@ const ColorPickerProps = [
 ];
 
 const ColorPickerEvents = [
-
+    {
+        name: 'onChange',
+        description: 'Callback to invoke when confirm dialog is hidden.',
+        arguments: [
+            {
+                name: 'value',
+                type: 'string',
+                description: 'Selected color value whose type depends on the format.'
+            }
+        ]
+    },
+    {
+        name: 'onShow',
+        description: 'Callback to invoke when overlay panel becomes visible.',
+    },
+    {
+        name: 'onHide',
+        description: 'Callback to invoke when overlay panel becomes hidden.',
+    }
 ];
 
 const ColorPickerStyles = [

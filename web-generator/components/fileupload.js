@@ -176,7 +176,149 @@ const FileUploadProps = [
 ];
 
 const FileUploadEvents = [
-
+    {
+        name: 'onBeforeUpload',
+        description: 'Callback to invoke before file upload begins to customize the request such as post parameters before the files.',
+        arguments: [
+            {
+                name: 'event.xhr',
+                type: 'object',
+                description: 'XmlHttpRequest instance.'
+            },
+            {
+                name: 'event.formData',
+                type: 'any',
+                description: 'FormData object.'
+            }
+        ]
+    },
+    {
+        name: 'onBeforeSend',
+        description: 'Callback to invoke before file send begins to customize the request such as adding headers.',
+        arguments: [
+            {
+                name: 'event.xhr',
+                type: 'object',
+                description: 'XmlHttpRequest instance.'
+            },
+            {
+                name: 'event.formData',
+                type: 'any',
+                description: 'FormData object.'
+            }
+        ]
+    },
+    {
+        name: 'onUpload',
+        description: 'Callback to invoke when file upload is complete.',
+        arguments: [
+            {
+                name: 'event.xhr',
+                type: 'object',
+                description: 'XmlHttpRequest instance.'
+            },
+            {
+                name: 'event.files',
+                type: 'any',
+                description: 'Uploaded files.'
+            }
+        ]
+    },
+    {
+        name: 'onError',
+        description: 'Callback to invoke if file upload fails.',
+        arguments: [
+            {
+                name: 'event.xhr',
+                type: 'object',
+                description: 'XmlHttpRequest instance.'
+            },
+            {
+                name: 'event.files',
+                type: 'any',
+                description: 'Files that are not uploaded.'
+            }
+        ]
+    },
+    {
+        name: 'onClear',
+        description: 'Callback to invoke when files in queue are removed without uploading.',
+    },
+    {
+        name: 'onSelect',
+        description: 'Callback to invoke when files are selected.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Original browser event.'
+            },
+            {
+                name: 'event.files',
+                type: 'any',
+                description: 'List of selected files.'
+            }
+        ]
+    },
+    {
+        name: 'onProgress',
+        description: 'Callback to invoke when files are selected.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Original browser event.'
+            },
+            {
+                name: 'event.progress',
+                type: 'any',
+                description: 'Callback to invoke when files are being uploaded.'
+            }
+        ]
+    },
+    {
+        name: 'onValidationFail',
+        description: 'Callback to invoke when a validation file fails.',
+        arguments: [
+            {
+                name: 'file',
+                type: 'object',
+                description: 'Invalid file.'
+            }
+        ]
+    },
+    {
+        name: 'uploadHandler',
+        description: 'Callback to invoke in custom upload mode to upload the files manually.',
+        arguments: [
+            {
+                name: 'event.files',
+                type: 'any',
+                description: 'List of selected files.'
+            },
+            {
+                name: 'event.options',
+                type: 'any',
+                description: 'Handler options.'
+            }
+        ]
+    },
+    {
+        name: 'onRemove',
+        description: 'Callback to invoke when a file is removed without uploading using clear button of a file.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Original browser event.'
+            },
+            {
+                name: 'event.file',
+                type: 'object',
+                description: 'Selected file.'
+            }
+        ]
+    }
 ];
 
 const FileUploadStyles = [

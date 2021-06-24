@@ -116,7 +116,60 @@ const InputMaskProps = [
   ];
 
 const InputMaskEvents = [
-
+    {
+        name: 'onFocus',
+        description: 'Callback to invoke when input receives focus.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onBlur',
+        description: 'Callback to invoke when input loses focus.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onComplete',
+        description: 'Callback to invoke on when user completes the mask pattern.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.value',
+                type: 'string',
+                description: 'New value of the component'
+            }
+        ]
+    },
+    {
+        name: 'onChange',
+        description: 'Callback to invoke on value change.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.value',
+                type: 'string',
+                description: 'New value of the component'
+            }
+        ]
+    }
 ];
 
 const InputMaskStyles = [

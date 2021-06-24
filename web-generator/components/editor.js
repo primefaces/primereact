@@ -56,7 +56,53 @@ const EditorProps = [
 ];
 
 const EditorEvents = [
-
+    {
+        name: 'onTextChange',
+        description: 'Callback to invoke when text of editor changes.',
+        arguments: [
+            {
+                name: 'event.delta',
+                type: 'any',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.source',
+                type: 'string',
+                description: 'Source of change. Will be either "user" or "api".'
+            },
+            {
+                name: 'event.htmlValue',
+                type: 'string|null',
+                description: 'Current value as html.'
+            },
+            {
+                name: 'event.textValue',
+                type: 'string',
+                description: 'Current value as text.'
+            }
+        ]
+    },
+    {
+        name: 'onSelectionChange',
+        description: 'Callback to invoke when selected text of editor changes.',
+        arguments: [
+            {
+                name: 'event.range',
+                type: 'any',
+                description: 'Object with index and length keys indicating where the selection exists.'
+            },
+            {
+                name: 'event.oldRange',
+                type: 'any',
+                description: 'Object with index and length keys indicating where the previous selection was.'
+            },
+            {
+                name: 'event.source',
+                type: 'string',
+                description: 'Source of change. Will be either "user" or "api".'
+            }
+        ]
+    }
 ];
 
 const EditorStyles = [

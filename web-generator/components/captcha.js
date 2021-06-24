@@ -44,7 +44,21 @@ const CaptchaProps = [
   ];
 
 const CaptchaEvents = [
-
+    {
+        name: 'onResponse',
+        description: 'The callback function to be executed when the user submits a successful CAPTCHA response.',
+        arguments: [
+            {
+                name: 'event.response',
+                type: 'any',
+                description: 'The user response token.'
+            }
+        ]
+    },
+    {
+        name: 'onExpire',
+        description: 'The callback function to be executed when the recaptcha response expires and the user needs to solve a new CAPTCHA.',
+    }
 ];
 
 const CaptchaStyles = [

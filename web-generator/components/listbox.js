@@ -170,7 +170,38 @@ const ListBoxProps = [
 ];
 
 const ListBoxEvents = [
-
+    {
+        name: 'onChange',
+        description: 'Callback to invoke when value of listbox changes.',
+        arguments: [
+            {
+                name: 'event.originalValue',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'even.value',
+                type: 'any',
+                description: 'Single value or an array of values depending on the selection mode'
+            }
+        ]
+    },
+    {
+        name: 'onFilterValueChange',
+        description: 'Callback to invoke when filter value changes.',
+        arguments: [
+            {
+                name: 'event.originalValue',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'even.value',
+                type: 'any',
+                description: 'the filtered value'
+            }
+        ]
+    }
 ];
 
 const ListBoxStyles = [

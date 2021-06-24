@@ -86,7 +86,17 @@ const KnobProps = [
 ];
 
 const KnobEvents = [
-
+    {
+        name: 'onChange',
+        description: 'Callback to invoke when the value changes.',
+        arguments: [
+            {
+                name: 'value',
+                type: 'number',
+                description: 'New value'
+            }
+        ]
+    },
 ];
 
 const KnobStyles = [

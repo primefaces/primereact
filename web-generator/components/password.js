@@ -146,7 +146,14 @@ const PasswordProps = [
 ];
 
 const PasswordEvents = [
-
+    {
+        name: 'onShow',
+        description: 'Callback to invoke when overlay becomes visible.',
+    },
+    {
+        name: 'onHide',
+        description: 'Callback to invoke when overlay becomes hidden.',
+    }
 ];
 
 const PasswordStyles = [

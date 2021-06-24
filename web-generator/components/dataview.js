@@ -158,7 +158,22 @@ const DataViewProps = [
 ];
 
 const DataViewEvents = [
-
+    {
+        name: 'onLoad',
+        description: 'Callback to invoke when layout mode is changed.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.value',
+                type: 'any',
+                description: 'layout mode e.g. "list" or "grid"'
+            }
+        ]
+    }
 ];
 
 const DataViewStyles = [

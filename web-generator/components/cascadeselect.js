@@ -110,7 +110,49 @@ const CascadeSelectProps = [
 ];
 
 const CascadeSelectEvents = [
-
+    {
+        name: 'onChange',
+        description: 'Callback to invoke on value change',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Original event'
+            },
+            {
+                name: 'event.value',
+                type: 'any',
+                description: 'Value of the checkbox'
+            }
+        ]
+    },
+    {
+        name: 'onGroupChange',
+        description: 'Callback to invoke when a group changes',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Original event'
+            }
+        ]
+    },
+    {
+        name: 'onBeforeShow',
+        description: 'Callback to invoke before the overlay is shown.',
+    },
+    {
+        name: 'onBeforeHide',
+        description: 'Callback to invoke before the overlay is hidden.',
+    },
+    {
+        name: 'onShow',
+        description: 'Callback to invoke when the overlay is shown.',
+    },
+    {
+        name: 'onHide',
+        description: 'Callback to invoke when the overlay is hidden.',
+    }
 ];
 
 const CascadeSelectStyles = [

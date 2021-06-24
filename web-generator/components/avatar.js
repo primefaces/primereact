@@ -44,7 +44,28 @@ const AvatarProps = [
 ];
 
 const AvatarEvents = [
-
+    {
+        name: 'onImageError',
+        description: 'This event is triggered if an error occurs while loading an image file.',
+        arguments: [
+            {
+                name: 'event',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onClick',
+        description: 'Callback to invoke on click.',
+        arguments: [
+            {
+                name: 'event',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    }
 ];
 
 const AvatarStyles = [

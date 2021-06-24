@@ -38,7 +38,36 @@ const ToastProps = [
 ];
 
 const ToastEvents = [
-
+    {
+        name: 'onRemove',
+        description: 'Callback to invoke when a message is removed.',
+        arguments: [
+            {
+                name: 'message',
+                type: 'any',
+                description: 'Removed message'
+            },
+        ]
+    },
+    {
+        name: 'onClick',
+        description: 'Callback to invoke when a message gets clicked.',
+        arguments: [
+            {
+                name: 'message',
+                type: 'any',
+                description: 'Clicked message'
+            },
+        ]
+    },
+    {
+        name: 'onShow',
+        description: 'Callback to invoke when message becomes visible.',
+    },
+    {
+        name: 'onHide',
+        description: 'Callback to invoke when message becomes hidden.',
+    }
 ];
 
 const ToastStyles = [

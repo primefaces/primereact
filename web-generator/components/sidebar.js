@@ -98,7 +98,14 @@ const SidebarProps = [
 ];
 
 const SidebarEvents = [
-
+    {
+        name: 'onHide',
+        description: 'Callback to invoke when sidebar gets hidden.',
+    },
+    {
+        name: 'onShow',
+        description: 'Callback to invoke when sidebar gets shown.',
+    }
 ];
 
 const SidebarStyles = [

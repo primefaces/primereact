@@ -278,7 +278,66 @@ const DropdownProps = [
 ];
 
 const DropdownEvents = [
-
+    {
+        name: 'onChange',
+        description: 'Callback to invoke on value change',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Original event'
+            },
+            {
+                name: 'event.value',
+                type: 'any',
+                description: 'Value of the checkbox'
+            }
+        ]
+    },
+    {
+        name: 'onMouseDown',
+        description: 'Callback to invoke to when a mouse button is pressed',
+        arguments: [
+            {
+                name: 'event',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onContextMenu',
+        description: 'Callback to invoke on right-click',
+        arguments: [
+            {
+                name: 'event',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onFocus',
+        description: 'Callback to invoke when the element receives focus.',
+        arguments: [
+            {
+                name: 'event',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onBlur',
+        description: 'Callback to invoke when the element loses focus.',
+        arguments: [
+            {
+                name: 'event',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    }
 ];
 
 const DropdownStyles = [

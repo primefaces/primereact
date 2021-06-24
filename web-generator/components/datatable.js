@@ -488,7 +488,494 @@ const DataTableProps = [
 ];
 
 const DataTableEvents = [
-
+    {
+        name: 'onSelectionChange',
+        description: 'Callback to invoke when selection changes.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.value',
+                type: 'any',
+                description: 'Selection object'
+            }
+        ]
+    },
+    {
+        name: 'onContextMenuSelectionChange',
+        description: 'Callback to invoke when a row selected with right click.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.value',
+                type: 'any',
+                description: 'Selection object'
+            }
+        ]
+    },
+    {
+        name: 'onRowToggle',
+        description: 'Callback to invoke when a row is toggled or collapsed.',
+        arguments: [
+            {
+                name: 'event.data',
+                type: 'any[]',
+                description: 'Expanded rows'
+            }
+        ]
+    },
+    {
+        name: 'onColumnResizeEnd',
+        description: 'Callback to invoke when a column is resized.',
+        arguments: [
+            {
+                name: 'event.element',
+                type: 'object',
+                description: 'DOM element of the resized column.'
+            },
+            {
+                name: 'event.column',
+                type: 'any',
+                description: 'Properties of the resized column.'
+            },
+            {
+                name: 'event.delta',
+                type: 'number',
+                description: 'Change in column width.'
+            }
+        ]
+    },
+    {
+        name: 'onColumnResizerClick',
+        description: 'Callback to invoke when a resizer element is clicked.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event.'
+            },
+            {
+                name: 'event.element',
+                type: 'object',
+                description: 'DOM element of the column.'
+            },
+            {
+                name: 'event.column',
+                type: 'any',
+                description: 'Properties of the column.'
+            }
+        ]
+    },
+    {
+        name: 'onColumnResizerDoubleClick',
+        description: 'Callback to invoke when a resizer element is double clicked.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event.'
+            },
+            {
+                name: 'event.element',
+                type: 'object',
+                description: 'DOM element of the column.'
+            },
+            {
+                name: 'event.column',
+                type: 'any',
+                description: 'Properties of the column.'
+            }
+        ]
+    },
+    {
+        name: 'onSort',
+        description: 'Callback to invoke on sort.',
+        arguments: [
+            {
+                name: 'event.sortField',
+                type: 'string',
+                description: 'Field to sort against.'
+            },
+            {
+                name: 'event.sortOrder',
+                type: 'any',
+                description: 'Sort order as integer.'
+            },
+            {
+                name: 'event.multiSortMeta',
+                type: 'any',
+                description: 'MultiSort metadata.'
+            }
+        ]
+    },
+    {
+        name: 'onPage',
+        description: 'Callback to invoke on pagination.',
+        arguments: [
+            {
+                name: 'event.sortField',
+                type: 'number',
+                description: 'Index of the first row.'
+            },
+            {
+                name: 'event.rows',
+                type: 'number',
+                description: 'Rows per page.'
+            }
+        ]
+    },
+    {
+        name: 'onFilter',
+        description: 'Callback to invoke on filtering.',
+        arguments: [
+            {
+                name: 'event.filters',
+                type: 'any',
+                description: 'Collection of active filters.'
+            }
+        ]
+    },
+    {
+        name: 'onVirtualScroll',
+        description: 'Callback to invoke during virtual scrolling.',
+        arguments: [
+            {
+                name: 'event.first',
+                type: 'number',
+                description: 'Index of the first row.'
+            }
+        ]
+    },
+    {
+        name: 'onAllRowsSelect',
+        description: 'Callback to invoke when all rows are selected using the header checkbox.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event.'
+            },
+            {
+                name: 'event.data',
+                type: 'any',
+                description: 'Selected rows data.'
+            },
+            {
+                name: 'event.type',
+                type: 'any',
+                description: 'Type of the selection, valid value is "all".'
+            }
+        ]
+    },
+    {
+        name: 'onAllRowsUnselect',
+        description: 'Callback to invoke when all rows are unselected using the header checkbox.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event.'
+            },
+            {
+                name: 'event.data',
+                type: 'any',
+                description: 'Unselected rows data.'
+            },
+            {
+                name: 'event.type',
+                type: 'any',
+                description: 'Type of the selection, valid value is "all".'
+            }
+        ]
+    },
+    {
+        name: 'onRowClick',
+        description: 'Callback to invoke when a row is clicked.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event.'
+            },
+            {
+                name: 'event.data',
+                type: 'any',
+                description: 'Clicked row data'
+            },
+            {
+                name: 'event.index',
+                type: 'number',
+                description: 'Clicked row data index'
+            }
+        ]
+    },
+    {
+        name: 'onRowDoubleClick',
+        description: 'Callback to invoke when a row is double clicked.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event.'
+            },
+            {
+                name: 'event.data',
+                type: 'any',
+                description: 'Clicked row data'
+            },
+            {
+                name: 'event.index',
+                type: 'number',
+                description: 'Clicked row data index'
+            }
+        ]
+    },
+    {
+        name: 'onRowSelect',
+        description: 'Callback to invoke when a row is unselected.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event.'
+            },
+            {
+                name: 'event.data',
+                type: 'any',
+                description: 'Selected row data.'
+            },
+            {
+                name: 'event.type',
+                type: 'any',
+                description: 'Type of the selection, valid values are "row", "radio" or "checkbox".'
+            }
+        ]
+    },
+    {
+        name: 'onRowExpand',
+        description: 'Callback to invoke when a row is expanded.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event.'
+            },
+            {
+                name: 'event.data',
+                type: 'any',
+                description: 'Expanded row data.'
+            }
+        ]
+    },
+    {
+        name: 'onRowCollapse',
+        description: 'Callback to invoke when a row is collapsed.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event.'
+            },
+            {
+                name: 'event.data',
+                type: 'any',
+                description: 'Collapsed row data.'
+            }
+        ]
+    },
+    {
+        name: 'onContextMenu',
+        description: 'Callback to invoke when a context menu is clicked.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Original event instance.'
+            },
+            {
+                name: 'event.data',
+                type: 'any',
+                description: 'Collapsed row data.'
+            }
+        ]
+    },
+    {
+        name: 'onColReorder',
+        description: 'Callback to invoke when a column is reordered.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event.'
+            },
+            {
+                name: 'event.dragIndex',
+                type: 'number',
+                description: 'Index of the dragged column.'
+            },
+            {
+                name: 'event.dropIndex',
+                type: 'number',
+                description: 'Index of the dropped column.'
+            },
+            {
+                name: 'event.columns',
+                type: 'object',
+                description: 'Columns array after reorder.'
+            }
+        ]
+    },
+    {
+        name: 'onRowReOrder',
+        description: 'Callback to invoke when a row is reordered.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event.'
+            },
+            {
+                name: 'event.value',
+                type: 'any',
+                description: 'New value after reorder '
+            },
+            {
+                name: 'event.dragIndex',
+                type: 'number',
+                description: 'Index of the dragged row.'
+            },
+            {
+                name: 'event.dropIndex',
+                type: 'number',
+                description: 'Index of the drop location.'
+            }
+        ]
+    },
+    {
+        name: 'onValueChange',
+        description: 'Callback to invoke after filtering and sorting to pass the rendered value.',
+        arguments: [
+            {
+                name: 'value',
+                type: 'any',
+                description: 'Browser event.'
+            }
+        ]
+    },
+    {
+        name: 'rowEditorValidator',
+        description: 'Callback to invoke to validate the editing row when the save icon is clicked on row editing mode.',
+        arguments: [
+            {
+                name: 'data',
+                type: 'any',
+                description: 'Editing row data'
+            }
+        ]
+    },
+    {
+        name: 'onRowEditInit',
+        description: 'Callback to invoke when the editing icon is clicked on row editing mode.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.data',
+                type: 'any',
+                description: 'Editing row data'
+            }
+        ]
+    },
+    {
+        name: 'onRowEditSave',
+        description: 'Callback to invoke when the save icon is clicked on row editing mode.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.data',
+                type: 'any',
+                description: 'Editing row data'
+            }
+        ]
+    },
+    {
+        name: 'onRowEditCancel',
+        description: 'Callback to invoke when the cancel icon is clicked on row editing mode.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.data',
+                type: 'any',
+                description: 'Editing row data'
+            },
+            {
+                name: 'event.index',
+                type: 'number',
+                description: 'Editing row data index'
+            }
+        ]
+    },
+    {
+        name: 'onRowEditChange',
+        description: 'Callback to invoke when the row editor is programmatically shown/hidden on row editing mode.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.data',
+                type: 'any',
+                description: 'Editing rows data'
+            },
+            {
+                name: 'event.index',
+                type: 'number',
+                description: 'Current editing row data index'
+            }
+        ]
+    },
+    {
+        name: 'onStateSave',
+        description: 'Callback to invoke table state is saved.',
+        arguments: [
+            {
+                name: 'state',
+                type: 'object',
+                description: 'Table state'
+            }
+        ]
+    },
+    {
+        name: 'onStateRestore',
+        description: 'Callback to invoke table state is restored.',
+        arguments: [
+            {
+                name: 'state',
+                type: 'object',
+                description: 'Table state'
+            }
+        ]
+    }
 ];
 
 const DataTableStyles = [

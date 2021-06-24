@@ -74,7 +74,25 @@ const ConfirmDialogProps = [
   ];
 
 const ConfirmDialogEvents = [
-
+    {
+        name: 'accept',
+        description: 'Callback to execute when action is confirmed.',
+    },
+    {
+        name: 'reject',
+        description: 'Callback to execute when action is rejected.',
+    },
+    {
+        name: 'onHide',
+        description: 'Callback to invoke when confirm dialog is hidden.',
+        arguments: [
+            {
+                name: 'result',
+                type: 'string',
+                description: 'Indicates with which selection the dialog was closed. Valid values are "accept", "reject" and undefined (outside click).'
+            }
+        ]
+    }
 ];
 
 const ConfirmDialogStyles = [ { name: 'p-confirm-dialog', description: 'Container element.' } ];

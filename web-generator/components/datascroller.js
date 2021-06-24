@@ -74,7 +74,22 @@ const DataScrollerProps = [
 ];
 
 const DataScrollerEvents = [
-
+    {
+        name: 'onLazyLoad',
+        description: 'Callback to invoke in lazy mode to load new data.',
+        arguments: [
+            {
+                name: 'event.first',
+                type: 'number',
+                description: 'First row offset'
+            },
+            {
+                name: 'event.rows',
+                type: 'number',
+                description: 'Number of rows per page'
+            }
+        ]
+    }
 ];
 
 const DataScrollerStyles = [

@@ -3,7 +3,17 @@ const DeferredContentProps = [
 ];
 
 const DeferredContentEvents = [
-
+    {
+        name: 'onLoad',
+        description: 'Callback to invoke when deferred content is loaded.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    }
 ];
 
 const DeferredContentStyles = [

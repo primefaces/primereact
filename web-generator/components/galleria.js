@@ -176,7 +176,25 @@ const GalleriaProps = [
 ];
 
 const GalleriaEvents = [
-
+    {
+        name: 'onItemChange',
+        description: 'Callback to invoke after changing item.',
+        arguments: [
+            {
+                name: 'event.index',
+                type: 'number',
+                description: 'index of the new item.'
+            }
+        ]
+    },
+    {
+        name: 'onShow',
+        description: 'Callback to invoke when modal becomes visible.',
+    },
+    {
+        name: 'onHide',
+        description: 'Callback to invoke when modal becomes hidden.',
+    }
 ];
 
 const GalleriaStyles = [

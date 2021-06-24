@@ -86,7 +86,49 @@ const CheckboxProps = [
 ];
 
 const CheckboxEvents = [
-
+    {
+        name: 'onChange',
+        description: 'Callback to invoke on value change',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Original event'
+            },
+            {
+                name: 'event.value',
+                type: 'any',
+                description: 'Value of the checkbox'
+            },
+            {
+                name: 'event.checked',
+                type: 'boolean',
+                description: 'Checked state as a boolean.'
+            }
+        ]
+    },
+    {
+        name: 'onMouseDown',
+        description: 'Callback to invoke to when a mouse button is pressed',
+        arguments: [
+            {
+                name: 'event',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onContextMenu',
+        description: 'Callback to invoke on right-click.',
+        arguments: [
+            {
+                name: 'event',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    }
 ];
 
 const CheckboxStyles = [

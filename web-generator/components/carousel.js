@@ -110,7 +110,17 @@ const CarouselProps = [
 ];
 
 const CarouselEvents = [
-
+    {
+        name: 'onPageChange',
+        description: 'Callback to invoke after scroll.',
+        arguments: [
+            {
+                name: 'event.page',
+                type: 'number',
+                description: 'Value of the new page.'
+            }
+        ]
+    }
 ];
 
 const CarouselStyles = [

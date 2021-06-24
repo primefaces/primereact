@@ -26,7 +26,90 @@ const GMapProps = [
 ];
 
 const GMapEvents = [
-
+    {
+        name: 'onMapClick',
+        description: 'Callback to invoke when map is clicked except markers.',
+        arguments: [
+            {
+                name: 'event',
+                type: 'object',
+                description: 'Google Maps MouseEvent'
+            }
+        ]
+    },
+    {
+        name: 'onMapDragEnd',
+        description: 'Callback to invoke when map drag (i.e. pan) has ended.',
+    },
+    {
+        name: 'onMapReady',
+        description: 'Callback to invoke when the map is ready to be used.',
+        arguments: [
+            {
+                name: 'event.map',
+                type: 'any',
+                description: 'Google Maps Instance'
+            }
+        ]
+    },
+    {
+        name: 'onOverlayClick',
+        description: 'Callback to invoke when an overlay is clicked.',
+        arguments: [
+            {
+                name: 'originalEvent',
+                type: 'object',
+                description: 'Google Maps MouseEvent'
+            },
+            {
+                name: 'overlay',
+                type: 'any',
+                description: 'Clicked overlay'
+            },
+            {
+                name: 'map',
+                type: 'any',
+                description: 'Map instance'
+            }
+        ]
+    },
+    {
+        name: 'onOverlayDragStart',
+        description: 'Callback to invoke when an overlay drag starts.',
+        arguments: [
+            {
+                name: 'event',
+                type: 'object',
+                description: 'Google Maps MouseEvent'
+            }
+        ]
+    },
+    {
+        name: 'onOverlayDrag',
+        description: 'Callback to invoke when an overlay is being dragged.',
+        arguments: [
+            {
+                name: 'event',
+                type: 'object',
+                description: 'Google Maps MouseEvent'
+            }
+        ]
+    },
+    {
+        name: 'onOverlayDragEnd',
+        description: 'Callback to invoke when an overlay drag ends.',
+        arguments: [
+            {
+                name: 'event',
+                type: 'object',
+                description: 'Google Maps MouseEvent'
+            }
+        ]
+    },
+    {
+        name: 'onZoomChanged',
+        description: 'Callback to invoke when zoom level has changed.',
+    }
 ];
 
 const GMapStyles = [

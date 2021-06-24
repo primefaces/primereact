@@ -74,7 +74,32 @@ const PaginatorProps = [
 ];
 
 const PaginatorEvents = [
-
+    {
+        name: 'onPageChange',
+        description: 'Callback to invoke when page changes, the event object contains information about the new state.',
+        arguments: [
+            {
+                name: 'event.page',
+                type: 'number',
+                description: 'New page number'
+            },
+            {
+                name: 'event.first',
+                type: 'number',
+                description: 'Index of first record'
+            },
+            {
+                name: 'event.rows',
+                type: 'number',
+                description: 'Number of rows to display in new page'
+            },
+            {
+                name: 'event.pageCount',
+                type: 'number',
+                description: 'Total number of pages'
+            }
+        ]
+    },
 ];
 
 const PaginatorStyles = [

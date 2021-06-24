@@ -278,7 +278,84 @@ const MultiSelectProps = [
 ];
 
 const MultiSelectEvents = [
-
+    {
+        name: 'onChange',
+        description: 'Callback to invoke when value changes.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.value',
+                type: 'any',
+                description: 'Current selected values'
+            }
+        ]
+    },
+    {
+        name: 'onFocus',
+        description: 'Callback to invoke when the element receives focus.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onBlur',
+        description: 'Callback to invoke when the element loses focus.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onShow',
+        description: 'Callback to invoke when overlay panel becomes visible.',
+    },
+    {
+        name: 'onHide',
+        description: 'Callback to invoke when overlay panel becomes hidden.',
+    },
+    {
+        name: 'onFilter',
+        description: 'Callback to invoke on filtering.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.filter',
+                type: 'string',
+                description: 'Filter value.'
+            }
+        ]
+    },
+    {
+        name: 'onSelectAll',
+        description: 'Callback to invoke when all data is selected.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.filter',
+                type: 'string',
+                description: 'Filter value.'
+            }
+        ]
+    }
 ];
 
 const MultiSelectStyles = [

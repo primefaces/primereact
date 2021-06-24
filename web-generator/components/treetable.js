@@ -350,7 +350,245 @@ const TreeTableProps = [
 ];
 
 const TreeTableEvents = [
-
+    {
+        name: 'onExpand',
+        description: 'Callback to invoke when a node is expanded.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.node',
+                type: 'any',
+                description: 'Expanded node instance.'
+            }
+        ]
+    },
+    {
+        name: 'onCollapse',
+        description: 'Callback to invoke when a node is collapsed.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.node',
+                type: 'any',
+                description: 'Expanded node instance.'
+            }
+        ]
+    },
+    {
+        name: 'onToggle',
+        description: 'Callback to invoke when a node is toggled.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.node',
+                type: 'any',
+                description: 'Toggled node instance'
+            }
+        ]
+    },
+    {
+        name: 'onPage',
+        description: 'Callback to invoke on pagination.',
+        arguments: [
+            {
+                name: 'event.first',
+                type: 'any',
+                description: 'Index of the first row.'
+            },
+            {
+                name: 'event.rows',
+                type: 'any',
+                description: 'Rows per page.'
+            }
+        ]
+    },
+    {
+        name: 'onSort',
+        description: 'Callback to invoke on pagination.',
+        arguments: [
+            {
+                name: 'event.sortField',
+                type: 'any',
+                description: 'Field to sort against.'
+            },
+            {
+                name: 'event.sortOrder',
+                type: 'any',
+                description: 'Sort order as integer.'
+            },
+            {
+                name: 'event.multiSortMeta',
+                type: 'any',
+                description: 'MultiSort metadata.'
+            }
+        ]
+    },
+    {
+        name: 'onFilter',
+        description: 'Callback to invoke when a node is selected.',
+        arguments: [
+            {
+                name: 'event.filters',
+                type: 'any',
+                description: 'Collection of active filters.'
+            }
+        ]
+    },
+    {
+        name: 'onSelect',
+        description: 'Callback to invoke when a node is selected.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'browser event'
+            },
+            {
+                name: 'event.node',
+                type: 'any',
+                description: 'Selected node instance.'
+            }
+        ]
+    },
+    {
+        name: 'onUnselect',
+        description: 'Callback to invoke when a node is unselected.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'browser event'
+            },
+            {
+                name: 'event.node',
+                type: 'any',
+                description: 'Unselected node instance.'
+            }
+        ]
+    },
+    {
+        name: 'onRowClick',
+        description: 'Callback to invoke when a row is clicked.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'browser event'
+            },
+            {
+                name: 'event.data',
+                type: 'any',
+                description: 'Clicked row data'
+            }
+        ]
+    },
+    {
+        name: 'onSelectionChange',
+        description: 'Callback to invoke when selection changes.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'browser event'
+            },
+            {
+                name: 'event.data',
+                type: 'any',
+                description: 'Selected node key(s).'
+            }
+        ]
+    },
+    {
+        name: 'onContextMenuSelectionChange',
+        description: 'Callback to invoke when selection changes with a context menu.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'browser event'
+            },
+            {
+                name: 'event.value',
+                type: 'any',
+                description: 'Selected node key.'
+            }
+        ]
+    },
+    {
+        name: 'onColumnResizeEnd',
+        description: 'Callback to invoke when a column is resized.',
+        arguments: [
+            {
+                name: 'event.element',
+                type: 'any',
+                description: 'DOM element of the resized column.'
+            },
+            {
+                name: 'event.column',
+                type: 'any',
+                description: 'Properties of the resized column.'
+            },
+            {
+                name: 'event.delta',
+                type: 'any',
+                description: 'Change in column width'
+            }
+        ]
+    },
+    {
+        name: 'onColReorder',
+        description: 'Callback to invoke when a column is reordered.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.dragIndex',
+                type: 'any',
+                description: 'Index of the dragged column'
+            },
+            {
+                name: 'event.dropIndex',
+                type: 'any',
+                description: 'Index of the dropped column'
+            },
+            {
+                name: 'event.columns',
+                type: 'any',
+                description: 'Columns array after reorder.'
+            }
+        ]
+    },
+    {
+        name: 'onContextMenu',
+        description: 'Callback to invoke when a context menu is clicked.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Original event instance.'
+            },
+            {
+                name: 'event.data',
+                type: 'any',
+                description: 'Collapsed row data '
+            }
+        ]
+    }
 ];
 
 const TreeTableStyles = [

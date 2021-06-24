@@ -38,7 +38,44 @@ const InplaceProps = [
   ];
 
 const InplaceEvents = [
-
+    {
+        name: 'onOpen',
+        description: 'Callback to invoke when inplace is opened.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onClose',
+        description: 'Callback to invoke when inplace is closed.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onToggle',
+        description: 'Callback to invoke when inplace is opened or closed.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.value',
+                type: 'boolean',
+                description: 'active state as a boolean'
+            }
+        ]
+    }
 ];
 
 const InplaceStyles = [

@@ -56,7 +56,28 @@ const ChipProps = [
 ];
 
 const ChipEvents = [
-
+    {
+        name: 'onRemove',
+        description: 'Callback to invoke when a chip is removed.',
+        arguments: [
+            {
+                name: 'originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onImageError',
+        description: 'This event is triggered if an error occurs while loading an image file.',
+        arguments: [
+            {
+                name: 'originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    }
 ];
 
 const ChipStyles = [

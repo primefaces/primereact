@@ -152,7 +152,70 @@ const TooltipProps = [
 ];
 
 const TooltipEvents = [
-
+    {
+        name: 'onBeforeShow',
+        description: 'Callback to invoke before the tooltip is shown.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.target',
+                type: 'any',
+                description: 'Target Element.'
+            }
+        ]
+    },
+    {
+        name: 'onBeforeHide',
+        description: 'Callback to invoke before the tooltip is hidden.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.target',
+                type: 'any',
+                description: 'Target Element.'
+            }
+        ]
+    },
+    {
+        name: 'onShow',
+        description: 'Callback to invoke when the tooltip is shown.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.target',
+                type: 'any',
+                description: 'Target Element.'
+            }
+        ]
+    },
+    {
+        name: 'onHide',
+        description: 'Callback to invoke when the tooltip is hidden.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.target',
+                type: 'any',
+                description: 'Target Element.'
+            }
+        ]
+    }
 ];
 
 const TooltipStyles = [

@@ -98,7 +98,25 @@ const SplitButtonProps = [
 ];
 
 const SplitButtonEvents = [
-
+    {
+        name: 'onClick',
+        description: 'Callback to invoke when main button is clicked.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onShow',
+        description: 'Callback to invoke when overlay panel becomes visible.',
+    },
+    {
+        name: 'onHide',
+        description: 'Callback to invoke when overlay panel becomes hidden.',
+    }
 ];
 
 const SplitButtonStyles = [

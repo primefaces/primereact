@@ -62,7 +62,22 @@ const OrderListProps = [
 ];
 
 const OrderListEvents = [
-
+    {
+        name: 'onChange',
+        description: 'Callback to invoke when list is reordered.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.value',
+                type: 'any',
+                description: 'Reordered list'
+            }
+        ]
+    }
 ];
 
 const OrderListStyles = [
