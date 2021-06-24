@@ -1,5 +1,21 @@
 # Changelog
 
+## [6.5.0-rc.1](https://github.com/primefaces/primereact/tree/6.5.0-rc1)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/6.4.1...6.5.0-rc1)
+
+**Implemented New Features and Enhancements:**
+
+- New PrimeReact Build [\#2135](https://github.com/primefaces/primereact/issues/2135)
+
+**Fixed bugs:**
+
+- Tooltips closed on window resize after system keyboard appears on mobile devices [\#2140](https://github.com/primefaces/primereact/issues/2140)
+- Overlay components are not aligned correctly [\#2139](https://github.com/primefaces/primereact/issues/2139)
+- PickList crashes Application when using SourceSelection [\#2133](https://github.com/primefaces/primereact/issues/2133)
+- Calendar yearNavigator not working  [\#2131](https://github.com/primefaces/primereact/issues/2131)
+- Building against primereact 6.4.1 generates TS1036 error against VirtualScroller.d.ts:38 [\#2123](https://github.com/primefaces/primereact/issues/2123)
+
 ## [6.4.1](https://github.com/primefaces/primereact/tree/6.4.1) (2021-06-16)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/6.4.0...6.4.1)
