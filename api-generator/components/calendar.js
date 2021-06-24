@@ -374,6 +374,140 @@ const CalendarProps = [
 ];
 
 const CalendarEvents = [
+    {
+        name: 'onFocus',
+        description: 'The callback function to be executed when the user submits a successful CAPTCHA response.',
+        arguments: [
+            {
+                name: 'event',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onBlur',
+        description: 'Callback to invoke on blur event of input field.',
+        arguments: [
+            {
+                name: 'event',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onInput',
+        description: 'Callback to invoke on input event of input field.',
+        arguments: [
+            {
+                name: 'event',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onSelect',
+        description: 'Callback to invoke when a date is selected.',
+        arguments: [
+            {
+                name: 'event',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'value',
+                type: 'any',
+                description: 'Selected date'
+            }
+        ]
+    },
+    {
+        name: 'onChange',
+        description: 'Callback to invoke when value changes.',
+        arguments: [
+            {
+                name: 'event',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'value',
+                type: 'any',
+                description: 'New date'
+            }
+        ]
+    },
+    {
+        name: 'onTodayButtonClick',
+        description: 'Callback to invoke when today button is clicked.',
+        arguments: [
+            {
+                name: 'event',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onClearButtonClick',
+        description: 'Callback to invoke when clear button is clicked.',
+        arguments: [
+            {
+                name: 'event',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onViewDateChange',
+        description: 'Callback to invoke when the displayed month/year is changed.',
+        arguments: [
+            {
+                name: 'event',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'value',
+                type: 'any',
+                description: 'New date'
+            }
+        ]
+    },
+    {
+        name: 'onShow',
+        description: 'Callback to invoke when the displayed month/year is changed.',
+        arguments: []
+    },
+    {
+        name: 'onHide',
+        description: 'Callback to invoke when overlay panel or modal becomes hidden.',
+        arguments: []
+    },
+    {
+        name: 'onVisibleChange',
+        description: 'Callback to invoke when visible is changed.',
+        arguments: [
+            {
+                name: 'event.visible',
+                type: 'boolean',
+                description: 'Whether the overlay is visible'
+            },
+            {
+                name: 'event.type',
+                type: 'any',
+                description: 'Action type when the overlay is visible/hidden'
+            },
+            {
+                name: 'event.callback',
+                type: '',
+                description: 'It is used to refocus the input field in some cases when the overlay is hidden.'
+            }
+        ]
+    }
 
 ];
 

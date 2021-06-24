@@ -200,7 +200,112 @@ const TreeSelectProps = [
 ];
 
 const TreeSelectEvents = [
-
+    {
+        name: 'onShow',
+        description: 'Callback to invoke when the overlay is shown.',
+        arguments: []
+    },
+    {
+        name: 'onHide',
+        description: 'Callback to invoke when the overlay is hidden.',
+        arguments: []
+    },
+    {
+        name: 'onChange',
+        description: 'Callback to invoke when selection changes.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.value',
+                type: 'any',
+                description: 'Selected node key(s).'
+            }
+        ]
+    },
+    {
+        name: 'onNodeSelect',
+        description: 'Callback to invoke when selection changes.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.node',
+                type: 'any',
+                description: 'Selected node instance.'
+            }
+        ]
+    },
+    {
+        name: 'onNodeUnselect',
+        description: 'Callback to invoke when a node is unselected.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.node',
+                type: 'any',
+                description: 'Unselected node instance.'
+            }
+        ]
+    },
+    {
+        name: 'onNodeExpand',
+        description: 'Callback to invoke when a node is expanded.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.node',
+                type: 'any',
+                description: 'Expanded node instance.'
+            }
+        ]
+    },
+    {
+        name: 'onNodeCollapse',
+        description: 'Callback to invoke when a node is collapsed.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.node',
+                type: 'any',
+                description: 'Collapsed node instance.'
+            }
+        ]
+    },
+    {
+        name: 'onFilterValueChange',
+        description: 'Callback to invoke when a node is collapsed.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.value',
+                type: 'string',
+                description: 'Callback to invoke when filter value changes.'
+            }
+        ]
+    }
 ];
 
 const TreeSelectStyles = [

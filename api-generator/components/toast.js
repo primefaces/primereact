@@ -63,10 +63,12 @@ const ToastEvents = [
     {
         name: 'onShow',
         description: 'Callback to invoke when message becomes visible.',
+        arguments: []
     },
     {
         name: 'onHide',
         description: 'Callback to invoke when message becomes hidden.',
+        arguments: []
     }
 ];
 

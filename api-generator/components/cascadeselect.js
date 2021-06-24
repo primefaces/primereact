@@ -140,18 +140,22 @@ const CascadeSelectEvents = [
     {
         name: 'onBeforeShow',
         description: 'Callback to invoke before the overlay is shown.',
+        argument: []
     },
     {
         name: 'onBeforeHide',
         description: 'Callback to invoke before the overlay is hidden.',
+        arguments: []
     },
     {
         name: 'onShow',
         description: 'Callback to invoke when the overlay is shown.',
+        arguments: []
     },
     {
         name: 'onHide',
         description: 'Callback to invoke when the overlay is hidden.',
+        arguments: []
     }
 ];
 

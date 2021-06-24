@@ -190,10 +190,12 @@ const GalleriaEvents = [
     {
         name: 'onShow',
         description: 'Callback to invoke when modal becomes visible.',
+        arguments: []
     },
     {
         name: 'onHide',
         description: 'Callback to invoke when modal becomes hidden.',
+        arguments: []
     }
 ];
 
