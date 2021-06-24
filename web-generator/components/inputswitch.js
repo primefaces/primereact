@@ -1,5 +1,64 @@
 const InputSwitchProps = [
-
+    {
+        name: 'id',
+        type: 'string',
+        default: 'null',
+        description: 'Unique identifier of the element.'
+    },
+    {
+        name: 'style',
+        type: 'string',
+        default: 'null',
+        description: 'Inline style of the element.'
+    },
+    {
+        name: 'className',
+        type: 'string',
+        default: 'null',
+        description: 'Style class of the element.'
+    },
+    {
+        name: 'inputId',
+        type: 'string',
+        default: 'null',
+        description: 'Identifier of the input element.'
+    },
+    {
+        name: 'name',
+        type: 'string',
+        default: 'null',
+        description: 'Name of the input element.'
+    },
+    {
+        name: 'checked',
+        type: 'boolean',
+        default: 'false',
+        description: 'Specifies whether a inputswitch should be checked or not.'
+    },
+    {
+        name: 'disabled',
+        type: 'boolean',
+        default: 'false',
+        description: 'When present, it specifies that the component should be disabled.'
+    },
+    {
+        name: 'tooltip',
+        type: 'any',
+        default: 'null',
+        description: 'Content of the tooltip.'
+    },
+    {
+        name: 'tooltipOptions',
+        type: 'object',
+        default: 'null',
+        description: 'Configuration of the tooltip, refer to the tooltip documentation for more information.'
+    },
+    {
+        name: 'ariaLabelledBy',
+        type: 'string',
+        default: 'null',
+        description: 'Establishes relationships between the component and label(s) where its value should be one or more element IDs.'
+    }
 ];
 
 const InputSwitchEvents = [
@@ -7,7 +66,15 @@ const InputSwitchEvents = [
 ];
 
 const InputSwitchStyles = [
-
+    { name: 'p-inputswitch', description: 'Container element.' },
+    {
+        name: 'p-inputswitch-checked',
+        description: 'Container element in active state.'
+    },
+    {
+        name: 'p-inputswitch-slider',
+        description: 'Slider element behind the handle.'
+    }
 ];
 
 module.exports = {

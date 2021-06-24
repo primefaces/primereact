@@ -40,13 +40,24 @@ const AccordionTabProps = [
         type: 'object',
         default: 'null',
         description: 'Inline style of the tab content.'
-    },
+    }
+];
+
+const AccordionTabEvents = [
+
+];
+
+const AccordionTabStyles = [
+
 ];
 
 module.exports = {
     accordiontab: {
         name: 'AccordionTab',
         description: 'Accordion element consists of one or more AccordionTab elements.',
-        props: AccordionTabProps
+        docUrl: 'https://primefaces.org/primereact/showcase/#/accordion',
+        props: AccordionTabProps,
+        events: AccordionTabEvents,
+        styles: AccordionTabStyles
     }
 };

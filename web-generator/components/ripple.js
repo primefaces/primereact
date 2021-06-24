@@ -7,7 +7,12 @@ const RippleEvents = [
 ];
 
 const RippleStyles = [
-
+    { name: 'p-ripple', description: 'Host element.' },
+    { name: 'p-ink', description: 'Ripple element.' },
+    {
+        name: 'p-ink-active',
+        description: 'Ripple element during animating.'
+    }
 ];
 
 module.exports = {

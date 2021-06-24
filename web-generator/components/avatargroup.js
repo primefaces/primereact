@@ -6,9 +6,7 @@ const AvatarGroupEvents = [
 
 ];
 
-const AvatarGroupStyles = [
-
-];
+const AvatarGroupStyles = [ { name: 'p-avatar-group', description: 'Container element.' } ];
 
 module.exports = {
     avatargroup: {
