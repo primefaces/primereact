@@ -73,7 +73,7 @@ const TriStateCheckboxStyles = [
 ];
 
 module.exports = {
-    virtualscroller: {
+    tristatecheckbox: {
         name: 'TriStateCheckbox',
         description: 'Accordion groups a collection of contents in tabs.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/tristatecheckbox',
