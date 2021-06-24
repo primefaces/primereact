@@ -100,7 +100,7 @@ const ConfirmDialogStyles = [ { name: 'p-confirm-dialog', description: 'Containe
 module.exports = {
     confirmdialog: {
         name: 'ConfirmDialog',
-        description: 'TODO',
+        description: 'ConfirmDialog uses a Dialog UI with confirmDialog method or <ConfirmDialog> tag.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/confirmdialog',
         props: ConfirmDialogProps,
         events: ConfirmDialogEvents,

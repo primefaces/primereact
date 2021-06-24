@@ -333,7 +333,7 @@ const FileUploadStyles = [
 module.exports = {
     fileupload: {
         name: 'FileUpload',
-        description: 'TODO',
+        description: 'FileUpload is an advanced uploader with dragdrop support, multi file uploads, auto uploading, progress tracking and validations.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/fileupload',
         props: FileUploadProps,
         events: FileUploadEvents,

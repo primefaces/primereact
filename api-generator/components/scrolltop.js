@@ -53,7 +53,7 @@ const ScrollTopStyles = [
 module.exports = {
     scrolltop: {
         name: 'ScrollTop',
-        description: 'TODO',
+        description: 'ScrollTop gets displayed after a certain scroll position and used to navigates to the top of the page quickly.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/scrolltop',
         props: ScrollTopProps,
         events: ScrollTopEvents,

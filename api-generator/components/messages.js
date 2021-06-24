@@ -77,7 +77,7 @@ const MessagesStyles = [
 module.exports = {
     messages: {
         name: 'Messages',
-        description: 'TODO',
+        description: 'Messages is used to display inline messages with various severities.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/messages',
         props: MessagesProps,
         events: MessagesEvents,

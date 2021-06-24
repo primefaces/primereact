@@ -128,7 +128,7 @@ const SlideMenuStyles = [
 module.exports = {
     slidemenu: {
         name: 'SlideMenu',
-        description: 'TODO',
+        description: 'SlideMenu displays submenus with a slide animation.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/slidemenu',
         props: SlideMenuProps,
         events: SlideMenuEvents,

@@ -128,7 +128,7 @@ const SplitButtonStyles = [
 module.exports = {
     splitbutton: {
         name: 'SplitButton',
-        description: 'TODO',
+        description: 'SplitButton groups a set of commands in an overlay with a default command.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/splitbutton',
         props: SplitButtonProps,
         events: SplitButtonEvents,

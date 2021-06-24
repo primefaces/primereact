@@ -90,7 +90,7 @@ const TriStateCheckboxStyles = [
 module.exports = {
     tristatecheckbox: {
         name: 'TriStateCheckbox',
-        description: 'Accordion groups a collection of contents in tabs.',
+        description: 'TriStateCheckbox is used to select either "true", "false" or "null" as the value.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/tristatecheckbox',
         props: TriStateCheckboxProps,
         events: TriStateCheckboxEvents,

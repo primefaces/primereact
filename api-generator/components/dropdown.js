@@ -368,7 +368,7 @@ const DropdownStyles = [
 module.exports = {
     dropdown: {
         name: 'Dropdown',
-        description: 'TODO',
+        description: 'Dropdown is used to select an item from a collection of options.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/dropdown',
         props: DropdownProps,
         events: DropdownEvents,

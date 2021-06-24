@@ -34,7 +34,7 @@ const InputTextStyles = [ { name: 'p-inputtext', description: 'Input element' } 
 module.exports = {
     inputtext: {
         name: 'InputText',
-        description: 'TODO',
+        description: 'InputText is an extension to standard input element with theming and keyfiltering.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/inputtext',
         props: InputTextProps,
         events: InputTextEvents,

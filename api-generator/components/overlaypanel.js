@@ -78,7 +78,7 @@ const OverlayPanelStyles = [
 module.exports = {
     overlaypanel: {
         name: 'OverlayPanel',
-        description: 'TODO',
+        description: 'OverlayPanel is a container component that can overlay other components on page.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/overlaypanel',
         props: OverlayPanelProps,
         events: OverlayPanelEvents,

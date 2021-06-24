@@ -53,7 +53,7 @@ const MenubarStyles = [
 module.exports = {
     menubar: {
         name: 'Menubar',
-        description: 'TODO',
+        description: 'Menubar is a horizontal menu component.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/menubar',
         props: MenubarProps,
         events: MenubarEvents,

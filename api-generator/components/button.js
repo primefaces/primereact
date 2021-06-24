@@ -68,7 +68,7 @@ const ButtonStyles = [
 module.exports = {
     button: {
         name: 'Button',
-        description: 'TODO',
+        description: 'Button is an extension to standard input element with icons and theming.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/button',
         props: ButtonProps,
         events: ButtonEvents,

@@ -36,7 +36,7 @@ const SplitterPanelStyles = [
 module.exports = {
     splitterpanel: {
         name: 'SplitterPanel',
-        description: 'TODO',
+        description: 'SplitterPanel is helper component for Splitter.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/splitter',
         props: SplitterPanelProps,
         events: SplitterPanelEvents,

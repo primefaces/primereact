@@ -91,7 +91,7 @@ const MenuStyles = [
 module.exports = {
     menu: {
         name: 'Menu',
-        description: 'TODO',
+        description: 'Menu is a navigation/command component that supports dynamic and static positioning.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/menu',
         props: MenuProps,
         events: MenuEvents,

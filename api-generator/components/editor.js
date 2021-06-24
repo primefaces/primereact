@@ -114,7 +114,7 @@ const EditorStyles = [
 module.exports = {
     editor: {
         name: 'Editor',
-        description: 'TODO',
+        description: 'Editor is rich text editor component based on Quill.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/editor',
         props: EditorProps,
         events: EditorEvents,

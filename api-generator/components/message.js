@@ -48,7 +48,7 @@ const MessageStyles = [
 module.exports = {
     message: {
         name: 'Message',
-        description: 'TODO',
+        description: 'Message component is useful in cases where a single message needs to be displayed related to an element such as forms.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/message',
         props: MessageProps,
         events: MessageEvents,

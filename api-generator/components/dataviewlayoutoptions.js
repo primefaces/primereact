@@ -36,7 +36,7 @@ const DataViewLayoutOptionsStyles = [
 module.exports = {
     dataviewlayoutoptions: {
         name: 'DataViewLayoutOptions',
-        description: 'TODO',
+        description: 'DataViewLayoutOptions is a helper component to choose between layout modes. This component is used in controlled manner to manage the state of layout orientation.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/dataview',
         props: DataViewLayoutOptionsProps,
         events: DataViewLayoutOptionsEvents,

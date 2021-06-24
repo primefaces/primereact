@@ -68,7 +68,7 @@ const CaptchaStyles = [
 module.exports = {
     captcha: {
         name: 'Captcha',
-        description: 'TODO',
+        description: 'Captcha is a form validation component based on Recaptcha.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/captcha',
         props: CaptchaProps,
         events: CaptchaEvents,

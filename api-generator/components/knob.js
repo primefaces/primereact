@@ -109,7 +109,7 @@ const KnobStyles = [
 module.exports = {
     knob: {
         name: 'Knob',
-        description: 'TODO',
+        description: 'Knob is a form component to define number inputs with a dial.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/knob',
         props: KnobProps,
         events: KnobEvents,

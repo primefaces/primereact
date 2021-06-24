@@ -47,7 +47,7 @@ const MegaMenuStyles = [
 module.exports = {
     megamenu: {
         name: 'MegaMenu',
-        description: 'TODO',
+        description: 'MegaMenu is navigation component that displays submenus together.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/megamenu',
         props: MegaMenuProps,
         events: MegaMenuEvents,

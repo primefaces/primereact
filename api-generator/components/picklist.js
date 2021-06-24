@@ -87,7 +87,7 @@ const PickListProps = [
         name: 'metaKeySelection',
         type: 'boolean',
         default: 'true',
-        description: '                                        <td>'
+        description: 'Defines how multiple items can be selected, when true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.'
     },
     {
         name: 'tabIndex',
@@ -239,7 +239,7 @@ const PickListStyles = [
 module.exports = {
     picklist: {
         name: 'PickList',
-        description: 'TODO',
+        description: 'PickList is used to reorder items between different lists.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/picklist',
         props: PickListProps,
         events: PickListEvents,

@@ -90,7 +90,7 @@ const RatingStyles = [
 module.exports = {
     rating: {
         name: 'Rating',
-        description: 'TODO',
+        description: 'Rating componentsis a star based selection input.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/rating',
         props: RatingProps,
         events: RatingEvents,

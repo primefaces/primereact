@@ -111,7 +111,7 @@ const TreeTableProps = [
         name: 'currentPageReportTemplate',
         type: 'string',
         default: '({`{currentPage} of {totalPages}`})',
-        description: '                                        <td>'
+        description: 'Template of the current page report element. Available placeholders are {currentPage}, {totalPages}, {rows}, {first}, {last} and {totalRecords}.'
     },
     {
         name: 'paginatorDropdownAppendTo',
@@ -201,7 +201,7 @@ const TreeTableProps = [
         name: 'metaKeySelection',
         type: 'boolean',
         default: 'true',
-        description: '                                        <td>'
+        description: 'Defines how multiple items can be selected, when true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.'
     },
     {
         name: 'selectOnEdit',
@@ -619,7 +619,7 @@ const TreeTableStyles = [
 module.exports = {
     treetable: {
         name: 'TreeTable',
-        description: 'TODO',
+        description: 'TreeTable is used to display hierarchical data in tabular format.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/treetable',
         props: TreeTableProps,
         events: TreeTableEvents,

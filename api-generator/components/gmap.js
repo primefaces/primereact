@@ -119,7 +119,7 @@ const GMapStyles = [
 module.exports = {
     gmap: {
         name: 'GMap',
-        description: 'TODO',
+        description: 'GMap component provides integration with Google Maps API.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/gmap',
         props: GMapProps,
         events: GMapEvents,

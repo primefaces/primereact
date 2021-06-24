@@ -92,7 +92,7 @@ const ContextMenuStyles = [
 module.exports = {
     contextmenu: {
         name: 'ContextMenu',
-        description: 'TODO',
+        description: 'ContextMenu displays an overlay menu on right click of its target.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/contextmenu',
         props: ContextMenuProps,
         events: ContextMenuEvents,

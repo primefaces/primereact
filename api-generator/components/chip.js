@@ -93,7 +93,7 @@ const ChipStyles = [
 module.exports = {
     chip: {
         name: 'Chip',
-        description: 'TODO',
+        description: 'Chip represents entities using icons, labels and images.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/chip',
         props: ChipProps,
         events: ChipEvents,

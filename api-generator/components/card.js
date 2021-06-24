@@ -58,7 +58,7 @@ const CardStyles = [
 module.exports = {
     card: {
         name: 'Card',
-        description: 'TODO',
+        description: 'Card is a flexible container component.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/card',
         props: CardProps,
         events: CardEvents,

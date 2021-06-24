@@ -13,7 +13,7 @@ const RowStyles = [
 module.exports = {
     row: {
         name: 'Row',
-        description: 'TODO',
+        description: 'Row is helper component for ColumnGroup',
         docUrl: 'https://primefaces.org/primereact/showcase/#/row',
         props: RowProps,
         events: RowEvents,

@@ -67,7 +67,7 @@ const TabMenuStyles = [
 module.exports = {
     tabmenu: {
         name: 'TabMenu',
-        description: 'TODO',
+        description: 'Menu is a navigation/command component that displays items as tab headers.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/tabmenu',
         props: TabMenuProps,
         events: TabMenuEvents,

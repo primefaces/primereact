@@ -39,7 +39,7 @@ const SplitterProps = [
         name: 'stateStorage',
         type: 'string',
         default: 'session',
-        description: '                                    <td>'
+        description: 'Defines where a stateful splitter keeps its state, valid values are "session" for sessionStorage and "local" for localStorage.'
     }
 ];
 
@@ -90,7 +90,7 @@ const SplitterStyles = [
 module.exports = {
     splitter: {
         name: 'Splitter',
-        description: 'TODO',
+        description: 'Splitter is utilized to separate and resize panels.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/splitter',
         props: SplitterProps,
         events: SplitterEvents,

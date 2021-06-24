@@ -144,7 +144,7 @@ const CheckboxStyles = [
 module.exports = {
     checkbox: {
         name: 'Checkbox',
-        description: 'TODO',
+        description: 'Checkbox is an extension to standard checkbox element with skinning capabilities.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/checkbox',
         props: CheckboxProps,
         events: CheckboxEvents,

@@ -63,7 +63,7 @@ const TreeProps = [
         name: 'metaKeySelection',
         type: 'boolean',
         default: 'true',
-        description: '                                        <td>'
+        description: 'Defines how multiple items can be selected, when true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.'
     },
     {
         name: 'propagateSelectionUp',
@@ -366,7 +366,7 @@ const TreeStyles = [
 module.exports = {
     tree: {
         name: 'Tree',
-        description: 'TODO',
+        description: 'Tree is used to display hierarchical data.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/tree',
         props: TreeProps,
         events: TreeEvents,

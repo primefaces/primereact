@@ -50,7 +50,7 @@ const ProgressSpinnerStyles = [
 module.exports = {
     progressspinner: {
         name: 'ProgressSpinner',
-        description: 'TODO',
+        description: 'ProgressSpinner is a process status indicator.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/progressspinner',
         props: ProgressSpinnerProps,
         events: ProgressSpinnerEvents,

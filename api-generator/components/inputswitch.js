@@ -117,7 +117,7 @@ const InputSwitchStyles = [
 module.exports = {
     inputswitch: {
         name: 'InputSwitch',
-        description: 'TODO',
+        description: 'InputSwitch is used to select a boolean value.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/inputswitch',
         props: InputSwitchProps,
         events: InputSwitchEvents,

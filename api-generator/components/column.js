@@ -417,7 +417,7 @@ const ColumnStyles = [
 module.exports = {
     column: {
         name: 'Column',
-        description: 'TODO',
+        description: 'Column component defines various options to specify corresponding features.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/column',
         props: ColumnProps,
         events: ColumnEvents,

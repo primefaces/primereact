@@ -137,7 +137,7 @@ const ConfirmPopupStyles = [
 module.exports = {
     confirmpopup: {
         name: 'ConfirmPopup',
-        description: 'TODO',
+        description: 'ConfirmPopup displays a confirmation overlay displayed relatively to its target.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/confirmpopup',
         props: ConfirmPopupProps,
         events: ConfirmPopupEvents,

@@ -100,7 +100,7 @@ const TimelineStyles = [
 module.exports = {
     timeline: {
         name: 'Timeline',
-        description: 'TODO',
+        description: 'Timeline visualizes a series of chained events.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/timeline',
         props: TimelineProps,
         events: TimelineEvents,

@@ -89,7 +89,7 @@ const OrderListStyles = [
 module.exports = {
     orderlist: {
         name: 'OrderList',
-        description: 'TODO',
+        description: 'OrderList is used to sort a collection.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/orderlist',
         props: OrderListProps,
         events: OrderListEvents,

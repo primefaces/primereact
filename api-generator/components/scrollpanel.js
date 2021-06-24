@@ -44,7 +44,7 @@ const ScrollPanelStyles = [
 module.exports = {
     scrollpanel: {
         name: 'ScrollPanel',
-        description: 'TODO',
+        description: 'ScrollPanel is a cross browser, lightweight and skinnable alternative to native browser scrollbar.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/scrollpanel',
         props: ScrollPanelProps,
         events: ScrollPanelEvents,

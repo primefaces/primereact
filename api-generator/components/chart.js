@@ -60,7 +60,7 @@ const ChartStyles = [
 module.exports = {
     chart: {
         name: 'Chart',
-        description: 'TODO',
+        description: 'Chart components are based on Charts.js, an open source HTML5 based charting library.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/chart',
         props: ChartProps,
         events: ChartEvents,

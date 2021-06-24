@@ -28,7 +28,7 @@ const InputTextareaStyles = [ { name: 'p-inputtextarea', description: 'Textarea 
 module.exports = {
     inputtextarea: {
         name: 'InputTextarea',
-        description: 'TODO',
+        description: 'Inputtextarea add styling and autoResize functionality to standard textarea element.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/inputtextarea',
         props: InputTextareaProps,
         events: InputTextareaEvents,

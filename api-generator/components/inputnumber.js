@@ -57,7 +57,7 @@ const InputNumberProps = [
         name: 'localeMatcher',
         type: 'string',
         default: 'best fit',
-        description: '                            <td>'
+        description: 'The locale matching algorithm to use. Possible values are "lookup" and "best fit"; the default is "best fit". See Locale Negotation for details.'
     },
     {
         name: 'mode',
@@ -81,13 +81,13 @@ const InputNumberProps = [
         name: 'currency',
         type: 'string',
         default: 'null',
-        description: '                            <td>'
+        description: 'The currency to use in currency formatting. Possible values are the ISO 4217 currency codes, such as "USD" for the US dollar, "EUR" for the euro, or "CNY" for the Chinese RMB. There is no default value; if the style is "currency", the currency property must be provided.'
     },
     {
         name: 'currencyDisplay',
         type: 'string',
         default: 'symbol',
-        description: '                            <td>'
+        description: 'How to display the currency in currency formatting. Possible values are "symbol" to use a localized currency symbol such as €, ü"code" to use the ISO currency code, "name" to use a localized currency name such as "dollar"; the default is "symbol".'
     },
     {
         name: 'useGrouping',
@@ -99,13 +99,13 @@ const InputNumberProps = [
         name: 'minFractionDigits',
         type: 'number',
         default: 'null',
-        description: '                            <td>'
+        description: 'The minimum number of fraction digits to use. Possible values are from 0 to 20; the default for plain number and percent formatting is 0; the default for currency formatting is the number of minor unit digits provided by the ISO 4217 currency code list (2 if the list doesn\'t provide that information).'
     },
     {
         name: 'maxFractionDigits',
         type: 'number',
         default: 'null',
-        description: '                            <td>'
+        description: 'The maximum number of fraction digits to use. Possible values are from 0 to 20; the default for plain number formatting is the larger of minimumFractionDigits and 3; the default for currency formatting is the larger of minimumFractionDigits and the number of minor unit digits provided by the ISO 4217 currency code list(2 if the list doesn\'t provide that information).'
     },
     {
         name: 'id',
@@ -342,7 +342,7 @@ const InputNumberStyles = [
 module.exports = {
     inputnumber: {
         name: 'InputNumber',
-        description: 'TODO',
+        description: 'InputNumber is an input component to provide numerical input.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/inputnumber',
         props: InputNumberProps,
         events: InputNumberEvents,

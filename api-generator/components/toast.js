@@ -92,7 +92,7 @@ const ToastStyles = [
 module.exports = {
     toast: {
         name: 'Toast',
-        description: 'TODO',
+        description: 'Toast is used to display messages in an overlay.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/toast',
         props: ToastProps,
         events: ToastEvents,

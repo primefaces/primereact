@@ -194,7 +194,7 @@ const DataViewStyles = [
 module.exports = {
     dataview: {
         name: 'DataView',
-        description: 'TODO',
+        description: 'DataView displays data in grid or list layout with pagination and sorting features.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/dataview',
         props: DataViewProps,
         events: DataViewEvents,

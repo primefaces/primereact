@@ -129,7 +129,7 @@ const ToggleButtonStyles = [
 module.exports = {
     togglebutton: {
         name: 'ToggleButton',
-        description: 'TODO',
+        description: 'ToggleButton is used to select a boolean value using a button.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/togglebutton',
         props: ToggleButtonProps,
         events: ToggleButtonEvents,

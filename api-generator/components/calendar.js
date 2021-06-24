@@ -419,7 +419,7 @@ const CalendarStyles = [
 module.exports = {
     calendar: {
         name: 'Calendar',
-        description: 'TODO',
+        description: 'Calendar is a form component to work with dates.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/calendar',
         props: CalendarProps,
         events: CalendarEvents,

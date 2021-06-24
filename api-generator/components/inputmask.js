@@ -179,7 +179,7 @@ const InputMaskStyles = [
 module.exports = {
     inputmask: {
         name: 'InputMask',
-        description: 'TODO',
+        description: 'InputMask component is used to enter input in a certain format such as numeric, date, currency, email and phone.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/inputmask',
         props: InputMaskProps,
         events: InputMaskEvents,

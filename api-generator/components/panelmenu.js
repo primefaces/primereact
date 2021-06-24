@@ -64,7 +64,7 @@ const PanelMenuStyles = [
 module.exports = {
     panelmenu: {
         name: 'PanelMenu',
-        description: 'TODO',
+        description: 'PanelMenu is a hybrid of accordion-tree components.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/panelmenu',
         props: PanelMenuProps,
         events: PanelMenuEvents,

@@ -56,7 +56,7 @@ const SkeletonStyles = [
 module.exports = {
     skeleton: {
         name: 'Skeleton',
-        description: 'TODO',
+        description: 'Skeleton is a placeholder to display instead of the actual content.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/skeleton',
         props: SkeletonProps,
         events: SkeletonEvents,

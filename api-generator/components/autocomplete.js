@@ -51,7 +51,7 @@ const AutoCompleteProps = [
         name: 'forceSelection',
         type: 'boolean',
         default: 'false',
-        description: '                                        <td>'
+        description: 'When present, autocomplete clears the manual input if it does not match of the suggestions to force only accepting values from the suggestions.'
     },
     {
         name: 'autoHighlight',
@@ -462,7 +462,7 @@ const AutoCompleteStyles = [
 module.exports = {
     autocomplete: {
         name: 'AutoComplete',
-        description: 'TODO',
+        description: 'AutoComplete is an input component that provides real-time suggestions when being typed.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/autocomplete',
         props: AutoCompleteProps,
         events: AutoCompleteEvents,

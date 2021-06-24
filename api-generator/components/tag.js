@@ -39,7 +39,7 @@ const TagStyles = [
 module.exports = {
     tag: {
         name: 'Tag',
-        description: 'TODO',
+        description: 'Tag component is used to categorize content.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/tag',
         props: TagProps,
         events: TagEvents,

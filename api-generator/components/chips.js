@@ -167,7 +167,7 @@ const ChipsStyles = [
 module.exports = {
     chips: {
         name: 'Chips',
-        description: 'TODO',
+        description: 'Chips is used to enter multiple values on an input field.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/chips',
         props: ChipsProps,
         events: ChipsEvents,

@@ -45,7 +45,7 @@ const BreadCrumbStyles = [
 module.exports = {
     breadcrumb: {
         name: 'BreadCrumb',
-        description: 'TODO',
+        description: 'Breadcrumb provides contextual information about page hierarchy.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/breadcrumb',
         props: BreadCrumbProps,
         events: BreadCrumbEvents,

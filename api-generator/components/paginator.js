@@ -63,7 +63,7 @@ const PaginatorProps = [
         name: 'currentPageReportTemplate',
         type: 'string',
         default: '(&#123;currentPage&#125; of &#123;totalPages&#125;)',
-        description: '                                        <td>'
+        description: 'Template of the current page report element. Available placeholders are {currentPage},{totalPages},{rows},{first},{last} and {totalRecords}.'
     },
     {
         name: 'dropdownAppendTo',
@@ -122,7 +122,7 @@ const PaginatorStyles = [
 module.exports = {
     paginator: {
         name: 'Paginator',
-        description: 'TODO',
+        description: 'Paginator is a generic widget to display content in paged format.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/paginator',
         props: PaginatorProps,
         events: PaginatorEvents,

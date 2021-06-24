@@ -3,7 +3,7 @@ const DividerProps = [
         name: 'align',
         type: 'string',
         default: 'null',
-        description: '                                <td>'
+        description: 'Alignment of the content, options are "left", "center", "right" for horizontal layout and "top", "center", "bottom" for vertical.'
     },
     {
         name: 'layout',
@@ -70,7 +70,7 @@ const DividerStyles = [
 module.exports = {
     divider: {
         name: 'Divider',
-        description: 'TODO',
+        description: 'Divider is used to separate contents.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/divider',
         props: DividerProps,
         events: DividerEvents,

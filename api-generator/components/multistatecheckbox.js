@@ -120,7 +120,7 @@ const MultiStateCheckboxStyles = [
 module.exports = {
     multistatecheckbox: {
         name: 'MultiStateCheckbox',
-        description: 'TODO',
+        description: 'MultiStateCheckbox is used to select a state from given multiple states.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/multistatecheckbox',
         props: MultiStateCheckboxProps,
         events: MultiStateCheckboxEvents,

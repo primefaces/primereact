@@ -230,7 +230,7 @@ const GalleriaStyles = [
 module.exports = {
     galleria: {
         name: 'Galleria',
-        description: 'TODO',
+        description: 'Galleria is a content gallery component.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/galleria',
         props: GalleriaProps,
         events: GalleriaEvents,

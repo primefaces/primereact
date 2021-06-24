@@ -173,7 +173,7 @@ const PasswordStyles = [
 module.exports = {
     password: {
         name: 'Password',
-        description: 'TODO',
+        description: 'Password displays strength indicator for password fields.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/password',
         props: PasswordProps,
         events: PasswordEvents,

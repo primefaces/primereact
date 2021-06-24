@@ -153,7 +153,7 @@ const CarouselStyles = [
 module.exports = {
     carousel: {
         name: 'Carousel',
-        description: 'TODO',
+        description: 'Carousel is a content slider featuring various customization options.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/carousel',
         props: CarouselProps,
         events: CarouselEvents,

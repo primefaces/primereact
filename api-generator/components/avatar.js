@@ -93,7 +93,7 @@ const AvatarStyles = [
 module.exports = {
     avatar: {
         name: 'Avatar',
-        description: 'TODO',
+        description: 'Avatar represents people using icons, labels and images.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/avatar',
         props: AvatarProps,
         events: AvatarEvents,

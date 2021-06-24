@@ -82,7 +82,7 @@ const ProgressBarStyles = [
 module.exports = {
     progressbar: {
         name: 'ProgressBar',
-        description: 'TODO',
+        description: 'ProgressBar is a process status indicator.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/progressbar',
         props: ProgressBarProps,
         events: ProgressBarEvents,

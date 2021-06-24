@@ -53,7 +53,7 @@ const BadgeStyles = [
 module.exports = {
     badge: {
         name: 'Badge',
-        description: 'TODO',
+        description: 'Badge is a small status indicator for another element.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/badge',
         props: BadgeProps,
         events: BadgeEvents,

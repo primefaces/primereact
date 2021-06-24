@@ -107,7 +107,7 @@ const RadioButtonStyles = [
 module.exports = {
     radiobutton: {
         name: 'RadioButton',
-        description: 'TODO',
+        description: 'RadioButton is an extension to standard radio button element with skinning capabilities.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/radiobutton',
         props: RadioButtonProps,
         events: RadioButtonEvents,

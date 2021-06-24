@@ -227,7 +227,7 @@ const TooltipStyles = [
 module.exports = {
     tooltip: {
         name: 'Tooltip',
-        description: 'TODO',
+        description: 'Tooltip functionality is integrated within various PrimeReact components.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/tooltip',
         props: TooltipProps,
         events: TooltipEvents,

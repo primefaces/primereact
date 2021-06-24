@@ -309,7 +309,7 @@ const DialogStyles = [
 module.exports = {
     dialog: {
         name: 'Dialog',
-        description: 'TODO',
+        description: 'Dialog is a container to display content in an overlay window.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/dialog',
         props: DialogProps,
         events: DialogEvents,

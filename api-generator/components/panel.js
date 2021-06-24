@@ -107,7 +107,7 @@ const PanelStyles = [
 module.exports = {
     panel: {
         name: 'Panel',
-        description: 'TODO',
+        description: 'Panel is a grouping component providing with content toggle feature.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/panel',
         props: PanelProps,
         events: PanelEvents,

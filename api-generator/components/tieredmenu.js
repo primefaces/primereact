@@ -92,7 +92,7 @@ const TieredMenuStyles = [
 module.exports = {
     tieredmenu: {
         name: 'TieredMenu',
-        description: 'TODO',
+        description: 'TieredMenu displays submenus in nested overlays.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/tieredmenu',
         props: TieredMenuProps,
         events: TieredMenuEvents,

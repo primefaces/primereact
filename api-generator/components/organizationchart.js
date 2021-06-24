@@ -125,7 +125,7 @@ const OrganizationChartStyles = [
 module.exports = {
     organizationchart: {
         name: 'OrganizationChart',
-        description: 'TODO',
+        description: 'OrganizationChart visualizes hierarchical organization data.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/organizationchart',
         props: OrganizationChartProps,
         events: OrganizationChartEvents,

@@ -18,7 +18,7 @@ const RippleStyles = [
 module.exports = {
     ripple: {
         name: 'Ripple',
-        description: 'TODO',
+        description: 'Ripple component adds ripple effect to the host element.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/ripple',
         props: RippleProps,
         events: RippleEvents,

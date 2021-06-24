@@ -129,7 +129,7 @@ const SelectButtonStyles = [
 module.exports = {
     selectbutton: {
         name: 'SelectButton',
-        description: 'TODO',
+        description: 'SelectButton is used to choose single or multiple items from a list using buttons.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/selectbutton',
         props: SelectButtonProps,
         events: SelectButtonEvents,

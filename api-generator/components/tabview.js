@@ -61,7 +61,7 @@ const TabViewStyles = [
 module.exports = {
     tabview: {
         name: 'TabView',
-        description: 'TODO',
+        description: 'TabView is a container component to group content with tabs.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/tabview',
         props: TabViewProps,
         events: TabViewEvents,

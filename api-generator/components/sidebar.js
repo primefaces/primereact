@@ -144,7 +144,7 @@ const SidebarStyles = [
     },
     {
         name: 'p-sidebar-content',
-        description: '                                        <td>'
+        description: 'A content is displayed according to the sidebar position. To use this style, a sidebar must be created inside that content using the appendTo property and this content must have position:"relative" style.'
     },
     {
         name: 'p-sidebar-mask',
@@ -155,7 +155,7 @@ const SidebarStyles = [
 module.exports = {
     sidebar: {
         name: 'Sidebar',
-        description: 'TODO',
+        description: 'Sidebar is a panel component displayed as an overlay.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/sidebar',
         props: SidebarProps,
         events: SidebarEvents,

@@ -117,7 +117,7 @@ const SliderStyles = [
 module.exports = {
     slider: {
         name: 'Slider',
-        description: 'TODO',
+        description: 'Slider is a component to provide input using dragging of a handle.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/slider',
         props: SliderProps,
         events: SliderEvents,

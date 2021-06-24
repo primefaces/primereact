@@ -399,7 +399,7 @@ const MultiSelectStyles = [
 module.exports = {
     multiselect: {
         name: 'MultiSelect',
-        description: 'TODO',
+        description: 'MultiSelect is used to select multiple items from a collection.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/multiselect',
         props: MultiSelectProps,
         events: MultiSelectEvents,

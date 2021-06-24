@@ -105,7 +105,7 @@ const DataTableProps = [
         name: 'currentPageReportTemplate',
         type: 'string',
         default: '(&#123;currentPage&#125; of &#123;totalPages&#125;)',
-        description: '                            <td>'
+        description: 'Template of the current page report element. Available placeholders are {currentPage}, {totalPages}, {rows}, {first}, {last} and {totalRecords}'
     },
     {
         name: 'paginatorDropdownAppendTo',
@@ -219,7 +219,7 @@ const DataTableProps = [
         name: 'metaKeySelection',
         type: 'boolean',
         default: 'true',
-        description: '                            <td>'
+        description: 'Defines whether metaKey is requred or not for the selection.When true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.'
     },
     {
         name: 'selectOnEdit',
@@ -435,7 +435,7 @@ const DataTableProps = [
         name: 'exportFunction',
         type: 'function',
         default: 'null',
-        description: '                            <td>'
+        description: 'A function to implement custom export. Need to return string value. event.data: Field data. event.rows: Column field.'
     },
     {
         name: 'expandableRowGroups',
@@ -477,7 +477,7 @@ const DataTableProps = [
         name: 'customSaveState',
         type: 'function',
         default: 'null',
-        description: '                            <td>'
+        description: 'A function to implement custom saveState with stateStorage="custom".state: the object to be stored.'
     },
     {
         name: 'customRestoreState',
@@ -1012,7 +1012,7 @@ const DataTableStyles = [
 module.exports = {
     datatable: {
         name: 'DataTable',
-        description: 'TODO',
+        description: 'DataTable displays data in tabular format.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/datatable',
         props: DataTableProps,
         events: DataTableEvents,

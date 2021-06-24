@@ -30,7 +30,7 @@ const FullCalendarStyles = [
 module.exports = {
     fullcalendar: {
         name: 'FullCalendar',
-        description: 'TODO',
+        description: 'FullCalendar React library is fully compatible with PrimeReact themes.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/fullcalendar',
         props: FullCalendarProps,
         events: FullCalendarEvents,

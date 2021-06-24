@@ -66,7 +66,7 @@ const TabPanelStyles = [
 module.exports = {
     tabpanel: {
         name: 'TabPanel',
-        description: 'TODO',
+        description: 'TabPanel is helper component for TabView.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/tabview',
         props: TabPanelProps,
         events: TabPanelEvents,

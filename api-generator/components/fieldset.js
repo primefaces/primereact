@@ -108,7 +108,7 @@ const FieldsetStyles = [
 module.exports = {
     fieldset: {
         name: 'Fieldset',
-        description: 'TODO',
+        description: 'Fieldset is a grouping component with a content toggle feature.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/fieldset',
         props: FieldsetProps,
         events: FieldsetEvents,

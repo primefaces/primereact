@@ -71,7 +71,7 @@ const StepsStyles = [
 module.exports = {
     steps: {
         name: 'Steps',
-        description: 'TODO',
+        description: 'Steps component is an indicator for the steps in a workflow. Layout of steps component is optimized for responsive design.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/steps',
         props: StepsProps,
         events: StepsEvents,

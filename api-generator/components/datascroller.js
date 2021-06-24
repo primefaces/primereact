@@ -109,7 +109,7 @@ const DataScrollerStyles = [
 module.exports = {
     datascroller: {
         name: 'DataScroller',
-        description: 'TODO',
+        description: 'DataScroller displays data with on demand loading using scroll.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/datascroller',
         props: DataScrollerProps,
         events: DataScrollerEvents,

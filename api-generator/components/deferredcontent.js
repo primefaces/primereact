@@ -23,7 +23,7 @@ const DeferredContentStyles = [
 module.exports = {
     deferredcontent: {
         name: 'DeferredContent',
-        description: 'TODO',
+        description: 'DeferredContent postpones the loading the content that is initially not in the viewport until it becomes visible on scroll.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/deferredcontent',
         props: DeferredContentProps,
         events: DeferredContentEvents,

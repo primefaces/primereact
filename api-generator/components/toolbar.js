@@ -50,7 +50,7 @@ const ToolbarStyles = [
 module.exports = {
     toolbar: {
         name: 'Toolbar',
-        description: 'TODO',
+        description: 'Toolbar is a grouping component for buttons and other content.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/toolbar',
         props: ToolbarProps,
         events: ToolbarEvents,
