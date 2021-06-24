@@ -140,15 +140,18 @@ const VirtualScrollerEvents = [
 const VirtualScrollerStyles = [
     {
         name: 'p-virtualscroller',
-        description: 'Container element.'
+        description: 'Container element.',
+        arguments: []
     },
     {
         name: 'p-virtualscroller-content',
-        description: 'Content element.'
+        description: 'Content element.',
+        arguments: []
     },
     {
         name: 'p-virtualscroller-loader',
-        description: 'Loader element.'
+        description: 'Loader element.',
+        arguments: []
     }
 ];
 

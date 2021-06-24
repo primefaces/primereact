@@ -101,10 +101,12 @@ const SidebarEvents = [
     {
         name: 'onHide',
         description: 'Callback to invoke when sidebar gets hidden.',
+        arguments: []
     },
     {
         name: 'onShow',
         description: 'Callback to invoke when sidebar gets shown.',
+        arguments: []
     }
 ];
 

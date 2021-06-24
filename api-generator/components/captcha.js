@@ -58,6 +58,7 @@ const CaptchaEvents = [
     {
         name: 'onExpire',
         description: 'The callback function to be executed when the recaptcha response expires and the user needs to solve a new CAPTCHA.',
+        arguments: []
     }
 ];
 

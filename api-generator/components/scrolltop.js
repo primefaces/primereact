@@ -35,10 +35,12 @@ const ScrollTopEvents = [
     {
         name: 'onShow',
         description: 'Callback to invoke when overlay becomes visible.',
+        arguments: []
     },
     {
         name: 'onHide',
         description: 'Callback to invoke when overlay becomes hidden.',
+        arguments: []
     }
 ];
 

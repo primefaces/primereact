@@ -77,10 +77,12 @@ const ConfirmDialogEvents = [
     {
         name: 'accept',
         description: 'Callback to execute when action is confirmed.',
+        arguments: []
     },
     {
         name: 'reject',
         description: 'Callback to execute when action is rejected.',
+        arguments: []
     },
     {
         name: 'onHide',

@@ -243,6 +243,7 @@ const FileUploadEvents = [
     {
         name: 'onClear',
         description: 'Callback to invoke when files in queue are removed without uploading.',
+        arguments: []
     },
     {
         name: 'onSelect',

@@ -40,6 +40,7 @@ const GMapEvents = [
     {
         name: 'onMapDragEnd',
         description: 'Callback to invoke when map drag (i.e. pan) has ended.',
+        arguments: []
     },
     {
         name: 'onMapReady',
@@ -109,6 +110,7 @@ const GMapEvents = [
     {
         name: 'onZoomChanged',
         description: 'Callback to invoke when zoom level has changed.',
+        arguments: []
     }
 ];
 

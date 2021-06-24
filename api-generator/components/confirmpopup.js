@@ -101,10 +101,12 @@ const ConfirmPopupEvents = [
     {
         name: 'accept',
         description: 'Callback to execute when action is confirmed.',
+        arguments: []
     },
     {
         name: 'reject',
         description: 'Callback to execute when action is rejected.',
+        arguments: []
     },
     {
         name: 'onHide',
@@ -120,6 +122,7 @@ const ConfirmPopupEvents = [
     {
         name: 'onShow',
         description: 'Callback to invoke when overlay panel becomes visible.',
+        arguments: []
     }
 ];
 
