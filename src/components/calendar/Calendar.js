@@ -2649,7 +2649,7 @@ export class Calendar extends Component {
             const viewYear = viewDate.getFullYear();
             const displayedYearNames = yearOptions.filter(year => (!(this.props.minDate && this.props.minDate.getFullYear() > year) && !(this.props.maxDate && this.props.maxDate.getFullYear() < year)));
             const content = (
-                <select className="p-datepicker-year" onChange={this.onYearDropdownChange} value={viewYear}>
+                <select className="p-datepicker-year" onChange={(e) => this.onYearDropdownChange(e, e.target.value)} value={viewYear}>
                     {
                         displayedYearNames.map(year => <option key={year} value={year}>{year}</option>)
                     }
