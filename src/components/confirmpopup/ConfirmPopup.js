@@ -108,6 +108,7 @@ export class ConfirmPopup extends Component {
         this.onExited = this.onExited.bind(this);
 
         this.overlayRef = React.createRef();
+        this.acceptBtnRef = React.createRef();
     }
 
     acceptLabel() {
@@ -243,6 +244,10 @@ export class ConfirmPopup extends Component {
         this.bindScrollListener();
         this.bindResizeListener();
 
+        if (this.acceptBtnRef && this.acceptBtnRef.current) {
+            this.acceptBtnRef.current.focus();
+        }
+
         this.props.onShow && this.props.onShow();
     }
 
@@ -324,7 +329,7 @@ export class ConfirmPopup extends Component {
         const content = (
             <div className="p-confirm-popup-footer">
                 <Button label={this.rejectLabel()} icon={this.props.rejectIcon} className={rejectClassName} onClick={this.reject} />
-                <Button label={this.acceptLabel()} icon={this.props.acceptIcon} className={acceptClassName} onClick={this.accept} autoFocus />
+                <Button ref={this.acceptBtnRef} label={this.acceptLabel()} icon={this.props.acceptIcon} className={acceptClassName} onClick={this.accept} />
             </div>
         )
 
