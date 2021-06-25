@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+type DataScrollerEmptyMessageType = React.ReactNode | ((props: DataScrollerProps) => React.ReactNode);
+
 interface DataScrollerLazyLoadParams {
     first: number;
     rows: number;
@@ -18,6 +20,7 @@ export interface DataScrollerProps {
     header?: React.ReactNode;
     footer?: React.ReactNode;
     lazy?: boolean;
+    emptyMessage?: DataScrollerEmptyMessageType;
     onLazyLoad?(e: DataScrollerLazyLoadParams): void;
     itemTemplate?(item: any): React.ReactNode;
 }

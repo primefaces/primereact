@@ -70,6 +70,12 @@ const DataScrollerProps = [
         type: 'any',
         default: 'null',
         description: 'Label of footer.'
+    },
+    {
+        name: 'emptyMessage',
+        type: 'any',
+        default: 'No records found',
+        description: 'Text to display when there is no data.'
     }
 ];
 

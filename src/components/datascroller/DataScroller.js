@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { classNames } from '../utils/Utils';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
 export class DataScroller extends Component {
 
@@ -15,6 +15,7 @@ export class DataScroller extends Component {
         style: null,
         className: null,
         onLazyLoad: null,
+        emptyMessage: 'No records found',
         itemTemplate: null,
         header: null,
         footer: null,
@@ -32,6 +33,7 @@ export class DataScroller extends Component {
         style: PropTypes.object,
         className: PropTypes.string,
         onLazyLoad: PropTypes.func,
+        emptyMessage: PropTypes.any,
         itemTemplate: PropTypes.func,
         header: PropTypes.any,
         footer: PropTypes.any,
@@ -170,29 +172,58 @@ export class DataScroller extends Component {
         }
     }
 
+    renderHeader() {
+        if (this.props.header) {
+            return <div className="p-datascroller-header">{this.props.header}</div>
+        }
+
+        return null;
+    }
+
+    renderFooter() {
+        if (this.props.footer) {
+            return <div className="p-datascroller-footer">{this.props.footer}</div>
+        }
+
+        return null;
+    }
+
+    renderItem(value, index) {
+        const content = this.props.itemTemplate ? this.props.itemTemplate(value) : value;
+
+        return (
+            <li key={index + '_datascrollitem'}>
+                {content}
+            </li>
+        );
+    }
+
+    renderEmptyMessage() {
+        const content = ObjectUtils.getJSXElement(this.props.emptyMessage, this.props);
+
+        return <li>{content}</li>;
+    }
+
+    renderContent() {
+        const content = this.state.dataToRender && this.state.dataToRender.length ? this.state.dataToRender.map((val, i) => this.renderItem(val, i)) : this.renderEmptyMessage();
+
+        return (
+            <div ref={(el) => this.contentElement = el} className="p-datascroller-content" style={{ 'maxHeight': this.props.scrollHeight }}>
+                <ul className="p-datascroller-list">
+                    {content}
+                </ul>
+            </div>
+        )
+    }
+
     render() {
         const className = classNames('p-datascroller p-component', this.props.className, {
             'p-datascroller-inline': this.props.inline
         });
 
-        const header = this.props.header && <div className="p-datascroller-header"> {this.props.header}</div>,
-            footer = this.props.footer && <div className="p-datascroller-footer"> {this.props.footer} </div>,
-            content = (
-                <div ref={(el) => this.contentElement = el} className="p-datascroller-content" style={{ 'maxHeight': this.props.scrollHeight }}>
-                    <ul className="p-datascroller-list">
-                        {
-                            this.state.dataToRender && this.state.dataToRender.map((val, i) => {
-                                const listItemContent = this.props.itemTemplate ? this.props.itemTemplate(val) : val;
-                                return (
-                                    <li key={i + '_datascrollitem'}>
-                                        {listItemContent}
-                                    </li>
-                                );
-                            })
-                        }
-                    </ul>
-                </div>
-            );
+        const header = this.renderHeader();
+        const footer = this.renderFooter();
+        const content = this.renderContent();
 
         return (
             <div id={this.props.id} className={className}>

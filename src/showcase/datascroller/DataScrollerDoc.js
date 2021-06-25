@@ -410,6 +410,12 @@ const loadData = (event) => {
                                         <td>null</td>
                                         <td>Label of footer.</td>
                                     </tr>
+                                    <tr>
+                                        <td>emptyMessage</td>
+                                        <td>any</td>
+                                        <td>No records found</td>
+                                        <td>Text to display when there is no data.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
