@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import { ObjectUtils, classNames } from '../utils/Utils';
 import { tip } from '../tooltip/Tooltip';
@@ -34,19 +34,23 @@ export class ButtonComponent extends Component {
         loadingIcon: PropTypes.any
     };
 
-    getElementRef(el) {
-        this.element = el;
+    constructor(props) {
+        super(props);
 
-        if (this.props.forwardRef) {
-            if (ObjectUtils.isFunction(this.props.forwardRef)) {
-                return this.props.forwardRef(el);
+        this.elementRef = createRef(this.props.forwardRef);
+    }
+
+    updateForwardRef() {
+        let ref = this.props.forwardRef;
+
+        if (ref) {
+            if (typeof ref === 'function') {
+                ref(this.elementRef.current);
             }
             else {
-                return this.props.forwardRef;
+                ref.current = this.elementRef.current;
             }
         }
-
-        return this.element;
     }
 
     isDisabled() {
@@ -54,6 +58,8 @@ export class ButtonComponent extends Component {
     }
 
     componentDidMount() {
+        this.updateForwardRef();
+
         if (this.props.tooltip) {
             this.renderTooltip();
         }
@@ -77,7 +83,7 @@ export class ButtonComponent extends Component {
 
     renderTooltip() {
         this.tooltip = tip({
-            target: this.element,
+            target: this.elementRef.current,
             content: this.props.tooltip,
             options: this.props.tooltipOptions
         });
@@ -148,7 +154,7 @@ export class ButtonComponent extends Component {
         let buttonProps = ObjectUtils.findDiffKeys(this.props, ButtonComponent.defaultProps);
 
         return (
-            <button ref={(el) => this.getElementRef(el)} {...buttonProps} className={className} disabled={disabled}>
+            <button ref={this.elementRef} {...buttonProps} className={className} disabled={disabled}>
                 {icon}
                 {label}
                 {this.props.children}
