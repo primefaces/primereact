@@ -138,6 +138,12 @@ const FileUploadProps = [
         description: 'The template of empty content in the container.'
     },
     {
+        name: 'progressBarTemplate',
+        type: 'any',
+        default: 'null',
+        description: 'The template of progressBar content in the container.'
+    },
+    {
         name: 'itemTemplate',
         type: 'any',
         default: 'null',

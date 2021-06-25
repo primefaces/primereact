@@ -36,6 +36,8 @@ type FileUploadItemTemplateType = React.ReactNode | ((file: object, options: Ite
 
 type FileUploadEmptyTemplateType = React.ReactNode | ((props: FileUploadProps) => React.ReactNode);
 
+type FileUploadProgressBarTemplateType = React.ReactNode | ((props: FileUploadProps) => React.ReactNode);
+
 interface FileUploadBeforeUploadParams {
     xhr: XMLHttpRequest;
     formData: FormData;
@@ -103,6 +105,7 @@ interface FileUploadProps {
     headerTemplate?: FileUploadHeaderTemplateType;
     itemTemplate?: FileUploadItemTemplateType;
     emptyTemplate?: FileUploadEmptyTemplateType;
+    progressBarTemplate?: FileUploadProgressBarTemplateType;
     onBeforeUpload?(e: FileUploadBeforeUploadParams): void;
     onBeforeSend?(e: FileUploadBeforeSendParams): void;
     onUpload?(e: FileUploadUploadParams): void;

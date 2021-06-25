@@ -737,6 +737,12 @@ const buttonOptions = {
                             <td>The template of empty content in the container.</td>
                         </tr>
                         <tr>
+                            <td>progressBarTemplate</td>
+                            <td>any</td>
+                            <td>null</td>
+                            <td>The template of progressBar content in the container.</td>
+                        </tr>
+                        <tr>
                             <td>itemTemplate</td>
                             <td>any</td>
                             <td>null</td>

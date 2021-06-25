@@ -57,6 +57,7 @@ export class FileUpload extends Component {
         headerTemplate: null,
         itemTemplate: null,
         emptyTemplate: null,
+        progressBarTemplate: null,
         onBeforeUpload: null,
         onBeforeSend: null,
         onUpload: null,
@@ -99,6 +100,7 @@ export class FileUpload extends Component {
         headerTemplate: PropTypes.any,
         itemTemplate: PropTypes.any,
         emptyTemplate: PropTypes.any,
+        progressBarTemplate: PropTypes.any,
         onBeforeUpload: PropTypes.func,
         onBeforeSend: PropTypes.func,
         onUpload: PropTypes.func,
@@ -516,6 +518,14 @@ export class FileUpload extends Component {
         return null;
     }
 
+    renderProgressBarContent() {
+        if (this.props.progressBarTemplate) {
+            return ObjectUtils.getJSXElement(this.props.progressBarTemplate, this.props);
+        }
+
+        return <ProgressBar value={this.state.progress} showValue={false} />;
+    }
+
     renderAdvanced() {
         const className = classNames('p-fileupload p-fileupload-advanced p-component', this.props.className);
         const headerClassName = classNames('p-fileupload-buttonbar', this.props.headerClassName);
@@ -536,7 +546,7 @@ export class FileUpload extends Component {
 
         if (this.hasFiles()) {
             filesList = this.renderFiles();
-            progressBar = <ProgressBar value={this.state.progress} showValue={false} />;
+            progressBar = this.renderProgressBarContent();
         }
 
         let header = (
