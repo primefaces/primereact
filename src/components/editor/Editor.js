@@ -16,7 +16,8 @@ export class Editor extends Component {
         theme: 'snow',
         headerTemplate: null,
         onTextChange: null,
-        onSelectionChange: null
+        onSelectionChange: null,
+        onLoad: null
     };
 
     static propTypes = {
@@ -31,8 +32,13 @@ export class Editor extends Component {
         theme: PropTypes.string,
         headerTemplate: PropTypes.any,
         onTextChange: PropTypes.func,
-        onSelectionChange: PropTypes.func
+        onSelectionChange: PropTypes.func,
+        onLoad: PropTypes.func
     };
+
+    getQuill() {
+        return this.quill;
+    }
 
     componentDidMount() {
         import('quill').then((module) => {
@@ -79,7 +85,11 @@ export class Editor extends Component {
                     }
                 });
             }
-        });
+        }).then(() => {
+            if (this.quill && this.quill.getModule('toolbar')) {
+                this.props.onLoad && this.props.onLoad(this.quill);
+            }
+        })
     }
 
     componentDidUpdate(prevProps) {
