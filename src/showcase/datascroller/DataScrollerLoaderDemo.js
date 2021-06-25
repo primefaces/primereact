@@ -154,7 +154,7 @@ const DataScrollerLoaderDemo = () => {
     const productService = new ProductService();
 
     useEffect(() => {
-        this.productService.getProducts().then(data => this.setState({ products: data }));
+        productService.getProducts().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (data) => {
@@ -205,7 +205,7 @@ const DataScrollerLoaderDemo = () => {
     const productService = new ProductService();
 
     useEffect(() => {
-        this.productService.getProducts().then(data => this.setState({ products: data }));
+        productService.getProducts().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (data) => {
