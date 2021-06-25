@@ -26,6 +26,7 @@ export interface EditorProps {
     headerTemplate?: React.ReactNode;
     onTextChange?(e: EditorTextChangeParams): void;
     onSelectionChange?(e: EditorSelectionChangeParams): void;
+    onLoad?(quill: any): void;
 }
 
 export declare class Editor extends React.Component<EditorProps, any> { }

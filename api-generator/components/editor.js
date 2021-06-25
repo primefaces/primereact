@@ -102,6 +102,17 @@ const EditorEvents = [
                 description: 'Source of change. Will be either "user" or "api".'
             }
         ]
+    },
+    {
+        name: 'onLoad',
+        description: 'Callback to invoke when the quill modules are loaded.',
+        arguments: [
+            {
+                name: 'quill',
+                type: 'any',
+                description: 'Quill instance'
+            }
+        ]
     }
 ];
 

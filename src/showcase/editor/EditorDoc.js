@@ -267,6 +267,11 @@ const header = (
                                         event.source: Source of change. Will be either "user" or "api".</td>
                                         <td>Callback to invoke when selected text of editor changes.</td>
                                     </tr>
+                                    <tr>
+                                        <td>onLoad</td>
+                                        <td>quill: Quill instance</td>
+                                        <td>Callback to invoke when the quill modules are loaded.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
