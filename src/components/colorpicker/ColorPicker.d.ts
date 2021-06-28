@@ -9,11 +9,11 @@ type ColorPickerFormatType = 'hex' | 'rgb' | 'hsb';
 interface ColorPickerChangeTargetOptions {
     name: string;
     id: string;
-    value: string;
+    value: ColorPickerProps['value'];
 }
 
 interface ColorPickerChangeParams {
-    value: string;
+    value: ColorPickerProps['value'];
     stopPropagation(): void;
     preventDefault(): void;
     target: ColorPickerChangeTargetOptions;
