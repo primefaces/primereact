@@ -920,7 +920,7 @@ export class InputNumber extends Component {
         }
 
         const newValue = this.validateValue(this.props.value);
-        if (this.props.value !== null && this.props.value !== newValue) {
+        if (this.props.value !== newValue) {
             this.updateModel(null, newValue);
         }
     }
