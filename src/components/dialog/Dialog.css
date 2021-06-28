@@ -223,6 +223,6 @@
     bottom: 1px;
 }
 
-.p-dialog-resizable .p-dialog-header {
+.p-dialog-draggable .p-dialog-header {
     cursor: move;
 }
