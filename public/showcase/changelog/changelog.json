@@ -1,4 +1,53 @@
 {
+    "6.5.0-rc2": {
+        "button": [
+            {
+                "number": 2143,
+                "title": "Improve forwardRef structure on Button",
+                "url": "https://github.com/primefaces/primereact/issues/2143"
+            }
+        ],
+        "dialog": [
+            {
+                "number": 2064,
+                "title": "Move cursor not showing if Dialog is not resizable",
+                "url": "https://github.com/primefaces/primereact/issues/2064"
+            }
+        ],
+        "editor": [
+            {
+                "number": 2145,
+                "title": "Add onLoad property to Editor",
+                "url": "https://github.com/primefaces/primereact/issues/2145"
+            },
+            {
+                "number": 2122,
+                "title": "Access to Quill object when using the Editor component",
+                "url": "https://github.com/primefaces/primereact/issues/2122"
+            }
+        ],
+        "fileupload": [
+            {
+                "number": 2144,
+                "title": "Add progressBarTemplate property to FileUpload",
+                "url": "https://github.com/primefaces/primereact/issues/2144"
+            }
+        ],
+        "confirmpopup": [
+            {
+                "number": 2142,
+                "title": "When clicking on the target element to open the confirmPopup, the browser's scroll moves",
+                "url": "https://github.com/primefaces/primereact/issues/2142"
+            }
+        ],
+        "datascroller": [
+            {
+                "number": 2141,
+                "title": "Add emptyMessage property to DataScroller",
+                "url": "https://github.com/primefaces/primereact/issues/2141"
+            }
+        ]
+    },
     "6.5.0-rc1": {
         "tooltip": [
             {

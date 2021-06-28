@@ -1,5 +1,24 @@
 # Changelog
 
+## [6.5.0-rc.2](https://github.com/primefaces/primereact/tree/6.5.0-rc.2) (2021-06-28)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/6.5.0-rc.1...6.5.0-rc.2)
+
+**Implemented New Features and Enhancements:**
+
+- Webpack moduleFederation throws warning for micro front end apps [\#2146](https://github.com/primefaces/primereact/issues/2146)
+- Add onLoad property to Editor [\#2145](https://github.com/primefaces/primereact/issues/2145)
+- Add progressBarTemplate property to FileUpload [\#2144](https://github.com/primefaces/primereact/issues/2144)
+- Improve forwardRef structure on Button [\#2143](https://github.com/primefaces/primereact/issues/2143)
+- Add emptyMessage property to DataScroller [\#2141](https://github.com/primefaces/primereact/issues/2141)
+- Access to Quill object when using the Editor component [\#2122](https://github.com/primefaces/primereact/issues/2122)
+
+**Fixed bugs:**
+
+- When clicking on the target element to open the confirmPopup, the browser's scroll moves [\#2142](https://github.com/primefaces/primereact/issues/2142)
+- Colors vars are not working [\#2126](https://github.com/primefaces/primereact/issues/2126)
+- Move cursor not showing if Dialog is not resizable [\#2064](https://github.com/primefaces/primereact/issues/2064)
+
 ## [6.5.0-rc.1](https://github.com/primefaces/primereact/tree/6.5.0-rc1)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/6.4.1...6.5.0-rc1)
