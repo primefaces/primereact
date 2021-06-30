@@ -40,7 +40,7 @@ export class SplitButton extends Component {
         disabled: PropTypes.bool,
         style: PropTypes.object,
         className: PropTypes.string,
-        menustyle: PropTypes.object,
+        menuStyle: PropTypes.object,
         menuClassName: PropTypes.string,
         tabIndex: PropTypes.number,
         appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
