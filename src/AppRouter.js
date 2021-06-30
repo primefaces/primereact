@@ -175,6 +175,7 @@ import { ReactHookFormDemo } from './showcase/validate/ReactHookFormDemo';
 import { ReactFinalFormDemo } from './showcase/validate/ReactFinalFormDemo';
 import { TreeSelectDemo } from './showcase/treeselect/TreeSelectDemo';
 import { VirtualScrollerDemo } from './showcase/virtualscroller/VirtualScrollerDemo';
+import { SpeedDialDemo } from './showcase/speeddial/SpeedDialDemo';
 
 class AppRouter extends Component {
 
@@ -377,6 +378,7 @@ class AppRouter extends Component {
                             <Route path="/reactfinalform" component={ReactFinalFormDemo} />
                             <Route path="/treeselect" component={TreeSelectDemo} />
                             <Route path="/virtualscroller" component={VirtualScrollerDemo} />
+                            <Route path="/speeddial" component={SpeedDialDemo} />
                         </>
                     )
                 }

@@ -451,6 +451,14 @@
                     "meta": [
                         "splitbutton"
                     ]
+                },
+                {
+                    "name": "Speed Dial",
+                    "to": "/speeddial",
+                    "meta": [
+                        "speeddial"
+                    ],
+                    "badge": "new"
                 }
             ]
         },
