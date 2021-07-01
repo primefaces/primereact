@@ -16,6 +16,7 @@ export class SpeedDial extends Component {
         transitionDuration: 30,
         type: 'linear',
         radius: 0,
+        mask: false,
         disabled: false,
         hideOnClickOutside: true,
         buttonStyle: null,
@@ -40,6 +41,7 @@ export class SpeedDial extends Component {
         transitionDuration: PropTypes.number,
         type: PropTypes.string,
         radius: PropTypes.number,
+        mask: PropTypes.bool,
         disabled: PropTypes.bool,
         hideOnClickOutside: PropTypes.bool,
         buttonStyle: PropTypes.object,
@@ -309,6 +311,21 @@ export class SpeedDial extends Component {
         return content;
     }
 
+    renderMask() {
+        if (this.props.mask) {
+            const visible = this.isVisible();
+            const className = classNames('p-speeddial-mask', {
+                'p-speeddial-mask-visible': visible
+            });
+
+            return (
+                <div className={className}></div>
+            );
+        }
+
+        return null;
+    }
+
     render() {
         const className = classNames(`p-speeddial p-component p-speeddial-${this.props.type}`, {
             [`p-speeddial-direction-${this.props.direction}`]: this.props.type !== 'circle',
@@ -317,12 +334,16 @@ export class SpeedDial extends Component {
         }, this.props.className);
         const button = this.renderButton();
         const list = this.renderList();
+        const mask = this.renderMask();
 
         return (
-            <div ref={(el) => this.container = el} id={this.props.id} className={className} style={this.props.style}>
-                {button}
-                {list}
-            </div>
+            <React.Fragment>
+                <div ref={(el) => this.container = el} id={this.props.id} className={className} style={this.props.style}>
+                    {button}
+                    {list}
+                </div>
+                {mask}
+            </React.Fragment>
         );
     }
 }

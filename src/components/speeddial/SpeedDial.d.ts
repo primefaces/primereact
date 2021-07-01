@@ -26,6 +26,7 @@ export interface SpeedDialProps {
     transitionDuration?: number;
     type?: SpeedDialType;
     radius?: number;
+    mask?: boolean;
     disabled?: boolean;
     hideOnClickOutside?: boolean;
     buttonStyle?: object;
