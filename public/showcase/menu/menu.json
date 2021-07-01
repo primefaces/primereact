@@ -1491,6 +1491,14 @@
                     "meta": [
                         "tag"
                     ]
+                },
+                {
+                    "name": "Terminal",
+                    "to": "/terminal",
+                    "meta": [
+                        "terminal"
+                    ],
+                    "badge": "new"
                 }
             ]
         }

@@ -177,6 +177,7 @@ import { TreeSelectDemo } from './showcase/treeselect/TreeSelectDemo';
 import { VirtualScrollerDemo } from './showcase/virtualscroller/VirtualScrollerDemo';
 import { SpeedDialDemo } from './showcase/speeddial/SpeedDialDemo';
 import { BlockUIDemo } from './showcase/blockui/BlockUIDemo';
+import { TerminalDemo } from './showcase/terminal/TerminalDemo';
 
 class AppRouter extends Component {
 
@@ -381,6 +382,7 @@ class AppRouter extends Component {
                             <Route path="/virtualscroller" component={VirtualScrollerDemo} />
                             <Route path="/speeddial" component={SpeedDialDemo} />
                             <Route path="/blockui" component={BlockUIDemo} />
+                            <Route path="/terminal" component={TerminalDemo} />
                         </>
                     )
                 }
