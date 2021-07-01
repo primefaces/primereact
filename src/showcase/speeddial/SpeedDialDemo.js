@@ -95,7 +95,7 @@ export class SpeedDialDemo extends Component {
 
                     <div className="card">
                         <h5>Tooltip</h5>
-                        <div className="speeddial-tooltip-demo" style={{ position: 'relative', height: '300px' }}>
+                        <div className="speeddial-tooltip-demo" style={{ position: 'relative', height: '350px' }}>
                             <Tooltip target=".speeddial-tooltip-demo .speeddial-right .p-speeddial-action" position="left" />
                             <SpeedDial model={this.items} direction="up" className="speeddial-right" buttonClassName="p-button-danger" />
 
@@ -106,8 +106,15 @@ export class SpeedDialDemo extends Component {
 
                     <div className="card">
                         <h5>Transition Duration, Icon and No Rotate Animation</h5>
-                        <div className="speeddial-delay-demo" style={{ position: 'relative', height: '300px' }}>
+                        <div className="speeddial-delay-demo" style={{ position: 'relative', height: '350px' }}>
                             <SpeedDial model={this.items} direction="up" transitionDuration={80} showIcon="pi pi-bars" hideIcon="pi pi-times" buttonClassName="p-button-outlined" />
+                        </div>
+                    </div>
+
+                    <div className="card">
+                        <h5>Mask</h5>
+                        <div className="speeddial-mask-demo" style={{ position: 'relative', height: '350px' }}>
+                            <SpeedDial model={this.items} direction="up" mask />
                         </div>
                     </div>
                 </div>
