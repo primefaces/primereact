@@ -63,7 +63,6 @@ export class SpeedDialDemo extends Component {
                     <AppDemoActions github="speeddial/SpeedDialDemo.js" />
                 </div>
 
-
                 <div className="content-section implementation">
                     <Toast ref={(el) => this.toast = el} />
 
@@ -76,7 +75,6 @@ export class SpeedDialDemo extends Component {
                             <SpeedDial model={this.items} direction="right" />
                         </div>
                     </div>
-
 
                     <div className="card">
                         <h5>Circle, Semi-Circle and Quarter-Circle</h5>
