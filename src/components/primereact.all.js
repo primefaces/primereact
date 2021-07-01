@@ -94,3 +94,4 @@ export * from './tristatecheckbox/TriStateCheckbox';
 export * from './utils/Utils';
 export * from './virtualscroller/VirtualScroller';
 export * from './speeddial/SpeedDial';
+export * from './blockui/BlockUI';
