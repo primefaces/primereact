@@ -23,7 +23,7 @@ export interface SpeedDialProps {
     style?: object;
     className?: string;
     direction?: SpeedDialDirectionType;
-    transitionDuration?: number;
+    transitionDelay?: number;
     type?: SpeedDialType;
     radius?: number;
     mask?: boolean;

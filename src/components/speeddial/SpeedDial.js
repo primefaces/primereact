@@ -13,7 +13,7 @@ export class SpeedDial extends Component {
         style: null,
         className: null,
         direction: 'up',
-        transitionDuration: 30,
+        transitionDelay: 30,
         type: 'linear',
         radius: 0,
         mask: false,
@@ -38,7 +38,7 @@ export class SpeedDial extends Component {
         style: PropTypes.object,
         className: PropTypes.string,
         direction: PropTypes.string,
-        transitionDuration: PropTypes.number,
+        transitionDelay: PropTypes.number,
         type: PropTypes.string,
         radius: PropTypes.number,
         mask: PropTypes.bool,
@@ -136,11 +136,11 @@ export class SpeedDial extends Component {
         return this.container && !(this.container.isSameNode(event.target) || this.container.contains(event.target) || this.isItemClicked);
     }
 
-    calculateTransitionDuration(index) {
+    calculateTransitionDelay(index) {
         const length = this.props.model.length;
         const visible = this.isVisible();
 
-        return (visible ? index : length - index - 1) * this.props.transitionDuration;
+        return (visible ? index : length - index - 1) * this.props.transitionDelay;
     }
 
     calculatePointStyle(index) {
@@ -200,11 +200,11 @@ export class SpeedDial extends Component {
     }
 
     getItemStyle(index) {
-        const transitionDuration = this.calculateTransitionDuration(index);
+        const transitionDelay = this.calculateTransitionDelay(index);
         const pointStyle = this.calculatePointStyle(index);
 
         return {
-            transitionDelay: `${transitionDuration}ms`,
+            transitionDelay: `${transitionDelay}ms`,
             ...pointStyle
         };
     }
