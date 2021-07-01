@@ -11,6 +11,7 @@ export class SpeedDialDemo extends Component {
 
     constructor(props) {
         super(props);
+
         this.items = [
             {
                 label: 'Add',
@@ -56,7 +57,7 @@ export class SpeedDialDemo extends Component {
                 <div className="content-section introduction">
                     <AppInlineHeader changelogText="speedDial">
                         <h1>Speed Dial</h1>
-                        <p>TODO</p>
+                        <p>When pressed, a floating action button can display multiple primary actions that can be performed on a page.</p>
                     </AppInlineHeader>
 
                     <AppDemoActions github="speeddial/SpeedDialDemo.js" />
@@ -80,15 +81,15 @@ export class SpeedDialDemo extends Component {
                     <div className="card">
                         <h5>Circle, Semi-Circle and Quarter-Circle</h5>
                         <div className="speeddial-circle-demo" style={{ position: 'relative', height: '500px' }}>
-                            <SpeedDial model={this.items} radius={80} type="circle" />
-                            <SpeedDial model={this.items} radius={80} direction="up" type="semi-circle" />
+                            <SpeedDial model={this.items} radius={80} type="circle" buttonClassName="p-button-warning" />
+                            <SpeedDial model={this.items} radius={80} direction="up" type="semi-circle"  />
                             <SpeedDial model={this.items} radius={80} direction="down" type="semi-circle" />
                             <SpeedDial model={this.items} radius={80} direction="left" type="semi-circle" />
                             <SpeedDial model={this.items} radius={80} direction="right" type="semi-circle" />
-                            <SpeedDial model={this.items} radius={120} direction="up-left" type="quarter-circle" />
-                            <SpeedDial model={this.items} radius={120} direction="up-right" type="quarter-circle" />
-                            <SpeedDial model={this.items} radius={120} direction="down-left" type="quarter-circle" />
-                            <SpeedDial model={this.items} radius={120} direction="down-right" type="quarter-circle" />
+                            <SpeedDial model={this.items} radius={120} direction="up-left" type="quarter-circle" buttonClassName="p-button-success" />
+                            <SpeedDial model={this.items} radius={120} direction="up-right" type="quarter-circle" buttonClassName="p-button-success" />
+                            <SpeedDial model={this.items} radius={120} direction="down-left" type="quarter-circle" buttonClassName="p-button-success" />
+                            <SpeedDial model={this.items} radius={120} direction="down-right" type="quarter-circle" buttonClassName="p-button-success" />
                         </div>
                     </div>
 
@@ -96,17 +97,17 @@ export class SpeedDialDemo extends Component {
                         <h5>Tooltip</h5>
                         <div className="speeddial-tooltip-demo" style={{ position: 'relative', height: '300px' }}>
                             <Tooltip target=".speeddial-tooltip-demo .speeddial-right .p-speeddial-action" position="left" />
-                            <SpeedDial model={this.items} direction="up" className="speeddial-right" />
+                            <SpeedDial model={this.items} direction="up" className="speeddial-right" buttonClassName="p-button-danger" />
 
                             <Tooltip target=".speeddial-tooltip-demo .speeddial-left .p-speeddial-action" />
-                            <SpeedDial model={this.items} direction="up" className="speeddial-left" />
+                            <SpeedDial model={this.items} direction="up" className="speeddial-left" buttonClassName="p-button-help" />
                         </div>
                     </div>
 
                     <div className="card">
                         <h5>Transition Duration, Icon and No Rotate Animation</h5>
                         <div className="speeddial-delay-demo" style={{ position: 'relative', height: '300px' }}>
-                            <SpeedDial model={this.items} direction="up" transitionDuration={80} showIcon="pi pi-bars" hideIcon="pi pi-times"/>
+                            <SpeedDial model={this.items} direction="up" transitionDuration={80} showIcon="pi pi-bars" hideIcon="pi pi-times" buttonClassName="p-button-outlined" />
                         </div>
                     </div>
                 </div>
