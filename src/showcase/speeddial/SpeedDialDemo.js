@@ -104,9 +104,9 @@ export class SpeedDialDemo extends Component {
                     </div>
 
                     <div className="card">
-                        <h5>Delay, Icon and No Rotate Animation</h5>
+                        <h5>Transition Duration, Icon and No Rotate Animation</h5>
                         <div className="speeddial-delay-demo" style={{ position: 'relative', height: '300px' }}>
-                            <SpeedDial model={this.items} direction="up" delay={50} showIcon="pi pi-bars" hideIcon="pi pi-times"/>
+                            <SpeedDial model={this.items} direction="up" transitionDuration={80} showIcon="pi pi-bars" hideIcon="pi pi-times"/>
                         </div>
                     </div>
                 </div>

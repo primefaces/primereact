@@ -23,7 +23,7 @@ export interface SpeedDialProps {
     style?: object;
     className?: string;
     direction?: SpeedDialDirectionType;
-    delay?: number;
+    transitionDuration?: number;
     type?: SpeedDialType;
     radius?: number;
     disabled?: boolean;
@@ -35,8 +35,12 @@ export interface SpeedDialProps {
     hideIcon?: string;
     rotateAnimation?: boolean;
     onVisibleChange?(visible: boolean): void;
+    onClick?(event: React.MouseEvent<HTMLElement>): void;
     onShow?(): void;
     onHide?(): void;
 }
 
-export declare class SpeedDial extends React.Component<SpeedDialProps, any> { }
+export declare class SpeedDial extends React.Component<SpeedDialProps, any> {
+    public show(): void;
+    public hide(): void;
+}

@@ -13,7 +13,7 @@ export class SpeedDial extends Component {
         style: null,
         className: null,
         direction: 'up',
-        delay: 30,
+        transitionDuration: 30,
         type: 'linear',
         radius: 0,
         disabled: false,
@@ -25,6 +25,7 @@ export class SpeedDial extends Component {
         hideIcon: null,
         rotateAnimation: true,
         onVisibleChange: null,
+        onClick: null,
         onShow: null,
         onHide: null
     }
@@ -48,6 +49,7 @@ export class SpeedDial extends Component {
         hideIcon: PropTypes.string,
         rotateAnimation: PropTypes.bool,
         onVisibleChange: PropTypes.func,
+        onClick: PropTypes.func,
         onShow: PropTypes.func,
         onHide: PropTypes.func
     }
@@ -89,8 +91,10 @@ export class SpeedDial extends Component {
         this.props.onHide && this.props.onHide();
     }
 
-    onClick() {
+    onClick(e) {
         this.isVisible() ? this.hide() : this.show();
+
+        this.props.onClick && this.props.onClick(e);
 
         this.isItemClicked = true;
     }
