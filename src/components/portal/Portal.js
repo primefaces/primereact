@@ -8,13 +8,17 @@ export class Portal extends Component {
     static defaultProps = {
         element: null,
         appendTo: null,
-        visible: false
+        visible: false,
+        onMounted: null,
+        onUnmounted: null
     };
 
     static propTypes = {
         element: PropTypes.any,
         appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-        visible: PropTypes.bool
+        visible: PropTypes.bool,
+        onMounted: PropTypes.func,
+        onUnmounted: PropTypes.func
     };
 
     constructor(props) {
@@ -31,8 +35,12 @@ export class Portal extends Component {
 
     componentDidMount() {
         if (this.hasDOM() && !this.state.mounted) {
-            this.setState({ mounted: true });
+            this.setState({ mounted: true }, this.props.onMounted);
         }
+    }
+
+    componentWillUnmount() {
+        this.props.onUnmounted && this.props.onUnmounted();
     }
 
     render() {
