@@ -22,6 +22,8 @@ export class SpeedDial extends Component {
         buttonStyle: null,
         buttonClassName: null,
         buttonTemplate: null,
+        maskStyle: null,
+        maskClassName: null,
         showIcon: 'pi pi-plus',
         hideIcon: null,
         rotateAnimation: true,
@@ -47,6 +49,8 @@ export class SpeedDial extends Component {
         buttonStyle: PropTypes.object,
         buttonClassName: PropTypes.string,
         buttonTemplate: PropTypes.any,
+        maskStyle: PropTypes.object,
+        maskClassName: PropTypes.string,
         showIcon: PropTypes.string,
         hideIcon: PropTypes.string,
         rotateAnimation: PropTypes.bool,
@@ -316,10 +320,10 @@ export class SpeedDial extends Component {
             const visible = this.isVisible();
             const className = classNames('p-speeddial-mask', {
                 'p-speeddial-mask-visible': visible
-            });
+            }, this.props.maskClassName);
 
             return (
-                <div className={className}></div>
+                <div className={className} style={this.props.maskStyle}></div>
             );
         }
 

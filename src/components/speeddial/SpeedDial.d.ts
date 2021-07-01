@@ -32,6 +32,8 @@ export interface SpeedDialProps {
     buttonStyle?: object;
     buttonClassName?: string;
     buttonTemplate?: SpeedDialButtonTemplateType;
+    maskStyle?: object;
+    maskClassName?: string;
     showIcon?: string;
     hideIcon?: string;
     rotateAnimation?: boolean;
