@@ -95,3 +95,5 @@ export * from './utils/Utils';
 export * from './virtualscroller/VirtualScroller';
 export * from './speeddial/SpeedDial';
 export * from './blockui/BlockUI';
+export * from './terminalservice/TerminalService';
+export * from './terminal/Terminal';
