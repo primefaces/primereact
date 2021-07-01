@@ -2338,19 +2338,25 @@
     background: rgba(165, 214, 167, 0.92);
     color: #212121; }
 
-.p-speeddial-direction-up .p-speeddial-item,
-.p-speeddial-direction-down .p-speeddial-item {
+.p-speeddial-direction-up .p-speeddial-item {
   margin: 0.25rem 0; }
-  .p-speeddial-direction-up .p-speeddial-item:first-child,
-  .p-speeddial-direction-down .p-speeddial-item:first-child {
+  .p-speeddial-direction-up .p-speeddial-item:first-child {
     margin-bottom: 0.5rem; }
 
-.p-speeddial-direction-left .p-speeddial-item,
+.p-speeddial-direction-down .p-speeddial-item {
+  margin: 0.25rem 0; }
+  .p-speeddial-direction-down .p-speeddial-item:first-child {
+    margin-top: 0.5rem; }
+
+.p-speeddial-direction-left .p-speeddial-item {
+  margin: 0 0.25rem; }
+  .p-speeddial-direction-left .p-speeddial-item:first-child {
+    margin-right: 0.5rem; }
+
 .p-speeddial-direction-right .p-speeddial-item {
   margin: 0 0.25rem; }
-  .p-speeddial-direction-left .p-speeddial-item:first-child,
   .p-speeddial-direction-right .p-speeddial-item:first-child {
-    margin-right: 0.5rem; }
+    margin-left: 0.5rem; }
 
 .p-speeddial-circle .p-speeddial-item,
 .p-speeddial-semi-circle .p-speeddial-item,
