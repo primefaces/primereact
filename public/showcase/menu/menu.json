@@ -1221,7 +1221,8 @@
                     "to": "/dock",
                     "meta": [
                         "dock"
-                    ]
+                    ],
+                    "badge": "new"
                 }
             ]
         },
