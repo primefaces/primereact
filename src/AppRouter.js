@@ -178,6 +178,7 @@ import { VirtualScrollerDemo } from './showcase/virtualscroller/VirtualScrollerD
 import { SpeedDialDemo } from './showcase/speeddial/SpeedDialDemo';
 import { BlockUIDemo } from './showcase/blockui/BlockUIDemo';
 import { TerminalDemo } from './showcase/terminal/TerminalDemo';
+import { DockDemo } from './showcase/dock/DockDemo';
 
 class AppRouter extends Component {
 
@@ -383,6 +384,7 @@ class AppRouter extends Component {
                             <Route path="/speeddial" component={SpeedDialDemo} />
                             <Route path="/blockui" component={BlockUIDemo} />
                             <Route path="/terminal" component={TerminalDemo} />
+                            <Route path="/dock" component={DockDemo} />
                         </>
                     )
                 }

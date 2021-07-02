@@ -1,0 +1,47 @@
+.dock-demo {
+    .p-dock {
+        z-index: 5000;
+    }
+
+    .p-dialog {
+        .p-dialog-header {
+            padding: .2rem;
+        }
+
+        .p-dialog-content {
+            padding: 0;
+        }
+
+        p {
+            margin-top: 0;
+        }
+
+        .p-terminal {
+            background-color: #212121;
+            color: #ffffff;
+            border: 0 none;
+            min-height: 18rem;
+            height: 100%;
+
+            .p-terminal-command {
+                color: #80CBC4;
+            }
+
+            .p-terminal-prompt {
+                color: #FFD54F;
+            }
+
+            .p-terminal-response {
+                color: #9FA8DA;
+            }
+        }
+
+        .p-tree {
+            height: 100%;
+            border-radius: 0;
+            border-left-width: 0;
+            border-right-width: 0;
+            border-bottom-width: 0;
+        }
+    }
+}

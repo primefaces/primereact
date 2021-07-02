@@ -1215,6 +1215,13 @@
                     "meta": [
                         "slidemenu"
                     ]
+                },
+                {
+                    "name": "Dock",
+                    "to": "/dock",
+                    "meta": [
+                        "dock"
+                    ]
                 }
             ]
         },
