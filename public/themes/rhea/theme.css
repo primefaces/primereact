@@ -3763,6 +3763,28 @@
   .p-contextmenu .p-submenu-icon {
     font-size: 0.875rem; }
 
+.p-dock-list {
+  background: #cdcdcd;
+  padding: 0.3rem 2rem; }
+
+.p-dock-item {
+  padding: 0.2rem; }
+
+.p-dock-item-second-prev,
+.p-dock-item-second-next {
+  margin: 0 0.9rem; }
+
+.p-dock-item-prev,
+.p-dock-item-next {
+  margin: 0 1.3rem; }
+
+.p-dock-item-current {
+  margin: 0 1.5rem; }
+
+.p-dock-action {
+  width: 4rem;
+  height: 4rem; }
+
 .p-megamenu {
   padding: 0.5rem;
   background: #ffffff;
