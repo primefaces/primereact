@@ -31,42 +31,42 @@ export class DockDemo extends Component {
         this.dockItems = [
             {
                 label: 'Finder',
-                icon: () => <img alt="Finder" src={`${imgPath}/finder.png`} onError={(e) => e.target.src = imgErrorPath} width="100%" />,
+                icon: () => <img alt="Finder" src={`${imgPath}/finder.svg`} onError={(e) => e.target.src = imgErrorPath} width="100%" />,
                 command: () => {
                     this.setState({ displayFinder: true });
                 }
             },
             {
                 label: 'Terminal',
-                icon: () => <img alt="Finder" src={`${imgPath}/terminal.png`} onError={(e) => e.target.src = imgErrorPath} width="100%" />,
+                icon: () => <img alt="Finder" src={`${imgPath}/terminal.svg`} onError={(e) => e.target.src = imgErrorPath} width="100%" />,
                 command: () => {
                     this.setState({ displayTerminal: true });
                 }
             },
             {
                 label: 'App Store',
-                icon: () => <img alt="App Store" src={`${imgPath}/app-store.png`} onError={(e) => e.target.src = imgErrorPath} width="100%" />,
+                icon: () => <img alt="App Store" src={`${imgPath}/appstore.svg`} onError={(e) => e.target.src = imgErrorPath} width="100%" />,
                 command: () => {
                     this.toast2.show({ severity: 'error', summary: 'An unexpected error occurred while signing in.', detail: 'UNTRUSTED_CERT_TITLE' });
                 }
             },
             {
-                label: 'Chrome',
-                icon: () => <img alt="Finder" src={`${imgPath}/chrome.png`} onError={(e) => e.target.src = imgErrorPath} width="100%" />,
+                label: 'Safari',
+                icon: () => <img alt="Finder" src={`${imgPath}/safari.svg`} onError={(e) => e.target.src = imgErrorPath} width="100%" />,
                 command: () => {
-                    this.toast2.show({ severity: 'warn', summary: 'Google Chrome has stopped working' });
+                    this.toast2.show({ severity: 'warn', summary: 'Safari has stopped working' });
                 }
             },
             {
-                label: 'Preview',
-                icon: () => <img alt="Finder" src={`${imgPath}/preview.png`} onError={(e) => e.target.src = imgErrorPath} width="100%" />,
+                label: 'Photos',
+                icon: () => <img alt="Photos" src={`${imgPath}/photos.svg`} onError={(e) => e.target.src = imgErrorPath} width="100%" />,
                 command: () => {
                     this.galleria.show();
                 }
             },
             {
-                label: 'System Preferences',
-                icon: () => <img alt="Settings" src={`${imgPath}/settings.png`} onError={(e) => e.target.src = imgErrorPath} width="100%" />,
+                label: 'GitHub',
+                icon: () => <img alt="Settings" src={`${imgPath}/github.svg`} onError={(e) => e.target.src = imgErrorPath} width="100%" />,
             },
             {
                 label: 'Trash',
@@ -168,7 +168,7 @@ export class DockDemo extends Component {
                     <Toast ref={(el) => this.toast = el} />
                     <Toast ref={(el) => this.toast2 = el} position="top-center" />
 
-                    <Tooltip target=".p-dock-action" my="center+15 bottom" at="center top" showDelay={150} />
+                    <Tooltip className="dark-tooltip" target=".p-dock-action" my="center+15 bottom-15" at="center top" showDelay={150} />
                     <div className="dock-window">
                         <Dock model={this.dockItems} />
                     </div>

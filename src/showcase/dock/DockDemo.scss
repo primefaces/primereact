@@ -1,7 +1,7 @@
 .dock-demo {
     .dock-window {
         width: 100%;
-        height: 900px;
+        height: 450px;
         position: relative;
         background-image: url('../../assets/images/dock/window.jpg');
         background-repeat: no-repeat;
@@ -53,4 +53,20 @@
             border-bottom-width: 0;
         }
     }
+}
+
+@mixin tooltip-color($color) {
+    &.p-tooltip {
+        .p-tooltip-arrow {
+            border-top-color: var(#{$color});
+        }
+
+        .p-tooltip-text {
+            background-color: var(#{$color});
+        }
+    }
+}
+
+.dark-tooltip {
+    @include tooltip-color(--surface-900);
 }
