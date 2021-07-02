@@ -169,7 +169,9 @@ export class DockDemo extends Component {
                     <Toast ref={(el) => this.toast2 = el} position="top-center" />
 
                     <Tooltip target=".p-dock-action" my="center+15 bottom" at="center top" showDelay={150} />
-                    <Dock model={this.dockItems} />
+                    <div className="dock-window">
+                        <Dock model={this.dockItems} />
+                    </div>
 
                     <Dialog visible={this.state.displayTerminal} breakpoints={{ '960px': '50vw' }} style={{ width: '30vw' }} onHide={() => this.setState({ displayTerminal: false })}
                         maximizable appendTo="self">
