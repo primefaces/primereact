@@ -8,7 +8,9 @@ export class DockDoc extends Component {
 
     render() {
         return (
-            <h1>TODO</h1>
+            <div style={{height: '800px'}}>
+                <h1>TODO</h1>
+            </div>
         )
     }
 }

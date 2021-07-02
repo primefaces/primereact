@@ -9,7 +9,14 @@
     }
 
     .p-dock {
-        z-index: 5000;
+        z-index: 1000;
+    }
+
+    .p-dialog-mask,
+    .p-galleria-mask,
+    .p-galleria-mask .p-galleria-item-nav,
+    .p-toast {
+        position: absolute;
     }
 
     .p-dialog {
@@ -51,6 +58,35 @@
             border-left-width: 0;
             border-right-width: 0;
             border-bottom-width: 0;
+        }
+    }
+
+    .p-menubar {
+        padding-top: 0;
+        padding-bottom: 0;
+        border-radius: 0;
+
+        .menubar-root {
+            font-weight: bold;
+            padding: 0 1rem;
+        }
+
+        .p-menuitem-link {
+            padding: 0.5rem .75rem;
+        }
+
+        .p-menubar-root-list > .p-menuitem > .p-menuitem-link {
+            padding: 0.5rem .75rem;
+
+            > .p-submenu-icon {
+                display: none;
+            }
+        }
+
+        .p-menubar-end {
+            span, i {
+                padding: 0 .75rem;
+            }
         }
     }
 }
