@@ -97,3 +97,4 @@ export * from './speeddial/SpeedDial';
 export * from './blockui/BlockUI';
 export * from './terminalservice/TerminalService';
 export * from './terminal/Terminal';
+export * from './dock/Dock';

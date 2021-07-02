@@ -19,7 +19,7 @@ type MenuItemTemplateType = React.ReactNode | ((item: MenuItem, options: MenuIte
 
 export interface MenuItem {
     label?: string;
-    icon?: string;
+    icon?: any;
     url?: string;
     items?: MenuItem[] | MenuItem[][];
     expanded?: boolean;
