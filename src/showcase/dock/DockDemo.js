@@ -308,11 +308,11 @@ export class DockDemo extends Component {
                 <div className="content-section implementation dock-demo">
                     <Tooltip className="dark-tooltip" target=".p-dock-action" my="center+15 bottom-15" at="center top" showDelay={150} />
 
+                    <Menubar model={this.menubarItems} start={start} end={end} />
                     <div className="dock-window">
                         <Toast ref={(el) => this.toast = el} />
                         <Toast ref={(el) => this.toast2 = el} position="top-center" />
 
-                        <Menubar model={this.menubarItems} start={start} end={end} />
                         <Dock model={this.dockItems} />
 
                         <Dialog visible={this.state.displayTerminal} breakpoints={{ '960px': '50vw' }} style={{ width: '30vw' }} onHide={() => this.setState({ displayTerminal: false })} maximizable>
