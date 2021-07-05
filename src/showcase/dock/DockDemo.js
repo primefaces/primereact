@@ -79,6 +79,25 @@ export class DockDemo extends Component {
             }
         ];
 
+        this.dockBasicItems = [
+            {
+                label: 'Finder',
+                icon: () => <img alt="Finder" src={`${imgPath}/finder.svg`} onError={(e) => e.target.src = imgErrorPath} width="100%" />
+            },
+            {
+                label: 'App Store',
+                icon: () => <img alt="App Store" src={`${imgPath}/appstore.svg`} onError={(e) => e.target.src = imgErrorPath} width="100%" />
+            },
+            {
+                label: 'Photos',
+                icon: () => <img alt="Photos" src={`${imgPath}/photos.svg`} onError={(e) => e.target.src = imgErrorPath} width="100%" />
+            },
+            {
+                label: 'Trash',
+                icon: () => <img alt="trash" src={`${imgPath}/trash.png`} onError={(e) => e.target.src = imgErrorPath} width="100%" />
+            }
+        ]
+
         this.menubarItems = [
             {
                 label: 'Finder',
@@ -306,10 +325,19 @@ export class DockDemo extends Component {
                 </div>
 
                 <div className="content-section implementation dock-demo">
-                    <Tooltip className="dark-tooltip" target=".p-dock-action" my="center+15 bottom-15" at="center top" showDelay={150} />
+                    <h5>Basic</h5>
+                    <div className="dock-window">
+                        <Dock model={this.dockBasicItems} position="bottom"/>
+                        <Dock model={this.dockBasicItems} position="top"/>
+                        <Dock model={this.dockBasicItems} position="left"/>
+                        <Dock model={this.dockBasicItems} position="right"/>
+                    </div>
+
+                    <h5>Advanced</h5>
+                    <Tooltip className="dark-tooltip" target=".dock-advanced .p-dock-action" my="center+15 bottom-15" at="center top" showDelay={150} />
 
                     <Menubar model={this.menubarItems} start={start} end={end} />
-                    <div className="dock-window">
+                    <div className="dock-window dock-advanced">
                         <Toast ref={(el) => this.toast = el} />
                         <Toast ref={(el) => this.toast2 = el} position="top-center" />
 

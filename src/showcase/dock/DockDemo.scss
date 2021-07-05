@@ -12,52 +12,58 @@
         z-index: 1000;
     }
 
-    .p-dialog-mask,
-    .p-galleria-mask,
-    .p-galleria-mask .p-galleria-item-nav,
-    .p-toast {
-        position: absolute;
-    }
-
-    .p-dialog {
-        .p-dialog-header {
-            padding: .2rem;
+    .dock-advanced {
+        .p-dialog-mask,
+        .p-galleria-mask,
+        .p-galleria-mask .p-galleria-item-nav,
+        .p-toast {
+            position: absolute;
         }
 
-        .p-dialog-content {
-            padding: 0;
-        }
-
-        p {
-            margin-top: 0;
-        }
-
-        .p-terminal {
-            background-color: #212121;
-            color: #ffffff;
-            border: 0 none;
-            min-height: 18rem;
-            height: 100%;
-
-            .p-terminal-command {
-                color: #80CBC4;
+        .p-dialog {
+            .p-dialog-header {
+                padding: .2rem;
             }
 
-            .p-terminal-prompt {
-                color: #FFD54F;
+            .p-dialog-content {
+                padding: 0;
             }
 
-            .p-terminal-response {
-                color: #9FA8DA;
+            p {
+                margin-top: 0;
+            }
+
+            .p-terminal {
+                background-color: #212121;
+                color: #ffffff;
+                border: 0 none;
+                min-height: 18rem;
+                height: 100%;
+
+                .p-terminal-command {
+                    color: #80CBC4;
+                }
+
+                .p-terminal-prompt {
+                    color: #FFD54F;
+                }
+
+                .p-terminal-response {
+                    color: #9FA8DA;
+                }
+            }
+
+            .p-tree {
+                height: 100%;
+                border-radius: 0;
+                border-left-width: 0;
+                border-right-width: 0;
+                border-bottom-width: 0;
             }
         }
 
-        .p-tree {
-            height: 100%;
-            border-radius: 0;
-            border-left-width: 0;
-            border-right-width: 0;
-            border-bottom-width: 0;
+        .p-toast {
+            top: 20px;
         }
     }
 
@@ -91,18 +97,14 @@
     }
 }
 
-@mixin tooltip-color($color) {
-    &.p-tooltip {
+.dark-tooltip {
+    .p-tooltip {
         .p-tooltip-arrow {
-            border-top-color: var(#{$color});
+            border-top-color: var(--surface-900);
         }
 
         .p-tooltip-text {
-            background-color: var(#{$color});
+            background-color: var(--surface-900);
         }
     }
-}
-
-.dark-tooltip {
-    @include tooltip-color(--surface-900);
 }
