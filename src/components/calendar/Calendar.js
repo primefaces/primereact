@@ -25,6 +25,7 @@ export class Calendar extends Component {
         inputId: null,
         inputStyle: null,
         inputClassName: null,
+        inputMode: 'text',
         required: false,
         readOnlyInput: false,
         keepInvalid: false,
@@ -106,6 +107,7 @@ export class Calendar extends Component {
         inputId: PropTypes.string,
         inputStyle: PropTypes.object,
         inputClassName: PropTypes.string,
+        inputMode: PropTypes.string,
         required: PropTypes.bool,
         readOnlyInput: PropTypes.bool,
         keepInvalid: PropTypes.bool,
@@ -3053,7 +3055,7 @@ export class Calendar extends Component {
             return (
                 <InputText ref={this.inputRef} id={this.props.inputId} name={this.props.name} type="text" className={this.props.inputClassName} style={this.props.inputStyle}
                     readOnly={this.props.readOnlyInput} disabled={this.props.disabled} required={this.props.required} autoComplete="off" placeholder={this.props.placeholder}
-                    onInput={this.onUserInput} onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onInputKeyDown} aria-labelledby={this.props.ariaLabelledBy} inputMode="none" />
+                    onInput={this.onUserInput} onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onInputKeyDown} aria-labelledby={this.props.ariaLabelledBy} inputMode={this.props.inputMode} />
             );
         }
 
