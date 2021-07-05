@@ -326,50 +326,36 @@ export class DockDemo extends Component {
         );
 
         return (
-            <div>
-                <div className="content-section introduction">
-                    <AppInlineHeader changelogText="dock">
-                        <h1>Dock</h1>
-                        <p>Dock is a navigation component consisting of menuitems.</p>
-                    </AppInlineHeader>
-
-                    <AppDemoActions github="dock/DockDemo.js" />
+            <div className=" dock-demo">
+                <h5>Basic</h5>
+                <div className="dock-window">
+                    <Dock model={this.dockBasicItems} position="bottom"/>
+                    <Dock model={this.dockBasicItems} position="top"/>
+                    <Dock model={this.dockBasicItems} position="left"/>
+                    <Dock model={this.dockBasicItems} position="right"/>
                 </div>
 
-                <div className="content-section implementation dock-demo">
-                    <h5>Basic</h5>
-                    <div className="dock-window">
-                        <Dock model={this.dockBasicItems} position="bottom"/>
-                        <Dock model={this.dockBasicItems} position="top"/>
-                        <Dock model={this.dockBasicItems} position="left"/>
-                        <Dock model={this.dockBasicItems} position="right"/>
-                    </div>
+                <h5>Advanced</h5>
+                <Tooltip className="dark-tooltip" target=".dock-advanced .p-dock-action" my="center+15 bottom-15" at="center top" showDelay={150} />
 
-                    <h5>Advanced</h5>
-                    <Tooltip className="dark-tooltip" target=".dock-advanced .p-dock-action" my="center+15 bottom-15" at="center top" showDelay={150} />
+                <Menubar model={this.menubarItems} start={start} end={end} />
+                <div className="dock-window dock-advanced">
+                    <Toast ref={(el) => this.toast = el} />
+                    <Toast ref={(el) => this.toast2 = el} position="top-center" />
 
-                    <Menubar model={this.menubarItems} start={start} end={end} />
-                    <div className="dock-window dock-advanced">
-                        <Toast ref={(el) => this.toast = el} />
-                        <Toast ref={(el) => this.toast2 = el} position="top-center" />
+                    <Dock model={this.dockItems} />
 
-                        <Dock model={this.dockItems} />
+                    <Dialog visible={this.state.displayTerminal} breakpoints={{ '960px': '50vw' }} style={{ width: '30vw' }} onHide={() => this.setState({ displayTerminal: false })} maximizable blockScroll={false}>
+                        <Terminal welcomeMessage="Welcome to PrimeReact (cmd: 'date', 'greet {0}', 'random' and 'clear')" prompt="primereact $" />
+                    </Dialog>
 
-                        <Dialog visible={this.state.displayTerminal} breakpoints={{ '960px': '50vw' }} style={{ width: '30vw' }} onHide={() => this.setState({ displayTerminal: false })} maximizable blockScroll={false}>
-                            <Terminal welcomeMessage="Welcome to PrimeReact (cmd: 'date', 'greet {0}', 'random' and 'clear')" prompt="primereact $" />
-                        </Dialog>
+                    <Dialog visible={this.state.displayFinder} breakpoints={{ '960px': '50vw' }} style={{ width: '30vw', height: '18rem' }} onHide={() => this.setState({ displayFinder: false })} maximizable blockScroll={false}>
+                        <Tree value={this.state.nodes} />
+                    </Dialog>
 
-                        <Dialog visible={this.state.displayFinder} breakpoints={{ '960px': '50vw' }} style={{ width: '30vw', height: '18rem' }} onHide={() => this.setState({ displayFinder: false })} maximizable blockScroll={false}>
-                            <Tree value={this.state.nodes} />
-                        </Dialog>
-
-                        <Galleria ref={(el) => this.galleria = el} value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={2} style={{ width: '400px' }}
-                            circular fullScreen showThumbnails={false} showItemNavigators item={this.itemTemplate} />
-                    </div>
-
+                    <Galleria ref={(el) => this.galleria = el} value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={2} style={{ width: '400px' }}
+                        circular fullScreen showThumbnails={false} showItemNavigators item={this.itemTemplate} />
                 </div>
-
-                <DockDoc />
             </div>
         )
     }
@@ -379,13 +365,695 @@ export class DockDemo extends Component {
             'hooks': {
                 tabName: 'Hooks Source',
                 content: `
+import React, { useState, useEffect } from 'react';
+import PrimeReact from 'primereact/api';
+import { Dock } from 'primereact/dock';
+import { Tooltip } from 'primereact/tooltip';
+import { Dialog } from 'primereact/dialog';
+import { Terminal } from 'primereact/terminal';
+import { TerminalService } from 'primereact/terminalservice';
+import { Galleria } from 'primereact/galleria';
+import { Toast } from 'primereact/toast';
+import { Tree } from 'primereact/tree';
+import { Menubar } from 'primereact/menubar';
+import { NodeService } from '../service/NodeService';
+import { PhotoService } from '../service/PhotoService';
+import './DockDemo.css';
 
+export const DockDemo = () => {
+
+    const [displayTerminal, setDisplayTerminal ] = useState(false);
+    const [displayFinder, setDisplayFinder] = useState(false);
+    const [images, setImages] = useState(null);
+    const [nodes, setNodes] = useState(null);
+    const toast = useRef(null);
+    const toast2 = useRef(null);
+    const galleria = useRef(null);
+
+    const nodeService = new NodeService();
+    const galleriaService = new PhotoService();
+
+    const imgPath = 'showcase/demo/images/dock';
+    const imgErrorPath = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png';
+
+    const dockItems = [
+        {
+            label: 'Finder',
+            icon: () => <img alt="Finder" src={\`\${imgPath}/finder.svg\`} onError={(e) => e.target.src = imgErrorPath} width="100%" />,
+            command: () => {
+                setDisplayFinder(true);
+            }
+        },
+        {
+            label: 'Terminal',
+            icon: () => <img alt="Finder" src={\`\${imgPath}/terminal.svg\`} onError={(e) => e.target.src = imgErrorPath} width="100%" />,
+            command: () => {
+                setDisplayTerminal(true);
+            }
+        },
+        {
+            label: 'App Store',
+            icon: () => <img alt="App Store" src={\`\${imgPath}/appstore.svg\`} onError={(e) => e.target.src = imgErrorPath} width="100%" />,
+            command: () => {
+                toast2.current.show({ severity: 'error', summary: 'An unexpected error occurred while signing in.', detail: 'UNTRUSTED_CERT_TITLE' });
+            }
+        },
+        {
+            label: 'Safari',
+            icon: () => <img alt="Finder" src={\`\${imgPath}/safari.svg\`} onError={(e) => e.target.src = imgErrorPath} width="100%" />,
+            command: () => {
+                toast2.current.show({ severity: 'warn', summary: 'Safari has stopped working' });
+            }
+        },
+        {
+            label: 'Photos',
+            icon: () => <img alt="Photos" src={\`\${imgPath}/photos.svg\`} onError={(e) => e.target.src = imgErrorPath} width="100%" />,
+            command: () => {
+                galleria.current.show();
+            }
+        },
+        {
+            label: 'GitHub',
+            icon: () => <img alt="Settings" src={\`\${imgPath}/github.svg\`} onError={(e) => e.target.src = imgErrorPath} width="100%" />,
+        },
+        {
+            label: 'Trash',
+            icon: () => <img alt="trash" src={\`\${imgPath}/trash.png\`} onError={(e) => e.target.src = imgErrorPath} width="100%" />,
+            command: () => {
+                toast.current.show({ severity: 'info', summary: 'Empty Trash' });
+            }
+        }
+    ];
+
+    const dockBasicItems = [
+        {
+            label: 'Finder',
+            icon: () => <img alt="Finder" src={\`\${imgPath}/finder.svg\`} onError={(e) => e.target.src = imgErrorPath} width="100%" />
+        },
+        {
+            label: 'App Store',
+            icon: () => <img alt="App Store" src={\`\${imgPath}/appstore.svg\`} onError={(e) => e.target.src = imgErrorPath} width="100%" />
+        },
+        {
+            label: 'Photos',
+            icon: () => <img alt="Photos" src={\`\${imgPath}/photos.svg\`} onError={(e) => e.target.src = imgErrorPath} width="100%" />
+        },
+        {
+            label: 'Trash',
+            icon: () => <img alt="trash" src={\`\${imgPath}/trash.png\`} onError={(e) => e.target.src = imgErrorPath} width="100%" />
+        }
+    ];
+
+    const menubarItems = [
+        {
+            label: 'Finder',
+            className: 'menubar-root'
+        },
+        {
+            label: 'File',
+            items: [
+                {
+                    label: 'New',
+                    icon: 'pi pi-fw pi-plus',
+                    items: [
+                        {
+                            label: 'Bookmark',
+                            icon: 'pi pi-fw pi-bookmark'
+                        },
+                        {
+                            label: 'Video',
+                            icon: 'pi pi-fw pi-video'
+                        },
+
+                    ]
+                },
+                {
+                    label: 'Delete',
+                    icon: 'pi pi-fw pi-trash'
+                },
+                {
+                    separator: true
+                },
+                {
+                    label: 'Export',
+                    icon: 'pi pi-fw pi-external-link'
+                }
+            ]
+        },
+        {
+            label: 'Edit',
+            items: [
+                {
+                    label: 'Left',
+                    icon: 'pi pi-fw pi-align-left'
+                },
+                {
+                    label: 'Right',
+                    icon: 'pi pi-fw pi-align-right'
+                },
+                {
+                    label: 'Center',
+                    icon: 'pi pi-fw pi-align-center'
+                },
+                {
+                    label: 'Justify',
+                    icon: 'pi pi-fw pi-align-justify'
+                },
+
+            ]
+        },
+        {
+            label: 'Users',
+            items: [
+                {
+                    label: 'New',
+                    icon: 'pi pi-fw pi-user-plus',
+
+                },
+                {
+                    label: 'Delete',
+                    icon: 'pi pi-fw pi-user-minus',
+
+                },
+                {
+                    label: 'Search',
+                    icon: 'pi pi-fw pi-users',
+                    items: [
+                        {
+                            label: 'Filter',
+                            icon: 'pi pi-fw pi-filter',
+                            items: [
+                                {
+                                    label: 'Print',
+                                    icon: 'pi pi-fw pi-print'
+                                }
+                            ]
+                        },
+                        {
+                            icon: 'pi pi-fw pi-bars',
+                            label: 'List'
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            label: 'Events',
+            items: [
+                {
+                    label: 'Edit',
+                    icon: 'pi pi-fw pi-pencil',
+                    items: [
+                        {
+                            label: 'Save',
+                            icon: 'pi pi-fw pi-calendar-plus'
+                        },
+                        {
+                            label: 'Delete',
+                            icon: 'pi pi-fw pi-calendar-minus'
+                        }
+                    ]
+                },
+                {
+                    label: 'Archieve',
+                    icon: 'pi pi-fw pi-calendar-times',
+                    items: [
+                        {
+                            label: 'Remove',
+                            icon: 'pi pi-fw pi-calendar-minus'
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            label: 'Quit'
+        }
+    ];
+
+    const responsiveOptions = [
+        {
+            breakpoint: '1024px',
+            numVisible: 3
+        },
+        {
+            breakpoint: '768px',
+            numVisible: 2
+        },
+        {
+            breakpoint: '560px',
+            numVisible: 1
+        }
+    ];
+
+    const itemTemplate = (item) => {
+        return <img src={item.itemImageSrc} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
+    }
+
+    const commandHandler = (text) => {
+        let response;
+        let argsIndex = text.indexOf(' ');
+        let command = argsIndex !== -1 ? text.substring(0, argsIndex) : text;
+
+        switch (command) {
+            case 'date':
+                response = 'Today is ' + new Date().toDateString();
+                break;
+
+            case 'greet':
+                response = 'Hola ' + text.substring(argsIndex + 1) + '!';
+                break;
+
+            case 'random':
+                response = Math.floor(Math.random() * 100);
+                break;
+
+            case 'clear':
+                response = null;
+                break;
+
+            default:
+                response = 'Unknown command: ' + command;
+                break;
+        }
+
+        if (response) {
+            TerminalService.emit('response', response);
+        }
+        else {
+            TerminalService.emit('clear');
+        }
+    }
+
+    useEffect(() => {
+        TerminalService.on('command', commandHandler);
+
+        galleriaService.getImages().then(data => setImages(data));
+        nodeService.getTreeNodes().then(data => setNodes(data));
+
+        PrimeReact.appendTo = 'self';
+
+        return () => {
+            TerminalService.off('command', commandHandler);
+
+            // reset
+            PrimeReact.appendTo = null;
+        }
+    },[])
+
+    const start = <i className="pi pi-apple"></i>;
+    const end = (
+        <React.Fragment>
+            <i className="pi pi-video" />
+            <i className="pi pi-wifi" />
+            <i className="pi pi-volume-up" />
+            <span>Fri 13:07</span>
+            <i className="pi pi-search" />
+            <i className="pi pi-bars" />
+        </React.Fragment>
+    );
+
+    return (
+        <div className="dock-demo">
+            <h5>Basic</h5>
+            <div className="dock-window">
+                <Dock model={dockBasicItems} position="bottom"/>
+                <Dock model={dockBasicItems} position="top"/>
+                <Dock model={dockBasicItems} position="left"/>
+                <Dock model={dockBasicItems} position="right"/>
+            </div>
+
+            <h5>Advanced</h5>
+            <Tooltip className="dark-tooltip" target=".dock-advanced .p-dock-action" my="center+15 bottom-15" at="center top" showDelay={150} />
+
+            <Menubar model={menubarItems} start={start} end={end} />
+            <div className="dock-window dock-advanced">
+                <Toast ref={toast} />
+                <Toast ref={toast2} position="top-center" />
+
+                <Dock model={dockItems} />
+
+                <Dialog visible={displayTerminal} breakpoints={{ '960px': '50vw' }} style={{ width: '30vw' }} onHide={() => setDisplayTerminal(false)} maximizable blockScroll={false}>
+                    <Terminal welcomeMessage="Welcome to PrimeReact (cmd: 'date', 'greet {0}', 'random' and 'clear')" prompt="primereact $" />
+                </Dialog>
+
+                <Dialog visible={displayFinder} breakpoints={{ '960px': '50vw' }} style={{ width: '30vw', height: '18rem' }} onHide={() => setDisplayFinder(false)} maximizable blockScroll={false}>
+                    <Tree value={nodes} />
+                </Dialog>
+
+                <Galleria ref={galleria} value={images} responsiveOptions={responsiveOptions} numVisible={2} style={{ width: '400px' }}
+                    circular fullScreen showThumbnails={false} showItemNavigators item={itemTemplate} />
+            </div>
+        </div>
+    )
+}
                 `
             },
             'ts': {
                 tabName: 'TS Source',
                 content: `
+import React, { useState, useEffect } from 'react';
+import PrimeReact from 'primereact/api';
+import { Dock } from 'primereact/dock';
+import { Tooltip } from 'primereact/tooltip';
+import { Dialog } from 'primereact/dialog';
+import { Terminal } from 'primereact/terminal';
+import { TerminalService } from 'primereact/terminalservice';
+import { Galleria } from 'primereact/galleria';
+import { Toast } from 'primereact/toast';
+import { Tree } from 'primereact/tree';
+import { Menubar } from 'primereact/menubar';
+import { NodeService } from '../service/NodeService';
+import { PhotoService } from '../service/PhotoService';
+import './DockDemo.css';
 
+export const DockDemo = () => {
+
+    const [displayTerminal, setDisplayTerminal] = useState<boolean>(false);
+    const [displayFinder, setDisplayFinder] = useState<boolean>(false);
+    const [images, setImages] = useState<any>(null);
+    const [nodes, setNodes] = useState<any>(null);
+    const toast = useRef<any>(null);
+    const toast2 = useRef<any>(null);
+    const galleria = useRef<any>(null);
+
+    const nodeService = new NodeService();
+    const galleriaService = new PhotoService();
+
+    const imgPath = 'showcase/demo/images/dock';
+    const imgErrorPath = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png';
+
+    const dockItems = [
+        {
+            label: 'Finder',
+            icon: () => <img alt="Finder" src={\`\${imgPath}/finder.svg\`} onError={(e) => e.target.src = imgErrorPath} width="100%" />,
+            command: () => {
+                setDisplayFinder(true);
+            }
+        },
+        {
+            label: 'Terminal',
+            icon: () => <img alt="Finder" src={\`\${imgPath}/terminal.svg\`} onError={(e) => e.target.src = imgErrorPath} width="100%" />,
+            command: () => {
+                setDisplayTerminal(true);
+            }
+        },
+        {
+            label: 'App Store',
+            icon: () => <img alt="App Store" src={\`\${imgPath}/appstore.svg\`} onError={(e) => e.target.src = imgErrorPath} width="100%" />,
+            command: () => {
+                toast2.current.show({ severity: 'error', summary: 'An unexpected error occurred while signing in.', detail: 'UNTRUSTED_CERT_TITLE' });
+            }
+        },
+        {
+            label: 'Safari',
+            icon: () => <img alt="Finder" src={\`\${imgPath}/safari.svg\`} onError={(e) => e.target.src = imgErrorPath} width="100%" />,
+            command: () => {
+                toast2.current.show({ severity: 'warn', summary: 'Safari has stopped working' });
+            }
+        },
+        {
+            label: 'Photos',
+            icon: () => <img alt="Photos" src={\`\${imgPath}/photos.svg\`} onError={(e) => e.target.src = imgErrorPath} width="100%" />,
+            command: () => {
+                galleria.current.show();
+            }
+        },
+        {
+            label: 'GitHub',
+            icon: () => <img alt="Settings" src={\`\${imgPath}/github.svg\`} onError={(e) => e.target.src = imgErrorPath} width="100%" />,
+        },
+        {
+            label: 'Trash',
+            icon: () => <img alt="trash" src={\`\${imgPath}/trash.png\`} onError={(e) => e.target.src = imgErrorPath} width="100%" />,
+            command: () => {
+                toast.current.show({ severity: 'info', summary: 'Empty Trash' });
+            }
+        }
+    ];
+
+    const dockBasicItems = [
+        {
+            label: 'Finder',
+            icon: () => <img alt="Finder" src={\`\${imgPath}/finder.svg\`} onError={(e) => e.target.src = imgErrorPath} width="100%" />
+        },
+        {
+            label: 'App Store',
+            icon: () => <img alt="App Store" src={\`\${imgPath}/appstore.svg\`} onError={(e) => e.target.src = imgErrorPath} width="100%" />
+        },
+        {
+            label: 'Photos',
+            icon: () => <img alt="Photos" src={\`\${imgPath}/photos.svg\`} onError={(e) => e.target.src = imgErrorPath} width="100%" />
+        },
+        {
+            label: 'Trash',
+            icon: () => <img alt="trash" src={\`\${imgPath}/trash.png\`} onError={(e) => e.target.src = imgErrorPath} width="100%" />
+        }
+    ];
+
+    const menubarItems = [
+        {
+            label: 'Finder',
+            className: 'menubar-root'
+        },
+        {
+            label: 'File',
+            items: [
+                {
+                    label: 'New',
+                    icon: 'pi pi-fw pi-plus',
+                    items: [
+                        {
+                            label: 'Bookmark',
+                            icon: 'pi pi-fw pi-bookmark'
+                        },
+                        {
+                            label: 'Video',
+                            icon: 'pi pi-fw pi-video'
+                        },
+
+                    ]
+                },
+                {
+                    label: 'Delete',
+                    icon: 'pi pi-fw pi-trash'
+                },
+                {
+                    separator: true
+                },
+                {
+                    label: 'Export',
+                    icon: 'pi pi-fw pi-external-link'
+                }
+            ]
+        },
+        {
+            label: 'Edit',
+            items: [
+                {
+                    label: 'Left',
+                    icon: 'pi pi-fw pi-align-left'
+                },
+                {
+                    label: 'Right',
+                    icon: 'pi pi-fw pi-align-right'
+                },
+                {
+                    label: 'Center',
+                    icon: 'pi pi-fw pi-align-center'
+                },
+                {
+                    label: 'Justify',
+                    icon: 'pi pi-fw pi-align-justify'
+                },
+
+            ]
+        },
+        {
+            label: 'Users',
+            items: [
+                {
+                    label: 'New',
+                    icon: 'pi pi-fw pi-user-plus',
+
+                },
+                {
+                    label: 'Delete',
+                    icon: 'pi pi-fw pi-user-minus',
+
+                },
+                {
+                    label: 'Search',
+                    icon: 'pi pi-fw pi-users',
+                    items: [
+                        {
+                            label: 'Filter',
+                            icon: 'pi pi-fw pi-filter',
+                            items: [
+                                {
+                                    label: 'Print',
+                                    icon: 'pi pi-fw pi-print'
+                                }
+                            ]
+                        },
+                        {
+                            icon: 'pi pi-fw pi-bars',
+                            label: 'List'
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            label: 'Events',
+            items: [
+                {
+                    label: 'Edit',
+                    icon: 'pi pi-fw pi-pencil',
+                    items: [
+                        {
+                            label: 'Save',
+                            icon: 'pi pi-fw pi-calendar-plus'
+                        },
+                        {
+                            label: 'Delete',
+                            icon: 'pi pi-fw pi-calendar-minus'
+                        }
+                    ]
+                },
+                {
+                    label: 'Archieve',
+                    icon: 'pi pi-fw pi-calendar-times',
+                    items: [
+                        {
+                            label: 'Remove',
+                            icon: 'pi pi-fw pi-calendar-minus'
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            label: 'Quit'
+        }
+    ];
+
+    const responsiveOptions = [
+        {
+            breakpoint: '1024px',
+            numVisible: 3
+        },
+        {
+            breakpoint: '768px',
+            numVisible: 2
+        },
+        {
+            breakpoint: '560px',
+            numVisible: 1
+        }
+    ];
+
+    const itemTemplate = (item) => {
+        return <img src={item.itemImageSrc} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
+    }
+
+    const commandHandler = (text) => {
+        let response;
+        let argsIndex = text.indexOf(' ');
+        let command = argsIndex !== -1 ? text.substring(0, argsIndex) : text;
+
+        switch (command) {
+            case 'date':
+                response = 'Today is ' + new Date().toDateString();
+                break;
+
+            case 'greet':
+                response = 'Hola ' + text.substring(argsIndex + 1) + '!';
+                break;
+
+            case 'random':
+                response = Math.floor(Math.random() * 100);
+                break;
+
+            case 'clear':
+                response = null;
+                break;
+
+            default:
+                response = 'Unknown command: ' + command;
+                break;
+        }
+
+        if (response) {
+            TerminalService.emit('response', response);
+        }
+        else {
+            TerminalService.emit('clear');
+        }
+    }
+
+    useEffect(() => {
+        TerminalService.on('command', commandHandler);
+
+        galleriaService.getImages().then(data => setImages(data));
+        nodeService.getTreeNodes().then(data => setNodes(data));
+
+        PrimeReact.appendTo = 'self';
+
+        return () => {
+            TerminalService.off('command', commandHandler);
+
+            // reset
+            PrimeReact.appendTo = null;
+        }
+    },[])
+
+    const start = <i className="pi pi-apple"></i>;
+    const end = (
+        <React.Fragment>
+            <i className="pi pi-video" />
+            <i className="pi pi-wifi" />
+            <i className="pi pi-volume-up" />
+            <span>Fri 13:07</span>
+            <i className="pi pi-search" />
+            <i className="pi pi-bars" />
+        </React.Fragment>
+    );
+
+    return (
+        <div className="dock-demo">
+            <h5>Basic</h5>
+            <div className="dock-window">
+                <Dock model={dockBasicItems} position="bottom"/>
+                <Dock model={dockBasicItems} position="top"/>
+                <Dock model={dockBasicItems} position="left"/>
+                <Dock model={dockBasicItems} position="right"/>
+            </div>
+
+            <h5>Advanced</h5>
+            <Tooltip className="dark-tooltip" target=".dock-advanced .p-dock-action" my="center+15 bottom-15" at="center top" showDelay={150} />
+
+            <Menubar model={menubarItems} start={start} end={end} />
+            <div className="dock-window dock-advanced">
+                <Toast ref={toast} />
+                <Toast ref={toast2} position="top-center" />
+
+                <Dock model={dockItems} />
+
+                <Dialog visible={displayTerminal} breakpoints={{ '960px': '50vw' }} style={{ width: '30vw' }} onHide={() => setDisplayTerminal(false)} maximizable blockScroll={false}>
+                    <Terminal welcomeMessage="Welcome to PrimeReact (cmd: 'date', 'greet {0}', 'random' and 'clear')" prompt="primereact $" />
+                </Dialog>
+
+                <Dialog visible={displayFinder} breakpoints={{ '960px': '50vw' }} style={{ width: '30vw', height: '18rem' }} onHide={() => setDisplayFinder(false)} maximizable blockScroll={false}>
+                    <Tree value={nodes} />
+                </Dialog>
+
+                <Galleria ref={galleria} value={images} responsiveOptions={responsiveOptions} numVisible={2} style={{ width: '400px' }}
+                    circular fullScreen showThumbnails={false} showItemNavigators item={itemTemplate} />
+            </div>
+        </div>
+    )
+}
                 `
             }
         }
