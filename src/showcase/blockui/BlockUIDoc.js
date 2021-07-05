@@ -246,26 +246,26 @@ export const BlockUIDemo = () => {
                         </div>
 
                         <h5>Events</h5>
-                        <div class="doc-tablewrapper">
-                            <table class="doc-table">
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Parameters</th>
-                                    <th>Description</th>
-                                </tr>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Parameters</th>
+                                        <th>Description</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>onBlocked</td>
-                                    <td>-</td>
-                                    <td>Fired when the element gets blocked.</td>
-                                </tr>
-                                <tr>
-                                    <td>onUnblocked</td>
-                                    <td>-</td>
-                                    <td>Fired when the element gets unblocked.</td>
-                                </tr>
+                                    <tr>
+                                        <td>onBlocked</td>
+                                        <td>-</td>
+                                        <td>Fired when the element gets blocked.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onUnblocked</td>
+                                        <td>-</td>
+                                        <td>Fired when the element gets unblocked.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
