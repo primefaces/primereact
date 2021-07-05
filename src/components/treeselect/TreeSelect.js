@@ -2,7 +2,7 @@ import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import { DomHandler, ObjectUtils, classNames, ZIndexUtils, ConnectedOverlayScrollHandler } from '../utils/Utils';
 import PrimeReact from '../api/Api';
-import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
+import { OverlayService } from '../overlayservice/OverlayService';
 import { Tree } from '../tree/Tree';
 import { TreeSelectPanel } from './TreeSelectPanel';
 import { Ripple } from '../ripple/Ripple';
@@ -227,7 +227,7 @@ export class TreeSelect extends Component {
     }
 
     onOverlayClick(event) {
-        OverlayEventBus.emit('overlay-click', {
+        OverlayService.emit('overlay-click', {
             originalEvent: event,
             target: this.container
         });

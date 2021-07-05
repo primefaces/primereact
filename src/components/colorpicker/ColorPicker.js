@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { DomHandler, ObjectUtils, classNames, ConnectedOverlayScrollHandler, ZIndexUtils } from '../utils/Utils';
 import { ColorPickerPanel } from './ColorPickerPanel';
 import { tip } from '../tooltip/Tooltip';
-import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
+import { OverlayService } from '../overlayservice/OverlayService';
 import PrimeReact from '../api/Api';
 
 export class ColorPicker extends Component {
@@ -77,7 +77,7 @@ export class ColorPicker extends Component {
 
     onPanelClick(event) {
         if (!this.props.inline) {
-            OverlayEventBus.emit('overlay-click', {
+            OverlayService.emit('overlay-click', {
                 originalEvent: event,
                 target: this.container
             });

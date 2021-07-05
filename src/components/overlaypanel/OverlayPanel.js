@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { DomHandler, ZIndexUtils, classNames, ConnectedOverlayScrollHandler, UniqueComponentId } from '../utils/Utils';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Ripple } from '../ripple/Ripple';
-import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
+import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 
 export class OverlayPanel extends Component {
@@ -128,7 +128,7 @@ export class OverlayPanel extends Component {
     onPanelClick(event) {
         this.isPanelClicked = true;
 
-        OverlayEventBus.emit('overlay-click', {
+        OverlayService.emit('overlay-click', {
             originalEvent: event,
             target: this.target
         });
@@ -165,14 +165,14 @@ export class OverlayPanel extends Component {
                     }
                 };
 
-                OverlayEventBus.on('overlay-click', this.overlayEventListener);
+                OverlayService.on('overlay-click', this.overlayEventListener);
             });
         }
     }
 
     hide() {
         this.setState({ visible: false }, () => {
-            OverlayEventBus.off('overlay-click', this.overlayEventListener);
+            OverlayService.off('overlay-click', this.overlayEventListener);
             this.overlayEventListener = null;
         });
     }
@@ -262,7 +262,7 @@ export class OverlayPanel extends Component {
         }
 
         if (this.overlayEventListener) {
-            OverlayEventBus.off('overlay-click', this.overlayEventListener);
+            OverlayService.off('overlay-click', this.overlayEventListener);
             this.overlayEventListener = null;
         }
 

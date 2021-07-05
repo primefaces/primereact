@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ObjectUtils, DomHandler, classNames } from '../utils/Utils';
-import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
+import { OverlayService } from '../overlayservice/OverlayService';
 
 export class TreeTableBodyCell extends Component {
 
@@ -31,7 +31,7 @@ export class TreeTableBodyCell extends Component {
                     }
                 };
 
-                OverlayEventBus.on('overlay-click', this.overlayEventListener);
+                OverlayService.on('overlay-click', this.overlayEventListener);
             });
         }
     }
@@ -75,7 +75,7 @@ export class TreeTableBodyCell extends Component {
                 editing: false
             }, () => {
                 this.unbindDocumentEditListener();
-                OverlayEventBus.off('overlay-click', this.overlayEventListener);
+                OverlayService.off('overlay-click', this.overlayEventListener);
                 this.overlayEventListener = null;
             });
         }, 1);
@@ -127,7 +127,7 @@ export class TreeTableBodyCell extends Component {
         this.unbindDocumentEditListener();
 
         if (this.overlayEventListener) {
-            OverlayEventBus.off('overlay-click', this.overlayEventListener);
+            OverlayService.off('overlay-click', this.overlayEventListener);
             this.overlayEventListener = null;
         }
     }

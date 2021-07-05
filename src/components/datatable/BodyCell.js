@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ObjectUtils, DomHandler, classNames } from '../utils/Utils';
-import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
+import { OverlayService } from '../overlayservice/OverlayService';
 import { RowRadioButton } from './RowRadioButton';
 import { RowCheckbox } from './RowCheckbox';
 import { Ripple } from '../ripple/Ripple';
@@ -138,7 +138,7 @@ export class BodyCell extends Component {
                         }
                     };
 
-                    OverlayEventBus.on('overlay-click', this.overlayEventListener);
+                    OverlayService.on('overlay-click', this.overlayEventListener);
                 }
 
                 if (this.props.onEditingCellChange) {
@@ -236,7 +236,7 @@ export class BodyCell extends Component {
                 editing: false
             }, () => {
                 this.unbindDocumentEditListener();
-                OverlayEventBus.off('overlay-click', this.overlayEventListener);
+                OverlayService.off('overlay-click', this.overlayEventListener);
                 this.overlayEventListener = null;
 
                 if (this.props.onEditingCellChange) {
@@ -379,7 +379,7 @@ export class BodyCell extends Component {
         this.unbindDocumentEditListener();
 
         if (this.overlayEventListener) {
-            OverlayEventBus.off('overlay-click', this.overlayEventListener);
+            OverlayService.off('overlay-click', this.overlayEventListener);
             this.overlayEventListener = null;
         }
     }

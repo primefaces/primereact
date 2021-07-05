@@ -1,0 +1,6 @@
+{
+    "main": "./overlayservice.cjs.js",
+    "module": "./overlayservice.esm.js",
+    "unpkg": "./overlayservice.min.js",
+    "types": "./overlayservice.d.ts"
+}

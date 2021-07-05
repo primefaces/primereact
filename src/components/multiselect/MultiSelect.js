@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { DomHandler, FilterUtils, ObjectUtils, ZIndexUtils, classNames, ConnectedOverlayScrollHandler } from '../utils/Utils';
 import { tip } from '../tooltip/Tooltip';
 import { MultiSelectPanel } from './MultiSelectPanel';
-import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
+import { OverlayService } from '../overlayservice/OverlayService';
 import PrimeReact from '../api/Api';
 
 export class MultiSelect extends Component {
@@ -165,7 +165,7 @@ export class MultiSelect extends Component {
     }
 
     onPanelClick(event) {
-        OverlayEventBus.emit('overlay-click', {
+        OverlayService.emit('overlay-click', {
             originalEvent: event,
             target: this.container
         });

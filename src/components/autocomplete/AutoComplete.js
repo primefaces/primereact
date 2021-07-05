@@ -5,7 +5,7 @@ import { Button } from '../button/Button';
 import { DomHandler, ObjectUtils, classNames, UniqueComponentId, ConnectedOverlayScrollHandler, ZIndexUtils} from '../utils/Utils';
 import { AutoCompletePanel } from './AutoCompletePanel';
 import { tip } from '../tooltip/Tooltip';
-import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
+import { OverlayService } from '../overlayservice/OverlayService';
 import PrimeReact from '../api/Api';
 
 export class AutoComplete extends Component {
@@ -326,7 +326,7 @@ export class AutoComplete extends Component {
     }
 
     onPanelClick(event) {
-        OverlayEventBus.emit('overlay-click', {
+        OverlayService.emit('overlay-click', {
             originalEvent: event,
             target: this.container
         });

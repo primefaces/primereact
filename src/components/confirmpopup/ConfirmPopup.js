@@ -5,7 +5,7 @@ import { DomHandler, ObjectUtils, classNames, ZIndexUtils, ConnectedOverlayScrol
 import { Button } from '../button/Button';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { localeOption } from '../api/Api';
-import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
+import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 
 export function confirmPopup(props) {
@@ -189,7 +189,7 @@ export class ConfirmPopup extends Component {
     onPanelClick(event) {
         this.isPanelClicked = true;
 
-        OverlayEventBus.emit('overlay-click', {
+        OverlayService.emit('overlay-click', {
             originalEvent: event,
             target: this.props.target
         });
@@ -219,13 +219,13 @@ export class ConfirmPopup extends Component {
                 }
             };
 
-            OverlayEventBus.on('overlay-click', this.overlayEventListener);
+            OverlayService.on('overlay-click', this.overlayEventListener);
         });
     }
 
     hide(result) {
         this.setState({ visible: false }, () => {
-            OverlayEventBus.off('overlay-click', this.overlayEventListener);
+            OverlayService.off('overlay-click', this.overlayEventListener);
             this.overlayEventListener = null;
 
             if (this.props.onHide) {
@@ -301,7 +301,7 @@ export class ConfirmPopup extends Component {
         }
 
         if (this.overlayEventListener) {
-            OverlayEventBus.off('overlay-click', this.overlayEventListener);
+            OverlayService.off('overlay-click', this.overlayEventListener);
             this.overlayEventListener = null;
         }
 

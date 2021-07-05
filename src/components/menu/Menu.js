@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { DomHandler, ObjectUtils,ZIndexUtils, classNames, ConnectedOverlayScrollHandler } from '../utils/Utils';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
+import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 
 export class Menu extends Component {
@@ -53,7 +53,7 @@ export class Menu extends Component {
 
     onPanelClick(event) {
         if (this.props.popup) {
-            OverlayEventBus.emit('overlay-click', {
+            OverlayService.emit('overlay-click', {
                 originalEvent: event,
                 target: this.target
             });

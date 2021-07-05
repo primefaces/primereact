@@ -54,7 +54,7 @@ export * from './multiselect/MultiSelect';
 export * from './multistatecheckbox/MultiStateCheckbox';
 export * from './orderlist/OrderList';
 export * from './organizationchart/OrganizationChart';
-export * from './overlayeventbus/OverlayEventBus';
+export * from './overlayservice/OverlayService';
 export * from './overlaypanel/OverlayPanel';
 export * from './paginator/Paginator';
 export * from './panel/Panel';

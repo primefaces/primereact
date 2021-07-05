@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { DomHandler, ObjectUtils, FilterUtils, classNames, ZIndexUtils, ConnectedOverlayScrollHandler } from '../utils/Utils';
 import { DropdownPanel } from './DropdownPanel';
 import { tip } from '../tooltip/Tooltip';
-import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
+import { OverlayService } from '../overlayservice/OverlayService';
 import PrimeReact from '../api/Api';
 
 export class Dropdown extends Component {
@@ -210,7 +210,7 @@ export class Dropdown extends Component {
     }
 
     onPanelClick(event) {
-        OverlayEventBus.emit('overlay-click', {
+        OverlayService.emit('overlay-click', {
             originalEvent: event,
             target: this.container
         });

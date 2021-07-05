@@ -7,7 +7,7 @@ import { DomHandler, ObjectUtils, classNames, ConnectedOverlayScrollHandler, mas
 import { tip } from '../tooltip/Tooltip';
 import { Ripple } from '../ripple/Ripple';
 import PrimeReact, { localeOption, localeOptions } from '../api/Api';
-import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
+import { OverlayService } from '../overlayservice/OverlayService';
 
 export class Calendar extends Component {
 
@@ -707,7 +707,7 @@ export class Calendar extends Component {
 
     onPanelClick(event) {
         if (!this.props.inline) {
-            OverlayEventBus.emit('overlay-click', {
+            OverlayService.emit('overlay-click', {
                 originalEvent: event,
                 target: this.container
             });
@@ -1584,7 +1584,7 @@ export class Calendar extends Component {
                     }
                 };
 
-                OverlayEventBus.on('overlay-click', this.overlayEventListener);
+                OverlayService.on('overlay-click', this.overlayEventListener);
             });
         }
     }
@@ -1599,7 +1599,7 @@ export class Calendar extends Component {
                 callback();
             }
 
-            OverlayEventBus.off('overlay-click', this.overlayEventListener);
+            OverlayService.off('overlay-click', this.overlayEventListener);
             this.overlayEventListener = null;
         };
 

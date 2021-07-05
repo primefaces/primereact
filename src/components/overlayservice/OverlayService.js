@@ -1,3 +1,3 @@
 import { EventBus } from '../utils/Utils';
 
-export default EventBus();
+export const OverlayService = EventBus();

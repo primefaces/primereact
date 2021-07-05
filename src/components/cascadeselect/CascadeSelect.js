@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { DomHandler, ObjectUtils, classNames, ConnectedOverlayScrollHandler, ZIndexUtils } from '../utils/Utils';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { CascadeSelectSub } from './CascadeSelectSub';
-import OverlayEventBus from '../overlayeventbus/OverlayEventBus';
+import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import PrimeReact from '../api/Api';
 
@@ -225,7 +225,7 @@ export class CascadeSelect extends Component {
     }
 
     onPanelClick(event) {
-        OverlayEventBus.emit('overlay-click', {
+        OverlayService.emit('overlay-click', {
             originalEvent: event,
             target: this.container
         });
