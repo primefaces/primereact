@@ -96,7 +96,7 @@ export class DockDemo extends Component {
                 label: 'Trash',
                 icon: () => <img alt="trash" src={`${imgPath}/trash.png`} onError={(e) => e.target.src = imgErrorPath} width="100%" />
             }
-        ]
+        ];
 
         this.menubarItems = [
             {
