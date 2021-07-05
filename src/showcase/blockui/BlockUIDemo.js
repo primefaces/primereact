@@ -58,7 +58,6 @@ export class BlockUIDemo extends Component {
                     <AppDemoActions github="blockui/BlockUIDemo.js" />
                 </div>
 
-
                 <div className="content-section implementation blockui-demo">
                     <div className="card">
                         <h5>Document</h5>
