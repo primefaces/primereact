@@ -9,14 +9,16 @@ export class Dock extends Component {
         id: null,
         style: null,
         className: null,
-        model: null
+        model: null,
+        position: 'bottom'
     };
 
     static propTypes = {
         id: PropTypes.string,
         style: PropTypes.object,
         className: PropTypes.string,
-        model: PropTypes.array
+        model: PropTypes.array,
+        position: PropTypes.string
     };
 
     constructor(props) {
@@ -104,7 +106,7 @@ export class Dock extends Component {
     }
 
     render() {
-        const className = classNames('p-dock p-component', this.props.className);
+        const className = classNames(`p-dock p-component p-dock-${this.props.position}`, this.props.className);
         const list = this.renderList();
 
         return (

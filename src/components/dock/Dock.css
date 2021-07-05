@@ -1,8 +1,5 @@
 .p-dock {
     position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
     z-index: 1;
     display: flex;
     justify-content: center;
@@ -21,7 +18,6 @@
 }
 
 .p-dock-item {
-    transform-origin: center bottom;
     transition: all .2s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: transform;
 }
@@ -49,4 +45,57 @@
 .p-dock-item-current {
     transform: scale(1.6);
     z-index: 1;
+}
+
+/* Position */
+/* top */
+.p-dock-top {
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+
+.p-dock-top .p-dock-item {
+    transform-origin: center top;
+}
+
+/* bottom */
+.p-dock-bottom {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.p-dock-bottom .p-dock-item {
+    transform-origin: center bottom;
+}
+
+/* right */
+.p-dock-right {
+    right: 0;
+    top: 0;
+    height: 100%;
+}
+
+.p-dock-right .p-dock-item {
+    transform-origin: center right;
+}
+
+.p-dock-right .p-dock-list {
+    flex-direction: column;
+}
+
+/* left */
+.p-dock-left {
+    left: 0;
+    top: 0;
+    height: 100%;
+}
+
+.p-dock-left .p-dock-item {
+    transform-origin: center left;
+}
+
+.p-dock-left .p-dock-list {
+    flex-direction: column;
 }
