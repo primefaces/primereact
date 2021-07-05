@@ -231,6 +231,7 @@ export interface DataTableProps {
     rowExpansionTemplate?(data: any): React.ReactNode;
     onRowToggle?(e: DataTableRowToggleParams): void;
     rowClassName?(data: any): object;
+    cellClassName?(data: any, options: any): object;
     rowGroupHeaderTemplate?(data: any, index: number): React.ReactNode;
     rowGroupFooterTemplate?(data: any, index: number): React.ReactNode;
     onColumnResizeEnd?(e: DataTableColumnResizeEndParams): void;

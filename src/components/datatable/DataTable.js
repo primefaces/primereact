@@ -78,6 +78,7 @@ export class DataTable extends Component {
         rowGroupMode: null,
         autoLayout: false,
         rowClassName: null,
+        cellClassName: null,
         rowGroupHeaderTemplate: null,
         rowGroupFooterTemplate: null,
         loading: false,
@@ -196,6 +197,7 @@ export class DataTable extends Component {
         rowGroupMode: PropTypes.string,
         autoLayout: PropTypes.bool,
         rowClassName: PropTypes.func,
+        cellClassName: PropTypes.func,
         rowGroupHeaderTemplate: PropTypes.func,
         rowGroupFooterTemplate: PropTypes.func,
         loading: PropTypes.bool,
@@ -1407,7 +1409,7 @@ export class DataTable extends Component {
                         onRowExpand={this.props.onRowExpand} onRowCollapse={this.props.onRowCollapse} emptyMessage={this.props.emptyMessage}
                         virtualScroll={this.props.virtualScroll} virtualRowHeight={this.props.virtualRowHeight} loading={this.props.loading}
                         groupField={this.props.groupField} rowGroupMode={this.props.rowGroupMode} rowGroupHeaderTemplate={this.props.rowGroupHeaderTemplate} rowGroupFooterTemplate={this.props.rowGroupFooterTemplate}
-                        sortField={this.getSortField()} rowClassName={this.props.rowClassName} onRowReorder={this.props.onRowReorder}
+                        sortField={this.getSortField()} rowClassName={this.props.rowClassName} cellClassName={this.props.cellClassName} onRowReorder={this.props.onRowReorder}
                         editMode={this.props.editMode} editingRows={this.props.editingRows} rowEditorValidator={this.props.rowEditorValidator}
                         onRowEditInit={this.props.onRowEditInit} onRowEditSave={this.props.onRowEditSave} onRowEditCancel={this.props.onRowEditCancel} onRowEditChange={this.props.onRowEditChange}
                         expandableRowGroups={this.props.expandableRowGroups} showRowReorderElement={this.props.showRowReorderElement} showSelectionElement={this.props.showSelectionElement}

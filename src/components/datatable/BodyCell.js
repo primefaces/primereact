@@ -387,7 +387,14 @@ export class BodyCell extends Component {
     render() {
         let content, editorKeyHelper;
         let cellSelected = this.props.allowCellSelection && this.isSelected();
-        let cellClassName = classNames(this.props.bodyClassName || this.props.className, {
+        let cellClassName = null;
+
+        if (this.props.cellClassName) {
+            let cellData = ObjectUtils.resolveFieldData(this.props.rowData, this.props.field);
+            cellClassName = this.props.cellClassName(cellData, { ...this.props, ...{ rowData: this.props.rowData } });
+        }
+
+        let className = classNames(this.props.bodyClassName || this.props.className, cellClassName, {
             'p-selection-column': this.props.selectionMode,
             'p-selectable-cell': this.props.allowCellSelection,
             'p-highlight': cellSelected,
@@ -511,7 +518,7 @@ export class BodyCell extends Component {
         }
 
         return (
-            <td ref={(el) => { this.container = el; }} role="cell" tabIndex={tabIndex} className={cellClassName} style={this.props.bodyStyle || this.props.style} onClick={this.onClick} onKeyDown={this.onKeyDown}
+            <td ref={(el) => { this.container = el; }} role="cell" tabIndex={tabIndex} className={className} style={this.props.bodyStyle || this.props.style} onClick={this.onClick} onKeyDown={this.onKeyDown}
                 rowSpan={this.props.rowSpan} onBlur={this.onBlur} onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp}>
                 {editorKeyHelper}
                 {content}

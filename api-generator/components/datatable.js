@@ -378,6 +378,12 @@ const DataTableProps = [
         description: `Function that takes the row data and <br/> returns an object in "&#123;'styleclass' : condition&#125;" format to define a classname for a particular now.`
     },
     {
+        name: 'cellClassName',
+        type: 'function',
+        default: 'null',
+        description: `Function that takes the cell data and <br/> returns an object in "&#123;'styleclass' : condition&#125;" format to define a classname for a particular now.`
+    },
+    {
         name: 'rowGroupHeaderTemplate',
         type: 'function',
         default: 'null',

@@ -2926,6 +2926,12 @@ const bodyTemplate = (data, props) => {
                             <td>Function that takes the row data and <br/> returns an object in "&#123;'styleclass' : condition&#125;" format to define a classname for a particular now.</td>
                         </tr>
                         <tr>
+                            <td>cellClassName</td>
+                            <td>function</td>
+                            <td>null</td>
+                            <td>Function that takes the cell data and <br/> returns an object in "&#123;'styleclass' : condition&#125;" format to define a classname for a particular now.</td>
+                        </tr>
+                        <tr>
                             <td>rowGroupHeaderTemplate</td>
                             <td>function</td>
                             <td>null</td>
