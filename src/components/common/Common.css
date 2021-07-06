@@ -70,14 +70,6 @@
   100% { opacity: 1; }
 }
 
-input[type="button"],
-input[type="submit"],
-input[type="reset"],
-input[type="file"]::-webkit-file-upload-button,
-button {
-    border-radius: 0;
-}
-
 .p-link {
 	text-align: left;
 	background-color: transparent;
