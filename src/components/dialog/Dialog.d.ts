@@ -56,6 +56,8 @@ export interface DialogProps {
     onResizeEnd?(e: React.MouseEvent<HTMLElement>): void;
     onHide(): void;
     onShow?(): void;
+    onMaskClick?(e: React.MouseEvent<HTMLElement>): void;
+    onClick?(e: React.MouseEvent<HTMLElement>): void;
 }
 
 export declare class Dialog extends React.Component<DialogProps, any> { }

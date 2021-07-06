@@ -290,6 +290,28 @@ const DialogEvents = [
                 description: 'Browser event'
             }
         ]
+    },
+    {
+        name: 'onMaskClick',
+        description: 'Callback to invoke when the mask is clicked.',
+        arguments: [
+            {
+                name: 'event',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onClick',
+        description: 'Callback to invoke when dialog is clicked.',
+        arguments: [
+            {
+                name: 'event',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
     }
 ];
 

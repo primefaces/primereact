@@ -818,6 +818,16 @@ const myIcon = (
                                         <td>event: Browser event</td>
                                         <td>Callback to invoke when dialog resizing is completed.</td>
                                     </tr>
+                                    <tr>
+                                        <td>onMaskClick</td>
+                                        <td>event: Browser event</td>
+                                        <td>Callback to invoke when the mask is clicked.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onClick</td>
+                                        <td>event: Browser event</td>
+                                        <td>Callback to invoke when dialog is clicked.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

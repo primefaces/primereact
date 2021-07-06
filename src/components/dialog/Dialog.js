@@ -47,7 +47,9 @@ export class Dialog extends Component {
         onDragEnd: null,
         onResizeStart: null,
         onResize: null,
-        onResizeEnd: null
+        onResizeEnd: null,
+        onClick: null,
+        onMaskClick: null
     }
 
     static propTypes = {
@@ -90,7 +92,9 @@ export class Dialog extends Component {
         onDragEnd: PropTypes.func,
         onResizeStart: PropTypes.func,
         onResize: PropTypes.func,
-        onResizeEnd: PropTypes.func
+        onResizeEnd: PropTypes.func,
+        onClick: PropTypes.func,
+        onMaskClick: PropTypes.func
     };
 
     constructor(props) {
@@ -135,6 +139,8 @@ export class Dialog extends Component {
         if (this.props.dismissableMask && this.props.modal && this.mask === event.target) {
             this.onClose(event);
         }
+
+        this.props.onMaskClick && this.props.onMaskClick(event);
     }
 
     toggleMaximize(event) {
@@ -647,7 +653,7 @@ export class Dialog extends Component {
             <div ref={(el) => this.mask = el} className={maskClassName} onClick={this.onMaskClick}>
                 <CSSTransition nodeRef={this.dialogRef} classNames="p-dialog" timeout={transitionTimeout} in={this.state.visible} options={this.props.transitionOptions}
                     unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExited={this.onExited}>
-                    <div ref={this.dialogRef} id={this.state.id} className={className} style={this.props.style}
+                    <div ref={this.dialogRef} id={this.state.id} className={className} style={this.props.style} onClick={this.props.onClick}
                         role="dialog" aria-labelledby={this.state.id + '_header'} aria-describedby={this.state.id + '_content'} aria-modal={this.props.modal}>
                         {header}
                         {content}
