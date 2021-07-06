@@ -627,6 +627,12 @@ const itemTemplate = (data, layout) => {
                                         <td>Layout of the items, valid values are "list" and "grid".</td>
                                     </tr>
                                     <tr>
+                                        <td>dataKey</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>A property to uniquely identify an item.</td>
+                                    </tr>
+                                    <tr>
                                         <td>style</td>
                                         <td>object</td>
                                         <td>null</td>

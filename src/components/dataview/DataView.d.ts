@@ -37,6 +37,7 @@ export interface DataViewProps {
     footer?: React.ReactNode;
     value?: any[];
     layout?: DataViewLayoutType;
+    dataKey?: string;
     rows?: number;
     first?: number;
     totalRecords?: number;

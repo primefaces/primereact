@@ -83,6 +83,7 @@ export class DataView extends Component {
         footer: null,
         value: null,
         layout: 'list',
+        dataKey: null,
         rows: null,
         first: 0,
         totalRecords: null,
@@ -115,6 +116,7 @@ export class DataView extends Component {
         footer: PropTypes.any,
         value: PropTypes.array,
         layout: PropTypes.string,
+        dataKey: PropTypes.string,
         rows: PropTypes.number,
         first: PropTypes.number,
         totalRecords: PropTypes.number,
@@ -153,6 +155,10 @@ export class DataView extends Component {
 
         this.sortChange = false;
         this.onPageChange = this.onPageChange.bind(this)
+    }
+
+    getItemRenderKey(value) {
+        return this.props.dataKey ? ObjectUtils.resolveFieldData(value, this.props.dataKey) : null;
     }
 
     getTotalRecords() {
@@ -286,7 +292,7 @@ export class DataView extends Component {
 
                 for (let i = first; i < last; i++) {
                     const val = value[i];
-                    val && items.push(<DataViewItem key={i} template={this.props.itemTemplate} layout={this.props.layout} item={val} />);
+                    val && items.push(<DataViewItem key={this.getItemRenderKey(value) || i} template={this.props.itemTemplate} layout={this.props.layout} item={val} />);
                 }
 
                 return items;
@@ -294,7 +300,7 @@ export class DataView extends Component {
             else {
                 return (
                     value.map((item, index) => {
-                        return <DataViewItem key={index} template={this.props.itemTemplate} layout={this.props.layout} item={item} />
+                        return <DataViewItem key={this.getItemRenderKey(item) || index} template={this.props.itemTemplate} layout={this.props.layout} item={item} />
                     })
                 );
             }

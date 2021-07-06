@@ -30,6 +30,12 @@ const DataViewProps = [
         description: 'Layout of the items, valid values are "list" and "grid".'
     },
     {
+        name: 'dataKey',
+        type: 'string',
+        default: 'null',
+        description: 'A property to uniquely identify an item.'
+    },
+    {
         name: 'rows',
         type: 'number',
         default: 'null',
