@@ -940,6 +940,20 @@ export const TreeContextMenuDemo = () => {
                                         </td>
                                         <td>Callback to invoke when filter value changes.</td>
                                     </tr>
+                                    <tr>
+                                        <td>onNodeClick</td>
+                                        <td>event.originalEvent: Browser event <br/>
+                                            event.node: the current node <br/>
+                                        </td>
+                                        <td>Callback to invoke when the node is clicked.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onNodeDoubleClick</td>
+                                        <td>event.originalEvent: Browser event <br/>
+                                            event.node: the current node <br/>
+                                        </td>
+                                        <td>Callback to invoke when the node is double-clicked.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

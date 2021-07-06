@@ -341,6 +341,38 @@ const TreeEvents = [
                 description: 'the filtered value'
             }
         ]
+    },
+    {
+        name: 'onNodeClick',
+        description: 'Callback to invoke when the node is clicked.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.node',
+                type: 'any',
+                description: 'the current node'
+            }
+        ]
+    },
+    {
+        name: 'onNodeDoubleClick',
+        description: 'Callback to invoke when the node is double-clicked.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.node',
+                type: 'any',
+                description: 'the current node'
+            }
+        ]
     }
 ];
 

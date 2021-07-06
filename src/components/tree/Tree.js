@@ -43,7 +43,9 @@ export class Tree extends Component {
         onToggle: null,
         onDragDrop: null,
         onContextMenu: null,
-        onFilterValueChange: null
+        onFilterValueChange: null,
+        onNodeClick: null,
+        onNodeDoubleClick: null
     }
 
     static propTypes = {
@@ -84,7 +86,9 @@ export class Tree extends Component {
         onToggle: PropTypes.func,
         onDragDrop: PropTypes.func,
         onContextMenu: PropTypes.func,
-        onFilterValueChange: PropTypes.func
+        onFilterValueChange: PropTypes.func,
+        onNodeClick: PropTypes.func,
+        onNodeDoubleClick: PropTypes.func
     }
 
     constructor(props) {
@@ -397,7 +401,8 @@ export class Tree extends Component {
                 propagateSelectionDown={this.props.propagateSelectionDown} propagateSelectionUp={this.props.propagateSelectionUp}
                 onExpand={this.props.onExpand} onCollapse={this.props.onCollapse} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect}
                 expandedKeys={this.getExpandedKeys()} onToggle={this.onToggle} nodeTemplate={this.props.nodeTemplate} togglerTemplate={this.props.togglerTemplate} isNodeLeaf={this.isNodeLeaf}
-                dragdropScope={this.props.dragdropScope} onDragStart={this.onDragStart} onDragEnd={this.onDragEnd} onDrop={this.onDrop} onDropPoint={this.onDropPoint} />
+                dragdropScope={this.props.dragdropScope} onDragStart={this.onDragStart} onDragEnd={this.onDragEnd} onDrop={this.onDrop} onDropPoint={this.onDropPoint}
+                onNodeClick={this.props.onNodeClick} onNodeDoubleClick={this.props.onNodeDoubleClick} />
         );
     }
 

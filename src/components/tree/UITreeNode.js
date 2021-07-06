@@ -37,7 +37,9 @@ export class UITreeNode extends Component {
         onDragEnd: null,
         onDrop: null,
         onDropPoint: null,
-        onContextMenu: null
+        onContextMenu: null,
+        onNodeClick: null,
+        onNodeDoubleClick: null
     }
 
     static propTypes = {
@@ -72,13 +74,16 @@ export class UITreeNode extends Component {
         onDragEnd: PropTypes.func,
         onDrop: PropTypes.func,
         onDropPoint: PropTypes.func,
-        onContextMenu: PropTypes.func
+        onContextMenu: PropTypes.func,
+        onNodeClick: PropTypes.func,
+        onNodeDoubleClick: PropTypes.func
     }
 
     constructor(props) {
         super(props);
 
         this.onClick = this.onClick.bind(this);
+        this.onDoubleClick = this.onDoubleClick.bind(this);
         this.onRightClick = this.onRightClick.bind(this);
         this.onTouchEnd = this.onTouchEnd.bind(this);
         this.onTogglerClick = this.onTogglerClick.bind(this);
@@ -273,6 +278,13 @@ export class UITreeNode extends Component {
     }
 
     onClick(event) {
+        if (this.props.onClick) {
+            this.props.onClick({
+                originalEvent: event,
+                node: this.props.node
+            });
+        }
+
         if ((event.target.className && event.target.className.constructor === String && event.target.className.indexOf('p-tree-toggler') === 0) || this.props.disabled) {
             return;
         }
@@ -426,6 +438,15 @@ export class UITreeNode extends Component {
         }
 
         this.nodeTouched = false;
+    }
+
+    onDoubleClick(event) {
+        if (this.props.onDoubleClick) {
+            this.props.onDoubleClick({
+                originalEvent: event,
+                node: this.props.node
+            })
+        }
     }
 
     onRightClick(event) {
@@ -730,7 +751,8 @@ export class UITreeNode extends Component {
         const tabIndex = this.props.disabled ? undefined : 0;
 
         return (
-            <div ref={(el) => this.contentElement = el} className={className} style={this.props.node.style} onClick={this.onClick} onContextMenu={this.onRightClick} onTouchEnd={this.onTouchEnd} draggable={this.props.dragdropScope && this.props.node.draggable !== false && !this.props.disabled}
+            <div ref={(el) => this.contentElement = el} className={className} style={this.props.node.style} onClick={this.onClick} onDoubleClick={this.onDoubleClick}
+                onContextMenu={this.onRightClick} onTouchEnd={this.onTouchEnd} draggable={this.props.dragdropScope && this.props.node.draggable !== false && !this.props.disabled}
                 onDrop={this.onDrop} onDragOver={this.onDragOver} onDragEnter={this.onDragEnter} onDragLeave={this.onDragLeave}
                 onDragStart={this.onDragStart} onDragEnd={this.onDragEnd} tabIndex={tabIndex} onKeyDown={this.onNodeKeyDown}
                 role="treeitem" aria-posinset={this.props.index + 1} aria-expanded={this.isExpanded()} aria-selected={checked || selected}>

@@ -83,6 +83,13 @@ interface TreeFilterValueChangeParams {
     value: string;
 }
 
+interface TreeNodeClickParams {
+    originalEvent: React.SyntheticEvent;
+    node: TreeNode;
+}
+
+interface TreeNodeDoubleClickParams extends TreeNodeClickParams {}
+
 export interface TreeProps {
     id?: string;
     value?: TreeNode[];
@@ -122,6 +129,8 @@ export interface TreeProps {
     onDragDrop?(e: TreeDragDropParams): void;
     onContextMenu?(e: TreeEventNodeParams): void;
     onFilterValueChange?(e: TreeFilterValueChangeParams): void;
+    onNodeClick?(e: TreeNodeClickParams): void;
+    onNodeDoubleClick?(e: TreeNodeDoubleClickParams): void;
 }
 
 export declare class Tree extends React.Component<TreeProps, any> {
