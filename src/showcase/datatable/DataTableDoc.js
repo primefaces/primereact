@@ -855,25 +855,23 @@ import { DataTable } from 'primereact/datatable';
 
             <h5>Getting Started</h5>
             <p>DataTable requires a value as an array of objects and columns defined with Column component. Throughout the samples, a product interface having code, name, description, image, category, quantity, price, inventoryStatus and rating properties is used to define an object to be displayed by the datatable.
-                Products are loaded by a CustomerService that connects to a server to fetch the products with a axios. Note that this is only for demo purposes, DataTable does not have any restrictions on how data is provided.
+                Products are loaded by a CustomerService that connects to a server to fetch the products. Note that this is only for demo purposes, DataTable does not have any restrictions on how data is provided.
             </p>
 
 <CodeHighlight lang="js">
 {`
-import axios from 'axios';
-
 export default class ProductService {
 
     getProductsSmall() {
-		return axios.get('showcase/demo/data/products-small.json').then(res => res.data.data);
+		return fetch('showcase/demo/data/products-small.json').then(res => res.json()).then(d => d.data);
 	}
 
 	getProducts() {
-		return axios.get('showcase/demo/data/products.json').then(res => res.data.data);
+		return fetch('showcase/demo/data/products.json').then(res => res.json()).then(d => d.data);
     }
 
     getProductsWithOrdersSmall() {
-		return axios.get('showcase/demo/data/products-orders-small.json').then(res => res.data.data);
+		return fetch('showcase/demo/data/products-orders-small.json').then(res => res.json()).then(d => d.data);
 	}
 }
 `}

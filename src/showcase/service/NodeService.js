@@ -1,14 +1,12 @@
-import axios from 'axios';
-
 export class NodeService {
-    
+
     getTreeTableNodes() {
-        return axios.get('showcase/demo/data/treetablenodes.json')
-                .then(res => res.data.root);
+        return fetch('showcase/demo/data/treetablenodes.json').then(res => res.json())
+                .then(d => d.root);
     }
 
     getTreeNodes() {
-        return axios.get('showcase/demo/data/treenodes.json')
-                .then(res => res.data.root);
+        return fetch('showcase/demo/data/treenodes.json').then(res => res.json())
+                .then(d => d.root);
     }
 }

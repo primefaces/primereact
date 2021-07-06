@@ -623,18 +623,16 @@ import { TreeTable } from 'primereact/treetable';
 </CodeHighlight>
                         </div>
 
-                        <p>Throughout the samples, a NodeService would be used to connect to a server to fetch the nodes with axios.
+                        <p>Throughout the samples, a NodeService would be used to connect to a server to fetch the nodes.
                         Note that this is only for demo purposes, TreeTable does not have any restrictions on how data is provided.</p>
 
 <CodeHighlight lang="js">
 {`
-import axios from 'axios';
-
 export class NodeService {
 
     getTreeTableNodes() {
-        return axios.get('showcase/demo/data/treetablenodes.json')
-                .then(res => res.data.root);
+        return fetch('showcase/demo/data/treetablenodes.json').then(res => res.json())
+                .then(d => d.root);
     }
 
 }

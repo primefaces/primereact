@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 export class IconService {
 
     constructor() {
@@ -8,8 +6,8 @@ export class IconService {
     }
 
     getIcons() {
-        return axios.get('showcase/demo/data/icons.json', { headers: { 'Cache-Control' : 'no-cache' } })
-            .then(res => res.data.icons);
+        return fetch('showcase/demo/data/icons.json', { headers: { 'Cache-Control' : 'no-cache' } }).then(res => res.json())
+            .then(d => d.icons);
     }
 
     getIcon(id){

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { NavLink } from 'react-router-dom';
-import axios from 'axios';
 import { classNames } from './components/utils/ClassNames';
 import { InputText } from '../src/components/inputtext/InputText';
 
@@ -20,9 +19,9 @@ export class AppMenu extends Component {
     }
 
     getMenu() {
-        axios.get('showcase/menu/menu.json', { headers: { 'Cache-Control': 'no-cache' } })
-            .then(res => res.data.data)
-            .then(data => this.setState({ menu: data, filteredMenu: data }));
+        fetch('showcase/menu/menu.json', { headers: { 'Cache-Control': 'no-cache' } })
+            .then(res => res.json())
+            .then(d => this.setState({ menu: d.data, filteredMenu: d.data }));
     }
 
     onSearchInputChange(event) {

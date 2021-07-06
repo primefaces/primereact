@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Dialog } from './components/dialog/Dialog';
 import { Button } from './components/button/Button';
-import axios from 'axios';
 
 export class AppChangelogDialog extends Component {
 
@@ -21,8 +20,8 @@ export class AppChangelogDialog extends Component {
     }
 
     getChangelog() {
-        axios.get('showcase/changelog/changelog.json', { headers: { 'Cache-Control': 'no-cache' } })
-            .then(res => res.data)
+        fetch('showcase/changelog/changelog.json', { headers: { 'Cache-Control': 'no-cache' } })
+            .then(res => res.json())
             .then(data => this.setState({ changelog: data }));
     }
 

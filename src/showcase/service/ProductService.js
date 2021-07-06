@@ -1,16 +1,14 @@
-import axios from 'axios';
-
 export default class ProductService {
 
     getProductsSmall() {
-		return axios.get('showcase/demo/data/products-small.json').then(res => res.data.data);
+		return fetch('showcase/demo/data/products-small.json').then(res => res.json()).then(d => d.data);
 	}
 
 	getProducts() {
-		return axios.get('showcase/demo/data/products.json').then(res => res.data.data);
+		return fetch('showcase/demo/data/products.json').then(res => res.json()).then(d => d.data);
     }
 
     getProductsWithOrdersSmall() {
-		return axios.get('showcase/demo/data/products-orders-small.json').then(res => res.data.data);
+		return fetch('showcase/demo/data/products-orders-small.json').then(res => res.json()).then(d => d.data);
 	}
 }

@@ -202,12 +202,10 @@ export const TreeSelectDemo = () => {
 
 <CodeHighlight lang="js">
 {`
-import axios from 'axios';
-
 export class NodeService {
 
     getTreeNodes() {
-        return axios.get('showcase/demo/data/treenodes.json').then(res => res.data.root);
+        return fetch('showcase/demo/data/treenodes.json').then(res => res.json()).then(d => d.root);
     }
 
 }

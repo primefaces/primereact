@@ -51,7 +51,7 @@ export const useLiveEditorTabs = (props) => {
                     <CodeHighlight lang="js">
                         {services[s]}
                     </CodeHighlight>
-                    <span className="liveEditorHelperText">*Dependency: axios</span>
+                    <span className="liveEditorHelperText"></span>
                 </TabPanel>
             )
         });
@@ -93,7 +93,6 @@ export const useLiveEditor = () => {
                             'react': dependencies['react'],
                             'react-dom': dependencies['react-dom'],
                             'react-transition-group': dependencies['react-transition-group'],
-                            'axios': dependencies['axios'],
                             'primereact': '^6.4.0', // latest
                             'primeflex': dependencies['primeflex'],
                             'primeicons': dependencies['primeicons']
@@ -391,8 +390,6 @@ ReactDOM.render(<${name} />, rootElement);`
                     content: services[s]
                 }
             });
-
-            extDependencies['axios'] = "^0.19.0";
         }
 
         if (props.data) {
