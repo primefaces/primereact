@@ -469,7 +469,7 @@ export const ReactHookFormDemo = () => {
         <div className="content-section documentation" id="app-doc">
             <TabView>
                 {
-                    useLiveEditorTabs({ name: 'ReactHookFormDemo', sources, service: 'CountryService', data: 'countries', extFiles, dependencies: { 'react-hook-form': '^6.15.5' } })
+                    useLiveEditorTabs({ name: 'ReactHookFormDemo', sources, service: 'CountryService', data: 'countries', extFiles, dependencies: { 'react-hook-form': '^7.8.4' } })
                 }
             </TabView>
         </div>
