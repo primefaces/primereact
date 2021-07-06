@@ -827,12 +827,19 @@ const monthNavigatorTemplate = (options) => {
                                         <td>object</td>
                                         <td>null</td>
                                         <td>Inline style of the input element.</td>
+
                                     </tr>
                                     <tr>
                                         <td>inputClassName</td>
                                         <td>string</td>
                                         <td>null</td>
                                         <td>Style class of the input element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>inputMode</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>HTML inputmode attribute of input.</td>
                                     </tr>
                                     <tr>
                                         <td>required</td>
