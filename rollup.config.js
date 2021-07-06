@@ -17,20 +17,20 @@ let entries = [];
 // alias entries
 const ALIAS_ENTRIES = [
     { find: '../api/Api', replacement: 'primereact/api' },
-    { find: '../ripple/Ripple', replacement: 'primereact/ripple' },
-    { find: '../utils/Utils', replacement: 'primereact/utils' },
-    { find: '../overlayservice/OverlayService', replacement: 'primereact/overlayservice' },
+    { find: '../ripple/Ripple', replacement: 'primereact/core' },
+    { find: '../utils/Utils', replacement: 'primereact/core' },
+    { find: '../tooltip/Tooltip', replacement: 'primereact/core' },
+    { find: '../keyfilter/KeyFilter', replacement: 'primereact/core' },
+    { find: '../overlayservice/OverlayService', replacement: 'primereact/core' },
+    { find: '../csstransition/CSSTransition', replacement: 'primereact/core' },
+    { find: '../portal/Portal', replacement: 'primereact/core' },
     { find: '../terminalservice/TerminalService', replacement: 'primereact/terminalservice' },
-    { find: '../csstransition/CSSTransition', replacement: 'primereact/csstransition' },
     { find: '../virtualscroller/VirtualScroller', replacement: 'primereact/virtualscroller' },
-    { find: '../portal/Portal', replacement: 'primereact/portal' },
-    { find: '../tooltip/Tooltip', replacement: 'primereact/tooltip' },
     { find: '../button/Button', replacement: 'primereact/button' },
     { find: '../inputtext/InputText', replacement: 'primereact/inputtext' },
     { find: '../paginator/Paginator', replacement: 'primereact/paginator' },
     { find: '../messages/Messages', replacement: 'primereact/messages' },
     { find: '../progressbar/ProgressBar', replacement: 'primereact/progressbar' },
-    { find: '../keyfilter/KeyFilter', replacement: 'primereact/keyfilter' },
     { find: '../checkox/Checkbox', replacement: 'primereact/checkbox' },
     { find: '../dropdown/Dropdown', replacement: 'primereact/dropdown' },
     { find: '../tree/Tree', replacement: 'primereact/tree' },
@@ -57,7 +57,7 @@ const EXTERNAL_COMPONENT = [...EXTERNAL, ...(ALIAS_ENTRIES.map(entries => entrie
 const BABEL_PLUGIN_OPTIONS = {
     exclude: 'node_modules/**',
     presets: ['@babel/preset-env', '@babel/preset-react'],
-    plugins: ['@babel/plugin-transform-runtime', '@babel/plugin-proposal-class-properties'],
+    plugins: ['@babel/plugin-transform-runtime', '@babel/plugin-proposal-class-properties', ['babel-plugin-transform-react-remove-prop-types', { removeImport: true }]],
     skipPreflightCheck: true,
     babelHelpers: 'runtime',
     babelrc: false
@@ -172,7 +172,7 @@ function addComponent() {
                     const input = INPUT_DIR + folderName + '/' + file;
                     const output = OUTPUT_DIR + folderName + '/' + name;
 
-                    addEntry('primereact.' + folderName, input, output);
+                    addEntry('primereact.' + folderName, input, output, folderName !== 'core');
                 }
             });
         });
