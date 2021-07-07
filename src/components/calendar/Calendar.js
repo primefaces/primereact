@@ -1160,7 +1160,7 @@ export class Calendar extends Component {
     }
 
     updateTime(event, hour, minute, second, millisecond) {
-        let newDateTime = this.getCurrentDateTime();
+        let newDateTime = (this.props.value && this.props.value instanceof Date) ? new Date(this.props.value) : new Date();
 
         newDateTime.setHours(hour);
         newDateTime.setMinutes(minute);
@@ -1483,7 +1483,7 @@ export class Calendar extends Component {
                 ({ hours, minutes, seconds, milliseconds } = timeMeta);
             }
             else {
-                let time = this.getCurrentDateTime();
+                let time = (this.props.value && this.props.value instanceof Date) ? this.props.value : new Date();
                 [hours, minutes, seconds, milliseconds] = [time.getHours(), time.getMinutes(), time.getSeconds(), time.getMilliseconds()];
             }
 
