@@ -1555,17 +1555,18 @@ export class Calendar extends Component {
 
     updateModel(event, value) {
         if (this.props.onChange) {
+            const newValue = (value && value instanceof Date) ? new Date(value.getTime()) : value;
             this.viewStateChanged = true;
 
             this.props.onChange({
                 originalEvent: event,
-                value: value,
+                value: newValue,
                 stopPropagation: () => { },
                 preventDefault: () => { },
                 target: {
                     name: this.props.name,
                     id: this.props.id,
-                    value: value
+                    value: newValue
                 }
             });
         }
