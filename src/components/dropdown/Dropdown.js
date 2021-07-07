@@ -133,7 +133,6 @@ export class Dropdown extends Component {
         };
 
         this.onClick = this.onClick.bind(this);
-        this.onFilterContainerClick = this.onFilterContainerClick.bind(this);
         this.onInputFocus = this.onInputFocus.bind(this);
         this.onInputBlur = this.onInputBlur.bind(this);
         this.onInputKeyDown = this.onInputKeyDown.bind(this);
@@ -170,7 +169,10 @@ export class Dropdown extends Component {
             return;
         }
 
-        if (!this.isClearClicked(event) && event.target.tagName !== 'INPUT') {
+        if (DomHandler.hasClass(event.target, 'p-dropdown-clear-icon') || event.target.tagName === 'INPUT') {
+            return;
+        }
+        else if (!this.overlayRef.current || !(this.overlayRef.current && this.overlayRef.current.contains(event.target))) {
             this.focusInput.focus();
 
             if (this.state.overlayVisible) {
@@ -180,10 +182,6 @@ export class Dropdown extends Component {
                 this.showOverlay();
             }
         }
-    }
-
-    onFilterContainerClick(event) {
-        event.stopPropagation();
     }
 
     onInputFocus(event) {

@@ -121,7 +121,7 @@ class DropdownPanelComponent extends Component {
             const containerClassName = classNames('p-dropdown-filter-container', { 'p-dropdown-clearable-filter': !!clearIcon });
             return (
                 <div className="p-dropdown-header">
-                    <div className={containerClassName} onClick={this.onFilterContainerClick}>
+                    <div className={containerClassName}>
                         <input ref={(el) => this.filterInput = el} type="text" autoComplete="off" className="p-dropdown-filter p-inputtext p-component" placeholder={this.props.filterPlaceholder}
                             onKeyDown={this.props.onFilterInputKeyDown} onChange={this.onFilterInputChange} value={this.props.filterValue} />
                         {clearIcon}
