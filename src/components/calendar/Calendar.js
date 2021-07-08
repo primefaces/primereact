@@ -2608,7 +2608,12 @@ export class Calendar extends Component {
             const content = (
                 <select className="p-datepicker-month" onChange={(e) => this.onMonthDropdownChange(e, e.target.value)} value={viewMonth}>
                     {
-                        displayedMonthNames.map((month, index) => <option key={month} value={index}>{month}</option>)
+                        monthNames.map((month, index) => {
+                            if ((!this.isInMinYear(viewDate) || index >= this.props.minDate.getMonth()) && (!this.isInMaxYear(viewDate) || index <= this.props.maxDate.getMonth())) {
+                                return <option key={month} value={index}>{month}</option>
+                            }
+                            return null;
+                        })
                     }
                 </select>
             );
