@@ -357,6 +357,14 @@
                     "badge": "updated"
                 },
                 {
+                    "name": "Mention",
+                    "to": "/mention",
+                    "meta": [
+                        "mention"
+                    ],
+                    "badge": "new"
+                },
+                {
                     "name": "MultiSelect",
                     "to": "/multiselect",
                     "meta": [
