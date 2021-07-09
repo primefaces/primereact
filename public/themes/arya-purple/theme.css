@@ -920,6 +920,29 @@
   .p-listbox.p-invalid {
     border-color: #ef9a9a; }
 
+.p-mention-panel {
+  background: #1e1e1e;
+  color: rgba(255, 255, 255, 0.87);
+  border: 1px solid #383838;
+  border-radius: 3px;
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12); }
+  .p-mention-panel .p-mention-items {
+    padding: 0.5rem 0; }
+    .p-mention-panel .p-mention-items .p-mention-item {
+      margin: 0;
+      padding: 0.5rem 1rem;
+      border: 0 none;
+      color: rgba(255, 255, 255, 0.87);
+      background: transparent;
+      transition: box-shadow 0.2s;
+      border-radius: 0; }
+      .p-mention-panel .p-mention-items .p-mention-item:hover {
+        color: rgba(255, 255, 255, 0.87);
+        background: rgba(255, 255, 255, 0.03); }
+      .p-mention-panel .p-mention-items .p-mention-item.p-highlight {
+        color: rgba(255, 255, 255, 0.87);
+        background: rgba(186, 104, 200, 0.16); }
+
 .p-multiselect {
   background: #121212;
   border: 1px solid #383838;

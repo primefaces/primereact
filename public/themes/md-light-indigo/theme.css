@@ -941,6 +941,29 @@
   .p-listbox.p-invalid {
     border-color: #B00020; }
 
+.p-mention-panel {
+  background: #ffffff;
+  color: rgba(0, 0, 0, 0.87);
+  border: 0 none;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12); }
+  .p-mention-panel .p-mention-items {
+    padding: 0; }
+    .p-mention-panel .p-mention-items .p-mention-item {
+      margin: 0;
+      padding: 1rem 1rem;
+      border: 0 none;
+      color: rgba(0, 0, 0, 0.87);
+      background: transparent;
+      transition: none;
+      border-radius: 0; }
+      .p-mention-panel .p-mention-items .p-mention-item:hover {
+        color: rgba(0, 0, 0, 0.87);
+        background: rgba(0, 0, 0, 0.04); }
+      .p-mention-panel .p-mention-items .p-mention-item.p-highlight {
+        color: #3F51B5;
+        background: rgba(63, 81, 181, 0.12); }
+
 .p-multiselect {
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.38);

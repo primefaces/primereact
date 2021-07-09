@@ -923,6 +923,29 @@
   .p-listbox.p-invalid {
     border-color: #dc3545; }
 
+.p-mention-panel {
+  background: #ffffff;
+  color: #212529;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  box-shadow: none; }
+  .p-mention-panel .p-mention-items {
+    padding: 0.5rem 0; }
+    .p-mention-panel .p-mention-items .p-mention-item {
+      margin: 0;
+      padding: 0.5rem 1.5rem;
+      border: 0 none;
+      color: #212529;
+      background: transparent;
+      transition: box-shadow 0.15s;
+      border-radius: 0; }
+      .p-mention-panel .p-mention-items .p-mention-item:hover {
+        color: #212529;
+        background: #e9ecef; }
+      .p-mention-panel .p-mention-items .p-mention-item.p-highlight {
+        color: #ffffff;
+        background: #883cae; }
+
 .p-multiselect {
   background: #ffffff;
   border: 1px solid #ced4da;

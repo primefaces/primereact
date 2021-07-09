@@ -923,6 +923,29 @@
   .p-listbox.p-invalid {
     border-color: #e57373; }
 
+.p-mention-panel {
+  background: #323232;
+  color: #dedede;
+  border: 1px solid #191919;
+  border-radius: 3px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16); }
+  .p-mention-panel .p-mention-items {
+    padding: 0; }
+    .p-mention-panel .p-mention-items .p-mention-item {
+      margin: 0;
+      padding: 0.429rem 0.857rem;
+      border: 0 none;
+      color: #dedede;
+      background: transparent;
+      transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
+      border-radius: 0; }
+      .p-mention-panel .p-mention-items .p-mention-item:hover {
+        color: #dedede;
+        background: #4c4c4c; }
+      .p-mention-panel .p-mention-items .p-mention-item.p-highlight {
+        color: #212529;
+        background: #81D4FA; }
+
 .p-multiselect {
   background: #191919;
   border: 1px solid #4b4b4b;
