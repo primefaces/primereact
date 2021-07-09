@@ -66,12 +66,10 @@ class InputTextareaComponent extends Component {
             this.resize();
         }
 
-        if (!this.props.onChange) {
-            if (e.target.value.length > 0)
-                DomHandler.addClass(e.target, 'p-filled');
-            else
-                DomHandler.removeClass(e.target, 'p-filled');
-        }
+        if (e.target.value.length > 0)
+            DomHandler.addClass(e.target, 'p-filled');
+        else
+            DomHandler.removeClass(e.target, 'p-filled');
 
         if (this.props.onInput) {
             this.props.onInput(e);
@@ -102,6 +100,12 @@ class InputTextareaComponent extends Component {
                 this.cachedScrollHeight = inputEl.scrollHeight;
             }
         }
+    }
+
+    isFilled() {
+        return (this.props.value != null && this.props.value.toString().length > 0) ||
+            (this.props.defaultValue != null && this.props.defaultValue.toString().length > 0) ||
+            (this.elementRef && this.elementRef.current && this.elementRef.current.value.toString().length > 0);
     }
 
     updateForwardRef() {
@@ -160,7 +164,7 @@ class InputTextareaComponent extends Component {
     render() {
         const className = classNames('p-inputtextarea p-inputtext p-component', {
             'p-disabled': this.props.disabled,
-            'p-filled': (this.props.value != null && this.props.value.toString().length > 0) || (this.props.defaultValue != null && this.props.defaultValue.toString().length > 0),
+            'p-filled': this.isFilled(),
             'p-inputtextarea-resizable': this.props.autoResize
         }, this.props.className);
 
