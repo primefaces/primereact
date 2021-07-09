@@ -234,9 +234,10 @@ export class Mention extends Component {
 
     selectItem(event, suggestion) {
         const value = this.inputRef.current.value;
+        const selectionStart = event.target.selectionStart;
         const trigger = this.state.trigger;
         const spaceIndex = value.indexOf(' ', trigger.index);
-        const currentText = value.substr(trigger.index, spaceIndex - trigger.index);
+        const currentText = value.substring(trigger.index, spaceIndex > -1 ? spaceIndex : selectionStart);
         const selectedText = this.formatValue(suggestion).replace(/\s+/g, '');
 
         if (currentText.trim() !== selectedText) {
