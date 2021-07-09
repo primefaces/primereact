@@ -133,15 +133,15 @@ export class MentionDemo extends Component {
                 <div className="content-section implementation">
                     <div className="card">
                         <h5>Basic</h5>
-                        <Mention suggestions={this.state.suggestions} onSearch={this.onSearch} field="nickname" placeholder="please enter @ to mention people"  rows={5} cols={40}
+                        <Mention suggestions={this.state.suggestions} onSearch={this.onSearch} field="nickname" placeholder="Please enter @ to mention people"  rows={5} cols={40}
                             itemTemplate={this.itemTemplate} />
 
                         <h5>Auto Resize</h5>
-                        <Mention suggestions={this.state.suggestions} onSearch={this.onSearch} field="nickname" placeholder="input @ to mention people"  rows={5} cols={40} autoResize
+                        <Mention suggestions={this.state.suggestions} onSearch={this.onSearch} field="nickname" placeholder="Please enter @ to mention people"  rows={5} cols={40} autoResize
                             itemTemplate={this.itemTemplate} />
 
                         <h5>Multiple Trigger</h5>
-                        <Mention trigger={['@', '#']} suggestions={this.state.multipleSuggestions} onSearch={this.onMultipleSearch} field={['nickname']} placeholder="please enter @ to mention people, # to mention tag"
+                        <Mention trigger={['@', '#']} suggestions={this.state.multipleSuggestions} onSearch={this.onMultipleSearch} field={['nickname']} placeholder="Please enter @ to mention people, # to mention tag"
                             itemTemplate={this.multipleItemTemplate} rows={5} cols={40} />
                     </div>
                 </div>
