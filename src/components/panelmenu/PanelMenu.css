@@ -28,3 +28,7 @@
 .p-panelmenu .p-menuitem-text {
     line-height: 1;
 }
+
+html[dir='rtl'] .p-panelmenu-icon {
+    transform: scaleX(-1);
+}
