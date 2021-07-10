@@ -87,3 +87,7 @@ input.p-dropdown-label  {
 .p-fluid .p-dropdown .p-dropdown-label {
     width: 1%;
 }
+
+html[dir='rtl'] .p-dropdown-clear-icon {
+    margin-right: 8rem;
+}
