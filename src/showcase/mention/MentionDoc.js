@@ -14,139 +14,265 @@ export class MentionDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import { InputText } from 'primereact/inputtext';
+import { Mention } from 'primereact/mention';
+import { CustomerService } from '../service/CustomerService';
 
-export class InputTextDemo extends Component {
+export class MentionDemo extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            value1: '',
-            value2: '',
-            value3: '',
-            value4: '',
-            value5: ''
+            customers: [],
+            suggestions: [],
+            multipleSuggestions: []
         };
+
+        this.tagSuggestions = ['primereact', 'primefaces', 'primeng', 'primevue'];
+
+        this.customerservice = new CustomerService();
+
+        this.onSearch = this.onSearch.bind(this);
+        this.onMultipleSearch = this.onMultipleSearch.bind(this);
+        this.itemTemplate = this.itemTemplate.bind(this);
+        this.multipleItemTemplate = this.multipleItemTemplate.bind(this);
+    }
+
+    componentDidMount() {
+        this.customerservice.getCustomersSmall().then(data => {
+            data.forEach(d => d['nickname'] = \`\${d.name.replace(/\\s+/g, '').toLowerCase()}_\${d.id}\`);
+            this.setState({ customers: data })
+        });
+    }
+
+    onSearch(event) {
+        //in a real application, make a request to a remote url with the query and return suggestions, for demo we filter at client side
+        setTimeout(() => {
+            const query = event.query;
+            let suggestions;
+
+            if (!query.trim().length) {
+                suggestions = [...this.state.customers];
+            }
+            else {
+                suggestions = this.state.customers.filter((customer) => {
+                    return customer.nickname.toLowerCase().startsWith(query.toLowerCase());
+                });
+            }
+
+            this.setState({ suggestions });
+        }, 250);
+    }
+
+    onMultipleSearch(event) {
+        const trigger = event.trigger;
+
+        if (trigger === '@') {
+            //in a real application, make a request to a remote url with the query and return suggestions, for demo we filter at client side
+            setTimeout(() => {
+                const query = event.query;
+                let suggestions;
+
+                if (!query.trim().length) {
+                    suggestions = [...this.state.customers];
+                }
+                else {
+                    suggestions = this.state.customers.filter((customer) => {
+                        return customer.nickname.toLowerCase().startsWith(query.toLowerCase());
+                    });
+                }
+
+                this.setState({ multipleSuggestions: suggestions });
+            }, 250);
+        }
+        else if (trigger === '#') {
+            setTimeout(() => {
+                const query = event.query;
+                let suggestions;
+
+                if (!query.trim().length) {
+                    suggestions = [...this.tagSuggestions];
+                }
+                else {
+                    suggestions = this.tagSuggestions.filter((tag) => {
+                        return tag.toLowerCase().startsWith(query.toLowerCase());
+                    });
+                }
+
+                this.setState({ multipleSuggestions: suggestions });
+            }, 250);
+        }
+    }
+
+    itemTemplate(suggestion) {
+        const src = 'showcase/demo/images/avatar/' + suggestion.representative.image;
+
+        return (
+            <div className="p-d-flex p-ai-center">
+                <img alt={suggestion.name} src={src} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" style={{verticalAlign: 'middle'}} />
+                <span className="p-d-flex p-dir-col p-ml-2">
+                    {suggestion.name}
+                    <small style={{ fontSize: '.75rem', color: 'var(--text-secondary-color)' }}>@{suggestion.nickname}</small>
+                </span>
+            </div>
+        );
+    }
+
+    multipleItemTemplate(suggestion, options) {
+        const trigger = options.trigger;
+
+        if (trigger === '@' && suggestion.nickname) {
+            return this.itemTemplate(suggestion);
+        }
+        else if (trigger === '#' && !suggestion.nickname) {
+            return <span>{suggestion}</span>;
+        }
+
+        return null;
     }
 
     render() {
         return (
-            <div>
-                <div className="card">
-                    <h5>Basic</h5>
-                    <InputText value={this.state.value1} onChange={(e) => this.setState({value1: e.target.value})} />
-                    <span className="p-ml-2">{this.state.value1}</span>
+            <div className="card">
+                <h5>Basic</h5>
+                <Mention suggestions={this.state.suggestions} onSearch={this.onSearch} field="nickname" placeholder="Please enter @ to mention people"  rows={5} cols={40}
+                    itemTemplate={this.itemTemplate} />
 
-                    <h5>Floating Label</h5>
-                    <span className="p-float-label">
-                        <InputText id="username" value={this.state.value2} onChange={(e) => this.setState({value2: e.target.value})} />
-                        <label htmlFor="username">Username</label>
-                    </span>
+                <h5>Auto Resize</h5>
+                <Mention suggestions={this.state.suggestions} onSearch={this.onSearch} field="nickname" placeholder="Please enter @ to mention people"  rows={5} cols={40} autoResize
+                    itemTemplate={this.itemTemplate} />
 
-                    <h5>Left Icon</h5>
-                    <span className="p-input-icon-left">
-                        <i className="pi pi-search" />
-                        <InputText value={this.state.value3} onChange={(e) => this.setState({value3: e.target.value})} placeholder="Search" />
-                    </span>
-
-                    <h5>Right Icon</h5>
-                    <span className="p-input-icon-right">
-                        <i className="pi pi-spin pi-spinner" />
-                        <InputText value={this.state.value4} onChange={(e) => this.setState({value4: e.target.value})} />
-                    </span>
-
-                    <h5>Help Text</h5>
-                    <div className="p-field">
-                        <label htmlFor="username1" className="p-d-block">Username</label>
-                        <InputText id="username1" aria-describedby="username1-help" className="p-d-block"/>
-                        <small id="username1-help" className="p-d-block">Enter your username to reset your password.</small>
-                    </div>
-
-                    <h5>Invalid</h5>
-                    <div className="p-field">
-                        <label htmlFor="username2" className="p-d-block">Username</label>
-                        <InputText id="username2" aria-describedby="username2-help" className="p-invalid p-d-block" />
-                        <small id="username2-help" className="p-error p-d-block">Username is not available.</small>
-                    </div>
-
-                    <h5>Disabled</h5>
-                    <InputText value={this.state.value5} disabled />
-
-                    <h5>Sizes</h5>
-                    <div className="sizes">
-                        <InputText type="text" className="p-inputtext-sm p-d-block p-mb-2" placeholder="Small" />
-                        <InputText type="text" className="p-d-block p-mb-2" placeholder="Normal" />
-                        <InputText type="text" className="p-inputtext-lg p-d-block"  placeholder="Large" />
-                    </div>
-                </div>
+                <h5>Multiple Trigger</h5>
+                <Mention trigger={['@', '#']} suggestions={this.state.multipleSuggestions} onSearch={this.onMultipleSearch} field={['nickname']} placeholder="Please enter @ to mention people, # to mention tag"
+                    itemTemplate={this.multipleItemTemplate} rows={5} cols={40} />
             </div>
         )
     }
 }
+
                 `
             },
             'hooks': {
                 tabName: 'Hooks Source',
                 content: `
-import React, { useState } from 'react';
-import { InputText } from 'primereact/inputtext';
+import React, { useState, useEffect } from 'react';
+import { Mention } from 'primereact/mention';
+import { CustomerService } from '../service/CustomerService';
 
-const InputTextDemo = () => {
-    const [value1, setValue1] = useState('');
-    const [value2, setValue2] = useState('');
-    const [value3, setValue3] = useState('');
-    const [value4, setValue4] = useState('');
-    const [value5, setValue5] = useState('');
+const MentionDemo = () => {
+
+    const [customers, setCustomers] = useState([]);
+    const [suggestions, setSuggestions] = useState([]);
+    const [multipleSuggestions, setMultipleSuggestions]= useState([]);
+
+    const tagSuggestions = ['primereact', 'primefaces', 'primeng', 'primevue'];
+    const customerservice = new CustomerService();
+
+    useEffect(() => {
+        customerservice.getCustomersSmall().then(data => {
+            data.forEach(d => d['nickname'] = \`\${d.name.replace(/\\s+/g, '').toLowerCase()}_\${d.id}\`);
+            setCustomers(data);
+        });
+    }, [])
+
+    const onSearch = (event) => {
+        //in a real application, make a request to a remote url with the query and return suggestions, for demo we filter at client side
+        setTimeout(() => {
+            const query = event.query;
+            let suggestions;
+
+            if (!query.trim().length) {
+                suggestions = [...customers];
+            }
+            else {
+                suggestions = customers.filter((customer) => {
+                    return customer.nickname.toLowerCase().startsWith(query.toLowerCase());
+                });
+            }
+
+            setSuggestions(suggestions);
+        }, 250);
+    }
+
+    const onMultipleSearch = (event) => {
+        const trigger = event.trigger;
+
+        if (trigger === '@') {
+            //in a real application, make a request to a remote url with the query and return suggestions, for demo we filter at client side
+            setTimeout(() => {
+                const query = event.query;
+                let suggestions;
+
+                if (!query.trim().length) {
+                    suggestions = [...customers];
+                }
+                else {
+                    suggestions = customers.filter((customer) => {
+                        return customer.nickname.toLowerCase().startsWith(query.toLowerCase());
+                    });
+                }
+
+                setMultipleSuggestions(suggestions);
+            }, 250);
+        }
+        else if (trigger === '#') {
+            setTimeout(() => {
+                const query = event.query;
+                let suggestions;
+
+                if (!query.trim().length) {
+                    suggestions = [...tagSuggestions];
+                }
+                else {
+                    suggestions = tagSuggestions.filter((tag) => {
+                        return tag.toLowerCase().startsWith(query.toLowerCase());
+                    });
+                }
+
+                setMultipleSuggestions(suggestions);
+            }, 250);
+        }
+    }
+
+    const itemTemplate = (suggestion) => {
+        const src = 'showcase/demo/images/avatar/' + suggestion.representative.image;
+
+        return (
+            <div className="p-d-flex p-ai-center">
+                <img alt={suggestion.name} src={src} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" style={{verticalAlign: 'middle'}} />
+                <span className="p-d-flex p-dir-col p-ml-2">
+                    {suggestion.name}
+                    <small style={{ fontSize: '.75rem', color: 'var(--text-secondary-color)' }}>@{suggestion.nickname}</small>
+                </span>
+            </div>
+        );
+    }
+
+    const multipleItemTemplate = (suggestion, options) => {
+        const trigger = options.trigger;
+
+        if (trigger === '@' && suggestion.nickname) {
+            return itemTemplate(suggestion);
+        }
+        else if (trigger === '#' && !suggestion.nickname) {
+            return <span>{suggestion}</span>;
+        }
+
+        return null;
+    }
 
     return (
-        <div>
-            <div className="card">
-                <h5>Basic</h5>
-                <InputText value={value1} onChange={(e) => setValue1(e.target.value)} />
-                <span className="p-ml-2">{value1}</span>
+        <div className="card">
+            <h5>Basic</h5>
+            <Mention suggestions={suggestions} onSearch={onSearch} field="nickname" placeholder="Please enter @ to mention people"  rows={5} cols={40}
+                itemTemplate={itemTemplate} />
 
-                <h5>Floating Label</h5>
-                <span className="p-float-label">
-                    <InputText id="username" value={value2} onChange={(e) => setValue2(e.target.value)} />
-                    <label htmlFor="username">Username</label>
-                </span>
+            <h5>Auto Resize</h5>
+            <Mention suggestions={suggestions} onSearch={onSearch} field="nickname" placeholder="Please enter @ to mention people"  rows={5} cols={40} autoResize
+                itemTemplate={itemTemplate} />
 
-                <h5>Left Icon</h5>
-                <span className="p-input-icon-left">
-                    <i className="pi pi-search" />
-                    <InputText value={value3} onChange={(e) => setValue3(e.target.value)} placeholder="Search" />
-                </span>
-
-                <h5>Right Icon</h5>
-                <span className="p-input-icon-right">
-                    <i className="pi pi-spin pi-spinner" />
-                    <InputText value={value4} onChange={(e) => setValue4(e.target.value)} />
-                </span>
-
-                <h5>Help Text</h5>
-                <div className="p-field">
-                    <label htmlFor="username1" className="p-d-block">Username</label>
-                    <InputText id="username1" aria-describedby="username1-help" className="p-d-block"/>
-                    <small id="username1-help" className="p-d-block">Enter your username to reset your password.</small>
-                </div>
-
-                <h5>Invalid</h5>
-                <div className="p-field">
-                    <label htmlFor="username2" className="p-d-block">Username</label>
-                    <InputText id="username2" aria-describedby="username2-help" className="p-invalid p-d-block" />
-                    <small id="username2-help" className="p-error p-d-block">Username is not available.</small>
-                </div>
-
-                <h5>Disabled</h5>
-                <InputText value={value5} disabled />
-
-                <h5>Sizes</h5>
-                <div className="sizes">
-                    <InputText type="text" className="p-inputtext-sm p-d-block p-mb-2" placeholder="Small" />
-                    <InputText type="text" className="p-d-block p-mb-2" placeholder="Normal" />
-                    <InputText type="text" className="p-inputtext-lg p-d-block"  placeholder="Large" />
-                </div>
-            </div>
+            <h5>Multiple Trigger</h5>
+            <Mention trigger={['@', '#']} suggestions={multipleSuggestions} onSearch={onMultipleSearch} field={['nickname']} placeholder="Please enter @ to mention people, # to mention tag"
+                itemTemplate={multipleItemTemplate} rows={5} cols={40} />
         </div>
     )
 }
@@ -155,65 +281,125 @@ const InputTextDemo = () => {
             'ts': {
                 tabName: 'TS Source',
                 content: `
-import React, { useState } from 'react';
-import { InputText } from 'primereact/inputtext';
+import React, { useState, useEffect } from 'react';
+import { Mention } from 'primereact/mention';
+import { CustomerService } from '../service/CustomerService';
 
-const InputTextDemo = () => {
-    const [value1, setValue1] = useState('');
-    const [value2, setValue2] = useState('');
-    const [value3, setValue3] = useState('');
-    const [value4, setValue4] = useState('');
-    const [value5, setValue5] = useState('');
+const MentionDemo = () => {
+
+    const [customers, setCustomers] = useState([]);
+    const [suggestions, setSuggestions] = useState([]);
+    const [multipleSuggestions, setMultipleSuggestions]= useState([]);
+
+    const tagSuggestions = ['primereact', 'primefaces', 'primeng', 'primevue'];
+    const customerservice = new CustomerService();
+
+    useEffect(() => {
+        customerservice.getCustomersSmall().then(data => {
+            data.forEach(d => d['nickname'] = \`\${d.name.replace(/\\s+/g, '').toLowerCase()}_\${d.id}\`);
+            setCustomers(data);
+        });
+    }, [])
+
+    const onSearch = (event) => {
+        //in a real application, make a request to a remote url with the query and return suggestions, for demo we filter at client side
+        setTimeout(() => {
+            const query = event.query;
+            let suggestions;
+
+            if (!query.trim().length) {
+                suggestions = [...customers];
+            }
+            else {
+                suggestions = customers.filter((customer) => {
+                    return customer.nickname.toLowerCase().startsWith(query.toLowerCase());
+                });
+            }
+
+            setSuggestions(suggestions);
+        }, 250);
+    }
+
+    const onMultipleSearch = (event) => {
+        const trigger = event.trigger;
+
+        if (trigger === '@') {
+            //in a real application, make a request to a remote url with the query and return suggestions, for demo we filter at client side
+            setTimeout(() => {
+                const query = event.query;
+                let suggestions;
+
+                if (!query.trim().length) {
+                    suggestions = [...customers];
+                }
+                else {
+                    suggestions = customers.filter((customer) => {
+                        return customer.nickname.toLowerCase().startsWith(query.toLowerCase());
+                    });
+                }
+
+                setMultipleSuggestions(suggestions);
+            }, 250);
+        }
+        else if (trigger === '#') {
+            setTimeout(() => {
+                const query = event.query;
+                let suggestions;
+
+                if (!query.trim().length) {
+                    suggestions = [...tagSuggestions];
+                }
+                else {
+                    suggestions = tagSuggestions.filter((tag) => {
+                        return tag.toLowerCase().startsWith(query.toLowerCase());
+                    });
+                }
+
+                setMultipleSuggestions(suggestions);
+            }, 250);
+        }
+    }
+
+    const itemTemplate = (suggestion) => {
+        const src = 'showcase/demo/images/avatar/' + suggestion.representative.image;
+
+        return (
+            <div className="p-d-flex p-ai-center">
+                <img alt={suggestion.name} src={src} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" style={{verticalAlign: 'middle'}} />
+                <span className="p-d-flex p-dir-col p-ml-2">
+                    {suggestion.name}
+                    <small style={{ fontSize: '.75rem', color: 'var(--text-secondary-color)' }}>@{suggestion.nickname}</small>
+                </span>
+            </div>
+        );
+    }
+
+    const multipleItemTemplate = (suggestion, options) => {
+        const trigger = options.trigger;
+
+        if (trigger === '@' && suggestion.nickname) {
+            return itemTemplate(suggestion);
+        }
+        else if (trigger === '#' && !suggestion.nickname) {
+            return <span>{suggestion}</span>;
+        }
+
+        return null;
+    }
 
     return (
-        <div>
-            <div className="card">
-                <h5>Basic</h5>
-                <InputText value={value1} onChange={(e) => setValue1(e.target.value)} />
-                <span className="p-ml-2">{value1}</span>
+        <div className="card">
+            <h5>Basic</h5>
+            <Mention suggestions={suggestions} onSearch={onSearch} field="nickname" placeholder="Please enter @ to mention people"  rows={5} cols={40}
+                itemTemplate={itemTemplate} />
 
-                <h5>Floating Label</h5>
-                <span className="p-float-label">
-                    <InputText id="username" value={value2} onChange={(e) => setValue2(e.target.value)} />
-                    <label htmlFor="username">Username</label>
-                </span>
+            <h5>Auto Resize</h5>
+            <Mention suggestions={suggestions} onSearch={onSearch} field="nickname" placeholder="Please enter @ to mention people"  rows={5} cols={40} autoResize
+                itemTemplate={itemTemplate} />
 
-                <h5>Left Icon</h5>
-                <span className="p-input-icon-left">
-                    <i className="pi pi-search" />
-                    <InputText value={value3} onChange={(e) => setValue3(e.target.value)} placeholder="Search" />
-                </span>
-
-                <h5>Right Icon</h5>
-                <span className="p-input-icon-right">
-                    <i className="pi pi-spin pi-spinner" />
-                    <InputText value={value4} onChange={(e) => setValue4(e.target.value)} />
-                </span>
-
-                <h5>Help Text</h5>
-                <div className="p-field">
-                    <label htmlFor="username1" className="p-d-block">Username</label>
-                    <InputText id="username1" aria-describedby="username1-help" className="p-d-block"/>
-                    <small id="username1-help" className="p-d-block">Enter your username to reset your password.</small>
-                </div>
-
-                <h5>Invalid</h5>
-                <div className="p-field">
-                    <label htmlFor="username2" className="p-d-block">Username</label>
-                    <InputText id="username2" aria-describedby="username2-help" className="p-invalid p-d-block" />
-                    <small id="username2-help" className="p-error p-d-block">Username is not available.</small>
-                </div>
-
-                <h5>Disabled</h5>
-                <InputText value={value5} disabled />
-
-                <h5>Sizes</h5>
-                <div className="sizes">
-                    <InputText type="text" className="p-inputtext-sm p-d-block p-mb-2" placeholder="Small" />
-                    <InputText type="text" className="p-d-block p-mb-2" placeholder="Normal" />
-                    <InputText type="text" className="p-inputtext-lg p-d-block"  placeholder="Large" />
-                </div>
-            </div>
+            <h5>Multiple Trigger</h5>
+            <Mention trigger={['@', '#']} suggestions={multipleSuggestions} onSearch={onMultipleSearch} field={['nickname']} placeholder="Please enter @ to mention people, # to mention tag"
+                itemTemplate={multipleItemTemplate} rows={5} cols={40} />
         </div>
     )
 }
