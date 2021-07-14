@@ -27,6 +27,7 @@ export interface PickListProps {
     showTargetControls?: boolean;
     metaKeySelection?: boolean;
     tabIndex?: number;
+    dataKey?: string;
     itemTemplate?(item: any): React.ReactNode;
     onChange?(e: PickListChangeParams): void;
     onMoveToSource?(e: PickListEventParams): void;

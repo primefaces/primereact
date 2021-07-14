@@ -1,41 +1,8 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 import { PickListItem } from './PickListItem';
 
 class PickListSubListComponent extends Component {
-
-    static defaultProps = {
-        forwardRef: null,
-        list: null,
-        selection: null,
-        header: null,
-        className: null,
-        listClassName: null,
-        style: null,
-        showControls: true,
-        metaKeySelection: true,
-        tabIndex: null,
-        itemTemplate: null,
-        onItemClick: null,
-        onSelectionChange: null
-    }
-
-    static propTypes = {
-        forwardRef: PropTypes.any,
-        list: PropTypes.array,
-        selection: PropTypes.array,
-        header: PropTypes.string,
-        className: PropTypes.string,
-        listClassName: PropTypes.string,
-        style: PropTypes.object,
-        showControls: PropTypes.bool,
-        metaKeySelection: PropTypes.bool,
-        tabIndex: PropTypes.number,
-        itemTemplate: PropTypes.func,
-        onItemClick: PropTypes.func,
-        onSelectionChange: PropTypes.func
-    }
 
     constructor(props) {
         super(props);
@@ -47,7 +14,7 @@ class PickListSubListComponent extends Component {
         let originalEvent = event.originalEvent;
         let item = event.value;
         let selection = [...this.props.selection];
-        let index = ObjectUtils.findIndexInList(item, selection);
+        let index = ObjectUtils.findIndexInList(item, selection, this.props.dataKey);
         let selected = (index !== -1);
         let metaSelection = this.props.metaKeySelection;
 
@@ -133,7 +100,7 @@ class PickListSubListComponent extends Component {
     }
 
     isSelected(item) {
-        return ObjectUtils.findIndexInList(item, this.props.selection) !== -1;
+        return ObjectUtils.findIndexInList(item, this.props.selection, this.props.dataKey) !== -1;
     }
 
     render() {

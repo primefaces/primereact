@@ -1,28 +1,12 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { ObjectUtils, classNames } from '../utils/Utils';
 import { Button } from '../button/Button';
 
 export class PickListTransferControls extends Component {
 
-    static defaultProps = {
-        source: null,
-        target: null,
-        sourceSelection: null,
-        targetSelection: null,
-        onTransfer: null
-    }
+    constructor(props) {
+        super(props);
 
-    static propTypes = {
-        source: PropTypes.array,
-        target: PropTypes.array,
-        sourceSelection: PropTypes.array,
-        targetSelection: PropTypes.array,
-        onTransfer: PropTypes.func
-    }
-
-    constructor() {
-        super();
         this.moveRight = this.moveRight.bind(this);
         this.moveAllRight = this.moveAllRight.bind(this);
         this.moveLeft = this.moveLeft.bind(this);
@@ -39,8 +23,8 @@ export class PickListTransferControls extends Component {
             for (let i = 0; i < selection.length; i++) {
                 let selectedItem = selection[i];
 
-                if (ObjectUtils.findIndexInList(selectedItem, targetList) === -1) {
-                    targetList.push(sourceList.splice(ObjectUtils.findIndexInList(selectedItem, sourceList), 1)[0]);
+                if (ObjectUtils.findIndexInList(selectedItem, targetList, this.props.dataKey) === -1) {
+                    targetList.push(sourceList.splice(ObjectUtils.findIndexInList(selectedItem, sourceList, this.props.dataKey), 1)[0]);
                 }
             }
 
@@ -81,8 +65,8 @@ export class PickListTransferControls extends Component {
             for (let i = 0; i < selection.length; i++) {
                 let selectedItem = selection[i];
 
-                if (ObjectUtils.findIndexInList(selectedItem, sourceList) === -1) {
-                    sourceList.push(targetList.splice(ObjectUtils.findIndexInList(selectedItem, targetList), 1)[0]);
+                if (ObjectUtils.findIndexInList(selectedItem, sourceList, this.props.dataKey) === -1) {
+                    sourceList.push(targetList.splice(ObjectUtils.findIndexInList(selectedItem, targetList, this.props.dataKey), 1)[0]);
                 }
             }
 

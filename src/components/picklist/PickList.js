@@ -23,6 +23,7 @@ export class PickList extends Component {
         showTargetControls: true,
         metaKeySelection: true,
         tabIndex: 0,
+        dataKey: null,
         itemTemplate: null,
         onChange: null,
         onMoveToSource: null,
@@ -49,6 +50,7 @@ export class PickList extends Component {
         showTargetControls: PropTypes.bool,
         metaKeySelection: PropTypes.bool,
         tabIndex: PropTypes.number,
+        dataKey: PropTypes.string,
         itemTemplate: PropTypes.func,
         onChange: PropTypes.func,
         onMoveToSource: PropTypes.func,
@@ -219,19 +221,19 @@ export class PickList extends Component {
         return (
             <div id={this.props.id} className={className} style={this.props.style}>
                 {this.props.showSourceControls && <PickListControls list={this.props.source} selection={sourceSelection}
-                    onReorder={this.onSourceReorder} className="p-picklist-source-controls" />}
+                    onReorder={this.onSourceReorder} className="p-picklist-source-controls" dataKey={this.props.dataKey} />}
 
                 <PickListSubList ref={(el) => this.sourceListElement = el} list={this.props.source} selection={sourceSelection} onSelectionChange={(e) => this.onSelectionChange(e, 'sourceSelection', this.props.onSourceSelectionChange)} itemTemplate={this.props.itemTemplate}
-                    header={this.props.sourceHeader} style={this.props.sourceStyle} className="p-picklist-source-wrapper" listClassName="p-picklist-source" metaKeySelection={this.props.metaKeySelection} tabIndex={this.props.tabIndex} />
+                    header={this.props.sourceHeader} style={this.props.sourceStyle} className="p-picklist-source-wrapper" listClassName="p-picklist-source" metaKeySelection={this.props.metaKeySelection} tabIndex={this.props.tabIndex} dataKey={this.props.dataKey} />
 
                 <PickListTransferControls onTransfer={this.onTransfer} source={this.props.source} target={this.props.target}
-                    sourceSelection={sourceSelection} targetSelection={targetSelection} />
+                    sourceSelection={sourceSelection} targetSelection={targetSelection} dataKey={this.props.dataKey} />
 
                 <PickListSubList ref={(el) => this.targetListElement = el} list={this.props.target} selection={targetSelection} onSelectionChange={(e) => this.onSelectionChange(e, 'targetSelection', this.props.onTargetSelectionChange)} itemTemplate={this.props.itemTemplate}
-                    header={this.props.targetHeader} style={this.props.targetStyle} className="p-picklist-target-wrapper" listClassName="p-picklist-target" metaKeySelection={this.props.metaKeySelection} tabIndex={this.props.tabIndex} />
+                    header={this.props.targetHeader} style={this.props.targetStyle} className="p-picklist-target-wrapper" listClassName="p-picklist-target" metaKeySelection={this.props.metaKeySelection} tabIndex={this.props.tabIndex} dataKey={this.props.dataKey} />
 
                 {this.props.showTargetControls && <PickListControls list={this.props.target} selection={targetSelection}
-                    onReorder={this.onTargetReorder} className="p-picklist-target-controls" />}
+                    onReorder={this.onTargetReorder} className="p-picklist-target-controls" dataKey={this.props.dataKey} />}
 
             </div>
         );

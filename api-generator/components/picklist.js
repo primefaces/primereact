@@ -94,6 +94,12 @@ const PickListProps = [
         type: 'number',
         default: 'null',
         description: 'Index of the element in tabbing order.'
+    },
+    {
+        name: 'dataKey',
+        type: 'string',
+        default: 'null',
+        description: 'Name of the field that uniquely identifies the a record in the data.'
     }
 ];
 

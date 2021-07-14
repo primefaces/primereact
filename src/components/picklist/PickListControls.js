@@ -1,26 +1,11 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { Button } from '../button/Button';
 import { ObjectUtils, classNames } from '../utils/Utils';
 
 export class PickListControls extends Component {
 
-    static defaultProps = {
-        className: null,
-        list: null,
-        selection: null,
-        onReorder: null
-    }
-
-    static propTypes = {
-        className: PropTypes.string,
-        list: PropTypes.array,
-        selection: PropTypes.array,
-        onReorder: PropTypes.func
-    }
-
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.moveUp = this.moveUp.bind(this);
         this.moveTop = this.moveTop.bind(this);
         this.moveDown = this.moveDown.bind(this);
@@ -35,7 +20,7 @@ export class PickListControls extends Component {
 
             for (let i = 0; i < selectedItems.length; i++) {
                 let selectedItem = selectedItems[i];
-                let selectedItemIndex = ObjectUtils.findIndexInList(selectedItem, list);
+                let selectedItemIndex = ObjectUtils.findIndexInList(selectedItem, list, this.props.dataKey);
 
                 if (selectedItemIndex !== 0) {
                     let movedItem = list[selectedItemIndex];
@@ -66,7 +51,7 @@ export class PickListControls extends Component {
 
             for (let i = 0; i < selectedItems.length; i++) {
                 let selectedItem = selectedItems[i];
-                let selectedItemIndex = ObjectUtils.findIndexInList(selectedItem, list);
+                let selectedItemIndex = ObjectUtils.findIndexInList(selectedItem, list, this.props.dataKey);
 
                 if (selectedItemIndex !== 0) {
                     let movedItem = list.splice(selectedItemIndex, 1)[0];
@@ -95,7 +80,7 @@ export class PickListControls extends Component {
 
             for (let i = selectedItems.length - 1; i >= 0; i--) {
                 let selectedItem = selectedItems[i];
-                let selectedItemIndex = ObjectUtils.findIndexInList(selectedItem, list);
+                let selectedItemIndex = ObjectUtils.findIndexInList(selectedItem, list, this.props.dataKey);
 
                 if (selectedItemIndex !== (list.length - 1)) {
                     let movedItem = list[selectedItemIndex];
@@ -128,7 +113,7 @@ export class PickListControls extends Component {
 
             for (let i = selectedItems.length - 1; i >= 0; i--) {
                 let selectedItem = selectedItems[i];
-                let selectedItemIndex = ObjectUtils.findIndexInList(selectedItem, list);
+                let selectedItemIndex = ObjectUtils.findIndexInList(selectedItem, list, this.props.dataKey);
 
                 if (selectedItemIndex !== (list.length - 1)) {
                     let movedItem = list.splice(selectedItemIndex, 1)[0];
