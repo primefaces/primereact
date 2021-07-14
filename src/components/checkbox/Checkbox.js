@@ -18,6 +18,7 @@ export class Checkbox extends Component {
         required: false,
         readOnly: false,
         tabIndex: null,
+        icon: 'pi pi-check',
         tooltip: null,
         tooltipOptions: null,
         ariaLabelledBy: null,
@@ -39,6 +40,7 @@ export class Checkbox extends Component {
         required: PropTypes.bool,
         readOnly: PropTypes.bool,
         tabIndex: PropTypes.number,
+        icon: PropTypes.string,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
         ariaLabelledBy: PropTypes.string,
@@ -159,7 +161,7 @@ export class Checkbox extends Component {
             'p-focus': this.state.focused
         });
         const iconClass = classNames('p-checkbox-icon p-c', {
-            'pi pi-check': this.props.checked
+            [this.props.icon]: this.props.checked
         });
 
         return (

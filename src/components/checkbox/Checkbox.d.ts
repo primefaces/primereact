@@ -31,6 +31,7 @@ export interface CheckboxProps {
     required?: boolean;
     readOnly?: boolean;
     tabIndex?: number;
+    icon?: string;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;

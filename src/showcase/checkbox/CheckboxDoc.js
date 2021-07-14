@@ -428,6 +428,12 @@ const onCityChange = (e) => {
                                         <td>Index of the element in tabbing order.</td>
                                     </tr>
                                     <tr>
+                                        <td>icon</td>
+                                        <td>string</td>
+                                        <td>pi pi-check</td>
+                                        <td>Icon class of the checkbox icon.</td>
+                                    </tr>
+                                    <tr>
                                         <td>tooltip</td>
                                         <td>any</td>
                                         <td>null</td>
