@@ -277,6 +277,12 @@ import { OrderList } from 'primereact/orderlist';
                             <td>An array of objects to reorder.</td>
                         </tr>
                         <tr>
+                            <td>dataKey</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Name of the field that uniquely identifies the a record in the data.</td>
+                        </tr>
+                        <tr>
                             <td>header</td>
                             <td>string</td>
                             <td>null</td>

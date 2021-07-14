@@ -397,6 +397,12 @@ const onChange = (e) => {
                                         <td>null</td>
                                         <td>Index of the element in tabbing order.</td>
                                     </tr>
+                                    <tr>
+                                        <td>dataKey</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Name of the field that uniquely identifies the a record in the data.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
