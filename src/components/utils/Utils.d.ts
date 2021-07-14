@@ -10,54 +10,54 @@ export declare class ConnectedOverlayScrollHandler {
 }
 
 export declare class DomHandler {
-    innerWidth(el: HTMLElement): number;
-    width(el: HTMLElement): number;
-    getWindowScrollTop(): number;
-    getWindowScrollLeft(): number;
-    getOuterWidth(el: HTMLElement, margin: boolean): number;
-    getOuterHeight(el: HTMLElement, margin: boolean): number;
-    getClientHeight(el: HTMLElement, margin: boolean): number;
-    getViewport(): { width: number; height: number; };
-    getOffset(el: HTMLElement): { top: any; left: any; };
-    index(el: HTMLElement): number;
-    addMultipleClasses(el: HTMLElement, className: string): void;
-    addClass(el: HTMLElement, className: string): void;
-    removeClass(el: HTMLElement, className: string): void;
-    hasClass(el: HTMLElement, className: string): boolean;
-    find(el: HTMLElement, selector: string): any[];
-    findSingle(el: HTMLElement, selector: string): any;
-    getHeight(el: HTMLElement): number;
-    getWidth(el: HTMLElement): number;
-    alignOverlay(overlay: HTMLElement, target: HTMLElement, appendTo?: string): void;
-    absolutePosition(el: HTMLElement, target: HTMLElement): void;
-    relativePosition(el: HTMLElement, target: HTMLElement): void;
-    flipfitCollision(el: HTMLElement, target: HTMLElement, my?: string, at?: string, callback?: any): void;
-    findCollisionPosition(position: string): void;
-    getParents(el: HTMLElement, parents?: any[]): any[];
-    getScrollableParents(el: HTMLElement): any[];
-    getHiddenElementOuterHeight(el: HTMLElement): number;
-    getHiddenElementOuterWidth(el: HTMLElement): number;
-    getHiddenElementDimensions(el: HTMLElement): { width?: number; height?: number; };
-    fadeIn(el: HTMLElement, duration: number): void;
-    fadeOut(el: HTMLElement, duration: number): void;
-    getUserAgent(): string;
-    isIOS(): boolean;
-    isAndroid(): boolean;
-    isFunction(obj: any): boolean;
-    appendChild(el: HTMLElement, target: HTMLElement): void;
-    removeChild(el: HTMLElement, target: HTMLElement): void;
-    isElement(obj: any): boolean;
-    scrollInView(container: HTMLElement, item: HTMLElement): void;
-    calculateScrollbarWidth(el: HTMLElement): number;
-    getBrowser(): object;
-    resolveUserAgent(): { browser: string; version: string; };
-    clearSelection(): void;
-    calculateScrollbarWidth(): number;
-    isVisible(el: HTMLElement): boolean;
-    getFocusableElements(el: HTMLElement): any[];
-    getFirstFocusableElement(el: HTMLElement): any;
-    getLastFocusableElement(el: HTMLElement): any;
-    getCursorOffset(el: HTMLElement, prevText?: string, nextText?: string, currentText?: string): { top: any; left: any; };
+    static innerWidth(el: HTMLElement): number;
+    static width(el: HTMLElement): number;
+    static getWindowScrollTop(): number;
+    static getWindowScrollLeft(): number;
+    static getOuterWidth(el: HTMLElement, margin: boolean): number;
+    static getOuterHeight(el: HTMLElement, margin: boolean): number;
+    static getClientHeight(el: HTMLElement, margin: boolean): number;
+    static getViewport(): { width: number; height: number; };
+    static getOffset(el: HTMLElement): { top: any; left: any; };
+    static index(el: HTMLElement): number;
+    static addMultipleClasses(el: HTMLElement, className: string): void;
+    static addClass(el: HTMLElement, className: string): void;
+    static removeClass(el: HTMLElement, className: string): void;
+    static hasClass(el: HTMLElement, className: string): boolean;
+    static find(el: HTMLElement, selector: string): any[];
+    static findSingle(el: HTMLElement, selector: string): any;
+    static getHeight(el: HTMLElement): number;
+    static getWidth(el: HTMLElement): number;
+    static alignOverlay(overlay: HTMLElement, target: HTMLElement, appendTo?: string): void;
+    static absolutePosition(el: HTMLElement, target: HTMLElement): void;
+    static relativePosition(el: HTMLElement, target: HTMLElement): void;
+    static flipfitCollision(el: HTMLElement, target: HTMLElement, my?: string, at?: string, callback?: any): void;
+    static findCollisionPosition(position: string): void;
+    static getParents(el: HTMLElement, parents?: any[]): any[];
+    static getScrollableParents(el: HTMLElement): any[];
+    static getHiddenElementOuterHeight(el: HTMLElement): number;
+    static getHiddenElementOuterWidth(el: HTMLElement): number;
+    static getHiddenElementDimensions(el: HTMLElement): { width?: number; height?: number; };
+    static fadeIn(el: HTMLElement, duration: number): void;
+    static fadeOut(el: HTMLElement, duration: number): void;
+    static getUserAgent(): string;
+    static isIOS(): boolean;
+    static isAndroid(): boolean;
+    static isFunction(obj: any): boolean;
+    static appendChild(el: HTMLElement, target: HTMLElement): void;
+    static removeChild(el: HTMLElement, target: HTMLElement): void;
+    static isElement(obj: any): boolean;
+    static scrollInView(container: HTMLElement, item: HTMLElement): void;
+    static calculateScrollbarWidth(el: HTMLElement): number;
+    static getBrowser(): object;
+    static resolveUserAgent(): { browser: string; version: string; };
+    static clearSelection(): void;
+    static calculateScrollbarWidth(): number;
+    static isVisible(el: HTMLElement): boolean;
+    static getFocusableElements(el: HTMLElement): any[];
+    static getFirstFocusableElement(el: HTMLElement): any;
+    static getLastFocusableElement(el: HTMLElement): any;
+    static getCursorOffset(el: HTMLElement, prevText?: string, nextText?: string, currentText?: string): { top: any; left: any; };
 }
 
 export declare function EventBus(): {
@@ -67,17 +67,17 @@ export declare function EventBus(): {
 }
 
 export declare class FilterUtils {
-    filter(value: any, fields: string, filterValue: any, filterMatchMode: string, filterLocale?: string): any[];
-    startsWith(value: any, filter: string, filterLocale?: string): boolean;
-    contains(value: any, filter: string, filterLocale?: string): boolean;
-    endsWith(value: any, filter: string, filterLocale?: string): boolean;
-    equals(value: any, filter: string, filterLocale?: string): boolean;
-    notEquals(value: any, filter: string, filterLocale?: string): boolean;
-    in(value: any, filter: string, filterLocale?: string): boolean;
-    lt(value: any, filter: string, filterLocale?: string): boolean;
-    lte(value: any, filter: string, filterLocale?: string): boolean;
-    gt(value: any, filter: string, filterLocale?: string): boolean;
-    gte(value: any, filter: string, filterLocale?: string): boolean;
+    static filter(value: any, fields: string, filterValue: any, filterMatchMode: string, filterLocale?: string): any[];
+    static startsWith(value: any, filter: string, filterLocale?: string): boolean;
+    static contains(value: any, filter: string, filterLocale?: string): boolean;
+    static endsWith(value: any, filter: string, filterLocale?: string): boolean;
+    static equals(value: any, filter: string, filterLocale?: string): boolean;
+    static notEquals(value: any, filter: string, filterLocale?: string): boolean;
+    static in(value: any, filter: string, filterLocale?: string): boolean;
+    static lt(value: any, filter: string, filterLocale?: string): boolean;
+    static lte(value: any, filter: string, filterLocale?: string): boolean;
+    static gt(value: any, filter: string, filterLocale?: string): boolean;
+    static gte(value: any, filter: string, filterLocale?: string): boolean;
 }
 
 export declare function mask(el: HTMLElement, options: object): {
@@ -89,17 +89,17 @@ export declare function mask(el: HTMLElement, options: object): {
 }
 
 export declare class ObjectUtils {
-    equals(obj1: any, obj2: any, field: string): boolean;
-    deepEquals(a: any, b: any): boolean;
-    resolveFieldData(data: any, field: string): any;
-    isFunction(obj: any): boolean;
-    findDiffKeys(obj1: any, obj2: any): object;
-    reorderArray(value: any, from: number, to: number): void;
-    findIndexInList(value: any, list: any[]): number;
-    getJSXElement(obj: any, ...params: any[]): any;
-    removeAccents(str: any): string;
-    isEmpty(value: any): boolean;
-    isNotEmpty(value: any): boolean;
+    static equals(obj1: any, obj2: any, field: string): boolean;
+    static deepEquals(a: any, b: any): boolean;
+    static resolveFieldData(data: any, field: string): any;
+    static isFunction(obj: any): boolean;
+    static findDiffKeys(obj1: any, obj2: any): object;
+    static reorderArray(value: any, from: number, to: number): void;
+    static findIndexInList(value: any, list: any[]): number;
+    static getJSXElement(obj: any, ...params: any[]): any;
+    static removeAccents(str: any): string;
+    static isEmpty(value: any): boolean;
+    static isNotEmpty(value: any): boolean;
 }
 
 export declare function UniqueComponentId(prefix?: string): string;
