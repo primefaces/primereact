@@ -545,11 +545,10 @@ export default class DomHandler {
         }
     }
 
-    static fadeOut(element, ms) {
+    static fadeOut(element, duration) {
         if (element) {
             let opacity = 1,
                 interval = 50,
-                duration = ms,
                 gap = interval / duration;
 
             let fading = setInterval(() => {
