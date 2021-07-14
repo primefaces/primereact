@@ -6,14 +6,14 @@ const MentionProps = [
         description: 'Unique identifier of the element.'
     },
     {
-        name: 'model',
-        type: 'array',
+        name: 'inputId',
+        type: 'string',
         default: 'null',
-        description: 'An array of menuitems.'
+        description: 'Identifier of the input element.'
     },
     {
         name: 'style',
-        type: 'string',
+        type: 'object',
         default: 'null',
         description: 'Inline style of the component.'
     },
@@ -24,24 +24,185 @@ const MentionProps = [
         description: 'Style class of the component.'
     },
     {
-        name: 'orientation',
+        name: 'trigger',
+        type: 'string|array',
+        default: '@',
+        description: 'TODO'
+    },
+    {
+        name: 'suggestions',
+        type: 'array',
+        default: 'null',
+        description: 'Field of a suggested object to resolve and display.'
+    },
+    {
+        name: 'inputStyle',
+        type: 'object',
+        default: 'null',
+        description: 'Inline style of the input field.'
+    },
+    {
+        name: 'inputClassName',
         type: 'string',
-        default: 'horizontal',
-        description: 'Defines the orientation, valid values are horizontal and vertical.'
+        default: 'null',
+        description: 'Style class of the input field.'
+    },
+    {
+        name: 'panelClassName',
+        type: 'string',
+        default: 'null',
+        description: 'Style class of the overlay panel element.'
+    },
+    {
+        name: 'panelStyle',
+        type: 'object',
+        default: 'null',
+        description: 'Inline style of the overlay panel element.'
+    },
+    {
+        name: 'scrollHeight',
+        type: 'string',
+        default: '200px',
+        description: 'Maximum height of the suggestions panel.'
+    },
+    {
+        name: 'autoHighlight',
+        type: 'boolean',
+        default: 'true',
+        description: 'When enabled, highlights the first item in the list by default.'
+    },
+    {
+        name: 'placeholder',
+        type: 'boolean',
+        default: 'true',
+        description: 'Placeholder text for the input.'
+    },
+    {
+        name: 'delay',
+        type: 'number',
+        default: '0',
+        description: 'Delay between keystrokes to wait before sending a query.'
+    },
+    {
+        name: 'headerTemplate',
+        type: 'any',
+        default: 'null',
+        description: 'The template of header.'
+    },
+    {
+        name: 'footerTemplate',
+        type: 'any',
+        default: 'null',
+        description: 'The template of footer.'
+    },
+    {
+        name: 'itemTemplate',
+        type: 'any',
+        default: 'null',
+        description: 'Custom template for the items.'
+    },
+    {
+        name: 'transitionOptions',
+        type: 'object',
+        default: 'null',
+        description: 'The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.'
     }
 ];
 
 const MentionEvents = [
-
+    {
+        name: 'onChange',
+        description: 'Callback to invoke when value changes.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onFocus',
+        description: 'Callback to invoke when the element receives focus.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onBlur',
+        description: 'Callback to invoke when the element loses focus.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onShow',
+        description: 'Callback to invoke when overlay panel becomes visible.',
+        arguments: []
+    },
+    {
+        name: 'onHide',
+        description: 'Callback to invoke when overlay panel becomes hidden.',
+        arguments: []
+    },
+    {
+        name: 'onSearch',
+        description: 'Callback to invoke when search.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.trigger',
+                type: 'object',
+                description: 'TODO'
+            }
+        ]
+    },
+    {
+        name: 'onSelect',
+        description: 'Callback to invoke when selection changes.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.suggestion',
+                type: 'object',
+                description: 'TODO'
+            }
+        ]
+    },
+    {
+        name: 'onInput',
+        description: 'Callback to invoke on input event of input field.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    }
 ];
 
 const MentionStyles = [
-    { name: 'p-megamenu', description: 'Container element.' },
-    { name: 'p-menu-list', description: 'List element.' },
-    { name: 'p-menuitem', description: 'Menuitem element.' },
-    { name: 'p-menuitem-text', description: 'Label of a menuitem.' },
-    { name: 'p-menuitem-icon', description: 'Icon of a menuitem.' },
-    { name: 'p-submenu-icon', description: 'Arrow icon of a submenu.' }
+    { name: 'p-mention', description: 'Container element.' },
+    { name: 'p-mention-panel', description: 'Overlay panel of suggestions.' },
+    { name: 'p-mention-items', description: 'List container of suggestions.' },
+    { name: 'p-mention-item', description: 'List item of a suggestion.' },
 ];
 
 module.exports = {
