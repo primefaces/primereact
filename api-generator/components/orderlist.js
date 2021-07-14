@@ -12,6 +12,12 @@ const OrderListProps = [
         description: 'An array of objects to reorder.'
     },
     {
+        name: 'dataKey',
+        type: 'string',
+        default: 'null',
+        description: 'Name of the field that uniquely identifies the a record in the data.'
+    },
+    {
         name: 'header',
         type: 'string',
         default: 'null',

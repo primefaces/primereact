@@ -1,21 +1,8 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { Button } from '../button/Button';
 import { ObjectUtils } from '../utils/Utils';
 
 export class OrderListControls extends Component {
-
-    static defaultProps = {
-        value: null,
-        selection: null,
-        onReorder: null
-    }
-
-    static propTypes = {
-        value: PropTypes.array,
-        selection: PropTypes.array,
-        onReorder: PropTypes.func
-    }
 
     constructor() {
         super();
@@ -31,7 +18,7 @@ export class OrderListControls extends Component {
 
             for (let i = 0; i < this.props.selection.length; i++) {
                 let selectedItem = this.props.selection[i];
-                let selectedItemIndex = ObjectUtils.findIndexInList(selectedItem, value);
+                let selectedItemIndex = ObjectUtils.findIndexInList(selectedItem, value, this.props.dataKey);
 
                 if(selectedItemIndex !== 0) {
                     let movedItem = value[selectedItemIndex];
@@ -60,7 +47,7 @@ export class OrderListControls extends Component {
 
             for (let i = 0; i < this.props.selection.length; i++) {
                 let selectedItem = this.props.selection[i];
-                let selectedItemIndex = ObjectUtils.findIndexInList(selectedItem, value);
+                let selectedItemIndex = ObjectUtils.findIndexInList(selectedItem, value, this.props.dataKey);
 
                 if (selectedItemIndex !== 0) {
                     let movedItem = value.splice(selectedItemIndex, 1)[0];
@@ -87,7 +74,7 @@ export class OrderListControls extends Component {
 
             for (let i = this.props.selection.length - 1; i >= 0; i--) {
                 let selectedItem = this.props.selection[i];
-                let selectedItemIndex = ObjectUtils.findIndexInList(selectedItem, value);
+                let selectedItemIndex = ObjectUtils.findIndexInList(selectedItem, value, this.props.dataKey);
 
                 if (selectedItemIndex !== (value.length - 1)) {
                     let movedItem = value[selectedItemIndex];
@@ -116,7 +103,7 @@ export class OrderListControls extends Component {
 
             for (let i = this.props.selection.length - 1; i >= 0; i--) {
                 let selectedItem = this.props.selection[i];
-                let selectedItemIndex = ObjectUtils.findIndexInList(selectedItem, value);
+                let selectedItemIndex = ObjectUtils.findIndexInList(selectedItem, value, this.props.dataKey);
 
                 if (selectedItemIndex !== (value.length - 1)) {
                     let movedItem = value.splice(selectedItemIndex, 1)[0];

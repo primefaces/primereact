@@ -1,35 +1,8 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types';
 import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 import { Ripple } from '../ripple/Ripple';
 
 export class OrderListSubList extends Component {
-
-    static defaultProps = {
-        value: null,
-        selection: null,
-        header: null,
-        listStyle: null,
-        itemTemplate: null,
-        dragdrop: false,
-        tabIndex: null,
-        onItemClick: null,
-        onItemKeyDown: null,
-        onChange: null
-    }
-
-    static propTypes = {
-        value: PropTypes.array,
-        selection: PropTypes.array,
-        header: PropTypes.string,
-        listStyle: PropTypes.object,
-        itemTemplate: PropTypes.func,
-        dragdrop: PropTypes.bool,
-        tabIndex: PropTypes.number,
-        onItemClick: PropTypes.func,
-        onItemKeyDown: PropTypes.func,
-        onChange: PropTypes.func
-    }
 
     constructor(props) {
         super(props);
@@ -41,7 +14,7 @@ export class OrderListSubList extends Component {
     }
 
     isSelected(item) {
-        return ObjectUtils.findIndexInList(item, this.props.selection) !== -1;
+        return ObjectUtils.findIndexInList(item, this.props.selection, this.props.dataKey) !== -1;
     }
 
     onDragStart(event, index) {

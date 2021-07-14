@@ -15,6 +15,7 @@ export class OrderList extends Component {
         listStyle: null,
         dragdrop: false,
         tabIndex: 0,
+        dataKey: null,
         onChange: null,
         itemTemplate: null
     }
@@ -28,6 +29,7 @@ export class OrderList extends Component {
         listStyle: PropTypes.object,
         dragdrop: PropTypes.bool,
         tabIndex: PropTypes.number,
+        dataKey: PropTypes.string,
         onChange: PropTypes.func,
         itemTemplate: PropTypes.func
     }
@@ -45,7 +47,7 @@ export class OrderList extends Component {
 
     onItemClick(event) {
         let metaKey = (event.originalEvent.metaKey || event.originalEvent.ctrlKey);
-        let index = ObjectUtils.findIndexInList(event.value, this.state.selection);
+        let index = ObjectUtils.findIndexInList(event.value, this.state.selection, this.props.dataKey);
         let selected = (index !== -1);
         let selection;
 
@@ -168,9 +170,9 @@ export class OrderList extends Component {
 
         return (
             <div ref={(el) => this.element = el} id={this.props.id} className={className} style={this.props.style}>
-                <OrderListControls value={this.props.value} selection={this.state.selection} onReorder={this.onReorder} />
+                <OrderListControls value={this.props.value} selection={this.state.selection} onReorder={this.onReorder} dataKey={this.props.dataKey} />
                 <OrderListSubList ref={(el) => this.subList = el} value={this.props.value} selection={this.state.selection} onItemClick={this.onItemClick} onItemKeyDown={this.onItemKeyDown}
-                    itemTemplate={this.props.itemTemplate} header={this.props.header} listStyle={this.props.listStyle}
+                    itemTemplate={this.props.itemTemplate} header={this.props.header} listStyle={this.props.listStyle} dataKey={this.props.dataKey}
                     dragdrop={this.props.dragdrop} onDragStart={this.onDragStart} onDragEnter={this.onDragEnter} onDragEnd={this.onDragEnd} onDragLeave={this.onDragEnter} onDrop={this.onDrop}
                     onChange={this.props.onChange} tabIndex={this.props.tabIndex} />
             </div>

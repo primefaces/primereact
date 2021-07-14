@@ -14,6 +14,7 @@ export interface OrderListProps {
     listStyle?: object;
     dragdrop?: boolean;
     tabIndex?: number;
+    dataKey?: string;
     onChange?(e: OrderListChangeParams): void;
     itemTemplate?(item: any): React.ReactNode;
 }
