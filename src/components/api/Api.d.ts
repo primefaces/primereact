@@ -20,12 +20,12 @@ declare const PrimeReact: APIOptions;
 export default PrimeReact;
 
 // Locale
-export declare function locale(locale: string): object;
+export declare function locale(locale: string): { locale: string, options: object };
 export declare function addLocale(locale: string, options: object): void;
 export declare function updateLocaleOption(key: string, value: any, locale: string): void;
 export declare function updateLocaleOptions(options: object, locale: string): void;
-export declare function localeOption(key: string, locale: string): void;
-export declare function localeOptions(locale: string): void;
+export declare function localeOption(key: string, locale: string): any;
+export declare function localeOptions(locale: string): object;
 
 // Icons
 export interface PrimeIconsOptions {
