@@ -41,7 +41,7 @@ export class KeyFilterDemo extends Component {
                                 <InputText id="alpha" keyfilter="alpha"/>
                             </div>
                             <div className="p-field p-col-12 p-md-3">
-                            <label htmlFor="alphanum">Alphanumberic</label>
+                            <label htmlFor="alphanum">Alphanumeric</label>
                                 <InputText id="alphanum" keyfilter="alphanum" />
                             </div>
                             <div className="p-field p-col-12 p-md-3">
