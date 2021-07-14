@@ -19,9 +19,15 @@ const ChartProps = [
     },
     {
         name: 'options',
-        type: 'any',
+        type: 'object',
         default: 'null',
         description: 'Options to customize the chart.'
+    },
+    {
+        name: 'plugins',
+        type: 'array',
+        default: 'null',
+        description: 'Used to custom plugins of the chart.'
     },
     {
         name: 'width',

@@ -122,9 +122,15 @@ const options = {
                             </tr>
                             <tr>
                                 <td>options</td>
-                                <td>any</td>
+                                <td>object</td>
                                 <td>null</td>
                                 <td>Options to customize the chart.</td>
+                            </tr>
+                            <tr>
+                                <td>plugins</td>
+                                <td>any[]</td>
+                                <td>null</td>
+                                <td>Used to custom plugins of the chart.</td>
                             </tr>
                             <tr>
                                 <td>width</td>

@@ -9,6 +9,7 @@ export class Chart extends Component {
         type: null,
         data: null,
         options: null,
+        plugins: null,
         width: null,
         height: null,
         style: null,
@@ -20,6 +21,7 @@ export class Chart extends Component {
         type: PropTypes.string,
         data: PropTypes.object,
         options: PropTypes.object,
+        plugins: PropTypes.array,
         width: PropTypes.string,
         height: PropTypes.string,
         style: PropTypes.object,
@@ -37,7 +39,8 @@ export class Chart extends Component {
                 this.chart = new module.default(this.canvas, {
                     type: this.props.type,
                     data: this.props.data,
-                    options: this.props.options
+                    options: this.props.options,
+                    plugins: this.props.plugins
                 });
             }
         });

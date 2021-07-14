@@ -5,6 +5,7 @@ export interface ChartProps {
     type?: string;
     data?: object;
     options?: object;
+    plugins?: any[];
     width?: string;
     height?: string;
     style?: object;
