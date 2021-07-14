@@ -401,6 +401,7 @@ export class ListBox extends Component {
         if (this.props.virtualScrollerOptions) {
             const virtualScrollerProps = { ...this.props.virtualScrollerOptions, ...{
                 items: visibleOptions,
+                onLazyLoad: (event) => this.props.virtualScrollerOptions.onLazyLoad({...event, ...{ filter: this.getFilterValue() }}),
                 itemTemplate: (item, options) => item && this.renderItem(item, options.index),
                 contentTemplate: (options) => {
                     const className = classNames('p-listbox-list', options.className);

@@ -140,6 +140,7 @@ class DropdownPanelComponent extends Component {
                 style: {...this.props.virtualScrollerOptions.style, ...{ height: this.props.scrollHeight }},
                 className: classNames('p-dropdown-items-wrapper', this.props.virtualScrollerOptions.className),
                 items: this.props.visibleOptions,
+                onLazyLoad: (event) => this.props.virtualScrollerOptions.onLazyLoad({...event, ...{ filter: this.props.filterValue }}),
                 itemTemplate: (item, options) => item && this.renderItem(item, options.index),
                 contentTemplate: (options) => {
                     const className = classNames('p-dropdown-items', options.className);

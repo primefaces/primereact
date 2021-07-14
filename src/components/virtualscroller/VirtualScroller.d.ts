@@ -72,6 +72,12 @@ interface VirtualScrollerChangeParams {
     numItems: VirtualScrollerStateType;
 }
 
+interface VirtualScrollerLazyParams {
+    first: VirtualScrollerStateType;
+    last: VirtualScrollerStateType;
+    [key: string]: any;
+}
+
 export interface VirtualScrollerProps {
     id?: string;
     style?: object;
@@ -90,7 +96,7 @@ export interface VirtualScrollerProps {
     contentTemplate?: VirtualScrollerContentTemplateType;
     onScroll?(e: React.UIEvent<HTMLElement>): void;
     onScrollIndexChange?(e: VirtualScrollerChangeParams): void;
-    onLazyLoad?(e: VirtualScrollerChangeParams): void;
+    onLazyLoad?(e: VirtualScrollerLazyParams): void;
 }
 
 export declare class VirtualScroller extends React.Component<VirtualScrollerProps, any> {
