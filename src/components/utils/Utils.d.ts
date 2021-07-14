@@ -95,7 +95,7 @@ export declare class ObjectUtils {
     static isFunction(obj: any): boolean;
     static findDiffKeys(obj1: any, obj2: any): object;
     static reorderArray(value: any, from: number, to: number): void;
-    static findIndexInList(value: any, list: any[]): number;
+    static findIndexInList(value: any, list: any[], dataKey?: string): number;
     static getJSXElement(obj: any, ...params: any[]): any;
     static removeAccents(str: any): string;
     static isEmpty(value: any): boolean;

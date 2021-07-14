@@ -111,19 +111,12 @@ export default class ObjectUtils {
         }
     }
 
-    static findIndexInList(value, list) {
-        let index = -1;
-
-        if(list) {
-            for(let i = 0; i < list.length; i++) {
-                if(list[i] === value) {
-                    index = i;
-                    break;
-                }
-            }
+    static findIndexInList(value, list, dataKey) {
+        if (list) {
+            return dataKey ? list.findIndex(item => this.equals(item, value, dataKey)) : list.findIndex(item => item === value);
         }
 
-        return index;
+        return -1;
     }
 
     static getJSXElement(obj, ...params) {
