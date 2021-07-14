@@ -27,7 +27,7 @@ const MentionProps = [
         name: 'trigger',
         type: 'string|array',
         default: '@',
-        description: 'TODO'
+        description: 'Set trigger keyword.'
     },
     {
         name: 'suggestions',
@@ -165,7 +165,7 @@ const MentionEvents = [
             {
                 name: 'event.trigger',
                 type: 'object',
-                description: 'TODO'
+                description: 'Current trigger keyword.'
             }
         ]
     },
@@ -181,7 +181,7 @@ const MentionEvents = [
             {
                 name: 'event.suggestion',
                 type: 'object',
-                description: 'TODO'
+                description: 'Selected item'
             }
         ]
     },

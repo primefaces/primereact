@@ -463,7 +463,7 @@ import { Mention } from 'primereact/mention';
                             <td>trigger</td>
                             <td>string|array</td>
                             <td>@</td>
-                            <td>TODO</td>
+                            <td>Set trigger keyword.</td>
                         </tr>
                         <tr>
                             <td>suggestions</td>
@@ -592,14 +592,14 @@ import { Mention } from 'primereact/mention';
                         <tr>
                             <td>onSearch</td>
                             <td>event.originalEvent: Browser event <br />
-                                event.trigger:
+                                event.trigger: Current trigger keyword.
                             </td>
                             <td>Callback to invoke when search. </td>
                         </tr>
                         <tr>
                             <td>onSelect</td>
                             <td>event.originalEvent: Browser event<br />
-                                event.suggestion:
+                                event.suggestion: Selected item
                             </td>
                             <td>Callback to invoke when selection changes.</td>
                         </tr>
