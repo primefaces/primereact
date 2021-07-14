@@ -2604,23 +2604,23 @@ export class Calendar extends Component {
         if (this.props.monthNavigator && this.props.view !== 'month') {
             const viewDate = this.getViewDate();
             const viewMonth = viewDate.getMonth();
-            const displayedMonthNames = monthNames.filter((month, index) => (!this.isInMinYear(viewDate) || index >= this.props.minDate.getMonth()) && (!this.isInMaxYear(viewDate) || index <= this.props.maxDate.getMonth()));
+            const displayedMonthOptions = monthNames.map((month, index) => ((!this.isInMinYear(viewDate) || index >= this.props.minDate.getMonth()) && (!this.isInMaxYear(viewDate) || index <= this.props.maxDate.getMonth())) ? { label: month, value: index, index } : null).filter(option => !!option);
+            const displayedMonthNames = displayedMonthOptions.map(option => option.label);
             const content = (
                 <select className="p-datepicker-month" onChange={(e) => this.onMonthDropdownChange(e, e.target.value)} value={viewMonth}>
                     {
-                        displayedMonthNames.map((month, index) => <option key={month} value={index}>{month}</option>)
+                        displayedMonthOptions.map(option => <option key={option.label} value={option.value}>{option.label}</option>)
                     }
                 </select>
             );
 
             if (this.props.monthNavigatorTemplate) {
-                const options = displayedMonthNames.map((name, i) => ({ label: name, value: i, index: i }));
                 const defaultContentOptions = {
                     onChange: this.onMonthDropdownChange,
                     className: 'p-datepicker-month',
                     value: viewMonth,
                     names: displayedMonthNames,
-                    options,
+                    options: displayedMonthOptions,
                     element: content,
                     props: this.props
                 };
