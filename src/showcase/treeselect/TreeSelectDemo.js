@@ -14,6 +14,7 @@ export class TreeSelectDemo extends Component {
             nodes: null,
             selectedNodeKey1: null,
             selectedNodeKey2: null,
+            selectedNodeKey3: '0-1',
             selectedNodeKeys1: null,
             selectedNodeKeys2: null
         };
@@ -49,6 +50,9 @@ export class TreeSelectDemo extends Component {
 
                         <h5>Filter</h5>
                         <TreeSelect value={this.state.selectedNodeKey2} options={this.state.nodes} onChange={(e) => this.setState({ selectedNodeKey2: e.value })} filter placeholder="Select Items"></TreeSelect>
+
+                        <h5>Initial Value</h5>
+                        <TreeSelect value={this.state.selectedNodeKey3} options={this.state.nodes} onChange={(e) => this.setState({ selectedNodeKey3: e.value })} placeholder="Select Item"></TreeSelect>
                     </div>
                 </div>
 
