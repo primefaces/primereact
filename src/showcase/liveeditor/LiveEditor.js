@@ -93,7 +93,7 @@ export const useLiveEditor = () => {
                             'react': dependencies['react'],
                             'react-dom': dependencies['react-dom'],
                             'react-transition-group': dependencies['react-transition-group'],
-                            'primereact': '^6.4.0', // latest
+                            'primereact': '^6.5.0', // latest
                             'primeflex': dependencies['primeflex'],
                             'primeicons': dependencies['primeicons']
                         }
