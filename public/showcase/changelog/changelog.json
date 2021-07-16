@@ -1,4 +1,368 @@
 {
+    "6.5.0": {
+        "multistatecheckbox": [
+            {
+                "number": 2195,
+                "title": "Add empty property to MultiStateCheckbox",
+                "url": "https://github.com/primefaces/primereact/issues/2195"
+            }
+        ],
+        "dropdown": [
+            {
+                "number": 2192,
+                "title": "Add filter parameter to the lazyLoad method of VirtualScroller on Dropdown, MultiSelect and Listbox",
+                "url": "https://github.com/primefaces/primereact/issues/2192"
+            },
+            {
+                "number": 2171,
+                "title": "Dropdown filter closing issue",
+                "url": "https://github.com/primefaces/primereact/issues/2171"
+            },
+            {
+                "number": 2162,
+                "title": "Rename OverlayEventBus to OverlayService",
+                "url": "https://github.com/primefaces/primereact/issues/2162"
+            }
+        ],
+        "listbox": [
+            {
+                "number": 2192,
+                "title": "Add filter parameter to the lazyLoad method of VirtualScroller on Dropdown, MultiSelect and Listbox",
+                "url": "https://github.com/primefaces/primereact/issues/2192"
+            }
+        ],
+        "multiselect": [
+            {
+                "number": 2192,
+                "title": "Add filter parameter to the lazyLoad method of VirtualScroller on Dropdown, MultiSelect and Listbox",
+                "url": "https://github.com/primefaces/primereact/issues/2192"
+            },
+            {
+                "number": 2162,
+                "title": "Rename OverlayEventBus to OverlayService",
+                "url": "https://github.com/primefaces/primereact/issues/2162"
+            }
+        ],
+        "virtualscroller": [
+            {
+                "number": 2192,
+                "title": "Add filter parameter to the lazyLoad method of VirtualScroller on Dropdown, MultiSelect and Listbox",
+                "url": "https://github.com/primefaces/primereact/issues/2192"
+            },
+            {
+                "number": 2196,
+                "title": "When the container is scrolled using the keyboard on VirtualScroller, this behavior does not continue when new elements are loaded.",
+                "url": "https://github.com/primefaces/primereact/issues/2196"
+            }
+        ],
+        "api": [
+            {
+                "number": 2181,
+                "title": "localeOption return type definition should be an any, not void",
+                "url": "https://github.com/primefaces/primereact/issues/2181"
+            }
+        ],
+        "checkbox": [
+            {
+                "number": 2173,
+                "title": "Add icon property to Checkbox",
+                "url": "https://github.com/primefaces/primereact/issues/2173"
+            }
+        ],
+        "sidebar": [
+            {
+                "number": 2185,
+                "title": "[bug] Sidebar Close button ripple effect on opposite side rather than on the button ",
+                "url": "https://github.com/primefaces/primereact/issues/2185"
+            }
+        ],
+        "mention": [
+            {
+                "number": 2178,
+                "title": "New Component: Mention",
+                "url": "https://github.com/primefaces/primereact/issues/2178"
+            },
+            {
+                "number": 2171,
+                "title": "Dropdown filter closing issue",
+                "url": "https://github.com/primefaces/primereact/issues/2171"
+            }
+        ],
+        "primereact.all.js": [
+            {
+                "number": 2178,
+                "title": "New Component: Mention",
+                "url": "https://github.com/primefaces/primereact/issues/2178"
+            },
+            {
+                "number": 2017,
+                "title": "New Component: Dock",
+                "url": "https://github.com/primefaces/primereact/issues/2017"
+            },
+            {
+                "number": 472,
+                "title": "New Component: Terminal",
+                "url": "https://github.com/primefaces/primereact/issues/472"
+            },
+            {
+                "number": 1268,
+                "title": "New Component: BlockUI ",
+                "url": "https://github.com/primefaces/primereact/issues/1268"
+            },
+            {
+                "number": 1975,
+                "title": "New Component: SpeedDial",
+                "url": "https://github.com/primefaces/primereact/issues/1975"
+            },
+            {
+                "number": 2162,
+                "title": "Rename OverlayEventBus to OverlayService",
+                "url": "https://github.com/primefaces/primereact/issues/2162"
+            }
+        ],
+        "utils": [
+            {
+                "number": 2178,
+                "title": "New Component: Mention",
+                "url": "https://github.com/primefaces/primereact/issues/2178"
+            }
+        ],
+        "dialog": [
+            {
+                "number": 2163,
+                "title": "Add onClick and onMaskClick events to Dialog",
+                "url": "https://github.com/primefaces/primereact/issues/2163"
+            }
+        ],
+        "chart": [
+            {
+                "number": 2186,
+                "title": "Add support for using plugins in the Chart component",
+                "url": "https://github.com/primefaces/primereact/issues/2186"
+            }
+        ],
+        "calendar": [
+            {
+                "number": 2174,
+                "title": "Changing month with monthNavigator issue on Inline Calendar",
+                "url": "https://github.com/primefaces/primereact/issues/2174"
+            },
+            {
+                "number": 2130,
+                "title": "Calendar min max doesn't work with showTime show second",
+                "url": "https://github.com/primefaces/primereact/issues/2130"
+            },
+            {
+                "number": 2158,
+                "title": "Add inputMode property to Calendar",
+                "url": "https://github.com/primefaces/primereact/issues/2158"
+            },
+            {
+                "number": 2162,
+                "title": "Rename OverlayEventBus to OverlayService",
+                "url": "https://github.com/primefaces/primereact/issues/2162"
+            }
+        ],
+        "common": [
+            {
+                "number": 1082,
+                "title": "Primereact should not act on the global style",
+                "url": "https://github.com/primefaces/primereact/issues/1082"
+            }
+        ],
+        "paginator": [
+            {
+                "number": 2030,
+                "title": "OnPage datatable call api twice ",
+                "url": "https://github.com/primefaces/primereact/issues/2030"
+            }
+        ],
+        "dock": [
+            {
+                "number": 2017,
+                "title": "New Component: Dock",
+                "url": "https://github.com/primefaces/primereact/issues/2017"
+            }
+        ],
+        "menuitem": [
+            {
+                "number": 2017,
+                "title": "New Component: Dock",
+                "url": "https://github.com/primefaces/primereact/issues/2017"
+            }
+        ],
+        "terminal": [
+            {
+                "number": 472,
+                "title": "New Component: Terminal",
+                "url": "https://github.com/primefaces/primereact/issues/472"
+            }
+        ],
+        "terminalservice": [
+            {
+                "number": 472,
+                "title": "New Component: Terminal",
+                "url": "https://github.com/primefaces/primereact/issues/472"
+            }
+        ],
+        "tree": [
+            {
+                "number": 1099,
+                "title": "Add onNodeClick and onNodeDoubleClick events to Tree",
+                "url": "https://github.com/primefaces/primereact/issues/1099"
+            }
+        ],
+        "datatable": [
+            {
+                "number": 2124,
+                "title": "No whitespace when cell editing in DataTable",
+                "url": "https://github.com/primefaces/primereact/issues/2124"
+            },
+            {
+                "number": 2160,
+                "title": "Add cellClassName property to DataTable",
+                "url": "https://github.com/primefaces/primereact/issues/2160"
+            },
+            {
+                "number": 2162,
+                "title": "Rename OverlayEventBus to OverlayService",
+                "url": "https://github.com/primefaces/primereact/issues/2162"
+            }
+        ],
+        "blockui": [
+            {
+                "number": 1268,
+                "title": "New Component: BlockUI ",
+                "url": "https://github.com/primefaces/primereact/issues/1268"
+            }
+        ],
+        "dataview": [
+            {
+                "number": 1115,
+                "title": "Add dataKey property to DataView",
+                "url": "https://github.com/primefaces/primereact/issues/1115"
+            }
+        ],
+        "speeddial": [
+            {
+                "number": 1975,
+                "title": "New Component: SpeedDial",
+                "url": "https://github.com/primefaces/primereact/issues/1975"
+            }
+        ],
+        "orderlist": [
+            {
+                "number": 2187,
+                "title": "Add dataKey property to OrderList and PickList components",
+                "url": "https://github.com/primefaces/primereact/issues/2187"
+            }
+        ],
+        "picklist": [
+            {
+                "number": 2187,
+                "title": "Add dataKey property to OrderList and PickList components",
+                "url": "https://github.com/primefaces/primereact/issues/2187"
+            }
+        ],
+        "autocomplete": [
+            {
+                "number": 2162,
+                "title": "Rename OverlayEventBus to OverlayService",
+                "url": "https://github.com/primefaces/primereact/issues/2162"
+            }
+        ],
+        "cascadeselect": [
+            {
+                "number": 2162,
+                "title": "Rename OverlayEventBus to OverlayService",
+                "url": "https://github.com/primefaces/primereact/issues/2162"
+            }
+        ],
+        "colorpicker": [
+            {
+                "number": 2162,
+                "title": "Rename OverlayEventBus to OverlayService",
+                "url": "https://github.com/primefaces/primereact/issues/2162"
+            }
+        ],
+        "confirmpopup": [
+            {
+                "number": 2162,
+                "title": "Rename OverlayEventBus to OverlayService",
+                "url": "https://github.com/primefaces/primereact/issues/2162"
+            }
+        ],
+        "menu": [
+            {
+                "number": 2162,
+                "title": "Rename OverlayEventBus to OverlayService",
+                "url": "https://github.com/primefaces/primereact/issues/2162"
+            }
+        ],
+        "overlayeventbus": [
+            {
+                "number": 2162,
+                "title": "Rename OverlayEventBus to OverlayService",
+                "url": "https://github.com/primefaces/primereact/issues/2162"
+            }
+        ],
+        "overlaypanel": [
+            {
+                "number": 2162,
+                "title": "Rename OverlayEventBus to OverlayService",
+                "url": "https://github.com/primefaces/primereact/issues/2162"
+            }
+        ],
+        "overlayservice": [
+            {
+                "number": 2162,
+                "title": "Rename OverlayEventBus to OverlayService",
+                "url": "https://github.com/primefaces/primereact/issues/2162"
+            }
+        ],
+        "password": [
+            {
+                "number": 2162,
+                "title": "Rename OverlayEventBus to OverlayService",
+                "url": "https://github.com/primefaces/primereact/issues/2162"
+            }
+        ],
+        "slidemenu": [
+            {
+                "number": 2162,
+                "title": "Rename OverlayEventBus to OverlayService",
+                "url": "https://github.com/primefaces/primereact/issues/2162"
+            }
+        ],
+        "splitbutton": [
+            {
+                "number": 2162,
+                "title": "Rename OverlayEventBus to OverlayService",
+                "url": "https://github.com/primefaces/primereact/issues/2162"
+            }
+        ],
+        "tieredmenu": [
+            {
+                "number": 2162,
+                "title": "Rename OverlayEventBus to OverlayService",
+                "url": "https://github.com/primefaces/primereact/issues/2162"
+            }
+        ],
+        "treeselect": [
+            {
+                "number": 2162,
+                "title": "Rename OverlayEventBus to OverlayService",
+                "url": "https://github.com/primefaces/primereact/issues/2162"
+            }
+        ],
+        "treetable": [
+            {
+                "number": 2162,
+                "title": "Rename OverlayEventBus to OverlayService",
+                "url": "https://github.com/primefaces/primereact/issues/2162"
+            }
+        ]
+    },
     "6.5.0-rc2": {
         "button": [
             {
