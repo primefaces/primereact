@@ -561,7 +561,7 @@ import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
 
 <CodeHighlight lang="js">
 {`
-npm install primeflex --save
+npm install primeflex@2.0.0 --save
 `}
 </CodeHighlight>
 

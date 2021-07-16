@@ -49,7 +49,7 @@
     "jspdf": "^1.5.3",
     "jspdf-autotable": "^3.2.5",
     "path": "^0.12.7",
-    "primeflex": "^2.0.0",
+    "primeflex": "2.0.0",
     "primeicons": "^4.1.0",
     "prismjs": "^1.15.0",
     "prop-types": "^15.6.2",

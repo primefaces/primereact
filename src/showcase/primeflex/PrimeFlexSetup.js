@@ -7,7 +7,7 @@ export class PrimeFlexSetup extends Component {
         return (
             <div>
                 <div className="content-section documentation" id="app-doc">
-                    <h1>PrimeFlex</h1>
+                    <h1>PrimeFlex (v2.0.0)</h1>
                     <p>PrimeFlex is a CSS utility library featuring various helpers such as a grid system, flexbox, spacing, elevation and more. Although it is not required, it is highly
                         recommended to add PrimeFlex as it is likely to need such utilities when developing applications with PrimeReact.</p>
 
@@ -16,7 +16,7 @@ export class PrimeFlexSetup extends Component {
 
 <CodeHighlight lang="js">
 {`
-npm install primeflex --save
+npm install primeflex@2.0.0 --save
 `}
 </CodeHighlight>
 

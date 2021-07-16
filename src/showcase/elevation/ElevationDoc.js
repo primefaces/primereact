@@ -31,7 +31,7 @@ export class ElevationDoc extends Component {
 </CodeHighlight>
 
                         <h5>Dependencies</h5>
-                        <p>PrimeFlex.</p>
+                        <p>PrimeFlex 2.0.0.</p>
                     </TabPanel>
 
                     <TabPanel header="Source">

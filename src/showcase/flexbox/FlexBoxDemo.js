@@ -559,7 +559,7 @@ export class FlexBoxDemo extends Component {
                     </div>
 
                     <h5>Dependencies</h5>
-                    <p>PrimeFlex.</p>
+                    <p>PrimeFlex 2.0.0.</p>
                 </div>
             </div>
         );

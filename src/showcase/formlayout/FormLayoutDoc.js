@@ -645,7 +645,7 @@ const FormLayoutDemo = () => {
                         <p>PrimeFlex is available at npm, if you have an existing application run the following command to download it to your project.</p>
 <CodeHighlight lang="js">
 {`
-npm install primeflex --save
+npm install primeflex@2.0.0 --save
 `}
 </CodeHighlight>
 
