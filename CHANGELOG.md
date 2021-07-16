@@ -1,5 +1,40 @@
 # Changelog
 
+## [6.5.0](https://github.com/primefaces/primereact/tree/6.5.0) (2021-07-16)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/6.5.0-rc.2...6.5.0)
+
+**Implemented New Features and Enhancements:**
+
+- Add empty property to MultiStateCheckbox [\#2195](https://github.com/primefaces/primereact/issues/2195)
+- Add filter parameter to the lazyLoad method of VirtualScroller on Dropdown, MultiSelect and Listbox [\#2192](https://github.com/primefaces/primereact/issues/2192)
+- Add dataKey property to OrderList and PickList components [\#2187](https://github.com/primefaces/primereact/issues/2187)
+- Add support for using plugins in the Chart component [\#2186](https://github.com/primefaces/primereact/issues/2186)
+- New Component: Mention [\#2178](https://github.com/primefaces/primereact/issues/2178)
+- Add icon property to Checkbox [\#2173](https://github.com/primefaces/primereact/issues/2173)
+- Add onClick and onMaskClick events to Dialog [\#2163](https://github.com/primefaces/primereact/issues/2163)
+- Rename OverlayEventBus to OverlayService [\#2162](https://github.com/primefaces/primereact/issues/2162)
+- Add cellClassName property to DataTable [\#2160](https://github.com/primefaces/primereact/issues/2160)
+- Add inputMode property to Calendar [\#2158](https://github.com/primefaces/primereact/issues/2158)
+- New Component: Dock [\#2017](https://github.com/primefaces/primereact/issues/2017)
+- New Component: SpeedDial [\#1975](https://github.com/primefaces/primereact/issues/1975)
+- New Component: BlockUI  [\#1268](https://github.com/primefaces/primereact/issues/1268)
+- Add dataKey property to DataView [\#1115](https://github.com/primefaces/primereact/issues/1115)
+- Add onNodeClick and onNodeDoubleClick events to Tree [\#1099](https://github.com/primefaces/primereact/issues/1099)
+- Primereact should not act on the global style [\#1082](https://github.com/primefaces/primereact/issues/1082)
+- New Component: Terminal [\#472](https://github.com/primefaces/primereact/issues/472)
+
+**Fixed bugs:**
+
+- When the container is scrolled using the keyboard on VirtualScroller, this behavior does not continue when new elements are loaded. [\#2196](https://github.com/primefaces/primereact/issues/2196)
+- \[bug\] Sidebar Close button ripple effect on opposite side rather than on the button  [\#2185](https://github.com/primefaces/primereact/issues/2185)
+- localeOption return type definition should be an any, not void [\#2181](https://github.com/primefaces/primereact/issues/2181)
+- Changing month with monthNavigator issue on Inline Calendar [\#2174](https://github.com/primefaces/primereact/issues/2174)
+- Dropdown filter closing issue [\#2171](https://github.com/primefaces/primereact/issues/2171)
+- Calendar min max doesn't work with showTime show second [\#2130](https://github.com/primefaces/primereact/issues/2130)
+- No whitespace when cell editing in DataTable [\#2124](https://github.com/primefaces/primereact/issues/2124)
+- OnPage datatable call api twice  [\#2030](https://github.com/primefaces/primereact/issues/2030)
+
 ## [6.5.0-rc.2](https://github.com/primefaces/primereact/tree/6.5.0-rc.2) (2021-06-28)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/6.5.0-rc.1...6.5.0-rc.2)

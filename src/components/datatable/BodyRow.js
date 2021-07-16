@@ -133,7 +133,7 @@ export class BodyRow extends Component {
 
     onKeyDown(event) {
         if (this.isFocusable() && !this.props.allowCellSelection) {
-            const row = event.currentTarget;
+            const { target, currentTarget: row } = event;
 
             switch (event.which) {
                 //down arrow
@@ -158,11 +158,19 @@ export class BodyRow extends Component {
                     event.preventDefault();
                     break;
 
-                //enter or space
+                //enter
                 case 13: // @deprecated
-                case 32:
                     this.onClick(event);
                     event.preventDefault();
+                    break;
+
+                //space
+                case 32:
+                    if (target.nodeName !== 'INPUT' && target.nodeName !== 'TEXTAREA' && !target.readOnly) {
+                        this.onClick(event);
+                        event.preventDefault();
+                    }
+
                     break;
 
                 default:
