@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-//import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
@@ -423,16 +422,62 @@ const MentionDemo = () => {
 import { Mention } from 'primereact/mention';
 `}
 </CodeHighlight>
+
+                        <h5>Getting Started</h5>
+                        <p>Mention is used as a controlled component with <i>suggestions</i> and <i>onSearch</i> properties.</p>
+
+<CodeHighlight>
+{`
+<Mention suggestions={suggestions} onSearch={onSearch} field="nickname" placeholder="Please enter @ to mention people" />
+`}
+</CodeHighlight>
+
+<CodeHighlight lang="js">
+{`
+const customers = // datasource
+
+const onSearch = (event) => {
+    //in a real application, make a request to a remote url with the query and return suggestions, for demo we filter at client side
+    setTimeout(() => {
+        const query = event.query;
+        let suggestions;
+
+        if (!query.trim().length) {
+            suggestions = [...customers];
+        }
+        else {
+            suggestions = customers.filter((customer) => {
+                return customer.nickname.toLowerCase().startsWith(query.toLowerCase());
+            });
+        }
+
+        setSuggestions(suggestions);
+    }, 250);
+}
+`}
+</CodeHighlight>
+
+            <h5>Trigger</h5>
+            <p>It is used to define the expected keyword/s in the input field to mention someone or something.</p>
+<CodeHighlight>
+{`
+<Mention trigger="@" suggestions={suggestions} onSearch={onSearch} field="nickname" placeholder="Please enter @ to mention people" />
+
+<Mention trigger={['@', '#']} suggestions={suggestions} onSearch={onSearch} field="nickname" placeholder="Please enter @ to mention people" />
+`}
+</CodeHighlight>
+
             <h5>Properties</h5>
+            <p>InputTextarea passes any attribute to the underlying textarea element, additional attributes are as follows;</p>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Default</th>
-                        <th>Description</th>
-                    </tr>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Default</th>
+                            <th>Description</th>
+                        </tr>
                     </thead>
                     <tbody>
                         <tr>
@@ -646,12 +691,12 @@ import { Mention } from 'primereact/mention';
             <h5>Dependencies</h5>
             <p>None.</p>
 
-                </TabPanel>
-            {
-                useLiveEditorTabs({ name: 'MentionDemo', sources: this.sources, extFiles: this.extFiles })
-            }
-            </TabView>
-        </div>
+            </TabPanel>
+                    {
+                        useLiveEditorTabs({ name: 'MentionDemo', sources: this.sources })
+                    }
+                </TabView>
+            </div>
         )
     }
 }

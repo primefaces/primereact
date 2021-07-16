@@ -262,7 +262,6 @@ import { InputText } from 'primereact/inputtext';
 
                         <h5>Properties</h5>
                         <p>InputText passes any valid attribute to the underlying input element. Extended properties are as follows;</p>
-                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
