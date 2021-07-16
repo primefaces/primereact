@@ -142,21 +142,16 @@ export class Paginator extends Component {
     }
 
     onRowsChange(event) {
-        const rows = event.value;
-
-        this.isRowChanged = rows !== this.props.rows;
-        this.changePage(0, rows);
+        this.changePage(0, event.value);
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (this.props.rows !== prevProps.rows && !this.isRowChanged) {
+        if (this.props.rows !== prevProps.rows) {
             this.changePage(0, this.props.rows);
         }
         else if (this.getPage() > 0 && prevProps.totalRecords !== this.props.totalRecords && this.props.first >= this.props.totalRecords) {
             this.changePage((this.getPageCount() - 1) * this.props.rows, this.props.rows);
         }
-
-        this.isRowChanged = false;
     }
 
     renderElement(key, template) {
