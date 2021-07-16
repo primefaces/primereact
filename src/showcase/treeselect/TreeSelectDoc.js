@@ -99,7 +99,7 @@ const TreeSelectDemo = () => {
                 <TreeSelect value={selectedNodeKey2} options={nodes} onChange={(e) => setSelectedNodeKey2(e.value)} filter placeholder="Select Items"></TreeSelect>
 
                 <h5>Initial Value</h5>
-                <TreeSelect value={selectedNodeKey3} options={nodes} onChange={setSelectedNodeKey3(e.value)} placeholder="Select Item"></TreeSelect>
+                <TreeSelect value={selectedNodeKey3} options={nodes} onChange={(e) => setSelectedNodeKey3(e.value)} placeholder="Select Item"></TreeSelect>
             </div>
         </div>
     );
@@ -143,7 +143,7 @@ const TreeSelectDemo = () => {
                 <TreeSelect value={selectedNodeKey2} options={nodes} onChange={(e) => setSelectedNodeKey2(e.value)} filter placeholder="Select Items"></TreeSelect>
 
                 <h5>Initial Value</h5>
-                <TreeSelect value={selectedNodeKey3} options={nodes} onChange={setSelectedNodeKey3(e.value)} placeholder="Select Item"></TreeSelect>
+                <TreeSelect value={selectedNodeKey3} options={nodes} onChange={(e) => setSelectedNodeKey3(e.value)} placeholder="Select Item"></TreeSelect>
             </div>
         </div>
     );
