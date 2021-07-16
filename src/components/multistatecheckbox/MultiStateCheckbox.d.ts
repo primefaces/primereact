@@ -47,6 +47,7 @@ export interface MultiStateCheckboxProps {
     className?: string;
     disabled?: boolean;
     readOnly?: boolean;
+    empty?: boolean;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;

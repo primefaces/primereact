@@ -19,6 +19,7 @@ export class MultiStateCheckbox extends Component {
         className: null,
         disabled: false,
         readOnly: false,
+        empty: true,
         tooltip: null,
         tooltipOptions: null,
         ariaLabelledBy: null,
@@ -39,6 +40,7 @@ export class MultiStateCheckbox extends Component {
         className: PropTypes.string,
         disabled: PropTypes.bool,
         readOnly: PropTypes.bool,
+        empty: PropTypes.bool,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
         ariaLabelledBy: PropTypes.string,
@@ -89,7 +91,7 @@ export class MultiStateCheckbox extends Component {
     findNextOption() {
         if (this.props.options) {
             const { index } = this.findSelectedOptionMap();
-            return index === this.props.options.length - 1 ? null : this.props.options[index + 1];
+            return index === this.props.options.length - 1 ? (this.props.empty ? null : this.props.options[0]) : this.props.options[index + 1];
         }
 
         return null;
@@ -139,6 +141,10 @@ export class MultiStateCheckbox extends Component {
 
         if (this.props.tooltip && !this.props.disabled) {
             this.renderTooltip();
+        }
+
+        if (!this.props.empty && this.props.value === null) {
+            this.toggle();
         }
     }
 

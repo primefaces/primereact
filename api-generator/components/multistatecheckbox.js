@@ -66,6 +66,12 @@ const MultiStateCheckboxProps = [
         description: 'When present, it specifies that the element value cannot be altered.'
     },
     {
+        name: 'empty',
+        type: 'boolean',
+        default: 'true',
+        description: 'If false, the empty state is skipped in the chekbox.'
+    },
+    {
         name: 'tooltip',
         type: 'any',
         default: 'null',

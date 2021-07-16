@@ -241,6 +241,12 @@ import {MultiStateCheckbox} from 'primereact/multistatecheckbox';
                                     <td>When present, it specifies that the element value cannot be altered.</td>
                                 </tr>
                                 <tr>
+                                    <td>empty</td>
+                                    <td>boolean</td>
+                                    <td>true</td>
+                                    <td>If false, the empty state is skipped in the chekbox.</td>
+                                </tr>
+                                <tr>
                                     <td>tooltip</td>
                                     <td>any</td>
                                     <td>null</td>
