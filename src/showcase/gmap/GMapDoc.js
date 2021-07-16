@@ -171,7 +171,7 @@ export class GMapDemo extends Component {
             'hooks': {
                 tabName: 'Hooks Source',
                 content: `
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { GMap } from 'primereact/gmap';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
@@ -309,7 +309,7 @@ const GMapDemo = () => {
             'ts': {
                 tabName: 'TS Source',
                 content: `
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { GMap } from 'primereact/gmap';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
