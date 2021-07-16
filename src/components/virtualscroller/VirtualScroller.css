@@ -4,6 +4,7 @@
     contain: strict;
     transform: translateZ(0);
     will-change: scroll-position;
+    outline: 0 none;
 }
 
 .p-virtualscroller-content {

@@ -565,7 +565,7 @@ export class VirtualScroller extends Component {
         const content = this.renderContent();
 
         return (
-            <div ref={(el) => this.element = el} className={className} style={this.props.style} onScroll={this.onScroll}>
+            <div ref={(el) => this.element = el} className={className} tabIndex={0} style={this.props.style} onScroll={this.onScroll}>
                 {content}
                 <div ref={(el) => this.spacer = el} className="p-virtualscroller-spacer"></div>
                 {loader}
