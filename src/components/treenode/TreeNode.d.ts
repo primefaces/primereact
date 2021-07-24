@@ -3,7 +3,7 @@ export default interface TreeNode {
     label?: string;
     data?: any;
     icon?: string;
-    children: TreeNode[];
+    children?: TreeNode[];
     style?: object;
     className?: string;
     droppable?: boolean;
