@@ -10,7 +10,7 @@ export interface TieredMenuProps {
     style?: object;
     className?: string;
     autoZIndex?: boolean;
-    bazeZIndex?: number;
+    baseZIndex?: number;
     appendTo?: TieredMenuAppendToType;
     transitionOptions?: object;
     onShow?(e: React.SyntheticEvent): void;

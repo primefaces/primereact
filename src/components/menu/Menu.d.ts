@@ -10,7 +10,7 @@ export interface MenuProps {
     style?: object;
     className?: string;
     autoZIndex?: boolean;
-    bazeZIndex?: number;
+    baseZIndex?: number;
     appendTo?: MenuAppendToType;
     transitionOptions?: object;
     onShow?(e: React.SyntheticEvent): void;
