@@ -3959,7 +3959,7 @@
       color: #212529; }
     .p-menu .p-menuitem-link .p-menuitem-icon {
       color: #212529;
-      margin-right: 0.5rem; }
+      margin-inline-end: 0.5rem; }
     .p-menu .p-menuitem-link .p-submenu-icon {
       color: #212529; }
     .p-menu .p-menuitem-link:not(.p-disabled):hover {
@@ -4178,9 +4178,9 @@
   border-radius: 4px;
   transition: box-shadow 0.15s; }
   .p-panelmenu .p-panelmenu-header > a .p-panelmenu-icon {
-    margin-right: 0.5rem; }
+    margin-inline-end: 0.5rem; }
   .p-panelmenu .p-panelmenu-header > a .p-menuitem-icon {
-    margin-right: 0.5rem; }
+    margin-inline-end: 0.5rem; }
   .p-panelmenu .p-panelmenu-header > a:focus {
     outline: 0 none;
     outline-offset: 0;

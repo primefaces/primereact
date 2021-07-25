@@ -3971,7 +3971,7 @@
       color: rgba(255, 255, 255, 0.87); }
     .p-menu .p-menuitem-link .p-menuitem-icon {
       color: rgba(255, 255, 255, 0.6);
-      margin-right: 0.5rem; }
+      margin-inline-end: 0.5rem; }
     .p-menu .p-menuitem-link .p-submenu-icon {
       color: rgba(255, 255, 255, 0.6); }
     .p-menu .p-menuitem-link:not(.p-disabled):hover {
@@ -4190,9 +4190,9 @@
   border-radius: 4px;
   transition: none; }
   .p-panelmenu .p-panelmenu-header > a .p-panelmenu-icon {
-    margin-right: 0.5rem; }
+    margin-inline-end: 0.5rem; }
   .p-panelmenu .p-panelmenu-header > a .p-menuitem-icon {
-    margin-right: 0.5rem; }
+    margin-inline-end: 0.5rem; }
   .p-panelmenu .p-panelmenu-header > a:focus {
     outline: 0 none;
     outline-offset: 0;
