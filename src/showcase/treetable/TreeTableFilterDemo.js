@@ -271,6 +271,75 @@ const TreeTableFilterDemo = () => {
     )
 }
                 `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="./NodeService.js"></script>
+
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/inputtext/inputtext.min.js"></script>
+        <script src="https://unpkg.com/primereact/column/column.min.js"></script>
+        <script src="https://unpkg.com/primereact/treetable/treetable.min.js"></script>
+        <script src="https://unpkg.com/primereact/inputtext/inputtext.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const { Column } = primereact.column;
+const { TreeTable } = primereact.treetable;
+const { InputText } = primereact.inputtext;
+
+const TreeTableFilterDemo = () => {
+    const [nodes, setNodes] = useState([]);
+    const [globalFilter1, setGlobalFilter1] = useState(null);
+    const [globalFilter2, setGlobalFilter2] = useState(null);
+    const nodeservice = new NodeService();
+
+    const treeTableFuncMap = {
+        'globalFilter1': setGlobalFilter1,
+        'globalFilter2': setGlobalFilter2
+    };
+
+    useEffect(() => {
+        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const getHeader = (globalFilterKey) => {
+        return (
+            <div className="p-text-right">
+                <div className="p-input-icon-left">
+                    <i className="pi pi-search"></i>
+                    <InputText type="search" onInput={(e) => treeTableFuncMap[\`\${globalFilterKey}\`](e.target.value)} placeholder="Global Search" size="50" />
+                </div>
+            </div>
+        );
+    }
+
+    let header1 = getHeader('globalFilter1');
+    let header2 = getHeader('globalFilter2');
+
+    return (
+        <div>
+            <div className="card">
+                <h5>Lenient Filter</h5>
+                <TreeTable value={nodes} globalFilter={globalFilter1} header={header1}>
+                    <Column field="name" header="Name" expander filter></Column>
+                    <Column field="size" header="Size" filter></Column>
+                    <Column field="type" header="Type" filter></Column>
+                </TreeTable>
+            </div>
+
+            <div className="card">
+                <h5>Strict Filter</h5>
+                <TreeTable value={nodes} globalFilter={globalFilter2} header={header2} filterMode="strict">
+                    <Column field="name" header="Name" expander filter></Column>
+                    <Column field="size" header="Size" filter></Column>
+                    <Column field="type" header="Type" filter></Column>
+                </TreeTable>
+            </div>
+        </div>
+    )
+}
+                `
             }
         }
     }

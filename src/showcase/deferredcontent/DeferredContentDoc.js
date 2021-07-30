@@ -17,7 +17,7 @@ import { DeferredContent } from 'primereact/deferredcontent';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Toast } from 'primereact/toast';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
 
 export class DeferredContentDemo extends Component {
 
@@ -80,9 +80,9 @@ import { DeferredContent } from 'primereact/deferredcontent';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Toast } from 'primereact/toast';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
 
-export class DeferredContentDemo extends Component {
+const DeferredContentDemo = () => {
     const toast = useRef(null);
     const [products, setProducts] = useState(null);
     const productService = new ProductService();
@@ -133,9 +133,9 @@ import { DeferredContent } from 'primereact/deferredcontent';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Toast } from 'primereact/toast';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
 
-export class DeferredContentDemo extends Component {
+const DeferredContentDemo = () => {
     const toast = useRef(null);
     const [products, setProducts] = useState(null);
     const productService = new ProductService();
@@ -178,6 +178,66 @@ export class DeferredContentDemo extends Component {
 }
                 `
             },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="./ProductService.js"></script>
+
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/deferredcontent/deferredcontent.min.js"></script>
+        <script src="https://unpkg.com/primereact/column/column.min.js"></script>
+        <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>
+        <script src="https://unpkg.com/primereact/toast/toast.min.js"></script>`,
+                content: `
+const { useEffect, useState, useRef } = React;
+const { DeferredContent } = primereact.deferredcontent;
+const { Column } = primereact.column;
+const { DataTable } = primereact.datatable;
+const { Toast } = primereact.toast;
+
+const DeferredContentDemo = () => {
+    const toast = useRef(null);
+    const [products, setProducts] = useState(null);
+    const productService = new ProductService();
+
+    const onImageLoad = () => {
+        toast.current.show({ severity: 'success', summary: 'Image Initialized', detail: 'Scroll down to load the datatable' });
+    }
+
+    const onDataLoad = () => {
+        productService.getProductsSmall().then(data => setProducts(data));
+        toast.current.show({ severity: 'success', summary: 'Data Initialized', detail: 'Render Completed' });
+    }
+
+    return (
+        <div>
+            <Toast ref={toast} />
+
+            <div className="card">
+                <div style={{ height: '800px' }}>
+                    Scroll down to lazy load an image and the DataTable which initiates a query that is not executed on initial page load to speed up load performance.
+                </div>
+
+                <DeferredContent onLoad={onImageLoad}>
+                    <img src="showcase/demo/images/galleria/galleria1.jpg" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt="Prime"/>
+                </DeferredContent>
+
+                <div style={{height: '500px'}}></div>
+
+                <DeferredContent onLoad={onDataLoad}>
+                    <DataTable value={products}>
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="quantity" header="Quantity"></Column>
+                    </DataTable>
+                </DeferredContent>
+            </div>
+        </div>
+    )
+}
+                `
+            }
         }
     }
 

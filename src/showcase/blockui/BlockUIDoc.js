@@ -232,11 +232,86 @@ export const BlockUIDemo = () => {
     )
 }
                 `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <link rel="stylesheet" href="./BlockUIDemo.css" />
+
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/blockui/blockui.min.js"></script>
+        <script src="https://unpkg.com/primereact/button/button.min.js"></script>
+        <script src="https://unpkg.com/primereact/panel/panel.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const { BlockUI } = primereact.blockui;
+const { Button } = primereact.button;
+const { Panel } = primereact.panel;
+
+const BlockUIDemo = () => {
+
+    const [blockedPanel, setBlockedPanel] = useState(false);
+    const [blockedDocument, setBlockedDocument] = useState(false);
+
+    useEffect(() => {
+        if(blockedDocument) {
+            setTimeout(() => {
+                setBlockedDocument(false);
+            }, 3000);
+        }
+    }, [blockedDocument])
+
+    const blockDocument = () => {
+        setBlockedDocument(true);
+    }
+
+    const blockPanel = () => {
+        setBlockedPanel(true);
+    }
+
+    const unblockPanel = () => {
+        setBlockedPanel(false);
+    }
+
+    return (
+        <div className="blockui-demo">
+            <div className="card">
+                <h5>Document</h5>
+                <BlockUI blocked={blockedDocument} fullScreen />
+
+                <Button type="button" label="Block" onClick={blockDocument} />
+
+                <h5>Panel</h5>
+                <Button type="button" label="Block" onClick={blockPanel} />
+                <Button type="button" label="Unblock" onClick={unblockPanel} />
+
+                <BlockUI blocked={blockedPanel}>
+                    <Panel header="Basic" style={{ marginTop: '20px' }}>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </Panel>
+                </BlockUI>
+
+                <BlockUI blocked={blockedPanel} template={<i className="pi pi-lock" style={{'fontSize': '3rem'}} />}>
+                    <Panel header="Template" style={{ marginTop: '20px' }}>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </Panel>
+                </BlockUI>
+            </div>
+        </div>
+    )
+}
+                `
             }
         }
 
         this.extFiles = {
-            'src/demo/BlockUIDemo.css': {
+            'demo/BlockUIDemo.css': {
                 content: `
 .blockui-demo .p-panel p {
     line-height: 1.5;

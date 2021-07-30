@@ -133,6 +133,35 @@ const TreeDragDropDemo = () => {
     )
 }
                 `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="./NodeService.js"></script>
+
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/tree/tree.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const { Tree } = primereact.tree;
+
+const TreeDragDropDemo = () => {
+    const [nodes, setNodes] = useState(null);
+    const nodeService = new NodeService();
+
+    useEffect(() => {
+        nodeService.getTreeNodes().then(data => setNodes(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    return (
+        <div>
+            <div className="card">
+                <Tree value={nodes} dragdropScope="demo" onDragDrop={event => setNodes(event.value)} />
+            </div>
+        </div>
+    )
+}
+                `
             }
         }
     }

@@ -84,6 +84,31 @@ const TriStateCheckboxDemo = () => {
     );
 }
                 `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/tristatecheckbox/tristatecheckbox.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const { TriStateCheckbox } = primereact.tristatecheckbox;
+
+const TriStateCheckboxDemo = () => {
+    const [value, setValue] = useState(null);
+
+    return (
+        <div>
+            <div className="card">
+                <div className="p-field-checkbox p-m-0">
+                    <TriStateCheckbox value={value} onChange={(e) => setValue(e.value)} />
+                    <label>{String(value)}</label>
+                </div>
+            </div>
+        </div>
+    );
+}
+                `
             }
         }
     }

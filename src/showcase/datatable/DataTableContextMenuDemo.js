@@ -3,7 +3,7 @@ import { DataTable } from '../../components/datatable/DataTable';
 import { Column } from '../../components/column/Column';
 import { ContextMenu } from '../../components/contextmenu/ContextMenu';
 import { Toast } from '../../components/toast/Toast';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
 import { TabView } from '../../components/tabview/TabView';
 import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
@@ -102,7 +102,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { ContextMenu } from 'primereact/contextmenu';
 import { Toast } from 'primereact/toast';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
 
 export class DataTableContextMenuDemo extends Component {
 
@@ -180,7 +180,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { ContextMenu } from 'primereact/contextmenu';
 import { Toast } from 'primereact/toast';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
 
 const DataTableContextMenuDemo = () => {
     const [products, setProducts] = useState([]);
@@ -246,7 +246,80 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { ContextMenu } from 'primereact/contextmenu';
 import { Toast } from 'primereact/toast';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
+
+const DataTableContextMenuDemo = () => {
+    const [products, setProducts] = useState([]);
+    const [selectedProduct, setSelectedProduct] = useState(null);
+    const toast = useRef(null);
+    const cm = useRef(null);
+    const menuModel = [
+        {label: 'View', icon: 'pi pi-fw pi-search', command: () => viewProduct(selectedProduct)},
+        {label: 'Delete', icon: 'pi pi-fw pi-times', command: () => deleteProduct(selectedProduct)}
+    ];
+    const productService = new ProductService();
+
+    useEffect(() => {
+        productService.getProductsSmall().then(data => setProducts(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const viewProduct = (product) => {
+        toast.current.show({severity: 'info', summary: 'Product Selected', detail: product.name});
+    }
+
+    const deleteProduct = (product) => {
+        let _products = [...products];
+        _products = _products.filter((p) => p.id !== product.id);
+
+        toast.current.show({severity: 'info', summary: 'Product Deleted', detail: product.name});
+        setProducts(_products);
+    }
+
+    const formatCurrency = (value) => {
+        return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+    }
+
+    const priceBodyTemplate = (rowData) => {
+        return formatCurrency(rowData.price);
+    }
+
+    return (
+        <div>
+            <Toast ref={toast}></Toast>
+
+            <ContextMenu model={menuModel} ref={cm} onHide={() => setSelectedProduct(null)}/>
+
+            <div className="card">
+                <DataTable value={products} contextMenuSelection={selectedProduct}
+                    onContextMenuSelectionChange={e => setSelectedProduct(e.value)}
+                    onContextMenu={e => cm.current.show(e.originalEvent)}>
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="price" header="Price" body={priceBodyTemplate} />
+                </DataTable>
+            </div>
+        </div>
+    );
+}
+                `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="./ProductService.js"></script>
+
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/column/column.min.js"></script>
+        <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>
+        <script src="https://unpkg.com/primereact/contextmenu/contextmenu.min.js"></script>
+        <script src="https://unpkg.com/primereact/toast/toast.min.js"></script>`,
+                content: `
+const { useEffect, useState, useRef } = React;
+const { Column } = primereact.column;
+const { DataTable } = primereact.datatable;
+const { ContextMenu } = primereact.contextmenu;
+const { Toast } = primereact.toast;
 
 const DataTableContextMenuDemo = () => {
     const [products, setProducts] = useState([]);

@@ -109,6 +109,34 @@ const FullCalendarDemo = () => {
     );
 }
                 `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="./EventService.js"></script>
+        <script src="https://unpkg.com/fullcalendar@5.8.0/main.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+
+const FullCalendarDemo = () => {
+    const [events, setEvents] = useState([]);
+
+    const eventService = new EventService();
+
+    useEffect(() => {
+        eventService.getEvents().then(data => setEvents(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    return (
+        <div>
+            <div className="card">
+                <FullCalendar events={events} initialDate="2017-02-01" initialView='dayGridMonth' plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+                    headerToolbar={{ left: 'prev,next today', center: 'title', right: 'dayGridMonth,timeGridWeek,timeGridDay' }} editable selectable selectMirror dayMaxEvents />
+            </div>
+        </div>
+    );
+}
+                `
             }
         }
 

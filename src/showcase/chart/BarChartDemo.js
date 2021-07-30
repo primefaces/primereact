@@ -1021,7 +1021,7 @@ const BarChartDemo = () => {
 
                 <div className="card">
                     <h5>Horizontal</h5>
-                    <Chart type="bar" data={this.basicData} options={horizontalOptions} />
+                    <Chart type="bar" data={basicData} options={horizontalOptions} />
                 </div>
 
                 <div className="card">
@@ -1298,7 +1298,7 @@ const BarChartDemo = () => {
 
                 <div className="card">
                     <h5>Horizontal</h5>
-                    <Chart type="bar" data={this.basicData} options={horizontalOptions} />
+                    <Chart type="bar" data={basicData} options={horizontalOptions} />
                 </div>
 
                 <div className="card">

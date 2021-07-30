@@ -289,6 +289,78 @@ const TreeTableContextMenuDemo = () => {
     )
 }
                 `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="./NodeService.js"></script>
+
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/column/column.min.js"></script>
+        <script src="https://unpkg.com/primereact/treetable/treetable.min.js"></script>
+        <script src="https://unpkg.com/primereact/contextmenu/contextmenu.min.js"></script>
+        <script src="https://unpkg.com/primereact/toast/toast.min.js"></script>`,
+                content: `
+const { useEffect, useState, useRef } = React;
+const { Column } = primereact.column;
+const { TreeTable } = primereact.treetable;
+const { ContextMenu } = primereact.contextmenu;
+const { Toast } = primereact.toast;
+
+const TreeTableContextMenuDemo = () => {
+    const [nodes, setNodes] = useState([]);
+    const [expandedKeys, setExpandedKeys] = useState({});
+    const [selectedNodeKey, setSelectedNodeKey] = useState(null);
+    const toast = useRef(null);
+    const cm = useRef(null);
+    const menu = [
+        {
+            label: 'View Key',
+            icon: 'pi pi-search',
+            command: () => {
+                toast.current.show({ severity: 'success', summary: 'Node Key', detail: this.state.selectedNodeKey });
+            }
+        },
+        {
+            label: 'Toggle',
+            icon: 'pi pi-cog',
+            command: () => {
+                let _expandedKeys = { ...expandedKeys };
+                if (_expandedKeys[selectedNodeKey])
+                    delete _expandedKeys[selectedNodeKey];
+                else
+                    _expandedKeys[selectedNodeKey] = true;
+
+                setExpandedKeys(_expandedKeys);
+            }
+        }
+    ];
+
+    const nodeservice = new NodeService();
+
+    useEffect(() => {
+        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    return (
+        <div>
+            <Toast ref={toast} />
+
+            <ContextMenu model={menu} ref={cm} onHide={() => setSelectedNodeKey(null)} />
+
+            <div className="card">
+                <TreeTable value={nodes} expandedKeys={expandedKeys} onToggle={e => setExpandedKeys(e.value)}
+                    contextMenuSelectionKey={selectedNodeKey} onContextMenuSelectionChange={event => setSelectedNodeKey(event.value)}
+                    onContextMenu={event => cm.current.show(event.originalEvent)}>
+                    <Column field="name" header="Name" expander></Column>
+                    <Column field="size" header="Size"></Column>
+                    <Column field="type" header="Type"></Column>
+                </TreeTable>
+            </div>
+        </div>
+    )
+}
+                `
             }
         }
     }

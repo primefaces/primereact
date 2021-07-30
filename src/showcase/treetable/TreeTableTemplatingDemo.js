@@ -201,6 +201,54 @@ const TreeTableTemplatingDemo = () => {
     );
 }
                 `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="./NodeService.js"></script>
+
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/column/column.min.js"></script>
+        <script src="https://unpkg.com/primereact/treetable/treetable.min.js"></script>
+        <script src="https://unpkg.com/primereact/button/button.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const { Column } = primereact.column;
+const { TreeTable } = primereact.treetable;
+const { Button } = primereact.button;
+
+const TreeTableTemplatingDemo = () => {
+    const [nodes, setNodes] = useState([]);
+    const nodeservice = new NodeService();
+
+    useEffect(() => {
+        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const actionTemplate = (node, column) => {
+        return <div>
+            <Button type="button" icon="pi pi-search" className="p-button-success" style={{ marginRight: '.5em' }}></Button>
+            <Button type="button" icon="pi pi-pencil" className="p-button-warning"></Button>
+        </div>;
+    }
+
+    const header = "File Viewer";
+    const footer = <div style={{ textAlign: 'left' }}><Button icon="pi pi-refresh" tooltip="Reload" /></div>;
+
+    return (
+        <div>
+            <div className="card">
+                <TreeTable value={nodes} header={header} footer={footer}>
+                    <Column field="name" header="Name" expander></Column>
+                    <Column field="size" header="Size"></Column>
+                    <Column field="type" header="Type"></Column>
+                    <Column body={actionTemplate} style={{ textAlign: 'center', width: '8em' }} />
+                </TreeTable>
+            </div>
+        </div>
+    );
+}
+                `
             }
         }
     }

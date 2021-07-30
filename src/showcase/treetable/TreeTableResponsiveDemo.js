@@ -197,11 +197,57 @@ const TreeTableResponsiveDemo = () => {
     );
 }
                 `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <link rel="stylesheet" href="./TreeTableDemo.css" />
+        <script src="./NodeService.js"></script>
+
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/column/column.min.js"></script>
+        <script src="https://unpkg.com/primereact/treetable/treetable.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const { Column } = primereact.column;
+const { TreeTable } = primereact.treetable;
+
+const TreeTableResponsiveDemo = () => {
+    const [nodes, setNodes] = useState([]);
+    const nodeservice = new NodeService();
+
+    useEffect(() => {
+        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const nameTemplate = (node) => {
+        return (
+            <React.Fragment>
+                <span>{node.data.name}</span>
+                <span className="sm-visible"> {node.data.size}</span>
+                <span className="sm-visible"> {node.data.type}</span>
+            </React.Fragment>
+        )
+    }
+
+    return (
+        <div className="treetable-responsive-demo">
+            <div className="card">
+                <TreeTable value={nodes} header="Responsive">
+                    <Column field="name" header="Name" body={nameTemplate} expander></Column>
+                    <Column field="size" header="Size" headerClassName="sm-invisible" bodyClassName="sm-invisible"></Column>
+                    <Column field="type" header="Type" headerClassName="sm-invisible" bodyClassName="sm-invisible"></Column>
+                </TreeTable>
+            </div>
+        </div>
+    );
+}
+                `
             }
         }
 
         this.extFiles = {
-            'src/demo/TreeTableDemo.css': {
+            'demo/TreeTableDemo.css': {
                 content: `
 .treetable-responsive-demo .sm-visible {
     display: none;

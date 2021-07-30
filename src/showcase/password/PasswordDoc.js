@@ -163,10 +163,65 @@ const PasswordDemo = () => {
 }
                 `
             },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <link rel="stylesheet" href="./PasswordDemo.css" />
+
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/inputtext/inputtext.min.js"></script>
+        <script src="https://unpkg.com/primereact/password/password.min.js"></script>
+        <script src="https://unpkg.com/primereact/divider/divider.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const { Password } = primereact.password;
+const { Divider } = primereact.divider;
+
+const PasswordDemo = () => {
+    const [value1, setValue1] = useState('');
+    const [value2, setValue2] = useState('');
+    const [value3, setValue3] = useState('');
+    const [value4, setValue4] = useState('');
+
+    const header = <h6>Pick a password</h6>;
+    const footer = (
+        <React.Fragment>
+            <Divider />
+            <p className="p-mt-2">Suggestions</p>
+            <ul className="p-pl-2 p-ml-2 p-mt-0" style={{lineHeight: '1.5'}}>
+                <li>At least one lowercase</li>
+                <li>At least one uppercase</li>
+                <li>At least one numeric</li>
+                <li>Minimum 8 characters</li>
+            </ul>
+        </React.Fragment>
+    );
+
+    return (
+        <div>
+            <div className="card">
+                <h5>Basic</h5>
+                <Password value={value1} onChange={(e) => setValue1(e.target.value)} feedback={false} />
+
+                <h5>Password Meter</h5>
+                <Password value={value2} onChange={(e) => setValue2(e.target.value)} />
+
+                <h5>Show Password</h5>
+                <Password value={value3} onChange={(e) => setValue3(e.target.value)} toggleMask />
+
+                <h5>Templating</h5>
+                <Password value={value4} onChange={(e) => setValue4(e.target.value)} header={header} footer={footer} />
+            </div>
+        </div>
+    );
+}
+                `
+            }
         }
 
         this.extFiles = {
-            'src/demo/PasswordDemo.css': {
+            'demo/PasswordDemo.css': {
                 content: `
 .p-password input {
     width: 15rem;

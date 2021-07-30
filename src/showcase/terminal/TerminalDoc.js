@@ -203,11 +203,80 @@ export const TerminalDemo = () => {
     )
 }
                 `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <link rel="stylesheet" href="./TerminalDemo.css" />
+
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/terminalservice/terminalservice.min.js"></script>
+        <script src="https://unpkg.com/primereact/terminal/terminal.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const { Terminal } = primereact.terminal;
+const { TerminalService } = primereact.terminalservice;
+
+const TerminalDemo = () => {
+
+    const commandHandler = (text) => {
+        let response;
+        let argsIndex = text.indexOf(' ');
+        let command = argsIndex !== -1 ? text.substring(0, argsIndex) : text;
+
+        switch (command) {
+            case 'date':
+                response = 'Today is ' + new Date().toDateString();
+                break;
+
+            case 'greet':
+                response = 'Hola ' + text.substring(argsIndex + 1) + '!';
+                break;
+
+            case 'random':
+                response = Math.floor(Math.random() * 100);
+                break;
+
+            case 'clear':
+                response = null;
+                break;
+
+            default:
+                response = 'Unknown command: ' + command;
+                break;
+        }
+
+        if (response) {
+            TerminalService.emit('response', response);
+        }
+        else {
+            TerminalService.emit('clear');
+        }
+    }
+
+    useEffect(() => {
+        TerminalService.on('command', commandHandler);
+
+        return () => {
+            TerminalService.off('command', commandHandler);
+        }
+    },[])
+
+    return (
+        <div className="terminal-demo">
+            <div className="card">
+                <p>Enter "<strong>date</strong>" to display the current date, "<strong>greet {'{0}'}</strong>" for a message, "<strong>random</strong>" to get a random number and "<strong>clear</strong>" to clear all commands.</p>
+                <Terminal welcomeMessage="Welcome to PrimeReact" prompt="primereact $" />
+            </div>
+        </div>
+    )
+}
+                `
             }
         }
 
         this.extFiles = {
-            'src/demo/TerminalDemo.css': {
+            'demo/TerminalDemo.css': {
                 content: `
 .terminal-demo p {
     margin-top: 0;

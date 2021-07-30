@@ -25,6 +25,10 @@ export default class AppDemoActions extends Component {
             {
                 label: 'TS Source Demo',
                 command: () => this.liveEditor.postSandboxParameters('ts')
+            },
+            {
+                label: 'Browser Source Demo',
+                command: () => this.liveEditor.postSandboxParameters('browser')
             }
         ];
     }

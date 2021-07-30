@@ -128,6 +128,46 @@ const ChipsDemo = () => {
     )
 }
                 `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/chips/chips.min.js"></script>`,
+                content: `
+const { useEffect, useState, useRef } = React;
+const { Chips } = primereact.chips;
+
+const ChipsDemo = () => {
+    const [values1, setValues1] = useState([]);
+    const [values2, setValues2] = useState([]);
+    const [values3, setValues3] = useState([]);
+
+    const customChip = (item) => {
+        return (
+            <div>
+                <span>{item} - (active) </span>
+                <i className="pi pi-user-plus" style={{ fontSize: '14px' }}></i>
+            </div>
+        );
+    }
+
+    return (
+        <div>
+            <div className="card p-fluid">
+                <h5>Basic</h5>
+                <Chips value={values1} onChange={(e) => setValues1(e.value)} />
+
+                <h5>Comma Separator</h5>
+                <Chips value={values2} onChange={(e) => setValues2(e.value)} separator="," />
+
+                <h5>Template</h5>
+                <Chips value={values3} onChange={(e) => setValues3(e.value)} max={5} itemTemplate={customChip}></Chips>
+            </div>
+        </div>
+    )
+}
+                `
             }
         }
     }

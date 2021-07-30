@@ -18,7 +18,7 @@ import { Inplace, InplaceDisplay, InplaceContent } from 'primereact/inplace';
 import { InputText } from 'primereact/inputtext';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
 
 export class InplaceDemo extends Component {
 
@@ -93,7 +93,7 @@ import { Inplace, InplaceDisplay, InplaceContent } from 'primereact/inplace';
 import { InputText } from 'primereact/inputtext';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
 
 const InplaceDemo = () => {
     const [text, setText] = useState('');
@@ -158,7 +158,80 @@ import { Inplace, InplaceDisplay, InplaceContent } from 'primereact/inplace';
 import { InputText } from 'primereact/inputtext';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
+
+const InplaceDemo = () => {
+    const [text, setText] = useState('');
+    const [products, setProducts] = useState([]);
+    const productService = new ProductService();
+
+    const onOpen = () => {
+        productService.getProductsSmall().then(data => setProducts(data));
+    }
+
+    return (
+        <div>
+            <div className="card">
+                <h5>Input</h5>
+                <Inplace closable>
+                    <InplaceDisplay>
+                        {text || 'Click to Edit'}
+                    </InplaceDisplay>
+                    <InplaceContent>
+                        <InputText value={text} onChange={(e) => setText(e.target.value)} autoFocus />
+                    </InplaceContent>
+                </Inplace>
+
+                <h5>Image</h5>
+                <Inplace>
+                    <InplaceDisplay>
+                        <span className="p-d-inline-flex p-align-center">
+                            <span className="pi pi-search"></span>
+                            <span className="p-ml-2">View Picture</span>
+                        </span>
+                    </InplaceDisplay>
+                    <InplaceContent>
+                        <img alt="Nature" src="showcase/demo/images/nature/nature1.jpg" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} />
+                    </InplaceContent>
+                </Inplace>
+
+                <h5>Lazy Data</h5>
+                <Inplace onOpen={onOpen}>
+                    <InplaceDisplay>
+                        View Data
+                </InplaceDisplay>
+                    <InplaceContent>
+                        <DataTable value={products}>
+                            <Column field="code" header="Code"></Column>
+                            <Column field="name" header="Name"></Column>
+                            <Column field="category" header="Category"></Column>
+                            <Column field="quantity" header="Quantity"></Column>
+                        </DataTable>
+                    </InplaceContent>
+                </Inplace>
+            </div>
+        </div>
+    )
+}
+                `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="./ProductService.js"></script>
+
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/button/button.min.js"></script>
+        <script src="https://unpkg.com/primereact/inplace/inplace.min.js"></script>
+        <script src="https://unpkg.com/primereact/inputtext/inputtext.min.js"></script>
+        <script src="https://unpkg.com/primereact/column/column.min.js"></script>
+        <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const { Inplace, InplaceDisplay, InplaceContent } = primereact.inplace;
+const { InputText } = primereact.inputtext;
+const { Column } = primereact.column;
+const { DataTable } = primereact.datatable;
 
 const InplaceDemo = () => {
     const [text, setText] = useState('');

@@ -180,6 +180,66 @@ const TreeTableDemo = () => {
     );
 }
                 `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="./NodeService.js"></script>
+
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/column/column.min.js"></script>
+        <script src="https://unpkg.com/primereact/treetable/treetable.min.js"></script>
+        <script src="https://unpkg.com/primereact/button/button.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const { Column } = primereact.column;
+const { TreeTable } = primereact.treetable;
+const { Button } = primereact.button;
+
+const TreeTableDemo = () => {
+    const [nodes, setNodes] = useState([]);
+    const [expandedKeys, setExpandedKeys] = useState({});
+    const nodeservice = new NodeService();
+
+    const toggleApplications = () => {
+        let _expandedKeys = { ...expandedKeys };
+        if (_expandedKeys['0'])
+            delete _expandedKeys['0'];
+        else
+            _expandedKeys['0'] = true;
+
+        setExpandedKeys(_expandedKeys);
+    }
+
+    useEffect(() => {
+        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    return (
+        <div>
+            <div className="card">
+                <h5>Basic</h5>
+                <TreeTable value={nodes}>
+                    <Column field="name" header="Name" expander></Column>
+                    <Column field="size" header="Size"></Column>
+                    <Column field="type" header="Type"></Column>
+                </TreeTable>
+            </div>
+
+            <div className="card">
+                <h5>Programmatic</h5>
+                <Button onClick={toggleApplications} label="Toggle Applications" />
+                <TreeTable value={nodes} expandedKeys={expandedKeys}
+                    onToggle={e => setExpandedKeys(e.value)} style={{ marginTop: '.5em' }}>
+                    <Column field="name" header="Name" expander></Column>
+                    <Column field="size" header="Size"></Column>
+                    <Column field="type" header="Type"></Column>
+                </TreeTable>
+            </div>
+        </div>
+    );
+}
+                `
             }
         }
     }

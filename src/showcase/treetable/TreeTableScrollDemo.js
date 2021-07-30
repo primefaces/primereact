@@ -279,6 +279,73 @@ const TreeTableScrollDemo = () => {
     );
 }
                 `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="./NodeService.js"></script>
+
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/column/column.min.js"></script>
+        <script src="https://unpkg.com/primereact/treetable/treetable.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const { Column } = primereact.column;
+const { TreeTable } = primereact.treetable;
+
+const TreeTableScrollDemo = () => {
+    const [nodes, setNodes] = useState([]);
+    const nodeservice = new NodeService();
+
+    useEffect(() => {
+        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    return (
+        <div>
+            <div className="card">
+                <h5>Vertical</h5>
+                <TreeTable value={nodes} scrollable scrollHeight="200px">
+                    <Column field="name" header="Name" expander></Column>
+                    <Column field="size" header="Size"></Column>
+                    <Column field="type" header="Type"></Column>
+                </TreeTable>
+            </div>
+
+            <div className="card">
+                <h5>Horizontal</h5>
+                <TreeTable value={nodes} scrollable style={{ width: '600px' }}>
+                    <Column field="name" header="Name" expander style={{ width: '350px' }}></Column>
+                    <Column field="size" header="Size" style={{ width: '350px' }}></Column>
+                    <Column field="type" header="Type" style={{ width: '350px' }}></Column>
+                </TreeTable>
+            </div>
+
+            <div className="card">
+                <h5>Horizontal and Vertical</h5>
+                <TreeTable value={nodes} scrollable style={{ width: '600px' }} scrollHeight="200px">
+                    <Column field="name" header="Name" expander style={{ width: '350px' }}></Column>
+                    <Column field="size" header="Size" style={{ width: '350px' }}></Column>
+                    <Column field="type" header="Type" style={{ width: '350px' }}></Column>
+                </TreeTable>
+            </div>
+
+            <div className="card">
+                <h5>Frozen Columns</h5>
+                <TreeTable value={nodes} scrollable frozenWidth="200px" scrollHeight="250px">
+                    <Column field="name" header="Name" expander frozen style={{ width: '250px', height: '57px' }}></Column>
+                    <Column field="size" header="Size" style={{ width: '250px', height: '57px' }} columnKey="size_0"></Column>
+                    <Column field="type" header="Type" style={{ width: '250px', height: '57px' }} columnKey="type_0"></Column>
+                    <Column field="size" header="Size" style={{ width: '250px', height: '57px' }} columnKey="size_1"></Column>
+                    <Column field="type" header="Type" style={{ width: '250px', height: '57px' }} columnKey="type_1"></Column>
+                    <Column field="size" header="Size" style={{ width: '250px', height: '57px' }} columnKey="size_2"></Column>
+                    <Column field="type" header="Type" style={{ width: '250px', height: '57px' }} columnKey="type_2"></Column>
+                </TreeTable>
+            </div>
+        </div>
+    );
+}
+                `
             }
         }
     }

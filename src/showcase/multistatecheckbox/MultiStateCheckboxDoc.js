@@ -100,6 +100,36 @@ const MultiStateCheckboxDemo = () => {
     );
 }
                 `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/multistatecheckbox/multistatecheckbox.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const { MultiStateCheckbox } = primereact.multistatecheckbox;
+
+const MultiStateCheckboxDemo = () => {
+    const [value, setValue] = useState('public');
+    const options = [
+        { value: 'public', icon: 'pi pi-globe' },
+        { value: 'protected', icon: 'pi pi-lock-open' },
+        { value: 'private', icon: 'pi pi-lock' }
+    ];
+
+    return (
+        <div>
+            <div className="card">
+                <div className="p-field-checkbox p-m-0">
+                    <MultiStateCheckbox value={value} options={options} optionValue="value" onChange={(e) => setValue(e.value)} />
+                    <label>{value}</label>
+                </div>
+            </div>
+        </div>
+    );
+}
+                `
             }
         }
     }

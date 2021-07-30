@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { DataView, DataViewLayoutOptions } from '../../components/dataview/DataView';
 import { TabView } from '../../components/tabview/TabView';
 import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { Rating } from '../../components/rating/Rating';
 import { Button } from '../../components/button/Button';
@@ -176,7 +176,7 @@ export class DataViewLazyDemoDoc extends Component {
                 content: `
 import React, { Component } from 'react';
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
 import { Rating } from 'primereact/rating';
 import { Button } from 'primereact/button';
 import './DataViewDemo.css';
@@ -329,7 +329,7 @@ export class DataViewLazyDemo extends Component {
                 content: `
 import React, { useState, useEffect, useRef } from 'react';
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
 import { Rating } from 'primereact/rating';
 import { Button } from 'primereact/button';
 import './DataViewDemo.css';
@@ -349,7 +349,6 @@ const DataViewLazyDemo = () => {
         if (isMounted.current) {
             setTimeout(() => {
                 setLoading(false);
-                setLayout(e.value);
             }, 1000);
         }
     }, [loading]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -372,7 +371,7 @@ const DataViewLazyDemo = () => {
         //imitate delay of a backend call
         setTimeout(() => {
             const startIndex = event.first;
-            const endIndex = Math.min(event.first + this.rows, this.state.totalRecords - 1);
+            const endIndex = Math.min(event.first + rows.current, totalRecords - 1);
             const newProducts = startIndex === endIndex ? datasource.slice(startIndex) : datasource.slice(startIndex, endIndex);
 
             setFirst(startIndex);
@@ -442,6 +441,7 @@ const DataViewLazyDemo = () => {
     const renderHeader = () => {
         let onOptionChange = (e) => {
             setLoading(true);
+            setLayout(e.value);
         };
 
         return (
@@ -457,7 +457,7 @@ const DataViewLazyDemo = () => {
         <div className="dataview-demo">
             <div className="card">
                 <DataView value={products} layout={layout} header={header}
-                        itemTemplate={itemTemplate} lazy paginator paginatorPosition={'both'} rows={this.rows}
+                        itemTemplate={itemTemplate} lazy paginator paginatorPosition={'both'} rows={rows.current}
                         totalRecords={totalRecords} first={first} onPage={onPage} loading={loading} />
             </div>
         </div>
@@ -470,7 +470,7 @@ const DataViewLazyDemo = () => {
                 content: `
 import React, { useState, useEffect, useRef } from 'react';
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
 import { Rating } from 'primereact/rating';
 import { Button } from 'primereact/button';
 import './DataViewDemo.css';
@@ -490,7 +490,6 @@ const DataViewLazyDemo = () => {
         if (isMounted.current) {
             setTimeout(() => {
                 setLoading(false);
-                setLayout(e.value);
             }, 1000);
         }
     }, [loading]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -513,7 +512,7 @@ const DataViewLazyDemo = () => {
         //imitate delay of a backend call
         setTimeout(() => {
             const startIndex = event.first;
-            const endIndex = Math.min(event.first + this.rows, this.state.totalRecords - 1);
+            const endIndex = Math.min(event.first + rows.current, totalRecords - 1);
             const newProducts = startIndex === endIndex ? datasource.slice(startIndex) : datasource.slice(startIndex, endIndex);
 
             setFirst(startIndex);
@@ -583,6 +582,7 @@ const DataViewLazyDemo = () => {
     const renderHeader = () => {
         let onOptionChange = (e) => {
             setLoading(true);
+            setLayout(e.value);
         };
 
         return (
@@ -598,7 +598,157 @@ const DataViewLazyDemo = () => {
         <div className="dataview-demo">
             <div className="card">
                 <DataView value={products} layout={layout} header={header}
-                        itemTemplate={itemTemplate} lazy paginator paginatorPosition={'both'} rows={this.rows}
+                        itemTemplate={itemTemplate} lazy paginator paginatorPosition={'both'} rows={rows.current}
+                        totalRecords={totalRecords} first={first} onPage={onPage} loading={loading} />
+            </div>
+        </div>
+    );
+}
+                `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <link rel="stylesheet" href="./DataViewDemo.css" />
+        <script src="./ProductService.js"></script>
+
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/dropdown/dropdown.min.js"></script>
+        <script src="https://unpkg.com/primereact/paginator/paginator.min.js"></script>
+        <script src="https://unpkg.com/primereact/dataview/dataview.min.js"></script>
+        <script src="https://unpkg.com/primereact/button/button.min.js"></script>
+        <script src="https://unpkg.com/primereact/rating/rating.min.js"></script>`,
+                content: `
+const { useEffect, useState, useRef } = React;
+const { DataView, DataViewLayoutOptions } = primereact.dataview;
+const { Button } = primereact.button;
+const { Rating } = primereact.rating;
+
+const DataViewLazyDemo = () => {
+    const [products, setProducts] = useState(null);
+    const [layout, setLayout] = useState('grid');
+    const [loading, setLoading] = useState(true);
+    const [first, setFirst] = useState(0);
+    const [totalRecords, setTotalRecords] = useState(0);
+    const rows = useRef(6);
+    const datasource = useRef(null);
+    const isMounted = useRef(false);
+    const productService = new ProductService();
+
+    useEffect(() => {
+        if (isMounted.current) {
+            setTimeout(() => {
+                setLoading(false);
+            }, 1000);
+        }
+    }, [loading]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    useEffect(() => {
+        setTimeout(() => {
+            isMounted.current = true;
+            productService.getProducts().then(data => {
+                datasource.current = data;
+                setTotalRecords(data.length);
+                setProducts(datasource.current.slice(0, rows.current));
+                setLoading(false);
+            });
+        }, 1000);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const onPage = (event) => {
+        setLoading(true);
+
+        //imitate delay of a backend call
+        setTimeout(() => {
+            const startIndex = event.first;
+            const endIndex = Math.min(event.first + rows.current, totalRecords - 1);
+            const newProducts = startIndex === endIndex ? datasource.slice(startIndex) : datasource.slice(startIndex, endIndex);
+
+            setFirst(startIndex);
+            setProducts(newProducts);
+            setLoading(false);
+        }, 1000);
+    }
+
+    const renderListItem = (data) => {
+        return (
+            <div className="p-col-12">
+                <div className="product-list-item">
+                    <img src={\`showcase/demo/images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
+                    <div className="product-list-detail">
+                        <div className="product-name">{data.name}</div>
+                        <div className="product-description">{data.description}</div>
+                        <Rating value={data.rating} readOnly cancel={false}></Rating>
+                        <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
+                    </div>
+                    <div className="product-list-action">
+                        <span className="product-price">\${data.price}</span>
+                        <Button icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                        <span className={\`product-badge status-\${data.inventoryStatus.toLowerCase()}\`}>{data.inventoryStatus}</span>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    const renderGridItem = (data) => {
+        return (
+            <div className="p-col-12 p-md-4">
+                <div className="product-grid-item card">
+                    <div className="product-grid-item-top">
+                        <div>
+                            <i className="pi pi-tag product-category-icon"></i>
+                            <span className="product-category">{data.category}</span>
+                        </div>
+                        <span className={\`product-badge status-\${data.inventoryStatus.toLowerCase()}\`}>{data.inventoryStatus}</span>
+                    </div>
+                    <div className="product-grid-item-content">
+                    <img src={\`showcase/demo/images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
+                        <div className="product-name">{data.name}</div>
+                        <div className="product-description">{data.description}</div>
+                        <Rating value={data.rating} readOnly cancel={false}></Rating>
+                    </div>
+                    <div className="product-grid-item-bottom">
+                        <span className="product-price">\${data.price}</span>
+                        <Button icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    const itemTemplate = (product, layout) => {
+        if (!product) {
+            return;
+        }
+
+        if (layout === 'list')
+            return renderListItem(product);
+        else if (layout === 'grid')
+            return renderGridItem(product);
+    }
+
+    const renderHeader = () => {
+        let onOptionChange = (e) => {
+            setLoading(true);
+            setLayout(e.value);
+        };
+
+        return (
+            <div style={{ textAlign: 'left' }}>
+                <DataViewLayoutOptions layout={layout} onChange={onOptionChange} />
+            </div>
+        );
+    }
+
+    const header = renderHeader();
+
+    return (
+        <div className="dataview-demo">
+            <div className="card">
+                <DataView value={products} layout={layout} header={header}
+                        itemTemplate={itemTemplate} lazy paginator paginatorPosition={'both'} rows={rows.current}
                         totalRecords={totalRecords} first={first} onPage={onPage} loading={loading} />
             </div>
         </div>
@@ -609,7 +759,7 @@ const DataViewLazyDemo = () => {
         }
 
         this.extFiles = {
-            'src/demo/DataViewDemo.css': {
+            'demo/DataViewDemo.css': {
                 content: `
 .dataview-demo .p-dropdown {
     width: 14rem;

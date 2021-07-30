@@ -75,6 +75,30 @@ const ProgressSpinnerDemo = () => {
     );
 }
                 `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/progressspinner/progressspinner.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const { ProgressSpinner } = primereact.progressspinner;
+
+const ProgressSpinnerDemo = () => {
+    return (
+        <div>
+            <div className="card">
+                <h5>Basic</h5>
+                <ProgressSpinner />
+
+                <h5>Custom</h5>
+                <ProgressSpinner style={{width: '50px', height: '50px'}} strokeWidth="8" fill="#EEEEEE" animationDuration=".5s"/>
+            </div>
+        </div>
+    );
+}
+                `
             }
         }
     }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { DataView, DataViewLayoutOptions } from '../../components/dataview/DataView';
 import { Button } from '../../components/button/Button';
 import { Dropdown } from '../../components/dropdown/Dropdown';
-import ProductService from '../../showcase/service/ProductService';
+import { ProductService } from '../../showcase/service/ProductService';
 import { Rating } from '../../components//rating/Rating';
 import { render } from '@testing-library/react';
 

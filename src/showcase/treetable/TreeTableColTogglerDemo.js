@@ -261,6 +261,70 @@ const TreeTableColTogglerDemo = () => {
     );
 }
                 `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="./NodeService.js"></script>
+
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/column/column.min.js"></script>
+        <script src="https://unpkg.com/primereact/treetable/treetable.min.js"></script>
+        <script src="https://unpkg.com/primereact/multiselect/multiselect.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const { Column } = primereact.column;
+const { TreeTable } = primereact.treetable;
+const { MultiSelect } = primereact.multiselect;
+
+const TreeTableColTogglerDemo = () => {
+    let columns = [
+        { field: 'size', header: 'Size' },
+        { field: 'type', header: 'Type' }
+    ];
+
+    let colOptions = [];
+    for (let col of columns) {
+        colOptions.push({ label: col.header, value: col });
+    }
+
+    const [nodes, setNodes] = useState([]);
+    const [cols, setCols] = useState(columns);
+
+    const nodeservice = new NodeService();
+
+    useEffect(() => {
+        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const onColumnToggle = (event) => {
+        setCols(event.value);
+    }
+
+    const header = (
+        <div style={{ textAlign: 'left' }}>
+            <MultiSelect value={cols} options={colOptions} onChange={onColumnToggle}
+                style={{ width: '250px' }} />
+        </div>
+    );
+
+    const _columns = cols.map((col, i) => {
+        return <Column key={col.field} field={col.field} header={col.header} />;
+    });
+
+    return (
+        <div>
+            <div className="card">
+                <TreeTable value={nodes} header={header}>
+                    <Column key="name" field="name" header="Name" expander />
+                    {_columns}
+                </TreeTable>
+            </div>
+        </div>
+    );
+}
+                `
             }
         }
     }

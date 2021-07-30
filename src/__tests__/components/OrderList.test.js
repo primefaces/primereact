@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { render } from '@testing-library/react';
 import { OrderList } from '../../components/orderlist/OrderList';
-import ProductService from '../../showcase/service/ProductService';
+import { ProductService } from '../../showcase/service/ProductService';
 
 
 const OrderListTestComponent = () => {

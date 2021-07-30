@@ -343,11 +343,92 @@ const TreeTableEditDemo = () => {
     );
 }
                 `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <link rel="stylesheet" href="./TreeTableDemo.css" />
+        <script src="./NodeService.js"></script>
+
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/column/column.min.js"></script>
+        <script src="https://unpkg.com/primereact/treetable/treetable.min.js"></script>
+        <script src="https://unpkg.com/primereact/inputtext/inputtext.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const { Column } = primereact.column;
+const { TreeTable } = primereact.treetable;
+const { InputText } = primereact.inputtext;
+
+const TreeTableEditDemo = () => {
+    const [nodes, setNodes] = useState([]);
+    const nodeservice = new NodeService();
+
+    useEffect(() => {
+        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const onEditorValueChange = (props, value) => {
+        let newNodes = JSON.parse(JSON.stringify(nodes));
+        let editedNode = findNodeByKey(newNodes, props.node.key);
+        editedNode.data[props.field] = value;
+
+        setNodes(newNodes);
+    }
+
+    const findNodeByKey = (nodes, key) => {
+        let path = key.split('-');
+        let node;
+
+        while (path.length) {
+            let list = node ? node.children : nodes;
+            node = list[parseInt(path[0], 10)];
+            path.shift();
+        }
+
+        return node;
+    }
+
+    const inputTextEditor = (props, field) => {
+        return (
+            <InputText type="text" value={props.node.data[field]}
+                onChange={(e) => onEditorValueChange(props, e.target.value)} />
+        );
+    }
+
+    const sizeEditor = (props) => {
+        return inputTextEditor(props, 'size');
+    }
+
+    const typeEditor = (props) => {
+        return inputTextEditor(props, 'type');
+    }
+
+    const requiredValidator = (e) => {
+        let props = e.columnProps;
+        let value = props.node.data[props.field];
+
+        return value && value.length > 0;
+    }
+
+    return (
+        <div>
+            <div className="card">
+                <TreeTable value={nodes}>
+                    <Column field="name" header="Name" expander style={{ height: '3.5em' }}></Column>
+                    <Column field="size" header="Size" editor={sizeEditor} editorValidator={requiredValidator} style={{ height: '3.5em' }}></Column>
+                    <Column field="type" header="Type" editor={typeEditor} style={{ height: '3.5em' }}></Column>
+                </TreeTable>
+            </div>
+        </div>
+    );
+}
+                `
             }
         }
 
         this.extFiles = {
-            'src/demo/TreeTableDemo.css': {
+            'demo/TreeTableDemo.css': {
                 content: `
 .treetable-editing-demo .p-treetable .p-treetable-tbody > tr > td.p-cell-editing {
     padding-top: 0;

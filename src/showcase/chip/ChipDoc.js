@@ -156,10 +156,62 @@ const ChipDemo = () => {
     );
 }
                 `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <link rel="stylesheet" href="./ChipDemo.css" />
+
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/chip/chip.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const { Chip } = primereact.chip;
+
+const ChipDemo = () => {
+    return (
+        <div>
+            <div className="card">
+                <h5>Basic</h5>
+                <div className="p-d-flex p-ai-center p-flex-wrap">
+                    <Chip label="Action" className="p-mr-2 p-mb-2" />
+                    <Chip label="Comedy" className="p-mr-2 p-mb-2" />
+                    <Chip label="Mystery" className="p-mr-2 p-mb-2" />
+                    <Chip label="Thriller" className="p-mb-2" removable />
+                </div>
+
+                <h5>Icon</h5>
+                <div className="p-d-flex p-ai-center p-flex-wrap">
+                    <Chip label="Apple" icon="pi pi-apple" className="p-mr-2 p-mb-2" />
+                    <Chip label="Facebook" icon="pi pi-facebook" className="p-mr-2 p-mb-2" />
+                    <Chip label="Google" icon="pi pi-google" className="p-mr-2 p-mb-2" />
+                    <Chip label="Microsoft" icon="pi pi-microsoft" className="p-mb-2" removable />
+                </div>
+
+                <h5>Image</h5>
+                <div className="p-d-flex p-ai-center p-flex-wrap">
+                    <Chip label="Amy Elsner" image="showcase/demo/images/avatar/amyelsner.png" className="p-mr-2 p-mb-2" />
+                    <Chip label="Asiya Javayant" image="showcase/demo/images/avatar/asiyajavayant.png" className="p-mr-2 p-mb-2" />
+                    <Chip label="Onyama Limba" image="showcase/demo/images/avatar/onyamalimba.png" className="p-mr-2 p-mb-2" />
+                    <Chip label="Xuxue Feng" image="showcase/demo/images/avatar/xuxuefeng.png" className="p-mb-2" removable />
+                </div>
+
+                <h5>Styling</h5>
+                <div className="p-d-flex p-ai-center p-flex-wrap">
+                    <Chip label="Action" className="p-mr-2 p-mb-2 custom-chip" />
+                    <Chip label="Apple" icon="pi pi-apple" className="p-mr-2 p-mb-2 custom-chip" />
+                    <Chip label="Onyama Limba" image="showcase/demo/images/avatar/onyamalimba.png" className="p-mr-2 p-mb-2 custom-chip" />
+                    <Chip label="Xuxue Feng" image="showcase/demo/images/avatar/xuxuefeng.png" className="custom-chip p-mb-2" removable />
+                </div>
+            </div>
+        </div>
+    );
+}
+                `
             }
         }
         this.extFiles = {
-            'src/demo/ChipDemo.css': {
+            'demo/ChipDemo.css': {
                 content: `
 .p-chip.custom-chip {
     background: var(--primary-color);

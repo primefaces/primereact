@@ -474,7 +474,7 @@ export const FormikFormDemo = () => {
     };
 
     const extFiles = {
-        'src/demo/FormDemo.css': {
+        'demo/FormDemo.css': {
             content: `
 .form-demo .card {
     min-width: 450px;

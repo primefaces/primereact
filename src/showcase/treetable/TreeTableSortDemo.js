@@ -253,6 +253,65 @@ const TreeTableSortDemo = () => {
     );
 }
                 `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="./NodeService.js"></script>
+
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/column/column.min.js"></script>
+        <script src="https://unpkg.com/primereact/treetable/treetable.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const { Column } = primereact.column;
+const { TreeTable } = primereact.treetable;
+
+const TreeTableSortDemo = () => {
+    const [nodes1, setNodes1] = useState([]);
+    const [nodes2, setNodes2] = useState([]);
+    const nodeservice = new NodeService();
+
+    useEffect(() => {
+        nodeservice.getTreeTableNodes().then(data => {
+            setNodes1(data);
+
+            let _nodes2 = data;
+            _nodes2.push({
+                data: {
+                    name: 'Documents',
+                    size: '100kb',
+                    type: 'Link'
+                }
+            });
+
+            setNodes2(_nodes2);
+        });
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    return (
+        <div>
+            <div className="card">
+                <h5>Single Column Sorting</h5>
+                <TreeTable value={nodes1}>
+                    <Column field="name" header="Name" expander sortable></Column>
+                    <Column field="size" header="Size" sortable></Column>
+                    <Column field="type" header="Type" sortable></Column>
+                </TreeTable>
+            </div>
+
+            <div className="card">
+                <h5>Multiple Column Sorting</h5>
+                <TreeTable value={nodes2} sortMode="multiple">
+                    <Column field="name" header="Name" expander sortable></Column>
+                    <Column field="size" header="Size" sortable></Column>
+                    <Column field="type" header="Type" sortable></Column>
+                </TreeTable>
+            </div>
+        </div>
+    );
+}
+                `
             }
         }
     }

@@ -201,6 +201,72 @@ const SplitterDemo = () => {
 }
                 `
             },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/splitter/splitter.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const { Splitter, SplitterPanel } = primereact.splitter;
+
+const SplitterDemo = () => {
+    return (
+        <div>
+            <div className="card">
+                <h5>Horizontal</h5>
+                <Splitter style={{height: '300px'}} className="p-mb-5">
+                    <SplitterPanel className="p-d-flex p-ai-center p-jc-center">
+                        Panel 1
+                    </SplitterPanel>
+                    <SplitterPanel className="p-d-flex p-ai-center p-jc-center">
+                        Panel 2
+                    </SplitterPanel>
+                </Splitter>
+            </div>
+
+            <div className="card">
+                <h5>Vertical</h5>
+                <Splitter style={{height: '300px'}} layout="vertical">
+                    <SplitterPanel className="p-d-flex p-ai-center p-jc-center">
+                        Panel 1
+                    </SplitterPanel>
+                    <SplitterPanel className="p-d-flex p-ai-center p-jc-center">
+                        Panel 2
+                    </SplitterPanel>
+                </Splitter>
+            </div>
+
+            <div className="card">
+                <h5>Nested</h5>
+                <Splitter style={{height: '300px'}}>
+                    <SplitterPanel className="p-d-flex p-ai-center p-jc-center" size={20} minSize={10}>
+                        Panel 1
+                    </SplitterPanel>
+                    <SplitterPanel size={80}>
+                        <Splitter layout="vertical">
+                            <SplitterPanel className="p-d-flex p-ai-center p-jc-center" size={15}>
+                                Panel 2
+                            </SplitterPanel>
+                            <SplitterPanel size={85}>
+                                <Splitter>
+                                    <SplitterPanel className="p-d-flex p-ai-center p-jc-center" size={20}>
+                                        Panel 3
+                                    </SplitterPanel>
+                                    <SplitterPanel className="p-d-flex p-ai-center p-jc-center" size={80}>
+                                        Panel 4
+                                    </SplitterPanel>
+                                </Splitter>
+                            </SplitterPanel>
+                        </Splitter>
+                    </SplitterPanel>
+                </Splitter>
+            </div>
+        </div>
+    )
+}
+                `
+            }
         }
     }
 

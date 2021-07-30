@@ -108,6 +108,39 @@ const RatingDemo = () => {
 }
                 `
             },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/rating/rating.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const { Rating } = primereact.rating;
+
+const RatingDemo = () => {
+    const [val1, setVal1] = useState(null);
+    const [val2, setVal2] = useState(null);
+
+    return (
+        <div>
+            <div className="card">
+                <h5>Basic {val1}</h5>
+                <Rating value={val1} onChange={(e) => setVal1(e.value)} />
+
+                <h5>Without Cancel</h5>
+                <Rating value={val2} cancel={false} onChange={(e) => setVal2(e.value)} />
+
+                <h5>ReadOnly</h5>
+                <Rating value={5} readOnly stars={10} cancel={false} />
+
+                <h5>Disabled</h5>
+                <Rating value={8} disabled stars={10} />
+            </div>
+        </div>
+    )
+}
+                `
+            }
         }
     }
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { DataView, DataViewLayoutOptions } from '../../components/dataview/DataView';
 import { Button } from '../../components/button/Button';
 import { Dropdown } from '../../components/dropdown/Dropdown';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
 import { Rating } from '../../components/rating/Rating';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import { DataViewDoc } from './DataViewDoc';
@@ -134,7 +134,7 @@ export class DataViewDemo extends Component {
                     <AppInlineHeader changelogText="dataView">
                         <h1>DataView</h1>
                         <p>DataView displays data in grid or list layout with pagination and sorting features.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="dataview/DataViewDemo.js" />
                 </div>
 

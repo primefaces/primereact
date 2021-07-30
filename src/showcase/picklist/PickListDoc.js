@@ -15,7 +15,7 @@ export class PickListDoc extends Component {
                 content: `
 import React, { Component } from 'react';
 import { PickList } from 'primereact/picklist';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
 import './PickListDemo.css';
 
 export class PickListDemo extends Component {
@@ -83,7 +83,7 @@ export class PickListDemo extends Component {
                 content: `
 import React, { useState, useEffect } from 'react';
 import { PickList } from 'primereact/picklist';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
 import './PickListDemo.css';
 
 const PickListDemo = () => {
@@ -137,8 +137,67 @@ const PickListDemo = () => {
                 content: `
 import React, { useState, useEffect } from 'react';
 import { PickList } from 'primereact/picklist';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
 import './PickListDemo.css';
+
+const PickListDemo = () => {
+    const [source, setSource] = useState([]);
+    const [target, setTarget] = useState([]);
+    const productService = new ProductService();
+
+    useEffect(() => {
+        productService.getProductsSmall().then(data => setSource(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const onChange = (event) => {
+        setSource(event.source);
+        setTarget(event.target);
+    }
+
+    const itemTemplate = (item) => {
+        return (
+            <div className="product-item">
+                <div className="image-container">
+                    <img src={\`showcase/demo/images/product/\${item.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} />
+                </div>
+                <div className="product-list-detail">
+                    <h5 className="p-mb-2">{item.name}</h5>
+                    <i className="pi pi-tag product-category-icon"></i>
+                    <span className="product-category">{item.category}</span>
+                </div>
+                <div className="product-list-action">
+                    <h6 className="p-mb-2">\${item.price}</h6>
+                    <span className={\`product-badge status-\${item.inventoryStatus.toLowerCase()}\`}>{item.inventoryStatus}</span>
+                </div>
+            </div>
+        );
+    }
+
+    return (
+        <div className="picklist-demo">
+            <div className="card">
+                <PickList source={source} target={target} itemTemplate={itemTemplate}
+                    sourceHeader="Available" targetHeader="Selected"
+                    sourceStyle={{ height: '342px' }} targetStyle={{ height: '342px' }}
+                    onChange={onChange}></PickList>
+            </div>
+        </div>
+    );
+}
+                `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <link rel="stylesheet" href="./PickListDemo.css" />
+        <script src="./ProductService.js"></script>
+
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/button/button.min.js"></script>
+        <script src="https://unpkg.com/primereact/picklist/picklist.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const { PickList } = primereact.picklist;
 
 const PickListDemo = () => {
     const [source, setSource] = useState([]);
@@ -189,7 +248,7 @@ const PickListDemo = () => {
         };
 
         this.extFiles = {
-            'src/demo/PickListDemo.css': {
+            'demo/PickListDemo.css': {
                 content: `
 .picklist-demo .product-item {
     display: flex;

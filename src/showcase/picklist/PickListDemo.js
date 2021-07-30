@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { PickList } from '../../components/picklist/PickList';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './PickListDemo.scss';
 import { PickListDoc } from './PickListDoc';
@@ -58,7 +58,7 @@ export class PickListDemo extends Component {
                     <AppInlineHeader changelogText="pickList">
                         <h1>PickList</h1>
                         <p>PickList is used to reorder items between different lists.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="picklist/PickListDemo.js" />
                 </div>
 

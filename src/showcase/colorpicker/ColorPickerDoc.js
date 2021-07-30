@@ -88,6 +88,34 @@ const ColorPickerDemo = () => {
     )
 }
                 `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/colorpicker/colorpicker.min.js"></script>`,
+                content: `
+const { useEffect, useState, useRef } = React;
+const { ColorPicker } = primereact.colorpicker;
+
+const ColorPickerDemo = () => {
+    const [color1, setColor1] = useState(null);
+    const [color2, setColor2] = useState('1976D2');
+
+    return (
+        <div>
+            <div className="card">
+                <h5>Inline</h5>
+                <ColorPicker value={color1} onChange={(e) => setColor1(e.value)} inline></ColorPicker>
+
+                <h5>Overlay</h5>
+                <ColorPicker value={color2} onChange={(e) => setColor2(e.value)}></ColorPicker>
+            </div>
+        </div>
+    )
+}
+                `
             }
         }
 

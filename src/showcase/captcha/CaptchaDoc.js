@@ -92,6 +92,36 @@ const CaptchaDemo = () => {
     )
 }
                 `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/toast/toast.min.js"></script>
+        <script src="https://unpkg.com/primereact/captcha/captcha.min.js"></script>`,
+                content: `
+const { useEffect, useState, useRef } = React;
+const { Captcha } = primereact.captcha;
+const { Toast } = primereact.toast;
+
+const CaptchaDemo = () => {
+    const toast = useRef(null);
+
+    const showResponse = () => {
+        toast.current.show({ severity: 'info', summary: 'Success', detail: 'User Responded' });
+    }
+
+    return (
+        <div>
+            <Toast ref={toast}></Toast>
+
+            <div className="card">
+                <Captcha siteKey="YOUR_SITE_KEY" onResponse={showResponse} />
+            </div>
+        </div>
+    )
+}
+                `
             }
         }
     }

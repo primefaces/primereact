@@ -197,6 +197,70 @@ const TreeDemo = () => {
     );
 }
                 `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="./NodeService.js"></script>
+
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/tree/tree.min.js"></script>
+        <script src="https://unpkg.com/primereact/button/button.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const { Tree } = primereact.tree;
+const { Button } = primereact.button;
+
+const TreeDemo = () => {
+    const [nodes, setNodes] = useState(null);
+    const [expandedKeys, setExpandedKeys] = useState({});
+    const nodeService = new NodeService();
+
+    const expandAll = () => {
+        let _expandedKeys = {};
+        for (let node of nodes) {
+            expandNode(node, _expandedKeys);
+        }
+
+        setExpandedKeys(_expandedKeys);
+    }
+
+    const collapseAll = () => {
+        setExpandedKeys({});
+    }
+
+    const expandNode = (node, _expandedKeys) => {
+        if (node.children && node.children.length) {
+            _expandedKeys[node.key] = true;
+
+            for (let child of node.children) {
+                expandNode(child, _expandedKeys);
+            }
+        }
+    }
+
+    useEffect(() => {
+        nodeService.getTreeNodes().then(data => setNodes(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    return (
+        <div>
+            <div className="card">
+                <h5>Basic</h5>
+                <Tree value={nodes} />
+
+                <h5>Programmatic Control</h5>
+                <div className="p-mb-4">
+                    <Button type="button" icon="pi pi-plus" label="Expand All" onClick={expandAll} className="p-mr-2" />
+                    <Button type="button" icon="pi pi-minus" label="Collapse All" onClick={collapseAll} />
+                </div>
+                <Tree value={nodes} expandedKeys={expandedKeys}
+                    onToggle={e => setExpandedKeys(e.value)} />
+            </div>
+        </div>
+    );
+}
+                `
             }
         }
     }

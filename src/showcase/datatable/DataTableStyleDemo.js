@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { classNames } from '../../components/utils/ClassNames';
 import { DataTable } from '../../components/datatable/DataTable';
 import { Column } from '../../components/column/Column';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
 import { TabView } from '../../components/tabview/TabView';
 import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
@@ -88,7 +88,7 @@ import React, { Component } from 'react';
 import { classNames } from 'primereact/utils';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
 import './DataTableDemo.css';
 
 export class DataTableStyleDemo extends Component {
@@ -153,7 +153,7 @@ import React, { useState, useEffect } from 'react';
 import { classNames } from 'primereact/utils';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
 import './DataTableDemo.css';
 
 const DataTableStyleDemo = () => {
@@ -206,8 +206,66 @@ import React, { useState, useEffect } from 'react';
 import { classNames } from 'primereact/utils';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
 import './DataTableDemo.css';
+
+const DataTableStyleDemo = () => {
+    const [products, setProducts] = useState([]);
+    const productService = new ProductService();
+
+    useEffect(() => {
+        productService.getProductsSmall().then(data => setProducts(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const rowClass = (data) => {
+        return {
+            'row-accessories': data.category === 'Accessories'
+        }
+    }
+
+    const stockBodyTemplate = (rowData) => {
+        const stockClassName = classNames({
+            'outofstock': rowData.quantity === 0,
+            'lowstock': rowData.quantity > 0 && rowData.quantity < 10,
+            'instock': rowData.quantity > 10
+        });
+
+        return (
+            <div className={stockClassName}>
+                {rowData.quantity}
+            </div>
+        );
+    }
+
+    return (
+        <div className="datatable-style-demo">
+            <div className="card">
+                <DataTable value={products} rowClassName={rowClass}>
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity" body={stockBodyTemplate}></Column>
+                </DataTable>
+            </div>
+        </div>
+    );
+}
+                `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <link rel="stylesheet" href="./DataTableDemo.css" />
+        <script src="./ProductService.js"></script>
+
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/column/column.min.js"></script>
+        <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const { Column } = primereact.column;
+const { DataTable } = primereact.datatable;
+const { classNames } = primereact.core;
 
 const DataTableStyleDemo = () => {
     const [products, setProducts] = useState([]);
@@ -255,7 +313,7 @@ const DataTableStyleDemo = () => {
         };
 
         this.extFiles = {
-            'src/demo/DataTableDemo.css': {
+            'demo/DataTableDemo.css': {
                 content: `
 .datatable-style-demo .outofstock {
     font-weight: 700;

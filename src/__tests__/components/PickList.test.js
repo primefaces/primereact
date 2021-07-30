@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { render } from '@testing-library/react';
 import { PickList } from '../../components/picklist/PickList';
-import ProductService from '../../showcase/service/ProductService';
+import { ProductService } from '../../showcase/service/ProductService';
 
 const PickListTestComponent = () => {
     const [source, setSource] = useState([]);

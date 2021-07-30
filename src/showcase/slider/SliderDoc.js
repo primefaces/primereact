@@ -147,11 +147,59 @@ const SliderDemo = () => {
     );
 }
                 `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <link rel="stylesheet" href="./SliderDemo.css" />
+
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/slider/slider.min.js"></script>
+        <script src="https://unpkg.com/primereact/inputtext/inputtext.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const { Slider } = primereact.slider;
+const { InputText } = primereact.inputtext;
+
+const SliderDemo = () => {
+    const [value1, setValue1] = useState(null);
+    const [value2, setValue2] = useState(50);
+    const [value3, setValue3] = useState(20);
+    const [value4, setValue4] = useState(30.5);
+    const [value5, setValue5] = useState([20,80]);
+    const [value6, setValue6] = useState(50);
+
+    return (
+        <div className="slider-demo">
+            <div className="card">
+                <h5>Basic: {value1}</h5>
+                <Slider value={value1} onChange={(e) => setValue1(e.value)} />
+
+                <h5>Input: {value2}</h5>
+                <InputText value={value2} onChange={(e) => setValue2(e.target.value)} />
+                <Slider value={value2} onChange={(e) => setValue2(e.value)} />
+
+                <h5>Step: {value3}</h5>
+                <Slider value={value3} onChange={(e) => setValue3(e.value)} step={20} />
+
+                <h5>Decimal Step: {value4}</h5>
+                <Slider value={value4} onChange={(e) => setValue4(e.value)} step={0.5} />
+
+                <h5>Range: [{value5[0]}, {value5[1]}]</h5>
+                <Slider value={value5} onChange={(e) => setValue5(e.value)} range />
+
+                <h5>Vertical: {value6}</h5>
+                <Slider value={value6} onChange={(e) => setValue6(e.value)} orientation="vertical" />
+            </div>
+        </div>
+    );
+}
+                `
             }
         };
 
         this.extFiles = {
-            'src/demo/SliderDemo.css': {
+            'demo/SliderDemo.css': {
                 content: `
 .slider-demo .p-slider-horizontal, .slider-demo .p-inputtext {
     width: 14rem;

@@ -29,6 +29,7 @@
     border-radius: 50%;
     position: relative;
     overflow: hidden;
+    text-decoration: none;
 }
 
 .p-speeddial-circle .p-speeddial-item,

@@ -123,11 +123,51 @@ const RippleDemo = () => {
     );
 }
                 `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <link rel="stylesheet" href="./RippleDemo.css" />
+
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const PrimeReact = primereact.api;
+const { Ripple } = primereact.core;
+
+const RippleDemo = () => {
+    PrimeReact.ripple = true;
+
+    return (
+        <div className="ripple-demo">
+            <div className="card-container p-d-flex">
+                <div className="card primary-box p-ripple">
+                    Default
+                    <Ripple />
+                </div>
+                <div className="card styled-box-green p-ripple">
+                    Green
+                    <Ripple />
+                </div>
+                <div className="card styled-box-orange p-ripple">
+                    Orange
+                    <Ripple />
+                </div>
+                <div className="card styled-box-purple p-ripple">
+                    Purple
+                    <Ripple />
+                </div>
+            </div>
+        </div>
+    );
+}
+                `
             }
         };
 
         this.extFiles = {
-            'src/demo/RippleDemo.css': {
+            'demo/RippleDemo.css': {
                 content: `
 .ripple-demo .card-container .card {
     width: 75px;

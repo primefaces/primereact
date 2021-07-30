@@ -2,8 +2,59 @@ import React from 'react';
 import { services, data } from './LiveEditorData';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
 import { TabPanel } from '../../components/tabview/TabView';
+import * as pkg from '../../../package.json';
+
+const vPrimeReact = '^6.5.0'; // latest
 
 let currentProps = {};
+
+const contents = (name, content, imports) => ({
+    'js': `import 'primeicons/primeicons.css';
+import 'primereact/resources/themes/saga-blue/theme.css';
+import 'primereact/resources/primereact.css';
+import 'primeflex/primeflex.css';
+import '../../index.css';
+import ReactDOM from 'react-dom';
+${content}
+const rootElement = document.getElementById("root");
+ReactDOM.render(<${name} />, rootElement);`,
+
+    'browser': `
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>${name}</title>
+
+        <!-- PrimeReact -->
+        <link rel="stylesheet" href="https://unpkg.com/primeicons/primeicons.css" />
+        <link rel="stylesheet" href="https://unpkg.com/primereact/resources/themes/saga-blue/theme.css" />
+        <link rel="stylesheet" href="https://unpkg.com/primereact/resources/primereact.min.css" />
+        <link rel="stylesheet" href="https://unpkg.com/primeflex@2.0.0/primeflex.min.css" />
+
+        <!-- Dependencies -->
+        <script src="https://unpkg.com/react/umd/react.production.min.js"></script>
+        <script src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <script src="https://unpkg.com/react-transition-group@4.4.2/dist/react-transition-group.js"></script>
+
+        <!-- Demo -->${imports}
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <script type="text/babel">
+${content}
+const rootElement = document.getElementById("root");
+ReactDOM.render(<${name} />, rootElement);
+
+        </script>
+    </body>
+</html>
+`
+});
 
 export const useLiveEditorTabs = (props) => {
     currentProps = props;
@@ -19,7 +70,7 @@ export const useLiveEditorTabs = (props) => {
         return (
             <CodeHighlight key={`${key}_${i}`} lang={lang}>
 {`
-/* ${key.replace('src/demo/', '')} */
+/* ${key.replace('demo/', '')} */
 `}
                 {value.content}
             </CodeHighlight>
@@ -27,6 +78,9 @@ export const useLiveEditorTabs = (props) => {
     });
 
     let tabs = Object.entries(props.sources).map(([key, value]) => {
+        const { content: _c, imports: _i } = value;
+        const content = key === 'browser' ? contents(props.name, _c, _i).browser : _c;
+
         return (
             <TabPanel key={key} header={value.tabName}>
                 {/* eslint-disable */}
@@ -35,7 +89,7 @@ export const useLiveEditorTabs = (props) => {
                 </a>
                 {/* eslint-enable */}
                 <CodeHighlight lang="js">
-                    {value.content}
+                    {content}
                 </CodeHighlight>
 
                 {extFiles}
@@ -51,7 +105,7 @@ export const useLiveEditorTabs = (props) => {
                     <CodeHighlight lang="js">
                         {services[s]}
                     </CodeHighlight>
-                    <span className="liveEditorHelperText"></span>
+                    <span className="liveEditorHelperText">* This code is different for the 'Browser Source'.</span>
                 </TabPanel>
             )
         });
@@ -76,28 +130,39 @@ export const useLiveEditorTabs = (props) => {
 export const useLiveEditor = () => {
     const props = currentProps;
 
-    const createSandboxParameters = (nameWithExt, files, extDependencies) => {
-        let extFiles = !!props.extFiles ? { ...props.extFiles } : {};
-        let extIndexCSS = extFiles['index.css'] || '';
-        delete extFiles['index.css'];
+    const createSandboxParameters = (nameWithExt, files, extDependencies, sourceType, rootPath) => {
+        let isBrowser = sourceType === 'browser';
+        let _extFiles = !!props.extFiles ? { ...props.extFiles } : {};
+        let extIndexCSS = _extFiles['index.css'] || '';
+        delete _extFiles['index.css'];
 
-        const dependencies = require('../../../package.json') ? require('../../../package.json').devDependencies : {};
+        let extFiles = {};
+        Object.entries(_extFiles).forEach(([k, v]) => extFiles[`${rootPath}${k}`] = v);
+
+        const dependencies = pkg ? pkg.devDependencies : {};
 
         return {
             files: {
                 'package.json': {
                     content: {
-                        main: `src/demo/${nameWithExt}`,
-                        dependencies: {
+                        main: `${rootPath}demo/${nameWithExt}`,
+                        dependencies: isBrowser ? {} : {
                             ...extDependencies,
                             'react': dependencies['react'],
                             'react-dom': dependencies['react-dom'],
                             'react-transition-group': dependencies['react-transition-group'],
-                            'primereact': '^6.5.0', // latest
+                            'primereact': vPrimeReact, // latest
                             'primeflex': dependencies['primeflex'],
                             'primeicons': dependencies['primeicons']
                         }
                     }
+                },
+                'index.html': {
+                    content: isBrowser ? `<meta http-equiv="refresh" content="0;url=demo/${nameWithExt}" />` :
+                    `<div id="root"></div>
+
+                    <!-- Added to show icons in the editor -->
+                    <link rel="stylesheet" href="https://unpkg.com/primeicons@${dependencies['primeicons'].replace(/[\^|~]/gi, '')}/primeicons.css">`
                 },
                 'index.css': {
                     content: `
@@ -303,31 +368,35 @@ ${extIndexCSS}
                     `,
                 },
                 ...files,
-                ...extFiles,
-                'index.html': {
-                    content: `
-<div id="root"></div>
-
-<!-- Added to show icons in the editor -->
-<link rel="stylesheet" href="https://unpkg.com/primeicons@${dependencies['primeicons'].replace(/[\^|~]/gi, '')}/primeicons.css">
-                  `
-                }
+                ...extFiles
             }
         }
     };
 
     const getSandboxParameters = (sourceType) => {
-        let name = props.name;
+        let { name, sources, dependencies } = props;
         let extension = '.js';
-        let extDependencies = props.dependencies || {};
-        let content = props.sources[sourceType].content;
+        let serviceExtension = extension;
+        let extDependencies = dependencies || {};
+        let { content, imports } = sources[sourceType];
+        let { browser, js } = contents(name, content, `\n        <link rel="stylesheet" href="../index.css" />${imports}`);
+        let rootPath = 'src/';
 
         let _files = {};
+
+        _files[`sandbox.config.json`] = {
+            content: {
+                "infiniteLoopProtection": false
+            }
+        }
+
         if (sourceType === 'class' || sourceType === 'hooks') {
-            extension = '.js';
+            extension = serviceExtension = '.js';
+            content = js;
         }
         else if (sourceType === 'ts') {
-            extension = '.tsx';
+            extension = serviceExtension = '.tsx';
+            content = js;
 
             _files[`tsconfig.json`] = {
                 content:
@@ -369,25 +438,26 @@ ${extIndexCSS}
                 "typescript": "3.3.3"
             }
         }
+        else if (sourceType === 'browser') {
+            extension = '.html';
+            content = browser;
+            rootPath = '';
 
-        _files[`src/demo/${name}${extension}`] = {
-            content:
-                `import 'primeicons/primeicons.css';
-import 'primereact/resources/themes/saga-blue/theme.css';
-import 'primereact/resources/primereact.css';
-import 'primeflex/primeflex.css';
-import '../../index.css';
-import ReactDOM from 'react-dom';
-${content}
-const rootElement = document.getElementById("root");
-ReactDOM.render(<${name} />, rootElement);`
+            _files[`sandbox.config.json`]['content']['template'] = 'static';
+        }
+
+        _files[`${rootPath}demo/${name}${extension}`] = {
+            content
         }
 
         if (props.service) {
             const serviceArr = props.service.replace(/\s/g,'').split(',');
             serviceArr.forEach(s => {
-                _files[`src/service/${s}${extension}`] = {
-                    content: services[s]
+                const path = `${rootPath}${sourceType === 'browser' ? 'demo' : 'service'}/${s}${serviceExtension}`;
+                const content = sourceType === 'browser' ? services[s].replace('export class', 'class') : services[s];
+
+                _files[path] = {
+                    content
                 }
             });
         }
@@ -395,13 +465,16 @@ ReactDOM.render(<${name} />, rootElement);`
         if (props.data) {
             const dataArr = props.data.replace(/\s/g,'').split(',');
             dataArr.forEach(d => {
-                _files[`public/data/${d}.json`] = {
-                    content: data[d]
+                const path = `${sourceType === 'browser' ? 'demo' : 'public'}/data/${d}.json`;
+                const content = data[d];
+
+                _files[path] = {
+                    content
                 }
             });
         }
 
-        return createSandboxParameters(`${name}${extension}`, _files, extDependencies);
+        return createSandboxParameters(`${name}${extension}`, _files, extDependencies, sourceType, rootPath);
     }
 
     return {

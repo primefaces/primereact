@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { OrderList } from '../../components/orderlist/OrderList';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './OrderListDemo.scss';
 import { OrderListDoc } from './OrderListDoc';
@@ -49,7 +49,7 @@ export class OrderListDemo extends Component {
                     <AppInlineHeader changelogText="orderList">
                         <h1>OrderList</h1>
                         <p>OrderList is used to sort a collection.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="orderlist/OrderListDemo.js" />
                 </div>
 

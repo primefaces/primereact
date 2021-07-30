@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { DataTable } from '../../components/datatable/DataTable';
 import { Column } from '../../components/column/Column';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
 import { TabView } from '../../components/tabview/TabView';
 import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
@@ -41,7 +41,7 @@ export class DataTableSortDemo extends Component {
                         <h1>DataTable <span>Sort</span></h1>
                         <p>Enabling sortable property on a column is enough to make a column sortable. Multiple column sorting is enabled using sortMode property and
                             used with metaKey.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="datatable/DataTableSortDemo.js" />
                 </div>
 
@@ -122,7 +122,7 @@ export class DataTableSortDemoDoc extends Component {
 import React, { Component } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
 
 export class DataTableSortDemo extends Component {
 
@@ -221,7 +221,7 @@ export class DataTableSortDemo extends Component {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
 
 const DataTableSortDemo = () => {
     const [products, setProducts] = useState([]);
@@ -309,7 +309,100 @@ const DataTableSortDemo = () => {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
+
+const DataTableSortDemo = () => {
+    const [products, setProducts] = useState([]);
+    const [multiSortMeta, setMultiSortMeta] = useState([{ field: 'category', order: -1 }]);
+    const productService = new ProductService();
+
+    useEffect(() => {
+        productService.getProductsSmall().then(data => setProducts(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const formatCurrency = (value) => {
+        return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+    }
+
+    const priceBodyTemplate = (rowData) => {
+        return formatCurrency(rowData.price);
+    }
+
+    return (
+        <div>
+            <div className="card">
+                <h5>Single Column</h5>
+                <DataTable value={products}>
+                    <Column field="code" header="Code" sortable></Column>
+                    <Column field="name" header="Name" sortable></Column>
+                    <Column field="category" header="Category" sortable></Column>
+                    <Column field="quantity" header="Quantity" sortable></Column>
+                    <Column field="price" header="Price" body={priceBodyTemplate} sortable></Column>
+                </DataTable>
+            </div>
+
+            <div className="card">
+                <h5>Multiple Columns</h5>
+                <p>Use metakey to add a column to the sort selection.</p>
+                <DataTable value={products} sortMode="multiple">
+                    <Column field="code" header="Code" sortable></Column>
+                    <Column field="name" header="Name" sortable></Column>
+                    <Column field="category" header="Category" sortable></Column>
+                    <Column field="quantity" header="Quantity" sortable></Column>
+                    <Column field="price" header="Price" body={priceBodyTemplate} sortable></Column>
+                </DataTable>
+            </div>
+
+            <div className="card">
+                <h5>Presort</h5>
+                <DataTable value={products} sortField="category" sortOrder={-1}>
+                    <Column field="code" header="Code" sortable></Column>
+                    <Column field="name" header="Name" sortable></Column>
+                    <Column field="category" header="Category" sortable></Column>
+                    <Column field="quantity" header="Quantity" sortable></Column>
+                    <Column field="price" header="Price" body={priceBodyTemplate} sortable></Column>
+                </DataTable>
+            </div>
+
+            <div className="card">
+                <h5>Removable Sort</h5>
+                <DataTable value={products} removableSort>
+                    <Column field="code" header="Code" sortable></Column>
+                    <Column field="name" header="Name" sortable></Column>
+                    <Column field="category" header="Category" sortable></Column>
+                    <Column field="quantity" header="Quantity" sortable></Column>
+                    <Column field="price" header="Price" body={priceBodyTemplate} sortable></Column>
+                </DataTable>
+            </div>
+
+            <div className="card">
+                <h5>Sortable Disabled</h5>
+                <p>Use metakey to add a column to the multiple sort selection.</p>
+                <DataTable value={products} sortMode="multiple" removableSort multiSortMeta={multiSortMeta} onSort={(e) => setMultiSortMeta(e.multiSortMeta)}>
+                    <Column field="code" header="Code" sortable></Column>
+                    <Column field="name" header="Name" sortable></Column>
+                    <Column field="category" header="Category (Disabled)" sortable sortableDisabled></Column>
+                    <Column field="quantity" header="Quantity" sortable></Column>
+                    <Column field="price" header="Price" body={priceBodyTemplate} sortable></Column>
+                </DataTable>
+            </div>
+        </div>
+    );
+}
+                `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="./ProductService.js"></script>
+
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/column/column.min.js"></script>
+        <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const { Column } = primereact.column;
+const { DataTable } = primereact.datatable;
 
 const DataTableSortDemo = () => {
     const [products, setProducts] = useState([]);

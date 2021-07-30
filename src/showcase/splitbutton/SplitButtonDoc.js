@@ -212,6 +212,77 @@ const SplitButtonDemo = () => {
     )
 }
                 `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/button/button.min.js"></script>
+        <script src="https://unpkg.com/primereact/splitbutton/splitbutton.min.js"></script>
+        <script src="https://unpkg.com/primereact/toast/toast.min.js"></script>`,
+                content: `
+const { useEffect, useState, useRef } = React;
+const { SplitButton } = primereact.splitbutton;
+const { Toast } = primereact.toast;
+
+const SplitButtonDemo = () => {
+    const toast = useRef(null);
+    const items = [
+        {
+            label: 'Update',
+            icon: 'pi pi-refresh',
+            command: () => {
+                toast.current.show({severity:'success', summary:'Updated', detail:'Data Updated'});
+            }
+        },
+        {
+            label: 'Delete',
+            icon: 'pi pi-times',
+            command: () => {
+                toast.current.show({ severity: 'success', summary: 'Delete', detail: 'Data Deleted' });
+            }
+        },
+        {
+            label: 'React Website',
+            icon: 'pi pi-external-link',
+            command: () => {
+                window.location.href = 'https://facebook.github.io/react/'
+            }
+        },
+        {   label: 'Upload',
+            icon: 'pi pi-upload',
+            command: () => {
+                window.location.hash = "/fileupload"
+            }
+        }
+    ];
+
+    const save = () => {
+        toast.current.show({severity: 'success', summary: 'Success', detail: 'Data Saved'});
+    }
+
+    return (
+        <div>
+            <Toast ref={toast}></Toast>
+
+            <div className="card">
+                <h5>Basic</h5>
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items}></SplitButton>
+
+                <h5>Severities</h5>
+                <SplitButton label="Save" icon="pi pi-plus" model={items} className="p-mr-2"></SplitButton>
+                <SplitButton label="Save" icon="pi pi-plus" model={items} className="p-button-secondary p-mr-2"></SplitButton>
+                <SplitButton label="Save" icon="pi pi-plus" model={items} className="p-button-success p-mr-2"></SplitButton>
+                <SplitButton label="Save" icon="pi pi-plus" model={items} className="p-button-info p-mr-2"></SplitButton>
+                <SplitButton label="Save" icon="pi pi-plus" model={items} className="p-button-warning p-mr-2"></SplitButton>
+                <SplitButton label="Save" icon="pi pi-plus" model={items} className="p-button-help p-mr-2"></SplitButton>
+                <SplitButton label="Save" icon="pi pi-plus" model={items} className="p-button-danger p-mr-2"></SplitButton>
+            </div>
+        </div>
+    )
+}
+                `
             }
         }
     }

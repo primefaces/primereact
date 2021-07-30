@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { DataScroller } from '../../components/datascroller/DataScroller';
 import { Button } from '../../components/button/Button';
 import { Rating } from '../../components/rating/Rating';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
 import { AppInlineHeader } from '../../AppInlineHeader';
 import './DataScrollerDemo.scss';
 import { DataScrollerDoc } from './DataScrollerDoc';
@@ -51,7 +51,7 @@ export class DataScrollerDemo extends Component {
                     <AppInlineHeader changelogText="dataScroller">
                         <h1>DataScroller</h1>
                         <p>DataScroller displays data with on demand loading using scroll.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="datascroller/DataScrollerDemo.js" />
                 </div>
 

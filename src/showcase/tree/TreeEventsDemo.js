@@ -229,6 +229,58 @@ const TreeEventsDemo = () => {
     )
 }
                 `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="./NodeService.js"></script>
+
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/tree/tree.min.js"></script>
+        <script src="https://unpkg.com/primereact/toast/toast.min.js"></script>`,
+                content: `
+const { useEffect, useState, useRef } = React;
+const { Tree } = primereact.tree;
+const { Toast } = primereact.toast;
+
+const TreeEventsDemo = () => {
+    const [nodes, setNodes] = useState([]);
+    const [selectedNodeKey, setSelectedNodeKey] = useState(null);
+    const toast = useRef(null);
+    const nodeService = new NodeService();
+
+    useEffect(() => {
+        nodeService.getTreeNodes().then(data => setNodes(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const onExpand = (event) => {
+        toast.current.show({ severity: 'success', summary: 'Node Expanded', detail: event.node.label });
+    }
+
+    const onCollapse = (event) => {
+        toast.current.show({ severity: 'success', summary: 'Node Collapsed', detail: event.node.label });
+    }
+
+    const onSelect = (event) => {
+        toast.current.show({ severity: 'info', summary: 'Node Selected', detail: event.node.label });
+    }
+
+    const onUnselect = (event) => {
+        toast.current.show({ severity: 'info', summary: 'Node Unselected', detail: event.node.label });
+    }
+
+    return (
+        <div>
+            <Toast ref={toast} />
+
+            <div className="card">
+                <Tree value={nodes} selectionMode="single" selectionKeys={selectedNodeKey} onSelectionChange={e => setSelectedNodeKey(e.value)}
+                    onExpand={onExpand} onCollapse={onCollapse} onSelect={onSelect} onUnselect={onUnselect} />
+            </div>
+        </div>
+    )
+}
+                `
             }
         }
     }

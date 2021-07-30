@@ -102,6 +102,37 @@ const InputTextareaDemo = () => {
 }
                 `
             },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/inputtextarea/inputtextarea.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const { InputTextarea } = primereact.inputtextarea;
+
+const InputTextareaDemo = () => {
+    const [value1, setValue1] = useState('');
+    const [value2, setValue2] = useState('');
+    const [value3, setValue3] = useState('');
+
+    return (
+        <div>
+            <div className="card">
+                <h5>Basic</h5>
+                <InputTextarea value={value1} onChange={(e) => setValue1(e.target.value)} rows={5} cols={30} />
+
+                <h5>Auto Resize</h5>
+                <InputTextarea value={value2} onChange={(e) => setValue2(e.target.value)} rows={5} cols={30} autoResize />
+
+                <h5>Disabled</h5>
+                <InputTextarea value={value3} rows={5} cols={30} disabled />
+            </div>
+        </div>
+    )
+}
+                `
+            }
         }
     }
 

@@ -269,6 +269,72 @@ const TreeContextMenuDemo = () => {
     )
 }
                 `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="./NodeService.js"></script>
+
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/tree/tree.min.js"></script>
+        <script src="https://unpkg.com/primereact/contextmenu/contextmenu.min.js"></script>
+        <script src="https://unpkg.com/primereact/toast/toast.min.js"></script>`,
+                content: `
+const { useEffect, useState, useRef } = React;
+const { Tree } = primereact.tree;
+const { ContextMenu } = primereact.contextmenu;
+const { Toast } = primereact.toast;
+
+const TreeContextMenuDemo = () => {
+    const [nodes, setNodes] = useState(null);
+    const [expandedKeys, setExpandedKeys] = useState({});
+    const [selectedNodeKey, setSelectedNodeKey] = useState(null);
+    const toast = useRef(null);
+    const cm = useRef(null);
+    const menu = [
+        {
+            label: 'View Key',
+            icon: 'pi pi-search',
+            command: () => {
+                toast.current.show({severity: 'success', summary: 'Node Key', detail: selectedNodeKey});
+            }
+        },
+        {
+            label: 'Toggle',
+            icon: 'pi pi-cog',
+            command: () => {
+                let _expandedKeys = {...expandedKeys};
+                if (_expandedKeys[selectedNodeKey])
+                    delete _expandedKeys[selectedNodeKey];
+                else
+                    _expandedKeys[selectedNodeKey] = true;
+
+                setExpandedKeys(_expandedKeys);
+            }
+        }
+    ];
+
+    const nodeService = new NodeService();
+
+    useEffect(() => {
+        nodeService.getTreeNodes().then(data => setNodes(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    return (
+        <div>
+            <Toast ref={toast} />
+
+            <ContextMenu model={menu} ref={cm} onHide={() => setSelectedNodeKey(null)}/>
+
+            <div className="card">
+                <Tree value={nodes} expandedKeys={expandedKeys} onToggle={e => setExpandedKeys(e.value)}
+                    contextMenuSelectionKey={selectedNodeKey} onContextMenuSelectionChange={event => setSelectedNodeKey(event.value)}
+                    onContextMenu={event => cm.current.show(event.originalEvent)} />
+            </div>
+        </div>
+    )
+}
+                `
             }
         }
     }

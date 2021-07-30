@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { DataTable } from '../../components/datatable/DataTable';
 import { Column } from '../../components/column/Column';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
 import { MultiSelect } from '../../components/multiselect/MultiSelect';
 import { TabView } from '../../components/tabview/TabView';
 import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
@@ -86,7 +86,7 @@ export class DataTableColTogglerDemoDoc extends Component {
 import React, { Component } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
 import { MultiSelect } from 'primereact/multiselect';
 
 export class DataTableColTogglerDemo extends Component {
@@ -150,7 +150,7 @@ export class DataTableColTogglerDemo extends Component {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
 import { MultiSelect } from 'primereact/multiselect';
 
 const DataTableColTogglerDemo = () => {
@@ -203,8 +203,68 @@ const DataTableColTogglerDemo = () => {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
 import { MultiSelect } from 'primereact/multiselect';
+
+const DataTableColTogglerDemo = () => {
+    const columns = [
+        {field: 'name', header: 'Name'},
+        {field: 'category', header: 'Category'},
+        {field: 'quantity', header: 'Quantity'}
+    ];
+
+    const [selectedColumns, setSelectedColumns] = useState(columns);
+    const [products, setProducts] = useState([]);
+    const productService = new ProductService();
+
+    useEffect(() => {
+        productService.getProductsSmall().then(data => setProducts(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const onColumnToggle = (event) => {
+        let selectedColumns = event.value;
+        let orderedSelectedColumns = columns.filter(col => selectedColumns.some(sCol => sCol.field === col.field));
+        setSelectedColumns(orderedSelectedColumns);
+    }
+
+    const header = (
+        <div style={{ textAlign:'left' }}>
+            <MultiSelect value={selectedColumns} options={columns} optionLabel="header" onChange={onColumnToggle} style={{width:'20em'}}/>
+        </div>
+    );
+
+    const columnComponents = selectedColumns.map(col=> {
+        return <Column key={col.field} field={col.field} header={col.header} />;
+    });
+
+    return (
+        <div>
+            <div className="card">
+                <DataTable value={products} header={header}>
+                    <Column field="code" header="Code" />
+                    {columnComponents}
+                </DataTable>
+            </div>
+        </div>
+    );
+}
+                `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="./ProductService.js"></script>
+
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/column/column.min.js"></script>
+        <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>
+        <script src="https://unpkg.com/primereact/multiselect/multiselect.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const { Column } = primereact.column;
+const { DataTable } = primereact.datatable;
+const { MultiSelect } = primereact.multiselect;
 
 const DataTableColTogglerDemo = () => {
     const columns = [

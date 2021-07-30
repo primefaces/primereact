@@ -734,11 +734,190 @@ const DataTableScrollDemo = () => {
     );
 }
                 `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <link rel="stylesheet" href="./DataTableDemo.css" />
+        <script src="./CustomerService.js"></script>
+
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/column/column.min.js"></script>
+        <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>`,
+                content: `
+const { useEffect, useState, useRef } = React;
+const { Column } = primereact.column;
+const { DataTable } = primereact.datatable;
+
+const DataTableScrollDemo = () => {
+    const [customers, setCustomers] = useState([]);
+    const [virtualCustomers, setVirtualCustomers] = useState([]);
+    const [inmemoryData, setInMemoryData] = useState([]);
+    const [lazyTotalRecords, setLazyTotalRecords] = useState(0);
+    const [loading, setLoading] = useState(false);
+    const [virtualLoading, setVirtualLoading] = useState(false);
+    const isMounted = useRef(null);
+    const customerService = new CustomerService();
+
+    const frozenValue = [
+        {
+            id: 1255,
+            name: "James McAdams",
+            country: {
+                name: "United States",
+                code: "us"
+            },
+            company: "McAdams Consulting Ltd",
+            date: "2014-02-13",
+            status: "qualified",
+            activity: 23,
+            representative: {
+                name: "Ioni Bowcher",
+                image: "ionibowcher.png"
+            }
+        },
+        {
+            id: 5135,
+            name: "Geraldine Bisset",
+            country: {
+                name: "France",
+                code: "fr"
+            },
+            company: "Bisset Group",
+            status: "proposal",
+            date: "2019-05-05",
+            activity: 0,
+            representative: {
+                name: "Amy Elsner",
+                image: "amyelsner.png"
+            }
+        }
+    ];
+
+    useEffect(() => {
+        if (isMounted.current) {
+            loadVirtualCustomers();
+        }
+    }, [inmemoryData]);
+
+    useEffect(() => {
+        isMounted.current = true;
+        setLoading(true);
+        setVirtualLoading(true);
+
+        customerService.getCustomersLarge().then(data => {
+            setCustomers(data);
+            setLoading(false);
+        });
+        customerService.getCustomersXLarge().then(data => setInMemoryData(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const loadVirtualCustomers = () => {
+        setVirtualCustomers(loadChunk(0, 40));
+        setLazyTotalRecords(500);
+        setVirtualLoading(false);
+    }
+
+    const loadChunk = (index, length) => {
+        let chunk = [];
+        for (let i = 0; i < length; i++) {
+            chunk[i] = { ...inmemoryData[i]};
+        }
+
+        return chunk;
+    }
+
+    const onVirtualScroll = (event) => {
+        //for demo purposes keep loading the same dataset
+        //in a real production application, this data should come from server by building the query with LazyLoadEvent options
+        setTimeout(() => {
+            //last chunk
+            if (event.first === 480) {
+                setVirtualCustomers(loadChunk(event.first, 20));
+            }
+            else {
+                setVirtualCustomers(loadChunk(event.first, event.rows));
+            }
+        }, 250);
+    }
+
+    const loadingText = () => {
+        return <span className="loading-text"></span>;
+    }
+
+    const nameBodyTemplate = (rowData) => {
+        return <span style={{ fontWeight: '700' }}>{rowData.name}</span>;
+    }
+
+    return (
+        <div className="datatable-scroll-demo">
+            <div className="card">
+                <h5>Vertical</h5>
+                <DataTable value={customers} scrollable scrollHeight="200px" loading={loading}>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="country.name" header="Country"></Column>
+                    <Column field="representative.name" header="Representative"></Column>
+                    <Column field="status" header="Status"></Column>
+                </DataTable>
+            </div>
+
+            <div className="card">
+                <h5>Virtual Scroll</h5>
+                <DataTable value={virtualCustomers} scrollable scrollHeight="200px" lazy rows={20} loading={virtualLoading}
+                    virtualScroll virtualRowHeight={45} onVirtualScroll={onVirtualScroll} totalRecords={lazyTotalRecords}>
+                    <Column field="name" header="Name" loadingBody={loadingText}></Column>
+                    <Column field="country.name" header="Country" loadingBody={loadingText}></Column>
+                    <Column field="representative.name" header="Representative" loadingBody={loadingText}></Column>
+                    <Column field="status" header="Status" loadingBody={loadingText}></Column>
+                </DataTable>
+            </div>
+
+            <div className="card">
+                <h5>Horizontal and Vertical</h5>
+                <DataTable value={customers} scrollable scrollHeight="200px" style={{ width: '600px' }} loading={loading}>
+                    <Column field="id" header="Id" headerStyle={{ width: '250px' }} columnKey="id"></Column>
+                    <Column field="name" header="Name" headerStyle={{ width: '250px' }} columnKey="name"></Column>
+                    <Column field="country.name" header="Country" headerStyle={{ width: '250px' }} columnKey="country"></Column>
+                    <Column field="date" header="Date" headerStyle={{ width: '250px' }} columnKey="date"></Column>
+                    <Column field="company" header="Company" headerStyle={{ width: '250px' }} columnKey="company"></Column>
+                    <Column field="status" header="Status" headerStyle={{ width: '250px' }} columnKey="status"></Column>
+                    <Column field="activity" header="Activity" headerStyle={{ width: '250px' }} columnKey="activity"></Column>
+                    <Column field="representative.name" header="Representative" headerStyle={{ width: '250px' }} columnKey="representative"></Column>
+                </DataTable>
+            </div>
+
+            <div className="card">
+                <h5>Frozen Rows</h5>
+                <DataTable value={customers} frozenValue={frozenValue} scrollable scrollHeight="200px" loading={loading}>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="country.name" header="Country"></Column>
+                    <Column field="representative.name" header="Representative"></Column>
+                    <Column field="status" header="Status"></Column>
+                </DataTable>
+            </div>
+
+            <div className="card">
+                <h5>Frozen Columns</h5>
+                <DataTable value={customers} scrollable scrollHeight="200px" frozenWidth="300px" loading={loading}>
+                    <Column field="name" header="Name" body={nameBodyTemplate} headerStyle={{ width: '300px' }} columnKey="name" frozen></Column>
+                    <Column field="id" header="Id" headerStyle={{ width: '300px' }} columnKey="id"></Column>
+                    <Column field="country.name" header="Country" headerStyle={{ width: '300px' }} columnKey="country"></Column>
+                    <Column field="date" header="Date" headerStyle={{ width: '300px' }} columnKey="date"></Column>
+                    <Column field="company" header="Country" headerStyle={{ width: '300px' }} columnKey="company"></Column>
+                    <Column field="status" header="Status" headerStyle={{ width: '300px' }} columnKey="status"></Column>
+                    <Column field="activity" header="Activity" headerStyle={{ width: '300px' }} columnKey="activity"></Column>
+                    <Column field="representative.name" header="Representative" headerStyle={{ width: '300px' }} columnKey="representative"></Column>
+                </DataTable>
+            </div>
+        </div>
+    );
+}
+                `
             }
         };
 
         this.extFiles = {
-            'src/demo/DataTableDemo.css': {
+            'demo/DataTableDemo.css': {
                 content: `
 .datatable-scroll-demo .loading-text {
     display: block;

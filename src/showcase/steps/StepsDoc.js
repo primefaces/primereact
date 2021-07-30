@@ -179,11 +179,72 @@ const StepsDemo = () => {
     );
 }
                 `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <link rel="stylesheet" href="./StepsDemo.css" />
+
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/steps/steps.min.js"></script>
+        <script src="https://unpkg.com/primereact/toast/toast.min.js"></script>
+        <script src="https://unpkg.com/primereact/panel/panel.min.js"></script>`,
+                content: `
+const { useEffect, useState, useRef } = React;
+const { Steps } = primereact.steps;
+const { Toast } = primereact.toast;
+const { Panel } = primereact.panel;
+
+const StepsDemo = () => {
+    const [activeIndex, setActiveIndex] = useState(1);
+    const toast = useRef(null);
+    const items = [
+        {
+            label: 'Personal',
+            command: (event) => {
+                toast.current.show({ severity: 'info', summary: 'First Step', detail: event.item.label });
+            }
+        },
+        {
+            label: 'Seat',
+            command: (event) => {
+                toast.current.show({ severity: 'info', summary: 'Seat Selection', detail: event.item.label });
+            }
+        },
+        {
+            label: 'Payment',
+            command: (event) => {
+                toast.current.show({ severity: 'info', summary: 'Pay with CC', detail: event.item.label });
+            }
+        },
+        {
+            label: 'Confirmation',
+            command: (event) => {
+                toast.current.show({ severity: 'info', summary: 'Last Step', detail: event.item.label });
+            }
+        }
+    ];
+
+    return (
+        <div className="steps-demo">
+            <Toast ref={toast}></Toast>
+
+            <div className="card">
+                <h5>Basic</h5>
+                <Steps model={items} />
+
+                <h5>Interactive</h5>
+                <Steps model={items} activeIndex={activeIndex} onSelect={(e) => setActiveIndex(e.index)} readOnly={false} />
+            </div>
+        </div>
+    );
+}
+                `
             }
         }
 
         this.extFiles = {
-            'src/demo/StepsDemo.css': {
+            'demo/StepsDemo.css': {
                 content: `
 @media screen and (max-width: 640px) {
     .steps-demo .p-steps {

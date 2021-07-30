@@ -4,7 +4,7 @@ import { Carousel } from '../../components/carousel/Carousel';
 import { Button } from '../../components/button/Button';
 import { CarouselDoc } from './CarouselDoc';
 import { AppInlineHeader } from '../../AppInlineHeader';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
 import './CarouselDemo.scss';
 
 export class CarouselDemo extends Component {
@@ -71,7 +71,7 @@ export class CarouselDemo extends Component {
                     <AppInlineHeader changelogText="carousel">
                         <h1>Carousel</h1>
                         <p>Carousel is a content slider featuring various customization options.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="carousel/CarouselDemo.js" />
                 </div>
 

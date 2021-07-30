@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { DataTable } from '../../components/datatable/DataTable';
 import { Column } from '../../components/column/Column';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
 import { TabView } from '../../components/tabview/TabView';
 import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
@@ -104,7 +104,7 @@ export class DataTableResponsiveDemoDoc extends Component {
 import React, { Component } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
 import './DataTableDemo.css';
 
 export class DataTableResponsiveDemo extends Component {
@@ -186,7 +186,7 @@ export class DataTableResponsiveDemo extends Component {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
 import './DataTableDemo.css';
 
 const DataTableResponsiveDemo = () => {
@@ -254,8 +254,82 @@ const DataTableResponsiveDemo = () => {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import ProductService from '../service/ProductService';
+import { ProductService } from '../service/ProductService';
 import './DataTableDemo.css';
+
+const DataTableResponsiveDemo = () => {
+    const [products, setProducts] = useState([]);
+    const productService = new ProductService();
+
+    useEffect(() => {
+        productService.getProducts().then(data => setProducts(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const codeBodyTemplate = (rowData) => {
+        return (
+            <React.Fragment>
+                <span className="p-column-title">Code</span>
+                {rowData.code}
+            </React.Fragment>
+        );
+    }
+
+    const nameBodyTemplate = (rowData) => {
+        return (
+            <React.Fragment>
+                <span className="p-column-title">Name</span>
+                {rowData.name}
+            </React.Fragment>
+        );
+    }
+
+    const categoryBodyTemplate = (rowData) => {
+        return (
+            <React.Fragment>
+                <span className="p-column-title">Category</span>
+                {rowData.category}
+            </React.Fragment>
+        );
+    }
+
+    const quantityBodyTemplate = (rowData) => {
+        return (
+            <React.Fragment>
+                <span className="p-column-title">Quantity</span>
+                {rowData.quantity}
+            </React.Fragment>
+        );
+    }
+
+    return (
+        <div className="datatable-responsive-demo">
+            <div className="card">
+                <DataTable value={products} className="p-datatable-responsive-demo" paginator rows={10} header="Responsive">
+                    <Column field="code" header="Code" body={codeBodyTemplate} />
+                    <Column field="name" header="Name" body={nameBodyTemplate} />
+                    <Column field="category" header="Category" body={categoryBodyTemplate} />
+                    <Column field="quantity" header="Quantity" body={quantityBodyTemplate} />
+                </DataTable>
+            </div>
+        </div>
+    );
+}
+                `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <link rel="stylesheet" href="./DataTableDemo.css" />
+        <script src="./ProductService.js"></script>
+
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/paginator/paginator.min.js"></script>
+        <script src="https://unpkg.com/primereact/column/column.min.js"></script>
+        <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const { Column } = primereact.column;
+const { DataTable } = primereact.datatable;
 
 const DataTableResponsiveDemo = () => {
     const [products, setProducts] = useState([]);
@@ -319,7 +393,7 @@ const DataTableResponsiveDemo = () => {
         };
 
         this.extFiles = {
-            'src/demo/DataTableDemo.css': {
+            'demo/DataTableDemo.css': {
                 content: `
 .datatable-responsive-demo .p-datatable-responsive-demo .p-datatable-tbody > tr > td .p-column-title {
     display: none;

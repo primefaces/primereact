@@ -149,11 +149,61 @@ const TreeSelectDemo = () => {
     );
 }
                 `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <link rel="stylesheet" href="./TreeSelectDemo.css" />
+        <script src="./NodeService.js"></script>
+
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/tree/tree.min.js"></script>
+        <script src="https://unpkg.com/primereact/treeselect/treeselect.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const { TreeSelect } = primereact.treeselect;
+
+const TreeSelectDemo = () => {
+    const [nodes, setNodes] = useState(null);
+    const [selectedNodeKey1, setSelectedNodeKey1] = useState(null);
+    const [selectedNodeKey2, setSelectedNodeKey2] = useState(null);
+    const [selectedNodeKey3, setSelectedNodeKey3] = useState('0-1');
+    const [selectedNodeKeys1, setSelectedNodeKeys1] = useState(null);
+    const [selectedNodeKeys2, setSelectedNodeKeys2] = useState(null);
+    const nodeService = new NodeService();
+
+    useEffect(() => {
+        nodeService.getTreeNodes().then(data => setNodes(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    return (
+        <div className="treeselect-demo">
+            <div className="card">
+                <h5>Single</h5>
+                <TreeSelect value={selectedNodeKey1} options={nodes} onChange={(e) => setSelectedNodeKey1(e.value)} placeholder="Select Item"></TreeSelect>
+
+                <h5>Multiple</h5>
+                <TreeSelect value={selectedNodeKeys1} options={nodes} onChange={(e) => setSelectedNodeKeys1(e.value)} selectionMode="multiple" metaKeySelection={false} placeholder="Select Items"></TreeSelect>
+
+                <h5>Checkbox</h5>
+                <TreeSelect value={selectedNodeKeys2} options={nodes} onChange={(e) => setSelectedNodeKeys2(e.value)} display="chip" selectionMode="checkbox" placeholder="Select Items"></TreeSelect>
+
+                <h5>Filter</h5>
+                <TreeSelect value={selectedNodeKey2} options={nodes} onChange={(e) => setSelectedNodeKey2(e.value)} filter placeholder="Select Items"></TreeSelect>
+
+                <h5>Initial Value</h5>
+                <TreeSelect value={selectedNodeKey3} options={nodes} onChange={(e) => setSelectedNodeKey3(e.value)} placeholder="Select Item"></TreeSelect>
+            </div>
+        </div>
+    );
+}
+                `
             }
         };
 
         this.extFiles = {
-            'src/demo/TreeSelectDemo.css': {
+            'demo/TreeSelectDemo.css': {
                 content: `
 .treeselect-demo .p-treeselect {
     width: 20rem;

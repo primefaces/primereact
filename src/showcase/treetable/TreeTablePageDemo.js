@@ -243,6 +243,63 @@ const TreeTablePageDemo = () => {
     );
 }
                 `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/paginator/paginator.min.js"></script>
+        <script src="https://unpkg.com/primereact/column/column.min.js"></script>
+        <script src="https://unpkg.com/primereact/treetable/treetable.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const { Column } = primereact.column;
+const { TreeTable } = primereact.treetable;
+
+const TreeTablePageDemo = () => {
+    const [nodes, setNodes] = useState([]);
+
+    useEffect(() => {
+        let files = [];
+        for (let i = 0; i < 50; i++) {
+            let node = {
+                key: i,
+                data: {
+                    name: 'Item ' + i,
+                    size: Math.floor(Math.random() * 1000) + 1 + 'kb',
+                    type: 'Type ' + i
+                },
+                children: [
+                    {
+                        key: i + ' - 0',
+                        data: {
+                            name: 'Item ' + i + ' - 0',
+                            size: Math.floor(Math.random() * 1000) + 1 + 'kb',
+                            type: 'Type ' + i
+                        }
+                    }
+                ]
+            };
+
+            files.push(node);
+        }
+
+        setNodes(files);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    return (
+        <div>
+            <div className="card">
+                <TreeTable value={nodes} paginator rows={10}>
+                    <Column field="name" header="Name" expander></Column>
+                    <Column field="size" header="Size"></Column>
+                    <Column field="type" header="Type"></Column>
+                </TreeTable>
+            </div>
+        </div>
+    );
+}
+                `
             }
         }
     }

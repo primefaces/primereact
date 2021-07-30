@@ -93,6 +93,36 @@ const BreadCrumbDemo = () => {
     );
 }
                 `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/breadcrumb/breadcrumb.min.js"></script>`,
+                content: `
+const { useEffect, useState, useRef } = React;
+const { BreadCrumb } = primereact.breadcrumb;
+
+const BreadCrumbDemo = () => {
+    const items = [
+        {label: 'Computer'},
+        {label: 'Notebook'},
+        {label: 'Accessories'},
+        {label: 'Backpacks'},
+        {label: 'Item'}
+    ];
+
+    const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact/showcase' }
+
+    return (
+        <div>
+            <div className="card">
+                <BreadCrumb model={items} home={home} />
+            </div>
+        </div>
+    );
+}
+                `
             }
         }
     }

@@ -20,13 +20,11 @@ export class SkeletonDemo extends Component {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <AppInlineHeader changelogText="skeleton">
-                            <h1>Skeleton</h1>
-                            <p>Skeleton is a placeholder to display instead of the actual content.</p>
-                        </AppInlineHeader> 
+                    <AppInlineHeader changelogText="skeleton">
+                        <h1>Skeleton</h1>
+                        <p>Skeleton is a placeholder to display instead of the actual content.</p>
+                    </AppInlineHeader>
                     <AppDemoActions github="skeleton/SkeletonDemo.js" />
-                    </div>
                 </div>
 
                 <div className="content-section implementation">
