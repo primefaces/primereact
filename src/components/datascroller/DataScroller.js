@@ -158,6 +158,8 @@ export class DataScroller extends Component {
         if (newValue && this.value !== newValue) {
             this.value = newValue;
 
+            this.first = 0;
+            this.dataToRender = [];
             this.handleDataChange();
         }
 
