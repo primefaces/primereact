@@ -328,9 +328,9 @@ import { Sidebar } from 'primereact/sidebar';
                         <p>Sidebar size can be changed using a fixed value or using one of the three predefined ones.</p>
 <CodeHighlight>
 {`
-<Sidebar visible={visible} position="right" className="ui-sidebar-sm" onHide={() => setVisible(false)}></Sidebar>
-<Sidebar visible={visible} position="right" className="ui-sidebar-md" onHide={() => setVisible(false)}></Sidebar>
-<Sidebar visible={visible} position="right" className="ui-sidebar-lg" onHide={() => setVisible(false)}></Sidebar>
+<Sidebar visible={visible} position="right" className="p-sidebar-sm" onHide={() => setVisible(false)}></Sidebar>
+<Sidebar visible={visible} position="right" className="p-sidebar-md" onHide={() => setVisible(false)}></Sidebar>
+<Sidebar visible={visible} position="right" className="p-sidebar-lg" onHide={() => setVisible(false)}></Sidebar>
 <Sidebar visible={visible} position="right" style={{width:'30em'}} onHide={() => setVisible(false)}></Sidebar>
 `}
 </CodeHighlight>
