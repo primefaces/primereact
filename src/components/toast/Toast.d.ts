@@ -14,6 +14,10 @@ export interface ToastMessage {
     closable?: boolean;
     sticky?: boolean;
     life?: number;
+    className?: string;
+    style?: object;
+    contentClassName: string;
+    contentStyle?: object;
 }
 
 export interface ToastProps {

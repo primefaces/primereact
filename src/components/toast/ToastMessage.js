@@ -94,18 +94,22 @@ class ToastMessageComponent extends Component {
 
     render() {
         const severity = this.props.message.severity;
+        const contentClassName = this.props.message.contentClassName;
+        const contentStyle = this.props.message.contentStyle;
+        const style = this.props.message.style;
+
         const className = classNames('p-toast-message', {
             'p-toast-message-info': severity === 'info',
             'p-toast-message-warn': severity === 'warn',
             'p-toast-message-error': severity === 'error',
             'p-toast-message-success': severity === 'success'
-        });
+        }, this.props.message.className);
         const message = this.renderMessage();
         const closeIcon = this.renderCloseIcon();
 
         return (
-            <div ref={this.props.forwardRef} className={className} role="alert" aria-live="assertive" aria-atomic="true" onClick={this.onClick}>
-                <div className="p-toast-message-content">
+            <div ref={this.props.forwardRef} className={className} style={style} role="alert" aria-live="assertive" aria-atomic="true" onClick={this.onClick}>
+                <div className={classNames('p-toast-message-content', contentClassName)} style={contentStyle}>
                     {message}
                     {closeIcon}
                 </div>

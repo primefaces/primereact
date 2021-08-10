@@ -575,6 +575,30 @@ toast.current.show({severity: 'success', summary: 'Success Message', detail: 'Or
                                         <td>Custom content of the message. If enabled, summary and details properties are ignored.</td>
                                     </tr>
                                     <tr>
+                                        <td>className</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Style class of the message.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>style</td>
+                                        <td>object</td>
+                                        <td>null</td>
+                                        <td>Inline style of the message.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>contentClassName</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Style class of the message content.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>contentStyle</td>
+                                        <td>object</td>
+                                        <td>null</td>
+                                        <td>Inline style of the message content.</td>
+                                    </tr>
+                                    <tr>
                                         <td>closable</td>
                                         <td>boolean</td>
                                         <td>true</td>
@@ -718,7 +742,7 @@ toast.current.show({life: 5000, severity: 'error', summary: 'Error Message', det
                                     </tr>
                                     <tr>
                                         <td>style</td>
-                                        <td>string</td>
+                                        <td>object</td>
                                         <td>null</td>
                                         <td>Inline style of the element.</td>
                                     </tr>
