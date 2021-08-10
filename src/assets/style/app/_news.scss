@@ -9,7 +9,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: linear-gradient(90deg, #2a206c, #221b5c);
+    background-image: linear-gradient(90deg, #500d9d, #bd4b56);
 
     .layout-news-container {
         width: 100%;
@@ -42,15 +42,15 @@
         }
 
         img.layouts-news-mockup-image {
-            height: 50px;
+            height: 70px;
         }
 
         .layout-news-button {
-            border: 2px solid #ffffff;
+            border: 1px solid #ffffff;
             color: #ffffff;
             font-size: 15px;
-            padding: 0.5em 1em;
-            font-weight: bolder;
+            padding: .3em .3em .5em 1em;
+            font-weight: bold;
             border-radius: 3px;
             display: flex;
             justify-content: center;

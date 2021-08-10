@@ -38,7 +38,7 @@ export class App extends Component {
             themeCategory: null,
             menuMode: null,
             sidebarActive: false,
-            newsActive: false,
+            newsActive: true,
             configuratorActive: false,
             changelogActive: false,
             searchVal: null,
