@@ -238,6 +238,7 @@ export const BlockUIDemo = () => {
                 imports: `
         <link rel="stylesheet" href="./BlockUIDemo.css" />
 
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/blockui/blockui.min.js"></script>
         <script src="https://unpkg.com/primereact/button/button.min.js"></script>

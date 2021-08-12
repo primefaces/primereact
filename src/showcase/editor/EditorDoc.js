@@ -131,6 +131,7 @@ const EditorDemo = () => {
                 imports: `
         <script src="https://unpkg.com/quill/dist/quill.min.js"></script>
 
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/editor/editor.min.js"></script>`,
                 content: `

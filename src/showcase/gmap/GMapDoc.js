@@ -449,6 +449,7 @@ const GMapDemo = () => {
                 imports: `
         <script src="./GoogleMaps.js"></script>
 
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/gmap/gmap.min.js"></script>
         <script src="https://unpkg.com/primereact/dialog/dialog.min.js"></script>

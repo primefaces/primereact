@@ -219,6 +219,7 @@ const MenuDemo = () => {
             'browser': {
                 tabName: 'Browser Source',
                 imports: `
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/menu/menu.min.js"></script>
         <script src="https://unpkg.com/primereact/button/button.min.js"></script>

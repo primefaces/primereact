@@ -470,6 +470,7 @@ const DialogDemo = () => {
                 imports: `
         <link rel="stylesheet" href="./DialogDemo.css" />
 
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/dialog/dialog.min.js"></script>
         <script src="https://unpkg.com/primereact/button/button.min.js"></script>`,

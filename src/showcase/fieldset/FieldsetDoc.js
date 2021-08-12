@@ -109,6 +109,7 @@ const FieldsetDemo = () => {
             'browser': {
                 tabName: 'Browser Source',
                 imports: `
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/fieldset/fieldset.min.js"></script>`,
                 content: `

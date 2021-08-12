@@ -171,6 +171,7 @@ const DataScrollerDemo = () => {
         <link rel="stylesheet" href="./DataScrollerDemo.css" />
         <script src="./ProductService.js"></script>
 
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/datascroller/datascroller.min.js"></script>
         <script src="https://unpkg.com/primereact/button/button.min.js"></script>

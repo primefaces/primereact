@@ -137,6 +137,7 @@ export const ScrollTopDemo = () => {
                 imports: `
         <link rel="stylesheet" href="./ScrollTopDemo.css" />
 
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/scrolltop/scrolltop.min.js"></script>
         <script src="https://unpkg.com/primereact/scrollpanel/scrollpanel.min.js"></script>`,

@@ -449,6 +449,7 @@ const OrganizationChartDemo = () => {
                 imports: `
         <link rel="stylesheet" href="./OrganizationChartDemo.css" />
 
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/organizationchart/organizationchart.min.js"></script>`,
                 content: `

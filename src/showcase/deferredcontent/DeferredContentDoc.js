@@ -183,6 +183,7 @@ const DeferredContentDemo = () => {
                 imports: `
         <script src="./ProductService.js"></script>
 
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/deferredcontent/deferredcontent.min.js"></script>
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>

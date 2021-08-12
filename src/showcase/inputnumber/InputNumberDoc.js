@@ -435,6 +435,7 @@ const InputNumberDemo = () => {
             'browser': {
                 tabName: 'Browser Source',
                 imports: `
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/inputtext/inputtext.min.js"></script>
         <script src="https://unpkg.com/primereact/inputnumber/inputnumber.min.js"></script>`,

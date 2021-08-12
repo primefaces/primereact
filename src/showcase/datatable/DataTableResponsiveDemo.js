@@ -322,6 +322,7 @@ const DataTableResponsiveDemo = () => {
         <link rel="stylesheet" href="./DataTableDemo.css" />
         <script src="./ProductService.js"></script>
 
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/paginator/paginator.min.js"></script>
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>

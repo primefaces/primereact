@@ -185,6 +185,7 @@ const StepsDemo = () => {
                 imports: `
         <link rel="stylesheet" href="./StepsDemo.css" />
 
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/steps/steps.min.js"></script>
         <script src="https://unpkg.com/primereact/toast/toast.min.js"></script>

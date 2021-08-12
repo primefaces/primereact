@@ -275,6 +275,7 @@ const TreeContextMenuDemo = () => {
                 imports: `
         <script src="./NodeService.js"></script>
 
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/tree/tree.min.js"></script>
         <script src="https://unpkg.com/primereact/contextmenu/contextmenu.min.js"></script>

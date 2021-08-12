@@ -390,6 +390,7 @@ export const AccordionDemo = () => {
                 imports: `
         <link rel="stylesheet" href="./AccordionDemo.css" />
 
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/accordion/accordion.min.js"></script>
         <script src="https://unpkg.com/primereact/button/button.min.js"></script>`,

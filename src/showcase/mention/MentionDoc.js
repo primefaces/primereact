@@ -409,6 +409,7 @@ const MentionDemo = () => {
                 imports: `
         <script src="./CustomerService.js"></script>
 
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/mention/mention.min.js"></script>`,
                 content: `

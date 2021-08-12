@@ -346,6 +346,7 @@ export const SpeedDialDemo = () => {
                 imports: `
         <link rel="stylesheet" href="./SpeedDialDemo.css" />
 
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/button/button.min.js"></script>
         <script src="https://unpkg.com/primereact/speeddial/speeddial.min.js"></script>

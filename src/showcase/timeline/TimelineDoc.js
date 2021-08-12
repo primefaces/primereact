@@ -272,6 +272,7 @@ const TieredMenuDemo = () => {
                 imports: `
         <link rel="stylesheet" href="./TimelineDemo.css" />
 
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/timeline/timeline.min.js"></script>
         <script src="https://unpkg.com/primereact/card/card.min.js"></script>

@@ -165,6 +165,7 @@ const OrderListDemo = () => {
         <link rel="stylesheet" href="./OrderListDemo.css" />
         <script src="./ProductService.js"></script>
 
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/button/button.min.js"></script>
         <script src="https://unpkg.com/primereact/orderlist/orderlist.min.js"></script>`,

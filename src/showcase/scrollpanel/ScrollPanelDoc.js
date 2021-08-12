@@ -219,6 +219,7 @@ const ScrollPanelDemo = () => {
                 imports: `
         <link rel="stylesheet" href="./ScrollPanelDemo.css" />
 
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/scrollpanel/scrollpanel.min.js"></script>`,
                 content: `
