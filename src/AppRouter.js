@@ -180,6 +180,7 @@ import { BlockUIDemo } from './showcase/blockui/BlockUIDemo';
 import { TerminalDemo } from './showcase/terminal/TerminalDemo';
 import { DockDemo } from './showcase/dock/DockDemo';
 import { MentionDemo } from './showcase/mention/MentionDemo';
+import { StyleClassDemo } from './showcase/styleclass/StyleClassDemo';
 
 class AppRouter extends Component {
 
@@ -387,6 +388,7 @@ class AppRouter extends Component {
                             <Route path="/terminal" component={TerminalDemo} />
                             <Route path="/dock" component={DockDemo} />
                             <Route path="/mention" component={MentionDemo} />
+                            <Route path="/styleclass" component={StyleClassDemo} />
                         </>
                     )
                 }
