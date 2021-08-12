@@ -17,13 +17,6 @@ let entries = [];
 // alias entries
 const ALIAS_ENTRIES = [
     { find: '../api/Api', replacement: 'primereact/api' },
-    { find: '../ripple/Ripple', replacement: 'primereact/core' },
-    { find: '../utils/Utils', replacement: 'primereact/core' },
-    { find: '../tooltip/Tooltip', replacement: 'primereact/core' },
-    { find: '../keyfilter/KeyFilter', replacement: 'primereact/core' },
-    { find: '../overlayservice/OverlayService', replacement: 'primereact/core' },
-    { find: '../csstransition/CSSTransition', replacement: 'primereact/core' },
-    { find: '../portal/Portal', replacement: 'primereact/core' },
     { find: '../terminalservice/TerminalService', replacement: 'primereact/terminalservice' },
     { find: '../virtualscroller/VirtualScroller', replacement: 'primereact/virtualscroller' },
     { find: '../button/Button', replacement: 'primereact/button' },
@@ -37,6 +30,19 @@ const ALIAS_ENTRIES = [
     { find: '../dialog/Dialog', replacement: 'primereact/dialog' }
 ];
 
+const ALIAS_COMPONENT_ENTRIES = [
+    ...ALIAS_ENTRIES,
+    ...[
+        { find: '../ripple/Ripple', replacement: 'primereact/core' },
+        { find: '../utils/Utils', replacement: 'primereact/core' },
+        { find: '../tooltip/Tooltip', replacement: 'primereact/core' },
+        { find: '../keyfilter/KeyFilter', replacement: 'primereact/core' },
+        { find: '../overlayservice/OverlayService', replacement: 'primereact/core' },
+        { find: '../csstransition/CSSTransition', replacement: 'primereact/core' },
+        { find: '../portal/Portal', replacement: 'primereact/core' }
+    ]
+];
+
 // dependencies
 const GLOBAL_DEPENDENCIES = {
     'react': 'React',
@@ -45,13 +51,19 @@ const GLOBAL_DEPENDENCIES = {
 };
 
 const GLOBAL_COMPONENT_DEPENDENCIES = {
+    ...GLOBAL_DEPENDENCIES, ...(ALIAS_COMPONENT_ENTRIES.reduce((acc, cur) => ({ ...acc, [cur.replacement]: cur.replacement.replace('\/', '.') }), {}))
+};
+
+const GLOBAL_CORE_DEPENDENCIES = {
     ...GLOBAL_DEPENDENCIES, ...(ALIAS_ENTRIES.reduce((acc, cur) => ({ ...acc, [cur.replacement]: cur.replacement.replace('\/', '.') }), {}))
 };
 
 // externals
 const EXTERNAL = ['react', 'react-dom', 'react-transition-group', '@babel/runtime', '@fullcalendar/core', 'chart.js/auto', 'quill'];
 
-const EXTERNAL_COMPONENT = [...EXTERNAL, ...(ALIAS_ENTRIES.map(entries => entries.replacement))];
+const EXTERNAL_COMPONENT = [...EXTERNAL, ...(ALIAS_COMPONENT_ENTRIES.map(entries => entries.replacement))];
+
+const EXTERNAL_CORE = [...EXTERNAL, ...(ALIAS_ENTRIES.map(entries => entries.replacement))];
 
 // plugins
 const BABEL_PLUGIN_OPTIONS = {
@@ -65,6 +77,10 @@ const BABEL_PLUGIN_OPTIONS = {
 
 const ALIAS_PLUGIN_OPTIONS = {
     entries: ALIAS_ENTRIES
+};
+
+const ALIAS_PLUGIN_OPTIONS_FOR_COMPONENT = {
+    entries: ALIAS_COMPONENT_ENTRIES
 };
 
 const REPLACE_PLUGIN_OPTIONS = {
@@ -87,9 +103,9 @@ const POSTCSS_PLUGIN_OPTIONS = {
 
 const TERSER_PLUGIN_OPTIONS = {
     compress: {
-      keep_infinity: true,
-      pure_getters: true,
-      reduce_funcs: false
+        keep_infinity: true,
+        pure_getters: true,
+        reduce_funcs: false
     }
 }
 
@@ -102,14 +118,20 @@ const PLUGINS = [
 ];
 
 const PLUGINS_COMPONENT = [
+    alias(ALIAS_PLUGIN_OPTIONS_FOR_COMPONENT),
+    ...PLUGINS
+];
+
+const PLUGINS_CORE = [
     alias(ALIAS_PLUGIN_OPTIONS),
     ...PLUGINS
 ];
 
 function addEntry(name, input, output, isComponent = true) {
     const exports = name === 'primereact.api' || name === 'primereact' ? 'named' : 'auto';
-    const plugins = isComponent ? PLUGINS_COMPONENT : PLUGINS;
-    const external = isComponent ? EXTERNAL_COMPONENT : EXTERNAL;
+    const isCore = name === 'primereact.core';
+    const plugins = isComponent ? PLUGINS_COMPONENT : (isCore ? PLUGINS_CORE : PLUGINS);
+    const external = isComponent ? EXTERNAL_COMPONENT : (isCore ? EXTERNAL_CORE : EXTERNAL);
     const inlineDynamicImports = true;
 
     const getEntry = (isMinify) => {
@@ -147,7 +169,7 @@ function addEntry(name, input, output, isComponent = true) {
                     format: 'iife',
                     name,
                     file: `${output}${isMinify ? '.min' : ''}.js`,
-                    globals: isComponent ? GLOBAL_COMPONENT_DEPENDENCIES : GLOBAL_DEPENDENCIES,
+                    globals: isComponent ? GLOBAL_COMPONENT_DEPENDENCIES : (isCore ? GLOBAL_CORE_DEPENDENCIES : GLOBAL_DEPENDENCIES),
                     exports
                 }
             ]
