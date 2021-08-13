@@ -131,6 +131,22 @@
             ]
         },
         {
+            "name": "PrimeBlocks",
+            "meta": ["primeblocks"],
+            "banner": true,
+            "imageLight": "showcase/demo/images/banner-primeblocks.png",
+            "imageDark": "showcase/demo/images/banner-primeblocks-dark.png",
+            "href": "https://www.primefaces.org/primeblocks-react"
+        },
+        {
+            "name": "PrimeFlex 3.0",
+            "meta": ["primeflex"],
+            "banner": true,
+            "imageLight": "showcase/demo/images/banner-primeflex.svg",
+            "imageDark": "showcase/demo/images/banner-primeflex-dark.svg",
+            "href": "https://www.primefaces.org/primeflex"
+        },
+        {
             "name": "PrimeFlex 2.0",
             "meta": [
                 "primeflex"

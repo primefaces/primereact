@@ -223,9 +223,14 @@ export class AppMenu extends Component {
                                         {menuitem.name}
                                         {badge}
                                     </div>
-                                    <div className="menu-items">
+                                    {menuitem.children && <div className="menu-items">
                                         {categoryItem}
-                                    </div>
+                                    </div>}
+                                    {menuitem.banner && <div className="menu-image">
+                                        <a href={menuitem.href}>
+                                            <img src={menuitem.imageLight} alt="banner" />
+                                        </a>
+                                    </div>}
                                 </React.Fragment>
                             )
                         })
