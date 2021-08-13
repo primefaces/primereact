@@ -66,7 +66,7 @@ const StyleClassEvents = [];
 const StyleClassStyles = [];
 
 module.exports = {
-    steps: {
+    styleclass: {
         name: 'StyleClass',
         description: 'StyleClass manages css classes declaratively to during enter/leave animations or just to toggle classes on an element.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/styleclass',
