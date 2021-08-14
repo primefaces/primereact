@@ -208,6 +208,32 @@ export class HomeComponent extends Component {
                     </div>
                 </div>
 
+                <div className="primeblocks">
+                    <div className="p-grid">
+                        <div className="p-col-12 p-md-6">
+                            <h4 className="pro-title">React UI Blocks Powered by PrimeReact</h4>
+                            <p>150+ ready to use UI blocks to build spectacular applications in no time.</p>
+                            <a className="action-button" href="https://www.primefaces.org/primeblocks-react">LEARN MORE</a>
+                        </div>
+                        <div className="p-col-12 p-md-6 p-text-center">
+                            <img alt="primeblocks-react" src="showcase/images/primeblocks.png" className="section-image" />
+                        </div>
+                    </div>
+                </div>
+
+                <div className="primeflex">
+                    <div className="p-grid">
+                        <div className="p-col-12 p-md-6">
+                            <h3 className="pro-title">PrimeFlex: Perfect CSS Utility Companion</h3>
+                            <p>PrimeFlex is a lightweight responsive CSS utility library to accompany Prime UI libraries and static webpages as well.</p>
+                            <a className="action-button" href="https://www.primefaces.org/primeflex">LEARN MORE</a>
+                        </div>
+                        <div className="p-col-12 p-md-6 p-text-center">
+                            <img alt="primeflex" src="showcase/images/primeflex.png" className="section-image" />
+                        </div>
+                    </div>
+                </div>
+
                 <div className="prosupport">
                     <div className="p-grid">
                         <div className="p-col-12 p-md-6">
