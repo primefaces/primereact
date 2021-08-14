@@ -228,7 +228,7 @@ export class AppMenu extends Component {
                                     </div>}
                                     {menuitem.banner && <div className="menu-image">
                                         <a href={menuitem.href}>
-                                            <img src={menuitem.imageLight} alt="banner" />
+                                            <img src={this.props.darkTheme ? menuitem.imageDark : menuitem.imageLight} alt="banner" />
                                         </a>
                                     </div>}
                                 </React.Fragment>

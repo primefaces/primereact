@@ -253,7 +253,7 @@ export class App extends Component {
 
                 <AppTopbar onMenuButtonClick={this.onMenuButtonClick} onThemeChange={this.onThemeChange} theme={this.state.theme} darkTheme={this.state.darkTheme} versions={this.state.versions} />
 
-                <AppMenu active={this.state.sidebarActive} onMenuItemClick={this.onMenuItemClick} />
+                <AppMenu active={this.state.sidebarActive} onMenuItemClick={this.onMenuItemClick} darkTheme={this.state.darkTheme} />
 
                 <AppContentContext.Provider value={{
                     ripple: this.state.ripple,
