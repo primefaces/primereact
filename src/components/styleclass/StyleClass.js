@@ -2,7 +2,6 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { DomHandler } from '../utils/Utils';
 
-
 export class StyleClass extends Component {
 
     static defaultProps = {
