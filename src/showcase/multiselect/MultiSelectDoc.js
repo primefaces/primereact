@@ -1331,7 +1331,7 @@ const groupedCities = [
                         <tr>
                             <td>onSelectAll</td>
                             <td>event.originalEvent: Browser event<br />
-                                event.filter: Filter value.</td>
+                                event.checked: Whether all data is selected.</td>
                             <td>Callback to invoke when all data is selected.</td>
                         </tr>
                     </tbody>
