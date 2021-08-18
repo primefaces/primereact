@@ -1,5 +1,22 @@
 # Changelog
 
+## [6.5.1](https://github.com/primefaces/primereact/tree/6.5.1) (2021-08-18)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/6.5.0...6.5.1)
+
+**Implemented New Features and Enhancements:**
+
+- Add StyleClass Component [\#2242](https://github.com/primefaces/primereact/issues/2242)
+- Inline style and style class for ToastMessage and its content [\#2236](https://github.com/primefaces/primereact/issues/2236)
+
+**Fixed bugs:**
+
+- Ripple animation is not working on components [\#2240](https://github.com/primefaces/primereact/issues/2240)
+- Dropdown keypress doesn't support Turkish characters [\#2217](https://github.com/primefaces/primereact/issues/2217)
+- TreeSelect Typescript error [\#2211](https://github.com/primefaces/primereact/issues/2211)
+- Typo in `Menu.d.ts` & `TieredMenu.d.ts` [\#2210](https://github.com/primefaces/primereact/issues/2210)
+- DataScroller increases the first index value even when there are no rows [\#1902](https://github.com/primefaces/primereact/issues/1902)
+
 ## [6.5.0](https://github.com/primefaces/primereact/tree/6.5.0) (2021-07-16)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/6.5.0-rc.2...6.5.0)
