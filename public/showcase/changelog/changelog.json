@@ -1,4 +1,55 @@
 {
+    "6.5.1": {
+        "datascroller": [
+            {
+                "number": 1902,
+                "title": "DataScroller increases the first index value even when there are no rows",
+                "url": "https://github.com/primefaces/primereact/issues/1902"
+            }
+        ],
+        "toast": [
+            {
+                "number": 2236,
+                "title": "Inline style and style class for ToastMessage and its content",
+                "url": "https://github.com/primefaces/primereact/issues/2236"
+            }
+        ],
+        "menu": [
+            {
+                "number": 2210,
+                "title": "Typo in `Menu.d.ts` & `TieredMenu.d.ts`",
+                "url": "https://github.com/primefaces/primereact/issues/2210"
+            }
+        ],
+        "tieredmenu": [
+            {
+                "number": 2210,
+                "title": "Typo in `Menu.d.ts` & `TieredMenu.d.ts`",
+                "url": "https://github.com/primefaces/primereact/issues/2210"
+            }
+        ],
+        "dropdown": [
+            {
+                "number": 2217,
+                "title": "Dropdown keypress doesn't support Turkish characters",
+                "url": "https://github.com/primefaces/primereact/issues/2217"
+            }
+        ],
+        "styleclass": [
+            {
+                "number": 2242,
+                "title": "Add StyleClass Component",
+                "url": "https://github.com/primefaces/primereact/issues/2242"
+            }
+        ],
+        "treenode": [
+            {
+                "number": 2211,
+                "title": "TreeSelect Typescript error",
+                "url": "https://github.com/primefaces/primereact/issues/2211"
+            }
+        ]
+    },
     "6.5.0": {
         "multistatecheckbox": [
             {
