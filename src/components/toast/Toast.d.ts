@@ -16,7 +16,7 @@ export interface ToastMessage {
     life?: number;
     className?: string;
     style?: object;
-    contentClassName: string;
+    contentClassName?: string;
     contentStyle?: object;
 }
 
