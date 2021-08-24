@@ -252,8 +252,8 @@ import {StyleClass} from 'primereact/styleclass';
 </CodeHighlight>
                         <h5>Target</h5>
                         <p>Target element is defined with the <i>selector</i> prop that can either be a valid css query or one of the keywords below.</p>
-                        <div class="doc-tablewrapper">
-                            <table class="doc-table">
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Name</th>
