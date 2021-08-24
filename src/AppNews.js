@@ -23,7 +23,7 @@ export class AppNews extends Component {
                                 </a>
                                 <a href="https://www.primefaces.org/store" target="_blank" rel="noopener noreferrer" tabIndex="-1" style={{textDecoration: 'none'}} className="layout-news-button">
                                     LEARN MORE
-                                    <i class="pi pi-angle-right"></i>
+                                    <i className="pi pi-angle-right"></i>
                                 </a>
                                 <button type="button" className="p-link layout-news-close" onClick={this.props.onHideNews}>
                                     <i className="pi pi-times"></i>
