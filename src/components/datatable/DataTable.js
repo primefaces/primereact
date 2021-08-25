@@ -1349,6 +1349,10 @@ export class DataTable extends Component {
     isAllSelected() {
         let visibleData = this.hasFilter() ? this.processData() : this.props.value;
 
+        if(this.props.lazy) {
+            return this.props.selection && this.props.totalRecords && this.props.selection.length === this.props.totalRecords;
+        }
+
         return this.props.selection && visibleData && visibleData.length && this.props.selection.length === visibleData.length;
     }
 
