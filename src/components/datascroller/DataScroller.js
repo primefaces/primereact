@@ -76,7 +76,9 @@ export class DataScroller extends Component {
                     this.dataToRender.push(this.value[i]);
                 }
 
-                this.first = this.first + this.props.rows;
+                if (this.value.length !== 0) {
+                    this.first = this.first + this.props.rows;
+                }
                 this.setState({ dataToRender: this.dataToRender });
             }
         }
