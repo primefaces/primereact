@@ -240,9 +240,7 @@ export class HomeComponent extends Component {
                             <h3>PrimeReact PRO Support</h3>
                             <p>With PrimeReact PRO, it is easy to support, tune and add features to PrimeReact as if it were an in-house framework.</p>
                             <p>PrimeReact PRO is a term based commercial support service. With the exclusive services of Pro account, you no longer need to post your questions in the community forum and your issues to community issue tracker.</p>
-                            <a className="link-button2" href="mailto:contact@primetek.com.tr">
-                                Get a Quote
-                            </a>
+                            <Link to="/support" className="action-button">LEARN MORE</Link>
                         </div>
                         <div className="p-col-12 p-md-6">
                             <img alt="PRO" src="showcase/images/home/pro.png" style={{maxWidth: '430px', width: '100%'}}></img>
