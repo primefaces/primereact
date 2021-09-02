@@ -226,7 +226,7 @@ export class AppMenu extends Component {
                                     {menuitem.children && <div className="menu-items">
                                         {categoryItem}
                                     </div>}
-                                    {menuitem.banner && <div className="menu-image">
+                                    {menuitem.banner && <div className="menu-image menu-banner">
                                         <a href={menuitem.href}>
                                             <img src={this.props.darkTheme ? menuitem.imageDark : menuitem.imageLight} alt="banner" />
                                         </a>

@@ -122,6 +122,24 @@
         }
 
         .menu-image {
+            &.menu-banner {
+                a {
+                    padding: 0;
+
+                    &:hover {
+                        background-color: transparent;
+
+                        img {
+                            background-color: var(--surface-c);
+                        }
+                    }
+
+                    &:focus {
+                        box-shadow: none;
+                    }
+                }
+            }
+
             padding: 0 0 1rem 0;
 
             img {
