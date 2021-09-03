@@ -19,7 +19,7 @@ interface ColorPickerChangeParams {
     target: ColorPickerChangeTargetOptions;
 }
 
-export interface ColorPickerProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onChange' | 'value'> {
+export interface ColorPickerProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onChange' | 'value'|'ref'> {
     inputRef?: React.Ref<HTMLInputElement>;
     value?: any;
     defaultColor?: string;
