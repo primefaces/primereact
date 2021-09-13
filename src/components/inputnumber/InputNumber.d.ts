@@ -43,6 +43,7 @@ export interface InputNumberProps {
     id?: string;
     name?: string;
     type?: string;
+    allowEmpty?: boolean;
     step?: number;
     min?: number;
     max?: number;

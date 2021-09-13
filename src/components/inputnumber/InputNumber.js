@@ -30,6 +30,7 @@ export class InputNumber extends Component {
         id: null,
         name: null,
         type: 'text',
+        allowEmpty: true,
         step: 1,
         min: null,
         max: null,
@@ -80,6 +81,7 @@ export class InputNumber extends Component {
         id: PropTypes.string,
         name: PropTypes.string,
         type: PropTypes.string,
+        allowEmpty: PropTypes.bool,
         step: PropTypes.number,
         min: PropTypes.number,
         max: PropTypes.number,
@@ -756,6 +758,7 @@ export class InputNumber extends Component {
 
         if (valueStr != null) {
             newValue = this.parseValue(valueStr);
+            newValue = !newValue && !this.props.allowEmpty ? 0 : newValue;
             this.updateInput(newValue, insertedValueStr, operation, valueStr);
 
             this.handleOnChange(event, currentValue, newValue);
@@ -877,14 +880,21 @@ export class InputNumber extends Component {
     }
 
     updateInputValue(newValue) {
+        newValue = !newValue && !this.props.allowEmpty ? 0 : newValue;
+
         const inputEl = this.inputRef.current;
         const value = inputEl.value;
-        const formattedValue = this.formatValue(newValue);
+        const formattedValue = this.formattedValue(newValue);
 
         if (value !== formattedValue) {
             inputEl.value = formattedValue;
             inputEl.setAttribute('aria-valuenow', newValue);
         }
+    }
+
+    formattedValue(val) {
+        const newVal = !val && !this.props.allowEmpty ? 0 : val;
+        return this.formatValue(newVal);
     }
 
     concatValues(val1, val2) {
@@ -1048,7 +1058,7 @@ export class InputNumber extends Component {
 
     renderInputElement() {
         const className = classNames('p-inputnumber-input', this.props.inputClassName);
-        const valueToRender = this.formatValue(this.props.value);
+        const valueToRender = this.formattedValue(this.props.value);
 
         return (
             <InputText ref={this.inputRef} id={this.props.inputId} style={this.props.inputStyle} role="spinbutton"
