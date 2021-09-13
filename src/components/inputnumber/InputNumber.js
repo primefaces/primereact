@@ -987,6 +987,10 @@ export class InputNumber extends Component {
         return this.props.inputMode || ((this.props.mode === 'decimal' && !this.props.minFractionDigits) ? 'numeric' : 'decimal');
     }
 
+    getFormatter() {
+        return this.numberFormat;
+    }
+
     updateInputRef() {
         let ref = this.props.inputRef;
 
