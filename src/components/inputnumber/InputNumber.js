@@ -421,23 +421,31 @@ export class InputNumber extends Component {
                 event.preventDefault();
 
                 if (selectionStart === selectionEnd) {
-                    let deleteChar = inputValue.charAt(selectionStart - 1);
-                    let decimalCharIndex = inputValue.search(this._decimal);
-                    this._decimal.lastIndex = 0;
+                    const deleteChar = inputValue.charAt(selectionStart - 1);
+                    const { decimalCharIndex, decimalCharIndexWithoutPrefix } = this.getDecimalCharIndexes(inputValue);
 
                     if (this.isNumeralChar(deleteChar)) {
+                        const decimalLength = this.getDecimalLength(inputValue);
+
                         if (this._group.test(deleteChar)) {
                             this._group.lastIndex = 0;
                             newValueStr = inputValue.slice(0, selectionStart - 2) + inputValue.slice(selectionStart - 1);
                         }
                         else if (this._decimal.test(deleteChar)) {
                             this._decimal.lastIndex = 0;
-                            this.inputRef.current.setSelectionRange(selectionStart - 1, selectionStart - 1);
+
+                            if (decimalLength) {
+                                this.inputRef.current.setSelectionRange(selectionStart - 1, selectionStart - 1);
+                            }
+                            else {
+                                newValueStr = inputValue.slice(0, selectionStart - 1) + inputValue.slice(selectionStart);
+                            }
                         }
                         else if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
-                            newValueStr = inputValue.slice(0, selectionStart - 1) + '0' + inputValue.slice(selectionStart);
+                            const insertedText = this.isDecimalMode() && (this.props.minFractionDigits || 0) < decimalLength ? '' : '0';
+                            newValueStr = inputValue.slice(0, selectionStart - 1) + insertedText + inputValue.slice(selectionStart);
                         }
-                        else if (decimalCharIndex > 0 && decimalCharIndex === 1) {
+                        else if (decimalCharIndexWithoutPrefix === 1) {
                             newValueStr = inputValue.slice(0, selectionStart - 1) + '0' + inputValue.slice(selectionStart);
                             newValueStr = this.parseValue(newValueStr) > 0 ? newValueStr : '';
                         }
@@ -452,6 +460,7 @@ export class InputNumber extends Component {
                     newValueStr = this.deleteRange(inputValue, selectionStart, selectionEnd);
                     this.updateValue(event, newValueStr, null, 'delete-range');
                 }
+
             break;
 
             // del
@@ -459,23 +468,31 @@ export class InputNumber extends Component {
                 event.preventDefault();
 
                 if (selectionStart === selectionEnd) {
-                    let deleteChar = inputValue.charAt(selectionStart);
-                    let decimalCharIndex = inputValue.search(this._decimal);
-                    this._decimal.lastIndex = 0;
+                    const deleteChar = inputValue.charAt(selectionStart);
+                    const { decimalCharIndex, decimalCharIndexWithoutPrefix } = this.getDecimalCharIndexes(inputValue);
 
                     if (this.isNumeralChar(deleteChar)) {
+                        const decimalLength = this.getDecimalLength(inputValue);
+
                         if (this._group.test(deleteChar)) {
                             this._group.lastIndex = 0;
                             newValueStr = inputValue.slice(0, selectionStart) + inputValue.slice(selectionStart + 2);
                         }
                         else if (this._decimal.test(deleteChar)) {
                             this._decimal.lastIndex = 0;
-                            this.inputRef.current.setSelectionRange(selectionStart + 1, selectionStart + 1);
+
+                            if (decimalLength) {
+                                this.$refs.input.$el.setSelectionRange(selectionStart + 1, selectionStart + 1);
+                            }
+                            else {
+                                newValueStr = inputValue.slice(0, selectionStart) + inputValue.slice(selectionStart + 1);
+                            }
                         }
                         else if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
-                            newValueStr = inputValue.slice(0, selectionStart) + '0' + inputValue.slice(selectionStart + 1);
+                            const insertedText = this.isDecimalMode() && (this.props.minFractionDigits || 0) < decimalLength ? '' : '0';
+                            newValueStr = inputValue.slice(0, selectionStart) + insertedText + inputValue.slice(selectionStart + 1);
                         }
-                        else if (decimalCharIndex > 0 && decimalCharIndex === 1) {
+                        else if (decimalCharIndexWithoutPrefix === 1) {
                             newValueStr = inputValue.slice(0, selectionStart) + '0' + inputValue.slice(selectionStart + 1);
                             newValueStr = this.parseValue(newValueStr) > 0 ? newValueStr : '';
                         }
@@ -546,6 +563,34 @@ export class InputNumber extends Component {
         return false;
     }
 
+    isDecimalMode() {
+        return this.props.mode === 'decimal';
+    }
+
+    getDecimalCharIndexes(val) {
+        let decimalCharIndex = val.search(this._decimal);
+        this._decimal.lastIndex = 0;
+
+        const filteredVal = val.replace(this._prefix, '').trim().replace(/\s/g, '').replace(this._currency, '');
+        const decimalCharIndexWithoutPrefix = filteredVal.search(this._decimal);
+        this._decimal.lastIndex = 0;
+
+        return { decimalCharIndex, decimalCharIndexWithoutPrefix };
+    }
+
+    getCharIndexes(val) {
+        const decimalCharIndex = val.search(this._decimal);
+        this._decimal.lastIndex = 0;
+        const minusCharIndex = val.search(this._minusSign);
+        this._minusSign.lastIndex = 0;
+        const suffixCharIndex = val.search(this._suffix);
+        this._suffix.lastIndex = 0;
+        const currencyCharIndex = val.search(this._currency);
+        this._currency.lastIndex = 0;
+
+        return { decimalCharIndex, minusCharIndex, suffixCharIndex, currencyCharIndex };
+    }
+
     insert(event, text, sign = { isDecimalSign: false, isMinusSign: false }) {
         const minusCharIndexOnText = text.search(this._minusSign);
         this._minusSign.lastIndex = 0;
@@ -556,10 +601,7 @@ export class InputNumber extends Component {
         const selectionStart = this.inputRef.current.selectionStart;
         const selectionEnd = this.inputRef.current.selectionEnd;
         let inputValue = this.inputRef.current.value.trim();
-        const decimalCharIndex = inputValue.search(this._decimal);
-        this._decimal.lastIndex = 0;
-        const minusCharIndex = inputValue.search(this._minusSign);
-        this._minusSign.lastIndex = 0;
+        const { decimalCharIndex, minusCharIndex, suffixCharIndex, currencyCharIndex } = this.getCharIndexes(inputValue);
         let newValueStr;
 
         if (sign.isMinusSign) {
@@ -580,6 +622,10 @@ export class InputNumber extends Component {
                 newValueStr = this.insertText(inputValue, text, selectionStart, selectionEnd);
                 this.updateValue(event, newValueStr, text, 'insert');
             }
+            else if (decimalCharIndex === -1 && this.maxFractionDigits) {
+                newValueStr = this.insertText(inputValue, text, selectionStart, selectionEnd);
+                this.updateValue(event, newValueStr, text, 'insert');
+            }
         }
         else {
             const maxFractionDigits = this.numberFormat.resolvedOptions().maximumFractionDigits;
@@ -587,7 +633,9 @@ export class InputNumber extends Component {
 
             if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
                 if ((selectionStart + text.length - (decimalCharIndex + 1)) <= maxFractionDigits) {
-                    newValueStr = inputValue.slice(0, selectionStart) + text + inputValue.slice(selectionStart + text.length);
+                    const charIndex = currencyCharIndex >= selectionStart ? currencyCharIndex - 1 : (suffixCharIndex >= selectionStart ? suffixCharIndex : inputValue.length);
+
+                    newValueStr = inputValue.slice(0, selectionStart) + text + inputValue.slice(selectionStart + text.length, charIndex) + inputValue.slice(charIndex);
                     this.updateValue(event, newValueStr, text, operation);
                 }
             }
@@ -599,7 +647,7 @@ export class InputNumber extends Component {
     }
 
     insertText(value, text, start, end) {
-        let textSplit = text.split('.');
+        let textSplit = text === '.' ? text : text.split('.');
 
         if (textSplit.length === 2) {
             const decimalCharIndex = value.slice(start, end).search(this._decimal);
@@ -708,7 +756,7 @@ export class InputNumber extends Component {
 
         if (valueStr != null) {
             newValue = this.parseValue(valueStr);
-            this.updateInput(newValue, insertedValueStr, operation);
+            this.updateInput(newValue, insertedValueStr, operation, valueStr);
 
             this.handleOnChange(event, currentValue, newValue);
         }
@@ -752,13 +800,17 @@ export class InputNumber extends Component {
         return value;
     }
 
-    updateInput(value, insertedValueStr, operation) {
+    updateInput(value, insertedValueStr, operation, valueStr) {
         insertedValueStr = insertedValueStr || '';
 
         let inputEl = this.inputRef.current;
         let inputValue = inputEl.value;
         let newValue = this.formatValue(value);
         let currentLength = inputValue.length;
+
+        if (newValue !== valueStr) {
+            newValue = this.concatValues(newValue, valueStr);
+        }
 
         if (currentLength === 0) {
             inputEl.value = newValue;
@@ -833,6 +885,32 @@ export class InputNumber extends Component {
             inputEl.value = formattedValue;
             inputEl.setAttribute('aria-valuenow', newValue);
         }
+    }
+
+    concatValues(val1, val2) {
+        if (val1 && val2) {
+            let decimalCharIndex = val2.search(this._decimal);
+            this._decimal.lastIndex = 0;
+
+            return decimalCharIndex !== -1 ? (val1.split(this._decimal)[0] + val2.slice(decimalCharIndex)) : val1;
+        }
+
+        return val1;
+    }
+
+    getDecimalLength(value) {
+        if (value) {
+            const valueSplit = value.split(this._decimal);
+
+            if (valueSplit.length === 2) {
+                return valueSplit[1].replace(this._suffix, '')
+                            .trim()
+                            .replace(/\s/g, '')
+                            .replace(this._currency, '').length;
+            }
+        }
+
+        return 0;
     }
 
     updateModel(event, value) {
