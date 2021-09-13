@@ -126,6 +126,12 @@ const InputNumberProps = [
         description: 'Type of the input element.'
     },
     {
+        name: "allowEmpty",
+        type: "boolean",
+        default: "true",
+        description: "Determines whether the input field is empty."
+    },
+    {
         name: 'step',
         type: 'number',
         default: '1',

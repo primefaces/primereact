@@ -856,6 +856,12 @@ Vertical
                             <td>Type of the input element.</td>
                         </tr>
                         <tr>
+                            <td>allowEmpty</td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>Determines whether the input field is empty.</td>
+                        </tr>
+                        <tr>
                             <td>step</td>
                             <td>number</td>
                             <td>1</td>
