@@ -691,9 +691,14 @@ export class InputNumber extends Component {
         let valueLength = inputValue.length;
         let index = null;
 
+        // remove prefix
+        let prefixLength = (this.prefixChar || '').length;
+        inputValue = inputValue.replace(this._prefix, '');
+        selectionStart = selectionStart - prefixLength;
+
         let char = inputValue.charAt(selectionStart);
         if (this.isNumeralChar(char)) {
-            return;
+            return selectionStart + prefixLength;
         }
 
         //left
@@ -701,7 +706,7 @@ export class InputNumber extends Component {
         while (i >= 0) {
             char = inputValue.charAt(i);
             if (this.isNumeralChar(char)) {
-                index = i;
+                index = i + prefixLength;
                 break;
             }
             else {
@@ -713,11 +718,11 @@ export class InputNumber extends Component {
             this.inputRef.current.setSelectionRange(index + 1, index + 1);
         }
         else {
-            i = selectionStart + 1;
+            i = selectionStart;
             while (i < valueLength) {
                 char = inputValue.charAt(i);
                 if (this.isNumeralChar(char)) {
-                    index = i;
+                    index = i + prefixLength;
                     break;
                 }
                 else {
@@ -729,6 +734,8 @@ export class InputNumber extends Component {
                 this.inputRef.current.setSelectionRange(index, index);
             }
         }
+
+        return index || 0;
     }
 
     onInputClick() {
@@ -818,9 +825,8 @@ export class InputNumber extends Component {
         if (currentLength === 0) {
             inputEl.value = newValue;
             inputEl.setSelectionRange(0, 0);
-            this.initCursor();
-            const prefixLength = (this.prefixChar || '').length;
-            const selectionEnd = prefixLength + insertedValueStr.length;
+            const index = this.initCursor();
+            const selectionEnd = index + insertedValueStr.length;
             inputEl.setSelectionRange(selectionEnd, selectionEnd);
         }
         else {
