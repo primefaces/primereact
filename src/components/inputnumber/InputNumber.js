@@ -1133,7 +1133,7 @@ export class InputNumber extends Component {
     }
 
     render() {
-        const className = classNames('p-inputnumber p-component', this.props.className, {
+        const className = classNames('p-inputnumber p-component p-inputwrapper', this.props.className, {
                 'p-inputwrapper-filled': this.props.value != null && this.props.value.toString().length > 0,
                 'p-inputwrapper-focus': this.state.focused,
                 'p-inputnumber-buttons-stacked': this.isStacked(),
