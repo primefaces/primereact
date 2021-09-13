@@ -79,6 +79,7 @@ export class Galleria extends Component {
 
         this.state = {
             visible: false,
+            numVisible: props.numVisible,
             slideShowActive: false
         }
 
@@ -183,6 +184,18 @@ export class Galleria extends Component {
         return this.props.thumbnailsPosition === 'left' || this.props.thumbnailsPosition === 'right';
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.value !== this.props.value) {
+            if (this.props.value && this.props.value.length < this.state.numVisible) {
+                this.setState({ numVisible: this.props.value.length });
+            }
+        }
+
+        if (prevProps.numVisible !== this.props.numVisible) {
+            this.setState({ numVisible: this.props.numVisible });
+        }
+    }
+
     componentWillUnmount() {
         if (this.state.slideShowActive) {
             this.stopSlideShow();
@@ -243,7 +256,7 @@ export class Galleria extends Component {
 
                     {
                         this.props.showThumbnails && <GalleriaThumbnails value={this.props.value} activeItemIndex={this.activeItemIndex} onActiveItemChange={this.onActiveItemChange}
-                            itemTemplate={this.props.thumbnail} numVisible={this.props.numVisible} responsiveOptions={this.props.responsiveOptions} circular={this.props.circular}
+                            itemTemplate={this.props.thumbnail} numVisible={this.state.numVisible} responsiveOptions={this.props.responsiveOptions} circular={this.props.circular}
                             isVertical={isVertical} contentHeight={this.props.verticalThumbnailViewPortHeight} showThumbnailNavigators={this.props.showThumbnailNavigators}
                             autoPlay={this.props.autoPlay} slideShowActive={this.state.slideShowActive} stopSlideShow={this.stopSlideShow} />
                     }
