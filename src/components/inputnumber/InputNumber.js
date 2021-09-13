@@ -709,9 +709,9 @@ export class InputNumber extends Component {
         if (valueStr != null) {
             newValue = this.parseValue(valueStr);
             this.updateInput(newValue, insertedValueStr, operation);
-        }
 
-        this.handleOnChange(event, currentValue, newValue);
+            this.handleOnChange(event, currentValue, newValue);
+        }
     }
 
     handleOnChange(event, currentValue, newValue) {
