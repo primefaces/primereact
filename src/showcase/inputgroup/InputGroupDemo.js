@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { InputText } from '../../components/inputtext/InputText';
+import { InputNumber } from '../../components/inputnumber/InputNumber';
 import { Button } from '../../components/button/Button';
 import { Checkbox } from '../../components/checkbox/Checkbox';
 import { RadioButton } from '../../components/radiobutton/RadioButton';
@@ -26,7 +27,7 @@ export class InputGroupDemo extends Component {
                     <AppInlineHeader changelogText="inputGroup">
                         <h1>InputGroup</h1>
                         <p>Text, icon, buttons and other content can be grouped next to an input.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="inputgroup/InputGroupDemo.js" />
                 </div>
 
@@ -46,7 +47,7 @@ export class InputGroupDemo extends Component {
                             <div className="p-col-12 p-md-4">
                                 <div className="p-inputgroup">
                                     <span className="p-inputgroup-addon">$</span>
-                                    <InputText placeholder="Price" />
+                                    <InputNumber placeholder="Price" />
                                     <span className="p-inputgroup-addon">.00</span>
                                 </div>
                             </div>
@@ -69,7 +70,7 @@ export class InputGroupDemo extends Component {
                                     <span className="p-inputgroup-addon">
                                         <i className="pi pi-star"></i>
                                     </span>
-                                    <InputText placeholder="Price" />
+                                    <InputNumber placeholder="Price" />
                                     <span className="p-inputgroup-addon">$</span>
                                     <span className="p-inputgroup-addon">.00</span>
                                 </div>

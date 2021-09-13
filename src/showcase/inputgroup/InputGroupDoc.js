@@ -12,10 +12,11 @@ export class InputGroupDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import { InputText } from "primereact/inputtext";
-import { Button } from "primereact/button";
-import { Checkbox } from "primereact/checkbox";
-import { RadioButton } from "primereact/radiobutton";
+import { InputText } from 'primereact/inputtext';
+import { InputNumber } from 'primereact/inputnumber';
+import { Button } from 'primereact/button';
+import { Checkbox } from 'primereact/checkbox';
+import { RadioButton } from 'primereact/radiobutton';
 
 export class InputGroupDemo extends Component {
 
@@ -47,7 +48,7 @@ export class InputGroupDemo extends Component {
                         <div className="p-col-12 p-md-4">
                             <div className="p-inputgroup">
                                 <span className="p-inputgroup-addon">$</span>
-                                <InputText placeholder="Price" />
+                                <InputNumber placeholder="Price" />
                                 <span className="p-inputgroup-addon">.00</span>
                             </div>
                         </div>
@@ -70,7 +71,7 @@ export class InputGroupDemo extends Component {
                                 <span className="p-inputgroup-addon">
                                     <i className="pi pi-star"></i>
                                 </span>
-                                <InputText placeholder="Price" />
+                                <InputNumber placeholder="Price" />
                                 <span className="p-inputgroup-addon">$</span>
                                 <span className="p-inputgroup-addon">.00</span>
                             </div>
@@ -145,10 +146,11 @@ export class InputGroupDemo extends Component {
                 tabName: 'Hook Source',
                 content: `
 import React, { useState } from 'react';
-import { InputText } from "primereact/inputtext";
-import { Button } from "primereact/button";
-import { Checkbox } from "primereact/checkbox";
-import { RadioButton } from "primereact/radiobutton";
+import { InputText } from 'primereact/inputtext';
+import { InputNumber } from 'primereact/inputnumber';
+import { Button } from 'primereact/button';
+import { Checkbox } from 'primereact/checkbox';
+import { RadioButton } from 'primereact/radiobutton';
 
 const InputGroupDemo = () => {
     const [checked1, setChecked1] = useState(false);
@@ -173,7 +175,7 @@ const InputGroupDemo = () => {
                     <div className="p-col-12 p-md-4">
                         <div className="p-inputgroup">
                             <span className="p-inputgroup-addon">$</span>
-                            <InputText placeholder="Price" />
+                            <InputNumber placeholder="Price" />
                             <span className="p-inputgroup-addon">.00</span>
                         </div>
                     </div>
@@ -196,7 +198,7 @@ const InputGroupDemo = () => {
                             <span className="p-inputgroup-addon">
                                 <i className="pi pi-star"></i>
                             </span>
-                            <InputText placeholder="Price" />
+                            <InputNumber placeholder="Price" />
                             <span className="p-inputgroup-addon">$</span>
                             <span className="p-inputgroup-addon">.00</span>
                         </div>
@@ -270,10 +272,11 @@ const InputGroupDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState } from 'react';
-import { InputText } from "primereact/inputtext";
-import { Button } from "primereact/button";
-import { Checkbox } from "primereact/checkbox";
-import { RadioButton } from "primereact/radiobutton";
+import { InputText } from 'primereact/inputtext';
+import { InputNumber } from 'primereact/inputnumber';
+import { Button } from 'primereact/button';
+import { Checkbox } from 'primereact/checkbox';
+import { RadioButton } from 'primereact/radiobutton';
 
 const InputGroupDemo = () => {
     const [checked1, setChecked1] = useState<boolean>(false);
@@ -298,7 +301,7 @@ const InputGroupDemo = () => {
                     <div className="p-col-12 p-md-4">
                         <div className="p-inputgroup">
                             <span className="p-inputgroup-addon">$</span>
-                            <InputText placeholder="Price" />
+                            <InputNumber placeholder="Price" />
                             <span className="p-inputgroup-addon">.00</span>
                         </div>
                     </div>
@@ -321,7 +324,7 @@ const InputGroupDemo = () => {
                             <span className="p-inputgroup-addon">
                                 <i className="pi pi-star"></i>
                             </span>
-                            <InputText placeholder="Price" />
+                            <InputNumber placeholder="Price" />
                             <span className="p-inputgroup-addon">$</span>
                             <span className="p-inputgroup-addon">.00</span>
                         </div>
