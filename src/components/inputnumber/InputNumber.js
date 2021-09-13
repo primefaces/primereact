@@ -172,7 +172,7 @@ export class InputNumber extends Component {
     }
 
     getDecimalExpression() {
-        const formatter = new Intl.NumberFormat(this.locale, {...this.getOptions(), useGrouping: false});
+        const formatter = new Intl.NumberFormat(this.props.locale, {...this.getOptions(), useGrouping: false});
         return new RegExp(`[${formatter.format(1.1).replace(this._currency, '').trim().replace(this._numeral, '')}]`, 'g');
     }
 
@@ -188,8 +188,8 @@ export class InputNumber extends Component {
     }
 
     getCurrencyExpression() {
-        if (this.currency) {
-            const formatter = new Intl.NumberFormat(this.locale, {style: 'currency', currency: this.currency, currencyDisplay: this.currencyDisplay,
+        if (this.props.currency) {
+            const formatter = new Intl.NumberFormat(this.props.locale, {style: 'currency', currency: this.props.currency, currencyDisplay: this.props.currencyDisplay,
                 minimumFractionDigits: 0, maximumFractionDigits: 0});
             return new RegExp(`[${formatter.format(1).replace(/\s/g, '').replace(this._numeral, '').replace(this._group, '')}]`, 'g');
         }
@@ -283,14 +283,16 @@ export class InputNumber extends Component {
     }
 
     spin(event, dir) {
-        let step = this.props.step * dir;
-        let currentValue = this.parseValue(this.inputRef.current.value) || 0;
-        let newValue = this.validateValue(currentValue + step);
+        if (this.inputRef && this.inputRef.current) {
+            let step = this.props.step * dir;
+            let currentValue = this.parseValue(this.inputRef.current.value) || 0;
+            let newValue = this.validateValue(currentValue + step);
 
-        this.updateInput(newValue, null, 'spin');
-        this.updateModel(event, newValue);
+            this.updateInput(newValue, null, 'spin');
+            this.updateModel(event, newValue);
 
-        this.handleOnChange(event, currentValue, newValue);
+            this.handleOnChange(event, currentValue, newValue);
+        }
     }
 
     onUpButtonMouseDown(event) {
@@ -325,7 +327,7 @@ export class InputNumber extends Component {
         }
     }
 
-    onDownButtonMouseDown(event, focusInput) {
+    onDownButtonMouseDown(event) {
         if (!this.props.disabled) {
             this.inputRef.current.focus();
             this.repeat(event, null, -1);
@@ -396,16 +398,14 @@ export class InputNumber extends Component {
 
             //left
             case 37:
-                let prevChar = inputValue.charAt(selectionStart - 1);
-                if (!this.isNumeralChar(prevChar)) {
+                if (!this.isNumeralChar(inputValue.charAt(selectionStart - 1))) {
                     event.preventDefault();
                 }
             break;
 
             //right
             case 39:
-                let currentChar = inputValue.charAt(selectionStart);
-                if (!this.isNumeralChar(currentChar)) {
+                if (!this.isNumeralChar(inputValue.charAt(selectionStart))) {
                     event.preventDefault();
                 }
             break;
@@ -624,7 +624,7 @@ export class InputNumber extends Component {
                 newValueStr = this.insertText(inputValue, text, selectionStart, selectionEnd);
                 this.updateValue(event, newValueStr, text, 'insert');
             }
-            else if (decimalCharIndex === -1 && this.maxFractionDigits) {
+            else if (decimalCharIndex === -1 && this.props.maxFractionDigits) {
                 newValueStr = this.insertText(inputValue, text, selectionStart, selectionEnd);
                 this.updateValue(event, newValueStr, text, 'insert');
             }
