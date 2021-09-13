@@ -788,16 +788,16 @@ export class InputNumber extends Component {
     }
 
     validateValue(value) {
+        if (value === '-' || value == null) {
+            return null;
+        }
+
         if (this.props.min !== null && value < this.props.min) {
             return this.props.min;
         }
 
         if (this.props.max !== null && value > this.props.max) {
             return this.props.max;
-        }
-
-        if (value === '-') { // Minus sign
-            return null;
         }
 
         return value;
