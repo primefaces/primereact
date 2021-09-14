@@ -156,15 +156,6 @@ export class SupportPage extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="p-col-6 p-lg-3">
-                            <div className="p-d-flex">
-                                <div className="dot color-7">&nbsp;</div>
-                                <div className="p-d-flex p-flex-column p-pl-3">
-                                    <h6>Accessibility Improvements</h6>
-                                    <p>Our team makes accessibility improvements that allow your developers to create more accessible applications.</p>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -201,7 +192,15 @@ export class SupportPage extends Component {
                                 </div>
                             </div>
                         </div>
-
+                        <div className="p-col-6 p-lg-3">
+                            <div className="p-d-flex">
+                                <div className="dot color-7">&nbsp;</div>
+                                <div className="p-d-flex p-flex-column p-pl-3">
+                                    <h6>Accessibility Improvements</h6>
+                                    <p>Our team makes accessibility improvements that allow your developers to create more accessible applications.</p>
+                                </div>
+                            </div>
+                        </div>
                         <div className="p-col-6 p-lg-3">
                             <div className="p-d-flex">
                                 <div className="dot color-4">&nbsp;</div>
