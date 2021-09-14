@@ -1429,6 +1429,13 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "name": "Image",
+                    "to": "/image",
+                    "meta": [
+                        "image"
+                    ]
                 }
             ]
         },

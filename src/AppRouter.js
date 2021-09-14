@@ -181,6 +181,7 @@ import { TerminalDemo } from './showcase/terminal/TerminalDemo';
 import { DockDemo } from './showcase/dock/DockDemo';
 import { MentionDemo } from './showcase/mention/MentionDemo';
 import { StyleClassDemo } from './showcase/styleclass/StyleClassDemo';
+import { ImageDemo } from './showcase/image/ImageDemo';
 
 class AppRouter extends Component {
 
@@ -389,6 +390,7 @@ class AppRouter extends Component {
                             <Route path="/dock" component={DockDemo} />
                             <Route path="/mention" component={MentionDemo} />
                             <Route path="/styleclass" component={StyleClassDemo} />
+                            <Route path="/image" component={ImageDemo} />
                         </>
                     )
                 }
