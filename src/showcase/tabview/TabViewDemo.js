@@ -11,18 +11,21 @@ export class TabViewDemo extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            activeIndex: 1
+            activeIndex1: 1,
+            activeIndex2: 0
         }
     }
 
     render() {
+        const scrollableTabs = Array.from({ length: 50 }, (_, i) => ({ title: `Tab ${i + 1}`, content: `Tab ${i + 1} Content` }))
+
         return (
             <div>
                 <div className="content-section introduction">
                     <AppInlineHeader changelogText="tabView">
                         <h1>TabView</h1>
                         <p>TabView is a container component to group content with tabs.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="tabview/TabViewDemo.js" />
                 </div>
 
@@ -51,12 +54,12 @@ export class TabViewDemo extends Component {
                     <div className="card">
                         <h5>Programmatic</h5>
                         <div className="p-pt-2 p-pb-4">
-                            <Button onClick={() => this.setState({ activeIndex: 0 })} className="p-button-text" label="Activate 1st" />
-                            <Button onClick={() => this.setState({ activeIndex: 1 })} className="p-button-text" label="Activate 2nd" />
-                            <Button onClick={() => this.setState({ activeIndex: 2 })} className="p-button-text" label="Activate 3rd" />
+                            <Button onClick={() => this.setState({ activeIndex1: 0 })} className="p-button-text" label="Activate 1st" />
+                            <Button onClick={() => this.setState({ activeIndex1: 1 })} className="p-button-text" label="Activate 2nd" />
+                            <Button onClick={() => this.setState({ activeIndex1: 2 })} className="p-button-text" label="Activate 3rd" />
                         </div>
 
-                        <TabView activeIndex={this.state.activeIndex} onTabChange={(e) => this.setState({ activeIndex: e.index })}>
+                        <TabView activeIndex={this.state.activeIndex1} onTabChange={(e) => this.setState({ activeIndex1: e.index })}>
                             <TabPanel header="Header I">
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                                 ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
@@ -115,6 +118,25 @@ export class TabViewDemo extends Component {
                                 cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
                             Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
                             </TabPanel>
+                        </TabView>
+                    </div>
+
+                    <div className="card">
+                        <h5>Scrollable</h5>
+                        <div className="p-py-2">
+                            <Button onClick={() => this.setState({ activeIndex2: 0 })} className="p-button-text" label="Activate 1st" />
+                            <Button onClick={() => this.setState({ activeIndex2: 29 })} className="p-button-text p-mr-2" label="Activate 30th" />
+                            <Button onClick={() => this.setState({ activeIndex2: 49 })} className="p-button-text p-mr-2" label="Activate 50th" />
+                        </div>
+
+                        <TabView activeIndex={this.state.activeIndex2} onTabChange={(e) => this.setState({ activeIndex2: e.index })} scrollable>
+                            {scrollableTabs.map((tab) => {
+                                return (
+                                    <TabPanel key={tab.title} header={tab.title}>
+                                        <p>{tab.content}</p>
+                                    </TabPanel>
+                                )
+                            })}
                         </TabView>
                     </div>
                 </div>

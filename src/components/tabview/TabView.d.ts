@@ -41,6 +41,7 @@ export interface TabViewProps {
     style?: object;
     className?: string;
     renderActiveOnly?: boolean;
+    scrollable?: boolean;
     onTabChange?(e: TabViewTabChangeParams): void;
 }
 

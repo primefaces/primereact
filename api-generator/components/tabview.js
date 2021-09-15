@@ -28,6 +28,12 @@ const TabViewProps = [
         type: 'boolean',
         default: 'true',
         description: 'Whether to render the contents of the selected tab or all tabs.'
+    },
+    {
+        name: 'scrollable',
+        type: 'boolean',
+        default: 'false',
+        description: 'When enabled displays buttons at each side of the tab headers to scroll the tab list.'
     }
 ];
 

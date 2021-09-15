@@ -39,7 +39,8 @@ export class TabView extends Component {
         style: null,
         className: null,
         renderActiveOnly: true,
-        onTabChange: null
+        onTabChange: null,
+        scrollable: false
     }
 
     static propTypes = {
@@ -48,13 +49,16 @@ export class TabView extends Component {
         style: PropTypes.object,
         className: PropTypes.string,
         renderActiveOnly: PropTypes.bool,
-        onTabChange: PropTypes.func
+        onTabChange: PropTypes.func,
+        scrollable: PropTypes.bool
     };
 
     constructor(props) {
         super(props);
         let state = {
-            id: props.id
+            id: props.id,
+            backwardIsDisabled: true,
+            forwardIsDisabled: false
         };
 
         if (!this.props.onTabChange) {
@@ -65,6 +69,10 @@ export class TabView extends Component {
         }
 
         this.state = state;
+        this.navBackward = this.navBackward.bind(this);
+        this.navForward = this.navForward.bind(this);
+        this.onScroll = this.onScroll.bind(this);
+
     }
 
     getActiveIndex() {
@@ -87,6 +95,8 @@ export class TabView extends Component {
             }
         }
 
+        this.updateScrollBar(index);
+
         event.preventDefault();
     }
 
@@ -98,6 +108,49 @@ export class TabView extends Component {
         this.inkbar.style.left = DomHandler.getOffset(tabHeader).left - DomHandler.getOffset(this.nav).left + 'px';
     }
 
+    updateScrollBar(index) {
+        let tabHeader = this[`tab_${index}`];
+        tabHeader.scrollIntoView({ block: 'nearest' })
+    }
+
+    updateButtonState() {
+        const content = this.content;
+        const { scrollLeft, scrollWidth } = content;
+        const width = DomHandler.getWidth(content);
+
+        this.setState({ backwardIsDisabled: scrollLeft === 0 });
+        this.setState({ forwardIsDisabled: scrollLeft === scrollWidth - width });
+    }
+
+    onScroll(event) {
+        this.props.scrollable && this.updateButtonState();
+
+        event.preventDefault();
+    }
+
+    getVisibleButtonWidths() {
+        const prevBtn = this.prevBtn;
+        const nextBtn = this.nextBtn;
+
+        return [prevBtn, nextBtn].reduce((acc, el) => el ? acc + DomHandler.getWidth(el) : acc, 0);
+    }
+
+    navBackward() {
+        const content = this.content;
+        const width = DomHandler.getWidth(content) - this.getVisibleButtonWidths();
+        const pos = content.scrollLeft - width;
+        content.scrollLeft = pos <= 0 ? 0 : pos;
+    }
+
+    navForward() {
+        const content = this.content;
+        const width = DomHandler.getWidth(content) - this.getVisibleButtonWidths();
+        const pos = content.scrollLeft + width;
+        const lastPos = content.scrollWidth - width;
+
+        content.scrollLeft = pos >= lastPos ? lastPos : pos;
+    }
+
     componentDidMount() {
         if (!this.state.id) {
             this.setState({ id: UniqueComponentId() });
@@ -106,8 +159,12 @@ export class TabView extends Component {
         this.updateInkBar();
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps) {
         this.updateInkBar();
+
+        if (prevProps.activeIndex !== this.props.activeIndex){
+            this.updateScrollBar(this.props.activeIndex);
+        }
     }
 
     renderTabHeader(tab, index) {
@@ -169,10 +226,12 @@ export class TabView extends Component {
         const headers = this.renderTabHeaders();
 
         return (
-            <ul ref={(el) => this.nav = el} className="p-tabview-nav" role="tablist">
-                {headers}
-                <li ref={(el) => this.inkbar = el} className="p-tabview-ink-bar"></li>
-            </ul>
+            <div ref={(el) => this.content = el} id={this.props.id} className="p-tabview-nav-content" style={this.props.style} onScroll={this.onScroll}>
+                <ul ref={(el) => this.nav = el} className="p-tabview-nav" role="tablist">
+                    {headers}
+                    <li ref={(el) => this.inkbar = el} className="p-tabview-ink-bar"></li>
+                </ul>
+            </div>
         );
     }
 
@@ -204,16 +263,45 @@ export class TabView extends Component {
         );
     }
 
+    renderPrevButton() {
+        if (this.props.scrollable && !this.state.backwardIsDisabled) {
+            return (
+                <button ref={(el) => this.prevBtn = el} className="p-tabview-nav-prev p-tabview-nav-btn p-link" onClick={this.navBackward} type="button">
+                    <span className="pi pi-chevron-left"></span>
+                </button>
+            )
+        }
+        return null;
+
+    }
+
+    renderNextButton() {
+        if (this.props.scrollable && !this.state.forwardIsDisabled) {
+            return (
+                <button ref={(el) => this.nextBtn = el} className="p-tabview-nav-next p-tabview-nav-btn p-link" onClick={this.navForward} type="button">
+                    <span className="pi pi-chevron-right"></span>
+                </button>
+            )
+        }
+
+    }
+
     render() {
-        const className = classNames('p-tabview p-component', this.props.className);
+        const className = classNames('p-tabview p-component', this.props.className, { 'p-tabview-scrollable': this.props.scrollable });
         const navigator = this.renderNavigator();
         const content = this.renderContent();
+        const prevButton = this.renderPrevButton();
+        const nextButton = this.renderNextButton();
 
         return (
-            <div id={this.props.id} className={className} style={this.props.style}>
-                {navigator}
+            <div className={className}>
+                <div className="p-tabview-nav-container">
+                    {prevButton}
+                    {navigator}
+                    {nextButton}
+                </div>
                 {content}
-            </div>
+            </div >
         );
     }
 }
