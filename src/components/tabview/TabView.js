@@ -268,6 +268,7 @@ export class TabView extends Component {
             return (
                 <button ref={(el) => this.prevBtn = el} className="p-tabview-nav-prev p-tabview-nav-btn p-link" onClick={this.navBackward} type="button">
                     <span className="pi pi-chevron-left"></span>
+                    <Ripple />
                 </button>
             )
         }
@@ -280,6 +281,7 @@ export class TabView extends Component {
             return (
                 <button ref={(el) => this.nextBtn = el} className="p-tabview-nav-next p-tabview-nav-btn p-link" onClick={this.navForward} type="button">
                     <span className="pi pi-chevron-right"></span>
+                    <Ripple />
                 </button>
             )
         }
