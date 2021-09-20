@@ -116,6 +116,7 @@ primereact/resources/themes/mdc-light-indigo/theme.css
 primereact/resources/themes/mdc-light-deeppurple/theme.css
 primereact/resources/themes/mdc-dark-indigo/theme.css
 primereact/resources/themes/mdc-dark-deeppurple/theme.css
+primereact/resources/themes/tailwind-light/theme.css
 primereact/resources/themes/fluent-light/theme.css
 primereact/resources/themes/saga-blue/theme.css
 primereact/resources/themes/saga-green/theme.css

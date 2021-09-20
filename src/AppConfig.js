@@ -215,6 +215,16 @@ export class AppConfig extends Component {
                                 </div>
                             </div>
 
+                            <h5>Tailwind</h5>
+                            <div className="p-grid free-themes">
+                                <div className="p-col-3">
+                                    <button className="p-link">
+                                        <img src="showcase/images/themes/tailwind-light.png" alt="Tailwind Light" onClick={(e) => this.onThemeChange(e, 'tailwind-light')}/>
+                                    </button>
+                                    <span>Tailwind Light</span>
+                                </div>
+                            </div>
+
                             <h5>Fluent UI</h5>
                             <div className="p-grid free-themes">
                                 <div className="p-col-3">

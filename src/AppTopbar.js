@@ -68,7 +68,8 @@ export class AppTopbar extends Component {
             'viva-light': 'viva-light.svg',
             'viva-dark': 'viva-dark.svg',
             'mira': 'mira.jpg',
-            'nano': 'nano.jpg'
+            'nano': 'nano.jpg',
+            'tailwind-light': 'tailwind-light.png'
         };
 
         this.onMenuButtonClick = this.onMenuButtonClick.bind(this);
@@ -199,6 +200,9 @@ export class AppTopbar extends Component {
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'mdc-light-deeppurple')} role="menuitem"><img src="showcase/images/themes/md-light-deeppurple.svg" alt="Deep Purple Light" /><span>Deep Purple Light</span></button></li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'mdc-dark-indigo', true)} role="menuitem"><img src="showcase/images/themes/md-dark-indigo.svg" alt="Indigo Dark" /><span>Indigo Dark</span></button></li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'mdc-dark-deeppurple', true)} role="menuitem"><img src="showcase/images/themes/md-dark-deeppurple.svg" alt="Deep Purple Dark" /><span>Deep Purple Dark</span></button></li>
+
+                                <li role="none" className="topbar-submenu-header">TAILWIND</li>
+                                <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'tailwind-light')} role="menuitem"><img src="showcase/images/themes/tailwind-light.png" alt="Tailwind Light" /><span>Tailwind Light</span></button></li>
 
                                 <li role="none" className="topbar-submenu-header">FLUENT UI</li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'fluent-light')} role="menuitem"><img src="showcase/images/themes/fluent-light.png" alt="Fluent Light" /><span>Fluent Light</span></button></li>
