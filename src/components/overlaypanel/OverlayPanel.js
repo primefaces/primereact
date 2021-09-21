@@ -134,6 +134,10 @@ export class OverlayPanel extends Component {
         });
     }
 
+    onContentClick() {
+        this.isPanelClicked = true;
+    }
+
     toggle(event, target) {
         if (this.state.visible) {
             this.hide();
@@ -290,7 +294,7 @@ export class OverlayPanel extends Component {
             <CSSTransition nodeRef={this.overlayRef} classNames="p-overlaypanel" in={this.state.visible} timeout={{ enter: 120, exit: 100 }} options={this.props.transitionOptions}
                 unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit} onExited={this.onExited}>
                 <div ref={this.overlayRef} id={this.props.id} className={className} style={this.props.style} onClick={this.onPanelClick}>
-                    <div className="p-overlaypanel-content">
+                    <div className="p-overlaypanel-content" onClick={this.onContentClick} onMouseDown={this.onContentClick}>
                         {this.props.children}
                     </div>
                     {closeIcon}
