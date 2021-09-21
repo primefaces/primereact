@@ -3853,6 +3853,13 @@
 .p-paginator .p-dropdown .p-dropdown-label {
   padding-right: 0;
 }
+.p-paginator .p-paginator-page-input {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+.p-paginator .p-paginator-page-input .p-inputtext {
+  max-width: 3rem;
+}
 .p-paginator .p-paginator-current {
   background-color: transparent;
   border: 1px solid #d4d4d8;
