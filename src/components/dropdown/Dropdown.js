@@ -633,7 +633,6 @@ export class Dropdown extends Component {
     onOverlayEnter(callback) {
         ZIndexUtils.set('overlay', this.overlayRef.current);
         this.alignOverlay();
-        this.scrollInView();
         callback && callback();
     }
 
