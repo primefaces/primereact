@@ -111,7 +111,9 @@ export class Dock extends Component {
 
         return (
             <div id={this.props.id} className={className} style={this.props.style}>
-                {list}
+                <div class="p-dock-list-container">
+                    {list}
+                </div>
             </div>
         );
     }
