@@ -576,6 +576,10 @@ export default class DomHandler {
         return /(android)/i.test(navigator.userAgent);
     }
 
+    static isTouchDevice() {
+        return (('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0));
+    }
+
     static isFunction(obj) {
         return !!(obj && obj.constructor && obj.call && obj.apply);
     }

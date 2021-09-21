@@ -712,7 +712,7 @@ export class Dropdown extends Component {
     bindResizeListener() {
         if (!this.resizeListener) {
             this.resizeListener = () => {
-                if (this.state.overlayVisible && !DomHandler.isAndroid()) {
+                if (this.state.overlayVisible && !DomHandler.isTouchDevice()) {
                     this.hideOverlay();
                 }
             };
