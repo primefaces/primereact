@@ -578,21 +578,25 @@ export class Dropdown extends Component {
 
     getSelectedOption() {
         let index = this.getSelectedOptionIndex();
-        return index !== -1 ? (this.props.optionGroupLabel ? this.getOptionGroupChildren(this.props.options[index.group])[index.option] : this.props.options[index]) : null;
+        let visibleOptions = this.getVisibleOptions()
+
+        return index !== -1 ? (this.props.optionGroupLabel ? this.getOptionGroupChildren(visibleOptions[index.group])[index.option] : visibleOptions[index]) : null;
     }
 
     getSelectedOptionIndex() {
-        if (this.props.value != null && this.props.options) {
+        let visibleOptions = this.getVisibleOptions()
+
+        if (this.props.value != null && visibleOptions) {
             if (this.props.optionGroupLabel) {
-                for (let i = 0; i < this.props.options.length; i++) {
-                    let selectedOptionIndex = this.findOptionIndexInList(this.props.value, this.getOptionGroupChildren(this.props.options[i]));
+                for (let i = 0; i < visibleOptions.length; i++) {
+                    let selectedOptionIndex = this.findOptionIndexInList(this.props.value, this.getOptionGroupChildren(visibleOptions[i]));
                     if (selectedOptionIndex !== -1) {
                         return { group: i, option: selectedOptionIndex };
                     }
                 }
             }
             else {
-                return this.findOptionIndexInList(this.props.value, this.props.options);
+                return this.findOptionIndexInList(this.props.value, visibleOptions);
             }
         }
 
