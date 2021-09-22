@@ -100,6 +100,7 @@ interface PaginatorRowsPerPageDropdownOptions {
     totalRecords: number;
     element: JSX.Element;
     props: PaginatorProps;
+    disabled: boolean;
 }
 
 interface PaginatorCurrentPageReportOptions {

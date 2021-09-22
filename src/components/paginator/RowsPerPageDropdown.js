@@ -13,7 +13,8 @@ export class RowsPerPageDropdown extends Component {
         totalRecords: 0,
         appendTo: null,
         onChange: null,
-        template: null
+        template: null,
+        disabled: false
     }
 
     static propTypes = {
@@ -34,7 +35,7 @@ export class RowsPerPageDropdown extends Component {
     render() {
         const hasOptions = this.hasOptions();
         const options = hasOptions ? this.props.options.map(opt => ({ label: String(opt), value: opt })) : [];
-        const element = hasOptions ? <Dropdown value={this.props.value} options={options} onChange={this.props.onChange} appendTo={this.props.appendTo} /> : null;
+        const element = hasOptions ? <Dropdown value={this.props.value} options={options} onChange={this.props.onChange} appendTo={this.props.appendTo} disabled={this.props.disabled} /> : null;
 
         if (this.props.template) {
             const defaultOptions = {
@@ -45,8 +46,9 @@ export class RowsPerPageDropdown extends Component {
                 currentPage: this.props.page,
                 totalPages: this.props.pageCount,
                 totalRecords: this.props.totalRecords,
+                disabled: this.props.disabled,
                 element,
-                props: this.props
+                props: this.props,
             };
 
             return ObjectUtils.getJSXElement(this.props.template, defaultOptions);

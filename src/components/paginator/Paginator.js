@@ -65,7 +65,7 @@ export class Paginator extends Component {
     }
 
     getPageCount() {
-        return Math.ceil(this.props.totalRecords / this.props.rows) || 1;
+        return Math.ceil(this.totalRecords / this.d_rows);
     }
 
     calculatePageLinkBoundaries() {
@@ -118,6 +118,11 @@ export class Paginator extends Component {
         return Math.floor(this.props.first / this.props.rows);
     }
 
+    empty() {
+        let pageCount = this.getPageCount()
+        return pageCount === 0;
+    }
+
     changePageToFirst(event) {
         this.changePage(0, this.props.rows);
         event.preventDefault();
@@ -165,19 +170,19 @@ export class Paginator extends Component {
 
         switch (key) {
             case 'FirstPageLink':
-                element = <FirstPageLink key={key} onClick={this.changePageToFirst} disabled={this.isFirstPage()} template={template} />;
+                element = <FirstPageLink key={key} onClick={this.changePageToFirst} disabled={this.isFirstPage() || this.empty()} template={template} />;
                 break;
 
             case 'PrevPageLink':
-                element = <PrevPageLink key={key} onClick={this.changePageToPrev} disabled={this.isFirstPage()} template={template} />;
+                element = <PrevPageLink key={key} onClick={this.changePageToPrev} disabled={this.isFirstPage() || this.empty()} template={template} />;
                 break;
 
             case 'NextPageLink':
-                element = <NextPageLink key={key} onClick={this.changePageToNext} disabled={this.isLastPage()} template={template} />;
+                element = <NextPageLink key={key} onClick={this.changePageToNext} disabled={this.isLastPage() || this.empty()} template={template} />;
                 break;
 
             case 'LastPageLink':
-                element = <LastPageLink key={key} onClick={this.changePageToLast} disabled={this.isLastPage()} template={template} />;
+                element = <LastPageLink key={key} onClick={this.changePageToLast} disabled={this.isLastPage() || this.empty()} template={template} />;
                 break;
 
             case 'PageLinks':
@@ -185,7 +190,7 @@ export class Paginator extends Component {
                 break;
 
             case 'RowsPerPageDropdown':
-                element = <RowsPerPageDropdown key={key} value={this.props.rows} page={this.getPage()} pageCount={this.getPageCount()} totalRecords={this.props.totalRecords} options={this.props.rowsPerPageOptions} onChange={this.onRowsChange} appendTo={this.props.dropdownAppendTo} template={template} />;
+                element = <RowsPerPageDropdown key={key} value={this.props.rows} page={this.getPage()} pageCount={this.getPageCount()} totalRecords={this.props.totalRecords} options={this.props.rowsPerPageOptions} onChange={this.onRowsChange} appendTo={this.props.dropdownAppendTo} template={template} disabled={this.empty()} />;
                 break;
 
             case 'CurrentPageReport':
@@ -194,7 +199,7 @@ export class Paginator extends Component {
                     rows={this.props.rows} totalRecords={this.props.totalRecords} template={template} />;
                 break;
             case 'JumpToPageInput':
-                element = <JumpToPageInput page={this.getPage()} onChange={this.changePage} disabled={this.isLastPage()} />;
+                element = <JumpToPageInput page={this.getPage()} onChange={this.changePage} disabled={this.empty()} />;
                 break;
 
             default:
