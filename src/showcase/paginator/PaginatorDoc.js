@@ -910,6 +910,7 @@ const onPageChange = (e) => {
                             <li>NextPageLink</li>
                             <li>LastPageLink</li>
                             <li>RowsPerPageDropdown</li>
+                            <li>JumpToPageInput</li>
                             <li>CurrentPageReport</li>
                         </ul>
 

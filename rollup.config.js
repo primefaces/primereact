@@ -21,6 +21,7 @@ const ALIAS_ENTRIES = [
     { find: '../virtualscroller/VirtualScroller', replacement: 'primereact/virtualscroller' },
     { find: '../button/Button', replacement: 'primereact/button' },
     { find: '../inputtext/InputText', replacement: 'primereact/inputtext' },
+    { find: '../inputnumber/InputNumber', replacement: 'primereact/inputnumber' },
     { find: '../paginator/Paginator', replacement: 'primereact/paginator' },
     { find: '../messages/Messages', replacement: 'primereact/messages' },
     { find: '../progressbar/ProgressBar', replacement: 'primereact/progressbar' },

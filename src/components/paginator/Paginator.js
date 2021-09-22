@@ -8,6 +8,7 @@ import { LastPageLink } from './LastPageLink';
 import { PageLinks } from './PageLinks';
 import { RowsPerPageDropdown } from './RowsPerPageDropdown';
 import { CurrentPageReport } from './CurrentPageReport';
+import { JumpToPageInput } from './JumpToPageInput';
 
 export class Paginator extends Component {
 
@@ -190,7 +191,10 @@ export class Paginator extends Component {
             case 'CurrentPageReport':
                 element = <CurrentPageReport reportTemplate={this.props.currentPageReportTemplate} key={key}
                     page={this.getPage()} pageCount={this.getPageCount()} first={this.props.first}
-                    rows={this.props.rows} totalRecords={this.props.totalRecords} template={template}/>;
+                    rows={this.props.rows} totalRecords={this.props.totalRecords} template={template} />;
+                break;
+            case 'JumpToPageInput':
+                element = <JumpToPageInput page={this.getPage()} onChange={this.changePage} disabled={this.isLastPage()} />;
                 break;
 
             default:

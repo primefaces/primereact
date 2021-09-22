@@ -21,6 +21,8 @@ type PaginatorRowsPerPageDropdownType = React.ReactNode | ((options: PaginatorRo
 
 type PaginatorCurrentPageReportType = React.ReactNode | ((options: PaginatorCurrentPageReportOptions) => React.ReactNode);
 
+type PaginatorJumpToPageInputType = React.ReactNode | ((options: PaginatorJumpToPageInputOptions) => React.ReactNode);
+
 type PaginatorAppendToType = 'self' | HTMLElement | undefined | null;
 
 interface PaginatorFirstPageLinkOptions {
@@ -112,6 +114,13 @@ interface PaginatorCurrentPageReportOptions {
     props: PaginatorProps;
 }
 
+interface PaginatorJumpToPageInputOptions {
+    value: number;
+    page: number;
+    pageCount: number;
+    disabled: boolean;
+}
+
 interface PaginatorTemplateOptions {
     layout: string;
     FirstPageLink: PaginatorFirstPageLinkType;
@@ -121,6 +130,7 @@ interface PaginatorTemplateOptions {
     LastPageLink: PaginatorLastPageLinkType;
     RowsPerPageDropdown: PaginatorRowsPerPageDropdownType;
     CurrentPageReport: PaginatorCurrentPageReportType;
+    JumpToPageInput: PaginatorJumpToPageInputType;
 }
 
 export type PaginatorTemplate = string | PaginatorTemplateOptions;
