@@ -35,9 +35,9 @@ export class CurrentPageReport extends Component {
         };
 
         const text = this.props.reportTemplate
-            .replace("{currentPage}",report.totalPages > 0 ? report.currentPage + 1 : 0)
+        .replace("{currentPage}", report.currentPage)
             .replace("{totalPages}", report.totalPages)
-            .replace("{first}", report.totalPages > 0 ? report.first + 1 : 0)
+            .replace("{first}", report.first)
             .replace("{last}", report.last)
             .replace("{rows}", report.rows)
             .replace("{totalRecords}", report.totalRecords);

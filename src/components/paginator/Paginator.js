@@ -65,7 +65,7 @@ export class Paginator extends Component {
     }
 
     getPageCount() {
-        return Math.ceil(this.totalRecords / this.d_rows);
+        return Math.ceil(this.props.totalRecords / this.props.rows);
     }
 
     calculatePageLinkBoundaries() {
