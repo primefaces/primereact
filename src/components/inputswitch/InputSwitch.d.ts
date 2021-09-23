@@ -22,7 +22,9 @@ export interface InputSwitchProps {
     className?: string;
     inputId?: string;
     name?: string;
-    checked?: boolean;
+    checked?: any;
+    trueValue?: any;
+    falseValue?: any;
     disabled?: boolean;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;

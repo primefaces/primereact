@@ -58,6 +58,18 @@ const InputSwitchProps = [
         type: 'string',
         default: 'null',
         description: 'Establishes relationships between the component and label(s) where its value should be one or more element IDs.'
+    },
+    {
+        name: 'trueValue',
+        type: 'any',
+        default: 'true',
+        description: 'Value in checked state.'
+    },
+    {
+        name: 'falseValue',
+        type: 'any',
+        default: 'false',
+        description: 'Value in unchecked state.'
     }
 ];
 

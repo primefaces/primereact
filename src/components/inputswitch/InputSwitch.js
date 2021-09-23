@@ -13,6 +13,8 @@ export class InputSwitch extends Component {
         inputId: null,
         name: null,
         checked: false,
+        trueValue: true,
+        falseValue: false,
         disabled: false,
         tooltip: null,
         tooltipOptions: null,
@@ -29,7 +31,9 @@ export class InputSwitch extends Component {
         className: PropTypes.string,
         inputId: PropTypes.string,
         name: PropTypes.string,
-        checked: PropTypes.bool,
+        checked: PropTypes.any,
+        trueValue: PropTypes.bool,
+        falseValue: PropTypes.bool,
         disabled: PropTypes.bool,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
@@ -66,15 +70,17 @@ export class InputSwitch extends Component {
 
     toggle(event) {
         if (this.props.onChange) {
+            let value = this.isChecked() ? this.props.falseValue : this.props.trueValue;
+
             this.props.onChange({
                 originalEvent: event,
-                value: !this.props.checked,
+                value: value,
                 stopPropagation : () =>{},
                 preventDefault : () =>{},
                 target: {
                     name: this.props.name,
                     id: this.props.id,
-                    value: !this.props.checked,
+                    value: value,
                 }
             });
         }
@@ -149,9 +155,13 @@ export class InputSwitch extends Component {
         });
     }
 
+    isChecked() {
+        return this.props.checked === this.props.trueValue
+    }
+
     render() {
         const className = classNames('p-inputswitch p-component', {
-            'p-inputswitch-checked': this.props.checked,
+            'p-inputswitch-checked': this.isChecked(),
             'p-disabled': this.props.disabled,
             'p-inputswitch-focus': this.state.focused
         }, this.props.className);
@@ -160,10 +170,10 @@ export class InputSwitch extends Component {
 
         return (
             <div ref={el => this.container = el} id={this.props.id} className={className} style={this.props.style} onClick={this.onClick}
-                role="checkbox" aria-checked={this.props.checked} {...inputSwitchProps}>
+                role="checkbox" aria-checked={this.isChecked()} {...inputSwitchProps}>
                 <div className="p-hidden-accessible">
-                    <input ref={this.inputRef} type="checkbox" id={this.props.inputId} name={this.props.name} checked={this.props.checked} onChange={this.toggle}
-                        onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.onKeyDown} disabled={this.props.disabled}  role="switch" aria-checked={this.props.checked}
+                    <input ref={this.inputRef} type="checkbox" id={this.props.inputId} name={this.props.name} checked={this.isChecked()} onChange={this.toggle}
+                        onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.onKeyDown} disabled={this.props.disabled}  role="switch" aria-checked={this.isChecked()}
                         aria-labelledby={this.props.ariaLabelledBy}/>
                 </div>
                 <span className="p-inputswitch-slider"></span>
