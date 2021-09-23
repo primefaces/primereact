@@ -133,7 +133,7 @@ export class Galleria extends Component {
 
     onEntering() {
         ZIndexUtils.set('modal', this.mask, this.props.baseZIndex);
-        DomHandler.addClass(this.mask, 'p-component-overlay');
+        DomHandler.addMultipleClasses(this.mask, 'p-component-overlay p-component-overlay-enter');
     }
 
     onEntered() {
@@ -142,7 +142,7 @@ export class Galleria extends Component {
 
     onExit() {
         DomHandler.removeClass(document.body, 'p-overflow-hidden');
-        DomHandler.addClass(this.mask, 'p-galleria-mask-leave');
+        DomHandler.addClass(this.mask, 'p-component-overlay-leave');
     }
 
     onExited() {

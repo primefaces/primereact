@@ -343,6 +343,7 @@ export class Dialog extends Component {
         this.dragging = false;
         ZIndexUtils.clear(this.mask);
         this.setState({ maskVisible: false });
+        DomHandler.addClass(this.mask, 'p-component-overlay-leave');
         this.disableDocumentSettings();
     }
 
@@ -633,7 +634,7 @@ export class Dialog extends Component {
         });
 
         const maskClassName = classNames('p-dialog-mask', {
-            'p-component-overlay': this.props.modal,
+            'p-component-overlay p-component-overlay-enter': this.props.modal,
             'p-dialog-visible': this.state.maskVisible,
             'p-dialog-draggable': this.props.draggable,
             'p-dialog-resizable': this.props.resizable,

@@ -23,15 +23,6 @@
     position: relative;
 }
 
-.p-sidebar-mask {
-    background-color: transparent;
-    transition-property: background-color;
-}
-
-.p-sidebar-mask-leave.p-component-overlay {
-    background-color: transparent;
-}
-
 .p-sidebar-left {
     top: 0;
     left: 0;

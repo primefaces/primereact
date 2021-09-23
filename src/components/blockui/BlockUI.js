@@ -48,8 +48,8 @@ export class BlockUI extends Component {
     }
 
     unblock() {
-        DomHandler.addClass(this.mask, 'p-blockui-leave');
-        this.mask.addEventListener('transitionend', () => {
+        DomHandler.addClass(this.mask, 'p-component-overlay-leave');
+        this.mask.addEventListener('animationend', () => {
             ZIndexUtils.clear(this.mask);
             this.setState({ visible: false }, () => {
                 this.props.fullScreen && DomHandler.removeClass(document.body, 'p-overflow-hidden');
@@ -64,12 +64,6 @@ export class BlockUI extends Component {
             document.activeElement.blur();
         }
 
-        if (this.mask) {
-            setTimeout(() => {
-                DomHandler.addClass(this.mask, 'p-component-overlay');
-            }, 1);
-        }
-
         if (this.props.autoZIndex) {
             ZIndexUtils.set(this.props.fullScreen ? 'modal' : 'overlay', this.mask, this.props.baseZIndex);
         }
@@ -79,7 +73,7 @@ export class BlockUI extends Component {
 
     renderMask() {
         if (this.state.visible) {
-            const className = classNames('p-blockui', {
+            const className = classNames('p-blockui p-component-overlay p-component-overlay-enter', {
                 'p-blockui-document': this.props.fullScreen
             }, this.props.className);
             const content = this.props.template ? ObjectUtils.getJSXElement(this.props.template, this.props) : null;

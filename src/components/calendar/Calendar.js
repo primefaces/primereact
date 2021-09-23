@@ -1725,7 +1725,7 @@ export class Calendar extends Component {
         if (!this.touchUIMask) {
             this.touchUIMask = document.createElement('div');
             this.touchUIMask.style.zIndex = String(ZIndexUtils.get(this.overlayRef.current) - 1);
-            DomHandler.addMultipleClasses(this.touchUIMask, 'p-component-overlay p-datepicker-mask p-datepicker-mask-scrollblocker');
+            DomHandler.addMultipleClasses(this.touchUIMask, 'p-component-overlay p-datepicker-mask p-datepicker-mask-scrollblocker p-component-overlay-enter');
 
             this.touchUIMaskClickListener = () => {
                 this.disableModality();
@@ -1739,26 +1739,31 @@ export class Calendar extends Component {
 
     disableModality() {
         if (this.touchUIMask) {
-            this.touchUIMask.removeEventListener('click', this.touchUIMaskClickListener);
-            this.touchUIMaskClickListener = null;
-            document.body.removeChild(this.touchUIMask);
-            this.touchUIMask = null;
+            DomHandler.addClass(this.touchUIMask, 'p-component-overlay-leave');
+            this.touchUIMask.addEventListener('animationend', () => {
+                this.destroyMask();
+            });
+        }
+    }
 
-            let bodyChildren = document.body.children;
-            let hasBlockerMasks;
-            for (let i = 0; i < bodyChildren.length; i++) {
-                let bodyChild = bodyChildren[i];
-                if (DomHandler.hasClass(bodyChild, 'p-datepicker-mask-scrollblocker')) {
-                    hasBlockerMasks = true;
-                    break;
-                }
+    destroyMask() {
+        this.touchUIMask.removeEventListener('click', this.touchUIMaskClickListener);
+        this.touchUIMaskClickListener = null;
+        document.body.removeChild(this.touchUIMask);
+        this.touchUIMask = null;
+
+        let bodyChildren = document.body.children;
+        let hasBlockerMasks;
+        for (let i = 0; i < bodyChildren.length; i++) {
+            let bodyChild = bodyChildren[i];
+            if(DomHandler.hasClass(bodyChild, 'p-datepicker-mask-scrollblocker')) {
+                hasBlockerMasks = true;
+                break;
             }
+        }
 
-            if (!hasBlockerMasks) {
-                DomHandler.removeClass(document.body, 'p-overflow-hidden');
-            }
-
-            this.hideOverlay();
+        if (!hasBlockerMasks) {
+            DomHandler.removeClass(document.body, 'p-overflow-hidden');
         }
     }
 

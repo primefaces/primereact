@@ -102,7 +102,7 @@ export class Sidebar extends Component {
         if (!this.mask) {
             this.mask = document.createElement('div');
             this.mask.style.zIndex = String(ZIndexUtils.get(this.sidebarRef.current) - 1);
-            let maskClassName = 'p-component-overlay p-sidebar-mask';
+            let maskClassName = 'p-component-overlay p-component-overlay p-component-overlay-enter';
             if (this.props.blockScroll) {
                 maskClassName += ' p-sidebar-mask-scrollblocker';
             }
@@ -122,24 +122,18 @@ export class Sidebar extends Component {
 
     disableModality() {
         if (this.mask) {
+            DomHandler.addClass(this.mask, 'p-component-overlay-leave');
+            this.mask.addEventListener('animationend', () => {
+                this.destroyModal();
+            });
+        }
+    }
+
+    destroyModal() {
+        if (this.mask) {
             this.unbindMaskClickListener();
             document.body.removeChild(this.mask);
-
-            if (this.props.blockScroll) {
-                let bodyChildren = document.body.children;
-                let hasBlockerMasks;
-                for (let i = 0; i < bodyChildren.length; i++) {
-                    let bodyChild = bodyChildren[i];
-                    if (DomHandler.hasClass(bodyChild, 'p-sidebar-mask-scrollblocker')) {
-                        hasBlockerMasks = true;
-                        break;
-                    }
-                }
-
-                if (!hasBlockerMasks) {
-                    DomHandler.removeClass(document.body, 'p-overflow-hidden');
-                }
-            }
+            DomHandler.removeClass(document.body, 'p-overflow-hidden');
             this.mask = null;
         }
     }

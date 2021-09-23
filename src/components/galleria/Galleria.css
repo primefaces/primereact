@@ -236,8 +236,6 @@
     align-items: center;
     justify-content: center;
     pointer-events: none;
-    background-color: transparent;
-    transition-property: background-color;
 }
 
 .p-galleria-mask.p-component-overlay {
@@ -288,10 +286,6 @@
 
 .p-galleria-enter-active .p-galleria-item-nav {
     opacity: 0;
-}
-
-.p-galleria-mask.p-galleria-mask-leave {
-    background-color: transparent;
 }
 
 /* Keyboard Support */

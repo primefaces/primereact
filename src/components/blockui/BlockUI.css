@@ -8,9 +8,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: transparent;
     opacity: 1;
-    transition-property: background-color, opacity;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,9 +20,4 @@
 
 .p-blockui-document.p-component-overlay {
     position: fixed;
-}
-
-.p-blockui.p-blockui-leave.p-component-overlay {
-    opacity: 0;
-    background-color: transparent;
 }
