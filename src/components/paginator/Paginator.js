@@ -53,6 +53,7 @@ export class Paginator extends Component {
         this.changePageToNext = this.changePageToNext.bind(this);
         this.changePageToLast = this.changePageToLast.bind(this);
         this.onRowsChange = this.onRowsChange.bind(this);
+        this.changePage = this.changePage.bind(this);
         this.onPageLinkClick = this.onPageLinkClick.bind(this);
     }
 
@@ -116,6 +117,10 @@ export class Paginator extends Component {
 
     getPage() {
         return Math.floor(this.props.first / this.props.rows);
+    }
+
+    currentPage() {
+        return this.getPageCount() > 0 ? this.getPage() + 1 : 0;
     }
 
     empty() {
@@ -199,7 +204,7 @@ export class Paginator extends Component {
                     rows={this.props.rows} totalRecords={this.props.totalRecords} template={template} />;
                 break;
             case 'JumpToPageInput':
-                element = <JumpToPageInput page={this.getPage()} onChange={this.changePage} disabled={this.empty()} />;
+                element = <JumpToPageInput key={key} rows={this.props.rows} page={this.currentPage()} onChange={this.changePage} disabled={this.empty()} />;
                 break;
 
             default:

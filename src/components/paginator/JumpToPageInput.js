@@ -5,37 +5,34 @@ import { InputNumber } from '../inputnumber/InputNumber';
 export class JumpToPageInput extends Component {
 
     static defaultProps = {
-        value: null,
         page: null,
-        pageCount: null,
-        disabled: false
+        rows: null,
+        disabled: false,
+        onChange: null
     }
 
     static propTypes = {
-        value: PropTypes.number,
         page: PropTypes.number,
-        pageCount: PropTypes.number,
+        rows: PropTypes.number,
         disabled: PropTypes.bool,
+        onChange: PropTypes.func
     }
 
     constructor(props) {
         super(props)
 
-        this.onChange = this.onChange.bind(this);
+        this.inputChange = this.inputChange.bind(this);
     }
 
-    onChange(event) {
+    inputChange(event) {
         if (this.props.onChange) {
-            this.props.onChange({
-                event: event.originalEvent,
-                value: event.value
-            });
+            this.props.onChange(this.props.rows * (event.value - 1), this.props.rows);
         }
     }
 
     render() {
         return (
-            <InputNumber value={this.props.value} onChange={this.onChange} className="p-paginator-page-input" disabled={this.props.disabled} />
+            <InputNumber value={this.props.page} onChange={this.inputChange} className="p-paginator-page-input" disabled={this.props.disabled} />
         )
     }
 
