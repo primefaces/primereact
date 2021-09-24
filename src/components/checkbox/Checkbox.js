@@ -12,6 +12,8 @@ export class Checkbox extends Component {
         value: null,
         name: null,
         checked: false,
+        trueValue: true,
+        falseValue: false,
         style: null,
         className: null,
         disabled: false,
@@ -33,7 +35,9 @@ export class Checkbox extends Component {
         inputId: PropTypes.string,
         value: PropTypes.any,
         name: PropTypes.string,
-        checked: PropTypes.bool,
+        checked: PropTypes.any,
+        trueValue: PropTypes.any,
+        falseValue: PropTypes.any,
         style: PropTypes.object,
         className: PropTypes.string,
         disabled: PropTypes.bool,
@@ -65,10 +69,12 @@ export class Checkbox extends Component {
 
     onClick(e) {
         if (!this.props.disabled && !this.props.readOnly && this.props.onChange) {
+            let value = this.isChecked() ? this.props.falseValue : this.props.trueValue;
+
             this.props.onChange({
                 originalEvent: e,
                 value: this.props.value,
-                checked: !this.props.checked,
+                checked: value,
                 stopPropagation : () =>{},
                 preventDefault : () =>{},
                 target: {
@@ -76,11 +82,11 @@ export class Checkbox extends Component {
                     name: this.props.name,
                     id: this.props.id,
                     value: this.props.value,
-                    checked: !this.props.checked,
+                    checked: value,
                 }
             });
 
-            this.inputRef.current.checked = !this.props.checked;
+            this.inputRef.current.checked = !this.isChecked();
             this.inputRef.current.focus();
 
             e.preventDefault();
@@ -116,7 +122,7 @@ export class Checkbox extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        this.inputRef.current.checked = this.props.checked;
+        this.inputRef.current.checked = this.isChecked();
 
         if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
             if (this.tooltip)
@@ -149,28 +155,32 @@ export class Checkbox extends Component {
         });
     }
 
+    isChecked() {
+        return this.props.checked === this.props.trueValue;
+    }
+
     render() {
         const containerClass = classNames('p-checkbox p-component', {
-            'p-checkbox-checked': this.props.checked,
+            'p-checkbox-checked': this.isChecked(),
             'p-checkbox-disabled': this.props.disabled,
             'p-checkbox-focused': this.state.focused
         }, this.props.className);
         const boxClass = classNames('p-checkbox-box', {
-            'p-highlight': this.props.checked,
+            'p-highlight': this.isChecked(),
             'p-disabled': this.props.disabled,
             'p-focus': this.state.focused
         });
         const iconClass = classNames('p-checkbox-icon p-c', {
-            [this.props.icon]: this.props.checked
+            [this.props.icon]: this.isChecked()
         });
 
         return (
             <div ref={(el) => this.element = el} id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick} onContextMenu={this.props.onContextMenu} onMouseDown={this.props.onMouseDown}>
                 <div className="p-hidden-accessible">
-                    <input ref={this.inputRef} type="checkbox" aria-labelledby={this.props.ariaLabelledBy} id={this.props.inputId} name={this.props.name} tabIndex={this.props.tabIndex} defaultChecked={this.props.checked}
+                    <input ref={this.inputRef} type="checkbox" aria-labelledby={this.props.ariaLabelledBy} id={this.props.inputId} name={this.props.name} tabIndex={this.props.tabIndex} defaultChecked={this.isChecked()}
                              onKeyDown={this.onKeyDown} onFocus={this.onFocus} onBlur={this.onBlur} disabled={this.props.disabled} readOnly={this.props.readOnly} required={this.props.required}/>
                 </div>
-                <div className={boxClass} ref={el => this.box = el} role="checkbox" aria-checked={this.props.checked}>
+                <div className={boxClass} ref={el => this.box = el} role="checkbox" aria-checked={this.isChecked()}>
                     <span className={iconClass}></span>
                 </div>
             </div>

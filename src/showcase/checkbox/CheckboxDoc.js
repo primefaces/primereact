@@ -484,6 +484,18 @@ const onCityChange = (e) => {
                                         <td>Specifies whether a checkbox should be checked or not.</td>
                                     </tr>
                                     <tr>
+                                        <td>trueValue</td>
+                                        <td>any</td>
+                                        <td>true</td>
+                                        <td>Value in checked state.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>falseValue</td>
+                                        <td>any</td>
+                                        <td>false</td>
+                                        <td>Value in unchecked state.</td>
+                                    </tr>
+                                    <tr>
                                         <td>style</td>
                                         <td>string</td>
                                         <td>null</td>

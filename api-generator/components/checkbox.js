@@ -25,9 +25,21 @@ const CheckboxProps = [
     },
     {
         name: 'checked',
-        type: 'boolean',
+        type: 'any',
         default: 'false',
         description: 'Specifies whether a checkbox should be checked or not.'
+    },
+    {
+        name: 'trueValue',
+        type: 'any',
+        default: 'true',
+        description: 'Value in checked state.'
+    },
+    {
+        name: 'falseValue',
+        type: 'any',
+        default: 'false',
+        description: 'Value in unchecked state.'
     },
     {
         name: 'style',

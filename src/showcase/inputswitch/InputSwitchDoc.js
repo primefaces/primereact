@@ -195,6 +195,18 @@ import {InputSwitch} from 'primereact/inputswitch';
                                     <td>Specifies whether a inputswitch should be checked or not.</td>
                                 </tr>
                                 <tr>
+                                    <td>trueValue</td>
+                                    <td>any</td>
+                                    <td>true</td>
+                                    <td>Value in checked state.</td>
+                                </tr>
+                                <tr>
+                                    <td>falseValue</td>
+                                    <td>any</td>
+                                    <td>false</td>
+                                    <td>Value in unchecked state.</td>
+                                </tr>
+                                <tr>
                                     <td>disabled</td>
                                     <td>boolean</td>
                                     <td>false</td>
@@ -217,18 +229,6 @@ import {InputSwitch} from 'primereact/inputswitch';
                                     <td>string</td>
                                     <td>null</td>
                                     <td>Establishes relationships between the component and label(s) where its value should be one or more element IDs.</td>
-                                </tr>
-                                <tr>
-                                    <td>trueValue</td>
-                                    <td>any</td>
-                                    <td>null</td>
-                                    <td>Value in checked state.</td>
-                                </tr>
-                                <tr>
-                                    <td>falseValue</td>
-                                    <td>any</td>
-                                    <td>null</td>
-                                    <td>Value in unchecked state.</td>
                                 </tr>
                             </tbody>
                         </table>

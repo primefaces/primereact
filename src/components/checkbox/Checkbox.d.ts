@@ -24,7 +24,9 @@ export interface CheckboxProps {
     inputId?: string;
     value?: any;
     name?: string;
-    checked?: boolean;
+    checked?: any;
+    trueValue?: any;
+    falseValue?: any;
     style?: object;
     className?: string;
     disabled?: boolean;
