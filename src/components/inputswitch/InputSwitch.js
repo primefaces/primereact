@@ -32,8 +32,8 @@ export class InputSwitch extends Component {
         inputId: PropTypes.string,
         name: PropTypes.string,
         checked: PropTypes.any,
-        trueValue: PropTypes.bool,
-        falseValue: PropTypes.bool,
+        trueValue: PropTypes.any,
+        falseValue: PropTypes.any,
         disabled: PropTypes.bool,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
@@ -156,7 +156,7 @@ export class InputSwitch extends Component {
     }
 
     isChecked() {
-        return this.props.checked === this.props.trueValue
+        return this.props.checked === this.props.trueValue;
     }
 
     render() {
