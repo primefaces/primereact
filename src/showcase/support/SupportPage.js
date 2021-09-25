@@ -17,8 +17,8 @@ export class SupportPage extends Component {
                     <div className="p-col-12 p-md-6 p-lg-6">
                         <div className="card support-box">
                             <h5>Community Support</h5>
-                            <p><a href="https://forum.primefaces.org/viewforum.php?f=57">Forum</a> is where the community users gather to seek support, post topics and discuss the technology. PrimeTek does not
-                                guarantee response at forum although it is monitored and maintained by our staff. If you need to secure our response within 1 business day, you may consider PrimeReact PRO support.</p>
+                            <p><a href="https://forum.primefaces.org/viewforum.php?f=35">Forum</a> and <a href="https://discord.gg/gzKFYnpmCY">Discord</a> are where the community users gather to seek support, post topics and discuss the technology. PrimeTek does not
+                            guarantee response at forum and discord although they are monitored and maintained by our staff. If you need to secure our response within 1 business day, you may consider PrimeReact PRO support.</p>
                         </div>
                     </div>
 
@@ -28,15 +28,15 @@ export class SupportPage extends Component {
                                 <h5>PrimeReact PRO Support</h5>
                                 <p>PrimeReact PRO is a term based commercial support service. With the exclusive services of Pro account,
                                     you no longer need to post your questions in the community forum and your issues to community issue tracker.
-                                    With PrimeReact PRO, it's easy to support, tune and add features to PrimeReact as if it were an in-house framework.</p>
+                                With PrimeReact PRO, it's easy to support, tune and add features to PrimeReact as if it were an in-house framework.</p>
                             </div>
-                            <a className="action-button" href="mailto:primereact@primetek.com.tr">GET A QUOTE</a>
+                            <a className="action-button" href="mailto:PrimeReact@primetek.com.tr">GET A QUOTE</a>
                         </div>
                     </div>
                 </div>
 
                 <div className="content-section section-moreaboutpro">
-                    <h5 className="section-header">More About Pro</h5>
+                    <h5 className="section-header">Included in PRO</h5>
                     <div className="p-grid">
                         <div className="p-col-6 p-lg-3">
                             <div className="p-d-flex">
@@ -59,28 +59,10 @@ export class SupportPage extends Component {
                         </div>
                         <div className="p-col-6 p-lg-3">
                             <div className="p-d-flex">
-                                <div className="dot color-2">&nbsp;</div>
+                                <div className="dot color-7">&nbsp;</div>
                                 <div className="p-d-flex p-flex-column p-pl-3">
-                                    <h6>Long Term Support License</h6>
-                                    <p>LTS Support ensures stability, premium quality and advanced security for the prior versions. </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="p-col-6 p-lg-3">
-                            <div className="p-d-flex">
-                                <div className="dot color-3">&nbsp;</div>
-                                <div className="p-d-flex p-flex-column p-pl-3">
-                                    <h6>Theme Designer - Extended License</h6>
-                                    <p>Designer is the ultimate tool to create your own PrimeReact experience powered by a SASS based theme engine with 500+ variables and a Visual Designer. </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="p-col-6 p-lg-3">
-                            <div className="p-d-flex">
-                                <div className="dot color-2">&nbsp;</div>
-                                <div className="p-d-flex p-flex-column p-pl-3">
-                                    <h6>Premium Template of Your Choice - Extended License</h6>
-                                    <p>Choose a premium template of your choice and start your project with our High Touch PRO Support.</p>
+                                    <h6>Unlimited Number of Cases</h6>
+                                    <p>Take advantage of the unlimited number of cases. Our PRO team is at your side to solve all the problems you are experiencing. </p>
                                 </div>
                             </div>
                         </div>
@@ -95,10 +77,19 @@ export class SupportPage extends Component {
                         </div>
                         <div className="p-col-6 p-lg-3">
                             <div className="p-d-flex">
+                                <div className="dot color-3">&nbsp;</div>
+                                <div className="p-d-flex p-flex-column p-pl-3">
+                                    <h6>Theme Designer</h6>
+                                    <p><a href="https://www.primefaces.org/designer-react">Designer</a> is the ultimate tool to create your own PrimeReact experience powered by a SASS based theme engine with 500+ variables and a Visual Designer. </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="p-col-6 p-lg-3">
+                            <div className="p-d-flex">
                                 <div className="dot color-5">&nbsp;</div>
                                 <div className="p-d-flex p-flex-column p-pl-3">
-                                    <h6>Private Branch Management</h6>
-                                    <p>Our PRO Team provides private customized branch management.</p>
+                                    <h6>Premium Template</h6>
+                                    <p>Choose one premium template of your choice with an extended license.</p>
                                 </div>
                             </div>
                         </div>
@@ -106,17 +97,17 @@ export class SupportPage extends Component {
                             <div className="p-d-flex">
                                 <div className="dot color-6">&nbsp;</div>
                                 <div className="p-d-flex p-flex-column p-pl-3">
-                                    <h6>Customized Builds</h6>
-                                    <p>We deliver you customized build folders to help to support your project.</p>
+                                    <h6>PrimeBlocks</h6>
+                                    <p>An enterprise license for all of the ready to use <a href="https://www.primefaces.org/primeblock-react">UI blocks</a> to build spectacular applications in no time.</p>
                                 </div>
                             </div>
                         </div>
                         <div className="p-col-6 p-lg-3">
                             <div className="p-d-flex">
-                                <div className="dot color-7">&nbsp;</div>
+                                <div className="dot color-2">&nbsp;</div>
                                 <div className="p-d-flex p-flex-column p-pl-3">
-                                    <h6>Unlimited Number of Cases</h6>
-                                    <p>Take advantage of the unlimited number of cases. Our PRO team is at your side to solve all the problems you are experiencing. </p>
+                                    <h6>Long Term Support</h6>
+                                    <p>LTS Support ensures stability, premium quality and advanced security for any version.</p>
                                 </div>
                             </div>
                         </div>
@@ -142,7 +133,7 @@ export class SupportPage extends Component {
                             <div className="p-d-flex">
                                 <div className="dot color-10">&nbsp;</div>
                                 <div className="p-d-flex p-flex-column p-pl-3">
-                                    <h6>High Priority to Your Issues.</h6>
+                                    <h6>High Priority to Your Issues</h6>
                                     <p>PRO delivers the premium support and expertise you need. Resources are prioritized for an optimized response to critical issues.</p>
                                 </div>
                             </div>
@@ -159,7 +150,7 @@ export class SupportPage extends Component {
                     </div>
                 </div>
 
-                <div className="content-section options section-newfeatures">
+                <div className="content-section section-newfeatures">
                     <h5>New Enhancements</h5>
                     <div className="p-d-flex p-mb-4">
                         <p>New feature and enhancement requests are not available in core services and provided via an hour based model instead. When you have a feature request we provide an estimate, if you confirm we deliver your request within an estimated timeframe and deduct the amount of work from your hours. These requests can be;</p>
