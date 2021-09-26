@@ -432,10 +432,11 @@ export class BodyCell extends Component {
             }
 
             if (showSelection) {
+                let isDisabled = this.props.isDataSelectable && !this.props.isDataSelectable();
                 if (this.props.selectionMode === 'single')
-                    content = <RowRadioButton onClick={this.props.onRadioClick} rowData={this.props.rowData} selected={this.props.selected} tableId={this.props.tableId} />;
+                    content = <RowRadioButton onClick={this.props.onRadioClick} disabled={isDisabled} rowData={this.props.rowData} selected={this.props.selected} tableId={this.props.tableId} />;
                 else
-                    content = <RowCheckbox onClick={this.props.onCheckboxClick} rowData={this.props.rowData} selected={this.props.selected} />;
+                    content = <RowCheckbox onClick={this.props.onCheckboxClick} disabled={isDisabled} rowData={this.props.rowData} selected={this.props.selected} />;
             }
         }
         else if (this.props.rowReorder) {

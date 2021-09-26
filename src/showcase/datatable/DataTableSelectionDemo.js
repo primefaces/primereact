@@ -63,6 +63,14 @@ export class DataTableSelectionDemo extends Component {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
+    isDataCellSelectable(data){
+        return !(data.field === "category" && data.value === "Accessories");
+    }
+
+    isDataRowSelectable(rowData){
+        return rowData.category !== 'Accessories';
+    }
+
     render() {
         return (
             <div>
@@ -176,6 +184,7 @@ export class DataTableSelectionDemo extends Component {
                             <Column field="category" header="Category"></Column>
                             <Column field="quantity" header="Quantity"></Column>
                         </DataTable>
+
                     </div>
 
                     <div className="card">
@@ -222,7 +231,40 @@ export class DataTableSelectionDemo extends Component {
                             <Column field="quantity" header="Quantity"></Column>
                         </DataTable>
                     </div>
+                    <div className="card">
+                        <h5>Disabled Selection</h5>
+                        <p>Whether data can be selected or not can be handled by "isDataSelectable" prop.</p>
+
+                        <h6>Row Selection Disabled</h6>
+                        <p> Rows which category is "Accessories" can not be selected.</p>
+                        <DataTable value={this.state.products} isDataSelectable={this.isDataRowSelectable} selectionMode="checkbox" selection={this.state.selectedProducts8} onSelectionChange={e => this.setState({selectedProducts8 : e.value })} dataKey="id">
+                            <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>
+                            <Column field="code" header="Code"></Column>
+                            <Column field="name" header="Name"></Column>
+                            <Column field="category" header="Category"></Column>
+                            <Column field="quantity" header="Quantity"></Column>
+                        </DataTable>
+
+                        <h6>Cell Selection Disabled</h6>
+                        <p> Cell which is in category column and has "Accessories" value can not be selected.</p>
+                        <DataTable value={this.state.products} isDataSelectable={this.isDataCellSelectable} selectionMode="single" cellSelection selection={this.state.selectedProduct2} onSelectionChange={e => this.setState({ selectedProduct2: e.value })} dataKey="id">
+                            <Column field="code" header="Code"></Column>
+                            <Column field="name" header="Name"></Column>
+                            <Column field="category" header="Category"></Column>
+                            <Column field="quantity" header="Quantity"></Column>
+                        </DataTable>
+
+                        <h6>Cell Selection Disabled With Drag Selection</h6>
+                        <DataTable value={this.state.products} selectionMode="multiple" isDataSelectable={this.isDataCellSelectable}  cellSelection dragSelection selection={this.state.selectedProducts6} onSelectionChange={e => this.setState({selectedProducts6 : e.value })} dataKey="id">
+                            <Column field="code" header="Code"></Column>
+                            <Column field="name" header="Name"></Column>
+                            <Column field="category" header="Category"></Column>
+                            <Column field="quantity" header="Quantity"></Column>
+                        </DataTable>
+                    </div>
                 </div>
+
+
 
                 <DataTableSelectionDemoDoc></DataTableSelectionDemoDoc>
             </div>
@@ -299,6 +341,15 @@ export class DataTableSelectionDemo extends Component {
     toCapitalize(str) {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
+
+    isDataCellSelectable(data){
+        return !(data.field === "category" && data.value === "Accessories");
+    }
+
+    isDataRowSelectable(rowData){
+        return rowData.category !== 'Accessories';
+    }
+
 
     render() {
         return (
@@ -449,6 +500,40 @@ export class DataTableSelectionDemo extends Component {
                         <Column field="quantity" header="Quantity"></Column>
                     </DataTable>
                 </div>
+
+                <div className="card">
+                    <h5>Disabled Selection</h5>
+                    <p>Whether data can be selected or not can be handled by "isDataSelectable" prop.</p>
+
+                    <h6>Row Selection Disabled</h6>
+                    <p> Rows which category is "Accessories" can not be selected.</p>
+                    <DataTable value={this.state.products} isDataSelectable={this.isDataRowSelectable} selectionMode="checkbox" selection={this.state.selectedProducts8} onSelectionChange={e => this.setState({selectedProducts8 : e.value })} dataKey="id">
+                            <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>
+                            <Column field="code" header="Code"></Column>
+                            <Column field="name" header="Name"></Column>
+                            <Column field="category" header="Category"></Column>
+                            <Column field="quantity" header="Quantity"></Column>
+                      </DataTable>
+
+
+                    <h6>Cell Selection Disabled</h6>
+                    <p> Cell which is in category column and has "Accessories" value can not be selected.</p>
+                    <DataTable value={this.state.products} isDataSelectable={this.isDataCellSelectable} selectionMode="single" cellSelection selection={this.state.selectedProduct2} onSelectionChange={e => this.setState({ selectedProduct2: e.value })} dataKey="id">
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="quantity" header="Quantity"></Column>
+                    </DataTable>
+
+                    <h6>Cell Selection Disabled With Drag Selection</h6>
+                    <DataTable value={this.state.products} selectionMode="multiple" isDataSelectable={this.isDataCellSelectable}  cellSelection dragSelection selection={this.state.selectedProducts6} onSelectionChange={e => this.setState({selectedProducts6 : e.value })} dataKey="id">
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="quantity" header="Quantity"></Column>
+                    </DataTable>
+                </div>
+
             </div>
         );
     }
@@ -510,6 +595,14 @@ const DataTableSelectionDemo = () => {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
+    const isDataCellSelectable = (data) => {
+        return !(data.field === "category" && data.value === "Accessories");
+    }
+
+    const isDataRowSelectable =(rowData) => {
+        return rowData.category !== 'Accessories';
+    }
+
     return (
         <div className="datatable-selection-demo">
             <Toast ref={toast} />
@@ -657,6 +750,48 @@ const DataTableSelectionDemo = () => {
                     <Column field="category" header="Category"></Column>
                     <Column field="quantity" header="Quantity"></Column>
                 </DataTable>
+            </div>
+
+            <div className="card">
+                    <h5>Disabled Selection</h5>
+                    <p>Whether data can be selected or not can be handled by "isDataSelectable" prop.</p>
+
+                    <h6>Row Selection Disabled</h6>
+                    <p> Rows which category is "Accessories" can not be selected.</p>
+                    <DataTable value={products} isDataSelectable={isDataRowSelectable} selectionMode="checkbox" selection={selectedProducts8}
+                                   onSelectionChange={e => setSelectedProducts8(e.value)} dataKey="id">
+                            <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>
+                            <Column field="code" header="Code"></Column>
+                            <Column field="name" header="Name"></Column>
+                            <Column field="category" header="Category"></Column>
+                            <Column field="quantity" header="Quantity"></Column>
+                      </DataTable>
+
+                    <h6>Cell Selection Disabled</h6>
+                    <p> Cell which is in category column and has "Accessories" value can not be selected.</p>
+                    <DataTable value={products} isDataSelectable={isDataCellSelectable} selectionMode="single" cellSelection selection={selectedProduct2} onSelectionChange={e => setSelectedProduct2(e.value)} dataKey="id">
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="quantity" header="Quantity"></Column>
+                    </DataTable>
+
+                    <h6>Cell Selection Disabled</h6>
+                    <p> Cell which is in category column and has "Accessories" value can not be selected.</p>
+                    <DataTable value={products} isDataSelectable={isDataCellSelectable} selectionMode="single" cellSelection selection={selectedProduct2} onSelectionChange={e => setselectedProduct2(e.value)} dataKey="id">
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="quantity" header="Quantity"></Column>
+                    </DataTable>
+
+                    <h6>Cell Selection Disabled With Drag Selection</h6>
+                    <DataTable value={products} selectionMode="multiple" isDataSelectable={isDataCellSelectable}  cellSelection dragSelection selection={selectedProducts6} onSelectionChange={e => setselectedProducts6(e.value)} dataKey="id">
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="quantity" header="Quantity"></Column>
+                    </DataTable>
             </div>
         </div>
     );
@@ -718,6 +853,14 @@ const DataTableSelectionDemo = () => {
         toast.current.show({ severity: 'warn', summary: \`Item Unselected In Product\`, detail: \`\${toCapitalize(event.field)}: \${event.value}\`, life: 3000 });
     }
 
+    const isDataCellSelectable = (data) => {
+        return !(data.field === "category" && data.value === "Accessories");
+    }
+
+    const isDataRowSelectable =(rowData) => {
+        return rowData.category !== 'Accessories';
+    }
+
     return (
         <div className="datatable-selection-demo">
             <Toast ref={toast} />
@@ -860,6 +1003,38 @@ const DataTableSelectionDemo = () => {
                 <h6>Checkbox-Only Selection</h6>
                 <DataTable value={products} selectionMode="checkbox" selection={selectedProducts8} onSelectionChange={e => setSelectedProducts8(e.value)} dataKey="id">
                     <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+            </div>
+
+            <div className="card">
+                <h5>Disabled Selection</h5>
+                <p>Whether data can be selected or not can be handled by "isDataSelectable" prop.</p>
+
+                <h6>Row Selection Disabled</h6>
+                <p> Rows which category is "Accessories" can not be selected.</p>
+                <DataTable value={products} isDataSelectable={isDataRowSelectable} selectionMode="checkbox" selection={selectedProducts8} onSelectionChange={e => setSelectedProducts8(e.value)} dataKey="id">
+                    <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+
+                <h6>Cell Selection Disabled</h6>
+                <p> Cell which is in category column and has "Accessories" value can not be selected.</p>
+                <DataTable value={products} isDataSelectable={isDataCellSelectable} selectionMode="single" cellSelection selection={selectedProduct2} onSelectionChange={e => setselectedProduct2(e.value)} dataKey="id">
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+
+                <h6>Cell Selection Disabled With Drag Selection</h6>
+                <DataTable value={products} selectionMode="multiple" isDataSelectable={isDataCellSelectable}  cellSelection dragSelection selection={selectedProducts6} onSelectionChange={e => setselectedProducts6(e.value)} dataKey="id">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -933,6 +1108,14 @@ const DataTableSelectionDemo = () => {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
+    const isDataCellSelectable = (data) => {
+        return !(data.field === "category" && data.value === "Accessories");
+    }
+
+    const isDataRowSelectable =(rowData) => {
+        return rowData.category !== 'Accessories';
+    }
+
     return (
         <div className="datatable-selection-demo">
             <Toast ref={toast} />
@@ -1075,6 +1258,37 @@ const DataTableSelectionDemo = () => {
                 <h6>Checkbox-Only Selection</h6>
                 <DataTable value={products} selectionMode="checkbox" selection={selectedProducts8} onSelectionChange={e => setSelectedProducts8(e.value)} dataKey="id">
                     <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+            </div>
+
+            <div className="card">
+                <h5>Disabled Selection</h5>
+                <p>Whether data can be selected or not can be handled by "isDataSelectable" prop.</p>
+                <h6>Row Selection Disabled</h6>
+                <p> Rows which category is "Accessories" can not be selected.</p>
+                <DataTable value={products} isDataSelectable={isDataRowSelectable} selectionMode="checkbox" selection={selectedProducts8} onSelectionChange={e => setSelectedProducts8(e.value)} dataKey="id">
+                        <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="quantity" header="Quantity"></Column>
+                 </DataTable>
+
+                <h6>Cell Selection Disabled</h6>
+                <p> Cell which is in category column and has "Accessories" value can not be selected.</p>
+                <DataTable value={products} isDataSelectable={isDataCellSelectable} selectionMode="single" cellSelection selection={selectedProduct2} onSelectionChange={e => setselectedProduct2(e.value)} dataKey="id">
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+
+                <h6>Cell Selection Disabled With Drag Selection</h6>
+                <DataTable value={products} selectionMode="multiple" isDataSelectable={isDataCellSelectable}  cellSelection dragSelection selection={selectedProducts6} onSelectionChange={e => setselectedProducts6(e.value)} dataKey="id">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>

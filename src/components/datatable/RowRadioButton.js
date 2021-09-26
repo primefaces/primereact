@@ -61,7 +61,7 @@ export class RowRadioButton extends Component {
     }
 
     render() {
-        const className = classNames('p-radiobutton-box p-component p-clickable', { 'p-highlight': this.props.selected, 'p-focus': this.state.focused });
+        const className = classNames('p-radiobutton-box p-component p-clickable', { 'p-highlight': this.props.selected, 'p-focus': this.state.focused , 'p-disabled': this.props.disabled });
         const name = `${this.props.tableId ? this.props.tableId + '_' : ''}dt_radio`;
 
         return (

@@ -266,6 +266,7 @@ export interface DataTableProps {
     customRestoreState?(): object;
     onStateSave?(state: object): void;
     onStateRestore?(state: object): void;
+    isDataSelectable?(data: any | DataTableCellClickEventParams) : boolean;
 }
 
 export declare class DataTable extends React.Component<DataTableProps, any> {

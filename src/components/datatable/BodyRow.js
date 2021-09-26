@@ -321,7 +321,7 @@ export class BodyRow extends Component {
 
             let editing = this.getEditing();
             let cell = <BodyCell tableId={this.props.tableId} key={i} {...column.props} value={this.props.value} rowSpan={rowSpan} rowData={this.props.rowData} index={i} rowIndex={this.props.rowIndex} onRowToggle={this.props.onRowToggle} expanded={this.props.expanded}
-                onRadioClick={this.props.onRadioClick} onCheckboxClick={this.props.onCheckboxClick} selected={this.props.selected} selection={this.props.selection} selectOnEdit={this.props.selectOnEdit}
+                onRadioClick={this.props.onRadioClick} onCheckboxClick={this.props.onCheckboxClick} selected={this.props.selected} selection={this.props.selection} isDataSelectable={this.props.isDataSelectable} selectOnEdit={this.props.selectOnEdit}
                 editMode={this.props.editMode} editing={editing} onRowEditInit={this.onRowEditInit} onRowEditSave={this.onRowEditSave} onRowEditCancel={this.onRowEditCancel} onMouseDown={this.props.onCellMouseDown} onMouseUp={this.props.onCellMouseUp}
                 showRowReorderElement={this.props.showRowReorderElement} showSelectionElement={this.props.showSelectionElement} allowCellSelection={this.props.allowCellSelection} onClick={this.props.onCellClick} onEditingCellChange={this.props.onEditingCellChange}
                 cellClassName={this.props.cellClassName} />;

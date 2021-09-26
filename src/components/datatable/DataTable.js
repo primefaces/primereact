@@ -1240,6 +1240,9 @@ export class DataTable extends Component {
 
         if (!event.checked) {
             let visibleData = this.hasFilter() ? this.processData() : this.props.value;
+            if(this.props.isDataSelectable){
+                visibleData = visibleData?.filter((k) => this.props.isDataSelectable(k))
+            }
             selection = [...visibleData];
 
             this.props.onAllRowsSelect && this.props.onAllRowsSelect({ originalEvent, data: selection, type: 'all' });
@@ -1353,7 +1356,12 @@ export class DataTable extends Component {
             return this.props.selection && this.props.totalRecords && this.props.selection.length === this.props.totalRecords;
         }
 
-        return this.props.selection && visibleData && visibleData.length && this.props.selection.length === visibleData.length;
+        let unselectableDataCount = 0;
+        if(this.props.isDataSelectable){
+            unselectableDataCount = visibleData?.filter((k) => !this.props.isDataSelectable(k)).length;
+        }
+
+        return this.props.selection && visibleData && visibleData.length && (this.props.selection.length + unselectableDataCount) === visibleData.length;
     }
 
     getFrozenColumns(columns) {
@@ -1406,7 +1414,7 @@ export class DataTable extends Component {
 
     createTableBody(value, columns, frozen, selectionModeInColumn) {
         return <TableBody tableId={this.props.id} value={value} first={this.getFirst()} rows={this.getRows()} lazy={this.props.lazy} paginator={this.props.paginator} dataKey={this.props.dataKey} compareSelectionBy={this.props.compareSelectionBy}
-                        selectionMode={this.props.selectionMode} selection={this.props.selection} metaKeySelection={this.props.metaKeySelection} frozen={frozen} selectionModeInColumn={selectionModeInColumn}
+                        selectionMode={this.props.selectionMode} selection={this.props.selection} isDataSelectable={this?.props.isDataSelectable} metaKeySelection={this.props.metaKeySelection} frozen={frozen} selectionModeInColumn={selectionModeInColumn}
                         onSelectionChange={this.props.onSelectionChange} onRowClick={this.props.onRowClick} onRowDoubleClick={this.props.onRowDoubleClick} onRowSelect={this.props.onRowSelect} onRowUnselect={this.props.onRowUnselect}
                         contextMenuSelection={this.props.contextMenuSelection} onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu}
                         expandedRows={this.props.expandedRows} onRowToggle={this.props.onRowToggle} rowExpansionTemplate={this.props.rowExpansionTemplate} selectOnEdit={this.props.selectOnEdit}

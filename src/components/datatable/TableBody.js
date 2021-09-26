@@ -93,6 +93,10 @@ export class TableBody extends Component {
         let selected = this.isSelected(data);
         let selection = this.props.selection;
 
+        if(this.props.isDataSelectable && !this.props.isDataSelectable(data)){
+            return;
+        }
+
         if (selected) {
             if (toggleable) {
                 selection = null;
@@ -117,6 +121,10 @@ export class TableBody extends Component {
     onMultipleSelection({ originalEvent, data, toggleable, type }) {
         let selected = this.isSelected(data);
         let selection = this.props.selection || [];
+
+        if(this.props.isDataSelectable && !this.props.isDataSelectable(data)){
+            return;
+        }
 
         if (selected) {
             if (toggleable) {
@@ -150,7 +158,9 @@ export class TableBody extends Component {
         this.rangeRowIndex = this.allowCellSelection() ? event.rowIndex : event.index;
         let selectionInRange = this.selectRange(event);
         let selection = this.isMultipleSelection() ? [...new Set([...(this.props.selection || []), ...selectionInRange])] : selectionInRange;
-
+        if(this.props.isDataSelectable){
+            selection = selection.filter(data => this.props.isDataSelectable(data) === true);
+        }
         if (this.props.onSelectionChange && selection !== this.props.selection) {
             this.props.onSelectionChange({
                 originalEvent: event.originalEvent,
@@ -793,9 +803,10 @@ export class TableBody extends Component {
                     let isRowGroupExpanded = this.props.expandableRowGroups && hasSubheaderGrouping && rowGroupHeaderExpanded;
                     if (!this.props.expandableRowGroups || isRowGroupExpanded) {
                         //row content
+
                         let bodyRow = <BodyRow tableId={this.props.tableId} key={i} value={this.props.value} rowData={rowData} rowIndex={i} onClick={this.onRowClick} onDoubleClick={this.props.onRowDoubleClick}
                             onRightClick={this.onRowRightClick} onTouchEnd={this.onRowTouchEnd} onMouseDown={this.onRowMouseDown} onMouseUp={this.onRowMouseUp} onCellMouseDown={this.onCellMouseDown} onCellMouseUp={this.onCellMouseUp}
-                            onRowToggle={this.onRowToggle} expanded={expanded} selectionMode={this.props.selectionMode} selectOnEdit={this.props.selectOnEdit}
+                            onRowToggle={this.onRowToggle} expanded={expanded} selectionMode={this.props.selectionMode} isDataSelectable={this.props.isDataSelectable && (() => this.props.isDataSelectable(rowData))} selectOnEdit={this.props.selectOnEdit}
                             onRadioClick={this.onRadioClick} onCheckboxClick={this.onCheckboxClick} selected={selected} contextMenuSelected={contextMenuSelected} rowClassName={this.props.rowClassName} cellClassName={this.props.cellClassName}
                             sortField={this.props.sortField} rowGroupMode={this.props.rowGroupMode} groupRowSpan={groupRowSpan}
                             onDragStart={(e) => this.onRowDragStart(e, i)} onDragEnd={this.onRowDragEnd} onDragOver={(e) => this.onRowDragOver(e, i)} onDragLeave={this.onRowDragLeave}
