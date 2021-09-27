@@ -63,7 +63,7 @@ export class App extends Component {
     }
 
     init() {
-        const href = window.location.href;
+        const href = window.location.search;
         const queryParams = href.split('?');
         let theme = this.state.theme;
 
