@@ -119,10 +119,6 @@ export class Paginator extends Component {
         return Math.floor(this.props.first / this.props.rows);
     }
 
-    currentPage() {
-        return this.getPageCount() > 0 ? this.getPage() + 1 : 0;
-    }
-
     empty() {
         let pageCount = this.getPageCount()
         return pageCount === 0;
@@ -204,7 +200,7 @@ export class Paginator extends Component {
                     rows={this.props.rows} totalRecords={this.props.totalRecords} template={template} />;
                 break;
             case 'JumpToPageInput':
-                element = <JumpToPageInput key={key} rows={this.props.rows} page={this.currentPage()} onChange={this.changePage} disabled={this.empty()} />;
+                element = <JumpToPageInput key={key} rows={this.props.rows} page={this.getPage()} pageCount={this.getPageCount()} onChange={this.changePage} disabled={this.empty()} template={template} />;
                 break;
 
             default:
