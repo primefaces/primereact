@@ -1435,7 +1435,8 @@
                     "to": "/image",
                     "meta": [
                         "image"
-                    ]
+                    ],
+                    "badge": "new"
                 }
             ]
         },
