@@ -63,12 +63,11 @@ export class App extends Component {
     }
 
     init() {
-        const href = window.location.search;
-        const queryParams = href.split('?');
+        const queryString = window.location.search;
         let theme = this.state.theme;
 
-        if (queryParams && queryParams[1]) {
-            const searchParams = new URLSearchParams(queryParams[1]);
+        if (queryString) {
+            const searchParams = new URLSearchParams(queryString.substring(1));
             theme = searchParams.get('theme');
 
             const menuMode = searchParams.get('menu');
