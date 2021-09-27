@@ -1,5 +1,48 @@
 # Changelog
 
+## [6.6.0-rc.1](https://github.com/primefaces/primereact/tree/6.6.0-rc.1) (2021-09-27)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/6.5.1...6.6.0-rc.1)
+
+**Implemented New Features and Enhancements:**
+
+- Improve Galleria Thumbnail animation [\#2326](https://github.com/primefaces/primereact/issues/2326)
+- Add trueValue-falseValue to Checkbox [\#2323](https://github.com/primefaces/primereact/issues/2323)
+- Add trueValue-falseValue to InputSwitch [\#2317](https://github.com/primefaces/primereact/issues/2317)
+- Modal layer enter-leave transition [\#2316](https://github.com/primefaces/primereact/issues/2316)
+- Make Dock component mobile friendly [\#2312](https://github.com/primefaces/primereact/issues/2312)
+- Set Paginator Page from InputNumber [\#2310](https://github.com/primefaces/primereact/issues/2310)
+- Tooltip: word wrap [\#2307](https://github.com/primefaces/primereact/issues/2307)
+- Tailwind Theme [\#2302](https://github.com/primefaces/primereact/issues/2302)
+- Scrollable feature for TabView Component [\#2298](https://github.com/primefaces/primereact/issues/2298)
+- New Component: Image [\#2297](https://github.com/primefaces/primereact/issues/2297)
+- Add p-inputwrapper class to InputNumber [\#2289](https://github.com/primefaces/primereact/issues/2289)
+- Add getFormatter method to InputNumber [\#2287](https://github.com/primefaces/primereact/issues/2287)
+- Add allowEmpty property to InputNumber [\#2285](https://github.com/primefaces/primereact/issues/2285)
+- InputNumber behaves odd when trying to insert fracitonal digits [\#2284](https://github.com/primefaces/primereact/issues/2284)
+- InputNumber: cannot insert fractional digits when minFractionDigits=0  [\#2283](https://github.com/primefaces/primereact/issues/2283)
+
+**Fixed bugs:**
+
+- CurrentPageReport displays wrong value [\#2314](https://github.com/primefaces/primereact/issues/2314)
+- Filtered Dropdown unusable on Windows Tablet [\#2311](https://github.com/primefaces/primereact/issues/2311)
+- Material themes Surface Border Issue [\#2309](https://github.com/primefaces/primereact/issues/2309)
+- Dropdown scrolls top after reopened  [\#2308](https://github.com/primefaces/primereact/issues/2308)
+- Dropdown with filter bug selecting with arrow keys [\#2306](https://github.com/primefaces/primereact/issues/2306)
+- Incorrect Sizing due to filter input width of dropdown [\#2305](https://github.com/primefaces/primereact/issues/2305)
+- Overlay panel hide when clicking on a label inside of it [\#2304](https://github.com/primefaces/primereact/issues/2304)
+- Thumbnails are not displayed correctly on Galleria if numVisible is greater than the length of value  [\#2293](https://github.com/primefaces/primereact/issues/2293)
+- InputNumber: issues with decimal separator for some locales, 0s are added to input [\#2292](https://github.com/primefaces/primereact/issues/2292)
+- Negative sign in front of number is not possible for Finnish or Swedish locale [\#2291](https://github.com/primefaces/primereact/issues/2291)
+- Input number caret issue with negatives [\#2290](https://github.com/primefaces/primereact/issues/2290)
+- inputnumber : both prefix and currency Input error  [\#2288](https://github.com/primefaces/primereact/issues/2288)
+- InputNumber: setting "min" to anything greater than 0 implies "required" [\#2286](https://github.com/primefaces/primereact/issues/2286)
+- InputNumber input event returns wrong value [\#2282](https://github.com/primefaces/primereact/issues/2282)
+- Checkbox causes layout issues when used inside an overflow: auto div [\#2281](https://github.com/primefaces/primereact/issues/2281)
+- Table Header Checkbox not working when lazy loading enabled [\#2253](https://github.com/primefaces/primereact/issues/2253)
+- \[BUG\] 6.5.1 Toast - ContentClassName prop should be optional  [\#2247](https://github.com/primefaces/primereact/issues/2247)
+- InputNumber with min triggers onValueChange immediately if value is nully [\#2136](https://github.com/primefaces/primereact/issues/2136)
+
 ## [6.5.1](https://github.com/primefaces/primereact/tree/6.5.1) (2021-08-18)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/6.5.0...6.5.1)
