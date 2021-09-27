@@ -196,8 +196,8 @@ export class GalleriaThumbnails extends Component {
         }
     }
 
-    onTransitionEnd() {
-        if (this.itemsContainer) {
+    onTransitionEnd(e) {
+        if (this.itemsContainer && e.propertyName === 'transform') {
             DomHandler.addClass(this.itemsContainer, 'p-items-hidden');
             this.itemsContainer.style.transition = '';
         }
