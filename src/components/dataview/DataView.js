@@ -259,7 +259,7 @@ export class DataView extends Component {
 
     renderEmptyMessage() {
         if (!this.props.loading) {
-            return <div className="p-col-12 p-dataview-emptymessage">{this.props.emptyMessage}</div>;
+            return <div className="p-col-12 col-12 p-dataview-emptymessage">{this.props.emptyMessage}</div>;
         }
 
         return null;
@@ -315,7 +315,7 @@ export class DataView extends Component {
 
         return (
             <div className="p-dataview-content">
-                <div className="p-grid p-nogutter">
+                <div className="p-grid p-nogutter grid grid-nogutter">
                     {items}
                 </div>
             </div>
