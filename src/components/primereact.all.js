@@ -99,3 +99,4 @@ export * from './terminalservice/TerminalService';
 export * from './terminal/Terminal';
 export * from './dock/Dock';
 export * from './mention/Mention';
+export * from './image/Image';
