@@ -1,5 +1,18 @@
 # Changelog
 
+## [6.6.0](https://github.com/primefaces/primereact/tree/6.6.0) (2021-10-01)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/6.6.0-rc.1...6.6.0)
+
+**Implemented New Features and Enhancements:**
+
+- PrimeFlex 3 support for DataView [\#2332](https://github.com/primefaces/primereact/issues/2332)
+- Improve scrollbar style on BreadCrumb and TabMenu [\#2330](https://github.com/primefaces/primereact/issues/2330)
+
+**Fixed bugs:**
+
+- Image component is missing in primereact.all.js [\#2329](https://github.com/primefaces/primereact/issues/2329)
+
 ## [6.6.0-rc.1](https://github.com/primefaces/primereact/tree/6.6.0-rc.1) (2021-09-27)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/6.5.1...6.6.0-rc.1)
