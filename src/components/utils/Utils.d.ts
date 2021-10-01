@@ -105,10 +105,10 @@ export declare class ObjectUtils {
 
 export declare function UniqueComponentId(prefix?: string): string;
 
-export declare const ZIndexUtils: {
-    get(el?: HTMLElement): number;
-    set(key: string, el: HTMLElement, baseZIndex?: number): void;
-    clear(el: HTMLElement): void;
-    getBase(key: string): number;
-    getCurrent(key: string): number;
+export declare namespace ZIndexUtils {
+    export function get(el?: HTMLElement): number;
+    export function set(key: string, el: HTMLElement, baseZIndex?: number): void;
+    export function clear(el: HTMLElement): void;
+    export function getBase(key: string): number;
+    export function getCurrent(key: string): number;
 }
