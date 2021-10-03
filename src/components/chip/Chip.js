@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, ObjectUtils, IconUtils } from '../utils/Utils';
 
 export class Chip extends Component {
 
@@ -20,10 +20,10 @@ export class Chip extends Component {
 
     static propTypes = {
         label: PropTypes.string,
-        icon: PropTypes.string,
+        icon: PropTypes.any,
         image: PropTypes.string,
         removable: PropTypes.bool,
-        removeIcon: PropTypes.string,
+        removeIcon: PropTypes.any,
         className: PropTypes.string,
         style: PropTypes.object,
         template: PropTypes.any,
@@ -73,7 +73,7 @@ export class Chip extends Component {
         }
         else if (this.props.icon) {
             const iconClassName = classNames('p-chip-icon', this.props.icon);
-            content.push(<span key="icon" className={iconClassName}></span>);
+            content.push(IconUtils.getJSXIcon(this.props.icon, {key: "icon", className: iconClassName}, this.props));
         }
 
         if (this.props.label) {
@@ -82,7 +82,10 @@ export class Chip extends Component {
 
         if (this.props.removable) {
             const removableIconClassName = classNames('p-chip-remove-icon', this.props.removeIcon);
-            content.push(<span key="removeIcon" tabIndex={0} className={removableIconClassName} onClick={this.close} onKeyDown={this.onKeyDown}></span>);
+            content.push(IconUtils.getJSXIcon(this.props.removeIcon,
+                {key: "removeIcon", tabIndex: 0, className: removableIconClassName, onClick: this.close, onKeyDown: this.onKeyDown},
+                this.props,
+            ))
         }
 
         return content;

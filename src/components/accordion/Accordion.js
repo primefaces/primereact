@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { classNames, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { classNames, ObjectUtils, IconUtils, UniqueComponentId } from '../utils/Utils';
 import { CSSTransition } from '../csstransition/CSSTransition';
 
 export class AccordionTab extends Component {
@@ -48,8 +48,8 @@ export class Accordion extends Component {
         className: PropTypes.string,
         style: PropTypes.object,
         multiple: PropTypes.bool,
-        expandIcon: PropTypes.string,
-        collapseIcon: PropTypes.string,
+        expandIcon: PropTypes.any,
+        collapseIcon: PropTypes.any,
         transitionOptions: PropTypes.object,
         onTabOpen: PropTypes.func,
         onTabClose: PropTypes.func,
@@ -131,11 +131,12 @@ export class Accordion extends Component {
         const ariaControls = this.state.id + '_content_' + index;
         const tabIndex = tab.props.disabled ? -1 : null;
         const header = tab.props.headerTemplate ? ObjectUtils.getJSXElement(tab.props.headerTemplate, tab.props) : <span className="p-accordion-header-text">{tab.props.header}</span>;
+        const icon = selected ? this.props.collapseIcon : this.props.expandIcon;
 
         return (
             <div className={tabHeaderClass} style={tab.props.headerStyle}>
                 <a href={'#' + ariaControls} id={id} className="p-accordion-header-link" aria-controls={ariaControls} role="tab" aria-expanded={selected} onClick={(event) => this.onTabHeaderClick(event, tab, index)} tabIndex={tabIndex}>
-                    <span className={iconClassName}></span>
+                    {IconUtils.getJSXIcon(icon, {className: iconClassName}, this.props)}
                     {header}
                 </a>
             </div>

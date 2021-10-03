@@ -103,6 +103,10 @@ export declare class ObjectUtils {
     static isNotEmpty(value: any): boolean;
 }
 
+export declare class IconUtils {
+    static getJSXIcon(icon: IconType<any>, iconProps: React.HTMLProps<HTMLElement>, props: any): any;
+}
+
 export declare function UniqueComponentId(prefix?: string): string;
 
 export declare namespace ZIndexUtils {
@@ -112,3 +116,13 @@ export declare namespace ZIndexUtils {
     export function getBase(key: string): number;
     export function getCurrent(key: string): number;
 }
+
+export interface IconOptions<ParentProps> {
+    iconProps: React.HTMLProps<HTMLElement>;
+    element: React.ReactNode;
+    props: ParentProps;
+}
+
+export type IconType<ParentProps> = React.ReactNode | ((options: IconOptions<ParentProps>) => React.ReactNode);
+
+export type TemplateType<ParentProps> = React.ReactNode | ((props: ParentProps) => React.ReactNode);

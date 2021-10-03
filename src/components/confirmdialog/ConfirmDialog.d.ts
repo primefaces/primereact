@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { DialogProps } from '../dialog';
+import {IconType} from "../utils/Utils";
 
 type ConfirmDialogTemplateType = React.ReactNode | ((options: ConfirmDialogOptions) => React.ReactNode);
 
@@ -26,9 +27,9 @@ export interface ConfirmDialogProps extends Omit<DialogProps, 'onHide'> {
     message?: ConfirmDialogTemplateType;
     rejectLabel?: string;
     acceptLabel?: string;
-    icon?: string;
-    rejectIcon?: string;
-    acceptIcon?: string;
+    icon?: IconType<ConfirmDialogProps>;
+    rejectIcon?: IconType<ConfirmDialogProps>;;
+    acceptIcon?: IconType<ConfirmDialogProps>;;
     rejectClassName?: string;
     acceptClassName?: string;
     appendTo?: ConfirmDialogAppendToType;

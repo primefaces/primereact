@@ -1,10 +1,11 @@
 import * as React from 'react';
+import {IconType} from "../utils/Utils";
 
 type FileUploadModeType = 'basic' | 'advanced';
 
 interface FileUploadOptionsType {
     label?: string;
-    icon?: string;
+    icon?: IconType<FileUploadProps>;
     iconOnly?: boolean;
     className?: string;
     style?: object

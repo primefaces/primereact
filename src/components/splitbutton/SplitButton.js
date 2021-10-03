@@ -35,7 +35,7 @@ export class SplitButton extends Component {
     static propTypes = {
         id: PropTypes.string,
         label: PropTypes.string,
-        icon: PropTypes.string,
+        icon: PropTypes.any,
         model: PropTypes.array,
         disabled: PropTypes.bool,
         style: PropTypes.object,
@@ -48,7 +48,7 @@ export class SplitButton extends Component {
         tooltipOptions: PropTypes.object,
         buttonTemplate: PropTypes.any,
         transitionOptions: PropTypes.object,
-        dropdownIcon: PropTypes.string,
+        dropdownIcon: PropTypes.any,
         onClick: PropTypes.func,
         onShow: PropTypes.func,
         onHide: PropTypes.func

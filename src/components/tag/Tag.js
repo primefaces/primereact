@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { classNames } from '../utils/Utils';
+import {classNames, IconUtils} from '../utils/Utils';
 
 export class Tag extends Component {
 
@@ -17,7 +17,7 @@ export class Tag extends Component {
         value: PropTypes.any,
         severity: PropTypes.string,
         rounded: PropTypes.bool,
-        icon: PropTypes.string,
+        icon: PropTypes.any,
         style: PropTypes.object,
         className: PropTypes.string
     };
@@ -35,7 +35,7 @@ export class Tag extends Component {
 
         return (
             <span className={tagClassName} style={this.props.style}>
-                {this.props.icon && <span className={iconClass}></span>}
+                {this.props.icon && IconUtils.getJSXIcon(this.props.icon, {className: iconClass}, this.props)}
                 <span className="p-tag-value">{this.props.value}</span>
                 <span>{this.props.children}</span>
             </span>

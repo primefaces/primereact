@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import { DomHandler, ObjectUtils, classNames, ZIndexUtils, ConnectedOverlayScrollHandler } from '../utils/Utils';
+import {
+    DomHandler,
+    ObjectUtils,
+    classNames,
+    ZIndexUtils,
+    ConnectedOverlayScrollHandler,
+    IconUtils
+} from '../utils/Utils';
 import { Button } from '../button/Button';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { localeOption } from '../api/Api';
@@ -73,9 +80,9 @@ export class ConfirmPopup extends Component {
         message: PropTypes.any,
         rejectLabel: PropTypes.string,
         acceptLabel: PropTypes.string,
-        icon: PropTypes.string,
-        rejectIcon: PropTypes.string,
-        acceptIcon: PropTypes.string,
+        icon: PropTypes.any,
+        rejectIcon: PropTypes.any,
+        acceptIcon: PropTypes.any,
         rejectClassName: PropTypes.string,
         acceptClassName: PropTypes.string,
         className: PropTypes.string,
@@ -314,7 +321,7 @@ export class ConfirmPopup extends Component {
 
         return (
             <div className="p-confirm-popup-content">
-                <i className={iconClassName} />
+                {IconUtils.getJSXIcon(this.props.icon, {className: iconClassName}, this.props)}
                 <span className="p-confirm-popup-message">{message}</span>
             </div>
         );

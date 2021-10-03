@@ -1,16 +1,15 @@
 import * as React from 'react';
-
-type ChipTemplateType = React.ReactNode | ((props: ChipProps) => React.ReactNode);
+import {IconType, TemplateType} from "../utils/Utils";
 
 export interface ChipProps {
     label?: string;
-    icon?: string;
+    icon?: IconType<ChipProps>;
     image?: string;
     removable?: boolean;
     removeIcon?: string;
     className?: string;
     style?: object;
-    template?: ChipTemplateType;
+    template?: TemplateType<ChipProps>;
     imageAlt?: string;
     onImageError?(event: React.SyntheticEvent): void;
     onRemove?(event: React.MouseEvent<HTMLElement>): void;

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {IconType} from "../utils/Utils";
 
 type AvatarSizeType = 'normal' | 'large' | 'xlarge';
 
@@ -8,7 +9,7 @@ type AvatarTemplateType = React.ReactNode | ((props: AvatarProps) => React.React
 
 export interface AvatarProps {
     label?: string;
-    icon?: string;
+    icon?: IconType<AvatarProps>;
     image?: string;
     size?: AvatarSizeType;
     shape?: AvatarShapeType;

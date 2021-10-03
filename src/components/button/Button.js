@@ -1,6 +1,6 @@
 import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
-import { ObjectUtils, classNames } from '../utils/Utils';
+import { ObjectUtils, classNames, IconUtils } from '../utils/Utils';
 import { tip } from '../tooltip/Tooltip';
 import { Ripple } from '../ripple/Ripple';
 
@@ -91,32 +91,16 @@ export class ButtonComponent extends Component {
 
     renderIcon() {
         let icon = this.props.loading ? this.props.loadingIcon : this.props.icon;
-        let content = null;
-
-        if (icon) {
-            let iconType = typeof icon;
-            let className = classNames('p-button-icon p-c', {
-                'p-button-loading-icon': this.props.loading,
-                [`${icon}`]: iconType === 'string',
-                'p-button-icon-left': this.props.iconPos === 'left' && this.props.label,
-                'p-button-icon-right': this.props.iconPos === 'right' && this.props.label,
-                'p-button-icon-top': this.props.iconPos === 'top' && this.props.label,
-                'p-button-icon-bottom': this.props.iconPos === 'bottom' && this.props.label,
-            });
-            content = <span className={className}></span>;
-
-            if (iconType !== 'string') {
-                const defaultContentOptions = {
-                    className,
-                    element: content,
-                    props: this.props
-                };
-
-                content = ObjectUtils.getJSXElement(icon, defaultContentOptions);
-            }
-        }
-
-        return content;
+        let iconType = typeof icon;
+        let className = classNames('p-button-icon p-c', {
+            'p-button-loading-icon': this.props.loading,
+            [`${icon}`]: iconType === 'string',
+            'p-button-icon-left': this.props.iconPos === 'left' && this.props.label,
+            'p-button-icon-right': this.props.iconPos === 'right' && this.props.label,
+            'p-button-icon-top': this.props.iconPos === 'top' && this.props.label,
+            'p-button-icon-bottom': this.props.iconPos === 'bottom' && this.props.label,
+        });
+        return IconUtils.getJSXIcon(icon, {className}, this.props);
     }
 
     renderLabel() {
