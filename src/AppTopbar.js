@@ -249,8 +249,8 @@ export class AppTopbar extends Component {
                             <ul ref={this.templatesOverlayRef} role="menu" aria-label="Templates">
                                 <li role="none" className="topbar-submenu-header">FREE ADMIN TEMPLATES</li>
                                 <li role="none">
-                                    <a href="https://www.primefaces.org/sigma-react" role="menuitem" rel="noopener noreferrer" target="_blank" className="no-border">
-                                        <img src="showcase/images/layouts/themeswitcher-sigma.png" alt="Sigma" /><span>Sigma</span>
+                                    <a href="https://www.primefaces.org/sakai-react" role="menuitem" rel="noopener noreferrer" target="_blank" className="no-border">
+                                        <img src="showcase/images/layouts/themeswitcher-sakai.svg" alt="Sakai" /><span>Sakai</span>
                                     </a>
                                 </li>
 
