@@ -408,7 +408,7 @@ export class AppConfig extends Component {
                             <p>Beautifully crafted premium <a href="https://github.com/facebookincubator/create-react-app">create-react-app</a> application templates by the PrimeTek design team.</p>
                             <div className="p-grid premium-themes">
                                 <div className="p-col-12 p-md-6">
-                                    <a href="https://www.primefaces.org/layouts/sakai-react" rel="noopener noreferrer" target="_blank">
+                                    <a href="https://www.primefaces.org/sakai-react" rel="noopener noreferrer" target="_blank">
                                         <img alt="sakai" src="showcase/images/layouts/sakai-react.jpg" />
                                     </a>
                                 </div>

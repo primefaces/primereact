@@ -135,7 +135,7 @@ export class HomeComponent extends Component {
 a
                     <div className="p-grid">
                         <div class="p-col-12 p-md-3">
-                            <a href="https://www.primefaces.org/layouts/sakai-react">
+                            <a href="https://www.primefaces.org/sakai-react">
                                 <img alt="Sakai" src="showcase/images/layouts/sakai-react.jpg" />
                             </a>
                         </div>
