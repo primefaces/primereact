@@ -132,8 +132,13 @@ export class HomeComponent extends Component {
                     <h4>Premium Application Templates</h4>
                     <p>Based on <a href="https://github.com/facebookincubator/create-react-app" className="layout-content-link">create-react-app</a>, develop awesome applications in no time using the premium templates
                         of PrimeReact and impress your users.</p>
-
+a
                     <div className="p-grid">
+                        <div class="p-col-12 p-md-3">
+                            <a href="https://www.primefaces.org/sakai-react">
+                                <img alt="Sakai" src="showcase/images/layouts/sakai-react.jpg" />
+                            </a>
+                        </div>
                         <div className="p-col-12 p-md-3">
                             <a href="https://www.primefaces.org/layouts/freya-react">
                                 <img alt="Freya" src="showcase/images/layouts/freya-react.jpg" />
@@ -179,19 +184,6 @@ export class HomeComponent extends Component {
 								<img alt="Roma" src="showcase/images/layouts/roma-react.jpg" />
 							</a>
 						</div>
-                    </div>
-                </div>
-
-                <div className="templates">
-                    <h4>Free Application Template for PrimeReact</h4>
-                    <p>Sigma is a free and open source admin template based on <a href="https://github.com/facebookincubator/create-react-app" className="layout-content-link">create-react-app</a>.</p>
-
-                    <div className="p-grid">
-                        <div className="p-col-12">
-                            <a href="https://www.primefaces.org/sigma-react">
-                                <img alt="Sigma" src="showcase/images/layouts/sigma-biggest.jpg" />
-                            </a>
-                        </div>
                     </div>
                 </div>
 
