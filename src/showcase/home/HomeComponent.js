@@ -187,19 +187,6 @@ a
                     </div>
                 </div>
 
-                <div className="templates">
-                    <h4>Free Application Template for PrimeReact</h4>
-                    <p>Sigma is a free and open source admin template based on <a href="https://github.com/facebookincubator/create-react-app" className="layout-content-link">create-react-app</a>.</p>
-
-                    <div className="p-grid">
-                        <div className="p-col-12">
-                            <a href="https://www.primefaces.org/sigma-react">
-                                <img alt="Sigma" src="showcase/images/layouts/sigma-biggest.jpg" />
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
                 <div className="primereact-designer">
                     <h4>Theme Designer</h4>
                     <p>PrimeReact is a design-agnostic library and the theming system is based on the Theme Designer, the official tool to create themes for the components. Designer includes a SASS enabled infrastructure that has over 500 customizable variables, a live editor
