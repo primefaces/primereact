@@ -98,7 +98,7 @@ export class SupportPage extends Component {
                                 <div className="dot color-6">&nbsp;</div>
                                 <div className="p-d-flex p-flex-column p-pl-3">
                                     <h6>PrimeBlocks</h6>
-                                    <p>An enterprise license for all of the ready to use <a href="https://www.primefaces.org/primeblock-react">UI blocks</a> to build spectacular applications in no time.</p>
+                                    <p>An enterprise license for all of the ready to use <a href="https://www.primefaces.org/primeblocks-react">UI blocks</a> to build spectacular applications in no time.</p>
                                 </div>
                             </div>
                         </div>
