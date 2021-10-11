@@ -123,7 +123,7 @@
                 },
                 {
                     "name": "SASS API",
-                    "href": "https://www.primefaces.org/designer/api/primereact/6.1.0",
+                    "href": "https://www.primefaces.org/designer/api/primereact/6.3.0",
                     "meta": [
                         "sass api"
                     ]
