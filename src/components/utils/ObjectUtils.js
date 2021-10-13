@@ -123,6 +123,14 @@ export default class ObjectUtils {
         return this.isFunction(obj) ? obj(...params) : obj;
     }
 
+    static getRefElement(ref) {
+        if (ref) {
+            return typeof ref === 'object' && ref.hasOwnProperty('current') ? ref.current : ref;
+        }
+
+        return null;
+    }
+
     static removeAccents(str) {
         if (str && str.search(/[\xC0-\xFF]/g) > -1) {
             str = str
