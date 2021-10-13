@@ -74,6 +74,20 @@ export default class DomHandler {
         return 0;
     }
 
+    static getClientWidth(el, margin) {
+        if (el) {
+            let width = el.clientWidth;
+
+            if (margin) {
+                let style = getComputedStyle(el);
+                width += parseFloat(style.marginLeft) + parseFloat(style.marginRight);
+            }
+
+            return width;
+        }
+        return 0;
+    }
+
     static getViewport() {
         let win = window,
             d = document,
@@ -126,6 +140,24 @@ export default class DomHandler {
                 let styles = className.split(' ');
                 for (let i = 0; i < styles.length; i++) {
                     element.className += ' ' + styles[i];
+                }
+            }
+        }
+    }
+
+    static removeMultipleClasses(element, className) {
+        if (element && className) {
+            if (element.classList) {
+                let styles = className.split(' ');
+                for (let i = 0; i < styles.length; i++) {
+                    element.classList.remove(styles[i]);
+                }
+
+            }
+            else {
+                let styles = className.split(' ');
+                for (let i = 0; i < styles.length; i++) {
+                    element.className = element.className.replace(new RegExp('(^|\\b)' + styles[i].split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
                 }
             }
         }
