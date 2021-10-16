@@ -1,16 +1,16 @@
 import * as React from 'react';
 
 export interface ImageProps {
-    preview?: false;
+    preview?: boolean;
     className?: string;
     style?: string;
     imageStyle?: string;
     imageClassName?: string;
     template?: any;
-    src?: sting;
-    alt?: sting;
-    width?: sting;
-    height?: sting;
+    src?: string;
+    alt?: string;
+    width?: string;
+    height?: string;
     onShow?(): void;
     onHide?(): void;
 }
