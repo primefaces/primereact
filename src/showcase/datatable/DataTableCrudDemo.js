@@ -891,7 +891,7 @@ const DataTableCrudDemo = () => {
 
     const deleteProduct = () => {
         let _products = products.filter(val => val.id !== product.id);
-        setProduct(_products);
+        setProducts(_products);
         setDeleteProductDialog(false);
         setProduct(emptyProduct);
         toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
@@ -1227,7 +1227,7 @@ const DataTableCrudDemo = () => {
 
     const deleteProduct = () => {
         let _products = products.filter(val => val.id !== product.id);
-        setProduct(_products);
+        setProducts(_products);
         setDeleteProductDialog(false);
         setProduct(emptyProduct);
         toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
@@ -1582,7 +1582,7 @@ const DataTableCrudDemo = () => {
 
     const deleteProduct = () => {
         let _products = products.filter(val => val.id !== product.id);
-        setProduct(_products);
+        setProducts(_products);
         setDeleteProductDialog(false);
         setProduct(emptyProduct);
         toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
