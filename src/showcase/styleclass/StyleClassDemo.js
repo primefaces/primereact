@@ -20,7 +20,7 @@ export class StyleClassDemo extends Component {
                     <AppDemoActions github="styleclass/StyleClassDemo.js" />
                 </div>
 
-                <div className="content-section implementation">
+                <div className="content-section implementation styleclass-demo">
                     <div className="card">
                         <h5>Toggle Class</h5>
                         <StyleClass nodeRef={this.toggleBtnRef} selector="@next" toggleClassName="p-disabled">
