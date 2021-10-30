@@ -91,6 +91,7 @@ export interface VirtualScrollerProps {
     delay?: number;
     lazy?: boolean;
     showLoader?: boolean;
+    loading: boolean;
     loadingTemplate?: VirtualScrollerLoadingTemplateType;
     itemTemplate?: VirtualScrollerItemTemplateType;
     contentTemplate?: VirtualScrollerContentTemplateType;
