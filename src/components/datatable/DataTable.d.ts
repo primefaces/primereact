@@ -18,7 +18,7 @@ type DataTableSelectionModeType = 'single' | 'multiple' | 'checkbox' | 'radiobut
 
 type DataTableColumnResizeModeType = 'fit' | 'expand';
 
-type DataTableFilterMatchModeType = 'startsWith' | 'contains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'lt' | 'lte' | 'gt' | 'gte' | 'custom';
+type DataTableFilterMatchModeType = 'startsWith' | 'contains' | 'notContains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'lt' | 'lte' | 'gt' | 'gte' | 'between' | 'dateIs' | 'dateIsNot' | 'dateBefore' | 'dateAfter' | 'custom';
 
 type DataTableGlobalFilterType = string | undefined | null;
 
