@@ -214,6 +214,7 @@ export class Calendar extends Component {
         this.onTodayButtonClick = this.onTodayButtonClick.bind(this);
         this.onClearButtonClick = this.onClearButtonClick.bind(this);
         this.onPanelClick = this.onPanelClick.bind(this);
+        this.onPanelMouseUp = this.onPanelMouseUp.bind(this);
         this.incrementHour = this.incrementHour.bind(this);
         this.decrementHour = this.decrementHour.bind(this);
         this.incrementMinute = this.incrementMinute.bind(this);
@@ -714,6 +715,10 @@ export class Calendar extends Component {
                 target: this.container
             });
         }
+    }
+
+    onPanelMouseUp(event) {
+        this.onPanelClick(event);
     }
 
     onTimePickerElementMouseDown(event, type, direction) {
@@ -3139,7 +3144,7 @@ export class Calendar extends Component {
             <span ref={(el) => this.container = el} id={this.props.id} className={className} style={this.props.style}>
                 {input}
                 {button}
-                <CalendarPanel ref={this.overlayRef} className={panelClassName} style={this.props.panelStyle} appendTo={this.props.appendTo} inline={this.props.inline} onClick={this.onPanelClick}
+                <CalendarPanel ref={this.overlayRef} className={panelClassName} style={this.props.panelStyle} appendTo={this.props.appendTo} inline={this.props.inline} onClick={this.onPanelClick} onMouseUp={this.onPanelMouseUp}
                     in={isVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}
                     transitionOptions={this.props.transitionOptions}>
                     {datePicker}
