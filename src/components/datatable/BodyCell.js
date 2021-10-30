@@ -406,13 +406,13 @@ export class BodyCell extends Component {
                 this.selfClick = false;
             };
 
-            document.addEventListener('click', this.documentEditListener);
+            document.addEventListener('click', this.documentEditListener, true);
         }
     }
 
     unbindDocumentEditListener() {
         if (this.documentEditListener) {
-            document.removeEventListener('click', this.documentEditListener);
+            document.removeEventListener('click', this.documentEditListener, true);
             this.documentEditListener = null;
             this.selfClick = false;
         }

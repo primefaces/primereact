@@ -1009,6 +1009,8 @@ export class DataTable extends Component {
     }
 
     onPageChange(e) {
+        this.clearEditingMetaData();
+
         if (this.props.onPage)
             this.props.onPage(e);
         else
@@ -1020,6 +1022,8 @@ export class DataTable extends Component {
     }
 
     onSortChange(e) {
+        this.clearEditingMetaData();
+
         const { originalEvent: event, column, sortableDisabledFields } = e;
         let sortField = column.props.sortField || column.props.field;
         let sortOrder = this.props.defaultSortOrder;
@@ -1105,8 +1109,6 @@ export class DataTable extends Component {
     }
 
     sortSingle(data, field, order) {
-        this.clearEditingMetaData();
-
         if (this.props.groupRowsBy && this.props.groupRowsBy === this.props.sortField) {
             const multiSortMeta = [
                 { field: this.props.sortField, order: this.props.sortOrder || this.props.defaultSortOrder }
@@ -1147,8 +1149,6 @@ export class DataTable extends Component {
     }
 
     sortMultiple(data, multiSortMeta = []) {
-        this.clearEditingMetaData();
-
         if (this.props.groupRowsBy && (this.groupRowsSortMeta || (multiSortMeta.length && this.props.groupRowsBy === multiSortMeta[0].field))) {
             const firstSortMeta = multiSortMeta[0];
             !this.groupRowsSortMeta && (this.groupRowsSortMeta = firstSortMeta);
@@ -1198,6 +1198,8 @@ export class DataTable extends Component {
     }
 
     onFilterChange(filters) {
+        this.clearEditingMetaData();
+
         this.setState({ d_filters: filters });
     }
 
@@ -1224,8 +1226,6 @@ export class DataTable extends Component {
 
     filterLocal(data, filters) {
         if (!data) return;
-
-        this.clearEditingMetaData();
 
         filters = filters || {};
 
