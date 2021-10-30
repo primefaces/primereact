@@ -851,7 +851,7 @@ export class TreeTable extends Component {
 
                 //local
                 if (filterMeta) {
-                    let filterMatchMode = filterMeta.matchMode || col.props.filterMatchMode;
+                    let filterMatchMode = filterMeta.matchMode || col.props.filterMatchMode || 'startsWith';
                     filterValue = filterMeta.value;
                     filterConstraint = filterMatchMode === 'custom' ? col.props.filterFunction : FilterUtils[filterMatchMode];
                     options = {

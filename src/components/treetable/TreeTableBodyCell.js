@@ -86,8 +86,8 @@ export class TreeTableBodyCell extends Component {
     }
 
     switchCellToViewMode(event) {
-        if (this.props.editorValidator) {
-            let valid = this.props.editorValidator({
+        if (this.props.cellEditValidator) {
+            let valid = this.props.cellEditValidator({
                 originalEvent: event,
                 columnProps: this.props
             });
