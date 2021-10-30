@@ -60,7 +60,7 @@ export class DataTableStyleDemo extends Component {
 
                 <div className="content-section implementation datatable-style-demo">
                     <div className="card">
-                        <DataTable value={this.state.products} rowClassName={this.rowClass}>
+                        <DataTable value={this.state.products} rowClassName={this.rowClass} responsiveLayout="scroll">
                             <Column field="code" header="Code"></Column>
                             <Column field="name" header="Name"></Column>
                             <Column field="category" header="Category"></Column>
@@ -133,7 +133,7 @@ export class DataTableStyleDemo extends Component {
         return (
             <div className="datatable-style-demo">
                 <div className="card">
-                    <DataTable value={this.state.products} rowClassName={this.rowClass}>
+                    <DataTable value={this.state.products} rowClassName={this.rowClass} responsiveLayout="scroll">
                         <Column field="code" header="Code"></Column>
                         <Column field="name" header="Name"></Column>
                         <Column field="category" header="Category"></Column>
@@ -187,7 +187,7 @@ const DataTableStyleDemo = () => {
     return (
         <div className="datatable-style-demo">
             <div className="card">
-                <DataTable value={products} rowClassName={rowClass}>
+                <DataTable value={products} rowClassName={rowClass} responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -240,7 +240,7 @@ const DataTableStyleDemo = () => {
     return (
         <div className="datatable-style-demo">
             <div className="card">
-                <DataTable value={products} rowClassName={rowClass}>
+                <DataTable value={products} rowClassName={rowClass} responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -299,7 +299,7 @@ const DataTableStyleDemo = () => {
     return (
         <div className="datatable-style-demo">
             <div className="card">
-                <DataTable value={products} rowClassName={rowClass}>
+                <DataTable value={products} rowClassName={rowClass} responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>

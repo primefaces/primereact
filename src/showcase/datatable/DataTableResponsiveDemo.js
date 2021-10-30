@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { DataTable } from '../../components/datatable/DataTable';
 import { Column } from '../../components/column/Column';
+import { Rating } from '../../components/rating/Rating';
 import { ProductService } from '../service/ProductService';
 import { TabView } from '../../components/tabview/TabView';
 import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
-import './DataTableDemo.scss';
 import AppDemoActions from '../../AppDemoActions';
 
 export class DataTableResponsiveDemo extends Component {
@@ -18,50 +18,20 @@ export class DataTableResponsiveDemo extends Component {
         };
 
         this.productService = new ProductService();
-        this.codeBodyTemplate = this.codeBodyTemplate.bind(this);
-        this.nameBodyTemplate = this.nameBodyTemplate.bind(this);
-        this.categoryBodyTemplate = this.categoryBodyTemplate.bind(this);
-        this.quantityBodyTemplate = this.quantityBodyTemplate.bind(this);
+        this.statusTemplate = this.statusTemplate.bind(this);
+        this.ratingTemplate = this.ratingTemplate.bind(this);
     }
 
     componentDidMount() {
-        this.productService.getProducts().then(data => this.setState({ products: data }));
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
     }
 
-    codeBodyTemplate(rowData) {
-        return (
-            <React.Fragment>
-                <span className="p-column-title">Code</span>
-                {rowData.code}
-            </React.Fragment>
-        );
+    statusTemplate(rowData) {
+        return <span className={`product-badge status-${(rowData.inventoryStatus ? rowData.inventoryStatus.toLowerCase() : '')}`}>{rowData.inventoryStatus}</span>;
     }
 
-    nameBodyTemplate(rowData) {
-        return (
-            <React.Fragment>
-                <span className="p-column-title">Name</span>
-                {rowData.name}
-            </React.Fragment>
-        );
-    }
-
-    categoryBodyTemplate(rowData) {
-        return (
-            <React.Fragment>
-                <span className="p-column-title">Category</span>
-                {rowData.category}
-            </React.Fragment>
-        );
-    }
-
-    quantityBodyTemplate(rowData) {
-        return (
-            <React.Fragment>
-                <span className="p-column-title">Quantity</span>
-                {rowData.quantity}
-            </React.Fragment>
-        );
+    ratingTemplate(rowData) {
+        return <Rating value={rowData.rating} readOnly cancel={false} />
     }
 
     render() {
@@ -70,18 +40,32 @@ export class DataTableResponsiveDemo extends Component {
                 <div className="content-section introduction">
                     <AppInlineHeader changelogText="dataTable">
                         <h1>DataTable <span>Responsive</span></h1>
-                        <p>DataTable columns are displayed as stacked in responsive mode if the screen size becomes smaller than a certain breakpoint value.</p>
+                        <p>DataTable responsive layout can be achieved in two ways;
+                            first approach is displaying a horizontal scrollbar for smaller screens and second one is defining a breakpoint to display the cells of a row as stacked.</p>
                     </AppInlineHeader>
                     <AppDemoActions github="datatable/DataTableResponsiveDemo.js" />
                 </div>
 
-                <div className="content-section implementation datatable-responsive-demo">
+                <div className="content-section implementation">
                     <div className="card">
-                        <DataTable value={this.state.products} className="p-datatable-responsive-demo" paginator rows={10} header="Responsive">
-                            <Column field="code" header="Code" body={this.codeBodyTemplate} />
-                            <Column field="name" header="Name" body={this.nameBodyTemplate} />
-                            <Column field="category" header="Category" body={this.categoryBodyTemplate} />
-                            <Column field="quantity" header="Quantity" body={this.quantityBodyTemplate} />
+                        <DataTable value={this.state.products} header="Scroll" responsiveLayout="scroll">
+                            <Column field="code" header="Code" />
+                            <Column field="name" header="Name" />
+                            <Column field="category" header="Category" />
+                            <Column field="quantity" header="Quantity" />
+                            <Column field="inventoryStatus" header="Status" body={this.statusTemplate} />
+                            <Column field="rating" header="Rating" body={this.ratingTemplate} />
+                        </DataTable>
+                    </div>
+
+                    <div className="card">
+                        <DataTable value={this.state.products} header="Stack" responsiveLayout="stack" breakpoint="960px">
+                            <Column field="code" header="Code" />
+                            <Column field="name" header="Name" />
+                            <Column field="category" header="Category" />
+                            <Column field="quantity" header="Quantity" />
+                            <Column field="inventoryStatus" header="Status" body={this.statusTemplate} />
+                            <Column field="rating" header="Rating" body={this.ratingTemplate} />
                         </DataTable>
                     </div>
                 </div>
@@ -104,8 +88,8 @@ export class DataTableResponsiveDemoDoc extends Component {
 import React, { Component } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import { Rating } from 'primereact/rating';
 import { ProductService } from '../service/ProductService';
-import './DataTableDemo.css';
 
 export class DataTableResponsiveDemo extends Component {
 
@@ -117,61 +101,44 @@ export class DataTableResponsiveDemo extends Component {
         };
 
         this.productService = new ProductService();
-        this.codeBodyTemplate = this.codeBodyTemplate.bind(this);
-        this.nameBodyTemplate = this.nameBodyTemplate.bind(this);
-        this.categoryBodyTemplate = this.categoryBodyTemplate.bind(this);
-        this.quantityBodyTemplate = this.quantityBodyTemplate.bind(this);
+        this.statusTemplate = this.statusTemplate.bind(this);
+        this.ratingTemplate = this.ratingTemplate.bind(this);
     }
 
     componentDidMount() {
-        this.productService.getProducts().then(data => this.setState({ products: data }));
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
     }
 
-    codeBodyTemplate(rowData) {
-        return (
-            <React.Fragment>
-                <span className="p-column-title">Code</span>
-                {rowData.code}
-            </React.Fragment>
-        );
+    statusTemplate(rowData) {
+        return <span className={\`product-badge status-\${(rowData.inventoryStatus ? rowData.inventoryStatus.toLowerCase() : '')}\`}>{rowData.inventoryStatus}</span>;
     }
 
-    nameBodyTemplate(rowData) {
-        return (
-            <React.Fragment>
-                <span className="p-column-title">Name</span>
-                {rowData.name}
-            </React.Fragment>
-        );
-    }
-
-    categoryBodyTemplate(rowData) {
-        return (
-            <React.Fragment>
-                <span className="p-column-title">Category</span>
-                {rowData.category}
-            </React.Fragment>
-        );
-    }
-
-    quantityBodyTemplate(rowData) {
-        return (
-            <React.Fragment>
-                <span className="p-column-title">Quantity</span>
-                {rowData.quantity}
-            </React.Fragment>
-        );
+    ratingTemplate(rowData) {
+        return <Rating value={rowData.rating} readOnly cancel={false} />
     }
 
     render() {
         return (
-            <div className="datatable-responsive-demo">
+            <div>
                 <div className="card">
-                    <DataTable value={this.state.products} className="p-datatable-responsive-demo" paginator rows={10} header="Responsive">
-                        <Column field="code" header="Code" body={this.codeBodyTemplate} />
-                        <Column field="name" header="Name" body={this.nameBodyTemplate} />
-                        <Column field="category" header="Category" body={this.categoryBodyTemplate} />
-                        <Column field="quantity" header="Quantity" body={this.quantityBodyTemplate} />
+                    <DataTable value={this.state.products} header="Scroll" responsiveLayout="scroll">
+                        <Column field="code" header="Code" />
+                        <Column field="name" header="Name" />
+                        <Column field="category" header="Category" />
+                        <Column field="quantity" header="Quantity" />
+                        <Column field="inventoryStatus" header="Status" body={this.statusTemplate} />
+                        <Column field="rating" header="Rating" body={this.ratingTemplate} />
+                    </DataTable>
+                </div>
+
+                <div className="card">
+                    <DataTable value={this.state.products} header="Stack" responsiveLayout="stack" breakpoint="960px">
+                        <Column field="code" header="Code" />
+                        <Column field="name" header="Name" />
+                        <Column field="category" header="Category" />
+                        <Column field="quantity" header="Quantity" />
+                        <Column field="inventoryStatus" header="Status" body={this.statusTemplate} />
+                        <Column field="rating" header="Rating" body={this.ratingTemplate} />
                     </DataTable>
                 </div>
             </div>
@@ -186,61 +153,46 @@ export class DataTableResponsiveDemo extends Component {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import { Rating } from 'primereact/rating';
 import { ProductService } from '../service/ProductService';
-import './DataTableDemo.css';
 
 const DataTableResponsiveDemo = () => {
     const [products, setProducts] = useState([]);
     const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProducts().then(data => setProducts(data));
+        productService.getProductsSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const codeBodyTemplate = (rowData) => {
-        return (
-            <React.Fragment>
-                <span className="p-column-title">Code</span>
-                {rowData.code}
-            </React.Fragment>
-        );
+    const statusTemplate = (rowData) => {
+        return <span className={\`product-badge status-\${(rowData.inventoryStatus ? rowData.inventoryStatus.toLowerCase() : '')}\`}>{rowData.inventoryStatus}</span>;
     }
 
-    const nameBodyTemplate = (rowData) => {
-        return (
-            <React.Fragment>
-                <span className="p-column-title">Name</span>
-                {rowData.name}
-            </React.Fragment>
-        );
-    }
-
-    const categoryBodyTemplate = (rowData) => {
-        return (
-            <React.Fragment>
-                <span className="p-column-title">Category</span>
-                {rowData.category}
-            </React.Fragment>
-        );
-    }
-
-    const quantityBodyTemplate = (rowData) => {
-        return (
-            <React.Fragment>
-                <span className="p-column-title">Quantity</span>
-                {rowData.quantity}
-            </React.Fragment>
-        );
+    const ratingTemplate = (rowData) => {
+        return <Rating value={rowData.rating} readOnly cancel={false} />
     }
 
     return (
-        <div className="datatable-responsive-demo">
+        <div>
             <div className="card">
-                <DataTable value={products} className="p-datatable-responsive-demo" paginator rows={10} header="Responsive">
-                    <Column field="code" header="Code" body={codeBodyTemplate} />
-                    <Column field="name" header="Name" body={nameBodyTemplate} />
-                    <Column field="category" header="Category" body={categoryBodyTemplate} />
-                    <Column field="quantity" header="Quantity" body={quantityBodyTemplate} />
+                <DataTable value={products} header="Scroll" responsiveLayout="scroll">
+                    <Column field="code" header="Code" />
+                    <Column field="name" header="Name" />
+                    <Column field="category" header="Category" />
+                    <Column field="quantity" header="Quantity" />
+                    <Column field="inventoryStatus" header="Status" body={statusTemplate} />
+                    <Column field="rating" header="Rating" body={ratingTemplate} />
+                </DataTable>
+            </div>
+
+            <div className="card">
+                <DataTable value={products} header="Stack" responsiveLayout="stack" breakpoint="960px">
+                    <Column field="code" header="Code" />
+                    <Column field="name" header="Name" />
+                    <Column field="category" header="Category" />
+                    <Column field="quantity" header="Quantity" />
+                    <Column field="inventoryStatus" header="Status" body={statusTemplate} />
+                    <Column field="rating" header="Rating" body={ratingTemplate} />
                 </DataTable>
             </div>
         </div>
@@ -254,61 +206,46 @@ const DataTableResponsiveDemo = () => {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import { Rating } from 'primereact/rating';
 import { ProductService } from '../service/ProductService';
-import './DataTableDemo.css';
 
 const DataTableResponsiveDemo = () => {
     const [products, setProducts] = useState([]);
     const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProducts().then(data => setProducts(data));
+        productService.getProductsSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const codeBodyTemplate = (rowData) => {
-        return (
-            <React.Fragment>
-                <span className="p-column-title">Code</span>
-                {rowData.code}
-            </React.Fragment>
-        );
+    const statusTemplate = (rowData) => {
+        return <span className={\`product-badge status-\${(rowData.inventoryStatus ? rowData.inventoryStatus.toLowerCase() : '')}\`}>{rowData.inventoryStatus}</span>;
     }
 
-    const nameBodyTemplate = (rowData) => {
-        return (
-            <React.Fragment>
-                <span className="p-column-title">Name</span>
-                {rowData.name}
-            </React.Fragment>
-        );
-    }
-
-    const categoryBodyTemplate = (rowData) => {
-        return (
-            <React.Fragment>
-                <span className="p-column-title">Category</span>
-                {rowData.category}
-            </React.Fragment>
-        );
-    }
-
-    const quantityBodyTemplate = (rowData) => {
-        return (
-            <React.Fragment>
-                <span className="p-column-title">Quantity</span>
-                {rowData.quantity}
-            </React.Fragment>
-        );
+    const ratingTemplate = (rowData) => {
+        return <Rating value={rowData.rating} readOnly cancel={false} />
     }
 
     return (
-        <div className="datatable-responsive-demo">
+        <div>
             <div className="card">
-                <DataTable value={products} className="p-datatable-responsive-demo" paginator rows={10} header="Responsive">
-                    <Column field="code" header="Code" body={codeBodyTemplate} />
-                    <Column field="name" header="Name" body={nameBodyTemplate} />
-                    <Column field="category" header="Category" body={categoryBodyTemplate} />
-                    <Column field="quantity" header="Quantity" body={quantityBodyTemplate} />
+                <DataTable value={products} header="Scroll" responsiveLayout="scroll">
+                    <Column field="code" header="Code" />
+                    <Column field="name" header="Name" />
+                    <Column field="category" header="Category" />
+                    <Column field="quantity" header="Quantity" />
+                    <Column field="inventoryStatus" header="Status" body={statusTemplate} />
+                    <Column field="rating" header="Rating" body={ratingTemplate} />
+                </DataTable>
+            </div>
+
+            <div className="card">
+                <DataTable value={products} header="Stack" responsiveLayout="stack" breakpoint="960px">
+                    <Column field="code" header="Code" />
+                    <Column field="name" header="Name" />
+                    <Column field="category" header="Category" />
+                    <Column field="quantity" header="Quantity" />
+                    <Column field="inventoryStatus" header="Status" body={statusTemplate} />
+                    <Column field="rating" header="Rating" body={ratingTemplate} />
                 </DataTable>
             </div>
         </div>
@@ -319,11 +256,11 @@ const DataTableResponsiveDemo = () => {
             'browser': {
                 tabName: 'Browser Source',
                 imports: `
-        <link rel="stylesheet" href="./DataTableDemo.css" />
         <script src="./ProductService.js"></script>
 
         <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/rating/rating.min.js"></script>
         <script src="https://unpkg.com/primereact/paginator/paginator.min.js"></script>
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>
         <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>`,
@@ -331,59 +268,45 @@ const DataTableResponsiveDemo = () => {
 const { useEffect, useState } = React;
 const { Column } = primereact.column;
 const { DataTable } = primereact.datatable;
+const { Rating } = primereact.rating;
 
 const DataTableResponsiveDemo = () => {
     const [products, setProducts] = useState([]);
     const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProducts().then(data => setProducts(data));
+        productService.getProductsSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const codeBodyTemplate = (rowData) => {
-        return (
-            <React.Fragment>
-                <span className="p-column-title">Code</span>
-                {rowData.code}
-            </React.Fragment>
-        );
+    const statusTemplate = (rowData) => {
+        return <span className={\`product-badge status-\${(rowData.inventoryStatus ? rowData.inventoryStatus.toLowerCase() : '')}\`}>{rowData.inventoryStatus}</span>;
     }
 
-    const nameBodyTemplate = (rowData) => {
-        return (
-            <React.Fragment>
-                <span className="p-column-title">Name</span>
-                {rowData.name}
-            </React.Fragment>
-        );
-    }
-
-    const categoryBodyTemplate = (rowData) => {
-        return (
-            <React.Fragment>
-                <span className="p-column-title">Category</span>
-                {rowData.category}
-            </React.Fragment>
-        );
-    }
-
-    const quantityBodyTemplate = (rowData) => {
-        return (
-            <React.Fragment>
-                <span className="p-column-title">Quantity</span>
-                {rowData.quantity}
-            </React.Fragment>
-        );
+    const ratingTemplate = (rowData) => {
+        return <Rating value={rowData.rating} readOnly cancel={false} />
     }
 
     return (
-        <div className="datatable-responsive-demo">
+        <div>
             <div className="card">
-                <DataTable value={products} className="p-datatable-responsive-demo" paginator rows={10} header="Responsive">
-                    <Column field="code" header="Code" body={codeBodyTemplate} />
-                    <Column field="name" header="Name" body={nameBodyTemplate} />
-                    <Column field="category" header="Category" body={categoryBodyTemplate} />
-                    <Column field="quantity" header="Quantity" body={quantityBodyTemplate} />
+                <DataTable value={products} header="Scroll" responsiveLayout="scroll">
+                    <Column field="code" header="Code" />
+                    <Column field="name" header="Name" />
+                    <Column field="category" header="Category" />
+                    <Column field="quantity" header="Quantity" />
+                    <Column field="inventoryStatus" header="Status" body={statusTemplate} />
+                    <Column field="rating" header="Rating" body={ratingTemplate} />
+                </DataTable>
+            </div>
+
+            <div className="card">
+                <DataTable value={products} header="Stack" responsiveLayout="stack" breakpoint="960px">
+                    <Column field="code" header="Code" />
+                    <Column field="name" header="Name" />
+                    <Column field="category" header="Category" />
+                    <Column field="quantity" header="Quantity" />
+                    <Column field="inventoryStatus" header="Status" body={statusTemplate} />
+                    <Column field="rating" header="Rating" body={ratingTemplate} />
                 </DataTable>
             </div>
         </div>
@@ -392,44 +315,6 @@ const DataTableResponsiveDemo = () => {
                 `
             }
         };
-
-        this.extFiles = {
-            'demo/DataTableDemo.css': {
-                content: `
-.datatable-responsive-demo .p-datatable-responsive-demo .p-datatable-tbody > tr > td .p-column-title {
-    display: none;
-}
-
-@media screen and (max-width: 40em) {
-    .datatable-responsive-demo .p-datatable.p-datatable-responsive-demo .p-datatable-thead > tr > th,
-    .datatable-responsive-demo .p-datatable.p-datatable-responsive-demo .p-datatable-tfoot > tr > td {
-        display: none !important;
-    }
-
-    .datatable-responsive-demo .p-datatable.p-datatable-responsive-demo .p-datatable-tbody > tr > td {
-        text-align: left;
-        display: block;
-        width: 100%;
-        float: left;
-        clear: left;
-        border: 0 none;
-    }
-
-    .datatable-responsive-demo .p-datatable.p-datatable-responsive-demo .p-datatable-tbody > tr > td .p-column-title {
-        padding: .4rem;
-        min-width: 30%;
-        display: inline-block;
-        margin: -.4em 1em -.4em -.4rem;
-        font-weight: bold;
-    }
-
-    .datatable-responsive-demo .p-datatable.p-datatable-responsive-demo .p-datatable-tbody > tr > td:last-child {
-        border-bottom: 1px solid var(--surface-d);
-    }
-}
-                `
-            }
-        }
     }
 
     shouldComponentUpdate() {
@@ -441,7 +326,7 @@ const DataTableResponsiveDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
-                        useLiveEditorTabs({ name: 'DataTableResponsiveDemo', sources: this.sources, service: 'ProductService', data: 'products', extFiles: this.extFiles })
+                        useLiveEditorTabs({ name: 'DataTableResponsiveDemo', sources: this.sources, service: 'ProductService', data: 'products-small' })
                     }
                 </TabView>
             </div>

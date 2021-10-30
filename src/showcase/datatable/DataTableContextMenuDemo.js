@@ -20,8 +20,8 @@ export class DataTableContextMenuDemo extends Component {
         };
 
         this.menuModel = [
-            {label: 'View', icon: 'pi pi-fw pi-search', command: () => this.viewProduct(this.state.selectedProduct)},
-            {label: 'Delete', icon: 'pi pi-fw pi-times', command: () => this.deleteProduct(this.state.selectedProduct)}
+            { label: 'View', icon: 'pi pi-fw pi-search', command: () => this.viewProduct(this.state.selectedProduct) },
+            { label: 'Delete', icon: 'pi pi-fw pi-times', command: () => this.deleteProduct(this.state.selectedProduct) }
         ];
 
         this.productService = new ProductService();
@@ -35,19 +35,19 @@ export class DataTableContextMenuDemo extends Component {
     }
 
     viewProduct(product) {
-        this.toast.show({severity: 'info', summary: 'Product Selected', detail: product.name});
+        this.toast.show({ severity: 'info', summary: 'Product Selected', detail: product.name });
     }
 
     deleteProduct(product) {
         let products = [...this.state.products];
         products = products.filter((p) => p.id !== product.id);
 
-        this.toast.show({severity: 'info', summary: 'Product Deleted', detail: product.name});
+        this.toast.show({ severity: 'error', summary: 'Product Deleted', detail: product.name });
         this.setState({ products });
     }
 
     formatCurrency(value) {
-        return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+        return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
     }
 
     priceBodyTemplate(rowData) {
@@ -68,12 +68,12 @@ export class DataTableContextMenuDemo extends Component {
                 <div className="content-section implementation">
                     <Toast ref={(el) => { this.toast = el; }}></Toast>
 
-                    <ContextMenu model={this.menuModel} ref={el => this.cm = el} onHide={() => this.setState({ selectedProduct: null })}/>
+                    <ContextMenu model={this.menuModel} ref={el => this.cm = el} onHide={() => this.setState({ selectedProduct: null })} />
 
                     <div className="card">
                         <DataTable value={this.state.products} contextMenuSelection={this.state.selectedProduct}
                             onContextMenuSelectionChange={e => this.setState({ selectedProduct: e.value })}
-                            onContextMenu={e => this.cm.show(e.originalEvent)}>
+                            onContextMenu={e => this.cm.show(e.originalEvent)} responsiveLayout="scroll">
                             <Column field="code" header="Code"></Column>
                             <Column field="name" header="Name"></Column>
                             <Column field="category" header="Category"></Column>
@@ -137,7 +137,7 @@ export class DataTableContextMenuDemo extends Component {
         let products = [...this.state.products];
         products = products.filter((p) => p.id !== product.id);
 
-        this.toast.show({severity: 'info', summary: 'Product Deleted', detail: product.name});
+        this.toast.show({severity: 'error', summary: 'Product Deleted', detail: product.name});
         this.setState({ products });
     }
 
@@ -159,7 +159,7 @@ export class DataTableContextMenuDemo extends Component {
                 <div className="card">
                     <DataTable value={this.state.products} contextMenuSelection={this.state.selectedProduct}
                         onContextMenuSelectionChange={e => this.setState({ selectedProduct: e.value })}
-                        onContextMenu={e => this.cm.show(e.originalEvent)}>
+                        onContextMenu={e => this.cm.show(e.originalEvent)} responsiveLayout="scroll">
                         <Column field="code" header="Code"></Column>
                         <Column field="name" header="Name"></Column>
                         <Column field="category" header="Category"></Column>
@@ -205,7 +205,7 @@ const DataTableContextMenuDemo = () => {
         let _products = [...products];
         _products = _products.filter((p) => p.id !== product.id);
 
-        toast.current.show({severity: 'info', summary: 'Product Deleted', detail: product.name});
+        toast.current.show({severity: 'error', summary: 'Product Deleted', detail: product.name});
         setProducts(_products);
     }
 
@@ -226,7 +226,7 @@ const DataTableContextMenuDemo = () => {
             <div className="card">
                 <DataTable value={products} contextMenuSelection={selectedProduct}
                     onContextMenuSelectionChange={e => setSelectedProduct(e.value)}
-                    onContextMenu={e => cm.current.show(e.originalEvent)}>
+                    onContextMenu={e => cm.current.show(e.originalEvent)} responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -271,7 +271,7 @@ const DataTableContextMenuDemo = () => {
         let _products = [...products];
         _products = _products.filter((p) => p.id !== product.id);
 
-        toast.current.show({severity: 'info', summary: 'Product Deleted', detail: product.name});
+        toast.current.show({severity: 'error', summary: 'Product Deleted', detail: product.name});
         setProducts(_products);
     }
 
@@ -292,7 +292,7 @@ const DataTableContextMenuDemo = () => {
             <div className="card">
                 <DataTable value={products} contextMenuSelection={selectedProduct}
                     onContextMenuSelectionChange={e => setSelectedProduct(e.value)}
-                    onContextMenu={e => cm.current.show(e.originalEvent)}>
+                    onContextMenu={e => cm.current.show(e.originalEvent)} responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -345,7 +345,7 @@ const DataTableContextMenuDemo = () => {
         let _products = [...products];
         _products = _products.filter((p) => p.id !== product.id);
 
-        toast.current.show({severity: 'info', summary: 'Product Deleted', detail: product.name});
+        toast.current.show({severity: 'error', summary: 'Product Deleted', detail: product.name});
         setProducts(_products);
     }
 
@@ -366,7 +366,7 @@ const DataTableContextMenuDemo = () => {
             <div className="card">
                 <DataTable value={products} contextMenuSelection={selectedProduct}
                     onContextMenuSelectionChange={e => setSelectedProduct(e.value)}
-                    onContextMenu={e => cm.current.show(e.originalEvent)}>
+                    onContextMenu={e => cm.current.show(e.originalEvent)} responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>

@@ -36,7 +36,7 @@ export class DataTableGridLinesDemo extends Component {
 
                 <div className="content-section implementation">
                     <div className="card">
-                        <DataTable value={this.state.products} header="Header" footer="Footer" showGridlines>
+                        <DataTable value={this.state.products} header="Header" footer="Footer" showGridlines responsiveLayout="scroll">
                             <Column field="code" header="Code"></Column>
                             <Column field="name" header="Name"></Column>
                             <Column field="category" header="Category"></Column>
@@ -85,7 +85,7 @@ export class DataTableGridLinesDemo extends Component {
         return (
             <div>
                 <div className="card">
-                    <DataTable value={this.state.products} header="Header" footer="Footer" showGridlines>
+                    <DataTable value={this.state.products} header="Header" footer="Footer" showGridlines responsiveLayout="scroll">
                         <Column field="code" header="Code"></Column>
                         <Column field="name" header="Name"></Column>
                         <Column field="category" header="Category"></Column>
@@ -117,7 +117,7 @@ const DataTableGridLinesDemo = () => {
     return (
         <div>
             <div className="card">
-                <DataTable value={products} header="Header" footer="Footer" showGridlines>
+                <DataTable value={products} header="Header" footer="Footer" showGridlines responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -148,7 +148,7 @@ const DataTableGridLinesDemo = () => {
     return (
         <div>
             <div className="card">
-                <DataTable value={products} header="Header" footer="Footer" showGridlines>
+                <DataTable value={products} header="Header" footer="Footer" showGridlines responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -185,7 +185,7 @@ const DataTableGridLinesDemo = () => {
     return (
         <div>
             <div className="card">
-                <DataTable value={products} header="Header" footer="Footer" showGridlines>
+                <DataTable value={products} header="Header" footer="Footer" showGridlines responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>

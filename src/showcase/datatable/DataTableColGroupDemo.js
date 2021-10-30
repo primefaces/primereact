@@ -109,7 +109,7 @@ export class DataTableColGroupDemo extends Component {
 
                 <div className="content-section implementation">
                     <div className="card">
-                        <DataTable value={this.sales} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup}>
+                        <DataTable value={this.sales} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup} responsiveLayout="scroll">
                             <Column field="product" />
                             <Column field="lastYearSale" body={this.lastYearSaleBodyTemplate} />
                             <Column field="thisYearSale" body={this.thisYearSaleBodyTemplate} />
@@ -232,7 +232,7 @@ export class DataTableColGroupDemo extends Component {
         return (
             <div>
                 <div className="card">
-                    <DataTable value={this.sales} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup}>
+                    <DataTable value={this.sales} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup} responsiveLayout="scroll">
                         <Column field="product" />
                         <Column field="lastYearSale" body={this.lastYearSaleBodyTemplate} />
                         <Column field="thisYearSale" body={this.thisYearSaleBodyTemplate} />
@@ -334,7 +334,7 @@ const DataTableColGroupDemo = () => {
     return (
         <div>
             <div className="card">
-                <DataTable value={sales} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup}>
+                <DataTable value={sales} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup} responsiveLayout="scroll">
                     <Column field="product" />
                     <Column field="lastYearSale" body={lastYearSaleBodyTemplate} />
                     <Column field="thisYearSale" body={thisYearSaleBodyTemplate} />
@@ -435,7 +435,7 @@ const DataTableColGroupDemo = () => {
     return (
         <div>
             <div className="card">
-                <DataTable value={sales} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup}>
+                <DataTable value={sales} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup} responsiveLayout="scroll">
                     <Column field="product" />
                     <Column field="lastYearSale" body={lastYearSaleBodyTemplate} />
                     <Column field="thisYearSale" body={thisYearSaleBodyTemplate} />
@@ -545,7 +545,7 @@ const DataTableColGroupDemo = () => {
     return (
         <div>
             <div className="card">
-                <DataTable value={sales} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup}>
+                <DataTable value={sales} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup} responsiveLayout="scroll">
                     <Column field="product" />
                     <Column field="lastYearSale" body={lastYearSaleBodyTemplate} />
                     <Column field="thisYearSale" body={thisYearSaleBodyTemplate} />

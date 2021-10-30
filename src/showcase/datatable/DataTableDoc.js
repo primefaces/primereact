@@ -14,255 +14,235 @@ export class DataTableDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import { classNames } from 'primereact/utils';
+import { FilterMatchMode, FilterOperator } from 'primereact/api';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
-import { Button } from 'primereact/button';
-import { CustomerService } from '../service/CustomerService';
 import { Dropdown } from 'primereact/dropdown';
+import { InputNumber } from 'primereact/inputnumber';
+import { Button } from 'primereact/button';
+import { ProgressBar } from 'primereact/progressbar';
 import { Calendar } from 'primereact/calendar';
 import { MultiSelect } from 'primereact/multiselect';
-import { ProgressBar } from 'primereact/progressbar';
+import { Slider } from 'primereact/slider';
+import { CustomerService } from '../service/CustomerService';
 import './DataTableDemo.css';
 
 export class DataTableDemo extends Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
             customers: null,
             selectedCustomers: null,
-            globalFilter: null,
-            selectedRepresentatives: null,
-            dateFilter: null,
-            selectedStatus: null
+            filters: {
+                'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
+                'name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+                'country.name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+                'representative': { value: null, matchMode: FilterMatchMode.IN },
+                'date': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.DATE_IS }] },
+                'balance': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
+                'status': { operator: FilterOperator.OR, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
+                'activity': { value: null, matchMode: FilterMatchMode.BETWEEN }
+            },
+            globalFilterValue: '',
+            loading: true
         };
 
         this.representatives = [
-            {name: "Amy Elsner", image: 'amyelsner.png'},
-            {name: "Anna Fali", image: 'annafali.png'},
-            {name: "Asiya Javayant", image: 'asiyajavayant.png'},
-            {name: "Bernardo Dominic", image: 'bernardodominic.png'},
-            {name: "Elwin Sharvill", image: 'elwinsharvill.png'},
-            {name: "Ioni Bowcher", image: 'ionibowcher.png'},
-            {name: "Ivan Magalhaes",image: 'ivanmagalhaes.png'},
-            {name: "Onyama Limba", image: 'onyamalimba.png'},
-            {name: "Stephen Shaw", image: 'stephenshaw.png'},
-            {name: "XuXue Feng", image: 'xuxuefeng.png'}
+            { name: "Amy Elsner", image: 'amyelsner.png' },
+            { name: "Anna Fali", image: 'annafali.png' },
+            { name: "Asiya Javayant", image: 'asiyajavayant.png' },
+            { name: "Bernardo Dominic", image: 'bernardodominic.png' },
+            { name: "Elwin Sharvill", image: 'elwinsharvill.png' },
+            { name: "Ioni Bowcher", image: 'ionibowcher.png' },
+            { name: "Ivan Magalhaes", image: 'ivanmagalhaes.png' },
+            { name: "Onyama Limba", image: 'onyamalimba.png' },
+            { name: "Stephen Shaw", image: 'stephenshaw.png' },
+            { name: "XuXue Feng", image: 'xuxuefeng.png' }
         ];
 
         this.statuses = [
             'unqualified', 'qualified', 'new', 'negotiation', 'renewal', 'proposal'
-        ];
+        ]
 
         this.customerService = new CustomerService();
-
-        //body cells
-        this.nameBodyTemplate = this.nameBodyTemplate.bind(this);
-        this.countryBodyTemplate = this.countryBodyTemplate.bind(this);
-        this.representativeBodyTemplate = this.representativeBodyTemplate.bind(this);
+        this.onGlobalFilterChange = this.onGlobalFilterChange.bind(this);
+        this.representativeFilterTemplate = this.representativeFilterTemplate.bind(this);
         this.dateBodyTemplate = this.dateBodyTemplate.bind(this);
+        this.dateFilterTemplate = this.dateFilterTemplate.bind(this);
+        this.balanceBodyTemplate = this.balanceBodyTemplate.bind(this);
+        this.balanceFilterTemplate = this.balanceFilterTemplate.bind(this);
         this.statusBodyTemplate = this.statusBodyTemplate.bind(this);
-        this.activityBodyTemplate = this.activityBodyTemplate.bind(this);
-        this.actionBodyTemplate = this.actionBodyTemplate.bind(this);
-
-        //filters
-        this.representativeItemTemplate = this.representativeItemTemplate.bind(this);
-        this.onRepresentativeFilterChange = this.onRepresentativeFilterChange.bind(this);
-        this.onDateFilterChange = this.onDateFilterChange.bind(this);
-        this.filterDate = this.filterDate.bind(this);       //custom filter function
+        this.statusFilterTemplate = this.statusFilterTemplate.bind(this);
         this.statusItemTemplate = this.statusItemTemplate.bind(this);
-        this.onStatusFilterChange = this.onStatusFilterChange.bind(this);
+        this.activityBodyTemplate = this.activityBodyTemplate.bind(this);
+        this.activityFilterTemplate = this.activityFilterTemplate.bind(this);
+        this.representativeRowFilterTemplate = this.representativeRowFilterTemplate.bind(this);
+        this.statusRowFilterTemplate = this.statusRowFilterTemplate.bind(this);
+        this.actionBodyTemplate = this.actionBodyTemplate.bind(this);
     }
 
     componentDidMount() {
-        this.customerService.getCustomersLarge().then(data => this.setState({customers: data}));
+        this.customerService.getCustomersLarge().then(data => this.setState({ customers: this.getCustomers(data), loading: false }));
+    }
+
+    getCustomers(data) {
+        return [...data || []].map(d => {
+            d.date = new Date(d.date);
+            return d;
+        });
+    }
+
+    formatDate(value) {
+        return value.toLocaleDateString('en-US', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+        });
+    }
+
+    formatCurrency(value) {
+        return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    }
+
+    onGlobalFilterChange(e) {
+        const value = e.target.value;
+        let filters = { ...this.state.filters };
+        filters['global'].value = value;
+
+        this.setState({ filters, globalFilterValue: value });
     }
 
     renderHeader() {
         return (
-            <div className="table-header">
-                List of Customers
+            <div className="p-d-flex p-jc-between p-ai-center">
+                <h5 className="p-m-0">Customers</h5>
                 <span className="p-input-icon-left">
                     <i className="pi pi-search" />
-                    <InputText type="search" onInput={(e) => this.setState({globalFilter: e.target.value})} placeholder="Global Search" />
+                    <InputText value={this.state.globalFilterValue} onChange={this.onGlobalFilterChange} placeholder="Keyword Search" />
                 </span>
             </div>
-        );
-    }
-
-    activityBodyTemplate(rowData) {
-        return (
-            <React.Fragment>
-                <span className="p-column-title">Activity</span>
-                <ProgressBar value={rowData.activity} showValue={false} />
-            </React.Fragment>
-        );
-    }
-
-    actionBodyTemplate() {
-        return (
-            <Button type="button" icon="pi pi-cog" className="p-button-secondary"></Button>
-        );
-    }
-
-    statusBodyTemplate(rowData) {
-        return (
-            <React.Fragment>
-                <span className="p-column-title">Status</span>
-                <span className={classNames('customer-badge', 'status-' + rowData.status)}>{rowData.status}</span>
-            </React.Fragment>
-        );
-    }
-
-    nameBodyTemplate(rowData) {
-        return (
-            <React.Fragment>
-                <span className="p-column-title">Name</span>
-                {rowData.name}
-            </React.Fragment>
-        );
+        )
     }
 
     countryBodyTemplate(rowData) {
-        let { name, code } = rowData.country;
-
         return (
             <React.Fragment>
-                <span className="p-column-title">Country</span>
-                <img src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={name} className={classNames('flag', 'flag-' + code)} />
-                <span style={{verticalAlign: 'middle', marginLeft: '.5em'}}>{name}</span>
+                <img alt="flag" src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${rowData.country.code}\`} width={30} />
+                <span className="image-text">{rowData.country.name}</span>
             </React.Fragment>
         );
     }
 
     representativeBodyTemplate(rowData) {
-        const src = "showcase/demo/images/avatar/" + rowData.representative.image;
-
+        const representative = rowData.representative;
         return (
             <React.Fragment>
-                <span className="p-column-title">Representative</span>
-                <img alt={rowData.representative.name} src={src} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" style={{verticalAlign: 'middle'}} />
-                <span style={{verticalAlign: 'middle', marginLeft: '.5em'}}>{rowData.representative.name}</span>
+                <img alt={representative.name} src={\`showcase/demo/images/avatar/\${representative.image}\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width={32} style={{ verticalAlign: 'middle' }} />
+                <span className="image-text">{representative.name}</span>
             </React.Fragment>
         );
     }
 
-    dateBodyTemplate(rowData) {
+    representativeFilterTemplate(options) {
         return (
             <React.Fragment>
-                <span className="p-column-title">Date</span>
-                <span>{rowData.date}</span>
+                <div className="p-mb-3 p-text-bold">Agent Picker</div>
+                <MultiSelect value={options.value} options={this.representatives} itemTemplate={this.representativesItemTemplate} onChange={(e) => options.filterCallback(e.value)} optionLabel="name" placeholder="Any" className="p-column-filter" />
             </React.Fragment>
         );
     }
 
-    renderRepresentativeFilter() {
-        return (
-            <MultiSelect className="p-column-filter" value={this.state.selectedRepresentatives} options={this.representatives}
-                onChange={this.onRepresentativeFilterChange} itemTemplate={this.representativeItemTemplate} placeholder="All" optionLabel="name" optionValue="name" />
-        );
-    }
-
-    representativeItemTemplate(option) {
-        const src = "showcase/demo/images/avatar/" + option.image;
-
+    representativesItemTemplate(option) {
         return (
             <div className="p-multiselect-representative-option">
-                <img alt={option.name} src={src} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" style={{verticalAlign: 'middle'}} />
-                <span style={{verticalAlign: 'middle', marginLeft: '.5em'}}>{option.name}</span>
+                <img alt={option.name} src={\`showcase/demo/images/avatar/\${option.image}\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width={32} style={{ verticalAlign: 'middle' }} />
+                <span className="image-text">{option.name}</span>
             </div>
         );
     }
 
-    onRepresentativeFilterChange(event) {
-        this.dt.filter(event.value, 'representative.name', 'in');
-        this.setState({selectedRepresentatives: event.value});
+    dateBodyTemplate(rowData) {
+        return this.formatDate(rowData.date);
     }
 
-    renderDateFilter() {
-        return (
-            <Calendar value={this.state.dateFilter} onChange={this.onDateFilterChange} placeholder="Registration Date" dateFormat="yy-mm-dd" className="p-column-filter" />
-        );
+    dateFilterTemplate(options) {
+        return <Calendar value={options.value} onChange={(e) => options.filterCallback(e.value, options.index)} dateFormat="mm/dd/yy" placeholder="mm/dd/yyyy" mask="99/99/9999" />
     }
 
-    onDateFilterChange(event) {
-        if (event.value !== null)
-            this.dt.filter(this.formatDate(event.value), 'date', 'equals');
-        else
-            this.dt.filter(null, 'date', 'equals');
-
-        this.setState({dateFilter: event.value});
+    balanceBodyTemplate(rowData) {
+        return this.formatCurrency(rowData.balance);
     }
 
-    filterDate(value, filter) {
-        if (filter === undefined || filter === null || (typeof filter === 'string' && filter.trim() === '')) {
-            return true;
-        }
-
-        if (value === undefined || value === null) {
-            return false;
-        }
-
-        return value === this.formatDate(filter);
+    balanceFilterTemplate(options) {
+        return <InputNumber value={options.value} onChange={(e) => options.filterCallback(e.value, options.index)} mode="currency" currency="USD" locale="en-US" />
     }
 
-    formatDate(date) {
-        let month = date.getMonth() + 1;
-        let day = date.getDate();
-
-        if (month < 10) {
-            month = '0' + month;
-        }
-
-        if (day < 10) {
-            day = '0' + day;
-        }
-
-        return date.getFullYear() + '-' + month + '-' + day;
+    statusBodyTemplate(rowData) {
+        return <span className={\`customer-badge status-\${rowData.status}\`}>{rowData.status}</span>;
     }
 
-    renderStatusFilter() {
-        return (
-            <Dropdown value={this.state.selectedStatus} options={this.statuses} onChange={this.onStatusFilterChange}
-                        itemTemplate={this.statusItemTemplate} showClear placeholder="Select a Status" className="p-column-filter"/>
-        );
+    statusFilterTemplate(options) {
+        return <Dropdown value={options.value} options={this.statuses} onChange={(e) => options.filterCallback(e.value, options.index)} itemTemplate={this.statusItemTemplate} placeholder="Select a Status" className="p-column-filter" showClear />;
     }
 
     statusItemTemplate(option) {
-        return (
-            <span className={classNames('customer-badge', 'status-' + option)}>{option}</span>
-        );
+        return <span className={\`customer-badge status-\${option}\`}>{option}</span>;
     }
 
-    onStatusFilterChange(event) {
-        this.dt.filter(event.value, 'status', 'equals');
-        this.setState({selectedStatus: event.value});
+    activityBodyTemplate(rowData) {
+        return <ProgressBar value={rowData.activity} showValue={false}></ProgressBar>;
+    }
+
+    activityFilterTemplate(options) {
+        return (
+            <>
+                <Slider value={options.value} onChange={(e) => options.filterCallback(e.value)} range className="p-m-3"></Slider>
+                <div className="p-d-flex p-ai-center p-jc-between p-px-2">
+                    <span>{options.value ? options.value[0] : 0}</span>
+                    <span>{options.value ? options.value[1] : 100}</span>
+                </div>
+            </>
+        )
+    }
+
+    representativeRowFilterTemplate(options) {
+        return <MultiSelect value={options.value} options={this.representatives} itemTemplate={this.representativesItemTemplate} onChange={(e) => options.filterApplyCallback(e.value)} optionLabel="name" placeholder="Any" className="p-column-filter" maxSelectedLabels={1} />;
+    }
+
+    statusRowFilterTemplate(options) {
+        return <Dropdown value={options.value} options={this.statuses} onChange={(e) => options.filterApplyCallback(e.value)} itemTemplate={this.statusItemTemplate} placeholder="Select a Status" className="p-column-filter" showClear />;
+    }
+
+    actionBodyTemplate() {
+        return <Button type="button" icon="pi pi-cog"></Button>;
     }
 
     render() {
         const header = this.renderHeader();
-        const representativeFilter = this.renderRepresentativeFilter();
-        const dateFilter = this.renderDateFilter();
-        const statusFilter = this.renderStatusFilter();
 
         return (
             <div className="datatable-doc-demo">
                 <div className="card">
-                    <DataTable ref={(el) => this.dt = el} value={this.state.customers}
-                        header={header} className="p-datatable-customers" dataKey="id" rowHover globalFilter={this.state.globalFilter}
-                        selection={this.state.selectedCustomers} onSelectionChange={e => this.setState({selectedCustomers: e.value})}
-                        paginator rows={10} emptyMessage="No customers found" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                        paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" rowsPerPageOptions={[10,25,50]}>
-                        <Column selectionMode="multiple" style={{width:'3em'}}/>
-                        <Column field="name" header="Name" body={this.nameBodyTemplate} sortable filter filterPlaceholder="Search by name" />
-                        <Column sortField="country.name" filterField="country.name" header="Country" body={this.countryBodyTemplate} sortable filter filterMatchMode="contains" filterPlaceholder="Search by country"/>
-                        <Column sortField="representative.name" filterField="representative.name" header="Representative" body={this.representativeBodyTemplate} sortable filter filterElement={representativeFilter} />
-                        <Column field="date" header="Date" body={this.dateBodyTemplate} sortable filter filterMatchMode="custom" filterFunction={this.filterDate} filterElement={dateFilter} />
-                        <Column field="status" header="Status" body={this.statusBodyTemplate} sortable filter filterElement={statusFilter} />
-                        <Column field="activity" header="Activity" body={this.activityBodyTemplate} sortable filter filterMatchMode="gte" filterPlaceholder="Minimum" />
-                        <Column body={this.actionBodyTemplate} headerStyle={{width: '8em', textAlign: 'center'}} bodyStyle={{textAlign: 'center', overflow: 'visible'}} />
+                    <DataTable value={this.state.customers} paginator className="p-datatable-customers" header={header} rows={10}
+                        paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" rowsPerPageOptions={[10,25,50]}
+                        dataKey="id" rowHover selection={this.state.selectedCustomers} onSelectionChange={e => this.setState({ selectedCustomers: e.value })}
+                        filters={this.state.filters} filterDisplay="menu" loading={this.state.loading} responsiveLayout="scroll"
+                        globalFilterFields={['name', 'country.name', 'representative.name', 'balance', 'status']} emptyMessage="No customers found."
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                        <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
+                        <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name" style={{ minWidth: '14rem' }} />
+                        <Column field="country.name" header="Country" sortable filterField="country.name" style={{ minWidth: '14rem' }} body={this.countryBodyTemplate} filter filterPlaceholder="Search by country" />
+                        <Column header="Agent" sortable sortField="representative.name" filterField="representative" showFilterMatchModes={false} filterMenuStyle={{ width: '14rem' }} style={{ minWidth: '14rem' }} body={this.representativeBodyTemplate}
+                            filter filterElement={this.representativeFilterTemplate} />
+                        <Column field="date" header="Date" sortable filterField="date" dataType="date" style={{ minWidth: '8rem' }} body={this.dateBodyTemplate}
+                            filter filterElement={this.dateFilterTemplate} />
+                        <Column field="balance" header="Balance" sortable dataType="numeric" style={{ minWidth: '8rem' }} body={this.balanceBodyTemplate} filter filterElement={this.balanceFilterTemplate} />
+                        <Column field="status" header="Status" sortable filterMenuStyle={{ width: '14rem' }} style={{ minWidth: '10rem' }} body={this.statusBodyTemplate} filter filterElement={this.statusFilterTemplate} />
+                        <Column field="activity" header="Activity" sortable showFilterMatchModes={false} style={{ minWidth: '10rem' }} body={this.activityBodyTemplate} filter filterElement={this.activityFilterTemplate} />
+                        <Column headerStyle={{ width: '4rem', textAlign: 'center' }} bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={this.actionBodyTemplate} />
                     </DataTable>
                 </div>
             </div>
@@ -274,27 +254,36 @@ export class DataTableDemo extends Component {
             'hooks': {
                 tabName: 'Hooks Source',
                 content: `
-import React, { useState, useEffect, useRef } from 'react';
-import { classNames } from 'primereact/utils';
+import React, { useState, useEffect } from 'react';
+import { FilterMatchMode, FilterOperator } from 'primereact/api';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
-import { Button } from 'primereact/button';
-import { CustomerService } from '../service/CustomerService';
 import { Dropdown } from 'primereact/dropdown';
+import { InputNumber } from 'primereact/inputnumber';
+import { Button } from 'primereact/button';
+import { ProgressBar } from 'primereact/progressbar';
 import { Calendar } from 'primereact/calendar';
 import { MultiSelect } from 'primereact/multiselect';
-import { ProgressBar } from 'primereact/progressbar';
+import { Slider } from 'primereact/slider';
+import { CustomerService } from '../service/CustomerService';
 import './DataTableDemo.css';
 
 const DataTableDemo = () => {
     const [customers, setCustomers] = useState(null);
     const [selectedCustomers, setSelectedCustomers] = useState(null);
-    const [globalFilter, setGlobalFilter] = useState(null);
-    const [selectedRepresentatives, setSelectedRepresentatives] = useState(null);
-    const [dateFilter, setDateFilter] = useState(null);
-    const [selectedStatus, setSelectedStatus] = useState(null);
-    const dt = useRef(null);
+    const [filters, setFilters] = useState({
+        'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
+        'name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+        'country.name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+        'representative': { value: null, matchMode: FilterMatchMode.IN },
+        'date': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.DATE_IS }] },
+        'balance': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
+        'status': { operator: FilterOperator.OR, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
+        'activity': { value: null, matchMode: FilterMatchMode.BETWEEN }
+    });
+    const [globalFilterValue, setGlobalFilterValue] = useState('');
+    const [loading, setLoading] = useState(true);
     const representatives = [
         {name: "Amy Elsner", image: 'amyelsner.png'},
         {name: "Anna Fali", image: 'annafali.png'},
@@ -315,191 +304,164 @@ const DataTableDemo = () => {
     const customerService = new CustomerService();
 
     useEffect(() => {
-        customerService.getCustomersLarge().then(data => setCustomers(data));
+        customerService.getCustomersLarge().then(data => { setCustomers(data), setLoading(false) });
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const getCustomers = (data) => {
+        return [...data || []].map(d => {
+            d.date = new Date(d.date);
+            return d;
+        });
+    }
+
+    const formatDate = (value) => {
+        return value.toLocaleDateString('en-US', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+        });
+    }
+
+    const formatCurrency = (value) => {
+        return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    }
+
+    const onGlobalFilterChange = (e) => {
+        const value = e.target.value;
+        let _filters = { ...filters };
+        _filters['global'].value = value;
+
+        setFilters(_filters);
+        setGlobalFilterValue(value);
+    }
 
     const renderHeader = () => {
         return (
-            <div className="table-header">
-                List of Customers
+            <div className="p-d-flex p-jc-between p-ai-center">
+                <h5 className="p-m-0">Customers</h5>
                 <span className="p-input-icon-left">
                     <i className="pi pi-search" />
-                    <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Global Search" />
+                    <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Keyword Search" />
                 </span>
             </div>
-        );
-    }
-
-    const activityBodyTemplate = (rowData) => {
-        return (
-            <React.Fragment>
-                <span className="p-column-title">Activity</span>
-                <ProgressBar value={rowData.activity} showValue={false} />
-            </React.Fragment>
-        );
-    }
-
-    const actionBodyTemplate = () => {
-        return (
-            <Button type="button" icon="pi pi-cog" className="p-button-secondary"></Button>
-        );
-    }
-
-    const statusBodyTemplate = (rowData) => {
-        return (
-            <React.Fragment>
-                <span className="p-column-title">Status</span>
-                <span className={classNames('customer-badge', 'status-' + rowData.status)}>{rowData.status}</span>
-            </React.Fragment>
-        );
-    }
-
-    const nameBodyTemplate = (rowData) => {
-        return (
-            <React.Fragment>
-                <span className="p-column-title">Name</span>
-                {rowData.name}
-            </React.Fragment>
-        );
+        )
     }
 
     const countryBodyTemplate = (rowData) => {
-        let { name, code } = rowData.country;
-
         return (
             <React.Fragment>
-                <span className="p-column-title">Country</span>
-                <img src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={name} className={classNames('flag', 'flag-' + code)} />
-                <span style={{verticalAlign: 'middle', marginLeft: '.5em'}}>{name}</span>
+                <img alt="flag" src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${rowData.country.code}\`} width={30} />
+                <span className="image-text">{rowData.country.name}</span>
             </React.Fragment>
         );
     }
 
     const representativeBodyTemplate = (rowData) => {
-        const src = "showcase/demo/images/avatar/" + rowData.representative.image;
-
+        const representative = rowData.representative;
         return (
             <React.Fragment>
-                <span className="p-column-title">Representative</span>
-                <img alt={rowData.representative.name} src={src} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" style={{verticalAlign: 'middle'}} />
-                <span style={{verticalAlign: 'middle', marginLeft: '.5em'}}>{rowData.representative.name}</span>
+                <img alt={representative.name} src={\`showcase/demo/images/avatar/\${representative.image}\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width={32} style={{ verticalAlign: 'middle' }} />
+                <span className="image-text">{representative.name}</span>
             </React.Fragment>
         );
     }
 
-    const dateBodyTemplate = (rowData) => {
+    const representativeFilterTemplate = (options) => {
         return (
             <React.Fragment>
-                <span className="p-column-title">Date</span>
-                <span>{rowData.date}</span>
+                <div className="p-mb-3 p-text-bold">Agent Picker</div>
+                <MultiSelect value={options.value} options={representatives} itemTemplate={representativesItemTemplate} onChange={(e) => options.filterCallback(e.value)} optionLabel="name" placeholder="Any" className="p-column-filter" />
             </React.Fragment>
         );
     }
 
-    const renderRepresentativeFilter = () => {
-        return (
-            <MultiSelect className="p-column-filter" value={selectedRepresentatives} options={representatives}
-                onChange={onRepresentativeFilterChange} itemTemplate={representativeItemTemplate} placeholder="All" optionLabel="name" optionValue="name" />
-        );
-    }
-
-    const representativeItemTemplate = (option) => {
-        const src = "showcase/demo/images/avatar/" + option.image;
-
+    const representativesItemTemplate = (option) => {
         return (
             <div className="p-multiselect-representative-option">
-                <img alt={option.name} src={src} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" style={{verticalAlign: 'middle'}} />
-                <span style={{verticalAlign: 'middle', marginLeft: '.5em'}}>{option.name}</span>
+                <img alt={option.name} src={\`showcase/demo/images/avatar/\${option.image}\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width={32} style={{ verticalAlign: 'middle' }} />
+                <span className="image-text">{option.name}</span>
             </div>
         );
     }
 
-    const onRepresentativeFilterChange = (event) => {
-        dt.current.filter(event.value, 'representative.name', 'in');
-        setSelectedRepresentatives(event.value);
+    const dateBodyTemplate = (rowData) => {
+        return formatDate(rowData.date);
     }
 
-    const renderDateFilter = () => {
-        return (
-            <Calendar value={dateFilter} onChange={onDateFilterChange} placeholder="Registration Date" dateFormat="yy-mm-dd" className="p-column-filter" />
-        );
+    const dateFilterTemplate = (options) => {
+        return <Calendar value={options.value} onChange={(e) => options.filterCallback(e.value, options.index)} dateFormat="mm/dd/yy" placeholder="mm/dd/yyyy" mask="99/99/9999" />
     }
 
-    const onDateFilterChange = (event) => {
-        if (event.value !== null)
-            dt.current.filter(formatDate(event.value), 'date', 'equals');
-        else
-            dt.current.filter(null, 'date', 'equals');
-
-        setDateFilter(event.value);
+    const balanceBodyTemplate = (rowData) => {
+        return formatCurrency(rowData.balance);
     }
 
-    const filterDate = (value, filter) => {
-        if (filter === undefined || filter === null || (typeof filter === 'string' && filter.trim() === '')) {
-            return true;
-        }
-
-        if (value === undefined || value === null) {
-            return false;
-        }
-
-        return value === formatDate(filter);
+    const balanceFilterTemplate = (options) => {
+        return <InputNumber value={options.value} onChange={(e) => options.filterCallback(e.value, options.index)} mode="currency" currency="USD" locale="en-US" />
     }
 
-    const formatDate = (date) => {
-        let month = date.getMonth() + 1;
-        let day = date.getDate();
-
-        if (month < 10) {
-            month = '0' + month;
-        }
-
-        if (day < 10) {
-            day = '0' + day;
-        }
-
-        return date.getFullYear() + '-' + month + '-' + day;
+    const statusBodyTemplate = (rowData) => {
+        return <span className={\`customer-badge status-\${rowData.status}\`}>{rowData.status}</span>;
     }
 
-    const renderStatusFilter = () => {
-        return (
-            <Dropdown value={selectedStatus} options={statuses} onChange={onStatusFilterChange}
-                        itemTemplate={statusItemTemplate} showClear placeholder="Select a Status" className="p-column-filter"/>
-        );
+    const statusFilterTemplate = (options) => {
+        return <Dropdown value={options.value} options={statuses} onChange={(e) => options.filterCallback(e.value, options.index)} itemTemplate={statusItemTemplate} placeholder="Select a Status" className="p-column-filter" showClear />;
     }
 
     const statusItemTemplate = (option) => {
-        return (
-            <span className={classNames('customer-badge', 'status-' + option)}>{option}</span>
-        );
+        return <span className={\`customer-badge status-\${option}\`}>{option}</span>;
     }
 
-    const onStatusFilterChange = (event) => {
-        dt.current.filter(event.value, 'status', 'equals');
-        setSelectedStatus(event.value);
+    const activityBodyTemplate = (rowData) => {
+        return <ProgressBar value={rowData.activity} showValue={false}></ProgressBar>;
+    }
+
+    const activityFilterTemplate = (options) => {
+        return (
+            <>
+                <Slider value={options.value} onChange={(e) => options.filterCallback(e.value)} range className="p-m-3"></Slider>
+                <div className="p-d-flex p-ai-center p-jc-between p-px-2">
+                    <span>{options.value ? options.value[0] : 0}</span>
+                    <span>{options.value ? options.value[1] : 100}</span>
+                </div>
+            </>
+        )
+    }
+
+    const representativeRowFilterTemplate = (options) => {
+        return <MultiSelect value={options.value} options={representatives} itemTemplate={representativesItemTemplate} onChange={(e) => options.filterApplyCallback(e.value)} optionLabel="name" placeholder="Any" className="p-column-filter" maxSelectedLabels={1} />;
+    }
+
+    const statusRowFilterTemplate = (options) => {
+        return <Dropdown value={options.value} options={statuses} onChange={(e) => options.filterApplyCallback(e.value)} itemTemplate={statusItemTemplate} placeholder="Select a Status" className="p-column-filter" showClear />;
+    }
+
+    const actionBodyTemplate = () => {
+        return <Button type="button" icon="pi pi-cog"></Button>;
     }
 
     const header = renderHeader();
-    const representativeFilterElement = renderRepresentativeFilter();
-    const dateFilterElement = renderDateFilter();
-    const statusFilterElement = renderStatusFilter();
 
     return (
         <div className="datatable-doc-demo">
             <div className="card">
-                <DataTable ref={dt} value={customers}
-                    header={header} className="p-datatable-customers" dataKey="id" rowHover globalFilter={globalFilter}
-                    selection={selectedCustomers} onSelectionChange={e => setSelectedCustomers(e.value)}
-                    paginator rows={10} emptyMessage="No customers found" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" rowsPerPageOptions={[10,25,50]}>
-                    <Column selectionMode="multiple" style={{width:'3em'}}/>
-                    <Column field="name" header="Name" body={nameBodyTemplate} sortable filter filterPlaceholder="Search by name" />
-                    <Column sortField="country.name" filterField="country.name" header="Country" body={countryBodyTemplate} sortable filter filterMatchMode="contains" filterPlaceholder="Search by country"/>
-                    <Column sortField="representative.name" filterField="representative.name" header="Representative" body={representativeBodyTemplate} sortable filter filterElement={representativeFilterElement} />
-                    <Column field="date" header="Date" body={dateBodyTemplate} sortable filter filterMatchMode="custom" filterFunction={filterDate} filterElement={dateFilterElement} />
-                    <Column field="status" header="Status" body={statusBodyTemplate} sortable filter filterElement={statusFilterElement} />
-                    <Column field="activity" header="Activity" body={activityBodyTemplate} sortable filter filterMatchMode="gte" filterPlaceholder="Minimum" />
-                    <Column body={actionBodyTemplate} headerStyle={{width: '8em', textAlign: 'center'}} bodyStyle={{textAlign: 'center', overflow: 'visible'}} />
+                <DataTable value={customers} paginator className="p-datatable-customers" header={header} rows={10}
+                    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" rowsPerPageOptions={[10,25,50]}
+                    dataKey="id" rowHover selection={selectedCustomers} onSelectionChange={e => setSelectedCustomers(e.value)}
+                    filters={filters} filterDisplay="menu" loading={loading} responsiveLayout="scroll"
+                    globalFilterFields={['name', 'country.name', 'representative.name', 'balance', 'status']} emptyMessage="No customers found."
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                    <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
+                    <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name" style={{ minWidth: '14rem' }} />
+                    <Column field="country.name" header="Country" sortable filterField="country.name" style={{ minWidth: '14rem' }} body={countryBodyTemplate} filter filterPlaceholder="Search by country" />
+                    <Column header="Agent" sortable sortField="representative.name" filterField="representative" showFilterMatchModes={false} filterMenuStyle={{ width: '14rem' }} style={{ minWidth: '14rem' }} body={representativeBodyTemplate}
+                        filter filterElement={representativeFilterTemplate} />
+                    <Column field="date" header="Date" sortable filterField="date" dataType="date" style={{ minWidth: '8rem' }} body={dateBodyTemplate}
+                        filter filterElement={dateFilterTemplate} />
+                    <Column field="balance" header="Balance" sortable dataType="numeric" style={{ minWidth: '8rem' }} body={balanceBodyTemplate} filter filterElement={balanceFilterTemplate} />
+                    <Column field="status" header="Status" sortable filterMenuStyle={{ width: '14rem' }} style={{ minWidth: '10rem' }} body={statusBodyTemplate} filter filterElement={statusFilterTemplate} />
+                    <Column field="activity" header="Activity" sortable showFilterMatchModes={false} style={{ minWidth: '10rem' }} body={activityBodyTemplate} filter filterElement={activityFilterTemplate} />
+                    <Column headerStyle={{ width: '4rem', textAlign: 'center' }} bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={actionBodyTemplate} />
                 </DataTable>
             </div>
         </div>
@@ -510,27 +472,36 @@ const DataTableDemo = () => {
             'ts': {
                 tabName: 'TS Source',
                 content: `
-import React, { useState, useEffect, useRef } from 'react';
-import { classNames } from 'primereact/utils';
+import React, { useState, useEffect } from 'react';
+import { FilterMatchMode, FilterOperator } from 'primereact/api';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
-import { Button } from 'primereact/button';
-import { CustomerService } from '../service/CustomerService';
 import { Dropdown } from 'primereact/dropdown';
+import { InputNumber } from 'primereact/inputnumber';
+import { Button } from 'primereact/button';
+import { ProgressBar } from 'primereact/progressbar';
 import { Calendar } from 'primereact/calendar';
 import { MultiSelect } from 'primereact/multiselect';
-import { ProgressBar } from 'primereact/progressbar';
+import { Slider } from 'primereact/slider';
+import { CustomerService } from '../service/CustomerService';
 import './DataTableDemo.css';
 
 const DataTableDemo = () => {
     const [customers, setCustomers] = useState(null);
     const [selectedCustomers, setSelectedCustomers] = useState(null);
-    const [globalFilter, setGlobalFilter] = useState(null);
-    const [selectedRepresentatives, setSelectedRepresentatives] = useState(null);
-    const [dateFilter, setDateFilter] = useState(null);
-    const [selectedStatus, setSelectedStatus] = useState(null);
-    const dt = useRef(null);
+    const [filters, setFilters] = useState({
+        'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
+        'name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+        'country.name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+        'representative': { value: null, matchMode: FilterMatchMode.IN },
+        'date': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.DATE_IS }] },
+        'balance': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
+        'status': { operator: FilterOperator.OR, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
+        'activity': { value: null, matchMode: FilterMatchMode.BETWEEN }
+    });
+    const [globalFilterValue, setGlobalFilterValue] = useState('');
+    const [loading, setLoading] = useState(true);
     const representatives = [
         {name: "Amy Elsner", image: 'amyelsner.png'},
         {name: "Anna Fali", image: 'annafali.png'},
@@ -551,191 +522,164 @@ const DataTableDemo = () => {
     const customerService = new CustomerService();
 
     useEffect(() => {
-        customerService.getCustomersLarge().then(data => setCustomers(data));
+        customerService.getCustomersLarge().then(data => { setCustomers(data), setLoading(false) });
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const getCustomers = (data) => {
+        return [...data || []].map(d => {
+            d.date = new Date(d.date);
+            return d;
+        });
+    }
+
+    const formatDate = (value) => {
+        return value.toLocaleDateString('en-US', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+        });
+    }
+
+    const formatCurrency = (value) => {
+        return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    }
+
+    const onGlobalFilterChange = (e) => {
+        const value = e.target.value;
+        let _filters = { ...filters };
+        _filters['global'].value = value;
+
+        setFilters(_filters);
+        setGlobalFilterValue(value);
+    }
 
     const renderHeader = () => {
         return (
-            <div className="table-header">
-                List of Customers
+            <div className="p-d-flex p-jc-between p-ai-center">
+                <h5 className="p-m-0">Customers</h5>
                 <span className="p-input-icon-left">
                     <i className="pi pi-search" />
-                    <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Global Search" />
+                    <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Keyword Search" />
                 </span>
             </div>
-        );
-    }
-
-    const activityBodyTemplate = (rowData) => {
-        return (
-            <React.Fragment>
-                <span className="p-column-title">Activity</span>
-                <ProgressBar value={rowData.activity} showValue={false} />
-            </React.Fragment>
-        );
-    }
-
-    const actionBodyTemplate = () => {
-        return (
-            <Button type="button" icon="pi pi-cog" className="p-button-secondary"></Button>
-        );
-    }
-
-    const statusBodyTemplate = (rowData) => {
-        return (
-            <React.Fragment>
-                <span className="p-column-title">Status</span>
-                <span className={classNames('customer-badge', 'status-' + rowData.status)}>{rowData.status}</span>
-            </React.Fragment>
-        );
-    }
-
-    const nameBodyTemplate = (rowData) => {
-        return (
-            <React.Fragment>
-                <span className="p-column-title">Name</span>
-                {rowData.name}
-            </React.Fragment>
-        );
+        )
     }
 
     const countryBodyTemplate = (rowData) => {
-        let { name, code } = rowData.country;
-
         return (
             <React.Fragment>
-                <span className="p-column-title">Country</span>
-                <img src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={name} className={classNames('flag', 'flag-' + code)} />
-                <span style={{verticalAlign: 'middle', marginLeft: '.5em'}}>{name}</span>
+                <img alt="flag" src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${rowData.country.code}\`} width={30} />
+                <span className="image-text">{rowData.country.name}</span>
             </React.Fragment>
         );
     }
 
     const representativeBodyTemplate = (rowData) => {
-        const src = "showcase/demo/images/avatar/" + rowData.representative.image;
-
+        const representative = rowData.representative;
         return (
             <React.Fragment>
-                <span className="p-column-title">Representative</span>
-                <img alt={rowData.representative.name} src={src} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" style={{verticalAlign: 'middle'}} />
-                <span style={{verticalAlign: 'middle', marginLeft: '.5em'}}>{rowData.representative.name}</span>
+                <img alt={representative.name} src={\`showcase/demo/images/avatar/\${representative.image}\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width={32} style={{ verticalAlign: 'middle' }} />
+                <span className="image-text">{representative.name}</span>
             </React.Fragment>
         );
     }
 
-    const dateBodyTemplate = (rowData) => {
+    const representativeFilterTemplate = (options) => {
         return (
             <React.Fragment>
-                <span className="p-column-title">Date</span>
-                <span>{rowData.date}</span>
+                <div className="p-mb-3 p-text-bold">Agent Picker</div>
+                <MultiSelect value={options.value} options={representatives} itemTemplate={representativesItemTemplate} onChange={(e) => options.filterCallback(e.value)} optionLabel="name" placeholder="Any" className="p-column-filter" />
             </React.Fragment>
         );
     }
 
-    const renderRepresentativeFilter = () => {
-        return (
-            <MultiSelect className="p-column-filter" value={selectedRepresentatives} options={representatives}
-                onChange={onRepresentativeFilterChange} itemTemplate={representativeItemTemplate} placeholder="All" optionLabel="name" optionValue="name" />
-        );
-    }
-
-    const representativeItemTemplate = (option) => {
-        const src = "showcase/demo/images/avatar/" + option.image;
-
+    const representativesItemTemplate = (option) => {
         return (
             <div className="p-multiselect-representative-option">
-                <img alt={option.name} src={src} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" style={{verticalAlign: 'middle'}} />
-                <span style={{verticalAlign: 'middle', marginLeft: '.5em'}}>{option.name}</span>
+                <img alt={option.name} src={\`showcase/demo/images/avatar/\${option.image}\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width={32} style={{ verticalAlign: 'middle' }} />
+                <span className="image-text">{option.name}</span>
             </div>
         );
     }
 
-    const onRepresentativeFilterChange = (event) => {
-        dt.current.filter(event.value, 'representative.name', 'in');
-        setSelectedRepresentatives(event.value);
+    const dateBodyTemplate = (rowData) => {
+        return formatDate(rowData.date);
     }
 
-    const renderDateFilter = () => {
-        return (
-            <Calendar value={dateFilter} onChange={onDateFilterChange} placeholder="Registration Date" dateFormat="yy-mm-dd" className="p-column-filter" />
-        );
+    const dateFilterTemplate = (options) => {
+        return <Calendar value={options.value} onChange={(e) => options.filterCallback(e.value, options.index)} dateFormat="mm/dd/yy" placeholder="mm/dd/yyyy" mask="99/99/9999" />
     }
 
-    const onDateFilterChange = (event) => {
-        if (event.value !== null)
-            dt.current.filter(formatDate(event.value), 'date', 'equals');
-        else
-            dt.current.filter(null, 'date', 'equals');
-
-        setDateFilter(event.value);
+    const balanceBodyTemplate = (rowData) => {
+        return formatCurrency(rowData.balance);
     }
 
-    const filterDate = (value, filter) => {
-        if (filter === undefined || filter === null || (typeof filter === 'string' && filter.trim() === '')) {
-            return true;
-        }
-
-        if (value === undefined || value === null) {
-            return false;
-        }
-
-        return value === formatDate(filter);
+    const balanceFilterTemplate = (options) => {
+        return <InputNumber value={options.value} onChange={(e) => options.filterCallback(e.value, options.index)} mode="currency" currency="USD" locale="en-US" />
     }
 
-    const formatDate = (date) => {
-        let month = date.getMonth() + 1;
-        let day = date.getDate();
-
-        if (month < 10) {
-            month = '0' + month;
-        }
-
-        if (day < 10) {
-            day = '0' + day;
-        }
-
-        return date.getFullYear() + '-' + month + '-' + day;
+    const statusBodyTemplate = (rowData) => {
+        return <span className={\`customer-badge status-\${rowData.status}\`}>{rowData.status}</span>;
     }
 
-    const renderStatusFilter = () => {
-        return (
-            <Dropdown value={selectedStatus} options={statuses} onChange={onStatusFilterChange}
-                        itemTemplate={statusItemTemplate} showClear placeholder="Select a Status" className="p-column-filter"/>
-        );
+    const statusFilterTemplate = (options) => {
+        return <Dropdown value={options.value} options={statuses} onChange={(e) => options.filterCallback(e.value, options.index)} itemTemplate={statusItemTemplate} placeholder="Select a Status" className="p-column-filter" showClear />;
     }
 
     const statusItemTemplate = (option) => {
-        return (
-            <span className={classNames('customer-badge', 'status-' + option)}>{option}</span>
-        );
+        return <span className={\`customer-badge status-\${option}\`}>{option}</span>;
     }
 
-    const onStatusFilterChange = (event) => {
-        dt.current.filter(event.value, 'status', 'equals');
-        setSelectedStatus(event.value);
+    const activityBodyTemplate = (rowData) => {
+        return <ProgressBar value={rowData.activity} showValue={false}></ProgressBar>;
+    }
+
+    const activityFilterTemplate = (options) => {
+        return (
+            <>
+                <Slider value={options.value} onChange={(e) => options.filterCallback(e.value)} range className="p-m-3"></Slider>
+                <div className="p-d-flex p-ai-center p-jc-between p-px-2">
+                    <span>{options.value ? options.value[0] : 0}</span>
+                    <span>{options.value ? options.value[1] : 100}</span>
+                </div>
+            </>
+        )
+    }
+
+    const representativeRowFilterTemplate = (options) => {
+        return <MultiSelect value={options.value} options={representatives} itemTemplate={representativesItemTemplate} onChange={(e) => options.filterApplyCallback(e.value)} optionLabel="name" placeholder="Any" className="p-column-filter" maxSelectedLabels={1} />;
+    }
+
+    const statusRowFilterTemplate = (options) => {
+        return <Dropdown value={options.value} options={statuses} onChange={(e) => options.filterApplyCallback(e.value)} itemTemplate={statusItemTemplate} placeholder="Select a Status" className="p-column-filter" showClear />;
+    }
+
+    const actionBodyTemplate = () => {
+        return <Button type="button" icon="pi pi-cog"></Button>;
     }
 
     const header = renderHeader();
-    const representativeFilterElement = renderRepresentativeFilter();
-    const dateFilterElement = renderDateFilter();
-    const statusFilterElement = renderStatusFilter();
 
     return (
         <div className="datatable-doc-demo">
             <div className="card">
-                <DataTable ref={dt} value={customers}
-                    header={header} className="p-datatable-customers" dataKey="id" rowHover globalFilter={globalFilter}
-                    selection={selectedCustomers} onSelectionChange={e => setSelectedCustomers(e.value)}
-                    paginator rows={10} emptyMessage="No customers found" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" rowsPerPageOptions={[10,25,50]}>
-                    <Column selectionMode="multiple" style={{width:'3em'}}/>
-                    <Column field="name" header="Name" body={nameBodyTemplate} sortable filter filterPlaceholder="Search by name" />
-                    <Column sortField="country.name" filterField="country.name" header="Country" body={countryBodyTemplate} sortable filter filterMatchMode="contains" filterPlaceholder="Search by country"/>
-                    <Column sortField="representative.name" filterField="representative.name" header="Representative" body={representativeBodyTemplate} sortable filter filterElement={representativeFilterElement} />
-                    <Column field="date" header="Date" body={dateBodyTemplate} sortable filter filterMatchMode="custom" filterFunction={filterDate} filterElement={dateFilterElement} />
-                    <Column field="status" header="Status" body={statusBodyTemplate} sortable filter filterElement={statusFilterElement} />
-                    <Column field="activity" header="Activity" body={activityBodyTemplate} sortable filter filterMatchMode="gte" filterPlaceholder="Minimum" />
-                    <Column body={actionBodyTemplate} headerStyle={{width: '8em', textAlign: 'center'}} bodyStyle={{textAlign: 'center', overflow: 'visible'}} />
+                <DataTable value={customers} paginator className="p-datatable-customers" header={header} rows={10}
+                    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" rowsPerPageOptions={[10,25,50]}
+                    dataKey="id" rowHover selection={selectedCustomers} onSelectionChange={e => setSelectedCustomers(e.value)}
+                    filters={filters} filterDisplay="menu" loading={loading} responsiveLayout="scroll"
+                    globalFilterFields={['name', 'country.name', 'representative.name', 'balance', 'status']} emptyMessage="No customers found."
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                    <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
+                    <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name" style={{ minWidth: '14rem' }} />
+                    <Column field="country.name" header="Country" sortable filterField="country.name" style={{ minWidth: '14rem' }} body={countryBodyTemplate} filter filterPlaceholder="Search by country" />
+                    <Column header="Agent" sortable sortField="representative.name" filterField="representative" showFilterMatchModes={false} filterMenuStyle={{ width: '14rem' }} style={{ minWidth: '14rem' }} body={representativeBodyTemplate}
+                        filter filterElement={representativeFilterTemplate} />
+                    <Column field="date" header="Date" sortable filterField="date" dataType="date" style={{ minWidth: '8rem' }} body={dateBodyTemplate}
+                        filter filterElement={dateFilterTemplate} />
+                    <Column field="balance" header="Balance" sortable dataType="numeric" style={{ minWidth: '8rem' }} body={balanceBodyTemplate} filter filterElement={balanceFilterTemplate} />
+                    <Column field="status" header="Status" sortable filterMenuStyle={{ width: '14rem' }} style={{ minWidth: '10rem' }} body={statusBodyTemplate} filter filterElement={statusFilterTemplate} />
+                    <Column field="activity" header="Activity" sortable showFilterMatchModes={false} style={{ minWidth: '10rem' }} body={activityBodyTemplate} filter filterElement={activityFilterTemplate} />
+                    <Column headerStyle={{ width: '4rem', textAlign: 'center' }} bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={actionBodyTemplate} />
                 </DataTable>
             </div>
         </div>
@@ -753,35 +697,45 @@ const DataTableDemo = () => {
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/dropdown/dropdown.min.js"></script>
         <script src="https://unpkg.com/primereact/inputtext/inputtext.min.js"></script>
+        <script src="https://unpkg.com/primereact/inputnumber/inputnumber.min.js"></script>
         <script src="https://unpkg.com/primereact/paginator/paginator.min.js"></script>
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>
         <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>
-        <script src="https://unpkg.com/primereact/inputtext/inputtext.min.js"></script>
         <script src="https://unpkg.com/primereact/button/button.min.js"></script>
         <script src="https://unpkg.com/primereact/dropdown/dropdown.min.js"></script>
         <script src="https://unpkg.com/primereact/calendar/calendar.min.js"></script>
         <script src="https://unpkg.com/primereact/multiselect/multiselect.min.js"></script>
-        <script src="https://unpkg.com/primereact/progressbar/progressbar.min.js"></script>`,
+        <script src="https://unpkg.com/primereact/progressbar/progressbar.min.js"></script>
+        <script src="https://unpkg.com/primereact/slider/slider.min.js"></script>`,
                 content: `
-const { useEffect, useState, useRef } = React;
-const { classNames } = primereact.core;
+const { useEffect, useState } = React;
+const { FilterMatchMode, FilterOperator } = primereact.api;
 const { Column } = primereact.column;
 const { DataTable } = primereact.datatable;
 const { InputText } = primereact.inputtext;
+const { InputNumber } = primereact.inputnumber;
 const { Button } = primereact.button;
 const { Dropdown } = primereact.dropdown;
 const { Calendar } = primereact.calendar;
 const { MultiSelect } = primereact.multiselect;
 const { ProgressBar } = primereact.progressbar;
+const { Slider } = primereact.slider;
 
 const DataTableDemo = () => {
     const [customers, setCustomers] = useState(null);
     const [selectedCustomers, setSelectedCustomers] = useState(null);
-    const [globalFilter, setGlobalFilter] = useState(null);
-    const [selectedRepresentatives, setSelectedRepresentatives] = useState(null);
-    const [dateFilter, setDateFilter] = useState(null);
-    const [selectedStatus, setSelectedStatus] = useState(null);
-    const dt = useRef(null);
+    const [filters, setFilters] = useState({
+        'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
+        'name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+        'country.name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+        'representative': { value: null, matchMode: FilterMatchMode.IN },
+        'date': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.DATE_IS }] },
+        'balance': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
+        'status': { operator: FilterOperator.OR, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
+        'activity': { value: null, matchMode: FilterMatchMode.BETWEEN }
+    });
+    const [globalFilterValue, setGlobalFilterValue] = useState('');
+    const [loading, setLoading] = useState(true);
     const representatives = [
         {name: "Amy Elsner", image: 'amyelsner.png'},
         {name: "Anna Fali", image: 'annafali.png'},
@@ -802,191 +756,164 @@ const DataTableDemo = () => {
     const customerService = new CustomerService();
 
     useEffect(() => {
-        customerService.getCustomersLarge().then(data => setCustomers(data));
+        customerService.getCustomersLarge().then(data => { setCustomers(data), setLoading(false) });
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const getCustomers = (data) => {
+        return [...data || []].map(d => {
+            d.date = new Date(d.date);
+            return d;
+        });
+    }
+
+    const formatDate = (value) => {
+        return value.toLocaleDateString('en-US', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+        });
+    }
+
+    const formatCurrency = (value) => {
+        return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    }
+
+    const onGlobalFilterChange = (e) => {
+        const value = e.target.value;
+        let _filters = { ...filters };
+        _filters['global'].value = value;
+
+        setFilters(_filters);
+        setGlobalFilterValue(value);
+    }
 
     const renderHeader = () => {
         return (
-            <div className="table-header">
-                List of Customers
+            <div className="p-d-flex p-jc-between p-ai-center">
+                <h5 className="p-m-0">Customers</h5>
                 <span className="p-input-icon-left">
                     <i className="pi pi-search" />
-                    <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Global Search" />
+                    <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Keyword Search" />
                 </span>
             </div>
-        );
-    }
-
-    const activityBodyTemplate = (rowData) => {
-        return (
-            <React.Fragment>
-                <span className="p-column-title">Activity</span>
-                <ProgressBar value={rowData.activity} showValue={false} />
-            </React.Fragment>
-        );
-    }
-
-    const actionBodyTemplate = () => {
-        return (
-            <Button type="button" icon="pi pi-cog" className="p-button-secondary"></Button>
-        );
-    }
-
-    const statusBodyTemplate = (rowData) => {
-        return (
-            <React.Fragment>
-                <span className="p-column-title">Status</span>
-                <span className={classNames('customer-badge', 'status-' + rowData.status)}>{rowData.status}</span>
-            </React.Fragment>
-        );
-    }
-
-    const nameBodyTemplate = (rowData) => {
-        return (
-            <React.Fragment>
-                <span className="p-column-title">Name</span>
-                {rowData.name}
-            </React.Fragment>
-        );
+        )
     }
 
     const countryBodyTemplate = (rowData) => {
-        let { name, code } = rowData.country;
-
         return (
             <React.Fragment>
-                <span className="p-column-title">Country</span>
-                <img src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={name} className={classNames('flag', 'flag-' + code)} />
-                <span style={{verticalAlign: 'middle', marginLeft: '.5em'}}>{name}</span>
+                <img alt="flag" src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${rowData.country.code}\`} width={30} />
+                <span className="image-text">{rowData.country.name}</span>
             </React.Fragment>
         );
     }
 
     const representativeBodyTemplate = (rowData) => {
-        const src = "showcase/demo/images/avatar/" + rowData.representative.image;
-
+        const representative = rowData.representative;
         return (
             <React.Fragment>
-                <span className="p-column-title">Representative</span>
-                <img alt={rowData.representative.name} src={src} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" style={{verticalAlign: 'middle'}} />
-                <span style={{verticalAlign: 'middle', marginLeft: '.5em'}}>{rowData.representative.name}</span>
+                <img alt={representative.name} src={\`showcase/demo/images/avatar/\${representative.image}\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width={32} style={{ verticalAlign: 'middle' }} />
+                <span className="image-text">{representative.name}</span>
             </React.Fragment>
         );
     }
 
-    const dateBodyTemplate = (rowData) => {
+    const representativeFilterTemplate = (options) => {
         return (
             <React.Fragment>
-                <span className="p-column-title">Date</span>
-                <span>{rowData.date}</span>
+                <div className="p-mb-3 p-text-bold">Agent Picker</div>
+                <MultiSelect value={options.value} options={representatives} itemTemplate={representativesItemTemplate} onChange={(e) => options.filterCallback(e.value)} optionLabel="name" placeholder="Any" className="p-column-filter" />
             </React.Fragment>
         );
     }
 
-    const renderRepresentativeFilter = () => {
-        return (
-            <MultiSelect className="p-column-filter" value={selectedRepresentatives} options={representatives}
-                onChange={onRepresentativeFilterChange} itemTemplate={representativeItemTemplate} placeholder="All" optionLabel="name" optionValue="name" />
-        );
-    }
-
-    const representativeItemTemplate = (option) => {
-        const src = "showcase/demo/images/avatar/" + option.image;
-
+    const representativesItemTemplate = (option) => {
         return (
             <div className="p-multiselect-representative-option">
-                <img alt={option.name} src={src} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" style={{verticalAlign: 'middle'}} />
-                <span style={{verticalAlign: 'middle', marginLeft: '.5em'}}>{option.name}</span>
+                <img alt={option.name} src={\`showcase/demo/images/avatar/\${option.image}\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width={32} style={{ verticalAlign: 'middle' }} />
+                <span className="image-text">{option.name}</span>
             </div>
         );
     }
 
-    const onRepresentativeFilterChange = (event) => {
-        dt.current.filter(event.value, 'representative.name', 'in');
-        setSelectedRepresentatives(event.value);
+    const dateBodyTemplate = (rowData) => {
+        return formatDate(rowData.date);
     }
 
-    const renderDateFilter = () => {
-        return (
-            <Calendar value={dateFilter} onChange={onDateFilterChange} placeholder="Registration Date" dateFormat="yy-mm-dd" className="p-column-filter" />
-        );
+    const dateFilterTemplate = (options) => {
+        return <Calendar value={options.value} onChange={(e) => options.filterCallback(e.value, options.index)} dateFormat="mm/dd/yy" placeholder="mm/dd/yyyy" mask="99/99/9999" />
     }
 
-    const onDateFilterChange = (event) => {
-        if (event.value !== null)
-            dt.current.filter(formatDate(event.value), 'date', 'equals');
-        else
-            dt.current.filter(null, 'date', 'equals');
-
-        setDateFilter(event.value);
+    const balanceBodyTemplate = (rowData) => {
+        return formatCurrency(rowData.balance);
     }
 
-    const filterDate = (value, filter) => {
-        if (filter === undefined || filter === null || (typeof filter === 'string' && filter.trim() === '')) {
-            return true;
-        }
-
-        if (value === undefined || value === null) {
-            return false;
-        }
-
-        return value === formatDate(filter);
+    const balanceFilterTemplate = (options) => {
+        return <InputNumber value={options.value} onChange={(e) => options.filterCallback(e.value, options.index)} mode="currency" currency="USD" locale="en-US" />
     }
 
-    const formatDate = (date) => {
-        let month = date.getMonth() + 1;
-        let day = date.getDate();
-
-        if (month < 10) {
-            month = '0' + month;
-        }
-
-        if (day < 10) {
-            day = '0' + day;
-        }
-
-        return date.getFullYear() + '-' + month + '-' + day;
+    const statusBodyTemplate = (rowData) => {
+        return <span className={\`customer-badge status-\${rowData.status}\`}>{rowData.status}</span>;
     }
 
-    const renderStatusFilter = () => {
-        return (
-            <Dropdown value={selectedStatus} options={statuses} onChange={onStatusFilterChange}
-                        itemTemplate={statusItemTemplate} showClear placeholder="Select a Status" className="p-column-filter"/>
-        );
+    const statusFilterTemplate = (options) => {
+        return <Dropdown value={options.value} options={statuses} onChange={(e) => options.filterCallback(e.value, options.index)} itemTemplate={statusItemTemplate} placeholder="Select a Status" className="p-column-filter" showClear />;
     }
 
     const statusItemTemplate = (option) => {
-        return (
-            <span className={classNames('customer-badge', 'status-' + option)}>{option}</span>
-        );
+        return <span className={\`customer-badge status-\${option}\`}>{option}</span>;
     }
 
-    const onStatusFilterChange = (event) => {
-        dt.current.filter(event.value, 'status', 'equals');
-        setSelectedStatus(event.value);
+    const activityBodyTemplate = (rowData) => {
+        return <ProgressBar value={rowData.activity} showValue={false}></ProgressBar>;
+    }
+
+    const activityFilterTemplate = (options) => {
+        return (
+            <>
+                <Slider value={options.value} onChange={(e) => options.filterCallback(e.value)} range className="p-m-3"></Slider>
+                <div className="p-d-flex p-ai-center p-jc-between p-px-2">
+                    <span>{options.value ? options.value[0] : 0}</span>
+                    <span>{options.value ? options.value[1] : 100}</span>
+                </div>
+            </>
+        )
+    }
+
+    const representativeRowFilterTemplate = (options) => {
+        return <MultiSelect value={options.value} options={representatives} itemTemplate={representativesItemTemplate} onChange={(e) => options.filterApplyCallback(e.value)} optionLabel="name" placeholder="Any" className="p-column-filter" maxSelectedLabels={1} />;
+    }
+
+    const statusRowFilterTemplate = (options) => {
+        return <Dropdown value={options.value} options={statuses} onChange={(e) => options.filterApplyCallback(e.value)} itemTemplate={statusItemTemplate} placeholder="Select a Status" className="p-column-filter" showClear />;
+    }
+
+    const actionBodyTemplate = () => {
+        return <Button type="button" icon="pi pi-cog"></Button>;
     }
 
     const header = renderHeader();
-    const representativeFilterElement = renderRepresentativeFilter();
-    const dateFilterElement = renderDateFilter();
-    const statusFilterElement = renderStatusFilter();
 
     return (
         <div className="datatable-doc-demo">
             <div className="card">
-                <DataTable ref={dt} value={customers}
-                    header={header} className="p-datatable-customers" dataKey="id" rowHover globalFilter={globalFilter}
-                    selection={selectedCustomers} onSelectionChange={e => setSelectedCustomers(e.value)}
-                    paginator rows={10} emptyMessage="No customers found" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" rowsPerPageOptions={[10,25,50]}>
-                    <Column selectionMode="multiple" style={{width:'3em'}}/>
-                    <Column field="name" header="Name" body={nameBodyTemplate} sortable filter filterPlaceholder="Search by name" />
-                    <Column sortField="country.name" filterField="country.name" header="Country" body={countryBodyTemplate} sortable filter filterMatchMode="contains" filterPlaceholder="Search by country"/>
-                    <Column sortField="representative.name" filterField="representative.name" header="Representative" body={representativeBodyTemplate} sortable filter filterElement={representativeFilterElement} />
-                    <Column field="date" header="Date" body={dateBodyTemplate} sortable filter filterMatchMode="custom" filterFunction={filterDate} filterElement={dateFilterElement} />
-                    <Column field="status" header="Status" body={statusBodyTemplate} sortable filter filterElement={statusFilterElement} />
-                    <Column field="activity" header="Activity" body={activityBodyTemplate} sortable filter filterMatchMode="gte" filterPlaceholder="Minimum" />
-                    <Column body={actionBodyTemplate} headerStyle={{width: '8em', textAlign: 'center'}} bodyStyle={{textAlign: 'center', overflow: 'visible'}} />
+                <DataTable value={customers} paginator className="p-datatable-customers" header={header} rows={10}
+                    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" rowsPerPageOptions={[10,25,50]}
+                    dataKey="id" rowHover selection={selectedCustomers} onSelectionChange={e => setSelectedCustomers(e.value)}
+                    filters={filters} filterDisplay="menu" loading={loading} responsiveLayout="scroll"
+                    globalFilterFields={['name', 'country.name', 'representative.name', 'balance', 'status']} emptyMessage="No customers found."
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                    <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
+                    <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name" style={{ minWidth: '14rem' }} />
+                    <Column field="country.name" header="Country" sortable filterField="country.name" style={{ minWidth: '14rem' }} body={countryBodyTemplate} filter filterPlaceholder="Search by country" />
+                    <Column header="Agent" sortable sortField="representative.name" filterField="representative" showFilterMatchModes={false} filterMenuStyle={{ width: '14rem' }} style={{ minWidth: '14rem' }} body={representativeBodyTemplate}
+                        filter filterElement={representativeFilterTemplate} />
+                    <Column field="date" header="Date" sortable filterField="date" dataType="date" style={{ minWidth: '8rem' }} body={dateBodyTemplate}
+                        filter filterElement={dateFilterTemplate} />
+                    <Column field="balance" header="Balance" sortable dataType="numeric" style={{ minWidth: '8rem' }} body={balanceBodyTemplate} filter filterElement={balanceFilterTemplate} />
+                    <Column field="status" header="Status" sortable filterMenuStyle={{ width: '14rem' }} style={{ minWidth: '10rem' }} body={statusBodyTemplate} filter filterElement={statusFilterTemplate} />
+                    <Column field="activity" header="Activity" sortable showFilterMatchModes={false} style={{ minWidth: '10rem' }} body={activityBodyTemplate} filter filterElement={activityFilterTemplate} />
+                    <Column headerStyle={{ width: '4rem', textAlign: 'center' }} bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={actionBodyTemplate} />
                 </DataTable>
             </div>
         </div>
@@ -1002,86 +929,32 @@ const DataTableDemo = () => {
 .datatable-doc-demo .p-paginator .p-paginator-current {
     margin-left: auto;
 }
-
 .datatable-doc-demo .p-progressbar {
-    height: .5rem;
-    background-color: #D8DADC;
+    height: 0.5rem;
+    background-color: #d8dadc;
 }
-
 .datatable-doc-demo .p-progressbar .p-progressbar-value {
-    background-color: #607D8B;
+    background-color: #607d8b;
 }
-
-.datatable-doc-demo .table-header {
-    display: flex;
-    justify-content: space-between;
-}
-
 .datatable-doc-demo .p-datepicker {
     min-width: 25rem;
 }
-
 .datatable-doc-demo .p-datepicker td {
     font-weight: 400;
 }
-
 .datatable-doc-demo .p-datatable.p-datatable-customers .p-datatable-header {
     padding: 1rem;
     text-align: left;
     font-size: 1.5rem;
 }
-
 .datatable-doc-demo .p-datatable.p-datatable-customers .p-paginator {
     padding: 1rem;
 }
-
 .datatable-doc-demo .p-datatable.p-datatable-customers .p-datatable-thead > tr > th {
     text-align: left;
 }
-
-.datatable-doc-demo .p-datatable.p-datatable-customers .p-datatable-tbody > tr > td {
-    cursor: auto;
-}
-
 .datatable-doc-demo .p-datatable.p-datatable-customers .p-dropdown-label:not(.p-placeholder) {
     text-transform: uppercase;
-}
-
-.datatable-doc-demo .p-datatable-customers .p-datatable-tbody > tr > td .p-column-title {
-    display: none;
-}
-
-@media screen and (max-width: 960px) {
-    .datatable-doc-demo .p-datatable.p-datatable-customers .p-datatable-thead > tr > th,
-    .datatable-doc-demo .p-datatable.p-datatable-customers .p-datatable-tfoot > tr > td {
-        display: none !important;
-    }
-
-    .datatable-doc-demo .p-datatable.p-datatable-customers .p-datatable-tbody > tr {
-        border-bottom: 1px solid var(--layer-2);
-    }
-
-    .datatable-doc-demo .p-datatable.p-datatable-customers .p-datatable-tbody > tr > td {
-        text-align: left;
-        display: block;
-        border: 0 none !important;
-        width: 100% !important;
-        float: left;
-        clear: left;
-        border: 0 none;
-    }
-
-    .datatable-doc-demo .p-datatable.p-datatable-customers .p-datatable-tbody > tr > td .p-column-title {
-        padding: .4rem;
-        min-width: 30%;
-        display: inline-block;
-        margin: -.4rem 1rem -.4rem -.4rem;
-        font-weight: bold;
-    }
-
-    .datatable-doc-demo .p-datatable.p-datatable-customers .p-datatable-tbody > tr > td .p-progressbar {
-        margin-top: .5rem;
-    }
 }
                 `
             }
@@ -1411,43 +1284,43 @@ export const DataTableDemo = () => {
                             <td>Function to provide the cell editor input.</td>
                         </tr>
                         <tr>
-                            <td>editorValidator</td>
+                            <td>cellEditValidator</td>
                             <td>function</td>
                             <td>null</td>
                             <td>Validator function to validate the cell input value.</td>
                         </tr>
                         <tr>
-                            <td>editorValidatorEvent</td>
+                            <td>cellEditValidatorEvent</td>
                             <td>string</td>
                             <td>click</td>
                             <td>Event to trigger the validation, possible values are "click" and "blur".</td>
                         </tr>
                         <tr>
-                            <td>onBeforeEditorShow</td>
+                            <td>onBeforeCellEditShow</td>
                             <td>function</td>
                             <td>null</td>
                             <td>Callback to invoke before the cell editor is shown.</td>
                         </tr>
                         <tr>
-                            <td>onBeforeEditorHide</td>
+                            <td>onBeforeCellEditHide</td>
                             <td>function</td>
                             <td>null</td>
                             <td>Callback to invoke before the cell editor is hidden.</td>
                         </tr>
                         <tr>
-                            <td>onEditorInit</td>
+                            <td>onCellEditInit</td>
                             <td>function</td>
                             <td>null</td>
                             <td>Callback to invoke when cell edit is initiated.</td>
                         </tr>
                         <tr>
-                            <td>onEditorSubmit</td>
+                            <td>onCellEditComplete</td>
                             <td>function</td>
                             <td>null</td>
                             <td>Callback to execute when editor is submitted.</td>
                         </tr>
                         <tr>
-                            <td>onEditorCancel</td>
+                            <td>onCellEditCancel</td>
                             <td>function</td>
                             <td>null</td>
                             <td>Callback to execute when editor is cancelled.</td>
@@ -2173,13 +2046,13 @@ const statusEditor = (props) => {
 </CodeHighlight>
 
             <p>Clicking outside the cell or hitting enter key closes the cell, however this may not be desirable if the input is invalid. In order
-            to decide whether to keep the cell open or not, provide a <i>editorValidator</i> function that validates the value. Optionally <i>onEditorSubmit</i> and <i>onEditorCancel</i>
+            to decide whether to keep the cell open or not, provide a <i>cellEditValidator</i> function that validates the value. Optionally <i>onCellEditComplete</i> and <i>onCellEditCancel</i>
             events are available at the column component to provide callbacks whenever an editor is submitted or cancelled.</p>
 
 <CodeHighlight>
 {`
 <DataTable value={products}>
-    <Column field="code" header="Code" editor={codeEditor} editorValidator={requiredValidator} />
+    <Column field="code" header="Code" editor={codeEditor} cellEditValidator={requiredValidator} />
     <Column field="name" header="Name" editor={nameEditor} />
     <Column field="price" header="Price" editor={priceDateEditor} />
 </DataTable>
