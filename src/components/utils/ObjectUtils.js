@@ -123,6 +123,10 @@ export default class ObjectUtils {
         return this.isFunction(obj) ? obj(...params) : obj;
     }
 
+    static getPropValue(obj, ...params) {
+        return this.isFunction(obj) ? obj(...params) : obj;
+    }
+
     static getRefElement(ref) {
         if (ref) {
             return typeof ref === 'object' && ref.hasOwnProperty('current') ? ref.current : ref;
@@ -164,7 +168,7 @@ export default class ObjectUtils {
         return (
             value === null || value === undefined || value === '' ||
             (Array.isArray(value) && value.length === 0) ||
-            (typeof value === 'object' && Object.keys(value).length === 0)
+            (!(value instanceof Date) && typeof value === 'object' && Object.keys(value).length === 0)
         );
     }
 
