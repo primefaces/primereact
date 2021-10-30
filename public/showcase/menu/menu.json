@@ -529,6 +529,7 @@
                     "meta": [
                         "datatable"
                     ],
+                    "badge": "updated",
                     "children": [
                         {
                             "name": "Documentation",
@@ -626,6 +627,13 @@
                             "to": "/datatable/scroll",
                             "meta": [
                                 "scroll"
+                            ]
+                        },
+                        {
+                            "name": "FlexScroll",
+                            "to": "/datatable/flexscroll",
+                            "meta": [
+                                "flexscroll"
                             ]
                         },
                         {
