@@ -87,7 +87,7 @@ export class TreeTableEditDemo extends Component {
                     <div className="card">
                         <TreeTable value={this.state.nodes}>
                             <Column field="name" header="Name" expander style={{ height: '3.5em' }}></Column>
-                            <Column field="size" header="Size" editor={this.sizeEditor} editorValidator={this.requiredValidator} style={{ height: '3.5em' }}></Column>
+                            <Column field="size" header="Size" editor={this.sizeEditor} cellEditValidator={this.requiredValidator} style={{ height: '3.5em' }}></Column>
                             <Column field="type" header="Type" editor={this.typeEditor} style={{ height: '3.5em' }}></Column>
                         </TreeTable>
                     </div>
@@ -184,7 +184,7 @@ export class TreeTableEditDemo extends Component {
                 <div className="card">
                     <TreeTable value={this.state.nodes}>
                         <Column field="name" header="Name" expander style={{ height: '3.5em' }}></Column>
-                        <Column field="size" header="Size" editor={this.sizeEditor} editorValidator={this.requiredValidator} style={{ height: '3.5em' }}></Column>
+                        <Column field="size" header="Size" editor={this.sizeEditor} cellEditValidator={this.requiredValidator} style={{ height: '3.5em' }}></Column>
                         <Column field="type" header="Type" editor={this.typeEditor} style={{ height: '3.5em' }}></Column>
                     </TreeTable>
                 </div>
@@ -260,7 +260,7 @@ const TreeTableEditDemo = () => {
             <div className="card">
                 <TreeTable value={nodes}>
                     <Column field="name" header="Name" expander style={{ height: '3.5em' }}></Column>
-                    <Column field="size" header="Size" editor={sizeEditor} editorValidator={requiredValidator} style={{ height: '3.5em' }}></Column>
+                    <Column field="size" header="Size" editor={sizeEditor} cellEditValidator={requiredValidator} style={{ height: '3.5em' }}></Column>
                     <Column field="type" header="Type" editor={typeEditor} style={{ height: '3.5em' }}></Column>
                 </TreeTable>
             </div>
@@ -335,7 +335,7 @@ const TreeTableEditDemo = () => {
             <div className="card">
                 <TreeTable value={nodes}>
                     <Column field="name" header="Name" expander style={{ height: '3.5em' }}></Column>
-                    <Column field="size" header="Size" editor={sizeEditor} editorValidator={requiredValidator} style={{ height: '3.5em' }}></Column>
+                    <Column field="size" header="Size" editor={sizeEditor} cellEditValidator={requiredValidator} style={{ height: '3.5em' }}></Column>
                     <Column field="type" header="Type" editor={typeEditor} style={{ height: '3.5em' }}></Column>
                 </TreeTable>
             </div>
@@ -417,7 +417,7 @@ const TreeTableEditDemo = () => {
             <div className="card">
                 <TreeTable value={nodes}>
                     <Column field="name" header="Name" expander style={{ height: '3.5em' }}></Column>
-                    <Column field="size" header="Size" editor={sizeEditor} editorValidator={requiredValidator} style={{ height: '3.5em' }}></Column>
+                    <Column field="size" header="Size" editor={sizeEditor} cellEditValidator={requiredValidator} style={{ height: '3.5em' }}></Column>
                     <Column field="type" header="Type" editor={typeEditor} style={{ height: '3.5em' }}></Column>
                 </TreeTable>
             </div>
