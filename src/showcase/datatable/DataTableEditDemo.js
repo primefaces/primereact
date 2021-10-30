@@ -22,6 +22,7 @@ export class DataTableEditDemo extends Component {
             products1: null,
             products2: null,
             products3: null,
+            products4: null,
             editingRows: {}
         };
 
@@ -52,6 +53,7 @@ export class DataTableEditDemo extends Component {
         this.fetchProductData('products1');
         this.fetchProductData('products2');
         this.fetchProductData('products3');
+        this.fetchProductData('products4');
     }
 
     fetchProductData(productStateKey) {
@@ -222,6 +224,18 @@ export class DataTableEditDemo extends Component {
                             </DataTable>
                         </div>
                     </div>
+
+                    <div className="card p-fluid">
+                        <h5>Cell Editing with Sorting and Filter</h5>
+                        <DataTable value={this.state.products4} editMode="cell" className="editable-cells-table" filterDisplay="row" responsiveLayout="scroll">
+                            {
+                                this.columns.map(({ field, header }) => {
+                                    return <Column key={field} field={field} header={header} filter sortable style={{ width: '25%' }} body={field === 'price' && this.priceBodyTemplate}
+                                        editor={(options) => this.cellEditor(options)} onCellEditComplete={this.onCellEditComplete} />
+                                })
+                            }
+                        </DataTable>
+                    </div>
                 </div>
 
                 <DataTableEditDemoDoc></DataTableEditDemoDoc>
@@ -259,6 +273,7 @@ export class DataTableEditDemo extends Component {
             products1: null,
             products2: null,
             products3: null,
+            products4: null,
             editingRows: {}
         };
 
@@ -289,6 +304,7 @@ export class DataTableEditDemo extends Component {
         this.fetchProductData('products1');
         this.fetchProductData('products2');
         this.fetchProductData('products3');
+        this.fetchProductData('products4');
     }
 
     fetchProductData(productStateKey) {
@@ -450,6 +466,18 @@ export class DataTableEditDemo extends Component {
                         </DataTable>
                     </div>
                 </div>
+
+                <div className="card p-fluid">
+                    <h5>Cell Editing with Sorting and Filter</h5>
+                    <DataTable value={this.state.products4} editMode="cell" className="editable-cells-table" filterDisplay="row" responsiveLayout="scroll">
+                        {
+                            this.columns.map(({ field, header }) => {
+                                return <Column key={field} field={field} header={header} filter sortable style={{ width: '25%' }} body={field === 'price' && this.priceBodyTemplate}
+                                    editor={(options) => this.cellEditor(options)} onCellEditComplete={this.onCellEditComplete} />
+                            })
+                        }
+                    </DataTable>
+                </div>
             </div>
         );
     }
@@ -474,6 +502,7 @@ const DataTableEditDemo = () => {
     const [products1, setProducts1] = useState(null);
     const [products2, setProducts2] = useState(null);
     const [products3, setProducts3] = useState(null);
+    const [products4, setProducts4] = useState(null);
     const [editingRows, setEditingRows] = useState({});
     const toast = useRef(null);
 
@@ -493,7 +522,8 @@ const DataTableEditDemo = () => {
     const dataTableFuncMap = {
         'products1': setProducts1,
         'products2': setProducts2,
-        'products3': setProducts3
+        'products3': setProducts3,
+        'products4': setProducts4
     };
 
     const productService = new ProductService();
@@ -502,6 +532,7 @@ const DataTableEditDemo = () => {
         fetchProductData('products1');
         fetchProductData('products2');
         fetchProductData('products3');
+        fetchProductData('products4');
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const fetchProductData = (productStateKey) => {
@@ -661,6 +692,18 @@ const DataTableEditDemo = () => {
                         <Column rowEditor headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }}></Column>
                     </DataTable>
                 </div>
+            </div>
+
+            <div className="card p-fluid">
+                <h5>Cell Editing with Sorting and Filter</h5>
+                <DataTable value={products4} editMode="cell" className="editable-cells-table" filterDisplay="row" responsiveLayout="scroll">
+                    {
+                        columns.map(({ field, header }) => {
+                            return <Column key={field} field={field} header={header} filter sortable style={{ width: '25%' }} body={field === 'price' && priceBodyTemplate}
+                                editor={(options) => cellEditor(options)} onCellEditComplete={onCellEditComplete} />
+                        })
+                    }
+                </DataTable>
             </div>
         </div>
     );
@@ -685,6 +728,7 @@ const DataTableEditDemo = () => {
     const [products1, setProducts1] = useState(null);
     const [products2, setProducts2] = useState(null);
     const [products3, setProducts3] = useState(null);
+    const [products4, setProducts4] = useState(null);
     const [editingRows, setEditingRows] = useState({});
     const toast = useRef(null);
 
@@ -704,7 +748,8 @@ const DataTableEditDemo = () => {
     const dataTableFuncMap = {
         'products1': setProducts1,
         'products2': setProducts2,
-        'products3': setProducts3
+        'products3': setProducts3,
+        'products4': setProducts4
     };
 
     const productService = new ProductService();
@@ -713,6 +758,7 @@ const DataTableEditDemo = () => {
         fetchProductData('products1');
         fetchProductData('products2');
         fetchProductData('products3');
+        fetchProductData('products4');
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const fetchProductData = (productStateKey) => {
@@ -872,6 +918,18 @@ const DataTableEditDemo = () => {
                         <Column rowEditor headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }}></Column>
                     </DataTable>
                 </div>
+            </div>
+
+            <div className="card p-fluid">
+                <h5>Cell Editing with Sorting and Filter</h5>
+                <DataTable value={products4} editMode="cell" className="editable-cells-table" filterDisplay="row" responsiveLayout="scroll">
+                    {
+                        columns.map(({ field, header }) => {
+                            return <Column key={field} field={field} header={header} filter sortable style={{ width: '25%' }} body={field === 'price' && priceBodyTemplate}
+                                editor={(options) => cellEditor(options)} onCellEditComplete={onCellEditComplete} />
+                        })
+                    }
+                </DataTable>
             </div>
         </div>
     );
@@ -907,6 +965,7 @@ const DataTableEditDemo = () => {
     const [products1, setProducts1] = useState(null);
     const [products2, setProducts2] = useState(null);
     const [products3, setProducts3] = useState(null);
+    const [products4, setProducts4] = useState(null);
     const [editingRows, setEditingRows] = useState({});
     const toast = useRef(null);
 
@@ -926,7 +985,8 @@ const DataTableEditDemo = () => {
     const dataTableFuncMap = {
         'products1': setProducts1,
         'products2': setProducts2,
-        'products3': setProducts3
+        'products3': setProducts3,
+        'products4': setProducts4
     };
 
     const productService = new ProductService();
@@ -935,6 +995,7 @@ const DataTableEditDemo = () => {
         fetchProductData('products1');
         fetchProductData('products2');
         fetchProductData('products3');
+        fetchProductData('products4');
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const fetchProductData = (productStateKey) => {
@@ -1094,6 +1155,18 @@ const DataTableEditDemo = () => {
                         <Column rowEditor headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }}></Column>
                     </DataTable>
                 </div>
+            </div>
+
+            <div className="card p-fluid">
+                <h5>Cell Editing with Sorting and Filter</h5>
+                <DataTable value={products4} editMode="cell" className="editable-cells-table" filterDisplay="row" responsiveLayout="scroll">
+                    {
+                        columns.map(({ field, header }) => {
+                            return <Column key={field} field={field} header={header} filter sortable style={{ width: '25%' }} body={field === 'price' && priceBodyTemplate}
+                                editor={(options) => cellEditor(options)} onCellEditComplete={onCellEditComplete} />
+                        })
+                    }
+                </DataTable>
             </div>
         </div>
     );
