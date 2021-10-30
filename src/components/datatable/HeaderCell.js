@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { InputText } from '../inputtext/InputText';
-import { DomHandler, classNames } from '../utils/Utils';
-import { RowCheckbox } from './RowCheckbox';
+import { DomHandler, classNames, ObjectUtils } from '../utils/Utils';
+import { HeaderCheckbox } from './HeaderCheckbox';
+import { ColumnFilter } from './ColumnFilter';
 
 export class HeaderCell extends Component {
 
@@ -9,186 +9,70 @@ export class HeaderCell extends Component {
         super(props);
 
         this.state = {
-            filterValue: '',
-            badgeVisible: false
+            styleObject: {}
         }
 
         this.onClick = this.onClick.bind(this);
-        this.onFilterChange = this.onFilterChange.bind(this);
         this.onMouseDown = this.onMouseDown.bind(this);
-        this.onResizerMouseDown = this.onResizerMouseDown.bind(this);
-        this.onResizerClick = this.onResizerClick.bind(this);
-        this.onResizerDoubleClick = this.onResizerDoubleClick.bind(this);
         this.onKeyDown = this.onKeyDown.bind(this);
+
+        // drag
         this.onDragStart = this.onDragStart.bind(this);
         this.onDragOver = this.onDragOver.bind(this);
         this.onDragLeave = this.onDragLeave.bind(this);
         this.onDrop = this.onDrop.bind(this);
+
+        // resize
+        this.onResizerMouseDown = this.onResizerMouseDown.bind(this);
+        this.onResizerClick = this.onResizerClick.bind(this);
+        this.onResizerDoubleClick = this.onResizerDoubleClick.bind(this);
     }
 
-    onClick(event) {
-        const { field, sortField, sortable, sortFunction } = this.props.columnProps;
-        if (!this.isSortableDisabled()) {
-            let targetNode = event.target;
-            if (DomHandler.hasClass(targetNode, 'p-sortable-column') || DomHandler.hasClass(targetNode, 'p-column-title')
-                || DomHandler.hasClass(targetNode, 'p-sortable-column-icon') || DomHandler.hasClass(targetNode.parentElement, 'p-sortable-column-icon')) {
-                this.props.onSort({
-                    originalEvent: event,
-                    sortField: sortField || field,
-                    sortFunction,
-                    sortable,
-                    sortableDisabledFields: this.props.sortableDisabledFields
-                });
+    isBadgeVisible() {
+        return this.props.multiSortMeta && this.props.multiSortMeta.length > 1;
+    }
 
-                DomHandler.clearSelection();
-            }
+    isSortableDisabled() {
+        return !this.getColumnProp('sortable') || (this.getColumnProp('sortable') && (this.props.allSortableDisabled || this.getColumnProp('sortableDisabled')));
+    }
+
+    getColumnProp(...args) {
+        return typeof args[0] === 'string' ? this.props.column.props[args[0]] : (args[0] || this.props.column).props[args[1]];
+    }
+
+    getStyle() {
+        const headerStyle = this.getColumnProp('headerStyle');
+        const columnStyle = this.getColumnProp('style');
+
+        return this.getColumnProp('frozen') ? Object.assign({}, columnStyle, headerStyle, this.state.styleObject) : Object.assign({}, columnStyle, headerStyle);
+    }
+
+    getMultiSortMetaIndex() {
+        return this.props.multiSortMeta.findIndex(meta => (meta.field === this.getColumnProp('field') || meta.field === this.getColumnProp('sortField')));
+    }
+
+    getSortMeta() {
+        let sorted = false;
+        let sortOrder = 0;
+        let metaIndex = -1;
+
+        if (this.props.sortMode === 'single') {
+            sorted = this.props.sortField && (this.props.sortField === this.getColumnProp('field') || this.props.sortField === this.getColumnProp('sortField'));
+            sortOrder = sorted ? this.props.sortOrder : 0;
         }
-    }
-
-    onFilterChange(e) {
-        let filterValue = e.target.value;
-
-        if (this.props.columnProps.filter && this.props.onFilter) {
-            if (this.filterTimeout) {
-                clearTimeout(this.filterTimeout);
-            }
-
-            this.filterTimeout = setTimeout(() => {
-                this.props.onFilter({
-                    value: filterValue,
-                    field: this.props.columnProps.filterField || this.props.columnProps.field,
-                    matchMode: this.props.columnProps.filterMatchMode
-                });
-                this.filterTimeout = null;
-            }, this.props.filterDelay);
-        }
-
-        this.setState({ filterValue });
-    }
-
-    onResizerMouseDown(event) {
-        if (this.props.resizableColumns && this.props.onColumnResizeStart) {
-            this.props.onColumnResizeStart({
-                originalEvent: event,
-                columnEl: event.target.parentElement,
-                columnProps: this.props.columnProps
-            });
-
-            event.preventDefault();
-        }
-    }
-
-    onResizerClick(event) {
-        if (this.props.resizableColumns && this.props.onColumnResizerClick) {
-            this.props.onColumnResizerClick({
-                originalEvent: event,
-                element: event.currentTarget.parentElement,
-                column: this.props.columnProps
-            });
-
-            event.preventDefault();
-        }
-    }
-
-    onResizerDoubleClick(event) {
-        if (this.props.resizableColumns && this.props.onColumnResizerDoubleClick) {
-            this.props.onColumnResizerDoubleClick({
-                originalEvent: event,
-                element: event.currentTarget.parentElement,
-                column: this.props.columnProps
-            });
-
-            event.preventDefault();
-        }
-    }
-
-    onMouseDown(event) {
-        if (this.props.reorderableColumns && this.props.columnProps.reorderable) {
-            if (event.target.nodeName !== 'INPUT')
-                this.el.draggable = true;
-            else if (event.target.nodeName === 'INPUT')
-                this.el.draggable = false;
-        }
-    }
-
-    onKeyDown(event) {
-        if (event.key === 'Enter' && event.currentTarget === this.el) {
-            this.onClick(event);
-            event.preventDefault();
-        }
-    }
-
-    onDragStart(event) {
-        if (this.props.onDragStart) {
-            this.props.onDragStart({
-                originalEvent: event,
-                column: this.props.columnProps
-            });
-        }
-    }
-
-    onDragOver(event) {
-        if (this.props.onDragOver) {
-            this.props.onDragOver({
-                originalEvent: event,
-                column: this.props.columnProps
-            });
-        }
-    }
-
-    onDragLeave(event) {
-        if (this.props.onDragLeave) {
-            this.props.onDragLeave({
-                originalEvent: event,
-                column: this.props.columnProps
-            });
-        }
-    }
-
-    onDrop(event) {
-        if (this.props.onDrop) {
-            this.props.onDrop({
-                originalEvent: event,
-                column: this.props.columnProps
-            });
-        }
-    }
-
-    getMultiSortMetaDataIndex() {
-        if (this.props.multiSortMeta) {
-            let columnSortField = this.props.columnProps.sortField || this.props.columnProps.field;
-            for (let i = 0; i < this.props.multiSortMeta.length; i++) {
-                if (this.props.multiSortMeta[i].field === columnSortField) {
-                    return i;
-                }
+        else if (this.props.sortMode === 'multiple') {
+            metaIndex = this.getMultiSortMetaIndex();
+            if (metaIndex > -1) {
+                sorted = true;
+                sortOrder = this.props.multiSortMeta[metaIndex].order;
             }
         }
 
-        return -1;
+        return { sorted, sortOrder, metaIndex };
     }
 
-    static getDerivedStateFromProps(nextProps, prevState) {
-        return {
-            badgeVisible: nextProps.multiSortMeta && nextProps.multiSortMeta.length > 1
-        }
-    }
-
-    componentDidUpdate(prevProps) {
-        const prevColumnProps = prevProps.columnProps;
-        const columnProps = this.props.columnProps;
-        const filterField = columnProps.filterField || columnProps.field;
-
-        if (prevColumnProps.sortableDisabled !== columnProps.sortableDisabled || prevColumnProps.sortable !== columnProps.sortable) {
-            this.props.onSortableChange();
-        }
-
-        if (this.state.filterValue && prevProps.filters && prevProps.filters[filterField] && (!this.props.filters || !this.props.filters[filterField])) {
-            this.setState({ filterValue: '' });
-        }
-    }
-
-    getAriaSort(sorted, sortOrder) {
-        if (this.props.columnProps.sortable) {
+    getAriaSort({ sorted, sortOrder }) {
+        if (this.getColumnProp('sortable')) {
             let sortIcon = sorted ? sortOrder < 0 ? 'pi-sort-amount-down' : 'pi-sort-amount-up-alt' : 'pi-sort-alt';
             if (sortIcon === 'pi-sort-amount-down')
                 return 'descending';
@@ -197,103 +81,243 @@ export class HeaderCell extends Component {
             else
                 return 'none';
         }
-        else {
-            return null;
+
+        return null;
+    }
+
+    updateStickyPosition() {
+        if (this.getColumnProp('frozen')) {
+            let styleObject = { ...this.state.styleObject };
+            let align = this.getColumnProp('alignFrozen');
+            if (align === 'right') {
+                let right = 0;
+                let next = this.el.nextElementSibling;
+                if (next) {
+                    right = DomHandler.getOuterWidth(next) + parseFloat(next.style.right || 0);
+                }
+                styleObject['right'] = right + 'px';
+            }
+            else {
+                let left = 0;
+                let prev = this.el.previousElementSibling;
+                if (prev) {
+                    left = DomHandler.getOuterWidth(prev) + parseFloat(prev.style.left || 0);
+                }
+                styleObject['left'] = left + 'px';
+            }
+
+            let filterRow = this.el.parentElement.nextElementSibling;
+            if (filterRow) {
+                let index = DomHandler.index(this.el);
+                filterRow.children[index].style.left = styleObject['left'];
+                filterRow.children[index].style.right = styleObject['right'];
+            }
+
+            const isSameStyle = this.state.styleObject['left'] === styleObject['left'] && this.state.styleObject['right'] === styleObject['right'];
+            !isSameStyle && this.setState({ styleObject });
         }
     }
 
-    isSortableDisabled() {
-        return !this.props.columnProps.sortable || (this.props.columnProps.sortable && (this.props.allSortableDisabled || this.props.columnProps.sortableDisabled));
+    updateSortableDisabled(prevColumn) {
+        if (this.getColumnProp(prevColumn, 'sortableDisabled') !== this.getColumnProp('sortableDisabled') || this.getColumnProp(prevColumn, 'sortable') !== this.getColumnProp('sortable')) {
+            this.props.onSortableChange();
+        }
     }
 
-    isSingleSorted() {
-        return this.props.sortField !== null ? (this.props.columnProps.field === this.props.sortField || this.props.columnProps.sortField === this.props.sortField) : false;
+    onClick(event) {
+        if (!this.isSortableDisabled()) {
+            let targetNode = event.target;
+            if (DomHandler.hasClass(targetNode, 'p-sortable-column') || DomHandler.hasClass(targetNode, 'p-column-title') || DomHandler.hasClass(targetNode, 'p-column-header-content')
+                || DomHandler.hasClass(targetNode, 'p-sortable-column-icon') || DomHandler.hasClass(targetNode.parentElement, 'p-sortable-column-icon')) {
+                DomHandler.clearSelection();
+
+                this.props.onSortChange({
+                    originalEvent: event,
+                    column: this.props.column,
+                    sortableDisabledFields: this.props.sortableDisabledFields
+                });
+            }
+        }
     }
 
-    renderSortIcon(sorted, sortOrder) {
-        if (this.props.columnProps.sortable) {
-            let sortIcon = sorted ? sortOrder < 0 ? 'pi-sort-amount-down' : 'pi-sort-amount-up-alt' : 'pi-sort-alt';
-            let sortIconClassName = classNames('p-sortable-column-icon pi pi-fw', sortIcon);
+    onMouseDown(event) {
+        this.props.onColumnMouseDown({ originalEvent: event, column: this.props.column });
+    }
 
+    onKeyDown(event) {
+        if (event.key === 'Enter' && event.currentTarget === this.el && DomHandler.hasClass(event.currentTarget, 'p-sortable-column')) {
+            this.onClick(event);
+
+            event.preventDefault();
+        }
+    }
+
+    onDragStart(event) {
+        this.props.onColumnDragStart({ originalEvent: event, column: this.props.column });
+    }
+
+    onDragOver(event) {
+        this.props.onColumnDragOver({ originalEvent: event, column: this.props.column });
+    }
+
+    onDragLeave(event) {
+        this.props.onColumnDragLeave({ originalEvent: event, column: this.props.column });
+    }
+
+    onDrop(event) {
+        this.props.onColumnDrop({ originalEvent: event, column: this.props.column });
+    }
+
+    onResizerMouseDown(event) {
+        this.props.onColumnResizeStart({ originalEvent: event, column: this.props.column });
+    }
+
+    onResizerClick(event) {
+        if (this.props.onColumnResizerClick) {
+            this.props.onColumnResizerClick({
+                originalEvent: event,
+                element: event.currentTarget.parentElement,
+                column: this.props.column
+            });
+
+            event.preventDefault();
+        }
+    }
+
+    onResizerDoubleClick(event) {
+        if (this.props.onColumnResizerDoubleClick) {
+            this.props.onColumnResizerDoubleClick({
+                originalEvent: event,
+                element: event.currentTarget.parentElement,
+                column: this.props.column
+            });
+
+            event.preventDefault();
+        }
+    }
+
+    componentDidMount() {
+        if (this.getColumnProp('frozen')) {
+            this.updateStickyPosition();
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.getColumnProp('frozen')) {
+            this.updateStickyPosition();
+        }
+
+        this.updateSortableDisabled(prevProps.column);
+    }
+
+    renderResizer() {
+        if (this.props.resizableColumns && !this.getColumnProp('frozen')) {
             return (
-                <span className={sortIconClassName}></span>
-            );
-        }
-        else {
-            return null;
-        }
-    }
-
-    renderSortBadge(sortMetaDataIndex) {
-        if (sortMetaDataIndex !== -1 && this.state.badgeVisible) {
-            return <span className="p-sortable-column-badge">{sortMetaDataIndex + 1}</span>;
+                <span className="p-column-resizer" onMouseDown={this.onResizerMouseDown} onClick={this.onResizerClick} onDoubleClick={this.onResizerDoubleClick}></span>
+            )
         }
 
         return null;
     }
 
+    renderTitle() {
+        const title = ObjectUtils.getJSXElement(this.getColumnProp('header'), { props: this.props });
+
+        return <span className="p-column-title">{title}</span>;
+    }
+
+    renderSortIcon({ sorted, sortOrder }) {
+        if (this.getColumnProp('sortable')) {
+            let sortIcon = sorted ? sortOrder < 0 ? 'pi-sort-amount-down' : 'pi-sort-amount-up-alt' : 'pi-sort-alt';
+            let className = classNames('p-sortable-column-icon pi pi-fw', sortIcon);
+
+            return (
+                <span className={className}></span>
+            )
+        }
+
+        return null;
+    }
+
+    renderBadge({ metaIndex }) {
+        if (metaIndex !== -1 && this.isBadgeVisible()) {
+            const value = (this.props.groupRowsBy && this.props.groupRowsBy === this.props.groupRowSortField) ? metaIndex : metaIndex + 1;
+
+            return <span className="p-sortable-column-badge">{value}</span>;
+        }
+
+        return null;
+    }
+
+    renderCheckbox() {
+        if (this.getColumnProp('selectionMode') === 'multiple' && this.props.filterDisplay !== 'row') {
+            const allRowsSelected = this.props.allRowsSelected(this.props.value);
+
+            return (
+                <HeaderCheckbox checked={allRowsSelected} onChange={this.props.onColumnCheckboxChange} disabled={this.props.empty} />
+            )
+        }
+
+        return null;
+    }
+
+    renderFilter() {
+        if (this.props.filterDisplay === 'menu' && this.getColumnProp('filter')) {
+            return (
+                <ColumnFilter display="menu" column={this.props.column} filters={this.props.filters} onFilterChange={this.props.onFilterChange} onFilterApply={this.props.onFilterApply} filtersStore={this.props.filtersStore} />
+            )
+        }
+
+        return null;
+    }
+
+    renderHeader(sortMeta) {
+        const title = this.renderTitle();
+        const sortIcon = this.renderSortIcon(sortMeta);
+        const badge = this.renderBadge(sortMeta);
+        const checkbox = this.renderCheckbox();
+        const filter = this.renderFilter();
+
+        return (
+            <div className="p-column-header-content">
+                {title}
+                {sortIcon}
+                {badge}
+                {checkbox}
+                {filter}
+            </div>
+        )
+    }
+
     render() {
-        let filterElement, headerCheckbox;
+        const isSortableDisabled = this.isSortableDisabled();
+        const sortMeta = this.getSortMeta();
+        const style = this.getStyle();
+        const className = classNames(this.getColumnProp('headerClassName'), this.getColumnProp('className'), {
+            'p-sortable-column': this.getColumnProp('sortable'),
+            'p-resizable-column': this.props.resizableColumns,
+            'p-highlight': sortMeta.sorted,
+            'p-frozen-column': this.getColumnProp('frozen'),
+            'p-selection-column': this.getColumnProp('selectionMode'),
+            'p-sortable-disabled': this.getColumnProp('sortable') && isSortableDisabled,
+            'p-reorderable-column': this.props.reorderableColumns && this.getColumnProp('reorderable')
+        });
+        const tabIndex = this.getColumnProp('sortable') && !isSortableDisabled ? this.props.tabIndex : null;
+        const colSpan = this.getColumnProp('colSpan');
+        const rowSpan = this.getColumnProp('rowSpan');
+        const ariaSort = this.getAriaSort(sortMeta);
 
-        if (this.props.columnProps.filter && this.props.renderOptions.renderFilter) {
-            filterElement = this.props.columnProps.filterElement || <InputText onChange={this.onFilterChange} type={this.props.columnProps.filterType} value={this.state.filterValue}
-                className="p-column-filter" placeholder={this.props.columnProps.filterPlaceholder} maxLength={this.props.columnProps.filterMaxLength} />;
-        }
+        const resizer = this.renderResizer();
+        const header = this.renderHeader(sortMeta);
 
-        if (this.props.columnProps.selectionMode === 'multiple' && this.props.renderOptions.renderHeaderCheckbox) {
-            headerCheckbox = <RowCheckbox onClick={this.props.onHeaderCheckboxClick} selected={this.props.headerCheckboxSelected} disabled={!this.props.value || this.props.value.length === 0} />;
-        }
-
-        if (this.props.renderOptions.filterOnly) {
-            return (
-                <th ref={(el) => this.el = el} role="columnheader" className={classNames('p-filter-column', this.props.columnProps.filterHeaderClassName)} style={this.props.columnProps.filterHeaderStyle || this.props.columnProps.style}
-                    colSpan={this.props.columnProps.colSpan} rowSpan={this.props.columnProps.rowSpan}>
-                    {filterElement}
-                    {headerCheckbox}
-                </th>
-            );
-        }
-        else {
-            let sortMetaDataIndex = this.getMultiSortMetaDataIndex();
-            let multiSortMetaData = sortMetaDataIndex !== -1 ? this.props.multiSortMeta[sortMetaDataIndex] : null;
-            let singleSorted = this.isSingleSorted();
-            let multipleSorted = multiSortMetaData !== null;
-            let sortOrder = 0;
-            let resizer = this.props.resizableColumns && <span className="p-column-resizer p-clickable" onMouseDown={this.onResizerMouseDown} onClick={this.onResizerClick} onDoubleClick={this.onResizerDoubleClick}></span>;
-
-            if (singleSorted)
-                sortOrder = this.props.sortOrder;
-            else if (multipleSorted)
-                sortOrder = multiSortMetaData.order;
-
-            let sorted = this.props.columnProps.sortable && (singleSorted || multipleSorted);
-            let isSortableDisabled = this.isSortableDisabled();
-            let className = classNames({
-                'p-sortable-column': this.props.columnProps.sortable,
-                'p-highlight': sorted,
-                'p-sortable-disabled': isSortableDisabled,
-                'p-resizable-column': this.props.resizableColumns,
-                'p-selection-column': this.props.columnProps.selectionMode
-            }, this.props.columnProps.headerClassName || this.props.columnProps.className);
-
-            let sortIconElement = this.renderSortIcon(sorted, sortOrder);
-            let ariaSortData = this.getAriaSort(sorted, sortOrder);
-            let sortBadge = this.renderSortBadge(sortMetaDataIndex);
-            let tabIndex = this.props.columnProps.sortable && !isSortableDisabled ? this.props.tabIndex : null
-
-            return (
-                <th ref={(el) => this.el = el} role="columnheader" tabIndex={tabIndex}
-                    className={className} style={this.props.columnProps.headerStyle || this.props.columnProps.style} onClick={this.onClick} onMouseDown={this.onMouseDown} onKeyDown={this.onKeyDown}
-                    colSpan={this.props.columnProps.colSpan} rowSpan={this.props.columnProps.rowSpan} aria-sort={ariaSortData}
-                    onDragStart={this.onDragStart} onDragOver={this.onDragOver} onDragLeave={this.onDragLeave} onDrop={this.onDrop}>
-                    {resizer}
-                    <span className="p-column-title">{this.props.columnProps.header}</span>
-                    {sortIconElement}
-                    {sortBadge}
-                    {filterElement}
-                    {headerCheckbox}
-                </th>
-            );
-        }
+        return (
+            <th ref={(el) => this.el = el} style={style} className={className} tabIndex={tabIndex} role="columnheader"
+                onClick={this.onClick} onKeyDown={this.onKeyDown} onMouseDown={this.onMouseDown}
+                onDragStart={this.onDragStart} onDragOver={this.onDragOver} onDragLeave={this.onDragLeave} onDrop={this.onDrop}
+                colSpan={colSpan} rowSpan={rowSpan} aria-sort={ariaSort}>
+                {resizer}
+                {header}
+            </th>
+        )
     }
 }

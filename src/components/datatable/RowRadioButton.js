@@ -1,20 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { classNames } from '../utils/Utils';
 
 export class RowRadioButton extends Component {
-
-    static defaultProps = {
-        rowData: null,
-        onClick: null,
-        selected: false
-    }
-
-    static propTypes = {
-        rowData: PropTypes.any,
-        onClick: PropTypes.func,
-        selected: PropTypes.bool
-    }
 
     constructor(props) {
         super(props);
@@ -31,14 +18,14 @@ export class RowRadioButton extends Component {
     }
 
     onClick(event) {
-        if (this.props.onClick) {
-            this.props.onClick({
+        if (!this.props.disabled) {
+            this.props.onChange({
                 originalEvent: event,
-                data: this.props.rowData
-            })
-        }
+                data: this.props.value
+            });
 
-        this.input.focus();
+            this.input.focus();
+        }
     }
 
     onFocus() {
@@ -61,16 +48,17 @@ export class RowRadioButton extends Component {
     }
 
     render() {
-        const className = classNames('p-radiobutton-box p-component p-clickable', { 'p-highlight': this.props.selected, 'p-focus': this.state.focused });
-        const name = `${this.props.tableId ? this.props.tableId + '_' : ''}dt_radio`;
+        const className = classNames('p-radiobutton-box p-component', { 'p-highlight': this.props.checked, 'p-focus': this.state.focused, 'p-disabled': this.props.disabled });
+        const name = `${this.props.tableSelector}_dt_radio`;
 
         return (
             <div className="p-radiobutton p-component">
                 <div className="p-hidden-accessible">
-                    <input name={name} ref={(el) => this.input = el} type="radio" checked={this.props.selected} onFocus={this.onFocus} onBlur={this.onBlur} onChange={this.onChange} onKeyDown={this.onKeyDown} />
+                    <input name={name} ref={(el) => this.input = el} type="radio" checked={this.props.checked}
+                        onFocus={this.onFocus} onBlur={this.onBlur} onChange={this.onChange} onKeyDown={this.onKeyDown} />
                 </div>
-                <div className={className} onClick={this.onClick} role="radio" aria-checked={this.props.selected}>
-                    <div className="p-radiobutton-icon p-clickable"></div>
+                <div className={className} onClick={this.onClick} role="radio" aria-checked={this.props.checked}>
+                    <div className="p-radiobutton-icon"></div>
                 </div>
             </div>
         );

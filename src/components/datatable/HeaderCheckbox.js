@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { classNames } from '../utils/Utils';
 
-export class RowCheckbox extends Component {
+export class HeaderCheckbox extends Component {
 
     constructor(props) {
         super(props);
@@ -9,21 +9,10 @@ export class RowCheckbox extends Component {
             focused: false
         };
 
-        this.onClick = this.onClick.bind(this);
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
+        this.onClick = this.onClick.bind(this);
         this.onKeyDown = this.onKeyDown.bind(this);
-    }
-
-    onClick(event) {
-        if (!this.props.disabled) {
-            this.setState({ focused: true });
-
-            this.props.onChange({
-                originalEvent: event,
-                data: this.props.value
-            });
-        }
     }
 
     onFocus() {
@@ -34,6 +23,17 @@ export class RowCheckbox extends Component {
         this.setState({ focused: false });
     }
 
+    onClick(event) {
+        if (!this.props.disabled) {
+            this.setState({ focused: true });
+
+            this.props.onChange({
+                originalEvent: event,
+                checked: this.props.checked
+            });
+        }
+    }
+
     onKeyDown(event) {
         if (event.code === 'Space') {
             this.onClick(event);
@@ -42,14 +42,19 @@ export class RowCheckbox extends Component {
     }
 
     render() {
-        const className = classNames('p-checkbox-box p-component', { 'p-highlight': this.props.checked, 'p-disabled': this.props.disabled, 'p-focus': this.state.focused });
-        const iconClassName = classNames('p-checkbox-icon', { 'pi pi-check': this.props.checked });
-        const tabIndex = this.props.disabled ? null : '0';
+        const boxClassName = classNames('p-checkbox-box p-component', {
+            'p-highlight': this.props.checked,
+            'p-disabled': this.props.disabled,
+            'p-focus': this.state.focused
+        });
+        const iconClassName = classNames('p-checkbox-icon', {
+            'pi pi-check': this.props.checked
+        });
+        const tabIndex = this.props.disabled ? null : 0;
 
         return (
             <div className="p-checkbox p-component" onClick={this.onClick}>
-                <div className={className} role="checkbox" aria-checked={this.props.checked} tabIndex={tabIndex}
-                    onKeyDown={this.onKeyDown} onFocus={this.onFocus} onBlur={this.onBlur}>
+                <div className={boxClassName} role="checkbox" aria-checked={this.props.checked} tabIndex={tabIndex} onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.onKeyDown}>
                     <span className={iconClassName}></span>
                 </div>
             </div>

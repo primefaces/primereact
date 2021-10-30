@@ -2,6 +2,10 @@ import * as React from 'react';
 import { ColumnProps } from '../column';
 import { PaginatorTemplate } from '../paginator';
 
+type DataTableHeaderTemplateType = React.ReactNode | ((options: DataTableHeaderTemplateOptions) => React.ReactNode);
+
+type DataTableFooterTemplateType = React.ReactNode | ((options: DataTableFooterTemplateOptions) => React.ReactNode);
+
 type DataTablePaginatorPositionType = 'top' | 'bottom' | 'both';
 
 type DataTableSortModeType = 'single' | 'multiple';
@@ -27,6 +31,18 @@ type DataTableStateStorageType = 'session' | 'local' | 'custom';
 type DataTableAppendToType = 'self' | HTMLElement | undefined | null;
 
 type DataTableSelectType = 'row' | 'cell' | 'checkbox' | 'radio' | 'all';
+
+type DataTableResponsiveLayoutType = 'scroll' | 'stack';
+
+type DataTableFilterDisplayType = 'menu' | 'row';
+
+type DataTableSizeType = 'small' | 'normal' | 'large';
+
+interface DataTableHeaderTemplateOptions {
+    props: DataTableProps;
+}
+
+interface DataTableFooterTemplateOptions extends DataTableHeaderTemplateOptions {}
 
 interface DataTableSortMeta {
     field: string;
@@ -55,11 +71,6 @@ interface DataTablePageParams {
     rows: number;
     page: number;
     pageCount: number;
-}
-
-interface DataTableVirtualScrollParams {
-    first: number;
-    rows: number;
 }
 
 interface DataTableRowToggleParams {
@@ -122,6 +133,13 @@ interface DataTableRowEditSaveParams extends DataTableRowEditParams {
     valid: boolean;
 }
 
+interface DataTableRowEditCompleteParams extends DataTableRowEventParams {
+    newData: any;
+    field: string;
+    index: number;
+    editorCallback(value: any): void;
+}
+
 interface DataTableSelectParams {
     originalEvent: React.SyntheticEvent;
     data: any;
@@ -152,8 +170,8 @@ interface DataTableRowReorderParams {
 export interface DataTableProps {
     id?: string;
     value?: any[];
-    header?: React.ReactNode;
-    footer?: React.ReactNode;
+    header?: DataTableHeaderTemplateType;
+    footer?: DataTableFooterTemplateType;
     style?: object;
     className?: string;
     tableStyle?: object;
@@ -191,8 +209,6 @@ export interface DataTableProps {
     selectOnEdit?: boolean;
     headerColumnGroup?: React.ReactNode;
     footerColumnGroup?: React.ReactNode;
-    frozenHeaderColumnGroup?: React.ReactNode;
-    frozenFooterColumnGroup?: React.ReactNode;
     expandedRows?: any[] | DataTableExpandedRows;
     resizableColumns?: boolean;
     columnResizeMode?: DataTableColumnResizeModeType;
@@ -203,9 +219,6 @@ export interface DataTableProps {
     filterLocale?: string;
     scrollable?: boolean;
     scrollHeight?: string;
-    virtualScroll?: boolean;
-    virtualScrollDelay?: number;
-    virtualRowHeight?: number;
     frozenWidth?: string;
     frozenValue?: any[];
     csvSeparator?: string;
@@ -217,13 +230,21 @@ export interface DataTableProps {
     tabIndex?: number;
     stateKey?: string;
     stateStorage?: DataTableStateStorageType;
-    groupField?: string;
+    groupRowsBy?: string;
     editMode?: string;
     editingRows?: any[] | DataTableEditingRows;
     expandableRowGroups?: boolean;
     rowHover?: boolean;
     showGridlines?: boolean;
     stripedRows?: boolean;
+    size?: DataTableSizeType;
+    responsiveLayout?: DataTableResponsiveLayoutType;
+    breakpoint?: string;
+    filterDisplay?: DataTableFilterDisplayType;
+    expandedRowIcon?: string;
+    collapsedRowIcon?: string;
+    globalFilterFields?: string[];
+    onRowEditComplete?(e: DataTableRowEditCompleteParams): void;
     showSelectionElement?(data: any): boolean | undefined | null;
     showRowReorderElement?(data: any): boolean | undefined | null;
     onSelectionChange?(e: DataTableSelectionChangeParams): void;
@@ -240,7 +261,6 @@ export interface DataTableProps {
     onSort?(e: DataTableSortParams): void;
     onPage?(e: DataTablePageParams): void;
     onFilter?(e: DataTableFilterParams): void;
-    onVirtualScroll?(e: DataTableVirtualScrollParams): void;
     onAllRowsSelect?(e: DataTableSelectParams): void;
     onAllRowsUnselect?(e: DataTableUnselectParams): void;
     onRowClick?(e: DataTableRowClickEventParams): void;

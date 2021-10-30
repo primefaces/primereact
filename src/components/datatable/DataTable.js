@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Paginator } from '../paginator/Paginator';
-import { classNames, DomHandler, ObjectUtils, FilterUtils } from '../utils/Utils';
-import { ScrollableView } from './ScrollableView';
+import { classNames, DomHandler, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import PrimeReact, { FilterService, FilterOperator, FilterMatchMode } from '../api/Api';
 import { TableBody } from './TableBody';
 import { TableFooter } from './TableFooter';
 import { TableHeader } from './TableHeader';
-import { TableLoadingBody } from './TableLoadingBody';
+import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 
 export class DataTable extends Component {
 
@@ -24,7 +24,7 @@ export class DataTable extends Component {
         alwaysShowPaginator: true,
         paginatorClassName: null,
         paginatorTemplate: 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown',
-        paginatorLeft:null,
+        paginatorLeft: null,
         paginatorRight: null,
         paginatorDropdownAppendTo: null,
         pageLinkSize: 5,
@@ -54,8 +54,6 @@ export class DataTable extends Component {
         selectOnEdit: true,
         headerColumnGroup: null,
         footerColumnGroup: null,
-        frozenHeaderColumnGroup: null,
-        frozenFooterColumnGroup: null,
         rowExpansionTemplate: null,
         expandedRows: null,
         onRowToggle: null,
@@ -68,9 +66,6 @@ export class DataTable extends Component {
         filterLocale: undefined,
         scrollable: false,
         scrollHeight: null,
-        virtualScroll: false,
-        virtualScrollDelay: 150,
-        virtualRowHeight: 28,
         frozenWidth: null,
         frozenValue: null,
         csvSeparator: ',',
@@ -86,13 +81,21 @@ export class DataTable extends Component {
         tabIndex: 0,
         stateKey: null,
         stateStorage: 'session',
-        groupField: null,
+        groupRowsBy: null,
         editMode: 'cell',
         editingRows: null,
         expandableRowGroups: false,
         rowHover: false,
         showGridlines: false,
         stripedRows: false,
+        size: 'normal',
+        responsiveLayout: 'stack',
+        breakpoint: '960px',
+        filterDisplay: 'menu',
+        expandedRowIcon: 'pi pi-chevron-down',
+        collapsedRowIcon: 'pi pi-chevron-right',
+        onRowEditComplete: null,
+        globalFilterFields: null,
         showSelectionElement: null,
         showRowReorderElement: null,
         onColumnResizeEnd: null,
@@ -101,7 +104,6 @@ export class DataTable extends Component {
         onSort: null,
         onPage: null,
         onFilter: null,
-        onVirtualScroll: null,
         onAllRowsSelect: null,
         onAllRowsUnselect: null,
         onRowClick: null,
@@ -173,10 +175,8 @@ export class DataTable extends Component {
         selectOnEdit: PropTypes.bool,
         headerColumnGroup: PropTypes.any,
         footerColumnGroup: PropTypes.any,
-        frozenHeaderColumnGroup: PropTypes.any,
-        frozenFooterColumnGroup: PropTypes.any,
         rowExpansionTemplate: PropTypes.func,
-        expandedRows: PropTypes.oneOfType([PropTypes.array,PropTypes.object]),
+        expandedRows: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
         onRowToggle: PropTypes.func,
         resizableColumns: PropTypes.bool,
         columnResizeMode: PropTypes.string,
@@ -187,9 +187,6 @@ export class DataTable extends Component {
         filterLocale: PropTypes.string,
         scrollable: PropTypes.bool,
         scrollHeight: PropTypes.string,
-        virtualScroll: PropTypes.bool,
-        virtualScrollDelay: PropTypes.number,
-        virtualRowHeight: PropTypes.number,
         frozenWidth: PropTypes.string,
         frozenValue: PropTypes.array,
         csvSeparator: PropTypes.string,
@@ -205,13 +202,21 @@ export class DataTable extends Component {
         tabIndex: PropTypes.number,
         stateKey: PropTypes.string,
         stateStorage: PropTypes.string,
-        groupField: PropTypes.string,
+        groupRowsBy: PropTypes.string,
         editMode: PropTypes.string,
-        editingRows: PropTypes.oneOfType([PropTypes.array,PropTypes.object]),
+        editingRows: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
         expandableRowGroups: PropTypes.bool,
         rowHover: PropTypes.bool,
         showGridlines: PropTypes.bool,
         stripedRows: PropTypes.bool,
+        size: PropTypes.string,
+        responsiveLayout: PropTypes.string,
+        breakpoint: PropTypes.string,
+        filterDisplay: PropTypes.string,
+        expandedRowIcon: PropTypes.string,
+        collapsedRowIcon: PropTypes.string,
+        globalFilterFields: PropTypes.array,
+        onRowEditComplete: PropTypes.func,
         showSelectionElement: PropTypes.func,
         showRowReorderElement: PropTypes.func,
         onColumnResizeEnd: PropTypes.func,
@@ -220,7 +225,6 @@ export class DataTable extends Component {
         onSort: PropTypes.func,
         onPage: PropTypes.func,
         onFilter: PropTypes.func,
-        onVirtualScroll: PropTypes.func,
         onAllRowsSelect: PropTypes.func,
         onAllRowsUnselect: PropTypes.func,
         onRowClick: PropTypes.func,
@@ -250,9 +254,12 @@ export class DataTable extends Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
             d_rows: props.rows,
-            editingCells: []
+            columnOrder: [],
+            groupRowsSortMeta: null,
+            editingMeta: {}
         };
 
         if (!this.props.onPage) {
@@ -266,6 +273,7 @@ export class DataTable extends Component {
             this.state.multiSortMeta = props.multiSortMeta;
         }
 
+        this.state.d_filters = this.cloneFilters(props.filters);
         if (!this.props.onFilter) {
             this.state.filters = props.filters;
         }
@@ -274,17 +282,42 @@ export class DataTable extends Component {
             this.restoreState(this.state);
         }
 
-        this.onPageChange = this.onPageChange.bind(this);
-        this.onSort = this.onSort.bind(this);
-        this.onFilter = this.onFilter.bind(this);
+        this.attributeSelector = UniqueComponentId();
+
+        // header
+        this.onSortChange = this.onSortChange.bind(this);
+        this.onFilterChange = this.onFilterChange.bind(this);
+        this.onFilterApply = this.onFilterApply.bind(this);
+        this.onColumnHeaderMouseDown = this.onColumnHeaderMouseDown.bind(this);
+        this.onColumnHeaderDragStart = this.onColumnHeaderDragStart.bind(this);
+        this.onColumnHeaderDragOver = this.onColumnHeaderDragOver.bind(this);
+        this.onColumnHeaderDragLeave = this.onColumnHeaderDragLeave.bind(this);
+        this.onColumnHeaderDrop = this.onColumnHeaderDrop.bind(this);
         this.onColumnResizeStart = this.onColumnResizeStart.bind(this);
-        this.onHeaderCheckboxClick = this.onHeaderCheckboxClick.bind(this);
-        this.onColumnDragStart = this.onColumnDragStart.bind(this);
-        this.onColumnDragOver = this.onColumnDragOver.bind(this);
-        this.onColumnDragLeave = this.onColumnDragLeave.bind(this);
-        this.onColumnDrop = this.onColumnDrop.bind(this);
-        this.onVirtualScroll = this.onVirtualScroll.bind(this);
-        this.onEditingCellChange = this.onEditingCellChange.bind(this);
+        this.onColumnHeaderCheckboxChange = this.onColumnHeaderCheckboxChange.bind(this);
+        this.allRowsSelected = this.allRowsSelected.bind(this);
+
+        // body
+        this.onEditingMetaChange = this.onEditingMetaChange.bind(this);
+
+        //paginator
+        this.onPageChange = this.onPageChange.bind(this);
+    }
+
+    isCustomStateStorage() {
+        return this.props.stateStorage === 'custom';
+    }
+
+    isStateful() {
+        return this.props.stateKey != null || this.isCustomStateStorage();
+    }
+
+    isVirtualScrollerDisabled() {
+        return ObjectUtils.isEmpty(this.props.virtualScrollerOptions) || !this.props.scrollable;
+    }
+
+    hasFilter() {
+        return ObjectUtils.isNotEmpty(this.getFilters()) || this.props.globalFilter;
     }
 
     getFirst() {
@@ -304,11 +337,41 @@ export class DataTable extends Component {
     }
 
     getMultiSortMeta() {
-        return this.props.onSort ? this.props.multiSortMeta : this.state.multiSortMeta;
+        return (this.props.onSort ? this.props.multiSortMeta : this.state.multiSortMeta) || [];
     }
 
     getFilters() {
         return this.props.onFilter ? this.props.filters : this.state.filters;
+    }
+
+    getColumnProp(col, prop) {
+        return col.props[prop];
+    }
+
+    getColumns(ignoreReorderable) {
+        const isValidType = (type) => type.name === 'Column';
+        const columns = React.Children.toArray(this.props.children).reduce((arr, child) => {
+            const type = child && child.type;
+            type && (isValidType(type) ? arr.push(child) : (type.toString() === 'Symbol(react.fragment)' && (arr = [...arr, ...React.Children.toArray(child.props.children).filter(c => isValidType(c.type))])));
+
+            return arr;
+        }, []);
+
+        if (!columns) {
+            return null;
+        }
+
+        if (!ignoreReorderable && this.props.reorderableColumns && this.state.columnOrder) {
+            let orderedColumns = this.state.columnOrder.reduce((arr, columnKey) => {
+                const column = this.findColumnByKey(columns, columnKey);
+                column && arr.push(column);
+                return arr;
+            }, []);
+
+            return [...orderedColumns, ...columns.filter(col => orderedColumns.indexOf(col) < 0)];
+        }
+
+        return columns;
     }
 
     getStorage() {
@@ -325,14 +388,6 @@ export class DataTable extends Component {
             default:
                 throw new Error(this.props.stateStorage + ' is not a valid value for the state storage, supported values are "local", "session" and "custom".');
         }
-    }
-
-    isCustomStateStorage() {
-        return this.props.stateStorage === 'custom';
-    }
-
-    isStateful() {
-        return this.props.stateKey != null || this.isCustomStateStorage();
     }
 
     saveState() {
@@ -381,7 +436,7 @@ export class DataTable extends Component {
         }
         else {
             const storage = this.getStorage();
-            if (Object.keys(state).length) {
+            if (ObjectUtils.isNotEmpty(state)) {
                 storage.setItem(this.props.stateKey, JSON.stringify(state));
             }
         }
@@ -410,9 +465,13 @@ export class DataTable extends Component {
         else {
             const storage = this.getStorage();
             const stateString = storage.getItem(this.props.stateKey);
+            const dateFormat = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/;
+            const reviver = function (key, value) {
+                return (typeof value === "string" && dateFormat.test(value)) ? new Date(value) : value;
+            }
 
             if (stateString) {
-                restoredState = JSON.parse(stateString);
+                restoredState = JSON.parse(stateString, reviver);
             }
         }
 
@@ -421,17 +480,17 @@ export class DataTable extends Component {
 
     restoreTableState(restoredState) {
         const state = this._restoreState(restoredState);
-        if (state && Object.keys(state).length) {
+        if (ObjectUtils.isNotEmpty(state)) {
             this.setState(state);
         }
     }
 
     _restoreState(restoredState, state = {}) {
-        if (restoredState && Object.keys(restoredState).length) {
+        if (ObjectUtils.isNotEmpty(restoredState)) {
             if (this.props.paginator) {
                 if (this.props.onPage) {
                     const getOnPageParams = (first, rows) => {
-                        const totalRecords = this.getTotalRecords(this.processData());
+                        const totalRecords = this.getTotalRecords(this.processedData());
                         const pageCount = Math.ceil(totalRecords / rows) || 1;
                         const page = Math.floor(first / rows);
 
@@ -471,13 +530,15 @@ export class DataTable extends Component {
             }
 
             if (restoredState.filters) {
+                state.d_filters = this.cloneFilters(restoredState.filters);
+
                 if (this.props.onFilter) {
                     this.props.onFilter({
                         filters: restoredState.filters
                     });
                 }
                 else {
-                    state.filters = restoredState.filters;
+                    state.filters = this.cloneFilters(restoredState.filters);
                 }
             }
 
@@ -512,13 +573,12 @@ export class DataTable extends Component {
 
     saveColumnWidths(state) {
         let widths = [];
-        let headers = DomHandler.find(this.container, '.p-datatable-thead > tr > th.p-resizable-column');
-        headers.map(header => widths.push(DomHandler.getOuterWidth(header)));
+        let headers = DomHandler.find(this.el, '.p-datatable-thead > tr > th');
+        headers.forEach(header => widths.push(DomHandler.getOuterWidth(header)));
         state.columnWidths = widths.join(',');
 
         if (this.props.columnResizeMode === 'expand') {
-            state.tableWidth = this.props.scrollable ? DomHandler.findSingle(this.container, '.p-datatable-scrollable-header-table').style.width :
-                                                DomHandler.getOuterWidth(this.table) + 'px';
+            state.tableWidth = DomHandler.getOuterWidth(this.table) + 'px';
         }
     }
 
@@ -527,68 +587,457 @@ export class DataTable extends Component {
             let widths = this.columnWidthsState.split(',');
 
             if (this.props.columnResizeMode === 'expand' && this.tableWidthState) {
-                if (this.props.scrollable) {
-                    this.setScrollableItemsWidthOnExpandResize(null, this.tableWidthState, 0);
-                }
-                else {
-                    this.table.style.width = this.tableWidthState;
-                    this.container.style.width = this.tableWidthState;
-                }
+                this.table.style.width = this.tableWidthState;
+                this.table.style.minWidth = this.tableWidthState;
+                this.el.style.width = this.tableWidthState;
             }
 
-            if (this.props.scrollable) {
-                let headerCols = DomHandler.find(this.container, '.p-datatable-scrollable-header-table > colgroup > col');
-                let bodyCols = DomHandler.find(this.container, '.p-datatable-scrollable-body-table > colgroup > col');
+            this.createStyleElement();
 
-                headerCols.map((col, index) => col.style.width = widths[index] + 'px');
-                bodyCols.map((col, index) => col.style.width = widths[index] + 'px');
+            if (this.props.scrollable && widths && widths.length > 0) {
+                let innerHTML = '';
+                widths.forEach((width, index) => {
+                    innerHTML += `
+                        .p-datatable[${this.attributeSelector}] .p-datatable-thead > tr > th:nth-child(${index + 1}) {
+                            flex: 0 0 ${width}px;
+                        }
+
+                        .p-datatable[${this.attributeSelector}] .p-datatable-tbody > tr > td:nth-child(${index + 1}) {
+                            flex: 0 0 ${width}px;
+                        }
+                    `
+                });
+
+                this.styleElement.innerHTML = innerHTML;
             }
             else {
-                let headers = DomHandler.find(this.table, '.p-datatable-thead > tr > th');
-                headers.map((header, index) => header.style.width = widths[index] + 'px');
+                DomHandler.find(this.table, '.p-datatable-thead > tr > th').forEach((header, index) => header.style.width = widths[index] + 'px');
             }
         }
     }
 
-    onPageChange(event) {
-        if (this.props.onPage)
-            this.props.onPage(event);
-        else
-            this.setState({first: event.first, rows: event.rows});
-
-        if (this.props.onValueChange) {
-            this.props.onValueChange(this.processData());
+    findParentHeader(element) {
+        if (element.nodeName === 'TH') {
+            return element;
+        }
+        else {
+            let parent = element.parentElement;
+            while (parent.nodeName !== 'TH') {
+                parent = parent.parentElement;
+                if (!parent) break;
+            }
+            return parent;
         }
     }
 
-    createPaginator(position, totalRecords, data) {
-        const className = classNames('p-paginator-' + position, this.props.paginatorClassName);
-        return (
-            <Paginator first={this.getFirst()} rows={this.getRows()} pageLinkSize={this.props.pageLinkSize} className={className} onPageChange={this.onPageChange} template={this.props.paginatorTemplate}
-                        totalRecords={totalRecords} rowsPerPageOptions={this.props.rowsPerPageOptions} currentPageReportTemplate={this.props.currentPageReportTemplate}
-                        leftContent={this.props.paginatorLeft} rightContent={this.props.paginatorRight} alwaysShow={this.props.alwaysShowPaginator} dropdownAppendTo={this.props.paginatorDropdownAppendTo} />
-        );
+    getGroupRowSortField() {
+        return this.props.sortMode === 'single' ? this.props.sortField : (this.state.groupRowsSortMeta ? this.state.groupRowsSortMeta.field : null);
     }
 
-    onSort(event) {
-        let sortField = event.sortField;
+    allRowsSelected(processedData) {
+        const val = this.props.frozenValue ? [...this.props.frozenValue, ...processedData] : processedData;
+        const length = this.props.lazy ? this.props.totalRecords : (val ? val.length : 0);
+        return (val && length > 0 && this.props.selection && this.props.selection.length > 0 && this.props.selection.length === length);
+    }
+
+    getSelectionModeInColumn(columns) {
+        if (columns) {
+            const col = columns.find(c => !!c.props.selectionMode);
+            return col ? col.props.selectionMode : null;
+        }
+
+        return null;
+    }
+
+    findColumnByKey(columns, key) {
+        return ObjectUtils.isNotEmpty(columns) ? columns.find(col => col.props.columnKey === key || col.props.field === key) : null;
+    }
+
+    getTotalRecords(data) {
+        return this.props.lazy ? this.props.totalRecords : data ? data.length : 0;
+    }
+
+    onEditingMetaChange(e) {
+        const { rowData, field, rowIndex, editing } = e;
+        let editingMeta = { ...this.state.editingMeta };
+        let meta = editingMeta[rowIndex];
+
+        if (editing) {
+            !meta && (meta = editingMeta[rowIndex] = { data: { ...rowData }, fields: [] });
+            meta['fields'].push(field);
+        }
+        else if (meta) {
+            const fields = meta['fields'].filter(f => f !== field);
+            !fields.length ? (delete editingMeta[rowIndex]) : (meta['fields'] = fields);
+        }
+
+        this.setState({ editingMeta });
+    }
+
+    clearEditingMetaData() {
+        if (this.props.editMode && ObjectUtils.isNotEmpty(this.state.editingMeta)) {
+            this.setState({ editingMeta: {} });
+        }
+    }
+
+    onColumnResizeStart(e) {
+        const { originalEvent: event, column } = e;
+        const containerLeft = DomHandler.getOffset(this.el).left;
+        this.resizeColumn = column;
+        this.resizeColumnElement = event.currentTarget.parentElement;
+        this.columnResizing = true;
+        this.lastResizeHelperX = (event.pageX - containerLeft + this.el.scrollLeft);
+
+        this.bindColumnResizeEvents();
+    }
+
+    onColumnResize(event) {
+        const containerLeft = DomHandler.getOffset(this.el).left;
+
+        DomHandler.addClass(this.el, 'p-unselectable-text');
+        this.resizeHelper.style.height = this.el.offsetHeight + 'px';
+        this.resizeHelper.style.top = 0 + 'px';
+        this.resizeHelper.style.left = (event.pageX - containerLeft + this.el.scrollLeft) + 'px';
+
+        this.resizeHelper.style.display = 'block';
+    }
+
+    onColumnResizeEnd() {
+        let delta = this.resizeHelper.offsetLeft - this.lastResizeHelperX;
+        let columnWidth = this.resizeColumnElement.offsetWidth;
+        let newColumnWidth = columnWidth + delta;
+        let minWidth = this.resizeColumnElement.style.minWidth || 15;
+
+        if (columnWidth + delta > parseInt(minWidth, 10)) {
+            if (this.props.columnResizeMode === 'fit') {
+                let nextColumn = this.resizeColumnElement.nextElementSibling;
+                let nextColumnWidth = nextColumn.offsetWidth - delta;
+
+                if (newColumnWidth > 15 && nextColumnWidth > 15) {
+                    this.resizeTableCells(newColumnWidth, nextColumnWidth);
+                }
+            }
+            else if (this.props.columnResizeMode === 'expand') {
+                const tableWidth = this.table.offsetWidth + delta + 'px';
+                this.table.style.width = tableWidth;
+                this.table.style.minWidth = tableWidth;
+
+                this.resizeTableCells(newColumnWidth);
+            }
+
+            if (this.props.onColumnResizeEnd) {
+                this.props.onColumnResizeEnd({
+                    element: this.resizeColumnElement,
+                    column: this.resizeColumn,
+                    delta: delta
+                });
+            }
+
+            if (this.isStateful()) {
+                this.saveState();
+            }
+        }
+
+        this.resizeHelper.style.display = 'none';
+        this.resizeColumn = null;
+        this.resizeColumnElement = null;
+        DomHandler.removeClass(this.el, 'p-unselectable-text');
+
+        this.unbindColumnResizeEvents();
+    }
+
+    resizeTableCells(newColumnWidth, nextColumnWidth) {
+        let widths = [];
+        let colIndex = DomHandler.index(this.resizeColumnElement);
+        let headers = DomHandler.find(this.table, '.p-datatable-thead > tr > th');
+        headers.forEach(header => widths.push(DomHandler.getOuterWidth(header)));
+
+        this.destroyStyleElement();
+        this.createStyleElement();
+
+        let innerHTML = '';
+        widths.forEach((width, index) => {
+            let colWidth = index === colIndex ? newColumnWidth : (nextColumnWidth && index === colIndex + 1) ? nextColumnWidth : width;
+            let style = this.props.scrollable ? `flex: 0 0 ${colWidth}px !important` : `width: ${colWidth}px !important`;
+            innerHTML += `
+                .p-datatable[${this.attributeSelector}] .p-datatable-thead > tr > th:nth-child(${index + 1}),
+                .p-datatable[${this.attributeSelector}] .p-datatable-tbody > tr > td:nth-child(${index + 1}),
+                .p-datatable[${this.attributeSelector}] .p-datatable-tfoot > tr > td:nth-child(${index + 1}) {
+                    ${style}
+                }
+            `
+        });
+        this.styleElement.innerHTML = innerHTML;
+    }
+
+    bindColumnResizeEvents() {
+        if (!this.documentColumnResizeListener) {
+            this.documentColumnResizeListener = document.addEventListener('mousemove', (event) => {
+                if (this.columnResizing) {
+                    this.onColumnResize(event);
+                }
+            });
+        }
+
+        if (!this.documentColumnResizeEndListener) {
+            this.documentColumnResizeEndListener = document.addEventListener('mouseup', () => {
+                if (this.columnResizing) {
+                    this.columnResizing = false;
+                    this.onColumnResizeEnd();
+                }
+            });
+        }
+    }
+
+    unbindColumnResizeEvents() {
+        if (this.documentColumnResizeListener) {
+            document.removeEventListener('document', this.documentColumnResizeListener);
+            this.documentColumnResizeListener = null;
+        }
+
+        if (this.documentColumnResizeEndListener) {
+            document.removeEventListener('document', this.documentColumnResizeEndListener);
+            this.documentColumnResizeEndListener = null;
+        }
+    }
+
+    onColumnHeaderMouseDown(e) {
+        DomHandler.clearSelection();
+
+        const { originalEvent: event, column } = e;
+
+        if (this.props.reorderableColumns && this.getColumnProp(column, 'reorderable') !== false) {
+            if (event.target.nodeName === 'INPUT' || event.target.nodeName === 'TEXTAREA' || DomHandler.hasClass(event.target, 'p-column-resizer'))
+                event.currentTarget.draggable = false;
+            else
+                event.currentTarget.draggable = true;
+        }
+    }
+
+    onColumnHeaderCheckboxChange(e, processedData) {
+        const { originalEvent, checked } = e;
+        let selection;
+
+        if (!checked) {
+            selection = this.props.frozenValue ? [...this.props.frozenValue, ...processedData] : processedData;
+
+            this.props.onAllRowsSelect && this.props.onAllRowsSelect({ originalEvent, data: selection, type: 'all' });
+        }
+        else {
+            selection = [];
+
+            this.props.onAllRowsUnselect && this.props.onAllRowsUnselect({ originalEvent, data: selection, type: 'all' });
+        }
+
+        if (this.props.onSelectionChange) {
+            this.props.onSelectionChange({
+                originalEvent,
+                value: selection
+            });
+        }
+    }
+
+    onColumnHeaderDragStart(e) {
+        const { originalEvent: event, column } = e;
+
+        if (this.columnResizing) {
+            event.preventDefault();
+            return;
+        }
+
+        this.colReorderIconWidth = DomHandler.getHiddenElementOuterWidth(this.reorderIndicatorUp);
+        this.colReorderIconHeight = DomHandler.getHiddenElementOuterHeight(this.reorderIndicatorUp);
+
+        this.draggedColumn = column;
+        this.draggedColumnElement = this.findParentHeader(event.currentTarget);
+        event.dataTransfer.setData('text', 'b'); // Firefox requires this to make dragging possible
+    }
+
+    onColumnHeaderDragOver(e) {
+        const { originalEvent: event } = e;
+        const dropHeader = this.findParentHeader(event.currentTarget);
+        if (this.props.reorderableColumns && this.draggedColumnElement && dropHeader) {
+            event.preventDefault();
+
+            if (this.draggedColumnElement !== dropHeader) {
+                const containerOffset = DomHandler.getOffset(this.el);
+                const dropHeaderOffset = DomHandler.getOffset(dropHeader);
+                const targetLeft = dropHeaderOffset.left - containerOffset.left;
+                const columnCenter = dropHeaderOffset.left + dropHeader.offsetWidth / 2;
+
+                this.reorderIndicatorUp.style.top = dropHeaderOffset.top - containerOffset.top - (this.colReorderIconHeight - 1) + 'px';
+                this.reorderIndicatorDown.style.top = dropHeaderOffset.top - containerOffset.top + dropHeader.offsetHeight + 'px';
+
+                if (event.pageX > columnCenter) {
+                    this.reorderIndicatorUp.style.left = (targetLeft + dropHeader.offsetWidth - Math.ceil(this.colReorderIconWidth / 2)) + 'px';
+                    this.reorderIndicatorDown.style.left = (targetLeft + dropHeader.offsetWidth - Math.ceil(this.colReorderIconWidth / 2)) + 'px';
+                    this.dropPosition = 1;
+                }
+                else {
+                    this.reorderIndicatorUp.style.left = (targetLeft - Math.ceil(this.colReorderIconWidth / 2)) + 'px';
+                    this.reorderIndicatorDown.style.left = (targetLeft - Math.ceil(this.colReorderIconWidth / 2)) + 'px';
+                    this.dropPosition = -1;
+                }
+
+                this.reorderIndicatorUp.style.display = 'block';
+                this.reorderIndicatorDown.style.display = 'block';
+            }
+        }
+    }
+
+    onColumnHeaderDragLeave(e) {
+        const { originalEvent: event } = e;
+
+        if (this.props.reorderableColumns && this.draggedColumnElement) {
+            event.preventDefault();
+            this.reorderIndicatorUp.style.display = 'none';
+            this.reorderIndicatorDown.style.display = 'none';
+        }
+    }
+
+    onColumnHeaderDrop(e) {
+        const { originalEvent: event, column } = e;
+
+        event.preventDefault();
+        if (this.draggedColumnElement) {
+            let dragIndex = DomHandler.index(this.draggedColumnElement);
+            let dropIndex = DomHandler.index(this.findParentHeader(event.currentTarget));
+            let allowDrop = (dragIndex !== dropIndex);
+            if (allowDrop && ((dropIndex - dragIndex === 1 && this.dropPosition === -1) || (dragIndex - dropIndex === 1 && this.dropPosition === 1))) {
+                allowDrop = false;
+            }
+
+            if (allowDrop) {
+                let columns = this.getColumns();
+                let isSameColumn = (col1, col2) => (col1.props.columnKey || col2.props.columnKey) ? ObjectUtils.equals(col1.props, col2.props, 'columnKey') : ObjectUtils.equals(col1.props, col2.props, 'field');
+                let dragColIndex = columns.findIndex((child) => isSameColumn(child, this.draggedColumn));
+                let dropColIndex = columns.findIndex((child) => isSameColumn(child, column));
+
+                if (dropColIndex < dragColIndex && this.dropPosition === 1) {
+                    dropColIndex++;
+                }
+
+                if (dropColIndex > dragColIndex && this.dropPosition === -1) {
+                    dropColIndex--;
+                }
+
+                ObjectUtils.reorderArray(columns, dragColIndex, dropColIndex);
+
+                const columnOrder = columns.reduce((orders, col) => {
+                    orders.push(col.props.columnKey || col.props.field);
+
+                    return orders;
+                }, []);
+
+                this.setState({ columnOrder });
+
+                if (this.props.onColReorder) {
+                    this.props.onColReorder({
+                        originalEvent: event,
+                        dragIndex: dragColIndex,
+                        dropIndex: dropColIndex,
+                        columns
+                    });
+                }
+            }
+
+            this.reorderIndicatorUp.style.display = 'none';
+            this.reorderIndicatorDown.style.display = 'none';
+            this.draggedColumnElement.draggable = false;
+            this.draggedColumnElement = null;
+            this.draggedColumn = null;
+            this.dropPosition = null;
+        }
+    }
+
+    createStyleElement() {
+        this.styleElement = document.createElement('style');
+        document.head.appendChild(this.styleElement);
+    }
+
+    createResponsiveStyle() {
+        if (!this.responsiveStyleElement) {
+            this.responsiveStyleElement = document.createElement('style');
+            document.head.appendChild(this.responsiveStyleElement);
+
+            let innerHTML = `
+@media screen and (max-width: ${this.props.breakpoint}) {
+    .p-datatable[${this.attributeSelector}] .p-datatable-thead > tr > th,
+    .p-datatable[${this.attributeSelector}] .p-datatable-tfoot > tr > td {
+        display: none !important;
+    }
+
+    .p-datatable[${this.attributeSelector}] .p-datatable-tbody > tr > td {
+        display: flex;
+        width: 100% !important;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .p-datatable[${this.attributeSelector}] .p-datatable-tbody > tr > td:not(:last-child) {
+        border: 0 none;
+    }
+
+    .p-datatable[${this.attributeSelector}].p-datatable-gridlines .p-datatable-tbody > tr > td:last-child {
+        border-top: 0;
+        border-right: 0;
+        border-left: 0;
+    }
+
+    .p-datatable[${this.attributeSelector}] .p-datatable-tbody > tr > td > .p-column-title {
+        display: block;
+    }
+}
+`;
+
+            this.responsiveStyleElement.innerHTML = innerHTML;
+        }
+    }
+
+    destroyResponsiveStyle() {
+        if (this.responsiveStyleElement) {
+            document.head.removeChild(this.responsiveStyleElement);
+            this.responsiveStyleElement = null;
+        }
+    }
+
+    destroyStyleElement() {
+        if (this.styleElement) {
+            document.head.removeChild(this.styleElement);
+            this.styleElement = null;
+        }
+    }
+
+    onPageChange(e) {
+        if (this.props.onPage)
+            this.props.onPage(e);
+        else
+            this.setState({ first: e.first, rows: e.rows });
+
+        if (this.props.onValueChange) {
+            this.props.onValueChange(this.processedData());
+        }
+    }
+
+    onSortChange(e) {
+        const { originalEvent: event, column, sortableDisabledFields } = e;
+        let sortField = column.props.sortField || column.props.field;
         let sortOrder = this.props.defaultSortOrder;
         let multiSortMeta;
         let eventMeta;
 
-        this.columnSortable = event.sortable;
-        this.columnSortFunction = event.sortFunction;
-        this.columnField = event.sortField;
+        this.columnSortable = column.props.sortable;
+        this.columnSortFunction = column.props.sortFunction;
+        this.columnField = column.props.sortField;
 
         if (this.props.sortMode === 'multiple') {
-            let metaKey = event.originalEvent.metaKey || event.originalEvent.ctrlKey;
-            let sortableDisabledFields = event.sortableDisabledFields;
-            multiSortMeta = [...(this.getMultiSortMeta()||[])];
+            let metaKey = event.metaKey || event.ctrlKey;
+            multiSortMeta = [...this.getMultiSortMeta()];
 
             const sortMeta = multiSortMeta.find(sortMeta => sortMeta.field === sortField);
             sortOrder = sortMeta ? this.getCalculatedSortOrder(sortMeta.order) : sortOrder;
 
-            const newMetaData = {field: sortField, order: sortOrder};
+            const newMetaData = { field: sortField, order: sortOrder };
 
             if (sortOrder) {
                 multiSortMeta = metaKey ? multiSortMeta : multiSortMeta.filter((meta) => sortableDisabledFields.some((field) => field === meta.field));
@@ -624,7 +1073,7 @@ export class DataTable extends Component {
         }
 
         if (this.props.onValueChange) {
-            this.props.onValueChange(this.processData({
+            this.props.onValueChange(this.processedData({
                 sortField: sortField,
                 sortOrder: sortOrder,
                 multiSortMeta: multiSortMeta
@@ -637,13 +1086,7 @@ export class DataTable extends Component {
     }
 
     addSortMeta(meta, multiSortMeta) {
-        let index = -1;
-        for (let i = 0; i < multiSortMeta.length; i++) {
-            if (multiSortMeta[i].field === meta.field) {
-                index = i;
-                break;
-            }
-        }
+        const index = multiSortMeta.findIndex(sortMeta => sortMeta.field === meta.field);
 
         if (index >= 0)
             multiSortMeta[index] = meta;
@@ -652,13 +1095,7 @@ export class DataTable extends Component {
     }
 
     removeSortMeta(meta, multiSortMeta) {
-        let index = -1;
-        for (let i = 0; i < multiSortMeta.length; i++) {
-            if (multiSortMeta[i].field === meta.field) {
-                index = i;
-                break;
-            }
-        }
+        const index = multiSortMeta.findIndex(sortMeta => sortMeta.field === meta.field);
 
         if (index >= 0) {
             multiSortMeta.splice(index, 1);
@@ -667,19 +1104,28 @@ export class DataTable extends Component {
         multiSortMeta = multiSortMeta.length > 0 ? multiSortMeta : null;
     }
 
-    sortSingle(data, sortField, sortOrder) {
+    sortSingle(data, field, order) {
+        this.clearEditingMetaData();
+
+        if (this.props.groupRowsBy && this.props.groupRowsBy === this.props.sortField) {
+            const multiSortMeta = [
+                { field: this.props.sortField, order: this.props.sortOrder || this.props.defaultSortOrder }
+            ];
+
+            this.props.sortField !== field && multiSortMeta.push({ field, order });
+
+            return this.sortMultiple(data, multiSortMeta);
+        }
+
         let value = [...data];
 
-        if(this.columnSortable && this.columnSortFunction) {
-            value = this.columnSortFunction({
-                field: this.getSortField(),
-                order: this.getSortOrder()
-            });
+        if (this.columnSortable && this.columnSortFunction) {
+            value = this.columnSortFunction({ field, order });
         }
         else {
             value.sort((data1, data2) => {
-                const value1 = ObjectUtils.resolveFieldData(data1, sortField);
-                const value2 = ObjectUtils.resolveFieldData(data2, sortField);
+                const value1 = ObjectUtils.resolveFieldData(data1, field);
+                const value2 = ObjectUtils.resolveFieldData(data2, field);
                 let result = null;
 
                 if (value1 == null && value2 != null)
@@ -693,14 +1139,25 @@ export class DataTable extends Component {
                 else
                     result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
 
-                return (sortOrder * result);
+                return (order * result);
             });
         }
 
         return value;
     }
 
-    sortMultiple(data, multiSortMeta) {
+    sortMultiple(data, multiSortMeta = []) {
+        this.clearEditingMetaData();
+
+        if (this.props.groupRowsBy && (this.groupRowsSortMeta || (multiSortMeta.length && this.props.groupRowsBy === multiSortMeta[0].field))) {
+            const firstSortMeta = multiSortMeta[0];
+            !this.groupRowsSortMeta && (this.groupRowsSortMeta = firstSortMeta);
+
+            if (firstSortMeta.field !== this.groupRowsSortMeta.field) {
+                multiSortMeta = [this.groupRowsSortMeta, ...multiSortMeta];
+            }
+        }
+
         let value = [...data];
 
         if (this.columnSortable && this.columnSortFunction) {
@@ -708,10 +1165,7 @@ export class DataTable extends Component {
             const field = this.columnField;
             const order = meta ? meta.order : this.defaultSortOrder;
 
-            value = this.columnSortFunction({
-                field,
-                order
-            });
+            value = this.columnSortFunction({ field, order });
         }
         else {
             value.sort((data1, data2) => {
@@ -736,424 +1190,212 @@ export class DataTable extends Component {
             result = (value1 < value2) ? -1 : 1;
         }
 
-        if(value1 === value2)  {
+        if (value1 === value2) {
             return (multiSortMeta.length - 1) > (index) ? (this.multisortField(data1, data2, multiSortMeta, index + 1)) : 0;
         }
 
         return (multiSortMeta[index].order * result);
     }
 
-    filter(value, field, mode) {
-        this.onFilter({
-            value: value,
-            field: field,
-            matchMode: mode
-        });
+    onFilterChange(filters) {
+        this.setState({ d_filters: filters });
     }
 
-    onFilter(event) {
-        let currentFilters = this.getFilters();
-        let newFilters = currentFilters ? {...currentFilters} : {};
+    onFilterApply() {
+        clearTimeout(this.filterTimeout);
+        this.filterTimeout = setTimeout(() => {
+            let filters = this.cloneFilters(this.state.d_filters);
 
-        if(!this.isFilterBlank(event.value))
-            newFilters[event.field] = {value: event.value, matchMode: event.matchMode};
-        else if(newFilters[event.field])
-            delete newFilters[event.field];
-
-        if (this.props.onFilter) {
-            this.props.onFilter({
-                filters: newFilters
-            });
-        }
-        else {
-            this.setState({
-                first: 0,
-                filters: newFilters
-            });
-        }
-
-        if (this.props.onValueChange) {
-            this.props.onValueChange(this.processData({
-                filters: newFilters
-            }));
-        }
-    }
-
-    hasFilter() {
-        let filters = this.getFilters() || this.props.globalFilter;
-
-        return filters && Object.keys(filters).length > 0;
-    }
-
-    isFilterBlank(filter) {
-        if(filter !== null && filter !== undefined) {
-            if((typeof filter === 'string' && filter.trim().length === 0) || (filter instanceof Array && filter.length === 0))
-                return true;
-            else
-                return false;
-        }
-        return true;
-    }
-
-    hasFooter() {
-        if(this.props.children) {
-            if(this.props.footerColumnGroup) {
-                return true;
+            if (this.props.onFilter) {
+                this.props.onFilter({ filters });
             }
             else {
-                return this.hasChildrenFooter(this.props.children);
+                this.setState({
+                    first: 0,
+                    filters
+                });
             }
-        }
-        else {
-            return false;
-        }
-    }
 
-    hasChildrenFooter(children) {
-        let hasFooter = false;
-
-        if (children) {
-            if (children instanceof Array) {
-                for (let i = 0; i < children.length; i++) {
-                    hasFooter = hasFooter || this.hasChildrenFooter(children[i]);
-                }
+            if (this.props.onValueChange) {
+                this.props.onValueChange(this.processedData({ filters }));
             }
-            else {
-                return children.props && children.props.footer !== null;
-            }
+        }, this.props.filterDelay);
+    }
+
+    filterLocal(data, filters) {
+        if (!data) return;
+
+        this.clearEditingMetaData();
+
+        filters = filters || {};
+
+        let columns = this.getColumns();
+        let filteredValue = [];
+
+        let isGlobalFilter = filters['global'] || this.props.globalFilter;
+        let globalFilterFieldsArray;
+        if (isGlobalFilter) {
+            globalFilterFieldsArray = this.props.globalFilterFields || columns.filter(col => !col.props.excludeGlobalFilter).map(col => col.props.filterField || col.props.field);
         }
 
-        return hasFooter;
-    }
+        for (let i = 0; i < data.length; i++) {
+            let localMatch = true;
+            let globalMatch = false;
+            let localFiltered = false;
 
-    onColumnResizeStart(event) {
-        let containerLeft = DomHandler.getOffset(this.container).left;
-        this.resizeColumn = event.columnEl;
-        this.resizeColumnProps = event.columnProps;
-        this.columnResizing = true;
-        this.lastResizerHelperX = (event.originalEvent.pageX - containerLeft + this.container.scrollLeft);
+            for (let prop in filters) {
+                if (Object.prototype.hasOwnProperty.call(filters, prop) && prop !== 'global') {
+                    localFiltered = true;
+                    let filterField = prop;
+                    let filterMeta = filters[filterField];
 
-        this.bindColumnResizeEvents();
-    }
+                    if (filterMeta.operator) {
+                        for (let j = 0; j < filterMeta.constraints.length; j++) {
+                            let filterConstraint = filterMeta.constraints[j];
+                            localMatch = this.executeLocalFilter(filterField, data[i], filterConstraint, j);
 
-    onColumnResize(event) {
-        let containerLeft = DomHandler.getOffset(this.container).left;
-        DomHandler.addClass(this.container, 'p-unselectable-text');
-        this.resizerHelper.style.height = this.container.offsetHeight + 'px';
-        this.resizerHelper.style.top = 0 + 'px';
-        this.resizerHelper.style.left = (event.pageX - containerLeft + this.container.scrollLeft) + 'px';
-
-        this.resizerHelper.style.display = 'block';
-    }
-
-    onColumnResizeEnd(event) {
-        let delta = this.resizerHelper.offsetLeft - this.lastResizerHelperX;
-        let columnWidth = this.resizeColumn.offsetWidth;
-        let newColumnWidth = columnWidth + delta;
-        let minWidth = this.resizeColumn.style.minWidth||15;
-
-        if(columnWidth + delta > parseInt(minWidth, 10)) {
-            if(this.props.columnResizeMode === 'fit') {
-                let nextColumn = this.resizeColumn.nextElementSibling;
-                let nextColumnWidth = nextColumn.offsetWidth - delta;
-
-                if(newColumnWidth > 15 && nextColumnWidth > 15) {
-                    if(this.props.scrollable) {
-                        let scrollableView = this.findParentScrollableView(this.resizeColumn);
-                        let scrollableBodyTable = DomHandler.findSingle(scrollableView, 'table.p-datatable-scrollable-body-table');
-                        let scrollableHeaderTable = DomHandler.findSingle(scrollableView, 'table.p-datatable-scrollable-header-table');
-                        let scrollableFooterTable = DomHandler.findSingle(scrollableView, 'table.p-datatable-scrollable-footer-table');
-                        let resizeColumnIndex = DomHandler.index(this.resizeColumn);
-
-                        this.resizeColGroup(scrollableHeaderTable, resizeColumnIndex, newColumnWidth, nextColumnWidth);
-                        this.resizeColGroup(scrollableBodyTable, resizeColumnIndex, newColumnWidth, nextColumnWidth);
-                        this.resizeColGroup(scrollableFooterTable, resizeColumnIndex, newColumnWidth, nextColumnWidth);
-                    }
-                    else {
-                        this.resizeColumn.style.width = newColumnWidth + 'px';
-                        if(nextColumn) {
-                            nextColumn.style.width = nextColumnWidth + 'px';
+                            if ((filterMeta.operator === FilterOperator.OR && localMatch) || (filterMeta.operator === FilterOperator.AND && !localMatch)) {
+                                break;
+                            }
                         }
                     }
+                    else {
+                        localMatch = this.executeLocalFilter(filterField, data[i], filterMeta, 0);
+                    }
+
+                    if (!localMatch) {
+                        break;
+                    }
                 }
             }
-            else if(this.props.columnResizeMode === 'expand') {
-                if (this.props.scrollable) {
-                    this.setScrollableItemsWidthOnExpandResize(this.resizeColumn, newColumnWidth, delta);
+
+            if (isGlobalFilter && !globalMatch && globalFilterFieldsArray) {
+                for (let j = 0; j < globalFilterFieldsArray.length; j++) {
+                    let globalFilterField = globalFilterFieldsArray[j];
+                    let matchMode = filters['global'] ? filters['global'].matchMode : FilterMatchMode.CONTAINS;
+                    let value = filters['global'] ? filters['global'].value : this.props.globalFilter;
+                    globalMatch = FilterService.filters[matchMode](ObjectUtils.resolveFieldData(data[i], globalFilterField), value, this.props.filterLocale);
+
+                    if (globalMatch) {
+                        break;
+                    }
                 }
-                else {
-                    this.table.style.width = this.table.offsetWidth + delta + 'px';
-                    this.resizeColumn.style.width = newColumnWidth + 'px';
-                }
             }
 
-            if(this.props.onColumnResizeEnd) {
-                this.props.onColumnResizeEnd({
-                    element: this.resizeColumn,
-                    column: this.resizeColumnProps,
-                    delta: delta
-                });
-            }
-
-            if (this.isStateful()) {
-                this.saveState();
-            }
-        }
-
-        this.resizerHelper.style.display = 'none';
-        this.resizeColumn = null;
-        this.resizeColumnProps = null;
-        DomHandler.removeClass(this.container, 'p-unselectable-text');
-
-        this.unbindColumnResizeEvents();
-    }
-
-    setScrollableItemsWidthOnExpandResize(column, newColumnWidth, delta) {
-        let scrollableView = column ? this.findParentScrollableView(column) : this.container;
-        let scrollableBody = DomHandler.findSingle(scrollableView, '.p-datatable-scrollable-body');
-        let scrollableHeader = DomHandler.findSingle(scrollableView, '.p-datatable-scrollable-header');
-        let scrollableFooter = DomHandler.findSingle(scrollableView, '.p-datatable-scrollable-footer');
-        let scrollableBodyTable = DomHandler.findSingle(scrollableBody, 'table.p-datatable-scrollable-body-table');
-        let scrollableHeaderTable = DomHandler.findSingle(scrollableHeader, 'table.p-datatable-scrollable-header-table');
-        let scrollableFooterTable = DomHandler.findSingle(scrollableFooter, 'table.p-datatable-scrollable-footer-table');
-
-        const scrollableBodyTableWidth = column ? scrollableBodyTable.offsetWidth + delta : newColumnWidth;
-        const scrollableHeaderTableWidth = column ? scrollableHeaderTable.offsetWidth + delta : newColumnWidth;
-        const isContainerInViewport = this.container.offsetWidth >= scrollableBodyTableWidth;
-
-        let setWidth = (container, table, width, isContainerInViewport) => {
-            if (container && table) {
-                container.style.width = isContainerInViewport ? width + DomHandler.calculateScrollbarWidth(scrollableBody) + 'px' : 'auto'
-                table.style.width = width + 'px';
-            }
-        };
-
-        setWidth(scrollableBody, scrollableBodyTable, scrollableBodyTableWidth, isContainerInViewport);
-        setWidth(scrollableHeader, scrollableHeaderTable, scrollableHeaderTableWidth, isContainerInViewport);
-        setWidth(scrollableFooter, scrollableFooterTable, scrollableHeaderTableWidth, isContainerInViewport);
-
-        if (column) {
-            let resizeColumnIndex = DomHandler.index(column);
-
-            this.resizeColGroup(scrollableHeaderTable, resizeColumnIndex, newColumnWidth, null);
-            this.resizeColGroup(scrollableBodyTable, resizeColumnIndex, newColumnWidth, null);
-            this.resizeColGroup(scrollableFooterTable, resizeColumnIndex, newColumnWidth, null);
-        }
-    }
-
-    findParentScrollableView(column) {
-        if (column) {
-            let parent = column.parentElement;
-            while (parent && !DomHandler.hasClass(parent, 'p-datatable-scrollable-view')) {
-                parent = parent.parentElement;
-            }
-
-            return parent;
-        }
-        else {
-            return null;
-        }
-    }
-
-    resizeColGroup(table, resizeColumnIndex, newColumnWidth, nextColumnWidth) {
-        if(table) {
-            let colGroup = table.children[0].nodeName === 'COLGROUP' ? table.children[0] : null;
-
-            if(colGroup) {
-                let col = colGroup.children[resizeColumnIndex];
-                let nextCol = col.nextElementSibling;
-                col.style.width = newColumnWidth + 'px';
-
-                if (nextCol && nextColumnWidth) {
-                    nextCol.style.width = nextColumnWidth + 'px';
-                }
+            let matches;
+            if (isGlobalFilter) {
+                matches = localFiltered ? (localFiltered && localMatch && globalMatch) : globalMatch;
             }
             else {
-                throw new Error("Scrollable tables require a colgroup to support resizable columns");
+                matches = localFiltered && localMatch;
+            }
+
+            if (matches) {
+                filteredValue.push(data[i]);
             }
         }
+
+        if (filteredValue.length === this.props.value.length) {
+            filteredValue = data;
+        }
+
+        return filteredValue;
     }
 
-    bindColumnResizeEvents() {
-        this.documentColumnResizeListener = document.addEventListener('mousemove', (event) => {
-            if(this.columnResizing) {
-                this.onColumnResize(event);
-            }
-        });
+    executeLocalFilter(field, rowData, filterMeta, index) {
+        let filterValue = filterMeta.value;
+        let filterMatchMode = filterMeta.matchMode === 'custom' ? `custom_${field}` : filterMeta.matchMode || FilterMatchMode.STARTS_WITH;
+        let dataFieldValue = ObjectUtils.resolveFieldData(rowData, field);
+        let filterConstraint = FilterService.filters[filterMatchMode];
 
-        this.documentColumnResizeEndListener = document.addEventListener('mouseup', (event) => {
-            if(this.columnResizing) {
-                this.columnResizing = false;
-                this.onColumnResizeEnd(event);
-            }
-        });
+        return filterConstraint(dataFieldValue, filterValue, this.props.filterLocale, index);
     }
 
-    unbindColumnResizeEvents() {
-        document.removeEventListener('document', this.documentColumnResizeListener);
-        document.removeEventListener('document', this.documentColumnResizeEndListener);
-    }
+    cloneFilters(filters) {
+        filters = filters || this.props.filters;
+        let cloned = {};
 
-    findParentHeader(element) {
-        if(element.nodeName === 'TH') {
-            return element;
+        if (filters) {
+            Object.entries(filters).forEach(([prop, value]) => {
+                cloned[prop] = value.operator ? { operator: value.operator, constraints: value.constraints.map(constraint => { return { ...constraint } }) } : { ...value };
+            });
         }
         else {
-            let parent = element.parentElement;
-            while(parent.nodeName !== 'TH') {
-                parent = parent.parentElement;
-                if(!parent) break;
-            }
-            return parent;
-        }
-    }
+            const columns = this.getColumns();
 
-    onColumnDragStart(e) {
-        const { originalEvent: event, column } = e;
+            cloned = columns.reduce((_filters, col) => {
+                if (col.props.filter) {
+                    const field = col.props.filterField || col.props.field;
+                    const filterFunction = col.props.filterFunction;
+                    const dataType = col.props.dataType;
+                    const matchMode = col.props.filterMatchMode || (PrimeReact.filterMatchModeOptions[dataType] ? PrimeReact.filterMatchModeOptions[dataType][0] : FilterMatchMode.STARTS_WITH);
+                    let constraint = { value: null, matchMode };
 
-        if (this.columnResizing) {
-            event.preventDefault();
-            return;
-        }
+                    if (filterFunction) {
+                        FilterService.register(`custom_${field}`, (...args) => filterFunction(...args, { column: col }));
+                    }
 
-        this.iconWidth = DomHandler.getHiddenElementOuterWidth(this.reorderIndicatorUp);
-        this.iconHeight = DomHandler.getHiddenElementOuterHeight(this.reorderIndicatorUp);
-
-        this.draggedColumnEl = this.findParentHeader(event.currentTarget);
-        this.draggedColumn = column;
-        event.dataTransfer.setData('text', 'b'); // Firefox requires this to make dragging possible
-    }
-
-    onColumnDragOver(e) {
-        const event = e.originalEvent;
-        const dropHeader = this.findParentHeader(event.currentTarget);
-        if (this.props.reorderableColumns && this.draggedColumnEl && dropHeader) {
-            event.preventDefault();
-            let containerOffset = DomHandler.getOffset(this.container);
-            let dropHeaderOffset = DomHandler.getOffset(dropHeader);
-
-            if (this.draggedColumnEl !== dropHeader) {
-                let targetLeft =  dropHeaderOffset.left - containerOffset.left;
-                //let targetTop =  containerOffset.top - dropHeaderOffset.top;
-                let columnCenter = dropHeaderOffset.left + dropHeader.offsetWidth / 2;
-
-                this.reorderIndicatorUp.style.top = dropHeaderOffset.top - containerOffset.top - (this.iconHeight - 1) + 'px';
-                this.reorderIndicatorDown.style.top = dropHeaderOffset.top - containerOffset.top + dropHeader.offsetHeight + 'px';
-
-                if(event.pageX > columnCenter) {
-                    this.reorderIndicatorUp.style.left = (targetLeft + dropHeader.offsetWidth - Math.ceil(this.iconWidth / 2)) + 'px';
-                    this.reorderIndicatorDown.style.left = (targetLeft + dropHeader.offsetWidth - Math.ceil(this.iconWidth / 2))+ 'px';
-                    this.dropPosition = 1;
-                }
-                else {
-                    this.reorderIndicatorUp.style.left = (targetLeft - Math.ceil(this.iconWidth / 2)) + 'px';
-                    this.reorderIndicatorDown.style.left = (targetLeft - Math.ceil(this.iconWidth / 2))+ 'px';
-                    this.dropPosition = -1;
+                    _filters[field] = this.props.filterDisplay === 'menu' ? { operator: FilterOperator.AND, constraints: [constraint] } : constraint;
                 }
 
-                this.reorderIndicatorUp.style.display = 'block';
-                this.reorderIndicatorDown.style.display = 'block';
-            }
-        }
-    }
-
-    onColumnDragLeave(e) {
-        const event = e.originalEvent;
-        if (this.props.reorderableColumns && this.draggedColumnEl) {
-            event.preventDefault();
-            this.reorderIndicatorUp.style.display = 'none';
-            this.reorderIndicatorDown.style.display = 'none';
-        }
-    }
-
-    onColumnDrop(e) {
-        const { originalEvent: event, column } = e;
-
-        event.preventDefault();
-        if (this.draggedColumnEl) {
-            let dragIndex = DomHandler.index(this.draggedColumnEl);
-            let dropIndex = DomHandler.index(this.findParentHeader(event.currentTarget));
-            let allowDrop = (dragIndex !== dropIndex);
-            if (allowDrop && ((dropIndex - dragIndex === 1 && this.dropPosition === -1) || (dragIndex - dropIndex === 1 && this.dropPosition === 1))) {
-                allowDrop = false;
-            }
-
-            if (allowDrop) {
-                let columns = this.state.columnOrder ? this.getColumns() : React.Children.toArray(this.props.children);
-                let isSameColumn = (col1, col2) => (col1.columnKey || col2.columnKey) ? ObjectUtils.equals(col1, col2, 'columnKey') : ObjectUtils.equals(col1, col2, 'field');
-                let dragColIndex = columns.findIndex((child) => isSameColumn(child.props, this.draggedColumn));
-                let dropColIndex = columns.findIndex((child) => isSameColumn(child.props, column));
-
-                if (dropColIndex < dragColIndex && this.dropPosition === 1) {
-                    dropColIndex++;
-                }
-
-                if (dropColIndex > dragColIndex && this.dropPosition === -1) {
-                    dropColIndex--;
-                }
-
-                ObjectUtils.reorderArray(columns, dragColIndex, dropColIndex);
-
-                let columnOrder = [];
-                for (let column of columns) {
-                    columnOrder.push(column.props.columnKey||column.props.field);
-                }
-
-                this.setState({
-                    columnOrder
-                });
-
-                if (this.props.onColReorder) {
-                    this.props.onColReorder({
-                        originalEvent: event,
-                        dragIndex: dragColIndex,
-                        dropIndex: dropColIndex,
-                        columns: columns
-                    });
-                }
-            }
-
-            this.reorderIndicatorUp.style.display = 'none';
-            this.reorderIndicatorDown.style.display = 'none';
-            this.draggedColumnEl.draggable = false;
-            this.draggedColumnEl = null;
-            this.dropPosition = null;
-        }
-    }
-
-    onVirtualScroll(event) {
-        if (this.virtualScrollTimer) {
-            clearTimeout(this.virtualScrollTimer);
+                return _filters;
+            }, {});
         }
 
-        this.virtualScrollTimer = setTimeout(() => {
-            if (this.props.onVirtualScroll) {
-                this.props.onVirtualScroll({
-                    first: (event.page - 1) * this.props.rows,
-                    rows: this.props.virtualScroll ? this.props.rows * 2 : this.props.rows
-                });
-            }
-        }, this.props.virtualScrollDelay);
+        return cloned;
     }
 
-    hasEditingCell() {
-        return this.state.editingCells && this.state.editingCells.length !== 0;
+    filter(value, field, matchMode, index = 0) {
+        let filters = { ...this.state.d_filters };
+        let meta = filters[field];
+        let constraint = meta && meta.operator ? meta.constraints[index] : meta;
+
+        constraint = meta ? { value, matchMode: matchMode || constraint.matchMode } : { value, matchMode };
+        this.props.filterDisplay === 'menu' && meta && meta.operator ? (filters[field].constraints[index] = constraint) : (filters[field] = constraint);
+
+        this.setState({ d_filters: filters }, this.onFilterApply);
     }
 
-    onEditingCellChange(event) {
-        let { rowIndex, cellIndex, editing } = event;
-        let editingCells = [...this.state.editingCells];
+    reset() {
+        let state = {
+            d_rows: this.props.rows,
+            d_filters: this.cloneFilters(this.props.filters),
+            groupRowsSortMeta: null,
+            editingMeta: {}
+        };
 
-        if (editing)
-            editingCells.push({ rowIndex, cellIndex });
-        else
-            editingCells = editingCells.filter(cell => !(cell.rowIndex === rowIndex && cell.cellIndex === cellIndex));
+        if (!this.props.onPage) {
+            state.first = this.props.first;
+            state.rows = this.props.rows;
+        }
 
-        this.setState({
-            editingCells
-        }, () => {
-            this.props.onValueChange && this.props.onValueChange(this.processData());
-        });
+        if (!this.props.onSort) {
+            state.sortField = this.props.sortField;
+            state.sortOrder = this.props.sortOrder;
+            state.multiSortMeta = this.props.multiSortMeta;
+        }
+
+        if (!this.props.onFilter) {
+            state.filters = this.props.filters;
+        }
+
+        this.resetColumnOrder();
+
+        this.setState(state);
+    }
+
+    resetColumnOrder() {
+        const columns = this.getColumns(true);
+        let columnOrder = [];
+
+        if (columns) {
+            columnOrder = columns.reduce((orders, col) => {
+                orders.push(col.props.columnKey || col.props.field);
+                return orders;
+            }, []);
+        }
+
+        this.setState({ columnOrder });
     }
 
     exportCSV(options) {
@@ -1165,7 +1407,7 @@ export class DataTable extends Component {
             data = this.props.selection || [];
         }
         else {
-            data = [...(this.props.frozenValue||[]), ...(this.processData()||[])];
+            data = [...(this.props.frozenValue || []), ...(this.processedData() || [])];
         }
 
         //headers
@@ -1190,8 +1432,9 @@ export class DataTable extends Component {
                 if (exportable && field) {
                     let cellData = ObjectUtils.resolveFieldData(record, field);
 
-                    if (cellData != null)
+                    if (cellData != null) {
                         cellData = this.props.exportFunction ? this.props.exportFunction({ data: cellData, field }) : String(cellData).replace(/"/g, '""');
+                    }
                     else
                         cellData = '';
 
@@ -1204,28 +1447,7 @@ export class DataTable extends Component {
             });
         });
 
-        let blob = new Blob([csv],{
-            type: 'application/csv;charset=utf-8;'
-        });
-
-        if(window.navigator.msSaveOrOpenBlob) {
-            navigator.msSaveOrOpenBlob(blob, this.props.exportFilename + '.csv');
-        }
-        else {
-            let link = document.createElement("a");
-            if(link.download !== undefined) {
-                link.setAttribute('href', URL.createObjectURL(blob));
-                link.setAttribute('download', this.props.exportFilename + '.csv');
-                link.style.display = 'none';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            }
-            else {
-                csv = 'data:text/csv;charset=utf-8,' + csv;
-                window.open(encodeURI(csv));
-            }
-        }
+        DomHandler.exportCSV(csv, this.props.exportFilename);
     }
 
     closeEditingCell() {
@@ -1234,111 +1456,25 @@ export class DataTable extends Component {
         }
     }
 
-    onHeaderCheckboxClick(event) {
-        const { originalEvent } = event;
-        let selection;
+    processedData(localState) {
+        let data = this.props.value || [];
 
-        if (!event.checked) {
-            let visibleData = this.hasFilter() ? this.processData() : this.props.value;
-            selection = [...visibleData];
-
-            this.props.onAllRowsSelect && this.props.onAllRowsSelect({ originalEvent, data: selection, type: 'all' });
-        }
-        else {
-            selection = [];
-
-            this.props.onAllRowsUnselect && this.props.onAllRowsUnselect({ originalEvent, data: selection, type: 'all' });
-        }
-
-        if (this.props.onSelectionChange) {
-            this.props.onSelectionChange({
-                originalEvent,
-                value: selection
-            });
-        }
-    }
-
-    filterLocal(value, localFilters) {
-        let filteredValue = [];
-        let filters = localFilters || this.getFilters();
-        let columns = React.Children.toArray(this.props.children);
-
-        for (let i = 0; i < value.length; i++) {
-            let localMatch = true;
-            let globalMatch = false;
-
-            for (let j = 0; j < columns.length; j++) {
-                let col = columns[j];
-                let columnField = col.props.filterField || col.props.field;
-                let filterMeta = filters ? filters[columnField] : null;
-
-                //local
-                if (filterMeta) {
-                    let filterValue = filterMeta.value;
-                    let dataFieldValue = ObjectUtils.resolveFieldData(value[i], columnField);
-                    let filterMatchMode = filterMeta.matchMode||col.props.filterMatchMode;
-                    let filterConstraint = filterMatchMode === 'custom' ? col.props.filterFunction : FilterUtils[filterMatchMode];
-                    let options = {
-                        rowData: value[i],
-                        filters,
-                        props: this.props,
-                        column: {
-                            filterMeta,
-                            filterField: columnField,
-                            props: col.props
-                        }
-                    };
-
-                    if (filterConstraint !== null && !filterConstraint(dataFieldValue, filterValue, this.props.filterLocale, options)) {
-                        localMatch = false;
-                    }
-
-                    if (!localMatch) {
-                        break;
-                    }
-                }
-
-                if (!col.props.excludeGlobalFilter && this.props.globalFilter && !globalMatch) {
-                    globalMatch = FilterUtils['contains'](ObjectUtils.resolveFieldData(value[i], columnField), this.props.globalFilter, this.props.filterLocale);
-                }
-            }
-
-            let matches = localMatch;
-            if (this.props.globalFilter) {
-                matches = localMatch&&globalMatch;
-            }
-
-            if(matches) {
-                filteredValue.push(value[i]);
-            }
-        }
-
-        if(filteredValue.length === value.length) {
-            filteredValue = value;
-        }
-
-        return filteredValue;
-    }
-
-    processData(localState) {
-        let data = this.props.value;
-
-        if (!this.props.lazy && !this.hasEditingCell()) {
+        if (!this.props.lazy) {
             if (data && data.length) {
-                let sortField = (localState && localState.sortField) || this.getSortField();
-                let sortOrder = (localState && localState.sortOrder) || this.getSortOrder();
-                let multiSortMeta = (localState && localState.multiSortMeta) || this.getMultiSortMeta();
+                const filters = (localState && localState.filters) || this.getFilters();
+                const sortField = (localState && localState.sortField) || this.getSortField();
+                const sortOrder = (localState && localState.sortOrder) || this.getSortOrder();
+                const multiSortMeta = (localState && localState.multiSortMeta) || this.getMultiSortMeta();
 
-                if (sortField || (multiSortMeta && multiSortMeta.length)) {
-                    if(this.props.sortMode === 'single')
-                        data = this.sortSingle(data, sortField, sortOrder);
-                    else if(this.props.sortMode === 'multiple')
-                        data = this.sortMultiple(data, multiSortMeta);
+                if (ObjectUtils.isNotEmpty(filters) || this.props.globalFilter) {
+                    data = this.filterLocal(data, filters);
                 }
 
-                let localFilters = (localState && localState.filters) || this.getFilters();
-                if (localFilters || this.props.globalFilter) {
-                    data = this.filterLocal(data, localFilters);
+                if (sortField || ObjectUtils.isNotEmpty(multiSortMeta)) {
+                    if (this.props.sortMode === 'single')
+                        data = this.sortSingle(data, sortField, sortOrder);
+                    else if (this.props.sortMode === 'multiple')
+                        data = this.sortMultiple(data, multiSortMeta);
                 }
             }
         }
@@ -1346,198 +1482,22 @@ export class DataTable extends Component {
         return data;
     }
 
-    isAllSelected() {
-        let visibleData = this.hasFilter() ? this.processData() : this.props.value;
-
-        if(this.props.lazy) {
-            return this.props.selection && this.props.totalRecords && this.props.selection.length === this.props.totalRecords;
+    dataToRender(data) {
+        if (data && this.props.paginator) {
+            const first = this.props.lazy ? 0 : this.getFirst();
+            return data.slice(first, first + this.getRows());
         }
 
-        return this.props.selection && visibleData && visibleData.length && this.props.selection.length === visibleData.length;
-    }
-
-    getFrozenColumns(columns) {
-        let frozenColumns = null;
-
-        for(let col of columns) {
-            if(col.props.frozen) {
-                frozenColumns = frozenColumns||[];
-                frozenColumns.push(col);
-            }
-        }
-
-        return frozenColumns;
-    }
-
-    getScrollableColumns(columns) {
-        let scrollableColumns = null;
-
-        for(let col of columns) {
-            if(!col.props.frozen) {
-                scrollableColumns = scrollableColumns||[];
-                scrollableColumns.push(col);
-            }
-        }
-
-        return scrollableColumns;
-    }
-
-    getSelectionModeInColumn(columns) {
-        if (Array.isArray(columns)) {
-            for (let col of columns) {
-                if (col.props.selectionMode)
-                   return col.props.selectionMode;
-            }
-        }
-
-        return null;
-    }
-
-    createTableHeader(value, columns, columnGroup) {
-        return <TableHeader value={value} sortMode={this.props.sortMode} onSort={this.onSort} sortField={this.getSortField()} sortOrder={this.getSortOrder()} multiSortMeta={this.getMultiSortMeta()} columnGroup={columnGroup}
-                            resizableColumns={this.props.resizableColumns} onColumnResizeStart={this.onColumnResizeStart} onColumnResizerClick={this.props.onColumnResizerClick} onColumnResizerDoubleClick={this.props.onColumnResizerDoubleClick}
-                            onFilter={this.onFilter} filterDelay={this.props.filterDelay}
-                            onHeaderCheckboxClick={this.onHeaderCheckboxClick} headerCheckboxSelected={this.isAllSelected()}
-                            reorderableColumns={this.props.reorderableColumns} onColumnDragStart={this.onColumnDragStart} filters={this.getFilters()}
-                            onColumnDragOver={this.onColumnDragOver} onColumnDragLeave={this.onColumnDragLeave} onColumnDrop={this.onColumnDrop} tabIndex={this.props.tabIndex}>
-                            {columns}
-                          </TableHeader>;
-    }
-
-    createTableBody(value, columns, frozen, selectionModeInColumn) {
-        return <TableBody tableId={this.props.id} value={value} first={this.getFirst()} rows={this.getRows()} lazy={this.props.lazy} paginator={this.props.paginator} dataKey={this.props.dataKey} compareSelectionBy={this.props.compareSelectionBy}
-                        selectionMode={this.props.selectionMode} selection={this.props.selection} metaKeySelection={this.props.metaKeySelection} frozen={frozen} selectionModeInColumn={selectionModeInColumn}
-                        onSelectionChange={this.props.onSelectionChange} onRowClick={this.props.onRowClick} onRowDoubleClick={this.props.onRowDoubleClick} onRowSelect={this.props.onRowSelect} onRowUnselect={this.props.onRowUnselect}
-                        contextMenuSelection={this.props.contextMenuSelection} onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu}
-                        expandedRows={this.props.expandedRows} onRowToggle={this.props.onRowToggle} rowExpansionTemplate={this.props.rowExpansionTemplate} selectOnEdit={this.props.selectOnEdit}
-                        onRowExpand={this.props.onRowExpand} onRowCollapse={this.props.onRowCollapse} emptyMessage={this.props.emptyMessage}
-                        virtualScroll={this.props.virtualScroll} virtualRowHeight={this.props.virtualRowHeight} loading={this.props.loading}
-                        groupField={this.props.groupField} rowGroupMode={this.props.rowGroupMode} rowGroupHeaderTemplate={this.props.rowGroupHeaderTemplate} rowGroupFooterTemplate={this.props.rowGroupFooterTemplate}
-                        sortField={this.getSortField()} rowClassName={this.props.rowClassName} cellClassName={this.props.cellClassName} onRowReorder={this.props.onRowReorder}
-                        editMode={this.props.editMode} editingRows={this.props.editingRows} rowEditorValidator={this.props.rowEditorValidator}
-                        onRowEditInit={this.props.onRowEditInit} onRowEditSave={this.props.onRowEditSave} onRowEditCancel={this.props.onRowEditCancel} onRowEditChange={this.props.onRowEditChange}
-                        expandableRowGroups={this.props.expandableRowGroups} showRowReorderElement={this.props.showRowReorderElement} showSelectionElement={this.props.showSelectionElement}
-                        dragSelection={this.props.dragSelection} cellSelection={this.props.cellSelection} onCellClick={this.props.onCellClick} onCellSelect={this.props.onCellSelect} onCellUnselect={this.props.onCellUnselect}
-                        onEditingCellChange={this.onEditingCellChange}>
-                        {columns}
-                </TableBody>;
-    }
-
-    createTableLoadingBody(columns) {
-        if (this.props.virtualScroll) {
-            return <TableLoadingBody columns={columns} rows={this.getRows()}></TableLoadingBody>;
-        }
-        else {
-            return null;
-        }
-    }
-
-    createTableFooter(columns, columnGroup) {
-        if(this.hasFooter())
-            return <TableFooter columnGroup={columnGroup}>{columns}</TableFooter>;
-        else
-            return null;
-    }
-
-    createScrollableView(value, columns, frozen, headerColumnGroup, footerColumnGroup, totalRecords, selectionModeInColumn) {
-        return <ScrollableView columns={columns} header={this.createTableHeader(value, columns, headerColumnGroup)}
-                body={this.createTableBody(value, columns, frozen, selectionModeInColumn)} loadingBody={this.createTableLoadingBody(columns)} frozenBody={this.props.frozenValue ? this.createTableBody(this.props.frozenValue, columns, true, selectionModeInColumn): null}
-                footer={this.createTableFooter(columns, footerColumnGroup)} tableStyle={this.props.tableStyle} tableClassName={this.props.tableClassName}
-                scrollHeight={this.props.scrollHeight} frozen={frozen} frozenWidth={this.props.frozenWidth}
-                virtualScroll={this.props.virtualScroll} virtualRowHeight={this.props.virtualRowHeight} rows={this.props.rows} totalRecords={totalRecords}
-                onVirtualScroll={this.onVirtualScroll} loading={this.props.loading}></ScrollableView>
-    }
-
-    getColumns() {
-        let columns = React.Children.toArray(this.props.children);
-
-        if(columns && columns.length) {
-            if(this.props.reorderableColumns && this.state.columnOrder) {
-                let orderedColumns = [];
-                for(let columnKey of this.state.columnOrder) {
-                    let column = this.findColumnByKey(columns, columnKey);
-                    if (column) {
-                        orderedColumns.push(column);
-                    }
-                }
-
-                return [...orderedColumns, ...columns.filter((item) => {
-                    return orderedColumns.indexOf(item) < 0;
-                })];
-            }
-            else {
-                return columns;
-            }
-        }
-
-        return null;
-    }
-
-    findColumnByKey(columns, key) {
-        if(columns && columns.length) {
-            for(let i = 0; i < columns.length; i++) {
-                let child = columns[i];
-                if(child.props.columnKey === key || child.props.field === key) {
-                    return child;
-                }
-            }
-        }
-
-        return null;
-    }
-
-    getTotalRecords(data) {
-        return this.props.lazy ? this.props.totalRecords : data ? data.length : 0;
-    }
-
-    reset() {
-        let state = {};
-        if (!this.props.onPage) {
-            state.first = this.props.first;
-            state.rows = this.props.rows;
-        }
-
-        if (!this.props.onSort) {
-            state.sortField = this.props.sortField;
-            state.sortOrder = this.props.sortOrder;
-            state.multiSortMeta = this.props.multiSortMeta;
-        }
-
-        if (!this.props.onFilter) {
-            state.filters = this.props.filters;
-        }
-
-        this.resetColumnOrder();
-
-        if (Object.keys(state).length) {
-            this.setState(state);
-        }
-    }
-
-    resetColumnOrder() {
-        let columns = React.Children.toArray(this.props.children);
-        let columnOrder = [];
-
-        for(let column of columns) {
-            columnOrder.push(column.props.columnKey||column.props.field);
-        }
-
-        this.setState({
-            columnOrder
-        });
-    }
-
-    renderLoader() {
-        let iconClassName = classNames('p-datatable-loading-icon pi-spin', this.props.loadingIcon);
-
-        return (
-            <div className="p-datatable-loading-overlay p-component-overlay">
-                <i className={iconClassName}></i>
-            </div>
-        );
+        return data;
     }
 
     componentDidMount() {
+        this.el.setAttribute(this.attributeSelector, '');
+
+        if (this.props.responsiveLayout === 'stack' && !this.props.scrollable) {
+            this.createResponsiveStyle();
+        }
+
         if (this.isStateful() && this.props.resizableColumns) {
             this.restoreColumnWidths();
         }
@@ -1559,78 +1519,273 @@ export class DataTable extends Component {
             this.saveState();
         }
 
+        if (prevProps.responsiveLayout !== this.props.responsiveLayout) {
+            this.destroyResponsiveStyle();
+
+            if (this.props.responsiveLayout === 'stack' && !this.props.scrollable) {
+                this.createResponsiveStyle();
+            }
+        }
+
+        if (prevProps.filters !== this.props.filters) {
+            this.setState({
+                filters: this.cloneFilters(this.props.filters),
+                d_filters: this.cloneFilters(this.props.filters)
+            });
+        }
+
         if (prevProps.globalFilter !== this.props.globalFilter) {
-            this.filter(this.props.globalFilter, 'globalFilter', 'contains');
+            this.filter(this.props.globalFilter, 'global', 'contains');
         }
     }
 
-    render() {
-        let value = this.processData();
-        let columns = this.getColumns();
-        let totalRecords = this.getTotalRecords(value);
-        let selectionModeInColumn = this.getSelectionModeInColumn(columns);
-        let className = classNames('p-datatable p-component', {
-                        'p-datatable-resizable': this.props.resizableColumns, 'p-datatable-resizable-fit': this.props.resizableColumns && this.props.columnResizeMode === 'fit',
-                        'p-datatable-scrollable': this.props.scrollable, 'p-datatable-virtual-scrollable': this.props.virtualScroll,
-                        'p-datatable-striped': this.props.stripedRows, 'p-datatable-gridlines': this.props.showGridlines,
-                        'p-datatable-auto-layout': this.props.autoLayout, 'p-datatable-hoverable-rows': this.props.rowHover || this.props.selectionMode || selectionModeInColumn}, this.props.className);
-        let paginatorTop = this.props.paginator && this.props.paginatorPosition !== 'bottom' && this.createPaginator('top', totalRecords);
-        let paginatorBottom = this.props.paginator && this.props.paginatorPosition !== 'top' && this.createPaginator('bottom', totalRecords);
-        let headerFacet = this.props.header && <div className="p-datatable-header">{this.props.header}</div>;
-        let footerFacet = this.props.footer && <div className="p-datatable-footer">{this.props.footer}</div>;
-        let resizeHelper = this.props.resizableColumns && <div ref={(el) => {this.resizerHelper = el;}} className="p-column-resizer-helper p-highlight" style={{display:'none'}}></div>;
-        let tableContent = null;
-        let resizeIndicatorUp = this.props.reorderableColumns && <span ref={(el) => {this.reorderIndicatorUp = el;}} className="pi pi-arrow-down p-datatable-reorder-indicator-up" style={{position: 'absolute', display: 'none'}} />
-        let resizeIndicatorDown = this.props.reorderableColumns && <span ref={(el) => {this.reorderIndicatorDown = el;}} className="pi pi-arrow-up p-datatable-reorder-indicator-down" style={{position: 'absolute', display: 'none'}} />;
-        let loader;
+    componentWillUnmount() {
+        this.unbindColumnResizeEvents();
+        this.destroyStyleElement();
+        this.destroyResponsiveStyle();
+    }
 
+    renderLoader() {
         if (this.props.loading) {
-            loader = this.renderLoader();
+            const iconClassName = classNames('p-datatable-loading-icon pi-spin', this.props.loadingIcon);
+
+            return (
+                <div className="p-datatable-loading-overlay p-component-overlay">
+                    <i className={iconClassName} />
+                </div>
+            )
         }
 
-        if (Array.isArray(columns)) {
-            if (this.props.scrollable) {
-                let frozenColumns = this.getFrozenColumns(columns);
-                let scrollableColumns = frozenColumns ? this.getScrollableColumns(columns) : columns;
-                let frozenView, scrollableView;
-                if (frozenColumns) {
-                    frozenView = this.createScrollableView(value, frozenColumns, true, this.props.frozenHeaderColumnGroup, this.props.frozenFooterColumnGroup, totalRecords, selectionModeInColumn);
-                }
+        return null;
+    }
 
-                scrollableView = this.createScrollableView(value, scrollableColumns, false, this.props.headerColumnGroup, this.props.footerColumnGroup, totalRecords, selectionModeInColumn);
-
-                tableContent = <div className="p-datatable-scrollable-wrapper">
-                                    {frozenView}
-                                    {scrollableView}
-                            </div>;
-            }
-            else {
-                let tableHeader = this.createTableHeader(value, columns, this.props.headerColumnGroup);
-                let tableBody = this.createTableBody(value, columns, false, selectionModeInColumn);
-                let tableFooter = this.createTableFooter(columns, this.props.footerColumnGroup);
-
-                tableContent = <div className="p-datatable-wrapper">
-                        <table style={this.props.tableStyle} role="grid" className={this.props.tableClassName} ref={(el) => {this.table = el;}}>
-                            {tableHeader}
-                            {tableFooter}
-                            {tableBody}
-                        </table>
-                    </div>;
-            }
+    renderHeader() {
+        if (this.props.header) {
+            const content = ObjectUtils.getJSXElement(this.props.header, { props: this.props });
+            return (
+                <div className="p-datatable-header">{content}</div>
+            )
         }
+
+        return null;
+    }
+
+    renderTableHeader(processedData, columns, empty) {
+        const sortField = this.getSortField();
+        const sortOrder = this.getSortOrder();
+        const multiSortMeta = [...this.getMultiSortMeta()];
+        const groupRowSortField = this.getGroupRowSortField();
+        const filters = this.state.d_filters;
+        const filtersStore = this.getFilters();
 
         return (
-            <div id={this.props.id} className={className} style={this.props.style} ref={(el) => {this.container = el;}} data-scrollselectors=".p-datatable-scrollable-body, .p-datatable-unfrozen-view .p-datatable-scrollable-body">
-                {loader}
-                {headerFacet}
-                {paginatorTop}
-                {tableContent}
-                {paginatorBottom}
-                {footerFacet}
-                {resizeHelper}
-                {resizeIndicatorUp}
-                {resizeIndicatorDown}
+            <TableHeader value={processedData} tableProps={this.props} columns={columns} tabIndex={this.props.tabIndex} empty={empty} headerColumnGroup={this.props.headerColumnGroup} resizableColumns={this.props.resizableColumns}
+                onColumnResizeStart={this.onColumnResizeStart} onColumnResizerClick={this.props.onColumnResizerClick} onColumnResizerDoubleClick={this.props.onColumnResizerDoubleClick}
+                sortMode={this.props.sortMode} sortField={sortField} sortOrder={sortOrder} multiSortMeta={multiSortMeta} groupRowsBy={this.props.groupRowsBy} groupRowSortField={groupRowSortField} onSortChange={this.onSortChange}
+                filterDisplay={this.props.filterDisplay} filters={filters} filtersStore={filtersStore} onFilterChange={this.onFilterChange} onFilterApply={this.onFilterApply}
+                allRowsSelected={this.allRowsSelected} onColumnCheckboxChange={this.onColumnHeaderCheckboxChange}
+                onColumnMouseDown={this.onColumnHeaderMouseDown} onColumnDragStart={this.onColumnHeaderDragStart} onColumnDragOver={this.onColumnHeaderDragOver} onColumnDragLeave={this.onColumnHeaderDragLeave} onColumnDrop={this.onColumnHeaderDrop}
+                rowGroupMode={this.props.rowGroupMode} reorderableColumns={this.props.reorderableColumns} />
+        )
+    }
+
+    renderTableBody(options, columns, selectionModeInColumn, empty, isVirtualScrollerDisabled) {
+        const tableSelector = this.attributeSelector;
+        const first = this.getFirst();
+        const editingMeta = this.state.editingMeta;
+        const { rows, contentRef, className, loading, loadingTemplate } = options;
+
+        const frozenBody = this.props.frozenValue && (
+            <TableBody value={this.props.frozenValue} className="p-datatable-frozen-tbody" frozenRow
+                tableProps={this.props} tableSelector={tableSelector} columns={columns} selectionModeInColumn={selectionModeInColumn}
+                first={first} editingMeta={editingMeta} onEditingMetaChange={this.onEditingMetaChange} tabIndex={this.props.tabIndex}
+                onRowClick={this.props.onRowClick} onRowDoubleClick={this.props.onRowDoubleClick} onCellClick={this.props.onCellClick}
+                selection={this.props.selection} onSelectionChange={this.props.onSelectionChange} lazy={this.props.lazy} paginator={this.props.paginator}
+                onCellSelect={this.props.onCellSelect} onCellUnselect={this.props.onCellUnselect} onRowSelect={this.props.onRowSelect} onRowUnselect={this.props.onRowUnselect}
+                dragSelection={this.props.dragSelection} onContextMenu={this.props.onContextMenu} onContextMenuSelectionChange={this.props.onContextMenuSelectionChange}
+                metaKeySelection={this.props.metaKeySelection} selectionMode={this.props.selectionMode} cellSelection={this.props.cellSelection} contextMenuSelection={this.props.contextMenuSelection}
+                dataKey={this.props.dataKey} expandedRows={this.props.expandedRows} onRowCollapse={this.props.onRowCollapse} onRowExpand={this.props.onRowExpand} onRowToggle={this.props.onRowToggle}
+                editMode={this.props.editMode} editingRows={this.props.editingRows} onRowReorder={this.props.onRowReorder} scrollable={this.props.scrollable} rowGroupMode={this.props.rowGroupMode}
+                groupRowsBy={this.props.groupRowsBy} expandableRowGroups={this.props.expandableRowGroups} loading={this.props.loading} emptyMessage={this.props.emptyMessage}
+                rowGroupHeaderTemplate={this.props.rowGroupHeaderTemplate} rowExpansionTemplate={this.props.rowExpansionTemplate} rowGroupFooterTemplate={this.props.rowGroupFooterTemplate}
+                onRowEditChange={this.props.onRowEditChange} compareSelectionBy={this.props.compareSelectionBy} selectOnEdit={this.props.selectOnEdit}
+                onRowEditInit={this.props.onRowEditInit} rowEditorValidator={this.props.rowEditorValidator} onRowEditSave={this.props.onRowEditSave} onRowEditComplete={this.props.onRowEditComplete} onRowEditCancel={this.props.onRowEditCancel}
+                cellClassName={this.props.cellClassName} responsiveLayout={this.props.responsiveLayout}
+                showSelectionElement={this.props.showSelectionElement} showRowReorderElement={this.props.showRowReorderElement}
+                expandedRowIcon={this.props.expandedRowIcon} collapsedRowIcon={this.props.collapsedRowIcon} rowClassName={this.props.rowClassName}
+                isVirtualScrollerDisabled={true} />
+        );
+        const body = (
+            <TableBody className={className} value={this.dataToRender(rows)} empty={empty} frozenRow={false}
+                tableProps={this.props} tableSelector={tableSelector} columns={columns} selectionModeInColumn={selectionModeInColumn}
+                first={first} editingMeta={editingMeta} onEditingMetaChange={this.onEditingMetaChange} tabIndex={this.props.tabIndex}
+                onRowClick={this.props.onRowClick} onRowDoubleClick={this.props.onRowDoubleClick} onCellClick={this.props.onCellClick}
+                selection={this.props.selection} onSelectionChange={this.props.onSelectionChange} lazy={this.props.lazy} paginator={this.props.paginator}
+                onCellSelect={this.props.onCellSelect} onCellUnselect={this.props.onCellUnselect} onRowSelect={this.props.onRowSelect} onRowUnselect={this.props.onRowUnselect}
+                dragSelection={this.props.dragSelection} onContextMenu={this.props.onContextMenu} onContextMenuSelectionChange={this.props.onContextMenuSelectionChange}
+                metaKeySelection={this.props.metaKeySelection} selectionMode={this.props.selectionMode} cellSelection={this.props.cellSelection} contextMenuSelection={this.props.contextMenuSelection}
+                dataKey={this.props.dataKey} expandedRows={this.props.expandedRows} onRowCollapse={this.props.onRowCollapse} onRowExpand={this.props.onRowExpand} onRowToggle={this.props.onRowToggle}
+                editMode={this.props.editMode} editingRows={this.props.editingRows} onRowReorder={this.props.onRowReorder} scrollable={this.props.scrollable} rowGroupMode={this.props.rowGroupMode}
+                groupRowsBy={this.props.groupRowsBy} expandableRowGroups={this.props.expandableRowGroups} loading={this.props.loading} emptyMessage={this.props.emptyMessage}
+                rowGroupHeaderTemplate={this.props.rowGroupHeaderTemplate} rowExpansionTemplate={this.props.rowExpansionTemplate} rowGroupFooterTemplate={this.props.rowGroupFooterTemplate}
+                onRowEditChange={this.props.onRowEditChange} compareSelectionBy={this.props.compareSelectionBy} selectOnEdit={this.props.selectOnEdit}
+                onRowEditInit={this.props.onRowEditInit} rowEditorValidator={this.props.rowEditorValidator} onRowEditSave={this.props.onRowEditSave} onRowEditComplete={this.props.onRowEditComplete} onRowEditCancel={this.props.onRowEditCancel}
+                cellClassName={this.props.cellClassName} responsiveLayout={this.props.responsiveLayout}
+                showSelectionElement={this.props.showSelectionElement} showRowReorderElement={this.props.showRowReorderElement}
+                expandedRowIcon={this.props.expandedRowIcon} collapsedRowIcon={this.props.collapsedRowIcon} rowClassName={this.props.rowClassName}
+                virtualScrollerContentRef={contentRef} virtualScrollerOptions={this.props.virtualScrollerOptions} virtualScrollerLoading={loading} virtualScrollerLoadingTemplate={loadingTemplate} isVirtualScrollerDisabled={isVirtualScrollerDisabled} />
+        );
+
+        return (
+            <>
+                {frozenBody}
+                {body}
+            </>
+        );
+    }
+
+    renderTableFooter(columns) {
+        return (
+            <TableFooter tableProps={this.props} columns={columns} footerColumnGroup={this.props.footerColumnGroup} />
+        );
+    }
+
+    renderContent(processedData, columns, selectionModeInColumn, empty) {
+        if (!columns) return;
+
+        const isVirtualScrollerDisabled = this.isVirtualScrollerDisabled();
+        const virtualScrollerOptions = this.props.virtualScrollerOptions || {};
+
+        return (
+            <div className="p-datatable-wrapper" style={{ maxHeight: isVirtualScrollerDisabled ? this.props.scrollHeight : '' }}>
+                <VirtualScroller {...virtualScrollerOptions} showSpacer={false} items={processedData} columns={columns} style={{ height: this.props.scrollHeight }}
+                    disabled={isVirtualScrollerDisabled} loaderDisabled
+                    contentTemplate={(options) => {
+                        const ref = (el) => { this.table = el; options.spacerRef && options.spacerRef(el) };
+                        const tableClassName = classNames('p-datatable-table', this.props.tableClassName);
+                        const tableHeader = this.renderTableHeader(options.items, options.columns, empty);
+                        const tableBody = this.renderTableBody(options, options.columns, selectionModeInColumn, empty, isVirtualScrollerDisabled);
+                        const tableFooter = this.renderTableFooter(options.columns);
+
+                        return (
+                            <table ref={ref} style={this.props.tableStyle} className={tableClassName} role="table">
+                                {tableHeader}
+                                {tableBody}
+                                {tableFooter}
+                            </table>
+                        )
+                    }} />
             </div>
         );
+    }
+
+    renderFooter() {
+        if (this.props.footer) {
+            const content = ObjectUtils.getJSXElement(this.props.footer, { props: this.props });
+            return (
+                <div className="p-datatable-footer">{content}</div>
+            )
+        }
+
+        return null;
+    }
+
+    renderPaginator(position, totalRecords) {
+        const className = classNames('p-paginator-' + position, this.props.paginatorClassName);
+
+        return (
+            <Paginator first={this.getFirst()} rows={this.getRows()} pageLinkSize={this.props.pageLinkSize} className={className} onPageChange={this.onPageChange} template={this.props.paginatorTemplate}
+                totalRecords={totalRecords} rowsPerPageOptions={this.props.rowsPerPageOptions} currentPageReportTemplate={this.props.currentPageReportTemplate}
+                leftContent={this.props.paginatorLeft} rightContent={this.props.paginatorRight} alwaysShow={this.props.alwaysShowPaginator} dropdownAppendTo={this.props.paginatorDropdownAppendTo} />
+        );
+    }
+
+    renderPaginatorTop(totalRecords) {
+        if (this.props.paginator && this.props.paginatorPosition !== 'bottom') {
+            return this.renderPaginator('top', totalRecords);
+        }
+
+        return null;
+    }
+
+    renderPaginatorBottom(totalRecords) {
+        if (this.props.paginator && this.props.paginatorPosition !== 'top') {
+            return this.renderPaginator('bottom', totalRecords);
+        }
+
+        return null;
+    }
+
+    renderResizeHelper() {
+        if (this.props.resizableColumns) {
+            return (
+                <div ref={el => this.resizeHelper = el} className="p-column-resizer-helper" style={{ display: 'none' }}></div>
+            )
+        }
+
+        return null;
+    }
+
+    renderReorderIndicators() {
+        if (this.props.reorderableColumns) {
+            const style = { position: 'absolute', display: 'none' };
+            return (
+                <>
+                    <span ref={el => this.reorderIndicatorUp = el} className="pi pi-arrow-down p-datatable-reorder-indicator-up" style={style}></span>
+                    <span ref={el => this.reorderIndicatorDown = el} className="pi pi-arrow-up p-datatable-reorder-indicator-down" style={style}></span>
+                </>
+            )
+        }
+
+        return null;
+    }
+
+    render() {
+        const processedData = this.processedData();
+        const columns = this.getColumns();
+        const totalRecords = this.getTotalRecords(processedData);
+        const empty = ObjectUtils.isEmpty(processedData);
+        const selectionModeInColumn = this.getSelectionModeInColumn(columns);
+        const className = classNames('p-datatable p-component', {
+            'p-datatable-hoverable-rows': this.props.rowHover || this.props.selectionMode || selectionModeInColumn,
+            'p-datatable-auto-layout': this.props.autoLayout,
+            'p-datatable-resizable': this.props.resizableColumns,
+            'p-datatable-resizable-fit': this.props.resizableColumns && this.props.columnResizeMode === 'fit',
+            'p-datatable-scrollable': this.props.scrollable,
+            'p-datatable-scrollable-vertical': this.props.scrollable && this.props.scrollDirection === 'vertical',
+            'p-datatable-scrollable-horizontal': this.props.scrollable && this.props.scrollDirection === 'horizontal',
+            'p-datatable-scrollable-both': this.props.scrollable && this.props.scrollDirection === 'both',
+            'p-datatable-flex-scrollable': (this.props.scrollable && this.props.scrollHeight === 'flex'),
+            'p-datatable-responsive-stack': this.props.responsiveLayout === 'stack',
+            'p-datatable-responsive-scroll': this.props.responsiveLayout === 'scroll',
+            'p-datatable-striped': this.props.stripedRows,
+            'p-datatable-gridlines': this.props.showGridlines,
+            'p-datatable-grouped-header': this.props.headerColumnGroup != null,
+            'p-datatable-grouped-footer': this.props.footerColumnGroup != null,
+            'p-datatable-sm': this.props.size === 'small',
+            'p-datatable-lg': this.props.size === 'large'
+        }, this.props.className);
+
+        const loader = this.renderLoader();
+        const header = this.renderHeader();
+        const paginatorTop = this.renderPaginatorTop(totalRecords);
+        const content = this.renderContent(processedData, columns, selectionModeInColumn, empty);
+        const paginatorBottom = this.renderPaginatorBottom(totalRecords);
+        const footer = this.renderFooter();
+        const resizeHelper = this.renderResizeHelper();
+        const reorderIndicators = this.renderReorderIndicators();
+
+        return (
+            <div ref={el => this.el = el} id={this.props.id} className={className} style={this.props.style} data-scrollselectors=".p-datatable-wrapper">
+                {loader}
+                {header}
+                {paginatorTop}
+                {content}
+                {paginatorBottom}
+                {footer}
+                {resizeHelper}
+                {reorderIndicators}
+            </div>
+        )
     }
 }
