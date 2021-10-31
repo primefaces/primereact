@@ -637,6 +637,13 @@
                             ]
                         },
                         {
+                            "name": "VirtualScroll",
+                            "to": "/datatable/virtualscroll",
+                            "meta": [
+                                "virtualscroll"
+                            ]
+                        },
+                        {
                             "name": "ColGroup",
                             "to": "/datatable/colgroup",
                             "meta": [
