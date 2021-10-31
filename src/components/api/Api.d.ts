@@ -7,12 +7,24 @@ interface ZIndexOptions {
     toast: number;
 }
 
+export type InputStyleType = 'outlined' | 'filled';
+
+export type AppendToType = 'self' | HTMLElement | undefined | null;
+
+interface FilterMatchModeOptions {
+    text: any[];
+    numeric: any[];
+    date: any[];
+}
+
 interface APIOptions {
     ripple?: boolean;
+    inputStyle?: InputStyleType;
     locale?: string;
     autoZIndex?: false;
     zIndex?: ZIndexOptions;
-    appendTo?: 'self' | HTMLElement | undefined | null;
+    appendTo?: AppendToType;
+    filterMatchModeOptions?: FilterMatchModeOptions;
 }
 
 declare const PrimeReact: APIOptions;
@@ -244,3 +256,32 @@ export interface MessageSeverityOptions {
 }
 
 export declare const MessageSeverity: MessageSeverityOptions;
+
+export interface FilterMatchMode {
+    readonly STARTS_WITH: string;
+    readonly CONTAINS: string;
+    readonly NOT_CONTAINS: string;
+    readonly ENDS_WITH: string;
+    readonly EQUALS: string;
+    readonly NOT_EQUALS: string;
+    readonly IN: string;
+    readonly LESS_THAN: string;
+    readonly LESS_THAN_OR_EQUAL_TO: string;
+    readonly GREATER_THAN: string;
+    readonly GREATER_THAN_OR_EQUAL_TO: string;
+    readonly BETWEEN: string;
+    readonly DATE_IS: string;
+    readonly DATE_IS_NOT: string;
+    readonly DATE_BEFORE: string;
+    readonly DATE_AFTER: string;
+    readonly CUSTOM: string;
+}
+
+export interface FilterMatchMode {
+    readonly AND: string;
+    readonly OR: string;
+}
+
+export declare namespace FilterService {
+    export function register(rule: string, fn: (...arg: any[]) => boolean): void;
+}
