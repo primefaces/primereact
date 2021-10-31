@@ -1,0 +1,6 @@
+{
+    "main": "./skeleton.cjs.js",
+    "module": "./skeleton.esm.js",
+    "unpkg": "./skeleton.min.js",
+    "types": "./skeleton.d.ts"
+}

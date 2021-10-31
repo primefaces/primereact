@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-interface FullCalendarProps {
+export interface FullCalendarProps {
     id?: string;
     events?: any[];
     style?: object;
@@ -8,4 +8,4 @@ interface FullCalendarProps {
     options?: object;
 }
 
-export class FullCalendar extends React.Component<FullCalendarProps,any> {}
+export declare class FullCalendar extends React.Component<FullCalendarProps, any> { }

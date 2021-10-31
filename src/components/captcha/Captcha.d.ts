@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-interface CaptchaProps {
+export interface CaptchaProps {
     id?: string;
     siteKey?: string;
     theme?: string;
@@ -12,4 +12,4 @@ interface CaptchaProps {
     onExpire?(): void;
 }
 
-export class Captcha extends React.Component<CaptchaProps,any> {}
+export declare class Captcha extends React.Component<CaptchaProps, any> { }

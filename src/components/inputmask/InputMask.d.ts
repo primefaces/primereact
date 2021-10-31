@@ -1,8 +1,28 @@
 import * as React from 'react';
-import TooltipOptions from '../tooltip/TooltipOptions';
+import TooltipOptions from '../tooltip/tooltipoptions';
 
-interface InputMaskProps {
+interface InputMaskCompleteParams {
+    originalEvent: React.SyntheticEvent;
+    value: string | undefined | null;
+}
+
+interface InputMaskChangeTargetOptions {
+    name: string;
+    id: string;
+    value: string;
+}
+
+interface InputMaskChangeParams {
+    originalEvent: React.SyntheticEvent;
+    value: string;
+    stopPropagation(): void;
+    preventDefault(): void;
+    target: InputMaskChangeTargetOptions;
+}
+
+export interface InputMaskProps {
     id?: string;
+    inputRef?: React.Ref<HTMLInputElement>;
     value?: string;
     type?: string;
     mask?: string;
@@ -14,15 +34,18 @@ interface InputMaskProps {
     placeholder?: string;
     size?: number;
     maxlength?: number;
-    tabindex?: number;
+    tabIndex?: number;
     disabled?: boolean;
-    readonly?: boolean;
+    readOnly?: boolean;
     name?: string;
     required?: boolean;
-    tooltip?: any;
+    tooltip?: string;
     tooltipOptions?: TooltipOptions;
-    onComplete?(e: Event): void;
-    onChange?(e: {originalEvent: Event, value: any}): void;
+    ariaLabelledBy?: string;
+    onComplete?(e: InputMaskCompleteParams): void;
+    onChange?(e: InputMaskChangeParams): void;
+    onFocus?(event: React.FocusEvent<HTMLInputElement>): void;
+    onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
 }
 
-export class InputMask extends React.Component<InputMaskProps,any> {}
+export declare class InputMask extends React.Component<InputMaskProps, any> { }

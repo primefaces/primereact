@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ObjectUtils from '../utils/ObjectUtils';
-import {Calendar} from 'fullcalendar';
+import { ObjectUtils } from '../utils/Utils';
 
 export class FullCalendar extends Component {
 
@@ -22,6 +21,8 @@ export class FullCalendar extends Component {
     }
 
     componentDidMount() {
+        console.warn("FullCalendar component is deprecated. Use FullCalendar component of '@fullcalendar/react' package.");
+
         this.config = {
             theme: true
         };
@@ -56,13 +57,17 @@ export class FullCalendar extends Component {
     }
 
     initialize() {
-        this.calendar = new Calendar(this.element, this.config);
-        this.calendar.render();
+        import('@fullcalendar/core').then((module) => {
+            if (module && module.Calendar) {
+                this.calendar = new module.Calendar(this.element, this.config);
+                this.calendar.render();
 
-        if (this.props.events) {
-            this.calendar.removeAllEventSources();
-            this.calendar.addEventSource(this.props.events);
-        }
+                if (this.props.events) {
+                    this.calendar.removeAllEventSources();
+                    this.calendar.addEventSource(this.props.events);
+                }
+            }
+        });
     }
 
     componentWillUnmount() {

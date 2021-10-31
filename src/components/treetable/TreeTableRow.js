@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import DomHandler from '../utils/DomHandler';
-import { TreeTableBodyCell } from './TreeTableBodyCell'; 
+import { DomHandler, classNames } from '../utils/Utils';
+import { TreeTableBodyCell } from './TreeTableBodyCell';
+import { Ripple } from '../ripple/Ripple';
 
 export class TreeTableRow extends Component {
 
@@ -34,10 +34,10 @@ export class TreeTableRow extends Component {
         node: PropTypes.any,
         level: PropTypes.number,
         columns: PropTypes.array,
-        expandedKeys: PropTypes.array,
+        expandedKeys: PropTypes.object,
         contextMenuSelectionKey: PropTypes.any,
         selectionMode: PropTypes.string,
-        selectionKeys: PropTypes.array,
+        selectionKeys: PropTypes.any,
         metaKeySelection: PropTypes.bool,
         propagateSelectionUp: PropTypes.bool,
         propagateSelectionDown: PropTypes.bool,
@@ -79,6 +79,7 @@ export class TreeTableRow extends Component {
             this.expand(event);
 
         event.preventDefault();
+        event.stopPropagation();
     }
 
     expand(event) {
@@ -96,7 +97,7 @@ export class TreeTableRow extends Component {
     collapse(event) {
         let expandedKeys = {...this.props.expandedKeys};
         delete expandedKeys[this.props.node.key];
-        
+
         this.props.onToggle({
             originalEvent: event,
             value: expandedKeys
@@ -217,7 +218,7 @@ export class TreeTableRow extends Component {
                     else {
                         selectionKeys = this.props.selectionKeys ? {...this.props.selectionKeys} : {};
                         selectionKeys[this.props.node.key] = true;
-                        
+
                         if (this.props.onSelect) {
                             this.props.onSelect({
                                 originalEvent: event,
@@ -245,7 +246,7 @@ export class TreeTableRow extends Component {
 
     onCheckboxChange(event) {
         const checked = this.isChecked();
-        let selectionKeys = this.props.selectionKeys ? {...this.props.selectionKeys} : {};    
+        let selectionKeys = this.props.selectionKeys ? {...this.props.selectionKeys} : {};
 
         if (checked) {
             if (this.props.propagateSelectionDown)
@@ -271,7 +272,7 @@ export class TreeTableRow extends Component {
         else {
             if (this.props.propagateSelectionDown)
                 this.propagateDown(this.props.node, true, selectionKeys);
-            else 
+            else
                 selectionKeys[this.props.node.key] = {checked: true};
 
                 if (this.props.propagateSelectionUp && this.props.onPropagateUp) {
@@ -313,7 +314,7 @@ export class TreeTableRow extends Component {
         let selectionKeys = event.selectionKeys;
         let checkedChildCount = 0;
         let childPartialSelected = false;
-        
+
         for(let child of this.props.node.children) {
             if(selectionKeys[child.key] && selectionKeys[child.key].checked)
                 checkedChildCount++;
@@ -382,35 +383,35 @@ export class TreeTableRow extends Component {
                     if (nextRow) {
                         nextRow.focus();
                     }
-    
+
                     event.preventDefault();
                 break;
-    
+
                 //up arrow
                 case 38:
                     const previousRow = rowElement.previousElementSibling;
                     if (previousRow) {
                         previousRow.focus();
                     }
-    
+
                     event.preventDefault();
                 break;
-    
+
                 //right arrow
                 case 39:
                     if (!this.isExpanded()) {
                         this.expand(event);
                     }
-    
+
                     event.preventDefault();
                 break;
-    
+
                 //left arrow
                 case 37:
                     if (this.isExpanded()) {
                         this.collapse(event);
                     }
-    
+
                     event.preventDefault();
                 break;
 
@@ -419,7 +420,7 @@ export class TreeTableRow extends Component {
                     this.onClick(event);
                     event.preventDefault();
                 break;
-    
+
                 default:
                     //no op
                 break;
@@ -460,9 +461,10 @@ export class TreeTableRow extends Component {
         const style = {marginLeft: this.props.level * 16 + 'px', visibility: (this.props.node.leaf === false || (this.props.node.children && this.props.node.children.length)) ? 'visible' : 'hidden'};
 
         return (
-            <span className="p-treetable-toggler p-unselectable-text" onClick={this.onTogglerClick} style={style}>
-                <i className={iconClassName} ></i>
-            </span>
+            <button type="button" className="p-treetable-toggler p-link p-unselectable-text" onClick={this.onTogglerClick} tabIndex={-1} style={style}>
+                <i className={iconClassName}></i>
+                <Ripple />
+            </button>
         );
     }
 
@@ -470,11 +472,11 @@ export class TreeTableRow extends Component {
         if (this.props.selectionMode === 'checkbox' && this.props.node.selectable !== false) {
             const checked = this.isChecked();
             const partialChecked = this.isPartialChecked();
-            const className = classNames('p-checkbox-box', {'p-highlight': checked});
+            const className = classNames('p-checkbox-box', {'p-highlight': checked, 'p-indeterminate': partialChecked});
             const icon = classNames('p-checkbox-icon p-c', {'pi pi-check': checked, 'pi pi-minus': partialChecked});
 
             return (
-                <div className="p-checkbox p-treetable-checkbox p-component" onClick={this.onCheckboxChange}>
+                <div className="p-checkbox p-treetable-checkbox p-component" onClick={this.onCheckboxChange} role="checkbox" aria-checked={checked}>
                     <div className="p-hidden-accessible">
                         <input type="checkbox" onFocus={this.onCheckboxFocus} onBlur={this.onCheckboxBlur} />
                     </div>
@@ -498,7 +500,7 @@ export class TreeTableRow extends Component {
         }
 
         return (
-            <TreeTableBodyCell key={column.props.columnKey||column.props.field} {...column.props} node={this.props.node}>
+            <TreeTableBodyCell key={column.props.columnKey||column.props.field} {...column.props} selectOnEdit={this.props.selectOnEdit} selected={this.isSelected()} node={this.props.node} rowIndex={this.props.rowIndex}>
                 {toggler}
                 {checkbox}
             </TreeTableBodyCell>
@@ -507,22 +509,22 @@ export class TreeTableRow extends Component {
 
     renderChildren() {
         if (this.isExpanded() && this.props.node.children) {
-            return this.props.node.children.map(childNode => {
+            return this.props.node.children.map((childNode, index) => {
                 return (
-                    <TreeTableRow key={childNode.key||JSON.stringify(childNode.data)} level={this.props.level + 1}
-                        node={childNode} columns={this.props.columns} expandedKeys={this.props.expandedKeys} 
-                        onToggle={this.props.onToggle} onExpand={this.props.onExpand} onCollapse={this.props.onCollapse} 
+                    <TreeTableRow key={childNode.key||JSON.stringify(childNode.data)} level={this.props.level + 1} rowIndex={this.props.rowIndex + '_' + index}
+                        node={childNode} columns={this.props.columns} expandedKeys={this.props.expandedKeys} selectOnEdit={this.props.selectOnEdit}
+                        onToggle={this.props.onToggle} onExpand={this.props.onExpand} onCollapse={this.props.onCollapse}
                         selectionMode={this.props.selectionMode} selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange}
-                        metaKeySelection={this.props.metaKeySelection} onRowClick={this.props.onRowClick} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect} 
+                        metaKeySelection={this.props.metaKeySelection} onRowClick={this.props.onRowClick} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect}
                         propagateSelectionUp={this.props.propagateSelectionUp} propagateSelectionDown={this.props.propagateSelectionDown} onPropagateUp={this.propagateUp}
                         rowClassName={this.props.rowClassName}
-                        contextMenuSelectionKey={this.props.contextMenuSelectionKey} onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu} /> 
+                        contextMenuSelectionKey={this.props.contextMenuSelectionKey} onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu} />
                 );
             });
         }
         else {
             return null;
-        } 
+        }
     }
 
     render() {
@@ -538,13 +540,13 @@ export class TreeTableRow extends Component {
             className = {...className, ...rowClassName};
         }
 
-        className = classNames(className);
+        className = classNames(className, this.props.node.className);
 
         return (
-            <React.Fragment>
-                <tr ref={el => this.container = el} tabIndex="0" className={className} onClick={this.onClick} onTouchEnd={this.onTouchEnd} onContextMenu={this.onRightClick} onKeyDown={this.onKeyDown}>{cells}</tr>
+            <>
+                <tr ref={el => this.container = el} tabIndex={0} className={className} style={this.props.node.style} onClick={this.onClick} onTouchEnd={this.onTouchEnd} onContextMenu={this.onRightClick} onKeyDown={this.onKeyDown}>{cells}</tr>
                 {children}
-            </React.Fragment>
+            </>
         );
     }
 }

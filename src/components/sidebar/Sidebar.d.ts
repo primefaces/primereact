@@ -1,20 +1,30 @@
 import * as React from 'react';
 
-interface SidebarProps {
+type SidebarPositionType = 'top' | 'bottom' | 'left' | 'right';
+
+type SidebarTemplateType = React.ReactNode | ((props: SidebarProps) => React.ReactNode);
+
+type SidebarAppendToType = 'self' | HTMLElement | undefined | null;
+
+export interface SidebarProps {
     id?: string;
     style?: object;
     className?: string;
     visible?: boolean;
-    position?: string;
+    position?: SidebarPositionType;
     fullScreen?: boolean;
     blockScroll?: boolean;
     baseZIndex?: number;
     dismissable?: boolean;
     showCloseIcon?: boolean;
-    iconsTemplate?(): JSX.Element | undefined;
+    ariaCloseLabel?: string;
+    closeOnEscape?: boolean;
+    icons?: SidebarTemplateType;
     modal?: boolean;
+    appendTo?: SidebarAppendToType;
+    transitionOptions?: object;
     onShow?(): void;
     onHide(): void;
 }
 
-export class Sidebar extends React.Component<SidebarProps,any> {}
+export declare class Sidebar extends React.Component<SidebarProps, any> { }

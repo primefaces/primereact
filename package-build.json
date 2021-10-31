@@ -1,0 +1,30 @@
+{
+    "name": "primereact",
+    "version": "7.0.0",
+    "homepage": "https://www.primefaces.org/primereact",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/primefaces/primereact.git"
+    },
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/primefaces/primereact/issues"
+    },
+    "keywords": [
+        "primereact",
+        "react",
+        "ui framework",
+        "component framework",
+        "ui library",
+        "component library",
+        "material",
+        "bootstrap",
+        "react components",
+        "responsive components"
+    ],
+    "peerDependencies": {
+        "react": "^17.0.1",
+        "react-dom": "^17.0.1"
+    },
+    "unpkg": "primereact.all.min.js"
+}

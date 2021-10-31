@@ -1,15 +1,16 @@
-import React, {Component} from 'react';
-import {Tree} from '../../components/tree/Tree';
-import {NodeService} from '../service/NodeService';
-import {TreeSubmenu} from './TreeSubmenu';
-import {TabView, TabPanel} from '../../components/tabview/TabView';
-import {CodeHighlight} from '../codehighlight/CodeHighlight';
+import React, { Component } from 'react';
+import { Tree } from '../../components/tree/Tree';
+import { NodeService } from '../service/NodeService';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class TreeDragDropDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             nodes: null
         };
 
@@ -17,23 +18,24 @@ export class TreeDragDropDemo extends Component {
     }
 
     componentDidMount() {
-        this.nodeService.getTreeNodes().then(data => this.setState({nodes: data}));
+        this.nodeService.getTreeNodes().then(data => this.setState({ nodes: data }));
     }
 
     render() {
         return (
             <div>
-                <TreeSubmenu />
-                
                 <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Tree - DragDrop</h1>
+                    <AppInlineHeader changelogText="tree">
+                        <h1>Tree <span>DragDrop</span></h1>
                         <p>Nodes can be reordered using drag and drop.</p>
-                    </div>
+                    </AppInlineHeader>
+                    <AppDemoActions github="tree/TreeDragDropDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
-                    <Tree value={this.state.nodes} dragdropScope="demo" onDragDrop={event => this.setState({nodes: event.value})} />
+                    <div className="card">
+                        <Tree value={this.state.nodes} dragdropScope="demo" onDragDrop={event => this.setState({ nodes: event.value })} />
+                    </div>
                 </div>
 
                 <TreeDragDropDemoDoc />
@@ -44,27 +46,22 @@ export class TreeDragDropDemo extends Component {
 
 export class TreeDragDropDemoDoc extends Component {
 
-    shouldComponentUpdate(){
-        return false;
-    }
-    
-    render() {
-        return (
-            <div className="content-section documentation">
-                <TabView>
-                    <TabPanel header="Source">
-                        <h3>Import</h3>
-<CodeHighlight className="language-javascript">
-{`
-import React, {Component} from 'react';
-import {Tree} from 'primereact/tree';
-import {NodeService} from '../service/NodeService';
+    constructor(props) {
+        super(props);
+
+        this.sources = {
+            'class': {
+                tabName: 'Class Source',
+                content: `
+import React, { Component } from 'react';
+import { Tree } from 'primereact/tree';
+import { NodeService } from '../service/NodeService';
 
 export class TreeDragDropDemo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             nodes: null
         };
 
@@ -72,31 +69,115 @@ export class TreeDragDropDemo extends Component {
     }
 
     componentDidMount() {
-        this.nodeService.getTreeNodes().then(data => this.setState({nodes: data}));
+        this.nodeService.getTreeNodes().then(data => this.setState({ nodes: data }));
     }
 
     render() {
         return (
-            <div>              
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Tree - DragDrop</h1>
-                        <p>Nodes can be reordered using drag and drop.</p>
-                    </div>
-                </div>
-
-                <div className="content-section implementation">
-                    <Tree value={this.state.nodes} dragdropScope="demo" onDragDrop={event => this.setState({nodes: event.value})} />
+            <div>
+                <div className="card">
+                    <Tree value={this.state.nodes} dragdropScope="demo" onDragDrop={event => this.setState({ nodes: event.value })} />
                 </div>
             </div>
         )
     }
 }
+                `
+            },
+            'hooks': {
+                tabName: 'Hooks Source',
+                content: `
+import React, { useState, useEffect } from 'react';
+import { Tree } from 'primereact/tree';
+import { NodeService } from '../service/NodeService';
 
-`}
-</CodeHighlight>
+const TreeDragDropDemo = () => {
+    const [nodes, setNodes] = useState(null);
+    const nodeService = new NodeService();
 
-                    </TabPanel>
+    useEffect(() => {
+        nodeService.getTreeNodes().then(data => setNodes(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    return (
+        <div>
+            <div className="card">
+                <Tree value={nodes} dragdropScope="demo" onDragDrop={event => setNodes(event.value)} />
+            </div>
+        </div>
+    )
+}
+                `
+            },
+            'ts': {
+                tabName: 'TS Source',
+                content: `
+import React, { useState, useEffect } from 'react';
+import { Tree } from 'primereact/tree';
+import { NodeService } from '../service/NodeService';
+
+const TreeDragDropDemo = () => {
+    const [nodes, setNodes] = useState(null);
+    const nodeService = new NodeService();
+
+    useEffect(() => {
+        nodeService.getTreeNodes().then(data => setNodes(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    return (
+        <div>
+            <div className="card">
+                <Tree value={nodes} dragdropScope="demo" onDragDrop={event => setNodes(event.value)} />
+            </div>
+        </div>
+    )
+}
+                `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="./NodeService.js"></script>
+
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/tree/tree.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const { Tree } = primereact.tree;
+
+const TreeDragDropDemo = () => {
+    const [nodes, setNodes] = useState(null);
+    const nodeService = new NodeService();
+
+    useEffect(() => {
+        nodeService.getTreeNodes().then(data => setNodes(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    return (
+        <div>
+            <div className="card">
+                <Tree value={nodes} dragdropScope="demo" onDragDrop={event => setNodes(event.value)} />
+            </div>
+        </div>
+    )
+}
+                `
+            }
+        }
+    }
+
+    shouldComponentUpdate() {
+        return false;
+    }
+
+    render() {
+        return (
+            <div className="content-section documentation" id="app-doc">
+                <TabView>
+                    {
+                        useLiveEditorTabs({ name: 'TreeDragDropDemo', sources: this.sources, service: 'NodeService', data: 'treenodes' })
+                    }
                 </TabView>
             </div>
         );

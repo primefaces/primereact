@@ -1,5 +1,6 @@
 .sass-cache
 node_modules
+/dist
 public
 src
 .gitignore
@@ -11,3 +12,6 @@ yarn.lock
 exports
 vscode
 .vscode
+.editorconfig
+package-lock.json
+npm-shrinkwrap.json

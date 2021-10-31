@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { classNames } from '../utils/Utils';
 
 export class ProgressBar extends Component {
 
@@ -11,7 +11,9 @@ export class ProgressBar extends Component {
         unit: '%',
         style: null,
         className: null,
-        mode: 'determinate'
+        mode: 'determinate',
+        displayValueTemplate: null,
+        color: null
     }
 
     static propTypes = {
@@ -21,18 +23,20 @@ export class ProgressBar extends Component {
         unit: PropTypes.string,
         style: PropTypes.object,
         className: PropTypes.string,
-        mode: PropTypes.string
+        mode: PropTypes.string,
+        displayValueTemplate: PropTypes.func,
+        color: PropTypes.string
     };
 
     renderLabel() {
-        if (this.props.showValue && this.props.value) {
+        if (this.props.showValue && this.props.value != null) {
+            let label = this.props.displayValueTemplate ? this.props.displayValueTemplate(this.props.value) : this.props.value + this.props.unit;
             return (
-                <div className="p-progressbar-label">{this.props.value + this.props.unit}</div>
+                <div className="p-progressbar-label">{label}</div>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderDeterminate() {
@@ -40,8 +44,8 @@ export class ProgressBar extends Component {
         let label = this.renderLabel();
 
         return (
-            <div  role="progressbar" id={this.props.id} className={className} style={this.props.style} aria-valuemin="0" aria-valuenow={this.props.value} aria-valuemax="100" aria-label={this.props.value}>
-                <div className="p-progressbar-value p-progressbar-value-animate" style={{width: this.props.value + '%', display: 'block'}}></div>
+            <div role="progressbar" id={this.props.id} className={className} style={this.props.style} aria-valuemin="0" aria-valuenow={this.props.value} aria-valuemax="100" aria-label={this.props.value}>
+                <div className="p-progressbar-value p-progressbar-value-animate" style={{ width: this.props.value + '%', display: 'block', backgroundColor: this.props.color }}></div>
                 {label}
             </div>
         );
@@ -53,7 +57,7 @@ export class ProgressBar extends Component {
         return (
             <div role="progressbar" id={this.props.id} className={className} style={this.props.style}>
                 <div className="p-progressbar-indeterminate-container">
-                    <div className="p-progressbar-value p-progressbar-value-animate"></div>
+                    <div className="p-progressbar-value p-progressbar-value-animate" style={{ backgroundColor: this.props.color }}></div>
                 </div>
             </div>
         )

@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import ObjectUtils from '../utils/ObjectUtils';
-import {UITreeNode} from './UITreeNode';
+import { ObjectUtils, classNames } from '../utils/Utils';
+import { UITreeNode } from './UITreeNode';
 
 export class Tree extends Component {
 
     static defaultProps = {
         id: null,
         value: null,
+        disabled: false,
         selectionMode: null,
         selectionKeys: null,
         onSelectionChange: null,
@@ -17,29 +17,41 @@ export class Tree extends Component {
         expandedKeys: null,
         style: null,
         className: null,
+        contentStyle: null,
+        contentClassName: null,
         metaKeySelection: true,
         propagateSelectionUp: true,
         propagateSelectionDown: true,
         loading: false,
         loadingIcon: 'pi pi-spinner',
         dragdropScope: null,
+        header: null,
+        footer: null,
+        showHeader: true,
         filter: false,
+        filterValue: null,
         filterBy: 'label',
         filterMode: 'lenient',
         filterPlaceholder: null,
+        filterLocale: undefined,
         nodeTemplate: null,
+        togglerTemplate: null,
         onSelect: null,
         onUnselect: null,
         onExpand: null,
         onCollapse: null,
         onToggle: null,
         onDragDrop: null,
-        onContextMenu: null
+        onContextMenu: null,
+        onFilterValueChange: null,
+        onNodeClick: null,
+        onNodeDoubleClick: null
     }
 
     static propTypes = {
         id: PropTypes.string,
-        value: PropTypes.any.isRequired,
+        value: PropTypes.any,
+        disabled: PropTypes.bool,
         selectionMode: PropTypes.string,
         selectionKeys: PropTypes.any,
         onSelectionChange: PropTypes.func,
@@ -48,36 +60,50 @@ export class Tree extends Component {
         expandedKeys: PropTypes.object,
         style: PropTypes.object,
         className: PropTypes.string,
+        contentStyle: PropTypes.object,
+        contentClassName: PropTypes.string,
         metaKeySelection: PropTypes.bool,
         propagateSelectionUp: PropTypes.bool,
         propagateSelectionDown: PropTypes.bool,
         loading: PropTypes.bool,
         loadingIcon: PropTypes.string,
         dragdropScope: PropTypes.string,
+        header: PropTypes.any,
+        footer: PropTypes.any,
+        showHeader: PropTypes.bool,
         filter: PropTypes.bool,
+        filterValue: PropTypes.string,
         filterBy: PropTypes.any,
         filterMode: PropTypes.string,
         filterPlaceholder: PropTypes.string,
-        nodeTemplate: PropTypes.func,
+        filterLocale: PropTypes.string,
+        nodeTemplate: PropTypes.any,
+        togglerTemplate: PropTypes.func,
         onSelect: PropTypes.func,
         onUnselect: PropTypes.func,
         onExpand: PropTypes.func,
         onCollapse: PropTypes.func,
         onToggle: PropTypes.func,
         onDragDrop: PropTypes.func,
-        onContextMenu: PropTypes.func
+        onContextMenu: PropTypes.func,
+        onFilterValueChange: PropTypes.func,
+        onNodeClick: PropTypes.func,
+        onNodeDoubleClick: PropTypes.func
     }
 
     constructor(props) {
         super(props);
 
-        if (!this.props.onToggle) {
-            this.state = {
-                expandedKeys: this.props.expandedKeys,
-                filter: ''
-            };
+        this.state = {};
+
+        if (!this.props.onFilterValueChange) {
+            this.state['filterValue'] = '';
         }
-        
+
+        if (!this.props.onToggle) {
+            this.state['expandedKeys'] = this.props.expandedKeys;
+        }
+
         this.isNodeLeaf = this.isNodeLeaf.bind(this);
         this.onToggle = this.onToggle.bind(this);
         this.onDragStart = this.onDragStart.bind(this);
@@ -86,6 +112,10 @@ export class Tree extends Component {
         this.onDropPoint = this.onDropPoint.bind(this);
         this.onFilterInputChange = this.onFilterInputChange.bind(this);
         this.onFilterInputKeyDown = this.onFilterInputKeyDown.bind(this);
+    }
+
+    getFilterValue() {
+        return this.props.onFilterValueChange ? this.props.filterValue : this.state.filterValue;
     }
 
     getExpandedKeys() {
@@ -126,7 +156,7 @@ export class Tree extends Component {
             let dragNodeParent = this.findNode(value, dragPaths);
             let dragNode = dragNodeParent ? dragNodeParent.children[this.dragState.index] : value[this.dragState.index];
             let dropNode = this.findNode(value, event.path.split('-'));
-            
+
             if (dropNode.children)
                 dropNode.children.push(dragNode);
             else
@@ -140,7 +170,10 @@ export class Tree extends Component {
             if (this.props.onDragDrop) {
                 this.props.onDragDrop({
                     originalEvent: event.originalEvent,
-                    value: value
+                    value: value,
+                    dragNode,
+                    dropNode,
+                    dropIndex: event.index
                 });
             }
         }
@@ -177,11 +210,14 @@ export class Tree extends Component {
                 else
                     value.push(dragNode);
             }
-            
+
             if (this.props.onDragDrop) {
                 this.props.onDragDrop({
                     originalEvent: event.originalEvent,
-                    value: value
+                    value: value,
+                    dragNode,
+                    dropNode: dropNodeParent,
+                    dropIndex: event.index
                 });
             }
         }
@@ -191,7 +227,7 @@ export class Tree extends Component {
         if (!dragPath) {
             return false;
         }
-        else {   
+        else {
             //same node
             if (dragPath === dropPath) {
                 return false;
@@ -225,7 +261,7 @@ export class Tree extends Component {
         let validateDrop = this.validateDrop(this.dragState.path, event.path);
         if (validateDrop) {
             //child dropped to next sibling's drop point
-            if (event.position === -1 && this.areSiblings(this.dragState.path, event.path) && (this.dragState.index +1 === event.index)) {
+            if (event.position === -1 && this.areSiblings(this.dragState.path, event.path) && (this.dragState.index + 1 === event.index)) {
                 return false;
             }
 
@@ -274,32 +310,48 @@ export class Tree extends Component {
 
     onFilterInputChange(event) {
         this.filterChanged = true;
-        this.setState({filter: event.target.value});
+        let filterValue = event.target.value;
+
+        if (this.props.onFilterValueChange) {
+            this.props.onFilterValueChange({
+                originalEvent: event,
+                value: filterValue
+            });
+        }
+        else {
+            this.setState({ filterValue });
+        }
     }
 
-    filter() {
+    filter(value) {
+        this.setState({ filterValue: ObjectUtils.isNotEmpty(value) ? value : '' }, this._filter);
+    }
+
+    _filter() {
         if (!this.filterChanged) {
             return;
         }
 
-        if (this.state.filter === '') {
+        const filterValue = this.getFilterValue();
+
+        if (ObjectUtils.isEmpty(filterValue)) {
             this.filteredNodes = this.props.value;
         }
         else {
             this.filteredNodes = [];
             const searchFields = this.props.filterBy.split(',');
-            const filterText = this.state.filter.toLowerCase();
+            const filterText = filterValue.toLocaleLowerCase(this.props.filterLocale);
             const isStrictMode = this.props.filterMode === 'strict';
-            for(let node of this.props.value) {
-                let copyNode = {...node};
-                let paramsWithoutNode = {searchFields, filterText, isStrictMode};
+            for (let node of this.props.value) {
+                let copyNode = { ...node };
+                let paramsWithoutNode = { searchFields, filterText, isStrictMode };
                 if ((isStrictMode && (this.findFilteredNodes(copyNode, paramsWithoutNode) || this.isFilterMatched(copyNode, paramsWithoutNode))) ||
                     (!isStrictMode && (this.isFilterMatched(copyNode, paramsWithoutNode) || this.findFilteredNodes(copyNode, paramsWithoutNode)))) {
                     this.filteredNodes.push(copyNode);
                 }
             }
         }
-        
+
         this.filterChanged = false;
     }
 
@@ -310,31 +362,32 @@ export class Tree extends Component {
                 let childNodes = [...node.children];
                 node.children = [];
                 for (let childNode of childNodes) {
-                    let copyChildNode = {...childNode};
+                    let copyChildNode = { ...childNode };
                     if (this.isFilterMatched(copyChildNode, paramsWithoutNode)) {
                         matched = true;
                         node.children.push(copyChildNode);
                     }
                 }
             }
-            
+
             if (matched) {
+                node.expanded = true;
                 return true;
             }
         }
     }
 
-    isFilterMatched(node, {searchFields, filterText, isStrictMode}) {
+    isFilterMatched(node, { searchFields, filterText, isStrictMode }) {
         let matched = false;
-        for(let field of searchFields) {
-            let fieldValue = String(ObjectUtils.resolveFieldData(node, field)).toLowerCase();
-            if(fieldValue.indexOf(filterText) > -1) {
+        for (let field of searchFields) {
+            let fieldValue = String(ObjectUtils.resolveFieldData(node, field)).toLocaleLowerCase(this.props.filterLocale);
+            if (fieldValue.indexOf(filterText) > -1) {
                 matched = true;
             }
         }
 
         if (!matched || (isStrictMode && !this.isNodeLeaf(node))) {
-            matched = this.findFilteredNodes(node, {searchFields, filterText, isStrictMode}) || matched;
+            matched = this.findFilteredNodes(node, { searchFields, filterText, isStrictMode }) || matched;
         }
 
         return matched;
@@ -342,19 +395,21 @@ export class Tree extends Component {
 
     renderRootChild(node, index, last) {
         return (
-            <UITreeNode key={node.key||node.label} node={node} index={index} last={last} path={String(index)} selectionMode={this.props.selectionMode} 
-                    selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange} metaKeySelection={this.props.metaKeySelection}
-                    contextMenuSelectionKey={this.props.contextMenuSelectionKey} onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu}
-                    propagateSelectionDown={this.props.propagateSelectionDown} propagateSelectionUp={this.props.propagateSelectionUp}
-                    onExpand={this.props.onExpand} onCollapse={this.props.onCollapse} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect}
-                    expandedKeys={this.getExpandedKeys()} onToggle={this.onToggle} nodeTemplate={this.props.nodeTemplate} isNodeLeaf={this.isNodeLeaf}
-                    dragdropScope={this.props.dragdropScope} onDragStart={this.onDragStart} onDragEnd={this.onDragEnd} onDrop={this.onDrop} onDropPoint={this.onDropPoint}  />
+            <UITreeNode key={node.key || node.label} node={node} index={index} last={last} path={String(index)} disabled={this.props.disabled} selectionMode={this.props.selectionMode}
+                selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange} metaKeySelection={this.props.metaKeySelection}
+                contextMenuSelectionKey={this.props.contextMenuSelectionKey} onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu}
+                propagateSelectionDown={this.props.propagateSelectionDown} propagateSelectionUp={this.props.propagateSelectionUp}
+                onExpand={this.props.onExpand} onCollapse={this.props.onCollapse} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect}
+                expandedKeys={this.getExpandedKeys()} onToggle={this.onToggle} nodeTemplate={this.props.nodeTemplate} togglerTemplate={this.props.togglerTemplate} isNodeLeaf={this.isNodeLeaf}
+                dragdropScope={this.props.dragdropScope} onDragStart={this.onDragStart} onDragEnd={this.onDragEnd} onDrop={this.onDrop} onDropPoint={this.onDropPoint}
+                onNodeClick={this.props.onNodeClick} onNodeDoubleClick={this.props.onNodeDoubleClick} />
         );
     }
 
     renderRootChildren() {
         if (this.props.filter) {
-            this.filter();
+            this.filterChanged = true;
+            this._filter();
         }
 
         const value = this.getRootNode();
@@ -366,60 +421,108 @@ export class Tree extends Component {
     renderModel() {
         if (this.props.value) {
             const rootNodes = this.renderRootChildren();
+            let contentClass = classNames('p-tree-container', this.props.contentClassName);
 
             return (
-                <ul className="p-tree-container" role="tree" aria-label={this.props.ariaLabel} aria-labelledby={this.props.ariaLabelledBy}>
+                <ul className={contentClass} role="tree" aria-label={this.props.ariaLabel} aria-labelledby={this.props.ariaLabelledBy} style={this.props.contentStyle}>
                     {rootNodes}
                 </ul>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
-    
+
     renderLoader() {
         if (this.props.loading) {
             let icon = classNames('p-tree-loading-icon pi-spin', this.props.loadingIcon);
 
             return (
-                <React.Fragment>
-                    <div className="p-tree-loading-mask p-component-overlay"></div>
-                    <div className="p-tree-loading-content">
-                        <i className={icon} />
-                    </div>
-                </React.Fragment>
+                <div className="p-tree-loading-overlay p-component-overlay">
+                    <i className={icon} />
+                </div>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderFilter() {
         if (this.props.filter) {
-            return <div className="p-tree-filter-container">
-                        <input type="text" autoComplete="off" className="p-tree-filter p-inputtext p-component" placeholder={this.props.filterPlaceholder}
-                            onKeyDown={this.onFilterInputKeyDown} onChange={this.onFilterInputChange} />
-                        <span className="p-tree-filter-icon pi pi-search"></span>
-                   </div>;
+            let filterValue = this.getFilterValue();
+            filterValue = ObjectUtils.isNotEmpty(filterValue) ? filterValue : '';
+
+            return (
+                <div className="p-tree-filter-container">
+                    <input type="text" value={filterValue} autoComplete="off" className="p-tree-filter p-inputtext p-component" placeholder={this.props.filterPlaceholder}
+                        onKeyDown={this.onFilterInputKeyDown} onChange={this.onFilterInputChange} disabled={this.props.disabled} />
+                    <span className="p-tree-filter-icon pi pi-search"></span>
+                </div>
+            );
         }
-        else {
-            return null;
+
+        return null;
+    }
+
+    renderHeader() {
+        if (this.props.showHeader) {
+            const filterElement = this.renderFilter();
+            let content = filterElement;
+
+            if (this.props.header) {
+                const defaultContentOptions = {
+                    filterContainerClassName: 'p-tree-filter-container',
+                    filterIconClasssName: 'p-tree-filter-icon pi pi-search',
+                    filterInput: {
+                        className: 'p-tree-filter p-inputtext p-component',
+                        onKeyDown: this.onFilterInputKeyDown,
+                        onChange: this.onFilterInputChange
+                    },
+                    filterElement,
+                    element: content,
+                    props: this.props
+                };
+
+                content = ObjectUtils.getJSXElement(this.props.header, defaultContentOptions);
+            }
+
+            return (
+                <div className="p-tree-header">
+                    {content}
+                </div>
+            );
         }
+
+        return null;
+    }
+
+    renderFooter() {
+        const content = ObjectUtils.getJSXElement(this.props.footer, this.props);
+
+        return (
+            <div className="p-tree-footer">
+                {content}
+            </div>
+        );
     }
 
     render() {
-        const className = classNames('p-tree p-component', {'p-tree-selectable': this.props.selectionMode, 'p-tree-loading': this.props.loading});
+        const className = classNames('p-tree p-component', this.props.className, {
+            'p-tree-selectable': this.props.selectionMode,
+            'p-tree-loading': this.props.loading,
+            'p-disabled': this.props.disabled
+        });
         const loader = this.renderLoader();
         const content = this.renderModel();
-        const filter = this.renderFilter();
+        const header = this.renderHeader();
+        const footer = this.renderFooter();
 
         return (
             <div id={this.props.id} className={className} style={this.props.style}>
                 {loader}
-                {filter}
+                {header}
                 {content}
+                {footer}
             </div>
         );
     }

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-interface ProgressSpinnerProps {
+export interface ProgressSpinnerProps {
     id?: string;
     style?: object;
     className?: string;
@@ -9,4 +9,4 @@ interface ProgressSpinnerProps {
     animationDuration?: string
 }
 
-export class ProgressSpinner extends React.Component<ProgressSpinnerProps,any> {}
+export declare class ProgressSpinner extends React.Component<ProgressSpinnerProps, any> { }

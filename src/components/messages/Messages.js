@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { UIMessage } from './UIMessage';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { TransitionGroup } from 'react-transition-group';
+import { CSSTransition } from '../csstransition/CSSTransition';
 
-var messageIdx = 0;
+let messageIdx = 0;
 
 export class Messages extends Component {
 
@@ -11,6 +12,7 @@ export class Messages extends Component {
         id: null,
         className: null,
         style: null,
+        transitionOptions: null,
         onRemove: null,
         onClick: null
     }
@@ -19,6 +21,7 @@ export class Messages extends Component {
         id: PropTypes.string,
         className: PropTypes.string,
         style: PropTypes.object,
+        transitionOptions: PropTypes.object,
         onRemove: PropTypes.func,
         onClick: PropTypes.func
     };
@@ -34,7 +37,7 @@ export class Messages extends Component {
 
     show(value) {
         if (value) {
-            let newMessages;
+            let newMessages = [];
 
             if (Array.isArray(value)) {
                 for (let i = 0; i < value.length; i++) {
@@ -59,6 +62,12 @@ export class Messages extends Component {
         })
     }
 
+    replace(value) {
+        this.setState({
+            messages: [],
+        }, () => this.show(value));
+    }
+
     onClose(message) {
         let newMessages = this.state.messages.filter(msg => msg.id !== message.id);
         this.setState({
@@ -73,15 +82,20 @@ export class Messages extends Component {
     render() {
         return (
             <div id={this.props.id} className={this.props.className} style={this.props.style}>
-                <TransitionGroup >
-                    {this.state.messages.map((message, index) =>
-                        <CSSTransition key={message.id} classNames="p-messages"
-                            timeout={{ enter: 250, exit: 500 }}>
-                            <UIMessage message={message} onClick={this.props.onClick} onClose={this.onClose} />
-                        </CSSTransition>
-                    )}
+                <TransitionGroup>
+                    {
+                        this.state.messages.map((message) => {
+                            const messageRef = React.createRef();
+
+                            return (
+                                <CSSTransition nodeRef={messageRef} key={message.id} classNames="p-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} options={this.props.transitionOptions}>
+                                    <UIMessage ref={messageRef} message={message} onClick={this.props.onClick} onClose={this.onClose} />
+                                </CSSTransition>
+                            )
+                        })
+                    }
                 </TransitionGroup>
             </div>
-        );  
+        );
     }
 }

@@ -1,7 +1,3 @@
-.p-megamenu {
-    padding: .25em;
-}
-
 .p-megamenu-root-list {
     margin: 0;
     padding: 0;
@@ -13,18 +9,16 @@
 }
 
 .p-megamenu .p-menuitem-link {
-    padding: .25em;
-    display: block;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
     text-decoration: none;
-}
-
-.p-megamenu .p-menuitem-icon {
-    margin-right: .25em;
-    vertical-align: middle;
+    overflow: hidden;
+    position: relative;
 }
 
 .p-megamenu .p-menuitem-text {
-    vertical-align: middle;
+    line-height: 1;
 }
 
 .p-megamenu-panel {
@@ -38,42 +32,22 @@
     display: block;
 }
 
-.p-megamenu-panel .p-menuitem {
-    margin: .125em 0;
-}
-
 .p-megamenu-submenu {
     margin: 0;
     padding: 0;
     list-style: none;
-    width: 12.5em;
-}
-
-.p-megamenu-submenu-header {
-    padding: .25em;
 }
 
 /* Horizontal */
-.p-megamenu-horizontal .p-megamenu-root-list > .p-menuitem {
-    display: inline-block;
-}
-
-.p-megamenu-horizontal .p-megamenu-root-list > .p-menuitem > .p-menuitem-link > .p-submenu-icon {
-    vertical-align: middle;
-    margin-left: .25em;
+.p-megamenu-horizontal .p-megamenu-root-list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 /* Vertical */
-.p-megamenu-vertical {
-    width: 12.5em;
-}
-
-.p-megamenu-vertical .p-megamenu-root-list > .p-menuitem {
-    display: block;
-}
-
-.p-megamenu-vertical .p-megamenu-root-list > .p-menuitem > .p-menuitem-link {
-    position: relative;
+.p-megamenu-vertical .p-megamenu-root-list {
+    flex-direction: column;
 }
 
 .p-megamenu-vertical .p-megamenu-root-list > .p-menuitem-active > .p-megamenu-panel {
@@ -82,15 +56,39 @@
 }
 
 .p-megamenu-vertical .p-megamenu-root-list > .p-menuitem > .p-menuitem-link > .p-submenu-icon {
-    position: absolute;
-    width: 1em;
-    height: 1em;
-    top: 50%;
-    right: 0;
-    margin-top: -.5em;
+    margin-left: auto;
 }
 
-.p-megamenu .p-grid {
-    -ms-flex-wrap: nowrap;
-    flex-wrap: nowrap;
+
+.p-megamenu-grid {
+    display: flex;
+}
+
+.p-megamenu-col-2,
+.p-megamenu-col-3,
+.p-megamenu-col-4,
+.p-megamenu-col-6,
+.p-megamenu-col-12 {
+    flex: 0 0 auto;
+    padding: 0.5rem;
+}
+
+.p-megamenu-col-2 {
+    width: 16.6667%;
+}
+
+.p-megamenu-col-3 {
+    width: 25%;
+}
+
+.p-megamenu-col-4 {
+    width: 33.3333%;
+}
+
+.p-megamenu-col-6 {
+    width: 50%;
+}
+
+.p-megamenu-col-12 {
+    width: 100%;
 }

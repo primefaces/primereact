@@ -1,20 +1,30 @@
 import * as React from 'react';
 
-interface DataScrollerProps {
+type DataScrollerEmptyMessageType = React.ReactNode | ((props: DataScrollerProps) => React.ReactNode);
+
+interface DataScrollerLazyLoadParams {
+    first: number;
+    rows: number;
+}
+
+export interface DataScrollerProps {
     id?: string;
     value?: any[];
     rows?: number;
     inline?: boolean;
-    scrollHeight?: any;
-    loader?: any;
+    scrollHeight?: string;
+    loader?: boolean;
     buffer?: number;
     style?: object;
     className?: string;
-    header?: any;
-    footer?: any;
+    header?: React.ReactNode;
+    footer?: React.ReactNode;
     lazy?: boolean;
-    onLazyLoad?(e: {first: number, rows: number}): void;
-    itemTemplate?(item: any): JSX.Element | undefined;
+    emptyMessage?: DataScrollerEmptyMessageType;
+    onLazyLoad?(e: DataScrollerLazyLoadParams): void;
+    itemTemplate?(item: any): React.ReactNode;
 }
 
-export class DataScroller extends React.Component<DataScrollerProps,any> {}
+export declare class DataScroller extends React.Component<DataScrollerProps, any> {
+    public load(): void;
+}

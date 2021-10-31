@@ -1,14 +1,13 @@
 import * as React from 'react';
-import TooltipOptions from '../tooltip/TooltipOptions';
+import TooltipOptions from '../tooltip/tooltipoptions';
+import { KeyFilterType } from '../keyfilter';
 
-interface InputTextProps extends React.HTMLProps<HTMLInputElement> {
-    [key: string]: any;
-    keyfilter?: any;
+export interface InputTextProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onInput'> {
+    keyfilter?: KeyFilterType;
     validateOnly?: boolean;
-    tooltip?: any;
+    tooltip?: string;
     tooltipOptions?: TooltipOptions;
-    onInput?(event: React.FormEvent<HTMLInputElement>): void;
-    onKeyPress?(event: React.KeyboardEvent<HTMLInputElement>): void;
+    onInput?(event: React.FormEvent<HTMLInputElement>, validatePattern: boolean): void;
 }
 
-export class InputText extends React.Component<InputTextProps,any> {}
+export declare class InputText extends React.Component<InputTextProps, any> { }

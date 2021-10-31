@@ -1,21 +1,45 @@
 import * as React from 'react';
-import TooltipOptions from '../tooltip/TooltipOptions';
+import TooltipOptions from '../tooltip/tooltipoptions';
 
-interface CheckboxProps {
+interface CheckboxChangeTargetOptions {
+    type: 'checkbox';
+    name: string;
+    id: string;
+    value: any;
+    checked: boolean;
+}
+
+interface CheckboxChangeParams {
+    originalEvent: React.SyntheticEvent;
+    value: any;
+    checked: boolean;
+    stopPropagation(): void;
+    preventDefault(): void;
+    target: CheckboxChangeTargetOptions;
+}
+
+export interface CheckboxProps {
     id?: string;
+    inputRef?: React.Ref<HTMLInputElement>;
     inputId?: string;
     value?: any;
     name?: string;
-    checked?: boolean;
+    checked?: any;
+    trueValue?: any;
+    falseValue?: any;
     style?: object;
     className?: string;
     disabled?: boolean;
+    required?: boolean;
     readOnly?: boolean;
-    tooltip?: any;
+    tabIndex?: number;
+    icon?: string;
+    tooltip?: string;
     tooltipOptions?: TooltipOptions;
-    onMouseDown?(event: Event): void;
-    onContextMenu?(event: Event): void;
-    onChange(e: { originalEvent: Event, value: any, checked: boolean}): void;
+    ariaLabelledBy?: string;
+    onChange?(e: CheckboxChangeParams): void;
+    onMouseDown?(event: React.MouseEvent<HTMLElement>): void;
+    onContextMenu?(event: React.MouseEvent<HTMLElement>): void;
 }
 
-export class Checkbox extends React.Component<CheckboxProps,any> {}
+export declare class Checkbox extends React.Component<CheckboxProps, any> { }

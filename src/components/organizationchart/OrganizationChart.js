@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { classNames } from '../utils/Utils';
 
 export class OrganizationChartNode extends Component {
-    
+
     static defaultProps = {
         node: null,
         nodeTemplate: null,
@@ -35,7 +35,7 @@ export class OrganizationChartNode extends Component {
     getLeaf() {
         return this.node.leaf === false ? false : !(this.node.children&&this.node.children.length);
     }
-    
+
     getColspan() {
         return (this.node.children && this.node.children.length) ? this.node.children.length * 2: null;
     }
@@ -43,13 +43,15 @@ export class OrganizationChartNode extends Component {
     onNodeClick(event, node) {
         this.props.onNodeClick(event, node)
     }
-    
+
     toggleNode(event, node) {
-        let _expanded = !this.state.expanded;
-        this.setState({expanded: _expanded});
+        this.setState((prevState) => ({
+            expanded: !prevState.expanded
+        }));
+
         event.preventDefault();
     }
-    
+
     isSelected() {
         return this.props.isSelected(this.node);
     }
@@ -57,8 +59,8 @@ export class OrganizationChartNode extends Component {
     render() {
         this.node = this.props.node;
 
-        var colspan = this.getColspan();
-        let nodeStyleClass = classNames('p-organizationchart-node-content', this.node.className, {
+        let colspan = this.getColspan();
+        let nodeClassName = classNames('p-organizationchart-node-content', this.node.className, {
                 'p-organizationchart-selectable-node': this.props.selectionMode && this.node.selectable !== false,
                 'p-highlight': this.isSelected()
             }),
@@ -66,12 +68,14 @@ export class OrganizationChartNode extends Component {
             toggleIcon = classNames('p-node-toggler-icon', {'pi pi-chevron-down': this.state.expanded, 'pi pi-chevron-up': !this.state.expanded}),
             nodeContent = (<tr>
                 <td colSpan={colspan}>
-                    <div className={nodeStyleClass} onClick={(e) => this.onNodeClick(e,this.node)}>
+                    <div className={nodeClassName} onClick={(e) => this.onNodeClick(e, this.node)}>
                         {nodeLabel}
                         {
-                            !this.getLeaf() && <button className="p-node-toggler p-link" onClick={(e) => this.toggleNode(e, this.node)}>
+                            /* eslint-disable */
+                            !this.getLeaf() && <a href="#" className="p-node-toggler" onClick={(e) => this.toggleNode(e, this.node)}>
                                 <i className={toggleIcon}></i>
-                            </button>
+                            </a>
+                            /* eslint-enable */
                         }
                     </div>
                 </td>
@@ -86,12 +90,21 @@ export class OrganizationChartNode extends Component {
             nodeChildLength = this.node.children && this.node.children.length,
             linesMiddle = (<tr style={{visibility: _visibility}} className="p-organizationchart-lines">
                 {
-                    this.node.children && this.node.children.map((item, index) => {
-                        let leftClass = classNames('p-organizationchart-line-left', {'p-organizationchart-line-top': index !== 0}),
-                        rightClass = classNames('p-organizationchart-line-right', {'p-organizationchart-line-top': index !== nodeChildLength - 1});
+                    this.node.children && this.node.children.length === 1 && (
+                                    <td colSpan={this.getColspan()}>
+                                        <div className="p-organizationchart-line-down"></div>
+                                    </td>
+                    )
+                }
+                {
+                    this.node.children && this.node.children.length > 1 && (
+                                    this.node.children.map((item, index) => {
+                                        let leftClass = classNames('p-organizationchart-line-left', {'p-organizationchart-line-top': index !== 0}),
+                                        rightClass = classNames('p-organizationchart-line-right', {'p-organizationchart-line-top': index !== nodeChildLength - 1});
 
-                        return [<td key={index + '_lineleft'} className={leftClass}>&nbsp;</td>, <td key={index + '_lineright'} className={rightClass}>&nbsp;</td>];
-                    })
+                                        return [<td key={index + '_lineleft'} className={leftClass}>&nbsp;</td>, <td key={index + '_lineright'} className={rightClass}>&nbsp;</td>];
+                                    })
+                                )
                 }
             </tr>),
             childNodes = (<tr style={{visibility: _visibility}} className="p-organizationchart-nodes">
@@ -165,11 +178,11 @@ export class OrganizationChart extends Component {
             if (node.selectable === false) {
                 return;
             }
-            
+
             let index = this.findIndexInSelection(node);
             let selected = (index >= 0);
             let selection;
-            
+
             if (this.props.selectionMode === 'single') {
                 if (selected) {
                     selection = null;
@@ -198,7 +211,7 @@ export class OrganizationChart extends Component {
                     }
                 }
             }
-            
+
             if (this.props.onSelectionChange) {
                 this.props.onSelectionChange({
                     originalEvent: event,
@@ -207,7 +220,7 @@ export class OrganizationChart extends Component {
             }
         }
     }
-    
+
     findIndexInSelection(node) {
         let index = -1;
 
@@ -227,15 +240,16 @@ export class OrganizationChart extends Component {
 
         return index;
     }
-    
+
     isSelected(node) {
-        return this.findIndexInSelection(node) !== -1;         
+        return this.findIndexInSelection(node) !== -1;
     }
 
     render() {
         this.root = this.props.value && this.props.value.length ? this.props.value[0] : null;
 
-        var className = classNames('p-organizationchart p-component', this.props.className);
+        const className = classNames('p-organizationchart p-component', this.props.className);
+
         return (
             <div id={this.props.id} style={this.props.style} className={className}>
                 <OrganizationChartNode node={this.root} nodeTemplate={this.props.nodeTemplate} selectionMode={this.props.selectionMode}

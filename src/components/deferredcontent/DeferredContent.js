@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 export class DeferredContent extends Component {
@@ -11,8 +11,8 @@ export class DeferredContent extends Component {
         onLoad: PropTypes.func
     }
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             loaded: false
         };
@@ -53,14 +53,14 @@ export class DeferredContent extends Component {
             let rect = this.container.getBoundingClientRect();
             let docElement = document.documentElement;
             let winHeight = docElement.clientHeight;
-    
+
             return (winHeight >= rect.top);
         }
     }
 
     load(event) {
-        this.setState({loaded:true});
-        
+        this.setState({ loaded: true });
+
         if (this.props.onLoad) {
             this.props.onLoad(event);
         }

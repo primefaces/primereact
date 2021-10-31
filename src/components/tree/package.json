@@ -1,0 +1,6 @@
+{
+    "main": "./tree.cjs.js",
+    "module": "./tree.esm.js",
+    "unpkg": "./tree.min.js",
+    "types": "./tree.d.ts"
+}

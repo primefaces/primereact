@@ -1,0 +1,234 @@
+.datatable-doc-demo {
+    .p-paginator {
+        .p-paginator-current {
+            margin-left: auto;
+        }
+    }
+
+    .p-progressbar {
+        height: .5rem;
+        background-color: #D8DADC;
+
+        .p-progressbar-value {
+            background-color: #607D8B;
+        }
+    }
+
+    .p-datepicker {
+        min-width: 25rem;
+
+        td {
+            font-weight: 400;
+        }
+    }
+
+    .p-datatable.p-datatable-customers {
+        .p-datatable-header {
+            padding: 1rem;
+            text-align: left;
+            font-size: 1.5rem;
+        }
+
+        .p-paginator {
+            padding: 1rem;
+        }
+
+        .p-datatable-thead > tr > th {
+            text-align: left;
+        }
+
+        .p-dropdown-label:not(.p-placeholder) {
+            text-transform: uppercase;
+        }
+    }
+}
+
+.datatable-rowexpansion-demo {
+    .product-image {
+        width: 100px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+    }
+
+    .orders-subtable {
+        padding: 1rem;
+    }
+}
+
+.datatable-templating-demo {
+    .table-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .product-image {
+        width: 100px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+    }
+}
+
+.datatable-filter-demo {
+    .p-paginator {
+        .p-paginator-current {
+            margin-left: auto;
+        }
+    }
+
+    .p-progressbar {
+        height: .5rem;
+        background-color: #D8DADC;
+
+        .p-progressbar-value {
+            background-color: #607D8B;
+        }
+    }
+
+    .p-datepicker {
+        min-width: 25rem;
+
+        td {
+            font-weight: 400;
+        }
+    }
+
+    .p-datatable.p-datatable-customers {
+        .p-datatable-header {
+            padding: 1rem;
+            text-align: left;
+            font-size: 1.5rem;
+        }
+
+        .p-paginator {
+            padding: 1rem;
+        }
+
+        .p-datatable-thead > tr > th {
+            text-align: left;
+        }
+
+        .p-datatable-tbody > tr > td {
+            cursor: auto;
+        }
+
+        .p-dropdown-label:not(.p-placeholder) {
+            text-transform: uppercase;
+        }
+    }
+}
+
+.datatable-scroll-demo {
+    .p-datatable-frozen-tbody {
+        font-weight: bold;
+    }
+
+    .p-datatable-scrollable .p-frozen-column {
+        font-weight: bold;
+    }
+}
+
+.datatable-editing-demo {
+    .editable-cells-table td.p-cell-editing {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+}
+
+.datatable-crud-demo {
+    .table-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        @media screen and (max-width: 960px) {
+            align-items: flex-start;
+        }
+    }
+
+    .product-image {
+        width: 100px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    }
+
+    .p-dialog .product-image {
+        width: 150px;
+        margin: 0 auto 2rem auto;
+        display: block;
+    }
+
+    .confirmation-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    @media screen and (max-width: 960px) {
+        .p-toolbar {
+            flex-wrap: wrap;
+
+            .p-button {
+                margin-bottom: 0.25rem;
+            }
+        }
+
+        .table-header {
+            flex-direction: column;
+
+            .p-input-icon-left,
+            input {
+                width: 100%;
+            }
+        }
+    }
+}
+
+.datatable-style-demo {
+    .outofstock {
+        font-weight: 700;
+        color: #FF5252;
+        text-decoration: line-through;
+    }
+
+    .lowstock {
+        font-weight: 700;
+        color: #FFA726;
+    }
+
+    .instock {
+        font-weight: 700;
+        color: #66BB6A;
+    }
+
+    .row-accessories {
+        background-color: rgba(0,0,0,.15) !important;
+
+    }
+}
+
+.datatable-rowgroup-demo {
+    .p-rowgroup-footer td {
+        font-weight: 700;
+    }
+
+    .p-rowgroup-header {
+        span {
+            font-weight: 700;
+        }
+
+        .p-row-toggler {
+            vertical-align: middle;
+            margin-right: .25rem;
+        }
+    }
+}
+
+.datatable-selection-demo {
+    .card {
+        h6 {
+            margin-top: 2rem;
+
+            &:first-of-type {
+                margin-top: 0;
+            }
+        }
+    }
+}

@@ -1,0 +1,6 @@
+{
+    "main": "./cascadeselect.cjs.js",
+    "module": "./cascadeselect.esm.js",
+    "unpkg": "./cascadeselect.min.js",
+    "types": "./cascadeselect.d.ts"
+}

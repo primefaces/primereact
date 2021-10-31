@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
-import DomHandler from '../utils/DomHandler';
-import classNames from 'classnames'
+import { DomHandler, classNames } from '../utils/Utils';
 
 export class Slider extends Component {
 
@@ -10,20 +9,21 @@ export class Slider extends Component {
         value: null,
         min: 0,
         max: 100,
-        orientation: "horizontal",
+        orientation: 'horizontal',
         step: null,
         range: false,
         style: null,
         className: null,
         disabled: false,
-        tabIndex: '0',
+        tabIndex: 0,
+        ariaLabelledBy: null,
         onChange: null,
         onSlideEnd: null
     }
 
     static propTypes = {
         id: PropTypes.string,
-        value: PropTypes.number,
+        value: PropTypes.any,
         min: PropTypes.number,
         max: PropTypes.number,
         orientation: PropTypes.string,
@@ -32,31 +32,43 @@ export class Slider extends Component {
         style: PropTypes.object,
         className: PropTypes.string,
         disabled: PropTypes.bool,
-        tabIndex: PropTypes.string,
+        tabIndex: PropTypes.number,
+        ariaLabelledBy: PropTypes.string,
         onChange: PropTypes.func,
         onSlideEnd: PropTypes.func
     }
 
     constructor(props) {
         super(props);
+
         this.onBarClick = this.onBarClick.bind(this);
+        this.onKeyDown = this.onKeyDown.bind(this);
+
+        this.handleIndex = 0;
     }
 
-    componentWillUnmount() {
-        this.unbindDragListeners();
-        this.unbindTouchListeners();
+    get value() {
+        return this.props.range ? this.props.value || [0, 100] : this.props.value || 0;
+    }
+
+    spin(event, dir) {
+        const value = this.props.range ? this.value[this.handleIndex] : this.value;
+        const step = (this.props.step || 1) * dir;
+
+        this.updateValue(event, value + step);
+        event.preventDefault();
     }
 
     onDragStart(event, index) {
-        if (this.disabled) {
+        if (this.props.disabled) {
             return;
         }
-        
+
         this.dragging = true;
         this.updateDomData();
         this.sliderHandleClick = true;
         this.handleIndex = index;
-        event.preventDefault();
+        //event.preventDefault();
     }
 
     onMouseDown(event, index) {
@@ -69,11 +81,27 @@ export class Slider extends Component {
         this.onDragStart(event, index);
     }
 
+    onKeyDown(event, index) {
+        if (this.props.disabled) {
+            return;
+        }
+
+        this.handleIndex = index;
+        const key = event.key;
+
+        if (key === 'ArrowRight' || key === 'ArrowUp') {
+            this.spin(event, 1);
+        }
+        else if (key === 'ArrowLeft' || key === 'ArrowDown') {
+            this.spin(event, -1);
+        }
+    }
+
     onBarClick(event) {
         if (this.props.disabled) {
             return;
         }
-        
+
         if (!this.sliderHandleClick) {
             this.updateDomData();
             this.setValue(event);
@@ -94,17 +122,14 @@ export class Slider extends Component {
             this.dragging = false;
 
             if (this.props.onSlideEnd) {
-                if (this.props.range)
-                    this.props.onSlideEnd({originalEvent: event, values: this.props.value});
-                else
-                    this.props.onSlideEnd({originalEvent: event, value: this.props.value});
+                this.props.onSlideEnd({ originalEvent: event, value: this.props.value });
             }
 
             this.unbindDragListeners();
             this.unbindTouchListeners();
         }
     }
-    
+
     bindDragListeners() {
         if (!this.dragListener) {
             this.dragListener = this.onDrag.bind(this);
@@ -116,13 +141,13 @@ export class Slider extends Component {
             document.addEventListener('mouseup', this.dragEndListener);
         }
     }
-    
+
     unbindDragListeners() {
         if (this.dragListener) {
             document.removeEventListener('mousemove', this.dragListener);
             this.dragListener = null;
         }
-        
+
         if (this.dragEndListener) {
             document.removeEventListener('mouseup', this.dragEndListener)
             this.dragEndListener = null;
@@ -146,13 +171,13 @@ export class Slider extends Component {
             document.removeEventListener('touchmove', this.dragListener);
             this.dragListener = null;
         }
-        
+
         if (this.dragEndListener) {
             document.removeEventListener('touchend', this.dragEndListener)
             this.dragEndListener = null;
         }
     }
-    
+
     updateDomData() {
         let rect = this.el.getBoundingClientRect();
         this.initX = rect.left + DomHandler.getWindowScrollLeft();
@@ -164,46 +189,50 @@ export class Slider extends Component {
     setValue(event) {
         let handleValue;
         let pageX = event.touches ? event.touches[0].pageX : event.pageX;
+        let pageY = event.touches ? event.touches[0].pageY : event.pageY;
 
-        if(this.props.orientation === 'horizontal')
+        if (this.props.orientation === 'horizontal')
             handleValue = ((pageX - this.initX) * 100) / (this.barWidth);
         else
-            handleValue = (((this.initY + this.barHeight) - event.pageY) * 100) / (this.barHeight);
+            handleValue = (((this.initY + this.barHeight) - pageY) * 100) / (this.barHeight);
 
         let newValue = (this.props.max - this.props.min) * (handleValue / 100) + this.props.min;
 
-        if(this.props.step) {
-            const oldValue = this.props.range ? this.props.value[this.handleIndex] : this.props.value;
+        if (this.props.step) {
+            const oldValue = this.props.range ? this.value[this.handleIndex] : this.value;
             const diff = (newValue - oldValue);
-            
-            if(diff < 0)
+
+            if (diff < 0)
                 newValue = oldValue + Math.ceil(newValue / this.props.step - oldValue / this.props.step) * this.props.step;
-            else if(diff > 0)
+            else if (diff > 0)
                 newValue = oldValue + Math.floor(newValue / this.props.step - oldValue / this.props.step) * this.props.step;
         }
- 
-        this.updateValue(event, newValue);            
+        else {
+            newValue = Math.floor(newValue);
+        }
+
+        this.updateValue(event, newValue);
     }
 
     updateValue(event, value) {
-        if(this.props.range) {
-            let newValue = value;
-            
+        let newValue = parseFloat(value.toFixed(10));
+
+        if (this.props.range) {
             if (this.handleIndex === 0) {
                 if (newValue < this.props.min)
                     newValue = this.props.min;
-                else if (newValue > this.props.value[1])
-                    newValue = this.props.value[1];
+                else if (newValue > this.value[1])
+                    newValue = this.value[1];
             }
             else {
-                if(newValue > this.props.max)
+                if (newValue > this.props.max)
                     newValue = this.props.max;
-                else if (newValue < this.props.value[0])
-                    newValue = this.props.value[0];
+                else if (newValue < this.value[0])
+                    newValue = this.value[0];
             }
 
-            let newValues = [...this.props.value];
-            newValues[this.handleIndex] = Math.floor(newValue);
+            let newValues = [...this.value];
+            newValues[this.handleIndex] = newValue;
 
             if (this.props.onChange) {
                 this.props.onChange({
@@ -213,8 +242,6 @@ export class Slider extends Component {
             }
         }
         else {
-            let newValue = value;
-
             if (newValue < this.props.min)
                 newValue = this.props.min;
             else if (newValue > this.props.max)
@@ -223,56 +250,68 @@ export class Slider extends Component {
             if (this.props.onChange) {
                 this.props.onChange({
                     originalEvent: event,
-                    value: Math.floor(newValue)
+                    value: newValue
                 });
             }
         }
     }
 
+    componentWillUnmount() {
+        this.unbindDragListeners();
+        this.unbindTouchListeners();
+    }
+
     renderHandle(leftValue, bottomValue, index) {
+        const handleClassName = classNames('p-slider-handle', {
+            'p-slider-handle-start': index === 0,
+            'p-slider-handle-end': index === 1,
+            'p-slider-handle-active': this.handleIndex === index
+        });
+
         return (
-            <span onMouseDown={event => this.onMouseDown(event, index)} onTouchStart={event => this.onTouchStart(event, index)} tabIndex={this.props.tabIndex}
-                    className="p-slider-handle"  style={{transition: this.dragging ? 'none' : null, left: leftValue + '%', bottom: bottomValue + '%'}}></span>
+            <span onMouseDown={event => this.onMouseDown(event, index)} onTouchStart={event => this.onTouchStart(event, index)} onKeyDown={event => this.onKeyDown(event, index)} tabIndex={this.props.tabIndex}
+                className={handleClassName} style={{ transition: this.dragging ? 'none' : null, left: leftValue !== null && (leftValue + '%'), bottom: bottomValue && (bottomValue + '%') }}
+                role="slider" aria-valuemin={this.props.min} aria-valuemax={this.props.max} aria-valuenow={leftValue || bottomValue} aria-labelledby={this.props.ariaLabelledBy}></span>
         );
     }
 
     renderRangeSlider() {
-        let values = this.props.value||[0,0];
+        let values = this.value;
         let horizontal = (this.props.orientation === 'horizontal');
         const handleValueStart = (values[0] < this.props.min ? 0 : values[0] - this.props.min) * 100 / (this.props.max - this.props.min);
         const handleValueEnd = (values[1] > this.props.max ? 100 : values[1] - this.props.min) * 100 / (this.props.max - this.props.min);
-        const rangeStartHandle = horizontal ? this.renderHandle(handleValueStart, 'auto', 0) : this.renderHandle('auto', handleValueStart, 0);
-        const rangeEndHandle = horizontal ? this.renderHandle(handleValueEnd, 'auto', 1) : this.renderHandle('auto', handleValueEnd, 1);
-        const rangeStyle = horizontal ? {left: handleValueStart + '%', width: (handleValueEnd - handleValueStart) + '%'} : {bottom: handleValueStart + '%', height: (handleValueEnd - handleValueStart) + '%'};
+        const rangeStartHandle = horizontal ? this.renderHandle(handleValueStart, null, 0) : this.renderHandle(null, handleValueStart, 0);
+        const rangeEndHandle = horizontal ? this.renderHandle(handleValueEnd, null, 1) : this.renderHandle(null, handleValueEnd, 1);
+        const rangeStyle = horizontal ? { left: handleValueStart + '%', width: (handleValueEnd - handleValueStart) + '%' } : { bottom: handleValueStart + '%', height: (handleValueEnd - handleValueStart) + '%' };
 
         return (
-            <React.Fragment>
+            <>
                 <span className="p-slider-range" style={rangeStyle}></span>
                 {rangeStartHandle}
                 {rangeEndHandle}
-            </React.Fragment>
+            </>
         )
     }
 
     renderSingleSlider() {
-        let value = this.props.value||0;
+        let value = this.value;
         let handleValue;
 
         if (value < this.props.min)
             handleValue = 0;
-        else if(value > this.props.max)
+        else if (value > this.props.max)
             handleValue = 100;
         else
             handleValue = (value - this.props.min) * 100 / (this.props.max - this.props.min);
 
-        const rangeStyle = this.props.orientation === 'horizontal' ? {width: handleValue + '%'} : {height: handleValue + '%'};
-        const handle = this.props.orientation === 'horizontal' ? this.renderHandle(handleValue, 'auto', null) : this.renderHandle('auto', handleValue, null);
+        const rangeStyle = this.props.orientation === 'horizontal' ? { width: handleValue + '%' } : { height: handleValue + '%' };
+        const handle = this.props.orientation === 'horizontal' ? this.renderHandle(handleValue, null, null) : this.renderHandle(null, handleValue, null);
 
         return (
-            <React.Fragment>
-                <span className="p-slider-range p-slider-range-min ui-widget-header ui-corner-all" style={rangeStyle}></span>
+            <>
+                <span className="p-slider-range" style={rangeStyle}></span>
                 {handle}
-            </React.Fragment>
+            </>
         );
     }
 

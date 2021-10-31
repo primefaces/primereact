@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import DomHandler from '../utils/DomHandler';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import { Ripple } from '../ripple/Ripple';
 
 export class UITreeNode extends Component {
-    
+
     static defaultProps = {
         node: null,
         index: null,
         last: null,
         parent: null,
         path: null,
+        disabled: false,
         selectionMode: null,
         selectionKeys: null,
         contextMenuSelectionKey: null,
@@ -22,6 +23,7 @@ export class UITreeNode extends Component {
         ariaLabel: null,
         ariaLabelledBy: null,
         nodeTemplate: null,
+        togglerTemplate: null,
         isNodeLeaf: null,
         onSelect: null,
         onUnselect: null,
@@ -35,15 +37,18 @@ export class UITreeNode extends Component {
         onDragEnd: null,
         onDrop: null,
         onDropPoint: null,
-        onContextMenu: null
+        onContextMenu: null,
+        onNodeClick: null,
+        onNodeDoubleClick: null
     }
 
     static propTypes = {
         node: PropTypes.object,
         index: PropTypes.number,
-        last: PropTypes.number,
+        last: PropTypes.bool,
         parent: PropTypes.object,
         path: PropTypes.string,
+        disabled: PropTypes.bool,
         selectionMode: PropTypes.string,
         selectionKeys: PropTypes.any,
         contextMenuSelectionKey: PropTypes.any,
@@ -54,7 +59,8 @@ export class UITreeNode extends Component {
         dragdropScope: PropTypes.string,
         ariaLabel: PropTypes.string,
         ariaLabelledBy: PropTypes.string,
-        nodeTemplate: PropTypes.func,
+        nodeTemplate: PropTypes.any,
+        togglerTemplate: PropTypes.func,
         isNodeLeaf: PropTypes.func,
         onSelect: PropTypes.func,
         onUnselect: PropTypes.func,
@@ -68,13 +74,16 @@ export class UITreeNode extends Component {
         onDragEnd: PropTypes.func,
         onDrop: PropTypes.func,
         onDropPoint: PropTypes.func,
-        onContextMenu: PropTypes.func
+        onContextMenu: PropTypes.func,
+        onNodeClick: PropTypes.func,
+        onNodeDoubleClick: PropTypes.func
     }
 
     constructor(props) {
         super(props);
 
         this.onClick = this.onClick.bind(this);
+        this.onDoubleClick = this.onDoubleClick.bind(this);
         this.onRightClick = this.onRightClick.bind(this);
         this.onTouchEnd = this.onTouchEnd.bind(this);
         this.onTogglerClick = this.onTogglerClick.bind(this);
@@ -111,7 +120,7 @@ export class UITreeNode extends Component {
     collapse(event) {
         let expandedKeys = {...this.props.expandedKeys};
         delete expandedKeys[this.props.node.key];
-        
+
         this.props.onToggle({
             originalEvent: event,
             value: expandedKeys
@@ -119,8 +128,12 @@ export class UITreeNode extends Component {
 
         this.invokeToggleEvents(event, false);
     }
- 
+
     onTogglerClick(event) {
+        if (this.props.disabled) {
+            return;
+        }
+
         if (this.isExpanded())
             this.collapse(event);
         else
@@ -147,11 +160,19 @@ export class UITreeNode extends Component {
     }
 
     isExpanded() {
-        return this.props.expandedKeys ? this.props.expandedKeys[this.props.node.key] !== undefined : false;
+        return (this.props.expandedKeys ? this.props.expandedKeys[this.props.node.key] !== undefined : false) || this.props.node.expanded;
     }
 
     onNodeKeyDown(event) {
+        if (this.props.disabled) {
+            return;
+        }
+
         const nodeElement = event.target.parentElement;
+
+        if (!DomHandler.hasClass(nodeElement, 'p-treenode')) {
+            return;
+        }
 
         switch (event.which) {
             //down arrow
@@ -257,16 +278,23 @@ export class UITreeNode extends Component {
     }
 
     onClick(event) {
-        if (event.target.className && event.target.className.indexOf('p-tree-toggler') === 0) {
+        if (this.props.onClick) {
+            this.props.onClick({
+                originalEvent: event,
+                node: this.props.node
+            });
+        }
+
+        if ((event.target.className && event.target.className.constructor === String && event.target.className.indexOf('p-tree-toggler') === 0) || this.props.disabled) {
             return;
         }
-        
+
         if (this.props.selectionMode && this.props.node.selectable !== false) {
             let selectionKeys;
 
             if (this.isCheckboxSelectionMode()) {
                 const checked = this.isChecked();
-                selectionKeys = this.props.selectionKeys ? {...this.props.selectionKeys} : {};    
+                selectionKeys = this.props.selectionKeys ? {...this.props.selectionKeys} : {};
 
                 if (checked) {
                     if (this.props.propagateSelectionDown)
@@ -292,9 +320,9 @@ export class UITreeNode extends Component {
                 else {
                     if (this.props.propagateSelectionDown)
                         this.propagateDown(this.props.node, true, selectionKeys);
-                    else 
+                    else
                         selectionKeys[this.props.node.key] = {checked: true};
- 
+
                         if (this.props.propagateSelectionUp && this.props.onPropagateUp) {
                             this.props.onPropagateUp({
                                 originalEvent: event,
@@ -317,7 +345,7 @@ export class UITreeNode extends Component {
 
                 if (metaSelection) {
                     let metaKey = (event.metaKey||event.ctrlKey);
-    
+
                     if (selected && metaKey) {
                         if (this.isSingleSelectionMode()) {
                             selectionKeys = null;
@@ -326,7 +354,7 @@ export class UITreeNode extends Component {
                             selectionKeys = {...this.props.selectionKeys};
                             delete selectionKeys[this.props.node.key];
                         }
-    
+
                         if (this.props.onUnselect) {
                             this.props.onUnselect({
                                 originalEvent: event,
@@ -342,7 +370,7 @@ export class UITreeNode extends Component {
                             selectionKeys = !metaKey ? {} : (this.props.selectionKeys ? {...this.props.selectionKeys} : {});
                             selectionKeys[this.props.node.key] = true;
                         }
-    
+
                         if (this.props.onSelect) {
                             this.props.onSelect({
                                 originalEvent: event,
@@ -355,7 +383,7 @@ export class UITreeNode extends Component {
                     if (this.isSingleSelectionMode()) {
                         if (selected) {
                             selectionKeys = null;
-    
+
                             if (this.props.onUnselect) {
                                 this.props.onUnselect({
                                     originalEvent: event,
@@ -365,7 +393,7 @@ export class UITreeNode extends Component {
                         }
                         else {
                             selectionKeys = this.props.node.key;
-    
+
                             if (this.props.onSelect) {
                                 this.props.onSelect({
                                     originalEvent: event,
@@ -378,7 +406,7 @@ export class UITreeNode extends Component {
                         if (selected) {
                             selectionKeys = {...this.props.selectionKeys};
                             delete selectionKeys[this.props.node.key];
-    
+
                             if (this.props.onUnselect) {
                                 this.props.onUnselect({
                                     originalEvent: event,
@@ -389,7 +417,7 @@ export class UITreeNode extends Component {
                         else {
                             selectionKeys = this.props.selectionKeys ? {...this.props.selectionKeys} : {};
                             selectionKeys[this.props.node.key] = true;
-                            
+
                             if (this.props.onSelect) {
                                 this.props.onSelect({
                                     originalEvent: event,
@@ -412,7 +440,20 @@ export class UITreeNode extends Component {
         this.nodeTouched = false;
     }
 
+    onDoubleClick(event) {
+        if (this.props.onDoubleClick) {
+            this.props.onDoubleClick({
+                originalEvent: event,
+                node: this.props.node
+            })
+        }
+    }
+
     onRightClick(event) {
+        if (this.props.disabled) {
+            return;
+        }
+
         DomHandler.clearSelection();
 
         if (this.props.onContextMenuSelectionChange) {
@@ -435,7 +476,7 @@ export class UITreeNode extends Component {
         let selectionKeys = event.selectionKeys;
         let checkedChildCount = 0;
         let childPartialSelected = false;
-        
+
         for(let child of this.props.node.children) {
             if(selectionKeys[child.key] && selectionKeys[child.key].checked)
                 checkedChildCount++;
@@ -454,7 +495,7 @@ export class UITreeNode extends Component {
             if(childPartialSelected || (checkedChildCount > 0 && checkedChildCount !== this.props.node.children.length))
                 selectionKeys[this.props.node.key] = {checked: false, partialChecked: true};
             else
-                selectionKeys[this.props.node.key] = {checked: false, partialChecked: false};
+                delete selectionKeys[this.props.node.key];
         }
 
         if (this.props.propagateSelectionUp && this.props.onPropagateUp) {
@@ -511,7 +552,7 @@ export class UITreeNode extends Component {
 
         if (this.props.node.droppable !== false) {
             DomHandler.removeClass(event.target, 'p-treenode-droppoint-active');
-            
+
             if (this.props.onDropPoint) {
                 this.props.onDropPoint({
                     originalEvent: event,
@@ -524,20 +565,20 @@ export class UITreeNode extends Component {
     }
 
     onDropPointDragOver(event) {
-        if (event.dataTransfer.types[1] === this.props.dragdropScope) {
+        if (event.dataTransfer.types[1] === this.props.dragdropScope.toLocaleLowerCase()) {
             event.dataTransfer.dropEffect = 'move';
             event.preventDefault();
         }
     }
 
     onDropPointDragEnter(event) {
-        if (event.dataTransfer.types[1] === this.props.dragdropScope) {
+        if (event.dataTransfer.types[1] === this.props.dragdropScope.toLocaleLowerCase()) {
             DomHandler.addClass(event.target, 'p-treenode-droppoint-active');
         }
     }
 
     onDropPointDragLeave(event) {
-        if (event.dataTransfer.types[1] === this.props.dragdropScope) {
+        if (event.dataTransfer.types[1] === this.props.dragdropScope.toLocaleLowerCase()) {
             DomHandler.removeClass(event.target, 'p-treenode-droppoint-active');
         }
     }
@@ -547,18 +588,19 @@ export class UITreeNode extends Component {
             DomHandler.removeClass(this.contentElement, 'p-treenode-dragover');
             event.preventDefault();
             event.stopPropagation();
-            
+
             if (this.props.onDrop) {
                 this.props.onDrop({
                     originalEvent: event,
-                    path: this.props.path
+                    path: this.props.path,
+                    index: this.props.index
                 });
             }
         }
     }
 
     onDragOver(event) {
-        if (event.dataTransfer.types[1] === this.props.dragdropScope && this.props.node.droppable !== false) {
+        if (event.dataTransfer.types[1] === this.props.dragdropScope.toLocaleLowerCase() && this.props.node.droppable !== false) {
             event.dataTransfer.dropEffect = 'move';
             event.preventDefault();
             event.stopPropagation();
@@ -566,13 +608,13 @@ export class UITreeNode extends Component {
     }
 
     onDragEnter(event) {
-        if (event.dataTransfer.types[1] === this.props.dragdropScope && this.props.node.droppable !== false) {
+        if (event.dataTransfer.types[1] === this.props.dragdropScope.toLocaleLowerCase() && this.props.node.droppable !== false) {
             DomHandler.addClass(this.contentElement, 'p-treenode-dragover');
         }
     }
 
     onDragLeave(event) {
-        if (event.dataTransfer.types[1] === this.props.dragdropScope && this.props.node.droppable !== false) {
+        if (event.dataTransfer.types[1] === this.props.dragdropScope.toLocaleLowerCase() && this.props.node.droppable !== false) {
             let rect = event.currentTarget.getBoundingClientRect();
             if (event.nativeEvent.x > rect.left + rect.width || event.nativeEvent.x < rect.left || event.nativeEvent.y >= Math.floor(rect.top + rect.height) || event.nativeEvent.y < rect.top) {
                 DomHandler.removeClass(this.contentElement, 'p-treenode-dragover');
@@ -602,33 +644,44 @@ export class UITreeNode extends Component {
     }
 
     renderLabel() {
-        const label = this.props.nodeTemplate ? this.props.nodeTemplate(this.props.node) : this.props.node.label;
-        
-        return (
+        let content = (
             <span className="p-treenode-label">
-                {label}
+                {this.props.node.label}
             </span>
         );
+
+        if (this.props.nodeTemplate) {
+            const defaultContentOptions = {
+                onTogglerClick: this.onTogglerClick,
+                className: 'p-treenode-label',
+                element: content,
+                props: this.props,
+                expanded: this.isExpanded()
+            };
+
+            content = ObjectUtils.getJSXElement(this.props.nodeTemplate, this.props.node, defaultContentOptions);
+        }
+
+        return content;
     }
 
     renderCheckbox() {
         if (this.isCheckboxSelectionMode() && this.props.node.selectable !== false) {
             const checked = this.isChecked();
             const partialChecked = this.isPartialChecked();
-            const className = classNames('p-checkbox-box', {'p-highlight': checked});
+            const className = classNames('p-checkbox-box', {'p-highlight': checked, 'p-indeterminate': partialChecked, 'p-disabled': this.props.disabled});
             const icon = classNames('p-checkbox-icon p-c', {'pi pi-check': checked, 'pi pi-minus': partialChecked});
 
             return (
                 <div className="p-checkbox p-component">
-                    <div className={className}>
+                    <div className={className} role="checkbox" aria-checked={checked}>
                         <span className={icon}></span>
                     </div>
                 </div>
             )
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderIcon(expanded) {
@@ -641,19 +694,33 @@ export class UITreeNode extends Component {
                <span className={className}></span>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderToggler(expanded) {
-        const iconClassName = classNames('p-tree-toggler-icon pi pi-fw', {'pi-caret-right': !expanded, 'pi-caret-down': expanded});
-
-        return (
-            <span className="p-tree-toggler p-unselectable-text p-link" onClick={this.onTogglerClick}>
+        const iconClassName = classNames('p-tree-toggler-icon pi pi-fw', {'pi-chevron-right': !expanded, 'pi-chevron-down': expanded});
+        let content = (
+            <button type="button" className="p-tree-toggler p-link" tabIndex={-1} onClick={this.onTogglerClick}>
                 <span className={iconClassName}></span>
-            </span>
+                <Ripple />
+            </button>
         );
+
+        if (this.props.togglerTemplate) {
+            const defaultContentOptions = {
+                onClick: this.onTogglerClick,
+                containerClassName: 'p-tree-toggler p-link',
+                iconClassName: 'p-tree-toggler-icon',
+                element: content,
+                props: this.props,
+                expanded
+            };
+
+            content = ObjectUtils.getJSXElement(this.props.togglerTemplate, this.props.node, defaultContentOptions);
+        }
+
+        return content;
     }
 
     renderDropPoint(position) {
@@ -663,28 +730,31 @@ export class UITreeNode extends Component {
                         onDragEnter={this.onDropPointDragEnter} onDragLeave={this.onDropPointDragLeave}></li>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderContent() {
         const selected = this.isSelected();
         const checked = this.isChecked();
         const className = classNames('p-treenode-content', this.props.node.className, {
-                'p-treenode-selectable': (this.props.selectionMode && this.props.node.selectable !== false), 
+                'p-treenode-selectable': (this.props.selectionMode && this.props.node.selectable !== false),
                 'p-highlight': this.isCheckboxSelectionMode() ? checked : selected,
-                'p-highlight-contextmenu': (this.props.contextMenuSelectionKey && this.props.contextMenuSelectionKey === this.props.node.key)});
+                'p-highlight-contextmenu': (this.props.contextMenuSelectionKey && this.props.contextMenuSelectionKey === this.props.node.key),
+                'p-disabled': this.props.disabled
+            });
         const expanded = this.isExpanded();
         const toggler = this.renderToggler(expanded);
         const checkbox = this.renderCheckbox();
         const icon = this.renderIcon(expanded);
         const label = this.renderLabel();
+        const tabIndex = this.props.disabled ? undefined : 0;
 
         return (
-            <div ref={(el) => this.contentElement = el} className={className} style={this.props.node.style} onClick={this.onClick} onContextMenu={this.onRightClick} onTouchEnd={this.onTouchEnd} draggable={this.props.dragdropScope && this.props.node.draggable !== false}
+            <div ref={(el) => this.contentElement = el} className={className} style={this.props.node.style} onClick={this.onClick} onDoubleClick={this.onDoubleClick}
+                onContextMenu={this.onRightClick} onTouchEnd={this.onTouchEnd} draggable={this.props.dragdropScope && this.props.node.draggable !== false && !this.props.disabled}
                 onDrop={this.onDrop} onDragOver={this.onDragOver} onDragEnter={this.onDragEnter} onDragLeave={this.onDragLeave}
-                onDragStart={this.onDragStart} onDragEnd={this.onDragEnd} tabIndex="0" onKeyDown={this.onNodeKeyDown} 
+                onDragStart={this.onDragStart} onDragEnd={this.onDragEnd} tabIndex={tabIndex} onKeyDown={this.onNodeKeyDown}
                 role="treeitem" aria-posinset={this.props.index + 1} aria-expanded={this.isExpanded()} aria-selected={checked || selected}>
                 {toggler}
                 {checkbox}
@@ -701,12 +771,12 @@ export class UITreeNode extends Component {
                     {
                         this.props.node.children.map((childNode, index) => {
                             return (
-                                <UITreeNode key={childNode.key||childNode.label} node={childNode} parent={this.props.node} index={index} last={index === this.props.node.children.length - 1} path={this.props.path + '-' + index} selectionMode={this.props.selectionMode}
-                                    selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange} metaKeySelection={this.props.metaKeySelection}
+                                <UITreeNode key={childNode.key||childNode.label} node={childNode} parent={this.props.node} index={index} last={index === this.props.node.children.length - 1} path={this.props.path + '-' + index} disabled={this.props.disabled}
+                                    selectionMode={this.props.selectionMode} selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange} metaKeySelection={this.props.metaKeySelection}
                                     propagateSelectionDown={this.props.propagateSelectionDown} propagateSelectionUp={this.props.propagateSelectionUp}
                                     contextMenuSelectionKey={this.props.contextMenuSelectionKey} onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu}
                                     onExpand={this.props.onExpand} onCollapse={this.props.onCollapse} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect}
-                                    expandedKeys={this.props.expandedKeys} onToggle={this.props.onToggle} onPropagateUp={this.propagateUp} nodeTemplate={this.props.nodeTemplate} isNodeLeaf={this.props.isNodeLeaf}
+                                    expandedKeys={this.props.expandedKeys} onToggle={this.props.onToggle} onPropagateUp={this.propagateUp} nodeTemplate={this.props.nodeTemplate} togglerTemplate={this.props.togglerTemplate} isNodeLeaf={this.props.isNodeLeaf}
                                     dragdropScope={this.props.dragdropScope} onDragStart={this.props.onDragStart} onDragEnd={this.props.onDragEnd} onDrop={this.props.onDrop} onDropPoint={this.props.onDropPoint} />
                             );
                         })
@@ -714,13 +784,12 @@ export class UITreeNode extends Component {
                 </ul>
             )
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderNode() {
-        const className = classNames('p-treenode', this.props.node.className, {'p-treenode-leaf': this.isLeaf()})
+        const className = classNames('p-treenode', {'p-treenode-leaf': this.isLeaf()}, this.props.node.className)
         const content = this.renderContent();
         const children = this.renderChildren();
 
@@ -735,16 +804,16 @@ export class UITreeNode extends Component {
     render() {
         const node = this.renderNode();
 
-        if (this.props.dragdropScope) {
+        if (this.props.dragdropScope && !this.props.disabled) {
             const beforeDropPoint = this.renderDropPoint(-1);
             const afterDropPoint = this.props.last ? this.renderDropPoint(1) : null;
 
             return (
-                <React.Fragment>
+                <>
                     {beforeDropPoint}
                     {node}
                     {afterDropPoint}
-                </React.Fragment>
+                </>
             );
         }
         else {

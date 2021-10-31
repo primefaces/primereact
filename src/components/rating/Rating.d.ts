@@ -1,18 +1,32 @@
 import * as React from 'react';
-import TooltipOptions from '../tooltip/TooltipOptions';
+import TooltipOptions from '../tooltip/tooltipoptions';
 
-interface RatingProps {
+interface RatingChangeTargetOptions {
+    name: string;
+    id: string;
+    value: number | undefined | null;
+}
+
+interface RatingChangeParams {
+    originalEvent: React.SyntheticEvent;
+    value: number | undefined | null;
+    stopPropagation(): void;
+    preventDefault(): void;
+    target: RatingChangeTargetOptions;
+}
+
+export interface RatingProps {
     id?: string;
     value?: number;
     disabled?: boolean;
-    readonly?: boolean;
+    readOnly?: boolean;
     stars?: number;
     cancel?: boolean;
     style?: object;
     className?: string;
-    tooltip?: any;
+    tooltip?: string;
     tooltipOptions?: TooltipOptions;
-    onChange?(e: {originalEvent: Event, value: number}): void;
+    onChange?(e: RatingChangeParams): void;
 }
 
-export class Rating extends React.Component<RatingProps,any> {}
+export declare class Rating extends React.Component<RatingProps, any> { }

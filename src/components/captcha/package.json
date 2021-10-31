@@ -1,0 +1,6 @@
+{
+    "main": "./captcha.cjs.js",
+    "module": "./captcha.esm.js",
+    "unpkg": "./captcha.min.js",
+    "types": "./captcha.d.ts"
+}

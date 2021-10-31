@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import DomHandler from '../utils/DomHandler';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import { Ripple } from '../ripple/Ripple';
 
 export class TieredMenuSub extends Component {
 
@@ -41,6 +41,10 @@ export class TieredMenuSub extends Component {
                 activeItem: null
             });
         }
+
+        if (this.props.parentActive && !this.props.root) {
+            this.position();
+        }
     }
 
     componentDidMount() {
@@ -62,12 +66,26 @@ export class TieredMenuSub extends Component {
         }
     }
 
+    position() {
+        if (this.element) {
+            const parentItem = this.element.parentElement;
+            const containerOffset = DomHandler.getOffset(parentItem);
+            const viewport = DomHandler.getViewport();
+            const sublistWidth = this.element.offsetParent ? this.element.offsetWidth : DomHandler.getHiddenElementOuterWidth(this.element);
+            const itemOuterWidth = DomHandler.getOuterWidth(parentItem.children[0]);
+
+            if ((parseInt(containerOffset.left, 10) + itemOuterWidth + sublistWidth) > (viewport.width - DomHandler.calculateScrollbarWidth())) {
+                DomHandler.addClass(this.element, 'p-submenu-list-flipped');
+            }
+        }
+    }
+
     onItemMouseEnter(event, item) {
         if (item.disabled) {
             event.preventDefault();
             return;
         }
-        
+
         if (this.props.root) {
             if (this.state.activeItem || this.props.popup) {
                 this.setState({
@@ -98,7 +116,7 @@ export class TieredMenuSub extends Component {
                 item: item
             });
         }
-        
+
         if (this.props.root) {
             if (item.items) {
                 if (this.state.activeItem && item === this.state.activeItem) {
@@ -125,21 +143,21 @@ export class TieredMenuSub extends Component {
         switch(event.which) {
             //down
             case 40:
-                var nextItem = this.findNextItem(listItem);
+                let nextItem = this.findNextItem(listItem);
                 if (nextItem) {
                     nextItem.children[0].focus();
                 }
-                
+
                 event.preventDefault();
             break;
 
             //up
             case 38:
-                var prevItem = this.findPrevItem(listItem);
+                let prevItem = this.findPrevItem(listItem);
                 if (prevItem) {
                     prevItem.children[0].focus();
                 }
-                
+
                 event.preventDefault();
             break;
 
@@ -154,10 +172,10 @@ export class TieredMenuSub extends Component {
                         listItem.children[1].children[0].children[0].focus();
                     }, 50);
                 }
-               
+
                 event.preventDefault();
             break;
-            
+
             default:
             break;
         }
@@ -186,7 +204,7 @@ export class TieredMenuSub extends Component {
 
     findPrevItem(item) {
         let prevItem = item.previousElementSibling;
-        
+
         if (prevItem)
             return DomHandler.hasClass(prevItem, 'p-disabled') || !DomHandler.hasClass(prevItem, 'p-menuitem') ? this.findPrevItem(prevItem) : prevItem;
         else
@@ -205,32 +223,8 @@ export class TieredMenuSub extends Component {
 
     renderSeparator(index) {
         return (
-            <li key={'separator_' + index} className="p-menu-separator"></li>
+            <li key={'separator_' + index} className="p-menu-separator" role="separator"></li>
         );
-    }
-    
-    renderIcon(item) {
-        const className = classNames('p-menuitem-icon', item.icon);
-        
-        if (item.icon) {
-            return (
-                <span className={className}></span>
-            );
-        }
-        else {
-            return null;
-        }
-    }
-
-    renderSubmenuIcon(item) {
-        if (item.items) {
-            return (
-                <span className="p-submenu-icon pi pi-fw pi-caret-right"></span>
-            );
-        }
-        else {
-            return null;
-        }
     }
 
     renderSubmenu(item) {
@@ -239,25 +233,49 @@ export class TieredMenuSub extends Component {
                 <TieredMenuSub model={item.items} onLeafClick={this.onLeafClick} popup={this.props.popup} onKeyDown={this.onChildItemKeyDown} parentActive={item === this.state.activeItem} />
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderMenuitem(item, index) {
-        const className = classNames('p-menuitem', {'p-menuitem-active': this.state.activeItem === item, 'p-disabled': item.disabled}, item.className);
-        const icon = this.renderIcon(item);
-        const submenuIcon = this.renderSubmenuIcon(item);
+        const active = this.state.activeItem === item;
+        const className = classNames('p-menuitem', {'p-menuitem-active': active}, item.className);
+        const linkClassName = classNames('p-menuitem-link', {'p-disabled': item.disabled});
+        const iconClassName = classNames('p-menuitem-icon', item.icon);
+        const submenuIconClassName = 'p-submenu-icon pi pi-angle-right';
+        const icon = item.icon && <span className={iconClassName}></span>;
+        const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
+        const submenuIcon = item.items && <span className={submenuIconClassName}></span>;
         const submenu = this.renderSubmenu(item);
+        let content = (
+            <a href={item.url || '#'} className={linkClassName} target={item.target} role="menuitem" aria-haspopup={item.items != null}
+                onClick={(event) => this.onItemClick(event, item)} onKeyDown={(event) => this.onItemKeyDown(event, item)} aria-disabled={item.disabled}>
+                {icon}
+                {label}
+                {submenuIcon}
+                <Ripple />
+            </a>
+        );
+
+        if (item.template) {
+            const defaultContentOptions = {
+                onClick: (event) => this.onItemClick(event, item),
+                onKeyDown: (event) => this.onItemKeyDown(event, item),
+                className: linkClassName,
+                labelClassName: 'p-menuitem-text',
+                iconClassName,
+                submenuIconClassName,
+                element: content,
+                props: this.props,
+                active
+            };
+
+            content = ObjectUtils.getJSXElement(item.template, item, defaultContentOptions);
+        }
 
         return (
-            <li key={item.label + '_' + index} className={className} style={item.style} onMouseEnter={(event) => this.onItemMouseEnter(event, item)}>
-                <a href={item.url || '#'} className="p-menuitem-link" target={item.target}
-                    onClick={(event) => this.onItemClick(event, item)} onKeyDown={(event) => this.onItemKeyDown(event, item)}>
-                    {icon}
-                    <span className="p-menuitem-text">{item.label}</span>
-                    {submenuIcon}
-                </a>
+            <li key={item.label + '_' + index} className={className} style={item.style} onMouseEnter={(event) => this.onItemMouseEnter(event, item)} role="none">
+                {content}
                 {submenu}
             </li>
         );
@@ -266,7 +284,7 @@ export class TieredMenuSub extends Component {
     renderItem(item, index) {
         if (item.separator)
             return this.renderSeparator(index);
-        else 
+        else
             return this.renderMenuitem(item, index);
     }
 
@@ -278,9 +296,8 @@ export class TieredMenuSub extends Component {
                 })
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     render() {
@@ -288,9 +305,9 @@ export class TieredMenuSub extends Component {
         const submenu = this.renderMenu();
 
         return (
-            <ul ref={el => this.element = el} className={className}>
+            <ul ref={el => this.element = el} className={className} role={this.props.root ? 'menubar' : 'menu'} aria-orientation="horizontal">
                 {submenu}
             </ul>
-        );   
+        );
     }
 }
