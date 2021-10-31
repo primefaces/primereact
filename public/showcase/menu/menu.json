@@ -239,8 +239,7 @@
                     "to": "/autocomplete",
                     "meta": [
                         "autocomplete"
-                    ],
-                    "badge": "updated"
+                    ]
                 },
                 {
                     "name": "Calendar",
@@ -284,8 +283,7 @@
                     "meta": [
                         "dropdown",
                         "selectOneMenu"
-                    ],
-                    "badge": "updated"
+                    ]
                 },
                 {
                     "name": "Editor",
@@ -369,16 +367,14 @@
                     "to": "/listbox",
                     "meta": [
                         "listbox"
-                    ],
-                    "badge": "updated"
+                    ]
                 },
                 {
                     "name": "Mention",
                     "to": "/mention",
                     "meta": [
                         "mention"
-                    ],
-                    "badge": "new"
+                    ]
                 },
                 {
                     "name": "MultiSelect",
@@ -386,8 +382,7 @@
                     "meta": [
                         "multiselect",
                         "selectCheckboxMenu"
-                    ],
-                    "badge": "updated"
+                    ]
                 },
                 {
                     "name": "Password",
@@ -481,8 +476,7 @@
                     "to": "/speeddial",
                     "meta": [
                         "speeddial"
-                    ],
-                    "badge": "new"
+                    ]
                 }
             ]
         },
@@ -786,8 +780,7 @@
                     "to": "/virtualscroller",
                     "meta": [
                         "virtualscroller"
-                    ],
-                    "badge": "new"
+                    ]
                 },
                 {
                     "name": "Google Maps",
@@ -1260,8 +1253,7 @@
                     "to": "/dock",
                     "meta": [
                         "dock"
-                    ],
-                    "badge": "new"
+                    ]
                 }
             ]
         },
@@ -1270,7 +1262,6 @@
             "meta": [
                 "chart"
             ],
-            "badge": "updated",
             "children": [
                 {
                     "name": "ChartModel",
@@ -1450,8 +1441,7 @@
                     "to": "/image",
                     "meta": [
                         "image"
-                    ],
-                    "badge": "new"
+                    ]
                 }
             ]
         },
@@ -1480,8 +1470,7 @@
                     "to": "/blockui",
                     "meta": [
                         "blockui"
-                    ],
-                    "badge": "new"
+                    ]
                 },
                 {
                     "name": "Chip",
@@ -1552,16 +1541,14 @@
                     "to": "/terminal",
                     "meta": [
                         "terminal"
-                    ],
-                    "badge": "new"
+                    ]
                 },
                 {
                     "name": "StyleClass",
                     "to": "/styleclass",
                     "meta": [
                         "styleclass"
-                    ],
-                    "badge": "new"
+                    ]
                 }
             ]
         }
