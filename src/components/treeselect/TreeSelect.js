@@ -138,7 +138,7 @@ export class TreeSelect extends Component {
 
     getSelectedNodes() {
         let selectedNodes = [];
-        if (this.props.value && this.props.options) {
+        if ((this.props.value || this.props.value === 0) && this.props.options) {
             let keys = this.props.selectionMode === 'single' ? {[`${this.props.value}`]: true} : {...this.props.value};
             this.findSelectedNodes(null, keys, selectedNodes);
         }
