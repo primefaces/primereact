@@ -1110,12 +1110,6 @@ export const DataTableDemo = () => {
                             <td>Body content of the column.</td>
                         </tr>
                         <tr>
-                            <td>loadingBody</td>
-                            <td>function</td>
-                            <td>null</td>
-                            <td>Function to return the body content of the column to display when virtual scroll loads the new data.</td>
-                        </tr>
-                        <tr>
                             <td>footer</td>
                             <td>any</td>
                             <td>null</td>
