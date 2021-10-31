@@ -37,7 +37,7 @@ export class HeaderCell extends Component {
     }
 
     getColumnProp(...args) {
-        return typeof args[0] === 'string' ? this.props.column.props[args[0]] : (args[0] || this.props.column).props[args[1]];
+        return this.props.column ? typeof args[0] === 'string' ? this.props.column.props[args[0]] : (args[0] || this.props.column).props[args[1]] : null;
     }
 
     getStyle() {
@@ -289,7 +289,7 @@ export class HeaderCell extends Component {
         )
     }
 
-    render() {
+    renderElement() {
         const isSortableDisabled = this.isSortableDisabled();
         const sortMeta = this.getSortMeta();
         const style = this.getStyle();
@@ -319,5 +319,9 @@ export class HeaderCell extends Component {
                 {header}
             </th>
         )
+    }
+
+    render() {
+        return this.renderElement();
     }
 }

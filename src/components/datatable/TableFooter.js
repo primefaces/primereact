@@ -4,7 +4,7 @@ import { FooterCell } from './FooterCell';
 export class TableFooter extends Component {
 
     hasFooter() {
-        return this.props.footerColumnGroup ? true : (this.props.columns ? this.props.columns.some(col => col.props.footer) : false);
+        return this.props.footerColumnGroup ? true : (this.props.columns ? this.props.columns.some(col => col && col.props.footer) : false);
     }
 
     renderGroupFooterCells(row) {
@@ -15,7 +15,10 @@ export class TableFooter extends Component {
 
     renderFooterCells(columns) {
         return React.Children.map(columns, (col, i) => {
-            return !col.props.hidden && <FooterCell key={col.props.columnKey || col.props.field || i} tableProps={this.props.tableProps} column={col} />;
+            const isVisible = col ? !col.props.hidden : true;
+            const key = col ? col.props.columnKey || col.props.field || i : i;
+
+            return isVisible && <FooterCell key={key} tableProps={this.props.tableProps} column={col} />;
         })
     }
 

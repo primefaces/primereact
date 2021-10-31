@@ -66,6 +66,7 @@ export class DataTable extends Component {
         filterLocale: undefined,
         scrollable: false,
         scrollHeight: null,
+        virtualScrollerOptions: null,
         frozenWidth: null,
         frozenValue: null,
         csvSeparator: ',',
@@ -187,6 +188,7 @@ export class DataTable extends Component {
         filterLocale: PropTypes.string,
         scrollable: PropTypes.bool,
         scrollHeight: PropTypes.string,
+        virtualScrollerOptions: PropTypes.object,
         frozenWidth: PropTypes.string,
         frozenValue: PropTypes.array,
         csvSeparator: PropTypes.string,
@@ -1570,13 +1572,14 @@ export class DataTable extends Component {
         return null;
     }
 
-    renderTableHeader(processedData, columns, empty) {
+    renderTableHeader(options, empty) {
         const sortField = this.getSortField();
         const sortOrder = this.getSortOrder();
         const multiSortMeta = [...this.getMultiSortMeta()];
         const groupRowSortField = this.getGroupRowSortField();
         const filters = this.state.d_filters;
         const filtersStore = this.getFilters();
+        const { items: processedData, columns } = options;
 
         return (
             <TableHeader value={processedData} tableProps={this.props} columns={columns} tabIndex={this.props.tabIndex} empty={empty} headerColumnGroup={this.props.headerColumnGroup} resizableColumns={this.props.resizableColumns}
@@ -1589,11 +1592,11 @@ export class DataTable extends Component {
         )
     }
 
-    renderTableBody(options, columns, selectionModeInColumn, empty, isVirtualScrollerDisabled) {
+    renderTableBody(options, selectionModeInColumn, empty, isVirtualScrollerDisabled) {
         const tableSelector = this.attributeSelector;
         const first = this.getFirst();
         const editingMeta = this.state.editingMeta;
-        const { rows, contentRef, className, loading, loadingTemplate } = options;
+        const { rows, columns, contentRef, className } = options;
 
         const frozenBody = this.props.frozenValue && (
             <TableBody value={this.props.frozenValue} className="p-datatable-frozen-tbody" frozenRow
@@ -1616,7 +1619,7 @@ export class DataTable extends Component {
                 isVirtualScrollerDisabled={true} />
         );
         const body = (
-            <TableBody className={className} value={this.dataToRender(rows)} empty={empty} frozenRow={false}
+            <TableBody value={this.dataToRender(rows)} className={className} empty={empty} frozenRow={false}
                 tableProps={this.props} tableSelector={tableSelector} columns={columns} selectionModeInColumn={selectionModeInColumn}
                 first={first} editingMeta={editingMeta} onEditingMetaChange={this.onEditingMetaChange} tabIndex={this.props.tabIndex}
                 onRowClick={this.props.onRowClick} onRowDoubleClick={this.props.onRowDoubleClick} onCellClick={this.props.onCellClick}
@@ -1633,7 +1636,7 @@ export class DataTable extends Component {
                 cellClassName={this.props.cellClassName} responsiveLayout={this.props.responsiveLayout}
                 showSelectionElement={this.props.showSelectionElement} showRowReorderElement={this.props.showRowReorderElement}
                 expandedRowIcon={this.props.expandedRowIcon} collapsedRowIcon={this.props.collapsedRowIcon} rowClassName={this.props.rowClassName}
-                virtualScrollerContentRef={contentRef} virtualScrollerOptions={this.props.virtualScrollerOptions} virtualScrollerLoading={loading} virtualScrollerLoadingTemplate={loadingTemplate} isVirtualScrollerDisabled={isVirtualScrollerDisabled} />
+                virtualScrollerContentRef={contentRef} virtualScrollerOptions={options} isVirtualScrollerDisabled={isVirtualScrollerDisabled} />
         );
 
         return (
@@ -1644,7 +1647,9 @@ export class DataTable extends Component {
         );
     }
 
-    renderTableFooter(columns) {
+    renderTableFooter(options) {
+        const { columns } = options;
+
         return (
             <TableFooter tableProps={this.props} columns={columns} footerColumnGroup={this.props.footerColumnGroup} />
         );
@@ -1658,14 +1663,14 @@ export class DataTable extends Component {
 
         return (
             <div className="p-datatable-wrapper" style={{ maxHeight: isVirtualScrollerDisabled ? this.props.scrollHeight : '' }}>
-                <VirtualScroller {...virtualScrollerOptions} showSpacer={false} items={processedData} columns={columns} style={{ height: this.props.scrollHeight }}
-                    disabled={isVirtualScrollerDisabled} loaderDisabled
+                <VirtualScroller {...virtualScrollerOptions} items={processedData} columns={columns} style={{ height: this.props.scrollHeight }}
+                    disabled={isVirtualScrollerDisabled} loaderDisabled showSpacer={false}
                     contentTemplate={(options) => {
                         const ref = (el) => { this.table = el; options.spacerRef && options.spacerRef(el) };
                         const tableClassName = classNames('p-datatable-table', this.props.tableClassName);
-                        const tableHeader = this.renderTableHeader(options.items, options.columns, empty);
-                        const tableBody = this.renderTableBody(options, options.columns, selectionModeInColumn, empty, isVirtualScrollerDisabled);
-                        const tableFooter = this.renderTableFooter(options.columns);
+                        const tableHeader = this.renderTableHeader(options, empty);
+                        const tableBody = this.renderTableBody(options, selectionModeInColumn, empty, isVirtualScrollerDisabled);
+                        const tableFooter = this.renderTableFooter(options);
 
                         return (
                             <table ref={ref} style={this.props.tableStyle} className={tableClassName} role="table">

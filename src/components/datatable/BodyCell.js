@@ -55,7 +55,11 @@ export class BodyCell extends Component {
     }
 
     getColumnProp(prop) {
-        return this.props.column.props[prop];
+        return this.props.column ? this.props.column.props[prop] : null;
+    }
+
+    getVirtualScrollerOption(option) {
+        return this.props.virtualScrollerOptions ? this.props.virtualScrollerOptions[option] : null;
     }
 
     getStyle() {
@@ -465,7 +469,16 @@ export class BodyCell extends Component {
     }
 
     renderLoading() {
-        const content = ObjectUtils.getJSXElement(this.props.virtualScrollerLoadingTemplate, {});
+        const options = this.getVirtualScrollerOption('getLoaderOptions')(this.props.rowIndex, {
+            cellIndex: this.props.index,
+            cellFirst: this.props.index === 0,
+            cellLast: this.props.index === (this.getVirtualScrollerOption('columns').length - 1),
+            cellEven: this.props.index % 2 === 0,
+            cellOdd: this.props.index % 2 !== 0,
+            column: this.props.column,
+            field: this.field
+        });
+        const content = ObjectUtils.getJSXElement(this.getVirtualScrollerOption('loadingTemplate'), options);
 
         return (
             <td>
@@ -610,6 +623,6 @@ export class BodyCell extends Component {
     }
 
     render() {
-        return this.props.virtualScrollerLoading ? this.renderLoading() : this.renderElement();
+        return this.getVirtualScrollerOption('loading') ? this.renderLoading() : this.renderElement();
     }
 }

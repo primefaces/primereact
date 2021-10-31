@@ -59,7 +59,7 @@ export class TableBody extends Component {
     }
 
     isSelectionEnabled() {
-        return (this.props.selectionMode || this.props.selectionModeInColumn !== null) || (this.props.columns && this.props.columns.some(col => !!col.props.selectionMode));
+        return (this.props.selectionMode || this.props.selectionModeInColumn !== null) || (this.props.columns && this.props.columns.some(col => col && !!col.props.selectionMode));
     }
 
     isRadioSelectionMode() {
@@ -179,6 +179,11 @@ export class TableBody extends Component {
 
     getColumnsLength() {
         return this.props.columns ? this.props.columns.length : 0;
+    }
+
+    getVirtualScrollerOption(option, options) {
+        options = options || this.props.virtualScrollerOptions;
+        return options ? options[option] : null;
     }
 
     findIndex(collection, rowData) {
@@ -769,7 +774,7 @@ export class TableBody extends Component {
             this.updateFrozenRowGroupHeaderStickyPosition();
         }
 
-        if (!this.props.isVirtualScrollerDisabled) {
+        if (!this.props.isVirtualScrollerDisabled && this.getVirtualScrollerOption('vertical')) {
             let style = getComputedStyle(this.el);
             this.el.style.top = parseFloat(style.top) + parseFloat(this.props.virtualScrollerOptions.itemSize) + 'px';
         }
@@ -784,9 +789,9 @@ export class TableBody extends Component {
             this.updateFrozenRowGroupHeaderStickyPosition();
         }
 
-        if (!this.props.isVirtualScrollerDisabled && prevProps.virtualScrollerOptions.itemSize !== this.props.virtualScrollerOptions.itemSize) {
+        if (!this.props.isVirtualScrollerDisabled && this.getVirtualScrollerOption('vertical') && this.getVirtualScrollerOption('itemSize', prevProps.virtualScrollerOptions) !== this.getVirtualScrollerOption('itemSize')) {
             let style = getComputedStyle(this.el);
-            this.el.style.top = parseFloat(style.top) + parseFloat(this.props.virtualScrollerOptions.itemSize) - parseFloat(prevProps.virtualScrollerOptions.itemSize) + 'px';
+            this.el.style.top = parseFloat(style.top) + parseFloat(this.getVirtualScrollerOption('itemSize')) - parseFloat(this.getVirtualScrollerOption('itemSize', prevProps.virtualScrollerOptions)) + 'px';
         }
     }
 
@@ -857,7 +862,7 @@ export class TableBody extends Component {
                     cellClassName={this.props.cellClassName} responsiveLayout={this.props.responsiveLayout} frozenRow={this.props.frozenRow}
                     showSelectionElement={this.props.showSelectionElement} showRowReorderElement={this.props.showRowReorderElement}
                     expanded={expanded} expandedRowIcon={this.props.expandedRowIcon} collapsedRowIcon={this.props.collapsedRowIcon} rowClassName={this.props.rowClassName}
-                    virtualScrollerLoading={this.props.virtualScrollerLoading} virtualScrollerLoadingTemplate={this.props.virtualScrollerLoadingTemplate} />
+                    virtualScrollerOptions={this.props.virtualScrollerOptions} />
             )
         }
     }
@@ -896,7 +901,7 @@ export class TableBody extends Component {
     renderContent() {
         return (
             this.props.value.map((rowData, i) => {
-                const index = this.props.first + i;
+                const index = this.getVirtualScrollerOption('getItemOptions') ? this.getVirtualScrollerOption('getItemOptions')(i).index : this.props.first + i;
                 const key = this.getRowKey(rowData, index);
                 const expanded = this.isRowExpanded(rowData);
                 const isSubheaderGrouping = this.isSubheaderGrouping();

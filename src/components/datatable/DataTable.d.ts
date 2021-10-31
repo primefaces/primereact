@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { ColumnProps } from '../column';
 import { PaginatorTemplate } from '../paginator';
+import { VirtualScrollerProps } from '../virtualscroller/virtualscroller';
 
 type DataTableHeaderTemplateType = React.ReactNode | ((options: DataTableHeaderTemplateOptions) => React.ReactNode);
 
@@ -219,6 +220,7 @@ export interface DataTableProps {
     filterLocale?: string;
     scrollable?: boolean;
     scrollHeight?: string;
+    virtualScrollerOptions?: VirtualScrollerProps;
     frozenWidth?: string;
     frozenValue?: any[];
     csvSeparator?: string;

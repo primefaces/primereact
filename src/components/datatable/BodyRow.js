@@ -52,7 +52,7 @@ export class BodyRow extends Component {
     }
 
     getColumnProp(col, prop) {
-        return col.props[prop];
+        return col ? col.props[prop] : null;
     }
 
     getEditing() {
@@ -326,7 +326,7 @@ export class BodyRow extends Component {
                         cellClassName={this.props.cellClassName} responsiveLayout={this.props.responsiveLayout} frozenRow={this.props.frozenRow}
                         showSelectionElement={this.props.showSelectionElement} showRowReorderElement={this.props.showRowReorderElement} onRadioChange={this.props.onRadioChange} onCheckboxChange={this.props.onCheckboxChange}
                         expanded={this.props.expanded} expandedRowIcon={this.props.expandedRowIcon} collapsedRowIcon={this.props.collapsedRowIcon}
-                        virtualScrollerLoading={this.props.virtualScrollerLoading} virtualScrollerLoadingTemplate={this.props.virtualScrollerLoadingTemplate} />
+                        virtualScrollerOptions={this.props.virtualScrollerOptions} />
                 )
             }
 

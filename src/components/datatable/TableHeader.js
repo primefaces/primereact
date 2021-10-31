@@ -73,10 +73,11 @@ export class TableHeader extends Component {
 
     renderHeaderCells(columns) {
         return React.Children.map(columns, (col, i) => {
-            const isVisible = !col.props.hidden;
+            const isVisible = col ? !col.props.hidden : true;
+            const key = col ? col.props.columnKey || col.props.field || i : i;
 
             return isVisible && (
-                <HeaderCell key={col.props.columnKey || col.props.field || i} value={this.props.value} tableProps={this.props.tableProps} column={col} tabIndex={this.props.tabIndex} empty={this.props.empty} resizableColumns={this.props.resizableColumns} groupRowsBy={this.props.groupRowsBy} groupRowSortField={this.props.groupRowSortField}
+                <HeaderCell key={key} value={this.props.value} tableProps={this.props.tableProps} column={col} tabIndex={this.props.tabIndex} empty={this.props.empty} resizableColumns={this.props.resizableColumns} groupRowsBy={this.props.groupRowsBy} groupRowSortField={this.props.groupRowSortField}
                     sortMode={this.props.sortMode} sortField={this.props.sortField} sortOrder={this.props.sortOrder} multiSortMeta={this.props.multiSortMeta} allSortableDisabled={this.isAllSortableDisabled()} onSortableChange={this.onSortableChange} sortableDisabledFields={this.state.sortableDisabledFields}
                     filterDisplay={this.props.filterDisplay} filters={this.props.filters} filtersStore={this.props.filtersStore} onFilterChange={this.props.onFilterChange} onFilterApply={this.props.onFilterApply}
                     onColumnMouseDown={this.props.onColumnMouseDown} onColumnDragStart={this.props.onColumnDragStart} onColumnDragOver={this.props.onColumnDragOver} onColumnDragLeave={this.props.onColumnDragLeave} onColumnDrop={this.props.onColumnDrop}
