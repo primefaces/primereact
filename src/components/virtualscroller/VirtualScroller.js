@@ -427,12 +427,12 @@ export class VirtualScroller extends Component {
 
             this.setContentPosition(newState);
 
-            if (this.props.lazy) {
-                this.props.onLazyLoad && this.props.onLazyLoad(newState);
-            }
-
             this.setState(newState, () => {
                 this.props.onScrollIndexChange && this.props.onScrollIndexChange(newState);
+
+                if (this.props.lazy) {
+                    this.props.onLazyLoad && this.props.onLazyLoad(newState);
+                }
             });
         }
     }
@@ -440,7 +440,7 @@ export class VirtualScroller extends Component {
     onScroll(event) {
         this.props.onScroll && this.props.onScroll(event);
 
-        if (this.props.delay && !this.props.lazy) {
+        if (this.props.delay) {
             if (this.scrollTimeout) {
                 clearTimeout(this.scrollTimeout);
             }
