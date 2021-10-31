@@ -26,7 +26,7 @@ export class DataTableVirtualScrollDemo extends Component {
     }
 
     loadCarsLazy(event) {
-        this.setState({ lazyLoading: true });
+        !this.state.lazyLoading && this.setState({ lazyLoading: true });
 
         if (this.loadLazyTimeout) {
             clearTimeout(this.loadLazyTimeout);
@@ -83,7 +83,7 @@ export class DataTableVirtualScrollDemo extends Component {
 
                     <div className="card">
                         <h5>Lazy Loading from a Remote Datasource (100000 Rows)</h5>
-                        <DataTable value={this.state.virtualCars} scrollable scrollHeight="400px" virtualScrollerOptions={{ lazy: true, onLazyLoad: this.loadCarsLazy, itemSize: 46, showLoader: true, loading: this.state.lazyLoading, loadingTemplate: this.loadingTemplate }}>
+                        <DataTable value={this.state.virtualCars} scrollable scrollHeight="400px" virtualScrollerOptions={{ lazy: true, onLazyLoad: this.loadCarsLazy, itemSize: 46, delay: 200, showLoader: true, loading: this.state.lazyLoading, loadingTemplate: this.loadingTemplate }}>
                             <Column field="id" header="Id" style={{ minWidth: '200px' }}></Column>
                             <Column field="vin" header="Vin" style={{ minWidth: '200px' }}></Column>
                             <Column field="year" header="Year" style={{ minWidth: '200px' }}></Column>
@@ -132,7 +132,7 @@ export class DataTableVirtualScrollDemo extends Component {
     }
 
     loadCarsLazy(event) {
-        this.setState({ lazyLoading: true });
+        !this.state.lazyLoading && this.setState({ lazyLoading: true });
 
         if (this.loadLazyTimeout) {
             clearTimeout(this.loadLazyTimeout);
@@ -180,7 +180,7 @@ export class DataTableVirtualScrollDemo extends Component {
 
                 <div className="card">
                     <h5>Lazy Loading from a Remote Datasource (100000 Rows)</h5>
-                    <DataTable value={this.state.virtualCars} scrollable scrollHeight="400px" virtualScrollerOptions={{ lazy: true, onLazyLoad: this.loadCarsLazy, itemSize: 46, showLoader: true, loading: this.state.lazyLoading, loadingTemplate: this.loadingTemplate }}>
+                    <DataTable value={this.state.virtualCars} scrollable scrollHeight="400px" virtualScrollerOptions={{ lazy: true, onLazyLoad: this.loadCarsLazy, itemSize: 46, delay: 200, showLoader: true, loading: this.state.lazyLoading, loadingTemplate: this.loadingTemplate }}>
                         <Column field="id" header="Id" style={{ minWidth: '200px' }}></Column>
                         <Column field="vin" header="Vin" style={{ minWidth: '200px' }}></Column>
                         <Column field="year" header="Year" style={{ minWidth: '200px' }}></Column>
@@ -212,7 +212,7 @@ const DataTableVirtualScrollDemo = () => {
     const loadLazyTimeout = null;
 
     const loadCarsLazy = (event) => {
-        setLazyLoading(true);
+        !lazyLoading && setLazyLoading(true);
 
         if (loadLazyTimeout) {
             clearTimeout(loadLazyTimeout);
@@ -257,7 +257,7 @@ const DataTableVirtualScrollDemo = () => {
 
             <div className="card">
                 <h5>Lazy Loading from a Remote Datasource (100000 Rows)</h5>
-                <DataTable value={virtualCars} scrollable scrollHeight="400px" virtualScrollerOptions={{ lazy: true, onLazyLoad: loadCarsLazy, itemSize: 46, showLoader: true, loading: lazyLoading, loadingTemplate }}>
+                <DataTable value={virtualCars} scrollable scrollHeight="400px" virtualScrollerOptions={{ lazy: true, onLazyLoad: loadCarsLazy, itemSize: 46, delay: 200, showLoader: true, loading: lazyLoading, loadingTemplate }}>
                     <Column field="id" header="Id" style={{ minWidth: '200px' }}></Column>
                     <Column field="vin" header="Vin" style={{ minWidth: '200px' }}></Column>
                     <Column field="year" header="Year" style={{ minWidth: '200px' }}></Column>
@@ -288,7 +288,7 @@ const DataTableVirtualScrollDemo = () => {
     const loadLazyTimeout = null;
 
     const loadCarsLazy = (event) => {
-        setLazyLoading(true);
+        !lazyLoading && setLazyLoading(true);
 
         if (loadLazyTimeout) {
             clearTimeout(loadLazyTimeout);
@@ -333,7 +333,7 @@ const DataTableVirtualScrollDemo = () => {
 
             <div className="card">
                 <h5>Lazy Loading from a Remote Datasource (100000 Rows)</h5>
-                <DataTable value={virtualCars} scrollable scrollHeight="400px" virtualScrollerOptions={{ lazy: true, onLazyLoad: loadCarsLazy, itemSize: 46, showLoader: true, loading: lazyLoading, loadingTemplate }}>
+                <DataTable value={virtualCars} scrollable scrollHeight="400px" virtualScrollerOptions={{ lazy: true, onLazyLoad: loadCarsLazy, itemSize: 46, delay: 200, showLoader: true, loading: lazyLoading, loadingTemplate }}>
                     <Column field="id" header="Id" style={{ minWidth: '200px' }}></Column>
                     <Column field="vin" header="Vin" style={{ minWidth: '200px' }}></Column>
                     <Column field="year" header="Year" style={{ minWidth: '200px' }}></Column>
@@ -371,7 +371,7 @@ const DataTableVirtualScrollDemo = () => {
     const loadLazyTimeout = null;
 
     const loadCarsLazy = (event) => {
-        setLazyLoading(true);
+        !lazyLoading && setLazyLoading(true);
 
         if (loadLazyTimeout) {
             clearTimeout(loadLazyTimeout);
@@ -416,7 +416,7 @@ const DataTableVirtualScrollDemo = () => {
 
             <div className="card">
                 <h5>Lazy Loading from a Remote Datasource (100000 Rows)</h5>
-                <DataTable value={virtualCars} scrollable scrollHeight="400px" virtualScrollerOptions={{ lazy: true, onLazyLoad: loadCarsLazy, itemSize: 46, showLoader: true, loading: lazyLoading, loadingTemplate }}>
+                <DataTable value={virtualCars} scrollable scrollHeight="400px" virtualScrollerOptions={{ lazy: true, onLazyLoad: loadCarsLazy, itemSize: 46, delay: 200, showLoader: true, loading: lazyLoading, loadingTemplate }}>
                     <Column field="id" header="Id" style={{ minWidth: '200px' }}></Column>
                     <Column field="vin" header="Vin" style={{ minWidth: '200px' }}></Column>
                     <Column field="year" header="Year" style={{ minWidth: '200px' }}></Column>
