@@ -54,29 +54,36 @@ interface VirtualScrollerTemplateOptions {
 
 interface VirtualScrollerLoadingTemplateOptions extends VirtualScrollerTemplateOptions {
     numCols: number;
+    [key: string]: any;
 }
 
 interface VirtualScrollerContentTemplateOptions {
     className: string;
-    ref: any;
+    contentRef: any;
+    spacerRef: any;
+    stickyRef: any;
+    items: VirtualScrollerItemsType;
+    getItemOptions(index: number): VirtualScrollerTemplateOptions;
     children: any;
     element: JSX.Element;
     props: VirtualScrollerProps;
     loading: boolean;
-    first: number;
-    last: number;
+    getLoaderOptions(index: number, ext?: object): VirtualScrollerLoadingTemplateOptions;
+    loadingTemplate: VirtualScrollerLoadingTemplateType;
+    itemSize: VirtualScrollerItemSizeType;
+    rows: any[];
+    columns: any[];
+    vertical: boolean;
+    horizontal: boolean;
+    both: boolean;
 }
 
 interface VirtualScrollerChangeParams {
     first: VirtualScrollerStateType;
-    numItems: VirtualScrollerStateType;
+    last: VirtualScrollerStateType;
 }
 
-interface VirtualScrollerLazyParams {
-    first: VirtualScrollerStateType;
-    last: VirtualScrollerStateType;
-    [key: string]: any;
-}
+interface VirtualScrollerLazyParams extends VirtualScrollerChangeParams {}
 
 export interface VirtualScrollerProps {
     id?: string;
@@ -90,6 +97,11 @@ export interface VirtualScrollerProps {
     numToleratedItems?: number;
     delay?: number;
     lazy?: boolean;
+    disabled?: boolean;
+    loaderDisabled?: boolean;
+    columns?: any;
+    loading?: boolean;
+    showSpacer?: boolean;
     showLoader?: boolean;
     loadingTemplate?: VirtualScrollerLoadingTemplateType;
     itemTemplate?: VirtualScrollerItemTemplateType;

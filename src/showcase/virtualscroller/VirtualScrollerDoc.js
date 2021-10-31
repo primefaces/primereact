@@ -935,16 +935,24 @@ const onLazyLoad = (event) => {
 {`
 const contentTemplate = (options) => {
     // options.className: Class name of wrapper element.
-    // options.ref: Ref of wrapper element.
+    // options.contentRef: Ref of wrapper element.
+    // options.spacerRef: Ref of spacer element.
+    // options.stickyRef: Ref of sticky element in content.
+    // options.items: Loaded data.
+    // options.getItemOptions(index): Information of any item.
     // options.children: Items of wrapper element.
     // options.element: Default wrapper element.
     // options.props: Props of component.
     // options.loading: Whether the data is loaded.
-    // options.first: First index.
-    // options.last: Last index
+    // options.getLoaderOptions(index): Information of any item during the loading.
+    // options.loadingTemplate: Template of loading item.
+    // options.itemSize: The height/width of item according to orientation.
+    // options.vertical: Whether the orientation is vertical.
+    // options.horizontal: Whether the orientation is horizontal.
+    // options.both: Whether the orientation is both.
 
     return (
-        <ul ref={options.ref} className={options.className} role="listbox">
+        <ul ref={options.contentRef} className={options.className} role="listbox">
             {options.children}
         </ul>
     );
@@ -1034,6 +1042,30 @@ const itemTemplate = (item, options) => {
                                         <td>boolean</td>
                                         <td>false</td>
                                         <td>Defines if data is loaded and interacted with in lazy manner.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>disabled</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>If disabled, the VirtualScroller feature is eliminated and the content is displayed directly.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>loaderDisabled</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>Used to implement a custom loader instead of using the loader feature in the VirtualScroller.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>loading</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>Whether the data is loaded.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>showSpacer</td>
+                                        <td>boolean</td>
+                                        <td>true</td>
+                                        <td>Used to implement a custom spacer instead of using the spacer feature in the VirtualScroller.</td>
                                     </tr>
                                     <tr>
                                         <td>showLoader</td>

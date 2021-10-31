@@ -407,7 +407,7 @@ export class ListBox extends Component {
                     const className = classNames('p-listbox-list', options.className);
 
                     return (
-                        <ul ref={options.ref} className={className} role="listbox" aria-multiselectable={this.props.multiple}>
+                        <ul ref={options.contentRef} className={className} role="listbox" aria-multiselectable={this.props.multiple}>
                             {options.children}
                         </ul>
                     );
