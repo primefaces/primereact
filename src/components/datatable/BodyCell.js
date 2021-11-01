@@ -243,25 +243,28 @@ export class BodyCell extends Component {
                 onBeforeCellEditShow(params);
             }
 
-            this.setState({
-                editing: true
-            }, () => {
-                if (onCellEditInit) {
-                    onCellEditInit(params);
-                }
+            // If the data is sorted using sort icon, it has been added to wait for the sort operation when any cell is wanted to be opened.
+            setTimeout(() => {
+                this.setState({
+                    editing: true
+                }, () => {
+                    if (onCellEditInit) {
+                        onCellEditInit(params);
+                    }
 
-                if (cellEditValidatorEvent === 'click') {
-                    this.bindDocumentEditListener();
+                    if (cellEditValidatorEvent === 'click') {
+                        this.bindDocumentEditListener();
 
-                    this.overlayEventListener = (e) => {
-                        if (!this.isOutsideClicked(e.target)) {
-                            this.selfClick = true;
-                        }
-                    };
+                        this.overlayEventListener = (e) => {
+                            if (!this.isOutsideClicked(e.target)) {
+                                this.selfClick = true;
+                            }
+                        };
 
-                    OverlayService.on('overlay-click', this.overlayEventListener);
-                }
-            });
+                        OverlayService.on('overlay-click', this.overlayEventListener);
+                    }
+                });
+            }, 1);
         }
 
         if (this.props.allowCellSelection && this.props.onClick) {
