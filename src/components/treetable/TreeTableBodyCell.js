@@ -142,13 +142,13 @@ export class TreeTableBodyCell extends Component {
 
         if(this.state && this.state.editing) {
             if(this.props.editor)
-                content = this.props.editor(this.props);
+                content = ObjectUtils.getJSXElement(this.props.editor, { node: this.props.node, rowData: this.props.node.data, value: ObjectUtils.resolveFieldData(this.props.node.data, this.props.field), field: this.props.field, rowIndex: this.props.rowIndex, props: this.props });
             else
                 throw new Error("Editor is not found on column.");
         }
         else {
             if (this.props.body)
-                content = this.props.body(this.props.node, this.props);
+                content = ObjectUtils.getJSXElement(this.props.body, this.props.node, { field: this.props.field, rowIndex: this.props.rowIndex, props: this.props });
             else
                 content = ObjectUtils.resolveFieldData(this.props.node.data, this.props.field);
         }
