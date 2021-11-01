@@ -120,7 +120,7 @@ export class DataTable extends Component {
         onCellUnselect: null,
         onRowReorder: null,
         onValueChange: null,
-        rowEditorValidator: null,
+        rowEditValidator: null,
         onRowEditInit: null,
         onRowEditSave: null,
         onRowEditCancel: null,
@@ -242,7 +242,7 @@ export class DataTable extends Component {
         onColReorder: PropTypes.func,
         onRowReorder: PropTypes.func,
         onValueChange: PropTypes.func,
-        rowEditorValidator: PropTypes.func,
+        rowEditValidator: PropTypes.func,
         onRowEditInit: PropTypes.func,
         onRowEditSave: PropTypes.func,
         onRowEditCancel: PropTypes.func,
@@ -1612,7 +1612,7 @@ export class DataTable extends Component {
                 groupRowsBy={this.props.groupRowsBy} expandableRowGroups={this.props.expandableRowGroups} loading={this.props.loading} emptyMessage={this.props.emptyMessage}
                 rowGroupHeaderTemplate={this.props.rowGroupHeaderTemplate} rowExpansionTemplate={this.props.rowExpansionTemplate} rowGroupFooterTemplate={this.props.rowGroupFooterTemplate}
                 onRowEditChange={this.props.onRowEditChange} compareSelectionBy={this.props.compareSelectionBy} selectOnEdit={this.props.selectOnEdit}
-                onRowEditInit={this.props.onRowEditInit} rowEditorValidator={this.props.rowEditorValidator} onRowEditSave={this.props.onRowEditSave} onRowEditComplete={this.props.onRowEditComplete} onRowEditCancel={this.props.onRowEditCancel}
+                onRowEditInit={this.props.onRowEditInit} rowEditValidator={this.props.rowEditValidator} onRowEditSave={this.props.onRowEditSave} onRowEditComplete={this.props.onRowEditComplete} onRowEditCancel={this.props.onRowEditCancel}
                 cellClassName={this.props.cellClassName} responsiveLayout={this.props.responsiveLayout}
                 showSelectionElement={this.props.showSelectionElement} showRowReorderElement={this.props.showRowReorderElement}
                 expandedRowIcon={this.props.expandedRowIcon} collapsedRowIcon={this.props.collapsedRowIcon} rowClassName={this.props.rowClassName}
@@ -1632,7 +1632,7 @@ export class DataTable extends Component {
                 groupRowsBy={this.props.groupRowsBy} expandableRowGroups={this.props.expandableRowGroups} loading={this.props.loading} emptyMessage={this.props.emptyMessage}
                 rowGroupHeaderTemplate={this.props.rowGroupHeaderTemplate} rowExpansionTemplate={this.props.rowExpansionTemplate} rowGroupFooterTemplate={this.props.rowGroupFooterTemplate}
                 onRowEditChange={this.props.onRowEditChange} compareSelectionBy={this.props.compareSelectionBy} selectOnEdit={this.props.selectOnEdit}
-                onRowEditInit={this.props.onRowEditInit} rowEditorValidator={this.props.rowEditorValidator} onRowEditSave={this.props.onRowEditSave} onRowEditComplete={this.props.onRowEditComplete} onRowEditCancel={this.props.onRowEditCancel}
+                onRowEditInit={this.props.onRowEditInit} rowEditValidator={this.props.rowEditValidator} onRowEditSave={this.props.onRowEditSave} onRowEditComplete={this.props.onRowEditComplete} onRowEditCancel={this.props.onRowEditCancel}
                 cellClassName={this.props.cellClassName} responsiveLayout={this.props.responsiveLayout}
                 showSelectionElement={this.props.showSelectionElement} showRowReorderElement={this.props.showRowReorderElement}
                 expandedRowIcon={this.props.expandedRowIcon} collapsedRowIcon={this.props.collapsedRowIcon} rowClassName={this.props.rowClassName}

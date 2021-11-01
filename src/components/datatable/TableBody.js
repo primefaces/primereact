@@ -857,7 +857,7 @@ export class TableBody extends Component {
                     onRadioChange={this.onRadioChange} onCheckboxChange={this.onCheckboxChange} onCellClick={this.onCellClick} onCellMouseDown={this.onCellMouseDown} onCellMouseUp={this.onCellMouseUp}
                     editing={editing} editingRows={this.props.editingRows} editingMeta={this.props.editingMeta} editMode={this.props.editMode} onRowEditChange={this.props.onRowEditChange} onEditingMetaChange={this.props.onEditingMetaChange}
                     groupRowsBy={this.props.groupRowsBy} compareSelectionBy={this.props.compareSelectionBy} dataKey={this.props.dataKey} rowGroupMode={this.props.rowGroupMode}
-                    onRowEditInit={this.props.onRowEditInit} rowEditorValidator={this.props.rowEditorValidator} onRowEditSave={this.props.onRowEditSave} onRowEditComplete={this.props.onRowEditComplete} onRowEditCancel={this.props.onRowEditCancel}
+                    onRowEditInit={this.props.onRowEditInit} rowEditValidator={this.props.rowEditValidator} onRowEditSave={this.props.onRowEditSave} onRowEditComplete={this.props.onRowEditComplete} onRowEditCancel={this.props.onRowEditCancel}
                     selection={this.props.selection} allowRowSelection={allowRowSelection} allowCellSelection={allowCellSelection} selectOnEdit={this.props.selectOnEdit} selectionMode={this.props.selectionMode} selectionModeInColumn={this.props.selectionModeInColumn}
                     cellClassName={this.props.cellClassName} responsiveLayout={this.props.responsiveLayout} frozenRow={this.props.frozenRow}
                     showSelectionElement={this.props.showSelectionElement} showRowReorderElement={this.props.showRowReorderElement}

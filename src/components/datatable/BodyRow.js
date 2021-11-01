@@ -273,7 +273,7 @@ export class BodyRow extends Component {
 
     onEditSave(e) {
         const { originalEvent: event } = e;
-        const valid = this.props.rowEditorValidator ? this.props.rowEditorValidator(this.props.rowData, { props: this.props.tableProps }) : true;
+        const valid = this.props.rowEditValidator ? this.props.rowEditValidator(this.props.rowData, { props: this.props.tableProps }) : true;
 
         if (this.props.onRowEditSave) {
             this.props.onRowEditSave({

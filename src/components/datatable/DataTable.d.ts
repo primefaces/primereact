@@ -209,7 +209,7 @@ interface DataTableShowRowReorderElementOptions {
     props: DataTableProps;
 }
 
-interface DataTableRowEditorValidatorOptions {
+interface DataTableRowEditValidatorOptions {
     props: DataTableProps;
 }
 
@@ -323,7 +323,7 @@ export interface DataTableProps {
     onColReorder?(e: DataTableColReorderParams): void;
     onRowReorder?(e: DataTableRowReorderParams): void;
     onValueChange?(value: any[]): void;
-    rowEditorValidator?(data: any, options: DataTableRowEditorValidatorOptions): boolean;
+    rowEditValidator?(data: any, options: DataTableRowEditValidatorOptions): boolean;
     onRowEditInit?(e: DataTableRowEditParams): void;
     onRowEditSave?(e: DataTableRowEditSaveParams): void;
     onRowEditCancel?(e: DataTableRowEditParams): void;

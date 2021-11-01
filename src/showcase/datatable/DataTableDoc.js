@@ -2071,7 +2071,7 @@ const requiredValidator = (e) => {
 <DataTable value={products} editMode="row">
     <Column field="code" header="Code" />
     <Column field="name" header="Name" />
-    <Column field="inventoryStatuses" header="Status" editor={statusEditor} onRowEditorValidator={onRowEditorValidator} />
+    <Column field="inventoryStatuses" header="Status" editor={statusEditor} onRowEditValidator={onRowEditValidator} />
     <Column rowEditor />
 </DataTable>
 `}
@@ -2079,7 +2079,7 @@ const requiredValidator = (e) => {
 
 <CodeHighlight lang="js">
 {`
-const onRowEditorValidator = (rowData) => {
+const onRowEditValidator = (rowData) => {
     let value = rowData['inventoryStatuses'];
     return value.length > 0;
 }
@@ -3319,7 +3319,7 @@ const bodyTemplate = (data, props) => {
                             <td>Callback to invoke after filtering and sorting to pass the rendered value.</td>
                         </tr>
                         <tr>
-                            <td>rowEditorValidator</td>
+                            <td>rowEditValidator</td>
                             <td>data: Editing row data</td>
                             <td>Callback to invoke to validate the editing row when the save icon is clicked on row editing mode.</td>
                         </tr>
