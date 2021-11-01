@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ObjectUtils, FilterUtils, classNames } from '../utils/Utils';
+import { FilterService } from '../api/Api';
+import { ObjectUtils, classNames } from '../utils/Utils';
 import { ListBoxItem } from './ListBoxItem';
 import { ListBoxHeader } from './ListBoxHeader';
 import { tip } from '../tooltip/Tooltip';
@@ -328,7 +329,7 @@ export class ListBox extends Component {
             if (this.props.optionGroupLabel) {
                 let filteredGroups = [];
                 for (let optgroup of this.props.options) {
-                    let filteredSubOptions = FilterUtils.filter(this.getOptionGroupChildren(optgroup), searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
+                    let filteredSubOptions = FilterService.filter(this.getOptionGroupChildren(optgroup), searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
                     if (filteredSubOptions && filteredSubOptions.length) {
                         filteredGroups.push({ ...optgroup, ...{ items: filteredSubOptions } });
                     }
@@ -336,7 +337,7 @@ export class ListBox extends Component {
                 return filteredGroups;
             }
             else {
-                return FilterUtils.filter(this.props.options, searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
+                return FilterService.filter(this.props.options, searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
             }
         }
         else {

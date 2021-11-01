@@ -72,20 +72,6 @@ export declare function EventBus(): {
     off(type: string, fn: any): void;
 }
 
-export declare class FilterUtils {
-    static filter(value: any, fields: string, filterValue: any, filterMatchMode: string, filterLocale?: string): any[];
-    static startsWith(value: any, filter: string, filterLocale?: string): boolean;
-    static contains(value: any, filter: string, filterLocale?: string): boolean;
-    static endsWith(value: any, filter: string, filterLocale?: string): boolean;
-    static equals(value: any, filter: string, filterLocale?: string): boolean;
-    static notEquals(value: any, filter: string, filterLocale?: string): boolean;
-    static in(value: any, filter: string, filterLocale?: string): boolean;
-    static lt(value: any, filter: string, filterLocale?: string): boolean;
-    static lte(value: any, filter: string, filterLocale?: string): boolean;
-    static gt(value: any, filter: string, filterLocale?: string): boolean;
-    static gte(value: any, filter: string, filterLocale?: string): boolean;
-}
-
 export declare function mask(el: HTMLElement, options: object): {
     init(): void;
     bindEvents(): void;

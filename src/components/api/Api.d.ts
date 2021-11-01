@@ -277,11 +277,30 @@ export interface FilterMatchMode {
     readonly CUSTOM: string;
 }
 
-export interface FilterMatchMode {
+export interface FilterOperator {
     readonly AND: string;
     readonly OR: string;
 }
 
 export declare namespace FilterService {
+    export function filter(value: any, fields: string[], filterValue: any, filterMatchMode: string, filterLocale?: string): any[];
+    export interface filters {
+        startsWith(value: any, filter: string, filterLocale?: string): boolean;
+        contains(value: any, filter: string, filterLocale?: string): boolean;
+        notContains(value: any, filter: string, filterLocale?: string): boolean;
+        endsWith(value: any, filter: string, filterLocale?: string): boolean;
+        equals(value: any, filter: string, filterLocale?: string): boolean;
+        notEquals(value: any, filter: string, filterLocale?: string): boolean;
+        in(value: any, filter: string): boolean;
+        between(value: any, filter: string): boolean;
+        lt(value: any, filter: string): boolean;
+        lte(value: any, filter: string): boolean;
+        gt(value: any, filter: string): boolean;
+        gte(value: any, filter: string): boolean;
+        dateIs(value: any, filter: string): boolean;
+        dateIsNot(value: any, filter: string): boolean;
+        dateBefore(value: any, filter: string): boolean;
+        dateAfter(value: any, filter: string): boolean;
+    }
     export function register(rule: string, fn: (...arg: any[]) => boolean): void;
 }

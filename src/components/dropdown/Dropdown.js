@@ -1,10 +1,10 @@
 import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
-import { DomHandler, ObjectUtils, FilterUtils, classNames, ZIndexUtils, ConnectedOverlayScrollHandler } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames, ZIndexUtils, ConnectedOverlayScrollHandler } from '../utils/Utils';
 import { DropdownPanel } from './DropdownPanel';
 import { tip } from '../tooltip/Tooltip';
 import { OverlayService } from '../overlayservice/OverlayService';
-import PrimeReact from '../api/Api';
+import PrimeReact, { FilterService } from '../api/Api';
 
 export class Dropdown extends Component {
 
@@ -790,7 +790,7 @@ export class Dropdown extends Component {
             if (this.props.optionGroupLabel) {
                 let filteredGroups = [];
                 for (let optgroup of this.props.options) {
-                    let filteredSubOptions = FilterUtils.filter(this.getOptionGroupChildren(optgroup), searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
+                    let filteredSubOptions = FilterService.filter(this.getOptionGroupChildren(optgroup), searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
                     if (filteredSubOptions && filteredSubOptions.length) {
                         filteredGroups.push({ ...optgroup, ...{ items: filteredSubOptions } });
                     }
@@ -798,7 +798,7 @@ export class Dropdown extends Component {
                 return filteredGroups;
             }
             else {
-                return FilterUtils.filter(this.props.options, searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
+                return FilterService.filter(this.props.options, searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
             }
         }
         else {
