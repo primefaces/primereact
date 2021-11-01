@@ -824,7 +824,7 @@ export class TableBody extends Component {
             const toggler = this.props.expandableRowGroups && (
                 <RowTogglerButton onClick={this.onRowToggle} rowData={rowData} expanded={expanded} expandedRowIcon={this.props.expandedRowIcon} collapsedRowIcon={this.props.collapsedRowIcon} />
             );
-            const content = ObjectUtils.getJSXElement(this.props.rowGroupHeaderTemplate, rowData, { index });
+            const content = ObjectUtils.getJSXElement(this.props.rowGroupHeaderTemplate, rowData, { index, props: this.props.tableProps });
 
             return (
                 <tr className="p-rowgroup-header" style={style} role="row">
@@ -886,7 +886,7 @@ export class TableBody extends Component {
 
     renderGroupFooter(rowData, index, expanded, isSubheaderGrouping, colSpan) {
         if (isSubheaderGrouping && this.shouldRenderRowGroupFooter(this.props.value, rowData, index, expanded)) {
-            const content = ObjectUtils.getJSXElement(this.props.rowGroupFooterTemplate, rowData, { index, colSpan });
+            const content = ObjectUtils.getJSXElement(this.props.rowGroupFooterTemplate, rowData, { index, colSpan, props: this.props.tableProps });
 
             return (
                 <tr className="p-rowgroup-footer" role="row">

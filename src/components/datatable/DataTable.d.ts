@@ -1,11 +1,15 @@
 import * as React from 'react';
-import { ColumnProps } from '../column';
+import { Column } from '../column';
 import { PaginatorTemplate } from '../paginator';
 import { VirtualScrollerProps } from '../virtualscroller/virtualscroller';
 
 type DataTableHeaderTemplateType = React.ReactNode | ((options: DataTableHeaderTemplateOptions) => React.ReactNode);
 
 type DataTableFooterTemplateType = React.ReactNode | ((options: DataTableFooterTemplateOptions) => React.ReactNode);
+
+type DataTableRowGroupHeaderTemplateType = React.ReactNode | ((data: any, options: DataTableRowGroupHeaderTemplateOptions) => React.ReactNode);
+
+type DataTableRowGroupFooterTemplateType = React.ReactNode | ((data: any, options: DataTableRowGroupFooterTemplateOptions) => React.ReactNode);
 
 type DataTablePaginatorPositionType = 'top' | 'bottom' | 'both';
 
@@ -45,6 +49,15 @@ interface DataTableHeaderTemplateOptions {
 
 interface DataTableFooterTemplateOptions extends DataTableHeaderTemplateOptions {}
 
+interface DataTableRowGroupHeaderTemplateOptions {
+    index: number;
+    props: DataTableProps;
+}
+
+interface DataTableRowGroupFooterTemplateOptions extends DataTableRowGroupHeaderTemplateOptions {
+    colSpan: number;
+}
+
 interface DataTableSortMeta {
     field: string;
     order: DataTableSortOrderType;
@@ -55,8 +68,13 @@ interface DataTableFilterMetaData {
     matchMode: DataTableFilterMatchModeType;
 }
 
+interface DataTableOperatorFilterMetaData {
+    operator: string;
+    constraints: DataTableFilterMetaData[];
+}
+
 interface DataTableFilterMeta {
-    [key: string]: DataTableFilterMetaData;
+    [key: string]: DataTableFilterMetaData | DataTableOperatorFilterMetaData;
 }
 
 interface DataTableExpandedRows {
@@ -80,14 +98,14 @@ interface DataTableRowToggleParams {
 
 interface DataTableColumnResizeEndParams {
     element: HTMLElement;
-    column: ColumnProps;
+    column: Column;
     delta: number;
 }
 
 interface DataTableColumnResizerClickParams {
     originalEvent: React.MouseEvent<HTMLElement>;
     element: HTMLElement;
-    column: ColumnProps;
+    column: Column;
 }
 
 interface DataTableSortParams {
@@ -168,6 +186,33 @@ interface DataTableRowReorderParams {
     dropIndex: number;
 }
 
+interface DataTableRowExpansionTemplate {
+    index: number;
+}
+
+interface DataTableRowClassNameOptions {
+    props: DataTableProps;
+}
+
+interface DataTableCellClassNameOptions {
+    props: DataTableProps;
+    rowData: any;
+}
+
+interface DataTableShowSelectionElementOptions {
+    index: number;
+    props: DataTableProps;
+}
+
+interface DataTableShowRowReorderElementOptions {
+    index: number;
+    props: DataTableProps;
+}
+
+interface DataTableRowEditorValidatorOptions {
+    props: DataTableProps;
+}
+
 export interface DataTableProps {
     id?: string;
     value?: any[];
@@ -246,17 +291,17 @@ export interface DataTableProps {
     expandedRowIcon?: string;
     collapsedRowIcon?: string;
     globalFilterFields?: string[];
+    rowGroupHeaderTemplate?: DataTableRowGroupHeaderTemplateType;
+    rowGroupFooterTemplate?: DataTableRowGroupFooterTemplateType
     onRowEditComplete?(e: DataTableRowEditCompleteParams): void;
-    showSelectionElement?(data: any): boolean | undefined | null;
-    showRowReorderElement?(data: any): boolean | undefined | null;
+    showSelectionElement?(data: any, options: DataTableShowSelectionElementOptions): boolean | undefined | null;
+    showRowReorderElement?(data: any, options: DataTableShowRowReorderElementOptions): boolean | undefined | null;
     onSelectionChange?(e: DataTableSelectionChangeParams): void;
     onContextMenuSelectionChange?(e: DataTableSelectionChangeParams): void;
-    rowExpansionTemplate?(data: any): React.ReactNode;
+    rowExpansionTemplate?(data: any, options: DataTableRowExpansionTemplate): React.ReactNode;
     onRowToggle?(e: DataTableRowToggleParams): void;
-    rowClassName?(data: any): object;
-    cellClassName?(data: any, options: any): object;
-    rowGroupHeaderTemplate?(data: any, index: number): React.ReactNode;
-    rowGroupFooterTemplate?(data: any, index: number): React.ReactNode;
+    rowClassName?(data: any, options: DataTableRowClassNameOptions): object | string;
+    cellClassName?(value: any, options: DataTableCellClassNameOptions): object | string;
     onColumnResizeEnd?(e: DataTableColumnResizeEndParams): void;
     onColumnResizerClick?(e: DataTableColumnResizerClickParams): void;
     onColumnResizerDoubleClick?(e: DataTableColumnResizerClickParams): void;
@@ -278,7 +323,7 @@ export interface DataTableProps {
     onColReorder?(e: DataTableColReorderParams): void;
     onRowReorder?(e: DataTableRowReorderParams): void;
     onValueChange?(value: any[]): void;
-    rowEditorValidator?(data: any): boolean;
+    rowEditorValidator?(data: any, options: DataTableRowEditorValidatorOptions): boolean;
     onRowEditInit?(e: DataTableRowEditParams): void;
     onRowEditSave?(e: DataTableRowEditSaveParams): void;
     onRowEditCancel?(e: DataTableRowEditParams): void;
@@ -293,7 +338,7 @@ export interface DataTableProps {
 export declare class DataTable extends React.Component<DataTableProps, any> {
     public reset(): void;
     public exportCSV(options: { selectionOnly: boolean }): void;
-    public filter<T>(value: T, field: string, mode: DataTableFilterMatchModeType): void;
+    public filter<T>(value: T, field: string, mode: DataTableFilterMatchModeType, index?: number): void;
     public resetColumnOrder(): void;
     public closeEditingCell(): void;
 }

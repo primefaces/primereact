@@ -273,7 +273,7 @@ export class BodyRow extends Component {
 
     onEditSave(e) {
         const { originalEvent: event } = e;
-        const valid = this.props.rowEditorValidator ? this.props.rowEditorValidator(this.props.rowData) : true;
+        const valid = this.props.rowEditorValidator ? this.props.rowEditorValidator(this.props.rowData, { props: this.props.tableProps }) : true;
 
         if (this.props.onRowEditSave) {
             this.props.onRowEditSave({
@@ -319,7 +319,7 @@ export class BodyRow extends Component {
                 const editing = this.getEditing();
 
                 return (
-                    <BodyCell key={key} value={this.props.value} tableProps={this.props} tableSelector={this.props.tableSelector} column={col} rowData={this.props.rowData} rowIndex={this.props.index} index={i} rowSpan={rowSpan} dataKey={this.props.dataKey}
+                    <BodyCell key={key} value={this.props.value} tableProps={this.props.tableProps} tableSelector={this.props.tableSelector} column={col} rowData={this.props.rowData} rowIndex={this.props.index} index={i} rowSpan={rowSpan} dataKey={this.props.dataKey}
                         editing={editing} editingMeta={this.props.editingMeta} editMode={this.props.editMode} onRowEditInit={this.onEditInit} onRowEditSave={this.onEditSave} onRowEditCancel={this.onEditCancel} onEditingMetaChange={this.props.onEditingMetaChange}
                         onRowToggle={this.props.onRowToggle} selection={this.props.selection} allowCellSelection={this.props.allowCellSelection} compareSelectionBy={this.props.compareSelectionBy} selectOnEdit={this.props.selectOnEdit} selected={this.props.selected}
                         onClick={this.props.onCellClick} onMouseDown={this.props.onCellMouseDown} onMouseUp={this.props.onCellMouseUp} tabIndex={this.props.tabIndex}
@@ -335,7 +335,7 @@ export class BodyRow extends Component {
     }
 
     render() {
-        const rowClassName = ObjectUtils.getPropValue(this.props.rowClassName, this.props.rowData, { props: this.props });
+        const rowClassName = ObjectUtils.getPropValue(this.props.rowClassName, this.props.rowData, { props: this.props.tableProps });
         const className = classNames(rowClassName, {
             'p-highlight': !this.props.allowCellSelection && this.props.selected,
             'p-highlight-contextmenu': this.props.contextMenuSelected,

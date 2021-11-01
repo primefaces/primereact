@@ -501,7 +501,7 @@ export class BodyCell extends Component {
         const editor = this.getColumnProp('editor');
         const frozen = this.getColumnProp('frozen');
         const value = this.resolveFieldData();
-        const cellClassName = ObjectUtils.getPropValue(this.props.cellClassName, value, { props: this.props, rowData: this.props.rowData });
+        const cellClassName = ObjectUtils.getPropValue(this.props.cellClassName, value, { props: this.props.tableProps, rowData: this.props.rowData });
         const className = classNames(this.getColumnProp('bodyClassName'), this.getColumnProp('class'), cellClassName, {
             'p-selection-column': selectionMode !== null,
             'p-editable-column': editor,
@@ -520,7 +520,7 @@ export class BodyCell extends Component {
             content = ObjectUtils.getJSXElement(editor, { rowData: this.state.editingRowData, value: this.resolveFieldData(this.state.editingRowData), column: this.props.column, field: this.field, rowIndex: this.props.rowIndex, frozenRow: this.props.frozenRow, editorCallback: this.editorCallback  });
         }
         else if (selectionMode) {
-            const showSelection = this.props.showSelectionElement ? this.props.showSelectionElement(this.props.rowData) : true;
+            const showSelection = this.props.showSelectionElement ? this.props.showSelectionElement(this.props.rowData, { index: this.props.rowIndex, props: this.props.tableProps }) : true;
 
             content = showSelection && (
                 <>
@@ -530,7 +530,7 @@ export class BodyCell extends Component {
             )
         }
         else if (rowReorder) {
-            const showReorder = this.props.showRowReorderElement ? this.props.showRowReorderElement(this.props.rowData) : true;
+            const showReorder = this.props.showRowReorderElement ? this.props.showRowReorderElement(this.props.rowData, { index: this.props.rowIndex, props: this.props.tableProps }) : true;
             content = showReorder && <i className={classNames('p-datatable-reorderablerow-handle', this.getColumnProp('rowReorderIcon'))}></i>;
         }
         else if (expander) {
