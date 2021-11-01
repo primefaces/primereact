@@ -425,7 +425,7 @@ export class FileUpload extends Component {
             event.preventDefault();
 
             let files = event.dataTransfer ? event.dataTransfer.files : event.target.files;
-            let allowDrop = this.props.multiple || (files && files.length === 1);
+            let allowDrop = this.props.multiple || (files && files.length === 0);
 
             if (allowDrop) {
                 this.onFileSelect(event);
