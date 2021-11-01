@@ -1,6 +1,10 @@
 import * as React from 'react';
 
+type ColumnHeaderType = React.ReactNode | ((options: ColumnHeaderOptions) => React.ReactNode);
+
 type ColumnBodyType = React.ReactNode | ((data: any, options: ColumnBodyOptions) => React.ReactNode);
+
+type ColumnFooterType = React.ReactNode | ((options: ColumnFooterOptions) => React.ReactNode);
 
 type ColumnEditorType = React.ReactNode | ((options: ColumnEditorOptions) => React.ReactNode);
 
@@ -27,6 +31,12 @@ type ColumnFilterFooterType = React.ReactNode | ((options: ColumnFilterFooterTem
 type ColumnFilterElementType = React.ReactNode | ((options: ColumnFilterElementTemplateOptions) => React.ReactNode);
 
 type ColumnFilterModelType = ColumnFilterMetaData | ColumnFilterMetaDataWithConstraint;
+
+interface ColumnHeaderOptions {
+    props: any;
+}
+
+interface ColumnFooterOptions extends ColumnHeaderOptions {}
 
 interface ColumnBodyOptions {
     column: Column;
@@ -143,9 +153,9 @@ export interface ColumnProps {
     field?: string;
     sortField?: string;
     filterField?: string;
-    header?: React.ReactNode;
+    header?: ColumnHeaderType;
     body?: ColumnBodyType;
-    footer?: React.ReactNode;
+    footer?: ColumnFooterType;
     sortable?: boolean;
     sortableDisabled?: boolean;
     dataType?: ColumnDataType;
