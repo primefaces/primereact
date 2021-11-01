@@ -62,6 +62,7 @@ export class DataTableCrudDemo extends Component {
         this.editProduct = this.editProduct.bind(this);
         this.confirmDeleteProduct = this.confirmDeleteProduct.bind(this);
         this.deleteProduct = this.deleteProduct.bind(this);
+        this.importCSV = this.importCSV.bind(this);
         this.exportCSV = this.exportCSV.bind(this);
         this.confirmDeleteSelected = this.confirmDeleteSelected.bind(this);
         this.deleteSelectedProducts = this.deleteSelectedProducts.bind(this);
@@ -178,6 +179,34 @@ export class DataTableCrudDemo extends Component {
         return id;
     }
 
+    importCSV(e) {
+        const file = e.files[0];
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const csv = e.target.result;
+            const data = csv.split('\n');
+
+            // Prepare DataTable
+            const cols = data[0].split(',');
+            data.shift();
+
+            const importedData = data.map(d => {
+                d = d.split(',');
+                return cols.reduce((obj, c, i) => {
+                    c = c === 'Status' ? 'inventoryStatus' : (c === 'Reviews' ? 'rating' : c.toLowerCase());
+                    obj[c] = d[i].replace(/['"]+/g, '');
+                    return obj;
+                }, {});
+            });
+
+            const products = [...this.state.products, ...importedData];
+
+            this.setState({ products });
+        };
+
+        reader.readAsText(file, 'UTF-8');
+    }
+
     exportCSV() {
         this.dt.exportCSV();
     }
@@ -230,7 +259,7 @@ export class DataTableCrudDemo extends Component {
     rightToolbarTemplate() {
         return (
             <React.Fragment>
-                <FileUpload mode="basic" accept="image/*" maxFileSize={1000000} label="Import" chooseLabel="Import" className="p-mr-2 p-d-inline-block" />
+                <FileUpload mode="basic" name="demo[]" auto url="./upload.php" accept=".csv" chooseLabel="Import" className="p-mr-2 p-d-inline-block" onUpload={this.importCSV} />
                 <Button label="Export" icon="pi pi-upload" className="p-button-help" onClick={this.exportCSV} />
             </React.Fragment>
         )
@@ -264,7 +293,7 @@ export class DataTableCrudDemo extends Component {
     render() {
         const header = (
             <div className="table-header">
-                <h5 className="p-m-0">Manage Products</h5>
+                <h5 className="p-mx-0 p-my-1">Manage Products</h5>
                 <span className="p-input-icon-left">
                     <i className="pi pi-search" />
                     <InputText type="search" onInput={(e) => this.setState({ globalFilter: e.target.value })} placeholder="Search..." />
@@ -310,18 +339,16 @@ export class DataTableCrudDemo extends Component {
                             dataKey="id" paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
                             paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
-                            globalFilter={this.state.globalFilter}
-                            header={header}>
-
-                            <Column selectionMode="multiple" headerStyle={{ width: '3rem' }}></Column>
-                            <Column field="code" header="Code" sortable></Column>
-                            <Column field="name" header="Name" sortable></Column>
-                            <Column header="Image" body={this.imageBodyTemplate}></Column>
-                            <Column field="price" header="Price" body={this.priceBodyTemplate} sortable></Column>
-                            <Column field="category" header="Category" sortable></Column>
-                            <Column field="rating" header="Reviews" body={this.ratingBodyTemplate} sortable></Column>
-                            <Column field="inventoryStatus" header="Status" body={this.statusBodyTemplate} sortable></Column>
-                            <Column body={this.actionBodyTemplate}></Column>
+                            globalFilter={this.state.globalFilter} header={header} responsiveLayout="scroll">
+                            <Column selectionMode="multiple" headerStyle={{ width: '3rem' }} exportable={false}></Column>
+                            <Column field="code" header="Code" sortable style={{ minWidth: '12rem' }}></Column>
+                            <Column field="name" header="Name" sortable style={{ minWidth: '16rem' }}></Column>
+                            <Column field="image" header="Image" body={this.imageBodyTemplate}></Column>
+                            <Column field="price" header="Price" body={this.priceBodyTemplate} sortable style={{ minWidth: '8rem' }}></Column>
+                            <Column field="category" header="Category" sortable style={{ minWidth: '10rem' }}></Column>
+                            <Column field="rating" header="Reviews" body={this.ratingBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column>
+                            <Column field="inventoryStatus" header="Status" body={this.statusBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column>
+                            <Column body={this.actionBodyTemplate} exportable={false} style={{ minWidth: '8rem' }}></Column>
                         </DataTable>
                     </div>
 
@@ -387,7 +414,6 @@ export class DataTableCrudDemo extends Component {
                 </div>
 
                 <DataTableCrudDoc />
-
             </div>
         );
     }
@@ -462,6 +488,7 @@ export class DataTableCrudDemo extends Component {
         this.editProduct = this.editProduct.bind(this);
         this.confirmDeleteProduct = this.confirmDeleteProduct.bind(this);
         this.deleteProduct = this.deleteProduct.bind(this);
+        this.importCSV = this.importCSV.bind(this);
         this.exportCSV = this.exportCSV.bind(this);
         this.confirmDeleteSelected = this.confirmDeleteSelected.bind(this);
         this.deleteSelectedProducts = this.deleteSelectedProducts.bind(this);
@@ -578,6 +605,34 @@ export class DataTableCrudDemo extends Component {
         return id;
     }
 
+    importCSV(e) {
+        const file = e.files[0];
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const csv = e.target.result;
+            const data = csv.split('\n');
+
+            // Prepare DataTable
+            const cols = data[0].split(',');
+            data.shift();
+
+            const importedData = data.map(d => {
+                d = d.split(',');
+                return cols.reduce((obj, c, i) => {
+                    c = c === 'Status' ? 'inventoryStatus' : (c === 'Reviews' ? 'rating' : c.toLowerCase());
+                    obj[c] = d[i].replace(/['"]+/g, '');
+                    return obj;
+                }, {});
+            });
+
+            const products = [...this.state.products, ...importedData];
+
+            this.setState({ products });
+        };
+
+        reader.readAsText(file, 'UTF-8');
+    }
+
     exportCSV() {
         this.dt.exportCSV();
     }
@@ -630,7 +685,7 @@ export class DataTableCrudDemo extends Component {
     rightToolbarTemplate() {
         return (
             <React.Fragment>
-                <FileUpload mode="basic" accept="image/*" maxFileSize={1000000} label="Import" chooseLabel="Import" className="p-mr-2 p-d-inline-block" />
+                <FileUpload mode="basic" name="demo[]" auto url="./upload.php" accept=".csv" chooseLabel="Import" className="p-mr-2 p-d-inline-block" onUpload={this.importCSV} />
                 <Button label="Export" icon="pi pi-upload" className="p-button-help" onClick={this.exportCSV} />
             </React.Fragment>
         )
@@ -664,7 +719,7 @@ export class DataTableCrudDemo extends Component {
     render() {
         const header = (
             <div className="table-header">
-                <h5 className="p-m-0">Manage Products</h5>
+                <h5 className="p-mx-0 p-my-1">Manage Products</h5>
                 <span className="p-input-icon-left">
                     <i className="pi pi-search" />
                     <InputText type="search" onInput={(e) => this.setState({ globalFilter: e.target.value })} placeholder="Search..." />
@@ -701,18 +756,16 @@ export class DataTableCrudDemo extends Component {
                         dataKey="id" paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
                         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
-                        globalFilter={this.state.globalFilter}
-                        header={header}>
-
-                        <Column selectionMode="multiple" headerStyle={{ width: '3rem' }}></Column>
-                        <Column field="code" header="Code" sortable></Column>
-                        <Column field="name" header="Name" sortable></Column>
-                        <Column header="Image" body={this.imageBodyTemplate}></Column>
-                        <Column field="price" header="Price" body={this.priceBodyTemplate} sortable></Column>
-                        <Column field="category" header="Category" sortable></Column>
-                        <Column field="rating" header="Reviews" body={this.ratingBodyTemplate} sortable></Column>
-                        <Column field="inventoryStatus" header="Status" body={this.statusBodyTemplate} sortable></Column>
-                        <Column body={this.actionBodyTemplate}></Column>
+                        globalFilter={this.state.globalFilter} header={header} responsiveLayout="scroll">
+                        <Column selectionMode="multiple" headerStyle={{ width: '3rem' }} exportable={false}></Column>
+                        <Column field="code" header="Code" sortable style={{ minWidth: '12rem' }}></Column>
+                        <Column field="name" header="Name" sortable style={{ minWidth: '16rem' }}></Column>
+                        <Column field="image" header="Image" body={this.imageBodyTemplate}></Column>
+                        <Column field="price" header="Price" body={this.priceBodyTemplate} sortable style={{ minWidth: '8rem' }}></Column>
+                        <Column field="category" header="Category" sortable style={{ minWidth: '10rem' }}></Column>
+                        <Column field="rating" header="Reviews" body={this.ratingBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column>
+                        <Column field="inventoryStatus" header="Status" body={this.statusBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column>
+                        <Column body={this.actionBodyTemplate} exportable={false} style={{ minWidth: '8rem' }}></Column>
                     </DataTable>
                 </div>
 
@@ -918,6 +971,34 @@ const DataTableCrudDemo = () => {
         return id;
     }
 
+    const importCSV = (e) => {
+        const file = e.files[0];
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const csv = e.target.result;
+            const data = csv.split('\n');
+
+            // Prepare DataTable
+            const cols = data[0].split(',');
+            data.shift();
+
+            const importedData = data.map(d => {
+                d = d.split(',');
+                return cols.reduce((obj, c, i) => {
+                    c = c === 'Status' ? 'inventoryStatus' : (c === 'Reviews' ? 'rating' : c.toLowerCase());
+                    obj[c] = d[i].replace(/['"]+/g, '');
+                    return obj;
+                }, {});
+            });
+
+            const _products = [...products, ...importedData];
+
+            setProducts(_products);
+        };
+
+        reader.readAsText(file, 'UTF-8');
+    }
+
     const exportCSV = () => {
         dt.current.exportCSV();
     }
@@ -968,7 +1049,7 @@ const DataTableCrudDemo = () => {
     const rightToolbarTemplate = () => {
         return (
             <React.Fragment>
-                <FileUpload mode="basic" accept="image/*" maxFileSize={1000000} label="Import" chooseLabel="Import" className="p-mr-2 p-d-inline-block" />
+                <FileUpload mode="basic" name="demo[]" auto url="./upload.php" accept=".csv" chooseLabel="Import" className="p-mr-2 p-d-inline-block" onUpload={importCSV} />
                 <Button label="Export" icon="pi pi-upload" className="p-button-help" onClick={exportCSV} />
             </React.Fragment>
         )
@@ -1001,7 +1082,7 @@ const DataTableCrudDemo = () => {
 
     const header = (
         <div className="table-header">
-            <h5 className="p-m-0">Manage Products</h5>
+            <h5 className="p-mx-0 p-my-1">Manage Products</h5>
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
                 <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Search..." />
@@ -1038,18 +1119,16 @@ const DataTableCrudDemo = () => {
                     dataKey="id" paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
                     paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
-                    globalFilter={globalFilter}
-                    header={header}>
-
-                    <Column selectionMode="multiple" headerStyle={{ width: '3rem' }}></Column>
-                    <Column field="code" header="Code" sortable></Column>
-                    <Column field="name" header="Name" sortable></Column>
-                    <Column header="Image" body={imageBodyTemplate}></Column>
-                    <Column field="price" header="Price" body={priceBodyTemplate} sortable></Column>
-                    <Column field="category" header="Category" sortable></Column>
-                    <Column field="rating" header="Reviews" body={ratingBodyTemplate} sortable></Column>
-                    <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} sortable></Column>
-                    <Column body={actionBodyTemplate}></Column>
+                    globalFilter={globalFilter} header={header} responsiveLayout="scroll">
+                    <Column selectionMode="multiple" headerStyle={{ width: '3rem' }} exportable={false}></Column>
+                    <Column field="code" header="Code" sortable style={{ minWidth: '12rem' }}></Column>
+                    <Column field="name" header="Name" sortable style={{ minWidth: '16rem' }}></Column>
+                    <Column field="image" header="Image" body={imageBodyTemplate}></Column>
+                    <Column field="price" header="Price" body={priceBodyTemplate} sortable style={{ minWidth: '8rem' }}></Column>
+                    <Column field="category" header="Category" sortable style={{ minWidth: '10rem' }}></Column>
+                    <Column field="rating" header="Reviews" body={ratingBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column>
+                    <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column>
+                    <Column body={actionBodyTemplate} exportable={false} style={{ minWidth: '8rem' }}></Column>
                 </DataTable>
             </div>
 
@@ -1254,6 +1333,34 @@ const DataTableCrudDemo = () => {
         return id;
     }
 
+    const importCSV = (e) => {
+        const file = e.files[0];
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const csv = e.target.result;
+            const data = csv.split('\n');
+
+            // Prepare DataTable
+            const cols = data[0].split(',');
+            data.shift();
+
+            const importedData = data.map(d => {
+                d = d.split(',');
+                return cols.reduce((obj, c, i) => {
+                    c = c === 'Status' ? 'inventoryStatus' : (c === 'Reviews' ? 'rating' : c.toLowerCase());
+                    obj[c] = d[i].replace(/['"]+/g, '');
+                    return obj;
+                }, {});
+            });
+
+            const _products = [...products, ...importedData];
+
+            setProducts(_products);
+        };
+
+        reader.readAsText(file, 'UTF-8');
+    }
+
     const exportCSV = () => {
         dt.current.exportCSV();
     }
@@ -1304,7 +1411,7 @@ const DataTableCrudDemo = () => {
     const rightToolbarTemplate = () => {
         return (
             <React.Fragment>
-                <FileUpload mode="basic" accept="image/*" maxFileSize={1000000} label="Import" chooseLabel="Import" className="p-mr-2 p-d-inline-block" />
+                <FileUpload mode="basic" name="demo[]" auto url="./upload.php" accept=".csv" chooseLabel="Import" className="p-mr-2 p-d-inline-block" onUpload={importCSV} />
                 <Button label="Export" icon="pi pi-upload" className="p-button-help" onClick={exportCSV} />
             </React.Fragment>
         )
@@ -1337,7 +1444,7 @@ const DataTableCrudDemo = () => {
 
     const header = (
         <div className="table-header">
-            <h5 className="p-m-0">Manage Products</h5>
+            <h5 className="p-mx-0 p-my-1">Manage Products</h5>
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
                 <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Search..." />
@@ -1374,18 +1481,16 @@ const DataTableCrudDemo = () => {
                     dataKey="id" paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
                     paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
-                    globalFilter={globalFilter}
-                    header={header}>
-
-                    <Column selectionMode="multiple" headerStyle={{ width: '3rem' }}></Column>
-                    <Column field="code" header="Code" sortable></Column>
-                    <Column field="name" header="Name" sortable></Column>
-                    <Column header="Image" body={imageBodyTemplate}></Column>
-                    <Column field="price" header="Price" body={priceBodyTemplate} sortable></Column>
-                    <Column field="category" header="Category" sortable></Column>
-                    <Column field="rating" header="Reviews" body={ratingBodyTemplate} sortable></Column>
-                    <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} sortable></Column>
-                    <Column body={actionBodyTemplate}></Column>
+                    globalFilter={globalFilter} header={header} responsiveLayout="scroll">
+                    <Column selectionMode="multiple" headerStyle={{ width: '3rem' }} exportable={false}></Column>
+                    <Column field="code" header="Code" sortable style={{ minWidth: '12rem' }}></Column>
+                    <Column field="name" header="Name" sortable style={{ minWidth: '16rem' }}></Column>
+                    <Column field="image" header="Image" body={imageBodyTemplate}></Column>
+                    <Column field="price" header="Price" body={priceBodyTemplate} sortable style={{ minWidth: '8rem' }}></Column>
+                    <Column field="category" header="Category" sortable style={{ minWidth: '10rem' }}></Column>
+                    <Column field="rating" header="Reviews" body={ratingBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column>
+                    <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column>
+                    <Column body={actionBodyTemplate} exportable={false} style={{ minWidth: '8rem' }}></Column>
                 </DataTable>
             </div>
 
@@ -1609,6 +1714,34 @@ const DataTableCrudDemo = () => {
         return id;
     }
 
+    const importCSV = (e) => {
+        const file = e.files[0];
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const csv = e.target.result;
+            const data = csv.split('\n');
+
+            // Prepare DataTable
+            const cols = data[0].split(',');
+            data.shift();
+
+            const importedData = data.map(d => {
+                d = d.split(',');
+                return cols.reduce((obj, c, i) => {
+                    c = c === 'Status' ? 'inventoryStatus' : (c === 'Reviews' ? 'rating' : c.toLowerCase());
+                    obj[c] = d[i].replace(/['"]+/g, '');
+                    return obj;
+                }, {});
+            });
+
+            const _products = [...products, ...importedData];
+
+            setProducts(_products);
+        };
+
+        reader.readAsText(file, 'UTF-8');
+    }
+
     const exportCSV = () => {
         dt.current.exportCSV();
     }
@@ -1659,7 +1792,7 @@ const DataTableCrudDemo = () => {
     const rightToolbarTemplate = () => {
         return (
             <React.Fragment>
-                <FileUpload mode="basic" accept="image/*" maxFileSize={1000000} label="Import" chooseLabel="Import" className="p-mr-2 p-d-inline-block" />
+                <FileUpload mode="basic" name="demo[]" auto url="./upload.php" accept=".csv" chooseLabel="Import" className="p-mr-2 p-d-inline-block" onUpload={importCSV} />
                 <Button label="Export" icon="pi pi-upload" className="p-button-help" onClick={exportCSV} />
             </React.Fragment>
         )
@@ -1692,7 +1825,7 @@ const DataTableCrudDemo = () => {
 
     const header = (
         <div className="table-header">
-            <h5 className="p-m-0">Manage Products</h5>
+            <h5 className="p-mx-0 p-my-1">Manage Products</h5>
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
                 <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Search..." />
@@ -1729,18 +1862,16 @@ const DataTableCrudDemo = () => {
                     dataKey="id" paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
                     paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
-                    globalFilter={globalFilter}
-                    header={header}>
-
-                    <Column selectionMode="multiple" headerStyle={{ width: '3rem' }}></Column>
-                    <Column field="code" header="Code" sortable></Column>
-                    <Column field="name" header="Name" sortable></Column>
-                    <Column header="Image" body={imageBodyTemplate}></Column>
-                    <Column field="price" header="Price" body={priceBodyTemplate} sortable></Column>
-                    <Column field="category" header="Category" sortable></Column>
-                    <Column field="rating" header="Reviews" body={ratingBodyTemplate} sortable></Column>
-                    <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} sortable></Column>
-                    <Column body={actionBodyTemplate}></Column>
+                    globalFilter={globalFilter} header={header} responsiveLayout="scroll">
+                    <Column selectionMode="multiple" headerStyle={{ width: '3rem' }} exportable={false}></Column>
+                    <Column field="code" header="Code" sortable style={{ minWidth: '12rem' }}></Column>
+                    <Column field="name" header="Name" sortable style={{ minWidth: '16rem' }}></Column>
+                    <Column field="image" header="Image" body={imageBodyTemplate}></Column>
+                    <Column field="price" header="Price" body={priceBodyTemplate} sortable style={{ minWidth: '8rem' }}></Column>
+                    <Column field="category" header="Category" sortable style={{ minWidth: '10rem' }}></Column>
+                    <Column field="rating" header="Reviews" body={ratingBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column>
+                    <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column>
+                    <Column body={actionBodyTemplate} exportable={false} style={{ minWidth: '8rem' }}></Column>
                 </DataTable>
             </div>
 
@@ -1818,22 +1949,38 @@ const DataTableCrudDemo = () => {
     align-items: center;
     justify-content: space-between;
 }
-
+@media screen and (max-width: 960px) {
+    .datatable-crud-demo .table-header {
+        align-items: flex-start;
+    }
+}
 .datatable-crud-demo .product-image {
     width: 100px;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
-
 .datatable-crud-demo .p-dialog .product-image {
     width: 150px;
     margin: 0 auto 2rem auto;
     display: block;
 }
-
 .datatable-crud-demo .confirmation-content {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+@media screen and (max-width: 960px) {
+    .datatable-crud-demo .p-toolbar {
+        flex-wrap: wrap;
+    }
+    .datatable-crud-demo .p-toolbar .p-button {
+        margin-bottom: 0.25rem;
+    }
+    .datatable-crud-demo .table-header {
+        flex-direction: column;
+    }
+    .datatable-crud-demo .table-header .p-input-icon-left, .datatable-crud-demo .table-header input {
+        width: 100%;
+    }
 }
                 `
             }

@@ -140,6 +140,11 @@ export class HomeComponent extends Component {
                             </a>
                         </div>
                         <div className="p-col-12 p-md-3">
+                            <a href="https://www.primefaces.org/layouts/atlantis-react">
+                                <img alt="Atlantis" src="showcase/images/layouts/atlantis-react.jpg" />
+                            </a>
+                        </div>
+                        <div className="p-col-12 p-md-3">
                             <a href="https://www.primefaces.org/layouts/freya-react">
                                 <img alt="Freya" src="showcase/images/layouts/freya-react.jpg" />
                             </a>

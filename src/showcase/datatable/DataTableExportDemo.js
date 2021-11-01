@@ -202,7 +202,7 @@ export class DataTableExportDemo extends Component {
                             <Button type="button" label="Clear" icon="pi pi-times" onClick={this.clear} className="p-button-info p-ml-auto" />
                         </div>
 
-                        <DataTable value={this.state.importedData} emptyMessage="No data" paginator rows={10} alwaysShowPaginator={false}
+                        <DataTable value={this.state.importedData} emptyMessage="No data" paginator rows={10} alwaysShowPaginator={false} responsiveLayout="scroll"
                             selectionMode="multiple" selection={this.state.selectedImportedData} onSelectionChange={this.onImportSelectionChange}>
                             {
                                 this.state.importedCols.map((col, index) => <Column key={index} field={col.field} header={col.header} />)
@@ -215,7 +215,7 @@ export class DataTableExportDemo extends Component {
 
                         <Tooltip target=".export-buttons>button" position="bottom" />
 
-                        <DataTable ref={(el) => { this.dt = el; }} value={this.state.products} header={header} dataKey="id"
+                        <DataTable ref={(el) => { this.dt = el; }} value={this.state.products} header={header} dataKey="id" responsiveLayout="scroll"
                             selectionMode="multiple" selection={this.state.selectedProducts} onSelectionChange={this.onSelectionChange}>
                             {
                                 this.cols.map((col, index) => <Column key={index} field={col.field} header={col.header} />)
@@ -430,7 +430,7 @@ export class DataTableExportDemo extends Component {
                         <Button type="button" label="Clear" icon="pi pi-times" onClick={this.clear} className="p-button-info p-ml-auto" />
                     </div>
 
-                    <DataTable value={this.state.importedData} emptyMessage="No data" paginator rows={10} alwaysShowPaginator={false}
+                    <DataTable value={this.state.importedData} emptyMessage="No data" paginator rows={10} alwaysShowPaginator={false} responsiveLayout="scroll"
                         selectionMode="multiple" selection={this.state.selectedImportedData} onSelectionChange={this.onImportSelectionChange}>
                         {
                             this.state.importedCols.map((col, index) => <Column key={index} field={col.field} header={col.header} />)
@@ -443,7 +443,7 @@ export class DataTableExportDemo extends Component {
 
                     <Tooltip target=".export-buttons>button" position="bottom" />
 
-                    <DataTable ref={(el) => { this.dt = el; }} value={this.state.products} header={header} dataKey="id"
+                    <DataTable ref={(el) => { this.dt = el; }} value={this.state.products} header={header} dataKey="id" responsiveLayout="scroll"
                         selectionMode="multiple" selection={this.state.selectedProducts} onSelectionChange={this.onSelectionChange}>
                         {
                             this.cols.map((col, index) => <Column key={index} field={col.field} header={col.header} />)
@@ -626,7 +626,7 @@ export const DataTableExportDemo = () => {
                     <Button type="button" label="Clear" icon="pi pi-times" onClick={clear} className="p-button-info p-ml-auto" />
                 </div>
 
-                <DataTable value={importedData} emptyMessage="No data" paginator rows={10} alwaysShowPaginator={false}
+                <DataTable value={importedData} emptyMessage="No data" paginator rows={10} alwaysShowPaginator={false} responsiveLayout="scroll"
                     selectionMode="multiple" selection={selectedImportedData} onSelectionChange={onImportSelectionChange}>
                     {
                         importedCols.map((col, index) => <Column key={index} field={col.field} header={col.header} />)
@@ -639,7 +639,7 @@ export const DataTableExportDemo = () => {
 
                 <Tooltip target=".export-buttons>button" position="bottom" />
 
-                <DataTable ref={dt} value={products} header={header} dataKey="id"
+                <DataTable ref={dt} value={products} header={header} dataKey="id" responsiveLayout="scroll"
                     selectionMode="multiple" selection={selectedProducts} onSelectionChange={onSelectionChange}>
                     {
                         cols.map((col, index) => <Column key={index} field={col.field} header={col.header} />)
@@ -821,7 +821,7 @@ export const DataTableExportDemo = () => {
                     <Button type="button" label="Clear" icon="pi pi-times" onClick={clear} className="p-button-info p-ml-auto" />
                 </div>
 
-                <DataTable value={importedData} emptyMessage="No data" paginator rows={10} alwaysShowPaginator={false}
+                <DataTable value={importedData} emptyMessage="No data" paginator rows={10} alwaysShowPaginator={false} responsiveLayout="scroll"
                     selectionMode="multiple" selection={selectedImportedData} onSelectionChange={onImportSelectionChange}>
                     {
                         importedCols.map((col, index) => <Column key={index} field={col.field} header={col.header} />)
@@ -834,7 +834,7 @@ export const DataTableExportDemo = () => {
 
                 <Tooltip target=".export-buttons>button" position="bottom" />
 
-                <DataTable ref={dt} value={products} header={header} dataKey="id"
+                <DataTable ref={dt} value={products} header={header} dataKey="id" responsiveLayout="scroll"
                     selectionMode="multiple" selection={selectedProducts} onSelectionChange={onSelectionChange}>
                     {
                         cols.map((col, index) => <Column key={index} field={col.field} header={col.header} />)
@@ -1028,7 +1028,7 @@ const DataTableExportDemo = () => {
                     <Button type="button" label="Clear" icon="pi pi-times" onClick={clear} className="p-button-info p-ml-auto" />
                 </div>
 
-                <DataTable value={importedData} emptyMessage="No data" paginator rows={10} alwaysShowPaginator={false}
+                <DataTable value={importedData} emptyMessage="No data" paginator rows={10} alwaysShowPaginator={false} responsiveLayout="scroll"
                     selectionMode="multiple" selection={selectedImportedData} onSelectionChange={onImportSelectionChange}>
                     {
                         importedCols.map((col, index) => <Column key={index} field={col.field} header={col.header} />)
@@ -1041,7 +1041,7 @@ const DataTableExportDemo = () => {
 
                 <Tooltip target=".export-buttons>button" position="bottom" />
 
-                <DataTable ref={dt} value={products} header={header} dataKey="id"
+                <DataTable ref={dt} value={products} header={header} dataKey="id" responsiveLayout="scroll"
                     selectionMode="multiple" selection={selectedProducts} onSelectionChange={onSelectionChange}>
                     {
                         cols.map((col, index) => <Column key={index} field={col.field} header={col.header} />)

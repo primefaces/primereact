@@ -168,7 +168,7 @@ export class DataTablePaginatorDemo extends Component {
                 <div className="content-section implementation">
                     <div className="card">
                         <h5>Basic</h5>
-                        <DataTable value={this.state.customers1} paginator
+                        <DataTable value={this.state.customers1} paginator responsiveLayout="scroll"
                             paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
                             currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" rows={10} rowsPerPageOptions={[10,20,50]}
                             paginatorLeft={paginatorLeft} paginatorRight={paginatorRight}>
@@ -177,9 +177,11 @@ export class DataTablePaginatorDemo extends Component {
                             <Column field="company" header="Company"></Column>
                             <Column field="representative.name" header="Representative"></Column>
                         </DataTable>
+                    </div>
 
+                    <div className="card">
                         <h5>Custom Paginator Template</h5>
-                        <DataTable value={this.state.customers2} paginator paginatorTemplate={template1} first={this.state.first1} rows={this.state.rows1} onPage={this.onCustomPage1}>
+                        <DataTable value={this.state.customers2} paginator paginatorTemplate={template1} first={this.state.first1} rows={this.state.rows1} onPage={this.onCustomPage1} responsiveLayout="scroll">
                             <Column field="name" header="Name"></Column>
                             <Column field="country.name" header="Country"></Column>
                             <Column field="company" header="Company"></Column>
@@ -187,7 +189,7 @@ export class DataTablePaginatorDemo extends Component {
                         </DataTable>
 
                         <DataTable value={this.state.customers3} paginator paginatorTemplate={template2} first={this.state.first2} rows={this.state.rows2} onPage={this.onCustomPage2}
-                            paginatorClassName="p-jc-end" className="p-mt-6">
+                            paginatorClassName="p-jc-end" className="p-mt-6" responsiveLayout="scroll">
                             <Column field="name" header="Name"></Column>
                             <Column field="country.name" header="Country"></Column>
                             <Column field="company" header="Company"></Column>
@@ -369,7 +371,7 @@ export class DataTablePaginatorDemo extends Component {
             <div>
                 <div className="card">
                     <h5>Basic</h5>
-                    <DataTable value={this.state.customers1} paginator
+                    <DataTable value={this.state.customers1} paginator responsiveLayout="scroll"
                         paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" rows={10} rowsPerPageOptions={[10,20,50]}
                         paginatorLeft={paginatorLeft} paginatorRight={paginatorRight}>
@@ -378,9 +380,11 @@ export class DataTablePaginatorDemo extends Component {
                         <Column field="company" header="Company"></Column>
                         <Column field="representative.name" header="Representative"></Column>
                     </DataTable>
+                </div>
 
+                <div className="card">
                     <h5>Custom Paginator Template</h5>
-                    <DataTable value={this.state.customers2} paginator paginatorTemplate={template1} first={this.state.first1} rows={this.state.rows1} onPage={this.onCustomPage1}>
+                    <DataTable value={this.state.customers2} paginator paginatorTemplate={template1} first={this.state.first1} rows={this.state.rows1} onPage={this.onCustomPage1} responsiveLayout="scroll">
                         <Column field="name" header="Name"></Column>
                         <Column field="country.name" header="Country"></Column>
                         <Column field="company" header="Company"></Column>
@@ -388,7 +392,7 @@ export class DataTablePaginatorDemo extends Component {
                     </DataTable>
 
                     <DataTable value={this.state.customers3} paginator paginatorTemplate={template2} first={this.state.first2} rows={this.state.rows2} onPage={this.onCustomPage2}
-                        paginatorClassName="p-jc-end" className="p-mt-6">
+                        paginatorClassName="p-jc-end" className="p-mt-6" responsiveLayout="scroll">
                         <Column field="name" header="Name"></Column>
                         <Column field="country.name" header="Country"></Column>
                         <Column field="company" header="Company"></Column>
@@ -546,7 +550,7 @@ const DataTablePaginatorDemo = () => {
         <div>
             <div className="card">
                 <h5>Basic</h5>
-                <DataTable value={customers1} paginator
+                <DataTable value={customers1} paginator responsiveLayout="scroll"
                     paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" rows={10} rowsPerPageOptions={[10,20,50]}
                     paginatorLeft={paginatorLeft} paginatorRight={paginatorRight}>
@@ -555,9 +559,11 @@ const DataTablePaginatorDemo = () => {
                     <Column field="company" header="Company"></Column>
                     <Column field="representative.name" header="Representative"></Column>
                 </DataTable>
+            </div>
 
+            <div className="card">
                 <h5>Custom Paginator Template</h5>
-                <DataTable value={customers2} paginator paginatorTemplate={template1} first={first1} rows={rows1} onPage={onCustomPage1}>
+                <DataTable value={customers2} paginator paginatorTemplate={template1} first={first1} rows={rows1} onPage={onCustomPage1} responsiveLayout="scroll">
                     <Column field="name" header="Name"></Column>
                     <Column field="country.name" header="Country"></Column>
                     <Column field="company" header="Company"></Column>
@@ -565,7 +571,7 @@ const DataTablePaginatorDemo = () => {
                 </DataTable>
 
                 <DataTable value={customers3} paginator paginatorTemplate={template2} first={first2} rows={rows2} onPage={onCustomPage2}
-                    paginatorClassName="p-jc-end" className="p-mt-6">
+                    paginatorClassName="p-jc-end" className="p-mt-6" responsiveLayout="scroll">
                     <Column field="name" header="Name"></Column>
                     <Column field="country.name" header="Country"></Column>
                     <Column field="company" header="Company"></Column>
@@ -722,7 +728,7 @@ const DataTablePaginatorDemo = () => {
         <div>
             <div className="card">
                 <h5>Basic</h5>
-                <DataTable value={customers1} paginator
+                <DataTable value={customers1} paginator responsiveLayout="scroll"
                     paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" rows={10} rowsPerPageOptions={[10,20,50]}
                     paginatorLeft={paginatorLeft} paginatorRight={paginatorRight}>
@@ -731,9 +737,11 @@ const DataTablePaginatorDemo = () => {
                     <Column field="company" header="Company"></Column>
                     <Column field="representative.name" header="Representative"></Column>
                 </DataTable>
+            </div>
 
+            <div className="card">
                 <h5>Custom Paginator Template</h5>
-                <DataTable value={customers2} paginator paginatorTemplate={template1} first={first1} rows={rows1} onPage={onCustomPage1}>
+                <DataTable value={customers2} paginator paginatorTemplate={template1} first={first1} rows={rows1} onPage={onCustomPage1} responsiveLayout="scroll">
                     <Column field="name" header="Name"></Column>
                     <Column field="country.name" header="Country"></Column>
                     <Column field="company" header="Company"></Column>
@@ -741,7 +749,7 @@ const DataTablePaginatorDemo = () => {
                 </DataTable>
 
                 <DataTable value={customers3} paginator paginatorTemplate={template2} first={first2} rows={rows2} onPage={onCustomPage2}
-                    paginatorClassName="p-jc-end" className="p-mt-6">
+                    paginatorClassName="p-jc-end" className="p-mt-6" responsiveLayout="scroll">
                     <Column field="name" header="Name"></Column>
                     <Column field="country.name" header="Country"></Column>
                     <Column field="company" header="Company"></Column>
@@ -906,7 +914,7 @@ const DataTablePaginatorDemo = () => {
         <div>
             <div className="card">
                 <h5>Basic</h5>
-                <DataTable value={customers1} paginator
+                <DataTable value={customers1} paginator responsiveLayout="scroll"
                     paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" rows={10} rowsPerPageOptions={[10,20,50]}
                     paginatorLeft={paginatorLeft} paginatorRight={paginatorRight}>
@@ -915,9 +923,11 @@ const DataTablePaginatorDemo = () => {
                     <Column field="company" header="Company"></Column>
                     <Column field="representative.name" header="Representative"></Column>
                 </DataTable>
+            </div>
 
+            <div className="card">
                 <h5>Custom Paginator Template</h5>
-                <DataTable value={customers2} paginator paginatorTemplate={template1} first={first1} rows={rows1} onPage={onCustomPage1}>
+                <DataTable value={customers2} paginator paginatorTemplate={template1} first={first1} rows={rows1} onPage={onCustomPage1} responsiveLayout="scroll">
                     <Column field="name" header="Name"></Column>
                     <Column field="country.name" header="Country"></Column>
                     <Column field="company" header="Company"></Column>
@@ -925,7 +935,7 @@ const DataTablePaginatorDemo = () => {
                 </DataTable>
 
                 <DataTable value={customers3} paginator paginatorTemplate={template2} first={first2} rows={rows2} onPage={onCustomPage2}
-                    paginatorClassName="p-jc-end" className="p-mt-6">
+                    paginatorClassName="p-jc-end" className="p-mt-6" responsiveLayout="scroll">
                     <Column field="name" header="Name"></Column>
                     <Column field="country.name" header="Country"></Column>
                     <Column field="company" header="Company"></Column>

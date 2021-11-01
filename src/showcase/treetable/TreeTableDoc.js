@@ -971,7 +971,7 @@ export const TreeTableDemo = () => {
                                         <td>Function to provide the cell editor input.</td>
                                     </tr>
                                     <tr>
-                                        <td>editorValidator</td>
+                                        <td>cellEditValidator</td>
                                         <td>function</td>
                                         <td>null</td>
                                         <td>Validator function to validate the cell input value.</td>
@@ -1771,7 +1771,7 @@ export const TreeTableLazyDemo = () => {
                         <h5>Incell Editing</h5>
                         <p>Incell editing feature provides a way to quickly edit data inside the table. A cell editor is defined using the <i>editor</i> property
                         that refers to a function to return an input element for the editing. Clicking outside the cell or hitting enter key closes the cell, however this may not be desirable if the input is invalid. In order
-                        to decide whether to keep the cell open or not, provide a <i>editorValidator</i> function that validates the value.</p>
+                        to decide whether to keep the cell open or not, provide a <i>cellEditValidator</i> function that validates the value.</p>
 
 <CodeHighlight lang="js">
 {`
@@ -1836,7 +1836,7 @@ export const TreeTableEditDemo = () => {
     return (
         <TreeTable value={nodes}>
             <Column field="name" header="Name" expander></Column>
-            <Column field="size" header="Size" editor={sizeEditor} editorValidator={requiredValidator}></Column>
+            <Column field="size" header="Size" editor={sizeEditor} cellEditValidator={requiredValidator}></Column>
             <Column field="type" header="Type" editor={typeEditor}></Column>
         </TreeTable>
     )

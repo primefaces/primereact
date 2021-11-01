@@ -47,8 +47,12 @@ export class Slider extends Component {
         this.handleIndex = 0;
     }
 
+    get value() {
+        return this.props.range ? this.props.value || [0, 100] : this.props.value || 0;
+    }
+
     spin(event, dir) {
-        const value = (this.props.range ? this.props.value[this.handleIndex] : this.props.value) || 0;
+        const value = this.props.range ? this.value[this.handleIndex] : this.value;
         const step = (this.props.step || 1) * dir;
 
         this.updateValue(event, value + step);
@@ -195,7 +199,7 @@ export class Slider extends Component {
         let newValue = (this.props.max - this.props.min) * (handleValue / 100) + this.props.min;
 
         if (this.props.step) {
-            const oldValue = this.props.range ? this.props.value[this.handleIndex] : this.props.value;
+            const oldValue = this.props.range ? this.value[this.handleIndex] : this.value;
             const diff = (newValue - oldValue);
 
             if (diff < 0)
@@ -217,17 +221,17 @@ export class Slider extends Component {
             if (this.handleIndex === 0) {
                 if (newValue < this.props.min)
                     newValue = this.props.min;
-                else if (newValue > this.props.value[1])
-                    newValue = this.props.value[1];
+                else if (newValue > this.value[1])
+                    newValue = this.value[1];
             }
             else {
                 if (newValue > this.props.max)
                     newValue = this.props.max;
-                else if (newValue < this.props.value[0])
-                    newValue = this.props.value[0];
+                else if (newValue < this.value[0])
+                    newValue = this.value[0];
             }
 
-            let newValues = [...this.props.value];
+            let newValues = [...this.value];
             newValues[this.handleIndex] = newValue;
 
             if (this.props.onChange) {
@@ -272,7 +276,7 @@ export class Slider extends Component {
     }
 
     renderRangeSlider() {
-        let values = this.props.value || [0, 0];
+        let values = this.value;
         let horizontal = (this.props.orientation === 'horizontal');
         const handleValueStart = (values[0] < this.props.min ? 0 : values[0] - this.props.min) * 100 / (this.props.max - this.props.min);
         const handleValueEnd = (values[1] > this.props.max ? 100 : values[1] - this.props.min) * 100 / (this.props.max - this.props.min);
@@ -290,7 +294,7 @@ export class Slider extends Component {
     }
 
     renderSingleSlider() {
-        let value = this.props.value || 0;
+        let value = this.value;
         let handleValue;
 
         if (value < this.props.min)

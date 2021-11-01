@@ -876,7 +876,7 @@ const DataTableEvents = [
         ]
     },
     {
-        name: 'rowEditorValidator',
+        name: 'rowEditValidator',
         description: 'Callback to invoke to validate the editing row when the save icon is clicked on row editing mode.',
         arguments: [
             {

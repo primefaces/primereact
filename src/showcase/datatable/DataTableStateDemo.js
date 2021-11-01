@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import { FilterMatchMode, FilterOperator } from '../../components/api/Api';
 import { DataTable } from '../../components/datatable/DataTable';
 import { Column } from '../../components/column/Column';
-import { CustomerService } from '../service/CustomerService';
 import { InputText } from '../../components/inputtext/InputText';
 import { MultiSelect } from '../../components/multiselect/MultiSelect';
 import { Dropdown } from '../../components/dropdown/Dropdown';
+import { CustomerService } from '../service/CustomerService';
 import { TabView } from '../../components/tabview/TabView';
 import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
@@ -16,14 +17,30 @@ export class DataTableStateDemo extends Component {
         super(props);
         this.state = {
             customers: null,
-            globalFilter1: null,
-            globalFilter2: null,
-            globalFilter3: null,
+            filters1: {
+                'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
+                'name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+                'country.name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+                'representative': { value: null, matchMode: FilterMatchMode.IN },
+                'status': { operator: FilterOperator.OR, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] }
+            },
+            filters2: {
+                'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
+                'name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+                'country.name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+                'representative': { value: null, matchMode: FilterMatchMode.IN },
+                'status': { operator: FilterOperator.OR, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] }
+            },
+            filters3: {
+                'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
+                'name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+                'country.name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+                'representative': { value: null, matchMode: FilterMatchMode.IN },
+                'status': { operator: FilterOperator.OR, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] }
+            },
             selectedCustomer1: null,
             selectedCustomer2: null,
-            selectedCustomer3: null,
-            selectedRepresentative: null,
-            selectedStatus: null
+            selectedCustomer3: null
         };
 
         this.representatives = [
@@ -44,6 +61,8 @@ export class DataTableStateDemo extends Component {
         ];
 
         this.customerService = new CustomerService();
+        this.representativeFilterTemplate = this.representativeFilterTemplate.bind(this);
+        this.statusFilterTemplate = this.statusFilterTemplate.bind(this);
         this.onCustomSaveState = this.onCustomSaveState.bind(this);
         this.onCustomRestoreState = this.onCustomRestoreState.bind(this);
     }
@@ -78,25 +97,52 @@ export class DataTableStateDemo extends Component {
         );
     }
 
+    representativeFilterTemplate(options) {
+        return <MultiSelect value={options.value} options={this.representatives} itemTemplate={this.representativesItemTemplate} onChange={(e) => options.filterCallback(e.value)} optionLabel="name" placeholder="Any" className="p-column-filter" />;
+    }
+
+    representativesItemTemplate(option) {
+        return (
+            <div className="p-multiselect-representative-option">
+                <img alt={option.name} src={`showcase/demo/images/avatar/${option.image}`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width={32} style={{ verticalAlign: 'middle' }} />
+                <span className="image-text">{option.name}</span>
+            </div>
+        );
+    }
+
     statusBodyTemplate(rowData) {
         return <span className={`customer-badge status-${rowData.status}`}>{rowData.status}</span>;
     }
 
-    renderHeader(globalFilterKey) {
+    statusFilterTemplate(options) {
+        return <Dropdown value={options.value} options={this.statuses} onChange={(e) => options.filterCallback(e.value, options.index)} itemTemplate={this.statusItemTemplate} placeholder="Select a Status" className="p-column-filter" showClear />;
+    }
+
+    statusItemTemplate(option) {
+        return <span className={`customer-badge status-${option}`}>{option}</span>;
+    }
+
+    onGlobalFilterChange(event, filtersKey) {
+        const value = event.target.value;
+        let filters = { ...this.state[filtersKey] };
+        filters['global'].value = value;
+
+        this.setState({ [`${filtersKey}`]: filters });
+    }
+
+    renderHeader(filtersKey) {
         return (
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
-                <InputText type="search" onInput={(e) => this.setState({ [`${globalFilterKey}`]: e.target.value })} placeholder="Global Search" />
+                <InputText type="search" value={this.state[`${filtersKey}`]['global'].value || ''} onChange={(e) => this.onGlobalFilterChange(e, filtersKey)} placeholder="Global Search" />
             </span>
         );
     }
 
     render() {
-        const header1 = this.renderHeader('globalFilter1');
-        const header2 = this.renderHeader('globalFilter2');
-        const header3 = this.renderHeader('globalFilter3');
-        const representativeFilter = <MultiSelect value={this.state.selectedRepresentative} options={this.representatives} onChange={(e) => this.setState({ selectedRepresentative: e.value })} optionLabel="name" optionValue="name" placeholder="All" className="p-column-filter" />;
-        const statusFilter = <Dropdown value={this.state.selectedStatus} options={this.statuses} onChange={(e) => this.setState({ selectedStatus: e.value })} placeholder="Select a Status" className="p-column-filter" showClear />;
+        const header1 = this.renderHeader('filters1');
+        const header2 = this.renderHeader('filters2');
+        const header3 = this.renderHeader('filters3');
 
         return (
             <div>
@@ -112,37 +158,37 @@ export class DataTableStateDemo extends Component {
                 <div className="content-section implementation">
                     <div className="card">
                         <h5>Session Storage</h5>
-                        <DataTable value={this.state.customers} paginator rows={10} header={header1}
-                            selection={this.state.selectedCustomer1} onSelectionChange={e => this.setState({ selectedCustomer1: e.value })} selectionMode="single" dataKey="id"
+                        <DataTable value={this.state.customers} paginator rows={10} header={header1} filters={this.state.filters1} onFilter={(e) => this.setState({ filters1: e.filters })}
+                            selection={this.state.selectedCustomer1} onSelectionChange={e => this.setState({ selectedCustomer1: e.value })} selectionMode="single" dataKey="id" responsiveLayout="scroll"
                             stateStorage="session" stateKey="dt-state-demo-session" emptyMessage="No customers found.">
                             <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name"></Column>
-                            <Column header="Country" body={this.countryBodyTemplate} sortable sortField="country.name" filter filterField="country.name" filterMatchMode="contains" filterPlaceholder="Search by country"></Column>
-                            <Column header="Representative" body={this.representativeBodyTemplate} sortable sortField="representative.name" filter filterField="representative.name" filterMatchMode="in" filterElement={representativeFilter}></Column>
-                            <Column field="status" header="Status" body={this.statusBodyTemplate} sortable filter filterMatchMode="equals" filterElement={statusFilter}></Column>
+                            <Column header="Country" body={this.countryBodyTemplate} sortable sortField="country.name" filter filterField="country.name" filterPlaceholder="Search by country"></Column>
+                            <Column header="Agent" body={this.representativeBodyTemplate} sortable sortField="representative.name" filter filterField="representative" showFilterMatchModes={false} filterElement={this.representativeFilterTemplate} filterMenuStyle={{ width: '14rem' }}></Column>
+                            <Column field="status" header="Status" body={this.statusBodyTemplate} sortable filter filterElement={this.statusFilterTemplate} filterMenuStyle={{ width: '14rem' }}></Column>
                         </DataTable>
                     </div>
 
                     <div className="card">
                         <h5>Local Storage</h5>
-                        <DataTable value={this.state.customers} paginator rows={10} header={header2}
-                            selection={this.state.selectedCustomer2} onSelectionChange={e => this.setState({ selectedCustomer2: e.value })} selectionMode="single" dataKey="id"
+                        <DataTable value={this.state.customers} paginator rows={10} header={header2} filters={this.state.filters2} onFilter={(e) => this.setState({ filters2: e.filters })}
+                            selection={this.state.selectedCustomer2} onSelectionChange={e => this.setState({ selectedCustomer2: e.value })} selectionMode="single" dataKey="id" responsiveLayout="scroll"
                             stateStorage="local" stateKey="dt-state-demo-local" emptyMessage="No customers found.">
                             <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name"></Column>
-                            <Column header="Country" body={this.countryBodyTemplate} sortable sortField="country.name" filter filterField="country.name" filterMatchMode="contains" filterPlaceholder="Search by country"></Column>
-                            <Column header="Representative" body={this.representativeBodyTemplate} sortable sortField="representative.name" filter filterField="representative.name" filterMatchMode="in" filterElement={representativeFilter}></Column>
-                            <Column field="status" header="Status" body={this.statusBodyTemplate} sortable filter filterMatchMode="equals" filterElement={statusFilter}></Column>
+                            <Column header="Country" body={this.countryBodyTemplate} sortable sortField="country.name" filter filterField="country.name" filterPlaceholder="Search by country"></Column>
+                            <Column header="Agent" body={this.representativeBodyTemplate} sortable sortField="representative.name" filter filterField="representative" showFilterMatchModes={false} filterElement={this.representativeFilterTemplate} filterMenuStyle={{ width: '14rem' }}></Column>
+                            <Column field="status" header="Status" body={this.statusBodyTemplate} sortable filter filterElement={this.statusFilterTemplate} filterMenuStyle={{ width: '14rem' }}></Column>
                         </DataTable>
                     </div>
 
                     <div className="card">
                         <h5>Custom Storage</h5>
-                        <DataTable value={this.state.customers} paginator rows={10} header={header3}
-                            selection={this.state.selectedCustomer3} onSelectionChange={e => this.setState({ selectedCustomer3: e.value })} selectionMode="single" dataKey="id"
+                        <DataTable value={this.state.customers} paginator rows={10} header={header3} filters={this.state.filters3} onFilter={(e) => this.setState({ filters3: e.filters })}
+                            selection={this.state.selectedCustomer3} onSelectionChange={e => this.setState({ selectedCustomer3: e.value })} selectionMode="single" dataKey="id" responsiveLayout="scroll"
                             stateStorage="custom" customSaveState={this.onCustomSaveState} customRestoreState={this.onCustomRestoreState} emptyMessage="No customers found.">
                             <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name"></Column>
-                            <Column header="Country" body={this.countryBodyTemplate} sortable sortField="country.name" filter filterField="country.name" filterMatchMode="contains" filterPlaceholder="Search by country"></Column>
-                            <Column header="Representative" body={this.representativeBodyTemplate} sortable sortField="representative.name" filter filterField="representative.name" filterMatchMode="in" filterElement={representativeFilter}></Column>
-                            <Column field="status" header="Status" body={this.statusBodyTemplate} sortable filter filterMatchMode="equals" filterElement={statusFilter}></Column>
+                            <Column header="Country" body={this.countryBodyTemplate} sortable sortField="country.name" filter filterField="country.name" filterPlaceholder="Search by country"></Column>
+                            <Column header="Agent" body={this.representativeBodyTemplate} sortable sortField="representative.name" filter filterField="representative" showFilterMatchModes={false} filterElement={this.representativeFilterTemplate} filterMenuStyle={{ width: '14rem' }}></Column>
+                            <Column field="status" header="Status" body={this.statusBodyTemplate} sortable filter filterElement={this.statusFilterTemplate} filterMenuStyle={{ width: '14rem' }}></Column>
                         </DataTable>
                     </div>
                 </div>
@@ -163,12 +209,13 @@ export class DataTableStateDemoDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
+import { FilterMatchMode, FilterOperator } from 'primereact/api';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { CustomerService } from '../service/CustomerService';
 import { InputText } from 'primereact/inputtext';
 import { MultiSelect } from 'primereact/multiselect';
 import { Dropdown } from 'primereact/dropdown';
+import { CustomerService } from '../service/CustomerService';
 
 export class DataTableStateDemo extends Component {
 
@@ -176,14 +223,30 @@ export class DataTableStateDemo extends Component {
         super(props);
         this.state = {
             customers: null,
-            globalFilter1: null,
-            globalFilter2: null,
-            globalFilter3: null,
+            filters1: {
+                'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
+                'name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+                'country.name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+                'representative': { value: null, matchMode: FilterMatchMode.IN },
+                'status': { operator: FilterOperator.OR, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] }
+            },
+            filters2: {
+                'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
+                'name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+                'country.name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+                'representative': { value: null, matchMode: FilterMatchMode.IN },
+                'status': { operator: FilterOperator.OR, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] }
+            },
+            filters3: {
+                'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
+                'name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+                'country.name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+                'representative': { value: null, matchMode: FilterMatchMode.IN },
+                'status': { operator: FilterOperator.OR, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] }
+            },
             selectedCustomer1: null,
             selectedCustomer2: null,
-            selectedCustomer3: null,
-            selectedRepresentative: null,
-            selectedStatus: null
+            selectedCustomer3: null
         };
 
         this.representatives = [
@@ -204,6 +267,8 @@ export class DataTableStateDemo extends Component {
         ];
 
         this.customerService = new CustomerService();
+        this.representativeFilterTemplate = this.representativeFilterTemplate.bind(this);
+        this.statusFilterTemplate = this.statusFilterTemplate.bind(this);
         this.onCustomSaveState = this.onCustomSaveState.bind(this);
         this.onCustomRestoreState = this.onCustomRestoreState.bind(this);
     }
@@ -238,61 +303,88 @@ export class DataTableStateDemo extends Component {
         );
     }
 
+    representativeFilterTemplate(options) {
+        return <MultiSelect value={options.value} options={this.representatives} itemTemplate={this.representativesItemTemplate} onChange={(e) => options.filterCallback(e.value)} optionLabel="name" placeholder="Any" className="p-column-filter" />;
+    }
+
+    representativesItemTemplate(option) {
+        return (
+            <div className="p-multiselect-representative-option">
+                <img alt={option.name} src={\`showcase/demo/images/avatar/\${option.image}\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width={32} style={{ verticalAlign: 'middle' }} />
+                <span className="image-text">{option.name}</span>
+            </div>
+        );
+    }
+
     statusBodyTemplate(rowData) {
         return <span className={\`customer-badge status-\${rowData.status}\`}>{rowData.status}</span>;
     }
 
-    renderHeader(globalFilterKey) {
+    statusFilterTemplate(options) {
+        return <Dropdown value={options.value} options={this.statuses} onChange={(e) => options.filterCallback(e.value, options.index)} itemTemplate={this.statusItemTemplate} placeholder="Select a Status" className="p-column-filter" showClear />;
+    }
+
+    statusItemTemplate(option) {
+        return <span className={\`customer-badge status-\${option}\`}>{option}</span>;
+    }
+
+    onGlobalFilterChange(event, filtersKey) {
+        const value = event.target.value;
+        let filters = { ...this.state[filtersKey] };
+        filters['global'].value = value;
+
+        this.setState({ [\`\${filtersKey}\`]: filters });
+    }
+
+    renderHeader(filtersKey) {
         return (
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
-                <InputText type="search" onInput={(e) => this.setState({ [\`\${globalFilterKey}\`]: e.target.value })} placeholder="Global Search" />
+                <InputText type="search" value={this.state[\`\${filtersKey}\`]['global'].value || ''} onChange={(e) => this.onGlobalFilterChange(e, filtersKey)} placeholder="Global Search" />
             </span>
         );
     }
 
     render() {
-        const header1 = this.renderHeader('globalFilter1');
-        const header2 = this.renderHeader('globalFilter2');
-        const header3 = this.renderHeader('globalFilter3');
-        const representativeFilter = <MultiSelect value={this.state.selectedRepresentative} options={this.representatives} onChange={(e) => this.setState({ selectedRepresentative: e.value })} optionLabel="name" optionValue="name" placeholder="All" className="p-column-filter" />;
-        const statusFilter = <Dropdown value={this.state.selectedStatus} options={this.statuses} onChange={(e) => this.setState({ selectedStatus: e.value })} placeholder="Select a Status" className="p-column-filter" showClear />;
+        const header1 = this.renderHeader('filters1');
+        const header2 = this.renderHeader('filters2');
+        const header3 = this.renderHeader('filters3');
 
         return (
             <div>
                 <div className="card">
                     <h5>Session Storage</h5>
-                    <DataTable value={this.state.customers} paginator rows={10} header={header1}
-                        selection={this.state.selectedCustomer1} onSelectionChange={e => this.setState({ selectedCustomer1: e.value })} selectionMode="single" dataKey="id"
+                    <DataTable value={this.state.customers} paginator rows={10} header={header1} filters={this.state.filters1} onFilter={(e) => this.setState({ filters1: e.filters })}
+                        selection={this.state.selectedCustomer1} onSelectionChange={e => this.setState({ selectedCustomer1: e.value })} selectionMode="single" dataKey="id" responsiveLayout="scroll"
                         stateStorage="session" stateKey="dt-state-demo-session" emptyMessage="No customers found.">
                         <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name"></Column>
-                        <Column header="Country" body={this.countryBodyTemplate} sortable sortField="country.name" filter filterField="country.name" filterMatchMode="contains" filterPlaceholder="Search by country"></Column>
-                        <Column header="Representative" body={this.representativeBodyTemplate} sortable sortField="representative.name" filter filterField="representative.name" filterMatchMode="in" filterElement={representativeFilter}></Column>
-                        <Column field="status" header="Status" body={this.statusBodyTemplate} sortable filter filterMatchMode="equals" filterElement={statusFilter}></Column>
+                        <Column header="Country" body={this.countryBodyTemplate} sortable sortField="country.name" filter filterField="country.name" filterPlaceholder="Search by country"></Column>
+                        <Column header="Agent" body={this.representativeBodyTemplate} sortable sortField="representative.name" filter filterField="representative" showFilterMatchModes={false} filterElement={this.representativeFilterTemplate} filterMenuStyle={{ width: '14rem' }}></Column>
+                        <Column field="status" header="Status" body={this.statusBodyTemplate} sortable filter filterElement={this.statusFilterTemplate} filterMenuStyle={{ width: '14rem' }}></Column>
                     </DataTable>
                 </div>
 
                 <div className="card">
                     <h5>Local Storage</h5>
-                    <DataTable value={this.state.customers} paginator rows={10} header={header2}
-                        selection={this.state.selectedCustomer2} onSelectionChange={e => this.setState({ selectedCustomer2: e.value })} selectionMode="single" dataKey="id"
+                    <DataTable value={this.state.customers} paginator rows={10} header={header2} filters={this.state.filters2} onFilter={(e) => this.setState({ filters2: e.filters })}
+                        selection={this.state.selectedCustomer2} onSelectionChange={e => this.setState({ selectedCustomer2: e.value })} selectionMode="single" dataKey="id" responsiveLayout="scroll"
                         stateStorage="local" stateKey="dt-state-demo-local" emptyMessage="No customers found.">
                         <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name"></Column>
-                        <Column header="Country" body={this.countryBodyTemplate} sortable sortField="country.name" filter filterField="country.name" filterMatchMode="contains" filterPlaceholder="Search by country"></Column>
-                        <Column header="Representative" body={this.representativeBodyTemplate} sortable sortField="representative.name" filter filterField="representative.name" filterMatchMode="in" filterElement={representativeFilter}></Column>
-                        <Column field="status" header="Status" body={this.statusBodyTemplate} sortable filter filterMatchMode="equals" filterElement={statusFilter}></Column>
+                        <Column header="Country" body={this.countryBodyTemplate} sortable sortField="country.name" filter filterField="country.name" filterPlaceholder="Search by country"></Column>
+                        <Column header="Agent" body={this.representativeBodyTemplate} sortable sortField="representative.name" filter filterField="representative" showFilterMatchModes={false} filterElement={this.representativeFilterTemplate} filterMenuStyle={{ width: '14rem' }}></Column>
+                        <Column field="status" header="Status" body={this.statusBodyTemplate} sortable filter filterElement={this.statusFilterTemplate} filterMenuStyle={{ width: '14rem' }}></Column>
                     </DataTable>
                 </div>
 
                 <div className="card">
                     <h5>Custom Storage</h5>
-                    <DataTable value={this.state.customers} paginator rows={10} header={header3}
-                        selection={this.state.selectedCustomer3} onSelectionChange={e => this.setState({ selectedCustomer3: e.value })} selectionMode="single" dataKey="id"
+                    <DataTable value={this.state.customers} paginator rows={10} header={header3} filters={this.state.filters3} onFilter={(e) => this.setState({ filters3: e.filters })}
+                        selection={this.state.selectedCustomer3} onSelectionChange={e => this.setState({ selectedCustomer3: e.value })} selectionMode="single" dataKey="id" responsiveLayout="scroll"
                         stateStorage="custom" customSaveState={this.onCustomSaveState} customRestoreState={this.onCustomRestoreState} emptyMessage="No customers found.">
                         <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name"></Column>
-                        <Column header="Country" body={this.countryBodyTemplate} sortable sortField="country.name" filter filterField="country.name" filterMatchMode="contains" filterPlaceholder="Search by country"></Column>
-                        <Column header="Representative" body={this.representativeBodyTemplate} sortable sortField="representative.name" filter filterField="representative.name" filterMatchMode="in" filterElement={representativeFilter}></Column>
-                        <Column field="status" header="Status" body={this.statusBodyTemplate} sortable filter filterMatchMode="equals" filterElement={statusFilter}></Column>
+                        <Column header="Country" body={this.countryBodyTemplate} sortable sortField="country.name" filter filterField="country.name" filterPlaceholder="Search by country"></Column>
+                        <Column header="Agent" body={this.representativeBodyTemplate} sortable sortField="representative.name" filter filterField="representative" showFilterMatchModes={false} filterElement={this.representativeFilterTemplate} filterMenuStyle={{ width: '14rem' }}></Column>
+                        <Column field="status" header="Status" body={this.statusBodyTemplate} sortable filter filterElement={this.statusFilterTemplate} filterMenuStyle={{ width: '14rem' }}></Column>
                     </DataTable>
                 </div>
             </div>
@@ -305,23 +397,41 @@ export class DataTableStateDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState, useEffect } from 'react';
+import { FilterMatchMode, FilterOperator } from 'primereact/api';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { CustomerService } from '../service/CustomerService';
 import { InputText } from 'primereact/inputtext';
 import { MultiSelect } from 'primereact/multiselect';
 import { Dropdown } from 'primereact/dropdown';
+import { CustomerService } from '../service/CustomerService';
 
 const DataTableStateDemo = () => {
+
     const [customers, setCustomers] = useState(null);
-    const [globalFilter1, setGlobalFilter1] = useState(null);
-    const [globalFilter2, setGlobalFilter2] = useState(null);
-    const [globalFilter3, setGlobalFilter3] = useState(null);
+    const [filters1, setFilters1] = useState({
+        'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
+        'name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+        'country.name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+        'representative': { value: null, matchMode: FilterMatchMode.IN },
+        'status': { operator: FilterOperator.OR, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] }
+    });
+    const [filters2, setFilters2] = useState({
+        'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
+        'name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+        'country.name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+        'representative': { value: null, matchMode: FilterMatchMode.IN },
+        'status': { operator: FilterOperator.OR, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] }
+    });
+    const [filters3, setFilters3] = useState({
+        'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
+        'name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+        'country.name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+        'representative': { value: null, matchMode: FilterMatchMode.IN },
+        'status': { operator: FilterOperator.OR, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] }
+    });
     const [selectedCustomer1, setSelectedCustomer1] = useState(null);
     const [selectedCustomer2, setSelectedCustomer2] = useState(null);
     const [selectedCustomer3, setSelectedCustomer3] = useState(null);
-    const [selectedRepresentative, setSelectedRepresentative] = useState(null);
-    const [selectedStatus, setSelectedStatus] = useState(null);
     const representatives = [
         { name: "Amy Elsner", image: 'amyelsner.png' },
         { name: "Anna Fali", image: 'annafali.png' },
@@ -334,18 +444,16 @@ const DataTableStateDemo = () => {
         { name: "Stephen Shaw", image: 'stephenshaw.png' },
         { name: "XuXue Feng", image: 'xuxuefeng.png' }
     ];
-
-    const dataTableFuncMap = {
-        'globalFilter1': setGlobalFilter1,
-        'globalFilter2': setGlobalFilter2,
-        'globalFilter3': setGlobalFilter3
-    };
-
     const statuses = [
         'unqualified', 'qualified', 'new', 'negotiation', 'renewal', 'proposal'
     ];
-
     const customerService = new CustomerService();
+
+    const filtersMap = {
+        'filters1': { value: filters1, callback: setFilters1 },
+        'filters2': { value: filters2, callback: setFilters2 },
+        'filters3': { value: filters3, callback: setFilters3 },
+    };
 
     useEffect(() => {
         customerService.getCustomersMedium().then(data => setCustomers(data));
@@ -377,60 +485,87 @@ const DataTableStateDemo = () => {
         );
     }
 
+    const representativeFilterTemplate = (options) => {
+        return <MultiSelect value={options.value} options={representatives} itemTemplate={representativesItemTemplate} onChange={(e) => options.filterCallback(e.value)} optionLabel="name" placeholder="Any" className="p-column-filter" />;
+    }
+
+    const representativesItemTemplate = (option) => {
+        return (
+            <div className="p-multiselect-representative-option">
+                <img alt={option.name} src={\`showcase/demo/images/avatar/\${option.image}\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width={32} style={{ verticalAlign: 'middle' }} />
+                <span className="image-text">{option.name}</span>
+            </div>
+        );
+    }
+
     const statusBodyTemplate = (rowData) => {
         return <span className={\`customer-badge status-\${rowData.status}\`}>{rowData.status}</span>;
     }
 
-    const renderHeader = (globalFilterKey) => {
+    const statusFilterTemplate = (options) => {
+        return <Dropdown value={options.value} options={statuses} onChange={(e) => options.filterCallback(e.value, options.index)} itemTemplate={statusItemTemplate} placeholder="Select a Status" className="p-column-filter" showClear />;
+    }
+
+    const statusItemTemplate = (option) => {
+        return <span className={\`customer-badge status-\${option}\`}>{option}</span>;
+    }
+
+    const onGlobalFilterChange = (event, filtersKey) => {
+        const value = event.target.value;
+        let filters = { ...filtersMap[filtersKey].value };
+        filters['global'].value = value;
+
+        filtersMap[filtersKey].callback(filters);
+    }
+
+    const renderHeader = (filtersKey) => {
         return (
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
-                <InputText type="search" onInput={(e) => dataTableFuncMap[\`\${globalFilterKey}\`](e.target.value)} placeholder="Global Search" />
+                <InputText type="search" value={filtersMap[\`\${filtersKey}\`]['global'].value || ''} onChange={(e) => onGlobalFilterChange(e, filtersKey)} placeholder="Global Search" />
             </span>
         );
     }
 
-    const header1 = renderHeader('globalFilter1');
-    const header2 = renderHeader('globalFilter2');
-    const header3 = renderHeader('globalFilter3');
-    const representativeFilter = <MultiSelect value={selectedRepresentative} options={representatives} onChange={(e) => setSelectedRepresentative(e.value)} optionLabel="name" optionValue="name" placeholder="All" className="p-column-filter" />;
-    const statusFilter = <Dropdown value={selectedStatus} options={statuses} onChange={(e) => setSelectedStatus(e.value)} placeholder="Select a Status" className="p-column-filter" showClear />;
+    const header1 = renderHeader('filters1');
+    const header2 = renderHeader('filters2');
+    const header3 = renderHeader('filters3');
 
     return (
         <div>
             <div className="card">
                 <h5>Session Storage</h5>
-                <DataTable value={customers} paginator rows={10} header={header1} globalFilter={globalFilter1}
-                    selection={selectedCustomer1} onSelectionChange={e => setSelectedCustomer1(e.value)} selectionMode="single" dataKey="id"
+                <DataTable value={customers} paginator rows={10} header={header1} filters={filters1} onFilter={(e) => setFilters1(e.filters)}
+                    selection={selectedCustomer1} onSelectionChange={e => setSelectedCustomer1(e.value)} selectionMode="single" dataKey="id" responsiveLayout="scroll"
                     stateStorage="session" stateKey="dt-state-demo-session" emptyMessage="No customers found.">
                     <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name"></Column>
-                    <Column header="Country" body={countryBodyTemplate} sortable sortField="country.name" filter filterField="country.name" filterMatchMode="contains" filterPlaceholder="Search by country"></Column>
-                    <Column header="Representative" body={representativeBodyTemplate} sortable sortField="representative.name" filter filterField="representative.name" filterMatchMode="in" filterElement={representativeFilter}></Column>
-                    <Column field="status" header="Status" body={statusBodyTemplate} sortable filter filterMatchMode="equals" filterElement={statusFilter}></Column>
+                    <Column header="Country" body={countryBodyTemplate} sortable sortField="country.name" filter filterField="country.name" filterPlaceholder="Search by country"></Column>
+                    <Column header="Agent" body={representativeBodyTemplate} sortable sortField="representative.name" filter filterField="representative" showFilterMatchModes={false} filterElement={representativeFilterTemplate} filterMenuStyle={{ width: '14rem' }}></Column>
+                    <Column field="status" header="Status" body={statusBodyTemplate} sortable filter filterElement={statusFilterTemplate} filterMenuStyle={{ width: '14rem' }}></Column>
                 </DataTable>
             </div>
 
             <div className="card">
                 <h5>Local Storage</h5>
-                <DataTable value={customers} paginator rows={10} header={header2} globalFilter={globalFilter2}
-                    selection={selectedCustomer2} onSelectionChange={e => setSelectedCustomer2(e.value)} selectionMode="single" dataKey="id"
+                <DataTable value={customers} paginator rows={10} header={header2} filters={filters2} onFilter={(e) => setFilters2(e.filters)}
+                    selection={selectedCustomer2} onSelectionChange={e => setSelectedCustomer2(e.value)} selectionMode="single" dataKey="id" responsiveLayout="scroll"
                     stateStorage="local" stateKey="dt-state-demo-local" emptyMessage="No customers found.">
                     <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name"></Column>
-                    <Column header="Country" body={countryBodyTemplate} sortable sortField="country.name" filter filterField="country.name" filterMatchMode="contains" filterPlaceholder="Search by country"></Column>
-                    <Column header="Representative" body={representativeBodyTemplate} sortable sortField="representative.name" filter filterField="representative.name" filterMatchMode="in" filterElement={representativeFilter}></Column>
-                    <Column field="status" header="Status" body={statusBodyTemplate} sortable filter filterMatchMode="equals" filterElement={statusFilter}></Column>
+                    <Column header="Country" body={countryBodyTemplate} sortable sortField="country.name" filter filterField="country.name" filterPlaceholder="Search by country"></Column>
+                    <Column header="Agent" body={representativeBodyTemplate} sortable sortField="representative.name" filter filterField="representative" showFilterMatchModes={false} filterElement={representativeFilterTemplate} filterMenuStyle={{ width: '14rem' }}></Column>
+                    <Column field="status" header="Status" body={statusBodyTemplate} sortable filter filterElement={statusFilterTemplate} filterMenuStyle={{ width: '14rem' }}></Column>
                 </DataTable>
             </div>
 
             <div className="card">
                 <h5>Custom Storage</h5>
-                <DataTable value={customers} paginator rows={10} header={header3} globalFilter={globalFilter3}
-                    selection={selectedCustomer3} onSelectionChange={e => setSelectedCustomer3(e.value)} selectionMode="single" dataKey="id"
+                <DataTable value={customers} paginator rows={10} header={header3} filters={filters3} onFilter={(e) => setFilters3(e.filters)}
+                    selection={selectedCustomer3} onSelectionChange={e => setSelectedCustomer3(e.value)} selectionMode="single" dataKey="id" responsiveLayout="scroll"
                     stateStorage="custom" customSaveState={onCustomSaveState} customRestoreState={onCustomRestoreState} emptyMessage="No customers found.">
                     <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name"></Column>
-                    <Column header="Country" body={countryBodyTemplate} sortable sortField="country.name" filter filterField="country.name" filterMatchMode="contains" filterPlaceholder="Search by country"></Column>
-                    <Column header="Representative" body={representativeBodyTemplate} sortable sortField="representative.name" filter filterField="representative.name" filterMatchMode="in" filterElement={representativeFilter}></Column>
-                    <Column field="status" header="Status" body={statusBodyTemplate} sortable filter filterMatchMode="equals" filterElement={statusFilter}></Column>
+                    <Column header="Country" body={countryBodyTemplate} sortable sortField="country.name" filter filterField="country.name" filterPlaceholder="Search by country"></Column>
+                    <Column header="Agent" body={representativeBodyTemplate} sortable sortField="representative.name" filter filterField="representative" showFilterMatchModes={false} filterElement={representativeFilterTemplate} filterMenuStyle={{ width: '14rem' }}></Column>
+                    <Column field="status" header="Status" body={statusBodyTemplate} sortable filter filterElement={statusFilterTemplate} filterMenuStyle={{ width: '14rem' }}></Column>
                 </DataTable>
             </div>
         </div>
@@ -442,23 +577,41 @@ const DataTableStateDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState, useEffect } from 'react';
+import { FilterMatchMode, FilterOperator } from 'primereact/api';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { CustomerService } from '../service/CustomerService';
 import { InputText } from 'primereact/inputtext';
 import { MultiSelect } from 'primereact/multiselect';
 import { Dropdown } from 'primereact/dropdown';
+import { CustomerService } from '../service/CustomerService';
 
 const DataTableStateDemo = () => {
+
     const [customers, setCustomers] = useState(null);
-    const [globalFilter1, setGlobalFilter1] = useState(null);
-    const [globalFilter2, setGlobalFilter2] = useState(null);
-    const [globalFilter3, setGlobalFilter3] = useState(null);
+    const [filters1, setFilters1] = useState({
+        'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
+        'name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+        'country.name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+        'representative': { value: null, matchMode: FilterMatchMode.IN },
+        'status': { operator: FilterOperator.OR, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] }
+    });
+    const [filters2, setFilters2] = useState({
+        'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
+        'name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+        'country.name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+        'representative': { value: null, matchMode: FilterMatchMode.IN },
+        'status': { operator: FilterOperator.OR, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] }
+    });
+    const [filters3, setFilters3] = useState({
+        'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
+        'name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+        'country.name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+        'representative': { value: null, matchMode: FilterMatchMode.IN },
+        'status': { operator: FilterOperator.OR, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] }
+    });
     const [selectedCustomer1, setSelectedCustomer1] = useState(null);
     const [selectedCustomer2, setSelectedCustomer2] = useState(null);
     const [selectedCustomer3, setSelectedCustomer3] = useState(null);
-    const [selectedRepresentative, setSelectedRepresentative] = useState(null);
-    const [selectedStatus, setSelectedStatus] = useState(null);
     const representatives = [
         { name: "Amy Elsner", image: 'amyelsner.png' },
         { name: "Anna Fali", image: 'annafali.png' },
@@ -471,18 +624,16 @@ const DataTableStateDemo = () => {
         { name: "Stephen Shaw", image: 'stephenshaw.png' },
         { name: "XuXue Feng", image: 'xuxuefeng.png' }
     ];
-
-    const dataTableFuncMap = {
-        'globalFilter1': setGlobalFilter1,
-        'globalFilter2': setGlobalFilter2,
-        'globalFilter3': setGlobalFilter3
-    };
-
     const statuses = [
         'unqualified', 'qualified', 'new', 'negotiation', 'renewal', 'proposal'
     ];
-
     const customerService = new CustomerService();
+
+    const filtersMap = {
+        'filters1': { value: filters1, callback: setFilters1 },
+        'filters2': { value: filters2, callback: setFilters2 },
+        'filters3': { value: filters3, callback: setFilters3 },
+    };
 
     useEffect(() => {
         customerService.getCustomersMedium().then(data => setCustomers(data));
@@ -514,60 +665,87 @@ const DataTableStateDemo = () => {
         );
     }
 
+    const representativeFilterTemplate = (options) => {
+        return <MultiSelect value={options.value} options={representatives} itemTemplate={representativesItemTemplate} onChange={(e) => options.filterCallback(e.value)} optionLabel="name" placeholder="Any" className="p-column-filter" />;
+    }
+
+    const representativesItemTemplate = (option) => {
+        return (
+            <div className="p-multiselect-representative-option">
+                <img alt={option.name} src={\`showcase/demo/images/avatar/\${option.image}\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width={32} style={{ verticalAlign: 'middle' }} />
+                <span className="image-text">{option.name}</span>
+            </div>
+        );
+    }
+
     const statusBodyTemplate = (rowData) => {
         return <span className={\`customer-badge status-\${rowData.status}\`}>{rowData.status}</span>;
     }
 
-    const renderHeader = (globalFilterKey) => {
+    const statusFilterTemplate = (options) => {
+        return <Dropdown value={options.value} options={statuses} onChange={(e) => options.filterCallback(e.value, options.index)} itemTemplate={statusItemTemplate} placeholder="Select a Status" className="p-column-filter" showClear />;
+    }
+
+    const statusItemTemplate = (option) => {
+        return <span className={\`customer-badge status-\${option}\`}>{option}</span>;
+    }
+
+    const onGlobalFilterChange = (event, filtersKey) => {
+        const value = event.target.value;
+        let filters = { ...filtersMap[filtersKey].value };
+        filters['global'].value = value;
+
+        filtersMap[filtersKey].callback(filters);
+    }
+
+    const renderHeader = (filtersKey) => {
         return (
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
-                <InputText type="search" onInput={(e) => dataTableFuncMap[\`\${globalFilterKey}\`](e.target.value)} placeholder="Global Search" />
+                <InputText type="search" value={filtersMap[\`\${filtersKey}\`]['global'].value || ''} onChange={(e) => onGlobalFilterChange(e, filtersKey)} placeholder="Global Search" />
             </span>
         );
     }
 
-    const header1 = renderHeader('globalFilter1');
-    const header2 = renderHeader('globalFilter2');
-    const header3 = renderHeader('globalFilter3');
-    const representativeFilter = <MultiSelect value={selectedRepresentative} options={representatives} onChange={(e) => setSelectedRepresentative(e.value)} optionLabel="name" optionValue="name" placeholder="All" className="p-column-filter" />;
-    const statusFilter = <Dropdown value={selectedStatus} options={statuses} onChange={(e) => setSelectedStatus(e.value)} placeholder="Select a Status" className="p-column-filter" showClear />;
+    const header1 = renderHeader('filters1');
+    const header2 = renderHeader('filters2');
+    const header3 = renderHeader('filters3');
 
     return (
         <div>
             <div className="card">
                 <h5>Session Storage</h5>
-                <DataTable value={customers} paginator rows={10} header={header1} globalFilter={globalFilter1}
-                    selection={selectedCustomer1} onSelectionChange={e => setSelectedCustomer1(e.value)} selectionMode="single" dataKey="id"
+                <DataTable value={customers} paginator rows={10} header={header1} filters={filters1} onFilter={(e) => setFilters1(e.filters)}
+                    selection={selectedCustomer1} onSelectionChange={e => setSelectedCustomer1(e.value)} selectionMode="single" dataKey="id" responsiveLayout="scroll"
                     stateStorage="session" stateKey="dt-state-demo-session" emptyMessage="No customers found.">
                     <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name"></Column>
-                    <Column header="Country" body={countryBodyTemplate} sortable sortField="country.name" filter filterField="country.name" filterMatchMode="contains" filterPlaceholder="Search by country"></Column>
-                    <Column header="Representative" body={representativeBodyTemplate} sortable sortField="representative.name" filter filterField="representative.name" filterMatchMode="in" filterElement={representativeFilter}></Column>
-                    <Column field="status" header="Status" body={statusBodyTemplate} sortable filter filterMatchMode="equals" filterElement={statusFilter}></Column>
+                    <Column header="Country" body={countryBodyTemplate} sortable sortField="country.name" filter filterField="country.name" filterPlaceholder="Search by country"></Column>
+                    <Column header="Agent" body={representativeBodyTemplate} sortable sortField="representative.name" filter filterField="representative" showFilterMatchModes={false} filterElement={representativeFilterTemplate} filterMenuStyle={{ width: '14rem' }}></Column>
+                    <Column field="status" header="Status" body={statusBodyTemplate} sortable filter filterElement={statusFilterTemplate} filterMenuStyle={{ width: '14rem' }}></Column>
                 </DataTable>
             </div>
 
             <div className="card">
                 <h5>Local Storage</h5>
-                <DataTable value={customers} paginator rows={10} header={header2} globalFilter={globalFilter2}
-                    selection={selectedCustomer2} onSelectionChange={e => setSelectedCustomer2(e.value)} selectionMode="single" dataKey="id"
+                <DataTable value={customers} paginator rows={10} header={header2} filters={filters2} onFilter={(e) => setFilters2(e.filters)}
+                    selection={selectedCustomer2} onSelectionChange={e => setSelectedCustomer2(e.value)} selectionMode="single" dataKey="id" responsiveLayout="scroll"
                     stateStorage="local" stateKey="dt-state-demo-local" emptyMessage="No customers found.">
                     <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name"></Column>
-                    <Column header="Country" body={countryBodyTemplate} sortable sortField="country.name" filter filterField="country.name" filterMatchMode="contains" filterPlaceholder="Search by country"></Column>
-                    <Column header="Representative" body={representativeBodyTemplate} sortable sortField="representative.name" filter filterField="representative.name" filterMatchMode="in" filterElement={representativeFilter}></Column>
-                    <Column field="status" header="Status" body={statusBodyTemplate} sortable filter filterMatchMode="equals" filterElement={statusFilter}></Column>
+                    <Column header="Country" body={countryBodyTemplate} sortable sortField="country.name" filter filterField="country.name" filterPlaceholder="Search by country"></Column>
+                    <Column header="Agent" body={representativeBodyTemplate} sortable sortField="representative.name" filter filterField="representative" showFilterMatchModes={false} filterElement={representativeFilterTemplate} filterMenuStyle={{ width: '14rem' }}></Column>
+                    <Column field="status" header="Status" body={statusBodyTemplate} sortable filter filterElement={statusFilterTemplate} filterMenuStyle={{ width: '14rem' }}></Column>
                 </DataTable>
             </div>
 
             <div className="card">
                 <h5>Custom Storage</h5>
-                <DataTable value={customers} paginator rows={10} header={header3} globalFilter={globalFilter3}
-                    selection={selectedCustomer3} onSelectionChange={e => setSelectedCustomer3(e.value)} selectionMode="single" dataKey="id"
+                <DataTable value={customers} paginator rows={10} header={header3} filters={filters3} onFilter={(e) => setFilters3(e.filters)}
+                    selection={selectedCustomer3} onSelectionChange={e => setSelectedCustomer3(e.value)} selectionMode="single" dataKey="id" responsiveLayout="scroll"
                     stateStorage="custom" customSaveState={onCustomSaveState} customRestoreState={onCustomRestoreState} emptyMessage="No customers found.">
                     <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name"></Column>
-                    <Column header="Country" body={countryBodyTemplate} sortable sortField="country.name" filter filterField="country.name" filterMatchMode="contains" filterPlaceholder="Search by country"></Column>
-                    <Column header="Representative" body={representativeBodyTemplate} sortable sortField="representative.name" filter filterField="representative.name" filterMatchMode="in" filterElement={representativeFilter}></Column>
-                    <Column field="status" header="Status" body={statusBodyTemplate} sortable filter filterMatchMode="equals" filterElement={statusFilter}></Column>
+                    <Column header="Country" body={countryBodyTemplate} sortable sortField="country.name" filter filterField="country.name" filterPlaceholder="Search by country"></Column>
+                    <Column header="Agent" body={representativeBodyTemplate} sortable sortField="representative.name" filter filterField="representative" showFilterMatchModes={false} filterElement={representativeFilterTemplate} filterMenuStyle={{ width: '14rem' }}></Column>
+                    <Column field="status" header="Status" body={statusBodyTemplate} sortable filter filterElement={statusFilterTemplate} filterMenuStyle={{ width: '14rem' }}></Column>
                 </DataTable>
             </div>
         </div>
@@ -590,22 +768,41 @@ const DataTableStateDemo = () => {
         <script src="https://unpkg.com/primereact/dropdown/dropdown.min.js"></script>`,
                 content: `
 const { useEffect, useState } = React;
+const { FilterMatchMode, FilterOperator } = primereact.api;
 const { Column } = primereact.column;
 const { DataTable } = primereact.datatable;
 const { InputText } = primereact.inputtext;
 const { MultiSelect } = primereact.multiselect;
 const { Dropdown } = primereact.dropdown;
 
+
 const DataTableStateDemo = () => {
+
     const [customers, setCustomers] = useState(null);
-    const [globalFilter1, setGlobalFilter1] = useState(null);
-    const [globalFilter2, setGlobalFilter2] = useState(null);
-    const [globalFilter3, setGlobalFilter3] = useState(null);
+    const [filters1, setFilters1] = useState({
+        'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
+        'name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+        'country.name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+        'representative': { value: null, matchMode: FilterMatchMode.IN },
+        'status': { operator: FilterOperator.OR, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] }
+    });
+    const [filters2, setFilters2] = useState({
+        'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
+        'name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+        'country.name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+        'representative': { value: null, matchMode: FilterMatchMode.IN },
+        'status': { operator: FilterOperator.OR, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] }
+    });
+    const [filters3, setFilters3] = useState({
+        'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
+        'name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+        'country.name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+        'representative': { value: null, matchMode: FilterMatchMode.IN },
+        'status': { operator: FilterOperator.OR, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] }
+    });
     const [selectedCustomer1, setSelectedCustomer1] = useState(null);
     const [selectedCustomer2, setSelectedCustomer2] = useState(null);
     const [selectedCustomer3, setSelectedCustomer3] = useState(null);
-    const [selectedRepresentative, setSelectedRepresentative] = useState(null);
-    const [selectedStatus, setSelectedStatus] = useState(null);
     const representatives = [
         { name: "Amy Elsner", image: 'amyelsner.png' },
         { name: "Anna Fali", image: 'annafali.png' },
@@ -618,18 +815,16 @@ const DataTableStateDemo = () => {
         { name: "Stephen Shaw", image: 'stephenshaw.png' },
         { name: "XuXue Feng", image: 'xuxuefeng.png' }
     ];
-
-    const dataTableFuncMap = {
-        'globalFilter1': setGlobalFilter1,
-        'globalFilter2': setGlobalFilter2,
-        'globalFilter3': setGlobalFilter3
-    };
-
     const statuses = [
         'unqualified', 'qualified', 'new', 'negotiation', 'renewal', 'proposal'
     ];
-
     const customerService = new CustomerService();
+
+    const filtersMap = {
+        'filters1': { value: filters1, callback: setFilters1 },
+        'filters2': { value: filters2, callback: setFilters2 },
+        'filters3': { value: filters3, callback: setFilters3 },
+    };
 
     useEffect(() => {
         customerService.getCustomersMedium().then(data => setCustomers(data));
@@ -661,60 +856,87 @@ const DataTableStateDemo = () => {
         );
     }
 
+    const representativeFilterTemplate = (options) => {
+        return <MultiSelect value={options.value} options={representatives} itemTemplate={representativesItemTemplate} onChange={(e) => options.filterCallback(e.value)} optionLabel="name" placeholder="Any" className="p-column-filter" />;
+    }
+
+    const representativesItemTemplate = (option) => {
+        return (
+            <div className="p-multiselect-representative-option">
+                <img alt={option.name} src={\`showcase/demo/images/avatar/\${option.image}\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width={32} style={{ verticalAlign: 'middle' }} />
+                <span className="image-text">{option.name}</span>
+            </div>
+        );
+    }
+
     const statusBodyTemplate = (rowData) => {
         return <span className={\`customer-badge status-\${rowData.status}\`}>{rowData.status}</span>;
     }
 
-    const renderHeader = (globalFilterKey) => {
+    const statusFilterTemplate = (options) => {
+        return <Dropdown value={options.value} options={statuses} onChange={(e) => options.filterCallback(e.value, options.index)} itemTemplate={statusItemTemplate} placeholder="Select a Status" className="p-column-filter" showClear />;
+    }
+
+    const statusItemTemplate = (option) => {
+        return <span className={\`customer-badge status-\${option}\`}>{option}</span>;
+    }
+
+    const onGlobalFilterChange = (event, filtersKey) => {
+        const value = event.target.value;
+        let filters = { ...filtersMap[filtersKey].value };
+        filters['global'].value = value;
+
+        filtersMap[filtersKey].callback(filters);
+    }
+
+    const renderHeader = (filtersKey) => {
         return (
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
-                <InputText type="search" onInput={(e) => dataTableFuncMap[\`\${globalFilterKey}\`](e.target.value)} placeholder="Global Search" />
+                <InputText type="search" value={filtersMap[\`\${filtersKey}\`]['global'].value || ''} onChange={(e) => onGlobalFilterChange(e, filtersKey)} placeholder="Global Search" />
             </span>
         );
     }
 
-    const header1 = renderHeader('globalFilter1');
-    const header2 = renderHeader('globalFilter2');
-    const header3 = renderHeader('globalFilter3');
-    const representativeFilter = <MultiSelect value={selectedRepresentative} options={representatives} onChange={(e) => setSelectedRepresentative(e.value)} optionLabel="name" optionValue="name" placeholder="All" className="p-column-filter" />;
-    const statusFilter = <Dropdown value={selectedStatus} options={statuses} onChange={(e) => setSelectedStatus(e.value)} placeholder="Select a Status" className="p-column-filter" showClear />;
+    const header1 = renderHeader('filters1');
+    const header2 = renderHeader('filters2');
+    const header3 = renderHeader('filters3');
 
     return (
         <div>
             <div className="card">
                 <h5>Session Storage</h5>
-                <DataTable value={customers} paginator rows={10} header={header1} globalFilter={globalFilter1}
-                    selection={selectedCustomer1} onSelectionChange={e => setSelectedCustomer1(e.value)} selectionMode="single" dataKey="id"
+                <DataTable value={customers} paginator rows={10} header={header1} filters={filters1} onFilter={(e) => setFilters1(e.filters)}
+                    selection={selectedCustomer1} onSelectionChange={e => setSelectedCustomer1(e.value)} selectionMode="single" dataKey="id" responsiveLayout="scroll"
                     stateStorage="session" stateKey="dt-state-demo-session" emptyMessage="No customers found.">
                     <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name"></Column>
-                    <Column header="Country" body={countryBodyTemplate} sortable sortField="country.name" filter filterField="country.name" filterMatchMode="contains" filterPlaceholder="Search by country"></Column>
-                    <Column header="Representative" body={representativeBodyTemplate} sortable sortField="representative.name" filter filterField="representative.name" filterMatchMode="in" filterElement={representativeFilter}></Column>
-                    <Column field="status" header="Status" body={statusBodyTemplate} sortable filter filterMatchMode="equals" filterElement={statusFilter}></Column>
+                    <Column header="Country" body={countryBodyTemplate} sortable sortField="country.name" filter filterField="country.name" filterPlaceholder="Search by country"></Column>
+                    <Column header="Agent" body={representativeBodyTemplate} sortable sortField="representative.name" filter filterField="representative" showFilterMatchModes={false} filterElement={representativeFilterTemplate} filterMenuStyle={{ width: '14rem' }}></Column>
+                    <Column field="status" header="Status" body={statusBodyTemplate} sortable filter filterElement={statusFilterTemplate} filterMenuStyle={{ width: '14rem' }}></Column>
                 </DataTable>
             </div>
 
             <div className="card">
                 <h5>Local Storage</h5>
-                <DataTable value={customers} paginator rows={10} header={header2} globalFilter={globalFilter2}
-                    selection={selectedCustomer2} onSelectionChange={e => setSelectedCustomer2(e.value)} selectionMode="single" dataKey="id"
+                <DataTable value={customers} paginator rows={10} header={header2} filters={filters2} onFilter={(e) => setFilters2(e.filters)}
+                    selection={selectedCustomer2} onSelectionChange={e => setSelectedCustomer2(e.value)} selectionMode="single" dataKey="id" responsiveLayout="scroll"
                     stateStorage="local" stateKey="dt-state-demo-local" emptyMessage="No customers found.">
                     <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name"></Column>
-                    <Column header="Country" body={countryBodyTemplate} sortable sortField="country.name" filter filterField="country.name" filterMatchMode="contains" filterPlaceholder="Search by country"></Column>
-                    <Column header="Representative" body={representativeBodyTemplate} sortable sortField="representative.name" filter filterField="representative.name" filterMatchMode="in" filterElement={representativeFilter}></Column>
-                    <Column field="status" header="Status" body={statusBodyTemplate} sortable filter filterMatchMode="equals" filterElement={statusFilter}></Column>
+                    <Column header="Country" body={countryBodyTemplate} sortable sortField="country.name" filter filterField="country.name" filterPlaceholder="Search by country"></Column>
+                    <Column header="Agent" body={representativeBodyTemplate} sortable sortField="representative.name" filter filterField="representative" showFilterMatchModes={false} filterElement={representativeFilterTemplate} filterMenuStyle={{ width: '14rem' }}></Column>
+                    <Column field="status" header="Status" body={statusBodyTemplate} sortable filter filterElement={statusFilterTemplate} filterMenuStyle={{ width: '14rem' }}></Column>
                 </DataTable>
             </div>
 
             <div className="card">
                 <h5>Custom Storage</h5>
-                <DataTable value={customers} paginator rows={10} header={header3} globalFilter={globalFilter3}
-                    selection={selectedCustomer3} onSelectionChange={e => setSelectedCustomer3(e.value)} selectionMode="single" dataKey="id"
+                <DataTable value={customers} paginator rows={10} header={header3} filters={filters3} onFilter={(e) => setFilters3(e.filters)}
+                    selection={selectedCustomer3} onSelectionChange={e => setSelectedCustomer3(e.value)} selectionMode="single" dataKey="id" responsiveLayout="scroll"
                     stateStorage="custom" customSaveState={onCustomSaveState} customRestoreState={onCustomRestoreState} emptyMessage="No customers found.">
                     <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name"></Column>
-                    <Column header="Country" body={countryBodyTemplate} sortable sortField="country.name" filter filterField="country.name" filterMatchMode="contains" filterPlaceholder="Search by country"></Column>
-                    <Column header="Representative" body={representativeBodyTemplate} sortable sortField="representative.name" filter filterField="representative.name" filterMatchMode="in" filterElement={representativeFilter}></Column>
-                    <Column field="status" header="Status" body={statusBodyTemplate} sortable filter filterMatchMode="equals" filterElement={statusFilter}></Column>
+                    <Column header="Country" body={countryBodyTemplate} sortable sortField="country.name" filter filterField="country.name" filterPlaceholder="Search by country"></Column>
+                    <Column header="Agent" body={representativeBodyTemplate} sortable sortField="representative.name" filter filterField="representative" showFilterMatchModes={false} filterElement={representativeFilterTemplate} filterMenuStyle={{ width: '14rem' }}></Column>
+                    <Column field="status" header="Status" body={statusBodyTemplate} sortable filter filterElement={statusFilterTemplate} filterMenuStyle={{ width: '14rem' }}></Column>
                 </DataTable>
             </div>
         </div>

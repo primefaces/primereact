@@ -116,6 +116,7 @@ export class Dialog extends Component {
         this.onMaskClick = this.onMaskClick.bind(this);
         this.onEnter = this.onEnter.bind(this);
         this.onEntered = this.onEntered.bind(this);
+        this.onExiting = this.onExiting.bind(this);
         this.onExited = this.onExited.bind(this);
 
         this.attributeSelector = UniqueComponentId();
@@ -339,11 +340,16 @@ export class Dialog extends Component {
         this.enableDocumentSettings();
     }
 
+    onExiting() {
+        if (this.props.modal) {
+            DomHandler.addClass(this.mask, 'p-component-overlay-leave');
+        }
+    }
+
     onExited() {
         this.dragging = false;
         ZIndexUtils.clear(this.mask);
         this.setState({ maskVisible: false });
-        DomHandler.addClass(this.mask, 'p-component-overlay-leave');
         this.disableDocumentSettings();
     }
 
@@ -653,7 +659,7 @@ export class Dialog extends Component {
         return (
             <div ref={(el) => this.mask = el} className={maskClassName} onClick={this.onMaskClick}>
                 <CSSTransition nodeRef={this.dialogRef} classNames="p-dialog" timeout={transitionTimeout} in={this.state.visible} options={this.props.transitionOptions}
-                    unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExited={this.onExited}>
+                    unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExiting={this.onExiting} onExited={this.onExited}>
                     <div ref={this.dialogRef} id={this.state.id} className={className} style={this.props.style} onClick={this.props.onClick}
                         role="dialog" aria-labelledby={this.state.id + '_header'} aria-describedby={this.state.id + '_content'} aria-modal={this.props.modal}>
                         {header}

@@ -72,7 +72,7 @@ class AutoCompletePanelComponent extends Component {
                     const className = classNames('p-autocomplete-items', options.className);
 
                     return (
-                        <ul ref={options.ref} className={className} role="listbox" id={this.props.listId}>
+                        <ul ref={options.contentRef} className={className} role="listbox" id={this.props.listId}>
                             {options.children}
                         </ul>
                     );

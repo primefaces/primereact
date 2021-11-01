@@ -409,7 +409,12 @@ export class AppConfig extends Component {
                             <div className="p-grid premium-themes">
                                 <div className="p-col-12 p-md-6">
                                     <a href="https://www.primefaces.org/sakai-react" rel="noopener noreferrer" target="_blank">
-                                        <img alt="sakai" src="showcase/images/layouts/sakai-react.jpg" />
+                                        <img alt="Sakai" src="showcase/images/layouts/sakai-react.jpg" />
+                                    </a>
+                                </div>
+                                <div className="p-col-12 p-md-6">
+                                    <a href="https://www.primefaces.org/layouts/atlantis-react" rel="noopener noreferrer" target="_blank">
+                                        <img alt="Atlantis" src="showcase/images/layouts/atlantis-react.jpg" />
                                     </a>
                                 </div>
                                 <div className="p-col-12 p-md-6">

@@ -47,7 +47,7 @@ export class DataTableDynamicDemo extends Component {
 
                 <div className="content-section implementation">
                     <div className="card">
-                        <DataTable value={this.state.products}>
+                        <DataTable value={this.state.products} responsiveLayout="scroll">
                             {dynamicColumns}
                         </DataTable>
                     </div>
@@ -104,7 +104,7 @@ export class DataTableDynamicDemo extends Component {
         return (
             <div>
                 <div className="card">
-                    <DataTable value={this.state.products}>
+                    <DataTable value={this.state.products} responsiveLayout="scroll">
                         {dynamicColumns}
                     </DataTable>
                 </div>
@@ -144,7 +144,7 @@ const DataTableDynamicDemo = () => {
     return (
         <div>
             <div className="card">
-                <DataTable value={products}>
+                <DataTable value={products} responsiveLayout="scroll">
                     {dynamicColumns}
                 </DataTable>
             </div>
@@ -183,7 +183,7 @@ const DataTableDynamicDemo = () => {
     return (
         <div>
             <div className="card">
-                <DataTable value={products}>
+                <DataTable value={products} responsiveLayout="scroll">
                     {dynamicColumns}
                 </DataTable>
             </div>
@@ -228,7 +228,7 @@ const DataTableDynamicDemo = () => {
     return (
         <div>
             <div className="card">
-                <DataTable value={products}>
+                <DataTable value={products} responsiveLayout="scroll">
                     {dynamicColumns}
                 </DataTable>
             </div>

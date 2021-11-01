@@ -225,13 +225,13 @@ export default class DomHandler {
         return 0;
     }
 
-    static alignOverlay(overlay, target, appendTo) {
+    static alignOverlay(overlay, target, appendTo, calculateMinWidth = true) {
         if (overlay && target) {
             if (appendTo === 'self') {
                 this.relativePosition(overlay, target);
             }
             else {
-                overlay.style.minWidth = DomHandler.getOuterWidth(target) + 'px';
+                calculateMinWidth && (overlay.style.minWidth = DomHandler.getOuterWidth(target) + 'px');
                 this.absolutePosition(overlay, target);
             }
         }
@@ -523,8 +523,8 @@ export default class DomHandler {
             element.style.visibility = 'hidden';
             element.style.display = 'block';
             let elementHeight = element.offsetHeight;
-            element.style.display = '';
-            element.style.visibility = '';
+            element.style.display = 'none';
+            element.style.visibility = 'visible';
 
             return elementHeight;
         }
@@ -536,8 +536,8 @@ export default class DomHandler {
             element.style.visibility = 'hidden';
             element.style.display = 'block';
             let elementWidth = element.offsetWidth;
-            element.style.display = '';
-            element.style.visibility = '';
+            element.style.display = 'none';
+            element.style.visibility = 'visible';
 
             return elementWidth;
         }
@@ -551,8 +551,8 @@ export default class DomHandler {
             element.style.display = 'block';
             dimensions.width = element.offsetWidth;
             dimensions.height = element.offsetHeight;
-            element.style.display = '';
-            element.style.visibility = '';
+            element.style.display = 'none';
+            element.style.visibility = 'visible';
         }
         return dimensions;
     }
@@ -738,12 +738,14 @@ export default class DomHandler {
         return element && element.offsetParent != null;
     }
 
-    static getFocusableElements(element) {
-        let focusableElements = DomHandler.find(element, `button:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden]),
-                [href][clientHeight][clientWidth]:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden]),
-                input:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden]), select:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden]),
-                textarea:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden]), [tabIndex]:not([tabIndex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden]),
-                [contenteditable]:not([tabIndex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden])`
+    static getFocusableElements(element, selector = '') {
+        let focusableElements = DomHandler.find(element, `button:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden])${selector},
+                [href][clientHeight][clientWidth]:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden])${selector},
+                input:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden])${selector},
+                select:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden])${selector},
+                textarea:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden])${selector},
+                [tabIndex]:not([tabIndex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden])${selector},
+                [contenteditable]:not([tabIndex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden])${selector}`
         );
 
         let visibleFocusableElements = [];
@@ -755,13 +757,13 @@ export default class DomHandler {
         return visibleFocusableElements;
     }
 
-    static getFirstFocusableElement(element) {
-        const focusableElements = DomHandler.getFocusableElements(element);
+    static getFirstFocusableElement(element, selector) {
+        const focusableElements = DomHandler.getFocusableElements(element, selector);
         return focusableElements.length > 0 ? focusableElements[0] : null;
     }
 
-    static getLastFocusableElement(element) {
-        const focusableElements = DomHandler.getFocusableElements(element);
+    static getLastFocusableElement(element, selector) {
+        const focusableElements = DomHandler.getFocusableElements(element, selector);
         return focusableElements.length > 0 ? focusableElements[focusableElements.length - 1] : null;
     }
 
@@ -806,5 +808,56 @@ export default class DomHandler {
             top: 'auto',
             left: 'auto'
         };
+    }
+
+    static invokeElementMethod(element, methodName, args) {
+        (element)[methodName].apply(element, args);
+    }
+
+    static isClickable(element) {
+        const targetNode = element.nodeName;
+        const parentNode = element.parentElement && element.parentElement.nodeName;
+
+        return (targetNode === 'INPUT' || targetNode === 'BUTTON' || targetNode === 'A' ||
+                parentNode === 'INPUT' || parentNode === 'BUTTON' || parentNode === 'A' ||
+                this.hasClass(element, 'p-button') || this.hasClass(element.parentElement, 'p-button') ||
+                this.hasClass(element.parentElement, 'p-checkbox') || this.hasClass(element.parentElement, 'p-radiobutton')
+        );
+    }
+
+    static applyStyle(element, style) {
+        if (typeof style === 'string') {
+            element.style.cssText = this.style;
+        }
+        else {
+            for (let prop in this.style) {
+                element.style[prop] = style[prop];
+            }
+        }
+    }
+
+    static exportCSV(csv, filename) {
+        let blob = new Blob([csv], {
+            type: 'application/csv;charset=utf-8;'
+        });
+
+        if (window.navigator.msSaveOrOpenBlob) {
+            navigator.msSaveOrOpenBlob(blob, filename + '.csv');
+        }
+        else {
+            let link = document.createElement("a");
+            if (link.download !== undefined) {
+                link.setAttribute('href', URL.createObjectURL(blob));
+                link.setAttribute('download', filename + '.csv');
+                link.style.display = 'none';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+            else {
+                csv = 'data:text/csv;charset=utf-8,' + csv;
+                window.open(encodeURI(csv));
+            }
+        }
     }
 }

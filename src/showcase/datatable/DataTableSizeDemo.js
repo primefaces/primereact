@@ -28,15 +28,15 @@ export class DataTableSizeDemo extends Component {
             <div>
                 <div className="content-section introduction">
                     <AppInlineHeader changelogText="dataTable">
-                        <h1>DataTable <span>Styling</span></h1>
-                        <p>Particular rows and cells can be styled based on data.</p>
+                        <h1>DataTable <span>Size</span></h1>
+                        <p>In addition to a regular table, alternatives with alternative sizes are available.</p>
                     </AppInlineHeader>
                     <AppDemoActions github="datatable/DataTableSizeDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
                     <div className="card">
-                        <DataTable value={this.state.products} header="Small Table" className="p-datatable-sm">
+                        <DataTable value={this.state.products} header="Small Table" size="small" responsiveLayout="scroll">
                             <Column field="code" header="Code"></Column>
                             <Column field="name" header="Name"></Column>
                             <Column field="category" header="Category"></Column>
@@ -45,7 +45,7 @@ export class DataTableSizeDemo extends Component {
                     </div>
 
                     <div className="card">
-                        <DataTable value={this.state.products} header="Normal Table">
+                        <DataTable value={this.state.products} header="Normal Table" responsiveLayout="scroll">
                             <Column field="code" header="Code"></Column>
                             <Column field="name" header="Name"></Column>
                             <Column field="category" header="Category"></Column>
@@ -54,7 +54,7 @@ export class DataTableSizeDemo extends Component {
                     </div>
 
                     <div className="card">
-                        <DataTable value={this.state.products} header="Large Table" className="p-datatable-lg">
+                        <DataTable value={this.state.products} header="Large Table" size="large" responsiveLayout="scroll">
                             <Column field="code" header="Code"></Column>
                             <Column field="name" header="Name"></Column>
                             <Column field="category" header="Category"></Column>
@@ -103,7 +103,7 @@ export class DataTableSizeDemo extends Component {
         return (
             <div>
                 <div className="card">
-                    <DataTable value={this.state.products} header="Small Table" className="p-datatable-sm">
+                    <DataTable value={this.state.products} header="Small Table" size="small" responsiveLayout="scroll">
                         <Column field="code" header="Code"></Column>
                         <Column field="name" header="Name"></Column>
                         <Column field="category" header="Category"></Column>
@@ -112,7 +112,7 @@ export class DataTableSizeDemo extends Component {
                 </div>
 
                 <div className="card">
-                    <DataTable value={this.state.products} header="Normal Table">
+                    <DataTable value={this.state.products} header="Normal Table" responsiveLayout="scroll">
                         <Column field="code" header="Code"></Column>
                         <Column field="name" header="Name"></Column>
                         <Column field="category" header="Category"></Column>
@@ -121,7 +121,7 @@ export class DataTableSizeDemo extends Component {
                 </div>
 
                 <div className="card">
-                    <DataTable value={this.state.products} header="Large Table" className="p-datatable-lg">
+                    <DataTable value={this.state.products} header="Large Table" size="large" responsiveLayout="scroll">
                         <Column field="code" header="Code"></Column>
                         <Column field="name" header="Name"></Column>
                         <Column field="category" header="Category"></Column>
@@ -153,7 +153,7 @@ const DataTableSizeDemo = () => {
     return (
         <div>
             <div className="card">
-                <DataTable value={products} header="Small Table" className="p-datatable-sm">
+                <DataTable value={products} header="Small Table" size="small" responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -162,7 +162,7 @@ const DataTableSizeDemo = () => {
             </div>
 
             <div className="card">
-                <DataTable value={products} header="Normal Table">
+                <DataTable value={products} header="Normal Table" responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -171,7 +171,7 @@ const DataTableSizeDemo = () => {
             </div>
 
             <div className="card">
-                <DataTable value={products} header="Large Table" className="p-datatable-lg">
+                <DataTable value={products} header="Large Table" size="large" responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -202,7 +202,7 @@ const DataTableSizeDemo = () => {
     return (
         <div>
             <div className="card">
-                <DataTable value={products} header="Small Table" className="p-datatable-sm">
+                <DataTable value={products} header="Small Table" size="small" responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -211,7 +211,7 @@ const DataTableSizeDemo = () => {
             </div>
 
             <div className="card">
-                <DataTable value={products} header="Normal Table">
+                <DataTable value={products} header="Normal Table" responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -220,7 +220,7 @@ const DataTableSizeDemo = () => {
             </div>
 
             <div className="card">
-                <DataTable value={products} header="Large Table" className="p-datatable-lg">
+                <DataTable value={products} header="Large Table" size="large" responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -257,7 +257,7 @@ const DataTableSizeDemo = () => {
     return (
         <div>
             <div className="card">
-                <DataTable value={products} header="Small Table" className="p-datatable-sm">
+                <DataTable value={products} header="Small Table" size="small" responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -266,7 +266,7 @@ const DataTableSizeDemo = () => {
             </div>
 
             <div className="card">
-                <DataTable value={products} header="Normal Table">
+                <DataTable value={products} header="Normal Table" responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -275,7 +275,7 @@ const DataTableSizeDemo = () => {
             </div>
 
             <div className="card">
-                <DataTable value={products} header="Large Table" className="p-datatable-lg">
+                <DataTable value={products} header="Large Table" size="large" responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>

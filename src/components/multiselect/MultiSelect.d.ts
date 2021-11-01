@@ -10,6 +10,8 @@ type MultiSelectSelectedItemTemplateType = React.ReactNode | ((value: any) => Re
 
 type MultiSelectEmptyFilterMessageType = React.ReactNode | ((props: MultiSelectProps) => React.ReactNode);
 
+type MultiSelectDisplayType = 'comma' | 'chip';
+
 interface MultiSelectHeaderCheckboxChangeParams {
     originalEvent: React.FormEvent<HTMLInputElement>;
     checked: boolean;
@@ -73,7 +75,7 @@ export interface MultiSelectProps {
     optionGroupLabel?: string;
     optionGroupChildren?: string;
     optionGroupTemplate?: MultiSelectOptionGroupTemplateType;
-    display?: string;
+    display?: MultiSelectDisplayType;
     style?: object;
     className?: string;
     panelClassName?: string;

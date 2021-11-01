@@ -14,11 +14,6 @@
         }
     }
 
-    .table-header {
-        display: flex;
-        justify-content: space-between;
-    }
-
     .p-datepicker {
         min-width: 25rem;
 
@@ -42,92 +37,8 @@
             text-align: left;
         }
 
-        .p-datatable-tbody > tr > td {
-            cursor: auto;
-        }
-
         .p-dropdown-label:not(.p-placeholder) {
             text-transform: uppercase;
-        }
-    }
-
-    /* Responsive */
-    .p-datatable-customers .p-datatable-tbody > tr > td .p-column-title {
-        display: none;
-    }
-
-    @media screen and (max-width: 960px) {
-        .p-datatable {
-            &.p-datatable-customers {
-                .p-datatable-thead > tr > th,
-                .p-datatable-tfoot > tr > td {
-                    display: none !important;
-                }
-
-                .p-datatable-tbody > tr {
-                    border-bottom: 1px solid var(--layer-2);
-
-                    > td {
-                        text-align: left;
-                        display: block;
-                        border: 0 none !important;
-                        width: 100% !important;
-                        float: left;
-                        clear: left;
-                        border: 0 none;
-
-                        .p-column-title {
-                            padding: .4rem;
-                            min-width: 30%;
-                            display: inline-block;
-                            margin: -.4rem 1rem -.4rem -.4rem;
-                            font-weight: bold;
-                        }
-
-                        .p-progressbar {
-                            margin-top: .5rem;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-.datatable-responsive-demo {
-    .p-datatable-responsive-demo .p-datatable-tbody > tr > td .p-column-title {
-        display: none;
-    }
-
-    @media screen and (max-width: 40em) {
-        .p-datatable {
-            &.p-datatable-responsive-demo {
-                .p-datatable-thead > tr > th,
-                .p-datatable-tfoot > tr > td {
-                    display: none !important;
-                }
-
-                .p-datatable-tbody > tr > td {
-                    text-align: left;
-                    display: block;
-                    width: 100%;
-                    float: left;
-                    clear: left;
-                    border: 0 none;
-
-                    .p-column-title {
-                        padding: .4rem;
-                        min-width: 30%;
-                        display: inline-block;
-                        margin: -.4em 1em -.4em -.4rem;
-                        font-weight: bold;
-                    }
-
-                    &:last-child {
-                        border-bottom: 1px solid var(--surface-d);
-                    }
-                }
-            }
         }
     }
 }
@@ -172,11 +83,6 @@
         }
     }
 
-    .table-header {
-        display: flex;
-        justify-content: space-between;
-    }
-
     .p-datepicker {
         min-width: 25rem;
 
@@ -208,58 +114,15 @@
             text-transform: uppercase;
         }
     }
-
-    /* Responsive */
-    .p-datatable-customers .p-datatable-tbody > tr > td .p-column-title {
-        display: none;
-    }
-
-    @media screen and (max-width: 960px) {
-        .p-datatable {
-            &.p-datatable-customers {
-                .p-datatable-thead > tr > th,
-                .p-datatable-tfoot > tr > td {
-                    display: none !important;
-                }
-
-                .p-datatable-tbody > tr {
-                    border-bottom: 1px solid var(--layer-2);
-
-                    > td {
-                        text-align: left;
-                        display: block;
-                        border: 0 none !important;
-                        width: 100% !important;
-                        float: left;
-                        clear: left;
-                        border: 0 none;
-
-                        .p-column-title {
-                            padding: .4rem;
-                            min-width: 30%;
-                            display: inline-block;
-                            margin: -.4rem 1rem -.4rem -.4rem;
-                            font-weight: bold;
-                        }
-
-                        .p-progressbar {
-                            margin-top: .5rem;
-                        }
-                    }
-                }
-            }
-        }
-    }
 }
 
 .datatable-scroll-demo {
-    .loading-text {
-        display: block;
-        background-color: #f1f1f1;
-        min-height: 19px;
-        animation: pulse 1s infinite ease-in-out;
-        text-indent: -99999px;
-        overflow: hidden;
+    .p-datatable-frozen-tbody {
+        font-weight: bold;
+    }
+
+    .p-datatable-scrollable .p-frozen-column {
+        font-weight: bold;
     }
 }
 
@@ -275,6 +138,10 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+
+        @media screen and (max-width: 960px) {
+            align-items: flex-start;
+        }
     }
 
     .product-image {
@@ -292,6 +159,25 @@
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+
+    @media screen and (max-width: 960px) {
+        .p-toolbar {
+            flex-wrap: wrap;
+
+            .p-button {
+                margin-bottom: 0.25rem;
+            }
+        }
+
+        .table-header {
+            flex-direction: column;
+
+            .p-input-icon-left,
+            input {
+                width: 100%;
+            }
+        }
     }
 }
 

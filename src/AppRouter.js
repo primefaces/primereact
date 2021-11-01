@@ -57,6 +57,8 @@ import { DataTableSortDemo } from './showcase/datatable/DataTableSortDemo';
 import { DataTableFilterDemo } from './showcase/datatable/DataTableFilterDemo';
 import { DataTableColTogglerDemo } from './showcase/datatable/DataTableColTogglerDemo';
 import { DataTableScrollDemo } from './showcase/datatable/DataTableScrollDemo';
+import { DataTableFlexScrollDemo } from './showcase/datatable/DataTableFlexScrollDemo';
+import { DataTableVirtualScrollDemo } from './showcase/datatable/DataTableVirtualScrollDemo';
 import { DataTableSelectionDemo } from './showcase/datatable/DataTableSelectionDemo';
 import { DataTableColGroupDemo } from './showcase/datatable/DataTableColGroupDemo';
 import { DataTableRowExpansionDemo } from './showcase/datatable/DataTableRowExpansionDemo';
@@ -271,6 +273,8 @@ class AppRouter extends Component {
                             <Route path="/datatable/sort" component={DataTableSortDemo} />
                             <Route path="/datatable/filter" component={DataTableFilterDemo} />
                             <Route path="/datatable/scroll" component={DataTableScrollDemo} />
+                            <Route path="/datatable/flexscroll" component={DataTableFlexScrollDemo} />
+                            <Route path="/datatable/virtualscroll" component={DataTableVirtualScrollDemo} />
                             <Route path="/datatable/lazy" component={DataTableLazyDemo} />
                             <Route path="/datatable/selection" component={DataTableSelectionDemo} />
                             <Route path="/datatable/colgroup" component={DataTableColGroupDemo} />

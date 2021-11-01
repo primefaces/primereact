@@ -147,7 +147,7 @@ class DropdownPanelComponent extends Component {
                     const content = this.isEmptyFilter() ? this.renderEmptyMessage() : options.children;
 
                     return (
-                        <ul ref={options.ref} className={className} role="listbox">
+                        <ul ref={options.contentRef} className={className} role="listbox">
                             {content}
                         </ul>
                     );
