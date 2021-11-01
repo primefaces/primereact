@@ -43,6 +43,8 @@ type DataTableFilterDisplayType = 'menu' | 'row';
 
 type DataTableSizeType = 'small' | 'normal' | 'large';
 
+type DataTableScrollDirectionType = 'vertical' | 'horizontal' | 'both';
+
 interface DataTableHeaderTemplateOptions {
     props: DataTableProps;
 }
@@ -156,7 +158,6 @@ interface DataTableRowEditCompleteParams extends DataTableRowEventParams {
     newData: any;
     field: string;
     index: number;
-    editorCallback(value: any): void;
 }
 
 interface DataTableSelectParams {
@@ -265,6 +266,7 @@ export interface DataTableProps {
     filterLocale?: string;
     scrollable?: boolean;
     scrollHeight?: string;
+    scrollDirection?: DataTableScrollDirectionType;
     virtualScrollerOptions?: VirtualScrollerProps;
     frozenWidth?: string;
     frozenValue?: any[];

@@ -1,6 +1,8 @@
 import * as React from 'react';
 
-type ColumnBodyType = React.ReactNode | ((data: any, props: ColumnProps, ...parameters: any) => React.ReactNode);
+type ColumnBodyType = React.ReactNode | ((data: any, options: ColumnBodyOptions) => React.ReactNode);
+
+type ColumnEditorType = React.ReactNode | ((options: ColumnEditorOptions) => React.ReactNode);
 
 type ColumnFilterMatchModeType = 'startsWith' | 'contains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'lt' | 'lte' | 'gt' | 'gte' | 'custom';
 
@@ -25,6 +27,26 @@ type ColumnFilterFooterType = React.ReactNode | ((options: ColumnFilterFooterTem
 type ColumnFilterElementType = React.ReactNode | ((options: ColumnFilterElementTemplateOptions) => React.ReactNode);
 
 type ColumnFilterModelType = ColumnFilterMetaData | ColumnFilterMetaDataWithConstraint;
+
+interface ColumnBodyOptions {
+    column: Column;
+    field: string;
+    rowIndex: number;
+    frozenRow?: boolean;
+    props: any;
+}
+
+interface ColumnEditorOptions {
+    node?: any;
+    rowData: any;
+    value: any;
+    column: Column;
+    field: string;
+    rowIndex: number;
+    frozenRow?: boolean;
+    props: any;
+    editorCallback?(val: any): void;
+}
 
 interface ColumnFilterModelOptions {
     [key: string]: ColumnFilterModelType;
@@ -183,7 +205,7 @@ export interface ColumnProps {
     onCellEditCancel?(e: ColumnEventParams): void;
     sortFunction?(e: ColumnSortParams): void;
     filterFunction?(value: any, filter: any, filterLocale: string, params: ColumnFilterParams): void;
-    editor?(props: ColumnProps): React.ReactNode;
+    editor?: ColumnEditorType;
     cellEditValidator?(e: ColumnEventParams): boolean;
     onBeforeCellEditHide?(e: ColumnEventParams): void;
     onBeforeCellEditShow?(e: ColumnEventParams): void;
