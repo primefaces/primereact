@@ -353,13 +353,7 @@ export class DataTable extends Component {
     }
 
     getColumns(ignoreReorderable) {
-        const isValidType = (type) => type.name === 'Column';
-        const columns = React.Children.toArray(this.props.children).reduce((arr, child) => {
-            const type = child && child.type;
-            type && (isValidType(type) ? arr.push(child) : (type.toString() === 'Symbol(react.fragment)' && (arr = [...arr, ...React.Children.toArray(child.props.children).filter(c => isValidType(c.type))])));
-
-            return arr;
-        }, []);
+        const columns = React.Children.toArray(this.props.children);
 
         if (!columns) {
             return null;
