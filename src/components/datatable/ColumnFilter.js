@@ -15,9 +15,7 @@ export class ColumnFilter extends Component {
         super(props);
 
         this.state = {
-            overlayVisible: false,
-            defaultMatchMode: null,
-            defaultOperator: null
+            overlayVisible: false
         };
 
         this.overlayRef = React.createRef();
@@ -49,6 +47,10 @@ export class ColumnFilter extends Component {
 
     get filterModel() {
         return this.props.filters[this.field];
+    }
+
+    get filterStoreModel() {
+        return this.props.filtersStore[this.field];
     }
 
     hasFilter() {
@@ -109,6 +111,22 @@ export class ColumnFilter extends Component {
         return this.props.column.props[prop];
     }
 
+    getDefaultConstraint() {
+        if (this.props.filtersStore && this.filterStoreModel) {
+            if (this.filterStoreModel.operator) {
+                return {
+                    matchMode: this.filterStoreModel.constraints[0].matchMode,
+                    operator: this.filterStoreModel.operator
+                };
+            }
+            else {
+                return {
+                    matchMode: this.filterStoreModel.matchMode
+                };
+            }
+        }
+    }
+
     findDataType() {
         const dataType = this.getColumnProp('dataType');
         const matchMode = this.getColumnProp('filterMatchMode');
@@ -129,15 +147,16 @@ export class ColumnFilter extends Component {
     clearFilter() {
         const field = this.field;
         const filterClearCallback = this.getColumnProp('onFilterClear');
+        const defaultConstraint = this.getDefaultConstraint();
         let filters = { ...this.props.filters };
         if (filters[field].operator) {
             filters[field].constraints.splice(1);
-            filters[field].operator = this.state.defaultOperator;
-            filters[field].constraints[0] = { value: null, matchMode: this.state.defaultMatchMode };
+            filters[field].operator = defaultConstraint.operator;
+            filters[field].constraints[0] = { value: null, matchMode: defaultConstraint.matchMode };
         }
         else {
             filters[field].value = null;
-            filters[field].matchMode = this.state.defaultMatchMode;
+            filters[field].matchMode = defaultConstraint.matchMode;
         }
 
         filterClearCallback && filterClearCallback();
@@ -282,8 +301,9 @@ export class ColumnFilter extends Component {
 
     addConstraint() {
         const filterConstraintAddCallback = this.getColumnProp('onFilterConstraintAdd');
+        const defaultConstraint = this.getDefaultConstraint();
         let filters = { ...this.props.filters };
-        let newConstraint = { value: null, matchMode: this.state.defaultMatchMode };
+        let newConstraint = { value: null, matchMode: defaultConstraint.matchMode };
         filters[this.field].constraints.push(newConstraint);
         filterConstraintAddCallback && filterConstraintAddCallback({ field: this.field, constraing: newConstraint });
         this.props.onFilterChange(filters);
@@ -474,23 +494,6 @@ export class ColumnFilter extends Component {
         args && this.filterCallback(args[0], args[1]);
 
         this.props.onFilterApply();
-    }
-
-    componentDidMount() {
-        if (this.props.filters && this.filterModel) {
-            let filterModel = this.filterModel;
-            if (filterModel.operator) {
-                this.setState({
-                    defaultMatchMode: filterModel.constraints[0].matchMode,
-                    defaultOperator: filterModel.operator
-                });
-            }
-            else {
-                this.setState({
-                    defaultMatchMode: this.filterModel.matchMode
-                });
-            }
-        }
     }
 
     componentDidUpdate(prevProps, prevState) {
