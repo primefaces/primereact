@@ -145,6 +145,9 @@ export class BodyCell extends Component {
 
             this.closeCell(event);
         }
+        else {
+            event.preventDefault();
+        }
     }
 
     findNextSelectableCell(cell) {
