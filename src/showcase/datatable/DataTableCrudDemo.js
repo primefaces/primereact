@@ -614,7 +614,7 @@ export class DataTableCrudDemo extends Component {
             const data = csv.split('\n');
 
             // Prepare DataTable
-            const cols = data[0].split(',');
+            const cols = data[0].replace(/['"]+/g, '').split(',');
             data.shift();
 
             const importedData = data.map(d => {
@@ -622,6 +622,7 @@ export class DataTableCrudDemo extends Component {
                 return cols.reduce((obj, c, i) => {
                     c = c === 'Status' ? 'inventoryStatus' : (c === 'Reviews' ? 'rating' : c.toLowerCase());
                     obj[c] = d[i].replace(/['"]+/g, '');
+                    (c === 'price' || c === 'rating') && (obj[c] = parseFloat(obj[c]));
                     return obj;
                 }, {});
             });
@@ -980,7 +981,7 @@ const DataTableCrudDemo = () => {
             const data = csv.split('\n');
 
             // Prepare DataTable
-            const cols = data[0].split(',');
+            const cols = data[0].replace(/['"]+/g, '').split(',');
             data.shift();
 
             const importedData = data.map(d => {
@@ -988,6 +989,7 @@ const DataTableCrudDemo = () => {
                 return cols.reduce((obj, c, i) => {
                     c = c === 'Status' ? 'inventoryStatus' : (c === 'Reviews' ? 'rating' : c.toLowerCase());
                     obj[c] = d[i].replace(/['"]+/g, '');
+                    (c === 'price' || c === 'rating') && (obj[c] = parseFloat(obj[c]));
                     return obj;
                 }, {});
             });
@@ -1342,7 +1344,7 @@ const DataTableCrudDemo = () => {
             const data = csv.split('\n');
 
             // Prepare DataTable
-            const cols = data[0].split(',');
+            const cols = data[0].replace(/['"]+/g, '').split(',');
             data.shift();
 
             const importedData = data.map(d => {
@@ -1350,6 +1352,7 @@ const DataTableCrudDemo = () => {
                 return cols.reduce((obj, c, i) => {
                     c = c === 'Status' ? 'inventoryStatus' : (c === 'Reviews' ? 'rating' : c.toLowerCase());
                     obj[c] = d[i].replace(/['"]+/g, '');
+                    (c === 'price' || c === 'rating') && (obj[c] = parseFloat(obj[c]));
                     return obj;
                 }, {});
             });
@@ -1723,7 +1726,7 @@ const DataTableCrudDemo = () => {
             const data = csv.split('\n');
 
             // Prepare DataTable
-            const cols = data[0].split(',');
+            const cols = data[0].replace(/['"]+/g, '').split(',');
             data.shift();
 
             const importedData = data.map(d => {
@@ -1731,6 +1734,7 @@ const DataTableCrudDemo = () => {
                 return cols.reduce((obj, c, i) => {
                     c = c === 'Status' ? 'inventoryStatus' : (c === 'Reviews' ? 'rating' : c.toLowerCase());
                     obj[c] = d[i].replace(/['"]+/g, '');
+                    (c === 'price' || c === 'rating') && (obj[c] = parseFloat(obj[c]));
                     return obj;
                 }, {});
             });
