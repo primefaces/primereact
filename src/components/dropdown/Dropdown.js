@@ -782,8 +782,12 @@ export class Dropdown extends Component {
         return this.inputRef.current.checkValidity();
     }
 
+    isLazy() {
+        return this.props.virtualScrollerOptions && this.props.virtualScrollerOptions.lazy;
+    }
+
     getVisibleOptions() {
-        if (this.hasFilter()) {
+        if (this.hasFilter() && !this.isLazy()) {
             let filterValue = this.state.filter.trim().toLocaleLowerCase(this.props.filterLocale)
             let searchFields = this.props.filterBy ? this.props.filterBy.split(',') : [this.props.optionLabel || 'label'];
 
