@@ -493,8 +493,8 @@ export default class DomHandler {
             let parents = this.getParents(element);
             const overflowRegex = /(auto|scroll)/;
             const overflowCheck = (node) => {
-                let styleDeclaration = window['getComputedStyle'](node, null);
-                return overflowRegex.test(styleDeclaration.getPropertyValue('overflow')) || overflowRegex.test(styleDeclaration.getPropertyValue('overflowX')) || overflowRegex.test(styleDeclaration.getPropertyValue('overflowY'));
+                let styleDeclaration = node ? getComputedStyle(node) : null;
+                return styleDeclaration && (overflowRegex.test(styleDeclaration.getPropertyValue('overflow')) || overflowRegex.test(styleDeclaration.getPropertyValue('overflowX')) || overflowRegex.test(styleDeclaration.getPropertyValue('overflowY')));
             };
 
             for (let parent of parents) {
